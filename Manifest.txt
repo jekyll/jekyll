@@ -1,0 +1,7 @@
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/autoblog
+lib/autoblog.rb
+test/test_autoblog.rb
