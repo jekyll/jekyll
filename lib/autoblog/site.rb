@@ -42,6 +42,12 @@ module AutoBlog
     rescue Errno::ENOENT => e
       # ignore missing layout dir
     end
+    
+    def write_posts
+      self.posts.each do |post|
+        
+      end
+    end
   end
 
 end

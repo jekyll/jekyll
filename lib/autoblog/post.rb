@@ -8,12 +8,14 @@ module AutoBlog
     end
     
     attr_accessor :date, :slug, :ext
+    attr_accessor :data, :contents
     
     def initialize(base, name)
       @base = base
       @name = name
       
       self.process(name)
+      self.read_yaml(base, name)
     end
     
     def process(name)
@@ -25,6 +27,16 @@ module AutoBlog
     
     def url
       self.date.strftime("/%Y/%m/%d/") + self.slug
+    end
+    
+    def read_yaml(base, name)
+      self.contents = File.read(File.join(base, name))
+      
+      if self.contents =~ /^(---\n.*?)\n---\n/
+        self.contents = self.contents[($1.size + 5)..-1]
+        
+        self.data = YAML.load($1)
+      end
     end
   end
 
