@@ -16,6 +16,7 @@ require 'redcloth'
 # internal requires
 require 'autoblog/site'
 require 'autoblog/post'
+require 'autoblog/page'
 
 module AutoBlog
   VERSION = '1.0.0'

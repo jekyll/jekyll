@@ -15,6 +15,7 @@ module AutoBlog
       self.read_layouts
       self.read_posts
       self.write_posts
+      self.transform_pages
     end
     
     def read_layouts
@@ -48,6 +49,23 @@ module AutoBlog
       self.posts.each do |post|
         post.add_layout(self.layouts)
         post.write(self.dest)
+      end
+    end
+    
+    def transform_pages(dir = '')
+      base = File.join(self.source, dir)
+      entries = Dir.entries(base)
+      entries = entries.reject { |e| %w{_layouts posts}.include?(e) }
+      entries = entries.reject { |e| e[0..0] == '.' }
+      
+      entries.each do |f|
+        if File.directory?(File.join(base, f))
+          transform_pages(File.join(dir, f))
+        else
+          page = Page.new(self.source, dir, f)
+          page.add_layout(self.layouts)
+          page.write(self.dest)
+        end
       end
     end
   end
