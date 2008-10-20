@@ -34,14 +34,14 @@ module AutoBlog
     end
     
     def transform
-      if self.ext == "textile"
-        self.ext = "html"
+      if self.ext == ".textile"
+        self.ext = ".html"
         self.content = RedCloth.new(self.content).to_html
       end
     end
     
-    def add_layout(layouts)
-      payload = {"page" => self.data}
+    def add_layout(layouts, posts)
+      payload = {"page" => self.data, "site" => {"posts" => posts}}
       self.content = Liquid::Template.parse(self.content).render(payload)
       
       layout = layouts[self.data["layout"]] || self.content
@@ -53,7 +53,12 @@ module AutoBlog
     def write(dest)
       FileUtils.mkdir_p(File.join(dest, @dir))
       
-      path = File.join(dest, @dir, @name)
+      name = @name
+      if self.ext != ""
+        name = @name.split(".")[0..-2].join('.') + self.ext
+      end
+      
+      path = File.join(dest, @dir, name)
       File.open(path, 'w') do |f|
         f.write(self.content)
       end

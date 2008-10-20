@@ -63,7 +63,7 @@ module AutoBlog
           transform_pages(File.join(dir, f))
         else
           page = Page.new(self.source, dir, f)
-          page.add_layout(self.layouts)
+          page.add_layout(self.layouts, self.posts)
           page.write(self.dest)
         end
       end

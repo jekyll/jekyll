@@ -71,6 +71,12 @@ module AutoBlog
         f.write(self.content)
       end
     end
+    
+    def to_liquid
+      { "title" => self.data["title"] || "",
+        "url" => self.url,
+        "date" => self.date }
+    end
   end
 
 end
