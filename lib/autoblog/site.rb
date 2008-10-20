@@ -14,6 +14,7 @@ module AutoBlog
     def process
       self.read_layouts
       self.read_posts
+      self.write_posts
     end
     
     def read_layouts
@@ -46,6 +47,7 @@ module AutoBlog
     def write_posts
       self.posts.each do |post|
         post.add_layout(self.layouts)
+        post.write
       end
     end
   end

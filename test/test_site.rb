@@ -21,4 +21,10 @@ class TestSite < Test::Unit::TestCase
     
     assert_equal 1, @s.posts.size
   end
+  
+  def test_write_posts
+    @s.process
+    
+    
+  end
 end

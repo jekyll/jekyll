@@ -26,8 +26,12 @@ module AutoBlog
       self.ext = ext
     end
     
+    def dir
+      self.date.strftime("/%Y/%m/%d/")
+    end
+    
     def url
-      self.date.strftime("/%Y/%m/%d/") + self.slug
+      self.dir + self.slug + ".html"
     end
     
     def read_yaml(base, name)
@@ -52,6 +56,15 @@ module AutoBlog
       payload = {"content" => self.content, "page" => self.data}
       
       self.content = Liquid::Template.parse(layout).render(payload)
+    end
+    
+    def write(dest)
+      FileUtils.mkdir_p(File.join(dest, self.dir))
+      
+      path = File.join(dest, self.url)
+      File.open(path, 'w') do |f|
+        f.write(self.content)
+      end
     end
   end
 
