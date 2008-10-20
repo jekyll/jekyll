@@ -22,6 +22,10 @@ module AutoBlog
       self.slug = slug
       self.ext = ext
     end
+    
+    def url
+      self.date.strftime("/%Y/%m/%d/") + self.slug
+    end
   end
 
 end
