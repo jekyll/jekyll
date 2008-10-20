@@ -31,6 +31,14 @@ class TestPost < Test::Unit::TestCase
     p.read_yaml(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
     
     assert_equal({"title" => "Foo Bar"}, p.data)
-    assert_equal "\nh1. {{ page.title }}\n\nBest post ever", p.contents
+    assert_equal "\nh1. {{ page.title }}\n\nBest post ever", p.content
+  end
+  
+  def test_add_layout
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
+    layouts = {"default" => "<<< {{ content }} >>>"}
+    p.add_layout(layouts)
+    
+    assert_equal "<<< \nh1. Foo Bar\n\nBest post ever >>>", p.content
   end
 end

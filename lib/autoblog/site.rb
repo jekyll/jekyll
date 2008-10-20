@@ -45,7 +45,7 @@ module AutoBlog
     
     def write_posts
       self.posts.each do |post|
-        
+        post.add_layout(self.layouts)
       end
     end
   end

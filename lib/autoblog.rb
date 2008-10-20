@@ -9,6 +9,9 @@ require 'time'
 
 # stdlib
 
+# 3rd party
+require 'liquid'
+
 # internal requires
 require 'autoblog/site'
 require 'autoblog/post'
