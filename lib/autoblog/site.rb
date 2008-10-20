@@ -63,10 +63,14 @@ module AutoBlog
           transform_pages(File.join(dir, f))
         else
           page = Page.new(self.source, dir, f)
-          page.add_layout(self.layouts, self.posts)
+          page.add_layout(self.layouts, site_payload)
           page.write(self.dest)
         end
       end
+    end
+    
+    def site_payload
+      {"site" => {"time" => Time.now, "posts" => self.posts}}
     end
   end
 

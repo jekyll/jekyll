@@ -9,6 +9,8 @@ module AutoBlog
       @dir = dir
       @name = name
       
+      self.data = {}
+      
       self.process(name)
       self.read_yaml(base, dir, name)
       self.set_defaults
@@ -40,8 +42,8 @@ module AutoBlog
       end
     end
     
-    def add_layout(layouts, posts)
-      payload = {"page" => self.data, "site" => {"posts" => posts}}
+    def add_layout(layouts, site_payload)
+      payload = {"page" => self.data}.merge(site_payload)
       self.content = Liquid::Template.parse(self.content).render(payload, [AutoBlog::Filters])
       
       layout = layouts[self.data["layout"]] || self.content

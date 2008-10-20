@@ -8,7 +8,7 @@ module AutoBlog
     end
     
     attr_accessor :date, :slug, :ext
-    attr_accessor :data, :content
+    attr_accessor :data, :content, :output
     
     def initialize(base, name)
       @base = base
@@ -60,7 +60,7 @@ module AutoBlog
       layout = layouts[self.data["layout"]] || self.content
       payload = {"content" => self.content, "page" => self.data}
       
-      self.content = Liquid::Template.parse(layout).render(payload)
+      self.output = Liquid::Template.parse(layout).render(payload)
     end
     
     def write(dest)
@@ -68,14 +68,15 @@ module AutoBlog
       
       path = File.join(dest, self.url)
       File.open(path, 'w') do |f|
-        f.write(self.content)
+        f.write(self.output)
       end
     end
     
     def to_liquid
       { "title" => self.data["title"] || "",
         "url" => self.url,
-        "date" => self.date }
+        "date" => self.date,
+        "content" => self.content }
     end
   end
 
