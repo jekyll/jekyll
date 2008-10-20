@@ -42,12 +42,12 @@ module AutoBlog
     
     def add_layout(layouts, posts)
       payload = {"page" => self.data, "site" => {"posts" => posts}}
-      self.content = Liquid::Template.parse(self.content).render(payload)
+      self.content = Liquid::Template.parse(self.content).render(payload, [AutoBlog::Filters])
       
       layout = layouts[self.data["layout"]] || self.content
       payload = {"content" => self.content, "page" => self.data}
       
-      self.content = Liquid::Template.parse(layout).render(payload)
+      self.content = Liquid::Template.parse(layout).render(payload, [AutoBlog::Filters])
     end
     
     def write(dest)
