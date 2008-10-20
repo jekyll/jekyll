@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+require 'autoblog'
+
+AutoBlog.process(ARGV[0], ARGV[1])
