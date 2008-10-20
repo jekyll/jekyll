@@ -35,6 +35,10 @@ module AutoBlog
       self.dir + self.slug + ".html"
     end
     
+    def id
+      self.dir + self.slug
+    end
+    
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
       
@@ -76,6 +80,7 @@ module AutoBlog
       { "title" => self.data["title"] || "",
         "url" => self.url,
         "date" => self.date,
+        "id" => self.id,
         "content" => self.content }
     end
   end
