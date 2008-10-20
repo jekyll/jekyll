@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/helper'
 class TestSite < Test::Unit::TestCase
   def setup
     source = File.join(File.dirname(__FILE__), *%w[source])
-    @s = Site.new(source, "")
+    @s = Site.new(source, dest_dir)
   end
   
   def test_site_init
@@ -23,6 +23,8 @@ class TestSite < Test::Unit::TestCase
   end
   
   def test_write_posts
+    clear_dest
+    
     @s.process
     
     
