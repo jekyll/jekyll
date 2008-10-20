@@ -15,7 +15,7 @@ require 'autoblog/post'
 module AutoBlog
   VERSION = '1.0.0'
   
-  def self.process(repo_path)
-    AutoBlog::Site.new(repo_path)
+  def self.process(source, dest)
+    AutoBlog::Site.new(source, dest).process
   end
 end

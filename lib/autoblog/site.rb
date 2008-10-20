@@ -1,18 +1,21 @@
 module AutoBlog
   
   class Site
-    attr_accessor :root, :layouts
+    attr_accessor :source, :dest
+    attr_accessor :layouts
     
-    def initialize(root)
-      self.root = root
-      
+    def initialize(source, dest)
+      self.source = source
+      self.dest = dest
       self.layouts = {}
-      
+    end
+    
+    def process
       self.read_layouts
     end
     
     def read_layouts
-      base = File.join(self.root, "_layouts")
+      base = File.join(self.source, "_layouts")
       dir = Dir.new(base)
       dir.each do |f|
         unless %w{. ..}.include?(f)
@@ -22,10 +25,6 @@ module AutoBlog
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir
-    end
-    
-    def process
-      
     end
   end
 
