@@ -17,6 +17,7 @@ module AutoBlog
       self.process(name)
       self.read_yaml(base, name)
       self.set_defaults
+      self.transform
     end
     
     def process(name)
@@ -46,6 +47,10 @@ module AutoBlog
     
     def set_defaults
       self.data["layout"] ||= "default"
+    end
+    
+    def transform
+      self.content = RedCloth.new(self.content).to_html
     end
     
     def add_layout(layouts)

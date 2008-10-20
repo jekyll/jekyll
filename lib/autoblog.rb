@@ -11,6 +11,7 @@ require 'time'
 
 # 3rd party
 require 'liquid'
+require 'redcloth'
 
 # internal requires
 require 'autoblog/site'

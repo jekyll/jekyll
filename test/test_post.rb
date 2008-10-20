@@ -23,7 +23,7 @@ class TestPost < Test::Unit::TestCase
     p = Post.allocate
     p.process("2008-10-19-foo-bar.textile")
     
-    assert_equal "/2008/10/19/foo-bar", p.url
+    assert_equal "/2008/10/19/foo-bar.html", p.url
   end
   
   def test_read_yaml
@@ -31,7 +31,15 @@ class TestPost < Test::Unit::TestCase
     p.read_yaml(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
     
     assert_equal({"title" => "Foo Bar"}, p.data)
-    assert_equal "\nh1. {{ page.title }}\n\nBest post ever", p.content
+    assert_equal "\nh1. {{ page.title }}\n\nBest *post* ever", p.content
+  end
+  
+  def test_transform
+    p = Post.allocate
+    p.read_yaml(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
+    p.transform
+    
+    assert_equal "<h1>{{ page.title }}</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p>", p.content
   end
   
   def test_add_layout
@@ -39,7 +47,7 @@ class TestPost < Test::Unit::TestCase
     layouts = {"default" => "<<< {{ content }} >>>"}
     p.add_layout(layouts)
     
-    assert_equal "<<< \nh1. Foo Bar\n\nBest post ever >>>", p.content
+    assert_equal "<<< <h1>Foo Bar</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p> >>>", p.content
   end
   
   def test_write
