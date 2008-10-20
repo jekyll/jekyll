@@ -2,16 +2,18 @@ module AutoBlog
   
   class Site
     attr_accessor :source, :dest
-    attr_accessor :layouts
+    attr_accessor :layouts, :posts
     
     def initialize(source, dest)
       self.source = source
       self.dest = dest
       self.layouts = {}
+      self.posts = []
     end
     
     def process
       self.read_layouts
+      self.read_posts
     end
     
     def read_layouts
@@ -23,6 +25,20 @@ module AutoBlog
           self.layouts[name] = File.read(File.join(base, f))
         end
       end
+    rescue Errno::ENOENT => e
+      # ignore missing layout dir
+    end
+    
+    def read_posts
+      base = File.join(self.source, "posts")
+      entries = Dir.entries(base)
+      entries = entries.reject { |e| File.directory?(e) }
+      
+      entries.each do |f|
+        self.posts << Post.new(base, f) if Post.valid?(f)
+      end
+      
+      self.posts.sort!
     rescue Errno::ENOENT => e
       # ignore missing layout dir
     end

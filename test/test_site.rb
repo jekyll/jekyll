@@ -15,4 +15,10 @@ class TestSite < Test::Unit::TestCase
     
     assert_equal ["default"], @s.layouts.keys
   end
+  
+  def test_read_posts
+    @s.read_posts
+    
+    assert_equal 1, @s.posts.size
+  end
 end

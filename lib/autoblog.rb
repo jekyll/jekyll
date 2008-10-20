@@ -5,6 +5,7 @@ require 'rubygems'
 
 # core
 require 'fileutils'
+require 'time'
 
 # stdlib
 
