@@ -47,7 +47,7 @@ class TestPost < Test::Unit::TestCase
     layouts = {"default" => "<<< {{ content }} >>>"}
     p.add_layout(layouts)
     
-    assert_equal "<<< <h1>Foo Bar</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p> >>>", p.content
+    assert_equal "<<< <h1>Foo Bar</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p> >>>", p.output
   end
   
   def test_write
