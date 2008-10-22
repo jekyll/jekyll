@@ -1,6 +1,8 @@
 module AutoBlog
 
   class Post
+    include Comparable
+    
     MATCHER = /^(\d+-\d+-\d+)-(.*)\.([^.]+)$/
     
     def self.valid?(name)
@@ -18,6 +20,10 @@ module AutoBlog
       self.read_yaml(base, name)
       self.set_defaults
       self.transform
+    end
+    
+    def <=>(other)
+      self.date <=> other.date
     end
     
     def process(name)

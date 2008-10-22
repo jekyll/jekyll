@@ -70,7 +70,7 @@ module AutoBlog
     end
     
     def site_payload
-      {"site" => {"time" => Time.now, "posts" => self.posts}}
+      {"site" => {"time" => Time.now, "posts" => self.posts.sort.reverse}}
     end
   end
 
