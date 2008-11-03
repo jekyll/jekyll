@@ -47,7 +47,7 @@ module AutoBlog
     
     def write_posts
       self.posts.each do |post|
-        post.add_layout(self.layouts)
+        post.add_layout(self.layouts, site_payload)
         post.write(self.dest)
       end
     end
@@ -55,16 +55,21 @@ module AutoBlog
     def transform_pages(dir = '')
       base = File.join(self.source, dir)
       entries = Dir.entries(base)
-      entries = entries.reject { |e| %w{_layouts posts}.include?(e) }
+      entries = entries.reject { |e| %w{_layouts posts drafts}.include?(e) }
       entries = entries.reject { |e| e[0..0] == '.' }
       
       entries.each do |f|
         if File.directory?(File.join(base, f))
           transform_pages(File.join(dir, f))
         else
-          page = Page.new(self.source, dir, f)
-          page.add_layout(self.layouts, site_payload)
-          page.write(self.dest)
+          if %w{.png .jpg .gif}.include?(File.extname(f))
+            FileUtils.mkdir_p(File.join(self.dest, dir))
+            FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
+          else
+            page = Page.new(self.source, dir, f)
+            page.add_layout(self.layouts, site_payload)
+            page.write(self.dest)
+          end
         end
       end
     end

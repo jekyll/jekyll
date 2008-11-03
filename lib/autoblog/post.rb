@@ -63,14 +63,20 @@ module AutoBlog
       self.content = RedCloth.new(self.content).to_html
     end
     
-    def add_layout(layouts)
-      payload = {"page" => self.data}
-      self.content = Liquid::Template.parse(self.content).render(payload)
+    def related_posts(posts)
+      related = posts - [self]
+    end
+    
+    def add_layout(layouts, site_payload)
+      related = related_posts(site_payload["site"]["posts"])
+      
+      payload = {"page" => self.data, "related_posts" => related}.merge(site_payload)
+      self.content = Liquid::Template.parse(self.content).render(payload, [AutoBlog::Filters])
       
       layout = layouts[self.data["layout"]] || self.content
       payload = {"content" => self.content, "page" => self.data}
       
-      self.output = Liquid::Template.parse(layout).render(payload)
+      self.output = Liquid::Template.parse(layout).render(payload, [AutoBlog::Filters])
     end
     
     def write(dest)
