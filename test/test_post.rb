@@ -16,7 +16,7 @@ class TestPost < Test::Unit::TestCase
     
     assert_equal Time.parse("2008-10-19"), p.date
     assert_equal "foo-bar", p.slug
-    assert_equal "textile", p.ext
+    assert_equal ".textile", p.ext
   end
   
   def test_url
@@ -36,6 +36,7 @@ class TestPost < Test::Unit::TestCase
   
   def test_transform
     p = Post.allocate
+    p.process("2008-10-18-foo-bar.textile")
     p.read_yaml(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
     p.transform
     

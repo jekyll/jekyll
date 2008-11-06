@@ -1,9 +1,17 @@
 module AutoBlog
 
   class Page
+    include Convertible
+    
     attr_accessor :ext
     attr_accessor :data, :content
     
+    # Initialize a new Page.
+    #   +base+ is the String path to the <source>
+    #   +dir+ is the String path between <source> and the file
+    #   +name+ is the String filename of the post file
+    #
+    # Returns <Page>
     def initialize(base, dir, name)
       @base = base
       @dir = dir
@@ -12,36 +20,31 @@ module AutoBlog
       self.data = {}
       
       self.process(name)
-      self.read_yaml(base, dir, name)
+      self.read_yaml(File.join(base, dir), name)
       self.set_defaults
       self.transform
     end
     
+    # Extract information from the post filename
+    #   +name+ is the String filename of the post file
+    #
+    # Returns nothing
     def process(name)
       self.ext = File.extname(name)
     end
     
-    def read_yaml(base, dir, name)
-      self.content = File.read(File.join(base, dir, name))
-      
-      if self.content =~ /^(---\n.*?)\n---\n/
-        self.content = self.content[($1.size + 5)..-1]
-        
-        self.data = YAML.load($1)
-      end
-    end
-    
+    # Set the data defaults.
+    #
+    # Returns nothing
     def set_defaults
       self.data["layout"] ||= "default"
     end
     
-    def transform
-      if self.ext == ".textile"
-        self.ext = ".html"
-        self.content = RedCloth.new(self.content).to_html
-      end
-    end
-    
+    # Add any necessary layouts to this post
+    #   +layouts+ is a Hash of {"name" => "layout"}
+    #   +site_payload+ is the site payload hash
+    #
+    # Returns nothing
     def add_layout(layouts, site_payload)
       payload = {"page" => self.data}.merge(site_payload)
       self.content = Liquid::Template.parse(self.content).render(payload, [AutoBlog::Filters])
@@ -52,6 +55,10 @@ module AutoBlog
       self.content = Liquid::Template.parse(layout).render(payload, [AutoBlog::Filters])
     end
     
+    # Write the generated page file to the destination directory.
+    #   +dest+ is the String path to the destination dir
+    #
+    # Returns nothing
     def write(dest)
       FileUtils.mkdir_p(File.join(dest, @dir))
       
