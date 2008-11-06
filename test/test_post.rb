@@ -45,7 +45,7 @@ class TestPost < Test::Unit::TestCase
   def test_add_layout
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
     layouts = {"default" => "<<< {{ content }} >>>"}
-    p.add_layout(layouts)
+    p.add_layout(layouts, {"site" => {"posts" => []}})
     
     assert_equal "<<< <h1>Foo Bar</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p> >>>", p.output
   end
@@ -55,7 +55,7 @@ class TestPost < Test::Unit::TestCase
     
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
     layouts = {"default" => "<<< {{ content }} >>>"}
-    p.add_layout(layouts)
+    p.add_layout(layouts, {"site" => {"posts" => []}})
     p.write(dest_dir)
   end
 end
