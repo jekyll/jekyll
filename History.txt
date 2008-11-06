@@ -1,6 +1,9 @@
-=== 1.0.0 / 2008-10-19
+== 0.1.0 / 2008-11-05
+  * First release
+    * Converts posts written in Textile
+    * Converts regular site pages
+    * Simple copy of binary files
 
-* 1 major enhancement
-
+== 0.0.0 / 2008-10-19
   * Birthday!
 

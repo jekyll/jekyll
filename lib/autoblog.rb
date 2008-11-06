@@ -21,7 +21,7 @@ require 'autoblog/post'
 require 'autoblog/filters'
 
 module AutoBlog
-  VERSION = '1.0.0'
+  VERSION = '0.1.0'
   
   def self.process(source, dest)
     AutoBlog::Site.new(source, dest).process
