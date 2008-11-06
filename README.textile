@@ -1,32 +1,28 @@
-= autoblog
+h1. AutoBlog
 
-* FIX (url)
+Blog like a developer.
 
-== DESCRIPTION:
+h2. Example Proto-Site
 
-FIX (describe your package)
+My own personal site/blog is generated with autoblog.
 
-== FEATURES/PROBLEMS:
+The proto-site repo ("http://github.com/mojombo/tpw":http://github.com/mojombo/tpw)
+is converted into the actual site ("http://tom.preston-werner.com/":http://tom.preston-werner.com)
 
-* FIX (list of features or problems)
+h2. Install
 
-== SYNOPSIS:
+This is pre-release software. You will need to download the source
+and run the software from there.
 
-  FIX (code sample of usage)
+  $ git clone git://github.com/mojombo/autoblog
+  $ cd autoblog
+  $ bin/autoblog /path/to/proto/site /path/to/generated/site
 
-== REQUIREMENTS:
-
-* FIX (list of requirements)
-
-== INSTALL:
-
-* FIX (sudo gem install, anything else)
-
-== LICENSE:
+h2. License
 
 (The MIT License)
 
-Copyright (c) 2008 FIX
+Copyright (c) 2008 Tom Preston-Werner
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
