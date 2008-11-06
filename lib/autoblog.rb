@@ -16,6 +16,7 @@ require 'redcloth'
 # internal requires
 require 'autoblog/site'
 require 'autoblog/convertible'
+require 'autoblog/layout'
 require 'autoblog/page'
 require 'autoblog/post'
 require 'autoblog/filters'

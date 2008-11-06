@@ -24,5 +24,30 @@ module AutoBlog
         self.content = RedCloth.new(self.content).to_html
       end
     end
+    
+    # Add any necessary layouts to this post
+    #   +layouts+ is a Hash of {"name" => "layout"}
+    #   +site_payload+ is the site payload hash
+    #
+    # Returns nothing
+    def do_layout(payload, layouts, site_payload)
+      # construct payload
+      payload = payload.merge(site_payload)
+      
+      # render content
+      self.content = Liquid::Template.parse(self.content).render(payload, [AutoBlog::Filters])
+      
+      # output keeps track of what will finally be written
+      self.output = self.content
+      
+      # recursively render layouts
+      layout = layouts[self.data["layout"]]
+      while layout
+        payload = payload.merge({"content" => self.output, "page" => self.data})
+        self.output = Liquid::Template.parse(layout.content).render(payload, [AutoBlog::Filters])
+        
+        layout = layouts[layout.data["layout"]]
+      end
+    end
   end
 end

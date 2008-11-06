@@ -86,15 +86,10 @@ module AutoBlog
     #
     # Returns nothing
     def add_layout(layouts, site_payload)
+      # construct post payload
       related = related_posts(site_payload["site"]["posts"])
-      
-      payload = {"page" => self.data, "related_posts" => related}.merge(site_payload)
-      self.content = Liquid::Template.parse(self.content).render(payload, [AutoBlog::Filters])
-      
-      layout = layouts[self.data["layout"]] || self.content
-      payload = {"content" => self.content, "page" => self.data}
-      
-      self.output = Liquid::Template.parse(layout).render(payload, [AutoBlog::Filters])
+      payload = {"page" => self.data, "related_posts" => related}
+      do_layout(payload, layouts, site_payload)
     end
     
     # Write the generated post file to the destination directory.

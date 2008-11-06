@@ -40,7 +40,7 @@ module AutoBlog
       
       entries.each do |f|
         name = f.split(".")[0..-2].join(".")
-        self.layouts[name] = File.read(File.join(base, f))
+        self.layouts[name] = Layout.new(base, f)
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir

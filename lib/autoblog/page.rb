@@ -4,7 +4,7 @@ module AutoBlog
     include Convertible
     
     attr_accessor :ext
-    attr_accessor :data, :content
+    attr_accessor :data, :content, :output
     
     # Initialize a new Page.
     #   +base+ is the String path to the <source>
@@ -38,13 +38,8 @@ module AutoBlog
     #
     # Returns nothing
     def add_layout(layouts, site_payload)
-      payload = {"page" => self.data}.merge(site_payload)
-      self.content = Liquid::Template.parse(self.content).render(payload, [AutoBlog::Filters])
-      
-      layout = layouts[self.data["layout"]] || self.content
-      payload = {"content" => self.content, "page" => self.data}
-      
-      self.content = Liquid::Template.parse(layout).render(payload, [AutoBlog::Filters])
+      payload = {"page" => self.data}
+      do_layout(payload, layouts, site_payload)
     end
     
     # Write the generated page file to the destination directory.
@@ -61,7 +56,7 @@ module AutoBlog
       
       path = File.join(dest, @dir, name)
       File.open(path, 'w') do |f|
-        f.write(self.content)
+        f.write(self.output)
       end
     end
   end
