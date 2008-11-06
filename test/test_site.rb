@@ -13,7 +13,7 @@ class TestSite < Test::Unit::TestCase
   def test_read_layouts
     @s.read_layouts
     
-    assert_equal ["default"], @s.layouts.keys
+    assert_equal ["default", "simple"].sort, @s.layouts.keys.sort
   end
   
   def test_read_posts
