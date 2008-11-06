@@ -89,13 +89,15 @@ module AutoBlog
         if File.directory?(File.join(base, f))
           transform_pages(File.join(dir, f))
         else
-          if %w{.png .jpg .gif}.include?(File.extname(f))
-            FileUtils.mkdir_p(File.join(self.dest, dir))
-            FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
-          else
+          first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
+          
+          if first3 == "---"
             page = Page.new(self.source, dir, f)
             page.add_layout(self.layouts, site_payload)
             page.write(self.dest)
+          else
+            FileUtils.mkdir_p(File.join(self.dest, dir))
+            FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
           end
         end
       end

@@ -21,7 +21,6 @@ module AutoBlog
       
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
-      self.set_defaults
       self.transform
     end
     
@@ -31,13 +30,6 @@ module AutoBlog
     # Returns nothing
     def process(name)
       self.ext = File.extname(name)
-    end
-    
-    # Set the data defaults.
-    #
-    # Returns nothing
-    def set_defaults
-      self.data["layout"] ||= "default"
     end
     
     # Add any necessary layouts to this post

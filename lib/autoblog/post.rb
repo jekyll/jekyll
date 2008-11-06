@@ -28,7 +28,6 @@ module AutoBlog
       
       self.process(name)
       self.read_yaml(base, name)
-      self.set_defaults
       self.transform
     end
     
@@ -72,13 +71,6 @@ module AutoBlog
     # Returns <String>
     def id
       self.dir + self.slug
-    end
-    
-    # Set the data defaults.
-    #
-    # Returns nothing
-    def set_defaults
-      self.data["layout"] ||= "default"
     end
     
     # Calculate related posts.
