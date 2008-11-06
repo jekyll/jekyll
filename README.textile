@@ -9,9 +9,9 @@ My own personal site/blog is generated with autoblog.
 The proto-site repo ("http://github.com/mojombo/tpw":http://github.com/mojombo/tpw)
 is converted into the actual site ("http://tom.preston-werner.com/":http://tom.preston-werner.com)
 
-h2. Install
+h2. Install and Run
 
-This is pre-release software. You will need to download the source
+This is beta software. You will need to download the source
 and run the software from there.
 
   $ git clone git://github.com/mojombo/autoblog
