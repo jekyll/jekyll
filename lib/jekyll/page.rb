@@ -1,4 +1,4 @@
-module Conveyer
+module Jekyll
 
   class Page
     include Convertible

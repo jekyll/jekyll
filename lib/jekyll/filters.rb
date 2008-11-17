@@ -1,4 +1,4 @@
-module Conveyer
+module Jekyll
   
   module Filters
     def date_to_string(date)

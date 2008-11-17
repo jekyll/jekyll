@@ -2,6 +2,6 @@
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
-require 'conveyer'
+require 'jekyll'
 
-Conveyer.process(ARGV[0], ARGV[1])
+Jekyll.process(ARGV[0], ARGV[1])

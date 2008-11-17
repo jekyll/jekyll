@@ -14,17 +14,17 @@ require 'liquid'
 require 'redcloth'
 
 # internal requires
-require 'conveyer/site'
-require 'conveyer/convertible'
-require 'conveyer/layout'
-require 'conveyer/page'
-require 'conveyer/post'
-require 'conveyer/filters'
+require 'jekyll/site'
+require 'jekyll/convertible'
+require 'jekyll/layout'
+require 'jekyll/page'
+require 'jekyll/post'
+require 'jekyll/filters'
 
-module Conveyer
+module Jekyll
   VERSION = '0.1.0'
   
   def self.process(source, dest)
-    Conveyer::Site.new(source, dest).process
+    Jekyll::Site.new(source, dest).process
   end
 end

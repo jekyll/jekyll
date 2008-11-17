@@ -1,4 +1,4 @@
-module Conveyer
+module Jekyll
   module Convertible
     # Read the YAML frontmatter
     #   +base+ is the String path to the dir containing the file
@@ -35,7 +35,7 @@ module Conveyer
       payload = payload.merge(site_payload)
       
       # render content
-      self.content = Liquid::Template.parse(self.content).render(payload, [Conveyer::Filters])
+      self.content = Liquid::Template.parse(self.content).render(payload, [Jekyll::Filters])
       
       # output keeps track of what will finally be written
       self.output = self.content
@@ -44,7 +44,7 @@ module Conveyer
       layout = layouts[self.data["layout"]]
       while layout
         payload = payload.merge({"content" => self.output, "page" => self.data})
-        self.output = Liquid::Template.parse(layout.content).render(payload, [Conveyer::Filters])
+        self.output = Liquid::Template.parse(layout.content).render(payload, [Jekyll::Filters])
         
         layout = layouts[layout.data["layout"]]
       end

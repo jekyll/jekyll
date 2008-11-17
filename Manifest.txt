@@ -2,6 +2,6 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/conveyer
-lib/conveyer.rb
-test/test_conveyer.rb
+bin/jekyll
+lib/jekyll.rb
+test/test_jekyll.rb

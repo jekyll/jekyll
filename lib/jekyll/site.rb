@@ -1,4 +1,4 @@
-module Conveyer
+module Jekyll
   
   class Site
     attr_accessor :source, :dest

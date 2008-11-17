@@ -1,8 +1,8 @@
-require File.join(File.dirname(__FILE__), *%w[.. lib conveyer])
+require File.join(File.dirname(__FILE__), *%w[.. lib jekyll])
 
 require 'test/unit'
 
-include Conveyer
+include Jekyll
 
 def dest_dir
   File.join(File.dirname(__FILE__), *%w[dest])
