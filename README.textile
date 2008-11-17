@@ -1,6 +1,24 @@
 h1. Jekyll
 
-Blog like a developer.
+Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. Visit "http://tom.preston-werner.com":http://tom.preston-werner.com to see an example of a Jekyll generated blog.
+
+To understand how this all works, open up my "TPW":http://github.com/mojombo/tpw repo in a new browser window. I'll be referencing the code there.
+
+Take a look at "index.html":http://github.com/mojombo/tpw/tree/master/index.html. This file represents the homepage of the site. At the top of the file is a chunk of YAML that contains metadata about the file. This data tells Jekyll what layout to give the file, what the page's title should be, etc. In this case, I specify that the "default" template should be used. You can find the layout files in the "_layouts":http://github.com/mojombo/tpw/tree/master/_layouts directory. If you open "default.html":http://github.com/mojombo/tpw/tree/master/_layouts/default.html you can see that the homepage is constructed by wrapping index.html with this layout.
+
+You'll also notice Liquid templating code in these files. "Liquid":http://www.liquidmarkup.org/ is a simple, extensible templating language that makes it easy to embed data in your templates. For my homepage I wanted to have a list of all my blog posts. Jekyll hands me a Hash containing various data about my site. A reverse chronological list of all my blog posts can be found in <code>site.posts</code>. Each post, in turn, contains various fields such as <code>title</code> and <code>date</code>.
+
+Jekyll gets the list of blog posts by parsing the files in the "_posts":http://github.com/mojombo/tpw/tree/master/_posts directory. Each post's filename contains the publishing date and slug (what shows up in the URL) that the final HTML file should have. Open up the file corresponding to a blog post: "2008-11-17-blogging-like-a-hacker.textile":http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile. GitHub renders textile files by default, so to better understand the file, click on the "raw":http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile?raw=true view to see the original file. Here I've specified the <code>post</code> layout. If you look at that file you'll see an example of a nested layout. Layouts can contain other layouts allowing you a great deal of flexibility in how pages are assembled. In my case I use a nested layout in order to show related posts for each blog entry. The YAML also specifies the post's title which is then embedded in the post's body via Liquid.
+
+Posts are handled in a special way by Jekyll. The date you specify in the filename is used to construct the URL in the generated site. The example post, for instance, ends up at <code>http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</code>.
+
+Files that do not reside in directories prefixed with an underscore are mirrored into a corresponding directory structure in the generated site. If a file does not have a YAML preface, it is not run through the Liquid interpreter. Binary files are copied over unmodified.
+
+In order to convert your raw site into the finished version, you simply run:
+
+<pre class="terminal"><code>$ jekyll /path/to/raw/site /path/to/place/generated/site</code></pre>
+
+Jekyll is still a very young project. I've only developed the exact functionality that I've needed. As time goes on I'd like to see the project mature and support additional features. If you end up using Jekyll for your own blog, drop me a line and let me know what you'd like to see in future versions. Better yet, fork the project over at GitHub and hack in the features yourself!
 
 h2. Example Proto-Site
 
@@ -16,7 +34,7 @@ and run the software from there.
 
   $ git clone git://github.com/mojombo/jekyll
   $ cd jekyll
-  $ bin/jekyll /path/to/proto/site /path/to/generated/site
+  $ bin/jekyll /path/to/proto/site /path/to/place/generated/site
 
 h2. License
 
