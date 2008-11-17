@@ -1,4 +1,4 @@
-module AutoBlog
+module Conveyer
 
   class Page
     include Convertible

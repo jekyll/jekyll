@@ -1,4 +1,4 @@
-module AutoBlog
+module Conveyer
 
   class Post
     include Comparable

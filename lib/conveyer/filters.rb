@@ -1,4 +1,4 @@
-module AutoBlog
+module Conveyer
   
   module Filters
     def date_to_string(date)

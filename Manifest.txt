@@ -2,6 +2,6 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/autoblog
-lib/autoblog.rb
-test/test_autoblog.rb
+bin/conveyer
+lib/conveyer.rb
+test/test_conveyer.rb

@@ -2,6 +2,6 @@
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
-require 'autoblog'
+require 'conveyer'
 
-AutoBlog.process(ARGV[0], ARGV[1])
+Conveyer.process(ARGV[0], ARGV[1])

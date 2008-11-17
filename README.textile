@@ -1,10 +1,10 @@
-h1. AutoBlog
+h1. Conveyer
 
 Blog like a developer.
 
 h2. Example Proto-Site
 
-My own personal site/blog is generated with autoblog.
+My own personal site/blog is generated with Conveyer.
 
 The proto-site repo ("http://github.com/mojombo/tpw":http://github.com/mojombo/tpw)
 is converted into the actual site ("http://tom.preston-werner.com/":http://tom.preston-werner.com)
@@ -14,9 +14,9 @@ h2. Install and Run
 This is beta software. You will need to download the source
 and run the software from there.
 
-  $ git clone git://github.com/mojombo/autoblog
-  $ cd autoblog
-  $ bin/autoblog /path/to/proto/site /path/to/generated/site
+  $ git clone git://github.com/mojombo/conveyer
+  $ cd conveyer
+  $ bin/conveyer /path/to/proto/site /path/to/generated/site
 
 h2. License
 

@@ -14,17 +14,17 @@ require 'liquid'
 require 'redcloth'
 
 # internal requires
-require 'autoblog/site'
-require 'autoblog/convertible'
-require 'autoblog/layout'
-require 'autoblog/page'
-require 'autoblog/post'
-require 'autoblog/filters'
+require 'conveyer/site'
+require 'conveyer/convertible'
+require 'conveyer/layout'
+require 'conveyer/page'
+require 'conveyer/post'
+require 'conveyer/filters'
 
-module AutoBlog
+module Conveyer
   VERSION = '0.1.0'
   
   def self.process(source, dest)
-    AutoBlog::Site.new(source, dest).process
+    Conveyer::Site.new(source, dest).process
   end
 end

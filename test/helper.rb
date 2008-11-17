@@ -1,8 +1,8 @@
-require File.join(File.dirname(__FILE__), *%w[.. lib autoblog])
+require File.join(File.dirname(__FILE__), *%w[.. lib conveyer])
 
 require 'test/unit'
 
-include AutoBlog
+include Conveyer
 
 def dest_dir
   File.join(File.dirname(__FILE__), *%w[dest])

@@ -1,4 +1,4 @@
-module AutoBlog
+module Conveyer
   
   class Site
     attr_accessor :source, :dest
