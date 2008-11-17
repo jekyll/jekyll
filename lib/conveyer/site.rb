@@ -51,7 +51,7 @@ module Conveyer
     #
     # Returns nothing
     def read_posts
-      base = File.join(self.source, "posts")
+      base = File.join(self.source, "_posts")
       entries = Dir.entries(base)
       entries = entries.reject { |e| File.directory?(e) }
       
@@ -82,8 +82,7 @@ module Conveyer
     def transform_pages(dir = '')
       base = File.join(self.source, dir)
       entries = Dir.entries(base)
-      entries = entries.reject { |e| %w{_layouts posts drafts}.include?(e) }
-      entries = entries.reject { |e| e[0..0] == '.' }
+      entries = entries.reject { |e| ['.', '_'].include?(e[0..0]) }
       
       entries.each do |f|
         if File.directory?(File.join(base, f))
