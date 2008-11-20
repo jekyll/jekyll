@@ -1,6 +1,3 @@
-(in /www/adpickles/jekyll)
-# -*- encoding: utf-8 -*-
-
 Gem::Specification.new do |s|
   s.name = %q{jekyll}
   s.version = "0.1.0"
