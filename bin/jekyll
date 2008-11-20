@@ -4,4 +4,8 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'jekyll'
 
-Jekyll.process(ARGV[0], ARGV[1])
+if ARGV[0] && ARGV[1]
+  Jekyll.process(ARGV[0], ARGV[1])
+else
+  puts "USAGE: jekyll /path/to/raw/site /path/to/generated/site"
+end
