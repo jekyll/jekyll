@@ -56,13 +56,13 @@ all of the dependencies, install the gem first.
 
 The best way to get your changes merged back into core is as follows:
 
-1. Fork mojombo/jekyll on GitHub
-2. Clone down your fork
-3. Create a topic branch to contain your change
-4. Hack away
-5. If necessary, rebase your commits into logical chunks, without errors
-6. Push the branch up to GitHub
-7. Send me a pull request for your branch
+# Fork mojombo/jekyll on GitHub
+# Clone down your fork
+# Create a topic branch to contain your change
+# Hack away
+# If necessary, rebase your commits into logical chunks, without errors
+# Push the branch up to GitHub
+# Send me a pull request for your branch
 
 h2. License
 
