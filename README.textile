@@ -27,18 +27,42 @@ My own personal site/blog is generated with Jekyll.
 The proto-site repo ("http://github.com/mojombo/tpw":http://github.com/mojombo/tpw)
 is converted into the actual site ("http://tom.preston-werner.com/":http://tom.preston-werner.com)
 
-h2. Install and Run
+h2. Install
 
-This is beta software. You will need to download the source
-and run the software from there.
+The best way to install Jekyll is via RubyGems:
 
-  $ sudo gem install RedCloth
-  $ sudo gem install liquid
-  $ sudo gem install classifier
-  
+  $ sudo gem install jekyll
+
+h2. Run
+
+  $ cd /path/to/proto/site
+  $ jekyll
+
+This will generate the site and place it in /path/to/proto/site/_site. If
+you'd like the generated site placed somewhere else:
+
+  $ jekyll /path/to/place/generated/site
+
+And if you don't want to be in the proto site root to run Jekyll:
+
+  $ jekyll /path/to/proto/site /path/to/place/generated/site
+
+h2. Contribute
+
+If you'd like to hack on Jekyll, grab the source from GitHub. To get
+all of the dependencies, install the gem first.
+
   $ git clone git://github.com/mojombo/jekyll
-  $ cd jekyll
-  $ bin/jekyll /path/to/proto/site /path/to/place/generated/site
+
+The best way to get your changes merged back into core is as follows:
+
+1. Fork mojombo/jekyll on GitHub
+2. Clone down your fork
+3. Create a topic branch to contain your change
+4. Hack away
+5. If necessary, rebase your commits into logical chunks, without errors
+6. Push the branch up to GitHub
+7. Send me a pull request for your branch
 
 h2. License
 
