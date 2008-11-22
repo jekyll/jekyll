@@ -1,4 +1,4 @@
-== 0.1.1 /
+== 0.1.1 / 2008-11-22
   * Minor Additions
     * Posts now support introspectional data e.g. {{ page.url }}
 
