@@ -4,8 +4,23 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'jekyll'
 
-if ARGV[0] && ARGV[1]
-  Jekyll.process(ARGV[0], ARGV[1])
-else
-  puts "USAGE: jekyll /path/to/raw/site /path/to/generated/site"
+case ARGV.size
+  when 0
+    dest = File.join('.', '_site')
+    FileUtils.mkdir_p(dest)
+    Jekyll.process('.', dest)
+  when 1
+    Jekyll.process('.', ARGV[0])
+  when 2
+    Jekyll.process(ARGV[0], ARGV[1])
+  else
+    puts DATA.read
 end
+
+__END__
+Jekyll is a blog-aware, static site generator.
+
+Basic Command Line Usage:
+  jekyll                                                   # . -> ./_site
+  jekyll <path to write generated site>                    # . -> <path>
+  jekyll <path to source> <path to write generated site>   # <path> -> <path>
