@@ -1,0 +1,8 @@
+---
+layout: default
+title: Complex
+---
+
+url: {{ page.url }}
+date: {{ page.date }}
+id: {{ page.id }}

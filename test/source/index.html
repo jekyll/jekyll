@@ -1,0 +1,12 @@
+---
+layout: default
+title: Tom Preston-Werner
+---
+
+h1. Welcome to my site
+
+<ul>
+  {% for post in site.posts %}
+    <li>{{ post.date }} <a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
