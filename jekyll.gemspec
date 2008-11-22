@@ -1,20 +1,20 @@
 Gem::Specification.new do |s|
   s.name = %q{jekyll}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Preston-Werner"]
-  s.date = %q{2008-11-19}
+  s.date = %q{2008-11-22}
   s.default_executable = %q{jekyll}
   s.email = ["tom@mojombo.com"]
   s.executables = ["jekyll"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt"]
-  s.files = ["History.txt", "Manifest.txt", "README.textile", "Rakefile", "bin/jekyll", "lib/jekyll.rb", "lib/jekyll/convertible.rb", "lib/jekyll/filters.rb", "lib/jekyll/layout.rb", "lib/jekyll/page.rb", "lib/jekyll/post.rb", "lib/jekyll/site.rb", "test/helper.rb", "test/suite.rb", "test/test_jekyll.rb", "test/test_post.rb", "test/test_site.rb"]
+  s.files = ["History.txt", "Manifest.txt", "README.textile", "Rakefile", "bin/jekyll", "jekyll.gemspec", "lib/jekyll.rb", "lib/jekyll/convertible.rb", "lib/jekyll/filters.rb", "lib/jekyll/layout.rb", "lib/jekyll/page.rb", "lib/jekyll/post.rb", "lib/jekyll/site.rb", "test/dest/2008/10/18/foo-bar.html", "test/dest/2008/11/21/complex.html", "test/dest/css/screen.css", "test/dest/index.html", "test/helper.rb", "test/source/_layouts/default.html", "test/source/_layouts/simple.html", "test/source/_posts/2008-10-18-foo-bar.textile", "test/source/_posts/2008-11-21-complex.textile", "test/source/css/screen.css", "test/source/index.html", "test/suite.rb", "test/test_jekyll.rb", "test/test_post.rb", "test/test_site.rb"]
   s.has_rdoc = true
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{jekyll}
-  s.rubygems_version = %q{1.3.1}
+  s.rubygems_version = %q{1.3.0}
   s.summary = %q{Jekyll is a simple, blog aware, static site generator.}
   s.test_files = ["test/test_jekyll.rb", "test/test_post.rb", "test/test_site.rb"]
 
@@ -25,15 +25,15 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<RedCloth>, [">= 0"])
       s.add_runtime_dependency(%q<liquid>, [">= 0"])
-      s.add_development_dependency(%q<hoe>, [">= 1.7.0"])
+      s.add_development_dependency(%q<hoe>, [">= 1.8.0"])
     else
       s.add_dependency(%q<RedCloth>, [">= 0"])
       s.add_dependency(%q<liquid>, [">= 0"])
-      s.add_dependency(%q<hoe>, [">= 1.7.0"])
+      s.add_dependency(%q<hoe>, [">= 1.8.0"])
     end
   else
     s.add_dependency(%q<RedCloth>, [">= 0"])
     s.add_dependency(%q<liquid>, [">= 0"])
-    s.add_dependency(%q<hoe>, [">= 1.7.0"])
+    s.add_dependency(%q<hoe>, [">= 1.8.0"])
   end
 end

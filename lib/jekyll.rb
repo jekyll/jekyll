@@ -22,7 +22,7 @@ require 'jekyll/post'
 require 'jekyll/filters'
 
 module Jekyll
-  VERSION = '0.1.0'
+  VERSION = '0.1.1'
   
   def self.process(source, dest)
     Jekyll::Site.new(source, dest).process
