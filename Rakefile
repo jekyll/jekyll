@@ -6,7 +6,7 @@ Hoe.new('jekyll', Jekyll::VERSION) do |p|
   # p.rubyforge_name = 'jekyllx' # if different than lowercase project name
   p.developer('Tom Preston-Werner', 'tom@mojombo.com')
   p.summary = "Jekyll is a simple, blog aware, static site generator."
-  p.extra_deps = ['RedCloth', 'liquid']
+  p.extra_deps = ['RedCloth', 'liquid', 'classifier']
 end
 
 desc "Open an irb session preloaded with this library"

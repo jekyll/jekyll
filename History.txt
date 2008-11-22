@@ -1,4 +1,6 @@
-== 0.1.2 /
+== 0.1.2 / 2008-11-22
+  * Major Features
+    * Add a real "related posts" implementation using Classifier
   * Command Line Changes
     * Allow cli to be called with 0, 1, or 2 args intuiting dir paths
       if they are omitted

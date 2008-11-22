@@ -1,5 +1,10 @@
 module Jekyll
   module Convertible
+    # Return the contents as a string
+    def to_s
+      self.content || ''
+    end
+    
     # Read the YAML frontmatter
     #   +base+ is the String path to the dir containing the file
     #   +name+ is the String filename of the file

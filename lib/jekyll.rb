@@ -12,6 +12,7 @@ require 'time'
 # 3rd party
 require 'liquid'
 require 'redcloth'
+require 'classifier'
 
 # internal requires
 require 'jekyll/site'
@@ -22,7 +23,7 @@ require 'jekyll/post'
 require 'jekyll/filters'
 
 module Jekyll
-  VERSION = '0.1.1'
+  VERSION = '0.1.2'
   
   def self.process(source, dest)
     Jekyll::Site.new(source, dest).process

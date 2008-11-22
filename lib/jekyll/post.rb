@@ -4,6 +4,10 @@ module Jekyll
     include Comparable
     include Convertible
     
+    class << self
+      attr_accessor :lsi
+    end
+    
     MATCHER = /^(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
     
     # Post name validator. Post filenames must be like:
@@ -77,7 +81,14 @@ module Jekyll
     #
     # Returns [<Post>]
     def related_posts(posts)
-      related = posts - [self]
+      self.class.lsi ||= begin
+        lsi = Classifier::LSI.new
+        posts.each { |x| lsi.add_item(x) }
+        lsi
+      end
+
+      related = self.class.lsi.find_related(self.content, 11)
+      related - [self]
     end
     
     # Add any necessary layouts to this post

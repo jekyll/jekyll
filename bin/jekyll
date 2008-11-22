@@ -7,6 +7,7 @@ require 'jekyll'
 case ARGV.size
   when 0
     dest = File.join('.', '_site')
+    FileUtils.rm_rf(dest)
     FileUtils.mkdir_p(dest)
     Jekyll.process('.', dest)
   when 1
