@@ -1,3 +1,7 @@
+== 0.1.1 /
+  * Minor Additions
+    * Posts now support introspectional data e.g. {{ page.url }}
+
 == 0.1.0 / 2008-11-05
   * First release
     * Converts posts written in Textile
