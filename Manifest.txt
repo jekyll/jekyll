@@ -3,6 +3,7 @@ Manifest.txt
 README.textile
 Rakefile
 bin/jekyll
+jekyll.gemspec
 lib/jekyll.rb
 lib/jekyll/convertible.rb
 lib/jekyll/filters.rb
@@ -10,7 +11,17 @@ lib/jekyll/layout.rb
 lib/jekyll/page.rb
 lib/jekyll/post.rb
 lib/jekyll/site.rb
+test/dest/2008/10/18/foo-bar.html
+test/dest/2008/11/21/complex.html
+test/dest/css/screen.css
+test/dest/index.html
 test/helper.rb
+test/source/_layouts/default.html
+test/source/_layouts/simple.html
+test/source/_posts/2008-10-18-foo-bar.textile
+test/source/_posts/2008-11-21-complex.textile
+test/source/css/screen.css
+test/source/index.html
 test/suite.rb
 test/test_jekyll.rb
 test/test_post.rb
