@@ -34,6 +34,7 @@ and run the software from there.
 
   $ sudo gem install RedCloth
   $ sudo gem install liquid
+  $ sudo gem install classifier
   
   $ git clone git://github.com/mojombo/jekyll
   $ cd jekyll
