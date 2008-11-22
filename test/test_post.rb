@@ -28,7 +28,7 @@ class TestPost < Test::Unit::TestCase
   
   def test_read_yaml
     p = Post.allocate
-    p.read_yaml(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
+    p.read_yaml(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
     
     assert_equal({"title" => "Foo Bar", "layout" => "default"}, p.data)
     assert_equal "\nh1. {{ page.title }}\n\nBest *post* ever", p.content
@@ -37,14 +37,14 @@ class TestPost < Test::Unit::TestCase
   def test_transform
     p = Post.allocate
     p.process("2008-10-18-foo-bar.textile")
-    p.read_yaml(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
+    p.read_yaml(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
     p.transform
     
     assert_equal "<h1>{{ page.title }}</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p>", p.content
   end
   
   def test_add_layout
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.add_layout(layouts, {"site" => {"posts" => []}})
     
@@ -54,9 +54,17 @@ class TestPost < Test::Unit::TestCase
   def test_write
     clear_dest
     
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source posts]), "2008-10-18-foo-bar.textile")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.add_layout(layouts, {"site" => {"posts" => []}})
     p.write(dest_dir)
+  end
+  
+  def test_data
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-11-21-complex.textile")
+    layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
+    p.add_layout(layouts, {"site" => {"posts" => []}})
+    
+    assert_equal "<<< <p>url: /2008/11/21/complex.html\ndate: Fri Nov 21 00:00:00 -0800 2008\nid: /2008/11/21/complex</p> >>>", p.output
   end
 end

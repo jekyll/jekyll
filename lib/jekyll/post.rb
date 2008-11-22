@@ -88,7 +88,7 @@ module Jekyll
     def add_layout(layouts, site_payload)
       # construct post payload
       related = related_posts(site_payload["site"]["posts"])
-      payload = {"page" => self.data, "related_posts" => related}
+      payload = {"page" => self.to_liquid.merge(self.data), "related_posts" => related}
       do_layout(payload, layouts, site_payload)
     end
     
