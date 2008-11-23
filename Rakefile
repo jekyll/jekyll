@@ -13,3 +13,10 @@ desc "Open an irb session preloaded with this library"
 task :console do
   sh "irb -rubygems -r ./lib/jekyll.rb"
 end
+
+namespace :convert do
+  desc "Migrate from mephisto in the current directory"
+  task :mephisto do
+    sh %q(ruby -r './lib/jekyll/converters/mephisto' -e 'Jekyll::Mephisto.postgres(:database => "#{ENV["DB"]}")')
+  end
+end
