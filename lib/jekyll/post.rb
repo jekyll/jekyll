@@ -32,7 +32,8 @@ module Jekyll
       
       self.process(name)
       self.read_yaml(base, name)
-      self.transform
+      #Removed to avoid munging of liquid tags, replaced in convertible.rb#48
+      #self.transform
     end
     
     # Spaceship is based on Post#date
@@ -82,8 +83,10 @@ module Jekyll
     # Returns [<Post>]
     def related_posts(posts)
       self.class.lsi ||= begin
+        puts "Running the classifier... this could take a while."
         lsi = Classifier::LSI.new
-        posts.each { |x| lsi.add_item(x) }
+        posts.each { |x| $stdout.print(".");$stdout.flush;lsi.add_item(x) }
+        puts ""
         lsi
       end
 
