@@ -13,7 +13,7 @@ module Jekyll
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
       
-      if self.content =~ /^(---\n.*?)\n---\n/m
+      if self.content =~ /^(---.*\n.*?)\n---.*\n/m
         self.content = self.content[($1.size + 5)..-1]
         
         self.data = YAML.load($1)
@@ -24,9 +24,13 @@ module Jekyll
     #
     # Returns nothing
     def transform
-      if self.ext == ".textile"
+      case self.ext
+      when ".textile":
         self.ext = ".html"
         self.content = RedCloth.new(self.content).to_html
+      when ".markdown":
+        self.ext = ".html"
+        self.content = RDiscount.new(self.content).to_html
       end
     end
     
@@ -41,6 +45,7 @@ module Jekyll
       
       # render content
       self.content = Liquid::Template.parse(self.content).render(payload, [Jekyll::Filters])
+      self.transform
       
       # output keeps track of what will finally be written
       self.output = self.content
