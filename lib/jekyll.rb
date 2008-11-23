@@ -12,6 +12,7 @@ require 'time'
 # 3rd party
 require 'liquid'
 require 'redcloth'
+require 'rdiscount' rescue puts "The rdiscount gem is required for markdown support!"
 require 'classifier'
 
 # internal requires
@@ -21,6 +22,7 @@ require 'jekyll/layout'
 require 'jekyll/page'
 require 'jekyll/post'
 require 'jekyll/filters'
+require 'jekyll/blocks'
 
 module Jekyll
   VERSION = '0.1.2'
