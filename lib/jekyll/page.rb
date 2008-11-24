@@ -21,7 +21,7 @@ module Jekyll
       
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
-      self.transform
+      #self.transform
     end
     
     # Extract information from the post filename
