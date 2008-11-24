@@ -8,7 +8,14 @@ module Jekyll
     end
   
     def render(context)
-      "<pre class='syntax-highlight:#{@lang}'>#{escape(super)}</pre>"
+      #The div is required because RDiscount blows ass
+      <<-HTML
+<div>
+  <pre>
+    <code class='#{@lang}'>#{h(super.to_s).strip}</code>
+  </pre>
+</div>
+      HTML
     end    
   end
 end
