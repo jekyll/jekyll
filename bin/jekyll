@@ -6,16 +6,7 @@ require 'optparse'
 require 'jekyll'
 
 opts = OptionParser.new do |opts|
-  opts.banner = <<-EOF
-Jekyll is a blog-aware, static site generator.
-
-Basic Command Line Usage:
-  jekyll                                                   # . -> ./_site
-  jekyll <path to write generated site>                    # . -> <path>
-  jekyll <path to source> <path to write generated site>   # <path> -> <path>
-    
-  Options:
-EOF
+  opts.banner = DATA.read
 
   opts.on("--auto", "Auto-regenerate") do
     options[:auto] = true
@@ -24,16 +15,38 @@ end
 
 opts.parse!
 
+def process_local_to_local
+  dest = File.join('.', '_site')
+  FileUtils.rm_rf(dest)
+  FileUtils.mkdir_p(dest)
+  Jekyll.process('.', dest)
+end
+
+def process_local_to_path
+  Jekyll.process('.', ARGV[0])
+end
+
+def process_path_to_path
+  Jekyll.process(ARGV[0], ARGV[1])
+end
+
 case ARGV.size
   when 0
-    dest = File.join('.', '_site')
-    FileUtils.rm_rf(dest)
-    FileUtils.mkdir_p(dest)
-    Jekyll.process('.', dest)
+    process_local_to_local
   when 1
-    Jekyll.process('.', ARGV[0])
+    process_local_to_path
   when 2
-    Jekyll.process(ARGV[0], ARGV[1])
+    process_path_to_path
   else
-    puts DATA.read
+    puts "Invalid options. Run `jekyll --help` for assistance."
 end
+
+__END__
+Jekyll is a blog-aware, static site generator.
+
+Basic Command Line Usage:
+  jekyll                                                   # . -> ./_site
+  jekyll <path to write generated site>                    # . -> <path>
+  jekyll <path to source> <path to write generated site>   # <path> -> <path>
+    
+  Options:
