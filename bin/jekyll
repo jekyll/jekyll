@@ -5,6 +5,8 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 require 'optparse'
 require 'jekyll'
 
+options = {}
+
 opts = OptionParser.new do |opts|
   opts.banner = DATA.read
 
@@ -20,8 +22,13 @@ def clean(dest)
   FileUtils.mkdir_p(dest)
 end
 
-def globs
-  
+def globs(source)
+  Dir.chdir(source) do
+    dirs = Dir['*'].select { |x| File.directory?(x) }
+    dirs -= ['_site']
+    dirs = dirs.map { |x| "#{x}/**/*" }
+    dirs += ['*']
+  end
 end
 
 source = nil
@@ -42,7 +49,25 @@ case ARGV.size
     exit(1)
 end
 
-Jekyll.process(source, destination)
+if options[:auto]
+  puts "Auto-regenerating enabled: #{source} -> #{destination}"
+  
+  dw = DirectoryWatcher.new(source)
+  dw.interval = 1
+  dw.glob = globs(source)
+  
+  dw.add_observer do |*args|
+    t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+    puts "[#{t}] regeneration: #{args.size} files changed"
+    Jekyll.process(source, destination)
+  end
+  
+  dw.start
+  
+  loop { sleep 1000 }
+else
+  Jekyll.process(source, destination)
+end
 
 __END__
 Jekyll is a blog-aware, static site generator.
