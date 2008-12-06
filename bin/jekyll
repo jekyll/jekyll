@@ -15,31 +15,34 @@ end
 
 opts.parse!
 
-def process_local_to_local
-  dest = File.join('.', '_site')
+def clean(dest)
   FileUtils.rm_rf(dest)
   FileUtils.mkdir_p(dest)
-  Jekyll.process('.', dest)
 end
 
-def process_local_to_path
-  Jekyll.process('.', ARGV[0])
+def globs
+  
 end
 
-def process_path_to_path
-  Jekyll.process(ARGV[0], ARGV[1])
-end
+source = nil
+destination = nil
 
 case ARGV.size
   when 0
-    process_local_to_local
+    source = '.'
+    destination = File.join('.', '_site')
   when 1
-    process_local_to_path
+    source = '.'
+    destination = ARGV[0]
   when 2
-    process_path_to_path
+    source = ARGV[0]
+    destination = ARGV[1]
   else
     puts "Invalid options. Run `jekyll --help` for assistance."
+    exit(1)
 end
+
+Jekyll.process(source, destination)
 
 __END__
 Jekyll is a blog-aware, static site generator.
