@@ -2,7 +2,27 @@
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
+require 'optparse'
 require 'jekyll'
+
+opts = OptionParser.new do |opts|
+  opts.banner = <<-EOF
+Jekyll is a blog-aware, static site generator.
+
+Basic Command Line Usage:
+  jekyll                                                   # . -> ./_site
+  jekyll <path to write generated site>                    # . -> <path>
+  jekyll <path to source> <path to write generated site>   # <path> -> <path>
+    
+  Options:
+EOF
+
+  opts.on("--auto", "Auto-regenerate") do
+    options[:auto] = true
+  end
+end
+
+opts.parse!
 
 case ARGV.size
   when 0
@@ -17,11 +37,3 @@ case ARGV.size
   else
     puts DATA.read
 end
-
-__END__
-Jekyll is a blog-aware, static site generator.
-
-Basic Command Line Usage:
-  jekyll                                                   # . -> ./_site
-  jekyll <path to write generated site>                    # . -> <path>
-  jekyll <path to source> <path to write generated site>   # <path> -> <path>
