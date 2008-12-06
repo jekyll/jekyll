@@ -14,6 +14,7 @@ require 'liquid'
 require 'redcloth'
 require 'rdiscount' rescue puts "The rdiscount gem is required for markdown support!"
 require 'classifier'
+require 'directory_watcher'
 
 # internal requires
 require 'jekyll/site'

@@ -27,12 +27,14 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<liquid>, [">= 0"])
       s.add_runtime_dependency(%q<classifier>, [">= 0"])
       s.add_runtime_dependency(%q<rdiscount>, [">= 0"])
+      s.add_runtime_dependency(%q<directory_watcher>, [">= 0"])
       s.add_development_dependency(%q<hoe>, [">= 1.8.0"])
     else
       s.add_dependency(%q<RedCloth>, [">= 0"])
       s.add_dependency(%q<liquid>, [">= 0"])
       s.add_dependency(%q<classifier>, [">= 0"])
       s.add_dependency(%q<rdiscount>, [">= 0"])
+      s.add_dependency(%q<directory_watcher>, [">= 0"])
       s.add_dependency(%q<hoe>, [">= 1.8.0"])
     end
   else
@@ -40,6 +42,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<liquid>, [">= 0"])
     s.add_dependency(%q<classifier>, [">= 0"])
     s.add_dependency(%q<rdiscount>, [">= 0"])
+    s.add_dependency(%q<directory_watcher>, [">= 0"])
     s.add_dependency(%q<hoe>, [">= 1.8.0"])
   end
 end

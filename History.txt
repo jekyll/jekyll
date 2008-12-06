@@ -3,6 +3,7 @@
     * Markdown support [github.com/vanpelt]
     * Mephisto and CSV converters [github.com/vanpelt]
     * Code hilighting [github.com/vanpelt]
+    * Autobuild
   * Bug Fixes
     * Accept both \r\n and \n in YAML header [github.com/vanpelt]
 
