@@ -55,13 +55,27 @@ module Jekyll
     end
     
     # The generated directory into which the post will be placed
-    # upon generation. e.g. "/2008/11/05/"
+    # upon generation. This is derived from the permalink or, if
+    # permalink is absent, set to the default date
+    # e.g. "/2008/11/05/"
     #
     # Returns <String>
     def dir
-      self.date.strftime("/%Y/%m/%d/")
+      permalink ?
+        permalink.to_s.split("/")[0..-2].join("/") :
+        date.strftime("/%Y/%m/%d/")
     end
     
+    # The full path and filename of the post.
+    # Defined in the YAML of the post body
+    # (Optional)
+    #
+    # Returns <String>
+    def permalink
+      self.data && self.data['permalink']
+    end
+
+
     # The generated relative url of this post
     # e.g. /2008/11/05/my-awesome-post.html
     #
@@ -111,7 +125,7 @@ module Jekyll
     #
     # Returns nothing
     def write(dest)
-      FileUtils.mkdir_p(File.join(dest, self.dir))
+      FileUtils.mkdir_p(File.join(dest, dir))
       
       path = File.join(dest, self.url)
       File.open(path, 'w') do |f|
