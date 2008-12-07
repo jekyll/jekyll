@@ -26,7 +26,7 @@ require 'jekyll/filters'
 require 'jekyll/blocks'
 
 module Jekyll
-  VERSION = '0.1.2'
+  VERSION = '0.1.3'
   
   def self.process(source, dest)
     Jekyll::Site.new(source, dest).process
