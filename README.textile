@@ -38,14 +38,19 @@ h2. Run
   $ cd /path/to/proto/site
   $ jekyll
 
-This will generate the site and place it in /path/to/proto/site/_site. If
-you'd like the generated site placed somewhere else:
+This will generate the site and place it in /path/to/proto/site/_site. There is an autobuild feature that will regenerate your site if any of the files change:
+
+  $ jekyll --auto
+
+If you'd like the generated site placed somewhere else:
 
   $ jekyll /path/to/place/generated/site
 
 And if you don't want to be in the proto site root to run Jekyll:
 
   $ jekyll /path/to/proto/site /path/to/place/generated/site
+  
+The autobuid feature can be used on any of the invocations.
 
 h2. Contribute
 
@@ -60,9 +65,10 @@ The best way to get your changes merged back into core is as follows:
 # Clone down your fork
 # Create a topic branch to contain your change
 # Hack away
+# Do not change the version number, I will do that on my end
 # If necessary, rebase your commits into logical chunks, without errors
 # Push the branch up to GitHub
-# Send me a pull request for your branch
+# Send me (mojombo) a pull request for your branch
 
 h2. License
 
