@@ -12,7 +12,11 @@ require 'time'
 # 3rd party
 require 'liquid'
 require 'redcloth'
-require 'rdiscount' rescue puts "The rdiscount gem is required for markdown support!"
+begin
+  require 'rdiscount'
+rescue LoadError
+  puts "The rdiscount gem is required for markdown support!"
+end
 require 'classifier'
 require 'directory_watcher'
 
