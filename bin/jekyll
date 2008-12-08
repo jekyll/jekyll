@@ -2,13 +2,24 @@
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
+help = <<HELP
+Jekyll is a blog-aware, static site generator.
+
+Basic Command Line Usage:
+  jekyll                                                   # . -> ./_site
+  jekyll <path to write generated site>                    # . -> <path>
+  jekyll <path to source> <path to write generated site>   # <path> -> <path>
+    
+  Options:
+HELP
+
 require 'optparse'
 require 'jekyll'
 
 options = {}
 
 opts = OptionParser.new do |opts|
-  opts.banner = DATA.read
+  opts.banner = help
 
   opts.on("--auto", "Auto-regenerate") do
     options[:auto] = true
@@ -68,13 +79,3 @@ if options[:auto]
 else
   Jekyll.process(source, destination)
 end
-
-__END__
-Jekyll is a blog-aware, static site generator.
-
-Basic Command Line Usage:
-  jekyll                                                   # . -> ./_site
-  jekyll <path to write generated site>                    # . -> <path>
-  jekyll <path to source> <path to write generated site>   # <path> -> <path>
-    
-  Options:
