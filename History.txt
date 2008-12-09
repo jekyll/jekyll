@@ -1,4 +1,8 @@
-== 0.1.3 /
+== 0.1.4 / 2008-12-08
+  * Bug Fixes
+    * DATA does not work properly with rubygems
+
+== 0.1.3 / 2008-12-06
   * Major Features
     * Markdown support [github.com/vanpelt]
     * Mephisto and CSV converters [github.com/vanpelt]
