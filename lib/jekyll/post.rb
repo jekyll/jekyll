@@ -96,6 +96,7 @@ module Jekyll
     #
     # Returns [<Post>]
     def related_posts(posts)
+      return [] unless posts.size > 1
       self.class.lsi ||= begin
         puts "Running the classifier... this could take a while."
         lsi = Classifier::LSI.new
