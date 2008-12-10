@@ -9,7 +9,7 @@ module Jekyll
     # Initialize a new Page.
     #   +base+ is the String path to the <source>
     #   +dir+ is the String path between <source> and the file
-    #   +name+ is the String filename of the post file
+    #   +name+ is the String filename of the file
     #
     # Returns <Page>
     def initialize(base, dir, name)
@@ -24,8 +24,8 @@ module Jekyll
       #self.transform
     end
     
-    # Extract information from the post filename
-    #   +name+ is the String filename of the post file
+    # Extract information from the page filename
+    #   +name+ is the String filename of the page file
     #
     # Returns nothing
     def process(name)

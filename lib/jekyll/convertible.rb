@@ -34,7 +34,7 @@ module Jekyll
       end
     end
     
-    # Add any necessary layouts to this post
+    # Add any necessary layouts to this convertible document
     #   +layouts+ is a Hash of {"name" => "layout"}
     #   +site_payload+ is the site payload hash
     #
@@ -42,7 +42,6 @@ module Jekyll
     def do_layout(payload, layouts, site_payload)
       # construct payload
       payload = payload.merge(site_payload)
-      
       # render content
       self.content = Liquid::Template.parse(self.content).render(payload, [Jekyll::Filters])
       self.transform

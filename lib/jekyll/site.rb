@@ -74,9 +74,11 @@ module Jekyll
       end
     end
     
-    # Recursively transform and write all non-post pages to <dest>/
-    #   +dir+ is the String path part representing the path from
-    #         <source> to the currently processing dir (default '')
+    # Copy all regular files from <source> to <dest>/ ignoring
+    # any files/directories that are hidden (start with ".") or contain
+    # site content (start with "_")
+    #   The +dir+ String is a relative path used to call this method
+    #            recursively as it descends through directories
     #
     # Returns nothing
     def transform_pages(dir = '')
@@ -90,10 +92,12 @@ module Jekyll
         else
           first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
           
+          # if the file appears to have a YAML header then process it as a page
           if first3 == "---"
             page = Page.new(self.source, dir, f)
             page.add_layout(self.layouts, site_payload)
             page.write(self.dest)
+          # otherwise copy the file without transforming it
           else
             FileUtils.mkdir_p(File.join(self.dest, dir))
             FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
