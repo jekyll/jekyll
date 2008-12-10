@@ -92,10 +92,12 @@ module Jekyll
         else
           first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
           
+          # if the file appears to have a YAML header then process it as a page
           if first3 == "---"
             page = Page.new(self.source, dir, f)
             page.add_layout(self.layouts, site_payload)
             page.write(self.dest)
+          # otherwise copy the file without transforming it
           else
             FileUtils.mkdir_p(File.join(self.dest, dir))
             FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
