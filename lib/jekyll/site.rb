@@ -74,9 +74,11 @@ module Jekyll
       end
     end
     
-    # Recursively transform and write all non-post pages to <dest>/
-    #   +dir+ is the String path part representing the path from
-    #         <source> to the currently processing dir (default '')
+    # Copy all regular files from <source> to <dest>/ ignoring
+    # any files/directories that are hidden (start with ".") or contain
+    # site content (start with "_")
+    #   The +dir+ String is a relative path used to call this method
+    #            recursively as it descends through directories
     #
     # Returns nothing
     def transform_pages(dir = '')
