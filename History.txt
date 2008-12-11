@@ -1,3 +1,10 @@
+==
+  * Minor Enhancements
+    * Output informative message if RDiscount is not available [github.com/JackDanger]
+  * Bug Fixes
+    * Prevent Jekyll from picking up the output directory as a source [github.com/JackDanger]
+    * Skip related_posts when there is only one post [github.com/JackDanger]
+
 == 0.1.4 / 2008-12-08
   * Bug Fixes
     * DATA does not work properly with rubygems
