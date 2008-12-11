@@ -54,7 +54,7 @@ module Jekyll
       base = File.join(self.source, "_posts")
       entries = Dir.entries(base)
       entries = entries.reject { |e| File.directory?(e) }
-      
+
       entries.each do |f|
         self.posts << Post.new(base, f) if Post.valid?(f)
       end
@@ -85,9 +85,10 @@ module Jekyll
       base = File.join(self.source, dir)
       entries = Dir.entries(base)
       entries = entries.reject { |e| ['.', '_'].include?(e[0..0]) }
-      
+
       entries.each do |f|
         if File.directory?(File.join(base, f))
+          next if self.dest.sub(/\/$/, '') == File.join(base, f)
           transform_pages(File.join(dir, f))
         else
           first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
