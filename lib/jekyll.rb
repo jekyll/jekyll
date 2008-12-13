@@ -34,9 +34,10 @@ module Jekyll
   VERSION = '0.1.4'
   
   class << self
-    attr_accessor :pygments
+    attr_accessor :lsi, :pygments
   end
   
+  Jekyll.lsi = false
   Jekyll.pygments = false
   
   def self.process(source, dest)

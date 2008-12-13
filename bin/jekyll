@@ -25,6 +25,10 @@ opts = OptionParser.new do |opts|
     options[:auto] = true
   end
   
+  opts.on("--lsi", "Use LSI for better related posts") do
+    Jekyll.lsi = true
+  end
+  
   opts.on("--pygments", "Use pygments to highlight code") do
     Jekyll.pygments = true
   end

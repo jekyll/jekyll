@@ -97,16 +97,21 @@ module Jekyll
     # Returns [<Post>]
     def related_posts(posts)
       return [] unless posts.size > 1
-      self.class.lsi ||= begin
-        puts "Running the classifier... this could take a while."
-        lsi = Classifier::LSI.new
-        posts.each { |x| $stdout.print(".");$stdout.flush;lsi.add_item(x) }
-        puts ""
-        lsi
-      end
+      
+      if Jekyll.lsi
+        self.class.lsi ||= begin
+          puts "Running the classifier... this could take a while."
+          lsi = Classifier::LSI.new
+          posts.each { |x| $stdout.print(".");$stdout.flush;lsi.add_item(x) }
+          puts ""
+          lsi
+        end
 
-      related = self.class.lsi.find_related(self.content, 11)
-      related - [self]
+        related = self.class.lsi.find_related(self.content, 11)
+        related - [self]
+      else
+        (posts - [self])[0..9]
+      end
     end
     
     # Add any necessary layouts to this post
