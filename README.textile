@@ -38,9 +38,17 @@ h2. Run
   $ cd /path/to/proto/site
   $ jekyll
 
-This will generate the site and place it in /path/to/proto/site/_site. There is an autobuild feature that will regenerate your site if any of the files change:
+This will generate the site and place it in /path/to/proto/site/_site.
+
+There is an autobuild feature that will regenerate your site if any of the files change:
 
   $ jekyll --auto
+
+By default, the "related posts" functionality will produce crappy results.
+In order to get high quality results with a true LSI algorithm, you must
+enable it (it may take some time to run if you have many posts):
+
+  $ jekyll --lsi
 
 If you'd like the generated site placed somewhere else:
 
