@@ -31,7 +31,7 @@ require 'jekyll/blocks'
 require 'jekyll/albino'
 
 module Jekyll
-  VERSION = '0.1.4'
+  VERSION = '0.1.5'
   
   class << self
     attr_accessor :lsi, :pygments

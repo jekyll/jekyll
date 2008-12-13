@@ -1,4 +1,4 @@
-==
+== 0.1.5 / 2008-12-12
   * Major Features
     * Code highlighting with Pygments if --pygments is specified
     * Disable true LSI by default, enable with --lsi
