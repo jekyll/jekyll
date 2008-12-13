@@ -5,11 +5,12 @@ Rakefile
 bin/jekyll
 jekyll.gemspec
 lib/jekyll.rb
-lib/jekyll/convertible.rb
+lib/jekyll/albino.rb
+lib/jekyll/blocks.rb
 lib/jekyll/converters/csv.rb
 lib/jekyll/converters/mephisto.rb
+lib/jekyll/convertible.rb
 lib/jekyll/filters.rb
-lib/jekyll/blocks.rb
 lib/jekyll/layout.rb
 lib/jekyll/page.rb
 lib/jekyll/post.rb
@@ -21,6 +22,7 @@ test/source/_posts/2008-10-18-foo-bar.textile
 test/source/_posts/2008-11-21-complex.textile
 test/source/css/screen.css
 test/source/index.html
+test/source/posts/2008-12-03-permalinked-post.textile
 test/suite.rb
 test/test_jekyll.rb
 test/test_post.rb
