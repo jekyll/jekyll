@@ -5,7 +5,7 @@ require 'lib/jekyll'
 Hoe.new('jekyll', Jekyll::VERSION) do |p|
   p.developer('Tom Preston-Werner', 'tom@mojombo.com')
   p.summary = "Jekyll is a simple, blog aware, static site generator."
-  p.extra_deps = ['RedCloth', 'liquid', 'classifier', 'rdiscount', 'directory_watcher']
+  p.extra_deps = ['RedCloth', 'liquid', 'classifier', 'rdiscount', 'directory_watcher', 'open4']
 end
 
 desc "Open an irb session preloaded with this library"
