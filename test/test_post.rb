@@ -56,7 +56,7 @@ class TestPost < Test::Unit::TestCase
     p.read_yaml(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
     p.transform
     
-    assert_equal "<h1>{{ page.title }}</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p>", p.content
+    assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", p.content
   end
   
   def test_add_layout
@@ -64,7 +64,7 @@ class TestPost < Test::Unit::TestCase
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.add_layout(layouts, {"site" => {"posts" => []}})
     
-    assert_equal "<<< <h1>Foo Bar</h1>\n\n\n\t<p>Best <strong>post</strong> ever</p> >>>", p.output
+    assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", p.output
   end
   
   def test_write
@@ -81,6 +81,6 @@ class TestPost < Test::Unit::TestCase
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.add_layout(layouts, {"site" => {"posts" => []}})
     
-    assert_equal "<<< <p>url: /2008/11/21/complex.html\ndate: Fri Nov 21 00:00:00 -0800 2008\nid: /2008/11/21/complex</p> >>>", p.output
+    assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: Fri Nov 21 00:00:00 -0800 2008<br />\nid: /2008/11/21/complex</p> >>>", p.output
   end
 end
