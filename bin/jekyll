@@ -24,6 +24,10 @@ opts = OptionParser.new do |opts|
   opts.on("--auto", "Auto-regenerate") do
     options[:auto] = true
   end
+  
+  opts.on("--pygments", "Use pygments to highlight code") do
+    Jekyll.pygments = true
+  end
 end
 
 opts.parse!

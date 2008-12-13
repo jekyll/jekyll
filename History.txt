@@ -1,4 +1,6 @@
 ==
+  * Major Features
+    * Code highlighting with Pygments if --pygments is specified
   * Minor Enhancements
     * Output informative message if RDiscount is not available [github.com/JackDanger]
   * Bug Fixes
