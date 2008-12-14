@@ -79,34 +79,35 @@ h3. Global
 h3. Site
 
   site.time
-    The current Time (when you run the jekyll command)
+    The current Time (when you run the jekyll command).
 
   site.posts
-    A reverse chronological list of Posts
+    A reverse chronological list of all Posts.
 
   site.related_posts
     If the page being processed is a Post, this contains a list of up to ten
-    related Posts. For high quality results be sure to run the jekyll command
-    with the --lsi option.
+    related Posts. By default, these are low quality but fast to compute. For
+    high quality but slow to compute results, run the jekyll command with the 
+    --lsi (latent semantic indexing) option.
 
 h3. Post
 
   post.title
-    The title of the Post
+    The title of the Post.
 
   post.url
-    The URL of the Post without the domain
+    The URL of the Post without the domain.
     e.g. /2008/12/14/my-post.html
 
   post.date
-    The Date assigned to the Post
+    The Date assigned to the Post.
 
   post.id
-    An identifier unique to the Post (useful in RSS feeds)
+    An identifier unique to the Post (useful in RSS feeds).
     e.g. /2008/12/14/my-post
 
   post.content
-    The content of the Post
+    The content of the Post.
 
 h2. YAML Front Matter
 
