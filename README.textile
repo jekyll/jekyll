@@ -60,6 +60,35 @@ And if you don't want to be in the proto site root to run Jekyll:
   
 The autobuild feature can be used on any of the invocations.
 
+h2. Filters, Tags, and Blocks
+
+h3. Code Highlighting
+
+Jekyll has built in support for syntax highlighting of over "100
+languages":http://pygments.org/languages/ via "Pygments":http://pygments.org/.
+In order to take advantage of this you'll need to have Pygments installed (and
+the pygmentize binary must be in your path).
+
+To denote a code block that should be highlighted:
+
+<pre>
+{% highlight ruby %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+</pre>
+
+The argument to <code>highlight</code> is the language identifier. To find the
+appropriate identifier to use for your favorite language, look for the "short
+name" on the "Lexers":http://pygments.org/docs/lexers/ page.
+
+In order for the highlighting to show up, you'll need to include a
+highlighting stylesheet. For an example stylesheet you can look at
+"syntax.css":http://github.com/mojombo/tpw/tree/master/css/syntax.css. These
+are the same styles as used by GitHub and you are free to use them for your
+own site.
+
 h2. Contribute
 
 If you'd like to hack on Jekyll, grab the source from GitHub. To get
