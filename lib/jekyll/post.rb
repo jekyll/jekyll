@@ -74,8 +74,7 @@ module Jekyll
     def permalink
       self.data && self.data['permalink']
     end
-
-
+    
     # The generated relative url of this post
     # e.g. /2008/11/05/my-awesome-post.html
     #
