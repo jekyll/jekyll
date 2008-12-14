@@ -93,6 +93,39 @@ h3. Post
     A list of up to ten Posts that are related to this Post. For high quality 
     results be sure to run the jekyll command with the --lsi option
 
+h2. YAML Front Matter
+
+Any files that contain a YAML front matter block will be processed by Jekyll as special files. The front matter takes the form of:
+
+  ---
+  layout: post
+  title: Blogging Like a Hacker
+  ---
+
+Between the triple-dashed lines, you can set predefined variables (see below for a reference) or custom data of your own.
+
+h3. Predefined Global Variables
+
+  layout
+    If set, this specifies the layout file to use. Use the layout name without
+    file extension. Layout files must be placed in the _layouts directory.
+
+h3. Predefined Post Variables
+
+  permalink
+    If you need your processed URLs to be something other than the default
+    /year/month/day/title.html then you can set this variable and it will
+    be used as the final URL.
+
+h3. Custom Variables
+
+Any variables in the front matter that are not predefined are mixed into the
+data that is sent to the Liquid templating engine during the conversion. For
+instance, if you set a <code>title</code>, you can use that in your layout to
+set the page title:
+
+  <title>{{ page.title }}</title>
+
 h2. Filters, Tags, and Blocks
 
 In addition to the built-in Liquid filters, tags, and blocks, Jekyll provides some additional items that you can use in your site.
