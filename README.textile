@@ -62,7 +62,15 @@ The autobuild feature can be used on any of the invocations.
 
 h2. Filters, Tags, and Blocks
 
-h3. Code Highlighting
+h3. Include Tag
+
+If you have small page fragments that you wish to include in multiple places on your site, you can use the <code>include</code> tag.
+
+<pre>{% include sig.textile %}</pre>
+
+Jekyll expects all include files to be placed in an <code>_includes</code> directory at the root of your source dir. So this will embed the contents of <code>/path/to/proto/site/_includes/sig.textile</code> into the calling file.
+
+h3. Code Highlighting Block
 
 Jekyll has built in support for syntax highlighting of over "100
 languages":http://pygments.org/languages/ via "Pygments":http://pygments.org/.
