@@ -76,20 +76,22 @@ h3. Post
     The title of the Post
 
   post.url
-    The URL of the Post without the domain e.g. /2008/12/14/my-post.html
+    The URL of the Post without the domain
+    e.g. /2008/12/14/my-post.html
 
   post.date
     The Date assigned to the Post
 
   post.id
     An identifier unique to the Post (useful in RSS feeds)
+    e.g. /2008/12/14/my-post
 
   post.content
     The content of the Post
 
   post.related_posts
-    A list of up to ten Posts that are related to this Post. For high
-    quality results be sure to run the jekyll command with --lsi option
+    A list of up to ten Posts that are related to this Post. For high quality 
+    results be sure to run the jekyll command with the --lsi option
 
 h2. Filters, Tags, and Blocks
 
