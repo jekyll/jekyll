@@ -62,7 +62,35 @@ The autobuild feature can be used on any of the invocations.
 
 h2. Filters, Tags, and Blocks
 
-h3. Include Tag
+In addition to the built-in Liquid filters, tags, and blocks, Jekyll provides some additional items that you can use in your site.
+
+h3. Date to XML Schema (Filter)
+
+Convert a Time into XML Schema format.
+
+  {{ site.time | date_to_xmlschema }}
+
+becomes
+
+  2008-11-17T13:07:54-08:00
+
+h3. XML Escape (Filter)
+
+Escape some text for use in XML.
+
+  {{ post.content | xml_escape }}
+
+h3. Number of Words (Filter)
+
+Count the number of words in some text.
+
+  {{ post.content | number_of_words }}
+
+becomes
+
+  1337
+
+h3. Include (Tag)
 
 If you have small page fragments that you wish to include in multiple places on your site, you can use the <code>include</code> tag.
 
@@ -70,7 +98,7 @@ If you have small page fragments that you wish to include in multiple places on 
 
 Jekyll expects all include files to be placed in an <code>_includes</code> directory at the root of your source dir. So this will embed the contents of <code>/path/to/proto/site/_includes/sig.textile</code> into the calling file.
 
-h3. Code Highlighting Block
+h3. Code Highlighting (Block)
 
 Jekyll has built in support for syntax highlighting of over "100
 languages":http://pygments.org/languages/ via "Pygments":http://pygments.org/.
