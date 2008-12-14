@@ -60,7 +60,26 @@ For static code highlighting, you can install Pygments (see below) and then use 
 
 h2. Data
 
-The following is a reference of all the data that is made available to Liquid.
+Jekyll traverses your site looking for files to process. Any files with YAML front matter (see below) are subject to processing. For each of these files, Jekyll makes a variety of data available to the pages via the Liquid templating system. The following is a reference of the available data.
+
+h3. Global
+
+  site
+    Sitewide information.
+
+  page
+    For Posts, this is the union of the data in the YAML front matter and the
+    computed data (such as URL and date). For regular pages, this is just the
+    YAML front matter.
+
+  content
+    In layout files, this contains the content of the subview(s). In Posts or
+    pages, this is undefined.
+
+  related_posts
+    If the page being processed is a Post, this contains a list of up to ten
+    related Posts. For high quality results be sure to run the jekyll command
+    with the --lsi option.
 
 h3. Site
 
@@ -88,10 +107,6 @@ h3. Post
 
   post.content
     The content of the Post
-
-  post.related_posts
-    A list of up to ten Posts that are related to this Post. For high quality 
-    results be sure to run the jekyll command with the --lsi option
 
 h2. YAML Front Matter
 
