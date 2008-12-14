@@ -1,4 +1,4 @@
-==
+== 0.2.0 / 2008-12-14
   * Major Changes
     * related_posts is now found in site.related_posts
 
