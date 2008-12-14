@@ -76,11 +76,6 @@ h3. Global
     In layout files, this contains the content of the subview(s). In Posts or
     pages, this is undefined.
 
-  related_posts
-    If the page being processed is a Post, this contains a list of up to ten
-    related Posts. For high quality results be sure to run the jekyll command
-    with the --lsi option.
-
 h3. Site
 
   site.time
@@ -88,6 +83,11 @@ h3. Site
 
   site.posts
     A reverse chronological list of Posts
+
+  site.related_posts
+    If the page being processed is a Post, this contains a list of up to ten
+    related Posts. For high quality results be sure to run the jekyll command
+    with the --lsi option.
 
 h3. Post
 
