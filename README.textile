@@ -1,6 +1,6 @@
 h1. Jekyll
 
-Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. Visit "http://tom.preston-werner.com":http://tom.preston-werner.com to see an example of a Jekyll generated blog.
+Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile or Markdown and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. Visit "http://tom.preston-werner.com":http://tom.preston-werner.com to see an example of a Jekyll generated blog.
 
 To understand how this all works, open up my "TPW":http://github.com/mojombo/tpw repo in a new browser window. I'll be referencing the code there.
 
@@ -13,10 +13,6 @@ Jekyll gets the list of blog posts by parsing the files in the "_posts":http://g
 Posts are handled in a special way by Jekyll. The date you specify in the filename is used to construct the URL in the generated site. The example post, for instance, ends up at <code>http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</code>.
 
 Files that do not reside in directories prefixed with an underscore are mirrored into a corresponding directory structure in the generated site. If a file does not have a YAML preface, it is not run through the Liquid interpreter. Binary files are copied over unmodified.
-
-In order to convert your raw site into the finished version, you simply run:
-
-<pre class="terminal"><code>$ jekyll /path/to/raw/site /path/to/place/generated/site</code></pre>
 
 Jekyll is still a very young project. I've only developed the exact functionality that I've needed. As time goes on I'd like to see the project mature and support additional features. If you end up using Jekyll for your own blog, drop me a line and let me know what you'd like to see in future versions. Better yet, fork the project over at GitHub and hack in the features yourself!
 
@@ -31,14 +27,24 @@ h2. Install
 
 The best way to install Jekyll is via RubyGems:
 
-  $ sudo gem install jekyll
+  $ sudo gem install mojombo-jekyll -s http://gems.github.com/
 
 h2. Run
 
   $ cd /path/to/proto/site
   $ jekyll
 
-This will generate the site and place it in /path/to/proto/site/_site.
+This will generate the site and place it in /path/to/proto/site/_site. If you'd like the generated site placed somewhere else:
+
+  $ jekyll /path/to/place/generated/site
+
+And if you don't want to be in the proto site root to run Jekyll:
+
+  $ jekyll /path/to/proto/site /path/to/place/generated/site
+  
+The autobuild feature can be used on any of the invocations.
+
+h2. Run Options
 
 There is an autobuild feature that will regenerate your site if any of the files change:
 
@@ -50,15 +56,9 @@ enable it (it may take some time to run if you have many posts):
 
   $ jekyll --lsi
 
-If you'd like the generated site placed somewhere else:
+For static code highlighting, you can install Pygments (see below) and then use that to make your code blocks look pretty. To activate Pygments support during the conversion:
 
-  $ jekyll /path/to/place/generated/site
-
-And if you don't want to be in the proto site root to run Jekyll:
-
-  $ jekyll /path/to/proto/site /path/to/place/generated/site
-  
-The autobuild feature can be used on any of the invocations.
+  $ jekyll --pygments
 
 h2. Filters, Tags, and Blocks
 
