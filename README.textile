@@ -111,7 +111,7 @@ h3. Post
 
 h2. YAML Front Matter
 
-Any files that contain a YAML front matter block will be processed by Jekyll as special files. The front matter takes the form of:
+Any files that contain a YAML front matter block will be processed by Jekyll as special files. The front matter must be the first thing in the file and takes the form of:
 
   ---
   layout: post
@@ -122,9 +122,9 @@ Between the triple-dashed lines, you can set predefined variables (see below for
 
 h3. Predefined Global Variables
 
-  layout
-    If set, this specifies the layout file to use. Use the layout name without
-    file extension. Layout files must be placed in the _layouts directory.
+  layout If set, this specifies the layout file to use. Use the layout file
+  name without file extension. Layout files must be placed in the
+  <code>_layouts</code> directory.
 
 h3. Predefined Post Variables
 
