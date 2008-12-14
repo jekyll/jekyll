@@ -173,10 +173,10 @@ as special files. The front matter must be the first thing in the file and
 takes the form of:
 
 <pre>
-  ---
-  layout: post
-  title: Blogging Like a Hacker
-  ---
+---
+layout: post
+title: Blogging Like a Hacker
+---
 </pre>
 
 Between the triple-dashed lines, you can set predefined variables (see below
@@ -202,7 +202,9 @@ data that is sent to the Liquid templating engine during the conversion. For
 instance, if you set a <code>title</code>, you can use that in your layout to
 set the page title:
 
-  &lt;title&gt;{{ page.title }}&lt;/title&gt;
+<pre>
+<title>{{ page.title }}</title>
+</pre>
 
 h2. Filters, Tags, and Blocks
 
