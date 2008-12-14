@@ -1,4 +1,4 @@
-==
+== 0.1.6 / 2008-12-13
   * Major Features
     * Include files in _includes with {% include x.textile %}
 
