@@ -58,6 +58,39 @@ For static code highlighting, you can install Pygments (see below) and then use 
 
   $ jekyll --pygments
 
+h2. Data
+
+The following is a reference of all the data that is made available to Liquid.
+
+h3. Site
+
+  site.time
+    The current Time (when you run the jekyll command)
+
+  site.posts
+    A reverse chronological list of Posts
+
+h3. Post
+
+  post.title
+    The title of the Post
+
+  post.url
+    The URL of the Post without the domain e.g. /2008/12/14/my-post.html
+
+  post.date
+    The Date assigned to the Post
+
+  post.id
+    An identifier unique to the Post (useful in RSS feeds)
+
+  post.content
+    The content of the Post
+
+  post.related_posts
+    A list of up to ten Posts that are related to this Post. For high
+    quality results be sure to run the jekyll command with --lsi option
+
 h2. Filters, Tags, and Blocks
 
 In addition to the built-in Liquid filters, tags, and blocks, Jekyll provides some additional items that you can use in your site.
