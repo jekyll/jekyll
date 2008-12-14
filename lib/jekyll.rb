@@ -17,7 +17,6 @@ begin
 rescue LoadError
   puts "The rdiscount gem is required for markdown support!"
 end
-require 'classifier'
 require 'directory_watcher'
 
 # internal requires
@@ -42,6 +41,8 @@ module Jekyll
   Jekyll.pygments = false
   
   def self.process(source, dest)
+    require 'classifier' if Jekyll.lsi
+    
     Jekyll.source = source
     Jekyll.dest = dest
     Jekyll::Site.new(source, dest).process
