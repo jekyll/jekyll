@@ -27,20 +27,23 @@ require 'jekyll/layout'
 require 'jekyll/page'
 require 'jekyll/post'
 require 'jekyll/filters'
-require 'jekyll/blocks'
+require 'jekyll/tags/highlight'
+require 'jekyll/tags/include'
 require 'jekyll/albino'
 
 module Jekyll
   VERSION = '0.1.5'
   
   class << self
-    attr_accessor :lsi, :pygments
+    attr_accessor :source, :dest, :lsi, :pygments
   end
   
   Jekyll.lsi = false
   Jekyll.pygments = false
   
   def self.process(source, dest)
+    Jekyll.source = source
+    Jekyll.dest = dest
     Jekyll::Site.new(source, dest).process
   end
 end

@@ -1,0 +1,6 @@
+---
+layout: default
+title: Include
+---
+
+{% include sig.textile %}

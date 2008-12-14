@@ -1,6 +1,6 @@
 module Jekyll
   
-  class Highlight < Liquid::Block
+  class HighlightBlock < Liquid::Block
     include Liquid::StandardFilters
     
     def initialize(tag_name, lang, tokens)
@@ -34,4 +34,4 @@ module Jekyll
   
 end
 
-Liquid::Template.register_tag('highlight', Jekyll::Highlight)
+Liquid::Template.register_tag('highlight', Jekyll::HighlightBlock)
