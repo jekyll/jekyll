@@ -74,8 +74,10 @@ h3. Code Highlighting Block
 
 Jekyll has built in support for syntax highlighting of over "100
 languages":http://pygments.org/languages/ via "Pygments":http://pygments.org/.
-In order to take advantage of this you'll need to have Pygments installed (and
-the pygmentize binary must be in your path).
+In order to take advantage of this you'll need to have Pygments installed, and
+the pygmentize binary must be in your path. When you run Jekyll, make sure you run it with Pygments support:
+
+  $ jekyll --pygments
 
 To denote a code block that should be highlighted:
 
