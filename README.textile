@@ -184,9 +184,10 @@ for a reference) or custom data of your own.
 
 h3. Predefined Global Variables
 
-  layout If set, this specifies the layout file to use. Use the layout file
-  name without file extension. Layout files must be placed in the
-  <code>_layouts</code> directory.
+  layout
+    If set, this specifies the layout file to use. Use the layout file
+    name without file extension. Layout files must be placed in the
+    <code>_layouts</code> directory.
 
 h3. Predefined Post Variables
 
