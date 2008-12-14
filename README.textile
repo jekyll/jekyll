@@ -1,27 +1,77 @@
 h1. Jekyll
 
-Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile or Markdown and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. Visit "http://tom.preston-werner.com":http://tom.preston-werner.com to see an example of a Jekyll generated blog.
+Jekyll is a simple, blog aware, static site generator. It takes a template
+directory (representing the raw form of a website), runs it through Textile or
+Markdown and Liquid converters, and spits out a complete, static website
+suitable for serving with Apache or your favorite web server. Visit
+"http://tom.preston-werner.com":http://tom.preston-werner.com to see an
+example of a Jekyll generated blog.
 
-To understand how this all works, open up my "TPW":http://github.com/mojombo/tpw repo in a new browser window. I'll be referencing the code there.
+To understand how this all works, open up my
+"TPW":http://github.com/mojombo/tpw repo in a new browser window. I'll be
+referencing the code there.
 
-Take a look at "index.html":http://github.com/mojombo/tpw/tree/master/index.html. This file represents the homepage of the site. At the top of the file is a chunk of YAML that contains metadata about the file. This data tells Jekyll what layout to give the file, what the page's title should be, etc. In this case, I specify that the "default" template should be used. You can find the layout files in the "_layouts":http://github.com/mojombo/tpw/tree/master/_layouts directory. If you open "default.html":http://github.com/mojombo/tpw/tree/master/_layouts/default.html you can see that the homepage is constructed by wrapping index.html with this layout.
+Take a look at
+"index.html":http://github.com/mojombo/tpw/tree/master/index.html. This file
+represents the homepage of the site. At the top of the file is a chunk of YAML
+that contains metadata about the file. This data tells Jekyll what layout to
+give the file, what the page's title should be, etc. In this case, I specify
+that the "default" template should be used. You can find the layout files in
+the "_layouts":http://github.com/mojombo/tpw/tree/master/_layouts directory.
+If you open
+"default.html":http://github.com/mojombo/tpw/tree/master/_layouts/default.html
+you can see that the homepage is constructed by wrapping index.html with this
+layout.
 
-You'll also notice Liquid templating code in these files. "Liquid":http://www.liquidmarkup.org/ is a simple, extensible templating language that makes it easy to embed data in your templates. For my homepage I wanted to have a list of all my blog posts. Jekyll hands me a Hash containing various data about my site. A reverse chronological list of all my blog posts can be found in <code>site.posts</code>. Each post, in turn, contains various fields such as <code>title</code> and <code>date</code>.
+You'll also notice Liquid templating code in these files.
+"Liquid":http://www.liquidmarkup.org/ is a simple, extensible templating
+language that makes it easy to embed data in your templates. For my homepage I
+wanted to have a list of all my blog posts. Jekyll hands me a Hash containing
+various data about my site. A reverse chronological list of all my blog posts
+can be found in <code>site.posts</code>. Each post, in turn, contains various
+fields such as <code>title</code> and <code>date</code>.
 
-Jekyll gets the list of blog posts by parsing the files in the "_posts":http://github.com/mojombo/tpw/tree/master/_posts directory. Each post's filename contains the publishing date and slug (what shows up in the URL) that the final HTML file should have. Open up the file corresponding to a blog post: "2008-11-17-blogging-like-a-hacker.textile":http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile. GitHub renders textile files by default, so to better understand the file, click on the "raw":http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile?raw=true view to see the original file. Here I've specified the <code>post</code> layout. If you look at that file you'll see an example of a nested layout. Layouts can contain other layouts allowing you a great deal of flexibility in how pages are assembled. In my case I use a nested layout in order to show related posts for each blog entry. The YAML also specifies the post's title which is then embedded in the post's body via Liquid.
+Jekyll gets the list of blog posts by parsing the files in the
+"_posts":http://github.com/mojombo/tpw/tree/master/_posts directory. Each
+post's filename contains the publishing date and slug (what shows up in the
+URL) that the final HTML file should have. Open up the file corresponding to a
+blog post:
+"2008-11-17-blogging-like-a-hacker.textile":http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile.
+GitHub renders textile files by default, so to better understand the file,
+click on the
+"raw":http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile?raw=true
+view to see the original file. Here I've specified the <code>post</code>
+layout. If you look at that file you'll see an example of a nested layout.
+Layouts can contain other layouts allowing you a great deal of flexibility in
+how pages are assembled. In my case I use a nested layout in order to show
+related posts for each blog entry. The YAML also specifies the post's title
+which is then embedded in the post's body via Liquid.
 
-Posts are handled in a special way by Jekyll. The date you specify in the filename is used to construct the URL in the generated site. The example post, for instance, ends up at <code>http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</code>.
+Posts are handled in a special way by Jekyll. The date you specify in the
+filename is used to construct the URL in the generated site. The example post,
+for instance, ends up at
+<code>http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</code>.
 
-Files that do not reside in directories prefixed with an underscore are mirrored into a corresponding directory structure in the generated site. If a file does not have a YAML preface, it is not run through the Liquid interpreter. Binary files are copied over unmodified.
+Files that do not reside in directories prefixed with an underscore are
+mirrored into a corresponding directory structure in the generated site. If a
+file does not have a YAML preface, it is not run through the Liquid
+interpreter. Binary files are copied over unmodified.
 
-Jekyll is still a very young project. I've only developed the exact functionality that I've needed. As time goes on I'd like to see the project mature and support additional features. If you end up using Jekyll for your own blog, drop me a line and let me know what you'd like to see in future versions. Better yet, fork the project over at GitHub and hack in the features yourself!
+Jekyll is still a very young project. I've only developed the exact
+functionality that I've needed. As time goes on I'd like to see the project
+mature and support additional features. If you end up using Jekyll for your
+own blog, drop me a line and let me know what you'd like to see in future
+versions. Better yet, fork the project over at GitHub and hack in the features
+yourself!
 
 h2. Example Proto-Site
 
 My own personal site/blog is generated with Jekyll.
 
-The proto-site repo ("http://github.com/mojombo/tpw":http://github.com/mojombo/tpw)
-is converted into the actual site ("http://tom.preston-werner.com/":http://tom.preston-werner.com)
+The proto-site repo
+("http://github.com/mojombo/tpw":http://github.com/mojombo/tpw) is converted
+into the actual site
+("http://tom.preston-werner.com/":http://tom.preston-werner.com)
 
 h2. Install
 
@@ -34,7 +84,8 @@ h2. Run
   $ cd /path/to/proto/site
   $ jekyll
 
-This will generate the site and place it in /path/to/proto/site/_site. If you'd like the generated site placed somewhere else:
+This will generate the site and place it in /path/to/proto/site/_site. If
+you'd like the generated site placed somewhere else:
 
   $ jekyll /path/to/place/generated/site
 
@@ -44,7 +95,8 @@ And if you don't want to be in the proto site root to run Jekyll:
 
 h2. Run Options
 
-There is an autobuild feature that will regenerate your site if any of the files change. The autobuild feature can be used on any of the invocations:
+There is an autobuild feature that will regenerate your site if any of the
+files change. The autobuild feature can be used on any of the invocations:
 
   $ jekyll --auto
 
@@ -54,13 +106,18 @@ enable it (it may take some time to run if you have many posts):
 
   $ jekyll --lsi
 
-For static code highlighting, you can install Pygments (see below) and then use that to make your code blocks look pretty. To activate Pygments support during the conversion:
+For static code highlighting, you can install Pygments (see below) and then
+use that to make your code blocks look pretty. To activate Pygments support
+during the conversion:
 
   $ jekyll --pygments
 
 h2. Data
 
-Jekyll traverses your site looking for files to process. Any files with YAML front matter (see below) are subject to processing. For each of these files, Jekyll makes a variety of data available to the pages via the Liquid templating system. The following is a reference of the available data.
+Jekyll traverses your site looking for files to process. Any files with YAML
+front matter (see below) are subject to processing. For each of these files,
+Jekyll makes a variety of data available to the pages via the Liquid
+templating system. The following is a reference of the available data.
 
 h3. Global
 
@@ -111,14 +168,17 @@ h3. Post
 
 h2. YAML Front Matter
 
-Any files that contain a YAML front matter block will be processed by Jekyll as special files. The front matter must be the first thing in the file and takes the form of:
+Any files that contain a YAML front matter block will be processed by Jekyll
+as special files. The front matter must be the first thing in the file and
+takes the form of:
 
   ---
   layout: post
   title: Blogging Like a Hacker
   ---
 
-Between the triple-dashed lines, you can set predefined variables (see below for a reference) or custom data of your own.
+Between the triple-dashed lines, you can set predefined variables (see below
+for a reference) or custom data of your own.
 
 h3. Predefined Global Variables
 
@@ -144,7 +204,8 @@ set the page title:
 
 h2. Filters, Tags, and Blocks
 
-In addition to the built-in Liquid filters, tags, and blocks, Jekyll provides some additional items that you can use in your site.
+In addition to the built-in Liquid filters, tags, and blocks, Jekyll provides
+some additional items that you can use in your site.
 
 h3. Date to XML Schema (Filter)
 
@@ -178,14 +239,17 @@ If you have small page fragments that you wish to include in multiple places on 
 
 <pre>{% include sig.textile %}</pre>
 
-Jekyll expects all include files to be placed in an <code>_includes</code> directory at the root of your source dir. So this will embed the contents of <code>/path/to/proto/site/_includes/sig.textile</code> into the calling file.
+Jekyll expects all include files to be placed in an <code>_includes</code>
+directory at the root of your source dir. So this will embed the contents of
+<code>/path/to/proto/site/_includes/sig.textile</code> into the calling file.
 
 h3. Code Highlighting (Block)
 
 Jekyll has built in support for syntax highlighting of over "100
 languages":http://pygments.org/languages/ via "Pygments":http://pygments.org/.
 In order to take advantage of this you'll need to have Pygments installed, and
-the pygmentize binary must be in your path. When you run Jekyll, make sure you run it with Pygments support:
+the pygmentize binary must be in your path. When you run Jekyll, make sure you
+run it with Pygments support:
 
   $ jekyll --pygments
 
