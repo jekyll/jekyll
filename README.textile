@@ -41,12 +41,10 @@ This will generate the site and place it in /path/to/proto/site/_site. If you'd 
 And if you don't want to be in the proto site root to run Jekyll:
 
   $ jekyll /path/to/proto/site /path/to/place/generated/site
-  
-The autobuild feature can be used on any of the invocations.
 
 h2. Run Options
 
-There is an autobuild feature that will regenerate your site if any of the files change:
+There is an autobuild feature that will regenerate your site if any of the files change. The autobuild feature can be used on any of the invocations:
 
   $ jekyll --auto
 
