@@ -1,3 +1,7 @@
+== 0.2.0 / 2008-12-14
+  * Major Changes
+    * related_posts is now found in site.related_posts
+
 == 0.1.6 / 2008-12-13
   * Major Features
     * Include files in _includes with {% include x.textile %}
