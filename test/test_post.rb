@@ -86,10 +86,10 @@ class TestPost < Test::Unit::TestCase
   
   def test_include
     Jekyll.source = File.join(File.dirname(__FILE__), *%w[source])
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-12-13-include.textile")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-12-13-include.markdown")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.add_layout(layouts, {"site" => {"posts" => []}})
     
-    assert_equal "<<< <p>&#8212;<br />\nTom Preston-Werner<br />\ngithub.com/mojombo</p> >>>", p.output
+    assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", p.output
   end
 end
