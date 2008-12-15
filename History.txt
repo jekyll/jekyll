@@ -1,4 +1,6 @@
 == 
+  * Major Changes
+    * Use Maruku (pure Ruby) for Markdown by default [github.com/mreid]
   * Minor Enhancements
     * Don't load directory_watcher unless it's needed [github.com/pjhyett]
 
