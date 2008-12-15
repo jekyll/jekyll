@@ -79,6 +79,17 @@ The best way to install Jekyll is via RubyGems:
 
   $ sudo gem install mojombo-jekyll -s http://gems.github.com/
 
+Jekyll requires the gems `directory_watcher`, `liquid`, `open4`, 
+and `maruku` for markdown support. These are automatically
+installed by the gem install command.
+
+Maruku comes with optional support for LaTeX to PNG rendering via
+"blahtex":http://gva.noekeon.org/blahtexml/ (Version 0.6) which must be in
+your $PATH along with `dvips`. 
+
+(NOTE: the version of maruku I am using is `remi-maruku` on GitHub as it
+does not assume a fixed location for `dvips`.)
+
 h2. Run
 
   $ cd /path/to/proto/site

@@ -13,9 +13,20 @@ require 'time'
 require 'liquid'
 require 'redcloth'
 begin
-  require 'rdiscount'
+  require 'maruku'
+  require 'maruku/ext/math'
+  # Switch off MathML output
+  MaRuKu::Globals[:html_math_output_mathml] = false
+  MaRuKu::Globals[:html_math_engine] = 'none'
+
+  # Turn on math to PNG support with blahtex
+  # Resulting PNGs stored in `images/latex`
+  MaRuKu::Globals[:html_math_output_png] = true
+  MaRuKu::Globals[:html_png_engine] =  'blahtex'
+  MaRuKu::Globals[:html_png_dir] = 'images/latex'
+  MaRuKu::Globals[:html_png_url] = '/images/latex/'
 rescue LoadError
-  puts "The rdiscount gem is required for markdown support!"
+  puts "The maruku gem is required for markdown support!"
 end
 
 # internal requires
