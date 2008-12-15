@@ -32,6 +32,16 @@ opts = OptionParser.new do |opts|
   opts.on("--pygments", "Use pygments to highlight code") do
     Jekyll.pygments = true
   end
+  
+  opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
+    begin
+      require 'rdiscount'
+      Jekyll.markdown_proc = Proc.new { |x| RDiscount.new(x).to_html }
+      puts 'Using rdiscount for Markdown'
+    rescue LoadError
+      puts 'You must have the rdiscount gem installed first'
+    end
+  end
 end
 
 opts.parse!

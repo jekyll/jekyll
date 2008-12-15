@@ -30,7 +30,7 @@ module Jekyll
         self.content = RedCloth.new(self.content).to_html
       when ".markdown":
         self.ext = ".html"
-        self.content = Maruku.new(self.content).to_html
+        self.content = Jekyll.markdown_proc.call(self.content)
       end
     end
     

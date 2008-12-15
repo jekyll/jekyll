@@ -1,6 +1,7 @@
 == 
   * Major Changes
     * Use Maruku (pure Ruby) for Markdown by default [github.com/mreid]
+    * Allow use of RDiscount with --rdiscount flag
   * Minor Enhancements
     * Don't load directory_watcher unless it's needed [github.com/pjhyett]
 

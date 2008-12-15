@@ -80,7 +80,7 @@ The best way to install Jekyll is via RubyGems:
   $ sudo gem install mojombo-jekyll -s http://gems.github.com/
 
 Jekyll requires the gems `directory_watcher`, `liquid`, `open4`, 
-and `maruku` for markdown support. These are automatically
+and `maruku` (for markdown support). These are automatically
 installed by the gem install command.
 
 Maruku comes with optional support for LaTeX to PNG rendering via
@@ -122,6 +122,13 @@ use that to make your code blocks look pretty. To activate Pygments support
 during the conversion:
 
   $ jekyll --pygments
+
+By default, Jekyll uses "Maruku":http://maruku.rubyforge.org (pure Ruby) for
+Markdown support. If you'd like to use RDiscount (faster, but requires
+compilation), you must install it (gem install rdiscount) and then you can
+have it used instead:
+
+  $ jekyll --rdiscount
 
 h2. Data
 
