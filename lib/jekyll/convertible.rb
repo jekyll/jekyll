@@ -30,7 +30,7 @@ module Jekyll
         self.content = RedCloth.new(self.content).to_html
       when ".markdown":
         self.ext = ".html"
-        self.content = RDiscount.new(self.content).to_html
+        self.content = Maruku.new(self.content).to_html
       end
     end
     
