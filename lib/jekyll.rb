@@ -41,7 +41,7 @@ require 'jekyll/tags/include'
 require 'jekyll/albino'
 
 module Jekyll
-  VERSION = '0.2.0'
+  VERSION = '0.2.1'
   
   class << self
     attr_accessor :source, :dest, :lsi, :pygments, :markdown_proc

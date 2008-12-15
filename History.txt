@@ -1,4 +1,4 @@
-== 
+== 0.2.1 / 2008-12-15
   * Major Changes
     * Use Maruku (pure Ruby) for Markdown by default [github.com/mreid]
     * Allow use of RDiscount with --rdiscount flag
