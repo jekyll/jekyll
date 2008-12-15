@@ -17,7 +17,6 @@ begin
 rescue LoadError
   puts "The rdiscount gem is required for markdown support!"
 end
-require 'directory_watcher'
 
 # internal requires
 require 'jekyll/site'

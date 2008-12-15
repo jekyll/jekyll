@@ -69,6 +69,8 @@ case ARGV.size
 end
 
 if options[:auto]
+  require 'directory_watcher'
+
   puts "Auto-regenerating enabled: #{source} -> #{destination}"
   
   dw = DirectoryWatcher.new(source)
