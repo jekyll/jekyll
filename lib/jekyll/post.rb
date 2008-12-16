@@ -3,7 +3,7 @@ module Jekyll
   class Post
     include Comparable
     include Convertible
-    
+        
     class << self
       attr_accessor :lsi
     end
@@ -18,17 +18,19 @@ module Jekyll
       name =~ MATCHER
     end
     
-    attr_accessor :date, :slug, :ext
+    attr_accessor :date, :slug, :ext, :categories
     attr_accessor :data, :content, :output
     
     # Initialize this Post instance.
     #   +base+ is the String path to the dir containing the post file
     #   +name+ is the String filename of the post file
+    #   +categories+ is an Array of Strings for the categories for this post
     #
     # Returns <Post>
     def initialize(base, name)
       @base = base
       @name = name
+      @categories = base.split('/').reject { |p| ['.', '_posts'].include? p }
       
       self.process(name)
       self.read_yaml(base, name)
@@ -61,9 +63,10 @@ module Jekyll
     #
     # Returns <String>
     def dir
+      path = @categories ? '/' + @categories.join('/') : ''
       permalink ?
         permalink.to_s.split("/")[0..-2].join("/") :
-        date.strftime("/%Y/%m/%d/")
+        "#{path}" + date.strftime("/%Y/%m/%d/")
     end
     
     # The full path and filename of the post.
@@ -90,7 +93,7 @@ module Jekyll
     def id
       self.dir + self.slug
     end
-    
+        
     # Calculate related posts.
     #
     # Returns [<Post>]

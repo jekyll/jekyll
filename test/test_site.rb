@@ -15,9 +15,9 @@ class TestSite < Test::Unit::TestCase
     
     assert_equal ["default", "simple"].sort, @s.layouts.keys.sort
   end
-  
+ 
   def test_read_posts
-    @s.read_posts
+    @s.read_posts(File.join(@s.source, '_posts'))
     
     assert_equal 3, @s.posts.size
   end

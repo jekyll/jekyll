@@ -15,7 +15,6 @@ module Jekyll
     
     def number_of_words(input)
       input.split.length
-    end
-  end
-  
+    end    
+  end  
 end

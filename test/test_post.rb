@@ -81,7 +81,7 @@ class TestPost < Test::Unit::TestCase
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.add_layout(layouts, {"site" => {"posts" => []}})
     
-    assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", p.output
+    assert_equal "<<< <p>url: /test/source/2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /test/source/2008/11/21/complex</p> >>>", p.output
   end
   
   def test_include

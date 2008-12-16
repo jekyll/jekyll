@@ -31,9 +31,10 @@ various data about my site. A reverse chronological list of all my blog posts
 can be found in <code>site.posts</code>. Each post, in turn, contains various
 fields such as <code>title</code> and <code>date</code>.
 
-Jekyll gets the list of blog posts by parsing the files in the
-"_posts":http://github.com/mojombo/tpw/tree/master/_posts directory. Each
-post's filename contains the publishing date and slug (what shows up in the
+Jekyll gets the list of blog posts by parsing the files in any
+"_posts":http://github.com/mojombo/tpw/tree/master/_posts directory found in
+subdirectories below the root. 
+Each post's filename contains the publishing date and slug (what shows up in the
 URL) that the final HTML file should have. Open up the file corresponding to a
 blog post:
 "2008-11-17-blogging-like-a-hacker.textile":http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile.
@@ -51,6 +52,13 @@ Posts are handled in a special way by Jekyll. The date you specify in the
 filename is used to construct the URL in the generated site. The example post,
 for instance, ends up at
 <code>http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</code>.
+
+Categories for posts are derived from the directory structure the posts were 
+found within.
+A post that appears in the directory foo/bar/_posts is placed in the categories
+'foo' and 'bar'.
+By selecting posts from particular categories in your Liquid templates, you will
+be able to host multiple blogs within a site.
 
 Files that do not reside in directories prefixed with an underscore are
 mirrored into a corresponding directory structure in the generated site. If a
@@ -158,6 +166,9 @@ h3. Site
     high quality but slow to compute results, run the jekyll command with the 
     --lsi (latent semantic indexing) option.
 
+  site.categories.CATEGORY
+    The list of all posts in category CATEGORY.
+
 h3. Post
 
   post.title
@@ -176,6 +187,9 @@ h3. Post
 
   post.content
     The content of the Post.
+
+  post.categories
+    The list of categories to which this post belongs.
 
 h2. YAML Front Matter
 
@@ -288,6 +302,22 @@ highlighting stylesheet. For an example stylesheet you can look at
 "syntax.css":http://github.com/mojombo/tpw/tree/master/css/syntax.css. These
 are the same styles as used by GitHub and you are free to use them for your
 own site.
+
+h2. Categories
+
+Posts are placed into categories based on the directory structure they are found
+within (see above for an example). The categories can be accessed from within
+a Liquid template as follows:
+
+<pre>
+{% for post in site.categories.foo %}
+	<li><span>{{ post.date | date_to_string }}</span> - {{ post.title }}</li>
+{% endfor %}
+</pre>
+
+This would list all the posts in the category 'foo' by date and title.
+
+The posts within each category are sorted in reverse chronological order.
 
 h2. Contribute
 

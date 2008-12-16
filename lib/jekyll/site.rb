@@ -24,9 +24,8 @@ module Jekyll
     # Returns nothing
     def process
       self.read_layouts
-      self.read_posts
-      self.write_posts
       self.transform_pages
+      self.write_posts
     end
     
     # Read all the files in <source>/_layouts into memory for
@@ -46,12 +45,11 @@ module Jekyll
       # ignore missing layout dir
     end
     
-    # Read all the files in <source>/posts and create a new Post
+    # Read all the files in <base>/_posts and create a new Post
     # object with each one.
     #
     # Returns nothing
-    def read_posts
-      base = File.join(self.source, "_posts")
+    def read_posts(base)
       entries = Dir.entries(base)
       entries = entries.reject { |e| File.directory?(e) }
 
@@ -76,7 +74,7 @@ module Jekyll
     
     # Copy all regular files from <source> to <dest>/ ignoring
     # any files/directories that are hidden (start with ".") or contain
-    # site content (start with "_")
+    # site content (start with "_") unless they are "_posts" directories
     #   The +dir+ String is a relative path used to call this method
     #            recursively as it descends through directories
     #
@@ -84,10 +82,14 @@ module Jekyll
     def transform_pages(dir = '')
       base = File.join(self.source, dir)
       entries = Dir.entries(base)
-      entries = entries.reject { |e| ['.', '_'].include?(e[0..0]) }
+      entries = entries.reject { |e| 
+        (e != '_posts') and ['.', '_'].include?(e[0..0]) 
+      }
 
       entries.each do |f|
-        if File.directory?(File.join(base, f))
+        if f == '_posts'
+          read_posts(File.join(base, f))
+        elsif File.directory?(File.join(base, f))
           next if self.dest.sub(/\/$/, '') == File.join(base, f)
           transform_pages(File.join(dir, f))
         else
@@ -111,7 +113,17 @@ module Jekyll
     #
     # Returns {"site" => {"time" => <Time>, "posts" => [<Post>]}}
     def site_payload
-      {"site" => {"time" => Time.now, "posts" => self.posts.sort.reverse}}
+      # Build the category hash map of category ( names => arrays of posts )
+      # then sort each array in reverse order
+      categories = Hash.new { |hash,key| hash[key] = Array.new } 
+      self.posts.each { |p| p.categories.each { |c| categories[c] << p } }
+      categories.values.map { |cats| cats.sort! { |a,b| b <=> a} } 
+      
+      {"site" => {
+        "time" => Time.now, 
+        "posts" => self.posts.sort { |a,b| b <=> a },
+        "categories" => categories
+      }}
     end
   end
 
