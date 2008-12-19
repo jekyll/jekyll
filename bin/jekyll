@@ -25,6 +25,10 @@ opts = OptionParser.new do |opts|
     options[:auto] = true
   end
   
+  opts.on("--server", "Run a WEBrick server on destination directory") do
+    options[:server] = true
+  end
+  
   opts.on("--lsi", "Use LSI for better related posts") do
     Jekyll.lsi = true
   end
@@ -76,6 +80,24 @@ case ARGV.size
   else
     puts "Invalid options. Run `jekyll --help` for assistance."
     exit(1)
+end
+
+if options[:server]
+  require 'webrick'
+  include WEBrick
+
+  s = HTTPServer.new(
+    :Port            => 4000,
+    :DocumentRoot    => destination
+  )
+  t = Thread.new {
+    s.start
+  }
+  
+  unless options[:auto]
+    trap("INT") { s.shutdown }
+    t.join()
+  end
 end
 
 if options[:auto]
