@@ -4,6 +4,10 @@ module Jekyll
     def date_to_string(date)
       date.strftime("%d %b %Y")
     end
+
+    def date_to_long_string(date)
+      date.strftime("%d %B %Y")
+    end
     
     def date_to_xmlschema(date)
       date.xmlschema
