@@ -146,7 +146,8 @@ module Jekyll
         "url" => self.url,
         "date" => self.date,
         "id" => self.id,
-        "content" => self.content }
+        "content" => self.content,
+        "data" => self.data }
     end
   end
 
