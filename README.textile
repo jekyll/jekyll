@@ -129,6 +129,13 @@ compilation), you must install it (gem install rdiscount) and then you can
 have it used instead:
 
   $ jekyll --rdiscount
+  
+When previewing complex sites locally, simply opening the site in a web 
+browser (using file://) can cause problems with links that are relative to
+the site root (e.g., "/stylesheets/style.css"). To get around this, Jekyll
+can launch a simple WEBrick server (works well in conjunction with --auto):
+
+  $ jekyll --server
 
 h2. Data
 
