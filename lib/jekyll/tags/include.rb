@@ -7,7 +7,18 @@ module Jekyll
     end
     
     def render(context)
-      File.read(File.join(Jekyll.source, '_includes', @file))
+      if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
+        return "Include file '#{@file}' contains invalid characters or sequences"
+      end
+      
+      Dir.chdir(File.join(Jekyll.source, '_includes')) do
+        choices = Dir['**/*'].reject { |x| File.symlink?(x) }
+        if choices.include?(@file)
+          File.read(@file)
+        else
+          "Included file '#{@file}' not found in _includes directory"
+        end
+      end
     end
   end
   
