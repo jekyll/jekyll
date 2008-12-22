@@ -19,7 +19,7 @@ class TestSite < Test::Unit::TestCase
   def test_read_posts
     @s.read_posts(File.join(@s.source, '_posts'))
     
-    assert_equal 3, @s.posts.size
+    assert_equal 4, @s.posts.size
   end
   
   def test_write_posts
