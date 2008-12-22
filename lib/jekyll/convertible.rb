@@ -13,7 +13,7 @@ module Jekyll
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
       
-      if self.content =~ /^(---.*\n.*?)\n---.*\n/m
+      if self.content =~ /^(---\s*\n.*?)\n---\s*\n/m
         self.content = self.content[($1.size + 5)..-1]
         
         self.data = YAML.load($1)
@@ -52,7 +52,7 @@ module Jekyll
       # recursively render layouts
       layout = layouts[self.data["layout"]]
       while layout
-        payload = payload.merge({"content" => self.output, "page" => self.data})
+        payload = payload.merge({"content" => self.output, "page" => payload['page']})
         self.output = Liquid::Template.parse(layout.content).render(payload, [Jekyll::Filters])
         
         layout = layouts[layout.data["layout"]]
