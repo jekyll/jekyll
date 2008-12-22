@@ -64,9 +64,11 @@ module Jekyll
     # Returns <String>
     def dir
       path = @categories ? '/' + @categories.join('/') : ''
-      permalink ?
-        permalink.to_s.split("/")[0..-2].join("/") :
+      if permalink
+        permalink.to_s.split("/")[0..-2].join("/")
+      else
         "#{path}" + date.strftime("/%Y/%m/%d/")
+      end
     end
     
     # The full path and filename of the post.
