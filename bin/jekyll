@@ -83,24 +83,6 @@ case ARGV.size
     exit(1)
 end
 
-if options[:server]
-  require 'webrick'
-  include WEBrick
-
-  s = HTTPServer.new(
-    :Port            => options[:server_port],
-    :DocumentRoot    => destination
-  )
-  t = Thread.new {
-    s.start
-  }
-  
-  unless options[:auto]
-    trap("INT") { s.shutdown }
-    t.join()
-  end
-end
-
 if options[:auto]
   require 'directory_watcher'
 
@@ -118,7 +100,27 @@ if options[:auto]
   
   dw.start
   
-  loop { sleep 1000 }
+  unless options[:server]
+    loop { sleep 1000 }
+  end
 else
   Jekyll.process(source, destination)
+end
+
+if options[:server]
+  require 'webrick'
+  include WEBrick
+  
+  FileUtils.mkdir_p(destination)
+
+  s = HTTPServer.new(
+    :Port            => options[:server_port],
+    :DocumentRoot    => destination
+  )
+  t = Thread.new {
+    s.start
+  }
+  
+  trap("INT") { s.shutdown }
+  t.join()
 end

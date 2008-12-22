@@ -141,9 +141,10 @@ have it used instead:
 When previewing complex sites locally, simply opening the site in a web 
 browser (using file://) can cause problems with links that are relative to
 the site root (e.g., "/stylesheets/style.css"). To get around this, Jekyll
-can launch a simple WEBrick server (works well in conjunction with --auto):
+can launch a simple WEBrick server (works well in conjunction with --auto).
+Default port is 4000:
 
-  $ jekyll --server
+  $ jekyll --server [PORT]
 
 h2. Data
 
