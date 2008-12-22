@@ -9,6 +9,7 @@
   * Bug Fixes
     * Change YAML delimiter matcher so as to not chew up 2nd level markdown headers [github.com/mreid]
     * Fix bug that meant page data (such as the date) was not available in templates [github.com/mreid]
+    * Properly reject directories in _layouts
 
 == 0.2.1 / 2008-12-15
   * Major Changes

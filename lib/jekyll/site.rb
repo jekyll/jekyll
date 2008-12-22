@@ -35,7 +35,7 @@ module Jekyll
     def read_layouts
       base = File.join(self.source, "_layouts")
       entries = Dir.entries(base)
-      entries = entries.reject { |e| File.directory?(e) }
+      entries = entries.reject { |e| File.directory?(File.join(base, e)) }
       
       entries.each do |f|
         name = f.split(".")[0..-2].join(".")
