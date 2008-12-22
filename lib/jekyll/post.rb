@@ -145,11 +145,11 @@ module Jekyll
     #
     # Returns <Hash>
     def to_liquid
-      { "title" => self.data["title"] || "",
+      self.data.merge({ "title" => self.data["title"] || "",
         "url" => self.url,
         "date" => self.date,
         "id" => self.id,
-        "content" => self.content }
+        "content" => self.content })
     end
   end
 
