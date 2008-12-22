@@ -1,6 +1,6 @@
 ==
   * Major Enhancements
-    * Added --server option to start a simple WEBrick server on destination directory [github.com/johnreilly]
+    * Added --server option to start a simple WEBrick server on destination directory [github.com/johnreilly and github.com/mchung]
   * Minor Enhancements
     * Added post categories based on directories containing _posts [github.com/mreid]
     * Added new date filter that shows the full month name [github.com/mreid]

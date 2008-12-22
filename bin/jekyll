@@ -25,8 +25,9 @@ opts = OptionParser.new do |opts|
     options[:auto] = true
   end
   
-  opts.on("--server", "Run a WEBrick server on destination directory") do
+  opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
     options[:server] = true
+    options[:server_port] = port || 4000
   end
   
   opts.on("--lsi", "Use LSI for better related posts") do
@@ -87,7 +88,7 @@ if options[:server]
   include WEBrick
 
   s = HTTPServer.new(
-    :Port            => 4000,
+    :Port            => options[:server_port],
     :DocumentRoot    => destination
   )
   t = Thread.new {
