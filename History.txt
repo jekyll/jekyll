@@ -1,3 +1,13 @@
+==
+  * Minor Enhancements
+    * Added post categories based on directories containing _posts [github.com/mreid]
+    * Added new date filter that shows the full month name [github.com/mreid]
+    * Make post's YAML front matter available as post.data [github.com/remi]
+    * Merge Post's YAML front matter into its to_liquid payload [github.com/remi]
+  * Bug Fixes
+    * Change YAML delimiter matcher so as to not chew up 2nd level markdown headers [github.com/mreid]
+    * Fix bug that meant page data (such as the date) was not available in templates [github.com/mreid]
+
 == 0.2.1 / 2008-12-15
   * Major Changes
     * Use Maruku (pure Ruby) for Markdown by default [github.com/mreid]
