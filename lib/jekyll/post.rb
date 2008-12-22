@@ -63,7 +63,7 @@ module Jekyll
     #
     # Returns <String>
     def dir
-      path = @categories ? '/' + @categories.join('/') : ''
+      path = (@categories && !@categories.empty?) ? '/' + @categories.join('/') : ''
       if permalink
         permalink.to_s.split("/")[0..-2].join("/")
       else
