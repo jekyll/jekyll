@@ -105,6 +105,7 @@ if options[:auto]
   end
 else
   Jekyll.process(source, destination)
+  puts "Successfully generated site in #{destination}"
 end
 
 if options[:server]
