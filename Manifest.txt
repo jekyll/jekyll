@@ -22,10 +22,10 @@ test/source/_layouts/default.html
 test/source/_layouts/simple.html
 test/source/_posts/2008-10-18-foo-bar.textile
 test/source/_posts/2008-11-21-complex.textile
+test/source/_posts/2008-12-03-permalinked-post.textile
 test/source/_posts/2008-12-13-include.markdown
 test/source/css/screen.css
 test/source/index.html
-test/source/posts/2008-12-03-permalinked-post.textile
 test/suite.rb
 test/test_jekyll.rb
 test/test_post.rb
