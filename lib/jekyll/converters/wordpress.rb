@@ -28,7 +28,6 @@ module Jekyll
         slug = post[:post_name]
         date = post[:post_date]
         content = post[:post_content]
-
         name = "%02d-%02d-%02d-%s.markdown" % [date.year, date.month, date.day,
                                                slug]
 
