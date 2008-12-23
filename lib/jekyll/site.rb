@@ -51,7 +51,7 @@ module Jekyll
     # Returns nothing
     def read_posts(base)
       entries = Dir.entries(base)
-      entries = entries.reject { |e| File.directory?(e) }
+      entries = entries.reject { |e| File.directory?(File.join(base, e)) }
 
       entries.each do |f|
         self.posts << Post.new(base, f) if Post.valid?(f)
