@@ -4,7 +4,6 @@
   * Minor Enhancements
     * Added post categories based on directories containing _posts [github.com/mreid]
     * Added new date filter that shows the full month name [github.com/mreid]
-    * Make post's YAML front matter available as post.data [github.com/remi]
     * Merge Post's YAML front matter into its to_liquid payload [github.com/remi]
     * Restrict includes to regular files underneath _includes
   * Bug Fixes
