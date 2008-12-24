@@ -54,7 +54,12 @@ module Jekyll
       entries = entries.reject { |e| File.directory?(e) }
 
       entries.each do |f|
-        self.posts << Post.new(base, f) if Post.valid?(f)
+        if Post.valid?(f)
+          post = Post.new(base, f) 
+          post.content = Liquid::Template.parse(post.content).render(site_payload, [Jekyll::Filters])
+          post.transform
+          self.posts << post
+        end
       end
       
       self.posts.sort!
@@ -86,10 +91,15 @@ module Jekyll
         (e != '_posts') and ['.', '_'].include?(e[0..0]) 
       }
 
+      # we need to make sure to process _posts *first* otherwise they 
+      # might not be available yet to other templates as {{ site.posts }}
+      if entries.include? '_posts'
+        entries.delete '_posts'
+        read_posts(File.join(base, '_posts'))
+      end
+
       entries.each do |f|
-        if f == '_posts'
-          read_posts(File.join(base, f))
-        elsif File.directory?(File.join(base, f))
+        if File.directory?(File.join(base, f))
           next if self.dest.sub(/\/$/, '') == File.join(base, f)
           transform_pages(File.join(dir, f))
         else
