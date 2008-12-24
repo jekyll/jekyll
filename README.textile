@@ -165,7 +165,7 @@ h3. Global
 
   content
     In layout files, this contains the content of the subview(s). In Posts or
-    pages, this is undefined.
+    Pages, this is undefined.
 
 h3. Site
 
@@ -280,7 +280,8 @@ becomes
 
 h3. Include (Tag)
 
-If you have small page fragments that you wish to include in multiple places on your site, you can use the <code>include</code> tag.
+If you have small page fragments that you wish to include in multiple places
+on your site, you can use the <code>include</code> tag.
 
 <pre>{% include sig.textile %}</pre>
 
