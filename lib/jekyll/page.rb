@@ -37,9 +37,9 @@ module Jekyll
     #   +site_payload+ is the site payload hash
     #
     # Returns nothing
-    def add_layout(layouts, site_payload)
-      payload = {"page" => self.data}
-      do_layout(payload, layouts, site_payload)
+    def render(layouts, site_payload)
+      payload = {"page" => self.data}.merge(site_payload)
+      do_layout(payload, layouts)
     end
     
     # Write the generated page file to the destination directory.

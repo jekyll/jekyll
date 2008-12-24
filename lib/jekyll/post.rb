@@ -123,11 +123,16 @@ module Jekyll
     #   +site_payload+ is the site payload hash
     #
     # Returns nothing
-    def add_layout(layouts, site_payload)
-      # construct post payload
-      related = related_posts(site_payload["site"]["posts"])
-      payload = {"page" => self.to_liquid.merge(self.data)}
-      do_layout(payload, layouts, site_payload.merge({"site" => {"related_posts" => related}}))
+    def render(layouts, site_payload)
+      # construct payload
+      payload =
+      {
+        "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
+        "page" => self.to_liquid
+      }
+      payload = payload.merge(site_payload)
+      
+      do_layout(payload, layouts)
     end
     
     # Write the generated post file to the destination directory.
@@ -147,11 +152,11 @@ module Jekyll
     #
     # Returns <Hash>
     def to_liquid
-      self.data.merge({ "title" => self.data["title"] || "",
+      { "title" => self.data["title"] || "",
         "url" => self.url,
         "date" => self.date,
         "id" => self.id,
-        "content" => self.content })
+        "content" => self.content }.merge(self.data)
     end
   end
 

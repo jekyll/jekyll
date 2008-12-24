@@ -19,7 +19,7 @@ module Jekyll
         self.data = YAML.load($1)
       end
     end
-  
+    
     # Transform the contents based on the file extension.
     #
     # Returns nothing
@@ -39,10 +39,8 @@ module Jekyll
     #   +site_payload+ is the site payload hash
     #
     # Returns nothing
-    def do_layout(payload, layouts, site_payload)
-      # construct payload
-      payload = payload.merge(site_payload)
-      # render content
+    def do_layout(payload, layouts)
+      # render and transform content (this becomes the final content of the object)
       self.content = Liquid::Template.parse(self.content).render(payload, [Jekyll::Filters])
       self.transform
       

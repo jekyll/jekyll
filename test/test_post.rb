@@ -59,10 +59,10 @@ class TestPost < Test::Unit::TestCase
     assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", p.content
   end
   
-  def test_add_layout
+  def test_render
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.add_layout(layouts, {"site" => {"posts" => []}})
+    p.render(layouts, {"site" => {"posts" => []}})
     
     assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", p.output
   end
@@ -72,14 +72,14 @@ class TestPost < Test::Unit::TestCase
     
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.add_layout(layouts, {"site" => {"posts" => []}})
+    p.render(layouts, {"site" => {"posts" => []}})
     p.write(dest_dir)
   end
   
   def test_data
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-11-21-complex.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.add_layout(layouts, {"site" => {"posts" => []}})
+    p.render(layouts, {"site" => {"posts" => []}})
     
     assert_equal "<<< <p>url: /test/source/2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /test/source/2008/11/21/complex</p> >>>", p.output
   end
@@ -88,7 +88,7 @@ class TestPost < Test::Unit::TestCase
     Jekyll.source = File.join(File.dirname(__FILE__), *%w[source])
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-12-13-include.markdown")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.add_layout(layouts, {"site" => {"posts" => []}})
+    p.render(layouts, {"site" => {"posts" => []}})
     
     assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", p.output
   end

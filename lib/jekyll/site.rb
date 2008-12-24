@@ -53,13 +53,17 @@ module Jekyll
       entries = Dir.entries(base)
       entries = entries.reject { |e| File.directory?(File.join(base, e)) }
 
+      # first pass processes, but does not yet render post content
       entries.each do |f|
         if Post.valid?(f)
-          post = Post.new(base, f) 
-          post.content = Liquid::Template.parse(post.content).render(site_payload, [Jekyll::Filters])
-          post.transform
+          post = Post.new(base, f)
           self.posts << post
         end
+      end
+      
+      # second pass renders each post now that full site payload is available
+      self.posts.each do |post|
+        post.render(self.layouts, site_payload)
       end
       
       self.posts.sort!
@@ -72,7 +76,6 @@ module Jekyll
     # Returns nothing
     def write_posts
       self.posts.each do |post|
-        post.add_layout(self.layouts, site_payload)
         post.write(self.dest)
       end
     end
@@ -87,14 +90,14 @@ module Jekyll
     def transform_pages(dir = '')
       base = File.join(self.source, dir)
       entries = Dir.entries(base)
-      entries = entries.reject { |e| 
-        (e != '_posts') and ['.', '_'].include?(e[0..0]) 
-      }
+      entries = entries.reject do |e|
+        (e != '_posts') and ['.', '_'].include?(e[0..0])
+      end
 
       # we need to make sure to process _posts *first* otherwise they 
       # might not be available yet to other templates as {{ site.posts }}
-      if entries.include? '_posts'
-        entries.delete '_posts'
+      if entries.include?('_posts')
+        entries.delete('_posts')
         read_posts(File.join(base, '_posts'))
       end
 
@@ -105,13 +108,13 @@ module Jekyll
         else
           first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
           
-          # if the file appears to have a YAML header then process it as a page
           if first3 == "---"
+            # file appears to have a YAML header so process it as a page
             page = Page.new(self.source, dir, f)
-            page.add_layout(self.layouts, site_payload)
+            page.render(self.layouts, site_payload)
             page.write(self.dest)
-          # otherwise copy the file without transforming it
           else
+            # otherwise copy the file without transforming it
             FileUtils.mkdir_p(File.join(self.dest, dir))
             FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
           end
