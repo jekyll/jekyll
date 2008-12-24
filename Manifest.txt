@@ -27,6 +27,7 @@ test/source/_posts/2008-12-13-include.markdown
 test/source/css/screen.css
 test/source/index.html
 test/suite.rb
+test/test_generated_site.rb
 test/test_jekyll.rb
 test/test_post.rb
 test/test_site.rb
