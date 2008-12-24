@@ -8,7 +8,7 @@ module Jekyll
       attr_accessor :lsi
     end
     
-    MATCHER = /^(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
+    MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
     
     # Post name validator. Post filenames must be like:
     #   2008-11-05-my-awesome-post.textile
@@ -18,7 +18,7 @@ module Jekyll
       name =~ MATCHER
     end
     
-    attr_accessor :date, :slug, :ext, :categories
+    attr_accessor :date, :slug, :ext, :categories, :topics
     attr_accessor :data, :content, :output
     
     # Initialize this Post instance.
@@ -27,15 +27,17 @@ module Jekyll
     #   +categories+ is an Array of Strings for the categories for this post
     #
     # Returns <Post>
-    def initialize(base, name)
-      @base = base
+    def initialize(source, dir, name)
+      @base = File.join(source, dir, '_posts')
       @name = name
-      @categories = base.split('/').reject { |p| ['.', '_posts'].include? p }
+      
+      self.categories = dir.split('/').reject { |x| x.empty? }
+      
+      parts = name.split('/')
+      self.topics = parts.size > 1 ? parts[0..-2] : []
       
       self.process(name)
-      self.read_yaml(base, name)
-      #Removed to avoid munging of liquid tags, replaced in convertible.rb#48
-      #self.transform
+      self.read_yaml(@base, name)
     end
     
     # Spaceship is based on Post#date
@@ -50,7 +52,7 @@ module Jekyll
     #
     # Returns nothing
     def process(name)
-      m, date, slug, ext = *name.match(MATCHER)
+      m, cats, date, slug, ext = *name.match(MATCHER)
       self.date = Time.parse(date)
       self.slug = slug
       self.ext = ext
@@ -63,11 +65,11 @@ module Jekyll
     #
     # Returns <String>
     def dir
-      path = (@categories && !@categories.empty?) ? '/' + @categories.join('/') : ''
       if permalink
         permalink.to_s.split("/")[0..-2].join("/")
       else
-        "#{path}" + date.strftime("/%Y/%m/%d/")
+        prefix = self.categories.empty? ? '' : '/' + self.categories.join('/')
+        prefix + date.strftime("/%Y/%m/%d/")
       end
     end
     
@@ -156,6 +158,7 @@ module Jekyll
         "url" => self.url,
         "date" => self.date,
         "id" => self.id,
+        "topics" => self.topics,
         "content" => self.content }.merge(self.data)
     end
   end

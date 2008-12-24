@@ -49,14 +49,17 @@ module Jekyll
     # object with each one.
     #
     # Returns nothing
-    def read_posts(base)
-      entries = Dir.entries(base)
+    def read_posts(dir)
+      base = File.join(self.source, dir, '_posts')
+      
+      entries = []
+      Dir.chdir(base) { entries = Dir['**/*'] }
       entries = entries.reject { |e| File.directory?(File.join(base, e)) }
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
         if Post.valid?(f)
-          post = Post.new(base, f)
+          post = Post.new(self.source, dir, f)
           self.posts << post
         end
       end
@@ -98,7 +101,7 @@ module Jekyll
       # might not be available yet to other templates as {{ site.posts }}
       if entries.include?('_posts')
         entries.delete('_posts')
-        read_posts(File.join(base, '_posts'))
+        read_posts(dir)
       end
 
       entries.each do |f|
@@ -128,9 +131,9 @@ module Jekyll
     def site_payload
       # Build the category hash map of category ( names => arrays of posts )
       # then sort each array in reverse order
-      categories = Hash.new { |hash,key| hash[key] = Array.new } 
+      categories = Hash.new { |hash, key| hash[key] = Array.new }
       self.posts.each { |p| p.categories.each { |c| categories[c] << p } }
-      categories.values.map { |cats| cats.sort! { |a,b| b <=> a} } 
+      categories.values.map { |cats| cats.sort! { |a, b| b <=> a} }
       
       {"site" => {
         "time" => Time.now, 

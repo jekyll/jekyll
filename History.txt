@@ -3,6 +3,7 @@
     * Added --server option to start a simple WEBrick server on destination directory [github.com/johnreilly and github.com/mchung]
   * Minor Enhancements
     * Added post categories based on directories containing _posts [github.com/mreid]
+    * Added post topics based on directories underneath _posts
     * Added new date filter that shows the full month name [github.com/mreid]
     * Merge Post's YAML front matter into its to_liquid payload [github.com/remi]
     * Restrict includes to regular files underneath _includes

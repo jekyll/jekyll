@@ -7,6 +7,9 @@ class TestPost < Test::Unit::TestCase
   
   def test_valid
     assert Post.valid?("2008-10-19-foo-bar.textile")
+    assert Post.valid?("foo/bar/2008-10-19-foo-bar.textile")
+    
+    assert !Post.valid?("lol2008-10-19-foo-bar.textile")
     assert !Post.valid?("blah")
   end
   
@@ -21,6 +24,7 @@ class TestPost < Test::Unit::TestCase
   
   def test_url
     p = Post.allocate
+    p.categories = []
     p.process("2008-10-19-foo-bar.textile")
     
     assert_equal "/2008/10/19/foo-bar.html", p.url
@@ -60,7 +64,7 @@ class TestPost < Test::Unit::TestCase
   end
   
   def test_render
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-10-18-foo-bar.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.render(layouts, {"site" => {"posts" => []}})
     
@@ -70,23 +74,23 @@ class TestPost < Test::Unit::TestCase
   def test_write
     clear_dest
     
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-10-18-foo-bar.textile")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '', "2008-10-18-foo-bar.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.render(layouts, {"site" => {"posts" => []}})
     p.write(dest_dir)
   end
   
   def test_data
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-11-21-complex.textile")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '', "2008-11-21-complex.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.render(layouts, {"site" => {"posts" => []}})
     
-    assert_equal "<<< <p>url: /test/source/2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /test/source/2008/11/21/complex</p> >>>", p.output
+    assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", p.output
   end
   
   def test_include
     Jekyll.source = File.join(File.dirname(__FILE__), *%w[source])
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-12-13-include.markdown")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '', "2008-12-13-include.markdown")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.render(layouts, {"site" => {"posts" => []}})
     
