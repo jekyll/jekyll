@@ -28,13 +28,14 @@ module Jekyll
       self.write_posts
     end
     
-    # Read all the files in <source>/_layouts into memory for
-    # later use.
+    # Read all the files in <source>/_layouts except backup files
+    # (end with "~") into memory for later use.
     #
     # Returns nothing
     def read_layouts
       base = File.join(self.source, "_layouts")
       entries = Dir.entries(base)
+      entries = entries.reject { |e| e[-1..-1] == '~' }
       entries = entries.reject { |e| File.directory?(File.join(base, e)) }
       
       entries.each do |f|
@@ -45,8 +46,8 @@ module Jekyll
       # ignore missing layout dir
     end
     
-    # Read all the files in <base>/_posts and create a new Post
-    # object with each one.
+    # Read all the files in <base>/_posts except backup files (end with "~")
+    # and create a new Post object with each one.
     #
     # Returns nothing
     def read_posts(dir)
@@ -54,6 +55,7 @@ module Jekyll
       
       entries = []
       Dir.chdir(base) { entries = Dir['**/*'] }
+      entries = entries.reject { |e| e[-1..-1] == '~' }
       entries = entries.reject { |e| File.directory?(File.join(base, e)) }
 
       # first pass processes, but does not yet render post content
@@ -84,8 +86,9 @@ module Jekyll
     end
     
     # Copy all regular files from <source> to <dest>/ ignoring
-    # any files/directories that are hidden (start with ".") or contain
-    # site content (start with "_") unless they are "_posts" directories
+    # any files/directories that are hidden or backup files (start
+    # with "." or end with "~") or contain site content (start with "_")
+    # unless they are "_posts" directories
     #   The +dir+ String is a relative path used to call this method
     #            recursively as it descends through directories
     #
@@ -93,6 +96,7 @@ module Jekyll
     def transform_pages(dir = '')
       base = File.join(self.source, dir)
       entries = Dir.entries(base)
+      entries = entries.reject { |e| e[-1..-1] == '~' }
       entries = entries.reject do |e|
         (e != '_posts') and ['.', '_'].include?(e[0..0])
       end
