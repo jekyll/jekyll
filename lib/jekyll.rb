@@ -31,6 +31,7 @@ rescue LoadError
 end
 
 # internal requires
+require 'jekyll/core_ext'
 require 'jekyll/site'
 require 'jekyll/convertible'
 require 'jekyll/layout'

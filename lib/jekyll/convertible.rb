@@ -50,7 +50,7 @@ module Jekyll
       # recursively render layouts
       layout = layouts[self.data["layout"]]
       while layout
-        payload = payload.merge({"content" => self.output, "page" => payload['page']})
+        payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
         self.output = Liquid::Template.parse(layout.content).render(payload, [Jekyll::Filters])
         
         layout = layouts[layout.data["layout"]]

@@ -132,7 +132,7 @@ module Jekyll
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
         "page" => self.to_liquid
       }
-      payload = payload.merge(site_payload)
+      payload = payload.deep_merge(site_payload)
       
       do_layout(payload, layouts)
     end
@@ -159,7 +159,11 @@ module Jekyll
         "date" => self.date,
         "id" => self.id,
         "topics" => self.topics,
-        "content" => self.content }.merge(self.data)
+        "content" => self.content }.deep_merge(self.data)
+    end
+    
+    def inspect
+      "<Post: #{self.id}>"
     end
   end
 

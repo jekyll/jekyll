@@ -8,9 +8,10 @@ lib/jekyll.rb
 lib/jekyll/albino.rb
 lib/jekyll/converters/csv.rb
 lib/jekyll/converters/mephisto.rb
-lib/jekyll/converters/wordpress.rb
 lib/jekyll/converters/mt.rb
+lib/jekyll/converters/wordpress.rb
 lib/jekyll/convertible.rb
+lib/jekyll/core_ext.rb
 lib/jekyll/filters.rb
 lib/jekyll/layout.rb
 lib/jekyll/page.rb
