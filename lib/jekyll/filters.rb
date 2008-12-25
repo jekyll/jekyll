@@ -9,6 +9,10 @@ module Jekyll
       date.strftime("%d %B %Y")
     end
     
+    def strftime(date, format = '%x')
+        date.strftime(format)
+    end
+    
     def date_to_xmlschema(date)
       date.xmlschema
     end
