@@ -1,8 +1,8 @@
 module Jekyll
   
   module Filters
-    def date_to_string(date, format="%d %b %Y")
-      date.strftime(format)
+    def date_to_string(date)
+      date.strftime("%d %b %Y")
     end
 
     def date_to_long_string(date)
