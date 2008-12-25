@@ -18,4 +18,7 @@ namespace :convert do
   task :mephisto do
     sh %q(ruby -r './lib/jekyll/converters/mephisto' -e 'Jekyll::Mephisto.postgres(:database => "#{ENV["DB"]}")')
   end
+  task :mt do
+    sh %q(ruby -r './lib/jekyll/converters/mt' -e 'Jekyll::MT.process("#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")')
+  end
 end

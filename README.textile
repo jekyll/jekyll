@@ -361,6 +361,24 @@ The best way to get your changes merged back into core is as follows:
 # Push the branch up to GitHub
 # Send me (mojombo) a pull request for your branch
 
+h2. Blog migrations
+
+h3. Movable Type
+
+To migrate your MT blog into Jekyll, you'll need read access to the database.
+The lib/jekyll/converters/mt.rb module provides a simple convert to create
+.markdown files in a _posts directory based on the entries contained therein.
+
+  $ export DB=my_mtdb
+  $ export USER=dbuser
+  $ export PASS=dbpass
+  $ ruby -r './lib/jekyll/converters/mt' -e 'Jekyll::MT.process( \
+    "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'
+
+You may need to adjust the SQL query used to retrieve MT entries. Left alone,
+it will attempt to pull all entries across all blogs regardless of status.
+Please check the results and verify the posts before publishing.
+
 h2. License
 
 (The MIT License)
