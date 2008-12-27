@@ -114,7 +114,7 @@ module Jekyll
           transform_pages(File.join(dir, f))
         else
           first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
-          
+
           if first3 == "---"
             # file appears to have a YAML header so process it as a page
             page = Page.new(self.source, dir, f)
@@ -128,21 +128,29 @@ module Jekyll
         end
       end
     end
-    
+
+    # Constructs a hash map of Posts indexed by the specified Post attribute
+    #
+    # Returns {post_attr => [<Posts>]}
+    def post_attr_hash(post_attr)
+      # Build a hash map based on the specified post attribute ( post attr => array of posts )
+      # then sort each array in reverse order
+      hash = Hash.new { |hash, key| hash[key] = Array.new }
+      self.posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
+      hash.values.map { |sortme| sortme.sort! { |a, b| b <=> a} }
+      return hash
+    end
+
     # The Hash payload containing site-wide data
     #
-    # Returns {"site" => {"time" => <Time>, "posts" => [<Post>]}}
+    # Returns {"site" => {"time" => <Time>, "posts" => [<Post>], "categories" => [<Categories>], "topics" =>
+    # [<Topics>] }}
     def site_payload
-      # Build the category hash map of category ( names => arrays of posts )
-      # then sort each array in reverse order
-      categories = Hash.new { |hash, key| hash[key] = Array.new }
-      self.posts.each { |p| p.categories.each { |c| categories[c] << p } }
-      categories.values.map { |cats| cats.sort! { |a, b| b <=> a} }
-      
       {"site" => {
         "time" => Time.now, 
         "posts" => self.posts.sort { |a,b| b <=> a },
-        "categories" => categories
+        "categories" => post_attr_hash('categories'),
+        "topics" => post_attr_hash('topics')
       }}
     end
   end
