@@ -33,7 +33,7 @@ module Jekyll
         
         # Be sure to include the body and extended body.
         if more_content != nil
-          conent = content + " \n" + more_content
+          content = content + " \n" + more_content
         end
         
         # Ideally, this script would determine the post format (markdown, html
