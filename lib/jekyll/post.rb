@@ -154,7 +154,7 @@ module Jekyll
     #
     # Returns <Hash>
     def to_liquid
-      { "title" => self.data["title"] || "",
+      { "title" => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
         "url" => self.url,
         "date" => self.date,
         "id" => self.id,
