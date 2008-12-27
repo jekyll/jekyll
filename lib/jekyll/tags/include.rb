@@ -14,7 +14,11 @@ module Jekyll
       Dir.chdir(File.join(Jekyll.source, '_includes')) do
         choices = Dir['**/*'].reject { |x| File.symlink?(x) }
         if choices.include?(@file)
-          File.read(@file)
+          source = File.read(@file)
+          partial = Liquid::Template.parse(source)
+          context.stack do
+            partial.render(context)
+          end
         else
           "Included file '#{@file}' not found in _includes directory"
         end
