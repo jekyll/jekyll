@@ -379,6 +379,25 @@ You may need to adjust the SQL query used to retrieve MT entries. Left alone,
 it will attempt to pull all entries across all blogs regardless of status.
 Please check the results and verify the posts before publishing.
 
+h3. Typo 4+
+
+To migrate your Typo blog into Jekyll, you'll need read access to the MySQL
+database. The lib/jekyll/converters/typo.rb module provides a simple convert 
+to create .html, .textile, or .markdown files in a _posts directory based on 
+the entries contained therein.
+
+  $ export DB=my_typo_db
+  $ export USER=dbuser
+  $ export PASS=dbpass
+  $ ruby -r './lib/jekyll/converters/typo' -e 'Jekyll::Typo.process( \
+    "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'
+
+You may need to adjust the code used to filter Typo entries. Left alone,
+it will attempt to pull all entries across all blogs that were published.
+This code also has only been tested with Typo version 4+. Previous versions
+of Typo may not convert correctly. Please check the results and verify the 
+posts before publishing.
+
 h2. License
 
 (The MIT License)
