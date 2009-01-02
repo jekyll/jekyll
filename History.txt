@@ -1,3 +1,8 @@
+==
+  * Minor Enhancements
+    * Type importer [github.com/codeslinger]
+    * site.topics accessor [github.com/baz]
+
 == 0.3.0 / 2008-12-24
   * Major Enhancements
     * Added --server option to start a simple WEBrick server on destination directory [github.com/johnreilly and github.com/mchung]
