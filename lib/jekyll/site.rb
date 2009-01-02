@@ -131,7 +131,7 @@ module Jekyll
 
     # Constructs a hash map of Posts indexed by the specified Post attribute
     #
-    # Returns {post_attr => [<Posts>]}
+    # Returns {post_attr => [<Post>]}
     def post_attr_hash(post_attr)
       # Build a hash map based on the specified post attribute ( post attr => array of posts )
       # then sort each array in reverse order
@@ -143,8 +143,10 @@ module Jekyll
 
     # The Hash payload containing site-wide data
     #
-    # Returns {"site" => {"time" => <Time>, "posts" => [<Post>], "categories" => [<Categories>], "topics" =>
-    # [<Topics>] }}
+    # Returns {"site" => {"time" => <Time>,
+    #                     "posts" => [<Post>],
+    #                     "categories" => [<Post>],
+    #                     "topics" => [<Post>] }}
     def site_payload
       {"site" => {
         "time" => Time.now, 
