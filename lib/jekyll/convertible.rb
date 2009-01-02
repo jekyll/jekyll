@@ -24,11 +24,11 @@ module Jekyll
     #
     # Returns nothing
     def transform
-      case self.ext
-      when ".textile":
+      case self.ext[1..-1]
+      when /textile/i
         self.ext = ".html"
         self.content = RedCloth.new(self.content).to_html
-      when ".markdown":
+      when /markdown/i, /mkdn/i, /md/i
         self.ext = ".html"
         self.content = Jekyll.markdown_proc.call(self.content)
       end
