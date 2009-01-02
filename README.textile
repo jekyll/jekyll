@@ -286,6 +286,16 @@ becomes
 
   1337
 
+h3. Array to Sentence String
+
+Convert an array into a sentence.
+
+  {{ page.tags | array_to_sentence_string }}
+
+becomes
+
+  foo, bar, and baz
+
 h3. Include (Tag)
 
 If you have small page fragments that you wish to include in multiple places
