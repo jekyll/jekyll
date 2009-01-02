@@ -366,6 +366,7 @@ The best way to get your changes merged back into core is as follows:
 # Clone down your fork
 # Create a topic branch to contain your change
 # Hack away
+# If you are adding new functionality, document it in README.textile
 # Do not change the version number, I will do that on my end
 # If necessary, rebase your commits into logical chunks, without errors
 # Push the branch up to GitHub
