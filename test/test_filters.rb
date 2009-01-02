@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
-class TestSite < Test::Unit::TestCase
+class TestFilters < Test::Unit::TestCase
   
   class JekyllFilter
     include Jekyll::Filters
