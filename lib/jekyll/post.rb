@@ -66,7 +66,7 @@ module Jekyll
     # Returns <String>
     def dir
       if permalink
-        permalink.to_s.split("/")[0..-2].join("/")
+        permalink.to_s.split("/")[0..-2].join("/") + '/'
       else
         prefix = self.categories.empty? ? '' : '/' + self.categories.join('/')
         prefix + date.strftime("/%Y/%m/%d/")
@@ -87,7 +87,7 @@ module Jekyll
     #
     # Returns <String>
     def url
-      self.dir + self.slug + ".html"
+      permalink || self.dir + self.slug + ".html"
     end
     
     # The UID for this post (useful in feeds)

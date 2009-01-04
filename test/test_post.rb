@@ -43,7 +43,15 @@ class TestPost < Test::Unit::TestCase
     p.process("2008-12-03-permalinked-post.textile")
     p.read_yaml(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-12-03-permalinked-post.textile")
 
-    assert_equal "my_category", p.dir
+    assert_equal "my_category/", p.dir
+  end
+  
+  def test_url_respects_permalink
+    p = Post.allocate
+    p.process("2008-12-03-permalinked-post.textile")
+    p.read_yaml(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-12-03-permalinked-post.textile")
+
+    assert_equal "my_category/permalinked-post", p.url
   end
 
   def test_read_yaml
