@@ -53,12 +53,11 @@ filename is used to construct the URL in the generated site. The example post,
 for instance, ends up at
 <code>http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html</code>.
 
-Categories for posts are derived from the directory structure the posts were 
-found within.
-A post that appears in the directory foo/bar/_posts is placed in the categories
-'foo' and 'bar'.
-By selecting posts from particular categories in your Liquid templates, you will
-be able to host multiple blogs within a site.
+Categories for posts are derived from the directory structure the posts were
+found within. A post that appears in the directory foo/bar/_posts is placed in
+the categories 'foo' and 'bar'. By selecting posts from particular categories
+in your Liquid templates, you will be able to host multiple blogs within a
+site.
 
 Files that do not reside in directories prefixed with an underscore are
 mirrored into a corresponding directory structure in the generated site. If a
@@ -88,7 +87,7 @@ The best way to install Jekyll is via RubyGems:
   $ sudo gem install mojombo-jekyll -s http://gems.github.com/
 
 Jekyll requires the gems `directory_watcher`, `liquid`, `open4`, 
-and `maruku` for markdown support. These are automatically
+and `maruku` (for markdown support). These are automatically
 installed by the gem install command.
 
 Maruku comes with optional support for LaTeX to PNG rendering via
@@ -131,6 +130,21 @@ during the conversion:
 
   $ jekyll --pygments
 
+By default, Jekyll uses "Maruku":http://maruku.rubyforge.org (pure Ruby) for
+Markdown support. If you'd like to use RDiscount (faster, but requires
+compilation), you must install it (gem install rdiscount) and then you can
+have it used instead:
+
+  $ jekyll --rdiscount
+  
+When previewing complex sites locally, simply opening the site in a web 
+browser (using file://) can cause problems with links that are relative to
+the site root (e.g., "/stylesheets/style.css"). To get around this, Jekyll
+can launch a simple WEBrick server (works well in conjunction with --auto).
+Default port is 4000:
+
+  $ jekyll --server [PORT]
+
 h2. Data
 
 Jekyll traverses your site looking for files to process. Any files with YAML
@@ -150,7 +164,7 @@ h3. Global
 
   content
     In layout files, this contains the content of the subview(s). In Posts or
-    pages, this is undefined.
+    Pages, this is undefined.
 
 h3. Site
 
@@ -167,7 +181,7 @@ h3. Site
     --lsi (latent semantic indexing) option.
 
   site.categories.CATEGORY
-    The list of all posts in category CATEGORY.
+    The list of all Posts in category CATEGORY.
 
 h3. Post
 
@@ -185,11 +199,20 @@ h3. Post
     An identifier unique to the Post (useful in RSS feeds).
     e.g. /2008/12/14/my-post
 
+  post.categories
+    The list of categories to which this post belongs. Categories are
+    derived from the directory structure above the _posts directory. For
+    example, a post at /work/code/_posts/2008-12-24-closures.textile
+    would have this field set to ['work', 'code'].
+
+  post.topics
+    The list of topics for this Post. Topics are derived from the directory
+    structure beneath the _posts directory. For example, a post at
+    /_posts/music/metal/2008-12-24-metalocalypse.textile would have this field
+    set to ['music', 'metal'].
+
   post.content
     The content of the Post.
-
-  post.categories
-    The list of categories to which this post belongs.
 
 h2. YAML Front Matter
 
@@ -263,9 +286,20 @@ becomes
 
   1337
 
+h3. Array to Sentence String
+
+Convert an array into a sentence.
+
+  {{ page.tags | array_to_sentence_string }}
+
+becomes
+
+  foo, bar, and baz
+
 h3. Include (Tag)
 
-If you have small page fragments that you wish to include in multiple places on your site, you can use the <code>include</code> tag.
+If you have small page fragments that you wish to include in multiple places
+on your site, you can use the <code>include</code> tag.
 
 <pre>{% include sig.textile %}</pre>
 
@@ -332,10 +366,48 @@ The best way to get your changes merged back into core is as follows:
 # Clone down your fork
 # Create a topic branch to contain your change
 # Hack away
+# If you are adding new functionality, document it in README.textile
 # Do not change the version number, I will do that on my end
 # If necessary, rebase your commits into logical chunks, without errors
 # Push the branch up to GitHub
 # Send me (mojombo) a pull request for your branch
+
+h2. Blog migrations
+
+h3. Movable Type
+
+To migrate your MT blog into Jekyll, you'll need read access to the database.
+The lib/jekyll/converters/mt.rb module provides a simple convert to create
+.markdown files in a _posts directory based on the entries contained therein.
+
+  $ export DB=my_mtdb
+  $ export USER=dbuser
+  $ export PASS=dbpass
+  $ ruby -r './lib/jekyll/converters/mt' -e 'Jekyll::MT.process( \
+    "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'
+
+You may need to adjust the SQL query used to retrieve MT entries. Left alone,
+it will attempt to pull all entries across all blogs regardless of status.
+Please check the results and verify the posts before publishing.
+
+h3. Typo 4+
+
+To migrate your Typo blog into Jekyll, you'll need read access to the MySQL
+database. The lib/jekyll/converters/typo.rb module provides a simple convert 
+to create .html, .textile, or .markdown files in a _posts directory based on 
+the entries contained therein.
+
+  $ export DB=my_typo_db
+  $ export USER=dbuser
+  $ export PASS=dbpass
+  $ ruby -r './lib/jekyll/converters/typo' -e 'Jekyll::Typo.process( \
+    "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")'
+
+You may need to adjust the code used to filter Typo entries. Left alone,
+it will attempt to pull all entries across all blogs that were published.
+This code also has only been tested with Typo version 4+. Previous versions
+of Typo may not convert correctly. Please check the results and verify the 
+posts before publishing.
 
 h2. License
 

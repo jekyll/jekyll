@@ -8,7 +8,7 @@ module Jekyll
       attr_accessor :lsi
     end
     
-    MATCHER = /^(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
+    MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
     
     # Post name validator. Post filenames must be like:
     #   2008-11-05-my-awesome-post.textile
@@ -18,7 +18,7 @@ module Jekyll
       name =~ MATCHER
     end
     
-    attr_accessor :date, :slug, :ext, :categories
+    attr_accessor :date, :slug, :ext, :categories, :topics
     attr_accessor :data, :content, :output
     
     # Initialize this Post instance.
@@ -27,15 +27,17 @@ module Jekyll
     #   +categories+ is an Array of Strings for the categories for this post
     #
     # Returns <Post>
-    def initialize(base, name)
-      @base = base
+    def initialize(source, dir, name)
+      @base = File.join(source, dir, '_posts')
       @name = name
-      @categories = base.split('/').reject { |p| ['.', '_posts'].include? p }
+      
+      self.categories = dir.split('/').reject { |x| x.empty? }
+      
+      parts = name.split('/')
+      self.topics = parts.size > 1 ? parts[0..-2] : []
       
       self.process(name)
-      self.read_yaml(base, name)
-      #Removed to avoid munging of liquid tags, replaced in convertible.rb#48
-      #self.transform
+      self.read_yaml(@base, name)
     end
     
     # Spaceship is based on Post#date
@@ -50,7 +52,7 @@ module Jekyll
     #
     # Returns nothing
     def process(name)
-      m, date, slug, ext = *name.match(MATCHER)
+      m, cats, date, slug, ext = *name.match(MATCHER)
       self.date = Time.parse(date)
       self.slug = slug
       self.ext = ext
@@ -63,10 +65,12 @@ module Jekyll
     #
     # Returns <String>
     def dir
-      path = @categories ? '/' + @categories.join('/') : ''
-      permalink ?
-        permalink.to_s.split("/")[0..-2].join("/") :
-        "#{path}" + date.strftime("/%Y/%m/%d/")
+      if permalink
+        permalink.to_s.split("/")[0..-2].join("/")
+      else
+        prefix = self.categories.empty? ? '' : '/' + self.categories.join('/')
+        prefix + date.strftime("/%Y/%m/%d/")
+      end
     end
     
     # The full path and filename of the post.
@@ -121,11 +125,16 @@ module Jekyll
     #   +site_payload+ is the site payload hash
     #
     # Returns nothing
-    def add_layout(layouts, site_payload)
-      # construct post payload
-      related = related_posts(site_payload["site"]["posts"])
-      payload = {"page" => self.to_liquid.merge(self.data)}
-      do_layout(payload, layouts, site_payload.merge({"site" => {"related_posts" => related}}))
+    def render(layouts, site_payload)
+      # construct payload
+      payload =
+      {
+        "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
+        "page" => self.to_liquid
+      }
+      payload = payload.deep_merge(site_payload)
+      
+      do_layout(payload, layouts)
     end
     
     # Write the generated post file to the destination directory.
@@ -145,11 +154,16 @@ module Jekyll
     #
     # Returns <Hash>
     def to_liquid
-      { "title" => self.data["title"] || "",
+      { "title" => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
         "url" => self.url,
         "date" => self.date,
         "id" => self.id,
-        "content" => self.content }
+        "topics" => self.topics,
+        "content" => self.content }.deep_merge(self.data)
+    end
+    
+    def inspect
+      "<Post: #{self.id}>"
     end
   end
 

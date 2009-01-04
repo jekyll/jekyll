@@ -28,21 +28,6 @@ module Jekyll
     def process(name)
       self.ext = File.extname(name)
     end
-    
-    # Add any necessary layouts to this post
-    #   +layouts+ is a Hash of {"name" => "layout"}
-    #   +site_payload+ is the site payload hash
-    #
-    # Returns nothing
-    def add_layout(layouts, site_payload)
-      payload = {"page" => self.data}.merge(site_payload)
-      self.content = Liquid::Template.parse(self.content).render(payload, [Jekyll::Filters])
-      
-      layout = layouts[self.data["layout"]] || self.content
-      payload = {"content" => self.content, "page" => self.data}
-      
-      self.content = Liquid::Template.parse(layout).render(payload, [Jekyll::Filters])
-    end
   end
 
 end

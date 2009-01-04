@@ -19,18 +19,18 @@ module Jekyll
         self.data = YAML.load($1)
       end
     end
-  
+    
     # Transform the contents based on the file extension.
     #
     # Returns nothing
     def transform
-      case self.ext
-      when ".textile":
+      case self.ext[1..-1]
+      when /textile/i
         self.ext = ".html"
         self.content = RedCloth.new(self.content).to_html
-      when ".markdown":
+      when /markdown/i, /mkdn/i, /md/i
         self.ext = ".html"
-        self.content = Maruku.new(self.content).to_html
+        self.content = Jekyll.markdown_proc.call(self.content)
       end
     end
     
@@ -39,10 +39,8 @@ module Jekyll
     #   +site_payload+ is the site payload hash
     #
     # Returns nothing
-    def do_layout(payload, layouts, site_payload)
-      # construct payload
-      payload = payload.merge(site_payload)
-      # render content
+    def do_layout(payload, layouts)
+      # render and transform content (this becomes the final content of the object)
       self.content = Liquid::Template.parse(self.content).render(payload, [Jekyll::Filters])
       self.transform
       
@@ -52,7 +50,7 @@ module Jekyll
       # recursively render layouts
       layout = layouts[self.data["layout"]]
       while layout
-        payload = payload.merge({"content" => self.output, "page" => payload['page']})
+        payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
         self.output = Liquid::Template.parse(layout.content).render(payload, [Jekyll::Filters])
         
         layout = layouts[layout.data["layout"]]

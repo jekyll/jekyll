@@ -25,12 +25,27 @@ opts = OptionParser.new do |opts|
     options[:auto] = true
   end
   
+  opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
+    options[:server] = true
+    options[:server_port] = port || 4000
+  end
+  
   opts.on("--lsi", "Use LSI for better related posts") do
     Jekyll.lsi = true
   end
   
   opts.on("--pygments", "Use pygments to highlight code") do
     Jekyll.pygments = true
+  end
+  
+  opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
+    begin
+      require 'rdiscount'
+      Jekyll.markdown_proc = Proc.new { |x| RDiscount.new(x).to_html }
+      puts 'Using rdiscount for Markdown'
+    rescue LoadError
+      puts 'You must have the rdiscount gem installed first'
+    end
   end
 end
 
@@ -69,6 +84,8 @@ case ARGV.size
 end
 
 if options[:auto]
+  require 'directory_watcher'
+
   puts "Auto-regenerating enabled: #{source} -> #{destination}"
   
   dw = DirectoryWatcher.new(source)
@@ -83,7 +100,28 @@ if options[:auto]
   
   dw.start
   
-  loop { sleep 1000 }
+  unless options[:server]
+    loop { sleep 1000 }
+  end
 else
   Jekyll.process(source, destination)
+  puts "Successfully generated site in #{destination}"
+end
+
+if options[:server]
+  require 'webrick'
+  include WEBrick
+  
+  FileUtils.mkdir_p(destination)
+
+  s = HTTPServer.new(
+    :Port            => options[:server_port],
+    :DocumentRoot    => destination
+  )
+  t = Thread.new {
+    s.start
+  }
+  
+  trap("INT") { s.shutdown }
+  t.join()
 end

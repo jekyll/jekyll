@@ -1,3 +1,30 @@
+==
+  * Minor Enhancements
+    * Type importer [github.com/codeslinger]
+    * site.topics accessor [github.com/baz]
+    * Add array_to_sentence_string filter [github.com/mchung]
+
+== 0.3.0 / 2008-12-24
+  * Major Enhancements
+    * Added --server option to start a simple WEBrick server on destination directory [github.com/johnreilly and github.com/mchung]
+  * Minor Enhancements
+    * Added post categories based on directories containing _posts [github.com/mreid]
+    * Added post topics based on directories underneath _posts
+    * Added new date filter that shows the full month name [github.com/mreid]
+    * Merge Post's YAML front matter into its to_liquid payload [github.com/remi]
+    * Restrict includes to regular files underneath _includes
+  * Bug Fixes
+    * Change YAML delimiter matcher so as to not chew up 2nd level markdown headers [github.com/mreid]
+    * Fix bug that meant page data (such as the date) was not available in templates [github.com/mreid]
+    * Properly reject directories in _layouts
+
+== 0.2.1 / 2008-12-15
+  * Major Changes
+    * Use Maruku (pure Ruby) for Markdown by default [github.com/mreid]
+    * Allow use of RDiscount with --rdiscount flag
+  * Minor Enhancements
+    * Don't load directory_watcher unless it's needed [github.com/pjhyett]
+
 == 0.2.0 / 2008-12-14
   * Major Changes
     * related_posts is now found in site.related_posts

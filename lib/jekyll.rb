@@ -29,9 +29,9 @@ begin
 rescue LoadError
   puts "The maruku gem is required for markdown support!"
 end
-require 'directory_watcher'
 
 # internal requires
+require 'jekyll/core_ext'
 require 'jekyll/site'
 require 'jekyll/convertible'
 require 'jekyll/layout'
@@ -43,14 +43,15 @@ require 'jekyll/tags/include'
 require 'jekyll/albino'
 
 module Jekyll
-  VERSION = '0.2.0'
+  VERSION = '0.3.0'
   
   class << self
-    attr_accessor :source, :dest, :lsi, :pygments
+    attr_accessor :source, :dest, :lsi, :pygments, :markdown_proc
   end
   
   Jekyll.lsi = false
   Jekyll.pygments = false
+  Jekyll.markdown_proc = Proc.new { |x| Maruku.new(x).to_html }
   
   def self.process(source, dest)
     require 'classifier' if Jekyll.lsi
