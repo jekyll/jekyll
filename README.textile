@@ -409,6 +409,19 @@ This code also has only been tested with Typo version 4+. Previous versions
 of Typo may not convert correctly. Please check the results and verify the 
 posts before publishing.
 
+h3. TextPattern 4
+
+To migrate your TextPattern blog into Jekyll, you'll need read access to the MySQL
+database. The lib/jekyll/converters/textpattern.rb module provides a simple convert to create .textile files in a _posts directory based on 
+the entries contained therein.
+
+  $ ruby -r './lib/jekyll/converters/textpattern' -e 'Jekyll::TextPattern.process( \
+    "database_name", "username", "password", "hostname")'
+
+The hostname defaults to _localhost_, all other variables are needed
+You may need to adjust the code used to filter entries. Left alone,
+it will attempt to pull all entries that are live or sticky.
+
 h2. License
 
 (The MIT License)
