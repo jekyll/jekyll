@@ -17,7 +17,11 @@ module Jekyll
     end
     
     def render_pygments(context, code)
-      "<notextile>" + Albino.new(code, @lang).to_s + "</notextile>"
+      if Jekyll.content_type == :markdown
+        return "\n" + Albino.new(code, @lang).to_s + "\n"
+      else
+        "<notextile>" + Albino.new(code, @lang).to_s + "</notextile>"
+      end
     end
     
     def render_codehighlighter(context, code)
