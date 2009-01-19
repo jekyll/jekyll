@@ -46,12 +46,13 @@ module Jekyll
   VERSION = '0.3.0'
   
   class << self
-    attr_accessor :source, :dest, :lsi, :pygments, :markdown_proc
+    attr_accessor :source, :dest, :lsi, :pygments, :markdown_proc,:permalink_style
   end
   
   Jekyll.lsi = false
   Jekyll.pygments = false
   Jekyll.markdown_proc = Proc.new { |x| Maruku.new(x).to_html }
+  Jekyll.permalink_style = :date
   
   def self.process(source, dest)
     require 'classifier' if Jekyll.lsi

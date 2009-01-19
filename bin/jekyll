@@ -47,6 +47,11 @@ opts = OptionParser.new do |opts|
       puts 'You must have the rdiscount gem installed first'
     end
   end
+  
+  opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style| 
+    Jekyll.permalink_style = (style || 'date').to_sym
+  end
+
 end
 
 opts.parse!
