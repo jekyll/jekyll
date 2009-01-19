@@ -44,7 +44,7 @@ require 'jekyll/albino'
 
 module Jekyll
   class << self
-    attr_accessor :source, :dest, :lsi, :pygments, :markdown_proc, :content_type, :permalink_style
+    attr_accessor :source, :dest, :lsi, :pygments, :markdown_proc,:permalink_style
   end
   
   Jekyll.lsi = false
