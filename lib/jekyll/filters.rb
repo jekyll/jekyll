@@ -14,7 +14,7 @@ module Jekyll
     end
     
     def xml_escape(input)
-      input.gsub("<", "&lt;").gsub(">", "&gt;")
+      input.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
     end
     
     def number_of_words(input)
