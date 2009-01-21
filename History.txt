@@ -6,6 +6,7 @@
     * Add a converter for textpattern [github.com/PerfectlyNormal]
   * Bug Fixes
     * Fix permalink behavior [github.com/cavalle]
+    * Fixed an issue with pygments, markdown, and newlines [github.com/zpinter]
 
 == 0.3.0 / 2008-12-24
   * Major Enhancements
