@@ -6,6 +6,7 @@
     * Add a converter for textpattern [github.com/PerfectlyNormal]
     * Add a working Mephisto / MySQL converter [github.com/ivey]
     * Allowing .htaccess files to be copied over into the generated site [github.com/briandoll]
+    * Add option to not put file date in permalink URL [github.com/mreid]
   * Bug Fixes
     * Fix permalink behavior [github.com/cavalle]
     * Fixed an issue with pygments, markdown, and newlines [github.com/zpinter]
