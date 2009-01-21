@@ -46,7 +46,7 @@ module Jekyll
   VERSION = '0.3.0'
   
   class << self
-    attr_accessor :source, :dest, :lsi, :pygments, :markdown_proc
+    attr_accessor :source, :dest, :lsi, :pygments, :markdown_proc, :content_type
   end
   
   Jekyll.lsi = false
