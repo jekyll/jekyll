@@ -3,6 +3,7 @@
     * Type importer [github.com/codeslinger]
     * site.topics accessor [github.com/baz]
     * Add array_to_sentence_string filter [github.com/mchung]
+    * Add a converter for textpattern [github.com/PerfectlyNormal]
   * Bug Fixes
     * Fix permalink behavior [github.com/cavalle]
 
