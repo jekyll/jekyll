@@ -34,7 +34,7 @@ fields such as <code>title</code> and <code>date</code>.
 Jekyll gets the list of blog posts by parsing the files in any
 "_posts":http://github.com/mojombo/tpw/tree/master/_posts directory found in
 subdirectories below the root. 
-Each post's filename contains the publishing date and slug (what shows up in the
+Each post's filename contains (by default) the publishing date and slug (what shows up in the
 URL) that the final HTML file should have. Open up the file corresponding to a
 blog post:
 "2008-11-17-blogging-like-a-hacker.textile":http://github.com/mojombo/tpw/tree/master/_posts/2008-11-17-blogging-like-a-hacker.textile.
@@ -144,6 +144,17 @@ can launch a simple WEBrick server (works well in conjunction with --auto).
 Default port is 4000:
 
   $ jekyll --server [PORT]
+
+By default, the permalink for each post begins with its date in 'YYYY/MM/DD'
+format. If you do not wish to have the date appear in the URL of each post, 
+you can change the permalink style to 'none' so that only the 'slug' part of
+the filename is used. For example, with the permalink style set to 'none' the
+file '2009-01-01-happy-new-year.markdown' will have a permalink like
+'http://yoursite.com/happy-new-year.html'. The date of the post will still be
+read from the filename (and is required!) to be used elsewhere in Jekyll.
+Example usage:
+
+  $ jekyll --permalink none
 
 h2. Data
 
