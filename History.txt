@@ -4,6 +4,7 @@
     * site.topics accessor [github.com/baz]
     * Add array_to_sentence_string filter [github.com/mchung]
     * Add a converter for textpattern [github.com/PerfectlyNormal]
+    * Add a working Mephisto / MySQL converter [github.com/ivey]
   * Bug Fixes
     * Fix permalink behavior [github.com/cavalle]
     * Fixed an issue with pygments, markdown, and newlines [github.com/zpinter]
