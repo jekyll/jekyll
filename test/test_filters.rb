@@ -29,4 +29,9 @@ class TestFilters < Test::Unit::TestCase
     assert_equal "chunky, bacon, bits, and pieces", @filter.array_to_sentence_string(["chunky", "bacon", "bits", "pieces"])
   end
   
+  def test_xml_escape_with_ampersands
+    assert_equal "AT&amp;T", @filter.xml_escape("AT&T")
+    assert_equal "&lt;code&gt;command &amp;lt;filename&amp;gt;&lt;/code&gt;", @filter.xml_escape("<code>command &lt;filename&gt;</code>")
+  end
+  
 end
