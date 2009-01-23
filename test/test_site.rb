@@ -26,8 +26,8 @@ class TestSite < Test::Unit::TestCase
     clear_dest
     @s.process
     
-    assert_equal 5, @s.posts.length
-    assert_equal ['foo'], @s.categories.keys
+    assert_equal 7, @s.posts.length
+    assert_equal ["category", "foo", "z_category"].sort, @s.categories.keys.sort
     assert_equal 1, @s.categories['foo'].length
   end
 end
