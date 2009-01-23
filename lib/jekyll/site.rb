@@ -104,6 +104,8 @@ module Jekyll
       entries = entries.reject do |e|
         (e != '_posts') and ['.', '_'].include?(e[0..0]) unless ['.htaccess'].include?(e)
       end
+      directories = entries.select { |e| File.directory?(File.join(base, e)) }
+      files = entries.reject { |e| File.directory?(File.join(base, e)) }
 
       # we need to make sure to process _posts *first* otherwise they 
       # might not be available yet to other templates as {{ site.posts }}
@@ -111,23 +113,24 @@ module Jekyll
         entries.delete('_posts')
         read_posts(dir)
       end
-
-      entries.each do |f|
-        if File.directory?(File.join(base, f))
-          next if self.dest.sub(/\/$/, '') == File.join(base, f)
-          transform_pages(File.join(dir, f))
-        else
-          first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
-
-          if first3 == "---"
-            # file appears to have a YAML header so process it as a page
-            page = Page.new(self.source, dir, f)
-            page.render(self.layouts, site_payload)
-            page.write(self.dest)
+      [directories, files].each do |entries|
+        entries.each do |f|
+          if File.directory?(File.join(base, f))
+            next if self.dest.sub(/\/$/, '') == File.join(base, f)
+            transform_pages(File.join(dir, f))
           else
-            # otherwise copy the file without transforming it
-            FileUtils.mkdir_p(File.join(self.dest, dir))
-            FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
+            first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
+        
+            if first3 == "---"
+              # file appears to have a YAML header so process it as a page
+              page = Page.new(self.source, dir, f)
+              page.render(self.layouts, site_payload)
+              page.write(self.dest)
+            else
+              # otherwise copy the file without transforming it
+              FileUtils.mkdir_p(File.join(self.dest, dir))
+              FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
+            end
           end
         end
       end

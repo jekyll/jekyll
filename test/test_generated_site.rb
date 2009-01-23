@@ -11,6 +11,7 @@ class TestGeneratedSite < Test::Unit::TestCase
   
   def test_site_posts_in_index
     # confirm that {{ site.posts }} is working
+    puts @s.posts.size
     assert @index.include?("#{@s.posts.size} Posts")
   end
 
