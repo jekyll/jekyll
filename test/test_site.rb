@@ -22,9 +22,12 @@ class TestSite < Test::Unit::TestCase
     assert_equal 4, @s.posts.size
   end
   
-  def test_write_posts
+  def test_site_payload
     clear_dest
-    
     @s.process
+    
+    assert_equal 5, @s.posts.length
+    assert_equal ['foo'], @s.categories.keys
+    assert_equal 1, @s.categories['foo'].length
   end
 end

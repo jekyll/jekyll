@@ -2,7 +2,7 @@ module Jekyll
   
   class Site
     attr_accessor :source, :dest
-    attr_accessor :layouts, :posts
+    attr_accessor :layouts, :posts, :categories
     
     # Initialize the site
     #   +source+ is String path to the source directory containing
@@ -16,6 +16,7 @@ module Jekyll
       self.dest = dest
       self.layouts = {}
       self.posts = []
+      self.categories = Hash.new { |hash, key| hash[key] = Array.new }
     end
     
     # Do the actual work of processing the site and generating the
@@ -63,6 +64,7 @@ module Jekyll
         if Post.valid?(f)
           post = Post.new(self.source, dir, f)
           self.posts << post
+          post.categories.each { |c| self.categories[c] << post }
         end
       end
       
@@ -72,6 +74,7 @@ module Jekyll
       end
       
       self.posts.sort!
+      self.categories.values.map { |cats| cats.sort! { |a, b| b <=> a} }
     rescue Errno::ENOENT => e
       # ignore missing layout dir
     end
