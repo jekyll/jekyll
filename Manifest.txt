@@ -29,9 +29,11 @@ test/source/_posts/2008-10-18-foo-bar.textile
 test/source/_posts/2008-11-21-complex.textile
 test/source/_posts/2008-12-03-permalinked-post.textile
 test/source/_posts/2008-12-13-include.markdown
+test/source/category/_posts/2008-9-23-categories.textile
 test/source/css/screen.css
 test/source/foo/_posts/bar/2008-12-12-topical-post.textile
 test/source/index.html
+test/source/z_category/_posts/2008-9-23-categories.textile
 test/suite.rb
 test/test_filters.rb
 test/test_generated_site.rb
