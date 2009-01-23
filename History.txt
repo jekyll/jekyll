@@ -12,6 +12,7 @@
     * Fix permalink behavior [github.com/cavalle]
     * Fixed an issue with pygments, markdown, and newlines [github.com/zpinter]
     * Ampersands need to be escaped [github.com/pufuwozu, github.com/ap]
+    * Test and fix the site.categories hash [github.com/zzot]
 
 == 0.3.0 / 2008-12-24
   * Major Enhancements
