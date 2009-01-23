@@ -380,25 +380,6 @@ This would list all the posts in the category 'foo' by date and title.
 
 The posts within each category are sorted in reverse chronological order.
 
-h2. Contribute
-
-If you'd like to hack on Jekyll, grab the source from GitHub. To get
-all of the dependencies, install the gem first.
-
-  $ git clone git://github.com/mojombo/jekyll
-
-The best way to get your changes merged back into core is as follows:
-
-# Fork mojombo/jekyll on GitHub
-# Clone down your fork
-# Create a topic branch to contain your change
-# Hack away
-# If you are adding new functionality, document it in README.textile
-# Do not change the version number, I will do that on my end
-# If necessary, rebase your commits into logical chunks, without errors
-# Push the branch up to GitHub
-# Send me (mojombo) a pull request for your branch
-
 h2. Blog migrations
 
 h3. Movable Type
@@ -448,6 +429,25 @@ the entries contained therein.
 The hostname defaults to _localhost_, all other variables are needed
 You may need to adjust the code used to filter entries. Left alone,
 it will attempt to pull all entries that are live or sticky.
+
+h2. Contribute
+
+If you'd like to hack on Jekyll, start by forking my repo on GitHub:
+
+http://github.com/mojombo/jekyll
+
+To get all of the dependencies, install the gem first. The best way to get
+your changes merged back into core is as follows:
+
+# Clone down your fork
+# Create a topic branch to contain your change
+# Hack away
+# Add tests and make sure everything still passes by running `rake`
+# If you are adding new functionality, document it in README.textile
+# Do not change the version number, I will do that on my end
+# If necessary, rebase your commits into logical chunks, without errors
+# Push the branch up to GitHub
+# Send me (mojombo) a pull request for your branch
 
 h2. License
 
