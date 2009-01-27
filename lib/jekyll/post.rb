@@ -61,15 +61,19 @@ module Jekyll
     # The generated directory into which the post will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, set to the default date
-    # e.g. "/2008/11/05/"
+    # e.g. "/2008/11/05/" if the permalink style is :date, otherwise nothing
     #
     # Returns <String>
     def dir
       if permalink
-        permalink.to_s.split("/")[0..-2].join("/")
+        permalink.to_s.split("/")[0..-2].join("/") + '/'
       else
         prefix = self.categories.empty? ? '' : '/' + self.categories.join('/')
-        prefix + date.strftime("/%Y/%m/%d/")
+        if Jekyll.permalink_style == :date
+          prefix + date.strftime("/%Y/%m/%d/")
+        else
+          prefix + '/'
+        end
       end
     end
     
@@ -87,7 +91,7 @@ module Jekyll
     #
     # Returns <String>
     def url
-      self.dir + self.slug + ".html"
+      permalink || self.dir + self.slug + ".html"
     end
     
     # The UID for this post (useful in feeds)

@@ -24,14 +24,24 @@ module Jekyll
     #
     # Returns nothing
     def transform
-      case self.ext[1..-1]
-      when /textile/i
+      case Jekyll.content_type
+      when :textile
         self.ext = ".html"
         self.content = RedCloth.new(self.content).to_html
-      when /markdown/i, /mkdn/i, /md/i
+      when :markdown
         self.ext = ".html"
         self.content = Jekyll.markdown_proc.call(self.content)
       end
+    end
+    
+    def determine_content_type
+      case self.ext[1..-1]
+      when /textile/i
+        return :textile
+      when /markdown/i, /mkdn/i, /md/i
+        return :markdown
+      end      
+      return :unknown
     end
     
     # Add any necessary layouts to this convertible document
@@ -41,6 +51,7 @@ module Jekyll
     # Returns nothing
     def do_layout(payload, layouts)
       # render and transform content (this becomes the final content of the object)
+      Jekyll.content_type = self.determine_content_type
       self.content = Liquid::Template.parse(self.content).render(payload, [Jekyll::Filters])
       self.transform
       

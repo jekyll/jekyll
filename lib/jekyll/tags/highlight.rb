@@ -2,10 +2,22 @@ module Jekyll
   
   class HighlightBlock < Liquid::Block
     include Liquid::StandardFilters
+    # we need a language, but the linenos argument is optional.
+    SYNTAX = /(\w+)\s?(:?linenos)?\s?/
     
-    def initialize(tag_name, lang, tokens)
+    def initialize(tag_name, markup, tokens)
       super
-      @lang = lang.strip
+      if markup =~ SYNTAX
+        @lang = $1
+        if defined? $2
+          # additional options to pass to Albino.
+          @options = { 'O' => 'linenos=inline' }
+        else
+          @options = {}
+        end
+      else
+        raise SyntaxError.new("Syntax Error in 'highlight' - Valid syntax: highlight <lang> [linenos]")
+      end
     end
   
     def render(context)
@@ -17,7 +29,11 @@ module Jekyll
     end
     
     def render_pygments(context, code)
-      "<notextile>" + Albino.new(code, @lang).to_s + "</notextile>"
+      if Jekyll.content_type == :markdown
+        return "\n" + Albino.new(code, @lang).to_s(@options) + "\n"
+      else
+        "<notextile>" + Albino.new(code, @lang).to_s(@options) + "</notextile>"
+      end
     end
     
     def render_codehighlighter(context, code)

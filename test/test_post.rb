@@ -43,7 +43,15 @@ class TestPost < Test::Unit::TestCase
     p.process("2008-12-03-permalinked-post.textile")
     p.read_yaml(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-12-03-permalinked-post.textile")
 
-    assert_equal "my_category", p.dir
+    assert_equal "my_category/", p.dir
+  end
+  
+  def test_url_respects_permalink
+    p = Post.allocate
+    p.process("2008-12-03-permalinked-post.textile")
+    p.read_yaml(File.join(File.dirname(__FILE__), *%w[source _posts]), "2008-12-03-permalinked-post.textile")
+
+    assert_equal "my_category/permalinked-post", p.url
   end
 
   def test_read_yaml
@@ -87,6 +95,12 @@ class TestPost < Test::Unit::TestCase
     
     assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", p.output
   end
+  
+  def test_categories_and_topics
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
+    assert_equal ['foo'], p.categories
+    assert_equal ['bar'], p.topics
+  end    
   
   def test_include
     Jekyll.source = File.join(File.dirname(__FILE__), *%w[source])
