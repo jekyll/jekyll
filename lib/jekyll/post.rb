@@ -38,6 +38,14 @@ module Jekyll
       
       self.process(name)
       self.read_yaml(@base, name)
+      
+      if self.categories.empty?
+        if self.data.has_key?('category')
+          self.categories << self.data['category']
+        elsif self.data.has_key?('categories')
+          self.categories = self.data['categories'].split
+        end
+      end
     end
     
     # Spaceship is based on Post#date
