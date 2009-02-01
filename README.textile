@@ -7,6 +7,8 @@ suitable for serving with Apache or your favorite web server. Visit
 "http://tom.preston-werner.com":http://tom.preston-werner.com to see an
 example of a Jekyll generated blog.
 
+Some more changes...
+
 To understand how this all works, open up my
 "TPW":http://github.com/mojombo/tpw repo in a new browser window. I'll be
 referencing the code there.
