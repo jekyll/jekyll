@@ -1,4 +1,4 @@
-h1. Jekyll
+h1. Jekyll LOL
 
 Jekyll is a simple, blog aware, static site generator. It takes a template
 directory (representing the raw form of a website), runs it through Textile or
