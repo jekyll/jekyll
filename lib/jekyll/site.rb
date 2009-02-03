@@ -63,8 +63,11 @@ module Jekyll
       entries.each do |f|
         if Post.valid?(f)
           post = Post.new(self.source, dir, f)
-          self.posts << post
-          post.categories.each { |c| self.categories[c] << post }
+
+          if post.published
+            self.posts << post
+            post.categories.each { |c| self.categories[c] << post }
+          end
         end
       end
       
