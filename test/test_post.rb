@@ -132,4 +132,13 @@ class TestPost < Test::Unit::TestCase
     
     assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", p.output
   end
+  
+  def test_dir_with_short_date_permalink_type
+    Jekyll.permalink_style = :shortdate
+    p = Post.allocate
+    p.process("2008-02-03-permalinked-post.textile")
+    p.categories = []
+    assert_equal "/2008/2/3/", p.dir
+    Jekyll.permalink_style = :date
+  end
 end
