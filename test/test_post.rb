@@ -72,12 +72,12 @@ class TestPost < Test::Unit::TestCase
   end
 
   def test_published
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source publish_test]), '',  "2008-02-02-publish.textile")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-02-02-published.textile")
 		assert_equal true, p.published
   end
 
   def test_not_published
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source publish_test]), '',  "2008-02-02-not-published.textile")
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-02-02-not-published.textile")
 		assert_equal false, p.published
   end
 
