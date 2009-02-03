@@ -138,6 +138,11 @@ compilation), you must install it (gem install rdiscount) and then you can
 have it used instead:
 
   $ jekyll --rdiscount
+
+As another alternative, just because to make it a hat trick, you can also
+use BlueCloth (gem install bluecloth).
+
+  $ jekyll --bluecloth
   
 When previewing complex sites locally, simply opening the site in a web 
 browser (using file://) can cause problems with links that are relative to
