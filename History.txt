@@ -1,4 +1,4 @@
-==
+== 0.4.0 / 2009-02-03
   * Major Enhancements
     * Switch to Jeweler for packaging tasks
   * Minor Enhancements
