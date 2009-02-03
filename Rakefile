@@ -1,17 +1,62 @@
-require 'rubygems'
-require 'hoe'
-require 'lib/jekyll'
+require 'rake'
+require 'rake/testtask'
+require 'rake/rdoctask'
 
-Hoe.new('jekyll', Jekyll::VERSION) do |p|
-  p.developer('Tom Preston-Werner', 'tom@mojombo.com')
-  p.summary = "Jekyll is a simple, blog aware, static site generator."
-  p.extra_deps = ['RedCloth', 'liquid', 'classifier', 'maruku', 'directory_watcher', 'open4']
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |s|
+    s.name = "jekyll"
+    s.summary = %Q{Jekyll is a simple, blog aware, static site generator.}
+    s.email = "tom@mojombo.com"
+    s.homepage = "http://github.com/mojombo/jekyll"
+    s.description = "Jekyll is a simple, blog aware, static site generator."
+    s.authors = ["Tom Preston-Werner"]
+    s.rubyforge_project = "jekyll"
+    s.add_dependency('RedCloth', '>= 4.0.4')
+    s.add_dependency('liquid', '>= 1.9.0')
+    s.add_dependency('classifier', '>= 1.3.1')
+    s.add_dependency('maruku', '>= 0.5.9')
+    s.add_dependency('directory_watcher', '>= 1.1.1')
+    s.add_dependency('open4', '>= 0.9.6')
+  end
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
+
+Rake::TestTask.new do |t|
+  t.libs << 'lib'
+  t.pattern = 'test/**/test_*.rb'
+  t.verbose = false
+end
+
+Rake::RDocTask.new do |rdoc|
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title    = 'jekyll'
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+begin
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |t|
+    t.libs << 'test'
+    t.test_files = FileList['test/**/test_*.rb']
+    t.verbose = true
+  end
+rescue LoadError
+end
+
+task :default => :test
+
+# console
 
 desc "Open an irb session preloaded with this library"
 task :console do
   sh "irb -rubygems -r ./lib/jekyll.rb"
 end
+
+# converters
 
 namespace :convert do
   desc "Migrate from mephisto in the current directory"

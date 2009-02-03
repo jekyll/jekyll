@@ -1,4 +1,6 @@
 ==
+  * Major Enhancements
+    * Switch to Jeweler for packaging tasks
   * Minor Enhancements
     * Type importer [github.com/codeslinger]
     * site.topics accessor [github.com/baz]
