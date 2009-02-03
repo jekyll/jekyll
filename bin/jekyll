@@ -47,6 +47,16 @@ opts = OptionParser.new do |opts|
       puts 'You must have the rdiscount gem installed first'
     end
   end
+
+  opts.on("--bluecloth", "Use bluecloth gem for Markdown") do
+    begin
+      require 'bluecloth'
+      Jekyll.markdown_proc = Proc.new { |x| BlueCloth.new(x).to_html }
+      puts 'Using BlueCloth for Markdown'
+    rescue LoadError
+      puts 'You must have the BlueCloth gem installed first'
+    end
+  end
   
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style| 
     Jekyll.permalink_style = (style || 'date').to_sym
