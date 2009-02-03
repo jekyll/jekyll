@@ -18,7 +18,7 @@ module Jekyll
       name =~ MATCHER
     end
     
-    attr_accessor :date, :slug, :ext, :categories, :topics
+    attr_accessor :date, :slug, :ext, :categories, :topics, :published
     attr_accessor :data, :content, :output
     
     # Initialize this Post instance.
@@ -38,6 +38,12 @@ module Jekyll
       
       self.process(name)
       self.read_yaml(@base, name)
+
+			if self.data.has_key?('published') && self.data['published'] == false
+				self.published = false
+			else
+				self.published = true
+			end
       
       if self.categories.empty?
         if self.data.has_key?('category')

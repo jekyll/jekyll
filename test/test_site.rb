@@ -27,7 +27,7 @@ class TestSite < Test::Unit::TestCase
     @s.process
     
     posts = Dir[File.join(@source, "**", "_posts/*")]
-    categories = %w(bar baz category foo z_category).sort
+    categories = %w(bar baz category foo z_category publish_test).sort
 
     assert_equal posts.size, @s.posts.size
     assert_equal categories, @s.categories.keys.sort
