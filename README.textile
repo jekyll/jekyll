@@ -257,6 +257,16 @@ h3. Predefined Post Variables
     /year/month/day/title.html then you can set this variable and it will
     be used as the final URL.
 
+	category/categories
+		Don't want to use the directory structure for categories, but you still
+		want to publish with categories? No problem, just add a category or 
+		categories option in and it will get processed as if it was in a folder
+		for a category.
+
+	published
+		Set this to false if you don't want the post to show up in the _site
+		directory when jekyll runs.
+
 h3. Custom Variables
 
 Any variables in the front matter that are not predefined are mixed into the
