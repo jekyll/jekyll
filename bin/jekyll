@@ -51,7 +51,11 @@ opts = OptionParser.new do |opts|
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style| 
     Jekyll.permalink_style = (style || 'date').to_sym
   end
-
+  
+  opts.on("--version", "Display current version") do
+    puts "Jekyll " + Jekyll.version
+    exit 0
+  end
 end
 
 opts.parse!
