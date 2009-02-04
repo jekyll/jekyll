@@ -87,12 +87,7 @@ module Jekyll
         when :date
           prefix + date.strftime("/%Y/%m/%d/")
         when :shortdate
-          year = date.strftime("%Y")
-          month = date.strftime("%m")
-          day = date.strftime("%d")
-          day = day[1..1] if day.index("0") == 0
-          month = month[1..1] if month.index("0") == 0
-          prefix + "/#{year}/#{month}/#{day}/"
+          prefix + "/#{date.year}/#{date.month}/#{date.day}/"
         else
           prefix + '/'
         end
