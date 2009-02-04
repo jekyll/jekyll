@@ -9,47 +9,62 @@ Basic Command Line Usage:
   jekyll                                                   # . -> ./_site
   jekyll <path to write generated site>                    # . -> <path>
   jekyll <path to source> <path to write generated site>   # <path> -> <path>
+  
+  Configuration is read from '<source>/_config.yaml' but can be overriden
+  using the following options:
     
-  Options:
 HELP
 
 require 'optparse'
 require 'jekyll'
 
-options = {}
+# Default options. Overriden by values in _config.yaml or command-line opts.
+# (Strings rather symbols used for compatability with YAML)
+DEFAULTS = {
+  'auto'         => false,
+  'server'       => false,
+  'server_port'  => 4000,
+  'lsi'          => false,
+  'pygments'     => false,
+  'markdown'     => 'maruku',
+  'permalink'    => 'date',
 
+  'maruku'       => {
+    'use_tex'    => false,
+    'use_divs'   => false,
+    'png_engine' => 'blahtex',
+    'png_dir'    => 'images/latex',
+    'png_url'    => '/images/latex'
+  }
+}
+
+options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
   opts.on("--auto", "Auto-regenerate") do
-    options[:auto] = true
+    options['auto'] = true
   end
-  
+    
   opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
-    options[:server] = true
-    options[:server_port] = port || 4000
+    options['server'] = true
+    options['server_port'] = port unless port.nil?
   end
   
   opts.on("--lsi", "Use LSI for better related posts") do
-    Jekyll.lsi = true
+    options['lsi'] = true
   end
   
   opts.on("--pygments", "Use pygments to highlight code") do
-    Jekyll.pygments = true
+    options['pygments'] = true
   end
   
   opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
-    begin
-      require 'rdiscount'
-      Jekyll.markdown_proc = Proc.new { |x| RDiscount.new(x).to_html }
-      puts 'Using rdiscount for Markdown'
-    rescue LoadError
-      puts 'You must have the rdiscount gem installed first'
-    end
+    options['markdown'] = 'rdiscount'
   end
   
-  opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style| 
-    Jekyll.permalink_style = (style || 'date').to_sym
+  opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
+    options['permalink'] = style unless style.nil?
   end
   
   opts.on("--version", "Display current version") do
@@ -58,12 +73,44 @@ opts = OptionParser.new do |opts|
   end
 end
 
+# Read command line options into `options` hash
 opts.parse!
 
-def clean(dest)
-  FileUtils.rm_rf(dest)
-  FileUtils.mkdir_p(dest)
+# Get source and destintation from command line
+source      = nil
+destination = nil
+case ARGV.size
+  when 0
+    source       = '.'
+    destination  = File.join('.', '_site')
+  when 1
+    source       = '.'
+    options['destination'] = destination  = ARGV[0]
+  when 2
+    options['source']      = source       = ARGV[0]
+    options['destination'] = destination  = ARGV[1]
+  else
+    puts "Invalid options. Run `jekyll --help` for assistance."
+    exit(1)
 end
+
+# Get configuration from <source>/_config.yaml
+config = {}
+config_file = File.join(source, '_config.yaml')
+begin
+  config = YAML.load_file( config_file )
+  puts "Configuration from #{config_file}"
+rescue => err
+  puts "WARNING: Could not read configuration. Using defaults (and options)."
+  puts "\t" + err
+end
+
+# Merge DEFAULTS < config < options
+options = DEFAULTS.deep_merge(config).deep_merge(options)
+
+# Override source and destination directories if set by option or config
+source      = options['source'] || source
+destination = options['destination'] || destination
 
 def globs(source)
   Dir.chdir(source) do
@@ -74,25 +121,55 @@ def globs(source)
   end
 end
 
-source = nil
-destination = nil
+# Interpret the simple options and configure Jekyll appropriately
+Jekyll.lsi             = options['lsi']
+Jekyll.pygments        = options['pygments']
+Jekyll.permalink_style = options['permalink'].to_sym
 
-case ARGV.size
-  when 0
-    source = '.'
-    destination = File.join('.', '_site')
-  when 1
-    source = '.'
-    destination = ARGV[0]
-  when 2
-    source = ARGV[0]
-    destination = ARGV[1]
-  else
-    puts "Invalid options. Run `jekyll --help` for assistance."
-    exit(1)
+# Set the Markdown interpreter (and Maruku options, if necessary)
+case options['markdown']
+
+  when 'rdiscount'
+    begin
+      require 'rdiscount'
+      Jekyll.markdown_proc = Proc.new { |x| RDiscount.new(x).to_html }
+      puts 'Using rdiscount for Markdown'
+    rescue LoadError
+      puts 'You must have the rdiscount gem installed first'
+    end
+    
+  when 'maruku'
+    begin
+      require 'maruku'
+      Jekyll.markdown_proc = Proc.new { |x| Maruku.new(x).to_html }
+      
+      if options['maruku']['use_divs']
+        require 'maruku/ext/div' 
+        puts 'Maruku: Using extended syntax for div elements.'
+      end
+
+      if options['maruku']['use_tex']
+        require 'maruku/ext/math' 
+        puts "Maruku: Using LaTeX extension. Images in `#{options['maruku']['png_dir']}`."
+
+        # Switch off MathML output
+        MaRuKu::Globals[:html_math_output_mathml] = false
+        MaRuKu::Globals[:html_math_engine] = 'none'
+
+        # Turn on math to PNG support with blahtex
+        # Resulting PNGs stored in `images/latex`
+        MaRuKu::Globals[:html_math_output_png] = true
+        MaRuKu::Globals[:html_png_engine] =  options['maruku']['png_engine']
+        MaRuKu::Globals[:html_png_dir] = options['maruku']['png_dir']
+        MaRuKu::Globals[:html_png_url] = options['maruku']['png_url']
+      end
+    rescue LoadError
+        puts "The maruku gem is required for markdown support!"
+    end
 end
 
-if options[:auto]
+# Run the directory watcher for auto-generation, if required
+if options['auto']
   require 'directory_watcher'
 
   puts "Auto-regenerating enabled: #{source} -> #{destination}"
@@ -109,22 +186,23 @@ if options[:auto]
   
   dw.start
   
-  unless options[:server]
+  unless options['server']
     loop { sleep 1000 }
   end
 else
   Jekyll.process(source, destination)
-  puts "Successfully generated site in #{destination}"
+  puts "Successfully generated site: #{source} -> #{destination}"
 end
 
-if options[:server]
+# Run the server on the specified port, if required
+if options['server']
   require 'webrick'
   include WEBrick
   
   FileUtils.mkdir_p(destination)
 
   s = HTTPServer.new(
-    :Port            => options[:server_port],
+    :Port            => options['server_port'],
     :DocumentRoot    => destination
   )
   t = Thread.new {

@@ -174,6 +174,43 @@ leaf directory resulting in URLs like 2008/11/17/blogging-like-a-hacker/.
 
   $ jekyll --permalink [date|none|pretty]
 
+h2. Configuration File
+
+All of the options listed above can be specified on a site-by-site basis in
+a '_config.yaml' file at the root of the site's source. As the filename
+suggests, the configuration is given in "YAML":http://www.yaml.org/. As
+well as all of the options discussed in the last section, there are a few
+additional options:
+
+  destination: [PATH]           # Specify where the site should be rendered
+  markdown: [maruku|rdiscount]  # Which markdown renderer to use?
+
+  maruku:               # This is a YAML hash for Maruku settings
+    use_divs: [BOOLEAN] # Use the div element Maruku extension
+    use_tex:  [BOOLEAN] # Use the LaTeX extension to Maruku
+    png_dir:  [PATH]    # Where should the math PNGs be stored?
+    png_url:  [URL]     # A relative URL for the PNGs
+
+The default configuration is shown below as in YAML format: 
+
+  destination: ./_site
+  auto:        false
+  lsi:         false
+  server_port: 4000
+  pygments:    false
+  markdown:    maruku
+  permalink:   date
+
+  maruku:
+    use_tex:    false
+    use_divs:   false
+    png_dir:    images/latex
+    png_url:    /images/latex
+
+Parameters set in a configuration file override the default values. Parameters
+set using command line options override both the default values and those set
+in a configuration file.
+
 h2. Data
 
 Jekyll traverses your site looking for files to process. Any files with YAML
