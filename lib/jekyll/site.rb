@@ -70,13 +70,16 @@ module Jekyll
           end
         end
       end
+
+      self.posts.sort!
       
       # second pass renders each post now that full site payload is available
-      self.posts.each do |post|
+      self.posts.each_with_index do |post, idx|
+        post.previous = posts[idx - 1] unless idx - 1 < 0
+        post.next = posts[idx + 1] unless idx + 1 >= posts.size
         post.render(self.layouts, site_payload)
       end
       
-      self.posts.sort!
       self.categories.values.map { |cats| cats.sort! { |a, b| b <=> a} }
     rescue Errno::ENOENT => e
       # ignore missing layout dir

@@ -20,6 +20,7 @@ module Jekyll
     
     attr_accessor :date, :slug, :ext, :categories, :topics, :published
     attr_accessor :data, :content, :output
+    attr_accessor :previous, :next
     
     # Initialize this Post instance.
     #   +base+ is the String path to the dir containing the post file
@@ -151,7 +152,9 @@ module Jekyll
       payload =
       {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => self.to_liquid
+        "page" => self.to_liquid,
+        "previous" => self.previous,
+        "next" => self.next
       }
       payload = payload.deep_merge(site_payload)
       
