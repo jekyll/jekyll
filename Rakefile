@@ -12,12 +12,14 @@ begin
     s.description = "Jekyll is a simple, blog aware, static site generator."
     s.authors = ["Tom Preston-Werner"]
     s.rubyforge_project = "jekyll"
+    s.files = FileList["[A-Z]*", "{bin,lib,test}/**/*"]
     s.add_dependency('RedCloth', '>= 4.0.4')
     s.add_dependency('liquid', '>= 1.9.0')
     s.add_dependency('classifier', '>= 1.3.1')
     s.add_dependency('maruku', '>= 0.5.9')
     s.add_dependency('directory_watcher', '>= 1.1.1')
     s.add_dependency('open4', '>= 0.9.6')
+    s.executables = "jekyll"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
