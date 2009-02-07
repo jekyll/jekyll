@@ -60,10 +60,13 @@ class Albino
   end
 
   def execute(command)
-    pid, stdin, stdout, stderr = Open4.popen4(command)
-    stdin.puts @target
-    stdin.close
-    stdout.read.strip
+    output = ''
+    Open4.popen4(command) do |pid, stdin, stdout, stderr|
+      stdin.puts @target
+      stdin.close
+      output = stdout.read.strip
+    end
+    output
   end
 
   def colorize(options = {})
