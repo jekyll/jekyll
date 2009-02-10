@@ -255,6 +255,15 @@ h3. Predefined Post Variables
     /year/month/day/title.html then you can set this variable and it will
     be used as the final URL.
 
+  published
+		Set to false if you don't want a post to show up when the site is 
+		generated.
+
+	category/categories
+		Instead of placing posts inside of folders, you can specify one or more
+		categories that the post belongs to. When the site is generated the post
+		will act as though it had been set with these categories normally.
+
 h3. Custom Variables
 
 Any variables in the front matter that are not predefined are mixed into the
