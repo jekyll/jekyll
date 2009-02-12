@@ -70,6 +70,28 @@ class TestPost < Test::Unit::TestCase
     
     assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", p.content
   end
+
+  def test_published
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-02-02-published.textile")
+		assert_equal true, p.published
+  end
+
+  def test_not_published
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-02-02-not-published.textile")
+		assert_equal false, p.published
+  end
+
+  def test_yaml_category
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-category.textile")
+    assert p.categories.include?('foo')
+  end
+
+  def test_yaml_categories
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-categories.textile")
+    assert p.categories.include?('foo')
+    assert p.categories.include?('bar')
+    assert p.categories.include?('baz')
+  end
   
   def test_render
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-10-18-foo-bar.textile")
