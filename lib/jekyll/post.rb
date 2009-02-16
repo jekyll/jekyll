@@ -50,7 +50,7 @@ module Jekyll
         if self.data.has_key?('category')
           self.categories << self.data['category']
         elsif self.data.has_key?('categories')
-          self.categories = self.data['categories'].split
+          self.categories = (self.data['categories'] || "").split
         end
       end
     end

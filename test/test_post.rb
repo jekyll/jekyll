@@ -93,6 +93,11 @@ class TestPost < Test::Unit::TestCase
     assert p.categories.include?('baz')
   end
   
+  def test_empty_yaml_categories
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-no-categories.textile")
+    assert p.categories.empty?
+  end
+  
   def test_render
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-10-18-foo-bar.textile")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
