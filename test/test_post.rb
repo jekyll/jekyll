@@ -84,6 +84,7 @@ class TestPost < Test::Unit::TestCase
   def test_yaml_category
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-category.textile")
     assert p.categories.include?('foo')
+    assert p.data['categories'].include?('foo')
   end
 
   def test_yaml_categories
@@ -91,11 +92,13 @@ class TestPost < Test::Unit::TestCase
     assert p.categories.include?('foo')
     assert p.categories.include?('bar')
     assert p.categories.include?('baz')
+    assert p.data['categories'].include?('foo')
   end
   
   def test_empty_yaml_categories
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-no-categories.textile")
     assert p.categories.empty?
+    assert p.data['categories'].empty?
   end
   
   def test_render

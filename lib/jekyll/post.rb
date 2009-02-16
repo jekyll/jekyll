@@ -46,7 +46,7 @@ module Jekyll
 				self.published = true
 			end
       
-      if self.categories.empty?
+      self.data['categories'] = if self.categories.empty?
         if self.data.has_key?('category')
           self.categories << self.data['category']
         elsif self.data.has_key?('categories')
