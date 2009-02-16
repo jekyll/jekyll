@@ -45,6 +45,14 @@ module Jekyll
 			else
 				self.published = true
 			end
+
+      self.data['topics'] = if self.topics.empty?
+        if self.data.has_key?('topic')
+          self.topics << self.data['topic']
+        elsif self.data.has_key?('topics')
+          self.topics = (self.data['topics'] || "").split
+        end
+      end
       
       self.data['categories'] = if self.categories.empty?
         if self.data.has_key?('category')

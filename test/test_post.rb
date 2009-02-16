@@ -100,6 +100,25 @@ class TestPost < Test::Unit::TestCase
     assert p.categories.empty?
     assert p.data['categories'].empty?
   end
+
+  def test_yaml_topic
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-topic.textile")
+    assert p.topics.include?('foo')
+    assert p.data['topics'].include?('foo')
+  end
+
+  def test_yaml_topics
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-topics.textile")
+    assert p.topics.include?('foo')
+    assert p.topics.include?('bar')
+    assert p.data['topics'].include?('foo')
+  end
+  
+  def test_empty_yaml_topics
+    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-no-topics.textile")
+    assert p.topics.empty?
+    assert p.data['topics'].empty?
+  end
   
   def test_render
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-10-18-foo-bar.textile")
