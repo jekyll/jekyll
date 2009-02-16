@@ -1,3 +1,9 @@
+==
+  * Minor Enhancements
+    * Changed date format on wordpress converter (zeropadding) [github.com/dysinger]
+  * Bug Fixes
+    * Add jekyll binary as executable to gemspec [github.com/dysinger]
+
 == 0.4.0 / 2009-02-03
   * Major Enhancements
     * Switch to Jeweler for packaging tasks

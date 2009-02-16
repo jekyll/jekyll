@@ -10,8 +10,8 @@ require 'fileutils'
 
 module Jekyll
   module WordPress
-    
-    # Reads a MySQL database via Sequel and creates a post file for each 
+
+    # Reads a MySQL database via Sequel and creates a post file for each
     # post in wp_posts that has post_status = 'publish'.
     # This restriction is made because 'draft' posts are not guaranteed to
     # have valid dates.
@@ -19,20 +19,21 @@ module Jekyll
 
     def self.process(dbname, user, pass, host = 'localhost')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host)
-      
+
       FileUtils.mkdir_p "_posts"
-            
+
       db[QUERY].each do |post|
         # Get required fields and construct Jekyll compatible name
         title = post[:post_title]
         slug = post[:post_name]
         date = post[:post_date]
         content = post[:post_content]
-        
-        name = [date.year, date.month, date.day, slug].join('-') + ".markdown"
+
+        name = "%02d-%02d-%02d-%s.markdown" % [date.year, date.month, date.day,
+                                               slug]
 
         # Get the relevant fields as a hash, delete empty fields and convert
-        # to YAML for the header        
+        # to YAML for the header
         data = {
            'layout' => 'post',
            'title' => title.to_s,
