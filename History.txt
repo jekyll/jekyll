@@ -2,6 +2,7 @@
   * Minor Enhancements
     * Ability to set post categories via YAML [github.com/qrush]
     * Ability to set prevent a post from publishing via YAML [github.com/qrush]
+    * Add textilize filter [github.com/willcodeforfoo]
 
 == 0.4.1
   * Minor Enhancements
