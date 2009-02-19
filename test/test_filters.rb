@@ -10,6 +10,10 @@ class TestFilters < Test::Unit::TestCase
     @filter = JekyllFilter.new
   end
 
+  def test_textilize_with_simple_string
+    assert_equal "<p>something <strong>really</strong> simple</p>", @filter.textilize("something *really* simple")
+  end
+
   def test_array_to_sentence_string_with_no_args
     assert_equal "", @filter.array_to_sentence_string([])
   end

@@ -315,6 +315,12 @@ Convert an array into a sentence.
 becomes
 
   foo, bar, and baz
+  
+h3. Textilize
+
+Convert a Textile-formatted string into HTML, formatted via RedCloth
+
+  {{ page.excerpt | textilize }}
 
 h3. Include (Tag)
 

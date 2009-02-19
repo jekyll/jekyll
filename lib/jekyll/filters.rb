@@ -1,6 +1,10 @@
 module Jekyll
   
   module Filters
+    def textilize(input)
+      RedCloth.new(input).to_html
+    end
+    
     def date_to_string(date)
       date.strftime("%d %b %Y")
     end
