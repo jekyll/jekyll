@@ -93,7 +93,7 @@ module Jekyll
     
     # Copy all regular files from <source> to <dest>/ ignoring
     # any files/directories that are hidden or backup files (start
-    # with "." or end with "~") or contain site content (start with "_")
+    # with "." or "#" or end with "~") or contain site content (start with "_")
     # unless they are "_posts" directories or web server files such as
     # '.htaccess'
     #   The +dir+ String is a relative path used to call this method
@@ -105,7 +105,7 @@ module Jekyll
       entries = Dir.entries(base)
       entries = entries.reject { |e| e[-1..-1] == '~' }
       entries = entries.reject do |e|
-        (e != '_posts') and ['.', '_'].include?(e[0..0]) unless ['.htaccess'].include?(e)
+        (e != '_posts') and ['.', '_', '#'].include?(e[0..0]) unless ['.htaccess'].include?(e)
       end
       directories = entries.select { |e| File.directory?(File.join(base, e)) }
       files = entries.reject { |e| File.directory?(File.join(base, e)) }
