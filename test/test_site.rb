@@ -2,8 +2,11 @@ require File.dirname(__FILE__) + '/helper'
 
 class TestSite < Test::Unit::TestCase
   def setup
-    @source = File.join(File.dirname(__FILE__), *%w[source])
-    @s = Site.new(@source, dest_dir)
+    config = {
+      'source' => File.join(File.dirname(__FILE__), *%w[source]), 
+      'destination' => dest_dir
+    }
+    @s = Site.new(config)
   end
   
   def test_site_init

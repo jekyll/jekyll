@@ -27,10 +27,10 @@ module Jekyll
       case Jekyll.content_type
       when :textile
         self.ext = ".html"
-        self.content = RedCloth.new(self.content).to_html
+        self.content = Jekyll.textile(self.content)
       when :markdown
         self.ext = ".html"
-        self.content = Jekyll.markdown_proc.call(self.content)
+        self.content = Jekyll.markdown(self.content)
       end
     end
     

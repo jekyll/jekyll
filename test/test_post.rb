@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/helper'
 
 class TestPost < Test::Unit::TestCase
   def setup
-    
+    Jekyll.configure(Jekyll::DEFAULTS)
   end
   
   def test_valid
