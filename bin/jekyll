@@ -18,32 +18,17 @@ HELP
 require 'optparse'
 require 'jekyll'
 
-# Default options. Overriden by values in _config.yaml or command-line opts.
-# (Strings rather symbols used for compatability with YAML)
-DEFAULTS = {
-  'auto'         => false,
-  'server'       => false,
-  'server_port'  => 4000,
-  'lsi'          => false,
-  'pygments'     => false,
-  'markdown'     => 'maruku',
-  'permalink'    => 'date',
-
-  'maruku'       => {
-    'use_tex'    => false,
-    'use_divs'   => false,
-    'png_engine' => 'blahtex',
-    'png_dir'    => 'images/latex',
-    'png_url'    => '/images/latex'
-  }
-}
-
+exec = {}
 options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
   opts.on("--auto", "Auto-regenerate") do
     options['auto'] = true
+  end
+
+  opts.on("--no-auto", "No auto-regenerate") do
+    options['auto'] = false
   end
     
   opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
@@ -72,19 +57,18 @@ end
 # Read command line options into `options` hash
 opts.parse!
 
+# Temporarily set source and destination options to read in config file
+options['source']       = Jekyll::DEFAULTS['source']
+options['destination']  = Jekyll::DEFAULTS['destination']
+
 # Get source and destintation from command line
-source      = nil
-destination = nil
 case ARGV.size
   when 0
-    source       = '.'
-    destination  = File.join('.', '_site')
   when 1
-    source       = '.'
-    options['destination'] = destination  = ARGV[0]
+    options['destination'] = ARGV[0]
   when 2
-    options['source']      = source       = ARGV[0]
-    options['destination'] = destination  = ARGV[1]
+    options['source']      = ARGV[0]
+    options['destination'] = ARGV[1]
   else
     puts "Invalid options. Run `jekyll --help` for assistance."
     exit(1)
@@ -92,7 +76,7 @@ end
 
 # Get configuration from <source>/_config.yaml
 config = {}
-config_file = File.join(source, '_config.yaml')
+config_file = File.join(options['source'], '_config.yaml')
 begin
   config = YAML.load_file( config_file )
   puts "Configuration from #{config_file}"
@@ -101,13 +85,14 @@ rescue => err
   puts "\t" + err
 end
 
-# Merge DEFAULTS < config < options
-options = DEFAULTS.deep_merge(config).deep_merge(options)
+# Merge DEFAULTS < config file < command line options
+options = Jekyll::DEFAULTS.deep_merge(config).deep_merge(options)
 
-# Override source and destination directories if set by option or config
-source      = options['source'] || source
-destination = options['destination'] || destination
+# Get source and destination directories (possibly set by config file)
+source      = options['source']
+destination = options['destination']
 
+# Files to watch
 def globs(source)
   Dir.chdir(source) do
     dirs = Dir['*'].select { |x| File.directory?(x) }
@@ -115,53 +100,6 @@ def globs(source)
     dirs = dirs.map { |x| "#{x}/**/*" }
     dirs += ['*']
   end
-end
-
-# Interpret the simple options and configure Jekyll appropriately
-Jekyll.lsi             = options['lsi']
-Jekyll.pygments        = options['pygments']
-Jekyll.permalink_style = options['permalink'].to_sym
-
-# Set the Markdown interpreter (and Maruku options, if necessary)
-case options['markdown']
-
-  when 'rdiscount'
-    begin
-      require 'rdiscount'
-      Jekyll.markdown_proc = Proc.new { |x| RDiscount.new(x).to_html }
-      puts 'Using rdiscount for Markdown'
-    rescue LoadError
-      puts 'You must have the rdiscount gem installed first'
-    end
-    
-  when 'maruku'
-    begin
-      require 'maruku'
-      Jekyll.markdown_proc = Proc.new { |x| Maruku.new(x).to_html }
-      
-      if options['maruku']['use_divs']
-        require 'maruku/ext/div' 
-        puts 'Maruku: Using extended syntax for div elements.'
-      end
-
-      if options['maruku']['use_tex']
-        require 'maruku/ext/math' 
-        puts "Maruku: Using LaTeX extension. Images in `#{options['maruku']['png_dir']}`."
-
-        # Switch off MathML output
-        MaRuKu::Globals[:html_math_output_mathml] = false
-        MaRuKu::Globals[:html_math_engine] = 'none'
-
-        # Turn on math to PNG support with blahtex
-        # Resulting PNGs stored in `images/latex`
-        MaRuKu::Globals[:html_math_output_png] = true
-        MaRuKu::Globals[:html_png_engine] =  options['maruku']['png_engine']
-        MaRuKu::Globals[:html_png_dir] = options['maruku']['png_dir']
-        MaRuKu::Globals[:html_png_url] = options['maruku']['png_url']
-      end
-    rescue LoadError
-        puts "The maruku gem is required for markdown support!"
-    end
 end
 
 # Run the directory watcher for auto-generation, if required
@@ -177,7 +115,7 @@ if options['auto']
   dw.add_observer do |*args|
     t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     puts "[#{t}] regeneration: #{args.size} files changed"
-    Jekyll.process(source, destination)
+    Jekyll.process(options)
   end
   
   dw.start
@@ -186,7 +124,8 @@ if options['auto']
     loop { sleep 1000 }
   end
 else
-  Jekyll.process(source, destination)
+  puts "Building site: #{source} -> #{destination}"
+  Jekyll.process(options)
   puts "Successfully generated site: #{source} -> #{destination}"
 end
 

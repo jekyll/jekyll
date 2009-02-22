@@ -1,22 +1,23 @@
 module Jekyll
   
   class Site
-    attr_accessor :source, :dest
-    attr_accessor :layouts, :posts
+    attr_accessor :config, :layouts, :posts
     
     # Initialize the site
-    #   +source+ is String path to the source directory containing
-    #            the proto-site
-    #   +dest+ is the String path to the directory where the generated
-    #          site should be written
+    #   +config+ is a Hash containing site configurations details
     #
     # Returns <Site>
-    def initialize(source, dest)
-      self.source = source
-      self.dest = dest
+    def initialize(config)
+      self.config = config.clone
       self.layouts = {}
       self.posts = []
     end
+    
+    # The directory containing the proto-site.
+    def source; self.config['source']; end
+    
+    # Where the completed site should be written.
+    def dest; self.config['destination']; end
     
     # Do the actual work of processing the site and generating the
     # real deal.

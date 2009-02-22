@@ -3,8 +3,11 @@ require File.dirname(__FILE__) + '/helper'
 class TestGeneratedSite < Test::Unit::TestCase
   def setup
     clear_dest
-    source = File.join(File.dirname(__FILE__), *%w[source])
-    @s = Site.new(source, dest_dir)
+    config = Jekyll::DEFAULTS.clone
+    config['source'] = File.join(File.dirname(__FILE__), *%w[source])
+    config['destination'] = dest_dir
+    Jekyll.configure(config)
+    @s = Site.new(config)
     @s.process
     @index = File.read(File.join(dest_dir, 'index.html'))
   end
