@@ -58,17 +58,17 @@ end
 opts.parse!
 
 # Temporarily set source and destination options to read in config file
-options['source']       = Jekyll::DEFAULTS['source']
-options['destination']  = Jekyll::DEFAULTS['destination']
+source       = Jekyll::DEFAULTS['source']
+destination  = Jekyll::DEFAULTS['destination']
 
 # Get source and destintation from command line
 case ARGV.size
   when 0
   when 1
-    options['destination'] = ARGV[0]
+    destination = options['destination'] = ARGV[0]
   when 2
-    options['source']      = ARGV[0]
-    options['destination'] = ARGV[1]
+    source      = options['source']      = ARGV[0]
+    destination = options['destination'] = ARGV[1]
   else
     puts "Invalid options. Run `jekyll --help` for assistance."
     exit(1)
@@ -76,7 +76,7 @@ end
 
 # Get configuration from <source>/_config.yaml
 config = {}
-config_file = File.join(options['source'], '_config.yaml')
+config_file = File.join(source, '_config.yaml')
 begin
   config = YAML.load_file( config_file )
   puts "Configuration from #{config_file}"
