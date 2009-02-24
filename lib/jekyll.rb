@@ -60,6 +60,8 @@ module Jekyll
   # Initializes some global Jekyll parameters
   def self.configure(options)
     # Interpret the simple options and configure Jekyll appropriately
+    Jekyll.source          = options['source']
+    Jekyll.dest            = options['destination']
     Jekyll.lsi             = options['lsi']
     Jekyll.pygments        = options['pygments']
     Jekyll.permalink_style = options['permalink'].to_sym
