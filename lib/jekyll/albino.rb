@@ -65,6 +65,7 @@ class Albino
       stdin.puts @target
       stdin.close
       output = stdout.read.strip
+      [stdout, stderr].each { |io| io.close }
     end
     output
   end
