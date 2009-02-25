@@ -28,16 +28,14 @@ module Jekyll
       self.transform_pages
       self.write_posts
     end
-    
-    # Read all the files in <source>/_layouts except backup files
-    # (end with "~") into memory for later use.
+
+    # Read all the files in <source>/_layouts into memory for later use.
     #
     # Returns nothing
     def read_layouts
       base = File.join(self.source, "_layouts")
-      entries = Dir.entries(base)
-      entries = entries.reject { |e| e[-1..-1] == '~' }
-      entries = entries.reject { |e| File.directory?(File.join(base, e)) }
+      entries = []
+      Dir.chdir(base) { entries = filter_entries(Dir['*.*']) }
       
       entries.each do |f|
         name = f.split(".")[0..-2].join(".")
@@ -47,17 +45,13 @@ module Jekyll
       # ignore missing layout dir
     end
     
-    # Read all the files in <base>/_posts except backup files (end with "~")
-    # and create a new Post object with each one.
+    # Read all the files in <base>/_posts and create a new Post object with each one.
     #
     # Returns nothing
     def read_posts(dir)
       base = File.join(self.source, dir, '_posts')
-      
       entries = []
-      Dir.chdir(base) { entries = Dir['**/*'] }
-      entries = entries.reject { |e| e[-1..-1] == '~' }
-      entries = entries.reject { |e| File.directory?(File.join(base, e)) }
+      Dir.chdir(base) { entries = filter_entries(Dir['**/*']) }
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
@@ -102,11 +96,7 @@ module Jekyll
     # Returns nothing
     def transform_pages(dir = '')
       base = File.join(self.source, dir)
-      entries = Dir.entries(base)
-      entries = entries.reject { |e| e[-1..-1] == '~' }
-      entries = entries.reject do |e|
-        (e != '_posts') and ['.', '_', '#'].include?(e[0..0]) unless ['.htaccess'].include?(e)
-      end
+      entries = filter_entries(Dir.entries(base))
       directories = entries.select { |e| File.directory?(File.join(base, e)) }
       files = entries.reject { |e| File.directory?(File.join(base, e)) }
 
@@ -165,6 +155,19 @@ module Jekyll
         "topics" => post_attr_hash('topics')
       }}
     end
-  end
 
+    # Filter out any files/directories that are hidden or backup files (start
+    # with "." or "#" or end with "~") or contain site content (start with "_")
+    # unless they are "_posts" directories or web server files such as
+    # '.htaccess'
+    def filter_entries(entries)
+      entries = entries.reject do |e|
+        unless ['_posts', '.htaccess'].include?(e)
+          # Reject backup/hidden
+          ['.', '_', '#'].include?(e[0..0]) or e[-1..-1] == '~'
+        end
+      end
+    end
+
+  end
 end
