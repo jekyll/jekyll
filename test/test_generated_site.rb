@@ -29,4 +29,8 @@ class TestGeneratedSite < Test::Unit::TestCase
     assert_equal 1, published.size
     assert_equal "published.html", published.first
   end
+
+  def test_posts_directory_not_copied
+    assert !File.exist?(File.join(dest_dir, '_posts'))
+  end
 end
