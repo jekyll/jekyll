@@ -2,6 +2,7 @@ require File.join(File.dirname(__FILE__), *%w[.. lib jekyll])
 
 require 'test/unit'
 require 'redgreen'
+require 'shoulda'
 
 include Jekyll
 
