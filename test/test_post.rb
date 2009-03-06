@@ -52,72 +52,84 @@ class TestPost < Test::Unit::TestCase
       @post.process(@real_file)
       @post.read_yaml(@source, @real_file)
       @post.transform
-      
+
       assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.content
     end
   end
 
+  context "initializing posts" do
+    setup do
+      @setup_post = lambda do |file|
+        Post.new(File.join(File.dirname(__FILE__), *%w[source]), '', file)
+      end
+    end
 
+    should "publish when published yaml is no specified" do
+      post = @setup_post.call("2008-02-02-published.textile")
+      assert_equal true, post.published
+    end
 
-  should "RENAME ME: test published" do
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-02-02-published.textile")
-		assert_equal true, p.published
+    should "not published when published yaml is false" do
+      post = @setup_post.call("2008-02-02-not-published.textile")
+      assert_equal false, post.published
+    end
+
+    should "recognize category in yaml" do
+      post = @setup_post.call("2009-01-27-category.textile")
+      assert post.categories.include?('foo')
+    end
+
+    should "recognize several categories in yaml" do
+      post = @setup_post.call("2009-01-27-categories.textile")
+      assert post.categories.include?('foo')
+      assert post.categories.include?('bar')
+      assert post.categories.include?('baz')
+    end
+
+    context "rendering" do
+      setup do
+        clear_dest
+        @render = lambda do |post|
+          layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
+          post.render(layouts, {"site" => {"posts" => []}})
+        end
+      end
+
+      should "render properly" do
+        post = @setup_post.call("2008-10-18-foo-bar.textile")
+        @render.call(post)
+        assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", post.output
+      end
+
+      should "write properly" do
+        post = @setup_post.call("2008-10-18-foo-bar.textile")
+        @render.call(post)
+        post.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exists?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
+      end
+
+      should "insert data" do
+        post = @setup_post.call("2008-11-21-complex.textile")
+        @render.call(post)
+
+        assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", post.output
+      end
+
+      should "include templates" do
+        Jekyll.source = File.join(File.dirname(__FILE__), 'source')
+        post = @setup_post.call("2008-12-13-include.markdown")
+        @render.call(post)
+
+        assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", post.output
+      end
+    end
   end
 
-  should "RENAME ME: test not published" do
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-02-02-not-published.textile")
-		assert_equal false, p.published
-  end
-
-  should "RENAME ME: test yaml category" do
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-category.textile")
-    assert p.categories.include?('foo')
-  end
-
-  should "RENAME ME: test yaml categories" do
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-categories.textile")
-    assert p.categories.include?('foo')
-    assert p.categories.include?('bar')
-    assert p.categories.include?('baz')
-  end
-  
-  should "RENAME ME: test render" do
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2008-10-18-foo-bar.textile")
-    layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.render(layouts, {"site" => {"posts" => []}})
-    
-    assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", p.output
-  end
-  
-  should "RENAME ME: test write" do
-    clear_dest
-    
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '', "2008-10-18-foo-bar.textile")
-    layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.render(layouts, {"site" => {"posts" => []}})
-    p.write(dest_dir)
-  end
-  
-  should "RENAME ME: test data" do
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '', "2008-11-21-complex.textile")
-    layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.render(layouts, {"site" => {"posts" => []}})
-    
-    assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", p.output
-  end
-  
-  should "RENAME ME: test categories and topics" do
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
-    assert_equal ['foo'], p.categories
-    assert_equal ['bar'], p.topics
-  end    
-  
-  should "RENAME ME: test include" do
-    Jekyll.source = File.join(File.dirname(__FILE__), *%w[source])
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '', "2008-12-13-include.markdown")
-    layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-    p.render(layouts, {"site" => {"posts" => []}})
-    
-    assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", p.output
+  should "generate categories and topics" do
+    post = Post.new(File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
+    assert_equal ['foo'], post.categories
+    assert_equal ['bar'], post.topics
   end
 end
