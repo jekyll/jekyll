@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Preston-Werner"]
-  s.date = %q{2009-02-16}
+  s.date = %q{2009-03-08}
   s.default_executable = %q{jekyll}
   s.description = %q{Jekyll is a simple, blog aware, static site generator.}
   s.email = %q{tom@mojombo.com}
