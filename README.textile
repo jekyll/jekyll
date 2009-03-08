@@ -264,15 +264,14 @@ h3. Predefined Post Variables
     /year/month/day/title.html then you can set this variable and it will
     be used as the final URL.
 
-	category/categories
-		Don't want to use the directory structure for categories, but you still
-		want to publish with categories? No problem, just add a category or 
-		categories option in and it will get processed as if it was in a folder
-		for a category.
+  published
+    Set to false if you don't want a post to show up when the site is 
+    generated.
 
-	published
-		Set this to false if you don't want the post to show up in the _site
-		directory when jekyll runs.
+  category/categories
+    Instead of placing posts inside of folders, you can specify one or more
+    categories that the post belongs to. When the site is generated the post
+    will act as though it had been set with these categories normally.
 
 h3. Custom Variables
 
@@ -325,6 +324,12 @@ Convert an array into a sentence.
 becomes
 
   foo, bar, and baz
+  
+h3. Textilize
+
+Convert a Textile-formatted string into HTML, formatted via RedCloth
+
+  {{ page.excerpt | textilize }}
 
 h3. Include (Tag)
 
@@ -391,7 +396,7 @@ within a Liquid template as follows:
 
 <pre>
 {% for post in site.categories.foo %}
-	<li><span>{{ post.date | date_to_string }}</span> - {{ post.title }}</li>
+  <li><span>{{ post.date | date_to_string }}</span> - {{ post.title }}</li>
 {% endfor %}
 </pre>
 
