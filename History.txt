@@ -9,6 +9,7 @@
   * Bug Fixes
     * Use block syntax of popen4 to ensure that subprocesses are properly disposed [github.com/jqr]
     * Close open4 streams to prevent zombies [github.com/rtomayko]
+    * Only query required fields from the WP Database [github.com/ariejan]
   * Refactors
     * Factored the filtering code into a method [github.com/Chrononaut]
 
