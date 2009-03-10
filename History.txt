@@ -5,6 +5,7 @@
     * Add textilize filter [github.com/willcodeforfoo]
   * Bug Fixes
     * Use block syntax of popen4 to ensure that subprocesses are properly disposed [github.com/jqr]
+    * Close open4 streams to prevent zombies [github.com/rtomayko]
 
 == 0.4.1
   * Minor Enhancements
