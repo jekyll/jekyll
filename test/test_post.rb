@@ -87,10 +87,16 @@ class TestPost < Test::Unit::TestCase
   end
 
   def test_yaml_categories
-    p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',  "2009-01-27-categories.textile")
-    assert p.categories.include?('foo')
-    assert p.categories.include?('bar')
-    assert p.categories.include?('baz')
+    p1 = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',
+                  "2009-01-27-categories.textile")
+    p2 = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '',
+                  "2009-01-27-array-categories.textile")
+    
+    [p1, p2].each do |p|
+      assert p.categories.include?('foo')
+      assert p.categories.include?('bar')
+      assert p.categories.include?('baz')
+    end
   end
   
   def test_render

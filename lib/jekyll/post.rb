@@ -49,7 +49,13 @@ module Jekyll
         if self.data.has_key?('category')
           self.categories << self.data['category']
         elsif self.data.has_key?('categories')
-          self.categories = self.data['categories'].split
+          # Look for categories in the YAML-header, either specified as
+          # an array or a string.
+          if self.data['categories'].kind_of? String
+            self.categories = self.data['categories'].split
+          else
+            self.categories = self.data['categories']
+          end
         end
       end
     end

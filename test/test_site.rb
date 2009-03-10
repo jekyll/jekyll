@@ -33,4 +33,13 @@ class TestSite < Test::Unit::TestCase
     assert_equal categories, @s.categories.keys.sort
     assert_equal 3, @s.categories['foo'].size
   end
+
+  def test_filter_entries
+    ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
+              .baz.markdow foo.markdown~]
+    ent2 = %w[.htaccess _posts bla.bla]
+
+    assert_equal %w[foo.markdown bar.markdown baz.markdown], @s.filter_entries(ent1)
+    assert_equal ent2, @s.filter_entries(ent2)
+  end
 end
