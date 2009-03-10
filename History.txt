@@ -3,6 +3,7 @@
     * Ability to set post categories via YAML [github.com/qrush]
     * Ability to set prevent a post from publishing via YAML [github.com/qrush]
     * Add textilize filter [github.com/willcodeforfoo]
+    * Add 'pretty' permalink style for wordpress-like urls [github.com/dysinger]
   * Bug Fixes
     * Use block syntax of popen4 to ensure that subprocesses are properly disposed [github.com/jqr]
     * Close open4 streams to prevent zombies [github.com/rtomayko]
