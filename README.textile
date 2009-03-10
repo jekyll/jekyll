@@ -113,10 +113,14 @@ And if you don't want to be in the proto site root to run Jekyll:
 
 h2. Run Options
 
+h3. Autobuild
+
 There is an autobuild feature that will regenerate your site if any of the
 files change. The autobuild feature can be used on any of the invocations:
 
   $ jekyll --auto
+
+h3. Related Posts
 
 By default, the "related posts" functionality will produce crappy results.
 In order to get high quality results with a true LSI algorithm, you must
@@ -124,11 +128,15 @@ enable it (it may take some time to run if you have many posts):
 
   $ jekyll --lsi
 
+h3. Code Highlighting
+
 For static code highlighting, you can install Pygments (see below) and then
 use that to make your code blocks look pretty. To activate Pygments support
 during the conversion:
 
   $ jekyll --pygments
+
+h3. Markdown Processor
 
 By default, Jekyll uses "Maruku":http://maruku.rubyforge.org (pure Ruby) for
 Markdown support. If you'd like to use RDiscount (faster, but requires
@@ -136,7 +144,9 @@ compilation), you must install it (gem install rdiscount) and then you can
 have it used instead:
 
   $ jekyll --rdiscount
-  
+
+h3. Local Server
+
 When previewing complex sites locally, simply opening the site in a web 
 browser (using file://) can cause problems with links that are relative to
 the site root (e.g., "/stylesheets/style.css"). To get around this, Jekyll
@@ -145,16 +155,24 @@ Default port is 4000:
 
   $ jekyll --server [PORT]
 
+h3. Permalink Style
+
 By default, the permalink for each post begins with its date in 'YYYY/MM/DD'
-format. If you do not wish to have the date appear in the URL of each post, 
+format.
+
+If you do not wish to have the date appear in the URL of each post, 
 you can change the permalink style to 'none' so that only the 'slug' part of
 the filename is used. For example, with the permalink style set to 'none' the
 file '2009-01-01-happy-new-year.markdown' will have a permalink like
 'http://yoursite.com/happy-new-year.html'. The date of the post will still be
 read from the filename (and is required!) to be used elsewhere in Jekyll.
-Example usage:
 
-  $ jekyll --permalink none
+If you want WordPress-style pretty URLs that leave off the .html, you can
+change the permalink style to 'pretty' and directories corresponding to the
+date parts and post name will be made and an index.html will be placed in the
+leaf directory resulting in URLs like 2008/11/17/blogging-like-a-hacker/.
+
+  $ jekyll --permalink [date|none|pretty]
 
 h2. Data
 

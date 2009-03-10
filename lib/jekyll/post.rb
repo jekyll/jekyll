@@ -83,8 +83,7 @@ module Jekyll
         permalink.to_s.split("/")[0..-2].join("/") + '/'
       else
         prefix = self.categories.empty? ? '' : '/' + self.categories.join('/')
-        if Jekyll.permalink_style == :date ||
-          Jekyll.permalink_style == :pretty
+        if [:date, :pretty].include?(Jekyll.permalink_style)
           prefix + date.strftime("/%Y/%m/%d/")
         else
           prefix + '/'
@@ -106,8 +105,8 @@ module Jekyll
     #
     # Returns <String>
     def url
-      permalink || self.id +
-        ( ".html" unless Jekyll.permalink_style == :pretty ).to_s
+      ext = Jekyll.permalink_style == :pretty ? '' : '.html'
+      permalink || self.id + ext
     end
     
     # The UID for this post (useful in feeds)
@@ -117,7 +116,7 @@ module Jekyll
     def id
       self.dir + self.slug
     end
-        
+    
     # Calculate related posts.
     #
     # Returns [<Post>]
