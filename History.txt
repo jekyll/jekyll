@@ -4,9 +4,13 @@
     * Ability to set prevent a post from publishing via YAML [github.com/qrush]
     * Add textilize filter [github.com/willcodeforfoo]
     * Add 'pretty' permalink style for wordpress-like urls [github.com/dysinger]
+    * Made it possible to enter categories from YAML as an array [github.com/Chrononaut]
+    * Ignore Emacs autosave files [github.com/Chrononaut]
   * Bug Fixes
     * Use block syntax of popen4 to ensure that subprocesses are properly disposed [github.com/jqr]
     * Close open4 streams to prevent zombies [github.com/rtomayko]
+  * Refactors
+    * Factored the filtering code into a method [github.com/Chrononaut]
 
 == 0.4.1
   * Minor Enhancements
