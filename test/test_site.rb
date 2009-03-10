@@ -31,7 +31,7 @@ class TestSite < Test::Unit::TestCase
 
     assert_equal posts.size - 1, @s.posts.size
     assert_equal categories, @s.categories.keys.sort
-    assert_equal 3, @s.categories['foo'].size
+    assert_equal 4, @s.categories['foo'].size
   end
 
   def test_filter_entries
