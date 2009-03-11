@@ -102,8 +102,8 @@ module Jekyll
 
       # we need to make sure to process _posts *first* otherwise they 
       # might not be available yet to other templates as {{ site.posts }}
-      if entries.include?('_posts')
-        entries.delete('_posts')
+      if directories.include?('_posts')
+        directories.delete('_posts')
         read_posts(dir)
       end
       [directories, files].each do |entries|
