@@ -21,10 +21,10 @@ CONTENT
   
   def test_markdown_with_pygments_line_handling
     Jekyll.pygments = true
-    Jekyll.content_type = :markdown
+    context = {"content_type" => 'markdown'}
     
-    result = Liquid::Template.parse(@content).render({}, [Jekyll::Filters])
-    result = Jekyll.markdown_proc.call(result)
+    result = Liquid::Template.parse(@content).render(context, [Jekyll::Filters])
+    result = Jekyll.markdown(result)
     assert_no_match(/markdown\-html\-error/,result)
   end
   

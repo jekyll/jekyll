@@ -131,7 +131,10 @@ class TestPost < Test::Unit::TestCase
   end    
   
   def test_include
-    Jekyll.source = File.join(File.dirname(__FILE__), *%w[source])
+    config = Jekyll::DEFAULTS.clone
+    config['source'] = File.join(File.dirname(__FILE__), *%w[source])
+    Jekyll.configure(config)
+
     p = Post.new(File.join(File.dirname(__FILE__), *%w[source]), '', "2008-12-13-include.markdown")
     layouts = {"default" => Layout.new(File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
     p.render(layouts, {"site" => {"posts" => []}})

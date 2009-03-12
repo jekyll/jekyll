@@ -3,11 +3,11 @@ require File.dirname(__FILE__) + '/helper'
 class TestGeneratedSite < Test::Unit::TestCase
   def setup
     clear_dest
-    config = Jekyll::DEFAULTS.clone
-    config['source'] = File.join(File.dirname(__FILE__), *%w[source])
-    config['destination'] = dest_dir
-    Jekyll.configure(config)
-    @s = Site.new(config)
+    @config = Jekyll::DEFAULTS.clone
+    @config['source'] = File.join(File.dirname(__FILE__), *%w[source])
+    @config['destination'] = dest_dir
+    Jekyll.configure(@config)
+    @s = Site.new(@config)
     @s.process
     @index = File.read(File.join(dest_dir, 'index.html'))
   end
@@ -19,9 +19,8 @@ class TestGeneratedSite < Test::Unit::TestCase
 
   def test_post_content_in_index
     # confirm that the {{ post.content }} is rendered OK
-    latest_post = Dir[File.join(@source, '_posts/*')].last
-    post = Post.new(@source, '', File.basename(latest_post))
-    Jekyll.content_type = post.determine_content_type
+    latest_post = Dir[File.join(@config['source'], '_posts/*')].last
+    post = Post.new(@config['source'], '', File.basename(latest_post))
     post.transform
     assert @index.include?(post.content)
   end

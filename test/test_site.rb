@@ -2,11 +2,11 @@ require File.dirname(__FILE__) + '/helper'
 
 class TestSite < Test::Unit::TestCase
   def setup
-    config = {
-      'source' => File.join(File.dirname(__FILE__), *%w[source]), 
-      'destination' => dest_dir
-    }
-    @s = Site.new(config)
+    @config = Jekyll::DEFAULTS.clone
+    @config['source'] = File.join(File.dirname(__FILE__), *%w[source])
+    @config['destination'] = dest_dir
+    Jekyll.configure(@config)
+    @s = Site.new(@config)
   end
   
   def test_site_init
@@ -21,7 +21,7 @@ class TestSite < Test::Unit::TestCase
  
   def test_read_posts
     @s.read_posts('')
-    posts = Dir[File.join(@source, '_posts/*')]
+    posts = Dir[File.join(@config['source'], '_posts/*')]
     assert_equal posts.size - 1, @s.posts.size
   end
   
@@ -29,7 +29,7 @@ class TestSite < Test::Unit::TestCase
     clear_dest
     @s.process
     
-    posts = Dir[File.join(@source, "**", "_posts/*")]
+    posts = Dir[File.join(@config['source'], "**", "_posts/*")]
     categories = %w(bar baz category foo z_category publish_test).sort
 
     assert_equal posts.size - 1, @s.posts.size
