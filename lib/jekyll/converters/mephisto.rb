@@ -13,7 +13,7 @@ require File.join(File.dirname(__FILE__),"csv.rb")
 # installed, running the following commands should work:
 # $ sudo gem install sequel
 # $ sudo gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
- 
+
 module Jekyll
   module Mephisto
     #Accepts a hash with database config variables, exports mephisto posts into a csv
@@ -38,24 +38,24 @@ module Jekyll
     # through the created posts to make sure nothing is accidently published.
 
     QUERY = "SELECT id, permalink, body, published_at, title FROM contents WHERE user_id = 1 AND type = 'Article' AND published_at IS NOT NULL ORDER BY published_at"
- 
+
     def self.process(dbname, user, pass, host = 'localhost')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host)
-      
+
       FileUtils.mkdir_p "_posts"
-            
+
       db[QUERY].each do |post|
         title = post[:title]
         slug = post[:permalink]
         date = post[:published_at]
         content = post[:body]
 #         more_content = ''
-        
+
         # Be sure to include the body and extended body.
 #         if more_content != nil
 #           content = content + " \n" + more_content
 #         end
-        
+
         # Ideally, this script would determine the post format (markdown, html
         # , etc) and create files with proper extensions. At this point it
         # just assumes that markdown will be acceptable.
@@ -66,14 +66,14 @@ module Jekyll
            'title' => title.to_s,
            'mt_id' => post[:entry_id],
          }.delete_if { |k,v| v.nil? || v == ''}.to_yaml
- 
+
         File.open("_posts/#{name}", "w") do |f|
           f.puts data
           f.puts "---"
           f.puts content
         end
       end
- 
+
     end
   end
 end

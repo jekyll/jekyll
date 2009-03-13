@@ -9,10 +9,10 @@ Basic Command Line Usage:
   jekyll                                                   # . -> ./_site
   jekyll <path to write generated site>                    # . -> <path>
   jekyll <path to source> <path to write generated site>   # <path> -> <path>
-  
+
   Configuration is read from '<source>/_config.yaml' but can be overriden
   using the following options:
-    
+
 HELP
 
 require 'optparse'
@@ -30,28 +30,28 @@ opts = OptionParser.new do |opts|
   opts.on("--no-auto", "No auto-regenerate") do
     options['auto'] = false
   end
-    
+
   opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
     options['server'] = true
     options['server_port'] = port unless port.nil?
   end
-  
+
   opts.on("--lsi", "Use LSI for better related posts") do
     options['lsi'] = true
   end
-  
+
   opts.on("--pygments", "Use pygments to highlight code") do
     options['pygments'] = true
   end
-  
+
   opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
     options['markdown'] = 'rdiscount'
   end
-  
+
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
     options['permalink'] = style unless style.nil?
   end
-  
+
   opts.on("--version", "Display current version") do
     puts "Jekyll " + Jekyll.version
     exit 0
@@ -61,36 +61,20 @@ end
 # Read command line options into `options` hash
 opts.parse!
 
-# Temporarily set source and destination options to read in config file
-source       = Jekyll::DEFAULTS['source']
-destination  = Jekyll::DEFAULTS['destination']
-
 # Get source and destintation from command line
 case ARGV.size
   when 0
   when 1
-    destination = options['destination'] = ARGV[0]
+    options['destination'] = ARGV[0]
   when 2
-    source      = options['source']      = ARGV[0]
-    destination = options['destination'] = ARGV[1]
+    options['source']      = ARGV[0]
+    options['destination'] = ARGV[1]
   else
     puts "Invalid options. Run `jekyll --help` for assistance."
     exit(1)
 end
 
-# Get configuration from <source>/_config.yaml
-config = {}
-config_file = File.join(source, '_config.yaml')
-begin
-  config = YAML.load_file( config_file )
-  puts "Configuration from #{config_file}"
-rescue => err
-  puts "WARNING: Could not read configuration. Using defaults (and options)."
-  puts "\t" + err
-end
-
-# Merge DEFAULTS < config file < command line options
-options = Jekyll::DEFAULTS.deep_merge(config).deep_merge(options)
+options = Jekyll.configuration(options)
 
 # Get source and destination directories (possibly set by config file)
 source      = options['source']
@@ -106,30 +90,33 @@ def globs(source)
   end
 end
 
+# Create the Site
+site = Jekyll::Site.new(options)
+
 # Run the directory watcher for auto-generation, if required
 if options['auto']
   require 'directory_watcher'
 
   puts "Auto-regenerating enabled: #{source} -> #{destination}"
-  
+
   dw = DirectoryWatcher.new(source)
   dw.interval = 1
   dw.glob = globs(source)
-  
+
   dw.add_observer do |*args|
     t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     puts "[#{t}] regeneration: #{args.size} files changed"
-    Jekyll.process(options)
+    site.process
   end
-  
+
   dw.start
-  
+
   unless options['server']
     loop { sleep 1000 }
   end
 else
   puts "Building site: #{source} -> #{destination}"
-  Jekyll.process(options)
+  site.process
   puts "Successfully generated site: #{source} -> #{destination}"
 end
 
@@ -137,7 +124,7 @@ end
 if options['server']
   require 'webrick'
   include WEBrick
-  
+
   FileUtils.mkdir_p(destination)
 
   s = HTTPServer.new(
@@ -147,7 +134,7 @@ if options['server']
   t = Thread.new {
     s.start
   }
-  
+
   trap("INT") { s.shutdown }
   t.join()
 end

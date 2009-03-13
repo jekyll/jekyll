@@ -18,20 +18,20 @@ module Jekyll
 
     def self.process(dbname, user, pass, host = 'localhost')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host)
-      
+
       FileUtils.mkdir_p "_posts"
-            
+
       db[QUERY].each do |post|
         # Get required fields and construct Jekyll compatible name
         title = post[:Title]
         slug = post[:url_title]
         date = post[:Posted]
         content = post[:Body]
-        
+
         name = [date.strftime("%Y-%m-%d"), slug].join('-') + ".textile"
 
         # Get the relevant fields as a hash, delete empty fields and convert
-        # to YAML for the header        
+        # to YAML for the header
         data = {
            'layout' => 'post',
            'title' => title.to_s,

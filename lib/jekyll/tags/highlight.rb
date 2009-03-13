@@ -1,10 +1,11 @@
 module Jekyll
-  
+
   class HighlightBlock < Liquid::Block
     include Liquid::StandardFilters
+
     # we need a language, but the linenos argument is optional.
     SYNTAX = /(\w+)\s?(:?linenos)?\s?/
-    
+
     def initialize(tag_name, markup, tokens)
       super
       if markup =~ SYNTAX
@@ -19,25 +20,25 @@ module Jekyll
         raise SyntaxError.new("Syntax Error in 'highlight' - Valid syntax: highlight <lang> [linenos]")
       end
     end
-  
+
     def render(context)
-      if Jekyll.pygments
+      if context.registers[:site].pygments
         render_pygments(context, super.to_s)
       else
         render_codehighlighter(context, super.to_s)
       end
     end
-    
+
     def render_pygments(context, code)
       if context["content_type"] == :markdown
         return "\n" + Albino.new(code, @lang).to_s(@options) + "\n"
-      elsif content["content_type"] == :textile
+      elsif context["content_type"] == :textile
         return "<notextile>" + Albino.new(code, @lang).to_s(@options) + "</notextile>"
       else
         return Albino.new(code, @lang).to_s(@options)
       end
     end
-    
+
     def render_codehighlighter(context, code)
     #The div is required because RDiscount blows ass
       <<-HTML
@@ -49,7 +50,7 @@ module Jekyll
       HTML
     end
   end
-  
+
 end
 
 Liquid::Template.register_tag('highlight', Jekyll::HighlightBlock)

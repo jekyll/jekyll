@@ -177,7 +177,7 @@ leaf directory resulting in URLs like 2008/11/17/blogging-like-a-hacker/.
 h2. Configuration File
 
 All of the options listed above can be specified on a site-by-site basis in
-a '_config.yaml' file at the root of the site's source. As the filename
+a '_config.yml' file at the root of the site's source. As the filename
 suggests, the configuration is given in "YAML":http://www.yaml.org/. As
 well as all of the options discussed in the last section, there are a few
 additional options:

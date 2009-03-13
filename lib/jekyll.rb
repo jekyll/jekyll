@@ -27,8 +27,6 @@ require 'jekyll/tags/include'
 require 'jekyll/albino'
 
 module Jekyll
-  VERSION = '0.3.0'
-  
   # Default options. Overriden by values in _config.yaml or command-line opts.
   # (Strings rather symbols used for compatability with YAML)
   DEFAULTS = {
@@ -52,83 +50,32 @@ module Jekyll
       'png_url'    => '/images/latex'
     }
   }
-  
-  class << self
-    attr_accessor :source,:dest,:lsi,:pygments,:permalink_style
-  end
 
-  # Initializes some global Jekyll parameters
-  def self.configure(options)
-    # Interpret the simple options and configure Jekyll appropriately
-    Jekyll.source          = options['source']
-    Jekyll.dest            = options['destination']
-    Jekyll.lsi             = options['lsi']
-    Jekyll.pygments        = options['pygments']
-    Jekyll.permalink_style = options['permalink'].to_sym
+  # Generate a Jekyll configuration Hash by merging the default options
+  # with anything in _config.yml, and adding the given options on top
+  #   +override+ is a Hash of config directives
+  #
+  # Returns Hash
+  def self.configuration(override)
+    # _config.yml may override default source location, but until
+    # then, we need to know where to look for _config.yml
+    source = override['source'] || Jekyll::DEFAULTS['source']
 
-    # Check to see if LSI is enabled.
-    require 'classifier' if Jekyll.lsi
-
-    # Set the Markdown interpreter (and Maruku options, if necessary)
-    case options['markdown']
-
-      when 'rdiscount'
-        begin
-          require 'rdiscount'
-
-          def self.markdown(content) 
-            RDiscount.new(content).to_html
-          end
-
-          puts 'Using rdiscount for Markdown'
-        rescue LoadError
-          puts 'You must have the rdiscount gem installed first'
-        end
-
-      when 'maruku'
-        begin
-          require 'maruku'
-
-          def self.markdown(content) 
-            Maruku.new(content).to_html
-          end
-
-          if options['maruku']['use_divs']
-            require 'maruku/ext/div' 
-            puts 'Maruku: Using extended syntax for div elements.'
-          end
-
-          if options['maruku']['use_tex']
-            require 'maruku/ext/math' 
-            puts "Maruku: Using LaTeX extension. Images in `#{options['maruku']['png_dir']}`."
-
-            # Switch off MathML output
-            MaRuKu::Globals[:html_math_output_mathml] = false
-            MaRuKu::Globals[:html_math_engine] = 'none'
-
-            # Turn on math to PNG support with blahtex
-            # Resulting PNGs stored in `images/latex`
-            MaRuKu::Globals[:html_math_output_png] = true
-            MaRuKu::Globals[:html_png_engine] =  options['maruku']['png_engine']
-            MaRuKu::Globals[:html_png_dir] = options['maruku']['png_dir']
-            MaRuKu::Globals[:html_png_url] = options['maruku']['png_url']
-          end
-        rescue LoadError
-            puts "The maruku gem is required for markdown support!"
-        end
+    # Get configuration from <source>/_config.yaml
+    config = {}
+    config_file = File.join(source, '_config.yml')
+    begin
+      config = YAML.load_file(config_file)
+      puts "Configuration from #{config_file}"
+    rescue => err
+      puts "WARNING: Could not read configuration. Using defaults (and options)."
+      puts "\t" + err
     end
 
+    # Merge DEFAULTS < _config.yml < override
+    Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
   end
 
-  def self.textile(content)
-    RedCloth.new(content).to_html
-  end
-
-  def self.process(config)
-    Jekyll.configure(config)
-    Jekyll::Site.new(config).process
-  end
-  
   def self.version
     yml = YAML.load(File.read(File.join(File.dirname(__FILE__), *%w[.. VERSION.yml])))
     "#{yml[:major]}.#{yml[:minor]}.#{yml[:patch]}"
