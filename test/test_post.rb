@@ -1,6 +1,15 @@
 require File.dirname(__FILE__) + '/helper'
 
 class TestPost < Test::Unit::TestCase
+  def setup_post(file)
+    Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), '', file)
+  end
+
+  def do_render(post)
+    layouts = {"default" => Layout.new(@site, File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
+    post.render(layouts, {"site" => {"posts" => []}})
+  end
+
   context "A Post" do
     setup do
       clear_dest
@@ -68,29 +77,23 @@ class TestPost < Test::Unit::TestCase
     end
 
     context "initializing posts" do
-      setup do
-        @setup_post = lambda do |file|
-          Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), '', file)
-        end
-      end
-
       should "publish when published yaml is no specified" do
-        post = @setup_post.call("2008-02-02-published.textile")
+        post = setup_post("2008-02-02-published.textile")
         assert_equal true, post.published
       end
 
       should "not published when published yaml is false" do
-        post = @setup_post.call("2008-02-02-not-published.textile")
+        post = setup_post("2008-02-02-not-published.textile")
         assert_equal false, post.published
       end
 
       should "recognize category in yaml" do
-        post = @setup_post.call("2009-01-27-category.textile")
+        post = setup_post("2009-01-27-category.textile")
         assert post.categories.include?('foo')
       end
 
       should "recognize several categories in yaml" do
-        post = @setup_post.call("2009-01-27-categories.textile")
+        post = setup_post("2009-01-27-categories.textile")
         assert post.categories.include?('foo')
         assert post.categories.include?('bar')
         assert post.categories.include?('baz')
@@ -99,21 +102,17 @@ class TestPost < Test::Unit::TestCase
       context "rendering" do
         setup do
           clear_dest
-          @render = lambda do |post|
-            layouts = {"default" => Layout.new(@site, File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
-            post.render(layouts, {"site" => {"posts" => []}})
-          end
         end
 
         should "render properly" do
-          post = @setup_post.call("2008-10-18-foo-bar.textile")
-          @render.call(post)
+          post = setup_post("2008-10-18-foo-bar.textile")
+          do_render(post)
           assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", post.output
         end
 
         should "write properly" do
-          post = @setup_post.call("2008-10-18-foo-bar.textile")
-          @render.call(post)
+          post = setup_post("2008-10-18-foo-bar.textile")
+          do_render(post)
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
@@ -121,18 +120,17 @@ class TestPost < Test::Unit::TestCase
         end
 
         should "insert data" do
-          post = @setup_post.call("2008-11-21-complex.textile")
-          @render.call(post)
+          post = setup_post("2008-11-21-complex.textile")
+          do_render(post)
 
           assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", post.output
         end
 
         should_eventually "include templates" do
-          post = @setup_post.call("2008-12-13-include.markdown")
+          post = setup_post("2008-12-13-include.markdown")
           post.site.source = File.join(File.dirname(__FILE__), 'source')
-          @render.call(post)
+          do_render(post)
 
-          require 'ruby-debug'; breakpoint
           assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", post.output
         end
       end
