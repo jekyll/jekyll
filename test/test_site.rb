@@ -3,10 +3,10 @@ require File.dirname(__FILE__) + '/helper'
 class TestSite < Test::Unit::TestCase
   context "creating sites" do
     setup do
-      @source = File.join(File.dirname(__FILE__), 'source')
-      @configuration = Jekyll.configuration(:source => @source, :destination => dest_dir)
-
-      @s = Site.new(@configuration)
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+      end
+      @site = Site.new(Jekyll.configuration)
     end
 
     #should "read layouts" do
@@ -37,8 +37,8 @@ class TestSite < Test::Unit::TestCase
               .baz.markdow foo.markdown~]
       ent2 = %w[.htaccess _posts bla.bla]
 
-      assert_equal %w[foo.markdown bar.markdown baz.markdown], @s.filter_entries(ent1)
-      assert_equal ent2, @s.filter_entries(ent2)
+      assert_equal %w[foo.markdown bar.markdown baz.markdown], @site.filter_entries(ent1)
+      assert_equal ent2, @site.filter_entries(ent2)
     end
   end
 end

@@ -4,9 +4,11 @@ class TestGeneratedSite < Test::Unit::TestCase
   context "generated sites" do
     setup do
       clear_dest
-      @source = File.join(File.dirname(__FILE__), *%w[source])
-      @configuration = Jekyll.configuration 'source' => @source, 'destination' => dest_dir
-      @site = Site.new(@configuration)
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+      end
+
+      @site = Site.new(Jekyll.configuration)
       @site.process
       @index = File.read(File.join(dest_dir, 'index.html'))
     end
@@ -16,9 +18,8 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "render post.content" do
-      latest_post = Dir[File.join(@source, '_posts/*')].last
-      post = Post.new(@site, @source, '', File.basename(latest_post))
-      #Jekyll.content_type = post.determine_content_type
+      latest_post = Dir[File.join(source_dir, '_posts/*')].last
+      post = Post.new(@site, source_dir, '', File.basename(latest_post))
       post.transform
       assert @index.include?(post.content)
     end

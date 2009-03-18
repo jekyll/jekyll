@@ -11,7 +11,11 @@ class Test::Unit::TestCase
   include RR::Adapters::TestUnit
 
   def dest_dir
-    File.join(File.dirname(__FILE__), *%w[dest])
+    File.join(File.dirname(__FILE__), 'dest')
+  end
+
+  def source_dir
+    File.join(File.dirname(__FILE__), 'source')
   end
 
   def clear_dest

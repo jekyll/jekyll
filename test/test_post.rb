@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/helper'
 
 class TestPost < Test::Unit::TestCase
   def setup_post(file)
-    Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), '', file)
+    Post.new(@site, File.join(File.dirname(__FILE__), 'source'), '', file)
   end
 
   def do_render(post)
