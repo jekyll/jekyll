@@ -30,13 +30,13 @@ class TestSite < Test::Unit::TestCase
       assert_equal 3, @s.categories['foo'].size
     end
 
-      should "filter entries" do
-        ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
-                .baz.markdow foo.markdown~]
-        ent2 = %w[.htaccess _posts bla.bla]
+    should "filter entries" do
+      ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
+              .baz.markdow foo.markdown~]
+      ent2 = %w[.htaccess _posts bla.bla]
 
-        assert_equal %w[foo.markdown bar.markdown baz.markdown], @s.filter_entries(ent1)
-        assert_equal ent2, @s.filter_entries(ent2)
+      assert_equal %w[foo.markdown bar.markdown baz.markdown], @s.filter_entries(ent1)
+      assert_equal ent2, @s.filter_entries(ent2)
     end
   end
 end
