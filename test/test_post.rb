@@ -2,11 +2,11 @@ require File.dirname(__FILE__) + '/helper'
 
 class TestPost < Test::Unit::TestCase
   def setup_post(file)
-    Post.new(@site, File.join(File.dirname(__FILE__), 'source'), '', file)
+    Post.new(@site, source_dir, '', file)
   end
 
   def do_render(post)
-    layouts = {"default" => Layout.new(@site, File.join(File.dirname(__FILE__), *%w[source _layouts]), "simple.html")}
+    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
     post.render(layouts, {"site" => {"posts" => []}})
   end
 
@@ -32,7 +32,7 @@ class TestPost < Test::Unit::TestCase
 
         @real_file = "2008-10-18-foo-bar.textile"
         @fake_file = "2008-10-19-foo-bar.textile"
-        @source = File.join(File.dirname(__FILE__), *%w[source _posts])
+        @source = source_dir('_posts')
       end
 
       should "keep date, title, and markup type" do

@@ -10,7 +10,7 @@ class TestGeneratedSite < Test::Unit::TestCase
 
       @site = Site.new(Jekyll.configuration)
       @site.process
-      @index = File.read(File.join(dest_dir, 'index.html'))
+      @index = File.read(dest_dir('index.html'))
     end
 
     should "insert site.posts into the index" do
@@ -18,21 +18,21 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "render post.content" do
-      latest_post = Dir[File.join(source_dir, '_posts/*')].last
+      latest_post = Dir[source_dir('_posts/*')].last
       post = Post.new(@site, source_dir, '', File.basename(latest_post))
       post.transform
       assert @index.include?(post.content)
     end
 
     should "hide unpublished posts" do
-      published = Dir[File.join(dest_dir, 'publish_test/2008/02/02/*.html')].map {|f| File.basename(f)}
+      published = Dir[dest_dir('publish_test/2008/02/02/*.html')].map {|f| File.basename(f)}
 
       assert_equal 1, published.size
       assert_equal "published.html", published.first
     end
 
     should "not copy _posts directory" do
-      assert !File.exist?(File.join(dest_dir, '_posts'))
+      assert !File.exist?(dest_dir('_posts'))
     end
   end
 end
