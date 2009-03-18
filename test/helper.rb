@@ -10,11 +10,11 @@ include Jekyll
 class Test::Unit::TestCase
   include RR::Adapters::TestUnit
 
-  def dest_dir(subdirs = [])
+  def dest_dir(*subdirs)
     File.join(File.dirname(__FILE__), 'dest', *subdirs)
   end
 
-  def source_dir(subdirs = [])
+  def source_dir(*subdirs)
     File.join(File.dirname(__FILE__), 'source', *subdirs)
   end
 

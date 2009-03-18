@@ -9,28 +9,28 @@ class TestSite < Test::Unit::TestCase
       @site = Site.new(Jekyll.configuration)
     end
 
-    #should "read layouts" do
-      #@s.read_layouts
-      #assert_equal ["default", "simple"].sort, @s.layouts.keys.sort
-    #end
+    should "read layouts" do
+      @site.read_layouts
+      assert_equal ["default", "simple"].sort, @site.layouts.keys.sort
+    end
 
-    #should "read posts" do
-      #@s.read_posts('')
-      #posts = Dir[File.join(@source, '_posts/*')]
-      #assert_equal posts.size - 1, @s.posts.size
-    #end
+    should "read posts" do
+      @site.read_posts('')
+      posts = Dir[source_dir('_posts', '*')]
+      assert_equal posts.size - 1, @site.posts.size
+    end
 
-    #should "deploy payload" do
-      #clear_dest
-      #@s.process
+    should "deploy payload" do
+      clear_dest
+      @site.process
 
-      #posts = Dir[File.join(@source, "**", "_posts/*")]
-      #categories = %w(bar baz category foo z_category publish_test).sort
+      posts = Dir[source_dir("**", "_posts", "*")]
+      categories = %w(bar baz category foo z_category publish_test).sort
 
-      #assert_equal posts.size - 1, @s.posts.size
-      #assert_equal categories, @s.categories.keys.sort
-      #assert_equal 3, @s.categories['foo'].size
-    #end
+      assert_equal posts.size - 1, @site.posts.size
+      assert_equal categories, @site.categories.keys.sort
+      assert_equal 4, @site.categories['foo'].size
+    end
 
     should "filter entries" do
       ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
