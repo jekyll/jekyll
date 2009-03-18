@@ -13,9 +13,8 @@ class TestPost < Test::Unit::TestCase
   context "A Post" do
     setup do
       clear_dest
-      @source = File.join(File.dirname(__FILE__), *%w[source])
-      @configuration = Jekyll.configuration 'source' => @source, 'destination' => dest_dir
-      @site = Site.new(@configuration)
+      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      @site = Site.new(Jekyll.configuration)
     end
 
     should "ensure valid posts are valid" do
@@ -126,7 +125,7 @@ class TestPost < Test::Unit::TestCase
           assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", post.output
         end
 
-        should_eventually "include templates" do
+        should "include templates" do
           post = setup_post("2008-12-13-include.markdown")
           post.site.source = File.join(File.dirname(__FILE__), 'source')
           do_render(post)
