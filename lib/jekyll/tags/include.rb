@@ -11,7 +11,7 @@ module Jekyll
         return "Include file '#{@file}' contains invalid characters or sequences"
       end
 
-      Dir.chdir(File.join('.', context.registers[:site].source, '_includes')) do
+      Dir.chdir(File.join(context.registers[:site].source, '_includes')) do
         choices = Dir['**/*'].reject { |x| File.symlink?(x) }
         if choices.include?(@file)
           source = File.read(@file)
