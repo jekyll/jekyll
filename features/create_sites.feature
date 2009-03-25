@@ -1,7 +1,7 @@
 Feature: Create sites
   As a hacker who likes to blog
-  I want to be able to easily make a static site
-  In order to share my awesome skills with the interwebs
+  I want to be able to make a static site
+  In order to share my awesome ideas with the interwebs
 
   Scenario: Basic site
     Given I have a blank site
@@ -38,3 +38,5 @@ Feature: Create sites
     And the _site/posts/2009/03/24/hackers.html file should exist
     And I should see "My First Exploit" in "_site/posts/2009/03/24/hackers.html"
     And I should see "Basic Site with Layout and a Post: My First Exploit" in "_site/index.html"
+
+  Scenario: Basic site with include tag
