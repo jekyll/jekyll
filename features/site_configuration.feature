@@ -68,8 +68,7 @@ Feature: Site configuration
     And I have a configuration file with "permalink" set to "none"
     When I run jekyll
     Then the _site directory should exist
-    And the _site/posts directory should exist
-    And I should see "Whoa." in "_site/posts/none-permalink-schema.html"
+    And I should see "Whoa." in "_site/none-permalink-schema.html"
 
   Scenario: Use pretty permalink schema
     Given I have a blank site
@@ -78,9 +77,7 @@ Feature: Site configuration
     And I have a configuration file with "permalink" set to "pretty"
     When I run jekyll
     Then the _site directory should exist
-    And the _site/posts directory should exist
-    And the _site/posts/pretty-permalink-schema directory should exist
-    And I should see "Whoa." in "_site/posts/pretty-permalink-schema/index.html"
+    And I should see "Whoa." in "_site/2009/03/25/pretty-permalink-schema/index.html"
 
   Scenario: Highlight code with pygments
     Given I have a blank site

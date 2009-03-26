@@ -16,30 +16,27 @@ Feature: Create sites
     And I have a post titled "Hackers" for "3/24/2009" that contains "My First Exploit"
     When I run jekyll
     Then the _site directory should exist
-    And the _site/posts directory should exist
-    And I should see "My First Exploit" in "_site/posts/2009/03/24/hackers.html"
+    And I should see "My First Exploit" in "_site/2009/03/24/hackers.html"
 
-  Scenario: Basic site with layout
+  Scenario: Basic site with layout and a page
     Given I have a blank site
     And I have a _layouts directory
     And I have an "index.html" file with a "default" layout that contains "Basic Site with Layout"
-    And I have a default layout that contains "{{ content }}"
+    And I have a default layout that contains "Page Layout: {{ content }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Basic Site with Layout" in "_site/index.html"
+    And I should see "Page Layout: Basic Site with Layout" in "_site/index.html"
 
   Scenario: Basic site with layout and a post
     Given I have a blank site
     And I have a _layouts directory
     And I have a _posts directory
-    And I have a post titled "Hackers" for "3/24/2009" that contains "My First Exploit"
-    And I have an "index.html" file with a "default" layout that contains "Basic Site with Layout and a Post: {{ first_post }}"
-    And I have a default layout that contains "{{ content }}"
+    And I have a post titled "Wargames" for "3/26/2009" that contains "Would you like to play a game?"
+    And I have a post titled "Wargames" for "3/26/2009" with layout "default"
+    And I have a default layout that contains "Post Layout: {{ content }}"
     When I run jekyll
     Then the _site directory should exist
-    And the _site/posts directory should exist
-    And I should see "My First Exploit" in "_site/posts/2009/03/24/hackers.html"
-    And I should see "Basic Site with Layout and a Post: My First Exploit" in "_site/index.html"
+    And I should see "Post Layout: Would you like to play a game?" in "_site/2009/03/26/wargames.html"
 
   Scenario: Basic site with include tag
     Given I have a blank site
