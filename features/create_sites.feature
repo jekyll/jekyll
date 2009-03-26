@@ -17,7 +17,6 @@ Feature: Create sites
     When I run jekyll
     Then the _site directory should exist
     And the _site/posts directory should exist
-    And the _site/posts/2009/03/24/hackers.html file should exist
     And I should see "My First Exploit" in "_site/posts/2009/03/24/hackers.html"
 
   Scenario: Basic site with layout
@@ -39,7 +38,6 @@ Feature: Create sites
     When I run jekyll
     Then the _site directory should exist
     And the _site/posts directory should exist
-    And the _site/posts/2009/03/24/hackers.html file should exist
     And I should see "My First Exploit" in "_site/posts/2009/03/24/hackers.html"
     And I should see "Basic Site with Layout and a Post: My First Exploit" in "_site/index.html"
 

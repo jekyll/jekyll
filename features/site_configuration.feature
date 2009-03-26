@@ -4,6 +4,14 @@ Feature: Site configuration
   In order to make setting up a site easier
 
   Scenario: Change destination directory
+    Given I have a blank site in "_sourcedir"
+    And I have an "index.html" file that contains "Changing source directory"
+    And I have a configuration file in "_sourcedir" with "source" set to "_sourcedir"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Changing source directory" in "_site/index.html"
+
+  Scenario: Change destination directory
     Given I have a blank site
     And I have an "index.html" file that contains "Changing destination directory"
     And I have a configuration file with "site" set to "_mysite"
@@ -36,9 +44,18 @@ Feature: Site configuration
     Then the _site directory should exist
     And I should see "My awesome site" in "_site/index.html"
 
+  Scenario: Run server to host generated site
+    Given I have a blank site
+    And I have an "index.html" file that contains "WEBrick to the rescue"
+    And I have a configuration file with "server" set to "true"
+    When I run jekyll
+    And I go to "http://0.0.0.0:4000"
+    Then I should see "WEBrick to the rescue"
+
   Scenario: Run server on a different server port
     Given I have a blank site
     And I have an "index.html" file that contains "Changing Port"
+    And I have a configuration file with "server" set to "true"
     And I have a configuration file with "port" set to "1337"
     When I run jekyll
     And I go to "http://0.0.0.0:1337"
@@ -52,7 +69,6 @@ Feature: Site configuration
     When I run jekyll
     Then the _site directory should exist
     And the _site/posts directory should exist
-    And the _site/posts/none-permalink-schema.html file should exist
     And I should see "Whoa." in "_site/posts/none-permalink-schema.html"
 
   Scenario: Use pretty permalink schema
@@ -64,8 +80,12 @@ Feature: Site configuration
     Then the _site directory should exist
     And the _site/posts directory should exist
     And the _site/posts/pretty-permalink-schema directory should exist
-    And the _site/posts/pretty-permalink-schema/index.html file should exist
     And I should see "Whoa." in "_site/posts/pretty-permalink-schema/index.html"
 
   Scenario: Highlight code with pygments
-
+    Given I have a blank site
+    And I have an "index.html" file that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
+    And I have a configuration file with "pygments" set to "true"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "puts 'Hello world!'" in "_site/index.html"
