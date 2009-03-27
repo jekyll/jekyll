@@ -21,9 +21,11 @@ Feature: Site data
     Given I have a blank site
     And I have a _posts directory
     And I have an "index.html" file that contains "{{ site.posts.first.title }}: {{ site.posts.first.url }}"
-    And I have a post titled "First Post" for "3/25/2009" that contains "First!"
-    And I have a post titled "Second Post" for "3/26/2009" that contains "Second!"
-    And I have a post titled "Third Post" for "3/27/2009" that contains "Third!"
+    And I have the following posts:
+      | title       | date      | content         |
+      | First Post  | 3/25/2009 | My First Post   |
+      | Second Post | 3/26/2009 | My Second Post  |
+      | Third Post  | 3/27/2009 | My Third Post   |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Third Post: /2009/03/27/third-post.html" in "_site/index.html"
@@ -32,9 +34,11 @@ Feature: Site data
     Given I have a blank site
     And I have a _posts directory
     And I have an "index.html" file that contains "{% for post in site.posts %} {{ post.title }} {% endfor %}"
-    And I have a post titled "First Post" for "3/25/2009" that contains "First!"
-    And I have a post titled "Second Post" for "3/26/2009" that contains "Second!"
-    And I have a post titled "Third Post" for "3/27/2009" that contains "Third!"
+    And I have the following posts:
+      | title       | date      | content         |
+      | First Post  | 3/25/2009 | My First Post   |
+      | Second Post | 3/26/2009 | My Second Post  |
+      | Third Post  | 3/27/2009 | My Third Post   |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Third Post Second Post First Post" in "_site/index.html"
@@ -43,10 +47,10 @@ Feature: Site data
     Given I have a blank site
     And I have a _posts directory
     And I have an "index.html" file that contains "{% for post in site.categories.code %} {{ post.title }} {% endfor %}"
-    And I have a post titled "Awesome Hack" for "3/26/2009" that contains "while(true) { puts 'infinity' }"
-    And I have a post titled "Awesome Hack" for "3/26/2009" with category "code"
-    And I have a post titled "Delicious Beer" for "3/26/2009" that contains "# Yuengling"
-    And I have a post titled "Delicious Beer" for "3/26/2009" with category "food"
+    And I have the following posts:
+      | title          | date      | category | content            |
+      | Awesome Hack   | 3/26/2009 | code     | puts 'Hello World' |
+      | Delicious Beer | 3/26/2009 | food     | 1) Yuengling       |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Awesome Hack" in "_site/index.html"

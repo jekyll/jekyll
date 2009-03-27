@@ -64,20 +64,24 @@ Feature: Site configuration
   Scenario: Use none permalink schema
     Given I have a blank site
     And I have a _posts directory
-    And I have a post titled "None Permalink Schema" for "3/25/2009" that contains "Whoa."
+    And I have the following post:
+      | title                 | date      | content          |
+      | None Permalink Schema | 3/27/2009 | Totally nothing. |
     And I have a configuration file with "permalink" set to "none"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Whoa." in "_site/none-permalink-schema.html"
+    And I should see "Totally nothing." in "_site/none-permalink-schema.html"
 
   Scenario: Use pretty permalink schema
     Given I have a blank site
     And I have a _posts directory
-    And I have a post titled "Pretty Permalink Schema" for "3/25/2009" that contains "Whoa."
+    And I have the following post:
+      | title                   | date      | content            |
+      | Pretty Permalink Schema | 3/27/2009 | Totally wordpress. |
     And I have a configuration file with "permalink" set to "pretty"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Whoa." in "_site/2009/03/25/pretty-permalink-schema/index.html"
+    And I should see "Totally wordpress." in "_site/2009/03/27/pretty-permalink-schema/index.html"
 
   Scenario: Highlight code with pygments
     Given I have a blank site
