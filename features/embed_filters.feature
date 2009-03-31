@@ -7,8 +7,8 @@ Feature: Embed filters
     Given I have a blank site
     And I have a _posts directory
     And I have the following post:
-      | title              | date      | content                             |
-      | Date to XML schema | 3/27/2009 | {{ post.date | date_to_xmlschema }} |
+      | title              | date      | input     | filter            |
+      | Date to XML schema | 3/27/2009 | post.date | date_to_xmlschema |
     When I run jekyll
     Then the _site directory should exist
     And I should see "2009-03-27T00:00:00-08:00" in "_site/2009/03/27/date-to-xml-schema.html"
@@ -17,8 +17,8 @@ Feature: Embed filters
     Given I have a blank site
     And I have a _posts directory
     And I have the following post:
-      | title               | date      | content                                     |
-      | Escape text for XML | 3/27/2009 | {{ '<tt>Mario & Luigi</tt>' | xml_escape }} |
+      | title               | date      | input                    | filter     |
+      | Escape text for XML | 3/27/2009 | '<tt>Mario & Luigi</tt>' | xml_escape |
     When I run jekyll
     Then the _site directory should exist
     And I should see "&lt;tt&gt;Mario &amp; Luigi&lt;tt&gt;" in "_site/2009/03/27/escape-text-for-xml.html"
@@ -27,8 +27,8 @@ Feature: Embed filters
     Given I have a blank site
     And I have a _posts directory
     And I have the following post:
-      | title                     | date      | content                            |
-      | Calculate number of words | 3/27/2009 | {{ post.title | number_of_words }} |
+      | title                     | date      | input      | filter          |
+      | Calculate number of words | 3/27/2009 | post.title | number_of_words |
     When I run jekyll
     Then the _site directory should exist
     And I should see "4" in "_site/2009/03/27/calculate-number-of-words.html"
@@ -37,8 +37,8 @@ Feature: Embed filters
     Given I have a blank site
     And I have a _posts directory
     And I have the following post:
-      | title                     | date      | tags            | content                                    |
-      | Convert array to sentence | 3/27/2009 | life hacks code | {{ post.tags | array_to_sentence_string }} |
+      | title                     | date      | tags            | input     | filter                   |
+      | Convert array to sentence | 3/27/2009 | life hacks code | post.tags | array_to_sentence_string |
     When I run jekyll
     Then the _site directory should exist
     And I should see "life, hacks, and code" in "_site/2009/03/27/convert-array-to-sentence.html"
@@ -47,8 +47,8 @@ Feature: Embed filters
     Given I have a blank site
     And I have a _posts directory
     And I have the following post:
-      | title           | date      | tags        | content                       |
-      | Logical Awesome | 3/27/2009 | *Mr. Spock* | {{ post.author | textilize }} |
+      | title           | date      | tags        | input       | filter    |
+      | Logical Awesome | 3/27/2009 | *Mr. Spock* | post.author | textilize |
     When I run jekyll
     Then the _site directory should exist
     And I should see "<b>Mr. Spock</b>" in "_site/2009/03/27/textilize.html"
