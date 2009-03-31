@@ -23,7 +23,7 @@ Feature: Create sites
   Scenario: Basic site with layout and a page
     Given I have a blank site
     And I have a _layouts directory
-    And I have an "index.html" file with a "default" layout that contains "Basic Site with Layout"
+    And I have an "index.html" file with layout "default" that contains "Basic Site with Layout"
     And I have a default layout that contains "Page Layout: {{ content }}"
     When I run jekyll
     Then the _site directory should exist
