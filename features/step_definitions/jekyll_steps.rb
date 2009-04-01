@@ -39,14 +39,21 @@ Given /^I have a (.*) directory$/ do |dir|
   FileUtils.mkdir(dir)
 end
 
-Given /^I have the following posts?(?: in "(.*)")?:$/ do |dir, table|
+Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, table|
   table.hashes.each do |post|
     date = Date.parse(post['date']).strftime('%Y-%m-%d')
     title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
-    path = File.join(dir || '', '_posts', "#{date}-#{title}.#{post['type'] || 'textile'}")
+
+    if direction && direction == "in"
+      before = folder || '.'
+    elsif direction && direction == "under"
+      after = folder || '.'
+    end
+
+    path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{post['type'] || 'textile'}")
 
     matter_hash = {}
-    %w(title layout tags).each do |key|
+    %w(title layout tags category categories).each do |key|
       matter_hash[key] = post[key] if post[key]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp

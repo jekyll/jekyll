@@ -78,10 +78,10 @@ Feature: Post data
     And I have the following post in "movies/scifi":
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post categories: {{ site.posts.first.categories }}"
+    And I have a simple layout that contains "Post categories: {{ site.posts.first.categories | array_to_sentence_string }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Post categories: movies scifi" in "_site/movies/scifi/2009/03/27/star-wars.html"
+    And I should see "Post categories: movies and scifi" in "_site/movies/scifi/2009/03/27/star-wars.html"
 
   Scenario: Use post.categories variable when category is in YAML
     Given I have a _posts directory
@@ -92,30 +92,31 @@ Feature: Post data
     And I have a simple layout that contains "Post category: {{ site.posts.first.categories }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Post categories: movies" in "_site/movies/2009/03/27/star-wars.html"
+    And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
 
   Scenario: Use post.categories variable when categories are in YAML
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout | categories    | content                 |
-      | Star Wars | 3/27/2009 | simple | movies, scifi | Luke, I am your father. |
-    And I have a simple layout that contains "Post categories: {{ site.posts.first.categories }}"
+      | title     | date      | layout | categories          | content                 |
+      | Star Wars | 3/27/2009 | simple | ['movies', 'scifi'] | Luke, I am your father. |
+    And I have a simple layout that contains "Post categories: {{ site.posts.first.categories | array_to_sentence_string }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Post categories: movies scifi" in "_site/movies/scifi/2009/03/27/star-wars.html"
+    And I should see "Post categories: movies and scifi" in "_site/movies/scifi/2009/03/27/star-wars.html"
 
   Scenario: Use post.topics variable
     Given I have a _posts directory
     And I have a _posts/movies directory
     And I have a _posts/movies/scifi directory
-    And I have the following post:
+    And I have a _layouts directory
+    And I have the following post under "movies/scifi":
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post topics: {{ site.posts.first.topics }}"
+    And I have a simple layout that contains "Post topics: {{ site.posts.first.topics | array_to_sentence_string }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Post topics: movies scifi" in "_site/2009/03/27/star-wars.html"
+    And I should see "Post topics: movies and scifi" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Disable a post from being published
     Given I have a _posts directory
