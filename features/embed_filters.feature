@@ -4,52 +4,57 @@ Feature: Embed filters
   In order to perform cool stuff in my posts
 
   Scenario: Convert date to XML schema
-    Given I have a blank site
-    And I have a _posts directory
+    Given I have a _posts directory
+    And I have a _layouts directory
     And I have the following post:
-      | title              | date      | input     | filter            |
-      | Date to XML schema | 3/27/2009 | post.date | date_to_xmlschema |
+      | title     | date      | layout  | content                                     |
+      | Star Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
+    And I have a default layout that contains "{{ site.time | date_to_xmlschema }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "2009-03-27T00:00:00-08:00" in "_site/2009/03/27/date-to-xml-schema.html"
+    And I should see today's date in "_site/2009/03/27/star-wars.html"
 
   Scenario: Escape text for XML
-    Given I have a blank site
-    And I have a _posts directory
+    Given I have a _posts directory
+    And I have a _layouts directory
     And I have the following post:
-      | title               | date      | input                    | filter     |
-      | Escape text for XML | 3/27/2009 | '<tt>Mario & Luigi</tt>' | xml_escape |
+      | title       | date      | layout  | content                                     |
+      | Star & Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
+    And I have a default layout that contains "{{ page.title | xml_escape }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "&lt;tt&gt;Mario &amp; Luigi&lt;tt&gt;" in "_site/2009/03/27/escape-text-for-xml.html"
+    And I should see "Star &amp; Wars" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Calculate number of words
-    Given I have a blank site
-    And I have a _posts directory
+    Given I have a _posts directory
+    And I have a _layouts directory
     And I have the following post:
-      | title                     | date      | input      | filter          |
-      | Calculate number of words | 3/27/2009 | post.title | number_of_words |
+      | title     | date      | layout  | content                                     |
+      | Star Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
+    And I have a default layout that contains "{{ content | xml_escape }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "4" in "_site/2009/03/27/calculate-number-of-words.html"
+    And I should see "7" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Convert an array into a sentence
-    Given I have a blank site
-    And I have a _posts directory
+    Given I have a _posts directory
+    And I have a _layouts directory
     And I have the following post:
-      | title                     | date      | tags            | input     | filter                   |
-      | Convert array to sentence | 3/27/2009 | life hacks code | post.tags | array_to_sentence_string |
+      | title     | date      | layout  | tags                   | content                                     |
+      | Star Wars | 3/27/2009 | default | [scifi, movies, force] | These aren't the droids you're looking for. |
+    And I have a default layout that contains "{{ page.tags | array_to_sentence_string }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "life, hacks, and code" in "_site/2009/03/27/convert-array-to-sentence.html"
+    And I should see "scifi, movies, and force" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Textilize a given string
-    Given I have a blank site
-    And I have a _posts directory
+    Given I have a _posts directory
+    And I have a _layouts directory
     And I have the following post:
-      | title           | date      | tags        | input       | filter    |
-      | Logical Awesome | 3/27/2009 | *Mr. Spock* | post.author | textilize |
+      | title     | date      | layout  | content                                      |
+      | Star Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
+    And I have a default layout that contains "By {{ '_Obi-wan_' | textilize }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "<b>Mr. Spock</b>" in "_site/2009/03/27/textilize.html"
+    And I should see "By <p><em>Obi-wan</em></p>" in "_site/2009/03/27/star-wars.html"
 

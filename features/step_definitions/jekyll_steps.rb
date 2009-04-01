@@ -42,18 +42,26 @@ end
 Given /^I have the following posts?(?: in "(.*)")?:$/ do |dir, table|
   table.hashes.each do |post|
     date = Date.parse(post['date']).strftime('%Y-%m-%d')
-    path = File.join("_posts", "#{date}-#{post['title'].downcase}.textile")
+		title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+    path = File.join("_posts", "#{date}-#{title}.#{post['type'] || 'textile'}")
 
-    matter_hash = {'title' => post['title']}
-    matter_hash['layout'] = post['layout'] if post['layout']
-    matter = matter_hash.map { |k, v| "#{k}: #{v}\n" } 
+    matter_hash = {}
+		%w(title layout tags).each do |key|
+			matter_hash[key] = post[key] if post[key]
+		end
+    matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
+
+		content = post['content']
+		if post['input'] && post['filter']
+			content = "{{ #{post['input']} | #{post['filter']} }}"
+		end
 
     File.open(path, 'w') do |f|
       f.write <<EOF
 ---
 #{matter}
 ---
-#{post['content']}
+#{content}
 EOF
       f.close
     end
@@ -65,7 +73,7 @@ Given /^I have a configuration file(?: in "(.*)")? with "(.*)" set to "(.*)"$/ d
 end
 
 When /^I run jekyll$/ do
-  `#{File.join(ENV['PWD'], 'bin', 'jekyll')}`
+  system File.join(ENV['PWD'], 'bin', 'jekyll') + " >> /dev/null"
 end
 
 When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
@@ -86,5 +94,9 @@ end
 
 Then /^the "(.*)" file should not exist$/ do |file|
     pending
+end
+
+Then /^I should see today's date in "(.*)"$/ do |file|
+  assert_match Regexp.new(Date.today.to_s), File.open(file).readlines.join
 end
 
