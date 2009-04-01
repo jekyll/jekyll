@@ -3,3 +3,4 @@ test/dest/
 pkg/
 *.swp
 *~
+_site/

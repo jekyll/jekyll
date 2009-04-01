@@ -8,15 +8,19 @@ After do
   FileUtils.rm_rf(TEST_DIR)
 end
 
+Given /^I have a blank site in "(.*)"$/ do |path|
+  FileUtils.mkdir(path)
+end
+
+# Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
 Given /^I have an "(.*)" page(?: with layout "(.*)")? that contains "(.*)"$/ do |file, layout, text|
   File.open(file, 'w') do |f|
     f.write <<EOF
 ---
 layout: #{layout || 'nil'}
 ---
+#{text}
 EOF
-
-    f.write(text)
     f.close
   end
 end
@@ -75,16 +79,25 @@ EOF
   end
 end
 
-Given /^I have a configuration file(?: in "(.*)")? with "(.*)" set to "(.*)"$/ do |dir, key, value|
-    pending
+Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
+  File.open('_config.yml', 'w') do |f|
+    f.write("#{key}: #{value}")
+    f.close
+  end
+end
+
+When /^I run jekyll in the background$/ do
+  run_jekyll(:bg => true)
 end
 
 When /^I run jekyll$/ do
-  system File.join(ENV['PWD'], 'bin', 'jekyll') + " >> /dev/null"
+  run_jekyll
 end
 
 When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
-    pending
+  File.open(file, 'a') do |f|
+    f.write(text)
+  end
 end
 
 When /^I go to "(.*)"$/ do |address|
