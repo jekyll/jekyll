@@ -53,7 +53,7 @@ Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, t
     path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{post['type'] || 'textile'}")
 
     matter_hash = {}
-    %w(title layout tags category categories).each do |key|
+    %w(title layout tags category categories published author).each do |key|
       matter_hash[key] = post[key] if post[key]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
@@ -100,7 +100,7 @@ Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|
-    pending
+  assert !File.exists?(file)
 end
 
 Then /^I should see today's date in "(.*)"$/ do |file|

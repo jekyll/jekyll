@@ -47,7 +47,7 @@ begin
 rescue LoadError
 end
 
-task :default => :test
+task :default => [:test, :features]
 
 # console
 
