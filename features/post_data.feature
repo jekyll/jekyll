@@ -9,7 +9,7 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post title: {{ post.title }}"
+    And I have a simple layout that contains "Post title: {{ site.posts.first.title }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post title: Star Wars" in "_site/2009/03/27/star-wars.html"
@@ -20,7 +20,7 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post url: {{ post.url }}"
+    And I have a simple layout that contains "Post url: {{ site.posts.first.url }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post url: /2009/03/27/star-wars.html" in "_site/2009/03/27/star-wars.html"
@@ -31,10 +31,10 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post date: {{ post.date }}"
+    And I have a simple layout that contains "Post date: {{ site.posts.first.date }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Post url: 2009-03-27" in "_site/2009/03/27/star-wars.html"
+    And I should see "Post date: Fri Mar 27" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Use post.id variable
     Given I have a _posts directory
@@ -42,7 +42,7 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post id: {{ post.id }}"
+    And I have a simple layout that contains "Post id: {{ site.posts.first.id }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post id: /2009/03/27/star-wars" in "_site/2009/03/27/star-wars.html"
@@ -53,10 +53,10 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post content: {{ post.content }}"
+    And I have a simple layout that contains "Post content: {{ site.posts.first.content }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Post content: Luke, I am your father." in "_site/2009/03/27/star-wars.html"
+    And I should see "Post content: <p>Luke, I am your father.</p>" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Use post.categories variable when category is in a folder
     Given I have a movies directory
@@ -65,7 +65,7 @@ Feature: Post data
     And I have the following post in "movies":
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post category: {{ post.categories }}"
+    And I have a simple layout that contains "Post category: {{ site.posts.first.categories }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
@@ -78,7 +78,7 @@ Feature: Post data
     And I have the following post in "movies/scifi":
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post categories: {{ post.categories }}"
+    And I have a simple layout that contains "Post categories: {{ site.posts.first.categories }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post categories: movies scifi" in "_site/movies/scifi/2009/03/27/star-wars.html"
@@ -89,7 +89,7 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | category | content                 |
       | Star Wars | 3/27/2009 | simple | movies   | Luke, I am your father. |
-    And I have a simple layout that contains "Post category: {{ post.categories }}"
+    And I have a simple layout that contains "Post category: {{ site.posts.first.categories }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post categories: movies" in "_site/movies/2009/03/27/star-wars.html"
@@ -100,7 +100,7 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | categories    | content                 |
       | Star Wars | 3/27/2009 | simple | movies, scifi | Luke, I am your father. |
-    And I have a simple layout that contains "Post categories: {{ post.categories }}"
+    And I have a simple layout that contains "Post categories: {{ site.posts.first.categories }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post categories: movies scifi" in "_site/movies/scifi/2009/03/27/star-wars.html"
@@ -112,7 +112,7 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post topics: {{ post.topics }}"
+    And I have a simple layout that contains "Post topics: {{ site.posts.first.topics }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post topics: movies scifi" in "_site/2009/03/27/star-wars.html"
@@ -131,7 +131,7 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | author      | content                 |
       | Star Wars | 3/27/2009 | simple | Darth Vader | Luke, I am your father. |
-    And I have a simple layout that contains "Post author: {{ post.author }}"
+    And I have a simple layout that contains "Post author: {{ site.posts.first.author }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post author: Darth Vader" in "_site/2009/03/27/star-wars.html"

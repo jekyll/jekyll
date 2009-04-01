@@ -42,19 +42,19 @@ end
 Given /^I have the following posts?(?: in "(.*)")?:$/ do |dir, table|
   table.hashes.each do |post|
     date = Date.parse(post['date']).strftime('%Y-%m-%d')
-		title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
-    path = File.join("_posts", "#{date}-#{title}.#{post['type'] || 'textile'}")
+    title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+    path = File.join(dir || '', '_posts', "#{date}-#{title}.#{post['type'] || 'textile'}")
 
     matter_hash = {}
-		%w(title layout tags).each do |key|
-			matter_hash[key] = post[key] if post[key]
-		end
+    %w(title layout tags).each do |key|
+      matter_hash[key] = post[key] if post[key]
+    end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
 
-		content = post['content']
-		if post['input'] && post['filter']
-			content = "{{ #{post['input']} | #{post['filter']} }}"
-		end
+    content = post['content']
+    if post['input'] && post['filter']
+      content = "{{ #{post['input']} | #{post['filter']} }}"
+    end
 
     File.open(path, 'w') do |f|
       f.write <<EOF
