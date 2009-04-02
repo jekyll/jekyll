@@ -13,11 +13,11 @@ Given /^I have a blank site in "(.*)"$/ do |path|
 end
 
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
-Given /^I have an "(.*)" page(?: with layout "(.*)")? that contains "(.*)"$/ do |file, layout, text|
+Given /^I have an "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
   File.open(file, 'w') do |f|
     f.write <<EOF
 ---
-layout: #{layout || 'nil'}
+#{key || 'layout'}: #{value || 'nil'}
 ---
 #{text}
 EOF
@@ -96,10 +96,6 @@ When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
   end
 end
 
-When /^I go to "(.*)"$/ do |address|
-    pending
-end
-
 Then /^the (.*) directory should exist$/ do |dir|
   assert File.directory?(dir)
 end
@@ -110,6 +106,10 @@ end
 
 Then /^the "(.*)" file should not exist$/ do |file|
   assert !File.exists?(file)
+end
+
+Then /^I should see today's time in "(.*)"$/ do |file|
+  assert_match Regexp.new(Time.now.to_s), File.open(file).readlines.join
 end
 
 Then /^I should see today's date in "(.*)"$/ do |file|
