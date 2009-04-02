@@ -10,6 +10,7 @@ title: This is a test
 
 ---
 This document results in a markdown error with maruku
+
 {% highlight ruby %}
 puts "hi"
 
