@@ -13,6 +13,8 @@
     * Prevent _posts from being copied to the destination directory [github.com/bdimcheff]
   * Refactors
     * Factored the filtering code into a method [github.com/Chrononaut]
+    * Fix tests and convert to Shoulda [github.com/qrush, github.com/technicalpickles]
+    * Add Cucumber acceptance test suite [github.com/qrush, github.com/technicalpickles]
 
 == 0.4.1
   * Minor Enhancements
