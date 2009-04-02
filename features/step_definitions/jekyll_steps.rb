@@ -86,10 +86,6 @@ Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
   end
 end
 
-When /^I run jekyll in the background$/ do
-  run_jekyll(:bg => true)
-end
-
 When /^I run jekyll$/ do
   run_jekyll
 end

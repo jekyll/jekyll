@@ -13,5 +13,6 @@ def run_jekyll(opts = {})
   if opts[:bg]
     bg = '&'
   end
-  system "#{JEKYLL_PATH} >> /dev/null #{bg}"
+
+  system "#{JEKYLL_PATH} >> /dev/null"
 end

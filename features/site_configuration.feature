@@ -19,11 +19,11 @@ Feature: Site configuration
     And I should see "Changing destination directory" in "_mysite/index.html"
 
   Scenario: Use RDiscount for markup
-    Given I have an "index.html" file that contains "[Google](http://google.com)"
+    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
     And I have a configuration file with "markdown" set to "rdiscount"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "<a href='http://google.com/>Google</a>" in "_site/index.html"
+    And I should see "<a href="http://google.com">Google</a>" in "_site/index.html"
 
   Scenario: Use Maruku for markup
     Given I have an "index.markdown" page that contains "[Google](http://google.com)"
@@ -31,30 +31,6 @@ Feature: Site configuration
     When I run jekyll
     Then the _site directory should exist
     And I should see "<a href='http://google.com'>Google</a>" in "_site/index.html"
-
-  Scenario: Enable auto-regeneration
-    Given I have an "index.html" file that contains "My Awesome Site"
-    And I have a configuration file with "auto" set to "true"
-    When I run jekyll in the background
-    And I change "index.html" to contain "Auto-regenerate on!"
-    Then the _site directory should exist
-    And I should see "My Awesome Site" in "_site/index.html"
-    And I should see "Auto-regenerate on!" in "_site/index.html"
-
-  Scenario: Run server to host generated site
-    Given I have an "index.html" file that contains "WEBrick to the rescue"
-    And I have a configuration file with "server" set to "true"
-    When I run jekyll
-    And I go to "http://0.0.0.0:4000"
-    Then I should see "WEBrick to the rescue"
-
-  Scenario: Run server on a different server port
-    Given I have an "index.html" file that contains "Changing Port"
-    And I have a configuration file with "server" set to "true"
-    And I have a configuration file with "port" set to "1337"
-    When I run jekyll
-    And I go to "http://0.0.0.0:1337"
-    Then I should see "Changing Port"
 
   Scenario: Use none permalink schema
     Given I have a _posts directory
