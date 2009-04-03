@@ -10,7 +10,7 @@ Feature: Site data
     And I should see "Contact: email@me.com" in "_site/contact.html"
 
   Scenario: Use site.time variable
-    Given I have an "index.html" page that contains "Generated on: {{ site.time }}"
+    Given I have an "index.html" page that contains "{{ site.time }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see today's time in "_site/index.html"
