@@ -1,0 +1,37 @@
+#left {
+  background: #ddd;
+  color: #000;
+  text-align: right;
+}
+
+#right {
+  background: #000;
+  color: #ddd;
+  left: 50%;
+}
+
+.bg {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  font-size: 10em;
+  font-family: Georgia, Times, sans-serif;
+}
+
+p {
+  font-size: 10%;
+  font-family: Verdana, serif;
+  margin-top: 50px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+ul {
+  font-size: 25%;
+  font-family: Verdana, serif;
+  margin-top: 50px;
+}
+
+ul li {
+  margin: 10px;
+}
