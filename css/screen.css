@@ -2,17 +2,34 @@
   background: #ddd;
   color: #000;
   text-align: right;
+	float: left;
 }
 
 #right {
   background: #000;
   color: #ddd;
   left: 50%;
+	text-align: left;
+	float: right;
+}
+
+#left_bg {
+  background: #ddd;
+  color: #000;
+}
+
+#right_bg {
+  left: 50%;
+  background: #000;
+  color: #ddd;
 }
 
 .bg {
-  position: absolute;
-  height: 100%;
+	width: 50%;
+	position: absolute;
+	height: 100%;
+}
+.middle {
   width: 50%;
   font-size: 10em;
   font-family: Georgia, Times, sans-serif;
@@ -35,3 +52,7 @@ ul {
 ul li {
   margin: 10px;
 }
+	  .container {top: 0; left: 0; width: 100%; height: 100%;
+		    position: fixed; display: table}
+				  .center {text-align:center; display: table-cell; vertical-align: middle}
+
