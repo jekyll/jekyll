@@ -9,6 +9,19 @@ class TestSite < Test::Unit::TestCase
       @site = Site.new(Jekyll.configuration)
     end
 
+    should "reset data before processing" do
+      clear_dest
+      @site.process
+      before_posts = @site.posts.length
+      before_layouts = @site.layouts.length
+      before_categories = @site.categories.length
+
+      @site.process
+      assert_equal before_posts, @site.posts.length
+      assert_equal before_layouts, @site.layouts.length
+      assert_equal before_categories, @site.categories.length
+    end
+
     should "read layouts" do
       @site.read_layouts
       assert_equal ["default", "simple"].sort, @site.layouts.keys.sort
