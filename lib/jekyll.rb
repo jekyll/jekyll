@@ -16,6 +16,7 @@ require 'redcloth'
 
 # internal requires
 require 'jekyll/core_ext'
+require 'jekyll/pager'
 require 'jekyll/site'
 require 'jekyll/convertible'
 require 'jekyll/layout'

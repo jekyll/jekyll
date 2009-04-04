@@ -173,6 +173,14 @@ date parts and post name will be made and an index.html will be placed in the
 leaf directory resulting in URLs like 2008/11/17/blogging-like-a-hacker/.
 
   $ jekyll --permalink [date|none|pretty]
+  
+h3. Posts' pagination
+
+There is also an option to paginate a blog's post. With this option enabled, 
+Jekyll takes the index.html file in your base directory and compiles it within
+several directories called "page2", "page3" .. "pageN".
+
+  $ jekyll --paginate [POSTS_PER_PAGE]
 
 h2. Configuration File
 
@@ -279,6 +287,29 @@ h3. Post
 
   post.content
     The content of the Post.
+    
+h3. Paginator
+
+  paginator.page
+    The number of the current page.
+
+  paginator.per_page
+    Number of posts per page.
+
+  paginator.posts
+    Posts available for that page.
+
+  paginator.total_posts
+    Total number of posts.
+
+  paginator.total_pages
+    Total number of pages.
+
+  paginator.previous_page
+    The number of the previous page.
+
+  paginator.next_page
+    The number of the next page.
 
 h2. YAML Front Matter
 
