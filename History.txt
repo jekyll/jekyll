@@ -1,4 +1,4 @@
-==
+== 0.5.0 / 2009-04-07
   * Minor Enhancements
     * Ability to set post categories via YAML [github.com/qrush]
     * Ability to set prevent a post from publishing via YAML [github.com/qrush]
