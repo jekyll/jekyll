@@ -71,7 +71,9 @@ class Albino
   end
 
   def colorize(options = {})
-    execute @@bin + convert_options(options)
+    html = execute(@@bin + convert_options(options))
+    # Work around an RDiscount bug: http://gist.github.com/97682
+    html.to_s.sub(%r{</pre></div>\Z}, "</pre>\n</div>")
   end
   alias_method :to_s, :colorize
 
