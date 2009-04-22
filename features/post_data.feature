@@ -139,3 +139,17 @@ Feature: Post data
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post author: Darth Vader" in "_site/2009/03/27/star-wars.html"
+
+  Scenario: Previous and next posts title
+    Given I have a _posts directory
+    And I have a _layouts directory
+    And I have the following posts:
+      | title            | date      | layout  | author      | content                 |
+      | Star Wars        | 3/27/2009 | ordered | Darth Vader | Luke, I am your father. |
+      | Some like it hot | 4/27/2009 | ordered | Osgood      | Nobody is perfect.      |
+      | Terminator       | 5/27/2009 | ordered | Arnold      | Sayonara, baby          |
+    And I have a ordered layout that contains "Previous post: {{ page.previous.title }} and next post: {{ page.next.title }}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "next post: Some like it hot" in "_site/2009/03/27/star-wars.html"
+    And I should see "Previous post: Some like it hot" in "_site/2009/05/27/terminator.html"

@@ -194,11 +194,32 @@ module Jekyll
         "id" => self.id,
         "topics" => self.topics,
         "categories" => self.categories,
+        "next" => self.next,
+        "previous" => self.previous,
         "content" => self.content }.deep_merge(self.data)
     end
 
     def inspect
       "<Post: #{self.id}>"
+    end
+
+    def next
+      pos = self.site.posts.index(self)
+
+      if pos && pos < self.site.posts.length-1
+        self.site.posts[pos+1]
+      else
+        nil
+      end
+    end
+
+    def previous
+      pos = self.site.posts.index(self)
+      if pos && pos > 0
+        self.site.posts[pos-1]
+      else
+        nil
+      end
     end
   end
 

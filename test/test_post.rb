@@ -75,6 +75,32 @@ class TestPost < Test::Unit::TestCase
       end
     end
 
+    context "when in a site" do
+      setup do
+        clear_dest
+        stub(Jekyll).configuration { Jekyll::DEFAULTS }
+        @site = Site.new(Jekyll.configuration)
+        @site.posts = [setup_post('2008-02-02-published.textile'),
+                       setup_post('2009-01-27-categories.textile')]
+      end
+
+      should "have next post" do
+        assert_equal(@site.posts.last, @site.posts.first.next)
+      end
+
+      should "have previous post" do
+        assert_equal(@site.posts.first, @site.posts.last.previous)
+      end
+
+      should "not have previous post if first" do
+        assert_equal(nil, @site.posts.first.previous)
+      end
+
+      should "not have next post if last" do
+        assert_equal(nil, @site.posts.last.next)
+      end
+    end
+
     context "initializing posts" do
       should "publish when published yaml is no specified" do
         post = setup_post("2008-02-02-published.textile")
