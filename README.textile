@@ -191,6 +191,10 @@ additional options:
     png_dir:  [PATH]    # Where should the math PNGs be stored?
     png_url:  [URL]     # A relative URL for the PNGs
 
+  exclude:    # This is a YAML array for files in the root directory,
+    - file1   # which should be excluded to be processed into '_site'.
+    - file2   # This can be useful for README, Rakefiles etc.
+
 The default configuration is shown below as in YAML format: 
 
   destination: ./_site
