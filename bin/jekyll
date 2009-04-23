@@ -10,7 +10,7 @@ Basic Command Line Usage:
   jekyll <path to write generated site>                    # . -> <path>
   jekyll <path to source> <path to write generated site>   # <path> -> <path>
 
-  Configuration is read from '<source>/_config.yaml' but can be overriden
+  Configuration is read from '<source>/_config.yml' but can be overriden
   using the following options:
 
 HELP

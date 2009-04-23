@@ -27,7 +27,7 @@ require 'jekyll/tags/include'
 require 'jekyll/albino'
 
 module Jekyll
-  # Default options. Overriden by values in _config.yaml or command-line opts.
+  # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML)
   DEFAULTS = {
     'auto'         => false,
@@ -61,7 +61,7 @@ module Jekyll
     # then, we need to know where to look for _config.yml
     source = override['source'] || Jekyll::DEFAULTS['source']
 
-    # Get configuration from <source>/_config.yaml
+    # Get configuration from <source>/_config.yml
     config = {}
     config_file = File.join(source, '_config.yml')
     begin
