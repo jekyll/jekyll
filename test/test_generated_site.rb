@@ -18,7 +18,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "render post.content" do
-      latest_post = Dir[source_dir('_posts', '*')].last
+      latest_post = Dir[source_dir('_posts', '*')].sort.last
       post = Post.new(@site, source_dir, '', File.basename(latest_post))
       post.transform
       assert @index.include?(post.content)
