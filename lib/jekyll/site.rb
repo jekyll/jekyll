@@ -17,7 +17,7 @@ module Jekyll
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
 
-      self.exclude         = config['exclude']
+      self.exclude         = config['exclude'] || []
 
       self.reset
       self.setup
