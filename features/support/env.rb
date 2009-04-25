@@ -14,5 +14,5 @@ def run_jekyll(opts = {})
     bg = '&'
   end
 
-  system "#{JEKYLL_PATH} >> /dev/null"
+  system "#{JEKYLL_PATH}" #>> /dev/null"
 end

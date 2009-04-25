@@ -18,9 +18,12 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site
-    attr_accessor :date, :slug, :ext, :categories, :topics, :published
-    attr_accessor :data, :content, :output
+    attr_accessor :site, :date, :slug, :ext, :topics, :published, :data, :content, :output
+    attr_writer :categories
+
+    def categories
+      @categories ||= []
+    end
 
     # Initialize this Post instance.
     #   +site+ is the Site
@@ -88,16 +91,7 @@ module Jekyll
     #
     # Returns <String>
     def dir
-      if permalink
-        permalink.to_s.split("/")[0..-2].join("/") + '/'
-      else
-        prefix = self.categories.empty? ? '' : '/' + self.categories.join('/')
-        if [:date, :pretty].include?(self.site.permalink_style)
-          prefix + date.strftime("/%Y/%m/%d/")
-        else
-          prefix + '/'
-        end
-      end
+      File.dirname(url)
     end
 
     # The full path and filename of the post.
@@ -112,13 +106,13 @@ module Jekyll
     def template
       case self.site.permalink_style
       when :pretty
-        "/:year/:month/:day/:title"
+        "/:categories/:year/:month/:day/:title"
       when :none
-        "/:title.html"
+        "/:categories/:title.html"
       when :date
-        "/:year/:month/:day/:title.html"
+        "/:categories/:year/:month/:day/:title.html"
       else
-        self.site.permalink_style
+        self.site.permalink_style.to_s
       end
     end
 
@@ -130,13 +124,14 @@ module Jekyll
       return permalink if permalink
 
       {
-        "year"  => date.strftime("%Y"),
-        "month" => date.strftime("%m"),
-        "day"   => date.strftime("%d"),
-        "title" => slug
+        "year"       => date.strftime("%Y"),
+        "month"      => date.strftime("%m"),
+        "day"        => date.strftime("%d"),
+        "title"      => slug,
+        "categories" => categories.sort.join('/')
       }.inject(template) { |result, token|
         result.gsub(/:#{token.first}/, token.last)
-      }
+      }.gsub(/\/\//, "/")
     end
 
     # The UID for this post (useful in feeds)
@@ -144,7 +139,7 @@ module Jekyll
     #
     # Returns <String>
     def id
-      self.dir + self.slug
+      File.join(self.dir, self.slug)
     end
 
     # Calculate related posts.
@@ -195,7 +190,7 @@ module Jekyll
 
       path = File.join(dest, self.url)
 
-      if self.site.permalink_style == :pretty
+      if template[/\.html$/].nil?
         FileUtils.mkdir_p(path)
         path = File.join(path, "index.html")
       end

@@ -31,7 +31,7 @@ Feature: Fancy permalinks
     And I have a configuration file with "permalink" set to "blog/:year/:month/:day/:title"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Totally custom." in "_site/posts/2009/03/27/custom-permalink-scheme/index.html"
+    And I should see "Totally custom." in "_site/blog/2009/03/27/custom-permalink-schema/index.html"
 
   Scenario: Use custom permalink schema with category
     Given I have a _posts directory
@@ -41,7 +41,7 @@ Feature: Fancy permalinks
     And I have a configuration file with "permalink" set to ":category/:title.html"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Totally custom." in "_site/stuff/custom-permalink-scheme.html"
+    And I should see "Totally custom." in "_site/stuff/custom-permalink-schema.html"
 
   Scenario: Use custom permalink schema with squished date
     Given I have a _posts directory
@@ -51,4 +51,4 @@ Feature: Fancy permalinks
     And I have a configuration file with "permalink" set to ":month-:day-:year/:title.html"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Totally custom." in "_site/03-27-2009/custom-permalink-scheme.html"
+    And I should see "Totally custom." in "_site/03-27-2009/custom-permalink-schema.html"
