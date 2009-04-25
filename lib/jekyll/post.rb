@@ -109,13 +109,34 @@ module Jekyll
       self.data && self.data['permalink']
     end
 
+    def template
+      case self.site.permalink_style
+      when :pretty
+        "/:year/:month/:day/:title"
+      when :none
+        "/:title.html"
+      when :date
+        "/:year/:month/:day/:title.html"
+      else
+        self.site.permalink_style
+      end
+    end
+
     # The generated relative url of this post
     # e.g. /2008/11/05/my-awesome-post.html
     #
     # Returns <String>
     def url
-      ext = self.site.permalink_style == :pretty ? '' : '.html'
-      permalink || self.id + ext
+      return permalink if permalink
+
+      {
+        "year"  => date.strftime("%Y"),
+        "month" => date.strftime("%m"),
+        "day"   => date.strftime("%d"),
+        "title" => slug
+      }.inject(template) { |result, token|
+        result.gsub(/:#{token.first}/, token.last)
+      }
     end
 
     # The UID for this post (useful in feeds)

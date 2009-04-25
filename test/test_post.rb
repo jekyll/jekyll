@@ -49,8 +49,7 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2008/10/19/foo-bar.html", @post.url
       end
 
-
-      should "respect permalink" do
+      should "respect permalink in yaml front matter" do
         file = "2008-12-03-permalinked-post.textile"
         @post.process(file)
         @post.read_yaml(@source, file)
@@ -60,27 +59,57 @@ class TestPost < Test::Unit::TestCase
         assert_equal "my_category/permalinked-post", @post.url
       end
 
-      context "with permalink style of none" do
+
+      context "with site wide permalink" do
         setup do
-          @post.site.permalink_style = :none
           @post.categories = []
-          @post.process(@fake_file)
         end
 
-        should "process the url correctly" do
-          assert_equal "/foo-bar.html", @post.url
-        end
-      end
+        context "with unspecified (date) style" do
+          setup do
+            @post.process(@fake_file)
+          end
 
-      context "with permalink style of pretty" do
-        setup do
-          @post.site.permalink_style = :pretty
-          @post.categories = []
-          @post.process(@fake_file)
+          should "process the url correctly" do
+            assert_equal "/:year/:month/:day/:title.html", @post.template
+            assert_equal "/2008/10/19/foo-bar.html", @post.url
+          end
         end
 
-        should "process the url correctly" do
-          assert_equal "/2008/10/19/foo-bar", @post.url
+        context "with none style" do
+          setup do
+            @post.site.permalink_style = :none
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:title.html", @post.template
+            assert_equal "/foo-bar.html", @post.url
+          end
+        end
+
+        context "with pretty style" do
+          setup do
+            @post.site.permalink_style = :pretty
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:year/:month/:day/:title", @post.template
+            assert_equal "/2008/10/19/foo-bar", @post.url
+          end
+        end
+
+        context "with prefix style and no extension" do
+          setup do
+            @post.site.permalink_style = "/prefix/:title"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/prefix/:title", @post.template
+            assert_equal "/prefix/foo-bar", @post.url
+          end
         end
       end
 
