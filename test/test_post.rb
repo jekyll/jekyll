@@ -49,6 +49,7 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2008/10/19/foo-bar.html", @post.url
       end
 
+
       should "respect permalink" do
         file = "2008-12-03-permalinked-post.textile"
         @post.process(file)
@@ -57,6 +58,30 @@ class TestPost < Test::Unit::TestCase
         assert_equal "my_category/permalinked-post", @post.permalink
         assert_equal "my_category/", @post.dir
         assert_equal "my_category/permalinked-post", @post.url
+      end
+
+      context "with permalink style of none" do
+        setup do
+          @post.site.permalink_style = :none
+          @post.categories = []
+          @post.process(@fake_file)
+        end
+
+        should "process the url correctly" do
+          assert_equal "/foo-bar.html", @post.url
+        end
+      end
+
+      context "with permalink style of pretty" do
+        setup do
+          @post.site.permalink_style = :pretty
+          @post.categories = []
+          @post.process(@fake_file)
+        end
+
+        should "process the url correctly" do
+          assert_equal "/2008/10/19/foo-bar", @post.url
+        end
       end
 
       should "read yaml front-matter" do
