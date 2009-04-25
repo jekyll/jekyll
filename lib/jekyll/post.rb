@@ -123,7 +123,7 @@ module Jekyll
     def url
       return permalink if permalink
 
-      {
+      @url ||= {
         "year"       => date.strftime("%Y"),
         "month"      => date.strftime("%m"),
         "day"        => date.strftime("%d"),

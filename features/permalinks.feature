@@ -28,7 +28,7 @@ Feature: Fancy permalinks
     And I have the following post:
       | title                   | category | date      | content         |
       | Custom Permalink Schema | stuff    | 3/27/2009 | Totally custom. |
-    And I have a configuration file with "permalink" set to "blog/:year/:month/:day/:title"
+    And I have a configuration file with "permalink" set to "/blog/:year/:month/:day/:title"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Totally custom." in "_site/blog/2009/03/27/custom-permalink-schema/index.html"
@@ -38,7 +38,7 @@ Feature: Fancy permalinks
     And I have the following post:
       | title                   | category | date      | content         |
       | Custom Permalink Schema | stuff    | 3/27/2009 | Totally custom. |
-    And I have a configuration file with "permalink" set to ":category/:title.html"
+    And I have a configuration file with "permalink" set to "/:categories/:title.html"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Totally custom." in "_site/stuff/custom-permalink-schema.html"
@@ -48,7 +48,7 @@ Feature: Fancy permalinks
     And I have the following post:
       | title                   | category | date      | content         |
       | Custom Permalink Schema | stuff    | 3/27/2009 | Totally custom. |
-    And I have a configuration file with "permalink" set to ":month-:day-:year/:title.html"
+    And I have a configuration file with "permalink" set to "/:month-:day-:year/:title.html"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Totally custom." in "_site/03-27-2009/custom-permalink-schema.html"
