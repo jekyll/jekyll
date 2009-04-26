@@ -32,26 +32,6 @@ Feature: Site configuration
     Then the _site directory should exist
     And I should see "<a href='http://google.com'>Google</a>" in "_site/index.html"
 
-  Scenario: Use none permalink schema
-    Given I have a _posts directory
-    And I have the following post:
-      | title                 | date      | content          |
-      | None Permalink Schema | 3/27/2009 | Totally nothing. |
-    And I have a configuration file with "permalink" set to "none"
-    When I run jekyll
-    Then the _site directory should exist
-    And I should see "Totally nothing." in "_site/none-permalink-schema.html"
-
-  Scenario: Use pretty permalink schema
-    Given I have a _posts directory
-    And I have the following post:
-      | title                   | date      | content            |
-      | Pretty Permalink Schema | 3/27/2009 | Totally wordpress. |
-    And I have a configuration file with "permalink" set to "pretty"
-    When I run jekyll
-    Then the _site directory should exist
-    And I should see "Totally wordpress." in "_site/2009/03/27/pretty-permalink-schema/index.html"
-
   Scenario: Highlight code with pygments
     Given I have an "index.html" file that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
     And I have a configuration file with "pygments" set to "true"

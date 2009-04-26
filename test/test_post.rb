@@ -25,6 +25,7 @@ class TestPost < Test::Unit::TestCase
       assert !Post.valid?("blah")
     end
 
+
     context "processing posts" do
       setup do
         @post = Post.allocate
@@ -41,6 +42,8 @@ class TestPost < Test::Unit::TestCase
         assert_equal Time.parse("2008-10-19"), @post.date
         assert_equal "foo-bar", @post.slug
         assert_equal ".textile", @post.ext
+        assert_equal "/2008/10/19", @post.dir
+        assert_equal "/2008/10/19/foo-bar", @post.id
       end
 
       should "create url based on date and title" do
@@ -49,14 +52,92 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2008/10/19/foo-bar.html", @post.url
       end
 
-      should "respect permalink" do
+      should "respect permalink in yaml front matter" do
         file = "2008-12-03-permalinked-post.textile"
         @post.process(file)
         @post.read_yaml(@source, file)
 
         assert_equal "my_category/permalinked-post", @post.permalink
-        assert_equal "my_category/", @post.dir
+        assert_equal "my_category", @post.dir
         assert_equal "my_category/permalinked-post", @post.url
+      end
+
+      context "with site wide permalink" do
+        setup do
+          @post.categories = []
+        end
+
+        context "with unspecified (date) style" do
+          setup do
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/2008/10/19/foo-bar.html", @post.url
+          end
+        end
+
+        context "with unspecified (date) style and a category" do
+          setup do
+            @post.categories << "beer"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/beer/2008/10/19/foo-bar.html", @post.url
+          end
+        end
+
+        context "with unspecified (date) style and categories" do
+          setup do
+            @post.categories << "food"
+            @post.categories << "beer"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/beer/food/2008/10/19/foo-bar.html", @post.url
+          end
+        end
+
+        context "with none style" do
+          setup do
+            @post.site.permalink_style = :none
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:title.html", @post.template
+            assert_equal "/foo-bar.html", @post.url
+          end
+        end
+
+        context "with pretty style" do
+          setup do
+            @post.site.permalink_style = :pretty
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title", @post.template
+            assert_equal "/2008/10/19/foo-bar", @post.url
+          end
+        end
+
+        context "with prefix style and no extension" do
+          setup do
+            @post.site.permalink_style = "/prefix/:title"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/prefix/:title", @post.template
+            assert_equal "/prefix/foo-bar", @post.url
+          end
+        end
       end
 
       should "read yaml front-matter" do
@@ -142,6 +223,16 @@ class TestPost < Test::Unit::TestCase
 
           assert File.directory?(dest_dir)
           assert File.exists?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
+        end
+
+        should "write properly without html extension" do
+          post = setup_post("2008-10-18-foo-bar.textile")
+          post.site.permalink_style = ":title"
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exists?(File.join(dest_dir, 'foo-bar', 'index.html'))
         end
 
         should "insert data" do
