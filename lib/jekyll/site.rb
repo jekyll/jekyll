@@ -41,7 +41,6 @@ module Jekyll
               RDiscount.new(content).to_html
             end
 
-            puts 'Using rdiscount for Markdown'
           rescue LoadError
             puts 'You must have the rdiscount gem installed first'
           end
