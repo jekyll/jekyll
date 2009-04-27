@@ -1,3 +1,12 @@
+== 0.5.1
+  * Major Enhancements
+    * Next/previous posts in site payload [github.com/pantulis, github.com/tomo]
+    * Permalink templating system
+  * Bug Fixes
+    * Making sure config.yaml references are all gone, using only config.yml
+    * Fixed syntax highlighting breaking for UTF-8 code [github.com/henrik]
+    * Worked around RDiscount bug that prevents Markdown from getting parsed after highlight [github.com/henrik]
+
 == 0.5.0 / 2009-04-07
   * Minor Enhancements
     * Ability to set post categories via YAML [github.com/qrush]
