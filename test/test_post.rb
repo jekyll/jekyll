@@ -52,6 +52,13 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2008/10/19/foo-bar.html", @post.url
       end
 
+      should "CGI escape urls" do
+        @post.categories = []
+        @post.process("2009-03-12-hash-#1.markdown")
+        assert_equal "/2009/03/12/hash-%231.html", @post.url
+        assert_equal "/2009/03/12/hash-#1", @post.id
+      end
+
       should "respect permalink in yaml front matter" do
         file = "2008-12-03-permalinked-post.textile"
         @post.process(file)
