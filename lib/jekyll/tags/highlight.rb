@@ -30,9 +30,9 @@ module Jekyll
     end
 
     def render_pygments(context, code)
-      if context["content_type"] == :markdown
+      if context["content_type"] == "markdown"
         return "\n" + Albino.new(code, @lang).to_s(@options) + "\n"
-      elsif context["content_type"] == :textile
+      elsif context["content_type"] == "textile"
         return "<notextile>" + Albino.new(code, @lang).to_s(@options) + "</notextile>"
       else
         return Albino.new(code, @lang).to_s(@options)

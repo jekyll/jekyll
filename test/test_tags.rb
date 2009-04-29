@@ -2,15 +2,26 @@ require File.dirname(__FILE__) + '/helper'
 
 class TestTags < Test::Unit::TestCase
 
-  def create_post(content, override = {})
+  def create_post(content, override = {}, markdown = true)
     stub(Jekyll).configuration do
       Jekyll::DEFAULTS.merge({'pygments' => true}).merge(override)
     end
     site = Site.new(Jekyll.configuration)
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
 
-    @result = Liquid::Template.parse(content).render({}, info)
-    @result = site.markdown(@result)
+    if markdown
+      payload = {"content_type" => "markdown"}
+    else
+      payload = {"content_type" => "textile"}
+    end
+
+    @result = Liquid::Template.parse(content).render(payload, info)
+
+    if markdown
+      @result = site.markdown(@result)
+    else
+      @result = site.textile(@result)
+    end
   end
 
   def fill_post(code, override = {})
@@ -69,14 +80,24 @@ puts "3..2..1.."
 CONTENT
     end
 
+    context "using Textile" do
+      setup do
+        create_post(@content, {}, false)
+      end
+
+      should "not textilize highlight block" do
+        assert_no_match %r{3\.\.2\.\.1\.\.&quot;</span><br />}, @result
+      end
+    end
+
     context "using Maruku" do
       setup do
         create_post(@content)
       end
 
       should "parse correctly" do
-        assert_match %{<em>FIGHT!</em>}, @result
-        assert_match %{<em>FINISH HIM</em>}, @result
+        assert_match %r{<em>FIGHT!</em>}, @result
+        assert_match %r{<em>FINISH HIM</em>}, @result
       end
     end
 
@@ -86,8 +107,8 @@ CONTENT
       end
 
       should "parse correctly" do
-        assert_match %{<em>FIGHT!</em>}, @result
-        assert_match %{<em>FINISH HIM</em>}, @result
+        assert_match %r{<em>FIGHT!</em>}, @result
+        assert_match %r{<em>FINISH HIM</em>}, @result
       end
     end
   end
