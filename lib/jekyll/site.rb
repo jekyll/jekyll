@@ -16,7 +16,6 @@ module Jekyll
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
-
       self.exclude         = config['exclude'] || []
 
       self.reset
@@ -230,11 +229,9 @@ module Jekyll
     def filter_entries(entries)
       entries = entries.reject do |e|
         unless ['_posts', '.htaccess'].include?(e)
-          # Reject backup/hidden
-          ['.', '_', '#'].include?(e[0..0]) or e[-1..-1] == '~' or self.exclude.include?(e)
+          ['.', '_', '#'].include?(e[0..0]) || e[-1..-1] == '~' || self.exclude.include?(e)
         end
       end
     end
-
   end
 end

@@ -18,11 +18,24 @@ Feature: Site configuration
     Then the _mysite directory should exist
     And I should see "Changing destination directory" in "_mysite/index.html"
 
-  Scenario: Exclude files
+  Scenario: Exclude files inline
     Given I have an "Rakefile" file that contains "I want to be excluded"
     And I have an "README" file that contains "I want to be excluded"
     And I have an "index.html" file that contains "I want to be included"
     And I have a configuration file with "exclude" set to "Rakefile", "README"
+    When I run jekyll
+    Then I should see "I want to be included" in "_site/index.html"
+    And the "_site/Rakefile" file should not exist
+    And the "_site/README" file should not exist
+
+  Scenario: Exclude files with YAML array
+    Given I have an "Rakefile" file that contains "I want to be excluded"
+    And I have an "README" file that contains "I want to be excluded"
+    And I have an "index.html" file that contains "I want to be included"
+    And I have a configuration file with "exclude" set to:
+      | Value    |
+      | README   |
+      | Rakefile |
     When I run jekyll
     Then I should see "I want to be included" in "_site/index.html"
     And the "_site/Rakefile" file should not exist

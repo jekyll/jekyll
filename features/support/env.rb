@@ -10,9 +10,7 @@ TEST_DIR    = File.join('/', 'tmp', 'jekyll')
 JEKYLL_PATH = File.join(ENV['PWD'], 'bin', 'jekyll')
 
 def run_jekyll(opts = {})
-  if opts[:bg]
-    bg = '&'
-  end
-
-  system "#{JEKYLL_PATH} >> /dev/null"
+  command = JEKYLL_PATH
+  command << " >> /dev/null" if opts[:debug].nil?
+  system command
 end

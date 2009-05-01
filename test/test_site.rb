@@ -53,5 +53,13 @@ class TestSite < Test::Unit::TestCase
       assert_equal %w[foo.markdown bar.markdown baz.markdown], @site.filter_entries(ent1)
       assert_equal ent2, @site.filter_entries(ent2)
     end
+
+    should "filter entries with exclude" do
+      excludes = %w[README TODO]
+      includes = %w[index.html site.css]
+
+      @site.exclude = excludes
+      assert_equal includes, @site.filter_entries(excludes + includes)
+    end
   end
 end

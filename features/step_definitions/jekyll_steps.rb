@@ -86,8 +86,23 @@ Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
   end
 end
 
+Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
+  File.open('_config.yml', 'w') do |f|
+    f.write("#{key}:\n")
+    table.hashes.each do |row|
+      f.write("- #{row["Value"]}\n")
+    end
+    f.close
+  end
+end
+
+
 When /^I run jekyll$/ do
   run_jekyll
+end
+
+When /^I debug jekyll$/ do
+  run_jekyll(:debug => true)
 end
 
 When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
