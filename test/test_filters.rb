@@ -37,5 +37,13 @@ class TestFilters < Test::Unit::TestCase
       assert_equal "AT&amp;T", @filter.xml_escape("AT&T")
       assert_equal "&lt;code&gt;command &amp;lt;filename&amp;gt;&lt;/code&gt;", @filter.xml_escape("<code>command &lt;filename&gt;</code>")
     end
+
+    should "escape space as plus" do
+      assert_equal "my+things", @filter.cgi_escape("my things")
+    end
+
+    should "escape special characters" do
+      assert_equal "hey%21", @filter.cgi_escape("hey!")
+    end
   end
 end

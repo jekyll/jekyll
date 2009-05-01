@@ -21,6 +21,10 @@ module Jekyll
       input.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
     end
 
+    def cgi_escape(input)
+      CGI::escape(input)
+    end
+
     def number_of_words(input)
       input.split.length
     end
