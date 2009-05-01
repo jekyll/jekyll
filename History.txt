@@ -2,10 +2,13 @@
   * Major Enhancements
     * Next/previous posts in site payload [github.com/pantulis, github.com/tomo]
     * Permalink templating system
+    * Moved most of the README out to the GitHub wiki
+    * Exclude option in configuration so specified files won't be brought over with generated site [github.com/duritong]
   * Bug Fixes
     * Making sure config.yaml references are all gone, using only config.yml
     * Fixed syntax highlighting breaking for UTF-8 code [github.com/henrik]
     * Worked around RDiscount bug that prevents Markdown from getting parsed after highlight [github.com/henrik]
+    * CGI escaped post titles [github.com/Chrononaut]
 
 == 0.5.0 / 2009-04-07
   * Minor Enhancements
