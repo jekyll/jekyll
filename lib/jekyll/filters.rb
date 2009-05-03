@@ -18,7 +18,7 @@ module Jekyll
     end
 
     def xml_escape(input)
-      input.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
+      CGI.escapeHTML(input)
     end
 
     def cgi_escape(input)
