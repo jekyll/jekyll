@@ -19,6 +19,15 @@ h2. Diving In
 * Customize the "Permalinks":http://wiki.github.com/mojombo/jekyll/permalinks your posts are generated with
 * Use the built-in "Liquid Extensions":http://wiki.github.com/mojombo/jekyll/liquid-extensions to make your life easier
 
+h2. Dependencies
+
+* RedCloth 4.1.0: Textile support. This version obeys <notextile> tags. The latest version will still work, but tests will fail.
+* Liquid: Templating system
+* Classifier: Generating related posts
+* Maruku: Default markdown engine
+* Directory Watcher: Auto-regeneration of sites
+* Open4: Talking to pygments for syntax highlighting
+
 h2. License
 
 (The MIT License)

@@ -12,7 +12,6 @@ require 'yaml'
 
 # 3rd party
 require 'liquid'
-gem 'RedCloth', '= 4.1.0'
 require 'redcloth'
 
 # internal requires
