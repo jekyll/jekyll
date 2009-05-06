@@ -114,7 +114,7 @@ module Jekyll
     def template
       case self.site.permalink_style
       when :pretty
-        "/:categories/:year/:month/:day/:title"
+        "/:categories/:year/:month/:day/:title/"
       when :none
         "/:categories/:title.html"
       when :date

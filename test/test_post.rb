@@ -128,8 +128,8 @@ class TestPost < Test::Unit::TestCase
           end
 
           should "process the url correctly" do
-            assert_equal "/:categories/:year/:month/:day/:title", @post.template
-            assert_equal "/2008/10/19/foo-bar", @post.url
+            assert_equal "/:categories/:year/:month/:day/:title/", @post.template
+            assert_equal "/2008/10/19/foo-bar/", @post.url
           end
         end
 
