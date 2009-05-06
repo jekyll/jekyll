@@ -1,3 +1,6 @@
+require 'rubygems'
+gem 'RedCloth', '= 4.1.0'
+
 require File.join(File.dirname(__FILE__), *%w[.. lib jekyll])
 
 require 'test/unit'
