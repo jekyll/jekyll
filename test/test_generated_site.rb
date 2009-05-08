@@ -34,5 +34,10 @@ class TestGeneratedSite < Test::Unit::TestCase
     should "not copy _posts directory" do
       assert !File.exist?(dest_dir('_posts'))
     end
+
+    should "process other static files and generate correct permalinks" do
+      assert File.exists?(dest_dir('/about/index.html'))
+      assert File.exists?(dest_dir('/contacts.html'))
+    end
   end
 end
