@@ -115,6 +115,10 @@ Then /^the (.*) directory should exist$/ do |dir|
   assert File.directory?(dir)
 end
 
+Then /^the (.*) file should exist$/ do |file|
+  assert File.file?(file)
+end
+
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
   assert_match Regexp.new(text), File.open(file).readlines.join
 end
@@ -130,4 +134,3 @@ end
 Then /^I should see today's date in "(.*)"$/ do |file|
   assert_match Regexp.new(Date.today.to_s), File.open(file).readlines.join
 end
-

@@ -172,11 +172,14 @@ module Jekyll
         directories.delete('_posts')
         read_posts(dir)
       end
+      
       [directories, files].each do |entries|
         entries.each do |f|
           if File.directory?(File.join(base, f))
             next if self.dest.sub(/\/$/, '') == File.join(base, f)
             transform_pages(File.join(dir, f))
+          elsif Pager.pagination_enabled?(self.config, f)
+            paginate_posts(f, dir)
           else
             first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
 
@@ -231,6 +234,31 @@ module Jekyll
         unless ['_posts', '.htaccess'].include?(e)
           ['.', '_', '#'].include?(e[0..0]) || e[-1..-1] == '~' || self.exclude.include?(e)
         end
+      end
+    end
+
+    # Paginates the blog's posts. Renders the index.html file into paginated directories, ie: page2, page3...
+    # and adds more wite-wide data
+    #
+    # {"paginator" => { "page" => <Number>,
+    #                   "per_page" => <Number>,
+    #                   "posts" => [<Post>],
+    #                   "total_posts" => <Number>,
+    #                   "total_pages" => <Number>,
+    #                   "previous_page" => <Number>,
+    #                   "next_page" => <Number> }}
+    def paginate_posts(file, dir)
+      all_posts = self.posts.sort { |a,b| b <=> a }
+      page = Page.new(self, self.source, dir, file)
+
+      pages = Pager.calculate_pages(all_posts, self.config['paginate'].to_i)
+
+      (1..pages).each do |num_page|
+        pager = Pager.new(self.config, num_page, all_posts, pages)
+
+        page.render(self.layouts, site_payload.merge({'paginator' => pager.to_hash}))
+        suffix = "page#{num_page}" if num_page > 1
+        page.write(self.dest, suffix)
       end
     end
   end

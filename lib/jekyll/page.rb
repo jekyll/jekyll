@@ -46,18 +46,21 @@ module Jekyll
     end
 
     # Write the generated page file to the destination directory.
-    #   +dest+ is the String path to the destination dir
+    #   +dest_prefix+ is the String path to the destination dir
+    #   +dest_suffix+ is a suffix path to the destination dir
     #
     # Returns nothing
-    def write(dest)
-      FileUtils.mkdir_p(File.join(dest, @dir))
+    def write(dest_prefix, dest_suffix = nil)
+      dest = File.join(dest_prefix, @dir)
+      dest = File.join(dest, dest_suffix) if dest_suffix
+      FileUtils.mkdir_p(dest)
 
       name = @name
       if self.ext != ""
         name = @name.split(".")[0..-2].join('.') + self.ext
       end
 
-      path = File.join(dest, @dir, name)
+      path = File.join(dest, name)
       File.open(path, 'w') do |f|
         f.write(self.output)
       end
