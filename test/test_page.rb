@@ -24,10 +24,18 @@ class TestPage < Test::Unit::TestCase
       end
 
       context "with pretty url style" do
-        should "return dir correctly" do
+        setup do
           @site.permalink_style = :pretty
+        end
+
+        should "return dir correctly" do
           @page = setup_page('contacts.html')
           assert_equal '/contacts/', @page.dir
+        end
+
+        should "return dir correctly for index page" do
+          @page = setup_page('index.html')
+          assert_equal '/', @page.dir
         end
       end
 

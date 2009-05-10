@@ -4,7 +4,7 @@ module Jekyll
     include Convertible
 
     attr_accessor :site
-    attr_accessor :name, :ext
+    attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
     # Initialize a new Page.
@@ -24,7 +24,6 @@ module Jekyll
 
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
-      #self.transform
     end
 
     # The generated directory into which the page will be placed
@@ -46,7 +45,7 @@ module Jekyll
     end
 
     def template
-      if self.site.permalink_style == :pretty
+      if self.site.permalink_style == :pretty && !index?
         "/:name/"
       else
         "/:name.html"
@@ -60,7 +59,7 @@ module Jekyll
     def url
       return permalink if permalink
 
-      @url ||= template.gsub(':name', name.split('.')[0..-2].first)
+      @url ||= template.gsub(':name', basename)
     end
 
     # Extract information from the page filename
@@ -69,6 +68,7 @@ module Jekyll
     # Returns nothing
     def process(name)
       self.ext = File.extname(name)
+      self.basename = name.split('.')[0..-2].first
     end
 
     # Add any necessary layouts to this post
@@ -102,6 +102,13 @@ module Jekyll
         f.write(self.output)
       end
     end
+
+    private
+
+      def index?
+        basename == 'index'
+      end
+
   end
 
 end
