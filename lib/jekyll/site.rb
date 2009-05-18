@@ -1,8 +1,8 @@
 module Jekyll
 
   class Site
-    attr_accessor :config, :layouts, :posts, :categories, :exclude
-    attr_accessor :source, :dest, :lsi, :pygments, :permalink_style
+    attr_accessor :config, :layouts, :posts, :categories, :exclude,
+                  :source, :dest, :lsi, :pygments, :permalink_style, :tags
 
     # Initialize the site
     #   +config+ is a Hash containing site configurations details
@@ -25,7 +25,8 @@ module Jekyll
     def reset
       self.layouts         = {}
       self.posts           = []
-      self.categories      = Hash.new { |hash, key| hash[key] = Array.new }
+      self.categories      = Hash.new { |hash, key| hash[key] = [] }
+      self.tags            = Hash.new { |hash, key| hash[key] = [] }
     end
 
     def setup
@@ -126,6 +127,7 @@ module Jekyll
           if post.published
             self.posts << post
             post.categories.each { |c| self.categories[c] << post }
+            post.tags.each { |c| self.tags[c] << post }
           end
         end
       end
@@ -137,7 +139,8 @@ module Jekyll
         post.render(self.layouts, site_payload)
       end
 
-      self.categories.values.map { |cats| cats.sort! { |a, b| b <=> a} }
+      self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a} }
+      self.tags.values.map { |ps| ps.sort! { |a, b| b <=> a} }
     rescue Errno::ENOENT => e
       # ignore missing layout dir
     end
@@ -219,7 +222,8 @@ module Jekyll
       {"site" => {
           "time"       => Time.now,
           "posts"      => self.posts.sort { |a,b| b <=> a },
-          "categories" => post_attr_hash('categories')}}
+          "categories" => post_attr_hash('categories'),
+          "tags"       => post_attr_hash('tags')}}
     end
 
     # Filter out any files/directories that are hidden or backup files (start

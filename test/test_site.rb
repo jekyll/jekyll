@@ -9,6 +9,10 @@ class TestSite < Test::Unit::TestCase
       @site = Site.new(Jekyll.configuration)
     end
 
+    should "have an empty tag hash by default" do
+      assert_equal Hash.new, @site.tags
+    end
+
     should "reset data before processing" do
       clear_dest
       @site.process
