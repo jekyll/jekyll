@@ -47,6 +47,14 @@ module Jekyll
         self.published = true
       end
 
+      if self.data.has_key?("tag")
+        self.tags = [self.data["tag"]]
+      elsif self.data.has_key?("tags")
+        self.tags = self.data['tags']
+      else
+        self.tags = []
+      end
+
       if self.categories.empty?
         if self.data.has_key?('category')
           self.categories << self.data['category']

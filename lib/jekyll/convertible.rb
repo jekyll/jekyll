@@ -22,14 +22,6 @@ module Jekyll
         self.content = self.content[($1.size + 5)..-1]
 
         self.data = YAML.load($1)
-
-        if self.data.has_key?("tag")
-          self.tags = [self.data["tag"]]
-        elsif self.data.has_key?("tags")
-          self.tags = self.data['tags']
-        else
-          self.tags = []
-        end
       end
     end
 
