@@ -18,7 +18,7 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site, :date, :slug, :ext, :topics, :published, :data, :content, :output
+    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output
     attr_writer :categories
 
     def categories
@@ -38,10 +38,6 @@ module Jekyll
       @name = name
 
       self.categories = dir.split('/').reject { |x| x.empty? }
-
-      parts = name.split('/')
-      self.topics = parts.size > 1 ? parts[0..-2] : []
-
       self.process(name)
       self.read_yaml(@base, name)
 
@@ -209,7 +205,6 @@ module Jekyll
         "url" => self.url,
         "date" => self.date,
         "id" => self.id,
-        "topics" => self.topics,
         "categories" => self.categories,
         "next" => self.next,
         "previous" => self.previous,

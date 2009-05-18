@@ -214,15 +214,12 @@ module Jekyll
     #
     # Returns {"site" => {"time" => <Time>,
     #                     "posts" => [<Post>],
-    #                     "categories" => [<Post>],
-    #                     "topics" => [<Post>] }}
+    #                     "categories" => [<Post>]}
     def site_payload
       {"site" => {
-        "time" => Time.now,
-        "posts" => self.posts.sort { |a,b| b <=> a },
-        "categories" => post_attr_hash('categories'),
-        "topics" => post_attr_hash('topics')
-      }}
+          "time"       => Time.now,
+          "posts"      => self.posts.sort { |a,b| b <=> a },
+          "categories" => post_attr_hash('categories')}}
     end
 
     # Filter out any files/directories that are hidden or backup files (start

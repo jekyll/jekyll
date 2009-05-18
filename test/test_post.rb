@@ -25,7 +25,6 @@ class TestPost < Test::Unit::TestCase
       assert !Post.valid?("blah")
     end
 
-
     context "processing posts" do
       setup do
         @post = Post.allocate
@@ -262,7 +261,6 @@ class TestPost < Test::Unit::TestCase
     should "generate categories and topics" do
       post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
       assert_equal ['foo'], post.categories
-      assert_equal ['bar'], post.topics
     end
 
   end
