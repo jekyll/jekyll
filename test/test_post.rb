@@ -211,6 +211,18 @@ class TestPost < Test::Unit::TestCase
         assert post.categories.include?('baz')
       end
 
+      should "recognize tag in yaml" do
+        post = setup_post("2009-05-18-tag.textile")
+        assert post.tags.include?('code')
+      end
+
+      should "recognize tags in yaml" do
+        post = setup_post("2009-05-18-tags.textile")
+        assert post.tags.include?('food')
+        assert post.tags.include?('cooking')
+        assert post.tags.include?('pizza')
+      end
+
       context "rendering" do
         setup do
           clear_dest

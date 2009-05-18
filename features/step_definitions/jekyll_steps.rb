@@ -57,7 +57,7 @@ Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, t
     path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{post['type'] || 'textile'}")
 
     matter_hash = {}
-    %w(title layout tags category categories published author).each do |key|
+    %w(title layout tag tags category categories published author).each do |key|
       matter_hash[key] = post[key] if post[key]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp

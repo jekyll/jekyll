@@ -18,7 +18,7 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output
+    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output, :tags
     attr_writer :categories
 
     def categories
@@ -201,14 +201,15 @@ module Jekyll
     #
     # Returns <Hash>
     def to_liquid
-      { "title" => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
-        "url" => self.url,
-        "date" => self.date,
-        "id" => self.id,
+      { "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
+        "url"        => self.url,
+        "date"       => self.date,
+        "id"         => self.id,
         "categories" => self.categories,
-        "next" => self.next,
-        "previous" => self.previous,
-        "content" => self.content }.deep_merge(self.data)
+        "next"       => self.next,
+        "previous"   => self.previous,
+        "tags"       => self.tags,
+        "content"    => self.content }.deep_merge(self.data)
     end
 
     def inspect
