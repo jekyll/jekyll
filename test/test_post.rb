@@ -68,6 +68,19 @@ class TestPost < Test::Unit::TestCase
         assert_equal "my_category/permalinked-post", @post.url
       end
 
+      context "with CRLF linebreaks" do
+        setup do
+          @real_file = "2009-05-24-yaml-linebreak.markdown"
+          @source = source_dir('win/_posts')
+        end
+        should "read yaml front-matter" do
+          @post.read_yaml(@source, @real_file)
+
+          assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
+          assert_equal "\r\n\r\nThis is the content", @post.content
+        end
+      end
+
       context "with site wide permalink" do
         setup do
           @post.categories = []

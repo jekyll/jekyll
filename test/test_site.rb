@@ -42,7 +42,7 @@ class TestSite < Test::Unit::TestCase
       @site.process
 
       posts = Dir[source_dir("**", "_posts", "*")]
-      categories = %w(bar baz category foo z_category publish_test).sort
+      categories = %w(bar baz category foo z_category publish_test win).sort
 
       assert_equal posts.size - 1, @site.posts.size
       assert_equal categories, @site.categories.keys.sort

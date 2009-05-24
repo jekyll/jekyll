@@ -18,10 +18,10 @@ module Jekyll
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
 
-      if self.content =~ /^(---\s*\n.*?)\n---\s*\n/m
+      if self.content =~ /^(---\s*\n.*?)\r?\n---\s*\n/m
         self.content = self.content[($1.size + 5)..-1]
 
-        self.data = YAML.load($1)
+        self.data = YAML.load($1.dup)
       end
     end
 
