@@ -36,6 +36,10 @@ opts = OptionParser.new do |opts|
     options['server_port'] = port unless port.nil?
   end
 
+  opts.on("--baseurl [BASE_URL]", "Serve website from base URL (default '/'") do |baseurl|
+      options['baseurl'] = baseurl
+  end
+
   opts.on("--lsi", "Use LSI for better related posts") do
     options['lsi'] = true
   end
@@ -138,9 +142,9 @@ if options['server']
   FileUtils.mkdir_p(destination)
 
   s = HTTPServer.new(
-    :Port            => options['server_port'],
-    :DocumentRoot    => destination
+    :Port            => options['server_port']
   )
+  s.mount(options['baseurl'], HTTPServlet::FileHandler, destination)
   t = Thread.new {
     s.start
   }
