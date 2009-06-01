@@ -63,14 +63,15 @@ module Jekyll
     source = override['source'] || Jekyll::DEFAULTS['source']
 
     # Get configuration from <source>/_config.yml
-    config = {}
     config_file = File.join(source, '_config.yml')
     begin
       config = YAML.load_file(config_file)
-      puts "Configuration from #{config_file}"
+      raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
+      STDOUT.puts "Configuration from #{config_file}"
     rescue => err
-      puts "WARNING: Could not read configuration. Using defaults (and options)."
-      puts "\t" + err
+      STDERR.puts "WARNING: Could not read configuration. Using defaults (and options)."
+      STDERR.puts "\t" + err
+      config = {}
     end
 
     # Merge DEFAULTS < _config.yml < override
