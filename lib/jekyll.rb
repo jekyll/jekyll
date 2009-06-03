@@ -70,7 +70,7 @@ module Jekyll
       STDOUT.puts "Configuration from #{config_file}"
     rescue => err
       STDERR.puts "WARNING: Could not read configuration. Using defaults (and options)."
-      STDERR.puts "\t" + err
+      STDERR.puts "\t" + err.to_s
       config = {}
     end
 
