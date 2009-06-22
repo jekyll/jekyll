@@ -59,3 +59,18 @@ Feature: Site data
     When I run jekyll
     Then the _site directory should exist
     And I should see "Yuengling" in "_site/index.html"
+
+  Scenario: Order Posts by name when on the same date
+  Given I have a _posts directory
+  And I have an "index.html" page that contains "{% for post in site.posts %}{{ post.title }}:{{ post.previous.title}},{{ post.next.title}} {% endfor %}"
+  And I have the following posts:
+    | title | date      | content |
+    | first | 2/26/2009 | first   |
+    | A     | 3/26/2009 | A       |
+    | B     | 3/26/2009 | B       |
+    | C     | 3/26/2009 | C       |
+    | last  | 4/26/2009 | last    |
+  When I run jekyll
+  Then the _site directory should exist
+  And I should see "last:C, C:B,last B:A,C A:first,B first:,A" in "_site/index.html"
+  
