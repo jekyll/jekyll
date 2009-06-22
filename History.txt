@@ -1,4 +1,9 @@
-== 0.5.1
+== 0.5.2
+  * Bug Fixes
+    * Fixing Ruby 1.9 issue that requires to_s on the err object [github.com/Chrononaut]
+    * Fixes for pagination and ordering posts on the same day [github.com/ujh]
+
+== 0.5.1 / 2009-05-06
   * Major Enhancements
     * Next/previous posts in site payload [github.com/pantulis, github.com/tomo]
     * Permalink templating system
