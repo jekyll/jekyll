@@ -2,6 +2,11 @@
   * Bug Fixes
     * Fixing Ruby 1.9 issue that requires to_s on the err object [github.com/Chrononaut]
     * Fixes for pagination and ordering posts on the same day [github.com/ujh]
+    * Made pages respect permalinks style and permalinks in yml front matter [github.com/eugenebolshakov]
+    * Index.html file should always have index.html permalink [github.com/eugenebolshakov]
+    * Added trailing slash to pretty permalink style so Apache is happy [github.com/eugenebolshakov]
+    * Bad markdown processor in config fails sooner and with better message [github.com/gcnovus]
+    * Allow CRLFs in yaml frontmatter [github.com/juretta]
 
 == 0.5.1 / 2009-05-06
   * Major Enhancements
