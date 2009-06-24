@@ -77,7 +77,7 @@ class TestPost < Test::Unit::TestCase
           @post.read_yaml(@source, @real_file)
 
           assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
-          assert_equal "\r\n\r\nThis is the content", @post.content
+          assert_equal "\r\nThis is the content", @post.content
         end
       end
 
@@ -234,6 +234,16 @@ class TestPost < Test::Unit::TestCase
         assert post.tags.include?('food')
         assert post.tags.include?('cooking')
         assert post.tags.include?('pizza')
+      end
+      
+      should "allow no yaml" do
+        post = setup_post("2009-06-22-no-yaml.textile")
+        assert_equal "No YAML.", post.content
+      end
+
+      should "allow empty yaml" do
+        post = setup_post("2009-06-22-empty-yaml.textile")
+        assert_equal "Empty YAML.", post.content
       end
 
       context "rendering" do

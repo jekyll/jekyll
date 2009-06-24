@@ -20,8 +20,6 @@ module Jekyll
       @dir  = dir
       @name = name
 
-      self.data = {}
-
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
     end
