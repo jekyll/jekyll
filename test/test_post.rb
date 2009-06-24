@@ -235,6 +235,16 @@ class TestPost < Test::Unit::TestCase
         assert post.tags.include?('cooking')
         assert post.tags.include?('pizza')
       end
+      
+      should "allow no yaml" do
+        post = setup_post("2009-06-22-no-yaml.textile")
+        assert_equal "No YAML.", post.content
+      end
+
+      should "allow empty yaml" do
+        post = setup_post("2009-06-22-empty-yaml.textile")
+        assert_equal "Empty YAML.", post.content
+      end
 
       context "rendering" do
         setup do

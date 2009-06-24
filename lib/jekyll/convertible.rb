@@ -23,6 +23,8 @@ module Jekyll
       
         self.data = YAML.load($1)
       end
+      
+      self.data ||= {}
     end
 
     # Transform the contents based on the file extension.
