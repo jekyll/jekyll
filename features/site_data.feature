@@ -73,4 +73,10 @@ Feature: Site data
   When I run jekyll
   Then the _site directory should exist
   And I should see "last:C, C:B,last B:A,C A:first,B first:,A" in "_site/index.html"
-  
+
+  Scenario: Use configuration date in site payload
+    Given I have an "index.html" page that contains "{{ site.url }}"
+    And I have a configuration file with "url" set to "http://mysite.com"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "http://mysite.com" in "_site/index.html"
