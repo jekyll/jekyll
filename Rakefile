@@ -15,7 +15,7 @@ begin
     s.rubyforge_project = "jekyll"
     s.files.exclude 'test/dest'
     s.test_files.exclude 'test/dest'
-    s.add_dependency('RedCloth', '= 4.1.0')
+    s.add_dependency('RedCloth', '>= 4.2.1')
     s.add_dependency('liquid', '>= 1.9.0')
     s.add_dependency('classifier', '>= 1.3.1')
     s.add_dependency('maruku', '>= 0.5.9')

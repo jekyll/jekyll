@@ -21,7 +21,7 @@ h2. Diving In
 
 h2. Dependencies
 
-* RedCloth 4.1.0: Textile support. This version obeys @notextile@ tags. The latest version will still work, but tests will fail.
+* RedCloth: Textile support.
 * Liquid: Templating system
 * Classifier: Generating related posts
 * Maruku: Default markdown engine
