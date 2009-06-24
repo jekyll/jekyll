@@ -77,7 +77,7 @@ class TestPost < Test::Unit::TestCase
           @post.read_yaml(@source, @real_file)
 
           assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
-          assert_equal "\r\n\r\nThis is the content", @post.content
+          assert_equal "\r\nThis is the content", @post.content
         end
       end
 
