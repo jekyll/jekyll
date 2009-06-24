@@ -1,6 +1,9 @@
-== 0.5.2
-  * Minor Enhancements
+== 0.5.2 / 2009-06-24
+  * Enhancements
+    * Added --paginate option to the executable along with a paginator object for the payload [github.com/calavera]
     * Upgraded RedCloth to 4.2.1, which makes <notextile> tags work once again.
+    * Configuration options set in config.yml are now available through the site payload [github.com/vilcans]
+    * Posts can now have an empty YAML front matter or none at all [github.com/bahuvrihi]
   * Bug Fixes
     * Fixing Ruby 1.9 issue that requires to_s on the err object [github.com/Chrononaut]
     * Fixes for pagination and ordering posts on the same day [github.com/ujh]
