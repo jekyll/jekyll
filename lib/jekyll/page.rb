@@ -57,7 +57,7 @@ module Jekyll
     def url
       return permalink if permalink
 
-      @url ||= template.gsub(':name', basename)
+      @url ||= (ext == '.html') ? template.gsub(':name', basename) : "/#{name}"
     end
 
     # Extract information from the page filename
@@ -91,7 +91,7 @@ module Jekyll
 
       # The url needs to be unescaped in order to preserve the correct filename
       path = File.join(dest, CGI.unescape(self.url))
-      if self.url[/\.html$/].nil?
+      if self.ext == '.html' && self.url[/\.html$/].nil?
         FileUtils.mkdir_p(path)
         path = File.join(path, "index.html")
       end
