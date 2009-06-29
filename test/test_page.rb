@@ -81,6 +81,17 @@ class TestPage < Test::Unit::TestCase
         assert File.exists?(File.join(dest_dir, 'contacts', 'index.html'))
       end
       
+      should "write properly with extension different from html" do
+        page = setup_page("sitemap.xml")
+        page.site.permalink_style = :pretty
+        do_render(page)
+        page.write(dest_dir)
+
+        assert_equal("/sitemap.xml", page.url)
+        assert_nil(page.url[/\.html$/])
+        assert File.directory?(dest_dir)
+        assert File.exists?(File.join(dest_dir,'sitemap.xml'))
+      end
     end
 
   end 
