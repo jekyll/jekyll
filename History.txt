@@ -1,3 +1,7 @@
+== 0.5.3 / 2009-07-14
+  * Bug Fixes
+    * Solving the permalink bug where non-html files wouldn't work [github.com/jeffrydegrande]
+
 == 0.5.2 / 2009-06-24
   * Enhancements
     * Added --paginate option to the executable along with a paginator object for the payload [github.com/calavera]
