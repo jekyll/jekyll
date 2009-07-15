@@ -23,6 +23,17 @@ Feature: Fancy permalinks
     Then the _site directory should exist
     And I should see "Totally wordpress." in "_site/2009/03/27/pretty-permalink-schema/index.html"
 
+  Scenario: Use pretty permalink schema for pages
+    Given I have an "index.html" page that contains "Totally index"
+    And I have an "awesome.html" page that contains "Totally awesome"
+    And I have an "sitemap.xml" page that contains "Totally uhm, sitemap"
+    And I have a configuration file with "permalink" set to "pretty"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Totally index" in "_site/index.html"
+    And I should see "Totally awesome" in "_site/awesome/index.html"
+    And I should see "Totally uhm, sitemap" in "_site/sitemap.xml"
+
   Scenario: Use custom permalink schema with prefix
     Given I have a _posts directory
     And I have the following post:

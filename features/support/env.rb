@@ -11,6 +11,6 @@ JEKYLL_PATH = File.join(ENV['PWD'], 'bin', 'jekyll')
 
 def run_jekyll(opts = {})
   command = JEKYLL_PATH
-  command << " >> /dev/null" if opts[:debug].nil?
+  command << " >> /dev/null 2>&1" if opts[:debug].nil?
   system command
 end

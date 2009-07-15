@@ -42,7 +42,7 @@ class TestSite < Test::Unit::TestCase
       @site.process
 
       posts = Dir[source_dir("**", "_posts", "*")]
-      categories = %w(bar baz category foo z_category publish_test).sort
+      categories = %w(bar baz category foo z_category publish_test win).sort
 
       assert_equal posts.size - 1, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
@@ -65,5 +65,21 @@ class TestSite < Test::Unit::TestCase
       @site.exclude = excludes
       assert_equal includes, @site.filter_entries(excludes + includes)
     end
+    
+    context 'with an invalid markdown processor in the configuration' do
+      
+      should 'give a meaningful error message' do
+        bad_processor = 'not a processor name'
+        begin
+          Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+          flunk 'Invalid markdown processors should cause a failure on site creation'
+        rescue RuntimeError => e
+          assert e.to_s =~ /invalid|bad/i
+          assert e.to_s =~ %r{#{bad_processor}}
+        end
+      end
+      
+    end
+    
   end
 end

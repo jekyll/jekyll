@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jekyll}
-  s.version = "0.5.1"
+  s.version = "0.5.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Preston-Werner"]
-  s.date = %q{2009-05-06}
+  s.date = %q{2009-07-14}
   s.default_executable = %q{jekyll}
   s.description = %q{Jekyll is a simple, blog aware, static site generator.}
   s.email = %q{tom@mojombo.com}
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
     "lib/jekyll/filters.rb",
     "lib/jekyll/layout.rb",
     "lib/jekyll/page.rb",
+    "lib/jekyll/pager.rb",
     "lib/jekyll/post.rb",
     "lib/jekyll/site.rb",
     "lib/jekyll/tags/highlight.rb",
@@ -51,48 +52,61 @@ Gem::Specification.new do |s|
     "test/source/_posts/2009-01-27-categories.textile",
     "test/source/_posts/2009-01-27-category.textile",
     "test/source/_posts/2009-03-12-hash-#1.markdown",
+    "test/source/_posts/2009-05-18-tag.textile",
+    "test/source/_posts/2009-05-18-tags.textile",
+    "test/source/_posts/2009-06-22-empty-yaml.textile",
+    "test/source/_posts/2009-06-22-no-yaml.textile",
+    "test/source/about.html",
     "test/source/category/_posts/2008-9-23-categories.textile",
+    "test/source/contacts.html",
     "test/source/css/screen.css",
     "test/source/foo/_posts/bar/2008-12-12-topical-post.textile",
     "test/source/index.html",
+    "test/source/sitemap.xml",
+    "test/source/win/_posts/2009-05-24-yaml-linebreak.markdown",
     "test/source/z_category/_posts/2008-9-23-categories.textile",
     "test/suite.rb",
+    "test/test_configuration.rb",
     "test/test_filters.rb",
     "test/test_generated_site.rb",
+    "test/test_page.rb",
+    "test/test_pager.rb",
     "test/test_post.rb",
     "test/test_site.rb",
     "test/test_tags.rb"
   ]
-  s.has_rdoc = true
   s.homepage = %q{http://github.com/mojombo/jekyll}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{jekyll}
-  s.rubygems_version = %q{1.3.1}
+  s.rubygems_version = %q{1.3.3}
   s.summary = %q{Jekyll is a simple, blog aware, static site generator.}
   s.test_files = [
-    "test/helper.rb",
+    "test/test_page.rb",
+    "test/test_post.rb",
+    "test/test_pager.rb",
+    "test/test_configuration.rb",
+    "test/test_tags.rb",
+    "test/test_generated_site.rb",
     "test/suite.rb",
     "test/test_filters.rb",
-    "test/test_generated_site.rb",
-    "test/test_post.rb",
-    "test/test_site.rb",
-    "test/test_tags.rb"
+    "test/helper.rb",
+    "test/test_site.rb"
   ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 2
+    s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<RedCloth>, ["= 4.1.0"])
+      s.add_runtime_dependency(%q<RedCloth>, [">= 4.2.1"])
       s.add_runtime_dependency(%q<liquid>, [">= 1.9.0"])
       s.add_runtime_dependency(%q<classifier>, [">= 1.3.1"])
       s.add_runtime_dependency(%q<maruku>, [">= 0.5.9"])
       s.add_runtime_dependency(%q<directory_watcher>, [">= 1.1.1"])
       s.add_runtime_dependency(%q<open4>, [">= 0.9.6"])
     else
-      s.add_dependency(%q<RedCloth>, ["= 4.1.0"])
+      s.add_dependency(%q<RedCloth>, [">= 4.2.1"])
       s.add_dependency(%q<liquid>, [">= 1.9.0"])
       s.add_dependency(%q<classifier>, [">= 1.3.1"])
       s.add_dependency(%q<maruku>, [">= 0.5.9"])
@@ -100,7 +114,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<open4>, [">= 0.9.6"])
     end
   else
-    s.add_dependency(%q<RedCloth>, ["= 4.1.0"])
+    s.add_dependency(%q<RedCloth>, [">= 4.2.1"])
     s.add_dependency(%q<liquid>, [">= 1.9.0"])
     s.add_dependency(%q<classifier>, [">= 1.3.1"])
     s.add_dependency(%q<maruku>, [">= 0.5.9"])

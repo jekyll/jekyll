@@ -1,4 +1,24 @@
-== 0.5.1
+== 0.5.3 / 2009-07-14
+  * Bug Fixes
+    * Solving the permalink bug where non-html files wouldn't work [github.com/jeffrydegrande]
+
+== 0.5.2 / 2009-06-24
+  * Enhancements
+    * Added --paginate option to the executable along with a paginator object for the payload [github.com/calavera]
+    * Upgraded RedCloth to 4.2.1, which makes <notextile> tags work once again.
+    * Configuration options set in config.yml are now available through the site payload [github.com/vilcans]
+    * Posts can now have an empty YAML front matter or none at all [github.com/bahuvrihi]
+  * Bug Fixes
+    * Fixing Ruby 1.9 issue that requires to_s on the err object [github.com/Chrononaut]
+    * Fixes for pagination and ordering posts on the same day [github.com/ujh]
+    * Made pages respect permalinks style and permalinks in yml front matter [github.com/eugenebolshakov]
+    * Index.html file should always have index.html permalink [github.com/eugenebolshakov]
+    * Added trailing slash to pretty permalink style so Apache is happy [github.com/eugenebolshakov]
+    * Bad markdown processor in config fails sooner and with better message [github.com/gcnovus]
+    * Allow CRLFs in yaml frontmatter [github.com/juretta]
+    * Added Date#xmlschema for Ruby versions < 1.9
+
+== 0.5.1 / 2009-05-06
   * Major Enhancements
     * Next/previous posts in site payload [github.com/pantulis, github.com/tomo]
     * Permalink templating system

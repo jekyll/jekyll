@@ -20,3 +20,11 @@ class Hash
     target
   end
 end
+
+# Thanks, ActiveSupport!
+class Date
+  # Converts datetime to an appropriate format for use in XML
+  def xmlschema
+    strftime("%Y-%m-%dT%H:%M:%S%Z")
+  end if RUBY_VERSION < '1.9'
+end

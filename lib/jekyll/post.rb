@@ -70,11 +70,15 @@ module Jekyll
       end
     end
 
-    # Spaceship is based on Post#date
+    # Spaceship is based on Post#date, slug
     #
     # Returns -1, 0, 1
     def <=>(other)
-      self.date <=> other.date
+      cmp = self.date <=> other.date
+      if 0 == cmp
+       cmp = self.slug <=> other.slug
+      end
+      return cmp
     end
 
     # Extract information from the post filename
@@ -110,7 +114,7 @@ module Jekyll
     def template
       case self.site.permalink_style
       when :pretty
-        "/:categories/:year/:month/:day/:title"
+        "/:categories/:year/:month/:day/:title/"
       when :none
         "/:categories/:title.html"
       when :date
