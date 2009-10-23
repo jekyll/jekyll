@@ -30,12 +30,11 @@ module Jekyll
     end
 
     def render_pygments(context, code)
+      output = add_code_tags(Albino.new(code, @lang).to_s(@options), @lang)
       if context["content_type"] == "markdown"
-        return "\n" + add_code_tags(Albino.new(code, @lang).to_s(@options), @lang) + "\n"
+        return "\n" + output + "\n"
       elsif context["content_type"] == "textile"
-        return "<notextile>" + add_code_tags(Albino.new(code, @lang).to_s(@options), @lang) + "</notextile>"
-      else
-        return add_code_tags(Albino.new(code, @lang).to_s(@options), @lang)
+        return "<notextile>" + output + "</notextile>"
       end
     end
 
