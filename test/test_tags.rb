@@ -49,7 +49,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre>test\n</pre>}, @result
+      assert_match %{<pre><code class='text'>test\n</code></pre>}, @result
     end
   end
 
@@ -59,7 +59,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre>Æ\n</pre>}, @result
+      assert_match %{<pre><code class='text'>Æ\n</code></pre>}, @result
     end
   end
 

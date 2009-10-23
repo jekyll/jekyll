@@ -31,11 +31,11 @@ module Jekyll
 
     def render_pygments(context, code)
       if context["content_type"] == "markdown"
-        return "\n" + Albino.new(code, @lang).to_s(@options) + "\n"
+        return "\n" + add_code_tags(Albino.new(code, @lang).to_s(@options), @lang) + "\n"
       elsif context["content_type"] == "textile"
-        return "<notextile>" + Albino.new(code, @lang).to_s(@options) + "</notextile>"
+        return "<notextile>" + add_code_tags(Albino.new(code, @lang).to_s(@options), @lang) + "</notextile>"
       else
-        return Albino.new(code, @lang).to_s(@options)
+        return add_code_tags(Albino.new(code, @lang).to_s(@options), @lang)
       end
     end
 
@@ -49,6 +49,13 @@ module Jekyll
 </div>
       HTML
     end
+    
+    def add_code_tags(code, lang)
+      # Add nested <code> tags to code blocks
+      code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
+      code = code.sub(/<\/pre>/,"</code></pre>")
+    end
+    
   end
 
 end
