@@ -136,10 +136,13 @@ if options['server']
   include WEBrick
 
   FileUtils.mkdir_p(destination)
+  mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
+  mime_types.store 'js', 'application/javascript'
 
   s = HTTPServer.new(
     :Port            => options['server_port'],
-    :DocumentRoot    => destination
+    :DocumentRoot    => destination,
+    :MimeTypes       => mime_types
   )
   t = Thread.new {
     s.start
