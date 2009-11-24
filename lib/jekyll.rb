@@ -67,10 +67,10 @@ module Jekyll
     begin
       config = YAML.load_file(config_file)
       raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
-      STDOUT.puts "Configuration from #{config_file}"
+      $stdout.puts "Configuration from #{config_file}"
     rescue => err
-      STDERR.puts "WARNING: Could not read configuration. Using defaults (and options)."
-      STDERR.puts "\t" + err.to_s
+      $stderr.puts "WARNING: Could not read configuration. Using defaults (and options)."
+      $stderr.puts "\t" + err.to_s
       config = {}
     end
 
