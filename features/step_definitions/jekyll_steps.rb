@@ -25,7 +25,7 @@ EOF
   end
 end
 
-Given /^I have an "(.*)" file that contains "(.*)"$/ do |file, text|
+Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   File.open(file, 'w') do |f|
     f.write(text)
     f.close
@@ -121,6 +121,10 @@ end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
   assert_match Regexp.new(text), File.open(file).readlines.join
+end
+
+Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
+  assert_no_match Regexp.new(text), File.open(file).readlines.join
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|

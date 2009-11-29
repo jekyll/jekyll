@@ -2,7 +2,8 @@ module Jekyll
 
   class Site
     attr_accessor :config, :layouts, :posts, :categories, :exclude,
-                  :source, :dest, :lsi, :pygments, :permalink_style, :tags
+                  :source, :dest, :lsi, :pygments, :permalink_style, :tags,
+                  :extensions
 
     # Initialize the site
     #   +config+ is a Hash containing site configurations details
@@ -17,6 +18,7 @@ module Jekyll
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
+      self.extensions      = config['extensions']
 
       self.reset
       self.setup
@@ -79,6 +81,12 @@ module Jekyll
           end
         else
           raise "Invalid Markdown processor: '#{self.config['markdown']}' -- did you mean 'maruku' or 'rdiscount'?"
+      end
+
+      # Load extensions from _lib folder
+      if self.extensions
+        # load instead of require so that jekyll --auto reloads changes
+        Dir["#{source}/_lib/*.rb"].each {|f| load f}
       end
     end
 

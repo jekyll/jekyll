@@ -61,3 +61,21 @@ Feature: Site configuration
     When I run jekyll
     Then the _site directory should exist
     And I should see "puts 'Hello world!'" in "_site/index.html"
+
+  Scenario: Load an extension from _lib
+    Given I have an "index.html" page that contains "{{ 'extension' | hello }}"
+    And I have a _lib directory
+    And I have a "_lib/hello.rb" file that contains "module Jekyll::Filters ; def hello(input) ; "hello #{input}" ; end ; end"
+    And I have a configuration file with "extensions" set to "true"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "hello extension" in "_site/index.html"
+
+  Scenario: Skip loading extensions from _lib
+    Given I have an "index.html" page that contains "{{ 'extension' | hello }}"
+    And I have a _lib directory
+    And I have a "_lib/hello.rb" file that contains "module Jekyll::Filters ; def hello(input) ; "hello #{input}" ; end ; end"
+    And I have a configuration file with "extensions" set to "false"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should not see "hello extension" in "_site/index.html"
