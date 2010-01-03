@@ -19,11 +19,17 @@ class TestSite < Test::Unit::TestCase
       before_posts = @site.posts.length
       before_layouts = @site.layouts.length
       before_categories = @site.categories.length
+      before_tags = @site.tags.length
+      before_pages = @site.pages.length
+      before_static_files = @site.static_files.length
 
       @site.process
       assert_equal before_posts, @site.posts.length
       assert_equal before_layouts, @site.layouts.length
       assert_equal before_categories, @site.categories.length
+      assert_equal before_tags, @site.tags.length
+      assert_equal before_pages, @site.pages.length
+      assert_equal before_static_files, @site.static_files.length
     end
 
     should "read layouts" do
@@ -52,10 +58,10 @@ class TestSite < Test::Unit::TestCase
     should "filter entries" do
       ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
               .baz.markdow foo.markdown~]
-      ent2 = %w[.htaccess _posts bla.bla]
+      ent2 = %w[.htaccess _posts _pages bla.bla]
 
       assert_equal %w[foo.markdown bar.markdown baz.markdown], @site.filter_entries(ent1)
-      assert_equal ent2, @site.filter_entries(ent2)
+      assert_equal %w[.htaccess bla.bla], @site.filter_entries(ent2)
     end
 
     should "filter entries with exclude" do
