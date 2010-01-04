@@ -115,12 +115,12 @@ Then /^the (.*) directory should exist$/ do |dir|
   assert File.directory?(dir)
 end
 
-Then /^the (.*) file should exist$/ do |file|
-  assert File.file?(file)
-end
-
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
   assert_match Regexp.new(text), File.open(file).readlines.join
+end
+
+Then /^the "(.*)" file should exist$/ do |file|
+  assert File.file?(file)
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|

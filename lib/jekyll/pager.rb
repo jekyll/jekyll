@@ -4,7 +4,7 @@ module Jekyll
     
     def self.calculate_pages(all_posts, per_page)
       num_pages = all_posts.size / per_page.to_i
-      num_pages.abs + 1 if all_posts.size % per_page.to_i != 0
+      num_pages = num_pages + 1 if all_posts.size % per_page.to_i != 0
       num_pages
     end
     

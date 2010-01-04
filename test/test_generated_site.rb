@@ -13,6 +13,10 @@ class TestGeneratedSite < Test::Unit::TestCase
       @index = File.read(dest_dir('index.html'))
     end
 
+    should "ensure post count is as expected" do
+      assert_equal 17, @site.posts.size
+    end
+
     should "insert site.posts into the index" do
       assert @index.include?("#{@site.posts.size} Posts")
     end
