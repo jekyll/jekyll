@@ -13,7 +13,7 @@ Given /^I have a blank site in "(.*)"$/ do |path|
 end
 
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
-Given /^I have an "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
+Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
   File.open(file, 'w') do |f|
     f.write <<EOF
 ---
@@ -25,7 +25,7 @@ EOF
   end
 end
 
-Given /^I have an "(.*)" file that contains "(.*)"$/ do |file, text|
+Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   File.open(file, 'w') do |f|
     f.write(text)
     f.close
@@ -40,7 +40,7 @@ Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
 end
 
 Given /^I have a (.*) directory$/ do |dir|
-  FileUtils.mkdir(dir)
+  FileUtils.mkdir_p(dir)
 end
 
 Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, table|
@@ -115,12 +115,12 @@ Then /^the (.*) directory should exist$/ do |dir|
   assert File.directory?(dir)
 end
 
-Then /^the (.*) file should exist$/ do |file|
-  assert File.file?(file)
-end
-
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
   assert_match Regexp.new(text), File.open(file).readlines.join
+end
+
+Then /^the "(.*)" file should exist$/ do |file|
+  assert File.file?(file)
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|
