@@ -1,3 +1,11 @@
+== edge
+  * Enhancements
+    * added support for extensions [issue #100]
+  * Bug Fixes
+    * changed tests to require redcloth >= 4.2.1 [issue #92]
+    * fixed pagination when number of pages is an exact multiple of max per page [issue #78]
+    * fixed rendering order of site artifacts [issue #71]
+
 == 0.5.4 / 2009-08-23
   * Bug Fixes
     * Do not allow symlinks (security vulnerability)
