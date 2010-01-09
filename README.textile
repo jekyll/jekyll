@@ -20,14 +20,21 @@ h2. Diving In
 * Customize the "Permalinks":http://wiki.github.com/mojombo/jekyll/permalinks your posts are generated with
 * Use the built-in "Liquid Extensions":http://wiki.github.com/mojombo/jekyll/liquid-extensions to make your life easier
 
-h2. Dependencies
+h2. Runtime Dependencies
 
-* RedCloth: Textile support
-* Liquid: Templating system
-* Classifier: Generating related posts
-* Maruku: Default markdown engine
-* Directory Watcher: Auto-regeneration of sites
-* Open4: Talking to pygments for syntax highlighting
+* RedCloth: Textile support (Ruby)
+* Liquid: Templating system (Ruby)
+* Classifier: Generating related posts (Ruby)
+* Maruku: Default markdown engine (Ruby)
+* Directory Watcher: Auto-regeneration of sites (Ruby)
+* Open4: Talking to pygments for syntax highlighting (Ruby)
+* Pygments: Syntax highlighting (Python)
+
+h2. Developer Dependencies
+
+* Shoulda: Test framework (Ruby)
+* RR: Mocking (Ruby)
+* RedGreen: Nicer test output (Ruby)
 
 h2. License
 
