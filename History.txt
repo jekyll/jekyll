@@ -1,3 +1,12 @@
+==
+  * Bug Fixes
+    * Fix pagination % 0 bug (#78)
+    * Ensure all posts are processed first (#71)
+
+== NOTE
+  * After this point I will no longer be giving credit in the history;
+    that is what the commit log is for.
+
 == 0.5.4 / 2009-08-23
   * Bug Fixes
     * Do not allow symlinks (security vulnerability)
