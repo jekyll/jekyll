@@ -4,6 +4,7 @@
     * Don't break on triple dashes in yaml frontmatter (#93)
   * Minor Enhancements
     * Allow .mkd as markdown extension
+    * Use $stdout/err instead of constants (#99)
 
 == 0.5.5
   * Bug Fixes
