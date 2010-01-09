@@ -1,6 +1,8 @@
 ==
   * Bug Fixes
     * Require redcloth >= 4.2.1 in tests (#92)
+  * Minor Enhancements
+    * Allow .mkd as markdown extension
 
 == 0.5.5
   * Bug Fixes
