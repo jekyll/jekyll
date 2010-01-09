@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jekyll}
-  s.version = "0.5.5"
+  s.version = "0.5.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Preston-Werner"]
@@ -71,6 +71,7 @@ Gem::Specification.new do |s|
      "test/source/_posts/2009-05-18-tags.textile",
      "test/source/_posts/2009-06-22-empty-yaml.textile",
      "test/source/_posts/2009-06-22-no-yaml.textile",
+     "test/source/_posts/2010-01-08-triple-dash.markdown",
      "test/source/about.html",
      "test/source/category/_posts/2008-9-23-categories.textile",
      "test/source/contacts.html",
