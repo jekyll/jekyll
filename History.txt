@@ -6,6 +6,7 @@
     * Allow .mkd as markdown extension
     * Use $stdout/err instead of constants (#99)
     * Properly wrap code blocks (#91)
+    * Add javascript mime type for webrick (#98)
 
 == 0.5.5
   * Bug Fixes
