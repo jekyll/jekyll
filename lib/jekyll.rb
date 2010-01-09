@@ -43,7 +43,6 @@ module Jekyll
     'pygments'     => false,
     'markdown'     => 'maruku',
     'permalink'    => 'date',
-    'extensions'   => false,
 
     'maruku'       => {
       'use_tex'    => false,

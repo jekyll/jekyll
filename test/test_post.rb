@@ -36,7 +36,6 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "keep date, title, and markup type" do
-        @post.categories = []
         @post.process(@fake_file)
 
         assert_equal Time.parse("2008-10-19"), @post.date
@@ -215,13 +214,6 @@ class TestPost < Test::Unit::TestCase
     end
 
     context "initializing posts" do
-
-      should "ensure suitable defaults for attributes" do
-        post = setup_post("2009-06-22-no-yaml.textile")
-        assert_equal [], post.tags
-        assert_equal [], post.categories
-      end
-
       should "publish when published yaml is no specified" do
         post = setup_post("2008-02-02-published.textile")
         assert_equal true, post.published

@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.date = %q{2010-01-08}
   s.default_executable = %q{jekyll}
   s.description = %q{Jekyll is a simple, blog aware, static site generator.}
-  s.email = %q{kris@kris.me.uk}
+  s.email = %q{tom@mojombo.com}
   s.executables = ["jekyll"]
   s.extra_rdoc_files = [
     "README.textile"
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
      "features/site_data.feature",
      "features/step_definitions/jekyll_steps.rb",
      "features/support/env.rb",
-     "krisb-jekyll.gemspec",
+     "jekyll.gemspec",
      "lib/jekyll.rb",
      "lib/jekyll/albino.rb",
      "lib/jekyll/converters/csv.rb",
@@ -94,7 +94,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/mojombo/jekyll}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{krisb-jekyll}
+  s.rubyforge_project = %q{jekyll}
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Jekyll is a simple, blog aware, static site generator.}
   s.test_files = [

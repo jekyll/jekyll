@@ -18,9 +18,12 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site
-    attr_accessor :data, :content, :output, :ext
-    attr_accessor :date, :slug, :published, :tags, :categories
+    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output, :tags
+    attr_writer :categories
+
+    def categories
+      @categories ||= []
+    end
 
     # Initialize this Post instance.
     #   +site+ is the Site
@@ -48,8 +51,9 @@ module Jekyll
         self.tags = [self.data["tag"]]
       elsif self.data.has_key?("tags")
         self.tags = self.data['tags']
+      else
+        self.tags = []
       end
-      self.tags ||= []
 
       if self.categories.empty?
         if self.data.has_key?('category')
@@ -64,7 +68,6 @@ module Jekyll
           end
         end
       end
-      self.categories ||= []
     end
 
     # Spaceship is based on Post#date, slug

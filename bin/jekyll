@@ -62,14 +62,6 @@ opts = OptionParser.new do |opts|
     end
   end
 
-  opts.on("--extensions", "Load Jekyll extensions from _lib directory") do
-    options['extensions'] = true
-  end
-  
-  opts.on("--no-extensions", "Do not load Jekyll extensions") do
-    options['extensions'] = false
-  end
-
   opts.on("--version", "Display current version") do
     puts "Jekyll " + Jekyll.version
     exit 0
