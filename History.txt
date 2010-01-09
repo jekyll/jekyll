@@ -1,4 +1,4 @@
-==
+== 0.5.6 / 2010-01-08
   * Bug Fixes
     * Require redcloth >= 4.2.1 in tests (#92)
     * Don't break on triple dashes in yaml frontmatter (#93)
@@ -8,7 +8,7 @@
     * Properly wrap code blocks (#91)
     * Add javascript mime type for webrick (#98)
 
-== 0.5.5
+== 0.5.5 / 2010-01-08
   * Bug Fixes
     * Fix pagination % 0 bug (#78)
     * Ensure all posts are processed first (#71)
