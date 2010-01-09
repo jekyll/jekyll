@@ -1,5 +1,9 @@
 ==
   * Bug Fixes
+    * Require redcloth >= 4.2.1 in tests (#92)
+
+== 0.5.5
+  * Bug Fixes
     * Fix pagination % 0 bug (#78)
     * Ensure all posts are processed first (#71)
 
