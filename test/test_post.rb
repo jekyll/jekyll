@@ -78,7 +78,19 @@ class TestPost < Test::Unit::TestCase
           @post.read_yaml(@source, @real_file)
 
           assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
-          assert_equal "\r\nThis is the content", @post.content
+          assert_equal "This is the content", @post.content
+        end
+      end
+
+      context "with embedded triple dash" do
+        setup do
+          @real_file = "2010-01-08-triple-dash.markdown"
+        end
+        should "consume the embedded dashes" do
+          @post.read_yaml(@source, @real_file)
+
+          assert_equal({"title" => "Foo --- Bar"}, @post.data)
+          assert_equal "Triple the fun!", @post.content
         end
       end
 
@@ -164,7 +176,7 @@ class TestPost < Test::Unit::TestCase
         @post.read_yaml(@source, @real_file)
 
         assert_equal({"title" => "Foo Bar", "layout" => "default"}, @post.data)
-        assert_equal "\nh1. {{ page.title }}\n\nBest *post* ever", @post.content
+        assert_equal "h1. {{ page.title }}\n\nBest *post* ever", @post.content
       end
 
       should "transform textile" do

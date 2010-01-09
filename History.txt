@@ -1,10 +1,25 @@
-== edge
+== Edge
   * Enhancements
     * added support for extensions [issue #100]
+
+== 0.5.6 / 2010-01-08
   * Bug Fixes
-    * changed tests to require redcloth >= 4.2.1 [issue #92]
-    * fixed pagination when number of pages is an exact multiple of max per page [issue #78]
-    * fixed rendering order of site artifacts [issue #71]
+    * Require redcloth >= 4.2.1 in tests (#92)
+    * Don't break on triple dashes in yaml frontmatter (#93)
+  * Minor Enhancements
+    * Allow .mkd as markdown extension
+    * Use $stdout/err instead of constants (#99)
+    * Properly wrap code blocks (#91)
+    * Add javascript mime type for webrick (#98)
+
+== 0.5.5 / 2010-01-08
+  * Bug Fixes
+    * Fix pagination % 0 bug (#78)
+    * Ensure all posts are processed first (#71)
+
+== NOTE
+  * After this point I will no longer be giving credit in the history;
+    that is what the commit log is for.
 
 == 0.5.4 / 2009-08-23
   * Bug Fixes
