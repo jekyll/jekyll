@@ -236,6 +236,16 @@ class TestPost < Test::Unit::TestCase
         assert post.categories.include?('baz')
       end
 
+      should "recognize empty category in yaml" do
+        post = setup_post("2009-01-27-empty-category.textile")
+        assert_equal [], post.categories
+      end
+
+      should "recognize empty categories in yaml" do
+        post = setup_post("2009-01-27-empty-categories.textile")
+        assert_equal [], post.categories
+      end
+
       should "recognize tag in yaml" do
         post = setup_post("2009-05-18-tag.textile")
         assert post.tags.include?('code')
@@ -248,6 +258,16 @@ class TestPost < Test::Unit::TestCase
         assert post.tags.include?('pizza')
       end
       
+      should "recognize empty tag in yaml" do
+        post = setup_post("2009-05-18-empty-tag.textile")
+        assert_equal [], post.tags
+      end
+
+      should "recognize empty tags in yaml" do
+        post = setup_post("2009-05-18-empty-tags.textile")
+        assert_equal [], post.tags
+      end
+
       should "allow no yaml" do
         post = setup_post("2009-06-22-no-yaml.textile")
         assert_equal "No YAML.", post.content
