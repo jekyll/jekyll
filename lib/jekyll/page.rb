@@ -19,6 +19,7 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
+      @dirty = true
 
       self.process(name)
       self.read_yaml(File.join(base, dir), name)

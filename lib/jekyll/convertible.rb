@@ -5,6 +5,9 @@
 #   self.site -> Jekyll::Site
 module Jekyll
   module Convertible
+    
+    attr_accessor :dirty
+    
     # Return the contents as a string
     def to_s
       self.content || ''

@@ -72,6 +72,57 @@ class TestSite < Test::Unit::TestCase
       assert_equal includes, @site.filter_entries(excludes + includes)
     end
     
+    context "incremental regeneration" do
+      setup do
+        # Start with a processed site
+        clear_dest
+        @site.process
+      end
+      
+      should "do full regeneration when layout changes" do
+        # User modified a layout and post 
+        mod_layout = @site.layouts["default"]
+        mod_post = @site.posts.first
+        
+        mock(@site).process # Full-rebuild should be called
+        
+        @site.incremental([mod_layout.src_path, mod_post.src_path])
+        
+        @site.posts.each do |p|
+          assert !p.dirty # All posts should be clean
+        end
+      end
+      
+      should "do incremental regeneration when only posts are modified" do
+        mod_post = @site.posts.first
+        mod_path = mod_post.src_path
+        
+        orig_num_posts = @site.posts.size
+        
+        unmod_post = @site.posts.last
+        # Unmodified post should not be touched
+        dont_allow(unmod_post).write(is_a(String))
+        
+        orig_page = @site.pages.first
+        
+        @site.incremental([mod_path])
+        
+        assert_equal @site.posts.size, orig_num_posts
+        
+        # Compare updated post with original post
+        updated_post = @site.posts.first
+        assert_equal mod_post, updated_post # preserve ordering
+        assert_not_nil updated_post
+        assert_equal mod_post, updated_post # same path
+        assert !mod_post.equal?(updated_post) # but different object
+        
+        # Page should have been updated as well
+        updated_page = @site.pages.first
+        assert_equal orig_page.url, updated_page.url # 
+        assert !updated_page.equal?(orig_page) # 
+      end
+    end
+    
     context 'with an invalid markdown processor in the configuration' do
       
       should 'give a meaningful error message' do

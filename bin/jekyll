@@ -30,6 +30,10 @@ opts = OptionParser.new do |opts|
   opts.on("--no-auto", "No auto-regenerate") do
     options['auto'] = false
   end
+  
+  opts.on("--no-incremental", "Disable incremental regeneration (only with auto)") do
+    options['incremental'] = false
+  end
 
   opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
     options['server'] = true
@@ -107,7 +111,11 @@ site = Jekyll::Site.new(options)
 if options['auto']
   require 'directory_watcher'
 
+  incremental = true
+  incremental = options['incremental'] unless options['incremental'].nil?
+
   puts "Auto-regenerating enabled: #{source} -> #{destination}"
+  puts "Incremental regeneration enabled" if incremental
 
   dw = DirectoryWatcher.new(source)
   dw.interval = 1
@@ -116,7 +124,21 @@ if options['auto']
   dw.add_observer do |*args|
     t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     puts "[#{t}] regeneration: #{args.size} files changed"
-    site.process
+    
+    st = Time.now
+    # Check if files were only modified (not added/removed) 
+    # to attempt incremental regeneration
+    mod_paths = args.collect { |e| e.path if e.type == :modified }.compact
+
+    if incremental && (args.size == mod_paths.size)
+      site.incremental(mod_paths)
+    else
+      site.process
+    end
+    
+    f = Time.now
+    elapsed = format("%.2f",f - st)    
+    puts "[#{f.strftime("%Y-%m-%d %H:%M:%S")}] regeneration finished: #{elapsed} seconds"
   end
 
   dw.start

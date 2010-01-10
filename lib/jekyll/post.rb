@@ -18,7 +18,7 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output, :tags
+    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output, :tags, :src_path
     attr_writer :categories
 
     def categories
@@ -36,6 +36,8 @@ module Jekyll
       @site = site
       @base = File.join(source, dir, '_posts')
       @name = name
+      @src_path = File.join(@base, name) # source path of the post
+      @dirty = true
 
       self.categories = dir.split('/').reject { |x| x.empty? }
       self.process(name)
@@ -207,6 +209,8 @@ module Jekyll
       File.open(path, 'w') do |f|
         f.write(self.output)
       end
+      
+      self.dirty = false
     end
 
     # Convert this post into a Hash for use in Liquid templates.

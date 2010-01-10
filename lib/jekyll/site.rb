@@ -22,13 +22,19 @@ module Jekyll
       self.setup
     end
 
-    def reset
+    def reset(modified_posts=nil)
       self.layouts         = {}
-      self.posts           = []
       self.pages           = []
       self.static_files    = []
       self.categories      = Hash.new { |hash, key| hash[key] = [] }
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
+      
+      if modified_posts.nil?
+        self.posts = [] # Clean everything
+      else
+        # Only remove modified posts
+        self.posts.delete_if {|p| modified_posts.include?(p) }
+      end
     end
 
     def setup
@@ -92,12 +98,34 @@ module Jekyll
     # real deal.  Now has 4 phases; reset, read, render, write.  This allows
     # rendering to have full site payload available.
     #
+    #   +modified_posts+ is optional array of modified Posts for incremental rebuild
     # Returns nothing
-    def process
-      self.reset
+    def process(modified_posts=nil)
+      self.reset(modified_posts)
       self.read
       self.render
       self.write
+    end
+    
+    # Incrementally regenerate if only posts have been modified.
+    # Will also regenerate layouts, pages, static pages since they
+    # may have references to posts.
+    #
+    #   +changed_files+ array of paths that were modified
+    # Returns nothing
+    def incremental(changed_files)
+      modified_posts = []
+      self.posts.each do |p|
+        modified_posts << p if changed_files.include? p.src_path
+      end
+            
+      if modified_posts.size != changed_files.size
+        # Files other than just posts changed, do full regenerate
+        self.process
+      else
+        # Incremental rebuild of modified posts
+        self.process(modified_posts)
+      end
     end
 
     def read
@@ -132,7 +160,11 @@ module Jekyll
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
-        if Post.valid?(f)
+        # Check if post already has been created
+        full_path = File.join(base, f)
+        post_exists = self.posts.find {|p| p.src_path == full_path}
+        
+        if Post.valid?(f) && !post_exists
           post = Post.new(self, self.source, dir, f)
 
           if post.published
@@ -146,9 +178,9 @@ module Jekyll
       self.posts.sort!
     end
 
-    def render
-      [self.posts, self.pages].flatten.each do |convertible|
-        convertible.render(self.layouts, site_payload)
+    def render(posts=self.posts)
+      [posts, self.pages].flatten.each do |convertible|
+        convertible.render(self.layouts, site_payload) if convertible.dirty
       end
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a} }
@@ -162,7 +194,7 @@ module Jekyll
     # Returns nothing
     def write
       self.posts.each do |post|
-        post.write(self.dest)
+        post.write(self.dest) if post.dirty
       end
       self.pages.each do |page|
         page.write(self.dest)
