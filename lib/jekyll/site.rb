@@ -2,7 +2,8 @@ module Jekyll
 
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files, :categories, :exclude,
-                  :source, :dest, :lsi, :pygments, :permalink_style, :tags
+                  :source, :dest, :lsi, :pygments, :permalink_style, :tags, :time,
+                  :future
 
     # Initialize the site
     #   +config+ is a Hash containing site configurations details
@@ -17,12 +18,14 @@ module Jekyll
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
+      self.future          = config['future']
 
       self.reset
       self.setup
     end
 
     def reset
+      self.time            = Time.parse(self.config['time'].to_s) || Time.now
       self.layouts         = {}
       self.posts           = []
       self.pages           = []
@@ -135,7 +138,7 @@ module Jekyll
         if Post.valid?(f)
           post = Post.new(self, self.source, dir, f)
 
-          if post.published
+          if post.published && (self.future || post.date <= self.time)
             self.posts << post
             post.categories.each { |c| self.categories[c] << post }
             post.tags.each { |c| self.tags[c] << post }
@@ -230,7 +233,7 @@ module Jekyll
     #                     "categories" => [<Post>]}
     def site_payload
       {"site" => self.config.merge({
-          "time"       => Time.now,
+          "time"       => self.time,
           "posts"      => self.posts.sort { |a,b| b <=> a },
           "categories" => post_attr_hash('categories'),
           "tags"       => post_attr_hash('tags')})}

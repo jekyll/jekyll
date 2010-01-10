@@ -39,6 +39,7 @@ module Jekyll
     'source'       => '.',
     'destination'  => File.join('.', '_site'),
 
+    'future'       => true,
     'lsi'          => false,
     'pygments'     => false,
     'markdown'     => 'maruku',

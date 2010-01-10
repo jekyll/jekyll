@@ -22,6 +22,7 @@ class TestSite < Test::Unit::TestCase
       before_tags = @site.tags.length
       before_pages = @site.pages.length
       before_static_files = @site.static_files.length
+      before_time = @site.time
 
       @site.process
       assert_equal before_posts, @site.posts.length
@@ -30,6 +31,7 @@ class TestSite < Test::Unit::TestCase
       assert_equal before_tags, @site.tags.length
       assert_equal before_pages, @site.pages.length
       assert_equal before_static_files, @site.static_files.length
+      assert before_time <= @site.time
     end
 
     should "read layouts" do

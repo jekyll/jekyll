@@ -48,6 +48,18 @@ opts = OptionParser.new do |opts|
     options['markdown'] = 'rdiscount'
   end
 
+  opts.on("--time [TIME]", "Time to generate the site for") do |time|
+    options['time'] = Time.parse(time)
+  end
+
+  opts.on("--future", "Render future dated posts") do
+    options['future'] = true
+  end
+
+  opts.on("--no-future", "Do not render future dated posts") do
+    options['future'] = false
+  end
+
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
     options['permalink'] = style unless style.nil?
   end
