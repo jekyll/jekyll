@@ -41,6 +41,13 @@ module Jekyll
       self.process(name)
       self.read_yaml(@base, name)
 
+      #If we've added a date and time to the yaml, use that instead of the filename date
+      #Means we'll sort correctly.
+      if self.data.has_key?('date')
+        # ensure Time via to_s and reparse
+        self.date = Time.parse(self.data["date"].to_s)
+      end
+
       if self.data.has_key?('published') && self.data['published'] == false
         self.published = false
       else

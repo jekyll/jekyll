@@ -224,6 +224,16 @@ class TestPost < Test::Unit::TestCase
         assert_equal false, post.published
       end
 
+      should "recognize date in yaml" do
+        post = setup_post("2010-01-09-date-override.textile")
+        assert_equal "/2010/01/10/date-override.html", post.url
+      end
+
+      should "recognize time in yaml" do
+        post = setup_post("2010-01-09-time-override.textile")
+        assert_equal "/2010/01/10/time-override.html", post.url
+      end
+
       should "recognize category in yaml" do
         post = setup_post("2009-01-27-category.textile")
         assert post.categories.include?('foo')
