@@ -1,4 +1,6 @@
 == Edge
+  * Minor Enhancements
+    * Allow overriding of post date in the front matter (#62, #38)
   * Bug Fixes
     * Categories isn't always an array (#73)
     * Empty tags causes error in read_posts (#84)
