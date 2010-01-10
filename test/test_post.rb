@@ -36,6 +36,7 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "keep date, title, and markup type" do
+        @post.categories = []
         @post.process(@fake_file)
 
         assert_equal Time.parse("2008-10-19"), @post.date

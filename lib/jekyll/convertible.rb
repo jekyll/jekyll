@@ -3,6 +3,10 @@
 #
 # Requires
 #   self.site -> Jekyll::Site
+#   self.content=
+#   self.data=
+#   self.ext=
+#   self.output=
 module Jekyll
   module Convertible
     # Return the contents as a string

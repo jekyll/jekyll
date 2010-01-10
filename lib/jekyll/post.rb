@@ -18,12 +18,9 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output, :tags
-    attr_writer :categories
-
-    def categories
-      @categories ||= []
-    end
+    attr_accessor :site
+    attr_accessor :data, :content, :output, :ext
+    attr_accessor :date, :slug, :published, :tags, :categories
 
     # Initialize this Post instance.
     #   +site+ is the Site
