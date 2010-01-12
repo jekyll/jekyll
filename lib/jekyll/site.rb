@@ -147,8 +147,16 @@ module Jekyll
     end
 
     def render
-      [self.posts, self.pages].flatten.each do |convertible|
-        convertible.render(self.layouts, site_payload)
+      self.posts.each do |post|
+        post.render(self.layouts, site_payload)
+      end
+
+      self.pages.dup.each do |page|
+        if Pager.pagination_enabled?(self.config, page.name)
+          paginate(page)
+        else
+          page.render(self.layouts, site_payload)
+        end
       end
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a} }
@@ -191,17 +199,13 @@ module Jekyll
           next if self.dest.sub(/\/$/, '') == f_abs
           read_directories(f_rel)
         elsif !File.symlink?(f_abs)
-          if Pager.pagination_enabled?(self.config, f)
-            paginate_posts(f, dir)
+          first3 = File.open(f_abs) { |fd| fd.read(3) }
+          if first3 == "---"
+            # file appears to have a YAML header so process it as a page
+            pages << Page.new(self, self.source, dir, f)
           else
-            first3 = File.open(f_abs) { |fd| fd.read(3) }
-            if first3 == "---"
-              # file appears to have a YAML header so process it as a page
-              pages << Page.new(self, self.source, dir, f)
-            else
-              # otherwise treat it as a static file
-              static_files << StaticFile.new(self, self.source, dir, f)
-            end
+            # otherwise treat it as a static file
+            static_files << StaticFile.new(self, self.source, dir, f)
           end
         end
       end
@@ -244,8 +248,10 @@ module Jekyll
       end
     end
 
-    # Paginates the blog's posts. Renders the index.html file into paginated directories, ie: page2, page3...
-    # and adds more site-wide data
+    # Paginates the blog's posts. Renders the index.html file into paginated
+    # directories, ie: page2/index.html, page3/index.html, etc and adds more
+    # site-wide data.
+    #   +page+ is the index.html Page that requires pagination
     #
     # {"paginator" => { "page" => <Number>,
     #                   "per_page" => <Number>,
@@ -254,15 +260,19 @@ module Jekyll
     #                   "total_pages" => <Number>,
     #                   "previous_page" => <Number>,
     #                   "next_page" => <Number> }}
-    def paginate_posts(file, dir)
-      all_posts = self.posts.sort { |a,b| b <=> a }
+    def paginate(page)
+      all_posts = site_payload['site']['posts']
       pages = Pager.calculate_pages(all_posts, self.config['paginate'].to_i)
       (1..pages).each do |num_page|
         pager = Pager.new(self.config, num_page, all_posts, pages)
-        page = Page.new(self, self.source, dir, file)
-        page.render(self.layouts, site_payload.merge({'paginator' => pager.to_hash}))
-        suffix = "page#{num_page}" if num_page > 1
-        page.write(self.dest, suffix)
+        if num_page > 1
+          newpage = Page.new(self, self.source, page.dir, page.name)
+          newpage.render(self.layouts, site_payload.merge({'paginator' => pager.to_hash}))
+          newpage.dir = File.join(page.dir, "page#{num_page}")
+          self.pages << newpage
+        else
+          page.render(self.layouts, site_payload.merge({'paginator' => pager.to_hash}))
+        end
       end
     end
   end

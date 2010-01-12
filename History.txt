@@ -4,6 +4,7 @@
   * Bug Fixes
     * Categories isn't always an array (#73)
     * Empty tags causes error in read_posts (#84)
+    * Fix pagination to adhere to read/render/write paradigm
   * Test Enhancement
     * cucumber features no longer use site.ports.first where a better alternative is available
 
