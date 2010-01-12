@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jekyll}
-  s.version = "0.5.6"
+  s.version = "0.5.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Preston-Werner"]
-  s.date = %q{2010-01-08}
+  s.date = %q{2010-01-12}
   s.default_executable = %q{jekyll}
   s.description = %q{Jekyll is a simple, blog aware, static site generator.}
   s.email = %q{tom@mojombo.com}
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "bin/jekyll",
      "features/create_sites.feature",
      "features/embed_filters.feature",
+     "features/markdown.feature",
      "features/pagination.feature",
      "features/permalinks.feature",
      "features/post_data.feature",
@@ -66,12 +67,18 @@ Gem::Specification.new do |s|
      "test/source/_posts/2009-01-27-array-categories.textile",
      "test/source/_posts/2009-01-27-categories.textile",
      "test/source/_posts/2009-01-27-category.textile",
+     "test/source/_posts/2009-01-27-empty-categories.textile",
+     "test/source/_posts/2009-01-27-empty-category.textile",
      "test/source/_posts/2009-03-12-hash-#1.markdown",
+     "test/source/_posts/2009-05-18-empty-tag.textile",
+     "test/source/_posts/2009-05-18-empty-tags.textile",
      "test/source/_posts/2009-05-18-tag.textile",
      "test/source/_posts/2009-05-18-tags.textile",
      "test/source/_posts/2009-06-22-empty-yaml.textile",
      "test/source/_posts/2009-06-22-no-yaml.textile",
      "test/source/_posts/2010-01-08-triple-dash.markdown",
+     "test/source/_posts/2010-01-09-date-override.textile",
+     "test/source/_posts/2010-01-09-time-override.textile",
      "test/source/about.html",
      "test/source/category/_posts/2008-9-23-categories.textile",
      "test/source/contacts.html",
@@ -83,6 +90,7 @@ Gem::Specification.new do |s|
      "test/source/z_category/_posts/2008-9-23-categories.textile",
      "test/suite.rb",
      "test/test_configuration.rb",
+     "test/test_core_ext.rb",
      "test/test_filters.rb",
      "test/test_generated_site.rb",
      "test/test_page.rb",
@@ -101,6 +109,7 @@ Gem::Specification.new do |s|
     "test/helper.rb",
      "test/suite.rb",
      "test/test_configuration.rb",
+     "test/test_core_ext.rb",
      "test/test_filters.rb",
      "test/test_generated_site.rb",
      "test/test_page.rb",
