@@ -1,3 +1,7 @@
+== Edge
+  * Bug Fixes
+    * Render highlighted code for non markdown/textile pages (#116)
+
 == 0.5.7 / 2010-01-12
   * Minor Enhancements
     * Allow overriding of post date in the front matter (#62, #38)
