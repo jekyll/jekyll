@@ -1,6 +1,7 @@
 == Edge
   * Bug Fixes
     * Render highlighted code for non markdown/textile pages (#116)
+    * Expand source to full path so includes work anywhere (#101)
 
 == 0.5.7 / 2010-01-12
   * Minor Enhancements
