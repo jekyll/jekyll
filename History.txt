@@ -4,6 +4,7 @@
     * Expand source to full path so includes work anywhere (#101)
     * Fix highlighting on Ruby 1.9 (#65)
     * Fix extension munging when pretty permalinks are enabled (#64)
+    * Stop sorting categories (#33)
 
 == 0.5.7 / 2010-01-12
   * Minor Enhancements
