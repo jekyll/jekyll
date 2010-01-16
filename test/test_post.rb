@@ -227,12 +227,37 @@ class TestPost < Test::Unit::TestCase
 
       should "recognize date in yaml" do
         post = setup_post("2010-01-09-date-override.textile")
+        do_render(post)
+        assert_equal Time, post.date.class
+        assert_equal Time, post.to_liquid["date"].class
         assert_equal "/2010/01/10/date-override.html", post.url
+        assert_equal "<p>Post with a front matter date</p>\n<p>10 Jan 2010</p>", post.output
       end
 
       should "recognize time in yaml" do
         post = setup_post("2010-01-09-time-override.textile")
+        do_render(post)
+        assert_equal Time, post.date.class
+        assert_equal Time, post.to_liquid["date"].class
         assert_equal "/2010/01/10/time-override.html", post.url
+        assert_equal "<p>Post with a front matter time</p>\n<p>10 Jan 2010</p>", post.output
+      end
+
+      should "recognize time with timezone in yaml" do
+        post = setup_post("2010-01-09-timezone-override.textile")
+        do_render(post)
+        assert_equal Time, post.date.class
+        assert_equal Time, post.to_liquid["date"].class
+        assert_equal "/2010/01/10/timezone-override.html", post.url
+        assert_equal "<p>Post with a front matter time with timezone</p>\n<p>10 Jan 2010</p>", post.output
+      end
+
+      should "to_liquid prioritizes post attributes over data" do
+        post = setup_post("2010-01-16-override-data.textile")
+        assert_equal Array, post.tags.class
+        assert_equal Array, post.to_liquid["tags"].class
+        assert_equal Time, post.date.class
+        assert_equal Time, post.to_liquid["date"].class
       end
 
       should "recognize category in yaml" do
@@ -333,6 +358,21 @@ class TestPost < Test::Unit::TestCase
 
           assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", post.output
         end
+
+        should "render date specified in front matter properly" do
+          post = setup_post("2010-01-09-date-override.textile")
+          do_render(post)
+
+          assert_equal "<p>Post with a front matter date</p>\n<p>10 Jan 2010</p>", post.output
+        end
+
+        should "render time specified in front matter properly" do
+          post = setup_post("2010-01-09-time-override.textile")
+          do_render(post)
+
+          assert_equal "<p>Post with a front matter time</p>\n<p>10 Jan 2010</p>", post.output
+        end
+
       end
     end
 
