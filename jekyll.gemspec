@@ -129,14 +129,12 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<classifier>, [">= 1.3.1"])
       s.add_runtime_dependency(%q<maruku>, [">= 0.5.9"])
       s.add_runtime_dependency(%q<directory_watcher>, [">= 1.1.1"])
-      s.add_runtime_dependency(%q<open4>, [">= 0.9.6"])
     else
       s.add_dependency(%q<RedCloth>, [">= 4.2.1"])
       s.add_dependency(%q<liquid>, [">= 1.9.0"])
       s.add_dependency(%q<classifier>, [">= 1.3.1"])
       s.add_dependency(%q<maruku>, [">= 0.5.9"])
       s.add_dependency(%q<directory_watcher>, [">= 1.1.1"])
-      s.add_dependency(%q<open4>, [">= 0.9.6"])
     end
   else
     s.add_dependency(%q<RedCloth>, [">= 4.2.1"])
@@ -144,7 +142,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<classifier>, [">= 1.3.1"])
     s.add_dependency(%q<maruku>, [">= 0.5.9"])
     s.add_dependency(%q<directory_watcher>, [">= 1.1.1"])
-    s.add_dependency(%q<open4>, [">= 0.9.6"])
   end
 end
 
