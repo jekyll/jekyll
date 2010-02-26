@@ -75,8 +75,17 @@ module Jekyll
     #
     # Returns nothing
     def render(layouts, site_payload)
-      payload = {"page" => self.data}.deep_merge(site_payload)
+      payload = {
+        "page" => self.to_liquid
+      }.deep_merge(site_payload)
+
       do_layout(payload, layouts)
+    end
+
+    def to_liquid
+      self.data.deep_merge({
+        "url"        => self.url,
+        "content"    => self.content })
     end
 
     # Write the generated page file to the destination directory.

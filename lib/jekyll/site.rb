@@ -230,11 +230,13 @@ module Jekyll
     #
     # Returns {"site" => {"time" => <Time>,
     #                     "posts" => [<Post>],
+    #                     "pages" => [<Page>],
     #                     "categories" => [<Post>]}
     def site_payload
       {"site" => self.config.merge({
           "time"       => self.time,
           "posts"      => self.posts.sort { |a,b| b <=> a },
+          "pages"      => self.pages,
           "categories" => post_attr_hash('categories'),
           "tags"       => post_attr_hash('tags')})}
     end

@@ -167,12 +167,10 @@ module Jekyll
     # Returns nothing
     def render(layouts, site_payload)
       # construct payload
-      payload =
-      {
+      payload = {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
         "page" => self.to_liquid
-      }
-      payload = payload.deep_merge(site_payload)
+      }.deep_merge(site_payload)
 
       do_layout(payload, layouts)
     end
