@@ -201,7 +201,7 @@ module Jekyll
     #
     # Returns <Hash>
     def to_liquid
-      self.data.deep_merge({ 
+      self.data.deep_merge({
         "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
         "url"        => self.url,
         "date"       => self.date,
