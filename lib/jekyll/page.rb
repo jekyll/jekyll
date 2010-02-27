@@ -43,10 +43,10 @@ module Jekyll
     end
 
     def template
-      if self.site.permalink_style == :pretty && !index?
-        "/:name/"
+      if self.site.permalink_style == :pretty && !index? && html?
+        "/:basename/"
       else
-        "/:name.html"
+        "/:basename:output_ext"
       end
     end
 
@@ -57,7 +57,12 @@ module Jekyll
     def url
       return permalink if permalink
 
-      @url ||= (ext == '.html') ? template.gsub(':name', basename) : "/#{name}"
+      @url ||= {
+        "basename"   => self.basename,
+        "output_ext" => self.output_ext,
+      }.inject(template) { |result, token|
+        result.gsub(/:#{token.first}/, token.last)
+      }.gsub(/\/\//, "/")
     end
 
     # Extract information from the page filename
@@ -100,7 +105,7 @@ module Jekyll
 
       # The url needs to be unescaped in order to preserve the correct filename
       path = File.join(dest, CGI.unescape(self.url))
-      if self.ext == '.html' && self.url[/\.html$/].nil?
+      if self.url =~ /\/$/
         FileUtils.mkdir_p(path)
         path = File.join(path, "index.html")
       end
@@ -115,6 +120,10 @@ module Jekyll
     end
 
     private
+
+      def html?
+        output_ext == '.html'
+      end
 
       def index?
         basename == 'index'

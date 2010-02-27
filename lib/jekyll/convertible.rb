@@ -3,6 +3,7 @@
 #
 # Requires
 #   self.site -> Jekyll::Site
+#   self.content
 #   self.content=
 #   self.data=
 #   self.ext=
@@ -31,17 +32,29 @@ module Jekyll
       self.data ||= {}
     end
 
-    # Transform the contents based on the file extension.
+    # Transform the contents based on the content type.
     #
     # Returns nothing
     def transform
       case self.content_type
       when 'textile'
-        self.ext = ".html"
         self.content = self.site.textile(self.content)
       when 'markdown'
-        self.ext = ".html"
         self.content = self.site.markdown(self.content)
+      end
+    end
+
+    # Determine the extension depending on content_type
+    #
+    # Returns the extensions for the output file
+    def output_ext
+      case self.content_type
+      when 'textile'
+        ".html"
+      when 'markdown'
+        ".html"
+      else
+        self.ext
       end
     end
 
