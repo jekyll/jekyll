@@ -119,15 +119,13 @@ module Jekyll
       "#<Jekyll:Page @name=#{self.name.inspect}>"
     end
 
-    private
+    def html?
+      output_ext == '.html'
+    end
 
-      def html?
-        output_ext == '.html'
-      end
-
-      def index?
-        basename == 'index'
-      end
+    def index?
+      basename == 'index'
+    end
 
   end
 
