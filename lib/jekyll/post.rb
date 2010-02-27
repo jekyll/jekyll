@@ -124,7 +124,8 @@ module Jekyll
         "month"      => date.strftime("%m"),
         "day"        => date.strftime("%d"),
         "title"      => CGI.escape(slug),
-        "categories" => categories.join('/')
+        "categories" => categories.join('/'),
+        "output_ext" => self.output_ext
       }.inject(template) { |result, token|
         result.gsub(/:#{token.first}/, token.last)
       }.gsub(/\/\//, "/")

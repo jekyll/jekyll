@@ -22,13 +22,13 @@ module Jekyll
     # Returns nothing
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
-      
+
       if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
         self.content = self.content[($1.size + $2.size)..-1]
-      
+
         self.data = YAML.load($1)
       end
-      
+
       self.data ||= {}
     end
 
@@ -36,26 +36,14 @@ module Jekyll
     #
     # Returns nothing
     def transform
-      case self.content_type
-      when 'textile'
-        self.content = self.site.textile(self.content)
-      when 'markdown'
-        self.content = self.site.markdown(self.content)
-      end
+      self.content = converter.convert(self.content)
     end
 
     # Determine the extension depending on content_type
     #
     # Returns the extensions for the output file
     def output_ext
-      case self.content_type
-      when 'textile'
-        ".html"
-      when 'markdown'
-        ".html"
-      else
-        self.ext
-      end
+      converter.output_ext(self.ext)
     end
 
     # Determine which formatting engine to use based on this convertible's
@@ -63,13 +51,11 @@ module Jekyll
     #
     # Returns one of :textile, :markdown or :unknown
     def content_type
-      case self.ext[1..-1]
-      when /textile/i
-        return 'textile'
-      when /markdown/i, /mkdn/i, /md/i, /mkd/i
-        return 'markdown'
-      end
-      return 'unknown'
+      converter.content_type
+    end
+
+    def converter
+      @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
     end
 
     # Add any necessary layouts to this convertible document

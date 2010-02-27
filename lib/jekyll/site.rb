@@ -3,7 +3,7 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files, :categories, :exclude,
                   :source, :dest, :lsi, :pygments, :permalink_style, :tags, :time,
-                  :future
+                  :future, :converters
 
     # Initialize the site
     #   +config+ is a Hash containing site configurations details
@@ -19,6 +19,7 @@ module Jekyll
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
       self.future          = config['future']
+      self.converters      = []
 
       self.reset
       self.setup
@@ -38,57 +39,11 @@ module Jekyll
       # Check to see if LSI is enabled.
       require 'classifier' if self.lsi
 
-      # Set the Markdown interpreter (and Maruku self.config, if necessary)
-      case self.config['markdown']
-        when 'rdiscount'
-          begin
-            require 'rdiscount'
+      # converters
+      converters << Jekyll::MarkdownConverter.new(self.config)
+      converters << Jekyll::TextileConverter.new(self.config)
+      converters << Jekyll::IdentityConverter.new(self.config)
 
-            def markdown(content)
-              RDiscount.new(content).to_html
-            end
-
-          rescue LoadError
-            puts 'You must have the rdiscount gem installed first'
-          end
-        when 'maruku'
-          begin
-            require 'maruku'
-
-            def markdown(content)
-              Maruku.new(content).to_html
-            end
-
-            if self.config['maruku']['use_divs']
-              require 'maruku/ext/div'
-              puts 'Maruku: Using extended syntax for div elements.'
-            end
-
-            if self.config['maruku']['use_tex']
-              require 'maruku/ext/math'
-              puts "Maruku: Using LaTeX extension. Images in `#{self.config['maruku']['png_dir']}`."
-
-              # Switch off MathML output
-              MaRuKu::Globals[:html_math_output_mathml] = false
-              MaRuKu::Globals[:html_math_engine] = 'none'
-
-              # Turn on math to PNG support with blahtex
-              # Resulting PNGs stored in `images/latex`
-              MaRuKu::Globals[:html_math_output_png] = true
-              MaRuKu::Globals[:html_png_engine] =  self.config['maruku']['png_engine']
-              MaRuKu::Globals[:html_png_dir] = self.config['maruku']['png_dir']
-              MaRuKu::Globals[:html_png_url] = self.config['maruku']['png_url']
-            end
-          rescue LoadError
-            puts "The maruku gem is required for markdown support!"
-          end
-        else
-          raise "Invalid Markdown processor: '#{self.config['markdown']}' -- did you mean 'maruku' or 'rdiscount'?"
-      end
-    end
-
-    def textile(content)
-      RedCloth.new(content).to_html
     end
 
     # Do the actual work of processing the site and generating the
