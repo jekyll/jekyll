@@ -27,9 +27,10 @@ require 'jekyll/tags/highlight'
 require 'jekyll/tags/include'
 require 'jekyll/albino'
 require 'jekyll/static_file'
+require 'jekyll/converter'
+require 'jekyll/converters/identity'
 require 'jekyll/converters/markdown'
 require 'jekyll/converters/textile'
-require 'jekyll/converters/identity'
 
 module Jekyll
   # Default options. Overriden by values in _config.yml or command-line opts.

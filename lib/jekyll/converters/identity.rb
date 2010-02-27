@@ -1,13 +1,9 @@
 module Jekyll
-
-  class IdentityConverter
+  class IdentityConverter < Converter
+    priority :lowest
 
     def initialize(config = {})
 
-    end
-
-    def content_type
-      nil
     end
 
     def matches(ext)
@@ -23,5 +19,4 @@ module Jekyll
     end
 
   end
-
 end

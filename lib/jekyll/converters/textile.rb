@@ -1,13 +1,8 @@
 module Jekyll
-
-  class TextileConverter
+  class TextileConverter < Converter
 
     def initialize(config = {})
 
-    end
-
-    def content_type
-      "textile"
     end
 
     def matches(ext)
@@ -23,5 +18,4 @@ module Jekyll
     end
 
   end
-
 end

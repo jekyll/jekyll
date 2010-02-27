@@ -19,7 +19,6 @@ module Jekyll
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
       self.future          = config['future']
-      self.converters      = []
 
       self.reset
       self.setup
@@ -39,11 +38,7 @@ module Jekyll
       # Check to see if LSI is enabled.
       require 'classifier' if self.lsi
 
-      # converters
-      converters << Jekyll::MarkdownConverter.new(self.config)
-      converters << Jekyll::TextileConverter.new(self.config)
-      converters << Jekyll::IdentityConverter.new(self.config)
-
+      self.converters = Jekyll::Converter.subclasses.collect { |c| c.new(self.config) }
     end
 
     # Do the actual work of processing the site and generating the
@@ -135,7 +130,7 @@ module Jekyll
       end
     end
 
-    # Reads the directories and finds posts, pages and static files that will 
+    # Reads the directories and finds posts, pages and static files that will
     # become part of the valid site according to the rules in +filter_entries+.
     #   The +dir+ String is a relative path used to call this method
     #            recursively as it descends through directories

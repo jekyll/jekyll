@@ -1,6 +1,5 @@
 module Jekyll
-
-  class MarkdownConverter
+  class MarkdownConverter < Converter
 
     def initialize(config = {})
       # Set the Markdown interpreter (and Maruku self.config, if necessary)
@@ -52,10 +51,6 @@ module Jekyll
       end
     end
 
-    def content_type
-      "markdown"
-    end
-
     def matches(ext)
       ext =~ /(markdown|mkdn?|md)/i
     end
@@ -65,5 +60,4 @@ module Jekyll
     end
 
   end
-
 end
