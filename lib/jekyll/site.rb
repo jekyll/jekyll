@@ -92,13 +92,14 @@ module Jekyll
     end
 
     # Do the actual work of processing the site and generating the
-    # real deal.  Now has 4 phases; reset, read, render, write.  This allows
+    # real deal.  5 phases; reset, read, generate, render, write.  This allows
     # rendering to have full site payload available.
     #
     # Returns nothing
     def process
       self.reset
       self.read
+      self.generate
       self.render
       self.write
     end
@@ -154,12 +155,8 @@ module Jekyll
         post.render(self.layouts, site_payload)
       end
 
-      self.pages.dup.each do |page|
-        if Pager.pagination_enabled?(self.config, page.name)
-          paginate(page)
-        else
-          page.render(self.layouts, site_payload)
-        end
+      self.pages.each do |page|
+        page.render(self.layouts, site_payload)
       end
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a} }
@@ -254,6 +251,12 @@ module Jekyll
       end
     end
 
+    def generate
+      self.pages.dup.each do |page|
+        paginate(page) if Pager.pagination_enabled?(self.config, page.name)
+      end
+    end
+
     # Paginates the blog's posts. Renders the index.html file into paginated
     # directories, ie: page2/index.html, page3/index.html, etc and adds more
     # site-wide data.
@@ -273,11 +276,11 @@ module Jekyll
         pager = Pager.new(self.config, num_page, all_posts, pages)
         if num_page > 1
           newpage = Page.new(self, self.source, page.dir, page.name)
-          newpage.render(self.layouts, site_payload.merge({'paginator' => pager.to_hash}))
+          newpage.pager = pager
           newpage.dir = File.join(page.dir, "page#{num_page}")
           self.pages << newpage
         else
-          page.render(self.layouts, site_payload.merge({'paginator' => pager.to_hash}))
+          page.pager = pager
         end
       end
     end

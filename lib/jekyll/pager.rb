@@ -30,7 +30,7 @@ module Jekyll
       @next_page = @page != @total_pages ? @page + 1 : nil
     end
     
-    def to_hash
+    def to_liquid
       {
         'page' => page, 
         'per_page' => per_page, 

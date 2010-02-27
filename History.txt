@@ -4,6 +4,7 @@
     * Generation for a specific time (#59)
     * site.time allocated on render not per site_payload invocation (#59)
     * pages now present in the site payload and can be used through the site.pages and site.html_pages variables
+    * generate phase added to site#process and pagination is now a generator
   * Bug Fixes
     * Render highlighted code for non markdown/textile pages (#116)
     * Expand source to full path so includes work anywhere (#101)

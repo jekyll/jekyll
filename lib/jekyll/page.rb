@@ -3,7 +3,7 @@ module Jekyll
   class Page
     include Convertible
 
-    attr_accessor :site
+    attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename, :dir
     attr_accessor :data, :content, :output
 
@@ -81,7 +81,8 @@ module Jekyll
     # Returns nothing
     def render(layouts, site_payload)
       payload = {
-        "page" => self.to_liquid
+        "page" => self.to_liquid,
+        'paginator' => pager.to_liquid
       }.deep_merge(site_payload)
 
       do_layout(payload, layouts)
