@@ -3,21 +3,21 @@ layout: nil
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">	
-  
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+
   <url>
-		<loc>http://example.com</loc>
-		<lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>1.0</priority>
-	</url>
-	
-	{% for post in site.posts %}
-	<url>
-		<loc>http://example.com/{{ post.url }}/</loc>
-		<lastmod>{{ site.time }}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.2</priority>
-	</url>
-	{% endfor %}
+    <loc>http://example.com</loc>
+    <lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  {% for post in site.posts %}
+  <url>
+    <loc>http://example.com/{{ post.url }}/</loc>
+    <lastmod>{{ post.date | date: "%Y-%m-%d" }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  {% endfor %}
 </urlset>
