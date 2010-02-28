@@ -1,5 +1,7 @@
 module Jekyll
   class TextileConverter < Converter
+    pygments_prefix '<notextile>'
+    pygments_suffix '</notextile>'
 
     def initialize(config = {})
 

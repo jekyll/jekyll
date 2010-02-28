@@ -46,14 +46,8 @@ module Jekyll
       converter.output_ext(self.ext)
     end
 
-    # Determine which formatting engine to use based on this convertible's
+    # Determine which converter to use based on this convertible's
     # extension
-    #
-    # Returns one of :textile, :markdown or :unknown
-    def content_type
-      converter.content_type
-    end
-
     def converter
       @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
     end
@@ -67,7 +61,8 @@ module Jekyll
       info = { :filters => [Jekyll::Filters], :registers => { :site => self.site } }
 
       # render and transform content (this becomes the final content of the object)
-      payload["content_type"] = self.content_type
+      payload["pygments_prefix"] = converter.pygments_prefix
+      payload["pygments_suffix"] = converter.pygments_suffix
       self.content = Liquid::Template.parse(self.content).render(payload, info)
       self.transform
 

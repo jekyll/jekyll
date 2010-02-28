@@ -2,14 +2,15 @@ require File.dirname(__FILE__) + '/helper'
 
 class TestTags < Test::Unit::TestCase
 
-  def create_post(content, override = {}, content_type = "markdown")
+  def create_post(content, override = {}, converter_class = Jekyll::MarkdownConverter)
     stub(Jekyll).configuration do
       Jekyll::DEFAULTS.merge({'pygments' => true}).merge(override)
     end
     site = Site.new(Jekyll.configuration)
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
-    payload = {"content_type" => content_type}
-    @converter = site.converters.find { |c| c.content_type == content_type }
+    @converter = site.converters.find { |c| c.class == converter_class }
+    payload = { "pygments_prefix" => @converter.pygments_prefix,
+                "pygments_suffix" => @converter.pygments_suffix }
 
     @result = Liquid::Template.parse(content).render(payload, info)
     @result = @converter.convert(@result)
@@ -73,7 +74,7 @@ CONTENT
 
     context "using Textile" do
       setup do
-        create_post(@content, {}, "textile")
+        create_post(@content, {}, Jekyll::TextileConverter)
       end
 
       # Broken in RedCloth 4.1.9

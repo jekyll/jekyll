@@ -26,10 +26,16 @@ module Jekyll
         @priority || :normal
       end
 
-      # priority order of this converter
-      def content_type(content_type = nil)
-        @content_type = content_type if content_type
-        @content_type || self.name.downcase.gsub(/^.*::/, '').gsub(/converter$/, '')
+      # prefix for highlighting
+      def pygments_prefix(pygments_prefix = nil)
+        @pygments_prefix = pygments_prefix if pygments_prefix
+        @pygments_prefix
+      end
+
+      # suffix for highlighting
+      def pygments_suffix(pygments_suffix = nil)
+        @pygments_suffix = pygments_suffix if pygments_suffix
+        @pygments_suffix
       end
 
       # Spaceship is priority [higher -> lower]
@@ -41,8 +47,14 @@ module Jekyll
       end
     end
 
-    def content_type
-      self.class.content_type
+    # prefix for highlighting
+    def pygments_prefix
+      self.class.pygments_prefix
+    end
+
+    # suffix for highlighting
+    def pygments_suffix
+      self.class.pygments_suffix
     end
 
   end

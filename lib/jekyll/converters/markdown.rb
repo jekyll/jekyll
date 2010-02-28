@@ -1,5 +1,7 @@
 module Jekyll
   class MarkdownConverter < Converter
+    pygments_prefix '\n'
+    pygments_suffix '\n'
 
     def initialize(config = {})
       # Set the Markdown interpreter (and Maruku self.config, if necessary)
