@@ -1,10 +1,7 @@
 module Jekyll
+
   class IdentityConverter < Converter
     priority :lowest
-
-    def initialize(config = {})
-
-    end
 
     def matches(ext)
       true
@@ -19,4 +16,5 @@ module Jekyll
     end
 
   end
+
 end

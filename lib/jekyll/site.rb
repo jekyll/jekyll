@@ -3,7 +3,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files, :categories, :exclude,
                   :source, :dest, :lsi, :pygments, :permalink_style, :tags, :time,
-                  :future, :converters
+                  :future
+    attr_accessor :converters, :generators
 
     # Initialize the site
     #   +config+ is a Hash containing site configurations details
@@ -39,6 +40,7 @@ module Jekyll
       require 'classifier' if self.lsi
 
       self.converters = Jekyll::Converter.subclasses.collect { |c| c.new(self.config) }
+      self.generators = Jekyll::Generator.subclasses.collect { |c| c.new(self.config) }
     end
 
     # Do the actual work of processing the site and generating the

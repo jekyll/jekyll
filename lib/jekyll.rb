@@ -27,10 +27,17 @@ require 'jekyll/tags/highlight'
 require 'jekyll/tags/include'
 require 'jekyll/albino'
 require 'jekyll/static_file'
+
+#extensions
+require 'jekyll/extension'
 require 'jekyll/converter'
-require 'jekyll/converters/identity'
-require 'jekyll/converters/markdown'
-require 'jekyll/converters/textile'
+Dir["#{File.dirname(__FILE__)}/jekyll/converters/*.rb"].each do |file|
+  require file
+end
+require 'jekyll/generator'
+Dir["#{File.dirname(__FILE__)}/jekyll/generators/*.rb"].each do |file|
+  require file
+end
 
 module Jekyll
   # Default options. Overriden by values in _config.yml or command-line opts.

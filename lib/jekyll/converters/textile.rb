@@ -1,11 +1,8 @@
 module Jekyll
+
   class TextileConverter < Converter
     pygments_prefix '<notextile>'
     pygments_suffix '</notextile>'
-
-    def initialize(config = {})
-
-    end
 
     def matches(ext)
       ext =~ /textile/i
@@ -20,4 +17,5 @@ module Jekyll
     end
 
   end
+
 end

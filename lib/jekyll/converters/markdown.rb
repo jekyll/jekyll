@@ -1,4 +1,5 @@
 module Jekyll
+
   class MarkdownConverter < Converter
     pygments_prefix '\n'
     pygments_suffix '\n'
@@ -62,4 +63,5 @@ module Jekyll
     end
 
   end
+
 end
