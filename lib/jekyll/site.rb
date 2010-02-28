@@ -39,8 +39,8 @@ module Jekyll
       # Check to see if LSI is enabled.
       require 'classifier' if self.lsi
 
-      self.converters = Jekyll::Converter.subclasses.collect { |c| c.new(self.config) }
-      self.generators = Jekyll::Generator.subclasses.collect { |c| c.new(self.config) }
+      self.converters = Jekyll::Converter.all.collect { |c| c.new(self.config) }
+      self.generators = Jekyll::Generator.all.collect { |c| c.new(self.config) }
     end
 
     # Do the actual work of processing the site and generating the
@@ -100,6 +100,12 @@ module Jekyll
       end
 
       self.posts.sort!
+    end
+
+    def generate
+      self.generators.each do |generator|
+        generator.generate(self)
+      end
     end
 
     def render
@@ -203,38 +209,5 @@ module Jekyll
       end
     end
 
-    def generate
-      self.pages.dup.each do |page|
-        paginate(page) if Pager.pagination_enabled?(self.config, page.name)
-      end
-    end
-
-    # Paginates the blog's posts. Renders the index.html file into paginated
-    # directories, ie: page2/index.html, page3/index.html, etc and adds more
-    # site-wide data.
-    #   +page+ is the index.html Page that requires pagination
-    #
-    # {"paginator" => { "page" => <Number>,
-    #                   "per_page" => <Number>,
-    #                   "posts" => [<Post>],
-    #                   "total_posts" => <Number>,
-    #                   "total_pages" => <Number>,
-    #                   "previous_page" => <Number>,
-    #                   "next_page" => <Number> }}
-    def paginate(page)
-      all_posts = site_payload['site']['posts']
-      pages = Pager.calculate_pages(all_posts, self.config['paginate'].to_i)
-      (1..pages).each do |num_page|
-        pager = Pager.new(self.config, num_page, all_posts, pages)
-        if num_page > 1
-          newpage = Page.new(self, self.source, page.dir, page.name)
-          newpage.pager = pager
-          newpage.dir = File.join(page.dir, "page#{num_page}")
-          self.pages << newpage
-        else
-          page.pager = pager
-        end
-      end
-    end
   end
 end

@@ -18,6 +18,10 @@ module Jekyll
         subclasses.sort!
       end
 
+      def all
+        subclasses
+      end
+
       # priority order of this converter
       def priority(priority = nil)
         if priority && PRIORITIES.has_key?(priority)

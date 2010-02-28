@@ -16,28 +16,22 @@ require 'redcloth'
 
 # internal requires
 require 'jekyll/core_ext'
-require 'jekyll/pager'
 require 'jekyll/site'
 require 'jekyll/convertible'
 require 'jekyll/layout'
 require 'jekyll/page'
 require 'jekyll/post'
 require 'jekyll/filters'
-require 'jekyll/tags/highlight'
-require 'jekyll/tags/include'
 require 'jekyll/albino'
 require 'jekyll/static_file'
+Dir[File.dirname(__FILE__) + "/jekyll/tags/*.rb"].each { |f| require f }
 
 #extensions
 require 'jekyll/extension'
 require 'jekyll/converter'
-Dir["#{File.dirname(__FILE__)}/jekyll/converters/*.rb"].each do |file|
-  require file
-end
 require 'jekyll/generator'
-Dir["#{File.dirname(__FILE__)}/jekyll/generators/*.rb"].each do |file|
-  require file
-end
+Dir[File.dirname(__FILE__) + "/jekyll/converters/*.rb"].each { |f| require f }
+Dir[File.dirname(__FILE__) + "/jekyll/generators/*.rb"].each { |f| require f }
 
 module Jekyll
   # Default options. Overriden by values in _config.yml or command-line opts.
