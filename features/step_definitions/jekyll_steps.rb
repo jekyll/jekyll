@@ -45,7 +45,7 @@ end
 
 Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, table|
   table.hashes.each do |post|
-    date = Date.parse(post['date']).strftime('%Y-%m-%d')
+    date = Date.strptime(post['date'], '%m/%d/%Y').strftime('%Y-%m-%d')
     title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
 
     if direction && direction == "in"
