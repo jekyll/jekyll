@@ -23,10 +23,11 @@ module Jekyll
 
     def render(context)
       if context.registers[:site].pygments
-        render_pygments(context, super.to_s)
+        output = render_pygments(context, super.to_s)
       else
-        render_codehighlighter(context, super.to_s)
+        output = render_codehighlighter(context, super.to_s)
       end
+      output
     end
 
     def render_pygments(context, code)
