@@ -309,7 +309,18 @@ class TestPost < Test::Unit::TestCase
           assert File.exists?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
         end
 
+        should "write properly without creating folder" do
+          @site.no_post_dirs = true
+          post = setup_post("2008-10-18-foo-bar.textile")
+          post.site.permalink_style = ":title"
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.exists?(File.join(dest_dir, 'foo-bar.html'))
+        end
+
         should "write properly without html extension" do
+          @site.no_post_dirs = false
           post = setup_post("2008-10-18-foo-bar.textile")
           post.site.permalink_style = ":title"
           do_render(post)
