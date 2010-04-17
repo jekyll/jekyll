@@ -2,7 +2,7 @@ module Jekyll
 
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files, :categories, :exclude,
-                  :source, :dest, :lsi, :pygments, :permalink_style, :tags
+                  :source, :dest, :lsi, :pygments, :permalink_style, :tags, :no_post_dirs
 
     # Initialize the site
     #   +config+ is a Hash containing site configurations details
@@ -17,6 +17,7 @@ module Jekyll
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
+      self.no_post_dirs    = config['no_post_dirs']
 
       self.reset
       self.setup
