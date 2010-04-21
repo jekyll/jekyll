@@ -1,14 +1,24 @@
 $:.unshift File.dirname(__FILE__)     # For use/testing when no gem is installed
 
+# Require all of the Ruby files in the given directory.
+#
+# path - The String relative path from here to the directory.
+#
+# Returns nothing.
+def require_all(path)
+  glob = File.join(File.dirname(__FILE__), path, '*.rb')
+  Dir[glob].each do |f|
+    require f
+  end
+end
+
 # rubygems
 require 'rubygems'
 
-# core
+# stdlib
 require 'fileutils'
 require 'time'
 require 'yaml'
-
-# stdlib
 
 # 3rd party
 require 'liquid'
@@ -24,14 +34,14 @@ require 'jekyll/post'
 require 'jekyll/filters'
 require 'jekyll/albino'
 require 'jekyll/static_file'
-Dir[File.dirname(__FILE__) + "/jekyll/tags/*.rb"].each { |f| require f }
 
 #extensions
 require 'jekyll/extension'
 require 'jekyll/converter'
 require 'jekyll/generator'
-Dir[File.dirname(__FILE__) + "/jekyll/converters/*.rb"].each { |f| require f }
-Dir[File.dirname(__FILE__) + "/jekyll/generators/*.rb"].each { |f| require f }
+require_all 'jekyll/converters'
+require_all 'jekyll/generators'
+require_all 'jekyll/tags'
 
 module Jekyll
   # Default options. Overriden by values in _config.yml or command-line opts.
