@@ -36,11 +36,15 @@ module Jekyll
     end
 
     def setup
-      # Check to see if LSI is enabled.
       require 'classifier' if self.lsi
 
-      self.converters = Jekyll::Converter.all.collect { |c| c.new(self.config) }
-      self.generators = Jekyll::Generator.all.collect { |c| c.new(self.config) }
+      self.converters = Jekyll::Converter.subclasses.map do |c|
+        c.new(self.config)
+      end
+
+      self.generators = Jekyll::Generator.subclasses.map do |c|
+        c.new(self.config)
+      end
     end
 
     # Do the actual work of processing the site and generating the
