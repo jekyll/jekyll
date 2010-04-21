@@ -44,6 +44,8 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 module Jekyll
+  VERSION = '0.5.7'
+
   # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML).
   DEFAULTS = {
@@ -97,10 +99,5 @@ module Jekyll
 
     # Merge DEFAULTS < _config.yml < override
     Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
-  end
-
-  def self.version
-    yml = YAML.load(File.read(File.join(File.dirname(__FILE__), *%w[.. VERSION.yml])))
-    "#{yml[:major]}.#{yml[:minor]}.#{yml[:patch]}"
   end
 end

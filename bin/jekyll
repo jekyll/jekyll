@@ -75,7 +75,7 @@ opts = OptionParser.new do |opts|
   end
 
   opts.on("--version", "Display current version") do
-    puts "Jekyll " + Jekyll.version
+    puts "Jekyll " + Jekyll::VERSION
     exit 0
   end
 end
