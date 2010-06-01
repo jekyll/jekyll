@@ -18,10 +18,10 @@ class TestPost < Test::Unit::TestCase
     end
 
     should "ensure valid posts are valid" do
-      assert Post.valid?("2008-10-19-foo-bar.textile")
-      assert Post.valid?("foo/bar/2008-10-19-foo-bar.textile")
+      assert Post.valid?("2008-09-09-foo-bar.textile")
+      assert Post.valid?("foo/bar/2008-09-09-foo-bar.textile")
 
-      assert !Post.valid?("lol2008-10-19-foo-bar.textile")
+      assert !Post.valid?("lol2008-09-09-foo-bar.textile")
       assert !Post.valid?("blah")
     end
 
@@ -31,7 +31,7 @@ class TestPost < Test::Unit::TestCase
         @post.site = @site
 
         @real_file = "2008-10-18-foo-bar.textile"
-        @fake_file = "2008-10-19-foo-bar.textile"
+        @fake_file = "2008-09-09-foo-bar.textile"
         @source = source_dir('_posts')
       end
 
@@ -39,17 +39,17 @@ class TestPost < Test::Unit::TestCase
         @post.categories = []
         @post.process(@fake_file)
 
-        assert_equal Time.parse("2008-10-19"), @post.date
+        assert_equal Time.parse("2008-09-09"), @post.date
         assert_equal "foo-bar", @post.slug
         assert_equal ".textile", @post.ext
-        assert_equal "/2008/10/19", @post.dir
-        assert_equal "/2008/10/19/foo-bar", @post.id
+        assert_equal "/2008/09/09", @post.dir
+        assert_equal "/2008/09/09/foo-bar", @post.id
       end
 
       should "create url based on date and title" do
         @post.categories = []
         @post.process(@fake_file)
-        assert_equal "/2008/10/19/foo-bar.html", @post.url
+        assert_equal "/2008/09/09/foo-bar.html", @post.url
       end
 
       should "CGI escape urls" do
@@ -106,7 +106,7 @@ class TestPost < Test::Unit::TestCase
 
           should "process the url correctly" do
             assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
-            assert_equal "/2008/10/19/foo-bar.html", @post.url
+            assert_equal "/2008/09/09/foo-bar.html", @post.url
           end
         end
 
@@ -118,7 +118,7 @@ class TestPost < Test::Unit::TestCase
 
           should "process the url correctly" do
             assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
-            assert_equal "/beer/2008/10/19/foo-bar.html", @post.url
+            assert_equal "/beer/2008/09/09/foo-bar.html", @post.url
           end
         end
 
@@ -131,7 +131,7 @@ class TestPost < Test::Unit::TestCase
 
           should "process the url correctly" do
             assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
-            assert_equal "/food/beer/2008/10/19/foo-bar.html", @post.url
+            assert_equal "/food/beer/2008/09/09/foo-bar.html", @post.url
           end
         end
 
@@ -155,7 +155,18 @@ class TestPost < Test::Unit::TestCase
 
           should "process the url correctly" do
             assert_equal "/:categories/:year/:month/:day/:title/", @post.template
-            assert_equal "/2008/10/19/foo-bar/", @post.url
+            assert_equal "/2008/09/09/foo-bar/", @post.url
+          end
+        end
+
+        context "with custom date permalink" do
+          setup do
+            @post.site.permalink_style = '/:categories/:year/:i_month/:i_day/:title/'
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/2008/9/9/foo-bar/", @post.url
           end
         end
 
