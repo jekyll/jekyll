@@ -35,8 +35,8 @@ require 'jekyll/filters'
 require 'jekyll/albino'
 require 'jekyll/static_file'
 
-#extensions
-require 'jekyll/extension'
+# extensions
+require 'jekyll/plugin'
 require 'jekyll/converter'
 require 'jekyll/generator'
 require_all 'jekyll/converters'

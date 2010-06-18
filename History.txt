@@ -1,4 +1,6 @@
 == Edge
+  * Major Enhancements
+    * Proper plugin system (#19, #100)
   * Minor Enhancements
     * Inclusion/exclusion of future dated posts (#59)
     * Generation for a specific time (#59)

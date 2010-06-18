@@ -1,6 +1,6 @@
 module Jekyll
 
-  class Extension
+  class Plugin
     PRIORITIES = { :lowest => -100,
                    :low => -10,
                    :normal => 0,
@@ -49,7 +49,7 @@ module Jekyll
       PRIORITIES[other.priority] <=> PRIORITIES[self.priority]
     end
 
-    # Initialize a new extension. This should be overridden by the subclass.
+    # Initialize a new plugin. This should be overridden by the subclass.
     #
     # config - The Hash of configuration options.
     #

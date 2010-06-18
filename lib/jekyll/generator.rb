@@ -1,6 +1,6 @@
 module Jekyll
 
-  class Generator < Extension
+  class Generator < Plugin
 
   end
 
