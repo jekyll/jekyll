@@ -1,6 +1,7 @@
 == Edge
   * Major Enhancements
     * Proper plugin system (#19, #100)
+    * Add safe mode so unsafe converters/generators can be added
   * Minor Enhancements
     * Inclusion/exclusion of future dated posts (#59)
     * Generation for a specific time (#59)

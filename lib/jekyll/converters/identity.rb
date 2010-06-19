@@ -1,6 +1,8 @@
 module Jekyll
 
   class IdentityConverter < Converter
+    safe true
+
     priority :lowest
 
     def matches(ext)

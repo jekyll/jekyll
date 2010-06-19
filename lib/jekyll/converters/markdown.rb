@@ -1,6 +1,8 @@
 module Jekyll
 
   class MarkdownConverter < Converter
+    safe true
+
     pygments_prefix '\n'
     pygments_suffix '\n'
 

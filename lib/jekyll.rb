@@ -49,12 +49,14 @@ module Jekyll
   # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML).
   DEFAULTS = {
+    'safe'         => false,
     'auto'         => false,
     'server'       => false,
     'server_port'  => 4000,
 
     'source'       => '.',
     'destination'  => File.join('.', '_site'),
+    'plugins'      => File.join('.', '_plugins'),
 
     'future'       => true,
     'lsi'          => false,

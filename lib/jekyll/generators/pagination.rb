@@ -1,6 +1,7 @@
 module Jekyll
 
   class Pagination < Generator
+    safe true
 
     def generate(site)
       site.pages.dup.each do |page|

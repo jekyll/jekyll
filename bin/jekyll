@@ -23,6 +23,10 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
+  opts.on("--safe", "Safe mode (default unsafe)") do
+    options['safe'] = true
+  end
+
   opts.on("--auto", "Auto-regenerate") do
     options['auto'] = true
   end

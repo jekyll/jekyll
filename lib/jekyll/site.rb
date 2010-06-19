@@ -1,9 +1,9 @@
 module Jekyll
 
   class Site
-    attr_accessor :config, :layouts, :posts, :pages, :static_files, :categories, :exclude,
-                  :source, :dest, :lsi, :pygments, :permalink_style, :tags, :time,
-                  :future
+    attr_accessor :config, :layouts, :posts, :pages, :static_files,
+                  :categories, :exclude, :source, :dest, :lsi, :pygments,
+                  :permalink_style, :tags, :time, :future, :safe, :plugins
     attr_accessor :converters, :generators
 
     # Initialize the site
@@ -13,8 +13,10 @@ module Jekyll
     def initialize(config)
       self.config          = config.clone
 
+      self.safe            = config['safe']
       self.source          = File.expand_path(config['source'])
       self.dest            = config['destination']
+      self.plugins         = File.expand_path(config['plugins'])
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
@@ -38,11 +40,23 @@ module Jekyll
     def setup
       require 'classifier' if self.lsi
 
-      self.converters = Jekyll::Converter.subclasses.map do |c|
+      # If safe mode is off, load in any ruby files under the plugins
+      # directory.
+      unless self.safe
+        Dir[File.join(self.plugins, "**/*.rb")].each do |f|
+          require f
+        end
+      end
+
+      self.converters = Jekyll::Converter.subclasses.select do |c|
+        !self.safe || c.safe
+      end.map do |c|
         c.new(self.config)
       end
 
-      self.generators = Jekyll::Generator.subclasses.map do |c|
+      self.generators = Jekyll::Generator.subclasses.select do |c|
+        !self.safe || c.safe
+      end.map do |c|
         c.new(self.config)
       end
     end

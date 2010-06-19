@@ -25,7 +25,7 @@ module Jekyll
       @subclasses ||= []
     end
 
-    # Get or set the priority of this converter. When called without an
+    # Get or set the priority of this plugin. When called without an
     # argument it returns the priority. When an argument is given, it will
     # set the priority.
     #
@@ -38,6 +38,20 @@ module Jekyll
         @priority = priority
       end
       @priority || :normal
+    end
+
+    # Get or set the safety of this plugin. When called without an argument
+    # it returns the safety. When an argument is given, it will set the
+    # safety.
+    #
+    # safe - The Boolean safety (default: nil).
+    #
+    # Returns the safety Boolean.
+    def self.safe(safe = nil)
+      if safe
+        @safe = safe
+      end
+      @safe || false
     end
 
     # Spaceship is priority [higher -> lower]
