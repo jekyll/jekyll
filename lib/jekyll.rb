@@ -22,7 +22,7 @@ require 'yaml'
 
 # 3rd party
 require 'liquid'
-require 'redcloth'
+require 'maruku'
 
 # internal requires
 require 'jekyll/core_ext'
@@ -34,6 +34,7 @@ require 'jekyll/post'
 require 'jekyll/filters'
 require 'jekyll/albino'
 require 'jekyll/static_file'
+require 'jekyll/errors'
 
 # extensions
 require 'jekyll/plugin'

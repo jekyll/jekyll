@@ -2,6 +2,9 @@
   * Major Enhancements
     * Proper plugin system (#19, #100)
     * Add safe mode so unsafe converters/generators can be added
+    * Maruku is now the only processor dependency installed by default.
+      Other processors will be lazy-loaded when necessary (and prompt the
+      user to install them when necessary) (#57)
   * Minor Enhancements
     * Inclusion/exclusion of future dated posts (#59)
     * Generation for a specific time (#59)

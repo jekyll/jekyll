@@ -25,6 +25,13 @@ module Jekyll
       @pygments_suffix
     end
 
+    # Initialize the converter.
+    #
+    # Returns an initialized Converter.
+    def initialize(config = {})
+      @config = config
+    end
+
     # Get the pygments prefix.
     #
     # Returns the String prefix.

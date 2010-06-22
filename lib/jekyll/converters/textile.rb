@@ -6,6 +6,16 @@ module Jekyll
     pygments_prefix '<notextile>'
     pygments_suffix '</notextile>'
 
+    def setup
+      return if @setup
+      require 'redcloth'
+      @setup = true
+    rescue LoadError
+      STDERR.puts 'You are missing a library required for Textile. Please run:'
+      STDERR.puts '  $ [sudo] gem install RedCloth'
+      raise FatalException.new("Missing dependency: RedCloth")
+    end
+
     def matches(ext)
       ext =~ /textile/i
     end
@@ -15,9 +25,9 @@ module Jekyll
     end
 
     def convert(content)
+      setup
       RedCloth.new(content).to_html
     end
-
   end
 
 end

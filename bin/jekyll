@@ -142,7 +142,11 @@ if options['auto']
   end
 else
   puts "Building site: #{source} -> #{destination}"
-  site.process
+  begin
+    site.process
+  rescue Jekyll::FatalException
+    exit(1)
+  end
   puts "Successfully generated site: #{source} -> #{destination}"
 end
 

@@ -133,18 +133,20 @@ class TestSite < Test::Unit::TestCase
     end
     
     context 'with an invalid markdown processor in the configuration' do
-      
-      should 'give a meaningful error message' do
+      should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
-        begin
+        assert_nothing_raised do
           Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
-          flunk 'Invalid markdown processors should cause a failure on site creation'
-        rescue RuntimeError => e
-          assert e.to_s =~ /invalid|bad/i
-          assert e.to_s =~ %r{#{bad_processor}}
         end
       end
       
+      should 'throw FatalException at process time' do
+        bad_processor = 'not a processor name'
+        s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+        assert_raise Jekyll::FatalException do
+          s.process
+        end
+      end
     end
     
   end
