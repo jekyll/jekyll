@@ -78,6 +78,10 @@ opts = OptionParser.new do |opts|
     end
   end
 
+  opts.on("--url [URL]", "Set custom site.url") do |url|
+    options['url'] = url
+  end
+
   opts.on("--version", "Display current version") do
     puts "Jekyll " + Jekyll::VERSION
     exit 0
