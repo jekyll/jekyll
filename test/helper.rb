@@ -1,5 +1,5 @@
 require 'rubygems'
-gem 'RedCloth', '= 4.2.1'
+gem 'RedCloth', '>= 4.2.1'
 
 require File.join(File.dirname(__FILE__), *%w[.. lib jekyll])
 

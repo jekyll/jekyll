@@ -41,7 +41,6 @@
 # Chris Wanstrath // chris@ozmm.org
 #         GitHub // http://github.com
 #
-require 'open4'
 
 class Albino
   @@bin = Rails.development? ? 'pygmentize' : '/usr/bin/pygmentize' rescue 'pygmentize'
@@ -61,11 +60,10 @@ class Albino
 
   def execute(command)
     output = ''
-    Open4.popen4(command) do |pid, stdin, stdout, stderr|
-      stdin.puts @target
-      stdin.close
-      output = stdout.read.strip
-      [stdout, stderr].each { |io| io.close }
+    IO.popen(command, mode='r+') do |p|
+      p.write @target
+      p.close_write
+      output = p.read.strip
     end
     output
   end

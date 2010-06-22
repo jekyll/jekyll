@@ -23,6 +23,10 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
+  opts.on("--safe", "Safe mode (default unsafe)") do
+    options['safe'] = true
+  end
+
   opts.on("--auto", "Auto-regenerate") do
     options['auto'] = true
   end
@@ -48,6 +52,18 @@ opts = OptionParser.new do |opts|
     options['markdown'] = 'rdiscount'
   end
 
+  opts.on("--time [TIME]", "Time to generate the site for") do |time|
+    options['time'] = Time.parse(time)
+  end
+
+  opts.on("--future", "Render future dated posts") do
+    options['future'] = true
+  end
+
+  opts.on("--no-future", "Do not render future dated posts") do
+    options['future'] = false
+  end
+
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
     options['permalink'] = style unless style.nil?
   end
@@ -63,7 +79,7 @@ opts = OptionParser.new do |opts|
   end
 
   opts.on("--version", "Display current version") do
-    puts "Jekyll " + Jekyll.version
+    puts "Jekyll " + Jekyll::VERSION
     exit 0
   end
 end
@@ -136,6 +152,9 @@ if options['server']
   include WEBrick
 
   FileUtils.mkdir_p(destination)
+  mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
+  mime_types.store 'js', 'application/javascript'
+
   mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
   mime_types.store 'js', 'application/javascript'
 

@@ -2,26 +2,18 @@ require File.dirname(__FILE__) + '/helper'
 
 class TestTags < Test::Unit::TestCase
 
-  def create_post(content, override = {}, markdown = true)
+  def create_post(content, override = {}, converter_class = Jekyll::MarkdownConverter)
     stub(Jekyll).configuration do
       Jekyll::DEFAULTS.merge({'pygments' => true}).merge(override)
     end
     site = Site.new(Jekyll.configuration)
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
-
-    if markdown
-      payload = {"content_type" => "markdown"}
-    else
-      payload = {"content_type" => "textile"}
-    end
+    @converter = site.converters.find { |c| c.class == converter_class }
+    payload = { "pygments_prefix" => @converter.pygments_prefix,
+                "pygments_suffix" => @converter.pygments_suffix }
 
     @result = Liquid::Template.parse(content).render(payload, info)
-
-    if markdown
-      @result = site.markdown(@result)
-    else
-      @result = site.textile(@result)
-    end
+    @result = @converter.convert(@result)
   end
 
   def fill_post(code, override = {})
@@ -49,7 +41,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre>test\n</pre>}, @result
+      assert_match %{<pre><code class='text'>test\n</code></pre>}, @result
     end
   end
 
@@ -59,7 +51,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre>Æ\n</pre>}, @result
+      assert_match %{<pre><code class='text'>Æ\n</code></pre>}, @result
     end
   end
 
@@ -82,7 +74,7 @@ CONTENT
 
     context "using Textile" do
       setup do
-        create_post(@content, {}, false)
+        create_post(@content, {}, Jekyll::TextileConverter)
       end
 
       # Broken in RedCloth 4.1.9

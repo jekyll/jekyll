@@ -19,6 +19,28 @@ class Hash
 
     target
   end
+
+  # Read array from the supplied hash favouring the singular key
+  # and then the plural key, and handling any nil entries.
+  #   +hash+ the hash to read from
+  #   +singular_key+ the singular key
+  #   +plural_key+ the singular key
+  #
+  # Returns an array
+  def pluralized_array(singular_key, plural_key)
+    hash = self
+    if hash.has_key?(singular_key)
+      array = [hash[singular_key]] if hash[singular_key]
+    elsif hash.has_key?(plural_key)
+      case hash[plural_key]
+      when String
+        array = hash[plural_key].split
+      when Array
+        array = hash[plural_key].compact
+      end
+    end
+    array || []
+  end
 end
 
 # Thanks, ActiveSupport!

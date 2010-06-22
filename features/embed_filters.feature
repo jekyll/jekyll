@@ -20,7 +20,7 @@ Feature: Embed filters
     And I have the following post:
       | title       | date      | layout  | content                                     |
       | Star & Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
-    And I have a default layout that contains "{{ site.posts.first.title | xml_escape }}"
+    And I have a default layout that contains "{{ page.title | xml_escape }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Star &amp; Wars" in "_site/2009/03/27/star-wars.html"
@@ -31,7 +31,7 @@ Feature: Embed filters
     And I have the following post:
       | title     | date      | layout  | content                                     |
       | Star Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
-    And I have a default layout that contains "{{ site.posts.first.content | xml_escape }}"
+    And I have a default layout that contains "{{ content | xml_escape }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "7" in "_site/2009/03/27/star-wars.html"
@@ -42,7 +42,7 @@ Feature: Embed filters
     And I have the following post:
       | title     | date      | layout  | tags                   | content                                     |
       | Star Wars | 3/27/2009 | default | [scifi, movies, force] | These aren't the droids you're looking for. |
-    And I have a default layout that contains "{{ site.posts.first.tags | array_to_sentence_string }}"
+    And I have a default layout that contains "{{ page.tags | array_to_sentence_string }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "scifi, movies, and force" in "_site/2009/03/27/star-wars.html"

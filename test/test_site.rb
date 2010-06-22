@@ -19,11 +19,77 @@ class TestSite < Test::Unit::TestCase
       before_posts = @site.posts.length
       before_layouts = @site.layouts.length
       before_categories = @site.categories.length
+      before_tags = @site.tags.length
+      before_pages = @site.pages.length
+      before_static_files = @site.static_files.length
+      before_time = @site.time
 
       @site.process
       assert_equal before_posts, @site.posts.length
       assert_equal before_layouts, @site.layouts.length
       assert_equal before_categories, @site.categories.length
+      assert_equal before_tags, @site.tags.length
+      assert_equal before_pages, @site.pages.length
+      assert_equal before_static_files, @site.static_files.length
+      assert before_time <= @site.time
+    end
+
+    should "write only modified static files" do
+      clear_dest
+      StaticFile.reset_cache
+
+      @site.process
+      some_static_file = @site.static_files[0].path
+      dest = File.expand_path(@site.static_files[0].destination(@site.dest))
+      mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
+
+      # need to sleep because filesystem timestamps have best resolution in seconds
+      sleep 1
+      @site.process
+      mtime2 = File.stat(dest).mtime.to_i
+      assert_equal mtime1, mtime2
+
+      # simulate file modification by user
+      FileUtils.touch some_static_file
+
+      sleep 1
+      @site.process
+      mtime3 = File.stat(dest).mtime.to_i
+      assert_not_equal mtime2, mtime3 # must be regenerated!
+
+      sleep 1
+      @site.process
+      mtime4 = File.stat(dest).mtime.to_i
+      assert_equal mtime3, mtime4 # no modifications, so must be the same
+    end
+
+    should "write static files if not modified but missing in destination" do
+      clear_dest
+      StaticFile.reset_cache
+
+      @site.process
+      some_static_file = @site.static_files[0].path
+      dest = File.expand_path(@site.static_files[0].destination(@site.dest))
+      mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
+
+      # need to sleep because filesystem timestamps have best resolution in seconds
+      sleep 1
+      @site.process
+      mtime2 = File.stat(dest).mtime.to_i
+      assert_equal mtime1, mtime2
+
+      # simulate destination file deletion
+      File.unlink dest
+
+      sleep 1
+      @site.process
+      mtime3 = File.stat(dest).mtime.to_i
+      assert_not_equal mtime2, mtime3 # must be regenerated and differ!
+
+      sleep 1
+      @site.process
+      mtime4 = File.stat(dest).mtime.to_i
+      assert_equal mtime3, mtime4 # no modifications, so must be the same
     end
 
     should "read layouts" do
@@ -52,10 +118,10 @@ class TestSite < Test::Unit::TestCase
     should "filter entries" do
       ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
               .baz.markdow foo.markdown~]
-      ent2 = %w[.htaccess _posts bla.bla]
+      ent2 = %w[.htaccess _posts _pages bla.bla]
 
       assert_equal %w[foo.markdown bar.markdown baz.markdown], @site.filter_entries(ent1)
-      assert_equal ent2, @site.filter_entries(ent2)
+      assert_equal %w[.htaccess bla.bla], @site.filter_entries(ent2)
     end
 
     should "filter entries with exclude" do
