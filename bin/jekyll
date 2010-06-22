@@ -152,8 +152,6 @@ if options['server']
   include WEBrick
 
   FileUtils.mkdir_p(destination)
-  mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
-  mime_types.store 'js', 'application/javascript'
 
   mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
   mime_types.store 'js', 'application/javascript'
