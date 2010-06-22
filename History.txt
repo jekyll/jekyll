@@ -16,14 +16,13 @@
     * Only regenerate static files when they have changed (#142)
     * Allow arbitrary options to Pygments (#31)
     * Allow URL to be set via command line option (#147)
-    * Fix source directory binding using Dir.pwd (#75)
   * Bug Fixes
     * Render highlighted code for non markdown/textile pages (#116)
-    * Expand source to full path so includes work anywhere (#101)
     * Fix highlighting on Ruby 1.9 (#65)
     * Fix extension munging when pretty permalinks are enabled (#64)
     * Stop sorting categories (#33)
     * Preserve generated attributes over front matter (#119)
+    * Fix source directory binding using Dir.pwd (#75)
 
 == 0.5.7 / 2010-01-12
   * Minor Enhancements

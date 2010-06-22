@@ -56,8 +56,8 @@ module Jekyll
     'server_port'  => 4000,
 
     'source'       => Dir.pwd,
-    'destination'  => File.join('.', '_site'),
-    'plugins'      => File.join('.', '_plugins'),
+    'destination'  => File.join(Dir.pwd, '_site'),
+    'plugins'      => File.join(Dir.pwd, '_plugins'),
 
     'future'       => true,
     'lsi'          => false,

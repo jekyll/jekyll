@@ -14,9 +14,9 @@ module Jekyll
       self.config          = config.clone
 
       self.safe            = config['safe']
-      self.source          = File.expand_path(config['source'])
+      self.source          = config['source']
       self.dest            = config['destination']
-      self.plugins         = File.expand_path(config['plugins'])
+      self.plugins         = config['plugins']
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
