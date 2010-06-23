@@ -1,4 +1,4 @@
-== Edge
+== 0.6.0
   * Major Enhancements
     * Proper plugin system (#19, #100)
     * Add safe mode so unsafe converters/generators can be added

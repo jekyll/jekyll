@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '0.5.7'
-  s.date              = '2010-04-21'
+  s.version           = '0.6.0'
+  s.date              = '2010-06-22'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   # = MANIFEST =
   s.files = %w[
     History.txt
+    LICENSE
     README.textile
     Rakefile
     bin/jekyll
@@ -60,7 +61,7 @@ Gem::Specification.new do |s|
     lib/jekyll/converters/textile.rb
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb
-    lib/jekyll/extension.rb
+    lib/jekyll/errors.rb
     lib/jekyll/filters.rb
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
@@ -72,6 +73,7 @@ Gem::Specification.new do |s|
     lib/jekyll/migrators/typo.rb
     lib/jekyll/migrators/wordpress.rb
     lib/jekyll/page.rb
+    lib/jekyll/plugin.rb
     lib/jekyll/post.rb
     lib/jekyll/site.rb
     lib/jekyll/static_file.rb
