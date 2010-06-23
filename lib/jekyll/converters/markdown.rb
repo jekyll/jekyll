@@ -3,8 +3,8 @@ module Jekyll
   class MarkdownConverter < Converter
     safe true
 
-    pygments_prefix '\n'
-    pygments_suffix '\n'
+    pygments_prefix "\n"
+    pygments_suffix "\n"
 
     def setup
       return if @setup
