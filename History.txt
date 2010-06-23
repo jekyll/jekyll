@@ -1,4 +1,4 @@
-== Edge
+== 0.6.1
   * Bug Fixes
     * Fix Markdown Pygments prefix and suffix (#178)
 
