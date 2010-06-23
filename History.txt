@@ -1,3 +1,7 @@
+== Edge
+  * Bug Fixes
+    * Fix Rakefile 'release' task (tag pushing was missing origin)
+
 == 0.6.1
   * Bug Fixes
     * Fix Markdown Pygments prefix and suffix (#178)
