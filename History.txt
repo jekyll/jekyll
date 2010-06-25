@@ -3,6 +3,7 @@
     * Fix Rakefile 'release' task (tag pushing was missing origin)
     * Ensure that RedCloth is loaded when textilize filter is used (#183)
     * Expand source, destination, and plugin paths (#180)
+    * Fix page.url to include full relative path (#181)
 
 == 0.6.1
   * Bug Fixes

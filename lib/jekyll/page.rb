@@ -90,7 +90,7 @@ module Jekyll
 
     def to_liquid
       self.data.deep_merge({
-        "url"        => self.url,
+        "url"        => File.join(@dir, self.url),
         "content"    => self.content })
     end
 
