@@ -1,15 +1,15 @@
-== Edge
+== 0.6.2 / 2010-06-25
   * Bug Fixes
     * Fix Rakefile 'release' task (tag pushing was missing origin)
     * Ensure that RedCloth is loaded when textilize filter is used (#183)
     * Expand source, destination, and plugin paths (#180)
     * Fix page.url to include full relative path (#181)
 
-== 0.6.1
+== 0.6.1 / 2010-06-24
   * Bug Fixes
     * Fix Markdown Pygments prefix and suffix (#178)
 
-== 0.6.0
+== 0.6.0 / 2010-06-23
   * Major Enhancements
     * Proper plugin system (#19, #100)
     * Add safe mode so unsafe converters/generators can be added
