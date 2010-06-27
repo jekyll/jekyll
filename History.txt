@@ -1,6 +1,7 @@
 == HEAD
   * Bug Fixes
     * Highlight should not be able to render local files
+    * The site configuration may not always provide a 'time' setting (#184)
 
 == 0.6.2 / 2010-06-25
   * Bug Fixes
