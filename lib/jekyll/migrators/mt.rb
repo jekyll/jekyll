@@ -47,6 +47,7 @@ module Jekyll
            'layout' => 'post',
            'title' => title.to_s,
            'mt_id' => post[:entry_id],
+           'date' => date
          }.delete_if { |k,v| v.nil? || v == ''}.to_yaml
 
         File.open("_posts/#{name}", "w") do |f|
