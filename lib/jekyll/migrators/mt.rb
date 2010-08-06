@@ -18,7 +18,7 @@ module Jekyll
     # This query will pull blog posts from all entries across all blogs. If
     # you've got unpublished, deleted or otherwise hidden posts please sift
     # through the created posts to make sure nothing is accidently published.
-    QUERY = "SELECT entry_id, entry_basename, entry_text, entry_text_more, entry_created_on, entry_title, entry_convert_breaks FROM mt_entry"
+    QUERY = "SELECT entry_id, entry_basename, entry_text, entry_text_more, entry_authored_on, entry_title, entry_convert_breaks FROM mt_entry"
 
     def self.process(dbname, user, pass, host = 'localhost')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host)
@@ -28,7 +28,7 @@ module Jekyll
       db[QUERY].each do |post|
         title = post[:entry_title]
         slug = post[:entry_basename]
-        date = post[:entry_created_on]
+        date = post[:entry_authored_on]
         content = post[:entry_text]
         more_content = post[:entry_text_more]
         entry_convert_breaks = post[:entry_convert_breaks]
