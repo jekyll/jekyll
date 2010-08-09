@@ -27,7 +27,7 @@ module Jekyll
 
       db[QUERY].each do |post|
         title = post[:entry_title]
-        slug = post[:entry_basename]
+        slug = post[:entry_basename].gsub(/_/, '-')
         date = post[:entry_authored_on]
         content = post[:entry_text]
         more_content = post[:entry_text_more]
