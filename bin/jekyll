@@ -78,6 +78,10 @@ opts = OptionParser.new do |opts|
     end
   end
 
+  opts.on("--single [FILE]", "Render a single file") do |file|
+    options['single'] = file
+  end
+
   opts.on("--url [URL]", "Set custom site.url") do |url|
     options['url'] = url
   end
@@ -144,6 +148,11 @@ if options['auto']
   unless options['server']
     loop { sleep 1000 }
   end
+elsif options['single']
+  file = options['single']
+  puts "Rendering #{file}"
+  post = site.process_single(file)
+  puts "Finished! Post at #{post.url}"
 else
   puts "Building site: #{source} -> #{destination}"
   begin

@@ -74,6 +74,21 @@ module Jekyll
       self.write
     end
 
+    # Process a single file using the site's configuration and layouts. 
+    #
+    # Returns the rendered post
+    def process_single(filename)
+      self.reset
+      self.read_layouts
+      dir = File.dirname(filename)
+      f = File.basename(filename)
+      post = Post.new(self, self.source, dir, f, true)
+      post.render(self.layouts, site_payload)
+      post.write(self.dest)
+
+      return post
+    end
+
     def read
       self.read_layouts # existing implementation did this at top level only so preserved that
       self.read_directories
