@@ -36,17 +36,7 @@ module Jekyll
     #
     # Returns nothing
     def transform
-<<<<<<< HEAD:lib/jekyll/convertible.rb
-      case self.ext[1..-1]
-      when /textile/i
-        self.ext = ".html"
-        self.content = Jekyll.textile(self.content)
-      when /markdown/i, /mkdn/i, /md/i
-        self.ext = ".html"
-        self.content = Jekyll.markdown(self.content)
-      end
-=======
-      self.content = converter.convert(self.content)
+     self.content = converter.convert(self.content)
     end
 
     # Determine the extension depending on content_type
@@ -60,8 +50,7 @@ module Jekyll
     # extension
     def converter
       @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
->>>>>>> 5e997cae2111a69870f4a8c6b63c27e860cb8661:lib/jekyll/convertible.rb
-    end
+   end
 
     # Add any necessary layouts to this convertible document
     #   +layouts+ is a Hash of {"name" => "layout"}
