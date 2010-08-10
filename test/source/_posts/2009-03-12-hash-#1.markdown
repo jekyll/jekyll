@@ -1,0 +1,6 @@
+---
+layout: default
+title: Hash #1
+---
+
+Hashes are nice

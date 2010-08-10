@@ -1,130 +1,187 @@
 module Jekyll
-  
+
   class Site
-    attr_accessor :config, :layouts, :posts
-    
+    attr_accessor :config, :layouts, :posts, :pages, :static_files,
+                  :categories, :exclude, :source, :dest, :lsi, :pygments,
+                  :permalink_style, :tags, :time, :future, :safe, :plugins
+    attr_accessor :converters, :generators
+
     # Initialize the site
     #   +config+ is a Hash containing site configurations details
     #
     # Returns <Site>
     def initialize(config)
-      self.config = config.clone
-      self.layouts = {}
-      self.posts = []
+      self.config          = config.clone
+
+      self.safe            = config['safe']
+      self.source          = File.expand_path(config['source'])
+      self.dest            = File.expand_path(config['destination'])
+      self.plugins         = File.expand_path(config['plugins'])
+      self.lsi             = config['lsi']
+      self.pygments        = config['pygments']
+      self.permalink_style = config['permalink'].to_sym
+      self.exclude         = config['exclude'] || []
+      self.future          = config['future']
+
+      self.reset
+      self.setup
     end
-    
-    # The directory containing the proto-site.
-    def source; self.config['source']; end
-    
-    # Where the completed site should be written.
-    def dest; self.config['destination']; end
-    
+
+    def reset
+      self.time            = Time.parse(self.config['time'].to_s) || Time.now
+      self.layouts         = {}
+      self.posts           = []
+      self.pages           = []
+      self.static_files    = []
+      self.categories      = Hash.new { |hash, key| hash[key] = [] }
+      self.tags            = Hash.new { |hash, key| hash[key] = [] }
+    end
+
+    def setup
+      require 'classifier' if self.lsi
+
+      # If safe mode is off, load in any ruby files under the plugins
+      # directory.
+      unless self.safe
+        Dir[File.join(self.plugins, "**/*.rb")].each do |f|
+          require f
+        end
+      end
+
+      self.converters = Jekyll::Converter.subclasses.select do |c|
+        !self.safe || c.safe
+      end.map do |c|
+        c.new(self.config)
+      end
+
+      self.generators = Jekyll::Generator.subclasses.select do |c|
+        !self.safe || c.safe
+      end.map do |c|
+        c.new(self.config)
+      end
+    end
+
     # Do the actual work of processing the site and generating the
-    # real deal.
+    # real deal.  5 phases; reset, read, generate, render, write.  This allows
+    # rendering to have full site payload available.
     #
     # Returns nothing
     def process
-      self.read_layouts
-      self.transform_pages
-      self.write_posts
+      self.reset
+      self.read
+      self.generate
+      self.render
+      self.write
     end
-    
-    # Read all the files in <source>/_layouts except backup files
-    # (end with "~") into memory for later use.
+
+    def read
+      self.read_layouts # existing implementation did this at top level only so preserved that
+      self.read_directories
+    end
+
+    # Read all the files in <source>/<dir>/_layouts and create a new Layout
+    # object with each one.
     #
     # Returns nothing
-    def read_layouts
-      base = File.join(self.source, "_layouts")
-      entries = Dir.entries(base)
-      entries = entries.reject { |e| e[-1..-1] == '~' }
-      entries = entries.reject { |e| File.directory?(File.join(base, e)) }
-      
+    def read_layouts(dir = '')
+      base = File.join(self.source, dir, "_layouts")
+      return unless File.exists?(base)
+      entries = []
+      Dir.chdir(base) { entries = filter_entries(Dir['*.*']) }
+
       entries.each do |f|
         name = f.split(".")[0..-2].join(".")
-        self.layouts[name] = Layout.new(base, f)
+        self.layouts[name] = Layout.new(self, base, f)
       end
-    rescue Errno::ENOENT => e
-      # ignore missing layout dir
     end
-    
-    # Read all the files in <base>/_posts except backup files (end with "~")
-    # and create a new Post object with each one.
+
+    # Read all the files in <source>/<dir>/_posts and create a new Post
+    # object with each one.
     #
     # Returns nothing
     def read_posts(dir)
       base = File.join(self.source, dir, '_posts')
-      
-      entries = []
-      Dir.chdir(base) { entries = Dir['**/*'] }
-      entries = entries.reject { |e| e[-1..-1] == '~' }
-      entries = entries.reject { |e| File.directory?(File.join(base, e)) }
+      return unless File.exists?(base)
+      entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
         if Post.valid?(f)
-          post = Post.new(self.source, dir, f)
-          self.posts << post
+          post = Post.new(self, self.source, dir, f)
+
+          if post.published && (self.future || post.date <= self.time)
+            self.posts << post
+            post.categories.each { |c| self.categories[c] << post }
+            post.tags.each { |c| self.tags[c] << post }
+          end
         end
       end
-      
-      # second pass renders each post now that full site payload is available
+
+      self.posts.sort!
+    end
+
+    def generate
+      self.generators.each do |generator|
+        generator.generate(self)
+      end
+    end
+
+    def render
       self.posts.each do |post|
         post.render(self.layouts, site_payload)
       end
-      
-      self.posts.sort!
+
+      self.pages.each do |page|
+        page.render(self.layouts, site_payload)
+      end
+
+      self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a} }
+      self.tags.values.map { |ps| ps.sort! { |a, b| b <=> a} }
     rescue Errno::ENOENT => e
       # ignore missing layout dir
     end
-    
-    # Write each post to <dest>/<year>/<month>/<day>/<slug>
+
+    # Write static files, pages and posts
     #
     # Returns nothing
-    def write_posts
+    def write
       self.posts.each do |post|
         post.write(self.dest)
       end
+      self.pages.each do |page|
+        page.write(self.dest)
+      end
+      self.static_files.each do |sf|
+        sf.write(self.dest)
+      end
     end
-    
-    # Copy all regular files from <source> to <dest>/ ignoring
-    # any files/directories that are hidden or backup files (start
-    # with "." or end with "~") or contain site content (start with "_")
-    # unless they are "_posts" directories
+
+    # Reads the directories and finds posts, pages and static files that will
+    # become part of the valid site according to the rules in +filter_entries+.
     #   The +dir+ String is a relative path used to call this method
     #            recursively as it descends through directories
     #
     # Returns nothing
-    def transform_pages(dir = '')
+    def read_directories(dir = '')
       base = File.join(self.source, dir)
-      entries = Dir.entries(base)
-      entries = entries.reject { |e| e[-1..-1] == '~' }
-      entries = entries.reject do |e|
-        (e != '_posts') and ['.', '_'].include?(e[0..0])
-      end
+      entries = filter_entries(Dir.entries(base))
 
-      # we need to make sure to process _posts *first* otherwise they 
-      # might not be available yet to other templates as {{ site.posts }}
-      if entries.include?('_posts')
-        entries.delete('_posts')
-        read_posts(dir)
-      end
+      self.read_posts(dir)
 
       entries.each do |f|
-        if File.directory?(File.join(base, f))
-          next if self.dest.sub(/\/$/, '') == File.join(base, f)
-          transform_pages(File.join(dir, f))
-        else
-          first3 = File.open(File.join(self.source, dir, f)) { |fd| fd.read(3) }
-
+        f_abs = File.join(base, f)
+        f_rel = File.join(dir, f)
+        if File.directory?(f_abs)
+          next if self.dest.sub(/\/$/, '') == f_abs
+          read_directories(f_rel)
+        elsif !File.symlink?(f_abs)
+          first3 = File.open(f_abs) { |fd| fd.read(3) }
           if first3 == "---"
             # file appears to have a YAML header so process it as a page
-            page = Page.new(self.source, dir, f)
-            page.render(self.layouts, site_payload)
-            page.write(self.dest)
+            pages << Page.new(self, self.source, dir, f)
           else
-            # otherwise copy the file without transforming it
-            FileUtils.mkdir_p(File.join(self.dest, dir))
-            FileUtils.cp(File.join(self.source, dir, f), File.join(self.dest, dir, f))
+            # otherwise treat it as a static file
+            static_files << StaticFile.new(self, self.source, dir, f)
           end
         end
       end
@@ -146,16 +203,29 @@ module Jekyll
     #
     # Returns {"site" => {"time" => <Time>,
     #                     "posts" => [<Post>],
-    #                     "categories" => [<Post>],
-    #                     "topics" => [<Post>] }}
+    #                     "pages" => [<Page>],
+    #                     "categories" => [<Post>]}
     def site_payload
-      {"site" => {
-        "time" => Time.now, 
-        "posts" => self.posts.sort { |a,b| b <=> a },
-        "categories" => post_attr_hash('categories'),
-        "topics" => post_attr_hash('topics')
-      }}
+      {"site" => self.config.merge({
+          "time"       => self.time,
+          "posts"      => self.posts.sort { |a,b| b <=> a },
+          "pages"      => self.pages,
+          "html_pages" => self.pages.reject { |page| !page.html? },
+          "categories" => post_attr_hash('categories'),
+          "tags"       => post_attr_hash('tags')})}
     end
-  end
 
+    # Filter out any files/directories that are hidden or backup files (start
+    # with "." or "#" or end with "~"), or contain site content (start with "_"),
+    # or are excluded in the site configuration, unless they are web server
+    # files such as '.htaccess'
+    def filter_entries(entries)
+      entries = entries.reject do |e|
+        unless ['.htaccess'].include?(e)
+          ['.', '_', '#'].include?(e[0..0]) || e[-1..-1] == '~' || self.exclude.include?(e)
+        end
+      end
+    end
+
+  end
 end

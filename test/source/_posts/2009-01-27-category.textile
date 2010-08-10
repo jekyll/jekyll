@@ -1,0 +1,7 @@
+---
+layout: default
+title: Category in YAML
+category: foo
+---
+
+Best *post* ever

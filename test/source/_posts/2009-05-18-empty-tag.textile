@@ -1,0 +1,6 @@
+---
+title: A Tag
+tag:
+---
+
+Whoa.

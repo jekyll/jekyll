@@ -9,36 +9,33 @@ require 'fileutils'
 # $ sudo gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
 
 module Jekyll
-  module WordPress
-    
-    # Reads a MySQL database via Sequel and creates a post file for each 
-    # post in wp_posts that has post_status = 'publish'.
-    # This restriction is made because 'draft' posts are not guaranteed to
-    # have valid dates.
-    QUERY = "select * from wp_posts where post_status = 'publish' and post_type = 'post'"
+  module TextPattern
+    # Reads a MySQL database via Sequel and creates a post file for each post.
+    # The only posts selected are those with a status of 4 or 5, which means "live"
+    # and "sticky" respectively.
+    # Other statuses is 1 => draft, 2 => hidden and 3 => pending
+    QUERY = "select Title, url_title, Posted, Body, Keywords from textpattern where Status = '4' or Status = '5'"
 
     def self.process(dbname, user, pass, host = 'localhost')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host)
-      
+
       FileUtils.mkdir_p "_posts"
-            
+
       db[QUERY].each do |post|
         # Get required fields and construct Jekyll compatible name
-        title = post[:post_title]
-        slug = post[:post_name]
-        date = post[:post_date]
-        content = post[:post_content]
-        
-        name = [date.year, date.month, date.day, slug].join('-') + ".markdown"
+        title = post[:Title]
+        slug = post[:url_title]
+        date = post[:Posted]
+        content = post[:Body]
+
+        name = [date.strftime("%Y-%m-%d"), slug].join('-') + ".textile"
 
         # Get the relevant fields as a hash, delete empty fields and convert
-        # to YAML for the header        
+        # to YAML for the header
         data = {
            'layout' => 'post',
            'title' => title.to_s,
-           'excerpt' => post[:post_excerpt].to_s,
-           'wordpress_id' => post[:ID],
-           'wordpress_url' => post[:guid]
+           'tags' => post[:Keywords].split(',')
          }.delete_if { |k,v| v.nil? || v == ''}.to_yaml
 
         # Write out the data and content to file
@@ -48,7 +45,6 @@ module Jekyll
           f.puts content
         end
       end
-
     end
   end
 end

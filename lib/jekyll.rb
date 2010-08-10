@@ -1,18 +1,28 @@
-$:.unshift File.dirname(__FILE__)     # For use/testing when no gem is installed
+$:.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+
+# Require all of the Ruby files in the given directory.
+#
+# path - The String relative path from here to the directory.
+#
+# Returns nothing.
+def require_all(path)
+  glob = File.join(File.dirname(__FILE__), path, '*.rb')
+  Dir[glob].each do |f|
+    require f
+  end
+end
 
 # rubygems
 require 'rubygems'
 
-# core
+# stdlib
 require 'fileutils'
 require 'time'
 require 'yaml'
 
-# stdlib
-
 # 3rd party
 require 'liquid'
-require 'redcloth'
+require 'maruku'
 
 # internal requires
 require 'jekyll/core_ext'
@@ -22,23 +32,34 @@ require 'jekyll/layout'
 require 'jekyll/page'
 require 'jekyll/post'
 require 'jekyll/filters'
-require 'jekyll/tags/highlight'
-require 'jekyll/tags/include'
 require 'jekyll/albino'
+require 'jekyll/static_file'
+require 'jekyll/errors'
+
+# extensions
+require 'jekyll/plugin'
+require 'jekyll/converter'
+require 'jekyll/generator'
+require_all 'jekyll/converters'
+require_all 'jekyll/generators'
+require_all 'jekyll/tags'
 
 module Jekyll
-  VERSION = '0.3.0'
-  
-  # Default options. Overriden by values in _config.yaml or command-line opts.
-  # (Strings rather symbols used for compatability with YAML)
+  VERSION = '0.6.2'
+
+  # Default options. Overriden by values in _config.yml or command-line opts.
+  # (Strings rather symbols used for compatability with YAML).
   DEFAULTS = {
+    'safe'         => false,
     'auto'         => false,
     'server'       => false,
     'server_port'  => 4000,
 
-    'source'       => '.',
-    'destination'  => File.join('.', '_site'),
+    'source'       => Dir.pwd,
+    'destination'  => File.join(Dir.pwd, '_site'),
+    'plugins'      => File.join(Dir.pwd, '_plugins'),
 
+    'future'       => true,
     'lsi'          => false,
     'pygments'     => false,
     'markdown'     => 'maruku',
@@ -52,80 +73,34 @@ module Jekyll
       'png_url'    => '/images/latex'
     }
   }
-  
-  class << self
-    attr_accessor :source,:dest,:lsi,:pygments,:permalink_style
-  end
 
-  # Initializes some global Jekyll parameters
-  def self.configure(options)
-    # Interpret the simple options and configure Jekyll appropriately
-    Jekyll.source          = options['source']
-    Jekyll.dest            = options['destination']
-    Jekyll.lsi             = options['lsi']
-    Jekyll.pygments        = options['pygments']
-    Jekyll.permalink_style = options['permalink'].to_sym
+  # Generate a Jekyll configuration Hash by merging the default options
+  # with anything in _config.yml, and adding the given options on top.
+  #
+  # override - A Hash of config directives that override any options in both
+  #            the defaults and the config file. See Jekyll::DEFAULTS for a
+  #            list of option names and their defaults.
+  #
+  # Returns the final configuration Hash.
+  def self.configuration(override)
+    # _config.yml may override default source location, but until
+    # then, we need to know where to look for _config.yml
+    source = override['source'] || Jekyll::DEFAULTS['source']
 
-    # Check to see if LSI is enabled.
-    require 'classifier' if Jekyll.lsi
-
-    # Set the Markdown interpreter (and Maruku options, if necessary)
-    case options['markdown']
-
-      when 'rdiscount'
-        begin
-          require 'rdiscount'
-
-          def self.markdown(content) 
-            RDiscount.new(content).to_html
-          end
-
-          puts 'Using rdiscount for Markdown'
-        rescue LoadError
-          puts 'You must have the rdiscount gem installed first'
-        end
-
-      when 'maruku'
-        begin
-          require 'maruku'
-
-          def self.markdown(content) 
-            Maruku.new(content).to_html
-          end
-
-          if options['maruku']['use_divs']
-            require 'maruku/ext/div' 
-            puts 'Maruku: Using extended syntax for div elements.'
-          end
-
-          if options['maruku']['use_tex']
-            require 'maruku/ext/math' 
-            puts "Maruku: Using LaTeX extension. Images in `#{options['maruku']['png_dir']}`."
-
-            # Switch off MathML output
-            MaRuKu::Globals[:html_math_output_mathml] = false
-            MaRuKu::Globals[:html_math_engine] = 'none'
-
-            # Turn on math to PNG support with blahtex
-            # Resulting PNGs stored in `images/latex`
-            MaRuKu::Globals[:html_math_output_png] = true
-            MaRuKu::Globals[:html_png_engine] =  options['maruku']['png_engine']
-            MaRuKu::Globals[:html_png_dir] = options['maruku']['png_dir']
-            MaRuKu::Globals[:html_png_url] = options['maruku']['png_url']
-          end
-        rescue LoadError
-            puts "The maruku gem is required for markdown support!"
-        end
+    # Get configuration from <source>/_config.yml
+    config_file = File.join(source, '_config.yml')
+    begin
+      config = YAML.load_file(config_file)
+      raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
+      $stdout.puts "Configuration from #{config_file}"
+    rescue => err
+      $stderr.puts "WARNING: Could not read configuration. " +
+                   "Using defaults (and options)."
+      $stderr.puts "\t" + err.to_s
+      config = {}
     end
 
-  end
-
-  def self.textile(content)
-    RedCloth.new(content).to_html
-  end
-
-  def self.process(config)
-    Jekyll.configure(config)
-    Jekyll::Site.new(config).process
+    # Merge DEFAULTS < _config.yml < override
+    Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
   end
 end

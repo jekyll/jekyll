@@ -1,6 +1,10 @@
 module Jekyll
-  
+
   module Filters
+    def textilize(input)
+      TextileConverter.new.convert(input)
+    end
+
     def date_to_string(date)
       date.strftime("%d %b %Y")
     end
@@ -8,19 +12,23 @@ module Jekyll
     def date_to_long_string(date)
       date.strftime("%d %B %Y")
     end
-    
+
     def date_to_xmlschema(date)
       date.xmlschema
     end
-    
+
     def xml_escape(input)
-      input.gsub("<", "&lt;").gsub(">", "&gt;")
+      CGI.escapeHTML(input)
     end
-    
+
+    def cgi_escape(input)
+      CGI::escape(input)
+    end
+
     def number_of_words(input)
       input.split.length
     end
-    
+
     def array_to_sentence_string(array)
       connector = "and"
       case array.length
@@ -35,5 +43,5 @@ module Jekyll
       end
     end
 
-  end  
+  end
 end

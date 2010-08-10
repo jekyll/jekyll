@@ -1,3 +1,6 @@
-test/dest/
+test/dest
 *.gem
 pkg/
+*.swp
+*~
+_site/
