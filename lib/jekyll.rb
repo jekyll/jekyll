@@ -71,6 +71,9 @@ module Jekyll
       'png_engine' => 'blahtex',
       'png_dir'    => 'images/latex',
       'png_url'    => '/images/latex'
+    },
+    'rdiscount'    => {
+      'extensions' => []
     }
   }
 
