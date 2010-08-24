@@ -1,4 +1,6 @@
 == HEAD
+  * Minor Enhancements
+    * Add support for rdiscount extensions (#173)
   * Bug Fixes
     * Highlight should not be able to render local files
     * The site configuration may not always provide a 'time' setting (#184)
