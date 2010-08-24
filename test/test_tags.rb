@@ -24,9 +24,7 @@ title: This is a test
 
 This document results in a markdown error with maruku
 
-{% highlight text %}
-#{code}
-{% endhighlight %}
+{% highlight text %}#{code}{% endhighlight %}
 CONTENT
     create_post(content, override)
   end
@@ -42,6 +40,16 @@ CONTENT
 
     should "render markdown with pygments line handling" do
       assert_match %{<pre><code class='text'>test\n</code></pre>}, @result
+    end
+  end
+
+  context "post content has highlight with file reference" do
+    setup do
+      fill_post("./jekyll.gemspec")
+    end
+
+    should "not embed the file" do
+      assert_match %{<pre><code class='text'>./jekyll.gemspec\n</code></pre>}, @result
     end
   end
 

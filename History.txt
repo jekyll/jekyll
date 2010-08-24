@@ -1,3 +1,7 @@
+== HEAD
+  * Bug Fixes
+    * Highlight should not be able to render local files
+
 == 0.6.2 / 2010-06-25
   * Bug Fixes
     * Fix Rakefile 'release' task (tag pushing was missing origin)
