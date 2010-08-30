@@ -7,7 +7,6 @@ require 'RedCloth'
 require 'rdiscount'
 
 require 'test/unit'
-require 'redgreen'
 require 'shoulda'
 require 'rr'
 
