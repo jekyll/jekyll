@@ -35,6 +35,7 @@ h2. Developer Dependencies
 * Shoulda: Test framework (Ruby)
 * RR: Mocking (Ruby)
 * RedGreen: Nicer test output (Ruby)
+* RDiscount: Discount Markdown Processor (Ruby)
 
 h2. License
 
