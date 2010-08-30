@@ -1,3 +1,5 @@
+require 'rubygems'
+gem 'test-unit'
 require 'test/unit'
 
 # for some reason these tests fail when run via TextMate
