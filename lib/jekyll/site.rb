@@ -74,10 +74,10 @@ module Jekyll
       self.write
     end
 
-    # Process a single file using the site's configuration and layouts. 
+    # Process a single post using the site's configuration and layouts. 
     #
     # Returns the rendered post
-    def process_single(filename)
+    def process_post(filename)
       self.reset
       self.read_layouts
       dir = File.dirname(filename)
@@ -87,6 +87,21 @@ module Jekyll
       post.write(self.dest)
 
       return post
+    end
+
+    # Process a single page using the site's configuration and layouts. 
+    #
+    # Returns the rendered page
+    def process_page(filename)
+      self.reset
+      self.read_layouts
+      dir = File.dirname(filename)
+      f = File.basename(filename)
+      page= Page.new(self, self.source, dir, f)
+      page.render(self.layouts, site_payload)
+      page.write(self.dest)
+
+      return page
     end
 
     def read
