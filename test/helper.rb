@@ -6,9 +6,12 @@ require File.join(File.dirname(__FILE__), *%w[.. lib jekyll])
 require 'RedCloth'
 require 'rdiscount'
 
-require 'test/unit'
 require 'shoulda'
 require 'rr'
+
+require 'test/unit'
+require 'test/unit/ui/console/testrunner'
+class Test::Unit::UI::Console::TestRunner; def guess_color_availability; true; end; end
 
 include Jekyll
 
