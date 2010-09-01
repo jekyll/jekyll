@@ -45,7 +45,7 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 module Jekyll
-  VERSION = '0.6.2'
+  VERSION = '0.7.0'
 
   # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML).
@@ -71,6 +71,9 @@ module Jekyll
       'png_engine' => 'blahtex',
       'png_dir'    => 'images/latex',
       'png_url'    => '/images/latex'
+    },
+    'rdiscount'    => {
+      'extensions' => []
     }
   }
 
