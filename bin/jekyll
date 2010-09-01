@@ -78,12 +78,8 @@ opts = OptionParser.new do |opts|
     end
   end
 
-  opts.on("--post [FILE]", "Render a single post") do |file|
-    options['post'] = file
-  end
-
-  opts.on("--page [FILE]", "Render a single page") do |file|
-    options['page'] = file
+  opts.on("--single [FILE]", "Render a single post or page") do |file|
+    options['single'] = file
   end
 
   opts.on("--url [URL]", "Set custom site.url") do |url|
@@ -152,16 +148,17 @@ if options['auto']
   unless options['server']
     loop { sleep 1000 }
   end
-elsif options['post']
-  file = options['post']
-  puts "Rendering single post in #{file}"
-  post = site.process_post(file)
-  puts "Finished! Post at #{post.url}"
-elsif options['page']
-  file = options['page']
-  puts "Rendering single page in #{file}"
-  post = site.process_page(file)
-  puts "Finished! Page at #{post.url}"
+elsif options['single']
+  file = options['single']
+  name = File.basename(file)
+  dir  = File.dirname(file)
+  if Jekyll::Post.valid?(name)
+    single = Jekyll::Post.new(site, site.source, dir, name)
+  else
+    single = Jekyll::Page.new(site, site.source, dir, name)
+  end
+  puts "Rendering single #{single.class}: #{file} -> #{single.url}"
+  site.process_single(single)
 else
   puts "Building site: #{source} -> #{destination}"
   begin

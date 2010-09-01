@@ -78,34 +78,14 @@ module Jekyll
       self.write
     end
 
-    # Process a single post using the site's configuration and layouts. 
+    # Process a single page or post using the site's configuration and layouts. 
     #
-    # Returns the rendered post
-    def process_post(filename)
+    # Returns nothing
+    def process_single(single)
       self.reset
       self.read_layouts
-      dir = File.dirname(filename)
-      f = File.basename(filename)
-      post = Post.new(self, self.source, dir, f, true)
-      post.render(self.layouts, site_payload)
-      post.write(self.dest)
-
-      return post
-    end
-
-    # Process a single page using the site's configuration and layouts. 
-    #
-    # Returns the rendered page
-    def process_page(filename)
-      self.reset
-      self.read_layouts
-      dir = File.dirname(filename)
-      f = File.basename(filename)
-      page= Page.new(self, self.source, dir, f)
-      page.render(self.layouts, site_payload)
-      page.write(self.dest)
-
-      return page
+      single.render(self.layouts, site_payload)
+      single.write(self.dest)
     end
 
     def read
@@ -134,14 +114,15 @@ module Jekyll
     #
     # Returns nothing
     def read_posts(dir)
-      base = File.join(self.source, dir, '_posts')
+      postsdir = File.join(dir, '_posts')
+      base = File.join(self.source, postsdir)
       return unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
         if Post.valid?(f)
-          post = Post.new(self, self.source, dir, f)
+          post = Post.new(self, self.source, postsdir, f)
 
           if post.published && (self.future || post.date <= self.time)
             self.posts << post

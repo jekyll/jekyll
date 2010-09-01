@@ -29,13 +29,12 @@ module Jekyll
     #   +categories+ is an Array of Strings for the categories for this post
     #
     # Returns <Post>
-    def initialize(site, source, dir, name, single=false)
+    def initialize(site, source, dir, name)
       @site = site
       @base = File.join(source, dir)
-      @base = File.join(@base, "_posts") unless single
       @name = name
 
-      self.categories = dir.split('/').reject { |x| x.empty? } 
+      self.categories = dir.split('/').reject { |x| x.empty? or x == '_posts' } 
       self.process(name)
       self.read_yaml(@base, name)
 
