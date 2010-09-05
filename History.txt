@@ -1,3 +1,7 @@
+== HEAD
+  * Bug Fixes
+    * Fixed filename basename generation (#208)
+
 == 0.7.0 / 2010-08-24
   * Minor Enhancements
     * Add support for rdiscount extensions (#173)

@@ -23,6 +23,16 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/contacts.html", @page.url
       end
 
+      should "deal properly with extensions" do
+        @page = setup_page('deal.with.dots.html')
+        assert_equal ".html", @page.ext
+      end
+
+      should "deal properly with dots" do
+        @page = setup_page('deal.with.dots.html')
+        assert_equal "deal.with.dots", @page.basename
+      end
+
       context "with pretty url style" do
         setup do
           @site.permalink_style = :pretty
