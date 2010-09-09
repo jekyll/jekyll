@@ -70,8 +70,14 @@ module Jekyll
     #
     # Returns nothing
     def process(name)
-      self.ext = File.extname(name)
-      self.basename = name.split('.')[0..-2].first
+      # Is it a dotfile ?
+      if name[/^\./]
+        self.ext = ''
+        self.basename = name
+      else
+        self.ext = File.extname(name)
+        self.basename = name.split('.')[0..-2].first
+      end
     end
 
     # Add any necessary layouts to this post
