@@ -92,6 +92,15 @@ class TestPage < Test::Unit::TestCase
         assert File.directory?(dest_dir)
         assert File.exists?(File.join(dest_dir,'sitemap.xml'))
       end
+      
+      should "write dotfiles properly" do
+        page = setup_page('.htaccess')
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exists?(File.join(dest_dir, '.htaccess'))
+      end
     end
 
   end 
