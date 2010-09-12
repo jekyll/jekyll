@@ -3,7 +3,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+
     attr_accessor :converters, :generators
 
     # Initialize the site
@@ -22,6 +23,7 @@ module Jekyll
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
       self.future          = config['future']
+      self.limit_posts     = config['limit_posts'] || nil
 
       self.reset
       self.setup
@@ -39,6 +41,8 @@ module Jekyll
       self.static_files    = []
       self.categories      = Hash.new { |hash, key| hash[key] = [] }
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
+
+      raise ArgumentError, "Limit posts must be nil or >= 1" if !self.limit_posts.nil? && self.limit_posts < 1
     end
 
     def setup
@@ -122,6 +126,9 @@ module Jekyll
       end
 
       self.posts.sort!
+
+      # limit the posts if :limit_posts option is set
+      self.posts = self.posts[-limit_posts, limit_posts] if limit_posts
     end
 
     def generate
