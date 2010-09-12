@@ -78,6 +78,17 @@ opts = OptionParser.new do |opts|
     end
   end
 
+  opts.on("--limit-posts [MAX_POSTS]", "Limit the number of posts to publish") do |limit_posts|
+    begin
+      options['limit_posts'] = limit_posts.to_i
+      raise ArgumentError if options['limit_posts'] < 1
+    rescue
+      puts 'you must specify a number of posts by page bigger than 0'
+      exit 0
+    end
+  end
+
+
   opts.on("--url [URL]", "Set custom site.url") do |url|
     options['url'] = url
   end
