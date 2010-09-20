@@ -163,6 +163,20 @@ if options['server']
   require 'webrick'
   include WEBrick
 
+  # force webrick to return text/html mime type for urls without extensions (if not told otherwise)
+  module WEBrick
+    module HTTPUtils
+      alias_method :original_mime_type, :mime_type
+      module_function :original_mime_type
+      def mime_type(filename, mime_tab)
+        mime = original_mime_type(filename, mime_tab)
+        return "text/html" if mime == "application/octet-stream" and File.extname(filename)==""
+        mime
+      end
+      module_function :mime_type
+    end
+  end
+
   FileUtils.mkdir_p(destination)
 
   unless options['mime']
