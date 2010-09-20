@@ -45,6 +45,8 @@ module Jekyll
     def template
       if self.site.permalink_style == :pretty && !index? && html?
         "/:basename/"
+      elsif self.site.permalink_style == :pretty_flat && !index? && html?
+        "/:basename"
       else
         "/:basename:output_ext"
       end
