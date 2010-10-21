@@ -10,6 +10,15 @@ module Jekyll
       return if @setup
       # Set the Markdown interpreter (and Maruku self.config, if necessary)
       case @config['markdown']
+        when 'kramdown'
+          begin
+            require 'kramdown'
+
+          rescue LoadError
+            STDERR.puts 'You are missing a library required for Markdown. Please run:'
+            STDERR.puts '  $ [sudo] gem install kramdown'
+            raise FatalException.new("Missing dependency: kramdown")
+          end
         when 'rdiscount'
           begin
             require 'rdiscount'
@@ -52,7 +61,7 @@ module Jekyll
           end
         else
           STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
-          STDERR.puts "  Valid options are [ maruku | rdiscount ]"
+          STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown ]"
           raise FatalException.new("Invalid Markdown process: #{@config['markdown']}")
       end
       @setup = true
@@ -69,6 +78,8 @@ module Jekyll
     def convert(content)
       setup
       case @config['markdown']
+        when 'kramdown'
+          Kramdown::Document.new(content).to_html
         when 'rdiscount'
           RDiscount.new(content, *@rdiscount_extensions).to_html
         when 'maruku'
