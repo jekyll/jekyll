@@ -40,7 +40,7 @@ opts = OptionParser.new do |opts|
     options['server_port'] = port unless port.nil?
   end
 
-  opts.on("--baseurl [BASE_URL]", "Serve website from base URL (default '/'") do |baseurl|
+  opts.on("--baseurl [BASE_URL]", "Serve website from a given base URL (default '/'") do |baseurl|
       options['baseurl'] = baseurl
   end
 
