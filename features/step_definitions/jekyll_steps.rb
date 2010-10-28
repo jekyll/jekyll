@@ -13,7 +13,7 @@ Given /^I have a blank site in "(.*)"$/ do |path|
 end
 
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
-Given /^I have an "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
+Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
   File.open(file, 'w') do |f|
     f.write <<EOF
 ---
@@ -25,7 +25,7 @@ EOF
   end
 end
 
-Given /^I have an "(.*)" file that contains "(.*)"$/ do |file, text|
+Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   File.open(file, 'w') do |f|
     f.write(text)
     f.close
@@ -39,13 +39,13 @@ Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
   end
 end
 
-Given /^I have a (.*) directory$/ do |dir|
-  FileUtils.mkdir(dir)
+Given /^I have an? (.*) directory$/ do |dir|
+  FileUtils.mkdir_p(dir)
 end
 
 Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, table|
   table.hashes.each do |post|
-    date = Date.parse(post['date']).strftime('%Y-%m-%d')
+    date = Date.strptime(post['date'], '%m/%d/%Y').strftime('%Y-%m-%d')
     title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
 
     if direction && direction == "in"
@@ -81,7 +81,16 @@ end
 
 Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
   File.open('_config.yml', 'w') do |f|
-    f.write("#{key}: #{value}")
+    f.write("#{key}: #{value}\n")
+    f.close
+  end
+end
+
+Given /^I have a configuration file with:$/ do |table|
+  File.open('_config.yml', 'w') do |f|
+    table.hashes.each do |row|
+      f.write("#{row["key"]}: #{row["value"]}\n")
+    end
     f.close
   end
 end
@@ -90,7 +99,7 @@ Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
   File.open('_config.yml', 'w') do |f|
     f.write("#{key}:\n")
     table.hashes.each do |row|
-      f.write("- #{row["Value"]}\n")
+      f.write("- #{row["value"]}\n")
     end
     f.close
   end
@@ -115,12 +124,12 @@ Then /^the (.*) directory should exist$/ do |dir|
   assert File.directory?(dir)
 end
 
-Then /^the (.*) file should exist$/ do |file|
-  assert File.file?(file)
-end
-
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
   assert_match Regexp.new(text), File.open(file).readlines.join
+end
+
+Then /^the "(.*)" file should exist$/ do |file|
+  assert File.file?(file)
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|

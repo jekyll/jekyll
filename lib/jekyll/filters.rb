@@ -2,7 +2,7 @@ module Jekyll
 
   module Filters
     def textilize(input)
-      RedCloth.new(input).to_html
+      TextileConverter.new.convert(input)
     end
 
     def date_to_string(date)

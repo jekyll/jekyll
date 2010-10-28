@@ -23,6 +23,10 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
+  opts.on("--safe", "Safe mode (default unsafe)") do
+    options['safe'] = true
+  end
+
   opts.on("--auto", "Auto-regenerate") do
     options['auto'] = true
   end
@@ -52,6 +56,18 @@ opts = OptionParser.new do |opts|
     options['markdown'] = 'rdiscount'
   end
 
+  opts.on("--time [TIME]", "Time to generate the site for") do |time|
+    options['time'] = Time.parse(time)
+  end
+
+  opts.on("--future", "Render future dated posts") do
+    options['future'] = true
+  end
+
+  opts.on("--no-future", "Do not render future dated posts") do
+    options['future'] = false
+  end
+
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
     options['permalink'] = style unless style.nil?
   end
@@ -66,8 +82,12 @@ opts = OptionParser.new do |opts|
     end
   end
 
+  opts.on("--url [URL]", "Set custom site.url") do |url|
+    options['url'] = url
+  end
+
   opts.on("--version", "Display current version") do
-    puts "Jekyll " + Jekyll.version
+    puts "Jekyll " + Jekyll::VERSION
     exit 0
   end
 end
@@ -130,7 +150,11 @@ if options['auto']
   end
 else
   puts "Building site: #{source} -> #{destination}"
-  site.process
+  begin
+    site.process
+  rescue Jekyll::FatalException
+    exit(1)
+  end
   puts "Successfully generated site: #{source} -> #{destination}"
 end
 
@@ -141,8 +165,13 @@ if options['server']
 
   FileUtils.mkdir_p(destination)
 
+  mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
+  mime_types.store 'js', 'application/javascript'
+
   s = HTTPServer.new(
-    :Port            => options['server_port']
+    :Port            => options['server_port'],
+    :DocumentRoot    => destination,
+    :MimeTypes       => mime_types
   )
   s.mount(options['baseurl'], HTTPServlet::FileHandler, destination)
   t = Thread.new {

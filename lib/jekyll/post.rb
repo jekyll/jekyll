@@ -18,12 +18,9 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output, :tags
-    attr_writer :categories
-
-    def categories
-      @categories ||= []
-    end
+    attr_accessor :site
+    attr_accessor :data, :content, :output, :ext
+    attr_accessor :date, :slug, :published, :tags, :categories
 
     # Initialize this Post instance.
     #   +site+ is the Site
@@ -41,32 +38,23 @@ module Jekyll
       self.process(name)
       self.read_yaml(@base, name)
 
+      #If we've added a date and time to the yaml, use that instead of the filename date
+      #Means we'll sort correctly.
+      if self.data.has_key?('date')
+        # ensure Time via to_s and reparse
+        self.date = Time.parse(self.data["date"].to_s)
+      end
+
       if self.data.has_key?('published') && self.data['published'] == false
         self.published = false
       else
         self.published = true
       end
 
-      if self.data.has_key?("tag")
-        self.tags = [self.data["tag"]]
-      elsif self.data.has_key?("tags")
-        self.tags = self.data['tags']
-      else
-        self.tags = []
-      end
+      self.tags = self.data.pluralized_array("tag", "tags")
 
       if self.categories.empty?
-        if self.data.has_key?('category')
-          self.categories << self.data['category']
-        elsif self.data.has_key?('categories')
-          # Look for categories in the YAML-header, either specified as
-          # an array or a string.
-          if self.data['categories'].kind_of? String
-            self.categories = self.data['categories'].split
-          else
-            self.categories = self.data['categories']
-          end
-        end
+        self.categories = self.data.pluralized_array('category', 'categories')
       end
     end
 
@@ -136,9 +124,12 @@ module Jekyll
         "month"      => date.strftime("%m"),
         "day"        => date.strftime("%d"),
         "title"      => CGI.escape(slug),
-        "categories" => categories.sort.join('/')
+        "i_day"      => date.strftime("%d").to_i.to_s,
+        "i_month"    => date.strftime("%m").to_i.to_s,
+        "categories" => categories.join('/'),
+        "output_ext" => self.output_ext
       }.inject(template) { |result, token|
-        result.gsub(/:#{token.first}/, token.last)
+        result.gsub(/:#{Regexp.escape token.first}/, token.last)
       }.gsub(/\/\//, "/")
     end
 
@@ -179,12 +170,10 @@ module Jekyll
     # Returns nothing
     def render(layouts, site_payload)
       # construct payload
-      payload =
-      {
+      payload = {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
         "page" => self.to_liquid
-      }
-      payload = payload.deep_merge(site_payload)
+      }.deep_merge(site_payload)
 
       do_layout(payload, layouts)
     end
@@ -213,7 +202,8 @@ module Jekyll
     #
     # Returns <Hash>
     def to_liquid
-      { "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
+      self.data.deep_merge({
+        "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
         "url"        => self.url,
         "date"       => self.date,
         "id"         => self.id,
@@ -221,7 +211,7 @@ module Jekyll
         "next"       => self.next,
         "previous"   => self.previous,
         "tags"       => self.tags,
-        "content"    => self.content }.deep_merge(self.data)
+        "content"    => self.content })
     end
 
     def inspect

@@ -33,7 +33,7 @@ Feature: Site configuration
     And I have an "README" file that contains "I want to be excluded"
     And I have an "index.html" file that contains "I want to be included"
     And I have a configuration file with "exclude" set to:
-      | Value    |
+      | value    |
       | README   |
       | Rakefile |
     When I run jekyll
@@ -61,3 +61,43 @@ Feature: Site configuration
     When I run jekyll
     Then the _site directory should exist
     And I should see "puts 'Hello world!'" in "_site/index.html"
+
+  Scenario: Set time and no future dated posts
+    Given I have a _layouts directory
+    And I have a page layout that contains "Page Layout: {{ site.posts.size }} on {{ site.time | date: "%Y-%m-%d" }}"
+    And I have a post layout that contains "Post Layout: {{ content }}"
+    And I have an "index.html" page with layout "page" that contains "site index page"
+    And I have a configuration file with:
+      | key         | value        |
+      | time        | 2010-01-01   |
+      | future      | false        |
+    And I have a _posts directory
+    And I have the following posts:
+      | title     | date       | layout  | content                                |
+      | entry1    | 12/31/2007 | post    | content for entry1.                    |
+      | entry2    | 01/31/2020 | post    | content for entry2.                    |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Page Layout: 1 on 2010-01-01" in "_site/index.html"
+    And I should see "Post Layout: <p>content for entry1.</p>" in "_site/2007/12/31/entry1.html"
+    And the "_site/2020/01/31/entry2.html" file should not exist
+
+  Scenario: Set time and future dated posts allowed
+    Given I have a _layouts directory
+    And I have a page layout that contains "Page Layout: {{ site.posts.size }} on {{ site.time | date: "%Y-%m-%d" }}"
+    And I have a post layout that contains "Post Layout: {{ content }}"
+    And I have an "index.html" page with layout "page" that contains "site index page"
+    And I have a configuration file with:
+      | key         | value        |
+      | time        | 2010-01-01   |
+      | future      | true         |
+    And I have a _posts directory
+    And I have the following posts:
+      | title     | date       | layout  | content                                |
+      | entry1    | 12/31/2007 | post    | content for entry1.                    |
+      | entry2    | 01/31/2020 | post    | content for entry2.                    |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Page Layout: 2 on 2010-01-01" in "_site/index.html"
+    And I should see "Post Layout: <p>content for entry1.</p>" in "_site/2007/12/31/entry1.html"
+    And I should see "Post Layout: <p>content for entry2.</p>" in "_site/2020/01/31/entry2.html"
