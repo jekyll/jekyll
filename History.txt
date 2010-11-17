@@ -1,6 +1,7 @@
 == HEAD
   * Minor Enhancements
     * Add wordpress.com importer (#207)
+    * Add --limit-posts cli option (#212)
   * Bug Fixes
     * Fixed filename basename generation (#208)
 
