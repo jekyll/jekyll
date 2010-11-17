@@ -16,7 +16,7 @@ class TestPage < Test::Unit::TestCase
       stub(Jekyll).configuration { Jekyll::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
     end
-    
+
     context "processing pages" do
       should "create url based on filename" do
         @page = setup_page('contacts.html')
@@ -71,7 +71,7 @@ class TestPage < Test::Unit::TestCase
       setup do
         clear_dest
       end
-      
+
       should "write properly" do
         page = setup_page('contacts.html')
         do_render(page)
@@ -83,14 +83,14 @@ class TestPage < Test::Unit::TestCase
 
       should "write properly without html extension" do
         page = setup_page('contacts.html')
-        page.site.permalink_style = :pretty 
+        page.site.permalink_style = :pretty
         do_render(page)
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
         assert File.exists?(File.join(dest_dir, 'contacts', 'index.html'))
       end
-      
+
       should "write properly with extension different from html" do
         page = setup_page("sitemap.xml")
         page.site.permalink_style = :pretty
@@ -102,7 +102,16 @@ class TestPage < Test::Unit::TestCase
         assert File.directory?(dest_dir)
         assert File.exists?(File.join(dest_dir,'sitemap.xml'))
       end
+
+      should "write dotfiles properly" do
+        page = setup_page('.htaccess')
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exists?(File.join(dest_dir, '.htaccess'))
+      end
     end
 
-  end 
+  end
 end
