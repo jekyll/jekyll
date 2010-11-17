@@ -1,3 +1,5 @@
+require 'uri'
+
 module Jekyll
 
   module Filters
@@ -23,6 +25,10 @@ module Jekyll
 
     def cgi_escape(input)
       CGI::escape(input)
+    end
+
+    def uri_escape(input)
+      URI.escape(input)
     end
 
     def number_of_words(input)
