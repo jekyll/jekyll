@@ -2,6 +2,7 @@
   * Minor Enhancements
     * Add wordpress.com importer (#207)
     * Add --limit-posts cli option (#212)
+    * Add uri_escape filter (#234)
   * Bug Fixes
     * Fixed filename basename generation (#208)
 
