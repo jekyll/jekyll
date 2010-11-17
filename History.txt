@@ -1,6 +1,8 @@
 == HEAD
   * Minor Enhancements
     * Add wordpress.com importer (#207)
+  * Bug Fixes
+    * Fixed filename basename generation (#208)
 
 == 0.7.0 / 2010-08-24
   * Minor Enhancements
