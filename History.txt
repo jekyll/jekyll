@@ -1,3 +1,7 @@
+== HEAD
+  * Minor Enhancements
+    * Add wordpress.com importer (#207)
+
 == 0.7.0 / 2010-08-24
   * Minor Enhancements
     * Add support for rdiscount extensions (#173)
