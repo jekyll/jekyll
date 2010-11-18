@@ -3,6 +3,7 @@
     * Add wordpress.com importer (#207)
     * Add --limit-posts cli option (#212)
     * Add uri_escape filter (#234)
+    * Add --base-url cli option (#235)
   * Bug Fixes
     * Fixed filename basename generation (#208)
 
