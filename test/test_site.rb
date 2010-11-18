@@ -148,6 +148,27 @@ class TestSite < Test::Unit::TestCase
         end
       end
     end
+
+    context 'with purge option set in the configuration' do
+      should 'remove old destination files missing in source' do
+        s = Site.new(Jekyll.configuration.merge({ 'purge' => true }))
+        clear_dest
+        
+        s.process
+        
+        some_static_file = s.static_files[0].path
+        dest = File.expand_path(s.static_files[0].destination(s.dest))
+
+        assert File.exist?(dest) # destination file was generated
+        
+        # rename file, regenerate site and restore original filename
+        File.rename(some_static_file, some_static_file + ".renamed")
+        s.process
+        File.rename(some_static_file + ".renamed", some_static_file)
+                
+        assert !File.exist?(dest) # former destination file should have been removed
+      end
+    end
     
   end
 end

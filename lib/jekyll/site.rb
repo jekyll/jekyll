@@ -3,8 +3,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
-
+                  :permalink_style, :tags, :time, :future, :safe, :plugins,
+                  :limit_posts, :purge
     attr_accessor :converters, :generators
 
     # Initialize the site
@@ -24,6 +24,7 @@ module Jekyll
       self.exclude         = config['exclude'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.purge           = config['purge']
 
       self.reset
       self.setup
@@ -156,6 +157,7 @@ module Jekyll
     #
     # Returns nothing
     def write
+      FileUtils.rm_rf(self.dest) if self.purge
       self.posts.each do |post|
         post.write(self.dest)
       end

@@ -35,6 +35,10 @@ opts = OptionParser.new do |opts|
     options['auto'] = false
   end
 
+  opts.on("--purge", "Purge destination directory before generation") do
+    options['purge'] = true
+  end
+
   opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
     options['server'] = true
     options['server_port'] = port unless port.nil?
