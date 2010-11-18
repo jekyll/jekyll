@@ -6,6 +6,7 @@
     * Add --base-url cli option (#235)
   * Bug Fixes
     * Fixed filename basename generation (#208)
+    * Set mode to UTF8 on Sequel connections (#237)
 
 == 0.7.0 / 2010-08-24
   * Minor Enhancements
