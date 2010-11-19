@@ -1,0 +1,8 @@
+---
+layout: nil
+---
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+{% for post in site.posts %}
+  # {{ post.url }}
+{% endfor %}

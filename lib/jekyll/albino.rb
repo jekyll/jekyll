@@ -54,7 +54,7 @@ class Albino
   end
 
   def initialize(target, lexer = :text, format = :html)
-    @target  = File.exists?(target) ? File.read(target) : target rescue target
+    @target  = target
     @options = { :l => lexer, :f => format, :O => 'encoding=utf-8' }
   end
 

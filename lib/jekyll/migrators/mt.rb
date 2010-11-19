@@ -21,7 +21,7 @@ module Jekyll
     QUERY = "SELECT entry_id, entry_basename, entry_text, entry_text_more, entry_authored_on, entry_title, entry_convert_breaks FROM mt_entry"
 
     def self.process(dbname, user, pass, host = 'localhost')
-      db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host)
+      db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
 
       FileUtils.mkdir_p "_posts"
 

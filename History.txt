@@ -1,3 +1,20 @@
+== HEAD
+  * Minor Enhancements
+    * Add wordpress.com importer (#207)
+    * Add --limit-posts cli option (#212)
+    * Add uri_escape filter (#234)
+    * Add --base-url cli option (#235)
+  * Bug Fixes
+    * Fixed filename basename generation (#208)
+    * Set mode to UTF8 on Sequel connections (#237)
+
+== 0.7.0 / 2010-08-24
+  * Minor Enhancements
+    * Add support for rdiscount extensions (#173)
+  * Bug Fixes
+    * Highlight should not be able to render local files
+    * The site configuration may not always provide a 'time' setting (#184)
+
 == 0.6.2 / 2010-06-25
   * Bug Fixes
     * Fix Rakefile 'release' task (tag pushing was missing origin)
