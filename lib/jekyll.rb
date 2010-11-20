@@ -74,6 +74,12 @@ module Jekyll
     },
     'rdiscount'    => {
       'extensions' => []
+    },
+    'kramdown'        => {
+      'auto_ids'      => true,
+      'footnote_nr'   => 1,
+      'entity_output' => 'as_char',
+      'toc_levels'    => '1..6'
     }
   }
 

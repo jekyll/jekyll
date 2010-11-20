@@ -79,7 +79,12 @@ module Jekyll
       setup
       case @config['markdown']
         when 'kramdown'
-          Kramdown::Document.new(content).to_html
+          Kramdown::Document.new(content, {
+			  :auto_ids      => @config['kramdown']['auto_ids'],
+			  :footnote_nr   => @config['kramdown']['footnote_nr'],
+			  :entity_output => @config['kramdown']['entity_output'],
+			  :toc_levels    => @config['kramdown']['toc_levels']
+			  }).to_html
         when 'rdiscount'
           RDiscount.new(content, *@rdiscount_extensions).to_html
         when 'maruku'
