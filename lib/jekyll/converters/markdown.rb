@@ -79,12 +79,33 @@ module Jekyll
       setup
       case @config['markdown']
         when 'kramdown'
-          Kramdown::Document.new(content, {
-			  :auto_ids      => @config['kramdown']['auto_ids'],
-			  :footnote_nr   => @config['kramdown']['footnote_nr'],
-			  :entity_output => @config['kramdown']['entity_output'],
-			  :toc_levels    => @config['kramdown']['toc_levels']
-			  }).to_html
+
+	  # Check for use of coderay
+	  if @config['kramdown']['use_coderay']
+            Kramdown::Document.new(content, {
+		  :auto_ids      => @config['kramdown']['auto_ids'],
+		  :footnote_nr   => @config['kramdown']['footnote_nr'],
+		  :entity_output => @config['kramdown']['entity_output'],
+		  :toc_levels    => @config['kramdown']['toc_levels'],
+
+		  :coderay_wrap               => @config['kramdown']['coderay']['coderay_wrap'],
+		  :coderay_line_numbers       => @config['kramdown']['coderay']['coderay_line_numbers'],
+		  :coderay_line_number_start  => @config['kramdown']['coderay']['coderay_line_number_start'],
+		  :coderay_tab_width          => @config['kramdown']['coderay']['coderay_tab_width'],
+		  :coderay_bold_every         => @config['kramdown']['coderay']['coderay_bold_every'],
+		  :coderay_css                => @config['kramdown']['coderay']['coderay_css']
+		  }).to_html
+
+	  # not using coderay
+	  else
+
+            Kramdown::Document.new(content, {
+		  :auto_ids      => @config['kramdown']['auto_ids'],
+		  :footnote_nr   => @config['kramdown']['footnote_nr'],
+		  :entity_output => @config['kramdown']['entity_output'],
+		  :toc_levels    => @config['kramdown']['toc_levels']
+		  }).to_html
+          end
         when 'rdiscount'
           RDiscount.new(content, *@rdiscount_extensions).to_html
         when 'maruku'
