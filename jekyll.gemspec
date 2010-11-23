@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rr', [">= 4.2.1"])
   s.add_development_dependency('cucumber', [">= 4.2.1"])
   s.add_development_dependency('RedCloth', [">= 4.2.1"])
+  s.add_development_dependency('kramdown', [">= 0.12.0"])
 
   # = MANIFEST =
   s.files = %w[

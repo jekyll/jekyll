@@ -5,6 +5,7 @@
     * Add uri_escape filter (#234)
     * Add --base-url cli option (#235)
     * Improve MT migrator (#238)
+    * Add kramdown support (#239)
   * Bug Fixes
     * Fixed filename basename generation (#208)
     * Set mode to UTF8 on Sequel connections (#237)

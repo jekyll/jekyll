@@ -56,6 +56,10 @@ opts = OptionParser.new do |opts|
     options['markdown'] = 'rdiscount'
   end
 
+  opts.on("--kramdown", "Use kramdown gem for Markdown") do
+    options['markdown'] = 'kramdown'
+  end
+
   opts.on("--time [TIME]", "Time to generate the site for") do |time|
     options['time'] = Time.parse(time)
   end
