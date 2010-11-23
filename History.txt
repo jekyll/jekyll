@@ -9,6 +9,7 @@
   * Bug Fixes
     * Fixed filename basename generation (#208)
     * Set mode to UTF8 on Sequel connections (#237)
+    * Prevent _includes dir from being a symlink
 
 == 0.7.0 / 2010-08-24
   * Minor Enhancements
