@@ -1,4 +1,4 @@
-== HEAD
+== 0.8.0 / 2010-11-22
   * Minor Enhancements
     * Add wordpress.com importer (#207)
     * Add --limit-posts cli option (#212)

@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '0.7.0'
-  s.date              = '2010-08-24'
+  s.version           = '0.8.0'
+  s.date              = '2010-11-22'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -72,6 +72,7 @@ Gem::Specification.new do |s|
     lib/jekyll/migrators/mt.rb
     lib/jekyll/migrators/textpattern.rb
     lib/jekyll/migrators/typo.rb
+    lib/jekyll/migrators/wordpress.com.rb
     lib/jekyll/migrators/wordpress.rb
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
@@ -81,6 +82,7 @@ Gem::Specification.new do |s|
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
     test/helper.rb
+    test/source/.htaccess
     test/source/_includes/sig.markdown
     test/source/_layouts/default.html
     test/source/_layouts/simple.html
@@ -111,6 +113,7 @@ Gem::Specification.new do |s|
     test/source/category/_posts/2008-9-23-categories.textile
     test/source/contacts.html
     test/source/css/screen.css
+    test/source/deal.with.dots.html
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
     test/source/sitemap.xml
@@ -121,6 +124,7 @@ Gem::Specification.new do |s|
     test/test_core_ext.rb
     test/test_filters.rb
     test/test_generated_site.rb
+    test/test_kramdown.rb
     test/test_page.rb
     test/test_pager.rb
     test/test_post.rb
