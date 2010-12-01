@@ -52,12 +52,11 @@ module Jekyll
     # Returns false if the file was not modified since last time (no-op).
     def write(dest)
       dest_path = destination(dest)
-      dest_dir = File.join(dest, @dir)
 
       return false if File.exist? dest_path and !modified?
       @@mtimes[path] = mtime
 
-      FileUtils.mkdir_p(dest_dir)
+      FileUtils.mkdir_p(File.dirname(dest_path))
       FileUtils.cp(path, dest_path)
 
       true

@@ -93,24 +93,25 @@ module Jekyll
         "url"        => File.join(@dir, self.url),
         "content"    => self.content })
     end
+    
+    # Obtain destination path.
+    #   +dest+ is the String path to the destination dir
+    #
+    # Returns destination file path.
+    def destination(dest)
+      # The url needs to be unescaped in order to preserve the correct filename
+      path = File.join(dest, @dir, CGI.unescape(self.url))
+      path = File.join(path, "index.html") if self.url =~ /\/$/
+      path
+    end
 
     # Write the generated page file to the destination directory.
-    #   +dest_prefix+ is the String path to the destination dir
-    #   +dest_suffix+ is a suffix path to the destination dir
+    #   +dest+ is the String path to the destination dir
     #
     # Returns nothing
-    def write(dest_prefix, dest_suffix = nil)
-      dest = File.join(dest_prefix, @dir)
-      dest = File.join(dest, dest_suffix) if dest_suffix
-      FileUtils.mkdir_p(dest)
-
-      # The url needs to be unescaped in order to preserve the correct filename
-      path = File.join(dest, CGI.unescape(self.url))
-      if self.url =~ /\/$/
-        FileUtils.mkdir_p(path)
-        path = File.join(path, "index.html")
-      end
-
+    def write(dest)
+      path = destination(dest)
+      FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'w') do |f|
         f.write(self.output)
       end
