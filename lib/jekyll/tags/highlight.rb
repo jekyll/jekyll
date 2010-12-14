@@ -4,15 +4,28 @@ module Jekyll
     include Liquid::StandardFilters
 
     # we need a language, but the linenos argument is optional.
-    SYNTAX = /(\w+)\s?(:?linenos)?\s?/
+    SYNTAX = /(\w+)\s?([\w\s=]+)*/
 
     def initialize(tag_name, markup, tokens)
       super
       if markup =~ SYNTAX
         @lang = $1
         if defined? $2
+          tmp_options = {}
+          $2.split.each do |opt|
+            key, value = opt.split('=')
+            if value.nil?
+              if key == 'linenos'
+                value = 'inline'
+              else
+                value = true
+              end
+            end
+            tmp_options[key] = value
+          end
+          tmp_options = tmp_options.to_a.collect { |opt| opt.join('=') }
           # additional options to pass to Albino.
-          @options = { 'O' => 'linenos=inline' }
+          @options = { 'O' => tmp_options.join(',') }
         else
           @options = {}
         end
@@ -31,11 +44,9 @@ module Jekyll
 
     def render_pygments(context, code)
       output = add_code_tags(Albino.new(code, @lang).to_s(@options), @lang)
-      case context["content_type"]
-        when "markdown" then "\n" + output + "\n"
-        when "textile" then "<notextile>" + output + "</notextile>"
-        else output
-      end
+      output = context["pygments_prefix"] + output if context["pygments_prefix"]
+      output = output + context["pygments_suffix"] if context["pygments_suffix"]
+      output
     end
 
     def render_codehighlighter(context, code)

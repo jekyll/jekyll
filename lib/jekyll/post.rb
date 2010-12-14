@@ -124,9 +124,12 @@ module Jekyll
         "month"      => date.strftime("%m"),
         "day"        => date.strftime("%d"),
         "title"      => CGI.escape(slug),
-        "categories" => categories.sort.join('/')
+        "i_day"      => date.strftime("%d").to_i.to_s,
+        "i_month"    => date.strftime("%m").to_i.to_s,
+        "categories" => categories.join('/'),
+        "output_ext" => self.output_ext
       }.inject(template) { |result, token|
-        result.gsub(/:#{token.first}/, token.last)
+        result.gsub(/:#{Regexp.escape token.first}/, token.last)
       }.gsub(/\/\//, "/")
     end
 
@@ -167,14 +170,28 @@ module Jekyll
     # Returns nothing
     def render(layouts, site_payload)
       # construct payload
-      payload =
-      {
+      payload = {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
         "page" => self.to_liquid
-      }
-      payload = payload.deep_merge(site_payload)
+      }.deep_merge(site_payload)
 
       do_layout(payload, layouts)
+    end
+    
+    # Obtain destination path.
+    #   +dest+ is the String path to the destination dir
+    #
+    # Returns destination file path.
+    def destination(dest)
+      # The url needs to be unescaped in order to preserve the correct filename
+      path = File.join(dest, CGI.unescape(self.url))
+      if template[/\.html$/].nil?
+        if self.site.no_post_dirs
+          path += ".html"
+        else
+          path = File.join(path, "index.html")
+        end
+      path
     end
 
     # Write the generated post file to the destination directory.
@@ -182,20 +199,8 @@ module Jekyll
     #
     # Returns nothing
     def write(dest)
-      FileUtils.mkdir_p(File.join(dest, dir))
-
-      # The url needs to be unescaped in order to preserve the correct filename
-      path = File.join(dest, CGI.unescape(self.url))
-
-      if template[/\.html$/].nil?
-        if self.site.no_post_dirs
-          path += ".html"
-        else
-          FileUtils.mkdir_p(path)
-          path = File.join(path, "index.html")
-        end
-      end
-
+      path = destination(dest)
+      FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'w') do |f|
         f.write(self.output)
       end
@@ -205,7 +210,8 @@ module Jekyll
     #
     # Returns <Hash>
     def to_liquid
-      { "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
+      self.data.deep_merge({
+        "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
         "url"        => self.url,
         "date"       => self.date,
         "id"         => self.id,
@@ -213,7 +219,7 @@ module Jekyll
         "next"       => self.next,
         "previous"   => self.previous,
         "tags"       => self.tags,
-        "content"    => self.content }.deep_merge(self.data)
+        "content"    => self.content })
     end
 
     def inspect

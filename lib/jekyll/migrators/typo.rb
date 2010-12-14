@@ -22,7 +22,7 @@ module Jekyll
 
     def self.process dbname, user, pass, host='localhost'
       FileUtils.mkdir_p '_posts'
-      db = Sequel.mysql dbname, :user => user, :password => pass, :host => host
+      db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
       db[SQL].each do |post|
         next unless post[:state] =~ /Published/
 

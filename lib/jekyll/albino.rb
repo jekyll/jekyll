@@ -41,7 +41,6 @@
 # Chris Wanstrath // chris@ozmm.org
 #         GitHub // http://github.com
 #
-require 'open4'
 
 class Albino
   @@bin = Rails.development? ? 'pygmentize' : '/usr/bin/pygmentize' rescue 'pygmentize'
@@ -55,17 +54,16 @@ class Albino
   end
 
   def initialize(target, lexer = :text, format = :html)
-    @target  = File.exists?(target) ? File.read(target) : target rescue target
+    @target  = target
     @options = { :l => lexer, :f => format, :O => 'encoding=utf-8' }
   end
 
   def execute(command)
     output = ''
-    Open4.popen4(command) do |pid, stdin, stdout, stderr|
-      stdin.puts @target
-      stdin.close
-      output = stdout.read.strip
-      [stdout, stderr].each { |io| io.close }
+    IO.popen(command, mode='r+') do |p|
+      p.write @target
+      p.close_write
+      output = p.read.strip
     end
     output
   end

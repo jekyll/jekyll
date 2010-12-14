@@ -3,6 +3,7 @@
 #
 # Requires
 #   self.site -> Jekyll::Site
+#   self.content
 #   self.content=
 #   self.data=
 #   self.ext=
@@ -21,42 +22,38 @@ module Jekyll
     # Returns nothing
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
-      
+
       if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
         self.content = self.content[($1.size + $2.size)..-1]
-      
-        self.data = YAML.load($1)
+
+        begin
+          self.data = YAML.load($1)
+        rescue => e
+          puts "YAML Exception: #{e.message}"
+        end
       end
-      
+
       self.data ||= {}
     end
 
-    # Transform the contents based on the file extension.
+    # Transform the contents based on the content type.
     #
     # Returns nothing
     def transform
-      case self.content_type
-      when 'textile'
-        self.ext = ".html"
-        self.content = self.site.textile(self.content)
-      when 'markdown'
-        self.ext = ".html"
-        self.content = self.site.markdown(self.content)
-      end
+      self.content = converter.convert(self.content)
     end
 
-    # Determine which formatting engine to use based on this convertible's
-    # extension
+    # Determine the extension depending on content_type
     #
-    # Returns one of :textile, :markdown or :unknown
-    def content_type
-      case self.ext[1..-1]
-      when /textile/i
-        return 'textile'
-      when /markdown/i, /mkdn/i, /md/i, /mkd/i
-        return 'markdown'
-      end
-      return 'unknown'
+    # Returns the extensions for the output file
+    def output_ext
+      converter.output_ext(self.ext)
+    end
+
+    # Determine which converter to use based on this convertible's
+    # extension
+    def converter
+      @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
     end
 
     # Add any necessary layouts to this convertible document
@@ -68,8 +65,15 @@ module Jekyll
       info = { :filters => [Jekyll::Filters], :registers => { :site => self.site } }
 
       # render and transform content (this becomes the final content of the object)
-      payload["content_type"] = self.content_type
-      self.content = Liquid::Template.parse(self.content).render(payload, info)
+      payload["pygments_prefix"] = converter.pygments_prefix
+      payload["pygments_suffix"] = converter.pygments_suffix
+      
+      begin
+        self.content = Liquid::Template.parse(self.content).render(payload, info)
+      rescue => e
+        puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
+      end
+      
       self.transform
 
       # output keeps track of what will finally be written
@@ -79,7 +83,12 @@ module Jekyll
       layout = layouts[self.data["layout"]]
       while layout
         payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
-        self.output = Liquid::Template.parse(layout.content).render(payload, info)
+
+        begin
+          self.output = Liquid::Template.parse(layout.content).render(payload, info)
+        rescue => e
+          puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
+        end
 
         layout = layouts[layout.data["layout"]]
       end

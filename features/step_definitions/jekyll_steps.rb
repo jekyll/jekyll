@@ -45,7 +45,7 @@ end
 
 Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, table|
   table.hashes.each do |post|
-    date = Date.parse(post['date']).strftime('%Y-%m-%d')
+    date = Date.strptime(post['date'], '%m/%d/%Y').strftime('%Y-%m-%d')
     title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
 
     if direction && direction == "in"
@@ -81,7 +81,16 @@ end
 
 Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
   File.open('_config.yml', 'w') do |f|
-    f.write("#{key}: #{value}")
+    f.write("#{key}: #{value}\n")
+    f.close
+  end
+end
+
+Given /^I have a configuration file with:$/ do |table|
+  File.open('_config.yml', 'w') do |f|
+    table.hashes.each do |row|
+      f.write("#{row["key"]}: #{row["value"]}\n")
+    end
     f.close
   end
 end
@@ -90,7 +99,7 @@ Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
   File.open('_config.yml', 'w') do |f|
     f.write("#{key}:\n")
     table.hashes.each do |row|
-      f.write("- #{row["Value"]}\n")
+      f.write("- #{row["value"]}\n")
     end
     f.close
   end
