@@ -1,6 +1,7 @@
 == HEAD
   * Minor Enhancements
     * Use OptionParser's [no-] functionality for better boolean parsing.
+    * Add Drupal migrator (#245)
 
 == 0.8.0 / 2010-11-22
   * Minor Enhancements
