@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
 
   s.name              = 'jekyll'
   s.version           = '0.8.0'
-  s.date              = '2010-11-22'
+  s.date              = '2010-12-14'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
     LICENSE
     README.textile
     Rakefile
+    VERSION.yml
     bin/jekyll
     cucumber.yml
     features/create_sites.feature
@@ -68,6 +69,7 @@ Gem::Specification.new do |s|
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
     lib/jekyll/migrators/csv.rb
+    lib/jekyll/migrators/drupal.rb
     lib/jekyll/migrators/mephisto.rb
     lib/jekyll/migrators/mt.rb
     lib/jekyll/migrators/textpattern.rb

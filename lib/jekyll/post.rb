@@ -191,6 +191,7 @@ module Jekyll
         else
           path = File.join(path, "index.html")
         end
+      end
       path
     end
 
