@@ -2,6 +2,7 @@
   * Minor Enhancements
     * Use OptionParser's [no-] functionality for better boolean parsing.
     * Add Drupal migrator (#245)
+    * Complain about YAML and Liquid errors (#249)
 
 == 0.8.0 / 2010-11-22
   * Minor Enhancements
