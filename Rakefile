@@ -2,31 +2,6 @@ require 'rubygems'
 require 'rake'
 require 'date'
 
-<<<<<<< HEAD
-begin
-  gem 'jeweler', '>= 0.11.0'
-  require 'jeweler'
-  Jeweler::Tasks.new do |s|
-    s.name = "jekyll"
-    s.summary = %Q{Jekyll is a simple, blog aware, static site generator.}
-    s.email = "tom@mojombo.com"
-    s.homepage = "http://github.com/pedrocr/jekyll"
-    s.description = "Jekyll is a simple, blog aware, static site generator."
-    s.authors = ["Tom Preston-Werner"]
-    s.rubyforge_project = "jekyll"
-    s.files.exclude 'test/dest'
-    s.test_files.exclude 'test/dest'
-    s.add_dependency('RedCloth', '>= 4.2.1')
-    s.add_dependency('liquid', '>= 1.9.0')
-    s.add_dependency('classifier', '>= 1.3.1')
-    s.add_dependency('maruku', '>= 0.5.9')
-    s.add_dependency('directory_watcher', '>= 1.1.1')
-    s.add_dependency('open4', '>= 0.9.6')
-  end
-rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install jeweler --version '>= 0.11.0'"
-  exit(1)
-=======
 #############################################################################
 #
 # Helper functions
@@ -35,7 +10,6 @@ rescue LoadError
 
 def name
   @name ||= Dir['*.gemspec'].first.split('.').first
->>>>>>> c1ed790534e6f0365fb5936beee8f4d0658f8694
 end
 
 def version
