@@ -4,4 +4,3 @@ pkg/
 *.swp
 *~
 _site/
-jekyll.gemspec
