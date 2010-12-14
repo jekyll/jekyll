@@ -23,16 +23,12 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
-  opts.on("--safe", "Safe mode (default unsafe)") do
-    options['safe'] = true
+  opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
+    options['safe'] = safe
   end
 
-  opts.on("--auto", "Auto-regenerate") do
-    options['auto'] = true
-  end
-
-  opts.on("--no-auto", "No auto-regenerate") do
-    options['auto'] = false
+  opts.on("--[no-]auto", "Auto-regenerate") do |auto|
+    options['auto'] = auto
   end
 
   opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
@@ -44,12 +40,12 @@ opts = OptionParser.new do |opts|
       options['baseurl'] = baseurl
   end
 
-  opts.on("--lsi", "Use LSI for better related posts") do
-    options['lsi'] = true
+  opts.on("--[no-]lsi", "Use LSI for better related posts") do |lsi|
+    options['lsi'] = lsi
   end
 
-  opts.on("--pygments", "Use pygments to highlight code") do
-    options['pygments'] = true
+  opts.on("--[no-]pygments", "Use pygments to highlight code") do |pygments|
+    options['pygments'] = pygments
   end
 
   opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
@@ -64,12 +60,8 @@ opts = OptionParser.new do |opts|
     options['time'] = Time.parse(time)
   end
 
-  opts.on("--future", "Render future dated posts") do
-    options['future'] = true
-  end
-
-  opts.on("--no-future", "Do not render future dated posts") do
-    options['future'] = false
+  opts.on("--[no-]future", "Render future dated posts") do |future|
+    options['future'] = future
   end
 
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
