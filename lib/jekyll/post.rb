@@ -177,22 +177,25 @@ module Jekyll
 
       do_layout(payload, layouts)
     end
+    
+    # Obtain destination path.
+    #   +dest+ is the String path to the destination dir
+    #
+    # Returns destination file path.
+    def destination(dest)
+      # The url needs to be unescaped in order to preserve the correct filename
+      path = File.join(dest, CGI.unescape(self.url))
+      path = File.join(path, "index.html") if template[/\.html$/].nil?
+      path
+    end
 
     # Write the generated post file to the destination directory.
     #   +dest+ is the String path to the destination dir
     #
     # Returns nothing
     def write(dest)
-      FileUtils.mkdir_p(File.join(dest, dir))
-
-      # The url needs to be unescaped in order to preserve the correct filename
-      path = File.join(dest, CGI.unescape(self.url))
-
-      if template[/\.html$/].nil?
-        FileUtils.mkdir_p(path)
-        path = File.join(path, "index.html")
-      end
-
+      path = destination(dest)
+      FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'w') do |f|
         f.write(self.output)
       end

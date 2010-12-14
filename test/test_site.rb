@@ -132,6 +132,39 @@ class TestSite < Test::Unit::TestCase
       assert_equal includes, @site.filter_entries(excludes + includes)
     end
     
+    context 'with orphaned files in destination' do
+      setup do
+        clear_dest
+        @site.process
+        # generate some orphaned files:
+        # hidden file
+        File.open(dest_dir('.htpasswd'), 'w')
+        # single file
+        File.open(dest_dir('obsolete.html'), 'w')
+        # single file in sub directory
+        FileUtils.mkdir(dest_dir('qux'))
+        File.open(dest_dir('qux/obsolete.html'), 'w')
+        # empty directory
+        FileUtils.mkdir(dest_dir('quux'))
+      end
+      
+      teardown do
+        FileUtils.rm_f(dest_dir('.htpasswd'))
+        FileUtils.rm_f(dest_dir('obsolete.html'))
+        FileUtils.rm_rf(dest_dir('qux'))
+        FileUtils.rm_f(dest_dir('quux'))
+      end
+      
+      should 'remove orphaned files in destination' do
+        @site.process
+        assert !File.exist?(dest_dir('.htpasswd'))
+        assert !File.exist?(dest_dir('obsolete.html'))
+        assert !File.exist?(dest_dir('qux'))
+        assert !File.exist?(dest_dir('quux'))
+      end
+
+    end
+    
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
