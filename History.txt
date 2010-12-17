@@ -1,4 +1,4 @@
-== HEAD
+== 0.10.0 / 2010-12-16
   * Bug Fixes
     * Add --no-server option.
 
