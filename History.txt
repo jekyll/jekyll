@@ -1,3 +1,7 @@
+== HEAD
+  * Bug Fixes
+    * Add --no-server option.
+
 == 0.9.0 / 2010-12-15
   * Minor Enhancements
     * Use OptionParser's [no-] functionality for better boolean parsing.
