@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '0.8.0'
-  s.date              = '2010-11-22'
+  s.version           = '0.10.0'
+  s.date              = '2010-12-16'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -68,6 +68,8 @@ Gem::Specification.new do |s|
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
     lib/jekyll/migrators/csv.rb
+    lib/jekyll/migrators/drupal.rb
+    lib/jekyll/migrators/marley.rb
     lib/jekyll/migrators/mephisto.rb
     lib/jekyll/migrators/mt.rb
     lib/jekyll/migrators/textpattern.rb

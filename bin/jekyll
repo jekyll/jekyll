@@ -36,6 +36,10 @@ opts = OptionParser.new do |opts|
     options['server_port'] = port unless port.nil?
   end
 
+  opts.on("--no-server", "Do not start a web server") do |part|
+    options['server'] = false
+  end
+
   opts.on("--base-url [BASE_URL]", "Serve website from a given base URL (default '/'") do |baseurl|
       options['baseurl'] = baseurl
   end
