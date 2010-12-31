@@ -126,12 +126,20 @@ class TestSite < Test::Unit::TestCase
 
     should "filter entries with exclude" do
       excludes = %w[README TODO]
-      includes = %w[index.html site.css]
+      files = %w[index.html site.css .htaccess]
 
       @site.exclude = excludes
-      assert_equal includes, @site.filter_entries(excludes + includes)
+      assert_equal files, @site.filter_entries(excludes + files)
     end
     
+    should "not filter entries within include" do
+      includes = %w[_index.html .htaccess]
+      files = %w[index.html _index.html .htaccess]
+
+      @site.include = includes
+      assert_equal files, @site.filter_entries(files)
+    end
+
     context 'with orphaned files in destination' do
       setup do
         clear_dest
