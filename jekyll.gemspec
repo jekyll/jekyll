@@ -59,6 +59,7 @@ Gem::Specification.new do |s|
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
+    lib/jekyll/converters/org.rb
     lib/jekyll/converters/textile.rb
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb
