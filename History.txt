@@ -75,7 +75,7 @@
     * Empty tags causes error in read_posts (#84)
     * Fix pagination to adhere to read/render/write paradigm
   * Test Enhancement
-    * cucumber features no longer use site.ports.first where a better
+    * cucumber features no longer use site.posts.first where a better
       alternative is available
 
 == 0.5.6 / 2010-01-08
