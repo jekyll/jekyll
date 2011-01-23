@@ -12,7 +12,7 @@ require 'yaml'
 module Jekyll
   module WordPress
     
-    TABLE_PREFIX = 'wp_xh2g8g_'
+    TABLE_PREFIX = 'wp_'
 
     # Reads a MySQL database via Sequel and creates a post file for each
     # post in wp_posts that has post_status = 'publish'.
