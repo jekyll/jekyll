@@ -21,9 +21,9 @@ module Jekyll
       # post in wp_posts that has post_status = 'publish'.
       # This restriction is made because 'draft' posts are not guaranteed to
       # have valid dates.
-      QUERY = "select post_title, post_name, post_date, post_content, post_excerpt, ID, guid from #{table_prefix}posts where post_status = 'publish' and post_type = 'post'"
+      query = "select post_title, post_name, post_date, post_content, post_excerpt, ID, guid from #{table_prefix}posts where post_status = 'publish' and post_type = 'post'"
 
-      db[QUERY].each do |post|
+      db[query].each do |post|
         # Get required fields and construct Jekyll compatible name
         title = post[:post_title]
         slug = post[:post_name]
