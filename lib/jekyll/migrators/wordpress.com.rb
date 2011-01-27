@@ -19,9 +19,10 @@ module Jekyll
 			
 			(doc/:channel/:item).each do |item|
 				title = item.at(:title).inner_text.strip
+				permalink_title = item.at('wp:post_name').inner_text
 				date = Time.parse(item.at(:pubDate).inner_text)
 				tags = (item/:category).map{|c| c.inner_text}.reject{|c| c == 'Uncategorized'}.uniq
-				name = "#{date.strftime("%Y-%m-%d")}-#{title.downcase.tr('áéíóúàèìòùâêîôûãẽĩõũñäëïöüç','aeiouaeiouaeiouaeiounaeiouc').gsub(/\W+/, '-')}.html"
+				name = "#{date.strftime('%Y-%m-%d')}-#{permalink_title}.html"
 			  header = {
 			    'layout' => 'post', 
 			    'title'  => title, 
