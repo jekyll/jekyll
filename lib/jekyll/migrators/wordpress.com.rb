@@ -1,13 +1,15 @@
+# coding: utf-8
+
 require 'rubygems'
 require 'hpricot'
 require 'fileutils'
 require 'yaml'
 
-# This importer takes a wordpress.xml file,
-# which can be exported from your 
-# wordpress.com blog (/wp-admin/export.php)
-
 module Jekyll
+  
+  # This importer takes a wordpress.xml file,
+  # which can be exported from your 
+  # wordpress.com blog (/wp-admin/export.php)
   module WordpressDotCom
     def self.process(filename = "wordpress.xml")
       FileUtils.mkdir_p "_posts"
@@ -16,10 +18,10 @@ module Jekyll
 			doc = Hpricot::XML(File.read(filename))
 			
 			(doc/:channel/:item).each do |item|
-				title = item.at(:title).inner_text
+				title = item.at(:title).inner_text.strip
 				date = Time.parse(item.at(:pubDate).inner_text)
 				tags = (item/:category).map{|c| c.inner_text}.reject{|c| c == 'Uncategorized'}.uniq
-				name = "#{date.strftime("%Y-%m-%d")}-#{title.downcase.gsub(/\W+/, '-')}.html"
+				name = "#{date.strftime("%Y-%m-%d")}-#{title.downcase.tr('áéíóúàèìòùâêîôûãẽĩõũñäëïöüç','aeiouaeiouaeiouaeiounaeiouc').gsub(/\W+/, '-')}.html"
 			  header = {
 			    'layout' => 'post', 
 			    'title'  => title, 
@@ -30,14 +32,14 @@ module Jekyll
 				File.open("_posts/#{name}", "w") do |f|
 				  f.puts header.to_yaml
 				  f.puts '---'
-				  f.puts
           f.puts item.at('content:encoded').inner_text
         end
 
 				posts += 1
 			end
 
-			"Imported #{posts} posts"
+			puts "Imported #{posts} posts"
     end
   end
+  
 end
