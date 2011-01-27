@@ -29,7 +29,6 @@ module Jekyll
 			    'tags'   => tags
 			  }
 			  
-				File.mkdir("_posts") unless File.directory?("_posts")
 				File.open("_posts/#{name}", "w") do |f|
 				  f.puts header.to_yaml
 				  f.puts '---'
