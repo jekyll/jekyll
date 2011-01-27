@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'hpricot'
 require 'fileutils'
+require 'yaml'
 
 # This importer takes a wordpress.xml file,
 # which can be exported from your 
@@ -16,16 +17,20 @@ module Jekyll
 			
 			(doc/:channel/:item).each do |item|
 				title = item.at(:title).inner_text
-				name = "#{Date.parse((doc/:channel/:item).first.at(:pubDate).inner_text).to_s("%Y-%m-%d")}-#{title.downcase.gsub('[^a-z0-9]', '-')}.html"
-				
+				date = Time.parse(item.at(:pubDate).inner_text)
+				tags = (item/:category).map{|c| c.inner_text}.reject{|c| c == 'Uncategorized'}.uniq
+				name = "#{date.strftime("%Y-%m-%d")}-#{title.downcase.gsub(/\W+/, '-')}.html"
+			  header = {
+			    'layout' => 'post', 
+			    'title'  => title, 
+			    'tags'   => tags
+			  }
+			  
+				File.mkdir("_posts") unless File.directory?("_posts")
 				File.open("_posts/#{name}", "w") do |f|
-          f.puts <<-HEADER
----
-layout: post
-title: #{title}
----
- 
-HEADER
+				  f.puts header.to_yaml
+				  f.puts '---'
+				  f.puts
           f.puts item.at('content:encoded').inner_text
         end
 
