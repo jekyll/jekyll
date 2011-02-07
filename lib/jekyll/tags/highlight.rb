@@ -4,7 +4,7 @@ module Jekyll
     include Liquid::StandardFilters
 
     # we need a language, but the linenos argument is optional.
-    SYNTAX = /(\w+)\s?([\w\s=]+)*/
+    SYNTAX = /([\w+]+)\s?([\w\s=]+)*/
 
     def initialize(tag_name, markup, tokens)
       super
