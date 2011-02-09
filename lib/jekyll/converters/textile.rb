@@ -26,7 +26,11 @@ module Jekyll
 
     def convert(content)
       setup
-      RedCloth.new(content).to_html
+      r = RedCloth.new(content)
+      if !@config['redcloth']['hard_breaks']
+        r.hard_breaks = false
+      end
+      r.to_html
     end
   end
 
