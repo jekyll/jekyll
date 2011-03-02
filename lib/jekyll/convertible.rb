@@ -1,3 +1,5 @@
+require "English"
+
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
 #
@@ -24,7 +26,7 @@ module Jekyll
       self.content = File.read(File.join(base, name))
 
       if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
-        self.content = self.content[($1.size + $2.size)..-1]
+        self.content = $POSTMATCH
 
         begin
           self.data = YAML.load($1)
