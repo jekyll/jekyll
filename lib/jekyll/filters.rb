@@ -7,6 +7,10 @@ module Jekyll
       TextileConverter.new.convert(input)
     end
 
+    def rdiscount(input)
+      RDiscount.new(input).to_html
+    end
+
     def date_to_string(date)
       date.strftime("%d %b %Y")
     end
