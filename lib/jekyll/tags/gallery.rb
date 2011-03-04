@@ -20,7 +20,11 @@
 # if your images are in a different subfolder than 'img' and your files are
 # named something other than '.jpg'. 'name' is the only mandatory setting.
 #
-#   {% gallery name:your_gallery_name dir:img format:jpg %}
+#   {% gallery name:your_gallery_name dir:img format:jpg reverse:no %}
+#
+# By default, the gallery will be sorted reverse-lexically. If you've named
+# your files with the YYYYMMDD prefix, this results in a newest-first sorting.
+# If you desire the sort to be the other way around, specify 'reverse:no'.
 #
 # If you want to create a grid layout for your images, you can use the 'cycle'
 # tag to achieve that. This example starts a new row after every fourth image:
@@ -58,12 +62,10 @@ module Jekyll
         raise ArgumentError.new("You did not specify the name of your gallery.")
       end
       
-      @attributes['dir']    ||= 'img'
-      @attributes['format'] ||= 'jpg'
-      
       @name = @attributes['name']
-      @dir  = @attributes['dir']
-      @fmt  = @attributes['format']
+      @dir  = @attributes['dir']    || 'img'
+      @fmt  = @attributes['format'] || 'jpg'
+      @rev  = @attributes['reverse']
       
       super
     end
@@ -71,9 +73,8 @@ module Jekyll
     def render(context)
       context.registers[:gallery] ||= Hash.new(0)
       
-      # Find files ending in '.jpg' and sort them reverse-lexically. You can
-      # achieve newest-first sorting by beginning your filenames with YYYYMMDD
-      images = Dir.glob(File.join(@name, @dir, "*.#{@fmt}")).sort {|x,y| y <=> x }
+      images = Dir.glob(File.join(@name, @dir, "*.#{@fmt}"))
+      images.sort! {|x,y| @rev ? x <=> y : y <=> x }
       length = images.length
       result = []
       
