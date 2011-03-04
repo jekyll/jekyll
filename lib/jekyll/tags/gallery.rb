@@ -85,7 +85,7 @@ module Jekyll
             /[-_]/).map {|word| word.capitalize }.join(' ').sub(/^\d+\s/, '')
           
           # Provide relative links instead of absolute ones.
-          context['image'] = img.sub(/^[^\/]+\//, '')
+          context['image'] = File.join(@dir, File.basename(img))
           context['forloop'] = {
             'name' => 'gallery',
             'length' => length,
