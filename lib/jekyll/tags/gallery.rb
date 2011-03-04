@@ -39,6 +39,12 @@
 # This example also introduces the 'title' tag. It is simply the filename of
 # the image converted from hyphenated-lowercase to Title Case.
 
+class String
+  def titleize
+    gsub(/[-_]+/, ' ').split(/(\W)/).map(&:capitalize).join
+  end
+end
+
 
 module Jekyll
   class GalleryTag < Liquid::Block
@@ -82,8 +88,7 @@ module Jekyll
         images.each_with_index do |img, index|
           # Convert hyphens and underscores to spaces, then Title Case the filename,
           # after stripping off the dirname and file extension.
-          context['title'] = File.basename(img).chomp(".#{@fmt}").split(
-            /[-_]/).map {|word| word.capitalize }.join(' ').sub(/^\d+\s/, '')
+          context['title'] = File.basename(img).chomp(".#{@fmt}").titleize.sub(/^\d+\s/, '')
           
           # Provide relative links instead of absolute ones.
           context['image'] = File.join(@dir, File.basename(img))
