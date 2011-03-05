@@ -9,7 +9,7 @@
 # Your index.html should contain at least this, for the simplest gallery:
 #
 #   {% gallery name:your_gallery_name %}
-#   <img src="{{ image }}" />
+#   <img src="{{ file.path }}" />
 #   {% endgallery %}
 #
 # The important point here is that 'your_gallery_name' matches the directory
@@ -31,12 +31,12 @@
 #
 #   <table><tr>
 #   {% gallery name:your_gallery_name %}
-#   <td><img title="{{ title }}" src="{{ image }}" /></td>
+#   <td><img title="{{ file.title }}" src="{{ file.path }}" /></td>
 #   {% cycle '', '', '', '</tr><tr>' %}
 #   {% endgallery %}
 #   </tr></table>
 #
-# This example also introduces the 'title' tag. It is simply the filename of
+# This example also introduces the 'file.title' tag. It is simply the filename of
 # the image converted from hyphenated-lowercase to Title Case.
 
 class String
@@ -85,13 +85,24 @@ module Jekyll
       result = []
       
       context.stack do
-        images.each_with_index do |img, index|
-          # Convert hyphens and underscores to spaces, then Title Case the filename,
-          # after stripping off the dirname and file extension.
-          context['title'] = File.basename(img).chomp(".#{@fmt}").titleize.sub(/^\d+\s/, '')
+        images.each_with_index do |filename, index|
+          basename = File.basename(filename)
           
-          # Provide relative links instead of absolute ones.
-          context['image'] = File.join(@dir, File.basename(img))
+          # This matches '1984-11-27-sluggy-slug.ext', with optional hyphens
+          # (so '19841127-slugger.ext' is also valid), and the date is optional.
+          m, date, year, month, day, slug, ext = *basename.match(
+            /((\d{4})-?(\d\d)-?(\d\d))?-?(.*)(\.#{@fmt})$/)
+          
+          context['file'] = {
+            'title' => slug.titleize,
+            'date' => year.nil? ? nil : Time.local(year, month, day),
+            'name' => basename,
+            'slug' => slug,
+            'ext' => ext,
+            'path' => @dir + '/' + basename,
+            'url' => ['', @name, @dir, basename].join('/')
+          }
+          
           context['forloop'] = {
             'name' => 'gallery',
             'length' => length,
