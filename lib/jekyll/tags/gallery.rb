@@ -73,6 +73,10 @@ module Jekyll
       @fmt  = @attributes['format'] || 'jpg'
       @rev  = @attributes['reverse']
       
+      # Strip periods and slashes out of the 'dir' and 'name' arguments
+      # so that they can't contain evil things like '../..'
+      [@dir, @name].each {|s| s.gsub! /[\.\/]/, ''}
+      
       super
     end
     
