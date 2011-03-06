@@ -49,33 +49,28 @@ end
 module Jekyll
   class GalleryTag < Liquid::Block
     
-    include Liquid::StandardFilters
-    Syntax = /(#{Liquid::QuotedFragment}+)?/
-    
     def initialize(tag_name, markup, tokens)
-      @attributes = {}
+      attributes = {}
       
       # Parse parameters
-      if markup =~ Syntax
-        markup.scan(Liquid::TagAttributes) do |key, value|
-          @attributes[key] = value
-        end
-      else
-        raise SyntaxError.new("Bad options given to 'gallery' plugin.")
+      markup.scan(Liquid::TagAttributes) do |key, value|
+        attributes[key] = value
       end
       
-      if @attributes['name'].nil?
+      if attributes['name'].nil?
         raise ArgumentError.new("You did not specify the name of your gallery.")
       end
       
-      @name = @attributes['name']
-      @dir  = @attributes['dir']    || 'img'
-      @fmt  = @attributes['format'] || 'jpg'
-      @rev  = @attributes['reverse']
+      @name = attributes['name']
+      @dir  = attributes['dir']    || 'img'
+      @fmt  = attributes['format'] || 'jpg'
+      @rev  = attributes['reverse'].nil?
       
-      # Strip periods and slashes out of the 'dir' and 'name' arguments
-      # so that they can't contain evil things like '../..'
-      [@dir, @name].each {|s| s.gsub! /[\.\/]/, ''}
+      # Prevent template data from doing evil.
+      [@name, @dir, @fmt].each do |s|
+        s.delete! '/[]{}*?'
+        s.squeeze! '.'
+      end
       
       super
     end
@@ -83,13 +78,13 @@ module Jekyll
     def render(context)
       context.registers[:gallery] ||= Hash.new(0)
       
-      images = Dir.glob(File.join(@name, @dir, "*.#{@fmt}"))
-      images.sort! {|x,y| @rev ? x <=> y : y <=> x }
-      length = images.length
+      files = Dir.glob(File.join(@name, @dir, "*.#{@fmt}"))
+      files.sort! {|x,y| @rev ? y <=> x : x <=> y }
+      length = files.length
       result = []
       
       context.stack do
-        images.each_with_index do |filename, index|
+        files.each_with_index do |filename, index|
           basename = File.basename(filename)
           
           # This matches '1984-11-27-sluggy-slug.ext', with optional hyphens
@@ -102,7 +97,6 @@ module Jekyll
             'date' => year.nil? ? nil : Time.local(year, month, day),
             'name' => basename,
             'slug' => slug,
-            'ext' => ext,
             'path' => @dir + '/' + basename,
             'url' => ['', @name, @dir, basename].join('/')
           }
