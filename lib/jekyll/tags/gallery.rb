@@ -41,7 +41,7 @@
 
 class String
   def titleize
-    split(/\W+/).map(&:capitalize).join ' '
+    split(/[\W_]+/).map(&:capitalize).join ' '
   end
 end
 
