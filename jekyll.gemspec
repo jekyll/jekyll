@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('classifier', ">= 1.3.1")
   s.add_runtime_dependency('directory_watcher', ">= 1.1.1")
   s.add_runtime_dependency('maruku', ">= 0.5.9")
+  s.add_runtime_dependency('albino', ">= 1.3.2")
   s.add_runtime_dependency('rdiscount', ">= 1.6.8")
 
   s.add_development_dependency('redgreen', ">= 1.2.2")
