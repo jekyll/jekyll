@@ -27,7 +27,6 @@ h2. Runtime Dependencies
 * Classifier: Generating related posts (Ruby)
 * Maruku: Default markdown engine (Ruby)
 * Directory Watcher: Auto-regeneration of sites (Ruby)
-* Open4: Talking to pygments for syntax highlighting (Ruby)
 * Pygments: Syntax highlighting (Python)
 
 h2. Developer Dependencies
