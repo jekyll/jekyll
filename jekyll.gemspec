@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('classifier', ">= 1.3.1")
   s.add_runtime_dependency('directory_watcher', ">= 1.1.1")
   s.add_runtime_dependency('maruku', ">= 0.5.9")
+  s.add_runtime_dependency('kramdown', ">= 0.13.2")
   s.add_runtime_dependency('albino', ">= 1.3.2")
 
   s.add_development_dependency('redgreen', ">= 1.2.2")
@@ -34,7 +35,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rr', ">= 1.0.2")
   s.add_development_dependency('cucumber', ">= 0.10.0")
   s.add_development_dependency('RedCloth', ">= 4.2.1")
-  s.add_development_dependency('kramdown', ">= 0.12.0")
   s.add_development_dependency('rdiscount', ">= 1.6.5")
 
   # = MANIFEST =
