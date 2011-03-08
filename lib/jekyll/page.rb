@@ -55,14 +55,23 @@ module Jekyll
     #
     # Returns <String>
     def url
-      return permalink if permalink
+      return @url if @url
 
-      @url ||= {
-        "basename"   => self.basename,
-        "output_ext" => self.output_ext,
-      }.inject(template) { |result, token|
-        result.gsub(/:#{token.first}/, token.last)
-      }.gsub(/\/\//, "/")
+      url = if permalink
+        permalink
+      else
+        {
+          "basename"   => self.basename,
+          "output_ext" => self.output_ext,
+        }.inject(template) { |result, token|
+          result.gsub(/:#{token.first}/, token.last)
+        }.gsub(/\/\//, "/")
+      end
+
+      # sanitize url
+      @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
+      @url += "/" if url =~ /\/$/
+      @url
     end
 
     # Extract information from the page filename
