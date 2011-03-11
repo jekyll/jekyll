@@ -1,3 +1,5 @@
+require 'set'
+
 module Jekyll
 
   class Site
@@ -158,13 +160,13 @@ module Jekyll
     # Returns nothing
     def cleanup
       # all files and directories in destination, including hidden ones
-      dest_files = []
+      dest_files = Set.new
       Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
         dest_files << file unless file =~ /\/\.{1,2}$/
       end
 
       # files to be written
-      files = []
+      files = Set.new
       self.posts.each do |post|
         files << post.destination(self.dest)
       end
@@ -176,11 +178,13 @@ module Jekyll
       end
       
       # adding files' parent directories
-      files.each { |file| files << File.dirname(file) unless files.include? File.dirname(file) }
+      dirs = Set.new
+      files.each { |file| dirs << File.dirname(file) }
+      files.merge(dirs)
       
       obsolete_files = dest_files - files
       
-      FileUtils.rm_rf(obsolete_files)
+      FileUtils.rm_rf(obsolete_files.to_a)
     end
 
     # Write static files, pages and posts
