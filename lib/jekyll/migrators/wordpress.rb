@@ -12,18 +12,18 @@ require 'yaml'
 module Jekyll
   module WordPress
 
-    # Reads a MySQL database via Sequel and creates a post file for each
-    # post in wp_posts that has post_status = 'publish'.
-    # This restriction is made because 'draft' posts are not guaranteed to
-    # have valid dates.
-    QUERY = "select post_title, post_name, post_date, post_content, post_excerpt, ID, guid from wp_posts where post_status = 'publish' and post_type = 'post'"
-
-    def self.process(dbname, user, pass, host = 'localhost')
+    def self.process(dbname, user, pass, host = 'localhost', table_prefix = 'wp_')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
 
       FileUtils.mkdir_p "_posts"
+      
+      # Reads a MySQL database via Sequel and creates a post file for each
+      # post in wp_posts that has post_status = 'publish'.
+      # This restriction is made because 'draft' posts are not guaranteed to
+      # have valid dates.
+      query = "select post_title, post_name, post_date, post_content, post_excerpt, ID, guid from #{table_prefix}posts where post_status = 'publish' and post_type = 'post'"
 
-      db[QUERY].each do |post|
+      db[query].each do |post|
         # Get required fields and construct Jekyll compatible name
         title = post[:post_title]
         slug = post[:post_name]
