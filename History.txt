@@ -4,6 +4,7 @@
     * Bundler support
     * Use English library to avoid hoops (#292)
     * Add Posterous importer (#254)
+    * Fixes for Wordpress importer (#274, #252)
   * Bug Fixes
     * Secure additional path exploits
 
