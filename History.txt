@@ -3,6 +3,7 @@
     * Switch to Albino gem
     * Bundler support
     * Use English library to avoid hoops (#292)
+    * Add Posterous importer (#254)
   * Bug Fixes
     * Secure additional path exploits
 
