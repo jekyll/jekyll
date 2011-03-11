@@ -1,4 +1,6 @@
 == HEAD
+  * Major Enhancements
+    * Add command line importer functionality (#253)
   * Minor Enhancements
     * Switch to Albino gem
     * Bundler support
