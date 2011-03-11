@@ -1,3 +1,10 @@
+== HEAD
+  * Minor Enhancements
+    * Switch to Albino gem
+    * Bundler support
+  * Bug Fixes
+    * Secure additional path exploits
+
 == 0.10.0 / 2010-12-16
   * Bug Fixes
     * Add --no-server option.
