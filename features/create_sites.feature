@@ -98,10 +98,10 @@ Feature: Create sites
     And I have a gallery/img directory
     And I have a "gallery/img/20110310-foo-bar.jpg" file that contains " "
     And I have a "gallery/img/20110311-slug.jpg" file that contains " "
-    And I have a "gallery/index.html" page that contains "{% gallery name:gallery %}{{ file.title }} {{ file.date | date: "%F" }} {{ file.path }} {% endgallery %}"
+    And I have a "gallery/index.html" page that contains "{% gallery name:gallery %}{{ file.title }} {{ file.date | date: "%F" }} {{ file.path }} {{ file.url }} {% endgallery %}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Slug 2011-03-11 img/20110311-slug.jpg Foo Bar 2011-03-10 img/20110310-foo-bar.jpg" in "_site/gallery/index.html"
+    And I should see "Slug 2011-03-11 img/20110311-slug.jpg /gallery/img/20110311-slug.jpg Foo Bar 2011-03-10 img/20110310-foo-bar.jpg /gallery/img/20110310-foo-bar.jpg" in "_site/gallery/index.html"
 
   Scenario: Basic site with gallery tag, using all options
     Given I have a downloads directory
