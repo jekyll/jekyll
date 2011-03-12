@@ -52,6 +52,12 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2008/09/09/foo-bar.html", @post.url
       end
 
+      should "raise a good error on invalid post date" do
+        assert_raise Jekyll::FatalException do
+          @post.process("2009-27-03-foo-bar.textile")
+        end
+      end
+
       should "CGI escape urls" do
         @post.categories = []
         @post.process("2009-03-12-hash-#1.markdown")

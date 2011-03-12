@@ -78,6 +78,8 @@ module Jekyll
       self.date = Time.parse(date)
       self.slug = slug
       self.ext = ext
+    rescue ArgumentError
+      raise FatalException.new("Post #{name} does not have a valid date.")
     end
 
     # The generated directory into which the post will be placed
