@@ -124,4 +124,39 @@ CONTENT
       end
     end
   end
+
+  context "simple post with gallery" do
+    setup do
+      Dir.chdir dest_dir
+      FileUtils.mkdir_p 'gallery/img'
+      FileUtils.touch ['alpha-beta', 'delta-gamma'].collect {|img| "gallery/img/20110401-#{img}.jpg"}
+      FileUtils.touch "gallery/img/1984-01-01-wrong-format.gif"
+      @content = <<CONTENT
+---
+title: Super simple image gallery
+---
+
+My awesome photo gallery, jpgs only:
+{% gallery name:gallery %}
+<img title="{{ file.title }}, taken on {{ file.date | date: "%F" }}" src="{{ file.path }}" />
+{% endgallery %}
+
+Oh, I have a gif, too:
+{% gallery name:gallery format:gif %}
+<img title="This ugly gif is from {{ file.date | date: "%Y" }}" src="{{ file.path }}" />
+{% endgallery %}
+CONTENT
+    end
+
+    should "parse correctly" do
+      create_post(@content)
+      assert_match %r{title='Alpha Beta, taken on 2011-04-01'}, @result
+      assert_match %r{title='Delta Gamma, taken on 2011-04-01'}, @result
+      assert_match %r{src='img/20110401-alpha-beta.jpg'}, @result
+      assert_match %r{src='img/20110401-delta-gamma.jpg'}, @result
+      assert_match %r{title='This ugly gif is from 1984'}, @result
+      assert_no_match /I have a gif.*jpg/m, @result
+      assert_no_match /gif.*I have a gif/m, @result
+    end
+  end
 end
