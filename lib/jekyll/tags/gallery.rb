@@ -38,7 +38,10 @@ module Jekyll
         files.each_with_index do |filename, index|
           basename = File.basename(filename)
           
-          url = ['', @name, @dir, basename] - ['.']
+          url  = ['', @name, @dir, basename] - ['.']
+          path = url[-2..-1].join '/'
+          html = path.sub /\.#{@fmt}$/, '.html'
+          url  = url.join '/'
           
           # This matches '1984-11-27-sluggy-slug.ext', with optional hyphens
           # (so '19841127-slugger.ext' is also valid), and the date is optional.
@@ -46,12 +49,13 @@ module Jekyll
             /((\d{4})-?(\d\d)-?(\d\d))?-?(.*)(\.#{@fmt})$/)
           
           context['file'] = {
+            'htmlpath' => html,
             'title' => slug.titleize,
             'date' => year.nil? ? nil : Time.local(year, month, day),
             'name' => basename,
             'slug' => slug,
-            'path' => url[-2..-1].join('/'),
-            'url' => url.join('/')
+            'path' => path,
+            'url' => url
           }
           
           # Obviously images don't contain YAML but this bit is included
