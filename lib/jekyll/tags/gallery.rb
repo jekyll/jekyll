@@ -40,8 +40,8 @@ module Jekyll
           
           url  = ['', @name, @dir, basename] - ['.']
           path = url[-2..-1].join '/'
-          html = path.sub /\.#{@fmt}$/, '.html'
           url  = url.join '/'
+          html, hurl = *[path, url].collect {|s| s.sub /\.#{@fmt}$/, '.html'}
           
           # This matches '1984-11-27-sluggy-slug.ext', with optional hyphens
           # (so '19841127-slugger.ext' is also valid), and the date is optional.
@@ -50,6 +50,7 @@ module Jekyll
           
           context['file'] = {
             'htmlpath' => html,
+            'htmlurl' => hurl,
             'title' => slug.titleize,
             'date' => year.nil? ? nil : Time.local(year, month, day),
             'name' => basename,
