@@ -101,7 +101,8 @@ Feature: Create sites
     And I have a "gallery/index.html" page that contains "{% gallery name:gallery %}{{ file.title }} {{ file.date | date: "%F" }} {{ file.path }} {{ file.url }} {% endgallery %}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Slug 2011-03-11 img/20110311-slug.jpg /gallery/img/20110311-slug.jpg Foo Bar 2011-03-10 img/20110310-foo-bar.jpg /gallery/img/20110310-foo-bar.jpg" in "_site/gallery/index.html"
+    And I should see "Slug 2011-03-11 img/20110311-slug.jpg /gallery/img/20110311-slug.jpg Foo" in "_site/gallery/index.html"
+    And I should see "slug.jpg Foo Bar 2011-03-10 img/20110310-foo-bar.jpg /gallery/img/20110310-foo-bar.jpg" in "_site/gallery/index.html"
 
   Scenario: Basic site with gallery tag, using all options
     Given I have a downloads directory
@@ -112,3 +113,12 @@ Feature: Create sites
     When I run jekyll
     Then the _site directory should exist
     And I should see "example-0.1.1 files/example-0.1.1.tar.gz example-0.2.0 files/example-0.2.0.tar.gz" in "_site/downloads/index.html"
+
+  Scenario: Basic site with gallery tag, where globbed files incorporate YAML Front Matter
+    Given I have a documentation directory
+    And I have a "documentation/introduction.textile" page with layout "chazwozzer" that contains "_Welcome!_"
+    And I have an "index.html" page that contains "{% gallery name:. dir:documentation format:textile %}{{ file.slug }}.html {{ file.layout }}{% endgallery %}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "<em>Welcome!</em>" in "_site/documentation/introduction.html"
+    And I should see "introduction.html chazwozzer" in "_site/index.html"
