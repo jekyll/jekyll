@@ -48,6 +48,8 @@ end
 
 module Jekyll
   class GalleryTag < Liquid::Block
+    include Convertible
+    attr_accessor :content, :data
     
     def initialize(tag_name, markup, tokens)
       attributes = {}
@@ -102,6 +104,12 @@ module Jekyll
             'path' => url[-2..-1].join('/'),
             'url' => url.join('/')
           }
+          
+          # Obviously images don't contain YAML but this bit is included
+          # on the off chance that somebody is using this tag for other files
+          # that do have YAML Front Matter. This is a harmless nop on images.
+          self.read_yaml(File.join(@name, @dir), basename)
+          context['file'].merge! self.data
           
           context['forloop'] = {
             'name' => 'gallery',
