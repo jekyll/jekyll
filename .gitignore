@@ -5,3 +5,4 @@ pkg/
 *.swp
 *~
 _site/
+.bundle/
