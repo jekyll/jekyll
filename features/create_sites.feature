@@ -117,7 +117,7 @@ Feature: Create sites
   Scenario: Basic site with gallery tag, where globbed files incorporate YAML Front Matter
     Given I have a documentation directory
     And I have a "documentation/introduction.textile" page with layout "chazwozzer" that contains "_Welcome!_"
-    And I have an "index.html" page that contains "{% gallery name:. dir:documentation format:textile %}{{ file.slug }}.html {{ file.layout }}{% endgallery %}"
+    And I have an "index.html" page that contains "{% gallery dir:documentation format:textile %}{{ file.slug }}.html {{ file.layout }}{% endgallery %}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "<em>Welcome!</em>" in "_site/documentation/introduction.html"

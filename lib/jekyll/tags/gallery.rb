@@ -59,11 +59,7 @@ module Jekyll
         attributes[key] = value
       end
       
-      if attributes['name'].nil?
-        raise ArgumentError.new("You did not specify the name of your gallery.")
-      end
-      
-      @name = attributes['name']
+      @name = attributes['name']   || '.'
       @dir  = attributes['dir']    || 'img'
       @fmt  = attributes['format'] || 'jpg'
       @rev  = attributes['reverse'].nil?
@@ -89,7 +85,7 @@ module Jekyll
         files.each_with_index do |filename, index|
           basename = File.basename(filename)
           
-          url = ['', @name, @dir, basename]
+          url = ['', @name, @dir, basename] - ['.']
           
           # This matches '1984-11-27-sluggy-slug.ext', with optional hyphens
           # (so '19841127-slugger.ext' is also valid), and the date is optional.
