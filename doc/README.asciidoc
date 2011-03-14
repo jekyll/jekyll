@@ -1,0 +1,9 @@
+This Book
+=========
+
+This book is written using using the git-scribe toolchain, which can be found at:
+
+http://github.com/schacon/git-scribe
+
+Instructions on how to install the tool and use it for things like editing this book,
+submitting errata and providing translations can be found at that site.
