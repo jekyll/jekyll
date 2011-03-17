@@ -44,8 +44,11 @@ Feature: Image galleries
   Scenario: I want to show a list of documents that incorporate YAML Front Matter
     Given I have a documentation directory
     And I have a "documentation/introduction.textile" page with layout "chazwozzer" that contains "_Welcome!_"
+    And I have a "documentation/wonka-widgets.textile" page with layout "snozberries" that contains "*Golden Ticket!*"
     And I have an "index.html" page that contains "{% gallery dir:documentation format:textile %}{{ file.htmlpath }} {{ file.layout }}{% endgallery %}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "<em>Welcome!</em>" in "_site/documentation/introduction.html"
     And I should see "documentation/introduction.html chazwozzer" in "_site/index.html"
+    And I should see "<p><strong>Golden Ticket!</strong></p>" in "_site/documentation/wonka-widgets.html"
+    And I should see "documentation/wonka-widgets.html snozberries" in "_site/index.html"
