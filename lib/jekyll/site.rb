@@ -1,3 +1,5 @@
+require 'set'
+
 module Jekyll
 
   class Site
@@ -158,13 +160,13 @@ module Jekyll
     # Returns nothing
     def cleanup
       # all files and directories in destination, including hidden ones
-      dest_files = []
+      dest_files = Set.new
       Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
         dest_files << file unless file =~ /\/\.{1,2}$/
       end
 
       # files to be written
-      files = []
+      files = Set.new
       self.posts.each do |post|
         files << post.destination(self.dest)
       end
@@ -176,11 +178,13 @@ module Jekyll
       end
       
       # adding files' parent directories
-      files.each { |file| files << File.dirname(file) unless files.include? File.dirname(file) }
+      dirs = Set.new
+      files.each { |file| dirs << File.dirname(file) }
+      files.merge(dirs)
       
       obsolete_files = dest_files - files
       
-      FileUtils.rm_rf(obsolete_files)
+      FileUtils.rm_rf(obsolete_files.to_a)
     end
 
     # Write static files, pages and posts
@@ -206,7 +210,7 @@ module Jekyll
     # Returns nothing
     def read_directories(dir = '')
       base = File.join(self.source, dir)
-      entries = filter_entries(Dir.entries(base))
+      entries = Dir.chdir(base){ filter_entries(Dir['*']) }
 
       self.read_posts(dir)
 
@@ -264,7 +268,10 @@ module Jekyll
     def filter_entries(entries)
       entries = entries.reject do |e|
         unless ['.htaccess'].include?(e)
-          ['.', '_', '#'].include?(e[0..0]) || e[-1..-1] == '~' || self.exclude.include?(e)
+          ['.', '_', '#'].include?(e[0..0]) ||
+          e[-1..-1] == '~' ||
+          self.exclude.include?(e) ||
+          File.symlink?(e)
         end
       end
     end
