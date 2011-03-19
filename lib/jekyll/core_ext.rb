@@ -84,3 +84,9 @@ class File
     end
   end
 end
+
+class String
+  def titleize
+    split(/[\W_]+/).map(&:capitalize).join ' '
+  end
+end
