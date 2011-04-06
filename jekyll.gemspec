@@ -133,6 +133,7 @@ Gem::Specification.new do |s|
     test/test_rdiscount.rb
     test/test_site.rb
     test/test_tags.rb
+    test/test_redcloth.rb
   ]
   # = MANIFEST =
 
