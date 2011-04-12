@@ -419,7 +419,7 @@ class TestPost < Test::Unit::TestCase
     end
     
     should "process .md as markdown under alternate configuration" do
-      @site.config['markdown_ext'] = 'markdown,mdw,mdwn,md,text'
+      @site.config['markdown_ext'] = 'markdown,mkd,mkdn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
       assert conv.kind_of? Jekyll::MarkdownConverter
