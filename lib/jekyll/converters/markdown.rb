@@ -65,9 +65,10 @@ module Jekyll
       end
       @setup = true
     end
-
+    
     def matches(ext)
-      ext =~ /(markdown|mkdn?|md)/i
+      rgx = '(' + @config['markdown_ext'].gsub(',','|') +')'
+      ext =~ Regexp.new(rgx, Regexp::IGNORECASE)
     end
 
     def output_ext(ext)

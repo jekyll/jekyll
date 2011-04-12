@@ -64,6 +64,9 @@ module Jekyll
     'pygments'     => false,
     'markdown'     => 'maruku',
     'permalink'    => 'date',
+    
+    'markdown_ext' => 'markdown,mdw,mdwn,md',
+    'textile_ext'  => 'textile',
 
     'maruku'       => {
       'use_tex'    => false,
