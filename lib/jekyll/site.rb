@@ -216,7 +216,7 @@ module Jekyll
         if File.directory?(f_abs)
           next if self.dest.sub(/\/$/, '') == f_abs
           read_directories(f_rel)
-        elsif !File.symlink?(f_abs)
+        else
           first3 = File.open(f_abs) { |fd| fd.read(3) }
           if first3 == "---"
             # file appears to have a YAML header so process it as a page
