@@ -96,6 +96,15 @@ opts = OptionParser.new do |opts|
     options['url'] = url
   end
 
+  opts.on("--config [KEY]=[VALUE]", "Set a configuration value") do |key_value|
+    begin
+      key, value = key_value.split('=', 2)
+      options[key] = value
+    rescue
+      puts 'Configuration values must be specified with the form [KEY]=[VALUE]'
+    end
+  end
+
   opts.on("--version", "Display current version") do
     puts "Jekyll " + Jekyll::VERSION
     exit 0
