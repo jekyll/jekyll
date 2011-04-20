@@ -76,6 +76,9 @@ module Jekyll
     'rdiscount'    => {
       'extensions' => []
     },
+    'redcarpet'    => {
+      'extensions' => []
+    },
     'kramdown'        => {
       'auto_ids'      => true,
       'footnote_nr'   => 1,
