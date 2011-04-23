@@ -6,6 +6,7 @@ require File.join(File.dirname(__FILE__), *%w[.. lib jekyll])
 require 'RedCloth'
 require 'rdiscount'
 require 'kramdown'
+require 'redcarpet'
 
 require 'test/unit'
 require 'redgreen'
