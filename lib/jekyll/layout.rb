@@ -5,7 +5,7 @@ module Jekyll
 
     attr_accessor :site
     attr_accessor :ext
-    attr_accessor :data, :content
+    attr_accessor :data, :content, :src_path
 
     # Initialize a new Layout.
     #   +site+ is the Site
@@ -17,6 +17,7 @@ module Jekyll
       @site = site
       @base = base
       @name = name
+      @src_path = File.join(@base, @name) # source path of the layout
 
       self.data = {}
 

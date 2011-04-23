@@ -22,7 +22,6 @@ class TestSite < Test::Unit::TestCase
       before_tags = @site.tags.length
       before_pages = @site.pages.length
       before_static_files = @site.static_files.length
-      before_time = @site.time
 
       @site.process
       assert_equal before_posts, @site.posts.length
@@ -31,65 +30,6 @@ class TestSite < Test::Unit::TestCase
       assert_equal before_tags, @site.tags.length
       assert_equal before_pages, @site.pages.length
       assert_equal before_static_files, @site.static_files.length
-      assert before_time <= @site.time
-    end
-
-    should "write only modified static files" do
-      clear_dest
-      StaticFile.reset_cache
-
-      @site.process
-      some_static_file = @site.static_files[0].path
-      dest = File.expand_path(@site.static_files[0].destination(@site.dest))
-      mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
-
-      # need to sleep because filesystem timestamps have best resolution in seconds
-      sleep 1
-      @site.process
-      mtime2 = File.stat(dest).mtime.to_i
-      assert_equal mtime1, mtime2
-
-      # simulate file modification by user
-      FileUtils.touch some_static_file
-
-      sleep 1
-      @site.process
-      mtime3 = File.stat(dest).mtime.to_i
-      assert_not_equal mtime2, mtime3 # must be regenerated!
-
-      sleep 1
-      @site.process
-      mtime4 = File.stat(dest).mtime.to_i
-      assert_equal mtime3, mtime4 # no modifications, so must be the same
-    end
-
-    should "write static files if not modified but missing in destination" do
-      clear_dest
-      StaticFile.reset_cache
-
-      @site.process
-      some_static_file = @site.static_files[0].path
-      dest = File.expand_path(@site.static_files[0].destination(@site.dest))
-      mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
-
-      # need to sleep because filesystem timestamps have best resolution in seconds
-      sleep 1
-      @site.process
-      mtime2 = File.stat(dest).mtime.to_i
-      assert_equal mtime1, mtime2
-
-      # simulate destination file deletion
-      File.unlink dest
-
-      sleep 1
-      @site.process
-      mtime3 = File.stat(dest).mtime.to_i
-      assert_not_equal mtime2, mtime3 # must be regenerated and differ!
-
-      sleep 1
-      @site.process
-      mtime4 = File.stat(dest).mtime.to_i
-      assert_equal mtime3, mtime4 # no modifications, so must be the same
     end
 
     should "read layouts" do
@@ -132,54 +72,70 @@ class TestSite < Test::Unit::TestCase
       assert_equal includes, @site.filter_entries(excludes + includes)
     end
     
-    context 'with orphaned files in destination' do
+    context "incremental regeneration" do
       setup do
+        # Start with a processed site
         clear_dest
         @site.process
-        # generate some orphaned files:
-        # hidden file
-        File.open(dest_dir('.htpasswd'), 'w')
-        # single file
-        File.open(dest_dir('obsolete.html'), 'w')
-        # single file in sub directory
-        FileUtils.mkdir(dest_dir('qux'))
-        File.open(dest_dir('qux/obsolete.html'), 'w')
-        # empty directory
-        FileUtils.mkdir(dest_dir('quux'))
       end
       
-      teardown do
-        FileUtils.rm_f(dest_dir('.htpasswd'))
-        FileUtils.rm_f(dest_dir('obsolete.html'))
-        FileUtils.rm_rf(dest_dir('qux'))
-        FileUtils.rm_f(dest_dir('quux'))
+      should "do full regeneration when layout changes" do
+        # User modified a layout and post 
+        mod_layout = @site.layouts["default"]
+        mod_post = @site.posts.first
+        
+        mock(@site).process # Full-rebuild should be called
+        
+        @site.incremental([mod_layout.src_path, mod_post.src_path])
+        
+        @site.posts.each do |p|
+          assert !p.dirty # All posts should be clean
+        end
       end
       
-      should 'remove orphaned files in destination' do
-        @site.process
-        assert !File.exist?(dest_dir('.htpasswd'))
-        assert !File.exist?(dest_dir('obsolete.html'))
-        assert !File.exist?(dest_dir('qux'))
-        assert !File.exist?(dest_dir('quux'))
+      should "do incremental regeneration when only posts are modified" do
+        mod_post = @site.posts.first
+        mod_path = mod_post.src_path
+        
+        orig_num_posts = @site.posts.size
+        
+        unmod_post = @site.posts.last
+        # Unmodified post should not be touched
+        dont_allow(unmod_post).write(is_a(String))
+        
+        orig_page = @site.pages.first
+        
+        @site.incremental([mod_path])
+        
+        assert_equal @site.posts.size, orig_num_posts
+        
+        # Compare updated post with original post
+        updated_post = @site.posts.first
+        assert_equal mod_post, updated_post # preserve ordering
+        assert_not_nil updated_post
+        assert_equal mod_post, updated_post # same path
+        assert !mod_post.equal?(updated_post) # but different object
+        
+        # Page should have been updated as well
+        updated_page = @site.pages.first
+        assert_equal orig_page.url, updated_page.url # 
+        assert !updated_page.equal?(orig_page) # 
       end
-
     end
     
     context 'with an invalid markdown processor in the configuration' do
-      should 'not throw an error at initialization time' do
+      
+      should 'give a meaningful error message' do
         bad_processor = 'not a processor name'
-        assert_nothing_raised do
+        begin
           Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+          flunk 'Invalid markdown processors should cause a failure on site creation'
+        rescue RuntimeError => e
+          assert e.to_s =~ /invalid|bad/i
+          assert e.to_s =~ %r{#{bad_processor}}
         end
       end
       
-      should 'throw FatalException at process time' do
-        bad_processor = 'not a processor name'
-        s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
-        assert_raise Jekyll::FatalException do
-          s.process
-        end
-      end
     end
     
   end

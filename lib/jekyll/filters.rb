@@ -1,10 +1,8 @@
-require 'uri'
-
 module Jekyll
 
   module Filters
     def textilize(input)
-      TextileConverter.new.convert(input)
+      RedCloth.new(input).to_html
     end
 
     def date_to_string(date)
@@ -25,10 +23,6 @@ module Jekyll
 
     def cgi_escape(input)
       CGI::escape(input)
-    end
-
-    def uri_escape(input)
-      URI.escape(input)
     end
 
     def number_of_words(input)

@@ -6,7 +6,7 @@ Feature: Site pagination
   Scenario Outline: Paginate with N posts per page
     Given I have a configuration file with "paginate" set to "<num>"
     And I have a _layouts directory
-    And I have an "index.html" page that contains "{{ paginator.posts.size }}"
+    And I have an "index.html" file that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
     And I have the following post:
       | title     | date      | layout  | content                                |

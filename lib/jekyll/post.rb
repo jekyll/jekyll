@@ -18,9 +18,12 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site
-    attr_accessor :data, :content, :output, :ext
-    attr_accessor :date, :slug, :published, :tags, :categories
+    attr_accessor :site, :date, :slug, :ext, :published, :data, :content, :output, :tags, :src_path
+    attr_writer :categories
+
+    def categories
+      @categories ||= []
+    end
 
     # Initialize this Post instance.
     #   +site+ is the Site
@@ -33,17 +36,12 @@ module Jekyll
       @site = site
       @base = File.join(source, dir, '_posts')
       @name = name
+      @src_path = File.join(@base, name) # source path of the post
+      @dirty = true
 
       self.categories = dir.split('/').reject { |x| x.empty? }
       self.process(name)
       self.read_yaml(@base, name)
-
-      #If we've added a date and time to the yaml, use that instead of the filename date
-      #Means we'll sort correctly.
-      if self.data.has_key?('date')
-        # ensure Time via to_s and reparse
-        self.date = Time.parse(self.data["date"].to_s)
-      end
 
       if self.data.has_key?('published') && self.data['published'] == false
         self.published = false
@@ -51,10 +49,26 @@ module Jekyll
         self.published = true
       end
 
-      self.tags = self.data.pluralized_array("tag", "tags")
+      if self.data.has_key?("tag")
+        self.tags = [self.data["tag"]]
+      elsif self.data.has_key?("tags")
+        self.tags = self.data['tags']
+      else
+        self.tags = []
+      end
 
       if self.categories.empty?
-        self.categories = self.data.pluralized_array('category', 'categories')
+        if self.data.has_key?('category')
+          self.categories << self.data['category']
+        elsif self.data.has_key?('categories')
+          # Look for categories in the YAML-header, either specified as
+          # an array or a string.
+          if self.data['categories'].kind_of? String
+            self.categories = self.data['categories'].split
+          else
+            self.categories = self.data['categories']
+          end
+        end
       end
     end
 
@@ -124,12 +138,9 @@ module Jekyll
         "month"      => date.strftime("%m"),
         "day"        => date.strftime("%d"),
         "title"      => CGI.escape(slug),
-        "i_day"      => date.strftime("%d").to_i.to_s,
-        "i_month"    => date.strftime("%m").to_i.to_s,
-        "categories" => categories.join('/'),
-        "output_ext" => self.output_ext
+        "categories" => categories.sort.join('/')
       }.inject(template) { |result, token|
-        result.gsub(/:#{Regexp.escape token.first}/, token.last)
+        result.gsub(/:#{token.first}/, token.last)
       }.gsub(/\/\//, "/")
     end
 
@@ -170,23 +181,14 @@ module Jekyll
     # Returns nothing
     def render(layouts, site_payload)
       # construct payload
-      payload = {
+      payload =
+      {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
         "page" => self.to_liquid
-      }.deep_merge(site_payload)
+      }
+      payload = payload.deep_merge(site_payload)
 
       do_layout(payload, layouts)
-    end
-    
-    # Obtain destination path.
-    #   +dest+ is the String path to the destination dir
-    #
-    # Returns destination file path.
-    def destination(dest)
-      # The url needs to be unescaped in order to preserve the correct filename
-      path = File.join(dest, CGI.unescape(self.url))
-      path = File.join(path, "index.html") if template[/\.html$/].nil?
-      path
     end
 
     # Write the generated post file to the destination directory.
@@ -194,19 +196,28 @@ module Jekyll
     #
     # Returns nothing
     def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
+      FileUtils.mkdir_p(File.join(dest, dir))
+
+      # The url needs to be unescaped in order to preserve the correct filename
+      path = File.join(dest, CGI.unescape(self.url))
+
+      if template[/\.html$/].nil?
+        FileUtils.mkdir_p(path)
+        path = File.join(path, "index.html")
+      end
+
       File.open(path, 'w') do |f|
         f.write(self.output)
       end
+      
+      self.dirty = false
     end
 
     # Convert this post into a Hash for use in Liquid templates.
     #
     # Returns <Hash>
     def to_liquid
-      self.data.deep_merge({
-        "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
+      { "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
         "url"        => self.url,
         "date"       => self.date,
         "id"         => self.id,
@@ -214,7 +225,7 @@ module Jekyll
         "next"       => self.next,
         "previous"   => self.previous,
         "tags"       => self.tags,
-        "content"    => self.content })
+        "content"    => self.content }.deep_merge(self.data)
     end
 
     def inspect

@@ -14,7 +14,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "ensure post count is as expected" do
-      assert_equal 26, @site.posts.size
+      assert_equal 18, @site.posts.size
     end
 
     should "insert site.posts into the index" do
@@ -39,34 +39,6 @@ class TestGeneratedSite < Test::Unit::TestCase
     should "process other static files and generate correct permalinks" do
       assert File.exists?(dest_dir('/about/index.html'))
       assert File.exists?(dest_dir('/contacts.html'))
-    end
-  end
-
-  context "generating limited posts" do
-    setup do
-      clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 5})
-      end
-
-      @site = Site.new(Jekyll.configuration)
-      @site.process
-      @index = File.read(dest_dir('index.html'))
-    end
-
-    should "generate only the specified number of posts" do
-      assert_equal 5, @site.posts.size
-    end
-
-    should "ensure limit posts is 1 or more" do
-      assert_raise ArgumentError do
-        clear_dest
-        stub(Jekyll).configuration do
-          Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
-        end
-
-        @site = Site.new(Jekyll.configuration)
-      end
     end
   end
 end

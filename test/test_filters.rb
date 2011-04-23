@@ -45,9 +45,5 @@ class TestFilters < Test::Unit::TestCase
     should "escape special characters" do
       assert_equal "hey%21", @filter.cgi_escape("hey!")
     end
-
-    should "escape space as %20" do
-      assert_equal "my%20things", @filter.uri_escape("my things")
-    end
   end
 end

@@ -1,12 +1,10 @@
-# Quickly hacked together my Michael Ivey
-# Based on mt.rb by Nick Gerakines, open source and publically
-# available under the MIT license. Use this module at your own risk.
+# Created by Nick Gerakines, open source and publically available under the
+# MIT license. Use this module at your own risk.
+# I'm an Erlang/Perl/C++ guy so please forgive my dirty ruby.
 
 require 'rubygems'
 require 'sequel'
-require 'fastercsv'
 require 'fileutils'
-require File.join(File.dirname(__FILE__),"csv.rb")
 
 # NOTE: This converter requires Sequel and the MySQL gems.
 # The MySQL gem can be difficult to install on OS X. Once you have MySQL
@@ -15,46 +13,28 @@ require File.join(File.dirname(__FILE__),"csv.rb")
 # $ sudo gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
 
 module Jekyll
-  module Mephisto
-    #Accepts a hash with database config variables, exports mephisto posts into a csv
-    #export PGPASSWORD if you must
-    def self.postgres(c)
-      sql = <<-SQL
-      BEGIN;
-      CREATE TEMP TABLE jekyll AS
-        SELECT title, permalink, body, published_at, filter FROM contents
-        WHERE user_id = 1 AND type = 'Article' ORDER BY published_at;
-      COPY jekyll TO STDOUT WITH CSV HEADER;
-      ROLLBACK;
-      SQL
-      command = %Q(psql -h #{c[:host] || "localhost"} -c "#{sql.strip}" #{c[:database]} #{c[:username]} -o #{c[:filename] || "posts.csv"})
-      puts command
-      `#{command}`
-      CSV.process
-    end
-
+  module MT
     # This query will pull blog posts from all entries across all blogs. If
     # you've got unpublished, deleted or otherwise hidden posts please sift
     # through the created posts to make sure nothing is accidently published.
-
-    QUERY = "SELECT id, permalink, body, published_at, title FROM contents WHERE user_id = 1 AND type = 'Article' AND published_at IS NOT NULL ORDER BY published_at"
+    QUERY = "SELECT entry_id, entry_basename, entry_text, entry_text_more, entry_created_on, entry_title FROM mt_entry"
 
     def self.process(dbname, user, pass, host = 'localhost')
-      db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
+      db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host)
 
       FileUtils.mkdir_p "_posts"
 
       db[QUERY].each do |post|
-        title = post[:title]
-        slug = post[:permalink]
-        date = post[:published_at]
-        content = post[:body]
-#         more_content = ''
+        title = post[:entry_title]
+        slug = post[:entry_basename]
+        date = post[:entry_created_on]
+        content = post[:entry_text]
+        more_content = post[:entry_text_more]
 
         # Be sure to include the body and extended body.
-#         if more_content != nil
-#           content = content + " \n" + more_content
-#         end
+        if more_content != nil
+          content = content + " \n" + more_content
+        end
 
         # Ideally, this script would determine the post format (markdown, html
         # , etc) and create files with proper extensions. At this point it

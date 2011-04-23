@@ -7,17 +7,11 @@ module Jekyll
     end
 
     def render(context)
-      includes_dir = File.join(context.registers[:site].source, '_includes')
-
-      if File.symlink?(includes_dir)
-        return "Includes directory '#{includes_dir}' cannot be a symlink"
-      end
-
       if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
         return "Include file '#{@file}' contains invalid characters or sequences"
       end
 
-      Dir.chdir(includes_dir) do
+      Dir.chdir(File.join(context.registers[:site].source, '_includes')) do
         choices = Dir['**/*'].reject { |x| File.symlink?(x) }
         if choices.include?(@file)
           source = File.read(@file)
