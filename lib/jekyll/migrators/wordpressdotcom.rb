@@ -4,6 +4,7 @@ require 'rubygems'
 require 'hpricot'
 require 'fileutils'
 require 'yaml'
+require 'time'
 
 module Jekyll
   
