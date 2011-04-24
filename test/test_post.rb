@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestPost < Test::Unit::TestCase
   def setup_post(file)

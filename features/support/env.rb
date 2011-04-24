@@ -16,4 +16,4 @@ def run_jekyll(opts = {})
 end
 
 # work around "invalid option: --format" cucumber bug (see #296)
-Test::Unit.run = true
+# Test::Unit.run = true

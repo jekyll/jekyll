@@ -1,18 +1,16 @@
 require 'rubygems'
 gem 'RedCloth', '>= 4.2.1'
 
-require File.join(File.dirname(__FILE__), *%w[.. lib jekyll])
+require 'jekyll'
 
 require 'RedCloth'
 require 'rdiscount'
 require 'kramdown'
 
+require 'redgreen' if RUBY_VERSION < '1.9'
 require 'shoulda'
 require 'rr'
 
-require 'test/unit'
-require 'test/unit/ui/console/testrunner'
-class Test::Unit::UI::Console::TestRunner; def guess_color_availability; true; end; end
 
 include Jekyll
 

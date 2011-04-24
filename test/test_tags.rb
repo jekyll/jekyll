@@ -1,6 +1,6 @@
 # coding: utf-8
 
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestTags < Test::Unit::TestCase
 
