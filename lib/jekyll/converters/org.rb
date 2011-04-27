@@ -11,7 +11,7 @@ module Jekyll
       require 'org-ruby'
       @setup = true
     rescue LoadError
-      STDERR.puts 'You are missing a library required for Textile. Please run:'
+      STDERR.puts 'You are missing a library required for Org Mode. Please run:'
       STDERR.puts '  $ [sudo] gem install org-ruby'
       raise FatalException.new("Missing dependency: org-ruby")
     end
