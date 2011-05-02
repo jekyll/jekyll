@@ -67,7 +67,7 @@ module Jekyll
     end
 
     def matches(ext)
-      ext =~ /(markdown|mkdn?|md)/i
+      ext =~ /(markdown|mkdn?|md|text)/i
     end
 
     def output_ext(ext)
