@@ -8,12 +8,11 @@ module Jekyll
     attr_accessor :data, :content, :output
 
     # Initialize a new Page.
-    #   +site+ is the Site
-    #   +base+ is the String path to the <source>
-    #   +dir+ is the String path between <source> and the file
-    #   +name+ is the String filename of the file
     #
-    # Returns <Page>
+    # site - The Site object.
+    # base - The String path to the source.
+    # dir  - The String path between the source and the file.
+    # name - The String filename of the file.
     def initialize(site, base, dir, name)
       @site = site
       @base = base
@@ -26,22 +25,24 @@ module Jekyll
 
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
-    # permalink is absent, set to '/'
+    # permalink is absent, we be '/'
     #
-    # Returns <String>
+    # Returns the String destination directory.
     def dir
       url[-1, 1] == '/' ? url : File.dirname(url)
     end
 
-    # The full path and filename of the post.
-    # Defined in the YAML of the post body
-    # (Optional)
+    # The full path and filename of the post. Defined in the YAML of the post
+    # body.
     #
-    # Returns <String>
+    # Returns the String permalink or nil if none has been set.
     def permalink
       self.data && self.data['permalink']
     end
 
+    # The template of the permalink.
+    #
+    # Returns the template String.
     def template
       if self.site.permalink_style == :pretty && !index? && html?
         "/:basename/"
@@ -50,10 +51,9 @@ module Jekyll
       end
     end
 
-    # The generated relative url of this page
-    # e.g. /about.html
+    # The generated relative url of this page. e.g. /about.html.
     #
-    # Returns <String>
+    # Returns the String url.
     def url
       return @url if @url
 
@@ -74,20 +74,22 @@ module Jekyll
       @url
     end
 
-    # Extract information from the page filename
-    #   +name+ is the String filename of the page file
+    # Extract information from the page filename.
     #
-    # Returns nothing
+    # name - The String filename of the page file.
+    #
+    # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
       self.basename = name[0 .. -self.ext.length-1]
     end
 
     # Add any necessary layouts to this post
-    #   +layouts+ is a Hash of {"name" => "layout"}
-    #   +site_payload+ is the site payload hash
     #
-    # Returns nothing
+    # layouts      - The Hash of {"name" => "layout"}.
+    # site_payload - The site payload Hash.
+    #
+    # Returns nothing.
     def render(layouts, site_payload)
       payload = {
         "page" => self.to_liquid,
@@ -97,27 +99,33 @@ module Jekyll
       do_layout(payload, layouts)
     end
 
+    # Convert this Page's data to a Hash suitable for use by Liquid.
+    #
+    # Returns the Hash representation of this Page.
     def to_liquid
       self.data.deep_merge({
         "url"        => File.join(@dir, self.url),
         "content"    => self.content })
     end
-    
+
     # Obtain destination path.
-    #   +dest+ is the String path to the destination dir
     #
-    # Returns destination file path.
+    # dest - The String path to the destination dir.
+    #
+    # Returns the destination file path String.
     def destination(dest)
-      # The url needs to be unescaped in order to preserve the correct filename
+      # The url needs to be unescaped in order to preserve the correct
+      # filename.
       path = File.join(dest, @dir, CGI.unescape(self.url))
       path = File.join(path, "index.html") if self.url =~ /\/$/
       path
     end
 
     # Write the generated page file to the destination directory.
-    #   +dest+ is the String path to the destination dir
     #
-    # Returns nothing
+    # dest - The String path to the destination dir.
+    #
+    # Returns nothing.
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
@@ -126,14 +134,17 @@ module Jekyll
       end
     end
 
+    # Returns the object as a debug String.
     def inspect
       "#<Jekyll:Page @name=#{self.name.inspect}>"
     end
 
+    # Returns the Boolean of whether this Page is HTML or not.
     def html?
       output_ext == '.html'
     end
 
+    # Returns the Boolean of whether this Page is an index file or not.
     def index?
       basename == 'index'
     end
