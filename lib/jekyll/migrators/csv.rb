@@ -1,7 +1,7 @@
 module Jekyll
   module CSV
-    #Reads a csv with title, permalink, body, published_at, and filter.
-    #It creates a post file for each row in the csv
+    # Reads a csv with title, permalink, body, published_at, and filter.
+    # It creates a post file for each row in the csv
     def self.process(file = "posts.csv")
       FileUtils.mkdir_p "_posts"
       posts = 0

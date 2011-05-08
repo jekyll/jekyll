@@ -3,7 +3,6 @@ require 'fileutils'
 
 module Jekyll
   module Marley
-
     def self.regexp
       { :id    => /^\d{0,4}-{0,1}(.*)$/,
         :title => /^#\s*(.*)\s+$/,
