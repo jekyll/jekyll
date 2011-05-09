@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
 
   s.require_paths = %w[lib]
 
+  s.platform       = $platform || RUBY_PLATFORM[/java/] || 'ruby'
+
   s.executables = ["jekyll"]
   s.default_executable = 'jekyll'
 
@@ -24,7 +26,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = %w[README.textile LICENSE]
 
   s.add_runtime_dependency('liquid', [">= 1.9.0"])
-  s.add_runtime_dependency('classifier', [">= 1.3.1"])
+  s.add_runtime_dependency('classifier', [">= 1.3.1"]) unless s.platform.to_s == 'java'
   s.add_runtime_dependency('directory_watcher', [">= 1.1.1"])
   s.add_runtime_dependency('maruku', [">= 0.5.9"])
 

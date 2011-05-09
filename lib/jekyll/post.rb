@@ -146,7 +146,8 @@ module Jekyll
     # Returns [<Post>]
     def related_posts(posts)
       return [] unless posts.size > 1
-
+      return [] if defined?(JRUBY_VERSION)
+      
       if self.site.lsi
         self.class.lsi ||= begin
           puts "Running the classifier... this could take a while."
