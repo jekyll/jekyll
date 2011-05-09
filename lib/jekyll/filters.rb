@@ -3,18 +3,43 @@ require 'uri'
 module Jekyll
 
   module Filters
+    # Convert a Textile string into HTML output.
+    #
+    # input - The Textile String to convert.
+    #
+    # Returns the HTML formatted String.
     def textilize(input)
       TextileConverter.new.convert(input)
     end
 
+    # Format a date in short format e.g. "27 Jan 2011".
+    #
+    # date - the Time to format.
+    #
+    # Returns the formatting String.
     def date_to_string(date)
       date.strftime("%d %b %Y")
     end
 
+    # Format a date in long format e.g. "27 January 2011".
+    #
+    # date - The Time to format.
+    #
+    # Returns the formatted String.
     def date_to_long_string(date)
       date.strftime("%d %B %Y")
     end
 
+    # Format a date for use in XML.
+    #
+    # date - The Time to format.
+    #
+    # Examples
+    #
+    #   date_to_xmlschema(Time.now)
+    #   # => "2011-04-24T20:34:46+08:00"
+    #
+    # Returns the formatted String.
     def date_to_xmlschema(date)
       date.xmlschema
     end
@@ -23,6 +48,17 @@ module Jekyll
       CGI.escapeHTML(input)
     end
 
+    # CGI escape a string for use in a URL. Replaces any special characters
+    # with appropriate %XX replacements.
+    #
+    # input - The String to escape.
+    #
+    # Examples
+    #
+    #   cgi_escape('foo,bar;baz?')
+    #   # => "foo%2Cbar%3Bbaz%3F"
+    #
+    # Returns the escaped String.
     def cgi_escape(input)
       CGI::escape(input)
     end
@@ -31,10 +67,26 @@ module Jekyll
       URI.escape(input)
     end
 
+    # Count the number of words in the input string.
+    #
+    # input - The String on which to operate.
+    #
+    # Returns the Integer word count.
     def number_of_words(input)
       input.split.length
     end
 
+    # Join an array of things into a string by separating with commes and the
+    # word "and" for the last one.
+    #
+    # array - The Array of Strings to join.
+    #
+    # Examples
+    #
+    #   array_to_sentence_string(["apples", "oranges", "grapes"])
+    #   # => "apples, oranges, and grapes"
+    #
+    # Returns the formatted String.
     def array_to_sentence_string(array)
       connector = "and"
       case array.length

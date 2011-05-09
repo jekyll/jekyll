@@ -1,8 +1,14 @@
 module Jekyll
 
   class Pagination < Generator
+    # This generator is safe from arbitrary code execution.
     safe true
 
+    # Generate paginated pages if necessary.
+    #
+    # site - The Site.
+    #
+    # Returns nothing.
     def generate(site)
       site.pages.dup.each do |page|
         paginate(site, page) if Pager.pagination_enabled?(site.config, page.name)
@@ -10,9 +16,11 @@ module Jekyll
     end
 
     # Paginates the blog's posts. Renders the index.html file into paginated
-    # directories, ie: page2/index.html, page3/index.html, etc and adds more
+    # directories, e.g.: page2/index.html, page3/index.html, etc and adds more
     # site-wide data.
-    #   +page+ is the index.html Page that requires pagination
+    #
+    # site - The Site.
+    # page - The index.html Page that requires pagination.
     #
     # {"paginator" => { "page" => <Number>,
     #                   "per_page" => <Number>,
@@ -36,22 +44,38 @@ module Jekyll
         end
       end
     end
-
   end
 
   class Pager
     attr_reader :page, :per_page, :posts, :total_posts, :total_pages, :previous_page, :next_page
 
+    # Calculate the number of pages.
+    #
+    # all_posts - The Array of all Posts.
+    # per_page  - The Integer of entries per page.
+    #
+    # Returns the Integer number of pages.
     def self.calculate_pages(all_posts, per_page)
-      num_pages = all_posts.size / per_page.to_i
-      num_pages = num_pages + 1 if all_posts.size % per_page.to_i != 0
-      num_pages
+      (all_posts.size.to_f / per_page.to_i).ceil
     end
 
+    # Determine if pagination is enabled for a given file.
+    #
+    # config - The configuration Hash.
+    # file   - The String filename of the file.
+    #
+    # Returns true if pagination is enabled, false otherwise.
     def self.pagination_enabled?(config, file)
       file == 'index.html' && !config['paginate'].nil?
     end
 
+    # Initialize a new Pager.
+    #
+    # config    - The Hash configuration of the site.
+    # page      - The Integer page number.
+    # all_posts - The Array of all the site's Posts.
+    # num_pages - The Integer number of pages or nil if you'd like the number
+    #             of pages calculated.
     def initialize(config, page, all_posts, num_pages = nil)
       @page = page
       @per_page = config['paginate'].to_i
@@ -70,6 +94,9 @@ module Jekyll
       @next_page = @page != @total_pages ? @page + 1 : nil
     end
 
+    # Convert this Pager's data to a Hash suitable for use by Liquid.
+    #
+    # Returns the Hash representation of this Pager.
     def to_liquid
       {
         'page' => page,
@@ -82,6 +109,5 @@ module Jekyll
       }
     end
   end
-
 
 end

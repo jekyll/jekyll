@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestCoreExt < Test::Unit::TestCase
   context "hash" do

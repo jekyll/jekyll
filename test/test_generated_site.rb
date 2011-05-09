@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestGeneratedSite < Test::Unit::TestCase
   context "generated sites" do

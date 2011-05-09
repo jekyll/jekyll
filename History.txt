@@ -1,3 +1,19 @@
+== HEAD
+  * Major Enhancements
+    * Add command line importer functionality (#253)
+  * Minor Enhancements
+    * Switch to Albino gem
+    * Bundler support
+    * Use English library to avoid hoops (#292)
+    * Add Posterous importer (#254)
+    * Fixes for Wordpress importer (#274, #252, #271)
+    * Better error message for invalid post date (#291)
+    * Print formatted fatal exceptions to stdout on build failure
+    * Add Tumblr importer (#323)
+    * Add Enki importer (#320)
+  * Bug Fixes
+    * Secure additional path exploits
+
 == 0.10.0 / 2010-12-16
   * Bug Fixes
     * Add --no-server option.
@@ -75,7 +91,7 @@
     * Empty tags causes error in read_posts (#84)
     * Fix pagination to adhere to read/render/write paradigm
   * Test Enhancement
-    * cucumber features no longer use site.ports.first where a better
+    * cucumber features no longer use site.posts.first where a better
       alternative is available
 
 == 0.5.6 / 2010-01-08

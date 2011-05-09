@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestPost < Test::Unit::TestCase
   def setup_post(file)
@@ -50,6 +50,12 @@ class TestPost < Test::Unit::TestCase
         @post.categories = []
         @post.process(@fake_file)
         assert_equal "/2008/09/09/foo-bar.html", @post.url
+      end
+
+      should "raise a good error on invalid post date" do
+        assert_raise Jekyll::FatalException do
+          @post.process("2009-27-03-foo-bar.textile")
+        end
       end
 
       should "CGI escape urls" do

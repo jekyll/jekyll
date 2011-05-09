@@ -18,22 +18,23 @@ Gem::Specification.new do |s|
   s.require_paths = %w[lib]
 
   s.executables = ["jekyll"]
-  s.default_executable = 'jekyll'
 
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.textile LICENSE]
 
-  s.add_runtime_dependency('liquid', [">= 1.9.0"])
-  s.add_runtime_dependency('classifier', [">= 1.3.1"])
-  s.add_runtime_dependency('directory_watcher', [">= 1.1.1"])
-  s.add_runtime_dependency('maruku', [">= 0.5.9"])
+  s.add_runtime_dependency('liquid', ">= 1.9.0")
+  s.add_runtime_dependency('classifier', ">= 1.3.1")
+  s.add_runtime_dependency('directory_watcher', ">= 1.1.1")
+  s.add_runtime_dependency('maruku', ">= 0.5.9")
+  s.add_runtime_dependency('kramdown', ">= 0.13.2")
+  s.add_runtime_dependency('albino', ">= 1.3.2")
 
-  s.add_development_dependency('redgreen', [">= 4.2.1"])
-  s.add_development_dependency('shoulda', [">= 4.2.1"])
-  s.add_development_dependency('rr', [">= 4.2.1"])
-  s.add_development_dependency('cucumber', [">= 4.2.1"])
-  s.add_development_dependency('RedCloth', [">= 4.2.1"])
-  s.add_development_dependency('kramdown', [">= 0.12.0"])
+  s.add_development_dependency('redgreen', ">= 1.2.2")
+  s.add_development_dependency('shoulda', ">= 2.11.3")
+  s.add_development_dependency('rr', ">= 1.0.2")
+  s.add_development_dependency('cucumber', ">= 0.10.0")
+  s.add_development_dependency('RedCloth', ">= 4.2.1")
+  s.add_development_dependency('rdiscount', ">= 1.6.5")
 
   # = MANIFEST =
   s.files = %w[

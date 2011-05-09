@@ -1,6 +1,8 @@
+Gemfile.lock
 test/dest
 *.gem
 pkg/
 *.swp
 *~
 _site/
+.bundle/

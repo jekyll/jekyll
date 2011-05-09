@@ -36,11 +36,22 @@ module Jekyll
     # This query will pull blog posts from all entries across all blogs. If
     # you've got unpublished, deleted or otherwise hidden posts please sift
     # through the created posts to make sure nothing is accidently published.
-
-    QUERY = "SELECT id, permalink, body, published_at, title FROM contents WHERE user_id = 1 AND type = 'Article' AND published_at IS NOT NULL ORDER BY published_at"
+    QUERY = "SELECT id, \
+                    permalink, \
+                    body, \
+                    published_at, \
+                    title \
+             FROM contents \
+             WHERE user_id = 1 AND \
+                   type = 'Article' AND \
+                   published_at IS NOT NULL \
+             ORDER BY published_at"
 
     def self.process(dbname, user, pass, host = 'localhost')
-      db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
+      db = Sequel.mysql(dbname, :user => user,
+                                :password => pass,
+                                :host => host,
+                                :encoding => 'utf8')
 
       FileUtils.mkdir_p "_posts"
 
@@ -49,16 +60,10 @@ module Jekyll
         slug = post[:permalink]
         date = post[:published_at]
         content = post[:body]
-#         more_content = ''
 
-        # Be sure to include the body and extended body.
-#         if more_content != nil
-#           content = content + " \n" + more_content
-#         end
-
-        # Ideally, this script would determine the post format (markdown, html
-        # , etc) and create files with proper extensions. At this point it
-        # just assumes that markdown will be acceptable.
+        # Ideally, this script would determine the post format (markdown,
+        # html, etc) and create files with proper extensions. At this point
+        # it just assumes that markdown will be acceptable.
         name = [date.year, date.month, date.day, slug].join('-') + ".markdown"
 
         data = {
