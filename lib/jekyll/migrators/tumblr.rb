@@ -8,7 +8,6 @@ require 'date'
 
 module Jekyll
   module Tumblr
-
     def self.process(url, grab_images = false)
       current_page = 0
 
@@ -17,7 +16,7 @@ module Jekyll
         doc = Nokogiri::HTML(Iconv.conv("utf-8", f.charset, f.readlines.join("\n")))
 
         puts "Page: #{current_page + 1} - Posts: #{(doc/:tumblr/:posts/:post).size}"
-        
+
         FileUtils.mkdir_p "_posts/tumblr"
 
         (doc/:tumblr/:posts/:post).each do |post|
@@ -41,19 +40,19 @@ module Jekyll
             content << "<br/>" + CGI::unescapeHTML(post.at("link-description").inner_html) unless post.at("link-description") == nil
           elsif post['type'] == "photo"
             content = ""
-            
+
             if post.at("photo-link-url") != nil
               content = "<a href=\"#{post.at("photo-link-url").inner_html}\"><img src=\"#{save_file((post/"photo-url")[1].inner_html, grab_images)}\"/></a>"
             else
               content = "<img src=\"#{save_file((post/"photo-url")[1].inner_html, grab_images)}\"/>"
             end
-      
+
             if post.at("photo-caption") != nil
               content << "<br/>" unless content == nil
               content << CGI::unescapeHTML(post.at("photo-caption").inner_html)
             end
           elsif post['type'] == "audio"
-            content = CGI::unescapeHTML(post.at("audio-player").inner_html)       
+            content = CGI::unescapeHTML(post.at("audio-player").inner_html)
             content << CGI::unescapeHTML(post.at("audio-caption").inner_html) unless post.at("audio-caption") == nil
           elsif post['type'] == "quote"
             content = "<blockquote>" + CGI::unescapeHTML(post.at("quote-text").inner_html) + "</blockquote>"
@@ -61,23 +60,23 @@ module Jekyll
           elsif post['type'] == "conversation"
             title = post.at("conversation-title").inner_html unless post.at("conversation-title") == nil
             content = "<section><dialog>"
-      
+
             (post/:conversation/:line).each do |line|
               content << "<dt>" + line['label'] + "</dt><dd>" + line.inner_html + "</dd>" unless line['label'] == nil || line == nil
             end
-      
+
             content << "<section><dialog>"
-          elsif post['type'] == "video"      
+          elsif post['type'] == "video"
             title = post.at("video-title").inner_html unless post.at("video-title") == nil
             content = CGI::unescapeHTML(post.at("video-player").inner_html)
             content << CGI::unescapeHTML(post.at("video-caption").inner_html) unless post.at("video-caption") == nil
           end # End post types
 
           name = "#{Date.parse(post['date']).to_s}-#{post['id'].downcase.gsub(/[^a-z0-9]/, '-')}.html"
-  
+
           if title != nil || content != nil && name != nil
             File.open("_posts/tumblr/#{name}", "w") do |f|
-      
+
               f.puts <<-HEADER
 ---
 layout: post
@@ -106,16 +105,15 @@ HEADER
     def self.save_file(url, grab_image = false)
       unless grab_image == false
         FileUtils.mkdir_p "tumblr_files"
-      
+
         File.open("tumblr_files/#{url.split('/').last}", "w") do |f|
           f.write(open(url).read)
         end
-      
+
         return "/tumblr_files/#{url.split('/').last}"
       else
         return url
       end
     end
-
   end
 end

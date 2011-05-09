@@ -164,6 +164,7 @@ if ARGV.size > 0
       :mephisto => 'Mephisto',
       :mt => 'MT',
       :textpattern => 'TextPattern',
+      :tumblr => 'Tumblr',
       :typo => 'Typo'
     }
     
