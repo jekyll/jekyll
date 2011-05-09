@@ -94,8 +94,8 @@ module Jekyll
     }
   }
 
-  # Generate a Jekyll configuration Hash by merging the default options
-  # with anything in _config.yml, and adding the given options on top.
+  # Public: Generate a Jekyll configuration Hash by merging the default
+  # options with anything in _config.yml, and adding the given options on top.
   #
   # override - A Hash of config directives that override any options in both
   #            the defaults and the config file. See Jekyll::DEFAULTS for a
