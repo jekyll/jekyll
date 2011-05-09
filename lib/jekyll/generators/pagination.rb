@@ -56,9 +56,7 @@ module Jekyll
     #
     # Returns the Integer number of pages.
     def self.calculate_pages(all_posts, per_page)
-      num_pages = all_posts.size / per_page.to_i
-      num_pages = num_pages + 1 if all_posts.size % per_page.to_i != 0
-      num_pages
+      (all_posts.size.to_f / per_page.to_i).ceil
     end
 
     # Determine if pagination is enabled for a given file.
