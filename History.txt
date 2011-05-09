@@ -10,6 +10,7 @@
     * Better error message for invalid post date (#291)
     * Print formatted fatal exceptions to stdout on build failure
     * Add Tumblr importer (#323)
+    * Add Enki importer (#320)
   * Bug Fixes
     * Secure additional path exploits
 

@@ -8,19 +8,19 @@ require 'sequel'
 module Jekyll
   module Enki
     SQL = <<-EOS
-    SELECT p.id,
-           p.title,
-           p.slug,
-           p.body,
-           p.published_at as date,
-           p.cached_tag_list as tags
+      SELECT p.id,
+             p.title,
+             p.slug,
+             p.body,
+             p.published_at as date,
+             p.cached_tag_list as tags
       FROM posts p
     EOS
 
-    # just working with postgres, but can be easily adapted
-    # to work with both mysql and postgres
-    def self.process(dbname, user, pass, host='localhost')
-      FileUtils.mkdir_p '_posts'
+    # Just working with postgres, but can be easily adapted
+    # to work with both mysql and postgres.
+    def self.process(dbname, user, pass, host = 'localhost')
+      FileUtils.mkdir_p('_posts')
       db = Sequel.postgres(:database => dbname,
                            :user => user,
                            :password => pass,
@@ -28,7 +28,6 @@ module Jekyll
                            :encoding => 'utf8')
 
       db[SQL].each do |post|
-
         name = [ sprintf("%.04d", post[:date].year),
                  sprintf("%.02d", post[:date].month),
                  sprintf("%.02d", post[:date].day),
@@ -46,6 +45,5 @@ module Jekyll
         end
       end
     end
-
-  end   # module Enki
-end   # module Jekyll
+  end
+end

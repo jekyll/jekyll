@@ -161,6 +161,7 @@ if ARGV.size > 0
       :wordpress => 'Wordpress',
       :csv => 'CSV',
       :drupal => 'Drupal',
+      :enki => 'Enki',
       :mephisto => 'Mephisto',
       :mt => 'MT',
       :textpattern => 'TextPattern',
