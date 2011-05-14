@@ -56,7 +56,6 @@ Gem::Specification.new do |s|
     features/support/env.rb
     jekyll.gemspec
     lib/jekyll.rb
-    lib/jekyll/albino.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
@@ -75,7 +74,7 @@ Gem::Specification.new do |s|
     lib/jekyll/migrators/mt.rb
     lib/jekyll/migrators/textpattern.rb
     lib/jekyll/migrators/typo.rb
-    lib/jekyll/migrators/wordpress.com.rb
+    lib/jekyll/migrators/wordpressdotcom.rb
     lib/jekyll/migrators/wordpress.rb
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
