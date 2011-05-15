@@ -103,7 +103,12 @@ module Jekyll
             }).to_html
           end
         when 'rdiscount'
-          RDiscount.new(content, *@rdiscount_extensions).to_html
+          rd = RDiscount.new(content, *@rdiscount_extensions)
+          html = rd.to_html
+          if rd.generate_toc and html.include? @config['rdiscount']['toc_token']
+            html.gsub! @config['rdiscount']['toc_token'], rd.toc_content
+          end
+          html
         when 'maruku'
           Maruku.new(content).to_html
       end
