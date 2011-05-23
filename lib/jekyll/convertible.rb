@@ -1,3 +1,5 @@
+require 'set'
+
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
 #
@@ -86,6 +88,8 @@ module Jekyll
 
       # recursively render layouts
       layout = layouts[self.data["layout"]]
+      used = Set.new([layout])
+
       while layout
         payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
 
@@ -95,7 +99,13 @@ module Jekyll
           puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
         end
 
-        layout = layouts[layout.data["layout"]]
+        if layout = layouts[layout.data["layout"]]
+          if used.include?(layout)
+            layout = nil # avoid recursive chain
+          else
+            used << layout
+          end
+        end
       end
     end
   end
