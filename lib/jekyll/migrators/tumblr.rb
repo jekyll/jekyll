@@ -65,7 +65,7 @@ module Jekyll
               content << "<dt>" + line['label'] + "</dt><dd>" + line.inner_html + "</dd>" unless line['label'] == nil || line == nil
             end
 
-            content << "<section><dialog>"
+            content << "</section></dialog>"
           elsif post['type'] == "video"
             title = post.at("video-title").inner_html unless post.at("video-title") == nil
             content = CGI::unescapeHTML(post.at("video-player").inner_html)
