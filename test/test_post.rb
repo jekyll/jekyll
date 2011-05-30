@@ -397,6 +397,47 @@ class TestPost < Test::Unit::TestCase
       post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
       assert_equal ['foo'], post.categories
     end
-
   end
+  
+  context "converter file extension settings" do
+    setup do
+      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      @site = Site.new(Jekyll.configuration)
+    end
+    
+    should "process .md as markdown under default configuration" do
+      post = setup_post '2011-04-12-md-extension.md'
+      conv = post.converter
+      assert conv.kind_of? Jekyll::MarkdownConverter
+    end
+    
+    should "process .text as indentity under default configuration" do
+      post = setup_post '2011-04-12-text-extension.text'
+      conv = post.converter
+      assert conv.kind_of? Jekyll::IdentityConverter
+    end
+    
+    should "process .text as markdown under alternate configuration" do
+      @site.config['markdown_ext'] = 'markdown,mdw,mdwn,md,text'
+      post = setup_post '2011-04-12-text-extension.text'
+      conv = post.converter
+      assert conv.kind_of? Jekyll::MarkdownConverter
+    end
+    
+    should "process .md as markdown under alternate configuration" do
+      @site.config['markdown_ext'] = 'markdown,mkd,mkdn,md,text'
+      post = setup_post '2011-04-12-text-extension.text'
+      conv = post.converter
+      assert conv.kind_of? Jekyll::MarkdownConverter
+    end
+    
+    should "process .text as textile under alternate configuration" do
+      @site.config['textile_ext'] = 'textile,text'
+      post = setup_post '2011-04-12-text-extension.text'
+      conv = post.converter
+      assert conv.kind_of? Jekyll::TextileConverter
+    end
+    
+  end
+  
 end
