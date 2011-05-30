@@ -32,10 +32,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency('redgreen', ">= 1.2.2")
   s.add_development_dependency('shoulda', ">= 2.11.3")
   s.add_development_dependency('rr', ">= 1.0.2")
-  s.add_development_dependency('cucumber', ">= 0.10.0")
+  s.add_development_dependency('cucumber', ">= 0.10.3")
   s.add_development_dependency('RedCloth', ">= 4.2.1")
   s.add_development_dependency('rdiscount', ">= 1.6.5")
-
+  s.add_development_dependency('redcarpet', ">= 1.9.0")
+  
   # = MANIFEST =
   s.files = %w[
     History.txt
