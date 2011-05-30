@@ -12,6 +12,15 @@ module Jekyll
       TextileConverter.new.convert(input)
     end
 
+    # Convert a Markdown string into HTML output using RDiscount.
+    #
+    # input - The Markdown String to convert.
+    #
+    # Returns the HTML formatted String.
+    def rdiscount(input)
+      RDiscount.new(input).to_html
+    end
+
     # Format a date in short format e.g. "27 Jan 2011".
     #
     # date - the Time to format.

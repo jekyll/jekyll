@@ -14,6 +14,10 @@ class TestFilters < Test::Unit::TestCase
       assert_equal "<p>something <strong>really</strong> simple</p>", @filter.textilize("something *really* simple")
     end
 
+    should "rdiscount with simple string" do
+      assert_equal "<p>something <strong>really</strong> simple</p>\n", @filter.rdiscount("something **really** simple")
+    end
+
     should "convert array to sentence string with no args" do
       assert_equal "", @filter.array_to_sentence_string([])
     end
