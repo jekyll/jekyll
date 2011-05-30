@@ -10,6 +10,15 @@ module Jekyll
       return if @setup
       # Set the Markdown interpreter (and Maruku self.config, if necessary)
       case @config['markdown']
+        when 'redcarpet'
+          begin
+            require 'redcarpet'
+            @redcarpet_extensions = @config['redcarpet']['extensions'].map { |e| e.to_sym }
+          rescue LoadError
+            STDERR.puts 'You are missing a library required for Markdown. Please run:'
+            STDERR.puts '  $ [sudo] gem install redcarpet'
+            raise FatalException.new("Missing dependency: redcarpet")
+          end
         when 'kramdown'
           begin
             require 'kramdown'
@@ -77,6 +86,8 @@ module Jekyll
     def convert(content)
       setup
       case @config['markdown']
+        when 'redcarpet'
+          Redcarpet.new(content, *@redcarpet_extensions).to_html
         when 'kramdown'
           # Check for use of coderay
           if @config['kramdown']['use_coderay']
