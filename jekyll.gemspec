@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
 
   s.name              = 'jekyll'
   s.version           = '0.10.0'
-  s.date              = '2010-12-16'
+  s.date              = '2011-05-30'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
   
   # = MANIFEST =
   s.files = %w[
+    Gemfile
     History.txt
     LICENSE
     README.textile
@@ -57,7 +58,6 @@ Gem::Specification.new do |s|
     features/support/env.rb
     jekyll.gemspec
     lib/jekyll.rb
-    lib/jekyll/albino.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
@@ -71,13 +71,16 @@ Gem::Specification.new do |s|
     lib/jekyll/layout.rb
     lib/jekyll/migrators/csv.rb
     lib/jekyll/migrators/drupal.rb
+    lib/jekyll/migrators/enki.rb
     lib/jekyll/migrators/marley.rb
     lib/jekyll/migrators/mephisto.rb
     lib/jekyll/migrators/mt.rb
+    lib/jekyll/migrators/posterous.rb
     lib/jekyll/migrators/textpattern.rb
+    lib/jekyll/migrators/tumblr.rb
     lib/jekyll/migrators/typo.rb
-    lib/jekyll/migrators/wordpress.com.rb
     lib/jekyll/migrators/wordpress.rb
+    lib/jekyll/migrators/wordpressdotcom.rb
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
     lib/jekyll/post.rb
@@ -133,6 +136,7 @@ Gem::Specification.new do |s|
     test/test_pager.rb
     test/test_post.rb
     test/test_rdiscount.rb
+    test/test_redcarpet.rb
     test/test_site.rb
     test/test_tags.rb
   ]
