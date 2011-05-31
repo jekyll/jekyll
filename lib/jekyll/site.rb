@@ -314,5 +314,18 @@ module Jekyll
       end
     end
 
+    # Get the implementation class for the given Converter.
+    #
+    # klass - The Class of the Converter to fetch.
+    #
+    # Returns the Converter instance implementing the given Converter.
+    def getConverterImpl(klass)
+      matches = self.converters.select { |c| c.class == klass }
+      if impl = matches.first
+        impl
+      else
+        raise "Converter implementation not found for #{klass}"
+      end
+    end
   end
 end

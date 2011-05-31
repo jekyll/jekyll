@@ -12,7 +12,6 @@ require 'redgreen' if RUBY_VERSION < '1.9'
 require 'shoulda'
 require 'rr'
 
-
 include Jekyll
 
 # Send STDERR into the void to suppress program output messages

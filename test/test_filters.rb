@@ -3,6 +3,11 @@ require 'helper'
 class TestFilters < Test::Unit::TestCase
   class JekyllFilter
     include Jekyll::Filters
+
+    def initialize
+      site = Jekyll::Site.new(Jekyll.configuration({}))
+      @context = Liquid::Context.new({}, {}, { :site => site })
+    end
   end
 
   context "filters" do
@@ -14,8 +19,8 @@ class TestFilters < Test::Unit::TestCase
       assert_equal "<p>something <strong>really</strong> simple</p>", @filter.textilize("something *really* simple")
     end
 
-    should "rdiscount with simple string" do
-      assert_equal "<p>something <strong>really</strong> simple</p>\n", @filter.rdiscount("something **really** simple")
+    should "markdownify with simple string" do
+      assert_equal "<p>something <strong>really</strong> simple</p>", @filter.markdownify("something **really** simple")
     end
 
     should "convert array to sentence string with no args" do
