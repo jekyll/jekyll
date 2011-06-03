@@ -3,8 +3,9 @@ module Jekyll
   class Page
     include Convertible
 
+    attr_writer :dir
     attr_accessor :site, :pager
-    attr_accessor :name, :ext, :basename, :dir
+    attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
     # Initialize a new Page.
