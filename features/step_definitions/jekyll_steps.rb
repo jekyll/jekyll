@@ -121,7 +121,7 @@ When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
 end
 
 Then /^the (.*) directory should exist$/ do |dir|
-  assert File.directory?(dir)
+  assert File.directory?(dir), "The directory \"#{dir}\" does not exist"
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
