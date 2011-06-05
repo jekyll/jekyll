@@ -37,13 +37,19 @@ module Jekyll
         if num_page > 1
           newpage = Page.new(site, site.source, page.dir, page.name)
           newpage.pager = pager
-          newpage.dir = File.join(page.dir, "page#{num_page}")
+          newpage.dir = File.join(page.dir, paginate_path(site, num_page))
           site.pages << newpage
         else
           page.pager = pager
         end
       end
     end
+
+    private
+      def paginate_path(site, num_page)
+        format = site.config['paginate_path'] || "page:num"
+        format.sub(':num', num_page.to_s)
+      end
   end
 
   class Pager
