@@ -52,13 +52,17 @@ while posts.any?
 		tags = post.tags.map do |t|
 			t['name']
 		end
+
+		perm = URI::parse(post.full_url)
+
 		# Get the relevant fields as a hash, delete empty fields and convert
 		# to YAML for the header
 		data = {
+			'permalink' => perm.path + "/index.html",
 			'layout' => 'post',
 			'title' => post.title.to_s,
 			'published' => published,
-			'tags' => tags,
+			'categories' => tags,
 		}.delete_if { |k,v| v.nil? || v == ''}.to_yaml
 
 		content = post.body_html
