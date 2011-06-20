@@ -75,10 +75,12 @@ module Jekyll
       payload["pygments_prefix"] = converter.pygments_prefix
       payload["pygments_suffix"] = converter.pygments_suffix
 
-      begin
-        self.content = Liquid::Template.parse(self.content).render(payload, info)
-      rescue => e
-        puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
+      if apply_data?
+        begin
+          self.content = Liquid::Template.parse(self.content).render(payload, info)
+        rescue => e
+          puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
+        end
       end
 
       self.transform
@@ -107,6 +109,14 @@ module Jekyll
           end
         end
       end
+    end
+
+    # Whether apply template data or not.
+    #
+    # Returns true if "apply_data" data isn't "no" nor
+    # "false", false otherwise.
+    def apply_data?
+      not ["no", "false"].include?(self.data["apply_data"].to_s.downcase)
     end
   end
 end
