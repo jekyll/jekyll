@@ -45,11 +45,7 @@ module Jekyll
         self.date = Time.parse(self.data["date"].to_s)
       end
 
-      if self.data.has_key?('published') && self.data['published'] == false
-        self.published = false
-      else
-        self.published = true
-      end
+      self.published = data['published'] != false
 
       self.tags = self.data.pluralized_array("tag", "tags")
 
