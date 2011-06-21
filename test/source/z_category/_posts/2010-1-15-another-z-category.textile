@@ -1,0 +1,6 @@
+---
+layout: default
+title: Categories
+---
+
+Created for categories sorting test.

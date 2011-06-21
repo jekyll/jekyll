@@ -29,17 +29,17 @@ class Hash
   # Returns an array
   def pluralized_array(singular_key, plural_key)
     hash = self
+
     if hash.has_key?(singular_key)
-      array = [hash[singular_key]] if hash[singular_key]
-    elsif hash.has_key?(plural_key)
+      [hash[singular_key]].compact
+    else
       case hash[plural_key]
       when String
-        array = hash[plural_key].split
+        hash[plural_key].split
       when Array
-        array = hash[plural_key].compact
+        hash[plural_key].compact
       end
-    end
-    array || []
+    end || []
   end
 end
 
