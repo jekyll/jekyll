@@ -131,6 +131,26 @@ class TestSite < Test::Unit::TestCase
       @site.exclude = excludes
       assert_equal includes, @site.filter_entries(excludes + includes)
     end
+
+    context 'with two posts marked with "pizza" tag' do
+      should "sort them in descending order" do
+        sorted_posts = '[<Post: /2009/05/18/tags>, '+
+                       '<Post: /publish_test/2008/02/02/published>]'
+
+        @site.process
+        assert_equal sorted_posts, @site.tags["pizza"].inspect
+      end
+    end
+
+    context 'with two posts inside "z_category" category' do
+      should "sort them in descending order" do
+        sorted_posts = '[<Post: /z_category/2010/01/15/another-z-category>, '+
+                       '<Post: /z_category/2008/09/23/categories>]'
+
+        @site.process
+        assert_equal sorted_posts, @site.categories["z_category"].inspect
+      end
+    end
     
     context 'with orphaned files in destination' do
       setup do

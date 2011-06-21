@@ -12,6 +12,15 @@ module Jekyll
     # Public: Initialize a new Site.
     #
     # config - A Hash containing site configuration details.
+    #  safe            — (boolean) ???
+    #  lsi             — (boolean) produces an index for related posts,
+    #                    see http://en.wikipedia.org/wiki/Latent_Semantic_Indexing
+    #  pygments        — (boolean) enables highlight tag with Pygments
+    #  permalink_style — (:date, :pretty, :none)
+    #  exclude         — (array) a list of directories and files to exclude
+    #                    from the conversion
+    #  future          — (boolean) render future dated posts
+    #  limit_posts     — (integer) limit the number of posts to publish
     def initialize(config)
       self.config          = config.clone
 
@@ -77,17 +86,8 @@ module Jekyll
         end
       end
 
-      self.converters = Jekyll::Converter.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
-
-      self.generators = Jekyll::Generator.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
+      self.converters = build_plugins(Jekyll::Converter.subclasses)
+      self.generators = build_plugins(Jekyll::Generator.subclasses)
     end
 
     # Read Site data from disk and load it into internal data structures.
@@ -104,12 +104,9 @@ module Jekyll
     # Returns nothing.
     def read_layouts(dir = '')
       base = File.join(self.source, dir, "_layouts")
-      return unless File.exists?(base)
-      entries = []
-      Dir.chdir(base) { entries = filter_entries(Dir['*.*']) }
 
-      entries.each do |f|
-        name = f.split(".")[0..-2].join(".")
+      valid_filenames_from base do |f|
+        name = File.basename(f, '.*')
         self.layouts[name] = Layout.new(self, base, f)
       end
     end
@@ -123,42 +120,37 @@ module Jekyll
     # Returns nothing.
     def read_directories(dir = '')
       base = File.join(self.source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir['*']) }
 
-      self.read_posts(dir)
+      read_posts(dir)
 
-      entries.each do |f|
-        f_abs = File.join(base, f)
-        f_rel = File.join(dir, f)
-        if File.directory?(f_abs)
-          next if self.dest.sub(/\/$/, '') == f_abs
-          read_directories(f_rel)
-        elsif !File.symlink?(f_abs)
-          first3 = File.open(f_abs) { |fd| fd.read(3) }
+      valid_filenames_from(base, :pattern => '**/*') do |f|
+        if File.directory?(f)
+          read_posts(f)
+        elsif f !~ /_posts/
+          # we're not processing files in the _posts directories
+          first3 = File.open(f) { |fd| fd.read(3) }
           if first3 == "---"
             # file appears to have a YAML header so process it as a page
-            pages << Page.new(self, self.source, dir, f)
+            pages << Page.new(self, self.source, File.dirname(f), File.basename(f))
           else
             # otherwise treat it as a static file
-            static_files << StaticFile.new(self, self.source, dir, f)
+            static_files << StaticFile.new(self, self.source, File.dirname(f), File.basename(f))
           end
         end
       end
     end
 
-    # Read all the files in <source>/<dir>/_posts and create a new Post
-    # object with each one.
+    # Recursively read all the files in <source>/<dir>/_posts and create
+    # a new Post object with each one.
     #
     # dir - The String relative path of the directory to read.
     #
     # Returns nothing.
     def read_posts(dir)
       base = File.join(self.source, dir, '_posts')
-      return unless File.exists?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 
       # first pass processes, but does not yet render post content
-      entries.each do |f|
+      valid_filenames_from(base, :pattern => '**/*.*') do |f|
         if Post.valid?(f)
           post = Post.new(self, self.source, dir, f)
 
@@ -189,12 +181,8 @@ module Jekyll
     #
     # Returns nothing.
     def render
-      self.posts.each do |post|
-        post.render(self.layouts, site_payload)
-      end
-
-      self.pages.each do |page|
-        page.render(self.layouts, site_payload)
+      inner_elements_of(posts, pages) do |el|
+        el.send(:render, layouts, site_payload)
       end
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
@@ -215,14 +203,8 @@ module Jekyll
 
       # files to be written
       files = Set.new
-      self.posts.each do |post|
-        files << post.destination(self.dest)
-      end
-      self.pages.each do |page|
-        files << page.destination(self.dest)
-      end
-      self.static_files.each do |sf|
-        files << sf.destination(self.dest)
+      inner_elements_of(posts, pages, static_files) do |el|
+        files << el.send(:destination, dest)
       end
 
       # adding files' parent directories
@@ -239,14 +221,8 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      self.posts.each do |post|
-        post.write(self.dest)
-      end
-      self.pages.each do |page|
-        page.write(self.dest)
-      end
-      self.static_files.each do |sf|
-        sf.write(self.dest)
+      inner_elements_of(posts, pages, static_files) do |el|
+        el.send(:write, dest)
       end
     end
 
@@ -304,7 +280,7 @@ module Jekyll
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries)
-      entries = entries.reject do |e|
+      entries.reject do |e|
         unless ['.htaccess'].include?(e)
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||
@@ -325,6 +301,48 @@ module Jekyll
         impl
       else
         raise "Converter implementation not found for #{klass}"
+      end
+    end
+
+    private
+
+    # Collect safe plugins (or all plugins if Safe mode is off) and initialize
+    # them with the Site config.
+    #
+    # Returns Array.
+    def build_plugins(plugin_array)
+      plugin_array.select do |c|
+        !self.safe || c.safe
+      end.map do |c|
+        c.new(self.config)
+      end
+    end
+
+    # Collect valid files/directories from supplied path and pass their names
+    # with relative paths to the block.
+    # Changes current directory inside the block to the given path.
+    #
+    # opt — hash, which can include
+    # :pattern key (the same as Dir.glob pattern). Default pattern is "*.*".
+    #
+    # Returns nothing.
+    def valid_filenames_from(path, opt = {})
+      return unless File.exists?(path)
+
+      pattern = opt[:pattern] || '*.*'
+
+      Dir.chdir(path) do
+        filter_entries(Dir[pattern]).each { |f| yield f }
+      end
+    end
+
+    # Iterate through all given arguments and if they are array too,
+    # pass each inner element to the block.
+    #
+    # Returns nothing.
+    def inner_elements_of(*args)
+      args.each do |el|
+        el.is_a?(Array) && el.each { |innner| yield innner }
       end
     end
   end
