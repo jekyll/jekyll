@@ -39,6 +39,10 @@ Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
   end
 end
 
+Given /^I have a (.*) layout that contains:$/ do |layout, text|
+  File.open(File.join('_layouts', layout), 'w') { |f| f.write(text) }
+end
+
 Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
@@ -125,7 +129,7 @@ Then /^the (.*) directory should exist$/ do |dir|
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
-  assert_match Regexp.new(text), File.open(file).readlines.join
+  assert_match Regexp.new(text), File.read(file).gsub("\n", '')
 end
 
 Then /^the "(.*)" file should exist$/ do |file|
