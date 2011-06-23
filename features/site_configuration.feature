@@ -22,11 +22,25 @@ Feature: Site configuration
     Given I have an "Rakefile" file that contains "I want to be excluded"
     And I have an "README" file that contains "I want to be excluded"
     And I have an "index.html" file that contains "I want to be included"
-    And I have a configuration file with "exclude" set to "Rakefile", "README"
+    And I have a configuration file with "exclude" set to "[Rakefile, README, index]"
     When I run jekyll
     Then I should see "I want to be included" in "_site/index.html"
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
+
+  Scenario: Exclude files inline with Regexp
+    Given I have a _posts directory
+    And I have the following posts:
+      | title            | date      | content                           |
+      | Apples           | 3/27/2009 | An article about apples           |
+      | Oranges          | 4/1/2009  | An article about oranges          |
+      | Apples and honey | 4/5/2009  | An article about apples and honey |
+    And I have a configuration file with "exclude" set to ".+apples.+"
+    When I run jekyll
+    Then the _site directory should exist
+    And the "_site/2009/04/01/oranges.html" file should exist
+    And the "_site/2009/03/27/apples.html" file should not exist
+    And the "_site/2009/04/05/apples-and-honey.html" file should not exist
 
   Scenario: Exclude files with YAML array
     Given I have an "Rakefile" file that contains "I want to be excluded"
@@ -40,6 +54,38 @@ Feature: Site configuration
     Then I should see "I want to be included" in "_site/index.html"
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
+
+  Scenario: Include files inline
+    Given I have a js/_dojo directory
+    And I have a "js/_dojo/script.js" file that contains "// comment"
+    And I have a configuration file with "include" set to "_dojo"
+    When I run jekyll
+    And I should see "// comment" in "_site/js/_dojo/script.js"
+
+  Scenario: Include files inline with Regexp
+    Given I have a js/_dojo1 directory
+    And I have a js/_dojo2 directory
+    And I have a "js/_dojo1/script.js" file that contains "// comment"
+    And I have a "js/_dojo2/script.js" file that contains "// another comment"
+    And I have a configuration file with "include" set to "_dojo.*"
+    When I run jekyll
+    And I should see "// comment" in "_site/js/_dojo1/script.js"
+    And I should see "// another comment" in "_site/js/_dojo2/script.js"
+
+  Scenario: Include files with YAML array
+    Given I have a ".rvmrc" file that contains "I want to be included"
+    And I have an ".htpasswd" file that contains "I want to be excluded"
+    And I have a _files directory
+    And I have a "_files/sample.textile" file that contains "Textile sample"
+    And I have a configuration file with "include" set to:
+      | value    |
+      | .rvmrc   |
+      | _files   |
+      | Rakefile |
+    When I run jekyll
+    Then I should see "I want to be included" in "_site/.rvmrc"
+    And I should see "Textile sample" in "_site/_files/sample.textile"
+    And the "_site/.htpasswd" file should not exist
 
   Scenario: Use RDiscount for markup
     Given I have an "index.markdown" page that contains "[Google](http://google.com)"

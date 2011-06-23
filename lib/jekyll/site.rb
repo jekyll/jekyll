@@ -5,20 +5,23 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins,
+                  :limit_posts, :include
 
     attr_accessor :converters, :generators
 
     # Public: Initialize a new Site.
     #
     # config - A Hash containing site configuration details.
-    #  safe            — (boolean) ???
+    #  safe            — (boolean) if true will not load unsafe plugins
     #  lsi             — (boolean) produces an index for related posts,
     #                    see http://en.wikipedia.org/wiki/Latent_Semantic_Indexing
     #  pygments        — (boolean) enables highlight tag with Pygments
     #  permalink_style — (:date, :pretty, :none)
-    #  exclude         — (array) a list of directories and files to exclude
-    #                    from the conversion
+    #  exclude         — (array) a list of Regexp filename patterns to exclude
+    #                    from the file conversion
+    #  include         — (array) a list of Regexp filename patterns forbidden by
+    #                    default to include in the file conversion
     #  future          — (boolean) render future dated posts
     #  limit_posts     — (integer) limit the number of posts to publish
     def initialize(config)
@@ -31,7 +34,12 @@ module Jekyll
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
-      self.exclude         = config['exclude'] || []
+      # by default we skip files like .hello, #hello, _posts, trash~
+      self.exclude         = regexp_map((config['exclude'] || []).to_a +
+                                        ['[\._#].+', '.+~'])
+      # by default we don't want to skip .htaccess
+      self.include         = regexp_map((config['include'] || []).to_a +
+                                        ['.htaccess'])
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
 
@@ -112,8 +120,8 @@ module Jekyll
     end
 
     # Recursively traverse directories to find posts, pages and static files
-    # that will become part of the site according to the rules in
-    # filter_entries.
+    # that will become part of the site according to the rules in the
+    # Site.excluded and Site.included.
     #
     # dir - The String relative path of the directory to read.
     #
@@ -126,8 +134,7 @@ module Jekyll
       valid_filenames_from(base, :pattern => '**/*') do |f|
         if File.directory?(f)
           read_posts(f)
-        elsif f !~ /_posts/
-          # we're not processing files in the _posts directories
+        else
           first3 = File.open(f) { |fd| fd.read(3) }
           if first3 == "---"
             # file appears to have a YAML header so process it as a page
@@ -181,7 +188,7 @@ module Jekyll
     #
     # Returns nothing.
     def render
-      inner_elements_of(posts, pages) do |el|
+      [posts, pages].flatten.each do |el|
         el.send(:render, layouts, site_payload)
       end
 
@@ -203,7 +210,7 @@ module Jekyll
 
       # files to be written
       files = Set.new
-      inner_elements_of(posts, pages, static_files) do |el|
+      [posts, pages, static_files].flatten.each do |el|
         files << el.send(:destination, dest)
       end
 
@@ -221,7 +228,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      inner_elements_of(posts, pages, static_files) do |el|
+      [posts, pages, static_files].flatten.each do |el|
         el.send(:write, dest)
       end
     end
@@ -271,25 +278,6 @@ module Jekyll
           "tags"       => post_attr_hash('tags')})}
     end
 
-    # Filter out any files/directories that are hidden or backup files (start
-    # with "." or "#" or end with "~"), or contain site content (start with "_"),
-    # or are excluded in the site configuration, unless they are web server
-    # files such as '.htaccess'.
-    #
-    # entries - The Array of file/directory entries to filter.
-    #
-    # Returns the Array of filtered entries.
-    def filter_entries(entries)
-      entries.reject do |e|
-        unless ['.htaccess'].include?(e)
-          ['.', '_', '#'].include?(e[0..0]) ||
-          e[-1..-1] == '~' ||
-          self.exclude.include?(e) ||
-          File.symlink?(e)
-        end
-      end
-    end
-
     # Get the implementation class for the given Converter.
     #
     # klass - The Class of the Converter to fetch.
@@ -332,18 +320,40 @@ module Jekyll
       pattern = opt[:pattern] || '*.*'
 
       Dir.chdir(path) do
-        filter_entries(Dir[pattern]).each { |f| yield f }
+        Dir.glob(pattern, File::FNM_DOTMATCH).delete_if do |el|
+          File.symlink?(el) || restricted_filename?(el)
+        end.each { |f| yield f }
       end
     end
 
-    # Iterate through all given arguments and if they are array too,
-    # pass each inner element to the block.
+    # Treat filename which match pattern from Site.excluded and none of the
+    # patterns from Site.included as restricted.
     #
-    # Returns nothing.
-    def inner_elements_of(*args)
-      args.each do |el|
-        el.is_a?(Array) && el.each { |innner| yield innner }
-      end
+    # Returns Boolean.
+    def restricted_filename?(filename)
+      # we test each directory/file in the filename separately
+      chunks = filename.split(File::SEPARATOR)
+
+      chunks.detect do |chunk|
+        chunk =~ /^\.{1,2}$/ || # skip . and ..
+        exclude.detect { |exc| exc =~ chunk } && !include.detect { |inc| inc =~ chunk }
+      end != nil
+    end
+
+    # Take an Array of strings and convert it to the Array of Regexps.
+    # Escapes (\) any dot in the string unless it's escaped or included in the
+    # expression like .*, .+, .{3}.
+    # Sets ^$ anchors before converting to the Regexp.
+    #
+    # Returns Array.
+    def regexp_map(array)
+      array.map do |el|
+        if el.is_a?(String)
+          Regexp.new(
+            el.gsub(/(^|[^\\])\.([^\+\*\?\{]|$)/, '\1\.\2').insert(0, '^') + '$'
+          )
+        end
+      end.compact
     end
   end
 end

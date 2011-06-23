@@ -120,16 +120,21 @@ class TestSite < Test::Unit::TestCase
               .baz.markdow foo.markdown~]
       ent2 = %w[.htaccess _posts _pages bla.bla]
 
-      assert_equal %w[foo.markdown bar.markdown baz.markdown], @site.filter_entries(ent1)
-      assert_equal %w[.htaccess bla.bla], @site.filter_entries(ent2)
+      assert_equal %w[foo.markdown bar.markdown baz.markdown],
+        ent1.delete_if {|el| @site.send(:restricted_filename?, el) }
+      assert_equal %w[.htaccess bla.bla],
+        ent2.delete_if {|el| @site.send(:restricted_filename?, el) }
     end
 
     should "filter entries with exclude" do
       excludes = %w[README TODO]
       includes = %w[index.html site.css]
 
-      @site.exclude = excludes
-      assert_equal includes, @site.filter_entries(excludes + includes)
+      @site.exclude = @site.send(:regexp_map, excludes)
+      assert_equal includes,
+                   (includes + excludes).delete_if { |el|
+                     @site.send(:restricted_filename?, el)
+                   }
     end
 
     context 'with two posts marked with "pizza" tag' do
