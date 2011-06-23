@@ -25,6 +25,8 @@ require 'English'
 require 'liquid'
 require 'maruku'
 require 'albino'
+# will load only if we have haml templates
+autoload :Haml, 'haml'
 
 # internal requires
 require 'jekyll/core_ext'
