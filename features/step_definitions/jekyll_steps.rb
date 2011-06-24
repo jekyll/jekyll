@@ -32,6 +32,10 @@ Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   end
 end
 
+Given /^I have an? "(.*)" file that contains:$/ do |file, text|
+  File.open(file, 'w') { |f| f.write(text) }
+end
+
 Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
   File.open(File.join('_layouts', layout + '.html'), 'w') do |f|
     f.write(text)
@@ -39,7 +43,7 @@ Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
   end
 end
 
-Given /^I have a (.*) layout that contains:$/ do |layout, text|
+Given /^I have an? (.*) layout that contains:$/ do |layout, text|
   File.open(File.join('_layouts', layout), 'w') { |f| f.write(text) }
 end
 
@@ -126,6 +130,10 @@ end
 
 Then /^the (.*) directory should exist$/ do |dir|
   assert File.directory?(dir)
+end
+
+Then /^the (.*) directory should not exist$/ do |dir|
+  assert !File.exist?(dir)
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
