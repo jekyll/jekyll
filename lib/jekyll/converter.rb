@@ -1,6 +1,9 @@
 module Jekyll
 
   class Converter < Plugin
+    # Directory in which convertion happens
+    attr_accessor :base
+
     # Public: Get or set the pygments prefix. When an argument is specified,
     # the prefix will be set. If no argument is specified, the current prefix
     # will be returned.

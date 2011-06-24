@@ -94,7 +94,8 @@ module Jekyll
     def render(layouts, site_payload)
       payload = {
         "page" => self.to_liquid,
-        'paginator' => pager.to_liquid
+        'paginator' => pager.to_liquid,
+        'base' => File.join(@base, @dir)
       }.deep_merge(site_payload)
 
       do_layout(payload, layouts)
