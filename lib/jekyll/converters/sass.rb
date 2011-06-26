@@ -12,23 +12,32 @@ module Jekyll
     end
 
     def convert(content)
-      Sass::Engine.new(sanitize(content),
-                       :syntax => :scss,
-                       :style => :compressed,
-                       :load_paths => [base]
-                      ).render
-    rescue
+      # preventing infinite loops while parsing (due to possible incorrect
+      # using of Sass control directives. We don't want to fully disable control
+      # directives as Compass uses it)
+      Timeout::timeout(3) do
+        Sass::Engine.new(content,
+                         :syntax => :scss,
+                         :style => :compressed,
+                         :load_paths => compass_framework_dirs << base
+                        ).render
+      end
+    rescue Sass::SyntaxError, Timeout::Error
       content
     end
 
     private
 
-    # Malform SASS control directives @if, @for, @each, @while.
-    # Hacking with @f@foror will not work -> @f-or
+    # Paths to the stylesheets in the Compass gem.
     #
-    # Temporary solution, I believe (see https://github.com/nex3/sass/issues/123)
-    def sanitize(content)
-      content.gsub(/@((if)|(for)|(each)|(while))/, '-')
+    # Returns Array.
+    def compass_framework_dirs
+      @compass_dirs ||= begin
+        gemdir = Gem.loaded_specs['compass'].full_gem_path
+        ['blueprint', 'compass'].map do |lib|
+           File.join(gemdir, "frameworks/#{lib}/stylesheets")
+        end
+      end
     end
   end
 

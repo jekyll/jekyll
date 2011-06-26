@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('albino', ">= 1.3.2")
   s.add_runtime_dependency('haml', ">= 3.1.2")
   s.add_runtime_dependency('sass', ">= 3.1.3")
+  s.add_runtime_dependency('compass', ">= 0.11.3")
 
   s.add_development_dependency('redgreen', ">= 1.2.2")
   s.add_development_dependency('shoulda', ">= 2.11.3")
