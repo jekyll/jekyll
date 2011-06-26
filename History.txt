@@ -1,7 +1,7 @@
 == HEAD
   * Major Enhancements
     * Add command line importer functionality (#253)
-    * Add Recarpet Markdown support (#318)
+    * Add Redcarpet Markdown support (#318)
     * Make markdown/textile extensions configurable (#312)
     * Add `markdownify` filter
   * Minor Enhancements
