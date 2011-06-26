@@ -20,6 +20,7 @@ require 'fileutils'
 require 'time'
 require 'yaml'
 require 'English'
+autoload :Timeout, 'timeout'
 
 # 3rd party
 require 'liquid'

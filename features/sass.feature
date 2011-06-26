@@ -41,6 +41,18 @@ Feature: Sass
     And the "_site/css/rounded.css" file should not exist
     And the "_site/css/in" directory should not exist
 
+  Scenario: Basic Compass using
+    Given I have a css directory
+    And I have a "css/style.scss" file that contains:
+    """
+    ---
+    ---
+    @import "compass/css3/border-radius";
+    .simple   { @include border-radius(4px, 4px); }
+    """
+    When I run jekyll
+    Then I should see "-moz-border-radius:4px / 4px;" in "_site/css/style.css"
+
   Scenario: Security issue
     Given I have a css directory
     And I have a "css/style.scss" file that contains:
