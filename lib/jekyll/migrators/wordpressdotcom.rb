@@ -26,6 +26,12 @@ module Jekyll
 
         date = Time.parse(item.at('wp:post_date').inner_text)
         status = item.at('wp:status').inner_text
+	if status == "draft"
+		published = false
+	else
+		published = true
+	end
+
         type = item.at('wp:post_type').inner_text
         tags = (item/:category).map{|c| c.inner_text}.reject{|c| c == 'Uncategorized'}.uniq
 
@@ -43,6 +49,7 @@ module Jekyll
           'tags'   => tags,
           'status'   => status,
           'type'   => type,
+          'published' => published,
           'meta'   => metas
         }
 
