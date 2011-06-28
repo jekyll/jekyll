@@ -19,6 +19,11 @@ module Jekyll
       (doc/:channel/:item).each do |item|
         title = item.at(:title).inner_text.strip
         permalink_title = item.at('wp:post_name').inner_text
+        # Fallback to "prettified" title if post_name is empty (can happen)
+	if permalink_title == ""
+		permalink_title = title.downcase.split.join('-')
+	end
+
         date = Time.parse(item.at('wp:post_date').inner_text)
         status = item.at('wp:status').inner_text
         type = item.at('wp:post_type').inner_text
