@@ -11,9 +11,7 @@ module Jekyll
   # wordpress.com blog (/wp-admin/export.php).
   module WordpressDotCom
     def self.process(filename = "wordpress.xml")
-      FileUtils.mkdir_p "_posts"
-      posts = 0
-
+      import_count = Hash.new
       doc = Hpricot::XML(File.read(filename))
 
       (doc/:channel/:item).each do |item|
@@ -26,10 +24,11 @@ module Jekyll
 
         date = Time.parse(item.at('wp:post_date').inner_text)
         status = item.at('wp:status').inner_text
-	if status == "draft"
-		published = false
-	else
+
+	if status == "publish" 
 		published = true
+	else
+		published = false
 	end
 
         type = item.at('wp:post_type').inner_text
@@ -44,7 +43,7 @@ module Jekyll
 
         name = "#{date.strftime('%Y-%m-%d')}-#{permalink_title}.html"
         header = {
-          'layout' => 'post',
+          'layout' => type,
           'title'  => title,
           'tags'   => tags,
           'status'   => status,
@@ -53,16 +52,22 @@ module Jekyll
           'meta'   => metas
         }
 
-        File.open("_posts/#{name}", "w") do |f|
+        FileUtils.mkdir_p "_#{type}s"
+        File.open("_#{type}s/#{name}", "w") do |f|
           f.puts header.to_yaml
           f.puts '---'
           f.puts item.at('content:encoded').inner_text
         end
-
-        posts += 1
+	if import_count[type] == nil
+		import_count[type] = 1
+	else
+		import_count[type] += 1
+	end
       end
 
-      puts "Imported #{posts} posts"
+      import_count.each do |key, value|
+        puts "Imported #{value} #{key}s"
+      end
     end
   end
 end
