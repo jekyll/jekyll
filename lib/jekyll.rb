@@ -65,6 +65,9 @@ module Jekyll
     'pygments'     => false,
     'markdown'     => 'maruku',
     'permalink'    => 'date',
+    
+    'markdown_ext' => 'markdown,mkd,mkdn,md',
+    'textile_ext'  => 'textile',
 
     'maruku'       => {
       'use_tex'    => false,
@@ -74,6 +77,9 @@ module Jekyll
       'png_url'    => '/images/latex'
     },
     'rdiscount'    => {
+      'extensions' => []
+    },
+    'redcarpet'    => {
       'extensions' => []
     },
     'kramdown'        => {

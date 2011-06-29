@@ -9,7 +9,20 @@ module Jekyll
     #
     # Returns the HTML formatted String.
     def textilize(input)
-      TextileConverter.new.convert(input)
+      site = @context.registers[:site]
+      converter = site.getConverterImpl(Jekyll::TextileConverter)
+      converter.convert(input)
+    end
+
+    # Convert a Markdown string into HTML output.
+    #
+    # input - The Markdown String to convert.
+    #
+    # Returns the HTML formatted String.
+    def markdownify(input)
+      site = @context.registers[:site]
+      converter = site.getConverterImpl(Jekyll::MarkdownConverter)
+      converter.convert(input)
     end
 
     # Format a date in short format e.g. "27 Jan 2011".

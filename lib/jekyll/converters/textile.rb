@@ -17,7 +17,8 @@ module Jekyll
     end
 
     def matches(ext)
-      ext =~ /textile/i
+      rgx = '(' + @config['textile_ext'].gsub(',','|') +')'
+      ext =~ Regexp.new(rgx, Regexp::IGNORECASE)
     end
 
     def output_ext(ext)

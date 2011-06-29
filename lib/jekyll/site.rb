@@ -266,7 +266,7 @@ module Jekyll
     def post_attr_hash(post_attr)
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
-      hash = Hash.new { |hash, key| hash[key] = Array.new }
+      hash = Hash.new { |hsh, key| hsh[key] = Array.new }
       self.posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
       hash.values.map { |sortme| sortme.sort! { |a, b| b <=> a } }
       hash
@@ -314,5 +314,18 @@ module Jekyll
       end
     end
 
+    # Get the implementation class for the given Converter.
+    #
+    # klass - The Class of the Converter to fetch.
+    #
+    # Returns the Converter instance implementing the given Converter.
+    def getConverterImpl(klass)
+      matches = self.converters.select { |c| c.class == klass }
+      if impl = matches.first
+        impl
+      else
+        raise "Converter implementation not found for #{klass}"
+      end
+    end
   end
 end
