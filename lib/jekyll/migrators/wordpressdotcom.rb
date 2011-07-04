@@ -18,18 +18,18 @@ module Jekyll
         title = item.at(:title).inner_text.strip
         permalink_title = item.at('wp:post_name').inner_text
         # Fallback to "prettified" title if post_name is empty (can happen)
-	if permalink_title == ""
-		permalink_title = title.downcase.split.join('-')
-	end
+        if permalink_title == ""
+          permalink_title = title.downcase.split.join('-')
+        end
 
         date = Time.parse(item.at('wp:post_date').inner_text)
         status = item.at('wp:status').inner_text
 
-	if status == "publish" 
-		published = true
-	else
-		published = false
-	end
+        if status == "publish" 
+          published = true
+        else
+          published = false
+        end
 
         type = item.at('wp:post_type').inner_text
         tags = (item/:category).map{|c| c.inner_text}.reject{|c| c == 'Uncategorized'}.uniq
@@ -59,7 +59,7 @@ module Jekyll
           f.puts item.at('content:encoded').inner_text
         end
 
-	import_count[type] += 1
+        import_count[type] += 1
       end
 
       import_count.each do |key, value|
