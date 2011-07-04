@@ -11,7 +11,7 @@ module Jekyll
   # wordpress.com blog (/wp-admin/export.php).
   module WordpressDotCom
     def self.process(filename = "wordpress.xml")
-      import_count = Hash.new
+      import_count = Hash.new(0)
       doc = Hpricot::XML(File.read(filename))
 
       (doc/:channel/:item).each do |item|
@@ -58,11 +58,8 @@ module Jekyll
           f.puts '---'
           f.puts item.at('content:encoded').inner_text
         end
-	if import_count[type] == nil
-		import_count[type] = 1
-	else
-		import_count[type] += 1
-	end
+
+	import_count[type] += 1
       end
 
       import_count.each do |key, value|
