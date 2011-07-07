@@ -32,7 +32,7 @@ module Jekyll
         begin
           self.data = YAML.load($1)
         rescue => e
-          puts "YAML Exception: #{e.message}"
+          puts "YAML Exception reading #{name}: #{e.message}"
         end
       end
 
@@ -78,7 +78,7 @@ module Jekyll
       begin
         self.content = Liquid::Template.parse(self.content).render(payload, info)
       rescue => e
-        puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
+        puts "Liquid Exception: #{e.message} in #{self.name}"
       end
 
       self.transform
