@@ -1,0 +1,231 @@
+/* BEG */
+/* ---------------------------------------------------------------------------
+   Bare AsciiDoc styles
+   Ryan Tomayko <r@tomayko.com>
+--------------------------------------------------------------------------- */
+
+body {
+	font-family:verdana,helvetica,arial,sans-serif;
+	font-size:81.25%;   /* 13px */
+	line-height:1.538;  /* 20px */
+	margin:40px 50px;
+	max-width:53.8461538462em; /* 790px */
+	color:#333;
+}
+
+em {
+	font-style:italic;
+}
+
+strong {
+	font-weight:bold;
+	color:#000;
+}
+
+tt {
+	font-family:consolas, 'lucida console', 'bitstream vera sans mono',
+	           'courier new', monospace;
+	color:#000;
+}
+
+p, ul, ol, dl {
+	margin:10px 0
+}
+
+dl { }
+
+dt {
+	font-weight:normal;
+	color:#000;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family:'lucida grande',georgia,verdana,helvetica,arial,sans-serif;
+	font-weight:normal;
+	color:#000;
+}
+
+h1 {
+	font-size:30px;
+	line-height:1.428;
+	margin:20px 0;
+}
+
+h2 {
+	font-size:23px;
+	line-height:1.36363636; /* repeating, of course */
+	margin:20px 0;
+}
+
+h2 + .sectionbody {}
+
+h3 {
+	font-size:18px;
+	line-height:1.1;
+	margin:30px 0 10px 0;
+}
+
+h4 {
+	font-size:13px;
+	font-weight:bold;
+	line-height:1.538;
+}
+
+h5 {
+	font-size:13px;
+	font-style:italic;
+	line-height:1.538;
+}
+
+pre {
+	font-size:larger;
+}
+
+#header { 
+	text-align:center;
+	margin-bottom:30px;
+}
+
+#header h1 { margin-bottom:0 }
+
+
+.title, .sidebar-title {
+	font-weight:normal;
+	margin-bottom:0;
+}
+
+.admonitionblock .title {
+	font-weight:bold;
+}
+
+.admonitionblock {
+	margin:30px 0px;
+	color:#555;
+}
+
+.admonitionblock td.icon {
+	width:30px;
+	padding-right:20px;
+	padding-left:20px;
+	text-transform:uppercase;
+	font-weight:bold;
+	color:#888;
+}
+
+.listingblock .content {
+	border:1px solid silver;
+	background:#eee;
+	padding:5px;
+}
+
+.listingblock .content pre {
+	margin:0;
+}
+
+.literalblock .content {
+	margin-left:40px;
+}
+
+.verseblock .content {
+	white-space:pre
+}
+
+.sidebarblock .sidebar-content {
+	border:1px solid silver;
+	background:#FFFFEE;
+	padding:0 10px;
+	color:#222;
+	font-size:smaller;
+	line-height:1.5;
+}
+
+.sidebar-title {
+	margin:10px 0;
+	font-weight:bold;
+	color:#442;
+}
+
+.quoteblock-content {
+	font-style:italic;
+	color:#444;
+	margin-left:40px;
+}
+
+.quoteblock-content .attribution {
+	font-style:normal;
+	text-align:right;
+	color:#000;
+}
+
+.exampleblock-content *:first-child { margin-top:0 }
+.exampleblock-content {
+	border-left:2px solid silver;
+	padding-left:8px;
+}
+
+#footer {
+	font-size:11px;
+	margin-top:40px;
+	border-top:1px solid silver;
+	color:#555;
+}
+
+#author {
+	color:#000;
+	text-transform:uppercase
+}
+
+/* vim: set ft=css ts=4 sw=4 noexpandtab: */
+
+/* END @import url(bare.css); */
+
+/* ---------------------------------------------------------------------------
+   FreeBSD AsciiDoc Theme
+   Ryan Tomayko <r@tomayko.com>
+
+   Based on The FreeBSD Handbook and various other FreeBSD documenration.
+--------------------------------------------------------------------------- */
+
+body {
+  font-family:verdana,helvetica,arial,sans-serif;
+  font-size:100%;
+  color:#000;
+}
+
+tt { color:#007A00 }
+pre tt { color:#000 }
+
+dt { color:#000 }
+
+h1, h2, h3, h4, h5 {
+  font-family:'lucida grande',helvetica,verdana,sans-serif;
+  color:#900;
+  font-weight:bold;
+}
+
+#header {
+  text-align:left;
+}
+#header h1 { margin-bottom:40px }
+
+h1 {
+  font-size:36px;
+  line-height:1;
+  margin:40px 0;
+}
+
+h2 {
+  font-size:28px;
+  line-height:1;
+  margin:30px 0 20px 0;
+}
+
+.sectionbody {
+  margin-left:30px;
+}
+
+pre {
+  background:#EEE;
+}
+
+/* vim: set ft=css ts=4 sw=4 noexpandtab: */
