@@ -301,11 +301,11 @@ module Jekyll
     def build_plugins(plugin_array)
       plugin_array.select do |c|
         !self.safe || c.safe
-      end.map do |c|
+      end.sort.map do |c|
         c.new(self.config)
       end
     end
-
+    
     # Collect valid files/directories from supplied path and pass their names
     # with relative paths to the block.
     # Changes current directory inside the block to the given path.

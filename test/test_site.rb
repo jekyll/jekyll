@@ -4,7 +4,11 @@ class TestSite < Test::Unit::TestCase
   context "creating sites" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::DEFAULTS.merge({
+          'source' => source_dir,
+          'destination' => dest_dir,
+          'plugins' => File.join(source_dir, '_plugins')
+          })
       end
       @site = Site.new(Jekyll.configuration)
     end
@@ -90,6 +94,12 @@ class TestSite < Test::Unit::TestCase
       @site.process
       mtime4 = File.stat(dest).mtime.to_i
       assert_equal mtime3, mtime4 # no modifications, so must be the same
+    end
+
+    should "setup plugins" do
+      # plugins should be ordered by priority
+      assert_equal @site.converters.sort_by(&:class).map{|c|c.class.priority}, @site.converters.map{|c|c.class.priority}
+      assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
     end
 
     should "read layouts" do
