@@ -9,6 +9,11 @@ class TestTags < Test::Unit::TestCase
       Jekyll::DEFAULTS.merge({'pygments' => true}).merge(override)
     end
     site = Site.new(Jekyll.configuration)
+
+    if override['read_posts']
+      site.read_posts('')
+    end
+
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
     payload = { "pygments_prefix" => @converter.pygments_prefix,
@@ -135,6 +140,27 @@ CONTENT
         assert_match %r{<em>FIGHT!</em>}, @result
         assert_match %r{<em>FINISH HIM</em>}, @result
       end
+    end
+  end
+
+  context "simple page with post linking" do
+    setup do
+      content = <<CONTENT
+---
+title: Post linking
+---
+
+{% post_url 2008-11-21-complex %}
+CONTENT
+      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+    end
+
+    should "not cause an error" do
+      assert_no_match /markdown\-html\-error/, @result
+    end
+
+    should "have the url to the \"complex\" post from 2008-11-21" do
+      assert_match %r{/2008/11/21/complex/}, @result
     end
   end
 end
