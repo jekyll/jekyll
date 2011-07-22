@@ -56,6 +56,7 @@ module Jekyll
 
       FileUtils.mkdir_p(File.dirname(dest_path))
       FileUtils.cp(path, dest_path)
+      File.utime(mtime, mtime, dest_path) if @site.config['preserve_mtime']
 
       true
     end
