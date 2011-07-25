@@ -205,6 +205,20 @@ class TestPost < Test::Unit::TestCase
       end
     end
 
+    context "when in a site is NOT in prod_build (production build)" do
+      setup do
+        clear_dest
+        stub(Jekyll).configuration { Jekyll::DEFAULTS.merge( { 'prod_build' => false } ) }
+        @site = Site.new(Jekyll.configuration)
+        @site.posts = [setup_post('2008-02-02-not-published.textile')]
+      end
+
+      should " post is published when published yaml is false _but_ configuration is development build" do
+        post = setup_post("2008-02-02-not-published.textile")
+        assert_equal true, post.published
+      end
+    end
+
     context "when in a site" do
       setup do
         clear_dest

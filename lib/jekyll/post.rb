@@ -45,7 +45,7 @@ module Jekyll
         self.date = Time.parse(self.data["date"].to_s)
       end
 
-      if self.data.has_key?('published') && self.data['published'] == false
+      if self.data.has_key?('published') && self.data['published'] == false && site.prod_build == true
         self.published = false
       else
         self.published = true
