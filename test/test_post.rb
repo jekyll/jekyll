@@ -141,6 +141,19 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with space (categories)" do
+          setup do
+            @post.categories << "French cuisine"
+            @post.categories << "Belgian beer"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/French%20cuisine/Belgian%20beer/2008/09/09/foo-bar.html", @post.url
+          end
+        end
+
         context "with none style" do
           setup do
             @post.site.permalink_style = :none
