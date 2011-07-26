@@ -21,9 +21,16 @@ module Jekyll
                         ON c.text_filter_id = tf.id
     EOS
 
-    def self.process dbname, user, pass, host='localhost'
+    def self.process server, dbname, user, pass, host='localhost'
       FileUtils.mkdir_p '_posts'
-      db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
+      case server.intern
+      when :postgres
+        db = Sequel.postgres(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
+      when :mysql
+        db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
+      else
+        raise "Unknown databse server '#{server}'"
+      end
       db[SQL].each do |post|
         next unless post[:state] =~ /published/
 
