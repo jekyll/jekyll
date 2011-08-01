@@ -123,7 +123,7 @@ module Jekyll
     # Returns nothing.
     def read_directories(dir = '')
       base = File.join(self.source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir['*']) }
+      entries = Dir.chdir(base) { filter_entries(Dir['{*,.*}']) }
 
       self.read_posts(dir)
 
