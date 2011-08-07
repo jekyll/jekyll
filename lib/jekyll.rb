@@ -82,6 +82,9 @@ module Jekyll
     'redcarpet'    => {
       'extensions' => []
     },
+    'multimarkdown' => {
+      'extensions'  => []
+    },
     'kramdown'        => {
       'auto_ids'      => true,
       'footnote_nr'   => 1,
