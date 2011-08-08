@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '0.10.0'
-  s.date              = '2010-12-16'
+  s.version           = '0.11.0'
+  s.date              = '2011-07-10'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -32,18 +32,28 @@ Gem::Specification.new do |s|
   s.add_development_dependency('redgreen', ">= 1.2.2")
   s.add_development_dependency('shoulda', ">= 2.11.3")
   s.add_development_dependency('rr', ">= 1.0.2")
-  s.add_development_dependency('cucumber', ">= 0.10.0")
+  s.add_development_dependency('cucumber', ">= 0.10.3")
   s.add_development_dependency('RedCloth', ">= 4.2.1")
   s.add_development_dependency('rdiscount', ">= 1.6.5")
-
+  s.add_development_dependency('redcarpet', ">= 1.9.0")
+  
   # = MANIFEST =
   s.files = %w[
+    Gemfile
     History.txt
     LICENSE
     README.textile
     Rakefile
     bin/jekyll
     cucumber.yml
+    doc/output/book.html
+    doc/output/ch00-preface.asc
+    doc/output/ch01-quick-start.asc
+    doc/output/ch02-directory-layout.asc
+    doc/output/stylesheets/handbookish-quirks.css
+    doc/output/stylesheets/handbookish.css
+    doc/output/stylesheets/scribe-quirks.css
+    doc/output/stylesheets/scribe.css
     features/create_sites.feature
     features/embed_filters.feature
     features/markdown.feature
@@ -54,9 +64,9 @@ Gem::Specification.new do |s|
     features/site_data.feature
     features/step_definitions/jekyll_steps.rb
     features/support/env.rb
+    g.pl
     jekyll.gemspec
     lib/jekyll.rb
-    lib/jekyll/albino.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
@@ -70,13 +80,16 @@ Gem::Specification.new do |s|
     lib/jekyll/layout.rb
     lib/jekyll/migrators/csv.rb
     lib/jekyll/migrators/drupal.rb
+    lib/jekyll/migrators/enki.rb
     lib/jekyll/migrators/marley.rb
     lib/jekyll/migrators/mephisto.rb
     lib/jekyll/migrators/mt.rb
+    lib/jekyll/migrators/posterous.rb
     lib/jekyll/migrators/textpattern.rb
+    lib/jekyll/migrators/tumblr.rb
     lib/jekyll/migrators/typo.rb
-    lib/jekyll/migrators/wordpress.com.rb
     lib/jekyll/migrators/wordpress.rb
+    lib/jekyll/migrators/wordpressdotcom.rb
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
     lib/jekyll/post.rb
@@ -84,6 +97,8 @@ Gem::Specification.new do |s|
     lib/jekyll/static_file.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
+    output/stylesheets/scribe-quirks.css
+    output/stylesheets/scribe.css
     test/helper.rb
     test/source/.htaccess
     test/source/_includes/sig.markdown
@@ -112,6 +127,8 @@ Gem::Specification.new do |s|
     test/source/_posts/2010-01-09-time-override.textile
     test/source/_posts/2010-01-09-timezone-override.textile
     test/source/_posts/2010-01-16-override-data.textile
+    test/source/_posts/2011-04-12-md-extension.md
+    test/source/_posts/2011-04-12-text-extension.text
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
     test/source/contacts.html
@@ -132,6 +149,7 @@ Gem::Specification.new do |s|
     test/test_pager.rb
     test/test_post.rb
     test/test_rdiscount.rb
+    test/test_redcarpet.rb
     test/test_site.rb
     test/test_tags.rb
   ]

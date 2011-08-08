@@ -1,6 +1,9 @@
-== HEAD
+== 0.11.0 / 2011-07-10
   * Major Enhancements
     * Add command line importer functionality (#253)
+    * Add Redcarpet Markdown support (#318)
+    * Make markdown/textile extensions configurable (#312)
+    * Add `markdownify` filter
   * Minor Enhancements
     * Switch to Albino gem
     * Bundler support

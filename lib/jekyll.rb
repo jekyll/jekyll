@@ -46,7 +46,7 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 module Jekyll
-  VERSION = '0.10.0'
+  VERSION = '0.11.0'
 
   # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML).
@@ -65,6 +65,9 @@ module Jekyll
     'pygments'     => false,
     'markdown'     => 'maruku',
     'permalink'    => 'date',
+    
+    'markdown_ext' => 'markdown,mkd,mkdn,md',
+    'textile_ext'  => 'textile',
 
     'maruku'       => {
       'use_tex'    => false,
@@ -74,6 +77,9 @@ module Jekyll
       'png_url'    => '/images/latex'
     },
     'rdiscount'    => {
+      'extensions' => []
+    },
+    'redcarpet'    => {
       'extensions' => []
     },
     'kramdown'        => {

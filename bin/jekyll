@@ -82,6 +82,10 @@ opts = OptionParser.new do |opts|
   opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
     options['markdown'] = 'rdiscount'
   end
+  
+  opts.on("--redcarpet", "Use redcarpet gem for Markdown") do
+    options['markdown'] = 'redcarpet'
+  end
 
   opts.on("--kramdown", "Use kramdown gem for Markdown") do
     options['markdown'] = 'kramdown'
