@@ -33,9 +33,13 @@ module Jekyll
     # Returns Array.
     def compass_framework_dirs
       @compass_dirs ||= begin
-        gemdir = Gem.loaded_specs['compass'].full_gem_path
-        ['blueprint', 'compass'].map do |lib|
-           File.join(gemdir, "frameworks/#{lib}/stylesheets")
+        if gemspec = Gem.loaded_specs['compass']
+          gemdir = gemspec.full_gem_path
+          ['blueprint', 'compass'].map do |lib|
+            File.join(gemdir, "frameworks/#{lib}/stylesheets")
+          end
+        else
+          []
         end
       end
     end
