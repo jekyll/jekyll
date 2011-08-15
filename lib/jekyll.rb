@@ -66,6 +66,9 @@ module Jekyll
     'markdown'     => 'maruku',
     'permalink'    => 'date',
     
+    'locale'           => 'en',
+    'translation_path' => File.join(Dir.pwd, '_locale'),
+    
     'markdown_ext' => 'markdown,mkd,mkdn,md',
     'textile_ext'  => 'textile',
 
