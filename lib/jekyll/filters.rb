@@ -32,8 +32,11 @@ module Jekyll
     # date - the Time to format.
     #
     # Returns the formatting String.
+    #
+    # To change format for the current locale, add
+    # a _locale/<locale>.yml and specify a date_format: 
     def date_to_string(date)
-      l Date.parse(date.to_s)
+      l Date.parse(date.to_s), (t.date_format | nil)
     end
 
     # Format a date in long format e.g. "10th of January, 2010".
@@ -41,8 +44,11 @@ module Jekyll
     # date - The Time to format.
     #
     # Returns the formatted String.
+    #
+    # To change format for the current locale, add
+    # a _locale/<locale>.yml and specify a long_date_format: 
     def date_to_long_string(date)
-      l Date.parse(date.to_s), :full
+      l Date.parse(date.to_s), (t.long_date_format | :full)
     end
 
     # Format a date for use in XML.
