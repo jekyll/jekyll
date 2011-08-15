@@ -103,6 +103,9 @@ module Jekyll
       else
         Array(config['plugins']).map { |d| File.expand_path(d) }
       end
+      
+      # Set locale
+      R18n.set(config['locale'], config['translation_path'])
     end
 
     # Read Site data from disk and load it into internal data structures.
