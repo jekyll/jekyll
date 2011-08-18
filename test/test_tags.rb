@@ -1,4 +1,6 @@
-require File.dirname(__FILE__) + '/helper'
+# coding: utf-8
+
+require 'helper'
 
 class TestTags < Test::Unit::TestCase
 
@@ -116,6 +118,17 @@ CONTENT
     context "using Kramdown" do
       setup do
         create_post(@content, 'markdown' => 'kramdown')
+      end
+
+      should "parse correctly" do
+        assert_match %r{<em>FIGHT!</em>}, @result
+        assert_match %r{<em>FINISH HIM</em>}, @result
+      end
+    end
+    
+    context "using Redcarpet" do
+      setup do
+        create_post(@content, 'markdown' => 'redcarpet')
       end
 
       should "parse correctly" do

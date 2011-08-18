@@ -14,3 +14,6 @@ def run_jekyll(opts = {})
   command << " >> /dev/null 2>&1" if opts[:debug].nil?
   system command
 end
+
+# work around "invalid option: --format" cucumber bug (see #296)
+Test::Unit.run = true if RUBY_VERSION < '1.9'

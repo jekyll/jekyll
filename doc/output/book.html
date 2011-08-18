@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.3" />
+<title>Jekyll</title>
+<style type="text/css">
+/* ---------------------------------------------------------------------------
+   Bare AsciiDoc styles
+   Ryan Tomayko <r@tomayko.com>
+--------------------------------------------------------------------------- */
+
+body {
+	font-family:verdana,helvetica,arial,sans-serif;
+	font-size:81.25%;   /* 13px */
+	line-height:1.538;  /* 20px */
+	margin:40px auto 50px auto;
+	max-width:53.8461538462em; /* 790px */
+	color:#333;
+}
+
+em {
+	font-style:italic;
+}
+
+strong {
+	font-weight:bold;
+	color:#000;
+}
+
+tt {
+	font-family:consolas, 'lucida console', 'bitstream vera sans mono',
+	           'courier new', monospace;
+	color:#000;
+}
+
+p, ul, ol, dl {
+	margin:10px 0
+}
+
+dl {
+	margin-left:40px
+}
+
+dt {
+	font-weight:normal;
+	color:#000;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family:'lucida grande',georgia,verdana,helvetica,arial,sans-serif;
+	font-weight:normal;
+	color:#000;
+}
+
+h1 {
+	font-size:40px;
+	line-height:1.428;
+	margin:20px 0;
+}
+
+h2 {
+	font-size:30px;
+	line-height:1.36363636; /* repeating, of course */
+	margin:60px 0 20px 0;
+}
+
+h2 + .sectionbody {}
+
+h3 {
+	font-size:24px;
+	line-height:1.1;
+	margin:30px 0 10px 0;
+}
+
+h4 {
+	font-size:18px;
+	line-height:1.1;
+	margin:20px 0 5px 0;
+}
+
+h5 {
+	font-size:13px;
+	font-style:italic;
+	line-height:1.1;
+}
+
+#header {
+	text-align:center;
+	margin-bottom:30px;
+}
+
+#header h1 { margin-bottom:0 }
+
+.title, .sidebar-title {
+	font-weight:normal;
+	color:#000;
+	margin-bottom:0;
+}
+
+.admonitionblock .title {
+	font-weight:bold;
+}
+
+.admonitionblock {
+	margin:30px 0px;
+	color:#555;
+}
+
+.admonitionblock td.icon {
+	width:30px;
+	padding-right:20px;
+	padding-left:20px;
+	text-transform:uppercase;
+	font-weight:bold;
+	color:#888;
+}
+
+.listingblock {
+  margin: 13px 0;
+}
+
+.listingblock .content {
+	border:1px solid silver;
+	background:#eee;
+	padding:5px;
+}
+
+.listingblock .content pre {
+	margin:0;
+}
+
+.literalblock .content {
+	margin-left:40px;
+}
+
+.verseblock .content {
+	white-space:pre
+}
+
+.sidebarblock .sidebar-content {
+	border:1px solid silver;
+	background:#FFFFEE;
+	padding:0 10px;
+	color:#222;
+	font-size:smaller;
+	line-height:1.5;
+}
+
+.sidebar-title {
+	margin:10px 0;
+	font-weight:bold;
+	color:#442;
+}
+
+.quoteblock-content {
+	font-style:italic;
+	color:#444;
+	margin-left:40px;
+}
+
+.quoteblock-content .attribution {
+	font-style:normal;
+	text-align:right;
+	color:#000;
+}
+
+.exampleblock-content *:first-child { margin-top:0 }
+.exampleblock-content {
+	border-left:2px solid silver;
+	padding-left:8px;
+}
+
+#footer {
+	font-size:11px;
+	margin-top:40px;
+	border-top:1px solid silver;
+	color:#555;
+}
+
+#author {
+	color:#000;
+	text-transform:uppercase
+}
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(2);}
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
+}
+/*]]>*/
+</script>
+</head>
+<body>
+<div id="header">
+<h1>Jekyll</h1>
+<span id="author">Tom Preston-Werner</span><br />
+<span id="email"><tt>&lt;<a href="mailto:&lt;tom@mojombo.com&gt;">&lt;tom@mojombo.com&gt;</a>&gt;</tt></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<h2 id="_preface">1. Preface</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Jekyll was born out the desire to create a blog engine that would make it
+possible to write posts in my local text editor, version those posts with Git,
+and keep up with my desire to tweak the styles and layout of my site.</p></div>
+<div class="paragraph"><p>In other words, I wanted something that fit into my existing software
+development workflow and toolchain. Jekyll handles not only this case, but a
+wide variety of other situations that call for static site generation based on
+converted content and layout templates.</p></div>
+<div class="paragraph"><p>At its core, Jekyll is a text transformation engine. The concept behind the
+system is this: you give it text written in your favorite markup language, be
+that Markdown, Textile, or just plain HTML, and it churns that through a
+layout or series of layout files. Throughout that process you can tweak how
+you want the site URLs to look, what data gets displayed on the layout and
+much more.</p></div>
+<div class="paragraph"><p>If you&#8217;re looking for a simple, yet powerful solution to your blogging or
+static site needs, Jekyll may be just what you&#8217;ve been looking for.</p></div>
+<h3 id="_what_this_book_covers">1.1. What this book covers</h3><div style="clear:left"></div>
+<div class="paragraph"><p><em>Chapter 1, Quick Start</em> covers installation, introduces the Jekyll command
+line interface, and runs through a quick example demonstrating the site
+generator, post generator and how to convert your Jekyll site into a static
+site.</p></div>
+<div class="paragraph"><p><em>Chapter 2, Directory Layout</em> covers the various files and directories that
+comprise a Jekyll site.</p></div>
+<div class="paragraph"><p><em>Chapter 3, Tags and Filters</em></p></div>
+<div class="paragraph"><p><em>Chapter X, Deploying your Jekyll Site</em></p></div>
+<div class="paragraph"><p><em>Chapter X, Customizing Jekyll with Plugins</em></p></div>
+<div class="paragraph"><p><em>Chapter X, Migrating to Jekyll from your Existing Blog</em></p></div>
+<div class="paragraph"><p><em>Chapter X, Configuration Reference</em></p></div>
+</div>
+<h2 id="_chapter_1_quick_start">2. Chapter 1: Quick Start</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This chapter is designed to get you up and running with Jekyll as quickly as
+possible.</p></div>
+<h3 id="_installation">2.1. Installation</h3><div style="clear:left"></div>
+<div class="paragraph"><p>The best way to install Jekyll is via RubyGems:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>gem install jekyll</tt></pre>
+</div></div>
+<div class="paragraph"><p>This is all you need in order to get started with a basic Jekyll site. Some
+options require additional packages to be installed.</p></div>
+<div class="paragraph"><p>If you encounter errors during gem installation, you may need to install the
+header files for compiling extension modules for ruby 1.8:</p></div>
+<div class="listingblock">
+<div class="title">Debian</div>
+<div class="content">
+<pre><tt>sudo apt-get install ruby1.8-dev</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Red Hat / CentOS / Fedora systems</div>
+<div class="content">
+<pre><tt>sudo yum install ruby-devel</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">NearlyFreeSpeech</div>
+<div class="content">
+<pre><tt>RB_USER_INSTALL=true gem install jekyll</tt></pre>
+</div></div>
+<div class="paragraph"><p>If you encounter errors like <tt>Failed to build gem native extension</tt> on Windows
+you may need to install <a href="http://wiki.github.com/oneclick/rubyinstaller/development-kit">RubyInstaller
+DevKit</a>.</p></div>
+<h4 id="_latex_to_png">2.1.1. LaTeX to PNG</h4>
+<div class="paragraph"><p>Maruku comes with optional support for LaTeX to PNG rendering via blahtex
+(Version 0.6) which must be in your $PATH along with @dvips@.</p></div>
+<div class="paragraph"><p>(NOTE: "remi&#8217;s fork of Maruku":http://github.com/remi/maruku/tree/master does
+not assume a fixed location for @dvips@ if you need that fixed)</p></div>
+<h4 id="_rdiscount">2.1.2. RDiscount</h4>
+<div class="paragraph"><p>If you prefer to use
+<a href="http://github.com/rtomayko/rdiscount/tree/master">RDiscount</a> instead of
+<a href="http://maruku.rubyforge.org/">Maruku</a> for markdown, just make sure it&#8217;s
+installed:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>sudo gem install rdiscount</tt></pre>
+</div></div>
+<div class="paragraph"><p>And run Jekyll with the following option:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>jekyll --rdiscount</tt></pre>
+</div></div>
+<div class="paragraph"><p>Or, in your @_config.yml@ file put the following so you don&#8217;t have to specify the flag:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>markdown: rdiscount</tt></pre>
+</div></div>
+<h4 id="_pygments">2.1.3. Pygments</h4>
+<div class="paragraph"><p>If you want syntax highlighting via the @{% highlight %}@ tag in your posts,
+you&#8217;ll need to install <a href="http://pygments.org/">Pygments</a>.</p></div>
+<div class="listingblock">
+<div class="title">On OSX with Homebrew</div>
+<div class="content">
+<pre><tt>brew install pip &amp;&amp; pip install pygments</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">On OSX with MacPorts</div>
+<div class="content">
+<pre><tt>sudo port install python25 py25-pygments</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Bare OS X Leopard</div>
+<div class="content">
+<pre><tt>sudo easy_install Pygments</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Archlinux</div>
+<div class="content">
+<pre><tt>sudo pacman -S python-pygments</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Archlinux python2 for Pygments</div>
+<div class="content">
+<pre><tt>$ sudo pacman -S python2-pygments</tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">python2 pygments version creates a <tt>pygmentize2</tt> executable, while
+Jekyll tries to find <tt>pygmentize</tt>. Either create a symlink <tt># ln -s
+/usr/bin/pygmentize2 /usr/bin/pygmentize</tt> or use the python3 version.</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">Ubuntu and Debian</div>
+<div class="content">
+<pre><tt>sudo apt-get install python-pygments</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Gentoo</div>
+<div class="content">
+<pre><tt>$ sudo emerge -av dev-python/pygments</tt></pre>
+</div></div>
+<h3 id="_creating_your_first_site">2.2. Creating your First Site</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Jekyll comes with a handy generator that will create a barebones skeleton site
+to help you get up and running in no time. Simply create an empty directory to
+contain your site, navigate to it, and run the generator command:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ mkdir mysite
+$ cd mysite
+$ jekyll gen</tt></pre>
+</div></div>
+<div class="paragraph"><p>Make sure the directory is empty or Jekyll will refuse to run. If everything
+was successful, you&#8217;ll be left with a complete, valid Jekyll site that&#8217;s ready
+to be converted into a static site.</p></div>
+<div class="paragraph"><p>To perform the conversion, make sure you&#8217;re in the root of your Jekyll site
+directory and run:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$ jekyll --server</tt></pre>
+</div></div>
+<div class="paragraph"><p>If all goes well, you should get a few lines with information about config
+file detection, source and destination paths, and a success message.</p></div>
+<div class="paragraph"><p>The <tt>--server</tt> command line option fires up a simple web server that will
+serve the static site we just generated so that we can easily preview what it
+will look like once we deploy it to a production environment.</p></div>
+<div class="paragraph"><p>Open up your favorite web browser and navigate to:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>http://localhost:4000</tt></pre>
+</div></div>
+<div class="paragraph"><p>Congratulations! You have now successfully created and converted your first
+Jekyll site!</p></div>
+</div>
+<h2 id="_chapter_2_directory_layout">3. Chapter 2: Directory Layout</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If you followed the Quick Start in the last chapter, you have a Jekyll site on
+your local machine. Let&#8217;s take a closer look at it and see what makes it tick.
+The file layout should look something like this:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>.
+|-- _config.yml
+|-- _layouts
+|   |-- default.html
+|   `-- post.html
+|-- _posts
+|   |-- 2007-10-29-why-every-programmer-should-play-nethack.textile
+|   `-- 2009-04-26-barcamp-boston-4-roundup.textile
+|-- _site
+|-- images
+|   `-- logo.png
+`-- index.html</tt></pre>
+</div></div>
+<div class="paragraph"><p>Notice that some of the files and directories begin with an underscore. These
+have special meaning to Jekyll. The underscore ensures that they will not
+interfere with the rest of your site&#8217;s normal content. It also means that if
+any of your normal files start with an underscore, they will cause problems,
+so try to avoid this.</p></div>
+<h3 id="_config_yml">3.1. _config.yml</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This file stores configuration data. A majority of these options can be
+specified from the command line executable but it&#8217;s easier to throw them in
+here so you don&#8217;t have to type them out every time. Detailed explanations of
+configuration directives can be found in Chapter X.</p></div>
+<h3 id="_layouts">3.2. _layouts</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Files in this directory represent templates that can be used to wrap converted
+pages. Layouts are defined on a page-by-page basis in the YAML front matter.
+The liquid tag <tt>{{ content }}</tt> specifies where the content will be placed
+during the conversion process.</p></div>
+<h3 id="_posts">3.3. _posts</h3><div style="clear:left"></div>
+<div class="paragraph"><p>If you&#8217;re using Jekyll as a blog engine, this is where you&#8217;ll place your blog
+posts. A post&#8217;s filename contains several pieces of data, so you must be very
+careful about how these files are named. The filename format is:
+<tt>YEAR-MONTH-DATE-SLUG.MARKUP</tt>. The YEAR must be four numbers and the MONTH and
+DATE must be two numbers each. The SLUG is what will appear in the URL. The
+MARKUP tells Jekyll the format of the post. The date and slug will be used
+along with any permalink options you specify (See Chapter X) to construct the
+final URL of the post.</p></div>
+<h3 id="_site">3.4. _site</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This is where the generated site will be placed (by default) once Jekyll is
+done transforming it. If you&#8217;re using version control, you&#8217;ll want to add this
+directory to the list of files to be ignored.</p></div>
+<h3 id="_normal_files_with_yaml_front_matter">3.5. Normal Files with YAML Front Matter</h3><div style="clear:left"></div>
+<div class="paragraph"><p>All files outside of the special underscore directories and that do not
+themselves begin with an underscore will be scanned by Jekyll and subjected to
+conversion if they contain any YAML front matter.</p></div>
+<h3 id="_everything_else">3.6. Everything Else</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Any files and directories that do not fall into one of the above categories
+will be copied to the static site as-is without modification. In this example,
+<tt>images/logo.png</tt> will be copied to the same location in the generated site.</p></div>
+<div class="paragraph"><p>h2. Running Jekyll</p></div>
+<div class="paragraph"><p>Usually this is done through the @jekyll@ executable, which is installed with
+the gem. In order to get a server up and running with your Jekyll site, run:</p></div>
+<div class="paragraph"><p>@jekyll --server@</p></div>
+<div class="paragraph"><p>and then browse to <a href="http://0.0.0.0:4000">http://0.0.0.0:4000</a>. There&#8217;s plenty of <a id="configuration options|Configuration"></a> available to you as well.</p></div>
+<div class="paragraph"><p>On Debian or Ubuntu, you may need to add @/var/lib/gems/1.8/bin/@ to your path.</p></div>
+<div class="paragraph"><p>h2. Deployment</p></div>
+<div class="paragraph"><p>Since Jekyll simply generates a folder filled with HTML files, it can be
+served using practically any available web server out there. Please check the
+<a id="Deployment"></a> page for more information regarding specific scenarios.</p></div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2011-03-18 21:05:02 PDT
+</div>
+</div>
+</body>
+</html>

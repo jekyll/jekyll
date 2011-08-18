@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestGeneratedSite < Test::Unit::TestCase
   context "generated sites" do
@@ -14,7 +14,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "ensure post count is as expected" do
-      assert_equal 26, @site.posts.size
+      assert_equal 28, @site.posts.size
     end
 
     should "insert site.posts into the index" do
