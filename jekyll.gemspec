@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('maruku', ">= 0.5.9")
   s.add_runtime_dependency('kramdown', ">= 0.13.2")
   s.add_runtime_dependency('albino', ">= 1.3.2")
+  s.add_runtime_dependency('org-ruby, ">= 0.5.3")
 
   s.add_development_dependency('redgreen', ">= 1.2.2")
   s.add_development_dependency('shoulda', ">= 2.11.3")
