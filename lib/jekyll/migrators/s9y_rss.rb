@@ -23,7 +23,10 @@ module Jekyll
         post_url = item.link.match('.*(/archives/.*)')[1]
         categories = item.categories.collect { |c| c.content }
         content = item.content_encoded.strip
-        name = item.link.match('.*/archives/(.*)\.html')[1] + '.markdown'
+        date = item.date
+        slug = item.link.match('.*/archives/[0-9]+-(.*)\.html')[1]
+        name = "%02d-%02d-%02d-%s.markdown" % [date.year, date.month, date.day,
+                                               slug]
 
         data = {
           'layout' => 'post',
