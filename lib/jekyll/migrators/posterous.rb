@@ -1,11 +1,14 @@
 require 'rubygems'
 require 'jekyll'
 require 'fileutils'
-require 'net/http'
+require 'net/https'
+require 'open-uri'
 require 'uri'
 require "json"
 
-# ruby -r './lib/jekyll/migrators/posterous.rb' -e 'Jekyll::Posterous.process(email, pass, blog)'
+# ruby -r './lib/jekyll/migrators/posterous.rb' -e 'Jekyll::Posterous.process(email, pass, api_token, blog)'
+# You can find your api token in posterous api page - http://posterous.com/api . Click on any of the 'view token' links to see your token.
+# blog is optional, by default it is the primary one
 
 module Jekyll
   module Posterous
@@ -14,6 +17,9 @@ module Jekyll
       raise ArgumentError, 'Stuck in a redirect loop. Please double check your email and password' if limit == 0
 
       response = nil
+
+      puts uri_str
+      puts '-------'
       Net::HTTP.start('posterous.com') do |http|
         req = Net::HTTP::Get.new(uri_str)
         req.basic_auth @email, @pass
@@ -27,12 +33,11 @@ module Jekyll
       end
     end
 
-    def self.process(email, pass, blog = 'primary')
-      @email, @pass = email, pass
-      @api_token = JSON.parse(self.fetch("/api/2/auth/token").body)['api_token']
+    def self.process(email, pass, api_token, blog = 'primary')
+      @email, @pass , @api_token = email, pass, api_token
       FileUtils.mkdir_p "_posts"
 
-      posts = JSON.parse(self.fetch("/api/v2/users/me/sites/#{blog}/posts?api_token=#{@api_token}").body)
+      posts = JSON.parse(self.fetch("/api/2/sites/#{blog}/posts?api_token=#{@api_token}").body)
       page = 1
 
       while posts.any?
@@ -54,14 +59,15 @@ module Jekyll
 
           # Write out the data and content to file
           File.open("_posts/#{name}", "w") do |f|
-            f.puts data
+            puts name
+            f.puts name
             f.puts "---"
             f.puts content
           end
         end
 
         page += 1
-        posts = JSON.parse(self.fetch("/api/v2/users/me/sites/#{blog}/posts?api_token=#{@api_token}&page=#{page}").body)
+        posts = JSON.parse(self.fetch("/api/2/sites/#{blog}/posts?api_token=#{@api_token}&page=#{page}").body)
       end
     end
   end
