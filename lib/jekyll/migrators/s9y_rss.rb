@@ -32,7 +32,7 @@ module Jekyll
           'layout' => 'post',
           'title' => item.title,
           'categories' => categories,
-          'url' => post_url,
+          'permalink' => post_url,
           's9y_link' => item.link,
           'date' => item.date,
         }.delete_if { |k,v| v.nil? || v == '' }.to_yaml
