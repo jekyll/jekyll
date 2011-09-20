@@ -69,7 +69,7 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      info = { :filters => [Jekyll::Filters], :registers => { :site => self.site } }
+      info = { :filters => [Jekyll::Filters], :registers => { :site => self.site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
       payload["pygments_prefix"] = converter.pygments_prefix
