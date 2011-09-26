@@ -27,12 +27,13 @@ module Jekyll
                     entry_convert_breaks \
              FROM mt_entry"
 
-    def self.process(dbname, user, pass, host = 'localhost')
+    def self.process(dbname, user, pass, host = 'localhost', blog_id = nil)
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
 
       FileUtils.mkdir_p "_posts"
 
-      db[QUERY].each do |post|
+      q = blog_id.nil? ? QUERY : "#{QUERY} WHERE entry_blog_id = #{blog_id}"
+      db[q].each do |post|
         title = post[:entry_title]
         slug = post[:entry_basename].gsub(/_/, '-')
         date = post[:entry_authored_on]
