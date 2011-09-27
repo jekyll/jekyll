@@ -53,9 +53,7 @@ module Jekyll
       #The div is required because RDiscount blows ass
       <<-HTML
 <div>
-  <pre>
-    <code class='#{@lang}'>#{h(code).strip}</code>
-  </pre>
+  <pre><code class='#{@lang}'>#{h(code).strip}</code></pre>
 </div>
       HTML
     end
