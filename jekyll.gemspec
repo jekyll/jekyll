@@ -59,10 +59,12 @@ Gem::Specification.new do |s|
     doc/output/stylesheets/scribe.css
     features/create_sites.feature
     features/embed_filters.feature
+    features/haml.feature
     features/markdown.feature
     features/pagination.feature
     features/permalinks.feature
     features/post_data.feature
+    features/sass.feature
     features/site_configuration.feature
     features/site_data.feature
     features/step_definitions/jekyll_steps.rb
@@ -71,8 +73,10 @@ Gem::Specification.new do |s|
     jekyll.gemspec
     lib/jekyll.rb
     lib/jekyll/converter.rb
+    lib/jekyll/converters/haml.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
+    lib/jekyll/converters/sass.rb
     lib/jekyll/converters/textile.rb
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb
@@ -142,6 +146,7 @@ Gem::Specification.new do |s|
     test/source/sitemap.xml
     test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
     test/source/z_category/_posts/2008-9-23-categories.textile
+    test/source/z_category/_posts/2010-1-15-another-z-category.textile
     test/suite.rb
     test/test_configuration.rb
     test/test_core_ext.rb
