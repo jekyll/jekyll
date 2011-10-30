@@ -6,9 +6,9 @@ module Jekyll
     attr_reader   :source, :dest, :config
     attr_accessor :layouts, :posts, :pages, :static_files,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
-                  :time, :future, :unpublished, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :plugin_manager
+                  :use_post_dirs, :time, :future, :unpublished, :safe,
+                  :plugins, :limit_posts, :show_drafts, :keep_files, :baseurl,
+                  :data, :file_read_opts, :gems, :plugin_manager
 
     attr_accessor :converters, :generators
 
@@ -34,6 +34,7 @@ module Jekyll
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
       self.permalink_style = config['permalink'].to_sym
+      self.use_post_dirs   = config['use_post_dirs']
 
       Jekyll.sites << self
 

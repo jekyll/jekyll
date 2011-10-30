@@ -51,6 +51,7 @@ module Jekyll
       # Output Configuration
       'permalink'     => 'date',
       'paginate_path' => '/page:num',
+      'use_post_dirs' => true,
       'timezone'      => nil,           # use the local timezone
 
       'quiet'         => false,
