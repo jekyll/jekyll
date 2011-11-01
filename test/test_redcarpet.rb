@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestRedcarpet < Test::Unit::TestCase
   context "redcarpet" do
