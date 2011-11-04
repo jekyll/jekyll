@@ -33,10 +33,7 @@ module Jekyll
         @config['redcloth'].each do |key, value|
           restrictions << key.to_sym if value
         end
-        require 'ap'
-	ap restrictions
       end
-
 
       RedCloth.new(content, restrictions).to_html
     end
