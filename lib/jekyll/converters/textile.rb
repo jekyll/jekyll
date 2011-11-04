@@ -27,13 +27,18 @@ module Jekyll
 
     def convert(content)
       setup
-      r = RedCloth.new(content)
       
-      if !@config['redcloth'].nil? and !@config['redcloth']['hard_breaks'].nil?
-        r.hard_breaks = @config['redcloth']['hard_breaks'] 
+      restrictions = Array.new
+      if !@config['redcloth'].nil?
+        @config['redcloth'].each do |key, value|
+          restrictions << key.to_sym if value
+        end
+        require 'ap'
+	ap restrictions
       end
 
-      r.to_html
+
+      RedCloth.new(content, restrictions).to_html
     end
   end
 
