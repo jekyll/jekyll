@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.textile LICENSE]
 
-  s.add_runtime_dependency('liquid', ">= 1.9.0")
+  s.add_runtime_dependency('liquid', ">= 1.9.0", "<= 2.2.2")
   s.add_runtime_dependency('classifier', ">= 1.3.1")
   s.add_runtime_dependency('directory_watcher', ">= 1.1.1")
   s.add_runtime_dependency('maruku', ">= 0.5.9")
