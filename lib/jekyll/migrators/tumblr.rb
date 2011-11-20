@@ -75,7 +75,13 @@ module Jekyll
           name = "#{Date.parse(post['date']).to_s}-#{title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')}.#{format}"
 
           if title != nil || content != nil && name != nil
-            content = %x[echo '#{content.gsub("'", "''")}' | html2text] if format == "md"
+            if format == "md"
+              content = %x[echo '#{content.gsub("'", "''")}' | html2text]
+              # html2text leaves extra blank lines in code blocks - clean them up.
+              begin
+                content.gsub!("\n    \n", "\n")
+              end until !content.include? "\n    \n"
+            end
             File.open("_posts/tumblr/#{name}", "w") do |f|
 
               f.puts <<-HEADER
