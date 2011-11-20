@@ -72,7 +72,7 @@ module Jekyll
             content << CGI::unescapeHTML(post.at("video-caption").inner_html) unless post.at("video-caption") == nil
           end # End post types
 
-          name = "#{Date.parse(post['date']).to_s}-#{post['id'].downcase.gsub(/[^a-z0-9]/, '-')}.html"
+          name = "#{Date.parse(post['date']).to_s}-#{title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')}.#{format}"
 
           if title != nil || content != nil && name != nil
             File.open("_posts/tumblr/#{name}", "w") do |f|
