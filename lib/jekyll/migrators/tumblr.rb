@@ -2,7 +2,7 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'fileutils'
-require 'CGI'
+require 'cgi'
 require 'iconv'
 require 'date'
 
