@@ -80,7 +80,7 @@ module Jekyll
               f.puts <<-HEADER
 ---
 layout: post
-title: #{title}
+title: "#{title.gsub('"', '\"')}"
 ---
 
 HEADER
