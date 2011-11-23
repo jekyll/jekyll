@@ -1,10 +1,8 @@
 require 'rubygems'
-require 'nokogiri'
 require 'open-uri'
 require 'fileutils'
-require 'cgi'
-require 'iconv'
 require 'date'
+require 'json'
 
 module Jekyll
   module Tumblr
@@ -12,97 +10,67 @@ module Jekyll
       current_page = 0
 
       while true
-        f = open(url + "/api/read?num=50&start=#{current_page * 50}")
-        doc = Nokogiri::HTML(Iconv.conv("utf-8", f.charset, f.readlines.join("\n")))
 
-        puts "Page: #{current_page + 1} - Posts: #{(doc/:tumblr/:posts/:post).size}"
-
+        f = open(url + "/api/read/json/?num=50&start=#{current_page * 50}")
+        # [21...-2] strips Tumblr's Javascript/JSONP start/end chars
+        json = f.readlines.join("\n")[21...-2]
+        blog = JSON.parse(json)
+        puts "Page: #{current_page + 1} - Posts: #{blog["posts"].size}"
         FileUtils.mkdir_p "_posts/tumblr"
 
-        (doc/:tumblr/:posts/:post).each do |post|
-          title = ""
-          content = nil
-          name = nil
+        blog["posts"].each do |post|
 
-          if post['type'] == "regular"
-            title_element = post.at("regular-title")
-            title = title_element.inner_text unless title_element == nil
-            content = CGI::unescapeHTML post.at("regular-body").inner_html unless post.at("regular-body") == nil
-          elsif post['type'] == "link"
-            title = post.at("link-text").inner_html unless post.at("link-text") == nil
-
-            if post.at("link-text") != nil
-              content = "<a href=\"#{post.at("link-url").inner_html}\">#{post.at("link-text").inner_html}</a>"
-            else
-              content = "<a href=\"#{post.at("link-url").inner_html}\">#{post.at("link-url").inner_html}</a>"
-            end
-
-            content << "<br/>" + CGI::unescapeHTML(post.at("link-description").inner_html) unless post.at("link-description") == nil
-          elsif post['type'] == "photo"
-            content = ""
-
-            if post.at("photo-link-url") != nil
-              content = "<a href=\"#{post.at("photo-link-url").inner_html}\"><img src=\"#{save_file((post/"photo-url")[1].inner_html, grab_images)}\"/></a>"
-            else
-              content = "<img src=\"#{save_file((post/"photo-url")[1].inner_html, grab_images)}\"/>"
-            end
-
-            if post.at("photo-caption") != nil
-              content << "<br/>" unless content == nil
-              content << CGI::unescapeHTML(post.at("photo-caption").inner_html)
-            end
-          elsif post['type'] == "audio"
-            content = CGI::unescapeHTML(post.at("audio-player").inner_html)
-            content << CGI::unescapeHTML(post.at("audio-caption").inner_html) unless post.at("audio-caption") == nil
-          elsif post['type'] == "quote"
-            content = "<blockquote>" + CGI::unescapeHTML(post.at("quote-text").inner_html) + "</blockquote>"
-            content << "&#8212;" + CGI::unescapeHTML(post.at("quote-source").inner_html) unless post.at("quote-source") == nil
-          elsif post['type'] == "conversation"
-            title = post.at("conversation-title").inner_html unless post.at("conversation-title") == nil
-            content = "<section><dialog>"
-
-            (post/:conversation/:line).each do |line|
-              content << "<dt>" + line['label'] + "</dt><dd>" + line.inner_html + "</dd>" unless line['label'] == nil || line == nil
-            end
-
-            content << "</section></dialog>"
-          elsif post['type'] == "video"
-            title = post.at("video-title").inner_html unless post.at("video-title") == nil
-            content = CGI::unescapeHTML(post.at("video-player").inner_html)
-            content << CGI::unescapeHTML(post.at("video-caption").inner_html) unless post.at("video-caption") == nil
+          case post['type']
+            when "regular"
+              title = post["regular-title"]
+              content = post["regular-body"]
+            when "link"
+              title = post["link-text"] || post["link-url"]
+              content = "<a href=\"#{post["link-url"]}\">#{title}</a>"
+              content << "<br/>" + post["link-description"] unless post["link-description"].nil?
+            when "photo"
+              title = post["photo-caption"]
+              content = "<img src=\"#{save_file(post["photo-url"], grab_images)}\"/>"
+              content = "<a href=\"#{post["photo-link-url"]}\">#{content}</a>" unless post["photo-link-url"].nil?
+            when "audio"
+              if !post["id3-title"].nil?
+                title = post["id3-title"]
+                content = post.at["audio-player"] + "<br/>" + post["audio-caption"]
+              else
+                title = post["audio-caption"]
+                content = post.at["audio-player"]
+              end
+            when "quote"
+              title = post["quote-text"]
+              content = "<blockquote>#{post["quote-text"]}</blockquote>"
+              content << "&#8212;" + post["quote-source"] unless post["quote-source"].nil?
+            when "conversation"
+              title = post["conversation-title"]
+              content = "<section><dialog>"
+              post["conversation"]["line"].each do |line|
+                content << "<dt>#{line['label']}</dt><dd>#{line}</dd>"
+              end
+              content << "</section></dialog>"
+            when "video"
+              title = post["video-title"]
+              content = post["video-player"]
+              content << "<br/>" + post["video-caption"] unless post["video-caption"].nil?
           end # End post types
 
           name = "#{Date.parse(post['date']).to_s}-#{title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')}.#{format}"
 
-          if title != nil || content != nil && name != nil
-            if format == "md"
-              content = %x[echo '#{content.gsub("'", "''")}' | html2text]
-              # html2text leaves extra blank lines in code blocks - clean them up.
-              begin
-                content.gsub!("\n    \n", "\n")
-              end until !content.include? "\n    \n"
-            end
-            File.open("_posts/tumblr/#{name}", "w") do |f|
-
-              f.puts <<-HEADER
----
-layout: post
-title: "#{title.gsub('"', '\"')}"
----
-
-HEADER
-
-              f.puts content
-            end # End file
-          end
+          File.open("_posts/tumblr/#{name}", "w") do |f|
+            content = %x[echo '#{content.gsub("'", "''")}' | html2text] if format == "md"
+            header = {"layout" => "post", "title" => title, "tags" => post["tags"]}
+            f.puts header.to_yaml + "---\n" + content
+          end # End file
 
         end # End post XML
 
-        if (doc/:tumblr/:posts/:post).size < 50
+        if blog["posts"].size < 50
           break
-        else
-          current_page = current_page + 1
         end
+        current_page += 1
 
       end # End while loop
     end # End method
