@@ -60,7 +60,12 @@ module Jekyll
           name = "#{Date.parse(post['date']).to_s}-#{title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')}.#{format}"
 
           File.open("_posts/tumblr/#{name}", "w") do |f|
-            content = %x[echo '#{content.gsub("'", "''")}' | html2text] if format == "md"
+            if format == "md"
+                preserve = ["table", "tr", "th", "td"]
+                preserve.each { |tag| content = content.gsub(/<#{tag}/i, "$$" + tag).gsub(/<\/#{tag}/i, "||" + tag) }
+                content = %x[echo '#{content.gsub("'", "''")}' | html2text]
+                preserve.each { |tag| content = content.gsub("$$" + tag, "<" + tag).gsub("||" + tag, "</" + tag) }
+            end
             header = {"layout" => "post", "title" => title, "tags" => post["tags"]}
             f.puts header.to_yaml + "---\n" + content
           end # End file
