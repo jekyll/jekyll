@@ -20,11 +20,15 @@ require 'fileutils'
 require 'time'
 require 'yaml'
 require 'English'
+autoload :Timeout, 'timeout'
 
 # 3rd party
 require 'liquid'
 require 'maruku'
 require 'albino'
+# load only if actual convertion happens
+autoload :Haml, 'haml'
+autoload :Sass, 'sass'
 
 # internal requires
 require 'jekyll/core_ext'

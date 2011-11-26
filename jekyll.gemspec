@@ -28,6 +28,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('maruku', ">= 0.5.9")
   s.add_runtime_dependency('kramdown', ">= 0.13.2")
   s.add_runtime_dependency('albino', ">= 1.3.2")
+  s.add_runtime_dependency('haml', ">= 3.1.2")
+  s.add_runtime_dependency('sass', ">= 3.1.3")
+  s.add_runtime_dependency('compass', ">= 0.11.3")
 
   s.add_development_dependency('redgreen', ">= 1.2.2")
   s.add_development_dependency('shoulda', ">= 2.11.3")
@@ -68,8 +71,10 @@ Gem::Specification.new do |s|
     jekyll.gemspec
     lib/jekyll.rb
     lib/jekyll/converter.rb
+    lib/jekyll/converters/haml.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
+    lib/jekyll/converters/sass.rb
     lib/jekyll/converters/textile.rb
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb
