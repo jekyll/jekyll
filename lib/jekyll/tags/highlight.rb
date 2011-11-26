@@ -35,10 +35,14 @@ module Jekyll
     end
 
     def render(context)
+      code = super
+      # Work around for Liquid returning an array prior to 2.3.0
+      code = code.join if code.respond_to?(:join)
+
       if context.registers[:site].pygments
-        render_pygments(context, super.join)
+        render_pygments(context, code)
       else
-        render_codehighlighter(context, super.join)
+        render_codehighlighter(context, code)
       end
     end
 
