@@ -1,8 +1,11 @@
 require 'uri'
+require 'r18n-core'
 
 module Jekyll
 
   module Filters
+    include R18n::Helpers
+    
     # Convert a Textile string into HTML output.
     #
     # input - The Textile String to convert.
@@ -25,22 +28,28 @@ module Jekyll
       converter.convert(input)
     end
 
-    # Format a date in short format e.g. "27 Jan 2011".
+    # Format a date in short format e.g. "10/01/2010".
     #
     # date - the Time to format.
     #
     # Returns the formatting String.
+    #
+    # To change format for the current locale, add
+    # a _locale/<locale>.yml and specify a date_format: 
     def date_to_string(date)
-      date.strftime("%d %b %Y")
+      l Date.parse(date.to_s), (t.date_format | nil)
     end
 
-    # Format a date in long format e.g. "27 January 2011".
+    # Format a date in long format e.g. "10th of January, 2010".
     #
     # date - The Time to format.
     #
     # Returns the formatted String.
+    #
+    # To change format for the current locale, add
+    # a _locale/<locale>.yml and specify a long_date_format: 
     def date_to_long_string(date)
-      date.strftime("%d %B %Y")
+      l Date.parse(date.to_s), (t.long_date_format | :full)
     end
 
     # Format a date for use in XML.

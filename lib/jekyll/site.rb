@@ -88,6 +88,9 @@ module Jekyll
       end.map do |c|
         c.new(self.config)
       end
+      
+      # Set locale
+      R18n.set(config['locale'], config['translation_path'])
     end
 
     # Read Site data from disk and load it into internal data structures.
