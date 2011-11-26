@@ -6,7 +6,7 @@ require 'open-uri'
 require 'uri'
 require "json"
 
-# ruby -r './lib/jekyll/migrators/posterous.rb' -e 'Jekyll::Posterous.process(email, pass, api_token, blog)'
+# ruby -r './lib/jekyll/migrators/posterous.rb' -e 'Jekyll::Posterous.process(email, pass, api_token, blog, tags_key)'
 # You can find your api token in posterous api page - http://posterous.com/api . Click on any of the 'view token' links to see your token.
 # blog is optional, by default it is the primary one
 
@@ -33,7 +33,7 @@ module Jekyll
       end
     end
 
-    def self.process(email, pass, api_token, blog = 'primary')
+    def self.process(email, pass, api_token, blog = 'primary', tags_key = 'categories')
       @email, @pass , @api_token = email, pass, api_token
       FileUtils.mkdir_p "_posts"
 
@@ -43,24 +43,32 @@ module Jekyll
       while posts.any?
         posts.each do |post|
           title = post["title"]
-          slug = title.gsub(/[^[:alnum:]]+/, '-').downcase
+          slug = title.gsub(/[^[:alnum:]]+/, '-').gsub(/^-+|-+$/, '').downcase
+          posterous_slug = post["slug"]
           date = Date.parse(post["display_date"])
           content = post["body_html"]
           published = !post["is_private"]
           name = "%02d-%02d-%02d-%s.html" % [date.year, date.month, date.day, slug]
+          tags = []
+          post["tags"].each do |tag|
+            tags.push(tag["name"])
+          end
 
           # Get the relevant fields as a hash, delete empty fields and convert
           # to YAML for the header
           data = {
              'layout' => 'post',
              'title' => title.to_s,
-             'published' => published
+             'published' => published,
+             tags_key => tags,
+             'posterous_url' => post["full_url"],
+             'posterous_slug' => posterous_slug
            }.delete_if { |k,v| v.nil? || v == ''}.to_yaml
 
           # Write out the data and content to file
           File.open("_posts/#{name}", "w") do |f|
             puts name
-            f.puts name
+            f.puts data
             f.puts "---"
             f.puts content
           end
