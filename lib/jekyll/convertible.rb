@@ -43,7 +43,7 @@ module Jekyll
     #
     # Returns nothing.
     def transform
-      self.content = converter.convert(self.content)
+      self.content = converter.convert(self.content) if converter
     end
 
     # Determine the extension depending on content_type.
@@ -81,6 +81,9 @@ module Jekyll
         puts "Liquid Exception: #{e.message} in #{self.name}"
       end
 
+      # we have to pass 'base' to the converter, so sass compiler can @import
+      # other .scss files in this directory
+      converter.base = payload['base'] if converter
       self.transform
 
       # output keeps track of what will finally be written

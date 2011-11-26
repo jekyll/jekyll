@@ -2,6 +2,7 @@
 layout: default
 title: Publish
 category: publish_test
+tag: pizza
 ---
 
 This should be published.
