@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
 
   s.name              = 'jekyll'
   s.version           = '0.11.0'
-  s.date              = '2011-07-10'
+  s.date              = '2011-11-26'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -22,20 +22,22 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.textile LICENSE]
 
-  s.add_runtime_dependency('liquid', ">= 1.9.0")
-  s.add_runtime_dependency('classifier', ">= 1.3.1")
-  s.add_runtime_dependency('directory_watcher', ">= 1.1.1")
-  s.add_runtime_dependency('maruku', ">= 0.5.9")
-  s.add_runtime_dependency('kramdown', ">= 0.13.2")
-  s.add_runtime_dependency('albino', ">= 1.3.2")
+  s.add_runtime_dependency('liquid', "~> 2.3")
+  s.add_runtime_dependency('classifier', "~> 1.3")
+  s.add_runtime_dependency('directory_watcher', "~> 1.1")
+  s.add_runtime_dependency('maruku', "~> 0.5")
+  s.add_runtime_dependency('kramdown', "~> 0.13")
+  s.add_runtime_dependency('albino', "~> 1.3")
 
-  s.add_development_dependency('redgreen', ">= 1.2.2")
-  s.add_development_dependency('shoulda', ">= 2.11.3")
-  s.add_development_dependency('rr', ">= 1.0.2")
-  s.add_development_dependency('cucumber', ">= 0.10.3")
-  s.add_development_dependency('RedCloth', ">= 4.2.1")
-  s.add_development_dependency('rdiscount', ">= 1.6.5")
-  s.add_development_dependency('redcarpet', ">= 1.9.0")
+  s.add_development_dependency('rake', "~> 0.9")
+  s.add_development_dependency('rdoc', "~> 3.11")
+  s.add_development_dependency('redgreen', "~> 1.2")
+  s.add_development_dependency('shoulda', "~> 2.11")
+  s.add_development_dependency('rr', "~> 1.0")
+  s.add_development_dependency('cucumber', "= 1.1")
+  s.add_development_dependency('RedCloth', "~> 4.2")
+  s.add_development_dependency('rdiscount', "~> 1.6")
+  s.add_development_dependency('redcarpet', "~> 1.9")
   
   # = MANIFEST =
   s.files = %w[
@@ -46,14 +48,6 @@ Gem::Specification.new do |s|
     Rakefile
     bin/jekyll
     cucumber.yml
-    doc/output/book.html
-    doc/output/ch00-preface.asc
-    doc/output/ch01-quick-start.asc
-    doc/output/ch02-directory-layout.asc
-    doc/output/stylesheets/handbookish-quirks.css
-    doc/output/stylesheets/handbookish.css
-    doc/output/stylesheets/scribe-quirks.css
-    doc/output/stylesheets/scribe.css
     features/create_sites.feature
     features/embed_filters.feature
     features/markdown.feature
@@ -64,7 +58,6 @@ Gem::Specification.new do |s|
     features/site_data.feature
     features/step_definitions/jekyll_steps.rb
     features/support/env.rb
-    g.pl
     jekyll.gemspec
     lib/jekyll.rb
     lib/jekyll/converter.rb
@@ -97,8 +90,6 @@ Gem::Specification.new do |s|
     lib/jekyll/static_file.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
-    output/stylesheets/scribe-quirks.css
-    output/stylesheets/scribe.css
     test/helper.rb
     test/source/.htaccess
     test/source/_includes/sig.markdown
