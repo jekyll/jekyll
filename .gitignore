@@ -7,3 +7,4 @@ pkg/
 _site/
 .bundle/
 .DS_Store
+bbin/

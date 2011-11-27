@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'rdoc'
 require 'date'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
@@ -49,6 +50,10 @@ task :default => [:test, :features]
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
+  if `which pygmentize` == ''
+    puts "You must have Pygments installed to run the tests."
+    exit 1
+  end
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true
@@ -62,7 +67,7 @@ task :coverage do
   sh "open coverage/index.html"
 end
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "#{name} #{version}"
