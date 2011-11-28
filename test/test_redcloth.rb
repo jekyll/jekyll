@@ -54,4 +54,33 @@ class TestRedCloth < Test::Unit::TestCase
       assert_equal "<p>line1\nline2</p>", @textile.convert("p. line1\nline2").strip
     end
   end
+
+  context "RedCloth w/no_span_caps set to false" do
+    setup do
+      config = {
+        'redcloth'       => {
+          'no_span_caps' => false
+        }
+      }
+      @textile = TextileConverter.new config
+    end
+    should "generate span tags around capitalized words" do
+      assert_equal "<p><span class=\"caps\">NSC</span></p>", @textile.convert("NSC").strip
+    end
+  end
+
+  context "RedCloth w/no_span_caps set to true" do
+    setup do
+      config = {
+        'redcloth'       => {
+          'no_span_caps' => true
+        }
+      }
+      @textile = TextileConverter.new config
+    end
+
+    should "not generate span tags around capitalized words" do
+      assert_equal "<p>NSC</p>", @textile.convert("NSC").strip
+    end
+  end
 end

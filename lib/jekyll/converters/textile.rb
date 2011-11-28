@@ -27,15 +27,23 @@ module Jekyll
 
     def convert(content)
       setup
-      
-      restrictions = Array.new
-      if !@config['redcloth'].nil?
-        @config['redcloth'].each do |key, value|
-          restrictions << key.to_sym if value
-        end
+
+      # Shortcut if config doesn't contain RedCloth section
+      return RedCloth.new(content).to_html if @config['redcloth'].nil?
+
+      # List of attributes defined on RedCloth
+      # (from http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html)
+      attrs = ['filter_classes', 'filter_html', 'filter_ids', 'filter_styles',
+              'hard_breaks', 'lite_mode', 'no_span_caps', 'sanitize_html']
+
+      r = RedCloth.new(content)
+
+      # Set attributes in r if they are NOT nil in the config
+      attrs.each do |attr|
+        r.instance_variable_set("@#{attr}".to_sym, @config['redcloth'][attr]) unless @config['redcloth'][attr].nil?
       end
 
-      RedCloth.new(content, restrictions).to_html
+      r.to_html
     end
   end
 
