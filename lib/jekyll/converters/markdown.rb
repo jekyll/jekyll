@@ -13,7 +13,16 @@ module Jekyll
         when 'redcarpet'
           begin
             require 'redcarpet'
-            @redcarpet_extensions = @config['redcarpet']['extensions'].map { |e| e.to_sym }
+            # Redcarpet 2.x, converter can be instantiated,
+            # and the format of renderer options is in hash, not in array
+
+            # convert extensions array to hash form
+            #    [ 'ext_a',        'ext_b',        'ext_c'        ]
+            # => { :ext_a => true, :ext_b => true, :ext_c => true }
+            redcarpet_extensions = Hash[@config['redcarpet']['extensions'].map { |e| [e.to_sym, true] }]
+
+            # TODO: support Renderer options
+            @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTML, redcarpet_extensions)
           rescue LoadError
             STDERR.puts 'You are missing a library required for Markdown. Please run:'
             STDERR.puts '  $ [sudo] gem install redcarpet'
@@ -88,7 +97,8 @@ module Jekyll
       setup
       case @config['markdown']
         when 'redcarpet'
-          Redcarpet.new(content, *@redcarpet_extensions).to_html
+          # Redcarpet 2.x, converter can be instantiated
+          @converter.render(content)
         when 'kramdown'
           # Check for use of coderay
           if @config['kramdown']['use_coderay']
