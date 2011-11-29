@@ -4,7 +4,7 @@ class TestRedcarpet < Test::Unit::TestCase
   context "redcarpet" do
     setup do
       config = {
-        'redcarpet' => { 'extensions' => ['smart'] },
+        'redcarpet' => { 'extensions' => ['strikethrough'] },
         'markdown' => 'redcarpet'
       }
       @markdown = MarkdownConverter.new config
@@ -15,7 +15,7 @@ class TestRedcarpet < Test::Unit::TestCase
     end
     
     should "pass redcarpet extensions" do
-      assert_equal "<p>&ldquo;smart&rdquo;</p>", @markdown.convert('"smart"').strip
+      assert_equal "<p><del>deleted</del></p>", @markdown.convert('~~deleted~~').strip
     end
   end
 end
