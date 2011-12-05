@@ -4,7 +4,10 @@ class TestRedcarpet < Test::Unit::TestCase
   context "redcarpet" do
     setup do
       config = {
-        'redcarpet' => { 'extensions' => ['strikethrough', 'smart'] },
+        'redcarpet' => {
+          'extensions' => ['strikethrough', 'smart'],
+          'render_options' => ['filter_html']
+        },
         'markdown' => 'redcarpet'
       }
       @markdown = MarkdownConverter.new config
@@ -20,6 +23,10 @@ class TestRedcarpet < Test::Unit::TestCase
 
     should "pass redcarpet extensions" do
       assert_equal "<p><del>deleted</del></p>", @markdown.convert('~~deleted~~').strip
+    end
+
+    should "pass redcarpet render options" do
+      assert_equal "<p><strong>bad code not here</strong>: i am bad</p>", @markdown.convert('**bad code not here**: <script>i am bad</script>').strip
     end
   end
 end
