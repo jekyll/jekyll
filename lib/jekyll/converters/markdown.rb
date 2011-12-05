@@ -21,8 +21,17 @@ module Jekyll
             # => { :ext_a => true, :ext_b => true, :ext_c => true }
             redcarpet_extensions = Hash[@config['redcarpet']['extensions'].map { |e| [e.to_sym, true] }]
 
+            custom_redcarpet_class = Class.new(Redcarpet::Render::HTML)
+
+            # add SmartyPants module into the class if 'smart' is specified
+            if redcarpet_extensions[:smart] == true
+              custom_redcarpet_class.class_eval do
+                include Redcarpet::Render::SmartyPants
+              end
+            end
+
             # TODO: support Renderer options
-            @converter = Redcarpet::Markdown.new(Redcarpet::Render::HTML, redcarpet_extensions)
+            @converter = Redcarpet::Markdown.new(custom_redcarpet_class, redcarpet_extensions)
           rescue LoadError
             STDERR.puts 'You are missing a library required for Markdown. Please run:'
             STDERR.puts '  $ [sudo] gem install redcarpet'
