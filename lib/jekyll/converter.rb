@@ -45,6 +45,13 @@ module Jekyll
     def pygments_suffix
       self.class.pygments_suffix
     end
+
+    # Run the converter, call the convert method
+    #
+    # Return the converted data
+    def run(content, convertible)
+      self.convert(content)
+    end
   end
 
 end

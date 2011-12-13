@@ -43,7 +43,7 @@ module Jekyll
     #
     # Returns nothing.
     def transform
-      self.content = converter.convert(self.content)
+      self.content = converter.run(self.content, self)
     end
 
     # Determine the extension depending on content_type.
@@ -94,7 +94,7 @@ module Jekyll
         payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
 
         begin
-          self.output = Liquid::Template.parse(layout.content).render(payload, info)
+          self.output = Liquid::Template.parse(layout.render(self)).render(payload, info)
         rescue => e
           puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
         end
