@@ -6,6 +6,9 @@ module Jekyll
     # Gets the Site object.
     attr_reader :site
 
+    # The page the layout encloses currently.
+    attr_reader :page
+
     # Gets/Sets the extension of this layout.
     attr_accessor :ext
 
@@ -38,6 +41,15 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
+    end
+
+    # Render layout for a page
+    #
+    # Call the converter on that page output
+    def render(page)
+      @page = page
+      converter.run(page.output, self)
+      @page = nil
     end
   end
 
