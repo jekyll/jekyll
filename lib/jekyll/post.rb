@@ -18,7 +18,7 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site
+    attr_accessor :site, :name
     attr_accessor :data, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
