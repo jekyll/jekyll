@@ -10,6 +10,7 @@ module Jekyll
   module Tumblr
     def self.process(url, format = "html", grab_images = false,
                      add_highlights = false, rewrite_urls = true)
+      @grab_images = grab_images
       FileUtils.mkdir_p "_posts/tumblr"
       url += "/api/read/json/"
       per_page = 50
@@ -55,7 +56,7 @@ module Jekyll
           end
         when "photo"
           title = post["photo-caption"]
-          content = "<img src=\"#{save_file(post["photo-url"], grab_images)}\"/>"
+          content = "<img src=\"#{save_file(post["photo-url"])}\"/>"
           unless post["photo-link-url"].nil?
             content = "<a href=\"#{post["photo-link-url"]}\">#{content}</a>"
           end
@@ -170,16 +171,15 @@ module Jekyll
       lines.join("\n")
     end
 
-    def self.save_file(url, grab_image = false)
-      unless grab_image == false
+    def self.save_file(url)
+      if @grab_images
         FileUtils.mkdir_p "tumblr_files"
         File.open("tumblr_files/#{url.split('/').last}", "w") do |f|
           f.write(open(url).read)
         end
-        return "/tumblr_files/#{url.split('/').last}"
-      else
-        return url
+        url = "/tumblr_files/#{url.split('/').last}"
       end
+      url
     end
   end
 end
