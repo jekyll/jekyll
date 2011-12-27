@@ -1,3 +1,8 @@
+== HEAD
+  * Bug Fixes
+    * Fix extra blank line in highlight blocks (#409)
+    * Update dependencies
+
 == 0.11.0 / 2011-07-10
   * Major Enhancements
     * Add command line importer functionality (#253)
