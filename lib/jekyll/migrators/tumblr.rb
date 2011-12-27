@@ -110,6 +110,9 @@ module Jekyll
       site = Jekyll::Site.new(Jekyll.configuration({}))
       dir = File.join(File.dirname(__FILE__), "..")
       urls = Hash[posts.map { |post|
+        # Create an initial empty file for the post so that
+        # we can instantiate a post object.
+        File.open("_posts/tumblr/#{post[:name]}", "w")
         tumblr_url = URI.parse(post[:slug]).path
         jekyll_url = Jekyll::Post.new(site, dir, "", "tumblr/" + post[:name]).url
         redirect_dir = tumblr_url.sub(/\//, "") + "/"
