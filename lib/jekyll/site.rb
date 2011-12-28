@@ -5,7 +5,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, 
+                  :limit_posts, :no_post_dirs
 
     attr_accessor :converters, :generators
 
@@ -23,6 +24,7 @@ module Jekyll
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
+      self.no_post_dirs    = config['no_post_dirs']
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
 
