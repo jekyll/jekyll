@@ -45,7 +45,7 @@ module Jekyll
         self.date = Time.parse(self.data["date"].to_s)
       end
 
-      if self.data.has_key?('published') && self.data['published'] == false
+      if self.data.has_key?('published') && self.data['published'] == false && site.prod_build == true
         self.published = false
       else
         self.published = true
@@ -131,7 +131,7 @@ module Jekyll
           "title"      => CGI.escape(slug),
           "i_day"      => date.strftime("%d").to_i.to_s,
           "i_month"    => date.strftime("%m").to_i.to_s,
-          "categories" => categories.join('/'),
+          "categories" => categories.map {|c| URI.escape(c) }.join('/'),
           "output_ext" => self.output_ext
         }.inject(template) { |result, token|
           result.gsub(/:#{Regexp.escape token.first}/, token.last)

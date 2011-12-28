@@ -141,6 +141,19 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with space (categories)" do
+          setup do
+            @post.categories << "French cuisine"
+            @post.categories << "Belgian beer"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/French%20cuisine/Belgian%20beer/2008/09/09/foo-bar.html", @post.url
+          end
+        end
+
         context "with none style" do
           setup do
             @post.site.permalink_style = :none
@@ -202,6 +215,20 @@ class TestPost < Test::Unit::TestCase
         @post.transform
 
         assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.content
+      end
+    end
+
+    context "when in a site is NOT in prod_build (production build)" do
+      setup do
+        clear_dest
+        stub(Jekyll).configuration { Jekyll::DEFAULTS.merge( { 'prod_build' => false } ) }
+        @site = Site.new(Jekyll.configuration)
+        @site.posts = [setup_post('2008-02-02-not-published.textile')]
+      end
+
+      should " post is published when published yaml is false _but_ configuration is development build" do
+        post = setup_post("2008-02-02-not-published.textile")
+        assert_equal true, post.published
       end
     end
 
