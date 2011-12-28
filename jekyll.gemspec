@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '0.11.1'
+  s.version           = '0.11.2'
   s.date              = '2011-12-27'
   s.rubyforge_project = 'jekyll'
 
@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 2.11")
   s.add_development_dependency('rr', "~> 1.0")
-  s.add_development_dependency('cucumber', "= 1.1")
+  s.add_development_dependency('cucumber', "1.1")
   s.add_development_dependency('RedCloth', "~> 4.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
   s.add_development_dependency('redcarpet', "~> 1.9")
