@@ -1,4 +1,4 @@
-== HEAD
+== 0.11.1 / 2011-12-27
   * Bug Fixes
     * Fix extra blank line in highlight blocks (#409)
     * Update dependencies
