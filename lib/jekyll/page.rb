@@ -133,6 +133,10 @@ module Jekyll
       File.open(path, 'w') do |f|
         f.write(self.output)
       end
+      if @site.config['preserve_mtime'] and File.exists?(File.join(@base, @dir, @name))
+        mtime = File.stat(File.join(@base, @dir, @name)).mtime
+        File.utime(mtime, mtime, path)
+      end
     end
 
     # Returns the object as a debug String.

@@ -127,6 +127,10 @@ opts = OptionParser.new do |opts|
     options['url'] = url
   end
 
+  opts.on("--[no-]preserve-mtime", "Set the mtime of rendered pages to that of the source file") do |mtime|
+    options['preserve_mtime'] = mtime
+  end
+
   opts.on("--version", "Display current version") do
     puts "Jekyll " + Jekyll::VERSION
     exit 0

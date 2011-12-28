@@ -210,6 +210,10 @@ module Jekyll
       File.open(path, 'w') do |f|
         f.write(self.output)
       end
+      if @site.config['preserve_mtime'] and File.exists?(File.join(@base, @name))
+        mtime = File.stat(File.join(@base, @name)).mtime
+        File.utime(mtime, mtime, path)
+      end
     end
 
     # Convert this post into a Hash for use in Liquid templates.
