@@ -56,10 +56,10 @@ module Jekyll
           end
         when "photo"
           title = post["photo-caption"]
-          content = "<img src=\"#{save_file(post["photo-url"])}\"/>"
-          unless post["photo-link-url"].nil?
-            content = "<a href=\"#{post["photo-link-url"]}\">#{content}</a>"
-          end
+          max_size = post.keys.map{ |k| k.gsub("photo-url-", "").to_i }.max
+          url = post["photo-url"] || post["photo-url-#{max_size}"]
+          content = "<img src=\"#{save_file(url)}\"/>"
+          content = "<a href=\"#{url}\">#{content}</a>" unless url.nil?
         when "audio"
           if !post["id3-title"].nil?
             title = post["id3-title"]
