@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'open-uri'
 require 'fileutils'
+require 'nokogiri'
 require 'date'
 require 'json'
 require 'uri'
@@ -89,6 +90,7 @@ module Jekyll
           end
       end
       date = Date.parse(post['date']).to_s
+      title = Nokogiri::HTML(title).text
       slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
       {
         :name => "#{date}-#{slug}.#{format}",
