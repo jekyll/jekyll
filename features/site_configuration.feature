@@ -24,22 +24,25 @@ Feature: Site configuration
     And I have an "index.html" file that contains "I want to be included"
     And I have a configuration file with "exclude" set to "Rakefile", "README"
     When I run jekyll
-    Then I should see "I want to be included" in "_site/index.html"
+    Then the "_site/index.html" file should exist
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
 
   Scenario: Exclude files with YAML array
     Given I have an "Rakefile" file that contains "I want to be excluded"
+    And I have an "exclude_me_because_of_my.extension" file that contains "please"
     And I have an "README" file that contains "I want to be excluded"
     And I have an "index.html" file that contains "I want to be included"
     And I have a configuration file with "exclude" set to:
-      | value    |
-      | README   |
-      | Rakefile |
+      | value         |
+      | README        |
+      | Rakefile      |
+      | /\.extension/ |
     When I run jekyll
     Then I should see "I want to be included" in "_site/index.html"
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
+    And the "_site/exclude_me_because_of_my.extension" file should not exist
 
   Scenario: Use RDiscount for markup
     Given I have an "index.markdown" page that contains "[Google](http://google.com)"
