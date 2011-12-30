@@ -59,7 +59,10 @@ module Jekyll
           title = post["photo-caption"]
           max_size = post.keys.map{ |k| k.gsub("photo-url-", "").to_i }.max
           url = post["photo-url"] || post["photo-url-#{max_size}"]
-          content = "<img src=\"#{save_file(url)}\"/>"
+          ext = "." + post[post.keys.select { |k|
+            k =~ /^photo-url-/ && post[k].split("/").last =~ /\./
+          }.first].split(".").last
+          content = "<img src=\"#{save_file(url, ext)}\"/>"
           unless post["photo-link-url"].nil?
             content = "<a href=\"#{post["photo-link-url"]}\">#{content}</a>"
           end
@@ -178,13 +181,13 @@ module Jekyll
       lines.join("\n")
     end
 
-    def self.save_file(url)
+    def self.save_file(url, ext)
       if @grab_images
+        path = "tumblr_files/#{url.split('/').last}"
+        path += ext unless path =~ /#{ext}$/
         FileUtils.mkdir_p "tumblr_files"
-        File.open("tumblr_files/#{url.split('/').last}", "w") do |f|
-          f.write(open(url).read)
-        end
-        url = "/tumblr_files/#{url.split('/').last}"
+        File.open(path, "w") { |f| f.write(open(url).read) }
+        url = "/" + path
       end
       url
     end
