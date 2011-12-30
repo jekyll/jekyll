@@ -308,12 +308,25 @@ module Jekyll
         unless ['.htaccess'].include?(e)
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||
-          self.exclude.include?(e) ||
+          excluded?(e) ||
           File.symlink?(e)
         end
       end
     end
 
+    # Determines whether a file is excluded by the config
+    #
+    # file - the file to check for exclusion
+
+    def excluded? file
+      regexes = self.exclude.select { |v| /^\/.*\//.match v }
+      self.exclude.include?(file) || regexes.any? { |r| eval(r).match file }
+    end
+
+    def exclude= excludes
+      excludes = excludes.split(",").map { |e| e.strip.gsub(/"/,"") } if excludes.is_a? String
+      @exclude = excludes
+    end
     # Get the implementation class for the given Converter.
     #
     # klass - The Class of the Converter to fetch.

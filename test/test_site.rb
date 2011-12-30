@@ -127,11 +127,16 @@ class TestSite < Test::Unit::TestCase
     should "filter entries with exclude" do
       excludes = %w[README TODO]
       includes = %w[index.html site.css]
+      @site.exclude = excludes + ["/\.extension/"]
+      assert_equal includes, @site.filter_entries(excludes + ["exclude_this.extension"] + includes)
+    end
 
-      @site.exclude = excludes
+    should "filter entries as string" do
+      excludes = %w[README TODO]
+      includes = %w[index.html site.css]
+      @site.exclude = excludes.map { |e| "\"#{e}\""}. join ","
       assert_equal includes, @site.filter_entries(excludes + includes)
     end
-    
     context 'with orphaned files in destination' do
       setup do
         clear_dest
