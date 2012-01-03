@@ -1,4 +1,4 @@
-h1. Jekyll
+h1. Jekyll !https://gemnasium.com/mojombo/jekyll.png(Dependency Status)!:https://gemnasium.com/mojombo/jekyll
 
 By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!
 
