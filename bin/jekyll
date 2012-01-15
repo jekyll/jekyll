@@ -127,6 +127,10 @@ opts = OptionParser.new do |opts|
     options['url'] = url
   end
 
+  opts.on("--mime [PATH]", "Load custom Apache compatible mime.types file.") do |path|
+    options['mime'] = path
+  end
+
   opts.on("--version", "Display current version") do
     puts "Jekyll " + Jekyll::VERSION
     exit 0
@@ -263,10 +267,28 @@ if options['server']
   require 'webrick'
   include WEBrick
 
+  # force webrick to return text/html mime type for urls without extensions (if not told otherwise)
+  module WEBrick
+    module HTTPUtils
+      alias_method :original_mime_type, :mime_type
+      module_function :original_mime_type
+      def mime_type(filename, mime_tab)
+        mime = original_mime_type(filename, mime_tab)
+        return "text/html" if mime == "application/octet-stream" and File.extname(filename)==""
+        mime
+      end
+      module_function :mime_type
+    end
+  end
+
   FileUtils.mkdir_p(destination)
 
-  mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
-  mime_types.store 'js', 'application/javascript'
+  unless options['mime']
+    mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
+    mime_types.store 'js', 'application/javascript'
+  else
+    mime_types = WEBrick::HTTPUtils::load_mime_types(options['mime'])
+  end
 
   s = HTTPServer.new(
     :Port            => options['server_port'],
