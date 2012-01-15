@@ -71,6 +71,10 @@ opts = OptionParser.new do |opts|
       options['baseurl'] = baseurl
   end
 
+  opts.on("--default-mimetype [MT]", "Mimetype to use when no file extension (if --server)") do |mt|
+      options['default-mimetype'] = mt
+  end
+
   opts.on("--[no-]lsi", "Use LSI for better related posts") do |lsi|
     options['lsi'] = lsi
   end
@@ -267,6 +271,9 @@ if options['server']
 
   mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
   mime_types.store 'js', 'application/javascript'
+  if options['default-mimetype']
+    mime_types.store nil, options['default-mimetype']
+  end
 
   s = HTTPServer.new(
     :Port            => options['server_port'],
