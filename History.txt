@@ -2,6 +2,7 @@
   * Minor Enhancements
     * Add ability to explicitly specify included files (#261)
     * Add --default-mimetype option (#279)
+    * Allow setting of RedCloth options (#284)
   * Bug Fixes
     * Allow some special characters in highlight names
 
