@@ -31,6 +31,41 @@ CONTENT
     create_post(content, override)
   end
 
+  context "language name" do
+    should "match only the required set of chars" do
+      r = Jekyll::HighlightBlock::SYNTAX
+      assert_match r, "ruby"
+      assert_match r, "c#"
+      assert_match r, "xml+cheetah"
+      assert_match r, "x.y"
+      assert_match r, "coffee-script"
+
+      assert_no_match r, "blah^"
+
+      assert_match r, "ruby key=val"
+      assert_match r, "ruby a=b c=d"
+    end
+  end
+
+  context "initialized tag" do
+    should "work" do
+      tag = Jekyll::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({}, tag.instance_variable_get(:@options))
+
+      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({'O' => "linenos=inline"}, tag.instance_variable_get(:@options))
+
+      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({'O' => "linenos=table"}, tag.instance_variable_get(:@options))
+
+      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({'O' => "linenos=table,nowrap=true"}, tag.instance_variable_get(:@options))
+
+      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({'O' => "cssclass=hl,linenos=table"}, tag.instance_variable_get(:@options))
+    end
+  end
+
   context "post content has highlight tag" do
     setup do
       fill_post("test")

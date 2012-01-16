@@ -2,6 +2,8 @@
   * Minor Enhancements
     * Add ability to explicitly specify included files (#261)
     * Add --default-mimetype option (#279)
+  * Bug Fixes
+    * Allow some special characters in highlight names
 
 == 0.11.2 / 2011-12-27
   * Bug Fixes

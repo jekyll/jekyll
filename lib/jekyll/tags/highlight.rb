@@ -3,14 +3,19 @@ module Jekyll
   class HighlightBlock < Liquid::Block
     include Liquid::StandardFilters
 
-    # We need a language, but the linenos argument is optional.
-    SYNTAX = /(\w+)\s?([\w\s=]+)*/
+    # The regular expression syntax checker. Start with the language specifier.
+    # Follow that by zero or more space separated options that take one of two
+    # forms:
+    #
+    # 1. name
+    # 2. name=value
+    SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=\w+)?)*)$/
 
     def initialize(tag_name, markup, tokens)
       super
-      if markup =~ SYNTAX
+      if markup.strip =~ SYNTAX
         @lang = $1
-        if defined? $2
+        if defined?($2) && $2 != ''
           tmp_options = {}
           $2.split.each do |opt|
             key, value = opt.split('=')
@@ -23,7 +28,7 @@ module Jekyll
             end
             tmp_options[key] = value
           end
-          tmp_options = tmp_options.to_a.collect { |opt| opt.join('=') }
+          tmp_options = tmp_options.to_a.sort.collect { |opt| opt.join('=') }
           # additional options to pass to Albino
           @options = { 'O' => tmp_options.join(',') }
         else
