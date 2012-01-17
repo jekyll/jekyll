@@ -27,12 +27,10 @@ module Jekyll
       end
     end
 
-    def self.process(email, pass, blog = 'primary')
-      @email, @pass = email, pass
-      @api_token = JSON.parse(self.fetch("/api/2/auth/token").body)['api_token']
+    def self.process(api_token, blog = 'primary')
       FileUtils.mkdir_p "_posts"
 
-      posts = JSON.parse(self.fetch("/api/v2/users/me/sites/#{blog}/posts?api_token=#{@api_token}").body)
+      posts = JSON.parse(self.fetch("/api/v2/users/me/sites/#{blog}/posts?api_token=#{api_token}").body)
       page = 1
 
       while posts.any?
@@ -61,7 +59,7 @@ module Jekyll
         end
 
         page += 1
-        posts = JSON.parse(self.fetch("/api/v2/users/me/sites/#{blog}/posts?api_token=#{@api_token}&page=#{page}").body)
+        posts = JSON.parse(self.fetch("/api/v2/users/me/sites/#{blog}/posts?api_token=#{api_token}&page=#{page}").body)
       end
     end
   end
