@@ -59,6 +59,7 @@ module Jekyll
     'source'       => Dir.pwd,
     'destination'  => File.join(Dir.pwd, '_site'),
     'plugins'      => File.join(Dir.pwd, '_plugins'),
+    'public_root'  => nil,
 
     'future'       => true,
     'lsi'          => false,

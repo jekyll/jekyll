@@ -10,16 +10,17 @@ module Jekyll
     # base - The String path to the <source>.
     # dir  - The String path between <source> and the file.
     # name - The String filename of the file.
-    def initialize(site, base, dir, name)
+    def initialize(site, base, source_dir, destination_dir, name)
       @site = site
       @base = base
-      @dir  = dir
+      @source_dir  = source_dir
+      @destination_dir  = destination_dir
       @name = name
     end
 
     # Returns source file path.
     def path
-      File.join(@base, @dir, @name)
+      File.join(@base, @source_dir, @name)
     end
 
     # Obtain destination path.
@@ -28,7 +29,7 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      File.join(dest, @dir, @name)
+      File.join(dest, @destination_dir, @name)
     end
 
     # Returns last modification time for this file.

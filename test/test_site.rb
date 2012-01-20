@@ -4,7 +4,7 @@ class TestSite < Test::Unit::TestCase
   context "creating sites" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'public_folder' => '/public'})
       end
       @site = Site.new(Jekyll.configuration)
     end
@@ -85,6 +85,36 @@ class TestSite < Test::Unit::TestCase
       @site.process
       mtime3 = File.stat(dest).mtime.to_i
       assert_not_equal mtime2, mtime3 # must be regenerated and differ!
+
+      sleep 1
+      @site.process
+      mtime4 = File.stat(dest).mtime.to_i
+      assert_equal mtime3, mtime4 # no modifications, so must be the same
+    end
+
+    should "write static modified static files from the public root" do
+      clear_dest
+      StaticFile.reset_cache
+
+      @site.process
+      some_static_file = @site.static_files.find{|f| f.path.end_with?('learnmore.html')}
+      
+      dest = File.expand_path(some_static_file.destination(@site.dest))
+      mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
+
+      # need to sleep because filesystem timestamps have best resolution in seconds
+      sleep 1
+      @site.process
+      mtime2 = File.stat(dest).mtime.to_i
+      assert_equal mtime1, mtime2
+
+      # simulate file modification by user
+      FileUtils.touch some_static_file.path
+
+      sleep 1
+      @site.process
+      mtime3 = File.stat(dest).mtime.to_i
+      assert_not_equal mtime2, mtime3 # must be regenerated!
 
       sleep 1
       @site.process
