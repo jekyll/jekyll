@@ -143,7 +143,7 @@ module Jekyll
           else
             destination_dir = self.public_root.nil? ? dir : dir.sub(/^#{Regexp.escape(self.public_root)}/, '')
             # otherwise treat it as a static file
-            static_files << StaticFile.new(self, self.source, dir, destination_dir, f)
+            static_files << StaticFile.new(self.source, dir, destination_dir, f)
           end
         end
       end
