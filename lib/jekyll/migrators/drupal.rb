@@ -78,12 +78,18 @@ EOF
 
         # Make a file to redirect from the old Drupal URL
         if is_published
-          FileUtils.mkdir_p "node/#{node_id}"
-          File.open("node/#{node_id}/index.md", "w") do |f|
-            f.puts "---"
-            f.puts "layout: refresh"
-            f.puts "refresh_to_post_id: /#{time.strftime("%Y/%m/%d/") + slug}"
-            f.puts "---"
+          aliases = db["SELECT dst FROM #{prefix}url_alias WHERE src = ?", "node/#{node_id}"].all
+
+          aliases.push(:dst => "node/#{node_id}")
+
+          aliases.each do |url_alias|
+            FileUtils.mkdir_p url_alias[:dst]
+            File.open("#{url_alias[:dst]}/index.md", "w") do |f|
+              f.puts "---"
+              f.puts "layout: refresh"
+              f.puts "refresh_to_post_id: /#{time.strftime("%Y/%m/%d/") + slug}"
+              f.puts "---"
+            end
           end
         end
       end
