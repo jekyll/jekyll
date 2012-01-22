@@ -10,6 +10,7 @@ require 'set'
 #   self.data=
 #   self.ext=
 #   self.output=
+#   self.name
 module Jekyll
   module Convertible
     # Returns the contents as a String.
