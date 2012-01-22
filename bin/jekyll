@@ -166,7 +166,7 @@ if ARGV.size > 0
     migrators = {
       :posterous => 'Posterous',
       :wordpressdotcom => 'WordpressDotCom',
-      :wordpress => 'Wordpress',
+      :wordpress => 'WordPress',
       :csv => 'CSV',
       :drupal => 'Drupal',
       :enki => 'Enki',
