@@ -26,14 +26,13 @@ module Jekyll
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
 
-      if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
-        self.content = $POSTMATCH
-
-        begin
+      begin
+        if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+          self.content = $POSTMATCH
           self.data = YAML.load($1)
-        rescue => e
-          puts "YAML Exception reading #{name}: #{e.message}"
         end
+      rescue => e
+        puts "YAML Exception reading #{name}: #{e.message}"
       end
 
       self.data ||= {}
