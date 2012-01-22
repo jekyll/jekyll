@@ -6,20 +6,20 @@ module Jekyll
 
     # Initialize a new StaticFile.
     #
-    # site - The Site.
     # base - The String path to the <source>.
-    # dir  - The String path between <source> and the file.
+    # source_dir  - The String path between <source> and the file.
+    # destination_dir  - The String path between <destinations> and the file.
     # name - The String filename of the file.
-    def initialize(site, base, dir, name)
-      @site = site
+    def initialize(base, source_dir, destination_dir, name)
       @base = base
-      @dir  = dir
+      @source_dir  = source_dir
+      @destination_dir  = destination_dir
       @name = name
     end
 
     # Returns source file path.
     def path
-      File.join(@base, @dir, @name)
+      File.join(@base, @source_dir, @name)
     end
 
     # Obtain destination path.
@@ -28,7 +28,7 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      File.join(dest, @dir, @name)
+      File.join(dest, @destination_dir, @name)
     end
 
     # Returns last modification time for this file.

@@ -5,7 +5,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'public_root' => '/public'})
       end
 
       @site = Site.new(Jekyll.configuration)
@@ -39,6 +39,10 @@ class TestGeneratedSite < Test::Unit::TestCase
     should "process other static files and generate correct permalinks" do
       assert File.exists?(dest_dir('/about/index.html'))
       assert File.exists?(dest_dir('/contacts.html'))
+    end
+
+    should "process static file in public folder" do
+      assert File.exists?(dest_dir('/learnmore.html'))
     end
   end
 

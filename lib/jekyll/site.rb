@@ -5,7 +5,7 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :public_root, :limit_posts
 
     attr_accessor :converters, :generators
 
@@ -26,6 +26,7 @@ module Jekyll
       self.include         = config['include'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.public_root     = config['public_root'] || nil
 
       self.reset
       self.setup
@@ -140,8 +141,9 @@ module Jekyll
             # file appears to have a YAML header so process it as a page
             pages << Page.new(self, self.source, dir, f)
           else
+            destination_dir = self.public_root.nil? ? dir : dir.sub(/^#{Regexp.escape(self.public_root)}/, '')
             # otherwise treat it as a static file
-            static_files << StaticFile.new(self, self.source, dir, f)
+            static_files << StaticFile.new(self.source, dir, destination_dir, f)
           end
         end
       end
