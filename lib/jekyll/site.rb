@@ -174,7 +174,10 @@ module Jekyll
       self.posts.sort!
 
       # limit the posts if :limit_posts option is set
-      self.posts = self.posts[-limit_posts, limit_posts] if limit_posts
+      if limit_posts
+        limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
+        self.posts = self.posts[-limit, limit]
+      end
     end
 
     # Run each of the Generators.
