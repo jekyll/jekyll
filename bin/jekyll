@@ -195,7 +195,7 @@ end
 
 
 
-# Get source and destintation from command line
+# Get source and destination from command line
 case ARGV.size
   when 0
   when 1
