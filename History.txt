@@ -6,6 +6,7 @@
   * Bug Fixes
     * Allow some special characters in highlight names
     * URL escape category names in URL generation (#360)
+    * Fix error with limit_posts (#442)
 
 == 0.11.2 / 2011-12-27
   * Bug Fixes
