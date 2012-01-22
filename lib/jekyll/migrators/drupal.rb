@@ -14,18 +14,23 @@ module Jekyll
     # Reads a MySQL database via Sequel and creates a post file for each post
     # in wp_posts that has post_status = 'publish'. This restriction is made
     # because 'draft' posts are not guaranteed to have valid dates.
-    QUERY = "SELECT node.nid, \
-                    node.title, \
-                    node_revisions.body, \
-                    node.created, \
-                    node.status \
-             FROM node, \
-                  node_revisions \
-             WHERE (node.type = 'blog' OR node.type = 'story') \
-             AND node.vid = node_revisions.vid"
+    QUERY = "SELECT n.nid, \
+                    n.title, \
+                    nr.body, \
+                    n.created, \
+                    n.status \
+             FROM node AS n, \
+                  node_revisions AS nr \
+             WHERE (n.type = 'blog' OR n.type = 'story') \
+             AND n.vid = nr.vid"
 
-    def self.process(dbname, user, pass, host = 'localhost')
+    def self.process(dbname, user, pass, host = 'localhost', prefix = '')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
+
+      if prefix != ''
+        QUERY[" node "] = " " + prefix + "node "
+        QUERY[" node_revisions "] = " " + prefix + "node_revisions "
+      end
 
       FileUtils.mkdir_p "_posts"
       FileUtils.mkdir_p "_drafts"
