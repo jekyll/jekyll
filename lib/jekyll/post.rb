@@ -22,6 +22,8 @@ module Jekyll
     attr_accessor :data, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
+    attr_reader :name
+
     # Initialize this Post instance.
     #   +site+ is the Site
     #   +base+ is the String path to the dir containing the post file
