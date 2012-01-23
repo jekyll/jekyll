@@ -29,6 +29,11 @@ module Jekyll
       case response
         when Net::HTTPSuccess     then response
         when Net::HTTPRedirection then fetch(response['location'], limit - 1)
+        when Net::HTTPForbidden   then
+          retry_after = response.to_hash['retry-after'][0]
+          puts "We have been told to try again after #{retry_after} seconds"
+          sleep(retry_after.to_i + 1)
+          fetch(uri_str, limit - 1)
         else response.error!
       end
     end
