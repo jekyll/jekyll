@@ -38,6 +38,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency('RedCloth', "~> 4.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
   s.add_development_dependency('redcarpet', "~> 1.9")
+  s.add_development_dependency('sequel', "~> 3.31")
+  s.add_development_dependency('mysql', "~> 2.8")
+  s.add_development_dependency('pg', "~> 0.12")
   
   # = MANIFEST =
   s.files = %w[
