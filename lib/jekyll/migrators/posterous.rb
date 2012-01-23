@@ -5,7 +5,7 @@ require 'net/http'
 require 'uri'
 require "json"
 
-# ruby -r './lib/jekyll/migrators/posterous.rb' -e 'Jekyll::Posterous.process(email, pass, blog)'
+# ruby -r './lib/jekyll/migrators/posterous.rb' -e 'Jekyll::Posterous.process(email, pass, api_key, blog)'
 
 module Jekyll
   module Posterous
@@ -27,9 +27,8 @@ module Jekyll
       end
     end
 
-    def self.process(email, pass, blog = 'primary')
-      @email, @pass = email, pass
-      @api_token = JSON.parse(self.fetch("/api/2/auth/token").body)['api_token']
+    def self.process(email, pass, api_token, blog = 'primary')
+      @email, @pass, @api_token = email, pass, api_token
       FileUtils.mkdir_p "_posts"
 
       posts = JSON.parse(self.fetch("/api/v2/users/me/sites/#{blog}/posts?api_token=#{@api_token}").body)

@@ -46,7 +46,7 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 module Jekyll
-  VERSION = '0.11.0'
+  VERSION = '0.11.2'
 
   # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML).
@@ -65,7 +65,8 @@ module Jekyll
     'pygments'     => false,
     'markdown'     => 'maruku',
     'permalink'    => 'date',
-    
+    'include'      => ['.htaccess'],
+
     'markdown_ext' => 'markdown,mkd,mkdn,md',
     'textile_ext'  => 'textile',
 
@@ -97,6 +98,9 @@ module Jekyll
         'coderay_bold_every'        => 10,
         'coderay_css'               => 'style'
       }
+    },
+    'redcloth'        => {
+      'hard_breaks'   => true
     }
   }
 
