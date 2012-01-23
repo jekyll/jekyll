@@ -29,7 +29,7 @@ module Jekyll
       when :mysql
         db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
       else
-        raise "Unknown databse server '#{server}'"
+        raise "Unknown database server '#{server}'"
       end
       db[SQL].each do |post|
         next unless post[:state] =~ /published/
