@@ -1,6 +1,27 @@
 require 'helper'
 
 class TestSite < Test::Unit::TestCase
+  context "configuring sites" do
+    should "have an array for plugins by default" do
+      site = Site.new(Jekyll::DEFAULTS)
+      assert_equal [File.join(Dir.pwd, '_plugins')], site.plugins
+    end
+
+    should "have an array for plugins if passed as a string" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
+      assert_equal ['/tmp/plugins'], site.plugins
+    end
+
+    should "have an array for plugins if passed as an array" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
+      assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
+    end
+
+    should "have an array for plugins if nothing is passed" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => []}))
+      assert_equal [], site.plugins
+    end
+  end
   context "creating sites" do
     setup do
       stub(Jekyll).configuration do

@@ -14,16 +14,19 @@ module Jekyll
     # config - A Hash containing site configuration details.
     def initialize(config)
       self.config          = config.clone
-
       self.safe            = config['safe']
       self.source          = File.expand_path(config['source'])
       self.dest            = File.expand_path(config['destination'])
       self.plugins         = if config['plugins'].respond_to?('each')
                                # If plugins is an array, process it.
-                               config['plugins'].each { |directory| File.expand_path(directory) }
+                               Array(config['plugins']).map { |d| File.expand_path(d) }
                              else
                                # Otherwise process a single entry as an array.
-                               [File.expand_path(config['plugins'])]
+                               if config['plugins'].nil?
+                                 []
+                               else
+                                 [File.expand_path(config['plugins'])]
+                               end
                              end
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
