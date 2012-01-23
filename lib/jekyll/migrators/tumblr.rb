@@ -83,7 +83,6 @@ module Jekyll
         when "conversation"
           title = post["conversation-title"]
           content = "<section><dialog>"
-	  p post["conversation"]
           post["conversation"].each do |line|
             content << "<dt>#{line['label']}</dt><dd>#{line}</dd>"
           end
