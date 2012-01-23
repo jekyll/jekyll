@@ -14,6 +14,7 @@ module Jekyll
     # config - A Hash containing site configuration details.
     def initialize(config)
       self.config          = config.clone
+
       self.safe            = config['safe']
       self.source          = File.expand_path(config['source'])
       self.dest            = File.expand_path(config['destination'])
@@ -21,10 +22,10 @@ module Jekyll
                                # If plugins is an array, process it.
                                Array(config['plugins']).map { |d| File.expand_path(d) }
                              else
-                               # Otherwise process a single entry as an array.
                                if config['plugins'].nil?
                                  []
                                else
+                                 # Otherwise process a single entry as an array.
                                  [File.expand_path(config['plugins'])]
                                end
                              end

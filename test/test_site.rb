@@ -17,8 +17,13 @@ class TestSite < Test::Unit::TestCase
       assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
     end
 
-    should "have an array for plugins if nothing is passed" do
+    should "have an empty array for plugins if nothing is passed" do
       site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => []}))
+      assert_equal [], site.plugins
+    end
+
+    should "have an empty array for plugins if nil is passed" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => nil}))
       assert_equal [], site.plugins
     end
   end
