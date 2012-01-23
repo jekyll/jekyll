@@ -104,3 +104,9 @@ Feature: Create sites
     When I run jekyll
     Then the _site directory should exist
     And I should see "URL: /2020/01/31/entry2/" in "_site/index.html"
+
+  Scenario: Basic site with whitelisted dotfile
+    Given I have an ".htaccess" file that contains "SomeDirective"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "SomeDirective" in "_site/.htaccess"
