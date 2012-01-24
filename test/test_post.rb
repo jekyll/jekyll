@@ -21,6 +21,8 @@ class TestPost < Test::Unit::TestCase
       assert Post.valid?("2008-09-09-foo-bar.textile")
       assert Post.valid?("foo/bar/2008-09-09-foo-bar.textile")
       assert Post.valid?("foo-bar.textile")
+      assert Post.valid?("-foo.textile")
+      assert Post.valid?("2012-01-24foo.textile")
 
       assert !Post.valid?("blah")
     end
@@ -70,9 +72,17 @@ class TestPost < Test::Unit::TestCase
         assert_equal "foo-bar", @post.slug
         assert_equal ".textile", @post.ext
         
-        post_dir = "/#{now.strftime("%Y")}/#{now.strftime("%m")}/#{now.strftime("%d")}" 
+        post_dir = "/#{current_time.strftime("%Y")}/#{current_time.strftime("%m")}/#{current_time.strftime("%d")}" 
         assert_equal post_dir, @post.dir
         assert_equal "#{post_dir}/foo-bar", @post.id
+      end
+
+      should "get title correctly when there is no date in the filename" do
+        @post.categories = []
+        @post.process("2012-01-24foo.textile")
+        
+        assert_equal "2012-01-24foo", @post.slug
+        assert_equal ".textile", @post.ext
       end
 
       should "CGI escape urls" do

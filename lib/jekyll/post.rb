@@ -8,7 +8,7 @@ module Jekyll
       attr_accessor :lsi
     end
 
-    MATCHER = /^(.+\/)*(\d+-\d+-\d+)?-?(.*)(\.[^.]+)$/
+    MATCHER = /^(.+\/)*(\d+-\d+-\d+-)?(.*)(\.[^.]+)$/
 
     # Post name validator. Post filenames must be like:
     #   2008-11-05-my-awesome-post.textile
