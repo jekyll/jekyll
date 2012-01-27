@@ -5,7 +5,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :years
 
     attr_accessor :converters, :generators
 
@@ -58,6 +59,7 @@ module Jekyll
       self.static_files    = []
       self.categories      = Hash.new { |hash, key| hash[key] = [] }
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
+      self.years           = Hash.new { |hash, key| hash[key] = [] }
 
       if !self.limit_posts.nil? && self.limit_posts < 1
         raise ArgumentError, "Limit posts must be nil or >= 1"
@@ -167,6 +169,7 @@ module Jekyll
             self.posts << post
             post.categories.each { |c| self.categories[c] << post }
             post.tags.each { |c| self.tags[c] << post }
+            self.years[post.date.year.to_s] << post
           end
         end
       end
@@ -203,6 +206,7 @@ module Jekyll
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
       self.tags.values.map { |ps| ps.sort! { |a, b| b <=> a } }
+      self.years.values.map { |ps| ps.sort! { |a, b| b <=> a } }
     rescue Errno::ENOENT => e
       # ignore missing layout dir
     end
@@ -289,6 +293,7 @@ module Jekyll
     #                  See Site#post_attr_hash for type info.
     #   "tags"       - The Hash of tag values and Posts.
     #                  See Site#post_attr_hash for type info.
+    #   "years"      - The Hash of publishing years and Posts.
     def site_payload
       {"site" => self.config.merge({
           "time"       => self.time,
@@ -296,7 +301,8 @@ module Jekyll
           "pages"      => self.pages,
           "html_pages" => self.pages.reject { |page| !page.html? },
           "categories" => post_attr_hash('categories'),
-          "tags"       => post_attr_hash('tags')})}
+          "tags"       => post_attr_hash('tags'),
+          "years"      => self.years})}
     end
 
     # Filter out any files/directories that are hidden or backup files (start

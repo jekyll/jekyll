@@ -13,6 +13,10 @@ class TestSite < Test::Unit::TestCase
       assert_equal Hash.new, @site.tags
     end
 
+    should "have an empty year hash by default" do
+      assert_equal Hash.new, @site.years
+    end
+
     should "reset data before processing" do
       clear_dest
       @site.process
@@ -20,6 +24,7 @@ class TestSite < Test::Unit::TestCase
       before_layouts = @site.layouts.length
       before_categories = @site.categories.length
       before_tags = @site.tags.length
+      before_years = @site.years.length
       before_pages = @site.pages.length
       before_static_files = @site.static_files.length
       before_time = @site.time
@@ -29,6 +34,7 @@ class TestSite < Test::Unit::TestCase
       assert_equal before_layouts, @site.layouts.length
       assert_equal before_categories, @site.categories.length
       assert_equal before_tags, @site.tags.length
+      assert_equal before_years, @site.years.length
       assert_equal before_pages, @site.pages.length
       assert_equal before_static_files, @site.static_files.length
       assert before_time <= @site.time
