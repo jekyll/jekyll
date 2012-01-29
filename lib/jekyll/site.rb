@@ -18,7 +18,17 @@ module Jekyll
       self.safe            = config['safe']
       self.source          = File.expand_path(config['source'])
       self.dest            = File.expand_path(config['destination'])
-      self.plugins         = File.expand_path(config['plugins'])
+      self.plugins         = if config['plugins'].respond_to?('each')
+                               # If plugins is an array, process it.
+                               Array(config['plugins']).map { |d| File.expand_path(d) }
+                             else
+                               if config['plugins'].nil?
+                                 []
+                               else
+                                 # Otherwise process a single entry as an array.
+                                 [File.expand_path(config['plugins'])]
+                               end
+                             end
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
@@ -73,8 +83,10 @@ module Jekyll
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
       unless self.safe
-        Dir[File.join(self.plugins, "**/*.rb")].each do |f|
-          require f
+        self.plugins.each do |plugins|
+            Dir[File.join(plugins, "**/*.rb")].each do |f|
+              require f
+            end
         end
       end
 
