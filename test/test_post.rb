@@ -20,8 +20,10 @@ class TestPost < Test::Unit::TestCase
     should "ensure valid posts are valid" do
       assert Post.valid?("2008-09-09-foo-bar.textile")
       assert Post.valid?("foo/bar/2008-09-09-foo-bar.textile")
+      assert Post.valid?("foo-bar.textile")
+      assert Post.valid?("-foo.textile")
+      assert Post.valid?("2012-01-24foo.textile")
 
-      assert !Post.valid?("lol2008-09-09-foo-bar.textile")
       assert !Post.valid?("blah")
     end
 
@@ -56,6 +58,31 @@ class TestPost < Test::Unit::TestCase
         assert_raise Jekyll::FatalException do
           @post.process("2009-27-03-foo-bar.textile")
         end
+      end
+
+      should "assign today's date when there is no date in the filename" do
+        @post.categories = []
+        @post.process("foo-bar.textile")
+        
+        current_time = Time.now
+        
+        assert_equal current_time.year, @post.date.year
+        assert_equal current_time.month, @post.date.month
+        assert_equal current_time.day, @post.date.day
+        assert_equal "foo-bar", @post.slug
+        assert_equal ".textile", @post.ext
+        
+        post_dir = "/#{current_time.strftime("%Y")}/#{current_time.strftime("%m")}/#{current_time.strftime("%d")}" 
+        assert_equal post_dir, @post.dir
+        assert_equal "#{post_dir}/foo-bar", @post.id
+      end
+
+      should "get title correctly when there is no date in the filename" do
+        @post.categories = []
+        @post.process("2012-01-24foo.textile")
+        
+        assert_equal "2012-01-24foo", @post.slug
+        assert_equal ".textile", @post.ext
       end
 
       should "CGI escape urls" do
