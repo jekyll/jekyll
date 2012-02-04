@@ -50,3 +50,9 @@ class Date
     strftime("%Y-%m-%dT%H:%M:%S%Z")
   end if RUBY_VERSION < '1.9'
 end
+
+class String
+  def titleize
+    split(/[\W_]+/).map(&:capitalize).join ' '
+  end
+end
