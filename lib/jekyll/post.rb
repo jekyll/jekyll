@@ -22,6 +22,8 @@ module Jekyll
     attr_accessor :data, :content, :output, :ext
     attr_accessor :date, :updated, :slug, :published, :tags, :categories
 
+    attr_reader :name
+
     # Initialize this Post instance.
     #   +site+ is the Site
     #   +base+ is the String path to the dir containing the post file
@@ -83,6 +85,8 @@ module Jekyll
       self.date = Time.parse(date)
       self.slug = slug
       self.ext = ext
+    rescue ArgumentError
+      raise FatalException.new("Post #{name} does not have a valid date.")
     end
 
     # The generated directory into which the post will be placed
@@ -122,21 +126,30 @@ module Jekyll
     #
     # Returns <String>
     def url
-      return permalink if permalink
+      return @url if @url
 
-      @url ||= {
-        "year"       => date.strftime("%Y"),
-        "month"      => date.strftime("%m"),
-        "mname"      => date.strftime("%b").downcase,
-        "day"        => date.strftime("%d"),
-        "title"      => CGI.escape(slug),
-        "i_day"      => date.strftime("%d").to_i.to_s,
-        "i_month"    => date.strftime("%m").to_i.to_s,
-        "categories" => categories.join('/'),
-        "output_ext" => self.output_ext
-      }.inject(template) { |result, token|
-        result.gsub(/:#{Regexp.escape token.first}/, token.last)
-      }.gsub(/\/\//, "/")
+      url = if permalink
+        permalink
+      else
+        {
+          "year"       => date.strftime("%Y"),
+          "month"      => date.strftime("%m"),
+          "mname"      => date.strftime("%b").downcase,
+          "day"        => date.strftime("%d"),
+          "title"      => CGI.escape(slug),
+          "i_day"      => date.strftime("%d").to_i.to_s,
+          "i_month"    => date.strftime("%m").to_i.to_s,
+          "categories" => categories.map { |c| URI.escape(c) }.join('/'),
+          "output_ext" => self.output_ext
+        }.inject(template) { |result, token|
+          result.gsub(/:#{Regexp.escape token.first}/, token.last)
+        }.gsub(/\/\//, "/")
+      end
+
+      # sanitize url
+      @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
+      @url += "/" if url =~ /\/$/
+      @url
     end
 
     # The UID for this post (useful in feeds)

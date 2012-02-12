@@ -1,3 +1,44 @@
+== HEAD
+  * Minor Enhancements
+    * Add ability to explicitly specify included files (#261)
+    * Add --default-mimetype option (#279)
+    * Allow setting of RedCloth options (#284)
+    * Add post_url Liquid tag for internal post linking (#369)
+    * Allow multiple plugin dirs to be specified (#438)
+  * Bug Fixes
+    * Allow some special characters in highlight names
+    * URL escape category names in URL generation (#360)
+    * Fix error with limit_posts (#442)
+    * Properly select dotfile during directory scan (#363, #431, #377)
+
+== 0.11.2 / 2011-12-27
+  * Bug Fixes
+    * Fix gemspec
+
+== 0.11.1 / 2011-12-27
+  * Bug Fixes
+    * Fix extra blank line in highlight blocks (#409)
+    * Update dependencies
+
+== 0.11.0 / 2011-07-10
+  * Major Enhancements
+    * Add command line importer functionality (#253)
+    * Add Redcarpet Markdown support (#318)
+    * Make markdown/textile extensions configurable (#312)
+    * Add `markdownify` filter
+  * Minor Enhancements
+    * Switch to Albino gem
+    * Bundler support
+    * Use English library to avoid hoops (#292)
+    * Add Posterous importer (#254)
+    * Fixes for Wordpress importer (#274, #252, #271)
+    * Better error message for invalid post date (#291)
+    * Print formatted fatal exceptions to stdout on build failure
+    * Add Tumblr importer (#323)
+    * Add Enki importer (#320)
+  * Bug Fixes
+    * Secure additional path exploits
+
 == 0.10.0 / 2010-12-16
   * Bug Fixes
     * Add --no-server option.
@@ -75,7 +116,7 @@
     * Empty tags causes error in read_posts (#84)
     * Fix pagination to adhere to read/render/write paradigm
   * Test Enhancement
-    * cucumber features no longer use site.ports.first where a better
+    * cucumber features no longer use site.posts.first where a better
       alternative is available
 
 == 0.5.6 / 2010-01-08

@@ -1,14 +1,14 @@
 require 'rubygems'
 gem 'RedCloth', '>= 4.2.1'
 
-require File.join(File.dirname(__FILE__), *%w[.. lib jekyll])
+require 'jekyll'
 
 require 'RedCloth'
 require 'rdiscount'
 require 'kramdown'
+require 'redcarpet'
 
-require 'test/unit'
-require 'redgreen'
+require 'redgreen' if RUBY_VERSION < '1.9'
 require 'shoulda'
 require 'rr'
 

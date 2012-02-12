@@ -19,10 +19,12 @@ require 'rubygems'
 require 'fileutils'
 require 'time'
 require 'yaml'
+require 'English'
 
 # 3rd party
 require 'liquid'
 require 'maruku'
+require 'albino'
 
 # internal requires
 require 'jekyll/core_ext'
@@ -32,7 +34,6 @@ require 'jekyll/layout'
 require 'jekyll/page'
 require 'jekyll/post'
 require 'jekyll/filters'
-require 'jekyll/albino'
 require 'jekyll/static_file'
 require 'jekyll/errors'
 
@@ -45,7 +46,7 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 module Jekyll
-  VERSION = '0.10.0'
+  VERSION = '0.11.2'
 
   # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML).
@@ -64,6 +65,10 @@ module Jekyll
     'pygments'     => false,
     'markdown'     => 'maruku',
     'permalink'    => 'date',
+    'include'      => ['.htaccess'],
+
+    'markdown_ext' => 'markdown,mkd,mkdn,md',
+    'textile_ext'  => 'textile',
 
     'maruku'       => {
       'use_tex'    => false,
@@ -73,6 +78,9 @@ module Jekyll
       'png_url'    => '/images/latex'
     },
     'rdiscount'    => {
+      'extensions' => []
+    },
+    'redcarpet'    => {
       'extensions' => []
     },
     'kramdown'        => {
@@ -90,11 +98,14 @@ module Jekyll
         'coderay_bold_every'        => 10,
         'coderay_css'               => 'style'
       }
+    },
+    'redcloth'        => {
+      'hard_breaks'   => true
     }
   }
 
-  # Generate a Jekyll configuration Hash by merging the default options
-  # with anything in _config.yml, and adding the given options on top.
+  # Public: Generate a Jekyll configuration Hash by merging the default
+  # options with anything in _config.yml, and adding the given options on top.
   #
   # override - A Hash of config directives that override any options in both
   #            the defaults and the config file. See Jekyll::DEFAULTS for a

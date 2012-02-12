@@ -55,6 +55,13 @@ Feature: Site configuration
     Then the _site directory should exist
     And I should see "<a href="http://google.com">Google</a>" in "_site/index.html"
 
+  Scenario: Use Redcarpet for markup
+    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
+    And I have a configuration file with "markdown" set to "redcarpet"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "<a href="http://google.com">Google</a>" in "_site/index.html"
+
   Scenario: Use Maruku for markup
     Given I have an "index.markdown" page that contains "[Google](http://google.com)"
     And I have a configuration file with "markdown" set to "maruku"
@@ -124,3 +131,15 @@ Feature: Site configuration
     And the "_site/2009/04/05/bananas.html" file should exist
     And the "_site/2009/04/01/oranges.html" file should exist
     And the "_site/2009/03/27/apples.html" file should not exist
+
+  Scenario: Copy over normally excluded files when they are explicitly included
+    Given I have a ".gitignore" file that contains ".DS_Store"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have a configuration file with "include" set to:
+      | value      |
+      | .gitignore |
+      | .foo       |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see ".DS_Store" in "_site/.gitignore"
+    And the "_site/.htaccess" file should not exist

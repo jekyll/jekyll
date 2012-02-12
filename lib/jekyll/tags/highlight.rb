@@ -3,14 +3,19 @@ module Jekyll
   class HighlightBlock < Liquid::Block
     include Liquid::StandardFilters
 
-    # we need a language, but the linenos argument is optional.
-    SYNTAX = /(\w+)\s?([\w\s=]+)*/
+    # The regular expression syntax checker. Start with the language specifier.
+    # Follow that by zero or more space separated options that take one of two
+    # forms:
+    #
+    # 1. name
+    # 2. name=value
+    SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=\w+)?)*)$/
 
     def initialize(tag_name, markup, tokens)
       super
-      if markup =~ SYNTAX
+      if markup.strip =~ SYNTAX
         @lang = $1
-        if defined? $2
+        if defined?($2) && $2 != ''
           tmp_options = {}
           $2.split.each do |opt|
             key, value = opt.split('=')
@@ -23,8 +28,8 @@ module Jekyll
             end
             tmp_options[key] = value
           end
-          tmp_options = tmp_options.to_a.collect { |opt| opt.join('=') }
-          # additional options to pass to Albino.
+          tmp_options = tmp_options.to_a.sort.collect { |opt| opt.join('=') }
+          # additional options to pass to Albino
           @options = { 'O' => tmp_options.join(',') }
         else
           @options = {}
@@ -36,9 +41,9 @@ module Jekyll
 
     def render(context)
       if context.registers[:site].pygments
-        render_pygments(context, super.join)
+        render_pygments(context, super)
       else
-        render_codehighlighter(context, super.join)
+        render_codehighlighter(context, super)
       end
     end
 
@@ -50,22 +55,20 @@ module Jekyll
     end
 
     def render_codehighlighter(context, code)
-    #The div is required because RDiscount blows ass
+      #The div is required because RDiscount blows ass
       <<-HTML
 <div>
-  <pre>
-    <code class='#{@lang}'>#{h(code).strip}</code>
-  </pre>
+  <pre><code class='#{@lang}'>#{h(code).strip}</code></pre>
 </div>
       HTML
     end
-    
+
     def add_code_tags(code, lang)
       # Add nested <code> tags to code blocks
       code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
       code = code.sub(/<\/pre>/,"</code></pre>")
     end
-    
+
   end
 
 end

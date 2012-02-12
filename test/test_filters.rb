@@ -1,8 +1,13 @@
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestFilters < Test::Unit::TestCase
   class JekyllFilter
     include Jekyll::Filters
+
+    def initialize
+      site = Jekyll::Site.new(Jekyll.configuration({}))
+      @context = Liquid::Context.new({}, {}, { :site => site })
+    end
   end
 
   context "filters" do
@@ -12,6 +17,10 @@ class TestFilters < Test::Unit::TestCase
 
     should "textilize with simple string" do
       assert_equal "<p>something <strong>really</strong> simple</p>", @filter.textilize("something *really* simple")
+    end
+
+    should "markdownify with simple string" do
+      assert_equal "<p>something <strong>really</strong> simple</p>", @filter.markdownify("something **really** simple")
     end
 
     should "convert array to sentence string with no args" do

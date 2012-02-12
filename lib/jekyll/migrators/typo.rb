@@ -2,11 +2,12 @@
 require 'fileutils'
 require 'rubygems'
 require 'sequel'
+require 'yaml'
 
 module Jekyll
   module Typo
-    # this SQL *should* work for both MySQL and PostgreSQL, but I haven't
-    # tested PostgreSQL yet (as of 2008-12-16)
+    # This SQL *should* work for both MySQL and PostgreSQL, but I haven't
+    # tested PostgreSQL yet (as of 2008-12-16).
     SQL = <<-EOS
     SELECT c.id id,
            c.title title,
@@ -24,14 +25,15 @@ module Jekyll
       FileUtils.mkdir_p '_posts'
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
       db[SQL].each do |post|
-        next unless post[:state] =~ /Published/
+        next unless post[:state] =~ /published/
 
         name = [ sprintf("%.04d", post[:date].year),
                  sprintf("%.02d", post[:date].month),
                  sprintf("%.02d", post[:date].day),
                  post[:slug].strip ].join('-')
+
         # Can have more than one text filter in this field, but we just want
-        # the first one for this
+        # the first one for this.
         name += '.' + post[:filter].split(' ')[0]
 
         File.open("_posts/#{name}", 'w') do |f|
@@ -45,5 +47,5 @@ module Jekyll
       end
     end
 
-  end   # module Typo
-end   # module Jekyll
+  end
+end

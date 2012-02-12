@@ -1,6 +1,32 @@
-require File.dirname(__FILE__) + '/helper'
+require 'helper'
 
 class TestSite < Test::Unit::TestCase
+  context "configuring sites" do
+    should "have an array for plugins by default" do
+      site = Site.new(Jekyll::DEFAULTS)
+      assert_equal [File.join(Dir.pwd, '_plugins')], site.plugins
+    end
+
+    should "have an array for plugins if passed as a string" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
+      assert_equal ['/tmp/plugins'], site.plugins
+    end
+
+    should "have an array for plugins if passed as an array" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
+      assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
+    end
+
+    should "have an empty array for plugins if nothing is passed" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => []}))
+      assert_equal [], site.plugins
+    end
+
+    should "have an empty array for plugins if nil is passed" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => nil}))
+      assert_equal [], site.plugins
+    end
+  end
   context "creating sites" do
     setup do
       stub(Jekyll).configuration do
@@ -126,12 +152,20 @@ class TestSite < Test::Unit::TestCase
 
     should "filter entries with exclude" do
       excludes = %w[README TODO]
-      includes = %w[index.html site.css]
+      files = %w[index.html site.css .htaccess]
 
       @site.exclude = excludes
-      assert_equal includes, @site.filter_entries(excludes + includes)
+      assert_equal files, @site.filter_entries(excludes + files)
     end
     
+    should "not filter entries within include" do
+      includes = %w[_index.html .htaccess]
+      files = %w[index.html _index.html .htaccess]
+
+      @site.include = includes
+      assert_equal files, @site.filter_entries(files)
+    end
+
     context 'with orphaned files in destination' do
       setup do
         clear_dest

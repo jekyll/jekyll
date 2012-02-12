@@ -31,10 +31,10 @@ Feature: Post data
     And I have the following post:
       | title     | date      | layout | content                 |
       | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
-    And I have a simple layout that contains "Post date: {{ page.date }}"
+    And I have a simple layout that contains "Post date: {{ page.date | date_to_string }}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Post date: Fri Mar 27" in "_site/2009/03/27/star-wars.html"
+    And I should see "Post date: 27 Mar 2009" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Use post.id variable
     Given I have a _posts directory
