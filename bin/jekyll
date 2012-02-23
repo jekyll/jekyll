@@ -127,6 +127,10 @@ opts = OptionParser.new do |opts|
     end
   end
 
+  opts.on("--preview", "Publish posts that are from the future or marked unpublished") do
+    options['preview'] = true
+  end
+
   opts.on("--url [URL]", "Set custom site.url") do |url|
     options['url'] = url
   end

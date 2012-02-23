@@ -69,4 +69,25 @@ class TestGeneratedSite < Test::Unit::TestCase
       end
     end
   end
+
+  context "generating with preview" do
+    setup do
+      clear_dest
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'preview' => true})
+      end
+
+      @site = Site.new(Jekyll.configuration)
+      @site.process
+      @index = File.read(dest_dir('index.html'))
+    end
+
+    should "publishes unpublished posts" do
+      published = Dir[dest_dir('publish_test/2008/02/02/*.html')].map {|f| File.basename(f)}
+
+      assert_equal 2, published.size
+      assert_equal %w{ not-published.html published.html}, published
+    end
+
+  end
 end
