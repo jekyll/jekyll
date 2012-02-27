@@ -47,7 +47,7 @@ module Jekyll
 
     private
       def paginate_path(site, num_page)
-        format = site.config['paginate_path'] || "page:num"
+        format = site.config['paginate_path']
         format.sub(':num', num_page.to_s)
       end
   end
