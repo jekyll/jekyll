@@ -195,12 +195,13 @@ module Jekyll
     #
     # Returns nothing.
     def render
+      payload = site_payload
       self.posts.each do |post|
-        post.render(self.layouts, site_payload)
+        post.render(self.layouts, payload)
       end
 
       self.pages.each do |page|
-        page.render(self.layouts, site_payload)
+        page.render(self.layouts, payload)
       end
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
