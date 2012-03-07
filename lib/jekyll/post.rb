@@ -219,15 +219,17 @@ module Jekyll
     # Returns <Hash>
     def to_liquid
       self.data.deep_merge({
-        "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
-        "url"        => self.url,
-        "date"       => self.date,
-        "id"         => self.id,
-        "categories" => self.categories,
-        "next"       => self.next,
-        "previous"   => self.previous,
-        "tags"       => self.tags,
-        "content"    => self.content })
+        "title"                  => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
+        "url"                    => self.url,
+        "date"                   => self.date,
+        "id"                     => self.id,
+        "categories"             => self.categories,
+        "next"                   => self.next,
+        "next_in_categories"     => self.next_in_categories,
+        "previous"               => self.previous,
+        "previous_in_categories" => self.previous_in_categories,
+        "tags"                   => self.tags,
+        "content"                => self.content })
     end
 
     def inspect
@@ -248,6 +250,26 @@ module Jekyll
       pos = self.site.posts.index(self)
       if pos && pos > 0
         self.site.posts[pos-1]
+      else
+        nil
+      end
+    end
+
+    def next_in_categories
+      set = self.categories.map { |cat| self.site.categories[cat] }.flatten.uniq.sort
+      pos = set.index(self)
+      if pos && pos < set.length-1
+        set[pos+1]
+      else
+        nil
+      end
+    end
+
+    def previous_in_categories
+      set = self.categories.map { |cat| self.site.categories[cat] }.flatten.uniq.sort
+      pos = set.index(self)
+      if pos && pos > 0
+        set[pos-1]
       else
         nil
       end
