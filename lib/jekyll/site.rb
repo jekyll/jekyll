@@ -5,7 +5,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :cleanup_dest
 
     attr_accessor :converters, :generators
 
@@ -26,6 +27,7 @@ module Jekyll
       self.include         = config['include'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.cleanup_dest    = config['cleanup_dest']
 
       self.reset
       self.setup
@@ -39,7 +41,7 @@ module Jekyll
       self.read
       self.generate
       self.render
-      self.cleanup
+      self.cleanup if self.cleanup_dest
       self.write
     end
 
