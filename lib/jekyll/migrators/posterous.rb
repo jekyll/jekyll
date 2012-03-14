@@ -10,6 +10,9 @@ require "json"
 module Jekyll
   module Posterous
     def self.fetch(uri_str, limit = 10)
+      # Sleep to avoid throttling 403s.
+      sleep 1
+
       # You should choose better exception.
       raise ArgumentError, 'Stuck in a redirect loop. Please double check your email and password' if limit == 0
 
