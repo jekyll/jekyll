@@ -40,7 +40,7 @@ module Jekyll
       while posts.any?
         posts.each do |post|
           title = post["title"]
-          slug = title.gsub(/[^[:alnum:]]+/, '-').downcase
+          slug = title.gsub(/[^[:alnum:]]+/u, '-').downcase[0..130]
           date = Date.parse(post["display_date"])
           content = post["body_html"]
           published = !post["is_private"]
