@@ -166,6 +166,28 @@ class TestSite < Test::Unit::TestCase
       assert_equal files, @site.filter_entries(files)
     end
 
+    context 'error handling' do
+      should "raise if destination is included in source" do
+        stub(Jekyll).configuration do
+          Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => source_dir})
+        end
+
+        assert_raise Jekyll::FatalException do
+          site = Site.new(Jekyll.configuration)
+        end
+      end
+
+      should "raise if destination is source" do
+        stub(Jekyll).configuration do
+          Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => File.join(source_dir, "..")})
+        end
+
+        assert_raise Jekyll::FatalException do
+          site = Site.new(Jekyll.configuration)
+        end
+      end
+    end
+
     context 'with orphaned files in destination' do
       setup do
         clear_dest
