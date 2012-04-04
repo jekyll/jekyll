@@ -171,8 +171,6 @@ class TestSite < Test::Unit::TestCase
         clear_dest
         @site.process
         # generate some orphaned files:
-        # hidden file
-        File.open(dest_dir('.htpasswd'), 'w')
         # single file
         File.open(dest_dir('obsolete.html'), 'w')
         # single file in sub directory
@@ -183,7 +181,6 @@ class TestSite < Test::Unit::TestCase
       end
       
       teardown do
-        FileUtils.rm_f(dest_dir('.htpasswd'))
         FileUtils.rm_f(dest_dir('obsolete.html'))
         FileUtils.rm_rf(dest_dir('qux'))
         FileUtils.rm_f(dest_dir('quux'))
@@ -191,7 +188,6 @@ class TestSite < Test::Unit::TestCase
       
       should 'remove orphaned files in destination' do
         @site.process
-        assert !File.exist?(dest_dir('.htpasswd'))
         assert !File.exist?(dest_dir('obsolete.html'))
         assert !File.exist?(dest_dir('qux'))
         assert !File.exist?(dest_dir('quux'))
