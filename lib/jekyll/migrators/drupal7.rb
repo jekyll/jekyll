@@ -16,44 +16,30 @@ module Jekyll
     # because 'draft' posts are not guaranteed to have valid dates.
     QUERY = "SELECT n.nid, \
                     n.title, \
-                    nr.body, \
+                    fdb.body_value, \
                     n.created, \
                     n.status \
              FROM node AS n, \
-                  node_revisions AS nr \
+                  field_data_body AS fdb \
              WHERE (n.type = 'blog' OR n.type = 'story') \
-             AND n.vid = nr.vid"
+             AND n.vid = fdb.entity_id"
 
     def self.process(dbname, user, pass, host = 'localhost', prefix = '')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
 
       if prefix != ''
         QUERY[" node "] = " " + prefix + "node "
-        QUERY[" node_revisions "] = " " + prefix + "node_revisions "
+        QUERY[" field_data_body "] = " " + prefix + "field_data_body "
       end
 
       FileUtils.mkdir_p "_posts"
       FileUtils.mkdir_p "_drafts"
 
-      # Create the refresh layout
-      # Change the refresh url if you customized your permalink config
-      File.open("_layouts/refresh.html", "w") do |f|
-        f.puts <<EOF
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta http-equiv="refresh" content="0;url={{ page.refresh_to_post_id }}.html" />
-</head>
-</html>
-EOF
-      end
-
       db[QUERY].each do |post|
         # Get required fields and construct Jekyll compatible name
         node_id = post[:nid]
         title = post[:title]
-        content = post[:body]
+        content = post[:body_value]
         created = post[:created]
         time = Time.at(created)
         is_published = post[:status] == 1
@@ -64,7 +50,7 @@ EOF
         # Get the relevant fields as a hash, delete empty fields and convert
         # to YAML for the header
         data = {
-           'layout' => 'post',
+           'layout' => 'default',
            'title' => title.to_s,
            'created' => created,
          }.delete_if { |k,v| v.nil? || v == ''}.to_yaml
@@ -76,22 +62,6 @@ EOF
           f.puts content
         end
 
-        # Make a file to redirect from the old Drupal URL
-        if is_published
-          aliases = db["SELECT dst FROM #{prefix}url_alias WHERE src = ?", "node/#{node_id}"].all
-
-          aliases.push(:dst => "node/#{node_id}")
-
-          aliases.each do |url_alias|
-            FileUtils.mkdir_p url_alias[:dst]
-            File.open("#{url_alias[:dst]}/index.md", "w") do |f|
-              f.puts "---"
-              f.puts "layout: refresh"
-              f.puts "refresh_to_post_id: /#{time.strftime("%Y/%m/%d/") + slug}"
-              f.puts "---"
-            end
-          end
-        end
       end
 
       # TODO: Make dirs & files for nodes of type 'page'
