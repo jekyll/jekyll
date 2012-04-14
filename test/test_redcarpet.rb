@@ -15,7 +15,7 @@ class TestRedcarpet < Test::Unit::TestCase
     end
     
     should "pass redcarpet extensions" do
-      assert_equal "<p>&ldquo;smart&rdquo;</p>", @markdown.convert('"smart"').strip
+      assert_equal "<p>&quot;smart&quot;</p>", @markdown.convert('"smart"').strip
     end
   end
 end
