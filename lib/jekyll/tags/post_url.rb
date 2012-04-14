@@ -11,14 +11,14 @@ module Jekyll
       @date = Time.parse(date)
     end
     
-    # Octopress creates dates with hours and minutes in them which are not in the file name
+    # Octopress creates dates with hours and crap in them which are not in the file name
     # so just compare based on the date parts
     def ==(post)
       cmp = self.date.strftime('%Y-%m-%d') <=> post.date.strftime('%Y-%m-%d')
       if 0 == cmp
        cmp = self.slug <=> post.slug
       end
-      return cmp
+      return 0 == cmp
     end
   end
 
