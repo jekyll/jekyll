@@ -33,6 +33,13 @@ module Jekyll
       url[-1, 1] == '/' ? url : File.dirname(url)
     end
 
+    # The String path between the source and the file.
+    #
+    # Returns the String path between the source and the file.
+    def source_dir
+      return @dir
+    end
+	
     # The full path and filename of the post. Defined in the YAML of the post
     # body.
     #
@@ -100,12 +107,19 @@ module Jekyll
       do_layout(payload, layouts)
     end
 
+    # The full relative path to the page. e.g. /blog/index.html
+    #
+    # Returns the String path.
+	def full_path
+	  return File.join(@dir, self.url)
+	end
+	
     # Convert this Page's data to a Hash suitable for use by Liquid.
     #
     # Returns the Hash representation of this Page.
     def to_liquid
       self.data.deep_merge({
-        "url"        => File.join(@dir, self.url),
+        "url"        => full_path,
         "content"    => self.content })
     end
 

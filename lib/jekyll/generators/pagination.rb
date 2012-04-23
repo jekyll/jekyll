@@ -11,7 +11,8 @@ module Jekyll
     # Returns nothing.
     def generate(site)
       site.pages.dup.each do |page|
-        paginate(site, page) if Pager.pagination_enabled?(site.config, page.name)
+	    path = page.full_path.gsub(/^\//, '')
+        paginate(site, page) if Pager.pagination_enabled?(site.config, path)
       end
     end
 
@@ -31,13 +32,14 @@ module Jekyll
     #                   "next_page" => <Number> }}
     def paginate(site, page)
       all_posts = site.site_payload['site']['posts']
+	  template = Pager.template(site.config)
       pages = Pager.calculate_pages(all_posts, site.config['paginate'].to_i)
       (1..pages).each do |num_page|
         pager = Pager.new(site.config, num_page, all_posts, pages)
         if num_page > 1
-          newpage = Page.new(site, site.source, page.dir, page.name)
+          newpage = Page.new(site, site.source, page.source_dir, page.name)
           newpage.pager = pager
-          newpage.dir = File.join(page.dir, "page#{num_page}")
+          newpage.dir = File.join(page.dir, template.gsub(/:page/, num_page.to_s))
           site.pages << newpage
         else
           page.pager = pager
@@ -59,6 +61,15 @@ module Jekyll
       (all_posts.size.to_f / per_page.to_i).ceil
     end
 
+	def self.paginate_files(config)
+	  config['paginate_files'] ||= ['index.html']
+	  config.pluralized_array('paginate_file', 'paginate_files')
+	end
+	
+	def self.template(config)
+		config['paginate_style'] ||= "page:page"
+	end
+	
     # Determine if pagination is enabled for a given file.
     #
     # config - The configuration Hash.
@@ -66,7 +77,7 @@ module Jekyll
     #
     # Returns true if pagination is enabled, false otherwise.
     def self.pagination_enabled?(config, file)
-      file == 'index.html' && !config['paginate'].nil?
+      paginate_files(config).include?(file) if config['paginate']
     end
 
     # Initialize a new Pager.
