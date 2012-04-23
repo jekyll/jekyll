@@ -111,7 +111,8 @@ module Jekyll
               :auto_ids      => @config['kramdown']['auto_ids'],
               :footnote_nr   => @config['kramdown']['footnote_nr'],
               :entity_output => @config['kramdown']['entity_output'],
-              :toc_levels    => @config['kramdown']['toc_levels']
+              :toc_levels    => @config['kramdown']['toc_levels'],
+              :smart_quotes  => @config['kramdown']['smart_quotes']
             }).to_html
           end
         when 'rdiscount'
