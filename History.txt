@@ -5,6 +5,7 @@
     * Allow setting of RedCloth options (#284)
     * Add post_url Liquid tag for internal post linking (#369)
     * Allow multiple plugin dirs to be specified (#438)
+    * Inline TOC token support for RDiscount (#333)
   * Bug Fixes
     * Allow some special characters in highlight names
     * URL escape category names in URL generation (#360)
