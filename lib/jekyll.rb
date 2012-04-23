@@ -88,6 +88,7 @@ module Jekyll
       'footnote_nr'   => 1,
       'entity_output' => 'as_char',
       'toc_levels'    => '1..6',
+      'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
       'use_coderay'   => false,
 
       'coderay' => {

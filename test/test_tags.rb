@@ -6,7 +6,7 @@ class TestTags < Test::Unit::TestCase
 
   def create_post(content, override = {}, converter_class = Jekyll::MarkdownConverter)
     stub(Jekyll).configuration do
-      Jekyll::DEFAULTS.merge({'pygments' => true}).merge(override)
+      Jekyll::DEFAULTS.deep_merge({'pygments' => true}).deep_merge(override)
     end
     site = Site.new(Jekyll.configuration)
 
