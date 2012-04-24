@@ -23,7 +23,6 @@ require 'English'
 
 # 3rd party
 require 'liquid'
-require 'maruku'
 require 'albino'
 
 # internal requires
