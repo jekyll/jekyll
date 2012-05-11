@@ -15,10 +15,22 @@ module Jekyll
         file = "#{file}.css"
       end
 
-      files = [File.join(context.registers[:site].source, @file),
-               # strip a leading slash
-               File.join(context.registers[:site].source, @file[1..-1]),
-               ]
+      source_dir = context.registers[:site].source
+      page_url = context.environments.first['page']['url']
+      files = [File.join(source_dir, file),
+               # try with stripping a leading slash
+               File.join(source_dir, file[1..-1]),
+               # try relative to the current page
+               File.join(source_dir, File.dirname(page_url), file)]
+
+      if context['site']['stylesheet_link']
+        context['site']['stylesheet_link']['search_paths'].each do |path|
+          files << File.join(path, file)
+          files << File.join(path, file[1..-1])
+          files << File.join(path, File.dirname(page_url), file)
+        end
+      end
+
       files.each {|file|
         if File.exists? file
           return file

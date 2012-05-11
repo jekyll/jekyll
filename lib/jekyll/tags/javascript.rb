@@ -21,14 +21,22 @@ module Jekyll
                # try with stripping a leading slash
                File.join(source_dir, file[1..-1]),
                # try relative to the current page
-               File.join(source_dir, File.dirname(page_url), file)
-               ]
+               File.join(source_dir, File.dirname(page_url), file)]
+
+      if context['site']['javascript']
+        context['site']['javascript']['search_paths'].each do |path|
+          files << File.join(path, file)
+          files << File.join(path, file[1..-1])
+          files << File.join(path, File.dirname(page_url), file)
+        end
+      end
+
       files.each {|file|
         if File.exists? file
           return file
         end
       }
-      warn "Javascript file: '#{original_file}' not found"
+      warn "JAVASCRIPT FILE: '#{original_file}' NOT FOUND"
       return original_file
     end
 
