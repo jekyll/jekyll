@@ -1,6 +1,37 @@
 module Jekyll
 
   class StylesheetTag < Liquid::Tag
+    #
+    # CSS Stylesheet Liquid Tag for Jekyll.  This link tag will include the
+    # last modification time of the css file if it can be found, or the current
+    # as a fall back if the file can not be found.
+    #
+    # Example:
+    #
+    #    {% stylesheet_link '/path/to/file.css' %}
+    #
+    #  =>
+    #    <link rel="stylesheet" href="/path/to/file.css?1336750796" type="text/css" media="screen, projection" />
+    #
+    # This plugin looks for the CSS file using the following strategy, using
+    # the first one that finds a file:
+    #
+    #   * (site-directory)/path/to/file.css
+    #   * (site-directory)path/to/file.css
+    #   * (includig-file)/path/to/file.css
+    #
+    # If your _config.yml includes:
+    #
+    #   stylesheet_link:
+    #     search_paths: ['/css/path1', '/css/path2']
+    #
+    # Then those directories will also be searched:
+    #
+    #   * /css/path1/path/to/file.css
+    #   * /css/path1/path/to/file.css
+    #   * /css/path2/path/to/file.css
+    #   * /css/path2/path/to/file.css
+    #
     def initialize(tag_name, file, tokens)
       super
       @file = file
