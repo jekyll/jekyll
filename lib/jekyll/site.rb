@@ -219,8 +219,11 @@ module Jekyll
       # all files and directories in destination, including hidden ones
       dest_files = Set.new
       Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-        pattern = (self.keep_repos ? /\/\.{1,2}(git|hg|svn)?$/ : /\/\.{1,2}$/)
-        dest_files << file unless file =~ pattern
+        if self.keep_repos
+          dest_files << file unless file =~ /\/\.{1,2}$/ or file =~ /\/\.(git|hg|svn)/
+        else
+          dest_files << file unless file =~ /\/\.{1,2}$/
+        end
       end
 
       # files to be written
