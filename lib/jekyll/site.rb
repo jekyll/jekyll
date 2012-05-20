@@ -5,7 +5,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :keep_repos
 
     attr_accessor :converters, :generators
 
@@ -26,6 +27,7 @@ module Jekyll
       self.include         = config['include'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.keep_repos      = config['keep_repos']
 
       self.reset
       self.setup
@@ -217,7 +219,8 @@ module Jekyll
       # all files and directories in destination, including hidden ones
       dest_files = Set.new
       Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-        dest_files << file unless file =~ /\/\.{1,2}$/
+        pattern = (self.keep_repos ? /\/\.{1,2}(git|hg|svn)?$/ : /\/\.{1,2}$/)
+        dest_files << file unless file =~ pattern
       end
 
       # files to be written

@@ -141,6 +141,10 @@ opts = OptionParser.new do |opts|
     options['url'] = url
   end
 
+  opts.on("--keep-repos FALSE", "Whether to delete Git, SVN or Mercurial repository in site destination") do
+    options['keep_repos'] = false
+  end
+
   opts.on("--version", "Display current version") do
     puts "Jekyll " + Jekyll::VERSION
     exit 0
