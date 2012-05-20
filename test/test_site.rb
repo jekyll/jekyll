@@ -180,6 +180,14 @@ class TestSite < Test::Unit::TestCase
         File.open(dest_dir('qux/obsolete.html'), 'w')
         # empty directory
         FileUtils.mkdir(dest_dir('quux'))
+				# repositories
+        FileUtils.mkdir(dest_dir('.git'))
+        FileUtils.mkdir(dest_dir('.svn'))
+        FileUtils.mkdir(dest_dir('.hg'))
+				# single file in repository
+        File.open(dest_dir('.git/HEAD'), 'w')
+        File.open(dest_dir('.svn/HEAD'), 'w')
+        File.open(dest_dir('.hg/HEAD'), 'w')
       end
       
       teardown do
@@ -187,6 +195,9 @@ class TestSite < Test::Unit::TestCase
         FileUtils.rm_f(dest_dir('obsolete.html'))
         FileUtils.rm_rf(dest_dir('qux'))
         FileUtils.rm_f(dest_dir('quux'))
+        FileUtils.rm_rf(dest_dir('.git'))
+        FileUtils.rm_rf(dest_dir('.svn'))
+        FileUtils.rm_rf(dest_dir('.hg'))
       end
       
       should 'remove orphaned files in destination' do
@@ -195,6 +206,12 @@ class TestSite < Test::Unit::TestCase
         assert !File.exist?(dest_dir('obsolete.html'))
         assert !File.exist?(dest_dir('qux'))
         assert !File.exist?(dest_dir('quux'))
+        assert File.exist?(dest_dir('.git'))
+        assert File.exist?(dest_dir('.svn'))
+        assert File.exist?(dest_dir('.hg'))
+        assert File.exist?(dest_dir('.git/HEAD'))
+        assert File.exist?(dest_dir('.svn/HEAD'))
+        assert File.exist?(dest_dir('.hg/HEAD'))
       end
 
     end
