@@ -50,6 +50,10 @@ opts = OptionParser.new do |opts|
   end
   
 
+  opts.on("--config [FILE]", "Configuration file to use") do |config_file|
+      options['config_file'] = config_file
+  end
+
   opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
     options['safe'] = safe
   end
