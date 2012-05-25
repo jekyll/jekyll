@@ -120,6 +120,7 @@ module Jekyll
     # _config.yml may override default source location, but until
     # then, we need to know where to look for _config.yml
     source = override['source'] || Jekyll::DEFAULTS['source']
+
     config_filename = override['config_file'] || Jekyll::DEFAULTS['config_file']
 
     # Get configuration from <source>/<config_filename>
@@ -132,6 +133,7 @@ module Jekyll
       $stderr.puts "WARNING: Could not read configuration. " +
                    "Using defaults (and options)."
       $stderr.puts "\t" + err.to_s
+      override.delete 'config_file' # bad config file, using default one
       config = {}
     end
 
