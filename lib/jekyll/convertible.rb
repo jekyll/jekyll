@@ -28,7 +28,7 @@ module Jekyll
       self.content = File.read(File.join(base, name))
 
       begin
-        if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+        if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = YAML.load($1)
         end
