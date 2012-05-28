@@ -1,6 +1,6 @@
 module Jekyll
 
-  class Dummy < Generator
+  class ADummyGenerator < Generator
 
     priority :high
 
