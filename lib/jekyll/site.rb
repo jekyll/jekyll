@@ -80,8 +80,8 @@ module Jekyll
         end
       end
 
-      self.converters = build_plugins(Jekyll::Converter.subclasses)
-      self.generators = build_plugins(Jekyll::Generator.subclasses)
+      self.converters = build_plugins(Jekyll::Converter.subclasses.sort!)
+      self.generators = build_plugins(Jekyll::Generator.subclasses.sort!)
     end
 
     # Read Site data from disk and load it into internal data structures.

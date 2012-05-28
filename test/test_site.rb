@@ -125,11 +125,19 @@ class TestSite < Test::Unit::TestCase
     should "setup converter plugins in priority order" do
       assert_equal @site.converters.sort_by(&:class).map {|c| c.class.priority },
         @site.converters.map {|c| c.class.priority }
+
+      # subclasses array is sorted after plugin loading as well
+      assert_equal @site.converters.sort_by(&:class).map {|c| c.class.priority },
+        Jekyll::Converter.subclasses.map {|c| c.priority }
     end
 
     should "setup generator plugins in priority order" do
       assert_equal @site.generators.sort_by(&:class).map {|g| g.class.priority },
         @site.generators.map {|g| g.class.priority }
+
+      # subclasses array is sorted after plugin loading as well
+      assert_equal @site.generators.sort_by(&:class).map {|g| g.class.priority },
+        Jekyll::Generator.subclasses.map {|g| g.priority }
     end
 
     should "read layouts" do
