@@ -30,7 +30,11 @@ class TestSite < Test::Unit::TestCase
   context "creating sites" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::DEFAULTS.merge({
+          'source' => source_dir,
+          'destination' => dest_dir,
+          'plugins' => File.join(source_dir, '_plugins')
+          })
       end
       @site = Site.new(Jekyll.configuration)
     end
@@ -118,6 +122,24 @@ class TestSite < Test::Unit::TestCase
       assert_equal mtime3, mtime4 # no modifications, so must be the same
     end
 
+    should "setup converter plugins in priority order" do
+      assert_equal @site.converters.sort_by(&:class).map {|c| c.class.priority },
+        @site.converters.map {|c| c.class.priority }
+
+      # subclasses array is sorted after plugin loading as well
+      assert_equal @site.converters.sort_by(&:class).map {|c| c.class.priority },
+        Jekyll::Converter.subclasses.map {|c| c.priority }
+    end
+
+    should "setup generator plugins in priority order" do
+      assert_equal @site.generators.sort_by(&:class).map {|g| g.class.priority },
+        @site.generators.map {|g| g.class.priority }
+
+      # subclasses array is sorted after plugin loading as well
+      assert_equal @site.generators.sort_by(&:class).map {|g| g.class.priority },
+        Jekyll::Generator.subclasses.map {|g| g.priority }
+    end
+
     should "read layouts" do
       @site.read_layouts
       assert_equal ["default", "simple"].sort, @site.layouts.keys.sort
@@ -157,7 +179,7 @@ class TestSite < Test::Unit::TestCase
       @site.exclude = excludes
       assert_equal files, @site.filter_entries(excludes + files)
     end
-    
+
     should "not filter entries within include" do
       includes = %w[_index.html .htaccess]
       files = %w[index.html _index.html .htaccess]
@@ -181,14 +203,14 @@ class TestSite < Test::Unit::TestCase
         # empty directory
         FileUtils.mkdir(dest_dir('quux'))
       end
-      
+
       teardown do
         FileUtils.rm_f(dest_dir('.htpasswd'))
         FileUtils.rm_f(dest_dir('obsolete.html'))
         FileUtils.rm_rf(dest_dir('qux'))
         FileUtils.rm_f(dest_dir('quux'))
       end
-      
+
       should 'remove orphaned files in destination' do
         @site.process
         assert !File.exist?(dest_dir('.htpasswd'))
@@ -198,7 +220,7 @@ class TestSite < Test::Unit::TestCase
       end
 
     end
-    
+
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
@@ -206,7 +228,7 @@ class TestSite < Test::Unit::TestCase
           Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
         end
       end
-      
+
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
         s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
@@ -215,6 +237,6 @@ class TestSite < Test::Unit::TestCase
         end
       end
     end
-    
+
   end
 end

@@ -15,7 +15,6 @@ module Jekyll
     # Returns nothing.
     def self.inherited(base)
       subclasses << base
-      subclasses.sort!
     end
 
     # The list of Classes that have been subclassed.
