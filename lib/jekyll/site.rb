@@ -106,7 +106,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_layouts(dir = '')
-      base = File.join(self.source, dir, "_layouts")
+      base = File.join(self.source, dir, self.config['layouts'])
       return unless File.exists?(base)
       entries = []
       Dir.chdir(base) { entries = filter_entries(Dir['*.*']) }
