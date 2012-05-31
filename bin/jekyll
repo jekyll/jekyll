@@ -2,6 +2,10 @@
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
+require 'fileutils'
+require 'yaml'
+require 'time'
+
 help = <<HELP
 Jekyll is a blog-aware, static site generator.
 
@@ -10,6 +14,7 @@ Basic Command Line Usage:
   jekyll <path to write generated site>                    # . -> <path>
   jekyll <path to source> <path to write generated site>   # <path> -> <path>
   jekyll import <importer name> <options>                  # imports posts using named import script
+  jekyll generate post <options>                           # generates a new empty post
   
   Configuration is read from '<source>/_config.yml' but can be overriden
   using the following options:
@@ -48,7 +53,6 @@ opts = OptionParser.new do |opts|
   opts.on("--site [SITE NAME]", "Site to import from") do |import_site|
     options['site'] = import_site
   end
-  
 
   opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
     options['safe'] = safe
@@ -141,6 +145,10 @@ opts = OptionParser.new do |opts|
     options['url'] = url
   end
 
+  opts.on("--title [TITLE]", "Set the post title of a generated post") do |generate_title|
+    options['title'] = generate_title
+  end
+
   opts.on("--version", "Display current version") do
     puts "Jekyll " + Jekyll::VERSION
     exit 0
@@ -150,10 +158,44 @@ end
 # Read command line options into `options` hash
 opts.parse!
 
-
-# Check for import stuff
+# Check for import or generator stuff
 if ARGV.size > 0
-  if ARGV[0] == 'import'
+  case ARGV[0]
+  when 'generate'
+    type = ARGV[1]
+
+    if type.nil? || !['post', 'site'].include?(type)
+      puts "Invalid generator type option. Run `jekyll --help` for assistance."
+      exit(1)
+    else
+      type = type.downcase
+    end
+
+    case type
+    when 'post'
+      title  = options['title']
+      slug   = title.gsub(/[^[:alnum:]]+/, '-').downcase
+      date   = Time.now.strftime('%Y-%m-%d')
+      name   = "#{date}-#{slug}.md"
+      header = {
+        'layout' => 'post',
+        'title'  => "#{title}"
+      }
+
+      puts "Creating new post '_posts/#{title}'..."
+
+      FileUtils.mkdir('_posts') unless File.directory?('_posts')
+      File.open("_posts/#{name}", "w") do |f|
+        f.puts header.to_yaml
+        f.puts '---'
+        f.puts 'TODO'
+      end
+
+      exit(0)
+    else
+      puts "Invalid . Run `jekyll --help` for assistance."
+    end
+  when 'import'
     migrator = ARGV[1]
 
     if migrator.nil?
