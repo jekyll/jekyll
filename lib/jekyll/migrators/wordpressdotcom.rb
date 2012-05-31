@@ -65,6 +65,8 @@ module Jekyll
       import_count.each do |key, value|
         puts "Imported #{value} #{key}s"
       end
+
+      import_count
     end
   end
 end
