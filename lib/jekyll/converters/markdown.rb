@@ -98,9 +98,10 @@ module Jekyll
             end
           end
 
+          @renderer.send :include, Redcarpet::Render::SmartyPants if @redcarpet_extensions[:smart]
+
           markdown = Redcarpet::Markdown.new(@renderer.new(@redcarpet_extensions), @redcarpet_extensions)
-          content = markdown.render(content)
-          content = Redcarpet::Render::SmartyPants.render(content)
+          markdown.render(content)
         when 'kramdown'
           # Check for use of coderay
           if @config['kramdown']['use_coderay']
