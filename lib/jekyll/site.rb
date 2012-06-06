@@ -121,7 +121,7 @@ module Jekyll
     # that will become part of the site according to the rules in
     # filter_entries.
     #
-    # dir - The String relative path of the directory to read.
+    # dir - The String relative path of the directory to read. Default: ''.
     #
     # Returns nothing.
     def read_directories(dir = '')
@@ -257,7 +257,7 @@ module Jekyll
       end
     end
 
-    # Constructs a Hash of Posts indexed by the specified Post attribute.
+    # Construct a Hash of Posts indexed by the specified Post attribute.
     #
     # post_attr - The String name of the Post attribute.
     #
@@ -307,7 +307,7 @@ module Jekyll
     # or are excluded in the site configuration, unless they are web server
     # files such as '.htaccess'.
     #
-    # entries - The Array of file/directory entries to filter.
+    # entries - The Array of String file/directory entries to filter.
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries)
