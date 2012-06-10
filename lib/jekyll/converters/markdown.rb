@@ -98,6 +98,8 @@ module Jekyll
             end
           end
 
+          @redcarpet_extensions[:fenced_code_blocks] = true unless @redcarpet_extensions[:no_fenced_code_blocks]
+
           @renderer.send :include, Redcarpet::Render::SmartyPants if @redcarpet_extensions[:smart]
 
           markdown = Redcarpet::Markdown.new(@renderer.new(@redcarpet_extensions), @redcarpet_extensions)
