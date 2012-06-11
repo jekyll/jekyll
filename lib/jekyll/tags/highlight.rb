@@ -48,7 +48,13 @@ module Jekyll
     end
 
     def render_pygments(context, code)
-      output = add_code_tags(Albino.new(code, @lang).to_s(@options), @lang)
+      @options[:encoding] = 'utf-8'
+
+      output = add_code_tags(
+        Pygments.highlight(code, :lexer => @lang, :options => @options),
+        @lang
+      )
+
       output = context["pygments_prefix"] + output if context["pygments_prefix"]
       output = output + context["pygments_suffix"] if context["pygments_suffix"]
       output
