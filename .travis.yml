@@ -1,8 +1,4 @@
-before_script:
-  - "sudo pip install pygments"
 rvm:
   - 1.9.3
   - 1.9.2
   - 1.8.7
-  - rbx-18mode
-  # - rbx-19mode # liquid seems to fail on 1.9 mode
