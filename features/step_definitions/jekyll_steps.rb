@@ -39,6 +39,13 @@ Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
   end
 end
 
+Given /^I have a (.*) theme that contains "(.*)"$/ do |layout, text|
+  File.open(File.join('_theme', layout + '.html'), 'w') do |f|
+    f.write(text)
+    f.close
+  end
+end
+
 Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end

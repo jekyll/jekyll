@@ -101,12 +101,12 @@ module Jekyll
       self.read_directories
     end
 
-    # Read all the files in <source>/_layouts and create a new Layout object
+    # Read all the files in <source>/<layouts> and create a new Layout object
     # with each one.
     #
     # Returns nothing.
     def read_layouts
-      base = File.join(self.source, "_layouts")
+      base = File.join(self.source, self.config['layouts'])
       return unless File.exists?(base)
       entries = []
       Dir.chdir(base) { entries = filter_entries(Dir['*.*']) }
