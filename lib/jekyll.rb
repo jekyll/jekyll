@@ -24,7 +24,7 @@ require 'English'
 # 3rd party
 require 'liquid'
 require 'maruku'
-require 'albino'
+require 'pygments'
 
 # internal requires
 require 'jekyll/core_ext'
