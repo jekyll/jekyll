@@ -25,5 +25,15 @@ class TestRedcarpet < Test::Unit::TestCase
     should "pass redcarpet render options" do
       assert_equal "<p><strong>bad code not here</strong>: i am bad</p>", @markdown.convert('**bad code not here**: <script>i am bad</script>').strip
     end
+
+    should "render fenced code blocks" do
+      assert_equal "<div class=\"highlight\"><pre><code class=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre>\n</div>", @markdown.convert(
+        <<-EOS
+```ruby
+puts "Hello world"
+```
+EOS
+      ).strip  
+    end
   end
 end

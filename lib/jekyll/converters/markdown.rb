@@ -88,8 +88,11 @@ module Jekyll
         when 'redcarpet'
           @renderer ||= Class.new(Redcarpet::Render::HTML) do
             def block_code(code, lang)
-              lang ||= "text"
-              add_code_tags(Albino.colorize(code, lang), lang)
+              lang ||= 'text'
+              output = add_code_tags(
+                Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
+                lang
+              )
             end
 
             def add_code_tags(code, lang)
