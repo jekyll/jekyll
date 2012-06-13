@@ -19,7 +19,6 @@ HELP
 require 'optparse'
 require 'jekyll'
 
-
 exec = {}
 options = {}
 opts = OptionParser.new do |opts|
@@ -48,7 +47,6 @@ opts = OptionParser.new do |opts|
   opts.on("--site [SITE NAME]", "Site to import from") do |import_site|
     options['site'] = import_site
   end
-  
 
   opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
     options['safe'] = safe
@@ -147,11 +145,8 @@ opts = OptionParser.new do |opts|
   end
 end
 
-# Read command line options into `options` hash
 opts.parse!
 
-
-# Check for import stuff
 if ARGV.size > 0
   if ARGV[0] == 'import'
     migrator = ARGV[1]
@@ -163,16 +158,9 @@ if ARGV.size > 0
       migrator = migrator.downcase
     end
 
-    cmd_options = []
-    ['file', 'dbname', 'user', 'pass', 'host', 'site'].each do |p|
-      cmd_options << "\"#{options[p]}\"" unless options[p].nil?
-    end
+    cmd_options = {}
+    options.each { |key, value| cmd_options[key.to_sym] = value }
 
-    # It's import time
-    puts "Importing..."
-    
-    # Ideally, this shouldn't be necessary. Maybe parse the actual
-    # src files for the migrator name?
     migrators = {
       :posterous => 'Posterous',
       :wordpressdotcom => 'WordpressDotCom',
@@ -186,14 +174,42 @@ if ARGV.size > 0
       :tumblr => 'Tumblr',
       :typo => 'Typo'
     }
-    
+
     app_root = File.join(File.dirname(__FILE__), '..')
     
-    require "#{app_root}/lib/jekyll/migrators/#{migrator}"
+    require "#{app_root}/lib/jekyll/importers/#{migrator}"
     
-    if Jekyll.const_defined?(migrators[migrator.to_sym])
-      migrator_class = Jekyll.const_get(migrators[migrator.to_sym])
-      migrator_class.process(*cmd_options)
+    if Jekyll::Importers.const_defined?(migrators[migrator.to_sym])
+      migrator_class = Jekyll::Importers.const_get(migrators[migrator.to_sym])
+
+      if cmd_options.keys.size == 0 || ARGV[2] == 'help'
+        migrator_class.help.split("\n").each do |line|
+          puts line[8..-1]
+        end
+        exit(0)
+      end
+
+      errors = migrator_class.validate(cmd_options)
+
+      unless errors.empty?
+        puts "Failed to import: invalid or missing importer options."
+        puts
+        errors.each { |error| puts "    #{error}" }
+        puts
+        puts "For further help run the following command:"
+        puts
+        puts "    jekyll import #{migrator} help"
+        exit(1)
+      end
+    
+      puts "Importing..."
+
+      files = migrator_class.process(cmd_options)
+      migrator_class.write_files(files)
+
+      files.each do |type, specs|
+        puts "Imported #{type}: #{specs.size}"
+      end
     else
       puts "Invalid migrator. Run `jekyll --help` for assistance."
       exit(1)
@@ -202,8 +218,6 @@ if ARGV.size > 0
     exit(0)
   end
 end
-
-
 
 # Get source and destination from command line
 case ARGV.size
