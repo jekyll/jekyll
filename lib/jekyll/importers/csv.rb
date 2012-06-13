@@ -84,7 +84,6 @@ module Jekyll
           next if row[0] == "title"
           name = row[3].split(" ")[0] + "-" + row[1] + (row[4] =~ /markdown/ ? ".md" : ".textile")
           posts << {
-            :title  => row[0],
             :name   => name,
             :body   => row[2],
             :header => { :layout => 'posts', :title => row[0] }
