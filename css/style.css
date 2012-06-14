@@ -1,3 +1,28 @@
 body {
-  margin: 3em;
+  padding: 2em 3em;
+  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  line-height: 1.6em;
+  font-weight: 300;
+  color: #ddd;
+  background: #333;
+  border-top: 5px solid #fc0;
+  box-shadow: inset 0 3px 30px rgba(0,0,0,.3);
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+header, section, footer {
+  width: 500px;
+}
+
+h1 {
+  font-size: 84px;
+  font-weight: 300;
+  margin: 0;
+  line-height: 1.6em;
+}
+
+a {
+  color: #fc0;
+  text-decoration: none;
 }
