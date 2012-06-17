@@ -24,6 +24,18 @@ module Jekyll
       self.read_yaml(File.join(base, dir), name)
     end
 
+    # Read the YAML frontmatter.
+    #
+    # base - The String path to the dir containing the file.
+    # name - The String filename of the file.
+    #
+    # Returns nothing.
+    def read_yaml(base, name)
+      super(base, name)
+      self.data['layout'] ||= 'page'
+      self.data
+    end
+
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, we be '/'
