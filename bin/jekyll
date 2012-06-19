@@ -167,7 +167,7 @@ if ARGV.size > 0
 
     migrators = {
       :csv             => 'CSV',
-      :rss             => 'Rss'
+      :rss             => 'Rss',
       :mt              => 'MT',
       :enki            => 'Enki',
       :posterous       => 'Posterous',
