@@ -181,13 +181,13 @@ if ARGV.size > 0
       :textpattern     => 'TextPattern',
       :typo            => 'Typo',
       :joomla          => 'Joomla',
-
-      :posterous       => 'Posterous',
-      :wordpressdotcom => 'WordpressDotCom',
-      :wordpress       => 'WordPress',
       :drupal          => 'Drupal',
+      :marley          => 'Marley',
       :mephisto        => 'Mephisto',
+      :posterous       => 'Posterous',
       :tumblr          => 'Tumblr',
+      :wordpress       => 'WordPress',
+      :wordpressdotcom => 'WordpressDotCom',
     }
 
     app_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
