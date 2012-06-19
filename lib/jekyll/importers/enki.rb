@@ -66,7 +66,6 @@ module Jekyll
             :header => {
               :layout     => 'post',
               :title      => post[:title].to_s,
-              :mt_id      => post[:entry_id],
               :enki_id    => post[:id],
               :categories => post[:tags]
             }
@@ -74,23 +73,6 @@ module Jekyll
         end
 
         { :posts => posts }
-      end
-
-      def self.suffix(entry_type)
-        if entry_type.nil? || entry_type.include?("markdown")
-          # The markdown plugin I have saves this as
-          # "markdown_with_smarty_pants", so I just look for "markdown".
-          "markdown"
-        elsif entry_type.include?("textile")
-          # This is saved as "textile_2" on my installation of MT 5.1.
-          "textile"
-        elsif entry_type == "0" || entry_type.include?("richtext")
-          # Richtext looks to me like it's saved as HTML, so I include it here.
-          "html"
-        else
-          # Other values might need custom work.
-          entry_type
-        end
       end
     end
   end
