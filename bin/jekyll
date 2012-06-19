@@ -60,6 +60,14 @@ opts = OptionParser.new do |opts|
     options['source'] = import_source
   end
 
+  opts.on("--api-token [API TOKEN]", "API Token to use when importing") do |import_token|
+    options['api-token'] = import_token
+  end
+
+  opts.on("--blog [BLOG]", "Blog to use when importing") do |import_blog|
+    options['blog'] = import_blog
+  end
+
   opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
     options['safe'] = safe
   end

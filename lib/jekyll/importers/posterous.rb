@@ -30,6 +30,7 @@ module Jekyll
         errors << "--user is required"      if options[:user].nil?
         errors << "--password is required"  if options[:password].nil?
         errors << "--api-token is required" if options[:api_token].nil?
+        errors << "--blog is required"      if options[:blog].nil?
         errors
       end
 
