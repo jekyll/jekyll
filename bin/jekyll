@@ -166,21 +166,21 @@ if ARGV.size > 0
     options.each { |key, value| cmd_options[key.to_sym] = value }
 
     migrators = {
+      :csv             => 'CSV',
+      :rss             => 'Rss'
+      :mt              => 'MT',
+      :enki            => 'Enki',
       :posterous       => 'Posterous',
       :wordpressdotcom => 'WordpressDotCom',
       :wordpress       => 'WordPress',
-      :csv             => 'CSV',
       :drupal          => 'Drupal',
-      :enki            => 'Enki',
       :mephisto        => 'Mephisto',
-      :mt              => 'MT',
       :textpattern     => 'TextPattern',
       :tumblr          => 'Tumblr',
       :typo            => 'Typo',
-      :rss             => 'Rss'
     }
 
-    app_root = File.join(File.dirname(__FILE__), '..')
+    app_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
     
     require "#{app_root}/lib/jekyll/importers/#{migrator}"
     
