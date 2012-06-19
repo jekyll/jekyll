@@ -195,7 +195,7 @@ if ARGV.size > 0
       :posterous       => 'Posterous',
       :tumblr          => 'Tumblr',
       :wordpress       => 'WordPress',
-      :wordpressdotcom => 'WordpressDotCom',
+      :wordpressdotcom => 'WordPressDotCom',
     }
 
     app_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
@@ -209,6 +209,7 @@ if ARGV.size > 0
         migrator_class.help.split("\n").each do |line|
           puts line[8..-1]
         end
+        puts
         exit(0)
       end
 
