@@ -1,8 +1,6 @@
 body {
-  padding: 2em 3em;
   font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 21px;
-  line-height: 1.6em;
   font-weight: 300;
   color: #ddd;
   background: #333;
@@ -11,18 +9,75 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
-header, section, footer {
-  width: 500px;
+header {
+  padding: 40px 0 20px;
 }
 
-h1 {
+header h1 {
   font-size: 84px;
-  font-weight: 300;
+  font-weight: normal;
   margin: 0;
-  line-height: 1.6em;
+  display: inline-block;
+  font-family: Yesteryear;
+  text-transform: lowercase;
+  padding-left: 16px;
+}
+
+header h1 a {
+  color: #fff;
+}
+
+nav {
+  display: inline-block;
+  position: relative;
+  top: -7px;
+  margin-left: 20px;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+nav li a {
+  border-radius: 5px;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 0.5em 1em;
+  text-shadow: none;
+  text-transform: uppercase;
+}
+
+nav li a:hover {
+  background: #222;
+}
+
+nav li.current a {
+  background: #fc0;
+  color: #222;
 }
 
 a {
   color: #fc0;
   text-decoration: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.intro p {
+  font-size: 3em;
+  line-height: 1em;
+  margin: 0;
+}
+
+.content {
+  margin: 0;
+  padding: 15px;
 }
