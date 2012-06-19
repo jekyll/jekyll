@@ -31,6 +31,14 @@ opts = OptionParser.new do |opts|
   opts.on("--dbname [TEXT]", "DB to import from") do |import_dbname|
     options['dbname'] = import_dbname
   end
+
+  opts.on("--table-prefix [PREFIX]", "Table prefix to use when importing") do |import_prefix|
+    options['table_prefix'] = import_prefix
+  end
+
+  opts.on("--section [SECTION]", "Section to use when importing") do |import_section|
+    options['section'] = import_section
+  end
   
   opts.on("--user [TEXT]", "Username to use when importing") do |import_user|
     options['user'] = import_user
@@ -170,14 +178,16 @@ if ARGV.size > 0
       :rss             => 'Rss',
       :mt              => 'MT',
       :enki            => 'Enki',
+      :textpattern     => 'TextPattern',
+      :typo            => 'Typo',
+      :joomla          => 'Joomla',
+
       :posterous       => 'Posterous',
       :wordpressdotcom => 'WordpressDotCom',
       :wordpress       => 'WordPress',
       :drupal          => 'Drupal',
       :mephisto        => 'Mephisto',
-      :textpattern     => 'TextPattern',
       :tumblr          => 'Tumblr',
-      :typo            => 'Typo',
     }
 
     app_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
