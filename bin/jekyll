@@ -48,6 +48,10 @@ opts = OptionParser.new do |opts|
     options['site'] = import_site
   end
 
+  opts.on("--source [PATH]", "URL or file path to import from") do |import_source|
+    options['source'] = import_source
+  end
+
   opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
     options['safe'] = safe
   end
@@ -162,17 +166,18 @@ if ARGV.size > 0
     options.each { |key, value| cmd_options[key.to_sym] = value }
 
     migrators = {
-      :posterous => 'Posterous',
+      :posterous       => 'Posterous',
       :wordpressdotcom => 'WordpressDotCom',
-      :wordpress => 'WordPress',
-      :csv => 'CSV',
-      :drupal => 'Drupal',
-      :enki => 'Enki',
-      :mephisto => 'Mephisto',
-      :mt => 'MT',
-      :textpattern => 'TextPattern',
-      :tumblr => 'Tumblr',
-      :typo => 'Typo'
+      :wordpress       => 'WordPress',
+      :csv             => 'CSV',
+      :drupal          => 'Drupal',
+      :enki            => 'Enki',
+      :mephisto        => 'Mephisto',
+      :mt              => 'MT',
+      :textpattern     => 'TextPattern',
+      :tumblr          => 'Tumblr',
+      :typo            => 'Typo',
+      :rss             => 'Rss'
     }
 
     app_root = File.join(File.dirname(__FILE__), '..')

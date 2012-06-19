@@ -26,6 +26,8 @@ module Jekyll
 
       raise "There doesn't appear to be any RSS items at the source (#{source}) provided." unless rss
 
+      posts = []
+
       rss.items.each do |item|
         formatted_date = item.date.strftime('%Y-%m-%d')
         post_name = item.title.split(%r{ |!|/|:|&|-|$|,}).map { |i| i.downcase if i != '' }.compact.join('-')

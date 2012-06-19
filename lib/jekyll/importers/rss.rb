@@ -1,46 +1,27 @@
-begin
-  require 'fastercsv' unless RUBY_VERSION > '1.9'
-  require 'csv'       if     RUBY_VERSION > '1.9'
-rescue LoadError
-  puts 'FasterCSV gem is not installed. Please do `[sudo] gem install fastercsv`'
-  exit(1)
-end
-
-# Some-what hacky solution to get around the CSV/FasterCSV 1.9 problem.
-begin
-  class Csv < FasterCSV; end
-rescue
-  class Csv < CSV; end
-end
+require 'rss/1.0'
+require 'rss/2.0'
+require 'open-uri'
 
 module Jekyll
   module Importers
-    class CSV < Importer
+    class Rss < Importer
       # Public: Get the importer usage and command line options.
       #
       # Returns a String of the help message.
       def self.help
         <<-EOS
-        Jekyll CSV Importer
-
-        CSV Formatting:
-
-            title, slug, body, date, format
-
-          Example:
-
-            'Hello World','hello-world','Hello World from Jekyll','2012-06-12','markdown'
+        Jekyll RSS Importer
 
         Basic Command Line Usage:
 
-            jekyll import csv <options>
+            jekyll import rss <options>
 
         Configuration options:
 
-            --file [PATH]                File to import from
+            --source [PATH]                Source to import from can be a URL or file path
         EOS
       end
-      
+
       # Public: Validate a Hash of command line options for the importer.
       #
       # options - A Hash of options passed in from the command line.
@@ -48,7 +29,7 @@ module Jekyll
       # Returns an Array of Strings representing validation errors.
       def self.validate(options)
         errors = []
-        errors << "--file is required" if options[:file].nil?
+        errors << "--source is required" if options[:source].nil?
         errors
       end
 
@@ -78,15 +59,23 @@ module Jekyll
       #
       # Returns a Hash which maps types to an Array of Hashes for each file to write.
       def self.process(options)
+        contents = ""
+        open(options[:source]) { |s| s.read }
+        rss = RSS::Parser.parse(content, false)
+
+        raise "There doesn't appear to be any RSS items at the source (#{source}) provided." unless rss
+
         posts = []
 
-        Csv.foreach(options[:file]) do |row|
-          next if row[0] == "title"
-          name = row[3].split(" ")[0] + "-" + row[1] + (row[4] =~ /markdown/ ? ".md" : ".textile")
+        rss.items.each do |item|
+          formatted_date = item.date.strftime('%Y-%m-%d')
+          post_name = item.title.split(%r{ |!|/|:|&|-|$|,}).map { |i| i.downcase if i != '' }.compact.join('-')
+          name = "#{formatted_date}-#{post_name}" 
+
           posts << {
-            :name   => name,
-            :body   => row[2],
-            :header => { :layout => 'post', :title => row[0] }
+            :name   => "#{name}.html",
+            :body   => item.description,
+            :header => { :layout => 'post', :title => item.title }
           }
         end
 
