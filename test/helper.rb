@@ -28,6 +28,10 @@ class Test::Unit::TestCase
     File.join(File.dirname(__FILE__), 'source', *subdirs)
   end
 
+  def fixtures_dir(*subdirs)
+    File.join(File.dirname(__FILE__), 'fixtures', *subdirs)
+  end
+
   def clear_dest
     FileUtils.rm_rf(dest_dir)
   end
