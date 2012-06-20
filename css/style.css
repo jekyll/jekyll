@@ -14,13 +14,15 @@ header {
 }
 
 header h1 {
-  font-size: 84px;
+  font-size: 72px;
   font-weight: normal;
   margin: 0;
   display: inline-block;
   font-family: Yesteryear;
   text-transform: lowercase;
   padding-left: 16px;
+  background: url(../img/tube.png) 100% 50% no-repeat;
+  padding-right: 50px;
 }
 
 header h1 a {
@@ -74,7 +76,7 @@ a {
 .intro p {
   font-size: 3em;
   line-height: 1em;
-  margin: 0;
+  margin: -.2em 0 .2em;
 }
 
 .content {
