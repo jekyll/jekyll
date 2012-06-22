@@ -5,7 +5,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins,
+                  :limit_posts, :post_dir
 
     attr_accessor :converters, :generators
 
@@ -26,6 +27,7 @@ module Jekyll
       self.include         = config['include'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.post_dir        = config['posts']
 
       self.reset
       self.setup
@@ -157,10 +159,8 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      base = File.join(self.source, dir)
+      base = File.join(self.source, dir, post_dir)
       return unless File.exists?(base)
-      # TODO: if we want to create a config option for specifying a "_posts"
-      # subdirectory then apply it here as `Dir["#{posts_dir}/**/[0-9]*"]`.
       entries = Dir.chdir(base) { filter_entries(Dir["**/[0-9]*"]) }
 
       # first pass processes, but does not yet render post content

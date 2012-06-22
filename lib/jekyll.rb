@@ -60,6 +60,7 @@ module Jekyll
     'destination'  => File.join(Dir.pwd, '_site'),
     'plugins'      => File.join(Dir.pwd, '_plugins'),
     'layouts'      => '_layouts',
+    'posts'        => '_posts',
 
     'future'       => true,
     'lsi'          => false,
