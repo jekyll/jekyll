@@ -120,12 +120,29 @@ footer .align-right img {
   text-align: center;
 }
 
-/* Intro */
+/* Sections */
 
 .intro p {
   font-size: 3.2em;
   line-height: 1em;
   margin: 0;
+}
+
+.quickstart {
+  background: #666;
+  color: #fff;
+}
+
+.free-hosting .pane {
+  background: #eee;
+  color: #222;
+  padding: 25px 30px;
+  border-radius: 10px;
+  text-shadow: none;
+}
+
+.free-hosting a {
+  color: #c00;
 }
 
 /* HTML Elements */
