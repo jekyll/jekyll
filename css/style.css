@@ -1,3 +1,5 @@
+/* Base */
+
 body {
   font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 21px;
@@ -9,6 +11,8 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
+/* Sections */
+
 header, section, footer {
   float: left;
   width: 100%;
@@ -19,8 +23,14 @@ header, section, footer {
   padding: 20px 0;
 }
 
+/* Header */
+
 header {
   padding: 30px 0 20px;
+}
+
+header .content {
+  padding-bottom: 0;
 }
 
 header h1 {
@@ -38,6 +48,8 @@ header h1 {
 header h1 a {
   color: #fff;
 }
+
+/* Navigation */
 
 nav {
   margin-top: 45px;
@@ -71,14 +83,44 @@ nav li.current a {
   color: #222;
 }
 
-a {
-  color: #fc0;
-  text-decoration: none;
+/* Footer */
+
+footer {
+  background: #222;
+  font-size: 16px;
+  padding-bottom: 5px;
+  color: #888;
 }
 
-.clear {
-  clear: both;
+footer a {
+  color: #fff;
 }
+
+footer .align-right p, footer .align-right img {
+  display: inline-block;
+}
+
+footer .align-right img {
+  position: relative;
+  top: 14px;
+  margin-left: 5px;
+}
+
+/* Utilities */
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+/* Intro */
 
 .intro p {
   font-size: 3.2em;
@@ -86,7 +128,14 @@ a {
   margin: 0;
 }
 
+/* HTML Elements */
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   margin: 0;
+}
+
+a {
+  color: #fc0;
+  text-decoration: none;
 }
