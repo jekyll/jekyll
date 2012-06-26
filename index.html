@@ -6,74 +6,73 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Yesteryear' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/grid.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" type="text/css" media="screen and (min-width: 601px)" href="css/sections.css" />
-	<link rel="stylesheet" type="text/css" media="screen and (min-width: 601px) and (max-width: 960px)" href="css/sections-fluid.css" />
 </head>
 <body>
-  <div class="area">
-    <header class="">
-      <div class="content">
+  <header>
+    <div class="content">
+      <div class="grid3 first">
         <h1>
           <a href="/">Jekyll</a>
-        </h1>  
-        <nav>
-          <ul>
-            <li class="current">
-              <a href="/">Overview</a>
-            </li>
-            <li class="">
-              <a href="https://github.com/mojombo/jekyll/wiki">Documentation</a>
-            </li>
-            <li class="">
-              <a href="https://github.com/mojombo/jekyll">View on GitHub</a>
-            </li>
-          </ul>
-        </nav>
+        </h1>
       </div>
-    </header>
-    <section class="intro section">
-      <div class="content">
-        <p>Transform your plain text into static websites and blogs. <br />It&rsquo;s so easy, <em>it&rsquo;s scary</em>.</p>
-      </div>
-    </section>
-    <div class="section thirds">
-      <div class="subsection simple">
-        <div class="content">
-          <h2>Simple</h2>
-          <p>
-            No more databases, complicated blogging engines, comment moderation, or pesky updates to install. Just your content, the way you want.
-          </p>
-        </div>
-      </div>
-      <div class="subsection simple">
-        <div class="content">
-          <h2>Blog-aware</h2>
-          <p>
-            Permalinks, categories, pages, posts, and custom layouts are all first-class citizens here.
-          </p>
-        </div>
-      </div>
-      <div class="subsection simple">
-        <div class="content">
-          <h2>Static</h2>
-          <p>Create your content using <a href="http://daringfireball.net/projects/markdown/">Markdown</a> (or <a href="http://textile.sitemonks.com/">Textile</a>), <a href="http://liquidmarkup.org/">Liquid</a>, HTML <span class="amp">&amp;</span> CSS, and Jekyll will generate a static site ready for deployment using your favorite web server.</p>
-        </div>
-      </div>
+      <nav class="grid8">
+        <ul>
+          <li class="current">
+            <a href="/">Overview</a>
+          </li>
+          <li class="">
+            <a href="https://github.com/mojombo/jekyll/wiki">Documentation</a>
+          </li>
+          <li class="">
+            <a href="https://github.com/mojombo/jekyll">View on GitHub</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="clear"></div>
     </div>
-    <div class="section">
-      <div class="content">
-        <h2>Free hosting with GitHub Pages</h2>
-        <p>Sick of dealing with hosting companies? <a href="http://pages.github.com/">GitHub Pages</a> is powered by Jekyll, so you can easily deploy your site for free&mdash;<a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">custom domain name</a> and all.</p>
-      </div>
+  </header>
+  <section class="intro">
+    <div class="content">
+      <p class="first">Transform your plain text into static websites and blogs. <br />It&rsquo;s so easy, <em>it&rsquo;s scary</em>.</p>
     </div>
-    <footer class="section">
-      <div class="content">
-        <p>By <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, and many more awesome contributors.</p>
+  </section>
+  <section class="features">
+    <div class="content">
+      <div class="grid4 first">
+        <h2>Simple</h2>
+        <p>
+          No more databases, comment moderation, or pesky updates to install—just <em>your content</em>.
+        </p>
+        <a href="#" class="">How Jekyll works &rarr;</a>
       </div>
-    </footer>
-  </div>
-
+      <div class="grid4">
+        <h2>Static</h2>
+        <p><a href="http://daringfireball.net/projects/markdown/">Markdown</a> (or <a href="http://textile.sitemonks.com/">Textile</a>), <a href="http://liquidmarkup.org/">Liquid</a>, HTML <span class="amp">&amp;</span> CSS go in. Static sites come out ready for deployment.</p>
+        <a href="#" class="">Jekyll template guide &rarr;</a>
+      </div>
+      <div class="grid4">
+        <h2>Blog-aware</h2>
+        <p>
+          Permalinks, categories, pages, posts, and custom layouts are all first-class citizens here.
+        </p>
+        <a href="#" class="">Migrate your blog &rarr;</a>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </section>
+  <section>
+    <div class="content">
+      <h2>Free hosting with GitHub Pages</h2>
+      <p>Sick of dealing with hosting companies? <a href="http://pages.github.com/">GitHub Pages</a> are powered by Jekyll, so you can easily deploy your site using GitHub for free&mdash;<a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">custom domain name</a> and all.</p>
+    </div>
+  </section>
+  <footer class="section">
+    <div class="content">
+      <p>By <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, and many more awesome contributors.</p>
+    </div>
+  </footer>
   <div class="clear"></div>
 </body>
 </html>

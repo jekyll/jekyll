@@ -9,8 +9,18 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
+header, section, footer {
+  float: left;
+  width: 100%;
+  clear: both;
+}
+
+.content {
+  padding: 20px 0;
+}
+
 header {
-  padding: 40px 0 20px;
+  padding: 30px 0 20px;
 }
 
 header h1 {
@@ -30,10 +40,7 @@ header h1 a {
 }
 
 nav {
-  display: inline-block;
-  position: relative;
-  top: -7px;
-  margin-left: 20px;
+  margin-top: 45px;
 }
 
 nav ul {
@@ -74,12 +81,12 @@ a {
 }
 
 .intro p {
-  font-size: 3em;
+  font-size: 3.2em;
   line-height: 1em;
-  margin: -.2em 0 .2em;
+  margin: 0;
 }
 
-.content {
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
   margin: 0;
-  padding: 15px;
 }
