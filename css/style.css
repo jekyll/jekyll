@@ -45,7 +45,7 @@ header h1 {
   padding-right: 50px;
 }
 
-header h1 a {
+header h1 a, header h1 a:hover {
   color: #fff;
 }
 
