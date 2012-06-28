@@ -61,6 +61,8 @@ module Jekyll
     'plugins'      => File.join(Dir.pwd, '_plugins'),
     'layouts'      => '_layouts',
 
+    'config_file'  => '_config.yml',
+
     'future'       => true,
     'lsi'          => false,
     'pygments'     => false,
@@ -120,8 +122,10 @@ module Jekyll
     # then, we need to know where to look for _config.yml
     source = override['source'] || Jekyll::DEFAULTS['source']
 
-    # Get configuration from <source>/_config.yml
-    config_file = File.join(source, '_config.yml')
+    config_filename = override['config_file'] || Jekyll::DEFAULTS['config_file']
+
+    # Get configuration from <source>/<config_filename>
+    config_file = File.join(source, config_filename)
     begin
       config = YAML.load_file(config_file)
       raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
@@ -130,6 +134,7 @@ module Jekyll
       $stderr.puts "WARNING: Could not read configuration. " +
                    "Using defaults (and options)."
       $stderr.puts "\t" + err.to_s
+      override.delete 'config_file' # bad config file, using default one
       config = {}
     end
 
