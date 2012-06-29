@@ -38,7 +38,11 @@ module Jekyll
 
       self.categories = dir.split('/').reject { |x| x.empty? }
       self.process(name)
-      self.read_yaml(@base, name)
+      begin 
+        self.read_yaml(@base, name)
+      rescue Exception => msg
+        raise FatalException.new("#{msg} in #{@base}/#{name}")        
+      end
 
       #If we've added a date and time to the yaml, use that instead of the filename date
       #Means we'll sort correctly.
