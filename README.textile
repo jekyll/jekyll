@@ -35,6 +35,7 @@ h2. Developer Dependencies
 * RR: Mocking (Ruby)
 * RedGreen: Nicer test output (Ruby)
 * RDiscount: Discount Markdown Processor (Ruby)
+* pygments.rb: A ruby wrapper for the python pygments syntax highlighter (Ruby)
 
 h2. License
 
