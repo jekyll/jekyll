@@ -291,3 +291,7 @@ a {
 a:hover {
   color: #f90;
 }
+
+strong {
+  font-weight: 700;
+}
