@@ -7,6 +7,7 @@ module Jekyll
     end
 
     def render(context)
+      @file = context[@file] if context.has_key?(@file)
       includes_dir = File.join(context.registers[:site].source, '_includes')
 
       if File.symlink?(includes_dir)
