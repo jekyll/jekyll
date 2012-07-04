@@ -284,6 +284,7 @@ code .output {
   background: #444;
   border-radius: 10px;
   padding: 30px 40px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.1);
 }
 
 .docs aside {
@@ -297,7 +298,7 @@ code .output {
   padding: 0 0 10px 30px;
   margin-left: -30px;
   display: inline-block;
-  border-bottom: 2px solid #c00;
+  border-bottom: 1px solid #c00;
 }
 
 .docs aside ul {
