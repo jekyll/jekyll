@@ -93,6 +93,7 @@ footer {
   font-size: 16px;
   padding-bottom: 5px;
   color: #888;
+  margin-top: 40px;
 }
 
 footer a {
@@ -162,7 +163,7 @@ footer .align-right img {
 }
 
 .free-hosting .content {
-  margin-bottom: 40px;
+  /*margin-bottom: 40px;*/
   position: relative;
 }
 
@@ -271,6 +272,44 @@ code .command {
 
 code .output {
   color: #888;
+}
+
+/* Documentation */
+
+.docs .content {
+  padding: 0;
+}
+
+.docs article {
+  background: #444;
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+
+.docs aside {
+  padding-top: 30px;
+}
+
+.docs aside h4 {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 0 10px 30px;
+  margin-left: -30px;
+  display: inline-block;
+  border-bottom: 2px solid #c00;
+}
+
+.docs aside ul {
+  padding-left: 0;
+}
+
+.docs aside li {
+  list-style-type: none;
+}
+
+.docs aside li a {
+  font-size: 16px;
 }
 
 /* HTML Elements */
