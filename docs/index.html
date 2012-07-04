@@ -1,0 +1,23 @@
+---
+layout: default
+title: Documentation • Jekyll
+---
+
+<section>
+  <div class="content">
+    <h1>Documentation</h1>
+
+    <ul>
+      {% for post in site.posts %}
+        <li>
+          {% for category in post.categories %}
+            <span>{{ category }}</span>
+          {% endfor %}
+          &raquo;
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</section>

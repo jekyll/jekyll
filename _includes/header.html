@@ -1,0 +1,23 @@
+<header>
+  <div class="content">
+    <div class="grid3 first">
+      <h1>
+        <a href="/">Jekyll</a>
+      </h1>
+    </div>
+    <nav class="grid8">
+      <ul>
+        <li {% if page.overview %}class="current"{% endif %}>
+          <a href="/">Overview</a>
+        </li>
+        <li {% unless page.overview %}class="current"{% endunless %}>
+          <a href="/docs">Documentation</a>
+        </li>
+        <li class="">
+          <a href="https://github.com/mojombo/jekyll">View on GitHub</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="clear"></div>
+  </div>
+</header>
