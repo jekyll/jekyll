@@ -8,10 +8,10 @@
     <nav class="grid8">
       <ul>
         <li {% if page.overview %}class="current"{% endif %}>
-          <a href="/">Overview</a>
+          <a href="{{ site.baseurl }}/">Overview</a>
         </li>
         <li {% unless page.overview %}class="current"{% endunless %}>
-          <a href="/docs">Documentation</a>
+          <a href="{{ site.baseurl }}/docs">Documentation</a>
         </li>
         <li class="">
           <a href="https://github.com/mojombo/jekyll">View on GitHub</a>
