@@ -311,6 +311,19 @@ code .output {
 
 .docs aside li a {
   font-size: 16px;
+  position: relative
+}
+
+.docs aside li.current a:before {
+  content: "";
+  border-color: transparent transparent transparent #444;
+  border-style: solid;
+  border-width: 10px;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: -30px;
 }
 
 /* HTML Elements */
