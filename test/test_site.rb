@@ -180,6 +180,7 @@ class TestSite < Test::Unit::TestCase
         File.open(dest_dir('qux/obsolete.html'), 'w')
         # empty directory
         FileUtils.mkdir(dest_dir('quux'))
+        FileUtils.mkdir(dest_dir('.git'))
       end
       
       teardown do
@@ -187,6 +188,7 @@ class TestSite < Test::Unit::TestCase
         FileUtils.rm_f(dest_dir('obsolete.html'))
         FileUtils.rm_rf(dest_dir('qux'))
         FileUtils.rm_f(dest_dir('quux'))
+        FileUtils.rm_rf(dest_dir('.git'))
       end
       
       should 'remove orphaned files in destination' do
@@ -195,6 +197,7 @@ class TestSite < Test::Unit::TestCase
         assert !File.exist?(dest_dir('obsolete.html'))
         assert !File.exist?(dest_dir('qux'))
         assert !File.exist?(dest_dir('quux'))
+        assert File.exist?(dest_dir('.git'))
       end
 
     end
