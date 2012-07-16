@@ -32,7 +32,7 @@ module Jekyll
           self.content = $POSTMATCH
           self.data = YAML.load($1)
         end
-      rescue => e
+      rescue Exception => e
         puts "YAML Exception reading #{name}: #{e.message}"
       end
 
