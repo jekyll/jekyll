@@ -63,7 +63,7 @@ class TestFilters < Test::Unit::TestCase
       assert_equal "hello-world", @filter.slugify("Hello, World")
     end
 
-    should "remove hiphens at the beginning and at the end" do
+    should "remove hyphens at the beginning and at the end" do
       assert_equal "hello-world", @filter.slugify("'Hello, World!'")
     end
   end
