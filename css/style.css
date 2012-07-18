@@ -326,6 +326,20 @@ code .output {
   left: -30px;
 }
 
+/* Code Highlighting */
+
+.highlight {
+
+}
+
+.highlight pre {
+
+}
+
+.highlight pre code {
+
+}
+
 /* HTML Elements */
 
 h1, h2, h3, h4, h5, h6 {
@@ -347,4 +361,8 @@ a:hover {
 
 strong {
   font-weight: 700;
+}
+
+p {
+  line-height: 1.5em;
 }
