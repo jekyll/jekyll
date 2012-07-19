@@ -151,7 +151,7 @@ body > footer .align-right img {
   padding: 0px 0;
 }
 
-.quickstart code {
+.quickstart .code {
   margin: -30px 0;
   float: right;
 }
@@ -209,7 +209,7 @@ body > footer .align-right img {
 
 /* Code */
 
-code {
+.quickstart .code {
   display: block;
   background: #3d3d3d;
   border-radius: 5px;
@@ -218,7 +218,7 @@ code {
   box-shadow: 0 5px 30px rgba(0,0,0,.3);
 }
 
-code .title {
+.quickstart .code .title {
   display: block;
   text-align: center;
   margin: 0;
@@ -243,34 +243,34 @@ code .title {
   border-bottom: 1px solid #111;
 }
 
-code .shell {
+.quickstart .code .shell {
   padding: 20px;
   text-shadow: none;
 }
 
-code .line {
+.quickstart .code .line {
   display: block;
   margin: 0;
   padding: 0;
 }
 
-code .line span {
+.quickstart .code .line span {
   display: inline-block;
 }
 
-code .path {
+.quickstart .code .path {
   color: #87ceeb;
 }
 
-code .prompt {
+.quickstart .code .prompt {
   color: #cd5c5c;
 }
 
-code .command {
+.quickstart .code .command {
   color: #f0e68c;
 }
 
-code .output {
+.quickstart .code .output {
   color: #888;
 }
 
@@ -414,17 +414,31 @@ code .output {
 
 /* Code Highlighting */
 
+
+pre, code {
+  white-space: pre;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-family: Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
+  font-size: 16px;
+  padding: 0 .5em;
+  line-height: 1.8em;
+}
+
+.highlight, p > pre, p > code {
+  background: #333;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 10px rgba(0,0,0,.3),
+    0 1px 0 rgba(255,255,255,.1),
+    0 -1px 0 rgba(0,0,0,.5);
+}
+
 .highlight {
-
+  padding: 10px 0;
 }
 
-.highlight pre {
-
-}
-
-.highlight pre code {
-
-}
 
 /* HTML Elements */
 
