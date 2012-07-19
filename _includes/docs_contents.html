@@ -2,9 +2,9 @@
   <aside>
     <h4>Getting Started</h4>
     <ul>
-      <li class="current"><a href="">What is Jekyll?</a></li>
-      <li><a href="">Installation</a></li>
-      <li><a href="">Directory structure</a></li>
+      <li class="{% if page.title == "Introduction" %}current{% endif %}"><a href="{{ site.url }}/docs/home">Welcome</a></li>
+      <li class="{% if page.title == "Installation" %}current{% endif %}"><a href="{{ site.url }}/docs/installation">Installation</a></li>
+      <li class="{% if page.title == "Directory structure" %}current{% endif %}"><a href="">Directory structure</a></li>
     </ul>
     <h4>Basic Usage</h4>
     <ul>

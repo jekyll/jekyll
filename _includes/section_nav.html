@@ -1,0 +1,8 @@
+<div class="section-nav">
+  {% if page.prev_section != null %}
+    <a href="{{ site.url }}/docs/{{ page.prev_section }}" class="prev">Previous Section</a>
+  {% endif %}
+  {% if page.next_section != null %}
+    <a href="{{ site.url }}/docs/{{ page.next_section }}" class="next">Next Section</a>
+  {% endif %}
+</div>
