@@ -50,6 +50,7 @@ body > header h1 {
   text-transform: lowercase;
   padding-left: 16px;
   background: url(../img/tube.png) 100% 50% no-repeat;
+  background-size: 46px 80px;
   padding-right: 32px;
   text-shadow: 0 1px 5px rgba(0,0,0,.8);
 }
