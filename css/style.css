@@ -38,7 +38,7 @@ body > header h1 {
   font-weight: normal;
   margin: 0;
   display: inline-block;
-  font-family: Yesteryear;
+  font-family: Arizonia, cursive;
   text-transform: lowercase;
   padding-left: 16px;
   background: url(../img/tube.png) 100% 50% no-repeat;
@@ -52,7 +52,7 @@ body > header h1 a, body > header h1 a:hover {
 /* Navigation */
 
 nav {
-  margin-top: 45px;
+  margin-top: 35px;
 }
 
 nav ul {
