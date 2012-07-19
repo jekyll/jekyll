@@ -42,7 +42,8 @@ body > header h1 {
   text-transform: lowercase;
   padding-left: 16px;
   background: url(../img/tube.png) 100% 50% no-repeat;
-  padding-right: 50px;
+  padding-right: 32px;
+  text-shadow: 0 1px 5px rgba(0,0,0,.8);
 }
 
 body > header h1 a, body > header h1 a:hover {
