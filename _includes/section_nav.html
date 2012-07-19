@@ -1,8 +1,13 @@
 <div class="section-nav">
   {% if page.prev_section != null %}
-    <a href="{{ site.url }}/docs/{{ page.prev_section }}" class="prev">Previous Section</a>
+    <div class="left">
+      <a href="{{ site.url }}/docs/{{ page.prev_section }}" class="prev">&laquo; Previous</a>
+    </div>
   {% endif %}
   {% if page.next_section != null %}
-    <a href="{{ site.url }}/docs/{{ page.next_section }}" class="next">Next Section</a>
+    <div class="right">
+      <a href="{{ site.url }}/docs/{{ page.next_section }}" class="next">Next &raquo;</a>
+    </div>
   {% endif %}
+  <div class="clear"></div>
 </div>
