@@ -283,15 +283,13 @@ code .output {
 .docs article {
   background: #444;
   border-radius: 10px;
+  padding: 30px 40px;
   box-shadow: 0 3px 10px rgba(0,0,0,.1);
-}
-
-.docs article .inner {
-  padding: 15px 40px;
+  min-height: 800px;
 }
 
 .docs aside {
-  padding-top: 50px;
+  padding-top: 30px;
 }
 
 .docs aside h4 {
@@ -329,67 +327,27 @@ code .output {
   left: -30px;
 }
 
-.docs article header {
-  display: block;
-  margin: 0;
-  padding: 20px 40px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  box-shadow: box-shadow: 0 3px 10px rgba(0,0,0,.5);
-  border-bottom: 1px solid #333;
-  background: #f7f7f7;
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y3ZjdmNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjclIiBzdG9wLWNvbG9yPSIjY2ZjZmNmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2FhYWFhYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-  background: -moz-linear-gradient(top,  #f7f7f7 0%, #cfcfcf 7%, #aaaaaa 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(7%,#cfcfcf), color-stop(100%,#aaaaaa));
-  background: -webkit-linear-gradient(top,  #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
-  background: -o-linear-gradient(top,  #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
-  background: -ms-linear-gradient(top,  #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
-  background: linear-gradient(top,  #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#aaaaaa',GradientType=0 );
-}
-
-.docs article header h1 {
-  font-size: 24px;
-  text-transform: uppercase;
-  font-weight: 800;
-  color: #444;
-  text-shadow: 0 1px 0 rgba(255,255,255,.5);
-}
-
-.docs article footer {
-  display: block;
-  margin: 0;
-  padding: 15px 15px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  box-shadow: box-shadow: 0 3px 10px rgba(0,0,0,.5);
-  border-top: 1px solid #333;
-  background: #f7f7f7;
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y3ZjdmNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjclIiBzdG9wLWNvbG9yPSIjY2ZjZmNmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2FhYWFhYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-  background: -moz-linear-gradient(top,  #f7f7f7 0%, #cfcfcf 7%, #aaaaaa 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(7%,#cfcfcf), color-stop(100%,#aaaaaa));
-  background: -webkit-linear-gradient(top,  #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
-  background: -o-linear-gradient(top,  #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
-  background: -ms-linear-gradient(top,  #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
-  background: linear-gradient(top,  #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#aaaaaa',GradientType=0 );
-}
-
 .section-nav {
-  /*overflow: hidden;*/
+  text-align: center;
+  padding-top: 40px;
+  position: relative;
+  background: url(../img/article-footer.png) top center no-repeat;
 }
 
-.section-nav a {
-  display: inline-block;
+.section-nav > div {
+  width: 49.5%;
+}
+
+.section-nav a, .section-nav span {
   color: #fff;
   font-size: 16px;
   text-transform: uppercase;
-  font-weight: 800;
-  padding: 8px 12px;
+  font-weight: 700;
+  padding: 8px 12px 10px;
   border-radius: 5px;
-  border: 1px solid #666;
+  /*border: 1px solid #333;*/
   background: #999;
-  box-shadow: 0 1px 0px rgba(255,255,255,.5), inset 0 1px 1px rgba(255,255,255,.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.5);
   background: #888888;
   background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzg4ODg4OCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM2ZDZkNmQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
   background: -moz-linear-gradient(top,  #888888 0%, #6d6d6d 100%);
@@ -414,12 +372,43 @@ code .output {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5a5a5', endColorstr='#8c8c8c',GradientType=0 );
 }
 
-.section-nav .prev {
-  text-align: left;
+.section-nav .next, .section-nav .prev {
+  position: relative;
 }
 
-.section-nav .next {
-  text-align: right;
+.section-nav .next:after, .section-nav .prev:before {
+  font-size: 36px;
+  color: #222;
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+  position: absolute;
+  top: -7px;
+}
+
+.section-nav .next:after {
+  content: "›";
+  right: 10px;
+}
+
+.section-nav .prev:before {
+  content: "‹";
+  left: 10px;
+}
+
+.section-nav .prev, .section-nav .prev:hover {
+  /*float: left;*/
+  padding-left: 30px;
+}
+
+.section-nav .next, .section-nav .next:hover {
+  /*float: right;*/
+  padding-right: 30px;
+}
+
+.section-nav .disabled {
+  opacity: .5;
+  /*filter: alpha*/
+  cursor: default;
 }
 
 
@@ -466,3 +455,5 @@ p {
 
 .left { float: left; }
 .right { float: right; }
+.align-right { text-align: right; }
+.align-left { text-align: left; }
