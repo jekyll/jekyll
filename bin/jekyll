@@ -145,7 +145,7 @@ opts = OptionParser.new do |opts|
     options['url'] = url
   end
 
-  opts.on("--title [TITLE]", "Set the post title of a generated post") do |generate_title|
+  opts.on("--title TITLE", "Set the post title of a generated post") do |generate_title|
     options['title'] = generate_title
   end
 
