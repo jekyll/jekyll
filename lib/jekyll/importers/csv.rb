@@ -2,8 +2,7 @@ begin
   require 'fastercsv' unless RUBY_VERSION > '1.9'
   require 'csv'       if     RUBY_VERSION > '1.9'
 rescue LoadError
-  puts 'FasterCSV gem is not installed. Please do `[sudo] gem install fastercsv`'
-  exit(1)
+  abort 'FasterCSV gem is not installed. Please do `[sudo] gem install fastercsv`'
 end
 
 # Some-what hacky solution to get around the CSV/FasterCSV 1.9 problem.
