@@ -37,6 +37,9 @@ require 'jekyll/filters'
 require 'jekyll/static_file'
 require 'jekyll/errors'
 
+# importers
+require 'jekyll/importer'
+
 # extensions
 require 'jekyll/plugin'
 require 'jekyll/converter'
