@@ -164,22 +164,19 @@ if ARGV.size > 0
   when 'generate'
     type = ARGV[1]
 
-    if type.nil? || !['post', 'site'].include?(type)
+    if type.nil? || !['post'].include?(type)
       puts "Invalid generator type option. Run `jekyll --help` for assistance."
       exit(1)
-    else
-      type = type.downcase
     end
 
-    case type
-    when 'post'
+    if type.casecamp('post') == 0
       title  = options['title']
       slug   = title.gsub(/[^[:alnum:]]+/, '-').downcase
       date   = Time.now.strftime('%Y-%m-%d')
       name   = "#{date}-#{slug}.md"
       header = {
         'layout' => 'post',
-        'title'  => "#{title}"
+        'title'  => title
       }
 
       puts "Creating new post '_posts/#{title}'..."
