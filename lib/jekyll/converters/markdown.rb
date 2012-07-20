@@ -13,7 +13,24 @@ module Jekyll
         when 'redcarpet'
           begin
             require 'redcarpet'
-            @redcarpet_extensions = @config['redcarpet']['extensions'].map { |e| e.to_sym }
+
+            @renderer = Class.new(Redcarpet::Render::HTML) do
+              def block_code(code, lang)
+                lang ||= 'text'
+                output = add_code_tags(
+                  Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
+                  lang
+                )
+              end
+
+              def add_code_tags(code, lang)
+                code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
+                code = code.sub(/<\/pre>/,"</code></pre>")
+              end
+            end
+
+            @redcarpet_extensions = {}
+            @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
           rescue LoadError
             STDERR.puts 'You are missing a library required for Markdown. Please run:'
             STDERR.puts '  $ [sudo] gem install redcarpet'
@@ -30,8 +47,6 @@ module Jekyll
         when 'rdiscount'
           begin
             require 'rdiscount'
-
-            # Load rdiscount extensions
             @rdiscount_extensions = @config['rdiscount']['extensions'].map { |e| e.to_sym }
           rescue LoadError
             STDERR.puts 'You are missing a library required for Markdown. Please run:'
@@ -88,7 +103,10 @@ module Jekyll
       setup
       case @config['markdown']
         when 'redcarpet'
-          Redcarpet.new(content, *@redcarpet_extensions).to_html
+          @redcarpet_extensions[:fenced_code_blocks] = !@redcarpet_extensions[:no_fenced_code_blocks]
+          @renderer.send :include, Redcarpet::Render::SmartyPants if @redcarpet_extensions[:smart]
+          markdown = Redcarpet::Markdown.new(@renderer.new(@redcarpet_extensions), @redcarpet_extensions)
+          markdown.render(content)
         when 'kramdown'
           # Check for use of coderay
           if @config['kramdown']['use_coderay']
