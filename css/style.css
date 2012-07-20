@@ -34,7 +34,7 @@ body > header .content {
 }
 
 .logo {
-  width: 158px;
+  width: 218px;
   margin-left: 0;
   clear: left;
   float: left;
@@ -47,6 +47,11 @@ body > header h1 {
   margin: 0;
   display: inline-block;
   font-family: Arizonia, cursive;
+  font-family: Knewave;
+  font-family: "Trade Winds";
+  font-family: "Jolly Lodger";
+  font-family: Bangers;
+  font-family: "Carter One";
   text-transform: lowercase;
   padding-left: 16px;
   background: url(../img/tube.png) 100% 50% no-repeat;
@@ -62,7 +67,7 @@ body > header h1 a, body > header h1 a:hover {
 /* Navigation */
 
 nav {
-  margin-top: 35px;
+  margin-top: 45px;
 }
 
 nav ul {
