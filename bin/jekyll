@@ -198,45 +198,48 @@ if ARGV.size > 0
       :wordpressdotcom => 'WordPressDotCom',
     }
 
-    app_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-    
-    require "#{app_root}/lib/jekyll/importers/#{migrator}"
-    
-    if Jekyll::Importers.const_defined?(migrators[migrator.to_sym])
-      migrator_class = Jekyll::Importers.const_get(migrators[migrator.to_sym])
-
-      if cmd_options.keys.size == 0 || ARGV[2] == 'help'
-        migrator_class.help.split("\n").each do |line|
-          puts line[8..-1]
-        end
-        puts
-        exit(0)
-      end
-
-      errors = migrator_class.validate(cmd_options)
-
-      unless errors.empty?
-        puts "Failed to import: invalid or missing importer options."
-        puts
-        errors.each { |error| puts "    #{error}" }
-        puts
-        puts "For further help run the following command:"
-        puts
-        puts "    jekyll import #{migrator} help"
-        exit(1)
-      end
-    
-      puts "Importing..."
-
-      files = migrator_class.process(cmd_options)
-      migrator_class.write_files(files)
-
-      files.each do |type, specs|
-        puts "Imported #{type}: #{specs.size}"
-      end
-    else
-      puts "Invalid migrator. Run `jekyll --help` for assistance."
+    if migrators[migrator.to_sym].nil?
+      puts "Invalid migrator: #{migrator}"
+      puts "This is a list of available migrators:"
+      puts migrators.keys.map { |m| "    - #{m}\n" }
       exit(1)
+    else
+      app_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+      require "#{app_root}/lib/jekyll/importers/#{migrator}"
+      
+      if Jekyll::Importers.const_defined?(migrators[migrator.to_sym])
+        migrator_class = Jekyll::Importers.const_get(migrators[migrator.to_sym])
+
+        if cmd_options.keys.size == 0 || ARGV[2] == 'help'
+          migrator_class.help.split("\n").each do |line|
+            puts line[8..-1]
+          end
+          puts
+          exit(0)
+        end
+
+        errors = migrator_class.validate(cmd_options)
+
+        unless errors.empty?
+          puts "Failed to import: invalid or missing importer options."
+          puts
+          errors.each { |error| puts "    #{error}" }
+          puts
+          puts "For further help run the following command:"
+          puts
+          puts "    jekyll import #{migrator} help"
+          exit(1)
+        end
+      
+        puts "Importing..."
+
+        files = migrator_class.process(cmd_options)
+        migrator_class.write_files(files)
+
+        files.each do |type, specs|
+          puts "Imported #{type}: #{specs.size}"
+        end
+      end
     end
     
     exit(0)
