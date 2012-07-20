@@ -248,6 +248,8 @@ if options['auto']
   dw.glob = globs(source)
 
   dw.add_observer do |*args|
+    t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+    puts "[#{t}] regeneration: #{args.size} files changed"
     begin
       site.process
     rescue Jekyll::FatalException => e
@@ -257,8 +259,6 @@ if options['auto']
       puts e.message
       exit(1)
     end
-    t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-    puts "[#{t}] regeneration: #{args.size} files changed"
   end
 
   dw.start
