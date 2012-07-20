@@ -29,7 +29,8 @@ module Jekyll
               end
             end
 
-            @redcarpet_extensions = Hash[*@config['redcarpet']['extensions'].map { |e| [e.to_sym, true] }.flatten]
+            @redcarpet_extensions = {}
+            @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
           rescue LoadError
             STDERR.puts 'You are missing a library required for Markdown. Please run:'
             STDERR.puts '  $ [sudo] gem install redcarpet'
