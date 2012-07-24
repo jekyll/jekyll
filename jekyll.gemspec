@@ -90,6 +90,7 @@ Gem::Specification.new do |s|
     lib/jekyll/static_file.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
+    lib/jekyll/tags/post_url.rb
     test/helper.rb
     test/source/.htaccess
     test/source/_includes/sig.markdown
