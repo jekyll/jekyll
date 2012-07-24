@@ -93,7 +93,7 @@ namespace :migrate do
   end
   desc "Migrate from Typo in the current directory"
   task :typo do
-    sh %q(ruby -r './lib/jekyll/migrators/typo' -e 'Jekyll::Typo.process("#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")')
+    sh %q(ruby -r './lib/jekyll/migrators/typo' -e 'Jekyll::Typo.process("#{ENV["SERVER"]}", "#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")')
   end
 end
 
