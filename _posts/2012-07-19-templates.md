@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Templates
-prev_section: pages
+prev_section: migrations
 next_section: assets
 ---
 
