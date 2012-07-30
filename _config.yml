@@ -1,4 +1,4 @@
-auto: true
+auto: false
 server: true
 permalink: /docs/:categories/:title
 pygments: true
