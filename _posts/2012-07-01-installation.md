@@ -30,8 +30,6 @@ Jekyll requires the gems `directory_watcher`, `liquid`, `open4`, `maruku` and `c
 
 ### Installation Problems
 
-#### Ruby Extension Header Files
-
 If you encounter errors during gem installation, you may need to install
 the header files for compiling extension modules for ruby 1.9.1. This
 can be done on Debian systems by running:
@@ -52,14 +50,17 @@ On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need to run the command 
 RB_USER_INSTALL=true gem install jekyll
 {% endhighlight %}
 
-
 On OSX, you may need to update RubyGems:
 
-`sudo gem update --system`
+{% highlight bash %}
+sudo gem update --system
+{% endhighlight %}
 
 To install gem on Gentoo:
 
-`sudo emerge -av dev-ruby/rubygems`
+{% highlight bash %}
+sudo emerge -av dev-ruby/rubygems
+{% endhighlight %}
 
 On Windows, you may need to install [RubyInstaller
 DevKit](http://wiki.github.com/oneclick/rubyinstaller/development-kit).
@@ -80,7 +81,9 @@ Mac OS X (Leopard onwards) come preinstalled with Python, so on just about any O
 sudo easy_install Pygments
 {% endhighlight %}
 
-Alternatively, you can install Pygments with Homebrew, an excellent package manager for OS X:
+##### Homebrew
+
+Alternatively, you can install Pygments with [Homebrew](http://mxcl.github.com/homebrew/), an excellent package manager for OS X:
 {% highlight bash %}
 brew install python
 # export PATH="/usr/local/share/python:${PATH}"
@@ -89,15 +92,17 @@ pip install --upgrade distribute
 pip install pygments
 {% endhighlight %}
 
-*Note: Homebrew doesn’t symlink the executables for you. For the
-Homebrew default Cellar location and Python 2.7, be sure to add
-`/usr/local/share/python` to your `PATH`:* For, more information, check
-out [this](https://github.com/mxcl/homebrew/wiki/Homebrew-and-Python).
+**ProTip™**: Homebrew doesn’t symlink the executables for you. For the Homebrew default Cellar location and Python 2.7, be sure to add `/usr/local/share/python` to your `PATH`. For more information, check out [the Homebrew wiki](https://github.com/mxcl/homebrew/wiki/Homebrew-and-Python).
 
-If you still use MacPorts, you can install Pygments by running:
-`sudo port install python25 py25-pygments`
+##### MacPorts
 
-Seriously though, you should swap to Homebrew—it’s awesome.
+If you use MacPorts, you can install Pygments by running:
+
+{% highlight bash %}
+sudo port install python25 py25-pygments
+{% endhighlight %}
+
+Seriously though, you should check out [Homebrew](http://mxcl.github.com/homebrew/)—it’s awesome.
 
 
 **On Archlinux:**
