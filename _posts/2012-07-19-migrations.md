@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Blog migrations
-prev_section: pages
+prev_section: variables
 next_section: templates
 ---
 

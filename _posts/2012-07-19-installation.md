@@ -13,6 +13,7 @@ Installing Jekyll is easy and straight-forward, but there’s a few requirements
 - RubyGems
 - Linux, Unix, or Mac OS X
 
+## Installation
 
 The best way to install Jekyll is via
 [RubyGems](http://docs.rubygems.org/read/chapter/3):
@@ -133,3 +134,19 @@ install pygmentize).
 **On Gentoo:**
 
 `sudo emerge -av dev-python/pygments`
+
+
+## Running Jekyll
+
+Usually this is done through the `jekyll` executable, which is installed with the gem. In order to get a server up and running with your Jekyll site, run:
+
+`jekyll --server`
+
+and then browse to http://0.0.0.0:4000. There's plenty of [configuration options](../configuration) available to you as well.
+
+On Debian or Ubuntu, you may need to add `/var/lib/gems/1.8/bin/` to your path.
+
+### Base-URL Options
+
+If you are using base-url option like `jekyll --server --base-url '/blog'` then make sure that you access the site at `http://localhost:4000/blog/index.html`. Just accessing `http://localhost:4000/blog` will not work.
+
