@@ -2,47 +2,56 @@
 layout: docs
 title: Installation
 prev_section: home
-next_section: structure
+next_section: usage
 ---
 
-Installing Jekyll is easy and straight-forward, but there’s a few requirements you’ll need to make sure your system has before you start.
+Getting Jekyll installed and ready-to-go should only take a few minutes.
 
-## Requirements
+### Requirements
+
+Installing Jekyll is easy and straight-forward, but there’s a few requirements you’ll need to make sure your system has before you start.
 
 - Ruby
 - RubyGems
 - Linux, Unix, or Mac OS X
 
-## Installation
+Note that it is possible to get [Jekyll running on Windows](http://www.madhur.co.in/blog/2011/09/01/runningjekyllwindows.html), however the official documentation does not support installation on Windows platforms.
+
+## Install with RubyGems
 
 The best way to install Jekyll is via
-[RubyGems](http://docs.rubygems.org/read/chapter/3):
+[RubyGems](http://docs.rubygems.org/read/chapter/3). At the terminal prompt, simply run the following command to install Jekyll:
 
-`sudo gem install jekyll`
+{% highlight bash %}
+gem install jekyll
+{% endhighlight %}
 
-Jekyll requires the gems `directory_watcher`, `liquid`, `open4`,
-`maruku` and `classifier`. These are automatically installed by the gem
-install command.
+Jekyll requires the gems `directory_watcher`, `liquid`, `open4`, `maruku` and `classifier`. These are automatically installed by the `gem install` command.
 
+### Installation Problems
 
+#### Ruby Extension Header Files
 
 If you encounter errors during gem installation, you may need to install
 the header files for compiling extension modules for ruby 1.9.1. This
-can be done on Debian systems by:
+can be done on Debian systems by running:
 
-`sudo apt-get install ruby1.9.1-dev`
+{% highlight bash %}
+sudo apt-get install ruby1.9.1-dev
+{% endhighlight %}
 
-or on Red Hat / CentOS / Fedora systems by:
+or on Red Hat, CentOS, and Fedora systems by running:
 
-`sudo yum install ruby-devel`
+{% highlight bash %}
+sudo yum install ruby-devel
+{% endhighlight %}
 
-On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need:
+On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need to run the command with the following environment variable:
 
-`RB_USER_INSTALL=true gem install jekyll`
+{% highlight bash %}
+RB_USER_INSTALL=true gem install jekyll
+{% endhighlight %}
 
-If you encounter errors like `Failed to build gem native extension` on
-Windows you may need to install [RubyInstaller
-DevKit](http://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
 On OSX, you may need to update RubyGems:
 
@@ -52,64 +61,44 @@ To install gem on Gentoo:
 
 `sudo emerge -av dev-ruby/rubygems`
 
-LaTeX to PNG
-------------
+On Windows, you may need to install [RubyInstaller
+DevKit](http://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
-Maruku comes with optional support for LaTeX to PNG rendering via
-blahtex (Version 0.6) which must be in your \$PATH along with `dvips`.
+## Optional Extras
 
-(NOTE: [remi’s fork of
-Maruku](http://github.com/remi/maruku/tree/master) does not assume a
-fixed location for `dvips` if you need that fixed)
+There are a number of (optional) extra features that Jekyll supports that you may want to install, depending on how you plan to use Jekyll.
 
-RDiscount
----------
-
-If you prefer to use
-[RDiscount](http://github.com/rtomayko/rdiscount/tree/master) instead of
-[Maruku](http://maruku.rubyforge.org/) for markdown, just make sure it’s
-installed:
-
-`sudo gem install rdiscount`
-
-And run Jekyll with the following option:
-
-`jekyll --rdiscount`
-
-Or, in your `_config.yml` file put the following so you don’t have to
-specify the flag:
-
-`markdown: rdiscount`
-
-Pygments
---------
+### Pygments
 
 If you want syntax highlighting via the `{{ "{% highlight " }}%}` tag in your
 posts, you’ll need to install [Pygments](http://pygments.org/).
 
-**On OS X Leopard, Snow Leopard:**\
-It already comes preinstalled with Python 2.6\
-`sudo easy_install Pygments`
+#### Installing Pygments on OSX
+Mac OS X (Leopard onwards) come preinstalled with Python, so on just about any OS X machine you can install Pygments simply by running:
 
-**On OS X Lion:**\
-OS X Lion comes preinstalled with Python 2.7\
-`sudo easy_install Pygments`
+{% highlight bash %}
+sudo easy_install Pygments
+{% endhighlight %}
 
-**Alternatively on OS X with MacPorts:**\
-`sudo port install python25 py25-pygments`
-
-**Alternatively on OS X with Homebrew:**
-
-    brew install python
-    # export PATH="/usr/local/share/python:${PATH}"
-    easy_install pip
-    pip install --upgrade distribute
-    pip install pygments
+Alternatively, you can install Pygments with Homebrew, an excellent package manager for OS X:
+{% highlight bash %}
+brew install python
+# export PATH="/usr/local/share/python:${PATH}"
+easy_install pip
+pip install --upgrade distribute
+pip install pygments
+{% endhighlight %}
 
 *Note: Homebrew doesn’t symlink the executables for you. For the
 Homebrew default Cellar location and Python 2.7, be sure to add
 `/usr/local/share/python` to your `PATH`:* For, more information, check
 out [this](https://github.com/mxcl/homebrew/wiki/Homebrew-and-Python).
+
+If you still use MacPorts, you can install Pygments by running:
+`sudo port install python25 py25-pygments`
+
+Seriously though, you should swap to Homebrew—it’s awesome.
+
 
 **On Archlinux:**
 
@@ -135,18 +124,30 @@ install pygmentize).
 
 `sudo emerge -av dev-python/pygments`
 
+### LaTeX to PNG
 
-## Running Jekyll
+Maruku comes with optional support for LaTeX to PNG rendering via
+blahtex (Version 0.6) which must be in your \$PATH along with `dvips`.
 
-Usually this is done through the `jekyll` executable, which is installed with the gem. In order to get a server up and running with your Jekyll site, run:
+(NOTE: [remi’s fork of
+Maruku](http://github.com/remi/maruku/tree/master) does not assume a
+fixed location for `dvips` if you need that fixed)
 
-`jekyll --server`
+### RDiscount
 
-and then browse to http://0.0.0.0:4000. There's plenty of [configuration options](../configuration) available to you as well.
+If you prefer to use
+[RDiscount](http://github.com/rtomayko/rdiscount/tree/master) instead of
+[Maruku](http://maruku.rubyforge.org/) for markdown, just make sure it’s
+installed:
 
-On Debian or Ubuntu, you may need to add `/var/lib/gems/1.8/bin/` to your path.
+`sudo gem install rdiscount`
 
-### Base-URL Options
+And run Jekyll with the following option:
 
-If you are using base-url option like `jekyll --server --base-url '/blog'` then make sure that you access the site at `http://localhost:4000/blog/index.html`. Just accessing `http://localhost:4000/blog` will not work.
+`jekyll --rdiscount`
+
+Or, in your `_config.yml` file put the following so you don’t have to
+specify the flag:
+
+`markdown: rdiscount`
 

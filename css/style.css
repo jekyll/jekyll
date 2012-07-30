@@ -289,7 +289,7 @@ body > footer .align-right img {
 .docs article {
   background: #444;
   border-radius: 10px;
-  padding: 30px 40px;
+  padding: 40px 40px 30px;
   box-shadow: 0 3px 10px rgba(0,0,0,.1);
   min-height: 800px;
 }
@@ -435,9 +435,9 @@ pre, code {
 /* HTML Elements */
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;
   margin: 0;
 }
+
 
 a {
   color: #fc0;
