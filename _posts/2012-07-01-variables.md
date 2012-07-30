@@ -30,7 +30,7 @@ Site
 `site.related_posts`          If the page being processed is a Post, this contains a list of up to ten related Posts. By default, these are low quality but fast to compute. For high quality but slow to compute results, run the jekyll command with the `--lsi` (latent semantic indexing) option.
 `site.categories.CATEGORY`    The list of all Posts in category `CATEGORY`.
 `site.tags.TAG`               The list of all Posts with tag `TAG`.
-`site.[CONFIGURATION_DATA]`   As of **0.5.2**, all data inside of your `_config.yml` is now available through the `site` variable. So for example, if you have `url: http://mysite.com` in your configuration file, then in your posts and pages it can be used like so: `{{ "{{ site.url " }}}}</code>. Jekyll does not parse a changed `_config.yml` in `auto` mode, you have to restart jekyll.
+`site.[CONFIGURATION_DATA]`   As of **0.5.2**, all data inside of your `_config.yml` is now available through the `site` variable. So for example, if you have `url: http://mysite.com` in your configuration file, then in your posts and pages it can be used like so: `{{ "{{ site.url " }}}}`. Jekyll does not parse a changed `_config.yml` in `auto` mode, you have to restart jekyll.
 
 Page
 ----
