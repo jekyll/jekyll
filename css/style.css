@@ -34,7 +34,7 @@ body > header .content {
 }
 
 body > header h1 {
-  font-size: 72px;
+/*  font-size: 72px;
   font-weight: normal;
   margin: 0;
   display: inline-block;
@@ -45,7 +45,7 @@ body > header h1 {
   background-size: 46px 80px;
   padding-right: 32px;
   text-shadow: 0 1px 5px rgba(0,0,0,.8);
-}
+*/}
 
 body > header h1 a, body > header h1 a:hover {
   color: #fff;
@@ -54,7 +54,7 @@ body > header h1 a, body > header h1 a:hover {
 /* Navigation */
 
 nav {
-  margin-top: 35px;
+  margin-top: 52px;
 }
 
 nav ul {
