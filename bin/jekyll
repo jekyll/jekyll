@@ -257,7 +257,6 @@ if options['auto']
       puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
       puts "------------------------------------"
       puts e.message
-      exit(1)
     end
   end
 
