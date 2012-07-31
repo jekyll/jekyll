@@ -250,7 +250,14 @@ if options['auto']
   dw.add_observer do |*args|
     t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     puts "[#{t}] regeneration: #{args.size} files changed"
-    site.process
+    begin
+      site.process
+    rescue Jekyll::FatalException => e
+      puts
+      puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
+      puts "------------------------------------"
+      puts e.message
+    end
   end
 
   dw.start
