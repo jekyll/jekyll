@@ -438,7 +438,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-
 a {
   color: #fc0;
   text-decoration: none;
@@ -463,3 +462,9 @@ p {
 .right { float: right; }
 .align-right { text-align: right; }
 .align-left { text-align: left; }
+
+/* Article HTML */
+
+h5 {
+  margin: 1.5em 0 1em;
+}
