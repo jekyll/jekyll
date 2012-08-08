@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: GitHub Pages
-prev_section: plugins
+prev_section: extras
 next_section: heroku
 ---
 
