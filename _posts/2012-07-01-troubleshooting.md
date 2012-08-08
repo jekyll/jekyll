@@ -44,3 +44,10 @@ sudo emerge -av dev-ruby/rubygems
 On Windows, you may need to install [RubyInstaller
 DevKit](http://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
+## Problems running Jekyll
+
+On Debian or Ubuntu, you may need to add /var/lib/gems/1.8/bin/ to your path in order to have the `jekyll` executable be available in your Terminal.
+
+## Base-URL Problems
+
+If you are using base-url option like `jekyll --server --base-url '/blog'` then make sure that you access the site at `http://localhost:4000/blog/index.html`. Just accessing `http://localhost:4000/blog` will not work.
