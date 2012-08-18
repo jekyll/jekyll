@@ -13,6 +13,8 @@ A basic Jekyll site usually looks something like this:
 .
 |-- _config.yml
 |-- _includes
+|   |-- footer.html
+|   `-- header.html
 |-- _layouts
 |   |-- default.html
 |   `-- post.html
