@@ -147,7 +147,6 @@ opts = OptionParser.new do |opts|
   end
 
   opts.on( "--keep-files filename1,filename2", Array, "Whether to keep files that match the filename (default: .git)") do |names|
-    puts "keep-files option: #{names}"
     options['keep_files'] = names
   end
 end
