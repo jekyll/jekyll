@@ -5,24 +5,17 @@ prev_section: structure
 next_section: frontmatter
 ---
 
-Jekyll allows you to concoct your sites in any way you can dream up. The
-following is a list of the currently supported configuration options.
-These can all be specified by creating a `_config.yml` file in your
-site’s root directory. There are also flags for the `jekyll` executable
-which are described below next to their respective configuration
-options. The order of precedence for conflicting settings is this:
-
-1.  Command-line flags
-2.  Configuration file settings
-3.  Defaults
+Jekyll allows you to concoct your sites in any way you can dream up, and it’s thanks to the powerful and flexible configuration options that this is possible. These options can either be specified in a `_config.yml` file placed in your site’s root directory, or can be specified as flags for the `jekyll` executable in the terminal.
 
 ## Configuration Settings
+
+The table below lists the available settings for Jekyll, and the various <code class="option">options</code> (specifed in the configuration file) and <code class="flag">flags</code> (specified on the command-line) that control them.
 
 <table>
   <thead>
     <tr>
       <th>Setting</th>
-      <th>Options &amp; Flags</th>
+      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
     </tr>
   </thead>
   <tbody>
@@ -42,9 +35,9 @@ options. The order of precedence for conflicting settings is this:
         <p class='description'>Enables or disables Jekyll from recreating the site when files are modified.</p>
       </td>
       <td class="align-center">
-        <p><code>auto: [boolean]</code></p>
-        <p><code>--auto</code></p>
-        <p><code>--no-auto</code></p>
+        <p><code class="option">auto: [boolean]</code></p>
+        <p><code class="flag">--auto</code></p>
+        <p><code class="flag">--no-auto</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -53,8 +46,8 @@ options. The order of precedence for conflicting settings is this:
         <p class='description'>Fires up a server that will host your <code>_site</code> directory</p>
       </td>
       <td class="align-center">
-        <p><code>server: [boolean]</code></p>
-        <p><code>--server</code></p>
+        <p><code class="option">server: [boolean]</code></p>
+        <p><code class="flag">--server</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -63,8 +56,8 @@ options. The order of precedence for conflicting settings is this:
         <p class='description'>Changes the port that the Jekyll server will run on</p>
       </td>
       <td class="align-center">
-        <p><code>server_port: [integer]</code></p>
-        <p><code>--server [port]</code></p>
+        <p><code class="option">server_port: [integer]</code></p>
+        <p><code class="flag">--server [port]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -73,8 +66,8 @@ options. The order of precedence for conflicting settings is this:
         <p class='description'>Serve website from a given base URL</p>
       </td>
       <td class="align-center">
-        <p><code>baseurl: [BASE_URL]</code></p>
-        <p><code>--base-url [url]</code></p>
+        <p><code class="option">baseurl: [BASE_URL]</code></p>
+        <p><code class="flag">--base-url [url]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -83,8 +76,8 @@ options. The order of precedence for conflicting settings is this:
         <p class='description'>Sets <code>site.url</code>, useful for environment switching</p>
       </td>
       <td class="align-center">
-        <p><code>url: [URL]</code></p>
-        <p><code>--url [URL]</code></p>
+        <p><code class="option">url: [URL]</code></p>
+        <p><code class="flag">--url [URL]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -93,8 +86,8 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Changes the directory where Jekyll will write files to</p>
       </td>
       <td class='align-center'>
-        <p><code>destination: [dir]</code></p>
-        <p><code>jekyll [dest]</code></p>
+        <p><code class="option">destination: [dir]</code></p>
+        <p><code class="flag">jekyll [dest]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -103,8 +96,8 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Changes the directory where Jekyll will look to transform files</p>
       </td>
       <td class='align-center'>
-        <p><code>source: [dir]</code></p>
-        <p><code>jekyll [source] [dest]</code></p>
+        <p><code class="option">source: [dir]</code></p>
+        <p><code class="flag">jekyll [source] [dest]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -113,10 +106,10 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Uses RDiscount or <code>[engine]</code> instead of Maruku.</p>
       </td>
       <td class='align-center'>
-        <p><code>markdown: [engine]</code></p>
-        <p><code>--rdiscount</code></p>
-        <p><code>--kramdown</code></p>
-        <p><code>--redcarpet</code></p>
+        <p><code class="option">markdown: [engine]</code></p>
+        <p><code class="flag">--rdiscount</code></p>
+        <p><code class="flag">--kramdown</code></p>
+        <p><code class="flag">--redcarpet</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -125,8 +118,8 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Enables highlight tag with Pygments.</p>
       </td>
       <td class='align-center'>
-        <p><code>pygments: [boolean]</code></p>
-        <p><code>--pygments</code></p>
+        <p><code class="option">pygments: [boolean]</code></p>
+        <p><code class="flag">--pygments</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -135,9 +128,9 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Publishes posts with a future date</p>
       </td>
       <td class='align-center'>
-        <p><code>future: [boolean]</code></p>
-        <p><code>--no-future</code></p>
-        <p><code>--future</code></p>
+        <p><code class="option">future: [boolean]</code></p>
+        <p><code class="flag">--no-future</code></p>
+        <p><code class="flag">--future</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -146,8 +139,8 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Produces an index for related posts.</p>
       </td>
       <td class='align-center'>
-        <p><code>lsi: [boolean]</code></p>
-        <p><code>--lsi</code></p>
+        <p><code class="option">lsi: [boolean]</code></p>
+        <p><code class="flag">--lsi</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -156,8 +149,8 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Controls the URLs that posts are generated with. Please refer to the <a href="../permalinks">Permalinks</a> page for more info.</p>
       </td>
       <td class='align-center'>
-        <p><code>permalink: [style]</code></p>
-        <p><code>--permalink=[style]</code></p>
+        <p><code class="option">permalink: [style]</code></p>
+        <p><code class="flag">--permalink=[style]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -166,8 +159,8 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Splits your posts up over multiple subdirectories called "page2", "page3", ... "pageN"</p>
       </td>
       <td class='align-center'>
-        <p><code>paginate: [per_page]</code></p>
-        <p><code>--paginate [per_page]</code></p>
+        <p><code class="option">paginate: [per_page]</code></p>
+        <p><code class="flag">--paginate [per_page]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -176,7 +169,7 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">A list of directories and files to exclude from the conversion</p>
       </td>
       <td class='align-center'>
-        <p><code>exclude: [dir1, file1, dir2]</code></p>
+        <p><code class="option">exclude: [dir1, file1, dir2]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -185,7 +178,7 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">A list of directories and files to specifically include in the conversion. <code>.htaccess</code> is a good example since dotfiles are excluded by default.</p>
       </td>
       <td class='align-center'>
-        <p><code>include: [dir1, file1, dir2]</code></p>
+        <p><code class="option">include: [dir1, file1, dir2]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -194,27 +187,30 @@ options. The order of precedence for conflicting settings is this:
         <p class="description">Limits the number of posts to parse and publish</p>
       </td>
       <td class='align-center'>
-        <p><code>limit_posts: [max_posts]</code></p>
-        <p><code>--limit_posts=[max_posts]</code></p>
+        <p><code class="option">limit_posts: [max_posts]</code></p>
+        <p><code class="flag">--limit_posts=[max_posts]</code></p>
       </td>
     </tr>
 
   </tbody>
 </table>
 
-Default Configuration
----------------------
+<div class="note warning">
+  <h5>Do not use tabs in configuration files</h5>
+  <p>This will either lead to parsing errors, or Jekyll will revert to the default settings. Use spaces instead.</p>
+</div>
 
-**Note** &mdash; You cannot use tabs in configuration files. This will
-either lead to parsing errors, or Jekyll will use the default settings.
+## Default Configuration
+
+Jekyll runs with the following configuration options by default. Unless alternative settings for these options are explicitly specified in the configuration file or on the command-line, Jekyll will run using these options.
 
 {% highlight yaml %}
 safe:        false
 auto:        false
 server:      false
 server_port: 4000
-baseurl:    /
-url: http://localhost:4000
+baseurl:     /
+url:         http://localhost:4000
 
 source:      .
 destination: ./_site
