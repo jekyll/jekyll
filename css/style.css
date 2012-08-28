@@ -540,11 +540,11 @@ tbody td {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1affffff', endColorstr='#00ffffff',GradientType=0 );
 }
 
-.setting .description {
+td p {
   font-size: 16px;
 }
 
-.setting code {
+td p code {
   font-size: 14px;
 }
 
