@@ -10,6 +10,7 @@ Basic Command Line Usage:
   jekyll <path to write generated site>                    # . -> <path>
   jekyll <path to source> <path to write generated site>   # <path> -> <path>
   jekyll import <importer name> <options>                  # imports posts using named import script
+  jekyll new blog                                          # creates directory 'blog' containing the jekyll site structure
   
   Configuration is read from '<source>/_config.yml' but can be overriden
   using the following options:
@@ -199,6 +200,39 @@ if ARGV.size > 0
       exit(1)
     end
     
+    exit(0)
+
+  elsif ARGV[0] == 'new'
+    if ARGV[1].to_s == ""
+      puts "You need to add the name of the directory to be created"
+      exit(1)
+    end
+
+    blog = ARGV[1]
+    FileUtils.mkdir blog
+    Dir.chdir(blog) do
+      FileUtils.mkdir '_includes'
+      FileUtils.mkdir '_layouts'
+      FileUtils.mkdir '_posts'
+      FileUtils.mkdir '_site'
+
+      File.open('_layouts/default.html', 'w') do |f|
+        f.puts "<html>\n<body>\n{{ content }}\n</body>\n</html>"
+      end
+
+      File.open('_posts/2012-08-28-hello-world.markdown', 'w') do |f|
+        f.puts "---\nlayout: default\n---\n* hello world\n"
+      end
+
+      File.open('index.markdown', 'w') do |f|
+        f.puts "---\nlayout: default\n---\n[first post](2012/08/28/hello-world.html)\n"
+      end
+    end
+
+    puts "Generated basic structure in #{blog}"
+    puts "Please do 'cd #{blog} && jekyll --server'"
+    puts "You then should be able to reach your site at http://localhost:4000"
+
     exit(0)
   end
 end
