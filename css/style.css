@@ -522,7 +522,7 @@ td p {
 th {
   text-transform: uppercase;
   font-size: 16px;
-  padding: .5em 0;
+  padding: .5em .75em;
   text-shadow: 0 -1px 0 rgba(0,0,0,.9);
   color: #888;
 }
