@@ -5,61 +5,162 @@ prev_section: pages
 next_section: migrations
 ---
 
-Jekyll traverses your site looking for files to process. Any files with
-[YAML Front Matter](../frontmatter) are subject to processing. For each of these
-files, Jekyll makes a variety of data available to the pages via the
-[Liquid templating
-system](http://wiki.github.com/shopify/liquid/liquid-for-designers). The
-following is a reference of the available data.
+Jekyll traverses your site looking for files to process. Any files with [YAML Front Matter](../frontmatter) are subject to processing. For each of these files, Jekyll makes a variety of data available to the pages via the [Liquid templating system](http://wiki.github.com/shopify/liquid/liquid-for-designers). The following is a reference of the available data.
 
-Global
-------
+## Global Variables
 
-**Variable**   **Description**
-`site`         Sitewide information + Configuration settings from `_config.yml`
-`page`         This is just the [YAML Front Matter](../frontmatter) with 2 additions: `url` and `content`.
-`content`      In layout files, this contains the content of the subview(s). This is the variable used to insert the rendered content into the layout. This is not used in post files or page files.
-`paginator`    When the `paginate` configuration option is set, this variable becomes available for use.
+<table>
+  <thead>
+    <tr>
+      <td>Variable</td>
+      <td>Description</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p><code>site</code></p></td>
+      <td><p>Sitewide information + Configuration settings from <code>_config.yml</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>page</code></p></td>
+      <td><p>This is just the <a href="../frontmatter">YAML Front Matter</a> with 2 additions: <code>url</code> and <code>content</code>.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>content</code></p></td>
+      <td><p>In layout files, this contains the content of the subview(s). This is the variable used to insert the rendered content into the layout. This is not used in post files or page files.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>paginator</code></p></td>
+      <td><p>When the <code>paginate</code> configuration option is set, this variable becomes available for use.</p></td>
+    </tr>
+  </tbody>
+</table>
 
-Site
-----
+## Site Variables
 
-**Variable**                  **Description**
-`site.time`                   The current Time (when you run the jekyll command).
-`site.posts`                  A reverse chronological list of all Posts.
-`site.related_posts`          If the page being processed is a Post, this contains a list of up to ten related Posts. By default, these are low quality but fast to compute. For high quality but slow to compute results, run the jekyll command with the `--lsi` (latent semantic indexing) option.
-`site.categories.CATEGORY`    The list of all Posts in category `CATEGORY`.
-`site.tags.TAG`               The list of all Posts with tag `TAG`.
-`site.[CONFIGURATION_DATA]`   As of **0.5.2**, all data inside of your `_config.yml` is now available through the `site` variable. So for example, if you have `url: http://mysite.com` in your configuration file, then in your posts and pages it can be used like so: `{{ "{{ site.url " }}}}`. Jekyll does not parse a changed `_config.yml` in `auto` mode, you have to restart jekyll.
+<table>
+  <thead>
+    <tr>
+      <td>Variable</td>
+      <td>Description</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p><code>site.time</code></p></td>
+      <td><p>The current time (when you run the <code>jekyll</code> command).</p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.posts</code></p></td>
+      <td><p>A reverse chronological list of all Posts.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.related_posts</code></p></td>
+      <td><p>If the page being processed is a Post, this contains a list of up to ten related Posts. By default, these are low quality but fast to compute. For high quality but slow to compute results, run the <code>jekyll</code> command with the <code>--lsi</code> (latent semantic indexing) option.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.categories.CATEGORY</code></p></td>
+      <td><p>The list of all Posts in category <code>CATEGORY</code>.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.tags.TAG</code></p></td>
+      <td><p>The list of all Posts with tag <code>TAG</code>.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.[CONFIGURATION_DATA]</code></p></td>
+      <td><p>All variables set in your <code>_config.yml</code> are available through the <code>site</code> variable. For example, if you have <code>url: http://mysite.com</code> in your configuration file, then in your posts and pages it can be accessed using <code>{{ "{{ site.url " }}}}</code>. Jekyll does not parse changes to <code>_config.yml</code> in <code>auto</code> mode, you have to restart Jekyll to see changes to variables.</p></td>
+    </tr>
+  </tbody>
+</table>
 
-Page
-----
+## Page Variables
 
-**Variable**        **Description**
-`page.content`      The un-rendered content of the Page.
-`page.title`        The title of the Post.
-`page.url`          The URL of the Post without the domain. e.g. `/2008/12/14/my-post.html`
-`page.date`         The Date assigned to the Post. This can be overridden in a post’s front matter by specifying a new date/time in the format `YYYY-MM-DD HH:MM:SS`
-`page.id`           An identifier unique to the Post (useful in RSS feeds). e.g. `/2008/12/14/my-post`
-`page.categories`   The list of categories to which this post belongs. Categories are derived from the directory structure above the `_posts` directory. For example, a post at `/work/code/_posts/2008-12-24-closures.textile` would have this field set to `['work', 'code']`. These can also be specified in the [YAML Front Matter](../frontmatter)
-`page.tags`         The list of tags to which this post belongs. These can be specified in the [YAML Front Matter](../frontmatter)
+<table>
+  <thead>
+    <tr>
+      <td>Variable</td>
+      <td>Description</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p><code>page.content</code></p></td>
+      <td><p>The un-rendered content of the Page.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.title</code></p></td>
+      <td><p>The title of the Post.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.url</code></p></td>
+      <td><p>The URL of the Post without the domain. e.g. <code>/2008/12/14/my-post.html</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.date</code></p></td>
+      <td><p>The Date assigned to the Post. This can be overridden in a post’s front matter by specifying a new date/time in the format <code>YYYY-MM-DD HH:MM:SS</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.id</code></p></td>
+      <td><p>An identifier unique to the Post (useful in RSS feeds). e.g. <code>/2008/12/14/my-post</code></p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.categories</code></p></td>
+      <td><p>The list of categories to which this post belongs. Categories are derived from the directory structure above the <code>_posts</code> directory. For example, a post at <code>/work/code/_posts/2008-12-24-closures.textile</code> would have this field set to <code>['work', 'code']</code>. These can also be specified in the <a href="../frontmatter">YAML Front Matter</a>.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.tags</code></p></td>
+      <td><p>The list of tags to which this post belongs. These can be specified in the <a href="../frontmatter">YAML Front Matter</a></p></td>
+    </tr>
+  </tbody>
+</table>
 
-Note: Any custom front matter that you specify will be available under
-`page`. For example, if you specify `custom_css: true` in a page’s front
-matter, that value will be available in templates as `page.custom_css`
+<div class="note">
+  <h5>ProTip™: Use custom front-matter</h5>
+  <p>Any custom front matter that you specify will be available under <code>page</code>. For example, if you specify <code>custom_css: true</code> in a page’s front matter, that value will be available in templates as <code>page.custom_css</code>.</p>
+</div>
 
-Paginator
----------
+## Paginator
 
-**note: only available in index files, can be in subdirectory
-/blog/index.html**
+<table>
+  <thead>
+    <tr>
+      <td>Variable</td>
+      <td>Description</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p><code>paginator.per_page</code></p></td>
+      <td><p>Number of posts per page.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>paginator.posts</code></p></td>
+      <td><p>Posts available for that page.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>paginator.total_posts</code></p></td>
+      <td><p>Total number of posts.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>paginator.total_pages</code></p></td>
+      <td><p>Total number of pages.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>paginator.page</code></p></td>
+      <td><p>The number of the current page.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>paginator.previous_page</code></p></td>
+      <td><p>The number of the previous page.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>paginator.next_page</code></p></td>
+      <td><p>The number of the next page.</p></td>
+    </tr>
+  </tbody>
+</table>
 
-**Variable**                **Description**
-`paginator.per_page`        Number of posts per page.
-`paginator.posts`           Posts available for that page.
-`paginator.total_posts`     Total number of posts.
-`paginator.total_pages`     Total number of pages.
-`paginator.page`            The number of the current page.
-`paginator.previous_page`   The number of the previous page.
-`paginator.next_page`       The number of the next page.
-
+<div class="note info">
+  <h5>Paginator variable availability</h5>
+  <p>These are only available in index files, however they can be located in a subdirectory, such as <code>/blog/index.html</code>.</p>
+</div>
