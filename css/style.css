@@ -556,6 +556,10 @@ code.flag, th .flag {
   color: #049DCE;
 }
 
+code.option, code.flag {
+  margin-bottom: 2px;
+}
+
 /* Note types */
 
 .note {
