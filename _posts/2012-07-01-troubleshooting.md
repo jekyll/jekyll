@@ -63,3 +63,38 @@ The order of precedence for conflicting [configuration settings](../configuratio
 
 That is: defaults are overridden by options specified in `_config.yml`, and flags specified at the command-line will override all other settings specified elsewhere.
 
+## Markup Problems
+
+The various markup engines that Jekyll uses may have some issues. This
+page will document them to help others who may run into the same
+problems.
+
+### Maruku
+
+If your link has characters that need to be escaped, you need to use
+this syntax:
+
+`![Alt text](http://yuml.me/diagram/class/[Project]->[Task])`
+
+If you have an empty tag, i.e. `<script src="js.js"></script>`, Maruku
+transforms this into `<script src="js.js" />`. This causes problems in
+Firefox and possibly other browsers and is [discouraged in
+XHTML.](http://www.w3.org/TR/xhtml1/#C_3) An easy fix is to put a space
+between the opening and closing tags.
+
+### RedCloth
+
+Versions 4.1.1 and higher do not obey the notextile tag. [This is a
+known
+bug](http://aaronqian.com/articles/2009/04/07/redcloth-ate-my-notextile.html)
+and will hopefully be fixed for 4.2. You can still use 4.1.9, but the
+test suite requires that 4.1.0 be installed. If you use a version of
+RedCloth that does not have the notextile tag, you may notice that
+syntax highlighted blocks from Pygments are not formatted correctly,
+among other things. If you’re seeing this just install 4.1.0.
+
+### Liquid
+
+The latest version, version 2.0, seems to break the use of {{ "{{" }} in
+templates. Unlike previous versions, using {{ "{{" }} in 2.0 gives me:
+`'{{ "{{" }}' was not properly terminated with regexp: /\}\}/  (Liquid::SyntaxError)`

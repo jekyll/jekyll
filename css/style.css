@@ -548,15 +548,15 @@ td p code {
   font-size: 14px;
 }
 
-code.option, th .option {
+code.option, th .option, code.filter, th .filter {
   color: #50B600;
 }
 
-code.flag, th .flag {
+code.flag, th .flag, code.output, th .output {
   color: #049DCE;
 }
 
-code.option, code.flag {
+code.option, code.flag, code.filter, code.output {
   margin-bottom: 2px;
 }
 
