@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Permalinks
-prev_section: assets
+prev_section: templates
 next_section: pagination
 ---
 
