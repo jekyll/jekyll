@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Contributing
-prev_section: manual-deployment
+prev_section: deployment-methods
 next_section: issues
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: docs
-title: Manual deployment
-prev_section: heroku
+title: Deployment methods
+prev_section: github-pages
 next_section: contributing
 ---
 
