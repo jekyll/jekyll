@@ -5,7 +5,7 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :tag_names, :time, :future, :safe, :plugins, :limit_posts
 
     attr_accessor :converters, :generators
 
@@ -58,6 +58,7 @@ module Jekyll
       self.static_files    = []
       self.categories      = Hash.new { |hash, key| hash[key] = [] }
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
+      self.tag_names       = []
 
       if !self.limit_posts.nil? && self.limit_posts < 1
         raise ArgumentError, "Limit posts must be nil or >= 1"
@@ -292,14 +293,18 @@ module Jekyll
     #                  See Site#post_attr_hash for type info.
     #   "tags"       - The Hash of tag values and Posts.
     #                  See Site#post_attr_hash for type info.
+    #   "tag_names"  - The Array of keys from "tags", sorted lexicographically.
     def site_payload
+      tags = post_attr_hash('tags')
+      self.tag_names = tags.keys.sort
       {"site" => self.config.merge({
           "time"       => self.time,
           "posts"      => self.posts.sort { |a, b| b <=> a },
           "pages"      => self.pages,
           "html_pages" => self.pages.reject { |page| !page.html? },
           "categories" => post_attr_hash('categories'),
-          "tags"       => post_attr_hash('tags')})}
+          "tags"       => tags,
+          "tag_names"  => self.tag_names})}
     end
 
     # Filter out any files/directories that are hidden or backup files (start
