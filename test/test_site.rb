@@ -135,10 +135,13 @@ class TestSite < Test::Unit::TestCase
 
       posts = Dir[source_dir("**", "_posts", "*")]
       categories = %w(bar baz category foo z_category publish_test win).sort
+      tags = ["code", "food", "cooking", "pizza", "A string", "Ruby"].sort
 
       assert_equal posts.size - 1, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
       assert_equal 4, @site.categories['foo'].size
+      assert_equal tags, @site.tags.keys.sort
+      assert_equal tags, @site.tag_names
     end
 
     should "filter entries" do
