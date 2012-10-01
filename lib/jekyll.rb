@@ -24,7 +24,7 @@ require 'English'
 # 3rd party
 require 'liquid'
 require 'maruku'
-require 'albino'
+require 'pygments'
 
 # internal requires
 require 'jekyll/core_ext'
@@ -51,14 +51,15 @@ module Jekyll
   # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML).
   DEFAULTS = {
-    'safe'         => false,
-    'auto'         => false,
-    'server'       => false,
-    'server_port'  => 4000,
+    'safe'          => false,
+    'auto'          => false,
+    'server'        => false,
+    'server_port'   => 4000,
 
     'source'       => Dir.pwd,
     'destination'  => File.join(Dir.pwd, '_site'),
     'plugins'      => File.join(Dir.pwd, '_plugins'),
+    'layouts'      => '_layouts',
 
     'future'       => true,
     'lsi'          => false,
@@ -66,6 +67,7 @@ module Jekyll
     'markdown'     => 'maruku',
     'permalink'    => 'date',
     'include'      => ['.htaccess'],
+    'paginate_path' => 'page:num',
 
     'markdown_ext' => 'markdown,mkd,mkdn,md',
     'textile_ext'  => 'textile',
@@ -88,6 +90,7 @@ module Jekyll
       'footnote_nr'   => 1,
       'entity_output' => 'as_char',
       'toc_levels'    => '1..6',
+      'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
       'use_coderay'   => false,
 
       'coderay' => {

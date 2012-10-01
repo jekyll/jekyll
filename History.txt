@@ -4,11 +4,15 @@
     * Add --default-mimetype option (#279)
     * Allow setting of RedCloth options (#284)
     * Add post_url Liquid tag for internal post linking (#369)
+    * Allow multiple plugin dirs to be specified (#438)
+    * Inline TOC token support for RDiscount (#333)
+    * Add the option to specify the paginated url format (#342)
   * Bug Fixes
     * Allow some special characters in highlight names
     * URL escape category names in URL generation (#360)
     * Fix error with limit_posts (#442)
     * Properly select dotfile during directory scan (#363, #431, #377)
+    * Allow setting of Kramdown smart_quotes (#482)
 
 == 0.11.2 / 2011-12-27
   * Bug Fixes
