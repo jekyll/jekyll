@@ -69,10 +69,10 @@ module Jekyll
         when "audio"
           if !post["id3-title"].nil?
             title = post["id3-title"]
-            content = post.at["audio-player"] + "<br/>" + post["audio-caption"]
+            content = post["audio-player"] + "<br/>" + post["audio-caption"]
           else
             title = post["audio-caption"]
-            content = post.at["audio-player"]
+            content = post["audio-player"]
           end
         when "quote"
           title = post["quote-text"]
@@ -83,12 +83,16 @@ module Jekyll
         when "conversation"
           title = post["conversation-title"]
           content = "<section><dialog>"
-          post["conversation"]["line"].each do |line|
+          post["conversation"].each do |line|
             content << "<dt>#{line['label']}</dt><dd>#{line}</dd>"
           end
           content << "</section></dialog>"
         when "video"
-          title = post["video-title"]
+          if post["video-title"].nil?
+            title = "random video"
+          else
+            title = post["video-title"]
+          end
           content = post["video-player"]
           unless post["video-caption"].nil?
             content << "<br/>" + post["video-caption"]
@@ -96,7 +100,7 @@ module Jekyll
       end
       date = Date.parse(post['date']).to_s
       title = Nokogiri::HTML(title).text
-      slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+      slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')[0..50]
       {
         :name => "#{date}-#{slug}.#{format}",
         :header => {

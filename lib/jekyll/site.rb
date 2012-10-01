@@ -140,6 +140,7 @@ module Jekyll
           first3 = File.open(f_abs) { |fd| fd.read(3) }
           if first3 == "---"
             # file appears to have a YAML header so process it as a page
+	    puts f
             pages << Page.new(self, self.source, dir, f)
           else
             # otherwise treat it as a static file
