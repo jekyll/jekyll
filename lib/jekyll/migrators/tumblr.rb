@@ -88,7 +88,11 @@ module Jekyll
           end
           content << "</section></dialog>"
         when "video"
-          title = post["video-title"]
+          if post["video-title"].nil?
+            title = "random video"
+          else
+            title = post["video-title"]
+          end
           content = post["video-player"]
           unless post["video-caption"].nil?
             content << "<br/>" + post["video-caption"]
