@@ -1,3 +1,23 @@
+== HEAD
+  * Minor Enhancements
+    * Add ability to explicitly specify included files (#261)
+    * Add --default-mimetype option (#279)
+    * Allow setting of RedCloth options (#284)
+    * Add post_url Liquid tag for internal post linking (#369)
+  * Bug Fixes
+    * Allow some special characters in highlight names
+    * URL escape category names in URL generation (#360)
+    * Fix error with limit_posts (#442)
+
+== 0.11.2 / 2011-12-27
+  * Bug Fixes
+    * Fix gemspec
+
+== 0.11.1 / 2011-12-27
+  * Bug Fixes
+    * Fix extra blank line in highlight blocks (#409)
+    * Update dependencies
+
 == 0.11.0 / 2011-07-10
   * Major Enhancements
     * Add command line importer functionality (#253)

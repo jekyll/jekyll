@@ -22,6 +22,8 @@ module Jekyll
     attr_accessor :data, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
+    attr_reader :name
+
     # Initialize this Post instance.
     #   +site+ is the Site
     #   +base+ is the String path to the dir containing the post file
@@ -131,7 +133,7 @@ module Jekyll
           "title"      => CGI.escape(slug),
           "i_day"      => date.strftime("%d").to_i.to_s,
           "i_month"    => date.strftime("%m").to_i.to_s,
-          "categories" => categories.join('/'),
+          "categories" => categories.map { |c| URI.escape(c) }.join('/'),
           "output_ext" => self.output_ext
         }.inject(template) { |result, token|
           result.gsub(/:#{Regexp.escape token.first}/, token.last)
