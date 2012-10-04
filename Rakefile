@@ -50,10 +50,6 @@ task :default => [:test, :features]
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
-  if `which pygmentize` == ''
-    puts "You must have Pygments installed to run the tests."
-    exit 1
-  end
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true

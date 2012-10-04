@@ -131,3 +131,36 @@ Feature: Site configuration
     And the "_site/2009/04/05/bananas.html" file should exist
     And the "_site/2009/04/01/oranges.html" file should exist
     And the "_site/2009/03/27/apples.html" file should not exist
+
+  Scenario: Copy over normally excluded files when they are explicitly included
+    Given I have a ".gitignore" file that contains ".DS_Store"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have a configuration file with "include" set to:
+      | value      |
+      | .gitignore |
+      | .foo       |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see ".DS_Store" in "_site/.gitignore"
+    And the "_site/.htaccess" file should not exist
+
+  Scenario: Using a different layouts directory
+    Given I have a _theme directory
+    And I have a page theme that contains "Page Layout: {{ site.posts.size }} on {{ site.time | date: "%Y-%m-%d" }}"
+    And I have a post theme that contains "Post Layout: {{ content }}"
+    And I have an "index.html" page with layout "page" that contains "site index page"
+    And I have a configuration file with:
+      | key         | value        |
+      | time        | 2010-01-01   |
+      | future      | true         |
+      | layouts     | _theme       |
+    And I have a _posts directory
+    And I have the following posts:
+      | title     | date       | layout  | content                                |
+      | entry1    | 12/31/2007 | post    | content for entry1.                    |
+      | entry2    | 01/31/2020 | post    | content for entry2.                    |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Page Layout: 2 on 2010-01-01" in "_site/index.html"
+    And I should see "Post Layout: <p>content for entry1.</p>" in "_site/2007/12/31/entry1.html"
+    And I should see "Post Layout: <p>content for entry2.</p>" in "_site/2020/01/31/entry2.html"

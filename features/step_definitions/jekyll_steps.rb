@@ -39,6 +39,13 @@ Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
   end
 end
 
+Given /^I have a (.*) theme that contains "(.*)"$/ do |layout, text|
+  File.open(File.join('_theme', layout + '.html'), 'w') do |f|
+    f.write(text)
+    f.close
+  end
+end
+
 Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
@@ -121,7 +128,7 @@ When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
 end
 
 Then /^the (.*) directory should exist$/ do |dir|
-  assert File.directory?(dir)
+  assert File.directory?(dir), "The directory \"#{dir}\" does not exist"
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
