@@ -58,7 +58,7 @@ module Jekyll
 
     'source'       => Dir.pwd,
     'destination'  => File.join(Dir.pwd, '_site'),
-    'plugins'      => File.join(Dir.pwd, '_plugins'),
+    'plugins'      => '_plugins',
     'layouts'      => '_layouts',
 
     'future'       => true,
