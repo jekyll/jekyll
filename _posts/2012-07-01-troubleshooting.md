@@ -84,8 +84,7 @@ between the opening and closing tags.
 
 ### RedCloth
 
-Versions 4.1.1 and higher do not obey the notextile tag. [This is a
-known
+Versions 4.1.1 and higher do not obey the notextile tag. [This is a known
 bug](http://aaronqian.com/articles/2009/04/07/redcloth-ate-my-notextile.html)
 and will hopefully be fixed for 4.2. You can still use 4.1.9, but the
 test suite requires that 4.1.0 be installed. If you use a version of
@@ -95,6 +94,15 @@ among other things. If you’re seeing this just install 4.1.0.
 
 ### Liquid
 
-The latest version, version 2.0, seems to break the use of {{ "{{" }} in
-templates. Unlike previous versions, using {{ "{{" }} in 2.0 gives me:
-`'{{ "{{" }}' was not properly terminated with regexp: /\}\}/  (Liquid::SyntaxError)`
+The latest version, version 2.0, seems to break the use of `{{ "{{" }}` in
+templates. Unlike previous versions, using `{{ "{{" }}` in 2.0 triggers the
+following error:
+
+{% highlight bash %}
+'{{ "{{" }}' was not properly terminated with regexp: /\}\}/  (Liquid::SyntaxError)
+{% endhighlight %}
+
+<div class="note">
+  <h5>Please report issues you encounter!</h5>
+  <p>If you come across a bug, please <a href="https://github.com/mojombo/jekyll/issues/new">create an issue</a> on GitHub describing the problem and any work-arounds you find so we can document it here for others.</p>
+</div>
