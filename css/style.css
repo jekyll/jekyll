@@ -473,6 +473,28 @@ h5, h6 {
   font-style: italic;
 }
 
+article ul li p {
+  margin: 0;
+}
+
+article ul li, article ol li {
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+article ul li blockquote {
+  margin: 10px 0;
+}
+
+blockquote {
+  border-left: 2px solid #777;
+  padding-left: 20px;
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
 /* Tables */
 
 table {
