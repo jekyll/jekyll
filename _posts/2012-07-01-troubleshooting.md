@@ -1,11 +1,11 @@
 ---
 layout: docs
 title: Troubleshooting
-prev_section: issues
+prev_section: contributing
 next_section: sites
 ---
 
-If you ever run into problems installing or using Jekyll, here’s a few tips that might be of help. If the problem you’re experiencing isn’t covered below, please [report an issue](../issues) so the Jekyll community can make everyone’s experience better.
+If you ever run into problems installing or using Jekyll, here’s a few tips that might be of help. If the problem you’re experiencing isn’t covered below, please [report an issue](https://github.com/mojombo/jekyll/issues/new) so the Jekyll community can make everyone’s experience better.
 
 ## Installation Problems
 

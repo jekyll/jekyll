@@ -2,7 +2,7 @@
 layout: docs
 title: Contributing
 prev_section: deployment-methods
-next_section: issues
+next_section: troubleshooting
 ---
 
 Contributions to Jekyll are always welcome, however there’s a few things that you should keep in mind to improve your chances of having your changes merged in.

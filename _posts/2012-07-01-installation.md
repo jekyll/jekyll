@@ -5,7 +5,7 @@ prev_section: home
 next_section: usage
 ---
 
-Getting Jekyll installed and ready-to-go should only take a few minutes. If it ever becomes a pain in the ass, you should [file an issue](../issues) (or submit a pull request) about what might be a better way to do things.
+Getting Jekyll installed and ready-to-go should only take a few minutes. If it ever becomes a pain in the ass, you should [file an issue](https://github.com/mojombo/jekyll/issues/new) (or submit a pull request) about what might be a better way to do things.
 
 ### Requirements
 
@@ -29,7 +29,7 @@ The best way to install Jekyll is via
 gem install jekyll
 {% endhighlight %}
 
-All Jekyll’s gem dependancies are automatically installed by the above command, so you won’t have to worry about them at all. If you have problems installing Jekyll, check out the [troubleshooting](../troubleshooting) page or [report an issue](../issues) so the Jekyll community can improve the experience for everyone.
+All Jekyll’s gem dependancies are automatically installed by the above command, so you won’t have to worry about them at all. If you have problems installing Jekyll, check out the [troubleshooting](../troubleshooting) page or [report an issue](https://github.com/mojombo/jekyll/issues/new) so the Jekyll community can improve the experience for everyone.
 
 ## Optional Extras
 
