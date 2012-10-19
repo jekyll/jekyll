@@ -87,22 +87,22 @@ this script from within Textmate.
 
 [Rack-Jekyll](http://github.com/bry4n/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](http://github.com/rtomakyo/shotgun/), [rackup](http://github.com/rack/rack), [mongrel](http://github.com/mongrel/mongrel), [unicorn](http://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
 
-Read [this post](http://blog.crowdint.com/2010/08/02/instant-blog-using-jekyll-and-heroku.html) on how to deploy to Heroku.
+Read [this post](http://blog.crowdint.com/2010/08/02/instant-blog-using-jekyll-and-heroku.html) on how to deploy to Heroku using Rack-Jekyll.
 
-Jekyll-Admin for Rails
-----------------------
+## Jekyll-Admin for Rails
 
-If you want to maintain Jekyll inside your existing Rails app,
-[Jekyll-Admin](http://github.com/zkarpinski/Jekyll-Admin) contains drop
-in code to make this possible. See Jekyll-Admin’s
-[README](http://github.com/zkarpinski/Jekyll-Admin/blob/master/README)
+If you want to maintain Jekyll inside your existing Rails app, [Jekyll-Admin](http://github.com/zkarpinski/Jekyll-Admin) contains drop in code to make this possible. See Jekyll-Admin’s [README](http://github.com/zkarpinski/Jekyll-Admin/blob/master/README) for more details.
 
-Amazon S3
----------
+## Amazon S3
 
 If you want to host your site in Amazon S3, you can do so with
-[jekyll-s3](https://github.com/versapay/jekyll-s3) application. It will
+[jekyll-s3](https://github.com/laurilehmijoki/jekyll-s3) application. It will
 push your site to Amazon S3 where it can be served like any web server,
 dynamically scaling to almost unlimited traffic. This approach has the
 benefit of being about the cheapest hosting option available for
 low-volume blogs as you only pay for what you use.
+
+<div class="note">
+  <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
+  <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages">host your Jekyll-powered website for free</a>.</p>
+</div>
