@@ -60,7 +60,7 @@ module Jekyll
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
 
       if !self.limit_posts.nil? && self.limit_posts < 1
-        raise ArgumentError, "Limit posts must be nil or >= 1"
+        raise ArgumentError, "Limit posts must not be nil or >= 1"
       end
     end
 
