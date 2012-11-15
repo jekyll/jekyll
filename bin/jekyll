@@ -228,7 +228,7 @@ destination = options['destination']
 def globs(source)
   Dir.chdir(source) do
     dirs = Dir['*'].select { |x| File.directory?(x) }
-    dirs -= ['_site']
+    dirs -= ['_site', destination]
     dirs = dirs.map { |x| "#{x}/**/*" }
     dirs += ['*']
   end
