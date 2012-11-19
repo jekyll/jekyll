@@ -223,6 +223,12 @@ options = Jekyll.configuration(options)
 # Get source and destination directories (possibly set by config file)
 source      = options['source']
 destination = options['destination']
+ignore_dirs = options['ignore_dirs']
+
+ignore_dirs_re = []
+ignore_dirs.each do |ido| 
+  ignore_dirs_re << Regexp.new(ido)
+end
 
 # Files to watch
 def globs(source)
@@ -242,15 +248,31 @@ if options['auto']
   require 'directory_watcher'
 
   puts "Auto-regenerating enabled: #{source} -> #{destination}"
+  unless ignore_dirs.empty? 
+    puts "Ignoring directories: #{ignore_dirs}"
+  end
 
   dw = DirectoryWatcher.new(source)
   dw.interval = 1
   dw.glob = globs(source)
 
   dw.add_observer do |*args|
+    args.delete_if { |a| 
+      res = false
+      ignore_dirs_re.each do |id|
+        if match = id =~ a.path
+          puts "Ignoring [#{a.path}], matches #{id}"
+          res = true
+          break
+        end
+      end
+      res
+    }
+    if (args.size) > 0
     t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     puts "[#{t}] regeneration: #{args.size} files changed"
     site.process
+    end
   end
 
   dw.start
