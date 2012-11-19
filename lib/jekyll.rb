@@ -50,9 +50,11 @@ module Jekyll
 
   # Default options. Overriden by values in _config.yml or command-line opts.
   # (Strings rather symbols used for compatability with YAML).
+  # NOTE: a new option 'ignore_dirs' has been introduced (see issue #676)
   DEFAULTS = {
     'safe'          => false,
     'auto'          => false,
+    'ignore_dirs'   => [],
     'server'        => false,
     'server_port'   => 4000,
 
