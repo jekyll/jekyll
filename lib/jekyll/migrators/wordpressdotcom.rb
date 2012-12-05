@@ -19,7 +19,7 @@ module Jekyll
         permalink_title = item.at('wp:post_name').inner_text
         # Fallback to "prettified" title if post_name is empty (can happen)
         if permalink_title == ""
-          permalink_title = title.downcase.split.join('-')
+          permalink_title = sluggify(title)
         end
 
         date = Time.parse(item.at('wp:post_date').inner_text)
@@ -65,6 +65,10 @@ module Jekyll
       import_count.each do |key, value|
         puts "Imported #{value} #{key}s"
       end
+    end
+
+    def self.sluggify(title)
+      title.downcase.split.join('-').gsub('/','-')
     end
   end
 end
