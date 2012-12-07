@@ -5,6 +5,7 @@ Gem::Specification.new do |s|
 
   s.name              = 'jekyll'
   s.version           = '0.11.2'
+  s.license           = 'MIT'
   s.date              = '2011-12-27'
   s.rubyforge_project = 'jekyll'
 
