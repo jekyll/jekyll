@@ -101,12 +101,12 @@ module Jekyll
       self.read_directories
     end
 
-    # Read all the files in <source>/<dir>/_layouts and create a new Layout
-    # object with each one.
+    # Read all the files in <source>/<layouts> and create a new Layout object
+    # with each one.
     #
     # Returns nothing.
-    def read_layouts(dir = '')
-      base = File.join(self.source, dir, "_layouts")
+    def read_layouts
+      base = File.join(self.source, self.config['layouts'])
       return unless File.exists?(base)
       entries = []
       Dir.chdir(base) { entries = filter_entries(Dir['*.*']) }
@@ -121,7 +121,7 @@ module Jekyll
     # that will become part of the site according to the rules in
     # filter_entries.
     #
-    # dir - The String relative path of the directory to read.
+    # dir - The String relative path of the directory to read. Default: ''.
     #
     # Returns nothing.
     def read_directories(dir = '')
@@ -195,12 +195,13 @@ module Jekyll
     #
     # Returns nothing.
     def render
+      payload = site_payload
       self.posts.each do |post|
-        post.render(self.layouts, site_payload)
+        post.render(self.layouts, payload)
       end
 
       self.pages.each do |page|
-        page.render(self.layouts, site_payload)
+        page.render(self.layouts, payload)
       end
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
@@ -256,7 +257,7 @@ module Jekyll
       end
     end
 
-    # Constructs a Hash of Posts indexed by the specified Post attribute.
+    # Construct a Hash of Posts indexed by the specified Post attribute.
     #
     # post_attr - The String name of the Post attribute.
     #
@@ -306,7 +307,7 @@ module Jekyll
     # or are excluded in the site configuration, unless they are web server
     # files such as '.htaccess'.
     #
-    # entries - The Array of file/directory entries to filter.
+    # entries - The Array of String file/directory entries to filter.
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries)
