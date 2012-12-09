@@ -251,7 +251,7 @@ module Jekyll
     # create a regex from the keep_files array
     # ['.git','.svn'] => /\/(\.git|\/.svn)/
     def keep_file_regex
-      or_list = self.keep_files.map.inject("") { |x,y| "#{x}|#{y}" }[1..-1]
+      or_list = self.keep_files.join("|")
       pattern = "\/(#{or_list.gsub(".", "\.")})"
       Regexp.new pattern
     end
