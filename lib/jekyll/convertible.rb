@@ -76,9 +76,13 @@ module Jekyll
       payload["pygments_suffix"] = converter.pygments_suffix
 
       begin
-        self.content = Liquid::Template.parse(self.content).render(payload, info)
+        self.content = Liquid::Template.parse(self.content).render!(payload, info)
       rescue => e
         puts "Liquid Exception: #{e.message} in #{self.name}"
+        e.backtrace.each do |backtrace|
+          puts backtrace
+        end
+        abort("Build Failed")
       end
 
       self.transform
@@ -94,9 +98,13 @@ module Jekyll
         payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
 
         begin
-          self.output = Liquid::Template.parse(layout.content).render(payload, info)
+          self.output = Liquid::Template.parse(layout.content).render!(payload, info)
         rescue => e
           puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
+          e.backtrace.each do |backtrace|
+            puts backtrace
+          end
+          abort("Build Failed")
         end
 
         if layout = layouts[layout.data["layout"]]
