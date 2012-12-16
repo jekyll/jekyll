@@ -8,6 +8,7 @@
     * Inline TOC token support for RDiscount (#333)
     * Add the option to specify the paginated url format (#342)
     * Support Redcarpet 2 and fenced code blocks (#619)
+    * Better reporting of Liquid errors (#624)
   * Bug Fixes
     * Allow some special characters in highlight names
     * URL escape category names in URL generation (#360)
