@@ -108,31 +108,24 @@ module Jekyll
           markdown.render(content)
         when 'kramdown'
           # Check for use of coderay
-          if @config['kramdown']['use_coderay']
-            Kramdown::Document.new(content, {
-              :auto_ids      => @config['kramdown']['auto_ids'],
-              :footnote_nr   => @config['kramdown']['footnote_nr'],
-              :entity_output => @config['kramdown']['entity_output'],
-              :toc_levels    => @config['kramdown']['toc_levels'],
-              :smart_quotes  => @config['kramdown']['smart_quotes'],
-
-              :coderay_wrap               => @config['kramdown']['coderay']['coderay_wrap'],
-              :coderay_line_numbers       => @config['kramdown']['coderay']['coderay_line_numbers'],
-              :coderay_line_number_start  => @config['kramdown']['coderay']['coderay_line_number_start'],
-              :coderay_tab_width          => @config['kramdown']['coderay']['coderay_tab_width'],
-              :coderay_bold_every         => @config['kramdown']['coderay']['coderay_bold_every'],
-              :coderay_css                => @config['kramdown']['coderay']['coderay_css']
-            }).to_html
-          else
-            # not using coderay
-            Kramdown::Document.new(content, {
-              :auto_ids      => @config['kramdown']['auto_ids'],
-              :footnote_nr   => @config['kramdown']['footnote_nr'],
-              :entity_output => @config['kramdown']['entity_output'],
-              :toc_levels    => @config['kramdown']['toc_levels'],
-              :smart_quotes  => @config['kramdown']['smart_quotes']
-            }).to_html
+          document_hash = Hash.new 
+          [:auto_ids, :footnote_nr, :entity_output, :toc_levels, 
+            :smart_quotes ].each_with_object(document_hash) do |e, o|
+            
+            o[e] = @config['kramdown'][e.to_s]
           end
+
+          if @config['kramdown']['use_coderay']
+            [:coderay_wrap, :coderay_line_numbers, :coderay_line_number_start,
+              :coderay_tab_width, :coderay_bold_every, 
+              :coderay_css ].each_with_object(document_hash) do |e, o|
+
+              o[e] = @config['kramdown']['coderay'][e.to_s]
+            end
+          end
+          # no else required here
+          Kramdown::Document.new(content, document_hash).to_html
+
         when 'rdiscount'
           rd = RDiscount.new(content, *@rdiscount_extensions)
           html = rd.to_html
