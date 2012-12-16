@@ -94,10 +94,10 @@ module Jekyll
       init = (@page - 1) * @per_page
       offset = (init + @per_page - 1) >= all_posts.size ? all_posts.size : (init + @per_page - 1)
 
-      @total_posts = all_posts.size
-      @posts = all_posts[init..offset]
-      @previous_page = @page != 1 ? @page - 1 : nil
-      @next_page = @page != @total_pages ? @page + 1 : nil
+      @total_posts    = all_posts.size
+      @posts          = all_posts[init..offset]
+      @previous_page  = @page != 1 ? @page - 1 : nil
+      @next_page      = @page != @total_pages ? @page + 1 : nil
     end
 
     # Convert this Pager's data to a Hash suitable for use by Liquid.
