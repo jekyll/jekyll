@@ -60,6 +60,18 @@ Feature: Site data
     Then the _site directory should exist
     And I should see "Yuengling" in "_site/index.html"
 
+  Scenario: Use site.years variable
+    Given I have a _posts directory
+    And I have an "index.html" page that contains "{% for post in site.years.2009 %} {{ post.content }} {% endfor %}"
+    And I have the following posts:
+      | title       | date      | content         |
+      | First Post  | 3/25/2008 | My First Post   |
+      | Second Post | 3/26/2009 | My Second Post  |
+      | Third Post  | 3/27/2010 | My Third Post   |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "My Second Post" in "_site/index.html"
+
   Scenario: Order Posts by name when on the same date
   Given I have a _posts directory
   And I have an "index.html" page that contains "{% for post in site.posts %}{{ post.title }}:{{ post.previous.title}},{{ post.next.title}} {% endfor %}"
