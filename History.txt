@@ -15,6 +15,7 @@
     * Fix error with limit_posts (#442)
     * Properly select dotfile during directory scan (#363, #431, #377)
     * Allow setting of Kramdown smart_quotes (#482)
+    * Ensure front-matter is at start of file (#562)
 
 == 0.11.2 / 2011-12-27
   * Bug Fixes
