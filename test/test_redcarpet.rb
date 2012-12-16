@@ -27,7 +27,7 @@ class TestRedcarpet < Test::Unit::TestCase
     end
 
     should "render fenced code blocks" do
-      assert_equal "<div class=\"highlight\"><pre><code class=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre>\n</div>", @markdown.convert(
+      assert_equal "<div class=\"highlight\"><pre><code class=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
         <<-EOS
 ```ruby
 puts "Hello world"
