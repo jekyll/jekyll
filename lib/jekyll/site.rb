@@ -186,9 +186,7 @@ module Jekyll
     #
     # Returns nothing.
     def generate
-      self.generators.each do |generator|
-        generator.generate(self)
-      end
+      self.generators.each { |generator| generator.generate(self) }
     end
 
     # Render the site to the destination.
@@ -196,13 +194,8 @@ module Jekyll
     # Returns nothing.
     def render
       payload = site_payload
-      self.posts.each do |post|
-        post.render(self.layouts, payload)
-      end
-
-      self.pages.each do |page|
-        page.render(self.layouts, payload)
-      end
+      self.posts.each { |post| post.render(self.layouts, payload) }
+      self.pages.each { |page| page.render(self.layouts, payload) }
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
       self.tags.values.map { |ps| ps.sort! { |a, b| b <=> a } }
@@ -222,15 +215,9 @@ module Jekyll
 
       # files to be written
       files = Set.new
-      self.posts.each do |post|
-        files << post.destination(self.dest)
-      end
-      self.pages.each do |page|
-        files << page.destination(self.dest)
-      end
-      self.static_files.each do |sf|
-        files << sf.destination(self.dest)
-      end
+      self.posts.each { |post| files << post.destination(self.dest) }
+      self.pages.each { |page| files << page.destination(self.dest) }
+      self.static_files.each { |sf| files << sf.destination(self.dest) }
 
       # adding files' parent directories
       dirs = Set.new
@@ -246,15 +233,9 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      self.posts.each do |post|
-        post.write(self.dest)
-      end
-      self.pages.each do |page|
-        page.write(self.dest)
-      end
-      self.static_files.each do |sf|
-        sf.write(self.dest)
-      end
+      self.posts.each { |post| post.write(self.dest) }
+      self.pages.each { |page| page.write(self.dest) }
+      self.static_files.each { |sf| sf.write(self.dest) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
