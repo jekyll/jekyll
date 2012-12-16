@@ -35,6 +35,7 @@ module Jekyll
             STDERR.puts '  $ [sudo] gem install redcarpet'
             raise FatalException.new("Missing dependency: redcarpet")
           end
+
         when 'kramdown'
           begin
             require 'kramdown'
@@ -43,6 +44,7 @@ module Jekyll
             STDERR.puts '  $ [sudo] gem install kramdown'
             raise FatalException.new("Missing dependency: kramdown")
           end
+
         when 'rdiscount'
           begin
             require 'rdiscount'
@@ -52,6 +54,7 @@ module Jekyll
             STDERR.puts '  $ [sudo] gem install rdiscount'
             raise FatalException.new("Missing dependency: rdiscount")
           end
+
         when 'maruku'
           begin
             require 'maruku'
@@ -81,6 +84,7 @@ module Jekyll
             STDERR.puts '  $ [sudo] gem install maruku'
             raise FatalException.new("Missing dependency: maruku")
           end
+
         else
           STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
           STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown ]"
@@ -106,6 +110,7 @@ module Jekyll
           @renderer.send :include, Redcarpet::Render::SmartyPants if @redcarpet_extensions[:smart]
           markdown = Redcarpet::Markdown.new(@renderer.new(@redcarpet_extensions), @redcarpet_extensions)
           markdown.render(content)
+
         when 'kramdown'
           # Check for use of coderay
           document_hash = Hash.new 
@@ -133,8 +138,10 @@ module Jekyll
             html.gsub!(@config['rdiscount']['toc_token'], rd.toc_content)
           end
           html
+
         when 'maruku'
           Maruku.new(content).to_html
+
       end
     end
   end
