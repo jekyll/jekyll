@@ -29,3 +29,32 @@ command :build do |c|
     Jekyll::BuildCommand.process(options)
   end
 end
+
+# Serve command
+#
+# Args:
+#   --source
+#   --destination
+#   --watch
+#
+#   --port
+#   --host
+#   --baseurl
+command :serve do |c|
+  c.syntax = 'jekyll serve [options]'
+  c.description = 'Serve...'
+  c.option '-w', '--watch', 'Watch for changes and rebuild'
+  c.option '-p', '--port [PORT]', 'Port to listen on'
+  c.option '-h', '--host [HOST]', 'Host to bind to'
+  c.option '-b', '--baseurl [URL]', 'Base URL'
+  c.action do |args, options|
+    options.default :watch => false,
+                    :port => '4000',
+                    :host => '0.0.0.0',
+                    :baseurl => '/',
+                    :serving => true
+
+    Jekyll::BuildCommand.process(options)
+    Jekyll::ServeCommand.process(options)
+  end
+end

@@ -14,20 +14,21 @@ module Jekyll
       destination = opts['destination']
 
       if opts['watch']
-        self.watch(site, source, destination)
+        self.watch(site, opts)
       else
-        self.build(site, source, destination)
+        self.build(site, opts)
       end
     end
 
     # Private: Build the site from source into destination.
     #
     # site - A Jekyll::Site instance
-    # source - A String of the source path
-    # destination - A String of the destination path
+    # options - A Hash of options passed to the command
     #
     # Returns nothing.
-    def self.build(site, source, destination)
+    def self.build(site, options)
+      source = options['source']
+      destination = options['destination']
       puts "Building site: #{source} -> #{destination}"
       begin
         site.process
@@ -44,12 +45,14 @@ module Jekyll
     # Private: Watch for file changes and rebuild the site.
     #
     # site - A Jekyll::Site instance
-    # source - A String of the source path
-    # destination - A String of the destination path
+    # options - A Hash of options passed to the command
     #
     # Returns nothing.
-    def self.watch(site, source, destination)
+    def self.watch(site, options)
       require 'directory_watcher'
+
+      source = options['source']
+      destination = options['destination']
 
       puts "Auto-Regenerating enabled: #{source} -> #{destination}"
 
@@ -65,12 +68,14 @@ module Jekyll
 
       dw.start
 
-      trap("SIGINT") do
-        puts "Stopping auto-regeneration..."
-        exit 0
-      end
+      unless options['serving']
+        loop { sleep 1000 }
 
-      loop { sleep 1000 }
+        trap("INT") do
+          puts "Stopping auto-regeneration..."
+          exit 0
+        end
+      end
     end
   end
 
