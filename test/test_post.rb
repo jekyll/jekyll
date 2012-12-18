@@ -178,6 +178,18 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with pretty style" do
+          setup do
+            @post.site.permalink_style = :pretty_flat
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:year-:month-:day-:title", @post.template
+            assert_equal "/2008-09-09-foo-bar", @post.url
+          end
+        end
+
         context "with custom date permalink" do
           setup do
             @post.site.permalink_style = '/:categories/:year/:i_month/:i_day/:title/'
@@ -372,6 +384,16 @@ class TestPost < Test::Unit::TestCase
 
           assert File.directory?(dest_dir)
           assert File.exists?(File.join(dest_dir, 'foo-bar', 'index.html'))
+        end
+
+        should "pretty_flat: write properly without html extension" do
+          post = setup_post("2008-10-18-foo-bar.textile")
+          post.site.permalink_style = :pretty_flat
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(File.dirname(dest_dir))
+          assert File.exists?(File.join(dest_dir, '2008-10-18-foo-bar'))
         end
 
         should "insert data" do
