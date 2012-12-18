@@ -28,7 +28,9 @@ command :build do |c|
   c.description = 'Build your site with the option of auto-renegeration'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.action do |args, options|
-    Jekyll::BuildCommand.process(options.__hash__)
+    options.defaults :serving => false
+    options = Jekyll.configuration(options.__hash__)
+    Jekyll::BuildCommand.process(options)
   end
 end
 
@@ -55,7 +57,8 @@ command :serve do |c|
                     :baseurl => '/',
                     :serving => true
 
-    Jekyll::BuildCommand.process(options.__hash__)
-    Jekyll::ServeCommand.process(options.__hash__)
+    options = Jekyll.configuration(options.__hash__)
+    Jekyll::BuildCommand.process(options)
+    Jekyll::ServeCommand.process(options)
   end
 end

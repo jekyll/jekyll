@@ -124,7 +124,7 @@ module Jekyll
   # Returns the final configuration Hash.
   def self.configuration(override)
     # Convert any symbol keys to strings and remove the old key/values
-    override.keys.each { |k| override[k.to_s] = override.delete(k) }
+    override = override.reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
 
     # _config.yml may override default source location, but until
     # then, we need to know where to look for _config.yml

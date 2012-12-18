@@ -2,7 +2,6 @@ module Jekyll
 
   class BuildCommand < Command
     def self.process(options)
-      options = Jekyll.configuration(options)
       site = Jekyll::Site.new(options)
 
       source = options['source']
