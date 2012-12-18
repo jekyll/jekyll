@@ -2,21 +2,16 @@ module Jekyll
 
   class BuildCommand < Command
     def self.process(options)
-      opts = {}
-      options.__hash__.map do |k,v|
-        opts[k.to_s] = v
-      end
+      options = Jekyll.configuration(options)
+      site = Jekyll::Site.new(options)
 
-      opts = Jekyll.configuration(opts)
-      site = Jekyll::Site.new(opts)
+      source = options['source']
+      destination = options['destination']
 
-      source = opts['source']
-      destination = opts['destination']
-
-      if opts['watch']
-        self.watch(site, opts)
+      if options['watch']
+        self.watch(site, options)
       else
-        self.build(site, opts)
+        self.build(site, options)
       end
     end
 
