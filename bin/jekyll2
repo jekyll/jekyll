@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+
+require 'commander/import'
+require 'jekyll'
+
+# Details about Jekyll
+program :name, 'jekyll'
+program :version, Jekyll::VERSION
+program :description, 'Jekyll is a blog-aware, static site generator in Ruby'
+
+# Global options available to every command
+global_option '-s', '--source DIR', String, 'Source directory'
+global_option '-d', '--destination DIR', String, 'Destination directory'
+
+# Build command
+#
+# Args:
+#   --source
+#   --destination
+#   --watch
+command :build do |c|
+  c.syntax = 'jekyll build [options]'
+  c.description = 'Build...'
+  c.option '-w', '--watch', 'Watch for changes and rebuild'
+  c.action do |args, options|
+    options.default :watch => false
+    Jekyll::BuildCommand.process(options)
+  end
+end
