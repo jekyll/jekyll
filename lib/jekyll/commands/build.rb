@@ -62,7 +62,7 @@ module Jekyll
 
       dw.add_observer do |*args|
         t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-        puts "[#{t} regeneration: #{args.size} files changed"
+        puts "[#{t}] regeneration: #{args.size} files changed"
         site.process
       end
 
