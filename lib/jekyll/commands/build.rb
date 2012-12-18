@@ -69,12 +69,12 @@ module Jekyll
       dw.start
 
       unless options['serving']
-        loop { sleep 1000 }
-
         trap("INT") do
           puts "Stopping auto-regeneration..."
           exit 0
         end
+
+        loop { sleep 1000 }
       end
     end
   end
