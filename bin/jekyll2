@@ -10,6 +10,8 @@ program :name, 'jekyll'
 program :version, Jekyll::VERSION
 program :description, 'Jekyll is a blog-aware, static site generator in Ruby'
 
+default_command :help
+
 # Global options available to every command
 global_option '-s', '--source [DIR]', 'Source directory (defaults to ./)'
 global_option '-d', '--destination [DIR]', 'Destination directory (defaults to ./_site)'
