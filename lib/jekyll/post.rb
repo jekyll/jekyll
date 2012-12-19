@@ -44,8 +44,8 @@ module Jekyll
         raise FatalException.new("#{msg} in #{@base}/#{name}")        
       end
 
-      #If we've added a date and time to the yaml, use that instead of the filename date
-      #Means we'll sort correctly.
+      # If we've added a date and time to the yaml, use that instead of the
+      # filename date Means we'll sort correctly.
       if self.data.has_key?('date')
         # ensure Time via to_s and reparse
         self.date = Time.parse(self.data["date"].to_s)
@@ -64,7 +64,10 @@ module Jekyll
       end
     end
 
-    # Spaceship is based on Post#date, slug
+    # Compares Post objects. First compares the Post date. If the dates are
+    # equal, it compares the Post slugs.
+    #
+    #   +other+ is the object we are comparing to.
     #
     # Returns -1, 0, 1
     def <=>(other)
