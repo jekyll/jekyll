@@ -21,7 +21,7 @@ global_option '--layouts', 'Layouts directory (defaults to ./_layouts)'
 
 # Build command
 #
-# Args:
+# Options:
 #   --source
 #   --destination
 #   --watch
@@ -38,7 +38,7 @@ end
 
 # Serve command
 #
-# Args:
+# Options:
 #   --source
 #   --destination
 #   --watch
