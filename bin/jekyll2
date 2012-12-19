@@ -43,6 +43,7 @@ command :serve do |c|
   c.option '-p', '--port [PORT]', 'Port to listen on'
   c.option '-h', '--host [HOST]', 'Host to bind to'
   c.option '-b', '--baseurl [URL]', 'Base URL'
+
   c.action do |args, options|
     options.default :port => '4000',
                     :host => '0.0.0.0',
@@ -52,5 +53,20 @@ command :serve do |c|
     options = Jekyll.configuration(options.__hash__)
     Jekyll::BuildCommand.process(options)
     Jekyll::ServeCommand.process(options)
+  end
+end
+
+command :migrate do |c|
+  c.syntax = 'jekyll migrate <platform> [options]'
+  c.description = 'Migrate your own blog to Jekyll'
+
+  c.option '--file', 'File to migrate from'
+  c.option '--dbname', 'Database name to migrate from'
+  c.option '--user', 'Username to use when migrating'
+  c.option '--pass', 'Password to use when migrating'
+  c.option '--host', 'Host address to use when migrating'
+
+  c.action do |args, options|
+    Jekyll::MigrateCommand.process(args.first, options)
   end
 end
