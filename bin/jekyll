@@ -25,88 +25,108 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
+  # TODO: delete, migrator related
   opts.on("--file [PATH]", "File to import from") do |import_file|
     options['file'] = import_file
   end
   
+  # TODO: delete, migrator related
   opts.on("--dbname [TEXT]", "DB to import from") do |import_dbname|
     options['dbname'] = import_dbname
   end
   
+  # TODO: delete, migrator related
   opts.on("--user [TEXT]", "Username to use when importing") do |import_user|
     options['user'] = import_user
   end
   
+  # TODO: delete, migrator related
   opts.on("--pass [TEXT]", "Password to use when importing") do |import_pass|
     options['pass'] = import_pass
   end
   
+  # TODO: delete, migrator related
   opts.on("--host [HOST ADDRESS]", "Host to import from") do |import_host|
     options['host'] = import_host
   end
   
+  # TODO: delete, migrator related
   opts.on("--site [SITE NAME]", "Site to import from") do |import_site|
     options['site'] = import_site
   end
   
-
+  # TODO: global option
   opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
     options['safe'] = safe
   end
 
+  # TODO: option for build and serve command
   opts.on("--[no-]auto", "Auto-regenerate") do |auto|
     options['auto'] = auto
   end
 
+  # TODO: new serve command
   opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
     options['server'] = true
     options['server_port'] = port unless port.nil?
   end
 
+  # TODO: remove
   opts.on("--no-server", "Do not start a web server") do |part|
     options['server'] = false
   end
 
+  # TODO: option for serve command
   opts.on("--base-url [BASE_URL]", "Serve website from a given base URL (default '/'") do |baseurl|
       options['baseurl'] = baseurl
   end
 
+  # TODO: does anyone actually use this?
   opts.on("--default-mimetype [MT]", "Mimetype to use when no file extension (if --server)") do |mt|
       options['default-mimetype'] = mt
   end
 
+  # TODO: option for build and serve command
   opts.on("--[no-]lsi", "Use LSI for better related posts") do |lsi|
     options['lsi'] = lsi
   end
 
+  # TODO: remove and just enable all the time?
   opts.on("--[no-]pygments", "Use pygments to highlight code") do |pygments|
     options['pygments'] = pygments
   end
 
+  # TODO: read from config
   opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
     options['markdown'] = 'rdiscount'
   end
   
+  # TODO: read from config
   opts.on("--redcarpet", "Use redcarpet gem for Markdown") do
     options['markdown'] = 'redcarpet'
   end
 
+  # TODO: read from config
   opts.on("--kramdown", "Use kramdown gem for Markdown") do
     options['markdown'] = 'kramdown'
   end
 
+  # TODO: remove and just generate the site as is?
   opts.on("--time [TIME]", "Time to generate the site for") do |time|
     options['time'] = Time.parse(time)
   end
 
+  # TODO: remove and just render all posts which aren't 'unpublished'?
   opts.on("--[no-]future", "Render future dated posts") do |future|
     options['future'] = future
   end
 
+  # TODO: read from config
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
     options['permalink'] = style unless style.nil?
   end
 
+  # TODO: read from config
   opts.on("--paginate [POSTS_PER_PAGE]", "Paginate a blog's posts") do |per_page|
     begin
       options['paginate'] = per_page.to_i
@@ -117,6 +137,7 @@ opts = OptionParser.new do |opts|
     end
   end
 
+  # TODO: read from config
   opts.on("--paginate_path [PAGINATED_URL_FORMAT]", "Leave blank for /page<num>") do |paginate_path|
     begin
       options['paginate_path'] = paginate_path
@@ -127,6 +148,7 @@ opts = OptionParser.new do |opts|
     end
   end
 
+  # TODO: read from config
   opts.on("--limit_posts [MAX_POSTS]", "Limit the number of posts to publish") do |limit_posts|
     begin
       options['limit_posts'] = limit_posts.to_i
@@ -137,6 +159,7 @@ opts = OptionParser.new do |opts|
     end
   end
 
+  # TODO: read from config
   opts.on("--url [URL]", "Set custom site.url") do |url|
     options['url'] = url
   end
@@ -206,6 +229,7 @@ end
 
 
 # Get source and destination from command line
+# TODO: source and destination are now global options
 case ARGV.size
   when 0
   when 1
