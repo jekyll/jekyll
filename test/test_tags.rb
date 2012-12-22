@@ -198,4 +198,45 @@ CONTENT
       assert_match %r{/2008/11/21/complex/}, @result
     end
   end
+
+  context "test stylesheet_link" do
+    setup do
+      content = <<-CONTENT
+---
+title: test stylesheet link
+---
+
+{% stylesheet "/path/to/some/css.file" %}
+
+      CONTENT
+      create_post(content, {}, Jekyll::TextileConverter)
+    end
+
+    should "have stylesheet link with time based querystring" do
+      assert_match %r{stylesheet}, @result
+      assert_match %r{href=}, @result
+      assert_match %r{\?\d+}, @result
+    end
+  end
+
+  context "test javascript" do
+    setup do
+      content = <<-CONTENT
+---
+title: test javascript link
+---
+
+{% javascript "/path/to/some/file.js" %}
+
+      CONTENT
+      create_post(content, {}, Jekyll::TextileConverter)
+    end
+
+    should "have javascript link with time based querystring" do
+      assert_match %r{script}, @result
+      assert_match %r{src=}, @result
+      assert_match %r{\?\d+}, @result
+      puts @result
+    end
+  end
 end
