@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'hpricot'
 require 'fileutils'
+require 'psych'
 require 'yaml'
 require 'time'
 
