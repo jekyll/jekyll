@@ -46,7 +46,7 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 module Jekyll
-  VERSION = '0.11.2'
+  VERSION = '0.12.0'
 
   # Default options. Overriden by values in _config.yml or command-line opts.
   # Strings rather than symbols are used for compatability with YAML.

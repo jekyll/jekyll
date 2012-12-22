@@ -1,4 +1,4 @@
-== HEAD
+== 0.12.0 / 2012-12-22
   * Minor Enhancements
     * Add ability to explicitly specify included files (#261)
     * Add --default-mimetype option (#279)

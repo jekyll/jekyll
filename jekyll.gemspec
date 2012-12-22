@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '0.11.2'
+  s.version           = '0.12.0'
   s.license           = 'MIT'
-  s.date              = '2011-12-27'
+  s.date              = '2012-12-22'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -75,10 +75,12 @@ Gem::Specification.new do |s|
     lib/jekyll/migrators/csv.rb
     lib/jekyll/migrators/drupal.rb
     lib/jekyll/migrators/enki.rb
+    lib/jekyll/migrators/joomla.rb
     lib/jekyll/migrators/marley.rb
     lib/jekyll/migrators/mephisto.rb
     lib/jekyll/migrators/mt.rb
     lib/jekyll/migrators/posterous.rb
+    lib/jekyll/migrators/rss.rb
     lib/jekyll/migrators/textpattern.rb
     lib/jekyll/migrators/tumblr.rb
     lib/jekyll/migrators/typo.rb
@@ -91,6 +93,9 @@ Gem::Specification.new do |s|
     lib/jekyll/static_file.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
+    lib/jekyll/tags/post_url.rb
+    test/fixtures/broken_front_matter1.erb
+    test/fixtures/front_matter.erb
     test/helper.rb
     test/source/.htaccess
     test/source/_includes/sig.markdown
@@ -133,6 +138,7 @@ Gem::Specification.new do |s|
     test/source/z_category/_posts/2008-9-23-categories.textile
     test/suite.rb
     test/test_configuration.rb
+    test/test_convertible.rb
     test/test_core_ext.rb
     test/test_filters.rb
     test/test_generated_site.rb
@@ -142,9 +148,9 @@ Gem::Specification.new do |s|
     test/test_post.rb
     test/test_rdiscount.rb
     test/test_redcarpet.rb
+    test/test_redcloth.rb
     test/test_site.rb
     test/test_tags.rb
-    test/test_redcloth.rb
   ]
   # = MANIFEST =
 
