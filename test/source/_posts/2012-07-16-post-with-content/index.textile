@@ -1,0 +1,6 @@
+---
+layout: default
+title: Post with content
+---
+
+This post appears in its own subdirectory.  Whoa!
