@@ -64,6 +64,18 @@ module Jekyll
       end
     end
 
+    # Read the YAML frontmatter.
+    #
+    # base - The String path to the dir containing the file.
+    # name - The String filename of the file.
+    #
+    # Returns nothing.
+    def read_yaml(base, name)
+      super(base, name)
+      self.data['layout'] ||= 'post'
+      self.data
+    end
+
     # Spaceship is based on Post#date, slug
     #
     # Returns -1, 0, 1
