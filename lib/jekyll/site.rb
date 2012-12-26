@@ -3,9 +3,10 @@ require 'set'
 module Jekyll
 
   class Site
-    attr_accessor :config, :layouts, :posts, :pages, :static_files,
+    attr_accessor :config, :layouts, :posts, :unpublished_posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :preview
 
     attr_accessor :converters, :generators
 
@@ -26,6 +27,7 @@ module Jekyll
       self.include         = config['include'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.preview         = config['preview']
 
       self.reset
       self.setup
@@ -47,17 +49,18 @@ module Jekyll
     #
     # Returns nothing
     def reset
-      self.time            = if self.config['time']
-                               Time.parse(self.config['time'].to_s)
-                             else
-                               Time.now
-                             end
-      self.layouts         = {}
-      self.posts           = []
-      self.pages           = []
-      self.static_files    = []
-      self.categories      = Hash.new { |hash, key| hash[key] = [] }
-      self.tags            = Hash.new { |hash, key| hash[key] = [] }
+      self.time              = if self.config['time']
+                                 Time.parse(self.config['time'].to_s)
+                               else
+                                 Time.now
+                               end
+      self.layouts           = {}
+      self.posts             = []
+      self.unpublished_posts = []
+      self.pages             = []
+      self.static_files      = []
+      self.categories        = Hash.new { |hash, key| hash[key] = [] }
+      self.tags              = Hash.new { |hash, key| hash[key] = [] }
 
       if !self.limit_posts.nil? && self.limit_posts < 1
         raise ArgumentError, "Limit posts must be nil or >= 1"
@@ -169,6 +172,8 @@ module Jekyll
             self.posts << post
             post.categories.each { |c| self.categories[c] << post }
             post.tags.each { |c| self.tags[c] << post }
+          else
+            self.unpublished_posts << post
           end
         end
       end
@@ -199,6 +204,12 @@ module Jekyll
       self.posts.each do |post|
         post.render(self.layouts, payload)
       end
+      
+      if self.preview
+        self.unpublished_posts.sort.each do |post|
+          post.render(self.layouts, site_payload)
+        end
+      end
 
       self.pages.each do |page|
         page.render(self.layouts, payload)
@@ -225,6 +236,11 @@ module Jekyll
       self.posts.each do |post|
         files << post.destination(self.dest)
       end
+      if self.preview
+        self.unpublished_posts.each do |post|
+          files << post.destination(self.dest)
+        end
+      end
       self.pages.each do |page|
         files << page.destination(self.dest)
       end
@@ -248,6 +264,11 @@ module Jekyll
     def write
       self.posts.each do |post|
         post.write(self.dest)
+      end
+      if self.preview
+        self.unpublished_posts.each do |post|
+          post.write(self.dest)
+        end
       end
       self.pages.each do |page|
         page.write(self.dest)
