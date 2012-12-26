@@ -111,6 +111,49 @@ end
 
 #############################################################################
 #
+# Site tasks - http://jekyllrb.com
+#
+#############################################################################
+
+desc "Generate and view the site locally"
+task :site do
+  # Yep, it's a hack! Wait a few seconds for the Jekyll site to generate and
+  # then open it in a browser. Someday we can do better than this, I hope.
+  Thread.new do
+    sleep 4
+    puts "Opening in browser..."
+    sh "open http://localhost:4000"
+  end
+
+  # Generate the site in server mode.
+  puts "Running Jekyll..."
+  sh "cd site && jekyll --server"
+end
+
+desc "Commit the local site to the gh-pages branch and deploy"
+task :site_release do
+  # Ensure the gh-pages dir exists so we can generate into it.
+  puts "Checking for gh-pages dir..."
+  unless File.exist?("./gh-pages")
+    puts "No gh-pages directory found. Run the following commands first:"
+    puts "  `git clone git@github.com:mojombo/god gh-pages"
+    puts "  `cd gh-pages"
+    puts "  `git checkout gh-pages`"
+    exit(1)
+  end
+
+  # Copy the rest of the site over.
+  puts "Copying static..."
+  sh "cp -R site/* gh-pages/"
+
+  # Commit the changes
+  sha = `git log`.match(/[a-z0-9]{40}/)[0]
+  sh "cd gh-pages && git add . && git commit -m 'Updating to #{sha}.' && git push"
+  puts 'Done.'
+end
+
+#############################################################################
+#
 # Packaging tasks
 #
 #############################################################################
