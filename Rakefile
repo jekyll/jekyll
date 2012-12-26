@@ -144,7 +144,10 @@ task :site_release do
 
   # Copy the rest of the site over.
   puts "Copying static..."
-  sh "cp -R site/* gh-pages/"
+  Dir.glob("site/*") do |path|
+    next if path == "_site"
+    sh "cp -R #{path} gh-pages/"
+  end
 
   # Commit the changes
   sha = `git log`.match(/[a-z0-9]{40}/)[0]
