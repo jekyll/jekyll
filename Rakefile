@@ -118,12 +118,14 @@ end
 namespace :site do
   desc "Generate and view the site locally"
   task :preview do
+    require "launchy"
+
     # Yep, it's a hack! Wait a few seconds for the Jekyll site to generate and
     # then open it in a browser. Someday we can do better than this, I hope.
     Thread.new do
       sleep 4
       puts "Opening in browser..."
-      sh "open http://localhost:4000"
+      Launchy.open("http://localhost:4000")
     end
 
     # Generate the site in server mode.
