@@ -54,6 +54,7 @@ module Jekyll
     'safe'          => false,
     'auto'          => false,
     'server'        => false,
+    'server_host'   => '0.0.0.0',
     'server_port'   => 4000,
 
     'source'        => Dir.pwd,
