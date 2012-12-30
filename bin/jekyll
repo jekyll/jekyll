@@ -61,11 +61,11 @@ opts = OptionParser.new do |opts|
   opts.on("--server [[HOST:]PORT]", "Start web server (default 4000)") do |addr|
     options['server'] = true
 
-    unless addr.nil?
-      host, port = addr.split(":")
+    unless addr.nil? or addr.empty?
+      host, _, port = addr.rpartition(":")
 
-      options['server_host'] = host unless host.nil?
-      options['server_port'] = port unless port.nil?
+      options['server_host'] = host unless host.empty?
+      options['server_port'] = port unless port.empty?
     end
   end
 
