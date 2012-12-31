@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
 
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
@@ -289,7 +290,11 @@ if options['server']
     :Port            => options['server_port'],
     :MimeTypes       => mime_types
   )
-  s.mount(options['baseurl'], HTTPServlet::FileHandler, destination)
+
+  fh_option = WEBrick::Config::FileHandler
+  # recreate NondisclosureName under utf-8 circumstance
+  fh_option[:NondisclosureName] = ['.ht*','~*']
+  s.mount(options['baseurl'], HTTPServlet::FileHandler, destination,fh_option)
   t = Thread.new {
     s.start
   }
