@@ -14,6 +14,7 @@
     * Allow multiple plugin dirs to be specified (#438)
     * Inline TOC token support for RDiscount (#333)
     * Add the option to specify the paginated url format (#342)
+    * Swap out albino for pygments.rb (#569)
     * Support Redcarpet 2 and fenced code blocks (#619)
     * Better reporting of Liquid errors (#624)
   * Bug Fixes
