@@ -1,0 +1,70 @@
+/*.highlight  { background: #333333; color: #ffffff}*/
+.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #87ceeb} /* Comment */
+.highlight .err { color: #ffffff} /* Error */
+.highlight .g { color: #ffffff} /* Generic */
+.highlight .k { color: #f0e68c} /* Keyword */
+.highlight .l { color: #ffffff} /* Literal */
+.highlight .n { color: #ffffff} /* Name */
+.highlight .o { color: #ffffff} /* Operator */
+.highlight .x { color: #ffffff} /* Other */
+.highlight .p { color: #ffffff} /* Punctuation */
+.highlight .cm { color: #87ceeb} /* Comment.Multiline */
+.highlight .cp { color: #cd5c5c} /* Comment.Preproc */
+.highlight .c1 { color: #87ceeb} /* Comment.Single */
+.highlight .cs { color: #87ceeb} /* Comment.Special */
+.highlight .gd { color: #0000c0; font-weight: bold; background-color: #008080 } /* Generic.Deleted */
+.highlight .ge { color: #c000c0; text-decoration: underline} /* Generic.Emph */
+.highlight .gr { color: #c0c0c0; font-weight: bold; background-color: #c00000 } /* Generic.Error */
+.highlight .gh { color: #cd5c5c} /* Generic.Heading */
+.highlight .gi { color: #ffffff; background-color: #0000c0 } /* Generic.Inserted */
+.highlight .go { color: #add8e6; font-weight: bold; background-color: #4d4d4d } /* Generic.Output */
+.highlight .gp { color: #ffffff} /* Generic.Prompt */
+.highlight .gs { color: #ffffff} /* Generic.Strong */
+.highlight .gu { color: #cd5c5c} /* Generic.Subheading */
+.highlight .gt { color: #c0c0c0; font-weight: bold; background-color: #c00000 } /* Generic.Traceback */
+.highlight .kc { color: #f0e68c} /* Keyword.Constant */
+.highlight .kd { color: #f0e68c} /* Keyword.Declaration */
+.highlight .kn { color: #f0e68c} /* Keyword.Namespace */
+.highlight .kp { color: #f0e68c} /* Keyword.Pseudo */
+.highlight .kr { color: #f0e68c} /* Keyword.Reserved */
+.highlight .kt { color: #bdb76b} /* Keyword.Type */
+.highlight .ld { color: #ffffff} /* Literal.Date */
+.highlight .m { color: #ffffff} /* Literal.Number */
+.highlight .s { color: #ffffff} /* Literal.String */
+.highlight .na { color: #ffffff} /* Name.Attribute */
+.highlight .nb { color: #ffffff} /* Name.Builtin */
+.highlight .nc { color: #ffffff} /* Name.Class */
+.highlight .no { color: #ffa0a0} /* Name.Constant */
+.highlight .nd { color: #ffffff} /* Name.Decorator */
+.highlight .ni { color: #ffdead} /* Name.Entity */
+.highlight .ne { color: #ffffff} /* Name.Exception */
+.highlight .nf { color: #ffffff} /* Name.Function */
+.highlight .nl { color: #ffffff} /* Name.Label */
+.highlight .nn { color: #ffffff} /* Name.Namespace */
+.highlight .nx { color: #ffffff} /* Name.Other */
+.highlight .py { color: #ffffff} /* Name.Property */
+.highlight .nt { color: #f0e68c} /* Name.Tag */
+.highlight .nv { color: #98fb98} /* Name.Variable */
+.highlight .ow { color: #ffffff} /* Operator.Word */
+.highlight .w { color: #ffffff} /* Text.Whitespace */
+.highlight .mf { color: #ffffff} /* Literal.Number.Float */
+.highlight .mh { color: #ffffff} /* Literal.Number.Hex */
+.highlight .mi { color: #ffffff} /* Literal.Number.Integer */
+.highlight .mo { color: #ffffff} /* Literal.Number.Oct */
+.highlight .sb { color: #ffffff} /* Literal.String.Backtick */
+.highlight .sc { color: #ffffff} /* Literal.String.Char */
+.highlight .sd { color: #ffffff} /* Literal.String.Doc */
+.highlight .s2 { color: #ffffff} /* Literal.String.Double */
+.highlight .se { color: #ffffff} /* Literal.String.Escape */
+.highlight .sh { color: #ffffff} /* Literal.String.Heredoc */
+.highlight .si { color: #ffffff} /* Literal.String.Interpol */
+.highlight .sx { color: #ffffff} /* Literal.String.Other */
+.highlight .sr { color: #ffffff} /* Literal.String.Regex */
+.highlight .s1 { color: #ffffff} /* Literal.String.Single */
+.highlight .ss { color: #ffffff} /* Literal.String.Symbol */
+.highlight .bp { color: #ffffff} /* Name.Builtin.Pseudo */
+.highlight .vc { color: #98fb98} /* Name.Variable.Class */
+.highlight .vg { color: #98fb98} /* Name.Variable.Global */
+.highlight .vi { color: #98fb98} /* Name.Variable.Instance */
+.highlight .il { color: #ffffff} /* Literal.Number.Integer.Long */
