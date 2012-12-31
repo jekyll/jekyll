@@ -25,14 +25,16 @@ module Jekyll
     #
     # Returns nothing.
     def read_yaml(base, name)
-      self.content = File.read(File.join(base, name))
-
       begin
+        self.content = File.read(File.join(base, name))
+
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = YAML.load($1)
         end
       rescue => e
+        puts "Error reading file #{name}: #{e.message}"
+      rescue SyntaxError => e
         puts "YAML Exception reading #{name}: #{e.message}"
       end
 
