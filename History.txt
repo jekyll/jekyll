@@ -1,7 +1,9 @@
 == HEAD
   * Minor Enhancements
     * Add source and destination directory protection (#535)
+  * Site Enhancements
     * Bring site into master branch with better preview/deploy (#709)
+    * Redesigned site (#583)
 
 == 0.12.0 / 2012-12-22
   * Minor Enhancements
