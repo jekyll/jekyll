@@ -18,5 +18,23 @@ class TestConvertible < Test::Unit::TestCase
       ret = @convertible.read_yaml(@base, 'broken_front_matter1.erb')
       assert_equal({}, ret)
     end
+
+    should "not parse if there is syntax error in front-matter" do
+      out = capture_stdout do
+        ret = @convertible.read_yaml(@base, 'broken_front_matter2.erb')
+        assert_equal({}, ret)
+      end
+      assert_match(/YAML Exception|syntax error/, out)
+    end
+
+    if RUBY_VERSION >= '1.9.2'
+      should "not parse if there is encoding error in file" do
+        out = capture_stdout do
+          ret = @convertible.read_yaml(@base, 'broken_front_matter3.erb')
+          assert_equal({}, ret)
+        end
+        assert_match(/invalid byte sequence in UTF-8/, out)
+      end
+    end
   end
 end
