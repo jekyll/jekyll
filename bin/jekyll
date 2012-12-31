@@ -225,10 +225,10 @@ source      = options['source']
 destination = options['destination']
 
 # Files to watch
-def globs(source)
+def globs(source, destination)
   Dir.chdir(source) do
     dirs = Dir['*'].select { |x| File.directory?(x) }
-    dirs -= ['_site']
+    dirs -= [destination]
     dirs = dirs.map { |x| "#{x}/**/*" }
     dirs += ['*']
   end
@@ -245,7 +245,7 @@ if options['auto']
 
   dw = DirectoryWatcher.new(source)
   dw.interval = 1
-  dw.glob = globs(source)
+  dw.glob = globs(source, destination)
 
   dw.add_observer do |*args|
     t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
