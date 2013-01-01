@@ -2,6 +2,8 @@
   * Minor Enhancements
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
+  * Bug Fixes
+    * Prevent custom destination from causing continuous regen (#528)
   * Site Enhancements
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
