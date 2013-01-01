@@ -323,6 +323,7 @@ module Jekyll
           e[-1..-1] == '~' ||
           self.exclude.include?(e) ||
           File.symlink?(e)
+          File.directory?(e)
         end
       end
     end
