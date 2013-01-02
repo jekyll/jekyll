@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+puts ARGV
+
+migrator = ARGV[1]
+
+if migrator.nil?
+  puts "Invalid options. Run `jekyll --help` for assistance."
+  exit(1)
+else
+  migrator = migrator.downcase
+end
+
+cmd_options = []
+['file', 'dbname', 'user', 'pass', 'host', 'site'].each do |p|
+  cmd_options << "\"#{options[p]}\"" unless options[p].nil?
+end
+
+# It's import time
+puts "Importing..."
+    
+# Ideally, this shouldn't be necessary. Maybe parse the actual
+# src files for the migrator name?
+migrators = {
+  :posterous => 'Posterous',
+  :wordpressdotcom => 'WordpressDotCom',
+  :wordpress => 'WordPress',
+  :csv => 'CSV',
+  :drupal => 'Drupal',
+  :enki => 'Enki',
+  :mephisto => 'Mephisto',
+  :mt => 'MT',
+  :textpattern => 'TextPattern',
+  :tumblr => 'Tumblr',
+  :typo => 'Typo'
+}
+    
+app_root = File.join(File.dirname(__FILE__), '..')
+    
+require "#{app_root}/lib/jekyll/migrators/#{migrator}"
+    
+if Jekyll.const_defined?(migrators[migrator.to_sym])
+  migrator_class = Jekyll.const_get(migrators[migrator.to_sym])
+  migrator_class.process(*cmd_options)
+else
+  puts "Invalid migrator. Run `jekyll --help` for assistance."
+  exit(1)
+end
