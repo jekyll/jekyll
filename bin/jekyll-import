@@ -1,8 +1,41 @@
 #!/usr/bin/env ruby
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
+require 'optparse'
+require 'jekyll'
+
 puts ARGV
 
+opts = OptionParser.new do |opts|
+  opts.on("--file [PATH]", "File to import from") do |import_file|
+    options['file'] = import_file
+  end
+
+  opts.on("--dbname [TEXT]", "DB to import from") do |import_dbname|
+    options['dbname'] = import_dbname
+  end
+
+  opts.on("--user [TEXT]", "Username to use when importing") do |import_user|
+    options['user'] = import_user
+  end
+
+  opts.on("--pass [TEXT]", "Password to use when importing") do |import_pass|
+    options['pass'] = import_pass
+  end
+
+  opts.on("--host [HOST ADDRESS]", "Host to import from") do |import_host|
+    options['host'] = import_host
+  end
+
+  opts.on("--site [SITE NAME]", "Site to import from") do |import_site|
+    options['site'] = import_site
+  end
+end
+
+# Read command line options into `options` hash
+opts.parse!
+
+# Import using the appropriate migrator
 migrator = ARGV[1]
 
 if migrator.nil?
