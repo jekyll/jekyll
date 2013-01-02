@@ -21,7 +21,8 @@ require 'jekyll'
 
 # Does a sub-command exist?
 if File.exists? File.expand_path("jekyll-#{ARGV[0]}", File.dirname(__FILE__))
-  require File.expand_path("jekyll-#{ARGV[0]}", File.dirname(__FILE__))
+  executable_path = File.expand_path("jekyll-#{ARGV[0]}", File.dirname(__FILE__))
+  system "#{executable_path} #{ARGV.join(' ')}"
   exit(0)
 end
 
