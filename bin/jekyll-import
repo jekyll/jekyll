@@ -4,8 +4,6 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 require 'optparse'
 require 'jekyll'
 
-puts ARGV
-
 opts = OptionParser.new do |opts|
   opts.on("--file [PATH]", "File to import from") do |import_file|
     options['file'] = import_file
