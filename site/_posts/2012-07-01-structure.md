@@ -88,7 +88,7 @@ An overview of what each of these does:
         <p>Other Files/Folders</p>
       </td>
       <td>
-        <p>Every other directory and file except for those listed above—such as <code>css</code> and <code>images</code> folders, <code>favicon.ico</code> files, and so forth—will be transferred over verbatim to the generated site. There's plenty of <a href="../sites">sites already using Jekyll</a> if you're curious as to how they're laid out.</p>
+        <p>Every other directory and file except for those listed above—such as <code>css</code> and <code>images</code> folders, <code>favicon.ico</code> files, and so forth—will be transferred over verbatim to the generated site. There's plenty of sites already using Jekyll if you're curious as to how they're laid out.</p>
       </td>
     </tr>
   </tbody>
