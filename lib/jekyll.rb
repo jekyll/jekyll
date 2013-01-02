@@ -140,4 +140,28 @@ module Jekyll
     # Merge DEFAULTS < _config.yml < override
     Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
   end
+  
+  # Public: Generate the default directory structure if necessary.
+  #
+  # Returns nothing.
+  def self.init(path)
+    path = Dir.pwd if path.nil? || path.empty?
+    Dir.chdir(File.expand_path(path)) do
+      File.open("index.html", "w") do |f|
+        f.write("<html><body><h1>Welcome to Jekyll!</h1></body></html>")
+      end
+
+      %w(_includes _layouts _plugins _posts).each do |dir|
+        FileUtils.mkdir(dir)
+      end
+
+      %w(_config.yml).each do |file|
+        FileUtils.touch(file)
+      end
+    end
+  end
+  
+  def hi
+  end
+
 end
