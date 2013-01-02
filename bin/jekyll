@@ -51,6 +51,7 @@ opts = OptionParser.new do |opts|
 
 
   opts.on("--config [PATH]", "custom configuration file" ) do |config_file|
+    raise "You must specify a config file." if config_file.to_s.empty?
     options['config'] = config_file
   end
 
