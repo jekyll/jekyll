@@ -254,7 +254,8 @@ module Jekyll
         "next"       => self.next,
         "previous"   => self.previous,
         "tags"       => self.tags,
-        "content"    => self.content })
+        "content"    => self.content,
+        "excerpt"    => self.excerpt })
     end
 
     def inspect
