@@ -25,10 +25,6 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
-  opts.on("--config [PATH]", "custom configuration file" ) do |config_file|
-    options['config'] = config_file
-  end
-
   opts.on("--file [PATH]", "File to import from") do |import_file|
     options['file'] = import_file
   end
@@ -52,7 +48,11 @@ opts = OptionParser.new do |opts|
   opts.on("--site [SITE NAME]", "Site to import from") do |import_site|
     options['site'] = import_site
   end
-  
+
+
+  opts.on("--config [PATH]", "custom configuration file" ) do |config_file|
+    options['config'] = config_file
+  end
 
   opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
     options['safe'] = safe
