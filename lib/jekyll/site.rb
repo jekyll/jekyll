@@ -7,6 +7,7 @@ module Jekyll
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
 
+
     attr_accessor :converters, :generators
 
     # Public: Initialize a new Site.
@@ -36,6 +37,7 @@ module Jekyll
     # Returns nothing.
     def process
       self.reset
+      self.create_default_directories
       self.read
       self.generate
       self.render
@@ -61,6 +63,25 @@ module Jekyll
 
       if !self.limit_posts.nil? && self.limit_posts < 1
         raise ArgumentError, "Limit posts must be nil or >= 1"
+      end
+    end
+
+    # Generate the default directory structure if necessary.
+    #
+    # Returns nothing.
+    def create_default_directories
+      return unless config['init']
+
+      File.open(File.join(source, "index.html"), "w") do |f|
+        f.write("<html><body><h1>Welcome to Jekyll!</h1></body></html>")
+      end
+
+      %w(_includes _layouts _plugins _posts).each do |dir|
+        FileUtils.mkdir(File.join(source, dir))
+      end
+
+      %w(_config.yml .gitignore).each do |file|
+        FileUtils.touch(File.join(source, file))
       end
     end
 

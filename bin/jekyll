@@ -25,6 +25,10 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
+  opts.op("--init", "Create default directory structure") do
+    options['init'] = true
+  end
+
   opts.on("--file [PATH]", "File to import from") do |import_file|
     options['file'] = import_file
   end
