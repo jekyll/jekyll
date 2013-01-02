@@ -4,16 +4,13 @@ class TestDefaultStructure < Test::Unit::TestCase
   context "generating default directory structure" do
     setup do
       clear_dest
-      FileUtils.mkdir(dest_dir)
+      clear_empty
+      FileUtils.mkdir(empty_dir)
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source'      => dest_dir,
-                                'destination' => dest_dir("_site"),
-                                'init'     => true})
+        Jekyll::DEFAULTS.merge({'source' => empty_dir, 'destination' => dest_dir})
       end
-
-      @site = Site.new(Jekyll.configuration)
-      @site.process
-      @index = File.read(dest_dir("_site", 'index.html'))
+      Jekyll.init(empty_dir)
+      @index = File.read(empty_dir("index.html"))
     end
 
     should "have helpful message in index.html" do
@@ -21,27 +18,23 @@ class TestDefaultStructure < Test::Unit::TestCase
     end
 
     should "have _config.yml" do
-      assert File.exist?(dest_dir("_config.yml"))
-    end
-
-    should "have .gitignore" do
-      assert File.exist?(dest_dir(".gitignore"))
+      assert File.exist?(empty_dir("_config.yml"))
     end
 
     should "have _includes directory" do
-      assert File.directory?(dest_dir("_includes"))
+      assert File.directory?(empty_dir("_includes"))
     end
 
     should "have _layouts directory" do
-      assert File.directory?(dest_dir("_layouts"))
+      assert File.directory?(empty_dir("_layouts"))
     end
 
     should "have _plugins directory" do
-      assert File.directory?(dest_dir("_plugins"))
+      assert File.directory?(empty_dir("_plugins"))
     end
 
     should "have _posts directory" do
-      assert File.directory?(dest_dir("_posts"))
+      assert File.directory?(empty_dir("_posts"))
     end
   end
 end
