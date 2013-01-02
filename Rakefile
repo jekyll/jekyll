@@ -130,7 +130,9 @@ namespace :site do
 
     # Generate the site in server mode.
     puts "Running Jekyll..."
-    sh "cd site && #{File.expand_path('bin/jekyll', File.dirname(__FILE__))} --server"
+    Dir.chdir("site") do
+      sh "#{File.expand_path('bin/jekyll', File.dirname(__FILE__))} --server"
+    end
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
