@@ -9,6 +9,7 @@ Basic Command Line Usage:
   jekyll                                                   # . -> ./_site
   jekyll <path to write generated site>                    # . -> <path>
   jekyll <path to source> <path to write generated site>   # <path> -> <path>
+  jekyll init <path to new jekyll dir>                     # creates scaffold in given path (defaults to '.')
   jekyll import <importer name> <options>                  # imports posts using named import script
   
   Configuration is read from '<source>/_config.yml' but can be overriden
