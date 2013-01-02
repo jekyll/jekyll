@@ -62,10 +62,10 @@ opts = OptionParser.new do |opts|
     options['server'] = true
 
     unless addr.nil? or addr.empty?
-      host, _, port = addr.rpartition(":")
+      host, port = Jekyll.parse_addr(addr)
 
-      options['server_host'] = host unless host.empty?
-      options['server_port'] = port unless port.empty?
+      options['server_host'] = host
+      options['server_port'] = port
     end
   end
 

@@ -16,6 +16,7 @@ end
 require 'rubygems'
 
 # stdlib
+require 'ipaddr'
 require 'fileutils'
 require 'time'
 require 'yaml'
@@ -54,7 +55,7 @@ module Jekyll
     'safe'          => false,
     'auto'          => false,
     'server'        => false,
-    'server_host'   => '0.0.0.0',
+    'server_host'   => nil,
     'server_port'   => 4000,
 
     'source'        => Dir.pwd,
@@ -140,5 +141,55 @@ module Jekyll
 
     # Merge DEFAULTS < _config.yml < override
     Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
+  end
+
+  # Public: Parse socket address into array of host and port.
+  #
+  # addr - A string with `port` or `host` and `port` (delimited with semicolon).
+  #
+  # Examples
+  #
+  #   Jekyll.parse_addr("4000")
+  #   # => [nil, 4000]
+  #
+  #   Jekyll.parse_addr("localhost:4000")
+  #   # => ["localhost", 4000]
+  #
+  #   Jekyll.parse_addr(":::4000")
+  #   # => ["::", 4000]
+  #
+  #   Jekyll.parse_addr("foobar")
+  #   # raises RuntimeError
+  #
+  # Returns array with two elements: host and port.
+  # Raises RuntimeError if host is invalid
+  # Raises RuntimeError if port is invalid
+  def self.parse_addr(addr)
+    if addr.include? ":"
+      host, _, port = addr.rpartition(":")
+      host = nil if host.empty?
+    else
+      host, port = nil, addr
+    end
+
+    raise "Invalid host: '#{host}' (in: '#{addr}')" unless valid_host? host
+    raise "Invalid port: '#{port}' (in: '#{addr}')" unless valid_port? port
+
+    [host, port.to_i]
+  end
+
+  protected
+
+  # Internal: Test validity of given port
+  def self.valid_port?(port)
+    0 < port.to_i
+  end
+
+  # Internal: Test validity of given hostname/IP
+  def self.valid_host?(host)
+    IPSocket.getaddress(host) unless host.nil?
+    true
+  rescue
+    false
   end
 end
