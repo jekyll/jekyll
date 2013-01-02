@@ -88,6 +88,29 @@ module Jekyll
       raise FatalException.new("Post #{name} does not have a valid date.")
     end
 
+    # Public: Retrieve post's excerpt
+    #
+    # Returns rendered excerpt String
+    def excerpt
+      unless @excerpt
+        raw = File.read(File.join(@base, @name))
+
+        # strip out YAML front-matter block
+        if raw =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+          raw = $POSTMATCH
+        end
+
+        raw.strip!
+
+        head = raw.partition("\n\n").first
+        refs = raw.scan(/^\[[^\]]+\]:.+$/).join "\n"
+
+        @excerpt = converter.convert "#{head}\n\n#{refs}"
+      end
+
+      @excerpt
+    end
+
     # The generated directory into which the post will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, set to the default date

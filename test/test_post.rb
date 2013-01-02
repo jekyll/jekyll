@@ -216,6 +216,29 @@ class TestPost < Test::Unit::TestCase
 
         assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.content
       end
+
+      context "#excerpt" do
+        setup do
+          @post.instance_variable_set(:@base, @source)
+          @post.instance_variable_set(:@name, "2013-01-02-post-excerpt.markdown")
+          @post.process(@post.name)
+          @post.read_yaml(@source, @post.name)
+        end
+
+        should "return first paragraph by default" do
+          assert @post.excerpt.include?("First paragraph"), "contains first paragraph"
+          assert !@post.excerpt.include?("Second paragraph"), "does not contains second paragraph"
+        end
+
+        should "correctly resolve link references" do
+          assert @post.excerpt.include?("www.jekyllrb.com"), "contains referenced link URL"
+        end
+
+        should "return rendered HTML" do
+          assert_equal "<p>First paragraph with <a href='http://www.jekyllrb.com/'>link ref</a>.</p>",
+                       @post.excerpt
+        end
+      end
     end
 
     context "when in a site" do
