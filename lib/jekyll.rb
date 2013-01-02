@@ -145,7 +145,7 @@ module Jekyll
 
   # Public: Parse socket address into array of host and port.
   #
-  # addr - A string with `port` or `host` and `port` (delimited with semicolon).
+  # addr - A string with `port` or `host` and `port` (delimited with colon).
   #
   # Examples
   #
