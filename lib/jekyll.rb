@@ -155,8 +155,15 @@ module Jekyll
         FileUtils.mkdir(dir)
       end
 
-      %w(_config.yml).each do |file|
-        FileUtils.touch(file)
+      generated_configs = {
+        "source"      => ".",
+        "destination" => "_site",
+        "layouts"     => "_layouts",
+        "plugins"     => "_plugins"
+      }
+
+      File.open("_config.yml", "w") do |f|
+        f.write(generated_configs.to_yaml)
       end
     end
   end
