@@ -9,6 +9,7 @@ Basic Command Line Usage:
   jekyll                                                   # . -> ./_site
   jekyll <path to write generated site>                    # . -> <path>
   jekyll <path to source> <path to write generated site>   # <path> -> <path>
+  jekyll init <path to new jekyll dir>                     # creates scaffold in given path (defaults to '.')
   jekyll import <importer name> <options>                  # imports posts using named import script
   
   Configuration is read from '<source>/_config.yml' but can be overriden
@@ -19,36 +20,17 @@ HELP
 require 'optparse'
 require 'jekyll'
 
+# Does a sub-command exist?
+if File.exists? File.expand_path("jekyll-#{ARGV[0]}", File.dirname(__FILE__))
+  executable_path = File.expand_path("jekyll-#{ARGV[0]}", File.dirname(__FILE__))
+  system "#{executable_path} #{ARGV.join(' ')}"
+  exit(0)
+end
 
 exec = {}
 options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
-
-  opts.on("--file [PATH]", "File to import from") do |import_file|
-    options['file'] = import_file
-  end
-  
-  opts.on("--dbname [TEXT]", "DB to import from") do |import_dbname|
-    options['dbname'] = import_dbname
-  end
-  
-  opts.on("--user [TEXT]", "Username to use when importing") do |import_user|
-    options['user'] = import_user
-  end
-  
-  opts.on("--pass [TEXT]", "Password to use when importing") do |import_pass|
-    options['pass'] = import_pass
-  end
-  
-  opts.on("--host [HOST ADDRESS]", "Host to import from") do |import_host|
-    options['host'] = import_host
-  end
-  
-  opts.on("--site [SITE NAME]", "Site to import from") do |import_site|
-    options['site'] = import_site
-  end
-  
 
   opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
     options['safe'] = safe
@@ -149,61 +131,6 @@ end
 
 # Read command line options into `options` hash
 opts.parse!
-
-
-# Check for import stuff
-if ARGV.size > 0
-  if ARGV[0] == 'import'
-    migrator = ARGV[1]
-
-    if migrator.nil?
-      puts "Invalid options. Run `jekyll --help` for assistance."
-      exit(1)
-    else
-      migrator = migrator.downcase
-    end
-
-    cmd_options = []
-    ['file', 'dbname', 'user', 'pass', 'host', 'site'].each do |p|
-      cmd_options << "\"#{options[p]}\"" unless options[p].nil?
-    end
-
-    # It's import time
-    puts "Importing..."
-    
-    # Ideally, this shouldn't be necessary. Maybe parse the actual
-    # src files for the migrator name?
-    migrators = {
-      :posterous => 'Posterous',
-      :wordpressdotcom => 'WordpressDotCom',
-      :wordpress => 'WordPress',
-      :csv => 'CSV',
-      :drupal => 'Drupal',
-      :enki => 'Enki',
-      :mephisto => 'Mephisto',
-      :mt => 'MT',
-      :textpattern => 'TextPattern',
-      :tumblr => 'Tumblr',
-      :typo => 'Typo'
-    }
-    
-    app_root = File.join(File.dirname(__FILE__), '..')
-    
-    require "#{app_root}/lib/jekyll/migrators/#{migrator}"
-    
-    if Jekyll.const_defined?(migrators[migrator.to_sym])
-      migrator_class = Jekyll.const_get(migrators[migrator.to_sym])
-      migrator_class.process(*cmd_options)
-    else
-      puts "Invalid migrator. Run `jekyll --help` for assistance."
-      exit(1)
-    end
-    
-    exit(0)
-  end
-end
-
-
 
 # Get source and destination from command line
 case ARGV.size

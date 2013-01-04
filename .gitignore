@@ -1,5 +1,6 @@
 Gemfile.lock
 test/dest
+test/empty
 *.gem
 pkg/
 *.swp

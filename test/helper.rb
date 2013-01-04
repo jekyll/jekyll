@@ -27,6 +27,14 @@ class Test::Unit::TestCase
   def source_dir(*subdirs)
     File.join(File.dirname(__FILE__), 'source', *subdirs)
   end
+  
+  def empty_dir(*subdirs)
+    File.join(File.dirname(__FILE__), 'empty', *subdirs)
+  end
+  
+  def clear_empty
+    FileUtils.rm_rf(empty_dir)
+  end
 
   def clear_dest
     FileUtils.rm_rf(dest_dir)

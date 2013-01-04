@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+require 'jekyll'
+
+# Initialize a Jekyll scaffold in the path which was passed in
+# If ARGV[1] is empty or null, Jekyll.init will default to Dir.pwd
+Jekyll.init(ARGV[1])
