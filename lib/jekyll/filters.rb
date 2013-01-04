@@ -57,6 +57,17 @@ module Jekyll
       date.xmlschema
     end
 
+    # XML escape a string for use. Replaces any special characters with
+    # appropriate HTML entity replacements.
+    #
+    # input - The String to escape.
+    #
+    # Examples
+    #
+    #   xml_escape('foo "bar" <baz>')
+    #   # => "foo &quot;bar&quot; &lt;baz&gt;"
+    #
+    # Returns the escaped String.
     def xml_escape(input)
       CGI.escapeHTML(input)
     end
