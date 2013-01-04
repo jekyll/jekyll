@@ -61,7 +61,7 @@ opts = OptionParser.new do |opts|
   opts.on("--server [[HOST:]PORT]", "Start web server (default 4000)") do |addr|
     options['server'] = true
 
-    if addr and not addr.empty?
+    if addr && !addr.empty?
       host, port = Jekyll.parse_addr(addr)
 
       options['server_host'] = host
