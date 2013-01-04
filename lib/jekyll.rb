@@ -165,15 +165,15 @@ module Jekyll
   # Raises RuntimeError if host is invalid
   # Raises RuntimeError if port is invalid
   def self.parse_addr(addr)
-    if addr.include? ":"
+    if addr.include?(":")
       host, _, port = addr.rpartition(":")
       host = nil if host.empty?
     else
       host, port = nil, addr
     end
 
-    raise "Invalid host: '#{host}' (in: '#{addr}')" unless valid_host? host
-    raise "Invalid port: '#{port}' (in: '#{addr}')" unless valid_port? port
+    raise "Invalid host: '#{host}' (in: '#{addr}')" unless valid_host?(host)
+    raise "Invalid port: '#{port}' (in: '#{addr}')" unless valid_port?(port)
 
     [host, port.to_i]
   end
@@ -182,7 +182,7 @@ module Jekyll
 
   # Internal: Test validity of given port
   def self.valid_port?(port)
-    0 < port.to_i
+    port.to_i > 0
   end
 
   # Internal: Test validity of given hostname/IP
