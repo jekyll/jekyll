@@ -19,7 +19,7 @@ module Jekyll
     end
 
     attr_accessor :site
-    attr_accessor :data, :content, :output, :ext
+    attr_accessor :data, :excerpt, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
     attr_reader :name
@@ -88,27 +88,16 @@ module Jekyll
       raise FatalException.new("Post #{name} does not have a valid date.")
     end
 
-    # Public: Retrieve post's excerpt
-    #
-    # Returns rendered excerpt String
-    def excerpt
-      unless @excerpt
-        raw = File.read(File.join(@base, @name))
 
-        # strip out YAML front-matter block
-        if raw =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
-          raw = $POSTMATCH
-        end
+    def read_yaml(*args)
+      super
+      self.extract_excerpt!
+    end
 
-        raw.strip!
 
-        head = raw.partition("\n\n").first
-        refs = raw.scan(/^\[[^\]]+\]:.+$/).join "\n"
-
-        @excerpt = converter.convert "#{head}\n\n#{refs}"
-      end
-
-      @excerpt
+    def transform
+      super
+      self.excerpt = converter.convert(self.excerpt)
     end
 
     # The generated directory into which the post will be placed
@@ -279,6 +268,54 @@ module Jekyll
       else
         nil
       end
+    end
+
+    protected
+
+    # Internal: Extract excerpt from the content
+    #
+    # By default excerpt is your first paragraph of a post: everything before
+    # the first two new lines:
+    #
+    #     ---
+    #     title: Example
+    #     ---
+    #
+    #     First paragraph with [link][1].
+    #
+    #     Second paragraph.
+    #
+    #     [1]: http://example.com/
+    #
+    # This is fairly good option for Markdown and Textile files. But might cause
+    # problems for HTML posts (which is quiet unusual for Jekyll). If default
+    # excerpt delimiter is not good for you, you might want to set your own via
+    # configuration option `excerpt_separator`. For example, following is a good
+    # alternative for HTML posts:
+    #
+    #     # file: _config.yml
+    #     excerpt_separator: "<!-- more -->"
+    #
+    # Notice that all markdown-style link references will be appended to the
+    # excerpt. So the example post above will have this excerpt source:
+    #
+    #     First paragraph with [link][1].
+    #
+    #     [1]: http://example.com/
+    #
+    # Excerpts are rendered same time as content is rendered.
+    #
+    # Returns nothing
+    def extract_excerpt!
+      separator     = self.site.config['excerpt_separator'] || "\n\n"
+      head, _, tail = self.content.partition(separator)
+      refs          = self.content.scan(/^\[[^\]]+\]:.+$/).join("\n")
+
+      refs.prepend("\n\n") unless refs.empty?
+      tail.prepend("\n\n") unless tail.empty?
+
+      self.excerpt  = head + refs
+      self.content  = head + tail
     end
   end
 

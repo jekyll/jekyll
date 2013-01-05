@@ -219,15 +219,16 @@ class TestPost < Test::Unit::TestCase
 
       context "#excerpt" do
         setup do
-          @post.instance_variable_set(:@base, @source)
-          @post.instance_variable_set(:@name, "2013-01-02-post-excerpt.markdown")
-          @post.process(@post.name)
-          @post.read_yaml(@source, @post.name)
+          file = "2013-01-02-post-excerpt.markdown"
+          @post.process(file)
+          @post.read_yaml(@source, file)
+          @post.transform
         end
 
         should "return first paragraph by default" do
           assert @post.excerpt.include?("First paragraph"), "contains first paragraph"
           assert !@post.excerpt.include?("Second paragraph"), "does not contains second paragraph"
+          assert !@post.excerpt.include?("Third paragraph"), "does not contains third paragraph"
         end
 
         should "correctly resolve link references" do
@@ -237,6 +238,28 @@ class TestPost < Test::Unit::TestCase
         should "return rendered HTML" do
           assert_equal "<p>First paragraph with <a href='http://www.jekyllrb.com/'>link ref</a>.</p>",
                        @post.excerpt
+        end
+
+        context "with excerpt_separator setting" do
+          setup do
+            file = "2013-01-02-post-excerpt.markdown"
+
+            @post.site.config['excerpt_separator'] = "\n---\n"
+
+            @post.process(file)
+            @post.read_yaml(@source, file)
+            @post.transform
+          end
+
+          should "respect given separator" do
+            assert @post.excerpt.include?("First paragraph"), "contains first paragraph"
+            assert @post.excerpt.include?("Second paragraph"), "contains second paragraph"
+            assert !@post.excerpt.include?("Third paragraph"), "does not contains third paragraph"
+          end
+
+          should "replace separator with new-lines" do
+            assert !@post.excerpt.include?("---"), "does not contains separator"
+          end
         end
       end
     end
