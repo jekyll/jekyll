@@ -224,12 +224,19 @@ options = Jekyll.configuration(options)
 source      = options['source']
 destination = options['destination']
 
-# Files to watch
+# Get absolute pathname of a directory
+def absolute_pathname(directory)
+  Pathname.new File.expand_path directory
+end
+
+# Identify paths to watch for changes
 def globs(source, destination)
+  source = absolute_pathname source
   Dir.chdir(source) do
-    dirs = Dir['*'].select { |x| File.directory?(x) }
-    dirs -= [destination]
-    dirs = dirs.map { |x| "#{x}/**/*" }
+    dirs = Dir['*/'].map { |dir| absolute_pathname dir }
+    dirs -= [absolute_pathname(destination)]
+    dirs.map! { |dir| dir.relative_path_from source }
+    dirs.map! { |dir| "#{dir}/**/*" }
     dirs += ['*']
   end
 end
