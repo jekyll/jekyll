@@ -22,8 +22,8 @@ module Jekyll
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
-      self.exclude         = config['exclude'] || []
-      self.include         = config['include'] || []
+      self.exclude         = (config['exclude'] || []).map { |e| Regexp.new("^#{e}$") }
+      self.include         = (config['include'] || []).map { |e| Regexp.new("^#{e}$") }
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
 
@@ -318,13 +318,17 @@ module Jekyll
     # Returns the Array of filtered entries.
     def filter_entries(entries)
       entries.reject do |e|
-        unless self.include.include?(e)
+        unless regexp_include?(self.include, e)
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||
-          self.exclude.include?(e) ||
+          regexp_include?(self.exclude, e) ||
           File.symlink?(e)
         end
       end
+    end
+
+    def regexp_include?(exps, e)
+      !(exps.index { |exp| !exp.match(e).nil? }).nil?
     end
 
     # Get the implementation class for the given Converter.
