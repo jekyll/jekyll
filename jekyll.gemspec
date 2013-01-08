@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
 
   s.name              = 'jekyll'
   s.version           = '0.11.2'
-  s.date              = '2012-08-23'
+  s.date              = '2011-12-27'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -74,12 +74,10 @@ Gem::Specification.new do |s|
     lib/jekyll/migrators/csv.rb
     lib/jekyll/migrators/drupal.rb
     lib/jekyll/migrators/enki.rb
-    lib/jekyll/migrators/joomla.rb
     lib/jekyll/migrators/marley.rb
     lib/jekyll/migrators/mephisto.rb
     lib/jekyll/migrators/mt.rb
     lib/jekyll/migrators/posterous.rb
-    lib/jekyll/migrators/rss.rb
     lib/jekyll/migrators/textpattern.rb
     lib/jekyll/migrators/tumblr.rb
     lib/jekyll/migrators/typo.rb
@@ -92,7 +90,6 @@ Gem::Specification.new do |s|
     lib/jekyll/static_file.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
-    lib/jekyll/tags/post_url.rb
     test/helper.rb
     test/source/.htaccess
     test/source/_includes/sig.markdown
@@ -144,9 +141,9 @@ Gem::Specification.new do |s|
     test/test_post.rb
     test/test_rdiscount.rb
     test/test_redcarpet.rb
-    test/test_redcloth.rb
     test/test_site.rb
     test/test_tags.rb
+    test/test_redcloth.rb
   ]
   # = MANIFEST =
 

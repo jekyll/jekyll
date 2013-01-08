@@ -210,7 +210,6 @@ class TestSite < Test::Unit::TestCase
       end
 
       should 'remove orphaned files in destination - keep_files .svn' do
-
         config = Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'keep_files' => ['.svn']})
         @site = Site.new(config)
         @site.process

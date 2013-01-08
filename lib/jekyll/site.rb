@@ -220,7 +220,7 @@ module Jekyll
       dest_files = Set.new
       Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
         if self.keep_files.length > 0
-          dest_files << file unless file =~ /\/\.{1,2}$/ or file =~ keep_file_regex
+          dest_files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
         else
           dest_files << file unless file =~ /\/\.{1,2}$/
         end
@@ -248,8 +248,12 @@ module Jekyll
       FileUtils.rm_rf(obsolete_files.to_a)
     end
 
-    # create a regex from the keep_files array
-    # ['.git','.svn'] => /\/(\.git|\/.svn)/
+    # Private: creates a regular expression from the keep_files array
+    # 
+    # Examples
+    #   ['.git','.svn'] creates the following regex: /\/(\.git|\/.svn)/
+    #
+    # Returns the regular expression
     def keep_file_regex
       or_list = self.keep_files.join("|")
       pattern = "\/(#{or_list.gsub(".", "\.")})"
