@@ -8,12 +8,13 @@ module Jekyll
       attr_accessor :lsi
     end
 
+    # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
     # Post name validator. Post filenames must be like:
-    #   2008-11-05-my-awesome-post.textile
+    # 2008-11-05-my-awesome-post.textile
     #
-    # Returns <Bool>
+    # Returns true if valid, false if not.
     def self.valid?(name)
       name =~ MATCHER
     end
@@ -25,12 +26,13 @@ module Jekyll
     attr_reader :name
 
     # Initialize this Post instance.
-    #   +site+ is the Site
-    #   +base+ is the String path to the dir containing the post file
-    #   +name+ is the String filename of the post file
-    #   +categories+ is an Array of Strings for the categories for this post
     #
-    # Returns <Post>
+    # site       - The Site.
+    # base       - The String path to the dir containing the post file.
+    # name       - The String filename of the post file.
+    # categories - An Array of Strings for the categories for this post.
+    #
+    # Returns the new Post.
     def initialize(site, source, dir, name)
       @site = site
       @base = File.join(source, dir, '_posts')
@@ -41,11 +43,11 @@ module Jekyll
       begin 
         self.read_yaml(@base, name)
       rescue Exception => msg
-        raise FatalException.new("#{msg} in #{@base}/#{name}")        
+        raise FatalException.new("#{msg} in #{@base}/#{name}")
       end
 
-      #If we've added a date and time to the yaml, use that instead of the filename date
-      #Means we'll sort correctly.
+      # If we've added a date and time to the YAML, use that instead of the
+      # filename date. Means we'll sort correctly.
       if self.data.has_key?('date')
         # ensure Time via to_s and reparse
         self.date = Time.parse(self.data["date"].to_s)
@@ -64,7 +66,10 @@ module Jekyll
       end
     end
 
-    # Spaceship is based on Post#date, slug
+    # Compares Post objects. First compares the Post date. If the dates are
+    # equal, it compares the Post slugs.
+    #
+    # other - The other Post we are comparing to.
     #
     # Returns -1, 0, 1
     def <=>(other)
@@ -75,10 +80,11 @@ module Jekyll
       return cmp
     end
 
-    # Extract information from the post filename
-    #   +name+ is the String filename of the post file
+    # Extract information from the post filename.
     #
-    # Returns nothing
+    # name - The String filename of the post file.
+    #
+    # Returns nothing.
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
       self.date = Time.parse(date)
@@ -91,18 +97,17 @@ module Jekyll
     # The generated directory into which the post will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, set to the default date
-    # e.g. "/2008/11/05/" if the permalink style is :date, otherwise nothing
+    # e.g. "/2008/11/05/" if the permalink style is :date, otherwise nothing.
     #
-    # Returns <String>
+    # Returns the String directory.
     def dir
       File.dirname(url)
     end
 
-    # The full path and filename of the post.
-    # Defined in the YAML of the post body
-    # (Optional)
+    # The full path and filename of the post. Defined in the YAML of the post
+    # body (optional).
     #
-    # Returns <String>
+    # Returns the String permalink.
     def permalink
       self.data && self.data['permalink']
     end
@@ -120,10 +125,10 @@ module Jekyll
       end
     end
 
-    # The generated relative url of this post
+    # The generated relative url of this post.
     # e.g. /2008/11/05/my-awesome-post.html
     #
-    # Returns <String>
+    # Returns the String URL.
     def url
       return @url if @url
 
@@ -150,17 +155,17 @@ module Jekyll
       @url
     end
 
-    # The UID for this post (useful in feeds)
+    # The UID for this post (useful in feeds).
     # e.g. /2008/11/05/my-awesome-post
     #
-    # Returns <String>
+    # Returns the String UID.
     def id
       File.join(self.dir, self.slug)
     end
 
     # Calculate related posts.
     #
-    # Returns [<Post>]
+    # Returns an Array of related Posts.
     def related_posts(posts)
       return [] unless posts.size > 1
 
@@ -180,11 +185,12 @@ module Jekyll
       end
     end
 
-    # Add any necessary layouts to this post
-    #   +layouts+ is a Hash of {"name" => "layout"}
-    #   +site_payload+ is the site payload hash
+    # Add any necessary layouts to this post.
     #
-    # Returns nothing
+    # layouts      - A Hash of {"name" => "layout"}.
+    # site_payload - The site payload hash.
+    #
+    # Returns nothing.
     def render(layouts, site_payload)
       # construct payload
       payload = {
@@ -196,9 +202,10 @@ module Jekyll
     end
     
     # Obtain destination path.
-    #   +dest+ is the String path to the destination dir
     #
-    # Returns destination file path.
+    # dest - The String path to the destination dir.
+    #
+    # Returns destination file path String.
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
       path = File.join(dest, CGI.unescape(self.url))
@@ -207,9 +214,10 @@ module Jekyll
     end
 
     # Write the generated post file to the destination directory.
-    #   +dest+ is the String path to the destination dir
     #
-    # Returns nothing
+    # dest - The String path to the destination dir.
+    #
+    # Returns nothing.
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
@@ -220,7 +228,7 @@ module Jekyll
 
     # Convert this post into a Hash for use in Liquid templates.
     #
-    # Returns <Hash>
+    # Returns the representative Hash.
     def to_liquid
       self.data.deep_merge({
         "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
@@ -234,6 +242,7 @@ module Jekyll
         "content"    => self.content })
     end
 
+    # Returns the shorthand String identifier of this Post.
     def inspect
       "<Post: #{self.id}>"
     end
