@@ -159,11 +159,11 @@ class TestSite < Test::Unit::TestCase
     end
     
     should "not filter entries within include" do
-      includes = %w[_index.html .htaccess]
-      files = %w[index.html _index.html .htaccess]
+      includes = %w[_index.html .htaccess include*]
+      files = %w[index.html _index.html .htaccess includeA]
 
       @site.include = includes
-      assert_equal files, @site.filter_entries(files)
+      assert_equal files, @site.filter_entries(files + ["includeA"])
     end
 
     context 'error handling' do
