@@ -1,323 +1,72 @@
 #!/usr/bin/env ruby
 
-$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 
-help = <<HELP
-Jekyll is a blog-aware, static site generator.
-
-Basic Command Line Usage:
-  jekyll                                                   # . -> ./_site
-  jekyll <path to write generated site>                    # . -> <path>
-  jekyll <path to source> <path to write generated site>   # <path> -> <path>
-  jekyll import <importer name> <options>                  # imports posts using named import script
-  
-  Configuration is read from '<source>/_config.yml' but can be overriden
-  using the following options:
-
-HELP
-
-require 'optparse'
+require 'commander/import'
 require 'jekyll'
 
+# Details about Jekyll
+program :name, 'jekyll'
+program :version, Jekyll::VERSION
+program :description, 'Jekyll is a blog-aware, static site generator in Ruby'
 
-exec = {}
-options = {}
-opts = OptionParser.new do |opts|
-  opts.banner = help
+default_command :help
 
-  # TODO: delete, migrator related
-  opts.on("--file [PATH]", "File to import from") do |import_file|
-    options['file'] = import_file
-  end
-  
-  # TODO: delete, migrator related
-  opts.on("--dbname [TEXT]", "DB to import from") do |import_dbname|
-    options['dbname'] = import_dbname
-  end
-  
-  # TODO: delete, migrator related
-  opts.on("--user [TEXT]", "Username to use when importing") do |import_user|
-    options['user'] = import_user
-  end
-  
-  # TODO: delete, migrator related
-  opts.on("--pass [TEXT]", "Password to use when importing") do |import_pass|
-    options['pass'] = import_pass
-  end
-  
-  # TODO: delete, migrator related
-  opts.on("--host [HOST ADDRESS]", "Host to import from") do |import_host|
-    options['host'] = import_host
-  end
-  
-  # TODO: delete, migrator related
-  opts.on("--site [SITE NAME]", "Site to import from") do |import_site|
-    options['site'] = import_site
-  end
-  
-  # TODO: global option
-  opts.on("--[no-]safe", "Safe mode (default unsafe)") do |safe|
-    options['safe'] = safe
-  end
+# Global options available to every command
+global_option '-s', '--source [DIR]', 'Source directory (defaults to ./)'
+global_option '-d', '--destination [DIR]', 'Destination directory (defaults to ./_site)'
+global_option '--safe', 'Safe mode (defaults to false)'
+global_option '--plugins', 'Plugins directory (defaults to ./_plugins)'
+global_option '--layouts', 'Layouts directory (defaults to ./_layouts)'
 
-  # TODO: option for build and serve command
-  opts.on("--[no-]auto", "Auto-regenerate") do |auto|
-    options['auto'] = auto
-  end
+command :build do |c|
+  c.syntax = 'jekyll build [options]'
+  c.description = 'Build your site with the option of auto-renegeration'
 
-  # TODO: new serve command
-  opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
-    options['server'] = true
-    options['server_port'] = port unless port.nil?
-  end
+  c.option '-w', '--watch', 'Watch for changes and rebuild'
+  c.option '--lsi', 'Use LSI for improved related posts'
 
-  # TODO: remove
-  opts.on("--no-server", "Do not start a web server") do |part|
-    options['server'] = false
-  end
-
-  # TODO: option for serve command
-  opts.on("--base-url [BASE_URL]", "Serve website from a given base URL (default '/'") do |baseurl|
-      options['baseurl'] = baseurl
-  end
-
-  # TODO: does anyone actually use this?
-  opts.on("--default-mimetype [MT]", "Mimetype to use when no file extension (if --server)") do |mt|
-      options['default-mimetype'] = mt
-  end
-
-  # TODO: option for build and serve command
-  opts.on("--[no-]lsi", "Use LSI for better related posts") do |lsi|
-    options['lsi'] = lsi
-  end
-
-  # TODO: remove and just enable all the time?
-  opts.on("--[no-]pygments", "Use pygments to highlight code") do |pygments|
-    options['pygments'] = pygments
-  end
-
-  # TODO: read from config
-  opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
-    options['markdown'] = 'rdiscount'
-  end
-  
-  # TODO: read from config
-  opts.on("--redcarpet", "Use redcarpet gem for Markdown") do
-    options['markdown'] = 'redcarpet'
-  end
-
-  # TODO: read from config
-  opts.on("--kramdown", "Use kramdown gem for Markdown") do
-    options['markdown'] = 'kramdown'
-  end
-
-  # TODO: remove and just generate the site as is?
-  opts.on("--time [TIME]", "Time to generate the site for") do |time|
-    options['time'] = Time.parse(time)
-  end
-
-  # TODO: remove and just render all posts which aren't 'unpublished'?
-  opts.on("--[no-]future", "Render future dated posts") do |future|
-    options['future'] = future
-  end
-
-  # TODO: read from config
-  opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
-    options['permalink'] = style unless style.nil?
-  end
-
-  # TODO: read from config
-  opts.on("--paginate [POSTS_PER_PAGE]", "Paginate a blog's posts") do |per_page|
-    begin
-      options['paginate'] = per_page.to_i
-      raise ArgumentError if options['paginate'] == 0
-    rescue
-      puts 'you must specify a number of posts by page bigger than 0'
-      exit 0
-    end
-  end
-
-  # TODO: read from config
-  opts.on("--paginate_path [PAGINATED_URL_FORMAT]", "Leave blank for /page<num>") do |paginate_path|
-    begin
-      options['paginate_path'] = paginate_path
-      raise ArgumentError if options['paginate_path'].nil?
-    rescue
-      puts 'You must specify a pagination url format'
-      exit 0
-    end
-  end
-
-  # TODO: read from config
-  opts.on("--limit_posts [MAX_POSTS]", "Limit the number of posts to publish") do |limit_posts|
-    begin
-      options['limit_posts'] = limit_posts.to_i
-      raise ArgumentError if options['limit_posts'] < 1
-    rescue
-      puts 'you must specify a number of posts by page bigger than 0'
-      exit 0
-    end
-  end
-
-  # TODO: read from config
-  opts.on("--url [URL]", "Set custom site.url") do |url|
-    options['url'] = url
-  end
-
-  opts.on("--version", "Display current version") do
-    puts "Jekyll " + Jekyll::VERSION
-    exit 0
+  c.action do |args, options|
+    options.defaults :serving => false
+    options = Jekyll.configuration(options.__hash__)
+    Jekyll::BuildCommand.process(options)
   end
 end
 
-# Read command line options into `options` hash
-opts.parse!
+command :serve do |c|
+  c.syntax = 'jekyll serve [options]'
+  c.description = 'Serve your site locally with the option of auto-regeneration'
 
+  c.option '-w', '--watch', 'Watch for changes and rebuild'
+  c.option '--lsi', 'Use LSI for improved related posts'
 
-# Check for import stuff
-if ARGV.size > 0
-  if ARGV[0] == 'import'
-    migrator = ARGV[1]
+  c.option '-p', '--port [PORT]', 'Port to listen on'
+  c.option '-h', '--host [HOST]', 'Host to bind to'
+  c.option '-b', '--baseurl [URL]', 'Base URL'
 
-    if migrator.nil?
-      puts "Invalid options. Run `jekyll --help` for assistance."
-      exit(1)
-    else
-      migrator = migrator.downcase
-    end
+  c.action do |args, options|
+    options.default :port => '4000',
+                    :host => '0.0.0.0',
+                    :baseurl => '/',
+                    :serving => true
 
-    cmd_options = []
-    ['file', 'dbname', 'user', 'pass', 'host', 'site'].each do |p|
-      cmd_options << "\"#{options[p]}\"" unless options[p].nil?
-    end
-
-    # It's import time
-    puts "Importing..."
-    
-    # Ideally, this shouldn't be necessary. Maybe parse the actual
-    # src files for the migrator name?
-    migrators = {
-      :posterous => 'Posterous',
-      :wordpressdotcom => 'WordpressDotCom',
-      :wordpress => 'WordPress',
-      :csv => 'CSV',
-      :drupal => 'Drupal',
-      :enki => 'Enki',
-      :mephisto => 'Mephisto',
-      :mt => 'MT',
-      :textpattern => 'TextPattern',
-      :tumblr => 'Tumblr',
-      :typo => 'Typo'
-    }
-    
-    app_root = File.join(File.dirname(__FILE__), '..')
-    
-    require "#{app_root}/lib/jekyll/migrators/#{migrator}"
-    
-    if Jekyll.const_defined?(migrators[migrator.to_sym])
-      migrator_class = Jekyll.const_get(migrators[migrator.to_sym])
-      migrator_class.process(*cmd_options)
-    else
-      puts "Invalid migrator. Run `jekyll --help` for assistance."
-      exit(1)
-    end
-    
-    exit(0)
+    options = Jekyll.configuration(options.__hash__)
+    Jekyll::BuildCommand.process(options)
+    Jekyll::ServeCommand.process(options)
   end
 end
 
+command :migrate do |c|
+  c.syntax = 'jekyll migrate <platform> [options]'
+  c.description = 'Migrate your own blog to Jekyll'
 
+  c.option '--file', 'File to migrate from'
+  c.option '--dbname', 'Database name to migrate from'
+  c.option '--user', 'Username to use when migrating'
+  c.option '--pass', 'Password to use when migrating'
+  c.option '--host', 'Host address to use when migrating'
 
-# Get source and destination from command line
-# TODO: source and destination are now global options
-case ARGV.size
-  when 0
-  when 1
-    options['destination'] = ARGV[0]
-  when 2
-    options['source']      = ARGV[0]
-    options['destination'] = ARGV[1]
-  else
-    puts "Invalid options. Run `jekyll --help` for assistance."
-    exit(1)
-end
-
-options = Jekyll.configuration(options)
-
-# Get source and destination directories (possibly set by config file)
-source      = options['source']
-destination = options['destination']
-
-# Files to watch
-def globs(source, destination)
-  Dir.chdir(source) do
-    dirs = Dir['*'].select { |x| File.directory?(x) }
-    dirs -= [destination]
-    dirs = dirs.map { |x| "#{x}/**/*" }
-    dirs += ['*']
+  c.action do |args, options|
+    Jekyll::MigrateCommand.process(args.first, options)
   end
-end
-
-# Create the Site
-site = Jekyll::Site.new(options)
-
-# Run the directory watcher for auto-generation, if required
-if options['auto']
-  require 'directory_watcher'
-
-  puts "Auto-regenerating enabled: #{source} -> #{destination}"
-
-  dw = DirectoryWatcher.new(source)
-  dw.interval = 1
-  dw.glob = globs(source, destination)
-
-  dw.add_observer do |*args|
-    t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-    puts "[#{t}] regeneration: #{args.size} files changed"
-    site.process
-  end
-
-  dw.start
-
-  unless options['server']
-    loop { sleep 1000 }
-  end
-else
-  puts "Building site: #{source} -> #{destination}"
-  begin
-    site.process
-  rescue Jekyll::FatalException => e
-    puts
-    puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
-    puts "------------------------------------"
-    puts e.message
-    exit(1)
-  end
-  puts "Successfully generated site: #{source} -> #{destination}"
-end
-
-# Run the server on the specified port, if required
-if options['server']
-  require 'webrick'
-  include WEBrick
-
-  FileUtils.mkdir_p(destination)
-
-  mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
-  mime_types.store 'js', 'application/javascript'
-  if options['default-mimetype']
-    mime_types.store(nil, options['default-mimetype'])
-  end
-
-  s = HTTPServer.new(
-    :Port            => options['server_port'],
-    :MimeTypes       => mime_types
-  )
-  s.mount(options['baseurl'], HTTPServlet::FileHandler, destination)
-  t = Thread.new {
-    s.start
-  }
-
-  trap("INT") { s.shutdown }
-  t.join()
 end
