@@ -26,7 +26,7 @@ class TestConvertible < Test::Unit::TestCase
         assert_equal({}, ret)
       end
       assert_match(/YAML Exception|syntax error/, out)
-      assert_match(/#{File.join(@base,@name)}/, out)
+      assert_match(/#{File.join(@base, @name)}/, out)
     end
 
     if RUBY_VERSION >= '1.9.2'
@@ -37,7 +37,7 @@ class TestConvertible < Test::Unit::TestCase
           assert_equal({}, ret)
         end
         assert_match(/invalid byte sequence in UTF-8/, out)
-        assert_match(/#{File.join(@base,@name)}/, out)
+        assert_match(/#{File.join(@base, @name)}/, out)
       end
     end
   end
