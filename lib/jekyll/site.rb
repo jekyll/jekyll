@@ -328,7 +328,7 @@ module Jekyll
     end
 
     def glob_include?(exps, e)
-      !(exps.index { |exp| File.fnmatch?(exp, e) }).nil?
+      exps.any? { |exp| File.fnmatch?(exp, e) })
     end
 
     # Get the implementation class for the given Converter.
