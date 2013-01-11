@@ -145,6 +145,10 @@ opts = OptionParser.new do |opts|
     puts "Jekyll " + Jekyll::VERSION
     exit 0
   end
+
+  opts.on( "--keep-files filename1,filename2", Array, "Whether to keep files that match the filename (default: .git)") do |names|
+    options['keep_files'] = names
+  end
 end
 
 # Read command line options into `options` hash
