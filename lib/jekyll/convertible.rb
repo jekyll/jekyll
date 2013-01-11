@@ -33,9 +33,9 @@ module Jekyll
           self.data = YAML.load($1)
         end
       rescue => e
-        puts "Error reading file #{File.join(base,name)}: #{e.message}"
+        puts "Error reading file #{File.join(base, name)}: #{e.message}"
       rescue SyntaxError => e
-        puts "YAML Exception reading #{File.join(base,name)}: #{e.message}"
+        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       end
 
       self.data ||= {}
