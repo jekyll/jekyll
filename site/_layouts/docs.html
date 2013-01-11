@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+  <section class="docs">
+    <div class="content">
+
+      <div class="grid10 first">
+        <article>
+          <h1>{{ page.title }}</h1>
+          {{ content }}
+          {% include section_nav.html %}
+        </article>
+      </div>
+
+      {% include docs_contents.html %}
+
+      <div class="clear"></div>
+
+    </div>
+  </section>

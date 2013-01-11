@@ -166,13 +166,33 @@ class TestSite < Test::Unit::TestCase
       assert_equal files, @site.filter_entries(files)
     end
 
+    context 'error handling' do
+      should "raise if destination is included in source" do
+        stub(Jekyll).configuration do
+          Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => source_dir})
+        end
+
+        assert_raise Jekyll::FatalException do
+          site = Site.new(Jekyll.configuration)
+        end
+      end
+
+      should "raise if destination is source" do
+        stub(Jekyll).configuration do
+          Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => File.join(source_dir, "..")})
+        end
+
+        assert_raise Jekyll::FatalException do
+          site = Site.new(Jekyll.configuration)
+        end
+      end
+    end
+
     context 'with orphaned files in destination' do
       setup do
         clear_dest
         @site.process
         # generate some orphaned files:
-        # hidden file
-        File.open(dest_dir('.htpasswd'), 'w')
         # single file
         File.open(dest_dir('obsolete.html'), 'w')
         # single file in sub directory
@@ -183,7 +203,6 @@ class TestSite < Test::Unit::TestCase
       end
       
       teardown do
-        FileUtils.rm_f(dest_dir('.htpasswd'))
         FileUtils.rm_f(dest_dir('obsolete.html'))
         FileUtils.rm_rf(dest_dir('qux'))
         FileUtils.rm_f(dest_dir('quux'))
@@ -191,7 +210,6 @@ class TestSite < Test::Unit::TestCase
       
       should 'remove orphaned files in destination' do
         @site.process
-        assert !File.exist?(dest_dir('.htpasswd'))
         assert !File.exist?(dest_dir('obsolete.html'))
         assert !File.exist?(dest_dir('qux'))
         assert !File.exist?(dest_dir('quux'))

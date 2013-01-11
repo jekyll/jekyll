@@ -70,6 +70,12 @@ module Jekyll
     def setup
       require 'classifier' if self.lsi
 
+      # Check that the destination dir isn't the source dir or a directory
+      # parent to the source dir.
+      if self.source =~ /^#{self.dest}/
+        raise FatalException.new "Destination directory cannot be or contain the Source directory."
+      end
+
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
       unless self.safe
@@ -216,8 +222,8 @@ module Jekyll
     def cleanup
       # all files and directories in destination, including hidden ones
       dest_files = Set.new
-      Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-        dest_files << file unless file =~ /\/\.{1,2}$/
+      Dir.glob(File.join(self.dest, "**", "*")) do |file|
+        dest_files << file
       end
 
       # files to be written
@@ -311,7 +317,7 @@ module Jekyll
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries)
-      entries = entries.reject do |e|
+      entries.reject do |e|
         unless self.include.include?(e)
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||

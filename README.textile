@@ -22,19 +22,20 @@ h2. Diving In
 
 h2. Runtime Dependencies
 
-* RedCloth: Textile support (Ruby)
-* Liquid: Templating system (Ruby)
 * Classifier: Generating related posts (Ruby)
-* Maruku: Default markdown engine (Ruby)
 * Directory Watcher: Auto-regeneration of sites (Ruby)
+* Kramdown: Markdown-superset converter (Ruby)
+* Liquid: Templating system (Ruby)
+* Maruku: Default markdown engine (Ruby)
 * Pygments: Syntax highlighting (Python)
 
 h2. Developer Dependencies
 
-* Shoulda: Test framework (Ruby)
-* RR: Mocking (Ruby)
-* RedGreen: Nicer test output (Ruby)
 * RDiscount: Discount Markdown Processor (Ruby)
+* RedCloth: Textile support (Ruby)
+* RedGreen: Nicer test output (Ruby)
+* RR: Mocking (Ruby)
+* Shoulda: Test framework (Ruby)
 
 h2. License
 
