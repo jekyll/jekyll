@@ -318,17 +318,13 @@ module Jekyll
     # Returns the Array of filtered entries.
     def filter_entries(entries)
       entries.reject do |e|
-        unless glob_include?(self.include, e)
+        unless self.include.glob_include?(e)
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||
-          glob_include?(self.exclude, e) ||
+          self.exclude.glob_include?(e) ||
           File.symlink?(e)
         end
       end
-    end
-
-    def glob_include?(exps, e)
-      exps.any? { |exp| File.fnmatch?(exp, e) }
     end
 
     # Get the implementation class for the given Converter.
