@@ -1,0 +1,5 @@
+auto: false
+server: true
+permalink: /docs/:categories/:title
+pygments: true
+gauges_id: 503c5af6613f5d0f19000027

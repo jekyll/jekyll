@@ -72,6 +72,12 @@ module Jekyll
     def setup
       require 'classifier' if self.lsi
 
+      # Check that the destination dir isn't the source dir or a directory
+      # parent to the source dir.
+      if self.source =~ /^#{self.dest}/
+        raise FatalException.new "Destination directory cannot be or contain the Source directory."
+      end
+
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
       unless self.safe
@@ -244,7 +250,6 @@ module Jekyll
       files.merge(dirs)
 
       obsolete_files = dest_files - files
-
       FileUtils.rm_rf(obsolete_files.to_a)
     end
 
@@ -329,7 +334,7 @@ module Jekyll
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries)
-      entries = entries.reject do |e|
+      entries.reject do |e|
         unless self.include.include?(e)
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||

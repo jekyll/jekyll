@@ -25,15 +25,17 @@ module Jekyll
     #
     # Returns nothing.
     def read_yaml(base, name)
-      self.content = File.read(File.join(base, name))
-
       begin
-        if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+        self.content = File.read(File.join(base, name))
+
+        if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = YAML.load($1)
         end
       rescue => e
-        puts "YAML Exception reading #{name}: #{e.message}"
+        puts "Error reading file #{File.join(base, name)}: #{e.message}"
+      rescue SyntaxError => e
+        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       end
 
       self.data ||= {}
@@ -76,9 +78,13 @@ module Jekyll
       payload["pygments_suffix"] = converter.pygments_suffix
 
       begin
-        self.content = Liquid::Template.parse(self.content).render(payload, info)
+        self.content = Liquid::Template.parse(self.content).render!(payload, info)
       rescue => e
         puts "Liquid Exception: #{e.message} in #{self.name}"
+        e.backtrace.each do |backtrace|
+          puts backtrace
+        end
+        abort("Build Failed")
       end
 
       self.transform
@@ -94,9 +100,13 @@ module Jekyll
         payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
 
         begin
-          self.output = Liquid::Template.parse(layout.content).render(payload, info)
+          self.output = Liquid::Template.parse(layout.content).render!(payload, info)
         rescue => e
           puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
+          e.backtrace.each do |backtrace|
+            puts backtrace
+          end
+          abort("Build Failed")
         end
 
         if layout = layouts[layout.data["layout"]]

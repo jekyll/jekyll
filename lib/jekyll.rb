@@ -46,47 +46,50 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 module Jekyll
-  VERSION = '0.11.2'
+  VERSION = '0.12.0'
 
   # Default options. Overriden by values in _config.yml or command-line opts.
-  # (Strings rather symbols used for compatability with YAML).
+  # Strings rather than symbols are used for compatability with YAML.
   DEFAULTS = {
     'safe'          => false,
     'auto'          => false,
     'server'        => false,
     'server_port'   => 4000,
 
-    'source'       => Dir.pwd,
-    'destination'  => File.join(Dir.pwd, '_site'),
-    'plugins'      => File.join(Dir.pwd, '_plugins'),
+    'source'        => Dir.pwd,
+    'destination'   => File.join(Dir.pwd, '_site'),
+    'plugins'       => File.join(Dir.pwd, '_plugins'),
+    'layouts'       => '_layouts',
     'keep_files'   => ['.git','.svn'],
-    'layouts'      => '_layouts',
 
-    'future'       => true,
-    'lsi'          => false,
-    'pygments'     => false,
-    'markdown'     => 'maruku',
-    'permalink'    => 'date',
-    'include'      => ['.htaccess'],
+    'future'        => true,
+    'lsi'           => false,
+    'pygments'      => false,
+    'markdown'      => 'maruku',
+    'permalink'     => 'date',
+    'include'       => ['.htaccess'],
     'paginate_path' => 'page:num',
 
-    'markdown_ext' => 'markdown,mkd,mkdn,md',
-    'textile_ext'  => 'textile',
+    'markdown_ext'  => 'markdown,mkd,mkdn,md',
+    'textile_ext'   => 'textile',
 
-    'maruku'       => {
+    'maruku' => {
       'use_tex'    => false,
       'use_divs'   => false,
       'png_engine' => 'blahtex',
       'png_dir'    => 'images/latex',
       'png_url'    => '/images/latex'
     },
-    'rdiscount'    => {
+
+    'rdiscount' => {
       'extensions' => []
     },
-    'redcarpet'    => {
+
+    'redcarpet' => {
       'extensions' => []
     },
-    'kramdown'        => {
+
+    'kramdown' => {
       'auto_ids'      => true,
       'footnote_nr'   => 1,
       'entity_output' => 'as_char',
@@ -103,8 +106,9 @@ module Jekyll
         'coderay_css'               => 'style'
       }
     },
-    'redcloth'        => {
-      'hard_breaks'   => true
+
+    'redcloth' => {
+      'hard_breaks' => true
     }
   }
 
