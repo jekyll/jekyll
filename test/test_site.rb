@@ -240,7 +240,6 @@ class TestSite < Test::Unit::TestCase
         assert File.exist?(dest_dir('.svn'))
         assert File.exist?(dest_dir('.svn/HEAD'))
       end
-
     end
     
     context 'with an invalid markdown processor in the configuration' do
