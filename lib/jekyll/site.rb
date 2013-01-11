@@ -99,6 +99,10 @@ module Jekyll
       end
     end
 
+    # Internal: Setup the plugin search path 
+    # 
+    #
+    # Returns an Array of plugin search paths
     def setup_plugins
       if (config['plugins'] == Jekyll::DEFAULTS['plugins'])
         [File.join(self.source, config['plugins'])]
