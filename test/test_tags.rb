@@ -32,6 +32,7 @@ title: This is a test
 This document results in a markdown error with maruku
 
 {% highlight text %}#{code}{% endhighlight %}
+{% highlight text linenos %}#{code}{% endhighlight %}
 CONTENT
     create_post(content, override)
   end
@@ -80,8 +81,12 @@ CONTENT
       assert_no_match /markdown\-html\-error/, @result
     end
 
-    should "render markdown with pygments line handling" do
+    should "render markdown with pygments" do
       assert_match %{<pre><code class='text'>test\n</code></pre>}, @result
+    end
+
+    should "render markdown with pygments with line numbers" do
+      assert_match %{<pre><code class='text'><span class='lineno'>1</span> test\n</code></pre>}, @result
     end
   end
 
