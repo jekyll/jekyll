@@ -194,10 +194,10 @@ class TestSite < Test::Unit::TestCase
         @site.process
         # generate some orphaned files:
         # single file
-        File.open(dest_dir('obsolete.html'), 'w')
+        File.open(dest_dir('obsolete.html'), 'w').close()
         # single file in sub directory
         FileUtils.mkdir(dest_dir('qux'))
-        File.open(dest_dir('qux/obsolete.html'), 'w')
+        File.open(dest_dir('qux/obsolete.html'), 'w').close()
         # empty directory
         FileUtils.mkdir(dest_dir('quux'))
       end
@@ -209,10 +209,11 @@ class TestSite < Test::Unit::TestCase
       end
       
       should 'remove orphaned files in destination' do
-        @site.process
+        @site.cleanup
         assert !File.exist?(dest_dir('obsolete.html'))
         assert !File.exist?(dest_dir('qux'))
         assert !File.exist?(dest_dir('quux'))
+        assert File.exist?(dest_dir('2008/10/18/foo-bar.html')), 'post should not be deleted'
       end
 
     end
