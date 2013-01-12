@@ -15,8 +15,8 @@ module Jekyll
       super
       if markup.strip =~ SYNTAX
         @lang = $1
+        @options = {}
         if defined?($2) && $2 != ''
-          tmp_options = {}
           $2.split.each do |opt|
             key, value = opt.split('=')
             if value.nil?
@@ -26,13 +26,8 @@ module Jekyll
                 value = true
               end
             end
-            tmp_options[key] = value
+            @options[key] = value
           end
-          tmp_options = tmp_options.to_a.sort.collect { |opt| opt.join('=') }
-          # additional options to pass to Albino
-          @options = { 'O' => tmp_options.join(',') }
-        else
-          @options = {}
         end
       else
         raise SyntaxError.new("Syntax Error in 'highlight' - Valid syntax: highlight <lang> [linenos]")
