@@ -25,6 +25,10 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = help
 
+  opts.on("--ip [IPADDR]", "The IP address to bind to") do |bind_ip|
+    options['bind_ip'] = bind_ip
+  end
+
   opts.on("--file [PATH]", "File to import from") do |import_file|
     options['file'] = import_file
   end
@@ -291,7 +295,8 @@ if options['server']
 
   s = HTTPServer.new(
     :Port            => options['server_port'],
-    :MimeTypes       => mime_types
+    :MimeTypes       => mime_types,
+    :BindAddress     => options['bind_ip']
   )
   s.mount(options['baseurl'], HTTPServlet::FileHandler, destination)
   t = Thread.new {
