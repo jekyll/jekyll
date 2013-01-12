@@ -1,5 +1,7 @@
 == HEAD
   * Minor Enhancements
+    * "Keep files" feature (#685)
+    * Output full path & name for files that don't parse (#745)
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
