@@ -1,5 +1,6 @@
 == HEAD
   * Minor Enhancements
+    * Layout of Page or Post defaults to 'page' or 'post', respectively (#580)
     * "Keep files" feature (#685)
     * Output full path & name for files that don't parse (#745)
     * Add source and destination directory protection (#535)
