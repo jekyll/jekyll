@@ -32,7 +32,7 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name)
       super(base, name)
-      self.data['layout'] ||= 'page'
+      self.data['layout'] = 'page' unless self.data.has_key?('layout')
       self.data
     end
 

@@ -74,7 +74,7 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name)
       super(base, name)
-      self.data['layout'] ||= 'post'
+      self.data['layout'] = 'post' unless self.data.has_key?('layout')
       self.data
     end
 
