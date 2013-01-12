@@ -72,7 +72,7 @@ The table below lists the available settings for Jekyll, and the various <code c
   </tbody>
 </table>
 
-### Configuration for "build" Sub-Command
+### Build Command Options
 
 <table>
   <thead>
@@ -174,7 +174,7 @@ The table below lists the available settings for Jekyll, and the various <code c
   </tbody>
 </table>
 
-### Configuration for "serve" Sub-Command
+### Serve Command Options
 
 In addition to the options below, the `serve` sub-command can accept any of the options
 for the `build` sub-command, which are then applied to the site build which occurs right
