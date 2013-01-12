@@ -218,7 +218,6 @@ plugins:     ./_plugins
 
 future:      true
 lsi:         false
-pygments:    false
 markdown:    maruku
 permalink:   date
 
