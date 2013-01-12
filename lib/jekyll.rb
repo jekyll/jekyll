@@ -41,6 +41,9 @@ require 'jekyll/errors'
 require 'jekyll/plugin'
 require 'jekyll/converter'
 require 'jekyll/generator'
+require 'jekyll/command'
+
+require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
@@ -48,27 +51,23 @@ require_all 'jekyll/tags'
 module Jekyll
   VERSION = '0.12.0'
 
-  # Default options. Overriden by values in _config.yml or command-line opts.
+  # Default options. Overriden by values in _config.yml.
   # Strings rather than symbols are used for compatability with YAML.
   DEFAULTS = {
-    'safe'          => false,
-    'auto'          => false,
-    'server'        => false,
-    'server_port'   => 4000,
-
     'source'        => Dir.pwd,
     'destination'   => File.join(Dir.pwd, '_site'),
+
     'plugins'       => File.join(Dir.pwd, '_plugins'),
     'layouts'       => '_layouts',
     'keep_files'   => ['.git','.svn'],
 
-    'future'        => true,
-    'lsi'           => false,
-    'pygments'      => false,
-    'markdown'      => 'maruku',
-    'permalink'     => 'date',
-    'include'       => ['.htaccess'],
-    'paginate_path' => 'page:num',
+    'future'        => true,           # remove and make true just default
+    'pygments'      => false,          # remove and make true just default
+
+    'markdown'      => 'maruku',       # no longer a command option
+    'permalink'     => 'date',         # no longer a command option
+    'include'       => ['.htaccess'],  # no longer a command option
+    'paginate_path' => 'page:num',     # no longer a command option
 
     'markdown_ext'  => 'markdown,mkd,mkdn,md',
     'textile_ext'   => 'textile',
@@ -121,6 +120,9 @@ module Jekyll
   #
   # Returns the final configuration Hash.
   def self.configuration(override)
+    # Convert any symbol keys to strings and remove the old key/values
+    override = override.reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
+
     # _config.yml may override default source location, but until
     # then, we need to know where to look for _config.yml
     source = override['source'] || Jekyll::DEFAULTS['source']
