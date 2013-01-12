@@ -58,9 +58,15 @@ opts = OptionParser.new do |opts|
     options['auto'] = auto
   end
 
-  opts.on("--server [PORT]", "Start web server (default port 4000)") do |port|
+  opts.on("--server [[HOST:]PORT]", "Start web server (default 4000)") do |addr|
     options['server'] = true
-    options['server_port'] = port unless port.nil?
+
+    if addr && !addr.empty?
+      host, port = Jekyll.parse_addr(addr)
+
+      options['server_host'] = host
+      options['server_port'] = port
+    end
   end
 
   opts.on("--no-server", "Do not start a web server") do |part|
@@ -290,6 +296,7 @@ if options['server']
   end
 
   s = HTTPServer.new(
+    :BindAddress     => options['server_host'],
     :Port            => options['server_port'],
     :MimeTypes       => mime_types
   )
