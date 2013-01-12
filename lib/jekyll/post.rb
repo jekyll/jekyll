@@ -66,6 +66,18 @@ module Jekyll
       end
     end
 
+    # Read the YAML frontmatter.
+    #
+    # base - The String path to the dir containing the file.
+    # name - The String filename of the file.
+    #
+    # Returns nothing.
+    def read_yaml(base, name)
+      super(base, name)
+      self.data['layout'] ||= 'post'
+      self.data
+    end
+
     # Compares Post objects. First compares the Post date. If the dates are
     # equal, it compares the Post slugs.
     #
