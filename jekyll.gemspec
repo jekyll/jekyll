@@ -44,6 +44,8 @@ Gem::Specification.new do |s|
   
   # = MANIFEST =
   s.files = %w[
+    .travis.yml
+    CONTRIBUTING.md
     Gemfile
     History.txt
     LICENSE
@@ -63,6 +65,10 @@ Gem::Specification.new do |s|
     features/support/env.rb
     jekyll.gemspec
     lib/jekyll.rb
+    lib/jekyll/command.rb
+    lib/jekyll/commands/build.rb
+    lib/jekyll/commands/migrate.rb
+    lib/jekyll/commands/serve.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
@@ -97,6 +103,8 @@ Gem::Specification.new do |s|
     lib/jekyll/tags/include.rb
     lib/jekyll/tags/post_url.rb
     test/fixtures/broken_front_matter1.erb
+    test/fixtures/broken_front_matter2.erb
+    test/fixtures/broken_front_matter3.erb
     test/fixtures/front_matter.erb
     test/helper.rb
     test/source/.htaccess
