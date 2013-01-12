@@ -59,6 +59,7 @@ module Jekyll
 
     'plugins'       => File.join(Dir.pwd, '_plugins'),
     'layouts'       => '_layouts',
+    'keep_files'   => ['.git','.svn'],
 
     'future'        => true,           # remove and make true just default
     'pygments'      => false,          # remove and make true just default

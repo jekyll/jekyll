@@ -200,12 +200,22 @@ class TestSite < Test::Unit::TestCase
         File.open(dest_dir('qux/obsolete.html'), 'w')
         # empty directory
         FileUtils.mkdir(dest_dir('quux'))
+        FileUtils.mkdir(dest_dir('.git'))
+        FileUtils.mkdir(dest_dir('.svn'))
+        FileUtils.mkdir(dest_dir('.hg'))
+        # single file in repository
+        File.open(dest_dir('.git/HEAD'), 'w')
+        File.open(dest_dir('.svn/HEAD'), 'w')
+        File.open(dest_dir('.hg/HEAD'), 'w')
       end
       
       teardown do
         FileUtils.rm_f(dest_dir('obsolete.html'))
         FileUtils.rm_rf(dest_dir('qux'))
         FileUtils.rm_f(dest_dir('quux'))
+        FileUtils.rm_rf(dest_dir('.git'))
+        FileUtils.rm_rf(dest_dir('.svn'))
+        FileUtils.rm_rf(dest_dir('.hg'))
       end
       
       should 'remove orphaned files in destination' do
@@ -213,8 +223,23 @@ class TestSite < Test::Unit::TestCase
         assert !File.exist?(dest_dir('obsolete.html'))
         assert !File.exist?(dest_dir('qux'))
         assert !File.exist?(dest_dir('quux'))
+        assert File.exist?(dest_dir('.git'))
+        assert File.exist?(dest_dir('.git/HEAD'))
       end
 
+      should 'remove orphaned files in destination - keep_files .svn' do
+        config = Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'keep_files' => ['.svn']})
+        @site = Site.new(config)
+        @site.process
+        assert !File.exist?(dest_dir('.htpasswd'))
+        assert !File.exist?(dest_dir('obsolete.html'))
+        assert !File.exist?(dest_dir('qux'))
+        assert !File.exist?(dest_dir('quux'))
+        assert !File.exist?(dest_dir('.git'))
+        assert !File.exist?(dest_dir('.git/HEAD'))
+        assert File.exist?(dest_dir('.svn'))
+        assert File.exist?(dest_dir('.svn/HEAD'))
+      end
     end
     
     context 'with an invalid markdown processor in the configuration' do

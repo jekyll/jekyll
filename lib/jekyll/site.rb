@@ -5,7 +5,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :keep_files
 
     attr_accessor :converters, :generators
 
@@ -26,6 +27,7 @@ module Jekyll
       self.include         = config['include'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.keep_files      = config['keep_files'] || []
 
       self.reset
       self.setup
@@ -222,8 +224,12 @@ module Jekyll
     def cleanup
       # all files and directories in destination, including hidden ones
       dest_files = Set.new
-      Dir.glob(File.join(self.dest, "**", "*")) do |file|
-        dest_files << file
+      Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
+        if self.keep_files.length > 0
+          dest_files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
+        else
+          dest_files << file unless file =~ /\/\.{1,2}$/
+        end
       end
 
       # files to be written
@@ -244,8 +250,19 @@ module Jekyll
       files.merge(dirs)
 
       obsolete_files = dest_files - files
-
       FileUtils.rm_rf(obsolete_files.to_a)
+    end
+
+    # Private: creates a regular expression from the keep_files array
+    # 
+    # Examples
+    #   ['.git','.svn'] creates the following regex: /\/(\.git|\/.svn)/
+    #
+    # Returns the regular expression
+    def keep_file_regex
+      or_list = self.keep_files.join("|")
+      pattern = "\/(#{or_list.gsub(".", "\.")})"
+      Regexp.new pattern
     end
 
     # Write static files, pages, and posts.
