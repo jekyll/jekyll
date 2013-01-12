@@ -1,6 +1,5 @@
 language: ruby
 rvm:
-  - 1.9.3
+  - 1.9.3-p362
   - 1.9.2
   - 1.8.7
-script: bundle exec rake
