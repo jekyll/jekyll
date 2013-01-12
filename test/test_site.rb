@@ -154,13 +154,13 @@ class TestSite < Test::Unit::TestCase
       excludes = %w[README TODO]
       files = %w[index.html site.css .htaccess]
 
-      @site.exclude = excludes
-      assert_equal files, @site.filter_entries(excludes + files)
+      @site.exclude = excludes + ["exclude*"]
+      assert_equal files, @site.filter_entries(excludes + files + ["excludeA"])
     end
     
     should "not filter entries within include" do
-      includes = %w[_index.html .htaccess]
-      files = %w[index.html _index.html .htaccess]
+      includes = %w[_index.html .htaccess include*]
+      files = %w[index.html _index.html .htaccess includeA]
 
       @site.include = includes
       assert_equal files, @site.filter_entries(files)
