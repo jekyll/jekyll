@@ -1,5 +1,6 @@
 == HEAD
   * Minor Enhancements
+    * Add glob support to include, exclude option (#743)
     * Layout of Page or Post defaults to 'page' or 'post', respectively (#580)
     * "Keep files" feature (#685)
     * Output full path & name for files that don't parse (#745)
