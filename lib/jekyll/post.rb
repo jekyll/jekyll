@@ -91,7 +91,7 @@ module Jekyll
 
     def read_yaml(*args)
       super
-      self.extract_excerpt!
+      self.excerpt = self.extract_excerpt
     end
 
 
@@ -305,17 +305,12 @@ module Jekyll
     #
     # Excerpts are rendered same time as content is rendered.
     #
-    # Returns nothing
-    def extract_excerpt!
+    # Returns excerpt String
+    def extract_excerpt
       separator     = self.site.config['excerpt_separator'] || "\n\n"
       head, _, tail = self.content.partition(separator)
-      refs          = self.content.scan(/^\[[^\]]+\]:.+$/).join("\n")
 
-      refs.prepend("\n\n") unless refs.empty?
-      tail.prepend("\n\n") unless tail.empty?
-
-      self.excerpt  = head + refs
-      self.content  = head + tail
+      "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
     end
   end
 
