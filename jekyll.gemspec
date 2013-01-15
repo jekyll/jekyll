@@ -27,21 +27,21 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('directory_watcher', "~> 1.1")
   s.add_runtime_dependency('maruku', "~> 0.5")
-  s.add_runtime_dependency('kramdown', "~> 0.13.4")
+  s.add_runtime_dependency('kramdown', "~> 0.14.1")
   s.add_runtime_dependency('pygments.rb', "~> 0.3.2")
   s.add_runtime_dependency('commander', "~> 4.1.3")
 
-  s.add_development_dependency('rake', "~> 0.9")
+  s.add_development_dependency('rake', "~> 10.0.3")
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('redgreen', "~> 1.2")
-  s.add_development_dependency('shoulda', "~> 2.11")
+  s.add_development_dependency('shoulda', "~> 3.3.2")
   s.add_development_dependency('rr', "~> 1.0")
-  s.add_development_dependency('cucumber', "1.1")
+  s.add_development_dependency('cucumber', "~> 1.2.1")
   s.add_development_dependency('RedCloth', "~> 4.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
-  s.add_development_dependency('redcarpet', "~> 2.1.1")
+  s.add_development_dependency('redcarpet', "~> 2.2.2")
   s.add_development_dependency('launchy', "~> 2.1.2")
-  
+
   # = MANIFEST =
   s.files = %w[
     .travis.yml
