@@ -1,4 +1,6 @@
 == HEAD
+  * Major Enhancements
+    * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Minor Enhancements
     * "Keep files" feature (#685)
     * Output full path & name for files that don't parse (#745)
