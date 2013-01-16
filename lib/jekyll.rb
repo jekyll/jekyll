@@ -127,7 +127,7 @@ module Jekyll
     # then, we need to know where to look for _config.yml
     source = override['source'] || Jekyll::DEFAULTS['source']
 
-    # Get configuration from <source>/_config.yml or <source>/<config_file
+    # Get configuration from <source>/_config.yml or <source>/<config_file>
     config_file = override.delete('config')
     config_file = File.join(source, "_config.yml") if config_file.to_s.empty?
 
