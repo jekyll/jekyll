@@ -1,3 +1,8 @@
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/test/"
+end
+
 require 'rubygems'
 gem 'RedCloth', '>= 4.2.1'
 
