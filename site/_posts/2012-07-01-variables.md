@@ -68,7 +68,7 @@ Jekyll traverses your site looking for files to process. Any files with [YAML Fr
     </tr>
     <tr>
       <td><p><code>site.[CONFIGURATION_DATA]</code></p></td>
-      <td><p>All variables set in your <code>_config.yml</code> are available through the <code>site</code> variable. For example, if you have <code>url: http://mysite.com</code> in your configuration file, then in your posts and pages it can be accessed using <code>{{ "{{ site.url " }}}}</code>. Jekyll does not parse changes to <code>_config.yml</code> in <code>auto</code> mode, you have to restart Jekyll to see changes to variables.</p></td>
+      <td><p>All variables set in your <code>_config.yml</code> are available through the <code>site</code> variable. For example, if you have <code>url: http://mysite.com</code> in your configuration file, then in your posts and pages it can be accessed using <code>{{ "{{ site.url " }}}}</code>. Jekyll does not parse changes to <code>_config.yml</code> in <code>watch</code> mode, you have to restart Jekyll to see changes to variables.</p></td>
     </tr>
   </tbody>
 </table>

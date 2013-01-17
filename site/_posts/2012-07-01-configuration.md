@@ -9,6 +9,8 @@ Jekyll allows you to concoct your sites in any way you can dream up, and it’s 
 
 ## Configuration Settings
 
+### Global Configuration
+
 The table below lists the available settings for Jekyll, and the various <code class="option">options</code> (specifed in the configuration file) and <code class="flag">flags</code> (specified on the command-line) that control them.
 
 <table>
@@ -21,146 +23,32 @@ The table below lists the available settings for Jekyll, and the various <code c
   <tbody>
     <tr class='setting'>
       <td>
+        <p class='name'><strong>Site Source</strong></p>
+        <p class='description'>Changes the directory where Jekyll will look to transform files</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">source: [string]</code></p>
+        <p><code class="flag">--source [source]</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Site Destination</strong></p>
+        <p class='description'>Changes the directory where Jekyll will write files to</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">destination: [string]</code></p>
+        <p><code class="flag">--destination</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
         <p class='name'><strong>Safe</strong></p>
         <p class='description'>Disables <a href="../plugins">custom plugins</a>.</p>
       </td>
       <td class="align-center">
         <p><code class="option">safe: [boolean]</code></p>
         <p><code class="flag">--safe</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Regeneration</strong></p>
-        <p class='description'>Enables or disables Jekyll from recreating the site when files are modified.</p>
-      </td>
-      <td class="align-center">
-        <p><code class="option">auto: [boolean]</code></p>
-        <p><code class="flag">--auto</code></p>
-        <p><code class="flag">--no-auto</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Local Server</strong></p>
-        <p class='description'>Fires up a server that will host your <code>_site</code> directory</p>
-      </td>
-      <td class="align-center">
-        <p><code class="option">server: [boolean]</code></p>
-        <p><code class="flag">--server</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Local Server Port</strong></p>
-        <p class='description'>Changes the port that the Jekyll server will run on</p>
-      </td>
-      <td class="align-center">
-        <p><code class="option">server_port: [integer]</code></p>
-        <p><code class="flag">--server [port]</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Base URL</strong></p>
-        <p class='description'>Serve website from a given base URL</p>
-      </td>
-      <td class="align-center">
-        <p><code class="option">baseurl: [BASE_URL]</code></p>
-        <p><code class="flag">--base-url [url]</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>URL</strong></p>
-        <p class='description'>Sets <code>site.url</code>, useful for environment switching</p>
-      </td>
-      <td class="align-center">
-        <p><code class="option">url: [URL]</code></p>
-        <p><code class="flag">--url [URL]</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Site Destination</strong></p>
-        <p class="description">Changes the directory where Jekyll will write files to</p>
-      </td>
-      <td class='align-center'>
-        <p><code class="option">destination: [dir]</code></p>
-        <p><code class="flag">jekyll [dest]</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Site Source</strong></p>
-        <p class="description">Changes the directory where Jekyll will look to transform files</p>
-      </td>
-      <td class='align-center'>
-        <p><code class="option">source: [dir]</code></p>
-        <p><code class="flag">jekyll [source] [dest]</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Markdown</strong></p>
-        <p class="description">Uses RDiscount or <code>[engine]</code> instead of Maruku.</p>
-      </td>
-      <td class='align-center'>
-        <p><code class="option">markdown: [engine]</code></p>
-        <p><code class="flag">--rdiscount</code></p>
-        <p><code class="flag">--kramdown</code></p>
-        <p><code class="flag">--redcarpet</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Pygments</strong></p>
-        <p class="description">Enables highlight tag with Pygments.</p>
-      </td>
-      <td class='align-center'>
-        <p><code class="option">pygments: [boolean]</code></p>
-        <p><code class="flag">--pygments</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Future</strong></p>
-        <p class="description">Publishes posts with a future date</p>
-      </td>
-      <td class='align-center'>
-        <p><code class="option">future: [boolean]</code></p>
-        <p><code class="flag">--no-future</code></p>
-        <p><code class="flag">--future</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>LSI</strong></p>
-        <p class="description">Produces an index for related posts.</p>
-      </td>
-      <td class='align-center'>
-        <p><code class="option">lsi: [boolean]</code></p>
-        <p><code class="flag">--lsi</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Permalink</strong></p>
-        <p class="description">Controls the URLs that posts are generated with. Please refer to the <a href="../permalinks">Permalinks</a> page for more info.</p>
-      </td>
-      <td class='align-center'>
-        <p><code class="option">permalink: [style]</code></p>
-        <p><code class="flag">--permalink=[style]</code></p>
-      </td>
-    </tr>
-    <tr class='setting'>
-      <td>
-        <p class='name'><strong>Pagination</strong></p>
-        <p class="description">Splits your posts up over multiple subdirectories called "page2", "page3", ... "pageN"</p>
-      </td>
-      <td class='align-center'>
-        <p><code class="option">paginate: [per_page]</code></p>
-        <p><code class="flag">--paginate [per_page]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -181,6 +69,98 @@ The table below lists the available settings for Jekyll, and the various <code c
         <p><code class="option">include: [dir1, file1, dir2]</code></p>
       </td>
     </tr>
+  </tbody>
+</table>
+
+### Build Command Options
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Regeneration</strong></p>
+        <p class='description'>Enables auto-regeneration of the site when files are modified. Off by default.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">--watch</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>URL</strong></p>
+        <p class='description'>Sets <code>site.url</code>, useful for environment switching</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">url: [URL]</code></p>
+        <p><code class="flag">--url [URL]</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Markdown</strong></p>
+        <p class="description">Uses RDiscount or <code>[engine]</code> instead of Maruku.</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">markdown: [engine]</code></p>
+        <p><code class="flag">--markdown [rdiscount|kramdown|redcarpet]</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Pygments</strong></p>
+        <p class="description">Enables highlight tag with Pygments.</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">pygments: [boolean]</code></p>
+        <p><code class="flag">--pygments</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Future</strong></p>
+        <p class="description">Publishes posts with a future date</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">future: [boolean]</code></p>
+        <p><code class="flag">--future</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>LSI</strong></p>
+        <p class="description">Produces an index for related posts.</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">lsi: [boolean]</code></p>
+        <p><code class="flag">--lsi</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Permalink</strong></p>
+        <p class="description">Controls the URLs that posts are generated with. Please refer to the <a href="../permalinks">Permalinks</a> page for more info.</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">permalink: [style]</code></p>
+        <p><code class="flag">--permalink [style]</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Pagination</strong></p>
+        <p class="description">Splits your posts up over multiple subdirectories called "page2", "page3", ... "pageN"</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">paginate: [per_page]</code></p>
+        <p><code class="flag">--paginate [per_page]</code></p>
+      </td>
+    </tr>
     <tr class='setting'>
       <td>
         <p class='name'><strong>Limit Posts</strong></p>
@@ -188,10 +168,56 @@ The table below lists the available settings for Jekyll, and the various <code c
       </td>
       <td class='align-center'>
         <p><code class="option">limit_posts: [max_posts]</code></p>
-        <p><code class="flag">--limit_posts=[max_posts]</code></p>
+        <p><code class="flag">--limit_posts [max_posts]</code></p>
       </td>
     </tr>
+  </tbody>
+</table>
 
+### Serve Command Options
+
+In addition to the options below, the `serve` sub-command can accept any of the options
+for the `build` sub-command, which are then applied to the site build which occurs right
+before your site is served.
+
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Local Server Port</strong></p>
+        <p class='description'>Changes the port that the Jekyll server will run on</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">port: [integer]</code></p>
+        <p><code class="flag">--port [port]</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Local Server Hostname</strong></p>
+        <p class='description'>Changes the hostname that the Jekyll server will run on</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">host: [string]</code></p>
+        <p><code class="flag">--host [hostname]</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Base URL</strong></p>
+        <p class='description'>Serve website from a given base URL</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">baseurl: [BASE_URL]</code></p>
+        <p><code class="flag">--baseurl [url]</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 
@@ -206,9 +232,10 @@ Jekyll runs with the following configuration options by default. Unless alternat
 
 {% highlight yaml %}
 safe:        false
-auto:        false
+watch:       false
 server:      false
-server_port: 4000
+host:        0.0.0.0
+port:        4000
 baseurl:     /
 url:         http://localhost:4000
 

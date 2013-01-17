@@ -53,7 +53,7 @@ TMP_GIT_CLONE=$HOME/tmp/myrepo
 PUBLIC_WWW=/var/www/myrepo
 
 git clone $GIT_REPO $TMP_GIT_CLONE
-jekyll --no-auto $TMP_GIT_CLONE $PUBLIC_WWW
+jekyll build $TMP_GIT_CLONE $PUBLIC_WWW
 rm -Rf $TMP_GIT_CLONE
 exit
 {% endhighlight %}

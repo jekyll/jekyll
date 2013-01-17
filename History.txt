@@ -1,4 +1,6 @@
 == HEAD
+  * Major Enhancements
+    * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Minor Enhancements
     * Add glob support to include, exclude option (#743)
     * Layout of Page or Post defaults to 'page' or 'post', respectively (#580)
