@@ -17,6 +17,15 @@ global_option '--safe', 'Safe mode (defaults to false)'
 global_option '--plugins', 'Plugins directory (defaults to ./_plugins)'
 global_option '--layouts', 'Layouts directory (defaults to ./_layouts)'
 
+command :new do |c|
+  c.syntax = 'jekyll new PATH'
+  c.description = 'Creates a new Jekyll site scaffold in PATH'
+
+  c.action do |args, options|
+    Jekyll::NewCommand.process(args)
+  end
+end
+
 command :build do |c|
   c.syntax = 'jekyll build [options]'
   c.description = 'Build your site with the option of auto-renegeration'
