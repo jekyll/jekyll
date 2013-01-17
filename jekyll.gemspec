@@ -109,6 +109,15 @@ Gem::Specification.new do |s|
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
     lib/jekyll/tags/post_url.rb
+    lib/site_template/_config.yml
+    lib/site_template/_layouts/default.html
+    lib/site_template/_layouts/post.html
+    lib/site_template/_posts/.gitkeep
+    lib/site_template/css/screen.css
+    lib/site_template/css/syntax.css
+    lib/site_template/images/.gitkeep
+    lib/site_template/images/rss.png
+    lib/site_template/index.html
     test/fixtures/broken_front_matter1.erb
     test/fixtures/broken_front_matter2.erb
     test/fixtures/broken_front_matter3.erb
