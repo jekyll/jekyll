@@ -183,9 +183,12 @@ module Jekyll
 
       if self.site.lsi
         self.class.lsi ||= begin
-          puts "Running the classifier... this could take a while."
-          lsi = Classifier::LSI.new
+          puts "Starting the classifier..."
+          lsi = Classifier::LSI.new(:auto_rebuild => false)
+          $stdout.print("  Populating LSI... ");$stdout.flush
           posts.each { |x| $stdout.print(".");$stdout.flush;lsi.add_item(x) }
+          $stdout.print("\n  Rebuilding LSI index... ")
+          lsi.build_index
           puts ""
           lsi
         end
