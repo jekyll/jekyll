@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'rubygems'
 gem 'RedCloth', '>= 4.2.1'
 
