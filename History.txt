@@ -2,6 +2,7 @@
   * Major Enhancements
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Minor Enhancements
+    * Truncate post slugs when importing from Tumblr (#496)
     * Add glob support to include, exclude option (#743)
     * Layout of Page or Post defaults to 'page' or 'post', respectively (#580)
     * "Keep files" feature (#685)
