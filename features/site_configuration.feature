@@ -22,7 +22,7 @@ Feature: Site configuration
     Given I have an "Rakefile" file that contains "I want to be excluded"
     And I have an "README" file that contains "I want to be excluded"
     And I have an "index.html" file that contains "I want to be included"
-    And I have a configuration file with "exclude" set to "Rakefile", "README"
+    And I have a configuration file with "exclude" set to "['Rakefile', 'README']"
     When I run jekyll
     Then I should see "I want to be included" in "_site/index.html"
     And the "_site/Rakefile" file should not exist

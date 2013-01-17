@@ -66,6 +66,26 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/about/", @page.dir
       end
     end
+    
+    context "with unspecified layout" do
+      setup do
+        @page = setup_page('contacts.html')
+      end
+
+      should "default to 'post' layout" do
+        assert_equal "page", @page.data["layout"]
+      end
+    end
+        
+    context "with specified layout of nil" do
+      setup do
+        @page = setup_page('sitemap.xml')
+      end
+
+      should "layout of nil is respected" do
+        assert_equal "nil", @page.data["layout"]
+      end
+    end
 
     context "rendering" do
       setup do

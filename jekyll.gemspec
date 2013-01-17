@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('maruku', "~> 0.5")
   s.add_runtime_dependency('kramdown', "~> 0.13.4")
   s.add_runtime_dependency('pygments.rb', "~> 0.3.2")
+  s.add_runtime_dependency('commander', "~> 4.1.3")
 
   s.add_development_dependency('rake', "~> 0.9")
   s.add_development_dependency('rdoc', "~> 3.11")
@@ -43,6 +44,8 @@ Gem::Specification.new do |s|
   
   # = MANIFEST =
   s.files = %w[
+    .travis.yml
+    CONTRIBUTING.md
     Gemfile
     History.txt
     LICENSE
@@ -62,6 +65,10 @@ Gem::Specification.new do |s|
     features/support/env.rb
     jekyll.gemspec
     lib/jekyll.rb
+    lib/jekyll/command.rb
+    lib/jekyll/commands/build.rb
+    lib/jekyll/commands/migrate.rb
+    lib/jekyll/commands/serve.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
@@ -96,6 +103,8 @@ Gem::Specification.new do |s|
     lib/jekyll/tags/include.rb
     lib/jekyll/tags/post_url.rb
     test/fixtures/broken_front_matter1.erb
+    test/fixtures/broken_front_matter2.erb
+    test/fixtures/broken_front_matter3.erb
     test/fixtures/front_matter.erb
     test/helper.rb
     test/source/.htaccess

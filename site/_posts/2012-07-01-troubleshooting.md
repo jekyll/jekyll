@@ -50,7 +50,7 @@ On Debian or Ubuntu, you may need to add /var/lib/gems/1.8/bin/ to your path in 
 
 ## Base-URL Problems
 
-If you are using base-url option like `jekyll --server --base-url '/blog'` then make sure that you access the site at `http://localhost:4000/blog/index.html`. Just accessing `http://localhost:4000/blog` will not work.
+If you are using base-url option like `jekyll serve --baseurl '/blog'` then make sure that you access the site at `http://localhost:4000/blog/index.html`. Just accessing `http://localhost:4000/blog` will not work.
 
 ## Configuration problems
 

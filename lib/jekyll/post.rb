@@ -66,6 +66,18 @@ module Jekyll
       end
     end
 
+    # Read the YAML frontmatter.
+    #
+    # base - The String path to the dir containing the file.
+    # name - The String filename of the file.
+    #
+    # Returns nothing.
+    def read_yaml(base, name)
+      super(base, name)
+      self.data['layout'] = 'post' unless self.data.has_key?('layout')
+      self.data
+    end
+
     # Compares Post objects. First compares the Post date. If the dates are
     # equal, it compares the Post slugs.
     #
@@ -171,9 +183,12 @@ module Jekyll
 
       if self.site.lsi
         self.class.lsi ||= begin
-          puts "Running the classifier... this could take a while."
-          lsi = Classifier::LSI.new
+          puts "Starting the classifier..."
+          lsi = Classifier::LSI.new(:auto_rebuild => false)
+          $stdout.print("  Populating LSI... ");$stdout.flush
           posts.each { |x| $stdout.print(".");$stdout.flush;lsi.add_item(x) }
+          $stdout.print("\n  Rebuilding LSI index... ")
+          lsi.build_index
           puts ""
           lsi
         end

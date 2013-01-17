@@ -32,6 +32,7 @@ title: This is a test
 This document results in a markdown error with maruku
 
 {% highlight text %}#{code}{% endhighlight %}
+{% highlight text linenos %}#{code}{% endhighlight %}
 CONTENT
     create_post(content, override)
   end
@@ -58,16 +59,16 @@ CONTENT
       assert_equal({}, tag.instance_variable_get(:@options))
 
       tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({'O' => "linenos=inline"}, tag.instance_variable_get(:@options))
+      assert_equal({ 'linenos' => 'inline' }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({'O' => "linenos=table"}, tag.instance_variable_get(:@options))
+      assert_equal({ 'linenos' => 'table' }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({'O' => "linenos=table,nowrap=true"}, tag.instance_variable_get(:@options))
+      assert_equal({ 'linenos' => 'table', 'nowrap' => true }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({'O' => "cssclass=hl,linenos=table"}, tag.instance_variable_get(:@options))
+      assert_equal({ 'cssclass' => 'hl', 'linenos' => 'table' }, tag.instance_variable_get(:@options))
     end
   end
 
@@ -80,8 +81,12 @@ CONTENT
       assert_no_match /markdown\-html\-error/, @result
     end
 
-    should "render markdown with pygments line handling" do
+    should "render markdown with pygments" do
       assert_match %{<pre><code class='text'>test\n</code></pre>}, @result
+    end
+
+    should "render markdown with pygments with line numbers" do
+      assert_match %{<pre><code class='text'><span class='lineno'>1</span> test\n</code></pre>}, @result
     end
   end
 
