@@ -52,11 +52,18 @@ module Jekyll
           'meta'   => metas
         }
 
-        FileUtils.mkdir_p "_#{type}s"
-        File.open("_#{type}s/#{name}", "w") do |f|
-          f.puts header.to_yaml
-          f.puts '---'
-          f.puts item.at('content:encoded').inner_text
+        begin
+          FileUtils.mkdir_p "_#{type}s"
+          File.open("_#{type}s/#{name}", "w") do |f|
+            f.puts header.to_yaml
+            f.puts '---'
+            f.puts item.at('content:encoded').inner_text
+          end
+        rescue
+          puts "Couldn't import post!"
+          puts "Title: #{title}"
+          puts "Name/Slug: #{name}\n"
+          next
         end
 
         import_count[type] += 1
