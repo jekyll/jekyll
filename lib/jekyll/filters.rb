@@ -125,5 +125,19 @@ module Jekyll
       end
     end
 
+    # Convert a String into slugified one.
+    #
+    # input - The String to slugify.
+    #
+    # Examples
+    #
+    #   slugify("Hello, World")
+    #   # => "hello-world"
+    #
+    # Returns the slugified String.
+    def slugify(input)
+      input.gsub(/[^[:alnum:]]+/, '-').gsub(/^-|-$/, '').downcase
+    end
+
   end
 end

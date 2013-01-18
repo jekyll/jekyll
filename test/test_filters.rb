@@ -58,5 +58,13 @@ class TestFilters < Test::Unit::TestCase
     should "escape space as %20" do
       assert_equal "my%20things", @filter.uri_escape("my things")
     end
+
+    should "slugify string" do
+      assert_equal "hello-world", @filter.slugify("Hello, World")
+    end
+
+    should "remove hyphens at the beginning and at the end" do
+      assert_equal "hello-world", @filter.slugify("'Hello, World!'")
+    end
   end
 end
