@@ -18,11 +18,15 @@ module Jekyll
                     n.title, \
                     nr.body, \
                     n.created, \
-                    n.status \
-             FROM node AS n, \
-                  node_revisions AS nr \
+                    n.status, \
+                    GROUP_CONCAT( td.name SEPARATOR ' ' ) AS 'tags' \
+             FROM node_revisions AS nr, \
+                  node AS n \
+             JOIN term_node AS tn ON tn.nid = n.nid \
+             JOIN term_data AS td ON tn.tid = td.tid \
              WHERE (n.type = 'blog' OR n.type = 'story') \
-             AND n.vid = nr.vid"
+             AND n.vid = nr.vid \
+             GROUP BY n.nid"
 
     def self.process(dbname, user, pass, host = 'localhost', prefix = '')
       db = Sequel.mysql(dbname, :user => user, :password => pass, :host => host, :encoding => 'utf8')
@@ -51,6 +55,7 @@ EOF
 
       db[QUERY].each do |post|
         # Get required fields and construct Jekyll compatible name
+        tags = post[:tags].downcase.strip
         node_id = post[:nid]
         title = post[:title]
         content = post[:body]
@@ -67,6 +72,7 @@ EOF
            'layout' => 'post',
            'title' => title.to_s,
            'created' => created,
+           'categories' => tags,
          }.delete_if { |k,v| v.nil? || v == ''}.to_yaml
 
         # Write out the data and content to file
