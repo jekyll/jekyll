@@ -2,6 +2,7 @@
   * Major Enhancements
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Minor Enhancements
+    * Rescue from import errors in Wordpress.com migrator (#671)
     * Massively accelerate LSI performance (#664)
     * Truncate post slugs when importing from Tumblr (#496)
     * Add glob support to include, exclude option (#743)
