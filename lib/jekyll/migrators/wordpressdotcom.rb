@@ -59,10 +59,11 @@ module Jekyll
             f.puts '---'
             f.puts item.at('content:encoded').inner_text
           end
-        rescue
+        rescue => e
           puts "Couldn't import post!"
           puts "Title: #{title}"
           puts "Name/Slug: #{name}\n"
+          puts "Error: #{e.message}"
           next
         end
 
