@@ -42,6 +42,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency('redcarpet', "~> 2.1.1")
   s.add_development_dependency('launchy', "~> 2.1.2")
   s.add_development_dependency('simplecov', "~> 0.7")
+  s.add_development_dependency('sequel', "~> 3.42")
+  s.add_development_dependency('htmlentities', "~> 4.3")
+  s.add_development_dependency('hpricot', "~> 0.8")
   
   # = MANIFEST =
   s.files = %w[
