@@ -4,7 +4,7 @@ require 'helper'
 
 class TestTags < Test::Unit::TestCase
 
-  def create_post(content, override = {}, converter_class = Jekyll::MarkdownConverter)
+  def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     stub(Jekyll).configuration do
       Jekyll::DEFAULTS.deep_merge({'pygments' => true}).deep_merge(override)
     end
@@ -129,7 +129,7 @@ CONTENT
 
     context "using Textile" do
       setup do
-        create_post(@content, {}, Jekyll::TextileConverter)
+        create_post(@content, {}, Jekyll::Converters::Textile)
       end
 
       # Broken in RedCloth 4.1.9
