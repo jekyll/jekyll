@@ -39,7 +39,7 @@ CONTENT
 
   context "language name" do
     should "match only the required set of chars" do
-      r = Jekyll::HighlightBlock::SYNTAX
+      r = Jekyll::Tags::HighlightBlock::SYNTAX
       assert_match r, "ruby"
       assert_match r, "c#"
       assert_match r, "xml+cheetah"
@@ -55,19 +55,19 @@ CONTENT
 
   context "initialized tag" do
     should "work" do
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({}, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'linenos' => 'inline' }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'linenos' => 'table' }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'linenos' => 'table', 'nowrap' => true }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'cssclass' => 'hl', 'linenos' => 'table' }, tag.instance_variable_get(:@options))
     end
   end
