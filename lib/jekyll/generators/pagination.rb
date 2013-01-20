@@ -1,55 +1,56 @@
 module Jekyll
+  module Generators
+    class Pagination < Generator
+      # This generator is safe from arbitrary code execution.
+      safe true
 
-  class Pagination < Generator
-    # This generator is safe from arbitrary code execution.
-    safe true
-
-    # Generate paginated pages if necessary.
-    #
-    # site - The Site.
-    #
-    # Returns nothing.
-    def generate(site)
-      site.pages.dup.each do |page|
-        paginate(site, page) if Pager.pagination_enabled?(site.config, page.name)
-      end
-    end
-
-    # Paginates the blog's posts. Renders the index.html file into paginated
-    # directories, e.g.: page2/index.html, page3/index.html, etc and adds more
-    # site-wide data.
-    #
-    # site - The Site.
-    # page - The index.html Page that requires pagination.
-    #
-    # {"paginator" => { "page" => <Number>,
-    #                   "per_page" => <Number>,
-    #                   "posts" => [<Post>],
-    #                   "total_posts" => <Number>,
-    #                   "total_pages" => <Number>,
-    #                   "previous_page" => <Number>,
-    #                   "next_page" => <Number> }}
-    def paginate(site, page)
-      all_posts = site.site_payload['site']['posts']
-      pages = Pager.calculate_pages(all_posts, site.config['paginate'].to_i)
-      (1..pages).each do |num_page|
-        pager = Pager.new(site.config, num_page, all_posts, pages)
-        if num_page > 1
-          newpage = Page.new(site, site.source, page.dir, page.name)
-          newpage.pager = pager
-          newpage.dir = File.join(page.dir, paginate_path(site, num_page))
-          site.pages << newpage
-        else
-          page.pager = pager
+      # Generate paginated pages if necessary.
+      #
+      # site - The Site.
+      #
+      # Returns nothing.
+      def generate(site)
+        site.pages.dup.each do |page|
+          paginate(site, page) if Pager.pagination_enabled?(site.config, page.name)
         end
       end
-    end
 
-    private
-      def paginate_path(site, num_page)
-        format = site.config['paginate_path']
-        format.sub(':num', num_page.to_s)
+      # Paginates the blog's posts. Renders the index.html file into paginated
+      # directories, e.g.: page2/index.html, page3/index.html, etc and adds more
+      # site-wide data.
+      #
+      # site - The Site.
+      # page - The index.html Page that requires pagination.
+      #
+      # {"paginator" => { "page" => <Number>,
+      #                   "per_page" => <Number>,
+      #                   "posts" => [<Post>],
+      #                   "total_posts" => <Number>,
+      #                   "total_pages" => <Number>,
+      #                   "previous_page" => <Number>,
+      #                   "next_page" => <Number> }}
+      def paginate(site, page)
+        all_posts = site.site_payload['site']['posts']
+        pages = Pager.calculate_pages(all_posts, site.config['paginate'].to_i)
+        (1..pages).each do |num_page|
+          pager = Pager.new(site.config, num_page, all_posts, pages)
+          if num_page > 1
+            newpage = Page.new(site, site.source, page.dir, page.name)
+            newpage.pager = pager
+            newpage.dir = File.join(page.dir, paginate_path(site, num_page))
+            site.pages << newpage
+          else
+            page.pager = pager
+          end
+        end
       end
+
+      private
+        def paginate_path(site, num_page)
+          format = site.config['paginate_path']
+          format.sub(':num', num_page.to_s)
+        end
+    end
   end
 
   class Pager
@@ -115,5 +116,4 @@ module Jekyll
       }
     end
   end
-
 end

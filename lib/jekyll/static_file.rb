@@ -1,5 +1,4 @@
 module Jekyll
-
   class StaticFile
     # The cache of last modification times [path] -> mtime.
     @@mtimes = Hash.new
@@ -68,5 +67,4 @@ module Jekyll
       nil
     end
   end
-
 end

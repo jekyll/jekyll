@@ -27,7 +27,7 @@ command :build do |c|
   c.action do |args, options|
     options.defaults :serving => false
     options = Jekyll.configuration(options.__hash__)
-    Jekyll::BuildCommand.process(options)
+    Jekyll::Commands::Build.process(options)
   end
 end
 
@@ -49,8 +49,8 @@ command :serve do |c|
                     :serving => true
 
     options = Jekyll.configuration(options.__hash__)
-    Jekyll::BuildCommand.process(options)
-    Jekyll::ServeCommand.process(options)
+    Jekyll::Commands::Build.process(options)
+    Jekyll::Commands::Serve.process(options)
   end
 end
 
@@ -65,6 +65,6 @@ command :import do |c|
   c.option '--host', 'Host address to use when migrating'
 
   c.action do |args, options|
-    Jekyll::MigrateCommand.process(args.first, options)
+    Jekyll::Commands::Migrate.process(args.first, options)
   end
 end

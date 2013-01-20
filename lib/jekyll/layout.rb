@@ -1,5 +1,4 @@
 module Jekyll
-
   class Layout
     include Convertible
 
@@ -40,5 +39,4 @@ module Jekyll
       self.ext = File.extname(name)
     end
   end
-
 end

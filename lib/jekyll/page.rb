@@ -1,5 +1,4 @@
 module Jekyll
-
   class Page
     include Convertible
 
@@ -161,7 +160,5 @@ module Jekyll
     def index?
       basename == 'index'
     end
-
   end
-
 end

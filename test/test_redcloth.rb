@@ -4,7 +4,7 @@ class TestRedCloth < Test::Unit::TestCase
 
   context "RedCloth default (no explicit config) hard_breaks enabled" do
     setup do
-      @textile = TextileConverter.new
+      @textile = Converters::Textile.new
     end
     
     should "preserve single line breaks in HTML output" do 
@@ -17,7 +17,7 @@ class TestRedCloth < Test::Unit::TestCase
       config = {
         'redcloth'      => {}
         }
-      @textile = TextileConverter.new config
+      @textile = Converters::Textile.new config
     end
     
     should "preserve single line breaks in HTML output" do 
@@ -32,7 +32,7 @@ class TestRedCloth < Test::Unit::TestCase
           'hard_breaks' => true # default
         }
       }
-      @textile = TextileConverter.new config
+      @textile = Converters::Textile.new config
     end
     
     should "preserve single line breaks in HTML output" do 
@@ -47,7 +47,7 @@ class TestRedCloth < Test::Unit::TestCase
           'hard_breaks' => false
         }
       }
-      @textile = TextileConverter.new config
+      @textile = Converters::Textile.new config
     end
 
     should "not generate break tags in HTML output" do
@@ -62,7 +62,7 @@ class TestRedCloth < Test::Unit::TestCase
           'no_span_caps' => false
         }
       }
-      @textile = TextileConverter.new config
+      @textile = Converters::Textile.new config
     end
     should "generate span tags around capitalized words" do
       assert_equal "<p><span class=\"caps\">NSC</span></p>", @textile.convert("NSC").strip
@@ -76,7 +76,7 @@ class TestRedCloth < Test::Unit::TestCase
           'no_span_caps' => true
         }
       }
-      @textile = TextileConverter.new config
+      @textile = Converters::Textile.new config
     end
 
     should "not generate span tags around capitalized words" do
