@@ -23,6 +23,7 @@ command :build do |c|
 
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
+  c.option '--drafts', 'Render posts in the _drafts folder'
 
   c.action do |args, options|
     options.defaults :serving => false

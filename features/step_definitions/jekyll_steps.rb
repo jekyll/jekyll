@@ -50,7 +50,9 @@ Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
 
-Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, table|
+Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |type, direction, folder, table|
+  subdir = "_#{type}s"
+
   table.hashes.each do |post|
     date = Date.strptime(post['date'], '%m/%d/%Y').strftime('%Y-%m-%d')
     title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
@@ -61,7 +63,7 @@ Given /^I have the following posts?(?: (.*) "(.*)")?:$/ do |direction, folder, t
       after = folder || '.'
     end
 
-    path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{post['type'] || 'textile'}")
+    path = File.join(before || '.', subdir, after || '.', "#{date}-#{title}.#{post['type'] || 'textile'}")
 
     matter_hash = {}
     %w(title layout tag tags category categories published author).each do |key|
@@ -115,6 +117,10 @@ end
 
 When /^I run jekyll$/ do
   run_jekyll
+end
+
+When /^I run jekyll with drafts$/ do
+  run_jekyll(:drafts => true)
 end
 
 When /^I debug jekyll$/ do
