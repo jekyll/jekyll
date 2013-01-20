@@ -5,7 +5,7 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts, :show_drafts,
                   :keep_files
 
     attr_accessor :converters, :generators
@@ -26,6 +26,7 @@ module Jekyll
       self.exclude         = config['exclude'] || []
       self.include         = config['include'] || []
       self.future          = config['future']
+      self.show_drafts     = config['drafts'] || nil
       self.limit_posts     = config['limit_posts'] || nil
       self.keep_files      = config['keep_files'] || []
 
@@ -136,7 +137,19 @@ module Jekyll
       base = File.join(self.source, dir)
       entries = Dir.chdir(base) { filter_entries(Dir.entries('.')) }
 
-      self.read_posts(dir)
+      self.read_posts(dir,'_posts')
+
+      if self.show_drafts
+        self.read_posts(dir,'_drafts')
+      end
+
+      self.posts.sort!
+
+      # limit the posts if :limit_posts option is set
+      if limit_posts
+        limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
+        self.posts = self.posts[-limit, limit]
+      end
 
       entries.each do |f|
         f_abs = File.join(base, f)
@@ -160,18 +173,19 @@ module Jekyll
     # Read all the files in <source>/<dir>/_posts and create a new Post
     # object with each one.
     #
-    # dir - The String relative path of the directory to read.
+    # dir    - The String relative path of the directory to read.
+    # subdir - The String relative path of the subdirectory to read.
     #
     # Returns nothing.
-    def read_posts(dir)
-      base = File.join(self.source, dir, '_posts')
+    def read_posts(dir, subdir)
+      base = File.join(self.source, dir, subdir)
       return unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
         if Post.valid?(f)
-          post = Post.new(self, self.source, dir, f)
+          post = Post.new(self, self.source, dir, f, subdir)
 
           if post.published && (self.future || post.date <= self.time)
             self.posts << post
@@ -179,14 +193,6 @@ module Jekyll
             post.tags.each { |c| self.tags[c] << post }
           end
         end
-      end
-
-      self.posts.sort!
-
-      # limit the posts if :limit_posts option is set
-      if limit_posts
-        limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
-        self.posts = self.posts[-limit, limit]
       end
     end
 
