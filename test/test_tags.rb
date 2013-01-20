@@ -11,7 +11,7 @@ class TestTags < Test::Unit::TestCase
     site = Site.new(Jekyll.configuration)
 
     if override['read_posts']
-      site.read_posts('')
+      site.read_posts('', '_posts')
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
