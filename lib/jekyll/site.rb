@@ -1,7 +1,6 @@
 require 'set'
 
 module Jekyll
-
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,

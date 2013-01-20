@@ -1,7 +1,6 @@
 require 'uri'
 
 module Jekyll
-
   module Filters
     # Convert a Textile string into HTML output.
     #
@@ -124,6 +123,5 @@ module Jekyll
         "#{array[0...-1].join(', ')}, #{connector} #{array[-1]}"
       end
     end
-
   end
 end
