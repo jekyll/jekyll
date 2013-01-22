@@ -1,6 +1,7 @@
-require 'simplecov'
-SimpleCov.start do
-  add_filter "/test/"
+if RUBY_VERSION > '1.9' && ENV["COVERAGE"] == "true"
+  require 'simplecov'
+  require 'simplecov-gem-adapter'
+  SimpleCov.start('gem')
 end
 
 require 'rubygems'
