@@ -29,6 +29,13 @@ class TestConvertible < Test::Unit::TestCase
       assert_match(/#{File.join(@base, name)}/, out)
     end
 
+    should "not allow ruby objects in yaml" do
+      out = capture_stdout do
+        @convertible.read_yaml(@base, 'exploit_front_matter.erb')
+      end
+      assert_no_match /undefined class\/module DoesNotExist/, out
+    end
+
     if RUBY_VERSION >= '1.9.2'
       should "not parse if there is encoding error in file" do
         name = 'broken_front_matter3.erb'

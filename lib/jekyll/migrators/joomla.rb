@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sequel'
 require 'fileutils'
-require 'yaml'
+require 'safe_yaml'
 
 # NOTE: This migrator is made for Joomla 1.5 databases.
 # NOTE: This converter requires Sequel and the MySQL gems.

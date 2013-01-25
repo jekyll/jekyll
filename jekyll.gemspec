@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('kramdown', "~> 0.13.4")
   s.add_runtime_dependency('pygments.rb', "~> 0.3.2")
   s.add_runtime_dependency('commander', "~> 4.1.3")
+  s.add_runtime_dependency('safe_yaml', "~> 0.4")
 
   s.add_development_dependency('rake', "~> 0.9")
   s.add_development_dependency('rdoc', "~> 3.11")

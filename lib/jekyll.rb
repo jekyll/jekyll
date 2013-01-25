@@ -18,7 +18,7 @@ require 'rubygems'
 # stdlib
 require 'fileutils'
 require 'time'
-require 'yaml'
+require 'safe_yaml'
 require 'English'
 
 # 3rd party
