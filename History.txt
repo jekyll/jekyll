@@ -12,6 +12,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Safe YAML plugin to prevent vulnerability (#777)
     * Add SVG support to Jekyll/WEBrick. (#407, #406)
     * Prevent custom destination from causing continuous regen (#528)
   * Site Enhancements
