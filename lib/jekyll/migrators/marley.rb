@@ -1,4 +1,4 @@
-require 'yaml'
+require 'safe_yaml'
 require 'fileutils'
 
 module Jekyll
