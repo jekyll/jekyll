@@ -11,6 +11,7 @@ module Jekyll
 
       mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
       mime_types.store 'js', 'application/javascript'
+      mime_types.store 'svg', 'image/svg+xml'
 
       s = HTTPServer.new(
         :Port => options['port'],
