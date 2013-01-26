@@ -47,6 +47,8 @@ module Jekyll
 
       source = options['source']
       destination = options['destination']
+      # Needed to check if changed when regenrating.
+      config_file = File.join(source, '_config.yml') 
 
       puts "Auto-Regenerating enabled: #{source} -> #{destination}"
 
@@ -56,7 +58,13 @@ module Jekyll
 
       dw.add_observer do |*args|
         t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+        files_changed =  args.collect {|event| event.path }
+        if files_changed.include? (config_file)
+          updated_options = Jekyll.merge_with_config_file(options)
+          site.update_configuration(updated_options)
+        end   
         puts "[#{t}] regeneration: #{args.size} files changed"
+             
         site.process
       end
 

@@ -129,6 +129,42 @@ module Jekyll
 
     # Get configuration from <source>/_config.yml
     config_file = File.join(source, '_config.yml')
+    config = self.read_config_file(config_file)
+
+
+    # Merge DEFAULTS < _config.yml < override
+    Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
+  end
+
+  # Public: Regenerate a Jekyll configuration Hash by merging 
+  # the passed options with anything suppied in _config.yml, in this order.
+  #
+  # options - A Hash of config directives that was read when the site was
+  # initialized.
+  #
+  # Returns the updated configuration Hash.
+  def self.merge_with_config_file(options)
+    # Convert any symbol keys to strings and remove the old key/values
+    override = options.reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
+
+    # _config.yml may override default source location, but until
+    # then, we need to know where to look for _config.yml
+    source = options['source'] || Jekyll::DEFAULTS['source']
+
+    # Get configuration from <source>/_config.yml
+    config_file = File.join(source, '_config.yml')
+    config = self.read_config_file(config_file)
+
+    options.deep_merge(config)
+  end
+
+  # Private: Read options from the _config.yml file.
+  #
+  # config_file - the _config.yml. 
+  #
+  # Returns the configuration Hash from _config.yml or an empty hash if errors
+  # are encountered.
+  def self.read_config_file(config_file)
     begin
       config = YAML.load_file(config_file)
       raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
@@ -139,8 +175,6 @@ module Jekyll
       $stderr.puts "\t" + err.to_s
       config = {}
     end
-
-    # Merge DEFAULTS < _config.yml < override
-    Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
+    config
   end
 end

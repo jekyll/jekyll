@@ -14,6 +14,17 @@ module Jekyll
     #
     # config - A Hash containing site configuration details.
     def initialize(config)
+      self.read_config_data(config)
+      self.reset
+      self.setup
+    end
+
+    # Private: Read site configuration. 
+    #
+    # config - A Hash containing site configuration details.
+    #
+    # Returns nothing.
+    def read_config_data(config)
       self.config          = config.clone
 
       self.safe            = config['safe']
@@ -28,9 +39,15 @@ module Jekyll
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
       self.keep_files      = config['keep_files'] || []
+    end
 
-      self.reset
-      self.setup
+    # Public: Update site configuration.
+    #
+    # updated_options - A Hash containing updated site configuration. 
+    #
+    # Returns nothing.
+    def update_configuration(updated_options)
+      self.read_config_data(updated_options)
     end
 
     # Public: Read, process, and write this Site to output.
