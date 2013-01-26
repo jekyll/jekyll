@@ -128,6 +128,18 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with unspecified (date) style and a numeric category" do
+          setup do
+            @post.categories << 2013
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/2013/2008/09/09/foo-bar.html", @post.url
+          end
+        end
+
         context "with unspecified layout" do
           setup do
             file = '2013-01-12-no-layout.textile'
