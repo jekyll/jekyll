@@ -22,7 +22,7 @@ command :new do |c|
   c.description = 'Creates a new Jekyll site scaffold in PATH'
 
   c.action do |args, options|
-    Jekyll::NewCommand.process(args)
+    Jekyll::Commands::New.process(args)
   end
 end
 
