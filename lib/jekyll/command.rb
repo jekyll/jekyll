@@ -1,5 +1,4 @@
 module Jekyll
-
   class Command
     def self.globs(source)
       Dir.chdir(source) do
@@ -10,5 +9,4 @@ module Jekyll
       end
     end
   end
-
 end

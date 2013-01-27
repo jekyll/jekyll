@@ -1,5 +1,4 @@
 module Jekyll
-
   class Post
     include Comparable
     include Convertible
@@ -281,5 +280,4 @@ module Jekyll
       end
     end
   end
-
 end
