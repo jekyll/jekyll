@@ -63,6 +63,7 @@ module Jekyll
 
     'future'        => true,           # remove and make true just default
     'pygments'      => false,          # remove and make true just default
+    'preview'       => false,
 
     'markdown'      => 'maruku',       # no longer a command option
     'permalink'     => 'date',         # no longer a command option

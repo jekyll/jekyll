@@ -5,7 +5,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :keep_files
+                  :keep_files, :preview
 
     attr_accessor :converters, :generators
 
@@ -16,6 +16,7 @@ module Jekyll
       self.config          = config.clone
 
       self.safe            = config['safe']
+      self.preview         = config['preview']
       self.source          = File.expand_path(config['source'])
       self.dest            = File.expand_path(config['destination'])
       self.plugins         = Array(config['plugins']).map { |d| File.expand_path(d) }
@@ -172,7 +173,7 @@ module Jekyll
         if Post.valid?(f)
           post = Post.new(self, self.source, dir, f)
 
-          if post.published && (self.future || post.date <= self.time)
+          if self.preview || (post.published && (self.future || post.date <= self.time))
             self.posts << post
             post.categories.each { |c| self.categories[c] << post }
             post.tags.each { |c| self.tags[c] << post }
