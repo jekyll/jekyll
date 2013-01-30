@@ -62,7 +62,6 @@ module Jekyll
     'keep_files'   => ['.git','.svn'],
 
     'future'        => true,           # remove and make true just default
-    'pygments'      => false,          # remove and make true just default
 
     'markdown'      => 'maruku',       # no longer a command option
     'permalink'     => 'date',         # no longer a command option

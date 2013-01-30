@@ -35,11 +35,7 @@ module Jekyll
       end
 
       def render(context)
-        if context.registers[:site].pygments
-          render_pygments(context, super)
-        else
-          render_codehighlighter(context, super)
-        end
+        render_pygments(context, super)
       end
 
       def render_pygments(context, code)
@@ -53,15 +49,6 @@ module Jekyll
         output = context["pygments_prefix"] + output if context["pygments_prefix"]
         output = output + context["pygments_suffix"] if context["pygments_suffix"]
         output
-      end
-
-      def render_codehighlighter(context, code)
-        #The div is required because RDiscount blows ass
-        <<-HTML
-  <div>
-    <pre><code class='#{@lang}'>#{h(code).strip}</code></pre>
-  </div>
-        HTML
       end
 
       def add_code_tags(code, lang)

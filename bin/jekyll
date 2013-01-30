@@ -27,7 +27,6 @@ command :build do |c|
   c.option '--markdown [ENGINE]', 'Uses [ENGINE] instead of Maruku for Markdown parsing (Options: rdiscount, kramdown, redcarpet)'
   c.option '--paginate [PER_PAGE]', 'Splits your posts up over multiple subdirectories called "page2", "page3", ... "pageN"'
   c.option '--permalink [STYLE]', 'Uses permalink style, [style], instead of default. See documentation for more details.'
-  c.option '--pygments', 'Enables highlight tag with Pygments'
   c.option '--url', 'Sets site.url, useful for environment switching'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
 
@@ -48,7 +47,6 @@ command :serve do |c|
   c.option '--markdown [ENGINE]', 'Uses [ENGINE] instead of Maruku for Markdown parsing (Options: rdiscount, kramdown, redcarpet)'
   c.option '--paginate [PER_PAGE]', 'Splits your posts up over multiple subdirectories called "page2", "page3", ... "pageN"'
   c.option '--permalink [STYLE]', 'Uses permalink style, [style], instead of default. See documentation for more details.'
-  c.option '--pygments', 'Enables highlight tag with Pygments'
   c.option '--url', 'Sets site.url, useful for environment switching'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
 
