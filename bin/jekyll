@@ -71,6 +71,6 @@ command :import do |c|
       puts "You must install the 'jekyll-import' gem before continuing."
       exit(-1)
     end
-    Jekyll::Commands::Migrate.process(args.first, options)
+    Jekyll::Commands::Import.process(args.first, options)
   end
 end
