@@ -35,11 +35,7 @@ module Jekyll
       end
 
       def render(context)
-        if context.registers[:site].pygments
-          render_pygments(context, super)
-        else
-          render_codehighlighter(context, super)
-        end
+        render_pygments(context, super)
       end
 
       def render_pygments(context, code)
@@ -55,21 +51,11 @@ module Jekyll
         output
       end
 
-      def render_codehighlighter(context, code)
-        #The div is required because RDiscount blows ass
-        <<-HTML
-  <div>
-    <pre><code class='#{@lang}'>#{h(code).strip}</code></pre>
-  </div>
-        HTML
-      end
-
       def add_code_tags(code, lang)
         # Add nested <code> tags to code blocks
         code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
         code = code.sub(/<\/pre>/,"</code></pre>")
       end
-
     end
   end
 end

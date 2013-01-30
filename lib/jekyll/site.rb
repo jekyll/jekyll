@@ -20,7 +20,6 @@ module Jekyll
       self.dest            = File.expand_path(config['destination'])
       self.plugins         = Array(config['plugins']).map { |d| File.expand_path(d) }
       self.lsi             = config['lsi']
-      self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
       self.include         = config['include'] || []
