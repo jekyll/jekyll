@@ -56,7 +56,6 @@ module Jekyll
         code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
         code = code.sub(/<\/pre>/,"</code></pre>")
       end
-
     end
   end
 end
