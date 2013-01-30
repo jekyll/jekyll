@@ -5,6 +5,7 @@ if RUBY_VERSION > '1.9' && ENV["COVERAGE"] == "true"
 end
 
 require 'rubygems'
+require 'test/unit'
 gem 'RedCloth', '>= 4.2.1'
 
 require 'jekyll'
