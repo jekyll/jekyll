@@ -23,6 +23,7 @@ command :build do |c|
 
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
+  c.option '--preview', 'Enable preview mode'
 
   c.action do |args, options|
     options.defaults :serving => false
@@ -37,6 +38,7 @@ command :serve do |c|
 
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
+  c.option '--preview', 'Enable preview mode'
 
   c.option '-p', '--port [PORT]', 'Port to listen on'
   c.option '-h', '--host [HOST]', 'Host to bind to'
