@@ -11,9 +11,8 @@ require 'safe_yaml'
 
 module Jekyll
   module Drupal
-    # Reads a MySQL database via Sequel and creates a post file for each post
-    # in wp_posts that has post_status = 'publish'. This restriction is made
-    # because 'draft' posts are not guaranteed to have valid dates.
+    # Reads a MySQL database via Sequel and creates a post file for each story 
+    # and blog node in table node.
     QUERY = "SELECT n.nid, \
                     n.title, \
                     nr.body, \
