@@ -27,7 +27,35 @@ module Jekyll
       end
     end
 
-    def self.process(email, pass, api_token, blog = 'primary')
+    def self.fetch_images(directory, imgs)
+      def self.fetch_one(url, limit = 10)
+        raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+        response = Net::HTTP.get_response(URI.parse(url))
+        case response
+        when Net::HTTPSuccess     then response.body
+        when Net::HTTPRedirection then self.fetch_one(response['location'], limit - 1)
+        else
+          response.error!
+        end
+      end
+
+      FileUtils.mkdir_p directory
+      urls = Array.new
+      imgs.each do |img|
+        fullurl = img["full"]["url"]
+        uri = URI.parse(fullurl)
+        imgname = uri.path.split("/")[-1]
+        imgdata = self.fetch_one(fullurl)
+        open(directory + "/" + imgname, "wb") do |file|
+          file.write imgdata
+        end
+        urls.push(directory + "/" + imgname)
+      end
+
+      return urls
+    end
+
+    def self.process(email, pass, api_token, blog = 'primary', base_path = '/')
       @email, @pass, @api_token = email, pass, api_token
       FileUtils.mkdir_p "_posts"
 
@@ -41,7 +69,23 @@ module Jekyll
           date = Date.parse(post["display_date"])
           content = post["body_html"]
           published = !post["is_private"]
-          name = "%02d-%02d-%02d-%s.html" % [date.year, date.month, date.day, slug]
+          basename = "%02d-%02d-%02d-%s" % [date.year, date.month, date.day, slug]
+          name = basename + '.html'
+
+          # Images:
+          post_imgs = post["media"]["images"]
+          if post_imgs.any?
+            img_dir = "imgs/%s" % basename
+            img_urls = self.fetch_images(img_dir, post_imgs)
+
+            img_urls.map! do |url|
+              '<li><img src="' + base_path + url + '"></li>'
+            end
+            imgcontent = "<ol>\n" + img_urls.join("\n") + "</ol>\n"
+
+            # filter out "posterous-content", replacing with imgs:
+            content = content.sub(/\<p\>\[\[posterous-content:[^\]]+\]\]\<\/\p\>/, imgcontent)
+          end
 
           # Get the relevant fields as a hash, delete empty fields and convert
           # to YAML for the header
