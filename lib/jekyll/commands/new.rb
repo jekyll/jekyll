@@ -1,4 +1,5 @@
 require 'yaml'
+require 'erb'
 
 module Jekyll
   module Commands
@@ -8,31 +9,16 @@ module Jekyll
         path = File.expand_path(args.join(" "), Dir.pwd)
         template_site = File.expand_path("../../site_template", File.dirname(__FILE__))
         FileUtils.mkdir_p path
-        FileUtils.cp_r Dir["#{template_site}/*"], path
+        sample_files = Dir["#{template_site}/**/*"].reject {|f| File.extname(f) == ".erb"}
+        FileUtils.cp_r sample_files, path
         File.open(File.expand_path(self.initialized_post_name, path), "w") do |f|
-          f.write(self.scaffold_post_content)
+          f.write(self.scaffold_post_content(template_site))
         end
         puts "New jekyll site installed in #{path}."
       end
 
-      def self.scaffold_post_content
-        [
-          { "layout" => "post", "title" => "Welcome to Jekyll!", "date" => Time.now.strftime('%Y-%m-%d %H:%M:%S'), "categories" => %w(jekyll update) }.to_yaml + "---",
-          "You'll find this post in your `_posts` directory - edit this post and re-build (or run with the `-w` switch) to see your changes!",
-          "To add new posts, simply add a file in the `_posts` directory that follows the convention: YYYY-MM-DD-name-of-post.ext.",
-          "Jekyll also offers powerful support for code snippets:",
-          [
-            "{% highlight ruby %}",
-            "def print_hi(name)",
-            '  puts "Hi, #{name}"',
-            "end",
-            "print_hi('Tom')"
-            "#=> prints 'Hi, Tom' to STDOUT."
-            "{% endhighlight %}"
-          ].join("#{$/}"),
-          "Check out the [Jeyll docs][jekyll] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll's GitHub repo][jekyll-gh].",
-          "[jekyll-gh]: https://github.com/mojombo/github\n[jekyll]:    http://jekyllrb.com"
-        ].join("#{$/*2}")
+      def self.scaffold_post_content(template_site)
+        ERB.new(File.read(File.expand_path("_posts/0000-00-00-sample_post.markdown.erb", template_site))).result
       end
 
       # Internal: Gets the filename of the sample post to be created
