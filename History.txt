@@ -2,6 +2,7 @@
   * Major Enhancements
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Minor Enhancements
+    * Updated gem versions for Kramdown, Rake, Shoulda, Cucumber, and RedCarpet. (#744)
     * Refactored jekyll subcommands into Jekyll::Commands submodule, which now contains them (#768)
     * Rescue from import errors in Wordpress.com migrator (#671)
     * Massively accelerate LSI performance (#664)
