@@ -22,6 +22,7 @@ command :build do |c|
   c.description = 'Build your site with the option of auto-renegeration'
 
   c.option '--future', 'Publishes posts with a future date'
+  c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
 
@@ -37,6 +38,7 @@ command :serve do |c|
   c.description = 'Serve your site locally with the option of auto-regeneration'
 
   c.option '--future', 'Publishes posts with a future date'
+  c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
 
