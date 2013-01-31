@@ -11,7 +11,7 @@ Feature: Draft Posts
       | Recipe | 3/27/2009 | default | Not baked yet. |
     When I run jekyll with drafts
     Then the _site directory should exist
-	And I should see "Not baked yet." in "_site/recipe.html"
+    And I should see "Not baked yet." in "_site/recipe.html"
 
   Scenario: Don't preview a draft
     Given I have a configuration file with "permalink" set to "none"
@@ -22,4 +22,4 @@ Feature: Draft Posts
       | Recipe | 3/27/2009 | default | Not baked yet. |
     When I run jekyll
     Then the _site directory should exist
-	And the "_site/recipe.html" file should not exist
+    And the "_site/recipe.html" file should not exist
