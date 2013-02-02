@@ -2,7 +2,7 @@
 require 'fileutils'
 require 'rubygems'
 require 'sequel'
-require 'yaml'
+require 'safe_yaml'
 
 module Jekyll
   module Typo

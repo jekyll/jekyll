@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'hpricot'
 require 'fileutils'
-require 'yaml'
+require 'safe_yaml'
 require 'time'
 
 module Jekyll
@@ -19,7 +19,7 @@ module Jekyll
         permalink_title = item.at('wp:post_name').inner_text
         # Fallback to "prettified" title if post_name is empty (can happen)
         if permalink_title == ""
-          permalink_title = title.downcase.split.join('-')
+          permalink_title = sluggify(title)
         end
 
         date = Time.parse(item.at('wp:post_date').inner_text)
@@ -52,11 +52,19 @@ module Jekyll
           'meta'   => metas
         }
 
-        FileUtils.mkdir_p "_#{type}s"
-        File.open("_#{type}s/#{name}", "w") do |f|
-          f.puts header.to_yaml
-          f.puts '---'
-          f.puts item.at('content:encoded').inner_text
+        begin
+          FileUtils.mkdir_p "_#{type}s"
+          File.open("_#{type}s/#{name}", "w") do |f|
+            f.puts header.to_yaml
+            f.puts '---'
+            f.puts item.at('content:encoded').inner_text
+          end
+        rescue => e
+          puts "Couldn't import post!"
+          puts "Title: #{title}"
+          puts "Name/Slug: #{name}\n"
+          puts "Error: #{e.message}"
+          next
         end
 
         import_count[type] += 1
@@ -65,6 +73,10 @@ module Jekyll
       import_count.each do |key, value|
         puts "Imported #{value} #{key}s"
       end
+    end
+
+    def self.sluggify(title)
+      title.downcase.split.join('-').gsub('/','-')
     end
   end
 end

@@ -97,6 +97,7 @@ module Jekyll
       date = Date.parse(post['date']).to_s
       title = Nokogiri::HTML(title).text
       slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+      slug = slug.slice(0..200) if slug.length > 200
       {
         :name => "#{date}-#{slug}.#{format}",
         :header => {
@@ -115,13 +116,12 @@ module Jekyll
     # site/posts to get the correct permalink format.
     def self.rewrite_urls_and_redirects(posts)
       site = Jekyll::Site.new(Jekyll.configuration({}))
-      dir = File.join(File.dirname(__FILE__), "..")
       urls = Hash[posts.map { |post|
         # Create an initial empty file for the post so that
         # we can instantiate a post object.
         File.open("_posts/tumblr/#{post[:name]}", "w")
         tumblr_url = URI.parse(post[:slug]).path
-        jekyll_url = Jekyll::Post.new(site, dir, "", "tumblr/" + post[:name]).url
+        jekyll_url = Jekyll::Post.new(site, Dir.pwd, "", "tumblr/" + post[:name]).url
         redirect_dir = tumblr_url.sub(/\//, "") + "/"
         FileUtils.mkdir_p redirect_dir
         File.open(redirect_dir + "index.html", "w") do |f|

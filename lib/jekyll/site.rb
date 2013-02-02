@@ -1,11 +1,11 @@
 require 'set'
 
 module Jekyll
-
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :keep_files
 
     attr_accessor :converters, :generators
 
@@ -26,6 +26,7 @@ module Jekyll
       self.include         = config['include'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.keep_files      = config['keep_files'] || []
 
       self.reset
       self.setup
@@ -69,6 +70,12 @@ module Jekyll
     # Returns nothing.
     def setup
       require 'classifier' if self.lsi
+
+      # Check that the destination dir isn't the source dir or a directory
+      # parent to the source dir.
+      if self.source =~ /^#{self.dest}/
+        raise FatalException.new "Destination directory cannot be or contain the Source directory."
+      end
 
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
@@ -217,7 +224,11 @@ module Jekyll
       # all files and directories in destination, including hidden ones
       dest_files = Set.new
       Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-        dest_files << file unless file =~ /\/\.{1,2}$/
+        if self.keep_files.length > 0
+          dest_files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
+        else
+          dest_files << file unless file =~ /\/\.{1,2}$/
+        end
       end
 
       # files to be written
@@ -238,8 +249,19 @@ module Jekyll
       files.merge(dirs)
 
       obsolete_files = dest_files - files
-
       FileUtils.rm_rf(obsolete_files.to_a)
+    end
+
+    # Private: creates a regular expression from the keep_files array
+    # 
+    # Examples
+    #   ['.git','.svn'] creates the following regex: /\/(\.git|\/.svn)/
+    #
+    # Returns the regular expression
+    def keep_file_regex
+      or_list = self.keep_files.join("|")
+      pattern = "\/(#{or_list.gsub(".", "\.")})"
+      Regexp.new pattern
     end
 
     # Write static files, pages, and posts.
@@ -311,11 +333,11 @@ module Jekyll
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries)
-      entries = entries.reject do |e|
-        unless self.include.include?(e)
+      entries.reject do |e|
+        unless self.include.glob_include?(e)
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||
-          self.exclude.include?(e) ||
+          self.exclude.glob_include?(e) ||
           File.symlink?(e)
         end
       end

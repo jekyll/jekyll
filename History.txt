@@ -1,4 +1,35 @@
 == HEAD
+  * Major Enhancements
+    * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
+  * Minor Enhancements
+    * Updated gem versions for Kramdown, Rake, Shoulda, Cucumber, and RedCarpet. (#744)
+    * Refactored jekyll subcommands into Jekyll::Commands submodule, which now contains them (#768)
+    * Rescue from import errors in Wordpress.com migrator (#671)
+    * Massively accelerate LSI performance (#664)
+    * Truncate post slugs when importing from Tumblr (#496)
+    * Add glob support to include, exclude option (#743)
+    * Layout of Page or Post defaults to 'page' or 'post', respectively (#580)
+    * "Keep files" feature (#685)
+    * Output full path & name for files that don't parse (#745)
+    * Add source and destination directory protection (#535)
+    * Better YAML error message (#718)
+  * Bug Fixes
+    * Tumblr Migrator: finds _posts dir correctly, fixes truncation of long
+      post names (#775)
+    * Force Categories to be Strings (#767)
+    * Safe YAML plugin to prevent vulnerability (#777)
+    * Add SVG support to Jekyll/WEBrick. (#407, #406)
+    * Prevent custom destination from causing continuous regen (#528)
+  * Site Enhancements
+    * Bring site into master branch with better preview/deploy (#709)
+    * Redesigned site (#583)
+  * Development fixes
+    * Added script/bootstrap (#776)
+    * Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version
+      of greater than 1.9 (#771)
+    * Switch to Simplecov for coverage report (#765)
+
+== 0.12.0 / 2012-12-22
   * Minor Enhancements
     * Add ability to explicitly specify included files (#261)
     * Add --default-mimetype option (#279)
@@ -7,12 +38,16 @@
     * Allow multiple plugin dirs to be specified (#438)
     * Inline TOC token support for RDiscount (#333)
     * Add the option to specify the paginated url format (#342)
+    * Swap out albino for pygments.rb (#569)
+    * Support Redcarpet 2 and fenced code blocks (#619)
+    * Better reporting of Liquid errors (#624)
   * Bug Fixes
     * Allow some special characters in highlight names
     * URL escape category names in URL generation (#360)
     * Fix error with limit_posts (#442)
     * Properly select dotfile during directory scan (#363, #431, #377)
     * Allow setting of Kramdown smart_quotes (#482)
+    * Ensure front-matter is at start of file (#562)
 
 == 0.11.2 / 2011-12-27
   * Bug Fixes

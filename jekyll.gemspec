@@ -4,8 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '0.11.2'
-  s.date              = '2011-12-27'
+  s.version           = '0.12.0'
+  s.license           = 'MIT'
+  s.date              = '2012-12-22'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -26,21 +27,32 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('directory_watcher', "~> 1.1")
   s.add_runtime_dependency('maruku', "~> 0.5")
-  s.add_runtime_dependency('kramdown', "~> 0.13.4")
-  s.add_runtime_dependency('pygments.rb', "~> 0.2.12")
+  s.add_runtime_dependency('kramdown', "~> 0.14.1")
+  s.add_runtime_dependency('pygments.rb', "~> 0.3.2")
+  s.add_runtime_dependency('commander', "~> 4.1.3")
+  s.add_runtime_dependency('safe_yaml', "~> 0.4")
 
-  s.add_development_dependency('rake', "~> 0.9")
+  s.add_development_dependency('rake', "~> 10.0.3")
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('redgreen', "~> 1.2")
-  s.add_development_dependency('shoulda', "~> 2.11")
+  s.add_development_dependency('shoulda', "~> 3.3.2")
   s.add_development_dependency('rr', "~> 1.0")
-  s.add_development_dependency('cucumber', "1.1")
+  s.add_development_dependency('cucumber', "~> 1.2.1")
   s.add_development_dependency('RedCloth', "~> 4.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
-  s.add_development_dependency('redcarpet', "~> 1.9")
-  
+  s.add_development_dependency('redcarpet', "~> 2.2.2")
+  s.add_development_dependency('launchy', "~> 2.1.2")
+  s.add_development_dependency('simplecov', "~> 0.7")
+  s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
+  # migrator dependencies:
+  s.add_development_dependency('sequel', "~> 3.42")
+  s.add_development_dependency('htmlentities', "~> 4.3")
+  s.add_development_dependency('hpricot', "~> 0.8")
+
   # = MANIFEST =
   s.files = %w[
+    .travis.yml
+    CONTRIBUTING.md
     Gemfile
     History.txt
     LICENSE
@@ -60,6 +72,10 @@ Gem::Specification.new do |s|
     features/support/env.rb
     jekyll.gemspec
     lib/jekyll.rb
+    lib/jekyll/command.rb
+    lib/jekyll/commands/build.rb
+    lib/jekyll/commands/migrate.rb
+    lib/jekyll/commands/serve.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
@@ -74,10 +90,12 @@ Gem::Specification.new do |s|
     lib/jekyll/migrators/csv.rb
     lib/jekyll/migrators/drupal.rb
     lib/jekyll/migrators/enki.rb
+    lib/jekyll/migrators/joomla.rb
     lib/jekyll/migrators/marley.rb
     lib/jekyll/migrators/mephisto.rb
     lib/jekyll/migrators/mt.rb
     lib/jekyll/migrators/posterous.rb
+    lib/jekyll/migrators/rss.rb
     lib/jekyll/migrators/textpattern.rb
     lib/jekyll/migrators/tumblr.rb
     lib/jekyll/migrators/typo.rb
@@ -90,6 +108,11 @@ Gem::Specification.new do |s|
     lib/jekyll/static_file.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
+    lib/jekyll/tags/post_url.rb
+    test/fixtures/broken_front_matter1.erb
+    test/fixtures/broken_front_matter2.erb
+    test/fixtures/broken_front_matter3.erb
+    test/fixtures/front_matter.erb
     test/helper.rb
     test/source/.htaccess
     test/source/_includes/sig.markdown
@@ -132,6 +155,7 @@ Gem::Specification.new do |s|
     test/source/z_category/_posts/2008-9-23-categories.textile
     test/suite.rb
     test/test_configuration.rb
+    test/test_convertible.rb
     test/test_core_ext.rb
     test/test_filters.rb
     test/test_generated_site.rb
@@ -141,9 +165,9 @@ Gem::Specification.new do |s|
     test/test_post.rb
     test/test_rdiscount.rb
     test/test_redcarpet.rb
+    test/test_redcloth.rb
     test/test_site.rb
     test/test_tags.rb
-    test/test_redcloth.rb
   ]
   # = MANIFEST =
 

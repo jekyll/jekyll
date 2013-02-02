@@ -1,0 +1,62 @@
+.content {
+  width: 978px;
+  margin: 0 auto;
+}
+.grid1, .grid2, .grid3, .grid4, .grid5, .grid6, .grid7, .grid8, .grid9, .grid10, .grid11 {
+  float: left;
+  display: inline;
+  margin-left: 30px;
+}
+.grid1 {
+  width: 54px;
+}
+.grid2 {
+  width: 138px;
+}
+.grid3 {
+  width: 222px;
+}
+.grid4 {
+  width: 306px;
+}
+.grid5 {
+  width: 390px;
+}
+.grid6 {
+  width: 474px;
+}
+.grid7 {
+  width: 558px;
+}
+.grid8 {
+  width: 642px;
+}
+.grid9 {
+  width: 726px;
+}
+.grid10 {
+  width: 810px;
+}
+.grid11 {
+  width: 894px;
+}
+.first {
+  margin-left: 0;
+  clear: left;
+}
+
+/* clearfix */
+.clear:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+* html .clear {
+  zoom: 1;
+} /* IE6 */
+*:first-child+html .clear {
+  zoom: 1;
+} /* IE7 */

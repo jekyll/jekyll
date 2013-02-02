@@ -8,3 +8,6 @@ _site/
 .bundle/
 .DS_Store
 bbin/
+gh-pages/
+site/_site/
+coverage

@@ -1,5 +1,4 @@
 module Jekyll
-
   class Converter < Plugin
     # Public: Get or set the pygments prefix. When an argument is specified,
     # the prefix will be set. If no argument is specified, the current prefix
@@ -46,5 +45,4 @@ module Jekyll
       self.class.pygments_suffix
     end
   end
-
 end

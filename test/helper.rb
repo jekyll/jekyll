@@ -1,4 +1,11 @@
+if RUBY_VERSION > '1.9' && ENV["COVERAGE"] == "true"
+  require 'simplecov'
+  require 'simplecov-gem-adapter'
+  SimpleCov.start('gem')
+end
+
 require 'rubygems'
+require 'test/unit'
 gem 'RedCloth', '>= 4.2.1'
 
 require 'jekyll'
@@ -30,5 +37,15 @@ class Test::Unit::TestCase
 
   def clear_dest
     FileUtils.rm_rf(dest_dir)
+  end
+
+  def capture_stdout
+    $old_stdout = $stdout
+    $stdout = StringIO.new
+    yield
+    $stdout.rewind
+    return $stdout.string
+  ensure
+    $stdout = $old_stdout
   end
 end

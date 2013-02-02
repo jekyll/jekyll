@@ -1,5 +1,7 @@
 h1. Jekyll
 
+!https://travis-ci.org/mojombo/jekyll.png?branch=master!:https://travis-ci.org/mojombo/jekyll
+
 By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!
 
 Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile or Markdown and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind "GitHub Pages":http://pages.github.com, which you can use to host your project's page or blog right here from GitHub.
@@ -22,19 +24,20 @@ h2. Diving In
 
 h2. Runtime Dependencies
 
-* RedCloth: Textile support (Ruby)
-* Liquid: Templating system (Ruby)
 * Classifier: Generating related posts (Ruby)
-* Maruku: Default markdown engine (Ruby)
 * Directory Watcher: Auto-regeneration of sites (Ruby)
+* Kramdown: Markdown-superset converter (Ruby)
+* Liquid: Templating system (Ruby)
+* Maruku: Default markdown engine (Ruby)
 * Pygments: Syntax highlighting (Python)
 
 h2. Developer Dependencies
 
-* Shoulda: Test framework (Ruby)
-* RR: Mocking (Ruby)
-* RedGreen: Nicer test output (Ruby)
 * RDiscount: Discount Markdown Processor (Ruby)
+* RedCloth: Textile support (Ruby)
+* RedGreen: Nicer test output (Ruby)
+* RR: Mocking (Ruby)
+* Shoulda: Test framework (Ruby)
 
 h2. License
 

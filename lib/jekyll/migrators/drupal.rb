@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sequel'
 require 'fileutils'
-require 'yaml'
+require 'safe_yaml'
 
 # NOTE: This converter requires Sequel and the MySQL gems.
 # The MySQL gem can be difficult to install on OS X. Once you have MySQL
