@@ -1,6 +1,7 @@
 == HEAD
   * Major Enhancements
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
+    * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
   * Minor Enhancements
     * Updated gem versions for Kramdown, Rake, Shoulda, Cucumber, and RedCarpet. (#744)
     * Refactored jekyll subcommands into Jekyll::Commands submodule, which now contains them (#768)
