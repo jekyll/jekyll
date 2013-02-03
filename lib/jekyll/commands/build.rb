@@ -23,7 +23,9 @@ module Jekyll
       def self.build(site, options)
         source = options['source']
         destination = options['destination']
-        puts "Building site: #{source} -> #{destination}"
+        puts  "            Source: #{source}"
+        puts  "       Destination: #{destination}"
+        print "      Generating... "
         begin
           site.process
         rescue Jekyll::FatalException => e
@@ -33,7 +35,7 @@ module Jekyll
           puts e.message
           exit(1)
         end
-        puts "Successfully generated site: #{source} -> #{destination}"
+        puts "done."
       end
 
       # Private: Watch for file changes and rebuild the site.
