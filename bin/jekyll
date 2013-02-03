@@ -53,6 +53,7 @@ command :serve do |c|
     Jekyll::Commands::Serve.process(options)
   end
 end
+alias_command :server, :serve
 
 command :import do |c|
   c.syntax = 'jekyll import <platform> [options]'
