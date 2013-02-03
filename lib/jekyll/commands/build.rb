@@ -50,7 +50,9 @@ module Jekyll
         source = options['source']
         destination = options['destination']
 
-        puts "Auto-Regenerating enabled: #{source} -> #{destination}"
+        puts "            Source: #{source}"
+        puts "       Destination: #{destination}"
+        puts " Auto-regeneration: enabled"
 
         dw = DirectoryWatcher.new(source)
         dw.interval = 1
@@ -58,15 +60,16 @@ module Jekyll
 
         dw.add_observer do |*args|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-          puts "[#{t}] regeneration: #{args.size} files changed"
+          print "      Regenerating: #{args.size} files at #{t} "
           site.process
+          puts  "...done."
         end
 
         dw.start
 
         unless options['serving']
           trap("INT") do
-            puts "Stopping auto-regeneration..."
+            puts "     Halting auto-regeneration."
             exit 0
           end
 
