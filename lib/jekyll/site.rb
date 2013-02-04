@@ -338,7 +338,7 @@ module Jekyll
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||
           self.exclude.glob_include?(e) ||
-          (File.symlink?(e) & self.safe)
+          (File.symlink?(e) && self.safe)
         end
       end
     end
