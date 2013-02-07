@@ -70,7 +70,6 @@ Gem::Specification.new do |s|
     lib/jekyll.rb
     lib/jekyll/command.rb
     lib/jekyll/commands/build.rb
-    lib/jekyll/commands/migrate.rb
     lib/jekyll/commands/serve.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
@@ -83,20 +82,6 @@ Gem::Specification.new do |s|
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
-    lib/jekyll/migrators/csv.rb
-    lib/jekyll/migrators/drupal.rb
-    lib/jekyll/migrators/enki.rb
-    lib/jekyll/migrators/joomla.rb
-    lib/jekyll/migrators/marley.rb
-    lib/jekyll/migrators/mephisto.rb
-    lib/jekyll/migrators/mt.rb
-    lib/jekyll/migrators/posterous.rb
-    lib/jekyll/migrators/rss.rb
-    lib/jekyll/migrators/textpattern.rb
-    lib/jekyll/migrators/tumblr.rb
-    lib/jekyll/migrators/typo.rb
-    lib/jekyll/migrators/wordpress.rb
-    lib/jekyll/migrators/wordpressdotcom.rb
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
     lib/jekyll/post.rb
