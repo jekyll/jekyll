@@ -30,12 +30,11 @@ module Jekyll
     # site       - The Site.
     # base       - The String path to the dir containing the post file.
     # name       - The String filename of the post file.
-    # subdir     - The String path to the subdirectory.
     #
     # Returns the new Post.
-    def initialize(site, source, dir, name, subdir = '_posts')
+    def initialize(site, source, dir, name)
       @site = site
-      @base = File.join(source, dir, subdir)
+      @base = File.join(source, dir)
       @name = name
 
       self.categories = dir.split('/').reject { |x| x.empty? }

@@ -50,11 +50,8 @@ Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
 
-Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |type, direction, folder, table|
-  subdir = "_#{type}s"
-
+Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, direction, folder, table|
   table.hashes.each do |post|
-    date = Date.strptime(post['date'], '%m/%d/%Y').strftime('%Y-%m-%d')
     title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
 
     if direction && direction == "in"
@@ -63,7 +60,14 @@ Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |type, direct
       after = folder || '.'
     end
 
-    path = File.join(before || '.', subdir, after || '.', "#{date}-#{title}.#{post['type'] || 'textile'}")
+    ext = post['type'] || 'textile'
+
+    if "draft" == status
+      path = File.join(before || '.', '_drafts', after || '.', "#{title}.#{ext}")
+    else
+      date = Date.strptime(post['date'], '%m/%d/%Y').strftime('%Y-%m-%d')
+      path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{ext}")
+    end
 
     matter_hash = {}
     %w(title layout tag tags category categories published author).each do |key|

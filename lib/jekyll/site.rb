@@ -137,10 +137,10 @@ module Jekyll
       base = File.join(self.source, dir)
       entries = Dir.chdir(base) { filter_entries(Dir.entries('.')) }
 
-      self.read_posts(dir,'_posts')
+      self.read_posts(dir)
 
       if self.show_drafts
-        self.read_posts(dir,'_drafts')
+        self.read_drafts(dir)
       end
 
       self.posts.sort!
@@ -174,18 +174,46 @@ module Jekyll
     # object with each one.
     #
     # dir    - The String relative path of the directory to read.
-    # subdir - The String relative path of the subdirectory to read.
     #
     # Returns nothing.
-    def read_posts(dir, subdir)
-      base = File.join(self.source, dir, subdir)
+    def read_posts(dir)
+      dir = File.join(dir, '_posts')
+
+      base = File.join(self.source, dir)
       return unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
         if Post.valid?(f)
-          post = Post.new(self, self.source, dir, f, subdir)
+          post = Post.new(self, self.source, dir, f)
+
+          if post.published && (self.future || post.date <= self.time)
+            self.posts << post
+            post.categories.each { |c| self.categories[c] << post }
+            post.tags.each { |c| self.tags[c] << post }
+          end
+        end
+      end
+    end
+
+    # Read all the files in <source>/<dir>/_drafts and create a new Post
+    # object with each one.
+    #
+    # dir    - The String relative path of the directory to read.
+    #
+    # Returns nothing.
+    def read_drafts(dir)
+      dir = File.join(dir, '_drafts')
+
+      base = File.join(self.source, dir)
+      return unless File.exists?(base)
+      entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
+
+      # first pass processes, but does not yet render post content
+      entries.each do |f|
+        if Post.valid?(f)
+          post = Draft.new(self, self.source, dir, f)
 
           if post.published && (self.future || post.date <= self.time)
             self.posts << post
