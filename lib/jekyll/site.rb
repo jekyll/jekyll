@@ -212,7 +212,7 @@ module Jekyll
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
-        if Post.valid?(f)
+        if Draft.valid?(f)
           post = Draft.new(self, self.source, dir, f)
 
           if post.published && (self.future || post.date <= self.time)
