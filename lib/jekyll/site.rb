@@ -206,16 +206,14 @@ module Jekyll
       return unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 
-      # first pass processes, but does not yet render post content
+      # first pass processes, but does not yet render draft content
       entries.each do |f|
         if Draft.valid?(f)
-          post = Draft.new(self, self.source, dir, f)
+          draft = Draft.new(self, self.source, dir, f)
 
-          if post.published && (self.future || post.date <= self.time)
-            self.posts << post
-            post.categories.each { |c| self.categories[c] << post }
-            post.tags.each { |c| self.tags[c] << post }
-          end
+          self.posts << draft
+          draft.categories.each { |c| self.categories[c] << draft }
+          draft.tags.each { |c| self.tags[c] << draft }
         end
       end
     end
