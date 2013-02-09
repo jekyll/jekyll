@@ -177,9 +177,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      dir = File.join(dir, '_posts')
-
-      base = File.join(self.source, dir)
+      base = File.join(self.source, dir, '_posts')
       return unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 
@@ -204,9 +202,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_drafts(dir)
-      dir = File.join(dir, '_drafts')
-
-      base = File.join(self.source, dir)
+      base = File.join(self.source, dir, '_drafts')
       return unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 

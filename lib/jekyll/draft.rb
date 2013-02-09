@@ -13,6 +13,11 @@ module Jekyll
       name =~ MATCHER
     end
 
+    # Get the full path to the directory containing the draft files
+    def get_base(source, dir)
+      return File.join(source, dir, '_drafts')
+    end
+
     # Extract information from the post filename.
     #
     # name - The String filename of the post file.

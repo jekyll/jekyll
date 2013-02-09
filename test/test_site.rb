@@ -124,7 +124,7 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "read posts" do
-      @site.read_posts('', '_posts')
+      @site.read_posts('')
       posts = Dir[source_dir('_posts', '*')]
       assert_equal posts.size - 1, @site.posts.size
     end
