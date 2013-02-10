@@ -5,8 +5,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts, :show_drafts,
-                  :keep_files
+                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :show_drafts, :keep_files
 
     attr_accessor :converters, :generators
 
@@ -173,7 +173,7 @@ module Jekyll
     # Read all the files in <source>/<dir>/_posts and create a new Post
     # object with each one.
     #
-    # dir    - The String relative path of the directory to read.
+    # dir - The String relative path of the directory to read.
     #
     # Returns nothing.
     def read_posts(dir)
@@ -198,7 +198,7 @@ module Jekyll
     # Read all the files in <source>/<dir>/_drafts and create a new Post
     # object with each one.
     #
-    # dir    - The String relative path of the directory to read.
+    # dir - The String relative path of the directory to read.
     #
     # Returns nothing.
     def read_drafts(dir)
