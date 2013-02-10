@@ -26,6 +26,7 @@
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
   * Development fixes
+    * Changed Ruby version for development to 1.9.3-p374 from p362 (#801)
     * Including a link to the GitHub Ruby style guide in CONTRIBUTING.md (#806)
     * Added script/bootstrap (#776)
     * Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version
