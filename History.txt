@@ -1,6 +1,6 @@
 == 0.12.1 / 2013-02-19
   * Minor Enhancements
-    * Update Kramdown version to 0.14.1 (#744)
+    * Update Kramdown version to 0.14 (#744, #808)
   * Test Enhancements
     * Update Rake version to 10.0.3 (#744)
     * Update Shoulda version to 3.3.2 (#744)
