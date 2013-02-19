@@ -3,6 +3,7 @@
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
   * Minor Enhancements
+    * Relaxed Kramdown version to 0.14 (#808)
     * Aliased `jekyll server` to `jekyll serve`. (#792)
     * Updated gem versions for Kramdown, Rake, Shoulda, Cucumber, and RedCarpet. (#744)
     * Refactored jekyll subcommands into Jekyll::Commands submodule, which now contains them (#768)
