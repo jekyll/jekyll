@@ -48,6 +48,8 @@ require_all 'jekyll/converters'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
+SafeYAML::OPTIONS[:suppress_warnings] = true
+
 module Jekyll
   VERSION = '0.12.0'
 
@@ -130,7 +132,7 @@ module Jekyll
     # Get configuration from <source>/_config.yml
     config_file = File.join(source, '_config.yml')
     begin
-      config = YAML.load_file(config_file)
+      config = YAML.safe_load_file(config_file)
       raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
       $stdout.puts "Configuration from #{config_file}"
     rescue => err
