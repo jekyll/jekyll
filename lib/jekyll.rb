@@ -133,12 +133,17 @@ module Jekyll
     config_file = File.join(source, '_config.yml')
     begin
       config = YAML.safe_load_file(config_file)
-      raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
-      $stdout.puts "Configuration from #{config_file}"
+      raise "Configuration file: (INVALID) #{config_file}" if !config.is_a?(Hash)
+      $stdout.puts "Configuration file: #{config_file}"
+    rescue SystemCallError
+      # Errno:ENOENT = file not found
+      $stderr.puts "Configuration file: none"
+      config = {}
     rescue => err
-      $stderr.puts "WARNING: Could not read configuration. " +
+      $stderr.puts "           " +
+                   "WARNING: Error reading configuration. " +
                    "Using defaults (and options)."
-      $stderr.puts "\t" + err.to_s
+      $stderr.puts "#{err}"
       config = {}
     end
 
