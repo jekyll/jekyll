@@ -207,6 +207,7 @@ module Jekyll
     # Returns nothing.
     def render(layouts, site_payload)
       # construct payload
+      raise "Post Render Error: The layout specified '#{self.data["layout"]}' cannot be found." unless layouts.keys.include? self.data['layout']
       payload = {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
         "page" => self.to_liquid
