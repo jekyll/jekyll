@@ -19,7 +19,7 @@ global_option '--layouts', 'Layouts directory (defaults to ./_layouts)'
 
 command :build do |c|
   c.syntax = 'jekyll build [options]'
-  c.description = 'Build your site with the option of auto-renegeration'
+  c.description = 'Build your site'
 
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
@@ -33,7 +33,7 @@ end
 
 command :serve do |c|
   c.syntax = 'jekyll serve [options]'
-  c.description = 'Serve your site locally with the option of auto-regeneration'
+  c.description = 'Serve your site locally'
 
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
