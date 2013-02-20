@@ -103,6 +103,7 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
+      raise "Page Render Error: The layout specified '#{self.data["layout"]}' cannot be found." unless layouts.keys.include? self.data['layout']
       payload = {
         "page" => self.to_liquid,
         'paginator' => pager.to_liquid
