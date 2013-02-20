@@ -3,7 +3,7 @@
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
   * Minor Enhancements
-    * Reinstate --limit-posts and --future switches (#788)
+    * Reinstate --limit_posts and --future switches (#788)
     * Remove ambiguity from command descriptions (#815)
     * Fix SafeYAML Warnings (#807)
     * Relaxed Kramdown version to 0.14 (#808)
