@@ -26,7 +26,7 @@
     * Force Categories to be Strings (#767)
     * Safe YAML plugin to prevent vulnerability (#777)
     * Add SVG support to Jekyll/WEBrick. (#407, #406)
-    * Prevent custom destination from causing continuous regen (#528)
+    * Prevent custom destination from causing continuous regen on watch (#528, #820)
   * Site Enhancements
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
