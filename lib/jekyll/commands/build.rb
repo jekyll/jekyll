@@ -56,7 +56,7 @@ module Jekyll
 
         dw = DirectoryWatcher.new(source)
         dw.interval = 1
-        dw.glob = self.globs(source)
+        dw.glob = self.globs(source, destination)
 
         dw.add_observer do |*args|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
