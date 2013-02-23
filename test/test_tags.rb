@@ -203,4 +203,22 @@ CONTENT
       assert_match %r{/2008/11/21/complex/}, @result
     end
   end
+  
+  context "simple gist inclusion" do
+    setup do
+      @gist = 358471
+      content = <<CONTENT
+---
+title: My Cool Gist
+---
+
+{% gist #{@gist} %}
+CONTENT
+      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+    end
+    
+    should "write script tag" do
+      assert_match %r{<script src='http://gist.github.com/#{@gist}.js' type='text/javascript'>\s</script>}, @result
+    end
+  end
 end
