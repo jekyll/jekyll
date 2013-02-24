@@ -11,7 +11,7 @@ module Jekyll
     end
 
     def render(context)
-      "<script src=\"http://gist.github.com/#{@gist}.js\"> </script>"
+      "<script src=\"https://gist.github.com/#{@gist}.js\"> </script>"
     end
   end
 end
