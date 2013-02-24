@@ -218,7 +218,7 @@ CONTENT
     end
     
     should "write script tag" do
-      assert_match %r{<script src='http://gist.github.com/#{@gist}.js' type='text/javascript'>\s</script>}, @result
+      assert_match %r{<script src='http://gist.github.com/#{@gist}.js'>\s</script>}, @result
     end
   end
 end
