@@ -3,7 +3,8 @@
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
   * Minor Enhancements
-    * New format to Jekyll output (#795)
+    * Add 'gist' liquid tag to core (#822)
+    * New format of Jekyll output (#795)
     * Reinstate --limit_posts and --future switches (#788)
     * Remove ambiguity from command descriptions (#815)
     * Fix SafeYAML Warnings (#807)
