@@ -1,4 +1,11 @@
+if RUBY_VERSION > '1.9' && ENV["COVERAGE"] == "true"
+  require 'simplecov'
+  require 'simplecov-gem-adapter'
+  SimpleCov.start('gem')
+end
+
 require 'rubygems'
+require 'test/unit'
 gem 'RedCloth', '>= 4.2.1'
 
 require 'jekyll'

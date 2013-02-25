@@ -30,7 +30,7 @@ module Jekyll
 
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
-          self.data = YAML.load($1)
+          self.data = YAML.safe_load($1)
         end
       rescue => e
         puts "Error reading file #{File.join(base, name)}: #{e.message}"

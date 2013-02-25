@@ -1,7 +1,18 @@
 == HEAD
   * Major Enhancements
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
+    * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
   * Minor Enhancements
+    * Add 'gist' liquid tag to core (#822)
+    * New format of Jekyll output (#795)
+    * Reinstate --limit_posts and --future switches (#788)
+    * Remove ambiguity from command descriptions (#815)
+    * Fix SafeYAML Warnings (#807)
+    * Relaxed Kramdown version to 0.14 (#808)
+    * Aliased `jekyll server` to `jekyll serve`. (#792)
+    * Updated gem versions for Kramdown, Rake, Shoulda, Cucumber, and RedCarpet. (#744)
+    * Refactored jekyll subcommands into Jekyll::Commands submodule, which now contains them (#768)
+    * Rescue from import errors in Wordpress.com migrator (#671)
     * Massively accelerate LSI performance (#664)
     * Truncate post slugs when importing from Tumblr (#496)
     * Add glob support to include, exclude option (#743)
@@ -11,10 +22,22 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
-    * Prevent custom destination from causing continuous regen (#528)
+    * Tumblr Migrator: finds _posts dir correctly, fixes truncation of long
+      post names (#775)
+    * Force Categories to be Strings (#767)
+    * Safe YAML plugin to prevent vulnerability (#777)
+    * Add SVG support to Jekyll/WEBrick. (#407, #406)
+    * Prevent custom destination from causing continuous regen on watch (#528, #820)
   * Site Enhancements
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
+  * Development fixes
+    * Changed Ruby version for development to 1.9.3-p374 from p362 (#801)
+    * Including a link to the GitHub Ruby style guide in CONTRIBUTING.md (#806)
+    * Added script/bootstrap (#776)
+    * Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version
+      of greater than 1.9 (#771)
+    * Switch to Simplecov for coverage report (#765)
 
 == 0.12.0 / 2012-12-22
   * Minor Enhancements

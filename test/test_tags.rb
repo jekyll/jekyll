@@ -4,7 +4,7 @@ require 'helper'
 
 class TestTags < Test::Unit::TestCase
 
-  def create_post(content, override = {}, converter_class = Jekyll::MarkdownConverter)
+  def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     stub(Jekyll).configuration do
       Jekyll::DEFAULTS.deep_merge({'pygments' => true}).deep_merge(override)
     end
@@ -39,7 +39,7 @@ CONTENT
 
   context "language name" do
     should "match only the required set of chars" do
-      r = Jekyll::HighlightBlock::SYNTAX
+      r = Jekyll::Tags::HighlightBlock::SYNTAX
       assert_match r, "ruby"
       assert_match r, "c#"
       assert_match r, "xml+cheetah"
@@ -55,19 +55,19 @@ CONTENT
 
   context "initialized tag" do
     should "work" do
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({}, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'linenos' => 'inline' }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'linenos' => 'table' }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'linenos' => 'table', 'nowrap' => true }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'cssclass' => 'hl', 'linenos' => 'table' }, tag.instance_variable_get(:@options))
     end
   end
@@ -129,7 +129,7 @@ CONTENT
 
     context "using Textile" do
       setup do
-        create_post(@content, {}, Jekyll::TextileConverter)
+        create_post(@content, {}, Jekyll::Converters::Textile)
       end
 
       # Broken in RedCloth 4.1.9
@@ -201,6 +201,24 @@ CONTENT
 
     should "have the url to the \"complex\" post from 2008-11-21" do
       assert_match %r{/2008/11/21/complex/}, @result
+    end
+  end
+  
+  context "simple gist inclusion" do
+    setup do
+      @gist = 358471
+      content = <<CONTENT
+---
+title: My Cool Gist
+---
+
+{% gist #{@gist} %}
+CONTENT
+      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+    end
+    
+    should "write script tag" do
+      assert_match %r{<script src='https://gist.github.com/#{@gist}.js'>\s</script>}, @result
     end
   end
 end

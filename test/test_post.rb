@@ -128,6 +128,18 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with unspecified (date) style and a numeric category" do
+          setup do
+            @post.categories << 2013
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/2013/2008/09/09/foo-bar.html", @post.url
+          end
+        end
+
         context "with unspecified layout" do
           setup do
             file = '2013-01-12-no-layout.textile'
@@ -445,34 +457,34 @@ class TestPost < Test::Unit::TestCase
     should "process .md as markdown under default configuration" do
       post = setup_post '2011-04-12-md-extension.md'
       conv = post.converter
-      assert conv.kind_of? Jekyll::MarkdownConverter
+      assert conv.kind_of? Jekyll::Converters::Markdown
     end
     
     should "process .text as indentity under default configuration" do
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
-      assert conv.kind_of? Jekyll::IdentityConverter
+      assert conv.kind_of? Jekyll::Converters::Identity
     end
     
     should "process .text as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mdw,mdwn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
-      assert conv.kind_of? Jekyll::MarkdownConverter
+      assert conv.kind_of? Jekyll::Converters::Markdown
     end
     
     should "process .md as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mkd,mkdn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
-      assert conv.kind_of? Jekyll::MarkdownConverter
+      assert conv.kind_of? Jekyll::Converters::Markdown
     end
     
     should "process .text as textile under alternate configuration" do
       @site.config['textile_ext'] = 'textile,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
-      assert conv.kind_of? Jekyll::TextileConverter
+      assert conv.kind_of? Jekyll::Converters::Textile
     end
     
   end

@@ -8,7 +8,7 @@ class TestRdiscount < Test::Unit::TestCase
         'markdown' => 'rdiscount',
         'rdiscount' => { 'extensions' => ['smart', 'generate_toc'], 'toc_token' => '{:toc}' }
       }
-      @markdown = MarkdownConverter.new config
+      @markdown = Converters::Markdown.new config
     end
 
     should "pass rdiscount extensions" do

@@ -18,7 +18,7 @@ require 'rubygems'
 # stdlib
 require 'fileutils'
 require 'time'
-require 'yaml'
+require 'safe_yaml'
 require 'English'
 
 # 3rd party
@@ -47,6 +47,8 @@ require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
+
+SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
   VERSION = '0.12.0'
@@ -129,13 +131,18 @@ module Jekyll
     # Get configuration from <source>/_config.yml
     config_file = File.join(source, '_config.yml')
     begin
-      config = YAML.load_file(config_file)
-      raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
-      $stdout.puts "Configuration from #{config_file}"
+      config = YAML.safe_load_file(config_file)
+      raise "Configuration file: (INVALID) #{config_file}" if !config.is_a?(Hash)
+      $stdout.puts "Configuration file: #{config_file}"
+    rescue SystemCallError
+      # Errno:ENOENT = file not found
+      $stderr.puts "Configuration file: none"
+      config = {}
     rescue => err
-      $stderr.puts "WARNING: Could not read configuration. " +
+      $stderr.puts "           " +
+                   "WARNING: Error reading configuration. " +
                    "Using defaults (and options)."
-      $stderr.puts "\t" + err.to_s
+      $stderr.puts "#{err}"
       config = {}
     end
 

@@ -7,7 +7,7 @@ class TestRedcarpet < Test::Unit::TestCase
         'redcarpet' => { 'extensions' => ['smart', 'strikethrough', 'filter_html'] },
         'markdown' => 'redcarpet'
       }
-      @markdown = MarkdownConverter.new config
+      @markdown = Converters::Markdown.new config
     end
 
     should "pass redcarpet options" do

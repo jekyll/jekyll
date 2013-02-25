@@ -19,22 +19,26 @@ global_option '--layouts', 'Layouts directory (defaults to ./_layouts)'
 
 command :build do |c|
   c.syntax = 'jekyll build [options]'
-  c.description = 'Build your site with the option of auto-renegeration'
+  c.description = 'Build your site'
 
+  c.option '--future', 'Publishes posts with a future date'
+  c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
 
   c.action do |args, options|
     options.defaults :serving => false
     options = Jekyll.configuration(options.__hash__)
-    Jekyll::BuildCommand.process(options)
+    Jekyll::Commands::Build.process(options)
   end
 end
 
 command :serve do |c|
   c.syntax = 'jekyll serve [options]'
-  c.description = 'Serve your site locally with the option of auto-regeneration'
+  c.description = 'Serve your site locally'
 
+  c.option '--future', 'Publishes posts with a future date'
+  c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
 
@@ -49,10 +53,11 @@ command :serve do |c|
                     :serving => true
 
     options = Jekyll.configuration(options.__hash__)
-    Jekyll::BuildCommand.process(options)
-    Jekyll::ServeCommand.process(options)
+    Jekyll::Commands::Build.process(options)
+    Jekyll::Commands::Serve.process(options)
   end
 end
+alias_command :server, :serve
 
 command :import do |c|
   c.syntax = 'jekyll import <platform> [options]'
@@ -65,6 +70,11 @@ command :import do |c|
   c.option '--host', 'Host address to use when migrating'
 
   c.action do |args, options|
-    Jekyll::MigrateCommand.process(args.first, options)
+    begin
+      require 'jekyll-import'
+    rescue
+      abort "You must install the 'jekyll-import' gem before continuing."
+    end
+    Jekyll::Commands::Import.process(args.first, options)
   end
 end

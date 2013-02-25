@@ -10,3 +10,4 @@ _site/
 bbin/
 gh-pages/
 site/_site/
+coverage

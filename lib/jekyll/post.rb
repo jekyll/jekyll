@@ -1,5 +1,4 @@
 module Jekyll
-
   class Post
     include Comparable
     include Convertible
@@ -154,7 +153,7 @@ module Jekyll
           "title"      => CGI.escape(slug),
           "i_day"      => date.strftime("%d").to_i.to_s,
           "i_month"    => date.strftime("%m").to_i.to_s,
-          "categories" => categories.map { |c| URI.escape(c) }.join('/'),
+          "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
           "output_ext" => self.output_ext
         }.inject(template) { |result, token|
           result.gsub(/:#{Regexp.escape token.first}/, token.last)
@@ -281,5 +280,4 @@ module Jekyll
       end
     end
   end
-
 end

@@ -1,5 +1,4 @@
 module Jekyll
-
   class Plugin
     PRIORITIES = { :lowest => -100,
                    :low => -10,
@@ -73,5 +72,4 @@ module Jekyll
       # no-op for default
     end
   end
-
 end

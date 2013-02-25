@@ -55,46 +55,12 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-desc "Generate RCov test coverage and open in your browser"
-task :coverage do
-  require 'rcov'
-  sh "rm -fr coverage"
-  sh "rcov test/test_*.rb"
-  sh "open coverage/index.html"
-end
-
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "#{name} #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-desc "Open an irb session preloaded with this library"
-task :console do
-  sh "irb -rubygems -r ./lib/#{name}.rb"
-end
-
-#############################################################################
-#
-# Custom tasks (add your own tasks here)
-#
-#############################################################################
-
-namespace :migrate do
-  desc "Migrate from mephisto in the current directory"
-  task :mephisto do
-    sh %q(ruby -r './lib/jekyll/migrators/mephisto' -e 'Jekyll::Mephisto.postgres(:database => "#{ENV["DB"]}")')
-  end
-  desc "Migrate from Movable Type in the current directory"
-  task :mt do
-    sh %q(ruby -r './lib/jekyll/migrators/mt' -e 'Jekyll::MT.process("#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")')
-  end
-  desc "Migrate from Typo in the current directory"
-  task :typo do
-    sh %q(ruby -r './lib/jekyll/migrators/typo' -e 'Jekyll::Typo.process("#{ENV["DB"]}", "#{ENV["USER"]}", "#{ENV["PASS"]}")')
-  end
 end
 
 begin
@@ -107,6 +73,11 @@ rescue LoadError
   task :features do
     abort 'Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin'
   end
+end
+
+desc "Open an irb session preloaded with this library"
+task :console do
+  sh "irb -rubygems -r ./lib/#{name}.rb"
 end
 
 #############################################################################
