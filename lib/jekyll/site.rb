@@ -18,7 +18,7 @@ module Jekyll
       self.safe            = config['safe']
       self.source          = File.expand_path(config['source'])
       self.dest            = File.expand_path(config['destination'])
-      self.plugins         = setup_plugins
+      self.plugins         = plugins_path
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
@@ -104,7 +104,7 @@ module Jekyll
     # 
     #
     # Returns an Array of plugin search paths
-    def setup_plugins
+    def plugins_path
       if (config['plugins'] == Jekyll::DEFAULTS['plugins'])
         [File.join(self.source, config['plugins'])]
       else
