@@ -100,8 +100,7 @@ module Jekyll
       end
     end
 
-    # Internal: Setup the plugin search path 
-    # 
+    # Internal: Setup the plugin search path
     #
     # Returns an Array of plugin search paths
     def plugins_path
