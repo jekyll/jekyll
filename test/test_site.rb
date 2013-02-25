@@ -7,6 +7,11 @@ class TestSite < Test::Unit::TestCase
       assert_equal [File.join(Dir.pwd, '_plugins')], site.plugins
     end
 
+    should "look for plugins under the site directory by default" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'source' => source_dir}))
+      assert_equal [File.join(source_dir, '_plugins')], site.plugins
+    end
+
     should "have an array for plugins if passed as a string" do
       site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
       assert_equal ['/tmp/plugins'], site.plugins
@@ -26,6 +31,7 @@ class TestSite < Test::Unit::TestCase
       site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => nil}))
       assert_equal [], site.plugins
     end
+
   end
   context "creating sites" do
     setup do
