@@ -11,6 +11,11 @@ class TestSite < Test::Unit::TestCase
       site = Site.new(Jekyll::DEFAULTS.merge({'source' => source_dir}))
       assert_equal [File.join(source_dir, '_plugins')], site.plugins
     end
+    
+    should "have an array for plugins if passed as a string" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
+      assert_equal ['/tmp/plugins'], site.plugins
+    end
 
     should "have an array for plugins if passed as an array" do
       site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
