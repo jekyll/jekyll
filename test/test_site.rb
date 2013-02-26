@@ -166,6 +166,22 @@ class TestSite < Test::Unit::TestCase
       assert_equal files, @site.filter_entries(files)
     end
 
+    should "filter symlink entries when safe mode enabled" do
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
+      end
+      site = Site.new(Jekyll.configuration)
+      stub(File).symlink?('symlink.js') {true}
+      files = %w[symlink.js]
+      assert_equal [], site.filter_entries(files)
+    end
+
+    should "not filter symlink entries when safe mode disabled" do
+      stub(File).symlink?('symlink.js') {true}
+      files = %w[symlink.js]
+      assert_equal files, @site.filter_entries(files)
+    end
+
     context 'error handling' do
       should "raise if destination is included in source" do
         stub(Jekyll).configuration do
