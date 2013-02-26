@@ -18,7 +18,7 @@ module Jekyll
       self.safe            = config['safe']
       self.source          = File.expand_path(config['source'])
       self.dest            = File.expand_path(config['destination'])
-      self.plugins         = Array(config['plugins']).map { |d| File.expand_path(d) }
+      self.plugins         = plugins_path
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
       self.permalink_style = config['permalink'].to_sym
@@ -97,6 +97,17 @@ module Jekyll
         !self.safe || c.safe
       end.map do |c|
         c.new(self.config)
+      end
+    end
+
+    # Internal: Setup the plugin search path
+    #
+    # Returns an Array of plugin search paths
+    def plugins_path
+      if (config['plugins'] == Jekyll::DEFAULTS['plugins'])
+        [File.join(self.source, config['plugins'])]
+      else
+        Array(config['plugins']).map { |d| File.expand_path(d) }
       end
     end
 
