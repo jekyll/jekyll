@@ -22,6 +22,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Look for plugins under the source directory (#654)
     * Tumblr Migrator: finds _posts dir correctly, fixes truncation of long
       post names (#775)
     * Force Categories to be Strings (#767)
