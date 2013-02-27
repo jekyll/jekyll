@@ -30,7 +30,13 @@ module Jekyll
             end
           end
         else
-          raise SyntaxError.new("Syntax Error in 'highlight' - Valid syntax: highlight <lang> [linenos]")
+          raise SyntaxError.new <<-eos
+Syntax Error in tag 'highlight' while parsing the following markup:
+
+  #{markup}
+
+Valid syntax: highlight <lang> [linenos]
+eos
         end
       end
 
