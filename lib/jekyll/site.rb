@@ -264,7 +264,7 @@ module Jekyll
     end
 
     # Private: creates a regular expression from the keep_files array
-    # 
+    #
     # Examples
     #   ['.git','.svn'] creates the following regex: /\/(\.git|\/.svn)/
     #
@@ -349,7 +349,7 @@ module Jekyll
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||
           self.exclude.glob_include?(e) ||
-          File.symlink?(e)
+          (File.symlink?(e) && self.safe)
         end
       end
     end
