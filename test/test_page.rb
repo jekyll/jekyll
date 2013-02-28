@@ -64,8 +64,13 @@ class TestPage < Test::Unit::TestCase
 
         context "in a directory hierarchy" do
           should "create url based on filename" do
+            @page = setup_page('/contacts', 'bar.html')
+            assert_equal "/contacts/bar/", @page.url
+          end
+
+          should "create index url based on filename" do
             @page = setup_page('/contacts', 'index.html')
-            assert_equal "/contacts/index.html", @page.url
+            assert_equal "/contacts/", @page.url
           end
 
           should "return dir correctly" do
@@ -75,7 +80,7 @@ class TestPage < Test::Unit::TestCase
 
           should "return dir correctly for index page" do
             @page = setup_page('/contacts', 'index.html')
-            assert_equal '/contacts', @page.dir
+            assert_equal '/contacts/', @page.dir
           end
         end
       end
