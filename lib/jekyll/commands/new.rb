@@ -5,23 +5,19 @@ module Jekyll
   module Commands
     class New < Command
       def self.process(args)
-        args_joined = args.join(" ")
+        arg_string = args.join(" ")
+        raise ArgumentError, "You must specify a path." if arg_string.empty?
+        install_path = File.expand_path(arg_string, Dir.pwd)
 
-        if args_joined.empty?
-          puts "You must provide a path."
-        else
-          path = File.expand_path(args_joined, Dir.pwd)
+        template_site = File.expand_path("../../site_template", File.dirname(__FILE__))
+        FileUtils.cp_r template_site, install_path
 
-          template_site = File.expand_path("../../site_template", File.dirname(__FILE__))
-          FileUtils.cp_r template_site, path
-
-          File.open(File.expand_path(initialized_post_name, path), "w") do |f|
-            f.write(scaffold_post_content(template_site))
-          end
-          File.unlink(File.expand_path(sample_post_path, path))
-
-          puts "New jekyll site installed in #{path}."
+        File.open(File.expand_path(initialized_post_name, install_path), "w") do |f|
+          f.write(scaffold_post_content(template_site))
         end
+        File.unlink(File.expand_path(sample_post_path, install_path))
+
+        puts "New jekyll site installed in #{install_path}."
       end
 
       # Internal: Processes the sample post template
@@ -31,14 +27,14 @@ module Jekyll
         ERB.new(File.read(File.expand_path(sample_post_path, template_site))).result
       end
 
-      # Internal: Gets the filename of the sample post to be created
+      # Internal: Filename of the sample post to be created
       #
       # Returns the filename of the sample post as a String
       def self.initialized_post_name
         "_posts/#{Time.now.strftime('%Y-%m-%d')}-welcome-to-jekyll.markdown"
       end
 
-      # Internal: Gets the path of the file containing the sample post template
+      # Internal: Path of the file containing the sample post template
       #
       # Returns the filename of the sample post template as a String
       def self.sample_post_path

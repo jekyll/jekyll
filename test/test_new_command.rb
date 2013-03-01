@@ -71,10 +71,11 @@ class TestNewCommand < Test::Unit::TestCase
       @empty_args = []
     end
 
-    should 'output an error message' do
-      output = capture_stdout { Jekyll::Commands::New.process(@empty_args) }
-      error_message = "You must provide a path.\n"
-      assert_equal error_message, output
+    should 'raise an ArgumentError' do
+      exception = assert_raise ArgumentError do
+        Jekyll::Commands::New.process(@empty_args)
+      end
+      assert_equal 'You must specify a path.', exception.message
     end
   end
 end
