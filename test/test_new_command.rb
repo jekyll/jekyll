@@ -8,6 +8,10 @@ class TestNewCommand < Test::Unit::TestCase
     end
   end
 
+  def site_template
+    File.expand_path("../lib/site_template", File.dirname(__FILE__))
+  end
+
   context 'when args contains a path' do
     setup do
       @path = 'new-site'
@@ -31,21 +35,40 @@ class TestNewCommand < Test::Unit::TestCase
       assert_equal success_message, output
     end
 
-    should 'copy the site template to the new directory' do
-      stubbed_date = "2013-01-01"
-      stub.instance_of(Time).strftime { stubbed_date }
-
-      site_template = File.expand_path("../lib/site_template", File.dirname(__FILE__))
-      site_template_files = dir_contents(site_template).reject do |f|
-        File.extname(f) == ".erb"
+    should 'copy the static files in site template to the new directory' do
+      static_template_files = dir_contents(site_template).reject do |f|
+        File.extname(f) == '.erb'
       end
-      site_template_files << "/_posts/#{stubbed_date}-welcome-to-jekyll.markdown"
 
       capture_stdout { Jekyll::Commands::New.process(@args) }
 
-      new_site_files = dir_contents(@full_path)
+      new_site_files = dir_contents(@full_path).select do |f|
+        static_template_files.include? f
+      end
 
-      assert_same_elements site_template_files, new_site_files
+      assert_same_elements static_template_files, new_site_files
+    end
+
+    should 'process any ERB files' do
+      erb_template_files = dir_contents(site_template).select do |f|
+        File.extname(f) == '.erb'
+      end
+
+      stubbed_date = '2013-01-01'
+      stub.instance_of(Time).strftime { stubbed_date }
+
+      erb_template_files.each do |f|
+        f.chomp! '.erb'
+        f.gsub! '0000-00-00', stubbed_date
+      end
+
+      capture_stdout { Jekyll::Commands::New.process(@args) }
+
+      new_site_files = dir_contents(@full_path).select do |f|
+        erb_template_files.include? f
+      end
+
+      assert_same_elements erb_template_files, new_site_files
     end
   end
 

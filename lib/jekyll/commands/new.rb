@@ -12,33 +12,27 @@ module Jekyll
         template_site = File.expand_path("../../site_template", File.dirname(__FILE__))
         FileUtils.cp_r template_site, install_path
 
-        File.open(File.expand_path(initialized_post_name, install_path), "w") do |f|
-          f.write(scaffold_post_content(template_site))
-        end
-        File.unlink(File.expand_path(sample_post_path, install_path))
+        process_erb_files(install_path)
 
         puts "New jekyll site installed in #{install_path}."
       end
 
-      # Internal: Processes the sample post template
-      #
-      # Returns the processed ERB post template file content as a String
-      def self.scaffold_post_content(template_site)
-        ERB.new(File.read(File.expand_path(sample_post_path, template_site))).result
-      end
+      def self.process_erb_files(path)
+        erb_files = Dir["#{path}/**/*"].select do |f|
+          File.extname(f) == '.erb'
+        end
 
-      # Internal: Filename of the sample post to be created
-      #
-      # Returns the filename of the sample post as a String
-      def self.initialized_post_name
-        "_posts/#{Time.now.strftime('%Y-%m-%d')}-welcome-to-jekyll.markdown"
-      end
+        erb_files.each do |erb_file|
+          file_contents = File.read(erb_file)
 
-      # Internal: Path of the file containing the sample post template
-      #
-      # Returns the filename of the sample post template as a String
-      def self.sample_post_path
-        "_posts/0000-00-00-sample_post.markdown.erb"
+          File.open(erb_file, 'w') do |file|
+            file.write(ERB.new(file_contents).result)
+          end
+
+          new_filename = erb_file.chomp '.erb'
+          new_filename.gsub! '0000-00-00', Time.now.strftime('%Y-%m-%d')
+          FileUtils.mv erb_file, new_filename
+        end
       end
     end
   end
