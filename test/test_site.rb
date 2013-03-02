@@ -8,7 +8,7 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "look for plugins under the site directory by default" do
-      site = Site.new(Jekyll::DEFAULTS.merge({'source' => source_dir}))
+      site = Site.new(Jekyll::DEFAULTS.merge({'source' => File.expand_path(source_dir)}))
       assert_equal [File.join(source_dir, '_plugins')], site.plugins
     end
 
