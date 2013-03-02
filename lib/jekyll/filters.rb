@@ -24,6 +24,17 @@ module Jekyll
       converter.convert(input)
     end
 
+    # Convert an AsciiDoc string into HTML output.
+    #
+    # input - The AsciiDoc String to convert.
+    #
+    # Returns the HTML formatted String.
+    def asciidocify(input)
+      site = @context.registers[:site]
+      converter = site.getConverterImpl(Jekyll::Converters::AsciiDoc)
+      converter.convert(input)
+    end
+
     # Format a date in short format e.g. "27 Jan 2011".
     #
     # date - the Time to format.

@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('shoulda', "~> 3.3.2")
   s.add_development_dependency('rr', "~> 1.0")
   s.add_development_dependency('cucumber', "~> 1.2.1")
+  s.add_development_dependency('asciidoctor', "~> 0.1.1")
   s.add_development_dependency('RedCloth', "~> 4.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
   s.add_development_dependency('redcarpet', "~> 2.2.2")
