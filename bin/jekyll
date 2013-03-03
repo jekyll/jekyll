@@ -25,6 +25,7 @@ command :build do |c|
   c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
+  c.option '--drafts', 'Render posts in the _drafts folder'
 
   c.action do |args, options|
     options.defaults :serving => false
@@ -41,6 +42,7 @@ command :serve do |c|
   c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
+  c.option '--drafts', 'Render posts in the _drafts folder'
 
   c.option '-p', '--port [PORT]', 'Port to listen on'
   c.option '-h', '--host [HOST]', 'Host to bind to'
