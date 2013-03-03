@@ -79,17 +79,12 @@ module Jekyll
 
     # Compares Post objects. First compares the Post date. If the dates are
     # equal, it compares the Post slugs.
-    # This comparison is used to create internal links using post_url.
-    # Post filenames are without a time, but the date property in the YAML
-    # front matter can be with time, so we compare only the date here.
     #
     # other - The other Post we are comparing to.
     #
     # Returns -1, 0, 1
     def <=>(other)
-      cmp = self.date.year <=> other.date.year
-      cmp = self.date.month <=> other.date.month if cmp == 0
-      cmp = self.date.day <=> other.date.day if cmp == 0
+      cmp = self.date <=> other.date
       if 0 == cmp
        cmp = self.slug <=> other.slug
       end
