@@ -14,7 +14,7 @@ module Jekyll
     end
 
     # Get the full path to the directory containing the draft files
-    def get_base(source, dir)
+    def containing_dir(source, dir)
       return File.join(source, dir, '_drafts')
     end
 
