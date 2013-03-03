@@ -87,7 +87,9 @@ module Jekyll
     #
     # Returns -1, 0, 1
     def <=>(other)
-      cmp = self.date.to_date <=> other.date.to_date
+      cmp = self.date.year <=> other.date.year
+      cmp = self.date.month <=> other.date.month if cmp == 0
+      cmp = self.date.day <=> other.date.day if cmp == 0
       if 0 == cmp
        cmp = self.slug <=> other.slug
       end
