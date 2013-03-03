@@ -63,6 +63,7 @@ command :import do |c|
   c.syntax = 'jekyll import <platform> [options]'
   c.description = 'Import your old blog to Jekyll'
 
+  c.option '--source', 'Source file or URL to migrate from'
   c.option '--file', 'File to migrate from'
   c.option '--dbname', 'Database name to migrate from'
   c.option '--user', 'Username to use when migrating'
@@ -72,8 +73,11 @@ command :import do |c|
   c.action do |args, options|
     begin
       require 'jekyll-import'
-    rescue
-      abort "You must install the 'jekyll-import' gem before continuing."
+    rescue LoadError
+      msg  = "You must install the 'jekyll-import' gem before continuing.\n"
+      msg += "* Do this by running `gem install jekyll-import`.\n"
+      msg += "* Or if you need root privileges, run `sudo gem install jekyll-import`."
+      abort msg
     end
     Jekyll::Commands::Import.process(args.first, options)
   end
