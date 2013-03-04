@@ -5,7 +5,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :keep_files
+                  :show_drafts, :keep_files
 
     attr_accessor :converters, :generators
 
@@ -25,6 +25,7 @@ module Jekyll
       self.exclude         = config['exclude'] || []
       self.include         = config['include'] || []
       self.future          = config['future']
+      self.show_drafts     = config['show_drafts'] || nil
       self.limit_posts     = config['limit_posts'] || nil
       self.keep_files      = config['keep_files'] || []
 
@@ -148,6 +149,18 @@ module Jekyll
 
       self.read_posts(dir)
 
+      if self.show_drafts
+        self.read_drafts(dir)
+      end
+
+      self.posts.sort!
+
+      # limit the posts if :limit_posts option is set
+      if limit_posts
+        limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
+        self.posts = self.posts[-limit, limit]
+      end
+
       entries.each do |f|
         f_abs = File.join(base, f)
         f_rel = File.join(dir, f)
@@ -190,13 +203,28 @@ module Jekyll
           end
         end
       end
+    end
 
-      self.posts.sort!
+    # Read all the files in <source>/<dir>/_drafts and create a new Post
+    # object with each one.
+    #
+    # dir - The String relative path of the directory to read.
+    #
+    # Returns nothing.
+    def read_drafts(dir)
+      base = File.join(self.source, dir, '_drafts')
+      return unless File.exists?(base)
+      entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
 
-      # limit the posts if :limit_posts option is set
-      if limit_posts
-        limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
-        self.posts = self.posts[-limit, limit]
+      # first pass processes, but does not yet render draft content
+      entries.each do |f|
+        if Draft.valid?(f)
+          draft = Draft.new(self, self.source, dir, f)
+
+          self.posts << draft
+          draft.categories.each { |c| self.categories[c] << draft }
+          draft.tags.each { |c| self.tags[c] << draft }
+        end
       end
     end
 
