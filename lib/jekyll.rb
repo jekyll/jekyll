@@ -74,6 +74,8 @@ module Jekyll
     'markdown_ext'  => 'markdown,mkd,mkdn,md',
     'textile_ext'   => 'textile',
 
+    'excerpt_separator' => "\n\n",
+
     'maruku' => {
       'use_tex'    => false,
       'use_divs'   => false,
