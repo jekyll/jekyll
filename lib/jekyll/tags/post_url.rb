@@ -23,12 +23,12 @@ module Jekyll
         site = context.registers[:site]
 
         site.posts.each do |p|
-          if p.slug == @post.slug
-            and p.date.year == @post.date.year
-            and p.date.month == @post.date.month
+          if p.slug == @post.slug \
+            and p.date.year == @post.date.year \
+            and p.date.month == @post.date.month \
             and p.date.day == @post.date.day
 
-            p.url
+            return p.url
           end
         end
 
