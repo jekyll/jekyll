@@ -25,7 +25,7 @@ module Jekyll
       self.exclude         = config['exclude'] || []
       self.include         = config['include'] || []
       self.future          = config['future']
-      self.show_drafts     = config['drafts'] || nil
+      self.show_drafts     = config['show_drafts'] || nil
       self.limit_posts     = config['limit_posts'] || nil
       self.keep_files      = config['keep_files'] || []
 

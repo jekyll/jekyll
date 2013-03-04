@@ -17,6 +17,19 @@ global_option '--safe', 'Safe mode (defaults to false)'
 global_option '--plugins', 'Plugins directory (defaults to ./_plugins)'
 global_option '--layouts', 'Layouts directory (defaults to ./_layouts)'
 
+# Option names don't always directly match the configuration value we'd like.
+# This method will rename options to match what Jekyll configuration expects.
+#
+# options - The Hash of options from Commander.
+#
+# Returns the normalized Hash.
+def normalize_options(options)
+  if drafts_state = options.delete(:drafts)
+    options[:show_drafts] = drafts_state
+  end
+  options
+end
+
 command :build do |c|
   c.syntax = 'jekyll build [options]'
   c.description = 'Build your site'
@@ -29,7 +42,8 @@ command :build do |c|
 
   c.action do |args, options|
     options.defaults :serving => false
-    options = Jekyll.configuration(options.__hash__)
+    options = normalize_options(options.__hash__)
+    options = Jekyll.configuration(options)
     Jekyll::Commands::Build.process(options)
   end
 end
@@ -54,7 +68,8 @@ command :serve do |c|
                     :baseurl => '/',
                     :serving => true
 
-    options = Jekyll.configuration(options.__hash__)
+    options = normalize_options(options.__hash__)
+    options = Jekyll.configuration(options)
     Jekyll::Commands::Build.process(options)
     Jekyll::Commands::Serve.process(options)
   end
