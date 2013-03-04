@@ -24,7 +24,7 @@ class Hash
   # and then the plural key, and handling any nil entries.
   #   +hash+ the hash to read from
   #   +singular_key+ the singular key
-  #   +plural_key+ the singular key
+  #   +plural_key+ the plural key
   #
   # Returns an array
   def pluralized_array(singular_key, plural_key)
