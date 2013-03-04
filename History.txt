@@ -24,6 +24,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Fix broken post_url with posts with a time in their YAML Front-Matter (#831)
     * Look for plugins under the source directory (#654)
     * Tumblr Migrator: finds _posts dir correctly, fixes truncation of long
       post names (#775)
