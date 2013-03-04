@@ -66,7 +66,10 @@ end
 begin
   require 'cucumber/rake/task'
   Cucumber::Rake::Task.new(:features) do |t|
-    t.cucumber_opts = "--format progress"
+    t.profile = "travis"
+  end
+  Cucumber::Rake::Task.new(:"features:html", "Run Cucumber features and produce HTML output") do |t|
+    t.profile = "html_report"
   end
 rescue LoadError
   desc 'Cucumber rake task not available'
