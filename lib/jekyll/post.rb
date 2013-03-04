@@ -29,12 +29,11 @@ module Jekyll
     # site       - The Site.
     # base       - The String path to the dir containing the post file.
     # name       - The String filename of the post file.
-    # categories - An Array of Strings for the categories for this post.
     #
     # Returns the new Post.
     def initialize(site, source, dir, name)
       @site = site
-      @base = File.join(source, dir, '_posts')
+      @base = self.containing_dir(source, dir)
       @name = name
 
       self.categories = dir.split('/').reject { |x| x.empty? }
@@ -63,6 +62,11 @@ module Jekyll
       if self.categories.empty?
         self.categories = self.data.pluralized_array('category', 'categories')
       end
+    end
+
+    # Get the full path to the directory containing the post files
+    def containing_dir(source, dir)
+      return File.join(source, dir, '_posts')
     end
 
     # Read the YAML frontmatter.
