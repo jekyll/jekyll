@@ -195,9 +195,7 @@ module Jekyll
           post = Post.new(self, self.source, dir, f)
 
           if post.published && (self.future || post.date <= self.time)
-            self.posts << post
-            post.categories.each { |c| self.categories[c] << post }
-            post.tags.each { |c| self.tags[c] << post }
+            aggregate_post_info(post)
           end
         end
       end
@@ -217,9 +215,7 @@ module Jekyll
         if Draft.valid?(f)
           draft = Draft.new(self, self.source, dir, f)
 
-          self.posts << draft
-          draft.categories.each { |c| self.categories[c] << draft }
-          draft.tags.each { |c| self.tags[c] << draft }
+          aggregate_post_info(draft)
         end
       end
     end
@@ -402,6 +398,17 @@ module Jekyll
       base = File.join(self.source, dir, subfolder)
       return [] unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
+    end
+
+    # Aggregate post information
+    #
+    # post - The Post object to aggregate information for
+    #
+    # Returns nothing
+    def aggregate_post_info(post)
+      self.posts << post
+      post.categories.each { |c| self.categories[c] << post }
+      post.tags.each { |c| self.tags[c] << post }
     end
   end
 end
