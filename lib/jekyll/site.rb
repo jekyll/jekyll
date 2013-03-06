@@ -187,9 +187,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      base = File.join(self.source, dir, '_posts')
-      return unless File.exists?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
+      entries = get_entries(dir, '_posts')
 
       # first pass processes, but does not yet render post content
       entries.each do |f|
@@ -212,9 +210,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_drafts(dir)
-      base = File.join(self.source, dir, '_drafts')
-      return unless File.exists?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
+      entries = get_entries(dir, '_drafts')
 
       # first pass processes, but does not yet render draft content
       entries.each do |f|
@@ -394,6 +390,18 @@ module Jekyll
       else
         raise "Converter implementation not found for #{klass}"
       end
+    end
+
+    # Read the entries from a particular directory for processing
+    #
+    # dir - The String relative path of the directory to read
+    # subfolder - The String directory to read
+    #
+    # Returns the list of entries to process
+    def get_entries(dir, subfolder)
+      base = File.join(self.source, dir, subfolder)
+      return [] unless File.exists?(base)
+      entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
     end
   end
 end
