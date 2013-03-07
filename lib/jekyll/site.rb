@@ -88,12 +88,14 @@ module Jekyll
         end
       end
 
+      self.converters = hydrate(Jekyll::Converter)
       self.converters = Jekyll::Converter.subclasses.select do |c|
         !self.safe || c.safe
       end.map do |c|
         c.new(self.config)
       end
 
+      self.generators = hydrate(Jekyll::Generator)
       self.generators = Jekyll::Generator.subclasses.select do |c|
         !self.safe || c.safe
       end.map do |c|
@@ -393,6 +395,14 @@ module Jekyll
         impl
       else
         raise "Converter implementation not found for #{klass}"
+      end
+    end
+    
+    def hydrate(klass)
+      klass.subclasses.select do |c|
+        !self.safe || c.safe
+      end.map do |c|
+        c.new(self.config)
       end
     end
   end
