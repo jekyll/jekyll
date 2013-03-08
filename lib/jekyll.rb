@@ -67,11 +67,13 @@ module Jekyll
     'pygments'      => false,          # remove and make true just default
 
     'markdown'      => 'maruku',       # no longer a command option
+    'asciidoc'      => 'asciidoctor',  # no longer a command option
     'permalink'     => 'date',         # no longer a command option
     'include'       => ['.htaccess'],  # no longer a command option
     'paginate_path' => 'page:num',     # no longer a command option
 
     'markdown_ext'  => 'markdown,mkd,mkdn,md',
+    'asciidoc_ext'  => 'asciidoc,adoc,ad',
     'textile_ext'   => 'textile',
 
     'maruku' => {
@@ -106,6 +108,11 @@ module Jekyll
         'coderay_bold_every'        => 10,
         'coderay_css'               => 'style'
       }
+    },
+
+    'asciidoctor' => {
+      'notitle!'   => '',
+      'hardbreaks' => ''
     },
 
     'redcloth' => {
