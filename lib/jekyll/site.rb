@@ -88,17 +88,8 @@ module Jekyll
         end
       end
 
-      self.converters = Jekyll::Converter.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
-
-      self.generators = Jekyll::Generator.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
+      self.converters = build_plugins(Jekyll::Converter.subclasses)
+      self.generators = build_plugins(Jekyll::Generator.subclasses)
     end
 
     # Internal: Setup the plugin search path
@@ -393,6 +384,20 @@ module Jekyll
         impl
       else
         raise "Converter implementation not found for #{klass}"
+      end
+    end
+
+    private
+
+    # Collect safe plugins (or all plugins if Safe mode is off) and initialize
+    # them with the Site config.
+    #
+    # Returns Array.
+    def build_plugins(plugin_array)
+      plugin_array.select do |c|
+        !self.safe || c.safe
+      end.sort.map do |c|
+        c.new(self.config)
       end
     end
   end
