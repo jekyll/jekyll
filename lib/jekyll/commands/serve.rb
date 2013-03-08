@@ -9,9 +9,8 @@ module Jekyll
 
         FileUtils.mkdir_p(destination)
 
-        mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
-        mime_types.store 'js', 'application/javascript'
-        mime_types.store 'svg', 'image/svg+xml'
+        mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
+        mime_types = WEBrick::HTTPUtils::load_mime_types(mime_types_file)
 
         s = HTTPServer.new(
           :Port => options['port'],
