@@ -48,7 +48,7 @@ module Jekyll
       if self.site.permalink_style == :pretty
         if index? && html?
           "/:path/"
-	elsif html?
+        elsif html?
           "/:path/:basename/"
         else
           "/:path/:basename:output_ext"
