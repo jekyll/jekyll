@@ -1,8 +1,10 @@
 require 'helper'
 
 class TestPage < Test::Unit::TestCase
-  def setup_page(file)
-    @page = Page.new(@site, source_dir, '', file)
+  def setup_page(*args)
+    dir, file = args
+    dir, file = ['', dir] if file.nil?
+    @page = Page.new(@site, source_dir, dir, file)
   end
 
   def do_render(page)
@@ -21,6 +23,18 @@ class TestPage < Test::Unit::TestCase
       should "create url based on filename" do
         @page = setup_page('contacts.html')
         assert_equal "/contacts.html", @page.url
+      end
+
+      context "in a directory hierarchy" do
+        should "create url based on filename" do
+          @page = setup_page('/contacts', 'bar.html')
+          assert_equal "/contacts/bar.html", @page.url
+        end
+
+        should "create index url based on filename" do
+          @page = setup_page('/contacts', 'index.html')
+          assert_equal "/contacts/index.html", @page.url
+        end
       end
 
       should "deal properly with extensions" do
@@ -46,6 +60,28 @@ class TestPage < Test::Unit::TestCase
         should "return dir correctly for index page" do
           @page = setup_page('index.html')
           assert_equal '/', @page.dir
+        end
+
+        context "in a directory hierarchy" do
+          should "create url based on filename" do
+            @page = setup_page('/contacts', 'bar.html')
+            assert_equal "/contacts/bar/", @page.url
+          end
+
+          should "create index url based on filename" do
+            @page = setup_page('/contacts', 'index.html')
+            assert_equal "/contacts/", @page.url
+          end
+
+          should "return dir correctly" do
+            @page = setup_page('/contacts', 'bar.html')
+            assert_equal '/contacts/bar/', @page.dir
+          end
+
+          should "return dir correctly for index page" do
+            @page = setup_page('/contacts', 'index.html')
+            assert_equal '/contacts/', @page.dir
+          end
         end
       end
 
@@ -130,6 +166,36 @@ class TestPage < Test::Unit::TestCase
 
         assert File.directory?(dest_dir)
         assert File.exists?(File.join(dest_dir, '.htaccess'))
+      end
+
+      context "in a directory hierarchy" do
+        should "write properly the index" do
+          page = setup_page('/contacts', 'index.html')
+          do_render(page)
+          page.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exists?(File.join(dest_dir, 'contacts', 'index.html'))
+        end
+
+        should "write properly" do
+          page = setup_page('/contacts', 'bar.html')
+          do_render(page)
+          page.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exists?(File.join(dest_dir, 'contacts', 'bar.html'))
+        end
+
+        should "write properly without html extension" do
+          page = setup_page('/contacts', 'bar.html')
+          page.site.permalink_style = :pretty
+          do_render(page)
+          page.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exists?(File.join(dest_dir, 'contacts', 'bar', 'index.html'))
+        end
       end
     end
 

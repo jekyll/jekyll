@@ -56,10 +56,16 @@ module Jekyll
     #
     # Returns the template String.
     def template
-      if self.site.permalink_style == :pretty && !index? && html?
-        "/:basename/"
+      if self.site.permalink_style == :pretty
+        if index? && html?
+          "/:path/"
+        elsif html?
+          "/:path/:basename/"
+        else
+          "/:path/:basename:output_ext"
+        end
       else
-        "/:basename:output_ext"
+        "/:path/:basename:output_ext"
       end
     end
 
@@ -73,6 +79,7 @@ module Jekyll
         permalink
       else
         {
+          "path"       => @dir,
           "basename"   => self.basename,
           "output_ext" => self.output_ext,
         }.inject(template) { |result, token|
@@ -116,7 +123,7 @@ module Jekyll
     # Returns the Hash representation of this Page.
     def to_liquid
       self.data.deep_merge({
-        "url"        => File.join(@dir, self.url),
+        "url"        => self.url,
         "content"    => self.content })
     end
 
@@ -128,7 +135,7 @@ module Jekyll
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct
       # filename.
-      path = File.join(dest, @dir, CGI.unescape(self.url))
+      path = File.join(dest, CGI.unescape(self.url))
       path = File.join(path, "index.html") if self.url =~ /\/$/
       path
     end
