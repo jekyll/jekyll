@@ -21,7 +21,7 @@ h2. Diving In
 * Put information on your site with "Template Data":http://wiki.github.com/mojombo/jekyll/template-data
 * Customize the "Permalinks":http://wiki.github.com/mojombo/jekyll/permalinks your posts are generated with
 * Use the built-in "Liquid Extensions":http://wiki.github.com/mojombo/jekyll/liquid-extensions to make your life easier
-* Use custom "Plugins":https://github.com/mojombo/jekyll/wiki/Plugins to generate content specific to your site
+* Use custom "Plugins":http://wiki.github.com/mojombo/jekyll/Plugins to generate content specific to your site
 
 h2. Runtime Dependencies
 
