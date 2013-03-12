@@ -22,6 +22,11 @@ paginate: 5
 
 The number should be the maximum number of posts you’d like to be displayed per-page in the generated site.
 
+<div class="note info">
+  <h5>Pagination does not support tags or categories</h5>
+  <p>Pagination pages through every post in the <code>posts</code> variable regardless of variables defined in the YAML Front Matter of each. It does not currently allow paging over groups of posts linked by a common tag or category.</p>
+</div>
+
 ## Render the paginated posts
 
 The next thing you need to do is to actually display your posts in a list using the `paginator` variable that will now be available to you. You’ll probably want to do this in one of the main pages of your site. Here’s one example of a simple way of rendering paginated posts in a HTML file:
