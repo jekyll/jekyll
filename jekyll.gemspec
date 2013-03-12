@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('sequel', "~> 3.42")
   s.add_development_dependency('htmlentities', "~> 4.3")
   s.add_development_dependency('hpricot', "~> 0.8")
-  
+
   # = MANIFEST =
   s.files = %w[
     .travis.yml
@@ -75,6 +75,7 @@ Gem::Specification.new do |s|
     lib/jekyll/command.rb
     lib/jekyll/commands/build.rb
     lib/jekyll/commands/migrate.rb
+    lib/jekyll/commands/new.rb
     lib/jekyll/commands/serve.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
@@ -112,7 +113,7 @@ Gem::Specification.new do |s|
     lib/site_template/_config.yml
     lib/site_template/_layouts/default.html
     lib/site_template/_layouts/post.html
-    lib/site_template/_posts/.gitkeep
+    lib/site_template/_posts/0000-00-00-sample_post.markdown.erb
     lib/site_template/css/screen.css
     lib/site_template/css/syntax.css
     lib/site_template/images/.gitkeep
