@@ -88,17 +88,8 @@ module Jekyll
         end
       end
 
-      self.converters = Jekyll::Converter.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
-
-      self.generators = Jekyll::Generator.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
+      self.converters = hydrate(Jekyll::Converter)
+      self.generators = hydrate(Jekyll::Generator)
     end
 
     # Internal: Setup the plugin search path
@@ -393,6 +384,14 @@ module Jekyll
         impl
       else
         raise "Converter implementation not found for #{klass}"
+      end
+    end
+    
+    def hydrate(klass)
+      klass.subclasses.select do |c|
+        !self.safe || c.safe
+      end.map do |c|
+        c.new(self.config)
       end
     end
   end
