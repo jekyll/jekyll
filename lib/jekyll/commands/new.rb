@@ -9,16 +9,16 @@ module Jekyll
         new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
         FileUtils.mkdir_p new_blog_path
 
-        create_sample_files! new_blog_path
+        create_sample_files new_blog_path
 
         File.open(File.expand_path(self.initialized_post_name, new_blog_path), "w") do |f|
-          f.write(self.scaffold_post_content(template_site))
+          f.write(self.scaffold_post_content(site_template))
         end
         puts "New jekyll site installed in #{new_blog_path}."
       end
 
       def self.scaffold_post_content(template_site)
-        ERB.new(File.read(File.expand_path(scaffold_path, template_site))).result
+        ERB.new(File.read(File.expand_path(scaffold_path, site_template))).result
       end
 
       # Internal: Gets the filename of the sample post to be created
@@ -29,16 +29,12 @@ module Jekyll
       end
 
       private
-      def self.create_sample_files!(path)
-        FileUtils.cp_r sample_files, path
+      def self.create_sample_files(path)
+        FileUtils.cp_r site_template + '/.', path
         FileUtils.rm File.expand_path(scaffold_path, path)
       end
 
-      def self.sample_files
-        Dir.glob("#{template_site}/**/*")
-      end
-
-      def self.template_site
+      def self.site_template
         File.expand_path("../../site_template", File.dirname(__FILE__))
       end
 

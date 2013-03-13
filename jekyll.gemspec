@@ -113,7 +113,7 @@ Gem::Specification.new do |s|
     lib/site_template/_config.yml
     lib/site_template/_layouts/default.html
     lib/site_template/_layouts/post.html
-    lib/site_template/_posts/0000-00-00-sample_post.markdown.erb
+    lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb
     lib/site_template/css/screen.css
     lib/site_template/css/syntax.css
     lib/site_template/images/.gitkeep
