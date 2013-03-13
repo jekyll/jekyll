@@ -42,8 +42,8 @@ class TestNewCommand < Test::Unit::TestCase
 
       capture_stdout { Jekyll::Commands::New.process(@args) }
 
-      new_site_files = dir_contents(@full_path).select do |f|
-        static_template_files.include? f
+      new_site_files = dir_contents(@full_path).reject do |f|
+        File.extname(f) == '.markdown'
       end
 
       assert_same_elements static_template_files, new_site_files

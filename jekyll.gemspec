@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('kramdown', "~> 0.13.4")
   s.add_runtime_dependency('pygments.rb', "~> 0.3.2")
   s.add_runtime_dependency('commander', "~> 4.1.3")
-  s.add_runtime_dependency('safe_yaml', "~> 0.4")
+  s.add_runtime_dependency('safe_yaml', "~> 0.7.0")
 
   s.add_development_dependency('rake', "~> 0.9")
   s.add_development_dependency('rdoc', "~> 3.11")
@@ -113,7 +113,7 @@ Gem::Specification.new do |s|
     lib/site_template/_config.yml
     lib/site_template/_layouts/default.html
     lib/site_template/_layouts/post.html
-    lib/site_template/_posts/0000-00-00-sample_post.markdown.erb
+    lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb
     lib/site_template/css/screen.css
     lib/site_template/css/syntax.css
     lib/site_template/images/.gitkeep
