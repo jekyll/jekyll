@@ -3,8 +3,9 @@ require 'erb'
 module Jekyll
   module Commands
     class New < Command
-
       def self.process(args)
+        raise ArgumentError.new('You must specify a path.') if args.empty?
+
         new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
         FileUtils.mkdir_p new_blog_path
 
@@ -28,23 +29,22 @@ module Jekyll
       end
 
       private
+      def self.create_sample_files!(path)
+        FileUtils.cp_r sample_files, path
+        FileUtils.rm File.expand_path(scaffold_path, path)
+      end
 
-        def self.create_sample_files!(path)
-          FileUtils.cp_r sample_files, path
-          FileUtils.rm File.expand_path(scaffold_path, path)
-        end
+      def self.sample_files
+        Dir.glob("#{template_site}/**/*")
+      end
 
-        def self.sample_files
-          Dir.glob("#{template_site}/**/*")
-        end
+      def self.template_site
+        File.expand_path("../../site_template", File.dirname(__FILE__))
+      end
 
-        def self.template_site
-          File.expand_path("../../site_template", File.dirname(__FILE__))
-        end
-
-        def self.scaffold_path
-          "_posts/0000-00-00-sample_post.markdown.erb"
-        end
+      def self.scaffold_path
+        "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
+      end
     end
   end
 end
