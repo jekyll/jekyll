@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '0.12.0'
+  s.version           = '1.0.0.beta1'
   s.license           = 'MIT'
-  s.date              = '2012-12-22'
+  s.date              = '2013-03-14'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -47,7 +47,6 @@ Gem::Specification.new do |s|
 
   # = MANIFEST =
   s.files = %w[
-    .travis.yml
     CONTRIBUTING.md
     Gemfile
     History.txt
@@ -57,6 +56,7 @@ Gem::Specification.new do |s|
     bin/jekyll
     cucumber.yml
     features/create_sites.feature
+    features/drafts.feature
     features/embed_filters.feature
     features/markdown.feature
     features/pagination.feature
@@ -77,22 +77,76 @@ Gem::Specification.new do |s|
     lib/jekyll/converters/textile.rb
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb
+    lib/jekyll/draft.rb
     lib/jekyll/errors.rb
     lib/jekyll/filters.rb
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
+    lib/jekyll/mime.types
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
     lib/jekyll/post.rb
     lib/jekyll/site.rb
     lib/jekyll/static_file.rb
+    lib/jekyll/tags/gist.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
     lib/jekyll/tags/post_url.rb
+    script/bootstrap
+    site/.gitignore
+    site/CNAME
+    site/README
+    site/_config.yml
+    site/_includes/analytics.html
+    site/_includes/docs_contents.html
+    site/_includes/footer.html
+    site/_includes/header.html
+    site/_includes/section_nav.html
+    site/_includes/top.html
+    site/_layouts/default.html
+    site/_layouts/docs.html
+    site/_posts/2012-07-01-configuration.md
+    site/_posts/2012-07-01-contributing.md
+    site/_posts/2012-07-01-deployment-methods.md
+    site/_posts/2012-07-01-extras.md
+    site/_posts/2012-07-01-frontmatter.md
+    site/_posts/2012-07-01-github-pages.md
+    site/_posts/2012-07-01-heroku.md
+    site/_posts/2012-07-01-home.md
+    site/_posts/2012-07-01-installation.md
+    site/_posts/2012-07-01-migrations.md
+    site/_posts/2012-07-01-pages.md
+    site/_posts/2012-07-01-pagination.md
+    site/_posts/2012-07-01-permalinks.md
+    site/_posts/2012-07-01-plugins.md
+    site/_posts/2012-07-01-posts.md
+    site/_posts/2012-07-01-resources.md
+    site/_posts/2012-07-01-sites.md
+    site/_posts/2012-07-01-structure.md
+    site/_posts/2012-07-01-templates.md
+    site/_posts/2012-07-01-troubleshooting.md
+    site/_posts/2012-07-01-usage.md
+    site/_posts/2012-07-01-variables.md
+    site/css/grid.css
+    site/css/normalize.css
+    site/css/pygments.css
+    site/css/style.css
+    site/docs/index.html
+    site/favicon.png
+    site/img/article-footer.png
+    site/img/footer-arrow.png
+    site/img/footer-logo.png
+    site/img/logo-2x.png
+    site/img/octojekyll.png
+    site/img/tube.png
+    site/img/tube1x.png
+    site/index.html
+    site/js/modernizr-2.5.3.min.js
     test/fixtures/broken_front_matter1.erb
     test/fixtures/broken_front_matter2.erb
     test/fixtures/broken_front_matter3.erb
+    test/fixtures/exploit_front_matter.erb
     test/fixtures/front_matter.erb
     test/helper.rb
     test/source/.htaccess
@@ -124,9 +178,13 @@ Gem::Specification.new do |s|
     test/source/_posts/2010-01-16-override-data.textile
     test/source/_posts/2011-04-12-md-extension.md
     test/source/_posts/2011-04-12-text-extension.text
+    test/source/_posts/2013-01-12-nil-layout.textile
+    test/source/_posts/2013-01-12-no-layout.textile
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
     test/source/contacts.html
+    test/source/contacts/bar.html
+    test/source/contacts/index.html
     test/source/css/screen.css
     test/source/deal.with.dots.html
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
