@@ -62,6 +62,23 @@ body > footer img {
   margin-left: 5px;
   width: 100px;
   height: 44px;
+  opacity: .8;
+  -webkit-transition: opacity .2s;
+  -moz-transition: opacity .2s;
+  transition: opacity .2s;
+}
+
+body > footer a:hover img {
+  opacity: 1;
+}
+
+@media (max-width: 568px){
+  footer .one-third p {
+    margin-bottom: 0;
+  }
+  footer .two-thirds p {
+    margin-top: -20px;
+  }
 }
 
 /* HTML Elements */
