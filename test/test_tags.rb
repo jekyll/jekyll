@@ -170,7 +170,7 @@ CONTENT
         assert_match %r{<em>FINISH HIM</em>}, @result
       end
     end
-    
+
     context "using Redcarpet" do
       setup do
         create_post(@content, 'markdown' => 'redcarpet')
@@ -203,22 +203,78 @@ CONTENT
       assert_match %r{/2008/11/21/complex/}, @result
     end
   end
-  
-  context "simple gist inclusion" do
-    setup do
-      @gist = 358471
-      content = <<CONTENT
+
+  context "gist tag" do
+    context "simple" do
+      setup do
+        @gist = 358471
+        content = <<CONTENT
 ---
 title: My Cool Gist
 ---
 
 {% gist #{@gist} %}
 CONTENT
-      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "write script tag" do
+        assert_match "<script src='https://gist.github.com/#{@gist}.js'>\s</script>", @result
+      end
     end
-    
-    should "write script tag" do
-      assert_match %r{<script src='https://gist.github.com/#{@gist}.js'>\s</script>}, @result
+
+    context "with specific file" do
+      setup do
+        @gist = 358471
+        @filename = 'somefile.rb'
+        content = <<CONTENT
+---
+title: My Cool Gist
+---
+
+{% gist #{@gist} #{@filename} %}
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "write script tag with specific file in gist" do
+        assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'>\s</script>", @result
+      end
+    end
+
+    context "with blank gist id" do
+      setup do
+        content = <<CONTENT
+---
+title: My Cool Gist
+---
+
+{% gist %}
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "output error message" do
+        assert_match "Error parsing gist id", @result
+      end
+    end
+
+    context "with invalid gist id" do
+      setup do
+        invalid_gist = 'invalid'
+        content = <<CONTENT
+---
+title: My Cool Gist
+---
+
+{% gist #{invalid_gist} %}
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "output error message" do
+        assert_match "Error parsing gist id", @result
+      end
     end
   end
 end
