@@ -69,6 +69,10 @@
 .pull-left    { float: left; }
 .pull-right   { float: right; }
 
+.show-on-mobiles {
+  display: none;
+}
+
 /* Responsive Stuff */
 @media screen and (max-width: 568px) {
   /* Stack anything that isn’t full-width on smaller screens */
@@ -88,6 +92,12 @@
   }
   .hide-on-mobiles {
     display: none !important;
+  }
+  .show-on-mobiles {
+    display: block !important;
+  }
+  a .show-on-mobiles {
+    display: inline !important;
   }
 }
 

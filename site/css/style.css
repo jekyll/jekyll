@@ -38,6 +38,64 @@ nav li {
   display: inline-block;
 }
 
+.main-nav {
+  margin-top: 52px;
+  text-align: center;
+}
+
+.main-nav ul {
+  display: inline-block;
+}
+
+.main-nav li {
+  margin-left: 10px;
+}
+
+.main-nav li a {
+  border-radius: 5px;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 0.5em 1em;
+  text-shadow: none;
+  text-transform: uppercase;
+  transition: all .25s;
+   -moz-transition: all .25s;
+   -webkit-transition: all .25s;
+}
+
+.main-nav li a:hover {
+  background: #252525;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.1);
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+.main-nav li.current a {
+  background: #fc0;
+  color: #222;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 1px 5px rgba(0,0,0,.5);
+  text-shadow: 0 1px 0 rgba(255,255,255,.3);
+}
+
+.mobile-nav ul {
+  overflow: hidden;
+  width: 100%;
+  display: table;
+}
+
+.mobile-nav a {
+  float: left;
+  width: 100%;
+  background: #fc0;
+  color: #333;
+  box-shadow: inset 0 0 3px #c00;
+  text-align: center;
+}
+
+.mobile-nav li {
+  display: table-cell;
+  width: 33.3%;
+}
+
 /* Footer */
 
 body > footer {
