@@ -1,6 +1,6 @@
 <header>
-  <div class="content">
-    <div class="grid3 first">
+  <div class="grid">
+    <div class="unit one-quarter center-on-mobiles">
       <h1>
         <a href="{{ site.url }}/">
           <span>Jekyll</span>
@@ -8,19 +8,18 @@
         </a>
       </h1>
     </div>
-    <nav class="grid6">
-      <ul>
-        <li {% if page.overview %}class="current"{% endif %}>
+    <nav class="unit three-quarters center-on-mobiles">
+      <ul class="grid">
+        <li class="unit one-third {% if page.overview %}current{% endif %}">
           <a href="{{ site.url }}/">Overview</a>
         </li>
-        <li {% unless page.overview %}class="current"{% endunless %}>
+        <li class="unit one-third {% unless page.overview %}current{% endunless %}">
           <a href="{{ site.url }}/docs">Documentation</a>
         </li>
-        <li class="">
+        <li class="unit one-third">
           <a href="https://github.com/mojombo/jekyll">View on GitHub</a>
         </li>
       </ul>
     </nav>
-    <div class="clear"></div>
   </div>
 </header>
