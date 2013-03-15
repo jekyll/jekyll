@@ -40,15 +40,10 @@ nav li {
 
 .main-nav {
   margin-top: 52px;
-  text-align: center;
-}
-
-.main-nav ul {
-  display: inline-block;
 }
 
 .main-nav li {
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .main-nav li a {
@@ -136,6 +131,24 @@ body > footer a:hover img {
   }
   footer .two-thirds p {
     margin-top: -20px;
+  }
+}
+
+/* Intro */
+
+.intro .unit {
+  padding: 10px 0 40px;
+}
+
+.intro p {
+  font-size: 1.75em;
+  line-height: 1em;
+  margin: 0;
+}
+
+@media (min-width: 569px){
+  .intro p {
+    font-size: 3.2em;
   }
 }
 
