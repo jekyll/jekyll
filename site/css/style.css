@@ -52,14 +52,16 @@ body > footer a {
   color: #fff;
 }
 
-body > footer .align-right p, body > footer .align-right img {
+body > footer .align-right p, body > footer img {
   display: inline-block;
 }
 
-body > footer .align-right img {
+body > footer img {
   position: relative;
   top: 14px;
   margin-left: 5px;
+  width: 100px;
+  height: 44px;
 }
 
 /* HTML Elements */
