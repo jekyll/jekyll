@@ -19,9 +19,9 @@ module Jekyll
 
     def gist_script_tag(gist_id, filename=nil)
       if filename.empty?
-        "<script src=\"https://gist.github.com/#{gist_id}.js\">\s</script>"
+        "<script src=\"https://gist.github.com/#{gist_id}.js\"> </script>"
       else
-        "<script src=\"https://gist.github.com/#{gist_id}.js?file=#{filename}\">\s</script>"
+        "<script src=\"https://gist.github.com/#{gist_id}.js?file=#{filename}\"> </script>"
       end
     end
   end
