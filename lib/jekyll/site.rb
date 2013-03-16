@@ -88,17 +88,8 @@ module Jekyll
         end
       end
 
-      self.converters = Jekyll::Converter.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
-
-      self.generators = Jekyll::Generator.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
+      self.converters = instantiate_subclasses(Jekyll::Converter)
+      self.generators = instantiate_subclasses(Jekyll::Generator)
     end
 
     # Internal: Setup the plugin search path
@@ -385,6 +376,21 @@ module Jekyll
         impl
       else
         raise "Converter implementation not found for #{klass}"
+      end
+    end
+
+    # Create array of instances of the subclasses of the class or module
+    #   passed in as argument.
+    #
+    # klass - class or module containing the subclasses which should be
+    #         instantiated
+    #
+    # Returns array of instances of subclasses of parameter
+    def instantiate_subclasses(klass)
+      klass.subclasses.select do |c|
+        !self.safe || c.safe
+      end.sort.map do |c|
+        c.new(self.config)
       end
     end
 
