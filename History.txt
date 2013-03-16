@@ -27,6 +27,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Order plugin execution by priority (#864)
     * Fixed Page#dir and Page#url for edge cases (#536)
     * Fix broken post_url with posts with a time in their YAML Front-Matter (#831)
     * Look for plugins under the source directory (#654)
