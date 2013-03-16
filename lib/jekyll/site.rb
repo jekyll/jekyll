@@ -389,7 +389,7 @@ module Jekyll
     def instantiate_subclasses(klass)
       klass.subclasses.select do |c|
         !self.safe || c.safe
-      end.map do |c|
+      end.sort.map do |c|
         c.new(self.config)
       end
     end
