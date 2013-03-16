@@ -20,7 +20,7 @@ module Jekyll
 
     attr_accessor :site
     attr_accessor :data, :content, :output, :ext
-    attr_accessor :date, :slug, :published, :tags, :categories
+    attr_accessor :date, :updated, :slug, :published, :tags, :categories
 
     attr_reader :name
 
@@ -49,6 +49,9 @@ module Jekyll
       if self.data.has_key?('date')
         # ensure Time via to_s and reparse
         self.date = Time.parse(self.data["date"].to_s)
+      end
+      if self.data.has_key?('updated')
+        self.updated = Time.parse(self.data["updated"].to_s)
       end
 
       if self.data.has_key?('published') && self.data['published'] == false
@@ -88,7 +91,9 @@ module Jekyll
     #
     # Returns -1, 0, 1
     def <=>(other)
-      cmp = self.date <=> other.date
+	  d = self.updated || self.date
+	  o = other.updated || other.date
+      cmp = d <=> o
       if 0 == cmp
        cmp = self.slug <=> other.slug
       end
@@ -153,6 +158,7 @@ module Jekyll
         {
           "year"       => date.strftime("%Y"),
           "month"      => date.strftime("%m"),
+          "mname"      => date.strftime("%b").downcase,
           "day"        => date.strftime("%d"),
           "title"      => CGI.escape(slug),
           "i_day"      => date.strftime("%d").to_i.to_s,
