@@ -45,6 +45,21 @@ class TestSite < Test::Unit::TestCase
       assert_equal Hash.new, @site.tags
     end
 
+    should "give site with parsed pages and posts to generators" do
+      @site.reset
+      @site.read
+      class MyGenerator < Generator
+        def generate(site)
+          site.pages.dup.each do |page|
+            raise "#{page} isn't a page" unless page.is_a?(Page)
+            raise "#{page} doesn't respond to :name" unless page.respond_to?(:name)
+          end
+        end
+      end
+      @site.generate
+      assert_not_equal 0, @site.pages.size
+    end
+
     should "reset data before processing" do
       clear_dest
       @site.process
