@@ -4,6 +4,7 @@
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
     * Added ability to render drafts in _drafts folder via command line (#833)
   * Minor Enhancements
+    * Accept custom configuration file via CLI (#863)
     * Load in Apache MIME Types on `jekyll serve` (#847)
     * Improve debugability of error message for a malformed highlight tag (#785)
     * Allow symlinked files in unsafe mode (#824)
