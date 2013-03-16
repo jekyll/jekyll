@@ -43,6 +43,12 @@ class Test::Unit::TestCase
     File.join(File.dirname(__FILE__), *subdirs)
   end
 
+  def directory_with_contents(path)
+    FileUtils.rm_rf(path)
+    FileUtils.mkdir(path)
+    File.open("#{path}/index.html", "w"){ |f| f.write("I was previously generated.") }
+  end
+
   def capture_stdout
     $old_stdout = $stdout
     $stdout = StringIO.new

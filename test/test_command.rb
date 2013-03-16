@@ -6,19 +6,22 @@ class TestCommand < Test::Unit::TestCase
       setup do
         @source = source_dir
         @dest   = dest_dir
+        directory_with_contents(@dest)
         @globs  = Command.globs(@source, @dest)
       end
       should "return an array without the destination dir" do
         assert @globs.is_a?(Array)
         assert !@globs.include?(@dest)
       end
+      teardown do
+        clear_dest
+      end
     end
     context "when using default dest dir" do
       setup do
         @source = test_dir
         @dest   = test_dir('_site')
-        FileUtils.mkdir(@dest)
-        File.open("#{@dest}/index.html", "w"){ |f| f.write("I was previously generated.") }
+        directory_with_contents(@dest)
         @globs  = Command.globs(@source, @dest)
       end
       should "return an array without the destination dir" do
