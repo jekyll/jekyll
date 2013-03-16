@@ -34,6 +34,7 @@ command :build do |c|
   c.syntax = 'jekyll build [options]'
   c.description = 'Build your site'
 
+  c.option '--config [CONFIG_FILE]', 'Custom configuration file'
   c.option '--future', 'Publishes posts with a future date'
   c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
@@ -52,6 +53,7 @@ command :serve do |c|
   c.syntax = 'jekyll serve [options]'
   c.description = 'Serve your site locally'
 
+  c.option '--config [CONFIG_FILE]', 'Custom configuration file'
   c.option '--future', 'Publishes posts with a future date'
   c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
