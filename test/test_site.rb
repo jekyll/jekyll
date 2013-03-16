@@ -139,6 +139,11 @@ class TestSite < Test::Unit::TestCase
       assert_equal mtime3, mtime4 # no modifications, so must be the same
     end
 
+    should "setup plugins in priority order" do
+      assert_equal @site.converters.sort_by(&:class).map{|c|c.class.priority}, @site.converters.map{|c|c.class.priority}
+      assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
+    end
+
     should "read layouts" do
       @site.read_layouts
       assert_equal ["default", "simple"].sort, @site.layouts.keys.sort
