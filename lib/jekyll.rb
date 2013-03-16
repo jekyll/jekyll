@@ -130,7 +130,7 @@ module Jekyll
     source = override['source'] || Jekyll::DEFAULTS['source']
 
     # Get configuration from <source>/_config.yml
-    config_file = File.join(source, '_config.yml')
+    config_file = override['config'] || File.join(source, '_config.yml')
     begin
       config = YAML.safe_load_file(config_file)
       raise "Configuration file: (INVALID) #{config_file}" if !config.is_a?(Hash)
