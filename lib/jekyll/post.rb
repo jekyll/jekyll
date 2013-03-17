@@ -79,7 +79,6 @@ module Jekyll
       super(base, name)
       self.excerpt = self.extract_excerpt
       self.data['layout'] = 'post' unless self.data.has_key?('layout')
-      nil
     end
 
     # Compares Post objects. First compares the Post date. If the dates are
@@ -116,7 +115,6 @@ module Jekyll
     def transform
       super
       self.excerpt = converter.convert(self.excerpt)
-      nil
     end
 
     # The generated directory into which the post will be placed
@@ -313,7 +311,7 @@ module Jekyll
     #     [1]: http://example.com/
     #
     # This is fairly good option for Markdown and Textile files. But might cause
-    # problems for HTML posts (which is quiet unusual for Jekyll). If default
+    # problems for HTML posts (which is quite unusual for Jekyll). If default
     # excerpt delimiter is not good for you, you might want to set your own via
     # configuration option `excerpt_separator`. For example, following is a good
     # alternative for HTML posts:
