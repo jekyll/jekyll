@@ -8,7 +8,7 @@
     * Expose site.baseurl to Liquid templates (#869)
     * Adds excerpt attribute to posts which contains first paragraph of content (#837)
     * Accept custom configuration file via CLI (#863)
-    * Load in Apache MIME Types on `jekyll serve` (#847)
+    * Load in GitHub Pages MIME Types on `jekyll serve` (#847, #871)
     * Improve debugability of error message for a malformed highlight tag (#785)
     * Allow symlinked files in unsafe mode (#824)
     * Add 'gist' liquid tag to core (#822)
