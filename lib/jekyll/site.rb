@@ -21,7 +21,7 @@ module Jekyll
       self.plugins         = plugins_path
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
-      self.baseurl         = config['baseurl'] || '/'
+      self.baseurl         = config['baseurl']
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
       self.include         = config['include'] || []
