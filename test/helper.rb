@@ -28,15 +28,25 @@ class Test::Unit::TestCase
   include RR::Adapters::TestUnit
 
   def dest_dir(*subdirs)
-    File.join(File.dirname(__FILE__), 'dest', *subdirs)
+    test_dir('dest', *subdirs)
   end
 
   def source_dir(*subdirs)
-    File.join(File.dirname(__FILE__), 'source', *subdirs)
+    test_dir('source', *subdirs)
   end
 
   def clear_dest
     FileUtils.rm_rf(dest_dir)
+  end
+
+  def test_dir(*subdirs)
+    File.join(File.dirname(__FILE__), *subdirs)
+  end
+
+  def directory_with_contents(path)
+    FileUtils.rm_rf(path)
+    FileUtils.mkdir(path)
+    File.open("#{path}/index.html", "w"){ |f| f.write("I was previously generated.") }
   end
 
   def capture_stdout
