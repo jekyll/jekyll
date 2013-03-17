@@ -30,6 +30,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Ensure all Post categories are downcase (#842, #872)
     * Force encoding of the rdiscount TOC to UTF8 to avoid conversion errors (#555)
     * Patch for multibyte URI problem with jekyll serve (#723)
     * Order plugin execution by priority (#864)
