@@ -32,6 +32,15 @@ class TestSite < Test::Unit::TestCase
       assert_equal [], site.plugins
     end
 
+    should "expose default baseurl" do
+      site = Site.new(Jekyll::DEFAULTS)
+      assert_equal Jekyll::DEFAULTS['baseurl'], site.baseurl
+    end
+
+    should "expose baseurl passed in from config" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'baseurl' => '/blog'}))
+      assert_equal '/blog', site.baseurl
+    end
   end
   context "creating sites" do
     setup do
