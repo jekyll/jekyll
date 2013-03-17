@@ -1,5 +1,6 @@
 == HEAD
   * Major Enhancements
+    * Add `jekyll new` subcommand: generate a jekyll scaffold (#764)
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
     * Added ability to render drafts in _drafts folder via command line (#833)
