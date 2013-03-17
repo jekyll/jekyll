@@ -5,7 +5,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files
+                  :show_drafts, :keep_files, :baseurl
 
     attr_accessor :converters, :generators
 
