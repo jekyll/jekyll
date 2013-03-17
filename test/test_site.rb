@@ -7,6 +7,11 @@ class TestSite < Test::Unit::TestCase
       assert_equal [File.join(Dir.pwd, '_plugins')], site.plugins
     end
 
+    should "look for plugins under the site directory by default" do
+      site = Site.new(Jekyll::DEFAULTS.merge({'source' => File.expand_path(source_dir)}))
+      assert_equal [File.join(source_dir, '_plugins')], site.plugins
+    end
+
     should "have an array for plugins if passed as a string" do
       site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
       assert_equal ['/tmp/plugins'], site.plugins
@@ -26,6 +31,7 @@ class TestSite < Test::Unit::TestCase
       site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => nil}))
       assert_equal [], site.plugins
     end
+
   end
   context "creating sites" do
     setup do
@@ -37,6 +43,21 @@ class TestSite < Test::Unit::TestCase
 
     should "have an empty tag hash by default" do
       assert_equal Hash.new, @site.tags
+    end
+
+    should "give site with parsed pages and posts to generators" do
+      @site.reset
+      @site.read
+      class MyGenerator < Generator
+        def generate(site)
+          site.pages.dup.each do |page|
+            raise "#{page} isn't a page" unless page.is_a?(Page)
+            raise "#{page} doesn't respond to :name" unless page.respond_to?(:name)
+          end
+        end
+      end
+      @site.generate
+      assert_not_equal 0, @site.pages.size
     end
 
     should "reset data before processing" do
@@ -118,6 +139,11 @@ class TestSite < Test::Unit::TestCase
       assert_equal mtime3, mtime4 # no modifications, so must be the same
     end
 
+    should "setup plugins in priority order" do
+      assert_equal @site.converters.sort_by(&:class).map{|c|c.class.priority}, @site.converters.map{|c|c.class.priority}
+      assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
+    end
+
     should "read layouts" do
       @site.read_layouts
       assert_equal ["default", "simple"].sort, @site.layouts.keys.sort
@@ -163,6 +189,22 @@ class TestSite < Test::Unit::TestCase
       files = %w[index.html _index.html .htaccess includeA]
 
       @site.include = includes
+      assert_equal files, @site.filter_entries(files)
+    end
+
+    should "filter symlink entries when safe mode enabled" do
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
+      end
+      site = Site.new(Jekyll.configuration)
+      stub(File).symlink?('symlink.js') {true}
+      files = %w[symlink.js]
+      assert_equal [], site.filter_entries(files)
+    end
+
+    should "not filter symlink entries when safe mode disabled" do
+      stub(File).symlink?('symlink.js') {true}
+      files = %w[symlink.js]
       assert_equal files, @site.filter_entries(files)
     end
 

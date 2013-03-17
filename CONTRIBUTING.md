@@ -17,6 +17,7 @@ following in mind:
 * If your contribution changes any Jekyll behavior, make sure to update the
   documentation. It lives in site/_posts. If the docs are missing information,
   please feel free to add it in. Great docs make a great project!
+* Please follow the [Github Ruby Styleguide](https://github.com/styleguide/ruby) when modifying Ruby code.
 
 Test Dependencies
 -----------------

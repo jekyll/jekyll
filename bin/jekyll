@@ -16,6 +16,19 @@ global_option '-d', '--destination [DIR]', 'Destination directory (defaults to .
 global_option '--safe', 'Safe mode (defaults to false)'
 global_option '--plugins', 'Plugins directory (defaults to ./_plugins)'
 global_option '--layouts', 'Layouts directory (defaults to ./_layouts)'
+  
+# Option names don't always directly match the configuration value we'd like.
+# This method will rename options to match what Jekyll configuration expects.
+#
+# options - The Hash of options from Commander.
+#
+# Returns the normalized Hash.
+def normalize_options(options)
+  if drafts_state = options.delete(:drafts)
+    options[:show_drafts] = drafts_state
+  end
+  options
+end
 
 command :new do |c|
   c.syntax = 'jekyll new PATH'
@@ -28,24 +41,33 @@ end
 
 command :build do |c|
   c.syntax = 'jekyll build [options]'
-  c.description = 'Build your site with the option of auto-renegeration'
+  c.description = 'Build your site'
 
+  c.option '--config [CONFIG_FILE]', 'Custom configuration file'
+  c.option '--future', 'Publishes posts with a future date'
+  c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
+  c.option '--drafts', 'Render posts in the _drafts folder'
 
   c.action do |args, options|
     options.defaults :serving => false
-    options = Jekyll.configuration(options.__hash__)
+    options = normalize_options(options.__hash__)
+    options = Jekyll.configuration(options)
     Jekyll::Commands::Build.process(options)
   end
 end
 
 command :serve do |c|
   c.syntax = 'jekyll serve [options]'
-  c.description = 'Serve your site locally with the option of auto-regeneration'
+  c.description = 'Serve your site locally'
 
+  c.option '--config [CONFIG_FILE]', 'Custom configuration file'
+  c.option '--future', 'Publishes posts with a future date'
+  c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
+  c.option '--drafts', 'Render posts in the _drafts folder'
 
   c.option '-p', '--port [PORT]', 'Port to listen on'
   c.option '-h', '--host [HOST]', 'Host to bind to'
@@ -57,16 +79,19 @@ command :serve do |c|
                     :baseurl => '/',
                     :serving => true
 
-    options = Jekyll.configuration(options.__hash__)
+    options = normalize_options(options.__hash__)
+    options = Jekyll.configuration(options)
     Jekyll::Commands::Build.process(options)
     Jekyll::Commands::Serve.process(options)
   end
 end
+alias_command :server, :serve
 
 command :import do |c|
   c.syntax = 'jekyll import <platform> [options]'
   c.description = 'Import your old blog to Jekyll'
 
+  c.option '--source', 'Source file or URL to migrate from'
   c.option '--file', 'File to migrate from'
   c.option '--dbname', 'Database name to migrate from'
   c.option '--user', 'Username to use when migrating'
@@ -74,6 +99,14 @@ command :import do |c|
   c.option '--host', 'Host address to use when migrating'
 
   c.action do |args, options|
-    Jekyll::Commands::Migrate.process(args.first, options)
+    begin
+      require 'jekyll-import'
+    rescue LoadError
+      msg  = "You must install the 'jekyll-import' gem before continuing.\n"
+      msg += "* Do this by running `gem install jekyll-import`.\n"
+      msg += "* Or if you need root privileges, run `sudo gem install jekyll-import`."
+      abort msg
+    end
+    Jekyll::Commands::Import.process(args.first, options)
   end
 end

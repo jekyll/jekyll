@@ -33,6 +33,7 @@ require 'jekyll/convertible'
 require 'jekyll/layout'
 require 'jekyll/page'
 require 'jekyll/post'
+require 'jekyll/draft'
 require 'jekyll/filters'
 require 'jekyll/static_file'
 require 'jekyll/errors'
@@ -48,16 +49,17 @@ require_all 'jekyll/converters'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
+SafeYAML::OPTIONS[:suppress_warnings] = true
+
 module Jekyll
-  VERSION = '0.12.0'
+  VERSION = '1.0.0.beta1'
 
   # Default options. Overriden by values in _config.yml.
   # Strings rather than symbols are used for compatability with YAML.
   DEFAULTS = {
     'source'        => Dir.pwd,
     'destination'   => File.join(Dir.pwd, '_site'),
-
-    'plugins'       => File.join(Dir.pwd, '_plugins'),
+    'plugins'       => '_plugins',
     'layouts'       => '_layouts',
     'keep_files'   => ['.git','.svn'],
 
@@ -127,16 +129,23 @@ module Jekyll
     # then, we need to know where to look for _config.yml
     source = override['source'] || Jekyll::DEFAULTS['source']
 
-    # Get configuration from <source>/_config.yml
-    config_file = File.join(source, '_config.yml')
+    # Get configuration from <source>/_config.yml or <source>/<config_file>
+    config_file = override.delete('config')
+    config_file = File.join(source, "_config.yml") if config_file.to_s.empty?
+
     begin
-      config = YAML.load_file(config_file)
-      raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
-      $stdout.puts "Configuration from #{config_file}"
+      config = YAML.safe_load_file(config_file)
+      raise "Configuration file: (INVALID) #{config_file}" if !config.is_a?(Hash)
+      $stdout.puts "Configuration file: #{config_file}"
+    rescue SystemCallError
+      # Errno:ENOENT = file not found
+      $stderr.puts "Configuration file: none"
+      config = {}
     rescue => err
-      $stderr.puts "WARNING: Could not read configuration. " +
+      $stderr.puts "           " +
+                   "WARNING: Error reading configuration. " +
                    "Using defaults (and options)."
-      $stderr.puts "\t" + err.to_s
+      $stderr.puts "#{err}"
       config = {}
     end
 

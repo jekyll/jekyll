@@ -23,7 +23,9 @@ module Jekyll
       def self.build(site, options)
         source = options['source']
         destination = options['destination']
-        puts "Building site: #{source} -> #{destination}"
+        puts  "            Source: #{source}"
+        puts  "       Destination: #{destination}"
+        print "      Generating... "
         begin
           site.process
         rescue Jekyll::FatalException => e
@@ -33,7 +35,7 @@ module Jekyll
           puts e.message
           exit(1)
         end
-        puts "Successfully generated site: #{source} -> #{destination}"
+        puts "done."
       end
 
       # Private: Watch for file changes and rebuild the site.
@@ -48,23 +50,26 @@ module Jekyll
         source = options['source']
         destination = options['destination']
 
-        puts "Auto-Regenerating enabled: #{source} -> #{destination}"
+        puts "            Source: #{source}"
+        puts "       Destination: #{destination}"
+        puts " Auto-regeneration: enabled"
 
         dw = DirectoryWatcher.new(source)
         dw.interval = 1
-        dw.glob = self.globs(source)
+        dw.glob = self.globs(source, destination)
 
         dw.add_observer do |*args|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-          puts "[#{t}] regeneration: #{args.size} files changed"
+          print "      Regenerating: #{args.size} files at #{t} "
           site.process
+          puts  "...done."
         end
 
         dw.start
 
         unless options['serving']
           trap("INT") do
-            puts "Stopping auto-regeneration..."
+            puts "     Halting auto-regeneration."
             exit 0
           end
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Jekyll
   module Commands
     class Serve < Command
@@ -9,9 +10,12 @@ module Jekyll
 
         FileUtils.mkdir_p(destination)
 
-        mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
-        mime_types.store 'js', 'application/javascript'
-        mime_types.store 'svg', 'image/svg+xml'
+        mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
+        mime_types = WEBrick::HTTPUtils::load_mime_types(mime_types_file)
+
+        # recreate NondisclosureName under utf-8 circumstance
+        fh_option = WEBrick::Config::FileHandler
+        fh_option[:NondisclosureName] = ['.ht*','~*']
 
         s = HTTPServer.new(
           :Port => options['port'],
@@ -19,7 +23,7 @@ module Jekyll
           :MimeTypes => mime_types
         )
 
-        s.mount(options['baseurl'], HTTPServlet::FileHandler, destination)
+        s.mount(options['baseurl'], HTTPServlet::FileHandler, destination, fh_option)
         t = Thread.new { s.start }
         trap("INT") { s.shutdown }
         t.join()

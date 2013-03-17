@@ -1,7 +1,22 @@
 == HEAD
   * Major Enhancements
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
+    * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
+    * Added ability to render drafts in _drafts folder via command line (#833)
   * Minor Enhancements
+    * Accept custom configuration file via CLI (#863)
+    * Load in Apache MIME Types on `jekyll serve` (#847)
+    * Improve debugability of error message for a malformed highlight tag (#785)
+    * Allow symlinked files in unsafe mode (#824)
+    * Add 'gist' liquid tag to core (#822)
+    * New format of Jekyll output (#795)
+    * Reinstate --limit_posts and --future switches (#788)
+    * Remove ambiguity from command descriptions (#815)
+    * Fix SafeYAML Warnings (#807)
+    * Relaxed Kramdown version to 0.14 (#808)
+    * Aliased `jekyll server` to `jekyll serve`. (#792)
+    * Updated gem versions for Kramdown, Rake, Shoulda, Cucumber, and RedCarpet. (#744)
+    * Refactored jekyll subcommands into Jekyll::Commands submodule, which now contains them (#768)
     * Rescue from import errors in Wordpress.com migrator (#671)
     * Massively accelerate LSI performance (#664)
     * Truncate post slugs when importing from Tumblr (#496)
@@ -12,16 +27,26 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Patch for multibyte URI problem with jekyll serve (#723)
+    * Order plugin execution by priority (#864)
+    * Fixed Page#dir and Page#url for edge cases (#536)
+    * Fix broken post_url with posts with a time in their YAML Front-Matter (#831)
+    * Look for plugins under the source directory (#654)
     * Tumblr Migrator: finds _posts dir correctly, fixes truncation of long
       post names (#775)
     * Force Categories to be Strings (#767)
     * Safe YAML plugin to prevent vulnerability (#777)
     * Add SVG support to Jekyll/WEBrick. (#407, #406)
-    * Prevent custom destination from causing continuous regen (#528)
+    * Prevent custom destination from causing continuous regen on watch (#528, #820)
   * Site Enhancements
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
   * Development fixes
+    * Added "features:html" rake task for debugging purposes, cleaned up
+      cucumber profiles (#832)
+    * Explicitly require HTTPS rubygems source in Gemfile (#826)
+    * Changed Ruby version for development to 1.9.3-p374 from p362 (#801)
+    * Including a link to the GitHub Ruby style guide in CONTRIBUTING.md (#806)
     * Added script/bootstrap (#776)
     * Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version
       of greater than 1.9 (#771)
