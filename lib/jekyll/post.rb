@@ -36,7 +36,7 @@ module Jekyll
       @base = self.containing_dir(source, dir)
       @name = name
 
-      self.categories = dir.split('/').reject { |x| x.empty? }
+      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
       self.process(name)
       begin 
         self.read_yaml(@base, name)
@@ -60,7 +60,7 @@ module Jekyll
       self.tags = self.data.pluralized_array("tag", "tags")
 
       if self.categories.empty?
-        self.categories = self.data.pluralized_array('category', 'categories')
+        self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
       end
     end
 
