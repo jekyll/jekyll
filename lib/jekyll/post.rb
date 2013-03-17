@@ -139,6 +139,8 @@ module Jekyll
       case self.site.permalink_style
       when :pretty
         "/:categories/:year/:month/:day/:title/"
+      when :pretty_flat
+        "/:year-:month-:day-:title"
       when :none
         "/:categories/:title.html"
       when :date
@@ -235,7 +237,7 @@ module Jekyll
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
       path = File.join(dest, CGI.unescape(self.url))
-      path = File.join(path, "index.html") if template[/\.html$/].nil?
+      path = File.join(path, "index.html") if template[/\.html$/].nil? && self.site.permalink_style != :pretty_flat
       path
     end
 
