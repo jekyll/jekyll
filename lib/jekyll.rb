@@ -64,12 +64,13 @@ module Jekyll
     'keep_files'   => ['.git','.svn'],
 
     'future'        => true,           # remove and make true just default
-    'pygments'      => false,          # remove and make true just default
+    'pygments'      => true,          # remove and make true just default
 
-    'markdown'      => 'maruku',       # no longer a command option
-    'permalink'     => 'date',         # no longer a command option
-    'include'       => ['.htaccess'],  # no longer a command option
-    'paginate_path' => 'page:num',     # no longer a command option
+    'markdown'      => 'maruku',
+    'permalink'     => 'date',
+    'baseurl'       => '',
+    'include'       => ['.htaccess'],
+    'paginate_path' => 'page:num',
 
     'markdown_ext'  => 'markdown,mkd,mkdn,md',
     'textile_ext'   => 'textile',
