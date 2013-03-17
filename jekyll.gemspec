@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name              = 'jekyll'
   s.version           = '1.0.0.beta1'
   s.license           = 'MIT'
-  s.date              = '2013-03-14'
+  s.date              = '2013-03-17'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -70,7 +70,6 @@ Gem::Specification.new do |s|
     lib/jekyll.rb
     lib/jekyll/command.rb
     lib/jekyll/commands/build.rb
-    lib/jekyll/commands/migrate.rb
     lib/jekyll/commands/new.rb
     lib/jekyll/commands/serve.rb
     lib/jekyll/converter.rb
@@ -164,6 +163,7 @@ Gem::Specification.new do |s|
     test/source/_includes/sig.markdown
     test/source/_layouts/default.html
     test/source/_layouts/simple.html
+    test/source/_plugins/dummy.rb
     test/source/_posts/2008-02-02-not-published.textile
     test/source/_posts/2008-02-02-published.textile
     test/source/_posts/2008-10-18-foo-bar.textile
@@ -189,6 +189,7 @@ Gem::Specification.new do |s|
     test/source/_posts/2010-01-16-override-data.textile
     test/source/_posts/2011-04-12-md-extension.md
     test/source/_posts/2011-04-12-text-extension.text
+    test/source/_posts/2013-01-02-post-excerpt.markdown
     test/source/_posts/2013-01-12-nil-layout.textile
     test/source/_posts/2013-01-12-no-layout.textile
     test/source/about.html
@@ -204,12 +205,14 @@ Gem::Specification.new do |s|
     test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
     test/source/z_category/_posts/2008-9-23-categories.textile
     test/suite.rb
+    test/test_command.rb
     test/test_configuration.rb
     test/test_convertible.rb
     test/test_core_ext.rb
     test/test_filters.rb
     test/test_generated_site.rb
     test/test_kramdown.rb
+    test/test_new_command.rb
     test/test_page.rb
     test/test_pager.rb
     test/test_post.rb
