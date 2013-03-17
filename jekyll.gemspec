@@ -70,11 +70,8 @@ Gem::Specification.new do |s|
     lib/jekyll.rb
     lib/jekyll/command.rb
     lib/jekyll/commands/build.rb
-<<<<<<< HEAD
     lib/jekyll/commands/migrate.rb
     lib/jekyll/commands/new.rb
-=======
->>>>>>> master
     lib/jekyll/commands/serve.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
@@ -98,7 +95,6 @@ Gem::Specification.new do |s|
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
     lib/jekyll/tags/post_url.rb
-<<<<<<< HEAD
     lib/site_template/_config.yml
     lib/site_template/_layouts/default.html
     lib/site_template/_layouts/post.html
@@ -108,7 +104,6 @@ Gem::Specification.new do |s|
     lib/site_template/images/.gitkeep
     lib/site_template/images/rss.png
     lib/site_template/index.html
-=======
     script/bootstrap
     site/.gitignore
     site/CNAME
@@ -159,7 +154,6 @@ Gem::Specification.new do |s|
     site/img/tube1x.png
     site/index.html
     site/js/modernizr-2.5.3.min.js
->>>>>>> master
     test/fixtures/broken_front_matter1.erb
     test/fixtures/broken_front_matter2.erb
     test/fixtures/broken_front_matter3.erb
