@@ -5,7 +5,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files
+                  :show_drafts, :keep_files, :baseurl
 
     attr_accessor :converters, :generators
 
@@ -21,6 +21,7 @@ module Jekyll
       self.plugins         = plugins_path
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
+      self.baseurl         = config['baseurl'] || '/'
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
       self.include         = config['include'] || []
