@@ -30,6 +30,15 @@ def normalize_options(options)
   options
 end
 
+command :new do |c|
+  c.syntax = 'jekyll new PATH'
+  c.description = 'Creates a new Jekyll site scaffold in PATH'
+
+  c.action do |args, options|
+    Jekyll::Commands::New.process(args)
+  end
+end
+
 command :build do |c|
   c.syntax = 'jekyll build [options]'
   c.description = 'Build your site'

@@ -70,6 +70,8 @@ Gem::Specification.new do |s|
     lib/jekyll.rb
     lib/jekyll/command.rb
     lib/jekyll/commands/build.rb
+    lib/jekyll/commands/migrate.rb
+    lib/jekyll/commands/new.rb
     lib/jekyll/commands/serve.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
@@ -93,6 +95,15 @@ Gem::Specification.new do |s|
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
     lib/jekyll/tags/post_url.rb
+    lib/site_template/_config.yml
+    lib/site_template/_layouts/default.html
+    lib/site_template/_layouts/post.html
+    lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb
+    lib/site_template/css/screen.css
+    lib/site_template/css/syntax.css
+    lib/site_template/images/.gitkeep
+    lib/site_template/images/rss.png
+    lib/site_template/index.html
     script/bootstrap
     site/.gitignore
     site/CNAME
