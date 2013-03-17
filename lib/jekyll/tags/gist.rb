@@ -7,7 +7,7 @@
 module Jekyll
   class GistTag < Liquid::Tag
     def render(context)
-      if tag_contents = @markup.strip.match(/\A(\d+) ?(\S*)\z/)
+      if tag_contents = @markup.strip.match(/\A(\d+) ?(\S*)\Z/)
         gist_id, filename = tag_contents[1].strip, tag_contents[2].strip
         gist_script_tag(gist_id, filename)
       else
