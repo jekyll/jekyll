@@ -11,7 +11,7 @@
     * Load in GitHub Pages MIME Types on `jekyll serve` (#847, #871)
     * Improve debugability of error message for a malformed highlight tag (#785)
     * Allow symlinked files in unsafe mode (#824)
-    * Add 'gist' liquid tag to core (#822)
+    * Add 'gist' Liquid tag to core (#822, #861)
     * New format of Jekyll output (#795)
     * Reinstate --limit_posts and --future switches (#788)
     * Remove ambiguity from command descriptions (#815)
