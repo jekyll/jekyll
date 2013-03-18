@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.0.0.beta1'
+  s.version           = '1.0.0.beta2'
   s.license           = 'MIT'
-  s.date              = '2013-03-17'
+  s.date              = '2013-03-19'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."

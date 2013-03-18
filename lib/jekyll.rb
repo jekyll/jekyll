@@ -52,7 +52,7 @@ require_all 'jekyll/tags'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.0.0.beta1'
+  VERSION = '1.0.0.beta2'
 
   # Default options. Overriden by values in _config.yml.
   # Strings rather than symbols are used for compatability with YAML.
