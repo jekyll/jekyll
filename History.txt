@@ -57,6 +57,14 @@
       of greater than 1.9 (#771)
     * Switch to Simplecov for coverage report (#765)
 
+== 0.12.1 / 2013-02-19
+  * Minor Enhancements
+    * Update Kramdown version to 0.14.1 (#744)
+  * Test Enhancements
+    * Update Rake version to 10.0.3 (#744)
+    * Update Shoulda version to 3.3.2 (#744)
+    * Update Redcarpet version to 2.2.2 (#744)
+
 == 0.12.0 / 2012-12-22
   * Minor Enhancements
     * Add ability to explicitly specify included files (#261)
