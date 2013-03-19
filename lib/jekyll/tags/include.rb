@@ -1,9 +1,14 @@
 module Jekyll
   module Tags
     class IncludeTag < Liquid::Tag
-      def initialize(tag_name, file, tokens)
+      def initialize(tag_name, params, tokens)
         super
-        @file = file.strip
+        @file = params
+
+        separator = params.index(' ')
+        @file = params[0..separator].strip if params.include?(' ')
+
+        @params = params[separator..-1].split(',').map{|h| h1,h2 = h.split('='); {h1.strip => h2.strip} if (h1 && h2) }.reduce(:merge) if defined?(separator)
       end
 
       def render(context)
@@ -22,6 +27,7 @@ module Jekyll
           if choices.include?(@file)
             source = File.read(@file)
             partial = Liquid::Template.parse(source)
+            context['include'] = @params
             context.stack do
               partial.render(context)
             end
