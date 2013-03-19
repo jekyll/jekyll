@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+STDOUT.sync = true
 
 $:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 
