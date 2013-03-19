@@ -61,7 +61,15 @@ module Jekyll
         dw.add_observer do |*args|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           print "      Regenerating: #{args.size} files at #{t} "
-          site.process
+          begin
+            site.process
+          rescue Jekyll::FatalException => e
+            puts
+            puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
+            puts "------------------------------------"
+            puts e.message
+            exit(1)
+          end
           puts  "...done."
         end
 
