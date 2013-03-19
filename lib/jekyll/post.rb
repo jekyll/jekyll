@@ -62,6 +62,9 @@ module Jekyll
       if self.categories.empty?
         self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
       end
+
+      self.tags.flatten!
+      self.categories.flatten!
     end
 
     # Get the full path to the directory containing the post files
