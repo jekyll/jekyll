@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('liquid', "~> 2.3")
   s.add_runtime_dependency('classifier', "~> 1.3")
-  s.add_runtime_dependency('directory_watcher', "~> 1.1")
+  s.add_runtime_dependency('directory_watcher', "~> 1.4.1")
   s.add_runtime_dependency('maruku', "~> 0.5")
   s.add_runtime_dependency('kramdown', "~> 0.14")
   s.add_runtime_dependency('pygments.rb', "~> 0.3.2")
