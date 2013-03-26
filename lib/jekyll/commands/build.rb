@@ -4,9 +4,6 @@ module Jekyll
       def self.process(options)
         site = Jekyll::Site.new(options)
 
-        source = options['source']
-        destination = options['destination']
-
         if options['watch']
           self.watch(site, options)
         else
