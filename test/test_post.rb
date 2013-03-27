@@ -225,6 +225,17 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with custom abbreviated month date permalink" do
+          setup do
+            @post.site.permalink_style = '/:categories/:year/:abrv_month/:day/:title/'
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/2008/Sep/09/foo-bar/", @post.url
+          end
+        end
+
         context "with prefix style and no extension" do
           setup do
             @post.site.permalink_style = "/prefix/:title"
