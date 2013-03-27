@@ -13,6 +13,7 @@ class TestFilters < Test::Unit::TestCase
   context "filters" do
     setup do
       @filter = JekyllFilter.new
+      @sample_time = Time.parse "2013-03-27T11:22:33+00:00"
     end
 
     should "textilize with simple string" do
@@ -40,6 +41,22 @@ class TestFilters < Test::Unit::TestCase
     should "convert array to sentence string with multiple args" do
       assert_equal "1, 2, 3, and 4", @filter.array_to_sentence_string([1, 2, 3, 4])
       assert_equal "chunky, bacon, bits, and pieces", @filter.array_to_sentence_string(["chunky", "bacon", "bits", "pieces"])
+    end
+
+    should "format a date with short format" do
+      assert_equal "27 Mar 2013", @filter.date_to_string(@sample_time)
+    end
+
+    should "format a date with long format" do
+      assert_equal "27 March 2013", @filter.date_to_long_string(@sample_time)
+    end
+
+    should "format a time with xmlschema" do
+      assert_equal "2013-03-27T11:22:33+00:00", @filter.date_to_xmlschema(@sample_time)
+    end
+
+    should "format a time according to RFC-822" do
+      assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
     end
 
     should "escape xml with ampersands" do
