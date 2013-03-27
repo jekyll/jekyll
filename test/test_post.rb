@@ -227,7 +227,7 @@ class TestPost < Test::Unit::TestCase
 
         context "with custom abbreviated month date permalink" do
           setup do
-            @post.site.permalink_style = '/:categories/:year/:abrv_month/:day/:title/'
+            @post.site.permalink_style = '/:categories/:year/:short_month/:day/:title/'
             @post.process(@fake_file)
           end
 
