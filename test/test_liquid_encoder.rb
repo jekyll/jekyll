@@ -33,7 +33,7 @@ class TestLiquidEncoder < Test::Unit::TestCase
         encoder = Jekyll::LiquidEncoder.new('This is a {{sample}} string with {%liquid%} content.')
         assert_nil(encoder.encoded_content.index('{{'))
         assert_nil(encoder.encoded_content.index('{%'))
-        assert_match(%r|<liquid liquid-id="#{encoder.salt}-\d+" />|,encoder.encoded_content)
+        assert_match(encoder.decoder_regexp,encoder.encoded_content)
       end
 
       should "keep liquid tags within raw tags" do
