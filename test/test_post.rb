@@ -468,7 +468,7 @@ class TestPost < Test::Unit::TestCase
           post.site.source = File.join(File.dirname(__FILE__), 'source')
           do_render(post)
 
-          assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", post.output
+          assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n<p>This <em>is</em> cool</p> >>>", post.output
         end
 
         should "render date specified in front matter properly" do

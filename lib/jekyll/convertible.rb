@@ -77,6 +77,15 @@ module Jekyll
       payload["pygments_prefix"] = converter.pygments_prefix
       payload["pygments_suffix"] = converter.pygments_suffix
 
+      # Initialise the LiquidEncoder and encode text
+      encoder = Jekyll::LiquidEncoder.new(content)
+      self.content = encoder.encoded_content
+
+      # # Run transformation and decode Liquid
+      self.transform
+      self.content = encoder.decode(self.content)
+
+      # Run liquid
       begin
         self.content = Liquid::Template.parse(self.content).render!(payload, info)
       rescue => e
@@ -86,9 +95,7 @@ module Jekyll
         end
         abort("Build Failed")
       end
-
-      self.transform
-
+      
       # output keeps track of what will finally be written
       self.output = self.content
 
