@@ -274,4 +274,7 @@ kramdown:
     coderay_bold_every: 10
     coderay_css: style
 
+additional_configs:
+  - _configs/*.yml
+
 {% endhighlight %}

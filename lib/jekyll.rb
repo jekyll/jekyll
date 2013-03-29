@@ -27,6 +27,7 @@ require 'maruku'
 require 'pygments'
 
 # internal requires
+require 'jekyll/configuration'
 require 'jekyll/core_ext'
 require 'jekyll/site'
 require 'jekyll/convertible'
@@ -54,68 +55,6 @@ SafeYAML::OPTIONS[:suppress_warnings] = true
 module Jekyll
   VERSION = '1.0.0.beta2'
 
-  # Default options. Overriden by values in _config.yml.
-  # Strings rather than symbols are used for compatability with YAML.
-  DEFAULTS = {
-    'source'        => Dir.pwd,
-    'destination'   => File.join(Dir.pwd, '_site'),
-    'plugins'       => '_plugins',
-    'layouts'       => '_layouts',
-    'keep_files'   => ['.git','.svn'],
-
-    'future'        => true,           # remove and make true just default
-    'pygments'      => true,          # remove and make true just default
-
-    'markdown'      => 'maruku',
-    'permalink'     => 'date',
-    'baseurl'       => '',
-    'include'       => ['.htaccess'],
-    'paginate_path' => 'page:num',
-
-    'markdown_ext'  => 'markdown,mkd,mkdn,md',
-    'textile_ext'   => 'textile',
-
-    'excerpt_separator' => "\n\n",
-
-    'maruku' => {
-      'use_tex'    => false,
-      'use_divs'   => false,
-      'png_engine' => 'blahtex',
-      'png_dir'    => 'images/latex',
-      'png_url'    => '/images/latex'
-    },
-
-    'rdiscount' => {
-      'extensions' => []
-    },
-
-    'redcarpet' => {
-      'extensions' => []
-    },
-
-    'kramdown' => {
-      'auto_ids'      => true,
-      'footnote_nr'   => 1,
-      'entity_output' => 'as_char',
-      'toc_levels'    => '1..6',
-      'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
-      'use_coderay'   => false,
-
-      'coderay' => {
-        'coderay_wrap'              => 'div',
-        'coderay_line_numbers'      => 'inline',
-        'coderay_line_number_start' => 1,
-        'coderay_tab_width'         => 4,
-        'coderay_bold_every'        => 10,
-        'coderay_css'               => 'style'
-      }
-    },
-
-    'redcloth' => {
-      'hard_breaks' => true
-    }
-  }
-
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
   #
@@ -125,34 +64,7 @@ module Jekyll
   #
   # Returns the final configuration Hash.
   def self.configuration(override)
-    # Convert any symbol keys to strings and remove the old key/values
-    override = override.reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
-
-    # _config.yml may override default source location, but until
-    # then, we need to know where to look for _config.yml
-    source = override['source'] || Jekyll::DEFAULTS['source']
-
-    # Get configuration from <source>/_config.yml or <source>/<config_file>
-    config_file = override.delete('config')
-    config_file = File.join(source, "_config.yml") if config_file.to_s.empty?
-
-    begin
-      config = YAML.safe_load_file(config_file)
-      raise "Configuration file: (INVALID) #{config_file}" if !config.is_a?(Hash)
-      $stdout.puts "Configuration file: #{config_file}"
-    rescue SystemCallError
-      # Errno:ENOENT = file not found
-      $stderr.puts "Configuration file: none"
-      config = {}
-    rescue => err
-      $stderr.puts "           " +
-                   "WARNING: Error reading configuration. " +
-                   "Using defaults (and options)."
-      $stderr.puts "#{err}"
-      config = {}
-    end
-
-    # Merge DEFAULTS < _config.yml < override
-    Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
+    config = Configuration.new
+    config.configuration(override)
   end
 end
