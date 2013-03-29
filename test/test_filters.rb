@@ -13,7 +13,7 @@ class TestFilters < Test::Unit::TestCase
   context "filters" do
     setup do
       @filter = JekyllFilter.new
-      @sample_time = Time.parse "2013-03-27T11:22:33+00:00"
+      @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
     end
 
     should "textilize with simple string" do
@@ -52,11 +52,11 @@ class TestFilters < Test::Unit::TestCase
     end
 
     should "format a time with xmlschema" do
-      assert_equal "2013-03-27T11:22:33+00:00", @filter.date_to_xmlschema(@sample_time)
+      assert_equal "2013-03-27T11:22:33Z", @filter.date_to_xmlschema(@sample_time)
     end
 
     should "format a time according to RFC-822" do
-      assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
+      assert_equal "Wed, 27 Mar 2013 11:22:33 -0000", @filter.date_to_rfc822(@sample_time)
     end
 
     should "escape xml with ampersands" do
