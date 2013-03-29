@@ -277,4 +277,45 @@ CONTENT
       end
     end
   end
+
+  context "{% include %}" do
+
+    setup do
+      @tag = Jekyll::Tags::IncludeTag.new("include", "sample.md", nil)
+    end
+
+    def site_with_converter c
+      stub!.converters{ [c] }.subject
+    end
+
+    context "when including a file with a recognised extension" do
+      setup do
+        @sample_converter = mock!.matches(".md"){ true }.subject
+        mock(@sample_converter).is_a?(Jekyll::Converters::Identity){ false }
+        mock(@sample_converter).convert('Sample text'){ 'Converted' }
+      end
+
+      should "try to convert the included file" do
+        @tag.instance_variable_set("@site", site_with_converter(@sample_converter))
+        
+        converted_source = @tag.convert_source('Sample text')
+        assert_equal('Converted', converted_source)
+      end
+    end
+
+    context "when including a file without a recognised extension" do
+      setup do
+        @sample_converter = Jekyll::Converters::Identity.new
+      end
+
+      should "not try to convert the included file" do
+        mock(@sample_converter).convert.never
+
+        @tag.instance_variable_set("@site", site_with_converter(@sample_converter))
+
+        converted_source = @tag.convert_source('Sample text')
+        assert_equal('Sample text', converted_source)
+      end
+    end
+  end
 end

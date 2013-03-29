@@ -48,7 +48,7 @@ An overview of what each of these does:
         <p><code>_includes</code></p>
       </td>
       <td>
-        <p>These are the partials that can be mixed and matched by your _layouts and _posts to facilitate reuse.  The liquid tag <code>{{ "{% include file.ext " }}%}</code> can be used to include the partial in <code>_includes/file.ext</code>.</p>
+        <p>These are the partials that can be mixed and matched by your _layouts and _posts to facilitate reuse.  The liquid tag <code>{{ "{% include file.ext " }}%}</code> can be used to include the partial in <code>_includes/file.ext</code>. Note that included files will be run through any relevant [converters](/2012-07-01-plugins.html).</p>
       </td>
     </tr>
     <tr>
