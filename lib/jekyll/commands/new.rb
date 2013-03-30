@@ -6,7 +6,7 @@ module Jekyll
       def self.process(args)
         raise ArgumentError.new('You must specify a path.') if args.empty?
 
-        new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
+        new_blog_path = File.expand_path(args.join(" "))
         FileUtils.mkdir_p new_blog_path
 
         create_sample_files new_blog_path
