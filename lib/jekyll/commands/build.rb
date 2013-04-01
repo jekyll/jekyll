@@ -51,9 +51,8 @@ module Jekyll
         puts "       Destination: #{destination}"
         puts " Auto-regeneration: enabled"
 
-        dw = DirectoryWatcher.new(source)
+        dw = DirectoryWatcher.new('.', :glob => self.globs(source, destination), :pre_load => true)
         dw.interval = 1
-        dw.glob = self.globs(source, destination)
 
         dw.add_observer do |*args|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
