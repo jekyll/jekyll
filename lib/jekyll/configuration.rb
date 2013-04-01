@@ -101,10 +101,9 @@ module Jekyll
         config = YAML.safe_load_file(config_file)
         raise "Configuration file: (INVALID) #{config_file}" if !config.is_a?(Hash)
         $stdout.puts "Configuration file: #{config_file}"
-        @merged_config_hash = @merged_config_hash.deep_merge(config)
 
-        if config.has_key? 'additional_configs' and config['additional_configs'].is_a? Array
-          self.process_inclusions(config['additional_configs'], config_file)
+        if config.has_key? 'configs' and config['configs'].is_a? Array
+          self.process_inclusions(config['configs'], config_file)
         end
       rescue SystemCallError
         # Errno:ENOENT = file not found
@@ -117,7 +116,7 @@ module Jekyll
         $stderr.puts "#{err}"
         config = {}
       end
-
+      @merged_config_hash = @merged_config_hash.deep_merge(config)
     end
 
     # Expands a glob to an array of full qualified paths to each config file.

@@ -62,20 +62,20 @@ class TestConfiguration < Test::Unit::TestCase
 
     should "include config_a when loading the main config file with one inclusion" do
       mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/one_inclusion/_config.yml")
-      mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/one_inclusion/additional_configs/_config_a.yml")
+      mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/one_inclusion/configs/_config_a.yml")
       config = Jekyll.configuration({"source" => File.join(@replacement_source_dir, 'one_inclusion')})
       assert_equal "/foobar", config["root"]
     end
     should "include config_a when loading the main config file with glob inclusions" do
       mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/pattern_include/_config.yml")
-      mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/pattern_include/additional_configs/_config_a.yml")
-      mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/pattern_include/additional_configs/_config_b.yml")
+      mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/pattern_include/configs/_config_a.yml")
+      mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/pattern_include/configs/_config_b.yml")
       config = Jekyll.configuration({"source" => File.join(@replacement_source_dir, 'pattern_include')})
       assert_equal "/buzz", config["root"]
     end
     should "include config_a when loading the main config file with one inclusion, letting the included config overrule them all" do
       mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/root_config_override/_config.yml")
-      mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/root_config_override/additional_configs/_config_a.yml")
+      mock($stdout).puts("Configuration file: " + @replacement_source_dir + "/root_config_override/configs/_config_a.yml")
       config = Jekyll.configuration({"source" => File.join(@replacement_source_dir, 'root_config_override')})
       assert_equal "/overruled", config["root"]
 

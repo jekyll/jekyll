@@ -6,5 +6,5 @@ category_dir: blog/categories
 markdown: rdiscount
 pygments: false # default python pygments have been replaced by pygments.rb
 
-additional_configs:
-  - additional_configs/_config_a.yml
+configs:
+  - configs/_config_a.yml
