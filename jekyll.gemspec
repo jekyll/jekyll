@@ -84,6 +84,7 @@ Gem::Specification.new do |s|
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
+    lib/jekyll/liquid_encoder.rb
     lib/jekyll/mime.types
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
