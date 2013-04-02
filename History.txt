@@ -30,6 +30,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Fix integration with directory_watcher 1.5.x (#916)
     * Accepting strings as arguments to jekyll-import command (#910)
     * Force usage of older directory_watcher gem as 1.5 is broken (#883)
     * Ensure all Post categories are downcase (#842, #872)
