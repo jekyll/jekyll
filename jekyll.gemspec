@@ -85,6 +85,7 @@ Gem::Specification.new do |s|
     lib/jekyll/converters/markdown/maruku_parser.rb
     lib/jekyll/converters/markdown/rdiscount_parser.rb
     lib/jekyll/converters/markdown/redcarpet_parser.rb
+    lib/jekyll/converters/pre_identity.rb
     lib/jekyll/converters/textile.rb
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb

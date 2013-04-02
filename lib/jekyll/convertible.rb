@@ -44,10 +44,13 @@ module Jekyll
     end
 
     # Transform the contents based on the content type.
+    # 
+    # before_liquid - is this being run before liquid
+    # tags are parsed?
     #
     # Returns nothing.
-    def transform
-      self.content = converter.convert(self.content)
+    def transform(before_liquid=false)
+      self.content = converter(before_liquid).convert(self.content)
     rescue => e
       Jekyll.logger.error "Conversion error:", "There was an error converting" +
         " '#{self.path}'."
@@ -59,15 +62,23 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      converter.output_ext(self.ext)
+      converter(false).output_ext(self.ext)
     end
 
     # Determine which converter to use based on this convertible's
     # extension.
     #
+    # run_before_liquid - select converters designed to run before
+    # liquid tags are parsed
+    #
     # Returns the Converter instance.
-    def converter
-      @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
+    def converter(before_liquid=false)
+      @converter ||= {}
+      @converter[before_liquid] ||= self.site.converters.find{ |c| c.run_before_liquid? == before_liquid && c.matches(self.ext)}
+      @converter[before_liquid] ||= self.site.converters.find {|c|
+        c.run_before_liquid? == before_liquid &&
+        c.matches(self.ext)
+      }
     end
 
     # Render Liquid in the content
@@ -126,10 +137,11 @@ module Jekyll
       payload["pygments_prefix"] = converter.pygments_prefix
       payload["pygments_suffix"] = converter.pygments_suffix
 
+      self.transform(true)
       self.content = self.render_liquid(self.content,
                                         payload.merge({:file => self.name}),
                                         info)
-      self.transform
+      self.transform(false)
 
       # output keeps track of what will finally be written
       self.output = self.content
