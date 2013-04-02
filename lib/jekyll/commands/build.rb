@@ -4,11 +4,8 @@ module Jekyll
       def self.process(options)
         site = Jekyll::Site.new(options)
 
-        if options['watch']
-          self.watch(site, options)
-        else
-          self.build(site, options)
-        end
+        self.build(site, options)
+        self.watch(site, options) if options['watch']
       end
 
       # Private: Build the site from source into destination.
@@ -47,13 +44,10 @@ module Jekyll
         source = options['source']
         destination = options['destination']
 
-        puts "            Source: #{source}"
-        puts "       Destination: #{destination}"
         puts " Auto-regeneration: enabled"
 
-        dw = DirectoryWatcher.new(source)
+        dw = DirectoryWatcher.new(source, :glob => self.globs(source, destination), :pre_load => true)
         dw.interval = 1
-        dw.glob = self.globs(source, destination)
 
         dw.add_observer do |*args|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
