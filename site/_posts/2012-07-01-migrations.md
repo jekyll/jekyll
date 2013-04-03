@@ -50,7 +50,7 @@ Where IMPORTER is the name of the specific importer.
 ### Wordpress export files
 
 If hpricot is not already installed, you will need to run `gem install hpricot`.
-Next, export your blog using the Wordpress export utility. Assuming that
+Next, export your blog using the Wordpress export utility. Assuming that the
 exported file is saved as `wordpress.xml`, here is the command you need to run:
 
 {% highlight bash %}
@@ -72,7 +72,7 @@ $ ruby -rubygems -e 'require "jekyll/migrators/wordpress";
     Jekyll::WordPress.process("database", "user", "pass")'
 {% endhighlight %}
 
-If you are using Webfaction and have to set an [SSH tunnel](http://docs.webfaction.com/user-guide/databases.html?highlight=mysql#starting-an-ssh-tunnel-with-ssh), make sure to make the hostname (`127.0.0.1`) explicit, otherwise MySQL may block your access based on localhost and `127.0.0.1` not being equivalent in its authentication system:
+If you are using Webfaction and have to set up an [SSH tunnel](http://docs.webfaction.com/user-guide/databases.html?highlight=mysql#starting-an-ssh-tunnel-with-ssh), be sure to make the hostname (`127.0.0.1`) explicit, otherwise MySQL may block your access based on localhost and `127.0.0.1` not being equivalent in its authentication system:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/wordpress";
