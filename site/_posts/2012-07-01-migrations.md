@@ -72,7 +72,7 @@ $ ruby -rubygems -e 'require "jekyll/migrators/wordpress";
     Jekyll::WordPress.process("database", "user", "pass")'
 {% endhighlight %}
 
-If you are using Webfaction and have to set up an [SSH tunnel](http://docs.webfaction.com/user-guide/databases.html?highlight=mysql#starting-an-ssh-tunnel-with-ssh), be sure to make the hostname (`127.0.0.1`) explicit, otherwise MySQL may block your access based on localhost and `127.0.0.1` not being equivalent in its authentication system:
+If you are using Webfaction and have to set up an [SSH tunnel](http://docs.webfaction.com/user-guide/databases.html?highlight=mysql#starting-an-ssh-tunnel-with-ssh), be sure to make the hostname (`127.0.0.1`) explicit, otherwise MySQL may block your access based on `localhost` and `127.0.0.1` not being equivalent in its authentication system:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/wordpress";
