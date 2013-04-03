@@ -5,29 +5,53 @@ prev_section: variables
 next_section: templates
 ---
 
-If you’re switching to Jekyll from another blogging system, Jekyll’s migrators can help you with the move. Most methods listed on this page require read access to the database to generate posts from your old system. Each method generates `.markdown` posts in the `_posts` directory based on the entries in the database.
+If you’re switching to Jekyll from another blogging system, Jekyll’s importers
+can help you with the move. Most methods listed on this page require read access
+to the database to generate posts from your old system. Each method generates
+`.markdown` posts in the `_posts` directory based on the entries in the foreign
+system.
 
 ## Preparing for migrations
 
-The migrators are [built-in to the Jekyll gem](https://github.com/mojombo/jekyll/tree/master/lib/jekyll/migrators), and require a few things to be set up in your project directory before they are run. This should all be done from the root folder of your Jekyll project.
+Because the importers have many of their own dependencies, they are made
+available via a separate gem called `jekyll-import`. To use them, all you need
+to do is install the gem, and they will become available as part of Jekyll's
+standard command line interface.
 
 {% highlight bash %}
-$ mkdir _import
-$ gem install sequel mysqlplus
+$ gem install jekyll-import
 {% endhighlight %}
 
-You should now be all set to run the migrators below.
+You should now be all set to run the importers below. If you ever get stuck, you
+can see help for each importer:
+
+{% highlight bash %}
+$ jekyll help import           # => See list of importers
+$ jekyll help import IMPORTER  # => See importer specific help
+{% endhighlight %}
+
+Where IMPORTER is the name of the specific importer.
 
 <div class="note info">
   <h5>Note: Always double-check migrated content</h5>
-  <p>Import scripts may not distinguish between published or private posts, so you should always check that the content Jekyll generates for you appears as you intended.</p>
+  <p>
+
+    Importers may not distinguish between published or private posts, so
+    you should always check that the content Jekyll generates for you appears as
+    you intended.
+
+  </p>
 </div>
+
+<!-- TODO all these need to be fixed -->
 
 ## WordPress
 
 ### Wordpress export files
 
-If hpricot is not already installed, you will need to run `gem install hpricot`. Next, export your blog using the Wordpress export utility. Assuming that exported file is saved as `wordpress.xml`, here is the command you need to run:
+If hpricot is not already installed, you will need to run `gem install hpricot`.
+Next, export your blog using the Wordpress export utility. Assuming that
+exported file is saved as `wordpress.xml`, here is the command you need to run:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/wordpressdotcom";
