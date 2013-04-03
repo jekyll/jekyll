@@ -89,7 +89,7 @@ While the above methods work, they do not import much of the metadata that is us
 
 ## Drupal
 
-If you’re migrating from [Drupal](), there is [a migrator](https://github.com/mojombo/jekyll/blob/master/lib/jekyll/migrators/drupal.rb) for you too:
+If you’re migrating from [Drupal](http://drupal.org), there is [a migrator](https://github.com/mojombo/jekyll/blob/master/lib/jekyll/migrators/drupal.rb) for you too:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/drupal";
