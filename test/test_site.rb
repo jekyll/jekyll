@@ -217,6 +217,28 @@ class TestSite < Test::Unit::TestCase
       assert_equal files, @site.filter_entries(files)
     end
 
+    should "not include symlinks in safe mode" do
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
+      end
+      site = Site.new(Jekyll.configuration)
+
+      site.read_directories("symlink-test")
+      assert_equal [], site.pages
+      assert_equal [], site.static_files
+    end
+
+    should "include symlinks in unsafe mode" do
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => false})
+      end
+      site = Site.new(Jekyll.configuration)
+
+      site.read_directories("symlink-test")
+      assert_not_equal [], site.pages
+      assert_not_equal [], site.static_files
+    end
+
     context 'error handling' do
       should "raise if destination is included in source" do
         stub(Jekyll).configuration do
