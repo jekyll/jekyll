@@ -473,12 +473,12 @@ p {
 }
 
 .section-nav .next:after {
-  content: "â€º";
+  content: "›";
   right: 10px;
 }
 
 .section-nav .prev:before {
-  content: "â€¹";
+  content: "‹";
   left: 10px;
 }
 
