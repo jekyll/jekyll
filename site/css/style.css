@@ -17,6 +17,18 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
+.clear {
+  display: block;
+}
+
+.clear:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
 /* Sections */
 
 body > header, body > section, body > footer {
@@ -192,7 +204,7 @@ body > footer a:hover img {
 }
 
 .quickstart .code {
-  font-size: 13px;
+  font-size: 12px;
   display: block;
   margin: 0 0 -30px;
 }
@@ -221,7 +233,7 @@ body > footer a:hover img {
 .quickstart .code .title {
   display: block;
   text-align: center;
-  margin: 0 10px;
+  margin: 0 20px;
   padding: 5px 0;
   border-radius: 5px 5px 0 0;
   box-shadow: box-shadow: 0 3px 10px rgba(0,0,0,.5);
@@ -245,7 +257,7 @@ body > footer a:hover img {
 .quickstart .code .shell {
   padding: 20px;
   text-shadow: none;
-  margin: 0 10px;
+  margin: 0 20px;
   background: #3d3d3d;
   border-radius: 0 0 5px 5px;
   box-shadow: 0 5px 30px rgba(0,0,0,.3);
@@ -279,49 +291,58 @@ body > footer a:hover img {
 
 /* Free Hosting */
 
-.free-hosting .content {
-  /*margin-bottom: 40px;*/
-  position: relative;
-}
-
 .free-hosting .pane {
   background: #444;
   border-radius: 10px;
-  padding: 40px 70px 30px;
-  /*color: #222;*/
   text-shadow: none;
+  position: relative;
+  padding: 0 20px 30px;
 }
 
 .free-hosting img {
-  float: left;
-  margin: -20px 40px -40px -20px;
+  margin: -30px 0 0;
+  width: 180px;
+  height: 150px;
 }
 
 .free-hosting h2 {
-  /*font-weight: 800;*/
+  font-size: 28px;
 }
+
 .free-hosting p,
 .free-hosting a {
-  font-weight: inherit;
+  font-size: 16px;
 }
 
 .free-hosting p {
-  margin: 0.75em;
+  margin: .75em 0;
 }
 
-.free-hosting a {
-  /*color: #c00;*/
-}
-
-.free-hosting .content:after {
-  content: " ";
-  float: right;
-  background: url(../img/footer-arrow.png) top left no-repeat;
-  width: 73px;
-  height: 186px;
-  position: absolute;
-  right: 30px;
-  bottom: -60px;
+@media (min-width: 768px){
+  .free-hosting img {
+    float: left;
+    margin: -20px -30px -30px -50px;
+    width: 300px;
+    height: 251px;
+  }
+  .free-hosting .pane-content {
+    margin-top: 35px;
+    padding-right: 30px;
+  }
+  .free-hosting p,
+  .free-hosting a {
+    font-size: 18px;
+  }
+  .free-hosting .pane:after {
+    content: " ";
+    float: right;
+    background: url(../img/footer-arrow.png) top left no-repeat;
+    width: 73px;
+    height: 186px;
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+  }
 }
 
 /* HTML Elements */
