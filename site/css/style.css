@@ -498,6 +498,10 @@ p {
   cursor: default;
 }
 
+.docs-nav-mobile select {
+  width: 100%;
+}
+
 /* Article HTML */
 
 article h2,
