@@ -116,6 +116,7 @@ body > footer img {
   width: 100px;
   height: 44px;
   opacity: .8;
+  padding: 1px;
   -webkit-transition: opacity .2s;
   -moz-transition: opacity .2s;
   transition: opacity .2s;
