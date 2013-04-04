@@ -1,5 +1,5 @@
 <div class="docs-nav-mobile unit whole show-on-mobiles">
-  <select>
+  <select onchange="if (this.value) window.location.href=this.value">
     <option value="">Navigate the docs…</option>
     <optgroup label="Getting started">
       <option value="{{ site.url }}/docs/home">Welcome</option>
