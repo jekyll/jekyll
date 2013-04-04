@@ -495,9 +495,15 @@ pre, code {
   margin: 0;
   padding: 0;
   font-family: Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
-  font-size: 16px;
+  font-size: 14px;
   padding: 0 .5em;
   line-height: 1.8em;
+}
+
+@media (min-width: 768px){
+  pre, code {
+    font-size: 16px;
+  }
 }
 
 .highlight, p > pre, p > code {
