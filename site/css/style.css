@@ -345,38 +345,6 @@ body > footer a:hover img {
   }
 }
 
-/* HTML Elements */
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-}
-
-a {
-  color: #fc0;
-  text-decoration: none;
-  transition: all .25s;
-   -moz-transition: all .25s;
-   -webkit-transition: all .25s;
-}
-
-a:hover {
-  color: #f90;
-}
-
-strong {
-  font-weight: 700;
-}
-
-p {
-  line-height: 1.5em;
-}
-
-.left { float: left; }
-.right { float: right; }
-.align-right { text-align: right; }
-.align-left { text-align: left; }
-.align-center { text-align: center; }
-
 /* Documentation */
 
 .docs .content {
@@ -546,6 +514,38 @@ pre, code {
   width: 100%;
   overflow: scroll;
 }
+
+/* HTML Elements */
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+a {
+  color: #fc0;
+  text-decoration: none;
+  transition: all .25s;
+   -moz-transition: all .25s;
+   -webkit-transition: all .25s;
+}
+
+a:hover {
+  color: #f90;
+}
+
+strong {
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+.left { float: left; }
+.right { float: right; }
+.align-right { text-align: right; }
+.align-left { text-align: left; }
+.align-center { text-align: center; }
 
 /* Article HTML */
 
