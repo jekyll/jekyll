@@ -58,3 +58,11 @@ module Enumerable
     any? { |exp| File.fnmatch?(exp, e) }
   end
 end
+
+if RUBY_VERSION < "1.9"
+  class String
+    def force_encoding(enc)
+      self
+    end
+  end
+end

@@ -4,14 +4,8 @@ module Jekyll
       def self.process(options)
         site = Jekyll::Site.new(options)
 
-        source = options['source']
-        destination = options['destination']
-
-        if options['watch']
-          self.watch(site, options)
-        else
-          self.build(site, options)
-        end
+        self.build(site, options)
+        self.watch(site, options) if options['watch']
       end
 
       # Private: Build the site from source into destination.
@@ -50,18 +44,23 @@ module Jekyll
         source = options['source']
         destination = options['destination']
 
-        puts "            Source: #{source}"
-        puts "       Destination: #{destination}"
         puts " Auto-regeneration: enabled"
 
-        dw = DirectoryWatcher.new(source)
+        dw = DirectoryWatcher.new(source, :glob => self.globs(source, destination), :pre_load => true)
         dw.interval = 1
-        dw.glob = self.globs(source, destination)
 
         dw.add_observer do |*args|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           print "      Regenerating: #{args.size} files at #{t} "
-          site.process
+          begin
+            site.process
+          rescue Jekyll::FatalException => e
+            puts
+            puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
+            puts "------------------------------------"
+            puts e.message
+            exit(1)
+          end
           puts  "...done."
         end
 

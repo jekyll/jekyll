@@ -3,7 +3,7 @@ Feature: Site configuration
   I want to be able to configure jekyll
   In order to make setting up a site easier
 
-  Scenario: Change destination directory
+  Scenario: Change source directory
     Given I have a blank site in "_sourcedir"
     And I have an "_sourcedir/index.html" file that contains "Changing source directory"
     And I have a configuration file with "source" set to "_sourcedir"

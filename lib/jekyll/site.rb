@@ -5,7 +5,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files
+                  :show_drafts, :keep_files, :baseurl
 
     attr_accessor :converters, :generators
 
@@ -21,6 +21,7 @@ module Jekyll
       self.plugins         = plugins_path
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
+      self.baseurl         = config['baseurl']
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
       self.include         = config['include'] || []
@@ -88,17 +89,8 @@ module Jekyll
         end
       end
 
-      self.converters = Jekyll::Converter.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
-
-      self.generators = Jekyll::Generator.subclasses.select do |c|
-        !self.safe || c.safe
-      end.map do |c|
-        c.new(self.config)
-      end
+      self.converters = instantiate_subclasses(Jekyll::Converter)
+      self.generators = instantiate_subclasses(Jekyll::Generator)
     end
 
     # Internal: Setup the plugin search path
@@ -167,7 +159,7 @@ module Jekyll
         if File.directory?(f_abs)
           next if self.dest.sub(/\/$/, '') == f_abs
           read_directories(f_rel)
-        elsif !File.symlink?(f_abs)
+        else
           first3 = File.open(f_abs) { |fd| fd.read(3) }
           if first3 == "---"
             # file appears to have a YAML header so process it as a page
@@ -385,6 +377,21 @@ module Jekyll
         impl
       else
         raise "Converter implementation not found for #{klass}"
+      end
+    end
+
+    # Create array of instances of the subclasses of the class or module
+    #   passed in as argument.
+    #
+    # klass - class or module containing the subclasses which should be
+    #         instantiated
+    #
+    # Returns array of instances of subclasses of parameter
+    def instantiate_subclasses(klass)
+      klass.subclasses.select do |c|
+        !self.safe || c.safe
+      end.sort.map do |c|
+        c.new(self.config)
       end
     end
 

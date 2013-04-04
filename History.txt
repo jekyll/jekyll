@@ -1,13 +1,17 @@
 == HEAD
   * Major Enhancements
+    * Add `jekyll new` subcommand: generate a jekyll scaffold (#764)
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
     * Added ability to render drafts in _drafts folder via command line (#833)
   * Minor Enhancements
-    * Load in Apache MIME Types on `jekyll serve` (#847)
+    * Expose site.baseurl to Liquid templates (#869)
+    * Adds excerpt attribute to posts which contains first paragraph of content (#837)
+    * Accept custom configuration file via CLI (#863)
+    * Load in GitHub Pages MIME Types on `jekyll serve` (#847, #871)
     * Improve debugability of error message for a malformed highlight tag (#785)
     * Allow symlinked files in unsafe mode (#824)
-    * Add 'gist' liquid tag to core (#822)
+    * Add 'gist' Liquid tag to core (#822, #861)
     * New format of Jekyll output (#795)
     * Reinstate --limit_posts and --future switches (#788)
     * Remove ambiguity from command descriptions (#815)
@@ -26,6 +30,14 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Fix symlinked static files not being correctly built in unsafe mode (#909)
+    * Fix integration with directory_watcher 1.4.x (#916)
+    * Accepting strings as arguments to jekyll-import command (#910)
+    * Force usage of older directory_watcher gem as 1.5 is broken (#883)
+    * Ensure all Post categories are downcase (#842, #872)
+    * Force encoding of the rdiscount TOC to UTF8 to avoid conversion errors (#555)
+    * Patch for multibyte URI problem with jekyll serve (#723)
+    * Order plugin execution by priority (#864)
     * Fixed Page#dir and Page#url for edge cases (#536)
     * Fix broken post_url with posts with a time in their YAML Front-Matter (#831)
     * Look for plugins under the source directory (#654)
@@ -34,7 +46,7 @@
     * Force Categories to be Strings (#767)
     * Safe YAML plugin to prevent vulnerability (#777)
     * Add SVG support to Jekyll/WEBrick. (#407, #406)
-    * Prevent custom destination from causing continuous regen on watch (#528, #820)
+    * Prevent custom destination from causing continuous regen on watch (#528, #820, #862)
   * Site Enhancements
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
@@ -48,6 +60,14 @@
     * Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version
       of greater than 1.9 (#771)
     * Switch to Simplecov for coverage report (#765)
+
+== 0.12.1 / 2013-02-19
+  * Minor Enhancements
+    * Update Kramdown version to 0.14.1 (#744)
+  * Test Enhancements
+    * Update Rake version to 10.0.3 (#744)
+    * Update Shoulda version to 3.3.2 (#744)
+    * Update Redcarpet version to 2.2.2 (#744)
 
 == 0.12.0 / 2012-12-22
   * Minor Enhancements

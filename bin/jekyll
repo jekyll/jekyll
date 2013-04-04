@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+STDOUT.sync = true
 
 $:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 
@@ -30,10 +31,20 @@ def normalize_options(options)
   options
 end
 
+command :new do |c|
+  c.syntax = 'jekyll new PATH'
+  c.description = 'Creates a new Jekyll site scaffold in PATH'
+
+  c.action do |args, options|
+    Jekyll::Commands::New.process(args)
+  end
+end
+
 command :build do |c|
   c.syntax = 'jekyll build [options]'
   c.description = 'Build your site'
 
+  c.option '--config [CONFIG_FILE]', 'Custom configuration file'
   c.option '--future', 'Publishes posts with a future date'
   c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
@@ -52,6 +63,7 @@ command :serve do |c|
   c.syntax = 'jekyll serve [options]'
   c.description = 'Serve your site locally'
 
+  c.option '--config [CONFIG_FILE]', 'Custom configuration file'
   c.option '--future', 'Publishes posts with a future date'
   c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
@@ -80,12 +92,12 @@ command :import do |c|
   c.syntax = 'jekyll import <platform> [options]'
   c.description = 'Import your old blog to Jekyll'
 
-  c.option '--source', 'Source file or URL to migrate from'
-  c.option '--file', 'File to migrate from'
-  c.option '--dbname', 'Database name to migrate from'
-  c.option '--user', 'Username to use when migrating'
-  c.option '--pass', 'Password to use when migrating'
-  c.option '--host', 'Host address to use when migrating'
+  c.option '--source STRING', 'Source file or URL to migrate from'
+  c.option '--file STRING', 'File to migrate from'
+  c.option '--dbname STRING', 'Database name to migrate from'
+  c.option '--user STRING', 'Username to use when migrating'
+  c.option '--pass STRING', 'Password to use when migrating'
+  c.option '--host STRING', 'Host address to use when migrating'
 
   c.action do |args, options|
     begin

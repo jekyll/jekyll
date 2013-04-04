@@ -52,7 +52,7 @@ require_all 'jekyll/tags'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.0.0.beta1'
+  VERSION = '1.0.0.beta2'
 
   # Default options. Overriden by values in _config.yml.
   # Strings rather than symbols are used for compatability with YAML.
@@ -64,15 +64,18 @@ module Jekyll
     'keep_files'   => ['.git','.svn'],
 
     'future'        => true,           # remove and make true just default
-    'pygments'      => false,          # remove and make true just default
+    'pygments'      => true,          # remove and make true just default
 
-    'markdown'      => 'maruku',       # no longer a command option
-    'permalink'     => 'date',         # no longer a command option
-    'include'       => ['.htaccess'],  # no longer a command option
-    'paginate_path' => 'page:num',     # no longer a command option
+    'markdown'      => 'maruku',
+    'permalink'     => 'date',
+    'baseurl'       => '',
+    'include'       => ['.htaccess'],
+    'paginate_path' => 'page:num',
 
     'markdown_ext'  => 'markdown,mkd,mkdn,md',
     'textile_ext'   => 'textile',
+
+    'excerpt_separator' => "\n\n",
 
     'maruku' => {
       'use_tex'    => false,
@@ -129,8 +132,10 @@ module Jekyll
     # then, we need to know where to look for _config.yml
     source = override['source'] || Jekyll::DEFAULTS['source']
 
-    # Get configuration from <source>/_config.yml
-    config_file = File.join(source, '_config.yml')
+    # Get configuration from <source>/_config.yml or <source>/<config_file>
+    config_file = override.delete('config')
+    config_file = File.join(source, "_config.yml") if config_file.to_s.empty?
+
     begin
       config = YAML.safe_load_file(config_file)
       raise "Configuration file: (INVALID) #{config_file}" if !config.is_a?(Hash)
