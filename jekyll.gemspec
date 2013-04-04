@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.0.0.beta2'
+  s.version           = '1.0.0.beta3'
   s.license           = 'MIT'
-  s.date              = '2013-03-19'
+  s.date              = '2013-04-04'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -202,6 +202,8 @@ Gem::Specification.new do |s|
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
     test/source/sitemap.xml
+    test/source/symlink-test/symlinked-dir
+    test/source/symlink-test/symlinked-file
     test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
     test/source/z_category/_posts/2008-9-23-categories.textile
     test/suite.rb
