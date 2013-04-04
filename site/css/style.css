@@ -386,9 +386,24 @@ p {
 .docs article {
   background: #444;
   border-radius: 10px;
-  padding: 40px 40px 30px;
+  padding: 20px;
+  margin: 0 10px;
   box-shadow: 0 3px 10px rgba(0,0,0,.1);
   min-height: 800px;
+  font-size: 16px;
+}
+
+@media (max-width: 568px){
+  .docs article {
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px){
+  .docs article {
+    padding: 40px 40px 30px;
+    font-size: 21px;
+  }
 }
 
 .docs aside {
@@ -435,6 +450,7 @@ p {
   padding-top: 40px;
   position: relative;
   background: url(../img/article-footer.png) top center no-repeat;
+  margin: 40px -20px 10px;
 }
 
 .section-nav > div {
@@ -634,7 +650,7 @@ code.option, code.flag, code.filter, code.output {
 
 .note {
   margin: 30px 0;
-  margin-left: -50px;
+  margin-left: -30px;
   padding: 20px 20px 24px;
   padding-left: 50px;
   border-radius:  0px 5px 5px 0px;
@@ -649,6 +665,12 @@ code.option, code.flag, code.filter, code.output {
   background: -ms-linear-gradient(top,  #7e6d42 0%,#5c4e35 100%);
   background: linear-gradient(to bottom,  #7e6d42 0%,#5c4e35 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e6d42', endColorstr='#5c4e35',GradientType=0 );
+}
+
+@media (min-width: 768px){
+  .note {
+    margin-left: -50px;
+  }
 }
 
 .note:before {
