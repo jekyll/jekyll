@@ -5,6 +5,7 @@
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
     * Added ability to render drafts in _drafts folder via command line (#833)
   * Minor Enhancements
+    * Added short month (e.g. "Sep") to permalink style options for posts (#890)
     * Expose site.baseurl to Liquid templates (#869)
     * Adds excerpt attribute to posts which contains first paragraph of content (#837)
     * Accept custom configuration file via CLI (#863)
