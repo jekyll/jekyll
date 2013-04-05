@@ -121,6 +121,20 @@ nav li {
   padding: 8px;
 }
 
+@media (max-width: 768px){
+  .main-nav ul {
+    text-align: right;
+  }
+}
+@media (max-width: 720px){
+  .main-nav .show-on-mobiles {
+    display: inline;
+  }
+  .main-nav .hide-on-mobiles {
+    display: none;
+  }
+}
+
 /* Footer */
 
 body > footer {
