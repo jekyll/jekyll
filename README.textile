@@ -31,7 +31,6 @@ h2. Runtime Dependencies
 * Kramdown: Markdown-superset converter (Ruby)
 * Liquid: Templating system (Ruby)
 * Maruku: Default markdown engine (Ruby)
-* Pygments: Syntax highlighting (Python)
 
 h2. Developer Dependencies
 
