@@ -68,7 +68,7 @@ module Jekyll
 
     'markdown'      => 'maruku',
     'permalink'     => 'date',
-    'baseurl'       => '',
+    'baseurl'       => '/',
     'include'       => ['.htaccess'],
     'paginate_path' => 'page:num',
 

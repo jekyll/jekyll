@@ -77,7 +77,6 @@ command :serve do |c|
   c.action do |args, options|
     options.default :port => '4000',
                     :host => '0.0.0.0',
-                    :baseurl => '/',
                     :serving => true
 
     options = normalize_options(options.__hash__)
