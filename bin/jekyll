@@ -75,9 +75,7 @@ command :serve do |c|
   c.option '-b', '--baseurl [URL]', 'Base URL'
 
   c.action do |args, options|
-    options.default :port => '4000',
-                    :host => '0.0.0.0',
-                    :serving => true
+    options.default :serving => true
 
     options = normalize_options(options.__hash__)
     options = Jekyll.configuration(options)

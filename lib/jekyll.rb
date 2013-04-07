@@ -64,7 +64,7 @@ module Jekyll
     'keep_files'   => ['.git','.svn'],
 
     'future'        => true,           # remove and make true just default
-    'pygments'      => true,          # remove and make true just default
+    'pygments'      => true,           # remove and make true just default
 
     'markdown'      => 'maruku',
     'permalink'     => 'date',
@@ -74,6 +74,9 @@ module Jekyll
 
     'markdown_ext'  => 'markdown,mkd,mkdn,md',
     'textile_ext'   => 'textile',
+
+    'port'          => '4000',
+    'host'          => '0.0.0.0',
 
     'excerpt_separator' => "\n\n",
 
