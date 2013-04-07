@@ -35,6 +35,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Fix cascade problem with site.baseurl, site.port and site.host. (#935)
     * Filter out directories with valid post names (#875)
     * Fix symlinked static files not being correctly built in unsafe mode (#909)
     * Fix integration with directory_watcher 1.4.x (#916)
