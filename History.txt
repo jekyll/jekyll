@@ -33,6 +33,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Filter out directories with valid post names (#875)
     * Fix symlinked static files not being correctly built in unsafe mode (#909)
     * Fix integration with directory_watcher 1.4.x (#916)
     * Accepting strings as arguments to jekyll-import command (#910)
