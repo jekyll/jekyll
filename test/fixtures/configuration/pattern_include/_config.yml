@@ -1,0 +1,10 @@
+permalink: /blog/:year/:month/:day/:title/index.html
+destination: public
+plugins: plugins
+code_dir: downloads/code
+category_dir: blog/categories
+markdown: rdiscount
+pygments: false # default python pygments have been replaced by pygments.rb
+
+configs:
+  - configs/_config_*.yml
