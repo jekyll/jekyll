@@ -115,7 +115,6 @@ module Jekyll
       offset = (init + @per_page - 1) >= all_posts.size ? all_posts.size : (init + @per_page - 1)
 
       @total_posts = all_posts.size
-      puts "for page #{@page}, init=#{init}, offset=#{offset}"
       @posts = all_posts[init..offset]
       @previous_page = @page != 1 ? @page - 1 : nil
       @next_page = @page != @total_pages ? @page + 1 : nil
