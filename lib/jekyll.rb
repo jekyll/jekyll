@@ -65,6 +65,7 @@ module Jekyll
 
     'future'        => true,           # remove and make true just default
     'pygments'      => true,          # remove and make true just default
+    'rouge'         => false,
 
     'markdown'      => 'maruku',
     'permalink'     => 'date',

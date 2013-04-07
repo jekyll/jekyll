@@ -36,4 +36,25 @@ EOS
       ).strip  
     end
   end
+
+  context("redcarpet with Rouge") do
+    setup do
+      config = {
+          'redcarpet' => { 'extensions' => ['filter_html'] },
+          'markdown'  => 'redcarpet',
+          'rouge'     => true
+        }
+      @markdown = Converters::Markdown.new config
+    end
+
+    should "render fenced code blocks" do
+      assert_equal "<div class=\"highlight\"><pre><code class=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
+        <<-EOS
+```ruby
+puts "Hello world"
+```
+EOS
+      ).strip
+    end
+  end
 end
