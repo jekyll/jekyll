@@ -63,8 +63,9 @@ An overview of what each of these does:
         <p>
 
           These are the partials that can be mixed and matched by your layouts
-          and posts to facilitate reuse. The liquid tag <code>{% raw %}{% include
-          file.ext %}{% endraw %}</code> can be used to include the partial in
+          and posts to facilitate reuse. The liquid tag
+          <code>{% raw %}{% include file.ext %}{% endraw %}</code>
+          can be used to include the partial in
           <code>_includes/file.ext</code>.
 
         </p>
@@ -79,8 +80,9 @@ An overview of what each of these does:
 
           These are the templates that wrap posts. Layouts are chosen on a post-
           by-post basis in the <a href="../frontmatter">YAML front matter</a>,
-          which is described in the next section. The liquid tag <code>{% raw %}{{
-          content }}{% endraw %}</code> is used to inject content into the web page.
+          which is described in the next section. The liquid tag
+          <code>{% raw %}{{ content }}{% endraw %}</code>
+          is used to inject content into the web page.
 
         </p>
       </td>
@@ -93,10 +95,11 @@ An overview of what each of these does:
         <p>
 
           Your dynamic content, so to speak. The format of these files is
-          important, and must follow the format: <code>YEAR-MONTH-DAY-
-          title.MARKUP</code>. The <a href="../permalinks">permalinks</a> can be
-          customized for each post, but the date and markup language are
-          determined solely by the file name.
+          important, and must follow the format:
+          <code>YEAR-MONTH-DAY-title.MARKUP</code>.
+          The <a href="../permalinks">permalinks</a> can be customized for each
+          post, but the date and markup language are determined solely by the
+          file name.
 
         </p>
       </td>

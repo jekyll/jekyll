@@ -163,8 +163,8 @@ following is a reference of the available data.
       <td><p><code>page.url</code></p></td>
       <td><p>
 
-        The URL of the Post without the domain. e.g. <code>/2008/12/14/my-
-        post.html</code>
+        The URL of the Post without the domain. e.g.
+        <code>/2008/12/14/my-post.html</code>
 
       </p></td>
     </tr>
@@ -173,8 +173,8 @@ following is a reference of the available data.
       <td><p>
 
         The Date assigned to the Post. This can be overridden in a Post’s front
-        matter by specifying a new date/time in the format <code>YYYY-MM-DD
-        HH:MM:SS</code>
+        matter by specifying a new date/time in the format
+        <code>YYYY-MM-DD HH:MM:SS</code>
 
       </p></td>
     </tr>
