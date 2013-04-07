@@ -52,6 +52,7 @@
     * Add SVG support to Jekyll/WEBrick. (#407, #406)
     * Prevent custom destination from causing continuous regen on watch (#528, #820, #862)
   * Site Enhancements
+    * Clean up site docs to prepare for 1.0 release (#918)
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
   * Development fixes
