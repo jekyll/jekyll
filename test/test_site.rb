@@ -161,6 +161,7 @@ class TestSite < Test::Unit::TestCase
     should "read posts" do
       @site.read_posts('')
       posts = Dir[source_dir('_posts', '*')]
+      posts.delete_if { |post| File.directory?(post) }
       assert_equal posts.size - 1, @site.posts.size
     end
 
@@ -169,9 +170,10 @@ class TestSite < Test::Unit::TestCase
       @site.process
 
       posts = Dir[source_dir("**", "_posts", "*")]
+      posts.delete_if { |post| File.directory?(post) }
       categories = %w(bar baz category foo z_category publish_test win).sort
 
-      assert_equal posts.size - 1, @site.posts.size
+      assert_equal posts.size, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
       assert_equal 4, @site.categories['foo'].size
     end

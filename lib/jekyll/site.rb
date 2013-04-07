@@ -405,6 +405,7 @@ module Jekyll
       base = File.join(self.source, dir, subfolder)
       return [] unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
+      entries.delete_if { |e| File.directory?(File.join(base, e)) }
     end
 
     # Aggregate post information
