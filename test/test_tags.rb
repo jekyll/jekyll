@@ -286,9 +286,9 @@ CONTENT
 title: Include tag parameters
 ---
 
-{% include sig.markdown myparam=test %}
+{% include sig.markdown myparam="test" %}
 
-{% include params.html param=value %}
+{% include params.html param="value" %}
 CONTENT
         create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
       end
@@ -309,7 +309,7 @@ CONTENT
 title: multiple include parameters
 ---
 
-{% include params.html param1=new_value, param2=another %}
+{% include params.html param1="new_value" param2="another" %}
 CONTENT
         create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
       end

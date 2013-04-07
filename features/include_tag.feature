@@ -11,10 +11,10 @@ Feature: Include tags
     And I have a _posts directory
     And I have the following post:
       | title | date | layout | content |
-      | Include Files | 3/21/2013 | default | {% include header.html param=myparam %} |
-      | Ignore params if unused | 3/21/2013 | default | {% include ignore.html date=today %} |
-      | List multiple parameters | 3/21/2013 | default | {% include params.html date=today, start=tomorrow %} |
-      | Dont keep parameters | 3/21/2013 | default | {% include ignore.html param=test %}\n{% include header.html %} |
+      | Include Files | 3/21/2013 | default | {% include header.html param="myparam" %} |
+      | Ignore params if unused | 3/21/2013 | default | {% include ignore.html date="today" %} |
+      | List multiple parameters | 3/21/2013 | default | {% include params.html date="today" start="tomorrow" %} |
+      | Dont keep parameters | 3/21/2013 | default | {% include ignore.html param="test" %}\n{% include header.html %} |
     When I run jekyll
     Then the _site directory should exist
     And I should see "<header>My awesome blog header: myparam</header>" in "_site/2013/03/21/include-files.html"
