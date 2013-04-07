@@ -6,10 +6,10 @@ next_section: deployment-methods
 ---
 
 [GitHub Pages](https://pages.github.com) are public web pages for users,
-organizations, and repositories, that are freely hosted on
-[GitHub](https://github.com/). GitHub Pages are powered by Jekyll behind the
-scenes, so in addition to supporting regular HTML content, they’re also a great
-way to host your Jekyll-powered website for free.
+organizations, and repositories, that are freely hosted on GitHub's
+[github.io]() domain or on a custom domain name of your choice. GitHub Pages are
+powered by Jekyll behind the scenes, so in addition to supporting regular HTML
+content, they’re also a great way to host your Jekyll-powered website for free.
 
 ## Deploying Jekyll to GitHub Pages
 
@@ -23,8 +23,8 @@ few minor details.
 User and organization pages live in a special GitHub repository dedicated to
 only the GitHub Pages files. This repository must be named after the account
 name. For example, [@mojombo’s user page
-repository](https://github.com/mojombo/mojombo.github.com) has the name
-`mojombo.github.com`.
+repository](https://github.com/mojombo/mojombo.github.io) has the name
+`mojombo.github.io`.
 
 Content from the `master` branch of your repository will be used to build and
 publish the GitHub Pages site, so make sure your Jekyll site is stored there.
@@ -33,7 +33,7 @@ publish the GitHub Pages site, so make sure your Jekyll site is stored there.
   <h5>Custom domains do not affect repository names</h5>
   <p>
     GitHub Pages are initially configured to live under the
-    <code>username.github.com</code> subdomain, which is why repositories must
+    <code>username.github.io</code> subdomain, which is why repositories must
     be named this way <strong>even if a custom domain is being used</strong>.
   </p>
 </div>
@@ -44,7 +44,7 @@ Unlike user and organization Pages, Project Pages are kept in the same
 repository as the project they are for, except that the website content is
 stored in a specially named `gh-pages` branch. The content of this branch will
 be rendered using Jekyll, and the output will become available under a subpath
-of your user pages subdomain, such as `username.github.com/project` (unless a
+of your user pages subdomain, such as `username.github.io/project` (unless a
 custom domain is specified—see below).
 
 The Jekyll project repository itself is a perfect example of this branch
