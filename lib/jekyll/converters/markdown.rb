@@ -13,17 +13,28 @@ module Jekyll
             begin
               require 'redcarpet'
 
+              $highlighter = (@config['rouge']) ? 'rouge' : 'pygments'
+
               @renderer ||= Class.new(Redcarpet::Render::HTML) do
                 def block_code(code, lang)
-                  lang = lang && lang.split.first || "text"
-                  output = add_code_tags(
-                    Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
-                    lang
-                  )
+                  case $highlighter
+                  when 'rouge'
+                    require 'rouge'
+                    lexer = Rouge::Lexer.find_fancy(lang, code) || Rouge::Lexers::Text
+                    code.gsub! /^    /, "\t" if lexer.tag == 'make'
+                    formatter = Rouge::Formatters::HTML.new(:css_class => "#{lexer.tag}")
+
+                    output = '<div class="highlight">' + add_code_tags(formatter.format(lexer.lex(code)), lang) + '</div>'
+                  when 'pygments'
+                    lang = lang && lang.split.first || "text"
+                    output = add_code_tags(
+                      Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }), lang)
+                  end
                 end
 
                 def add_code_tags(code, lang)
                   code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
+                  code = code.sub(/<pre class=\"([a-zA-Z]*)\">/,'<pre><code class="\1">')
                   code = code.sub(/<\/pre>/,"</code></pre>")
                 end
               end

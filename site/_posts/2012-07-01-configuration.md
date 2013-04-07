@@ -123,6 +123,15 @@ The table below lists the available settings for Jekyll, and the various <code c
     </tr>
     <tr class='setting'>
       <td>
+        <p class='name'><strong>Rouge</strong></p>
+        <p class="description">Enables highlight tag with Rouge.</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">rouge: [boolean]</code></p>
+      </td>
+    </tr>
+    <tr class='setting'>
+      <td>
         <p class='name'><strong>Future</strong></p>
         <p class="description">Publishes posts with a future date</p>
       </td>
