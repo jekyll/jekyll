@@ -20,12 +20,12 @@ module Jekyll
         @params = {}
 
         while pos = markup.index(/[=\"\s]/, pos)
-	  str = markup[pos]
-	  if /\s/ =~ str
-	    last_space = pos
-	  elsif str == '='
-	    if last_key != nil
-	      raise SyntaxError.new <<-eos
+          str = markup[pos]
+          if /\s/ =~ str
+            last_space = pos
+          elsif str == '='
+            if last_key != nil
+              raise SyntaxError.new <<-eos
 Syntax Error in tag 'include' (missing value) while parsing the following markup:
 
   #{markup}
@@ -33,17 +33,17 @@ Syntax Error in tag 'include' (missing value) while parsing the following markup
 Valid syntax: include param="value"
 eos
             end
-	    last_key = markup[last_space+1..pos-1]
-	  elsif (str == '"' || str == "'") && markup[pos - 1] != '\\'
-	    in_quotes = !in_quotes
-	    if !in_quotes
-	      value = markup[last_quote+1..pos-1].gsub(/\\"/, '"')
-	      @params[last_key] = value
-	      last_key = nil
-	    end
-	    last_quote = pos
+            last_key = markup[last_space+1..pos-1]
+          elsif (str == '"' || str == "'") && markup[pos - 1] != '\\'
+            in_quotes = !in_quotes
+            if !in_quotes
+              value = markup[last_quote+1..pos-1].gsub(/\\"/, '"')
+              @params[last_key] = value
+              last_key = nil
+            end
+            last_quote = pos
           end
-	  last_pos = pos += 1
+          last_pos = pos += 1
         end
 
         if in_quotes
