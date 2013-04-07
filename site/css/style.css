@@ -406,7 +406,7 @@ pre, code {
   line-height: 1.8em;
 }
 
-.highlight, p > pre, p > code {
+.highlight, p > pre, p > code, p > nobr > code, li > code {
   background: #333;
   color: #fff;
   border-radius: 5px;
