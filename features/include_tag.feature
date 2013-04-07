@@ -20,7 +20,9 @@ Feature: Include tags
     Then the _site directory should exist
     And I should see "<header>My awesome blog header: myparam</header>" in "_site/2013/03/21/include-files.html"
     And I should not see "myparam" in "_site/2013/03/21/ignore-params-if-unused.html"
-    And I should see "<ul><li>date = today</li><li>start = tomorrow</li></ul>" in "_site/2013/03/21/list-multiple-parameters.html"
+    And I should see "<li>date = today</li>" in "_site/2013/03/21/list-multiple-parameters.html"
+    And I should see "<li>start = tomorrow</li>" in "_site/2013/03/21/list-multiple-parameters.html"
     And I should not see "<header>My awesome blog header: myparam</header>" in "_site/2013/03/21/dont-keep-parameters.html"
     But I should see "<header>My awesome blog header: </header>" in "_site/2013/03/21/dont-keep-parameters.html"
-    And I should see "<ul><li>cool = param with spaces</li><li>super = &#8220;quoted&#8221;</li></ul>" in "_site/2013/04/07/allow-params-with-spaces-and-quotes.html"
+    And I should see "<li>cool = param with spaces</li>" in "_site/2013/04/07/allow-params-with-spaces-and-quotes.html"
+    And I should see "<li>super = &#8220;quoted&#8221;</li>" in "_site/2013/04/07/allow-params-with-spaces-and-quotes.html"
