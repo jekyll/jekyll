@@ -4,6 +4,7 @@
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
     * Added ability to render drafts in _drafts folder via command line (#833)
+    * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
   * Minor Enhancements
     * Backwards compatibility for 'auto' (#821, #934)
     * Added date_to_rfc822 used on RSS feeds (#892)
