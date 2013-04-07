@@ -20,7 +20,7 @@ module Jekyll
         @params = {}
 
         while pos = markup.index(/[=\"\s]/, pos)
-          str = markup[pos]
+          str = markup[pos, 1]
           if /\s/ =~ str
             last_space = pos
           elsif str == '='
