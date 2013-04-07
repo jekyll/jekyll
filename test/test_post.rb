@@ -214,6 +214,18 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with ordinal style" do
+          setup do
+            @post.site.permalink_style = :ordinal
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:y_day/:title.html", @post.template
+            assert_equal "/2008/253/foo-bar.html", @post.url
+          end
+        end
+
         context "with custom date permalink" do
           setup do
             @post.site.permalink_style = '/:categories/:year/:i_month/:i_day/:title/'
