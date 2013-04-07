@@ -35,8 +35,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class='description'>Change the directory where Jekyll will read files</p>
       </td>
       <td class="align-center">
-        <p><code class="option">source: [string]</code></p>
-        <p><code class="flag">-s, --source [source]</code></p>
+        <p><code class="option">source: DIR</code></p>
+        <p><code class="flag">-s, --source DIR</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -45,8 +45,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class='description'>Change the directory where Jekyll will write files</p>
       </td>
       <td class="align-center">
-        <p><code class="option">destination: [string]</code></p>
-        <p><code class="flag">-d, --destination [destination]</code></p>
+        <p><code class="option">destination: DIR</code></p>
+        <p><code class="flag">-d, --destination DIR</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -55,7 +55,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class='description'>Disable <a href="../plugins">custom plugins</a>.</p>
       </td>
       <td class="align-center">
-        <p><code class="option">safe: [boolean]</code></p>
+        <p><code class="option">safe: BOOL</code></p>
         <p><code class="flag">--safe</code></p>
       </td>
     </tr>
@@ -65,7 +65,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Exclude directories and/or files from the conversion</p>
       </td>
       <td class='align-center'>
-        <p><code class="option">exclude: [dir1, file1, dir2]</code></p>
+        <p><code class="option">exclude: [DIR, FILE, ...]</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -78,7 +78,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         </p>
       </td>
       <td class='align-center'>
-        <p><code class="option">include: [dir1, file1, dir2]</code></p>
+        <p><code class="option">include: [DIR, FILE, ...]</code></p>
       </td>
     </tr>
   </tbody>
@@ -109,7 +109,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Specify a config file. Overrides settings in <code>_config.yml</code></p>
       </td>
       <td class='align-center'>
-        <p><code class="flag">--config [FILE]</code></p>
+        <p><code class="flag">--config FILE</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -127,7 +127,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Publish posts with a future date.</p>
       </td>
       <td class='align-center'>
-        <p><code class="option">future: [boolean]</code></p>
+        <p><code class="option">future: BOOL</code></p>
         <p><code class="flag">--future</code></p>
       </td>
     </tr>
@@ -137,7 +137,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Produce an index for related posts.</p>
       </td>
       <td class='align-center'>
-        <p><code class="option">lsi: [boolean]</code></p>
+        <p><code class="option">lsi: BOOL</code></p>
         <p><code class="flag">--lsi</code></p>
       </td>
     </tr>
@@ -147,8 +147,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Limit the number of posts to parse and publish.</p>
       </td>
       <td class='align-center'>
-        <p><code class="option">limit_posts: [max_posts]</code></p>
-        <p><code class="flag">--limit_posts [max_posts]</code></p>
+        <p><code class="option">limit_posts: NUM</code></p>
+        <p><code class="flag">--limit_posts NUM</code></p>
       </td>
     </tr>
   </tbody>
@@ -174,8 +174,8 @@ before your site is served.
         <p class='description'>Listen on the given port.</p>
       </td>
       <td class="align-center">
-        <p><code class="option">port: [integer]</code></p>
-        <p><code class="flag">--port [port]</code></p>
+        <p><code class="option">port: PORT</code></p>
+        <p><code class="flag">--port PORT</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -184,8 +184,8 @@ before your site is served.
         <p class='description'>Listen at the given hostname.</p>
       </td>
       <td class="align-center">
-        <p><code class="option">host: [string]</code></p>
-        <p><code class="flag">--host [hostname]</code></p>
+        <p><code class="option">host: HOSTNAME</code></p>
+        <p><code class="flag">--host HOSTNAME</code></p>
       </td>
     </tr>
     <tr class='setting'>
@@ -194,8 +194,8 @@ before your site is served.
         <p class='description'>Serve website with the given base URL</p>
       </td>
       <td class="align-center">
-        <p><code class="option">baseurl: [BASE_URL]</code></p>
-        <p><code class="flag">--baseurl [url]</code></p>
+        <p><code class="option">baseurl: URL</code></p>
+        <p><code class="flag">--baseurl URL</code></p>
       </td>
     </tr>
   </tbody>
