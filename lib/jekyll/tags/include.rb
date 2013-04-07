@@ -4,20 +4,20 @@ module Jekyll
       def initialize(tag_name, params, tokens)
         super
 
-	if (params.include?(' '))
-	  separator = params.index(' ')
+        if (params.include?(' '))
+          separator = params.index(' ')
           @file = params[0..separator].strip if params.include?(' ')
           params(params[separator..-1])
-	else
+        else
           @file = params
-	end
+        end
       end
 
       def params(markup)
-	last_space = last_quote = last_pos = pos = 0
-	last_key = nil
-	in_quotes = false
-	@params = {}
+        last_space = last_quote = last_pos = pos = 0
+        last_key = nil
+        in_quotes = false
+        @params = {}
 
         while pos = markup.index(/[=\"\s]/, pos)
 	  str = markup[pos]
@@ -46,7 +46,7 @@ eos
 	  last_pos = pos += 1
         end
 
-	if in_quotes
+        if in_quotes
 	  raise SyntaxError.new <<-eos
 Syntax Error in tag 'include' (unterminated value) while parsing the following markup:
 
