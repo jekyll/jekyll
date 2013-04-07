@@ -15,9 +15,10 @@ following in mind:
   would be appreciated, and once merged it will be transferred over to the main
   wiki.
 * If your contribution changes any Jekyll behavior, make sure to update the
-  documentation. It lives in site/_posts. If the docs are missing information,
+  documentation. It lives in `site/_posts`. If the docs are missing information,
   please feel free to add it in. Great docs make a great project!
-* Please follow the [Github Ruby Styleguide](https://github.com/styleguide/ruby) when modifying Ruby code.
+* Please follow the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby)
+  when modifying Ruby code.
 
 Test Dependencies
 -----------------
