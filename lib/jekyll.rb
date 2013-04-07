@@ -152,6 +152,13 @@ module Jekyll
       config = {}
     end
 
+    # Provide backwards-compatibility
+    if config['auto']
+      $stderr.puts "Deprecation: ".rjust(20) + "'auto' has been changed to " +
+                   "'watch'. Please update your configuration to use 'watch'."
+      config['watch'] = config['auto']
+    end
+
     # Merge DEFAULTS < _config.yml < override
     Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
   end
