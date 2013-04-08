@@ -59,6 +59,7 @@
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
   * Development fixes
+    * Exclude Cucumber 1.2.4, which causes tests to fail in 1.9.2 (#938)
     * Added "features:html" rake task for debugging purposes, cleaned up
       cucumber profiles (#832)
     * Explicitly require HTTPS rubygems source in Gemfile (#826)
