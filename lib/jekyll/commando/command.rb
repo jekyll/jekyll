@@ -5,11 +5,13 @@ module Jekyll
       attr_reader :syntax
       attr_accessor :options
       attr_accessor :commands
+      attr_accessor :actions
 
       def initialize(name)
         @name = name
         @options = [ ]
         @commands =  { }
+        @actions = [ ]
       end
 
       def syntax(syntax)
@@ -26,16 +28,22 @@ module Jekyll
         @commands[cmd_name] = cmd
       end
 
+      def action(&block)
+        @actions << block
+      end
+
       def go(argv, opts, config)
         process_options(opts, config)
 
-        if cmd = commands[argv[0].to_sym]
+        if argv[0] && cmd = commands[argv[0].to_sym]
           puts "Found #{cmd.name}"
           argv.shift
           cmd.go(argv, opts, config)
         else
           puts "No additional command found, time to exec"
 
+          self
+          # actions.each { |a| a.call(nil, nil) }
         end
       end
 
@@ -45,6 +53,10 @@ module Jekyll
             config[o[0]] = x
           end
         end
+      end
+
+      def ident
+        "<Command name=#{name}>"
       end
 
       def inspect

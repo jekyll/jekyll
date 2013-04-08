@@ -112,20 +112,18 @@ require 'jekyll'
 
 # New Style
 # ---------
-Commando.program do |p|
+Jekyll::Commando.program do |p|
   p.name 'jekyll'
   p.version Jekyll::VERSION
   p.description 'Jekyll is a blog-aware, static site generator in Ruby'
 
-  p.default_command :help
-
-  p.option '-s', '--source [DIR]', 'Source directory (defaults to ./)'
-  p.option '-d', '--destination [DIR]', 'Destination directory (defaults to ./_site)'
+  p.option '-s', '--source DIR', 'Source directory (defaults to ./)'
+  p.option '-d', '--destination DIR', 'Destination directory (defaults to ./_site)'
   p.option '--safe', 'Safe mode (defaults to false)'
   p.option '--plugins', 'Plugins directory (defaults to ./_plugins)'
   p.option '--layouts', 'Layouts directory (defaults to ./_layouts)'
 
-  program.command(:build) do |c|
+  p.command(:build) do |c|
     c.syntax = 'jekyll build [options]'
     c.description = 'Build your site'
 
@@ -140,16 +138,16 @@ Commando.program do |p|
 
       config = options.__hash__.clone
       config[:show_drafts] = options.drafts if config.delete(:drafts)
-      p config
 
       config = Jekyll.configuration(config)
       Jekyll::Commands::Build.process(config)
     end
   end
 
-  command :serve do |c|
+  p.command(:serve) do |c|
     c.syntax = 'jekyll serve [options]'
     c.description = 'Serve your site locally'
+    c.alias(:server)
 
     c.option '--future', 'Publishes posts with a future date'
     c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
@@ -157,24 +155,18 @@ Commando.program do |p|
     c.option '--lsi', 'Use LSI for improved related posts'
     c.option '--drafts', 'Render posts in the _drafts folder'
 
-    c.option '-p', '--port [PORT]', 'Port to listen on'
-    c.option '-h', '--host [HOST]', 'Host to bind to'
-    c.option '-b', '--baseurl [URL]', 'Base URL'
+    c.option '-p', '--port PORT', 'Port to listen on'
+    c.option '-h', '--host HOST', 'Host to bind to'
+    c.option '-b', '--baseurl URL', 'Base URL'
 
     c.action do |args, options|
-      options.default :port => '4000',
-                      :host => '0.0.0.0',
-                      :baseurl => '/',
-                      :serving => true
-
       options = Jekyll.configuration(options.__hash__)
       Jekyll::Commands::Build.process(options)
       Jekyll::Commands::Serve.process(options)
     end
   end
-  alias_command :server, :serve
 
-  command :import do |c|
+  p.command(:import) do |c|
     c.syntax = 'jekyll import <platform> [options]'
     c.description = 'Import your old blog to Jekyll'
 

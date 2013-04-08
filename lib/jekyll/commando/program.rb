@@ -26,13 +26,17 @@ module Jekyll
         puts
         p self
 
+        cmd = nil
+
         @optparse = OptionParser.new do |opts|
-          super(argv, opts, @config)
+          cmd = super(argv, opts, @config)
         end
 
         @optparse.parse!(argv)
 
         p @config
+
+        cmd.actions.each { |a| a.call(argv, @config) }
       end
     end
   end

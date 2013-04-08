@@ -13,6 +13,16 @@ module Jekyll
   end
 end
 
+# IMPORT
+
+module JekyllImport
+  module RSS
+    def self.define(c)
+      c.option "--src SOURCE", "Source URL or file."
+    end
+  end
+end
+
 # RUN
 
 module Jek
@@ -28,8 +38,8 @@ module Jek
 
     class Import
       class Typo
-        def self.define(c)
-          c.command(:typo) do |cc|
+        def self.define(cmd)
+          cmd.command(:typo) do |c|
             c.option '--file FILE', 'File to import from'
 #             c.option(:file) do |o|
 #               o.name [ '-f', '--file']
@@ -43,6 +53,11 @@ module Jek
 #                 end
 #               end
 #             end
+            c.action do |args, options|
+              puts "ACTION"
+              p args
+              p options
+            end
           end
         end
       end
@@ -62,7 +77,7 @@ Jekyll::Commando.program(:jekyll) do |p|
   p.version "v0.1.0"
   p.description "I'm awesome"
 
-  p.option '-s', '--source', 'Source of shit'
+  p.option '-s', '--source SOURCE', 'Source of shit'
 
   Jek::Commands::Build.define(p)
   Jek::Commands::Import.define(p)
