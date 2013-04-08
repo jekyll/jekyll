@@ -63,6 +63,7 @@ module Jekyll
     'layouts'       => '_layouts',
     'keep_files'    => ['.git','.svn'],
 
+    'safe'          => false,
     'show_drafts'   => nil,
     'limit_posts'   => nil,
     'lsi'           => false,
