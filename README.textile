@@ -42,4 +42,4 @@ h2. Developer Dependencies
 
 h2. License
 
-See LICENSE.
+See "LICENSE":https://github.com/mojombo/jekyll/blob/master/LICENSE.
