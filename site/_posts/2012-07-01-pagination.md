@@ -31,6 +31,78 @@ paginate: 5
 The number should be the maximum number of Posts you’d like to be displayed per-
 page in the generated site.
 
+## Liquid Attributes Available
+
+The pagination plugin exposes the `paginator` liquid object with the following
+attributes:
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p><code>page</code></p></td>
+      <td><p>current page number</p></td>
+    </tr>
+    <tr>
+      <td><p><code>per_page</code></p></td>
+      <td><p>number of posts per page</p></td>
+    </tr>
+    <tr>
+      <td><p><code>posts</code></p></td>
+      <td><p>a list of posts for the current page</p></td>
+    </tr>
+    <tr>
+      <td><p><code>total_posts</code></p></td>
+      <td><p>total number of posts in the site</p></td>
+    </tr>
+    <tr>
+      <td><p><code>total_pages</code></p></td>
+      <td><p>number of pagination pages</p></td>
+    </tr>
+    <tr>
+      <td><p><code>previous_page</code></p></td>
+      <td>
+          <p>
+              page number of the previous pagination page,
+              or <code>nil</code> if no previous page exists
+          </p>
+      </td>
+    </tr>
+    <tr>
+      <td><p><code>previous_page_path</code></p></td>
+      <td>
+          <p>
+              path of previous pagination page,
+              or <code>nil</code> if no previous page exists
+          </p>
+      </td>
+    </tr>
+    <tr>
+      <td><p><code>next_page</code></p></td>
+      <td>
+          <p>
+              page number of the next pagination page,
+              or <code>nil</code> if no subsequent page exists
+          </p>
+      </td>
+    </tr>
+    <tr>
+      <td><p><code>next_page_path</code></p></td>
+      <td>
+          <p>
+              path of next pagination page,
+              or <code>nil</code> if no subsequent page exists
+          </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <div class="note info">
   <h5>Pagination does not support tags or categories</h5>
   <p>Pagination pages through every post in the <code>posts</code> variable regardless of variables defined in the YAML Front Matter of each. It does not currently allow paging over groups of posts linked by a common tag or category.</p>
@@ -98,7 +170,7 @@ page with links to all but the current page.
       {% if paginator.previous_page == 1 %}
         <a href="/">Previous</a>
       {% else %}
-        <a href="/page{{ paginator.previous_page }}">Previous</a>
+        <a href="{{ paginator.previous_page_path }}">Previous</a>
       {% endif %}
     </p>
   {% else %}
@@ -129,7 +201,7 @@ page with links to all but the current page.
 
   {% if paginator.next_page %}
     <p class="next">
-      <a href="/page{{ paginator.next_page }}">Next</a>
+      <a href="{{ paginator.next_page_path }}">Next</a>
     </p>
   {% else %}
     <p class="next disabled">
