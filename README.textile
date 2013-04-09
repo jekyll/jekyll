@@ -1,6 +1,7 @@
 h1. Jekyll
 
 !https://travis-ci.org/mojombo/jekyll.png?branch=master!:https://travis-ci.org/mojombo/jekyll
+"!https://codeclimate.com/github/mojombo/jekyll.png!":https://codeclimate.com/github/mojombo/jekyll
 
 By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!
 
@@ -30,7 +31,6 @@ h2. Runtime Dependencies
 * Kramdown: Markdown-superset converter (Ruby)
 * Liquid: Templating system (Ruby)
 * Maruku: Default markdown engine (Ruby)
-* Pygments: Syntax highlighting (Python)
 
 h2. Developer Dependencies
 
@@ -42,4 +42,4 @@ h2. Developer Dependencies
 
 h2. License
 
-See LICENSE.
+See "LICENSE":https://github.com/mojombo/jekyll/blob/master/LICENSE.

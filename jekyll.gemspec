@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.0.0.beta2'
+  s.version           = '1.0.0.beta3'
   s.license           = 'MIT'
-  s.date              = '2013-03-19'
+  s.date              = '2013-04-04'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -25,10 +25,10 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('liquid', "~> 2.3")
   s.add_runtime_dependency('classifier', "~> 1.3")
-  s.add_runtime_dependency('directory_watcher', "~> 1.1")
+  s.add_runtime_dependency('directory_watcher', "~> 1.4.1")
   s.add_runtime_dependency('maruku', "~> 0.5")
   s.add_runtime_dependency('kramdown', "~> 0.14")
-  s.add_runtime_dependency('pygments.rb', "~> 0.3.2")
+  s.add_runtime_dependency('pygments.rb', "~> 0.4.2")
   s.add_runtime_dependency('commander', "~> 4.1.3")
   s.add_runtime_dependency('safe_yaml', "~> 0.7.0")
 
@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 3.3.2")
   s.add_development_dependency('rr', "~> 1.0")
-  s.add_development_dependency('cucumber', "~> 1.2.1")
+  s.add_development_dependency('cucumber', "~> 1.2.1", '!= 1.2.4')
   s.add_development_dependency('RedCloth', "~> 4.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
   s.add_development_dependency('redcarpet', "~> 2.2.2")
@@ -202,6 +202,8 @@ Gem::Specification.new do |s|
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
     test/source/sitemap.xml
+    test/source/symlink-test/symlinked-dir
+    test/source/symlink-test/symlinked-file
     test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
     test/source/z_category/_posts/2008-9-23-categories.textile
     test/suite.rb

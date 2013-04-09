@@ -161,6 +161,7 @@ class TestSite < Test::Unit::TestCase
     should "read posts" do
       @site.read_posts('')
       posts = Dir[source_dir('_posts', '*')]
+      posts.delete_if { |post| File.directory?(post) }
       assert_equal posts.size - 1, @site.posts.size
     end
 
@@ -169,9 +170,10 @@ class TestSite < Test::Unit::TestCase
       @site.process
 
       posts = Dir[source_dir("**", "_posts", "*")]
+      posts.delete_if { |post| File.directory?(post) }
       categories = %w(bar baz category foo z_category publish_test win).sort
 
-      assert_equal posts.size - 1, @site.posts.size
+      assert_equal posts.size, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
       assert_equal 4, @site.categories['foo'].size
     end
@@ -215,6 +217,28 @@ class TestSite < Test::Unit::TestCase
       stub(File).symlink?('symlink.js') {true}
       files = %w[symlink.js]
       assert_equal files, @site.filter_entries(files)
+    end
+
+    should "not include symlinks in safe mode" do
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
+      end
+      site = Site.new(Jekyll.configuration)
+
+      site.read_directories("symlink-test")
+      assert_equal [], site.pages
+      assert_equal [], site.static_files
+    end
+
+    should "include symlinks in unsafe mode" do
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => false})
+      end
+      site = Site.new(Jekyll.configuration)
+
+      site.read_directories("symlink-test")
+      assert_not_equal [], site.pages
+      assert_not_equal [], site.static_files
     end
 
     context 'error handling' do

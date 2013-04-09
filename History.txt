@@ -4,7 +4,12 @@
     * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
     * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
     * Added ability to render drafts in _drafts folder via command line (#833)
+    * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
   * Minor Enhancements
+    * Backwards compatibility for 'auto' (#821, #934)
+    * Added date_to_rfc822 used on RSS feeds (#892)
+    * Upgrade version of pygments.rb to 0.4.2 (#927)
+    * Added short month (e.g. "Sep") to permalink style options for posts (#890)
     * Expose site.baseurl to Liquid templates (#869)
     * Adds excerpt attribute to posts which contains first paragraph of content (#837)
     * Accept custom configuration file via CLI (#863)
@@ -30,6 +35,12 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Fix cascade problem with site.baseurl, site.port and site.host. (#935)
+    * Filter out directories with valid post names (#875)
+    * Fix symlinked static files not being correctly built in unsafe mode (#909)
+    * Fix integration with directory_watcher 1.4.x (#916)
+    * Accepting strings as arguments to jekyll-import command (#910)
+    * Force usage of older directory_watcher gem as 1.5 is broken (#883)
     * Ensure all Post categories are downcase (#842, #872)
     * Force encoding of the rdiscount TOC to UTF8 to avoid conversion errors (#555)
     * Patch for multibyte URI problem with jekyll serve (#723)
@@ -44,9 +55,11 @@
     * Add SVG support to Jekyll/WEBrick. (#407, #406)
     * Prevent custom destination from causing continuous regen on watch (#528, #820, #862)
   * Site Enhancements
+    * Clean up site docs to prepare for 1.0 release (#918)
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
   * Development fixes
+    * Exclude Cucumber 1.2.4, which causes tests to fail in 1.9.2 (#938)
     * Added "features:html" rake task for debugging purposes, cleaned up
       cucumber profiles (#832)
     * Explicitly require HTTPS rubygems source in Gemfile (#826)

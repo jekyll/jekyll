@@ -62,6 +62,9 @@ module Jekyll
       if self.categories.empty?
         self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
       end
+
+      self.tags.flatten!
+      self.categories.flatten!
     end
 
     # Get the full path to the directory containing the post files
@@ -143,6 +146,8 @@ module Jekyll
         "/:categories/:title.html"
       when :date
         "/:categories/:year/:month/:day/:title.html"
+      when :ordinal
+        "/:categories/:year/:y_day/:title.html"
       else
         self.site.permalink_style.to_s
       end
@@ -166,6 +171,8 @@ module Jekyll
           "i_day"      => date.strftime("%d").to_i.to_s,
           "i_month"    => date.strftime("%m").to_i.to_s,
           "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
+          "short_month" => date.strftime("%b"),
+          "y_day"      => date.strftime("%j"),
           "output_ext" => self.output_ext
         }.inject(template) { |result, token|
           result.gsub(/:#{Regexp.escape token.first}/, token.last)

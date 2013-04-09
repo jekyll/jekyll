@@ -52,7 +52,7 @@ require_all 'jekyll/tags'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.0.0.beta2'
+  VERSION = '1.0.0.beta3'
 
   # Default options. Overriden by values in _config.yml.
   # Strings rather than symbols are used for compatability with YAML.
@@ -64,16 +64,19 @@ module Jekyll
     'keep_files'   => ['.git','.svn'],
 
     'future'        => true,           # remove and make true just default
-    'pygments'      => true,          # remove and make true just default
+    'pygments'      => true,           # remove and make true just default
 
     'markdown'      => 'maruku',
     'permalink'     => 'date',
-    'baseurl'       => '',
+    'baseurl'       => '/',
     'include'       => ['.htaccess'],
     'paginate_path' => 'page:num',
 
     'markdown_ext'  => 'markdown,mkd,mkdn,md',
     'textile_ext'   => 'textile',
+
+    'port'          => '4000',
+    'host'          => '0.0.0.0',
 
     'excerpt_separator' => "\n\n",
 
@@ -150,6 +153,13 @@ module Jekyll
                    "Using defaults (and options)."
       $stderr.puts "#{err}"
       config = {}
+    end
+
+    # Provide backwards-compatibility
+    if config['auto']
+      $stderr.puts "Deprecation: ".rjust(20) + "'auto' has been changed to " +
+                   "'watch'. Please update your configuration to use 'watch'."
+      config['watch'] = config['auto']
     end
 
     # Merge DEFAULTS < _config.yml < override
