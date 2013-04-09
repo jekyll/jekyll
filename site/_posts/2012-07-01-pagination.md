@@ -98,7 +98,7 @@ page with links to all but the current page.
       {% if paginator.previous_page == 1 %}
         <a href="/">Previous</a>
       {% else %}
-        <a href="/page{{ paginator.previous_page }}">Previous</a>
+        <a href="{{ paginator.previous_page_path }}">Previous</a>
       {% endif %}
     </p>
   {% else %}
@@ -129,7 +129,7 @@ page with links to all but the current page.
 
   {% if paginator.next_page %}
     <p class="next">
-      <a href="/page{{ paginator.next_page }}">Next</a>
+      <a href="{{ paginator.next_page_path }}">Next</a>
     </p>
   {% else %}
     <p class="next disabled">
