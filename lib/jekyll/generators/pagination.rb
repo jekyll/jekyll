@@ -91,7 +91,7 @@ module Jekyll
     #
     # Returns the the absolute URL for the pagination page
     def self.paginate_url(site_config, num_page)
-      return "" if num_page.nil?
+      return nil if num_page.nil?
       path = paginate_path(site_config, num_page)
       if path[0..1] == "/"
         path
