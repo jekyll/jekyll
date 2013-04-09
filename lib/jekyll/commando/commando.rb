@@ -13,6 +13,8 @@ module Jekyll
   end
 end
 
+__END__
+
 # IMPORT
 
 module JekyllImport
@@ -31,7 +33,8 @@ module Jek
       def self.define(p)
         p.command(:build) do |c|
           c.syntax "jekyll build [options]"
-          c.option '--safe', 'Safe mode?'
+          c.option 'safe', '--safe', 'Safe mode?'
+          c.alias :bld
         end
       end
     end
@@ -40,7 +43,7 @@ module Jek
       class Typo
         def self.define(cmd)
           cmd.command(:typo) do |c|
-            c.option '--file FILE', 'File to import from'
+            c.option 'file', '--file FILE', 'File to import from'
 #             c.option(:file) do |o|
 #               o.name [ '-f', '--file']
 #               o.description 'File to import from'
@@ -64,7 +67,7 @@ module Jek
 
       def self.define(p)
         p.command(:import) do |c|
-          c.option '--safe', 'Safe mode?'
+          c.option 'safe', '--safe', 'Safe mode?'
 
           Typo.define(c)
         end
@@ -77,7 +80,7 @@ Jekyll::Commando.program(:jekyll) do |p|
   p.version "v0.1.0"
   p.description "I'm awesome"
 
-  p.option '-s', '--source SOURCE', 'Source of shit'
+  p.option 'source', '-s', '--source SOURCE', 'Source of shit'
 
   Jek::Commands::Build.define(p)
   Jek::Commands::Import.define(p)
