@@ -6,6 +6,7 @@
     * Added ability to render drafts in _drafts folder via command line (#833)
     * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
   * Minor Enhancements
+    * Add paginator.previous_page_path and paginator.next_page_path (#942)
     * Backwards compatibility for 'auto' (#821, #934)
     * Added date_to_rfc822 used on RSS feeds (#892)
     * Upgrade version of pygments.rb to 0.4.2 (#927)
