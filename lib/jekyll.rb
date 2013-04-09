@@ -57,26 +57,27 @@ module Jekyll
   # Default options. Overriden by values in _config.yml.
   # Strings rather than symbols are used for compatability with YAML.
   DEFAULTS = {
-    'source'        => Dir.pwd,
-    'destination'   => File.join(Dir.pwd, '_site'),
-    'plugins'       => '_plugins',
-    'layouts'       => '_layouts',
-    'keep_files'   => ['.git','.svn'],
+    'source'         => Dir.pwd,
+    'destination'    => File.join(Dir.pwd, '_site'),
+    'plugins'        => '_plugins',
+    'layouts'        => '_layouts',
+    'keep_files'     => ['.git','.svn'],
 
-    'future'        => true,           # remove and make true just default
-    'pygments'      => true,           # remove and make true just default
+    'future'         => true,           # remove and make true just default
+    'pygments'       => true,           # remove and make true just default
 
-    'markdown'      => 'maruku',
-    'permalink'     => 'date',
-    'baseurl'       => '/',
-    'include'       => ['.htaccess'],
-    'paginate_path' => 'page:num',
+    'markdown'       => 'maruku',
+    'permalink'      => 'date',
+    'baseurl'        => '/',
+    'include'        => ['.htaccess'],
+    'paginate_path'  => 'page:num',
+    'paginate_files' => ['index.html'],
 
-    'markdown_ext'  => 'markdown,mkd,mkdn,md',
-    'textile_ext'   => 'textile',
+    'markdown_ext'   => 'markdown,mkd,mkdn,md',
+    'textile_ext'    => 'textile',
 
-    'port'          => '4000',
-    'host'          => '0.0.0.0',
+    'port'           => '4000',
+    'host'           => '0.0.0.0',
 
     'excerpt_separator' => "\n\n",
 
