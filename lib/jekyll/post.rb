@@ -2,6 +2,7 @@ module Jekyll
   class Post
     include Comparable
     include Convertible
+    include URL
 
     class << self
       attr_accessor :lsi
@@ -153,36 +154,20 @@ module Jekyll
       end
     end
 
-    # The generated relative url of this post.
-    # e.g. /2008/11/05/my-awesome-post.html
-    #
-    # Returns the String URL.
-    def url
-      return @url if @url
-
-      url = if permalink
-        permalink
-      else
-        {
-          "year"       => date.strftime("%Y"),
-          "month"      => date.strftime("%m"),
-          "day"        => date.strftime("%d"),
-          "title"      => CGI.escape(slug),
-          "i_day"      => date.strftime("%d").to_i.to_s,
-          "i_month"    => date.strftime("%m").to_i.to_s,
-          "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
-          "short_month" => date.strftime("%b"),
-          "y_day"      => date.strftime("%j"),
-          "output_ext" => self.output_ext
-        }.inject(template) { |result, token|
-          result.gsub(/:#{Regexp.escape token.first}/, token.last)
-        }.gsub(/\/\//, "/")
-      end
-
-      # sanitize url
-      @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
-      @url += "/" if url =~ /\/$/
-      @url
+    # See url.rb for an explanation
+    def url_placeholders
+      {
+        "year"       => date.strftime("%Y"),
+        "month"      => date.strftime("%m"),
+        "day"        => date.strftime("%d"),
+        "title"      => CGI.escape(slug),
+        "i_day"      => date.strftime("%d").to_i.to_s,
+        "i_month"    => date.strftime("%m").to_i.to_s,
+        "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
+        "short_month" => date.strftime("%b"),
+        "y_day"      => date.strftime("%j"),
+        "output_ext" => self.output_ext
+      }
     end
 
     # The UID for this post (useful in feeds).
