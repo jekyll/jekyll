@@ -93,11 +93,7 @@ module Jekyll
     def self.paginate_url(site_config, num_page)
       return nil if num_page.nil?
       path = paginate_path(site_config, num_page)
-      if path[0..1] == "/"
-        path
-      else
-        "/#{path}"
-      end
+      File.join(site_config["baseurl"], path)
     end
 
     # Initialize a new Pager.
