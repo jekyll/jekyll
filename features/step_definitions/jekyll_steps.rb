@@ -21,28 +21,24 @@ Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |
 ---
 #{text}
 EOF
-    f.close
   end
 end
 
 Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   File.open(file, 'w') do |f|
     f.write(text)
-    f.close
   end
 end
 
 Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
   File.open(File.join('_layouts', layout + '.html'), 'w') do |f|
     f.write(text)
-    f.close
   end
 end
 
 Given /^I have a (.*) theme that contains "(.*)"$/ do |layout, text|
   File.open(File.join('_theme', layout + '.html'), 'w') do |f|
     f.write(text)
-    f.close
   end
 end
 
@@ -87,7 +83,6 @@ Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, dire
 ---
 #{content}
 EOF
-      f.close
     end
   end
 end
@@ -95,7 +90,6 @@ end
 Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
   File.open('_config.yml', 'w') do |f|
     f.write("#{key}: #{value}\n")
-    f.close
   end
 end
 
@@ -104,7 +98,6 @@ Given /^I have a configuration file with:$/ do |table|
     table.hashes.each do |row|
       f.write("#{row["key"]}: #{row["value"]}\n")
     end
-    f.close
   end
 end
 
@@ -114,7 +107,6 @@ Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
     table.hashes.each do |row|
       f.write("- #{row["value"]}\n")
     end
-    f.close
   end
 end
 
