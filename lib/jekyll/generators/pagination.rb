@@ -84,6 +84,12 @@ module Jekyll
       format.sub(':num', num_page.to_s)
     end
 
+    # Static: Return the URL for the pagination path of the page
+    #
+    # site_config - the site config
+    # num_page - the pagination page number
+    #
+    # Returns the the absolute URL for the pagination page
     def self.paginate_url(site_config, num_page)
       return "" if num_page.nil?
       path = paginate_path(site_config, num_page)
