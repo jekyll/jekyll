@@ -66,19 +66,39 @@ attributes:
     </tr>
     <tr>
       <td><p><code>previous_page</code></p></td>
-      <td><p>page number of the previous pagination page</p></td>
+      <td>
+          <p>
+              page number of the previous pagination page,
+              or <code>nil</code> if no previous page exists
+          </p>
+      </td>
     </tr>
     <tr>
       <td><p><code>previous_page_path</code></p></td>
-      <td><p>path (including leading "/") of previous pagination page</p></td>
+      <td>
+          <p>
+              path (including leading "/") of previous pagination page,
+              or <code>nil</code> if no previous page exists
+          </p>
+      </td>
     </tr>
     <tr>
       <td><p><code>next_page</code></p></td>
-      <td><p>page number of the next pagination page</p></td>
+      <td>
+          <p>
+              page number of the next pagination page,
+              or <code>nil</code> if no subsequent page exists
+          </p>
+      </td>
     </tr>
     <tr>
       <td><p><code>next_page_path</code></p></td>
-      <td><p>path (including leading "/") of next pagination page</p></td>
+      <td>
+          <p>
+              path (including leading "/") of next pagination page,
+              or <code>nil</code> if no subsequent page exists
+          </p>
+      </td>
     </tr>
   </tbody>
 </table>
