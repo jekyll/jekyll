@@ -77,7 +77,7 @@ attributes:
       <td><p><code>previous_page_path</code></p></td>
       <td>
           <p>
-              path (including leading "/") of previous pagination page,
+              path of previous pagination page,
               or <code>nil</code> if no previous page exists
           </p>
       </td>
@@ -95,7 +95,7 @@ attributes:
       <td><p><code>next_page_path</code></p></td>
       <td>
           <p>
-              path (including leading "/") of next pagination page,
+              path of next pagination page,
               or <code>nil</code> if no subsequent page exists
           </p>
       </td>

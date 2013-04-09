@@ -79,21 +79,9 @@ module Jekyll
     #
     # Returns the pagination path as a string
     def self.paginate_path(site_config, num_page)
-      return "/" if num_page.nil? || num_page <= 1
+      return nil if num_page.nil? || num_page <= 1
       format = site_config['paginate_path']
       format.sub(':num', num_page.to_s)
-    end
-
-    # Static: Return the URL for the pagination path of the page
-    #
-    # site_config - the site config
-    # num_page - the pagination page number
-    #
-    # Returns the the absolute URL for the pagination page
-    def self.paginate_url(site_config, num_page)
-      return nil if num_page.nil?
-      path = paginate_path(site_config, num_page)
-      File.join(site_config["baseurl"], path)
     end
 
     # Initialize a new Pager.
@@ -118,9 +106,9 @@ module Jekyll
       @total_posts = all_posts.size
       @posts = all_posts[init..offset]
       @previous_page = @page != 1 ? @page - 1 : nil
-      @previous_page_path = Pager.paginate_url(config, @previous_page)
+      @previous_page_path = Pager.paginate_path(config, @previous_page)
       @next_page = @page != @total_pages ? @page + 1 : nil
-      @next_page_path = Pager.paginate_url(config, @next_page)
+      @next_page_path = Pager.paginate_path(config, @next_page)
     end
 
     # Convert this Pager's data to a Hash suitable for use by Liquid.
