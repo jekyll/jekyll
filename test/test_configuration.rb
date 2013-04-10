@@ -51,7 +51,7 @@ class TestConfiguration < Test::Unit::TestCase
       mock(YAML).safe_load_file(@paths[:other]) { Hash.new }
       mock($stdout).puts("Configuration file: #{@paths[:default]}")
       mock($stdout).puts("Configuration file: #{@paths[:other]}")
-      assert_equal Jekyll::DEFAULTS, Jekyll.configuration({ "config" => "#{@paths[:default]} #{@paths[:other]}" })
+      assert_equal Jekyll::DEFAULTS, Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })
     end
 
     should "load multiple config files and last config should win" do
@@ -59,7 +59,7 @@ class TestConfiguration < Test::Unit::TestCase
       mock(YAML).safe_load_file(@paths[:other]) { {"baseurl" => "http://wahoo.dev"} }
       mock($stdout).puts("Configuration file: #{@paths[:default]}")
       mock($stdout).puts("Configuration file: #{@paths[:other]}")
-      assert_equal Jekyll::DEFAULTS.deep_merge({ "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => "#{@paths[:default]} #{@paths[:other]}" })
+      assert_equal Jekyll::DEFAULTS.deep_merge({ "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })
     end
   end
 end
