@@ -1,6 +1,6 @@
 ---
 layout: ~
-excerpt: 'I can set a custom excerpt with *markdown*'
+excerpt: 'I can set a custom excerpt'
 ---
 
 This is not my excerpt.

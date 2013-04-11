@@ -89,7 +89,11 @@ module Jekyll
     #
     # Returns excerpt string.
     def excerpt
-      self.data['excerpt'] ? converter.convert(self.data['excerpt']) : self.extracted_excerpt
+      if self.data.has_key? 'excerpt'
+       self.data['excerpt']
+      else
+       self.extracted_excerpt
+      end
     end
 
     # Compares Post objects. First compares the Post date. If the dates are

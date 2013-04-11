@@ -329,11 +329,11 @@ class TestPost < Test::Unit::TestCase
           end
 
           should "use custom excerpt" do
-            assert_equal("<p>I can set a custom excerpt with <em>markdown</em></p>", @post.excerpt)
+            assert_equal("I can set a custom excerpt", @post.excerpt)
           end
 
           should "expose custom excerpt to liquid" do
-            assert @post.content.include?("I can use the excerpt: <quote><p>I can set a custom excerpt with <em>markdown</em></p></quote>")
+            assert @post.content.include?("I can use the excerpt: <quote>I can set a custom excerpt</quote>"), "Exposes incorrect excerpt to liquid."
           end
 
         end
