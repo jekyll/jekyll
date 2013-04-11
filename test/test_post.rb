@@ -324,13 +324,16 @@ class TestPost < Test::Unit::TestCase
         context "with custom excerpt" do
           setup do
             file = "2013-04-11-custom-excerpt.markdown"
-            @post.process(file)
-            @post.read_yaml(@source, file)
-            @post.transform
+            @post = setup_post(file)
+            do_render(@post)
           end
 
           should "use custom excerpt" do
             assert_equal("<p>I can set a custom excerpt with <em>markdown</em></p>", @post.excerpt)
+          end
+
+          should "expose custom excerpt to liquid" do
+            assert @post.content.include?("I can use the excerpt: <quote><p>I can set a custom excerpt with <em>markdown</em></p></quote>")
           end
 
         end
