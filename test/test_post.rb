@@ -320,6 +320,21 @@ class TestPost < Test::Unit::TestCase
             assert !@post.excerpt.include?("---"), "does not contains separator"
           end
         end
+
+        context "with custom excerpt" do
+          setup do
+	    file = "2013-04-11-custom-excerpt.markdown"
+	    @post.process(file)
+            @post.read_yaml(@source, file)
+            @post.transform
+	  end
+
+          should "use custom excerpt" do
+	    assert_equal("<p>I can set a custom excerpt with <em>markdown</em></p>", @post.excerpt)
+	  end
+
+	end
+
       end
     end
 
