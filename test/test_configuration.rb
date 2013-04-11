@@ -46,6 +46,12 @@ class TestConfiguration < Test::Unit::TestCase
       assert_equal Jekyll::DEFAULTS.deep_merge({ "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => @paths[:other] })
     end
 
+    should "load default config if path passed is empty" do
+      mock(YAML).safe_load_file(@paths[:default]) { Hash.new }
+      mock($stdout).puts("Configuration file: #{@paths[:default]}")
+      assert_equal Jekyll::DEFAULTS, Jekyll.configuration({ "config" => @paths[:empty] })
+    end
+
     should "load multiple config files" do
       mock(YAML).safe_load_file(@paths[:default]) { Hash.new }
       mock(YAML).safe_load_file(@paths[:other]) { Hash.new }

@@ -138,7 +138,7 @@ module Jekyll
     # Get configuration from <source>/_config.yml or <source>/<config_file>
     config_files = override.delete('config')
     config_files = File.join(source, "_config.yml") if config_files.to_s.empty?
-    if not config_files.is_a? Array
+    unless config_files.is_a? Array
       config_files = [config_files]
     end
 
