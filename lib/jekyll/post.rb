@@ -22,7 +22,7 @@ module Jekyll
     attr_accessor :data, :extracted_excerpt, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
-    attr_reader :name, :excerpt
+    attr_reader :name
 
     # Initialize this Post instance.
     #
