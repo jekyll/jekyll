@@ -19,10 +19,10 @@ module Jekyll
     end
 
     attr_accessor :site
-    attr_accessor :data, :excerpt, :content, :output, :ext
+    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
-    attr_reader :name
+    attr_reader :name, :excerpt
 
     # Initialize this Post instance.
     #
@@ -80,8 +80,16 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name)
       super(base, name)
-      self.excerpt = self.data["excerpt"] || self.extract_excerpt
+      self.extracted_excerpt = self.extract_excerpt
       self.data['layout'] = 'post' unless self.data.has_key?('layout')
+    end
+
+    # The post excerpt. This is either a custom excerpt
+    # set in YAML front matter or the result of extract_excerpt.
+    #
+    # Returns excerpt string.
+    def excerpt
+      self.data['excerpt'] ? converter.convert(self.data['excerpt']) : self.extracted_excerpt
     end
 
     # Compares Post objects. First compares the Post date. If the dates are
@@ -117,7 +125,7 @@ module Jekyll
     # Returns nothing.
     def transform
       super
-      self.excerpt = converter.convert(self.excerpt)
+      self.extracted_excerpt = converter.convert(self.extracted_excerpt)
     end
 
     # The generated directory into which the post will be placed
