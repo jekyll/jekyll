@@ -137,7 +137,8 @@ module Jekyll
     # Returns nothing.
     def read_directories(dir = '')
       base = File.join(self.source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.')) }
+      filter_underscores = dir == '' # filter underscores only in the root directory
+      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), filter_underscores) }
 
       self.read_posts(dir)
 
@@ -348,17 +349,24 @@ module Jekyll
     end
 
     # Filter out any files/directories that are hidden or backup files (start
-    # with "." or "#" or end with "~"), or contain site content (start with "_"),
-    # or are excluded in the site configuration, unless they are web server
-    # files such as '.htaccess'.
+    # with "." or "#" or end with "~"), or are excluded in the site configuration,
+    # unless they are web server files such as '.htaccess'.
+    #
+    # If filter_underscores is true, entries that start with "_" will also be
+    # filtered out. This is used when processing the root directory to filter out
+    # entries that contain site content.
     #
     # entries - The Array of String file/directory entries to filter.
+    # filter_underscores - whether to filter out entries prefixed with an underscore
     #
     # Returns the Array of filtered entries.
-    def filter_entries(entries)
+    def filter_entries(entries, filter_underscores = true)
+      filtered_prefixes = ['.', '#']
+      filtered_prefixes << '_' if filter_underscores
+
       entries.reject do |e|
         unless self.include.glob_include?(e)
-          ['.', '_', '#'].include?(e[0..0]) ||
+          filtered_prefixes.include?(e[0..0]) ||
           e[-1..-1] == '~' ||
           self.exclude.glob_include?(e) ||
           (File.symlink?(e) && self.safe)

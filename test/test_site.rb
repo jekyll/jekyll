@@ -203,6 +203,12 @@ class TestSite < Test::Unit::TestCase
       assert_equal files, @site.filter_entries(files)
     end
 
+    should "not filter underscore-prefixed entries when filter_underscores is false" do
+      entries = %w[bla.bla _foo]
+
+      assert_equal %w[bla.bla _foo], @site.filter_entries(entries, false)
+    end
+
     should "filter symlink entries when safe mode enabled" do
       stub(Jekyll).configuration do
         Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
@@ -239,6 +245,16 @@ class TestSite < Test::Unit::TestCase
       site.read_directories("symlink-test")
       assert_not_equal [], site.pages
       assert_not_equal [], site.static_files
+    end
+
+    should "include files with leading underscores outside the root directory" do
+      stub(Jekyll).configuration do
+        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+      end
+      site = Site.new(Jekyll.configuration)
+
+      site.read_directories("underscore-test")
+      assert_not_equal [], site.pages
     end
 
     context 'error handling' do
