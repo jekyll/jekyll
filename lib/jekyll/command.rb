@@ -15,15 +15,13 @@ module Jekyll
     #
     # Returns nothing
     def self.process_site(site)
-      begin
-        site.process
-      rescue Jekyll::FatalException => e
-        puts
-        puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
-        puts "------------------------------------"
-        puts e.message
-        exit(1)
-      end
+      site.process
+    rescue Jekyll::FatalException => e
+      puts
+      puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
+      puts "------------------------------------"
+      puts e.message
+      exit(1)
     end
   end
 end
