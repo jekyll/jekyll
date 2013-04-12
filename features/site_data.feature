@@ -9,6 +9,19 @@ Feature: Site data
     Then the _site directory should exist
     And I should see "Contact: email@me.com" in "_site/contact.html"
 
+  Scenario Outline: Use page.path variable in a page
+    Given I have a <dir> directory
+    And I have a "<path>" page that contains "Source path: {{ page.path }}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Source path: <path>" in "_site/<path>"
+
+    Examples:
+      | dir | path |
+      | .   | index.html |
+      | dir | dir/about.html |
+      | dir/nested | dir/nested/page.html |
+
   Scenario: Use site.time variable
     Given I have an "index.html" page that contains "{{ site.time }}"
     When I run jekyll

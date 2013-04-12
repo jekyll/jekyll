@@ -124,7 +124,8 @@ module Jekyll
     def to_liquid
       self.data.deep_merge({
         "url"        => self.url,
-        "content"    => self.content })
+        "content"    => self.content,
+        "path"       => File.join(@dir, @name).sub(/\A\//, '') })
     end
 
     # Obtain destination path.
