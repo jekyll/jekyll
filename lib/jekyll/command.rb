@@ -8,6 +8,12 @@ module Jekyll
         dirs += ['*']
       end
     end
+
+    # Static: Run Site#process and catch errors
+    #
+    # site - the Jekyll::Site object
+    #
+    # Returns nothing
     def self.process_site(site)
       begin
         site.process
