@@ -320,6 +320,24 @@ class TestPost < Test::Unit::TestCase
             assert !@post.excerpt.include?("---"), "does not contains separator"
           end
         end
+
+        context "with custom excerpt" do
+          setup do
+            file = "2013-04-11-custom-excerpt.markdown"
+            @post = setup_post(file)
+            do_render(@post)
+          end
+
+          should "use custom excerpt" do
+            assert_equal("I can set a custom excerpt", @post.excerpt)
+          end
+
+          should "expose custom excerpt to liquid" do
+            assert @post.content.include?("I can use the excerpt: <quote>I can set a custom excerpt</quote>"), "Exposes incorrect excerpt to liquid."
+          end
+
+        end
+
       end
     end
 
