@@ -27,11 +27,10 @@ class TestConfiguration < Test::Unit::TestCase
   end
   context "#config_files" do
     setup do
-      @config = Configuration[Configuration::DEFAULTS]
-      @base_config     = {"source" => source_dir}
-      @no_override     = @base_config.merge({})
-      @one_config_file = @base_config.merge({ "config" => "config.yml" })
-      @multiple_files  = @base_config.merge({ "config" => %w[config/site.yml config/deploy.yml configuration.yml] })
+      @config = Configuration[{"source" => source_dir}]
+      @no_override     = {}
+      @one_config_file = {"config" => "config.yml"}
+      @multiple_files  = {"config" => %w[config/site.yml config/deploy.yml configuration.yml]}
     end
 
     should "always return an array" do
