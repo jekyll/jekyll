@@ -168,6 +168,15 @@ Feature: Post data
       | dir | dir/        |
       | dir/nested | dir/nested/ |
 
+  Scenario: Override page.path variable
+    Given I have a _posts directory
+    And I have the following post:
+      | title    | date      | path               | content                      |
+      | override | 4/12/2013 | override-path.html | Custom path: {{ page.path }} |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Custom path: override-path.html" in "_site/2013/04/12/override.html"
+
   Scenario: Disable a post from being published
     Given I have a _posts directory
     And I have an "index.html" file that contains "Published!"

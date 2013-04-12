@@ -22,6 +22,12 @@ Feature: Site data
       | dir | dir/about.html |
       | dir/nested | dir/nested/page.html |
 
+  Scenario: Override page.path
+    Given I have an "override.html" page with path "custom-override.html" that contains "Custom path: {{ page.path }}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Custom path: custom-override.html" in "_site/override.html"
+
   Scenario: Use site.time variable
     Given I have an "index.html" page that contains "{{ site.time }}"
     When I run jekyll

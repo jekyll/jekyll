@@ -287,7 +287,7 @@ module Jekyll
         "tags"       => self.tags,
         "content"    => self.content,
         "excerpt"    => self.excerpt,
-        "path"       => File.join(@dir, '_posts', @name).sub(/\A\//, '') })
+        "path"       => self.data['path'] || File.join(@dir, '_posts', @name).sub(/\A\//, '') })
     end
 
     # Returns the shorthand String identifier of this Post.
