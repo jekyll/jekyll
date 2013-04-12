@@ -97,7 +97,7 @@ module Jekyll
     #
     # Returns an Array of plugin search paths
     def plugins_path
-      if (config['plugins'] == Jekyll::DEFAULTS['plugins'])
+      if (config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
         [File.join(self.source, config['plugins'])]
       else
         Array(config['plugins']).map { |d| File.expand_path(d) }
