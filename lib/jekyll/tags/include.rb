@@ -52,6 +52,7 @@ eos
             end
             last_quote = pos
           end
+          pos += 1
         end
 
         if in_quotes
