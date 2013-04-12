@@ -73,7 +73,11 @@ module Jekyll
       reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
     end
 
-    # Public: Generate list of configuration files from the override§
+    # Public: Generate list of configuration files from the override
+    #
+    # override - the command-line options hash
+    #
+    # Returns an Array of config files
     def config_files(override)
       # _config.yml may override default source location, but until
       # then, we need to know where to look for _config.yml
@@ -90,7 +94,9 @@ module Jekyll
 
     # Public: Read configuration and return merged Hash
     #
-    # file - 
+    # file - the path to the YAML file to be read in
+    #
+    # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
       configuration = dup
       next_config = YAML.safe_load_file(file)
@@ -98,7 +104,13 @@ module Jekyll
       $stdout.puts "Configuration file: #{file}"
       configuration.deep_merge(next_config)
     end
-    
+
+    # Public: Read in a list of configuration files and merge with this hash
+    #
+    # files - the list of configuration file paths
+    #
+    # Returns the full configuration, with the defaults overridden by the values in the
+    # configuration files
     def read_config_files(files)
       configuration = dup
 
@@ -118,7 +130,11 @@ module Jekyll
       
       configuration
     end
-    
+
+    # Public: Ensure the proper options are set in the configuration to allow for
+    # backwards-compatibility with Jekyll pre-1.0
+    #
+    # Returns the backwards-compatible configuration
     def backwards_compatibilize
       config = dup
       # Provide backwards-compatibility
