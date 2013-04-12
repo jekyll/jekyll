@@ -81,7 +81,7 @@ module Jekyll
     def config_files(override)
       # _config.yml may override default source location, but until
       # then, we need to know where to look for _config.yml
-      source = override['source'] || DEFAULTS['source']
+      source = override['source'] || self['source'] || DEFAULTS['source']
 
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
@@ -127,7 +127,7 @@ module Jekyll
                      "Using defaults (and options)."
         $stderr.puts "#{err}"
       end
-      
+
       configuration
     end
 
