@@ -15,7 +15,7 @@ class TestPage < Test::Unit::TestCase
   context "A Page" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
     end
 

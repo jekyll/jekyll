@@ -13,7 +13,7 @@ class TestPost < Test::Unit::TestCase
   context "A Post" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
     end
 
@@ -344,7 +344,7 @@ class TestPost < Test::Unit::TestCase
     context "when in a site" do
       setup do
         clear_dest
-        stub(Jekyll).configuration { Jekyll::DEFAULTS }
+        stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
         @site = Site.new(Jekyll.configuration)
         @site.posts = [setup_post('2008-02-02-published.textile'),
                        setup_post('2009-01-27-categories.textile')]
@@ -537,7 +537,7 @@ class TestPost < Test::Unit::TestCase
   
   context "converter file extension settings" do
     setup do
-      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
     end
     

@@ -3,49 +3,49 @@ require 'helper'
 class TestSite < Test::Unit::TestCase
   context "configuring sites" do
     should "have an array for plugins by default" do
-      site = Site.new(Jekyll::DEFAULTS)
+      site = Site.new(Jekyll::Configuration::DEFAULTS)
       assert_equal [File.join(Dir.pwd, '_plugins')], site.plugins
     end
 
     should "look for plugins under the site directory by default" do
-      site = Site.new(Jekyll::DEFAULTS.merge({'source' => File.expand_path(source_dir)}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'source' => File.expand_path(source_dir)}))
       assert_equal [File.join(source_dir, '_plugins')], site.plugins
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
       assert_equal ['/tmp/plugins'], site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
       assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
-      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => []}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => []}))
       assert_equal [], site.plugins
     end
 
     should "have an empty array for plugins if nil is passed" do
-      site = Site.new(Jekyll::DEFAULTS.merge({'plugins' => nil}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => nil}))
       assert_equal [], site.plugins
     end
 
     should "expose default baseurl" do
-      site = Site.new(Jekyll::DEFAULTS)
-      assert_equal Jekyll::DEFAULTS['baseurl'], site.baseurl
+      site = Site.new(Jekyll::Configuration::DEFAULTS)
+      assert_equal Jekyll::Configuration::DEFAULTS['baseurl'], site.baseurl
     end
 
     should "expose baseurl passed in from config" do
-      site = Site.new(Jekyll::DEFAULTS.merge({'baseurl' => '/blog'}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'baseurl' => '/blog'}))
       assert_equal '/blog', site.baseurl
     end
   end
   context "creating sites" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
       end
       @site = Site.new(Jekyll.configuration)
     end
@@ -205,7 +205,7 @@ class TestSite < Test::Unit::TestCase
 
     should "filter symlink entries when safe mode enabled" do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
       end
       site = Site.new(Jekyll.configuration)
       stub(File).symlink?('symlink.js') {true}
@@ -221,7 +221,7 @@ class TestSite < Test::Unit::TestCase
 
     should "not include symlinks in safe mode" do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
       end
       site = Site.new(Jekyll.configuration)
 
@@ -232,7 +232,7 @@ class TestSite < Test::Unit::TestCase
 
     should "include symlinks in unsafe mode" do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => false})
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => false})
       end
       site = Site.new(Jekyll.configuration)
 
@@ -244,7 +244,7 @@ class TestSite < Test::Unit::TestCase
     context 'error handling' do
       should "raise if destination is included in source" do
         stub(Jekyll).configuration do
-          Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => source_dir})
+          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => source_dir})
         end
 
         assert_raise Jekyll::FatalException do
@@ -254,7 +254,7 @@ class TestSite < Test::Unit::TestCase
 
       should "raise if destination is source" do
         stub(Jekyll).configuration do
-          Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => File.join(source_dir, "..")})
+          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => File.join(source_dir, "..")})
         end
 
         assert_raise Jekyll::FatalException do
@@ -303,7 +303,7 @@ class TestSite < Test::Unit::TestCase
       end
 
       should 'remove orphaned files in destination - keep_files .svn' do
-        config = Jekyll::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'keep_files' => ['.svn']})
+        config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'keep_files' => ['.svn']})
         @site = Site.new(config)
         @site.process
         assert !File.exist?(dest_dir('.htpasswd'))

@@ -28,6 +28,7 @@ require 'pygments'
 
 # internal requires
 require 'jekyll/core_ext'
+require 'jekyll/configuration'
 require 'jekyll/site'
 require 'jekyll/convertible'
 require 'jekyll/layout'
@@ -54,76 +55,11 @@ SafeYAML::OPTIONS[:suppress_warnings] = true
 module Jekyll
   VERSION = '1.0.0.beta4'
 
-  # Default options. Overriden by values in _config.yml.
-  # Strings rather than symbols are used for compatability with YAML.
-  DEFAULTS = {
-    'source'        => Dir.pwd,
-    'destination'   => File.join(Dir.pwd, '_site'),
-    'plugins'       => '_plugins',
-    'layouts'       => '_layouts',
-    'keep_files'   => ['.git','.svn'],
-
-    'future'        => true,           # remove and make true just default
-    'pygments'      => true,           # remove and make true just default
-
-    'markdown'      => 'maruku',
-    'permalink'     => 'date',
-    'baseurl'       => '/',
-    'include'       => ['.htaccess'],
-    'paginate_path' => 'page:num',
-
-    'markdown_ext'  => 'markdown,mkd,mkdn,md',
-    'textile_ext'   => 'textile',
-
-    'port'          => '4000',
-    'host'          => '0.0.0.0',
-
-    'excerpt_separator' => "\n\n",
-
-    'maruku' => {
-      'use_tex'    => false,
-      'use_divs'   => false,
-      'png_engine' => 'blahtex',
-      'png_dir'    => 'images/latex',
-      'png_url'    => '/images/latex'
-    },
-
-    'rdiscount' => {
-      'extensions' => []
-    },
-
-    'redcarpet' => {
-      'extensions' => []
-    },
-
-    'kramdown' => {
-      'auto_ids'      => true,
-      'footnote_nr'   => 1,
-      'entity_output' => 'as_char',
-      'toc_levels'    => '1..6',
-      'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
-      'use_coderay'   => false,
-
-      'coderay' => {
-        'coderay_wrap'              => 'div',
-        'coderay_line_numbers'      => 'inline',
-        'coderay_line_number_start' => 1,
-        'coderay_tab_width'         => 4,
-        'coderay_bold_every'        => 10,
-        'coderay_css'               => 'style'
-      }
-    },
-
-    'redcloth' => {
-      'hard_breaks' => true
-    }
-  }
-
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
   #
   # override - A Hash of config directives that override any options in both
-  #            the defaults and the config file. See Jekyll::DEFAULTS for a
+  #            the defaults and the config file. See Jekyll::Configuration::DEFAULTS for a
   #            list of option names and their defaults.
   #
   # Returns the final configuration Hash.
