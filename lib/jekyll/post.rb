@@ -90,9 +90,9 @@ module Jekyll
     # Returns excerpt string.
     def excerpt
       if self.data.has_key? 'excerpt'
-       self.data['excerpt']
+        self.data['excerpt']
       else
-       self.extracted_excerpt
+        self.extracted_excerpt
       end
     end
 
