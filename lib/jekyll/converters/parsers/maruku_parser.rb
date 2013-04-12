@@ -37,6 +37,10 @@ module Jekyll
           MaRuKu::Globals[:html_png_dir] = @config['maruku']['png_dir']
           MaRuKu::Globals[:html_png_url] = @config['maruku']['png_url']
         end
+
+        def convert(content)
+          Maruku.new(content).to_html
+        end
       end
     end
   end

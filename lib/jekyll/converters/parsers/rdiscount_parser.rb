@@ -11,6 +11,15 @@ module Jekyll
           STDERR.puts '  $ [sudo] gem install rdiscount'
           raise FatalException.new("Missing dependency: rdiscount")
         end
+
+        def convert(content)
+          rd = RDiscount.new(content, *@rdiscount_extensions)
+          html = rd.to_html
+          if rd.generate_toc and html.include?(@config['rdiscount']['toc_token'])
+            html.gsub!(@config['rdiscount']['toc_token'], rd.toc_content.force_encoding('utf-8'))
+          end
+          html
+        end
       end
     end
   end
