@@ -8,79 +8,15 @@ module Jekyll
 
       def setup
         return if @setup
-        case @config['markdown']
+        @parser = case @config['markdown']
           when 'redcarpet'
-            begin
-              require 'redcarpet'
-
-              @renderer ||= Class.new(Redcarpet::Render::HTML) do
-                def block_code(code, lang)
-                  lang = lang && lang.split.first || "text"
-                  output = add_code_tags(
-                    Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
-                    lang
-                  )
-                end
-
-                def add_code_tags(code, lang)
-                  code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
-                  code = code.sub(/<\/pre>/,"</code></pre>")
-                end
-              end
-
-              @redcarpet_extensions = {}
-              @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
-            rescue LoadError
-              STDERR.puts 'You are missing a library required for Markdown. Please run:'
-              STDERR.puts '  $ [sudo] gem install redcarpet'
-              raise FatalException.new("Missing dependency: redcarpet")
-            end
+            RedcarpetParser.new @config
           when 'kramdown'
-            begin
-              require 'kramdown'
-            rescue LoadError
-              STDERR.puts 'You are missing a library required for Markdown. Please run:'
-              STDERR.puts '  $ [sudo] gem install kramdown'
-              raise FatalException.new("Missing dependency: kramdown")
-            end
+            KramdownParser.new @config
           when 'rdiscount'
-            begin
-              require 'rdiscount'
-              @rdiscount_extensions = @config['rdiscount']['extensions'].map { |e| e.to_sym }
-            rescue LoadError
-              STDERR.puts 'You are missing a library required for Markdown. Please run:'
-              STDERR.puts '  $ [sudo] gem install rdiscount'
-              raise FatalException.new("Missing dependency: rdiscount")
-            end
+            RDiscountParser.new @config
           when 'maruku'
-            begin
-              require 'maruku'
-
-              if @config['maruku']['use_divs']
-                require 'maruku/ext/div'
-                STDERR.puts 'Maruku: Using extended syntax for div elements.'
-              end
-
-              if @config['maruku']['use_tex']
-                require 'maruku/ext/math'
-                STDERR.puts "Maruku: Using LaTeX extension. Images in `#{@config['maruku']['png_dir']}`."
-
-                # Switch off MathML output
-                MaRuKu::Globals[:html_math_output_mathml] = false
-                MaRuKu::Globals[:html_math_engine] = 'none'
-
-                # Turn on math to PNG support with blahtex
-                # Resulting PNGs stored in `images/latex`
-                MaRuKu::Globals[:html_math_output_png] = true
-                MaRuKu::Globals[:html_png_engine] =  @config['maruku']['png_engine']
-                MaRuKu::Globals[:html_png_dir] = @config['maruku']['png_dir']
-                MaRuKu::Globals[:html_png_url] = @config['maruku']['png_url']
-              end
-            rescue LoadError
-              STDERR.puts 'You are missing a library required for Markdown. Please run:'
-              STDERR.puts '  $ [sudo] gem install maruku'
-              raise FatalException.new("Missing dependency: maruku")
-            end
+            MarukuParser.new @config
           else
             STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
             STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown ]"
@@ -88,7 +24,7 @@ module Jekyll
         end
         @setup = true
       end
-      
+
       def matches(ext)
         rgx = '(' + @config['markdown_ext'].gsub(',','|') +')'
         ext =~ Regexp.new(rgx, Regexp::IGNORECASE)

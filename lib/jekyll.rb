@@ -46,6 +46,7 @@ require 'jekyll/command'
 
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
+require_all 'jekyll/converters/parsers'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
