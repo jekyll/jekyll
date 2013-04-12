@@ -8,5 +8,16 @@ module Jekyll
         dirs += ['*']
       end
     end
+    def self.process_site(site)
+      begin
+        site.process
+      rescue Jekyll::FatalException => e
+        puts
+        puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
+        puts "------------------------------------"
+        puts e.message
+        exit(1)
+      end
+    end
   end
 end
