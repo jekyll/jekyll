@@ -205,7 +205,17 @@ following is a reference of the available data.
       <td><p>
 
         The list of tags to which this post belongs. These can be specified in
-        the <a href="../frontmatter">YAML Front Matter</a>
+        the <a href="../frontmatter">YAML Front Matter</a>.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.path</code></p></td>
+      <td><p>
+
+        The path to the raw post or page. Example usage: Linking back to the
+        page or post's source on GitHub. This can be overridden in the
+        <a href="../frontmatter">YAML Front Matter</a>.
 
       </p></td>
     </tr>
