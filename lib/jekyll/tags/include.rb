@@ -14,7 +14,7 @@ module Jekyll
       end
 
       def params(markup)
-        last_space = last_quote = last_pos = pos = 0
+        last_space = last_quote = pos = 0
         last_key = nil
         in_quotes = false
         @params = {}
@@ -52,7 +52,6 @@ eos
             end
             last_quote = pos
           end
-          last_pos = pos += 1
         end
 
         if in_quotes
