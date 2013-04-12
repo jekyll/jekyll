@@ -128,7 +128,7 @@ module Jekyll
         $stderr.puts "#{err}"
       end
 
-      configuration
+      configuration.backwards_compatibilize
     end
 
     # Public: Ensure the proper options are set in the configuration to allow for

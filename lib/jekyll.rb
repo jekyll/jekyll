@@ -67,7 +67,6 @@ module Jekyll
     config = Configuration[Configuration::DEFAULTS]
     override = Configuration[override].stringify_keys
     config = config.read_config_files(config.config_files(override))
-    config = config.backwards_compatibilize
 
     # Merge DEFAULTS < _config.yml < override
     config.deep_merge(override).stringify_keys
