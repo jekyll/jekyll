@@ -73,22 +73,25 @@ module Jekyll
       reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
     end
 
+    # Public: Directory of the Jekyll source folder
+    #
+    # override - the command-line options hash
+    #
+    # Returns the path to the Jekyll source directory
+    def source(override)
+      override['source'] || self['source'] || DEFAULTS['source']
+    end
+
     # Public: Generate list of configuration files from the override
     #
     # override - the command-line options hash
     #
     # Returns an Array of config files
     def config_files(override)
-      # _config.yml may override default source location, but until
-      # then, we need to know where to look for _config.yml
-      source = override['source'] || self['source'] || DEFAULTS['source']
-
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
-      config_files = File.join(source, "_config.yml") if config_files.to_s.empty?
-      unless config_files.is_a? Array
-        config_files = [config_files]
-      end
+      config_files = File.join(source(override), "_config.yml") if config_files.to_s.empty?
+      config_files = [config_files] unless config_files.is_a? Array
       config_files
     end
 
