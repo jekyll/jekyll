@@ -33,6 +33,7 @@ module Jekyll
     # Returns the new Post.
     def initialize(site, source, dir, name)
       @site = site
+      @dir = dir
       @base = self.containing_dir(source, dir)
       @name = name
 
@@ -285,7 +286,8 @@ module Jekyll
         "previous"   => self.previous,
         "tags"       => self.tags,
         "content"    => self.content,
-        "excerpt"    => self.excerpt })
+        "excerpt"    => self.excerpt,
+        "path"       => File.join(@dir, '_posts', @name).sub(/\A\//, '') })
     end
 
     # Returns the shorthand String identifier of this Post.
