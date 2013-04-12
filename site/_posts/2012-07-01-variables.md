@@ -259,8 +259,16 @@ following is a reference of the available data.
       <td><p>The number of the previous page.</p></td>
     </tr>
     <tr>
+      <td><p><code>paginator.previous_page_path</code></p></td>
+      <td><p>The path to the previous page.</p></td>
+    </tr>
+    <tr>
       <td><p><code>paginator.next_page</code></p></td>
       <td><p>The number of the next page.</p></td>
+    </tr>
+    <tr>
+      <td><p><code>paginator.next_page_path</code></p></td>
+      <td><p>The path to the next page.</p></td>
     </tr>
   </tbody>
 </table>
