@@ -136,13 +136,20 @@ module Jekyll
     source = override['source'] || Jekyll::DEFAULTS['source']
 
     # Get configuration from <source>/_config.yml or <source>/<config_file>
-    config_file = override.delete('config')
-    config_file = File.join(source, "_config.yml") if config_file.to_s.empty?
+    config_files = override.delete('config')
+    config_files = File.join(source, "_config.yml") if config_files.to_s.empty?
+    unless config_files.is_a? Array
+      config_files = [config_files]
+    end
 
     begin
-      config = YAML.safe_load_file(config_file)
-      raise "Configuration file: (INVALID) #{config_file}" if !config.is_a?(Hash)
-      $stdout.puts "Configuration file: #{config_file}"
+      config = {}
+      config_files.each do |config_file|
+        next_config = YAML.safe_load_file(config_file)
+        raise "Configuration file: (INVALID) #{config_file}" if !next_config.is_a?(Hash)
+        $stdout.puts "Configuration file: #{config_file}"
+        config = config.deep_merge(next_config)
+      end
     rescue SystemCallError
       # Errno:ENOENT = file not found
       $stderr.puts "Configuration file: none"
