@@ -64,48 +64,12 @@ module Jekyll
   #
   # Returns the final configuration Hash.
   def self.configuration(override)
-    # Convert any symbol keys to strings and remove the old key/values
-    override = override.reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
-
-    # _config.yml may override default source location, but until
-    # then, we need to know where to look for _config.yml
-    source = override['source'] || Jekyll::DEFAULTS['source']
-
-    # Get configuration from <source>/_config.yml or <source>/<config_file>
-    config_files = override.delete('config')
-    config_files = File.join(source, "_config.yml") if config_files.to_s.empty?
-    unless config_files.is_a? Array
-      config_files = [config_files]
-    end
-
-    begin
-      config = {}
-      config_files.each do |config_file|
-        next_config = YAML.safe_load_file(config_file)
-        raise "Configuration file: (INVALID) #{config_file}" if !next_config.is_a?(Hash)
-        $stdout.puts "Configuration file: #{config_file}"
-        config = config.deep_merge(next_config)
-      end
-    rescue SystemCallError
-      # Errno:ENOENT = file not found
-      $stderr.puts "Configuration file: none"
-      config = {}
-    rescue => err
-      $stderr.puts "           " +
-                   "WARNING: Error reading configuration. " +
-                   "Using defaults (and options)."
-      $stderr.puts "#{err}"
-      config = {}
-    end
-
-    # Provide backwards-compatibility
-    if config['auto']
-      $stderr.puts "Deprecation: ".rjust(20) + "'auto' has been changed to " +
-                   "'watch'. Please update your configuration to use 'watch'."
-      config['watch'] = config['auto']
-    end
+    config = Configuration[Configuration::DEFAULTS]
+    override = Configuration[override].stringify_keys
+    config = config.read_config_files(config.config_files(override))
+    config = config.backwards_compatibilize
 
     # Merge DEFAULTS < _config.yml < override
-    Jekyll::DEFAULTS.deep_merge(config).deep_merge(override)
+    config.deep_merge(override).stringify_keys
   end
 end
