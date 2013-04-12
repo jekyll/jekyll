@@ -48,6 +48,15 @@ class TestConfiguration < Test::Unit::TestCase
       assert_equal %w[config/site.yml config/deploy.yml configuration.yml], @config.config_files(@multiple_files)
     end
   end
+  context "#backwards_compatibilize" do
+    setup do
+      @config = Configuration[{"auto" => true}]
+    end
+    should "create 'watch' key for 'auto'" do
+      assert @config.backwards_compatibilize.has_key? "watch"
+      assert_equal true, @config.backwards_compatibilize["watch"]
+    end
+  end
   context "loading configuration" do
     setup do
       @path = File.join(Dir.pwd, '_config.yml')
