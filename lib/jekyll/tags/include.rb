@@ -56,7 +56,7 @@ eos
         end
 
         if in_quotes
-	  raise SyntaxError.new <<-eos
+          raise SyntaxError.new <<-eos
 Syntax Error in tag 'include' (unterminated value) while parsing the following markup:
 
   #{markup}
