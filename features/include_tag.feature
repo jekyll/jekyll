@@ -16,6 +16,7 @@ Feature: Include tags
       | List multiple parameters | 3/21/2013 | default | {% include params.html date="today" start="tomorrow" %} |
       | Dont keep parameters | 3/21/2013 | default | {% include ignore.html param="test" %}\n{% include header.html %} |
       | Allow params with spaces and quotes | 4/07/2013 | default | {% include params.html cool="param with spaces" super="\"quoted\"" %} |
+      | Parameter syntax | 4/12/2013 | default | {% include params.html param1_or_2="value" %} |
     When I run jekyll
     Then the _site directory should exist
     And I should see "<header>My awesome blog header: myparam</header>" in "_site/2013/03/21/include-files.html"
@@ -26,3 +27,4 @@ Feature: Include tags
     But I should see "<header>My awesome blog header: </header>" in "_site/2013/03/21/dont-keep-parameters.html"
     And I should see "<li>cool = param with spaces</li>" in "_site/2013/04/07/allow-params-with-spaces-and-quotes.html"
     And I should see "<li>super = &#8220;quoted&#8221;</li>" in "_site/2013/04/07/allow-params-with-spaces-and-quotes.html"
+    And I should see "<li>param1_or_2 = value</li>" in "_site/2013/04/12/parameter-syntax.html"

@@ -18,6 +18,15 @@ module Jekyll
         last_key = nil
         in_quotes = false
         @params = {}
+        if !(/^(\s*\b\S+="(?:\\"|.)*?")*\s*$/ =~ markup)
+          raise SyntaxError.new <<-eos
+Syntax error for 'include'  while parsing the following markup:
+
+  #{markup}
+
+Valid syntax: include param="value"
+eos
+        end
 
         while pos = markup.index(/[=\"\s]/, pos)
           str = markup[pos, 1]
