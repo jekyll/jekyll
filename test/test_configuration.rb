@@ -1,6 +1,30 @@
 require 'helper'
 
 class TestConfiguration < Test::Unit::TestCase
+  context "#stringify_keys" do
+    setup do
+      @mixed_keys = Configuration[{
+        'markdown' => 'maruku',
+        :permalink => 'date',
+        'baseurl'  => '/',
+        :include   => ['.htaccess'],
+        :source    => './'
+      }]
+      @string_keys = Configuration[{
+        'markdown'  => 'maruku',
+        'permalink' => 'date',
+        'baseurl'   => '/',
+        'include'   => ['.htaccess'],
+        'source'    => './'
+      }]
+    end
+    should "stringify symbol keys" do
+      assert_equal @string_keys, @mixed_keys.stringify_keys
+    end
+    should "not mess with keys already strings" do
+      assert_equal @string_keys, @string_keys.stringify_keys
+    end
+  end
   context "loading configuration" do
     setup do
       @path = File.join(Dir.pwd, '_config.yml')
