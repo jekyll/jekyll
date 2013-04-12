@@ -43,7 +43,7 @@ Valid syntax: include param="value"
 eos
             end
             last_key = markup[last_space+1..pos-1]
-          elsif (str == '"' || str == "'") && markup[pos - 1, 1] != '\\'
+          elsif str == '"' && markup[pos - 1, 1] != '\\'
             in_quotes = !in_quotes
             if !in_quotes
               value = markup[last_quote+1..pos-1].gsub(/\\"/, '"')
