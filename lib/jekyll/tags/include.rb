@@ -6,10 +6,10 @@ module Jekyll
 
         if (params.include?(' '))
           separator = params.index(' ')
-          @file = params[0..separator].strip if params.include?(' ')
+          @file = params[0..separator].strip
           params(params[separator..-1])
         else
-          @file = params
+          @file = params.strip
         end
       end
 
