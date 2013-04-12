@@ -6,6 +6,7 @@
     * Added ability to render drafts in _drafts folder via command line (#833)
     * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
   * Minor Enhancements
+    * Expose new attribute to Liquid via `page`: `page.path` (#951)
     * Accept multiple config files from command line (#945)
     * Add page variable to liquid custom tags and blocks (#413)
     * Add paginator.previous_page_path and paginator.next_page_path (#942)
