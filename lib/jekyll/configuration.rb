@@ -103,7 +103,7 @@ module Jekyll
     def read_config_file(file)
       configuration = dup
       next_config = YAML.safe_load_file(file)
-      raise "Configuration file: (INVALID) #{file}" if !next_config.is_a?(Hash)
+      raise "Configuration file: (INVALID) #{file}".yellow if !next_config.is_a?(Hash)
       Jekyll.info "Configuration file:", file
       configuration.deep_merge(next_config)
     end
@@ -125,9 +125,9 @@ module Jekyll
         # Errno:ENOENT = file not found
         Jekyll.warn "Configuration file:", "none"
       rescue => err
-        Jekyll.warn "WARNING", "Error reading configuration. " +
+        Jekyll.warn "WARNING:", "Error reading configuration. " +
                      "Using defaults (and options)."
-        Jekyll.warn "", "#{err}"
+        $stderr.puts "#{err}"
       end
 
       configuration.backwards_compatibilize
