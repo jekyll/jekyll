@@ -63,6 +63,7 @@
   * Site Enhancements
     * Update quickstart instructions with `new` command (#966)
     * Add docs for page.excerpt (#956)
+    * Add docs for page.path (#951)
     * Clean up site docs to prepare for 1.0 release (#918)
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
