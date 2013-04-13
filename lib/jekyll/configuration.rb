@@ -10,7 +10,7 @@ module Jekyll
       'layouts'       => '_layouts',
       'keep_files'    => ['.git','.svn'],
 
-      'timezone'      => nil             # use the local timezone
+      'timezone'      => nil,           # use the local timezone
 
       'safe'          => false,
       'show_drafts'   => nil,
