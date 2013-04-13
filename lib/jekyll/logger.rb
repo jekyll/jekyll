@@ -17,7 +17,7 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message)
-      $stderr.puts Jekyll.message(topic, message)
+      $stderr.puts (Jekyll.message(topic, message)).yellow
     end
 
     # Public: Build a Jekyll topic method
