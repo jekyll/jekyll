@@ -28,6 +28,8 @@ require 'pygments'
 
 # internal requires
 require 'jekyll/core_ext'
+require 'jekyll/logger'
+require 'jekyll/deprecator'
 require 'jekyll/configuration'
 require 'jekyll/site'
 require 'jekyll/convertible'
@@ -54,6 +56,8 @@ SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
   VERSION = '1.0.0.beta4'
+
+  extend Logger
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
