@@ -6,6 +6,8 @@ $:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 require 'commander/import'
 require 'jekyll'
 
+Jekyll::Deprecator.process(ARGV)
+
 program :name, 'jekyll'
 program :version, Jekyll::VERSION
 program :description, 'Jekyll is a blog-aware, static site generator in Ruby'
