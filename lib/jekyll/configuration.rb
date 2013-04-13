@@ -104,7 +104,7 @@ module Jekyll
       configuration = dup
       next_config = YAML.safe_load_file(file)
       raise "Configuration file: (INVALID) #{file}" if !next_config.is_a?(Hash)
-      $stdout.puts "Configuration file: #{file}"
+      Jekyll.info "Configuration file:", file
       configuration.deep_merge(next_config)
     end
 
@@ -123,12 +123,11 @@ module Jekyll
         end
       rescue SystemCallError
         # Errno:ENOENT = file not found
-        $stderr.puts "Configuration file: none"
+        Jekyll.warn "Configuration file:", "none"
       rescue => err
-        $stderr.puts "           " +
-                     "WARNING: Error reading configuration. " +
+        Jekyll.warn "WARNING", "Error reading configuration. " +
                      "Using defaults (and options)."
-        $stderr.puts "#{err}"
+        Jekyll.warn "", "#{err}"
       end
 
       configuration.backwards_compatibilize
@@ -141,8 +140,8 @@ module Jekyll
     def backwards_compatibilize
       config = dup
       # Provide backwards-compatibility
-      if config['auto']
-        $stderr.puts "Deprecation: ".rjust(20) + "'auto' has been changed to " +
+      if config.has_key? 'auto'
+        Jekyll.warn "Deprecation:", "'auto' has been changed to " +
                    "'watch'. Please update your configuration to use 'watch'."
         config['watch'] = config['auto']
       end

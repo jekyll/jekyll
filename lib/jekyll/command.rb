@@ -18,9 +18,9 @@ module Jekyll
       site.process
     rescue Jekyll::FatalException => e
       puts
-      puts "ERROR: YOUR SITE COULD NOT BE BUILT:"
-      puts "------------------------------------"
-      puts e.message
+      Jekyll.warn "ERROR:", "YOUR SITE COULD NOT BE BUILT:"
+      Jekyll.warn "", "------------------------------------"
+      Jekyll.warn "", e.message
       exit(1)
     end
   end
