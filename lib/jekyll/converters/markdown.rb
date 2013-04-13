@@ -19,7 +19,7 @@ module Jekyll
             MarukuParser.new @config
           else
             STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
-            STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown ]"
+            STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown | redcarpet ]"
             raise FatalException.new("Invalid Markdown process: #{@config['markdown']}")
         end
         @setup = true
