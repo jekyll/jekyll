@@ -17,7 +17,7 @@ module Jekyll
 
     def self.deprecation_message(args, deprecated_argument, message)
       if args.include?(deprecated_argument)
-        Jekyll.warn "Deprecation:", message
+        Jekyll.error "Deprecation:", message
         exit(1)
       end
     end

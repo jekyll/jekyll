@@ -20,6 +20,16 @@ module Jekyll
       $stderr.puts (Jekyll.message(topic, message)).yellow
     end
 
+    # Public: Print a jekyll error message to stderr
+    #
+    # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
+    # message - the message detail
+    #
+    # Returns nothing
+    def error(topic, message)
+      $stderr.puts (Jekyll.message(topic, message)).red
+    end
+
     # Public: Build a Jekyll topic method
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
