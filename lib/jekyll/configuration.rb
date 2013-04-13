@@ -8,8 +8,12 @@ module Jekyll
       'destination'   => File.join(Dir.pwd, '_site'),
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
-      'keep_files'   => ['.git','.svn'],
+      'keep_files'    => ['.git','.svn'],
 
+      'safe'          => false,
+      'show_drafts'   => nil,
+      'limit_posts'   => nil,
+      'lsi'           => false,
       'future'        => true,           # remove and make true just default
       'pygments'      => true,           # remove and make true just default
 
@@ -17,6 +21,7 @@ module Jekyll
       'permalink'     => 'date',
       'baseurl'       => '/',
       'include'       => ['.htaccess'],
+      'exclude'       => [],
       'paginate_path' => 'page:num',
 
       'markdown_ext'  => 'markdown,mkd,mkdn,md',
