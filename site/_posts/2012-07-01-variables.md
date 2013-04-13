@@ -160,6 +160,14 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
+      <td><p><code>page.excerpt</code></p></td>
+      <td><p>
+
+        The un-rendered excerpt of the Page.
+
+      </p></td>
+    </tr>
+    <tr>
       <td><p><code>page.url</code></p></td>
       <td><p>
 
