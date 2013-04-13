@@ -23,12 +23,12 @@ module Jekyll
       self.pygments        = config['pygments']
       self.baseurl         = config['baseurl']
       self.permalink_style = config['permalink'].to_sym
-      self.exclude         = config['exclude'] || []
-      self.include         = config['include'] || []
+      self.exclude         = config['exclude']
+      self.include         = config['include']
       self.future          = config['future']
-      self.show_drafts     = config['show_drafts'] || nil
-      self.limit_posts     = config['limit_posts'] || nil
-      self.keep_files      = config['keep_files'] || []
+      self.show_drafts     = config['show_drafts']
+      self.limit_posts     = config['limit_posts']
+      self.keep_files      = config['keep_files']
 
       self.reset
       self.setup
