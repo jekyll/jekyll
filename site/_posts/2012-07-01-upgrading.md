@@ -16,7 +16,7 @@ automatically rebuild each time a file changes, just add the `--watch` flag.
 
 Rather than passing individual flags via the command line, you can now pass an
 entire custom Jekyll config file. This helps to distinguish between
-environments, or lets you problematically override user-specified defaults.
+environments, or lets you programmatically override user-specified defaults.
 Simply add the `--config` flag, followed by the path to one or more config
 files.
 
