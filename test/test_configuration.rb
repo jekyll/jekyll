@@ -50,11 +50,21 @@ class TestConfiguration < Test::Unit::TestCase
   end
   context "#backwards_compatibilize" do
     setup do
-      @config = Configuration[{"auto" => true}]
+      @config = Configuration[{
+        "auto" => true,
+        "watch" => true,
+        "server" => true
+      }]
     end
-    should "create 'watch' key for 'auto'" do
-      assert @config.backwards_compatibilize.has_key? "watch"
-      assert_equal true, @config.backwards_compatibilize["watch"]
+    should "unset 'auto' and 'watch'" do
+      assert @config.has_key?("auto")
+      assert @config.has_key?("watch")
+      assert !@config.backwards_compatibilize.has_key?("auto")
+      assert !@config.backwards_compatibilize.has_key?("watch")
+    end
+    should "unset 'server'" do
+      assert @config.has_key?("server")
+      assert !@config.backwards_compatibilize.has_key?("server")
     end
   end
   context "loading configuration" do
