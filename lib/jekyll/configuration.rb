@@ -106,7 +106,7 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
-      configuration = dup
+      configuration = clone
       next_config = YAML.safe_load_file(file)
       raise "Configuration file: (INVALID) #{file}".yellow if !next_config.is_a?(Hash)
       Jekyll::Logger.info "Configuration file:", file
@@ -120,7 +120,7 @@ module Jekyll
     # Returns the full configuration, with the defaults overridden by the values in the
     # configuration files
     def read_config_files(files)
-      configuration = dup
+      configuration = clone
 
       begin
         files.each do |config_file|
@@ -143,12 +143,21 @@ module Jekyll
     #
     # Returns the backwards-compatible configuration
     def backwards_compatibilize
-      config = dup
+      config = clone
       # Provide backwards-compatibility
-      if config.has_key? 'auto'
-        Jekyll::Logger.warn "Deprecation:", "'auto' has been changed to " +
-                   "'watch'. Please update your configuration to use 'watch'."
-        config['watch'] = config['auto']
+      if config.has_key?('auto') || config.has_key?('watch')
+        Jekyll::Logger.warn "Deprecation:", "Auto-regeneration can no longer" +
+                            " be set from your configuration file(s). Use the"+
+                            " --watch/-w command-line option instead."
+        config.delete('auto')
+        config.delete('watch')
+      end
+
+      if config.has_key? 'server'
+        Jekyll::Logger.warn "Deprecation:", "The 'server' configuration option" +
+                            " is no longer accepted. Use the 'jekyll serve'" +
+                            " subcommand to serve your site with WEBrick."
+        config.delete('server')
       end
 
       config
