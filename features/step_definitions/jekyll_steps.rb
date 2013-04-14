@@ -1,4 +1,7 @@
 Before do
+  if File.directory?(TEST_DIR)
+    FileUtils.rm_rf(TEST_DIR)
+  end
   FileUtils.mkdir(TEST_DIR)
   Dir.chdir(TEST_DIR)
 end
