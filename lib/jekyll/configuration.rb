@@ -145,10 +145,19 @@ module Jekyll
     def backwards_compatibilize
       config = clone
       # Provide backwards-compatibility
-      if config.has_key? 'auto'
-        Jekyll::Logger.warn "Deprecation:", "'auto' has been changed to " +
-                   "'watch'. Please update your configuration to use 'watch'."
-        config['watch'] = config['auto']
+      if config.has_key?('auto') || config.has_key?('watch')
+        Jekyll::Logger.warn "Deprecation:", "Auto-regeneration can no longer" +
+                            " be set from your configuration file(s). Use the"+
+                            " --watch/-w command-line option instead."
+        config.delete('auto')
+        config.delete('watch')
+      end
+
+      if config.has_key? 'server'
+        Jekyll::Logger.warn "Deprecation:", "The 'server' configuration option" +
+                            " is no longer accepted. Use the 'jekyll serve'" +
+                            " subcommand to serve your site with WEBrick."
+        config.delete('server')
       end
 
       config
