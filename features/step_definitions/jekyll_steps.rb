@@ -64,13 +64,24 @@ Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, dire
     if "draft" == status
       path = File.join(before || '.', '_drafts', after || '.', "#{title}.#{ext}")
     else
-      date = Date.strptime(post['date'], '%m/%d/%Y').strftime('%Y-%m-%d')
+      date = if post['date'].split.size > 1
+        parsed_date = DateTime.strptime(post['date'], '%Y-%m-%d %H:%M %z')
+        post['date'] = parsed_date.to_s
+        parsed_date.strftime('%Y-%m-%d')
+      else
+        parsed_date = Date.strptime(post['date'], '%m/%d/%Y') # WHY WOULD YOU EVER DO THIS
+        post['date'] = parsed_date.to_s
+        parsed_date.strftime('%Y-%m-%d')
+      end
       path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{ext}")
     end
 
     matter_hash = {}
     %w(title layout tag tags category categories published author path).each do |key|
       matter_hash[key] = post[key] if post[key]
+    end
+    if "post" == status
+      matter_hash["date"] = post["date"] if post["date"]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
 
@@ -137,7 +148,11 @@ Then /^the (.*) directory should exist$/ do |dir|
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
-  assert_match Regexp.new(text), File.open(file).readlines.join
+  assert Regexp.new(text).match(File.open(file).readlines.join)
+end
+
+Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
+  assert Regexp.new(Regexp.escape(text)).match(File.open(file).readlines.join)
 end
 
 Then /^the "(.*)" file should exist$/ do |file|
