@@ -66,7 +66,7 @@ Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, dire
     end
 
     matter_hash = {}
-    %w(title layout tag tags category categories published author path).each do |key|
+    %w(title layout tag tags category categories published author path permalink).each do |key|
       matter_hash[key] = post[key] if post[key]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
