@@ -153,7 +153,7 @@ Feature: Post data
     And I should see "Post categories: scifi and movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
     And I should see "Post categories: scifi and movies" in "_site/scifi/movies/2013/03/17/star-trek.html"
 
-  Scenario Outline: Use post.path variable
+  Scenario Outline: Use page.path variable
     Given I have a <dir>/_posts directory
     And I have the following post in "<dir>":
       | title | type | date | content |
