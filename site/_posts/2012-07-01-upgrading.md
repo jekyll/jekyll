@@ -36,7 +36,6 @@ files.
 * `--auto`
 * `--server`
 * `--url=`
-* `--safe`
 * `--maruku`, `--rdiscount`, and `--redcarpet`
 * `--pygments`
 * `--permalink=`
