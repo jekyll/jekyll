@@ -6,6 +6,8 @@
     * Added ability to render drafts in _drafts folder via command line (#833)
     * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
   * Minor Enhancements
+    * Add deprecation messages for pre-1.0 CLI options (#959)
+    * Refactor and colorize logging (#959)
     * Refactor Markdown parsing (#955)
     * Added application/vnd.apple.pkpass to mime.types served by WEBrick (#907)
     * Move template site to default markdown renderer (#961)
