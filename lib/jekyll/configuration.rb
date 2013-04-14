@@ -106,7 +106,7 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
-      configuration = dup
+      configuration = clone
       next_config = YAML.safe_load_file(file)
       raise "Configuration file: (INVALID) #{file}".yellow if !next_config.is_a?(Hash)
       Jekyll::Logger.info "Configuration file:", file
@@ -120,7 +120,7 @@ module Jekyll
     # Returns the full configuration, with the defaults overridden by the values in the
     # configuration files
     def read_config_files(files)
-      configuration = dup
+      configuration = clone
 
       begin
         files.each do |config_file|
@@ -143,7 +143,7 @@ module Jekyll
     #
     # Returns the backwards-compatible configuration
     def backwards_compatibilize
-      config = dup
+      config = clone
       # Provide backwards-compatibility
       if config.has_key? 'auto'
         Jekyll::Logger.warn "Deprecation:", "'auto' has been changed to " +
