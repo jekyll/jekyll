@@ -53,11 +53,16 @@ new markdown file to it. To generate preview your new post, simply run the
 
 <div class="note info">
   <h5 mardown="1">Drafts don't have dates</h5>
-  <p markdown="1">Unlike posts, drafts don't have a date, since they havn't
+  <p markdown="1">Unlike posts, drafts don't have a date, since they haven't
   been published yet. Rather than naming your draft something like
   `2013-07-01-my-draft-post.md`, simply name the file what you'd like your 
   post to eventually be titled, here `my-draft-post.md`.</p>
 </div>
 
-
 ### Baseurl
+
+Often, you'll want the ability to run a Jekyll site in multiple places, such as
+previewing locally before pushing to a server. Jekyll 1.0 makes that easier with
+the new `--baseurl` flag. Throughout your Jekyll site, simply prefix relative
+url with `{{ site.baseurl }}` and Jekyll will swap in whatever you pass along
+ensuring your links remain true in both environments.
