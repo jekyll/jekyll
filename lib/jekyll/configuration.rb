@@ -106,11 +106,10 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
-      configuration = dup
       next_config = YAML.safe_load_file(file)
       raise "Configuration file: (INVALID) #{file}".yellow if !next_config.is_a?(Hash)
       Jekyll::Logger.info "Configuration file:", file
-      configuration.deep_merge(next_config)
+      next_config
     end
 
     # Public: Read in a list of configuration files and merge with this hash
@@ -120,11 +119,11 @@ module Jekyll
     # Returns the full configuration, with the defaults overridden by the values in the
     # configuration files
     def read_config_files(files)
-      configuration = dup
+      configuration = {}
 
       begin
         files.each do |config_file|
-          configuration = read_config_file(config_file)
+          configuration = configuration.deep_merge(read_config_file(config_file))
         end
       rescue SystemCallError
         # Errno:ENOENT = file not found
@@ -135,6 +134,7 @@ module Jekyll
         $stderr.puts "#{err}"
       end
 
+      configuration = dup.deep_merge(configuration)
       configuration.backwards_compatibilize
     end
 
