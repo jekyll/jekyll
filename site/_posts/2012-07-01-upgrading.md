@@ -33,7 +33,7 @@ files.
 
 * `--no-server`
 * `--no-auto`
-* `--auto`
+* `--auto` (now `--watch`)
 * `--server`
 * `--url=`
 * `--maruku`, `--rdiscount`, and `--redcarpet`
