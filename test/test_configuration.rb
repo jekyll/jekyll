@@ -64,7 +64,7 @@ class TestConfiguration < Test::Unit::TestCase
 
     should "fire warning with no _config.yml" do
       mock(YAML).safe_load_file(@path) { raise SystemCallError, "No such file or directory - #{@path}" }
-      mock($stderr).puts("Configuration file: none")
+      mock($stderr).puts("Configuration file: none".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
 
@@ -76,8 +76,8 @@ class TestConfiguration < Test::Unit::TestCase
 
     should "fire warning with bad config" do
       mock(YAML).safe_load_file(@path) { Array.new }
-      mock($stderr).puts("           WARNING: Error reading configuration. Using defaults (and options).")
-      mock($stderr).puts("Configuration file: (INVALID) #{@path}")
+      mock($stderr).puts(("WARNING: ".rjust(20) + "Error reading configuration. Using defaults (and options).").yellow)
+      mock($stderr).puts("Configuration file: (INVALID) #{@path}".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
   end
