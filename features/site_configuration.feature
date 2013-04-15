@@ -116,7 +116,7 @@ Feature: Site configuration
     And I should see "Post Layout: <p>content for entry1.</p>" in "_site/2007/12/31/entry1.html"
     And I should see "Post Layout: <p>content for entry2.</p>" in "_site/2020/01/31/entry2.html"
 
-    Scenario: Generate proper dates with explicitly set timezone (which is the same)
+    Scenario: Generate proper dates with explicitly set timezone (same as posts' time)
       Given I have a _layouts directory
       And I have a page layout that contains "Page Layout: {{ site.posts.size }}"
       And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
@@ -135,7 +135,7 @@ Feature: Site configuration
       And I should see "Post Layout: <p>content for entry1.</p> built at 2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html"
       And I should see "Post Layout: <p>content for entry2.</p> built at 2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html"
 
-    Scenario: Generate proper dates with explicitly set timezone, which is very different
+    Scenario: Generate proper dates with explicitly set timezone (different than posts' time)
       Given I have a _layouts directory
       And I have a page layout that contains "Page Layout: {{ site.posts.size }}"
       And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
