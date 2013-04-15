@@ -82,8 +82,10 @@ and add a new markdown file to it. To preview your new post, simply run the
 
 Often, you'll want the ability to run a Jekyll site in multiple places, such as
 previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes that 
-easier with the new `--baseurl` flag. Throughout your Jekyll site, simply 
-prefix relative urls with `{{ site.baseurl }}` and add the production `baseurl` 
-to your `_config.yml` file. When previewing locally, Jekyll will swap in 
-whatever you pass along via the `--baseurl` flag (most likely `/`), ensuring 
-your links remain true in both environments.
+easier with the new `--baseurl` flag. To take advantage of this feature, first 
+add the production `baseurl` to your site's `_config.yml` file. Then, 
+throughout the site, simply prefix relative URLs with `{{ site.baseurl }}`. 
+When you're ready to preview your site locally, pass along the `--baseurl` flag 
+with your local baseurl (most likely `/`) to `jekyll serve` and Jekyll will 
+swap in whatever you've passed along, ensuring all your links work as you'd 
+expect in both environments.
