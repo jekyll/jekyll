@@ -18,7 +18,7 @@ Upgrading from an older version of Jekyll? A few things have changed in 1.0.
 
 For better clarity, Jekyll now accepts the commands `build` and `serve`.
 Whereas before you might simply run the command `jekyll` to generate a site
-and `jekyll --serve` to view it locally, now use the subcommands `jekyll build`
+and `jekyll serve` to view it locally, now use the subcommands `jekyll build`
 and `jekyll serve` to do the same. And if you want Jekyll to automatically 
 rebuild each time a file changes, just add the `--watch` flag at the end.
 
