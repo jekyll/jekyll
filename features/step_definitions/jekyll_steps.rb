@@ -1,5 +1,5 @@
 Before do
-  if File.directory?(TEST_DIR)
+  if File.exists?(TEST_DIR)
     FileUtils.rm_rf(TEST_DIR)
   end
   FileUtils.mkdir(TEST_DIR)
