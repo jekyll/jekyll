@@ -14,6 +14,11 @@ and `jekyll --serve` to view it locally, now use the subcommands `jekyll build`
 and `jekyll serve` to do the same. And if you want Jekyll to automatically 
 rebuild each time a file changes, just add the `--watch` flag at the end.
 
+<div class="note feature">
+  <h5 mardown="1">Diving in</h5>
+  <p markdown="1">Want to get a new Jekyll site up and running quickly? Simply run `jekyll new [sitename]`, to create a new folder with a bare bones Jekyll site.</p>
+</div>
+
 ### Custom Config File
 
 Rather than passing individual flags via the command line, you can now pass an
