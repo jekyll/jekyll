@@ -73,6 +73,18 @@ module Jekyll
     config = config.read_config_files(config.config_files(override))
 
     # Merge DEFAULTS < _config.yml < override
-    config.deep_merge(override).stringify_keys
+    config = config.deep_merge(override).stringify_keys
+    set_timezone(config['timezone']) if config['timezone']
+
+    config
+  end
+
+  # Static: Set the TZ environment variable to use the timezone specified
+  #
+  # timezone - the IANA Time Zone
+  #
+  # Returns nothing
+  def self.set_timezone(timezone)
+    ENV['TZ'] = timezone
   end
 end
