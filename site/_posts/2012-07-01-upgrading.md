@@ -71,7 +71,7 @@ and add a new markdown file to it. To preview your new post, simply run the
 `Jekyll serve` command with the `--drafts` flag.
 
 <div class="note info">
-  <h5 mardown="1">Drafts don't have dates</h5>
+  <h5 markdown="1">Drafts don't have dates</h5>
   <p markdown="1">Unlike posts, drafts don't have a date, since they haven't
   been published yet. Rather than naming your draft something like
   `2013-07-01-my-draft-post.md`, simply name the file what you'd like your 
