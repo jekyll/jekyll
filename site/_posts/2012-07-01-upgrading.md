@@ -28,12 +28,14 @@ Simply add the `--config` flag to the `jekyll` command, followed by the path
 to one or more config files.
 
 <div class="note info">
-  <h5 mardown="1">The `--config` flag overrides your `_config.yml` file</h5>
+  <h5 mardown="1">The `--config` explicitly specifies your configuration file</h5>
   <p markdown="1">If you use the `--config` flag, Jekyll will ignore your 
     `_config.yml` file. Want to merge a custom configuration with the normal 
     configuration? No problem. Jekyll will accept more than one custom config 
-    file via the command line. Simply pass the path to both files with the latter 
-    file overriding the former.</p>
+    file via the command line. Config files cascade from right to left, such 
+    that if I run `jekyll serve --config `--config _config.yml,_config-dev.yml`,
+    the values in the config files on the right (`_config-dev.yml`) overwrite 
+    those on the left (`_config.yml`) when both contain the same key. , </p>
 </div>
 
 #### As a result, the following command line flags are now deprecated:
