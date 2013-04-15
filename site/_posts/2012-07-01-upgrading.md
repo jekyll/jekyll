@@ -8,7 +8,7 @@ Upgrading from an older version of Jekyll? A few things have changed in 1.0.
 
 
 <div class="note feature">
-  <h5 mardown="1">Diving in</h5>
+  <h5 markdown="1">Diving in</h5>
   <p markdown="1">Want to get a new Jekyll site up and running quickly? Simply
    run `jekyll new [sitename]`, to create a new folder with a bare bones
    Jekyll site.</p>
@@ -23,7 +23,7 @@ and `jekyll serve` to do the same. And if you want Jekyll to automatically
 rebuild each time a file changes, just add the `--watch` flag at the end.
 
 <div class="note info">
-  <h5 mardown="1">Watching and Serving</h5>
+  <h5 markdown="1">Watching and Serving</h5>
   <p markdown="1">With the new subcommands, the way sites are previewed locally
    changed a bit. Instead of specifying `server: true` in the site's 
    `_config.yml` file, use `jekyll serve`. The same hold's true for 
@@ -52,7 +52,7 @@ to one or more config files.
 * `--paginate`
 
 <div class="note info">
-  <h5 mardown="1">The `--config` explicitly specifies your configuration file(s)</h5>
+  <h5 markdown="1">The `--config` explicitly specifies your configuration file(s)</h5>
   <p markdown="1">If you use the `--config` flag, Jekyll will ignore your 
     `_config.yml` file. Want to merge a custom configuration with the normal 
     configuration? No problem. Jekyll will accept more than one custom config 
