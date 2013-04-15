@@ -9,7 +9,9 @@ Upgrading from an older version of Jekyll? A few things have changed in 1.0.
 
 <div class="note feature">
   <h5 mardown="1">Diving in</h5>
-  <p markdown="1">Want to get a new Jekyll site up and running quickly? Simply run `jekyll new [sitename]`, to create a new folder with a bare bones Jekyll site.</p>
+  <p markdown="1">Want to get a new Jekyll site up and running quickly? Simply
+   run `jekyll new [sitename]`, to create a new folder with a bare bones
+   Jekyll site.</p>
 </div>
 
 ### The Jekyll Command
@@ -83,5 +85,5 @@ previewing locally before pushing to GitHub pages. Jekyll 1.0 makes that easier
 with the new `--baseurl` flag. Throughout your Jekyll site, simply prefix 
 relative urls with `{{ site.baseurl }}` and add the production `baseurl` to
 your `_config.yml` file. When previewing locally, Jekyll will swap in whatever
-you  pass along via the `--baseurl` flag (most likely `/`), ensuring your links 
-remain true in both environments.
+you pass along via the `--baseurl` flag (most likely `/`), ensuring your
+links remain true in both environments.
