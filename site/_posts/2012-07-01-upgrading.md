@@ -6,6 +6,12 @@ prev_section: resources
 
 Upgrading from an older version of Jekyll? A few things have changed in 1.0.
 
+
+<div class="note feature">
+  <h5 mardown="1">Diving in</h5>
+  <p markdown="1">Want to get a new Jekyll site up and running quickly? Simply run `jekyll new [sitename]`, to create a new folder with a bare bones Jekyll site.</p>
+</div>
+
 ### The Jekyll Command
 
 For better clarity, Jekyll now accepts the commands `build` and `serve`.
@@ -14,9 +20,13 @@ and `jekyll --serve` to view it locally, now use the subcommands `jekyll build`
 and `jekyll serve` to do the same. And if you want Jekyll to automatically 
 rebuild each time a file changes, just add the `--watch` flag at the end.
 
-<div class="note feature">
-  <h5 mardown="1">Diving in</h5>
-  <p markdown="1">Want to get a new Jekyll site up and running quickly? Simply run `jekyll new [sitename]`, to create a new folder with a bare bones Jekyll site.</p>
+<div class="note info">
+  <h5 mardown="1">Watching and Serving</h5>
+  <p markdown="1">With the new subcommands, the way sites are previewed locally
+   changed a bit. Instead of specifying `server: true` in the site's 
+   `_config.yml` file, use `jekyll serve`. The same hold's true for 
+   `watch: true`. Instead, use the `--watch` flag with either `jekyll serve`
+    or `jekyll build`.</p>
 </div>
 
 ### Custom Config File
@@ -26,17 +36,6 @@ entire custom Jekyll config file. This helps to distinguish between
 environments, or lets you programmatically override user-specified defaults.
 Simply add the `--config` flag to the `jekyll` command, followed by the path 
 to one or more config files.
-
-<div class="note info">
-  <h5 mardown="1">The `--config` explicitly specifies your configuration file</h5>
-  <p markdown="1">If you use the `--config` flag, Jekyll will ignore your 
-    `_config.yml` file. Want to merge a custom configuration with the normal 
-    configuration? No problem. Jekyll will accept more than one custom config 
-    file via the command line. Config files cascade from right to left, such 
-    that if I run `jekyll serve --config `--config _config.yml,_config-dev.yml`,
-    the values in the config files on the right (`_config-dev.yml`) overwrite 
-    those on the left (`_config.yml`) when both contain the same key. , </p>
-</div>
 
 #### As a result, the following command line flags are now deprecated:
 
@@ -49,6 +48,17 @@ to one or more config files.
 * `--pygments`
 * `--permalink=`
 * `--paginate`
+
+<div class="note info">
+  <h5 mardown="1">The `--config` explicitly specifies your configuration file</h5>
+  <p markdown="1">If you use the `--config` flag, Jekyll will ignore your 
+    `_config.yml` file. Want to merge a custom configuration with the normal 
+    configuration? No problem. Jekyll will accept more than one custom config 
+    file via the command line. Config files cascade from right to left, such 
+    that if I run `jekyll serve --config _config.yml,_config-dev.yml`,
+    the values in the config files on the right (`_config-dev.yml`) overwrite 
+    those on the left (`_config.yml`) when both contain the same key. , </p>
+</div>
 
 ### Draft posts
 
