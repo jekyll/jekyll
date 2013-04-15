@@ -101,13 +101,17 @@ ul.posts {
     color: black;
   }
 
-  .site .title a.extra {
+  .site header h1.title {
+    display: inline;
+  }
+
+  .site header a.extra {
     color: #aaa;
     text-decoration: none;
     margin-left: 1em;
   }
 
-  .site .title a.extra:hover {
+  .site header a.extra:hover {
     color: black;
   }
 
@@ -115,7 +119,7 @@ ul.posts {
     color: #aaa;
   }
 
-  .site footer {
+  .site .footer {
     font-size: 80%;
     color: #666;
     border-top: 4px solid #eee;
@@ -123,22 +127,22 @@ ul.posts {
     overflow: hidden;
   }
 
-    .site footer .contact {
+    .site .footer .contact {
       float: left;
       margin-right: 3em;
     }
 
-      .site footer .contact a {
+      .site .footer .contact a {
         color: #8085C1;
       }
 
-    .site footer .rss {
+    .site .footer .rss {
       margin-top: 1.1em;
       margin-right: -.2em;
       float: right;
     }
 
-      .site footer .rss img {
+      .site .footer .rss img {
         border: 0;
       }
 
