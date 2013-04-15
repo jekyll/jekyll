@@ -82,7 +82,6 @@ module Jekyll
     def read_yaml(base, name)
       super(base, name)
       self.extracted_excerpt = self.extract_excerpt
-      self.data['layout'] = 'post' unless self.data.has_key?('layout')
     end
 
     # The post excerpt. This is either a custom excerpt

@@ -95,7 +95,7 @@ class TestPost < Test::Unit::TestCase
         should "consume the embedded dashes" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal({"title" => "Foo --- Bar", "layout" => "post"}, @post.data)
+          assert_equal({"title" => "Foo --- Bar"}, @post.data)
           assert_equal "Triple the fun!", @post.content
         end
       end
@@ -137,18 +137,6 @@ class TestPost < Test::Unit::TestCase
           should "process the url correctly" do
             assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
             assert_equal "/2013/2008/09/09/foo-bar.html", @post.url
-          end
-        end
-
-        context "with unspecified layout" do
-          setup do
-            file = '2013-01-12-no-layout.textile'
-            @post = setup_post(file)
-            @post.process(file)
-          end
-
-          should "default to 'post' layout" do
-            assert_equal "post", @post.data["layout"]
           end
         end
         
