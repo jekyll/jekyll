@@ -59,7 +59,7 @@ to one or more config files.
     file via the command line. Config files cascade from right to left, such 
     that if I run `jekyll serve --config _config.yml,_config-dev.yml`,
     the values in the config files on the right (`_config-dev.yml`) overwrite 
-    those on the left (`_config.yml`) when both contain the same key. , </p>
+    those on the left (`_config.yml`) when both contain the same key.</p>
 </div>
 
 ### Draft posts
