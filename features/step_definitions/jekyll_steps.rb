@@ -1,4 +1,5 @@
 Before do
+  FileUtils.rm_rf(TEST_DIR)
   FileUtils.mkdir(TEST_DIR)
   Dir.chdir(TEST_DIR)
 end
@@ -61,13 +62,23 @@ Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, dire
     if "draft" == status
       path = File.join(before || '.', '_drafts', after || '.', "#{title}.#{ext}")
     else
-      date = Date.strptime(post['date'], '%m/%d/%Y').strftime('%Y-%m-%d')
+      format = if has_time_component?(post['date'])
+        '%Y-%m-%d %H:%M %z'
+      else
+        '%m/%d/%Y' # why even
+      end
+      parsed_date = DateTime.strptime(post['date'], format)
+      post['date'] = parsed_date.to_s
+      date = parsed_date.strftime('%Y-%m-%d')
       path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{ext}")
     end
 
     matter_hash = {}
     %w(title layout tag tags category categories published author path).each do |key|
       matter_hash[key] = post[key] if post[key]
+    end
+    if "post" == status
+      matter_hash["date"] = post["date"] if post["date"]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
 
@@ -134,7 +145,11 @@ Then /^the (.*) directory should exist$/ do |dir|
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
-  assert_match Regexp.new(text), File.open(file).readlines.join
+  assert Regexp.new(text).match(File.open(file).readlines.join)
+end
+
+Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
+  assert Regexp.new(Regexp.escape(text)).match(File.open(file).readlines.join)
 end
 
 Then /^the "(.*)" file should exist$/ do |file|
