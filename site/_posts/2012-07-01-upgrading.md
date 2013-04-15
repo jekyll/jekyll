@@ -18,7 +18,7 @@ Upgrading from an older version of Jekyll? A few things have changed in 1.0.
 
 For better clarity, Jekyll now accepts the commands `build` and `serve`.
 Whereas before you might simply run the command `jekyll` to generate a site
-and `jekyll serve` to view it locally, now use the subcommands `jekyll build`
+and `jekyll --serve` to view it locally, now use the subcommands `jekyll build`
 and `jekyll serve` to do the same. And if you want Jekyll to automatically 
 rebuild each time a file changes, just add the `--watch` flag at the end.
 
@@ -81,9 +81,9 @@ and add a new markdown file to it. To preview your new post, simply run the
 ### Baseurl
 
 Often, you'll want the ability to run a Jekyll site in multiple places, such as
-previewing locally before pushing to GitHub pages. Jekyll 1.0 makes that easier 
-with the new `--baseurl` flag. Throughout your Jekyll site, simply prefix 
-relative urls with `{{ site.baseurl }}` and add the production `baseurl` to
-your `_config.yml` file. When previewing locally, Jekyll will swap in whatever
-you pass along via the `--baseurl` flag (most likely `/`), ensuring your
-links remain true in both environments.
+previewing locally before pushing to GitHub pages. Jekyll 1.0 makes that 
+easier with the new `--baseurl` flag. Throughout your Jekyll site, simply 
+prefix relative urls with `{{ site.baseurl }}` and add the production `baseurl` 
+to your `_config.yml` file. When previewing locally, Jekyll will swap in 
+whatever you pass along via the `--baseurl` flag (most likely `/`), ensuring 
+your links remain true in both environments.
