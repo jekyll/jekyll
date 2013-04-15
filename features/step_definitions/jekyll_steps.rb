@@ -1,7 +1,5 @@
 Before do
-  if File.exists?(TEST_DIR)
-    FileUtils.rm_rf(TEST_DIR)
-  end
+  FileUtils.rm_rf(TEST_DIR)
   FileUtils.mkdir(TEST_DIR)
   Dir.chdir(TEST_DIR)
 end
