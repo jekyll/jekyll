@@ -17,5 +17,9 @@ def run_jekyll(opts = {})
   system command
 end
 
+def has_time_component?(date_string)
+  date_string.split(" ").size > 1
+end
+
 # work around "invalid option: --format" cucumber bug (see #296)
 Test::Unit.run = true if RUBY_VERSION < '1.9'
