@@ -73,18 +73,25 @@ Gem::Specification.new do |s|
     lib/jekyll/commands/build.rb
     lib/jekyll/commands/new.rb
     lib/jekyll/commands/serve.rb
+    lib/jekyll/configuration.rb
     lib/jekyll/converter.rb
     lib/jekyll/converters/identity.rb
     lib/jekyll/converters/markdown.rb
+    lib/jekyll/converters/markdown/kramdown_parser.rb
+    lib/jekyll/converters/markdown/maruku_parser.rb
+    lib/jekyll/converters/markdown/rdiscount_parser.rb
+    lib/jekyll/converters/markdown/redcarpet_parser.rb
     lib/jekyll/converters/textile.rb
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb
+    lib/jekyll/deprecator.rb
     lib/jekyll/draft.rb
     lib/jekyll/errors.rb
     lib/jekyll/filters.rb
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
+    lib/jekyll/logger.rb
     lib/jekyll/mime.types
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
@@ -194,6 +201,7 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-01-12-nil-layout.textile
     test/source/_posts/2013-01-12-no-layout.textile
     test/source/_posts/2013-03-19-not-a-post.markdown/.gitkeep
+    test/source/_posts/2013-04-11-custom-excerpt.markdown
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
     test/source/contacts.html
