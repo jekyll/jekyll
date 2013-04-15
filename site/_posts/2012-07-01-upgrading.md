@@ -50,7 +50,7 @@ to one or more config files.
 * `--paginate`
 
 <div class="note info">
-  <h5 mardown="1">The `--config` explicitly specifies your configuration file</h5>
+  <h5 mardown="1">The `--config` explicitly specifies your configuration file(s)</h5>
   <p markdown="1">If you use the `--config` flag, Jekyll will ignore your 
     `_config.yml` file. Want to merge a custom configuration with the normal 
     configuration? No problem. Jekyll will accept more than one custom config 
