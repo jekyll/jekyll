@@ -258,19 +258,6 @@ module Jekyll
       path
     end
 
-    # Write the generated post file to the destination directory.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns nothing.
-    def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') do |f|
-        f.write(self.output)
-      end
-    end
-
     # Convert this post into a Hash for use in Liquid templates.
     #
     # Returns the representative Hash.
