@@ -204,3 +204,42 @@ Feature: Site configuration
     And I should see "Page Layout: 2 on 2010-01-01" in "_site/index.html"
     And I should see "Post Layout: <p>content for entry1.</p>" in "_site/2007/12/31/entry1.html"
     And I should see "Post Layout: <p>content for entry2.</p>" in "_site/2020/01/31/entry2.html"
+
+  Scenario: Define default layouts in the configuration
+    Given I have a _layouts directory
+    And I have a blog layout that contains "The blog says: {{content}}"
+    And I have a root layout that contains "Just some content: {{content}}"
+    And I have a root-page layout that contains "Here's a page for you: {{content}}"
+
+    And I have a dir directory
+    And I have a dir2 directory
+    And I have a "home.html" page with title "Some page" that contains "My home page"
+    And I have a "dir/docs.html" page with title "Another page" that contains "My docs page"
+    And I have a "dir2/license.html" page with title "Yet Another page" that contains "I'm licensing my blog?"
+    And I have an "about.html" page with layout "root" that contains "About me"
+
+    And I have a _posts directory
+    And I have a dir/_posts directory
+    And I have the following post:
+      | title      | date      | content                        |
+      | first post | 4/16/2013 | That's my first blog post ever |
+    And I have the following post:
+      | title      | date      | layout | content                        |
+      | second post| 4/16/2013 | blog   | That's my 2nd blog post ever   |
+    And I have the following post in "dir":
+      | title      | date      | content                        |
+      | third post | 4/16/2013 | That's my 3rd blog post ever   |
+
+    And I have a configuration file with:
+      | key             | value |
+      | layout_defaults | [{ path: "", layout: "root" }, { path: "", layout: "root-page", type: "page" }, { path: "dir2", layout: "blog" }] |
+
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Here's a page for you:" in "_site/home.html"
+    And I should see "Here's a page for you:" in "_site/dir/docs.html"
+    And I should see "The blog says:" in "_site/dir2/license.html"
+    And I should see "Just some content:" in "_site/about.html"
+    And I should see "Just some content:" in "_site/2013/04/16/first-post.html"
+    And I should see "The blog says:" in "_site/2013/04/16/second-post.html"
+    And I should see "Just some content:" in "_site/dir/2013/04/16/third-post.html"
