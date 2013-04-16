@@ -8,6 +8,10 @@ module Jekyll
 
         new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
         FileUtils.mkdir_p new_blog_path
+        unless Dir["#{new_blog_path}/**/*"].empty?
+          Jekyll::Logger.error "Conflict:", "#{new_blog_path} exists and is not empty."
+          exit(1)
+        end
 
         create_sample_files new_blog_path
 
