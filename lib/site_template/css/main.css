@@ -3,52 +3,50 @@
 /* Common
 /*
 /*****************************************************************************/
-
 /* Global Reset */
-
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-html, body {
-  height: 100%;
+html,body {
+    height: 100%;
 }
 
 body {
-  background-color: white;
-  font: 13.34px helvetica, arial, clean, sans-serif;
-  *font-size: small;
-  text-align: center;
+    background-color: #FFF;
+    font: 13.34px helvetica, arial, clean, sans-serif;
+    font-size: small;
+    text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-size: 100%;
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
 }
 
 h1 {
-  margin-bottom: 1em;
+    margin-bottom: 1em;
 }
 
 p {
-  margin: 1em 0;
+    margin: 1em 0;
 }
 
 a {
-  color: #00a;
+    color: #00a;
 }
 
 a:hover {
-  color: black;
+    color: #000;
 }
 
 a:visited {
-  color: #a0a;
+    color: #a0a;
 }
 
 table {
-  font-size: inherit;
-  font: 100%;
+    font-size: inherit;
+    font: 100%;
 }
 
 /*****************************************************************************/
@@ -56,138 +54,129 @@ table {
 /* Home
 /*
 /*****************************************************************************/
-
 ul.posts {
-  list-style-type: none;
-  margin-bottom: 2em;
+    list-style-type: none;
+    margin-bottom: 2em;
 }
 
-  ul.posts li {
+ul.posts li {
     line-height: 1.75em;
-  }
+}
 
-  ul.posts span {
+ul.posts span {
     color: #aaa;
     font-family: Monaco, "Courier New", monospace;
     font-size: 80%;
-  }
+}
 
 /*****************************************************************************/
 /*
 /* Site
 /*
 /*****************************************************************************/
-
 .site {
-  font-size: 110%;
-  text-align: justify;
-  width: 42em;
-  margin: 3em auto 2em auto;
-  line-height: 1.5em;
+    font-size: 115%;
+    text-align: justify;
+    width: 42em;
+    margin: 3em auto 2em;
+    line-height: 1.5em;
 }
 
-.title {
-  color: #a00;
-  font-weight: bold;
-  margin-bottom: 2em;
+.site header a {
+    font-weight: bold;
+    text-decoration: none;
 }
 
-  .site .title a {
+.site header h1.title {
+    display: inline-block;
+    margin-bottom: 2em;
+}
+
+.site header h1.title a {
     color: #a00;
-    text-decoration: none;
-  }
+}
 
-  .site .title a:hover {
-    color: black;
-  }
+.site header h1.title a:hover {
+    color: #000;
+}
 
-  .site header h1.title {
-    display: inline;
-  }
-
-  .site header a.extra {
+.site header a.extra {
     color: #aaa;
-    text-decoration: none;
     margin-left: 1em;
-  }
+}
 
-  .site header a.extra:hover {
-    color: black;
-  }
+.site header a.extra:hover {
+    color: #000;
+}
 
-  .site .meta {
+.site .meta {
     color: #aaa;
-  }
+}
 
-  .site .footer {
+.site footer {
     font-size: 80%;
     color: #666;
     border-top: 4px solid #eee;
     margin-top: 2em;
     overflow: hidden;
-  }
+}
 
-    .site .footer .contact {
-      float: left;
-      margin-right: 3em;
-    }
+.site footer .contact {
+    float: left;
+    margin-right: 3em;
+}
 
-      .site .footer .contact a {
-        color: #8085C1;
-      }
+.site footer .contact a {
+    color: #8085C1;
+}
 
-    .site .footer .rss {
-      margin-top: 1.1em;
-      margin-right: -.2em;
-      float: right;
-    }
+.site footer .rss {
+    margin-top: 1.1em;
+    margin-right: -.2em;
+    float: right;
+}
 
-      .site .footer .rss img {
-        border: 0;
-      }
+.site footer .rss img {
+    border: 0;
+}
 
 /*****************************************************************************/
 /*
 /* Posts
 /*
 /*****************************************************************************/
-
 #post {
-
 }
 
-  /* standard */
-
-  #post pre {
+/* standard */
+#post pre {
     border: 1px solid #ddd;
     background-color: #eef;
     padding: 0 .4em;
-  }
+}
 
-  #post ul,
-  #post ol {
+#post ul,#post ol {
     margin-left: 1.35em;
-  }
+}
 
-  #post code {
+#post code {
     border: 1px solid #ddd;
     background-color: #eef;
     font-size: 85%;
     padding: 0 .2em;
-  }
+}
 
-    #post pre code {
-      border: none;
-    }
+#post pre code {
+    border: none;
+}
 
-  /* terminal */
-
-  #post pre.terminal {
-    border: 1px solid black;
+/* terminal */
+#post pre.terminal {
+    border: 1px solid #000;
     background-color: #333;
-    color: white;
-  }
+    color: #FFF;
+}
 
-  #post pre.terminal code {
+#post pre.terminal code {
     background-color: #333;
-  }
+}
