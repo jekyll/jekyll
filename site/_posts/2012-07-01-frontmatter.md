@@ -57,6 +57,12 @@ There are a number of predefined global variables that you can set in the front-
           <code>_layouts</code> directory.
 
         </p>
+        <p>
+
+          Note that if omitted, layouts might still be used if you configured
+          <a href="../configuration/#global_configuration">default layouts</a>.
+
+        </p>
       </td>
     </tr>
     <tr>
