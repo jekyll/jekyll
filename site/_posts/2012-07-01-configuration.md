@@ -248,7 +248,7 @@ layout_defaults:
  - { path: "path/to/files", layout: "my_layout" }
 {% endhighlight %}
 
-This sets a default layout named *post* for all posts. Pages default to no layout.
+This sets a default layout named *posts* for all posts. Pages default to no layout.
 However, all pages and posts in `path/to/files` default to the *my_layout* layout.
 
 Of course, any layout specified in YAML frontmatter overrides the defaults.
