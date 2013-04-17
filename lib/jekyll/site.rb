@@ -137,7 +137,7 @@ module Jekyll
 
         if !self.layouts[name].nil?
           existing = self.layouts[name]
-          puts "Warning: Layout #{existing.base}/#{existing.name} is being overwritten by #{base}/#{f}".yellow
+          Jekyll::Logger.warn "Layout Warning:", "#{existing.base}/#{existing.name} is being overwritten by #{base}/#{f}"
         end
 
         self.layouts[name] = Layout.new(self, base, f)
