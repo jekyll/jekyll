@@ -103,10 +103,10 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class='description'>
             Set default layouts for posts and/or pages in certain subpaths.
             Set this to an array of hashes each of which specifies <code>path</code>
-            (relative to the source dir) and <code>layout</code>. You can leave
-            <code>path</code> empty to specify a global default. Layouts for sub-paths
-            override super-paths.<br/>
-            You can also specify <code>type</code> to be either <code>post</code> or
+            (relative to the source dir) and <code>layout</code>. Layouts for
+            sub-paths override super-paths. Leave <code>path</code> empty to specify
+            a global default.<br/>
+            Specify <code>type</code> to be either <code>post</code> or
             <code>page</code> to only apply the layout for these files. If omitted,
             it defaults to both.
         </p>
