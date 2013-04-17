@@ -137,6 +137,7 @@ module Jekyll
     def default_layout(path, type)
       layout = nil
       path.gsub!(/\A\//, '') # remove starting slash
+      path.gsub!(/([^\/])\z/, '\1/') # add trailing slash
 
       if self.config['layout_defaults'] and self.config['layout_defaults'].is_a? Array
         self.config['layout_defaults'].each do |hash|
@@ -174,7 +175,6 @@ module Jekyll
     #
     # Returns true if the given setting applies to the post or page
     def layout_applies?(path, type, layout)
-      path.gsub!(/([^\/])\z/, '\1/') # add trailing slash to be sure start_with? does not include other dirs (i.e. do not take dir2/bla if path is dir)
       (layout['path'].empty? or path.start_with? layout['path']) and (not layout.has_key? 'type' or layout['type'] == type.to_s)
     end
 
