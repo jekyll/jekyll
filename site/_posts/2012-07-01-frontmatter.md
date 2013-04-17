@@ -60,7 +60,7 @@ There are a number of predefined global variables that you can set in the front-
         <p>
 
           Note that if omitted, layouts might still be used if you configured
-          <a href="../configuration/#global_configuration">default layouts</a>.
+          <a href="../configuration/#default_layouts">default layouts</a>.
 
         </p>
       </td>
