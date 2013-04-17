@@ -97,6 +97,24 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="option">timezone: TIMEZONE</code></p>
       </td>
     </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Layout defaults</strong></p>
+        <p class='description'>
+            Set default layouts for posts and/or pages in certain subpaths.
+            Set this to an array of hashes each of which specifies <code>path</code>
+            (relative to the source dir) and <code>layout</code>. You can leave
+            <code>path</code> empty to specify a global default. Layouts for sub-paths
+            override super-paths.<br/>
+            You can also specify <code>type</code> to be either <code>post</code> or
+            <code>page</code> to only apply the layout for these files. If omitted,
+            it defaults to both.
+        </p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">layout_defaults:<br/>- { path: "", layout: "post", type: "post" }<br/>- { path: "path/to/files", layout: "my_layout" }</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 
