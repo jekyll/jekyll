@@ -158,6 +158,12 @@ class TestSite < Test::Unit::TestCase
       assert_equal ["default", "simple"].sort, @site.layouts.keys.sort
     end
 
+    should "read layouts from multiple directories" do
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'layouts' => ['_layouts', '_layouts2']}))
+      site.read_layouts
+      assert_equal ["default", "simple", "also_simple"].sort, site.layouts.keys.sort
+     end
+
     should "read posts" do
       @site.read_posts('')
       posts = Dir[source_dir('_posts', '*')]
