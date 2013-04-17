@@ -140,15 +140,14 @@ module Jekyll
 
       if self.config['layout_defaults'] and self.config['layout_defaults'].is_a? Array
         self.config['layout_defaults'].each do |hash|
-	  unless valid_layout?(hash)
-	    raise "Invalid default layout specified (must include path and layout name)"
-	  end
+          unless valid_layout?(hash)
+            raise "Invalid default layout specified (must include path and layout name)"
+          end
 
-	  if layout_applies?(path, type, hash) and layout_has_precedence?(layout, hash)
-	    layout = hash
-	  end
-
-	end
+          if layout_applies?(path, type, hash) and layout_has_precedence?(layout, hash)
+            layout = hash
+          end
+        end
       end
 
       if layout.nil?
