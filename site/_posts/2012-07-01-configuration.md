@@ -99,7 +99,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
     <tr class='setting'>
       <td>
-        <p class='name'><strong>Layout defaults</strong></p>
+        <p class='name'><strong>Default Layouts</strong></p>
         <p class='description'>
             see <a href="#default_layouts" title="default layouts">below</a>
         </p>
