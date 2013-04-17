@@ -45,7 +45,9 @@ module Jekyll
         raise FatalException.new("#{msg} in #{@base}/#{name}")
       end
 
-      self.data['layout'] = site.default_layout(File.join(dir, '_posts', name), :post) unless self.data.has_key?('layout')
+      unless self.data.has_key?('layout')
+        self.data['layout'] = site.default_layout(File.join(dir, '_posts', name), :post)
+      end
 
       # If we've added a date and time to the YAML, use that instead of the
       # filename date. Means we'll sort correctly.
