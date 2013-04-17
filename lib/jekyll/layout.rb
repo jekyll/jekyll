@@ -14,6 +14,9 @@ module Jekyll
     # Gets/Sets the content of this layout.
     attr_accessor :content
 
+    # Gets/Sets the file name/path
+    attr_accessor :name, :base
+
     # Initialize a new Layout.
     #
     # site - The Site.

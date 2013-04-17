@@ -134,6 +134,12 @@ module Jekyll
 
       entries.each do |f|
         name = f.split(".")[0..-2].join(".")
+
+        if !self.layouts[name].nil?
+          existing = self.layouts[name]
+          puts "Warning: Layout #{existing.base}/#{existing.name} is being overwritten by #{base}/#{f}".yellow
+        end
+
         self.layouts[name] = Layout.new(self, base, f)
       end
     end
