@@ -162,7 +162,7 @@ module Jekyll
     #
     # layout - the hash representing the default layout setting
     #
-    # Returns true if the hash has ll the data
+    # Returns true if the hash has all the data
     def valid_layout?(layout)
       layout.has_key? 'layout' and layout.has_key? 'path' # those must be specified, though path can be an empty string
     end
