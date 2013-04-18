@@ -1,11 +1,63 @@
-{% include top.html %}
-
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }}</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ site.url }}/css/normalize.css" />
+  <link rel="stylesheet" href="{{ site.url }}/css/grid.css" />
+  <link rel="stylesheet" href="{{ site.url }}/css/style.css" />
+  <link rel="stylesheet" href="{{ site.url }}/css/pygments.css" />
+  <link rel="icon" type="image/x-icon" href="{{ site.url }}/favicon.png" />
+  <script src="{{ site.url }}/js/modernizr-2.5.3.min.js"></script>
+</head>
 <body>
-  {% include header.html %}
+  <header>
+    <div class="content">
+      <div class="grid3 first">
+        <h1>
+          <a href="{{ site.url }}/">
+            <span>Jekyll</span>
+            <img src="{{ site.url }}/img/logo-2x.png" width="249px" height="115px" alt="">
+          </a>
+        </h1>
+      </div>
+      <nav class="grid6">
+        <ul>
+          <li {% if page.overview %}class="current"{% endif %}>
+            <a href="{{ site.url }}/">Overview</a>
+          </li>
+          <li {% unless page.overview %}class="current"{% endunless %}>
+            <a href="{{ site.url }}/docs">Documentation</a>
+          </li>
+          <li class="">
+            <a href="https://github.com/mojombo/jekyll">View on GitHub</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="clear"></div>
+    </div>
+  </header>
 
   {{ content }}
 
-  {% include footer.html %}
+  <footer>
+    <div class="content">
+      <div class="grid4 first">
+        <p>By <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, and many more <a href="https://github.com/mojombo/jekyll/graphs/contributors">awesome contributors</a>.</p>
+      </div>
+      <div class="grid8 align-right">
+        <p>Proudly hosted by</p>
+        <a href="https://github.com">
+          <img src="{{ site.url }}/img/footer-logo.png" alt="GitHub • Social coding">
+        </a>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </footer>
+  <div class="clear"></div>
+
   {% include analytics.html %}
 
 </body>
