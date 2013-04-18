@@ -3,6 +3,7 @@ layout: docs
 title: Front-matter
 prev_section: configuration
 next_section: posts
+permalink: /docs/frontmatter/
 ---
 
 The front-matter is where Jekyll starts to get really cool. Any file that
