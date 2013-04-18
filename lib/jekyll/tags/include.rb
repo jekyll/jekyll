@@ -1,15 +1,15 @@
 module Jekyll
   module Tags
     class IncludeTag < Liquid::Tag
-      def initialize(tag_name, params, tokens)
+      def initialize(tag_name, markup, tokens)
         super
 
-        if (params.include?(' '))
-          separator = params.index(' ')
-          @file = params[0..separator].strip
-          params(params[separator..-1])
+        if (markup.include?(' '))
+          separator = markup.index(' ')
+          @file = markup[0..separator].strip
+          params(markup[separator..-1])
         else
-          @file = params.strip
+          @file = markup.strip
         end
       end
 
