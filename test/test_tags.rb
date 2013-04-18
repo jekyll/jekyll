@@ -277,4 +277,94 @@ CONTENT
       end
     end
   end
+
+  context "include tag with parameters" do
+    context "with one parameter" do
+      setup do
+        content = <<CONTENT
+---
+title: Include tag parameters
+---
+
+{% include sig.markdown myparam="test" %}
+
+{% include params.html param="value" %}
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "correctly output include variable" do
+        assert_match "<span id='include-param'>value</span>", @result.strip
+      end
+
+      should "ignore parameters if unused" do
+        assert_match "<hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n", @result
+      end
+    end
+
+    context "with invalid parameter syntax" do
+      should "throw a SyntaxError" do
+        content = <<CONTENT
+---
+title: Invalid parameter syntax
+---
+
+{% include params.html param s="value" %}
+CONTENT
+        assert_raise SyntaxError, 'Did not raise exception on invalid "include" syntax' do
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        end
+
+        content = <<CONTENT
+---
+title: Invalid parameter syntax
+---
+
+{% include params.html params="value %}
+CONTENT
+        assert_raise SyntaxError, 'Did not raise exception on invalid "include" syntax' do
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        end
+      end
+    end
+
+    context "with several parameters" do
+      setup do
+        content = <<CONTENT
+---
+title: multiple include parameters
+---
+
+{% include params.html param1="new_value" param2="another" %}
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "list all parameters" do
+        assert_match '<li>param1 = new_value</li>', @result
+        assert_match '<li>param2 = another</li>', @result
+      end
+
+      should "not include previously used parameters" do
+        assert_match "<span id='include-param' />", @result
+      end
+    end
+
+    context "without parameters" do
+      setup do
+        content = <<CONTENT
+---
+title: without parameters
+---
+
+{% include params.html %}
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "include file with empty parameters" do
+        assert_match "<span id='include-param' />", @result
+      end
+    end
+  end
 end

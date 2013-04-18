@@ -152,6 +152,10 @@ Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
   assert Regexp.new(Regexp.escape(text)).match(File.open(file).readlines.join)
 end
 
+Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
+  assert_no_match Regexp.new(text), File.open(file).readlines.join
+end
+
 Then /^the "(.*)" file should exist$/ do |file|
   assert File.file?(file)
 end
