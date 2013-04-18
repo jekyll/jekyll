@@ -3,6 +3,7 @@ layout: docs
 title: Extras
 prev_section: plugins
 next_section: github-pages
+permalink: /docs/extras/
 ---
 
 There are a number of (optional) extra features that Jekyll supports that you

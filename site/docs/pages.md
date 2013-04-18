@@ -3,6 +3,7 @@ layout: docs
 title: Creating pages
 prev_section: posts
 next_section: variables
+permalink: /docs/pages/
 ---
 
 In addition to [writing posts](../posts), another thing you may want to do with

@@ -3,6 +3,7 @@ layout: docs
 title: GitHub Pages
 prev_section: extras
 next_section: deployment-methods
+permalink: /docs/github-pages/
 ---
 
 [GitHub Pages](https://pages.github.com) are public web pages for users,

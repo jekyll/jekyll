@@ -3,6 +3,7 @@ layout: docs
 title: Directory structure
 prev_section: usage
 next_section: configuration
+permalink: /docs/structure/
 ---
 
 Jekyll is, at its core, a text transformation engine. The concept behind the

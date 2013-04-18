@@ -3,6 +3,7 @@ layout: docs
 title: Templates
 prev_section: migrations
 next_section: permalinks
+permalink: /docs/templates/
 ---
 
 Jekyll uses the [Liquid](http://www.liquidmarkup.org/) templating language to
