@@ -137,7 +137,7 @@ $ ruby -rubygems -e 'require "jekyll/migrators/typo";
     Jekyll::Typo.process("database", "user", "pass")'
 {% endhighlight %}
 
-This code also has only been tested with Typo version 4+.
+This code has only been tested with Typo version 4+.
 
 ## TextPattern
 
