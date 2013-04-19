@@ -7,9 +7,9 @@ next_section: templates
 
 If you’re switching to Jekyll from another blogging system, Jekyll’s importers
 can help you with the move. Most methods listed on this page require read access
-to the database to generate posts from your old system. Each method generates
-`.markdown` posts in the `_posts` directory based on the entries in the foreign
-system.
+to the database from your old system to generate posts for Jekyll. Each method
+generates `.markdown` posts in the `_posts` directory based on the entries in
+the foreign system.
 
 ## Preparing for migrations
 
