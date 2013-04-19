@@ -207,7 +207,7 @@ before your site is served.
     <tr class='setting'>
       <td>
         <p class='name'><strong>Base URL</strong></p>
-        <p class='description'>Serve website with the given base URL</p>
+        <p class='description'>Serve the website at the given base URL</p>
       </td>
       <td class="align-center">
         <p><code class="option">baseurl: URL</code></p>
