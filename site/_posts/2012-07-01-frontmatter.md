@@ -54,7 +54,7 @@ front-matter of a page or post.
         <p>
 
           If set, this specifies the layout file to use. Use the layout file
-          name without file extension. Layout files must be placed in the
+          name without a file extension. Layout files must be placed in the
           <code>_layouts</code> directory.
 
         </p>
