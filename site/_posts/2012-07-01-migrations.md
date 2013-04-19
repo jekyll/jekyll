@@ -114,8 +114,8 @@ $ ruby -rubygems -e 'require "jekyll/migrators/drupal";
 
 <div class="note warning">
   <h5>Warning: Drupal Version Compatibility</h5>
-  <p>This migrator was written for Drupal 6.1 and may not work as expected on
-  future versions of Drupal. Please update it and send us a pull request if
+  <p>This migrator was written for Drupal 6.1 and may not work as expected with
+  newer versions of Drupal. Please update it and send us a pull request if
   necessary.</p>
 </div>
 
