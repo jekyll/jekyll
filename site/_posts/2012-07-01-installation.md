@@ -8,7 +8,7 @@ next_section: usage
 Getting Jekyll installed and ready-to-go should only take a few minutes. If it
 ever becomes a pain in the ass, please [file an
 issue](https://github.com/mojombo/jekyll/issues/new) (or submit a pull request)
-describing the issue you encountered, and how we might make the process easier.
+describing the issue you encountered and how we might make the process easier.
 
 ### Requirements
 
@@ -39,11 +39,11 @@ simply run the following command to install Jekyll:
 $ gem install jekyll
 {% endhighlight %}
 
-All Jekyll’s gem dependencies are automatically installed by the above command,
-so you won’t have to worry about them at all. If you have problems installing
-Jekyll, check out the [troubleshooting](../troubleshooting) page or [report an
-issue](https://github.com/mojombo/jekyll/issues/new) so the Jekyll community can
-improve the experience for everyone.
+All of Jekyll’s gem dependencies are automatically installed by the above
+command, so you won’t have to worry about them at all. If you have problems
+installing Jekyll, check out the [troubleshooting](../troubleshooting) page or
+[report an issue](https://github.com/mojombo/jekyll/issues/new) so the Jekyll
+community can improve the experience for everyone.
 
 ## Optional Extras
 
