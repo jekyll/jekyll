@@ -35,7 +35,8 @@ relies on.
 
 ## Predefined Global Variables
 
-There are a number of predefined global variables that you can set in the front-matter of a page or post.
+There are a number of predefined global variables that you can set in the
+front-matter of a page or post.
 
 <table>
   <thead>
