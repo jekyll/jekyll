@@ -241,5 +241,5 @@ $ ruby -rubygems -e 'require "jekyll/migrators/tumblr";
 
 ## Other Systems
 
-If you have a system that there isn’t currently a migrator for, you should
-consider writing one and sending us a pull request.
+If you have a system for which there is currently no migrator, consider writing
+one and sending us a pull request.
