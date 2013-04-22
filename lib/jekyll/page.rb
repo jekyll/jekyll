@@ -129,19 +129,6 @@ module Jekyll
       path
     end
 
-    # Write the generated page file to the destination directory.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns nothing.
-    def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') do |f|
-        f.write(self.output)
-      end
-    end
-
     # Returns the object as a debug String.
     def inspect
       "#<Jekyll:Page @name=#{self.name.inspect}>"

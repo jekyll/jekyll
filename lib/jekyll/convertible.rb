@@ -118,5 +118,18 @@ module Jekyll
         end
       end
     end
+
+    # Write the generated page file to the destination directory.
+    #
+    # dest - The String path to the destination dir.
+    #
+    # Returns nothing.
+    def write(dest)
+      path = destination(dest)
+      FileUtils.mkdir_p(File.dirname(path))
+      File.open(path, 'w') do |f|
+        f.write(self.output)
+      end
+    end
   end
 end

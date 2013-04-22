@@ -10,6 +10,13 @@ module Jekyll
         @slug = slug
         @date = Time.parse(date)
       end
+
+      def ==(other)
+        slug == other.slug &&
+          date.year  == other.date.year &&
+          date.month == other.date.month &&
+          date.day   == other.date.day
+      end
     end
 
     class PostUrl < Liquid::Tag
@@ -23,11 +30,7 @@ module Jekyll
         site = context.registers[:site]
 
         site.posts.each do |p|
-          if p.slug == @post.slug \
-            and p.date.year == @post.date.year \
-            and p.date.month == @post.date.month \
-            and p.date.day == @post.date.day
-
+          if @post == p
             return p.url
           end
         end
