@@ -53,7 +53,7 @@ eos
 
         output = add_code_tags(
           Pygments.highlight(code, :lexer => @lang, :options => @options),
-          @lang
+          @lang.gsub("+", "-")
         )
 
         output = context["pygments_prefix"] + output if context["pygments_prefix"]
