@@ -112,18 +112,34 @@ module Jekyll
       self.read_directories
     end
 
-    # Read all the files in <source>/<layouts> and create a new Layout object
-    # with each one.
+    # Read all the files in the configured layout directories, and create a
+    # new Layout object with each one.
     #
     # Returns nothing.
     def read_layouts
-      base = File.join(self.source, self.config['layouts'])
+      layouts = self.config['layouts']
+      layouts = [ layouts ] if !layouts.is_a? Array
+      layouts.each { |x| self.read_layouts_dir(x) }
+    end
+
+    # Read all layouts from the specified directory, and create a new Layout object
+    # with each one.
+    #
+    # Return nothing.
+    def read_layouts_dir(directory)
+      base = File.join(self.source, directory)
       return unless File.exists?(base)
       entries = []
       Dir.chdir(base) { entries = filter_entries(Dir['*.*']) }
 
       entries.each do |f|
         name = f.split(".")[0..-2].join(".")
+
+        if !self.layouts[name].nil?
+          existing = self.layouts[name]
+          Jekyll::Logger.warn "Layout Warning:", "#{existing.base}/#{existing.name} is being overwritten by #{base}/#{f}"
+        end
+
         self.layouts[name] = Layout.new(self, base, f)
       end
     end

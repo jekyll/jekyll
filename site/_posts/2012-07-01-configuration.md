@@ -97,6 +97,29 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="option">timezone: TIMEZONE</code></p>
       </td>
     </tr>
+
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Plugins</strong></p>
+        <p class="description">Specifies from which directories Jekyll plugins should be loaded</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">plugins: ["dir1", "dir2"]</code></p>
+        <p><code class="option">plugins: "_plugins"</code></p>
+      </td>
+    </tr>
+
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Layouts</strong></p>
+        <p class="description">Specifies from which directories layouts should be loaded</p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">layouts: ["dir1", "dir2"]</code></p>
+        <p><code class="option">layouts: "_layouts"</code></p>
+      </td>
+    </tr>
+
   </tbody>
 </table>
 
