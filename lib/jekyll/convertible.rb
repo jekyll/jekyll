@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'set'
 
 # Convertible provides methods for converting a pagelike item
