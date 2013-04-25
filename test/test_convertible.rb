@@ -14,6 +14,11 @@ class TestConvertible < Test::Unit::TestCase
       assert_equal({'test' => 'good'}, ret)
     end
 
+    should "parse UTF-8 files correctly" do
+      ret = @convertible.read_yaml(@base, 'utf8_front_matter.erb')
+      assert_equal({'test' => 'good'}, ret)
+    end
+
     should "not parse if the front-matter is not at the start of the file" do
       ret = @convertible.read_yaml(@base, 'broken_front_matter1.erb')
       assert_equal({}, ret)

@@ -88,6 +88,18 @@ class TestPost < Test::Unit::TestCase
         end
       end
 
+      context "with UTF-8 content" do
+        setup do
+          @real_file = "2013-04-24-its-2013-we-should-have-utf-8.markdown"
+          @source = source_dir('encoding/_posts')
+        end
+        should "read markdown as Unicode" do
+          @post.read_yaml(@source, @real_file)
+
+          assert_equal @post.content.encoding.name.to_s, 'UTF-8'
+        end
+      end
+
       context "with embedded triple dash" do
         setup do
           @real_file = "2010-01-08-triple-dash.markdown"
