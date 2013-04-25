@@ -10,7 +10,7 @@ class TestGeneratedSite < Test::Unit::TestCase
 
       @site = Site.new(Jekyll.configuration)
       @site.process
-      @index = File.read(dest_dir('index.html'), :encoding => 'UTF-8')
+      @index = File.read(dest_dir('index.html')).force_encoding('UTF-8')
     end
 
     should "ensure post count is as expected" do

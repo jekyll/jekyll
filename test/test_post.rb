@@ -1,3 +1,4 @@
+# Encoding: UTF-8
 require 'helper'
 
 class TestPost < Test::Unit::TestCase
@@ -96,7 +97,7 @@ class TestPost < Test::Unit::TestCase
         should "read markdown as Unicode" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal @post.content.encoding.name.to_s, 'UTF-8'
+          assert_match /ö/, @post.content
         end
       end
 
