@@ -47,14 +47,8 @@ module Jekyll
 
       self.published = self.is_published
 
-      self.tags = self.data.pluralized_array("tag", "tags")
-
-      if self.categories.empty?
-        self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
-      end
-
-      self.tags.flatten!
-      self.categories.flatten!
+      self.setup_categories
+      self.setup_tags
     end
 
     def is_published
@@ -63,6 +57,18 @@ module Jekyll
       else
         true
       end
+    end
+
+    def setup_categories
+      if self.categories.empty?
+        self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
+      end
+      self.categories.flatten!
+    end
+
+    def setup_tags
+      self.tags = self.data.pluralized_array("tag", "tags")
+      self.tags.flatten!
     end
 
     # Get the full path to the directory containing the post files
