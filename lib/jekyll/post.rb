@@ -47,8 +47,8 @@ module Jekyll
 
       self.published = self.is_published
 
-      self.setup_categories
-      self.setup_tags
+      self.populate_categories
+      self.populate_tags
     end
 
     def is_published
@@ -59,14 +59,14 @@ module Jekyll
       end
     end
 
-    def setup_categories
+    def populate_categories
       if self.categories.empty?
         self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
       end
       self.categories.flatten!
     end
 
-    def setup_tags
+    def populate_tags
       self.tags = self.data.pluralized_array("tag", "tags")
       self.tags.flatten!
     end
