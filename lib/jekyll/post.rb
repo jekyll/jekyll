@@ -67,8 +67,7 @@ module Jekyll
     end
 
     def populate_tags
-      self.tags = self.data.pluralized_array("tag", "tags")
-      self.tags.flatten!
+      self.tags = self.data.pluralized_array("tag", "tags").flatten
     end
 
     # Get the full path to the directory containing the post files
