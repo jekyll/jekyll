@@ -45,13 +45,13 @@ module Jekyll
         self.date = Time.parse(self.data["date"].to_s)
       end
 
-      self.published = self.is_published
+      self.published = self.published?
 
       self.populate_categories
       self.populate_tags
     end
 
-    def is_published
+    def published?
       if self.data.has_key?('published') && self.data['published'] == false
         false
       else
