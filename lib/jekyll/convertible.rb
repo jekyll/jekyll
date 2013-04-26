@@ -68,9 +68,9 @@ module Jekyll
 
     # Render Liquid in the content
     #
-    # content -
-    # payload -
-    # info -
+    # content - the raw Liquid content to render
+    # payload - the payload for Liquid
+    # info    - the info for Liquid
     #
     # Returns the converted content
     def render_liquid(content, payload, info)
@@ -83,6 +83,13 @@ module Jekyll
       abort("Build Failed")
     end
 
+    # Recursively render layouts
+    #
+    # layouts - a list of the layouts
+    # payload - the payload for Liquid
+    # info    - the info for Liquid
+    #
+    # Returns nothing
     def render_all_layouts(layouts, payload, info)
       # recursively render layouts
       layout = layouts[self.data["layout"]]
