@@ -67,6 +67,7 @@
     * Add SVG support to Jekyll/WEBrick. (#407, #406)
     * Prevent custom destination from causing continuous regen on watch (#528, #820, #862)
   * Site Enhancements
+    * Fix spelling, punctuation and phrasal errors (#989)
     * Update quickstart instructions with `new` command (#966)
     * Add docs for page.excerpt (#956)
     * Add docs for page.path (#951)
