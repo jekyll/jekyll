@@ -10,11 +10,11 @@ class TestGeneratedSite < Test::Unit::TestCase
 
       @site = Site.new(Jekyll.configuration)
       @site.process
-      @index = File.read(dest_dir('index.html'))
+      @index = File.read(dest_dir('index.html')).force_encoding('UTF-8')
     end
 
     should "ensure post count is as expected" do
-      assert_equal 32, @site.posts.size
+      assert_equal 33, @site.posts.size
     end
 
     should "insert site.posts into the index" do

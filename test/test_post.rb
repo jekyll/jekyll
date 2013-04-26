@@ -1,3 +1,4 @@
+# Encoding: UTF-8
 require 'helper'
 
 class TestPost < Test::Unit::TestCase
@@ -85,6 +86,18 @@ class TestPost < Test::Unit::TestCase
 
           assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
           assert_equal "This is the content", @post.content
+        end
+      end
+
+      context "with UTF-8 content" do
+        setup do
+          @real_file = "2013-04-24-its-2013-we-should-have-utf-8.markdown"
+          @source = source_dir('encoding/_posts')
+        end
+        should "read markdown as Unicode" do
+          @post.read_yaml(@source, @real_file)
+
+          assert_match /ö/, @post.content
         end
       end
 
