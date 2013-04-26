@@ -66,6 +66,45 @@ module Jekyll
       @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
     end
 
+    # Render Liquid in the content
+    #
+    # content -
+    # payload -
+    # info -
+    #
+    # Returns the converted content
+    def render_liquid(content, payload, info)
+      Liquid::Template.parse(content).render!(payload, info)
+    rescue => e
+      Jekyll::Logger.error "Liquid Exception:", "#{e.message} in #{payload[:file]}"
+      e.backtrace.each do |backtrace|
+        puts backtrace
+      end
+      abort("Build Failed")
+    end
+
+    def render_all_layouts(layouts, payload, info)
+      # recursively render layouts
+      layout = layouts[self.data["layout"]]
+      used = Set.new([layout])
+
+      while layout
+        payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
+
+        self.output = self.render_liquid(layout.content,
+                                         payload.merge({:file => self.data["layout"]}),
+                                         info)
+
+        if layout = layouts[layout.data["layout"]]
+          if used.include?(layout)
+            layout = nil # avoid recursive chain
+          else
+            used << layout
+          end
+        end
+      end
+    end
+
     # Add any necessary layouts to this convertible document.
     #
     # payload - The site payload Hash.
@@ -79,46 +118,15 @@ module Jekyll
       payload["pygments_prefix"] = converter.pygments_prefix
       payload["pygments_suffix"] = converter.pygments_suffix
 
-      begin
-        self.content = Liquid::Template.parse(self.content).render!(payload, info)
-      rescue => e
-        puts "Liquid Exception: #{e.message} in #{self.name}"
-        e.backtrace.each do |backtrace|
-          puts backtrace
-        end
-        abort("Build Failed")
-      end
-
+      self.content = self.render_liquid(self.content,
+                                        payload.merge({:file => self.name}),
+                                        info)
       self.transform
 
       # output keeps track of what will finally be written
       self.output = self.content
 
-      # recursively render layouts
-      layout = layouts[self.data["layout"]]
-      used = Set.new([layout])
-
-      while layout
-        payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
-
-        begin
-          self.output = Liquid::Template.parse(layout.content).render!(payload, info)
-        rescue => e
-          puts "Liquid Exception: #{e.message} in #{self.data["layout"]}"
-          e.backtrace.each do |backtrace|
-            puts backtrace
-          end
-          abort("Build Failed")
-        end
-
-        if layout = layouts[layout.data["layout"]]
-          if used.include?(layout)
-            layout = nil # avoid recursive chain
-          else
-            used << layout
-          end
-        end
-      end
+      self.render_all_layouts(layouts, payload, info)
     end
 
     # Write the generated page file to the destination directory.
