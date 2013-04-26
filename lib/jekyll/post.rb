@@ -96,6 +96,23 @@ module Jekyll
       end
     end
 
+    # Public: the Post title, from the YAML Front-Matter or from the slug
+    #
+    # Returns the post title
+    def title
+      self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+    end
+
+    # Public: the path to the post relative to the site source,
+    #         from the YAML Front-Matter or from a combination of
+    #         the directory it's in, "_posts", and the name of the
+    #         post file
+    #
+    # Returns the path to the file relative to the site source
+    def path
+      self.data['path'] || File.join(@dir, '_posts', @name).sub(/\A\//, '')
+    end
+
     # Compares Post objects. First compares the Post date. If the dates are
     # equal, it compares the Post slugs.
     #
@@ -262,18 +279,7 @@ module Jekyll
     #
     # Returns the representative Hash.
     def to_liquid
-      self.data.deep_merge({
-        "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
-        "url"        => self.url,
-        "date"       => self.date,
-        "id"         => self.id,
-        "categories" => self.categories,
-        "next"       => self.next,
-        "previous"   => self.previous,
-        "tags"       => self.tags,
-        "content"    => self.content,
-        "excerpt"    => self.excerpt,
-        "path"       => self.data['path'] || File.join(@dir, '_posts', @name).sub(/\A\//, '') })
+      self.data.deep_merge(methods_as_hash_for_liquid)
     end
 
     # Returns the shorthand String identifier of this Post.
@@ -301,6 +307,17 @@ module Jekyll
     end
 
     protected
+
+    # Protected: Fetch a Hash of specified attributes which has a corresponding
+    #            method: title, url, date, id, categories, next, previous, tags,
+    #            content, excerpt, and path
+    #
+    # Returns a hash of the attributes and their values
+    def methods_as_hash_for_liquid
+      Hash[%w[title url date id categories next previous tags content excerpt path].map { |attribute|
+          [attribute, send(attribute.to_sym)]
+      }]
+    end
 
     # Internal: Extract excerpt from the content
     #
