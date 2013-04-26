@@ -41,18 +41,11 @@ module Jekyll
       self.process(name)
       self.read_yaml(@base, name)
 
-      # If we've added a date and time to the YAML, use that instead of the
-      # filename date. Means we'll sort correctly.
       if self.data.has_key?('date')
-        # ensure Time via to_s and reparse
         self.date = Time.parse(self.data["date"].to_s)
       end
 
-      if self.data.has_key?('published') && self.data['published'] == false
-        self.published = false
-      else
-        self.published = true
-      end
+      self.published = self.is_published
 
       self.tags = self.data.pluralized_array("tag", "tags")
 
@@ -62,6 +55,14 @@ module Jekyll
 
       self.tags.flatten!
       self.categories.flatten!
+    end
+
+    def is_published
+      if self.data.has_key?('published') && self.data['published'] == false
+        false
+      else
+        true
+      end
     end
 
     # Get the full path to the directory containing the post files
