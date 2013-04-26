@@ -1,3 +1,4 @@
+# Encoding: UTF-8
 require 'helper'
 require 'ostruct'
 
@@ -16,7 +17,7 @@ class TestConvertible < Test::Unit::TestCase
 
     should "parse UTF-8 files correctly" do
       ret = @convertible.read_yaml(@base, 'utf8_front_matter.erb')
-      assert_equal({'test' => 'good'}, ret)
+      assert_equal({'test' => 'goød'}, ret)
     end
 
     should "not parse if the front-matter is not at the start of the file" do
