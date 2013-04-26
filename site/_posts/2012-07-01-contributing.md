@@ -14,9 +14,9 @@ following in mind:
   [RR](http://github.com/btakita/rr/tree/master).
 * If it's a brand new feature, make sure to create a new
   [Cucumber](https://github.com/cucumber/cucumber/) feature and reuse steps
-  where appropriate. Also, whipping up some documentation in your fork's wiki
-  would be appreciated, and once merged it will be transferred over to the main
-  wiki.
+  where appropriate. Also, whipping up some documentation in your fork's `site`
+  directory would be appreciated, and once merged it will also appear in
+  the next update of the main site.
 * If your contribution adds or changes any Jekyll behavior, make sure to update
   the documentation. It lives in `site/_posts`. If the docs are missing
   information, please feel free to add it in. Great docs make a great project!

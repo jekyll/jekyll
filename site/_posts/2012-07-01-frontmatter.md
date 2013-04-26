@@ -35,7 +35,8 @@ relies on.
 
 ## Predefined Global Variables
 
-There are a number of predefined global variables that you can set in the front-matter of a page or post.
+There are a number of predefined global variables that you can set in the
+front-matter of a page or post.
 
 <table>
   <thead>
@@ -53,7 +54,7 @@ There are a number of predefined global variables that you can set in the front-
         <p>
 
           If set, this specifies the layout file to use. Use the layout file
-          name without file extension. Layout files must be placed in the
+          name without the file extension. Layout files must be placed in the
           <code>_layouts</code> directory.
 
         </p>
