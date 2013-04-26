@@ -46,6 +46,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Fix the CLI option --plugins to actually accept dirs and files (#993)
     * Allow 'excerpt' in YAML Front-Matter to override the extracted excerpt (#946)
     * Fix cascade problem with site.baseurl, site.port and site.host. (#935)
     * Filter out directories with valid post names (#875)
