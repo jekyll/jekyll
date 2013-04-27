@@ -27,7 +27,8 @@ module Jekyll
       self.include         = config['include']
       self.future          = config['future']
       self.show_drafts     = config['show_drafts']
-      self.limit_posts     = config['limit_posts']
+      # given as String if it is came from CLI option
+      self.limit_posts     = config['limit_posts'].nil? ? nil : config["limit_posts"].to_i
       self.keep_files      = config['keep_files']
 
       self.reset
