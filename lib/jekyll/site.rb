@@ -28,7 +28,7 @@ module Jekyll
       self.future          = config['future']
       self.show_drafts     = config['show_drafts']
       # given as String if it is came from CLI option
-      self.limit_posts     = config['limit_posts'].nil? ? nil : config["limit_posts"].to_i
+      self.limit_posts     = config['limit_posts'].to_i
       self.keep_files      = config['keep_files']
 
       self.reset
@@ -63,8 +63,8 @@ module Jekyll
       self.categories      = Hash.new { |hash, key| hash[key] = [] }
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
 
-      if !self.limit_posts.nil? && self.limit_posts < 1
-        raise ArgumentError, "Limit posts must be nil or >= 1"
+      if self.limit_posts < 0
+        raise ArgumentError, "Limit posts must be nil or >= 0"
       end
     end
 
@@ -149,7 +149,7 @@ module Jekyll
       self.posts.sort!
 
       # limit the posts if :limit_posts option is set
-      if limit_posts
+      unless limit_posts.zero?
         limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
         self.posts = self.posts[-limit, limit]
       end
