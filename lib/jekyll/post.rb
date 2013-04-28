@@ -10,6 +10,21 @@ module Jekyll
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = %w[
+      title
+      url
+      date
+      id
+      categories
+      next
+      previous
+      tags
+      content
+      excerpt
+      path
+    ]
+
     # Post name validator. Post filenames must be like:
     # 2008-11-05-my-awesome-post.textile
     #
@@ -285,7 +300,10 @@ module Jekyll
     #
     # Returns the representative Hash.
     def to_liquid
-      self.data.deep_merge(methods_as_hash_for_liquid)
+      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
+        [attribute, send(attribute)]
+      }]
+      data.deep_merge(further_data)
     end
 
     # Returns the shorthand String identifier of this Post.
@@ -313,17 +331,6 @@ module Jekyll
     end
 
     protected
-
-    # Protected: Fetch a Hash of specified attributes which has a corresponding
-    #            method: title, url, date, id, categories, next, previous, tags,
-    #            content, excerpt, and path
-    #
-    # Returns a hash of the attributes and their values
-    def methods_as_hash_for_liquid
-      Hash[%w[title url date id categories next previous tags content excerpt path].map { |attribute|
-          [attribute, send(attribute.to_sym)]
-      }]
-    end
 
     # Internal: Extract excerpt from the content
     #
