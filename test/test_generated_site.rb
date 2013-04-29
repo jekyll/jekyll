@@ -58,8 +58,19 @@ class TestGeneratedSite < Test::Unit::TestCase
       assert_equal 5, @site.posts.size
     end
 
-    should "ensure limit posts is 1 or more" do
+    should "ensure limit posts is 0 or more" do
       assert_raise ArgumentError do
+        clear_dest
+        stub(Jekyll).configuration do
+          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1})
+        end
+
+        @site = Site.new(Jekyll.configuration)
+      end
+    end
+
+    should "acceptable limit post is 0" do
+      assert_nothing_raised ArgumentError do
         clear_dest
         stub(Jekyll).configuration do
           Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
