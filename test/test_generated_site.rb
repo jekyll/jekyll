@@ -68,15 +68,5 @@ class TestGeneratedSite < Test::Unit::TestCase
         @site = Site.new(Jekyll.configuration)
       end
     end
-
-    should "ensure if limit_posts is a String (from CLI option)" do
-      clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'limit_posts' => "3"})
-      end
-      @site = Site.new(Jekyll.configuration)
-
-      assert_equal 3, @site.limit_posts
-    end
   end
 end

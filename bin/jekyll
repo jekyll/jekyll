@@ -48,7 +48,7 @@ command :build do |c|
 
   c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
   c.option '--future', 'Publishes posts with a future date'
-  c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
+  c.option '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
   c.option '--drafts', 'Render posts in the _drafts folder'
@@ -66,7 +66,7 @@ command :serve do |c|
 
   c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
   c.option '--future', 'Publishes posts with a future date'
-  c.option '--limit_posts MAX_POSTS', 'Limits the number of posts to parse and publish'
+  c.option '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
   c.option '--drafts', 'Render posts in the _drafts folder'
