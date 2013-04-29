@@ -204,6 +204,27 @@ CONTENT
     end
   end
 
+  context "simple page with nested post linking" do
+    setup do
+      content = <<CONTENT
+---
+title: Post linking
+---
+
+{% post_url es/2008-11-21-nested %}
+CONTENT
+      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+    end
+
+    should "not cause an error" do
+      assert_no_match /markdown\-html\-error/, @result
+    end
+
+    should "have the url to the \"complex\" post from 2008-11-21" do
+      assert_match %r{/2008/11/21/nested/}, @result
+    end
+  end
+
   context "gist tag" do
     context "simple" do
       setup do
