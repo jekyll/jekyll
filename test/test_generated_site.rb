@@ -68,5 +68,16 @@ class TestGeneratedSite < Test::Unit::TestCase
         @site = Site.new(Jekyll.configuration)
       end
     end
+
+    should "acceptable limit post is 0" do
+      assert_nothing_raised ArgumentError do
+        clear_dest
+        stub(Jekyll).configuration do
+          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
+        end
+
+        @site = Site.new(Jekyll.configuration)
+      end
+    end
   end
 end
