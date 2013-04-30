@@ -34,10 +34,10 @@ module Jekyll
           self.content = $POSTMATCH
           self.data = YAML.safe_load($1)
         end
-      rescue => e
-        puts "Error reading file #{File.join(base, name)}: #{e.message}"
       rescue SyntaxError => e
-        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"        
+      rescue Exception => e
+        puts "Error reading file #{File.join(base, name)}: #{e.message}"
       end
 
       self.data ||= {}
@@ -75,7 +75,7 @@ module Jekyll
     # Returns the converted content
     def render_liquid(content, payload, info)
       Liquid::Template.parse(content).render!(payload, info)
-    rescue => e
+    rescue Exception => e
       Jekyll::Logger.error "Liquid Exception:", "#{e.message} in #{payload[:file]}"
       e.backtrace.each do |backtrace|
         puts backtrace
