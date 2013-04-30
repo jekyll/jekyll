@@ -47,6 +47,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Bullet-proof limit_posts option (#1004)
     * Read in YAML as UTF-8 to accept non-ASCII chars (#836)
     * Fix the CLI option --plugins to actually accept dirs and files (#993)
     * Allow 'excerpt' in YAML Front-Matter to override the extracted excerpt (#946)
