@@ -6,6 +6,7 @@
     * Added ability to render drafts in _drafts folder via command line (#833)
     * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
   * Minor Enhancements
+    * Tell the user if there is no subcommand specified (#1008)
     * Freak out if the destination of `jekyll new` exists and is non-empty (#981)
     * Add `timezone` configuration option for compilation (#957)
     * Add deprecation messages for pre-1.0 CLI options (#959)
