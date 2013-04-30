@@ -16,7 +16,7 @@ module Jekyll
 
       'safe'          => false,
       'show_drafts'   => nil,
-      'limit_posts'   => nil,
+      'limit_posts'   => 0,
       'lsi'           => false,
       'future'        => true,           # remove and make true just default
       'pygments'      => true,           # remove and make true just default
