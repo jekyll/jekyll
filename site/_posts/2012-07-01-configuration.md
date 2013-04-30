@@ -236,24 +236,28 @@ source:      .
 destination: ./_site
 plugins:     ./_plugins
 layouts:     ./_layouts
+include:     ['.htaccess']
+exclude:     []
 keep_files:  ['.git','.svn']
+timezone:    nil
 
 future:      true
-pygments:    false
+show_drafts: nil
+limit_posts: 0
+pygments:    true
 
-markdown:      maruku
 permalink:     date
-include:       ['.htaccess']
 paginate_path: 'page:num'
 
-markdown_ext: markdown,mkd,mkdn,md
-textile_ext: textile
+markdown:      maruku
+markdown_ext:  markdown,mkd,mkdn,md
+textile_ext:   textile
 
 excerpt_separator: "\n\n"
 
 safe:        false
-watch:       false
-server:      false
+watch:       false    # deprecated
+server:      false    # deprecated
 host:        0.0.0.0
 port:        4000
 baseurl:     /
