@@ -1,6 +1,7 @@
 module Jekyll
   class Deprecator
     def self.process(args)
+      no_subcommand(args)
       deprecation_message args, "--server", "The --server command has been replaced by the \
                           'serve' subcommand."
       deprecation_message args, "--no-server", "To build Jekyll without launching a server, \
@@ -13,6 +14,14 @@ module Jekyll
       deprecation_message args, "--paginate", "The 'paginate' setting can only be set in your \
                           config files."
       deprecation_message args, "--url", "The 'url' setting can only be set in your config files."
+    end
+
+    def self.no_subcommand(args)
+      if args.size == 0 || args.first =~ /^--/
+        Jekyll::Logger.error "Deprecation:", "Jekyll now uses subcommands instead of just \
+                            switches. Run `jekyll help' to find out more."
+        exit(1)
+      end
     end
 
     def self.deprecation_message(args, deprecated_argument, message)
