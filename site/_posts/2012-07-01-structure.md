@@ -33,6 +33,7 @@ A basic Jekyll site usually looks something like this:
 
 An overview of what each of these does:
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -153,3 +154,4 @@ An overview of what each of these does:
     </tr>
   </tbody>
 </table>
+</div>

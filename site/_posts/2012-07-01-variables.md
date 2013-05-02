@@ -13,11 +13,12 @@ following is a reference of the available data.
 
 ## Global Variables
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
-      <td>Variable</td>
-      <td>Description</td>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -61,14 +62,16 @@ following is a reference of the available data.
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Site Variables
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
-      <td>Variable</td>
-      <td>Description</td>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -132,14 +135,16 @@ following is a reference of the available data.
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Page Variables
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
-      <td>Variable</td>
-      <td>Description</td>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -229,6 +234,7 @@ following is a reference of the available data.
     </tr>
   </tbody>
 </table>
+</div>
 
 <div class="note">
   <h5>ProTip™: Use custom front-matter</h5>
@@ -244,11 +250,12 @@ following is a reference of the available data.
 
 ## Paginator
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
-      <td>Variable</td>
-      <td>Description</td>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -290,6 +297,7 @@ following is a reference of the available data.
     </tr>
   </tbody>
 </table>
+</div>
 
 <div class="note info">
   <h5>Paginator variable availability</h5>
