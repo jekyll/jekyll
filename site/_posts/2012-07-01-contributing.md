@@ -56,12 +56,28 @@ Workflow
 Here's the most direct way to get your work merged into the project:
 
 * Fork the project.
-* Clone down your fork: `git clone git://github.com/<username>/jekyll.git`
-* Create a topic branch to contain your change: `git checkout -b my_awesome_feature`
+* Clone down your fork:
+
+{% highlight bash %}
+git clone git://github.com/<username>/jekyll.git
+{% endhighlight %}
+
+* Create a topic branch to contain your change:
+
+{% highlight bash %}
+git checkout -b my_awesome_feature
+{% endhighlight %}
+
+
 * Hack away, add tests. Not necessarily in that order.
 * Make sure everything still passes by running `rake`.
 * If necessary, rebase your commits into logical chunks, without errors.
-* Push the branch up: `git push origin my_awesome_feature`
+* Push the branch up:
+
+{% highlight bash %}
+git push origin my_awesome_feature
+{% endhighlight %}
+
 * Create a pull request against mojombo/jekyll and describe what your change
   does and the why you think it should be merged.
 
