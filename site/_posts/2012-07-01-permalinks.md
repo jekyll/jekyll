@@ -17,6 +17,7 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
 
 ## Template variables
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -87,9 +88,11 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Built-in permalink styles
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -124,11 +127,13 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Permalink style examples
 
 Given a post named: `/2009-04-29-slap-chop.textile`
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -171,3 +176,4 @@ Given a post named: `/2009-04-29-slap-chop.textile`
     </tr>
   </tbody>
 </table>
+</div>

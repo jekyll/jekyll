@@ -1,0 +1,110 @@
+/*
+ * Gridism
+ * A simple, responsive, and handy CSS grid by @cobyism
+ * https://github.com/cobyism/gridism
+ */
+
+/* Preserve some sanity */
+.grid,
+.unit {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Set up some rules to govern the grid */
+.grid {
+  display: block;
+  clear: both;
+}
+.grid .unit {
+  float: left;
+  width: 100%;
+  padding: 10px;
+}
+
+/* This ensures the outer gutters are equal to the (doubled) inner gutters. */
+.grid .unit:first-child { padding-left: 20px; }
+.grid .unit:last-child { padding-right: 20px; }
+
+/* Nested grids already have padding though, so let’s nuke it */
+.unit .unit:first-child { padding-left: 0; }
+.unit .unit:last-child { padding-right: 0; }
+.unit .grid:first-child > .unit { padding-top: 0; }
+.unit .grid:last-child > .unit { padding-bottom: 0; }
+
+/* Let people nuke the gutters/padding completely in a couple of ways */
+.no-gutters .unit,
+.unit.no-gutters {
+  padding: 0 !important;
+}
+
+/* Wrapping at a maximum width is optional */
+.wrap .grid,
+.grid.wrap {
+  max-width: 978px;
+  margin: 0 auto;
+}
+
+/* Width classes also have shorthand versions numbered as fractions
+ * For example: for a grid unit 1/3 (one third) of the parent width,
+ * simply apply class="w-1-3" to the element. */
+.grid .whole,          .grid .w-1-1 { width: 100%; }
+.grid .half,           .grid .w-1-2 { width: 50%; }
+.grid .one-third,      .grid .w-1-3 { width: 33.3332%; }
+.grid .two-thirds,     .grid .w-2-3 { width: 66.6665%; }
+.grid .one-quarter,    .grid .w-1-4 { width: 25%; }
+.grid .three-quarters, .grid .w-3-4 { width: 75%; }
+.grid .one-fifth,      .grid .w-1-5 { width: 20%; }
+.grid .two-fifths,     .grid .w-2-5 { width: 40%; }
+.grid .three-fifths,   .grid .w-3-5 { width: 60%; }
+.grid .four-fifths,    .grid .w-4-5 { width: 80%; }
+.grid .golden-small,   .grid .w-g-s { width: 38.2716%; } /* Golden section: smaller piece */
+.grid .golden-large,   .grid .w-g-l { width: 61.7283%; } /* Golden section: larger piece */
+
+/* Utility classes */
+.align-center { text-align: center; }
+.align-left   { text-align: left; }
+.align-right  { text-align: right; }
+.pull-left    { float: left; }
+.pull-right   { float: right; }
+
+.show-on-mobiles {
+  display: none;
+}
+
+/* Responsive Stuff */
+@media screen and (max-width: 568px) {
+  /* Stack anything that isn’t full-width on smaller screens */
+  .grid .unit {
+    width: 100% !important;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .unit .grid .unit {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  /* Sometimes, you just want to be different on small screens */
+  .center-on-mobiles {
+    text-align: center !important;
+  }
+  .hide-on-mobiles {
+    display: none !important;
+  }
+  .show-on-mobiles {
+    display: block !important;
+  }
+  a .show-on-mobiles {
+    display: inline !important;
+  }
+}
+
+/* Expand the wrap a bit further on larger screens */
+/*@media screen and (min-width: 1180px) {
+  .wrap .grid {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+}*/

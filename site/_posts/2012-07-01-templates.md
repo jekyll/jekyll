@@ -13,6 +13,7 @@ common tasks easier.
 
 ## Filters
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -143,6 +144,7 @@ common tasks easier.
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Tags
 
@@ -231,4 +233,3 @@ You can also use this tag to create a link to a post in Markdown as follows:
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
 {% endraw %}
 {% endhighlight %}
-

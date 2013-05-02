@@ -38,6 +38,7 @@ relies on.
 There are a number of predefined global variables that you can set in the
 front-matter of a page or post.
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -119,6 +120,7 @@ front-matter of a page or post.
     </tr>
   </tbody>
 </table>
+</div>
 
 
 ## Custom Variables
@@ -142,6 +144,7 @@ title:
 
 These are available out-of-the-box to be used in the front-matter for a post.
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -163,3 +166,4 @@ These are available out-of-the-box to be used in the front-matter for a post.
     </tr>
   </tbody>
 </table>
+</div>
