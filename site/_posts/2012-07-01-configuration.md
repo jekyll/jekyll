@@ -13,6 +13,7 @@ Jekyll allows you to concoct your sites in any way you can dream up, and it’s 
 
 The table below lists the available settings for Jekyll, and the various <code class="option">options</code> (specifed in the configuration file) and <code class="flag">flags</code> (specified on the command-line) that control them.
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -71,9 +72,11 @@ The table below lists the available settings for Jekyll, and the various <code c
     </tr>
   </tbody>
 </table>
+</div>
 
 ### Build Command Options
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -173,6 +176,7 @@ The table below lists the available settings for Jekyll, and the various <code c
     </tr>
   </tbody>
 </table>
+</div>
 
 ### Serve Command Options
 
@@ -180,6 +184,7 @@ In addition to the options below, the `serve` sub-command can accept any of the 
 for the `build` sub-command, which are then applied to the site build which occurs right
 before your site is served.
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -220,6 +225,7 @@ before your site is served.
     </tr>
   </tbody>
 </table>
+</div>
 
 <div class="note warning">
   <h5>Do not use tabs in configuration files</h5>

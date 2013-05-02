@@ -814,3 +814,11 @@ code.option, code.flag, code.filter, code.output {
   font-weight: bold;
   text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 }
+
+/* Responsive tables */
+
+@media (max-width: 768px){
+  .mobile-side-scroller {
+    overflow-x: scroll;
+  }
+}
