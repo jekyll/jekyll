@@ -17,8 +17,8 @@ following is a reference of the available data.
 <table>
   <thead>
     <tr>
-      <td>Variable</td>
-      <td>Description</td>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -70,8 +70,8 @@ following is a reference of the available data.
 <table>
   <thead>
     <tr>
-      <td>Variable</td>
-      <td>Description</td>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -143,8 +143,8 @@ following is a reference of the available data.
 <table>
   <thead>
     <tr>
-      <td>Variable</td>
-      <td>Description</td>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -254,8 +254,8 @@ following is a reference of the available data.
 <table>
   <thead>
     <tr>
-      <td>Variable</td>
-      <td>Description</td>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
