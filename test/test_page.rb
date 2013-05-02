@@ -15,7 +15,7 @@ class TestPage < Test::Unit::TestCase
   context "A Page" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
     end
 
@@ -100,16 +100,6 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/about/", @page.permalink
         assert_equal @page.permalink, @page.url
         assert_equal "/about/", @page.dir
-      end
-    end
-    
-    context "with unspecified layout" do
-      setup do
-        @page = setup_page('contacts.html')
-      end
-
-      should "default to 'post' layout" do
-        assert_equal "page", @page.data["layout"]
       end
     end
         

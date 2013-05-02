@@ -56,6 +56,20 @@ module Jekyll
       date.xmlschema
     end
 
+    # Format a date according to RFC-822
+    #
+    # date - The Time to format.
+    #
+    # Examples
+    #
+    #   date_to_rfc822(Time.now)
+    #   # => "Sun, 24 Apr 2011 12:34:46 +0000"
+    #
+    # Returns the formatted String.
+    def date_to_rfc822(date)
+      date.rfc822
+    end
+
     # XML escape a string for use. Replaces any special characters with
     # appropriate HTML entity replacements.
     #

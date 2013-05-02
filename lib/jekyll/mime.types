@@ -35,6 +35,7 @@ application/postscript                ps eps ai
 application/rdf+xml                   rdf
 application/rtf                       rtf
 text/vcard                            vcf vcard
+application/vnd.apple.pkpass          pkpass
 application/vnd.ms-excel              xls
 application/vnd.ms-powerpoint         ppt
 application/vnd.wap.wmlc              wmlc

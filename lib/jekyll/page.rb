@@ -23,18 +23,6 @@ module Jekyll
       self.read_yaml(File.join(base, dir), name)
     end
 
-    # Read the YAML frontmatter.
-    #
-    # base - The String path to the dir containing the file.
-    # name - The String filename of the file.
-    #
-    # Returns nothing.
-    def read_yaml(base, name)
-      super(base, name)
-      self.data['layout'] = 'page' unless self.data.has_key?('layout')
-      self.data
-    end
-
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, we be '/'
@@ -124,7 +112,8 @@ module Jekyll
     def to_liquid
       self.data.deep_merge({
         "url"        => self.url,
-        "content"    => self.content })
+        "content"    => self.content,
+        "path"       => self.data['path'] || File.join(@dir, @name).sub(/\A\//, '') })
     end
 
     # Obtain destination path.
@@ -138,19 +127,6 @@ module Jekyll
       path = File.join(dest, CGI.unescape(self.url))
       path = File.join(path, "index.html") if self.url =~ /\/$/
       path
-    end
-
-    # Write the generated page file to the destination directory.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns nothing.
-    def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') do |f|
-        f.write(self.output)
-      end
     end
 
     # Returns the object as a debug String.

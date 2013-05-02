@@ -10,6 +10,21 @@ module Jekyll
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = %w[
+      title
+      url
+      date
+      id
+      categories
+      next
+      previous
+      tags
+      content
+      excerpt
+      path
+    ]
+
     # Post name validator. Post filenames must be like:
     # 2008-11-05-my-awesome-post.textile
     #
@@ -19,7 +34,7 @@ module Jekyll
     end
 
     attr_accessor :site
-    attr_accessor :data, :excerpt, :content, :output, :ext
+    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
     attr_reader :name
@@ -33,38 +48,41 @@ module Jekyll
     # Returns the new Post.
     def initialize(site, source, dir, name)
       @site = site
+      @dir = dir
       @base = self.containing_dir(source, dir)
       @name = name
 
       self.categories = dir.downcase.split('/').reject { |x| x.empty? }
       self.process(name)
-      begin 
-        self.read_yaml(@base, name)
-      rescue Exception => msg
-        raise FatalException.new("#{msg} in #{@base}/#{name}")
-      end
+      self.read_yaml(@base, name)
 
-      # If we've added a date and time to the YAML, use that instead of the
-      # filename date. Means we'll sort correctly.
       if self.data.has_key?('date')
-        # ensure Time via to_s and reparse
         self.date = Time.parse(self.data["date"].to_s)
       end
 
+      self.published = self.published?
+
+      self.populate_categories
+      self.populate_tags
+    end
+
+    def published?
       if self.data.has_key?('published') && self.data['published'] == false
-        self.published = false
+        false
       else
-        self.published = true
+        true
       end
+    end
 
-      self.tags = self.data.pluralized_array("tag", "tags")
-
+    def populate_categories
       if self.categories.empty?
         self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
       end
-
-      self.tags.flatten!
       self.categories.flatten!
+    end
+
+    def populate_tags
+      self.tags = self.data.pluralized_array("tag", "tags").flatten
     end
 
     # Get the full path to the directory containing the post files
@@ -80,8 +98,36 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name)
       super(base, name)
-      self.excerpt = self.extract_excerpt
-      self.data['layout'] = 'post' unless self.data.has_key?('layout')
+      self.extracted_excerpt = self.extract_excerpt
+    end
+
+    # The post excerpt. This is either a custom excerpt
+    # set in YAML front matter or the result of extract_excerpt.
+    #
+    # Returns excerpt string.
+    def excerpt
+      if self.data.has_key? 'excerpt'
+        self.data['excerpt']
+      else
+        self.extracted_excerpt
+      end
+    end
+
+    # Public: the Post title, from the YAML Front-Matter or from the slug
+    #
+    # Returns the post title
+    def title
+      self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+    end
+
+    # Public: the path to the post relative to the site source,
+    #         from the YAML Front-Matter or from a combination of
+    #         the directory it's in, "_posts", and the name of the
+    #         post file
+    #
+    # Returns the path to the file relative to the site source
+    def path
+      self.data['path'] || File.join(@dir, '_posts', @name).sub(/\A\//, '')
     end
 
     # Compares Post objects. First compares the Post date. If the dates are
@@ -117,7 +163,7 @@ module Jekyll
     # Returns nothing.
     def transform
       super
-      self.excerpt = converter.convert(self.excerpt)
+      self.extracted_excerpt = converter.convert(self.extracted_excerpt)
     end
 
     # The generated directory into which the post will be placed
@@ -146,6 +192,8 @@ module Jekyll
         "/:categories/:title.html"
       when :date
         "/:categories/:year/:month/:day/:title.html"
+      when :ordinal
+        "/:categories/:year/:y_day/:title.html"
       else
         self.site.permalink_style.to_s
       end
@@ -169,6 +217,8 @@ module Jekyll
           "i_day"      => date.strftime("%d").to_i.to_s,
           "i_month"    => date.strftime("%m").to_i.to_s,
           "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
+          "short_month" => date.strftime("%b"),
+          "y_day"      => date.strftime("%j"),
           "output_ext" => self.output_ext
         }.inject(template) { |result, token|
           result.gsub(/:#{Regexp.escape token.first}/, token.last)
@@ -196,21 +246,25 @@ module Jekyll
       return [] unless posts.size > 1
 
       if self.site.lsi
-        self.class.lsi ||= begin
-          puts "Starting the classifier..."
-          lsi = Classifier::LSI.new(:auto_rebuild => false)
-          $stdout.print("  Populating LSI... ");$stdout.flush
-          posts.each { |x| $stdout.print(".");$stdout.flush;lsi.add_item(x) }
-          $stdout.print("\n  Rebuilding LSI index... ")
-          lsi.build_index
-          puts ""
-          lsi
-        end
+        build_index
 
         related = self.class.lsi.find_related(self.content, 11)
         related - [self]
       else
         (posts - [self])[0..9]
+      end
+    end
+
+    def build_index
+      self.class.lsi ||= begin
+        puts "Starting the classifier..."
+        lsi = Classifier::LSI.new(:auto_rebuild => false)
+        $stdout.print("  Populating LSI... "); $stdout.flush
+        posts.each { |x| $stdout.print("."); $stdout.flush; lsi.add_item(x) }
+        $stdout.print("\n  Rebuilding LSI index... ")
+        lsi.build_index
+        puts ""
+        lsi
       end
     end
 
@@ -229,7 +283,7 @@ module Jekyll
 
       do_layout(payload, layouts)
     end
-    
+
     # Obtain destination path.
     #
     # dest - The String path to the destination dir.
@@ -242,34 +296,14 @@ module Jekyll
       path
     end
 
-    # Write the generated post file to the destination directory.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns nothing.
-    def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') do |f|
-        f.write(self.output)
-      end
-    end
-
     # Convert this post into a Hash for use in Liquid templates.
     #
     # Returns the representative Hash.
     def to_liquid
-      self.data.deep_merge({
-        "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
-        "url"        => self.url,
-        "date"       => self.date,
-        "id"         => self.id,
-        "categories" => self.categories,
-        "next"       => self.next,
-        "previous"   => self.previous,
-        "tags"       => self.tags,
-        "content"    => self.content,
-        "excerpt"    => self.excerpt })
+      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
+        [attribute, send(attribute)]
+      }]
+      data.deep_merge(further_data)
     end
 
     # Returns the shorthand String identifier of this Post.

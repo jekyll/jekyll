@@ -14,7 +14,7 @@ class TestPager < Test::Unit::TestCase
   context "pagination disabled" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({
+        Jekyll::Configuration::DEFAULTS.merge({
           'source'      => source_dir,
           'destination' => dest_dir
         })
@@ -31,7 +31,7 @@ class TestPager < Test::Unit::TestCase
   context "pagination enabled for 2" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({
+        Jekyll::Configuration::DEFAULTS.merge({
           'source'      => source_dir,
           'destination' => dest_dir,
           'paginate'    => 2

@@ -153,6 +153,30 @@ Feature: Post data
     And I should see "Post categories: scifi and movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
     And I should see "Post categories: scifi and movies" in "_site/scifi/movies/2013/03/17/star-trek.html"
 
+  Scenario Outline: Use page.path variable
+    Given I have a <dir>/_posts directory
+    And I have the following post in "<dir>":
+      | title | type | date | content |
+      | my-post | html | 4/12/2013 | Source path: {{ page.path }} |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Source path: <path_prefix>_posts/2013-04-12-my-post.html" in "_site/<dir>/2013/04/12/my-post.html"
+
+    Examples:
+      | dir | path_prefix |
+      | .   |             |
+      | dir | dir/        |
+      | dir/nested | dir/nested/ |
+
+  Scenario: Override page.path variable
+    Given I have a _posts directory
+    And I have the following post:
+      | title    | date      | path               | content                      |
+      | override | 4/12/2013 | override-path.html | Custom path: {{ page.path }} |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Custom path: override-path.html" in "_site/2013/04/12/override.html"
+
   Scenario: Disable a post from being published
     Given I have a _posts directory
     And I have an "index.html" file that contains "Published!"

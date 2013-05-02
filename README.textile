@@ -31,7 +31,6 @@ h2. Runtime Dependencies
 * Kramdown: Markdown-superset converter (Ruby)
 * Liquid: Templating system (Ruby)
 * Maruku: Default markdown engine (Ruby)
-* Pygments: Syntax highlighting (Python)
 
 h2. Developer Dependencies
 
@@ -43,4 +42,4 @@ h2. Developer Dependencies
 
 h2. License
 
-See LICENSE.
+See "LICENSE":https://github.com/mojombo/jekyll/blob/master/LICENSE.

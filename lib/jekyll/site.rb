@@ -23,12 +23,12 @@ module Jekyll
       self.pygments        = config['pygments']
       self.baseurl         = config['baseurl']
       self.permalink_style = config['permalink'].to_sym
-      self.exclude         = config['exclude'] || []
-      self.include         = config['include'] || []
+      self.exclude         = config['exclude']
+      self.include         = config['include']
       self.future          = config['future']
-      self.show_drafts     = config['show_drafts'] || nil
-      self.limit_posts     = config['limit_posts'] || nil
-      self.keep_files      = config['keep_files'] || []
+      self.show_drafts     = config['show_drafts']
+      self.limit_posts     = config['limit_posts']
+      self.keep_files      = config['keep_files']
 
       self.reset
       self.setup
@@ -62,8 +62,8 @@ module Jekyll
       self.categories      = Hash.new { |hash, key| hash[key] = [] }
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
 
-      if !self.limit_posts.nil? && self.limit_posts < 1
-        raise ArgumentError, "Limit posts must be nil or >= 1"
+      if self.limit_posts < 0
+        raise ArgumentError, "limit_posts must not be a negative number"
       end
     end
 
@@ -97,7 +97,7 @@ module Jekyll
     #
     # Returns an Array of plugin search paths
     def plugins_path
-      if (config['plugins'] == Jekyll::DEFAULTS['plugins'])
+      if (config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
         [File.join(self.source, config['plugins'])]
       else
         Array(config['plugins']).map { |d| File.expand_path(d) }
@@ -148,7 +148,7 @@ module Jekyll
       self.posts.sort!
 
       # limit the posts if :limit_posts option is set
-      if limit_posts
+      if limit_posts > 0
         limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
         self.posts = self.posts[-limit, limit]
       end
@@ -405,6 +405,7 @@ module Jekyll
       base = File.join(self.source, dir, subfolder)
       return [] unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
+      entries.delete_if { |e| File.directory?(File.join(base, e)) }
     end
 
     # Aggregate post information
