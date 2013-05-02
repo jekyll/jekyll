@@ -90,7 +90,7 @@ problems.
 If your link has characters that need to be escaped, you need to use
 this syntax:
 
-{% highlight markdown %}
+{% highlight text %}
 ![Alt text](http://yuml.me/diagram/class/[Project]->[Task])
 {% endhighlight %}
 
