@@ -9,6 +9,7 @@ Jekyll traverses your site looking for files to process. Any files with [YAML Fr
 
 ## Global Variables
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -35,9 +36,11 @@ Jekyll traverses your site looking for files to process. Any files with [YAML Fr
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Site Variables
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -72,9 +75,11 @@ Jekyll traverses your site looking for files to process. Any files with [YAML Fr
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Page Variables
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -113,6 +118,7 @@ Jekyll traverses your site looking for files to process. Any files with [YAML Fr
     </tr>
   </tbody>
 </table>
+</div>
 
 <div class="note">
   <h5>ProTip™: Use custom front-matter</h5>
@@ -121,6 +127,7 @@ Jekyll traverses your site looking for files to process. Any files with [YAML Fr
 
 ## Paginator
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -159,6 +166,7 @@ Jekyll traverses your site looking for files to process. Any files with [YAML Fr
     </tr>
   </tbody>
 </table>
+</div>
 
 <div class="note info">
   <h5>Paginator variable availability</h5>

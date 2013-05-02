@@ -9,6 +9,7 @@ Jekyll uses the [Liquid](http://www.liquidmarkup.org/) templating language to pr
 
 ## Filters
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -136,6 +137,7 @@ Jekyll uses the [Liquid](http://www.liquidmarkup.org/) templating language to pr
     </tr>
   </tbody>
 </table>
+</div>
 
 ## Tags
 
@@ -214,4 +216,3 @@ You can also use this tag to create a link to a post in Markdown as follows:
 {% highlight html %}
 [Name of Link]({{ "{% post_url 2010-07-21-name-of-post " }}%})
 {% endhighlight %}
-
