@@ -821,6 +821,6 @@ code.option, code.flag, code.filter, code.output {
   .mobile-side-scroller {
     overflow-x: scroll;
     margin: 0 -40px;
-    padding-left: 10px;
+    padding: 0 10px;
   }
 }
