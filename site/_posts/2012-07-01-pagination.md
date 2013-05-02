@@ -36,6 +36,7 @@ page in the generated site.
 The pagination plugin exposes the `paginator` liquid object with the following
 attributes:
 
+<div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
@@ -102,6 +103,7 @@ attributes:
     </tr>
   </tbody>
 </table>
+</div>
 
 <div class="note info">
   <h5>Pagination does not support tags or categories</h5>
