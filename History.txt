@@ -73,6 +73,7 @@
     * Add SVG support to Jekyll/WEBrick. (#407, #406)
     * Prevent custom destination from causing continuous regen on watch (#528, #820, #862)
   * Site Enhancements
+    * Responsify (#860)
     * Fix spelling, punctuation and phrasal errors (#989)
     * Update quickstart instructions with `new` command (#966)
     * Add docs for page.excerpt (#956)
@@ -80,7 +81,7 @@
     * Clean up site docs to prepare for 1.0 release (#918)
     * Bring site into master branch with better preview/deploy (#709)
     * Redesigned site (#583)
-  * Development fixes
+  * Development Fixes
     * Exclude Cucumber 1.2.4, which causes tests to fail in 1.9.2 (#938)
     * Added "features:html" rake task for debugging purposes, cleaned up
       cucumber profiles (#832)
