@@ -155,10 +155,10 @@ body > footer .align-right p, body > footer img {
 
 body > footer img {
   position: relative;
-  top: 14px;
+  top: 8px;
   margin-left: 5px;
   width: 100px;
-  height: 44px;
+  height: 30px;
   opacity: .8;
   padding: 1px;
   -webkit-transition: opacity .2s;
