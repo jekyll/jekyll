@@ -820,5 +820,7 @@ code.option, code.flag, code.filter, code.output {
 @media (max-width: 768px){
   .mobile-side-scroller {
     overflow-x: scroll;
+    margin: 0 -40px;
+    padding-left: 10px;
   }
 }
