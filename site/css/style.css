@@ -716,6 +716,12 @@ code.option, code.flag, code.filter, code.output {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e6d42', endColorstr='#5c4e35',GradientType=0 );
 }
 
+@media (max-width: 568px){
+  .note {
+    margin-right: -30px;
+  }
+}
+
 @media (min-width: 768px){
   .note {
     margin-left: -50px;
