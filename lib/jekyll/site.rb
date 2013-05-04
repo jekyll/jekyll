@@ -63,7 +63,7 @@ module Jekyll
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
 
       if self.limit_posts < 0
-        raise ArgumentError, "limit_posts must not be a negative number"
+        raise ArgumentError, "limit_posts must be a non-negative number"
       end
     end
 
