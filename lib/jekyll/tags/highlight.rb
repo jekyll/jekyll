@@ -49,6 +49,8 @@ eos
       end
 
       def render_pygments(context, code)
+        require 'pygments'
+
         @options[:encoding] = 'utf-8'
 
         output = add_code_tags(
