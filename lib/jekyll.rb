@@ -24,7 +24,6 @@ require 'English'
 # 3rd party
 require 'liquid'
 require 'maruku'
-require 'pygments'
 require 'colorator'
 
 # internal requires
