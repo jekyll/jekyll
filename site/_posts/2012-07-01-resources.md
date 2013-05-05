@@ -9,10 +9,6 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 
 ### Jekyll tips & tricks, and examples
 
-- [A simple way to add draft posts](https://gist.github.com/2870636)
-
-  No plugins required.
-
 - [Tips for working with GitHub Pages Integration](https://gist.github.com/2890453)
 
   Code example reuse, and keeping documentation up to date.
