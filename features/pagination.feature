@@ -2,13 +2,13 @@ Feature: Site pagination
   In order to paginate my blog
   As a blog's user
   I want divide the posts in several pages
-  
+
   Scenario Outline: Paginate with N posts per page
     Given I have a configuration file with "paginate" set to "<num>"
     And I have a _layouts directory
     And I have an "index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
-    And I have the following post:
+    And I have the following posts:
       | title     | date      | layout  | content                                |
       | Wargames  | 3/27/2009 | default | The only winning move is not to play.  |
       | Wargames2 | 4/27/2009 | default | The only winning move is not to play2. |
@@ -32,10 +32,10 @@ Feature: Site pagination
       | paginate      | 1                              |
       | paginate_path | /blog/page-:num                |
       | permalink     | /blog/:year/:month/:day/:title |
-      And I have a _layouts directory
-      And I have an "index.html" page that contains "{{ paginator.posts.size }}"
+    And I have a blog directory
+    And I have an "blog/index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
-    And I have the following post:
+    And I have the following posts:
       | title     | date      | layout  | content                                |
       | Wargames  | 3/27/2009 | default | The only winning move is not to play.  |
       | Wargames2 | 4/27/2009 | default | The only winning move is not to play2. |
