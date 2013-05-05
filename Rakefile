@@ -111,10 +111,6 @@ namespace :site do
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
   task :publish do
-    # Failsafe. Remove this once it has been done.
-    puts "Make sure to merge #860 into gh-pages before deploying."
-    exit(1)
-
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
