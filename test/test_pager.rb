@@ -23,7 +23,8 @@ class TestPager < Test::Unit::TestCase
     end
 
     should "report that pagination is disabled" do
-      assert !Pager.pagination_enabled?(@config, 'index.html')
+      page = OpenStruct.new({ :name => 'index.html', :dir => '/' })
+      assert !Pager.pagination_enabled?(@config, page)
     end
 
   end
@@ -45,7 +46,8 @@ class TestPager < Test::Unit::TestCase
     end
 
     should "report that pagination is enabled" do
-      assert Pager.pagination_enabled?(@config, 'index.html')
+      page = OpenStruct.new({ :name => 'index.html', :dir => '/' })
+      assert Pager.pagination_enabled?(@config, page)
     end
 
     context "with 4 posts" do

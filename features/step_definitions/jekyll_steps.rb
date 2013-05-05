@@ -5,7 +5,7 @@ Before do
 end
 
 After do
-  Dir.chdir(TEST_DIR)
+  Dir.chdir(File.expand_path("..", TEST_DIR))
   FileUtils.rm_rf(TEST_DIR)
 end
 
