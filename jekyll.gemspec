@@ -118,8 +118,10 @@ Gem::Specification.new do |s|
     site/_config.yml
     site/_includes/analytics.html
     site/_includes/docs_contents.html
+    site/_includes/docs_contents_mobile.html
     site/_includes/footer.html
     site/_includes/header.html
+    site/_includes/primary-nav-items.html
     site/_includes/section_nav.html
     site/_includes/top.html
     site/_layouts/default.html
@@ -146,7 +148,7 @@ Gem::Specification.new do |s|
     site/_posts/2012-07-01-troubleshooting.md
     site/_posts/2012-07-01-usage.md
     site/_posts/2012-07-01-variables.md
-    site/css/grid.css
+    site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
     site/css/style.css
@@ -202,6 +204,7 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-01-12-no-layout.textile
     test/source/_posts/2013-03-19-not-a-post.markdown/.gitkeep
     test/source/_posts/2013-04-11-custom-excerpt.markdown
+    test/source/_posts/es/2008-11-21-nested.textile
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
     test/source/contacts.html
