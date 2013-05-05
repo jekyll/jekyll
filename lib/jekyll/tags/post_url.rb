@@ -12,12 +12,25 @@ module Jekyll
       end
 
       def ==(other)
-        path = other.name.split("/")[0...-1].join("/")
-        otherslug = path != "" ? path + '/' + other.slug : other.slug
-        slug == otherslug &&
+        slug == post_slug(other) &&
           date.year  == other.date.year &&
           date.month == other.date.month &&
           date.day   == other.date.day
+      end
+
+      private
+      # Construct the directory-aware post slug for a Jekyll::Post
+      #
+      # other - the Jekyll::Post
+      #
+      # Returns the post slug with the subdirectory (relative to _posts)
+      def post_slug(other)
+        path = other.name.split("/")[0...-1].join("/")
+        if path.nil? || path == ""
+          other.slug
+        else
+          path + '/' + other.slug
+        end
       end
     end
 

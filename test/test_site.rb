@@ -48,6 +48,7 @@ class TestSite < Test::Unit::TestCase
         Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
       end
       @site = Site.new(Jekyll.configuration)
+      @num_invalid_posts = 2
     end
 
     should "have an empty tag hash by default" do
@@ -160,20 +161,20 @@ class TestSite < Test::Unit::TestCase
 
     should "read posts" do
       @site.read_posts('')
-      posts = Dir[source_dir('_posts', '*')]
-      posts.delete_if { |post| File.directory?(post) }
-      assert_equal posts.size, @site.posts.size
+      posts = Dir[source_dir('_posts', '**', '*')]
+      posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
+      assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
 
     should "deploy payload" do
       clear_dest
       @site.process
 
-      posts = Dir[source_dir("**", "_posts", "*")]
-      posts.delete_if { |post| File.directory?(post) }
+      posts = Dir[source_dir("**", "_posts", "**", "*")]
+      posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
       categories = %w(bar baz category foo z_category publish_test win).sort
 
-      assert_equal posts.size + 1, @site.posts.size
+      assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
       assert_equal 4, @site.categories['foo'].size
     end
