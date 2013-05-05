@@ -145,6 +145,7 @@ Gem::Specification.new do |s|
     site/_posts/2012-07-01-structure.md
     site/_posts/2012-07-01-templates.md
     site/_posts/2012-07-01-troubleshooting.md
+    site/_posts/2012-07-01-upgrading.md
     site/_posts/2012-07-01-usage.md
     site/_posts/2012-07-01-variables.md
     site/css/gridism.css
