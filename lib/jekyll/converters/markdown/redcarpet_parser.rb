@@ -4,6 +4,7 @@ module Jekyll
       class RedcarpetParser
         def initialize(config)
           require 'redcarpet'
+          require 'pygments'
           @config = config
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }

@@ -1,5 +1,7 @@
+require 'logger'
+
 module Jekyll
-  module Logger
+  class Logger < Logger
     # Public: Print a jekyll message to stdout
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
