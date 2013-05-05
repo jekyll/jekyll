@@ -11,7 +11,7 @@ module Jekyll
       # Returns nothing.
       def generate(site)
         site.pages.dup.each do |page|
-          paginate(site, page) if Pager.pagination_enabled?(site.config, page.name)
+          paginate(site, page) if Pager.pagination_enabled?(site.config, page)
         end
       end
 
@@ -65,11 +65,23 @@ module Jekyll
     # Determine if pagination is enabled for a given file.
     #
     # config - The configuration Hash.
-    # file   - The String filename of the file.
+    # page   - The Jekyll::Page with which to paginate
     #
     # Returns true if pagination is enabled, false otherwise.
-    def self.pagination_enabled?(config, file)
-      file == 'index.html' && !config['paginate'].nil?
+    def self.pagination_enabled?(config, page)
+     !config['paginate'].nil? &&
+        page.name == 'index.html' &&
+        subdirectories_identical(config['paginate_path'], page.dir)
+    end
+
+    # Determine if the subdirectories of the two paths are the same relative to source
+    #
+    # paginate_path - the paginate_path configuration setting
+    # page_dir      - the directory of the Jekyll::Page
+    #
+    # Returns whether the subdirectories are the same relative to source
+    def self.subdirectories_identical(paginate_path, page_dir)
+      File.dirname(paginate_path).gsub(/\A\./, '') == page_dir.gsub(/\/\z/, '')
     end
 
     # Static: Return the pagination path of the page
@@ -80,7 +92,7 @@ module Jekyll
     # Returns the pagination path as a string
     def self.paginate_path(site_config, num_page)
       return nil if num_page.nil? || num_page <= 1
-      format = site_config['paginate_path']
+      format = File.basename(site_config['paginate_path'])
       format.sub(':num', num_page.to_s)
     end
 
