@@ -82,30 +82,30 @@ ul.posts span {
     line-height: 1.5em;
 }
 
-.site header a {
+.site .header a {
     font-weight: bold;
     text-decoration: none;
 }
 
-.site header h1.title {
+.site .header h1.title {
     display: inline-block;
     margin-bottom: 2em;
 }
 
-.site header h1.title a {
+.site .header h1.title a {
     color: #a00;
 }
 
-.site header h1.title a:hover {
+.site .header h1.title a:hover {
     color: #000;
 }
 
-.site header a.extra {
+.site .header a.extra {
     color: #aaa;
     margin-left: 1em;
 }
 
-.site header a.extra:hover {
+.site .header a.extra:hover {
     color: #000;
 }
 
@@ -113,7 +113,7 @@ ul.posts span {
     color: #aaa;
 }
 
-.site footer {
+.site .footer {
     font-size: 80%;
     color: #666;
     border-top: 4px solid #eee;
@@ -121,22 +121,22 @@ ul.posts span {
     overflow: hidden;
 }
 
-.site footer .contact {
+.site .footer .contact {
     float: left;
     margin-right: 3em;
 }
 
-.site footer .contact a {
+.site .footer .contact a {
     color: #8085C1;
 }
 
-.site footer .rss {
+.site .footer .rss {
     margin-top: 1.1em;
     margin-right: -.2em;
     float: right;
 }
 
-.site footer .rss img {
+.site .footer .rss img {
     border: 0;
 }
 
