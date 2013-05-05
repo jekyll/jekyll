@@ -228,6 +228,7 @@ module Jekyll
       # sanitize url
       @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
       @url += "/" if url =~ /\/$/
+      @url.gsub!(/\A([^\/])/, '/\1')
       @url
     end
 
