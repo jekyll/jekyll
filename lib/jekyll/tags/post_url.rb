@@ -6,13 +6,15 @@ module Jekyll
       attr_accessor :date, :slug
 
       def initialize(name)
-        who, cares, date, slug = *name.match(MATCHER)
-        @slug = slug
+        all, path, date, slug = *name.sub(/^\//, "").match(MATCHER)
+        @slug = path ? path + slug : slug
         @date = Time.parse(date)
       end
 
       def ==(other)
-        slug == other.slug &&
+        path = other.name.split("/")[0...-1].join("/")
+        otherslug = path != "" ? path + '/' + other.slug : other.slug
+        slug == otherslug &&
           date.year  == other.date.year &&
           date.month == other.date.month &&
           date.day   == other.date.day
