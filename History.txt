@@ -6,6 +6,7 @@
     * Added ability to render drafts in _drafts folder via command line (#833)
     * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
   * Minor Enhancements
+    * Use post's directory path when matching for the post_url tag (#998)
     * Loosen dependency on Pygments so it's only required when it's needed (#1015)
     * Parse strings into Time objects for date-related Liquid filters (#1014)
     * Tell the user if there is no subcommand specified (#1008)
