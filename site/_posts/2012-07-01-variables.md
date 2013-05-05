@@ -176,7 +176,8 @@ following is a reference of the available data.
       <td><p><code>page.url</code></p></td>
       <td><p>
 
-        The URL of the Post without the domain. e.g.
+        The URL of the Post without the domain, but
+        with a leading slash, e.g.
         <code>/2008/12/14/my-post.html</code>
 
       </p></td>

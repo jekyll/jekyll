@@ -71,8 +71,8 @@ class TestPost < Test::Unit::TestCase
         @post.read_yaml(@source, file)
 
         assert_equal "my_category/permalinked-post", @post.permalink
-        assert_equal "my_category", @post.dir
-        assert_equal "my_category/permalinked-post", @post.url
+        assert_equal "/my_category", @post.dir
+        assert_equal "/my_category/permalinked-post", @post.url
       end
 
       context "with CRLF linebreaks" do
