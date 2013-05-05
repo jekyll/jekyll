@@ -52,6 +52,7 @@
     * Add source and destination directory protection (#535)
     * Better YAML error message (#718)
   * Bug Fixes
+    * Paginate in subdirectories properly (#1016)
     * Ensure post and page URLs have a leading slash (#992)
     * Catch all exceptions, not just StandardError descendents (#1007)
     * Bullet-proof limit_posts option (#1004)

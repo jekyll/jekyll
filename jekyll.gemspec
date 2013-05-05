@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.0.0.rc1'
+  s.version           = '1.0.0'
   s.license           = 'MIT'
-  s.date              = '2013-04-16'
+  s.date              = '2013-05-05'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -102,14 +102,13 @@ Gem::Specification.new do |s|
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
     lib/jekyll/tags/post_url.rb
+    lib/site_template/.gitignore
     lib/site_template/_config.yml
     lib/site_template/_layouts/default.html
     lib/site_template/_layouts/post.html
     lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb
-    lib/site_template/css/screen.css
+    lib/site_template/css/main.css
     lib/site_template/css/syntax.css
-    lib/site_template/images/.gitkeep
-    lib/site_template/images/rss.png
     lib/site_template/index.html
     script/bootstrap
     site/.gitignore
