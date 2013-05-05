@@ -69,9 +69,19 @@ module Jekyll
     #
     # Returns true if pagination is enabled, false otherwise.
     def self.pagination_enabled?(config, page)
-      page.name == 'index.html' &&
-        !config['paginate'].nil? &&
-        File.dirname(config['paginate_path']) == page.dir
+     !config['paginate'].nil? &&
+        page.name == 'index.html' &&
+        subdirectories_identical(config['paginate_path'], page.dir)
+    end
+
+    # Determine if the subdirectories of the two paths are the same relative to source
+    #
+    # paginate_path - the paginate_path configuration setting
+    # page_dir      - the directory of the Jekyll::Page
+    #
+    # Returns whether the subdirectories are the same relative to source
+    def self.subdirectories_identical(paginate_path, page_dir)
+      File.dirname(paginate_path).gsub(/\A\./, '') == page_dir.gsub(/\/\z/, '')
     end
 
     # Static: Return the pagination path of the page
