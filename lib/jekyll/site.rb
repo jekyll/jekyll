@@ -27,7 +27,7 @@ module Jekyll
       self.include         = config['include']
       self.future          = config['future']
       self.show_drafts     = config['show_drafts']
-      self.limit_posts     = config['limit_posts']
+      self.limit_posts     = config['limit_posts'].to_i
       self.keep_files      = config['keep_files']
 
       self.reset
