@@ -9,20 +9,20 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 
 h2. Getting Started
 
-* "Install":http://wiki.github.com/mojombo/jekyll/install the gem
-* Read up about its "Usage":http://wiki.github.com/mojombo/jekyll/usage and "Configuration":http://wiki.github.com/mojombo/jekyll/configuration
+* "Install":http://jekyllrb.com/docs/installation/ the gem
+* Read up about its "Usage":http://jekyllrb.com/docs/usage/ and "Configuration":http://jekyllrb.com/docs/configuration/
 * Take a gander at some existing "Sites":http://wiki.github.com/mojombo/jekyll/sites
-* Fork and "Contribute":http://wiki.github.com/mojombo/jekyll/contribute your own modifications
+* Fork and "Contribute":https://github.com/mojombo/jekyll/blob/master/CONTRIBUTING.md your own modifications
 * Have questions? Post them on the "Mailing List":http://groups.google.com/group/jekyll-rb
 
 h2. Diving In
 
-* "Migrate":http://wiki.github.com/mojombo/jekyll/blog-migrations from your previous system
-* Learn how the "YAML Front Matter":http://wiki.github.com/mojombo/jekyll/yaml-front-matter works
-* Put information on your site with "Template Data":http://wiki.github.com/mojombo/jekyll/template-data
-* Customize the "Permalinks":http://wiki.github.com/mojombo/jekyll/permalinks your posts are generated with
-* Use the built-in "Liquid Extensions":http://wiki.github.com/mojombo/jekyll/liquid-extensions to make your life easier
-* Use custom "Plugins":http://wiki.github.com/mojombo/jekyll/Plugins to generate content specific to your site
+* "Migrate":http://jekyllrb.com/docs/migrations/ from your previous system
+* Learn how the "YAML Front Matter":http://jekyllrb.com/docs/frontmatter/ works
+* Put information on your site with "Variables":http://jekyllrb.com/docs/variables/
+* Customize the "Permalinks":http://jekyllrb.com/docs/permalinks/ your posts are generated with
+* Use the built-in "Liquid Extensions":http://jekyllrb.com/docs/templates/ to make your life easier
+* Use custom "Plugins":http://jekyllrb.com/docs/plugins/ to generate content specific to your site
 
 h2. Runtime Dependencies
 
