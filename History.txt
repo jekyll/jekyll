@@ -4,6 +4,7 @@
   * Bug Fixes
   * Site Enhancements
   * Development Fixes
+    * Update links on README to point to new jekyllrb.com (#1018)
 
 == 1.0.0 / 2013-05-06
   * Major Enhancements
