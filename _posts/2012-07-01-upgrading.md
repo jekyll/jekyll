@@ -85,7 +85,7 @@ Often, you'll want the ability to run a Jekyll site in multiple places, such as
 previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes that
 easier with the new `--baseurl` flag. To take advantage of this feature, first
 add the production `baseurl` to your site's `_config.yml` file. Then,
-throughout the site, simply prefix relative URLs with `{{ site.baseurl }}`.
+throughout the site, simply prefix relative URLs with `{% raw %}{{ site.baseurl }}{% endraw %}`.
 When you're ready to preview your site locally, pass along the `--baseurl` flag
 with your local baseurl (most likely `/`) to `jekyll serve` and Jekyll will
 swap in whatever you've passed along, ensuring all your links work as you'd
