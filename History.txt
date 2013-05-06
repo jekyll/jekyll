@@ -3,6 +3,7 @@
   * Minor Enhancements
   * Bug Fixes
   * Site Enhancements
+    * Remove CSS cruft, fix typos, fix HTML errors (#1028)
     * Removing manual install of Pip and Distribute (#1025)
     * Updated URL for Markdown references plugin (#1022)
   * Development Fixes
