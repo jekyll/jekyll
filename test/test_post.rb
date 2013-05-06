@@ -535,7 +535,7 @@ class TestPost < Test::Unit::TestCase
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
     
-    should "process .text as indentity under default configuration" do
+    should "process .text as identity under default configuration" do
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Identity
