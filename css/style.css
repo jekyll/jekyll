@@ -447,7 +447,6 @@ body > footer a:hover img {
   padding: 8px 12px 10px;
   border-radius: 5px;
   /*border: 1px solid #333;*/
-  background: #999;
   box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.5);
   background: #777;
 }
