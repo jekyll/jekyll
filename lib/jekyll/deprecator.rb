@@ -17,7 +17,7 @@ module Jekyll
     end
 
     def self.no_subcommand(args)
-      if args.size == 0 || args.first =~ /^--/
+      if args.size == 0 || (args.first =~ /^--/ && !%w[--help --version].include?(args.first))
         Jekyll::Logger.error "Deprecation:", "Jekyll now uses subcommands instead of just \
                             switches. Run `jekyll help' to find out more."
         exit(1)
