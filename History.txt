@@ -3,6 +3,7 @@
   * Minor Enhancements
   * Bug Fixes
   * Site Enhancements
+    * Updated URL for Markdown references plugin (#1022)
   * Development Fixes
     * Update links on README to point to new jekyllrb.com (#1018)
 
