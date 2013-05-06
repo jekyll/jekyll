@@ -3,8 +3,8 @@
 module Jekyll
   class Configuration < Hash
 
-    # Default options. Overriden by values in _config.yml.
-    # Strings rather than symbols are used for compatability with YAML.
+    # Default options. Overridden by values in _config.yml.
+    # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = {
       'source'        => Dir.pwd,
       'destination'   => File.join(Dir.pwd, '_site'),
