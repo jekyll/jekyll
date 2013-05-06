@@ -41,6 +41,6 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 
 - [Jekyll Extensions -= Pain](http://rfelix.com/2010/01/19/jekyll-extensions-minus-equal-pain/)
 
-  A way to [extend Jekyll](http://github.com/rfelix/jekyll_ext) without forking and modifying the Jekyll gem codebase and some [portable Jekyll extensions](http://wiki.github.com/rfelix/jekyll_ext/extensions) that can be reutilized and shared.
+  A way to [extend Jekyll](http://github.com/rfelix/jekyll_ext) without forking and modifying the Jekyll gem codebase and some [portable Jekyll extensions](http://wiki.github.com/rfelix/jekyll_ext/extensions) that can be reused and shared.
 
 - [Using your Rails layouts in Jekyll](http://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
