@@ -250,7 +250,7 @@ body > footer a:hover img {
   margin: 0 20px;
   padding: 5px 0;
   border-radius: 5px 5px 0 0;
-  box-shadow: box-shadow: 0 3px 10px rgba(0,0,0,.5);
+  box-shadow: 0 3px 10px rgba(0,0,0,.5);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: normal;
@@ -447,7 +447,6 @@ body > footer a:hover img {
   padding: 8px 12px 10px;
   border-radius: 5px;
   /*border: 1px solid #333;*/
-  background: #999;
   box-shadow: 0 1px 3px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.5);
   background: #777;
 }
@@ -702,7 +701,7 @@ code.option, code.flag, code.filter, code.output {
   margin-left: -30px;
   padding: 20px 20px 24px;
   padding-left: 50px;
-  border-radius:  0px 5px 5px 0px;
+  border-radius: 0 5px 5px 0;
   position: relative;
   box-shadow: 0 1px 5px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255,255,255,.2), inset 0 -1px 0 rgba(0,0,0,.3);
   background: #7e6d42;

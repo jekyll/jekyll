@@ -16,7 +16,7 @@ in the terminal.
 ### Global Configuration
 
 The table below lists the available settings for Jekyll, and the various <code
-class="option">options</code> (specifed in the configuration file) and <code
+class="option">options</code> (specified in the configuration file) and <code
 class="flag">flags</code> (specified on the command-line) that control them.
 
 <div class="mobile-side-scroller">
