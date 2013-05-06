@@ -702,7 +702,7 @@ code.option, code.flag, code.filter, code.output {
   margin-left: -30px;
   padding: 20px 20px 24px;
   padding-left: 50px;
-  border-radius:  0px 5px 5px 0px;
+  border-radius:  0 5px 5px 0;
   position: relative;
   box-shadow: 0 1px 5px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255,255,255,.2), inset 0 -1px 0 rgba(0,0,0,.3);
   background: #7e6d42;
@@ -732,7 +732,7 @@ code.option, code.flag, code.filter, code.output {
   content: "";
   position: absolute;
   top: -10px;
-  left: 0px;
+  left: 0;
   border-color: transparent #222 #222 transparent;
   border-style: solid;
   border-width: 5px;
