@@ -1,6 +1,7 @@
 ## HEAD
 ### Major Enhancements
 ### Minor Enhancements
+  * Do not force use of toc_token when using generate_tok in RDiscount (#1048)
   * Add newer `language-` class name prefix to code blocks (#1037)
   * Commander error message now preferred over process abort with incorrect args (#1040)
 
