@@ -261,7 +261,7 @@ module Jekyll
         puts "Starting the classifier..."
         lsi = Classifier::LSI.new(:auto_rebuild => false)
         $stdout.print("  Populating LSI... "); $stdout.flush
-        posts.each { |x| $stdout.print("."); $stdout.flush; lsi.add_item(x) }
+        self.site.posts.each { |x| $stdout.print("."); $stdout.flush; lsi.add_item(x) }
         $stdout.print("\n  Rebuilding LSI index... ")
         lsi.build_index
         puts ""
