@@ -1,6 +1,7 @@
 ## HEAD
 ### Major Enhancements
 ### Minor Enhancements
+  * Add newer `language-` class name prefix to code blocks (#1037)
   * Commander error message now preferred over process abort with incorrect args (#1040)
 
 ### Bug Fixes
