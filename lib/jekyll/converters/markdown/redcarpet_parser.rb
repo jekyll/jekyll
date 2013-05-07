@@ -2,28 +2,57 @@ module Jekyll
   module Converters
     class Markdown
       class RedcarpetParser
+
+        module CommonMethods
+          def add_code_tags(code, lang)
+            code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\">")
+            code = code.sub(/<\/pre>/,"</code></pre>")
+          end
+        end
+
+        module WithPygments
+          include CommonMethods
+          def block_code(code, lang)
+            require 'pygments'
+            lang = lang && lang.split.first || "text"
+            output = add_code_tags(
+              Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
+              lang
+            )
+          end
+        end
+
+        module WithoutPygments
+          require 'cgi'
+
+          include CommonMethods
+
+          def code_wrap(code)
+            "<div class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></div>"
+          end
+
+          def block_code(code, lang)
+            lang = lang && lang.split.first || "text"
+            output = add_code_tags(code_wrap(code), lang)
+          end
+        end
+
         def initialize(config)
           require 'redcarpet'
-          require 'pygments'
           @config = config
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
-          @renderer ||= Class.new(Redcarpet::Render::HTML) do
-            def block_code(code, lang)
-              lang = lang && lang.split.first || "text"
-              output = add_code_tags(
-                Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
-                lang
-              )
-            end
-
-            def add_code_tags(code, lang)
-              code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\">")
-              code = code.sub(/<\/pre>/,"</code></pre>")
-            end
-          end
-        rescue LoadError
+          @renderer ||= if @config['pygments']
+                          Class.new(Redcarpet::Render::HTML) do
+                            include WithPygments
+                          end
+                        else
+                          Class.new(Redcarpet::Render::HTML) do
+                            include WithoutPygments
+                          end
+                        end
+        rescue LoadErro
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
           STDERR.puts '  $ [sudo] gem install redcarpet'
           raise FatalException.new("Missing dependency: redcarpet")
