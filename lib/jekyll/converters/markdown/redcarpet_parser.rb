@@ -2,6 +2,33 @@ module Jekyll
   module Converters
     class Markdown
       class RedcarpetParser
+
+        module CommonMethods
+          def add_code_tags(code, lang)
+            code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\">")
+            code = code.sub(/<\/pre>/,"</code></pre>")
+          end
+        end
+
+        class WithPygments < Redcarpet::Render::HTML
+          include CommonMethods
+          def block_code(code, lang)
+            lang = lang && lang.split.first || "text"
+            output = add_code_tags(
+              Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
+              lang
+            )
+          end
+        end
+
+        class WithoutPygments < Redcarpet::Render::HTML
+          include CommonMethods
+          def block_code(code, lang)
+            lang = lang && lang.split.first || "text"
+            output = add_code_tags(code, lang)
+          end
+        end
+
         def initialize(config)
           require 'redcarpet'
           require 'pygments'
@@ -9,19 +36,12 @@ module Jekyll
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
-          @renderer ||= Class.new(Redcarpet::Render::HTML) do
-            def block_code(code, lang)
-              lang = lang && lang.split.first || "text"
-              output = add_code_tags(
-                Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
-                lang
-              )
-            end
+          @renderer ||= if @config['pygments']
+                          WithPygments
+                        else
+                          WithoutPygments
+                        end
 
-            def add_code_tags(code, lang)
-              code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\">")
-              code = code.sub(/<\/pre>/,"</code></pre>")
-            end
           end
         rescue LoadError
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
