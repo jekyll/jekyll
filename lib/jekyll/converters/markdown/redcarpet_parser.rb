@@ -23,10 +23,17 @@ module Jekyll
         end
 
         module WithoutPygments
+          require 'cgi'
+
           include CommonMethods
+
+          def code_wrap(code)
+            "<div class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></div>"
+          end
+
           def block_code(code, lang)
             lang = lang && lang.split.first || "text"
-            output = add_code_tags(code, lang)
+            output = add_code_tags(code_wrap(code), lang)
           end
         end
 
