@@ -5,7 +5,7 @@ prev_section: extras
 next_section: deployment-methods
 ---
 
-[GitHub Pages](https://pages.github.com) are public web pages for users,
+[GitHub Pages](http://pages.github.com) are public web pages for users,
 organizations, and repositories, that are freely hosted on GitHub's
 [github.io]() domain or on a custom domain name of your choice. GitHub Pages are
 powered by Jekyll behind the scenes, so in addition to supporting regular HTML
