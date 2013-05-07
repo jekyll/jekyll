@@ -3,11 +3,11 @@ require 'helper'
 class TestRedcarpet < Test::Unit::TestCase
   context "redcarpet" do
     setup do
-      config = {
+      @config = {
         'redcarpet' => { 'extensions' => ['smart', 'strikethrough', 'filter_html'] },
         'markdown' => 'redcarpet'
       }
-      @markdown = Converters::Markdown.new config
+      @markdown = Converters::Markdown.new @config
     end
 
     should "pass redcarpet options" do
@@ -28,10 +28,10 @@ class TestRedcarpet < Test::Unit::TestCase
 
     context "with pygments enabled" do
       setup do
-        @markdown.config['pygments'] = true
+        @markdown = Converters::Markdown.new @config.merge({ 'pygments' => true })
       end
       
-      should "render fenced code blocks" do
+      should "render fenced code blocks with syntax highlighting" do
         assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
           <<-EOS
 ```ruby
@@ -44,10 +44,10 @@ puts "Hello world"
 
     context "with pygments disabled" do
       setup do
-        @markdown.config['pygments'] = false
+        @markdown = Converters::Markdown.new @config.merge({ 'pygments' => false })
       end
 
-      should "render fenced code blocks" do
+      should "render fenced code blocks without syntax highlighting" do
         assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\">puts &quot;Hello world&quot;\n</code></pre></div>", @markdown.convert(
           <<-EOS
 ```ruby
