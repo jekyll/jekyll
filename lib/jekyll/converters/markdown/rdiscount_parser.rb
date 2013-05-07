@@ -15,10 +15,19 @@ module Jekyll
         def convert(content)
           rd = RDiscount.new(content, *@rdiscount_extensions)
           html = rd.to_html
-          if rd.generate_toc and html.include?(@config['rdiscount']['toc_token'])
-            html.gsub!(@config['rdiscount']['toc_token'], rd.toc_content.force_encoding('utf-8'))
+          if @config['rdiscount']['toc_token']
+            html = replace_generated_toc(rd, html, @config['rdiscount']['toc_token'])
           end
           html
+        end
+
+        private
+        def replace_generated_toc(rd, html, toc_token)
+          if rd.generate_toc && html.include?(toc_token)
+            html.gsub(toc_token, rd.toc_content.force_encoding('utf-8'))
+          else
+            html
+          end
         end
       end
     end
