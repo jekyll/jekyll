@@ -13,7 +13,7 @@ class TestRedcarpet < Test::Unit::TestCase
     should "pass redcarpet options" do
       assert_equal "<h1>Some Header</h1>", @markdown.convert('# Some Header #').strip
     end
-    
+
     should "pass redcarpet SmartyPants options" do
       assert_equal "<p>&ldquo;smart&rdquo;</p>", @markdown.convert('"smart"').strip
     end
@@ -27,13 +27,13 @@ class TestRedcarpet < Test::Unit::TestCase
     end
 
     should "render fenced code blocks" do
-      assert_equal "<div class=\"highlight\"><pre><code class=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
+      assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
         <<-EOS
 ```ruby
 puts "Hello world"
 ```
 EOS
-      ).strip  
+      ).strip
     end
   end
 end
