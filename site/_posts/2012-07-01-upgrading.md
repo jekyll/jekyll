@@ -38,7 +38,7 @@ Rather than passing individual flags via the command line, you can now pass an
 entire custom Jekyll config file. This helps to distinguish between
 environments, or lets you programmatically override user-specified defaults.
 Simply add the `--config` flag to the `jekyll` command, followed by the path
-to one or more config files (comma-deliminated, no spaces).
+to one or more config files (comma-delimited, no spaces).
 
 #### As a result, the following command line flags are now deprecated:
 

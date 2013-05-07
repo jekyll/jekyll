@@ -11,7 +11,7 @@ If you ever run into problems installing or using Jekyll, here’s a few tips th
 
 If you encounter errors during gem installation, you may need to install
 the header files for compiling extension modules for ruby 1.9.1. This
-can be done on Ubunutu or Debian by running:
+can be done on Ubuntu or Debian by running:
 
 {% highlight bash %}
 sudo apt-get install ruby1.9.1-dev
