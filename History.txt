@@ -2,6 +2,7 @@
   * Major Enhancements
   * Minor Enhancements
   * Bug Fixes
+    * Don't print deprecation warning when no arguments are specified. (#1041)
     * Add missing <div> to site template used by `new` subcommand, fixed typos in code (#1032)
   * Site Enhancements
     * Remove CSS cruft, fix typos, fix HTML errors (#1028)
