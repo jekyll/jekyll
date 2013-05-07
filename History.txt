@@ -1,6 +1,7 @@
 == HEAD
   * Major Enhancements
   * Minor Enhancements
+    * Commander error message now preferred over process abort with incorrect args (#1040)
   * Bug Fixes
     * Don't print deprecation warning when no arguments are specified. (#1041)
     * Add missing <div> to site template used by `new` subcommand, fixed typos in code (#1032)
