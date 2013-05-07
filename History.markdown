@@ -1,15 +1,13 @@
-# Changelog
-
 ## HEAD
 ### Major Enhancements
 ### Minor Enhancements
-    * Commander error message now preferred over process abort with incorrect args (#1040)
+  * Commander error message now preferred over process abort with incorrect args (#1040)
 
 ### Bug Fixes
   * Fix the index build with LSI (#1045)
   * Don't print deprecation warning when no arguments are specified. (#1041)
-  * Add missing <div> to site template used by `new` subcommand, fixed typos in code (#1032)
-  
+  * Add missing /div to site template used by `new` subcommand, fixed typos in code (#1032)
+
 ### Site Enhancements
   * Remove CSS cruft, fix typos, fix HTML errors (#1028)
   * Removing manual install of Pip and Distribute (#1025)
