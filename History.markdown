@@ -11,6 +11,7 @@
   * Add missing `</div>` to site template used by `new` subcommand, fixed typos in code (#1032)
 
 ### Site Enhancements
+  * Changed https to http in the GitHub Pages link (#1051)
   * Remove CSS cruft, fix typos, fix HTML errors (#1028)
   * Removing manual install of Pip and Distribute (#1025)
   * Updated URL for Markdown references plugin (#1022)
