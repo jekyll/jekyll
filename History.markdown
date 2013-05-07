@@ -6,6 +6,7 @@
   * Commander error message now preferred over process abort with incorrect args (#1040)
 
 ### Bug Fixes
+  * Make Redcarpet respect the pygments configuration option (#1053)
   * Fix the index build with LSI (#1045)
   * Don't print deprecation warning when no arguments are specified. (#1041)
   * Add missing `</div>` to site template used by `new` subcommand, fixed typos in code (#1032)
