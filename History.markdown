@@ -6,7 +6,7 @@
 ### Bug Fixes
   * Fix the index build with LSI (#1045)
   * Don't print deprecation warning when no arguments are specified. (#1041)
-  * Add missing /div to site template used by `new` subcommand, fixed typos in code (#1032)
+  * Add missing `</div>` to site template used by `new` subcommand, fixed typos in code (#1032)
 
 ### Site Enhancements
   * Remove CSS cruft, fix typos, fix HTML errors (#1028)
@@ -14,8 +14,8 @@
   * Updated URL for Markdown references plugin (#1022)
 
 ### Development Fixes
+  * Markdownify history file (#1027)
   * Update links on README to point to new jekyllrb.com (#1018)
-  * Changelog is now markdown for enhanced readability
 
 ## 1.0.0 / 2013-05-06
 
@@ -23,7 +23,7 @@
   * Add `jekyll new` subcommand: generate a jekyll scaffold (#764)
   * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
-  * Added ability to render drafts in _drafts folder via command line (#833)
+  * Added ability to render drafts in `_drafts` folder via command line (#833)
   * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
 
 ### Minor Enhancements
