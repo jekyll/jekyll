@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.0.0'
+  s.version           = '1.0.1'
   s.license           = 'MIT'
-  s.date              = '2013-05-06'
+  s.date              = '2013-05-08'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   s.files = %w[
     CONTRIBUTING.md
     Gemfile
-    History.txt
+    History.markdown
     LICENSE
     README.textile
     Rakefile
