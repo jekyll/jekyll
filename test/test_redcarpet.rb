@@ -26,14 +26,36 @@ class TestRedcarpet < Test::Unit::TestCase
       assert_equal "<p><strong>bad code not here</strong>: i am bad</p>", @markdown.convert('**bad code not here**: <script>i am bad</script>').strip
     end
 
-    should "render fenced code blocks" do
-      assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
-        <<-EOS
+    context "with pygments enabled" do
+      setup do
+        @markdown.config['pygments'] = true
+      end
+      
+      should "render fenced code blocks" do
+        assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
+          <<-EOS
 ```ruby
 puts "Hello world"
 ```
-EOS
-      ).strip
+          EOS
+        ).strip
+      end
+    end
+
+    context "with pygments disabled" do
+      setup do
+        @markdown.config['pygments'] = false
+      end
+
+      should "render fenced code blocks" do
+        assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\">puts &quot;Hello world&quot;\n</code></pre></div>", @markdown.convert(
+          <<-EOS
+```ruby
+puts "Hello world"
+```
+          EOS
+        ).strip
+      end
     end
   end
 end

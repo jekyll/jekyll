@@ -10,9 +10,10 @@ module Jekyll
           end
         end
 
-        class WithPygments < Redcarpet::Render::HTML
+        module WithPygments
           include CommonMethods
           def block_code(code, lang)
+            require 'pygments'
             lang = lang && lang.split.first || "text"
             output = add_code_tags(
               Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
@@ -21,7 +22,7 @@ module Jekyll
           end
         end
 
-        class WithoutPygments < Redcarpet::Render::HTML
+        module WithoutPygments
           include CommonMethods
           def block_code(code, lang)
             lang = lang && lang.split.first || "text"
@@ -31,19 +32,20 @@ module Jekyll
 
         def initialize(config)
           require 'redcarpet'
-          require 'pygments'
           @config = config
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
           @renderer ||= if @config['pygments']
-                          WithPygments
+                          Class.new(Redcarpet::Render::HTML) do
+                            include WithPygments
+                          end
                         else
-                          WithoutPygments
+                          Class.new(Redcarpet::Render::HTML) do
+                            include WithoutPygments
+                          end
                         end
-
-          end
-        rescue LoadError
+        rescue LoadErro
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
           STDERR.puts '  $ [sudo] gem install redcarpet'
           raise FatalException.new("Missing dependency: redcarpet")
