@@ -1,5 +1,3 @@
-require 'jekyll/related_posts'
-
 module Jekyll
   class Post
     include Comparable
