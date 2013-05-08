@@ -2,6 +2,8 @@
 ### Major Enhancements
 ### Minor Enhancements
 ### Bug Fixes
+  * Catching that Redcarpet gem isn't installed (#1059)
+
 ### Site Enhancements
 ### Development Fixes
 

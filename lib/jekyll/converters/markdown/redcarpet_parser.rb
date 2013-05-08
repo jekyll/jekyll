@@ -52,7 +52,7 @@ module Jekyll
                             include WithoutPygments
                           end
                         end
-        rescue LoadErro
+        rescue LoadError
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
           STDERR.puts '  $ [sudo] gem install redcarpet'
           raise FatalException.new("Missing dependency: redcarpet")
