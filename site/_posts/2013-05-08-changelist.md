@@ -1,11 +1,8 @@
-## HEAD
-### Major Enhancements
-### Minor Enhancements
-### Bug Fixes
-- Catching that Redcarpet gem isn't installed (#1059)
-
-### Site Enhancements
-### Development Fixes
+---
+layout: docs
+title: Changelist
+prev_section: upgrading
+---
 
 ## 1.0.1 / 2013-05-08
 
