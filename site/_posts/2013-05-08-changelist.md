@@ -1,8 +1,11 @@
----
-layout: docs
-title: Changelist
-prev_section: upgrading
----
+## HEAD
+### Major Enhancements
+### Minor Enhancements
+### Bug Fixes
+- Catching that Redcarpet gem isn't installed (#1059)
+
+### Site Enhancements
+### Development Fixes
 
 ## 1.0.1 / 2013-05-08
 
@@ -77,7 +80,7 @@ prev_section: upgrading
 - Truncate post slugs when importing from Tumblr (#496)
 - Add glob support to include, exclude option (#743)
 - Layout of Page or Post defaults to 'page' or 'post', respectively (#580)
-  REPEALED by (#977)
+    REPEALED by (#977)
 - "Keep files" feature (#685)
 - Output full path & name for files that don't parse (#745)
 - Add source and destination directory protection (#535)
@@ -104,7 +107,7 @@ prev_section: upgrading
 - Fix broken post_url with posts with a time in their YAML Front-Matter (#831)
 - Look for plugins under the source directory (#654)
 - Tumblr Migrator: finds _posts dir correctly, fixes truncation of long
-    post names (#775)
+      post names (#775)
 - Force Categories to be Strings (#767)
 - Safe YAML plugin to prevent vulnerability (#777)
 - Add SVG support to Jekyll/WEBrick. (#407, #406)
@@ -123,13 +126,13 @@ prev_section: upgrading
 ### Development Fixes
 - Exclude Cucumber 1.2.4, which causes tests to fail in 1.9.2 (#938)
 - Added "features:html" rake task for debugging purposes, cleaned up
-    cucumber profiles (#832)
+      cucumber profiles (#832)
 - Explicitly require HTTPS rubygems source in Gemfile (#826)
 - Changed Ruby version for development to 1.9.3-p374 from p362 (#801)
 - Including a link to the GitHub Ruby style guide in CONTRIBUTING.md (#806)
 - Added script/bootstrap (#776)
 - Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version
-    of greater than 1.9 (#771)
+      of greater than 1.9 (#771)
 - Switch to Simplecov for coverage report (#765)
 
 ## 0.12.1 / 2013-02-19
@@ -237,15 +240,15 @@ prev_section: upgrading
 - Proper plugin system (#19, #100)
 - Add safe mode so unsafe converters/generators can be added
 - Maruku is now the only processor dependency installed by default.
-    Other processors will be lazy-loaded when necessary (and prompt the
-    user to install them when necessary) (#57)
+      Other processors will be lazy-loaded when necessary (and prompt the
+      user to install them when necessary) (#57)
 
 ### Minor Enhancements
 - Inclusion/exclusion of future dated posts (#59)
 - Generation for a specific time (#59)
 - Allocate site.time on render not per site_payload invocation (#59)
 - Pages now present in the site payload and can be used through the
-    site.pages and site.html_pages variables
+      site.pages and site.html_pages variables
 - Generate phase added to site#process and pagination is now a generator
 - Switch to RakeGem for build/test process
 - Only regenerate static files when they have changed (#142)
@@ -268,7 +271,7 @@ prev_section: upgrading
 - Fix pagination to adhere to read/render/write paradigm
 - Test Enhancement
 - cucumber features no longer use site.posts.first where a better
-    alternative is available
+      alternative is available
 
 ## 0.5.6 / 2010-01-08
 - Bug Fixes
@@ -288,7 +291,7 @@ prev_section: upgrading
 
 ## NOTE
 - After this point I will no longer be giving credit in the history;
-  that is what the commit log is for.
+    that is what the commit log is for.
 
 ## 0.5.4 / 2009-08-23
 - Bug Fixes
@@ -297,77 +300,77 @@ prev_section: upgrading
 ## 0.5.3 / 2009-07-14
 - Bug Fixes
 - Solving the permalink bug where non-html files wouldn't work
-    [github.com/jeffrydegrande]
+      [github.com/jeffrydegrande]
 
 ## 0.5.2 / 2009-06-24
 - Enhancements
 - Added --paginate option to the executable along with a paginator object
-    for the payload [github.com/calavera]
-- Upgraded RedCloth to 4.2.1, which makes `<notextile>` tags work once
-    again.
+      for the payload [github.com/calavera]
+- Upgraded RedCloth to 4.2.1, which makes <notextile> tags work once
+      again.
 - Configuration options set in config.yml are now available through the
-    site payload [github.com/vilcans]
+      site payload [github.com/vilcans]
 - Posts can now have an empty YAML front matter or none at all
-    [github.com/bahuvrihi]
+      [github.com/bahuvrihi]
 - Bug Fixes
 - Fixing Ruby 1.9 issue that requires to_s on the err object
-    [github.com/Chrononaut]
+      [github.com/Chrononaut]
 - Fixes for pagination and ordering posts on the same day [github.com/ujh]
 - Made pages respect permalinks style and permalinks in yml front matter
-    [github.com/eugenebolshakov]
+      [github.com/eugenebolshakov]
 - Index.html file should always have index.html permalink
-    [github.com/eugenebolshakov]
+      [github.com/eugenebolshakov]
 - Added trailing slash to pretty permalink style so Apache is happy
-    [github.com/eugenebolshakov]
+      [github.com/eugenebolshakov]
 - Bad markdown processor in config fails sooner and with better message
-    [github.com/gcnovus]
+      [github.com/gcnovus]
 - Allow CRLFs in yaml frontmatter [github.com/juretta]
 - Added Date#xmlschema for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06
 ### Major Enhancements
 - Next/previous posts in site payload [github.com/pantulis,
-    github.com/tomo]
+      github.com/tomo]
 - Permalink templating system
 - Moved most of the README out to the GitHub wiki
 - Exclude option in configuration so specified files won't be brought over
-    with generated site [github.com/duritong]
+      with generated site [github.com/duritong]
 - Bug Fixes
 - Making sure config.yaml references are all gone, using only config.yml
 - Fixed syntax highlighting breaking for UTF-8 code [github.com/henrik]
 - Worked around RDiscount bug that prevents Markdown from getting parsed
-    after highlight [github.com/henrik]
+      after highlight [github.com/henrik]
 - CGI escaped post titles [github.com/Chrononaut]
 
 ## 0.5.0 / 2009-04-07
 ### Minor Enhancements
 - Ability to set post categories via YAML [github.com/qrush]
 - Ability to set prevent a post from publishing via YAML
-    [github.com/qrush]
+      [github.com/qrush]
 - Add textilize filter [github.com/willcodeforfoo]
 - Add 'pretty' permalink style for wordpress-like urls
-    [github.com/dysinger]
+      [github.com/dysinger]
 - Made it possible to enter categories from YAML as an array
-    [github.com/Chrononaut]
+      [github.com/Chrononaut]
 - Ignore Emacs autosave files [github.com/Chrononaut]
 - Bug Fixes
 - Use block syntax of popen4 to ensure that subprocesses are properly
-    disposed [github.com/jqr]
+      disposed [github.com/jqr]
 - Close open4 streams to prevent zombies [github.com/rtomayko]
 - Only query required fields from the WP Database [github.com/ariejan]
 - Prevent _posts from being copied to the destination directory
-    [github.com/bdimcheff]
+      [github.com/bdimcheff]
 - Refactors
 - Factored the filtering code into a method [github.com/Chrononaut]
 - Fix tests and convert to Shoulda [github.com/qrush,
-    github.com/technicalpickles]
+      github.com/technicalpickles]
 - Add Cucumber acceptance test suite [github.com/qrush,
-    github.com/technicalpickles]
+      github.com/technicalpickles]
 
 ## 0.4.1
 ### Minor Enhancements
 - Changed date format on wordpress converter (zeropadding)
-    [github.com/dysinger]
+      [github.com/dysinger]
 - Bug Fixes
 - Add jekyll binary as executable to gemspec [github.com/dysinger]
 
@@ -382,13 +385,13 @@ prev_section: upgrading
 - Add a converter for textpattern [github.com/PerfectlyNormal]
 - Add a working Mephisto / MySQL converter [github.com/ivey]
 - Allowing .htaccess files to be copied over into the generated site
-    [github.com/briandoll]
+      [github.com/briandoll]
 - Add option to not put file date in permalink URL [github.com/mreid]
 - Add line number capabilities to highlight blocks [github.com/jcon]
 - Bug Fixes
 - Fix permalink behavior [github.com/cavalle]
 - Fixed an issue with pygments, markdown, and newlines
-    [github.com/zpinter]
+      [github.com/zpinter]
 - Ampersands need to be escaped [github.com/pufuwozu, github.com/ap]
 - Test and fix the site.categories hash [github.com/zzot]
 - Fix site payload available to files [github.com/matrix9180]
@@ -396,21 +399,21 @@ prev_section: upgrading
 ## 0.3.0 / 2008-12-24
 ### Major Enhancements
 - Added --server option to start a simple WEBrick server on destination
-    directory [github.com/johnreilly and github.com/mchung]
+      directory [github.com/johnreilly and github.com/mchung]
 
 ### Minor Enhancements
 - Added post categories based on directories containing _posts
-    [github.com/mreid]
+      [github.com/mreid]
 - Added post topics based on directories underneath _posts
 - Added new date filter that shows the full month name [github.com/mreid]
 - Merge Post's YAML front matter into its to_liquid payload
-    [github.com/remi]
+      [github.com/remi]
 - Restrict includes to regular files underneath _includes
 - Bug Fixes
 - Change YAML delimiter matcher so as to not chew up 2nd level markdown
-    headers [github.com/mreid]
+      headers [github.com/mreid]
 - Fix bug that meant page data (such as the date) was not available in
-    templates [github.com/mreid]
+      templates [github.com/mreid]
 - Properly reject directories in _layouts
 
 ## 0.2.1 / 2008-12-15
@@ -436,10 +439,10 @@ prev_section: upgrading
 
 ### Minor Enhancements
 - Output informative message if RDiscount is not available
-    [github.com/JackDanger]
+      [github.com/JackDanger]
 - Bug Fixes
 - Prevent Jekyll from picking up the output directory as a source
-    [github.com/JackDanger]
+      [github.com/JackDanger]
 - Skip related_posts when there is only one post [github.com/JackDanger]
 
 ## 0.1.4 / 2008-12-08
@@ -460,7 +463,7 @@ prev_section: upgrading
 - Add a real "related posts" implementation using Classifier
 - Command Line Changes
 - Allow cli to be called with 0, 1, or 2 args intuiting dir paths
-    if they are omitted
+      if they are omitted
 
 ## 0.1.1 / 2008-11-22
 - Minor Additions

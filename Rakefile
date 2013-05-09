@@ -24,6 +24,10 @@ def date
   Date.today.to_s
 end
 
+def file_date
+  Date.today.strftime("%F")
+end
+
 def rubyforge_project
   name
 end
@@ -142,6 +146,22 @@ namespace :site do
       sh "git push origin gh-pages"
     end
     puts 'Done.'
+  end
+
+  desc "Move the changelist over to _posts directory and update its formatting."
+  task :changelist do
+    # First lets go ahead and format the file correctly (mainly bullet points)
+    if File.exist?("History.markdown")
+      file_time = File.read("History.markdown")
+      replaced = file_time.gsub(/\s{2}\*{1}/, "-")
+    # Now we need to copy the file into the _posts directory with the proper date
+      Dir.chdir('site/_posts') do
+        sh "rm -rf *-changelist.md"
+        File.open("#{file_date}-changelist.md", "w") {|file| file.write(replaced)}
+      end
+    else
+      puts "Uh Oh!"
+    end
   end
 end
 
