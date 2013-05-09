@@ -2,6 +2,7 @@
 layout: docs
 title: Upgrading
 prev_section: resources
+next_section: changelist
 ---
 
 Upgrading from an older version of Jekyll? A few things have changed in 1.0.0
