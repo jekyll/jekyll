@@ -33,6 +33,7 @@ class TestRelatedPosts < Test::Unit::TestCase
       require 'classifier'
       any_instance_of(::Classifier::LSI) do |c|
         stub(c).find_related { @site.posts[-1..-9] }
+        stub(c).build_index
       end
       assert_equal @site.posts[-1..-9], Jekyll::RelatedPosts.new(@site.posts.last).build
     end
