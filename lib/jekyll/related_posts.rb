@@ -24,26 +24,25 @@ module Jekyll
       end
     end
 
+
     def build_index
       self.class.lsi ||= begin
-        puts "Starting the classifier..."
         lsi = Classifier::LSI.new(:auto_rebuild => false)
-        display("  Populating LSI... ")
+        display("\n  Populating LSI... ")
 
         self.site.posts.each do |x|
-          display(".")
           lsi.add_item(x)
         end
 
-        display("\n  Rebuilding LSI index... ")
+        display("\nRebuilding index... ")
         lsi.build_index
-        puts ""
+        display("")
         lsi
       end
     end
 
     def lsi_related_posts
-      lsi.find_related(post.content, 11) - [self.post]
+      self.class.lsi.find_related(post.content, 11) - [self.post]
     end
 
     def most_recent_posts
@@ -54,6 +53,5 @@ module Jekyll
       $stdout.print(output)
       $stdout.flush
     end
-
   end
 end
