@@ -1,6 +1,8 @@
 ## HEAD
 ### Major Enhancements
 ### Minor Enhancements
+  * Update Kramdown version to 1.0.2 (#1067)
+
 ### Bug Fixes
   * Catching that Redcarpet gem isn't installed (#1059)
 
