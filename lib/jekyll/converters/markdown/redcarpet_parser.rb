@@ -5,7 +5,7 @@ module Jekyll
 
         module CommonMethods
           def add_code_tags(code, lang)
-            code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\">")
+            code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\" data-lang=\"#{lang}\">")
             code = code.sub(/<\/pre>/,"</code></pre>")
           end
         end
