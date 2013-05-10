@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Pages</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/gridism.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pygments.css" />
+  <link rel="icon" type="image/x-icon" href="/favicon.png" />
+  <script src="/js/modernizr-2.5.3.min.js"></script>
+</head>
+
+
+<body class="wrap">
+  <header>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span>Jekyll</span>
+          <img src="/img/logo-2x.png" width="249px" height="115px" alt="">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+    <optgroup label="Getting started">
+      <option value="/docs/home">Welcome</option>
+      <option value="/docs/installation">Installation</option>
+      <option value="/docs/usage">Basic Usage</option>
+      <option value="/docs/structure">Directory structure</option>
+      <option value="/docs/configuration">Configuration</option>
+    </optgroup>
+    <optgroup label="Your Content">
+      <option value="/docs/frontmatter">Front-matter</option>
+      <option value="/docs/posts">Writing posts</option>
+      <option value="/docs/pages">Creating pages</option>
+      <option value="/docs/variables">Variables</option>
+      <option value="/docs/migrations">Blog migrations</option>
+    </optgroup>
+    <optgroup label="Customization">
+      <option value="/docs/templates">Templates</option>
+      <option value="/docs/permalinks">Permalinks</option>
+      <option value="/docs/pagination">Pagination</option>
+      <option value="/docs/plugins">Plugins</option>
+      <option value="/docs/extras">Extras</option>
+    </optgroup>
+    <optgroup label="Deployment">
+      <option value="/docs/github-pages">GitHub Pages</option>
+      <option value="/docs/deployment-methods">Other methods</option>
+    </optgroup>
+    <optgroup label="Miscellaneous">
+      <option value="/docs/contributing">Contributing</option>
+      <option value="/docs/troubleshooting">Troubleshooting</option>
+      <option value="/docs/sites">Sites using Jekyll</option>
+      <option value="/docs/resources">Resources</option>
+    </optgroup>
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>GitHub Pages</h1>
+          <p><a href='http://pages.github.com'>GitHub Pages</a> are public web pages for users, organizations, and repositories, that are freely hosted on GitHub&#8217;s <a href=''>github.io</a> domain or on a custom domain name of your choice. GitHub Pages are powered by Jekyll behind the scenes, so in addition to supporting regular HTML content, they’re also a great way to host your Jekyll-powered website for free.</p>
+
+<h2 id='deploying_jekyll_to_github_pages'>Deploying Jekyll to GitHub Pages</h2>
+
+<p>GitHub Pages work by looking at certain branches of repositories on GitHub. There are two basic types available: user/organization pages and project pages. The way to deploy these two types of sites are nearly identical, except for a few minor details.</p>
+
+<h3 id='user_and_organization_pages'>User and Organization Pages</h3>
+
+<p>User and organization pages live in a special GitHub repository dedicated to only the GitHub Pages files. This repository must be named after the account name. For example, <a href='https://github.com/mojombo/mojombo.github.io'>@mojombo’s user page repository</a> has the name <code>mojombo.github.io</code>.</p>
+
+<p>Content from the <code>master</code> branch of your repository will be used to build and publish the GitHub Pages site, so make sure your Jekyll site is stored there.</p>
+<div class='note info'>
+  <h5>Custom domains do not affect repository names</h5>
+  <p>
+    GitHub Pages are initially configured to live under the
+    <code>username.github.io</code> subdomain, which is why repositories must
+    be named this way <strong>even if a custom domain is being used</strong>.
+  </p>
+</div>
+<h3 id='project_pages'>Project Pages</h3>
+
+<p>Unlike user and organization Pages, Project Pages are kept in the same repository as the project they are for, except that the website content is stored in a specially named <code>gh-pages</code> branch. The content of this branch will be rendered using Jekyll, and the output will become available under a subpath of your user pages subdomain, such as <code>username.github.io/project</code> (unless a custom domain is specified—see below).</p>
+
+<p>The Jekyll project repository itself is a perfect example of this branch structure—the <a href='https://github.com/mojombo/jekyll'>master branch</a> contains the actual software project for Jekyll, however the Jekyll website (that you’re looking at right now) is contained in the <a href='https://github.com/mojombo/jekyll/tree/gh-pages'>gh-pages branch</a> of the same repository.</p>
+<div class='note'>
+  <h5>GitHub Pages Documentation, Help, and Support</h5>
+  <p>
+    For more information about what you can do with GitHub Pages, as well as for
+    troubleshooting guides, you should check out <a href='https://help.github.com/categories/20/articles'>GitHub’s Pages Help
+    section</a>. If all else fails, you should contact <a href='https://github.com/contact'>GitHub Support</a>.
+  </p>
+</div>
+          <div class="section-nav">
+  <div class="left align-right">
+    
+      <a href="/docs/extras" class="prev">
+        Back
+      </a>
+    
+  </div>
+  <div class="right align-left">
+    
+      <a href="/docs/deployment-methods" class="next">
+        Next
+      </a>
+    
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    <h4>Getting Started</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/home">Welcome</a>
+      </li>
+      <li class="">
+        <a href="/docs/installation">Installation</a>
+      </li>
+      <li class="">
+        <a href="/docs/usage">Basic Usage</a>
+      </li>
+      <li class="">
+        <a href="/docs/structure">Directory structure</a>
+      </li>
+      <li class="">
+        <a href="/docs/configuration">Configuration</a>
+      </li>
+    </ul>
+    <h4>Your Content</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/frontmatter">Front-matter</a>
+      </li>
+      <li class="">
+        <a href="/docs/posts">Writing posts</a>
+      </li>
+      <li class="">
+        <a href="/docs/pages">Creating pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/variables">Variables</a>
+      </li>
+      <li class="">
+        <a href="/docs/migrations">Blog migrations</a>
+      </li>
+    </ul>
+    <h4>Customization</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/templates">Templates</a>
+      </li>
+      <li class="">
+        <a href="/docs/permalinks">Permalinks</a>
+      </li>
+      <li class="">
+        <a href="/docs/pagination">Pagination</a>
+      </li>
+      <li class="">
+        <a href="/docs/plugins">Plugins</a>
+      </li>
+      <li class="">
+        <a href="/docs/extras">Extras</a>
+      </li>
+    </ul>
+    <h4>Deployment</h4>
+    <ul>
+      <li class="current">
+        <a href="/docs/github-pages">GitHub Pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/deployment-methods">Other methods</a>
+      </li>
+    </ul>
+    <h4>Miscellaneous</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/contributing">Contributing</a>
+      </li>
+      <li class="">
+        <a href="/docs/troubleshooting">Troubleshooting</a>
+      </li>
+      <li class="">
+        <a href="/docs/sites">Sites using Jekyll</a>
+      </li>
+      <li class="">
+        <a href="/docs/resources">Resources</a>
+      </li>
+      <li class="">
+        <a href="/docs/upgrading">Upgrading</a>
+      </li>
+    </ul>
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>By <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, and many more <a href="https://github.com/mojombo/jekyll/graphs/contributors">awesome&nbsp;contributors</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+  
+  <!-- Gauges (http://gaug.es/) -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '503c5af6613f5d0f19000027');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

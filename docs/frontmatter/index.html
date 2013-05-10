@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Front-matter</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/gridism.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pygments.css" />
+  <link rel="icon" type="image/x-icon" href="/favicon.png" />
+  <script src="/js/modernizr-2.5.3.min.js"></script>
+</head>
+
+
+<body class="wrap">
+  <header>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span>Jekyll</span>
+          <img src="/img/logo-2x.png" width="249px" height="115px" alt="">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+    <optgroup label="Getting started">
+      <option value="/docs/home">Welcome</option>
+      <option value="/docs/installation">Installation</option>
+      <option value="/docs/usage">Basic Usage</option>
+      <option value="/docs/structure">Directory structure</option>
+      <option value="/docs/configuration">Configuration</option>
+    </optgroup>
+    <optgroup label="Your Content">
+      <option value="/docs/frontmatter">Front-matter</option>
+      <option value="/docs/posts">Writing posts</option>
+      <option value="/docs/pages">Creating pages</option>
+      <option value="/docs/variables">Variables</option>
+      <option value="/docs/migrations">Blog migrations</option>
+    </optgroup>
+    <optgroup label="Customization">
+      <option value="/docs/templates">Templates</option>
+      <option value="/docs/permalinks">Permalinks</option>
+      <option value="/docs/pagination">Pagination</option>
+      <option value="/docs/plugins">Plugins</option>
+      <option value="/docs/extras">Extras</option>
+    </optgroup>
+    <optgroup label="Deployment">
+      <option value="/docs/github-pages">GitHub Pages</option>
+      <option value="/docs/deployment-methods">Other methods</option>
+    </optgroup>
+    <optgroup label="Miscellaneous">
+      <option value="/docs/contributing">Contributing</option>
+      <option value="/docs/troubleshooting">Troubleshooting</option>
+      <option value="/docs/sites">Sites using Jekyll</option>
+      <option value="/docs/resources">Resources</option>
+    </optgroup>
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Front-matter</h1>
+          <p>The front-matter is where Jekyll starts to get really cool. Any file that contains a <a href='http://yaml.org/'>YAML</a> front matter block will be processed by Jekyll as a special file. The front matter must be the first thing in the file and must take the form of valid YAML set between triple-dashed lines. Here is a basic example:</p>
+<div class='highlight'><pre><code class='yaml'><span class='nn'>---</span>
+<span class='l-Scalar-Plain'>layout</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>post</span>
+<span class='l-Scalar-Plain'>title</span><span class='p-Indicator'>:</span> <span class='l-Scalar-Plain'>Blogging Like a Hacker</span>
+<span class='nn'>---</span>
+</code></pre></div>
+<p>Between these triple-dashed lines, you can set predefined variables (see below for a reference) or even create custom ones of your own. These variables will then be available to you to access using Liquid tags both further down in the file and also in any layouts or includes that the page or post in question relies on.</p>
+<div class='note warning'>
+  <h5>UTF-8 Character Encoding Warning</h5>
+  <p>
+    If you use UTF-8 encoding, make sure that no <code>BOM</code> header
+    characters exist in your files or very, very bad things will happen to
+    Jekyll. This is especially relevant if you’re running Jekyll on Windows.
+  </p>
+</div>
+<h2 id='predefined_global_variables'>Predefined Global Variables</h2>
+
+<p>There are a number of predefined global variables that you can set in the front-matter of a page or post.</p>
+<div class='mobile-side-scroller'>
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>layout</code></p>
+      </td>
+      <td>
+        <p>
+
+          If set, this specifies the layout file to use. Use the layout file
+          name without the file extension. Layout files must be placed in the
+          <code>_layouts</code> directory.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>permalink</code></p>
+      </td>
+      <td>
+        <p>
+
+          If you need your processed blog post URLs to be something other than
+          the default <code>/year/month/day/title.html</code> then you can set
+          this variable and it will be used as the final URL.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>published</code></p>
+      </td>
+      <td>
+        <p>
+          Set to false if you don’t want a specific post to show up when the
+          site is generated.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p style='margin-bottom: 5px;'><code>category</code></p>
+        <p><code>categories</code></p>
+      </td>
+      <td>
+        <p>
+
+          Instead of placing posts inside of folders, you can specify one or
+          more categories that the post belongs to. When the site is generated
+          the post will act as though it had been set with these categories
+          normally. Categories (plural key) can be specified as a <a href='http://en.wikipedia.org/wiki/YAML#Lists'>YAML list</a> or a
+          space-separated string.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>tags</code></p>
+      </td>
+      <td>
+        <p>
+
+          Similar to categories, one or multiple tags can be added to a post.
+          Also like categories, tags can be specified as a YAML list or a space-
+          separated string.
+
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h2 id='custom_variables'>Custom Variables</h2>
+
+<p>Any variables in the front matter that are not predefined are mixed into the data that is sent to the Liquid templating engine during the conversion. For instance, if you set a title, you can use that in your layout to set the page title:</p>
+<div class='highlight'><pre><code class='html'><span class='cp'>&lt;!DOCTYPE HTML&gt;</span>
+<span class='nt'>&lt;html&gt;</span>
+  <span class='nt'>&lt;head&gt;</span>
+    <span class='nt'>&lt;title&gt;</span>{{ page.title }}<span class='nt'>&lt;/title&gt;</span>
+  <span class='nt'>&lt;/head&gt;</span>
+  <span class='nt'>&lt;body&gt;</span>
+    ...
+</code></pre></div>
+<h2 id='predefined_variables_for_posts'>Predefined Variables for Posts</h2>
+
+<p>These are available out-of-the-box to be used in the front-matter for a post.</p>
+<div class='mobile-side-scroller'>
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>date</code></p>
+      </td>
+      <td>
+        <p>
+          A date here overrides the date from the name of the post. This can be
+          used to ensure correct sorting of posts.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+          <div class="section-nav">
+  <div class="left align-right">
+    
+      <a href="/docs/configuration" class="prev">
+        Back
+      </a>
+    
+  </div>
+  <div class="right align-left">
+    
+      <a href="/docs/posts" class="next">
+        Next
+      </a>
+    
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    <h4>Getting Started</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/home">Welcome</a>
+      </li>
+      <li class="">
+        <a href="/docs/installation">Installation</a>
+      </li>
+      <li class="">
+        <a href="/docs/usage">Basic Usage</a>
+      </li>
+      <li class="">
+        <a href="/docs/structure">Directory structure</a>
+      </li>
+      <li class="">
+        <a href="/docs/configuration">Configuration</a>
+      </li>
+    </ul>
+    <h4>Your Content</h4>
+    <ul>
+      <li class="current">
+        <a href="/docs/frontmatter">Front-matter</a>
+      </li>
+      <li class="">
+        <a href="/docs/posts">Writing posts</a>
+      </li>
+      <li class="">
+        <a href="/docs/pages">Creating pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/variables">Variables</a>
+      </li>
+      <li class="">
+        <a href="/docs/migrations">Blog migrations</a>
+      </li>
+    </ul>
+    <h4>Customization</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/templates">Templates</a>
+      </li>
+      <li class="">
+        <a href="/docs/permalinks">Permalinks</a>
+      </li>
+      <li class="">
+        <a href="/docs/pagination">Pagination</a>
+      </li>
+      <li class="">
+        <a href="/docs/plugins">Plugins</a>
+      </li>
+      <li class="">
+        <a href="/docs/extras">Extras</a>
+      </li>
+    </ul>
+    <h4>Deployment</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/github-pages">GitHub Pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/deployment-methods">Other methods</a>
+      </li>
+    </ul>
+    <h4>Miscellaneous</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/contributing">Contributing</a>
+      </li>
+      <li class="">
+        <a href="/docs/troubleshooting">Troubleshooting</a>
+      </li>
+      <li class="">
+        <a href="/docs/sites">Sites using Jekyll</a>
+      </li>
+      <li class="">
+        <a href="/docs/resources">Resources</a>
+      </li>
+      <li class="">
+        <a href="/docs/upgrading">Upgrading</a>
+      </li>
+    </ul>
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>By <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, and many more <a href="https://github.com/mojombo/jekyll/graphs/contributors">awesome&nbsp;contributors</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+  
+  <!-- Gauges (http://gaug.es/) -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '503c5af6613f5d0f19000027');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

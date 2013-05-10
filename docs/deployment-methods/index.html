@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Deployment methods</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/gridism.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pygments.css" />
+  <link rel="icon" type="image/x-icon" href="/favicon.png" />
+  <script src="/js/modernizr-2.5.3.min.js"></script>
+</head>
+
+
+<body class="wrap">
+  <header>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span>Jekyll</span>
+          <img src="/img/logo-2x.png" width="249px" height="115px" alt="">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+    <optgroup label="Getting started">
+      <option value="/docs/home">Welcome</option>
+      <option value="/docs/installation">Installation</option>
+      <option value="/docs/usage">Basic Usage</option>
+      <option value="/docs/structure">Directory structure</option>
+      <option value="/docs/configuration">Configuration</option>
+    </optgroup>
+    <optgroup label="Your Content">
+      <option value="/docs/frontmatter">Front-matter</option>
+      <option value="/docs/posts">Writing posts</option>
+      <option value="/docs/pages">Creating pages</option>
+      <option value="/docs/variables">Variables</option>
+      <option value="/docs/migrations">Blog migrations</option>
+    </optgroup>
+    <optgroup label="Customization">
+      <option value="/docs/templates">Templates</option>
+      <option value="/docs/permalinks">Permalinks</option>
+      <option value="/docs/pagination">Pagination</option>
+      <option value="/docs/plugins">Plugins</option>
+      <option value="/docs/extras">Extras</option>
+    </optgroup>
+    <optgroup label="Deployment">
+      <option value="/docs/github-pages">GitHub Pages</option>
+      <option value="/docs/deployment-methods">Other methods</option>
+    </optgroup>
+    <optgroup label="Miscellaneous">
+      <option value="/docs/contributing">Contributing</option>
+      <option value="/docs/troubleshooting">Troubleshooting</option>
+      <option value="/docs/sites">Sites using Jekyll</option>
+      <option value="/docs/resources">Resources</option>
+    </optgroup>
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Deployment methods</h1>
+          <p>Sites built using Jekyll can be deployed in a large number of ways due to the static nature of the generated output. A few of the most common deployment techniques are described below.</p>
+
+<h2 id='web_hosting_providers_ftp'>Web hosting providers (FTP)</h2>
+
+<p>Just about any traditional web hosting provider will let you upload files to their servers over FTP. To upload a Jekyll site to a web host using FTP, simply run the <code>jekyll</code> command and copy the generated <code>_site</code> folder to the root folder of your hosting account. This is most likely to be the <code>httpdocs</code> or <code>public_html</code> folder on most hosting providers.</p>
+
+<h3 id='ftp_using_glynn'>FTP using Glynn</h3>
+
+<p>There is a project called <a href='https://github.com/dmathieu/glynn'>Glynn</a>, which lets you easily generate your Jekyll powered website’s static files and send them to your host through FTP.</p>
+
+<h2 id='selfmanaged_web_server'>Self-managed web server</h2>
+
+<p>If you have direct access yourself to the deployment web server yourself, the process is essentially the same, except you might have other methods available to you (such as <code>scp</code>, or even direct filesystem access) for transferring the files. Just remember to make sure the contents of the generated <code>_site</code> folder get placed in the appropriate web root directory for your web server.</p>
+
+<h2 id='automated_methods'>Automated methods</h2>
+
+<p>There are also a number of ways to easily automate the deployment of a Jekyll site. If you’ve got another method that isn’t listed below, we’d love it if you <a href='../contributing'>contributed</a> so that everyone else can benefit too.</p>
+
+<h3 id='git_postupdate_hook'>Git post-update hook</h3>
+
+<p>If you store your jekyll site in <a href='http://git-scm.com/'>Git</a> (you are using version control, right?), it’s pretty easy to automate the deployment process by setting up a post-update hook in your Git repository, <a href='http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/'>like this</a>.</p>
+
+<h3 id='git_postreceive_hook'>Git post-receive hook</h3>
+
+<p>To have a remote server handle the deploy for you every time you push changes using Git, you can create a user account which has all the public keys that are authorized to deploy in its <code>authorized_keys</code> file. With that in place, setting up the post-receive hook is done as follows:</p>
+<div class='highlight'><pre><code class='bash'>laptop<span class='nv'>$ </span>ssh deployer@myserver.com
+server<span class='nv'>$ </span>mkdir myrepo.git
+server<span class='nv'>$ </span><span class='nb'>cd </span>myrepo.git
+server<span class='nv'>$ </span>git --bare init
+server<span class='nv'>$ </span>cp hooks/post-receive.sample hooks/post-receive
+server<span class='nv'>$ </span>mkdir /var/www/myrepo
+</code></pre></div>
+<p>Next, add the following lines to hooks/post-receive and be sure Jekyll is installed on the server:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>GIT_REPO</span><span class='o'>=</span><span class='nv'>$HOME</span>/myrepo.git
+<span class='nv'>TMP_GIT_CLONE</span><span class='o'>=</span><span class='nv'>$HOME</span>/tmp/myrepo
+<span class='nv'>PUBLIC_WWW</span><span class='o'>=</span>/var/www/myrepo
+
+git clone <span class='nv'>$GIT_REPO</span> <span class='nv'>$TMP_GIT_CLONE</span>
+jekyll build <span class='nv'>$TMP_GIT_CLONE</span> <span class='nv'>$PUBLIC_WWW</span>
+rm -Rf <span class='nv'>$TMP_GIT_CLONE</span>
+<span class='nb'>exit</span>
+</code></pre></div>
+<p>Finally, run the following command on any users laptop that needs to be able to deploy using this hook:</p>
+<div class='highlight'><pre><code class='bash'>laptops<span class='nv'>$ </span>git remote add deploy deployer@myserver.com:~/myrepo.git
+</code></pre></div>
+<p>Deploying is now as easy as telling nginx or Apache to look at <code>/var/www/myrepo</code> and running the following:</p>
+<div class='highlight'><pre><code class='bash'>laptops<span class='nv'>$ </span>git push deploy master
+</code></pre></div>
+<h3 id='rake'>Rake</h3>
+
+<p>Another way to deploy your Jekyll site is to use <a href='https://github.com/jimweirich/rake'>Rake</a>, <a href='https://github.com/JEG2/highline'>HighLine</a>, and <a href='http://net-ssh.rubyforge.org/'>Net::SSH</a>. A more complex example of deploying Jekyll with Rake that deals with multiple branches can be found in <a href='https://github.com/gitready/gitready/blob/en/Rakefile'>Git Ready</a>.</p>
+
+<h3 id='rsync'>rsync</h3>
+
+<p>Once you’ve generated the <code>_site</code> directory, you can easily rsync it using a <code>tasks/deploy</code> shell script similar to <a href='http://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy'>this deploy script here</a>. You’d obviously need to change the values to reflect your site’s details. There is even <a href='http://gist.github.com/214959'>a matching TextMate command</a> that will help you run this script from within Textmate.</p>
+
+<h2 id='rackjekyll'>Rack-Jekyll</h2>
+
+<p><a href='http://github.com/bry4n/rack-jekyll/'>Rack-Jekyll</a> is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with <a href='http://github.com/rtomakyo/shotgun/'>shotgun</a>, <a href='http://github.com/rack/rack'>rackup</a>, <a href='http://github.com/mongrel/mongrel'>mongrel</a>, <a href='http://github.com/defunkt/unicorn/'>unicorn</a>, and <a href='https://github.com/adaoraul/rack-jekyll#readme'>others</a>.</p>
+
+<p>Read <a href='http://blog.crowdint.com/2010/08/02/instant-blog-using-jekyll-and-heroku.html'>this post</a> on how to deploy to Heroku using Rack-Jekyll.</p>
+
+<h2 id='jekylladmin_for_rails'>Jekyll-Admin for Rails</h2>
+
+<p>If you want to maintain Jekyll inside your existing Rails app, <a href='http://github.com/zkarpinski/Jekyll-Admin'>Jekyll-Admin</a> contains drop in code to make this possible. See Jekyll-Admin’s <a href='http://github.com/zkarpinski/Jekyll-Admin/blob/master/README'>README</a> for more details.</p>
+
+<h2 id='amazon_s3'>Amazon S3</h2>
+
+<p>If you want to host your site in Amazon S3, you can do so with <a href='https://github.com/laurilehmijoki/jekyll-s3'>jekyll-s3</a> application. It will push your site to Amazon S3 where it can be served like any web server, dynamically scaling to almost unlimited traffic. This approach has the benefit of being about the cheapest hosting option available for low-volume blogs as you only pay for what you use.</p>
+<div class='note'>
+  <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
+  <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href='../github-pages'>host your Jekyll-powered website for free</a>.</p>
+</div>
+          <div class="section-nav">
+  <div class="left align-right">
+    
+      <a href="/docs/github-pages" class="prev">
+        Back
+      </a>
+    
+  </div>
+  <div class="right align-left">
+    
+      <a href="/docs/contributing" class="next">
+        Next
+      </a>
+    
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    <h4>Getting Started</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/home">Welcome</a>
+      </li>
+      <li class="">
+        <a href="/docs/installation">Installation</a>
+      </li>
+      <li class="">
+        <a href="/docs/usage">Basic Usage</a>
+      </li>
+      <li class="">
+        <a href="/docs/structure">Directory structure</a>
+      </li>
+      <li class="">
+        <a href="/docs/configuration">Configuration</a>
+      </li>
+    </ul>
+    <h4>Your Content</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/frontmatter">Front-matter</a>
+      </li>
+      <li class="">
+        <a href="/docs/posts">Writing posts</a>
+      </li>
+      <li class="">
+        <a href="/docs/pages">Creating pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/variables">Variables</a>
+      </li>
+      <li class="">
+        <a href="/docs/migrations">Blog migrations</a>
+      </li>
+    </ul>
+    <h4>Customization</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/templates">Templates</a>
+      </li>
+      <li class="">
+        <a href="/docs/permalinks">Permalinks</a>
+      </li>
+      <li class="">
+        <a href="/docs/pagination">Pagination</a>
+      </li>
+      <li class="">
+        <a href="/docs/plugins">Plugins</a>
+      </li>
+      <li class="">
+        <a href="/docs/extras">Extras</a>
+      </li>
+    </ul>
+    <h4>Deployment</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/github-pages">GitHub Pages</a>
+      </li>
+      <li class="current">
+        <a href="/docs/deployment-methods">Other methods</a>
+      </li>
+    </ul>
+    <h4>Miscellaneous</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/contributing">Contributing</a>
+      </li>
+      <li class="">
+        <a href="/docs/troubleshooting">Troubleshooting</a>
+      </li>
+      <li class="">
+        <a href="/docs/sites">Sites using Jekyll</a>
+      </li>
+      <li class="">
+        <a href="/docs/resources">Resources</a>
+      </li>
+      <li class="">
+        <a href="/docs/upgrading">Upgrading</a>
+      </li>
+    </ul>
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>By <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, and many more <a href="https://github.com/mojombo/jekyll/graphs/contributors">awesome&nbsp;contributors</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+  
+  <!-- Gauges (http://gaug.es/) -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '503c5af6613f5d0f19000027');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Writing posts</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/gridism.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pygments.css" />
+  <link rel="icon" type="image/x-icon" href="/favicon.png" />
+  <script src="/js/modernizr-2.5.3.min.js"></script>
+</head>
+
+
+<body class="wrap">
+  <header>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span>Jekyll</span>
+          <img src="/img/logo-2x.png" width="249px" height="115px" alt="">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+    <optgroup label="Getting started">
+      <option value="/docs/home">Welcome</option>
+      <option value="/docs/installation">Installation</option>
+      <option value="/docs/usage">Basic Usage</option>
+      <option value="/docs/structure">Directory structure</option>
+      <option value="/docs/configuration">Configuration</option>
+    </optgroup>
+    <optgroup label="Your Content">
+      <option value="/docs/frontmatter">Front-matter</option>
+      <option value="/docs/posts">Writing posts</option>
+      <option value="/docs/pages">Creating pages</option>
+      <option value="/docs/variables">Variables</option>
+      <option value="/docs/migrations">Blog migrations</option>
+    </optgroup>
+    <optgroup label="Customization">
+      <option value="/docs/templates">Templates</option>
+      <option value="/docs/permalinks">Permalinks</option>
+      <option value="/docs/pagination">Pagination</option>
+      <option value="/docs/plugins">Plugins</option>
+      <option value="/docs/extras">Extras</option>
+    </optgroup>
+    <optgroup label="Deployment">
+      <option value="/docs/github-pages">GitHub Pages</option>
+      <option value="/docs/deployment-methods">Other methods</option>
+    </optgroup>
+    <optgroup label="Miscellaneous">
+      <option value="/docs/contributing">Contributing</option>
+      <option value="/docs/troubleshooting">Troubleshooting</option>
+      <option value="/docs/sites">Sites using Jekyll</option>
+      <option value="/docs/resources">Resources</option>
+    </optgroup>
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Writing posts</h1>
+          <p>One of Jekyll’s best aspects is that it is “blog aware”. What does this mean, exactly? Well, simply put, it means that blogging is baked into Jekyll’s functionality. If you write articles and publish them online, this means that you can publish and maintain a blog simply by managing a folder of text-files on your computer. Compared to the hassle of configuring and maintaining databases and web-based CMS systems, this will be a welcome change!</p>
+
+<h2 id='the_posts_folder'>The Posts Folder</h2>
+
+<p>As explained on the <a href='../structure'>directory structure</a> page, the <code>_posts</code> folder is where your blog posts will live. These files can be either <a href='http://daringfireball.net/projects/markdown/'>Markdown</a> or <a href='http://textile.sitemonks.com/'>Textile</a> formatted text files, and as long as they have <a href='../frontmatter'>YAML front-matter</a>, they will be converted from their source format into an HTML page that is part of your static site.</p>
+
+<h3 id='creating_post_files'>Creating Post Files</h3>
+
+<p>To create a new post, all you need to do is create a new file in the <code>_posts</code> directory. How you name files in this folder is important. Jekyll requires blog post files to be named according to the following format:</p>
+<div class='highlight'><pre><code class='bash'>YEAR-MONTH-DAY-title.MARKUP
+</code></pre></div>
+<p>Where <code>YEAR</code> is a four-digit number, <code>MONTH</code> and <code>DAY</code> are both two-digit numbers, and <code>MARKUP</code> is the file extension representing the format used in the file. For example, the following are examples of valid post filenames:</p>
+<div class='highlight'><pre><code class='bash'>2011-12-31-new-years-eve-is-awesome.md
+2012-09-12-how-to-write-a-blog.textile
+</code></pre></div>
+<h3 id='content_formats'>Content Formats</h3>
+
+<p>All blog post files must begin with <a href='../frontmatter'>YAML front- matter</a>. After that, it&#8217;s simply a matter of deciding which format you prefer. Jekyll supports two popular content markup formats: <a href='http://daringfireball.net/projects/markdown/'>Markdown</a> and <a href='http://textile.sitemonks.com/'>Textile</a>. These formats each have their own way of marking up different types of content within a post, so you should familiarize yourself with these formats and decide which one best suits your needs.</p>
+
+<h2 id='including_images_and_resources'>Including images and resources</h2>
+
+<p>Chances are, at some point, you&#8217;ll want to include images, downloads, or other digital assets along with your text content. While the syntax for linking to these resources differs between Markdown and Textile, the problem of working out where to store these files in your site is something everyone will face.</p>
+
+<p>Because of Jekyll’s flexibility, there are many solutions to how to do this. One common solution is to create a folder in the root of the project directory called something like <code>assets</code> or <code>downloads</code>, into which any images, downloads or other resources are placed. Then, from within any post, they can be linked to using the site’s root as the path for the asset to include. Again, this will depend on the way your site’s (sub)domain and path are configured, but here some examples (in Markdown) of how you could do this using the <code>site.url</code> variable in a post.</p>
+
+<p>Including an image asset in a post:</p>
+<div class='highlight'><pre><code class='text'>… which is shown in the screenshot below:
+![My helpful screenshot]({{ site.url }}/assets/screenshot.jpg)
+</code></pre></div>
+<p>Linking to a PDF for readers to download:</p>
+<div class='highlight'><pre><code class='text'>… you can [get the PDF]({{ site.url }}/assets/mydoc.pdf) directly.
+</code></pre></div><div class='note'>
+  <h5>ProTip™: Link using just the site root URL</h5>
+  <p>
+    You can skip the <code>{{ site.url }}</code> variable
+    if you <strong>know</strong> your site will only ever be displayed at the
+    root URL of your domain. In this case you can reference assets directly with
+    just <code>/path/file.jpg</code>.
+  </p>
+</div>
+<h2 id='displaying_an_index_of_posts'>Displaying an index of posts</h2>
+
+<p>It’s all well and good to have posts in a folder, but a blog is no use unless you have a list of posts somewhere. Creating an index of posts on another page (or in a <a href='../templates'>template</a>) is easy, thanks to the <a href='http://wiki.shopify.com/Liquid'>Liquid template language</a> and its tags. Here’s a basic example of how to create a list of links to your blog posts:</p>
+<div class='highlight'><pre><code class='html'><span class='nt'>&lt;ul&gt;</span>
+  {% for post in site.posts %}
+    <span class='nt'>&lt;li&gt;</span>
+      <span class='nt'>&lt;a</span> <span class='na'>href=</span><span class='s'>&quot;{{ post.url }}&quot;</span><span class='nt'>&gt;</span>{{ post.title }}<span class='nt'>&lt;/a&gt;</span>
+    <span class='nt'>&lt;/li&gt;</span>
+  {% endfor %}
+<span class='nt'>&lt;/ul&gt;</span>
+</code></pre></div>
+<p>Of course, you have full control over how (and where) you display your posts, and how you structure your site. You should read more about <a href='../templates'>how templates work</a> with Jekyll if you want to know more.</p>
+
+<h2 id='highlighting_code_snippets'>Highlighting code snippets</h2>
+
+<p>Jekyll also has built-in support for syntax highlighting of code snippets using <a href='../extras'>Pygments</a>, and including a code snippet in any post is easy. Just use the dedicated Liquid tag as follows:</p>
+<div class='highlight'><pre><code class='text'>{% highlight ruby %}
+def show
+  @widget = Widget(params[:id])
+  respond_to do |format|
+    format.html # show.html.erb
+    format.json { render json: @widget }
+  end
+end
+{% endhighlight %}
+</code></pre></div>
+<p>And the output will look like this:</p>
+<div class='highlight'><pre><code class='ruby'><span class='k'>def</span> <span class='nf'>show</span>
+  <span class='vi'>@widget</span> <span class='o'>=</span> <span class='no'>Widget</span><span class='p'>(</span><span class='n'>params</span><span class='o'>[</span><span class='ss'>:id</span><span class='o'>]</span><span class='p'>)</span>
+  <span class='n'>respond_to</span> <span class='k'>do</span> <span class='o'>|</span><span class='nb'>format</span><span class='o'>|</span>
+    <span class='nb'>format</span><span class='o'>.</span><span class='n'>html</span> <span class='c1'># show.html.erb</span>
+    <span class='nb'>format</span><span class='o'>.</span><span class='n'>json</span> <span class='p'>{</span> <span class='n'>render</span> <span class='ss'>json</span><span class='p'>:</span> <span class='vi'>@widget</span> <span class='p'>}</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+</code></pre></div><div class='note'>
+  <h5>ProTip™: Show line numbers</h5>
+  <p>
+    You can make code snippets include line-numbers by adding the word
+    <code>linenos</code> to the end of the opening highlight tag like this:
+    <code>{% highlight ruby linenos %}</code>.
+  </p>
+</div>
+<p>These basics should be enough to get you started writing your first posts. When you’re ready to dig into what else is possible, you might be interested in doing things like <a href='../permalinks'>customizing post permalinks</a> or using <a href='../variables'>custom variables</a> in your posts and elsewhere on your site.</p>
+          <div class="section-nav">
+  <div class="left align-right">
+    
+      <a href="/docs/frontmatter" class="prev">
+        Back
+      </a>
+    
+  </div>
+  <div class="right align-left">
+    
+      <a href="/docs/pages" class="next">
+        Next
+      </a>
+    
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    <h4>Getting Started</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/home">Welcome</a>
+      </li>
+      <li class="">
+        <a href="/docs/installation">Installation</a>
+      </li>
+      <li class="">
+        <a href="/docs/usage">Basic Usage</a>
+      </li>
+      <li class="">
+        <a href="/docs/structure">Directory structure</a>
+      </li>
+      <li class="">
+        <a href="/docs/configuration">Configuration</a>
+      </li>
+    </ul>
+    <h4>Your Content</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/frontmatter">Front-matter</a>
+      </li>
+      <li class="current">
+        <a href="/docs/posts">Writing posts</a>
+      </li>
+      <li class="">
+        <a href="/docs/pages">Creating pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/variables">Variables</a>
+      </li>
+      <li class="">
+        <a href="/docs/migrations">Blog migrations</a>
+      </li>
+    </ul>
+    <h4>Customization</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/templates">Templates</a>
+      </li>
+      <li class="">
+        <a href="/docs/permalinks">Permalinks</a>
+      </li>
+      <li class="">
+        <a href="/docs/pagination">Pagination</a>
+      </li>
+      <li class="">
+        <a href="/docs/plugins">Plugins</a>
+      </li>
+      <li class="">
+        <a href="/docs/extras">Extras</a>
+      </li>
+    </ul>
+    <h4>Deployment</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/github-pages">GitHub Pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/deployment-methods">Other methods</a>
+      </li>
+    </ul>
+    <h4>Miscellaneous</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/contributing">Contributing</a>
+      </li>
+      <li class="">
+        <a href="/docs/troubleshooting">Troubleshooting</a>
+      </li>
+      <li class="">
+        <a href="/docs/sites">Sites using Jekyll</a>
+      </li>
+      <li class="">
+        <a href="/docs/resources">Resources</a>
+      </li>
+      <li class="">
+        <a href="/docs/upgrading">Upgrading</a>
+      </li>
+    </ul>
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>By <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, and many more <a href="https://github.com/mojombo/jekyll/graphs/contributors">awesome&nbsp;contributors</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+  
+  <!-- Gauges (http://gaug.es/) -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '503c5af6613f5d0f19000027');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

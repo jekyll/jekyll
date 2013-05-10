@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog migrations</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/gridism.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/pygments.css" />
+  <link rel="icon" type="image/x-icon" href="/favicon.png" />
+  <script src="/js/modernizr-2.5.3.min.js"></script>
+</head>
+
+
+<body class="wrap">
+  <header>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span>Jekyll</span>
+          <img src="/img/logo-2x.png" width="249px" height="115px" alt="">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Overview</a>
+  </li>
+  <li class="current">
+    <a href="/docs/home">Doc<span class="show-on-mobiles">s</span><span class="hide-on-mobiles">umentation</span></a>
+  </li>
+  <li class="">
+    <a href="https://github.com/mojombo/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+    <optgroup label="Getting started">
+      <option value="/docs/home">Welcome</option>
+      <option value="/docs/installation">Installation</option>
+      <option value="/docs/usage">Basic Usage</option>
+      <option value="/docs/structure">Directory structure</option>
+      <option value="/docs/configuration">Configuration</option>
+    </optgroup>
+    <optgroup label="Your Content">
+      <option value="/docs/frontmatter">Front-matter</option>
+      <option value="/docs/posts">Writing posts</option>
+      <option value="/docs/pages">Creating pages</option>
+      <option value="/docs/variables">Variables</option>
+      <option value="/docs/migrations">Blog migrations</option>
+    </optgroup>
+    <optgroup label="Customization">
+      <option value="/docs/templates">Templates</option>
+      <option value="/docs/permalinks">Permalinks</option>
+      <option value="/docs/pagination">Pagination</option>
+      <option value="/docs/plugins">Plugins</option>
+      <option value="/docs/extras">Extras</option>
+    </optgroup>
+    <optgroup label="Deployment">
+      <option value="/docs/github-pages">GitHub Pages</option>
+      <option value="/docs/deployment-methods">Other methods</option>
+    </optgroup>
+    <optgroup label="Miscellaneous">
+      <option value="/docs/contributing">Contributing</option>
+      <option value="/docs/troubleshooting">Troubleshooting</option>
+      <option value="/docs/sites">Sites using Jekyll</option>
+      <option value="/docs/resources">Resources</option>
+    </optgroup>
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Blog migrations</h1>
+          <p>If you’re switching to Jekyll from another blogging system, Jekyll’s importers can help you with the move. Most methods listed on this page require read access to the database from your old system to generate posts for Jekyll. Each method generates <code>.markdown</code> posts in the <code>_posts</code> directory based on the entries in the foreign system.</p>
+
+<h2 id='preparing_for_migrations'>Preparing for migrations</h2>
+
+<p>Because the importers have many of their own dependencies, they are made available via a separate gem called <code>jekyll-import</code>. To use them, all you need to do is install the gem, and they will become available as part of Jekyll&#8217;s standard command line interface.</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>gem install jekyll-import
+</code></pre></div>
+<p>You should now be all set to run the importers below. If you ever get stuck, you can see help for each importer:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>jekyll <span class='nb'>help </span>import           <span class='c'># =&gt; See list of importers</span>
+<span class='nv'>$ </span>jekyll <span class='nb'>help </span>import IMPORTER  <span class='c'># =&gt; See importer specific help</span>
+</code></pre></div>
+<p>Where IMPORTER is the name of the specific importer.</p>
+<div class='note info'>
+  <h5>Note: Always double-check migrated content</h5>
+  <p>
+
+    Importers may not distinguish between published or private posts, so
+    you should always check that the content Jekyll generates for you appears as
+    you intended.
+
+  </p>
+</div><!-- TODO all these need to be fixed -->
+<h2 id='wordpress'>WordPress</h2>
+
+<h3 id='wordpress_export_files'>Wordpress export files</h3>
+
+<p>If hpricot is not already installed, you will need to run <code>gem install hpricot</code>. Next, export your blog using the Wordpress export utility. Assuming that the exported file is saved as <code>wordpress.xml</code>, here is the command you need to run:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/wordpressdotcom&quot;;</span>
+<span class='s1'>    Jekyll::WordpressDotCom.process(&quot;wordpress.xml&quot;)&#39;</span>
+</code></pre></div><div class='note'>
+  <h5>ProTip™: Wordpress.com Export Tool</h5>
+  <p>If you are migrating from a Wordpress.com account, you can access the export tool at the following URL: `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`.</p>
+</div>
+<h3 id='using_wordpress_mysql_server_connection'>Using Wordpress MySQL server connection</h3>
+
+<p>If you want to import using a direct connection to the Wordpress MySQL server, here&#8217;s how:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/wordpress&quot;;</span>
+<span class='s1'>    Jekyll::WordPress.process(&quot;database&quot;, &quot;user&quot;, &quot;pass&quot;)&#39;</span>
+</code></pre></div>
+<p>If you are using Webfaction and have to set up an <a href='http://docs.webfaction.com/user-guide/databases.html?highlight=mysql#starting-an-ssh-tunnel-with-ssh'>SSH tunnel</a>, be sure to make the hostname (<code>127.0.0.1</code>) explicit, otherwise MySQL may block your access based on <code>localhost</code> and <code>127.0.0.1</code> not being equivalent in its authentication system:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/wordpress&quot;;</span>
+<span class='s1'>    Jekyll::WordPress.process(&quot;database&quot;, &quot;user&quot;, &quot;pass&quot;, &quot;127.0.0.1&quot;)&#39;</span>
+</code></pre></div>
+<h3 id='further_wordpress_migration_alternatives'>Further Wordpress migration alternatives</h3>
+
+<p>While the above methods work, they do not import much of the metadata that is usually stored in Wordpress posts and pages. If you need to export things like pages, tags, custom fields, image attachments and so on, the following resources might be useful to you:</p>
+
+<ul>
+<li><a href='https://github.com/thomasf/exitwp'>Exitwp</a> is a configurable tool written in Python for migrating one or more Wordpress blogs into Jekyll (Markdown) format while keeping as much metadata as possible. Exitwp also downloads attachments and pages.</li>
+
+<li><a href='http://vitobotta.com/how-to-migrate-from-wordpress-to-jekyll/'>A great article</a> with a step-by-step guide for migrating a Wordpress blog to Jekyll while keeping most of the structure and metadata.</li>
+
+<li><a href='https://github.com/theaob/wpXml2Jekyll'>wpXml2Jekyll</a> is an executable windows application for creating Markdown posts from your Wordpress XML file.</li>
+</ul>
+
+<h2 id='drupal'>Drupal</h2>
+
+<p>If you’re migrating from <a href='http://drupal.org'>Drupal</a>, there is <a href='https://github.com/mojombo/jekyll/blob/master/lib/jekyll/migrators/drupal.rb'>a migrator</a> for you too:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/drupal&quot;;</span>
+<span class='s1'>    Jekyll::Drupal.process(&quot;database&quot;, &quot;user&quot;, &quot;pass&quot;)&#39;</span>
+</code></pre></div><div class='note warning'>
+  <h5>Warning: Drupal Version Compatibility</h5>
+  <p>This migrator was written for Drupal 6.1 and may not work as expected with
+  newer versions of Drupal. Please update it and send us a pull request if
+  necessary.</p>
+</div>
+<h2 id='movable_type'>Movable Type</h2>
+
+<p>To import posts from Movable Type:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/mt&quot;;</span>
+<span class='s1'>    Jekyll::MT.process(&quot;database&quot;, &quot;user&quot;, &quot;pass&quot;)&#39;</span>
+</code></pre></div>
+<h2 id='typo'>Typo</h2>
+
+<p>To import posts from Typo:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/typo&quot;;</span>
+<span class='s1'>    Jekyll::Typo.process(&quot;database&quot;, &quot;user&quot;, &quot;pass&quot;)&#39;</span>
+</code></pre></div>
+<p>This code has only been tested with Typo version 4+.</p>
+
+<h2 id='textpattern'>TextPattern</h2>
+
+<p>To import posts from TextPattern:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/textpattern&quot;;</span>
+<span class='s1'>    Jekyll::TextPattern.process(&quot;database_name&quot;, &quot;username&quot;, &quot;password&quot;, &quot;hostname&quot;)&#39;</span>
+</code></pre></div>
+<p>You will need to run the above from the parent directory of your <code>_import</code> folder. For example, if <code>_import</code> is located in <code>/path/source/_import</code>, you will need to run this code from <code>/path/source</code>. The hostname defaults to <code>localhost</code>, all other variables are required. You may need to adjust the code used to filter entries. Left alone, it will attempt to pull all entries that are live or sticky.</p>
+
+<h2 id='mephisto'>Mephisto</h2>
+
+<p>To import posts from Mephisto:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/mephisto&quot;;</span>
+<span class='s1'>    Jekyll::Mephisto.process(&quot;database&quot;, &quot;user&quot;, &quot;password&quot;)&#39;</span>
+</code></pre></div>
+<p>If your data is in Postgres, you should do this instead:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/mephisto&quot;;</span>
+<span class='s1'>    Jekyll::Mephisto.postgres({:database =&gt; &quot;database&quot;, :username=&gt;&quot;username&quot;, :password =&gt;&quot;password&quot;})&#39;</span>
+</code></pre></div>
+<h2 id='blogger_blogspot'>Blogger (Blogspot)</h2>
+
+<p>To import posts from Blogger, see <a href='http://coolaj86.info/articles/migrate-from-blogger-to-jekyll.html'>this post about migrating from Blogger to Jekyll</a>. If that doesn’t work for you, you might want to try some of the following alternatives:</p>
+
+<ul>
+<li><a href='https://github.com/kennym'>@kennym</a> created a <a href='https://gist.github.com/1115810'>little migration script</a>, because the solutions in the previous article didn&#8217;t work out for him.</li>
+
+<li><a href='https://github.com/ngauthier'>@ngauthier</a> created <a href='https://gist.github.com/1506614'>another importer</a> that imports comments, and does so via blogger’s archive instead of the RSS feed.</li>
+
+<li><a href='https://github.com/juniorz'>@juniorz</a> created <a href='https://gist.github.com/1564581'>yet another importer</a> that works for <a href='http://octopress.org'>Octopress</a>. It is like <a href='https://gist.github.com/1506614'>@ngauthier’s version</a> but separates drafts from posts, as well as importing tags and permalinks.</li>
+</ul>
+
+<h2 id='posterous'>Posterous</h2>
+
+<p>To import posts from your primary Posterous blog:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/posterous&quot;;</span>
+<span class='s1'>    Jekyll::Posterous.process(&quot;my_email&quot;, &quot;my_pass&quot;)&#39;</span>
+</code></pre></div>
+<p>For any other Posterous blog on your account, you will need to specify the <code>blog_id</code> for the blog:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/posterous&quot;;</span>
+<span class='s1'>    Jekyll::Posterous.process(&quot;my_email&quot;, &quot;my_pass&quot;, &quot;blog_id&quot;)&#39;</span>
+</code></pre></div>
+<p>There is also an <a href='https://github.com/pepijndevos/jekyll/blob/patch-1/lib/jekyll/migrators/posterous.rb'>alternative Posterous migrator</a> that maintains permalinks and attempts to import images too.</p>
+
+<h2 id='tumblr'>Tumblr</h2>
+
+<p>To import posts from Tumblr:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/tumblr&quot;;</span>
+<span class='s1'>    Jekyll::Tumblr.process(&quot;http://www.your_blog_url.com&quot;, true)&#39;</span>
+</code></pre></div>
+<p>There is also <a href='https://github.com/stephenmcd/jekyll/blob/master/lib/jekyll/migrators/tumblr.rb'>a modified Tumblr migrator</a> that exports posts as Markdown and preserves post tags.</p>
+
+<p>The migrator above requires the <code>json</code> gem and Python&#8217;s <code>html2text</code> to be installed as follows:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>gem install json
+<span class='nv'>$ </span>pip install html2text
+</code></pre></div>
+<p>Once installed, simply use the format argument:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/tumblr&quot;;</span>
+<span class='s1'>    Jekyll::Tumblr.process(&quot;http://www.your_blog_url.com&quot;, format=&quot;md&quot;)&#39;</span>
+</code></pre></div>
+<h2 id='other_systems'>Other Systems</h2>
+
+<p>If you have a system for which there is currently no migrator, consider writing one and sending us a pull request.</p>
+          <div class="section-nav">
+  <div class="left align-right">
+    
+      <a href="/docs/variables" class="prev">
+        Back
+      </a>
+    
+  </div>
+  <div class="right align-left">
+    
+      <a href="/docs/templates" class="next">
+        Next
+      </a>
+    
+  </div>
+  <div class="clear"></div>
+</div>
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    <h4>Getting Started</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/home">Welcome</a>
+      </li>
+      <li class="">
+        <a href="/docs/installation">Installation</a>
+      </li>
+      <li class="">
+        <a href="/docs/usage">Basic Usage</a>
+      </li>
+      <li class="">
+        <a href="/docs/structure">Directory structure</a>
+      </li>
+      <li class="">
+        <a href="/docs/configuration">Configuration</a>
+      </li>
+    </ul>
+    <h4>Your Content</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/frontmatter">Front-matter</a>
+      </li>
+      <li class="">
+        <a href="/docs/posts">Writing posts</a>
+      </li>
+      <li class="">
+        <a href="/docs/pages">Creating pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/variables">Variables</a>
+      </li>
+      <li class="current">
+        <a href="/docs/migrations">Blog migrations</a>
+      </li>
+    </ul>
+    <h4>Customization</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/templates">Templates</a>
+      </li>
+      <li class="">
+        <a href="/docs/permalinks">Permalinks</a>
+      </li>
+      <li class="">
+        <a href="/docs/pagination">Pagination</a>
+      </li>
+      <li class="">
+        <a href="/docs/plugins">Plugins</a>
+      </li>
+      <li class="">
+        <a href="/docs/extras">Extras</a>
+      </li>
+    </ul>
+    <h4>Deployment</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/github-pages">GitHub Pages</a>
+      </li>
+      <li class="">
+        <a href="/docs/deployment-methods">Other methods</a>
+      </li>
+    </ul>
+    <h4>Miscellaneous</h4>
+    <ul>
+      <li class="">
+        <a href="/docs/contributing">Contributing</a>
+      </li>
+      <li class="">
+        <a href="/docs/troubleshooting">Troubleshooting</a>
+      </li>
+      <li class="">
+        <a href="/docs/sites">Sites using Jekyll</a>
+      </li>
+      <li class="">
+        <a href="/docs/resources">Resources</a>
+      </li>
+      <li class="">
+        <a href="/docs/upgrading">Upgrading</a>
+      </li>
+    </ul>
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>By <a href="http://tom.preston-werner.com">Tom Preston-Werner</a>, <a href="http://quaran.to/">Nick Quaranto</a>, and many more <a href="https://github.com/mojombo/jekyll/graphs/contributors">awesome&nbsp;contributors</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+  
+  <!-- Gauges (http://gaug.es/) -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '503c5af6613f5d0f19000027');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
