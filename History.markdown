@@ -8,6 +8,8 @@
   * Catching that Redcarpet gem isn't installed (#1059)
 
 ### Site Enhancements
+  * Updated links to Liquid documentation (#1073)
+
 ### Development Fixes
 
 ## 1.0.1 / 2013-05-08
