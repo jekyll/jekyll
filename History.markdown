@@ -8,6 +8,7 @@
   * Catching that Redcarpet gem isn't installed (#1059)
 
 ### Site Enhancements
+  * Move pages to be Pages for realz (#985)
   * Updated links to Liquid documentation (#1073)
 
 ### Development Fixes
