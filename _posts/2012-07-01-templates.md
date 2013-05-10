@@ -5,7 +5,7 @@ prev_section: migrations
 next_section: permalinks
 ---
 
-Jekyll uses the [Liquid](http://www.liquidmarkup.org/) templating language to
+Jekyll uses the [Liquid](https://github.com/Shopify/liquid) templating language to
 process templates. All of the [standard Liquid tags and
 filters](http://wiki.github.com/shopify/liquid/liquid-for-designers) are
 supported, Jekyll even adds a few handy filters and tags of its own to make
