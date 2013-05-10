@@ -2,6 +2,7 @@
 layout: docs
 title: Welcome
 next_section: installation
+permalink: /docs/home/
 ---
 
 This site aims to be a comprehensive guide to Jekyll. We’ll cover topics such
