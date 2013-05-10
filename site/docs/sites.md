@@ -3,6 +3,7 @@ layout: docs
 title: Sites using Jekyll
 prev_section: troubleshooting
 next_section: resources
+permalink: /docs/sites/
 ---
 
 It’s interesting to see what designs and features others have come up

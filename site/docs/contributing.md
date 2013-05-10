@@ -3,6 +3,7 @@ layout: docs
 title: Contributing
 prev_section: deployment-methods
 next_section: troubleshooting
+permalink: /docs/contributing/
 ---
 
 So you've got an awesome idea to throw into Jekyll. Great! Please keep the

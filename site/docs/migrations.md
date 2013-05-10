@@ -3,6 +3,7 @@ layout: docs
 title: Blog migrations
 prev_section: variables
 next_section: templates
+permalink: /docs/migrations/
 ---
 
 If you’re switching to Jekyll from another blogging system, Jekyll’s importers
