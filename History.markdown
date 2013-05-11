@@ -1,10 +1,16 @@
 ## HEAD
 ### Major Enhancements
 ### Minor Enhancements
+  * Update pygments.rb version to 0.5.0 (#1061)
+  * Update Kramdown version to 1.0.2 (#1067)
+
 ### Bug Fixes
   * Catching that Redcarpet gem isn't installed (#1059)
 
 ### Site Enhancements
+  * Move pages to be Pages for realz (#985)
+  * Updated links to Liquid documentation (#1073)
+
 ### Development Fixes
 
 ## 1.0.1 / 2013-05-08

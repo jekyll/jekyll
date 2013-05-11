@@ -3,6 +3,7 @@ layout: docs
 title: Writing posts
 prev_section: frontmatter
 next_section: pages
+permalink: /docs/posts/
 ---
 
 One of Jekyll’s best aspects is that it is “blog aware”. What does this mean,
@@ -95,7 +96,7 @@ Linking to a PDF for readers to download:
 It’s all well and good to have posts in a folder, but a blog is no use unless
 you have a list of posts somewhere. Creating an index of posts on another page
 (or in a [template](../templates)) is easy, thanks to the [Liquid template
-language](http://liquidmarkup.org/) and its tags. Here’s a basic example of how
+language](http://wiki.shopify.com/Liquid) and its tags. Here’s a basic example of how
 to create a list of links to your blog posts:
 
 {% highlight html %}

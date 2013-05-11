@@ -3,6 +3,7 @@ layout: docs
 title: Configuration
 prev_section: structure
 next_section: frontmatter
+permalink: /docs/configuration/
 ---
 
 Jekyll allows you to concoct your sites in any way you can dream up, and it’s

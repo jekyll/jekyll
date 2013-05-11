@@ -2,10 +2,10 @@
 layout: docs
 title: Upgrading
 prev_section: resources
-next_section: changelist
+permalink: /docs/upgrading/
 ---
 
-Upgrading from an older version of Jekyll? A few things have changed in 1.0.0
+Upgrading from an older version of Jekyll? A few things have changed in 1.0
 that you'll want to know about.
 
 
