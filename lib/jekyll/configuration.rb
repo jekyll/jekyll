@@ -164,6 +164,12 @@ module Jekyll
         config.delete('server')
       end
 
+      if config.has_key? 'server_port'
+        Jekyll::Logger.warn "Deprecation:", "The 'server_port' configuration option" +
+                            " has been renamed to 'port'. Update your config file" +
+                            " accordingly."
+      end
+
       config
     end
 
