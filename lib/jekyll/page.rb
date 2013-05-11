@@ -144,5 +144,9 @@ module Jekyll
     def index?
       basename == 'index'
     end
+
+    def uses_relative_permalinks
+      permalink && !permalink.include?(File.expand_path(@dir, site.source))
+    end
   end
 end
