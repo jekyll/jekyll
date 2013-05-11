@@ -114,7 +114,14 @@ module Jekyll
       self.data.deep_merge({
         "url"        => self.url,
         "content"    => self.content,
-        "path"       => self.data['path'] || File.join(@dir, @name).sub(/\A\//, '') })
+        "path"       => self.data['path'] || path })
+    end
+
+    # The path to the source file
+    #
+    # Returns the path to the source file
+    def path
+      File.join(@dir, @name).sub(/\A\//, '')
     end
 
     # Obtain destination path.
