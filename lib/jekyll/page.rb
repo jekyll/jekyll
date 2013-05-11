@@ -64,7 +64,7 @@ module Jekyll
       return @url if @url
 
       url = if permalink
-        if uses_relative_permalinks
+        if site.config['relative_permalinks']
           File.join(@dir, permalink)
         else
           permalink
