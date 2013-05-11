@@ -165,7 +165,7 @@ module Jekyll
             # file appears to have a YAML header so process it as a page
             page = Page.new(self, self.source, dir, f)
             # only include it if it is published
-            pages << Page.new(self, self.source, dir, f) if page.published?
+            pages << page if page.published?
           else
             # otherwise treat it as a static file
             static_files << StaticFile.new(self, self.source, dir, f)
