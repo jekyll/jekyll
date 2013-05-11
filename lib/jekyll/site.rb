@@ -268,7 +268,14 @@ module Jekyll
 
       # adding files' parent directories
       dirs = Set.new
-      files.each { |file| dirs << File.dirname(file) }
+
+      files.each do |file|
+        dir = File.dirname(file)
+        unless dest_files.include?(dir) && File.file?(dir)
+          dirs << dir
+        end
+      end
+
       files.merge(dirs)
 
       obsolete_files = dest_files - files
