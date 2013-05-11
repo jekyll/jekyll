@@ -6,17 +6,22 @@ module Jekyll
           site = Jekyll::Site.new(options)
           site.read
 
-          deprecate_relative_permalinks(site)
+          unless deprecated_relative_permalinks(site)
+            Jekyll::Logger.info "Your test results", "are in. Everything looks fine."
+          end
         end
 
-        def deprecate_relative_permalinks(site)
+        def deprecated_relative_permalinks(site)
+          contains_deprecated_pages = false
           site.pages.each do |page|
             if page.uses_relative_permalinks
               Jekyll::Logger.warn "Deprecation:", "'#{page.path}' uses relative" +
                                   " permalinks which will be automatically" +
                                   " deprecated in Jekyll v1.1."
+              contains_deprecated_pages = true
             end
           end
+          contains_deprecated_pages
         end
       end
     end
