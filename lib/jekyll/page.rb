@@ -5,7 +5,7 @@ module Jekyll
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :data, :content, :output, :published
 
     # Initialize a new Page.
     #
@@ -21,6 +21,8 @@ module Jekyll
 
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
+
+      self.published = self.published?
     end
 
     # The generated directory into which the page will be placed
