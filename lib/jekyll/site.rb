@@ -163,7 +163,9 @@ module Jekyll
           first3 = File.open(f_abs) { |fd| fd.read(3) }
           if first3 == "---"
             # file appears to have a YAML header so process it as a page
-            pages << Page.new(self, self.source, dir, f)
+            page = Page.new(self, self.source, dir, f)
+            # only include it if it is published
+            pages << Page.new(self, self.source, dir, f) if page.published
           else
             # otherwise treat it as a static file
             static_files << StaticFile.new(self, self.source, dir, f)
