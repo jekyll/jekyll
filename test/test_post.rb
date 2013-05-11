@@ -426,6 +426,7 @@ class TestPost < Test::Unit::TestCase
       should "recognize number category in yaml" do
         post = setup_post("2013-05-10-number-category.textile")
         assert post.categories.include?('2013')
+        assert !post.categories.include?(2013)
       end
 
       should "recognize tag in yaml" do
