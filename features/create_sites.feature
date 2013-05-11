@@ -110,3 +110,11 @@ Feature: Create sites
     When I run jekyll
     Then the _site directory should exist
     And I should see "SomeDirective" in "_site/.htaccess"
+
+  Scenario: Basic site with unpublished page
+    Given I have an "index.html" page with title "index" that contains "Published page"
+    And I have a "secret.html" page with published "false" that contains "Unpublished page"
+    When I run jekyll
+    Then the _site directory should exist
+    And the "_site/index.html" file should exist
+    But the "_site/secret.html" file should not exist
