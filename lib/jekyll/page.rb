@@ -157,7 +157,7 @@ module Jekyll
     end
 
     def uses_relative_permalinks
-      permalink && !permalink.include?(File.expand_path(@dir, site.source))
+      permalink && @dir != "" && !permalink.include?(File.expand_path(@dir, site.source))
     end
   end
 end
