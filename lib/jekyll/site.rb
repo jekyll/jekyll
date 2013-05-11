@@ -422,11 +422,12 @@ module Jekyll
 
     def relative_permalinks_deprecation_method
       if config['relative_permalinks'] && !@deprecated_relative_permalinks
-        puts # Places newline after "Generating..."
+        $stderr.puts # Places newline after "Generating..."
         Jekyll::Logger.warn "Deprecation:", "Starting in 1.1, permalinks for pages" +
                                             " in subfolders must be absolute" +
                                             " permalinks relative to the site" +
                                             " source."
+        $stderr.print Jekyll::Logger.formatted_topic("") + "..." # for "done."
         @deprecated_relative_permalinks = true
       end
     end
