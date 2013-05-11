@@ -159,9 +159,9 @@
 
 <h2 id='drupal'>Drupal</h2>
 
-<p>If you’re migrating from <a href='http://drupal.org'>Drupal</a>, there is <a href='https://github.com/mojombo/jekyll/blob/master/lib/jekyll/migrators/drupal.rb'>a migrator</a> for you too:</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/migrators/drupal&quot;;</span>
-<span class='s1'>    Jekyll::Drupal.process(&quot;database&quot;, &quot;user&quot;, &quot;pass&quot;)&#39;</span>
+<p>If you’re migrating from <a href='http://drupal.org'>Drupal 6</a>, there is <a href='https://github.com/jekyll/jekyll-import/blob/master/lib/jekyll/jekyll-import/drupal6.rb'>a migrator</a> for you too:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>ruby -rubygems -e <span class='s1'>&#39;require &quot;jekyll/jekyll-import/drupal6&quot;;</span>
+<span class='s1'>    JekyllImport::Drupal6.process(&quot;database&quot;, &quot;user&quot;, &quot;pass&quot;, &quot;host&quot;, &quot;prefix&quot;)&#39;</span>
 </code></pre></div><div class='note warning'>
   <h5>Warning: Drupal Version Compatibility</h5>
   <p>This migrator was written for Drupal 6.1 and may not work as expected with
@@ -245,18 +245,18 @@
 <p>If you have a system for which there is currently no migrator, consider writing one and sending us a pull request.</p>
           <div class="section-nav">
   <div class="left align-right">
-    
+
       <a href="/docs/variables" class="prev">
         Back
       </a>
-    
+
   </div>
   <div class="right align-left">
-    
+
       <a href="/docs/templates" class="next">
         Next
       </a>
-    
+
   </div>
   <div class="clear"></div>
 </div>
@@ -374,7 +374,7 @@
   </div>
 </footer>
 
-  
+
   <!-- Gauges (http://gaug.es/) -->
   <script type="text/javascript">
     var _gauges = _gauges || [];
