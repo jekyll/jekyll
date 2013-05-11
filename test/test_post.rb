@@ -422,6 +422,11 @@ class TestPost < Test::Unit::TestCase
         post = setup_post("2009-01-27-empty-categories.textile")
         assert_equal [], post.categories
       end
+      
+      should "recognize number category in yaml" do
+        post = setup_post("2013-05-10-number-category.textile")
+        assert post.categories.include?('2013')
+      end
 
       should "recognize tag in yaml" do
         post = setup_post("2009-05-18-tag.textile")
