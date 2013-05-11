@@ -66,14 +66,6 @@ module Jekyll
       self.populate_tags
     end
 
-    def published?
-      if self.data.has_key?('published') && self.data['published'] == false
-        false
-      else
-        true
-      end
-    end
-
     def populate_categories
       if self.categories.empty?
         self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
