@@ -16,6 +16,10 @@ module Jekyll
       deprecation_message args, "--url", "The 'url' setting can only be set in your config files."
     end
 
+    def self.process_config(config)
+      deprecation_message config, "server_port", "The config option 'server_port' has been replaced by 'port'"
+    end
+
     def self.no_subcommand(args)
       if args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
         Jekyll::Logger.error "Deprecation:", "Jekyll now uses subcommands instead of just \
