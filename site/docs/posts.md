@@ -116,8 +116,8 @@ work](../templates) with Jekyll if you want to know more.
 ## Post excerpts
 
 Posts automatically take the first block of text, from the beginning of the content
-to the first occurrence of `excerpt_separator`, and sets it as the `post.excerpt`.
-Take the above example of an index of posts for example. Maybe you want to include
+to the first occurrence of `excerpt_separator`, and set it as the `post.excerpt`.
+Take the above example of an index of posts. Perhaps you want to include
 a little hint about the post's content by adding the first paragraph of each of your
 posts:
 
