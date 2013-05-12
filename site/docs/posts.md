@@ -113,6 +113,28 @@ Of course, you have full control over how (and where) you display your posts,
 and how you structure your site. You should read more about [how templates
 work](../templates) with Jekyll if you want to know more.
 
+## Post excerpts
+
+Posts automatically take the first block of text, from the beginning of the content
+to the first occurrence of `excerpt_separator`, and sets it as the `post.excerpt`.
+Take the above example of an index of posts for example. Maybe you want to include
+a little hint about the post's content by adding the first paragraph of each of your
+posts:
+
+{% highlight html %}
+<ul>
+  {% raw %}{% for post in site.posts %}{% endraw %}
+    <li>
+      <a href="{% raw %}{{ post.url }}{% endraw %}">{% raw %}{{ post.title }}{% endraw %}</a>
+      <p>{% raw %}{{ post.excerpt }}{% endraw %}</p>
+    </li>
+  {% raw %}{% endfor %}{% endraw %}
+</ul>
+{% endhighlight %}
+
+If you don't like the automatically-generated post excerpt, it can be overridden by adding
+`excerpt` to your post's YAML front-matter.
+
 ## Highlighting code snippets
 
 Jekyll also has built-in support for syntax highlighting of code snippets using

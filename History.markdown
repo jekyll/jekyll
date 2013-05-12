@@ -6,6 +6,7 @@
 ### Bug Fixes
 
 ### Site Enhancements
+  * Add docs for post excerpt (#1072)
   * Add docs for gist tag (#1072)
 
 ### Development Fixes
