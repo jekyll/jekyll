@@ -154,8 +154,11 @@ namespace :site do
     puts "Generating the History doc!"
     if File.exist?("History.markdown")
       file_time = File.read("History.markdown")
-      # Replacing the contents of the file for the markdown bullets
+      # Replacing the contents of the file for the markdown bullets & issue links
       rep_bullets = file_time.gsub(/\s{2}\*{1}/, "-")
+      rep_links = rep_bullets.gsub(/#(\d+)/) do |word|
+        "[#{word}](https://github.com/mojombo/jekyll/issue/#{word.delete("#")})"
+      end
       # Create a hash for the front matter that is to be included
       front_matter = {"layout" => "docs", "title" => "History",
                       "permalink" => "/docs/history/"}
@@ -163,7 +166,7 @@ namespace :site do
       Dir.chdir('site/docs/history') do
         File.open("index.md", "w") do |file|
           file.write("#{front_matter.to_yaml}---\n\n")
-          file.write(rep_bullets)
+          file.write(rep_links)
         end
       end
     else
