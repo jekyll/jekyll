@@ -1,5 +1,8 @@
 ## HEAD
 ### Major Enhancements
+  * Add `jekyll doctor` command to check site for any known compatibility problems (#1081)
+  * Backwards-compatibilize relative permalinks (#1081)
+
 ### Minor Enhancements
   * Deprecate old config `server_port`, match to `port` if `port` isn't set (#1084)
   * Update pygments.rb version to 0.5.0 (#1061)
