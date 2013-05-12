@@ -499,9 +499,13 @@ body > footer a:hover img {
   width: 100%;
 }
 
-/* Blog */
+/* News */
 
-section.news article h2 {
+section.news .news-header {
+  margin: 0 50px;
+}
+
+section.news .news-listing h2 {
   margin: 0;
   padding-top: 10px;
   border-top: rgba(220, 220, 220, 0.5) 1px solid;

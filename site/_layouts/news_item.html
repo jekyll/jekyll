@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+  <section class="docs news">
+    <div class="grid">
+
+      {% include news_contents_mobile.html %}
+
+      <div class="unit four-fifths">
+        <h1 class="news-header center-on-mobiles">News</h1>
+        <article class="news-item">
+          <h2 class="center-on-mobiles"><a href="{{ page.url }}">{{ page.title }}</a></h2>
+          <p class="post-content">
+            {{ page.content }}
+          </p>
+          <p class="post-details">
+            Posted on {{ page.date | date_to_string }} by @{{ page.author }}, filed in {{ page.categories | array_to_sentence_string }}
+          </p>
+        </article>
+      </div>
+
+      {% include news_contents.html %}
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
