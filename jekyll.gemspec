@@ -125,34 +125,33 @@ Gem::Specification.new do |s|
     site/_includes/top.html
     site/_layouts/default.html
     site/_layouts/docs.html
-    site/_posts/2012-07-01-configuration.md
-    site/_posts/2012-07-01-contributing.md
-    site/_posts/2012-07-01-deployment-methods.md
-    site/_posts/2012-07-01-extras.md
-    site/_posts/2012-07-01-frontmatter.md
-    site/_posts/2012-07-01-github-pages.md
-    site/_posts/2012-07-01-heroku.md
-    site/_posts/2012-07-01-home.md
-    site/_posts/2012-07-01-installation.md
-    site/_posts/2012-07-01-migrations.md
-    site/_posts/2012-07-01-pages.md
-    site/_posts/2012-07-01-pagination.md
-    site/_posts/2012-07-01-permalinks.md
-    site/_posts/2012-07-01-plugins.md
-    site/_posts/2012-07-01-posts.md
-    site/_posts/2012-07-01-resources.md
-    site/_posts/2012-07-01-sites.md
-    site/_posts/2012-07-01-structure.md
-    site/_posts/2012-07-01-templates.md
-    site/_posts/2012-07-01-troubleshooting.md
-    site/_posts/2012-07-01-upgrading.md
-    site/_posts/2012-07-01-usage.md
-    site/_posts/2012-07-01-variables.md
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
     site/css/style.css
-    site/docs/index.html
+    site/docs/configuration.md
+    site/docs/contributing.md
+    site/docs/deployment-methods.md
+    site/docs/extras.md
+    site/docs/frontmatter.md
+    site/docs/github-pages.md
+    site/docs/heroku.md
+    site/docs/index.md
+    site/docs/installation.md
+    site/docs/migrations.md
+    site/docs/pages.md
+    site/docs/pagination.md
+    site/docs/permalinks.md
+    site/docs/plugins.md
+    site/docs/posts.md
+    site/docs/resources.md
+    site/docs/sites.md
+    site/docs/structure.md
+    site/docs/templates.md
+    site/docs/troubleshooting.md
+    site/docs/upgrading.md
+    site/docs/usage.md
+    site/docs/variables.md
     site/favicon.png
     site/img/article-footer.png
     site/img/footer-arrow.png
