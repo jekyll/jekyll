@@ -25,6 +25,13 @@ then be available to you to access using Liquid tags both further down in the
 file and also in any layouts or includes that the page or post in question
 relies on.
 
+A file can also have an attendant .metadata file which contains its front matter
+separately; this is useful if you want to use Jekyll alongside some other
+system which can't read Jekyll's front matter format. The .metadata file is a
+pure YAML file without the triple dashes. Any metadata in the file itself takes
+precedence over the metadata in the external file, and files with external
+metadata are marked by Jekyll to be processed.
+
 <div class="note warning">
   <h5>UTF-8 Character Encoding Warning</h5>
   <p>
