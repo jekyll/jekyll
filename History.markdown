@@ -6,6 +6,7 @@
   * Update Kramdown version to 1.0.2 (#1067)
 
 ### Bug Fixes
+  * Fix issue when categories are numbers (#1078)
   * Catching that Redcarpet gem isn't installed (#1059)
 
 ### Site Enhancements
