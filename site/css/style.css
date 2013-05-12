@@ -499,6 +499,20 @@ body > footer a:hover img {
   width: 100%;
 }
 
+/* Blog */
+
+section.news article h2 {
+  margin: 0;
+  padding-top: 10px;
+  border-top: rgba(220, 220, 220, 0.5) 1px solid;
+}
+
+section.news .post-details {
+  padding: 0;
+  font-size: 0.8em;
+  color: gray;
+}
+
 /* Code Highlighting */
 
 
