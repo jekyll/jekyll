@@ -86,6 +86,20 @@ command :serve do |c|
 end
 alias_command :server, :serve
 
+command :doctor do |c|
+  c.syntax = 'jekyll doctor'
+  c.description = 'Search site and print specific deprecation warnings'
+
+  c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
+
+  c.action do |args, options|
+    options = normalize_options(options.__hash__)
+    options = Jekyll.configuration(options)
+    Jekyll::Commands::Doctor.process(options)
+  end
+end
+alias_command :hyde, :doctor
+
 command :import do |c|
   c.syntax = 'jekyll import <platform> [options]'
   c.description = 'Import your old blog to Jekyll'

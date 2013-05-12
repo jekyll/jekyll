@@ -19,7 +19,10 @@ module Jekyll
       'limit_posts'   => 0,
       'lsi'           => false,
       'future'        => true,           # remove and make true just default
-      'pygments'      => true,           # remove and make true just default
+      'pygments'      => true,
+
+      'relative_permalinks' => true,     # backwards-compatibility with < 1.0
+                                         # will be set to false once 1.1 hits
 
       'markdown'      => 'maruku',
       'permalink'     => 'date',
@@ -162,6 +165,15 @@ module Jekyll
                             " is no longer accepted. Use the 'jekyll serve'" +
                             " subcommand to serve your site with WEBrick."
         config.delete('server')
+      end
+
+      if config.has_key? 'server_port'
+        Jekyll::Logger.warn "Deprecation:", "The 'server_port' configuration option" +
+                            " has been renamed to 'port'. Please update your config" +
+                            " file accordingly."
+        # copy but don't overwrite:
+        config['port'] = config['server_port'] unless config.has_key?('port')
+        config.delete('server_port')
       end
 
       config
