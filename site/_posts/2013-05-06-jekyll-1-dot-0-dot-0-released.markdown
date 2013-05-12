@@ -1,0 +1,22 @@
+---
+layout: news
+title: "Jekyll 1.0.0 Released"
+date: "2013-05-06 02:12:52 +0200"
+author: parkr
+categories: [release, jekyll]
+---
+
+Hey! After many months of hard works by Jekyll's contributors, we're excited
+to announce the first major release of the project in a long while. v1.0.0 is
+finally here! While the list of improvements and bug fixes is [quite lengthy][history],
+here are the highlights (thanks to @BenBalter for the examples and for compiling
+this list):
+
+- Support for the Gist tag for easily embedding Gists ([example](https://gist.github.com/benbalter/5555251))
+- Automatically generated post excerpts ([example](https://gist.github.com/benbalter/5555369))
+- Save and preview drafts before publishing ([example](https://gist.github.com/benbalter/5555992))
+
+_(Take a look at the [Upgrading][] page in the docs for more detailed information.)_
+
+[history]: https://github.com/mojombo/jekyll/blob/master/History.markdown#100--2013-05-06
+[Upgrading]: /docs/upgrading/
