@@ -160,9 +160,9 @@ module Jekyll
           next if self.dest.sub(/\/$/, '') == f_abs
           read_directories(f_rel)
         else
-          first3 = File.open(f_abs) { |fd| fd.read(3) }
-          if first3 == "---"
-            # file appears to have a YAML header so process it as a page
+          if File.exists? "#{f_abs}.metadata" || File.open(f_abs) { |fd| fd.read(3) } == '---'
+            # file has a corresponding .metadata file, so proces it as a page.
+            # OR file appears to have a YAML header so process it as a page
             pages << Page.new(self, self.source, dir, f)
           else
             # otherwise treat it as a static file
@@ -361,6 +361,7 @@ module Jekyll
           ['.', '_', '#'].include?(e[0..0]) ||
           e[-1..-1] == '~' ||
           self.exclude.glob_include?(e) ||
+          e =~ /\.metadata$/ ||
           (File.symlink?(e) && self.safe)
         end
       end
