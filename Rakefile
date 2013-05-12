@@ -148,20 +148,28 @@ namespace :site do
     puts 'Done.'
   end
 
-  desc "Move the changelist over to _posts directory and update its formatting."
-  task :changelist do
+  desc "Move the History.markdown over to the /docs/history directory."
+  task :history do
     # First lets go ahead and format the file correctly (mainly bullet points)
+    puts "Generating the History doc!"
     if File.exist?("History.markdown")
       file_time = File.read("History.markdown")
-      replaced = file_time.gsub(/\s{2}\*{1}/, "-")
-    # Now we need to copy the file into the _posts directory with the proper date
-      Dir.chdir('site/_posts') do
-        sh "rm -rf *-changelist.md"
-        File.open("#{file_date}-changelist.md", "w") {|file| file.write(replaced)}
+      # Replacing the contents of the file for the markdown bullets
+      rep_bullets = file_time.gsub(/\s{2}\*{1}/, "-")
+      # Create a hash for the front matter that is to be included
+      front_matter = {"layout" => "docs", "title" => "History",
+                      "permalink" => "/docs/history/"}
+      # Finally we need to copy the file to the /history directory
+      Dir.chdir('site/docs/history') do
+        File.open("index.md", "w") do |file|
+          file.write("#{front_matter.to_yaml}---\n\n")
+          file.write(rep_bullets)
+        end
       end
     else
       puts "Uh Oh!"
     end
+    puts "Done!"
   end
 end
 
