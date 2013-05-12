@@ -158,7 +158,7 @@ module Jekyll
           next if self.dest.sub(/\/$/, '') == f_abs
           read_directories(f_rel)
         else
-          if File.exists? "#{f_abs}.metadata" || File.open(f_abs) { |fd| fd.read(3) } == '---'
+          if  (File.exists? "#{f_abs}.metadata") || (File.open(f_abs) { |fd| fd.read(3) } == '---')
             # file has a corresponding .metadata file, so proces it as a page.
             # OR file appears to have a YAML header so process it as a page
             pages << Page.new(self, self.source, dir, f)
