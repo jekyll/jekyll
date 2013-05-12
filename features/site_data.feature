@@ -99,3 +99,10 @@ Feature: Site data
     When I run jekyll
     Then the _site directory should exist
     And I should see "http://mysite.com" in "_site/index.html"
+
+  Scenario: Read custom metadata from a separate file.
+    Given I have an "index.html" page that contains "Collaborators: {{ page.collaborators }}
+    And I have a metadata file "index.html.metadata" with "collaborators" set to "Bob Q. Doe, Jane R. Ng"
+    When I run Jekyll
+    Then the _site directory should exist
+    And I should see "Collaborators: Bob Q. Doe, Jane R. Ng" in "_site/index.html"
