@@ -35,14 +35,13 @@ rebuild each time a file changes, just add the `--watch` flag at the end.
 
 ### Absolute Permalinks
 
-In older Jekyll versions, one could use relative permalinks for pages in
-subdirectories. As of Jekyll v1.0, **we introduced absolute permalinks**,
-which do not take advantage of the page's directory position to write the
-permalink. As of Jekyll v1.0.2, a new switch, `relative_permalinks`,
-allows the user to turn relative permalinks on and off at will, in order
-to preserve the old behaviour, or use the new behaviour. As of v1.0.2,
-this switch defaults to `true`, but it will default to `false`
-in v1.1.0 and beyond.
+In Jekyll v1.0, we introduced absolute permalinks for pages in subdirectories.
+Until v1.1, it is **opt-in**. Starting with v1.1, however, absolute permalinks
+will become **opt-out**, meaning Jekyll will default to using absolute permalinks
+instead of relative permalinks.
+
+* To use absolute permalinks, set `relative_permalinks: true` in your configuration file.
+* To continue using relative permalinks, set `relative_permalinks: false` in your configuration file.
 
 <div class="note warning" id="absolute-permalinks-warning">
   <h5 markdown="1">Absolute permalinks will be default in v1.1 and on</h5>
