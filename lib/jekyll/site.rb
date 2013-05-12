@@ -271,7 +271,7 @@ module Jekyll
 
       files.each do |file|
         dir = File.dirname(file)
-        unless dest_files.include?(dir) && File.file?(dir)
+        unless File.file?(dir)
           dirs << dir
         end
       end
