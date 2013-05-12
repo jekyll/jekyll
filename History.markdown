@@ -14,6 +14,7 @@
   * Catching that Redcarpet gem isn't installed (#1059)
 
 ### Site Enhancements
+  * Add documentation about `relative_permalinks` (#1081)
   * Remove pygments-installation instructions, as pygments.rb is bundled with it (#1079)
   * Move pages to be Pages for realz (#985)
   * Updated links to Liquid documentation (#1073)
