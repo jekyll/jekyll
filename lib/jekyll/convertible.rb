@@ -34,8 +34,7 @@ module Jekyll
 
         if File.exists? File.join(base, "#{name}.metadata")
           # Yay, found metadata file.
-          metadata = File.read(File.join(base, "#{name}.metadata"))
-          self.data = YAML.safe_load(metadata)
+          self.data = YAML.safe_load_file(File.join(base, "#{name}.metadata"))
         end
 
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
