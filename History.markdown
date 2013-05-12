@@ -1,8 +1,13 @@
 ## HEAD
 ### Major Enhancements
+
 ### Minor Enhancements
+
 ### Bug Fixes
+
 ### Site Enhancements
+  * Add docs for gist tag (#1072)
+
 ### Development Fixes
 
 ## 1.0.2 / 2013-05-12
