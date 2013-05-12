@@ -1,5 +1,13 @@
 ## HEAD
 ### Major Enhancements
+### Minor Enhancements
+### Bug Fixes
+### Site Enhancements
+### Development Fixes
+
+## 1.0.2 / 2013-05-12
+
+### Major Enhancements
   * Add `jekyll doctor` command to check site for any known compatibility problems (#1081)
   * Backwards-compatibilize relative permalinks (#1081)
 
@@ -18,8 +26,6 @@
   * Remove pygments-installation instructions, as pygments.rb is bundled with it (#1079)
   * Move pages to be Pages for realz (#985)
   * Updated links to Liquid documentation (#1073)
-
-### Development Fixes
 
 ## 1.0.1 / 2013-05-08
 
