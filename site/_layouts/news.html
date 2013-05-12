@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+  <section class="docs news">
+    <div class="grid">
+
+      {% include news_contents_mobile.html %}
+
+      <div class="unit four-fifths">
+        <article class="news-listing">
+          <h1>{{ page.title }}</h1>
+          {{ content }}
+        </article>
+      </div>
+
+      {% include news_contents.html %}
+
+      <div class="clear"></div>
+
+    </div>
+  </section>

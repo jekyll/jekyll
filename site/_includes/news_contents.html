@@ -1,0 +1,18 @@
+<div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    <h4>General</h4>
+    <ul>
+      <li class="{% if page.title == 'News' %}current{% endif %}">
+        <a href="/news/">News Listing</a>
+      </li>
+    </ul>
+    <h4>All Posts</h4>
+    <ul>
+      {% for post in site.posts %}
+      <li class="{% if page.title == post.title %}current{% endif %}">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+</div>

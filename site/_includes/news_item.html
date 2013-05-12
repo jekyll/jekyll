@@ -1,0 +1,7 @@
+<h2 class="center-on-mobiles"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+<p class="post-content">
+  {{ post.content }}
+</p>
+<p class="post-details">
+  Posted on {{ post.date | date_to_string }} by @{{ post.author }}, filed in {{ post.categories | array_to_sentence_string }}
+</p>
