@@ -30,12 +30,24 @@ module Jekyll
       begin
         self.content = File.read(File.join(base, name))
 
-        if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+        # Look for a .metadata file nearby.
+
+        if File.exists? File.join(base, "#{name}.metadata")
+          # Yay, found metadata file.
+          self.data = YAML.safe_load_file(File.join(base, "#{name}.metadata"))
+        end
+
+        if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m # File begins with YAML front matter
           self.content = $POSTMATCH
-          self.data = YAML.safe_load($1)
+          if self.data
+            # We already have data from the external file; the data in the file itself takes precedence.
+            self.data.merge(YAML.safe_load($1))
+          else
+            self.data = YAML.safe_load($1)
+          end
         end
       rescue SyntaxError => e
-        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"        
+        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue Exception => e
         puts "Error reading file #{File.join(base, name)}: #{e.message}"
       end
