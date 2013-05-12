@@ -1,6 +1,7 @@
 ## HEAD
 ### Major Enhancements
 ### Minor Enhancements
+  * Deprecate old config `server_port`, match to `port` if `port` isn't set (#1084)
   * Update pygments.rb version to 0.5.0 (#1061)
   * Update Kramdown version to 1.0.2 (#1067)
 
