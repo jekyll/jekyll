@@ -102,7 +102,10 @@ module Jekyll
     def config_files(override)
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
-      config_files = File.join(source(override), "_config.yml") if config_files.to_s.empty?
+      if config_files.to_s.empty?
+        config_files = File.join(source(override), "_config.yml")
+        @default_config_file = true
+      end
       config_files = [config_files] unless config_files.is_a? Array
       config_files
     end
@@ -117,6 +120,14 @@ module Jekyll
       raise "Configuration file: (INVALID) #{file}".yellow if !next_config.is_a?(Hash)
       Jekyll.logger.info "Configuration file:", file
       next_config
+    rescue SystemCallError
+      if @default_config_file
+        Jekyll::Logger.warn "Configuration file:", "none"
+        {}
+      else
+        Jekyll::Logger.error "Fatal:", "The configuration file '#{file}' could not be found."
+        exit(1)
+      end
     end
 
     # Public: Read in a list of configuration files and merge with this hash
@@ -133,9 +144,6 @@ module Jekyll
           new_config = read_config_file(config_file)
           configuration = configuration.deep_merge(new_config)
         end
-      rescue SystemCallError
-        # Errno:ENOENT = file not found
-        Jekyll.logger.warn "Configuration file:", "none"
       rescue => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " +
                      "Using defaults (and options)."
