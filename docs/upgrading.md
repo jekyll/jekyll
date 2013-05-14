@@ -40,8 +40,8 @@ Until v1.1, it is **opt-in**. Starting with v1.1, however, absolute permalinks
 will become **opt-out**, meaning Jekyll will default to using absolute permalinks
 instead of relative permalinks.
 
-* To use absolute permalinks, set `relative_permalinks: true` in your configuration file.
-* To continue using relative permalinks, set `relative_permalinks: false` in your configuration file.
+* To use absolute permalinks, set `relative_permalinks: false` in your configuration file.
+* To continue using relative permalinks, set `relative_permalinks: true` in your configuration file.
 
 <div class="note warning" id="absolute-permalinks-warning">
   <h5 markdown="1">Absolute permalinks will be default in v1.1 and on</h5>
