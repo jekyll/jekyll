@@ -25,11 +25,11 @@ and `jekyll serve` to do the same. And if you want Jekyll to automatically
 rebuild each time a file changes, just add the `--watch` flag at the end.
 
 <div class="note info">
-  <h5 markdown="1">Watching and Serving</h5>
+  <h5>Watching and Serving</h5>
   <p markdown="1">With the new subcommands, the way sites are previewed locally
    changed a bit. Instead of specifying `server: true` in the site's
    configuration file, use `jekyll serve`. The same hold's true for
-   `watch: true`. Instead, use the `--watch` flag with either `jekyll serve`
+   `watch: true`. Instead, use the `&#45;&#45;watch` flag with either `jekyll serve`
     or `jekyll build`.</p>
 </div>
 
