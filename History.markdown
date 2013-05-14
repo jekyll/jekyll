@@ -6,6 +6,7 @@
 ### Bug Fixes
 
 ### Site Enhancements
+  * Make code bits in notes look more natural, more readable (#1089)
   * Fix logic for `relative_permalinks` instructions on Upgrading page (#1101)
   * Add docs for post excerpt (#1072)
   * Add docs for gist tag (#1072)
