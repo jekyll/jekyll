@@ -73,14 +73,14 @@ to one or more config files (comma-delimited, no spaces).
 * `--paginate`
 
 <div class="note info">
-  <h5 markdown="1">The `--config` explicitly specifies your configuration file(s)</h5>
-  <p markdown="1">If you use the `--config` flag, Jekyll will ignore your
-    `config.yml` file. Want to merge a custom configuration with the normal
+  <h5>The config flag explicitly specifies your configuration file(s)</h5>
+  <p markdown="1">If you use the `&#45;&#45;config` flag, Jekyll will ignore your
+    `&#95;config.yml` file. Want to merge a custom configuration with the normal
     configuration? No problem. Jekyll will accept more than one custom config
     file via the command line. Config files cascade from right to left, such
-    that if I run `jekyll serve --config config.yml,config-dev.yml`,
-    the values in the config files on the right (`config-dev.yml`) overwrite
-    those on the left (`config.yml`) when both contain the same key.</p>
+    that if I run `jekyll serve &#45;&#45;config &#95;config.yml,&#95;config-dev.yml`,
+    the values in the config files on the right (`&#95;config-dev.yml`) overwrite
+    those on the left (`&#95;config.yml`) when both contain the same key.</p>
 </div>
 
 ### Draft posts
@@ -89,14 +89,15 @@ Jekyll now lets you write draft posts, and allows you to easily preview how
 they will look prior to publishing. To start a draft, simply create a folder
 called `_drafts` in your site's source directory (e.g., alongside `_posts`),
 and add a new markdown file to it. To preview your new post, simply run the
-`Jekyll serve` command with the `--drafts` flag.
+`jekyll serve` command with the `--drafts` flag.
 
 <div class="note info">
   <h5 markdown="1">Drafts don't have dates</h5>
-  <p markdown="1">Unlike posts, drafts don't have a date, since they haven't
-  been published yet. Rather than naming your draft something like
-  `2013-07-01-my-draft-post.md`, simply name the file what you'd like your
-  post to eventually be titled, here `my-draft-post.md`.</p>
+  <p markdown="1">
+    Unlike posts, drafts don't have a date, since they haven't
+    been published yet. Rather than naming your draft something like
+    `2013-07-01-my-draft-post.md`, simply name the file what you'd like your
+    post to eventually be titled, here `my-draft-post.md`.</p>
 </div>
 
 ### Baseurl
