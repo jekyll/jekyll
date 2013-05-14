@@ -115,7 +115,7 @@ module Jekyll
     def read_config_file(file)
       next_config = YAML.safe_load_file(file)
       raise "Configuration file: (INVALID) #{file}".yellow if !next_config.is_a?(Hash)
-      Jekyll::Logger.info "Configuration file:", file
+      Jekyll::Stevenson.info "Configuration file:", file
       next_config
     end
 
@@ -135,9 +135,9 @@ module Jekyll
         end
       rescue SystemCallError
         # Errno:ENOENT = file not found
-        Jekyll::Logger.warn "Configuration file:", "none"
+        Jekyll::Stevenson.warn "Configuration file:", "none"
       rescue => err
-        Jekyll::Logger.warn "WARNING:", "Error reading configuration. " +
+        Jekyll::Stevenson.warn "WARNING:", "Error reading configuration. " +
                      "Using defaults (and options)."
         $stderr.puts "#{err}"
       end
@@ -153,7 +153,7 @@ module Jekyll
       config = clone
       # Provide backwards-compatibility
       if config.has_key?('auto') || config.has_key?('watch')
-        Jekyll::Logger.warn "Deprecation:", "Auto-regeneration can no longer" +
+        Jekyll::Stevenson.warn "Deprecation:", "Auto-regeneration can no longer" +
                             " be set from your configuration file(s). Use the"+
                             " --watch/-w command-line option instead."
         config.delete('auto')
@@ -161,14 +161,14 @@ module Jekyll
       end
 
       if config.has_key? 'server'
-        Jekyll::Logger.warn "Deprecation:", "The 'server' configuration option" +
+        Jekyll::Stevenson.warn "Deprecation:", "The 'server' configuration option" +
                             " is no longer accepted. Use the 'jekyll serve'" +
                             " subcommand to serve your site with WEBrick."
         config.delete('server')
       end
 
       if config.has_key? 'server_port'
-        Jekyll::Logger.warn "Deprecation:", "The 'server_port' configuration option" +
+        Jekyll::Stevenson.warn "Deprecation:", "The 'server_port' configuration option" +
                             " has been renamed to 'port'. Please update your config" +
                             " file accordingly."
         # copy but don't overwrite:
