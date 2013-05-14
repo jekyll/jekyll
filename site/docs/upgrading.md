@@ -89,7 +89,7 @@ Jekyll now lets you write draft posts, and allows you to easily preview how
 they will look prior to publishing. To start a draft, simply create a folder
 called `_drafts` in your site's source directory (e.g., alongside `_posts`),
 and add a new markdown file to it. To preview your new post, simply run the
-`Jekyll serve` command with the `--drafts` flag.
+`jekyll serve` command with the `--drafts` flag.
 
 <div class="note info">
   <h5 markdown="1">Drafts don't have dates</h5>
