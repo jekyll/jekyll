@@ -519,7 +519,7 @@ pre, code {
   }
 }
 
-.highlight, p > pre, p > code, p > nobr > code, li > code, h5 > code {
+.highlight, p > pre, p > code, p > nobr > code, li > code, h5 > code, .note > code {
   background: #333;
   color: #fff;
   border-radius: 5px;
@@ -533,9 +533,6 @@ pre, code {
   margin-left: 2.5px;
   margin-right: 2.5px;
   font-size: 0.8em;
-  box-shadow: inset 0 1px 10px rgba(0,0,0,.4),
-    0 1px 0 rgba(255,255,255,.1),
-    0 -1px 0 rgba(0,0,0,.5);
 }
 
 .highlight {
