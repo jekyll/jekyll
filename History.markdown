@@ -4,6 +4,7 @@
 ### Minor Enhancements
 
 ### Bug Fixes
+  * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
 
 ### Site Enhancements
   * Add jekyll-contentblocks plugin to docs (#1068)
