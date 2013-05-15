@@ -71,8 +71,6 @@ module Jekyll
     #
     # Returns nothing.
     def setup
-      require 'classifier' if self.lsi
-
       # Check that the destination dir isn't the source dir or a directory
       # parent to the source dir.
       if self.source =~ /^#{self.dest}/

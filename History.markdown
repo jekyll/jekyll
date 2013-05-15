@@ -2,11 +2,15 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Move the building of related posts into their own class (#1057)
 
 ### Bug Fixes
   * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
 
 ### Site Enhancements
+  * Add link to jekyll-minibundle in the doc's plugins list (#1035)
+  * Quick patch for importers documentation
+  * Fix prefix for WordpressDotCom importer in docs (#1107)
   * Add jekyll-contentblocks plugin to docs (#1068)
   * Make code bits in notes look more natural, more readable (#1089)
   * Fix logic for `relative_permalinks` instructions on Upgrading page (#1101)

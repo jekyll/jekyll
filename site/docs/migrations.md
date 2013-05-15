@@ -15,12 +15,13 @@ the foreign system.
 ## Preparing for migrations
 
 Because the importers have many of their own dependencies, they are made
-available via a separate gem called `jekyll-import`. To use them, all you need
-to do is install the gem, and they will become available as part of Jekyll's
-standard command line interface.
+available via a separate gem called
+[`jekyll-import`](https://github.com/jekyll/jekyll-import). To use them, all
+you need to do is install the gem, and they will become available as part of
+Jekyll's standard command line interface.
 
 {% highlight bash %}
-$ gem install jekyll-import
+$ gem install jekyll-import [--pre]
 {% endhighlight %}
 
 You should now be all set to run the importers below. If you ever get stuck, you
@@ -55,13 +56,13 @@ Next, export your blog using the Wordpress export utility. Assuming that the
 exported file is saved as `wordpress.xml`, here is the command you need to run:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/wordpressdotcom";
-    Jekyll::WordpressDotCom.process("wordpress.xml")'
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpressdotcom";
+    JekyllImport::WordpressDotCom.process("wordpress.xml")'
 {% endhighlight %}
 
 <div class="note">
   <h5>ProTip™: Wordpress.com Export Tool</h5>
-  <p>If you are migrating from a Wordpress.com account, you can access the export tool at the following URL: `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`.</p>
+  <p markdown="1">If you are migrating from a Wordpress.com account, you can access the export tool at the following URL: `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`.</p>
 </div>
 
 ### Using Wordpress MySQL server connection
@@ -70,7 +71,7 @@ If you want to import using a direct connection to the Wordpress MySQL server, h
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/wordpress";
-    Jekyll::WordPress.process("database", "user", "pass")'
+    JekyllImport::WordPress.process("database", "user", "pass")'
 {% endhighlight %}
 
 If you are using Webfaction and have to set up an [SSH
@@ -81,7 +82,7 @@ authentication system:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/wordpress";
-    Jekyll::WordPress.process("database", "user", "pass", "127.0.0.1")'
+    JekyllImport::WordPress.process("database", "user", "pass", "127.0.0.1")'
 {% endhighlight %}
 
 ### Further Wordpress migration alternatives
@@ -110,7 +111,7 @@ for you too:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/drupal";
-    Jekyll::Drupal.process("database", "user", "pass")'
+    JekyllImport::Drupal.process("database", "user", "pass")'
 {% endhighlight %}
 
 <div class="note warning">
@@ -126,7 +127,7 @@ To import posts from Movable Type:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/mt";
-    Jekyll::MT.process("database", "user", "pass")'
+    JekyllImport::MT.process("database", "user", "pass")'
 {% endhighlight %}
 
 ## Typo
@@ -135,7 +136,7 @@ To import posts from Typo:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/typo";
-    Jekyll::Typo.process("database", "user", "pass")'
+    JekyllImport::Typo.process("database", "user", "pass")'
 {% endhighlight %}
 
 This code has only been tested with Typo version 4+.
@@ -146,7 +147,7 @@ To import posts from TextPattern:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/textpattern";
-    Jekyll::TextPattern.process("database_name", "username", "password", "hostname")'
+    JekyllImport::TextPattern.process("database_name", "username", "password", "hostname")'
 {% endhighlight %}
 
 You will need to run the above from the parent directory of your `_import`
@@ -162,14 +163,14 @@ To import posts from Mephisto:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/mephisto";
-    Jekyll::Mephisto.process("database", "user", "password")'
+    JekyllImport::Mephisto.process("database", "user", "password")'
 {% endhighlight %}
 
 If your data is in Postgres, you should do this instead:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/mephisto";
-    Jekyll::Mephisto.postgres({:database => "database", :username=>"username", :password =>"password"})'
+    JekyllImport::Mephisto.postgres({:database => "database", :username=>"username", :password =>"password"})'
 {% endhighlight %}
 
 ## Blogger (Blogspot)
@@ -197,7 +198,7 @@ To import posts from your primary Posterous blog:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/posterous";
-    Jekyll::Posterous.process("my_email", "my_pass")'
+    JekyllImport::Posterous.process("my_email", "my_pass")'
 {% endhighlight %}
 
 For any other Posterous blog on your account, you will need to specify the
@@ -205,7 +206,7 @@ For any other Posterous blog on your account, you will need to specify the
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/posterous";
-    Jekyll::Posterous.process("my_email", "my_pass", "blog_id")'
+    JekyllImport::Posterous.process("my_email", "my_pass", "blog_id")'
 {% endhighlight %}
 
 There is also an [alternative Posterous
@@ -218,7 +219,7 @@ To import posts from Tumblr:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/tumblr";
-    Jekyll::Tumblr.process("http://www.your_blog_url.com", true)'
+    JekyllImport::Tumblr.process("http://www.your_blog_url.com", true)'
 {% endhighlight %}
 
 There is also [a modified Tumblr
@@ -237,7 +238,7 @@ Once installed, simply use the format argument:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/tumblr";
-    Jekyll::Tumblr.process("http://www.your_blog_url.com", format="md")'
+    JekyllImport::Tumblr.process("http://www.your_blog_url.com", format="md")'
 {% endhighlight %}
 
 ## Other Systems
