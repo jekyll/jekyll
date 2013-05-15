@@ -55,8 +55,8 @@ Next, export your blog using the Wordpress export utility. Assuming that the
 exported file is saved as `wordpress.xml`, here is the command you need to run:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/wordpressdotcom";
-    Jekyll::WordpressDotCom.process("wordpress.xml")'
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpressdotcom";
+    JekyllImport::WordpressDotCom.process("wordpress.xml")'
 {% endhighlight %}
 
 <div class="note">
