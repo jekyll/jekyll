@@ -40,6 +40,7 @@ require 'jekyll/draft'
 require 'jekyll/filters'
 require 'jekyll/static_file'
 require 'jekyll/errors'
+require 'jekyll/related_posts'
 
 # extensions
 require 'jekyll/plugin'
