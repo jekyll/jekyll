@@ -7,6 +7,7 @@
   * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
 
 ### Site Enhancements
+  * Quick patch for importers documentation
   * Fix prefix for WordpressDotCom importer in docs (#1107)
   * Add jekyll-contentblocks plugin to docs (#1068)
   * Make code bits in notes look more natural, more readable (#1089)
