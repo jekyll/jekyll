@@ -427,6 +427,7 @@ There are a few useful, prebuilt plugins at the following locations:
 - [File compressor](https://gist.github.com/2758691) by [mytharcher](https://github.com/mytharcher): Compress HTML (\*.html) and JavaScript(\*.js) files when output.
 - [smilify](https://github.com/SaswatPadhi/jekyll_smilify) by [SaswatPadhi](https://github.com/SaswatPadhi): Convert text emoticons in your content to themeable smiley pics. [Demo](http://saswatpadhi.github.com/)
 - [excerpts](http://blog.darkrefraction.com/2012/jekyll-excerpt-plugin.html) by [drawoc](https://github.com/drawoc): provides a nice way to implement page excerpts.
+- [jekyll-minibundle](https://github.com/tkareine/jekyll-minibundle): Asset bundling and cache busting using external minification tool of your choice, no gem dependencies.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>

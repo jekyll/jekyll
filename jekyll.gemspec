@@ -92,13 +92,14 @@ Gem::Specification.new do |s|
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
-    lib/jekyll/logger.rb
     lib/jekyll/mime.types
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
     lib/jekyll/post.rb
+    lib/jekyll/related_posts.rb
     lib/jekyll/site.rb
     lib/jekyll/static_file.rb
+    lib/jekyll/stevenson.rb
     lib/jekyll/tags/gist.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
@@ -235,6 +236,7 @@ Gem::Specification.new do |s|
     test/test_rdiscount.rb
     test/test_redcarpet.rb
     test/test_redcloth.rb
+    test/test_related_posts.rb
     test/test_site.rb
     test/test_tags.rb
   ]
