@@ -172,7 +172,7 @@ class TestSite < Test::Unit::TestCase
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
-      categories = %w(bar baz category foo z_category publish_test win).sort
+      categories = %w(2013 bar baz category foo z_category publish_test win).sort
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort

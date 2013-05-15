@@ -18,9 +18,9 @@ module Jekyll
       site.process
     rescue Jekyll::FatalException => e
       puts
-      Jekyll::Logger.error "ERROR:", "YOUR SITE COULD NOT BE BUILT:"
-      Jekyll::Logger.error "", "------------------------------------"
-      Jekyll::Logger.error "", e.message
+      Jekyll::Stevenson.error "ERROR:", "YOUR SITE COULD NOT BE BUILT:"
+      Jekyll::Stevenson.error "", "------------------------------------"
+      Jekyll::Stevenson.error "", e.message
       exit(1)
     end
   end

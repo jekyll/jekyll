@@ -234,3 +234,21 @@ You can also use this tag to create a link to a post in Markdown as follows:
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
 {% endraw %}
 {% endhighlight %}
+
+### Gist
+
+Use the `gist` tag to easily embed a GitHub Gist onto your site:
+
+{% highlight text %}
+{% raw %}
+{% gist 5555251 %}
+{% endraw %}
+{% endhighlight %}
+
+You may also optionally specify the filename in the gist to display:
+
+{% highlight text %}
+{% raw %}
+{% gist 5555251 result.md %}
+{% endraw %}
+{% endhighlight %}

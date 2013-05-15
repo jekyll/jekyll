@@ -253,6 +253,8 @@ show_drafts: nil
 limit_posts: 0
 pygments:    true
 
+relative_permalinks: true
+
 permalink:     date
 paginate_path: 'page:num'
 

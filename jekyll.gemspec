@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.0.1'
+  s.version           = '1.0.2'
   s.license           = 'MIT'
-  s.date              = '2013-05-08'
+  s.date              = '2013-05-12'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -71,6 +71,7 @@ Gem::Specification.new do |s|
     lib/jekyll.rb
     lib/jekyll/command.rb
     lib/jekyll/commands/build.rb
+    lib/jekyll/commands/doctor.rb
     lib/jekyll/commands/new.rb
     lib/jekyll/commands/serve.rb
     lib/jekyll/configuration.rb
@@ -203,6 +204,7 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-01-12-no-layout.textile
     test/source/_posts/2013-03-19-not-a-post.markdown/.gitkeep
     test/source/_posts/2013-04-11-custom-excerpt.markdown
+    test/source/_posts/2013-05-10-number-category.textile
     test/source/_posts/es/2008-11-21-nested.textile
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
