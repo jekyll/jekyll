@@ -28,13 +28,13 @@ module Jekyll
     def build_index
       self.class.lsi ||= begin
         lsi = Classifier::LSI.new(:auto_rebuild => false)
-        display("\n  Populating LSI... ")
+        display("Populating LSI...")
 
         self.site.posts.each do |x|
           lsi.add_item(x)
         end
 
-        display("\nRebuilding index... ")
+        display("Rebuilding index...")
         lsi.build_index
         display("")
         lsi
@@ -50,7 +50,8 @@ module Jekyll
     end
 
     def display(output)
-      $stdout.print(output)
+      $stdout.print("\n")
+      $stdout.print(Jekyll::Stevenson.formatted_topic(output))
       $stdout.flush
     end
   end
