@@ -3,12 +3,12 @@ require 'erb'
 module Jekyll
   module Commands
     class New < Command
-      def self.process(args)
+      def self.process(args, options = {})
         raise ArgumentError.new('You must specify a path.') if args.empty?
 
         new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
         FileUtils.mkdir_p new_blog_path
-        unless Dir["#{new_blog_path}/**/*"].empty?
+        if !options[:force] && !Dir["#{new_blog_path}/**/*"].empty?
           Jekyll::Stevenson.error "Conflict:", "#{new_blog_path} exists and is not empty."
           exit(1)
         end
