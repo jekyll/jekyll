@@ -57,7 +57,7 @@ require_all 'jekyll/tags'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.0.1'
+  VERSION = '1.0.2'
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.

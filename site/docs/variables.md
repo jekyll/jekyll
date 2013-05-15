@@ -3,6 +3,7 @@ layout: docs
 title: Variables
 prev_section: pages
 next_section: migrations
+permalink: /docs/variables/
 ---
 
 Jekyll traverses your site looking for files to process. Any files with [YAML

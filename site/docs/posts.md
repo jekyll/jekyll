@@ -3,6 +3,7 @@ layout: docs
 title: Writing posts
 prev_section: frontmatter
 next_section: pages
+permalink: /docs/posts/
 ---
 
 One of Jekyll’s best aspects is that it is “blog aware”. What does this mean,
@@ -95,7 +96,7 @@ Linking to a PDF for readers to download:
 It’s all well and good to have posts in a folder, but a blog is no use unless
 you have a list of posts somewhere. Creating an index of posts on another page
 (or in a [template](../templates)) is easy, thanks to the [Liquid template
-language](http://liquidmarkup.org/) and its tags. Here’s a basic example of how
+language](http://wiki.shopify.com/Liquid) and its tags. Here’s a basic example of how
 to create a list of links to your blog posts:
 
 {% highlight html %}
@@ -111,6 +112,28 @@ to create a list of links to your blog posts:
 Of course, you have full control over how (and where) you display your posts,
 and how you structure your site. You should read more about [how templates
 work](../templates) with Jekyll if you want to know more.
+
+## Post excerpts
+
+Each post automatically takes the first block of text, from the beginning of the content
+to the first occurrence of `excerpt_separator`, and sets it as the `post.excerpt`.
+Take the above example of an index of posts. Perhaps you want to include
+a little hint about the post's content by adding the first paragraph of each of your
+posts:
+
+{% highlight html %}
+<ul>
+  {% raw %}{% for post in site.posts %}{% endraw %}
+    <li>
+      <a href="{% raw %}{{ post.url }}{% endraw %}">{% raw %}{{ post.title }}{% endraw %}</a>
+      <p>{% raw %}{{ post.excerpt }}{% endraw %}</p>
+    </li>
+  {% raw %}{% endfor %}{% endraw %}
+</ul>
+{% endhighlight %}
+
+If you don't like the automatically-generated post excerpt, it can be overridden by adding
+`excerpt` to your post's YAML front-matter.
 
 ## Highlighting code snippets
 

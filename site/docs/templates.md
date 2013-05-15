@@ -3,9 +3,10 @@ layout: docs
 title: Templates
 prev_section: migrations
 next_section: permalinks
+permalink: /docs/templates/
 ---
 
-Jekyll uses the [Liquid](http://www.liquidmarkup.org/) templating language to
+Jekyll uses the [Liquid](http://wiki.shopify.com/Liquid) templating language to
 process templates. All of the [standard Liquid tags and
 filters](http://wiki.github.com/shopify/liquid/liquid-for-designers) are
 supported, Jekyll even adds a few handy filters and tags of its own to make
@@ -231,5 +232,23 @@ You can also use this tag to create a link to a post in Markdown as follows:
 {% highlight text %}
 {% raw %}
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
+{% endraw %}
+{% endhighlight %}
+
+### Gist
+
+Use the `gist` tag to easily embed a GitHub Gist onto your site:
+
+{% highlight text %}
+{% raw %}
+{% gist 5555251 %}
+{% endraw %}
+{% endhighlight %}
+
+You may also optionally specify the filename in the gist to display:
+
+{% highlight text %}
+{% raw %}
+{% gist 5555251 result.md %}
 {% endraw %}
 {% endhighlight %}

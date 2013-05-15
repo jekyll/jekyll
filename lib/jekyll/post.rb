@@ -76,7 +76,7 @@ module Jekyll
 
     def populate_categories
       if self.categories.empty?
-        self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
+        self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.to_s.downcase}
       end
       self.categories.flatten!
     end

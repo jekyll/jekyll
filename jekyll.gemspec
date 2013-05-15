@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.0.1'
+  s.version           = '1.0.2'
   s.license           = 'MIT'
-  s.date              = '2013-05-08'
+  s.date              = '2013-05-12'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -27,8 +27,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('directory_watcher', "~> 1.4.1")
   s.add_runtime_dependency('maruku', "~> 0.5")
-  s.add_runtime_dependency('kramdown', "~> 0.14")
-  s.add_runtime_dependency('pygments.rb', "~> 0.4.2")
+  s.add_runtime_dependency('kramdown', "~> 1.0.2")
+  s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('commander', "~> 4.1.3")
   s.add_runtime_dependency('safe_yaml', "~> 0.7.0")
   s.add_runtime_dependency('colorator', "~> 0.1")
@@ -71,6 +71,7 @@ Gem::Specification.new do |s|
     lib/jekyll.rb
     lib/jekyll/command.rb
     lib/jekyll/commands/build.rb
+    lib/jekyll/commands/doctor.rb
     lib/jekyll/commands/new.rb
     lib/jekyll/commands/serve.rb
     lib/jekyll/configuration.rb
@@ -125,34 +126,33 @@ Gem::Specification.new do |s|
     site/_includes/top.html
     site/_layouts/default.html
     site/_layouts/docs.html
-    site/_posts/2012-07-01-configuration.md
-    site/_posts/2012-07-01-contributing.md
-    site/_posts/2012-07-01-deployment-methods.md
-    site/_posts/2012-07-01-extras.md
-    site/_posts/2012-07-01-frontmatter.md
-    site/_posts/2012-07-01-github-pages.md
-    site/_posts/2012-07-01-heroku.md
-    site/_posts/2012-07-01-home.md
-    site/_posts/2012-07-01-installation.md
-    site/_posts/2012-07-01-migrations.md
-    site/_posts/2012-07-01-pages.md
-    site/_posts/2012-07-01-pagination.md
-    site/_posts/2012-07-01-permalinks.md
-    site/_posts/2012-07-01-plugins.md
-    site/_posts/2012-07-01-posts.md
-    site/_posts/2012-07-01-resources.md
-    site/_posts/2012-07-01-sites.md
-    site/_posts/2012-07-01-structure.md
-    site/_posts/2012-07-01-templates.md
-    site/_posts/2012-07-01-troubleshooting.md
-    site/_posts/2012-07-01-upgrading.md
-    site/_posts/2012-07-01-usage.md
-    site/_posts/2012-07-01-variables.md
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
     site/css/style.css
-    site/docs/index.html
+    site/docs/configuration.md
+    site/docs/contributing.md
+    site/docs/deployment-methods.md
+    site/docs/extras.md
+    site/docs/frontmatter.md
+    site/docs/github-pages.md
+    site/docs/heroku.md
+    site/docs/index.md
+    site/docs/installation.md
+    site/docs/migrations.md
+    site/docs/pages.md
+    site/docs/pagination.md
+    site/docs/permalinks.md
+    site/docs/plugins.md
+    site/docs/posts.md
+    site/docs/resources.md
+    site/docs/sites.md
+    site/docs/structure.md
+    site/docs/templates.md
+    site/docs/troubleshooting.md
+    site/docs/upgrading.md
+    site/docs/usage.md
+    site/docs/variables.md
     site/favicon.png
     site/img/article-footer.png
     site/img/footer-arrow.png
@@ -204,6 +204,7 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-01-12-no-layout.textile
     test/source/_posts/2013-03-19-not-a-post.markdown/.gitkeep
     test/source/_posts/2013-04-11-custom-excerpt.markdown
+    test/source/_posts/2013-05-10-number-category.textile
     test/source/_posts/es/2008-11-21-nested.textile
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile

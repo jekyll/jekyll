@@ -76,7 +76,7 @@ module Jekyll
     def render_liquid(content, payload, info)
       Liquid::Template.parse(content).render!(payload, info)
     rescue Exception => e
-      Jekyll::Logger.error "Liquid Exception:", "#{e.message} in #{payload[:file]}"
+      Jekyll::Stevenson.error "Liquid Exception:", "#{e.message} in #{payload[:file]}"
       e.backtrace.each do |backtrace|
         puts backtrace
       end

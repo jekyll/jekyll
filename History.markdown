@@ -1,9 +1,41 @@
 ## HEAD
 ### Major Enhancements
+
 ### Minor Enhancements
+
 ### Bug Fixes
+  * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
+
 ### Site Enhancements
+  * Add jekyll-contentblocks plugin to docs (#1068)
+  * Make code bits in notes look more natural, more readable (#1089)
+  * Fix logic for `relative_permalinks` instructions on Upgrading page (#1101)
+  * Add docs for post excerpt (#1072)
+  * Add docs for gist tag (#1072)
+
 ### Development Fixes
+
+## 1.0.2 / 2013-05-12
+
+### Major Enhancements
+  * Add `jekyll doctor` command to check site for any known compatibility problems (#1081)
+  * Backwards-compatibilize relative permalinks (#1081)
+
+### Minor Enhancements
+  * Add a `data-lang="<lang>"` attribute to Redcarpet code blocks (#1066)
+  * Deprecate old config `server_port`, match to `port` if `port` isn't set (#1084)
+  * Update pygments.rb version to 0.5.0 (#1061)
+  * Update Kramdown version to 1.0.2 (#1067)
+
+### Bug Fixes
+  * Fix issue when categories are numbers (#1078)
+  * Catching that Redcarpet gem isn't installed (#1059)
+
+### Site Enhancements
+  * Add documentation about `relative_permalinks` (#1081)
+  * Remove pygments-installation instructions, as pygments.rb is bundled with it (#1079)
+  * Move pages to be Pages for realz (#985)
+  * Updated links to Liquid documentation (#1073)
 
 ## 1.0.1 / 2013-05-08
 

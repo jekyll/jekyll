@@ -146,7 +146,7 @@ module Jekyll
       when String
         Time.parse(input)
       else
-        Jekyll::Logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
+        Jekyll::Stevenson.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)
       end
     end

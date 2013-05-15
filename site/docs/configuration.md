@@ -3,6 +3,7 @@ layout: docs
 title: Configuration
 prev_section: structure
 next_section: frontmatter
+permalink: /docs/configuration/
 ---
 
 Jekyll allows you to concoct your sites in any way you can dream up, and it’s
@@ -251,6 +252,8 @@ future:      true
 show_drafts: nil
 limit_posts: 0
 pygments:    true
+
+relative_permalinks: true
 
 permalink:     date
 paginate_path: 'page:num'
