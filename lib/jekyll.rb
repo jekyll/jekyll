@@ -28,7 +28,7 @@ require 'colorator'
 
 # internal requires
 require 'jekyll/core_ext'
-require 'jekyll/logger'
+require 'jekyll/stevenson'
 require 'jekyll/deprecator'
 require 'jekyll/configuration'
 require 'jekyll/site'
