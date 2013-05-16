@@ -195,7 +195,7 @@ class TestSite < Test::Unit::TestCase
       @site.exclude = excludes + ["exclude*"]
       assert_equal files, @site.filter_entries(excludes + files + ["excludeA"])
     end
-    
+
     should "not filter entries within include" do
       includes = %w[_index.html .htaccess include*]
       files = %w[index.html _index.html .htaccess includeA]
@@ -284,7 +284,7 @@ class TestSite < Test::Unit::TestCase
         File.open(dest_dir('.svn/HEAD'), 'w')
         File.open(dest_dir('.hg/HEAD'), 'w')
       end
-      
+
       teardown do
         FileUtils.rm_f(dest_dir('obsolete.html'))
         FileUtils.rm_rf(dest_dir('qux'))
@@ -293,7 +293,7 @@ class TestSite < Test::Unit::TestCase
         FileUtils.rm_rf(dest_dir('.svn'))
         FileUtils.rm_rf(dest_dir('.hg'))
       end
-      
+
       should 'remove orphaned files in destination' do
         @site.process
         assert !File.exist?(dest_dir('obsolete.html'))
@@ -317,7 +317,7 @@ class TestSite < Test::Unit::TestCase
         assert File.exist?(dest_dir('.svn/HEAD'))
       end
     end
-    
+
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
@@ -325,7 +325,7 @@ class TestSite < Test::Unit::TestCase
           Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
         end
       end
-      
+
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
         s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
@@ -334,6 +334,6 @@ class TestSite < Test::Unit::TestCase
         end
       end
     end
-    
+
   end
 end
