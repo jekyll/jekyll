@@ -3,6 +3,7 @@
 
 ### Minor Enhancements
   * Move the building of related posts into their own class (#1057)
+  * Removed trailing spaces in several places throughout the code (#1116)
 
 ### Bug Fixes
   * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
