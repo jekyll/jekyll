@@ -6,7 +6,7 @@ class TestRedCloth < Test::Unit::TestCase
     setup do
       @textile = Converters::Textile.new
     end
-    
+
     should "preserve single line breaks in HTML output" do 
       assert_equal "<p>line1<br />\nline2</p>", @textile.convert("p. line1\nline2").strip
     end
@@ -19,7 +19,7 @@ class TestRedCloth < Test::Unit::TestCase
         }
       @textile = Converters::Textile.new config
     end
-    
+
     should "preserve single line breaks in HTML output" do 
       assert_equal "<p>line1<br />\nline2</p>", @textile.convert("p. line1\nline2").strip
     end
@@ -34,7 +34,7 @@ class TestRedCloth < Test::Unit::TestCase
       }
       @textile = Converters::Textile.new config
     end
-    
+
     should "preserve single line breaks in HTML output" do 
       assert_equal "<p>line1<br />\nline2</p>", @textile.convert("p. line1\nline2").strip
     end
