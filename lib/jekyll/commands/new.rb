@@ -8,7 +8,7 @@ module Jekyll
 
         new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
         FileUtils.mkdir_p new_blog_path
-        if preserve_source_location(new_blog_path, options)
+        if preserve_source_location?(new_blog_path, options)
           Jekyll::Stevenson.error "Conflict:", "#{new_blog_path} exists and is not empty."
           exit(1)
         end
@@ -33,8 +33,8 @@ module Jekyll
       end
 
       private
-      
-      def self.preserve_source_location(path, options)
+
+      def self.preserve_source_location?(path, options)
         !options[:force] && !Dir["#{path}/**/*"].empty?
       end
 
