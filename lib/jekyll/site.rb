@@ -270,7 +270,11 @@ module Jekyll
       files.each { |file| dirs << File.dirname(file) }
       files.merge(dirs)
 
-      obsolete_files = dest_files - files
+      # files that are replaced by dirs should be deleted
+      files_to_delete = Set.new
+      dirs.each { |dir| files_to_delete << dir if File.file?(dir) }
+
+      obsolete_files = dest_files - files + files_to_delete
       FileUtils.rm_rf(obsolete_files.to_a)
     end
 
