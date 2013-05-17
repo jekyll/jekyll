@@ -51,9 +51,11 @@ class TestConfiguration < Test::Unit::TestCase
   context "#backwards_compatibilize" do
     setup do
       @config = Configuration[{
-        "auto" => true,
-        "watch" => true,
-        "server" => true
+        "auto"    => true,
+        "watch"   => true,
+        "server"  => true,
+        "exclude" => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
+        "include" => "STOP_THE_PRESSES.txt,.heloses, .git"
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -65,6 +67,16 @@ class TestConfiguration < Test::Unit::TestCase
     should "unset 'server'" do
       assert @config.has_key?("server")
       assert !@config.backwards_compatibilize.has_key?("server")
+    end
+    should "transform string exclude into an array" do
+      assert @config.has_key?("exclude")
+      assert @config.backwards_compatibilize.has_key?("exclude")
+      assert_equal @config.backwards_compatibilize["exclude"], %w[READ-ME.md Gemfile CONTRIBUTING.hello.markdown]
+    end
+    should "transform string include into an array" do
+      assert @config.has_key?("include")
+      assert @config.backwards_compatibilize.has_key?("include")
+      assert_equal @config.backwards_compatibilize["include"], %w[STOP_THE_PRESSES.txt .heloses .git]
     end
   end
   context "loading configuration" do
