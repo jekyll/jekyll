@@ -2,7 +2,7 @@ Feature: Draft Posts
   As a hacker who likes to blog
   I want to be able to preview drafts locally
   In order to see if they look alright before publishing
-  
+
   Scenario: Preview a draft
     Given I have a configuration file with "permalink" set to "none"
     And I have a _drafts directory
