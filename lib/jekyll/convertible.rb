@@ -96,7 +96,7 @@ module Jekyll
         payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
 
         self.output = self.render_liquid(layout.content,
-                                         payload.merge({:file => self.data["layout"]}),
+                                         payload.merge({:file => layout.name}),
                                          info)
 
         if layout = layouts[layout.data["layout"]]
