@@ -138,8 +138,8 @@ If you don't like the automatically-generated post excerpt, it can be overridden
 ## Highlighting code snippets
 
 Jekyll also has built-in support for syntax highlighting of code snippets using
-[Pygments](../extras), and including a code snippet in any post is easy. Just
-use the dedicated Liquid tag as follows:
+Pygments, and including a code snippet in any post is easy. Just use the
+dedicated Liquid tag as follows:
 
 {% highlight text %}
 {% raw %}{% highlight ruby %}{% endraw %}
