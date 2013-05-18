@@ -62,14 +62,17 @@ Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, dire
     if "draft" == status
       path = File.join(before || '.', '_drafts', after || '.', "#{title}.#{ext}")
     else
-      format = if has_time_component?(post['date'])
-        '%Y-%m-%d %H:%M %z'
+      if has_time_component?(post['date'])
+        format = '%Y-%m-%d %H:%M %z'
+        parsed_date = DateTime.strptime(post['date'], format)
+        post['date'] = parsed_date.to_s
+        date = parsed_date.strftime('%Y-%m-%d')
       else
-        '%m/%d/%Y' # why even
+        format = '%m/%d/%Y' # why even
+        parsed_date = DateTime.strptime(post['date'], format)
+        post['date'] = parsed_date.strftime('%Y-%m-%d %H:%M')
+        date = parsed_date.strftime('%Y-%m-%d')
       end
-      parsed_date = DateTime.strptime(post['date'], format)
-      post['date'] = parsed_date.strftime('%Y-%m-%d %H:%M')
-      date = parsed_date.strftime('%Y-%m-%d')
       path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{ext}")
     end
 
