@@ -20,6 +20,8 @@
   * Fix logic for `relative_permalinks` instructions on Upgrading page (#1101)
   * Add docs for post excerpt (#1072)
   * Add docs for gist tag (#1072)
+  * Add docs indicating that Pygments does not need to be installed
+    separately (#1099, #1119)
 
 ### Development Fixes
 
