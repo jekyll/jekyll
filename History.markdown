@@ -7,6 +7,7 @@
 
 ### Bug Fixes
   * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
+  * Exit with a non-zero exit code when dealing with a Liquid error (#1121)
 
 ### Site Enhancements
   * Add link to jekyll-minibundle in the doc's plugins list (#1035)
