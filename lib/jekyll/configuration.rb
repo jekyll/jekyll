@@ -145,6 +145,15 @@ module Jekyll
       configuration.backwards_compatibilize
     end
 
+    # Public: Split a CSV string into an array containing its values
+    #
+    # csv - the string of comma-separated values
+    #
+    # Returns an array of the values contained in the CSV
+    def csv_to_array(csv)
+      csv.split(",").map(&:strip)
+    end
+
     # Public: Ensure the proper options are set in the configuration to allow for
     # backwards-compatibility with Jekyll pre-1.0
     #
@@ -174,6 +183,22 @@ module Jekyll
         # copy but don't overwrite:
         config['port'] = config['server_port'] unless config.has_key?('port')
         config.delete('server_port')
+      end
+
+      if config.has_key?('exclude') && config['exclude'].is_a?(String)
+        Jekyll::Stevenson.warn "Deprecation:", "The 'exclude' configuration option" +
+                               " must now be specified as an array, but you specified" +
+                               " a string. For now, we've treated the string you provided" +
+                               " as a list of comma-separated values."
+        config['exclude'] = csv_to_array(config['exclude'])
+      end
+
+      if config.has_key?('include') && config['include'].is_a?(String)
+        Jekyll::Stevenson.warn "Deprecation:", "The 'include' configuration option" +
+                               " must now be specified as an array, but you specified" +
+                               " a string. For now, we've treated the string you provided" +
+                               " as a list of comma-separated values."
+        config['include'] = csv_to_array(config['include'])
       end
 
       config
