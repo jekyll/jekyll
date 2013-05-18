@@ -68,7 +68,7 @@ Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, dire
         '%m/%d/%Y' # why even
       end
       parsed_date = DateTime.strptime(post['date'], format)
-      post['date'] = parsed_date.to_s
+      post['date'] = parsed_date.strftime('%Y-%m-%d %H:%M')
       date = parsed_date.strftime('%Y-%m-%d')
       path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{ext}")
     end
