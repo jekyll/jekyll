@@ -13,6 +13,7 @@
     versions of Jekyll prior to 1.0 (#1114)
 
 ### Site Enhancements
+  * Documentation highlight boxes shouldn't show scrollbars if not necessary (#1123)
   * Add link to jekyll-minibundle in the doc's plugins list (#1035)
   * Quick patch for importers documentation
   * Fix prefix for WordpressDotCom importer in docs (#1107)
