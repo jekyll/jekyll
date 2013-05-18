@@ -538,7 +538,7 @@ pre, code {
 .highlight {
   padding: 10px 0;
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 /* HTML Elements */
