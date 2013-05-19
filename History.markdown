@@ -4,11 +4,16 @@
 ### Minor Enhancements
   * Move the building of related posts into their own class (#1057)
   * Removed trailing spaces in several places throughout the code (#1116)
+  * Add a `--force` option to `jekyll new` (#1115)
 
 ### Bug Fixes
   * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
+  * Exit with a non-zero exit code when dealing with a Liquid error (#1121)
+  * Make the `exclude` and `include` options backwards compatible with
+    versions of Jekyll prior to 1.0 (#1114)
 
 ### Site Enhancements
+  * Documentation highlight boxes shouldn't show scrollbars if not necessary (#1123)
   * Add link to jekyll-minibundle in the doc's plugins list (#1035)
   * Quick patch for importers documentation
   * Fix prefix for WordpressDotCom importer in docs (#1107)
@@ -17,6 +22,8 @@
   * Fix logic for `relative_permalinks` instructions on Upgrading page (#1101)
   * Add docs for post excerpt (#1072)
   * Add docs for gist tag (#1072)
+  * Add docs indicating that Pygments does not need to be installed
+    separately (#1099, #1119)
 
 ### Development Fixes
 

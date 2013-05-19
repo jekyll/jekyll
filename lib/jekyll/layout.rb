@@ -5,6 +5,9 @@ module Jekyll
     # Gets the Site object.
     attr_reader :site
 
+    # Gets the name of this layout.
+    attr_reader :name
+
     # Gets/Sets the extension of this layout.
     attr_accessor :ext
 

@@ -37,8 +37,10 @@ command :new do |c|
   c.syntax = 'jekyll new PATH'
   c.description = 'Creates a new Jekyll site scaffold in PATH'
 
+  c.option '--force', 'Force creation even if PATH already exists'
+
   c.action do |args, options|
-    Jekyll::Commands::New.process(args)
+    Jekyll::Commands::New.process(args, options.__hash__)
   end
 end
 

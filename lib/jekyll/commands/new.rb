@@ -3,12 +3,12 @@ require 'erb'
 module Jekyll
   module Commands
     class New < Command
-      def self.process(args)
+      def self.process(args, options = {})
         raise ArgumentError.new('You must specify a path.') if args.empty?
 
         new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
         FileUtils.mkdir_p new_blog_path
-        unless Dir["#{new_blog_path}/**/*"].empty?
+        if preserve_source_location?(new_blog_path, options)
           Jekyll::Stevenson.error "Conflict:", "#{new_blog_path} exists and is not empty."
           exit(1)
         end
@@ -33,6 +33,11 @@ module Jekyll
       end
 
       private
+
+      def self.preserve_source_location?(path, options)
+        !options[:force] && !Dir["#{path}/**/*"].empty?
+      end
+
       def self.create_sample_files(path)
         FileUtils.cp_r site_template + '/.', path
         FileUtils.rm File.expand_path(scaffold_path, path)

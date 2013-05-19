@@ -50,10 +50,8 @@ community can improve the experience for everyone.
 
 There are a number of (optional) extra features that Jekyll supports that you
 may want to install, depending on how you plan to use Jekyll. These extras
-include syntax highlighting of code snippets using
-[Pygments](http://pygments.org/), LaTeX support, and the use of alternative
-content rendering engines. Check out [the extras page](../extras) for more
-information.
+include LaTeX support, and the use of alternative content rendering engines.
+Check out [the extras page](../extras) for more information.
 
 <div class="note">
   <h5>ProTip™: Enable Syntax Highlighting</h5>
