@@ -70,7 +70,7 @@ $ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpressdotcom";
 If you want to import using a direct connection to the Wordpress MySQL server, here's how:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/wordpress";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpress";
     JekyllImport::WordPress.process("database", "user", "pass")'
 {% endhighlight %}
 
@@ -81,7 +81,7 @@ your access based on `localhost` and `127.0.0.1` not being equivalent in its
 authentication system:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/wordpress";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpress";
     JekyllImport::WordPress.process("database", "user", "pass", "127.0.0.1")'
 {% endhighlight %}
 
@@ -105,28 +105,37 @@ might be useful to you:
 
 ## Drupal
 
-If you’re migrating from [Drupal](http://drupal.org), there is [a
-migrator](https://github.com/mojombo/jekyll/blob/master/lib/jekyll/migrators/drupal.rb)
-for you too:
+If you’re migrating from [Drupal](http://drupal.org), there are two migrators
+for you, depending upon your Drupal version:
+- [Drupal 6](https://github.com/jekyll/jekyll-import/blob/v0.1.0.beta1/lib/jekyll/jekyll-import/drupal6.rb)
+- [Drupal 7](https://github.com/jekyll/jekyll-import/blob/v0.1.0.beta1/lib/jekyll/jekyll-import/drupal7.rb)
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/drupal";
-    JekyllImport::Drupal.process("database", "user", "pass")'
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal6";
+    JekyllImport::Drupal6.process("dbname", "user", "pass"))'
+# ... or ...
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal7";
+    JekyllImport::Drupal7.process("database", "user", "pass")'
 {% endhighlight %}
 
-<div class="note warning">
-  <h5>Warning: Drupal Version Compatibility</h5>
-  <p>This migrator was written for Drupal 6.1 and may not work as expected with
-  newer versions of Drupal. Please update it and send us a pull request if
-  necessary.</p>
-</div>
+If you are connecting to a different host or need to specify a table prefix for
+your database, you may optionally add those two parameters to the end of either
+Drupal migrator execution:
+
+{% highlight bash %}
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal6";
+    JekyllImport::Drupal6.process("dbname", "user", "pass", "host", "table_prefix"))'
+# ... or ...
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal7";
+    JekyllImport::Drupal7.process("database", "user", "pass", "host", "table_prefix")'
+{% endhighlight %}
 
 ## Movable Type
 
 To import posts from Movable Type:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/mt";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/mt";
     JekyllImport::MT.process("database", "user", "pass")'
 {% endhighlight %}
 
@@ -135,7 +144,7 @@ $ ruby -rubygems -e 'require "jekyll/migrators/mt";
 To import posts from Typo:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/typo";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/typo";
     JekyllImport::Typo.process("database", "user", "pass")'
 {% endhighlight %}
 
@@ -146,7 +155,7 @@ This code has only been tested with Typo version 4+.
 To import posts from TextPattern:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/textpattern";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/textpattern";
     JekyllImport::TextPattern.process("database_name", "username", "password", "hostname")'
 {% endhighlight %}
 
@@ -162,14 +171,14 @@ sticky.
 To import posts from Mephisto:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/mephisto";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/mephisto";
     JekyllImport::Mephisto.process("database", "user", "password")'
 {% endhighlight %}
 
 If your data is in Postgres, you should do this instead:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/mephisto";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/mephisto";
     JekyllImport::Mephisto.postgres({:database => "database", :username=>"username", :password =>"password"})'
 {% endhighlight %}
 
@@ -197,7 +206,7 @@ alternatives:
 To import posts from your primary Posterous blog:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/posterous";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/posterous";
     JekyllImport::Posterous.process("my_email", "my_pass")'
 {% endhighlight %}
 
@@ -205,7 +214,7 @@ For any other Posterous blog on your account, you will need to specify the
 `blog_id` for the blog:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/posterous";
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/posterous";
     JekyllImport::Posterous.process("my_email", "my_pass", "blog_id")'
 {% endhighlight %}
 
@@ -218,30 +227,19 @@ that maintains permalinks and attempts to import images too.
 To import posts from Tumblr:
 
 {% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/tumblr";
-    JekyllImport::Tumblr.process("http://www.your_blog_url.com", true)'
-{% endhighlight %}
-
-There is also [a modified Tumblr
-migrator](https://github.com/stephenmcd/jekyll/blob/master/lib/jekyll/migrators/tumblr.rb)
-that exports posts as Markdown and preserves post tags.
-
-The migrator above requires the `json` gem and Python's `html2text` to be
-installed as follows:
-
-{% highlight bash %}
-$ gem install json
-$ pip install html2text
-{% endhighlight %}
-
-Once installed, simply use the format argument:
-
-{% highlight bash %}
-$ ruby -rubygems -e 'require "jekyll/migrators/tumblr";
-    JekyllImport::Tumblr.process("http://www.your_blog_url.com", format="md")'
+$ ruby -rubygems -e 'require "jekyll/jekyll-import/tumblr";
+    JekyllImport::Tumblr.process(url, format, grab_images, add_highlights, rewrite_urls)'
+# url    - String: your blog's URL
+# format - String: the output file extension. Use "md" to have your content
+#          converted from HTML to Markdown. Defaults to "html".
+# grab_images    - Boolean: whether to download images as well. Defaults to false.
+# add_highlights - Boolean: whether to wrap code blocks (indented 4 spaces) in a Liquid
+                   "highlight" tag. Defaults to false.
+# rewrite_urls   - Boolean: whether to write pages that redirect from the old Tumblr paths
+                   to the new Jekyll paths. Defaults to false.
 {% endhighlight %}
 
 ## Other Systems
 
 If you have a system for which there is currently no migrator, consider writing
-one and sending us a pull request.
+one and sending us [a pull request](https://github.com/jekyll/jekyll-import).
