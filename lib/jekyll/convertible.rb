@@ -38,11 +38,13 @@ module Jekyll
           self.data = YAML.safe_load(metadata)
         end
 
-        if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m # File begins with YAML front matter
+        if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+          # File begins with YAML front matter
           self.content = $POSTMATCH
           if self.data
-            # We already have data from the external file; the data in the file itself takes precedence.
-            self.data.merge(YAML.safe_load($1))
+            # We already have some metadata, maybe from the external file;
+            # the data in the file itself takes precedence.
+            self.data.merge!(YAML.safe_load($1))
           else
             self.data = YAML.safe_load($1)
           end
