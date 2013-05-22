@@ -112,10 +112,10 @@ for you, depending upon your Drupal version:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal6";
-    JekyllImport::Drupal6.process("dbname", "user", "pass"))'
+    JekyllImport::Drupal6.process("dbname", "user", "pass")'
 # ... or ...
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal7";
-    JekyllImport::Drupal7.process("database", "user", "pass")'
+    JekyllImport::Drupal7.process("dbname", "user", "pass")'
 {% endhighlight %}
 
 If you are connecting to a different host or need to specify a table prefix for
@@ -124,10 +124,10 @@ Drupal migrator execution:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal6";
-    JekyllImport::Drupal6.process("dbname", "user", "pass", "host", "table_prefix"))'
+    JekyllImport::Drupal6.process("dbname", "user", "pass", "host", "table_prefix")'
 # ... or ...
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal7";
-    JekyllImport::Drupal7.process("database", "user", "pass", "host", "table_prefix")'
+    JekyllImport::Drupal7.process("dbname", "user", "pass", "host", "table_prefix")'
 {% endhighlight %}
 
 ## Movable Type
