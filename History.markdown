@@ -11,6 +11,7 @@
   * Exit with a non-zero exit code when dealing with a Liquid error (#1121)
   * Make the `exclude` and `include` options backwards compatible with
     versions of Jekyll prior to 1.0 (#1114)
+  * Fix pagination on Windows (#1063)
 
 ### Site Enhancements
   * Documentation highlight boxes shouldn't show scrollbars if not necessary (#1123)
