@@ -109,6 +109,12 @@ If you’re migrating from [Drupal](http://drupal.org), there is [a
 migrator](https://github.com/mojombo/jekyll/blob/master/lib/jekyll/migrators/drupal.rb)
 for you too:
 
+### Further Drupal migration alternatives
+
+- [drupal-php-to-jekyll-exporter](https://gist.github.com/jebaird/5600267) is a simple 
+  script written in php that can pull blog and page content types(with tweaking its easy to add other types) with tags. Might be
+  useful for windows 
+
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/migrators/drupal";
     JekyllImport::Drupal.process("database", "user", "pass")'
