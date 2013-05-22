@@ -25,6 +25,7 @@
   * Add docs for gist tag (#1072)
   * Add docs indicating that Pygments does not need to be installed
     separately (#1099, #1119)
+  * Update the migrator docs to be current (#1136)
 
 ### Development Fixes
 
