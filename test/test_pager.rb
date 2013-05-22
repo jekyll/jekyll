@@ -11,6 +11,13 @@ class TestPager < Test::Unit::TestCase
     assert_equal(3, Pager.calculate_pages([1,2,3,4,5], '2'))
   end
 
+  should "determine the pagination path" do
+    assert_nil(Pager.paginate_path(Jekyll::Configuration::DEFAULTS, 1))
+    assert_equal("page2", Pager.paginate_path(Jekyll::Configuration::DEFAULTS, 2))
+    assert_nil(Pager.paginate_path(Jekyll::Configuration::DEFAULTS.merge('paginate_path' => '/blog/page-:num'), 1))
+    assert_equal("page-2", Pager.paginate_path(Jekyll::Configuration::DEFAULTS.merge('paginate_path' => '/blog/page-:num'), 2))
+  end
+
   context "pagination disabled" do
     setup do
       stub(Jekyll).configuration do
