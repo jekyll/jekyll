@@ -17,8 +17,28 @@ def run_jekyll(opts = {})
   system command
 end
 
+def time_format(date)
+  if has_time_component?(date)
+    ['%Y-%m-%d %H:%M %z'] * 2
+  else
+    ['%m/%d/%Y', '%Y-%m-%d %H:%M']
+  end
+end
+
 def has_time_component?(date_string)
   date_string.split(" ").size > 1
+end
+
+def slug(title)
+  title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+end
+
+def location(folder, direction)
+  if folder
+    before = folder if direction == "in"
+    after = folder if direction == "under"
+  end
+  [before || '.', after || '.']
 end
 
 # work around "invalid option: --format" cucumber bug (see #296)
