@@ -30,6 +30,7 @@
 
 ### Development Fixes
   * Fix pesky Cucumber infinite loop (#1139)
+  * Do not write posts with timezones in Cucumber tests (#1124)
 
 ## 1.0.2 / 2013-05-12
 
