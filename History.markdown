@@ -29,6 +29,7 @@
   * Update the migrator docs to be current (#1136)
 
 ### Development Fixes
+  * Fix pesky Cucumber infinite loop (#1139)
 
 ## 1.0.2 / 2013-05-12
 
