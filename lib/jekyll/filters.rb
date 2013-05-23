@@ -99,7 +99,17 @@ module Jekyll
     def cgi_escape(input)
       CGI::escape(input)
     end
-
+    
+    # URI escape a string.
+    #
+    # input - The String to escape.
+    #
+    # Examples
+    #
+    #   uri_escape('foo, bar \\baz?')
+    #   # => "foo,%20bar%20%5Cbaz?"
+    #
+    # Returns the escaped String.
     def uri_escape(input)
       URI.escape(input)
     end
