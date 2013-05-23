@@ -47,47 +47,38 @@ Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
 
-Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, direction, folder, table|
+Given /^I have the following (draft|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
   table.hashes.each do |post|
-    title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
-
-    if direction && direction == "in"
-      before = folder || '.'
-    elsif direction && direction == "under"
-      after = folder || '.'
-    end
-
+    title = slug(post['title'])
     ext = post['type'] || 'textile'
+    before, after = location(folder, direction)
+
+    if post['date']
+      in_format, out_format = time_format(post['date'])
+      parsed_date = DateTime.strptime(post['date'], in_format)
+      post['date'] = parsed_date.strftime(out_format)
+    end
 
     if "draft" == status
-      path = File.join(before || '.', '_drafts', after || '.', "#{title}.#{ext}")
-    else
-      if has_time_component?(post['date'])
-        format = '%Y-%m-%d %H:%M %z'
-        parsed_date = DateTime.strptime(post['date'], format)
-        post['date'] = parsed_date.to_s
-        date = parsed_date.strftime('%Y-%m-%d')
-      else
-        format = '%m/%d/%Y' # why even
-        parsed_date = DateTime.strptime(post['date'], format)
-        post['date'] = parsed_date.strftime('%Y-%m-%d %H:%M')
-        date = parsed_date.strftime('%Y-%m-%d')
-      end
-      path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{ext}")
+      folder_post = '_drafts'
+      filename = "#{title}.#{ext}"
+    elsif "post" == status
+      folder_post = '_posts'
+      filename = "#{parsed_date.strftime('%Y-%m-%d')}-#{title}.#{ext}"
     end
 
+    path = File.join(before, folder_post, after, filename)
+
     matter_hash = {}
-    %w(title layout tag tags category categories published author path).each do |key|
+    %w(title layout tag tags category categories published author path date).each do |key|
       matter_hash[key] = post[key] if post[key]
-    end
-    if "post" == status
-      matter_hash["date"] = post["date"] if post["date"]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
 
-    content = post['content']
-    if post['input'] && post['filter']
-      content = "{{ #{post['input']} | #{post['filter']} }}"
+    content = if post['input'] && post['filter']
+      "{{ #{post['input']} | #{post['filter']} }}"
+    else
+      post['content']
     end
 
     File.open(path, 'w') do |f|
