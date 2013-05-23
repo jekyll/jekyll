@@ -14,6 +14,7 @@
   * Fix pagination on Windows (#1063)
 
 ### Site Enhancements
+  * Documentation for `date_to_rfc822` and `uri_escape` (#1142)
   * Documentation highlight boxes shouldn't show scrollbars if not necessary (#1123)
   * Add link to jekyll-minibundle in the doc's plugins list (#1035)
   * Quick patch for importers documentation
