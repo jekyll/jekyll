@@ -428,6 +428,7 @@ There are a few useful, prebuilt plugins at the following locations:
 - [smilify](https://github.com/SaswatPadhi/jekyll_smilify) by [SaswatPadhi](https://github.com/SaswatPadhi): Convert text emoticons in your content to themeable smiley pics. [Demo](http://saswatpadhi.github.com/)
 - [excerpts](http://blog.darkrefraction.com/2012/jekyll-excerpt-plugin.html) by [drawoc](https://github.com/drawoc): provides a nice way to implement page excerpts.
 - [jekyll-minibundle](https://github.com/tkareine/jekyll-minibundle): Asset bundling and cache busting using external minification tool of your choice, no gem dependencies.
+- [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) by [redwallhp](https://github.com/redwallhp): Generates thumbnails from a directory of images and displays them in a grid with a Liquid tag.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
