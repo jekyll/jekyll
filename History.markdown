@@ -27,6 +27,7 @@
   * Add docs indicating that Pygments does not need to be installed
     separately (#1099, #1119)
   * Update the migrator docs to be current (#1136)
+  * Add the Jekyll Gallery Plugin to the plugin list (#1143)
 
 ### Development Fixes
   * Fix pesky Cucumber infinite loop (#1139)
