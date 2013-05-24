@@ -136,6 +136,10 @@ Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
   assert Regexp.new(text).match(File.open(file).readlines.join)
 end
 
+Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
+  assert_no_match Regexp.new(text), File.read(file)
+end
+
 Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
   assert Regexp.new(Regexp.escape(text)).match(File.open(file).readlines.join)
 end
