@@ -9,7 +9,7 @@ Feature: Markdown
     And I have a _posts directory
     And I have the following post:
       | title   | date      | content    | type     |
-      | Hackers | 3/27/2009 | # My Title | markdown |
+      | Hackers | 2009-03-27 | # My Title | markdown |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Index" in "_site/index.html"
@@ -22,7 +22,7 @@ Feature: Markdown
     And I have a _posts directory
     And I have the following post:
       | title   | date      | content    | type     |
-      | Hackers | 3/27/2009 | # My Title | markdown |
+      | Hackers | 2009-03-27 | # My Title | markdown |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Index" in "_site/index.html"

@@ -88,8 +88,8 @@ Feature: Site configuration
     And I have a _posts directory
     And I have the following posts:
       | title     | date       | layout  | content                                |
-      | entry1    | 12/31/2007 | post    | content for entry1.                    |
-      | entry2    | 01/31/2020 | post    | content for entry2.                    |
+      | entry1    | 2007-12-31 | post    | content for entry1.                    |
+      | entry2    | 2020-01-31 | post    | content for entry2.                    |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Page Layout: 1 on 2010-01-01" in "_site/index.html"
@@ -108,8 +108,8 @@ Feature: Site configuration
     And I have a _posts directory
     And I have the following posts:
       | title     | date       | layout  | content                                |
-      | entry1    | 12/31/2007 | post    | content for entry1.                    |
-      | entry2    | 01/31/2020 | post    | content for entry2.                    |
+      | entry1    | 2007-12-31 | post    | content for entry1.                    |
+      | entry2    | 2020-01-31 | post    | content for entry2.                    |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Page Layout: 2 on 2010-01-01" in "_site/index.html"
@@ -163,9 +163,9 @@ Feature: Site configuration
       | limit_posts | 2           |
     And I have the following posts:
       | title   | date      | content          |
-      | Apples  | 3/27/2009 | An article about apples |
-      | Oranges | 4/1/2009  | An article about oranges |
-      | Bananas | 4/5/2009  | An article about bananas |
+      | Apples  | 2009-03-27 | An article about apples |
+      | Oranges | 2009-04-01  | An article about oranges |
+      | Bananas | 2009-04-05  | An article about bananas |
     When I run jekyll
     Then the _site directory should exist
     And the "_site/2009/04/05/bananas.html" file should exist
@@ -197,8 +197,8 @@ Feature: Site configuration
     And I have a _posts directory
     And I have the following posts:
       | title     | date       | layout  | content                                |
-      | entry1    | 12/31/2007 | post    | content for entry1.                    |
-      | entry2    | 01/31/2020 | post    | content for entry2.                    |
+      | entry1    | 2007-12-31 | post    | content for entry1.                    |
+      | entry2    | 2020-01-31 | post    | content for entry2.                    |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Page Layout: 2 on 2010-01-01" in "_site/index.html"
