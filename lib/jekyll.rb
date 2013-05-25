@@ -87,4 +87,8 @@ module Jekyll
   def self.set_timezone(timezone)
     ENV['TZ'] = timezone
   end
+
+  def self.logger
+    @@logger ||= Stevenson.new
+  end
 end
