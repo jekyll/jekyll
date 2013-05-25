@@ -31,8 +31,8 @@ Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   end
 end
 
-Given /^I have an? (.*) (layout|theme) that contains "([^"]+)"$/ do |name, type, text|
-  folder = if (type == 'layout')
+Given /^I have an? (.*) (layout|theme) that contains "(.*)"$/ do |name, type, text|
+  folder = if type == 'layout'
     '_layouts'
   else
     '_theme'
