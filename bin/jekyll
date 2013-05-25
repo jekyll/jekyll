@@ -125,3 +125,22 @@ command :import do |c|
     Jekyll::Commands::Import.process(args.first, options)
   end
 end
+
+command :write do |c|
+  c.syntax = 'jekyll write [type]'
+  c.summary = 'Write a new post, page, or draft.'
+  c.description =
+    'Write a new post, page, or draft, based on [type]. Either --title or --path is required.'
+
+  c.option '--title STRING', String, 'Title to use.'
+  c.option '--path STRING', String, 'Path to write to.'
+  c.option '--ext STRING', String, 'File extension to use with --title and directory paths. Default: markdown'
+
+  c.action do |args, options|
+    args = ['post'] if args.empty?
+
+    options.default :ext => 'markdown'
+
+    Jekyll::Commands::Write.process(args, options.__hash__)
+  end
+end
