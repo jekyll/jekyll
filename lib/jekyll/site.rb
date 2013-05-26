@@ -240,9 +240,7 @@ module Jekyll
 
       # files to be written
       files = Set.new
-      [self.posts, self.pages, self.static_files].flatten.each do |item|
-        files << item.destination(self.dest)
-      end
+      site_files_each { |item| files << item.destination(self.dest) }
 
       # adding files' parent directories
       dirs = Set.new
@@ -269,9 +267,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      [self.posts, self.pages, self.static_files].flatten.each do |item|
-        item.write(self.dest)
-      end
+      site_files_each { |item| item.write(self.dest) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -401,6 +397,14 @@ module Jekyll
                                             " for more info."
         $stderr.print Jekyll::Stevenson.formatted_topic("") + "..." # for "done."
         @deprecated_relative_permalinks = true
+      end
+    end
+
+    def site_files_each
+      %w(posts pages static_files).each do |type|
+        self.send(type).each do |item|
+          yield item
+        end
       end
     end
 
