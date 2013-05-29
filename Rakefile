@@ -148,10 +148,10 @@ namespace :site do
     puts 'Done.'
   end
 
-  desc "Move the History.markdown over to the /docs/history directory."
+  desc "Create a nicely formatted history page for the jekyll site based on the repo history."
   task :history do
     # First lets go ahead and format the file correctly (mainly bullet points)
-    puts "Generating the History doc!"
+    puts "Generating the History doc"
     if File.exist?("History.markdown")
       file_time = File.read("History.markdown")
       # Replacing the contents of the file for the markdown bullets & issue links
