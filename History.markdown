@@ -12,6 +12,8 @@
   * Make the `exclude` and `include` options backwards compatible with
     versions of Jekyll prior to 1.0 (#1114)
   * Fix pagination on Windows (#1063)
+  * Fix the application of Pygments' Generic Output style to Go code
+    (#1156)
 
 ### Site Enhancements
   * Documentation for `date_to_rfc822` and `uri_escape` (#1142)
