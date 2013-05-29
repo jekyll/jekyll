@@ -89,6 +89,6 @@ module Jekyll
   end
 
   def self.logger
-    @@logger ||= Stevenson.new
+    @logger ||= Stevenson.new
   end
 end
