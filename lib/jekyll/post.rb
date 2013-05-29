@@ -164,6 +164,12 @@ module Jekyll
     def transform
       super
       self.extracted_excerpt = converter.convert(self.extracted_excerpt)
+      if self.site.config['excerpt_strip_p_tag']
+        doc = ::Nokogiri::XML::DocumentFragment.parse(self.extracted_excerpt)
+        if doc.children.size == 1 and doc.child.name == 'p'
+          self.extracted_excerpt = doc.child.children.to_s
+        end
+      end
     end
 
     # The generated directory into which the post will be placed

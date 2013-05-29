@@ -25,6 +25,7 @@ require 'English'
 require 'liquid'
 require 'maruku'
 require 'colorator'
+require 'nokogiri'
 
 # internal requires
 require 'jekyll/core_ext'

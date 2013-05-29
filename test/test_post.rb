@@ -326,6 +326,38 @@ class TestPost < Test::Unit::TestCase
 
         end
 
+        context "with excerpt_strip_p_tag enabled" do
+          setup do
+            file = "2013-01-02-post-excerpt.markdown"
+
+            @post.site.config['excerpt_strip_p_tag'] = true
+
+            @post.process(file)
+            @post.read_yaml(@source, file)
+            @post.transform
+          end
+
+          should "not have p tags in extracted excerpt" do
+            assert_equal "First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.", @post.excerpt
+          end
+        end
+
+        context "with excerpt_strip_p_tag explicitly disabled" do
+          setup do
+            file = "2013-01-02-post-excerpt.markdown"
+
+            @post.site.config['excerpt_strip_p_tag'] = false
+
+            @post.process(file)
+            @post.read_yaml(@source, file)
+            @post.transform
+          end
+
+          should "have p tags in extracted excerpt" do
+            assert_equal "<p>First paragraph with <a href='http://www.jekyllrb.com/'>link ref</a>.</p>", @post.excerpt
+          end
+        end
+
       end
     end
 
