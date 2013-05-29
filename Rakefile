@@ -163,16 +163,16 @@ namespace :site do
       front_matter = {"layout" => "docs", "title" => "History",
                       "permalink" => "/docs/history/"}
       # Finally we need to copy the file to the /history directory
-      Dir.chdir('site/docs/history') do
-        File.open("index.md", "w") do |file|
+      Dir.chdir('site/docs/') do
+        File.open("history.md", "w") do |file|
           file.write("#{front_matter.to_yaml}---\n\n")
           file.write(rep_links)
         end
       end
     else
-      puts "Uh Oh!"
+      puts "Something went wrong"
     end
-    puts "Done!"
+    puts "Done"
   end
 end
 
