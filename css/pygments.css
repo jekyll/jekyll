@@ -18,7 +18,7 @@
 .highlight .gr { color: #c0c0c0; font-weight: bold; background-color: #c00000 } /* Generic.Error */
 .highlight .gh { color: #cd5c5c} /* Generic.Heading */
 .highlight .gi { color: #ffffff; background-color: #0000c0 } /* Generic.Inserted */
-.highlight .go { color: #add8e6; font-weight: bold; background-color: #4d4d4d } /* Generic.Output */
+.highlight span.go { color: #add8e6; font-weight: bold; background-color: #4d4d4d } /* Generic.Output, qualified with span to prevent applying this style to the Go language, see #1153. */
 .highlight .gp { color: #ffffff} /* Generic.Prompt */
 .highlight .gs { color: #ffffff} /* Generic.Strong */
 .highlight .gu { color: #cd5c5c} /* Generic.Subheading */
