@@ -71,8 +71,6 @@ module Jekyll
     #
     # Returns nothing.
     def setup
-      require 'classifier' if self.lsi
-
       # Check that the destination dir isn't the source dir or a directory
       # parent to the source dir.
       if self.source =~ /^#{self.dest}/
@@ -423,12 +421,12 @@ module Jekyll
     def relative_permalinks_deprecation_method
       if config['relative_permalinks'] && !@deprecated_relative_permalinks
         $stderr.puts # Places newline after "Generating..."
-        Jekyll::Logger.warn "Deprecation:", "Starting in 1.1, permalinks for pages" +
+        Jekyll::Stevenson.warn "Deprecation:", "Starting in 1.1, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
                                             " directory. Check http://jekyllrb.com/docs/upgrading/"+
                                             " for more info."
-        $stderr.print Jekyll::Logger.formatted_topic("") + "..." # for "done."
+        $stderr.print Jekyll::Stevenson.formatted_topic("") + "..." # for "done."
         @deprecated_relative_permalinks = true
       end
     end

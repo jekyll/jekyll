@@ -35,7 +35,7 @@ module Jekyll
           self.data = YAML.safe_load($1)
         end
       rescue SyntaxError => e
-        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"        
+        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue Exception => e
         puts "Error reading file #{File.join(base, name)}: #{e.message}"
       end
@@ -76,11 +76,8 @@ module Jekyll
     def render_liquid(content, payload, info)
       Liquid::Template.parse(content).render!(payload, info)
     rescue Exception => e
-      Jekyll::Logger.error "Liquid Exception:", "#{e.message} in #{payload[:file]}"
-      e.backtrace.each do |backtrace|
-        puts backtrace
-      end
-      abort("Build Failed")
+      Jekyll::Stevenson.error "Liquid Exception:", "#{e.message} in #{payload[:file]}"
+      raise e
     end
 
     # Recursively render layouts
@@ -99,7 +96,7 @@ module Jekyll
         payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
 
         self.output = self.render_liquid(layout.content,
-                                         payload.merge({:file => self.data["layout"]}),
+                                         payload.merge({:file => layout.name}),
                                          info)
 
         if layout = layouts[layout.data["layout"]]

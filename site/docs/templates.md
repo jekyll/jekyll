@@ -39,6 +39,20 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class='name'><strong>Date to RFC-822 Format</strong></p>
+        <p>Convert a Date into the RFC-822 format used for RSS feeds.</p>
+      </td>
+      <td class='align-center'>
+        <p>
+         <code class='filter'>{% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class='output'>Mon, 17 Nov 2008 13:07:54 -0800</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class='name'><strong>Date to String</strong></p>
         <p>Convert a date to short format.</p>
       </td>
@@ -90,6 +104,22 @@ common tasks easier.
         </p>
         <p>
           <code class='output'>foo%2Cbar%3Bbaz%3F</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class='name'><strong>URI Escape</strong></p>
+        <p>
+          URI escape a string.
+        </p>
+      </td>
+      <td class='align-center'>
+        <p>
+         <code class='filter'>{% raw %}{{ “'foo, bar \\baz?'” | uri_escape }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class='output'>foo,%20bar%20%5Cbaz?</code>
         </p>
       </td>
     </tr>
@@ -166,9 +196,8 @@ root of your source directory. This will embed the contents of
 
 Jekyll has built in support for syntax highlighting of [over 100
 languages](http://pygments.org/languages/) thanks to
-[Pygments](http://pygments.org/). In order to take advantage of this you’ll need
-to have Pygments installed, and the `pygmentize` binary must be in your `$PATH`.
-When you run Jekyll, make sure you run it with [Pygments enabled](../extras).
+[Pygments](http://pygments.org/). When you run Jekyll, make sure you run it
+with `pygments` set to `true` in your configuration file.
 
 To render a code block with syntax highlighting, surround your code as follows:
 

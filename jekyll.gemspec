@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 3.3.2")
-  s.add_development_dependency('rr', "~> 1.0")
+  s.add_development_dependency('rr', "~> 1.0.0")
   s.add_development_dependency('cucumber', "~> 1.2.1", '!= 1.2.4')
   s.add_development_dependency('RedCloth', "~> 4.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
@@ -92,13 +92,14 @@ Gem::Specification.new do |s|
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
-    lib/jekyll/logger.rb
     lib/jekyll/mime.types
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
     lib/jekyll/post.rb
+    lib/jekyll/related_posts.rb
     lib/jekyll/site.rb
     lib/jekyll/static_file.rb
+    lib/jekyll/stevenson.rb
     lib/jekyll/tags/gist.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
@@ -236,6 +237,7 @@ Gem::Specification.new do |s|
     test/test_rdiscount.rb
     test/test_redcarpet.rb
     test/test_redcloth.rb
+    test/test_related_posts.rb
     test/test_site.rb
     test/test_tags.rb
   ]

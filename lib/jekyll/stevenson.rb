@@ -1,7 +1,7 @@
 require 'logger'
 
 module Jekyll
-  class Logger < Logger
+  class Stevenson
     # Public: Print a jekyll message to stdout
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.

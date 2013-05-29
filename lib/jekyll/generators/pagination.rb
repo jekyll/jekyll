@@ -92,8 +92,9 @@ module Jekyll
     # Returns the pagination path as a string
     def self.paginate_path(site_config, num_page)
       return nil if num_page.nil? || num_page <= 1
-      format = File.basename(site_config['paginate_path'])
-      format.sub(':num', num_page.to_s)
+      format = site_config['paginate_path']
+      format = format.sub(':num', num_page.to_s)
+      File.basename(format)
     end
 
     # Initialize a new Pager.

@@ -117,7 +117,7 @@ Feature: Post data
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
-    
+
   Scenario: Use post.categories variable when category is in YAML and is mixed-case
     Given I have a _posts directory
     And I have a _layouts directory
@@ -128,7 +128,7 @@ Feature: Post data
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
-    
+
   Scenario: Use post.categories variable when category is in YAML
     Given I have a _posts directory
     And I have a _layouts directory

@@ -404,6 +404,7 @@ There are a few useful, prebuilt plugins at the following locations:
 - [jekyll-rendering](https://github.com/blackwinter/jekyll-rendering): Jekyll plugin to provide alternative rendering engines.
 - [jekyll-pagination](https://github.com/blackwinter/jekyll-pagination): Jekyll plugin to extend the pagination generator.
 - [jekyll-tagging](https://github.com/pattex/jekyll-tagging): Jekyll plugin to automatically generate a tag cloud and tag pages.
+- [jekyll-contentblocks](https://github.com/rustygeldmacher/jekyll-contentblocks): Lets you use Rails-like content_for tags in your templates, for passing content from your posts up to your layouts.
 - [Generate YouTube Embed (tag)](https://gist.github.com/1805814) by [joelverhagen](https://github.com/joelverhagen): Jekyll plugin which allows you to embed a YouTube video in your page with the YouTube ID. Optionally specify width and height dimensions. Like “oEmbed Tag” but just for YouTube.
 - [JSON Filter](https://gist.github.com/1850654) by [joelverhagen](https://github.com/joelverhagen): filter that takes input text and outputs it as JSON. Great for rendering JavaScript.
 - [jekyll-beastiepress](https://github.com/okeeblow/jekyll-beastiepress): FreeBSD utility tags for Jekyll sites.
@@ -426,6 +427,8 @@ There are a few useful, prebuilt plugins at the following locations:
 - [File compressor](https://gist.github.com/2758691) by [mytharcher](https://github.com/mytharcher): Compress HTML (\*.html) and JavaScript(\*.js) files when output.
 - [smilify](https://github.com/SaswatPadhi/jekyll_smilify) by [SaswatPadhi](https://github.com/SaswatPadhi): Convert text emoticons in your content to themeable smiley pics. [Demo](http://saswatpadhi.github.com/)
 - [excerpts](http://blog.darkrefraction.com/2012/jekyll-excerpt-plugin.html) by [drawoc](https://github.com/drawoc): provides a nice way to implement page excerpts.
+- [jekyll-minibundle](https://github.com/tkareine/jekyll-minibundle): Asset bundling and cache busting using external minification tool of your choice, no gem dependencies.
+- [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) by [redwallhp](https://github.com/redwallhp): Generates thumbnails from a directory of images and displays them in a grid with a Liquid tag.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
