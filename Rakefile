@@ -152,7 +152,9 @@ namespace :site do
   task :history do
     # First lets go ahead and format the file correctly (mainly bullet points)
     puts "Generating the History doc"
+    # Checking to make sure the History file exists in the root of the repo
     if File.exist?("History.markdown")
+      # Read the file and save to a variable so we can do the replacements
       file_time = File.read("History.markdown")
       # Replacing the contents of the file for the markdown bullets & issue links
       rep_bullets = file_time.gsub(/\s{2}\*{1}/, "-")
