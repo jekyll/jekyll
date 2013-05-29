@@ -114,7 +114,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish do
+  task :publish => [:history] do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
