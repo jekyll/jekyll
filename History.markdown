@@ -32,6 +32,7 @@
   * Add the Jekyll Gallery Plugin to the plugin list (#1143)
 
 ### Development Fixes
+  * Use Jekyll.logger instead of Jekyll::Stevenson to log things (#1149)
   * Fix pesky Cucumber infinite loop (#1139)
   * Do not write posts with timezones in Cucumber tests (#1124)
 
