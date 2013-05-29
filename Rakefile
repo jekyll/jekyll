@@ -161,7 +161,8 @@ namespace :site do
       end
       # Create a hash for the front matter that is to be included
       front_matter = {"layout" => "docs", "title" => "History",
-                      "permalink" => "/docs/history/"}
+                      "permalink" => "/docs/history/",
+                      "prev_section" => "upgrading"}
       # Finally we need to copy the file to the /history directory
       Dir.chdir('site/docs/') do
         File.open("history.md", "w") do |file|
