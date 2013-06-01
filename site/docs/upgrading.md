@@ -83,7 +83,7 @@ to one or more config files (comma-delimited, no spaces).
     those on the left (`&#95;config.yml`) when both contain the same key.</p>
 </div>
 
-### New config File Options
+### New Config File Options
 
 Jekyll 1.0 introduced several new config file options. Before you upgrade, you
 should check to see if any of these are present in your pre-1.0 config file, and
@@ -98,7 +98,7 @@ if so, make sure that you're using them properly:
 * `timezone`
 * `url`
 
-### Draft posts
+### Draft Posts
 
 Jekyll now lets you write draft posts, and allows you to easily preview how
 they will look prior to publishing. To start a draft, simply create a folder
