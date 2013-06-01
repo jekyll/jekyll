@@ -16,6 +16,7 @@
     (#1156)
 
 ### Site Enhancements
+  * Add note to Upgrading page about new config options in 1.0.x (#1146)
   * Documentation for `date_to_rfc822` and `uri_escape` (#1142)
   * Documentation highlight boxes shouldn't show scrollbars if not necessary (#1123)
   * Add link to jekyll-minibundle in the doc's plugins list (#1035)
