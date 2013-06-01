@@ -14,6 +14,14 @@ program :description, 'Jekyll is a blog-aware, static site generator in Ruby'
 
 default_command :default
 
+command :help do |c|
+  c.action do
+    root = File.expand_path("../../man", __FILE__)
+    command = "groff -t -mandoc -Tascii"
+    Kernel.exec "#{command} #{root}/jekyll.1 | less"
+  end
+end
+
 global_option '-s', '--source [DIR]', 'Source directory (defaults to ./)'
 global_option '-d', '--destination [DIR]', 'Destination directory (defaults to ./_site)'
 global_option '--safe', 'Safe mode (defaults to false)'
