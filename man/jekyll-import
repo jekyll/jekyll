@@ -1,0 +1,37 @@
+.TH JEKYLL\-IMPORT "MAY 2013" "User Manual"
+.SH NAME:
+.PP
+jekyll import
+.SH DESCRIPTION:
+.PP
+Import your old blog to Jekyll
+.PP
+Please make sure to have the jekyll\-import gem installed
+before proceeding.
+.PP
+Do this by running `gem install jekyll\-import
+.SH SYNTAX:
+.PP
+jekyll import [platform] [options]
+.SH COMMANDS:
+.TP
+\fB\fC--source STRING\fR
+Custom configuration file
+.TP
+\fB\fC--file STRING\fR
+File to migrate from
+.TP
+\fB\fC--dbname STRING\fR
+Database name to migrate from
+.TP
+\fB\fC--user STRING\fR
+Username to use when migrating
+.TP
+\fB\fC--pass STRING\fR
+Password to use when migrating
+.TP
+\fB\fC--host STRING\fR
+Host address to use when migrating
+.SH ALIAS:
+.PP
+None

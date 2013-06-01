@@ -1,0 +1,33 @@
+.TH JEKYLL\-BUILD "MAY 2013" "User Manual"
+.SH NAME:
+.PP
+jekyll build
+.SH DESCRIPTION:
+.PP
+Build your site
+.SH SYNTAX:
+.PP
+jekyll build [options]
+.SH COMMANDS:
+.TP
+\fB\fC--config CONFIG_FILE[,CONFIG_FILE2,...]\fR
+Custom configuration file
+.TP
+\fB\fC--future\fR
+Publishes posts with a future date
+.TP
+\fB\fC--limit_posts MAX_POSTS\fR
+Limits the number of posts to parse and publish
+.PP
+\fB\fC-w\fR, \fB\fC--watch\fR
+.br
+  Watch for changes and rebuild
+.TP
+\fB\fC--lsi\fR
+Use LSI for improved related posts
+.TP
+\fB\fC--drafts\fR
+Render posts in the _drafts folder
+.SH ALIAS:
+.PP
+None

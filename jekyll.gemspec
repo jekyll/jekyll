@@ -23,6 +23,9 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
+  s.files += Dir['man/man?/*.?']
+  s.files += Dir['man/**/*.{html,css,js}']
+
   s.add_runtime_dependency('liquid', "~> 2.5.2")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('directory_watcher', "~> 1.4.1")
@@ -47,6 +50,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
   s.add_development_dependency('coveralls', "~> 0.6.9")
   s.add_development_dependency('activesupport', '~> 3.2.13')
+  s.add_development_dependency('md2man', "~> 2.0.0")
 
   # = MANIFEST =
   s.files = %w[

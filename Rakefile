@@ -3,6 +3,7 @@ require 'rake'
 require 'rdoc'
 require 'date'
 require 'yaml'
+require 'md2man/rakefile'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 
