@@ -52,6 +52,23 @@ instead of relative permalinks.
   </p>
 </div>
 
+### Draft Posts
+
+Jekyll now lets you write draft posts, and allows you to easily preview how
+they will look prior to publishing. To start a draft, simply create a folder
+called `_drafts` in your site's source directory (e.g., alongside `_posts`),
+and add a new markdown file to it. To preview your new post, simply run the
+`jekyll serve` command with the `--drafts` flag.
+
+<div class="note info">
+  <h5 markdown="1">Drafts don't have dates</h5>
+  <p markdown="1">
+    Unlike posts, drafts don't have a date, since they haven't
+    been published yet. Rather than naming your draft something like
+    `2013-07-01-my-draft-post.md`, simply name the file what you'd like your
+    post to eventually be titled, here `my-draft-post.md`.</p>
+</div>
+
 ### Custom Config File
 
 Rather than passing individual flags via the command line, you can now pass an
@@ -83,22 +100,20 @@ to one or more config files (comma-delimited, no spaces).
     those on the left (`&#95;config.yml`) when both contain the same key.</p>
 </div>
 
-### Draft posts
+### New Config File Options
 
-Jekyll now lets you write draft posts, and allows you to easily preview how
-they will look prior to publishing. To start a draft, simply create a folder
-called `_drafts` in your site's source directory (e.g., alongside `_posts`),
-and add a new markdown file to it. To preview your new post, simply run the
-`jekyll serve` command with the `--drafts` flag.
+Jekyll 1.0 introduced several new config file options. Before you upgrade, you
+should check to see if any of these are present in your pre-1.0 config file, and
+if so, make sure that you're using them properly:
 
-<div class="note info">
-  <h5 markdown="1">Drafts don't have dates</h5>
-  <p markdown="1">
-    Unlike posts, drafts don't have a date, since they haven't
-    been published yet. Rather than naming your draft something like
-    `2013-07-01-my-draft-post.md`, simply name the file what you'd like your
-    post to eventually be titled, here `my-draft-post.md`.</p>
-</div>
+* `excerpt_separator`
+* `host`
+* `include`
+* `keep_files`
+* `layouts`
+* `show_drafts`
+* `timezone`
+* `url`
 
 ### Baseurl
 
