@@ -5,7 +5,7 @@ module Jekyll
     DEBUG  = 0
     INFO   = 1
     WARN   = 2
-    ERRROR = 3
+    ERROR = 3
 
     # Public: Create a new instance of Stevenson, Jekyll's logger
     #
