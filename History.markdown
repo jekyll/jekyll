@@ -7,6 +7,7 @@
   * Add a `--force` option to `jekyll new` (#1115)
 
 ### Bug Fixes
+  * Fix typo in Stevenson constant "ERROR". (#1166)
   * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
   * Exit with a non-zero exit code when dealing with a Liquid error (#1121)
   * Make the `exclude` and `include` options backwards compatible with
