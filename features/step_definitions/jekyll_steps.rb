@@ -53,16 +53,11 @@ Given /^I have the following (draft|post)s?(?: (in|under) "([^"]+)")?:$/ do |sta
     ext = post['type'] || 'textile'
     before, after = location(folder, direction)
 
-    if post['date']
-      in_format, out_format = time_format(post['date'])
-      parsed_date = DateTime.strptime(post['date'], in_format)
-      post['date'] = parsed_date.strftime(out_format)
-    end
-
     if "draft" == status
       folder_post = '_drafts'
       filename = "#{title}.#{ext}"
     elsif "post" == status
+      parsed_date = Time.xmlschema(post['date']) rescue Time.parse(post['date'])
       folder_post = '_posts'
       filename = "#{parsed_date.strftime('%Y-%m-%d')}-#{title}.#{ext}"
     end
