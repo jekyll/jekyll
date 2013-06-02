@@ -38,6 +38,7 @@ module Jekyll
       'host'          => '0.0.0.0',
 
       'excerpt_separator' => "\n\n",
+      'render_extracted_excerpt' => true,
 
       'maruku' => {
         'use_tex'    => false,

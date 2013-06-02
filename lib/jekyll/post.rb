@@ -163,7 +163,9 @@ module Jekyll
     # Returns nothing.
     def transform
       super
-      self.extracted_excerpt = converter.convert(self.extracted_excerpt)
+      if self.site.config['render_extracted_excerpt']
+        self.extracted_excerpt = converter.convert(self.extracted_excerpt)
+      end
     end
 
     # The generated directory into which the post will be placed
