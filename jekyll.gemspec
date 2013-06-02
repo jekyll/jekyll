@@ -154,6 +154,7 @@ Gem::Specification.new do |s|
     site/docs/upgrading.md
     site/docs/usage.md
     site/docs/variables.md
+    site/docs/history/index.md
     site/favicon.png
     site/img/article-footer.png
     site/img/footer-arrow.png

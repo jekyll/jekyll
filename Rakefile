@@ -24,6 +24,10 @@ def date
   Date.today.to_s
 end
 
+def file_date
+  Date.today.strftime("%F")
+end
+
 def rubyforge_project
   name
 end
@@ -110,7 +114,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish do
+  task :publish => [:history] do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
@@ -142,6 +146,36 @@ namespace :site do
       sh "git push origin gh-pages"
     end
     puts 'Done.'
+  end
+
+  desc "Create a nicely formatted history page for the jekyll site based on the repo history."
+  task :history do
+    # First lets go ahead and format the file correctly (mainly bullet points)
+    puts "Generating the History doc"
+    # Checking to make sure the History file exists in the root of the repo
+    if File.exist?("History.markdown")
+      # Read the file and save to a variable so we can do the replacements
+      file_time = File.read("History.markdown")
+      # Replacing the contents of the file for the markdown bullets & issue links
+      rep_bullets = file_time.gsub(/\s{2}\*{1}/, "-")
+      rep_links = rep_bullets.gsub(/#(\d+)/) do |word|
+        "[#{word}](https://github.com/mojombo/jekyll/issues/#{word.delete("#")})"
+      end
+      # Create a hash for the front matter that is to be included
+      front_matter = {"layout" => "docs", "title" => "History",
+                      "permalink" => "/docs/history/",
+                      "prev_section" => "upgrading"}
+      # Finally we need to copy the file to the /history directory
+      Dir.chdir('site/docs/') do
+        File.open("history.md", "w") do |file|
+          file.write("#{front_matter.to_yaml}---\n\n")
+          file.write(rep_links)
+        end
+      end
+    else
+      puts "Something went wrong"
+    end
+    puts "Done"
   end
 end
 
