@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'rr'
 require 'test/unit'
+require 'time'
 
 TEST_DIR    = File.join('/', 'tmp', 'jekyll')
 JEKYLL_PATH = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll')
@@ -11,18 +12,6 @@ def run_jekyll(opts = {})
   command << " --drafts" if opts[:drafts]
   command << " >> /dev/null 2>&1" if opts[:debug].nil?
   system command
-end
-
-def time_format(date)
-  if has_time_component?(date)
-    ['%Y-%m-%d %H:%M %z'] * 2
-  else
-    ['%m/%d/%Y', '%Y-%m-%d %H:%M']
-  end
-end
-
-def has_time_component?(date_string)
-  date_string.split(" ").size > 1
 end
 
 def slug(title)
