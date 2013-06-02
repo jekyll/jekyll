@@ -18,6 +18,12 @@ module Jekyll
         File.open(File.expand_path(self.initialized_post_name, new_blog_path), "w") do |f|
           f.write(self.scaffold_post_content(site_template))
         end
+
+        if options[:blank]
+          files_to_clear =  Dir.glob("#{new_blog_path}/**/*.*")
+          files_to_clear.each {|file| File.truncate("#{file}", 0)}
+        end
+
         puts "New jekyll site installed in #{new_blog_path}."
       end
 

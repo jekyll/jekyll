@@ -38,6 +38,7 @@ command :new do |c|
   c.description = 'Creates a new Jekyll site scaffold in PATH'
 
   c.option '--force', 'Force creation even if PATH already exists'
+  c.option '--blank', 'Creates scaffolding but with empty files'
 
   c.action do |args, options|
     Jekyll::Commands::New.process(args, options.__hash__)
