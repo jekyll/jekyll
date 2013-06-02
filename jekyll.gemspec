@@ -138,6 +138,7 @@ Gem::Specification.new do |s|
     site/docs/frontmatter.md
     site/docs/github-pages.md
     site/docs/heroku.md
+    site/docs/history.md
     site/docs/index.md
     site/docs/installation.md
     site/docs/migrations.md
@@ -154,7 +155,6 @@ Gem::Specification.new do |s|
     site/docs/upgrading.md
     site/docs/usage.md
     site/docs/variables.md
-    site/docs/history/index.md
     site/favicon.png
     site/img/article-footer.png
     site/img/footer-arrow.png
