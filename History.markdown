@@ -36,6 +36,7 @@
   * Use Jekyll.logger instead of Jekyll::Stevenson to log things (#1149)
   * Fix pesky Cucumber infinite loop (#1139)
   * Do not write posts with timezones in Cucumber tests (#1124)
+  * Use ISO formatted dates in Cucumber features (#1150)
 
 ## 1.0.2 / 2013-05-12
 
