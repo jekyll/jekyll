@@ -2,6 +2,7 @@
 layout: docs
 title: Upgrading
 prev_section: resources
+next_section: history
 permalink: /docs/upgrading/
 ---
 
