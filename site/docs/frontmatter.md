@@ -34,6 +34,16 @@ relies on.
   </p>
 </div>
 
+<div class="note">
+  <h5>ProTip™: Front Matter Variables Are Optional</h5>
+  <p>
+    If you want to use <a href="../variables">Liquid tags and variables</a> but
+    don't need anything in your front-matter, just leave it empty! The set of
+    triple-dashed lines with nothing in between will still get Jekyll to process
+    your file. (This is useful for things like CSS and RSS feeds!)
+  </p>
+</div>
+
 ## Predefined Global Variables
 
 There are a number of predefined global variables that you can set in the
