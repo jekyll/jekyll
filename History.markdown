@@ -5,6 +5,7 @@
   * Move the building of related posts into their own class (#1057)
   * Removed trailing spaces in several places throughout the code (#1116)
   * Add a `--force` option to `jekyll new` (#1115)
+  * Convert IDs in the site template to classes (#1170)
 
 ### Bug Fixes
   * Fix typo in Stevenson constant "ERROR". (#1166)
