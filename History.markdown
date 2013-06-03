@@ -18,6 +18,7 @@
     (#1156)
 
 ### Site Enhancements
+  * Add a Pro Tip to docs about front matter variables being optional (#1147)
   * Add changelog to site as History page in /docs/ (#1065)
   * Add note to Upgrading page about new config options in 1.0.x (#1146)
   * Documentation for `date_to_rfc822` and `uri_escape` (#1142)
