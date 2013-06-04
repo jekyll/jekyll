@@ -14,7 +14,7 @@ Given /^I have a blank site in "(.*)"$/ do |path|
 end
 
 Given /^I do not have a "(.*)" directory$/ do |path|
-  Dir.exists?("#{TEST_DIR}/#{path}")
+  File.directory?("#{TEST_DIR}/#{path}")
 end
 
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
@@ -141,7 +141,7 @@ Then /^the (.*) directory should exist$/ do |dir|
 end
 
 Then /^the "(.*)" file should exist in the (.*) path$/ do |file, path|
-  assert File.file?("#{TEST_DIR}/#{path}/#{file}")
+  assert File.exists?("#{TEST_DIR}/#{path}/#{file}")
 end
 
 Then /^the (.*) directory should exist in the (.*) path$/ do |dir, path|
