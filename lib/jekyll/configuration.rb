@@ -145,14 +145,5 @@ module Jekyll
       configuration
     end
 
-    # Public: Split a CSV string into an array containing its values
-    #
-    # csv - the string of comma-separated values
-    #
-    # Returns an array of the values contained in the CSV
-    def csv_to_array(csv)
-      csv.split(",").map(&:strip)
-    end
-
   end
 end
