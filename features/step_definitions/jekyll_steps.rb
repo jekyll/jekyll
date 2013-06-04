@@ -140,6 +140,15 @@ Then /^the (.*) directory should exist$/ do |dir|
   assert File.directory?(dir), "The directory \"#{dir}\" does not exist"
 end
 
+Then /^the "(.*)" file should exist in the (.*) path$/ do |file, path|
+  assert File.file?("#{TEST_DIR}/#{path}/#{file}")
+end
+
+Then /^the (.*) directory should exist in the (.*) path$/ do |dir, path|
+  assert File.directory?("#{TEST_DIR}/#{path}/#{dir}"),
+  "The directory \"#{dir}\" does not exist"
+end
+
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
   assert Regexp.new(text).match(File.open(file).readlines.join)
 end

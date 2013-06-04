@@ -6,9 +6,9 @@ Feature: Create sites
   Scenario: Blank site
     Given I do not have a "test_blank" directory
     When I call jekyll new with test_blank --blank
-    Then the _layouts directory should exist
-    And the _posts directory should exist
-    And the "index.html" file should exist
+    Then the _layouts directory should exist in the test_blank path
+    And the _posts directory should exist in the test_blank path
+    And the "index.html" file should exist in the test_blank path
 
   Scenario: Basic site
     Given I have an "index.html" file that contains "Basic Site"
