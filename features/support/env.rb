@@ -17,6 +17,7 @@ end
 def call_jekyll_new(opts = {})
   command = JEKYLL_PATH.clone
   command << " new"
+  command << " #{opts[:path]}" if opts[:path]
   command << " --blank" if opts[:blank]
   command << " >> /dev/null 2>&1" if opts[:debug].nil?
   system command

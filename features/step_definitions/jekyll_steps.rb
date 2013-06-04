@@ -4,13 +4,17 @@ Before do
   Dir.chdir(TEST_DIR)
 end
 
-After do
-  Dir.chdir(File.expand_path("..", TEST_DIR))
-  FileUtils.rm_rf(TEST_DIR)
-end
+#After do
+#  Dir.chdir(File.expand_path("..", TEST_DIR))
+#  FileUtils.rm_rf(TEST_DIR)
+#end
 
 Given /^I have a blank site in "(.*)"$/ do |path|
   FileUtils.mkdir(path)
+end
+
+Given /^I do not have a "(.*)" directory$/ do |path|
+  Dir.exists?("#{TEST_DIR}/#{path}")
 end
 
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
@@ -116,6 +120,10 @@ end
 
 When /^I run jekyll with drafts$/ do
   run_jekyll(:drafts => true)
+end
+
+When /^I call jekyll new with test_blank --blank$/ do
+  call_jekyll_new(:path => "test_blank", :blank => true)
 end
 
 When /^I debug jekyll$/ do
