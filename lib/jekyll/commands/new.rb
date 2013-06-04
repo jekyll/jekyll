@@ -20,8 +20,15 @@ module Jekyll
         end
 
         if options[:blank]
-          files_to_clear =  Dir.glob("#{new_blog_path}/**/*.*")
-          files_to_clear.each {|file| File.truncate("#{file}", 0)}
+          file_to_truncate = "#{new_blog_path}/index.html"
+          file_list = [Dir.glob("#{new_blog_path}/**/_layouts/*"),
+                       Dir.glob("#{new_blog_path}/**/_posts/*")]
+
+          FileUtils.rm_rf Dir.glob("#{new_blog_path}/**/css")
+          FileUtils.rm Dir.glob("#{new_blog_path}/**/_config.yml")
+
+          FileUtils.rm_rf(file_list)
+          File.truncate(file_to_truncate, 0)
         end
 
         puts "New jekyll site installed in #{new_blog_path}."
