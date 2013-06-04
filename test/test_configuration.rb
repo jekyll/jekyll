@@ -71,12 +71,12 @@ class TestConfiguration < Test::Unit::TestCase
     should "transform string exclude into an array" do
       assert @config.has_key?("exclude")
       assert @config.backwards_compatibilize.has_key?("exclude")
-      assert_equal @config.backwards_compatibilize["exclude"], %w[READ-ME.md Gemfile CONTRIBUTING.hello.markdown]
+      assert_equal %w[READ-ME.md Gemfile CONTRIBUTING.hello.markdown], @config.backwards_compatibilize["exclude"]
     end
     should "transform string include into an array" do
       assert @config.has_key?("include")
       assert @config.backwards_compatibilize.has_key?("include")
-      assert_equal @config.backwards_compatibilize["include"], %w[STOP_THE_PRESSES.txt .heloses .git]
+      assert_equal %w[STOP_THE_PRESSES.txt .heloses .git], @config.backwards_compatibilize["include"]
     end
   end
   context "loading configuration" do
