@@ -326,6 +326,22 @@ class TestPost < Test::Unit::TestCase
 
         end
 
+        context "disable excerpt rendering" do
+          setup do
+            file = "2013-01-02-post-excerpt.markdown"
+
+            @post.site.config['render_extracted_excerpt'] = false
+
+            @post.process(file)
+            @post.read_yaml(@source, file)
+            @post.transform
+          end
+
+          should "not be rendered" do
+            assert_equal "First paragraph with [link ref][link].\n\n[link]: http://www.jekyllrb.com/", @post.excerpt
+          end
+        end
+
       end
     end
 
