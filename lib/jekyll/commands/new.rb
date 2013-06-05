@@ -13,25 +13,24 @@ module Jekyll
           exit(1)
         end
 
-        create_sample_files new_blog_path
+        if options[:blank]
+          create_blank_site new_blog_path
+        else
+          create_sample_files new_blog_path
+        end
 
         File.open(File.expand_path(self.initialized_post_name, new_blog_path), "w") do |f|
           f.write(self.scaffold_post_content(site_template))
         end
 
-        if options[:blank]
-          file_to_truncate = "#{new_blog_path}/index.html"
-          file_list = [Dir.glob("#{new_blog_path}/**/_layouts/*"),
-                       Dir.glob("#{new_blog_path}/**/_posts/*")]
-
-          FileUtils.rm_rf Dir.glob("#{new_blog_path}/**/css")
-          FileUtils.rm Dir.glob("#{new_blog_path}/**/_config.yml")
-
-          FileUtils.rm_rf(file_list)
-          File.truncate(file_to_truncate, 0)
-        end
-
         puts "New jekyll site installed in #{new_blog_path}."
+      end
+
+      def self.create_blank_site(path)
+        Dir.chdir(path) do
+          FileUtils.mkdir(%w(_layouts _posts))
+          FileUtils.touch("index.html")
+        end
       end
 
       def self.scaffold_post_content(template_site)
