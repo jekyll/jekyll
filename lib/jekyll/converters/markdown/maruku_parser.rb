@@ -5,12 +5,9 @@ module Jekyll
         def initialize(config)
           require 'maruku'
           @config = config
-          if @config['maruku']['use_divs']
-            load_divs_library
-          end
-          if @config['maruku']['use_tex']
-            load_blahtext_library
-          end
+          @errors = []
+          load_divs_library if @config['maruku']['use_divs']
+          load_blahtext_library if @config['maruku']['use_tex']
         rescue LoadError
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
           STDERR.puts '  $ [sudo] gem install maruku'
@@ -38,8 +35,15 @@ module Jekyll
           MaRuKu::Globals[:html_png_url] = @config['maruku']['png_url']
         end
 
+        def print_errors_and_fail
+          print @errors.join
+          raise MaRuKu::Exception, "MaRuKu encountered problem(s) while converting your markup."
+        end
+
         def convert(content)
-          Maruku.new(content).to_html
+          converted = Maruku.new(content, :error_stream => @errors).to_html
+          print_errors_and_fail unless @errors.empty?
+          converted
         end
       end
     end
