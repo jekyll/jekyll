@@ -2,6 +2,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Fail loudly when MaRuKu errors out (#1190)
   * Move the building of related posts into their own class (#1057)
   * Removed trailing spaces in several places throughout the code (#1116)
   * Add a `--force` option to `jekyll new` (#1115)
