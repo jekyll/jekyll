@@ -253,6 +253,46 @@ CONTENT
       end
     end
 
+    context "for private gist" do
+      context "when valid" do
+        setup do
+          @gist = "mattr-/24081a1d93d2898ecf0f"
+          @filename = "myfile.ext"
+          content = <<CONTENT
+  ---
+  title: My Cool Gist
+  ---
+
+  {% gist #{@gist} #{@filename} %}
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        end
+
+        should "write script tag with specific file in gist" do
+          assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'>\s</script>", @result
+        end
+      end
+
+      context "when invalid" do
+        setup do
+          @gist = "mattr-24081a1d93d2898ecf0f"
+          @filename = "myfile.ext"
+          content = <<CONTENT
+  ---
+  title: My Cool Gist
+  ---
+
+  {% gist #{@gist} #{@filename} %}
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        end
+
+        should "write script tag with specific file in gist" do
+          assert_match "Error parsing gist id", @result
+        end
+      end
+    end
+
     context "with specific file" do
       setup do
         @gist = 358471
