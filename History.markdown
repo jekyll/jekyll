@@ -2,6 +2,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Add support to gist tag for private gists. (#1189)
   * Fail loudly when MaRuKu errors out (#1190)
   * Move the building of related posts into their own class (#1057)
   * Removed trailing spaces in several places throughout the code (#1116)
