@@ -1,5 +1,12 @@
 ## HEAD
+
 ### Major Enhancements
+### Minor Enhancements
+### Bug Fixes
+### Site Enhancements
+### Development Fixes
+
+## 1.0.3 / 2013-06-07
 
 ### Minor Enhancements
   * Add support to gist tag for private gists. (#1189)
