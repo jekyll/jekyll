@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Welcome
-next_section: installation
+next_section: quickstart
 permalink: /docs/home/
 ---
 
@@ -23,22 +23,6 @@ for serving with your favorite web server. Jekyll also happens to be the engine
 behind [GitHub Pages](http://pages.github.com), which means you can use Jekyll
 to host your project’s page, blog, or website from GitHub’s servers **for
 free**.
-
-## Quick-start guide
-
-For the impatient, here's how to get a boilerplate Jekyll site up and running.
-
-{% highlight bash %}
-~ $ gem install jekyll
-~ $ jekyll new myblog
-~ $ cd myblog
-~/myblog $ jekyll serve
-# => Now browse to http://localhost:4000
-{% endhighlight %}
-
-That's nothing, though. The real magic happens when you start creating blog
-posts, using the front-matter to control templates and layouts, and taking
-advantage of all the awesome configuration options Jekyll makes available.
 
 ## ProTips™, Notes, and Warnings
 
