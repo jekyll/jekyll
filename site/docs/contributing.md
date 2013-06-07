@@ -82,6 +82,22 @@ git push origin my_awesome_feature
 * Create a pull request against mojombo/jekyll and describe what your change
   does and the why you think it should be merged.
 
+Updating Documentation
+----------------------
+
+We want the jekyll documentation to be the best it can be and we
+welcome pull request when you find it lacking.
+
+You can find the documentation for jekyllrb.com in the
+[site/docs](https://github.com/mojombo/jekyll/tree/master/site/docs)
+directory, it is setup to use jekyll pages.
+
+All documentation pull requests should be directed at MASTER.  We
+will close pull requests that are not directed at master.
+
+The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) here on github can be freely updated without a pull
+request as all github users have access.
+
 Gotchas
 -------
 
