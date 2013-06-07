@@ -60,10 +60,10 @@ You can find the documentation for jekyllrb.com in the
 [site/docs](https://github.com/zachgersh/jekyll/tree/master/site/docs) directory,
 it is setup to use jekyll pages.
 
-All documentation pull requests should be directed at MASTER.  We will
-close pull requests that are not directed at master.
+All documentation pull requests should be directed at MASTER.  Pull
+requests directed at another branch will not be accepted. 
 
-The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) here on github can be freely updated without a pull
+The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) on github can be freely updated without a pull
 request as all github users have access.
 
 Gotchas
