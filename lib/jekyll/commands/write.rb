@@ -6,11 +6,17 @@ module Jekyll
 
         case args[0]
         when "draft"
-          generate_draft(options)
+          path = generate_draft(options)
         when "post"
-          generate_post(options)
+          path = generate_post(options)
         when "page"
-          generate_page(options)
+          path = generate_page(options)
+        end
+
+        if STDOUT.tty?
+          Jekyll::Stevenson.info("Wrote #{args[0]} template to #{path}", "")
+        else
+          puts path
         end
       end
 
@@ -36,6 +42,8 @@ module Jekyll
         end
 
         write_frontmatter(path, options[:title], false)
+
+        return path
       end
 
       def self.generate_post(options)
@@ -46,6 +54,8 @@ module Jekyll
         end
 
         write_frontmatter(path, options[:title], true)
+
+        return path
       end
 
       def self.generate_page(options)
@@ -60,6 +70,8 @@ module Jekyll
         end
 
         write_frontmatter(path, options[:title], false)
+
+        return path
       end
     end
   end
