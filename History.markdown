@@ -6,6 +6,8 @@
 ### Site Enhancements
   * Add "History" page.
   * Restructured docs sections to include "Meta" section.
+  * Add message to "Templates" page that specifies that Python must be installed in order
+    to use Pygments. (#1182)
 
 ### Development Fixes
 
