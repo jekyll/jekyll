@@ -31,14 +31,13 @@ Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   end
 end
 
-Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
-  File.open(File.join('_layouts', layout + '.html'), 'w') do |f|
-    f.write(text)
+Given /^I have an? (.*) (layout|theme) that contains "(.*)"$/ do |name, type, text|
+  folder = if type == 'layout'
+    '_layouts'
+  else
+    '_theme'
   end
-end
-
-Given /^I have a (.*) theme that contains "(.*)"$/ do |layout, text|
-  File.open(File.join('_theme', layout + '.html'), 'w') do |f|
+  File.open(File.join(folder, name + '.html'), 'w') do |f|
     f.write(text)
   end
 end
