@@ -9,6 +9,7 @@
   * Add message to "Templates" page that specifies that Python must be installed in order
     to use Pygments. (#1182)
   * Update link to the official Maruku repo (#1175)
+  * Add documentation about `paginate_path` to "Templates" page in docs (#1129)
 
 ### Development Fixes
 
