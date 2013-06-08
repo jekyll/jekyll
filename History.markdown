@@ -3,6 +3,9 @@
 ### Major Enhancements
 ### Minor Enhancements
 ### Bug Fixes
+### Development Fixes
+  * Merge the theme and layout cucumber steps into one step (#1151)
+
 ### Site Enhancements
   * Add "History" page.
   * Restructured docs sections to include "Meta" section.
