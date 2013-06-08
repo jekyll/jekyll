@@ -4,6 +4,9 @@
 ### Minor Enhancements
 ### Bug Fixes
 ### Site Enhancements
+  * Add "History" page.
+  * Restructured docs sections to include "Meta" section.
+
 ### Development Fixes
 
 ## 1.0.3 / 2013-06-07
