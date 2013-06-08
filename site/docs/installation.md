@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Installation
-prev_section: home
+prev_section: quickstart
 next_section: usage
 permalink: /docs/installation/
 ---
