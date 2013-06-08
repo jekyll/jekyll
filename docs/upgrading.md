@@ -2,12 +2,18 @@
 layout: docs
 title: Upgrading
 prev_section: resources
+next_section: contributing
 permalink: /docs/upgrading/
 ---
 
 Upgrading from an older version of Jekyll? A few things have changed in 1.0
 that you'll want to know about.
 
+Before we dive in, go ahead and fetch the latest version of Jekyll:
+
+{% highlight bash %}
+$ gem update jekyll
+{% endhighlight %}
 
 <div class="note feature">
   <h5 markdown="1">Diving in</h5>

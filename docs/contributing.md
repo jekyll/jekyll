@@ -1,8 +1,8 @@
 ---
 layout: docs
 title: Contributing
-prev_section: deployment-methods
-next_section: troubleshooting
+prev_section: upgrading
+next_section: history
 permalink: /docs/contributing/
 ---
 
