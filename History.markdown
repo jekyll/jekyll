@@ -13,6 +13,7 @@
     to use Pygments. (#1182)
   * Update link to the official Maruku repo (#1175)
   * Add documentation about `paginate_path` to "Templates" page in docs (#1129)
+  * Give the quick-start guide its own page (#1191)
 
 ### Development Fixes
 
