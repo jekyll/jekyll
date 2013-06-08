@@ -2,18 +2,21 @@
 layout: docs
 title: History
 permalink: /docs/history/
-prev_section: upgrading
+prev_section: contributing
 ---
 
-## HEAD
-### Major Enhancements
+## 1.0.3 / 2013-06-07
 
 ### Minor Enhancements
+- Add support to gist tag for private gists. ([#1189](https://github.com/mojombo/jekyll/issues/1189))
+- Fail loudly when MaRuKu errors out ([#1190](https://github.com/mojombo/jekyll/issues/1190))
 - Move the building of related posts into their own class ([#1057](https://github.com/mojombo/jekyll/issues/1057))
 - Removed trailing spaces in several places throughout the code ([#1116](https://github.com/mojombo/jekyll/issues/1116))
 - Add a `--force` option to `jekyll new` ([#1115](https://github.com/mojombo/jekyll/issues/1115))
+- Convert IDs in the site template to classes ([#1170](https://github.com/mojombo/jekyll/issues/1170))
 
 ### Bug Fixes
+- Fix typo in Stevenson constant "ERROR". ([#1166](https://github.com/mojombo/jekyll/issues/1166))
 - Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue ([#1106](https://github.com/mojombo/jekyll/issues/1106))
 - Exit with a non-zero exit code when dealing with a Liquid error ([#1121](https://github.com/mojombo/jekyll/issues/1121))
 - Make the `exclude` and `include` options backwards compatible with
@@ -23,6 +26,9 @@ prev_section: upgrading
     ([#1156](https://github.com/mojombo/jekyll/issues/1156))
 
 ### Site Enhancements
+- Add a Pro Tip to docs about front matter variables being optional ([#1147](https://github.com/mojombo/jekyll/issues/1147))
+- Add changelog to site as History page in /docs/ ([#1065](https://github.com/mojombo/jekyll/issues/1065))
+- Add note to Upgrading page about new config options in 1.0.x ([#1146](https://github.com/mojombo/jekyll/issues/1146))
 - Documentation for `date_to_rfc822` and `uri_escape` ([#1142](https://github.com/mojombo/jekyll/issues/1142))
 - Documentation highlight boxes shouldn't show scrollbars if not necessary ([#1123](https://github.com/mojombo/jekyll/issues/1123))
 - Add link to jekyll-minibundle in the doc's plugins list ([#1035](https://github.com/mojombo/jekyll/issues/1035))
@@ -39,8 +45,10 @@ prev_section: upgrading
 - Add the Jekyll Gallery Plugin to the plugin list ([#1143](https://github.com/mojombo/jekyll/issues/1143))
 
 ### Development Fixes
+- Use Jekyll.logger instead of Jekyll::Stevenson to log things ([#1149](https://github.com/mojombo/jekyll/issues/1149))
 - Fix pesky Cucumber infinite loop ([#1139](https://github.com/mojombo/jekyll/issues/1139))
 - Do not write posts with timezones in Cucumber tests ([#1124](https://github.com/mojombo/jekyll/issues/1124))
+- Use ISO formatted dates in Cucumber features ([#1150](https://github.com/mojombo/jekyll/issues/1150))
 
 ## 1.0.2 / 2013-05-12
 
@@ -163,7 +171,7 @@ prev_section: upgrading
 - Fixed Page#dir and Page#url for edge cases ([#536](https://github.com/mojombo/jekyll/issues/536))
 - Fix broken post_url with posts with a time in their YAML Front-Matter ([#831](https://github.com/mojombo/jekyll/issues/831))
 - Look for plugins under the source directory ([#654](https://github.com/mojombo/jekyll/issues/654))
-- Tumblr Migrator: finds _posts dir correctly, fixes truncation of long
+- Tumblr Migrator: finds `_posts` dir correctly, fixes truncation of long
       post names ([#775](https://github.com/mojombo/jekyll/issues/775))
 - Force Categories to be Strings ([#767](https://github.com/mojombo/jekyll/issues/767))
 - Safe YAML plugin to prevent vulnerability ([#777](https://github.com/mojombo/jekyll/issues/777))
@@ -255,7 +263,7 @@ prev_section: upgrading
 
 ## 0.9.0 / 2010-12-15
 ### Minor Enhancements
-- Use OptionParser's [no-] functionality for better boolean parsing.
+- Use OptionParser's `[no-]` functionality for better boolean parsing.
 - Add Drupal migrator ([#245](https://github.com/mojombo/jekyll/issues/245))
 - Complain about YAML and Liquid errors ([#249](https://github.com/mojombo/jekyll/issues/249))
 - Remove orphaned files during regeneration ([#247](https://github.com/mojombo/jekyll/issues/247))
@@ -272,7 +280,7 @@ prev_section: upgrading
 - Bug Fixes
 - Fixed filename basename generation ([#208](https://github.com/mojombo/jekyll/issues/208))
 - Set mode to UTF8 on Sequel connections ([#237](https://github.com/mojombo/jekyll/issues/237))
-- Prevent _includes dir from being a symlink
+- Prevent `_includes` dir from being a symlink
 
 ## 0.7.0 / 2010-08-24
 ### Minor Enhancements
@@ -357,129 +365,116 @@ prev_section: upgrading
 ## 0.5.3 / 2009-07-14
 - Bug Fixes
 - Solving the permalink bug where non-html files wouldn't work
-      [github.com/jeffrydegrande]
+      ([@jeffrydegrande](https://github.com/jeffrydegrande))
 
 ## 0.5.2 / 2009-06-24
 - Enhancements
 - Added --paginate option to the executable along with a paginator object
-      for the payload [github.com/calavera]
-- Upgraded RedCloth to 4.2.1, which makes <notextile> tags work once
+      for the payload ([@calavera](https://github.com/calavera))
+- Upgraded RedCloth to 4.2.1, which makes `<notextile>` tags work once
       again.
 - Configuration options set in config.yml are now available through the
-      site payload [github.com/vilcans]
+      site payload ([@vilcans](https://github.com/vilcans))
 - Posts can now have an empty YAML front matter or none at all
-      [github.com/bahuvrihi]
+      ([@bahuvrihi](https://github.com/bahuvrihi))
 - Bug Fixes
 - Fixing Ruby 1.9 issue that requires to_s on the err object
-      [github.com/Chrononaut]
-- Fixes for pagination and ordering posts on the same day [github.com/ujh]
+      ([@Chrononaut](https://github.com/Chrononaut))
+- Fixes for pagination and ordering posts on the same day ([@ujh](https://github.com/ujh))
 - Made pages respect permalinks style and permalinks in yml front matter
-      [github.com/eugenebolshakov]
+      ([@eugenebolshakov](https://github.com/eugenebolshakov))
 - Index.html file should always have index.html permalink
-      [github.com/eugenebolshakov]
+      ([@eugenebolshakov](https://github.com/eugenebolshakov))
 - Added trailing slash to pretty permalink style so Apache is happy
-      [github.com/eugenebolshakov]
+      ([@eugenebolshakov](https://github.com/eugenebolshakov))
 - Bad markdown processor in config fails sooner and with better message
-      [github.com/gcnovus]
-- Allow CRLFs in yaml frontmatter [github.com/juretta]
+      ([@gcnovus](https://github.com/gcnovus))
+- Allow CRLFs in yaml frontmatter ([@juretta](https://github.com/juretta))
 - Added Date#xmlschema for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06
 ### Major Enhancements
-- Next/previous posts in site payload [github.com/pantulis,
-      github.com/tomo]
+- Next/previous posts in site payload ([@pantulis](https://github.com/pantulis), [@tomo](https://github.com/tomo))
 - Permalink templating system
 - Moved most of the README out to the GitHub wiki
 - Exclude option in configuration so specified files won't be brought over
-      with generated site [github.com/duritong]
+      with generated site ([@duritong](https://github.com/duritong))
 - Bug Fixes
 - Making sure config.yaml references are all gone, using only config.yml
-- Fixed syntax highlighting breaking for UTF-8 code [github.com/henrik]
+- Fixed syntax highlighting breaking for UTF-8 code ([@henrik](https://github.com/henrik))
 - Worked around RDiscount bug that prevents Markdown from getting parsed
-      after highlight [github.com/henrik]
-- CGI escaped post titles [github.com/Chrononaut]
+      after highlight ([@henrik](https://github.com/henrik))
+- CGI escaped post titles ([@Chrononaut](https://github.com/Chrononaut))
 
 ## 0.5.0 / 2009-04-07
 ### Minor Enhancements
-- Ability to set post categories via YAML [github.com/qrush]
-- Ability to set prevent a post from publishing via YAML
-      [github.com/qrush]
-- Add textilize filter [github.com/willcodeforfoo]
-- Add 'pretty' permalink style for wordpress-like urls
-      [github.com/dysinger]
-- Made it possible to enter categories from YAML as an array
-      [github.com/Chrononaut]
-- Ignore Emacs autosave files [github.com/Chrononaut]
+- Ability to set post categories via YAML ([@qrush](https://github.com/qrush))
+- Ability to set prevent a post from publishing via YAML ([@qrush](https://github.com/qrush))
+- Add textilize filter ([@willcodeforfoo](https://github.com/willcodeforfoo))
+- Add 'pretty' permalink style for wordpress-like urls ([@dysinger](https://github.com/dysinger))
+- Made it possible to enter categories from YAML as an array ([@Chrononaut](https://github.com/Chrononaut))
+- Ignore Emacs autosave files ([@Chrononaut](https://github.com/Chrononaut))
 - Bug Fixes
-- Use block syntax of popen4 to ensure that subprocesses are properly
-      disposed [github.com/jqr]
-- Close open4 streams to prevent zombies [github.com/rtomayko]
-- Only query required fields from the WP Database [github.com/ariejan]
-- Prevent _posts from being copied to the destination directory
-      [github.com/bdimcheff]
+- Use block syntax of popen4 to ensure that subprocesses are properly disposed ([@jqr](https://github.com/jqr))
+- Close open4 streams to prevent zombies ([@rtomayko](https://github.com/rtomayko))
+- Only query required fields from the WP Database ([@ariejan](https://github.com/ariejan))
+- Prevent `_posts` from being copied to the destination directory ([@bdimcheff](https://github.com/bdimcheff))
 - Refactors
-- Factored the filtering code into a method [github.com/Chrononaut]
-- Fix tests and convert to Shoulda [github.com/qrush,
-      github.com/technicalpickles]
-- Add Cucumber acceptance test suite [github.com/qrush,
-      github.com/technicalpickles]
+- Factored the filtering code into a method ([@Chrononaut](https://github.com/Chrononaut))
+- Fix tests and convert to Shoulda ([@qrush](https://github.com/qrush), [@technicalpickles](https://github.com/technicalpickles))
+- Add Cucumber acceptance test suite ([@qrush](https://github.com/qrush), [@technicalpickles](https://github.com/technicalpickles))
 
 ## 0.4.1
 ### Minor Enhancements
-- Changed date format on wordpress converter (zeropadding)
-      [github.com/dysinger]
+- Changed date format on wordpress converter (zeropadding) ([@dysinger](https://github.com/dysinger))
 - Bug Fixes
-- Add jekyll binary as executable to gemspec [github.com/dysinger]
+- Add jekyll binary as executable to gemspec ([@dysinger](https://github.com/dysinger))
 
 ## 0.4.0 / 2009-02-03
 ### Major Enhancements
 - Switch to Jeweler for packaging tasks
 
 ### Minor Enhancements
-- Type importer [github.com/codeslinger]
-- site.topics accessor [github.com/baz]
-- Add array_to_sentence_string filter [github.com/mchung]
-- Add a converter for textpattern [github.com/PerfectlyNormal]
-- Add a working Mephisto / MySQL converter [github.com/ivey]
-- Allowing .htaccess files to be copied over into the generated site
-      [github.com/briandoll]
-- Add option to not put file date in permalink URL [github.com/mreid]
-- Add line number capabilities to highlight blocks [github.com/jcon]
+- Type importer ([@codeslinger](https://github.com/codeslinger))
+- site.topics accessor ([@baz](https://github.com/baz))
+- Add `array_to_sentence_string` filter ([@mchung](https://github.com/mchung))
+- Add a converter for textpattern ([@PerfectlyNormal](https://github.com/PerfectlyNormal))
+- Add a working Mephisto / MySQL converter ([@ivey](https://github.com/ivey))
+- Allowing .htaccess files to be copied over into the generated site ([@briandoll](https://github.com/briandoll))
+- Add option to not put file date in permalink URL ([@mreid](https://github.com/mreid))
+- Add line number capabilities to highlight blocks ([@jcon](https://github.com/jcon))
 - Bug Fixes
-- Fix permalink behavior [github.com/cavalle]
-- Fixed an issue with pygments, markdown, and newlines
-      [github.com/zpinter]
-- Ampersands need to be escaped [github.com/pufuwozu, github.com/ap]
-- Test and fix the site.categories hash [github.com/zzot]
-- Fix site payload available to files [github.com/matrix9180]
+- Fix permalink behavior ([@cavalle](https://github.com/cavalle))
+- Fixed an issue with pygments, markdown, and newlines ([@zpinter](https://github.com/zpinter))
+- Ampersands need to be escaped ([@pufuwozu](https://github.com/pufuwozu), [@ap](https://github.com/ap))
+- Test and fix the site.categories hash ([@zzot](https://github.com/zzot))
+- Fix site payload available to files ([@matrix9180](https://github.com/matrix9180))
 
 ## 0.3.0 / 2008-12-24
 ### Major Enhancements
 - Added --server option to start a simple WEBrick server on destination
-      directory [github.com/johnreilly and github.com/mchung]
+      directory ([@johnreilly](https://github.com/johnreilly) and [@mchung](https://github.com/mchung))
 
 ### Minor Enhancements
-- Added post categories based on directories containing _posts
-      [github.com/mreid]
-- Added post topics based on directories underneath _posts
-- Added new date filter that shows the full month name [github.com/mreid]
-- Merge Post's YAML front matter into its to_liquid payload
-      [github.com/remi]
-- Restrict includes to regular files underneath _includes
+- Added post categories based on directories containing `_posts` ([@mreid](https://github.com/mreid))
+- Added post topics based on directories underneath `_posts`
+- Added new date filter that shows the full month name ([@mreid](https://github.com/mreid))
+- Merge Post's YAML front matter into its to_liquid payload ([@remi](https://github.com/remi))
+- Restrict includes to regular files underneath `_includes`
 - Bug Fixes
 - Change YAML delimiter matcher so as to not chew up 2nd level markdown
-      headers [github.com/mreid]
+      headers ([@mreid](https://github.com/mreid))
 - Fix bug that meant page data (such as the date) was not available in
-      templates [github.com/mreid]
-- Properly reject directories in _layouts
+      templates ([@mreid](https://github.com/mreid))
+- Properly reject directories in `_layouts`
 
 ## 0.2.1 / 2008-12-15
 - Major Changes
-- Use Maruku (pure Ruby) for Markdown by default [github.com/mreid]
+- Use Maruku (pure Ruby) for Markdown by default ([@mreid](https://github.com/mreid))
 - Allow use of RDiscount with --rdiscount flag
 
 ### Minor Enhancements
-- Don't load directory_watcher unless it's needed [github.com/pjhyett]
+- Don't load directory_watcher unless it's needed ([@pjhyett](https://github.com/pjhyett))
 
 ## 0.2.0 / 2008-12-14
 - Major Changes
@@ -487,7 +482,7 @@ prev_section: upgrading
 
 ## 0.1.6 / 2008-12-13
 - Major Features
-- Include files in _includes with {% include x.textile %}
+- Include files in `_includes` with {% raw %}`{% include x.textile %}`{% endraw %}
 
 ## 0.1.5 / 2008-12-12
 ### Major Enhancements
@@ -495,12 +490,10 @@ prev_section: upgrading
 - Disable true LSI by default, enable with --lsi
 
 ### Minor Enhancements
-- Output informative message if RDiscount is not available
-      [github.com/JackDanger]
+- Output informative message if RDiscount is not available ([@JackDanger](https://github.com/JackDanger))
 - Bug Fixes
-- Prevent Jekyll from picking up the output directory as a source
-      [github.com/JackDanger]
-- Skip related_posts when there is only one post [github.com/JackDanger]
+- Prevent Jekyll from picking up the output directory as a source ([@JackDanger](https://github.com/JackDanger))
+- Skip `related_posts` when there is only one post ([@JackDanger](https://github.com/JackDanger))
 
 ## 0.1.4 / 2008-12-08
 - Bug Fixes
@@ -508,12 +501,12 @@ prev_section: upgrading
 
 ## 0.1.3 / 2008-12-06
 - Major Features
-- Markdown support [github.com/vanpelt]
-- Mephisto and CSV converters [github.com/vanpelt]
-- Code hilighting [github.com/vanpelt]
+- Markdown support ([@vanpelt](https://github.com/vanpelt))
+- Mephisto and CSV converters ([@vanpelt](https://github.com/vanpelt))
+- Code hilighting ([@vanpelt](https://github.com/vanpelt))
 - Autobuild
 - Bug Fixes
-- Accept both \r\n and \n in YAML header [github.com/vanpelt]
+- Accept both \r\n and \n in YAML header ([@vanpelt](https://github.com/vanpelt))
 
 ## 0.1.2 / 2008-11-22
 - Major Features
@@ -524,7 +517,7 @@ prev_section: upgrading
 
 ## 0.1.1 / 2008-11-22
 - Minor Additions
-- Posts now support introspectional data e.g. {{ page.url }}
+- Posts now support introspectional data e.g. {% raw %}`{{ page.url }}`{% endraw %}
 
 ## 0.1.0 / 2008-11-05
 - First release

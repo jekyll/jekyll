@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Troubleshooting
-prev_section: contributing
+prev_section: deployment-methods
 next_section: sites
 permalink: /docs/troubleshooting/
 ---
