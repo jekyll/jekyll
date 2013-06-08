@@ -19,7 +19,7 @@ fork](http://github.com/remi/maruku).
 ## RDiscount
 
 If you prefer to use [RDiscount](http://github.com/rtomayko/rdiscount) instead
-of [Maruku](http://maruku.rubyforge.org/) for markdown, just make sure you have
+of [Maruku](http://github.com/bhollis/maruku) for markdown, just make sure you have
 it installed:
 
 {% highlight bash %}
