@@ -2,6 +2,15 @@ require 'helper'
 
 class TestPager < Test::Unit::TestCase
 
+  def jekyll_site(config = {})
+    base = Jekyll::Configuration::DEFAULTS.merge({
+      'source'      => source_dir,
+      'destination' => dest_dir,
+      'paginate'    => 1
+    })
+    Jekyll::Site.new(base.merge(config))
+  end
+
   should "calculate number of pages" do
     assert_equal(0, Pager.calculate_pages([], '2'))
     assert_equal(1, Pager.calculate_pages([1], '2'))
@@ -12,10 +21,12 @@ class TestPager < Test::Unit::TestCase
   end
 
   should "determine the pagination path" do
-    assert_nil(Pager.paginate_path(Jekyll::Configuration::DEFAULTS, 1))
-    assert_equal("page2", Pager.paginate_path(Jekyll::Configuration::DEFAULTS, 2))
-    assert_nil(Pager.paginate_path(Jekyll::Configuration::DEFAULTS.merge('paginate_path' => '/blog/page-:num'), 1))
-    assert_equal("page-2", Pager.paginate_path(Jekyll::Configuration::DEFAULTS.merge('paginate_path' => '/blog/page-:num'), 2))
+    assert_equal("/index.html",  Pager.paginate_path(jekyll_site, 1))
+    assert_equal("/page2",       Pager.paginate_path(jekyll_site, 2))
+    assert_equal("/index.html",  Pager.paginate_path(jekyll_site('paginate_path' => '/blog/page-:num'), 1))
+    assert_equal("/blog/page-2", Pager.paginate_path(jekyll_site('paginate_path' => '/blog/page-:num'), 2))
+    assert_equal("/index.html",  Pager.paginate_path(jekyll_site('paginate_path' => '/blog/page/:num'), 1))
+    assert_equal("/blog/page/2", Pager.paginate_path(jekyll_site('paginate_path' => '/blog/page/:num'), 2))
   end
 
   context "pagination disabled" do

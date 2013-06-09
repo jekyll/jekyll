@@ -50,7 +50,11 @@ module Jekyll
       #
       # Returns the url of the template page
       def self.first_page_url(site)
-        Pagination.new.template_page(site).url
+        if page = Pagination.new.template_page(site)
+          page.url
+        else
+          nil
+        end
       end
 
       # Public: Find the Jekyll::Page which will act as the pager template
