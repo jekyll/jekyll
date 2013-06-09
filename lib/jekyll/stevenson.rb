@@ -30,13 +30,23 @@ module Jekyll
       @log_level_int = log_level_as_int(@log_level)
     end
 
+    # Public: Print a Jekyll debug message to stdout
+    #
+    # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
+    # message - the message detail
+    #
+    # Returns nothing
+    def debug(topic, message = "")
+      $stdout.puts(message(topic, message)) if @log_level_int <= DEBUG
+    end
+
     # Public: Print a jekyll message to stdout
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
     #
     # Returns nothing
-    def info(topic, message)
+    def info(topic, message = "")
       $stdout.puts(message(topic, message)) if @log_level_int <= INFO
     end
 
@@ -46,7 +56,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def warn(topic, message)
+    def warn(topic, message = "")
       $stderr.puts(message(topic, message).yellow) if @log_level_int <= WARN
     end
 
@@ -56,7 +66,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def error(topic, message)
+    def error(topic, message = "")
       $stderr.puts(message(topic, message).red) if @log_level_int <= ERROR
     end
 
@@ -66,7 +76,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns the formatted message
-    def message(topic, message)
+    def message(topic, message = "")
       formatted_topic(topic) + message.gsub(/\s+/, ' ')
     end
 
