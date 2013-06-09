@@ -6,7 +6,7 @@ class TestPager < Test::Unit::TestCase
     base = Jekyll::Configuration::DEFAULTS.deep_merge({
       'source'      => source_dir,
       'destination' => dest_dir,
-      'pagination'  => 1
+      'paginate'    => 1
     })
     site = Jekyll::Site.new(base.deep_merge(config))
     site.process
@@ -23,12 +23,16 @@ class TestPager < Test::Unit::TestCase
   end
 
   should "determine the pagination path" do
-    #assert_equal("/index.html",  Pager.paginate_path(build_site, 1))
+    assert_equal("/index.html",  Pager.paginate_path(build_site, 1))
     assert_equal("/page2",       Pager.paginate_path(build_site, 2))
-    #assert_equal("/index.html",  Pager.paginate_path(build_site('paginate_path' => '/blog/page-:num'), 1))
-    assert_equal("/blog/page-2", Pager.paginate_path(build_site('paginate_path' => '/blog/page-:num'), 2))
-    #assert_equal("/index.html",  Pager.paginate_path(build_site('paginate_path' => '/blog/page/:num'), 1))
-    assert_equal("/blog/page/2", Pager.paginate_path(build_site('paginate_path' => '/blog/page/:num'), 2))
+    assert_equal("/index.html",  Pager.paginate_path(build_site({'paginate_path' => '/blog/page-:num'}), 1))
+    assert_equal("/blog/page-2", Pager.paginate_path(build_site({'paginate_path' => '/blog/page-:num'}), 2))
+    assert_equal("/index.html",  Pager.paginate_path(build_site({'paginate_path' => '/blog/page/:num'}), 1))
+    assert_equal("/blog/page/2", Pager.paginate_path(build_site({'paginate_path' => '/blog/page/:num'}), 2))
+    assert_equal("/contacts/index.html", Pager.paginate_path(build_site({'paginate_path' => '/contacts/page:num'}), 1))
+    assert_equal("/contacts/page2",      Pager.paginate_path(build_site({'paginate_path' => '/contacts/page:num'}), 2))
+    assert_equal("/contacts/index.html", Pager.paginate_path(build_site({'paginate_path' => '/contacts/page/:num'}), 1))
+    assert_equal("/contacts/page/2",     Pager.paginate_path(build_site({'paginate_path' => '/contacts/page/:num'}), 2))
   end
 
   context "pagination disabled" do
