@@ -14,6 +14,8 @@
   * Update link to the official Maruku repo (#1175)
   * Add documentation about `paginate_path` to "Templates" page in docs (#1129)
   * Give the quick-start guide its own page (#1191)
+  * Update ProTip on Installation page in docs to point to all the info about Pygments and
+    the 'highlight' tag. (#1196)
 
 ### Development Fixes
 
