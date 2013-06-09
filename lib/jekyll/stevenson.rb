@@ -9,15 +9,22 @@ module Jekyll
 
     # Public: Create a new instance of Stevenson, Jekyll's logger
     #
-    # level - a Symbol indicating the log level. One of:
-    #   - :debug
-    #   - :info
-    #   - :warn
-    #   - :error
+    # level - a Symbol or String indicating the log level. One of:
+    #   - :debug or 'debug'
+    #   - :info or 'info'
+    #   - :warn or 'warn'
+    #   - :error or 'error'
     #
     # Returns nothing
     def initialize(level = :info)
-      log_level = level
+      self.log_level = level
+    end
+
+    # Public: Return inspect string for this Stevenson instance
+    #
+    # Returns a String representation of this Stevenson instance
+    def inspect
+      "#<Jekyll::Stevenson @log_level=#{log_level.inspect} @log_level_int=#{@log_level_int.inspect}>"
     end
 
     # Public: Set the log level
