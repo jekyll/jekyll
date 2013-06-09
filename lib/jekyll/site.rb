@@ -74,7 +74,8 @@ module Jekyll
       # Check that the destination dir isn't the source dir or a directory
       # parent to the source dir.
       if self.source =~ /^#{self.dest}/
-        raise FatalException.new "Destination directory cannot be or contain the Source directory."
+        Jekyll.logger.error "Destination directory cannot be or contain the Source directory."
+        raise FatalException
       end
 
       # If safe mode is off, load in any Ruby files under the plugins
