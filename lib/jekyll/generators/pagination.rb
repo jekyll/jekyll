@@ -10,7 +10,14 @@ module Jekyll
       #
       # Returns nothing.
       def generate(site)
-        paginate(site, template_page(site)) if Pager.pagination_enabled?(site)
+        if Pager.pagination_enabled?(site)
+          if template = template_page(site)
+            paginate(site, template)
+          else
+            Jekyll.logger.warn "Pagination:", "Pagination is enabled, but I couldn't find" +
+            "an index.html page to use as the pagination template. Skipping pagination."
+          end
+        end
       end
 
       # Paginates the blog's posts. Renders the index.html file into paginated
