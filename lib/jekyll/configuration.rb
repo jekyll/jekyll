@@ -185,22 +185,15 @@ module Jekyll
         config.delete('server_port')
       end
 
-      if config.has_key?('exclude') && config['exclude'].is_a?(String)
-        Jekyll.logger.warn "Deprecation:", "The 'exclude' configuration option" +
-                               " must now be specified as an array, but you specified" +
-                               " a string. For now, we've treated the string you provided" +
-                               " as a list of comma-separated values."
-        config['exclude'] = csv_to_array(config['exclude'])
+      %w[include exclude].each do |option|
+        if config.has_key?(option) && config[option].is_a?(String)
+          Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
+            " must now be specified as an array, but you specified" +
+            " a string. For now, we've treated the string you provided" +
+            " as a list of comma-separated values."
+          config[option] = csv_to_array(config[option])
+        end
       end
-
-      if config.has_key?('include') && config['include'].is_a?(String)
-        Jekyll.logger.warn "Deprecation:", "The 'include' configuration option" +
-                               " must now be specified as an array, but you specified" +
-                               " a string. For now, we've treated the string you provided" +
-                               " as a list of comma-separated values."
-        config['include'] = csv_to_array(config['include'])
-      end
-
       config
     end
 
