@@ -107,26 +107,30 @@ module Jekyll
     #         Page's name must be `index.html` and exist in any of the directories
     #         between the site source and `paginate_path`.
     #
+    # config - the site configuration hash
+    # page   - the Jekyll::Page about which we're inquiring
+    #
     # Returns true if the
     def self.pagination_candidate?(config, page)
       page_dir = File.dirname(File.expand_path(remove_leading_slash(page.path), config['source']))
+      paginate_path = remove_leading_slash(config['paginate_path'])
+      paginate_path = File.expand_path(paginate_path, config['source'])
       page.name == 'index.html' &&
-        in_hierarchy(config, page_dir)
+        in_hierarchy(config['source'], page_dir, File.dirname(paginate_path))
     end
 
     # Determine if the subdirectories of the two paths are the same relative to source
     #
-    # config   - the site configuration hash
-    # page_dir - the directory of the Jekyll::Page
+    # source        - the site source
+    # page_dir      - the directory of the Jekyll::Page
+    # paginate_path - the absolute paginate path (from root of FS)
     #
     # Returns whether the subdirectories are the same relative to source
-    def self.in_hierarchy(config, page_dir)
-      paginate_path = remove_leading_slash(config['paginate_path'])
-      paginate_path = File.expand_path(paginate_path, config['source'])
-      return false if page_dir == File.dirname(page_dir)
-      page_dir == config['source'] ||
-        page_dir == paginate_path ||
-        in_hierarchy(config, File.dirname(page_dir))
+    def self.in_hierarchy(source, page_dir, paginate_path)
+      return false if paginate_path == File.dirname(paginate_path)
+      return false if paginate_path == Pathname.new(source).parent
+      page_dir == paginate_path ||
+        in_hierarchy(source, page_dir, File.dirname(paginate_path))
     end
 
     # Static: Return the pagination path of the page
