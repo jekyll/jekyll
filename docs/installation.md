@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Installation
-prev_section: home
+prev_section: quickstart
 next_section: usage
 permalink: /docs/installation/
 ---
@@ -58,7 +58,8 @@ Check out [the extras page](../extras) for more information.
   <p>
     If you’re the kind of person who is using Jekyll, then chances are you’ll
     want to enable syntax highlighting using Pygments. You should really
-    <a href="../extras">check out how to do that</a> before you go any further.
+    <a href="../templates/#code_snippet_highlighting">check out how to do
+    that</a> before you go any further.
   </p>
 </div>
 
