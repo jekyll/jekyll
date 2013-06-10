@@ -85,18 +85,17 @@ git push origin my_awesome_feature
 Updating Documentation
 ----------------------
 
-We want the jekyll documentation to be the best it can be and we
+We want the Jekyll documentation to be the best it can be and we
 welcome pull request when you find it lacking.
 
 You can find the documentation for jekyllrb.com in the
-[site/docs](https://github.com/mojombo/jekyll/tree/master/site/docs)
-directory, it is setup to use jekyll pages.
+[site](https://github.com/mojombo/jekyll/tree/master/site)
+directory, it is setup to use Jekyll pages.
 
-All documentation pull requests should be directed at MASTER.  Pull
+All documentation pull requests should be directed at `master`.  Pull
 requests directed at another branch will not be accepted.
 
-The [jekyll wiki](https://github.com/mojombo/jekyll/wiki) on github can be freely updated without a pull
-request as all github users have access.
+The [Jekyll wiki](https://github.com/mojombo/jekyll/wiki) on GitHub can be freely updated without a pull request as all GitHub users have access.
 
 Gotchas
 -------
