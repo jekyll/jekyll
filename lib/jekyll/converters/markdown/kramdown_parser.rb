@@ -26,7 +26,7 @@ module Jekyll
             # not using coderay
             base_kramdown_configs
           end
-          Kramdown::Document.new(content, kramdown_configs).to_html
+          Kramdown::Document.new(content, @config["kramdown"].symbolize_keys).to_html
         end
 
         def base_kramdown_configs
