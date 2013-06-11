@@ -10,13 +10,13 @@ Feature: Include tags
     And I have an "_includes/ignore.html" file that contains "<footer>My blog footer</footer>"
     And I have a _posts directory
     And I have the following post:
-      | title | date | layout | content |
-      | Include Files | 3/21/2013 | default | {% include header.html param="myparam" %} |
-      | Ignore params if unused | 3/21/2013 | default | {% include ignore.html date="today" %} |
-      | List multiple parameters | 3/21/2013 | default | {% include params.html date="today" start="tomorrow" %} |
-      | Dont keep parameters | 3/21/2013 | default | {% include ignore.html param="test" %}\n{% include header.html %} |
-      | Allow params with spaces and quotes | 4/07/2013 | default | {% include params.html cool="param with spaces" super="\"quoted\"" %} |
-      | Parameter syntax | 4/12/2013 | default | {% include params.html param1_or_2="value" %} |
+      | title                               | date       | layout  | content |
+      | Include Files                       | 2013-03-21 | default | {% include header.html param="myparam" %} |
+      | Ignore params if unused             | 2013-03-21 | default | {% include ignore.html date="today" %} |
+      | List multiple parameters            | 2013-03-21 | default | {% include params.html date="today" start="tomorrow" %} |
+      | Dont keep parameters                | 2013-03-21 | default | {% include ignore.html param="test" %}\n{% include header.html %} |
+      | Allow params with spaces and quotes | 2013-04-07 | default | {% include params.html cool="param with spaces" super="\"quoted\"" %} |
+      | Parameter syntax                    | 2013-04-12 | default | {% include params.html param1_or_2="value" %} |
     When I run jekyll
     Then the _site directory should exist
     And I should see "<header>My awesome blog header: myparam</header>" in "_site/2013/03/21/include-files.html"
