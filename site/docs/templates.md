@@ -195,13 +195,13 @@ root of your source directory. This will embed the contents of
 You can also pass parameters to an include:
 
 {% highlight ruby %}
-{{ "{% include sig.textile param=value " }}%}
+{% raw %}{% include sig.textile param="value" %}{% endraw %}
 {% endhighlight %}
 
 These parameters are available via Liquid in the include:
 
 {% highlight ruby %}
-{{ "{{ include.param " }}}}
+{% raw %}{{ include.param }}{% endraw %}
 {% endhighlight %}
 
 ### Code snippet highlighting
