@@ -13,57 +13,37 @@ module Jekyll
         end
       end
 
+      MATCHER = /(?<param>\w+)=(?:"(?<dvar>[^"\\]*(?:\\.[^"\\]*)*)"|'(?<svar>[^'\\]*(?:\\.[^'\\]*)*)')/
+
       def parse_params(markup)
-        last_space = last_quote = pos = 0
-        last_key = nil
-        in_quotes = false
         @params = {}
+        pos = 0
 
-        if !(/^(\s*\b\S+="(?:\\"|.)*?")*\s*$/ =~ markup)
+	# ensure the entire markup string from start to end is valid syntax, and params are separated by spaces
+        full_matcher = Regexp.compile('\A\s*(?:(?<=\s|\A)' + MATCHER.to_s + '\s*)*\z')
+        if not markup =~ full_matcher
           raise SyntaxError.new <<-eos
-Syntax error for 'include'  while parsing the following markup:
+Invalid syntax for include tag:
 
-  #{markup}
+	#{markup}
 
-Valid syntax: include param="value"
+Valid syntax:
+
+	{% include file.ext param='value' param2="value" %}
+
 eos
         end
 
-        while pos = markup.index(/[=\"\s]/, pos)
-          str = markup[pos, 1]
-          if /\s/ =~ str
-            last_space = pos
-          elsif str == '='
-            if !last_key.nil?
-              raise SyntaxError.new <<-eos
-Syntax Error in tag 'include' (missing value) while parsing the following markup:
+        while match = MATCHER.match(markup, pos) do
+          pos = match.end(0)
 
-  #{markup}
-
-Valid syntax: include param="value"
-eos
-            end
-            last_key = markup[last_space+1..pos-1]
-          elsif str == '"' and markup[pos-1, 1] != '\\'
-            in_quotes = !in_quotes
-            if !in_quotes
-              value = markup[last_quote+1..pos-1].gsub(/\\"/, '"')
-              @params[last_key] = value
-              last_key = nil
-            end
-            last_quote = pos
+          if match[:dvar]
+            value = match[:dvar].gsub(/\\"/, '"')
+          elsif match[:svar]
+            value = match[:svar].gsub(/\\'/, "'")
           end
-          pos += 1
-        end
 
-        if in_quotes
-          raise SyntaxError.new <<-eos
-Syntax Error in tag 'include' (unterminated value) while parsing the following markup:
-
-  #{markup}
-
-Valid syntax: include param="value"
-eos
+          @params[match[:param]] = value
         end
       end
 
