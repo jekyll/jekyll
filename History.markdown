@@ -17,6 +17,7 @@
   * Update ProTip on Installation page in docs to point to all the info about Pygments and
     the 'highlight' tag. (#1196)
   * Run `site/img` through ImageOptim (thanks @qrush!) (#1208)
+  * Added Jade Converter to `site/docs/plugins` (#1210)
 
 ### Development Fixes
 
