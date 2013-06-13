@@ -360,6 +360,7 @@ There are a few useful, prebuilt plugins at the following locations:
 - [Pygments Cache Path by Raimonds Simanovskis](https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb): Plugin to cache syntax-highlighted code from Pygments
 - [Delicious Plugin by Christian Hellsten](https://github.com/christianhellsten/jekyll-plugins): Fetches and renders bookmarks from delicious.com.
 - [Ultraviolet plugin by Steve Alex](https://gist.github.com/480380): Jekyll Plugin for Ultraviolet
+- [Jade plugin by John Papandriopoulos](https://github.com/snappylabs/jade-jekyll-plugin): Jade Converter plugin for Jekyll
 - [HAML plugin by Sam Z](https://gist.github.com/517556): HAML plugin for jekyll
 - [ArchiveGenerator by Ilkka Laukkanen](https://gist.github.com/707909): Uses [this archive page](https://gist.github.com/707020) to generate archives
 - [Tag Cloud Plugin by Ilkka Laukkanen](https://gist.github.com/710577): Jekyll tag cloud / tag pages plugin
