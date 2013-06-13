@@ -13,7 +13,7 @@ module Jekyll
         end
       end
 
-      MATCHER = /(?<param>\w+)=(?:"(?<dvar>[^"\\]*(?:\\.[^"\\]*)*)"|'(?<svar>[^'\\]*(?:\\.[^'\\]*)*)')/
+      MATCHER = /(\w+)=(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/
 
       def parse_params(markup)
         @params = {}
@@ -37,13 +37,13 @@ eos
         while match = MATCHER.match(markup, pos) do
           pos = match.end(0)
 
-          if match[:dvar]
-            value = match[:dvar].gsub(/\\"/, '"')
-          elsif match[:svar]
-            value = match[:svar].gsub(/\\'/, "'")
+          if match[2]
+            value = match[2].gsub(/\\"/, '"')
+          elsif match[3]
+            value = match[3].gsub(/\\'/, "'")
           end
 
-          @params[match[:param]] = value
+          @params[match[1]] = value
         end
       end
 
