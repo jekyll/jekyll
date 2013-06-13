@@ -16,6 +16,7 @@
   * Give the quick-start guide its own page (#1191)
   * Update ProTip on Installation page in docs to point to all the info about Pygments and
     the 'highlight' tag. (#1196)
+  * Run `site/img` through ImageOptim (thanks @qrush!) (#1208)
 
 ### Development Fixes
 
