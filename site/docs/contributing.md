@@ -19,7 +19,7 @@ following in mind:
   directory would be appreciated, and once merged it will also appear in
   the next update of the main site.
 * If your contribution adds or changes any Jekyll behavior, make sure to update
-  the documentation. It lives in `site/_posts`. If the docs are missing
+  the documentation. It lives in `site/docs`. If the docs are missing
   information, please feel free to add it in. Great docs make a great project!
 * Please follow the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby)
   when modifying Ruby code.
