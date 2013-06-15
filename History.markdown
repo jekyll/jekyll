@@ -18,6 +18,7 @@
     the 'highlight' tag. (#1196)
   * Run `site/img` through ImageOptim (thanks @qrush!) (#1208)
   * Added Jade Converter to `site/docs/plugins` (#1210)
+  * Fix location of docs pages in Contributing pages (#1214)
 
 ### Development Fixes
 
