@@ -8,20 +8,22 @@ module Jekyll
 
       def setup
         return if @setup
-        @parser = case @config['markdown']
-          when 'redcarpet'
-            RedcarpetParser.new @config
-          when 'kramdown'
-            KramdownParser.new @config
-          when 'rdiscount'
-            RDiscountParser.new @config
-          when 'maruku'
-            MarukuParser.new @config
+        @parser =
+          case @config['markdown']
+            when 'redcarpet' then RedcarpetParser.new(@config)
+            when 'kramdown' then KramdownParser.new(@config)
+            when 'rdiscount' then RDiscountParser.new(@config)
+            when 'maruku' then MarukuParser.new(@config)
           else
-            $stderr.puts "Invalid Markdown processor: #{@config['markdown']}"
-            $stderr.puts "  Valid options are [ maruku | rdiscount | kramdown | redcarpet ]"
-            raise FatalException, "Invalid Markdown process: #{@config['markdown']}"
-        end
+            # So they can't try some tricky bullshit or go down the ancestor chain, I hope.
+            if @config['markdown'] !~ /[^A-Za-z0-9]/ && self.class.constants.include?(@config['markdown'].to_sym)
+              self.class.const_get(@config['markdown']).new(@config)
+            else
+              $stderr.puts "Invalid Markdown processor: #{@config['markdown']}"
+              $stderr.puts "  Valid options are [ maruku | rdiscount | kramdown | redcarpet ]"
+              raise FatalException, "Invalid Markdown process: #{@config['markdown']}"
+            end
+          end
         @setup = true
       end
 
