@@ -66,7 +66,7 @@ def linkify(markdown)
 end
 
 def liquid_escape(markdown)
-  markdown.gsub(/(`{[{%].+[}%]}`)/, "{% raw %}\\1{% endraw %}")
+  markdown.gsub(/(`\{[\{%].+[\}%]\}`)/, "{% raw %}\\1{% endraw %}")
 end
 
 def remove_head_from_history(markdown)
