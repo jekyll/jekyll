@@ -6,9 +6,31 @@ module Jekyll
       attr_accessor :date, :slug
 
       def initialize(name)
-        who, cares, date, slug = *name.match(MATCHER)
-        @slug = slug
+        all, path, date, slug = *name.sub(/^\//, "").match(MATCHER)
+        @slug = path ? path + slug : slug
         @date = Time.parse(date)
+      end
+
+      def ==(other)
+        slug == post_slug(other) &&
+          date.year  == other.date.year &&
+          date.month == other.date.month &&
+          date.day   == other.date.day
+      end
+
+      private
+      # Construct the directory-aware post slug for a Jekyll::Post
+      #
+      # other - the Jekyll::Post
+      #
+      # Returns the post slug with the subdirectory (relative to _posts)
+      def post_slug(other)
+        path = other.name.split("/")[0...-1].join("/")
+        if path.nil? || path == ""
+          other.slug
+        else
+          path + '/' + other.slug
+        end
       end
     end
 
@@ -23,11 +45,7 @@ module Jekyll
         site = context.registers[:site]
 
         site.posts.each do |p|
-          if p.slug == @post.slug \
-            and p.date.year == @post.date.year \
-            and p.date.month == @post.date.month \
-            and p.date.day == @post.date.day
-
+          if @post == p
             return p.url
           end
         end

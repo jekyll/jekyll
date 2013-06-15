@@ -102,7 +102,7 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/about/", @page.dir
       end
     end
-        
+
     context "with specified layout of nil" do
       setup do
         @page = setup_page('sitemap.xml')

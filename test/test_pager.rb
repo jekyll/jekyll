@@ -11,6 +11,13 @@ class TestPager < Test::Unit::TestCase
     assert_equal(3, Pager.calculate_pages([1,2,3,4,5], '2'))
   end
 
+  should "determine the pagination path" do
+    assert_nil(Pager.paginate_path(Jekyll::Configuration::DEFAULTS, 1))
+    assert_equal("page2", Pager.paginate_path(Jekyll::Configuration::DEFAULTS, 2))
+    assert_nil(Pager.paginate_path(Jekyll::Configuration::DEFAULTS.merge('paginate_path' => '/blog/page-:num'), 1))
+    assert_equal("page-2", Pager.paginate_path(Jekyll::Configuration::DEFAULTS.merge('paginate_path' => '/blog/page-:num'), 2))
+  end
+
   context "pagination disabled" do
     setup do
       stub(Jekyll).configuration do
@@ -23,7 +30,8 @@ class TestPager < Test::Unit::TestCase
     end
 
     should "report that pagination is disabled" do
-      assert !Pager.pagination_enabled?(@config, 'index.html')
+      page = OpenStruct.new({ :name => 'index.html', :dir => '/' })
+      assert !Pager.pagination_enabled?(@config, page)
     end
 
   end
@@ -45,7 +53,8 @@ class TestPager < Test::Unit::TestCase
     end
 
     should "report that pagination is enabled" do
-      assert Pager.pagination_enabled?(@config, 'index.html')
+      page = OpenStruct.new({ :name => 'index.html', :dir => '/' })
+      assert Pager.pagination_enabled?(@config, page)
     end
 
     context "with 4 posts" do

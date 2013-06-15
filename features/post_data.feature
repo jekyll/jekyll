@@ -8,7 +8,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | content                 |
-      | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Luke, I am your father. |
     And I have a simple layout that contains "Post title: {{ page.title }}"
     When I run jekyll
     Then the _site directory should exist
@@ -19,7 +19,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | content                 |
-      | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Luke, I am your father. |
     And I have a simple layout that contains "Post url: {{ page.url }}"
     When I run jekyll
     Then the _site directory should exist
@@ -30,7 +30,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | content                 |
-      | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Luke, I am your father. |
     And I have a simple layout that contains "Post date: {{ page.date | date_to_string }}"
     When I run jekyll
     Then the _site directory should exist
@@ -41,7 +41,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | content                 |
-      | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Luke, I am your father. |
     And I have a simple layout that contains "Post id: {{ page.id }}"
     When I run jekyll
     Then the _site directory should exist
@@ -52,7 +52,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | content                 |
-      | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Luke, I am your father. |
     And I have a simple layout that contains "Post content: {{ content }}"
     When I run jekyll
     Then the _site directory should exist
@@ -64,7 +64,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post in "movies":
       | title     | date      | layout | content                 |
-      | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Luke, I am your father. |
     And I have a simple layout that contains "Post category: {{ page.categories }}"
     When I run jekyll
     Then the _site directory should exist
@@ -75,7 +75,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | tag   | content                 |
-      | Star Wars | 5/18/2009 | simple | twist | Luke, I am your father. |
+      | Star Wars | 2009-05-18 | simple | twist | Luke, I am your father. |
     And I have a simple layout that contains "Post tags: {{ page.tags }}"
     When I run jekyll
     Then the _site directory should exist
@@ -88,7 +88,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post in "scifi/movies":
       | title     | date      | layout | content                 |
-      | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Luke, I am your father. |
     And I have a simple layout that contains "Post categories: {{ page.categories | array_to_sentence_string }}"
     When I run jekyll
     Then the _site directory should exist
@@ -101,7 +101,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post in "scifi/Movies":
       | title     | date      | layout | content                 |
-      | Star Wars | 3/27/2009 | simple | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Luke, I am your father. |
     And I have a simple layout that contains "Post categories: {{ page.categories | array_to_sentence_string }}"
     When I run jekyll
     Then the _site directory should exist
@@ -112,29 +112,29 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | category | content                 |
-      | Star Wars | 3/27/2009 | simple | movies   | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | movies   | Luke, I am your father. |
     And I have a simple layout that contains "Post category: {{ page.categories }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
-    
+
   Scenario: Use post.categories variable when category is in YAML and is mixed-case
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | category | content                 |
-      | Star Wars | 3/27/2009 | simple | Movies   | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Movies   | Luke, I am your father. |
     And I have a simple layout that contains "Post category: {{ page.categories }}"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
-    
+
   Scenario: Use post.categories variable when category is in YAML
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | category | content                 |
-      | Star Wars | 3/27/2009 | simple | movies   | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | movies   | Luke, I am your father. |
     And I have a simple layout that contains "Post category: {{ page.categories }}"
     When I run jekyll
     Then the _site directory should exist
@@ -145,8 +145,8 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following posts:
       | title     | date      | layout | categories          | content                     |
-      | Star Wars | 3/27/2009 | simple | ['scifi', 'Movies'] | Luke, I am your father.     |
-      | Star Trek | 3/17/2013 | simple | ['SciFi', 'movies'] | Jean Luc, I am your father. |
+      | Star Wars | 2009-03-27 | simple | ['scifi', 'Movies'] | Luke, I am your father.     |
+      | Star Trek | 2013-03-17 | simple | ['SciFi', 'movies'] | Jean Luc, I am your father. |
     And I have a simple layout that contains "Post categories: {{ page.categories | array_to_sentence_string }}"
     When I run jekyll
     Then the _site directory should exist
@@ -157,7 +157,7 @@ Feature: Post data
     Given I have a <dir>/_posts directory
     And I have the following post in "<dir>":
       | title | type | date | content |
-      | my-post | html | 4/12/2013 | Source path: {{ page.path }} |
+      | my-post | html | 2013-04-12 | Source path: {{ page.path }} |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Source path: <path_prefix>_posts/2013-04-12-my-post.html" in "_site/<dir>/2013/04/12/my-post.html"
@@ -172,7 +172,7 @@ Feature: Post data
     Given I have a _posts directory
     And I have the following post:
       | title    | date      | path               | content                      |
-      | override | 4/12/2013 | override-path.html | Custom path: {{ page.path }} |
+      | override | 2013-04-12 | override-path.html | Custom path: {{ page.path }} |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Custom path: override-path.html" in "_site/2013/04/12/override.html"
@@ -182,7 +182,7 @@ Feature: Post data
     And I have an "index.html" file that contains "Published!"
     And I have the following post:
       | title     | date      | layout | published | content                 |
-      | Star Wars | 3/27/2009 | simple | false     | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | false     | Luke, I am your father. |
     When I run jekyll
     Then the _site directory should exist
     And the "_site/2009/03/27/star-wars.html" file should not exist
@@ -193,7 +193,7 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following post:
       | title     | date      | layout | author      | content                 |
-      | Star Wars | 3/27/2009 | simple | Darth Vader | Luke, I am your father. |
+      | Star Wars | 2009-03-27 | simple | Darth Vader | Luke, I am your father. |
     And I have a simple layout that contains "Post author: {{ page.author }}"
     When I run jekyll
     Then the _site directory should exist
@@ -204,9 +204,9 @@ Feature: Post data
     And I have a _layouts directory
     And I have the following posts:
       | title            | date      | layout  | author      | content                 |
-      | Star Wars        | 3/27/2009 | ordered | Darth Vader | Luke, I am your father. |
-      | Some like it hot | 4/27/2009 | ordered | Osgood      | Nobody is perfect.      |
-      | Terminator       | 5/27/2009 | ordered | Arnold      | Sayonara, baby          |
+      | Star Wars        | 2009-03-27 | ordered | Darth Vader | Luke, I am your father. |
+      | Some like it hot | 2009-04-27 | ordered | Osgood      | Nobody is perfect.      |
+      | Terminator       | 2009-05-27 | ordered | Arnold      | Sayonara, baby          |
     And I have a ordered layout that contains "Previous post: {{ page.previous.title }} and next post: {{ page.next.title }}"
     When I run jekyll
     Then the _site directory should exist

@@ -39,9 +39,9 @@ Feature: Site data
     And I have an "index.html" page that contains "{{ site.posts.first.title }}: {{ site.posts.first.url }}"
     And I have the following posts:
       | title       | date      | content         |
-      | First Post  | 3/25/2009 | My First Post   |
-      | Second Post | 3/26/2009 | My Second Post  |
-      | Third Post  | 3/27/2009 | My Third Post   |
+      | First Post  | 2009-03-25 | My First Post   |
+      | Second Post | 2009-03-26 | My Second Post  |
+      | Third Post  | 2009-03-27 | My Third Post   |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Third Post: /2009/03/27/third-post.html" in "_site/index.html"
@@ -51,9 +51,9 @@ Feature: Site data
     And I have an "index.html" page that contains "{% for post in site.posts %} {{ post.title }} {% endfor %}"
     And I have the following posts:
       | title       | date      | content         |
-      | First Post  | 3/25/2009 | My First Post   |
-      | Second Post | 3/26/2009 | My Second Post  |
-      | Third Post  | 3/27/2009 | My Third Post   |
+      | First Post  | 2009-03-25 | My First Post   |
+      | Second Post | 2009-03-26 | My Second Post  |
+      | Third Post  | 2009-03-27 | My Third Post   |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Third Post  Second Post  First Post" in "_site/index.html"
@@ -63,8 +63,8 @@ Feature: Site data
     And I have an "index.html" page that contains "{% for post in site.categories.code %} {{ post.title }} {% endfor %}"
     And I have the following posts:
       | title          | date      | category | content            |
-      | Awesome Hack   | 3/26/2009 | code     | puts 'Hello World' |
-      | Delicious Beer | 3/26/2009 | food     | 1) Yuengling       |
+      | Awesome Hack   | 2009-03-26 | code     | puts 'Hello World' |
+      | Delicious Beer | 2009-03-26 | food     | 1) Yuengling       |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Awesome Hack" in "_site/index.html"
@@ -74,7 +74,7 @@ Feature: Site data
     And I have an "index.html" page that contains "{% for post in site.tags.beer %} {{ post.content }} {% endfor %}"
     And I have the following posts:
       | title          | date      | tag  | content            |
-      | Delicious Beer | 3/26/2009 | beer | 1) Yuengling       |
+      | Delicious Beer | 2009-03-26 | beer | 1) Yuengling       |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Yuengling" in "_site/index.html"
@@ -84,11 +84,11 @@ Feature: Site data
   And I have an "index.html" page that contains "{% for post in site.posts %}{{ post.title }}:{{ post.previous.title}},{{ post.next.title}} {% endfor %}"
   And I have the following posts:
     | title | date      | content |
-    | first | 2/26/2009 | first   |
-    | A     | 3/26/2009 | A       |
-    | B     | 3/26/2009 | B       |
-    | C     | 3/26/2009 | C       |
-    | last  | 4/26/2009 | last    |
+    | first | 2009-02-26 | first   |
+    | A     | 2009-03-26 | A       |
+    | B     | 2009-03-26 | B       |
+    | C     | 2009-03-26 | C       |
+    | last  | 2009-04-26 | last    |
   When I run jekyll
   Then the _site directory should exist
   And I should see "last:C, C:B,last B:A,C A:first,B first:,A" in "_site/index.html"

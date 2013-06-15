@@ -204,6 +204,36 @@ CONTENT
     end
   end
 
+  context "simple page with nested post linking" do
+    setup do
+      content = <<CONTENT
+---
+title: Post linking
+---
+
+- 1 {% post_url 2008-11-21-complex %}
+- 2 {% post_url /2008-11-21-complex %}
+- 3 {% post_url es/2008-11-21-nested %}
+- 4 {% post_url /es/2008-11-21-nested %}
+CONTENT
+      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+    end
+
+    should "not cause an error" do
+      assert_no_match /markdown\-html\-error/, @result
+    end
+
+    should "have the url to the \"nested\" post from 2008-11-21" do
+      assert_match %r{1\s/2008/11/21/complex/}, @result
+      assert_match %r{2\s/2008/11/21/complex/}, @result
+    end
+
+    should "have the url to the \"nested\" post from 2008-11-21" do
+      assert_match %r{3\s/2008/11/21/nested/}, @result
+      assert_match %r{4\s/2008/11/21/nested/}, @result
+    end
+  end
+
   context "gist tag" do
     context "simple" do
       setup do
@@ -220,6 +250,46 @@ CONTENT
 
       should "write script tag" do
         assert_match "<script src='https://gist.github.com/#{@gist}.js'>\s</script>", @result
+      end
+    end
+
+    context "for private gist" do
+      context "when valid" do
+        setup do
+          @gist = "mattr-/24081a1d93d2898ecf0f"
+          @filename = "myfile.ext"
+          content = <<CONTENT
+  ---
+  title: My Cool Gist
+  ---
+
+  {% gist #{@gist} #{@filename} %}
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        end
+
+        should "write script tag with specific file in gist" do
+          assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'>\s</script>", @result
+        end
+      end
+
+      context "when invalid" do
+        setup do
+          @gist = "mattr-24081a1d93d2898ecf0f"
+          @filename = "myfile.ext"
+          content = <<CONTENT
+  ---
+  title: My Cool Gist
+  ---
+
+  {% gist #{@gist} #{@filename} %}
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        end
+
+        should "write script tag with specific file in gist" do
+          assert_match "Error parsing gist id", @result
+        end
       end
     end
 

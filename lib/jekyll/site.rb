@@ -62,8 +62,8 @@ module Jekyll
       self.categories      = Hash.new { |hash, key| hash[key] = [] }
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
 
-      if !self.limit_posts.nil? && self.limit_posts < 1
-        raise ArgumentError, "Limit posts must be nil or >= 1"
+      if self.limit_posts < 0
+        raise ArgumentError, "limit_posts must be a non-negative number"
       end
     end
 
@@ -71,8 +71,6 @@ module Jekyll
     #
     # Returns nothing.
     def setup
-      require 'classifier' if self.lsi
-
       # Check that the destination dir isn't the source dir or a directory
       # parent to the source dir.
       if self.source =~ /^#{self.dest}/
@@ -210,7 +208,7 @@ module Jekyll
       self.posts.sort!
 
       # limit the posts if :limit_posts option is set
-      if limit_posts
+      if limit_posts > 0
         limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
         self.posts = self.posts[-limit, limit]
       end
@@ -293,6 +291,7 @@ module Jekyll
       end
 
       self.pages.each do |page|
+        relative_permalinks_deprecation_method if page.uses_relative_permalinks
         page.render(self.layouts, payload)
       end
 
@@ -479,6 +478,19 @@ module Jekyll
       self.posts << post
       post.categories.each { |c| self.categories[c] << post }
       post.tags.each { |c| self.tags[c] << post }
+    end
+
+    def relative_permalinks_deprecation_method
+      if config['relative_permalinks'] && !@deprecated_relative_permalinks
+        $stderr.puts # Places newline after "Generating..."
+        Jekyll.logger.warn "Deprecation:", "Starting in 1.1, permalinks for pages" +
+                                            " in subfolders must be relative to the" +
+                                            " site source directory, not the parent" +
+                                            " directory. Check http://jekyllrb.com/docs/upgrading/"+
+                                            " for more info."
+        $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
+        @deprecated_relative_permalinks = true
+      end
     end
   end
 end

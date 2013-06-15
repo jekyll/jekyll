@@ -1,10 +1,7 @@
 require 'fileutils'
 require 'rr'
 require 'test/unit'
-
-World do
-  include Test::Unit::Assertions
-end
+require 'time'
 
 TEST_DIR    = File.join('/', 'tmp', 'jekyll')
 JEKYLL_PATH = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll')
@@ -17,8 +14,16 @@ def run_jekyll(opts = {})
   system command
 end
 
-def has_time_component?(date_string)
-  date_string.split(" ").size > 1
+def slug(title)
+  title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+end
+
+def location(folder, direction)
+  if folder
+    before = folder if direction == "in"
+    after = folder if direction == "under"
+  end
+  [before || '.', after || '.']
 end
 
 # work around "invalid option: --format" cucumber bug (see #296)

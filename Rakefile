@@ -2,6 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'rdoc'
 require 'date'
+require 'yaml'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 
@@ -24,6 +25,10 @@ def date
   Date.today.to_s
 end
 
+def file_date
+  Date.today.strftime("%F")
+end
+
 def rubyforge_project
   name
 end
@@ -38,6 +43,39 @@ end
 
 def replace_header(head, header_name)
   head.sub!(/(\.#{header_name}\s*= ').*'/) { "#{$1}#{send(header_name)}'"}
+end
+
+def normalize_bullets(markdown)
+  markdown.gsub(/\s{2}\*{1}/, "-")
+end
+
+def linkify_prs(markdown)
+  markdown.gsub(/#(\d+)/) do |word|
+    "[#{word}](https://github.com/mojombo/jekyll/issues/#{word.delete("#")})"
+  end
+end
+
+def linkify_users(markdown)
+  markdown.gsub(/(@\w+)/) do |username|
+    "[#{username}](https://github.com/#{username.delete("@")})"
+  end
+end
+
+def linkify(markdown)
+  linkify_users(linkify_prs(markdown))
+end
+
+def liquid_escape(markdown)
+  markdown.gsub(/(`{[{%].+[}%]}`)/, "{% raw %}\\1{% endraw %}")
+end
+
+def remove_head_from_history(markdown)
+  index = markdown =~ /^##\s+\d+\.\d+\.\d+/
+  markdown[index..-1]
+end
+
+def converted_history(markdown)
+  remove_head_from_history(liquid_escape(linkify(normalize_bullets(markdown))))
 end
 
 #############################################################################
@@ -110,11 +148,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish do
-    # Failsafe. Remove this once it has been done.
-    puts "Make sure to merge #583 into gh-pages before deploying."
-    exit(1)
-
+  task :publish => [:history] do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
@@ -146,6 +180,27 @@ namespace :site do
       sh "git push origin gh-pages"
     end
     puts 'Done.'
+  end
+
+  desc "Create a nicely formatted history page for the jekyll site based on the repo history."
+  task :history do
+    if File.exist?("History.markdown")
+      history_file = File.read("History.markdown")
+      front_matter = {
+        "layout" => "docs",
+        "title" => "History",
+        "permalink" => "/docs/history/",
+        "prev_section" => "contributing"
+      }
+      Dir.chdir('site/docs/') do
+        File.open("history.md", "w") do |file|
+          file.write("#{front_matter.to_yaml}---\n\n")
+          file.write(converted_history(history_file))
+        end
+      end
+    else
+      abort "You seem to have misplaced your History.markdown file. I can haz?"
+    end
   end
 end
 

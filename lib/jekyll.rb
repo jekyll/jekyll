@@ -24,12 +24,11 @@ require 'English'
 # 3rd party
 require 'liquid'
 require 'maruku'
-require 'pygments'
 require 'colorator'
 
 # internal requires
 require 'jekyll/core_ext'
-require 'jekyll/logger'
+require 'jekyll/stevenson'
 require 'jekyll/deprecator'
 require 'jekyll/configuration'
 require 'jekyll/site'
@@ -41,6 +40,7 @@ require 'jekyll/draft'
 require 'jekyll/filters'
 require 'jekyll/static_file'
 require 'jekyll/errors'
+require 'jekyll/related_posts'
 
 # extensions
 require 'jekyll/plugin'
@@ -57,7 +57,7 @@ require_all 'jekyll/tags'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.0.0.rc1'
+  VERSION = '1.0.3'
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
@@ -86,5 +86,9 @@ module Jekyll
   # Returns nothing
   def self.set_timezone(timezone)
     ENV['TZ'] = timezone
+  end
+
+  def self.logger
+    @logger ||= Stevenson.new
   end
 end

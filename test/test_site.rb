@@ -48,6 +48,7 @@ class TestSite < Test::Unit::TestCase
         Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
       end
       @site = Site.new(Jekyll.configuration)
+      @num_invalid_posts = 2
     end
 
     should "have an empty tag hash by default" do
@@ -160,20 +161,20 @@ class TestSite < Test::Unit::TestCase
 
     should "read posts" do
       @site.read_posts('')
-      posts = Dir[source_dir('_posts', '*')]
-      posts.delete_if { |post| File.directory?(post) }
-      assert_equal posts.size - 1, @site.posts.size
+      posts = Dir[source_dir('_posts', '**', '*')]
+      posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
+      assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
 
     should "deploy payload" do
       clear_dest
       @site.process
 
-      posts = Dir[source_dir("**", "_posts", "*")]
-      posts.delete_if { |post| File.directory?(post) }
-      categories = %w(bar baz category foo z_category publish_test win).sort
+      posts = Dir[source_dir("**", "_posts", "**", "*")]
+      posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
+      categories = %w(2013 bar baz category foo z_category publish_test win).sort
 
-      assert_equal posts.size, @site.posts.size
+      assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
       assert_equal 4, @site.categories['foo'].size
     end
@@ -194,7 +195,7 @@ class TestSite < Test::Unit::TestCase
       @site.exclude = excludes + ["exclude*"]
       assert_equal files, @site.filter_entries(excludes + files + ["excludeA"])
     end
-    
+
     should "not filter entries within include" do
       includes = %w[_index.html .htaccess include*]
       files = %w[index.html _index.html .htaccess includeA]
@@ -283,7 +284,7 @@ class TestSite < Test::Unit::TestCase
         File.open(dest_dir('.svn/HEAD'), 'w')
         File.open(dest_dir('.hg/HEAD'), 'w')
       end
-      
+
       teardown do
         FileUtils.rm_f(dest_dir('obsolete.html'))
         FileUtils.rm_rf(dest_dir('qux'))
@@ -292,7 +293,7 @@ class TestSite < Test::Unit::TestCase
         FileUtils.rm_rf(dest_dir('.svn'))
         FileUtils.rm_rf(dest_dir('.hg'))
       end
-      
+
       should 'remove orphaned files in destination' do
         @site.process
         assert !File.exist?(dest_dir('obsolete.html'))
@@ -316,7 +317,7 @@ class TestSite < Test::Unit::TestCase
         assert File.exist?(dest_dir('.svn/HEAD'))
       end
     end
-    
+
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
@@ -324,7 +325,7 @@ class TestSite < Test::Unit::TestCase
           Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
         end
       end
-      
+
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
         s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
@@ -333,6 +334,6 @@ class TestSite < Test::Unit::TestCase
         end
       end
     end
-    
+
   end
 end

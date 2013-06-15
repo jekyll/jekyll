@@ -17,9 +17,9 @@ module Jekyll
       def self.build(site, options)
         source = options['source']
         destination = options['destination']
-        Jekyll::Logger.info "Source:", source
-        Jekyll::Logger.info "Destination:", destination
-        print Jekyll::Logger.formatted_topic "Generating..."
+        Jekyll.logger.info "Source:", source
+        Jekyll.logger.info "Destination:", destination
+        print Jekyll.logger.formatted_topic "Generating..."
         self.process_site(site)
         puts "done."
       end
@@ -36,14 +36,14 @@ module Jekyll
         source = options['source']
         destination = options['destination']
 
-        Jekyll::Logger.info "Auto-regeneration:", "enabled"
+        Jekyll.logger.info "Auto-regeneration:", "enabled"
 
         dw = DirectoryWatcher.new(source, :glob => self.globs(source, destination), :pre_load => true)
         dw.interval = 1
 
         dw.add_observer do |*args|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-          print Jekyll::Logger.formatted_topic("Regenerating:") + "#{args.size} files at #{t} "
+          print Jekyll.logger.formatted_topic("Regenerating:") + "#{args.size} files at #{t} "
           self.process_site(site)
           puts  "...done."
         end

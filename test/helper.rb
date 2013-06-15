@@ -6,6 +6,7 @@ end
 
 require 'rubygems'
 require 'test/unit'
+require 'ostruct'
 gem 'RedCloth', '>= 4.2.1'
 
 require 'jekyll'
