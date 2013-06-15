@@ -255,6 +255,52 @@ class TestSite < Test::Unit::TestCase
       end
     end
 
+    context 'using a non-default markdown processor in the configuration' do
+      should 'use the non-default markdown processor' do
+        class Jekyll::Converters::Markdown::CustomMarkdown
+          def initialize(*args)
+            @args = args
+          end
+
+          def convert(*args)
+            ""
+          end
+        end
+
+        custom_processor = "CustomMarkdown"
+        s = Site.new(Jekyll.configuration.merge({ 'markdown' => custom_processor }))
+        assert_nothing_raised do
+          s.process
+        end
+
+        # Do some cleanup, we don't like straggling stuff's.
+        Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
+      end
+
+      should 'ignore, if there are any bad characters in the class name' do
+        module Jekyll::Converters::Markdown::Custom
+          class Markdown
+            def initialize(*args)
+              @args = args
+            end
+
+            def convert(*args)
+              ""
+            end
+          end
+        end
+
+        bad_processor = "Custom::Markdown"
+        s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+        assert_raise Jekyll::FatalException do
+          s.process
+        end
+
+        # Do some cleanup, we don't like straggling stuff's.
+        Jekyll::Converters::Markdown.send(:remove_const, :Custom)
+      end
+    end
+
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
