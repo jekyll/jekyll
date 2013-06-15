@@ -34,8 +34,8 @@ Valid syntax:
 eos
         end
 
-        while match = MATCHER.match(markup, pos) do
-          pos = match.end(0)
+        while match = MATCHER.match(markup) do
+          markup = markup[match.end(0)..-1]
 
           if match[2]
             value = match[2].gsub(/\\"/, '"')
