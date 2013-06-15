@@ -35,7 +35,12 @@ class TestRelatedPosts < Test::Unit::TestCase
         stub(c).find_related { @site.posts[-1..-9] }
         stub(c).build_index
       end
-      assert_equal @site.posts[-1..-9], Jekyll::RelatedPosts.new(@site.posts.last).build
+
+      result = nil; capture_stdout do
+        result = Jekyll::RelatedPosts.new(@site.posts.last).build
+      end
+
+      assert_equal @site.posts[-1..-9], result
     end
   end
 end
