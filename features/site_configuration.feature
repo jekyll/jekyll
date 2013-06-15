@@ -221,14 +221,14 @@ Feature: Site configuration
     And I have a _posts directory
     And I have a dir/_posts directory
     And I have the following post:
-      | title      | date      | content                        |
-      | first post | 4/16/2013 | That's my first blog post ever |
+      | title      | date       | content                        |
+      | first post | 2013-04-16 | That's my first blog post ever |
     And I have the following post:
-      | title      | date      | layout | content                        |
-      | second post| 4/16/2013 | blog   | That's my 2nd blog post ever   |
+      | title      | date       | layout | content                        |
+      | second post| 2013-04-16 | blog   | That's my 2nd blog post ever   |
     And I have the following post in "dir":
-      | title      | date      | content                        |
-      | third post | 4/16/2013 | That's my 3rd blog post ever   |
+      | title      | date       | content                        |
+      | third post | 2013-04-16 | That's my 3rd blog post ever   |
 
     And I have a configuration file with:
       | key             | value |
