@@ -19,8 +19,8 @@ module Jekyll
             if @config['markdown'] !~ /[^A-Za-z0-9]/ && self.class.constants.map(&:to_s).include?(@config['markdown'])
               self.class.const_get(@config['markdown']).new(@config)
             else
-              STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
-              STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown | redcarpet ]"
+              Jekyll.logger.error "Invalid Markdown Processor:", "#{@config['markdown']}"
+              Jekyll.logger.error "", "Valid options are [ maruku | rdiscount | kramdown | redcarpet ]"
               raise FatalException.new("Invalid Markdown process: #{@config['markdown']}")
             end
           end
