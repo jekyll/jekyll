@@ -127,6 +127,15 @@ class TestPage < Test::Unit::TestCase
         assert File.exists?(File.join(dest_dir, 'contacts.html'))
       end
 
+      should "write even when the folder name is plus" do
+        page = setup_page('+', 'foo.md')
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exists?(File.join(dest_dir, '+', 'foo.html'))
+      end
+
       should "write properly without html extension" do
         page = setup_page('contacts.html')
         page.site.permalink_style = :pretty

@@ -134,9 +134,7 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      # The url needs to be unescaped in order to preserve the correct
-      # filename.
-      path = File.join(dest, CGI.unescape(self.url))
+      path = File.join(dest, self.url)
       path = File.join(path, "index.html") if self.url =~ /\/$/
       path
     end
