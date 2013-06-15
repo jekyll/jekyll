@@ -20,7 +20,7 @@ module Jekyll
         pos = 0
 
 	# ensure the entire markup string from start to end is valid syntax, and params are separated by spaces
-        full_matcher = Regexp.compile('\A\s*(?:(?<=\s|\A)' + MATCHER.to_s + '\s*)*\z')
+        full_matcher = Regexp.compile('\A\s*(?:' + MATCHER.to_s + '(?=\s|\z)\s*)*\z')
         if not markup =~ full_matcher
           raise SyntaxError.new <<-eos
 Invalid syntax for include tag:
