@@ -410,7 +410,6 @@ There are a few useful, prebuilt plugins at the following locations:
 - [JSON Filter](https://gist.github.com/1850654) by [joelverhagen](https://github.com/joelverhagen): filter that takes input text and outputs it as JSON. Great for rendering JavaScript.
 - [jekyll-beastiepress](https://github.com/okeeblow/jekyll-beastiepress): FreeBSD utility tags for Jekyll sites.
 - [jsonball](https://gist.github.com/1895282): reads json files and produces maps for use in jekylled files
-- [redcarpet2](https://github.com/nono/Jekyll-plugins): use Redcarpet2 for rendering markdown
 - [bibjekyll](https://github.com/pablooliveira/bibjekyll): render BibTeX-formatted bibliographies/citations included in posts/pages using bibtex2html
 - [jekyll-citation](https://github.com/archome/jekyll-citation): render BibTeX-formatted bibliographies/citations included in posts/pages (pure Ruby)
 - [jekyll-scholar](https://github.com/inukshuk/jekyll-scholar): Jekyll extensions for the blogging scholar
@@ -423,11 +422,9 @@ There are a few useful, prebuilt plugins at the following locations:
 - [flickr](http://jonasforsberg.se/2012/04/15/flickr-plugin-for-jekyll/): Embed photos from flickr right into your posts.
 - [jekyll-devonly_tag](https://gist.github.com/2403522): A block tag for including markup only during development.
 - [Jekyll plugins by Aucor](https://github.com/aucor/jekyll-plugins): Plugins for eg. trimming unwanted newlines/whitespace and sorting pages by weight attribute.
-- [Only first paragraph](https://github.com/sebcioz/jekyll-only_first_p): Show only first paragrpaph of page/post.
 - [jekyll-pandoc-plugin](https://github.com/dsanson/jekyll-pandoc-plugin): use pandoc for rendering markdown.
 - [File compressor](https://gist.github.com/2758691) by [mytharcher](https://github.com/mytharcher): Compress HTML (\*.html) and JavaScript(\*.js) files when output.
 - [smilify](https://github.com/SaswatPadhi/jekyll_smilify) by [SaswatPadhi](https://github.com/SaswatPadhi): Convert text emoticons in your content to themeable smiley pics. [Demo](http://saswatpadhi.github.com/)
-- [excerpts](http://blog.darkrefraction.com/2012/jekyll-excerpt-plugin.html) by [drawoc](https://github.com/drawoc): provides a nice way to implement page excerpts.
 - [jekyll-minibundle](https://github.com/tkareine/jekyll-minibundle): Asset bundling and cache busting using external minification tool of your choice, no gem dependencies.
 - [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) by [redwallhp](https://github.com/redwallhp): Generates thumbnails from a directory of images and displays them in a grid with a Liquid tag.
 - [Read in X Minutes](https://gist.github.com/zachleat/5792681) by [zachleat](https://github.com/zachleat): Estimates the reading time of a string (use for blog post content).
