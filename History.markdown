@@ -19,6 +19,7 @@
   * Run `site/img` through ImageOptim (thanks @qrush!) (#1208)
   * Added Jade Converter to `site/docs/plugins` (#1210)
   * Fix location of docs pages in Contributing pages (#1214)
+  * Add ReadInXMinutes plugin to the plugin list (#1222)
 
 ### Development Fixes
 
