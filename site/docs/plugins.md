@@ -382,7 +382,8 @@ There are a few useful, prebuilt plugins at the following locations:
 - [CoffeeScript converter by phaer](https://gist.github.com/959938): Put this file in `plugins` and write a YAML header to your .coffee files. See [http://coffeescript.org](http://coffeescript.org) for more info
 - [Raw Tag by phaer.](https://gist.github.com/1020852): Keeps liquid from parsing text betweeen `{{ "{% raw " }}%}` and `{{ "{% endraw " }}%}`
 - [URL encoding by James An](https://gist.github.com/919275)
-- [Sitemap.xml Generator by Michael Levin](http://www.kinnetica.com/projects/jekyll-sitemap-generator/)
+- [Sitemap.xml Generator by Michael
+Levin](https://github.com/kinnetica/jekyll-plugins)
 - [Markdown references by Olov Lassus](https://github.com/olov/jekyll-references): Keep all your markdown reference-style link definitions in one file (_references.md)
 - [Full-text search by Pascal Widdershoven](https://github.com/PascalW/jekyll_indextank): Add full-text search to your Jekyll site with this plugin and a bit of JavaScript.
 - [Stylus Converter](https://gist.github.com/988201) Convert .styl to .css.
