@@ -417,7 +417,7 @@ Levin](https://github.com/kinnetica/jekyll-plugins)
 - [refheap_tag](https://github.com/aburdette/refheap_tag): Liquid tag that allows embedding pastes from [refheap](https://refheap.com)
 - [i18n_filter](https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb): Liquid filter to use I18n localization.
 - [singlepage-jekyll](https://github.com/JCB-K/singlepage-jekyll) by [JCB-K](https://github.com/JCB-K): turns Jekyll into a dynamic one-page website.
-- [flickr](http://jonasforsberg.se/2012/04/15/flickr-plugin-for-jekyll/): Embed photos from flickr right into your posts.
+- [flickr](https://github.com/reagent/fleakr): Embed photos from flickr right into your posts.
 - [jekyll-devonly_tag](https://gist.github.com/2403522): A block tag for including markup only during development.
 - [Jekyll plugins by Aucor](https://github.com/aucor/jekyll-plugins): Plugins for eg. trimming unwanted newlines/whitespace and sorting pages by weight attribute.
 - [jekyll-pandoc-plugin](https://github.com/dsanson/jekyll-pandoc-plugin): use pandoc for rendering markdown.
