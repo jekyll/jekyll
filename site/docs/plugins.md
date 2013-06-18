@@ -355,7 +355,6 @@ There are a few useful, prebuilt plugins at the following locations:
 - [Truncate HTML while preserving markup structure](https://github.com/MattHall/truncatehtml) by [Matt Hall](http://codebeef.com)
 - [Domain Name Filter by Lawrence Woodman](https://github.com/LawrenceWoodman/domain_name-liquid_filter): Filters the input text so that just the domain name is left
 - [Jekyll Plugins by Recursive Design](http://recursive-design.com/projects/jekyll-plugins/): Plugin to generate Project pages from GitHub readmes, a Category page plugin, and a Sitemap generator
-- [Tag Cloud Plugin from a Jekyll walk-through](http://vitobotta.com/how-to-migrate-from-wordpress-to-jekyll/): Plugin to generate a tag cloud
 - [Pygments Cache Path by Raimonds Simanovskis](https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb): Plugin to cache syntax-highlighted code from Pygments
 - [Delicious Plugin by Christian Hellsten](https://github.com/christianhellsten/jekyll-plugins): Fetches and renders bookmarks from delicious.com.
 - [Ultraviolet plugin by Steve Alex](https://gist.github.com/480380): Jekyll Plugin for Ultraviolet
