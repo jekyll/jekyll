@@ -22,6 +22,7 @@
   * Add ReadInXMinutes plugin to the plugin list (#1222)
   * Remove plugins from the plugin list that have equivalents in Jekyll
     proper (#1223)
+  * Add jekyll-assets to the plugin list (#1225)
 
 ### Development Fixes
 
