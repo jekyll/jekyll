@@ -394,7 +394,6 @@ Levin](https://github.com/kinnetica/jekyll-plugins)
 - [FlickrSetTag by Thomas Mango](https://github.com/tsmango/jekyll_flickr_set_tag): Generates image galleries from Flickr sets.
 - [Projectlist by Frederic Hemberger](https://github.com/fhemberger/jekyll-projectlist): Loads all files from a directory and renders the entries into a single page, instead of creating separate posts.
 - [Tiered Archives by Eli Naeher](https://gist.github.com/88cda643aa7e3b0ca1e5): creates a tiered template variable that allows you to create archives grouped by year and month.
-- [Jammit generator by Vladimir Andrijevik](https://gist.github.com/1224971): enables use of [Jammit](http://documentcloud.github.com/jammit/) for JavaScript and CSS packaging.
 - [oEmbed Tag by Tammo van Lessen](https://gist.github.com/1455726): enables easy content embedding (e.g. from YouTube, Flickr, Slideshare) via oEmbed.
 - [Company website and blog plugins](https://github.com/flatterline/jekyll-plugins) by Flatterline, a [Ruby on Rails development company](http://flatterline.com/): portfolio/project page generator, team/individual page generator, author bio liquid template tag for use on posts and a few other smaller plugins.
 - [Transform Layouts](https://gist.github.com/1472645) Monkey patching allowing HAML layouts (you need a HAML Converter plugin for this to work)
