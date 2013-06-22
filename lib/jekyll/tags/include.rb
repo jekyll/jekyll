@@ -1,6 +1,9 @@
 module Jekyll
   module Tags
     class IncludeTag < Liquid::Tag
+
+      MATCHER = /(\w+)=(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/
+
       def initialize(tag_name, markup, tokens)
         super
         markup.strip!
@@ -12,8 +15,6 @@ module Jekyll
           @file = markup
         end
       end
-
-      MATCHER = /(\w+)=(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/
 
       def parse_params(markup)
         @params = {}
