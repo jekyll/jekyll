@@ -26,7 +26,6 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 #### Integrating Jekyll with Git
 
 - [Blogging with Git, Emacs and Jekyll](http://metajack.im/2009/01/23/blogging-with-git-emacs-and-jekyll/)
-- [Using Git to maintain your blog](http://matedriven.com.ar/2009/04/28/using-git-to-maintain-your-blog.html) (step by step guide)
 
 #### Other hacks
 
