@@ -10,14 +10,14 @@ module Jekyll
         if markup.include?(' ')
           separator = markup.index(' ')
           @file = markup[0..separator].strip
-          parse_params(markup[separator..-1])
+          @params = markup[separator..-1]
         else
           @file = markup
         end
       end
 
       def parse_params(markup)
-        @params = {}
+        params = {}
         pos = 0
 
 	# ensure the entire markup string from start to end is valid syntax, and params are separated by spaces
@@ -44,8 +44,9 @@ eos
             value = match[3].gsub(/\\'/, "'")
           end
 
-          @params[match[1]] = value
+          params[match[1]] = value
         end
+        params
       end
 
       def render(context)
@@ -64,8 +65,9 @@ eos
           if choices.include?(@file)
             source = File.read(@file)
             partial = Liquid::Template.parse(source)
-            context['include'] = @params
+
             context.stack do
+              context['include'] = parse_params(@params) if @params
               partial.render(context)
             end
           else
