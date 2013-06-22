@@ -17,6 +17,7 @@ Feature: Include tags
       | Dont keep parameters                | 2013-03-21 | default | {% include ignore.html param="test" %}\n{% include header.html %} |
       | Allow params with spaces and quotes | 2013-04-07 | default | {% include params.html cool="param with spaces" super="\"quoted\"" single='has "quotes"' escaped='\'single\' quotes' %} |
       | Parameter syntax                    | 2013-04-12 | default | {% include params.html param1_or_2="value" %} |
+      | Pass a variable                     | 2013-06-22 | default | {% assign var = 'some text' %}{% include params.html local=var layout=page.layout %} |
     When I run jekyll
     Then the _site directory should exist
     And I should see "<header>My awesome blog header: myparam</header>" in "_site/2013/03/21/include-files.html"
@@ -30,3 +31,5 @@ Feature: Include tags
     And I should see "<li>single = has &#8220;quotes&#8221;</li>" in "_site/2013/04/07/allow-params-with-spaces-and-quotes.html"
     And I should see "<li>escaped = &#8216;single&#8217; quotes</li>" in "_site/2013/04/07/allow-params-with-spaces-and-quotes.html"
     And I should see "<li>param1_or_2 = value</li>" in "_site/2013/04/12/parameter-syntax.html"
+    And I should see "<li>local = some text</li>" in "_site/2013/06/22/pass-a-variable.html"
+    And I should see "<li>layout = default</li>" in "_site/2013/06/22/pass-a-variable.html"
