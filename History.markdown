@@ -24,6 +24,7 @@
     proper (#1223)
   * Add jekyll-assets to the plugin list (#1225)
   * Add jekyll-pandoc-mulitple-formats to the plugin list (#1229)
+  * Remove dead link to "Using Git to maintain your blog" (#1227)
 
 ### Development Fixes
 
