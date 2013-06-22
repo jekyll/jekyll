@@ -2,7 +2,7 @@ module Jekyll
   module Tags
     class IncludeTag < Liquid::Tag
 
-      MATCHER = /(\w+)=(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)')/
+      MATCHER = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
 
       def initialize(tag_name, markup, tokens)
         super
@@ -16,7 +16,7 @@ module Jekyll
         end
       end
 
-      def parse_params(markup)
+      def parse_params(markup, context)
         params = {}
         pos = 0
 
@@ -42,6 +42,8 @@ eos
             value = match[2].gsub(/\\"/, '"')
           elsif match[3]
             value = match[3].gsub(/\\'/, "'")
+          elsif match[4]
+            value = context[match[4]]
           end
 
           params[match[1]] = value
@@ -67,7 +69,7 @@ eos
             partial = Liquid::Template.parse(source)
 
             context.stack do
-              context['include'] = parse_params(@params) if @params
+              context['include'] = parse_params(@params, context) if @params
               partial.render(context)
             end
           else
