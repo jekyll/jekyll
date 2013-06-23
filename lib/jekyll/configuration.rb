@@ -29,7 +29,7 @@ module Jekyll
       'baseurl'       => '/',
       'include'       => ['.htaccess'],
       'exclude'       => [],
-      'paginate_path' => 'page:num',
+      'paginate_path' => '/page:num',
 
       'markdown_ext'  => 'markdown,mkd,mkdn,md',
       'textile_ext'   => 'textile',

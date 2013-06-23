@@ -10,8 +10,13 @@ module Jekyll
       #
       # Returns nothing.
       def generate(site)
-        site.pages.dup.each do |page|
-          paginate(site, page) if Pager.pagination_enabled?(site.config, page)
+        if Pager.pagination_enabled?(site)
+          if template = template_page(site)
+            paginate(site, template)
+          else
+            Jekyll.logger.warn "Pagination:", "Pagination is enabled, but I couldn't find" +
+            "an index.html page to use as the pagination template. Skipping pagination."
+          end
         end
       end
 
@@ -33,11 +38,11 @@ module Jekyll
         all_posts = site.site_payload['site']['posts']
         pages = Pager.calculate_pages(all_posts, site.config['paginate'].to_i)
         (1..pages).each do |num_page|
-          pager = Pager.new(site.config, num_page, all_posts, pages)
+          pager = Pager.new(site, num_page, all_posts, pages)
           if num_page > 1
             newpage = Page.new(site, site.source, page.dir, page.name)
             newpage.pager = pager
-            newpage.dir = File.join(page.dir, Pager.paginate_path(site.config, num_page))
+            newpage.dir = Pager.paginate_path(site, num_page)
             site.pages << newpage
           else
             page.pager = pager
@@ -45,6 +50,32 @@ module Jekyll
         end
       end
 
+      # Static: Fetch the URL of the template page. Used to determine the
+      #         path to the first pager in the series.
+      #
+      # site - the Jekyll::Site object
+      #
+      # Returns the url of the template page
+      def self.first_page_url(site)
+        if page = Pagination.new.template_page(site)
+          page.url
+        else
+          nil
+        end
+      end
+
+      # Public: Find the Jekyll::Page which will act as the pager template
+      #
+      # site - the Jekyll::Site object
+      #
+      # Returns the Jekyll::Page which will act as the pager template
+      def template_page(site)
+        site.pages.dup.select do |page|
+          Pager.pagination_candidate?(site.config, page)
+        end.sort do |one, two|
+          two.path.size <=> one.path.size
+        end.first
+      end
     end
   end
 
@@ -62,39 +93,78 @@ module Jekyll
       (all_posts.size.to_f / per_page.to_i).ceil
     end
 
-    # Determine if pagination is enabled for a given file.
+    # Determine if pagination is enabled the site.
     #
-    # config - The configuration Hash.
-    # page   - The Jekyll::Page with which to paginate
+    # site - the Jekyll::Site object
     #
     # Returns true if pagination is enabled, false otherwise.
-    def self.pagination_enabled?(config, page)
-     !config['paginate'].nil? &&
-        page.name == 'index.html' &&
-        subdirectories_identical(config['paginate_path'], page.dir)
+    def self.pagination_enabled?(site)
+     !site.config['paginate'].nil? &&
+       site.pages.size > 0
+    end
+
+    # Static: Determine if a page is a possible candidate to be a template page.
+    #         Page's name must be `index.html` and exist in any of the directories
+    #         between the site source and `paginate_path`.
+    #
+    # config - the site configuration hash
+    # page   - the Jekyll::Page about which we're inquiring
+    #
+    # Returns true if the
+    def self.pagination_candidate?(config, page)
+      page_dir = File.dirname(File.expand_path(remove_leading_slash(page.path), config['source']))
+      paginate_path = remove_leading_slash(config['paginate_path'])
+      paginate_path = File.expand_path(paginate_path, config['source'])
+      page.name == 'index.html' &&
+        in_hierarchy(config['source'], page_dir, File.dirname(paginate_path))
     end
 
     # Determine if the subdirectories of the two paths are the same relative to source
     #
-    # paginate_path - the paginate_path configuration setting
+    # source        - the site source
     # page_dir      - the directory of the Jekyll::Page
+    # paginate_path - the absolute paginate path (from root of FS)
     #
     # Returns whether the subdirectories are the same relative to source
-    def self.subdirectories_identical(paginate_path, page_dir)
-      File.dirname(paginate_path).gsub(/\A\./, '') == page_dir.gsub(/\/\z/, '')
+    def self.in_hierarchy(source, page_dir, paginate_path)
+      return false if paginate_path == File.dirname(paginate_path)
+      return false if paginate_path == Pathname.new(source).parent
+      page_dir == paginate_path ||
+        in_hierarchy(source, page_dir, File.dirname(paginate_path))
     end
 
     # Static: Return the pagination path of the page
     #
-    # site_config - the site config
+    # site     - the Jekyll::Site object
     # num_page - the pagination page number
     #
     # Returns the pagination path as a string
-    def self.paginate_path(site_config, num_page)
-      return nil if num_page.nil? || num_page <= 1
-      format = site_config['paginate_path']
+    def self.paginate_path(site, num_page)
+      return nil if num_page.nil?
+      return Generators::Pagination.first_page_url(site) if num_page <= 1
+      format = site.config['paginate_path']
       format = format.sub(':num', num_page.to_s)
-      File.basename(format)
+      ensure_leading_slash(format)
+    end
+
+    # Static: Return a String version of the input which has a leading slash.
+    #         If the input already has a forward slash in position zero, it will be
+    #         returned unchanged.
+    #
+    # path - a String path
+    #
+    # Returns the path with a leading slash
+    def self.ensure_leading_slash(path)
+      path[0..0] == "/" ? path : "/#{path}"
+    end
+
+    # Static: Return a String version of the input without a leading slash.
+    #
+    # path - a String path
+    #
+    # Returns the input without the leading slash
+    def self.remove_leading_slash(path)
+      ensure_leading_slash(path)[1..-1]
     end
 
     # Initialize a new Pager.
@@ -104,9 +174,9 @@ module Jekyll
     # all_posts - The Array of all the site's Posts.
     # num_pages - The Integer number of pages or nil if you'd like the number
     #             of pages calculated.
-    def initialize(config, page, all_posts, num_pages = nil)
+    def initialize(site, page, all_posts, num_pages = nil)
       @page = page
-      @per_page = config['paginate'].to_i
+      @per_page = site.config['paginate'].to_i
       @total_pages = num_pages || Pager.calculate_pages(all_posts, @per_page)
 
       if @page > @total_pages
@@ -119,9 +189,9 @@ module Jekyll
       @total_posts = all_posts.size
       @posts = all_posts[init..offset]
       @previous_page = @page != 1 ? @page - 1 : nil
-      @previous_page_path = Pager.paginate_path(config, @previous_page)
+      @previous_page_path = Pager.paginate_path(site, @previous_page)
       @next_page = @page != @total_pages ? @page + 1 : nil
-      @next_page_path = Pager.paginate_path(config, @next_page)
+      @next_page_path = Pager.paginate_path(site, @next_page)
     end
 
     # Convert this Pager's data to a Hash suitable for use by Liquid.
