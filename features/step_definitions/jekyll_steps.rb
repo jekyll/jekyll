@@ -4,11 +4,6 @@ Before do
   Dir.chdir(TEST_DIR)
 end
 
-After do
-  Dir.chdir(File.expand_path("..", TEST_DIR))
-  FileUtils.rm_rf(TEST_DIR)
-end
-
 Given /^I have a blank site in "(.*)"$/ do |path|
   FileUtils.mkdir(path)
 end
