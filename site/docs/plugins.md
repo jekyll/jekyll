@@ -353,10 +353,8 @@ end
 There are a few useful, prebuilt plugins at the following locations:
 
 - [Truncate HTML while preserving markup structure](https://github.com/MattHall/truncatehtml) by [Matt Hall](http://codebeef.com)
-- [Generic Blog Plugins by Jose Diaz-Gonzalez](https://github.com/josegonzalez/josediazgonzalez.com/tree/master/_plugins): Contains plugins for tags, categories, archives, as well as a few Liquid extensions
 - [Domain Name Filter by Lawrence Woodman](https://github.com/LawrenceWoodman/domain_name-liquid_filter): Filters the input text so that just the domain name is left
 - [Jekyll Plugins by Recursive Design](http://recursive-design.com/projects/jekyll-plugins/): Plugin to generate Project pages from GitHub readmes, a Category page plugin, and a Sitemap generator
-- [Tag Cloud Plugin from a Jekyll walk-through](http://vitobotta.com/how-to-migrate-from-wordpress-to-jekyll/): Plugin to generate a tag cloud
 - [Pygments Cache Path by Raimonds Simanovskis](https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb): Plugin to cache syntax-highlighted code from Pygments
 - [Delicious Plugin by Christian Hellsten](https://github.com/christianhellsten/jekyll-plugins): Fetches and renders bookmarks from delicious.com.
 - [Ultraviolet plugin by Steve Alex](https://gist.github.com/480380): Jekyll Plugin for Ultraviolet
@@ -384,7 +382,8 @@ There are a few useful, prebuilt plugins at the following locations:
 - [CoffeeScript converter by phaer](https://gist.github.com/959938): Put this file in `plugins` and write a YAML header to your .coffee files. See [http://coffeescript.org](http://coffeescript.org) for more info
 - [Raw Tag by phaer.](https://gist.github.com/1020852): Keeps liquid from parsing text betweeen `{{ "{% raw " }}%}` and `{{ "{% endraw " }}%}`
 - [URL encoding by James An](https://gist.github.com/919275)
-- [Sitemap.xml Generator by Michael Levin](http://www.kinnetica.com/projects/jekyll-sitemap-generator/)
+- [Sitemap.xml Generator by Michael
+Levin](https://github.com/kinnetica/jekyll-plugins)
 - [Markdown references by Olov Lassus](https://github.com/olov/jekyll-references): Keep all your markdown reference-style link definitions in one file (_references.md)
 - [Full-text search by Pascal Widdershoven](https://github.com/PascalW/jekyll_indextank): Add full-text search to your Jekyll site with this plugin and a bit of JavaScript.
 - [Stylus Converter](https://gist.github.com/988201) Convert .styl to .css.
@@ -395,7 +394,6 @@ There are a few useful, prebuilt plugins at the following locations:
 - [FlickrSetTag by Thomas Mango](https://github.com/tsmango/jekyll_flickr_set_tag): Generates image galleries from Flickr sets.
 - [Projectlist by Frederic Hemberger](https://github.com/fhemberger/jekyll-projectlist): Loads all files from a directory and renders the entries into a single page, instead of creating separate posts.
 - [Tiered Archives by Eli Naeher](https://gist.github.com/88cda643aa7e3b0ca1e5): creates a tiered template variable that allows you to create archives grouped by year and month.
-- [Jammit generator by Vladimir Andrijevik](https://gist.github.com/1224971): enables use of [Jammit](http://documentcloud.github.com/jammit/) for JavaScript and CSS packaging.
 - [oEmbed Tag by Tammo van Lessen](https://gist.github.com/1455726): enables easy content embedding (e.g. from YouTube, Flickr, Slideshare) via oEmbed.
 - [Company website and blog plugins](https://github.com/flatterline/jekyll-plugins) by Flatterline, a [Ruby on Rails development company](http://flatterline.com/): portfolio/project page generator, team/individual page generator, author bio liquid template tag for use on posts and a few other smaller plugins.
 - [Transform Layouts](https://gist.github.com/1472645) Monkey patching allowing HAML layouts (you need a HAML Converter plugin for this to work)
@@ -419,7 +417,7 @@ There are a few useful, prebuilt plugins at the following locations:
 - [refheap_tag](https://github.com/aburdette/refheap_tag): Liquid tag that allows embedding pastes from [refheap](https://refheap.com)
 - [i18n_filter](https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb): Liquid filter to use I18n localization.
 - [singlepage-jekyll](https://github.com/JCB-K/singlepage-jekyll) by [JCB-K](https://github.com/JCB-K): turns Jekyll into a dynamic one-page website.
-- [flickr](http://jonasforsberg.se/2012/04/15/flickr-plugin-for-jekyll/): Embed photos from flickr right into your posts.
+- [flickr](https://github.com/reagent/fleakr): Embed photos from flickr right into your posts.
 - [jekyll-devonly_tag](https://gist.github.com/2403522): A block tag for including markup only during development.
 - [Jekyll plugins by Aucor](https://github.com/aucor/jekyll-plugins): Plugins for eg. trimming unwanted newlines/whitespace and sorting pages by weight attribute.
 - [jekyll-pandoc-plugin](https://github.com/dsanson/jekyll-pandoc-plugin): use pandoc for rendering markdown.
