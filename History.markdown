@@ -31,6 +31,7 @@
   * Add jekyll-pandoc-mulitple-formats to the plugin list (#1229)
   * Remove dead link to "Using Git to maintain your blog" (#1227)
   * Tidy up the third-party plugins listing (#1228)
+  * Update contributor information (#1192)
 
 ### Development Fixes
 
