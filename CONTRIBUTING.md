@@ -50,6 +50,24 @@ Here's the most direct way to get your work merged into the project:
 * Create a pull request against mojombo/jekyll and describe what your change
   does and the why you think it should be merged.
 
+Updating Documentation
+----------------------
+
+We want the Jekyll documentation to be the best it can be. We've
+open-sourced our docs and we welcome any pull requests if you find it
+lacking.
+
+You can find the documentation for jekyllrb.com in the 
+[site](https://github.com/mojombo/jekyll/tree/master/site) directory of
+Jekyll's repo on GitHub.com.
+
+All documentation pull requests should be directed at `master`.  Pull
+requests directed at another branch will not be accepted. 
+
+The [Jekyll wiki](https://github.com/mojombo/jekyll/wiki) on GitHub 
+can be freely updated without a pull request as all 
+GitHub users have access.
+
 Gotchas
 -------
 
