@@ -8,6 +8,8 @@
 
 ### Bug Fixes
   * Fix pagination in subdirectories. (#1198)
+  * Fix an issue with directories and permalinks that have a plus sign
+    (+) in them (#1215)
 
 ### Development Fixes
   * Merge the theme and layout cucumber steps into one step (#1151)
