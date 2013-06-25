@@ -8,6 +8,10 @@ Given /^I have a blank site in "(.*)"$/ do |path|
   FileUtils.mkdir(path)
 end
 
+Given /^I do not have a "(.*)" directory$/ do |path|
+  File.directory?("#{TEST_DIR}/#{path}")
+end
+
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
 Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
   File.open(file, 'w') do |f|
@@ -111,6 +115,10 @@ end
 
 When /^I run jekyll with drafts$/ do
   run_jekyll(:drafts => true)
+end
+
+When /^I call jekyll new with test_blank --blank$/ do
+  call_jekyll_new(:path => "test_blank", :blank => true)
 end
 
 When /^I debug jekyll$/ do
