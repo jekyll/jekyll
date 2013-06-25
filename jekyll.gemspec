@@ -52,6 +52,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency('activesupport', '~> 3.2.13')
   s.add_development_dependency('md2man', "~> 2.0.0")
 
+  # md2man currently does not work with 1.8.7 and isn't required unless
+  # you are building the man pages
+  s.add_development_dependency('md2man', "~> 2.0.0") if RUBY_VERSION > 1.8
+
   # = MANIFEST =
   s.files = %w[
     CONTRIBUTING.markdown
