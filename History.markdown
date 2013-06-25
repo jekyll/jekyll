@@ -4,6 +4,7 @@
 ### Minor Enhancements
   * Search the hierarchy of pagination path up to site root to determine template page for
     pagination. (#1198)
+  * Add the ability to generate a new Jekyll site without a template (#1171)
 
 ### Bug Fixes
   * Fix pagination in subdirectories. (#1198)
