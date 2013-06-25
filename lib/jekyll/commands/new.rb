@@ -13,12 +13,24 @@ module Jekyll
           exit(1)
         end
 
-        create_sample_files new_blog_path
+        if options[:blank]
+          create_blank_site new_blog_path
+        else
+          create_sample_files new_blog_path
 
-        File.open(File.expand_path(self.initialized_post_name, new_blog_path), "w") do |f|
-          f.write(self.scaffold_post_content(site_template))
+          File.open(File.expand_path(self.initialized_post_name, new_blog_path), "w") do |f|
+            f.write(self.scaffold_post_content(site_template))
+          end
         end
+
         puts "New jekyll site installed in #{new_blog_path}."
+      end
+
+      def self.create_blank_site(path)
+        Dir.chdir(path) do
+          FileUtils.mkdir(%w(_layouts _posts _drafts))
+          FileUtils.touch("index.html")
+        end
       end
 
       def self.scaffold_post_content(template_site)
