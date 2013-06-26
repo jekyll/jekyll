@@ -35,6 +35,7 @@
   * Remove dead link to "Using Git to maintain your blog" (#1227)
   * Tidy up the third-party plugins listing (#1228)
   * Update contributor information (#1192)
+  * Update URL of article about Blogger migration (#1242)
 
 ### Development Fixes
 
