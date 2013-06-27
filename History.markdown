@@ -6,7 +6,9 @@
     pagination. (#1198)
   * Add the ability to generate a new Jekyll site without a template (#1171)
   * Use redcarpet as the default markdown engine in newly generated
-    sites (#1245)
+    sites (#1245, #1247)
+  * Add `redcarpet` as a runtime dependency so `jekyll build` works out-of-the-box for new
+    sites. (#1247)
 
 ### Bug Fixes
   * Fix pagination in subdirectories. (#1198)
@@ -39,6 +41,7 @@
   * Tidy up the third-party plugins listing (#1228)
   * Update contributor information (#1192)
   * Update URL of article about Blogger migration (#1242)
+  * Specify that RedCarpet is the default for new Jekyll sites on Quickstart page (#1247)
 
 ### Development Fixes
 
