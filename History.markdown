@@ -44,6 +44,7 @@
   * Specify that RedCarpet is the default for new Jekyll sites on Quickstart page (#1247)
   * Added site.pages to Variables page in docs (#1251)
   * Add Youku and Tudou Embed link on Plugins page. (#1250)
+  * Add note that `gist` tag supports private gists. (#1248)
 
 ### Development Fixes
 
