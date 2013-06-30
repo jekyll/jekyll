@@ -430,6 +430,8 @@ Levin](https://github.com/kinnetica/jekyll-plugins)
 - [jekyll-pandoc-multiple-formats](https://github.com/fauno/jekyll-pandoc-multiple-formats)
   by [edsl](https://github.com/edsl): Use pandoc to generate your site in
   multiple formats plus support for pandoc's markdown extensions.
+- [Youku and Tudou Embed](https://gist.github.com/Yexiaoxing/5891929): Liquid plugin for
+  embedding Youku and Tudou videos
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
