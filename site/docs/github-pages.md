@@ -64,3 +64,23 @@ branch](https://github.com/mojombo/jekyll/tree/gh-pages) of the same repository.
     href="https://github.com/contact">GitHub Support</a>.
   </p>
 </div>
+
+### Mimicking GitHub Flavored Markdown
+GitHub uses a slightly [different approach](https://help.github.com/articles/github-flavored-markdown) to Markdown.
+You can mimic this behavior on your local Jekyll with the following [configuration]({{ site.url }}/docs/configuration)
+```yml
+safe: true
+lsi: false
+pygments: true
+markdown: redcarpet
+redcarpet:
+  extensions:
+    - hard_wrap
+    - autolink
+```
+
+If you don't have [Redcarpet](https://github.com/vmg/redcarpet) installed, you
+can do this with
+```sh
+gem install redcarpet
+```
