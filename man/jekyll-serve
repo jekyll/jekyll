@@ -1,0 +1,41 @@
+.TH JEKYLL\-SERVE "MAY 2013" "User Manual"
+.SH NAME:
+.PP
+jekyll serve
+.SH DESCRIPTION:
+.PP
+Serve your site locally and make sure it is awesome
+.SH SYNTAX:
+.PP
+jekyll serve [options]
+.SH COMMANDS:
+.TP
+\fB\fC--config CONFIG_FILE[,CONFIG_FILE2,...]\fR
+Custom configuration file
+.TP
+\fB\fC--future\fR
+Publishes posts with a future date
+.TP
+\fB\fC--limit_posts MAX_POSTS\fR
+Limits the number of posts to parse and publish
+.TP
+\fB\fC-w\fR, \fB\fC--watch\fR
+Watch for changes and rebuild
+.TP
+\fB\fC--lsi\fR
+Use LSI for improved related posts
+.TP
+\fB\fC--drafts\fR
+Render posts in the _drafts folder
+.TP
+\fB\fC-P\fR, \fB\fC--port [PORT]\fR
+Port to listen on
+.TP
+\fB\fC-H\fR, \fB\fC--host [HOST]\fR
+Host to bind to
+.TP
+\fB\fC-b\fR, \fB\fC--baseurl [URL]\fR 
+Base URL
+.SH ALIAS:
+.PP
+server

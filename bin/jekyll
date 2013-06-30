@@ -15,10 +15,14 @@ program :description, 'Jekyll is a blog-aware, static site generator in Ruby'
 default_command :default
 
 command :help do |c|
-  c.action do
+  c.action do |args|
     root = File.expand_path("../../man", __FILE__)
     command = "groff -t -mandoc -Tascii"
-    Kernel.exec "#{command} #{root}/jekyll.1 | less"
+    if args.empty?
+      Kernel.exec "#{command} #{root}/jekyll.1 | less"
+    else
+      Kernel.exec "#{command} #{root}/jekyll-#{args[0]} | less"
+    end
   end
 end
 
