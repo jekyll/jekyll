@@ -43,6 +43,7 @@
   * Update URL of article about Blogger migration (#1242)
   * Specify that RedCarpet is the default for new Jekyll sites on Quickstart page (#1247)
   * Added site.pages to Variables page in docs (#1251)
+  * Add Youku and Tudou Embed link on Plugins page. (#1250)
 
 ### Development Fixes
 
