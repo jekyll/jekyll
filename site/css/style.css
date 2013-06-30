@@ -501,17 +501,44 @@ body > footer a:hover img {
 
 /* News */
 
-section.news .news-header {
+.news .news-header {
   margin: 0 50px;
 }
 
-section.news .news-listing h2 {
+.news .entry {
+  background: #444;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.1);
+  min-height: 800px;
+  font-size: 16px;
+}
+
+@media (max-width: 568px){
+  .news .entry {
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px){
+  .news .entry {
+    font-size: 21px;
+    margin-bottom: 20px;
+  }
+}
+
+.news .post {
+  padding: 40px;
+}
+
+.news .news-listing h2 {
   margin: 0;
   padding-top: 10px;
   border-top: rgba(220, 220, 220, 0.5) 1px solid;
 }
 
-section.news .post-details {
+.news .post-details {
   padding: 0;
   font-size: 0.8em;
   color: gray;

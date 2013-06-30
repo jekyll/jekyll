@@ -7,7 +7,7 @@ author: all
 
 <div class="grid">
   {% for post in site.posts %}
-  <div class="unit whole center-on-mobiles">
+  <div class="unit whole center-on-mobiles entry">
   {% include news_item.html %}
   </div>
   {% endfor %}
