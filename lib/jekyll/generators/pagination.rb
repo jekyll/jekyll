@@ -1,3 +1,5 @@
+require 'pathname'
+
 module Jekyll
   module Generators
     class Pagination < Generator
