@@ -251,8 +251,13 @@ one with a `type` wins.
 As an example, consider the following setting:
 {% highlight yaml %}
 layout_defaults:
- - { path: "", layout: "posts", type: "post" }
- - { path: "path/to/files", layout: "my_layout" }
+  -
+    path: ""
+    layout: "posts"
+    type: "post"
+  -
+    path: "path/to/files"
+    layout: "my_layout"
 {% endhighlight %}
 
 This sets a default layout named *posts* for all posts. Pages default to no layout.
