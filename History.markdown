@@ -9,6 +9,8 @@
     sites (#1245, #1247)
   * Add `redcarpet` as a runtime dependency so `jekyll build` works out-of-the-box for new
     sites. (#1247)
+  * In the generated site, remove files that will be replaced by a
+    directory (#1118)
 
 ### Bug Fixes
   * Fix pagination in subdirectories. (#1198)
