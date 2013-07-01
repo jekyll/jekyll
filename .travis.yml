@@ -14,7 +14,7 @@ notifications:
     #on_success: change
     #on_failure: change
     template:
-      - "%{repository}#%{build_number} (%{branch}) %{message}. %{build_url}"
+      - "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
   email:
     on_success: never
     on_failure: never
