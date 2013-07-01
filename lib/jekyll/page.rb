@@ -23,7 +23,7 @@ module Jekyll
       self.read_yaml(File.join(base, dir), name)
 
       unless self.data.has_key?('layout')
-        self.data['layout'] = site.default_layout(File.join(dir, name), :page)
+        self.data['layout'] = site.default_layouts.find(File.join(dir, name), :page)
       end
     end
 

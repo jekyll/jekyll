@@ -8,6 +8,7 @@ module Jekyll
                   :show_drafts, :keep_files, :baseurl
 
     attr_accessor :converters, :generators
+    attr_reader :default_layouts
 
     # Public: Initialize a new Site.
     #
@@ -32,6 +33,8 @@ module Jekyll
 
       self.reset
       self.setup
+
+      @default_layouts = DefaultLayouts.new config
     end
 
     # Public: Read, process, and write this Site to output.
@@ -124,68 +127,6 @@ module Jekyll
         name = f.split(".")[0..-2].join(".")
         self.layouts[name] = Layout.new(self, base, f)
       end
-    end
-
-    # Retrieve the default layout for a given path and type (post or page)
-    #
-    # path - the path to the source file, relative to the source dir
-    # type - the type, either :post or :page
-    #
-    # Returns the default layout name or nil
-    def default_layout(path, type)
-      layout = nil
-      path.gsub!(/\A\//, '') # remove starting slash
-      path.gsub!(/([^\/])\z/, '\1/') # add trailing slash
-
-      if self.config['layout_defaults'] and self.config['layout_defaults'].is_a? Array
-        self.config['layout_defaults'].each do |hash|
-          unless valid_layout?(hash)
-            raise "Invalid default layout specified (must include path and layout name)"
-          end
-
-          if layout_applies?(path, type, hash) and layout_has_precedence?(layout, hash)
-            layout = hash
-          end
-        end
-      end
-
-      if layout.nil?
-        nil
-      else
-        layout['layout']
-      end
-    end
-
-    # Ensures a default layout setting has all the required keys
-    #
-    # layout - the hash representing the default layout setting
-    #
-    # Returns true if the hash has all the data
-    def valid_layout?(layout)
-      layout.has_key? 'layout' and layout.has_key? 'path' # those must be specified, though path can be an empty string
-    end
-
-    # Checks whether a given default layout setting applies to the given post or page
-    #
-    # path - the path to the source file, relative to the source directory
-    # type - :page or :post
-    # layout - the layout default setting hash
-    #
-    # Returns true if the given setting applies to the post or page
-    def layout_applies?(path, type, layout)
-      (layout['path'].empty? or path.start_with? layout['path']) and (not layout.has_key? 'type' or layout['type'] == type.to_s)
-    end
-
-    # Check which of the given layout_default hashes has precedence
-    #
-    # old - the first of the two layout hashes
-    # new - the second of the two layout hashes
-    #
-    # Returns true if the second hash has precedence
-    def layout_has_precedence?(old, new)
-      old_length = old['path'].length unless old.nil?
-      new_length = new['path'].length
-      old.nil? or new_length > old_length or (new_length == old_length and not old.has_key? 'type' and new.has_key? 'type')
     end
 
     # Recursively traverse directories to find posts, pages and static files

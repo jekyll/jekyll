@@ -57,7 +57,7 @@ module Jekyll
       self.read_yaml(@base, name)
 
       unless self.data.has_key?('layout')
-        self.data['layout'] = site.default_layout(File.join(dir, '_posts', name), :post)
+        self.data['layout'] = site.default_layouts.find(File.join(dir, '_posts', name), :post)
       end
 
       if self.data.has_key?('date')
