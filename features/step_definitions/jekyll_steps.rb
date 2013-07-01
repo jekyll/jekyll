@@ -131,6 +131,10 @@ When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
   end
 end
 
+When /^I delete the file "(.*)"$/ do |file|
+  File.delete(file)
+end
+
 Then /^the (.*) directory should exist$/ do |dir|
   assert File.directory?(dir), "The directory \"#{dir}\" does not exist"
 end

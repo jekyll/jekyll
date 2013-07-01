@@ -117,3 +117,14 @@ Feature: Create sites
     When I run jekyll
     Then the _site directory should exist
     And I should see "SomeDirective" in "_site/.htaccess"
+
+  Scenario: File was replaced by a directory
+    Given I have a "test" file that contains "some stuff"
+    When I run jekyll
+    Then the _site directory should exist
+    When I delete the file "test"
+    Given I have a test directory
+    And I have a "test/index.html" file that contains "some other stuff"
+    When I run jekyll
+    Then the _site/test directory should exist
+    And I should see "some other stuff" in "_site/test/index.html"
