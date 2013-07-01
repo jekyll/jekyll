@@ -48,6 +48,10 @@ module Jekyll
     # Returns nothing.
     def transform
       self.content = converter.convert(self.content)
+    rescue => e
+      Jekyll.logger.error "Conversion error:", "There was an error converting" +
+        " '#{self.path}'."
+      raise e
     end
 
     # Determine the extension depending on content_type.
