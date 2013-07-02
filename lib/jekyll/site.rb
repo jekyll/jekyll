@@ -33,8 +33,6 @@ module Jekyll
 
       self.reset
       self.setup
-
-      @default_layouts = DefaultLayouts.new config
     end
 
     # Public: Read, process, and write this Site to output.
@@ -92,6 +90,8 @@ module Jekyll
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
+
+      @default_layouts = DefaultLayouts.new config
     end
 
     # Internal: Setup the plugin search path
