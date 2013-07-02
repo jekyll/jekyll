@@ -48,6 +48,7 @@
   * Added site.pages to Variables page in docs (#1251)
   * Add Youku and Tudou Embed link on Plugins page. (#1250)
   * Add note that `gist` tag supports private gists. (#1248)
+  * Add `jekyll-timeago` to list of third-party plugins. (#1260)
 
 ### Development Fixes
 
