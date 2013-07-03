@@ -432,7 +432,7 @@ Levin](https://github.com/kinnetica/jekyll-plugins)
   multiple formats plus support for pandoc's markdown extensions.
 - [Youku and Tudou Embed](https://gist.github.com/Yexiaoxing/5891929): Liquid plugin for
   embedding Youku and Tudou videos
-- [jekyll-timeago](https://github.com/markets/jekyll-timeago): Timeago Liquid filter
+- [jekyll-timeago](https://github.com/markets/jekyll-timeago): Time-ago Liquid filter
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
