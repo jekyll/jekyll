@@ -85,6 +85,14 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
+      <td><p><code>site.pages</code></p></td>
+      <td><p>
+
+        An alphabetical list of all Pages.
+
+      </p></td>
+    </tr>
+    <tr>
       <td><p><code>site.posts</code></p></td>
       <td><p>
 

@@ -185,7 +185,7 @@ $ ruby -rubygems -e 'require "jekyll/jekyll-import/mephisto";
 ## Blogger (Blogspot)
 
 To import posts from Blogger, see [this post about migrating from Blogger to
-Jekyll](http://coolaj86.info/articles/migrate-from-blogger-to-jekyll.html). If
+Jekyll](http://blog.coolaj86.com/articles/migrate-from-blogger-to-jekyll.html). If
 that doesn’t work for you, you might want to try some of the following
 alternatives:
 

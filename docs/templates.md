@@ -281,3 +281,13 @@ You may also optionally specify the filename in the gist to display:
 {% gist 5555251 result.md %}
 {% endraw %}
 {% endhighlight %}
+
+The `gist` tag also works with private gists:
+
+{% highlight text %}
+{% raw %}
+{% gist 931c1c8d465a04042403 %}
+{% endraw %}
+{% endhighlight %}
+
+The private gist syntax also supports filenames.

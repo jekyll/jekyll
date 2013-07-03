@@ -353,13 +353,12 @@ end
 There are a few useful, prebuilt plugins at the following locations:
 
 - [Truncate HTML while preserving markup structure](https://github.com/MattHall/truncatehtml) by [Matt Hall](http://codebeef.com)
-- [Generic Blog Plugins by Jose Diaz-Gonzalez](https://github.com/josegonzalez/josediazgonzalez.com/tree/master/_plugins): Contains plugins for tags, categories, archives, as well as a few Liquid extensions
 - [Domain Name Filter by Lawrence Woodman](https://github.com/LawrenceWoodman/domain_name-liquid_filter): Filters the input text so that just the domain name is left
 - [Jekyll Plugins by Recursive Design](http://recursive-design.com/projects/jekyll-plugins/): Plugin to generate Project pages from GitHub readmes, a Category page plugin, and a Sitemap generator
-- [Tag Cloud Plugin from a Jekyll walk-through](http://vitobotta.com/how-to-migrate-from-wordpress-to-jekyll/): Plugin to generate a tag cloud
 - [Pygments Cache Path by Raimonds Simanovskis](https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb): Plugin to cache syntax-highlighted code from Pygments
 - [Delicious Plugin by Christian Hellsten](https://github.com/christianhellsten/jekyll-plugins): Fetches and renders bookmarks from delicious.com.
 - [Ultraviolet plugin by Steve Alex](https://gist.github.com/480380): Jekyll Plugin for Ultraviolet
+- [Jade plugin by John Papandriopoulos](https://github.com/snappylabs/jade-jekyll-plugin): Jade Converter plugin for Jekyll
 - [HAML plugin by Sam Z](https://gist.github.com/517556): HAML plugin for jekyll
 - [ArchiveGenerator by Ilkka Laukkanen](https://gist.github.com/707909): Uses [this archive page](https://gist.github.com/707020) to generate archives
 - [Tag Cloud Plugin by Ilkka Laukkanen](https://gist.github.com/710577): Jekyll tag cloud / tag pages plugin
@@ -383,7 +382,8 @@ There are a few useful, prebuilt plugins at the following locations:
 - [CoffeeScript converter by phaer](https://gist.github.com/959938): Put this file in `plugins` and write a YAML header to your .coffee files. See [http://coffeescript.org](http://coffeescript.org) for more info
 - [Raw Tag by phaer.](https://gist.github.com/1020852): Keeps liquid from parsing text betweeen `{{ "{% raw " }}%}` and `{{ "{% endraw " }}%}`
 - [URL encoding by James An](https://gist.github.com/919275)
-- [Sitemap.xml Generator by Michael Levin](http://www.kinnetica.com/projects/jekyll-sitemap-generator/)
+- [Sitemap.xml Generator by Michael
+Levin](https://github.com/kinnetica/jekyll-plugins)
 - [Markdown references by Olov Lassus](https://github.com/olov/jekyll-references): Keep all your markdown reference-style link definitions in one file (_references.md)
 - [Full-text search by Pascal Widdershoven](https://github.com/PascalW/jekyll_indextank): Add full-text search to your Jekyll site with this plugin and a bit of JavaScript.
 - [Stylus Converter](https://gist.github.com/988201) Convert .styl to .css.
@@ -394,7 +394,6 @@ There are a few useful, prebuilt plugins at the following locations:
 - [FlickrSetTag by Thomas Mango](https://github.com/tsmango/jekyll_flickr_set_tag): Generates image galleries from Flickr sets.
 - [Projectlist by Frederic Hemberger](https://github.com/fhemberger/jekyll-projectlist): Loads all files from a directory and renders the entries into a single page, instead of creating separate posts.
 - [Tiered Archives by Eli Naeher](https://gist.github.com/88cda643aa7e3b0ca1e5): creates a tiered template variable that allows you to create archives grouped by year and month.
-- [Jammit generator by Vladimir Andrijevik](https://gist.github.com/1224971): enables use of [Jammit](http://documentcloud.github.com/jammit/) for JavaScript and CSS packaging.
 - [oEmbed Tag by Tammo van Lessen](https://gist.github.com/1455726): enables easy content embedding (e.g. from YouTube, Flickr, Slideshare) via oEmbed.
 - [Company website and blog plugins](https://github.com/flatterline/jekyll-plugins) by Flatterline, a [Ruby on Rails development company](http://flatterline.com/): portfolio/project page generator, team/individual page generator, author bio liquid template tag for use on posts and a few other smaller plugins.
 - [Transform Layouts](https://gist.github.com/1472645) Monkey patching allowing HAML layouts (you need a HAML Converter plugin for this to work)
@@ -409,7 +408,6 @@ There are a few useful, prebuilt plugins at the following locations:
 - [JSON Filter](https://gist.github.com/1850654) by [joelverhagen](https://github.com/joelverhagen): filter that takes input text and outputs it as JSON. Great for rendering JavaScript.
 - [jekyll-beastiepress](https://github.com/okeeblow/jekyll-beastiepress): FreeBSD utility tags for Jekyll sites.
 - [jsonball](https://gist.github.com/1895282): reads json files and produces maps for use in jekylled files
-- [redcarpet2](https://github.com/nono/Jekyll-plugins): use Redcarpet2 for rendering markdown
 - [bibjekyll](https://github.com/pablooliveira/bibjekyll): render BibTeX-formatted bibliographies/citations included in posts/pages using bibtex2html
 - [jekyll-citation](https://github.com/archome/jekyll-citation): render BibTeX-formatted bibliographies/citations included in posts/pages (pure Ruby)
 - [jekyll-scholar](https://github.com/inukshuk/jekyll-scholar): Jekyll extensions for the blogging scholar
@@ -419,16 +417,22 @@ There are a few useful, prebuilt plugins at the following locations:
 - [refheap_tag](https://github.com/aburdette/refheap_tag): Liquid tag that allows embedding pastes from [refheap](https://refheap.com)
 - [i18n_filter](https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb): Liquid filter to use I18n localization.
 - [singlepage-jekyll](https://github.com/JCB-K/singlepage-jekyll) by [JCB-K](https://github.com/JCB-K): turns Jekyll into a dynamic one-page website.
-- [flickr](http://jonasforsberg.se/2012/04/15/flickr-plugin-for-jekyll/): Embed photos from flickr right into your posts.
+- [flickr](https://github.com/reagent/fleakr): Embed photos from flickr right into your posts.
 - [jekyll-devonly_tag](https://gist.github.com/2403522): A block tag for including markup only during development.
 - [Jekyll plugins by Aucor](https://github.com/aucor/jekyll-plugins): Plugins for eg. trimming unwanted newlines/whitespace and sorting pages by weight attribute.
-- [Only first paragraph](https://github.com/sebcioz/jekyll-only_first_p): Show only first paragrpaph of page/post.
 - [jekyll-pandoc-plugin](https://github.com/dsanson/jekyll-pandoc-plugin): use pandoc for rendering markdown.
 - [File compressor](https://gist.github.com/2758691) by [mytharcher](https://github.com/mytharcher): Compress HTML (\*.html) and JavaScript(\*.js) files when output.
 - [smilify](https://github.com/SaswatPadhi/jekyll_smilify) by [SaswatPadhi](https://github.com/SaswatPadhi): Convert text emoticons in your content to themeable smiley pics. [Demo](http://saswatpadhi.github.com/)
-- [excerpts](http://blog.darkrefraction.com/2012/jekyll-excerpt-plugin.html) by [drawoc](https://github.com/drawoc): provides a nice way to implement page excerpts.
 - [jekyll-minibundle](https://github.com/tkareine/jekyll-minibundle): Asset bundling and cache busting using external minification tool of your choice, no gem dependencies.
 - [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) by [redwallhp](https://github.com/redwallhp): Generates thumbnails from a directory of images and displays them in a grid with a Liquid tag.
+- [Read in X Minutes](https://gist.github.com/zachleat/5792681) by [zachleat](https://github.com/zachleat): Estimates the reading time of a string (use for blog post content).
+- [jekyll-assets](http://ixti.net/jekyll-assets/) by [ixti](https://github.com/ixti): Rails-alike assets pipeline (write assets in CoffeeScript, SASS, LESS etc; specify dependencies for automatic bundling using simple declarative comments in assets; minify and compress; use JST templates; cache bust; and many-many more).
+- [jekyll-pandoc-multiple-formats](https://github.com/fauno/jekyll-pandoc-multiple-formats)
+  by [edsl](https://github.com/edsl): Use pandoc to generate your site in
+  multiple formats plus support for pandoc's markdown extensions.
+- [Youku and Tudou Embed](https://gist.github.com/Yexiaoxing/5891929): Liquid plugin for
+  embedding Youku and Tudou videos
+- [jekyll-timeago](https://github.com/markets/jekyll-timeago): Time-ago Liquid filter
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
