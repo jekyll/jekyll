@@ -261,6 +261,9 @@ module Jekyll
       }.deep_merge(site_payload)
 
       do_layout(payload, layouts)
+    rescue Exception => e
+      Jekyll.logger.error "Post Render Exception:", "\"#{e.message}\" rendering file \"#{path}\""
+      raise e
     end
 
     # Obtain destination path.
