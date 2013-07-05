@@ -17,11 +17,11 @@ module Jekyll
       def self.build(site, options)
         source = options['source']
         destination = options['destination']
-        Jekyll.logger.info "Source:", source
-        Jekyll.logger.info "Destination:", destination
-        print Jekyll.logger.formatted_topic "Generating..."
+        Jekyll.logger.info 'Source:', source
+        Jekyll.logger.info 'Destination:', destination
+        puts Jekyll.logger.formatted_topic 'Generating...'
         self.process_site(site)
-        puts "done."
+        puts 'done.'
       end
 
       # Private: Watch for file changes and rebuild the site.
@@ -36,23 +36,23 @@ module Jekyll
         source = options['source']
         destination = options['destination']
 
-        Jekyll.logger.info "Auto-regeneration:", "enabled"
+        Jekyll.logger.info 'Auto-regeneration:', 'enabled'
 
         dw = DirectoryWatcher.new(source, :glob => self.globs(source, destination), :pre_load => true)
         dw.interval = 1
 
         dw.add_observer do |*args|
-          t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-          print Jekyll.logger.formatted_topic("Regenerating:") + "#{args.size} files at #{t} "
+          t = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+          puts "#{Jekyll.logger.formatted_topic('Regenerating:')} #{args.size} files at #{t}"
           self.process_site(site)
-          puts  "...done."
+          puts '...done.'
         end
 
         dw.start
 
         unless options['serving']
-          trap("INT") do
-            puts "     Halting auto-regeneration."
+          trap('INT') do
+            puts '     Halting auto-regeneration.'
             exit 0
           end
 
