@@ -139,7 +139,7 @@ module Jekyll
     def <=>(other)
       cmp = self.date <=> other.date
       if 0 == cmp
-       cmp = self.slug <=> other.slug
+        cmp = self.slug <=> other.slug
       end
       return cmp
     end
@@ -186,16 +186,16 @@ module Jekyll
 
     def template
       case self.site.permalink_style
-      when :pretty
-        "/:categories/:year/:month/:day/:title/"
-      when :none
-        "/:categories/:title.html"
-      when :date
-        "/:categories/:year/:month/:day/:title.html"
-      when :ordinal
-        "/:categories/:year/:y_day/:title.html"
-      else
-        self.site.permalink_style.to_s
+        when :pretty
+          "/:categories/:year/:month/:day/:title/"
+        when :none
+          "/:categories/:title.html"
+        when :date
+          "/:categories/:year/:month/:day/:title.html"
+        when :ordinal
+          "/:categories/:year/:y_day/:title.html"
+        else
+          self.site.permalink_style.to_s
       end
     end
 
@@ -207,23 +207,23 @@ module Jekyll
       return @url if @url
 
       url = if permalink
-        permalink
-      else
-        {
-          "year"       => date.strftime("%Y"),
-          "month"      => date.strftime("%m"),
-          "day"        => date.strftime("%d"),
-          "title"      => CGI.escape(slug),
-          "i_day"      => date.strftime("%d").to_i.to_s,
-          "i_month"    => date.strftime("%m").to_i.to_s,
-          "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
-          "short_month" => date.strftime("%b"),
-          "y_day"      => date.strftime("%j"),
-          "output_ext" => self.output_ext
-        }.inject(template) { |result, token|
-          result.gsub(/:#{Regexp.escape token.first}/, token.last)
-        }.gsub(/\/\//, "/")
-      end
+              permalink
+            else
+              {
+                  "year"       => date.strftime("%Y"),
+                  "month"      => date.strftime("%m"),
+                  "day"        => date.strftime("%d"),
+                  "title"      => CGI.escape(slug),
+                  "i_day"      => date.strftime("%d").to_i.to_s,
+                  "i_month"    => date.strftime("%m").to_i.to_s,
+                  "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
+                  "short_month" => date.strftime("%b"),
+                  "y_day"      => date.strftime("%j"),
+                  "output_ext" => self.output_ext
+              }.inject(template) { |result, token|
+                result.gsub(/:#{Regexp.escape token.first}/, token.last)
+              }.gsub(/\/\//, "/")
+            end
 
       # sanitize url
       @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
@@ -256,11 +256,14 @@ module Jekyll
     def render(layouts, site_payload)
       # construct payload
       payload = {
-        "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => self.to_liquid
+          "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
+          "page" => self.to_liquid
       }.deep_merge(site_payload)
 
       do_layout(payload, layouts)
+    rescue Exception => e
+      Jekyll.logger.error "Post Render Exception:", "\"#{e.message}\" rendering file \"#{path}\""
+      raise e
     end
 
     # Obtain destination path.
