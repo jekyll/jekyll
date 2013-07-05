@@ -43,6 +43,15 @@ module Jekyll
       self.data ||= {}
     end
 
+    def tilt_options
+      case site.config['markdown']
+      when 'maruku'
+      when 'redcarpet'
+      when 'rdiscount'
+      when 'kramdown'
+      end
+    end
+
     # Transform the contents based on the content type.
     #
     # Returns nothing.
