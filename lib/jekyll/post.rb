@@ -1,5 +1,5 @@
 module Jekyll
-  class   Post
+  class Post
     include Comparable
     include Convertible
 
@@ -57,7 +57,7 @@ module Jekyll
       self.read_yaml(@base, name)
 
       if self.data.has_key?('date')
-        self.date = Time.parse(self.data['date'].to_s)
+        self.date = Time.parse(self.data["date"].to_s)
       end
 
       self.published = self.published?
@@ -82,7 +82,7 @@ module Jekyll
     end
 
     def populate_tags
-      self.tags = self.data.pluralized_array('tag', 'tags').flatten
+      self.tags = self.data.pluralized_array("tag", "tags").flatten
     end
 
     # Get the full path to the directory containing the post files
@@ -117,7 +117,7 @@ module Jekyll
     #
     # Returns the post title
     def title
-      self.data['title'] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+      self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
     end
 
     # Public: the path to the post relative to the site source,
@@ -139,7 +139,7 @@ module Jekyll
     def <=>(other)
       cmp = self.date <=> other.date
       if 0 == cmp
-       cmp = self.slug <=> other.slug
+        cmp = self.slug <=> other.slug
       end
       return cmp
     end
@@ -186,16 +186,16 @@ module Jekyll
 
     def template
       case self.site.permalink_style
-      when :pretty
-        '/:categories/:year/:month/:day/:title/'
-      when :none
-        '/:categories/:title.html'
-      when :date
-        '/:categories/:year/:month/:day/:title.html'
-      when :ordinal
-        '/:categories/:year/:y_day/:title.html'
-      else
-        self.site.permalink_style.to_s
+        when :pretty
+          "/:categories/:year/:month/:day/:title/"
+        when :none
+          "/:categories/:title.html"
+        when :date
+          "/:categories/:year/:month/:day/:title.html"
+        when :ordinal
+          "/:categories/:year/:y_day/:title.html"
+        else
+          self.site.permalink_style.to_s
       end
     end
 
@@ -207,27 +207,27 @@ module Jekyll
       return @url if @url
 
       url = if permalink
-        permalink
-      else
-        {
-          'year' => date.strftime('%Y'),
-          'month' => date.strftime('%m'),
-          'day' => date.strftime('%d'),
-          'title' => CGI.escape(slug),
-          'i_day' => date.strftime('%d').to_i.to_s,
-          'i_month' => date.strftime('%m').to_i.to_s,
-          'categories' => categories.map { |c| URI.escape(c.to_s) }.join('/'),
-          'short_month' => date.strftime('%b'),
-          'y_day' => date.strftime('%j'),
-          'output_ext' => self.output_ext
-        }.inject(template) { |result, token|
-          result.gsub(/:#{Regexp.escape token.first}/, token.last)
-        }.gsub(/\/\//, '/')
-      end
+              permalink
+            else
+              {
+                  "year"       => date.strftime("%Y"),
+                  "month"      => date.strftime("%m"),
+                  "day"        => date.strftime("%d"),
+                  "title"      => CGI.escape(slug),
+                  "i_day"      => date.strftime("%d").to_i.to_s,
+                  "i_month"    => date.strftime("%m").to_i.to_s,
+                  "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
+                  "short_month" => date.strftime("%b"),
+                  "y_day"      => date.strftime("%j"),
+                  "output_ext" => self.output_ext
+              }.inject(template) { |result, token|
+                result.gsub(/:#{Regexp.escape token.first}/, token.last)
+              }.gsub(/\/\//, "/")
+            end
 
       # sanitize url
       @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
-      @url += '/' if url =~ /\/$/
+      @url += "/" if url =~ /\/$/
       @url.gsub!(/\A([^\/])/, '/\1')
       @url
     end
@@ -256,13 +256,13 @@ module Jekyll
     def render(layouts, site_payload)
       # construct payload
       payload = {
-        site: {related_posts: related_posts(site_payload['site']['posts'])},
-        page: self.to_liquid
+          "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
+          "page" => self.to_liquid
       }.deep_merge(site_payload)
 
       do_layout(payload, layouts)
     rescue Exception => e
-      Jekyll.logger.error 'Post Render Exception:', %("#{e.message}" rendering file "#{path}")
+      Jekyll.logger.error "Post Render Exception:", "\"#{e.message}\" rendering file \"#{path}\""
       raise e
     end
 
@@ -274,7 +274,7 @@ module Jekyll
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
       path = File.join(dest, CGI.unescape(self.url))
-      path = File.join(path, 'index.html') if template[/\.html$/].nil?
+      path = File.join(path, "index.html") if template[/\.html$/].nil?
       path
     end
 
@@ -352,7 +352,7 @@ module Jekyll
       separator     = self.site.config['excerpt_separator']
       head, _, tail = self.content.partition(separator)
 
-      '' << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
+      "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
     end
   end
 end
