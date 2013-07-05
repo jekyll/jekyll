@@ -6,14 +6,7 @@ module Jekyll
 
       def initialize(tag_name, markup, tokens)
         super
-        markup.strip!
-        if markup.include?(' ')
-          separator = markup.index(' ')
-          @file = markup[0..separator].strip
-          @params = markup[separator..-1]
-        else
-          @file = markup
-        end
+        @file, @params = markup.strip.split(' ', 2);
       end
 
       def parse_params(markup, context)
@@ -22,7 +15,7 @@ module Jekyll
 
 	# ensure the entire markup string from start to end is valid syntax, and params are separated by spaces
         full_matcher = Regexp.compile('\A\s*(?:' + MATCHER.to_s + '(?=\s|\z)\s*)*\z')
-        if not markup =~ full_matcher
+        unless markup =~ full_matcher
           raise SyntaxError.new <<-eos
 Invalid syntax for include tag:
 
