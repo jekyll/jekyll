@@ -6,8 +6,6 @@ author: parkr
 categories: [release, jekyll]
 ---
 
-_(Take a look at the [History][] page in the docs for more detailed information.)_
-
 Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:
 
 * Add newer `language-` class name prefix to code blocks ([#1037][])
@@ -17,6 +15,8 @@ Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:
 * Fix the index build with LSI ([#1045][])
 * Don't print deprecation warning when no arguments are specified. ([#1041][])
 * Add missing `</div>` to site template used by `new` subcommand, fixed typos in code ([#1032][])
+
+_(Take a look at the [History][] page in the docs for more detailed information.)_
 
 {% assign issue_numbers = "1037|1040|1048|1053|1045|1041|1032" | split: "|" %}
 {% for issue in issue_numbers %}
