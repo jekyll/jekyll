@@ -1,0 +1,19 @@
+---
+layout: news
+---
+
+<div class="grid">
+  <div class="unit whole entry">
+    <div class="post single">
+      <p class="post-content">
+      {{ content }}
+      </p>
+      <p class="post-details">
+        Posted on {{ page.date | date_to_string }}
+        by <a href="https://github.com/{{ page.author }}">@{{ page.author }}</a>,
+        filed in {{ page.categories | array_to_sentence_string }}
+      </p>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
