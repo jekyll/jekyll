@@ -502,7 +502,7 @@ body > footer a:hover img {
 /* News */
 
 .news .news-header {
-  margin: 0 50px;
+  margin: 10px 50px;
 }
 
 .news .entry {
@@ -511,13 +511,12 @@ body > footer a:hover img {
   padding: 20px;
   margin: 0 10px;
   box-shadow: 0 3px 10px rgba(0,0,0,.1);
-  min-height: 800px;
   font-size: 16px;
 }
 
 @media (max-width: 568px){
   .news .entry {
-    margin: 0;
+    margin: 0 0 20px 0;
   }
 }
 
@@ -532,10 +531,18 @@ body > footer a:hover img {
   padding: 40px;
 }
 
+.news .post.single {
+  padding-top: 10px;
+}
+
 .news .news-listing h2 {
   margin: 0;
   padding-top: 10px;
   border-top: rgba(220, 220, 220, 0.5) 1px solid;
+}
+
+.news .listing h2 {
+  margin-top: 0;
 }
 
 .news .post-details {
