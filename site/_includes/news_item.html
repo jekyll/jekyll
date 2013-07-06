@@ -8,6 +8,8 @@
     {{ post.content }}
   </p>
   <p class="post-details">
-    Posted on {{ post.date | date_to_string }} by @{{ post.author }}, filed in {{ post.categories | array_to_sentence_string }}
+    Posted on {{ post.date | date_to_string }}
+    by <a href="https://github.com/{{ post.author }}">@{{ post.author }}</a>,
+    filed in {{ post.categories | array_to_sentence_string }}
   </p>
 </div>
