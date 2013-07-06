@@ -551,6 +551,46 @@ body > footer a:hover img {
   color: gray;
 }
 
+.news aside {
+  padding-top: 95px;
+  padding-left: 20px;
+}
+
+.news aside h4 {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 0 10px 29px;
+  margin-left: -29px;
+  display: inline-block;
+  border-bottom: 1px solid #c00;
+}
+
+.news aside ul {
+  padding-left: 0;
+}
+
+.news aside li {
+  list-style-type: none;
+}
+
+.news aside li a {
+  font-size: 16px;
+  position: relative
+}
+
+.news aside li.current a:before {
+  content: "";
+  border-color: transparent transparent transparent #444;
+  border-style: solid;
+  border-width: 10px;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: -30px;
+}
+
 /* Code Highlighting */
 
 
