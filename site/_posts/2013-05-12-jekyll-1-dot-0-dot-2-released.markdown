@@ -6,7 +6,7 @@ author: parkr
 categories: [release, jekyll]
 ---
 
-_(Take a look at the [Upgrading][] page in the docs for more detailed information.)_
+_(Take a look at the [History][] page in the docs for more detailed information.)_
 
 v1.0.2 has some key bugfixes that optionally restore some behaviour from pre-1.0
 releases, and fix some other annoying bugs:
@@ -24,4 +24,4 @@ releases, and fix some other annoying bugs:
 [#{{ issue }}]: https://github.com/mojombo/jekyll/issues/{{ issue }}
 {% endfor %}
 
-[Upgrading]: /docs/upgrading/
+[History]: /docs/history/#102__20130512

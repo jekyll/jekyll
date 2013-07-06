@@ -18,5 +18,5 @@ examples and for compiling this list):
 
 _(Take a look at the [Upgrading][] page in the docs for more detailed information.)_
 
-[history]: https://github.com/mojombo/jekyll/blob/master/History.markdown#100--2013-05-06
+[history]: /docs/history/#100__20130506
 [Upgrading]: /docs/upgrading/

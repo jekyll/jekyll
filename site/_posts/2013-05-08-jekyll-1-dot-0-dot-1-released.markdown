@@ -6,7 +6,7 @@ author: parkr
 categories: [release, jekyll]
 ---
 
-_(Take a look at the [Upgrading][] page in the docs for more detailed information.)_
+_(Take a look at the [History][] page in the docs for more detailed information.)_
 
 Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:
 
@@ -23,4 +23,4 @@ Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:
 [#{{ issue }}]: https://github.com/mojombo/jekyll/issues/{{ issue }}
 {% endfor %}
 
-[Upgrading]: /docs/upgrading/
+[History]: /docs/history/#101__20130508
