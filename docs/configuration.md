@@ -90,7 +90,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
             Set the time zone for site generation. This sets the <code>TZ</code>
             environment variable, which Ruby uses to handle time and date
             creation and manipulation. Any entry from the
-            <a href="http://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
+            <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA Time Zone
             Database</a> is valid, e.g. <code>America/New_York</code>. The default
             is the local time zone, as set by your operating system.
         </p>
