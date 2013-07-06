@@ -6,7 +6,7 @@ author: parkr
 categories: [release, jekyll]
 ---
 
-Hey! After many months of hard works by Jekyll's contributors, we're excited
+Hey! After many months of hard work by Jekyll's contributors, we're excited
 to announce the first major release of the project in a long while. v1.0.0 is
 finally here! While the list of improvements and bug fixes is [quite lengthy][history],
 here are the highlights (thanks to [@benbalter](http://twitter.com/BenBalter) for the
