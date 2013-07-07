@@ -22,7 +22,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def info(topic, message)
+    def info(topic, message = nil)
       $stdout.puts(message(topic, message)) if log_level <= INFO
     end
 
@@ -32,7 +32,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def warn(topic, message)
+    def warn(topic, message = nil)
       $stderr.puts(message(topic, message).yellow) if log_level <= WARN
     end
 
@@ -42,7 +42,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def error(topic, message)
+    def error(topic, message = nil)
       $stderr.puts(message(topic, message).red) if log_level <= ERROR
     end
 
@@ -52,8 +52,8 @@ module Jekyll
     # message - the message detail
     #
     # Returns the formatted message
-    def message(topic, message)
-      formatted_topic(topic) + message.gsub(/\s+/, ' ')
+    def message(topic, message = nil)
+      formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
     end
 
     # Public: Format the topic
