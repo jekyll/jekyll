@@ -25,6 +25,7 @@ require 'English'
 require 'liquid'
 require 'maruku'
 require 'colorator'
+require 'tilt'
 
 # internal requires
 require 'jekyll/core_ext'
@@ -51,6 +52,7 @@ require 'jekyll/command'
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/converters/markdown'
+require_all 'jekyll/configurators'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 

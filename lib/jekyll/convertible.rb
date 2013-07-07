@@ -43,11 +43,25 @@ module Jekyll
       self.data ||= {}
     end
 
+    def tilt_options
+      case site.config['markdown']
+      when 'maruku'
+      when 'redcarpet'
+      when 'rdiscount'
+      when 'kramdown'
+      end
+    end
+
     # Transform the contents based on the content type.
     #
     # Returns nothing.
     def transform
-      self.content = converter.convert(self.content)
+      self.content = if converter
+        converter.convert(self.content)
+      else
+        Tilt.prefer(Tilt.const_get("#{self.site.config['markdown'].capitalize}Template", false))
+        Tilt.new(self.name, :default_encoding => 'utf8').render(self.content, tilt_options)
+      end
     rescue => e
       Jekyll.logger.error "Conversion error:", "There was an error converting" +
         " '#{self.path}'."
