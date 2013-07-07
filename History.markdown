@@ -50,6 +50,7 @@
   * Add note that `gist` tag supports private gists. (#1248)
   * Add `jekyll-timeago` to list of third-party plugins. (#1260)
   * Add `jekyll-swfobject` to list of third-party plugins. (#1263)
+  * Add `jekyll-picture-tag` to list of third-party plugins. (#1280)
 
 ### Development Fixes
 
