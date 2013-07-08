@@ -552,7 +552,7 @@ article h2:first-child {
 
 @media (max-width: 568px){
   .post-category {
-    margin-right: -30px;
+    padding-left: 30px;
   }
 }
 
