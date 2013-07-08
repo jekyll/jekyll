@@ -21,6 +21,7 @@
 ### Development Fixes
   * Merge the theme and layout cucumber steps into one step (#1151)
   * Restrict activesupport dependency to pre-4.0.0 to maintain compatibility with `<= 1.9.2`
+  * Include/exclude deprecation handling simplification (#1284)
 
 ### Site Enhancements
   * Add "History" page.
