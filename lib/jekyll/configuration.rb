@@ -186,7 +186,7 @@ module Jekyll
       end
 
       %w[include exclude].each do |option|
-        if config.has_key?(option) && config[option].is_a?(String)
+        if config.fetch(option, []).is_a?(String)
           Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
             " must now be specified as an array, but you specified" +
             " a string. For now, we've treated the string you provided" +
