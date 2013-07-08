@@ -18,12 +18,12 @@ module Jekyll
         while match = MATCHER.match(markup) do
           markup = markup[match.end(0)..-1]
 
-          if match[2]
-            value = match[2].gsub(/\\"/, '"')
+          value = if match[2]
+            match[2].gsub(/\\"/, '"')
           elsif match[3]
-            value = match[3].gsub(/\\'/, "'")
+            match[3].gsub(/\\'/, "'")
           elsif match[4]
-            value = context[match[4]]
+            context[match[4]]
           end
 
           params[match[1]] = value
