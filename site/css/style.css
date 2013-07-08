@@ -517,14 +517,6 @@ article h2:first-child {
   margin-top: 0;
 }
 
-.news article {
-  margin-bottom: 20px;
-}
-
-.news .post-meta {
-
-}
-
 .post-category,
 .post-meta {
   display: inline-block;
@@ -603,7 +595,7 @@ article h2:first-child {
 }
 
 .news article + article {
-  margin-top: -30px;
+  margin-top: -10px;
   border-radius: 0 0 10px 10px;
   border-top: 1px solid #555;
   box-shadow: 0 -1px 0 #2f2f2f;
