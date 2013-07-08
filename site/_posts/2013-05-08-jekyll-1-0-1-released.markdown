@@ -3,7 +3,8 @@ layout: news_item
 title: "Jekyll 1.0.1 Released"
 date: "2013-05-08 23:46:11 +0200"
 author: parkr
-categories: [release, jekyll]
+version: 1.0.1
+categories: [release]
 ---
 
 Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:
@@ -16,7 +17,7 @@ Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:
 * Don't print deprecation warning when no arguments are specified. ([#1041][])
 * Add missing `</div>` to site template used by `new` subcommand, fixed typos in code ([#1032][])
 
-_(Take a look at the [History][] page in the docs for more detailed information.)_
+See the [History][] page for more information on this release.
 
 {% assign issue_numbers = "1037|1040|1048|1053|1045|1041|1032" | split: "|" %}
 {% for issue in issue_numbers %}

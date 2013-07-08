@@ -3,7 +3,8 @@ layout: news_item
 title: "Jekyll 1.0.3 Released"
 date: "2013-06-07 21:02:13 +0200"
 author: parkr
-categories: [release, jekyll]
+version: 1.0.3
+categories: [release]
 ---
 
 v1.0.3 contains some key enhancements and bug fixes:
@@ -14,7 +15,7 @@ v1.0.3 contains some key enhancements and bug fixes:
 - Fix compatibility with `exclude` and `include` with pre-1.0 Jekyll ([#1114][])
 - Fix pagination issue regarding `File.basename` and `page:num` ([#1063][])
 
-_(Take a look at the [History][] page in the docs for more detailed information.)_
+See the [History][] page for more information on this release.
 
 {% assign issue_numbers = "1190|1121|1189|1115|1114|1063" | split: "|" %}
 {% for issue in issue_numbers %}
