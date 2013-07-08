@@ -4,7 +4,7 @@ title: "Jekyll 1.0.0 Released"
 date: "2013-05-06 02:12:52 +0200"
 author: parkr
 version: 1.0.0
-categories: [releases, general]
+categories: [release]
 ---
 
 Hey! After many months of hard works by Jekyll's contributors, we're excited
@@ -17,7 +17,7 @@ examples and for compiling this list):
 - Automatically generated post excerpts ([example](https://gist.github.com/benbalter/5555369))
 - Save and preview drafts before publishing ([example](https://gist.github.com/benbalter/5555992))
 
-_(Take a look at the [Upgrading][] page in the docs for more detailed information.)_
+Take a look at the [Upgrading][] page in the docs for more detailed information.
 
 [history]: /docs/history/#100__20130506
 [Upgrading]: /docs/upgrading/
