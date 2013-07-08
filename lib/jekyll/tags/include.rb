@@ -9,24 +9,11 @@ module Jekyll
         @file, @params = markup.strip.split(' ', 2);
       end
 
-      def parse_params(markup, context)
+      def parse_params(context)
+        validate_syntax
+
         params = {}
-        pos = 0
-
-	# ensure the entire markup string from start to end is valid syntax, and params are separated by spaces
-        full_matcher = Regexp.compile('\A\s*(?:' + MATCHER.to_s + '(?=\s|\z)\s*)*\z')
-        unless markup =~ full_matcher
-          raise SyntaxError.new <<-eos
-Invalid syntax for include tag:
-
-	#{markup}
-
-Valid syntax:
-
-	{% include file.ext param='value' param2="value" %}
-
-eos
-        end
+        markup = @params
 
         while match = MATCHER.match(markup) do
           markup = markup[match.end(0)..-1]
@@ -42,6 +29,23 @@ eos
           params[match[1]] = value
         end
         params
+      end
+
+      # ensure the entire markup string from start to end is valid syntax, and params are separated by spaces
+      def validate_syntax
+        full_matcher = Regexp.compile('\A\s*(?:' + MATCHER.to_s + '(?=\s|\z)\s*)*\z')
+        unless @params =~ full_matcher
+          raise SyntaxError.new <<-eos
+Invalid syntax for include tag:
+
+	#{@params}
+
+Valid syntax:
+
+	{% include file.ext param='value' param2="value" %}
+
+eos
+        end
       end
 
       def render(context)
@@ -62,7 +66,7 @@ eos
             partial = Liquid::Template.parse(source)
 
             context.stack do
-              context['include'] = parse_params(@params, context) if @params
+              context['include'] = parse_params(context) if @params
               partial.render(context)
             end
           else
