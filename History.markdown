@@ -53,6 +53,8 @@
   * Add `jekyll-timeago` to list of third-party plugins. (#1260)
   * Add `jekyll-swfobject` to list of third-party plugins. (#1263)
   * Add `jekyll-picture-tag` to list of third-party plugins. (#1280)
+  * Add blog posts for releases to the site, along with an RSS feed
+    (#1093)
 
 ### Development Fixes
 
