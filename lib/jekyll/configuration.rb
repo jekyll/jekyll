@@ -150,60 +150,7 @@ module Jekyll
         $stderr.puts "#{err}"
       end
 
-      configuration.backwards_compatibilize
+      Deprecator.config(configuration)
     end
-
-    # Public: Split a CSV string into an array containing its values
-    #
-    # csv - the string of comma-separated values
-    #
-    # Returns an array of the values contained in the CSV
-    def csv_to_array(csv)
-      csv.split(",").map(&:strip)
-    end
-
-    # Public: Ensure the proper options are set in the configuration to allow for
-    # backwards-compatibility with Jekyll pre-1.0
-    #
-    # Returns the backwards-compatible configuration
-    def backwards_compatibilize
-      config = clone
-      # Provide backwards-compatibility
-      if config.has_key?('auto') || config.has_key?('watch')
-        Jekyll.logger.warn "Deprecation:", "Auto-regeneration can no longer" +
-                            " be set from your configuration file(s). Use the"+
-                            " --watch/-w command-line option instead."
-        config.delete('auto')
-        config.delete('watch')
-      end
-
-      if config.has_key? 'server'
-        Jekyll.logger.warn "Deprecation:", "The 'server' configuration option" +
-                            " is no longer accepted. Use the 'jekyll serve'" +
-                            " subcommand to serve your site with WEBrick."
-        config.delete('server')
-      end
-
-      if config.has_key? 'server_port'
-        Jekyll.logger.warn "Deprecation:", "The 'server_port' configuration option" +
-                            " has been renamed to 'port'. Please update your config" +
-                            " file accordingly."
-        # copy but don't overwrite:
-        config['port'] = config['server_port'] unless config.has_key?('port')
-        config.delete('server_port')
-      end
-
-      %w[include exclude].each do |option|
-        if config.fetch(option, []).is_a?(String)
-          Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
-            " must now be specified as an array, but you specified" +
-            " a string. For now, we've treated the string you provided" +
-            " as a list of comma-separated values."
-          config[option] = csv_to_array(config[option])
-        end
-      end
-      config
-    end
-
   end
 end

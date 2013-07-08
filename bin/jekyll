@@ -6,7 +6,7 @@ $:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 require 'commander/import'
 require 'jekyll'
 
-Jekyll::Deprecator.process(ARGV)
+Jekyll::Deprecator.command(ARGV)
 
 program :name, 'jekyll'
 program :version, Jekyll::VERSION

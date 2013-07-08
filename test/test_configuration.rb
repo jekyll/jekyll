@@ -48,64 +48,34 @@ class TestConfiguration < Test::Unit::TestCase
       assert_equal %w[config/site.yml config/deploy.yml configuration.yml], @config.config_files(@multiple_files)
     end
   end
-  context "#backwards_compatibilize" do
-    setup do
-      @config = Configuration[{
-        "auto"    => true,
-        "watch"   => true,
-        "server"  => true,
-        "exclude" => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
-        "include" => "STOP_THE_PRESSES.txt,.heloses, .git"
-      }]
-    end
-    should "unset 'auto' and 'watch'" do
-      assert @config.has_key?("auto")
-      assert @config.has_key?("watch")
-      assert !@config.backwards_compatibilize.has_key?("auto")
-      assert !@config.backwards_compatibilize.has_key?("watch")
-    end
-    should "unset 'server'" do
-      assert @config.has_key?("server")
-      assert !@config.backwards_compatibilize.has_key?("server")
-    end
-    should "transform string exclude into an array" do
-      assert @config.has_key?("exclude")
-      assert @config.backwards_compatibilize.has_key?("exclude")
-      assert_equal @config.backwards_compatibilize["exclude"], %w[READ-ME.md Gemfile CONTRIBUTING.hello.markdown]
-    end
-    should "transform string include into an array" do
-      assert @config.has_key?("include")
-      assert @config.backwards_compatibilize.has_key?("include")
-      assert_equal @config.backwards_compatibilize["include"], %w[STOP_THE_PRESSES.txt .heloses .git]
-    end
-  end
   context "loading configuration" do
     setup do
       @path = File.join(Dir.pwd, '_config.yml')
       @user_config = File.join(Dir.pwd, "my_config_file.yml")
+      YAML.stubs(:safe_load_file) # to ignore other YAML.safe_load_file invocations from Jekyll.configuration({})
     end
 
     should "fire warning with no _config.yml" do
-      mock(YAML).safe_load_file(@path) { raise SystemCallError, "No such file or directory - #{@path}" }
+      YAML.expects(:safe_load_file).with(@path).raises(SystemCallError, "No such file or directory - #{@path}")
       mock($stderr).puts("Configuration file: none".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
 
     should "load configuration as hash" do
-      mock(YAML).safe_load_file(@path) { Hash.new }
+      YAML.expects(:safe_load_file).with(@path).returns(Hash.new)
       mock($stdout).puts("Configuration file: #{@path}")
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
 
     should "fire warning with bad config" do
-      mock(YAML).safe_load_file(@path) { Array.new }
+      YAML.expects(:safe_load_file).with(@path).returns(Array.new)
       mock($stderr).puts(("WARNING: ".rjust(20) + "Error reading configuration. Using defaults (and options).").yellow)
       mock($stderr).puts("Configuration file: (INVALID) #{@path}".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
 
     should "fire warning when user-specified config file isn't there" do
-      mock(YAML).safe_load_file(@user_config) { raise SystemCallError, "No such file or directory - #{@user_config}" }
+      YAML.expects(:safe_load_file).with(@user_config).raises(SystemCallError, "No such file or directory - #{@user_config}")
       mock($stderr).puts(("Fatal: ".rjust(20) + "The configuration file '#{@user_config}' could not be found.").red)
       assert_raises LoadError do
         Jekyll.configuration({'config' => [@user_config]})
@@ -119,37 +89,38 @@ class TestConfiguration < Test::Unit::TestCase
         :other   => File.join(Dir.pwd, '_config.live.yml'),
         :empty   => ""
       }
+      YAML.stubs(:safe_load_file) # to ignore other YAML.safe_load_file invocations from Jekyll.configuration({})
     end
 
     should "load default config if no config_file is set" do
-      mock(YAML).safe_load_file(@paths[:default]) { Hash.new }
+      YAML.expects(:safe_load_file).with(@paths[:default]).returns(Hash.new)
       mock($stdout).puts("Configuration file: #{@paths[:default]}")
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
 
     should "load different config if specified" do
-      mock(YAML).safe_load_file(@paths[:other]) { {"baseurl" => "http://wahoo.dev"} }
+      YAML.expects(:safe_load_file).with(@paths[:other]).returns({"baseurl" => "http://wahoo.dev"})
       mock($stdout).puts("Configuration file: #{@paths[:other]}")
       assert_equal Jekyll::Configuration::DEFAULTS.deep_merge({ "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => @paths[:other] })
     end
 
     should "load default config if path passed is empty" do
-      mock(YAML).safe_load_file(@paths[:default]) { Hash.new }
+      YAML.expects(:safe_load_file).with(@paths[:default]).returns(Hash.new)
       mock($stdout).puts("Configuration file: #{@paths[:default]}")
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({ "config" => @paths[:empty] })
     end
 
     should "load multiple config files" do
-      mock(YAML).safe_load_file(@paths[:default]) { Hash.new }
-      mock(YAML).safe_load_file(@paths[:other]) { Hash.new }
+      YAML.expects(:safe_load_file).with(@paths[:default]).returns(Hash.new)
+      YAML.expects(:safe_load_file).with(@paths[:other]).returns(Hash.new)
       mock($stdout).puts("Configuration file: #{@paths[:default]}")
       mock($stdout).puts("Configuration file: #{@paths[:other]}")
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })
     end
 
     should "load multiple config files and last config should win" do
-      mock(YAML).safe_load_file(@paths[:default]) { {"baseurl" => "http://example.dev"} }
-      mock(YAML).safe_load_file(@paths[:other]) { {"baseurl" => "http://wahoo.dev"} }
+      YAML.expects(:safe_load_file).with(@paths[:default]).returns({"baseurl" => "http://example.dev"})
+      YAML.expects(:safe_load_file).with(@paths[:other]).returns({"baseurl" => "http://wahoo.dev"})
       mock($stdout).puts("Configuration file: #{@paths[:default]}")
       mock($stdout).puts("Configuration file: #{@paths[:other]}")
       assert_equal Jekyll::Configuration::DEFAULTS.deep_merge({ "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })
