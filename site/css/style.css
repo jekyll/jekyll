@@ -104,7 +104,7 @@ nav li {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 800;
-  padding: 5px 0;
+  padding: 5px;
   border-radius: 5px;
 }
 
@@ -126,7 +126,7 @@ nav li {
     text-align: right;
   }
 }
-@media (max-width: 720px){
+@media (max-width: 830px){
   .main-nav .show-on-mobiles {
     display: inline;
   }
@@ -371,6 +371,12 @@ article {
   font-size: 16px;
 }
 
+@media (max-width: 480px){
+  article ul {
+    padding-left: 20px;
+  }
+}
+
 @media (max-width: 568px){
   article {
     margin: 0;
@@ -552,7 +558,7 @@ article h2:first-child {
 
 @media (max-width: 568px){
   .post-category {
-    margin-right: -30px;
+    padding-left: 30px;
   }
 }
 
