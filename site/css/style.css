@@ -501,10 +501,6 @@ body > footer a:hover img {
 
 /* News */
 
-.news .news-header {
-  margin: 10px 50px;
-}
-
 .news .entry {
   background: #444;
   border-radius: 10px;
