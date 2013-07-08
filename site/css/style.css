@@ -371,6 +371,12 @@ article {
   font-size: 16px;
 }
 
+@media (max-width: 480px){
+  article ul {
+    padding-left: 20px;
+  }
+}
+
 @media (max-width: 568px){
   article {
     margin: 0;
