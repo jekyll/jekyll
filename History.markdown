@@ -25,6 +25,7 @@
   * Include/exclude deprecation handling simplification (#1284)
 
 ### Site Enhancements
+  * Add "News" section for release notes, along with an RSS feed (#1093, #1285, #1286)
   * Add "History" page.
   * Restructured docs sections to include "Meta" section.
   * Add message to "Templates" page that specifies that Python must be installed in order
@@ -53,8 +54,6 @@
   * Add `jekyll-timeago` to list of third-party plugins. (#1260)
   * Add `jekyll-swfobject` to list of third-party plugins. (#1263)
   * Add `jekyll-picture-tag` to list of third-party plugins. (#1280)
-  * Add blog posts for releases to the site, along with an RSS feed
-    (#1093)
 
 ### Development Fixes
 
