@@ -11,6 +11,7 @@ module Jekyll
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
       'keep_files'    => ['.git','.svn'],
+      'log_level'     => 'info',
 
       'timezone'      => nil,           # use the local timezone
 
@@ -142,6 +143,8 @@ module Jekyll
         $stderr.puts "#{err}"
       end
 
+      apply_log_level(configuration)
+
       configuration.backwards_compatibilize
     end
 
@@ -185,23 +188,26 @@ module Jekyll
         config.delete('server_port')
       end
 
-      if config.has_key?('exclude') && config['exclude'].is_a?(String)
-        Jekyll.logger.warn "Deprecation:", "The 'exclude' configuration option" +
-                               " must now be specified as an array, but you specified" +
-                               " a string. For now, we've treated the string you provided" +
-                               " as a list of comma-separated values."
-        config['exclude'] = csv_to_array(config['exclude'])
+      %w[include exclude].each do |option|
+        if config.has_key?(option) && config[option].is_a?(String)
+          Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
+            " must now be specified as an array, but you specified" +
+            " a string. For now, we've treated the string you provided" +
+            " as a list of comma-separated values."
+          config[option] = csv_to_array(config[option])
+        end
       end
-
-      if config.has_key?('include') && config['include'].is_a?(String)
-        Jekyll.logger.warn "Deprecation:", "The 'include' configuration option" +
-                               " must now be specified as an array, but you specified" +
-                               " a string. For now, we've treated the string you provided" +
-                               " as a list of comma-separated values."
-        config['include'] = csv_to_array(config['include'])
-      end
-
       config
+    end
+
+    # Public: Apply the log level to the Jekyll logger
+    #
+    # config - the configuration options
+    #
+    # Returns nothing
+    def apply_log_level(config)
+      Jekyll.logger.log_level = config['log_level']
+      Jekyll.logger.debug "Log level:", "#{config['log_level']}"
     end
 
   end

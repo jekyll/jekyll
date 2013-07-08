@@ -88,6 +88,9 @@ module Jekyll
     ENV['TZ'] = timezone
   end
 
+  # Static: Fetch the instance of Stevenson to write to the console.
+  #
+  # Returns an instance of Stevenson
   def self.logger
     @logger ||= Stevenson.new
   end
