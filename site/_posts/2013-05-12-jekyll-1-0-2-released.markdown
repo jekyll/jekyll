@@ -3,7 +3,8 @@ layout: news_item
 title: "Jekyll 1.0.2 Released"
 date: "2013-05-12 14:45:00 +0200"
 author: parkr
-categories: [release, jekyll]
+version: 1.0.2
+categories: [release]
 ---
 
 v1.0.2 has some key bugfixes that optionally restore some behaviour from pre-1.0
@@ -17,7 +18,7 @@ releases, and fix some other annoying bugs:
 * Add a `data-lang="<lang>"` attribute to Redcarpet code blocks ([#1066][])
 * Catching that Redcarpet gem isn't installed ([#1059][])
 
-_(Take a look at the [History][] page in the docs for more detailed information.)_
+See the [History][] page for more information on this release.
 
 {% assign issue_numbers = "1059|1061|1066|1067|1078|1081|1084" | split: "|" %}
 {% for issue in issue_numbers %}
