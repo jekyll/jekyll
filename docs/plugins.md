@@ -433,6 +433,8 @@ Levin](https://github.com/kinnetica/jekyll-plugins)
 - [Youku and Tudou Embed](https://gist.github.com/Yexiaoxing/5891929): Liquid plugin for
   embedding Youku and Tudou videos
 - [jekyll-timeago](https://github.com/markets/jekyll-timeago): Time-ago Liquid filter
+- [jekyll-swfobject](https://github.com/sectore/jekyll-swfobject): Liquid plugin for embedding Adobe Flash files (`*.swf`) using [SWFObject](http://code.google.com/p/swfobject/)
+- [Jekyll Picture Tag](https://github.com/robwierzbowski/jekyll-picture-tag): Easy responsive images for Jekyll. Based on the proposed [`<picture>`](http://picture.responsiveimages.org/) element, polyfilled with Scott Jelh's [Picturefill](https://github.com/scottjehl/picturefill).
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
