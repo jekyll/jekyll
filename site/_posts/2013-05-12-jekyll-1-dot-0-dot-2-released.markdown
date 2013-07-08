@@ -3,7 +3,8 @@ layout: news_item
 title: "Jekyll 1.0.2 Released"
 date: "2013-05-12 14:45:00 +0200"
 author: parkr
-categories: [release, jekyll]
+version: 1.0.2
+categories: [releases, general]
 ---
 
 _(Take a look at the [History][] page in the docs for more detailed information.)_
