@@ -43,13 +43,6 @@ module Jekyll
       self.data ||= {}
     end
 
-    # Checks if it has been marked as unpublished in the YAML frontmatter
-    #
-    # Returns true if published or false otherwise
-    def published?
-      not self.data.has_key?('published') or self.data['published']
-    end
-
     # Transform the contents based on the content type.
     #
     # Returns nothing.
