@@ -5,11 +5,6 @@ permalink: /news/releases/
 author: all
 ---
 
-<div class="grid">
 {% for post in site.categories.releases %}
-<div class="unit whole entry">
-{% include news_item.html %}
-</div>
+  {% include news_item.html %}
 {% endfor %}
-<div class="clear"></div>
-</div>

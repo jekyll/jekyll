@@ -2,22 +2,17 @@
 layout: news
 ---
 
-<div class="grid">
-  <div class="unit whole entry">
-    <div class="post single">
-      <h2 class="center-on-mobiles">
-        {{ page.title }}
-        <a href="{{ page.url }}" class="permalink" title="Permalink">∞</a>
-      </h2>
-      <p class="post-content">
-      {{ content }}
-      </p>
-      <p class="post-details">
-        Posted on {{ page.date | date_to_string }}
-        by <a href="https://github.com/{{ page.author }}">@{{ page.author }}</a>,
-        filed in {{ page.categories | array_to_sentence_string }}
-      </p>
-    </div>
-  </div>
-  <div class="clear"></div>
-</div>
+<article>
+  <h2 class="center-on-mobiles">
+    {{ page.title }}
+    <a href="{{ page.url }}" class="permalink" title="Permalink">∞</a>
+  </h2>
+  <p class="post-content">
+  {{ content }}
+  </p>
+  <p class="post-details">
+    Posted on {{ page.date | date_to_string }}
+    by <a href="https://github.com/{{ page.author }}">@{{ page.author }}</a>,
+    filed in {{ page.categories | array_to_sentence_string }}
+  </p>
+</article>
