@@ -3,6 +3,13 @@ Feature: Create sites
   I want to be able to make a static site
   In order to share my awesome ideas with the interwebs
 
+  Scenario: Blank site
+    Given I do not have a "test_blank" directory
+    When I call jekyll new with test_blank --blank
+    Then the test_blank/_layouts directory should exist
+    And the test_blank/_posts directory should exist
+    And the "test_blank/index.html" file should exist
+
   Scenario: Basic site
     Given I have an "index.html" file that contains "Basic Site"
     When I run jekyll
@@ -13,7 +20,7 @@ Feature: Create sites
     Given I have a _posts directory
     And I have the following post:
       | title   | date      | content          |
-      | Hackers | 3/27/2009 | My First Exploit |
+      | Hackers | 2009-03-27 | My First Exploit |
     When I run jekyll
     Then the _site directory should exist
     And I should see "My First Exploit" in "_site/2009/03/27/hackers.html"
@@ -31,7 +38,7 @@ Feature: Create sites
     And I have a _posts directory
     And I have the following posts:
       | title    | date      | layout  | content                               |
-      | Wargames | 3/27/2009 | default | The only winning move is not to play. |
+      | Wargames | 2009-03-27 | default | The only winning move is not to play. |
     And I have a default layout that contains "Post Layout: {{ content }}"
     When I run jekyll
     Then the _site directory should exist
@@ -49,13 +56,13 @@ Feature: Create sites
     And I have a _posts directory
     And I have the following posts:
       | title     | date      | layout  | content                                |
-      | entry1    | 3/27/2009 | post    | content for entry1.                    |
-      | entry2    | 4/27/2009 | post    | content for entry2.                    |
+      | entry1    | 2009-03-27 | post    | content for entry1.                    |
+      | entry2    | 2009-04-27 | post    | content for entry2.                    |
     And I have a category/_posts directory
     And I have the following posts in "category":
       | title     | date      | layout  | content                                |
-      | entry3    | 5/27/2009 | post    | content for entry3.                    |
-      | entry4    | 6/27/2009 | post    | content for entry4.                    |
+      | entry3    | 2009-05-27 | post    | content for entry3.                    |
+      | entry4    | 2009-06-27 | post    | content for entry4.                    |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Page : Site contains 2 pages and 4 posts" in "_site/index.html"
@@ -99,8 +106,8 @@ Feature: Create sites
     And I have a _posts directory
     And I have the following posts:
       | title     | date       | layout  | content                                |
-      | entry1    | 12/31/2007 | post    | content for entry1.                    |
-      | entry2    | 01/31/2020 | post    | content for entry2.                    |
+      | entry1    | 2007-12-31 | post    | content for entry1.                    |
+      | entry2    | 2020-01-31 | post    | content for entry2.                    |
     When I run jekyll
     Then the _site directory should exist
     And I should see "URL: /2020/01/31/entry2/" in "_site/index.html"
@@ -118,3 +125,14 @@ Feature: Create sites
     Then the _site directory should exist
     And the "_site/index.html" file should exist
     But the "_site/secret.html" file should not exist
+
+  Scenario: File was replaced by a directory
+    Given I have a "test" file that contains "some stuff"
+    When I run jekyll
+    Then the _site directory should exist
+    When I delete the file "test"
+    Given I have a test directory
+    And I have a "test/index.html" file that contains "some other stuff"
+    When I run jekyll
+    Then the _site/test directory should exist
+    And I should see "some other stuff" in "_site/test/index.html"

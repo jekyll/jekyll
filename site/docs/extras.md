@@ -9,86 +9,6 @@ permalink: /docs/extras/
 There are a number of (optional) extra features that Jekyll supports that you
 may want to install, depending on how you plan to use Jekyll.
 
-## Pygments
-
-If you want syntax highlighting via the `{% raw %}{% highlight %}{% endraw %}`
-tag in your posts, you’ll need to install [Pygments](http://pygments.org/).
-
-### Installing Pygments on OSX
-
-Mac OS X (Leopard onwards) comes preinstalled with Python, so on just about any
-OS X machine you can install Pygments simply by running:
-
-{% highlight bash %}
-$ sudo easy_install Pygments
-{% endhighlight %}
-
-#### Installing Pygments using Homebrew
-
-Alternatively, you can install Pygments with
-[Homebrew](http://mxcl.github.com/homebrew/), an excellent package manager for
-OS X:
-
-{% highlight bash %}
-$ brew install python
-# export PATH="/usr/local/share/python:${PATH}"
-$ pip install pygments
-{% endhighlight %}
-
-<div class="note">
-  <h5>Homebrew's executable paths</h5>
-  <p>
-    Homebrew doesn’t symlink the executables for you. For the Homebrew default
-    Cellar location and Python 2.7, be sure to add `/usr/local/share/python` to
-    your `PATH`. For more information, check out
-    <a href="https://github.com/mxcl/homebrew/wiki/Homebrew-and-Python">the
-    Homebrew wiki</a>.
-  </p>
-</div>
-
-#### Installing Pygments using MacPorts
-
-If you use MacPorts, you can install Pygments by running:
-
-{% highlight bash %}
-$ sudo port install python25 py25-pygments
-{% endhighlight %}
-
-Seriously though, you should check out
-[Homebrew](http://mxcl.github.com/homebrew/)—it’s awesome.
-
-### Installing Pygments on Arch Linux
-
-You can install Pygments using the pacman package manager as follows:
-
-{% highlight bash %}
-$ sudo pacman -S python-pygments
-{% endhighlight %}
-
-Or to use python2 for Pygments:
-
-{% highlight bash %}
-$ sudo pacman -S python2-pygments
-{% endhighlight %}
-
-### Installing Pygments on Ubuntu and Debian
-
-{% highlight bash %}
-$ sudo apt-get install python-pygments
-{% endhighlight %}
-
-### Installing Pygments on RedHat, Fedora, and CentOS
-
-{% highlight bash %}
-$ sudo yum install python-pygments
-{% endhighlight %}
-
-### Installing Pygments on Gentoo
-
-{% highlight bash %}
-$ sudo emerge -av dev-python/pygments
-{% endhighlight %}
-
 ## LaTeX Support
 
 Maruku comes with optional support for LaTeX to PNG rendering via blahtex
@@ -99,7 +19,7 @@ fork](http://github.com/remi/maruku).
 ## RDiscount
 
 If you prefer to use [RDiscount](http://github.com/rtomayko/rdiscount) instead
-of [Maruku](http://maruku.rubyforge.org/) for markdown, just make sure you have
+of [Maruku](http://github.com/bhollis/maruku) for markdown, just make sure you have
 it installed:
 
 {% highlight bash %}

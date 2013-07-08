@@ -4,13 +4,12 @@ Before do
   Dir.chdir(TEST_DIR)
 end
 
-After do
-  Dir.chdir(File.expand_path("..", TEST_DIR))
-  FileUtils.rm_rf(TEST_DIR)
-end
-
 Given /^I have a blank site in "(.*)"$/ do |path|
   FileUtils.mkdir(path)
+end
+
+Given /^I do not have a "(.*)" directory$/ do |path|
+  File.directory?("#{TEST_DIR}/#{path}")
 end
 
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
@@ -31,14 +30,13 @@ Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   end
 end
 
-Given /^I have a (.*) layout that contains "(.*)"$/ do |layout, text|
-  File.open(File.join('_layouts', layout + '.html'), 'w') do |f|
-    f.write(text)
+Given /^I have an? (.*) (layout|theme) that contains "(.*)"$/ do |name, type, text|
+  folder = if type == 'layout'
+    '_layouts'
+  else
+    '_theme'
   end
-end
-
-Given /^I have a (.*) theme that contains "(.*)"$/ do |layout, text|
-  File.open(File.join('_theme', layout + '.html'), 'w') do |f|
+  File.open(File.join(folder, name + '.html'), 'w') do |f|
     f.write(text)
   end
 end
@@ -47,44 +45,33 @@ Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
 
-Given /^I have the following (draft|post)s?(?: (.*) "(.*)")?:$/ do |status, direction, folder, table|
+Given /^I have the following (draft|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
   table.hashes.each do |post|
-    title = post['title'].downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
-
-    if direction && direction == "in"
-      before = folder || '.'
-    elsif direction && direction == "under"
-      after = folder || '.'
-    end
-
+    title = slug(post['title'])
     ext = post['type'] || 'textile'
+    before, after = location(folder, direction)
 
     if "draft" == status
-      path = File.join(before || '.', '_drafts', after || '.', "#{title}.#{ext}")
-    else
-      format = if has_time_component?(post['date'])
-        '%Y-%m-%d %H:%M %z'
-      else
-        '%m/%d/%Y' # why even
-      end
-      parsed_date = DateTime.strptime(post['date'], format)
-      post['date'] = parsed_date.to_s
-      date = parsed_date.strftime('%Y-%m-%d')
-      path = File.join(before || '.', '_posts', after || '.', "#{date}-#{title}.#{ext}")
+      folder_post = '_drafts'
+      filename = "#{title}.#{ext}"
+    elsif "post" == status
+      parsed_date = Time.xmlschema(post['date']) rescue Time.parse(post['date'])
+      folder_post = '_posts'
+      filename = "#{parsed_date.strftime('%Y-%m-%d')}-#{title}.#{ext}"
     end
 
+    path = File.join(before, folder_post, after, filename)
+
     matter_hash = {}
-    %w(title layout tag tags category categories published author path).each do |key|
+    %w(title layout tag tags category categories published author path date).each do |key|
       matter_hash[key] = post[key] if post[key]
-    end
-    if "post" == status
-      matter_hash["date"] = post["date"] if post["date"]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
 
-    content = post['content']
-    if post['input'] && post['filter']
-      content = "{{ #{post['input']} | #{post['filter']} }}"
+    content = if post['input'] && post['filter']
+      "{{ #{post['input']} | #{post['filter']} }}"
+    else
+      post['content']
     end
 
     File.open(path, 'w') do |f|
@@ -130,6 +117,10 @@ When /^I run jekyll with drafts$/ do
   run_jekyll(:drafts => true)
 end
 
+When /^I call jekyll new with test_blank --blank$/ do
+  call_jekyll_new(:path => "test_blank", :blank => true)
+end
+
 When /^I debug jekyll$/ do
   run_jekyll(:debug => true)
 end
@@ -138,6 +129,10 @@ When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
   File.open(file, 'a') do |f|
     f.write(text)
   end
+end
+
+When /^I delete the file "(.*)"$/ do |file|
+  File.delete(file)
 end
 
 Then /^the (.*) directory should exist$/ do |dir|

@@ -71,8 +71,6 @@ module Jekyll
     #
     # Returns nothing.
     def setup
-      require 'classifier' if self.lsi
-
       # Check that the destination dir isn't the source dir or a directory
       # parent to the source dir.
       if self.source =~ /^#{self.dest}/
@@ -233,6 +231,7 @@ module Jekyll
       end
 
       self.pages.each do |page|
+        relative_permalinks_deprecation_method if page.uses_relative_permalinks
         page.render(self.layouts, payload)
       end
 
@@ -273,7 +272,11 @@ module Jekyll
       files.each { |file| dirs << File.dirname(file) }
       files.merge(dirs)
 
-      obsolete_files = dest_files - files
+      # files that are replaced by dirs should be deleted
+      files_to_delete = Set.new
+      dirs.each { |dir| files_to_delete << dir if File.file?(dir) }
+
+      obsolete_files = dest_files - files + files_to_delete
       FileUtils.rm_rf(obsolete_files.to_a)
     end
 
@@ -419,6 +422,19 @@ module Jekyll
       self.posts << post
       post.categories.each { |c| self.categories[c] << post }
       post.tags.each { |c| self.tags[c] << post }
+    end
+
+    def relative_permalinks_deprecation_method
+      if config['relative_permalinks'] && !@deprecated_relative_permalinks
+        $stderr.puts # Places newline after "Generating..."
+        Jekyll.logger.warn "Deprecation:", "Starting in 1.1, permalinks for pages" +
+                                            " in subfolders must be relative to the" +
+                                            " site source directory, not the parent" +
+                                            " directory. Check http://jekyllrb.com/docs/upgrading/"+
+                                            " for more info."
+        $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
+        @deprecated_relative_permalinks = true
+      end
     end
   end
 end

@@ -18,14 +18,14 @@ module Jekyll
 
     def self.no_subcommand(args)
       if args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
-        Jekyll::Logger.error "Deprecation:", "Jekyll now uses subcommands instead of just \
+        Jekyll.logger.error "Deprecation:", "Jekyll now uses subcommands instead of just \
                             switches. Run `jekyll help' to find out more."
       end
     end
 
     def self.deprecation_message(args, deprecated_argument, message)
       if args.include?(deprecated_argument)
-        Jekyll::Logger.error "Deprecation:", message
+        Jekyll.logger.error "Deprecation:", message
       end
     end
   end

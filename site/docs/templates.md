@@ -39,6 +39,20 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class='name'><strong>Date to RFC-822 Format</strong></p>
+        <p>Convert a Date into the RFC-822 format used for RSS feeds.</p>
+      </td>
+      <td class='align-center'>
+        <p>
+         <code class='filter'>{% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class='output'>Mon, 17 Nov 2008 13:07:54 -0800</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class='name'><strong>Date to String</strong></p>
         <p>Convert a date to short format.</p>
       </td>
@@ -90,6 +104,22 @@ common tasks easier.
         </p>
         <p>
           <code class='output'>foo%2Cbar%3Bbaz%3F</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class='name'><strong>URI Escape</strong></p>
+        <p>
+          URI escape a string.
+        </p>
+      </td>
+      <td class='align-center'>
+        <p>
+         <code class='filter'>{% raw %}{{ “'foo, bar \\baz?'” | uri_escape }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class='output'>foo,%20bar%20%5Cbaz?</code>
         </p>
       </td>
     </tr>
@@ -166,9 +196,8 @@ root of your source directory. This will embed the contents of
 
 Jekyll has built in support for syntax highlighting of [over 100
 languages](http://pygments.org/languages/) thanks to
-[Pygments](http://pygments.org/). In order to take advantage of this you’ll need
-to have Pygments installed, and the `pygmentize` binary must be in your `$PATH`.
-When you run Jekyll, make sure you run it with [Pygments enabled](../extras).
+[Pygments](http://pygments.org/). To use Pygments, you must have Python installed on your
+system and set `pygments` to `true` in your site's configuration file.
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -234,3 +263,31 @@ You can also use this tag to create a link to a post in Markdown as follows:
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
 {% endraw %}
 {% endhighlight %}
+
+### Gist
+
+Use the `gist` tag to easily embed a GitHub Gist onto your site:
+
+{% highlight text %}
+{% raw %}
+{% gist 5555251 %}
+{% endraw %}
+{% endhighlight %}
+
+You may also optionally specify the filename in the gist to display:
+
+{% highlight text %}
+{% raw %}
+{% gist 5555251 result.md %}
+{% endraw %}
+{% endhighlight %}
+
+The `gist` tag also works with private gists:
+
+{% highlight text %}
+{% raw %}
+{% gist 931c1c8d465a04042403 %}
+{% endraw %}
+{% endhighlight %}
+
+The private gist syntax also supports filenames.

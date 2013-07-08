@@ -66,7 +66,7 @@ module Jekyll
 
     def populate_categories
       if self.categories.empty?
-        self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.downcase}
+        self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.to_s.downcase}
       end
       self.categories.flatten!
     end
@@ -234,29 +234,7 @@ module Jekyll
     #
     # Returns an Array of related Posts.
     def related_posts(posts)
-      return [] unless posts.size > 1
-
-      if self.site.lsi
-        build_index
-
-        related = self.class.lsi.find_related(self.content, 11)
-        related - [self]
-      else
-        (posts - [self])[0..9]
-      end
-    end
-
-    def build_index
-      self.class.lsi ||= begin
-        puts "Starting the classifier..."
-        lsi = Classifier::LSI.new(:auto_rebuild => false)
-        $stdout.print("  Populating LSI... "); $stdout.flush
-        self.site.posts.each { |x| $stdout.print("."); $stdout.flush; lsi.add_item(x) }
-        $stdout.print("\n  Rebuilding LSI index... ")
-        lsi.build_index
-        puts ""
-        lsi
-      end
+      Jekyll::RelatedPosts.new(self).build
     end
 
     # Add any necessary layouts to this post.

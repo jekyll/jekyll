@@ -5,6 +5,9 @@
       <li class="{% if page.title == "Welcome" %}current{% endif %}">
         <a href="{{ site.url }}/docs/home">Welcome</a>
       </li>
+      <li class="{% if page.title == "Quick-start guide" %}current{% endif %}">
+        <a href="{{ site.url }}/docs/quickstart">Quick-start guide</a>
+      </li>
       <li class="{% if page.title == "Installation" %}current{% endif %}">
         <a href="{{ site.url }}/docs/installation">Installation</a>
       </li>
@@ -65,9 +68,6 @@
     </ul>
     <h4>Miscellaneous</h4>
     <ul>
-      <li class="{% if page.title == "Contributing" %}current{% endif %}">
-        <a href="{{ site.url }}/docs/contributing">Contributing</a>
-      </li>
       <li class="{% if page.title == "Troubleshooting" %}current{% endif %}">
         <a href="{{ site.url }}/docs/troubleshooting">Troubleshooting</a>
       </li>
@@ -79,6 +79,15 @@
       </li>
       <li class="{% if page.title == "Upgrading" %}current{% endif %}">
         <a href="{{ site.url }}/docs/upgrading">Upgrading</a>
+      </li>
+    </ul>
+    <h4>Meta</h4>
+    <ul>
+      <li class="{% if page.title == "Contributing" %}current{% endif %}">
+        <a href="{{ site.url }}/docs/contributing">Contributing</a>
+      </li>
+      <li class="{% if page.title == "History" %}current{% endif %}">
+        <a href="{{ site.url }}/docs/history">History</a>
       </li>
     </ul>
   </aside>

@@ -17,7 +17,7 @@ default_command :help
 global_option '-s', '--source [DIR]', 'Source directory (defaults to ./)'
 global_option '-d', '--destination [DIR]', 'Destination directory (defaults to ./_site)'
 global_option '--safe', 'Safe mode (defaults to false)'
-global_option '--plugins PLUGINS_DIR1[,PLUGINS_DIR2[,...]]', Array, 'Plugins directory (defaults to ./_plugins)'
+global_option '-p', '--plugins PLUGINS_DIR1[,PLUGINS_DIR2[,...]]', Array, 'Plugins directory (defaults to ./_plugins)'
 global_option '--layouts', 'Layouts directory (defaults to ./_layouts)'
 
 # Option names don't always directly match the configuration value we'd like.
@@ -37,8 +37,11 @@ command :new do |c|
   c.syntax = 'jekyll new PATH'
   c.description = 'Creates a new Jekyll site scaffold in PATH'
 
+  c.option '--force', 'Force creation even if PATH already exists'
+  c.option '--blank', 'Creates scaffolding but with empty files'
+
   c.action do |args, options|
-    Jekyll::Commands::New.process(args)
+    Jekyll::Commands::New.process(args, options.__hash__)
   end
 end
 
@@ -71,8 +74,8 @@ command :serve do |c|
   c.option '--lsi', 'Use LSI for improved related posts'
   c.option '--drafts', 'Render posts in the _drafts folder'
 
-  c.option '-p', '--port [PORT]', 'Port to listen on'
-  c.option '-h', '--host [HOST]', 'Host to bind to'
+  c.option '-P', '--port [PORT]', 'Port to listen on'
+  c.option '-H', '--host [HOST]', 'Host to bind to'
   c.option '-b', '--baseurl [URL]', 'Base URL'
 
   c.action do |args, options|
@@ -85,6 +88,20 @@ command :serve do |c|
   end
 end
 alias_command :server, :serve
+
+command :doctor do |c|
+  c.syntax = 'jekyll doctor'
+  c.description = 'Search site and print specific deprecation warnings'
+
+  c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
+
+  c.action do |args, options|
+    options = normalize_options(options.__hash__)
+    options = Jekyll.configuration(options)
+    Jekyll::Commands::Doctor.process(options)
+  end
+end
+alias_command :hyde, :doctor
 
 command :import do |c|
   c.syntax = 'jekyll import <platform> [options]'

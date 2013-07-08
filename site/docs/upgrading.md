@@ -2,12 +2,18 @@
 layout: docs
 title: Upgrading
 prev_section: resources
+next_section: contributing
 permalink: /docs/upgrading/
 ---
 
 Upgrading from an older version of Jekyll? A few things have changed in 1.0
 that you'll want to know about.
 
+Before we dive in, go ahead and fetch the latest version of Jekyll:
+
+{% highlight bash %}
+$ gem update jekyll
+{% endhighlight %}
 
 <div class="note feature">
   <h5 markdown="1">Diving in</h5>
@@ -25,12 +31,48 @@ and `jekyll serve` to do the same. And if you want Jekyll to automatically
 rebuild each time a file changes, just add the `--watch` flag at the end.
 
 <div class="note info">
-  <h5 markdown="1">Watching and Serving</h5>
+  <h5>Watching and Serving</h5>
   <p markdown="1">With the new subcommands, the way sites are previewed locally
    changed a bit. Instead of specifying `server: true` in the site's
    configuration file, use `jekyll serve`. The same hold's true for
-   `watch: true`. Instead, use the `--watch` flag with either `jekyll serve`
+   `watch: true`. Instead, use the `&#45;&#45;watch` flag with either `jekyll serve`
     or `jekyll build`.</p>
+</div>
+
+### Absolute Permalinks
+
+In Jekyll v1.0, we introduced absolute permalinks for pages in subdirectories.
+Until v1.1, it is **opt-in**. Starting with v1.1, however, absolute permalinks
+will become **opt-out**, meaning Jekyll will default to using absolute permalinks
+instead of relative permalinks.
+
+* To use absolute permalinks, set `relative_permalinks: false` in your configuration file.
+* To continue using relative permalinks, set `relative_permalinks: true` in your configuration file.
+
+<div class="note warning" id="absolute-permalinks-warning">
+  <h5 markdown="1">Absolute permalinks will be default in v1.1 and on</h5>
+  <p markdown="1">
+    Starting with Jekyll v1.1.0, `relative_permalinks` will default to `false`,
+    meaning all pages will be built using the absolute permalink behaviour.
+    The switch will still exist until v2.0.
+  </p>
+</div>
+
+### Draft Posts
+
+Jekyll now lets you write draft posts, and allows you to easily preview how
+they will look prior to publishing. To start a draft, simply create a folder
+called `_drafts` in your site's source directory (e.g., alongside `_posts`),
+and add a new markdown file to it. To preview your new post, simply run the
+`jekyll serve` command with the `--drafts` flag.
+
+<div class="note info">
+  <h5 markdown="1">Drafts don't have dates</h5>
+  <p markdown="1">
+    Unlike posts, drafts don't have a date, since they haven't
+    been published yet. Rather than naming your draft something like
+    `2013-07-01-my-draft-post.md`, simply name the file what you'd like your
+    post to eventually be titled, here `my-draft-post.md`.</p>
 </div>
 
 ### Custom Config File
@@ -54,31 +96,30 @@ to one or more config files (comma-delimited, no spaces).
 * `--paginate`
 
 <div class="note info">
-  <h5 markdown="1">The `--config` explicitly specifies your configuration file(s)</h5>
-  <p markdown="1">If you use the `--config` flag, Jekyll will ignore your
-    `config.yml` file. Want to merge a custom configuration with the normal
+  <h5>The config flag explicitly specifies your configuration file(s)</h5>
+  <p markdown="1">If you use the `&#45;&#45;config` flag, Jekyll will ignore your
+    `&#95;config.yml` file. Want to merge a custom configuration with the normal
     configuration? No problem. Jekyll will accept more than one custom config
     file via the command line. Config files cascade from right to left, such
-    that if I run `jekyll serve --config config.yml,config-dev.yml`,
-    the values in the config files on the right (`config-dev.yml`) overwrite
-    those on the left (`config.yml`) when both contain the same key.</p>
+    that if I run `jekyll serve &#45;&#45;config &#95;config.yml,&#95;config-dev.yml`,
+    the values in the config files on the right (`&#95;config-dev.yml`) overwrite
+    those on the left (`&#95;config.yml`) when both contain the same key.</p>
 </div>
 
-### Draft posts
+### New Config File Options
 
-Jekyll now lets you write draft posts, and allows you to easily preview how
-they will look prior to publishing. To start a draft, simply create a folder
-called `_drafts` in your site's source directory (e.g., alongside `_posts`),
-and add a new markdown file to it. To preview your new post, simply run the
-`Jekyll serve` command with the `--drafts` flag.
+Jekyll 1.0 introduced several new config file options. Before you upgrade, you
+should check to see if any of these are present in your pre-1.0 config file, and
+if so, make sure that you're using them properly:
 
-<div class="note info">
-  <h5 markdown="1">Drafts don't have dates</h5>
-  <p markdown="1">Unlike posts, drafts don't have a date, since they haven't
-  been published yet. Rather than naming your draft something like
-  `2013-07-01-my-draft-post.md`, simply name the file what you'd like your
-  post to eventually be titled, here `my-draft-post.md`.</p>
-</div>
+* `excerpt_separator`
+* `host`
+* `include`
+* `keep_files`
+* `layouts`
+* `show_drafts`
+* `timezone`
+* `url`
 
 ### Baseurl
 

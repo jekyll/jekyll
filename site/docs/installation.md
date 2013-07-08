@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Installation
-prev_section: home
+prev_section: quickstart
 next_section: usage
 permalink: /docs/installation/
 ---
@@ -50,17 +50,16 @@ community can improve the experience for everyone.
 
 There are a number of (optional) extra features that Jekyll supports that you
 may want to install, depending on how you plan to use Jekyll. These extras
-include syntax highlighting of code snippets using
-[Pygments](http://pygments.org/), LaTeX support, and the use of alternative
-content rendering engines. Check out [the extras page](../extras) for more
-information.
+include LaTeX support, and the use of alternative content rendering engines.
+Check out [the extras page](../extras) for more information.
 
 <div class="note">
   <h5>ProTip™: Enable Syntax Highlighting</h5>
   <p>
     If you’re the kind of person who is using Jekyll, then chances are you’ll
     want to enable syntax highlighting using Pygments. You should really
-    <a href="../extras">check out how to do that</a> before you go any further.
+    <a href="../templates/#code_snippet_highlighting">check out how to do
+    that</a> before you go any further.
   </p>
 </div>
 

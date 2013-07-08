@@ -8,7 +8,13 @@ rvm:
   - 1.8.7
 script: bundle exec rake
 notifications:
-  irc: "irc.freenode.org#jekyll"
+  irc:
+    channels:
+      - "irc.freenode.org#jekyll"
+    #on_success: change
+    #on_failure: change
+    template:
+      - "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
   email:
     on_success: never
     on_failure: never

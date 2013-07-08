@@ -102,7 +102,7 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/about/", @page.dir
       end
     end
-        
+
     context "with specified layout of nil" do
       setup do
         @page = setup_page('sitemap.xml')
@@ -125,6 +125,15 @@ class TestPage < Test::Unit::TestCase
 
         assert File.directory?(dest_dir)
         assert File.exists?(File.join(dest_dir, 'contacts.html'))
+      end
+
+      should "write even when the folder name is plus and permalink has +" do
+        page = setup_page('+', 'foo.md')
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exists?(File.join(dest_dir, '+', 'plus+in+url'))
       end
 
       should "write properly without html extension" do
