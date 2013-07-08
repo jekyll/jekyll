@@ -17,6 +17,7 @@
   * Fix an issue with directories and permalinks that have a plus sign
     (+) in them (#1215)
   * Provide better error reporting when generating sites (#1253)
+  * Latest posts first in non-LSI `related_posts` (#1271)
 
 ### Development Fixes
   * Merge the theme and layout cucumber steps into one step (#1151)
