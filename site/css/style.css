@@ -126,7 +126,7 @@ nav li {
     text-align: right;
   }
 }
-@media (max-width: 720px){
+@media (max-width: 830px){
   .main-nav .show-on-mobiles {
     display: inline;
   }
