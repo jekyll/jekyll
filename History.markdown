@@ -2,6 +2,7 @@
 
 ### Major Enhancements
   * Add 'docs' subcommand to read Jekyll's docs when offline. (#1046)
+  * Support passing parameters to templates in 'include' tag (#1204)
 
 ### Minor Enhancements
   * Search the hierarchy of pagination path up to site root to determine template page for
