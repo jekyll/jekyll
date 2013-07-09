@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.executables = ["jekyll"]
 
   s.rdoc_options = ["--charset=UTF-8"]
-  s.extra_rdoc_files = %w[README.textile LICENSE]
+  s.extra_rdoc_files = %w[README.markdown LICENSE]
 
   s.add_runtime_dependency('liquid', "~> 2.3")
   s.add_runtime_dependency('classifier', "~> 1.3")
@@ -49,11 +49,11 @@ Gem::Specification.new do |s|
 
   # = MANIFEST =
   s.files = %w[
-    CONTRIBUTING.md
+    CONTRIBUTING.markdown
     Gemfile
     History.markdown
     LICENSE
-    README.textile
+    README.markdown
     Rakefile
     bin/jekyll
     cucumber.yml
