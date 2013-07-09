@@ -1,6 +1,8 @@
 ## HEAD
 
 ### Major Enhancements
+  * Add 'docs' subcommand to read Jekyll's docs when offline. (#1046)
+
 ### Minor Enhancements
   * Search the hierarchy of pagination path up to site root to determine template page for
     pagination. (#1198)
