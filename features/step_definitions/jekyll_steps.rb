@@ -91,6 +91,12 @@ Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
   end
 end
 
+Given /^I have a metadata file "(.*)" with "(.*)" set to "(.*)"$/ do |file, key, value|
+  File.open(file, 'w') do |f|
+    f.write("#{key}: #{value}\n")
+  end
+end
+
 Given /^I have a configuration file with:$/ do |table|
   File.open('_config.yml', 'w') do |f|
     table.hashes.each do |row|
