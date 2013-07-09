@@ -145,12 +145,6 @@ module Jekyll
 
       self.posts.sort!
 
-      # limit the posts if :limit_posts option is set
-      if limit_posts > 0
-        limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
-        self.posts = self.posts[-limit, limit]
-      end
-
       entries.each do |f|
         f_abs = File.join(base, f)
         f_rel = File.join(dir, f)
@@ -180,7 +174,8 @@ module Jekyll
       entries = get_entries(dir, '_posts')
 
       # first pass processes, but does not yet render post content
-      entries.each do |f|
+      entries.reverse.each do |f|
+        break if limit_posts > 0 && self.posts.size >= limit_posts
         if Post.valid?(f)
           post = Post.new(self, self.source, dir, f)
 
