@@ -192,6 +192,18 @@ Jekyll expects all include files to be placed in an `_includes` directory at the
 root of your source directory. This will embed the contents of
 `<source>/_includes/sig.md` into the calling file.
 
+You can also pass parameters to an include:
+
+{% highlight ruby %}
+{% raw %}{% include sig.textile param="value" %}{% endraw %}
+{% endhighlight %}
+
+These parameters are available via Liquid in the include:
+
+{% highlight ruby %}
+{% raw %}{{ include.param }}{% endraw %}
+{% endhighlight %}
+
 ### Code snippet highlighting
 
 Jekyll has built in support for syntax highlighting of [over 100
