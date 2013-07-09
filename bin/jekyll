@@ -103,6 +103,25 @@ command :doctor do |c|
 end
 alias_command :hyde, :doctor
 
+command :docs do |c|
+  c.syntax = 'jekyll docs'
+  c.description = "Launch local server with docs for Jekyll v#{Jekyll::VERSION}"
+
+  c.option '-p', '--port [PORT]', 'Port to listen on'
+  c.option '-u', '--host [HOST]', 'Host to bind to'
+
+  c.action do |args, options|
+    options = normalize_options(options.__hash__)
+    options = Jekyll.configuration(options).merge({
+      'source' => File.expand_path("../site", File.dirname(__FILE__)),
+      'destination' => File.expand_path("../site/_site", File.dirname(__FILE__))
+    })
+    puts options
+    Jekyll::Commands::Build.process(options)
+    Jekyll::Commands::Serve.process(options)
+  end
+end
+
 command :import do |c|
   c.syntax = 'jekyll import <platform> [options]'
   c.description = 'Import your old blog to Jekyll'
