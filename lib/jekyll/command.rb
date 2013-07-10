@@ -71,6 +71,7 @@ module Jekyll
         c.option 'show_drafts',  '-D', '--drafts', 'Render posts in the _drafts folder'
         c.option 'quiet',   '-q', '--quiet', 'Silence output.'
         c.option 'verbose', '-V', '--verbose', 'Print verbose output.'
+        c.option 'full-rebuild', '--full-rebuild', 'Force the entire site to be rebuilt'
       end
 
     end
