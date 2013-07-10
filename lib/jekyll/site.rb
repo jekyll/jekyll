@@ -20,7 +20,6 @@ module Jekyll
       self.source = File.expand_path(config['source'])
       self.destination = File.expand_path(config['destination'])
       self.plugins = plugins_path
-      self.permalink_style = config['permalink'].to_sym
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
