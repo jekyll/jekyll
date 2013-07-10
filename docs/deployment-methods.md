@@ -97,7 +97,7 @@ If you want to maintain Jekyll inside your existing Rails app, [Jekyll-Admin](ht
 ## Amazon S3
 
 If you want to host your site in Amazon S3, you can do so with
-[s3-website](https://github.com/laurilehmijoki/s3_website) application. It will
+[s3_website](https://github.com/laurilehmijoki/s3_website) application. It will
 push your site to Amazon S3 where it can be served like any web server,
 dynamically scaling to almost unlimited traffic. This approach has the
 benefit of being about the cheapest hosting option available for
