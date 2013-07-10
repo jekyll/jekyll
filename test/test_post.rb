@@ -2,12 +2,13 @@ require 'helper'
 
 class TestPost < Test::Unit::TestCase
   def setup_post(file)
+    path = File.join(source_dir, '_posts', file)
     @site.source = source_dir
-    Post.new(@site, '', file)
+    Post.new(@site, path)
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
+    layouts = { "default" => Layout.new(@site, File.join(source_dir('_layouts'), "simple.html"))}
     post.render(layouts, {"site" => {"posts" => []}})
   end
 
@@ -97,7 +98,7 @@ class TestPost < Test::Unit::TestCase
       should "respect permalink in yaml front matter" do
         file = "2008-12-03-permalinked-post.textile"
         @post.process(file)
-        @post.read_yaml(@source, file)
+        @post.read_yaml(File.join(@source, file))
 
         assert_equal "my_category/permalinked-post", @post.permalink
         assert_equal "/my_category", @post.dir
@@ -121,7 +122,7 @@ class TestPost < Test::Unit::TestCase
           @source = source_dir('win/_posts')
         end
         should "read yaml front-matter" do
-          @post.read_yaml(@source, @real_file)
+          @post.read_yaml(File.join(@source, @real_file))
 
           assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
           assert_equal "This is the content", @post.content
@@ -133,7 +134,7 @@ class TestPost < Test::Unit::TestCase
           @real_file = "2010-01-08-triple-dash.markdown"
         end
         should "consume the embedded dashes" do
-          @post.read_yaml(@source, @real_file)
+          @post.read_yaml(File.join(@source, @real_file))
 
           assert_equal({"title" => "Foo --- Bar"}, @post.data)
           assert_equal "Triple the fun!", @post.content
@@ -290,7 +291,7 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "read yaml front-matter" do
-        @post.read_yaml(@source, @real_file)
+        @post.read_yaml(File.join(@source, @real_file))
 
         assert_equal({"title" => "Foo Bar", "layout" => "default"}, @post.data)
         assert_equal "h1. {{ page.title }}\n\nBest *post* ever", @post.content
@@ -298,7 +299,7 @@ class TestPost < Test::Unit::TestCase
 
       should "transform textile" do
         @post.process(@real_file)
-        @post.read_yaml(@source, @real_file)
+        @post.read_yaml(File.join(@source, @real_file))
         @post.transform
 
         assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.content
@@ -310,6 +311,7 @@ class TestPost < Test::Unit::TestCase
           @post = setup_post(file)
           @post.process(file)
           @post.read_yaml(@source, file)
+          @post.read_yaml(File.join(@source, file))
           do_render(@post)
         end
 
@@ -335,7 +337,7 @@ class TestPost < Test::Unit::TestCase
             @post.site.config['excerpt_separator'] = "\n---\n"
 
             @post.process(file)
-            @post.read_yaml(@source, file)
+            @post.read_yaml(File.join(@source, file))
             @post.transform
           end
 
@@ -566,8 +568,8 @@ class TestPost < Test::Unit::TestCase
 
     should "generate categories and topics" do
       @site.source = File.join(File.dirname(__FILE__), *%w[source])
-      post = Post.new(@site, 'foo', 'bar/2008-12-12-topical-post.textile')
-      assert_equal ['foo'], post.categories
+      post = Post.new(@site, File.join(@site.source, 'foo', '_posts', 'bar/2008-12-12-topical-post.textile'))
+      assert_equal ['foo', 'bar'], post.categories
     end
   end
 

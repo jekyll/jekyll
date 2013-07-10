@@ -22,14 +22,13 @@ module Jekyll
     # base - The String path to the source.
     # dir  - The String path between the source and the file.
     # name - The String filename of the file.
-    def initialize(site, dir, name)
+    def initialize(site, path)
       @site = site
-      @base = site.source
-      @dir  = dir
-      @name = name
+      @dir  = File.dirname(path).sub(site.source, '')
+      @name = File.basename(path)
 
       process(name)
-      read_yaml(File.join(@base, dir), name)
+      read_yaml(path)
     end
 
     # The generated directory into which the page will be placed

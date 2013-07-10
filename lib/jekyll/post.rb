@@ -35,7 +35,7 @@ module Jekyll
 
     attr_accessor :site
     attr_accessor :data, :extracted_excerpt, :content, :output, :ext
-    attr_accessor :date, :slug, :tags, :categories
+    attr_accessor :date, :slug, :published, :tags, :categories, :file_path
 
     attr_reader :name
 
@@ -46,15 +46,15 @@ module Jekyll
     # name       - The String filename of the post file.
     #
     # Returns the new Post.
-    def initialize(site, dir, name)
+    def initialize(site, path)
       @site = site
-      @dir = dir
-      @base = containing_dir(site.source, dir)
-      @name = name
+      @dir  = File.dirname(path).sub(site.source, '').sub(/(_posts|_drafts)/, '')
+      @name = File.basename(path)
+      @file_path = path
 
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
-      process(name)
-      read_yaml(@base, name)
+      self.categories = @dir.downcase.split('/').reject { |x| x.empty? }
+      process(@name)
+      read_yaml(path)
 
       if data.has_key?('date')
         self.date = Time.parse(data["date"].to_s)
@@ -98,8 +98,8 @@ module Jekyll
     # name - The String filename of the file.
     #
     # Returns nothing.
-    def read_yaml(base, name)
-      super(base, name)
+    def read_yaml(path)
+      super(path)
       self.extracted_excerpt = extract_excerpt
     end
 

@@ -10,36 +10,39 @@ class TestConvertible < Test::Unit::TestCase
     end
 
     should "parse the front-matter correctly" do
-      ret = @convertible.read_yaml(@base, 'front_matter.erb')
+      path = File.join(@base, 'front_matter.erb')
+      ret = @convertible.read_yaml(path)
       assert_equal({'test' => 'good'}, ret)
     end
 
     should "not parse if the front-matter is not at the start of the file" do
-      ret = @convertible.read_yaml(@base, 'broken_front_matter1.erb')
+      path = File.join(@base, 'broken_front_matter1.erb')
+      ret = @convertible.read_yaml(path)
       assert_equal({}, ret)
     end
 
     should "not parse if there is syntax error in front-matter" do
-      name = 'broken_front_matter2.erb'
+      path = File.join(@base, 'broken_front_matter2.erb')
       out = capture_stdout do
-        ret = @convertible.read_yaml(@base, name)
+        ret = @convertible.read_yaml(path)
         assert_equal({}, ret)
       end
       assert_match(/YAML Exception|syntax error|Error reading file/, out)
-      assert_match(/#{File.join(@base, name)}/, out)
+      assert_match(/#{path}/, out)
     end
 
     should "not allow ruby objects in yaml" do
+      path = File.join(@base, 'exploit_front_matter.erb')
       out = capture_stdout do
-        @convertible.read_yaml(@base, 'exploit_front_matter.erb')
+        @convertible.read_yaml(path)
       end
       assert_no_match /undefined class\/module DoesNotExist/, out
     end
 
     should "not parse if there is encoding error in file" do
-      name = 'broken_front_matter3.erb'
+      path = File.join(@base, 'broken_front_matter3.erb')
       out = capture_stdout do
-        ret = @convertible.read_yaml(@base, name, :encoding => 'utf-8')
+        ret = @convertible.read_yaml(path, :encoding => 'utf-8')
         assert_equal({}, ret)
       end
       assert_match(/invalid byte sequence in UTF-8/, out)

@@ -117,77 +117,39 @@ module Jekyll
       end
     end
 
-    # Read Site data from disk and load it into internal data structures.
+    # Recursively traverse source directory to find posts, pages, layouts 
+    # and static filesthat will become part of the site according to the rules
+    # in filter_entries.
     #
     # Returns nothing.
     def read
-      self.layouts = LayoutReader.new(self).read
-      read_directories
-      read_data(config['data_source'])
-    end
-
-    # Recursively traverse directories to find posts, pages and static files
-    # that will become part of the site according to the rules in
-    # filter_entries.
-    #
-    # dir - The String relative path of the directory to read. Default: ''.
-    #
-    # Returns nothing.
-    def read_directories(dir = '')
-      base = File.join(source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
-
-      read_posts(dir)
-      read_drafts(dir) if show_drafts
+      filter_entries(Dir["#{source}/**/{*,.*}"]).each do |path|
+        if File.directory?(path)
+          next
+        elsif path =~ /_posts/
+          if Post.valid?(File.basename(path))
+            post = Post.new(self, path) if Post.valid?(path)
+            self.posts << post if post.published && (self.future || post.date <= self.time)
+          end
+        elsif show_drafts && path =~ /_drafts/
+          if Draft.valid?(File.basename(path))
+            draft = Draft.new(self, path)
+            self.posts << draft if draft.published && (self.future || draft.date <= self.time)
+          end
+        elsif path =~ /#{config['layouts']}/
+          ext = File.extname(path)
+          name = File.basename(path, ext)
+          layouts[name] = Layout.new(self, path)
+        elsif path.sub(source, '') =~ /\/_/
+          next
+        elsif has_yaml_header?(path)
+          pages << Page.new(self, path)
+        else
+          static_files << StaticFile.new(self, path)
+        end
+      end
       posts.sort!
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
-
-      entries.each do |f|
-        f_abs = File.join(base, f)
-        if File.directory?(f_abs)
-          f_rel = File.join(dir, f)
-          read_directories(f_rel) unless destination.sub(/\/$/, '') == f_abs
-        elsif has_yaml_header?(f_abs)
-          page = Page.new(self, dir, f)
-          pages << page if page.published?
-        else
-          static_files << StaticFile.new(self, dir, f)
-        end
-      end
-
-      pages.sort_by!(&:name)
-    end
-
-    # Read all the files in <source>/<dir>/_posts and create a new Post
-    # object with each one.
-    #
-    # dir - The String relative path of the directory to read.
-    #
-    # Returns nothing.
-    def read_posts(dir)
-      posts = read_content(dir, '_posts', Post)
-
-      posts.each do |post|
-        if Post.valid?(post)
-          post = Post.new(self, dir, f)
-        end
-      end
-   end
-
-    # Read all the files in <source>/<dir>/_drafts and create a new Post
-    # object with each one.
-    #
-    # dir - The String relative path of the directory to read.
-    #
-    # Returns nothing.
-    def read_drafts(dir)
-      drafts = read_content(dir, '_drafts', Draft)
-
-      drafts.each do |draft|
-        if Draft.valid?(f)
-          draft = Draft.new(self, dir, f)
-        end
-      end
     end
 
     def read_content(dir, magic_dir, klass)
@@ -323,6 +285,14 @@ module Jekyll
     # Returns the Array of filtered entries.
     def filter_entries(entries, base_directory = nil)
       EntryFilter.new(self, base_directory).filter(entries)
+    end
+
+    def filter_exclude?(entry)
+      exclude.glob_include?(entry.sub("#{source}/", ''))
+    end
+
+    def filter_include?(entry)
+      include.glob_include?(entry.sub("#{source}/", ''))
     end
 
     # Get the implementation class for the given Converter.
