@@ -21,9 +21,15 @@ module Jekyll
       self.destination = File.expand_path(config['destination'])
       self.plugins = plugins_path
 
+<<<<<<< HEAD
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
+      if limit_posts < 0
+        raise ArgumentError, "limit_posts must be a non-negative number"
+      end
+
+      ensure_not_in_dest
       reset
       setup
     end
@@ -52,18 +58,12 @@ module Jekyll
       self.categories = Hash.new { |hash, key| hash[key] = [] }
       self.tags = Hash.new { |hash, key| hash[key] = [] }
       self.data = {}
-
-      if limit_posts < 0
-        raise ArgumentError, "limit_posts must be a non-negative number"
-      end
     end
 
     # Load necessary libraries, plugins, converters, and generators.
     #
     # Returns nothing.
     def setup
-      ensure_not_in_dest
-
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
       unless safe
