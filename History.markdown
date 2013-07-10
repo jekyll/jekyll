@@ -61,6 +61,7 @@
   * Update the GitHub Pages documentation regarding relative URLs
     (#1291)
   * Update the S3 deployment documentation (#1294)
+  * Add suggestion for Xcode CLT install to troubleshooting page in docs (#1296)
 
 ### Development Fixes
 
