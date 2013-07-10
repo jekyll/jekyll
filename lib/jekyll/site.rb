@@ -1,7 +1,7 @@
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :categories, :exclude, :include, :source, :dest, :lsi, :highlighter,
+                  :categories, :exclude, :include, :source, :destination, :lsi, :highlighter,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
 
@@ -18,7 +18,7 @@ module Jekyll
       end
 
       self.source = File.expand_path(config['source'])
-      self.dest = File.expand_path(config['destination'])
+      self.destination = File.expand_path(config['destination'])
       self.plugins = plugins_path
       self.permalink_style = config['permalink'].to_sym
 
@@ -84,7 +84,7 @@ module Jekyll
     # Check that the destination dir isn't the source dir or a directory
     # parent to the source dir.
     def ensure_not_in_dest
-      dest_pathname = Pathname.new(dest)
+      dest_pathname = Pathname.new(destination)
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
@@ -148,7 +148,7 @@ module Jekyll
         f_abs = File.join(base, f)
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
-          read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
+          read_directories(f_rel) unless self.destination.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
           pages << page if page.published?
@@ -254,7 +254,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item| item.write(dest) }
+      each_site_file { |item| item.write(self.destination) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.

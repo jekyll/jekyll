@@ -97,7 +97,7 @@ class TestSite < Test::Unit::TestCase
 
       @site.process
       some_static_file = @site.static_files[0].path
-      dest = File.expand_path(@site.static_files[0].destination(@site.dest))
+      dest = File.expand_path(@site.static_files[0].destination(@site.destination))
       mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
 
       # need to sleep because filesystem timestamps have best resolution in seconds
@@ -126,7 +126,7 @@ class TestSite < Test::Unit::TestCase
 
       @site.process
       some_static_file = @site.static_files[0].path
-      dest = File.expand_path(@site.static_files[0].destination(@site.dest))
+      dest = File.expand_path(@site.static_files[0].destination(@site.destination))
       mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
 
       # need to sleep because filesystem timestamps have best resolution in seconds
