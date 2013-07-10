@@ -60,8 +60,20 @@ module Jekyll
         self.date = Time.parse(data["date"].to_s)
       end
 
+      published = self.published?
+
       populate_categories
       populate_tags
+
+      site.aggregate_post_info(self) if self.published && (site.future || self.date <= site.time)
+    end
+
+    def published?
+      if self.data.has_key?('published') && self.data['published'] == false
+        false
+      else
+        true
+      end
     end
 
     def populate_categories

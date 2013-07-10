@@ -168,8 +168,8 @@ module Jekyll
       posts = read_content(dir, '_posts', Post)
 
       posts.each do |post|
-        if post.published? && (future || post.date <= time)
-          aggregate_post_info(post)
+        if Post.valid?(post)
+          post = Post.new(self, source, dir, f)
         end
       end
    end
@@ -184,7 +184,9 @@ module Jekyll
       drafts = read_content(dir, '_drafts', Draft)
 
       drafts.each do |draft|
-        aggregate_post_info(draft)
+        if Draft.valid?(f)
+          draft = Draft.new(self, source, dir, f)
+        end
       end
     end
 
