@@ -36,6 +36,12 @@ On OSX, you may need to update RubyGems:
 sudo gem update --system
 {% endhighlight %}
 
+- If you still have issues, you may need to [use XCode to install Command Line Tools](http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/) that will allow you to install native gems using 
+
+{% highlight bash %}
+sudo gem install jekyll
+{% endhighlight %}
+
 To install RubyGems on Gentoo:
 
 {% highlight bash %}
