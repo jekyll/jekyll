@@ -58,6 +58,9 @@
   * Add `jekyll-timeago` to list of third-party plugins. (#1260)
   * Add `jekyll-swfobject` to list of third-party plugins. (#1263)
   * Add `jekyll-picture-tag` to list of third-party plugins. (#1280)
+  * Update the GitHub Pages documentation regarding relative URLs
+    (#1291)
+  * Update the S3 deployment documentation (#1294)
 
 ### Development Fixes
 
