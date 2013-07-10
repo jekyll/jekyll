@@ -117,6 +117,18 @@ module Jekyll
       do_layout(payload, layouts)
     end
 
+    def relative_permalinks_deprecation_method
+      if config['relative_permalinks'] && has_relative_page?
+        $stderr.puts # Places newline after "Generating..."
+        Jekyll.logger.warn "Deprecation:", "Starting in 2.0, permalinks for pages" +
+                                            " in subfolders must be relative to the" +
+                                            " site source directory, not the parent" +
+                                            " directory. Check http://jekyllrb.com/docs/upgrading/"+
+                                            " for more info."
+        $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
+      end
+    end
+
     # The path to the source file
     #
     # Returns the path to the source file
