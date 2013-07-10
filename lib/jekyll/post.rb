@@ -46,10 +46,10 @@ module Jekyll
     # name       - The String filename of the post file.
     #
     # Returns the new Post.
-    def initialize(site, source, dir, name)
+    def initialize(site, dir, name)
       @site = site
       @dir = dir
-      @base = containing_dir(source, dir)
+      @base = containing_dir(site.source, dir)
       @name = name
 
       self.categories = dir.downcase.split('/').reject { |x| x.empty? }

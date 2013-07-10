@@ -43,7 +43,7 @@ module Jekyll
         (1..pages).each do |num_page|
           pager = Pager.new(site, num_page, all_posts, pages)
           if num_page > 1
-            newpage = Page.new(site, site.source, page.dir, page.name)
+            newpage = Page.new(site, page.dir, page.name)
             newpage.pager = pager
             newpage.dir = Pager.paginate_path(site, num_page)
             site.pages << newpage

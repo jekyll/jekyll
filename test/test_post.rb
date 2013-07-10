@@ -2,7 +2,8 @@ require 'helper'
 
 class TestPost < Test::Unit::TestCase
   def setup_post(file)
-    Post.new(@site, source_dir, '', file)
+    @site.source = source_dir
+    Post.new(@site, '', file)
   end
 
   def do_render(post)
@@ -564,7 +565,8 @@ class TestPost < Test::Unit::TestCase
     end
 
     should "generate categories and topics" do
-      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
+      @site.source = File.join(File.dirname(__FILE__), *%w[source])
+      post = Post.new(@site, 'foo', 'bar/2008-12-12-topical-post.textile')
       assert_equal ['foo'], post.categories
     end
   end

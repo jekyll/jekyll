@@ -4,7 +4,8 @@ class TestPage < Test::Unit::TestCase
   def setup_page(*args)
     dir, file = args
     dir, file = ['', dir] if file.nil?
-    @page = Page.new(@site, source_dir, dir, file)
+    @site.source = source_dir
+    @page = Page.new(@site, dir, file)
   end
 
   def do_render(page)

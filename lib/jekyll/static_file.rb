@@ -9,9 +9,9 @@ module Jekyll
     # base - The String path to the <source>.
     # dir  - The String path between <source> and the file.
     # name - The String filename of the file.
-    def initialize(site, base, dir, name)
+    def initialize(site, dir, name)
       @site = site
-      @base = base
+      @base = site.source
       @dir  = dir
       @name = name
     end

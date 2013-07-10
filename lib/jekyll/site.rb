@@ -148,10 +148,10 @@ module Jekyll
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless destination.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
-          page = Page.new(self, source, dir, f)
+          page = Page.new(self, dir, f)
           pages << page if page.published?
         else
-          static_files << StaticFile.new(self, source, dir, f)
+          static_files << StaticFile.new(self, dir, f)
         end
       end
 
@@ -169,7 +169,7 @@ module Jekyll
 
       posts.each do |post|
         if Post.valid?(post)
-          post = Post.new(self, source, dir, f)
+          post = Post.new(self, dir, f)
         end
       end
    end
@@ -185,7 +185,7 @@ module Jekyll
 
       drafts.each do |draft|
         if Draft.valid?(f)
-          draft = Draft.new(self, source, dir, f)
+          draft = Draft.new(self, dir, f)
         end
       end
     end
