@@ -6,7 +6,10 @@ next_section: sites
 permalink: /docs/troubleshooting/
 ---
 
-If you ever run into problems installing or using Jekyll, here’s a few tips that might be of help. If the problem you’re experiencing isn’t covered below, please [report an issue](https://github.com/mojombo/jekyll/issues/new) so the Jekyll community can make everyone’s experience better.
+If you ever run into problems installing or using Jekyll, here's a few tips
+that might be of help. If the problem you’re experiencing isn’t covered below,
+please [report an issue](https://github.com/mojombo/jekyll/issues/new) so the
+Jekyll community can make everyone’s experience better.
 
 ## Installation Problems
 
@@ -24,7 +27,8 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 sudo yum install ruby-devel
 {% endhighlight %}
 
-On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need to run the command with the following environment variable:
+On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need to run the
+command with the following environment variable:
 
 {% highlight bash %}
 RB_USER_INSTALL=true gem install jekyll
@@ -36,7 +40,9 @@ On OSX, you may need to update RubyGems:
 sudo gem update --system
 {% endhighlight %}
 
-- If you still have issues, you may need to [use XCode to install Command Line Tools](http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/) that will allow you to install native gems using 
+If you still have issues, you may need to [use XCode to install Command Line
+Tools](http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/)
+that will allow you to install native gems using the following command:
 
 {% highlight bash %}
 sudo gem install jekyll
@@ -53,7 +59,8 @@ DevKit](http://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
 ## Problems running Jekyll
 
-On Debian or Ubuntu, you may need to add /var/lib/gems/1.8/bin/ to your path in order to have the `jekyll` executable be available in your Terminal.
+On Debian or Ubuntu, you may need to add `/var/lib/gems/1.8/bin/` to your path
+in order to have the `jekyll` executable be available in your Terminal.
 
 ## Base-URL Problems
 
@@ -77,14 +84,16 @@ http://localhost:4000/blog
 
 ## Configuration problems
 
-
-The order of precedence for conflicting [configuration settings](../configuration) is as follows:
+The order of precedence for conflicting [configuration settings](../configuration)
+is as follows:
 
 1.  Command-line flags
 2.  Configuration file settings
 3.  Defaults
 
-That is: defaults are overridden by options specified in `_config.yml`, and flags specified at the command-line will override all other settings specified elsewhere.
+That is: defaults are overridden by options specified in `_config.yml`,
+and flags specified at the command-line will override all other settings
+specified elsewhere.
 
 ## Markup Problems
 
