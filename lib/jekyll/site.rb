@@ -147,7 +147,7 @@ module Jekyll
         f_abs = File.join(base, f)
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
-          read_directories(f_rel) unless self.destination.sub(/\/$/, '') == f_abs
+          read_directories(f_rel) unless destination.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
           pages << page if page.published?
@@ -253,7 +253,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item| item.write(self.destination) }
+      each_site_file { |item| item.write(destination) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
