@@ -51,8 +51,7 @@ module Jekyll
     def reset
       self.time = (config['time'] ? Time.parse(config['time'].to_s) : Time.now)
       self.layouts = {}
-      self.posts = []
-      self.pages = []
+      self.files = []
       self.static_files = []
       self.categories = Hash.new { |hash, key| hash[key] = [] }
       self.tags = Hash.new { |hash, key| hash[key] = [] }
@@ -129,12 +128,12 @@ module Jekyll
         elsif path =~ /_posts/
           if Post.valid?(File.basename(path))
             post = Post.new(self, path) if Post.valid?(path)
-            self.posts << post if post.published && (self.future || post.date <= self.time)
+            files << post if post.published && (self.future || post.date <= self.time)
           end
         elsif show_drafts && path =~ /_drafts/
           if Draft.valid?(File.basename(path))
             draft = Draft.new(self, path)
-            self.posts << draft if draft.published && (self.future || draft.date <= self.time)
+            files << draft if draft.published && (self.future || draft.date <= self.time)
           end
         elsif path =~ /#{config['layouts']}/
           ext = File.extname(path)
@@ -143,40 +142,30 @@ module Jekyll
         elsif path.sub(source, '') =~ /\/_/
           next
         elsif has_yaml_header?(path)
-          pages << Page.new(self, path)
+          files << Page.new(self, path)
         else
-          static_files << StaticFile.new(self, path)
+          files << StaticFile.new(self, path)
         end
       end
       posts.sort!
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
     end
 
-    def read_content(dir, magic_dir, klass)
-      get_entries(dir, magic_dir).map do |entry|
-        klass.new(self, source, dir, entry) if klass.valid?(entry)
-      end.reject do |entry|
-        entry.nil?
-      end
+    def posts
+      files.select { |file| file.is_a?Post }.sort
     end
 
-    # Read and parse all yaml files under <source>/<dir>
-    #
-    # Returns nothing
-    def read_data(dir)
-      base = File.join(source, dir)
-      return unless File.directory?(base) && (!safe || !File.symlink?(base))
+    def posts=(posts)
+      files.delete_if { |file| file.is_a?Post }
+      files.concat(posts)
+    end
 
-      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
+    def pages
+      files.select { |file| file.is_a?Page }
+    end
 
-      entries.each do |entry|
-        path = File.join(source, dir, entry)
-        next if File.symlink?(path) && safe
-
-        key = sanitize_filename(File.basename(entry, '.*'))
-        self.data[key] = SafeYAML.load_file(path)
-      end
+    def static_files
+      files.select { |file| file.is_a?StaticFile }
     end
 
     # Run each of the Generators.
@@ -216,7 +205,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item| item.write(destination) }
+      files.each { |item| item.write(destination) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.

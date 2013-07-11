@@ -39,6 +39,10 @@ module Jekyll
       @@mtimes[path] != mtime
     end
 
+    def render(layout, payload)
+      #Quack
+    end
+
     # Write the static file to the destination directory (if modified).
     #
     # dest - The String path to the destination dir.

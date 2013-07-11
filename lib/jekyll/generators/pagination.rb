@@ -46,7 +46,7 @@ module Jekyll
             newpage = Page.new(site, File.join(site.source, page.dir, page.name))
             newpage.pager = pager
             newpage.dir = Pager.paginate_path(site, num_page)
-            site.site_files << newpage
+            site.files << newpage
           else
             page.pager = pager
           end
