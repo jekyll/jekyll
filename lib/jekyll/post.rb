@@ -1,7 +1,6 @@
 module Jekyll
-  class Post
+  class Post < Item
     include Comparable
-    include Convertible
 
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
@@ -33,25 +32,17 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site
-    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
-    attr_accessor :date, :slug, :published, :tags, :categories, :file_path
-
-    attr_reader :name
+    attr_accessor :extracted_excerpt, :date, :slug, :published, :tags, :categories
 
     # Initialize this Post instance.
     #
     # site       - The Site.
-    # base       - The String path to the dir containing the post file.
-    # name       - The String filename of the post file.
+    # path       - The String path of the post file.
     #
     # Returns the new Post.
     def initialize(site, path)
-      @site = site
+      super(site, path)
       @dir  = File.dirname(path).sub(site.source, '').sub(/(_posts|_drafts)/, '')
-      @name = File.basename(path)
-      @file_path = path
-
       self.categories = @dir.downcase.split('/').reject { |x| x.empty? }
       process(@name)
       read_yaml(path)
@@ -85,11 +76,6 @@ module Jekyll
 
     def populate_tags
       self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
-    end
-
-    # Get the full path to the directory containing the post files
-    def containing_dir(source, dir)
-      return File.join(source, dir, '_posts')
     end
 
     # Read the YAML frontmatter.
@@ -179,6 +165,7 @@ module Jekyll
       File.dirname(url)
     end
 
+<<<<<<< HEAD
     # The full path and filename of the post. Defined in the YAML of the post
     # body (optional).
     #
@@ -187,6 +174,8 @@ module Jekyll
       data && data['permalink']
     end
 
+=======
+>>>>>>> Extract parent object from posts and pages
     def template
       case site.permalink_style
       when :pretty
@@ -252,6 +241,7 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
+<<<<<<< HEAD
       # construct payload
       payload = Utils.deep_merge_hashes({
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
@@ -263,6 +253,13 @@ module Jekyll
       end
 
       do_layout(payload.merge({"page" => to_liquid}), layouts)
+=======
+      template = {
+        "page" => self.to_liquid,
+        "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) }
+      }
+      super(template, layouts, site_payload)
+>>>>>>> Extract parent object from posts and pages
     end
 
     # Obtain destination path.
@@ -277,6 +274,7 @@ module Jekyll
       path
     end
 
+<<<<<<< HEAD
     # Returns the shorthand String identifier of this Post.
     def inspect
       "<Post: #{id}>"
@@ -286,6 +284,22 @@ module Jekyll
       pos = site.posts.index {|post| post.equal?(self) }
       if pos && pos < site.posts.length - 1
         site.posts[pos + 1]
+=======
+    # Convert this post into a Hash for use in Liquid templates.
+    #
+    # Returns the representative Hash.
+    def to_liquid
+      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
+        [attribute, send(attribute)]
+      }]
+      data.deep_merge(further_data)
+    end
+
+    def next
+      pos = self.site.posts.index(self)
+      if pos && pos < self.site.posts.length-1
+        self.site.posts[pos+1]
+>>>>>>> Extract parent object from posts and pages
       else
         nil
       end

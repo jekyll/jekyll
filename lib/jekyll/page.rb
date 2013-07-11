@@ -1,11 +1,8 @@
 module Jekyll
-  class Page
-    include Convertible
+  class Page < Item
 
     attr_writer :dir
-    attr_accessor :site, :pager
-    attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :pager, :basename
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w[
@@ -23,12 +20,8 @@ module Jekyll
     # dir  - The String path between the source and the file.
     # name - The String filename of the file.
     def initialize(site, path)
-      @site = site
+      super(site, path)
       @dir  = File.dirname(path).sub(site.source, '')
-      @name = File.basename(path)
-
-      process(name)
-      read_yaml(path)
     end
 
     # The generated directory into which the page will be placed
@@ -38,19 +31,6 @@ module Jekyll
     # Returns the String destination directory.
     def dir
       url[-1, 1] == '/' ? url : File.dirname(url)
-    end
-
-    # The full path and filename of the post. Defined in the YAML of the post
-    # body.
-    #
-    # Returns the String permalink or nil if none has been set.
-    def permalink
-      return nil if data.nil? || data['permalink'].nil?
-      if site.config['relative_permalinks']
-        File.join(@dir, data['permalink'])
-      else
-        data['permalink']
-      end
     end
 
     # The template of the permalink.
@@ -98,7 +78,11 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
+<<<<<<< HEAD
       self.basename = name[0 .. -ext.length - 1]
+=======
+      self.basename = File.basename(name, ext)
+>>>>>>> Extract parent object from posts and pages
     end
 
     # Add any necessary layouts to this post
@@ -108,12 +92,21 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
+<<<<<<< HEAD
       payload = Utils.deep_merge_hashes({
         "page" => to_liquid,
         'paginator' => pager.to_liquid
       }, site_payload)
 
       do_layout(payload, layouts)
+=======
+      relative_permalinks_deprecation_method if uses_relative_permalinks
+      template = {
+        "page" => self.to_liquid,
+        'paginator' => pager.to_liquid
+      }
+      super(template, layouts, site_payload)
+>>>>>>> Extract parent object from posts and pages
     end
 
     def relative_permalinks_deprecation_method
@@ -151,11 +144,14 @@ module Jekyll
       path
     end
 
+<<<<<<< HEAD
     # Returns the object as a debug String.
     def inspect
       "#<Jekyll:Page @name=#{name.inspect}>"
     end
 
+=======
+>>>>>>> Extract parent object from posts and pages
     # Returns the Boolean of whether this Page is HTML or not.
     def html?
       output_ext == '.html'
