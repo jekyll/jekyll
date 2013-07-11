@@ -14,7 +14,7 @@ first draft:
 |   |-- a-draft-post.md
 {% endhighlight %}
 
-To preview your site with your drafts, simply run `jekyll serve` with the `--drafts`
-switch. The same goes for `jekyll build`. Each will be assigned the value of `Time.now`
+To preview your site with drafts, simply run `jekyll serve` or `jekyll build` with
+the `--drafts` switch.  Each will be assigned the value of `Time.now`
 for its date, and thus you will see them generated as the latest posts.
 
