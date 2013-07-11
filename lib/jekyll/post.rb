@@ -42,6 +42,7 @@ module Jekyll
     # Returns the new Post.
     def initialize(site, path)
       super(site, path)
+      raise NameError, "Invalid filename" unless self.class.valid?(@name)
       @dir  = File.dirname(path).sub(site.source, '').sub(/(_posts|_drafts)/, '')
       self.categories = @dir.downcase.split('/').reject { |x| x.empty? }
       process(@name)
@@ -55,8 +56,9 @@ module Jekyll
 
       populate_categories
       populate_tags
+      raise RangeError, "Not published" unless published? && (site.future || self.date <= site.time)
 
-      site.aggregate_post_info(self) if self.published && (site.future || self.date <= site.time)
+      site.aggregate_post_info(self)
     end
 
     def published?
@@ -165,17 +167,6 @@ module Jekyll
       File.dirname(url)
     end
 
-<<<<<<< HEAD
-    # The full path and filename of the post. Defined in the YAML of the post
-    # body (optional).
-    #
-    # Returns the String permalink.
-    def permalink
-      data && data['permalink']
-    end
-
-=======
->>>>>>> Extract parent object from posts and pages
     def template
       case site.permalink_style
       when :pretty
@@ -241,25 +232,11 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-<<<<<<< HEAD
-      # construct payload
-      payload = Utils.deep_merge_hashes({
-        "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
-      }, site_payload)
-
-      if generate_excerpt?
-        extracted_excerpt.do_layout(payload, {})
-      end
-
-      do_layout(payload.merge({"page" => to_liquid}), layouts)
-=======
       template = {
         "page" => self.to_liquid,
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) }
       }
       super(template, layouts, site_payload)
->>>>>>> Extract parent object from posts and pages
     end
 
     # Obtain destination path.
@@ -274,7 +251,6 @@ module Jekyll
       path
     end
 
-<<<<<<< HEAD
     # Returns the shorthand String identifier of this Post.
     def inspect
       "<Post: #{id}>"
@@ -284,22 +260,6 @@ module Jekyll
       pos = site.posts.index {|post| post.equal?(self) }
       if pos && pos < site.posts.length - 1
         site.posts[pos + 1]
-=======
-    # Convert this post into a Hash for use in Liquid templates.
-    #
-    # Returns the representative Hash.
-    def to_liquid
-      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
-        [attribute, send(attribute)]
-      }]
-      data.deep_merge(further_data)
-    end
-
-    def next
-      pos = self.site.posts.index(self)
-      if pos && pos < self.site.posts.length-1
-        self.site.posts[pos+1]
->>>>>>> Extract parent object from posts and pages
       else
         nil
       end

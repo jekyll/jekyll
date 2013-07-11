@@ -123,28 +123,29 @@ module Jekyll
     # Returns nothing.
     def read
       filter_entries(Dir["#{source}/**/{*,.*}"]).each do |path|
-        if File.directory?(path)
-          next
-        elsif path =~ /_posts/
-          if Post.valid?(File.basename(path))
-            post = Post.new(self, path) if Post.valid?(path)
-            files << post if post.published && (self.future || post.date <= self.time)
+        begin
+          klass = if File.directory?(path)
+            nil
+          elsif path =~ /#{config['layouts']}/
+            ext = File.extname(path)
+            name = File.basename(path, ext)
+            layouts[name] = Layout.new(self, path)
+            nil
+          elsif path =~ /_posts/
+            Post
+          elsif path =~ /_drafts/ && show_drafts
+            Draft
+          elsif path.sub(source, '') =~ /\/_/
+            nil
+          elsif has_yaml_header?(path)
+            Page
+          else
+            StaticFile
           end
-        elsif show_drafts && path =~ /_drafts/
-          if Draft.valid?(File.basename(path))
-            draft = Draft.new(self, path)
-            files << draft if draft.published && (self.future || draft.date <= self.time)
-          end
-        elsif path =~ /#{config['layouts']}/
-          ext = File.extname(path)
-          name = File.basename(path, ext)
-          layouts[name] = Layout.new(self, path)
-        elsif path.sub(source, '') =~ /\/_/
-          next
-        elsif has_yaml_header?(path)
-          files << Page.new(self, path)
-        else
-          files << StaticFile.new(self, path)
+          files << klass.new(self, path) if klass
+        rescue NameError
+          Jekyll.logger.warn "Warning:", "Invalid filename on #{path}"
+        rescue RangeError
         end
       end
       posts.sort!
