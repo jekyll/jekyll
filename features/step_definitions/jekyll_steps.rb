@@ -53,6 +53,9 @@ Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
   File.open(file, 'w') do |f|
     f.write(text)
   end
+
+  @modification_times ||= {}
+  @modification_times[file] = File.mtime(file)
 end
 
 Given /^I have an? (.*) (layout|theme) that contains "(.*)"$/ do |name, type, text|
@@ -199,4 +202,16 @@ end
 
 Then /^I should see today's date in "(.*)"$/ do |file|
   assert_match Regexp.new(Date.today.to_s), file_contents(file)
+end
+
+Given /^the site has not yet been built$/ do
+  FileUtils.rm_rf(File.join(TEST_DIR,'_site'))
+end
+
+Given /^the site has already been built$/ do
+  step 'I run jekyll'
+end
+
+Then /^"(.*)" should not have been regenerated$/  do |file|
+  assert_equal File.mtime(file), @modification_times.fetch(file, Time.new)
 end
