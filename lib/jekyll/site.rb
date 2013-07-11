@@ -138,34 +138,19 @@ module Jekyll
       entries = Dir.chdir(base) { filter_entries(Dir.entries('.')) }
 
       self.read_posts(dir)
-
-      if self.show_drafts
-        self.read_drafts(dir)
-      end
-
+      self.read_drafts(dir) if self.show_drafts
       self.posts.sort!
-
-      # limit the posts if :limit_posts option is set
-      if limit_posts > 0
-        limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
-        self.posts = self.posts[-limit, limit]
-      end
+      limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
         f_abs = File.join(base, f)
-        f_rel = File.join(dir, f)
         if File.directory?(f_abs)
-          next if self.dest.sub(/\/$/, '') == f_abs
-          read_directories(f_rel)
+          f_rel = File.join(dir, f)
+          read_directories(f_rel) unless self.dest.sub(/\/$/, '') == f_abs
+        elsif has_yaml_header?(f_abs)
+          pages << Page.new(self, self.source, dir, f)
         else
-          first3 = File.open(f_abs) { |fd| fd.read(3) }
-          if first3 == "---"
-            # file appears to have a YAML header so process it as a page
-            pages << Page.new(self, self.source, dir, f)
-          else
-            # otherwise treat it as a static file
-            static_files << StaticFile.new(self, self.source, dir, f)
-          end
+          static_files << StaticFile.new(self, self.source, dir, f)
         end
       end
     end
@@ -255,15 +240,7 @@ module Jekyll
 
       # files to be written
       files = Set.new
-      self.posts.each do |post|
-        files << post.destination(self.dest)
-      end
-      self.pages.each do |page|
-        files << page.destination(self.dest)
-      end
-      self.static_files.each do |sf|
-        files << sf.destination(self.dest)
-      end
+      site_files_each { |item| files << item.destination(self.dest) }
 
       # adding files' parent directories
       dirs = Set.new
@@ -294,15 +271,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      self.posts.each do |post|
-        post.write(self.dest)
-      end
-      self.pages.each do |page|
-        page.write(self.dest)
-      end
-      self.static_files.each do |sf|
-        sf.write(self.dest)
-      end
+      site_files_each { |item| item.write(self.dest) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -433,6 +402,25 @@ module Jekyll
         $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
         @deprecated_relative_permalinks = true
       end
+    end
+
+    def site_files_each
+      %w(posts pages static_files).each do |type|
+        self.send(type).each do |item|
+          yield item
+        end
+      end
+    end
+
+    private
+
+    def has_yaml_header?(file)
+      "---" == File.open(file) { |fd| fd.read(3) }
+    end
+
+    def limit_posts!
+      limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
+      self.posts = self.posts[-limit, limit]
     end
   end
 end
