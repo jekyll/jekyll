@@ -117,16 +117,16 @@ module Jekyll
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
       next_config = YAML.safe_load_file(file)
-      raise "Configuration file: (INVALID) #{file}".yellow if !next_config.is_a?(Hash)
+      raise ArgumentError.new("Configuration file: (INVALID) #{file}".yellow) if !next_config.is_a?(Hash)
       Jekyll.logger.info "Configuration file:", file
       next_config
     rescue SystemCallError
       if @default_config_file
-        Jekyll::Logger.warn "Configuration file:", "none"
+        Jekyll.logger.warn "Configuration file:", "none"
         {}
       else
-        Jekyll::Logger.error "Fatal:", "The configuration file '#{file}' could not be found."
-        exit(1)
+        Jekyll.logger.error "Fatal:", "The configuration file '#{file}' could not be found."
+        abort
       end
     end
 
