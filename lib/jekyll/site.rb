@@ -240,7 +240,7 @@ module Jekyll
 
       # files to be written
       files = Set.new
-      site_files_each { |item| files << item.destination(self.dest) }
+      each_site_file { |item| files << item.destination(self.dest) }
 
       # adding files' parent directories
       dirs = Set.new
@@ -271,7 +271,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      site_files_each { |item| item.write(self.dest) }
+      each_site_file { |item| item.write(self.dest) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -404,7 +404,7 @@ module Jekyll
       end
     end
 
-    def site_files_each
+    def each_site_file
       %w(posts pages static_files).each do |type|
         self.send(type).each do |item|
           yield item
