@@ -27,6 +27,7 @@
   * Restrict activesupport dependency to pre-4.0.0 to maintain compatibility with `<= 1.9.2`
   * Include/exclude deprecation handling simplification (#1284)
   * Convert README to Markdown. (#1267)
+  * Refactor Jekyll::Site (#1144)
 
 ### Site Enhancements
   * Add "News" section for release notes, along with an RSS feed (#1093, #1285, #1286)
