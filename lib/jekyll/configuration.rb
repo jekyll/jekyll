@@ -126,7 +126,7 @@ module Jekyll
         {}
       else
         Jekyll.logger.error "Fatal:", "The configuration file '#{file}' could not be found."
-        abort
+        raise LoadError
       end
     end
 
@@ -144,7 +144,7 @@ module Jekyll
           new_config = read_config_file(config_file)
           configuration = configuration.deep_merge(new_config)
         end
-      rescue => err
+      rescue ArgumentError => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " +
                      "Using defaults (and options)."
         $stderr.puts "#{err}"

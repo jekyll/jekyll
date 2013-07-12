@@ -82,6 +82,7 @@ class TestConfiguration < Test::Unit::TestCase
   context "loading configuration" do
     setup do
       @path = File.join(Dir.pwd, '_config.yml')
+      @user_config = File.join(Dir.pwd, "my_config_file.yml")
     end
 
     should "fire warning with no _config.yml" do
@@ -101,6 +102,14 @@ class TestConfiguration < Test::Unit::TestCase
       mock($stderr).puts(("WARNING: ".rjust(20) + "Error reading configuration. Using defaults (and options).").yellow)
       mock($stderr).puts("Configuration file: (INVALID) #{@path}".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
+    end
+
+    should "fire warning when user-specified config file isn't there" do
+      mock(YAML).safe_load_file(@user_config) { raise SystemCallError, "No such file or directory - #{@user_config}" }
+      mock($stderr).puts(("Fatal: ".rjust(20) + "The configuration file '#{@user_config}' could not be found.").red)
+      assert_raises LoadError do
+        Jekyll.configuration({'config' => [@user_config]})
+      end
     end
   end
   context "loading config from external file" do
