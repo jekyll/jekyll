@@ -267,9 +267,10 @@ class TestPost < Test::Unit::TestCase
       context "#excerpt" do
         setup do
           file = "2013-01-02-post-excerpt.markdown"
+          @post = setup_post(file)
           @post.process(file)
           @post.read_yaml(@source, file)
-          @post.transform
+          do_render(@post)
         end
 
         should "return first paragraph by default" do
