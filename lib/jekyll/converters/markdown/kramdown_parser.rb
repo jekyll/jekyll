@@ -14,7 +14,7 @@ module Jekyll
         def convert(content)
           # Check for use of coderay
           if @config['kramdown']['use_coderay']
-            @config['kramdown'].merge({
+            @config['kramdown'].merge!({
               :coderay_wrap               => @config['kramdown']['coderay']['coderay_wrap'],
               :coderay_line_numbers       => @config['kramdown']['coderay']['coderay_line_numbers'],
               :coderay_line_number_start  => @config['kramdown']['coderay']['coderay_line_number_start'],
