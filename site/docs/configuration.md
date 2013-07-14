@@ -236,7 +236,16 @@ before your site is served.
 
 Jekyll runs with the following configuration options by default. Unless
 alternative settings for these options are explicitly specified in the
-configuration file or on the command-line, Jekyll will run using these options.
+[[configuration]] file or on the command-line, Jekyll will run using these options.
+
+<div class="note warning">
+  <h5>There are two unsupported kramdown options</h5>
+  <p>
+    Please note that both remove_block_html_tags and
+    remove_span_html_tags are currently unsupported in jekyll due to the
+    fact that they are not included within the kramdown HTML converter.
+  </p>
+</div>
 
 {% highlight yaml %}
 source:      .
