@@ -197,7 +197,9 @@ following is a reference of the available data.
 
         The Date assigned to the Post. This can be overridden in a Post’s front
         matter by specifying a new date/time in the format
-        <code>YYYY-MM-DD HH:MM:SS</code>
+        <code>YYYY-MM-DD HH:MM:SS</code> (assuming UTC), or
+        <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code> (to specify a time zone using
+        an offset from UTC. e.g. <code>2008-12-14 10:30:00 +0900</code>).
 
       </p></td>
     </tr>
