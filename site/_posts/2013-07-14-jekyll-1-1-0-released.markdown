@@ -10,8 +10,8 @@ categories: [release]
 After a month of hard work, the Jekyll core team is excited to announce the release of
 Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new additions:
 
-- Add 'docs' subcommand to read Jekyll's docs when offline. ([#1046][])
-- Support passing parameters to templates in 'include' tag ([#1204][])
+- Add `docs` subcommand to read Jekyll's docs when offline. ([#1046][])
+- Support passing parameters to templates in `include` tag ([#1204][])
 - Add support for Liquid tags to post excerpts ([#1302][])
 - Fix pagination for subdirectories ([#1198][])
 - Provide better error reporting when generating sites ([#1253][])
