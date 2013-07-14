@@ -13,8 +13,8 @@
 ## 1.1.0 / 2013-07-14
 
 ### Major Enhancements
-  * Add 'docs' subcommand to read Jekyll's docs when offline. (#1046)
-  * Support passing parameters to templates in 'include' tag (#1204)
+  * Add `docs` subcommand to read Jekyll's docs when offline. (#1046)
+  * Support passing parameters to templates in `include` tag (#1204)
   * Add support for Liquid tags to post excerpts (#1302)
 
 ### Minor Enhancements
