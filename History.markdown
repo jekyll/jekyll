@@ -16,6 +16,7 @@
   * In the generated site, remove files that will be replaced by a
     directory (#1118)
   * Fail loudly if a user-specified configuration file doesn't exist (#1098)
+  * Allow for all options for Kramdown HTML Converter (#1201)
 
 ### Bug Fixes
   * Fix pagination in subdirectories. (#1198)
