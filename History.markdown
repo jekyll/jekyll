@@ -79,6 +79,8 @@
   * Update the S3 deployment documentation (#1294)
   * Add suggestion for Xcode CLT install to troubleshooting page in docs (#1296)
   * Add 'Working with drafts' page to docs (#1289)
+  * Add information about time zones to the documentation for a page's
+    date (#1304)
 
 ## 1.0.3 / 2013-06-07
 
