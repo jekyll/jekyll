@@ -139,6 +139,7 @@ Gem::Specification.new do |s|
     site/_posts/2013-05-08-jekyll-1-0-1-released.markdown
     site/_posts/2013-05-12-jekyll-1-0-2-released.markdown
     site/_posts/2013-06-07-jekyll-1-0-3-released.markdown
+    site/_posts/2013-07-14-jekyll-1-1-0-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
