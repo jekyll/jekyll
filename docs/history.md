@@ -5,6 +5,76 @@ permalink: /docs/history/
 prev_section: contributing
 ---
 
+## 1.1.0 / 2013-07-14
+
+### Major Enhancements
+- Add `docs` subcommand to read Jekyll's docs when offline. ([#1046](https://github.com/mojombo/jekyll/issues/1046))
+- Support passing parameters to templates in `include` tag ([#1204](https://github.com/mojombo/jekyll/issues/1204))
+- Add support for Liquid tags to post excerpts ([#1302](https://github.com/mojombo/jekyll/issues/1302))
+
+### Minor Enhancements
+- Search the hierarchy of pagination path up to site root to determine template page for
+    pagination. ([#1198](https://github.com/mojombo/jekyll/issues/1198))
+- Add the ability to generate a new Jekyll site without a template ([#1171](https://github.com/mojombo/jekyll/issues/1171))
+- Use redcarpet as the default markdown engine in newly generated
+    sites ([#1245](https://github.com/mojombo/jekyll/issues/1245), [#1247](https://github.com/mojombo/jekyll/issues/1247))
+- Add `redcarpet` as a runtime dependency so `jekyll build` works out-of-the-box for new
+    sites. ([#1247](https://github.com/mojombo/jekyll/issues/1247))
+- In the generated site, remove files that will be replaced by a
+    directory ([#1118](https://github.com/mojombo/jekyll/issues/1118))
+- Fail loudly if a user-specified configuration file doesn't exist ([#1098](https://github.com/mojombo/jekyll/issues/1098))
+- Allow for all options for Kramdown HTML Converter ([#1201](https://github.com/mojombo/jekyll/issues/1201))
+
+### Bug Fixes
+- Fix pagination in subdirectories. ([#1198](https://github.com/mojombo/jekyll/issues/1198))
+- Fix an issue with directories and permalinks that have a plus sign
+    (+) in them ([#1215](https://github.com/mojombo/jekyll/issues/1215))
+- Provide better error reporting when generating sites ([#1253](https://github.com/mojombo/jekyll/issues/1253))
+- Latest posts first in non-LSI `related_posts` ([#1271](https://github.com/mojombo/jekyll/issues/1271))
+
+### Development Fixes
+- Merge the theme and layout cucumber steps into one step ([#1151](https://github.com/mojombo/jekyll/issues/1151))
+- Restrict activesupport dependency to pre-4.0.0 to maintain compatibility with `<= 1.9.2`
+- Include/exclude deprecation handling simplification ([#1284](https://github.com/mojombo/jekyll/issues/1284))
+- Convert README to Markdown. ([#1267](https://github.com/mojombo/jekyll/issues/1267))
+- Refactor Jekyll::Site ([#1144](https://github.com/mojombo/jekyll/issues/1144))
+
+### Site Enhancements
+- Add "News" section for release notes, along with an RSS feed ([#1093](https://github.com/mojombo/jekyll/issues/1093), [#1285](https://github.com/mojombo/jekyll/issues/1285), [#1286](https://github.com/mojombo/jekyll/issues/1286))
+- Add "History" page.
+- Restructured docs sections to include "Meta" section.
+- Add message to "Templates" page that specifies that Python must be installed in order
+    to use Pygments. ([#1182](https://github.com/mojombo/jekyll/issues/1182))
+- Update link to the official Maruku repo ([#1175](https://github.com/mojombo/jekyll/issues/1175))
+- Add documentation about `paginate_path` to "Templates" page in docs ([#1129](https://github.com/mojombo/jekyll/issues/1129))
+- Give the quick-start guide its own page ([#1191](https://github.com/mojombo/jekyll/issues/1191))
+- Update ProTip on Installation page in docs to point to all the info about Pygments and
+    the 'highlight' tag. ([#1196](https://github.com/mojombo/jekyll/issues/1196))
+- Run `site/img` through ImageOptim (thanks [@qrush](https://github.com/qrush)!) ([#1208](https://github.com/mojombo/jekyll/issues/1208))
+- Added Jade Converter to `site/docs/plugins` ([#1210](https://github.com/mojombo/jekyll/issues/1210))
+- Fix location of docs pages in Contributing pages ([#1214](https://github.com/mojombo/jekyll/issues/1214))
+- Add ReadInXMinutes plugin to the plugin list ([#1222](https://github.com/mojombo/jekyll/issues/1222))
+- Remove plugins from the plugin list that have equivalents in Jekyll
+    proper ([#1223](https://github.com/mojombo/jekyll/issues/1223))
+- Add jekyll-assets to the plugin list ([#1225](https://github.com/mojombo/jekyll/issues/1225))
+- Add jekyll-pandoc-mulitple-formats to the plugin list ([#1229](https://github.com/mojombo/jekyll/issues/1229))
+- Remove dead link to "Using Git to maintain your blog" ([#1227](https://github.com/mojombo/jekyll/issues/1227))
+- Tidy up the third-party plugins listing ([#1228](https://github.com/mojombo/jekyll/issues/1228))
+- Update contributor information ([#1192](https://github.com/mojombo/jekyll/issues/1192))
+- Update URL of article about Blogger migration ([#1242](https://github.com/mojombo/jekyll/issues/1242))
+- Specify that RedCarpet is the default for new Jekyll sites on Quickstart page ([#1247](https://github.com/mojombo/jekyll/issues/1247))
+- Added site.pages to Variables page in docs ([#1251](https://github.com/mojombo/jekyll/issues/1251))
+- Add Youku and Tudou Embed link on Plugins page. ([#1250](https://github.com/mojombo/jekyll/issues/1250))
+- Add note that `gist` tag supports private gists. ([#1248](https://github.com/mojombo/jekyll/issues/1248))
+- Add `jekyll-timeago` to list of third-party plugins. ([#1260](https://github.com/mojombo/jekyll/issues/1260))
+- Add `jekyll-swfobject` to list of third-party plugins. ([#1263](https://github.com/mojombo/jekyll/issues/1263))
+- Add `jekyll-picture-tag` to list of third-party plugins. ([#1280](https://github.com/mojombo/jekyll/issues/1280))
+- Update the GitHub Pages documentation regarding relative URLs
+    ([#1291](https://github.com/mojombo/jekyll/issues/1291))
+- Update the S3 deployment documentation ([#1294](https://github.com/mojombo/jekyll/issues/1294))
+- Add suggestion for Xcode CLT install to troubleshooting page in docs ([#1296](https://github.com/mojombo/jekyll/issues/1296))
+- Add 'Working with drafts' page to docs ([#1289](https://github.com/mojombo/jekyll/issues/1289))
+
 ## 1.0.3 / 2013-06-07
 
 ### Minor Enhancements
