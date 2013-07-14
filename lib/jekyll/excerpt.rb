@@ -79,10 +79,7 @@ module Jekyll
     #
     # Returns the representative Hash.
     def to_liquid
-      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
-        [attribute, post.send(attribute)]
-      }]
-      further_data
+      post.to_liquid
     end
 
     def to_s
