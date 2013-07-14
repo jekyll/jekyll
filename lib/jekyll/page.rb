@@ -24,18 +24,6 @@ module Jekyll
       self.read_yaml(File.join(base, dir), name)
     end
 
-    # Read the YAML frontmatter.
-    #
-    # base - The String path to the dir containing the file.
-    # name - The String filename of the file.
-    #
-    # Returns nothing.
-    def read_yaml(base, name)
-      super(base, name)
-      self.data['layout'] = 'page' unless self.data.has_key?('layout')
-      self.data
-    end
-
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, we be '/'
@@ -50,7 +38,12 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      self.data && self.data['permalink']
+      return nil if self.data.nil? || self.data['permalink'].nil?
+      if site.config['relative_permalinks']
+        File.join(@dir, self.data['permalink'])
+      else
+        self.data['permalink']
+      end
     end
 
     # The template of the permalink.
@@ -110,7 +103,15 @@ module Jekyll
     def to_liquid
       self.data.deep_merge({
         "url"        => self.url,
-        "content"    => self.content })
+        "content"    => self.content,
+        "path"       => self.data['path'] || path })
+    end
+
+    # The path to the source file
+    #
+    # Returns the path to the source file
+    def path
+      File.join(@dir, @name).sub(/\A\//, '')
     end
 
     # Obtain destination path.
@@ -119,24 +120,9 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      # The url needs to be unescaped in order to preserve the correct
-      # filename.
-      path = File.join(dest, CGI.unescape(self.url))
+      path = File.join(dest, self.url)
       path = File.join(path, "index.html") if self.url =~ /\/$/
       path
-    end
-
-    # Write the generated page file to the destination directory.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns nothing.
-    def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') do |f|
-        f.write(self.output)
-      end
     end
 
     # Returns the object as a debug String.
@@ -152,6 +138,10 @@ module Jekyll
     # Returns the Boolean of whether this Page is an index file or not.
     def index?
       basename == 'index'
+    end
+
+    def uses_relative_permalinks
+      permalink && @dir != "" && site.config['relative_permalinks']
     end
   end
 end

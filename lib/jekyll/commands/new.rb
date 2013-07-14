@@ -3,18 +3,34 @@ require 'erb'
 module Jekyll
   module Commands
     class New < Command
-      def self.process(args)
+      def self.process(args, options = {})
         raise ArgumentError.new('You must specify a path.') if args.empty?
 
         new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
         FileUtils.mkdir_p new_blog_path
-
-        create_sample_files new_blog_path
-
-        File.open(File.expand_path(self.initialized_post_name, new_blog_path), "w") do |f|
-          f.write(self.scaffold_post_content(site_template))
+        if preserve_source_location?(new_blog_path, options)
+          Jekyll.logger.error "Conflict:", "#{new_blog_path} exists and is not empty."
+          exit(1)
         end
+
+        if options[:blank]
+          create_blank_site new_blog_path
+        else
+          create_sample_files new_blog_path
+
+          File.open(File.expand_path(self.initialized_post_name, new_blog_path), "w") do |f|
+            f.write(self.scaffold_post_content(site_template))
+          end
+        end
+
         puts "New jekyll site installed in #{new_blog_path}."
+      end
+
+      def self.create_blank_site(path)
+        Dir.chdir(path) do
+          FileUtils.mkdir(%w(_layouts _posts _drafts))
+          FileUtils.touch("index.html")
+        end
       end
 
       def self.scaffold_post_content(template_site)
@@ -29,6 +45,11 @@ module Jekyll
       end
 
       private
+
+      def self.preserve_source_location?(path, options)
+        !options[:force] && !Dir["#{path}/**/*"].empty?
+      end
+
       def self.create_sample_files(path)
         FileUtils.cp_r site_template + '/.', path
         FileUtils.rm File.expand_path(scaffold_path, path)

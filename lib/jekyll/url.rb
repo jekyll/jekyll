@@ -47,6 +47,9 @@ module Jekyll
 
       # Append a trailing slash to the URL if the unsanitized URL had one
       url += "/" if in_url =~ /\/$/
+
+      # Always add a leading slash
+      url.gsub!(/\A([^\/])/, '/\1')
       url
     end
   end

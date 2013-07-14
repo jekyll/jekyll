@@ -25,7 +25,7 @@ class TestConvertible < Test::Unit::TestCase
         ret = @convertible.read_yaml(@base, name)
         assert_equal({}, ret)
       end
-      assert_match(/YAML Exception|syntax error/, out)
+      assert_match(/YAML Exception|syntax error|Error reading file/, out)
       assert_match(/#{File.join(@base, name)}/, out)
     end
 

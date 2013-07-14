@@ -1,2 +1,3 @@
-markdown: rdiscount
+name: Your New Jekyll Site
+markdown: redcarpet
 pygments: true

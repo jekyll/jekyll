@@ -13,7 +13,7 @@ class TestPost < Test::Unit::TestCase
   context "A Post" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
     end
 
@@ -71,8 +71,8 @@ class TestPost < Test::Unit::TestCase
         @post.read_yaml(@source, file)
 
         assert_equal "my_category/permalinked-post", @post.permalink
-        assert_equal "my_category", @post.dir
-        assert_equal "my_category/permalinked-post", @post.url
+        assert_equal "/my_category", @post.dir
+        assert_equal "/my_category/permalinked-post", @post.url
       end
 
       context "with CRLF linebreaks" do
@@ -95,7 +95,7 @@ class TestPost < Test::Unit::TestCase
         should "consume the embedded dashes" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal({"title" => "Foo --- Bar", "layout" => "post"}, @post.data)
+          assert_equal({"title" => "Foo --- Bar"}, @post.data)
           assert_equal "Triple the fun!", @post.content
         end
       end
@@ -140,18 +140,6 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
-        context "with unspecified layout" do
-          setup do
-            file = '2013-01-12-no-layout.textile'
-            @post = setup_post(file)
-            @post.process(file)
-          end
-
-          should "default to 'post' layout" do
-            assert_equal "post", @post.data["layout"]
-          end
-        end
-        
         context "with specified layout of nil" do
           setup do
             file = '2013-01-12-nil-layout.textile'
@@ -320,13 +308,31 @@ class TestPost < Test::Unit::TestCase
             assert !@post.excerpt.include?("---"), "does not contains separator"
           end
         end
+
+        context "with custom excerpt" do
+          setup do
+            file = "2013-04-11-custom-excerpt.markdown"
+            @post = setup_post(file)
+            do_render(@post)
+          end
+
+          should "use custom excerpt" do
+            assert_equal("I can set a custom excerpt", @post.excerpt)
+          end
+
+          should "expose custom excerpt to liquid" do
+            assert @post.content.include?("I can use the excerpt: <quote>I can set a custom excerpt</quote>"), "Exposes incorrect excerpt to liquid."
+          end
+
+        end
+
       end
     end
 
     context "when in a site" do
       setup do
         clear_dest
-        stub(Jekyll).configuration { Jekyll::DEFAULTS }
+        stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
         @site = Site.new(Jekyll.configuration)
         @site.posts = [setup_post('2008-02-02-published.textile'),
                        setup_post('2009-01-27-categories.textile')]
@@ -417,6 +423,12 @@ class TestPost < Test::Unit::TestCase
         assert_equal [], post.categories
       end
 
+      should "recognize number category in yaml" do
+        post = setup_post("2013-05-10-number-category.textile")
+        assert post.categories.include?('2013')
+        assert !post.categories.include?(2013)
+      end
+
       should "recognize tag in yaml" do
         post = setup_post("2009-05-18-tag.textile")
         assert post.tags.include?('code')
@@ -428,7 +440,7 @@ class TestPost < Test::Unit::TestCase
         assert post.tags.include?('cooking')
         assert post.tags.include?('pizza')
       end
-      
+
       should "recognize empty tag in yaml" do
         post = setup_post("2009-05-18-empty-tag.textile")
         assert_equal [], post.tags
@@ -516,46 +528,46 @@ class TestPost < Test::Unit::TestCase
       assert_equal ['foo'], post.categories
     end
   end
-  
+
   context "converter file extension settings" do
     setup do
-      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
     end
-    
+
     should "process .md as markdown under default configuration" do
       post = setup_post '2011-04-12-md-extension.md'
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
-    
-    should "process .text as indentity under default configuration" do
+
+    should "process .text as identity under default configuration" do
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Identity
     end
-    
+
     should "process .text as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mdw,mdwn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
-    
+
     should "process .md as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mkd,mkdn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
-    
+
     should "process .text as textile under alternate configuration" do
       @site.config['textile_ext'] = 'textile,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Textile
     end
-    
+
   end
-  
+
 end

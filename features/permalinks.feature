@@ -7,7 +7,7 @@ Feature: Fancy permalinks
     Given I have a _posts directory
     And I have the following post:
       | title                 | date      | content          |
-      | None Permalink Schema | 3/27/2009 | Totally nothing. |
+      | None Permalink Schema | 2009-03-27 | Totally nothing. |
     And I have a configuration file with "permalink" set to "none"
     When I run jekyll
     Then the _site directory should exist
@@ -17,7 +17,7 @@ Feature: Fancy permalinks
     Given I have a _posts directory
     And I have the following post:
       | title                   | date      | content            |
-      | Pretty Permalink Schema | 3/27/2009 | Totally wordpress. |
+      | Pretty Permalink Schema | 2009-03-27 | Totally wordpress. |
     And I have a configuration file with "permalink" set to "pretty"
     When I run jekyll
     Then the _site directory should exist
@@ -38,7 +38,7 @@ Feature: Fancy permalinks
     Given I have a _posts directory
     And I have the following post:
       | title                   | category | date      | content         |
-      | Custom Permalink Schema | stuff    | 3/27/2009 | Totally custom. |
+      | Custom Permalink Schema | stuff    | 2009-03-27 | Totally custom. |
     And I have a configuration file with "permalink" set to "/blog/:year/:month/:day/:title"
     When I run jekyll
     Then the _site directory should exist
@@ -48,7 +48,7 @@ Feature: Fancy permalinks
     Given I have a _posts directory
     And I have the following post:
       | title                   | category | date      | content         |
-      | Custom Permalink Schema | stuff    | 3/27/2009 | Totally custom. |
+      | Custom Permalink Schema | stuff    | 2009-03-27 | Totally custom. |
     And I have a configuration file with "permalink" set to "/:categories/:title.html"
     When I run jekyll
     Then the _site directory should exist
@@ -58,7 +58,7 @@ Feature: Fancy permalinks
     Given I have a _posts directory
     And I have the following post:
       | title                   | category | date      | content         |
-      | Custom Permalink Schema | stuff    | 3/27/2009 | Totally custom. |
+      | Custom Permalink Schema | stuff    | 2009-03-27 | Totally custom. |
     And I have a configuration file with "permalink" set to "/:month-:day-:year/:title.html"
     When I run jekyll
     Then the _site directory should exist

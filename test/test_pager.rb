@@ -2,6 +2,17 @@ require 'helper'
 
 class TestPager < Test::Unit::TestCase
 
+  def build_site(config = {})
+    base = Jekyll::Configuration::DEFAULTS.deep_merge({
+      'source'      => source_dir,
+      'destination' => dest_dir,
+      'paginate'    => 1
+    })
+    site = Jekyll::Site.new(base.deep_merge(config))
+    site.process
+    site
+  end
+
   should "calculate number of pages" do
     assert_equal(0, Pager.calculate_pages([], '2'))
     assert_equal(1, Pager.calculate_pages([1], '2'))
@@ -11,41 +22,33 @@ class TestPager < Test::Unit::TestCase
     assert_equal(3, Pager.calculate_pages([1,2,3,4,5], '2'))
   end
 
+  should "determine the pagination path" do
+    assert_equal("/index.html",  Pager.paginate_path(build_site, 1))
+    assert_equal("/page2",       Pager.paginate_path(build_site, 2))
+    assert_equal("/index.html",  Pager.paginate_path(build_site({'paginate_path' => '/blog/page-:num'}), 1))
+    assert_equal("/blog/page-2", Pager.paginate_path(build_site({'paginate_path' => '/blog/page-:num'}), 2))
+    assert_equal("/index.html",  Pager.paginate_path(build_site({'paginate_path' => '/blog/page/:num'}), 1))
+    assert_equal("/blog/page/2", Pager.paginate_path(build_site({'paginate_path' => '/blog/page/:num'}), 2))
+    assert_equal("/contacts/index.html", Pager.paginate_path(build_site({'paginate_path' => '/contacts/page:num'}), 1))
+    assert_equal("/contacts/page2",      Pager.paginate_path(build_site({'paginate_path' => '/contacts/page:num'}), 2))
+    assert_equal("/contacts/index.html", Pager.paginate_path(build_site({'paginate_path' => '/contacts/page/:num'}), 1))
+    assert_equal("/contacts/page/2",     Pager.paginate_path(build_site({'paginate_path' => '/contacts/page/:num'}), 2))
+  end
+
   context "pagination disabled" do
-    setup do
-      stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({
-          'source'      => source_dir,
-          'destination' => dest_dir
-        })
-      end
-      @config = Jekyll.configuration
-    end
-
     should "report that pagination is disabled" do
-      assert !Pager.pagination_enabled?(@config, 'index.html')
+      assert !Pager.pagination_enabled?(build_site('paginate' => nil))
     end
-
   end
 
   context "pagination enabled for 2" do
     setup do
-      stub(Jekyll).configuration do
-        Jekyll::DEFAULTS.merge({
-          'source'      => source_dir,
-          'destination' => dest_dir,
-          'paginate'    => 2
-        })
-      end
-
-      @config = Jekyll.configuration
-      @site = Site.new(@config)
-      @site.process
+      @site  = build_site('paginate' => 2)
       @posts = @site.posts
     end
 
     should "report that pagination is enabled" do
-      assert Pager.pagination_enabled?(@config, 'index.html')
+      assert Pager.pagination_enabled?(@site)
     end
 
     context "with 4 posts" do
@@ -54,7 +57,7 @@ class TestPager < Test::Unit::TestCase
       end
 
       should "create first pager" do
-        pager = Pager.new(@config, 1, @posts)
+        pager = Pager.new(@site, 1, @posts)
         assert_equal(2, pager.posts.size)
         assert_equal(2, pager.total_pages)
         assert_nil(pager.previous_page)
@@ -62,7 +65,7 @@ class TestPager < Test::Unit::TestCase
       end
 
       should "create second pager" do
-        pager = Pager.new(@config, 2, @posts)
+        pager = Pager.new(@site, 2, @posts)
         assert_equal(2, pager.posts.size)
         assert_equal(2, pager.total_pages)
         assert_equal(1, pager.previous_page)
@@ -70,7 +73,7 @@ class TestPager < Test::Unit::TestCase
       end
 
       should "not create third pager" do
-        assert_raise(RuntimeError) { Pager.new(@config, 3, @posts) }
+        assert_raise(RuntimeError) { Pager.new(@site, 3, @posts) }
       end
 
     end
@@ -81,7 +84,7 @@ class TestPager < Test::Unit::TestCase
       end
 
       should "create first pager" do
-        pager = Pager.new(@config, 1, @posts)
+        pager = Pager.new(@site, 1, @posts)
         assert_equal(2, pager.posts.size)
         assert_equal(3, pager.total_pages)
         assert_nil(pager.previous_page)
@@ -89,7 +92,7 @@ class TestPager < Test::Unit::TestCase
       end
 
       should "create second pager" do
-        pager = Pager.new(@config, 2, @posts)
+        pager = Pager.new(@site, 2, @posts)
         assert_equal(2, pager.posts.size)
         assert_equal(3, pager.total_pages)
         assert_equal(1, pager.previous_page)
@@ -97,7 +100,7 @@ class TestPager < Test::Unit::TestCase
       end
 
       should "create third pager" do
-        pager = Pager.new(@config, 3, @posts)
+        pager = Pager.new(@site, 3, @posts)
         assert_equal(1, pager.posts.size)
         assert_equal(3, pager.total_pages)
         assert_equal(2, pager.previous_page)
@@ -105,7 +108,7 @@ class TestPager < Test::Unit::TestCase
       end
 
       should "not create fourth pager" do
-        assert_raise(RuntimeError) { Pager.new(@config, 4, @posts) }
+        assert_raise(RuntimeError) { Pager.new(@site, 4, @posts) }
       end
 
     end

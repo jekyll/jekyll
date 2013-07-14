@@ -14,6 +14,7 @@ class TestFilters < Test::Unit::TestCase
     setup do
       @filter = JekyllFilter.new
       @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
+      @time_as_string = "September 11, 2001 12:46:30 -0000"
     end
 
     should "textilize with simple string" do
@@ -43,20 +44,42 @@ class TestFilters < Test::Unit::TestCase
       assert_equal "chunky, bacon, bits, and pieces", @filter.array_to_sentence_string(["chunky", "bacon", "bits", "pieces"])
     end
 
-    should "format a date with short format" do
-      assert_equal "27 Mar 2013", @filter.date_to_string(@sample_time)
-    end
+    context "date filters" do
+      context "with Time object" do
+        should "format a date with short format" do
+          assert_equal "27 Mar 2013", @filter.date_to_string(@sample_time)
+        end
 
-    should "format a date with long format" do
-      assert_equal "27 March 2013", @filter.date_to_long_string(@sample_time)
-    end
+        should "format a date with long format" do
+          assert_equal "27 March 2013", @filter.date_to_long_string(@sample_time)
+        end
 
-    should "format a time with xmlschema" do
-      assert_equal "2013-03-27T11:22:33Z", @filter.date_to_xmlschema(@sample_time)
-    end
+        should "format a time with xmlschema" do
+          assert_equal "2013-03-27T11:22:33Z", @filter.date_to_xmlschema(@sample_time)
+        end
 
-    should "format a time according to RFC-822" do
-      assert_equal "Wed, 27 Mar 2013 11:22:33 -0000", @filter.date_to_rfc822(@sample_time)
+        should "format a time according to RFC-822" do
+          assert_equal "Wed, 27 Mar 2013 11:22:33 -0000", @filter.date_to_rfc822(@sample_time)
+        end
+      end
+
+      context "with String object" do
+        should "format a date with short format" do
+          assert_equal "11 Sep 2001", @filter.date_to_string(@time_as_string)
+        end
+
+        should "format a date with long format" do
+          assert_equal "11 September 2001", @filter.date_to_long_string(@time_as_string)
+        end
+
+        should "format a time with xmlschema" do
+          assert_equal "2001-09-11T12:46:30Z", @filter.date_to_xmlschema(@time_as_string)
+        end
+
+        should "format a time according to RFC-822" do
+          assert_equal "Tue, 11 Sep 2001 12:46:30 -0000", @filter.date_to_rfc822(@time_as_string)
+        end
+      end
     end
 
     should "escape xml with ampersands" do

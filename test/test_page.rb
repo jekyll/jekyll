@@ -15,7 +15,7 @@ class TestPage < Test::Unit::TestCase
   context "A Page" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::DEFAULTS }
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
     end
 
@@ -102,17 +102,7 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/about/", @page.dir
       end
     end
-    
-    context "with unspecified layout" do
-      setup do
-        @page = setup_page('contacts.html')
-      end
 
-      should "default to 'post' layout" do
-        assert_equal "page", @page.data["layout"]
-      end
-    end
-        
     context "with specified layout of nil" do
       setup do
         @page = setup_page('sitemap.xml')
@@ -135,6 +125,15 @@ class TestPage < Test::Unit::TestCase
 
         assert File.directory?(dest_dir)
         assert File.exists?(File.join(dest_dir, 'contacts.html'))
+      end
+
+      should "write even when the folder name is plus and permalink has +" do
+        page = setup_page('+', 'foo.md')
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exists?(File.join(dest_dir, '+', 'plus+in+url'))
       end
 
       should "write properly without html extension" do
