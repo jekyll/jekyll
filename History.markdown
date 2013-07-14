@@ -1,6 +1,18 @@
 ## HEAD
 
 ### Major Enhancements
+
+### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 1.1.0 / 2013-07-14
+
+### Major Enhancements
   * Add 'docs' subcommand to read Jekyll's docs when offline. (#1046)
   * Support passing parameters to templates in 'include' tag (#1204)
   * Add support for Liquid tags to post excerpts (#1302)
@@ -67,8 +79,6 @@
   * Update the S3 deployment documentation (#1294)
   * Add suggestion for Xcode CLT install to troubleshooting page in docs (#1296)
   * Add 'Working with drafts' page to docs (#1289)
-
-### Development Fixes
 
 ## 1.0.3 / 2013-06-07
 

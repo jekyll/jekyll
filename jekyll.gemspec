@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.0.3'
+  s.version           = '1.1.0'
   s.license           = 'MIT'
-  s.date              = '2013-06-07'
+  s.date              = '2013-07-14'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -60,6 +60,7 @@ Gem::Specification.new do |s|
     features/create_sites.feature
     features/drafts.feature
     features/embed_filters.feature
+    features/include_tag.feature
     features/markdown.feature
     features/pagination.feature
     features/permalinks.feature
@@ -89,6 +90,7 @@ Gem::Specification.new do |s|
     lib/jekyll/deprecator.rb
     lib/jekyll/draft.rb
     lib/jekyll/errors.rb
+    lib/jekyll/excerpt.rb
     lib/jekyll/filters.rb
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
@@ -123,11 +125,20 @@ Gem::Specification.new do |s|
     site/_includes/docs_contents_mobile.html
     site/_includes/footer.html
     site/_includes/header.html
+    site/_includes/news_contents.html
+    site/_includes/news_contents_mobile.html
+    site/_includes/news_item.html
     site/_includes/primary-nav-items.html
     site/_includes/section_nav.html
     site/_includes/top.html
     site/_layouts/default.html
     site/_layouts/docs.html
+    site/_layouts/news.html
+    site/_layouts/news_item.html
+    site/_posts/2013-05-06-jekyll-1-0-0-released.markdown
+    site/_posts/2013-05-08-jekyll-1-0-1-released.markdown
+    site/_posts/2013-05-12-jekyll-1-0-2-released.markdown
+    site/_posts/2013-06-07-jekyll-1-0-3-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
@@ -135,6 +146,7 @@ Gem::Specification.new do |s|
     site/docs/configuration.md
     site/docs/contributing.md
     site/docs/deployment-methods.md
+    site/docs/drafts.md
     site/docs/extras.md
     site/docs/frontmatter.md
     site/docs/github-pages.md
@@ -148,6 +160,7 @@ Gem::Specification.new do |s|
     site/docs/permalinks.md
     site/docs/plugins.md
     site/docs/posts.md
+    site/docs/quickstart.md
     site/docs/resources.md
     site/docs/sites.md
     site/docs/structure.md
@@ -157,6 +170,8 @@ Gem::Specification.new do |s|
     site/docs/usage.md
     site/docs/variables.md
     site/favicon.png
+    site/feed.xml
+    site/freenode.txt
     site/img/article-footer.png
     site/img/footer-arrow.png
     site/img/footer-logo.png
@@ -166,13 +181,17 @@ Gem::Specification.new do |s|
     site/img/tube1x.png
     site/index.html
     site/js/modernizr-2.5.3.min.js
+    site/news/index.md
+    site/news/releases/index.md
     test/fixtures/broken_front_matter1.erb
     test/fixtures/broken_front_matter2.erb
     test/fixtures/broken_front_matter3.erb
     test/fixtures/exploit_front_matter.erb
     test/fixtures/front_matter.erb
     test/helper.rb
+    test/source/+/foo.md
     test/source/.htaccess
+    test/source/_includes/params.html
     test/source/_includes/sig.markdown
     test/source/_layouts/default.html
     test/source/_layouts/simple.html
