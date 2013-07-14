@@ -24,4 +24,4 @@ See the [GitHub Release][] page for more a more detailed changelog for this rele
 [#{{ issue }}]: https://github.com/mojombo/jekyll/issues/{{ issue }}
 {% endfor %}
 
-[History]: https://github.com/mojombo/jekyll/releases/tag/v1.1.0
+[GitHub Release]: https://github.com/mojombo/jekyll/releases/tag/v1.1.0
