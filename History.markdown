@@ -9,6 +9,7 @@
 ### Development Fixes
 
 ### Site Enhancements
+  * Add Jekyll Image Tag to the plugins list (#1306)
 
 ## 1.1.0 / 2013-07-14
 
