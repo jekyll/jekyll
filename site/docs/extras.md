@@ -29,7 +29,7 @@ $ [sudo] gem install rdiscount
 And then specify RDiscount as the Markdown engine in your `_config.yml` file to
 have Jekyll run with that option.
 
-{% highlight bash %}
+{% highlight yaml %}
 # In _config.yml
 markdown: rdiscount
 {% endhighlight %}
@@ -45,7 +45,7 @@ $ [sudo] gem install kramdown
 
 Then you can specify Kramdown as the Markdown engine in `_config.yml`.
 
-{% highlight bash %}
+{% highlight yaml %}
 # In _config.yml
 markdown: kramdown
 {% endhighlight %}
