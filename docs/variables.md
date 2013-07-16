@@ -88,7 +88,7 @@ following is a reference of the available data.
       <td><p><code>site.pages</code></p></td>
       <td><p>
 
-        An alphabetical list of all Pages.
+        A list of all Pages.
 
       </p></td>
     </tr>
