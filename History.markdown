@@ -10,6 +10,7 @@
 
 ### Site Enhancements
   * Add Jekyll Image Tag to the plugins list (#1306)
+  * Remove erroneous statement that `site.pages` are sorted alphabetically.
 
 ## 1.1.0 / 2013-07-14
 
