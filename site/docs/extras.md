@@ -23,7 +23,7 @@ of [Maruku](http://github.com/bhollis/maruku) for Markdown, just make sure you h
 it installed:
 
 {% highlight bash %}
-$ sudo gem install rdiscount
+$ [sudo] gem install rdiscount
 {% endhighlight %}
 
 And then specify RDiscount as the Markdown engine in your `_config.yml` file to
@@ -40,7 +40,7 @@ You can also use [Kramdown](http://kramdown.rubyforge.org/) instead of Maruku
 for Markdown. Make sure that Kramdown is installed:
 
 {% highlight bash %}
-$ sudo gem install kramdown
+$ [sudo] gem install kramdown
 {% endhighlight %}
 
 Then you can specify Kramdown as the Markdown engine in `_config.yml`.
