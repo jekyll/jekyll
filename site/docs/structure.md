@@ -62,6 +62,18 @@ An overview of what each of these does:
     </tr>
     <tr>
       <td>
+        <p><code>_drafts</code></p>
+      </td>
+      <td>
+        <p>
+
+          Drafts are unpublished posts. The format of these files is without a date: <code>title.MARKUP</code>. Learn how to <a href="../drafts">work with drafts</a>.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>_includes</code></p>
       </td>
       <td>
