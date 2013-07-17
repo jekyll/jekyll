@@ -14,8 +14,7 @@ html, body { height: 100%; }
 
 body {
   background-color: #FFF;
-  font: 13.34px Helvetica, Arial, sans-serif;
-  font-size: small;
+  font-family: Helvetica, Arial, sans-serif;
   text-align: center;
 }
 
@@ -28,11 +27,6 @@ p { margin: 1em 0; }
 a         { color: #00a; }
 a:hover   { color: #000; }
 a:visited { color: #a0a; }
-
-table {
-  font-size: inherit;
-  font: 100%;
-}
 
 /*****************************************************************************/
 /*
@@ -61,7 +55,6 @@ ul.posts span {
 /*****************************************************************************/
 
 .site {
-  font-size: 115%;
   text-align: justify;
   width: 42em;
   margin: 3em auto 2em;
