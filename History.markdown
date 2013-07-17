@@ -11,6 +11,8 @@
 ### Site Enhancements
   * Add Jekyll Image Tag to the plugins list (#1306)
   * Remove erroneous statement that `site.pages` are sorted alphabetically.
+  * Add info about the `_drafts` directory to the directory structure
+    docs (#1320)
 
 ## 1.1.0 / 2013-07-14
 
