@@ -109,7 +109,7 @@ module Jekyll
       if self.data.has_key? 'excerpt'
         self.data['excerpt']
       else
-        self.extracted_excerpt.to_s
+        self.extracted_excerpt.output || self.extracted_excerpt.to_s
       end
     end
 
