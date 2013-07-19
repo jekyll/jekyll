@@ -33,6 +33,7 @@ module Jekyll
 
     def render_all_layouts(layouts, payload, info)
       output = content
+      Jekyll.logger.debug "Output of", "#{self.path} => '#{self.output}'"
     end
 
     # The UID for this post (useful in feeds).
@@ -51,6 +52,7 @@ module Jekyll
     end
 
     def to_s
+      Jekyll.logger.debug "Excerpt#to_s:", "#{output} || #{content}"
       output || content
     end
 

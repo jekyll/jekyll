@@ -78,6 +78,7 @@ module Jekyll
     #
     # Returns the converted content
     def render_liquid(content, payload, info)
+      Jekyll.logger.debug "Rendering Liquid for #{self.path}", ""
       Liquid::Template.parse(content).render!(payload, info)
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{payload[:file]}"
