@@ -1,41 +1,5 @@
 module Jekyll
   class Excerpt
-
-    # Internal: Extract excerpt from the content
-    #
-    # By default excerpt is your first paragraph of a post: everything before
-    # the first two new lines:
-    #
-    #     ---
-    #     title: Example
-    #     ---
-    #
-    #     First paragraph with [link][1].
-    #
-    #     Second paragraph.
-    #
-    #     [1]: http://example.com/
-    #
-    # This is fairly good option for Markdown and Textile files. But might cause
-    # problems for HTML posts (which is quite unusual for Jekyll). If default
-    # excerpt delimiter is not good for you, you might want to set your own via
-    # configuration option `excerpt_separator`. For example, following is a good
-    # alternative for HTML posts:
-    #
-    #     # file: _config.yml
-    #     excerpt_separator: "<!-- more -->"
-    #
-    # Notice that all markdown-style link references will be appended to the
-    # excerpt. So the example post above will have this excerpt source:
-    #
-    #     First paragraph with [link][1].
-    #
-    #     [1]: http://example.com/
-    #
-    # Excerpts are rendered same time as content is rendered.
-    #
-    # Returns excerpt String
-
     include Convertible
 
     attr_accessor :post
