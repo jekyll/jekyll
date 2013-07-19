@@ -31,6 +31,10 @@ module Jekyll
       (output && output.include?(something)) || content.include?(something)
     end
 
+    def render_all_layouts(layouts, payload, info)
+      output = content
+    end
+
     # The UID for this post (useful in feeds).
     # e.g. /2008/11/05/my-awesome-post
     #
