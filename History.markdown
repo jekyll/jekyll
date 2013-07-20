@@ -19,6 +19,8 @@
   * Add generator-jekyllrb and grunt-jekyll to plugins page (#1330)
   * Mention Kramdown as option for markdown parser on Extras page (#1318)
   * Update Quick-Start page to include reminder that all requirements must be installed (#1327)
+  * Change filename in `include` example to an HTML file so as not to indicate that Jekyll
+    will automatically convert them. (#1303)
 
 ## 1.1.0 / 2013-07-14
 
