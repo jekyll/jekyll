@@ -3,6 +3,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Remove superfluous `table` selector from main.css in `jekyll new` template (#1328)
 
 ### Bug Fixes
 
