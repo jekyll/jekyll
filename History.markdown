@@ -16,6 +16,7 @@
     docs (#1320)
   * Improve the layout of the plugin listing by organizing it into
     categories (#1310)
+  * Add generator-jekyllrb and grunt-jekyll to plugins page (#1330)
 
 ## 1.1.0 / 2013-07-14
 
