@@ -19,17 +19,38 @@ fork](http://github.com/remi/maruku).
 ## RDiscount
 
 If you prefer to use [RDiscount](http://github.com/rtomayko/rdiscount) instead
-of [Maruku](http://github.com/bhollis/maruku) for markdown, just make sure you have
+of [Maruku](http://github.com/bhollis/maruku) for Markdown, just make sure you have
 it installed:
 
 {% highlight bash %}
-$ sudo gem install rdiscount
+$ [sudo] gem install rdiscount
 {% endhighlight %}
 
 And then specify RDiscount as the Markdown engine in your `_config.yml` file to
 have Jekyll run with that option.
 
-{% highlight bash %}
+{% highlight yaml %}
 # In _config.yml
 markdown: rdiscount
 {% endhighlight %}
+
+## Kramdown
+
+You can also use [Kramdown](http://kramdown.rubyforge.org/) instead of Maruku
+for Markdown. Make sure that Kramdown is installed:
+
+{% highlight bash %}
+$ [sudo] gem install kramdown
+{% endhighlight %}
+
+Then you can specify Kramdown as the Markdown engine in `_config.yml`.
+
+{% highlight yaml %}
+# In _config.yml
+markdown: kramdown
+{% endhighlight %}
+
+Kramdown has various options for customizing the HTML output. The
+[Configuration](/docs/configuration/) page lists the default options used by
+Jekyll. A complete list of options is also available on the [Kramdown
+website](http://kramdown.rubyforge.org/options.html).
