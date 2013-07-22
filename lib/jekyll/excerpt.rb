@@ -59,7 +59,6 @@ module Jekyll
     end
 
     def to_s
-      Jekyll.logger.debug "Excerpt#to_s:", "#{self.output} || #{content}"
       self.output || self.content
     end
 

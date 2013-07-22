@@ -256,7 +256,6 @@ module Jekyll
       }.deep_merge(site_payload)
 
       self.extracted_excerpt.do_layout(payload, {})
-      Jekyll.logger.info("", "#{self.excerpt}".green)
 
       do_layout(payload.merge({"page" => self.to_liquid}), layouts)
     end
