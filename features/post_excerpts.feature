@@ -1,6 +1,6 @@
 Feature: Post excerpts
   As a hacker who likes to blog
-  I want to be able to make a static sitej
+  I want to be able to make a static site
   In order to share my awesome ideas with the interwebs
   But some people can only focus for a few moments
   So just give them a taste
