@@ -2,9 +2,9 @@
 layout: post
 title:  Post Excerpt with Layout
 categories:
-- jekyll
-- excerpt
-- blah
+- bar
+- baz
+- z_category
 tags:
 - first
 - second
