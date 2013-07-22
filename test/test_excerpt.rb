@@ -23,7 +23,7 @@ class TestExcerpt < Test::Unit::TestCase
       should "contain the proper page data to mimick the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
         assert_equal "/bar/baz/z_category/2013/07/22/post-excerpt-with-layout.html", @excerpt.to_liquid["url"]
-        assert_equal Time.new(2013, 07, 22), @excerpt.to_liquid["date"]
+        assert_equal Time.parse("2013-07-22"), @excerpt.to_liquid["date"]
         assert_equal %w[bar baz z_category], @excerpt.to_liquid["categories"]
         assert_equal %w[first second third jekyllrb.com], @excerpt.to_liquid["tags"]
         assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown", @excerpt.to_liquid["path"]
