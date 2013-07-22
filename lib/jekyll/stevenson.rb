@@ -15,6 +15,16 @@ module Jekyll
     def initialize(level = INFO)
       @log_level = level
     end
+    
+    # Public: Print a jekyll debug message to stdout
+    #
+    # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
+    # message - the message detail
+    #
+    # Returns nothing
+    def debug(topic, message = nil)
+      $stdout.puts(message(topic, message)) if log_level <= DEBUG
+    end
 
     # Public: Print a jekyll message to stdout
     #
