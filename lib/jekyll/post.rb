@@ -10,8 +10,7 @@ module Jekyll
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
-    # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
+    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
       title
       url
       date
@@ -20,10 +19,14 @@ module Jekyll
       next
       previous
       tags
-      content
-      excerpt
       path
     ]
+
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID.concat(%w[
+      content
+      excerpt
+    ])
 
     # Post name validator. Post filenames must be like:
     # 2008-11-05-my-awesome-post.textile
@@ -109,7 +112,7 @@ module Jekyll
       if self.data.has_key? 'excerpt'
         self.data['excerpt']
       else
-        self.extracted_excerpt.output || self.extracted_excerpt.to_s
+        self.extracted_excerpt.to_s
       end
     end
 
@@ -249,12 +252,13 @@ module Jekyll
       # construct payload
       payload = {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => self.to_liquid
+        "page" => self.to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
       }.deep_merge(site_payload)
 
-      self.extracted_excerpt.do_layout(payload, layouts)
+      self.extracted_excerpt.do_layout(payload, {})
+      Jekyll.logger.info("", "#{self.excerpt}".green)
 
-      do_layout(payload, layouts)
+      do_layout(payload.merge({"page" => self.to_liquid}), layouts)
     end
 
     # Obtain destination path.
@@ -272,8 +276,8 @@ module Jekyll
     # Convert this post into a Hash for use in Liquid templates.
     #
     # Returns the representative Hash.
-    def to_liquid
-      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
+    def to_liquid(attrs = ATTRIBUTES_FOR_LIQUID)
+      further_data = Hash[attrs.map { |attribute|
         [attribute, send(attribute)]
       }]
       data.deep_merge(further_data)

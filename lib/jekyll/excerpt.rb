@@ -13,27 +13,41 @@ module Jekyll
     #
     # Returns the new Post.
     def initialize(post)
-      @post = post
-      @content = extract_excerpt(post.content)
+      self.post = post
+      self.content = extract_excerpt(post.content)
     end
 
-    %w[site name data ext].each do |meth|
+    %w[site name ext].each do |meth|
       define_method(meth) do
         post.send(meth)
       end
     end
 
+    def to_liquid
+      post.to_liquid(Post::EXCERPT_ATTRIBUTES_FOR_LIQUID)
+    end
+
+    # Fetch YAML front-matter data from related post, without layout key
+    #
+    # Returns Hash of post data
+    def data
+      @data ||= post.data.dup
+      @data.delete("layout") if @data.has_key?("layout")
+      @data
+    end
+
+    # 'Path' of the excerpt.
+    # 
+    # Returns the path for the post this excerpt belongs to with #excerpt appended
     def path
       File.join(post.path, "#excerpt")
     end
 
+    # Check if excerpt includes a string
+    #
+    # Returns true if the string passed in 
     def include?(something)
-      (output && output.include?(something)) || content.include?(something)
-    end
-
-    def render_all_layouts(layouts, payload, info)
-      output = content
-      Jekyll.logger.debug "Output of", "#{self.path} => '#{self.output}'"
+      (self.output && self.output.include?(something)) || self.content.include?(something)
     end
 
     # The UID for this post (useful in feeds).
@@ -44,16 +58,9 @@ module Jekyll
       File.join(post.dir, post.slug, "#excerpt")
     end
 
-    # Convert this post into a Hash for use in Liquid templates.
-    #
-    # Returns the representative Hash.
-    def to_liquid
-      post.to_liquid
-    end
-
     def to_s
-      Jekyll.logger.debug "Excerpt#to_s:", "#{output} || #{content}"
-      output || content
+      Jekyll.logger.debug "Excerpt#to_s:", "#{self.output} || #{content}"
+      self.output || self.content
     end
 
     # Returns the shorthand String identifier of this Post.
