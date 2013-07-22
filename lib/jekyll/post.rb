@@ -113,7 +113,12 @@ module Jekyll
     #
     # Returns the post title
     def title
-      self.data.fetch("title", self.slug.split('-').select {|w| w.capitalize! || w }.join(' '))
+      self.data.fetch("title", self.titleize_slug)
+    end
+
+    # Turns the post slug into a suitable title
+    def titleize_slug
+      self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
     end
 
     # Public: the path to the post relative to the site source,
