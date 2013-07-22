@@ -106,18 +106,14 @@ module Jekyll
     #
     # Returns excerpt string.
     def excerpt
-      if self.data.has_key? 'excerpt'
-        self.data['excerpt']
-      else
-        self.extracted_excerpt.to_s
-      end
+      self.data.fetch('excerpt', self.extracted_excerpt.to_s)
     end
 
     # Public: the Post title, from the YAML Front-Matter or from the slug
     #
     # Returns the post title
     def title
-      self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+      self.data.fetch("title", self.slug.split('-').select {|w| w.capitalize! || w }.join(' '))
     end
 
     # Public: the path to the post relative to the site source,
@@ -127,7 +123,7 @@ module Jekyll
     #
     # Returns the path to the file relative to the site source
     def path
-      self.data['path'] || File.join(@dir, '_posts', @name).sub(/\A\//, '')
+      self.data.fetch('path', File.join(@dir, '_posts', @name).sub(/\A\//, ''))
     end
 
     # Compares Post objects. First compares the Post date. If the dates are

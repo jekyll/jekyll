@@ -118,7 +118,7 @@ module Jekyll
       self.data.deep_merge({
         "url"        => self.url,
         "content"    => self.content,
-        "path"       => self.data['path'] || path })
+        "path"       => self.data.fetch('path', path) })
     end
 
     # The path to the source file
