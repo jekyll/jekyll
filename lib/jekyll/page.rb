@@ -118,16 +118,6 @@ module Jekyll
       do_layout(payload, layouts)
     end
 
-    # Convert this Page's data to a Hash suitable for use by Liquid.
-    #
-    # Returns the Hash representation of this Page.
-    def to_liquid
-      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
-        [attribute, send(attribute)]
-      }]
-      data.deep_merge(further_data)
-    end
-
     # The path to the source file
     #
     # Returns the path to the source file

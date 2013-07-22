@@ -270,16 +270,6 @@ module Jekyll
       path
     end
 
-    # Convert this post into a Hash for use in Liquid templates.
-    #
-    # Returns the representative Hash.
-    def to_liquid
-      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
-        [attribute, send(attribute)]
-      }]
-      data.deep_merge(further_data)
-    end
-
     # Returns the shorthand String identifier of this Post.
     def inspect
       "<Post: #{self.id}>"
