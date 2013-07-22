@@ -15,20 +15,14 @@ module Jekyll
     def initialize(config)
       self.config          = config.clone
 
-      self.safe            = config['safe']
+      %w[safe lsi pygments baseurl exclude include future show_drafts limit_posts keep_files].each do |opt|
+        self.send("#{opt}=", config[opt])
+      end
+
       self.source          = File.expand_path(config['source'])
       self.dest            = File.expand_path(config['destination'])
       self.plugins         = plugins_path
-      self.lsi             = config['lsi']
-      self.pygments        = config['pygments']
-      self.baseurl         = config['baseurl']
       self.permalink_style = config['permalink'].to_sym
-      self.exclude         = config['exclude']
-      self.include         = config['include']
-      self.future          = config['future']
-      self.show_drafts     = config['show_drafts']
-      self.limit_posts     = config['limit_posts']
-      self.keep_files      = config['keep_files']
 
       self.reset
       self.setup
