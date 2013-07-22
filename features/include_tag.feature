@@ -33,3 +33,11 @@ Feature: Include tags
     And I should see "<li>param1_or_2 = value</li>" in "_site/2013/04/12/parameter-syntax.html"
     And I should see "<li>local = some text</li>" in "_site/2013/06/22/pass-a-variable.html"
     And I should see "<li>layout = default</li>" in "_site/2013/06/22/pass-a-variable.html"
+
+  Scenario: Include a markdown file
+    Given I have an _includes directory
+    And I have an "_includes/header.md" file that contains "# My page header"
+    And I have an "index.html" page that contains "{% include header.md %}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "<h1>My page header</h1>" in "_site/index.html"
