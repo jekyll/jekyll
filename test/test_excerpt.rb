@@ -16,11 +16,17 @@ class TestExcerpt < Test::Unit::TestCase
       stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
+      @excerpt = @post.send :extract_excerpt
     end
 
     context "#to_liquid" do
       should "contain the proper page data to mimick the post liquid" do
-        assert_equal {}, @post.excerpt.to_liquid.to_s
+        assert_equal "", @excerpt.to_liquid
+        assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
+        assert_equal "/jekyll/excerpt/blah/2013/07/22/post-excerpt-with-layout.html", @excerpt.to_liquid["url"]
+        assert_equal Time.new(2013, 07, 22), @excerpt.to_liquid["date"]
+        assert_equal %w[jekyll excerpt blah], @excerpt.to_liquid["categories"]
+        assert_equal %w[first second third jekyllrb.com], @excerpt.to_liquid["tags"]
       end
     end
 
@@ -28,11 +34,11 @@ class TestExcerpt < Test::Unit::TestCase
 
       context "before render" do
         should "be the first paragraph of the page" do
-          assert_equal "First paragraph with [link ref][link].\n\n[link]: http://www.jekyllrb.com/", @post.excerpt.to_s
+          assert_equal "First paragraph with [link ref][link].\n\n[link]: http://www.jekyllrb.com/", @excerpt.content
         end
 
         should "contain any refs at the bottom of the page" do
-          assert @post.excerpt.to_s.include?("[link]: http://www.jekyllrb.com/")
+          assert @excerpt.content.include?("[link]: http://www.jekyllrb.com/")
         end
       end
 
@@ -40,14 +46,15 @@ class TestExcerpt < Test::Unit::TestCase
         setup do
           @rendered_post = @post.dup
           do_render(@rendered_post)
+          @extracted_excerpt = @rendered_post.send :extracted_excerpt
         end
 
         should "be the first paragraph of the page" do
-          assert_equal "<p>First paragraph with <a href='http://www.jekyllrb.com/'>link ref</a>.</p>", @rendered_post.excerpt.content
+          assert_equal "<p>First paragraph with <a href='http://www.jekyllrb.com/'>link ref</a>.</p>", @extracted_excerpt.content
         end
 
         should "link properly" do
-          assert @rendered_post.excerpt.to_s.include?("http://www.jekyllrb.com/")
+          assert @extracted_excerpt.content.include?("http://www.jekyllrb.com/")
         end
       end
     end

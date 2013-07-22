@@ -1,6 +1,15 @@
 ---
 layout: post
 title:  Post Excerpt with Layout
+categories:
+- jekyll
+- excerpt
+- blah
+tags:
+- first
+- second
+- third
+- jekyllrb.com
 ---
 
 First paragraph with [link ref][link].
