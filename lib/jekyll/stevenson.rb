@@ -5,7 +5,7 @@ module Jekyll
     DEBUG  = 0
     INFO   = 1
     WARN   = 2
-    ERROR = 3
+    ERROR  = 3
 
     # Public: Create a new instance of Stevenson, Jekyll's logger
     #
@@ -22,7 +22,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def info(topic, message)
+    def info(topic, message = nil)
       $stdout.puts(message(topic, message)) if log_level <= INFO
     end
 
@@ -32,7 +32,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def warn(topic, message)
+    def warn(topic, message = nil)
       $stderr.puts(message(topic, message).yellow) if log_level <= WARN
     end
 
@@ -42,8 +42,19 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def error(topic, message)
+    def error(topic, message = nil)
       $stderr.puts(message(topic, message).red) if log_level <= ERROR
+    end
+
+    # Public: Print a Jekyll error message to stderr and immediately abort the process
+    #
+    # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
+    # message - the message detail (can be omitted)
+    #
+    # Returns nothing
+    def abort_with(topic, message = nil)
+      error(topic, message)
+      abort
     end
 
     # Public: Build a Jekyll topic method
