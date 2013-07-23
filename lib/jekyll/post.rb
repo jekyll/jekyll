@@ -3,10 +3,6 @@ module Jekyll
     include Comparable
     include Convertible
 
-    class << self
-      attr_accessor :lsi
-    end
-
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
