@@ -51,6 +51,21 @@ eos
       def render(context)
         includes_dir = File.join(context.registers[:site].source, '_includes')
 
+        error = self.validate_file(includes_dir)
+        unless error.nil?
+          return error
+        end
+
+        source = File.read(File.join(includes_dir, @file))
+        partial = Liquid::Template.parse(source)
+
+        context.stack do
+          context['include'] = parse_params(context) if @params
+          partial.render(context)
+        end
+      end
+
+      def validate_file(includes_dir)
         if File.symlink?(includes_dir)
           return "Includes directory '#{includes_dir}' cannot be a symlink"
         end
@@ -59,20 +74,14 @@ eos
           return "Include file '#{@file}' contains invalid characters or sequences"
         end
 
-        Dir.chdir(includes_dir) do
-          choices = Dir['**/*'].reject { |x| File.symlink?(x) }
-          if choices.include?(@file)
-            source = File.read(@file)
-            partial = Liquid::Template.parse(source)
-
-            context.stack do
-              context['include'] = parse_params(context) if @params
-              partial.render(context)
-            end
-          else
-            "Included file '#{@file}' not found in _includes directory"
-          end
+        file = File.join(includes_dir, @file)
+        if !File.exists?(file)
+          return "Included file #{@file} not found in _includes directory"
+        elsif File.symlink?(file)
+          return "Included file #{@file} is a symlink"
         end
+
+        nil
       end
     end
   end
