@@ -32,7 +32,7 @@ module Jekyll
     # Returns Hash of post data
     def data
       @data ||= post.data.dup
-      @data.delete("layout") if @data.has_key?("layout")
+      @data.delete("layout")
       @data
     end
 
