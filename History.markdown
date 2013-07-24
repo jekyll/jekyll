@@ -3,13 +3,21 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## v1.1.1 / 2013-07-24
+
+### Minor Enhancements
   * Remove superfluous `table` selector from main.css in `jekyll new` template (#1328)
   * Abort with non-zero exit codes (#1338)
 
 ### Bug Fixes
   * Fix up the rendering of excerpts (#1339)
-
-### Development Fixes
 
 ### Site Enhancements
   * Add Jekyll Image Tag to the plugins list (#1306)
