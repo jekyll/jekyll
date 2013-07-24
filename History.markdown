@@ -7,6 +7,7 @@
   * Abort with non-zero exit codes (#1338)
 
 ### Bug Fixes
+  * Fix up the rendering of excerpts (#1339)
 
 ### Development Fixes
 
