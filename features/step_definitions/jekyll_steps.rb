@@ -4,6 +4,8 @@ Before do
   Dir.chdir(TEST_DIR)
 end
 
+World(Test::Unit::Assertions)
+
 Given /^I have a blank site in "(.*)"$/ do |path|
   FileUtils.mkdir(path)
 end
@@ -141,6 +143,10 @@ end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
   assert Regexp.new(text).match(File.open(file).readlines.join)
+end
+
+Then /^I should see exactly "(.*)" in "(.*)"$/ do |text, file|
+  assert_equal text, File.open(file).readlines.join.strip
 end
 
 Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
