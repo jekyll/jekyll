@@ -109,11 +109,11 @@ module Jekyll
     #
     # Returns the post title
     def title
-      self.data.fetch("title", self.titleize_slug)
+      self.data.fetch("title", self.titleized_slug)
     end
 
     # Turns the post slug into a suitable title
-    def titleize_slug
+    def titleized_slug
       self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
     end
 
