@@ -169,7 +169,7 @@ following is a reference of the available data.
       <td><p><code>page.title</code></p></td>
       <td><p>
 
-        The title of the Post.
+        The title of the Page.
 
       </p></td>
     </tr>
