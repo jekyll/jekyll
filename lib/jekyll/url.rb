@@ -1,38 +1,49 @@
-# The URL module provides methods that generate a URL for a resource in which they're
-# included, such as a Post or a Page.
+# Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
-# Requires
+# Examples
 #
-#   self.permalink  - If a permalink is set in the included instance, that permalink
-#                     will be returned instead of any URL that might've been generated
+#   URL.new({
+#     :template => /:categories/:title.html",
+#     :placeholders => {:categories => "ruby", :title => "something"}
+#   }).to_s
 #
-#   self.url_placeholders - Placeholders that may be used in the URL, which will be replaced
-#                         with the values when the URL is generated. Must return a Hash
-#                         mapping placeholder names to their values. For example, if this
-#                         method returned
-#
-#                           { "year" => Time.now.strftime("%Y") }
-#
-#                         Every occurrence of ":year" (note the colon) would be replaced with
-#                         the current year.
-#
-#
-
 module Jekyll
-  module URL
+  class URL
 
-    # The generated relative url of this page. e.g. /about.html.
-    #
-    # Returns the String url.
-    def url
-      @url ||= sanitize_url(permalink || generate_url)
+    # options - One of :permalink or :template must be supplied.
+    #           :template     - The String used as template for URL generation,
+    #                           for example "/:path/:basename:output_ext", where
+    #                           a placeholder is prefixed with a colon.
+    #           :placeholders - A hash containing the placeholders which will be
+    #                           replaced when used inside the template. E.g.
+    #                           { "year" => Time.now.strftime("%Y") } would replace
+    #                           the placeholder ":year" with the current year.
+    #           :permalink    - If supplied, no URL will be generated from the
+    #                           template. Instead, the given permalink will be
+    #                           used as URL.
+    def initialize(options)
+      @template = options[:template]
+      @placeholders = options[:placeholders] || {}
+      @permalink = options[:permalink]
+
+      if (@template || @permalink).nil?
+        raise ArgumentError, "One of :template or :permalink must be supplied."
+      end
     end
 
-    # Generate the URL by replacing all placeholders with their respective values
+    # The generated relative URL of the resource
+    #
+    # Returns the String URL
+    def to_s
+      sanitize_url(@permalink || generate_url)
+    end
+
+    # Internal: Generate the URL by replacing all placeholders with their
+    # respective values
     #
     # Returns the _unsanitizied_ String URL
     def generate_url
-      url_placeholders.inject(template) { |result, token|
+      @placeholders.inject(@template) { |result, token|
         result.gsub(/:#{token.first}/, token.last)
       }
     end

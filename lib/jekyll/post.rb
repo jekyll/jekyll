@@ -2,7 +2,6 @@ module Jekyll
   class Post
     include Comparable
     include Convertible
-    include URL
 
     class << self
       attr_accessor :lsi
@@ -195,6 +194,17 @@ module Jekyll
       end
     end
 
+    # The generated relative url of this post.
+    #
+    # Returns the String url.
+    def url
+      @url ||= URL.new({
+        :template => template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
+      }).to_s
+    end
+
     # See url.rb for an explanation
     def url_placeholders
       {
@@ -204,7 +214,7 @@ module Jekyll
         "title"      => CGI.escape(slug),
         "i_day"      => date.strftime("%d").to_i.to_s,
         "i_month"    => date.strftime("%m").to_i.to_s,
-        "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
+        "categories" => (categories || []).map { |c| URI.escape(c.to_s) }.join('/'),
         "short_month" => date.strftime("%b"),
         "y_day"      => date.strftime("%j"),
         "output_ext" => self.output_ext

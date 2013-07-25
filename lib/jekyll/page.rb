@@ -1,7 +1,6 @@
 module Jekyll
   class Page
     include Convertible
-    include URL
 
     attr_writer :dir
     attr_accessor :site, :pager
@@ -61,6 +60,17 @@ module Jekyll
       else
         "/:path/:basename:output_ext"
       end
+    end
+
+    # The generated relative url of this page. e.g. /about.html.
+    #
+    # Returns the String url.
+    def url
+      @url ||= URL.new({
+        :template => template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
+      }).to_s
     end
 
     # See url.rb for an explanation
