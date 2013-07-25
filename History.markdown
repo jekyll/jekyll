@@ -1,10 +1,7 @@
-## HEAD
+## 1.0.4 / 2013-07-24
 
-### Major Enhancements
-### Minor Enhancements
 ### Bug Fixes
-### Site Enhancements
-### Development Fixes
+  * Require Liquid 2.5.1 (#1349)
 
 ## 1.0.3 / 2013-06-07
 
