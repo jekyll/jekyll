@@ -5,6 +5,7 @@
 ### Minor Enhancements
 
 ### Bug Fixes
+  * Require Liquid 2.5.1 (#1349)
 
 ### Development Fixes
 
