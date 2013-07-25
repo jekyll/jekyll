@@ -7,11 +7,11 @@ version: 1.0.4
 categories: [release]
 ---
 
-Version 1.1.2 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you are may, but are not required to upgrade at this time.
+Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you are may, but are not required to upgrade at this time.
 
 Community and custom plugins extending the `Liquid::Drop` class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system. 
 
-We recommend you upgrade to Jekyll v1.1.2 immediately if you use `Liquid::Drop` plugins on your Jekyll site.
+We recommend you upgrade to Jekyll v1.0.4 immediately if you use `Liquid::Drop` plugins on your Jekyll site.
 
 Many thanks for [Ben Balter](http://github.com/benbalter) for alerting us to the problem
 and [submitting a patch][1349] so quickly.
