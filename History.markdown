@@ -10,6 +10,7 @@
 
 ### Site Enhancements
   * Add info about new releases (#1353)
+  * Update plugin list with jekyll-rss plugin (#1354)
 
 ## v1.1.2 / 2013-07-25
 
