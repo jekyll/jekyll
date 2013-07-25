@@ -5,11 +5,13 @@
 ### Minor Enhancements
 
 ### Bug Fixes
-  * Require Liquid 2.5.1 (#1349)
 
 ### Development Fixes
 
-### Site Enhancements
+## v1.1.2 / 2013-07-25
+
+### Bug Fixes
+  * Require Liquid 2.5.1 (#1349)
 
 ## v1.1.1 / 2013-07-24
 
