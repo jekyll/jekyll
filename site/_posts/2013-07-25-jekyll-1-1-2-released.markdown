@@ -7,11 +7,11 @@ version: 1.1.2
 categories: [release]
 ---
 
-This version contains a [very important security patch][230] for `Liquid::Drop` plugins
-which granted access to all non-`Drop` entities within a `Drop`, which may include your
-Rack configuration settings and many more pieces of private information which could be
-used to exploit your system. We recommend you upgrade to v1.1.2 as quickly as possible if
-you use `Liquid::Drop` plugins in your site.
+Version 1.1.2 fixes a minor, but none-the-less important security vulnerablity affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you are may, but are not required to upgrade at this time.
+
+Community and custom plugins extending the `Liquid::Drop` class may inadvertantly disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system. 
+
+We recommend you upgrade to Jekyll v1.1.2 immediately if you use `Liquid::Drop` plugins on your Jekyll site.
 
 Many thanks for [Ben Balter](http://github.com/benbalter) for alerting us to the problem
 and [submitting a patch][1349] so quickly.
