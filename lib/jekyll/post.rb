@@ -11,8 +11,7 @@ module Jekyll
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
-    # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
+    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
       title
       url
       date
@@ -21,10 +20,14 @@ module Jekyll
       next
       previous
       tags
-      content
-      excerpt
       path
     ]
+
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID.concat(%w[
+      content
+      excerpt
+    ])
 
     # Post name validator. Post filenames must be like:
     # 2008-11-05-my-awesome-post.textile
@@ -110,7 +113,7 @@ module Jekyll
       if self.data.has_key? 'excerpt'
         self.data['excerpt']
       else
-        self.extracted_excerpt
+        self.extracted_excerpt.to_s
       end
     end
 
@@ -157,14 +160,6 @@ module Jekyll
       self.ext = ext
     rescue ArgumentError
       raise FatalException.new("Post #{name} does not have a valid date.")
-    end
-
-    # Transform the contents and excerpt based on the content type.
-    #
-    # Returns nothing.
-    def transform
-      super
-      self.extracted_excerpt = converter.convert(self.extracted_excerpt)
     end
 
     # The generated directory into which the post will be placed
@@ -241,10 +236,12 @@ module Jekyll
       # construct payload
       payload = {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => self.to_liquid
+        "page" => self.to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
       }.deep_merge(site_payload)
 
-      do_layout(payload, layouts)
+      self.extracted_excerpt.do_layout(payload, {})
+
+      do_layout(payload.merge({"page" => self.to_liquid}), layouts)
     end
 
     # Obtain destination path.
@@ -262,8 +259,8 @@ module Jekyll
     # Convert this post into a Hash for use in Liquid templates.
     #
     # Returns the representative Hash.
-    def to_liquid
-      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
+    def to_liquid(attrs = ATTRIBUTES_FOR_LIQUID)
+      further_data = Hash[attrs.map { |attribute|
         [attribute, send(attribute)]
       }]
       data.deep_merge(further_data)
@@ -295,45 +292,8 @@ module Jekyll
 
     protected
 
-    # Internal: Extract excerpt from the content
-    #
-    # By default excerpt is your first paragraph of a post: everything before
-    # the first two new lines:
-    #
-    #     ---
-    #     title: Example
-    #     ---
-    #
-    #     First paragraph with [link][1].
-    #
-    #     Second paragraph.
-    #
-    #     [1]: http://example.com/
-    #
-    # This is fairly good option for Markdown and Textile files. But might cause
-    # problems for HTML posts (which is quite unusual for Jekyll). If default
-    # excerpt delimiter is not good for you, you might want to set your own via
-    # configuration option `excerpt_separator`. For example, following is a good
-    # alternative for HTML posts:
-    #
-    #     # file: _config.yml
-    #     excerpt_separator: "<!-- more -->"
-    #
-    # Notice that all markdown-style link references will be appended to the
-    # excerpt. So the example post above will have this excerpt source:
-    #
-    #     First paragraph with [link][1].
-    #
-    #     [1]: http://example.com/
-    #
-    # Excerpts are rendered same time as content is rendered.
-    #
-    # Returns excerpt String
     def extract_excerpt
-      separator     = self.site.config['excerpt_separator']
-      head, _, tail = self.content.partition(separator)
-
-      "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
+      Jekyll::Excerpt.new(self)
     end
   end
 end

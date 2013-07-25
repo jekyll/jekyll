@@ -185,17 +185,17 @@ If you have small page fragments that you wish to include in multiple places on
 your site, you can use the `include` tag.
 
 {% highlight ruby %}
-{% raw %}{% include sig.md %}{% endraw %}
+{% raw %}{% include footer.html %}{% endraw %}
 {% endhighlight %}
 
 Jekyll expects all include files to be placed in an `_includes` directory at the
 root of your source directory. This will embed the contents of
-`<source>/_includes/sig.md` into the calling file.
+`<source>/_includes/footer.html` into the calling file.
 
 You can also pass parameters to an include:
 
 {% highlight ruby %}
-{% raw %}{% include sig.textile param="value" %}{% endraw %}
+{% raw %}{% include footer.html param="value" %}{% endraw %}
 {% endhighlight %}
 
 These parameters are available via Liquid in the include:

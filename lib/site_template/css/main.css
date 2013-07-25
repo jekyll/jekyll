@@ -29,11 +29,6 @@ a         { color: #00a; }
 a:hover   { color: #000; }
 a:visited { color: #a0a; }
 
-table {
-  font-size: inherit;
-  font: 100%;
-}
-
 /*****************************************************************************/
 /*
 /* Home

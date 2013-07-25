@@ -88,7 +88,7 @@ following is a reference of the available data.
       <td><p><code>site.pages</code></p></td>
       <td><p>
 
-        An alphabetical list of all Pages.
+        A list of all Pages.
 
       </p></td>
     </tr>
@@ -169,7 +169,7 @@ following is a reference of the available data.
       <td><p><code>page.title</code></p></td>
       <td><p>
 
-        The title of the Post.
+        The title of the Page.
 
       </p></td>
     </tr>
@@ -197,7 +197,9 @@ following is a reference of the available data.
 
         The Date assigned to the Post. This can be overridden in a Post’s front
         matter by specifying a new date/time in the format
-        <code>YYYY-MM-DD HH:MM:SS</code>
+        <code>YYYY-MM-DD HH:MM:SS</code> (assuming UTC), or
+        <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code> (to specify a time zone using
+        an offset from UTC. e.g. <code>2008-12-14 10:30:00 +0900</code>).
 
       </p></td>
     </tr>

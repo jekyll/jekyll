@@ -1,8 +1,51 @@
 ## HEAD
 
 ### Major Enhancements
-  * Add 'docs' subcommand to read Jekyll's docs when offline. (#1046)
-  * Support passing parameters to templates in 'include' tag (#1204)
+
+### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+  * Add info about new releases (#1353)
+  * Update plugin list with jekyll-rss plugin (#1354)
+
+## v1.1.2 / 2013-07-25
+
+### Bug Fixes
+  * Require Liquid 2.5.1 (#1349)
+
+## v1.1.1 / 2013-07-24
+
+### Minor Enhancements
+  * Remove superfluous `table` selector from main.css in `jekyll new` template (#1328)
+  * Abort with non-zero exit codes (#1338)
+
+### Bug Fixes
+  * Fix up the rendering of excerpts (#1339)
+
+### Site Enhancements
+  * Add Jekyll Image Tag to the plugins list (#1306)
+  * Remove erroneous statement that `site.pages` are sorted alphabetically.
+  * Add info about the `_drafts` directory to the directory structure
+    docs (#1320)
+  * Improve the layout of the plugin listing by organizing it into
+    categories (#1310)
+  * Add generator-jekyllrb and grunt-jekyll to plugins page (#1330)
+  * Mention Kramdown as option for markdown parser on Extras page (#1318)
+  * Update Quick-Start page to include reminder that all requirements must be installed (#1327)
+  * Change filename in `include` example to an HTML file so as not to indicate that Jekyll
+    will automatically convert them. (#1303)
+  * Add an RSS feed for commits to Jekyll (#1343)
+
+## 1.1.0 / 2013-07-14
+
+### Major Enhancements
+  * Add `docs` subcommand to read Jekyll's docs when offline. (#1046)
+  * Support passing parameters to templates in `include` tag (#1204)
+  * Add support for Liquid tags to post excerpts (#1302)
 
 ### Minor Enhancements
   * Search the hierarchy of pagination path up to site root to determine template page for
@@ -14,6 +57,8 @@
     sites. (#1247)
   * In the generated site, remove files that will be replaced by a
     directory (#1118)
+  * Fail loudly if a user-specified configuration file doesn't exist (#1098)
+  * Allow for all options for Kramdown HTML Converter (#1201)
 
 ### Bug Fixes
   * Fix pagination in subdirectories. (#1198)
@@ -27,6 +72,7 @@
   * Restrict activesupport dependency to pre-4.0.0 to maintain compatibility with `<= 1.9.2`
   * Include/exclude deprecation handling simplification (#1284)
   * Convert README to Markdown. (#1267)
+  * Refactor Jekyll::Site (#1144)
 
 ### Site Enhancements
   * Add "News" section for release notes, along with an RSS feed (#1093, #1285, #1286)
@@ -63,8 +109,8 @@
   * Update the S3 deployment documentation (#1294)
   * Add suggestion for Xcode CLT install to troubleshooting page in docs (#1296)
   * Add 'Working with drafts' page to docs (#1289)
-
-### Development Fixes
+  * Add information about time zones to the documentation for a page's
+    date (#1304)
 
 ## 1.0.3 / 2013-06-07
 
