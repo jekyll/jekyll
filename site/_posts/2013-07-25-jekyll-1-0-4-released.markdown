@@ -2,7 +2,7 @@
 layout: news_item
 title: "Jekyll 1.0.4 Released"
 date: "2013-07-25 09:08:38 +0200"
-author: parkr
+author: mattr-
 version: 1.0.4
 categories: [release]
 ---
