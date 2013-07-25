@@ -8,6 +8,9 @@
 
 ### Development Fixes
 
+### Site Enhancements
+  * Add info about new releases (#1353)
+
 ## v1.1.2 / 2013-07-25
 
 ### Bug Fixes
