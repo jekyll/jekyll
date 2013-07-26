@@ -7,6 +7,8 @@
 ### Bug Fixes
 
 ### Development Fixes
+  * Remove redundant argument to
+    Jekyll::Commands::New#scaffold_post_content (#1356)
 
 ### Site Enhancements
   * Add info about new releases (#1353)
