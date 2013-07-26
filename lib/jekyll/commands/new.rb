@@ -19,7 +19,7 @@ module Jekyll
           create_sample_files new_blog_path
 
           File.open(File.expand_path(self.initialized_post_name, new_blog_path), "w") do |f|
-            f.write(self.scaffold_post_content(site_template))
+            f.write(self.scaffold_post_content)
           end
         end
 
@@ -33,7 +33,7 @@ module Jekyll
         end
       end
 
-      def self.scaffold_post_content(template_site)
+      def self.scaffold_post_content
         ERB.new(File.read(File.expand_path(scaffold_path, site_template))).result
       end
 
