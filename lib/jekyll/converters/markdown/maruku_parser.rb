@@ -24,12 +24,12 @@ module Jekyll
 
           # Switch off MathML output
           if @config['maruku']['use_math_ml']
-            STDERR.puts "Maruku: Using LaTeX extension. Embedding MathML in output."
+            Jekyll.logger.info "Maruku:", "Using LaTeX extension. Embedding MathML in output."
 
             MaRuKu::Globals[:html_math_output_mathml] = true
             MaRuKu::Globals[:html_math_engine] = @config['maruku']['math_ml_engine']
           else
-            STDERR.puts "Maruku: Using LaTeX extension. Images in `#{@config['maruku']['png_dir']}`."
+            Jekyll.logger.info "Maruku:", "Using LaTeX extension. Images in `#{@config['maruku']['png_dir']}`."
 
             MaRuKu::Globals[:html_math_output_mathml] = false
             MaRuKu::Globals[:html_math_engine] = 'none'
