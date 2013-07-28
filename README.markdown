@@ -26,19 +26,26 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 
 ## Runtime Dependencies
 
+* Commander: Command-line interface constructor (Ruby)
+* Colorator: Colorizes command line output (Ruby)
 * Classifier: Generating related posts (Ruby)
 * Directory Watcher: Auto-regeneration of sites (Ruby)
 * Kramdown: Markdown-superset converter (Ruby)
 * Liquid: Templating system (Ruby)
 * Maruku: Default markdown engine (Ruby)
+* Pygments.rb: Syntax highlighting (Ruby/Python)
+* RedCarpet: Markdown engine (Ruby)
+* Safe YAML: YAML Parser built for security (Ruby)
 
 ## Developer Dependencies
 
+* Launchy: Cross-platform file launcher (Ruby)
 * RDiscount: Discount Markdown Processor (Ruby)
 * RedCloth: Textile support (Ruby)
 * RedGreen: Nicer test output (Ruby)
 * RR: Mocking (Ruby)
 * Shoulda: Test framework (Ruby)
+* SimpleCov: Coverage framework (Ruby)
 
 ## License
 
