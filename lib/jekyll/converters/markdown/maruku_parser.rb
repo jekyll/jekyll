@@ -21,18 +21,26 @@ module Jekyll
 
         def load_blahtext_library
           require 'maruku/ext/math'
-          STDERR.puts "Maruku: Using LaTeX extension. Images in `#{@config['maruku']['png_dir']}`."
 
           # Switch off MathML output
-          MaRuKu::Globals[:html_math_output_mathml] = false
-          MaRuKu::Globals[:html_math_engine] = 'none'
+          if @config['maruku']['use_math_ml']
+            STDERR.puts "Maruku: Using LaTeX extension. Embedding MathML in output."
 
-          # Turn on math to PNG support with blahtex
-          # Resulting PNGs stored in `images/latex`
-          MaRuKu::Globals[:html_math_output_png] = true
-          MaRuKu::Globals[:html_png_engine] =  @config['maruku']['png_engine']
-          MaRuKu::Globals[:html_png_dir] = @config['maruku']['png_dir']
-          MaRuKu::Globals[:html_png_url] = @config['maruku']['png_url']
+            MaRuKu::Globals[:html_math_output_mathml] = true
+            MaRuKu::Globals[:html_math_engine] = @config['maruku']['math_ml_engine']
+          else
+            STDERR.puts "Maruku: Using LaTeX extension. Images in `#{@config['maruku']['png_dir']}`."
+
+            MaRuKu::Globals[:html_math_output_mathml] = false
+            MaRuKu::Globals[:html_math_engine] = 'none'
+
+            # Turn on math to PNG support with blahtex
+            # Resulting PNGs stored in `images/latex`
+            MaRuKu::Globals[:html_math_output_png] = true
+            %w[engine dir url].each do |opt|
+              MaRuKu::Globals["html_png_#{opt}".to_sym] = @config['maruku']["png_#{opt}"]
+            end
+          end
         end
 
         def print_errors_and_fail
