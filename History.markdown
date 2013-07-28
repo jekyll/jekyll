@@ -3,11 +3,30 @@
 ### Major Enhancements
 
 ### Minor Enhancements
-  * Remove superfluous `table` selector from main.css in `jekyll new` template (#1328)
 
 ### Bug Fixes
 
 ### Development Fixes
+  * Remove redundant argument to
+    Jekyll::Commands::New#scaffold_post_content (#1356)
+
+### Site Enhancements
+  * Add info about new releases (#1353)
+  * Update plugin list with jekyll-rss plugin (#1354)
+
+## v1.1.2 / 2013-07-25
+
+### Bug Fixes
+  * Require Liquid 2.5.1 (#1349)
+
+## v1.1.1 / 2013-07-24
+
+### Minor Enhancements
+  * Remove superfluous `table` selector from main.css in `jekyll new` template (#1328)
+  * Abort with non-zero exit codes (#1338)
+
+### Bug Fixes
+  * Fix up the rendering of excerpts (#1339)
 
 ### Site Enhancements
   * Add Jekyll Image Tag to the plugins list (#1306)
@@ -21,6 +40,7 @@
   * Update Quick-Start page to include reminder that all requirements must be installed (#1327)
   * Change filename in `include` example to an HTML file so as not to indicate that Jekyll
     will automatically convert them. (#1303)
+  * Add an RSS feed for commits to Jekyll (#1343)
 
 ## 1.1.0 / 2013-07-14
 

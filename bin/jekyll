@@ -12,7 +12,7 @@ program :name, 'jekyll'
 program :version, Jekyll::VERSION
 program :description, 'Jekyll is a blog-aware, static site generator in Ruby'
 
-default_command :help
+default_command :default
 
 global_option '-s', '--source [DIR]', 'Source directory (defaults to ./)'
 global_option '-d', '--destination [DIR]', 'Destination directory (defaults to ./_site)'
@@ -31,6 +31,16 @@ def normalize_options(options)
     options[:show_drafts] = drafts_state
   end
   options
+end
+
+command :default do |c|
+  c.action do |args, options|
+    if args.empty?
+      command(:help).run
+    else
+      Jekyll.logger.abort_with "Invalid command. Use --help for more information"
+    end
+  end
 end
 
 command :new do |c|
