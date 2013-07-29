@@ -45,17 +45,14 @@ class Hash
   # Public: Turn all keys of this hash to symbols. If anyone don't responds
   # to to_sym, the old key will be keeped
   #
-  # deep - Determines that this call must be recursive into another hash values (default = false)
+  # deep - Determines that this call must be recursive into another hash values
+  # (default = false)
   #
   # Returns the same instance with the keys symbolized
-  def symbolize_keys!(deep = false)
+  def symbolize_keys!
     keys.each do |key|
       new_key = if key.respond_to? :to_sym then key.to_sym else key end
       self[new_key] = delete(key)
-      if deep
-        value = self[new_key]
-        value.symbolize_keys!(deep) if value.is_a? Hash
-      end
     end
     self
   end
@@ -66,8 +63,8 @@ class Hash
   # deep - Determines that this call must be recursive into another hash values (default = false)
   #
   # Returns a new instance with the keys symbolized
-  def symbolize_keys(deep = false)
-    dup.symbolize_keys! deep
+  def symbolize_keys
+    dup.symbolize_keys!
   end
 end
 

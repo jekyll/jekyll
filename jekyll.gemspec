@@ -89,13 +89,6 @@ Gem::Specification.new do |s|
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb
     lib/jekyll/deprecation.rb
-    lib/jekyll/deprecations/config.rb
-    lib/jekyll/deprecations/config/renamed.rb
-    lib/jekyll/deprecations/config/removed.rb
-    lib/jekyll/deprecations/config/type_changed.rb
-    lib/jekyll/deprecations/command.rb
-    lib/jekyll/deprecations/command/no_subcommand.rb
-    lib/jekyll/deprecations/definitions.yml
     lib/jekyll/deprecator.rb
     lib/jekyll/draft.rb
     lib/jekyll/errors.rb

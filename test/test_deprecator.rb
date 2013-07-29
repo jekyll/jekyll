@@ -28,7 +28,7 @@ class TestDeprecator < Test::Unit::TestCase
       assert @config.has_key?("server")
       assert !Deprecator.config(@config).has_key?("server")
     end
-    should "fire warning and transform string exclude into an array" do
+    should "fire warning and transform string 'exclude' into an array" do
       $stderr.expects(:puts).with { |param| param.include? "Deprecation: The 'exclude' configuration option must now be specified as an array, but you specified a string. For now, we've treated the string you provided as a list of comma-separated values." }
       compatible_config = Deprecator.config(@config)
       assert @config.has_key?("exclude")
@@ -36,7 +36,7 @@ class TestDeprecator < Test::Unit::TestCase
       assert_equal compatible_config["exclude"],
                     %w[READ-ME.md Gemfile CONTRIBUTING.hello.markdown]
     end
-    should "fire warning and transform string include into an array" do
+    should "fire warning and transform string 'include' into an array" do
       $stderr.expects(:puts).with { |param| param.include? "Deprecation: The 'include' configuration option must now be specified as an array, but you specified a string. For now, we've treated the string you provided as a list of comma-separated values." }
       compatible_config = Deprecator.config(@config)
       assert @config.has_key?("include")

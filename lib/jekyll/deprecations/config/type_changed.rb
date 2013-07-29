@@ -4,9 +4,6 @@ module Jekyll
       # Represents a TypeChanged config deprecation, which need to be processed
       # when a config type has changed from a type to other
       class TypeChanged < Config
-        # Unsupported type changing message
-        UNSUPPORTED_CHANGE = "Unsupported type change deprecation, the change of type \
-          from %s to %s is not a supported deprecation yet"
 
         attr_reader :old_type, :new_type
 
@@ -31,26 +28,8 @@ module Jekyll
         #
         # Returns nothing
         def process_config
-          old_value = @config[@key]
-
-          if old_value.is_a? @old_type
-            super
-
-            if @old_type == String
-              if @new_type == Array
-                @config[@key] = old_value.split(",").map(&:strip)
-              else
-                raise unsuported_change_msg
-              end
-            else
-              raise unsuported_change_msg
-            end
-          end
         end
 
-        def unsuported_change_msg
-          UNSUPPORTED_CHANGE % [@old_type, @new_type]
-        end
       end
     end
   end
