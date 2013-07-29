@@ -3,17 +3,17 @@ module Jekyll
     class Doctor < Command
       class << self
         def process(options)
-          site = Jekyll::Site.new(options)
-          site.read
+          @site = Jekyll::Site.new(options)
+          @site.read
 
-          unless deprecated_relative_permalinks(site)
+          unless deprecated_relative_permalinks
             Jekyll.logger.info "Your test results", "are in. Everything looks fine."
           end
         end
 
-        def deprecated_relative_permalinks(site)
+        def deprecated_relative_permalinks
           contains_deprecated_pages = false
-          site.pages.each do |page|
+          @site.pages.each do |page|
             if page.uses_relative_permalinks
               Jekyll.logger.warn "Deprecation:", "'#{page.path}' uses relative" +
                                   " permalinks which will be deprecated in" +
