@@ -9,6 +9,7 @@
 ### Development Fixes
   * Remove redundant argument to
     Jekyll::Commands::New#scaffold_post_content (#1356)
+  * Add new dependencies to the README (#1360)
 
 ### Site Enhancements
   * Add info about new releases (#1353)
