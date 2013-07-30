@@ -20,7 +20,8 @@ module Jekyll
         s = HTTPServer.new(
           :Port => options['port'],
           :BindAddress => options['host'],
-          :MimeTypes => mime_types
+          :MimeTypes => mime_types,
+          :DoNotReverseLookup => true
         )
 
         s.mount(options['baseurl'], HTTPServlet::FileHandler, destination, fh_option)
