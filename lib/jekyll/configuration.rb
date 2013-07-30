@@ -11,6 +11,7 @@ module Jekyll
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
       'keep_files'    => ['.git','.svn'],
+      'encoding'      => nil,
 
       'timezone'      => nil,           # use the local timezone
 

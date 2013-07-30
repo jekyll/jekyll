@@ -109,7 +109,7 @@ eos
 
       # This method allows to modify the file content by inheriting from the class.
       def source(file)
-        File.read(file)
+        File.read(file, context.registers[:site].file_read_opts)
       end
     end
   end
