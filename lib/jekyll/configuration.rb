@@ -11,9 +11,10 @@ module Jekyll
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
       'keep_files'    => ['.git','.svn'],
-      'encoding'      => nil,
 
       'timezone'      => nil,           # use the local timezone
+
+      'encoding'      => nil,           # use the system encoding
 
       'safe'          => false,
       'detach'        => false,          # default to not detaching the server

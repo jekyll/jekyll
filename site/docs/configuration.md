@@ -99,6 +99,18 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="option">timezone: TIMEZONE</code></p>
       </td>
     </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Encoding</strong></p>
+        <p class="description">
+            Set the encoding of files. The default is the system encoding,
+            which determined by LANG environment variable.
+        </p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">encoding: ENCODING</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -266,6 +278,7 @@ include:     ['.htaccess']
 exclude:     []
 keep_files:  ['.git','.svn']
 timezone:    nil
+encoding:    nil
 
 future:      true
 show_drafts: nil
