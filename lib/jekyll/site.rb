@@ -5,7 +5,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl
+                  :show_drafts, :keep_files, :baseurl, :file_read_opts
 
     attr_accessor :converters, :generators
 
@@ -29,6 +29,11 @@ module Jekyll
       self.show_drafts     = config['show_drafts']
       self.limit_posts     = config['limit_posts']
       self.keep_files      = config['keep_files']
+
+      self.file_read_opts = {}
+      if encoding = config['encoding']
+        self.file_read_opts[:encoding] = Encoding.find(encoding)
+      end
 
       self.reset
       self.setup
