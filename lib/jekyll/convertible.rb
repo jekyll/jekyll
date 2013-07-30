@@ -145,7 +145,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') do |f|
+      File.open(path, 'wb') do |f|
         f.write(self.output)
       end
     end
