@@ -14,6 +14,8 @@ module Jekyll
 
       'timezone'      => nil,           # use the local timezone
 
+      'encoding'      => nil,           # use the system encoding
+
       'safe'          => false,
       'show_drafts'   => nil,
       'limit_posts'   => 0,

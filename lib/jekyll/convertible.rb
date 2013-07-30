@@ -28,7 +28,7 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name)
       begin
-        self.content = File.read(File.join(base, name))
+        self.content = File.read(File.join(base, name), self.site.file_read_opts)
 
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
