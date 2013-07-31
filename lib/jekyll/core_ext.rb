@@ -76,4 +76,10 @@ if RUBY_VERSION < "1.9"
       self
     end
   end
+
+  class File
+    def File.read(path, opt = {})
+      super(path)
+    end
+  end
 end
