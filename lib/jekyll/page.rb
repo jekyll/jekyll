@@ -76,9 +76,9 @@ module Jekyll
     # See url.rb for an explanation
     def url_placeholders
       {
-        "path"       => @dir,
-        "basename"   => self.basename,
-        "output_ext" => self.output_ext
+        :path       => @dir,
+        :basename   => self.basename,
+        :output_ext => self.output_ext
       }
     end
 
