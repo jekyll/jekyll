@@ -78,7 +78,7 @@ if RUBY_VERSION < "1.9"
   end
 
   class File
-    def File.read(path, opt={})
+    def File.read(path, opt = {})
       super(path)
     end
   end
