@@ -15,6 +15,7 @@
   * Add info about new releases (#1353)
   * Update plugin list with jekyll-rss plugin (#1354)
   * Update the site list page with Ruby's official site (#1358)
+  * Add `jekyll-ditaa` to list of third-party plugins (#1370)
 
 ## v1.1.2 / 2013-07-25
 
