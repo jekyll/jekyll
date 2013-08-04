@@ -452,6 +452,7 @@ You can find a few useful plugins at the following locations:
 - [Singlepage-jekyll](https://github.com/JCB-K/singlepage-jekyll) by [JCB-K](https://github.com/JCB-K): Turns Jekyll into a dynamic one-page website.
 - [generator-jekyllrb](https://github.com/robwierzbowski/generator-jekyllrb): A generator that wraps Jekyll in [Yeoman](http://yeoman.io/), a tool collection and workflow for builing modern web apps.
 - [grunt-jekyll](https://github.com/dannygarcia/grunt-jekyll): A straightforward [Grunt](http://gruntjs.com/) plugin for Jekyll.
+- [jekyll-postfiles](https://github.com/indirect/jekyll-postfiles): Add `_postfiles` directory and `{{ postfile }}` tag so the files a post refers to will always be right there inside your repo.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
