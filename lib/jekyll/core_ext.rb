@@ -42,15 +42,32 @@ class Hash
     array || []
   end
 
-  def symbolize_keys!
+  # Public: Turn all keys of this hash to symbols. If anyone don't responds
+  # to to_sym, the old key will be keeped
+  #
+  # deep - Determines that this call must be recursive into another hash values (default = false)
+  #
+  # Returns the same instance with the keys symbolized
+  def symbolize_keys!(deep = false)
     keys.each do |key|
-      self[(key.to_sym rescue key) || key] = delete(key)
+      new_key = if key.respond_to? :to_sym then key.to_sym else key end
+      self[new_key] = delete(key)
+      if deep
+        value = self[new_key]
+        value.symbolize_keys!(deep) if value.is_a? Hash
+      end
     end
     self
   end
 
-  def symbolize_keys
-    dup.symbolize_keys!
+  # Public: Turn all keys of this hash to symbols. If anyone don't responds
+  # to to_sym, the old key will be keeped
+  #
+  # deep - Determines that this call must be recursive into another hash values (default = false)
+  #
+  # Returns a new instance with the keys symbolized
+  def symbolize_keys(deep = false)
+    dup.symbolize_keys! deep
   end
 end
 
@@ -67,6 +84,16 @@ module Enumerable
   # Look for more detail about glob pattern in method File::fnmatch.
   def glob_include?(e)
     any? { |exp| File.fnmatch?(exp, e) }
+  end
+end
+
+class String
+
+  # Public: Converts string to CamelCase, by default, the first letter will be UPPERCASE
+  #
+  # Returns a new instance of this string camelized
+  def camelize
+    self.gsub(/\/(.?)/) { "::" + $1.upcase }.gsub(/(^|_)(.)/) { $2.upcase }
   end
 end
 
