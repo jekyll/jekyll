@@ -3,6 +3,8 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Remove superfluous `div.container` from the default html template for
+    `jekyll new` (#1315)
 
 ### Bug Fixes
   * Markdown extension matching matches only exact matches (#1382)
