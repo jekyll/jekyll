@@ -255,7 +255,9 @@ module Jekyll
         "page" => self.to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
       }.deep_merge(site_payload)
 
-      self.extracted_excerpt.do_layout(payload, {})
+      if should_generate_excerpt?
+        self.extracted_excerpt.do_layout(payload, {})
+      end
 
       do_layout(payload.merge({"page" => self.to_liquid}), layouts)
     end
@@ -309,7 +311,15 @@ module Jekyll
     protected
 
     def extract_excerpt
-      Jekyll::Excerpt.new(self)
+      if should_generate_excerpt?
+        Jekyll::Excerpt.new(self)
+      else
+        ""
+      end
+    end
+
+    def should_generate_excerpt?
+      site.config['excerpt_separator'].to_s != ""
     end
   end
 end
