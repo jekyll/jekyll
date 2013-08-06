@@ -208,7 +208,7 @@ module Jekyll
     def fix_common_issues
       config = clone
 
-      if config.has_key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 0)
+      if config.has_key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
         Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" +
           " positive integer or nil. It's currently set to '#{config['paginate'].inspect}'."
         config['paginate'] = nil
