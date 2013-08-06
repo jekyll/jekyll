@@ -150,7 +150,7 @@ module Jekyll
         $stderr.puts "#{err}"
       end
 
-      configuration.backwards_compatibilize
+      configuration.fix_common_issues.backwards_compatibilize
     end
 
     # Public: Split a CSV string into an array containing its values
@@ -202,6 +202,18 @@ module Jekyll
           config[option] = csv_to_array(config[option])
         end
       end
+      config
+    end
+
+    def fix_common_issues
+      config = clone
+
+      if config.has_key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 0)
+        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" +
+          " positive integer or nil. It's currently set to '#{config['paginate'].inspect}'."
+        config['paginate'] = nil
+      end
+
       config
     end
 
