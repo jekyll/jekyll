@@ -133,7 +133,8 @@ posts:
 {% endhighlight %}
 
 If you don't like the automatically-generated post excerpt, it can be overridden by adding
-`excerpt` to your post's YAML front-matter.
+`excerpt` to your post's YAML front-matter. Completely disable it by setting
+your `excerpt_separator` to `""`.
 
 ## Highlighting code snippets
 
