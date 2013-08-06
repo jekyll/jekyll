@@ -27,5 +27,5 @@ See the [GitHub Release][] page for more a more detailed changelog for this rele
 {% endfor %}
 
 [GitHub Release]: https://github.com/mojombo/jekyll/releases/tag/v1.1.1
-[gh-pages]: http://pages.github.com
+[gh_pages]: http://pages.github.com
 [v1_1_0]: https://github.com/mojombo/jekyll/releases/tag/v1.1.0
