@@ -26,7 +26,7 @@ module Jekyll
       end
 
       def matches(ext)
-        rgx = '(' + @config['markdown_ext'].gsub(',','|') +')'
+        rgx = '^\.(' + @config['markdown_ext'].gsub(',','|') +')$'
         ext =~ Regexp.new(rgx, Regexp::IGNORECASE)
       end
 
