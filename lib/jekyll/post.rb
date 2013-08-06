@@ -319,7 +319,7 @@ module Jekyll
     end
 
     def should_generate_excerpt?
-      site.config['excerpt_separator'].to_s != ""
+      !(site.config['excerpt_separator'].to_s == "")
     end
   end
 end
