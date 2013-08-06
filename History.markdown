@@ -5,6 +5,7 @@
 ### Minor Enhancements
 
 ### Bug Fixes
+  * Markdown extension matching matches only exact matches (#1382)
 
 ### Development Fixes
   * Remove redundant argument to
