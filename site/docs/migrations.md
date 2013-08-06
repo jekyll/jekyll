@@ -49,10 +49,10 @@ Where IMPORTER is the name of the specific importer.
 
 ## WordPress
 
-### Wordpress export files
+### WordPress export files
 
 If hpricot is not already installed, you will need to run `gem install hpricot`.
-Next, export your blog using the Wordpress export utility. Assuming that the
+Next, export your blog using the WordPress export utility. Assuming that the
 exported file is saved as `wordpress.xml`, here is the command you need to run:
 
 {% highlight bash %}
@@ -61,13 +61,16 @@ $ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpressdotcom";
 {% endhighlight %}
 
 <div class="note">
-  <h5>ProTip™: Wordpress.com Export Tool</h5>
-  <p markdown="1">If you are migrating from a Wordpress.com account, you can access the export tool at the following URL: `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`.</p>
+  <h5>ProTip™: WordPress.com Export Tool</h5>
+  <p markdown="1">If you are migrating from a WordPress.com account, you can
+  access the export tool at the following URL:
+  `https://YOUR-USER-NAME.wordpress.com/wp-admin/export.php`.</p>
 </div>
 
-### Using Wordpress MySQL server connection
+### Using WordPress MySQL server connection
 
-If you want to import using a direct connection to the Wordpress MySQL server, here's how:
+If you want to import using a direct connection to the WordPress MySQL server,
+here's how:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpress";
@@ -85,23 +88,23 @@ $ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpress";
     JekyllImport::WordPress.process("database", "user", "pass", "127.0.0.1")'
 {% endhighlight %}
 
-### Further Wordpress migration alternatives
+### Further WordPress migration alternatives
 
 While the above methods work, they do not import much of the metadata that is
-usually stored in Wordpress posts and pages. If you need to export things like
+usually stored in WordPress posts and pages. If you need to export things like
 pages, tags, custom fields, image attachments and so on, the following resources
 might be useful to you:
 
 - [Exitwp](https://github.com/thomasf/exitwp) is a configurable tool written in
-  Python for migrating one or more Wordpress blogs into Jekyll (Markdown) format
+  Python for migrating one or more WordPress blogs into Jekyll (Markdown) format
   while keeping as much metadata as possible. Exitwp also downloads attachments
   and pages.
 - [A great
   article](http://vitobotta.com/how-to-migrate-from-wordpress-to-jekyll/) with a
-  step-by-step guide for migrating a Wordpress blog to Jekyll while keeping most
+  step-by-step guide for migrating a WordPress blog to Jekyll while keeping most
   of the structure and metadata.
 - [wpXml2Jekyll](https://github.com/theaob/wpXml2Jekyll) is an executable
-  windows application for creating Markdown posts from your Wordpress XML file.
+  windows application for creating Markdown posts from your WordPress XML file.
 
 ## Drupal
 
