@@ -2,18 +2,18 @@ module Jekyll
   class Deprecator
     def self.process(args)
       no_subcommand(args)
-      deprecation_message args, "--server", "The --server command has been replaced by the \
+      arg_is_present? args, "--server", "The --server command has been replaced by the \
                           'serve' subcommand."
-      deprecation_message args, "--no-server", "To build Jekyll without launching a server, \
+      arg_is_present? args, "--no-server", "To build Jekyll without launching a server, \
                           use the 'build' subcommand."
-      deprecation_message args, "--auto", "The switch '--auto' has been replaced with '--watch'."
-      deprecation_message args, "--no-auto", "To disable auto-replication, simply leave off \
+      arg_is_present? args, "--auto", "The switch '--auto' has been replaced with '--watch'."
+      arg_is_present? args, "--no-auto", "To disable auto-replication, simply leave off \
                           the '--watch' switch."
-      deprecation_message args, "--pygments", "The 'pygments' setting can only be set in \
+      arg_is_present? args, "--pygments", "The 'pygments' setting can only be set in \
                           your config files."
-      deprecation_message args, "--paginate", "The 'paginate' setting can only be set in your \
+      arg_is_present? args, "--paginate", "The 'paginate' setting can only be set in your \
                           config files."
-      deprecation_message args, "--url", "The 'url' setting can only be set in your config files."
+      arg_is_present? args, "--url", "The 'url' setting can only be set in your config files."
     end
 
     def self.no_subcommand(args)
@@ -23,10 +23,14 @@ module Jekyll
       end
     end
 
-    def self.deprecation_message(args, deprecated_argument, message)
+    def self.arg_is_present?(args, deprecated_argument, message)
       if args.include?(deprecated_argument)
-        Jekyll.logger.error "Deprecation:", message
+        deprecation_message(message)
       end
+    end
+
+    def self.deprecation_message(message)
+      Jekyll.logger.error "Deprecation:", message
     end
   end
 end
