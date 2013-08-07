@@ -63,7 +63,7 @@ module Jekyll
           "#{pathify(options[:title])}.html"
         end
 
-        if File.extname(path) === ""
+        if File.extname(path).empty?
           path = File.join(path, "index" + "." + options[:ext])
         end
 
