@@ -64,7 +64,7 @@ command :build do |c|
   c.option '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
-  c.option '--drafts', 'Render posts in the _drafts folder'
+  c.option '-D', '--drafts', 'Render posts in the _drafts folder'
 
   c.action do |args, options|
     options = normalize_options(options.__hash__)
@@ -82,7 +82,7 @@ command :serve do |c|
   c.option '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
-  c.option '--drafts', 'Render posts in the _drafts folder'
+  c.option '-D', '--drafts', 'Render posts in the _drafts folder'
 
   c.option '-P', '--port [PORT]', 'Port to listen on'
   c.option '-H', '--host [HOST]', 'Host to bind to'
