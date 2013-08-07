@@ -5,6 +5,7 @@
 ### Minor Enhancements
   * Remove superfluous `div.container` from the default html template for
     `jekyll new` (#1315)
+  * Add -D short-form switch for the drafts option (#1394)
 
 ### Bug Fixes
   * Markdown extension matching matches only exact matches (#1382)
