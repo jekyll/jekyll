@@ -5,7 +5,7 @@ module Jekyll
         raise ArgumentError.new('You must specify either a path or a title.') if !options[:title] && !options[:path]
 
         path = if %w[draft page post].include?(args[0])
-          send("generate_#(args[0])", options)
+          send("generate_#{args[0]}", options)
         else
           Jekyll.logger.warn "Invalid Argument:", "Jekyll can only write posts, pages and drafts for you. Beyond that, you're on your own."
           raise ArgumentError.new("Invalid type for writing: '#{args[0]}'")
@@ -64,7 +64,7 @@ module Jekyll
         end
 
         if File.extname(path).empty?
-          path = File.join(path, "index" + "." + options[:ext])
+          path = File.join(path, "index.#{options[:ext]}")
         end
 
         write_frontmatter(path, options[:title], false)
