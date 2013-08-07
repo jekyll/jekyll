@@ -9,6 +9,7 @@
 ### Bug Fixes
   * Markdown extension matching matches only exact matches (#1382)
   * Fixed NoMethodError when message passed to `Stevenson#message` is nil (#1388)
+  * Use binary mode when writing file (#1364)
 
 ### Development Fixes
   * Remove redundant argument to
