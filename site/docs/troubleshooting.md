@@ -136,6 +136,14 @@ following error:
 '{{ "{{" }}' was not properly terminated with regexp: /\}\}/  (Liquid::SyntaxError)
 {% endhighlight %}
 
+### Excerpts
+
+Since v1.0.0, Jekyll has had automatically-generated post excerpts. Since
+v1.1.0, Jekyll also passes these excerpts through Liquid, which can cause
+strange errors where references don't exist or a tag hasn't been closed. If you
+run into these errors, try setting `excerpt_separator: ""` in your
+`_config.yml`, or set it to some nonsense string.
+
 <div class="note">
   <h5>Please report issues you encounter!</h5>
   <p>If you come across a bug, please <a href="https://github.com/mojombo/jekyll/issues/new">create an issue</a> on GitHub describing the problem and any work-arounds you find so we can document it here for others.</p>
