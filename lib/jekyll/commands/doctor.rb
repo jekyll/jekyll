@@ -36,7 +36,6 @@ module Jekyll
           urls = {}
           urls = collect_urls(urls, site.pages, site.dest)
           urls = collect_urls(urls, site.posts, site.dest)
-          #urls = collect_urls(urls, site.static_files)
           urls.each do |url, paths|
             if paths.size > 1
               conflicting_urls = true
