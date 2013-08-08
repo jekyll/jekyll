@@ -1,6 +1,7 @@
 ## HEAD
 
 ### Major Enhancements
+  * Disable automatically-generated excerpts when `extracted_excerpt` is `""`. (#1386)
 
 ### Minor Enhancements
   * Catch and fix invalid `paginate` values (#1390)
