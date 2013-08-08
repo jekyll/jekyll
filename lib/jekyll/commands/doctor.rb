@@ -6,7 +6,9 @@ module Jekyll
           site = Jekyll::Site.new(options)
           site.read
 
-          unless unhealthy(site)
+          if unhealthy(site)
+            abort
+          else
             Jekyll.logger.info "Your test results", "are in. Everything looks fine."
           end
         end
