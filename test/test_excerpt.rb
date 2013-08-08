@@ -10,6 +10,22 @@ class TestExcerpt < Test::Unit::TestCase
     post.render(layouts, {"site" => {"posts" => []}})
   end
 
+  context "With extraction disabled" do
+    setup do
+      clear_dest
+      stub(Jekyll).configuration do
+        Jekyll::Configuration::DEFAULTS.merge({'excerpt_separator' => ''})
+      end
+      @site = Site.new(Jekyll.configuration)
+      @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
+    end
+
+    should "not be generated" do
+      excerpt = @post.send(:extract_excerpt)
+      assert_equal true, excerpt.empty?
+    end
+  end
+
   context "An extracted excerpt" do
     setup do
       clear_dest
