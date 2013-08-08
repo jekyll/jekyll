@@ -16,7 +16,7 @@ module Jekyll
         template.write
 
         if STDOUT.tty?
-          Jekyll::Stevenson.info("Wrote #{type} template to #{template.path}")
+          Jekyll.logger.info("Wrote #{type} template to #{template.path}")
         else
           template.puts path
         end
