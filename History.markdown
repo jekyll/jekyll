@@ -12,6 +12,8 @@
   * Markdown extension matching matches only exact matches (#1382)
   * Fixed NoMethodError when message passed to `Stevenson#message` is nil (#1388)
   * Use binary mode when writing file (#1364)
+  * Fix 'undefined method `encoding` for "mailto"' errors w/ Ruby 1.8 and
+    Kramdown > 0.14.0 (#1397)
 
 ### Development Fixes
   * Remove redundant argument to
