@@ -65,7 +65,7 @@ Given /^I have the following (draft|post)s?(?: (in|under) "([^"]+)")?:$/ do |sta
     path = File.join(before, folder_post, after, filename)
 
     matter_hash = {}
-    %w(title layout tag tags category categories published author path date).each do |key|
+    %w(title layout tag tags category categories published author path date permalink).each do |key|
       matter_hash[key] = post[key] if post[key]
     end
     matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp

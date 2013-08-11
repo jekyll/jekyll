@@ -63,3 +63,23 @@ Feature: Fancy permalinks
     When I run jekyll
     Then the _site directory should exist
     And I should see "Totally custom." in "_site/03-27-2009/custom-permalink-schema.html"
+
+  Scenario: Use per-post permalink
+    Given I have a _posts directory
+    And I have the following post:
+      | title     | date      | permalink       | content |
+      | Some post | 2013-04-14 | /custom/posts/1 | bla bla |
+    When I run jekyll
+    Then the _site directory should exist
+    And the _site/custom/posts/1 directory should exist
+    And I should see "bla bla" in "_site/custom/posts/1/index.html"
+
+  Scenario: Use per-post ending in .html
+    Given I have a _posts directory
+    And I have the following post:
+      | title     | date      | permalink               | content |
+      | Some post | 2013-04-14 | /custom/posts/some.html | bla bla |
+    When I run jekyll
+    Then the _site directory should exist
+    And the _site/custom/posts directory should exist
+    And I should see "bla bla" in "_site/custom/posts/some.html"
