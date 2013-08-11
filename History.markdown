@@ -9,6 +9,7 @@
     `jekyll new` (#1315)
   * Add -D short-form switch for the drafts option (#1394)
   * Update the links in the site template for Twitter and GitHub (#1400)
+  * Update dummy email address to example.com domain (#1408)
 
 ### Bug Fixes
   * Markdown extension matching matches only exact matches (#1382)
