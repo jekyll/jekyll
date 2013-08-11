@@ -68,7 +68,7 @@ Feature: Fancy permalinks
     Given I have a _posts directory
     And I have the following post:
       | title     | date      | permalink       | content |
-      | Some post | 4/14/2013 | /custom/posts/1 | bla bla |
+      | Some post | 2013-04-14 | /custom/posts/1 | bla bla |
     When I run jekyll
     Then the _site directory should exist
     And the _site/custom/posts/1 directory should exist
@@ -78,7 +78,7 @@ Feature: Fancy permalinks
     Given I have a _posts directory
     And I have the following post:
       | title     | date      | permalink               | content |
-      | Some post | 4/14/2013 | /custom/posts/some.html | bla bla |
+      | Some post | 2013-04-14 | /custom/posts/some.html | bla bla |
     When I run jekyll
     Then the _site directory should exist
     And the _site/custom/posts directory should exist
