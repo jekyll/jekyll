@@ -54,7 +54,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class='setting'>
       <td>
         <p class='name'><strong>Safe</strong></p>
-        <p class='description'>Disable <a href="../plugins">custom plugins</a>.</p>
+        <p class='description'>Disable <a href="../plugins/">custom plugins</a>.</p>
       </td>
       <td class="align-center">
         <p><code class="option">safe: BOOL</code></p>
