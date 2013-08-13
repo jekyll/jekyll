@@ -16,7 +16,7 @@ folders you need for paginated listings.
   <p>
     Pagination does not work with Markdown or Textile files in your Jekyll site.
     It will only work when used within HTML files. Since you’ll likely be using
-    this for the list of Posts, this shouldn't be an issue.
+    this for the list of Posts, this shouldn’t be an issue.
   </p>
 </div>
 

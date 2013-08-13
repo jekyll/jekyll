@@ -17,7 +17,7 @@ having to modify the Jekyll source itself.
     however all Pages sites are generated using the <code>--safe</code> option
     to disable custom plugins for security reasons. Unfortunately, this means
     your plugins won’t work if you’re deploying to GitHub Pages.<br><br>
-    You can still use GitHub Pages to publish your site, but you'll need to
+    You can still use GitHub Pages to publish your site, but you’ll need to
     convert the site locally and push the generated static files to your GitHub
     repository instead of the Jekyll source files.
   </p>
@@ -156,8 +156,8 @@ Converters should implement at a minimum 3 methods:
         <p><code>matches</code></p>
       </td>
       <td><p>
-        Does the given extension match this converter's list of acceptable
-        extensions? Takes one argument: the file's extension (including the
+        Does the given extension match this converter’s list of acceptable
+        extensions? Takes one argument: the file’s extension (including the
         dot). Must return <code>true</code> if it matches, <code>false</code>
         otherwise.
       </p></td>
@@ -313,8 +313,8 @@ There are two flags to be aware of when writing a plugin:
           allowed. This is used by GitHub Pages to determine which core plugins
           may be used, and which are unsafe to run. If your plugin does not
           allow for arbitrary code, execution, set this to <code>true</code>.
-          GitHub Pages still won't load your plugin, but if you submit it for
-          inclusion in core, it's best for this to be correct!
+          GitHub Pages still won’t load your plugin, but if you submit it for
+          inclusion in core, it’s best for this to be correct!
         </p>
       </td>
     </tr>
@@ -368,7 +368,7 @@ You can find a few useful plugins at the following locations:
 - [Jade plugin by John Papandriopoulos](https://github.com/snappylabs/jade-jekyll-plugin): Jade converter for Jekyll.
 - [HAML plugin by Sam Z](https://gist.github.com/517556): HAML converter for Jekyll.
 - [HAML-Sass Converter by Adam Pearson](https://gist.github.com/481456): Simple HAML-Sass converter for Jekyll. [Fork](https://gist.github.com/528642) by Sam X.
-- [Sass SCSS Converter by Mark Wolfe](https://gist.github.com/960150): Sass converter which uses the new CSS compatible syntax, based Sam X's fork above.
+- [Sass SCSS Converter by Mark Wolfe](https://gist.github.com/960150): Sass converter which uses the new CSS compatible syntax, based Sam X’s fork above.
 - [LESS Converter by Jason Graham](https://gist.github.com/639920): Convert LESS files to CSS.
 - [LESS Converter by Josh Brown](https://gist.github.com/760265): Simple LESS converter.
 - [Upcase Converter by Blake Smith](https://gist.github.com/449463): An example Jekyll converter.
@@ -377,7 +377,7 @@ You can find a few useful plugins at the following locations:
 - [Stylus Converter](https://gist.github.com/988201): Convert .styl to .css.
 - [ReStructuredText Converter](https://github.com/xdissent/jekyll-rst): Converts ReST documents to HTML with Pygments syntax highlighting.
 - [Jekyll-pandoc-plugin](https://github.com/dsanson/jekyll-pandoc-plugin): Use pandoc for rendering markdown.
-- [Jekyll-pandoc-multiple-formats](https://github.com/fauno/jekyll-pandoc-multiple-formats) by [edsl](https://github.com/edsl): Use pandoc to generate your site in multiple formats. Supports pandoc's markdown extensions.
+- [Jekyll-pandoc-multiple-formats](https://github.com/fauno/jekyll-pandoc-multiple-formats) by [edsl](https://github.com/edsl): Use pandoc to generate your site in multiple formats. Supports pandoc’s markdown extensions.
 - [ReStructuredText Converter](https://github.com/xdissent/jekyll-rst): Converts ReST documents to HTML with Pygments syntax highlighting.
 - [Transform Layouts](https://gist.github.com/1472645): Allows HAML layouts (you need a HAML Converter plugin for this to work).
 
@@ -422,7 +422,7 @@ You can find a few useful plugins at the following locations:
 - [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) by [redwallhp](https://github.com/redwallhp): Generates thumbnails from a directory of images and displays them in a grid.
 - [Youku and Tudou Embed](https://gist.github.com/Yexiaoxing/5891929): Liquid plugin for embedding Youku and Tudou videos.
 - [Jekyll-swfobject](https://github.com/sectore/jekyll-swfobject): Liquid plugin for embedding Adobe Flash files (.swf) using [SWFObject](http://code.google.com/p/swfobject/).
-- [Jekyll Picture Tag](https://github.com/robwierzbowski/jekyll-picture-tag): Easy responsive images for Jekyll. Based on the proposed [`<picture>`](http://picture.responsiveimages.org/) element, polyfilled with Scott Jelh's [Picturefill](https://github.com/scottjehl/picturefill).
+- [Jekyll Picture Tag](https://github.com/robwierzbowski/jekyll-picture-tag): Easy responsive images for Jekyll. Based on the proposed [`<picture>`](http://picture.responsiveimages.org/) element, polyfilled with Scott Jehl’s [Picturefill](https://github.com/scottjehl/picturefill).
 - [Jekyll Image Tag](https://github.com/robwierzbowski/jekyll-image-tag): Better images for Jekyll. Save image presets, generate resized images, and add classes, alt text, and other attributes.
 - [Ditaa Tag](https://github.com/matze/jekyll-ditaa) by [matze](https://github.com/matze): Renders ASCII diagram art into PNG images and inserts a figure tag.
 
