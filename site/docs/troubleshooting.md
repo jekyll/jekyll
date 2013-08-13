@@ -84,7 +84,7 @@ http://localhost:4000/blog
 
 ## Configuration problems
 
-The order of precedence for conflicting [configuration settings](../configuration)
+The order of precedence for conflicting [configuration settings](../configuration/)
 is as follows:
 
 1.  Command-line flags

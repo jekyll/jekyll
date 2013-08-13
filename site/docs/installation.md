@@ -42,7 +42,7 @@ $ gem install jekyll
 
 All of Jekyll’s gem dependencies are automatically installed by the above
 command, so you won’t have to worry about them at all. If you have problems
-installing Jekyll, check out the [troubleshooting](../troubleshooting) page or
+installing Jekyll, check out the [troubleshooting](../troubleshooting/) page or
 [report an issue](https://github.com/mojombo/jekyll/issues/new) so the Jekyll
 community can improve the experience for everyone.
 
@@ -51,7 +51,7 @@ community can improve the experience for everyone.
 There are a number of (optional) extra features that Jekyll supports that you
 may want to install, depending on how you plan to use Jekyll. These extras
 include LaTeX support, and the use of alternative content rendering engines.
-Check out [the extras page](../extras) for more information.
+Check out [the extras page](../extras/) for more information.
 
 <div class="note">
   <h5>ProTip™: Enable Syntax Highlighting</h5>

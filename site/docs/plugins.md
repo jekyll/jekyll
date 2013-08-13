@@ -13,7 +13,7 @@ having to modify the Jekyll source itself.
 <div class="note info">
   <h5>Plugins on GitHub Pages</h5>
   <p>
-    <a href="http://pages.github.com">GitHub Pages</a> is powered by Jekyll,
+    <a href="http://pages.github.com/">GitHub Pages</a> is powered by Jekyll,
     however all Pages sites are generated using the <code>--safe</code> option
     to disable custom plugins for security reasons. Unfortunately, this means
     your plugins won’t work if you’re deploying to GitHub Pages.<br><br>
@@ -458,7 +458,7 @@ You can find a few useful plugins at the following locations:
   <h5>Jekyll Plugins Wanted</h5>
   <p>
     If you have a Jekyll plugin that you would like to see added to this list,
-    you should <a href="../contributing">read the contributing page</a> to find
+    you should <a href="../contributing/">read the contributing page</a> to find
     out how to make that happen.
   </p>
 </div>
