@@ -18,6 +18,7 @@
   * Fix 'undefined method `encoding` for "mailto"' errors w/ Ruby 1.8 and
     Kramdown > 0.14.0 (#1397)
   * Do not force the permalink to be a dir if it ends on .html (#963)
+  * When a Liquid Exception is caught, show the full path rel. to site source (#1415)
 
 ### Development Fixes
   * Remove redundant argument to
