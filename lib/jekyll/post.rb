@@ -142,7 +142,7 @@ module Jekyll
     def <=>(other)
       cmp = self.date <=> other.date
       if 0 == cmp
-       cmp = self.slug <=> other.slug
+        cmp = self.slug <=> other.slug
       end
       return cmp
     end
@@ -260,6 +260,9 @@ module Jekyll
       end
 
       do_layout(payload.merge({"page" => self.to_liquid}), layouts)
+    rescue Exception => e
+      Jekyll.logger.error "Post Render Exception:", "\"#{e.message}\" rendering file \"#{path}\""
+      raise e
     end
 
     # Obtain destination path.
