@@ -31,6 +31,7 @@
   * Add `jekyll-ditaa` to list of third-party plugins (#1370)
   * Add `postfiles` to list of third-party plugins (#1373)
   * For internal links, use full path including trailing `/` (#1411)
+  * Use curly apostrophes in the docs (#1419)
 
 ## v1.1.2 / 2013-07-25
 
