@@ -32,6 +32,7 @@
   * Add `postfiles` to list of third-party plugins (#1373)
   * For internal links, use full path including trailing `/` (#1411)
   * Use curly apostrophes in the docs (#1419)
+  * Update the docs for Redcarpet in Jekyll (#1418)
 
 ## v1.1.2 / 2013-07-25
 
