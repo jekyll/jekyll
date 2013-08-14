@@ -80,7 +80,7 @@ module Jekyll
     def render_liquid(content, payload, info)
       Liquid::Template.parse(content).render!(payload, info)
     rescue Exception => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{payload[:file]}"
+      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{self.path}"
       raise e
     end
 
@@ -100,7 +100,7 @@ module Jekyll
         payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
 
         self.output = self.render_liquid(layout.content,
-                                         payload.merge({:file => layout.name}),
+                                         payload,
                                          info)
 
         if layout = layouts[layout.data["layout"]]
@@ -127,7 +127,7 @@ module Jekyll
       payload["pygments_suffix"] = converter.pygments_suffix
 
       self.content = self.render_liquid(self.content,
-                                        payload.merge({:file => self.name}),
+                                        payload,
                                         info)
       self.transform
 
