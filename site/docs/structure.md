@@ -129,7 +129,7 @@ An overview of what each of these does:
         <p>
 
           This is where the generated site will be placed (by default) once
-          Jekyll is done transforming it. It's probably a good idea to add this
+          Jekyll is done transforming it. It’s probably a good idea to add this
           to your <code>.gitignore</code> file.
 
         </p>
@@ -145,7 +145,7 @@ An overview of what each of these does:
           Provided that the file has a <a href="../frontmatter/">YAML Front
           Matter</a> section, it will be transformed by Jekyll. The same will
           happen for any <code>.html</code>, <code>.markdown</code>,
-          <code>.md</code>, or <code>.textile</code> file in your site's root
+          <code>.md</code>, or <code>.textile</code> file in your site’s root
           directory or directories not listed above.
 
         </p>
@@ -162,7 +162,7 @@ An overview of what each of these does:
           <code>css</code> and <code>images</code> folders,
           <code>favicon.ico</code> files, and so forth—will be copied verbatim
           to the generated site. There are plenty of <a href="../sites/">sites
-          already using Jekyll</a> if you're curious to see how they're laid
+          already using Jekyll</a> if you’re curious to see how they’re laid
           out.
 
         </p>

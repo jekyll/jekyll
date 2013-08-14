@@ -239,7 +239,7 @@ following is a reference of the available data.
       <td><p>
 
         The path to the raw post or page. Example usage: Linking back to the
-        page or post's source on GitHub. This can be overridden in the
+        page or post’s source on GitHub. This can be overridden in the
         <a href="../frontmatter/">YAML Front Matter</a>.
 
       </p></td>
