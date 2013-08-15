@@ -18,6 +18,11 @@ class TestRedcarpet < Test::Unit::TestCase
       assert_equal "<p>&ldquo;smart&rdquo;</p>", @markdown.convert('"smart"').strip
     end
 
+    should "pass redcarpet SmartyPants convertion hyphens to dashes" do
+      assert_equal "<p>double hyphen &ndash; ndash</p>", @markdown.convert('double hyphen -- ndash').strip
+      assert_equal "<p>triple hyphen &mdash; mdash</p>", @markdown.convert('triple hyphen --- mdash').strip
+    end
+
     should "pass redcarpet extensions" do
       assert_equal "<p><del>deleted</del></p>", @markdown.convert('~~deleted~~').strip
     end
