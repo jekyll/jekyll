@@ -1,6 +1,8 @@
 require 'helper'
 require 'ostruct'
 
+Encoding.default_external = 'UTF-8'
+
 class TestConvertible < Test::Unit::TestCase
   context "yaml front-matter" do
     setup do
