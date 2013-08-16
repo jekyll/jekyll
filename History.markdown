@@ -24,6 +24,7 @@
   * Remove redundant argument to
     Jekyll::Commands::New#scaffold_post_content (#1356)
   * Add new dependencies to the README (#1360)
+  * Fix link to contributing page in README (#1424)
 
 ### Site Enhancements
   * Add info about new releases (#1353)
