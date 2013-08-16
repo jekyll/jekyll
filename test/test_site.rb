@@ -223,6 +223,7 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "not include symlinks in safe mode" do
+      skip("MinGW (Windows) is not support symlinks") if is_mingw
       stub(Jekyll).configuration do
         Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
       end
@@ -234,6 +235,7 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "include symlinks in unsafe mode" do
+      skip("MinGW (Windows) is not support symlinks") if is_mingw
       stub(Jekyll).configuration do
         Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => false})
       end
