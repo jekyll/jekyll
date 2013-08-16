@@ -12,8 +12,8 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 * [Install](http://jekyllrb.com/docs/installation/) the gem
 * Read up about its [Usage](http://jekyllrb.com/docs/usage/) and [Configuration](http://jekyllrb.com/docs/configuration/)
 * Take a gander at some existing [Sites](http://wiki.github.com/mojombo/jekyll/sites)
-* Have questions? Post them on the [Mailing List](http://groups.google.com/group/jekyll-rb)
 * Fork and [Contribute](http://jekyllrb.com/docs/contributing/) your own modifications
+* Have questions? Check out `#jekyll` on irc.freenode.net.
 
 ## Diving In
 
