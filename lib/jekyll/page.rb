@@ -6,6 +6,7 @@ module Jekyll
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
+    attr_reader :fragments
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w[
@@ -25,6 +26,7 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
+      @fragments = []
 
       self.process(name)
       self.read_yaml(File.join(base, dir), name)

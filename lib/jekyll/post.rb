@@ -36,7 +36,7 @@ module Jekyll
     attr_accessor :data, :extracted_excerpt, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
-    attr_reader :name
+    attr_reader :name, :fragments
 
     # Initialize this Post instance.
     #
@@ -50,6 +50,7 @@ module Jekyll
       @dir = dir
       @base = self.containing_dir(source, dir)
       @name = name
+      @fragments = []
 
       self.categories = dir.downcase.split('/').reject { |x| x.empty? }
       self.process(name)
