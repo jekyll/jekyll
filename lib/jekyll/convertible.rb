@@ -26,9 +26,9 @@ module Jekyll
     # name - The String filename of the file.
     #
     # Returns nothing.
-    def read_yaml(base, name)
+    def read_yaml(base, name, opt = {})
       begin
-        self.content = File.read(File.join(base, name))
+        self.content = File.read(File.join(base, name), opt)
 
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
