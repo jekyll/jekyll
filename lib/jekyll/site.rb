@@ -312,7 +312,7 @@ module Jekyll
     def site_payload
       {"site" => self.config.merge({
           "time"       => self.time,
-          "version"    => Jekyll.VERSION,
+          "version"    => Jekyll::VERSION,
           "posts"      => self.posts.sort { |a, b| b <=> a },
           "pages"      => self.pages,
           "html_pages" => self.pages.reject { |page| !page.html? },
