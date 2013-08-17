@@ -358,12 +358,12 @@ class TestPost < Test::Unit::TestCase
     context "initializing posts" do
       should "publish when published yaml is no specified" do
         post = setup_post("2008-02-02-published.textile")
-        assert_equal true, Publisher.published?(post)
+        assert_equal true, Publisher.publishing?(post)
       end
 
       should "not published when published yaml is false" do
         post = setup_post("2008-02-02-not-published.textile")
-        assert_equal false, Publisher.published?(post)
+        assert_equal false, Publisher.publishing?(post)
       end
 
       should "recognize date in yaml" do

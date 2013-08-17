@@ -1,6 +1,6 @@
 module Jekyll
   class Publisher
-    def self.published?(thing)
+    def self.publishing?(thing)
       thing.data.fetch('published', true)
     end
   end

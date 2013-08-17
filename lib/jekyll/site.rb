@@ -163,7 +163,7 @@ module Jekyll
             # file appears to have a YAML header so process it as a page
             page = Page.new(self, self.source, dir, f)
             # only include it if it is published
-            pages << page if Publisher.published?(page)
+            pages << page if Publisher.publishing?(page)
           else
             # otherwise treat it as a static file
             static_files << StaticFile.new(self, self.source, dir, f)
@@ -186,7 +186,7 @@ module Jekyll
         if Post.valid?(f)
           post = Post.new(self, self.source, dir, f)
 
-          if Publisher.published?(post) && (self.future || post.date <= self.time)
+          if Publisher.publishing?(post) && (self.future || post.date <= self.time)
             aggregate_post_info(post)
           end
         end
