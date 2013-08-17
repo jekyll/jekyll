@@ -20,6 +20,7 @@ require 'fileutils'
 require 'time'
 require 'safe_yaml'
 require 'English'
+require 'pathname'
 
 # 3rd party
 require 'liquid'
