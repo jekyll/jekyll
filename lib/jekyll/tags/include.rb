@@ -51,10 +51,7 @@ eos
       def render(context)
         includes_dir = File.join(context.registers[:site].source, '_includes')
 
-        error = self.validate_file(includes_dir)
-        unless error.nil?
-          return error
-        end
+        return error if error = validate_file(includes_dir)
 
         source = File.read(File.join(includes_dir, @file))
         partial = Liquid::Template.parse(source)
@@ -78,10 +75,8 @@ eos
         if !File.exists?(file)
           return "Included file #{@file} not found in _includes directory"
         elsif File.symlink?(file)
-          return "Included file #{@file} is a symlink"
+          return "Symlink #{@file} must not be included"
         end
-
-        nil
       end
     end
   end
