@@ -6,18 +6,18 @@ module Jekyll
           site = Jekyll::Site.new(options)
           site.read
 
-          if unhealthy(site)
-            abort
-          else
+          if healthy?(site)
             Jekyll.logger.info "Your test results", "are in. Everything looks fine."
+          else
+            abort
           end
         end
 
-        def unhealthy(site)
+        def healthy?(site)
           [
-            deprecated_relative_permalinks(site),
-            conflicting_urls(site)
-          ].any?
+            !deprecated_relative_permalinks(site),
+            !conflicting_urls(site)
+          ].all?
         end
 
         def deprecated_relative_permalinks(site)
