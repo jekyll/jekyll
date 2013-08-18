@@ -75,7 +75,7 @@ eos
         if !File.exists?(file)
           return "Included file #{@file} not found in _includes directory"
         elsif File.symlink?(file)
-          return "Symlink #{@file} must not be included"
+          return "The included file '_includes/#{@file}' should not be a symlink"
         end
       end
     end
