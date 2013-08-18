@@ -8,6 +8,7 @@ module Jekyll
                   :show_drafts, :keep_files, :baseurl
 
     attr_accessor :converters, :generators
+    attr_reader :default_layouts
 
     # Public: Initialize a new Site.
     #
@@ -89,6 +90,8 @@ module Jekyll
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
+
+      @default_layouts = DefaultLayouts.new config
     end
 
     # Internal: Setup the plugin search path

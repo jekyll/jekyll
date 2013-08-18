@@ -70,6 +70,12 @@ front-matter of a page or post.
           <code>_layouts</code> directory.
 
         </p>
+        <p>
+
+          Note that if omitted, layouts might still be used if you configured
+          <a href="../configuration/#default_layouts">default layouts</a>.
+
+        </p>
       </td>
     </tr>
     <tr>

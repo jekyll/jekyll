@@ -99,6 +99,16 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="option">timezone: TIMEZONE</code></p>
       </td>
     </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Default Layouts</strong></p>
+        <p class='description'>
+            see <a href="#default_layouts" title="default layouts">below</a>
+        </p>
+      </td>
+      <td class='align-center'>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -223,6 +233,37 @@ before your site is served.
   </tbody>
 </table>
 </div>
+
+### Default Layouts
+Instead of specifying the `layout` in the [YAML frontmatter](../frontmatter) of each
+page or post, you can configure defaults. Just set the `layout_defaults` config setting
+to an array of layout defaults, for each of which you specify the subpath it applies
+to (`path`) and the layout that should be used for the pages and posts in that path
+(`layout`). If you set the `path` to an empty string, the default is a global default.
+
+To limit the default only to pages or only to posts, set the `type` variable
+to `post` or `page`. If not set, it defaults to both.
+
+You can specify multiple defaults for nested directories, where subpaths
+override super paths. Also, if two defaults for the same path exist, the
+one with a `type` wins.
+
+As an example, consider the following setting:
+{% highlight yaml %}
+layout_defaults:
+  -
+    path: ""
+    layout: "posts"
+    type: "post"
+  -
+    path: "path/to/files"
+    layout: "my_layout"
+{% endhighlight %}
+
+This sets a default layout named *posts* for all posts. Pages default to no layout.
+However, all pages and posts in `path/to/files` default to the *my_layout* layout.
+
+Of course, any layout specified in YAML frontmatter overrides the defaults.
 
 <div class="note warning">
   <h5>Do not use tabs in configuration files</h5>

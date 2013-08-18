@@ -59,6 +59,10 @@ module Jekyll
       self.process(name)
       self.read_yaml(@base, name)
 
+      unless self.data.has_key?('layout')
+        self.data['layout'] = site.default_layouts.find(File.join(dir, '_posts', name), :post)
+      end
+
       if self.data.has_key?('date')
         self.date = Time.parse(self.data["date"].to_s)
       end

@@ -21,6 +21,10 @@ module Jekyll
 
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
+
+      unless self.data.has_key?('layout')
+        self.data['layout'] = site.default_layouts.find(File.join(dir, name), :page)
+      end
     end
 
     # The generated directory into which the page will be placed
