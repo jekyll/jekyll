@@ -25,12 +25,12 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('liquid', "~> 2.5.1")
   s.add_runtime_dependency('classifier', "~> 1.3")
-  s.add_runtime_dependency('directory_watcher', "~> 1.4.1")
+  s.add_runtime_dependency('directory_watcher', "~> 1.4")
   s.add_runtime_dependency('maruku', "~> 0.5")
   s.add_runtime_dependency('kramdown', "~> 1.0.2")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('commander', "~> 4.1.3")
-  s.add_runtime_dependency('safe_yaml', "~> 0.7.0")
+  s.add_runtime_dependency('safe_yaml', "~> 0.7")
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 2.2.2")
 
