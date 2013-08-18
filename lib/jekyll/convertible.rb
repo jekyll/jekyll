@@ -24,11 +24,13 @@ module Jekyll
     #
     # base - The String path to the dir containing the file.
     # name - The String filename of the file.
+    # opts - optional parameter to File.read, default at site configs
     #
     # Returns nothing.
-    def read_yaml(base, name)
+    def read_yaml(base, name, opts = {})
       begin
-        opts = self.site ? self.site.file_read_opts : {}
+        opts = (self.site ? self.site.file_read_opts : {}).merge(opts)
+
         self.content = File.read(File.join(base, name), opts)
 
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
