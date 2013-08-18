@@ -2,6 +2,7 @@
 
 ### Major Enhancements
   * Disable automatically-generated excerpts when `extracted_excerpt` is `""`. (#1386)
+  * Add checking for URL conflicts when running `jekyll doctor` (#1389)
 
 ### Minor Enhancements
   * Catch and fix invalid `paginate` values (#1390)
