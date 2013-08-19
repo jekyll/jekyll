@@ -253,6 +253,14 @@ class TestSite < Test::Unit::TestCase
         end
       end
 
+      should "not raise if destination is outside of source" do
+        stub(Jekyll).configuration do
+          Jekyll::Configuration::DEFAULTS.merge({'source' => 'aab', 'destination' => 'aa'})
+        end
+
+        site = Site.new(Jekyll.configuration)
+      end
+
       should "raise if destination is source" do
         stub(Jekyll).configuration do
           Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => File.join(source_dir, "..")})
