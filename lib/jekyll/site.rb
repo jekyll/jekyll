@@ -3,7 +3,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :site_cleaner
+                  :show_drafts, :keep_files, :baseurl
 
     attr_accessor :converters, :generators
 
@@ -87,8 +87,6 @@ module Jekyll
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
-
-      self.site_cleaner = Cleaner.new(self)
     end
 
     # Internal: Setup the plugin search path
@@ -228,7 +226,7 @@ module Jekyll
     #
     # Returns nothing.
     def cleanup
-      self.site_cleaner.cleanup!
+      site_cleaner.cleanup!
     end
 
     # Write static files, pages, and posts.
@@ -385,6 +383,10 @@ module Jekyll
     def limit_posts!
       limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
       self.posts = self.posts[-limit, limit]
+    end
+
+    def site_cleaner
+      @site_cleaner ||= Cleaner.new(self)
     end
   end
 end
