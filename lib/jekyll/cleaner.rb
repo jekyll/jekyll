@@ -9,11 +9,17 @@ module Jekyll
 
     # Cleans up the site's destination directory
     def cleanup!
-      obsolete_files = existing_files - new_files - new_dirs + replaced_files
-      FileUtils.rm_rf(obsolete_files.to_a)
+      FileUtils.rm_rf(obsolete_files)
     end
 
     private
+
+    # Private: The list of files and directories to be deleted during the cleanup process
+    #
+    # Returns an Array with the file and directory paths
+    def obsolete_files
+      (existing_files - new_files - new_dirs + replaced_files).to_a
+    end
 
     # Private: The list of existing files, except those included in keep_files and hidden files.
     #
