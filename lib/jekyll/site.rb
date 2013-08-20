@@ -23,9 +23,7 @@ module Jekyll
       self.permalink_style = config['permalink'].to_sym
 
       self.file_read_opts = {}
-      if encoding = config['encoding']
-        self.file_read_opts[:encoding] = Encoding.find(encoding)
-      end
+      self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
       self.reset
       self.setup
