@@ -82,6 +82,7 @@ command :serve do |c|
   c.option '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
+  c.option '--detach', 'Run this server in the background'
   c.option '-D', '--drafts', 'Render posts in the _drafts folder'
 
   c.option '-P', '--port [PORT]', 'Port to listen on'
