@@ -147,6 +147,15 @@ namespace :site do
     end
   end
 
+  desc "Update normalize.css library to the latest version and minify"
+  task :update_normalize_css do
+    Dir.chdir("site/css") do
+      sh 'curl "http://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
+      sh 'sass "normalize.scss":"normalize.css" --style compressed'
+      sh 'rm "normalize.scss"'
+    end
+  end
+
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
   task :publish => [:history] do
     # Ensure the gh-pages dir exists so we can generate into it.

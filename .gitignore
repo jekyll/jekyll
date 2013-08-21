@@ -10,5 +10,7 @@ _site/
 bbin/
 gh-pages/
 site/_site/
+.ruby-version
 coverage
 .ruby-version
+.sass-cache
