@@ -169,7 +169,7 @@ module Jekyll
 
     # Initialize a new Pager.
     #
-    # config    - The Hash configuration of the site.
+    # site     - the Jekyll::Site object
     # page      - The Integer page number.
     # all_posts - The Array of all the site's Posts.
     # num_pages - The Integer number of pages or nil if you'd like the number
