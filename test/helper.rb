@@ -61,6 +61,6 @@ class Test::Unit::TestCase
   end
 
   def is_mingw
-    return RUBY_PLATFORM =~ /mingw/ ? true : false
+    RUBY_PLATFORM =~ /mingw/
   end
 end
