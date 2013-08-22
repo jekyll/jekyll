@@ -241,8 +241,8 @@ configuration file or on the command-line, Jekyll will run using these options.
 <div class="note warning">
   <h5>There are two unsupported kramdown options</h5>
   <p>
-    Please note that both remove_block_html_tags and
-    remove_span_html_tags are currently unsupported in jekyll due to the
+    Please note that both <code>remove_block_html_tags</code> and
+    <code>remove_span_html_tags</code> are currently unsupported in Jekyll due to the
     fact that they are not included within the kramdown HTML converter.
   </p>
 </div>
