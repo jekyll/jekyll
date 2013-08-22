@@ -37,6 +37,7 @@
   * For internal links, use full path including trailing `/` (#1411)
   * Use curly apostrophes in the docs (#1419)
   * Update the docs for Redcarpet in Jekyll (#1418)
+  * Add `pluralize` and `reading_time` filters to docs (#1439)
 
 ## v1.1.2 / 2013-07-25
 
