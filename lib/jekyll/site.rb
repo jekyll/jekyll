@@ -73,7 +73,7 @@ module Jekyll
     def setup
       # Check that the destination dir isn't the source dir or a directory
       # parent to the source dir.
-      if (self.source + '/').start_with?(self.dest + '/')
+      if "#{self.source}/".start_with?("#{self.dest}/")
         raise FatalException.new "Destination directory cannot be or contain the Source directory."
       end
 
