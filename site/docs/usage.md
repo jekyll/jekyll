@@ -31,8 +31,13 @@ preview what the generated site will look like in your browser locally.
 $ jekyll serve
 # => A development server will run at http://localhost:4000/
 
+$ jekyll serve --detach
+# => Same as `jekyll serve` but will detach from the current terminal.
+#    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
+#    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).
+
 $ jekyll serve --watch
-# => As above, but watch for changes and regenerate automatically.
+# => Same as `jekyll serve`, but watch for changes and regenerate automatically.
 {% endhighlight %}
 
 This is just a few of the available [configuration options](../configuration/).
