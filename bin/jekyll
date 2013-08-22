@@ -122,10 +122,11 @@ command :docs do |c|
 
   c.action do |args, options|
     options = normalize_options(options.__hash__)
-    options = Jekyll.configuration(options).merge({
+    options = options.merge({
       'source' => File.expand_path("../site", File.dirname(__FILE__)),
       'destination' => File.expand_path("../site/_site", File.dirname(__FILE__))
     })
+    options = Jekyll.configuration(options)
     puts options
     Jekyll::Commands::Build.process(options)
     Jekyll::Commands::Serve.process(options)
