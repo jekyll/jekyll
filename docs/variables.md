@@ -7,7 +7,7 @@ permalink: /docs/variables/
 ---
 
 Jekyll traverses your site looking for files to process. Any files with [YAML
-Front Matter](../frontmatter) are subject to processing. For each of these
+Front Matter](../frontmatter/) are subject to processing. For each of these
 files, Jekyll makes a variety of data available via the [Liquid templating
 system](http://wiki.github.com/shopify/liquid/liquid-for-designers). The
 following is a reference of the available data.
@@ -36,7 +36,7 @@ following is a reference of the available data.
       <td><p><code>page</code></p></td>
       <td><p>
 
-        Page specific information + the <a href="../frontmatter">YAML Front
+        Page specific information + the <a href="../frontmatter/">YAML Front
         Matter</a>. Custom variables set via the YAML front matter will be
         available here. See below for details.
 
@@ -57,7 +57,7 @@ following is a reference of the available data.
 
         When the <code>paginate</code> configuration option is set, this
         variable becomes available for use. See <a
-        href="../pagination">Pagination</a> for details.
+        href="../pagination/">Pagination</a> for details.
 
       </p></td>
     </tr>
@@ -221,7 +221,7 @@ following is a reference of the available data.
         directory. For example, a post at
         <code>/work/code/_posts/2008-12-24-closures.md</code> would have this
         field set to <code>['work', 'code']</code>. These can also be specified
-        in the <a href="../frontmatter">YAML Front Matter</a>.
+        in the <a href="../frontmatter/">YAML Front Matter</a>.
 
       </p></td>
     </tr>
@@ -230,7 +230,7 @@ following is a reference of the available data.
       <td><p>
 
         The list of tags to which this post belongs. These can be specified in
-        the <a href="../frontmatter">YAML Front Matter</a>.
+        the <a href="../frontmatter/">YAML Front Matter</a>.
 
       </p></td>
     </tr>
@@ -239,8 +239,8 @@ following is a reference of the available data.
       <td><p>
 
         The path to the raw post or page. Example usage: Linking back to the
-        page or post's source on GitHub. This can be overridden in the
-        <a href="../frontmatter">YAML Front Matter</a>.
+        page or post’s source on GitHub. This can be overridden in the
+        <a href="../frontmatter/">YAML Front Matter</a>.
 
       </p></td>
     </tr>

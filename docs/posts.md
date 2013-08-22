@@ -15,11 +15,11 @@ and web-based CMS systems, this will be a welcome change!
 
 ## The Posts Folder
 
-As explained on the [directory structure](../structure) page, the `_posts`
+As explained on the [directory structure](../structure/) page, the `_posts`
 folder is where your blog posts will live. These files can be either
 [Markdown](http://daringfireball.net/projects/markdown/) or
 [Textile](http://textile.sitemonks.com/) formatted text files, and as long as
-they have [YAML front-matter](../frontmatter), they will be converted from their
+they have [YAML front-matter](../frontmatter/), they will be converted from their
 source format into an HTML page that is part of your static site.
 
 ### Creating Post Files
@@ -43,7 +43,7 @@ file. For example, the following are examples of valid post filenames:
 
 ### Content Formats
 
-All blog post files must begin with [YAML front- matter](../frontmatter). After
+All blog post files must begin with [YAML front- matter](../frontmatter/). After
 that, it's simply a matter of deciding which format you prefer. Jekyll supports
 two popular content markup formats:
 [Markdown](http://daringfireball.net/projects/markdown/) and
@@ -95,7 +95,7 @@ Linking to a PDF for readers to download:
 
 It’s all well and good to have posts in a folder, but a blog is no use unless
 you have a list of posts somewhere. Creating an index of posts on another page
-(or in a [template](../templates)) is easy, thanks to the [Liquid template
+(or in a [template](../templates/)) is easy, thanks to the [Liquid template
 language](http://wiki.shopify.com/Liquid) and its tags. Here’s a basic example of how
 to create a list of links to your blog posts:
 
@@ -111,7 +111,7 @@ to create a list of links to your blog posts:
 
 Of course, you have full control over how (and where) you display your posts,
 and how you structure your site. You should read more about [how templates
-work](../templates) with Jekyll if you want to know more.
+work](../templates/) with Jekyll if you want to know more.
 
 ## Post excerpts
 
@@ -177,5 +177,5 @@ end
 
 These basics should be enough to get you started writing your first posts. When
 you’re ready to dig into what else is possible, you might be interested in doing
-things like [customizing post permalinks](../permalinks) or using [custom
-variables](../variables) in your posts and elsewhere on your site.
+things like [customizing post permalinks](../permalinks/) or using [custom
+variables](../variables/) in your posts and elsewhere on your site.
