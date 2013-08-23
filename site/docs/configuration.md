@@ -227,7 +227,7 @@ before your site is served.
       </td>
       <td class="align-center">
         <p><code class="option">detach: BOOL</code></p>
-        <p><code class="flag">--detach</code></p>
+        <p><code class="flag">-B, --detach</code></p>
       </td>
     </tr>
   </tbody>
