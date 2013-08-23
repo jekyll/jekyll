@@ -11,6 +11,8 @@
   * Add -D short-form switch for the drafts option (#1394)
   * Update the links in the site template for Twitter and GitHub (#1400)
   * Update dummy email address to example.com domain (#1408)
+  * Update normalize.css to v2.1.2 and minify; add rake task to update
+    normalize.css with greater ease. (#1430)
 
 ### Bug Fixes
   * Markdown extension matching matches only exact matches (#1382)
