@@ -27,11 +27,7 @@ module Jekyll
     def existing_files
       files = Set.new
       Dir.glob(File.join(@site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-        if @site.keep_files.length > 0
-          files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
-        else
-          files << file unless file =~ /\/\.{1,2}$/
-        end
+        files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
       end
       files
     end
