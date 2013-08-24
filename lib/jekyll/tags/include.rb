@@ -70,6 +70,11 @@ eos
         end
       end
 
+      # Grab file read opts in the context
+      def file_read_opts(context)
+        context.registers[:site].file_read_opts
+      end
+
       def render(context)
         dir = File.join(context.registers[:site].source, INCLUDES_DIR)
         if error = validate_dir(dir, context.registers[:site].safe)
@@ -81,7 +86,7 @@ eos
           return error
         end
 
-        partial = Liquid::Template.parse(source(file))
+        partial = Liquid::Template.parse(source(file, context))
 
         context.stack do
           context['include'] = parse_params(context) if @params
@@ -108,8 +113,8 @@ eos
       end
 
       # This method allows to modify the file content by inheriting from the class.
-      def source(file)
-        File.read(file, context.registers[:site].file_read_opts)
+      def source(file, context)
+        File.read_with_options(file, file_read_opts(context))
       end
     end
   end
