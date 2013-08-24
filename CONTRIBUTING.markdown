@@ -70,9 +70,6 @@ Jekyll's repo on GitHub.com.
 All documentation pull requests should be directed at `master`.  Pull
 requests directed at another branch will not be accepted.
 
-Use the domain `example.com` as an example in order to comply with the
-[RFC 2606](http://tools.ietf.org/html/rfc2606).
-
 The [Jekyll wiki](https://github.com/mojombo/jekyll/wiki) on GitHub 
 can be freely updated without a pull request as all GitHub users have access.
 
