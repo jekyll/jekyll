@@ -68,7 +68,7 @@ You can find the documentation for jekyllrb.com in the
 Jekyll's repo on GitHub.com.
 
 All documentation pull requests should be directed at `master`.  Pull
-requests directed at another branch will not be accepted.
+requests directed at another branch will not be accepted. 
 
 The [Jekyll wiki](https://github.com/mojombo/jekyll/wiki) on GitHub 
 can be freely updated without a pull request as all GitHub users have access.
