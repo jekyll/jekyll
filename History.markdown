@@ -22,6 +22,8 @@
     Kramdown > 0.14.0 (#1397)
   * Do not force the permalink to be a dir if it ends on .html (#963)
   * When a Liquid Exception is caught, show the full path rel. to site source (#1415)
+  * Properly read in the config options when serving the docs locally
+    (#1444)
 
 ### Development Fixes
   * Remove redundant argument to
