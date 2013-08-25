@@ -1,7 +1,7 @@
 ## HEAD
 
 ### Major Enhancements
-  * Disable automatically-generated excerpts when `extracted_excerpt` is `""`. (#1386)
+  * Disable automatically-generated excerpts when `excerpt_separator` is `""`. (#1386)
   * Add checking for URL conflicts when running `jekyll doctor` (#1389)
 
 ### Minor Enhancements
@@ -44,7 +44,7 @@
   * Use curly apostrophes in the docs (#1419)
   * Update the docs for Redcarpet in Jekyll (#1418)
   * Add `pluralize` and `reading_time` filters to docs (#1439)
-  # Fix markup for the Kramdown options (#1445)
+  * Fix markup for the Kramdown options (#1445)
 
 ## v1.1.2 / 2013-07-25
 
