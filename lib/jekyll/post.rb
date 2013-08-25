@@ -252,7 +252,7 @@ module Jekyll
       # construct payload
       payload = {
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => self.to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
+        "page" => self.to_liquid(excerpt_attributes_for_liquid)
       }.deep_merge(site_payload)
 
       if generate_excerpt?
@@ -277,11 +277,19 @@ module Jekyll
     # Convert this post into a Hash for use in Liquid templates.
     #
     # Returns the representative Hash.
-    def to_liquid(attrs = ATTRIBUTES_FOR_LIQUID)
+    def to_liquid(attrs = attributes_for_liquid)
       further_data = Hash[attrs.map { |attribute|
         [attribute, send(attribute)]
       }]
       data.deep_merge(further_data)
+    end
+
+    def attributes_for_liquid
+      ATTRIBUTES_FOR_LIQUID
+    end
+
+    def excerpt_attributes_for_liquid
+      EXCERPT_ATTRIBUTES_FOR_LIQUID
     end
 
     # Returns the shorthand String identifier of this Post.

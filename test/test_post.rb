@@ -462,6 +462,14 @@ class TestPost < Test::Unit::TestCase
         assert_equal "Empty YAML.", post.content
       end
 
+      should "collect all liquid attributes for the whole post" do
+        assert_equal Post::ATTRIBUTES_FOR_LIQUID, setup_post('2008-02-02-published.textile').attributes_for_liquid
+      end
+
+      should "collect all liquid attributes for the excerpt" do
+        assert_equal Post::EXCERPT_ATTRIBUTES_FOR_LIQUID, setup_post('2008-02-02-published.textile').excerpt_attributes_for_liquid
+      end
+
       context "rendering" do
         setup do
           clear_dest
