@@ -15,7 +15,7 @@ module Jekyll
       'timezone'      => nil,           # use the local timezone
 
       'safe'          => false,
-      'detach'        => false,          # don't default to detaching the server
+      'detach'        => false,          # default to not detaching the server
       'show_drafts'   => nil,
       'limit_posts'   => 0,
       'lsi'           => false,

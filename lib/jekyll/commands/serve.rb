@@ -25,15 +25,14 @@ module Jekyll
 
         s.mount(options['baseurl'], HTTPServlet::FileHandler, destination, fh_option)
 
-        unless options['detach']
-          t = Thread.new { s.start }
-          trap("INT") { s.shutdown }
-          t.join()
-        else
-          # they are detaching the server.
+        if options['detach'] # detach the server
           pid = Process.fork {s.start}
           Process.detach(pid)
           pid
+        else # create a new server thread, then join it with current terminal
+          t = Thread.new { s.start }
+          trap("INT") { s.shutdown }
+          t.join()
         end
       end
     end
