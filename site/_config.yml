@@ -3,3 +3,4 @@ relative_permalinks: false
 gauges_id: 503c5af6613f5d0f19000027
 permalink: /news/:year/:month/:day/:title
 excerpt_separator: noifniof3nioaniof3nioafafinoafnoif
+repository: https://github.com/mojombo/jekyll
