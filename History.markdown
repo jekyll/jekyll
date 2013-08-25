@@ -13,6 +13,8 @@
   * Update dummy email address to example.com domain (#1408)
   * Update normalize.css to v2.1.2 and minify; add rake task to update
     normalize.css with greater ease. (#1430)
+  * Add the ability to detach the server ran by `jekyll serve` from it's
+    controlling terminal (#1443)
 
 ### Bug Fixes
   * Markdown extension matching matches only exact matches (#1382)
