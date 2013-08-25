@@ -220,6 +220,16 @@ before your site is served.
         <p><code class="flag">--baseurl URL</code></p>
       </td>
     </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Detach</strong></p>
+        <p class='description'>Detach the server from the terminal</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">detach: BOOL</code></p>
+        <p><code class="flag">-B, --detach</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
