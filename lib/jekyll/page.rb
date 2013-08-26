@@ -37,7 +37,12 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      self.data && self.data['permalink']
+      return nil if self.data.nil? || self.data['permalink'].nil?
+      if site.config['relative_permalinks']
+        File.join(@dir, self.data['permalink'])
+      else
+        self.data['permalink']
+      end
     end
 
     # The template of the permalink.
@@ -61,29 +66,21 @@ module Jekyll
     #
     # Returns the String url.
     def url
-      return @url if @url
+      @url ||= URL.new({
+        :template => template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
+      }).to_s
+    end
 
-      url = if permalink
-        if site.config['relative_permalinks']
-          File.join(@dir, permalink)
-        else
-          permalink
-        end
-      else
-        {
-          "path"       => @dir,
-          "basename"   => self.basename,
-          "output_ext" => self.output_ext,
-        }.inject(template) { |result, token|
-          result.gsub(/:#{token.first}/, token.last)
-        }.gsub(/\/\//, "/")
-      end
-
-      # sanitize url
-      @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
-      @url += "/" if url =~ /\/$/
-      @url.gsub!(/\A([^\/])/, '/\1')
-      @url
+    # Returns a hash of URL placeholder names (as symbols) mapping to the
+    # desired placeholder replacements. For details see "url.rb"
+    def url_placeholders
+      {
+        :path       => @dir,
+        :basename   => self.basename,
+        :output_ext => self.output_ext
+      }
     end
 
     # Extract information from the page filename.
