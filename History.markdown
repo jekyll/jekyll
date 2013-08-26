@@ -26,6 +26,7 @@
   * When a Liquid Exception is caught, show the full path rel. to site source (#1415)
   * Properly read in the config options when serving the docs locally
     (#1444)
+  * Fixed `--layouts` option for `build` and `serve` commands (#1458)
 
 ### Development Fixes
   * Remove redundant argument to
