@@ -45,6 +45,7 @@
   * Update the docs for Redcarpet in Jekyll (#1418)
   * Add `pluralize` and `reading_time` filters to docs (#1439)
   * Fix markup for the Kramdown options (#1445)
+  * Fix typos in the History file (#1454)
 
 ## v1.1.2 / 2013-07-25
 
