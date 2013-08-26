@@ -51,7 +51,7 @@ end
 
 def linkify_prs(markdown)
   markdown.gsub(/#(\d+)/) do |word|
-    "[#{word}](https://github.com/mojombo/jekyll/issues/#{word.delete("#")})"
+    "[#{word}]({{ site.repository }}/issues/#{word.delete("#")})"
   end
 end
 
