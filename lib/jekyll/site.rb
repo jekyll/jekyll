@@ -1,5 +1,3 @@
-require 'set'
-
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
@@ -228,43 +226,7 @@ module Jekyll
     #
     # Returns nothing.
     def cleanup
-      # all files and directories in destination, including hidden ones
-      dest_files = Set.new
-      Dir.glob(File.join(self.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-        if self.keep_files.length > 0
-          dest_files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
-        else
-          dest_files << file unless file =~ /\/\.{1,2}$/
-        end
-      end
-
-      # files to be written
-      files = Set.new
-      each_site_file { |item| files << item.destination(self.dest) }
-
-      # adding files' parent directories
-      dirs = Set.new
-      files.each { |file| dirs << File.dirname(file) }
-      files.merge(dirs)
-
-      # files that are replaced by dirs should be deleted
-      files_to_delete = Set.new
-      dirs.each { |dir| files_to_delete << dir if File.file?(dir) }
-
-      obsolete_files = dest_files - files + files_to_delete
-      FileUtils.rm_rf(obsolete_files.to_a)
-    end
-
-    # Private: creates a regular expression from the keep_files array
-    #
-    # Examples
-    #   ['.git','.svn'] creates the following regex: /\/(\.git|\/.svn)/
-    #
-    # Returns the regular expression
-    def keep_file_regex
-      or_list = self.keep_files.join("|")
-      pattern = "\/(#{or_list.gsub(".", "\.")})"
-      Regexp.new pattern
+      site_cleaner.cleanup!
     end
 
     # Write static files, pages, and posts.
@@ -421,6 +383,10 @@ module Jekyll
     def limit_posts!
       limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
       self.posts = self.posts[-limit, limit]
+    end
+
+    def site_cleaner
+      @site_cleaner ||= Cleaner.new(self)
     end
   end
 end
