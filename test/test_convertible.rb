@@ -1,6 +1,10 @@
 require 'helper'
 require 'ostruct'
 
+if RUBY_VERSION >= '1.9.0'
+  Encoding.default_external = 'UTF-8'
+end
+
 class TestConvertible < Test::Unit::TestCase
   context "yaml front-matter" do
     setup do

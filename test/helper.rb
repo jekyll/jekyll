@@ -59,4 +59,8 @@ class Test::Unit::TestCase
   ensure
     $stdout = $old_stdout
   end
+
+  def is_mingw
+    RUBY_PLATFORM =~ /mingw/
+  end
 end

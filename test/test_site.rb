@@ -14,12 +14,14 @@ class TestSite < Test::Unit::TestCase
 
     should "have an array for plugins if passed as a string" do
       site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
-      assert_equal ['/tmp/plugins'], site.plugins
+      prefix = is_mingw ? Dir.pwd[0..1] : ''
+      assert_equal ["#{prefix}/tmp/plugins"], site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
       site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
-      assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
+      prefix = is_mingw ? Dir.pwd[0..1] : ''
+      assert_equal ["#{prefix}/tmp/plugins", "#{prefix}/tmp/otherplugins"], site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
@@ -221,6 +223,7 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "not include symlinks in safe mode" do
+      skip("MinGW (Windows) is not support symlinks") if is_mingw
       stub(Jekyll).configuration do
         Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
       end
@@ -232,6 +235,7 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "include symlinks in unsafe mode" do
+      skip("MinGW (Windows) is not support symlinks") if is_mingw
       stub(Jekyll).configuration do
         Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => false})
       end
