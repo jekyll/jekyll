@@ -49,6 +49,7 @@
   * Add `pluralize` and `reading_time` filters to docs (#1439)
   * Fix markup for the Kramdown options (#1445)
   * Fix typos in the History file (#1454)
+  * Add trailing slash to site's post URL (#1462)
 
 ## v1.1.2 / 2013-07-25
 
