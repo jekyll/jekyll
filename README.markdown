@@ -3,7 +3,7 @@
 [![Build Status](https://secure.travis-ci.org/mojombo/jekyll.png)](https://travis-ci.org/mojombo/jekyll)
 [![Code Climate](https://codeclimate.com/github/mojombo/jekyll.png)](https://codeclimate.com/github/mojombo/jekyll)
 
-By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!
+By Tom Preston-Werner, Nick Quaranto, and many awesome [contributors](https://github.com/mojombo/jekyll/graphs/contributors)!
 
 Jekyll is a simple, blog aware, static site generator. It takes a template directory (representing the raw form of a website), runs it through Textile or Markdown and Liquid converters, and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind [GitHub Pages](http://pages.github.com), which you can use to host your project's page or blog right here from GitHub.
 

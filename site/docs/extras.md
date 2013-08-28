@@ -19,7 +19,7 @@ fork](http://github.com/remi/maruku).
 ## RDiscount
 
 If you prefer to use [RDiscount](http://github.com/rtomayko/rdiscount) instead
-of [Maruku](http://github.com/bhollis/maruku) for Markdown, just make sure you have
+of [Redcarpet](https://github.com/vmg/redcarpet) for Markdown, just make sure you have
 it installed:
 
 {% highlight bash %}
@@ -36,7 +36,7 @@ markdown: rdiscount
 
 ## Kramdown
 
-You can also use [Kramdown](http://kramdown.rubyforge.org/) instead of Maruku
+You can also use [Kramdown](http://kramdown.rubyforge.org/) instead of Redcarpet
 for Markdown. Make sure that Kramdown is installed:
 
 {% highlight bash %}
