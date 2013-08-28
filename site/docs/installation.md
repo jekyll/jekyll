@@ -8,7 +8,7 @@ permalink: /docs/installation/
 
 Getting Jekyll installed and ready-to-go should only take a few minutes. If it
 ever becomes a pain in the ass, please [file an
-issue](https://github.com/mojombo/jekyll/issues/new) (or submit a pull request)
+issue]({{ site.repository }}/issues/new) (or submit a pull request)
 describing the issue you encountered and how we might make the process easier.
 
 ### Requirements
@@ -43,7 +43,7 @@ $ gem install jekyll
 All of Jekyll’s gem dependencies are automatically installed by the above
 command, so you won’t have to worry about them at all. If you have problems
 installing Jekyll, check out the [troubleshooting](../troubleshooting/) page or
-[report an issue](https://github.com/mojombo/jekyll/issues/new) so the Jekyll
+[report an issue]({{ site.repository }}/issues/new) so the Jekyll
 community can improve the experience for everyone.
 
 ## Optional Extras
