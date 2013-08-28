@@ -15,6 +15,7 @@
     normalize.css with greater ease. (#1430)
   * Add the ability to detach the server ran by `jekyll serve` from it's
     controlling terminal (#1443)
+  * Improve permalink generation for URLs with special characters (#944)
 
 ### Bug Fixes
   * Markdown extension matching matches only exact matches (#1382)
