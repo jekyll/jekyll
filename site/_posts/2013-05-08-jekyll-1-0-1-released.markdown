@@ -21,7 +21,7 @@ See the [History][] page for more information on this release.
 
 {% assign issue_numbers = "1037|1040|1048|1053|1045|1041|1032" | split: "|" %}
 {% for issue in issue_numbers %}
-[#{{ issue }}]: https://github.com/mojombo/jekyll/issues/{{ issue }}
+[#{{ issue }}]: {{ site.repository }}/issues/{{ issue }}
 {% endfor %}
 
 [History]: /docs/history/#101__20130508

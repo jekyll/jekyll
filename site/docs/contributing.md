@@ -90,13 +90,13 @@ open-sourced our docs and we welcome any pull requests if you find it
 lacking.
 
 You can find the documentation for jekyllrb.com in the
-[site](https://github.com/mojombo/jekyll/tree/master/site) directory of
+[site]({{ site.repository }}/tree/master/site) directory of
 Jekyll's repo on GitHub.com.
 
 All documentation pull requests should be directed at `master`.  Pull
 requests directed at another branch will not be accepted.
 
-The [Jekyll wiki](https://github.com/mojombo/jekyll/wiki) on GitHub 
+The [Jekyll wiki]({{ site.repository }}/wiki) on GitHub 
 can be freely updated without a pull request as all 
 GitHub users have access.
 
@@ -116,7 +116,7 @@ Gotchas
   <p>
     Both using and hacking on Jekyll should be fun, simple, and easy, so if for
     some reason you find it’s a pain, please <a
-    href="https://github.com/mojombo/jekyll/issues/new">create an issue</a> on
+    href="{{ site.repository }}/issues/new">create an issue</a> on
     GitHub describing your experience so we can make it better.
   </p>
 </div>
