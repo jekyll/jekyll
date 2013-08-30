@@ -266,9 +266,9 @@ module Jekyll
     #   "tags"       - The Hash of tag values and Posts.
     #                  See Site#post_attr_hash for type info.
     def site_payload
-      {"site" => self.config.merge({
+      {"jekyll" => { "version" => Jekyll::VERSION },
+       "site" => self.config.merge({
           "time"       => self.time,
-          "version"    => Jekyll::VERSION,
           "posts"      => self.posts.sort { |a, b| b <=> a },
           "pages"      => self.pages,
           "html_pages" => self.pages.reject { |page| !page.html? },
