@@ -50,6 +50,7 @@
   * Fix markup for the Kramdown options (#1445)
   * Fix typos in the History file (#1454)
   * Add trailing slash to site's post URL (#1462)
+  * Clarify that --config will take multiple files (#1474)
 
 ## v1.1.2 / 2013-07-25
 
