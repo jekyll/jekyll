@@ -37,6 +37,7 @@
   * Update TomDoc in Pager#initialize to match params (#1441)
   * Refactor `Site#cleanup` into `Jekyll::Site::Cleaner` class (#1429)
   * Several other small minor refactorings (#1341)
+  * Ignore `_site` in jekyllrb.com deploy (#1480)
 
 ### Site Enhancements
   * Add info about new releases (#1353)
