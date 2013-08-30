@@ -1,12 +1,12 @@
 module Jekyll
   class Page
     include Convertible
+    include Fragmentable
 
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
-    attr_reader :fragments
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w[
@@ -26,10 +26,14 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
-      @fragments = []
 
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
+    end
+
+    def transform
+      super
+      self.inject_fragments
     end
 
     # The generated directory into which the page will be placed

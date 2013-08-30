@@ -2,6 +2,7 @@ module Jekyll
   class Post
     include Comparable
     include Convertible
+    include Fragmentable
 
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
@@ -36,7 +37,7 @@ module Jekyll
     attr_accessor :data, :extracted_excerpt, :content, :output, :ext
     attr_accessor :date, :slug, :published, :tags, :categories
 
-    attr_reader :name, :fragments
+    attr_reader :name
 
     # Initialize this Post instance.
     #
@@ -50,7 +51,6 @@ module Jekyll
       @dir = dir
       @base = self.containing_dir(source, dir)
       @name = name
-      @fragments = []
 
       self.categories = dir.downcase.split('/').reject { |x| x.empty? }
       self.process(name)
@@ -64,6 +64,11 @@ module Jekyll
 
       self.populate_categories
       self.populate_tags
+    end
+
+    def transform
+      super
+      self.inject_fragments
     end
 
     def published?
