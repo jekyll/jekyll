@@ -126,10 +126,10 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class='setting'>
       <td>
         <p class='name'><strong>Configuration</strong></p>
-        <p class="description">Specify a config file. Overrides settings in <code>_config.yml</code></p>
+        <p class="description">Specify config files instead of using <code>_config.yml</code> automatically. Settings in later files override settings in earlier files.</p>
       </td>
       <td class='align-center'>
-        <p><code class="flag">--config FILE</code></p>
+        <p><code class="flag">--config FILE1[,FILE2,...]</code></p>
       </td>
     </tr>
     <tr class='setting'>
