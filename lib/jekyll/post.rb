@@ -3,10 +3,6 @@ module Jekyll
     include Comparable
     include Convertible
 
-    class << self
-      attr_accessor :lsi
-    end
-
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
@@ -109,18 +105,19 @@ module Jekyll
     #
     # Returns excerpt string.
     def excerpt
-      if self.data.has_key? 'excerpt'
-        self.data['excerpt']
-      else
-        self.extracted_excerpt.to_s
-      end
+      self.data.fetch('excerpt', self.extracted_excerpt.to_s)
     end
 
     # Public: the Post title, from the YAML Front-Matter or from the slug
     #
     # Returns the post title
     def title
-      self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+      self.data.fetch("title", self.titleized_slug)
+    end
+
+    # Turns the post slug into a suitable title
+    def titleized_slug
+      self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
     end
 
     # Public: the path to the post relative to the site source,
@@ -130,7 +127,12 @@ module Jekyll
     #
     # Returns the path to the file relative to the site source
     def path
-      self.data['path'] || File.join(@dir, '_posts', @name).sub(/\A\//, '')
+      self.data.fetch('path', self.relative_path.sub(/\A\//, ''))
+    end
+
+    # The path to the post source file, relative to the site source
+    def relative_path
+      File.join(@dir, '_posts', @name)
     end
 
     # Compares Post objects. First compares the Post date. If the dates are
@@ -267,16 +269,6 @@ module Jekyll
       path = File.join(dest, CGI.unescape(self.url))
       path = File.join(path, "index.html") if path[/\.html$/].nil?
       path
-    end
-
-    # Convert this post into a Hash for use in Liquid templates.
-    #
-    # Returns the representative Hash.
-    def to_liquid(attrs = ATTRIBUTES_FOR_LIQUID)
-      further_data = Hash[attrs.map { |attribute|
-        [attribute, send(attribute)]
-      }]
-      data.deep_merge(further_data)
     end
 
     # Returns the shorthand String identifier of this Post.
