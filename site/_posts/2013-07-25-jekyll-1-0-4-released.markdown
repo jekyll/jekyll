@@ -17,4 +17,4 @@ Many thanks for [Ben Balter](http://github.com/benbalter) for alerting us to the
 and [submitting a patch][1349] so quickly.
 
 [230]: https://github.com/Shopify/liquid/pull/230
-[1349]: https://github.com/mojombo/jekyll/issues/1349
+[1349]: {{ site.repository }}/issues/1349
