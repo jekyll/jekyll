@@ -14,14 +14,10 @@ module Jekyll
         def convert(content)
           # Check for use of coderay
           if @config['kramdown']['use_coderay']
-            @config['kramdown'].merge!({
-              :coderay_wrap               => @config['kramdown']['coderay']['coderay_wrap'],
-              :coderay_line_numbers       => @config['kramdown']['coderay']['coderay_line_numbers'],
-              :coderay_line_number_start  => @config['kramdown']['coderay']['coderay_line_number_start'],
-              :coderay_tab_width          => @config['kramdown']['coderay']['coderay_tab_width'],
-              :coderay_bold_every         => @config['kramdown']['coderay']['coderay_bold_every'],
-              :coderay_css                => @config['kramdown']['coderay']['coderay_css']
-            })
+            %w[wrap line_numbers line_numbers_start tab_width bold_every css default_lang].each do |opt|
+              key = "coderay_#{opt}"
+              @config['kramdown'][key.to_sym] = @config['kramdown']['coderay'][key] unless @config['kramdown'].has_key?(key)
+            end
           end
 
           Kramdown::Document.new(content, @config["kramdown"].symbolize_keys).to_html

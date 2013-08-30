@@ -84,6 +84,16 @@ module Jekyll
       raise e
     end
 
+    # Convert this Convertible's data to a Hash suitable for use by Liquid.
+    #
+    # Returns the Hash representation of this Convertible.
+    def to_liquid(attrs = nil)
+      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
+        [attribute, send(attribute)]
+      }]
+      data.deep_merge(further_data)
+    end
+
     # Recursively render layouts
     #
     # layouts - a list of the layouts

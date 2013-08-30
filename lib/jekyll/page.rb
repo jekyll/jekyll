@@ -7,6 +7,13 @@ module Jekyll
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = %w[
+      url
+      content
+      path
+    ]
+
     # Initialize a new Page.
     #
     # site - The Site object.
@@ -108,21 +115,16 @@ module Jekyll
       do_layout(payload, layouts)
     end
 
-    # Convert this Page's data to a Hash suitable for use by Liquid.
-    #
-    # Returns the Hash representation of this Page.
-    def to_liquid
-      self.data.deep_merge({
-        "url"        => self.url,
-        "content"    => self.content,
-        "path"       => self.data['path'] || path })
-    end
-
     # The path to the source file
     #
     # Returns the path to the source file
     def path
-      File.join(@dir, @name).sub(/\A\//, '')
+      self.data.fetch('path', self.relative_path.sub(/\A\//, ''))
+    end
+
+    # The path to the page source file, relative to the site source
+    def relative_path
+      File.join(@dir, @name)
     end
 
     # Obtain destination path.
