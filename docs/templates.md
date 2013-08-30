@@ -294,11 +294,11 @@ You may also optionally specify the filename in the gist to display:
 {% endraw %}
 {% endhighlight %}
 
-The `gist` tag also works with private gists:
+The `gist` tag also works with private gists, which require the gist owner's github username:
 
 {% highlight text %}
 {% raw %}
-{% gist 931c1c8d465a04042403 %}
+{% gist parkr/931c1c8d465a04042403 %}
 {% endraw %}
 {% endhighlight %}
 
