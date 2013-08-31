@@ -12,9 +12,13 @@ permalink: /docs/windows/
 TODO:
 ---
 
-[x] Have a smoke.
-[] Decide what to do.
-[] Get it done.
+- [x] Have a smoke.
+- [ ] Have another smoke.
+- [ ] Have another smoke.
+- [ ] Have a nap.
+- [ ] Decide what to do.
+- [ ] Get it done.
+- [ ] Quit smoking
 
 Outline
 ===
