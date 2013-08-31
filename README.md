@@ -13,17 +13,18 @@ TODO:
 ---
 
 - [x] Have a smoke.
-- [ ] Have another smoke.
+- [ ] [Outline - ref #1][1]
 - [ ] Have another smoke.
 - [ ] Have a nap.
 - [ ] Decide what to do.
 - [ ] Get it done.
 - [ ] Quit smoking
 
-Outline
+## Outline
+[1]: #1
 ===
 
-While Windows is not an officially-supported platform, it can be used to run
+> While Windows is not an officially-supported platform, it can be used to run
 Jekyll with the proper tweaks. This page aims to collect some of the general
 knowledge and lessons that have been unearthed by Windows users.
 
@@ -42,8 +43,11 @@ Additionally, you might need to change the code page of the console window to UT
 in case you get a "Liquid Exception: Incompatible character encoding" error during
 the site generation process. It can be done with the following command.
 
+```liquid
 {% highlight bash %}
 $ chcp 65001
 {% endhighlight %}
+
+```
 
 [windows-installation]: http://www.madhur.co.in/blog/2011/09/01/runningjekyllwindows.html
