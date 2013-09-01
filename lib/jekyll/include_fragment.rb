@@ -18,7 +18,7 @@ module Jekyll
     end
 
     def placeholder
-      @placeholder ||= "<# special include placeholder #{Random.rand}#>"
+      @placeholder ||= "---special include placeholder #{Random.rand}---"
     end
 
     def ext

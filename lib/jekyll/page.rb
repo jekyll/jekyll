@@ -33,7 +33,7 @@ module Jekyll
 
     def transform
       super
-      self.inject_fragments
+      self.inject_fragments!
     end
 
     # The generated directory into which the page will be placed
