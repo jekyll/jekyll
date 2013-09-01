@@ -8,7 +8,7 @@ permalink: /docs/troubleshooting/
 
 If you ever run into problems installing or using Jekyll, here's a few tips
 that might be of help. If the problem you’re experiencing isn’t covered below,
-please [report an issue](https://github.com/mojombo/jekyll/issues/new) so the
+please [report an issue]({{ site.repository }}/issues/new) so the
 Jekyll community can make everyone’s experience better.
 
 ## Installation Problems
@@ -146,5 +146,5 @@ run into these errors, try setting `excerpt_separator: ""` in your
 
 <div class="note">
   <h5>Please report issues you encounter!</h5>
-  <p>If you come across a bug, please <a href="https://github.com/mojombo/jekyll/issues/new">create an issue</a> on GitHub describing the problem and any work-arounds you find so we can document it here for others.</p>
+  <p>If you come across a bug, please <a href="{{ site.repository }}/issues/new">create an issue</a> on GitHub describing the problem and any work-arounds you find so we can document it here for others.</p>
 </div>

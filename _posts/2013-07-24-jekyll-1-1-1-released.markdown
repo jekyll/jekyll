@@ -23,9 +23,9 @@ See the [GitHub Release][] page for more a more detailed changelog for this rele
 
 {% assign issue_numbers = "1339|1338|1321" | split: "|" %}
 {% for issue in issue_numbers %}
-[{{ issue }}]: https://github.com/mojombo/jekyll/issues/{{ issue }}
+[{{ issue }}]: {{ site.repository }}/issues/{{ issue }}
 {% endfor %}
 
-[GitHub Release]: https://github.com/mojombo/jekyll/releases/tag/v1.1.1
+[GitHub Release]: {{ site.repository }}/releases/tag/v1.1.1
 [gh_pages]: http://pages.github.com
-[v1_1_0]: https://github.com/mojombo/jekyll/releases/tag/v1.1.0
+[v1_1_0]: {{ site.repository }}/releases/tag/v1.1.0

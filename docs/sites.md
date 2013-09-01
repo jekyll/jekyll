@@ -26,4 +26,4 @@ learning purposes.
 If you would like to explore more examples, you can find a list of sites
 and their sources on the ["Sites" page in the Jekyll wiki][jekyll-sites].
 
-[jekyll-sites]: https://github.com/mojombo/jekyll/wiki/Sites
+[jekyll-sites]: {{ site.repository }}/wiki/Sites
