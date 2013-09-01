@@ -55,14 +55,38 @@ eos
 
         return error if error = validate_file
 
+        container = find_container(context)
+        if container.nil? || matching_format?(container)
+          inline_render(context)
+        else
+          fragment = IncludeFragment.new(context.registers[:site], container, @file)
+          container.fragments << fragment
+          fragment.placeholder # render placeholder
+        end
+      end
 
-        source = File.read(File.join(includes_dir, @file))
+      def inline_render(context)
+        source = File.read(File.join(self.includes_dir, @file))
         partial = Liquid::Template.parse(source)
 
         context.stack do
           context['include'] = parse_params(context) if @params
           partial.render(context)
         end
+      end
+
+      def find_container(context)
+        url = context.registers[:page]['url']
+        containers = context.registers[:site].posts + context.registers[:site].pages
+
+        containers.find { |c| c.url == url }
+      rescue
+        Jekyll.logger.warn "Include tag:", "No container found - cannot support include formats" # actually never shown to users
+        nil
+      end
+
+      def matching_format?(container)
+        container.ext == File.extname(@file)
       end
 
       def validate_file
