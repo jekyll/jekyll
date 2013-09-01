@@ -55,6 +55,7 @@
   * Clarify that --config will take multiple files (#1474)
   * Fix docs/templates.md private gist example (#1477)
   * Use `site.repository` for Jekyll's GitHub URL (#1463)
+  * Add `jekyll-pageless-redirects` to list of third-party plugins (#1486)
 
 ## v1.1.2 / 2013-07-25
 
