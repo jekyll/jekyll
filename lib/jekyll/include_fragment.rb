@@ -26,7 +26,7 @@ module Jekyll
     end
 
     def path
-      File.join(@site.dest, '_includes', @name)
+      File.join(@site.source, '_includes', @name)
     end
 
     # Just undef them here temporarily. Take this out before merge.
