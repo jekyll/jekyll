@@ -4,6 +4,8 @@ module Jekyll
 
       MATCHER = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
 
+      attr_accessor :includes_dir
+
       def initialize(tag_name, markup, tokens)
         super
         @file, @params = markup.strip.split(' ', 2);
@@ -49,9 +51,10 @@ eos
       end
 
       def render(context)
-        includes_dir = File.join(context.registers[:site].source, '_includes')
+        self.includes_dir = File.join(context.registers[:site].source, '_includes')
 
-        return error if error = validate_file(includes_dir)
+        return error if error = validate_file
+
 
         source = File.read(File.join(includes_dir, @file))
         partial = Liquid::Template.parse(source)
@@ -62,16 +65,16 @@ eos
         end
       end
 
-      def validate_file(includes_dir)
-        if File.symlink?(includes_dir)
-          return "Includes directory '#{includes_dir}' cannot be a symlink"
+      def validate_file
+        if File.symlink?(self.includes_dir)
+          return "Includes directory '#{self.includes_dir}' cannot be a symlink"
         end
 
         if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
           return "Include file '#{@file}' contains invalid characters or sequences"
         end
 
-        file = File.join(includes_dir, @file)
+        file = File.join(self.includes_dir, @file)
         if !File.exists?(file)
           return "Included file #{@file} not found in _includes directory"
         elsif File.symlink?(file)
