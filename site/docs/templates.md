@@ -26,7 +26,7 @@ common tasks easier.
     <tr>
       <td>
         <p class='name'><strong>Date to XML Schema</strong></p>
-        <p>Convert a Date into XML Schema format.</p>
+        <p>Convert a Date into XML Schema (ISO 8601) format.</p>
       </td>
       <td class='align-center'>
         <p>
