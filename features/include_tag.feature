@@ -33,3 +33,11 @@ Feature: Include tags
     And I should see "<li>param1_or_2 = value</li>" in "_site/2013/04/12/parameter-syntax.html"
     And I should see "<li>local = some text</li>" in "_site/2013/06/22/pass-a-variable.html"
     And I should see "<li>layout = default</li>" in "_site/2013/06/22/pass-a-variable.html"
+
+  Scenario: Include a file from a variable
+    Given I have an _includes directory
+    And I have an "_includes/snippet.html" file that contains "a snippet"
+    And I have an "index.html" page that contains "{% assign file = 'snippet.html' %}{% include {{file}} %}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "a snippet" in "_site/index.html"
