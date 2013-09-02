@@ -76,7 +76,7 @@ eos
       end
 
       def retrieve_variable(context)
-        if /\{\{([\w\-]+)\}\}/ =~ @file
+        if /\{\{([\w\-\.]+)\}\}/ =~ @file
           raise ArgumentError.new("No variable #{$1} was found in include tag") if context[$1].nil?
           @file = context[$1]
         end
