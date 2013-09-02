@@ -115,7 +115,7 @@ module Jekyll
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
-          pages << page if page.published?
+          pages << page if publisher.publish?(page)
         else
           static_files << StaticFile.new(self, source, dir, f)
         end
