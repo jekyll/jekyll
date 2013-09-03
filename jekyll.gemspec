@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rr', "~> 1.0.0")
   s.add_development_dependency('cucumber', "~> 1.2.1", '!= 1.2.4')
   s.add_development_dependency('RedCloth', "~> 4.2")
+  s.add_development_dependency('kramdown', "~> 1.0.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
   s.add_development_dependency('launchy', "~> 2.1.2")
   s.add_development_dependency('simplecov', "~> 0.7")
