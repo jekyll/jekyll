@@ -1,6 +1,7 @@
 module Jekyll
   class Page
     include Convertible
+    include Fragmentable
 
     attr_writer :dir
     attr_accessor :site, :pager
@@ -28,6 +29,11 @@ module Jekyll
 
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
+    end
+
+    def transform
+      super
+      self.inject_fragments!
     end
 
     # The generated directory into which the page will be placed

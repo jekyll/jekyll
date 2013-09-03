@@ -2,6 +2,7 @@ module Jekyll
   class Post
     include Comparable
     include Convertible
+    include Fragmentable
 
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
@@ -63,6 +64,11 @@ module Jekyll
 
       self.populate_categories
       self.populate_tags
+    end
+
+    def transform
+      super
+      self.inject_fragments!
     end
 
     def published?
