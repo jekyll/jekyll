@@ -1,7 +1,10 @@
 # Jekyll
 
+[![Gem Version](https://badge.fury.io/rb/jekyll.png)](http://badge.fury.io/rb/jekyll)
+
 [![Build Status](https://secure.travis-ci.org/mojombo/jekyll.png)](https://travis-ci.org/mojombo/jekyll)
 [![Code Climate](https://codeclimate.com/github/mojombo/jekyll.png)](https://codeclimate.com/github/mojombo/jekyll)
+[![Dependency Status](https://gemnasium.com/mojombo/jekyll.png)](https://gemnasium.com/mojombo/jekyll)
 
 By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!
 
