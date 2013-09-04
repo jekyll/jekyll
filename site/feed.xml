@@ -22,7 +22,7 @@ permalink: /feed.xml
     <description>Transform your plain text into static websites and blogs.</description>
     {% for post in site.posts %}
     <item>
-        <title>{{ post.title }}</title>
+        <title>{{ post.title | xml_escape}}</title>
         <link>http://jekyllrb.com{{ post.url }}</link>
         <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
         <dc:creator>{{ post.author }}</dc:creator>
