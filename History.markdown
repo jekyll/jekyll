@@ -58,6 +58,7 @@
   * Use `site.repository` for Jekyll's GitHub URL (#1463)
   * Add `jekyll-pageless-redirects` to list of third-party plugins (#1486)
   * Clarify that `date_to_xmlschema` returns an ISO 8601 string (#1488)
+  * Add `jekyll-good-include` to list of third-party plugins (#1491)
 
 ## v1.1.2 / 2013-07-25
 
