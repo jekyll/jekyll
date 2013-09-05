@@ -16,6 +16,8 @@
   * Add the ability to detach the server ran by `jekyll serve` from it's
     controlling terminal (#1443)
   * Improve permalink generation for URLs with special characters (#944)
+  * Expose the current Jekyll version to posts and pages via a new
+    `jekyll.version` variable (#1481)
 
 ### Bug Fixes
   * Markdown extension matching matches only exact matches (#1382)
