@@ -29,6 +29,8 @@
     (#1444)
   * Fixed `--layouts` option for `build` and `serve` commands (#1458)
   * Remove kramdown as a runtime dependency since it's optional (#1498)
+  * Provide proper error handling for invalid file names in the include
+    tag (#1494)
 
 ### Development Fixes
   * Remove redundant argument to
