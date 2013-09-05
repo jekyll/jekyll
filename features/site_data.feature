@@ -99,3 +99,9 @@ Feature: Site data
     When I run jekyll
     Then the _site directory should exist
     And I should see "http://mysite.com" in "_site/index.html"
+
+  Scenario: Access Jekyll version via jekyll.version
+    Given I have an "index.html" page that contains "{{ jekyll.version }}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "\d+\.\d+\.\d+" in "_site/index.html"
