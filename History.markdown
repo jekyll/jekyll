@@ -65,6 +65,7 @@
   * Clarify that `date_to_xmlschema` returns an ISO 8601 string (#1488)
   * Add `jekyll-good-include` to list of third-party plugins (#1491)
   * XML escape the blog post title in our feed (#1501)
+  * Add `jekyll-toc-generator` to list of third-party plugins (#1506)
 
 ## v1.1.2 / 2013-07-25
 
