@@ -46,16 +46,18 @@ In `_data/members.yml`:
 This data can be accessed via `site.data.members` (notice that the filename
 determines the variable name).
 
-You can now do render the list of members in a template:
+You can now render the list of members in a template:
 
 {% highlight html %}
+{% raw %}
 <ul>
-{% raw %}{% for member in site.data.members %}{% endraw %}
+{% for member in site.data.members %}
   <li>
-    <a href="https://github.com/{% raw %}{{ member.github }}{% endraw %}">
-      {% raw %}{{ member.name }}{% endraw %}
+    <a href="https://github.com/{{ member.github }}">
+      {{ member.name }}
     </a>
   </li>
-{% raw %}{% end %}{% endraw %}
+{% end %}
 </ul>
+{% endraw %}
 {% endhighlight %}
