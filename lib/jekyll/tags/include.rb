@@ -51,7 +51,9 @@ eos
       def render(context)
         includes_dir = File.join(context.registers[:site].source, '_includes')
 
-        return error if error = validate_file(includes_dir)
+        if error = validate_file(includes_dir)
+          return error
+        end
 
         source = File.read(File.join(includes_dir, @file))
         partial = Liquid::Template.parse(source)
