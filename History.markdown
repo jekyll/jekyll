@@ -28,6 +28,7 @@
   * Properly read in the config options when serving the docs locally
     (#1444)
   * Fixed `--layouts` option for `build` and `serve` commands (#1458)
+  * Remove kramdown as a runtime dependency since it's optional (#1498)
 
 ### Development Fixes
   * Remove redundant argument to
