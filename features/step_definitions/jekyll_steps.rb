@@ -142,19 +142,19 @@ Then /^the (.*) directory should exist$/ do |dir|
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
-  assert Regexp.new(text).match(File.read(file))
+  assert Regexp.new(text).match(read_file(file))
 end
 
 Then /^I should see exactly "(.*)" in "(.*)"$/ do |text, file|
-  assert_equal text, File.read(file).strip
+  assert_equal text, read_file(file).strip
 end
 
 Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
-  assert_no_match Regexp.new(text), File.read(file)
+  assert_no_match Regexp.new(text), read_file(file)
 end
 
 Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
-  assert Regexp.new(Regexp.escape(text)).match(File.read(file))
+  assert Regexp.new(Regexp.escape(text)).match(read_file(file))
 end
 
 Then /^the "(.*)" file should exist$/ do |file|
@@ -166,9 +166,9 @@ Then /^the "(.*)" file should not exist$/ do |file|
 end
 
 Then /^I should see today's time in "(.*)"$/ do |file|
-  assert_match Regexp.new(Regexp.escape(Time.now.to_s)), File.read(file)
+  assert_match Regexp.new(Regexp.escape(Time.now.to_s)), read_file(file)
 end
 
 Then /^I should see today's date in "(.*)"$/ do |file|
-  assert_match Regexp.new(Date.today.to_s), File.read(file)
+  assert_match Regexp.new(Date.today.to_s), read_file(file)
 end

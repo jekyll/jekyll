@@ -35,5 +35,11 @@ def location(folder, direction)
   [before || '.', after || '.']
 end
 
+def read_file(path)
+  File.open(path) do |file|
+    file.readlines.join # avoid differences with \n and \r\n line endings
+  end
+end
+
 # work around "invalid option: --format" cucumber bug (see #296)
 Test::Unit.run = true if RUBY_VERSION < '1.9'
