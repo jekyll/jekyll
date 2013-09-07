@@ -20,4 +20,4 @@ Here are a few things we think you'll want to know about this release:
 * Permalinks with special characters should now generate without errors.
 * Expose the current Jekyll version as the `jekyll.version` Liquid variable.
 
-For a full run-down, visit our [change log](/history/)!
+For a full run-down, visit our [change log](/docs/history/)!
