@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.1.2'
+  s.version           = '1.2.0'
   s.license           = 'MIT'
-  s.date              = '2013-07-25'
+  s.date              = '2013-09-06'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -72,6 +72,7 @@ Gem::Specification.new do |s|
     features/support/env.rb
     jekyll.gemspec
     lib/jekyll.rb
+    lib/jekyll/cleaner.rb
     lib/jekyll/command.rb
     lib/jekyll/commands/build.rb
     lib/jekyll/commands/doctor.rb
@@ -108,6 +109,7 @@ Gem::Specification.new do |s|
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
     lib/jekyll/tags/post_url.rb
+    lib/jekyll/url.rb
     lib/site_template/.gitignore
     lib/site_template/_config.yml
     lib/site_template/_layouts/default.html
@@ -144,6 +146,7 @@ Gem::Specification.new do |s|
     site/_posts/2013-07-24-jekyll-1-1-1-released.markdown
     site/_posts/2013-07-25-jekyll-1-0-4-released.markdown
     site/_posts/2013-07-25-jekyll-1-1-2-released.markdown
+    site/_posts/2013-09-06-jekyll-1-2-0-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
@@ -233,6 +236,7 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-04-11-custom-excerpt.markdown
     test/source/_posts/2013-05-10-number-category.textile
     test/source/_posts/2013-07-22-post-excerpt-with-layout.markdown
+    test/source/_posts/2013-08-01-mkdn-extension.mkdn
     test/source/_posts/es/2008-11-21-nested.textile
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
@@ -267,6 +271,7 @@ Gem::Specification.new do |s|
     test/test_related_posts.rb
     test/test_site.rb
     test/test_tags.rb
+    test/test_url.rb
   ]
   # = MANIFEST =
 

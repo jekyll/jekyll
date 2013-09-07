@@ -1,6 +1,18 @@
 ## HEAD
 
 ### Major Enhancements
+
+### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## v1.2.0 / 2013-09-06
+
+### Major Enhancements
   * Disable automatically-generated excerpts when `excerpt_separator` is `""`. (#1386)
   * Add checking for URL conflicts when running `jekyll doctor` (#1389)
 
