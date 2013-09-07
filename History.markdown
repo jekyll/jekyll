@@ -3,7 +3,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
- * Disable reverse lookup when running `jekyll serve` (#1363)
+  * Disable reverse lookup when running `jekyll serve` (#1363)
 
 ### Bug Fixes
 
@@ -12,6 +12,7 @@
 
 ### Site Enhancements
   * Fix a couple of validation errors on the site (#1511)
+  * Make navigation menus reusable (#1507)
 
 ## v1.2.0 / 2013-09-06
 
