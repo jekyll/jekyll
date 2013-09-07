@@ -9,6 +9,7 @@
 ### Development Fixes
 
 ### Site Enhancements
+  * Fix a couple of validation errors on the site (#1511)
 
 ## v1.2.0 / 2013-09-06
 
