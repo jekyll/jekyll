@@ -8,6 +8,7 @@
 ### Bug Fixes
 
 ### Development Fixes
+  * Add a rake task to generate a new release post (#1404)
 
 ### Site Enhancements
   * Fix a couple of validation errors on the site (#1511)
