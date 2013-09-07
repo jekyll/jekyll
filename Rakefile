@@ -211,6 +211,30 @@ namespace :site do
       abort "You seem to have misplaced your History.markdown file. I can haz?"
     end
   end
+  
+  namespace :releases do
+    desc "Create new release post"
+    task :new, :version do |t, args|
+      raise "Specify a version: rake site:releases:new['1.2.3']" unless args.version
+      today = Time.new.strftime('%Y-%m-%d')
+      filename = "site/_posts/#{today}-jekyll-#{release.split('.').join('-')}-released.markdown"
+
+      File.open(filename, "wb") do |post|
+        post.puts("---")
+        post.puts("layout: news_item")
+        post.puts("title: 'Jekyll #{release} Released'")
+        post.puts("date: #{Time.new.strftime('%Y-%m-%d %H:%M:%S %z')}")
+        post.puts("author: ")
+        post.puts("version: #{version}")
+        post.puts("categories: [release]")
+        post.puts("---")
+        post.puts
+        post.puts
+      end
+
+      puts "Created #{filename}"
+    end
+  end
 end
 
 #############################################################################

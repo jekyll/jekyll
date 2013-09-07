@@ -3,13 +3,16 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Disable reverse lookup when running `jekyll serve` (#1363)
 
 ### Bug Fixes
 
 ### Development Fixes
+  * Add a rake task to generate a new release post (#1404)
 
 ### Site Enhancements
   * Fix a couple of validation errors on the site (#1511)
+  * Make navigation menus reusable (#1507)
   * Fix link to History page from Release v1.2.0 notes post.
 
 ## v1.2.0 / 2013-09-06
