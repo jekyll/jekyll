@@ -3,6 +3,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+ * Disable reverse lookup when running `jekyll serve` (#1363)
 
 ### Bug Fixes
 
