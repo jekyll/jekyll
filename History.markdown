@@ -10,6 +10,7 @@
 
 ### Site Enhancements
   * Fix a couple of validation errors on the site (#1511)
+  * Fix link to History page from Release v1.2.0 notes post.
 
 ## v1.2.0 / 2013-09-06
 
