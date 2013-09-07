@@ -41,6 +41,7 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 
 ## Developer Dependencies
 
+* Kramdown: Markdown-superset converter (Ruby)
 * Launchy: Cross-platform file launcher (Ruby)
 * RDiscount: Discount Markdown Processor (Ruby)
 * RedCloth: Textile support (Ruby)
