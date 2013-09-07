@@ -5,6 +5,103 @@ permalink: /docs/history/
 prev_section: contributing
 ---
 
+## 1.2.0 / 2013-09-06
+
+### Major Enhancements
+- Disable automatically-generated excerpts when `excerpt_separator` is `""`. ([#1386]({{ site.repository }}/issues/1386))
+- Add checking for URL conflicts when running `jekyll doctor` ([#1389]({{ site.repository }}/issues/1389))
+
+### Minor Enhancements
+- Catch and fix invalid `paginate` values ([#1390]({{ site.repository }}/issues/1390))
+- Remove superfluous `div.container` from the default html template for
+    `jekyll new` ([#1315]({{ site.repository }}/issues/1315))
+- Add -D short-form switch for the drafts option ([#1394]({{ site.repository }}/issues/1394))
+- Update the links in the site template for Twitter and GitHub ([#1400]({{ site.repository }}/issues/1400))
+- Update dummy email address to example.com domain ([#1408]({{ site.repository }}/issues/1408))
+- Update normalize.css to v2.1.2 and minify; add rake task to update
+    normalize.css with greater ease. ([#1430]({{ site.repository }}/issues/1430))
+- Add the ability to detach the server ran by `jekyll serve` from it's
+    controlling terminal ([#1443]({{ site.repository }}/issues/1443))
+- Improve permalink generation for URLs with special characters ([#944]({{ site.repository }}/issues/944))
+- Expose the current Jekyll version to posts and pages via a new
+    `jekyll.version` variable ([#1481]({{ site.repository }}/issues/1481))
+
+### Bug Fixes
+- Markdown extension matching matches only exact matches ([#1382]({{ site.repository }}/issues/1382))
+- Fixed NoMethodError when message passed to `Stevenson#message` is nil ([#1388]({{ site.repository }}/issues/1388))
+- Use binary mode when writing file ([#1364]({{ site.repository }}/issues/1364))
+- Fix 'undefined method `encoding` for "mailto"' errors w/ Ruby 1.8 and
+    Kramdown > 0.14.0 ([#1397]({{ site.repository }}/issues/1397))
+- Do not force the permalink to be a dir if it ends on .html ([#963]({{ site.repository }}/issues/963))
+- When a Liquid Exception is caught, show the full path rel. to site source ([#1415]({{ site.repository }}/issues/1415))
+- Properly read in the config options when serving the docs locally
+    ([#1444]({{ site.repository }}/issues/1444))
+- Fixed `--layouts` option for `build` and `serve` commands ([#1458]({{ site.repository }}/issues/1458))
+- Remove kramdown as a runtime dependency since it's optional ([#1498]({{ site.repository }}/issues/1498))
+- Provide proper error handling for invalid file names in the include
+    tag ([#1494]({{ site.repository }}/issues/1494))
+
+### Development Fixes
+- Remove redundant argument to
+    Jekyll::Commands::New#scaffold_post_content ([#1356]({{ site.repository }}/issues/1356))
+- Add new dependencies to the README ([#1360]({{ site.repository }}/issues/1360))
+- Fix link to contributing page in README ([#1424]({{ site.repository }}/issues/1424))
+- Update TomDoc in Pager#initialize to match params ([#1441]({{ site.repository }}/issues/1441))
+- Refactor `Site#cleanup` into `Jekyll::Site::Cleaner` class ([#1429]({{ site.repository }}/issues/1429))
+- Several other small minor refactorings ([#1341]({{ site.repository }}/issues/1341))
+- Ignore `_site` in jekyllrb.com deploy ([#1480]({{ site.repository }}/issues/1480))
+- Add Gem version and dependency badge to README ([#1497]({{ site.repository }}/issues/1497))
+
+### Site Enhancements
+- Add info about new releases ([#1353]({{ site.repository }}/issues/1353))
+- Update plugin list with jekyll-rss plugin ([#1354]({{ site.repository }}/issues/1354))
+- Update the site list page with Ruby's official site ([#1358]({{ site.repository }}/issues/1358))
+- Add `jekyll-ditaa` to list of third-party plugins ([#1370]({{ site.repository }}/issues/1370))
+- Add `postfiles` to list of third-party plugins ([#1373]({{ site.repository }}/issues/1373))
+- For internal links, use full path including trailing `/` ([#1411]({{ site.repository }}/issues/1411))
+- Use curly apostrophes in the docs ([#1419]({{ site.repository }}/issues/1419))
+- Update the docs for Redcarpet in Jekyll ([#1418]({{ site.repository }}/issues/1418))
+- Add `pluralize` and `reading_time` filters to docs ([#1439]({{ site.repository }}/issues/1439))
+- Fix markup for the Kramdown options ([#1445]({{ site.repository }}/issues/1445))
+- Fix typos in the History file ([#1454]({{ site.repository }}/issues/1454))
+- Add trailing slash to site's post URL ([#1462]({{ site.repository }}/issues/1462))
+- Clarify that --config will take multiple files ([#1474]({{ site.repository }}/issues/1474))
+- Fix docs/templates.md private gist example ([#1477]({{ site.repository }}/issues/1477))
+- Use `site.repository` for Jekyll's GitHub URL ([#1463]({{ site.repository }}/issues/1463))
+- Add `jekyll-pageless-redirects` to list of third-party plugins ([#1486]({{ site.repository }}/issues/1486))
+- Clarify that `date_to_xmlschema` returns an ISO 8601 string ([#1488]({{ site.repository }}/issues/1488))
+- Add `jekyll-good-include` to list of third-party plugins ([#1491]({{ site.repository }}/issues/1491))
+- XML escape the blog post title in our feed ([#1501]({{ site.repository }}/issues/1501))
+- Add `jekyll-toc-generator` to list of third-party plugins ([#1506]({{ site.repository }}/issues/1506))
+
+## 1.1.2 / 2013-07-25
+
+### Bug Fixes
+- Require Liquid 2.5.1 ([#1349]({{ site.repository }}/issues/1349))
+
+## 1.1.1 / 2013-07-24
+
+### Minor Enhancements
+- Remove superfluous `table` selector from main.css in `jekyll new` template ([#1328]({{ site.repository }}/issues/1328))
+- Abort with non-zero exit codes ([#1338]({{ site.repository }}/issues/1338))
+
+### Bug Fixes
+- Fix up the rendering of excerpts ([#1339]({{ site.repository }}/issues/1339))
+
+### Site Enhancements
+- Add Jekyll Image Tag to the plugins list ([#1306]({{ site.repository }}/issues/1306))
+- Remove erroneous statement that `site.pages` are sorted alphabetically.
+- Add info about the `_drafts` directory to the directory structure
+    docs ([#1320]({{ site.repository }}/issues/1320))
+- Improve the layout of the plugin listing by organizing it into
+    categories ([#1310]({{ site.repository }}/issues/1310))
+- Add generator-jekyllrb and grunt-jekyll to plugins page ([#1330]({{ site.repository }}/issues/1330))
+- Mention Kramdown as option for markdown parser on Extras page ([#1318]({{ site.repository }}/issues/1318))
+- Update Quick-Start page to include reminder that all requirements must be installed ([#1327]({{ site.repository }}/issues/1327))
+- Change filename in `include` example to an HTML file so as not to indicate that Jekyll
+    will automatically convert them. ([#1303]({{ site.repository }}/issues/1303))
+- Add an RSS feed for commits to Jekyll ([#1343]({{ site.repository }}/issues/1343))
+
 ## 1.1.0 / 2013-07-14
 
 ### Major Enhancements

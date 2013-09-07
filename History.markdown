@@ -15,7 +15,7 @@
   * Make navigation menus reusable (#1507)
   * Fix link to History page from Release v1.2.0 notes post.
 
-## v1.2.0 / 2013-09-06
+## 1.2.0 / 2013-09-06
 
 ### Major Enhancements
   * Disable automatically-generated excerpts when `excerpt_separator` is `""`. (#1386)
@@ -84,12 +84,12 @@
   * XML escape the blog post title in our feed (#1501)
   * Add `jekyll-toc-generator` to list of third-party plugins (#1506)
 
-## v1.1.2 / 2013-07-25
+## 1.1.2 / 2013-07-25
 
 ### Bug Fixes
   * Require Liquid 2.5.1 (#1349)
 
-## v1.1.1 / 2013-07-24
+## 1.1.1 / 2013-07-24
 
 ### Minor Enhancements
   * Remove superfluous `table` selector from main.css in `jekyll new` template (#1328)
