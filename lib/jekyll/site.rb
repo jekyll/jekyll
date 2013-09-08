@@ -1,3 +1,5 @@
+require_relative 'layout_reader'
+
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
@@ -119,15 +121,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_layouts
-      base = File.join(self.source, self.config['layouts'])
-      return unless File.exists?(base)
-      entries = []
-      Dir.chdir(base) { entries = filter_entries(Dir['**/*.*']) }
-
-      entries.each do |f|
-        name = f.split(".")[0..-2].join(".")
-        self.layouts[name] = Layout.new(self, base, f)
-      end
+      self.layouts = LayoutReader.new(self).collect
     end
 
     # Recursively traverse directories to find posts, pages and static files
