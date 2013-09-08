@@ -46,7 +46,7 @@ module Jekyll
     # Transform the contents based on the content type.
     #
     # Returns nothing.
-    def transform
+    def convert
       self.content = converter.convert(self.content)
     rescue => e
       Jekyll.logger.error "Conversion error:", "There was an error converting" +
@@ -136,15 +136,35 @@ module Jekyll
       payload["pygments_prefix"] = converter.pygments_prefix
       payload["pygments_suffix"] = converter.pygments_suffix
 
+      self.content = self.transform(self.content, info)
+
       self.content = self.render_liquid(self.content,
                                         payload,
                                         info)
-      self.transform
+      self.convert
 
       # output keeps track of what will finally be written
       self.output = self.content
 
       self.render_all_layouts(layouts, payload, info)
+    end
+
+    # Transform the page content with the available plugins.
+    #
+    # content - The String of raw content for the page.
+    # info - The page context object
+    #
+    # Returns new content String.
+    def transform(content, info)
+      Jekyll::Transformer.subclasses.select do |c|
+        !self.site.safe || c.safe
+      end.sort.map do |c|
+        c.new(info)
+      end.select do |transformer|
+        transformer.matches(info[:registers][:page])
+      end.inject(content) do |c, t|
+        t.transform(c)
+      end
     end
 
     # Write the generated page file to the destination directory.
