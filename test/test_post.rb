@@ -256,12 +256,28 @@ class TestPost < Test::Unit::TestCase
         assert_equal "h1. {{ page.title }}\n\nBest *post* ever", @post.content
       end
 
-      should "transform textile" do
+      should "convert textile" do
         @post.process(@real_file)
         @post.read_yaml(@source, @real_file)
-        @post.transform
+        @post.convert
 
         assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.content
+      end
+
+      should "run transformers" do
+        class MyTransformer < Transformer
+          def initialize(context)
+          end
+          def matches(page)
+            true
+          end
+          def transform(content)
+            content.gsub("test content", "test content success")
+          end
+        end
+        transformed_content = @post.transform("test content", {:registers => { :page => {}}})
+
+        assert_equal "test content success", transformed_content
       end
 
       context "#excerpt" do
@@ -296,7 +312,7 @@ class TestPost < Test::Unit::TestCase
 
             @post.process(file)
             @post.read_yaml(@source, file)
-            @post.transform
+            @post.convert
           end
 
           should "respect given separator" do
