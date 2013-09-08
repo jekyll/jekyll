@@ -29,11 +29,12 @@ In your site source root, make a `_plugins` directory. Place your plugins here.
 Any file ending in `*.rb` inside this directory will be loaded before Jekyll
 generates your site.
 
-In general, plugins you make will fall into one of three categories:
+In general, plugins you make will fall into one of four categories:
 
 1. Generators
 2. Converters
-3. Tags
+3. Tranformers
+4. Tags
 
 ## Generators
 
@@ -189,6 +190,71 @@ In our example, `UpcaseConverter#matches` checks if our filename extension is
 `UpcaseConverter#convert` to process the content. In our simple converter we’re
 simply uppercasing the entire content string. Finally, when it saves the page,
 it will do so with a `.html` extension.
+
+## Transformers
+
+You can create a transformer when you need Jekyll to alter the content of a file
+based on your own rules. For example, a transformer might look like this:
+
+{% highlight ruby %}
+module Jekyll
+
+  class WordFilterTransformer < Transformer
+    safe true
+
+    def initialize(context)
+        @context = context
+        @black_list = %w(death taxes)
+    end
+
+    def matches(page)
+        true
+    end
+
+    def transform(content)
+        content.gsub(/#{@black_list.join('|')}/i, '****')
+    end
+  end
+
+end
+{% endhighlight %}
+
+In this example, our transformer will find any instance of the words in the
+black list, and replace those words with asterisks.
+
+At minimum, Transformers must implement:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>matches</code></p>
+      </td>
+      <td><p>
+        Is this a page we want to tranform? Takes one argument: the page
+        object. Must return <code>true</code> if it matches,
+        <code>false</code> otherwise.
+      </p></td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>transform</code></p>
+      </td>
+      <td><p>
+        Logic to do the content transform. Takes one argument: the raw content
+        of the file (without YAML front matter). Must return a String.
+      </p></td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Tags
 
