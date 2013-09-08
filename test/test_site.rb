@@ -70,6 +70,21 @@ class TestSite < Test::Unit::TestCase
       assert_not_equal 0, @site.pages.size
     end
 
+    should "give site with parsed pages and posts to processors" do
+      @site.reset
+      @site.read
+      class MyProcessor < Processor
+        def process(site)
+          site.pages.dup.each do |page|
+            raise "#{page} isn't a page" unless page.is_a?(Page)
+            raise "#{page} doesn't respond to :name" unless page.respond_to?(:name)
+          end
+        end
+      end
+      @site.postprocess
+      assert_not_equal 0, @site.pages.size
+    end
+
     should "reset data before processing" do
       clear_dest
       @site.process
@@ -152,6 +167,7 @@ class TestSite < Test::Unit::TestCase
     should "setup plugins in priority order" do
       assert_equal @site.converters.sort_by(&:class).map{|c|c.class.priority}, @site.converters.map{|c|c.class.priority}
       assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
+      assert_equal @site.processors.sort_by(&:class).map{|g|g.class.priority}, @site.processors.map{|g|g.class.priority}
     end
 
     should "read layouts" do
