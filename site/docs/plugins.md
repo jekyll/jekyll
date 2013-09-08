@@ -29,11 +29,12 @@ In your site source root, make a `_plugins` directory. Place your plugins here.
 Any file ending in `*.rb` inside this directory will be loaded before Jekyll
 generates your site.
 
-In general, plugins you make will fall into one of three categories:
+In general, plugins you make will fall into one of four categories:
 
 1. Generators
 2. Converters
-3. Tags
+3. Processors
+4. Tags
 
 ## Generators
 
@@ -189,6 +190,56 @@ In our example, `UpcaseConverter#matches` checks if our filename extension is
 `UpcaseConverter#convert` to process the content. In our simple converter we’re
 simply uppercasing the entire content string. Finally, when it saves the page,
 it will do so with a `.html` extension.
+
+## Processors
+
+You can create a processor when you need to modify the final output of Jekyll
+based on your own rules. Processors run after Jekyll has completed the build
+process, so you can use Processors to modify the rendered files and directories.
+For example, a processor might look like this:
+
+{% highlight ruby %}
+module Jekyll
+
+  class TopLevelPagesProcessor < Processor
+    safe true
+
+    def generate(site)
+      FileUtils.cp_r(Dir['_site/_pages/*'], '..')
+      #FileUtils.rm_rf('_site/_pages')
+    end
+  end
+
+end
+{% endhighlight %}
+
+In this example, our processor will move all the files from the _pages directory
+into the top level directory (assuming you `include` _pages in your
+`_config.yml`). That way you can keep your pages organized in that directory
+instead of polluting your top level source directory.
+
+Processors are only required to implement one method:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>process</code></p>
+      </td>
+      <td>
+        <p>nil</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Tags
 
