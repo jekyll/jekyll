@@ -205,8 +205,8 @@ module Jekyll
     safe true
 
     def generate(site)
-      FileUtils.cp_r(Dir['_site/_pages/*'], '..')
-      #FileUtils.rm_rf('_site/_pages')
+      FileUtils.cp_r(Dir["#{site.dest}/_pages/*"], '..')
+      FileUtils.rm_rf("#{site.dest}/_pages")
     end
   end
 
