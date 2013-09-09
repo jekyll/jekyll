@@ -13,7 +13,7 @@ enhancements that we think you'll love.
 
 Here are a few things we think you'll want to know about this release:
 
-* Run `jekyll serve --detatch` to boot up a WEBrick server in the background. **Note:** you'll need to run `kill [server_pid]` to shut the server down.
+* Run `jekyll serve --detach` to boot up a WEBrick server in the background. **Note:** you'll need to run `kill [server_pid]` to shut the server down.
 * You can now **disable automatically-generated excerpts** if you set `excerpt_separator` to `""`.
 * If you're moving around pages and post, you can now check for **URL conflicts** by running `jekyll doctor`.
 * If you're a fan of the drafts feature, you'll be happy to know we've added `-D`, a shortened version of `--drafts`.
