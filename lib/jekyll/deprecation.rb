@@ -18,45 +18,16 @@ module Jekyll
       @properties = properties
 
       @msg = @properties[:msg].dup
-      if @msg
-        @properties.each_pair do |key, value|
-          @msg.gsub!(":#{key.to_s}", value.to_s)
+      @properties.each_pair do |key, value|
+        unless key == :msg
+          key_s = key.to_s
+          self.class.send(:define_method, key_s) { @properties[key] }
+
+          @msg.gsub!(":#{key_s}", value.to_s) unless !@msg || (key == :msg)
         end
       end
-    end
 
-    # Public: Treats the possible metaprogramming.
-    #
-    # Return will depend from the metaprog.
-    def method_missing(meth)
-      if @properties.has_key?(meth)
-        run_property_method_missing(meth)
-      else
-        super
-      end
-    end
-
-    # Public: Define a reader method for the property and returns the value of it. This reader method will be
-    # available to each property defined in properties map
-    #
-    # Examples
-    #
-    #   deprecation = Deprecation.new(:key => 'mon', :msg => 'Beware with the Mon Keys')
-    #   deprecation.key # Same as deprecation.properties[:key]
-    #   deprecation.msg # Same as deprecation.properties[:msg]
-    #   deprecation.monkey # Method missing error
-    #
-    # Signature
-    #
-    #   <property>
-    #
-    # property - The name of the property to be accessed
-    #
-    # Returns the property value
-    def run_property_method_missing(meth)
-      meth_str = meth.to_s
-      self.class.send(:define_method, meth_str) { @properties[meth] }
-      self.send(meth_str)
+      validate
     end
 
     # List of supported old types for type changing deprecation
@@ -68,6 +39,42 @@ module Jekyll
     UNSUPPORTED_TYPE_CHANGE_MSG = "Unsupported type change deprecation, the \
       change of type from %s to %s is not a supported deprecation yet"
 
+    # Public: Raise an error for non existent properties
+    #
+    # Returns nothing
+    def check_props_exists(*props)
+      props.each do |prop|
+        unless @properties.has_key?(prop)
+          raise "The required attribute #{prop.to_s} is not in deprecation properties"
+        end
+      end
+    end
+
+    # Public: Validates the deprecation, check if the required properties exists
+    #
+    # Returns nothing
+    def validate
+      check_props_exists :key, :type
+
+      case type
+      when :config
+        check_props_exists :config
+        case subtype
+        when :renamed
+          check_props_exists :new_key
+        when :type_changed
+          check_props_exists :old_type, :new_type
+          unless ALLOWED_OLD_TYPES.include?(old_type) & ALLOWED_NEW_TYPES.include?(new_type)
+            raise UNSUPPORTED_TYPE_CHANGE_MSG % old_type, new_type
+          end
+        end
+      when :args
+        check_props_exists :args
+      else
+        raise "Unsupported deprecation type #{type}."
+      end
+    end
+
     # Public: Given the type of the deprecation, returns if this deprecation
     # exists in the current environment
     #
@@ -76,30 +83,14 @@ module Jekyll
     def exists?
       case type
       when :config
-        if config.has_key?(key)
-          if subtype == :type_changed
-            config[key].is_a?(old_type)
-          else
-            true
-          end
-        end
+        config.has_key?(key) && ((subtype != :type_changed) || config[key].is_a?(old_type))
       when :args
-        if (self.subtype == :no_subcommand)
+        if subtype == :no_subcommand
           args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
         else
           args.include?(key)
         end
-      else
-        Jekyll.logger.warn "Unsupported deprecation type."
-        false
       end
-    end
-
-    # Public: Check if the given old and new types are allowed
-    #
-    # Raises Exception if one of the types are not allowed
-    def check_types!
-      raise UNSUPPORTED_TYPE_CHANGE_MSG % old_type, new_type unless ALLOWED_OLD_TYPES.include?(old_type) & ALLOWED_NEW_TYPES.include?(new_type)
     end
 
     # Public: log a warning with this deprecation message by the jekyll logger

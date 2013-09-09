@@ -141,7 +141,7 @@ module Jekyll
       case type
       when :config then CONFIG_DEPRECATIONS
       when :args then ARGS_DEPRECATIONS
-      else raise "Unsupported deprecation type"
+      else raise "Unsupported deprecation type #{type}"
       end
     end
 
@@ -184,9 +184,7 @@ module Jekyll
           end
           config.delete(key)
         when :type_changed
-          deprecation.check_types!
-
-          if (deprecation.old_type == String) & (deprecation.new_type == Array)
+          if (deprecation.old_type == String) && (deprecation.new_type == Array)
             config[key] = config[key].split(",").map(&:strip)
           end
         end
