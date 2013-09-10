@@ -126,6 +126,8 @@ Gem::Specification.new do |s|
     site/_includes/analytics.html
     site/_includes/docs_contents.html
     site/_includes/docs_contents_mobile.html
+    site/_includes/docs_option.html
+    site/_includes/docs_ul.html
     site/_includes/footer.html
     site/_includes/header.html
     site/_includes/news_contents.html
