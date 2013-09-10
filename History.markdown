@@ -6,6 +6,7 @@
   * Disable reverse lookup when running `jekyll serve` (#1363)
 
 ### Bug Fixes
+  * Fix file discrepancy in gemspec (#1522)
 
 ### Development Fixes
   * Add a rake task to generate a new release post (#1404)
