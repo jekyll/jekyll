@@ -142,14 +142,17 @@ Feature: Create sites
 
   Scenario: Basic site with unpublished page
     Given I have an "index.html" page with title "index" that contains "Published page"
+    And I have a "public.html" page with published "true" that contains "Explicitly published page"
     And I have a "secret.html" page with published "false" that contains "Unpublished page"
 
     When I run jekyll
     Then the _site directory should exist
     And the "_site/index.html" file should exist
+    And the "_site/public.html" file should exist
     But the "_site/secret.html" file should not exist
 
     When I run jekyll with "--unpublished"
     Then the _site directory should exist
     And the "_site/index.html" file should exist
+    And the "_site/public.html" file should exist
     And the "_site/secret.html" file should exist
