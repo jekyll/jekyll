@@ -4,6 +4,7 @@
 
 ### Minor Enhancements
   * Disable reverse lookup when running `jekyll serve` (#1363)
+  * Upgrade RedCarpet dependency to `~> 2.3.0` (#1515)
 
 ### Bug Fixes
   * Fix file discrepancy in gemspec (#1522)
