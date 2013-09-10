@@ -55,6 +55,10 @@ module Jekyll
       self.process(name)
       self.read_yaml(@base, name)
 
+      self.data.default_proc = proc do |hash, key|
+        self.site.frontmatter_defaults.find(File.join(dir, name), self.type, key)
+      end
+
       if self.data.has_key?('date')
         self.date = Time.parse(self.data["date"].to_s)
       end
