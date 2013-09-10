@@ -189,8 +189,8 @@ Gem::Specification.new do |s|
     site/img/tube1x.png
     site/index.html
     site/js/modernizr-2.5.3.min.js
-    site/news/index.md
-    site/news/releases/index.md
+    site/news/index.html
+    site/news/releases/index.html
     test/fixtures/broken_front_matter1.erb
     test/fixtures/broken_front_matter2.erb
     test/fixtures/broken_front_matter3.erb
