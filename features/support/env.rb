@@ -35,7 +35,7 @@ def location(folder, direction)
   [before || '.', after || '.']
 end
 
-def read_file(path)
+def file_contents(path)
   File.open(path) do |file|
     file.readlines.join # avoid differences with \n and \r\n line endings
   end
