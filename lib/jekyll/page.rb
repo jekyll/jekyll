@@ -30,6 +30,10 @@ module Jekyll
       self.read_yaml(File.join(base, dir), name)
     end
 
+    def type
+      :page
+    end
+
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, we be '/'

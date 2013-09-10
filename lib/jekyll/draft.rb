@@ -13,6 +13,10 @@ module Jekyll
       name =~ MATCHER
     end
 
+    def type
+      :draft
+    end
+
     # Get the full path to the directory containing the draft files
     def containing_dir(source, dir)
       File.join(source, dir, '_drafts')
