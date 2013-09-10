@@ -1,4 +1,5 @@
 require_relative 'layout_reader'
+require_relative 'entry_filter.rb'
 
 module Jekyll
   class Site
@@ -319,14 +320,7 @@ module Jekyll
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries)
-      entries.reject do |e|
-        unless self.include.glob_include?(e)
-          ['.', '_', '#'].include?(e[0..0]) ||
-          e[-1..-1] == '~' ||
-          self.exclude.glob_include?(e) ||
-          (File.symlink?(e) && self.safe)
-        end
-      end
+      EntryFilter.new(self).filter(entries)
     end
 
     # Get the implementation class for the given Converter.
