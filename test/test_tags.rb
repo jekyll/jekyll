@@ -436,5 +436,22 @@ CONTENT
         assert_match "<span id='include-param' />", @result
       end
     end
+
+    context "without parameters within if statement" do
+      setup do
+        content = <<CONTENT
+---
+title: without parameters within if statement
+---
+
+{% if true %}{% include params.html %}{% endif %}
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "include file with empty parameters within if statement" do
+        assert_match "<span id='include-param' />", @result
+      end
+    end
   end
 end

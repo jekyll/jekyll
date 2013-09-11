@@ -80,6 +80,10 @@ eos
           return "The included file '_includes/#{@file}' should not be a symlink"
         end
       end
+
+      def blank?
+        false
+      end
     end
   end
 end
