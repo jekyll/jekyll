@@ -67,7 +67,7 @@ module Jekyll
     #
     # Returns the Converter instance.
     def converter
-      @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
+      @converter ||= self.site.plugins.converters.find { |c| c.matches(self.ext) }
     end
 
     # Render Liquid in the content

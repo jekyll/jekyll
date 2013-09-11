@@ -5,8 +5,6 @@ module Jekyll
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl
 
-    attr_accessor :converters, :generators
-
     # Public: Initialize a new Site.
     #
     # config - A Hash containing site configuration details.
@@ -19,7 +17,6 @@ module Jekyll
 
       self.source          = File.expand_path(config['source'])
       self.dest            = File.expand_path(config['destination'])
-      self.plugins         = plugins_path
       self.permalink_style = config['permalink'].to_sym
 
       self.reset
@@ -69,29 +66,7 @@ module Jekyll
         raise FatalException.new "Destination directory cannot be or contain the Source directory."
       end
 
-      # If safe mode is off, load in any Ruby files under the plugins
-      # directory.
-      unless self.safe
-        self.plugins.each do |plugins|
-            Dir[File.join(plugins, "**/*.rb")].each do |f|
-              require f
-            end
-        end
-      end
-
-      self.converters = instantiate_subclasses(Jekyll::Converter)
-      self.generators = instantiate_subclasses(Jekyll::Generator)
-    end
-
-    # Internal: Setup the plugin search path
-    #
-    # Returns an Array of plugin search paths
-    def plugins_path
-      if (config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [File.join(self.source, config['plugins'])]
-      else
-        Array(config['plugins']).map { |d| File.expand_path(d) }
-      end
+      plugins.load
     end
 
     # Read Site data from disk and load it into internal data structures.
@@ -191,7 +166,7 @@ module Jekyll
     #
     # Returns nothing.
     def generate
-      self.generators.each do |generator|
+      plugins.generators.each do |generator|
         generator.generate(self)
       end
     end
@@ -295,35 +270,6 @@ module Jekyll
       end
     end
 
-    # Get the implementation class for the given Converter.
-    #
-    # klass - The Class of the Converter to fetch.
-    #
-    # Returns the Converter instance implementing the given Converter.
-    def getConverterImpl(klass)
-      matches = self.converters.select { |c| c.class == klass }
-      if impl = matches.first
-        impl
-      else
-        raise "Converter implementation not found for #{klass}"
-      end
-    end
-
-    # Create array of instances of the subclasses of the class or module
-    #   passed in as argument.
-    #
-    # klass - class or module containing the subclasses which should be
-    #         instantiated
-    #
-    # Returns array of instances of subclasses of parameter
-    def instantiate_subclasses(klass)
-      klass.subclasses.select do |c|
-        !self.safe || c.safe
-      end.sort.map do |c|
-        c.new(self.config)
-      end
-    end
-
     # Read the entries from a particular directory for processing
     #
     # dir - The String relative path of the directory to read
@@ -367,6 +313,10 @@ module Jekyll
           yield item
         end
       end
+    end
+
+    def plugins
+      @plugin_manager ||= PluginManager.new(self)
     end
 
     private
