@@ -204,7 +204,7 @@ module Jekyll
   class TopLevelPagesProcessor < PostProcessor
     safe true
 
-    def generate(site)
+    def process(site)
       FileUtils.cp_r(Dir["#{site.dest}/_pages/*"], '..')
       FileUtils.rm_rf("#{site.dest}/_pages")
     end
