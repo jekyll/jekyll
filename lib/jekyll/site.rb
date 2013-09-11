@@ -5,7 +5,7 @@ module Jekyll
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl
 
-    attr_accessor :converters, :generators, :processors
+    attr_accessor :converters, :generators, :post_processors
 
     # Public: Initialize a new Site.
     #
@@ -82,7 +82,7 @@ module Jekyll
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
-      self.processors = instantiate_subclasses(Jekyll::Processor)
+      self.post_processors = instantiate_subclasses(Jekyll::PostProcessor)
     end
 
     # Internal: Setup the plugin search path
@@ -202,8 +202,8 @@ module Jekyll
     #
     # Returns nothing.
     def postprocess
-      self.processors.each do |processor|
-        processor.process(self)
+      self.post_processors.each do |post_processor|
+        post_processor.process(self)
       end
     end
 

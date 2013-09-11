@@ -191,17 +191,17 @@ In our example, `UpcaseConverter#matches` checks if our filename extension is
 simply uppercasing the entire content string. Finally, when it saves the page,
 it will do so with a `.html` extension.
 
-## Processors
+## PostProcessors
 
-You can create a processor when you need to modify the final output of Jekyll
-based on your own rules. Processors run after Jekyll has completed the build
-process, so you can use Processors to modify the rendered files and directories.
-For example, a processor might look like this:
+You can create a post processor when you need to modify the final output of Jekyll
+based on your own rules. PostProcessors run after Jekyll has completed the build
+process, so you can use PostProcessors to modify the rendered files and directories.
+For example, a post processor might look like this:
 
 {% highlight ruby %}
 module Jekyll
 
-  class TopLevelPagesProcessor < Processor
+  class TopLevelPagesProcessor < PostProcessor
     safe true
 
     def generate(site)
@@ -213,12 +213,12 @@ module Jekyll
 end
 {% endhighlight %}
 
-In this example, our processor will move all the files from the _pages directory
-into the top level directory (assuming you `include` _pages in your
+In this example, our post processor will move all the files from the _pages
+directory into the top level directory (assuming you `include` _pages in your
 `_config.yml`). That way you can keep your pages organized in that directory
 instead of polluting your top level source directory.
 
-Processors are only required to implement one method:
+PostProcessors are only required to implement one method:
 
 <div class="mobile-side-scroller">
 <table>

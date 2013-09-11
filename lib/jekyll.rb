@@ -49,14 +49,14 @@ require 'jekyll/cleaner'
 require 'jekyll/plugin'
 require 'jekyll/converter'
 require 'jekyll/generator'
-require 'jekyll/processor'
+require 'jekyll/post_processor'
 require 'jekyll/command'
 
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/converters/markdown'
 require_all 'jekyll/generators'
-require_all 'jekyll/processors'
+require_all 'jekyll/post_processors'
 require_all 'jekyll/tags'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
