@@ -99,6 +99,18 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="option">timezone: TIMEZONE</code></p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class='name'><strong>Defaults</strong></p>
+	<p class='description'>
+	    Set defaults for <a href="../frontmatter/" title="YAML frontmatter">YAML frontmatter</a>
+	    variables.
+	</p>
+      </td>
+      <td class='align-center'>
+        <p>see <a href="#frontmatter_defaults" title="details">below</a></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -241,6 +253,37 @@ before your site is served.
     default settings. Use spaces instead.
   </p>
 </div>
+
+## Frontmatter defaults
+
+You can set default values for your [YAML frontmatter](../frontmatter/) variables
+in your configuration. This way, you can for example set default layouts or define
+defaults for your custom variables. Of course, any variable actually specified in
+the front matter overrides the defaults.
+
+All defaults go under the `defaults` key, which holds a list of scope-values combinations.
+The `scope` key defines for which files the defaults apply, limiting them by their `path` and
+optionally by their `type` (`page`, `post` or `draft`). The `values` key holds the actual list of defaults.
+
+For example:
+{% highlight yaml %}
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      layout: "my-site"
+  -
+    scope:
+      path: "about/blog"
+      type: "post"
+    values:
+      layout: "meta-blog" # overrides previous default layout
+      author: "Dr. Hyde"
+{% endhighlight %}
+
+With these defaults, all pages and posts would default to the `my-site` layout except for the posts under `about/blog`,
+who would default to the `meta-blog` layout and also have the `page.author` [liquid variable](../variables/) set to `Dr. Hyde` by default.
 
 ## Default Configuration
 
