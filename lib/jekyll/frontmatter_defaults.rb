@@ -28,7 +28,7 @@ module Jekyll
       end
 
       def valid?(set)
-        set['scope'].is_a?(Hash) && set['scope'].has_key?('path') && set['values'].is_a?(Hash)
+        set.is_a?(Hash) && set['scope'].is_a?(Hash) && set['scope']['path'].is_a?(String) && set['values'].is_a?(Hash)
       end
 
       def matching_sets(path, type)
