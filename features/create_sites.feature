@@ -128,3 +128,20 @@ Feature: Create sites
     When I run jekyll
     Then the _site/test directory should exist
     And I should see "some other stuff" in "_site/test/index.html"
+
+  Scenario: Same pages with varying extensions override alphabetically
+    Given I have a "example.html" file that contains "html"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "html" in "_site/example.html"
+    Given I have a "example.html" file that contains "html"
+    And I have a "example.markdown" file that contains "markdown"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "markdown" in "_site/example.html"
+    Given I have a "example.html" file that contains "html"
+    And I have a "example.markdown" file that contains "markdown"
+    And I have a "example.textile" file that contains "textile"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "textile" in "_site/example.html"
