@@ -52,6 +52,20 @@ class Hash
   def symbolize_keys
     dup.symbolize_keys!
   end
+
+  if RUBY_VERSION < '1.9'
+    attr_accessor :default_proc
+
+    def [](key)
+      fetch(key) do |key|
+        if @default_proc.nil?
+          default(key)
+        else
+          @default_proc.call(self, key)
+        end
+      end
+    end
+  end
 end
 
 # Thanks, ActiveSupport!
