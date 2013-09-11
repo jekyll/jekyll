@@ -136,18 +136,11 @@ Feature: Create sites
     When I run jekyll
     Then the _site directory should exist
     And I should see "Extension: html" in "_site/index.html"
-    Given I have a _layouts directory
-    And I have a default layout that contains "Extension: {{ content }}"
-    And I have an "index.html" page with layout "default" that contains "html"
-    And I have an "index.markdown" page with layout "default" that contains "markdown"
+    Given I have an "index.markdown" page with layout "default" that contains "markdown"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Extension: markdown" in "_site/index.html"
-    Given I have a _layouts directory
-    And I have a default layout that contains "Extension: {{ content }}"
-    And I have an "index.html" page with layout "default" that contains "html"
-    And I have an "index.markdown" page with layout "default" that contains "markdown"
-    And I have an "index.textile" page with layout "default" that contains "textile"
+    Given I have an "index.textile" page with layout "default" that contains "textile"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Extension: textile" in "_site/index.html"
