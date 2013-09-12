@@ -29,6 +29,7 @@ class TestRelatedPosts < Test::Unit::TestCase
                                                'destination' => dest_dir,
                                                'lsi' => true})
       end
+      any_instance_of(Jekyll::RelatedPosts) { |i| stub(i).display }
       @site = Site.new(Jekyll.configuration)
     end
 
