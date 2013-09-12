@@ -34,7 +34,7 @@ module Jekyll
         server = HTTPServer.new(
           :Port => options['port'],
           :BindAddress => options['host'],
-          :MimeTypes => self.mime_types,
+          :MimeTypes => mime_types,
           :DoNotReverseLookup => true
         )
 
