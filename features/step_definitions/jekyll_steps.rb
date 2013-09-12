@@ -142,7 +142,7 @@ Then /^the (.*) directory should exist$/ do |dir|
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
-  assert Regexp.new(text).match(file_contents(file))
+  assert_match Regexp.new(text), file_contents(file)
 end
 
 Then /^I should see exactly "(.*)" in "(.*)"$/ do |text, file|
@@ -154,7 +154,7 @@ Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
 end
 
 Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
-  assert Regexp.new(Regexp.escape(text)).match(file_contents(file))
+  assert_match Regexp.new(Regexp.escape(text)), file_contents(file)
 end
 
 Then /^the "(.*)" file should exist$/ do |file|
