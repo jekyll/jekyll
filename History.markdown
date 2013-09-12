@@ -8,6 +8,7 @@
 
 ### Bug Fixes
   * Fix file discrepancy in gemspec (#1522)
+  * Force rendering of Include tag (#1525)
 
 ### Development Fixes
   * Add a rake task to generate a new release post (#1404)
