@@ -1,3 +1,8 @@
+if RUBY_VERSION > '1.9' && ENV["COVERAGE"] == "true"
+  require 'coveralls'
+  Coveralls.wear_merged!
+end
+
 require 'fileutils'
 require 'rr'
 require 'test/unit'
