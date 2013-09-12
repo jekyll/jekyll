@@ -55,6 +55,14 @@ class TestSite < Test::Unit::TestCase
       assert_equal Hash.new, @site.tags
     end
 
+    should "sort tags and categories hashes (reversed)" do
+      correct_order = ['_posts/2013-09-12-sorting-tags-and-categories-with-different-slug.html', '_posts/2013-09-12-sorting-tags-and-categories.html', '_posts/2013-09-12-sorting-tags-and-categories-with-different-date.html']
+
+      @site.process
+      assert_equal correct_order, @site.tags['test-tag-order'].map { |p| p.path }
+      assert_equal correct_order, @site.categories['test-category-order'].map { |p| p.path }
+    end
+
     should "give site with parsed pages and posts to generators" do
       @site.reset
       @site.read
@@ -172,7 +180,7 @@ class TestSite < Test::Unit::TestCase
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
-      categories = %w(2013 bar baz category foo z_category publish_test win).sort
+      categories = %w(2013 bar baz category foo z_category publish_test win test-category-order).sort
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
