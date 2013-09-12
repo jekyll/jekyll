@@ -101,8 +101,8 @@ Mercenary.program(:jekyll) do |p|
     c.syntax 'jekyll docs'
     c.description "Launch local server with docs for Jekyll v#{Jekyll::VERSION}"
 
-    c.option 'port', '-p', '--port [PORT]', 'Port to listen on'
-    c.option 'host', '-u', '--host [HOST]', 'Host to bind to'
+    c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
+    c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
 
     c.action do |args, options|
       options = normalize_options(options)
