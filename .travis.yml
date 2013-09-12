@@ -1,6 +1,7 @@
 language: ruby
 before_install:
   - gem install bundler
+env: COVERAGE=true
 rvm:
   - 2.0.0
   - 1.9.3
