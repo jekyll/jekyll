@@ -37,8 +37,12 @@ Feature: Include tags
   Scenario: Include a file from a variable
     Given I have an _includes directory
     And I have an "_includes/snippet.html" file that contains "a snippet"
-    And I have a configuration file with "include_file" set to "snippet.html"
-    And I have an "index.html" page that contains "{% include {{site.include_file}} %}"
+    And I have an "_includes/parametrized.html" file that contains "works with {{include.what}}"
+    And I have a configuration file with:
+    | key           | value             |
+    | include_file1 | snippet.html      |
+    | include_file2 | parametrized.html |
+    And I have an "index.html" page that contains "{% include {{site.include_file1}} %} that {% include {{site.include_file2}} what='parameters' %}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "a snippet" in "_site/index.html"
+    And I should see "a snippet that works with parameters" in "_site/index.html"
