@@ -106,7 +106,9 @@ module Jekyll
 
       self.read_posts(dir)
       self.read_drafts(dir) if self.show_drafts
+
       self.posts.sort!
+      sort_tags_and_categories!
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
@@ -140,6 +142,12 @@ module Jekyll
             aggregate_post_info(post)
           end
         end
+      end
+    end
+
+    def sort_tags_and_categories!
+      [self.tags, self.categories].each do |set|
+        set.values.each { |posts| posts.sort!.reverse! }
       end
     end
 
