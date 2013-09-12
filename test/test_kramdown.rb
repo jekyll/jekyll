@@ -15,17 +15,16 @@ class TestKramdown < Test::Unit::TestCase
           'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo'
         }
       }
+      @markdown = Converters::Markdown.new(@config)
     end
 
     # http://kramdown.rubyforge.org/converter/html.html#options
     should "pass kramdown options" do
-      markdown = Converters::Markdown.new(@config)
-      assert_equal "<h1>Some Header</h1>", markdown.convert('# Some Header #').strip
+      assert_equal "<h1>Some Header</h1>", @markdown.convert('# Some Header #').strip
     end
 
     should "convert quotes to smart quotes" do
-      markdown = Converters::Markdown.new(@config)
-      assert_match /<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>/, markdown.convert(%{"Pit'hy"}).strip
+      assert_match /<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>/, @markdown.convert(%{"Pit'hy"}).strip
 
       override = { 'kramdown' => { 'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo' } }
       markdown = Converters::Markdown.new(@config.deep_merge(override))
