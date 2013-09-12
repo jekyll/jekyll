@@ -18,7 +18,7 @@
   * Make navigation menus reusable (#1507)
   * Fix link to History page from Release v1.2.0 notes post.
   * Fix markup in History file for command line options (#1512)
-
+  * Expand 1.2 release post title to 1.2.0 (#1516)
 
 ## 1.2.0 / 2013-09-06
 
