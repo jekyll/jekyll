@@ -31,12 +31,29 @@ module Jekyll
       #
       # Returns nothing.
       def self.watch(site, options)
-        require 'directory_watcher'
-
-        source = options['source']
-        destination = options['destination']
-
         Jekyll.logger.info "Auto-regeneration:", "enabled"
+
+        dw = self.setup_watcher(options['source'], options['destination'])
+        dw.start
+
+        unless options['serving']
+          trap("INT") do
+            puts "     Halting auto-regeneration."
+            exit 0
+          end
+
+          loop { sleep 1000 }
+        end
+      end
+
+      # Private: Create and configure a DirectoryWatcher instance
+      #
+      # source - the source path
+      # destination - the destination path
+      #
+      # Returns a DirectoryWatcher instance
+      def self.setup_watcher(source, destination)
+        require 'directory_watcher'
 
         dw = DirectoryWatcher.new(source, :glob => self.globs(source, destination), :pre_load => true)
         dw.interval = 1
@@ -48,16 +65,7 @@ module Jekyll
           puts  "...done."
         end
 
-        dw.start
-
-        unless options['serving']
-          trap("INT") do
-            puts "     Halting auto-regeneration."
-            exit 0
-          end
-
-          loop { sleep 1000 }
-        end
+        dw
       end
     end
   end
