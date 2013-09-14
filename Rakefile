@@ -84,7 +84,7 @@ end
 #
 #############################################################################
 
-if RUBY_VERSION > '1.9' && ENV["COVERAGE"] == "true" && ENV["TRAVIS"] == "true"
+if RUBY_VERSION > '1.9' && ENV["TRAVIS"] == "true"
   require 'coveralls/rake/task'
   Coveralls::RakeTask.new
 
