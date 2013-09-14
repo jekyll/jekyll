@@ -14,6 +14,7 @@
 ### Development Fixes
   * Add a rake task to generate a new release post (#1404)
   * Mute LSI output in tests (#1531)
+  * Update contributor documentation (#1537)
 
 ### Site Enhancements
   * Fix a couple of validation errors on the site (#1511)
