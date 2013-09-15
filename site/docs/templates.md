@@ -7,9 +7,9 @@ permalink: /docs/templates/
 ---
 
 Jekyll uses the [Liquid](http://wiki.shopify.com/Liquid) templating language to
-process templates. All of the [standard Liquid tags and
-filters](http://wiki.github.com/shopify/liquid/liquid-for-designers) are
-supported, Jekyll even adds a few handy filters and tags of its own to make
+process templates. All of the standard Liquid [tags](http://wiki.shopify.com/Logic) and
+[filters](http://wiki.shopify.com/Filters) are
+supported. Jekyll even adds a few handy filters and tags of its own to make
 common tasks easier.
 
 ## Filters
