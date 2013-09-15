@@ -3,6 +3,16 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 1.2.1 / 2013-09-14
+
+### Minor Enhancements
   * Print better messages for detached server. Mute output on detach. (#1518)
   * Disable reverse lookup when running `jekyll serve` (#1363)
   * Upgrade RedCarpet dependency to `~> 2.3.0` (#1515)
