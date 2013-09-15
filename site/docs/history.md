@@ -5,6 +5,30 @@ permalink: /docs/history/
 prev_section: contributing
 ---
 
+## 1.2.1 / 2013-09-14
+
+### Minor Enhancements
+- Print better messages for detached server. Mute output on detach. ([#1518]({{ site.repository }}/issues/1518))
+- Disable reverse lookup when running `jekyll serve` ([#1363]({{ site.repository }}/issues/1363))
+- Upgrade RedCarpet dependency to `~> 2.3.0` ([#1515]({{ site.repository }}/issues/1515))
+- Upgrade to Liquid `>= 2.5.2, < 2.6` ([#1536]({{ site.repository }}/issues/1536))
+
+### Bug Fixes
+- Fix file discrepancy in gemspec ([#1522]({{ site.repository }}/issues/1522))
+- Force rendering of Include tag ([#1525]({{ site.repository }}/issues/1525))
+
+### Development Fixes
+- Add a rake task to generate a new release post ([#1404]({{ site.repository }}/issues/1404))
+- Mute LSI output in tests ([#1531]({{ site.repository }}/issues/1531))
+- Update contributor documentation ([#1537]({{ site.repository }}/issues/1537))
+
+### Site Enhancements
+- Fix a couple of validation errors on the site ([#1511]({{ site.repository }}/issues/1511))
+- Make navigation menus reusable ([#1507]({{ site.repository }}/issues/1507))
+- Fix link to History page from Release v1.2.0 notes post.
+- Fix markup in History file for command line options ([#1512]({{ site.repository }}/issues/1512))
+- Expand 1.2 release post title to 1.2.0 ([#1516]({{ site.repository }}/issues/1516))
+
 ## 1.2.0 / 2013-09-06
 
 ### Major Enhancements
