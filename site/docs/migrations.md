@@ -74,7 +74,7 @@ here's how:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpress";
-    JekyllImport::WordPress.process("database", "user", "pass")'
+    JekyllImport::WordPress.process({:database => "database", :user => "user", :pass => "pass"})'
 {% endhighlight %}
 
 If you are using Webfaction and have to set up an [SSH
