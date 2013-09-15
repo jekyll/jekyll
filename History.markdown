@@ -9,6 +9,7 @@
 ### Development Fixes
 
 ### Site Enhancements
+  * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
 
 ## 1.2.1 / 2013-09-14
 
