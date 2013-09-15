@@ -85,7 +85,7 @@ authentication system:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpress";
-    JekyllImport::WordPress.process("database", "user", "pass", "127.0.0.1")'
+    JekyllImport::WordPress.process({:host => "127.0.0.1", :dbname => "database", :user => "user", :pass => "pass"})'
 {% endhighlight %}
 
 ### Further WordPress migration alternatives
