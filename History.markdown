@@ -3,6 +3,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Print better messages for detached server. Mute output on detach. (#1518)
   * Disable reverse lookup when running `jekyll serve` (#1363)
   * Upgrade RedCarpet dependency to `~> 2.3.0` (#1515)
   * Upgrade to Liquid `>= 2.5.2, < 2.6` (#1536)
