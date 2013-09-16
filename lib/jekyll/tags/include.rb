@@ -55,7 +55,7 @@ eos
           return error
         end
 
-        source = File.read(File.join(includes_dir, @file))
+        source = read_file(File.join(includes_dir, @file))
         partial = Liquid::Template.parse(source)
 
         context.stack do
@@ -77,12 +77,16 @@ eos
         if !File.exists?(file)
           return "Included file #{@file} not found in _includes directory"
         elsif File.symlink?(file)
-          return "The included file '_includes/#{@file}' should not be a symlink"
+          return "The included file '_includes/#{file}' should not be a symlink"
         end
       end
 
       def blank?
         false
+      end
+
+      def read_file(file)
+        return File.read(file)
       end
     end
   end
