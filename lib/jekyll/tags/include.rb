@@ -66,7 +66,7 @@ eos
       end
 
       def validate_file(dir)
-        if File.symlink?(dir)
+        if File.symlink?(dir) && context.registers[:site].safe?
           return "Includes directory '#{dir}' cannot be a symlink"
         end
 
@@ -77,7 +77,7 @@ eos
         file = File.join(dir, @file)
         if !File.exists?(file)
           return "Included file #{@file} not found in #{INCLUDES_DIR} directory"
-        elsif File.symlink?(file)
+        elsif File.symlink?(file) && context.registers[:site].safe?
           return "The included file '#{INCLUDES_DIR}/#{@file}' should not be a symlink"
         end
       end
