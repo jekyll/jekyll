@@ -27,4 +27,13 @@ Feature: Markdown
     Then the _site directory should exist
     And I should see "Index" in "_site/index.html"
     And I should see "<h1 id='my_title'>My Title</h1>" in "_site/index.html"
-    
+
+  Scenario: Output MathML with Maruku
+    Given I have a "math.md" page that contains "$x^{n}$"
+    And I have a configuration file with:
+      | key      | value                                                         |
+      | markdown | maruku                                                        |
+      | maruku   | { use_tex: true, use_math_ml: true, math_ml_engine: 'ritex' } |
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "<math (class='maruku-mathml'\s*|display='inline'\s*|xmlns='http://www.w3.org/1998/Math/MathML'\s*){3}><msup><mi>x</mi><mrow><mi>n</mi></mrow></msup></math>" in "_site/math.html"

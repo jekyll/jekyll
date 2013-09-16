@@ -45,7 +45,9 @@ module Jekyll
         'use_divs'   => false,
         'png_engine' => 'blahtex',
         'png_dir'    => 'images/latex',
-        'png_url'    => '/images/latex'
+        'png_url'    => '/images/latex',
+        'use_math_ml'=> false, # default for backwards-compatibility
+        'math_ml_engine' => 'blahtex'
       },
 
       'rdiscount' => {
