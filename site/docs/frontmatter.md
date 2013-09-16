@@ -185,6 +185,6 @@ These are available out-of-the-box to be used in the front-matter for a post.
     If you don't want to repeat your frequently used front-matter variables over and over,
     just define <a href="../configuration/#frontmatter_defaults" title="frontmatter defaults">defaults</a>
     for them and only override them where necessary (or not at all). This works both for predefined
-    and custom variables .
+    and custom variables.
   </p>
 </div>

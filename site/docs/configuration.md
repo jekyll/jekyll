@@ -102,10 +102,10 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr>
       <td>
         <p class='name'><strong>Defaults</strong></p>
-	<p class='description'>
-	    Set defaults for <a href="../frontmatter/" title="YAML frontmatter">YAML frontmatter</a>
-	    variables.
-	</p>
+        <p class='description'>
+            Set defaults for <a href="../frontmatter/" title="YAML frontmatter">YAML frontmatter</a>
+            variables.
+        </p>
       </td>
       <td class='align-center'>
         <p>see <a href="#frontmatter_defaults" title="details">below</a></p>
