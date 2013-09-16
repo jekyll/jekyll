@@ -49,7 +49,22 @@ module Jekyll
       #
       # Returns true if the scope applies to the given path and type
       def applies?(scope, path, type)
-        (scope['path'].empty? || path.starts_with?(scope['path'])) && (!scope.has_key?('type') || scope['type'] == type.to_s)
+        applies_path?(scope, path) && applies_type?(scope, type)
+      end
+
+      def applies_path?(scope, path)
+        return true if scope['path'].empty?
+
+        scope_path = Pathname.new(scope['path'])
+        Pathname.new(path).ascend do |path|
+          if path == scope_path
+            return true
+          end
+        end
+      end
+
+      def applies_type?(scope, type)
+        !scope.has_key?('type') || scope['type'] == type.to_s
       end
 
       # Checks if a given set of default values is valid
