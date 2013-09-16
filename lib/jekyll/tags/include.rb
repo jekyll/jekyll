@@ -4,6 +4,8 @@ module Jekyll
 
       MATCHER = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
 
+      INCLUDES_DIR = '_includes'
+
       def initialize(tag_name, markup, tokens)
         super
         @file, @params = markup.strip.split(' ', 2);
@@ -49,14 +51,13 @@ eos
       end
 
       def render(context)
-        includes_dir = File.join(context.registers[:site].source, '_includes')
+        dir = includes_dir(context)
 
-        if error = validate_file(includes_dir)
+        if error = validate_file(dir)
           return error
         end
 
-        source = read_file(File.join(includes_dir, @file))
-        partial = Liquid::Template.parse(source)
+        partial = Liquid::Template.parse(source(dir))
 
         context.stack do
           context['include'] = parse_params(context) if @params
@@ -64,20 +65,20 @@ eos
         end
       end
 
-      def validate_file(includes_dir)
-        if File.symlink?(includes_dir)
-          return "Includes directory '#{includes_dir}' cannot be a symlink"
+      def validate_file(dir)
+        if File.symlink?(dir)
+          return "Includes directory '#{dir}' cannot be a symlink"
         end
 
         if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
           return "Include file '#{@file}' contains invalid characters or sequences"
         end
 
-        file = File.join(includes_dir, @file)
+        file = File.join(dir, @file)
         if !File.exists?(file)
-          return "Included file #{@file} not found in _includes directory"
+          return "Included file #{@file} not found in #{INCLUDES_DIR} directory"
         elsif File.symlink?(file)
-          return "The included file '_includes/#{file}' should not be a symlink"
+          return "The included file '#{INCLUDES_DIR}/#{@file}' should not be a symlink"
         end
       end
 
@@ -85,8 +86,14 @@ eos
         false
       end
 
-      def read_file(file)
-        return File.read(file)
+      # This method allows to modify the file content by inheriting from the class.
+      # Don’t refactor it. 
+      def source(dir)
+        File.read(File.join(dir, @file))
+      end
+
+      def includes_dir(context)
+        File.join(context.registers[:site].source, INCLUDES_DIR)
       end
     end
   end
