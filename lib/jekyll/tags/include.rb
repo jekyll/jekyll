@@ -4,6 +4,8 @@ module Jekyll
 
       MATCHER = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
 
+      VALID_SYNTAX = "{% include file.ext param='value' param2='value' %}"
+
       INCLUDES_DIR = '_includes'
 
       def initialize(tag_name, markup, tokens)
@@ -35,6 +37,26 @@ module Jekyll
 
       # ensure the entire markup string from start to end is valid syntax, and params are separated by spaces
       def validate_syntax
+        validate_file_name
+        validate_params
+      end
+
+      def validate_file_name
+        if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
+            raise SyntaxError.new <<-eos
+Invalid syntax for include tag. File contains invalid characters or sequences:
+
+	#{@file}
+
+Valid syntax:
+
+	#{VALID_SYNTAX}
+
+eos
+        end
+      end
+
+      def validate_params
         full_matcher = Regexp.compile('\A\s*(?:' + MATCHER.to_s + '(?=\s|\z)\s*)*\z')
         unless @params =~ full_matcher
           raise SyntaxError.new <<-eos
@@ -44,20 +66,24 @@ Invalid syntax for include tag:
 
 Valid syntax:
 
-	{% include file.ext param='value' param2="value" %}
+	#{VALID_SYNTAX}
 
 eos
         end
       end
 
       def render(context)
-        dir = includes_dir(context)
-
-        if error = validate_file(dir)
+        dir = File.join(context.registers[:site].source, INCLUDES_DIR)
+        if error = validate_dir(dir, context.registers[:site].safe)
           return error
         end
 
-        partial = Liquid::Template.parse(source(dir))
+        file = File.join(dir, @file)
+        if error = validate_file(dir, context.registers[:site].safe)
+          return error
+        end
+
+        partial = Liquid::Template.parse(source(file))
 
         context.stack do
           context['include'] = parse_params(context) if @params
@@ -65,19 +91,16 @@ eos
         end
       end
 
-      def validate_file(dir)
-        if File.symlink?(dir) && context.registers[:site].safe?
+      def validate_dir(dir, safe)
+        if File.symlink?(dir) && safe?
           return "Includes directory '#{dir}' cannot be a symlink"
         end
+      end
 
-        if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
-          return "Include file '#{@file}' contains invalid characters or sequences"
-        end
-
-        file = File.join(dir, @file)
+      def validate_file(file, safe)
         if !File.exists?(file)
-          return "Included file #{@file} not found in #{INCLUDES_DIR} directory"
-        elsif File.symlink?(file) && context.registers[:site].safe?
+          return "Included file '#{@file}' not found in '#{INCLUDES_DIR}' directory"
+        elsif File.symlink?(file) && safe?
           return "The included file '#{INCLUDES_DIR}/#{@file}' should not be a symlink"
         end
       end
@@ -88,12 +111,8 @@ eos
 
       # This method allows to modify the file content by inheriting from the class.
       # Don’t refactor it. 
-      def source(dir)
-        File.read(File.join(dir, @file))
-      end
-
-      def includes_dir(context)
-        File.join(context.registers[:site].source, INCLUDES_DIR)
+      def source(file)
+        File.read(file)
       end
     end
   end
