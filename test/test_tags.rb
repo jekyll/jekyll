@@ -15,7 +15,7 @@ class TestTags < Test::Unit::TestCase
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
-    @converter = site.converters.find { |c| c.class == converter_class }
+    @converter = site.plugins.converters.find { |c| c.class == converter_class }
     payload = { "pygments_prefix" => @converter.pygments_prefix,
                 "pygments_suffix" => @converter.pygments_suffix }
 

@@ -4,32 +4,32 @@ class TestSite < Test::Unit::TestCase
   context "configuring sites" do
     should "have an array for plugins by default" do
       site = Site.new(Jekyll::Configuration::DEFAULTS)
-      assert_equal [File.join(Dir.pwd, '_plugins')], site.plugins
+      assert_equal [File.join(Dir.pwd, '_plugins')], site.plugins.send(:plugins_path)
     end
 
     should "look for plugins under the site directory by default" do
       site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'source' => File.expand_path(source_dir)}))
-      assert_equal [File.join(source_dir, '_plugins')], site.plugins
+      assert_equal [File.join(source_dir, '_plugins')], site.plugins.send(:plugins_path)
     end
 
     should "have an array for plugins if passed as a string" do
       site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
-      assert_equal ['/tmp/plugins'], site.plugins
+      assert_equal ['/tmp/plugins'], site.plugins.send(:plugins_path)
     end
 
     should "have an array for plugins if passed as an array" do
       site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
-      assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
+      assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins.send(:plugins_path)
     end
 
     should "have an empty array for plugins if nothing is passed" do
       site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => []}))
-      assert_equal [], site.plugins
+      assert_equal [], site.plugins.send(:plugins_path)
     end
 
     should "have an empty array for plugins if nil is passed" do
       site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => nil}))
-      assert_equal [], site.plugins
+      assert_equal [], site.plugins.send(:plugins_path)
     end
 
     should "expose default baseurl" do
@@ -53,6 +53,14 @@ class TestSite < Test::Unit::TestCase
 
     should "have an empty tag hash by default" do
       assert_equal Hash.new, @site.tags
+    end
+
+    should "sort tags and categories hashes (reversed)" do
+      correct_order = ['_posts/2013-09-12-sorting-tags-and-categories-with-different-slug.html', '_posts/2013-09-12-sorting-tags-and-categories.html', '_posts/2013-09-12-sorting-tags-and-categories-with-different-date.html']
+
+      @site.process
+      assert_equal correct_order, @site.tags['test-tag-order'].map { |p| p.path }
+      assert_equal correct_order, @site.categories['test-category-order'].map { |p| p.path }
     end
 
     should "give site with parsed pages and posts to generators" do
@@ -150,8 +158,8 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "setup plugins in priority order" do
-      assert_equal @site.converters.sort_by(&:class).map{|c|c.class.priority}, @site.converters.map{|c|c.class.priority}
-      assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
+      assert_equal @site.plugins.converters.sort_by(&:class).map{|c|c.class.priority}, @site.plugins.converters.map{|c|c.class.priority}
+      assert_equal @site.plugins.generators.sort_by(&:class).map{|g|g.class.priority}, @site.plugins.generators.map{|g|g.class.priority}
     end
 
     should "read layouts" do
@@ -172,7 +180,7 @@ class TestSite < Test::Unit::TestCase
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
-      categories = %w(2013 bar baz category foo z_category publish_test win).sort
+      categories = %w(2013 bar baz category foo z_category publish_test win test-category-order).sort
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort

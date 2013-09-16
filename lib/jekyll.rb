@@ -44,6 +44,7 @@ require 'jekyll/static_file'
 require 'jekyll/errors'
 require 'jekyll/related_posts'
 require 'jekyll/cleaner'
+require 'jekyll/plugin_manager'
 
 # extensions
 require 'jekyll/plugin'

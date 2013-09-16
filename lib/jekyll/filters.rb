@@ -9,7 +9,7 @@ module Jekyll
     # Returns the HTML formatted String.
     def textilize(input)
       site = @context.registers[:site]
-      converter = site.getConverterImpl(Jekyll::Converters::Textile)
+      converter = site.plugins.getConverterImpl(Jekyll::Converters::Textile)
       converter.convert(input)
     end
 
@@ -20,7 +20,7 @@ module Jekyll
     # Returns the HTML formatted String.
     def markdownify(input)
       site = @context.registers[:site]
-      converter = site.getConverterImpl(Jekyll::Converters::Markdown)
+      converter = site.plugins.getConverterImpl(Jekyll::Converters::Markdown)
       converter.convert(input)
     end
 
