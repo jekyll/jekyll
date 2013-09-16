@@ -18,27 +18,26 @@ Feature: Site configuration
     Then the _mysite directory should exist
     And I should see "Changing destination directory" in "_mysite/index.html"
 
-  Scenario: Similarly named source and destination
-    Given I have a blank site in "mysite_source"
-    And I have an "mysite_source/index.html" file that contains "html"
+  Scenario Outline: Similarly named source and destination
+    Given I have a blank site in "<source>"
+    And I have an "<source>/index.md" page that contains "markdown"
     And I have a configuration file with:
-    | key         | value         |
-    | source      | mysite_source |
-    | destination | mysite        |
+    | key         | value    |
+    | source      | <source> |
+    | destination | <dest>   |
     When I run jekyll
-    Then the mysite directory should exist
-    And I should see "html" in "mysite/index.html"
+    Then the <source> directory should exist
+    And the "<dest>/index.html" file should <file_exist> exist
+    And I should see "markdown" in "<source>/index.md"
 
-  Scenario: Similarly named source and destination 2
-    Given I have a blank site in "mysite"
-    And I have an "mysite/index.html" file that contains "html"
-    And I have a configuration file with:
-    | key         | value       |
-    | source      | mysite      |
-    | destination | mysite_dest |
-    When I run jekyll
-    Then the mysite_dest directory should exist
-    And I should see "html" in "mysite_dest/index.html"
+    Examples:
+      | source        | dest        | file_exist |
+      | mysite_source | mysite      |            |
+      | mysite        | mysite_dest |            |
+      | mysite/       | mysite      | not        |
+      | mysite        | ./mysite    | not        |
+      | mysite/source | mysite      | not        |
+      | mysite        | mysite/dest |            |
 
   Scenario: Exclude files inline
     Given I have an "Rakefile" file that contains "I want to be excluded"
