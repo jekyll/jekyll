@@ -373,7 +373,7 @@ CONTENT
     end
 
     context "with invalid parameter syntax" do
-      should "throw a SyntaxError" do
+      should "throw a ArgumentError" do
         content = <<CONTENT
 ---
 title: Invalid parameter syntax
@@ -381,7 +381,7 @@ title: Invalid parameter syntax
 
 {% include params.html param s="value" %}
 CONTENT
-        assert_raise SyntaxError, 'Did not raise exception on invalid "include" syntax' do
+        assert_raise ArgumentError, 'Did not raise exception on invalid "include" syntax' do
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
         end
 
@@ -392,7 +392,7 @@ title: Invalid parameter syntax
 
 {% include params.html params="value %}
 CONTENT
-        assert_raise SyntaxError, 'Did not raise exception on invalid "include" syntax' do
+        assert_raise ArgumentError, 'Did not raise exception on invalid "include" syntax' do
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
         end
       end
