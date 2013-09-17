@@ -41,7 +41,7 @@ module Jekyll
 
       def validate_file_name
         if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
-            raise SyntaxError.new <<-eos
+            raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
 	#{@file}
@@ -57,7 +57,7 @@ eos
       def validate_params
         full_valid_syntax = Regexp.compile('\A\s*(?:' + VALID_SYNTAX.to_s + '(?=\s|\z)\s*)*\z')
         unless @params =~ full_valid_syntax
-          raise SyntaxError.new <<-eos
+          raise ArgumentError.new <<-eos
 Invalid syntax for include tag:
 
 	#{@params}
