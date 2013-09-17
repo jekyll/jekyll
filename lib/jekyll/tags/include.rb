@@ -110,7 +110,6 @@ eos
       end
 
       # This method allows to modify the file content by inheriting from the class.
-      # Don’t refactor it. 
       def source(file)
         File.read(file)
       end
