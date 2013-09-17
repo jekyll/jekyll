@@ -14,6 +14,7 @@
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
   * Add `jekyll-suggested-tweet` to list of third-party plugins (#1555)
+  * Link to Liquid's docs for tags and filters (#1553)
 
 ## 1.2.1 / 2013-09-14
 
