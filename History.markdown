@@ -5,6 +5,8 @@
 ### Minor Enhancements
 
 ### Bug Fixes
+  * Fix up matching against source and destination when the two
+    locations are similar (#1556)
 
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
