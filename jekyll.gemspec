@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('launchy', "~> 2.1.2")
   s.add_development_dependency('simplecov', "~> 0.7")
   s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
+  s.add_development_dependency('coveralls', "~> 0.6.9")
   s.add_development_dependency('activesupport', '~> 3.2.13')
 
   # = MANIFEST =
