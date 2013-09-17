@@ -7,6 +7,7 @@
 ### Bug Fixes
 
 ### Development Fixes
+  * Add coverage reporting with Coveralls (#1539)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
