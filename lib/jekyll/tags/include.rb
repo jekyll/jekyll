@@ -2,21 +2,24 @@ module Jekyll
   module Tags
     class IncludeTag < Liquid::Tag
 
-      VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
-
       SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
+
+      VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/      
 
       INCLUDES_DIR = '_includes'
 
       def initialize(tag_name, markup, tokens)
         super
         @file, @params = markup.strip.split(' ', 2);
+        validate_syntax
+      end
+
+      def validate_syntax
         validate_file_name
+        validate_params if @params
       end
 
       def parse_params(context)
-        validate_params
-
         params = {}
         markup = @params
 
