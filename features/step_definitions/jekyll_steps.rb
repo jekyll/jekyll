@@ -7,7 +7,7 @@ end
 World(Test::Unit::Assertions)
 
 Given /^I have a blank site in "(.*)"$/ do |path|
-  FileUtils.mkdir(path)
+  FileUtils.mkdir_p(path)
 end
 
 Given /^I do not have a "(.*)" directory$/ do |path|
@@ -137,8 +137,12 @@ When /^I delete the file "(.*)"$/ do |file|
   File.delete(file)
 end
 
-Then /^the (.*) directory should exist$/ do |dir|
+Then /^the (.*) directory should +exist$/ do |dir|
   assert File.directory?(dir), "The directory \"#{dir}\" does not exist"
+end
+
+Then /^the (.*) directory should not exist$/ do |dir|
+  assert !File.directory?(dir), "The directory \"#{dir}\" exists"
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
@@ -157,12 +161,12 @@ Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
   assert Regexp.new(Regexp.escape(text)).match(File.open(file).readlines.join)
 end
 
-Then /^the "(.*)" file should exist$/ do |file|
-  assert File.file?(file)
+Then /^the "(.*)" file should +exist$/ do |file|
+  assert File.file?(file), "The file \"#{file}\" does not exist"
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|
-  assert !File.exists?(file)
+  assert !File.exists?(file), "The file \"#{file}\" exists"
 end
 
 Then /^I should see today's time in "(.*)"$/ do |file|
