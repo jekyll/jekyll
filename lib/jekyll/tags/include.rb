@@ -2,9 +2,9 @@ module Jekyll
   module Tags
     class IncludeTag < Liquid::Tag
 
-      MATCHER = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
+      VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
 
-      VALID_SYNTAX = "{% include file.ext param='value' param2='value' %}"
+      SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
 
       INCLUDES_DIR = '_includes'
 
@@ -19,7 +19,7 @@ module Jekyll
         params = {}
         markup = @params
 
-        while match = MATCHER.match(markup) do
+        while match = VALID_SYNTAX.match(markup) do
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
@@ -50,15 +50,15 @@ Invalid syntax for include tag. File contains invalid characters or sequences:
 
 Valid syntax:
 
-	#{VALID_SYNTAX}
+	#{SYNTAX_EXAMPLE}
 
 eos
         end
       end
 
       def validate_params
-        full_matcher = Regexp.compile('\A\s*(?:' + MATCHER.to_s + '(?=\s|\z)\s*)*\z')
-        unless @params =~ full_matcher
+        full_VALID_SYNTAX = Regexp.compile('\A\s*(?:' + VALID_SYNTAX.to_s + '(?=\s|\z)\s*)*\z')
+        unless @params =~ full_VALID_SYNTAX
           raise SyntaxError.new <<-eos
 Invalid syntax for include tag:
 
@@ -66,7 +66,7 @@ Invalid syntax for include tag:
 
 Valid syntax:
 
-	#{VALID_SYNTAX}
+	#{SYNTAX_EXAMPLE}
 
 eos
         end
