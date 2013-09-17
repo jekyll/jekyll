@@ -92,7 +92,7 @@ eos
       end
 
       def validate_dir(dir, safe)
-        if File.symlink?(dir) && safe?
+        if File.symlink?(dir) && safe
           return "Includes directory '#{dir}' cannot be a symlink"
         end
       end
@@ -100,7 +100,7 @@ eos
       def validate_file(file, safe)
         if !File.exists?(file)
           return "Included file '#{@file}' not found in '#{INCLUDES_DIR}' directory"
-        elsif File.symlink?(file) && safe?
+        elsif File.symlink?(file) && safe
           return "The included file '#{INCLUDES_DIR}/#{@file}' should not be a symlink"
         end
       end
