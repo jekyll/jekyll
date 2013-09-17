@@ -11,10 +11,11 @@ module Jekyll
       def initialize(tag_name, markup, tokens)
         super
         @file, @params = markup.strip.split(' ', 2);
+        validate_file_name
       end
 
       def parse_params(context)
-        validate_syntax
+        validate_params
 
         params = {}
         markup = @params
@@ -33,12 +34,6 @@ module Jekyll
           params[match[1]] = value
         end
         params
-      end
-
-      # ensure the entire markup string from start to end is valid syntax, and params are separated by spaces
-      def validate_syntax
-        validate_file_name
-        validate_params
       end
 
       def validate_file_name
