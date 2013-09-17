@@ -63,11 +63,7 @@ module Jekyll
     #
     # Returns nothing.
     def setup
-      # Check that the destination dir isn't the source dir or a directory
-      # parent to the source dir.
-      if self.source =~ /^#{self.dest}/
-        raise FatalException.new "Destination directory cannot be or contain the Source directory."
-      end
+      ensure_not_in_dest
 
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
@@ -81,6 +77,17 @@ module Jekyll
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
+    end
+
+    # Check that the destination dir isn't the source dir or a directory
+    # parent to the source dir.
+    def ensure_not_in_dest
+      dest = Pathname.new(self.dest)
+      Pathname.new(self.source).ascend do |path|
+        if path == dest
+          raise FatalException.new "Destination directory cannot be or contain the Source directory."
+        end
+      end
     end
 
     # Internal: Setup the plugin search path
