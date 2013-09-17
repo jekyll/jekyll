@@ -57,8 +57,8 @@ eos
       end
 
       def validate_params
-        full_VALID_SYNTAX = Regexp.compile('\A\s*(?:' + VALID_SYNTAX.to_s + '(?=\s|\z)\s*)*\z')
-        unless @params =~ full_VALID_SYNTAX
+        full_valid_syntax = Regexp.compile('\A\s*(?:' + VALID_SYNTAX.to_s + '(?=\s|\z)\s*)*\z')
+        unless @params =~ full_valid_syntax
           raise SyntaxError.new <<-eos
 Invalid syntax for include tag:
 
