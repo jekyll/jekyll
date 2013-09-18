@@ -3,7 +3,7 @@ require 'rake'
 require 'rdoc'
 require 'date'
 require 'yaml'
-require 'md2man/rakefile'
+require 'md2man/rakefile' if RUBY_VERSION > "1.9"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 
