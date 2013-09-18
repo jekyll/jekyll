@@ -265,7 +265,9 @@ task :release => :build do
 end
 
 task :build => :gemspec do
-  sh "bundle exec rake build"
+  sh "mkdir -p pkg"
+  sh "gem build #{gemspec_file}"
+  sh "mv #{gem_file} pkg"
 end
 
 task :gemspec do
