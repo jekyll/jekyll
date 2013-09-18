@@ -1,4 +1,4 @@
-JEKYLL 1 "MAY 2013" "User Manual"
+JEKYLL 1 "User Manual"
 =================================
 
 NAME:
@@ -49,6 +49,15 @@ Source directory (defaults to ./)
 
 `-d`, `--destination` *[DIR]*
 Destination directory (defaults to ./_site) 
+
+`--safe`
+Safe mode (defaults to false)
+
+`p`, `--plugins PLUGINS_DIR1[,PLUGINS_DIR2[,...]]`
+Plugins directory (defaults to ./_plugins)
+
+`--layouts STRING`
+Layouts directory (defaults to ./_layouts)
 
 BUGS:
 ----

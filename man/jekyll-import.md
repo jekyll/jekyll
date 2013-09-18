@@ -1,4 +1,4 @@
-JEKYLL-IMPORT "MAY 2013" "User Manual"
+JEKYLL-IMPORT "User Manual"
 =================================
 
 NAME:

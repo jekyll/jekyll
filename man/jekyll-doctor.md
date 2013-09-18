@@ -1,4 +1,4 @@
-JEKYLL-DOCTOR "MAY 2013" "User Manual"
+JEKYLL-DOCTOR "User Manual"
 =================================
 
 NAME:

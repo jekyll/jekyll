@@ -1,4 +1,4 @@
-.TH JEKYLL\-SERVE "MAY 2013" "User Manual"
+.TH JEKYLL\-SERVE "User Manual"
 .SH NAME:
 .PP
 jekyll serve
@@ -25,8 +25,14 @@ Watch for changes and rebuild
 \fB\fC--lsi\fR
 Use LSI for improved related posts
 .TP
-\fB\fC--drafts\fR
+\fB\fC-B\fR, \fB\fC--detach\fR
+Run the server in the background (detach)
+.TP
+\fB\fC-D\fR, \fB\fC--drafts\fR
 Render posts in the _drafts folder
+.TP
+\fB\fC-v\fR, \fB\fC--verbose\fR
+Print verbose output.
 .TP
 \fB\fC-P\fR, \fB\fC--port [PORT]\fR
 Port to listen on

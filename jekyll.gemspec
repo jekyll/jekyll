@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name              = 'jekyll'
   s.version           = '1.2.1'
   s.license           = 'MIT'
-  s.date              = '2013-09-14'
+  s.date              = '2013-09-18'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -123,6 +123,18 @@ Gem::Specification.new do |s|
     lib/site_template/css/main.css
     lib/site_template/css/syntax.css
     lib/site_template/index.html
+    man/jekyll-build
+    man/jekyll-build.md
+    man/jekyll-doctor
+    man/jekyll-doctor.md
+    man/jekyll-import
+    man/jekyll-import.md
+    man/jekyll-new
+    man/jekyll-new.md
+    man/jekyll-serve
+    man/jekyll-serve.md
+    man/jekyll.1
+    man/jekyll.1.md
     script/bootstrap
     site/.gitignore
     site/CNAME

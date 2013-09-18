@@ -1,4 +1,4 @@
-JEKYLL-NEW "MAY 2013" "User Manual"
+JEKYLL-NEW "User Manual"
 =================================
 
 NAME:

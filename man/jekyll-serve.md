@@ -1,4 +1,4 @@
-JEKYLL-SERVE "MAY 2013" "User Manual"
+JEKYLL-SERVE "User Manual"
 =================================
 
 NAME:
@@ -34,8 +34,14 @@ COMMANDS:
 `--lsi`
   Use LSI for improved related posts
 
-`--drafts`
+`-B`, `--detach`
+  Run the server in the background (detach)
+
+`-D`, `--drafts`
   Render posts in the _drafts folder
+
+`-v`, `--verbose`
+  Print verbose output.
  
 `-P`, `--port [PORT]`
   Port to listen on

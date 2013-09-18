@@ -1,4 +1,4 @@
-.TH JEKYLL\-BUILD "MAY 2013" "User Manual"
+.TH JEKYLL\-BUILD "User Manual"
 .SH NAME:
 .PP
 jekyll build
@@ -28,6 +28,9 @@ Use LSI for improved related posts
 .TP
 \fB\fC--drafts\fR
 Render posts in the _drafts folder
+.TP
+\fB\fC-v\fR, \fB\fC--verbose\fR
+Print verbose output.
 .SH ALIAS:
 .PP
 None

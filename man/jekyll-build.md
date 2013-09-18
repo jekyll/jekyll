@@ -1,4 +1,4 @@
-JEKYLL-BUILD "MAY 2013" "User Manual"
+JEKYLL-BUILD "User Manual"
 =================================
 
 NAME:
@@ -36,6 +36,9 @@ COMMANDS:
 
 `--drafts`
   Render posts in the _drafts folder
+
+`-v`, `--verbose`
+  Print verbose output.
  
 ALIAS:
 -------
