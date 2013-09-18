@@ -264,7 +264,7 @@ task :release => :build do
   sh "gem push pkg/#{name}-#{version}.gem"
 end
 
-task :build => :gemspec do
+task :build => [:gemspec, :man] do
   sh "mkdir -p pkg"
   sh "gem build #{gemspec_file}"
   sh "mv #{gem_file} pkg"
@@ -296,4 +296,9 @@ task :gemspec do
   spec = [head, manifest, tail].join("  # = MANIFEST =\n")
   File.open(gemspec_file, 'w') { |io| io.write(spec) }
   puts "Updated #{gemspec_file}"
+end
+
+task :man do
+  # just run the provided rake task that md2man gives us
+  sh "rake md2man:man"
 end
