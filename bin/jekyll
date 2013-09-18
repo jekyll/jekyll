@@ -17,11 +17,10 @@ default_command :default
 command :help do |c|
   c.action do |args|
     root = File.expand_path("../../man", __FILE__)
-    command = "groff -t -mandoc -Tascii"
     if args.empty?
-      Kernel.exec "#{command} #{root}/jekyll.1 | less"
+      Kernel.exec "man #{root}/jekyll.1"
     else
-      Kernel.exec "#{command} #{root}/jekyll-#{args[0]} | less"
+      Kernel.exec "man #{root}/jekyll-#{args[0]}"
     end
   end
 end
