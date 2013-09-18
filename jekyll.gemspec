@@ -50,8 +50,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
   s.add_development_dependency('coveralls', "~> 0.6.9")
   s.add_development_dependency('activesupport', '~> 3.2.13')
-
-  s.extensions = ["ext/mkrf_conf.rb"]
+  s.add_development_dependency 'md2man', '~> 2.0' if RUBY_VERSION > "1.9"
 
   # = MANIFEST =
   s.files = %w[
