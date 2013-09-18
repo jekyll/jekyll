@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name              = 'jekyll'
   s.version           = '1.2.1'
   s.license           = 'MIT'
-  s.date              = '2013-09-18'
+  s.date              = '2013-09-14'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -22,9 +22,6 @@ Gem::Specification.new do |s|
 
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.markdown LICENSE]
-
-  s.files += Dir['man/man?/*.?']
-  s.files += Dir['man/**/*.{html,css,js}']
 
   s.add_runtime_dependency('liquid', "~> 2.5.2")
   s.add_runtime_dependency('classifier', "~> 1.3")
