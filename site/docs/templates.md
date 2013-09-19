@@ -304,3 +304,16 @@ github username:
 {% endhighlight %}
 
 The private gist syntax also supports filenames.
+
+### Comments
+
+If you would like to comment-out a section of your template code so that it
+does not render when Jekyll builds the site, use the `comment` tag:
+
+{% highlight text %}
+{% raw %}
+{% comment %}
+    Some code you want to save but leave out of the built site for now
+{% endcomment %}
+{% endraw %}
+{% endhighlight %}
