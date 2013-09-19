@@ -19,7 +19,7 @@ class TestTags < Test::Unit::TestCase
     payload = { "pygments_prefix" => @converter.pygments_prefix,
                 "pygments_suffix" => @converter.pygments_suffix }
 
-    @result = Liquid::Template.parse(content).render(payload, info)
+    @result = Liquid::Template.parse(content).render!(payload, info)
     @result = @converter.convert(@result)
   end
 
@@ -273,7 +273,7 @@ CONTENT
         end
       end
 
-      should "raise SyntaxError when invalid" do
+      should "raise ArgumentError when invalid" do
         @gist = "mattr-24081a1d93d2898ecf0f"
         @filename = "myfile.ext"
         content = <<CONTENT
@@ -284,7 +284,7 @@ CONTENT
   {% gist #{@gist} #{@filename} %}
 CONTENT
 
-        assert_raise SyntaxError do
+        assert_raise ArgumentError do
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
         end
       end
@@ -310,7 +310,7 @@ CONTENT
     end
 
     context "with blank gist id" do
-      should "raise SyntaxError" do
+      should "raise ArgumentError" do
         content = <<CONTENT
 ---
 title: My Cool Gist
@@ -319,14 +319,14 @@ title: My Cool Gist
 {% gist %}
 CONTENT
 
-        assert_raise SyntaxError do
+        assert_raise ArgumentError do
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
         end
       end
     end
 
     context "with invalid gist id" do
-      should "raise SyntaxError" do
+      should "raise ArgumentError" do
         invalid_gist = 'invalid'
         content = <<CONTENT
 ---
@@ -336,7 +336,7 @@ title: My Cool Gist
 {% gist #{invalid_gist} %}
 CONTENT
 
-        assert_raise SyntaxError do
+        assert_raise ArgumentError do
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
         end
       end

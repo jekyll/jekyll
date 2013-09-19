@@ -12,7 +12,7 @@ module Jekyll
         gist_id, filename = tag_contents[0], tag_contents[1]
         gist_script_tag(gist_id, filename)
       else
-        raise SyntaxError.new <<-eos
+        raise ArgumentError.new <<-eos
 Syntax error in tag 'gist' while parsing the following markup:
 
   #{@markup}
