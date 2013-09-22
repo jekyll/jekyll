@@ -182,51 +182,29 @@ page with links to all but the current page.
 
 {% highlight html %}
 {% raw %}
-<div id="post-pagination" class="pagination">
+{% if paginator.total_pages > 1 %}
+<!-- Pagination -->
+<div class="pagination">
   {% if paginator.previous_page %}
-    <p class="previous">
-      {% if paginator.previous_page == 1 %}
-        <a href="/">Previous</a>
-      {% else %}
-        <a href="{{ paginator.previous_page_path }}">Previous</a>
-      {% endif %}
-    </p>
+    <a href="{{ paginator.previous_page_path }}">&laquo; Prev</a>
   {% else %}
-    <p class="previous disabled">
-      <span>Previous</span>
-    </p>
+    <span>&laquo; Prev</span>
   {% endif %}
 
-  <ul class="pages">
-    <li class="page">
-      {% if paginator.page == 1 %}
-        <span class="current-page">1</span>
-      {% else %}
-        <a href="/">1</a>
-      {% endif %}
-    </li>
-
-    {% for count in (2..paginator.total_pages) %}
-      <li class="page">
-        {% if count == paginator.page %}
-          <span class="current-page">{{ count }}</span>
-        {% else %}
-          <a href="/page{{ count }}">{{ count }}</a>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <em>{{ page }}</em>
+    {% else %}
+      <a href="{% if page == 1 %}/index.html{% else %}{{ site.paginate_path | replace: ':num', page }}{% endif %}">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
 
   {% if paginator.next_page %}
-    <p class="next">
-      <a href="{{ paginator.next_page_path }}">Next</a>
-    </p>
+    <a href="{{ paginator.next_page_path }}">Next &raquo;</a>
   {% else %}
-    <p class="next disabled">
-      <span>Next</span>
-    </p>
+    <span>Next &raquo;</span>
   {% endif %}
-
 </div>
+{% endif %}
 {% endraw %}
 {% endhighlight %}
