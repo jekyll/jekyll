@@ -27,6 +27,7 @@ module Jekyll
 
       'markdown'      => 'maruku',
       'permalink'     => 'date',
+      'pretty_pages'  => false,
       'baseurl'       => '/',
       'include'       => ['.htaccess'],
       'exclude'       => [],
