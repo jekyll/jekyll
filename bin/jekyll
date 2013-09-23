@@ -14,6 +14,17 @@ program :description, 'Jekyll is a blog-aware, static site generator in Ruby'
 
 default_command :default
 
+command :help do |c|
+  c.action do |args|
+    man_root = File.expand_path("../../man", __FILE__)
+    if args.empty?
+      Kernel.exec "man #{man_root}/jekyll.1"
+    else
+      Kernel.exec "man #{man_root}/jekyll-#{args[0]}"
+    end
+  end
+end
+
 global_option '-s', '--source [DIR]', 'Source directory (defaults to ./)'
 global_option '-d', '--destination [DIR]', 'Destination directory (defaults to ./_site)'
 global_option '--safe', 'Safe mode (defaults to false)'

@@ -3,6 +3,7 @@ require 'rake'
 require 'rdoc'
 require 'date'
 require 'yaml'
+require 'md2man/rakefile' if RUBY_VERSION > "1.9"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 
@@ -263,7 +264,7 @@ task :release => :build do
   sh "gem push pkg/#{name}-#{version}.gem"
 end
 
-task :build => :gemspec do
+task :build => [:gemspec, "md2man:man"] do
   sh "mkdir -p pkg"
   sh "gem build #{gemspec_file}"
   sh "mv #{gem_file} pkg"

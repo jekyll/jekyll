@@ -1,0 +1,20 @@
+.TH JEKYLL\-DOCS "User Manual"
+.SH NAME:
+.PP
+jekyll docs
+.SH DESCRIPTION:
+.PP
+Launch local server with docs for Jekyll
+.SH SYNTAX:
+.PP
+jekyll docs
+.SH COMMANDS:
+.TP
+\fB\fC-p\fR, \fB\fC--port [PORT]\fR
+Port to listen on
+.TP
+\fB\fC-u\fR, \fB\fC--host [HOST]\fR
+Host to bind to
+.SH ALIAS:
+.PP
+None

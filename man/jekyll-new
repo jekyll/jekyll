@@ -1,0 +1,20 @@
+.TH JEKYLL\-NEW "User Manual"
+.SH NAME:
+.PP
+jekyll new
+.SH DESCRIPTION:
+.PP
+Creates a new Jekyll site scaffold in PATH
+.SH SYNTAX:
+.PP
+jekyll new PATH
+.SH COMMANDS:
+.TP
+\fB\fC--force\fR
+Force creation even if PATH already exists
+.TP
+\fB\fC--blank\fR
+Creates scaffolding but with empty files
+.SH ALIAS:
+.PP
+None

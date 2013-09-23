@@ -1,0 +1,17 @@
+.TH JEKYLL\-DOCTOR "User Manual"
+.SH NAME:
+.PP
+jekyll doctor
+.SH DESCRIPTION:
+.PP
+Search site and print specific deprecation warnings
+.SH SYNTAX:
+.PP
+jekyll doctor
+.SH COMMANDS:
+.TP
+\fB\fC--config CONFIG_FILE[,CONFIG_FILE2,...]\fR
+Custom configuration file
+.SH ALIAS:
+.PP
+hyde
