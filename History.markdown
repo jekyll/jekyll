@@ -3,6 +3,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Decrease the specificity in the site template CSS (#1574)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
