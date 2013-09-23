@@ -85,9 +85,48 @@ class TestPage < Test::Unit::TestCase
         end
       end
 
+      context "with pretty page style" do
+        setup do
+          @site.pretty_pages = true
+        end
+
+        should "return dir correctly" do
+          @page = setup_page('contacts.html')
+          assert_equal '/contacts/', @page.dir
+        end
+
+        should "return dir correctly for index page" do
+          @page = setup_page('index.html')
+          assert_equal '/', @page.dir
+        end
+
+        context "in a directory hierarchy" do
+          should "create url based on filename" do
+            @page = setup_page('/contacts', 'bar.html')
+            assert_equal "/contacts/bar/", @page.url
+          end
+
+          should "create index url based on filename" do
+            @page = setup_page('/contacts', 'index.html')
+            assert_equal "/contacts/", @page.url
+          end
+
+          should "return dir correctly" do
+            @page = setup_page('/contacts', 'bar.html')
+            assert_equal '/contacts/bar/', @page.dir
+          end
+
+          should "return dir correctly for index page" do
+            @page = setup_page('/contacts', 'index.html')
+            assert_equal '/contacts/', @page.dir
+          end
+        end
+      end
+
       context "with any other url style" do
         should "return dir correctly" do
           @site.permalink_style = nil
+          @site.pretty_pages = false
           @page = setup_page('contacts.html')
           assert_equal '/', @page.dir
         end

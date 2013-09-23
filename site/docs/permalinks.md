@@ -178,3 +178,55 @@ Given a post named: `/2009-04-29-slap-chop.textile`
   </tbody>
 </table>
 </div>
+
+## Permalinks for pages
+
+Permalinks for pages behave differently: for the page `page.html`
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Permalink Setting</th>
+			<th>Pretty_pages Setting</th>
+      <th>Resulting Permalink URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>permalink: pretty</code></p>
+      </td>
+      <td>
+        <p>Any setting of <code>pretty_pages</code>, or none specified</p>
+      </td>
+      <td>
+        <p><code>/page/index.html</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Any setting for <code>permalink</code> different than <code>pretty</code>, or none specified</p>
+      </td>
+      <td>
+        <p><code>pretty_pages:true</code></p>
+      </td>
+      <td>
+        <p><code>/page/index.html</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Any setting for <code>permalink</code> different than <code>pretty</code>, or none specified</p>
+      </td>
+      <td>
+        <p><code>pretty_pages:false</code> or none specified</p>
+      </td>
+      <td>
+        <p><code>/page.html</code></p>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>

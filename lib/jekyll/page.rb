@@ -56,7 +56,7 @@ module Jekyll
     #
     # Returns the template String.
     def template
-      if self.site.permalink_style == :pretty
+      if self.site.permalink_style == :pretty || self.site.pretty_pages
         if index? && html?
           "/:path/"
         elsif html?

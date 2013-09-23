@@ -275,6 +275,7 @@ pygments:    true
 relative_permalinks: true
 
 permalink:     date
+pretty_pages:  false
 paginate_path: 'page:num'
 
 markdown:      maruku
