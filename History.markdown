@@ -9,6 +9,7 @@
   * Fix up matching against source and destination when the two
     locations are similar (#1556)
   * Fix the missing `pathname` require in certain cases (#1255)
+  * Use `+` instead of `Array#concat` when building `Post` attribute list (#1571)
 
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
