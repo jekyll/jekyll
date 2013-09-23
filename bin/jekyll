@@ -16,11 +16,11 @@ default_command :default
 
 command :help do |c|
   c.action do |args|
-    root = File.expand_path("../../man", __FILE__)
+    man_root = File.expand_path("../../man", __FILE__)
     if args.empty?
-      Kernel.exec "man #{root}/jekyll.1"
+      Kernel.exec "man #{man_root}/jekyll.1"
     else
-      Kernel.exec "man #{root}/jekyll-#{args[0]}"
+      Kernel.exec "man #{man_root}/jekyll-#{args[0]}"
     end
   end
 end
