@@ -14,6 +14,8 @@ module Jekyll
 
       'timezone'      => nil,           # use the local timezone
 
+      'encoding'      => nil,           # use the system encoding
+
       'safe'          => false,
       'detach'        => false,          # default to not detaching the server
       'show_drafts'   => nil,

@@ -99,6 +99,22 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="option">timezone: TIMEZONE</code></p>
       </td>
     </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Encoding</strong></p>
+        <p class="description">
+            Set the encoding of files by name. Only available for Ruby
+            1.9 or later).
+            The default value is nil, which use Ruby default,
+            <code>ASCII-8BIT</code>.
+            Available encoding for the ruby in use, can be shown by
+            command <code>ruby -e 'puts Encoding::list.join("\n")'</code>
+        </p>
+      </td>
+      <td class='align-center'>
+        <p><code class="option">encoding: ENCODING</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -266,6 +282,7 @@ include:     ['.htaccess']
 exclude:     []
 keep_files:  ['.git','.svn']
 timezone:    nil
+encoding:    nil
 
 future:      true
 show_drafts: nil
