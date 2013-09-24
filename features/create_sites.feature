@@ -128,3 +128,19 @@ Feature: Create sites
     When I run jekyll
     Then the _site/test directory should exist
     And I should see "some other stuff" in "_site/test/index.html"
+
+  Scenario: Same pages with varying extensions override alphabetically
+    Given I have a _layouts directory
+    And I have a default layout that contains "Extension: {{ content }}"
+    And I have an "index.html" page with layout "default" that contains "html"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Extension: html" in "_site/index.html"
+    Given I have an "index.markdown" page with layout "default" that contains "markdown"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Extension: <p>markdown</p>" in "_site/index.html"
+    Given I have an "index.textile" page with layout "default" that contains "textile"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Extension: <p>textile</p>" in "_site/index.html"
