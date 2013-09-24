@@ -40,7 +40,7 @@ class TestConvertible < Test::Unit::TestCase
       should "not parse if there is encoding error in file" do
         name = 'broken_front_matter3.erb'
         out = capture_stdout do
-          ret = @convertible.read_yaml(@base, name)
+          ret = @convertible.read_yaml(@base, name, :encoding => 'utf-8')
           assert_equal({}, ret)
         end
         assert_match(/invalid byte sequence in UTF-8/, out)
