@@ -20,25 +20,6 @@ class LayoutReader
     layouts
   end
 
-  # Filter out any files/directories that are hidden or backup files (start
-  # with "." or "#" or end with "~"), or contain site content (start with "_"),
-  # or are excluded in the site configuration, unless they are web server
-  # files such as '.htaccess'.
-  #
-  # entries - The Array of String file/directory entries to filter.
-  #
-  # Returns the Array of filtered entries.
-  def filter_entries(entries)
-    entries.reject do |e|
-      unless site.include.glob_include?(e)
-        ['.', '_', '#'].include?(e[0..0]) ||
-          e[-1..-1] == '~' ||
-          site.exclude.glob_include?(e) ||
-          (File.symlink?(e) && site.safe)
-      end
-    end
-  end
-
   # Verifies the layout directory exists and yields it if it does.
   #
   # Returs nothing
@@ -48,7 +29,7 @@ class LayoutReader
   end
 
   def layout_entries(base)
-    Dir.chdir(base) { filter_entries(Dir['*.*']) }
+    Dir.chdir(base) { EntryFilter.new(site).filter(Dir['*.*']) }
   end
 
   def layout_name(f)
