@@ -1,8 +1,8 @@
 class LayoutReader
-  attr_reader :site, :layouts
+  attr_reader :site
+
   def initialize(site)
     @site = site
-    @layouts = {}
   end
 
   # Read all the files in <source>/<layouts> and create a new Layout object
@@ -10,6 +10,7 @@ class LayoutReader
   #
   # Returns a Hash with layout names as keys and their disk location as values
   def collect
+    layouts = {}
     with_layout_directory(site.source, site.config['layouts']) do |base|
       layout_entries(base).each do |f|
         layouts[layout_name(f)] = Layout.new(site, base, f)
