@@ -1,6 +1,3 @@
-require_relative 'layout_reader'
-require_relative 'entry_filter.rb'
-
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
