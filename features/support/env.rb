@@ -7,6 +7,7 @@ require 'fileutils'
 require 'rr'
 require 'test/unit'
 require 'time'
+require 'timecop'
 
 TEST_DIR    = File.join('/', 'tmp', 'jekyll')
 JEKYLL_PATH = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll')
