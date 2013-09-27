@@ -170,7 +170,7 @@ Then /^the "(.*)" file should not exist$/ do |file|
 end
 
 Then /^I should see today's time in "(.*)"$/ do |file|
-  assert_match Regexp.new(Regexp.escape(Time.now.to_s)), File.open(file).readlines.join
+  assert_match Regexp.new(seconds_agnostic_time(Time.now)), File.open(file).readlines.join
 end
 
 Then /^I should see today's date in "(.*)"$/ do |file|

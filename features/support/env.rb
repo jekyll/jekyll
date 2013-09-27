@@ -40,5 +40,15 @@ def location(folder, direction)
   [before || '.', after || '.']
 end
 
+def seconds_agnostic_time(datetime = Time.now)
+  pieces = datetime.to_s.split(" ")
+  time = "#{pieces[1].split(':').first}:#{pieces[1].split(':')[1]}:\\d{2}"
+  [
+    Regexp.escape(pieces[0]),
+    time,
+    Regexp.escape(pieces.last)
+  ].join("\\ ")
+end
+
 # work around "invalid option: --format" cucumber bug (see #296)
 Test::Unit.run = true if RUBY_VERSION < '1.9'
