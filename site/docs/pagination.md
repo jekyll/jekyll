@@ -183,7 +183,6 @@ page with links to all but the current page.
 {% highlight html %}
 {% raw %}
 {% if paginator.total_pages > 1 %}
-<!-- Pagination: https://gist.github.com/jsw0528/4720584 -->
 <div class="pagination">
   {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
