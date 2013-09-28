@@ -41,12 +41,12 @@ def location(folder, direction)
 end
 
 def seconds_agnostic_time(datetime = Time.now)
-  pieces = datetime.to_s.split(" ")
-  time = "#{pieces[1].split(':').first}:#{pieces[1].split(':')[1]}:\\d{2}"
+  date, time, zone = datetime.strftime("%Y-%m-%d %H:%M:%S %z").split(" ")
+  hours, minutes, _ = time.split(":")
   [
-    Regexp.escape(pieces[0]),
-    time,
-    Regexp.escape(pieces.last)
+    Regexp.escape(date),
+    "#{hour}:#{minutes}:\\d{2}",
+    Regexp.escape(zone)
   ].join("\\ ")
 end
 
