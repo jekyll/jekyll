@@ -12,6 +12,7 @@ permalinks for your site through the [Configuration](../configuration/) or in th
 the built-in styles to create your links or craft your own. The default style is
 `date`.
 
+#Post permalinks
 Permalinks are constructed by creating a template URL where dynamic elements are
 represented by colon-prefixed keywords. For example, the default `date`
 permalink is defined as `/:categories/:year/:month/:day/:title.html`.
@@ -179,54 +180,77 @@ Given a post named: `/2009-04-29-slap-chop.textile`
 </table>
 </div>
 
-## Permalinks for pages
+# Pages permalinks
 
-Permalinks for pages behave differently: for the page `page.html`
+Permalinks for pages are managed through an optional parameter `page_permalink`.
+
+## Template variables
+
+Permalinks are constructed similarly as for posts. For example, the default template for pages when `page_permalink` is not specified is `/:path/:basename:output_ext`.
 
 <div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
-      <th>Permalink Setting</th>
-			<th>Pretty_pages Setting</th>
-      <th>Resulting Permalink URL</th>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <p><code>permalink: pretty</code></p>
+        <p><code>path</code></p>
       </td>
       <td>
-        <p>Any setting of <code>pretty_pages</code>, or none specified</p>
-      </td>
-      <td>
-        <p><code>/page/index.html</code></p>
+        <p>Path of the page</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p>Any setting for <code>permalink</code> different than <code>pretty</code>, or none specified</p>
+        <p><code>basename</code></p>
       </td>
       <td>
-        <p><code>pretty_pages:true</code></p>
-      </td>
-      <td>
-        <p><code>/page/index.html</code></p>
+        <p>Name of the page</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p>Any setting for <code>permalink</code> different than <code>pretty</code>, or none specified</p>
+        <p><code>output_ext</code></p>
       </td>
       <td>
-        <p><code>pretty_pages:false</code> or none specified</p>
-      </td>
-      <td>
-        <p><code>/page.html</code></p>
+        <p>File extension of the page</p>
       </td>
     </tr>
-
   </tbody>
 </table>
 </div>
+
+## Built-in permalink styles for pages
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Permalink Style</th>
+      <th>URL Template</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>pretty</code></p>
+      </td>
+      <td>
+        <p><code>/:categories/:year/:month/:day/:title/</code></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+## Default value
+
+If the `page_permalink` parameter is not specified, the default template is `/:path/:basename:output_ext`. 
+
+If, in addition, the `permalink` parameter is set as `pretty`, also the `page_permalink` parameter is automatically set as `pretty` unless explicitly specified in the `_config.yml` file.
+

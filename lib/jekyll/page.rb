@@ -56,7 +56,8 @@ module Jekyll
     #
     # Returns the template String.
     def template
-      if self.site.permalink_style == :pretty || self.site.pretty_pages
+      case self.site.page_permalink
+      when :pretty
         if index? && html?
           "/:path/"
         elsif html?
@@ -64,10 +65,23 @@ module Jekyll
         else
           "/:path/:basename:output_ext"
         end
+      when nil
+        if self.site.permalink_style == :pretty
+          if index? && html?
+            "/:path/"
+          elsif html?
+            "/:path/:basename/"
+          else
+            "/:path/:basename:output_ext"
+          end
+        else
+          "/:path/:basename:output_ext"
+        end
       else
-        "/:path/:basename:output_ext"
+        self.site.page_permalink.to_s
       end
     end
+
 
     # The generated relative url of this page. e.g. /about.html.
     #

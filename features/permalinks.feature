@@ -27,18 +27,7 @@ Feature: Fancy permalinks
     Given I have an "index.html" page that contains "Totally index"
     And I have an "awesome.html" page that contains "Totally awesome"
     And I have an "sitemap.xml" page that contains "Totally uhm, sitemap"
-    And I have a configuration file with "permalink" set to "pretty"
-    When I run jekyll
-    Then the _site directory should exist
-    And I should see "Totally index" in "_site/index.html"
-    And I should see "Totally awesome" in "_site/awesome/index.html"
-    And I should see "Totally uhm, sitemap" in "_site/sitemap.xml"
-
-  Scenario: Use pretty pages style
-    Given I have an "index.html" page that contains "Totally index"
-    And I have an "awesome.html" page that contains "Totally awesome"
-    And I have an "sitemap.xml" page that contains "Totally uhm, sitemap"
-    And I have a configuration file with "pretty_pages" set to "true"
+    And I have a configuration file with "page_permalink" set to "pretty"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Totally index" in "_site/index.html"
