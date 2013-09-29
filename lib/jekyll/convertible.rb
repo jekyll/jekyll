@@ -34,17 +34,18 @@ module Jekyll
     #
     # Returns nothing.
     def read_yaml(base, name, opts = {})
+      @path = File.join(base, name)
       begin
-        self.content = File.read_with_options(File.join(base, name),
+        self.content = File.read_with_options(@path,
                                               merged_file_read_opts(opts))
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = YAML.safe_load($1)
         end
       rescue SyntaxError => e
-        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        puts "YAML Exception reading #{@path}: #{e.message}"
       rescue Exception => e
-        puts "Error reading file #{File.join(base, name)}: #{e.message}"
+        puts "Error reading file #{@path}: #{e.message}"
       end
 
       self.data ||= {}
