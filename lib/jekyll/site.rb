@@ -2,7 +2,7 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :page_permalink, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :permalink_style, :pages_permalink, :tags, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl
 
     attr_accessor :converters, :generators
@@ -21,7 +21,7 @@ module Jekyll
       self.dest            = File.expand_path(config['destination'])
       self.plugins         = plugins_path
       self.permalink_style = config['permalink'].to_sym
-      self.page_permalink  = config['page_permalink'].to_sym if config['page_permalink']
+      self.pages_permalink  = config['pages_permalink'].to_sym if config['pages_permalink']
 
       self.reset
       self.setup

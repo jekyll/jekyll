@@ -56,7 +56,7 @@ module Jekyll
     #
     # Returns the template String.
     def template
-      case self.site.page_permalink
+      case self.site.pages_permalink
       when :pretty
         if index? && html?
           "/:path/"
@@ -78,7 +78,7 @@ module Jekyll
           "/:path/:basename:output_ext"
         end
       else
-        self.site.page_permalink.to_s
+        self.site.pages_permalink.to_s
       end
     end
 

@@ -27,7 +27,7 @@ Feature: Fancy permalinks
     Given I have an "index.html" page that contains "Totally index"
     And I have an "awesome.html" page that contains "Totally awesome"
     And I have an "sitemap.xml" page that contains "Totally uhm, sitemap"
-    And I have a configuration file with "page_permalink" set to "pretty"
+    And I have a configuration file with "pages_permalink" set to "pretty"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Totally index" in "_site/index.html"

@@ -182,11 +182,11 @@ Given a post named: `/2009-04-29-slap-chop.textile`
 
 # Pages permalinks
 
-Permalinks for pages are managed through an optional parameter `page_permalink`.
+Permalinks for pages are managed through an optional parameter `pages_permalink`.
 
 ## Template variables
 
-Permalinks are constructed similarly as for posts. For example, the default template for pages when `page_permalink` is not specified is `/:path/:basename:output_ext`.
+Permalinks are constructed similarly as for posts. For example, the default template for pages when `pages_permalink` is not specified is `/:path/:basename:output_ext`.
 
 <div class="mobile-side-scroller">
 <table>
@@ -250,7 +250,7 @@ Permalinks are constructed similarly as for posts. For example, the default temp
 
 ## Default value
 
-If the `page_permalink` parameter is not specified, the default template is `/:path/:basename:output_ext`. 
+If the `pages_permalink` parameter is not specified, the default template is `/:path/:basename:output_ext`. 
 
-If, in addition, the `permalink` parameter is set as `pretty`, also the `page_permalink` parameter is automatically set as `pretty` unless explicitly specified in the `_config.yml` file.
+If, in addition, the `permalink` parameter is set as `pretty`, also the `pages_permalink` parameter is automatically set as `pretty` unless explicitly specified in the `_config.yml` file.
 

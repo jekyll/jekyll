@@ -47,9 +47,9 @@ class TestPage < Test::Unit::TestCase
         assert_equal "deal.with.dots", @page.basename
       end
 
-      context "with no page_permalink and pretty url style" do
+      context "with no pages_permalink and pretty url style" do
         setup do
-          @site.page_permalink = nil
+          @site.pages_permalink = nil
           @site.permalink_style = :pretty
         end
 
@@ -88,7 +88,7 @@ class TestPage < Test::Unit::TestCase
 
       context "with pretty page permalink style" do
         setup do
-          @site.page_permalink = :pretty
+          @site.pages_permalink = :pretty
         end
 
         should "return dir correctly" do
@@ -126,7 +126,7 @@ class TestPage < Test::Unit::TestCase
 
       context "with other user specified style" do
         setup do
-          @site.page_permalink = '/:path/:output_ext/:basename'
+          @site.pages_permalink = '/:path/:output_ext/:basename'
         end
         should "return dir correctly" do
           @page = setup_page('contacts.html')
@@ -140,7 +140,7 @@ class TestPage < Test::Unit::TestCase
 
       context "with any other url style" do
         should "return dir correctly" do
-          @site.page_permalink = nil
+          @site.pages_permalink = nil
           @site.permalink_style = nil
           @page = setup_page('contacts.html')
           assert_equal '/', @page.dir

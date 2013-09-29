@@ -27,7 +27,7 @@ module Jekyll
 
       'markdown'      => 'maruku',
       'permalink'     => 'date',
-      'page_permalink'=> nil,
+      'pages_permalink'=> nil,
       'baseurl'       => '/',
       'include'       => ['.htaccess'],
       'exclude'       => [],
