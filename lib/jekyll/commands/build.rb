@@ -34,13 +34,20 @@ module Jekyll
         require 'listen'
 
         source = options['source']
-        destination = Pathname.new(options['destination'])
-                              .relative_path_from(Pathname.new(source))
-                              .to_path
+        destination = options['destination']
+
+        begin
+          ignored = Regexp.new(Regexp.escape(Pathname.new(destination)
+                                 .relative_path_from(Pathname.new(source))
+                                 .to_path))
+        rescue ArgumentError
+          # Destination is outside the source, no need to ignore it.
+          ignored = nil
+        end
 
         Jekyll.logger.info "Auto-regeneration:", "enabled"
 
-        Listen.to(source, :ignore => %r{#{Regexp.escape(destination)}}) do |modified, added, removed|
+        Listen.to(source, :ignore => ignored) do |modified, added, removed|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           n = modified.length + added.length + removed.length
           print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
