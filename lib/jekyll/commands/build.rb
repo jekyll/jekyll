@@ -31,24 +31,23 @@ module Jekyll
       #
       # Returns nothing.
       def self.watch(site, options)
-        require 'directory_watcher'
+        require 'listen'
+        require 'pathname'
 
         source = options['source']
-        destination = options['destination']
+        destination = Pathname.new(options['destination'])
+                              .relative_path_from(Pathname.new(source))
+                              .to_path
 
         Jekyll.logger.info "Auto-regeneration:", "enabled"
 
-        dw = DirectoryWatcher.new(source, :glob => self.globs(source, destination), :pre_load => true)
-        dw.interval = 1
-
-        dw.add_observer do |*args|
+        Listen.to(source, :ignore => %r{#{Regexp.escape(destination)}}) do |modified, added, removed|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-          print Jekyll.logger.formatted_topic("Regenerating:") + "#{args.size} files at #{t} "
+          n = modified.length + added.length + removed.length
+          print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
           self.process_site(site)
           puts  "...done."
         end
-
-        dw.start
 
         unless options['serving']
           trap("INT") do
