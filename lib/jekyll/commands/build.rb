@@ -32,7 +32,6 @@ module Jekyll
       # Returns nothing.
       def self.watch(site, options)
         require 'listen'
-        require 'pathname'
 
         source = options['source']
         destination = Pathname.new(options['destination'])
