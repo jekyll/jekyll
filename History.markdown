@@ -15,6 +15,7 @@
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
   * Refactor the Liquid `include` tag (#1490)
+  * Update the documentation for generators (#1590)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
