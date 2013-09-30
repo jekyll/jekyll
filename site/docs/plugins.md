@@ -38,7 +38,42 @@ In general, plugins you make will fall into one of three categories:
 ## Generators
 
 You can create a generator when you need Jekyll to create additional content
-based on your own rules. For example, a generator might look like this:
+based on your own rules.
+
+A generator is a subclass of `Jekyll::Generator` that defines a `generate`
+method, which receives an instance of
+[`Jekyll::Site`](https://github.com/fxn/jekyll/blob/master/lib/jekyll/site.rb).
+Generation is triggered for its side-effects, the return value of `generate` is
+ignored. Jekyll does not assume any particular side-effect to happen, it just
+runs the method.
+
+Generators run after Jekyll has made an inventory of the existing pages, and
+before the site is generated. Pages with YAML headers are stored as instances of
+[`Jekyll::Page`](https://github.com/fxn/jekyll/blob/master/lib/jekyll/page.rb)
+and are available via `site.pages`. Static files become instances of
+[`Jekyll::StaticFile`](https://github.com/fxn/jekyll/blob/master/lib/jekyll/static_file.rb)
+and are available via `site.static_files`.
+
+For example, if an existing Liquid template has data that needs to be computed
+at build time, a generator can search for it and inject it. In the following
+example the template called "reading.html" has two variables "ongoing" and
+"done" that we fill in the generator.
+
+{% highlight ruby %}
+module Reading
+  class Generator < Jekyll::Generator
+    def generate(site)
+      ongoing, done = Book.all.partition(&:ongoing?)
+  
+      reading = site.pages.detect {|page| page.name == 'reading.html'}
+      reading.data['ongoing'] = ongoing
+      reading.data['done'] = done
+    end
+  end
+end
+{% endhighlight %}
+
+This is a more complex generator that generates new pages:
 
 {% highlight ruby %}
 module Jekyll
@@ -95,7 +130,7 @@ Generators are only required to implement one method:
         <p><code>generate</code></p>
       </td>
       <td>
-        <p>String output of the content being generated.</p>
+        <p>Generates content as a side-effect.</p>
       </td>
     </tr>
   </tbody>
