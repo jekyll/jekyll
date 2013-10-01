@@ -3,7 +3,7 @@ layout: docs
 title: Data Files
 prev_section: variables
 next_section: migrations
-permalink: /docs/data/
+permalink: /docs/datafiles/
 ---
 
 In addition to the [built-in variables](../variables/) available from Jekyll,
@@ -27,7 +27,7 @@ extension) and they will be accessible via `site.data`.
 
 ## Example: List of members
 
-Here is a basic example of using Data Files avoid copy-pasting large chunks of
+Here is a basic example of using Data Files to avoid copy-pasting large chunks of
 code in your Jekyll templates:
 
 In `_data/members.yml`:
