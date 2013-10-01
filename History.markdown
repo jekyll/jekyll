@@ -7,6 +7,8 @@
 ### Minor Enhancements
   * Decrease the specificity in the site template CSS (#1574)
   * Add `encoding` configuration option (#1449)
+  * Provide better error handling for Jekyll's custom Liquid tags
+    (#1514)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
