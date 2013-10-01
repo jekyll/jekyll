@@ -86,6 +86,9 @@ module Jekyll
     # Returns the converted content
     def render_liquid(content, payload, info)
       Liquid::Template.parse(content).render!(payload, info)
+    rescue Tags::IncludeTagError => e
+      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}"
+      raise e
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{self.path}"
       raise e
