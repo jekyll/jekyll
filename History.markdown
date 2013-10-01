@@ -1,6 +1,8 @@
 ## HEAD
 
 ### Major Enhancements
+  * Add support for adding data as YAML files under a site's `_data`
+    directory (#1003)
 
 ### Minor Enhancements
   * Decrease the specificity in the site template CSS (#1574)
