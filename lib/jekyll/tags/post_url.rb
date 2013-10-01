@@ -50,9 +50,11 @@ module Jekyll
           end
         end
 
-        puts "ERROR: post_url: \"#{@orig_post}\" could not be found"
+        raise ArgumentError.new <<-eos
+Could not find post "#{@orig_post}" in tag 'post_url'.
 
-        return "#"
+Make sure the post exists and the name is correct.
+eos
       end
     end
   end

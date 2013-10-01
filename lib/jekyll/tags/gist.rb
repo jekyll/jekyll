@@ -12,7 +12,15 @@ module Jekyll
         gist_id, filename = tag_contents[0], tag_contents[1]
         gist_script_tag(gist_id, filename)
       else
-        "Error parsing gist id"
+        raise ArgumentError.new <<-eos
+Syntax error in tag 'gist' while parsing the following markup:
+
+  #{@markup}
+
+Valid syntax:
+  for public gists:  {% gist 1234567 %}
+  for private gists: {% gist user/1234567 %}
+eos
       end
     end
 
