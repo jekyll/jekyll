@@ -59,6 +59,7 @@ Gem::Specification.new do |s|
     bin/jekyll
     cucumber.yml
     features/create_sites.feature
+    features/data.feature
     features/drafts.feature
     features/embed_filters.feature
     features/include_tag.feature
@@ -203,6 +204,7 @@ Gem::Specification.new do |s|
     test/helper.rb
     test/source/+/foo.md
     test/source/.htaccess
+    test/source/_data/members.yaml
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
     test/source/_layouts/default.html
