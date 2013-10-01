@@ -3,7 +3,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :file_read_opts
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts
 
     attr_accessor :converters, :generators
 
@@ -56,6 +56,7 @@ module Jekyll
       self.static_files    = []
       self.categories      = Hash.new { |hash, key| hash[key] = [] }
       self.tags            = Hash.new { |hash, key| hash[key] = [] }
+      self.data            = {}
 
       if self.limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
@@ -110,6 +111,7 @@ module Jekyll
     def read
       self.read_layouts
       self.read_directories
+      self.read_data(config['data_source'])
     end
 
     # Read all the files in <source>/<layouts> and create a new Layout object
@@ -197,6 +199,25 @@ module Jekyll
       end
     end
 
+    # Read and parse all yaml files under <source>/<dir>
+    #
+    # Returns nothing
+    def read_data(dir)
+      base = File.join(self.source, dir)
+      return unless File.directory?(base) && (!self.safe || !File.symlink?(base))
+
+      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
+      entries.delete_if { |e| File.directory?(File.join(base, e)) }
+
+      entries.each do |entry|
+        path = File.join(self.source, dir, entry)
+        next if File.symlink?(path) && self.safe
+
+        key = sanitize_filename(File.basename(entry, '.*'))
+        self.data[key] = YAML.safe_load_file(path)
+      end
+    end
+
     # Run each of the Generators.
     #
     # Returns nothing.
@@ -262,6 +283,14 @@ module Jekyll
       hash
     end
 
+    # Prepare site data for site payload. The method maintains backward compatibility
+    # if the key 'data' is already used in _config.yml.
+    #
+    # Returns the Hash to be hooked to site.data.
+    def site_data
+      self.config['data'] || self.data
+    end
+
     # The Hash payload containing site-wide data.
     #
     # Returns the Hash: { "site" => data } where data is a Hash with keys:
@@ -283,7 +312,8 @@ module Jekyll
           "pages"      => self.pages,
           "html_pages" => self.pages.reject { |page| !page.html? },
           "categories" => post_attr_hash('categories'),
-          "tags"       => post_attr_hash('tags')})}
+          "tags"       => post_attr_hash('tags'),
+          "data"       => site_data})}
     end
 
     # Filter out any files/directories that are hidden or backup files (start
@@ -392,6 +422,12 @@ module Jekyll
 
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
+    end
+
+    def sanitize_filename(name)
+      name = name.gsub(/[^\w\s_-]+/, '')
+      name = name.gsub(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
+      name = name.gsub(/\s+/, '_')
     end
   end
 end

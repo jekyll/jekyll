@@ -43,6 +43,12 @@ Given /^I have an? (.*) (layout|theme) that contains "(.*)"$/ do |name, type, te
   end
 end
 
+Given /^I have an? "(.*)" file with content:$/ do |file, text|
+  File.open(file, 'w') do |f|
+    f.write(text)
+  end
+end
+
 Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
