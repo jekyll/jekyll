@@ -18,6 +18,8 @@ module Jekyll
 
         s.mount(options['baseurl'], HTTPServlet::FileHandler, destination, fh_option)
 
+        Jekyll.logger.info "Server address:", "http://#{s.config[:BindAddress]}:#{s.config[:Port]}"
+
         if options['detach'] # detach the server
           pid = Process.fork { s.start }
           Process.detach(pid)
