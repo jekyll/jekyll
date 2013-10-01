@@ -77,14 +77,10 @@ eos
 
       def render(context)
         dir = File.join(context.registers[:site].source, INCLUDES_DIR)
-        if error = validate_dir(dir, context.registers[:site].safe)
-          return error
-        end
+        validate_dir(dir, context.registers[:site].safe)
 
         file = File.join(dir, @file)
-        if error = validate_file(dir, context.registers[:site].safe)
-          return error
-        end
+        validate_file(file, context.registers[:site].safe)
 
         partial = Liquid::Template.parse(source(file, context))
 
@@ -96,15 +92,15 @@ eos
 
       def validate_dir(dir, safe)
         if File.symlink?(dir) && safe
-          "Includes directory '#{dir}' cannot be a symlink"
+          raise IOError.new "Includes directory '#{dir}' cannot be a symlink"
         end
       end
 
       def validate_file(file, safe)
         if !File.exists?(file)
-          "Included file '#{@file}' not found in '#{INCLUDES_DIR}' directory"
+          raise IOError.new "Included file '#{@file}' not found in '#{INCLUDES_DIR}' directory"
         elsif File.symlink?(file) && safe
-          "The included file '#{INCLUDES_DIR}/#{@file}' should not be a symlink"
+          raise IOError.new "The included file '#{INCLUDES_DIR}/#{@file}' should not be a symlink"
         end
       end
 
