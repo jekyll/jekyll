@@ -42,22 +42,25 @@ based on your own rules.
 
 A generator is a subclass of `Jekyll::Generator` that defines a `generate`
 method, which receives an instance of
-[`Jekyll::Site`](https://github.com/fxn/jekyll/blob/master/lib/jekyll/site.rb).
+[`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb).
+
 Generation is triggered for its side-effects, the return value of `generate` is
 ignored. Jekyll does not assume any particular side-effect to happen, it just
 runs the method.
 
-Generators run after Jekyll has made an inventory of the existing pages, and
-before the site is generated. Pages with YAML headers are stored as instances of
-[`Jekyll::Page`](https://github.com/fxn/jekyll/blob/master/lib/jekyll/page.rb)
+Generators run after Jekyll has made an inventory of the existing content, and
+before the site is generated. Pages with YAML front-matters are stored as
+instances of
+[`Jekyll::Page`]({{ site.repository }}/blob/master/lib/jekyll/page.rb)
 and are available via `site.pages`. Static files become instances of
-[`Jekyll::StaticFile`](https://github.com/fxn/jekyll/blob/master/lib/jekyll/static_file.rb)
-and are available via `site.static_files`.
+[`Jekyll::StaticFile`]({{ site.repository }}/blob/master/lib/jekyll/static_file.rb)
+and are available via `site.static_files`. See
+[`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb)
+for more details.
 
-For example, if an existing Liquid template has data that needs to be computed
-at build time, a generator can search for it and inject it. In the following
-example the template called "reading.html" has two variables "ongoing" and
-"done" that we fill in the generator.
+For instance, a generator can inject values computed at build time for template
+variables. In the following example the template `reading.html` has two
+variables `ongoing` and `done` that we fill in the generator:
 
 {% highlight ruby %}
 module Reading
