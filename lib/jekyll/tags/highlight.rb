@@ -60,6 +60,8 @@ eos
 
         output = context["pygments_prefix"] + output if context["pygments_prefix"]
         output = output + context["pygments_suffix"] if context["pygments_suffix"]
+        output = output.gsub('<div class="highlight">',"<div itemprop='code' itemscope='itemscope' itemtype='http://schema.org/Code' class='highlight'>")
+        output = output.gsub('</code></pre></div>',"</code></pre><meta content='#{@lang}' itemprop='programmingLanguage' /></div>")
         output
       end
 
@@ -74,7 +76,7 @@ eos
 
       def add_code_tags(code, lang)
         # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
+        code = code.sub(/<pre>/,'<pre><code class="' + lang + '"  itemprop="code" itemscope="itemscope" itemtype="http://schema.org/Code"><meta content="' + lang + '" itemprop="programmingLanguage" />')
         code = code.sub(/<\/pre>/,"</code></pre>")
       end
 
