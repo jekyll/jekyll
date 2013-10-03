@@ -9,6 +9,8 @@
   * Add `encoding` configuration option (#1449)
   * Provide better error handling for Jekyll's custom Liquid tags
     (#1514)
+  * If an included file causes a Liquid error, add the path to the
+    include file that caused the error to the error message (#1596)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
