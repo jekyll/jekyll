@@ -4,7 +4,7 @@ module Jekyll
       attr_accessor :path
 
       def initialize(msg, path)
-        super msg
+        super(msg)
         @path = path
       end
     end
