@@ -23,7 +23,6 @@
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
   * Refactor the Liquid `include` tag (#1490)
-  * Update the documentation for generators (#1590)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
@@ -32,6 +31,7 @@
   * Add note about installing Xcode on the Mac in the Installation docs (#1561)
   * Simplify/generalize pagination docs (#1577)
   * Add documentation for the new data sources feature (#1503)
+  * Add more information on how to create generators (#1590, #1592)
 
 ## 1.2.1 / 2013-09-14
 
