@@ -31,6 +31,7 @@
   * Link to Liquid's docs for tags and filters (#1553)
   * Add note about installing Xcode on the Mac in the Installation docs (#1561)
   * Simplify/generalize pagination docs (#1577)
+  * Add documentation for the new data sources feature (#1503)
 
 ## 1.2.1 / 2013-09-14
 
