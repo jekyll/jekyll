@@ -84,13 +84,13 @@ module Jekyll
     # info    - the info for Liquid
     #
     # Returns the converted content
-    def render_liquid(content, payload, info)
+    def render_liquid(content, payload, info, path = nil)
       Liquid::Template.parse(content).render!(payload, info)
     rescue Tags::IncludeTagError => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}"
       raise e
     rescue Exception => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{self.path}"
+      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || self.path}"
       raise e
     end
 
@@ -121,7 +121,8 @@ module Jekyll
 
         self.output = self.render_liquid(layout.content,
                                          payload,
-                                         info)
+                                         info,
+                                         File.join(self.site.config['layouts'], layout.name))
 
         if layout = layouts[layout.data["layout"]]
           if used.include?(layout)
