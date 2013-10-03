@@ -1,5 +1,14 @@
 module Jekyll
   module Tags
+    class IncludeTagError < StandardError
+      attr_accessor :path
+
+      def initialize(msg, path)
+        super msg
+        @path = path
+      end
+    end
+
     class IncludeTag < Liquid::Tag
 
       SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
@@ -86,7 +95,11 @@ eos
 
         context.stack do
           context['include'] = parse_params(context) if @params
-          partial.render(context)
+          begin
+            partial.render!(context)
+          rescue => e
+            raise IncludeTagError.new e.message, File.join(INCLUDES_DIR, @file)
+          end
         end
       end
 
