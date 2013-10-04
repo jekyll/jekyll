@@ -20,11 +20,6 @@ module Jekyll
       def initialize(tag_name, markup, tokens)
         super
         @file, @params = markup.strip.split(' ', 2);
-        validate_syntax
-      end
-
-      def validate_syntax
-        validate_file_name
         validate_params if @params
       end
 
@@ -96,6 +91,8 @@ eos
         validate_dir(dir, context.registers[:site].safe)
 
         retrieve_variable(context)
+        validate_file_name
+
         file = File.join(dir, @file)
         validate_file(file, context.registers[:site].safe)
 
