@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('commander', "~> 4.1.3")
   s.add_runtime_dependency('safe_yaml', "~> 0.7.0")
   s.add_runtime_dependency('colorator', "~> 0.1")
-  s.add_runtime_dependency('redcarpet', "~> 2.3.0")
+  s.add_runtime_dependency('redcarpet', "~> 3.0")
 
   s.add_development_dependency('rake', "~> 10.0.3")
   s.add_development_dependency('rdoc', "~> 3.11")
