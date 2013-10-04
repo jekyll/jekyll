@@ -14,6 +14,7 @@
     include file that caused the error to the error message (#1596)
   * If a layout causes a Liquid error, change the error message so that
     we know it comes from the layout (#1601)
+  * Update Kramdown dependency to `~> 1.2` (#1610)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
