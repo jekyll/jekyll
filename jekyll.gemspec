@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 2.3.0")
 
-  s.add_development_dependency('rake', "~> 10.0.3")
+  s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 3.3.2")
