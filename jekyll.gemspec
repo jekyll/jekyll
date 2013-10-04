@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
   s.add_development_dependency('coveralls', "~> 0.7.0")
   s.add_development_dependency('activesupport', '~> 3.2.13')
+  s.add_development_dependency('jekyll_test_plugin')
 
   # = MANIFEST =
   s.files = %w[
