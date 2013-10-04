@@ -15,6 +15,7 @@
   * If a layout causes a Liquid error, change the error message so that
     we know it comes from the layout (#1601)
   * Update launchy dependency to `~> 2.3` (#1608)
+  * Update rr dependency to `~> 1.1` (#1604)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
