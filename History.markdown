@@ -29,6 +29,7 @@
   * Update launchy dependency to `~> 2.3` (#1608)
   * Update rr dependency to `~> 1.1` (#1604)
   * Update cucumber dependency to `~> 1.3` (#1607)
+  * Update coveralls dependency to `~> 0.7.0` (#1606)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
