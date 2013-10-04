@@ -225,3 +225,11 @@ Feature: Site configuration
     And I should see "Page Layout: 2 on 2010-01-01" in "_site/index.html"
     And I should see "Post Layout: <p>content for entry1.</p>" in "_site/2007/12/31/entry1.html"
     And I should see "Post Layout: <p>content for entry2.</p>" in "_site/2020/01/31/entry2.html"
+
+  Scenario: Add a gem-based plugin
+    Given I have an "index.html" file that contains "Whatever"
+    And I have a configuration file with "gems" set to "[jekyll_test_plugin]"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Whatever" in "_site/index.html"
+    And I should see "this is a test" in "_site/test.txt"
