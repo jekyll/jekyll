@@ -3,7 +3,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
 
     attr_accessor :converters, :generators
 
@@ -13,7 +13,7 @@ module Jekyll
     def initialize(config)
       self.config          = config.clone
 
-      %w[safe lsi pygments baseurl exclude include future show_drafts limit_posts keep_files].each do |opt|
+      %w[safe lsi pygments baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -76,6 +76,9 @@ module Jekyll
             Dir[File.join(plugins, "**/*.rb")].each do |f|
               require f
             end
+        end
+        self.gems.each do |gem|
+          require gem
         end
       end
 
