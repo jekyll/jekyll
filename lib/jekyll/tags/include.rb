@@ -95,12 +95,10 @@ eos
 
         context.stack do
           context['include'] = parse_params(context) if @params
-          begin
-            partial.render!(context)
-          rescue => e
-            raise IncludeTagError.new e.message, File.join(INCLUDES_DIR, @file)
-          end
+          partial.render!(context)
         end
+      rescue => e
+        raise IncludeTagError.new e.message, File.join(INCLUDES_DIR, @file)
       end
 
       def validate_dir(dir, safe)
