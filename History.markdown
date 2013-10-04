@@ -16,6 +16,7 @@
     we know it comes from the layout (#1601)
   * Update launchy dependency to `~> 2.3` (#1608)
   * Update rr dependency to `~> 1.1` (#1604)
+  * Update cucumber dependency to `~> 1.3` (#1607)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
