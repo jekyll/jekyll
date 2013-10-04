@@ -84,10 +84,18 @@ eos
         context.registers[:site].file_read_opts
       end
 
+      def retrieve_variable(context)
+        if /\{\{([\w\-\.]+)\}\}/ =~ @file
+          raise ArgumentError.new("No variable #{$1} was found in include tag") if context[$1].nil?
+          @file = context[$1]
+        end
+      end
+
       def render(context)
         dir = File.join(context.registers[:site].source, INCLUDES_DIR)
         validate_dir(dir, context.registers[:site].safe)
 
+        retrieve_variable(context)
         file = File.join(dir, @file)
         validate_file(file, context.registers[:site].safe)
 
