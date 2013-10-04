@@ -27,7 +27,7 @@ module Jekyll
       'pygments'      => true,
 
       'relative_permalinks' => true,     # backwards-compatibility with < 1.0
-                                         # will be set to false once 1.1 hits
+                                         # will be set to false once 2.0 hits
 
       'markdown'      => 'maruku',
       'permalink'     => 'date',
