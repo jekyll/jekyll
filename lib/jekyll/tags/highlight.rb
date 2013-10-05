@@ -13,7 +13,7 @@ module Jekyll
 
       def initialize(tag_name, markup, tokens)
         super
-        if markup.strip =~ SYNTAX
+        if markup.downcase.strip =~ SYNTAX
           @lang = $1
           @options = {}
           if defined?($2) && $2 != ''
