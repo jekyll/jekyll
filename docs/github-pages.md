@@ -89,3 +89,44 @@ will start with `/project-name` and resolve properly.
     href="https://github.com/contact">GitHub Support</a>.
   </p>
 </div>
+
+### Mimicking GitHub Flavored Markdown
+GitHub uses a slightly [different approach](https://help.github.com/articles/github-flavored-markdown)
+to Markdown. You can mimic this behavior on your local Jekyll with the following
+[configuration]({{ site.url }}/docs/configuration)
+
+{% highlight yaml %}
+safe: true
+lsi: false
+pygments: true
+markdown: redcarpet
+redcarpet:
+  extensions:
+    - hard_wrap
+    - no_intra_emphasis
+    - autolink
+    - strikethrough
+    - fenced_code_blocks
+{% endhighlight %}
+
+This setup will get the following features from GFM in the markdown renderer.
+* [Newlines](https://help.github.com/articles/github-flavored-markdown#newlines)
+* [Multiple underscores in words](https://help.github.com/articles/github-flavored-markdown#multiple-underscores-in-words)
+* [URL autolinking](https://help.github.com/articles/github-flavored-markdown#url-autolinking)
+* [Strikethrough](https://help.github.com/articles/github-flavored-markdown#strikethrough)
+* [Fenced code blocks](https://help.github.com/articles/github-flavored-markdown#fenced-code-blocks)
+* [Syntax highlighting](https://help.github.com/articles/github-flavored-markdown#syntax-highlighting)
+
+<div class="note info">
+  <h5>GFM isn't for long-form content</h5>
+  <p>
+    Keep in mind that GFM was made specifically with the needs of comments and
+    bug reports in mind, not a website or blog.
+  </p>
+</div>
+
+If you don't have [Redcarpet](https://github.com/vmg/redcarpet), you can install it
+with the following command
+{% highlight sh %}
+gem install redcarpet
+{% endhighlight %}
