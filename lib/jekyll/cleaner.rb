@@ -2,7 +2,7 @@ require 'set'
 
 module Jekyll
   class Site
-    # Handles the cleanup of a site's destination before the site is built.
+    # Handles the cleanup of a site's destination before it is built.
     class Cleaner
       def initialize(site)
         @site = site
@@ -15,14 +15,14 @@ module Jekyll
 
       private
 
-      # Private: The list of files and directories to be deleted during the cleanup process
+      # Private: The list of files and directories to be deleted during cleanup process
       #
-      # Returns an Array with the file and directory paths
+      # Returns an Array of the file and directory paths
       def obsolete_files
         (existing_files - new_files - new_dirs + replaced_files).to_a
       end
 
-      # Private: The list of existing files, except those included in keep_files and hidden files.
+      # Private: The list of existing files, apart from those included in keep_files and hidden files.
       #
       # Returns a Set with the file paths
       def existing_files
@@ -33,7 +33,7 @@ module Jekyll
         files
       end
 
-      # Private: The list of files to be created when the site is built.
+      # Private: The list of files to be created when site is built.
       #
       # Returns a Set with the file paths
       def new_files
@@ -42,7 +42,7 @@ module Jekyll
         files
       end
 
-      # Private: The list of directories to be created when the site is built.
+      # Private: The list of directories to be created when site is built.
       # These are the parent directories of the files in #new_files.
       #
       # Returns a Set with the directory paths
@@ -57,7 +57,7 @@ module Jekyll
         new_dirs.select { |dir| File.file?(dir) }.to_set
       end
 
-      # Private: creates a regular expression from the config's keep_files array
+      # Private: Creates a regular expression from the config's keep_files array
       #
       # Examples
       #   ['.git','.svn'] creates the following regex: /\/(\.git|\/.svn)/
