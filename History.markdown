@@ -34,6 +34,7 @@
   * Update cucumber dependency to `~> 1.3` (#1607)
   * Update coveralls dependency to `~> 0.7.0` (#1606)
   * Update rake dependency to `~> 10.1` (#1603)
+  * Clean up `site.rb` comments to be more concise/uniform (#1616)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
