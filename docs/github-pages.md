@@ -96,8 +96,6 @@ to Markdown. You can mimic this behavior on your local Jekyll with the following
 [configuration]({{ site.url }}/docs/configuration)
 
 {% highlight yaml %}
-safe: true
-lsi: false
 pygments: true
 markdown: redcarpet
 redcarpet:
