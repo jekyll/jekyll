@@ -122,7 +122,7 @@ module Jekyll
       base = File.join(self.source, self.config['layouts'])
       return unless File.exists?(base)
       entries = []
-      Dir.chdir(base) { entries = filter_entries(Dir['*.*']) }
+      Dir.chdir(base) { entries = filter_entries(Dir['**/*.*']) }
 
       entries.each do |f|
         name = f.split(".")[0..-2].join(".")

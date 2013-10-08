@@ -44,6 +44,17 @@ Feature: Create sites
     Then the _site directory should exist
     And I should see "Post Layout: <p>The only winning move is not to play.</p>" in "_site/2009/03/27/wargames.html"
 
+  Scenario: Basic site with layout inside a subfolder and a post
+    Given I have a _layouts directory
+    And I have a _posts directory
+    And I have the following posts:
+      | title    | date      | layout  | content                               |
+      | Wargames | 2009-03-27 | post/simple | The only winning move is not to play. |
+    And I have a post/simple layout that contains "Post Layout: {{ content }}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Post Layout: <p>The only winning move is not to play.</p>" in "_site/2009/03/27/wargames.html"
+
   Scenario: Basic site with layouts, pages, posts and files
     Given I have a _layouts directory
     And I have a page layout that contains "Page {{ page.title }}: {{ content }}"
