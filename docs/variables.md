@@ -2,7 +2,7 @@
 layout: docs
 title: Variables
 prev_section: pages
-next_section: datafiles
+next_section: migrations
 permalink: /docs/variables/
 ---
 
