@@ -24,6 +24,15 @@ Jekyll's standard command line interface.
 $ gem install jekyll-import --pre
 {% endhighlight %}
 
+<div class="note warning">
+  <h5>Jekyll-import needs you to manually install some dependencies.</h5>
+  <p markdown="1">If you are importing you blog from Drupal 6,7, Joomla,
+  Mephisto, Mt, Textpattern or Typo (with mysql db), you need to install
+  `mysql` and `sequel` gem. If you are importing from Wordpress database, you
+  need to install `mysql2` and `sequel` gem, and if you are importing from Enki
+  or Typo (with postgresql db) you need to install `pg` and `sequel` gem.</p>
+</div>
+
 You should now be all set to run the importers below. If you ever get stuck, you
 can see help for each importer:
 
