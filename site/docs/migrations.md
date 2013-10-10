@@ -27,7 +27,7 @@ $ gem install jekyll-import --pre
 <div class="note warning">
   <h5>Jekyll-import needs you to manually install some dependencies.</h5>
   <p markdown="1">If you are importing you blog from Drupal 6,7, Joomla,
-  Mephisto, Mt, Textpattern or Typo (with mysql db), you need to install
+  Mephisto, Movable Type, Textpattern or Typo (with mysql db), you need to install
   `mysql` and `sequel` gems. If you are importing from WordPress database, you
   need to install `mysql2` and `sequel` gems, and if you are importing from Enki
   or Typo (with postgresql db) you need to install `pg` and `sequel` gems.</p>
