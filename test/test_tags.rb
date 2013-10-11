@@ -69,6 +69,9 @@ CONTENT
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ 'cssclass' => 'hl', 'linenos' => 'table' }, tag.instance_variable_get(:@options))
+
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
+      assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
     end
   end
 
