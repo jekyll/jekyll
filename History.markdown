@@ -46,6 +46,8 @@
   * Simplify/generalize pagination docs (#1577)
   * Add documentation for the new data sources feature (#1503)
   * Add more information on how to create generators (#1590, #1592)
+  * Improve the instructions for mimicking GitHub Flavored Markdown
+    (#1614)
 
 ## 1.2.1 / 2013-09-14
 
