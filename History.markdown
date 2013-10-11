@@ -15,7 +15,7 @@
   * If a layout causes a Liquid error, change the error message so that
     we know it comes from the layout (#1601)
   * Update Kramdown dependency to `~> 1.2` (#1610)
-  * Update safe_yaml dependency to `~> 0.9.7` (#1602)
+  * Update `safe_yaml` dependency to `~> 0.9.7` (#1602)
   * Allow layouts to be in subfolders like includes (#1622)
 
 ### Bug Fixes
@@ -48,6 +48,7 @@
   * Add more information on how to create generators (#1590, #1592)
   * Improve the instructions for mimicking GitHub Flavored Markdown
     (#1614)
+  * Add `jekyll-import` warning note of missing dependencies (#1626)
 
 ## 1.2.1 / 2013-09-14
 
