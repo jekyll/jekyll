@@ -16,6 +16,7 @@
     we know it comes from the layout (#1601)
   * Update Kramdown dependency to `~> 1.2` (#1610)
   * Update safe_yaml dependency to `~> 0.9.7` (#1602)
+  * Allow layouts to be in subfolders like includes (#1622)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
