@@ -38,7 +38,12 @@ Given /^I have an? (.*) (layout|theme) that contains "(.*)"$/ do |name, type, te
   else
     '_theme'
   end
-  File.open(File.join(folder, name + '.html'), 'w') do |f|
+  destination_file = File.join(folder, name + '.html')
+  destination_path = File.dirname(destination_file)
+  unless File.exist?(destination_path)
+    FileUtils.mkdir_p(destination_path)
+  end
+  File.open(destination_file, 'w') do |f|
     f.write(text)
   end
 end
