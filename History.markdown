@@ -26,6 +26,7 @@
   * Print server address when launching a server (#1586)
   * Downgrade to Maruku `~> 0.6.0` in order to avoid changes in rendering (#1598)
   * Fix error with failing include tag when variable was file name (#1613)
+  * Downcase lexers before passing them to pygments (#1615)
 
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
