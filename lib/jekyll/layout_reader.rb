@@ -29,7 +29,7 @@ class LayoutReader
   end
 
   def layout_entries(base)
-    Dir.chdir(base) { EntryFilter.new(site).filter(Dir['*.*']) }
+    Dir.chdir(base) { EntryFilter.new(site).filter(Dir['**/*.*']) }
   end
 
   def layout_name(f)
