@@ -39,8 +39,8 @@ Feature: frontmatter defaults
       | about | 2013-10-14 | info on {{page.name}} |
     And I have a special/_posts directory
     And I have the following post in "special":
-      | title | date       | content               |
-      | about | 2013-10-14 | info on {{page.name}} |
+      | title | date       | path  | content               |
+      | about | 2013-10-14 | local | info on {{page.name}} |
 
     And I have an "index.html" page with title "overview" that contains "Overview for {{page.name}}"
     And I have an "special/index.html" page with title "section overview" that contains "Overview for {{page.name}}"

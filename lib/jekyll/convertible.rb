@@ -92,7 +92,7 @@ module Jekyll
       further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
         [attribute, send(attribute)]
       }]
-      defaults = site.frontmatter_defaults.all(self.path, self.type)
+      defaults = site.frontmatter_defaults.all(self.relative_path, self.type)
       defaults.merge(data).deep_merge(further_data)
     end
 
