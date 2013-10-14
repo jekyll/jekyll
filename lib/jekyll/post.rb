@@ -19,10 +19,10 @@ module Jekyll
     ]
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID.concat(%w[
+    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
       content
       excerpt
-    ])
+    ]
 
     # Post name validator. Post filenames must be like:
     # 2008-11-05-my-awesome-post.textile

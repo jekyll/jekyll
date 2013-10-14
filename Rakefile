@@ -84,7 +84,14 @@ end
 #
 #############################################################################
 
-task :default => [:test, :features]
+if RUBY_VERSION > '1.9' && ENV["TRAVIS"] == "true"
+  require 'coveralls/rake/task'
+  Coveralls::RakeTask.new
+
+  task :default => [:test, :features, 'coveralls:push']
+else
+  task :default => [:test, :features]
+end
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
@@ -217,6 +224,7 @@ namespace :site do
     task :new, :version do |t, args|
       raise "Specify a version: rake site:releases:new['1.2.3']" unless args.version
       today = Time.new.strftime('%Y-%m-%d')
+      release = args.version.to_s
       filename = "site/_posts/#{today}-jekyll-#{release.split('.').join('-')}-released.markdown"
 
       File.open(filename, "wb") do |post|

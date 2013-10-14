@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Blog migrations
-prev_section: variables
+prev_section: datafiles
 next_section: templates
 permalink: /docs/migrations/
 ---
@@ -23,6 +23,15 @@ Jekyll's standard command line interface.
 {% highlight bash %}
 $ gem install jekyll-import --pre
 {% endhighlight %}
+
+<div class="note warning">
+  <h5>Jekyll-import requires you to manually install some dependencies.</h5>
+  <p markdown="1">If you are importing your blog from Drupal 6,7, Joomla,
+  Mephisto, Movable Type, Textpattern, or Typo (with mysql db), you need to install
+  `mysql` and `sequel` gems. If you are importing from a WordPress database, you
+  need to install `mysql2` and `sequel` gems, and if you are importing from Enki
+  or Typo (with postgresql db) you need to install `pg` and `sequel` gems.</p>
+</div>
 
 You should now be all set to run the importers below. If you ever get stuck, you
 can see help for each importer:
@@ -74,7 +83,7 @@ here's how:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpress";
-    JekyllImport::WordPress.process("database", "user", "pass")'
+    JekyllImport::WordPress.process({:dbname => "database", :user => "user", :pass => "pass"})'
 {% endhighlight %}
 
 If you are using Webfaction and have to set up an [SSH
@@ -85,7 +94,7 @@ authentication system:
 
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/wordpress";
-    JekyllImport::WordPress.process("database", "user", "pass", "127.0.0.1")'
+    JekyllImport::WordPress.process({:host => "127.0.0.1", :dbname => "database", :user => "user", :pass => "pass"})'
 {% endhighlight %}
 
 ### Further WordPress migration alternatives

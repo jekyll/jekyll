@@ -11,14 +11,20 @@ following in mind:
   [RR](http://github.com/btakita/rr/tree/master).
 * If it's a brand new feature, make sure to create a new
   [Cucumber](https://github.com/cucumber/cucumber/) feature and reuse steps
-  where appropriate. Also, whipping up some documentation in your fork's wiki
+  where appropriate. Also, whipping up some documentation in your fork's `site`
   would be appreciated, and once merged it will be transferred over to the main
-  wiki.
+  `site`, jekyllrb.com.
 * If your contribution changes any Jekyll behavior, make sure to update the
   documentation. It lives in `site/docs`. If the docs are missing information,
   please feel free to add it in. Great docs make a great project!
 * Please follow the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby)
   when modifying Ruby code.
+* Please do your best to submit **small pull requests**. The easier the proposed
+  change is to review, the more likely it will be merged.
+* When submitting a pull request, please make judicious use of the pull request
+  body. A description of what changes were made, the motivations behind the
+  changes and [any tasks completed or left to complete](http://git.io/gfm-tasks)
+  will also speed up review time.
 
 Test Dependencies
 -----------------
@@ -32,8 +38,8 @@ you're all set!
 Before you start, run the tests and make sure that they pass (to confirm your
 environment is configured properly):
 
-    $ rake test
-    $ rake features
+    $ bundle exec rake test
+    $ bundle exec rake features
 
 Workflow
 --------
@@ -65,8 +71,7 @@ All documentation pull requests should be directed at `master`.  Pull
 requests directed at another branch will not be accepted. 
 
 The [Jekyll wiki](https://github.com/mojombo/jekyll/wiki) on GitHub 
-can be freely updated without a pull request as all 
-GitHub users have access.
+can be freely updated without a pull request as all GitHub users have access.
 
 Gotchas
 -------

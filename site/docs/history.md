@@ -5,6 +5,30 @@ permalink: /docs/history/
 prev_section: contributing
 ---
 
+## 1.2.1 / 2013-09-14
+
+### Minor Enhancements
+- Print better messages for detached server. Mute output on detach. ([#1518]({{ site.repository }}/issues/1518))
+- Disable reverse lookup when running `jekyll serve` ([#1363]({{ site.repository }}/issues/1363))
+- Upgrade RedCarpet dependency to `~> 2.3.0` ([#1515]({{ site.repository }}/issues/1515))
+- Upgrade to Liquid `>= 2.5.2, < 2.6` ([#1536]({{ site.repository }}/issues/1536))
+
+### Bug Fixes
+- Fix file discrepancy in gemspec ([#1522]({{ site.repository }}/issues/1522))
+- Force rendering of Include tag ([#1525]({{ site.repository }}/issues/1525))
+
+### Development Fixes
+- Add a rake task to generate a new release post ([#1404]({{ site.repository }}/issues/1404))
+- Mute LSI output in tests ([#1531]({{ site.repository }}/issues/1531))
+- Update contributor documentation ([#1537]({{ site.repository }}/issues/1537))
+
+### Site Enhancements
+- Fix a couple of validation errors on the site ([#1511]({{ site.repository }}/issues/1511))
+- Make navigation menus reusable ([#1507]({{ site.repository }}/issues/1507))
+- Fix link to History page from Release v1.2.0 notes post.
+- Fix markup in History file for command line options ([#1512]({{ site.repository }}/issues/1512))
+- Expand 1.2 release post title to 1.2.0 ([#1516]({{ site.repository }}/issues/1516))
+
 ## 1.2.0 / 2013-09-06
 
 ### Major Enhancements
@@ -15,7 +39,7 @@ prev_section: contributing
 - Catch and fix invalid `paginate` values ([#1390]({{ site.repository }}/issues/1390))
 - Remove superfluous `div.container` from the default html template for
     `jekyll new` ([#1315]({{ site.repository }}/issues/1315))
-- Add -D short-form switch for the drafts option ([#1394]({{ site.repository }}/issues/1394))
+- Add `-D` short-form switch for the drafts option ([#1394]({{ site.repository }}/issues/1394))
 - Update the links in the site template for Twitter and GitHub ([#1400]({{ site.repository }}/issues/1400))
 - Update dummy email address to example.com domain ([#1408]({{ site.repository }}/issues/1408))
 - Update normalize.css to v2.1.2 and minify; add rake task to update
@@ -65,7 +89,7 @@ prev_section: contributing
 - Fix markup for the Kramdown options ([#1445]({{ site.repository }}/issues/1445))
 - Fix typos in the History file ([#1454]({{ site.repository }}/issues/1454))
 - Add trailing slash to site's post URL ([#1462]({{ site.repository }}/issues/1462))
-- Clarify that --config will take multiple files ([#1474]({{ site.repository }}/issues/1474))
+- Clarify that `--config` will take multiple files ([#1474]({{ site.repository }}/issues/1474))
 - Fix docs/templates.md private gist example ([#1477]({{ site.repository }}/issues/1477))
 - Use `site.repository` for Jekyll's GitHub URL ([#1463]({{ site.repository }}/issues/1463))
 - Add `jekyll-pageless-redirects` to list of third-party plugins ([#1486]({{ site.repository }}/issues/1486))
@@ -302,7 +326,7 @@ prev_section: contributing
 - Allow symlinked files in unsafe mode ([#824]({{ site.repository }}/issues/824))
 - Add 'gist' Liquid tag to core ([#822]({{ site.repository }}/issues/822), [#861]({{ site.repository }}/issues/861))
 - New format of Jekyll output ([#795]({{ site.repository }}/issues/795))
-- Reinstate --limit_posts and --future switches ([#788]({{ site.repository }}/issues/788))
+- Reinstate `--limit_posts` and `--future` switches ([#788]({{ site.repository }}/issues/788))
 - Remove ambiguity from command descriptions ([#815]({{ site.repository }}/issues/815))
 - Fix SafeYAML Warnings ([#807]({{ site.repository }}/issues/807))
 - Relaxed Kramdown version to 0.14 ([#808]({{ site.repository }}/issues/808))
@@ -325,7 +349,7 @@ prev_section: contributing
 - Catch all exceptions, not just StandardError descendents ([#1007]({{ site.repository }}/issues/1007))
 - Bullet-proof limit_posts option ([#1004]({{ site.repository }}/issues/1004))
 - Read in YAML as UTF-8 to accept non-ASCII chars ([#836]({{ site.repository }}/issues/836))
-- Fix the CLI option --plugins to actually accept dirs and files ([#993]({{ site.repository }}/issues/993))
+- Fix the CLI option `--plugins` to actually accept dirs and files ([#993]({{ site.repository }}/issues/993))
 - Allow 'excerpt' in YAML Front-Matter to override the extracted excerpt ([#946]({{ site.repository }}/issues/946))
 - Fix cascade problem with site.baseurl, site.port and site.host. ([#935]({{ site.repository }}/issues/935))
 - Filter out directories with valid post names ([#875]({{ site.repository }}/issues/875))

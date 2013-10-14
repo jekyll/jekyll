@@ -46,6 +46,16 @@ installing Jekyll, check out the [troubleshooting](../troubleshooting/) page or
 [report an issue]({{ site.repository }}/issues/new) so the Jekyll
 community can improve the experience for everyone.
 
+<div class="note info">
+  <h5>Installing Xcode Command-Line Tools</h5>
+  <p>
+    If you run into issues installing Jekyll's dependencies which make use of
+    native extensions and are using Mac OS X, you will need to install Xcode
+    and the Command-Line Tools it ships with. Download in
+    <code>Preferences &#8594; Downloads &#8594; Components</code>.
+  </p>
+</div>
+
 ## Optional Extras
 
 There are a number of (optional) extra features that Jekyll supports that you

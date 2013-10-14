@@ -14,7 +14,7 @@ module Jekyll
       def initialize(tag_name, markup, tokens)
         super
         if markup.strip =~ SYNTAX
-          @lang = $1
+          @lang = $1.downcase
           @options = {}
           if defined?($2) && $2 != ''
             $2.split.each do |opt|

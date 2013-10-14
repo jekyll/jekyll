@@ -1,0 +1,7 @@
+- name: Jack
+  age: 27
+  blog: http://example.com/jack
+
+- name: John
+  age: 32
+  blog: http://example.com/john

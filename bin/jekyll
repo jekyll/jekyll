@@ -65,6 +65,7 @@ command :build do |c|
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
   c.option '-D', '--drafts', 'Render posts in the _drafts folder'
+  c.option '-v', '--verbose', 'Print verbose output.'
 
   c.action do |args, options|
     options = normalize_options(options.__hash__)
@@ -84,6 +85,7 @@ command :serve do |c|
   c.option '--lsi', 'Use LSI for improved related posts'
   c.option '-B', '--detach', 'Run the server in the background (detach)'
   c.option '-D', '--drafts', 'Render posts in the _drafts folder'
+  c.option '-v', '--verbose', 'Print verbose output.'
 
   c.option '-P', '--port [PORT]', 'Port to listen on'
   c.option '-H', '--host [HOST]', 'Host to bind to'

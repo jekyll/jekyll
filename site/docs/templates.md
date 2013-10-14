@@ -7,9 +7,9 @@ permalink: /docs/templates/
 ---
 
 Jekyll uses the [Liquid](http://wiki.shopify.com/Liquid) templating language to
-process templates. All of the [standard Liquid tags and
-filters](http://wiki.github.com/shopify/liquid/liquid-for-designers) are
-supported, Jekyll even adds a few handy filters and tags of its own to make
+process templates. All of the standard Liquid [tags](http://wiki.shopify.com/Logic) and
+[filters](http://wiki.shopify.com/Filters) are
+supported. Jekyll even adds a few handy filters and tags of its own to make
 common tasks easier.
 
 ## Filters
@@ -191,6 +191,19 @@ your site, you can use the `include` tag.
 Jekyll expects all include files to be placed in an `_includes` directory at the
 root of your source directory. This will embed the contents of
 `<source>/_includes/footer.html` into the calling file.
+
+<div class="note">
+  <h5>ProTip™: Use variables as file name</h5>
+  <p>
+
+    The name of the file you wish to embed can be literal (as in the example above),
+    or you can use a variable, using liquid-like variable syntax as in
+    <code>{% raw %}{% include {{my_variable}} %}{% endraw %}</code>.
+
+    Note that unlike usual liquid variable syntax, you cannot have spaces inside the curly braces.
+
+  </p>
+</div>
 
 You can also pass parameters to an include:
 

@@ -10,9 +10,12 @@ module Jekyll
       'destination'   => File.join(Dir.pwd, '_site'),
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
+      'data_source'   =>  '_data',
       'keep_files'    => ['.git','.svn'],
 
       'timezone'      => nil,           # use the local timezone
+
+      'encoding'      => nil,           # use the system encoding
 
       'safe'          => false,
       'detach'        => false,          # default to not detaching the server

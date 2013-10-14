@@ -31,6 +31,8 @@ A basic Jekyll site usually looks something like this:
 ├── _posts
 |   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile
 |   └── 2009-04-26-barcamp-boston-4-roundup.textile
+├── _data
+|   └── members.yml
 ├── _site
 └── index.html
 {% endhighlight %}
@@ -117,6 +119,21 @@ An overview of what each of these does:
           The <a href="../permalinks/">permalinks</a> can be customized for each
           post, but the date and markup language are determined solely by the
           file name.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>_data</code></p>
+      </td>
+      <td>
+        <p>
+
+          Well-formatted site data should be placed here. The jekyll engine will 
+          autoload all yaml files (ends with <code>.yml</code> or <code>.yaml</code>) 
+          in this directory. If there's a file <code>members.yml</code> under the directory, 
+          then you can access contents of the file through <code>site.data.members</code>.
 
         </p>
       </td>

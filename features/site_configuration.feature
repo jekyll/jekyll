@@ -18,6 +18,27 @@ Feature: Site configuration
     Then the _mysite directory should exist
     And I should see "Changing destination directory" in "_mysite/index.html"
 
+  Scenario Outline: Similarly named source and destination
+    Given I have a blank site in "<source>"
+    And I have an "<source>/index.md" page that contains "markdown"
+    And I have a configuration file with:
+    | key         | value    |
+    | source      | <source> |
+    | destination | <dest>   |
+    When I run jekyll
+    Then the <source> directory should exist
+    And the "<dest>/index.html" file should <file_exist> exist
+    And I should see "markdown" in "<source>/index.md"
+
+    Examples:
+      | source        | dest        | file_exist |
+      | mysite_source | mysite      |            |
+      | mysite        | mysite_dest |            |
+      | mysite/       | mysite      | not        |
+      | mysite        | ./mysite    | not        |
+      | mysite/source | mysite      | not        |
+      | mysite        | mysite/dest |            |
+
   Scenario: Exclude files inline
     Given I have an "Rakefile" file that contains "I want to be excluded"
     And I have an "README" file that contains "I want to be excluded"

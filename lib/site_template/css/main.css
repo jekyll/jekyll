@@ -34,16 +34,16 @@ a:visited { color: #a0a; }
 /* Home
 /*
 /*****************************************************************************/
-ul.posts {
+.posts {
   list-style-type: none;
   margin-bottom: 2em;
 }
 
-ul.posts li {
+.posts li {
   line-height: 1.75em;
 }
 
-ul.posts span {
+.posts span {
   color: #aaa;
   font-family: Monaco, "Courier New", monospace;
   font-size: 80%;
@@ -63,38 +63,38 @@ ul.posts span {
   line-height: 1.5em;
 }
 
-.site .header a {
+.header a {
   font-weight: bold;
   text-decoration: none;
 }
 
-.site .header h1.title {
+.title {
   display: inline-block;
   margin-bottom: 2em;
 }
 
-.site .header h1.title a {
+.title a {
   color: #a00;
 }
 
-.site .header h1.title a:hover {
+.title a:hover {
   color: #000;
 }
 
-.site .header a.extra {
+.header a.extra {
   color: #aaa;
   margin-left: 1em;
 }
 
-.site .header a.extra:hover {
+.header a.extra:hover {
   color: #000;
 }
 
-.site .meta {
+.meta {
   color: #aaa;
 }
 
-.site .footer {
+.footer {
   font-size: 80%;
   color: #666;
   border-top: 4px solid #eee;
@@ -102,22 +102,22 @@ ul.posts span {
   overflow: hidden;
 }
 
-.site .footer .contact {
+.footer .contact {
   float: left;
   margin-right: 3em;
 }
 
-.site .footer .contact a {
+.footer .contact a {
   color: #8085C1;
 }
 
-.site .footer .rss {
+.footer .rss {
   margin-top: 1.1em;
   margin-right: -.2em;
   float: right;
 }
 
-.site .footer .rss img {
+.footer .rss img {
   border: 0;
 }
 

@@ -5,6 +5,7 @@
 [![Build Status](https://secure.travis-ci.org/mojombo/jekyll.png)](https://travis-ci.org/mojombo/jekyll)
 [![Code Climate](https://codeclimate.com/github/mojombo/jekyll.png)](https://codeclimate.com/github/mojombo/jekyll)
 [![Dependency Status](https://gemnasium.com/mojombo/jekyll.png)](https://gemnasium.com/mojombo/jekyll)
+[![Coverage Status](https://coveralls.io/repos/mojombo/jekyll/badge.png)](https://coveralls.io/r/mojombo/jekyll)
 
 By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!
 

@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.2.0'
+  s.version           = '1.2.1'
   s.license           = 'MIT'
-  s.date              = '2013-09-06'
+  s.date              = '2013-09-14'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -23,28 +23,29 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
-  s.add_runtime_dependency('liquid', "~> 2.5.1")
+  s.add_runtime_dependency('liquid', "~> 2.5.2")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('directory_watcher', "~> 1.4.1")
-  s.add_runtime_dependency('maruku', "~> 0.5")
+  s.add_runtime_dependency('maruku', "~> 0.6.0")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('commander', "~> 4.1.3")
-  s.add_runtime_dependency('safe_yaml', "~> 0.7.0")
+  s.add_runtime_dependency('safe_yaml', "~> 0.9.7")
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 2.3.0")
 
-  s.add_development_dependency('rake', "~> 10.0.3")
+  s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 3.3.2")
-  s.add_development_dependency('rr', "~> 1.0.0")
-  s.add_development_dependency('cucumber', "~> 1.2.1", '!= 1.2.4')
+  s.add_development_dependency('rr', "~> 1.1")
+  s.add_development_dependency('cucumber', "~> 1.3")
   s.add_development_dependency('RedCloth', "~> 4.2")
-  s.add_development_dependency('kramdown', "~> 1.0.2")
+  s.add_development_dependency('kramdown', "~> 1.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
-  s.add_development_dependency('launchy', "~> 2.1.2")
+  s.add_development_dependency('launchy', "~> 2.3")
   s.add_development_dependency('simplecov', "~> 0.7")
   s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
+  s.add_development_dependency('coveralls', "~> 0.7.0")
   s.add_development_dependency('activesupport', '~> 3.2.13')
 
   # = MANIFEST =
@@ -58,6 +59,7 @@ Gem::Specification.new do |s|
     bin/jekyll
     cucumber.yml
     features/create_sites.feature
+    features/data.feature
     features/drafts.feature
     features/embed_filters.feature
     features/include_tag.feature
@@ -149,6 +151,7 @@ Gem::Specification.new do |s|
     site/_posts/2013-07-25-jekyll-1-0-4-released.markdown
     site/_posts/2013-07-25-jekyll-1-1-2-released.markdown
     site/_posts/2013-09-06-jekyll-1-2-0-released.markdown
+    site/_posts/2013-09-14-jekyll-1-2-1-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
@@ -201,6 +204,7 @@ Gem::Specification.new do |s|
     test/helper.rb
     test/source/+/foo.md
     test/source/.htaccess
+    test/source/_data/members.yaml
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
     test/source/_layouts/default.html

@@ -38,7 +38,45 @@ In general, plugins you make will fall into one of three categories:
 ## Generators
 
 You can create a generator when you need Jekyll to create additional content
-based on your own rules. For example, a generator might look like this:
+based on your own rules.
+
+A generator is a subclass of `Jekyll::Generator` that defines a `generate`
+method, which receives an instance of
+[`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb).
+
+Generation is triggered for its side-effects, the return value of `generate` is
+ignored. Jekyll does not assume any particular side-effect to happen, it just
+runs the method.
+
+Generators run after Jekyll has made an inventory of the existing content, and
+before the site is generated. Pages with YAML front-matters are stored as
+instances of
+[`Jekyll::Page`]({{ site.repository }}/blob/master/lib/jekyll/page.rb)
+and are available via `site.pages`. Static files become instances of
+[`Jekyll::StaticFile`]({{ site.repository }}/blob/master/lib/jekyll/static_file.rb)
+and are available via `site.static_files`. See
+[`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb)
+for more details.
+
+For instance, a generator can inject values computed at build time for template
+variables. In the following example the template `reading.html` has two
+variables `ongoing` and `done` that we fill in the generator:
+
+{% highlight ruby %}
+module Reading
+  class Generator < Jekyll::Generator
+    def generate(site)
+      ongoing, done = Book.all.partition(&:ongoing?)
+  
+      reading = site.pages.detect {|page| page.name == 'reading.html'}
+      reading.data['ongoing'] = ongoing
+      reading.data['done'] = done
+    end
+  end
+end
+{% endhighlight %}
+
+This is a more complex generator that generates new pages:
 
 {% highlight ruby %}
 module Jekyll
@@ -95,7 +133,7 @@ Generators are only required to implement one method:
         <p><code>generate</code></p>
       </td>
       <td>
-        <p>String output of the content being generated.</p>
+        <p>Generates content as a side-effect.</p>
       </td>
     </tr>
   </tbody>
@@ -430,6 +468,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll Image Tag](https://github.com/robwierzbowski/jekyll-image-tag): Better images for Jekyll. Save image presets, generate resized images, and add classes, alt text, and other attributes.
 - [Ditaa Tag](https://github.com/matze/jekyll-ditaa) by [matze](https://github.com/matze): Renders ASCII diagram art into PNG images and inserts a figure tag.
 - [Good Include](https://github.com/penibelst/jekyll-good-include) by [Anatol Broder](http://penibelst.de/): Strips newlines and whitespaces from the end of include files before processing.
+- [Jekyll Suggested Tweet](https://github.com/davidensinger/jekyll-suggested-tweet) by [David Ensinger](https://github.com/davidensinger/): A Liquid tag for Jekyll that allows for the embedding of suggested tweets via Twitter’s Web Intents API.
 
 #### Collections
 

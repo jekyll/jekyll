@@ -20,6 +20,7 @@ require 'fileutils'
 require 'time'
 require 'safe_yaml'
 require 'English'
+require 'pathname'
 
 # 3rd party
 require 'liquid'
@@ -61,7 +62,7 @@ require_all 'jekyll/tags'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.2.0'
+  VERSION = '1.2.1'
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.

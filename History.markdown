@@ -1,23 +1,78 @@
 ## HEAD
 
 ### Major Enhancements
+  * Add support for adding data as YAML files under a site's `_data`
+    directory (#1003)
+  * Allow variables to be used with `include` tags (#1495)
 
 ### Minor Enhancements
+  * Decrease the specificity in the site template CSS (#1574)
+  * Add `encoding` configuration option (#1449)
+  * Provide better error handling for Jekyll's custom Liquid tags
+    (#1514)
+  * If an included file causes a Liquid error, add the path to the
+    include file that caused the error to the error message (#1596)
+  * If a layout causes a Liquid error, change the error message so that
+    we know it comes from the layout (#1601)
+  * Update Kramdown dependency to `~> 1.2` (#1610)
+  * Update `safe_yaml` dependency to `~> 0.9.7` (#1602)
+  * Allow layouts to be in subfolders like includes (#1622)
+
+### Bug Fixes
+  * Fix up matching against source and destination when the two
+    locations are similar (#1556)
+  * Fix the missing `pathname` require in certain cases (#1255)
+  * Use `+` instead of `Array#concat` when building `Post` attribute list (#1571)
+  * Print server address when launching a server (#1586)
+  * Downgrade to Maruku `~> 0.6.0` in order to avoid changes in rendering (#1598)
+  * Fix error with failing include tag when variable was file name (#1613)
+  * Downcase lexers before passing them to pygments (#1615)
+
+### Development Fixes
+  * Add coverage reporting with Coveralls (#1539)
+  * Refactor the Liquid `include` tag (#1490)
+  * Update launchy dependency to `~> 2.3` (#1608)
+  * Update rr dependency to `~> 1.1` (#1604)
+  * Update cucumber dependency to `~> 1.3` (#1607)
+  * Update coveralls dependency to `~> 0.7.0` (#1606)
+  * Update rake dependency to `~> 10.1` (#1603)
+  * Clean up `site.rb` comments to be more concise/uniform (#1616)
+
+### Site Enhancements
+  * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
+  * Add `jekyll-suggested-tweet` to list of third-party plugins (#1555)
+  * Link to Liquid's docs for tags and filters (#1553)
+  * Add note about installing Xcode on the Mac in the Installation docs (#1561)
+  * Simplify/generalize pagination docs (#1577)
+  * Add documentation for the new data sources feature (#1503)
+  * Add more information on how to create generators (#1590, #1592)
+  * Improve the instructions for mimicking GitHub Flavored Markdown
+    (#1614)
+  * Add `jekyll-import` warning note of missing dependencies (#1626)
+
+## 1.2.1 / 2013-09-14
+
+### Minor Enhancements
+  * Print better messages for detached server. Mute output on detach. (#1518)
   * Disable reverse lookup when running `jekyll serve` (#1363)
   * Upgrade RedCarpet dependency to `~> 2.3.0` (#1515)
+  * Upgrade to Liquid `>= 2.5.2, < 2.6` (#1536)
 
 ### Bug Fixes
   * Fix file discrepancy in gemspec (#1522)
+  * Force rendering of Include tag (#1525)
 
 ### Development Fixes
   * Add a rake task to generate a new release post (#1404)
+  * Mute LSI output in tests (#1531)
+  * Update contributor documentation (#1537)
 
 ### Site Enhancements
   * Fix a couple of validation errors on the site (#1511)
   * Make navigation menus reusable (#1507)
   * Fix link to History page from Release v1.2.0 notes post.
   * Fix markup in History file for command line options (#1512)
-
+  * Expand 1.2 release post title to 1.2.0 (#1516)
 
 ## 1.2.0 / 2013-09-06
 
