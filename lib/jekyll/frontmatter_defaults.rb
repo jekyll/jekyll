@@ -55,6 +55,7 @@ module Jekyll
       def applies_path?(scope, path)
         return true if scope['path'].empty?
 
+        path = path.gsub(/\A\//, '').gsub(/([^\/])\z/, '\1/') # add / remove slashes from path
         scope_path = Pathname.new(scope['path'])
         Pathname.new(path).ascend do |path|
           if path == scope_path
