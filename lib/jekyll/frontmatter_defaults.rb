@@ -105,7 +105,7 @@ module Jekyll
           true
         else
           !old_scope.has_key? 'type'
-	end
+        end
       end
 
       # Collects a list of sets that match the given path and type
