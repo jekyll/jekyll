@@ -45,7 +45,7 @@ Feature: frontmatter defaults
     And I have an "index.html" page with title "overview" that contains "Overview for {{page.name}}"
     And I have an "special/index.html" page with title "section overview" that contains "Overview for {{page.name}}"
 
-    And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {layout: "root", name: "the webpage"}}, {scope: {path: "special"}, values: {layout: "subfolder", name: "the special section"}}]"
+    And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "subfolder", name: "the special section"}}, {scope: {path: ""}, values: {layout: "root", name: "the webpage"}}]"
 
     When I run jekyll
     Then the _site directory should exist
@@ -60,7 +60,7 @@ Feature: frontmatter defaults
       | title          | date       | content |
       | this is a post | 2013-10-14 | blabla  |
     And I have an "index.html" page that contains "interesting stuff"
-    And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {permalink: "/perma.html"}}, {scope: {path: "", type: "post"}, values: {permalink: "/post.html"}}, {scope: {path: "", type: "page"}, values: {permalink: "/page.html"}}]"
+    And I have a configuration file with "defaults" set to "[{scope: {path: "", type: "post"}, values: {permalink: "/post.html"}}, {scope: {path: "", type: "page"}, values: {permalink: "/page.html"}}, {scope: {path: ""}, values: {permalink: "/perma.html"}}]"
     When I run jekyll
     Then I should see "blabla" in "_site/post.html"
     And I should see "interesting stuff" in "_site/page.html"
