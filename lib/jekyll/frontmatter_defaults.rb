@@ -19,8 +19,13 @@ module Jekyll
       # Returns the default value or nil if none was found
       def find(path, type, setting)
         value = nil
+        old_scope = nil
+
         matching_sets(path, type).each do |set|
-          value = set['values'][setting] if set['values'].has_key?(setting)
+          if set['values'].has_key?(setting) && has_precedence?(old_scope, set['scope'])
+            value = set['values'][setting]
+            old_scope = set['scope']
+          end
         end
         value
       end
@@ -33,8 +38,14 @@ module Jekyll
       # Returns a hash with all default values (an empty hash if there are none)
       def all(path, type)
         defaults = {}
+        old_scope = nil
         matching_sets(path, type).each do |set|
-          defaults.merge! set['values']
+          if has_precedence?(old_scope, set['scope'])
+            defaults.merge! set['values']
+            old_scope = set['scope']
+          else
+            defaults = set['values'].merge(defaults)
+          end
         end
         defaults
       end
@@ -55,9 +66,8 @@ module Jekyll
       def applies_path?(scope, path)
         return true if scope['path'].empty?
 
-        path = path.gsub(/\A\//, '').gsub(/([^\/])\z/, '\1/') # add / remove slashes from path
         scope_path = Pathname.new(scope['path'])
-        Pathname.new(path).ascend do |path|
+        Pathname.new(sanitize_path(path)).ascend do |path|
           if path == scope_path
             return true
           end
@@ -75,6 +85,27 @@ module Jekyll
       # Returns true if the set is valid and can be used in this class
       def valid?(set)
         set.is_a?(Hash) && set['scope'].is_a?(Hash) && set['scope']['path'].is_a?(String) && set['values'].is_a?(Hash)
+      end
+
+      # Determines if a new scope has precedence over an old one
+      #
+      # old_scope - the old scope hash, or nil if there's none
+      # new_scope - the new scope hash
+      #
+      # Returns true if the new scope has precedence over the older
+      def has_precedence?(old_scope, new_scope)
+        return true if old_scope.nil?
+
+        new_path = sanitize_path(new_scope['path'])
+        old_path = sanitize_path(old_scope['path'])
+
+        if new_path.length != old_path.length
+          new_path.length >= old_path.length
+        elsif new_scope.has_key? 'type'
+          true
+        else
+          !old_scope.has_key? 'type'
+	end
       end
 
       # Collects a list of sets that match the given path and type
@@ -101,6 +132,15 @@ module Jekyll
             Jekyll.logger.warn "Default:", "An invalid default set was found"
           end
           valid?(set)
+        end
+      end
+
+      # Sanitizes the given path by removing a leading and addding a trailing slash
+      def sanitize_path(path)
+        if path.nil? || path.empty?
+          ""
+        else
+          path.gsub(/\A\//, '').gsub(/([^\/])\z/, '\1/')
         end
       end
     end
