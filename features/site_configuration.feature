@@ -11,6 +11,17 @@ Feature: Site configuration
     Then the _site directory should exist
     And I should see "Changing source directory" in "_site/index.html"
 
+  Scenario: Have two source directories
+    Given I have a blank site in "docs"
+    And I have a dist directory
+    And I have a "dist/something.js" file that contains "(function(){ console.log('HEY LOOK AT ME') })"
+    And I have an "docs/index.html" file that contains "Changing source directory"
+    And I have a configuration file with "source" set to "['docs', 'dist']"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Changing source directory" in "_site/index.html"
+    And I should see "(function(){ console.log('HEY LOOK AT ME') })" in "_site/something.js"
+
   Scenario: Change destination directory
     Given I have an "index.html" file that contains "Changing destination directory"
     And I have a configuration file with "destination" set to "_mysite"
