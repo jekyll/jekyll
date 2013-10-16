@@ -49,6 +49,7 @@
   * Improve the instructions for mimicking GitHub Flavored Markdown
     (#1614)
   * Add `jekyll-import` warning note of missing dependencies (#1626)
+  * Fix grammar in the Usage section (#1635)
 
 ## 1.2.1 / 2013-09-14
 
