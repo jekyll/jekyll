@@ -38,6 +38,7 @@
   * Update rake dependency to `~> 10.1` (#1603)
   * Clean up `site.rb` comments to be more concise/uniform (#1616)
   * Use the master branch for the build badge in the readme (#1636)
+  * Refactor Site#render (#1638)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
