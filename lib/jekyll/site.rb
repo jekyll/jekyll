@@ -231,13 +231,14 @@ module Jekyll
     #
     # Returns nothing.
     def render
+      relative_permalinks_deprecation_method
+
       payload = site_payload
       self.posts.each do |post|
         post.render(self.layouts, payload)
       end
 
       self.pages.each do |page|
-        relative_permalinks_deprecation_method if page.uses_relative_permalinks
         page.render(self.layouts, payload)
       end
 
@@ -389,7 +390,7 @@ module Jekyll
     end
 
     def relative_permalinks_deprecation_method
-      if config['relative_permalinks'] && !@deprecated_relative_permalinks
+      if config['relative_permalinks'] && self.pages.any? { |page| page.uses_relative_permalinks }
         $stderr.puts # Places newline after "Generating..."
         Jekyll.logger.warn "Deprecation:", "Starting in 1.1, permalinks for pages" +
                                             " in subfolders must be relative to the" +
@@ -397,7 +398,6 @@ module Jekyll
                                             " directory. Check http://jekyllrb.com/docs/upgrading/"+
                                             " for more info."
         $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
-        @deprecated_relative_permalinks = true
       end
     end
 
