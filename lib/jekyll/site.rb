@@ -234,12 +234,8 @@ module Jekyll
       relative_permalinks_deprecation_method
 
       payload = site_payload
-      self.posts.each do |post|
-        post.render(self.layouts, payload)
-      end
-
-      self.pages.each do |page|
-        page.render(self.layouts, payload)
+      [self.posts, self.pages].flatten.each do |page_or_post|
+        page_or_post.render(self.layouts, payload)
       end
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
