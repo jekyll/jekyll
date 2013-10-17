@@ -386,7 +386,7 @@ module Jekyll
     end
 
     def relative_permalinks_deprecation_method
-      if config['relative_permalinks'] && self.pages.any? { |page| page.uses_relative_permalinks }
+      if config['relative_permalinks'] && has_relative_page?
         $stderr.puts # Places newline after "Generating..."
         Jekyll.logger.warn "Deprecation:", "Starting in 1.1, permalinks for pages" +
                                             " in subfolders must be relative to the" +
@@ -406,6 +406,10 @@ module Jekyll
     end
 
     private
+
+    def has_relative_page?
+      self.pages.any? { |page| page.uses_relative_permalinks }
+    end
 
     def has_yaml_header?(file)
       "---" == File.open(file) { |fd| fd.read(3) }
