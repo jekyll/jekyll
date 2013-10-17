@@ -40,6 +40,7 @@
   * Use the master branch for the build badge in the readme (#1636)
   * Refactor Site#render (#1638)
   * Remove duplication in command line options (#1637)
+  * Add tests for all the coderay options (#1543)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
