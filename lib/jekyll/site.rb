@@ -3,7 +3,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :locale_active
 
     attr_accessor :converters, :generators
 
@@ -103,9 +103,11 @@ module Jekyll
       else
         Array(config['plugins']).map { |d| File.expand_path(d) }
       end
-      
+
       # Set locale
-      R18n.set(config['locale'], config['translation_path'])
+      locale_path = config['translation_path']
+      R18n.set(config['locale'], locale_path)
+      @locale_active = File.exists? locale_path
     end
 
     # Read Site data from disk and load it into internal data structures.
