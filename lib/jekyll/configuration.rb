@@ -35,6 +35,9 @@ module Jekyll
       'exclude'       => [],
       'paginate_path' => '/page:num',
 
+      'locale'           => 'en',
+      'translation_path' => File.join(Dir.pwd, '_locale'),
+
       'markdown_ext'  => 'markdown,mkd,mkdn,md',
       'textile_ext'   => 'textile',
 

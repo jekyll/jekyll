@@ -1,7 +1,10 @@
 require 'uri'
+require 'r18n-core'
 
 module Jekyll
   module Filters
+    include R18n::Helpers
+
     # Convert a Textile string into HTML output.
     #
     # input - The Textile String to convert.
@@ -26,20 +29,36 @@ module Jekyll
 
     # Format a date in short format e.g. "27 Jan 2011".
     #
+    # To change format for the current locale, add
+    # a _locale/<locale>.yml and specify a date_format.
+    #
     # date - the Time to format.
     #
     # Returns the formatting String.
     def date_to_string(date)
-      time(date).strftime("%d %b %Y")
+      site = @context.registers[:site]
+      if site.locale_active
+        l Date.parse(date.to_s), (t.date_format | nil)
+      else
+        time(date).strftime("%d %b %Y")
+      end
     end
 
     # Format a date in long format e.g. "27 January 2011".
+    #
+    # To change format for the current locale, add
+    # a _locale/<locale>.yml and specify a long_date_format.
     #
     # date - The Time to format.
     #
     # Returns the formatted String.
     def date_to_long_string(date)
-      time(date).strftime("%d %B %Y")
+      site = @context.registers[:site]
+      if site.locale_active
+        l Date.parse(date.to_s), (t.long_date_format | :full)
+      else
+        time(date).strftime("%d %B %Y")
+      end
     end
 
     # Format a date for use in XML.
@@ -99,7 +118,7 @@ module Jekyll
     def cgi_escape(input)
       CGI::escape(input)
     end
-    
+
     # URI escape a string.
     #
     # input - The String to escape.
