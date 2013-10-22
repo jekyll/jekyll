@@ -173,6 +173,17 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class='name'><strong>Data To JSON</strong></p>
+        <p>Convert Hash or Array to JSON.</p>
+      </td>
+      <td class='align-center'>
+        <p>
+         <code class='filter'>{% raw %}{{ site.data.projects | jsonify }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
