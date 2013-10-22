@@ -38,7 +38,6 @@ module Jekyll
       'locale'           => 'en',
       'translation_path' => File.join(Dir.pwd, '_locale'),
 
-
       'markdown_ext'  => 'markdown,mkd,mkdn,md',
       'textile_ext'   => 'textile',
 
