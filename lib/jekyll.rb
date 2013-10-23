@@ -58,6 +58,9 @@ require_all 'jekyll/converters/markdown'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
+# require plugins from Gemfile's :jekyll_plugins group
+require 'jekyll/bundler'
+
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
