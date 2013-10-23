@@ -103,11 +103,6 @@ module Jekyll
       else
         Array(config['plugins']).map { |d| File.expand_path(d) }
       end
-
-      # Set locale
-      locale_path = config['translation_path']
-      R18n.set(config['locale'], locale_path)
-      @locale_active = File.exists? locale_path
     end
 
     # Read Site data from disk and load it into internal data structures.
@@ -117,6 +112,7 @@ module Jekyll
       self.read_layouts
       self.read_directories
       self.read_data(config['data_source'])
+      self.read_locale
     end
 
     # Read all the files in <source>/<layouts> and create a new Layout object
@@ -221,6 +217,15 @@ module Jekyll
         key = sanitize_filename(File.basename(entry, '.*'))
         self.data[key] = YAML.safe_load_file(path)
       end
+    end
+
+    # Read the locale from the translation path and set the r18n environment
+    #
+    # Returns nothing
+    def read_locale
+      locale_path = config['translation_path']
+      @locale_active = File.exists? locale_path
+      R18n.set(config['locale'], locale_path)
     end
 
     # Run each of the Generators.
