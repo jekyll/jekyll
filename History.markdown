@@ -4,6 +4,7 @@
   * Add support for adding data as YAML files under a site's `_data`
     directory (#1003)
   * Allow variables to be used with `include` tags (#1495)
+  * Allow using gems for plugin management (#1557)
 
 ### Minor Enhancements
   * Decrease the specificity in the site template CSS (#1574)
