@@ -42,7 +42,7 @@ rebuild each time a file changes, just add the `--watch` flag at the end.
 ### Absolute Permalinks
 
 In Jekyll v1.0, we introduced absolute permalinks for pages in subdirectories.
-Until v1.1, it is **opt-in**. Starting with v1.1, however, absolute permalinks
+Until v2.0, it is **opt-in**. Starting with v2.0, however, absolute permalinks
 will become **opt-out**, meaning Jekyll will default to using absolute permalinks
 instead of relative permalinks.
 
@@ -50,9 +50,9 @@ instead of relative permalinks.
 * To continue using relative permalinks, set `relative_permalinks: true` in your configuration file.
 
 <div class="note warning" id="absolute-permalinks-warning">
-  <h5 markdown="1">Absolute permalinks will be default in v1.1 and on</h5>
+  <h5 markdown="1">Absolute permalinks will be default in v2.0 and on</h5>
   <p markdown="1">
-    Starting with Jekyll v1.1.0, `relative_permalinks` will default to `false`,
+    Starting with Jekyll v2.0, `relative_permalinks` will default to `false`,
     meaning all pages will be built using the absolute permalink behaviour.
     The switch will still exist until v2.0.
   </p>
