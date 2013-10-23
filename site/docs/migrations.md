@@ -122,6 +122,12 @@ for you, depending upon your Drupal version:
 - [Drupal 6](https://github.com/jekyll/jekyll-import/blob/v0.1.0.beta1/lib/jekyll/jekyll-import/drupal6.rb)
 - [Drupal 7](https://github.com/jekyll/jekyll-import/blob/v0.1.0.beta1/lib/jekyll/jekyll-import/drupal7.rb)
 
+### Further Drupal migration alternatives
+
+- [drupal-php-to-jekyll-exporter](https://gist.github.com/jebaird/5600267) is a simple 
+  script written in php that can pull blog and page content types(with tweaking its easy to add other types) with tags. Might be
+  useful for windows 
+
 {% highlight bash %}
 $ ruby -rubygems -e 'require "jekyll/jekyll-import/drupal6";
     JekyllImport::Drupal6.process("dbname", "user", "pass")'
