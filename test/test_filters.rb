@@ -98,5 +98,16 @@ class TestFilters < Test::Unit::TestCase
     should "escape space as %20" do
       assert_equal "my%20things", @filter.uri_escape("my things")
     end
+
+    context "jsonify filter" do
+      should "convert hash to json" do
+        assert_equal "{\"age\":18}", @filter.jsonify({:age => 18})
+      end
+
+      should "convert array to json" do
+        assert_equal "[1,2]", @filter.jsonify([1, 2])
+        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => 'Jack'}, {:name => 'Smith'}])
+      end
+    end
   end
 end

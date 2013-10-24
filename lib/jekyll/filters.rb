@@ -1,4 +1,5 @@
 require 'uri'
+require 'json'
 
 module Jekyll
   module Filters
@@ -146,6 +147,15 @@ module Jekyll
       else
         "#{array[0...-1].join(', ')}, #{connector} #{array[-1]}"
       end
+    end
+
+    # Convert the input into json string
+    #
+    # input - The Array or Hash to be converted
+    #
+    # Returns the converted json string
+    def jsonify(input)
+      input.to_json
     end
 
     private
