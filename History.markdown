@@ -43,6 +43,7 @@
   * Refactor Site#render (#1638)
   * Remove duplication in command line options (#1637)
   * Add tests for all the coderay options (#1543)
+  * Improve some of the cucumber test code (#1493)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
