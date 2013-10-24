@@ -19,6 +19,7 @@
   * Update `safe_yaml` dependency to `~> 0.9.7` (#1602)
   * Allow layouts to be in subfolders like includes (#1622)
   * Switch to listen for site watching while serving (#1589)
+  * Add a `json` liquid filter to be used in sites (#1651)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
