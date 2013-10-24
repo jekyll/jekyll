@@ -122,15 +122,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_layouts
-      base = File.join(self.source, self.config['layouts'])
-      return unless File.exists?(base)
-      entries = []
-      Dir.chdir(base) { entries = filter_entries(Dir['**/*.*']) }
-
-      entries.each do |f|
-        name = f.split(".")[0..-2].join(".")
-        self.layouts[name] = Layout.new(self, base, f)
-      end
+      self.layouts = LayoutReader.new(self).collect
     end
 
     # Recursively traverse directories to find posts, pages and static files
@@ -325,14 +317,7 @@ module Jekyll
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries)
-      entries.reject do |e|
-        unless self.include.glob_include?(e)
-          ['.', '_', '#'].include?(e[0..0]) ||
-          e[-1..-1] == '~' ||
-          self.exclude.glob_include?(e) ||
-          (File.symlink?(e) && self.safe)
-        end
-      end
+      EntryFilter.new(self).filter(entries)
     end
 
     # Get the implementation class for the given Converter.
