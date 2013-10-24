@@ -31,27 +31,34 @@ module Jekyll
       #
       # Returns nothing.
       def self.watch(site, options)
-        require 'directory_watcher'
+        require 'listen'
 
         source = options['source']
         destination = options['destination']
 
+        begin
+          ignored = Regexp.new(Regexp.escape(Pathname.new(destination)
+                                 .relative_path_from(Pathname.new(source))
+                                 .to_path))
+        rescue ArgumentError
+          # Destination is outside the source, no need to ignore it.
+          ignored = nil
+        end
+
         Jekyll.logger.info "Auto-regeneration:", "enabled"
 
-        dw = DirectoryWatcher.new(source, :glob => self.globs(source, destination), :pre_load => true)
-        dw.interval = 1
-
-        dw.add_observer do |*args|
+        listener = Listen.to(source, ignore: ignored) do |modified, added, removed|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-          print Jekyll.logger.formatted_topic("Regenerating:") + "#{args.size} files at #{t} "
+          n = modified.length + added.length + removed.length
+          print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
           self.process_site(site)
           puts  "...done."
         end
-
-        dw.start
+        listener.start
 
         unless options['serving']
           trap("INT") do
+            listener.stop
             puts "     Halting auto-regeneration."
             exit 0
           end
