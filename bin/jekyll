@@ -40,7 +40,7 @@ def add_build_options(c)
   c.option '-w', '--watch', 'Watch for changes and rebuild'
   c.option '--lsi', 'Use LSI for improved related posts'
   c.option '-D', '--drafts', 'Render posts in the _drafts folder'
-  c.option '-v', '--verbose', 'Print verbose output.'
+  c.option '-V', '--verbose', 'Print verbose output.'
 end
 
 command :default do |c|
