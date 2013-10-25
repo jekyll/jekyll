@@ -3,8 +3,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :whitelist
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
 
     attr_accessor :converters, :generators
 
