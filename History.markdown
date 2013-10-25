@@ -30,6 +30,8 @@
   * Downgrade to Maruku `~> 0.6.0` in order to avoid changes in rendering (#1598)
   * Fix error with failing include tag when variable was file name (#1613)
   * Downcase lexers before passing them to pygments (#1615)
+  * Capitalize the short verbose switch because it conflicts with the
+    built-in Commander switch (#1660)
 
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
