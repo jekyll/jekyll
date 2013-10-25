@@ -41,6 +41,7 @@ def add_build_options(c)
   c.option '--lsi', 'Use LSI for improved related posts'
   c.option '-D', '--drafts', 'Render posts in the _drafts folder'
   c.option '-V', '--verbose', 'Print verbose output.'
+  c.option '-W', '--whitelist', 'Gem plugin whitelist'
 end
 
 command :default do |c|

@@ -3,7 +3,8 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
+                  :gems, :whitelist
 
     attr_accessor :converters, :generators
 
@@ -98,14 +99,18 @@ module Jekyll
 
     def require_gems
       self.gems.each do |gem|
-        if gem_whitelist.include?(gem) || !self.safe
+        if whitelist.include?(gem) || !self.safe
           require gem
         end
       end
     end
 
-    def gem_whitelist
-      @gem_whitelist ||= []
+    def whitelist
+      @whitelist ||= begin
+        YAML.safe_load_file(self.config['whitelist']) || []
+      rescue
+        []
+      end
     end
 
     # Internal: Setup the plugin search path
