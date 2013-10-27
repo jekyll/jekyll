@@ -63,6 +63,8 @@
   * Fix grammar in the Usage section (#1635)
   * Add documentation for the use of gems as plugins (#1656)
   * Document the existence of a few additional plugins (#1405)
+  * Document that the `date_to_string` always returns a two digit date
+    (#1663)
 
 ## 1.2.1 / 2013-09-14
 
