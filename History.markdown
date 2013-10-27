@@ -62,6 +62,7 @@
   * Add `jekyll-import` warning note of missing dependencies (#1626)
   * Fix grammar in the Usage section (#1635)
   * Add documentation for the use of gems as plugins (#1656)
+  * Document the existence of a few additional plugins (#1405)
 
 ## 1.2.1 / 2013-09-14
 
