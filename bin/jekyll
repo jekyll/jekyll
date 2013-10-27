@@ -149,8 +149,7 @@ command :import do |c|
       require 'jekyll-import'
     rescue LoadError
       msg  = "You must install the 'jekyll-import' gem before continuing.\n"
-      msg += "* Do this by running `gem install jekyll-import`.\n"
-      msg += "* Or if you need root privileges, run `sudo gem install jekyll-import`."
+      msg += "* Please see the documentation at http://jekyllrb.com/docs/migrations/ for instructions.\n"
       abort msg
     end
     Jekyll::Commands::Import.process(args.first, options)
