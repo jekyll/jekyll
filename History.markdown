@@ -32,6 +32,7 @@
   * Downcase lexers before passing them to pygments (#1615)
   * Capitalize the short verbose switch because it conflicts with the
     built-in Commander switch (#1660)
+  * Fix compatibility with 1.8.x (#1665)
 
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
