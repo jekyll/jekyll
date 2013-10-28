@@ -37,9 +37,8 @@ module Jekyll
         destination = options['destination']
 
         begin
-          ignored = Regexp.new(Regexp.escape(Pathname.new(destination)
-                                 .relative_path_from(Pathname.new(source))
-                                 .to_path))
+          dest = Pathname.new(destination).relative_path_from(Pathname.new(source)).to_path
+          ignored = Regexp.new(Regexp.escape(dest))
         rescue ArgumentError
           # Destination is outside the source, no need to ignore it.
           ignored = nil
@@ -47,7 +46,7 @@ module Jekyll
 
         Jekyll.logger.info "Auto-regeneration:", "enabled"
 
-        listener = Listen.to(source, ignore: ignored) do |modified, added, removed|
+        listener = Listen.to(source, :ignore => ignored) do |modified, added, removed|
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           n = modified.length + added.length + removed.length
           print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
