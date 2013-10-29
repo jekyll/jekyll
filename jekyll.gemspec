@@ -154,6 +154,7 @@ Gem::Specification.new do |s|
     site/_posts/2013-07-25-jekyll-1-1-2-released.markdown
     site/_posts/2013-09-06-jekyll-1-2-0-released.markdown
     site/_posts/2013-09-14-jekyll-1-2-1-released.markdown
+    site/_posts/2013-10-28-jekyll-1-3-0-rc1-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
