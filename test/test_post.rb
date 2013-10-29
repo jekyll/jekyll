@@ -284,7 +284,7 @@ class TestPost < Test::Unit::TestCase
         end
 
         should "return rendered HTML" do
-          assert_equal "<p>First paragraph with <a href='http://www.jekyllrb.com/'>link ref</a>.</p>",
+          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>",
                        @post.excerpt
         end
 

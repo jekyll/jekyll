@@ -66,7 +66,7 @@ class TestExcerpt < Test::Unit::TestCase
         end
 
         should "be the first paragraph of the page" do
-          assert_equal "<p>First paragraph with <a href='http://www.jekyllrb.com/'>link ref</a>.</p>", @extracted_excerpt.content
+          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>", @extracted_excerpt.content
         end
 
         should "link properly" do
