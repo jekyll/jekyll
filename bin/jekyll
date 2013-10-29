@@ -143,6 +143,7 @@ command :import do |c|
   c.option '--user STRING', 'Username to use when migrating'
   c.option '--pass STRING', 'Password to use when migrating'
   c.option '--host STRING', 'Host address to use when migrating'
+  c.option '--table_prefix STRING', 'Database table prefix to use when migrating'
 
   c.action do |args, options|
     begin
