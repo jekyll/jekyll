@@ -25,9 +25,27 @@ having to modify the Jekyll source itself.
 
 ## Installing a plugin
 
-In your site source root, make a `_plugins` directory. Place your plugins here.
-Any file ending in `*.rb` inside this directory will be loaded before Jekyll
-generates your site.
+You have 2 options for installing plugins:
+
+1. In your site source root, make a `_plugins` directory. Place your plugins here.
+    Any file ending in `*.rb` inside this directory will be loaded before Jekyll
+    generates your site.
+2. In your `_config.yml` file, add a new array with the key `gems` and the values
+    of the gem names of the plugins you'd like to use. An example:
+
+        gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
+        # This will require each of these gems automatically.
+
+<div class="note info">
+  <h5>
+    <code>_plugins</code> and <code>gems</code>
+    can be used simultaneously
+  </h5>
+  <p>
+    You may use both of the aforementioned plugin options simultaneously in the
+    same site if you so choose. Use of one does not restrict the use of the other
+  </p>
+</div>
 
 In general, plugins you make will fall into one of three categories:
 
@@ -38,7 +56,45 @@ In general, plugins you make will fall into one of three categories:
 ## Generators
 
 You can create a generator when you need Jekyll to create additional content
-based on your own rules. For example, a generator might look like this:
+based on your own rules.
+
+A generator is a subclass of `Jekyll::Generator` that defines a `generate`
+method, which receives an instance of
+[`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb).
+
+Generation is triggered for its side-effects, the return value of `generate` is
+ignored. Jekyll does not assume any particular side-effect to happen, it just
+runs the method.
+
+Generators run after Jekyll has made an inventory of the existing content, and
+before the site is generated. Pages with YAML front-matters are stored as
+instances of
+[`Jekyll::Page`]({{ site.repository }}/blob/master/lib/jekyll/page.rb)
+and are available via `site.pages`. Static files become instances of
+[`Jekyll::StaticFile`]({{ site.repository }}/blob/master/lib/jekyll/static_file.rb)
+and are available via `site.static_files`. See
+[`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb)
+for more details.
+
+For instance, a generator can inject values computed at build time for template
+variables. In the following example the template `reading.html` has two
+variables `ongoing` and `done` that we fill in the generator:
+
+{% highlight ruby %}
+module Reading
+  class Generator < Jekyll::Generator
+    def generate(site)
+      ongoing, done = Book.all.partition(&:ongoing?)
+
+      reading = site.pages.detect {|page| page.name == 'reading.html'}
+      reading.data['ongoing'] = ongoing
+      reading.data['done'] = done
+    end
+  end
+end
+{% endhighlight %}
+
+This is a more complex generator that generates new pages:
 
 {% highlight ruby %}
 module Jekyll
@@ -95,7 +151,7 @@ Generators are only required to implement one method:
         <p><code>generate</code></p>
       </td>
       <td>
-        <p>String output of the content being generated.</p>
+        <p>Generates content as a side-effect.</p>
       </td>
     </tr>
   </tbody>
@@ -356,7 +412,7 @@ You can find a few useful plugins at the following locations:
 
 - [ArchiveGenerator by Ilkka Laukkanen](https://gist.github.com/707909): Uses [this archive page](https://gist.github.com/707020) to generate archives.
 - [LESS.js Generator by Andy Fowler](https://gist.github.com/642739): Renders LESS.js files during generation.
-- [Version Reporter by Blake Smith](https://gist.github.com/449491): Creates a version.html file containing the Jekyll version. 
+- [Version Reporter by Blake Smith](https://gist.github.com/449491): Creates a version.html file containing the Jekyll version.
 - [Sitemap.xml Generator by Michael Levin](https://github.com/kinnetica/jekyll-plugins): Generates a sitemap.xml file by traversing all of the available posts and pages.
 - [Full-text search by Pascal Widdershoven](https://github.com/PascalW/jekyll_indextank): Adds full-text search to your Jekyll site with a plugin and a bit of JavaScript.
 - [AliasGenerator by Thomas Mango](https://github.com/tsmango/jekyll_alias_generator): Generates redirect pages for posts when an alias is specified in the YAML Front Matter.
@@ -431,6 +487,9 @@ You can find a few useful plugins at the following locations:
 - [Ditaa Tag](https://github.com/matze/jekyll-ditaa) by [matze](https://github.com/matze): Renders ASCII diagram art into PNG images and inserts a figure tag.
 - [Good Include](https://github.com/penibelst/jekyll-good-include) by [Anatol Broder](http://penibelst.de/): Strips newlines and whitespaces from the end of include files before processing.
 - [Jekyll Suggested Tweet](https://github.com/davidensinger/jekyll-suggested-tweet) by [David Ensinger](https://github.com/davidensinger/): A Liquid tag for Jekyll that allows for the embedding of suggested tweets via Twitter’s Web Intents API.
+- [Jekyll Date Chart](https://github.com/GSI/jekyll_date_chart) by [GSI](https://github.com/GSI): Block that renders date line charts based on textile-formatted tables.
+- [Jekyll Image Encode](https://github.com/GSI/jekyll_image_encode) by [GSI](https://github.com/GSI): Tag that renders base64 codes of images fetched from the web.
+- [Jekyll Quick Man](https://github.com/GSI/jekyll_quick_man) by [GSI](https://github.com/GSI): Tag that renders pretty links to man page sources on the internet.
 
 #### Collections
 

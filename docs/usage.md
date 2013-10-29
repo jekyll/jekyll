@@ -40,7 +40,7 @@ $ jekyll serve --watch
 # => Same as `jekyll serve`, but watch for changes and regenerate automatically.
 {% endhighlight %}
 
-This is just a few of the available [configuration options](../configuration/).
+These are just a few of the available [configuration options](../configuration/).
 Many configuration options can either be specified as flags on the command line,
 or alternatively (and more commonly) they can be specified in a `_config.yml`
 file at the root of the source directory. Jekyll will automatically use the
