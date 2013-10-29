@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
-  s.add_runtime_dependency('liquid', "~> 2.5.2")
+  s.add_runtime_dependency('liquid', "~> 2.5.3")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('listen', "~> 1.3")
   s.add_runtime_dependency('maruku', "~> 0.6.0")
