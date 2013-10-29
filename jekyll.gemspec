@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.2.1'
+  s.version           = '1.3.0.rc'
   s.license           = 'MIT'
-  s.date              = '2013-09-14'
+  s.date              = '2013-10-28'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -160,6 +160,7 @@ Gem::Specification.new do |s|
     site/css/style.css
     site/docs/configuration.md
     site/docs/contributing.md
+    site/docs/datafiles.md
     site/docs/deployment-methods.md
     site/docs/drafts.md
     site/docs/extras.md
@@ -206,10 +207,13 @@ Gem::Specification.new do |s|
     test/helper.rb
     test/source/+/foo.md
     test/source/.htaccess
+    test/source/_data/languages.yml
     test/source/_data/members.yaml
+    test/source/_data/products.yml
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
     test/source/_layouts/default.html
+    test/source/_layouts/post/simple.html
     test/source/_layouts/simple.html
     test/source/_plugins/dummy.rb
     test/source/_posts/2008-02-02-not-published.textile
@@ -255,7 +259,9 @@ Gem::Specification.new do |s|
     test/source/deal.with.dots.html
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
+    test/source/products.yml
     test/source/sitemap.xml
+    test/source/symlink-test/_data
     test/source/symlink-test/symlinked-dir
     test/source/symlink-test/symlinked-file
     test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
