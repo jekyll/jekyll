@@ -32,7 +32,7 @@ code in your Jekyll templates:
 
 In `_data/members.yml`:
 
-{% highlight yaml %}
+```yaml
 - name: Tom Preston-Werner
   github: mojombo
 
@@ -41,15 +41,14 @@ In `_data/members.yml`:
 
 - name: Liu Fengyun
   github: liufengyun
-{% endhighlight %}
+```
 
 This data can be accessed via `site.data.members` (notice that the filename
 determines the variable name).
 
 You can now render the list of members in a template:
 
-{% highlight html %}
-{% raw %}
+```html
 <ul>
 {% for member in site.data.members %}
   <li>
@@ -59,5 +58,4 @@ You can now render the list of members in a template:
   </li>
 {% end %}
 </ul>
-{% endraw %}
-{% endhighlight %}
+```
