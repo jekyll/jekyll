@@ -1,6 +1,8 @@
 ---
 layout: docs
 title: Working with drafts
+prev_section: posts
+next_section: pages
 permalink: /docs/drafts/
 ---
 
