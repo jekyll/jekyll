@@ -441,6 +441,12 @@ aside li.current a:before {
   min-height: 1150px;
 }
 
+@media (max-width: 568px){
+  .docs article {
+    min-height: inherit;
+  }
+}
+
 .docs .content {
   padding: 0;
 }
