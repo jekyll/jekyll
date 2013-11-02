@@ -35,6 +35,8 @@
   * Capitalize the short verbose switch because it conflicts with the
     built-in Commander switch (#1660)
   * Fix compatibility with 1.8.x (#1665)
+  * Fix an error with the new file watching code due to library version
+    incompatibilities (#1687)
 
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
