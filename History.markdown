@@ -70,6 +70,7 @@
   * Document the existence of a few additional plugins (#1405)
   * Document that the `date_to_string` always returns a two digit day (#1663)
   * Fix navigation in the "Working with Drafts" page (#1667)
+  * Fix an error with the data documentation (#1691)
 
 ## 1.2.1 / 2013-09-14
 
