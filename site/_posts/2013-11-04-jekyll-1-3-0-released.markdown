@@ -40,4 +40,4 @@ Here are a few things we think you'll want to know about this release:
 
 For a full run-down, visit our [change log](/docs/history/)!
 
-[arbitrary docs]: /docs/datafiles/
+[arbitrary data]: /docs/datafiles/
