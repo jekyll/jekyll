@@ -1,6 +1,18 @@
 ## HEAD
 
 ### Major Enhancements
+
+### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## v1.3.0 / 2013-11-04
+
+### Major Enhancements
   * Add support for adding data as YAML files under a site's `_data`
     directory (#1003)
   * Allow variables to be used with `include` tags (#1495)
