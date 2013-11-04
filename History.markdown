@@ -10,7 +10,7 @@
 
 ### Site Enhancements
 
-## v1.3.0 / 2013-10-24
+## v1.3.0 / 2013-11-04
 
 ### Major Enhancements
   * Add support for adding data as YAML files under a site's `_data`
