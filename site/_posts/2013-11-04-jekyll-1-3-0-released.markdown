@@ -1,9 +1,9 @@
 ---
 layout: news_item
 title: 'Jekyll 1.3.0 Released'
-date: 2013-10-23 23:15:22 -0500
-author: 
-version: 1.2.1
+date: 2013-11-04 21:46:02 -0600
+author: mattr-
+version: 1.3.0
 categories: [release]
 ---
 
@@ -14,7 +14,7 @@ love.
 
 Here are a few things we think you'll want to know about this release:
 
-* You can add arbitrary data to the site by adding YAML files under a
+* You can add [arbitrary data][] to the site by adding YAML files under a
   site's `_data` directory. This will allow you to avoid
   repetition in your templates and to set site specific options without
   changing `_config.yml`.
@@ -39,3 +39,5 @@ Here are a few things we think you'll want to know about this release:
   variable.
 
 For a full run-down, visit our [change log](/docs/history/)!
+
+[arbitrary docs]: /docs/datafiles/
