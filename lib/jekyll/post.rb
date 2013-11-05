@@ -208,10 +208,10 @@ module Jekyll
         :year        => date.strftime("%Y"),
         :month       => date.strftime("%m"),
         :day         => date.strftime("%d"),
-        :title       => CGI.escape(slug),
+        :title       => URL.escape_path(slug),
         :i_day       => date.strftime("%d").to_i.to_s,
         :i_month     => date.strftime("%m").to_i.to_s,
-        :categories  => (categories || []).map { |c| URI.escape(c.to_s) }.join('/'),
+        :categories  => (categories || []).map { |c| URL.escape_path(c.to_s) }.join('/'),
         :short_month => date.strftime("%b"),
         :y_day       => date.strftime("%j"),
         :output_ext  => output_ext
@@ -260,7 +260,7 @@ module Jekyll
     # Returns destination file path String.
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
-      path = Jekyll.sanitized_path(dest, CGI.unescape(url))
+      path = Jekyll.sanitized_path(dest, URL.unescape_path(url))
       path = File.join(path, "index.html") if path[/\.html$/].nil?
       path
     end

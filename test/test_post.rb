@@ -86,11 +86,18 @@ class TestPost < Test::Unit::TestCase
         end
       end
 
-      should "CGI escape urls" do
+      should "escape urls" do
         @post.categories = []
         @post.process("2009-03-12-hash-#1.markdown")
         assert_equal "/2009/03/12/hash-%231.html", @post.url
         assert_equal "/2009/03/12/hash-#1", @post.id
+      end
+
+      should "escape urls with non-alphabetic characters" do
+        @post.categories = []
+        @post.process("2014-03-22-escape-+ %20[].markdown")
+        assert_equal "/2014/03/22/escape-+%20%2520%5B%5D.html", @post.url
+        assert_equal "/2014/03/22/escape-+ %20[]", @post.id
       end
 
       should "respect permalink in yaml front matter" do
@@ -519,6 +526,26 @@ class TestPost < Test::Unit::TestCase
 
           assert File.directory?(dest_dir)
           assert File.exists?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
+        end
+
+        should "write properly when url has hash" do
+          post = setup_post("2009-03-12-hash-#1.markdown")
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exists?(File.join(dest_dir, '2009', '03', '12',
+                                        'hash-#1.html'))
+        end
+
+        should "write properly when url has space" do
+          post = setup_post("2014-03-22-escape-+ %20[].markdown")
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exists?(File.join(dest_dir, '2014', '03', '22',
+                                        'escape-+ %20[].html'))
         end
 
         should "write properly without html extension" do

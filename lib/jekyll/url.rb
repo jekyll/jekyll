@@ -1,3 +1,5 @@
+require 'uri'
+
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
 # Examples
@@ -64,6 +66,44 @@ module Jekyll
       url.gsub!(/\A([^\/])/, '/\1')
 
       url
+    end
+
+    # Escapes a path to be a valid URL path segment
+    #
+    # path - The path to be escaped.
+    #
+    # Examples:
+    #
+    #   URL.escape_path("/a b")
+    #   # => "/a%20b"
+    #
+    # Returns the escaped path.
+    def self.escape_path(path)
+      # Because URI.escape doesn't escape '?', '[' and ']' by defaut,
+      # specify unsafe string (except unreserved, sub-delims, ":", "@" and "/").
+      #
+      # URI path segment is defined in RFC 3986 as follows:
+      #   segment       = *pchar
+      #   pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
+      #   unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+      #   pct-encoded   = "%" HEXDIG HEXDIG
+      #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+      #                 / "*" / "+" / "," / ";" / "="
+      URI.escape(path, /[^a-zA-Z\d\-._~!$&\'()*+,;=:@\/]/)
+    end
+
+    # Unescapes a URL path segment
+    #
+    # path - The path to be unescaped.
+    #
+    # Examples:
+    #
+    #   URL.unescape_path("/a%20b")
+    #   # => "/a b"
+    #
+    # Returns the unescaped path.
+    def self.unescape_path(path)
+      URI.unescape(path)
     end
   end
 end
