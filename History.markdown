@@ -9,6 +9,8 @@
 ### Development Fixes
 
 ### Site Enhancements
+  * Fix drafts docs to indicate that draft time is based on file modification
+    time, not `Time.now` (#1695)
   * Add `jekyll-monthly-archive-plugin` and `jekyll-category-archive-plugin` to
     list of third-party plugins (#1693)
 
