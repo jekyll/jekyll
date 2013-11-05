@@ -86,8 +86,8 @@ module Jekyll
     # desired placeholder replacements. For details see "url.rb"
     def url_placeholders
       {
-        :path       => @dir,
-        :basename   => basename,
+        :path       => URL.escape_path(@dir),
+        :basename   => URL.escape_path(basename),
         :output_ext => output_ext
       }
     end
@@ -135,7 +135,7 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      path = Jekyll.sanitized_path(dest, url)
+      path = Jekyll.sanitized_path(dest, URL.unescape_path(url))
       path = File.join(path, "index.html") if url =~ /\/$/
       path
     end

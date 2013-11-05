@@ -30,6 +30,11 @@ class TestPage < Test::Unit::TestCase
         assert_equal false, @page.published?
       end
 
+      should "create url with non-alphabetic characters" do
+        @page = setup_page('+', '%# +.md')
+        assert_equal "/+/%25%23%20+.html", @page.url
+      end
+
       context "in a directory hierarchy" do
         should "create url based on filename" do
           @page = setup_page('/contacts', 'bar.html')
@@ -172,6 +177,15 @@ class TestPage < Test::Unit::TestCase
 
         assert File.directory?(dest_dir)
         assert File.exists?(File.join(dest_dir, '+', 'plus+in+url'))
+      end
+
+      should "write even when permalink has '%# +'" do
+        page = setup_page('+', '%# +.md')
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exists?(File.join(dest_dir, '+', '%# +.html'))
       end
 
       should "write properly without html extension" do
