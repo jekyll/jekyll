@@ -15,6 +15,7 @@
   * Add `jekyll-monthly-archive-plugin` and `jekyll-category-archive-plugin` to
     list of third-party plugins (#1693)
   * Add `jekyll-asset-path-plugin` to list of third-party plugins (#1670)
+  * Add `emoji-for-jekyll` to list of third-part plugins (#1708)
 
 ## 1.3.0 / 2013-11-04
 
