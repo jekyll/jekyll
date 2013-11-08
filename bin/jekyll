@@ -119,28 +119,18 @@ Mercenary.program(:jekyll) do |p|
     c.syntax 'jekyll import <platform> [options]'
     c.description 'Import your old blog to Jekyll'
 
-    c.option 'source', '--source STRING', 'Source file or URL to migrate from'
-    c.option 'file',   '--file STRING', 'File to migrate from'
-    c.option 'dbname', '--dbname STRING', 'Database name to migrate from'
-    c.option 'user', '--user STRING', 'Username to use when migrating'
-    c.option 'pass', '--pass STRING', 'Password to use when migrating'
-    c.option 'host', '--host STRING', 'Host address to use when migrating'
-    c.option 'prefix', '--prefix STRING', 'Database table prefix to use when migrating'
-
     begin
       require 'jekyll-import'
     rescue LoadError
+      JekyllImport.add_importer_commands(c)
     end
 
     c.action do |args, options|
-      begin
-        require 'jekyll-import'
-      rescue LoadError
+      if defined?(JekyllImport)
         msg  = "You must install the 'jekyll-import' gem before continuing.\n"
         msg += "* Please see the documentation at http://jekyllrb.com/docs/migrations/ for instructions.\n"
         abort msg
       end
-      Jekyll::Commands::Import.process(args.first, options)
     end
   end
 end
