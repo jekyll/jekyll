@@ -121,12 +121,12 @@ Mercenary.program(:jekyll) do |p|
 
     begin
       require 'jekyll-import'
-    rescue LoadError
       JekyllImport.add_importer_commands(c)
+    rescue LoadError
     end
 
     c.action do |args, options|
-      if defined?(JekyllImport)
+      unless Object.const_defined?(:JekyllImport)
         msg  = "You must install the 'jekyll-import' gem before continuing.\n"
         msg += "* Please see the documentation at http://jekyllrb.com/docs/migrations/ for instructions.\n"
         abort msg
