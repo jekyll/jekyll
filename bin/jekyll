@@ -118,10 +118,11 @@ Mercenary.program(:jekyll) do |p|
   p.command(:import) do |c|
     c.syntax 'jekyll import <platform> [options]'
     c.description 'Import your old blog to Jekyll'
+    importers = []
 
     begin
       require 'jekyll-import'
-      JekyllImport.add_importer_commands(c)
+      importers = JekyllImport.add_importer_commands(c)
     rescue LoadError
     end
 
@@ -130,6 +131,11 @@ Mercenary.program(:jekyll) do |p|
         msg  = "You must install the 'jekyll-import' gem before continuing.\n"
         msg += "* Please see the documentation at http://jekyllrb.com/docs/migrations/ for instructions.\n"
         abort msg
+      end
+      if args.empty?
+        Jekyll.logger.warn "You must specify an importer."
+        Jekyll.logger.info "Valid options are:"
+        importers.each { |i| Jekyll.logger.info "*", "#{i}" }
       end
     end
   end
