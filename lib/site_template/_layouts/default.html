@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html 
-{% if page.lang %} lang="{{ page.lang }}" 
+{% if page.language %} lang="{{ page.language }}" 
 {%   else %}
-{%     if site.lang %} lang="{{ site.lang }}" {% endif %}
+{%     if site.language %} lang="{{ site.language }}" {% endif %}
 {% endif %} 
 
 {% if page.direction %} dir="{{ page.direction }}" 
