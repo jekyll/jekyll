@@ -1,3 +1,5 @@
 name: Your New Jekyll Site
+language: en
+direction: ltr
 markdown: redcarpet
 pygments: true
