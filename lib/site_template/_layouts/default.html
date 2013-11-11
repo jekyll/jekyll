@@ -1,5 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html 
+{% if page.language %} lang="{{ page.language }}" 
+{%   else %}
+{%     if site.language %} lang="{{ site.language }}" {% endif %}
+{% endif %} 
+
+{% if page.direction %} dir="{{ page.direction }}" 
+{%   else %}
+{%     if site.direction %} dir="{{ site.direction }}" {% endif %}
+{% endif %}>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
