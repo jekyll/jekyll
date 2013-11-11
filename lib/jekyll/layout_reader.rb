@@ -15,10 +15,6 @@ class LayoutReader
 
   private
 
-  def layout_directory
-    File.join(site.source, site.config['layouts'])
-  end
-
   def layout_entries
     entries = []
     with(layout_directory) do
@@ -27,13 +23,18 @@ class LayoutReader
     entries
   end
 
-  def with(directory)
-    return unless File.exists?(directory)
-    Dir.chdir(directory) { yield directory }
-  end
-
   def layout_name(file)
     file.split(".")[0..-2].join(".")
   end
+
+  def with(directory)
+    return unless File.exists?(directory)
+    Dir.chdir(directory) { yield }
+  end
+
+  def layout_directory
+    File.join(site.source, site.config['layouts'])
+  end
+
 
 end
