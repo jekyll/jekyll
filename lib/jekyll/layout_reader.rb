@@ -6,16 +6,34 @@ class LayoutReader
   end
 
   def read
-      base = File.join(site.source, site.config['layouts'])
-      return @layouts unless File.exists?(base)
-      entries = []
-      Dir.chdir(base) { entries = EntryFilter.new(site).filter(Dir['**/*.*']) }
+    layout_entries.each do |f|
+      @layouts[layout_name(f)] = Layout.new(site, layout_directory, f)
+    end
 
-      entries.each do |f|
-        name = f.split(".")[0..-2].join(".")
-        @layouts[name] = Layout.new(site, base, f)
-      end
-
-      @layouts
+    @layouts
   end
+
+  private
+
+  def layout_directory
+    File.join(site.source, site.config['layouts'])
+  end
+
+  def layout_entries
+    entries = []
+    with(layout_directory) do
+      entries = EntryFilter.new(site).filter(Dir['**/*.*'])
+    end
+    entries
+  end
+
+  def with(directory)
+    return unless File.exists?(directory)
+    Dir.chdir(directory) { yield directory }
+  end
+
+  def layout_name(file)
+    file.split(".")[0..-2].join(".")
+  end
+
 end
