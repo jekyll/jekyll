@@ -3,6 +3,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Add a `--prefix` option to passthrough for the importers (#1669)
 
 ### Bug Fixes
 
