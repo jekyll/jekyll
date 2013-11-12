@@ -15,6 +15,34 @@ knowledge and lessons that have been unearthed by Windows users.
 Madhur Ahuja has written up instructions to get
 [Jekyll running on Windows][windows-installation] and it seems to work for most.
 
+## Running
+After installing jekyll from a command prompt at the root of your jekyll project directory:
+
+```
+bundle exec jekyll serve
+```
+
+To have jekyll auto reload changes:
+
+```
+bundle exec jekyll serve --watch
+```
+
+**Errors**
+
+If you get the following error with the --watch option
+
+```
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/listen-1.3.1/lib/listen/adapter.rb:207:in `require': cannot load such file -- wdm (LoadError)
+```
+
+To fix that error, open the gemfile in your jekyll project directory and add these two lines:
+
+```
+require 'rbconfig'
+gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw/i
+```
+
 ## Encoding
 
 If you use UTF-8 encoding, make sure that no <code>BOM</code> header
