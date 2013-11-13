@@ -15,7 +15,7 @@ knowledge and lessons that have been unearthed by Windows users.
 Madhur Ahuja has written up instructions to get
 [Jekyll running on Windows][windows-installation] and it seems to work for most.
 
-## Watching for changes and regenerating automatically
+## Automatic Regeneration
 
 If you get the following error with the --watch option
 
