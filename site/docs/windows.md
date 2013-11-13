@@ -15,20 +15,7 @@ knowledge and lessons that have been unearthed by Windows users.
 Madhur Ahuja has written up instructions to get
 [Jekyll running on Windows][windows-installation] and it seems to work for most.
 
-## Running
-After installing jekyll from a command prompt at the root of your jekyll project directory:
-
-```
-bundle exec jekyll serve
-```
-
-To have jekyll auto reload changes:
-
-```
-bundle exec jekyll serve --watch
-```
-
-**Errors**
+## Watching for changes and regenerating automatically
 
 If you get the following error with the --watch option
 
