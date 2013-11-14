@@ -46,3 +46,12 @@ Feature: Include tags
     When I run jekyll
     Then the _site directory should exist
     And I should see "a snippet that works with parameters" in "_site/index.html"
+
+  Scenario: Include a variable file in a loop
+    Given I have an _includes directory
+    And I have an "_includes/one.html" file that contains "one"
+    And I have an "_includes/two.html" file that contains "two"
+    And I have an "index.html" page with files "[one.html, two.html]" that contains "{% for file in page.files %}{% include {{file}} %} {% endfor %}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "one two" in "_site/index.html"
