@@ -190,7 +190,7 @@ page with links to all but the current page.
     <span>&laquo; Prev</span>
   {% endif %}
 
-  {% for page in (1..paginator.total_pages) %}
+  {% for page in (paginator.total_pages) %}
     {% if page == paginator.page %}
       <em>{{ page }}</em>
     {% elsif page == 1 %}
