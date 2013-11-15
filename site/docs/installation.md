@@ -24,7 +24,7 @@ you’ll need to make sure your system has before you start.
   <h5>Running Jekyll on Windows</h5>
   <p>
     It is possible to get
-    <a href="http://www.madhur.co.in/blog/2011/09/01/runningjekyllwindows.html">
+    <a href="http://minimaldev.com/how-to-install-jekyll-on-windows">
     Jekyll running on Windows</a>, but the official documentation does not
     support installation on Windows platforms.
   </p>
