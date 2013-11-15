@@ -43,8 +43,8 @@ module Jekyll
         params
       end
 
-      def validate_file_name
-        if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
+      def validate_file_name(file)
+        if file !~ /^[a-zA-Z0-9_\/\.-]+$/ || file =~ /\.\// || file =~ /\/\./
             raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
@@ -82,7 +82,7 @@ eos
       def retrieve_variable(context)
         if /\{\{([\w\-\.]+)\}\}/ =~ @file
           raise ArgumentError.new("No variable #{$1} was found in include tag") if context[$1].nil?
-          @file = context[$1]
+          context[$1]
         end
       end
 
@@ -90,13 +90,13 @@ eos
         dir = File.join(context.registers[:site].source, INCLUDES_DIR)
         validate_dir(dir, context.registers[:site].safe)
 
-        retrieve_variable(context)
-        validate_file_name
+        file = retrieve_variable(context) || @file
+        validate_file_name(file)
 
-        file = File.join(dir, @file)
-        validate_file(file, context.registers[:site].safe)
+        path = File.join(dir, file)
+        validate_file(path, context.registers[:site].safe)
 
-        partial = Liquid::Template.parse(source(file, context))
+        partial = Liquid::Template.parse(source(path, context))
 
         context.stack do
           context['include'] = parse_params(context) if @params
