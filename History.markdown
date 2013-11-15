@@ -6,6 +6,7 @@
   * Add a `--prefix` option to passthrough for the importers (#1669)
 
 ### Bug Fixes
+  * Fix the include tag when ran in a loop (#1726)
 
 ### Development Fixes
   * Extract `Site#filter_entries` into its own object (#1697)
