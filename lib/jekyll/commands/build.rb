@@ -37,7 +37,7 @@ module Jekyll
         destination = options['destination']
 
         begin
-          dest = Pathname.new(destination).relative_path_from(Pathname.new(source)).to_path
+          dest = Pathname.new(destination).relative_path_from(Pathname.new(source)).to_s
           ignored = Regexp.new(Regexp.escape(dest))
         rescue ArgumentError
           # Destination is outside the source, no need to ignore it.
