@@ -7,6 +7,7 @@
 
 ### Bug Fixes
   * Fix the include tag when ran in a loop (#1726)
+  * Fix errors when using `--watch` on 1.8.7 (#1730)
 
 ### Development Fixes
   * Extract `Site#filter_entries` into its own object (#1697)
