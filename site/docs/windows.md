@@ -37,3 +37,8 @@ As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
 `--watch` switch is specified during a build or serve. While `listen` has
 built-in support for UNIX systems, it requires an extra gem for compatibility
 with Windows. Add the following to the Gemfile for your site:
+
+{% highlight ruby %}
+require 'rbconfig'
+gem 'wdm', '~> 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw/i
+{% endhighlight %}
