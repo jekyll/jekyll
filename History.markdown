@@ -11,6 +11,7 @@
 
 ### Development Fixes
   * Extract `Site#filter_entries` into its own object (#1697)
+  * Enable Travis' bundle caching (#1734)
 
 ### Site Enhancements
   * Fix drafts docs to indicate that draft time is based on file modification
