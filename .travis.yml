@@ -6,6 +6,8 @@ rvm:
   - 2.0.0
   - 1.9.3
   - 1.9.2
+  - rbx-2.2.1
+  - rbx-2.1.1
 script: bundle exec rake
 notifications:
   irc:
