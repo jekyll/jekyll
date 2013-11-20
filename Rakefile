@@ -84,7 +84,8 @@ end
 #
 #############################################################################
 
-if ENV["TRAVIS"] == "true"
+# Coverage is currently too slow on Rubinius, don't send coverage to coveralls.
+if RUBY_ENGINE != 'rbx' && ENV["TRAVIS"] == "true"
   require 'coveralls/rake/task'
   Coveralls::RakeTask.new
 
