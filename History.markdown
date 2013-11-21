@@ -14,6 +14,7 @@
   * Enable Travis' bundle caching (#1734)
 
 ### Site Enhancements
+  * Update link to example Rakefile to point to specific commit (#1741)
   * Fix drafts docs to indicate that draft time is based on file modification
     time, not `Time.now` (#1695)
   * Add `jekyll-monthly-archive-plugin` and `jekyll-category-archive-plugin` to
