@@ -167,7 +167,7 @@ module Jekyll
     #  {"name"  => "larry"
     #   "items" => [...] } # all the items where `property` == "larry"
     def group_by(input, property)
-      if input.respond_to?(:group_by)
+      if groupable?(input)
         input.group_by do |item|
           if item.respond_to?(:data)
             item.data[property.to_s].to_s
@@ -193,6 +193,10 @@ module Jekyll
         Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)
       end
+    end
+    
+    def groupable?(element)
+      element.respond_to?(:group_by)
     end
   end
 end
