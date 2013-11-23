@@ -24,6 +24,7 @@
   * Fix previous section link on plugins page to point to pagination page (#1707)
   * Add `org-mode` converter plugin to third-party plugins (#1711)
   * Point "Blog migrations" page to http://import.jekyllrb.com (#1732)
+  * Add docs for `post_url` when posts are in subdirectories (#1718)
 
 ## 1.3.0 / 2013-11-04
 
