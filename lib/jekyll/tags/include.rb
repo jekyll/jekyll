@@ -96,14 +96,16 @@ eos
         path = File.join(dir, file)
         validate_file(path, context.registers[:site].safe)
 
-        partial = Liquid::Template.parse(source(path, context))
+        begin
+          partial = Liquid::Template.parse(source(path, context))
 
-        context.stack do
-          context['include'] = parse_params(context) if @params
-          partial.render!(context)
+          context.stack do
+            context['include'] = parse_params(context) if @params
+            partial.render!(context)
+          end
+        rescue => e
+          raise IncludeTagError.new e.message, File.join(INCLUDES_DIR, @file)
         end
-      rescue => e
-        raise IncludeTagError.new e.message, File.join(INCLUDES_DIR, @file)
       end
 
       def validate_dir(dir, safe)
