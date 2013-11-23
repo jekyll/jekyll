@@ -50,7 +50,7 @@ def seconds_agnostic_datetime(datetime = Time.now)
   pieces = datetime.to_s.split(" ")
   if pieces.size == 6 # Ruby 1.8.7
     date = pieces[0..2].join(" ")
-    time = seconds_agnostic_time(pieces[3]) 
+    time = seconds_agnostic_time(pieces[3])
     zone = pieces[4..5].join(" ")
   else # Ruby 1.9.1 or greater
     date, time, zone = pieces
