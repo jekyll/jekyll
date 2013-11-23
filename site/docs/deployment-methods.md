@@ -37,7 +37,7 @@ this](http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/0
 To have a remote server handle the deploy for you every time you push changes using Git, you can create a user account which has all the public keys that are authorized to deploy in its `authorized_keys` file. With that in place, setting up the post-receive hook is done as follows:
 
 {% highlight bash %}
-laptop$ ssh deployer@myserver.com
+laptop$ ssh deployer@example.com
 server$ mkdir myrepo.git
 server$ cd myrepo.git
 server$ git --bare init
@@ -63,7 +63,7 @@ Finally, run the following command on any users laptop that needs to be able to
 deploy using this hook:
 
 {% highlight bash %}
-laptops$ git remote add deploy deployer@myserver.com:~/myrepo.git
+laptops$ git remote add deploy deployer@example.com:~/myrepo.git
 {% endhighlight %}
 
 Deploying is now as easy as telling nginx or Apache to look at

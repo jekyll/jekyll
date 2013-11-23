@@ -4,10 +4,10 @@ Feature: Site data
   In order to make the site slightly dynamic
 
   Scenario: Use page variable in a page
-    Given I have an "contact.html" page with title "Contact" that contains "{{ page.title }}: email@me.com"
+    Given I have an "contact.html" page with title "Contact" that contains "{{ page.title }}: email@example.com"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "Contact: email@me.com" in "_site/contact.html"
+    And I should see "Contact: email@example.com" in "_site/contact.html"
 
   Scenario Outline: Use page.path variable in a page
     Given I have a <dir> directory
@@ -95,10 +95,10 @@ Feature: Site data
 
   Scenario: Use configuration date in site payload
     Given I have an "index.html" page that contains "{{ site.url }}"
-    And I have a configuration file with "url" set to "http://mysite.com"
+    And I have a configuration file with "url" set to "http://example.com"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "http://mysite.com" in "_site/index.html"
+    And I should see "http://example.com" in "_site/index.html"
 
   Scenario: Access Jekyll version via jekyll.version
     Given I have an "index.html" page that contains "{{ jekyll.version }}"
