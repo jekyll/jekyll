@@ -218,7 +218,7 @@ namespace :site do
       abort "You seem to have misplaced your History.markdown file. I can haz?"
     end
   end
-  
+
   namespace :releases do
     desc "Create new release post"
     task :new, :version do |t, args|
