@@ -226,7 +226,7 @@ CONTENT
       assert_no_match /markdown\-html\-error/, @result
     end
 
-    should "have the url to the \"nested\" post from 2008-11-21" do
+    should "have the url to the \"complex\" post from 2008-11-21" do
       assert_match %r{1\s/2008/11/21/complex/}, @result
       assert_match %r{2\s/2008/11/21/complex/}, @result
     end
