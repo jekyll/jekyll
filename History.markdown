@@ -15,6 +15,7 @@
   * Extract `Site#filter_entries` into its own object (#1697)
   * Enable Travis' bundle caching (#1734)
   * Remove trailing whitespace in some files (#1736)
+  * Fix a duplicate test name (#1754)
 
 ### Site Enhancements
   * Update link to example Rakefile to point to specific commit (#1741)
