@@ -10,7 +10,8 @@ class TestHTMLPipeline < Test::Unit::TestCase
         'html_pipeline' => {
           'filters'       => ['markdownfilter', 'sanitizationfilter', 'emojifilter', 'mentionfilter'],
           'context'       => {
-          	'asset_root'  => "http://foo.com/icons"
+            'asset_root'  => "http://foo.com/icons",
+            'base_url'    => "https://github.com/",
           }
         }
       }
@@ -23,8 +24,12 @@ class TestHTMLPipeline < Test::Unit::TestCase
       assert_equal "<h1>Some Header</h1>", @markdown.convert('# Some Header #').strip
     end
 
-    should "pass render emoji" do
+    should "pass rendering emoji" do
       assert_equal "<p><img class=\"emoji\" title=\":trollface:\" alt=\":trollface:\" src=\"http://foo.com/icons/emoji/trollface.png\" height=\"20\" width=\"20\" align=\"absmiddle\"></p>", @markdown.convert(':trollface:').strip
+    end
+
+    should "pass rendering mentions" do
+      assert_equal "<p><strong>Hey, <a href=\"https://github.com/mojombo\" class=\"user-mention\">@mojombo</a></strong>!</p>", @markdown.convert('**Hey, @mojombo**!').strip
     end
 
     should "fail when a library dependency is not met" do
