@@ -4,6 +4,8 @@
 
 ### Minor Enhancements
   * Add a `--prefix` option to passthrough for the importers (#1669)
+  * Push the paginator plugin lower in the plugin priority order so
+    other plugins run before it (#1759)
 
 ### Bug Fixes
   * Fix the include tag when ran in a loop (#1726)
