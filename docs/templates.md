@@ -290,6 +290,15 @@ will generate the correct permalink URL for the post you specify.
 {% endraw %}
 {% endhighlight %}
 
+If you organize your posts in subdirectories, you need to include subdirectory 
+path to the post:
+
+{% highlight text %}
+{% raw %}
+{% post_url /subdir/2010-07-21-name-of-post %}
+{% endraw %}
+{% endhighlight %}
+
 There is no need to include the file extension when using the `post_url` tag.
 
 You can also use this tag to create a link to a post in Markdown as follows:
