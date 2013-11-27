@@ -3,6 +3,16 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 1.3.1 / 2013-11/26
+
+### Minor Enhancements
   * Add a `--prefix` option to passthrough for the importers (#1669)
   * Push the paginator plugin lower in the plugin priority order so
     other plugins run before it (#1759)

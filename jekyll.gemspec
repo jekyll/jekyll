@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.3.0'
+  s.version           = '1.3.1'
   s.license           = 'MIT'
-  s.date              = '2013-11-04'
+  s.date              = '2013-11-26'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -95,6 +95,7 @@ Gem::Specification.new do |s|
     lib/jekyll/core_ext.rb
     lib/jekyll/deprecator.rb
     lib/jekyll/draft.rb
+    lib/jekyll/entry_filter.rb
     lib/jekyll/errors.rb
     lib/jekyll/excerpt.rb
     lib/jekyll/filters.rb
@@ -273,6 +274,7 @@ Gem::Specification.new do |s|
     test/test_configuration.rb
     test/test_convertible.rb
     test/test_core_ext.rb
+    test/test_entry_filter.rb
     test/test_excerpt.rb
     test/test_filters.rb
     test/test_generated_site.rb

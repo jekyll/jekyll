@@ -5,6 +5,39 @@ permalink: /docs/history/
 prev_section: contributing
 ---
 
+## 1.3.1 / 2013-11/26
+
+### Minor Enhancements
+- Add a `--prefix` option to passthrough for the importers ([#1669]({{ site.repository }}/issues/1669))
+- Push the paginator plugin lower in the plugin priority order so
+    other plugins run before it ([#1759]({{ site.repository }}/issues/1759))
+
+### Bug Fixes
+- Fix the include tag when ran in a loop ([#1726]({{ site.repository }}/issues/1726))
+- Fix errors when using `--watch` on 1.8.7 ([#1730]({{ site.repository }}/issues/1730))
+- Specify where the include is called from if an included file is
+    missing ([#1746]({{ site.repository }}/issues/1746))
+
+### Development Fixes
+- Extract `Site#filter_entries` into its own object ([#1697]({{ site.repository }}/issues/1697))
+- Enable Travis' bundle caching ([#1734]({{ site.repository }}/issues/1734))
+- Remove trailing whitespace in some files ([#1736]({{ site.repository }}/issues/1736))
+- Fix a duplicate test name ([#1754]({{ site.repository }}/issues/1754))
+
+### Site Enhancements
+- Update link to example Rakefile to point to specific commit ([#1741]({{ site.repository }}/issues/1741))
+- Fix drafts docs to indicate that draft time is based on file modification
+    time, not `Time.now` ([#1695]({{ site.repository }}/issues/1695))
+- Add `jekyll-monthly-archive-plugin` and `jekyll-category-archive-plugin` to
+    list of third-party plugins ([#1693]({{ site.repository }}/issues/1693))
+- Add `jekyll-asset-path-plugin` to list of third-party plugins ([#1670]({{ site.repository }}/issues/1670))
+- Add `emoji-for-jekyll` to list of third-part plugins ([#1708]({{ site.repository }}/issues/1708))
+- Fix previous section link on plugins page to point to pagination page ([#1707]({{ site.repository }}/issues/1707))
+- Add `org-mode` converter plugin to third-party plugins ([#1711]({{ site.repository }}/issues/1711))
+- Point "Blog migrations" page to http://import.jekyllrb.com ([#1732]({{ site.repository }}/issues/1732))
+- Add docs for `post_url` when posts are in subdirectories ([#1718]({{ site.repository }}/issues/1718))
+- Update the docs to point to `example.com` ([#1448]({{ site.repository }}/issues/1448))
+
 ## 1.3.0 / 2013-11-04
 
 ### Major Enhancements
