@@ -22,7 +22,7 @@ module Jekyll
           @config['html_pipeline']['filters'] ||= ['markdownfilter']
           @config['html_pipeline']['context'] ||= {'gfm' => true}
           # symbolize strings as keys, which is what HTML::Pipeline wants
-          @config['html_pipeline']['context'] = @config['html_pipeline']['context'].inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+          @config['html_pipeline']['context'] = @config['html_pipeline']['context'].symbolize_keys
         end
 
         def setup
