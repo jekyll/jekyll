@@ -4,6 +4,9 @@ module Jekyll
       # This generator is safe from arbitrary code execution.
       safe true
 
+      # This generator should be passive with regard to its execution
+      priority :lowest
+
       # Generate paginated pages if necessary.
       #
       # site - The Site.
