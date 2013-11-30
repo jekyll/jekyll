@@ -9,7 +9,7 @@ class TestTilt < Test::Unit::TestCase
 
     context "when matching tilt converter" do
       %w[
-        .ad .adoc .asciidoc .haml .rdoc .wiki .creole .mediawiki .mw .slim .mab .radius
+        .ad .adoc .asciidoc .rdoc .wiki .creole .mediawiki .mw .slim .mab .radius
         .sass .scss .less .coffee .builder .yajl .rcsv
       ].each do |extname|
         should "return match the tilt converter" do
@@ -25,7 +25,7 @@ class TestTilt < Test::Unit::TestCase
     end
 
     context "when determining output extension" do
-      %w[.ad .adoc .asciidoc .haml .rdoc .wiki .creole .mediawiki .mw .slim .mab .radius].each do |extname|
+      %w[.ad .adoc .asciidoc .rdoc .wiki .creole .mediawiki .mw .slim .mab .radius].each do |extname|
         should "return '.html' output ext for #{extname}" do
           assert_equal ".html", @converter.output_ext(extname)
         end
