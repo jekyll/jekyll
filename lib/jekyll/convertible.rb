@@ -75,6 +75,8 @@ module Jekyll
     # Returns the Converter instance.
     def converter
       @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
+      @converter.current_filename = self.path
+      @converter
     end
 
     # Render Liquid in the content

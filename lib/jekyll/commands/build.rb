@@ -19,9 +19,9 @@ module Jekyll
         destination = options['destination']
         Jekyll.logger.info "Source:", source
         Jekyll.logger.info "Destination:", destination
-        print Jekyll.logger.formatted_topic "Generating..."
+        Jekyll.logger.info "Generating..."
         self.process_site(site)
-        puts "done."
+        Jekyll.logger.info "", "...done."
       end
 
       # Private: Watch for file changes and rebuild the site.
