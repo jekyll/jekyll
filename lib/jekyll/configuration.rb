@@ -142,7 +142,7 @@ module Jekyll
         {}
       else
         Jekyll.logger.error "Fatal:", "The configuration file '#{file}' could not be found."
-        raise LoadError
+        raise LoadError, "The Configuration file '#{file}' could not be found."
       end
     end
 
