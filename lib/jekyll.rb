@@ -26,6 +26,7 @@ require 'pathname'
 require 'liquid'
 require 'maruku'
 require 'colorator'
+require 'toml'
 
 # internal requires
 require 'jekyll/core_ext'
