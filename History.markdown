@@ -8,6 +8,7 @@
   * Add a space between two words in a Pagination warning message (#1769)
 
 ### Development Fixes
+  * Remove some whitespace in the code (#1755)
 
 ### Site Enhancements
 
