@@ -11,6 +11,7 @@
   * Remove some whitespace in the code (#1755)
 
 ### Site Enhancements
+  * Fixed case of a word in the Jekyll v1.3.0 release post (#1762)
 
 ## 1.3.1 / 2013-11/26
 
