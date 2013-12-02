@@ -17,7 +17,7 @@ module Jekyll
           if template = template_page(site)
             paginate(site, template)
           else
-            Jekyll.logger.warn "Pagination:", "Pagination is enabled, but I couldn't find" +
+            Jekyll.logger.warn "Pagination:", "Pagination is enabled, but I couldn't find " +
             "an index.html page to use as the pagination template. Skipping pagination."
           end
         end
