@@ -147,10 +147,13 @@ module Jekyll
       payload["pygments_prefix"] = converter.pygments_prefix
       payload["pygments_suffix"] = converter.pygments_suffix
 
-      self.content = self.render_liquid(self.content,
-                                        payload,
-                                        info)
+      self.pre_render
+      self.content = self.render_liquid(self.content, payload, info)
+      self.post_render
+
+      self.pre_transform
       self.transform
+      self.post_transform
 
       # output keeps track of what will finally be written
       self.output = self.content
@@ -169,6 +172,22 @@ module Jekyll
       File.open(path, 'wb') do |f|
         f.write(self.output)
       end
+      post_write
+    end
+
+    def pre_render
+    end
+
+    def post_render
+    end
+
+    def pre_transform
+    end
+
+    def post_transform
+    end
+
+    def post_write
     end
   end
 end
