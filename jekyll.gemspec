@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.2.1'
+  s.version           = '1.3.1'
   s.license           = 'MIT'
-  s.date              = '2013-09-14'
+  s.date              = '2013-11-26'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -25,13 +25,14 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('liquid', "~> 2.5.2")
   s.add_runtime_dependency('classifier', "~> 1.3")
-  s.add_runtime_dependency('directory_watcher', "~> 1.4.1")
+  s.add_runtime_dependency('listen', "~> 1.3")
   s.add_runtime_dependency('maruku', "~> 0.6.0")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('commander', "~> 4.1.3")
   s.add_runtime_dependency('safe_yaml', "~> 0.9.7")
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 2.3.0")
+  s.add_runtime_dependency('toml', '~> 0.0.4')
 
   s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")
@@ -46,7 +47,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency('simplecov', "~> 0.7")
   s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
   s.add_development_dependency('coveralls', "~> 0.7.0")
+  s.add_development_dependency('mime-types', "~> 1.5")
   s.add_development_dependency('activesupport', '~> 3.2.13')
+  s.add_development_dependency('jekyll_test_plugin')
 
   # = MANIFEST =
   s.files = %w[
@@ -93,6 +96,7 @@ Gem::Specification.new do |s|
     lib/jekyll/core_ext.rb
     lib/jekyll/deprecator.rb
     lib/jekyll/draft.rb
+    lib/jekyll/entry_filter.rb
     lib/jekyll/errors.rb
     lib/jekyll/excerpt.rb
     lib/jekyll/filters.rb
@@ -152,12 +156,16 @@ Gem::Specification.new do |s|
     site/_posts/2013-07-25-jekyll-1-1-2-released.markdown
     site/_posts/2013-09-06-jekyll-1-2-0-released.markdown
     site/_posts/2013-09-14-jekyll-1-2-1-released.markdown
+    site/_posts/2013-10-28-jekyll-1-3-0-rc1-released.markdown
+    site/_posts/2013-11-04-jekyll-1-3-0-released.markdown
+    site/_posts/2013-11-26-jekyll-1-3-1-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
     site/css/style.css
     site/docs/configuration.md
     site/docs/contributing.md
+    site/docs/datafiles.md
     site/docs/deployment-methods.md
     site/docs/drafts.md
     site/docs/extras.md
@@ -204,10 +212,13 @@ Gem::Specification.new do |s|
     test/helper.rb
     test/source/+/foo.md
     test/source/.htaccess
+    test/source/_data/languages.yml
     test/source/_data/members.yaml
+    test/source/_data/products.yml
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
     test/source/_layouts/default.html
+    test/source/_layouts/post/simple.html
     test/source/_layouts/simple.html
     test/source/_plugins/dummy.rb
     test/source/_posts/2008-02-02-not-published.textile
@@ -253,7 +264,9 @@ Gem::Specification.new do |s|
     test/source/deal.with.dots.html
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
+    test/source/products.yml
     test/source/sitemap.xml
+    test/source/symlink-test/_data
     test/source/symlink-test/symlinked-dir
     test/source/symlink-test/symlinked-file
     test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
@@ -263,6 +276,7 @@ Gem::Specification.new do |s|
     test/test_configuration.rb
     test/test_convertible.rb
     test/test_core_ext.rb
+    test/test_entry_filter.rb
     test/test_excerpt.rb
     test/test_filters.rb
     test/test_generated_site.rb

@@ -57,7 +57,7 @@ You can now render the list of members in a template:
       {{ member.name }}
     </a>
   </li>
-{% end %}
+{% endfor %}
 </ul>
 {% endraw %}
 {% endhighlight %}

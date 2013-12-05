@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Plugins
-prev_section: assets
+prev_section: pagination
 next_section: extras
 permalink: /docs/plugins/
 ---
@@ -25,9 +25,27 @@ having to modify the Jekyll source itself.
 
 ## Installing a plugin
 
-In your site source root, make a `_plugins` directory. Place your plugins here.
-Any file ending in `*.rb` inside this directory will be loaded before Jekyll
-generates your site.
+You have 2 options for installing plugins:
+
+1. In your site source root, make a `_plugins` directory. Place your plugins here.
+    Any file ending in `*.rb` inside this directory will be loaded before Jekyll
+    generates your site.
+2. In your `_config.yml` file, add a new array with the key `gems` and the values
+    of the gem names of the plugins you'd like to use. An example:
+
+        gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
+        # This will require each of these gems automatically.
+
+<div class="note info">
+  <h5>
+    <code>_plugins</code> and <code>gems</code>
+    can be used simultaneously
+  </h5>
+  <p>
+    You may use both of the aforementioned plugin options simultaneously in the
+    same site if you so choose. Use of one does not restrict the use of the other
+  </p>
+</div>
 
 In general, plugins you make will fall into one of three categories:
 
@@ -67,7 +85,7 @@ module Reading
   class Generator < Jekyll::Generator
     def generate(site)
       ongoing, done = Book.all.partition(&:ongoing?)
-  
+
       reading = site.pages.detect {|page| page.name == 'reading.html'}
       reading.data['ongoing'] = ongoing
       reading.data['done'] = done
@@ -394,13 +412,16 @@ You can find a few useful plugins at the following locations:
 
 - [ArchiveGenerator by Ilkka Laukkanen](https://gist.github.com/707909): Uses [this archive page](https://gist.github.com/707020) to generate archives.
 - [LESS.js Generator by Andy Fowler](https://gist.github.com/642739): Renders LESS.js files during generation.
-- [Version Reporter by Blake Smith](https://gist.github.com/449491): Creates a version.html file containing the Jekyll version. 
+- [Version Reporter by Blake Smith](https://gist.github.com/449491): Creates a version.html file containing the Jekyll version.
 - [Sitemap.xml Generator by Michael Levin](https://github.com/kinnetica/jekyll-plugins): Generates a sitemap.xml file by traversing all of the available posts and pages.
 - [Full-text search by Pascal Widdershoven](https://github.com/PascalW/jekyll_indextank): Adds full-text search to your Jekyll site with a plugin and a bit of JavaScript.
 - [AliasGenerator by Thomas Mango](https://github.com/tsmango/jekyll_alias_generator): Generates redirect pages for posts when an alias is specified in the YAML Front Matter.
 - [Pageless Redirect Generator by Nick Quinlan](https://github.com/nquinlan/jekyll-pageless-redirects): Generates redirects based on files in the Jekyll root, with support for htaccess style redirects.
 - [Projectlist by Frederic Hemberger](https://github.com/fhemberger/jekyll-projectlist): Renders files in a directory as a single page instead of separate posts.
 - [RssGenerator by Assaf Gelber](https://github.com/agelber/jekyll-rss): Automatically creates an RSS 2.0 feed from your posts.
+- [Monthly archive generator by Shigeya Suzuki](https://github.com/shigeya/jekyll-monthly-archive-plugin): Generator and template which renders monthly archive like MovableType style, based on the work by Ilkka Laukkanen and others above.
+- [Category archive generator by Shigeya Suzuki](https://github.com/shigeya/jekyll-category-archive-plugin): Generator and template which renders category archive like MovableType style, based on Monthly archive generator.
+- [Emoji for Jekyll](https://github.com/yihangho/emoji-for-jekyll): Seamlessly enable emoji for all posts and pages.
 
 #### Converters
 
@@ -419,6 +440,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll-pandoc-multiple-formats](https://github.com/fauno/jekyll-pandoc-multiple-formats) by [edsl](https://github.com/edsl): Use pandoc to generate your site in multiple formats. Supports pandoc’s markdown extensions.
 - [ReStructuredText Converter](https://github.com/xdissent/jekyll-rst): Converts ReST documents to HTML with Pygments syntax highlighting.
 - [Transform Layouts](https://gist.github.com/1472645): Allows HAML layouts (you need a HAML Converter plugin for this to work).
+- [Org-mode Converter](https://gist.github.com/abhiyerra/7377603): Org-mode converter for Jekyll.
 
 #### Filters
 
@@ -437,6 +459,7 @@ You can find a few useful plugins at the following locations:
 
 #### Tags
 
+- [Asset Path Tag](https://github.com/samrayner/jekyll-asset-path-plugin) by [Sam Rayner](http://www.samrayner.com/): Allows organisation of assets into subdirectories by outputting a path for a given file relative to the current post or page.
 - [Delicious Plugin by Christian Hellsten](https://github.com/christianhellsten/jekyll-plugins): Fetches and renders bookmarks from delicious.com.
 - [Ultraviolet Plugin by Steve Alex](https://gist.github.com/480380): Jekyll tag for the [Ultraviolet](http://ultraviolet.rubyforge.org/) code highligher.
 - [Tag Cloud Plugin by Ilkka Laukkanen](https://gist.github.com/710577): Generate a tag cloud that links to tag pages.
@@ -469,6 +492,9 @@ You can find a few useful plugins at the following locations:
 - [Ditaa Tag](https://github.com/matze/jekyll-ditaa) by [matze](https://github.com/matze): Renders ASCII diagram art into PNG images and inserts a figure tag.
 - [Good Include](https://github.com/penibelst/jekyll-good-include) by [Anatol Broder](http://penibelst.de/): Strips newlines and whitespaces from the end of include files before processing.
 - [Jekyll Suggested Tweet](https://github.com/davidensinger/jekyll-suggested-tweet) by [David Ensinger](https://github.com/davidensinger/): A Liquid tag for Jekyll that allows for the embedding of suggested tweets via Twitter’s Web Intents API.
+- [Jekyll Date Chart](https://github.com/GSI/jekyll_date_chart) by [GSI](https://github.com/GSI): Block that renders date line charts based on textile-formatted tables.
+- [Jekyll Image Encode](https://github.com/GSI/jekyll_image_encode) by [GSI](https://github.com/GSI): Tag that renders base64 codes of images fetched from the web.
+- [Jekyll Quick Man](https://github.com/GSI/jekyll_quick_man) by [GSI](https://github.com/GSI): Tag that renders pretty links to man page sources on the internet.
 
 #### Collections
 

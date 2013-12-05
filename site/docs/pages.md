@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Creating pages
-prev_section: posts
+prev_section: drafts
 next_section: variables
 permalink: /docs/pages/
 ---
@@ -53,9 +53,9 @@ and associated URLs might look like:
 |-- _layouts/
 |-- _posts/
 |-- _site/
-|-- about.html    # => http://yoursite.com/about.html
-|-- index.html    # => http://yoursite.com/
-└── contact.html  # => http://yoursite.com/contact.html
+|-- about.html    # => http://example.com/about.html
+|-- index.html    # => http://example.com/
+└── contact.html  # => http://example.com/contact.html
 {% endhighlight %}
 
 ### Named folders containing index HTML files
@@ -76,10 +76,10 @@ look like:
 ├── _posts/
 ├── _site/
 ├── about/
-|   └── index.html  # => http://yoursite.com/about/
+|   └── index.html  # => http://example.com/about/
 ├── contact/
-|   └── index.html  # => http://yoursite.com/contact/
-└── index.html      # => http://yoursite.com/
+|   └── index.html  # => http://example.com/contact/
+└── index.html      # => http://example.com/
 {% endhighlight %}
 
 This approach may not suit everyone, but for people who like clean URLs it’s

@@ -26,6 +26,7 @@ require 'pathname'
 require 'liquid'
 require 'maruku'
 require 'colorator'
+require 'toml'
 
 # internal requires
 require 'jekyll/core_ext'
@@ -46,6 +47,7 @@ require 'jekyll/static_file'
 require 'jekyll/errors'
 require 'jekyll/related_posts'
 require 'jekyll/cleaner'
+require 'jekyll/entry_filter'
 
 # extensions
 require 'jekyll/plugin'
@@ -62,7 +64,7 @@ require_all 'jekyll/tags'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.2.1'
+  VERSION = '1.3.1'
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.

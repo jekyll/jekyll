@@ -40,5 +40,36 @@ def location(folder, direction)
   [before || '.', after || '.']
 end
 
+def file_contents(path)
+  File.open(path) do |file|
+    file.readlines.join # avoid differences with \n and \r\n line endings
+  end
+end
+
+def seconds_agnostic_datetime(datetime = Time.now)
+  pieces = datetime.to_s.split(" ")
+  if pieces.size == 6 # Ruby 1.8.7
+    date = pieces[0..2].join(" ")
+    time = seconds_agnostic_time(pieces[3])
+    zone = pieces[4..5].join(" ")
+  else # Ruby 1.9.1 or greater
+    date, time, zone = pieces
+    time = seconds_agnostic_time(time)
+  end
+  [
+    Regexp.escape(date),
+    "#{time}:\\d{2}",
+    Regexp.escape(zone)
+  ].join("\\ ")
+end
+
+def seconds_agnostic_time(time)
+  if time.is_a? Time
+    time = time.strftime("%H:%M:%S")
+  end
+  hour, minutes, _ = time.split(":")
+  "#{hour}:#{minutes}"
+end
+
 # work around "invalid option: --format" cucumber bug (see #296)
 Test::Unit.run = true if RUBY_VERSION < '1.9'

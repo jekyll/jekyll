@@ -88,7 +88,7 @@ module Jekyll
     def render_liquid(content, payload, info, path = nil)
       Liquid::Template.parse(content).render!(payload, info)
     rescue Tags::IncludeTagError => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}"
+      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
       raise e
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || self.path}"

@@ -1,9 +1,61 @@
 ## HEAD
 
 ### Major Enhancements
+  * Add support for TOML config files (#1765)
+
+### Minor Enhancements
+  * Sort plugins as a way to establish a load order (#1682)
+
+### Bug Fixes
+  * Add a space between two words in a Pagination warning message (#1769)
+
+### Development Fixes
+  * Remove some whitespace in the code (#1755)
+
+### Site Enhancements
+  * Fixed case of a word in the Jekyll v1.3.0 release post (#1762)
+  * Fixed the mime type for the favicon (#1772)
+
+## 1.3.1 / 2013-11/26
+
+### Minor Enhancements
+  * Add a `--prefix` option to passthrough for the importers (#1669)
+  * Push the paginator plugin lower in the plugin priority order so
+    other plugins run before it (#1759)
+
+### Bug Fixes
+  * Fix the include tag when ran in a loop (#1726)
+  * Fix errors when using `--watch` on 1.8.7 (#1730)
+  * Specify where the include is called from if an included file is
+    missing (#1746)
+
+### Development Fixes
+  * Extract `Site#filter_entries` into its own object (#1697)
+  * Enable Travis' bundle caching (#1734)
+  * Remove trailing whitespace in some files (#1736)
+  * Fix a duplicate test name (#1754)
+
+### Site Enhancements
+  * Update link to example Rakefile to point to specific commit (#1741)
+  * Fix drafts docs to indicate that draft time is based on file modification
+    time, not `Time.now` (#1695)
+  * Add `jekyll-monthly-archive-plugin` and `jekyll-category-archive-plugin` to
+    list of third-party plugins (#1693)
+  * Add `jekyll-asset-path-plugin` to list of third-party plugins (#1670)
+  * Add `emoji-for-jekyll` to list of third-part plugins (#1708)
+  * Fix previous section link on plugins page to point to pagination page (#1707)
+  * Add `org-mode` converter plugin to third-party plugins (#1711)
+  * Point "Blog migrations" page to http://import.jekyllrb.com (#1732)
+  * Add docs for `post_url` when posts are in subdirectories (#1718)
+  * Update the docs to point to `example.com` (#1448)
+
+## 1.3.0 / 2013-11-04
+
+### Major Enhancements
   * Add support for adding data as YAML files under a site's `_data`
     directory (#1003)
   * Allow variables to be used with `include` tags (#1495)
+  * Allow using gems for plugin management (#1557)
 
 ### Minor Enhancements
   * Decrease the specificity in the site template CSS (#1574)
@@ -17,6 +69,10 @@
   * Update Kramdown dependency to `~> 1.2` (#1610)
   * Update `safe_yaml` dependency to `~> 0.9.7` (#1602)
   * Allow layouts to be in subfolders like includes (#1622)
+  * Switch to listen for site watching while serving (#1589)
+  * Add a `json` liquid filter to be used in sites (#1651)
+  * Point people to the migration docs when the `jekyll-import` gem is
+    missing (#1662)
 
 ### Bug Fixes
   * Fix up matching against source and destination when the two
@@ -27,6 +83,11 @@
   * Downgrade to Maruku `~> 0.6.0` in order to avoid changes in rendering (#1598)
   * Fix error with failing include tag when variable was file name (#1613)
   * Downcase lexers before passing them to pygments (#1615)
+  * Capitalize the short verbose switch because it conflicts with the
+    built-in Commander switch (#1660)
+  * Fix compatibility with 1.8.x (#1665)
+  * Fix an error with the new file watching code due to library version
+    incompatibilities (#1687)
 
 ### Development Fixes
   * Add coverage reporting with Coveralls (#1539)
@@ -37,6 +98,12 @@
   * Update coveralls dependency to `~> 0.7.0` (#1606)
   * Update rake dependency to `~> 10.1` (#1603)
   * Clean up `site.rb` comments to be more concise/uniform (#1616)
+  * Use the master branch for the build badge in the readme (#1636)
+  * Refactor Site#render (#1638)
+  * Remove duplication in command line options (#1637)
+  * Add tests for all the coderay options (#1543)
+  * Improve some of the cucumber test code (#1493)
+  * Improve comparisons of timestamps by ignoring the seconds (#1582)
 
 ### Site Enhancements
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
@@ -49,6 +116,12 @@
   * Improve the instructions for mimicking GitHub Flavored Markdown
     (#1614)
   * Add `jekyll-import` warning note of missing dependencies (#1626)
+  * Fix grammar in the Usage section (#1635)
+  * Add documentation for the use of gems as plugins (#1656)
+  * Document the existence of a few additional plugins (#1405)
+  * Document that the `date_to_string` always returns a two digit day (#1663)
+  * Fix navigation in the "Working with Drafts" page (#1667)
+  * Fix an error with the data documentation (#1691)
 
 ## 1.2.1 / 2013-09-14
 

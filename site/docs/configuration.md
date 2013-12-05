@@ -330,6 +330,7 @@ layouts:     ./_layouts
 include:     ['.htaccess']
 exclude:     []
 keep_files:  ['.git','.svn']
+gems:        []
 timezone:    nil
 encoding:    nil
 

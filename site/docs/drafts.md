@@ -1,6 +1,8 @@
 ---
 layout: docs
 title: Working with drafts
+prev_section: posts
+next_section: pages
 permalink: /docs/drafts/
 ---
 
@@ -15,6 +17,5 @@ first draft:
 {% endhighlight %}
 
 To preview your site with drafts, simply run `jekyll serve` or `jekyll build` with
-the `--drafts` switch.  Each will be assigned the value of `Time.now`
-for its date, and thus you will see them generated as the latest posts.
-
+the `--drafts` switch.  Each will be assigned the value modification time of the draft file
+for its date, and thus you will see currently edited drafts as the latest posts.

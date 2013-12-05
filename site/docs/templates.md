@@ -33,7 +33,7 @@ common tasks easier.
          <code class='filter'>{% raw %}{{ site.time | date_to_xmlschema }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>2008-11-17T13:07:54-08:00</code>
+          <code class='output'>2008-11-07T13:07:54-08:00</code>
         </p>
       </td>
     </tr>
@@ -47,7 +47,7 @@ common tasks easier.
          <code class='filter'>{% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>Mon, 17 Nov 2008 13:07:54 -0800</code>
+          <code class='output'>Mon, 07 Nov 2008 13:07:54 -0800</code>
         </p>
       </td>
     </tr>
@@ -61,7 +61,7 @@ common tasks easier.
          <code class='filter'>{% raw %}{{ site.time | date_to_string }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>17 Nov 2008</code>
+          <code class='output'>07 Nov 2008</code>
         </p>
       </td>
     </tr>
@@ -75,7 +75,7 @@ common tasks easier.
          <code class='filter'>{% raw %}{{ site.time | date_to_long_string }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>17 November 2008</code>
+          <code class='output'>07 November 2008</code>
         </p>
       </td>
     </tr>
@@ -170,6 +170,17 @@ common tasks easier.
       <td class='align-center'>
         <p>
          <code class='filter'>{% raw %}{{ page.excerpt | markdownify }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class='name'><strong>Data To JSON</strong></p>
+        <p>Convert Hash or Array to JSON.</p>
+      </td>
+      <td class='align-center'>
+        <p>
+         <code class='filter'>{% raw %}{{ site.data.projects | jsonify }}{% endraw %}</code>
         </p>
       </td>
     </tr>
@@ -276,6 +287,15 @@ will generate the correct permalink URL for the post you specify.
 {% highlight text %}
 {% raw %}
 {% post_url 2010-07-21-name-of-post %}
+{% endraw %}
+{% endhighlight %}
+
+If you organize your posts in subdirectories, you need to include subdirectory 
+path to the post:
+
+{% highlight text %}
+{% raw %}
+{% post_url /subdir/2010-07-21-name-of-post %}
 {% endraw %}
 {% endhighlight %}
 
