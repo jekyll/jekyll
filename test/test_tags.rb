@@ -456,12 +456,11 @@ CONTENT
   context "post with directory tag" do
     setup do
       Dir.chdir source_dir
-      FileUtils.mkdir_p 'img'
+      FileUtils.mkdir_p "img"
     end
 
     teardown do
-      FileUtils.rm_rf 'img'
-      FileUtils.rm_rf 'downloads'
+      FileUtils.rm_rf "img"
     end
 
     should "render with reverse chronological dates" do
@@ -475,7 +474,7 @@ title: Super simple image gallery
   <img title="{{ file.title }}, taken on {{ file.date | date: "%F" }}" src="{{ file.url }}" />
 {% enddirectory %}
 CONTENT
-      create_post(content, {'source' => source_dir })
+      create_post(content, {"source" => source_dir })
 
       # content
       assert_match %r{title='Delta Gamma, taken on 2011-04-02'}, @result
@@ -486,8 +485,8 @@ CONTENT
     end
 
     should "be able to exclude files" do
-      FileUtils.mkdir_p 'img'
-      FileUtils.touch ['alpha-beta', 'delta-gamma'].map {|img| "img/2011-04-01-#{img}.jpg"}
+      FileUtils.mkdir_p "img"
+      FileUtils.touch ["alpha-beta", "delta-gamma"].map {|img| "img/2011-04-01-#{img}.jpg"}
       content = <<CONTENT
 ---
 title: Partially excluded image gallery
@@ -496,11 +495,46 @@ title: Partially excluded image gallery
   <img src="{{ file.url }}" />
 {% enddirectory %}
 CONTENT
-      create_post(content, {'source' => source_dir })
+      create_post(content, {"source" => source_dir })
 
       # content
       assert_match    %r{src='/img/2011-04-01-alpha-beta.jpg'}, @result
       assert_no_match %r{src='/img/2011-04-01-delta-gamma.jpg'}, @result
+    end
+
+    should "handle files without extensions" do
+      FileUtils.mkdir_p "img"
+      FileUtils.touch "img/mystery-mystery-file"
+
+      content = <<CONTENT
+---
+title: Directory of weird files
+---
+{% directory path: img %}
+  <p>{{ file.name }}</p>
+{% enddirectory %}
+CONTENT
+      create_post(content, {"source" => source_dir })
+
+      # content
+      assert_match    %r{mystery-mystery-file}, @result
+    end
+
+    context "with a path outside of Jekyll's root" do
+      should "throw a ArgumentError" do
+        content = <<CONTENT
+---
+title: hacking the gibson
+---
+{% directory path: ../ } %}
+  <p>{{ file.name }}</p>
+{% enddirectory %}
+CONTENT
+
+        assert_raise ArgumentError do
+          create_post(content, {"source" => source_dir })
+        end
+      end
     end
   end
 end

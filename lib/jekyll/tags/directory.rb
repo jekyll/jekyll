@@ -54,6 +54,10 @@ module Jekyll
       source_dir = context.registers[:site].source
       directory_files = File.join(source_dir, @path, "*")
 
+      unless File.expand_path(directory_files).index(source_dir)
+        raise ArgumentError.new "Lised directory '#{source_dir}' cannot be out of jekyll root"
+      end
+
       files = Dir.glob(directory_files).reject{|f| f =~ @exclude }
       files.sort!
       files.reverse! if @reverse
@@ -67,14 +71,14 @@ module Jekyll
           context['file'] = process_filename(filename)
 
           context['forloop'] = {
-            'name' => 'directory',
-            'length' => length,
-            'index' => index + 1,
-            'index0' => index,
-            'rindex' => length - index,
+            'name'    => 'directory',
+            'length'  => length,
+            'index'   => index + 1,
+            'index0'  => index,
+            'rindex'  => length - index,
             'rindex0' => length - index - 1,
-            'first' => (index == 0),
-            'last' => (index == length - 1)
+            'first'   => (index == 0),
+            'last'    => (index == length - 1)
           }
 
           result << render_all(@nodelist, context)
@@ -100,7 +104,7 @@ module Jekyll
         slug = slug
       else
         date = File.ctime(name)
-        ext = basename[/\.[a-z]+$/, 0]
+        ext = basename[/\.[a-z]+$/, 0] || ''
         slug = basename.sub(ext, '')
       end
 
