@@ -4,7 +4,7 @@
 #
 # Syntax:
 #
-#   {% directory path: path/from/source [reverse] [exclude] %}
+#   {% directory path: path/from/source [reverse: boolean] [exclude: regex] %}
 #     {{ file.url }}
 #     {{ file.name }}
 #     {{ file.date }}
@@ -18,7 +18,7 @@
 # - `exclude` - Defaults to '.html$', skips the html files in the specified path.
 #
 # File Attributes:
-# 
+#
 # - `url` - The absolute path to the published file
 # - `name` - The basename
 # - `date` - The date extracted from the filename, otherwise the file's creation time
@@ -31,8 +31,6 @@ module Jekyll
   class DirectoryTag < Liquid::Block
     include Convertible
 
-    MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
-
     attr_accessor :content, :data
 
     def initialize(tag_name, markup, tokens)
@@ -43,9 +41,9 @@ module Jekyll
         attributes[key] = value
       end
 
-      @path     = attributes['path']   || '.'
+      @path     = attributes['path'] || '.'
       @exclude  = Regexp.new(attributes['exclude'] || '.html$', Regexp::EXTENDED | Regexp::IGNORECASE)
-      @rev      = attributes['reverse'].nil?
+      @reverse  = attributes['reverse'] == 'true'
 
       super
     end
@@ -57,38 +55,16 @@ module Jekyll
       directory_files = File.join(source_dir, @path, "*")
 
       files = Dir.glob(directory_files).reject{|f| f =~ @exclude }
-      files.sort! {|x,y| @rev ? x <=> y : y <=> x }
+      files.sort!
+      files.reverse! if @reverse
 
       length = files.length
       result = []
 
       context.stack do
         files.each_with_index do |filename, index|
-          basename = File.basename(filename)
 
-          filepath  = [@path, basename] - ['.']
-          path = filepath.join '/'
-          url  = '/' + filepath.join('/')
-
-          m, cats, date, slug, ext = *basename.match(MATCHER)
-
-          if m
-            date = Time.parse(date)
-            ext = ext
-            slug = slug
-          else
-            date = File.ctime(filename)
-            ext = basename[/\.[a-z]+$/, 0]
-            slug = basename.sub(ext, '')
-          end
-
-          context['file'] = {
-            'title' => slug.titleize,
-            'date' => date,
-            'name' => basename,
-            'slug' => slug,
-            'url' => url
-          }
+          context['file'] = process_filename(filename)
 
           context['forloop'] = {
             'name' => 'directory',
@@ -105,6 +81,34 @@ module Jekyll
         end
       end
       result
+    end
+
+    private
+
+    def process_filename(name)
+      basename = File.basename(name)
+
+      filepath  = [@path, basename] - ['.']
+      path = filepath.join('/')
+      url  = '/' + filepath.join('/')
+
+      match, cats, date, slug, ext = *basename.match(Post::MATCHER)
+
+      if match
+        date = Time.parse(date)
+        ext = ext
+        slug = slug
+      else
+        date = File.ctime(name)
+        ext = basename[/\.[a-z]+$/, 0]
+        slug = basename.sub(ext, '')
+      end
+
+      { 'title' => slug.titleize,
+        'date' => date,
+        'name' => basename,
+        'slug' => slug,
+        'url' => url }
     end
 
   end

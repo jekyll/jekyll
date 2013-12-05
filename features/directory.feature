@@ -24,7 +24,7 @@ Feature: Directory
     Given I have a downloads/files directory
     And I have a "downloads/files/example-0.1.1.tar.gz" file that contains " "
     And I have a "downloads/files/example-0.2.0.tar.gz" file that contains " "
-    And I have a "downloads/index.html" page that contains "{% directory path: downloads/files reverse: true %}{{ file.slug }} {% enddirectory %}"
+    And I have a "downloads/index.html" page that contains "{% directory path: downloads/files %}{{ file.slug }} {% enddirectory %}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "example-0.2.0.tar example-0.1.1.tar" in "_site/downloads/index.html"
+    And I should see "example-0.1.1.tar example-0.2.0.tar" in "_site/downloads/index.html"

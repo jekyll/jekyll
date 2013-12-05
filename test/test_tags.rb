@@ -464,27 +464,25 @@ CONTENT
       FileUtils.rm_rf 'downloads'
     end
 
-    should "render with paths chronological dates" do
+    should "render with reverse chronological dates" do
       FileUtils.touch "img/2011-04-01-alpha-beta.jpg"
       FileUtils.touch "img/2011-04-02-delta-gamma.jpg"
       content = <<CONTENT
 ---
 title: Super simple image gallery
 ---
-{% directory path: img %}
+{% directory path: img reverse: true %}
   <img title="{{ file.title }}, taken on {{ file.date | date: "%F" }}" src="{{ file.url }}" />
 {% enddirectory %}
 CONTENT
       create_post(content, {'source' => source_dir })
-     
+
       # content
-      assert_match %r{title='Alpha Beta, taken on 2011-04-01'}, @result
       assert_match %r{title='Delta Gamma, taken on 2011-04-02'}, @result
-      assert_match %r{src='/img/2011-04-01-alpha-beta.jpg'}, @result
-      assert_match %r{src='/img/2011-04-02-delta-gamma.jpg'}, @result
-     
+      assert_match %r{title='Alpha Beta, taken on 2011-04-01'}, @result
+
       # order
-      assert_match %r{Alpha.*Delta}, @result
+      assert_match %r{Delta.*Alpha}, @result
     end
 
     should "be able to exclude files" do
@@ -499,8 +497,8 @@ title: Partially excluded image gallery
 {% enddirectory %}
 CONTENT
       create_post(content, {'source' => source_dir })
-      
-      # content 
+
+      # content
       assert_match    %r{src='/img/2011-04-01-alpha-beta.jpg'}, @result
       assert_no_match %r{src='/img/2011-04-01-delta-gamma.jpg'}, @result
     end
