@@ -73,7 +73,7 @@ module Jekyll
       # directory.
       unless self.safe
         self.plugins.each do |plugins|
-            Dir[File.join(plugins, "**/*.rb")].each do |f|
+            Dir[File.join(plugins, "**/*.rb")].sort.each do |f|
               require f
             end
         end
