@@ -106,6 +106,16 @@ module Jekyll
       defaults.merge(data).deep_merge(further_data)
     end
 
+    def type
+      if is_a?(Post)
+        :post
+      elsif is_a?(Page)
+        :page
+      elsif is_a?(Draft)
+        :draft
+      end
+    end
+
     # Recursively render layouts
     #
     # layouts - a list of the layouts

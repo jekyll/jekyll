@@ -69,10 +69,6 @@ module Jekyll
       self.populate_tags
     end
 
-    def type
-      :post
-    end
-
     def published?
       if self.data.has_key?('published') && self.data['published'] == false
         false
