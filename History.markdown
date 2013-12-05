@@ -1,6 +1,7 @@
 ## HEAD
 
 ### Major Enhancements
+  * Add support for TOML config files (#1765)
 
 ### Minor Enhancements
 
