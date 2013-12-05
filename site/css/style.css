@@ -438,7 +438,13 @@ aside li.current a:before {
 /* Documentation */
 
 .docs article {
-  min-height: 800px;
+  min-height: 1150px;
+}
+
+@media (max-width: 568px){
+  .docs article {
+    min-height: inherit;
+  }
 }
 
 .docs .content {
