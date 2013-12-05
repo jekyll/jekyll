@@ -4,6 +4,7 @@
   * Add support for TOML config files (#1765)
 
 ### Minor Enhancements
+  * Sort plugins as a way to establish a load order (#1682)
 
 ### Bug Fixes
   * Add a space between two words in a Pagination warning message (#1769)
