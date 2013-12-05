@@ -12,6 +12,7 @@
 
 ### Site Enhancements
   * Fixed case of a word in the Jekyll v1.3.0 release post (#1762)
+  * Fixed the mime type for the favicon (#1772)
 
 ## 1.3.1 / 2013-11/26
 
