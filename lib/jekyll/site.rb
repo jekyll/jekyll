@@ -104,7 +104,7 @@ module Jekyll
       end
     end
 
-    def plugin_allowed?(name)
+    def plugin_allowed?(gem_name)
       whitelist.include?(gem_name) || !self.safe
     end
 
