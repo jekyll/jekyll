@@ -1,7 +1,5 @@
-if RUBY_VERSION > '1.9'
-  require 'coveralls'
-  Coveralls.wear_merged!
-end
+require 'coveralls'
+Coveralls.wear_merged!
 
 require 'fileutils'
 require 'rr'
@@ -47,15 +45,8 @@ def file_contents(path)
 end
 
 def seconds_agnostic_datetime(datetime = Time.now)
-  pieces = datetime.to_s.split(" ")
-  if pieces.size == 6 # Ruby 1.8.7
-    date = pieces[0..2].join(" ")
-    time = seconds_agnostic_time(pieces[3])
-    zone = pieces[4..5].join(" ")
-  else # Ruby 1.9.1 or greater
-    date, time, zone = pieces
-    time = seconds_agnostic_time(time)
-  end
+  date, time, zone = datetime.to_s.split(" ")
+  time = seconds_agnostic_time(time)
   [
     Regexp.escape(date),
     "#{time}:\\d{2}",
@@ -70,6 +61,3 @@ def seconds_agnostic_time(time)
   hour, minutes, _ = time.split(":")
   "#{hour}:#{minutes}"
 end
-
-# work around "invalid option: --format" cucumber bug (see #296)
-Test::Unit.run = true if RUBY_VERSION < '1.9'
