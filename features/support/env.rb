@@ -10,23 +10,31 @@ require 'time'
 
 TEST_DIR    = File.join('/', 'tmp', 'jekyll')
 JEKYLL_PATH = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll')
+JEKYLL_COMMAND_OUTPUT_FILE = File.join('/', 'tmp', 'jekyll_output.txt')
 
-def run_jekyll(opts = {})
-  command = JEKYLL_PATH.clone
-  command << " build"
-  command << " --drafts" if opts[:drafts]
-  command << " --safe" if opts[:safe]
-  command << " >> /dev/null 2>&1" if opts[:debug].nil?
+def jekyll_output_file
+  JEKYLL_COMMAND_OUTPUT_FILE
+end
+
+def jekyll_output
+  File.read(jekyll_output_file)
+end
+
+def run_jekyll(args, output_file)
+  command = "#{JEKYLL_PATH} #{args} > #{jekyll_output_file} 2>&1"
   system command
 end
 
-def call_jekyll_new(opts = {})
-  command = JEKYLL_PATH.clone
-  command << " new"
-  command << " #{opts[:path]}" if opts[:path]
-  command << " --blank" if opts[:blank]
-  command << " >> /dev/null 2>&1" if opts[:debug].nil?
-  system command
+def run_jekyll_build(build_args = "")
+  if !run_jekyll("build #{build_args}", jekyll_output_file) || build_args.eql?("--verbose")
+    puts jekyll_run_output
+  end
+end
+
+def run_jekyll_new(new_args = "")
+  unless run_jekyll("new #{new_args}", jekyll_output_file)
+    puts jekyll_run_output
+  end
 end
 
 def slug(title)

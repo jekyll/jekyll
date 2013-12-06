@@ -1,7 +1,11 @@
 Before do
-  FileUtils.rm_rf(TEST_DIR)
   FileUtils.mkdir(TEST_DIR)
   Dir.chdir(TEST_DIR)
+end
+
+After do
+  FileUtils.rm_rf(TEST_DIR)
+  FileUtils.rm_rf(JEKYLL_COMMAND_OUTPUT_FILE)
 end
 
 World(Test::Unit::Assertions)
@@ -123,23 +127,23 @@ end
 
 
 When /^I run jekyll$/ do
-  run_jekyll
+  run_jekyll_build
 end
 
 When /^I run jekyll in safe mode$/ do
-  run_jekyll(:safe => true)
+  run_jekyll_build("--safe")
 end
 
 When /^I run jekyll with drafts$/ do
-  run_jekyll(:drafts => true)
+  run_jekyll_build("--drafts")
 end
 
 When /^I call jekyll new with test_blank --blank$/ do
-  call_jekyll_new(:path => "test_blank", :blank => true)
+  run_jekyll_new("test_blank --blank")
 end
 
 When /^I debug jekyll$/ do
-  run_jekyll(:debug => true)
+  run_jekyll_build("--verbose")
 end
 
 When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
