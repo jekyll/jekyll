@@ -98,10 +98,14 @@ module Jekyll
 
     def require_gems
       self.gems.each do |gem|
-        if whitelist.include?(gem) || !self.safe
+        if plugin_allowed?(gem)
           require gem
         end
       end
+    end
+
+    def plugin_allowed?(name)
+      whitelist.include?(gem_name) || !self.safe
     end
 
     def whitelist
