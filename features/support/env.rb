@@ -16,7 +16,7 @@ def jekyll_output_file
   JEKYLL_COMMAND_OUTPUT_FILE
 end
 
-def jekyll_output
+def jekyll_run_output
   File.read(jekyll_output_file)
 end
 
