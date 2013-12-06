@@ -105,11 +105,7 @@ module Jekyll
     end
 
     def whitelist
-      @whitelist ||= begin
-        Array[self.config['whitelist']].flatten || []
-      rescue
-        []
-      end
+      @whitelist ||= Array[self.config['whitelist']].flatten || []
     end
 
     # Internal: Setup the plugin search path
