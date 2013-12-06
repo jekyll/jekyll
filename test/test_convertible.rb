@@ -48,4 +48,50 @@ class TestConvertible < Test::Unit::TestCase
       end
     end
   end
+
+  context "pre- and post-liquid conversion" do
+    setup do
+      @convertible = OpenStruct.new
+      @convertible.extend Jekyll::Convertible
+      @convertible.ext = '.test'
+
+      @before_converter = stub!.run_before_liquid?{true}.subject
+      stub(@before_converter).matches{ true }
+      stub(@before_converter).convert("foo"){ "{%raw%}bar{%endraw%}" }
+
+      @after_converter = stub!.run_before_liquid?{false}.subject
+      stub(@after_converter).matches{ true }
+      stub(@after_converter ).convert("bar"){ "Passed!" }
+
+      @site = stub!.converters{ [@before_converter, @after_converter]}.subject
+
+      @convertible.site = @site
+    end
+
+    should "recognise correct converters" do
+      assert_equal(@before_converter,@convertible.converter(true))
+      assert_equal(@after_converter, @convertible.converter(false) )
+    end
+
+    should "be run on mulitple transforms" do
+      @convertible.content = "foo"
+
+      @convertible.transform(true)
+      assert_equal("{%raw%}bar{%endraw%}", @convertible.content)
+      @convertible.content = Liquid::Template.parse(@convertible.content).render!
+      assert_equal("bar", @convertible.content)
+      @convertible.transform(false)
+      assert_equal("Passed!", @convertible.content)
+    end
+
+    should "be run on do_layout" do
+      stub(@after_converter).pygments_prefix{""}
+      stub(@after_converter).pygments_suffix{""}
+
+      @convertible.content = "foo"
+      @convertible.data = {}
+      @convertible.do_layout({},{})
+      assert_equal("Passed!", @convertible.content)
+    end
+  end
 end
