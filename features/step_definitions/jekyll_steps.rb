@@ -126,6 +126,10 @@ When /^I run jekyll$/ do
   run_jekyll
 end
 
+When /^I run jekyll in safe mode$/ do
+  run_jekyll(:safe => true)
+end
+
 When /^I run jekyll with drafts$/ do
   run_jekyll(:drafts => true)
 end
