@@ -118,8 +118,8 @@ command :docs do |c|
   c.syntax = 'jekyll docs'
   c.description = "Launch local server with docs for Jekyll v#{Jekyll::VERSION}"
 
-  c.option '-p', '--port [PORT]', 'Port to listen on'
-  c.option '-u', '--host [HOST]', 'Host to bind to'
+  c.option '-P', '--port [PORT]', 'Port to listen on'
+  c.option '-H', '--host [HOST]', 'Host to bind to'
 
   c.action do |args, options|
     options = normalize_options(options.__hash__)
