@@ -169,19 +169,14 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      entries = get_entries(dir, '_posts')
+      posts = read_things(dir, '_posts', Post)
 
-      # first pass processes, but does not yet render post content
-      entries.each do |f|
-        if Post.valid?(f)
-          post = Post.new(self, self.source, dir, f)
-
-          if post.published && (self.future || post.date <= self.time)
-            aggregate_post_info(post)
-          end
+      posts.each do |post|
+        if post.published && (self.future || post.date <= self.time)
+          aggregate_post_info(post)
         end
       end
-    end
+   end
 
     # Read all the files in <source>/<dir>/_drafts and create a new Post
     # object with each one.
@@ -190,15 +185,16 @@ module Jekyll
     #
     # Returns nothing.
     def read_drafts(dir)
-      entries = get_entries(dir, '_drafts')
+      drafts = read_things(dir, '_drafts', Draft)
 
-      # first pass processes, but does not yet render draft content
-      entries.each do |f|
-        if Draft.valid?(f)
-          draft = Draft.new(self, self.source, dir, f)
+      drafts.each do |draft|
+        aggregate_post_info(draft)
+      end
+    end
 
-          aggregate_post_info(draft)
-        end
+    def read_things(dir, magic_dir, klass)
+      get_entries(dir, magic_dir).each_with_object([]) do |entry, things|
+        things << klass.new(self, self.source, dir, entry) if klass.valid?(entry)
       end
     end
 
