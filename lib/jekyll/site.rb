@@ -193,8 +193,8 @@ module Jekyll
     end
 
     def read_things(dir, magic_dir, klass)
-      get_entries(dir, magic_dir).each_with_object([]) do |entry, things|
-        things << klass.new(self, self.source, dir, entry) if klass.valid?(entry)
+      things = get_entries(dir, magic_dir).map do |entry|
+        klass.new(self, self.source, dir, entry) if klass.valid?(entry)
       end
     end
 
