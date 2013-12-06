@@ -8,6 +8,7 @@
 
 ### Bug Fixes
   * Add a space between two words in a Pagination warning message (#1769)
+  * Upgrade `toml` gem to `v0.1.0` to maintain compat with Ruby 1.8.7 (#1778)
 
 ### Development Fixes
   * Remove some whitespace in the code (#1755)
