@@ -106,7 +106,7 @@ module Jekyll
 
     def whitelist
       @whitelist ||= begin
-        YAML.safe_load_file(self.config['whitelist']) || []
+        Array[self.config['whitelist']].flatten || []
       rescue
         []
       end
