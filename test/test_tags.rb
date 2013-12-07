@@ -252,7 +252,7 @@ CONTENT
       end
 
       should "write script tag" do
-        assert_match "<script src='https://gist.github.com/#{@gist}.js'>\s</script>", @result
+        assert_match "<script src='https://gist.github.com/#{@gist}.js'><![CDATA[\s]]></script>", @result
       end
     end
 
@@ -272,7 +272,7 @@ CONTENT
         end
 
         should "write script tag with specific file in gist" do
-          assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'>\s</script>", @result
+          assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'><![CDATA[\s]]></script>", @result
         end
       end
 
@@ -308,7 +308,7 @@ CONTENT
       end
 
       should "write script tag with specific file in gist" do
-        assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'>\s</script>", @result
+        assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'><![CDATA[\s]]></script>", @result
       end
     end
 
