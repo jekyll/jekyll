@@ -5,6 +5,7 @@
 
 ### Minor Enhancements
   * Sort plugins as a way to establish a load order (#1682)
+  * Update Maruku to 0.7.0 (#1775)
 
 ### Bug Fixes
   * Add a space between two words in a Pagination warning message (#1769)
@@ -12,6 +13,7 @@
 
 ### Development Fixes
   * Remove some whitespace in the code (#1755)
+  * Remove some duplication in the reading of posts and drafts (#1779)
 
 ### Site Enhancements
   * Fixed case of a word in the Jekyll v1.3.0 release post (#1762)
