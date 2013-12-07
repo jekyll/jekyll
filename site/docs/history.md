@@ -5,7 +5,28 @@ permalink: /docs/history/
 prev_section: contributing
 ---
 
-## 1.3.1 / 2013-11/26
+## 1.4.0 / 2013-12-7
+
+### Major Enhancements
+- Add support for TOML config files ([#1765]({{ site.repository }}/issues/1765))
+
+### Minor Enhancements
+- Sort plugins as a way to establish a load order ([#1682]({{ site.repository }}/issues/1682))
+- Update Maruku to 0.7.0 ([#1775]({{ site.repository }}/issues/1775))
+
+### Bug Fixes
+- Add a space between two words in a Pagination warning message ([#1769]({{ site.repository }}/issues/1769))
+- Upgrade `toml` gem to `v0.1.0` to maintain compat with Ruby 1.8.7 ([#1778]({{ site.repository }}/issues/1778))
+
+### Development Fixes
+- Remove some whitespace in the code ([#1755]({{ site.repository }}/issues/1755))
+- Remove some duplication in the reading of posts and drafts ([#1779]({{ site.repository }}/issues/1779))
+
+### Site Enhancements
+- Fixed case of a word in the Jekyll v1.3.0 release post ([#1762]({{ site.repository }}/issues/1762))
+- Fixed the mime type for the favicon ([#1772]({{ site.repository }}/issues/1772))
+
+## 1.3.1 / 2013-11-26
 
 ### Minor Enhancements
 - Add a `--prefix` option to passthrough for the importers ([#1669]({{ site.repository }}/issues/1669))
