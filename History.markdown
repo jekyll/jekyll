@@ -1,6 +1,18 @@
 ## HEAD
 
 ### Major Enhancements
+
+### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 1.4.0 / 2013-12-07
+
+### Major Enhancements
   * Add support for TOML config files (#1765)
 
 ### Minor Enhancements
@@ -19,7 +31,7 @@
   * Fixed case of a word in the Jekyll v1.3.0 release post (#1762)
   * Fixed the mime type for the favicon (#1772)
 
-## 1.3.1 / 2013-11/26
+## 1.3.1 / 2013-11-26
 
 ### Minor Enhancements
   * Add a `--prefix` option to passthrough for the importers (#1669)
