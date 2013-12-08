@@ -1,0 +1,11 @@
+---
+---
+
+{% capture screen %}
+{% include css/normalize.css %}
+{% include css/gridism.css %}
+{% include css/style.css %}
+{% include css/pygments.css %}
+{% endcapture %}
+
+{{ screen | strip_newlines | remove: '  ' }}
