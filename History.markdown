@@ -2,6 +2,8 @@
 
 ### Major Enhancements
 
+* Add gem-based plugin whitelist to safe mode (#1657)
+
 ### Minor Enhancements
 
 ### Bug Fixes
