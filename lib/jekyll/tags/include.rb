@@ -14,12 +14,19 @@ module Jekyll
       SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
 
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
+      VARIABLE_SYNTAX = /(?<variable>\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\})(?<params>.*)/
 
       INCLUDES_DIR = '_includes'
 
       def initialize(tag_name, markup, tokens)
         super
-        @file, @params = markup.strip.split(' ', 2);
+        matched = markup.strip.match(VARIABLE_SYNTAX)
+        if matched
+          @file = matched['variable'].strip
+          @params = matched['params'].strip
+        else
+          @file, @params = markup.strip.split(' ', 2);
+        end
         validate_params if @params
       end
 
@@ -48,7 +55,7 @@ module Jekyll
             raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
-	#{@file}
+	#{file}
 
 Valid syntax:
 
@@ -79,10 +86,11 @@ eos
         context.registers[:site].file_read_opts
       end
 
-      def retrieve_variable(context)
-        if /\{\{([\w\-\.]+)\}\}/ =~ @file
-          raise ArgumentError.new("No variable #{$1} was found in include tag") if context[$1].nil?
-          context[$1]
+      # Render the variable if required
+      def render_variable(context)
+        if @file.match(VARIABLE_SYNTAX)
+          partial = Liquid::Template.parse(@file)
+          partial.render!(context)
         end
       end
 
@@ -90,7 +98,7 @@ eos
         dir = File.join(context.registers[:site].source, INCLUDES_DIR)
         validate_dir(dir, context.registers[:site].safe)
 
-        file = retrieve_variable(context) || @file
+        file = render_variable(context) || @file
         validate_file_name(file)
 
         path = File.join(dir, file)
@@ -116,9 +124,9 @@ eos
 
       def validate_file(file, safe)
         if !File.exists?(file)
-          raise IOError.new "Included file '#{@file}' not found in '#{INCLUDES_DIR}' directory"
+          raise IOError.new "Included file '#{file}' not found in '#{INCLUDES_DIR}' directory"
         elsif File.symlink?(file) && safe
-          raise IOError.new "The included file '#{INCLUDES_DIR}/#{@file}' should not be a symlink"
+          raise IOError.new "The included file '#{INCLUDES_DIR}/#{file}' should not be a symlink"
         end
       end
 

@@ -471,5 +471,36 @@ CONTENT
       end
     end
 
+    context "include tag with variable and liquid filters" do
+      setup do
+        stub(Jekyll).configuration do
+          Jekyll::Configuration::DEFAULTS.deep_merge({'pygments' => true}).deep_merge({'source' => source_dir, 'destination' => dest_dir})
+        end
+
+        site = Site.new(Jekyll.configuration)
+        post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
+        layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
+        post.render(layouts, {"site" => {"posts" => []}})
+        @content = post.content
+      end
+
+      should "include file as variable with liquid filters" do
+        assert_match %r{1 included}, @content
+        assert_match %r{2 included}, @content
+        assert_match %r{3 included}, @content
+        assert_match %r{4 included}, @content
+      end
+
+      should "include file as variable and liquid filters with arbitrary whitespace" do
+        assert_match %r{5 included}, @content
+        assert_match %r{6 included}, @content
+        assert_match %r{7 included}, @content
+      end
+
+      should "include file as variable and filters with additional parameters" do
+        assert_match '<li>var1 = foo</li>', @content
+        assert_match '<li>var2 = bar</li>', @content
+      end
+    end
   end
 end
