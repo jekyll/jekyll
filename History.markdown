@@ -10,7 +10,7 @@
 
 ### Site Enhancements
 
-## 1.4.0 / 2013-12-7
+## 1.4.0 / 2013-12-07
 
 ### Major Enhancements
   * Add support for TOML config files (#1765)

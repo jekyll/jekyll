@@ -5,7 +5,7 @@ permalink: /docs/history/
 prev_section: contributing
 ---
 
-## 1.4.0 / 2013-12-7
+## 1.4.0 / 2013-12-07
 
 ### Major Enhancements
 - Add support for TOML config files ([#1765]({{ site.repository }}/issues/1765))
