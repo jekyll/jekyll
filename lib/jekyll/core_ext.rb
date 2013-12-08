@@ -61,12 +61,3 @@ module Enumerable
     any? { |exp| File.fnmatch?(exp, e) }
   end
 end
-
-# Ruby 1.8's File.read don't support option.
-# read_with_options ignore optional parameter for 1.8,
-# and act as alias for 1.9 or later.
-class File
-  def self.read_with_options(path, opts = {})
-    self.read(path, opts)
-  end
-end
