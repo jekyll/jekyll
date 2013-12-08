@@ -1,11 +1,9 @@
-if RUBY_VERSION > '1.9'
-  require 'simplecov'
-  require 'simplecov-gem-adapter'
-  SimpleCov.start('gem')
+require 'simplecov'
+require 'simplecov-gem-adapter'
+SimpleCov.start('gem')
 
-  require 'coveralls'
-  Coveralls.wear_merged!
-end
+require 'coveralls'
+Coveralls.wear_merged!
 
 require 'rubygems'
 require 'test/unit'
@@ -19,7 +17,6 @@ require 'rdiscount'
 require 'kramdown'
 require 'redcarpet'
 
-require 'redgreen' if RUBY_VERSION < '1.9'
 require 'shoulda'
 require 'rr'
 
