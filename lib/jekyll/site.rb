@@ -77,10 +77,9 @@ module Jekyll
               require f
             end
         end
-        self.gems.each do |gem|
-          require gem
-        end
       end
+
+      require_gems
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
@@ -95,6 +94,22 @@ module Jekyll
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
         end
       end
+    end
+
+    def require_gems
+      self.gems.each do |gem|
+        if plugin_allowed?(gem)
+          require gem
+        end
+      end
+    end
+
+    def plugin_allowed?(gem_name)
+      whitelist.include?(gem_name) || !self.safe
+    end
+
+    def whitelist
+      @whitelist ||= Array[self.config['whitelist']].flatten || []
     end
 
     # Internal: Setup the plugin search path
