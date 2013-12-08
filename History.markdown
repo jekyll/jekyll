@@ -12,6 +12,8 @@
 
 ### Site Enhancements
 
+* Move CSS to includes & update normalize.css to v2.1.3 (#1787)
+
 ## 1.4.0 / 2013-12-07
 
 ### Major Enhancements
