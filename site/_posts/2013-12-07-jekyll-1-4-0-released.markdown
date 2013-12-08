@@ -8,8 +8,8 @@ categories: [release]
 ---
 
 About a month after the release of Jekyll v1.3.0, we are releasing
-Jekyll v1.4.0. This release will be the last release to support Ruby
-1.8.7 and our next release will be Jekyll 2.0.0
+Jekyll v1.4.0. This release will be the last non-patch release to support Ruby
+1.8.7 and our next release will be Jekyll 2.0.0.
 
 Here are a few things we think you'll want to know about this release:
 
@@ -18,8 +18,9 @@ Here are a few things we think you'll want to know about this release:
 * Maruku has been updated to 0.7.0 which provides some new features and
   a ton of bugfixes over the previous 0.6.x releases.
 
-* Plugins are now sorted before they're processed, which can provide a
-  rudimentary way to establish a load order for plugins
+* Non-`gem` Plugins are now sorted alphabetically by filename before they're
+  processed, which can provide a rudimentary way to establish a load order for
+  plugins.
 
 For a full run-down, visit our [change log](/docs/history/)!
 
