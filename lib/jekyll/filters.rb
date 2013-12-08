@@ -100,7 +100,7 @@ module Jekyll
     def cgi_escape(input)
       CGI::escape(input)
     end
-    
+
     # URI escape a string.
     #
     # input - The String to escape.
@@ -158,6 +158,31 @@ module Jekyll
       input.to_json
     end
 
+
+    # Group an array of items by a property
+    #
+    # input - the inputted Enumerable
+    # property - the property
+    #
+    # Returns an array of Hashes, each looking something like this:
+    #  {"name"  => "larry"
+    #   "items" => [...] } # all the items where `property` == "larry"
+    def group_by(input, property)
+      if groupable?(input)
+        input.group_by do |item|
+          if item.respond_to?(:data)
+            item.data[property.to_s].to_s
+          else
+            item[property.to_s].to_s
+          end
+        end.inject([]) do |memo, i|
+          memo << {"name" => i.first, "items" => i.last}
+        end
+      else
+        input
+      end
+    end
+
     private
     def time(input)
       case input
@@ -169,6 +194,10 @@ module Jekyll
         Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)
       end
+    end
+
+    def groupable?(element)
+      element.respond_to?(:group_by)
     end
   end
 end
