@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name              = 'jekyll'
   s.version           = '1.4.0'
   s.license           = 'MIT'
-  s.date              = '2013-12-07'
+  s.date              = '2013-12-09'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -131,6 +131,10 @@ Gem::Specification.new do |s|
     site/README
     site/_config.yml
     site/_includes/analytics.html
+    site/_includes/css/gridism.css
+    site/_includes/css/normalize.css
+    site/_includes/css/pygments.css
+    site/_includes/css/style.css
     site/_includes/docs_contents.html
     site/_includes/docs_contents_mobile.html
     site/_includes/docs_option.html
@@ -161,10 +165,7 @@ Gem::Specification.new do |s|
     site/_posts/2013-11-04-jekyll-1-3-0-released.markdown
     site/_posts/2013-11-26-jekyll-1-3-1-released.markdown
     site/_posts/2013-12-07-jekyll-1-4-0-released.markdown
-    site/css/gridism.css
-    site/css/normalize.css
-    site/css/pygments.css
-    site/css/style.css
+    site/css/screen.css
     site/docs/configuration.md
     site/docs/contributing.md
     site/docs/datafiles.md
