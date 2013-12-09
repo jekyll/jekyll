@@ -193,8 +193,10 @@ module Jekyll
     end
 
     def read_things(dir, magic_dir, klass)
-      things = get_entries(dir, magic_dir).map do |entry|
+      get_entries(dir, magic_dir).map do |entry|
         klass.new(self, self.source, dir, entry) if klass.valid?(entry)
+      end.reject do |entry|
+        entry.nil?
       end
     end
 
