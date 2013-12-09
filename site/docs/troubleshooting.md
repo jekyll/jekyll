@@ -41,7 +41,7 @@ sudo gem update --system
 {% endhighlight %}
 
 If you still have issues, you may need to [use XCode to install Command Line
-Tools](http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/)
+Tools](http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html)
 that will allow you to install native gems using the following command:
 
 {% highlight bash %}
