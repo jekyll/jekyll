@@ -330,6 +330,7 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   use_coderay: false
+  input: GFM
 
   coderay:
     coderay_wrap: div
