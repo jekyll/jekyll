@@ -464,21 +464,21 @@ CONTENT
         }
       end
 
-#       context "with pygments enabled" do
-#         setup do
-#           @markdown = Converters::Markdown.new @config.merge({ 'pygments' => true })
-#         end
+      context "with pygments enabled" do
+        setup do
+          @markdown = Converters::Markdown.new @config.merge({ 'pygments' => true })
+        end
 
-#         should "render fenced code blocks with syntax highlighting" do
-#           assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
-#             <<-EOS
-# ```ruby
-# puts "Hello world"
-# ```
-#             EOS
-#           ).strip
-#         end
-#       end
+        should "render fenced code blocks with syntax highlighting" do
+          assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
+            <<-EOS
+```ruby
+puts "Hello world"
+```
+            EOS
+          ).strip
+        end
+      end
 
       context "with pygments disabled" do
         setup do
