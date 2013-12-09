@@ -12,6 +12,7 @@
 
 ### Site Enhancements
 
+* Document Kramdown's GFM parser option (#1791)
 * Move CSS to includes & update normalize.css to v2.1.3 (#1787)
 
 ## 1.4.0 / 2013-12-07
