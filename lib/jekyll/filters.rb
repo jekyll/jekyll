@@ -170,11 +170,7 @@ module Jekyll
     def group_by(input, property)
       if groupable?(input)
         input.group_by do |item|
-          if item.respond_to?(:data)
-            item.data[property.to_s].to_s
-          else
-            item[property.to_s].to_s
-          end
+          item_property(item, property).to_s
         end.inject([]) do |memo, i|
           memo << {"name" => i.first, "items" => i.last}
         end
@@ -198,6 +194,14 @@ module Jekyll
 
     def groupable?(element)
       element.respond_to?(:group_by)
+    end
+
+    def item_property(item, property)
+      if item.respond_to?(:data)
+        item.data[property.to_s]
+      else
+        item[property.to_s]
+      end
     end
   end
 end
