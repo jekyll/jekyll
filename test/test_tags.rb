@@ -452,48 +452,30 @@ CONTENT
       end
     end
 
+    context "with fenced code blocks with backticks" do
 
-    context "with maruku and fenced code blocks with backticks" do
-
+      # setup do
+        # @config = {
+        #   'markdown' => 'maruku',
+        #   'maruku' => {
+        #     'fenced_code_blocks' => true
+        #   }
+        # }
+      # end
       setup do
-        @config = {
-          'markdown' => 'maruku',
-          'maruku' => {
-            'fenced_code_blocks' => true
-          }
-        }
-      end
-
-      context "with pygments enabled" do
-        setup do
-          @markdown = Converters::Markdown.new @config.merge({ 'pygments' => true })
-        end
-
-        should "render fenced code blocks with syntax highlighting" do
-          assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
-            <<-EOS
+        content = <<CONTENT
 ```ruby
 puts "Hello world"
 ```
-            EOS
-          ).strip
-        end
+CONTENT
+        create_post(content, {
+          'maruku' => {'fenced_code_blocks' => true}}
+        )
       end
 
-      context "with pygments disabled" do
-        setup do
-          @markdown = Converters::Markdown.new @config.merge({ 'pygments' => false })
-        end
-
-        should "render fenced code blocks without syntax highlighting" do
-          assert_equal "<pre class=\"ruby\"><code class=\"ruby\">\nputs &quot;Hello world&quot;\n</code></pre>", @markdown.convert(
-            <<-EOS
-```ruby
-puts "Hello world"
-```
-            EOS
-          ).strip
-        end
+      # todo: if #112 is merged into maruku, update to remove the newlines inside code block
+      should "render fenced code blocks" do
+        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">\nputs &quot;Hello world&quot;\n</code></pre>}, @result.strip
       end
     end
 
