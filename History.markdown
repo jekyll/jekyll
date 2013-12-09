@@ -6,6 +6,9 @@
 
 ### Minor Enhancements
 
+* Move the EntryFilter class into the Jekyll module to avoid polluting the
+  global namespace (#1800)
+
 ### Bug Fixes
 
 ### Development Fixes
