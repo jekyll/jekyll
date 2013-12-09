@@ -330,7 +330,6 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   use_coderay: false
-  input: GFM
 
   coderay:
     coderay_wrap: div
@@ -373,3 +372,12 @@ All other extensions retain their usual names from Redcarpet, and no renderer op
 - `autolink`
 
 [redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v2.2.2/README.markdown#and-its-like-really-simple-to-use
+
+### Kramdown
+
+In addition to the defaults mentioned above, you can also turn on recognition of Github Flavored Markdown by passing an `input` option with a value of "GFM".
+
+For example, in your `_config.yml`:
+
+    kramdown:
+      input: GFM
