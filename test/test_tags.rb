@@ -454,14 +454,6 @@ CONTENT
 
     context "with fenced code blocks with backticks" do
 
-      # setup do
-        # @config = {
-        #   'markdown' => 'maruku',
-        #   'maruku' => {
-        #     'fenced_code_blocks' => true
-        #   }
-        # }
-      # end
       setup do
         content = <<CONTENT
 ```ruby
