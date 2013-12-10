@@ -8,7 +8,7 @@ categories: [release]
 ---
 
 Another quick turnover, anyone? A [critical
-bug](https://github.com/mojombo/jekyll/issues/1794) in the reading of
+bug]({{ site.repository }}/issues/1794) in the reading of
 posts snuck itself into the 1.4.0 release.
 
 To address this issue, we're releasing v1.4.1 of Jekyll so that you can
