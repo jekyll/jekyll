@@ -14,6 +14,7 @@
 * Don't allow nil entries when loading posts (#1796)
 
 ### Development Fixes
+* Add a link to the site in the README.md file (#1795)
 
 ### Site Enhancements
 
