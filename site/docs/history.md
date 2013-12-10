@@ -5,6 +5,73 @@ permalink: /docs/history/
 prev_section: contributing
 ---
 
+## 1.4.1 / 2013-12-09
+
+### Major Enhancements
+
+### Minor Enhancements
+
+### Bug Fixes
+- Don't allow nil entries when loading posts ([#1796]({{ site.repository }}/issues/1796))
+
+### Development Fixes
+
+### Site Enhancements
+
+## 1.4.0 / 2013-12-07
+
+### Major Enhancements
+- Add support for TOML config files ([#1765]({{ site.repository }}/issues/1765))
+
+### Minor Enhancements
+- Sort plugins as a way to establish a load order ([#1682]({{ site.repository }}/issues/1682))
+- Update Maruku to 0.7.0 ([#1775]({{ site.repository }}/issues/1775))
+
+### Bug Fixes
+- Add a space between two words in a Pagination warning message ([#1769]({{ site.repository }}/issues/1769))
+- Upgrade `toml` gem to `v0.1.0` to maintain compat with Ruby 1.8.7 ([#1778]({{ site.repository }}/issues/1778))
+
+### Development Fixes
+- Remove some whitespace in the code ([#1755]({{ site.repository }}/issues/1755))
+- Remove some duplication in the reading of posts and drafts ([#1779]({{ site.repository }}/issues/1779))
+
+### Site Enhancements
+- Fixed case of a word in the Jekyll v1.3.0 release post ([#1762]({{ site.repository }}/issues/1762))
+- Fixed the mime type for the favicon ([#1772]({{ site.repository }}/issues/1772))
+
+## 1.3.1 / 2013-11-26
+
+### Minor Enhancements
+- Add a `--prefix` option to passthrough for the importers ([#1669]({{ site.repository }}/issues/1669))
+- Push the paginator plugin lower in the plugin priority order so
+    other plugins run before it ([#1759]({{ site.repository }}/issues/1759))
+
+### Bug Fixes
+- Fix the include tag when ran in a loop ([#1726]({{ site.repository }}/issues/1726))
+- Fix errors when using `--watch` on 1.8.7 ([#1730]({{ site.repository }}/issues/1730))
+- Specify where the include is called from if an included file is
+    missing ([#1746]({{ site.repository }}/issues/1746))
+
+### Development Fixes
+- Extract `Site#filter_entries` into its own object ([#1697]({{ site.repository }}/issues/1697))
+- Enable Travis' bundle caching ([#1734]({{ site.repository }}/issues/1734))
+- Remove trailing whitespace in some files ([#1736]({{ site.repository }}/issues/1736))
+- Fix a duplicate test name ([#1754]({{ site.repository }}/issues/1754))
+
+### Site Enhancements
+- Update link to example Rakefile to point to specific commit ([#1741]({{ site.repository }}/issues/1741))
+- Fix drafts docs to indicate that draft time is based on file modification
+    time, not `Time.now` ([#1695]({{ site.repository }}/issues/1695))
+- Add `jekyll-monthly-archive-plugin` and `jekyll-category-archive-plugin` to
+    list of third-party plugins ([#1693]({{ site.repository }}/issues/1693))
+- Add `jekyll-asset-path-plugin` to list of third-party plugins ([#1670]({{ site.repository }}/issues/1670))
+- Add `emoji-for-jekyll` to list of third-part plugins ([#1708]({{ site.repository }}/issues/1708))
+- Fix previous section link on plugins page to point to pagination page ([#1707]({{ site.repository }}/issues/1707))
+- Add `org-mode` converter plugin to third-party plugins ([#1711]({{ site.repository }}/issues/1711))
+- Point "Blog migrations" page to http://import.jekyllrb.com ([#1732]({{ site.repository }}/issues/1732))
+- Add docs for `post_url` when posts are in subdirectories ([#1718]({{ site.repository }}/issues/1718))
+- Update the docs to point to `example.com` ([#1448]({{ site.repository }}/issues/1448))
+
 ## 1.3.0 / 2013-11-04
 
 ### Major Enhancements

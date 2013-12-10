@@ -3,16 +3,17 @@ require 'helper'
 class TestFilters < Test::Unit::TestCase
   class JekyllFilter
     include Jekyll::Filters
+    attr_accessor :site, :context
 
-    def initialize
-      site = Jekyll::Site.new(Jekyll.configuration({}))
-      @context = Liquid::Context.new({}, {}, { :site => site })
+    def initialize(opts = {})
+      @site = Jekyll::Site.new(Jekyll.configuration(opts))
+      @context = Liquid::Context.new({}, {}, { :site => @site })
     end
   end
 
   context "filters" do
     setup do
-      @filter = JekyllFilter.new
+      @filter = JekyllFilter.new({"source" => source_dir, "destination" => dest_dir})
       @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @array_of_objects = [
@@ -117,6 +118,27 @@ class TestFilters < Test::Unit::TestCase
       should "proper filter objects using where" do
         assert_equal "some string", @filter.where("some string", nil, nil)
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
+      end
+    end
+
+    context "group_by filter" do
+      should "successfully group array of Jekyll::Page's" do
+        @filter.site.process
+        grouping = @filter.group_by(@filter.site.pages, "layout")
+        grouping.each do |g|
+          assert ["default", "nil", ""].include?(g["name"]), "#{g['name']} isn't a valid grouping."
+          case g["name"]
+          when "default"
+            assert g["items"].is_a?(Array), "The list of grouped items for 'default' is not an Array."
+            assert_equal 3, g["items"].size
+          when "nil"
+            assert g["items"].is_a?(Array), "The list of grouped items for 'nil' is not an Array."
+            assert_equal 2, g["items"].size
+          when ""
+            assert g["items"].is_a?(Array), "The list of grouped items for '' is not an Array."
+            assert_equal 5, g["items"].size
+          end
+        end
       end
     end
   end

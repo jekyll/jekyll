@@ -67,28 +67,28 @@ Feature: Site configuration
     And I have a configuration file with "markdown" set to "rdiscount"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "<a href="http://google.com">Google</a>" in "_site/index.html"
+    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Use Kramdown for markup
     Given I have an "index.markdown" page that contains "[Google](http://google.com)"
     And I have a configuration file with "markdown" set to "kramdown"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "<a href="http://google.com">Google</a>" in "_site/index.html"
+    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Use Redcarpet for markup
     Given I have an "index.markdown" page that contains "[Google](http://google.com)"
     And I have a configuration file with "markdown" set to "redcarpet"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "<a href="http://google.com">Google</a>" in "_site/index.html"
+    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Use Maruku for markup
     Given I have an "index.markdown" page that contains "[Google](http://google.com)"
     And I have a configuration file with "markdown" set to "maruku"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "<a href='http://google.com'>Google</a>" in "_site/index.html"
+    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Highlight code with pygments
     Given I have an "index.html" file that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
@@ -232,4 +232,27 @@ Feature: Site configuration
     When I run jekyll
     Then the _site directory should exist
     And I should see "Whatever" in "_site/index.html"
+    And I should see "this is a test" in "_site/test.txt"
+
+  Scenario: Add an empty whitelist to restrict all gems
+    Given I have an "index.html" file that contains "Whatever"
+    And I have a configuration file with:
+      | key       | value |
+      | gems      | [jekyll_test_plugin] |
+      | whitelist | [] |
+    When I run jekyll in safe mode
+    Then the _site directory should exist
+    And I should see "Whatever" in "_site/index.html"
+    And the "_site/test.txt" file should not exist
+
+  Scenario: Add a whitelist to restrict some gems but allow others
+    Given I have an "index.html" file that contains "Whatever"
+    And I have a configuration file with:
+      | key       | value |
+      | gems      | [jekyll_test_plugin, jekyll_test_plugin_malicious] |
+      | whitelist | [jekyll_test_plugin] |
+    When I run jekyll in safe mode
+    Then the _site directory should exist
+    And I should see "Whatever" in "_site/index.html"
+    And the "_site/test.txt" file should exist
     And I should see "this is a test" in "_site/test.txt"

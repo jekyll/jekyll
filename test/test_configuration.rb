@@ -30,7 +30,7 @@ class TestConfiguration < Test::Unit::TestCase
       @config = Configuration[{"source" => source_dir}]
       @no_override     = {}
       @one_config_file = {"config" => "config.yml"}
-      @multiple_files  = {"config" => %w[config/site.yml config/deploy.yml configuration.yml]}
+      @multiple_files  = {"config" => %w[config/site.yml config/deploy.toml configuration.yml]}
     end
 
     should "always return an array" do
@@ -45,7 +45,7 @@ class TestConfiguration < Test::Unit::TestCase
       assert_equal %w[config.yml], @config.config_files(@one_config_file)
     end
     should "return an array of the config files if given many config files" do
-      assert_equal %w[config/site.yml config/deploy.yml configuration.yml], @config.config_files(@multiple_files)
+      assert_equal %w[config/site.yml config/deploy.toml configuration.yml], @config.config_files(@multiple_files)
     end
   end
   context "#backwards_compatibilize" do
@@ -131,6 +131,7 @@ class TestConfiguration < Test::Unit::TestCase
       @paths = {
         :default => File.join(Dir.pwd, '_config.yml'),
         :other   => File.join(Dir.pwd, '_config.live.yml'),
+        :toml    => source_dir('_config.dev.toml'),
         :empty   => ""
       }
     end
@@ -153,12 +154,20 @@ class TestConfiguration < Test::Unit::TestCase
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({ "config" => @paths[:empty] })
     end
 
+    should "successfully load a TOML file" do
+      Jekyll.logger.log_level = Jekyll::Stevenson::WARN
+      assert_equal Jekyll::Configuration::DEFAULTS.merge({ "baseurl" => "/you-beautiful-blog-you", "title" => "My magnificent site, wut" }), Jekyll.configuration({ "config" => [@paths[:toml]] })
+      Jekyll.logger.log_level = Jekyll::Stevenson::INFO
+    end
+
     should "load multiple config files" do
       mock(YAML).safe_load_file(@paths[:default]) { Hash.new }
       mock(YAML).safe_load_file(@paths[:other]) { Hash.new }
+      mock(TOML).load_file(@paths[:toml]) { Hash.new }
       mock($stdout).puts("Configuration file: #{@paths[:default]}")
       mock($stdout).puts("Configuration file: #{@paths[:other]}")
-      assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })
+      mock($stdout).puts("Configuration file: #{@paths[:toml]}")
+      assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({ "config" => [@paths[:default], @paths[:other], @paths[:toml]] })
     end
 
     should "load multiple config files and last config should win" do

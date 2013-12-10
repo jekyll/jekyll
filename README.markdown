@@ -1,4 +1,4 @@
-# Jekyll
+# [Jekyll](http://jekyllrb.com/)
 
 [![Gem Version](https://badge.fury.io/rb/jekyll.png)](http://badge.fury.io/rb/jekyll)
 

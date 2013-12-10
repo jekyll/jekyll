@@ -19,7 +19,7 @@ Here are a few things we think you'll want to know about this release:
   repetition in your templates and to set site specific options without
   changing `_config.yml`.
 
-* You can now Run `jekyll serve --detach` to boot up a WEBrick server in the
+* You can now run `jekyll serve --detach` to boot up a WEBrick server in the
   background. **Note:** you'll need to run `kill [server_pid]` to shut
   the server down. When ran, you'll get a process id that you can use in
   place of `[server_pid]`

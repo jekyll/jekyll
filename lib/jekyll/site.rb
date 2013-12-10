@@ -73,14 +73,13 @@ module Jekyll
       # directory.
       unless self.safe
         self.plugins.each do |plugins|
-            Dir[File.join(plugins, "**/*.rb")].each do |f|
+            Dir[File.join(plugins, "**/*.rb")].sort.each do |f|
               require f
             end
         end
-        self.gems.each do |gem|
-          require gem
-        end
       end
+
+      require_gems
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
@@ -95,6 +94,22 @@ module Jekyll
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
         end
       end
+    end
+
+    def require_gems
+      self.gems.each do |gem|
+        if plugin_allowed?(gem)
+          require gem
+        end
+      end
+    end
+
+    def plugin_allowed?(gem_name)
+      whitelist.include?(gem_name) || !self.safe
+    end
+
+    def whitelist
+      @whitelist ||= Array[self.config['whitelist']].flatten || []
     end
 
     # Internal: Setup the plugin search path
@@ -169,19 +184,14 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      entries = get_entries(dir, '_posts')
+      posts = read_things(dir, '_posts', Post)
 
-      # first pass processes, but does not yet render post content
-      entries.each do |f|
-        if Post.valid?(f)
-          post = Post.new(self, self.source, dir, f)
-
-          if post.published && (self.future || post.date <= self.time)
-            aggregate_post_info(post)
-          end
+      posts.each do |post|
+        if post.published && (self.future || post.date <= self.time)
+          aggregate_post_info(post)
         end
       end
-    end
+   end
 
     # Read all the files in <source>/<dir>/_drafts and create a new Post
     # object with each one.
@@ -190,15 +200,18 @@ module Jekyll
     #
     # Returns nothing.
     def read_drafts(dir)
-      entries = get_entries(dir, '_drafts')
+      drafts = read_things(dir, '_drafts', Draft)
 
-      # first pass processes, but does not yet render draft content
-      entries.each do |f|
-        if Draft.valid?(f)
-          draft = Draft.new(self, self.source, dir, f)
+      drafts.each do |draft|
+        aggregate_post_info(draft)
+      end
+    end
 
-          aggregate_post_info(draft)
-        end
+    def read_things(dir, magic_dir, klass)
+      get_entries(dir, magic_dir).map do |entry|
+        klass.new(self, self.source, dir, entry) if klass.valid?(entry)
+      end.reject do |entry|
+        entry.nil?
       end
     end
 

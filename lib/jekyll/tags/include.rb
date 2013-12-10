@@ -13,7 +13,7 @@ module Jekyll
 
       SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
 
-      VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/      
+      VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
 
       INCLUDES_DIR = '_includes'
 

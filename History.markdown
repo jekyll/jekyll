@@ -1,9 +1,66 @@
 ## HEAD
 
 ### Major Enhancements
+  * Add gem-based plugin whitelist to safe mode (#1657)
+
+### Minor Enhancements
+  * Move the EntryFilter class into the Jekyll module to avoid polluting the
+    global namespace (#1800)
+  * Add `group_by` Liquid filter create lists of items grouped by a common
+    property's value (#1788)
+
+### Bug Fixes
+  * Don't allow nil entries when loading posts (#1796)
+
+### Development Fixes
+  * Add a link to the site in the README.md file (#1795)
+
+### Site Enhancements
+  * Document Kramdown's GFM parser option (#1791)
+  * Move CSS to includes & update normalize.css to v2.1.3 (#1787)
+  * Fix broken link to installation of Ruby on Mountain Lion blog post on
+    Troubleshooting docs page (#1797)
+
+## 1.4.1 / 2013-12-09
+
+### Major Enhancements
+
+### Minor Enhancements
+
+### Bug Fixes
+  * Don't allow nil entries when loading posts (#1796)
+
+### Development Fixes
+
+### Site Enhancements
+
+## 1.4.0 / 2013-12-07
+
+### Major Enhancements
+  * Add support for TOML config files (#1765)
+
+### Minor Enhancements
+  * Sort plugins as a way to establish a load order (#1682)
+  * Update Maruku to 0.7.0 (#1775)
+
+### Bug Fixes
+  * Add a space between two words in a Pagination warning message (#1769)
+  * Upgrade `toml` gem to `v0.1.0` to maintain compat with Ruby 1.8.7 (#1778)
+
+### Development Fixes
+  * Remove some whitespace in the code (#1755)
+  * Remove some duplication in the reading of posts and drafts (#1779)
+
+### Site Enhancements
+  * Fixed case of a word in the Jekyll v1.3.0 release post (#1762)
+  * Fixed the mime type for the favicon (#1772)
+
+## 1.3.1 / 2013-11-26
 
 ### Minor Enhancements
   * Add a `--prefix` option to passthrough for the importers (#1669)
+  * Push the paginator plugin lower in the plugin priority order so
+    other plugins run before it (#1759)
 
 ### Bug Fixes
   * Fix the include tag when ran in a loop (#1726)
@@ -15,6 +72,7 @@
   * Extract `Site#filter_entries` into its own object (#1697)
   * Enable Travis' bundle caching (#1734)
   * Remove trailing whitespace in some files (#1736)
+  * Fix a duplicate test name (#1754)
 
 ### Site Enhancements
   * Update link to example Rakefile to point to specific commit (#1741)

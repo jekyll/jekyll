@@ -226,7 +226,7 @@ CONTENT
       assert_no_match /markdown\-html\-error/, @result
     end
 
-    should "have the url to the \"nested\" post from 2008-11-21" do
+    should "have the url to the \"complex\" post from 2008-11-21" do
       assert_match %r{1\s/2008/11/21/complex/}, @result
       assert_match %r{2\s/2008/11/21/complex/}, @result
     end
@@ -252,7 +252,7 @@ CONTENT
       end
 
       should "write script tag" do
-        assert_match "<script src='https://gist.github.com/#{@gist}.js'>\s</script>", @result
+        assert_match "<script src='https://gist.github.com/#{@gist}.js'><![CDATA[\s]]></script>", @result
       end
     end
 
@@ -272,7 +272,7 @@ CONTENT
         end
 
         should "write script tag with specific file in gist" do
-          assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'>\s</script>", @result
+          assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'><![CDATA[\s]]></script>", @result
         end
       end
 
@@ -308,7 +308,7 @@ CONTENT
       end
 
       should "write script tag with specific file in gist" do
-        assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'>\s</script>", @result
+        assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'><![CDATA[\s]]></script>", @result
       end
     end
 

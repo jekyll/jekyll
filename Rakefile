@@ -156,7 +156,7 @@ namespace :site do
 
   desc "Update normalize.css library to the latest version and minify"
   task :update_normalize_css do
-    Dir.chdir("site/css") do
+    Dir.chdir("site/_includes/css") do
       sh 'curl "http://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
       sh 'sass "normalize.scss":"normalize.css" --style compressed'
       sh 'rm "normalize.scss"'
@@ -218,7 +218,7 @@ namespace :site do
       abort "You seem to have misplaced your History.markdown file. I can haz?"
     end
   end
-  
+
   namespace :releases do
     desc "Create new release post"
     task :new, :version do |t, args|

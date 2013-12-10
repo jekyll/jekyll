@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.3.0'
+  s.version           = '1.4.0'
   s.license           = 'MIT'
-  s.date              = '2013-11-04'
+  s.date              = '2013-12-09'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -26,12 +26,13 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('liquid', "~> 2.5.2")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('listen', "~> 1.3")
-  s.add_runtime_dependency('maruku', "~> 0.6.0")
+  s.add_runtime_dependency('maruku', "~> 0.7.0")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('commander', "~> 4.1.3")
   s.add_runtime_dependency('safe_yaml', "~> 0.9.7")
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 2.3.0")
+  s.add_runtime_dependency('toml', '~> 0.1.0')
 
   s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")
@@ -49,6 +50,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('mime-types', "~> 1.5")
   s.add_development_dependency('activesupport', '~> 3.2.13')
   s.add_development_dependency('jekyll_test_plugin')
+  s.add_development_dependency('jekyll_test_plugin_malicious')
 
   # = MANIFEST =
   s.files = %w[
@@ -95,6 +97,7 @@ Gem::Specification.new do |s|
     lib/jekyll/core_ext.rb
     lib/jekyll/deprecator.rb
     lib/jekyll/draft.rb
+    lib/jekyll/entry_filter.rb
     lib/jekyll/errors.rb
     lib/jekyll/excerpt.rb
     lib/jekyll/filters.rb
@@ -128,6 +131,10 @@ Gem::Specification.new do |s|
     site/README
     site/_config.yml
     site/_includes/analytics.html
+    site/_includes/css/gridism.css
+    site/_includes/css/normalize.css
+    site/_includes/css/pygments.css
+    site/_includes/css/style.css
     site/_includes/docs_contents.html
     site/_includes/docs_contents_mobile.html
     site/_includes/docs_option.html
@@ -156,10 +163,9 @@ Gem::Specification.new do |s|
     site/_posts/2013-09-14-jekyll-1-2-1-released.markdown
     site/_posts/2013-10-28-jekyll-1-3-0-rc1-released.markdown
     site/_posts/2013-11-04-jekyll-1-3-0-released.markdown
-    site/css/gridism.css
-    site/css/normalize.css
-    site/css/pygments.css
-    site/css/style.css
+    site/_posts/2013-11-26-jekyll-1-3-1-released.markdown
+    site/_posts/2013-12-07-jekyll-1-4-0-released.markdown
+    site/css/screen.css
     site/docs/configuration.md
     site/docs/contributing.md
     site/docs/datafiles.md
@@ -209,6 +215,7 @@ Gem::Specification.new do |s|
     test/helper.rb
     test/source/+/foo.md
     test/source/.htaccess
+    test/source/_config.dev.toml
     test/source/_data/languages.yml
     test/source/_data/members.yaml
     test/source/_data/products.yml
@@ -273,6 +280,7 @@ Gem::Specification.new do |s|
     test/test_configuration.rb
     test/test_convertible.rb
     test/test_core_ext.rb
+    test/test_entry_filter.rb
     test/test_excerpt.rb
     test/test_filters.rb
     test/test_generated_site.rb
