@@ -179,6 +179,24 @@ module Jekyll
       end
     end
 
+    # Sort an array of items by a property
+    #
+    # input - an Enumerable
+    # property - the property to sort by
+    #
+    # Returns an array of Hashes, each looking something like this:
+    #  {"name"  => "larry"
+    #   "items" => [...] } # all the items where `property` == "larry"
+    def sort_by(input, property)
+      if sortable?(input)
+        input.sort_by do |item|
+          item_property(item, property).to_s
+        end
+      else
+        input
+      end
+    end
+
     private
     def time(input)
       case input
@@ -190,6 +208,10 @@ module Jekyll
         Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)
       end
+    end
+
+    def sortable?(element)
+      element.respond_to?(:sort_by)
     end
 
     def groupable?(element)
