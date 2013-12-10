@@ -11,6 +11,8 @@
 
 ### Bug Fixes
 
+* Don't allow nil entries when loading posts (#1796)
+
 ### Development Fixes
 
 ### Site Enhancements
