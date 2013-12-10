@@ -158,6 +158,17 @@ module Jekyll
       input.to_json
     end
 
+    # Filter an array of objects
+    #
+    # input - the object array
+    # key - key within each object to filter by
+    # value - desired value
+    #
+    # Returns the filtered array of objects
+    def where(input, key, value)
+      return input unless input.class == Array
+      input.select { |object| object[key] == value }
+    end
 
     # Group an array of items by a property
     #
