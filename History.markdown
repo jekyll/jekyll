@@ -22,6 +22,19 @@
 * Fix broken link to installation of Ruby on Mountain Lion blog post on
   Troubleshooting docs page (#1797)
 
+## 1.4.1 / 2013-12-09
+
+### Major Enhancements
+
+### Minor Enhancements
+
+### Bug Fixes
+  * Don't allow nil entries when loading posts (#1796)
+
+### Development Fixes
+
+### Site Enhancements
+
 ## 1.4.0 / 2013-12-07
 
 ### Major Enhancements
