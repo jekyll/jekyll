@@ -252,8 +252,8 @@ end
 #############################################################################
 
 task :release => :build do
-  unless `git branch` =~ /^\* master$/
-    puts "You must be on the master branch to release!"
+  unless `git branch` =~ /^(\* master|\* v1-stable)$/
+    puts "You must be on the master branch or the v1-stable branch to release!"
     exit!
   end
   sh "git commit --allow-empty -m 'Release #{version}'"
