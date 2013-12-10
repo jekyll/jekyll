@@ -6,6 +6,8 @@
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
     global namespace (#1800)
+  * Add `group_by` Liquid filter create lists of items grouped by a common
+    property's value (#1788)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
