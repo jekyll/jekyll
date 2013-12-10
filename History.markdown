@@ -18,6 +18,7 @@
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
   * Move CSS to includes & update normalize.css to v2.1.3 (#1787)
+  * Minify CSS only in production (#1803)
   * Fix broken link to installation of Ruby on Mountain Lion blog post on
     Troubleshooting docs page (#1797)
   * Fix issues with 1.4.1 release blog post (#1804)
