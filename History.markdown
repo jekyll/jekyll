@@ -20,6 +20,7 @@
   * Move CSS to includes & update normalize.css to v2.1.3 (#1787)
   * Fix broken link to installation of Ruby on Mountain Lion blog post on
     Troubleshooting docs page (#1797)
+  * Fix issues with 1.4.1 release blog post (#1804)
 
 ## 1.4.1 / 2013-12-09
 
