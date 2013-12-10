@@ -10,9 +10,7 @@ module Jekyll
           load_blahtext_library if @config['maruku']['use_tex']
 
           # allow fenced code blocks (new in Maruku 0.7.0)
-          if @config['maruku']['fenced_code_blocks']
-            MaRuKu::Globals[:fenced_code_blocks] = true
-          end
+          MaRuKu::Globals[:fenced_code_blocks] = !!@config['maruku']['fenced_code_blocks']
 
         rescue LoadError
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
