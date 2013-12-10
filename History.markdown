@@ -1,27 +1,23 @@
 ## HEAD
 
 ### Major Enhancements
-
-* Add gem-based plugin whitelist to safe mode (#1657)
+  * Add gem-based plugin whitelist to safe mode (#1657)
 
 ### Minor Enhancements
-
-* Move the EntryFilter class into the Jekyll module to avoid polluting the
-  global namespace (#1800)
+  * Move the EntryFilter class into the Jekyll module to avoid polluting the
+    global namespace (#1800)
 
 ### Bug Fixes
-
-* Don't allow nil entries when loading posts (#1796)
+  * Don't allow nil entries when loading posts (#1796)
 
 ### Development Fixes
-* Add a link to the site in the README.md file (#1795)
+  * Add a link to the site in the README.md file (#1795)
 
 ### Site Enhancements
-
-* Document Kramdown's GFM parser option (#1791)
-* Move CSS to includes & update normalize.css to v2.1.3 (#1787)
-* Fix broken link to installation of Ruby on Mountain Lion blog post on
-  Troubleshooting docs page (#1797)
+  * Document Kramdown's GFM parser option (#1791)
+  * Move CSS to includes & update normalize.css to v2.1.3 (#1787)
+  * Fix broken link to installation of Ruby on Mountain Lion blog post on
+    Troubleshooting docs page (#1797)
 
 ## 1.4.1 / 2013-12-09
 
