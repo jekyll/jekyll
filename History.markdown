@@ -8,6 +8,7 @@
     global namespace (#1800)
   * Add `group_by` Liquid filter create lists of items grouped by a common
     property's value (#1788)
+  * Add support for Maruku's `fenced_code_blocks` option (#1799)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
