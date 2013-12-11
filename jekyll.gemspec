@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
-  s.add_runtime_dependency('liquid', "~> 2.5.2")
+  s.add_runtime_dependency('liquid', "~> 2.6")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('listen', "~> 1.3")
   s.add_runtime_dependency('maruku', "~> 0.7.0")
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('toml', '~> 0.1.0')
 
   s.add_development_dependency('rake', "~> 10.1")
-  s.add_development_dependency('rdoc', "~> 3.11")
+  s.add_development_dependency('rdoc', "~> 4.0")
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 3.3.2")
   s.add_development_dependency('rr', "~> 1.1")
