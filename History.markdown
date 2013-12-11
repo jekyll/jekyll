@@ -31,6 +31,7 @@
     Troubleshooting docs page (#1797)
   * Fix issues with 1.4.1 release blog post (#1804)
   * Add note about deploying to OpenShift (#1812)
+  * Collect all Windows-related docs onto one page (#1818)
 
 ## 1.4.1 / 2013-12-09
 
