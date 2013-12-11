@@ -9,6 +9,8 @@ module Jekyll
       def setup
         return if @setup
         @parser = case @config['markdown']
+          when 'html_pipeline'
+            HTMLPipelineParser.new @config
           when 'redcarpet'
             RedcarpetParser.new @config
           when 'kramdown'
@@ -19,7 +21,7 @@ module Jekyll
             MarukuParser.new @config
           else
             STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
-            STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown | redcarpet ]"
+            STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown | redcarpet | html_pipeline ]"
             raise FatalException.new("Invalid Markdown process: #{@config['markdown']}")
         end
         @setup = true
