@@ -103,6 +103,11 @@ dynamically scaling to almost unlimited traffic. This approach has the
 benefit of being about the cheapest hosting option available for
 low-volume blogs as you only pay for what you use.
 
+## OpenShift
+
+If you'd like to deploy your site to an OpenShift gear, there's [a cartridge
+for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
+
 <div class="note">
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
   <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages/">host your Jekyll-powered website for free</a>.</p>
