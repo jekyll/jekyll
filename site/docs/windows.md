@@ -17,11 +17,11 @@ Madhur Ahuja has written up instructions to get
 
 ## Encoding
 
-If you use UTF-8 encoding, make sure that no <code>BOM</code> header
+If you use UTF-8 encoding, make sure that no `BOM` header
 characters exist in your files or very, very bad things will happen to
 Jekyll. This is especially relevant if you're running Jekyll on Windows.
 
-Additionally, you might need to change the code page of the console window to UTF-8 
+Additionally, you might need to change the code page of the console window to UTF-8
 in case you get a "Liquid Exception: Incompatible character encoding" error during
 the site generation process. It can be done with the following command:
 
