@@ -8,6 +8,10 @@ module Jekyll
           @errors = []
           load_divs_library if @config['maruku']['use_divs']
           load_blahtext_library if @config['maruku']['use_tex']
+
+          # allow fenced code blocks (new in Maruku 0.7.0)
+          MaRuKu::Globals[:fenced_code_blocks] = !!@config['maruku']['fenced_code_blocks']
+
         rescue LoadError
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
           STDERR.puts '  $ [sudo] gem install maruku'

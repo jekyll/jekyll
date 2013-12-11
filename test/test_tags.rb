@@ -451,5 +451,25 @@ CONTENT
         assert_match "<span id='include-param' />", @result
       end
     end
+
+    context "with fenced code blocks with backticks" do
+
+      setup do
+        content = <<CONTENT
+```ruby
+puts "Hello world"
+```
+CONTENT
+        create_post(content, {
+          'maruku' => {'fenced_code_blocks' => true}}
+        )
+      end
+
+      # todo: if #112 is merged into maruku, update to remove the newlines inside code block
+      should "render fenced code blocks" do
+        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">\nputs &quot;Hello world&quot;\n</code></pre>}, @result.strip
+      end
+    end
+
   end
 end
