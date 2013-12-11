@@ -85,7 +85,7 @@ git checkout -b my_awesome_feature
 git push origin my_awesome_feature
 {% endhighlight %}
 
-* Create a pull request against mojombo/jekyll:master and describe what your
+* Create a pull request against jekyll/jekyll:master and describe what your
   change does and the why you think it should be merged.
 
 Updating Documentation
@@ -111,7 +111,7 @@ Gotchas
 
 * If you want to bump the gem version, please put that in a separate commit.
   This way, the maintainers can control when the gem gets released.
-* Try to keep your patch(es) based from the latest commit on mojombo/jekyll.
+* Try to keep your patch(es) based from the latest commit on jekyll/jekyll.
   The easier it is to apply your work, the less work the maintainers have to do,
   which is always a good thing.
 * Please don't tag your GitHub issue with \[fix\], \[feature\], etc. The maintainers
