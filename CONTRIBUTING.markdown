@@ -53,7 +53,7 @@ Here's the most direct way to get your work merged into the project:
 * Make sure everything still passes by running `rake`.
 * If necessary, rebase your commits into logical chunks, without errors.
 * Push the branch up ( `git push origin my_awesome_feature` ).
-* Create a pull request against mojombo/jekyll and describe what your change
+* Create a pull request against jekyll/jekyll and describe what your change
   does and the why you think it should be merged.
 
 Updating Documentation
@@ -63,14 +63,14 @@ We want the Jekyll documentation to be the best it can be. We've
 open-sourced our docs and we welcome any pull requests if you find it
 lacking.
 
-You can find the documentation for jekyllrb.com in the 
-[site](https://github.com/mojombo/jekyll/tree/master/site) directory of
+You can find the documentation for jekyllrb.com in the
+[site](https://github.com/jekyll/jekyll/tree/master/site) directory of
 Jekyll's repo on GitHub.com.
 
 All documentation pull requests should be directed at `master`.  Pull
-requests directed at another branch will not be accepted. 
+requests directed at another branch will not be accepted.
 
-The [Jekyll wiki](https://github.com/mojombo/jekyll/wiki) on GitHub 
+The [Jekyll wiki](https://github.com/jekyll/jekyll/wiki) on GitHub
 can be freely updated without a pull request as all GitHub users have access.
 
 Gotchas
@@ -78,7 +78,7 @@ Gotchas
 
 * If you want to bump the gem version, please put that in a separate commit.
   This way, the maintainers can control when the gem gets released.
-* Try to keep your patch(es) based from the latest commit on mojombo/jekyll.
+* Try to keep your patch(es) based from the latest commit on jekyll/jekyll.
   The easier it is to apply your work, the less work the maintainers have to do,
   which is always a good thing.
 * Please don't tag your GitHub issue with [fix], [feature], etc. The maintainers

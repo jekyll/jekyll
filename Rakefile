@@ -169,7 +169,7 @@ namespace :site do
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
       puts "No gh-pages directory found. Run the following commands first:"
-      puts "  `git clone git@github.com:mojombo/jekyll gh-pages"
+      puts "  `git clone git@github.com:jekyll/jekyll gh-pages"
       puts "  `cd gh-pages"
       puts "  `git checkout gh-pages`"
       exit(1)

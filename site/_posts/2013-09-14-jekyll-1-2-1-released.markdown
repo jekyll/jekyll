@@ -8,7 +8,7 @@ categories: [release]
 ---
 
 Quick turnover, anyone? A [recent incompatibility with Liquid
-v2.5.2](https://github.com/mojombo/jekyll/pull/1525) produced a nasty bug in
+v2.5.2](https://github.com/jekyll/jekyll/pull/1525) produced a nasty bug in
 which `include` tags were not rendered properly within `if` blocks. 
 
 This release also includes a better handling of detached servers (prints pid and
