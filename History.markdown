@@ -5,6 +5,7 @@
   * Replace the commander command line parser with a more robust
     solution for our needs called `mercenary` (#1706)
   * Remove support for Ruby 1.8.x (#1780)
+  * Move to jekyll/jekyll from mojombo/jekyll (#1817)
 
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
