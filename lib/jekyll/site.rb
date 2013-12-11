@@ -414,6 +414,10 @@ module Jekyll
       end
     end
 
+    def frontmatter_defaults
+      @frontmatter_defaults ||= Configuration::FrontmatterDefaults.new(self)
+    end
+
     private
 
     def has_relative_page?

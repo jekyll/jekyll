@@ -28,6 +28,10 @@ module Jekyll
 
       self.process(name)
       self.read_yaml(File.join(base, dir), name)
+
+      self.data.default_proc = proc do |hash, key|
+        self.site.frontmatter_defaults.find(File.join(dir, name), self.type, key)
+      end
     end
 
     # The generated directory into which the page will be placed

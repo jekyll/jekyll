@@ -13,6 +13,7 @@ require 'set'
 #   self.ext=
 #   self.output=
 #   self.name
+#   self.type -> :page, :post or :draft
 module Jekyll
   module Convertible
     # Returns the contents as a String.
@@ -101,7 +102,18 @@ module Jekyll
       further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
         [attribute, send(attribute)]
       }]
-      data.deep_merge(further_data)
+      defaults = site.frontmatter_defaults.all(self.relative_path, self.type)
+      defaults.merge(data).deep_merge(further_data)
+    end
+
+    def type
+      if is_a?(Post)
+        :post
+      elsif is_a?(Page)
+        :page
+      elsif is_a?(Draft)
+        :draft
+      end
     end
 
     # Recursively render layouts
