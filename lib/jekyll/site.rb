@@ -1,7 +1,7 @@
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
+                  :categories, :exclude, :include, :sources, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
 
@@ -17,7 +17,8 @@ module Jekyll
         self.send("#{opt}=", config[opt])
       end
 
-      self.source          = File.expand_path(config['source'])
+
+      self.sources         = Array.[](config['source']).flatten.map { |dir| File.expand_path(dir) }
       self.dest            = File.expand_path(config['destination'])
       self.plugins         = plugins_path
       self.permalink_style = config['permalink'].to_sym
@@ -27,6 +28,14 @@ module Jekyll
 
       self.reset
       self.setup
+    end
+
+    def source
+      sources[0]
+    end
+
+    def source=(new_source)
+      sources[0] = new_source
     end
 
     # Public: Read, process, and write this Site to output.
@@ -89,9 +98,11 @@ module Jekyll
     # parent to the source dir.
     def ensure_not_in_dest
       dest = Pathname.new(self.dest)
-      Pathname.new(self.source).ascend do |path|
-        if path == dest
-          raise FatalException.new "Destination directory cannot be or contain the Source directory."
+      self.sources.each do |s|
+        Pathname.new(s).ascend do |path|
+          if path == dest
+            raise FatalException.new "Destination directory cannot be or contain the Source directory."
+          end
         end
       end
     end
