@@ -38,7 +38,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('redgreen', "~> 1.2")
-  s.add_development_dependency('shoulda', "~> 3.3.2")
+  s.add_development_dependency('shoulda', "~> 3.5.0")
+  # shoulda-matchers 2.0.0 still supports MRI <= 1.9.2
+  s.add_development_dependency('shoulda-matchers', "~> 2.0.0")
   s.add_development_dependency('rr', "~> 1.1")
   s.add_development_dependency('cucumber', "~> 1.3")
   s.add_development_dependency('RedCloth', "~> 4.2")

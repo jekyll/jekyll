@@ -1,9 +1,12 @@
-require 'simplecov'
-require 'simplecov-gem-adapter'
-SimpleCov.start('gem')
+# Coverage is currently too slow on Rubinius, disable it.
+if RUBY_ENGINE != 'rbx'
+  require 'simplecov'
+  require 'simplecov-gem-adapter'
+  SimpleCov.start('gem')
 
-require 'coveralls'
-Coveralls.wear_merged!
+  require 'coveralls'
+  Coveralls.wear_merged!
+end
 
 require 'rubygems'
 require 'test/unit'

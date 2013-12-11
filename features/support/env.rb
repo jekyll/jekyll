@@ -1,5 +1,8 @@
-require 'coveralls'
-Coveralls.wear_merged!
+# Coverage is currently too slow on Rubinius, disable it.
+if RUBY_ENGINE != 'rbx'
+  require 'coveralls'
+  Coveralls.wear_merged!
+end
 
 require 'fileutils'
 require 'rr'
