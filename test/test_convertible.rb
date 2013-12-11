@@ -36,16 +36,14 @@ class TestConvertible < Test::Unit::TestCase
       assert_no_match /undefined class\/module DoesNotExist/, out
     end
 
-    if RUBY_VERSION >= '1.9.2'
-      should "not parse if there is encoding error in file" do
-        name = 'broken_front_matter3.erb'
-        out = capture_stdout do
-          ret = @convertible.read_yaml(@base, name, :encoding => 'utf-8')
-          assert_equal({}, ret)
-        end
-        assert_match(/invalid byte sequence in UTF-8/, out)
-        assert_match(/#{File.join(@base, name)}/, out)
+    should "not parse if there is encoding error in file" do
+      name = 'broken_front_matter3.erb'
+      out = capture_stdout do
+        ret = @convertible.read_yaml(@base, name, :encoding => 'utf-8')
+        assert_equal({}, ret)
       end
+      assert_match(/invalid byte sequence in UTF-8/, out)
+      assert_match(/#{File.join(@base, name)}/, out)
     end
   end
 end

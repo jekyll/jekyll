@@ -35,8 +35,8 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name, opts = {})
       begin
-        self.content = File.read_with_options(File.join(base, name),
-                                              merged_file_read_opts(opts))
+        self.content = File.read(File.join(base, name),
+                                 merged_file_read_opts(opts))
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = YAML.safe_load($1)
