@@ -8,7 +8,7 @@ After do
   FileUtils.rm_rf(JEKYLL_COMMAND_OUTPUT_FILE)
 end
 
-World(Test::Unit::Assertions)
+#World(Test::Unit::Assertions)
 
 Given /^I have a blank site in "(.*)"$/ do |path|
   FileUtils.mkdir_p(path)

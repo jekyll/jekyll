@@ -1,2 +1,5 @@
 #!/bin/sh
-bundle install
+
+gem install bundler
+
+bundle install 
