@@ -184,6 +184,18 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class='name'><strong>Fallback</strong></p>
+        <p>Replace nil input with a default value. Merge if both values are Hashes.</p>
+      </td>
+      <td class='align-center'>
+        <p>
+         <code class='filter'>{% raw %}{{ page.modified | fallback: page.date | date_to_xmlschema }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+
   </tbody>
 </table>
 </div>

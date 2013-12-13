@@ -131,5 +131,16 @@ class TestFilters < Test::Unit::TestCase
         end
       end
     end
+
+    context "fallback filter" do
+      should "override nil with fallback" do
+        assert_equal 1, @filter.fallback(nil, 1)
+      end
+      should "merge hashes" do
+        assert_equal ({:a=>1}), @filter.fallback({}, {:a=>1})
+        assert_equal ({:a=>1}), @filter.fallback({:a=>1}, {:a=>0})
+        assert_equal ({:a=>1, :b=>"two"}), @filter.fallback({:b=>"two"}, {:a=>1})
+      end
+    end
   end
 end

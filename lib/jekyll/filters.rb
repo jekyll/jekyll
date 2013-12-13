@@ -179,6 +179,25 @@ module Jekyll
       end
     end
 
+    # Replaces nil input with a default value
+    # 
+    # input - any type
+    # default - any type
+    #
+    # Returns default value
+    # {{ "women" | fallback: "men" }} => "women"
+    # {{ nil | fallback: "men" }} => "men"
+    #
+    def fallback(input, default)   
+      if (input == nil)
+        default
+      elsif (input.kind_of?(Hash) and default.kind_of?(Hash))
+        default.merge(input)
+      else
+        input
+      end
+    end
+
     private
     def time(input)
       case input
