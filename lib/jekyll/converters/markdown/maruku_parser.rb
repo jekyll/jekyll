@@ -8,6 +8,7 @@ module Jekyll
           @errors = []
           load_divs_library if @config['maruku']['use_divs']
           load_blahtext_library if @config['maruku']['use_tex']
+          enable_fenced_code_blocks if @config['maruku']['fenced_code_blocks']
         rescue LoadError
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
           STDERR.puts '  $ [sudo] gem install maruku'
@@ -33,6 +34,10 @@ module Jekyll
           MaRuKu::Globals[:html_png_engine] =  @config['maruku']['png_engine']
           MaRuKu::Globals[:html_png_dir] = @config['maruku']['png_dir']
           MaRuKu::Globals[:html_png_url] = @config['maruku']['png_url']
+        end
+
+        def enable_fenced_code_blocks
+          MaRuKu::Globals[:fenced_code_blocks] = true
         end
 
         def print_errors_and_fail
