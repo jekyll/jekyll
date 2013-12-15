@@ -7,7 +7,7 @@ module Jekyll
 
       def initialize(name)
         all, path, date, slug = *name.sub(/^\//, "").match(MATCHER)
-        raise ArgumentError unless all
+        raise ArgumentError.new("invalid post name") unless all
         @slug = path ? path + slug : slug
         @date = Time.parse(date)
       end
