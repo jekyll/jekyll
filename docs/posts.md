@@ -65,26 +65,26 @@ called something like `assets` or `downloads`, into which any images, downloads
 or other resources are placed. Then, from within any post, they can be linked to
 using the site’s root as the path for the asset to include. Again, this will
 depend on the way your site’s (sub)domain and path are configured, but here some
-examples (in Markdown) of how you could do this using the `site.url` variable in
+examples (in Markdown) of how you could do this using the `site.baseurl` variable in
 a post.
 
 Including an image asset in a post:
 
 {% highlight text %}
 … which is shown in the screenshot below:
-![My helpful screenshot]({% raw %}{{ site.url }}{% endraw %}/assets/screenshot.jpg)
+![My helpful screenshot]({% raw %}{{ site.baseurl }}{% endraw %}/assets/screenshot.jpg)
 {% endhighlight %}
 
 Linking to a PDF for readers to download:
 
 {% highlight text %}
-… you can [get the PDF]({% raw %}{{ site.url }}{% endraw %}/assets/mydoc.pdf) directly.
+… you can [get the PDF]({% raw %}{{ site.baseurl }}{% endraw %}/assets/mydoc.pdf) directly.
 {% endhighlight %}
 
 <div class="note">
   <h5>ProTip™: Link using just the site root URL</h5>
   <p>
-    You can skip the <code>{% raw %}{{ site.url }}{% endraw %}</code> variable
+    You can skip the <code>{% raw %}{{ site.baseurl }}{% endraw %}</code> variable
     if you <strong>know</strong> your site will only ever be displayed at the
     root URL of your domain. In this case you can reference assets directly with
     just <code>/path/file.jpg</code>.
