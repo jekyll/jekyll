@@ -5,6 +5,7 @@
 ### Minor Enhancements
 
 ### Bug Fixes
+  * Turn on Maruku fenced code blocks by default (#1830)
 
 ### Development Fixes
 
