@@ -316,6 +316,7 @@ maruku:
   png_engine: blahtex
   png_dir:    images/latex
   png_url:    /images/latex
+  fenced_code_blocks: true
 
 rdiscount:
   extensions: []

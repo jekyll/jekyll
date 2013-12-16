@@ -45,6 +45,7 @@ module Jekyll
       'excerpt_separator' => "\n\n",
 
       'maruku' => {
+        'fenced_code_blocks' => true,
         'use_tex'    => false,
         'use_divs'   => false,
         'png_engine' => 'blahtex',
