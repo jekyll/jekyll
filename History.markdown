@@ -33,18 +33,15 @@
   * Add note about deploying to OpenShift (#1812)
   * Collect all Windows-related docs onto one page (#1818)
 
+## 1.4.2 / 2013-12-16
+
+### Bug Fixes
+  * Turn on Maruku fenced code blocks by default (#1830)
+
 ## 1.4.1 / 2013-12-09
-
-### Major Enhancements
-
-### Minor Enhancements
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
-
-### Development Fixes
-
-### Site Enhancements
 
 ## 1.4.0 / 2013-12-07
 
