@@ -5,11 +5,15 @@
 ### Minor Enhancements
 
 ### Bug Fixes
-  * Turn on Maruku fenced code blocks by default (#1830)
 
 ### Development Fixes
 
 ### Site Enhancements
+
+## 1.4.2 / 2013-12-16
+
+### Bug Fixes
+  * Turn on Maruku fenced code blocks by default (#1830)
 
 ## 1.4.1 / 2013-12-09
 
