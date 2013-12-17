@@ -22,6 +22,7 @@
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
+  * Add in History and site changes from `v1-stable` branch (#1836)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
