@@ -14,3 +14,5 @@ default to `true`.
 
 If you do not wish to use Maruku fenced code blocks, you may turn this option
 off in your site's configuration file.
+
+[a regression]: https://github.com/jekyll/jekyll/pull/1830
