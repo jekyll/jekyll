@@ -233,7 +233,7 @@ namespace :site do
         post.puts("title: 'Jekyll #{release} Released'")
         post.puts("date: #{Time.new.strftime('%Y-%m-%d %H:%M:%S %z')}")
         post.puts("author: ")
-        post.puts("version: #{version}")
+        post.puts("version: #{release}")
         post.puts("categories: [release]")
         post.puts("---")
         post.puts
