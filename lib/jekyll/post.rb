@@ -160,7 +160,10 @@ module Jekyll
       self.slug = slug
       self.ext = ext
     rescue ArgumentError
-      raise FatalException.new("Post #{name} does not have a valid date.")
+      path = File.join(@dir || "", name)
+      msg  =  "Post '#{path}' does not have a valid date.\n"
+      msg  << "Fix the date, or exclude the file or directory from being processed"
+      raise FatalException.new(msg)
     end
 
     # The generated directory into which the post will be placed
