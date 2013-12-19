@@ -488,13 +488,12 @@ CONTENT
         assert_match %r{1 included}, @content
         assert_match %r{2 included}, @content
         assert_match %r{3 included}, @content
-        assert_match %r{4 included}, @content
       end
 
       should "include file as variable and liquid filters with arbitrary whitespace" do
+        assert_match %r{4 included}, @content
         assert_match %r{5 included}, @content
         assert_match %r{6 included}, @content
-        assert_match %r{7 included}, @content
       end
 
       should "include file as variable and filters with additional parameters" do
