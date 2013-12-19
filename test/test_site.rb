@@ -154,6 +154,14 @@ class TestSite < Test::Unit::TestCase
       assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
     end
 
+    should "sort pages in a consistent way" do
+      # The order that files are returned differs across operating systems, so ensure that they're being sorted after the fact.
+      stub.proxy(Dir).entries { |entries| entries.reverse }
+      @site.process
+      sorted_pages = %w(.htaccess about.html bar.html contacts.html deal.with.dots.html foo.md index.html index.html sitemap.xml symlinked-file)
+      assert_equal sorted_pages, @site.pages.map(&:name)
+    end
+
     should "read layouts" do
       @site.read_layouts
       assert_equal ["default", "simple", "post/simple"].sort, @site.layouts.keys.sort
