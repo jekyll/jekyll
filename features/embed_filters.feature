@@ -58,3 +58,18 @@ Feature: Embed filters
     Then the _site directory should exist
     And I should see "By <p><em>Obi-wan</em></p>" in "_site/2009/03/27/star-wars.html"
 
+  Scenario: Sort by an arbitrary variable
+    Given I have a _layouts directory
+    And I have the following page:
+      | title  | layout  | value | content   |
+      | Page-1 | default | 8     | Something |
+    And I have the following page:
+      | title  | layout  | value | content   |
+      | Page-2 | default | 6     | Something |
+    And I have a default layout that contains "{{ site.pages | sort:'value' | map:'title' | join:', ' }}"
+    # And I have a default layout that contains "{% assign pages = site.pages | sort:'value' %}{% for pg in pages %}{{ pg.value }}"
+    # And I have a default layout that contains "{% for pg in site.pages %}{{ pg.value }}{% endfor %}"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see exactly "Page-2, Page-1" in "_site/page-1.html"
+    And I should see exactly "Page-2, Page-1" in "_site/page-2.html"
