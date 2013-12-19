@@ -14,6 +14,7 @@
     property's value (#1788)
   * Add support for Maruku's `fenced_code_blocks` option (#1799)
   * Update Redcarpet dependency to ~> 3.0 (#1815)
+  * Automatically sort all pages by name (#1848)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
