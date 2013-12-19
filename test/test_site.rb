@@ -156,6 +156,7 @@ class TestSite < Test::Unit::TestCase
 
     should "sort pages in a consistent way" do
       # The order that files are returned differs across operating systems, so ensure that they're being sorted after the fact.
+      # http://stackoverflow.com/a/5529966/358804
       stub.proxy(Dir).entries { |entries| entries.reverse }
       @site.process
       sorted_pages = %w(.htaccess about.html bar.html contacts.html deal.with.dots.html foo.md index.html index.html sitemap.xml symlinked-file)
