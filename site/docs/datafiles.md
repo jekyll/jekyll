@@ -13,7 +13,7 @@ templating system](http://wiki.github.com/shopify/liquid/liquid-for-designers).
 Jekyll supports loading data from [YAML](http://yaml.org/) files located in the 
 `_data` directory.
 
-This powerful features allows you to avoid repetition in your templates and to
+This powerful feature allows you to avoid repetition in your templates and to
 set site specific options without changing `_config.yml`. 
 
 Plugins/themes can also leverage Data Files to set configuration variables.
