@@ -124,9 +124,9 @@ eos
 
       def validate_file(file, safe)
         if !File.exists?(file)
-          raise IOError.new "Included file '#{file}' not found in '#{INCLUDES_DIR}' directory"
+          raise IOError.new "Included file '#{file}' not found" 
         elsif File.symlink?(file) && safe
-          raise IOError.new "The included file '#{INCLUDES_DIR}/#{file}' should not be a symlink"
+          raise IOError.new "The included file '#{file}' should not be a symlink"
         end
       end
 
