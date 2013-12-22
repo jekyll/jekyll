@@ -72,11 +72,13 @@ eos
 
         linenos = @options.keys.include?('linenos')
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
-        formatter = Rouge::Formatters::HTML.new(line_numbers: linenos)
+        formatter = Rouge::Formatters::HTML.new(line_numbers: linenos, wrap: false)
+
+        pre = "<pre>#{formatter.format(lexer.lex(code))}</pre>"
 
         output = context["highlighter_prefix"] || ""
         output << "<div class=\"highlight\">"
-        output << add_code_tags(formatter.render(lexer.lex(code)), @lang)
+        output << add_code_tags(pre, @lang)
         output << "</div>"
         output << context["highlighter_suffix"] if context["highlighter_suffix"]
 
