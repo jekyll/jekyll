@@ -51,11 +51,12 @@ class TestConfiguration < Test::Unit::TestCase
   context "#backwards_compatibilize" do
     setup do
       @config = Configuration[{
-        "auto"    => true,
-        "watch"   => true,
-        "server"  => true,
-        "exclude" => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
-        "include" => "STOP_THE_PRESSES.txt,.heloses, .git"
+        "auto"     => true,
+        "watch"    => true,
+        "server"   => true,
+        "exclude"  => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
+        "include"  => "STOP_THE_PRESSES.txt,.heloses, .git",
+        "pygments" => true,
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -77,6 +78,11 @@ class TestConfiguration < Test::Unit::TestCase
       assert @config.has_key?("include")
       assert @config.backwards_compatibilize.has_key?("include")
       assert_equal @config.backwards_compatibilize["include"], %w[STOP_THE_PRESSES.txt .heloses .git]
+    end
+    should "set highlighter to pygments" do
+      assert @config.has_key?("pygments")
+      assert !@config.backwards_compatibilize.has_key?("pygments")
+      assert_equal @config.backwards_compatibilize["highlighter"], "pygments"
     end
   end
   context "#fix_common_issues" do

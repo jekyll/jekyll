@@ -212,8 +212,11 @@ module Jekyll
       if config.has_key? 'pygments'
         Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
                             " has been renamed to 'highlighter'. Please update your" +
-                            " config file accordingly. The allowed values are 'rouge"+
+                            " config file accordingly. The allowed values are 'rouge', " +
                             "'pygments' or null"
+
+        config['highlighter'] = 'pygments' if config['pygments']
+        config.delete('pygments')
       end
 
       %w[include exclude].each do |option|
