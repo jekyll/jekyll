@@ -41,7 +41,8 @@ eos
       end
 
       def render(context)
-        if context.registers[:site].pygments
+        case context.registers[:site].highlighter
+        when 'pygments'
           render_pygments(context, super)
         else
           render_codehighlighter(context, super)
@@ -58,9 +59,10 @@ eos
           @lang
         )
 
-        output = context["pygments_prefix"] + output if context["pygments_prefix"]
-        output = output + context["pygments_suffix"] if context["pygments_suffix"]
-        output
+        output = context["highlighter_prefix"] + output if context["highlighter_prefix"]
+        output << context["highlighter_suffix"] if context["highlighter_suffix"]
+
+        return output
       end
 
       def render_codehighlighter(context, code)

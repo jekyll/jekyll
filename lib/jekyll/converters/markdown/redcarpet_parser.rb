@@ -43,7 +43,8 @@ module Jekyll
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
-          @renderer ||= if @config['pygments']
+          @renderer ||= case @config['highlighter']
+                        when 'pygments'
                           Class.new(Redcarpet::Render::HTML) do
                             include WithPygments
                           end

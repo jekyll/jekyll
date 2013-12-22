@@ -1,6 +1,7 @@
 ## HEAD
 
 ### Major Enhancements
+  * Rename the `pygments` option to `highlighter`
   * Add gem-based plugin whitelist to safe mode (#1657)
   * Replace the commander command line parser with a more robust
     solution for our needs called `mercenary` (#1706)

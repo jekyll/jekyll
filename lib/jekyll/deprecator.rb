@@ -9,8 +9,7 @@ module Jekyll
       arg_is_present? args, "--auto", "The switch '--auto' has been replaced with '--watch'."
       arg_is_present? args, "--no-auto", "To disable auto-replication, simply leave off \
                           the '--watch' switch."
-      arg_is_present? args, "--pygments", "The 'pygments' setting can only be set in \
-                          your config files."
+      arg_is_present? args, "--pygments", "The 'pygments' setting has been removed"
       arg_is_present? args, "--paginate", "The 'paginate' setting can only be set in your \
                           config files."
       arg_is_present? args, "--url", "The 'url' setting can only be set in your config files."

@@ -28,7 +28,7 @@ class TestRedcarpet < Test::Unit::TestCase
 
     context "with pygments enabled" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ 'pygments' => true })
+        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => 'pygments' })
       end
 
       should "render fenced code blocks with syntax highlighting" do
@@ -42,9 +42,9 @@ puts "Hello world"
       end
     end
 
-    context "with pygments disabled" do
+    context "without any highlighter" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ 'pygments' => false })
+        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => nil })
       end
 
       should "render fenced code blocks without syntax highlighting" do

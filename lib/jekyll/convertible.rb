@@ -144,8 +144,8 @@ module Jekyll
       info = { :filters => [Jekyll::Filters], :registers => { :site => self.site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
-      payload["pygments_prefix"] = converter.pygments_prefix
-      payload["pygments_suffix"] = converter.pygments_suffix
+      payload["highlighter_prefix"] = converter.highlighter_prefix
+      payload["highlighter_suffix"] = converter.highlighter_suffix
 
       self.content = self.render_liquid(self.content,
                                         payload,
