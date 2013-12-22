@@ -1,12 +1,13 @@
 ## HEAD
 
 ### Major Enhancements
-  * Rename the `pygments` option to `highlighter`
   * Add gem-based plugin whitelist to safe mode (#1657)
   * Replace the commander command line parser with a more robust
     solution for our needs called `mercenary` (#1706)
   * Remove support for Ruby 1.8.x (#1780)
   * Move to jekyll/jekyll from mojombo/jekyll (#1817)
+  * Rename the `pygments` option to `highlighter` (#1859)
+  * Provide support for the Rouge syntax highlighter (#1859)
 
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
@@ -25,7 +26,7 @@
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
   * Add in History and site changes from `v1-stable` branch (#1836)
-  * Fix the `highlight` tag feature
+  * Fix the `highlight` tag feature (#1859)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)

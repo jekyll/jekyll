@@ -42,6 +42,22 @@ puts "Hello world"
       end
     end
 
+    context "with rouge enabled" do
+      setup do
+        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => 'rouge' })
+      end
+
+      should "render fenced code blocks with syntax highlighting" do
+        assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">\"Hello world\"</span>\n</code></pre></div>", @markdown.convert(
+          <<-EOS
+```ruby
+puts "Hello world"
+```
+          EOS
+        ).strip
+      end
+    end
+
     context "without any highlighter" do
       setup do
         @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => nil })

@@ -5,7 +5,7 @@ module Jekyll
 
         module CommonMethods
           def add_code_tags(code, lang)
-            code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\" data-lang=\"#{lang}\">")
+            code = code.sub(/<pre(.*?)>/, "<pre><code class=\"#{lang} language-#{lang}\" data-lang=\"#{lang}\">")
             code = code.sub(/<\/pre>/,"</code></pre>")
           end
         end
@@ -22,7 +22,7 @@ module Jekyll
           end
         end
 
-        module WithoutPygments
+        module WithoutHighlighting
           require 'cgi'
 
           include CommonMethods
@@ -37,6 +37,22 @@ module Jekyll
           end
         end
 
+        module WithRouge
+          include CommonMethods
+
+          def block_code(code, lang)
+            require 'rouge'
+
+            lexer = Rouge::Lexer.find_fancy(lang, code) || Rouge::Lexers::PlainText
+            formatter = Rouge::Formatters::HTML.new
+
+            output = "<div class=\"highlight\">"
+            output << add_code_tags(formatter.render(lexer.lex(code)), lang)
+            output << "</div>"
+          end
+        end
+
+
         def initialize(config)
           require 'redcarpet'
           @config = config
@@ -48,9 +64,13 @@ module Jekyll
                           Class.new(Redcarpet::Render::HTML) do
                             include WithPygments
                           end
+                        when 'rouge'
+                          Class.new(Redcarpet::Render::HTML) do
+                            include WithRouge
+                          end
                         else
                           Class.new(Redcarpet::Render::HTML) do
-                            include WithoutPygments
+                            include WithoutHighlighting
                           end
                         end
         rescue LoadError
