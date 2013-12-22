@@ -177,7 +177,11 @@ module Jekyll
     #
     # Returns the String value or nil if the property isn't included.
     def [](property)
-      data[property]
+      if self.class::ATTRIBUTES_FOR_LIQUID.include?(property)
+        send(property)
+      else
+        data[property]
+      end
     end
   end
 end

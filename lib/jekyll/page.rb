@@ -9,9 +9,11 @@ module Jekyll
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w[
-      url
       content
+      dir
+      name
       path
+      url
     ]
 
     # Initialize a new Page.

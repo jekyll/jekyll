@@ -176,7 +176,7 @@ class TestSite < Test::Unit::TestCase
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
-      assert_equal 4, @site.categories['foo'].size
+      assert_equal 5, @site.categories['foo'].size
     end
 
     context 'error handling' do
