@@ -38,16 +38,15 @@ module Jekyll
         end
 
         module WithRouge
+          require 'rouge'
+          require 'rouge/plugins/redcarpet'
+
+          include Rouge::Plugins::Redcarpet
           include CommonMethods
 
           def block_code(code, lang)
-            require 'rouge'
-
-            lexer = Rouge::Lexer.find_fancy(lang, code) || Rouge::Lexers::PlainText
-            formatter = Rouge::Formatters::HTML.new
-
             output = "<div class=\"highlight\">"
-            output << add_code_tags(formatter.render(lexer.lex(code)), lang)
+            output << add_code_tags(super, lang)
             output << "</div>"
           end
         end
