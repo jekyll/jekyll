@@ -92,7 +92,6 @@ Feature: Site configuration
 
   Scenario: Highlight code with pygments
     Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
-    And I have a configuration file with "highlighter" set to "pygments"
     When I run jekyll
     Then the _site directory should exist
     And I should see "Hello world!" in "_site/index.html"
