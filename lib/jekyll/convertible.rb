@@ -57,7 +57,7 @@ module Jekyll
       self.content = converter.convert(self.content)
     rescue => e
       Jekyll.logger.error "Conversion error:", "There was an error converting" +
-        " '#{self.path}'."
+        " '#{self.name}'."
       raise e
     end
 
