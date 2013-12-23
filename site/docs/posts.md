@@ -139,8 +139,8 @@ your `excerpt_separator` to `""`.
 ## Highlighting code snippets
 
 Jekyll also has built-in support for syntax highlighting of code snippets using
-either Pygments or [Rouge](https://github.com/jayferd/rouge), and including a
-code snippet in any post is easy. Just use the dedicated Liquid tag as follows:
+either Pygments or Rouge, and including a code snippet in any post is easy. Just
+use the dedicated Liquid tag as follows:
 
 {% highlight text %}
 {% raw %}{% highlight ruby %}{% endraw %}

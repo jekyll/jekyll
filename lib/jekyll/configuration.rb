@@ -213,7 +213,7 @@ module Jekyll
         Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
                             " has been renamed to 'highlighter'. Please update your" +
                             " config file accordingly. The allowed values are 'rouge', " +
-                            "'pygments' or null"
+                            "'pygments' or null."
 
         config['highlighter'] = 'pygments' if config['pygments']
         config.delete('pygments')
