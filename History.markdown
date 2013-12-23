@@ -14,6 +14,7 @@
     property's value (#1788)
   * Add support for Maruku's `fenced_code_blocks` option (#1799)
   * Update Redcarpet dependency to ~> 3.0 (#1815)
+  * Automatically sort all pages by name (#1848)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
@@ -33,6 +34,7 @@
   * Fix issues with 1.4.1 release blog post (#1804)
   * Add note about deploying to OpenShift (#1812)
   * Collect all Windows-related docs onto one page (#1818)
+  * Fixed typo in datafiles doc page (#1854)
 
 ## 1.4.2 / 2013-12-16
 

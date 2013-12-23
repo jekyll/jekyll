@@ -175,6 +175,8 @@ module Jekyll
           static_files << StaticFile.new(self, self.source, dir, f)
         end
       end
+
+      pages.sort_by!(&:name)
     end
 
     # Read all the files in <source>/<dir>/_posts and create a new Post
