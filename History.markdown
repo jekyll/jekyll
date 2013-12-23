@@ -35,6 +35,7 @@
   * Add note about deploying to OpenShift (#1812)
   * Collect all Windows-related docs onto one page (#1818)
   * Fixed typo in datafiles doc page (#1854)
+  * Clarify how to access `site` in docs (#1864)
 
 ## 1.4.2 / 2013-12-16
 
