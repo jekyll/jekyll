@@ -15,6 +15,7 @@
   * Add support for Maruku's `fenced_code_blocks` option (#1799)
   * Update Redcarpet dependency to ~> 3.0 (#1815)
   * Automatically sort all pages by name (#1848)
+  * Better error message when time is not parseable (#1847)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
