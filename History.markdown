@@ -36,6 +36,7 @@
   * Collect all Windows-related docs onto one page (#1818)
   * Fixed typo in datafiles doc page (#1854)
   * Clarify how to access `site` in docs (#1864)
+  * Add closing `<code>` tag to `context.registers[:site]` note (#1867)
 
 ## 1.4.2 / 2013-12-16
 
