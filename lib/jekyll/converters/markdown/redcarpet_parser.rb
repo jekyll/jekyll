@@ -22,7 +22,7 @@ module Jekyll
           end
         end
 
-        module WithoutPygments
+        module WithoutHighlighting
           require 'cgi'
 
           include CommonMethods
@@ -37,19 +37,50 @@ module Jekyll
           end
         end
 
+        module WithRouge
+          require 'rouge'
+          require 'rouge/plugins/redcarpet'
+
+          if Rouge.version < '1.3.0'
+            abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
+          end
+
+          include Rouge::Plugins::Redcarpet
+          include CommonMethods
+
+          def block_code(code, lang)
+            code = "<pre>#{super}</pre>"
+
+            output = "<div class=\"highlight\">"
+            output << add_code_tags(code, lang)
+            output << "</div>"
+          end
+
+          protected
+          def rouge_formatter(opts = {})
+            Rouge::Formatters::HTML.new(opts.merge(wrap: false))
+          end
+        end
+
+
         def initialize(config)
           require 'redcarpet'
           @config = config
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
-          @renderer ||= if @config['pygments']
+          @renderer ||= case @config['highlighter']
+                        when 'pygments'
                           Class.new(Redcarpet::Render::HTML) do
                             include WithPygments
                           end
+                        when 'rouge'
+                          Class.new(Redcarpet::Render::HTML) do
+                            include WithRouge
+                          end
                         else
                           Class.new(Redcarpet::Render::HTML) do
-                            include WithoutPygments
+                            include WithoutHighlighting
                           end
                         end
         rescue LoadError

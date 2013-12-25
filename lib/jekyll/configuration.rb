@@ -24,12 +24,12 @@ module Jekyll
       'limit_posts'   => 0,
       'lsi'           => false,
       'future'        => true,           # remove and make true just default
-      'pygments'      => true,
 
       'relative_permalinks' => true,     # backwards-compatibility with < 1.0
                                          # will be set to false once 2.0 hits
 
       'markdown'      => 'maruku',
+      'highlighter'   => 'pygments',
       'permalink'     => 'date',
       'baseurl'       => '/',
       'include'       => ['.htaccess'],
@@ -207,6 +207,16 @@ module Jekyll
         # copy but don't overwrite:
         config['port'] = config['server_port'] unless config.has_key?('port')
         config.delete('server_port')
+      end
+
+      if config.has_key? 'pygments'
+        Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
+                            " has been renamed to 'highlighter'. Please update your" +
+                            " config file accordingly. The allowed values are 'rouge', " +
+                            "'pygments' or null."
+
+        config['highlighter'] = 'pygments' if config['pygments']
+        config.delete('pygments')
       end
 
       %w[include exclude].each do |option|
