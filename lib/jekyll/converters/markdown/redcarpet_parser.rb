@@ -5,7 +5,7 @@ module Jekyll
 
         module CommonMethods
           def add_code_tags(code, lang)
-            code = code.sub(/<pre(.*?)>/, "<pre><code class=\"#{lang} language-#{lang}\" data-lang=\"#{lang}\">")
+            code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\" data-lang=\"#{lang}\">")
             code = code.sub(/<\/pre>/,"</code></pre>")
           end
         end
@@ -41,13 +41,24 @@ module Jekyll
           require 'rouge'
           require 'rouge/plugins/redcarpet'
 
+          if Rouge.version < '1.3.0'
+            abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
+          end
+
           include Rouge::Plugins::Redcarpet
           include CommonMethods
 
           def block_code(code, lang)
+            code = "<pre>#{super}</pre>"
+
             output = "<div class=\"highlight\">"
-            output << add_code_tags(super, lang)
+            output << add_code_tags(code, lang)
             output << "</div>"
+          end
+
+          protected
+          def rouge_formatter(opts = {})
+            Rouge::Formatters::HTML.new(opts.merge(wrap: false))
           end
         end
 
