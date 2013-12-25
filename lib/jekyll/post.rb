@@ -309,7 +309,7 @@ module Jekyll
     end
 
     def generate_excerpt?
-      !(site.config['excerpt_separator'].to_s.empty?)
+      !(site.config['excerpt_separator'].nil?)
     end
   end
 end
