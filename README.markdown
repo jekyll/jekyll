@@ -55,4 +55,3 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 
 See [LICENSE](https://github.com/jekyll/jekyll/blob/master/LICENSE).
 
-#commiting test
