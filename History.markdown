@@ -24,6 +24,7 @@
   * Remove the scrollbar that's always displayed in new sites generated
     from the site template (#1805)
   * Add `#path` to required methods in `Jekyll::Convertible` (#1866)
+  * Default Maruku fenced code blocks to ON for 2.0.0-dev (#1831)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
