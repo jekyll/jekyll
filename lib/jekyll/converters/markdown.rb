@@ -9,7 +9,7 @@ module Jekyll
       def setup
         return if @setup
         @parser =
-          case @config['markdown']
+          case @config['markdown'].downcase
             when 'redcarpet' then RedcarpetParser.new(@config)
             when 'kramdown' then KramdownParser.new(@config)
             when 'rdiscount' then RDiscountParser.new(@config)
