@@ -16,7 +16,7 @@ module Jekyll
             when 'maruku' then MarukuParser.new(@config)
           else
             # So they can't try some tricky bullshit or go down the ancestor chain, I hope.
-            if @config['markdown'] !~ /[^A-Za-z0-9]/ && self.class.constants.include?(@config['markdown'].to_sym)
+            if allowed_custom_class?(@config['markdown'])
               self.class.const_get(@config['markdown']).new(@config)
             else
               Jekyll.logger.error "Invalid Markdown Processor:", "#{@config['markdown']}"
@@ -39,6 +39,11 @@ module Jekyll
       def convert(content)
         setup
         @parser.convert(content)
+      end
+
+      private
+      def allowed_custom_class?(parser_name)
+        parser_name !~ /[^A-Za-z0-9]/ && self.class.constants.include?(parser_name.to_sym)
       end
     end
   end
