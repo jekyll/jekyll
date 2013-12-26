@@ -44,7 +44,10 @@ module Jekyll
     #
     # Returns the safety Boolean.
     def self.safe(safe = false)
-      @safe = [true,false].include?(safe) ? safe : false
+      if safe
+        @safe = safe
+      end
+      @safe || false
     end
 
     # Spaceship is priority [higher -> lower]
