@@ -13,6 +13,7 @@ require 'set'
 #   self.ext=
 #   self.output=
 #   self.name
+#   self.path
 module Jekyll
   module Convertible
     # Returns the contents as a String.
