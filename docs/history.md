@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: History
-permalink: /docs/history/
+permalink: "/docs/history/"
 prev_section: contributing
 ---
 
