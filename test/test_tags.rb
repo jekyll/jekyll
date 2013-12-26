@@ -237,6 +237,22 @@ CONTENT
     end
   end
 
+  context "simple page with invalid post name linking" do
+    should "cause an error" do
+      content = <<CONTENT
+---
+title: Invalid post name linking
+---
+
+{% post_url abc2008-11-21-complex %}
+CONTENT
+
+      assert_raise ArgumentError do
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+    end
+  end
+
   context "gist tag" do
     context "simple" do
       setup do
