@@ -42,6 +42,14 @@ module Jekyll
       end
 
       private
+
+      # Private: Determine whether a class name is an allowed custom markdown
+      # class name
+      #
+      # parser_name - the name of the parser class
+      #
+      # Returns true if the parser name contains only alphanumeric characters
+      # and is defined within Jekyll::Converters::Markdown
       def allowed_custom_class?(parser_name)
         parser_name !~ /[^A-Za-z0-9]/ && self.class.constants.include?(parser_name.to_sym)
       end
