@@ -186,7 +186,7 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def where(input, key, value)
-      return input unless input.class == Array
+      return input unless input.is_a?(Array)
       input.select { |object| object[key] == value }
     end
 
