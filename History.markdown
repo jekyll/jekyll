@@ -19,6 +19,7 @@
   * Better error message when time is not parseable (#1847)
   * Allow `include` tag variable arguments to use filters (#1841)
   * `post_url` tag should raise `ArgumentError` for invalid name (#1825)
+  * Bump dependency `mercenary` to `~> 0.2.0` (#1879)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
