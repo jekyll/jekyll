@@ -32,12 +32,8 @@ module Jekyll
     #            :lowest, :low, :normal, :high, :highest
     #
     # Returns the Symbol priority.
-    def self.priority(priority = nil)
-      @priority ||= nil
-      if priority && PRIORITIES.has_key?(priority)
-        @priority = priority
-      end
-      @priority || :normal
+    def self.priority(priority = :normal)
+      @priority = PRIORITIES.has_key?(priority)  ?  priority : :normal
     end
 
     # Get or set the safety of this plugin. When called without an argument
@@ -47,7 +43,7 @@ module Jekyll
     # safe - The Boolean safety (default: nil).
     #
     # Returns the safety Boolean.
-    def self.safe(safe = nil)
+    def self.safe(safe = false)
       if safe
         @safe = safe
       end
