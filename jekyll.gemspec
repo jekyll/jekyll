@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('maruku', "~> 0.7.0")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('mercenary', "~> 0.2.0")
-  s.add_runtime_dependency('safe_yaml', "~> 1.0.0")
+  s.add_runtime_dependency('safe_yaml', "~> 1.0")
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 3.0")
   s.add_runtime_dependency('toml', '~> 0.1.0')
