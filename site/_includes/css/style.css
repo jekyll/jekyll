@@ -289,10 +289,20 @@ body > footer a:hover img {
 
 .quickstart .code .path {
   color: #87ceeb;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  -o-user-select: none;
+  user-select: none;
 }
 
 .quickstart .code .prompt {
   color: #cd5c5c;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  -o-user-select: none;
+  user-select: none;
 }
 
 .quickstart .code .command {
