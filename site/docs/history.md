@@ -3,7 +3,6 @@ layout: docs
 title: History
 permalink: "/docs/history/"
 prev_section: contributing
-next_section: license
 ---
 
 ## 1.4.2 / 2013-12-16

@@ -206,8 +206,7 @@ namespace :site do
         "layout" => "docs",
         "title" => "History",
         "permalink" => "/docs/history/",
-        "prev_section" => "contributing",
-        "next_section" => "license"
+        "prev_section" => "contributing"
       }
       Dir.chdir('site/docs/') do
         File.open("history.md", "w") do |file|
