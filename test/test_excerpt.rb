@@ -35,6 +35,36 @@ class TestExcerpt < Test::Unit::TestCase
       @excerpt = @post.send :extract_excerpt
     end
 
+    context "#include(string)" do
+      
+      setup do
+        @excerpt.output = "Here is a fake output stub"
+      end
+
+      should "return true only if an excerpt output contains a specified string" do
+        assert @excerpt.include?("fake output")
+        refute @excerpt.include?("real output")
+      end
+    end
+
+    context "#id" do
+      should "contain the UID for the post" do
+        assert_include @excerpt.id, @post.id
+      end
+      should "return a string" do
+        assert_same @post.id.class, String
+      end
+    end
+
+    context "#inspect" do
+      should "contain the excerpt id" do
+        assert_include @excerpt.inspect, @excerpt.id
+      end
+      should "contain the shorthand String identifier of the post" do
+        assert_include @excerpt.inspect, @post.slug
+      end
+    end
+
     context "#to_liquid" do
       should "contain the proper page data to mimick the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
