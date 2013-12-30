@@ -49,7 +49,7 @@ class TestExcerpt < Test::Unit::TestCase
 
     context "#id" do
       should "contain the UID for the post" do
-        assert_include @excerpt.id, @post.id
+        assert_equal @excerpt.id, "#{@post.id}/#excerpt"
       end
       should "return a string" do
         assert_same @post.id.class, String
@@ -68,11 +68,12 @@ class TestExcerpt < Test::Unit::TestCase
     end
 
     context "#inspect" do
-      should "contain the excerpt id" do
-        assert_include @excerpt.inspect, @excerpt.id
+      should "contain the excerpt id as a shorthand string identifier" do
+        assert_equal @excerpt.inspect, "<Excerpt: #{@excerpt.id}>"
       end
-      should "contain the shorthand String identifier of the post" do
-        assert_include @excerpt.inspect, @post.slug
+
+      should "return a string" do
+        assert_same @post.id.class, String
       end
     end
 
