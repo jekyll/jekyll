@@ -131,5 +131,16 @@ class TestFilters < Test::Unit::TestCase
         end
       end
     end
+
+    context "shuffle_filter" do
+      thousand = (1..1000).to_a
+      should "shuffle an array" do
+        # there are 1000! (4×10²⁵⁶⁷) combinations
+        assert_not_equal thousand, @filter.shuffle(thousand)
+      end
+      should "shuffle an array to another that contains same elements" do
+        assert_equal thousand, @filter.shuffle(thousand).sort
+      end
+    end
   end
 end
