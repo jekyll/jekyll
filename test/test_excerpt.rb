@@ -56,6 +56,17 @@ class TestExcerpt < Test::Unit::TestCase
       end
     end
 
+    context "#to_s" do
+      should "return its content if no output present" do
+        assert_equal @excerpt.content, @excerpt.to_s
+      end
+
+      should "return its output if output present" do  
+        @excerpt.output = "Fake Output"
+        assert_equal @excerpt.output, @excerpt.to_s
+      end
+    end
+
     context "#inspect" do
       should "contain the excerpt id" do
         assert_include @excerpt.inspect, @excerpt.id
