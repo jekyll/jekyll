@@ -184,6 +184,17 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class='name'><strong>Shuffle</strong></p>
+        <p>Shuffle an Array.</p>
+      </td>
+      <td class='align-center'>
+        <p>
+         <code class='filter'>{% raw %}{{ site.posts | shuffle }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -288,7 +299,7 @@ will generate the correct permalink URL for the post you specify.
 {% endraw %}
 {% endhighlight %}
 
-If you organize your posts in subdirectories, you need to include subdirectory 
+If you organize your posts in subdirectories, you need to include subdirectory
 path to the post:
 
 {% highlight text %}
