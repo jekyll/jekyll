@@ -141,6 +141,10 @@ class TestFilters < Test::Unit::TestCase
       should "shuffle an array to another that contains same elements" do
         assert_equal thousand, @filter.shuffle(thousand).sort
       end
+      should "not shuffle a non-array" do
+        assert_equal "word", @filter.shuffle("word")
+        assert_equal nil, @filter.shuffle(nil)
+      end
     end
   end
 end

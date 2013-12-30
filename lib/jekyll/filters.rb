@@ -188,9 +188,16 @@ module Jekyll
     #   shuffle([1, 2, 3, 4, 5])
     #   # => ([3, 5, 2, 1, 4])
     #
+    #   shuffle("word")
+    #   # => ("word")
+    #
     # Returns a new array with elements of input shuffled.
     def shuffle(input)
-      input.shuffle
+      if input.is_a? Array
+        input.shuffle
+      else
+        input
+      end
     end
 
     private
