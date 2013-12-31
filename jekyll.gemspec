@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('activesupport', '~> 3.2.13')
   s.add_development_dependency('jekyll_test_plugin')
   s.add_development_dependency('jekyll_test_plugin_malicious')
+  s.add_development_dependency('rouge', '~> 1.3')
 
   # = MANIFEST =
   s.files = %w[

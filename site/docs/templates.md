@@ -230,8 +230,14 @@ These parameters are available via Liquid in the include:
 
 Jekyll has built in support for syntax highlighting of [over 100
 languages](http://pygments.org/languages/) thanks to
-[Pygments](http://pygments.org/). To use Pygments, you must have Python installed on your
-system and set `pygments` to `true` in your site's configuration file.
+[Pygments](http://pygments.org/). To use Pygments, you must have Python installed
+on your system and set `highlighter` to `pygments` in your site's configuration
+file.
+
+Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to highlight
+your code snippets. It doesn't support as many languages as Pygments does but
+it should fit in most cases and it's written in pure Ruby ; you don't need Python
+on your system!
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -247,8 +253,9 @@ end
 
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
-you want to highlight, look for the “short name” on the [Lexers
-page](http://pygments.org/docs/lexers/).
+you want to highlight, look for the “short name” on the [Pygments' Lexers
+page](http://pygments.org/docs/lexers/) or the [Rouge
+wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers).
 
 #### Line numbers
 
@@ -288,7 +295,7 @@ will generate the correct permalink URL for the post you specify.
 {% endraw %}
 {% endhighlight %}
 
-If you organize your posts in subdirectories, you need to include subdirectory 
+If you organize your posts in subdirectories, you need to include subdirectory
 path to the post:
 
 {% highlight text %}

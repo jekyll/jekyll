@@ -123,8 +123,8 @@ bug](http://aaronqian.com/articles/2009/04/07/redcloth-ate-my-notextile.html)
 and will hopefully be fixed for 4.2. You can still use 4.1.9, but the
 test suite requires that 4.1.0 be installed. If you use a version of
 RedCloth that does not have the notextile tag, you may notice that
-syntax highlighted blocks from Pygments are not formatted correctly,
-among other things. If you’re seeing this just install 4.1.0.
+syntax highlighted blocks from Pygments or Rouge are not formatted
+correctly, among other things. If you’re seeing this just install 4.1.0.
 
 ### Liquid
 

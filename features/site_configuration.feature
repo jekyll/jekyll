@@ -91,11 +91,19 @@ Feature: Site configuration
     And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Highlight code with pygments
-    Given I have an "index.html" file that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
-    And I have a configuration file with "pygments" set to "true"
+    Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
     When I run jekyll
     Then the _site directory should exist
-    And I should see "puts 'Hello world!'" in "_site/index.html"
+    And I should see "Hello world!" in "_site/index.html"
+    And I should see "class=\"highlight\"" in "_site/index.html"
+
+  Scenario: Highlight code with rouge
+    Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
+    And I have a configuration file with "highlighter" set to "rouge"
+    When I run jekyll
+    Then the _site directory should exist
+    And I should see "Hello world!" in "_site/index.html"
+    And I should see "class=\"highlight\"" in "_site/index.html"
 
   Scenario: Set time and no future dated posts
     Given I have a _layouts directory

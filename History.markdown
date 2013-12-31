@@ -7,6 +7,7 @@
   * Remove support for Ruby 1.8.x (#1780)
   * Move to jekyll/jekyll from mojombo/jekyll (#1817)
   * Allow custom markdown processors (#1872)
+  * Provide support for the Rouge syntax highlighter (#1859)
 
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
@@ -37,6 +38,7 @@
   * Add in History and site changes from `v1-stable` branch (#1836)
   * Testing additions on the Excerpt class (#1893)
   * Update Kramdown to `~> 1.3` (#1894)
+  * Fix the `highlight` tag feature (#1859)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)

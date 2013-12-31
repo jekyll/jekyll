@@ -6,7 +6,7 @@ class TestTags < Test::Unit::TestCase
 
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     stub(Jekyll).configuration do
-      Jekyll::Configuration::DEFAULTS.deep_merge({'pygments' => true}).deep_merge(override)
+      Jekyll::Configuration::DEFAULTS.deep_merge({'highlighter' => 'pygments'}).deep_merge(override)
     end
     site = Site.new(Jekyll.configuration)
 
@@ -16,8 +16,8 @@ class TestTags < Test::Unit::TestCase
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
-    payload = { "pygments_prefix" => @converter.pygments_prefix,
-                "pygments_suffix" => @converter.pygments_suffix }
+    payload = { "highlighter_prefix" => @converter.highlighter_prefix,
+                "highlighter_suffix" => @converter.highlighter_suffix }
 
     @result = Liquid::Template.parse(content).render!(payload, info)
     @result = @converter.convert(@result)

@@ -1,7 +1,7 @@
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :categories, :exclude, :include, :source, :dest, :lsi, :pygments,
+                  :categories, :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
 
@@ -13,7 +13,7 @@ module Jekyll
     def initialize(config)
       self.config          = config.clone
 
-      %w[safe lsi pygments baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
+      %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
