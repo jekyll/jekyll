@@ -179,6 +179,27 @@ module Jekyll
       end
     end
 
+    # Shuffle an array
+    #
+    # input - The Array to shuffle.
+    #
+    # Examples
+    #
+    #   shuffle([1, 2, 3, 4, 5])
+    #   # => ([3, 5, 2, 1, 4])
+    #
+    #   shuffle("word")
+    #   # => ("word")
+    #
+    # Returns a new array with elements of input shuffled.
+    def shuffle(input)
+      if input.is_a? Array
+        input.shuffle
+      else
+        input
+      end
+    end
+
     private
     def time(input)
       case input
