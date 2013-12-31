@@ -21,6 +21,7 @@
   * `post_url` tag should raise `ArgumentError` for invalid name (#1825)
   * Bump dependency `mercenary` to `~> 0.2.0` (#1879)
   * Bump dependency `safe_yaml` to `~> 1.0` (#1886)
+  * Allow sorting of content by custom properties (#1849)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
