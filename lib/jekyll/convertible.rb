@@ -171,5 +171,18 @@ module Jekyll
         f.write(self.output)
       end
     end
+
+    # Accessor for data properties by Liquid.
+    #
+    # property - The String name of the property to retrieve.
+    #
+    # Returns the String value or nil if the property isn't included.
+    def [](property)
+      if self.class::ATTRIBUTES_FOR_LIQUID.include?(property)
+        send(property)
+      else
+        data[property]
+      end
+    end
   end
 end

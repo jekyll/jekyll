@@ -9,6 +9,7 @@ module Jekyll
     EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
       title
       url
+      dir
       date
       id
       categories

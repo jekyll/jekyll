@@ -25,6 +25,34 @@ class TestPost < Test::Unit::TestCase
       assert !Post.valid?("blah")
     end
 
+    should "make properties accessible through #[]" do
+      post = setup_post('2013-12-20-properties.text')
+
+      attrs = {
+        categories: %w(foo bar baz),
+        content: "All the properties.\n\nPlus an excerpt.\n",
+        date: Time.new(2013, 12, 20),
+        dir: "/foo/bar/baz/2013/12/20",
+        excerpt: "All the properties.\n\n",
+        foo: 'bar',
+        id: "/foo/bar/baz/2013/12/20/properties",
+        layout: 'default',
+        name: nil,
+        # path: "properties.html",
+        permalink: nil,
+        published: nil,
+        tags: %w(ay bee cee),
+        title: 'Properties Post',
+        url: "/foo/bar/baz/2013/12/20/properties.html"
+      }
+
+      attrs.each do |attr, val|
+        attr_str = attr.to_s
+        result = post[attr_str]
+        assert_equal val, result, "For <post[\"#{attr_str}\"]>:"
+      end
+    end
+
     context "processing posts" do
       setup do
         @post = Post.allocate

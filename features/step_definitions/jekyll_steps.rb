@@ -1,3 +1,22 @@
+def file_content_from_hash(input_hash)
+  matter_hash = input_hash.reject { |k, v| k == "content" }
+  matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
+
+  content = if input_hash['input'] && input_hash['filter']
+    "{{ #{input_hash['input']} | #{input_hash['filter']} }}"
+  else
+    input_hash['content']
+  end
+
+  <<EOF
+---
+#{matter}
+---
+#{content}
+EOF
+end
+
+
 Before do
   FileUtils.mkdir(TEST_DIR)
   Dir.chdir(TEST_DIR)
@@ -62,42 +81,28 @@ Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
 
-Given /^I have the following (draft|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
-  table.hashes.each do |post|
-    title = slug(post['title'])
-    ext = post['type'] || 'textile'
+Given /^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash['title'])
+    ext = input_hash['type'] || 'textile'
     before, after = location(folder, direction)
 
-    if "draft" == status
-      folder_post = '_drafts'
+    case status
+    when "draft"
+      dest_folder = '_drafts'
       filename = "#{title}.#{ext}"
-    elsif "post" == status
-      parsed_date = Time.xmlschema(post['date']) rescue Time.parse(post['date'])
-      folder_post = '_posts'
+    when "page"
+      dest_folder = ''
+      filename = "#{title}.#{ext}"
+    when "post"
+      parsed_date = Time.xmlschema(input_hash['date']) rescue Time.parse(input_hash['date'])
+      dest_folder = '_posts'
       filename = "#{parsed_date.strftime('%Y-%m-%d')}-#{title}.#{ext}"
     end
 
-    path = File.join(before, folder_post, after, filename)
-
-    matter_hash = {}
-    %w(title layout tag tags category categories published author path date permalink).each do |key|
-      matter_hash[key] = post[key] if post[key]
-    end
-    matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
-
-    content = if post['input'] && post['filter']
-      "{{ #{post['input']} | #{post['filter']} }}"
-    else
-      post['content']
-    end
-
+    path = File.join(before, dest_folder, after, filename)
     File.open(path, 'w') do |f|
-      f.write <<EOF
----
-#{matter}
----
-#{content}
-EOF
+      f.write file_content_from_hash(input_hash)
     end
   end
 end

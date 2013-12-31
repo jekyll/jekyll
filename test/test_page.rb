@@ -47,6 +47,29 @@ class TestPage < Test::Unit::TestCase
         assert_equal "deal.with.dots", @page.basename
       end
 
+      should "make properties accessible through #[]" do
+        page = setup_page('properties.html')
+        attrs = {
+          content: "All the properties.\n",
+          dir: "/properties/",
+          excerpt: nil,
+          foo: 'bar',
+          layout: 'default',
+          name: "properties.html",
+          path: "properties.html",
+          permalink: '/properties/',
+          published: nil,
+          title: 'Properties Page',
+          url: "/properties/"
+        }
+
+        attrs.each do |attr, val|
+          attr_str = attr.to_s
+          result = page[attr_str]
+          assert_equal val, result, "For <page[\"#{attr_str}\"]>:"
+        end
+      end
+
       context "with pretty url style" do
         setup do
           @site.permalink_style = :pretty
