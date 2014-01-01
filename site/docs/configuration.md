@@ -294,6 +294,7 @@ relative_permalinks: true
 
 permalink:     date
 paginate_path: 'page:num'
+paginate:      nil
 
 markdown:      maruku
 markdown_ext:  markdown,mkd,mkdn,md
