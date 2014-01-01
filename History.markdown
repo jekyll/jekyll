@@ -53,6 +53,7 @@
   * Clarify how to access `site` in docs (#1864)
   * Add closing `<code>` tag to `context.registers[:site]` note (#1867)
   * Fix link to @mojombo's site source (#1897)
+  * Add `paginate: nil` to default configuration in docs (#1896)
 
 ## 1.4.2 / 2013-12-16
 
