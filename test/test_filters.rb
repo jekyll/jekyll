@@ -114,11 +114,6 @@ class TestFilters < Test::Unit::TestCase
         assert_equal "[1,2]", @filter.jsonify([1, 2])
         assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => 'Jack'}, {:name => 'Smith'}])
       end
-
-      should "proper filter objects using where" do
-        assert_equal "some string", @filter.where("some string", nil, nil)
-        assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
-      end
     end
 
     context "group_by filter" do
@@ -141,5 +136,17 @@ class TestFilters < Test::Unit::TestCase
         end
       end
     end
+
+    context "where filter" do
+      should "return the object if it's not an array" do
+        assert_equal {}, @filter.where({}, nil, nil)
+        assert_equal "some string", @filter.where("some string", "la", "le")
+      end
+
+      should "properly filter the objects" do
+        assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
+      end
+    end
+
   end
 end
