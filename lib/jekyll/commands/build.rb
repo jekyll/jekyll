@@ -4,6 +4,8 @@ module Jekyll
       def self.process(options)
         site = Jekyll::Site.new(options)
 
+        Jekyll.logger.log_level = Jekyll::Stevenson::ERROR if options['quiet']
+
         self.build(site, options)
         self.watch(site, options) if options['watch']
       end
