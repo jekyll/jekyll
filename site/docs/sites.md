@@ -11,7 +11,7 @@ with. Below are some Jekyll-powered blogs which were hand-picked for
 learning purposes.
 
 - [Tom Preston-Werner](http://tom.preston-werner.com/)
-    ([source](http://github.com/mojombo/mojombo.github.com))
+    ([source](https://github.com/mojombo/mojombo.github.io))
 - [Nick Quaranto](http://quaran.to/)
     ([source](https://github.com/qrush/qrush.github.com))
 - [Roger Chapman](http://rogchap.com/)
