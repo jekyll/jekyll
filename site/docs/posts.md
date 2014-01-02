@@ -43,7 +43,7 @@ file. For example, the following are examples of valid post filenames:
 
 ### Content Formats
 
-All blog post files must begin with [YAML front- matter](../frontmatter/). After
+All blog post files must begin with [YAML front-matter](../frontmatter/). After
 that, it's simply a matter of deciding which format you prefer. Jekyll supports
 two popular content markup formats:
 [Markdown](http://daringfireball.net/projects/markdown/) and
@@ -51,6 +51,18 @@ two popular content markup formats:
 of marking up different types of content within a post, so you should
 familiarize yourself with these formats and decide which one best suits your
 needs.
+
+<div class="note info">
+  <h5>Be aware of character sets</h5>
+  <p>
+    Content processors can modify certain characters to make them look nicer.
+    For example, the <code>smart</code> extension in Redcarpet converts standard,
+    ASCII quotation characters to curly, Unicode ones. In order for the browser
+    to display those characters properly, define the charset meta value by
+    including <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> in the
+    <code>&lt;head&gt;</code> of your layout.
+  </p>
+</div>
 
 ## Including images and resources
 
