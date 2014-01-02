@@ -14,7 +14,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "ensure post count is as expected" do
-      assert_equal 37, @site.posts.size
+      assert_equal 38, @site.posts.size
     end
 
     should "insert site.posts into the index" do
