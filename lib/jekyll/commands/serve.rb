@@ -10,6 +10,15 @@ module Jekyll
 
         FileUtils.mkdir_p(destination)
 
+        # monkey patch WEBrick using custom 404 page (/404.html)
+        if File.exists?(File.join(destination, '404.html'))
+          WEBrick::HTTPResponse.class_eval do
+            def create_error_page
+              @body = IO.read(File.join(@config[:DocumentRoot], '404.html'))
+            end
+          end
+        end
+
         # recreate NondisclosureName under utf-8 circumstance
         fh_option = WEBrick::Config::FileHandler
         fh_option[:NondisclosureName] = ['.ht*','~*']
@@ -33,6 +42,7 @@ module Jekyll
 
       def self.webrick_options(config)
         opts = {
+          :DocumentRoot => config['destination'],
           :Port => config['port'],
           :BindAddress => config['host'],
           :MimeTypes => self.mime_types,
