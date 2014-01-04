@@ -15,6 +15,7 @@ def add_build_options(c)
   c.option 'watch',   '-w', '--watch', 'Watch for changes and rebuild'
   c.option 'lsi',     '--lsi', 'Use LSI for improved related posts'
   c.option 'show_drafts',  '-D', '--drafts', 'Render posts in the _drafts folder'
+  c.option 'quiet', '-q', '--quiet', 'Silence output.'
   c.option 'verbose', '-V', '--verbose', 'Print verbose output.'
 end
 
