@@ -23,6 +23,7 @@
   * Bump dependency `mercenary` to `~> 0.2.0` (#1879)
   * Bump dependency `safe_yaml` to `~> 1.0` (#1886)
   * Allow sorting of content by custom properties (#1849)
+  * Add `--quiet` flag to silence output during build and serve (#1898)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
