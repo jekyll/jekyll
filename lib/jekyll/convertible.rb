@@ -21,7 +21,7 @@ module Jekyll
       self.content || ''
     end
 
-    # Returns merged optin hash for File.read of self.site (if exists)
+    # Returns merged option hash for File.read of self.site (if exists)
     # and a given param
     def merged_file_read_opts(opts)
       (self.site ? self.site.file_read_opts : {}).merge(opts)
