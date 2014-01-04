@@ -16,6 +16,11 @@ class TestFilters < Test::Unit::TestCase
       @filter = JekyllFilter.new({"source" => source_dir, "destination" => dest_dir})
       @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
       @time_as_string = "September 11, 2001 12:46:30 -0000"
+      @array_of_objects = [
+        { "color" => "red",  "size" => "large"  },
+        { "color" => "red",  "size" => "medium" },
+        { "color" => "blue", "size" => "medium" }
+      ]
     end
 
     should "textilize with simple string" do
@@ -131,5 +136,17 @@ class TestFilters < Test::Unit::TestCase
         end
       end
     end
+
+    context "where filter" do
+      should "return any input that is not an array" do
+        assert_equal Hash.new, @filter.where(Hash.new, nil, nil)
+        assert_equal "some string", @filter.where("some string", "la", "le")
+      end
+
+      should "filter objects appropriately" do
+        assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
+      end
+    end
+
   end
 end
