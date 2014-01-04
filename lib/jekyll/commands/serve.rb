@@ -32,7 +32,7 @@ module Jekyll
         if options['detach'] # detach the server
           pid = Process.fork { s.start }
           Process.detach(pid)
-          Jekyll.logger.info "Server detatched with pid '#{pid}'.", "Run `kill -9 #{pid}' to stop the server."
+          Jekyll.logger.info "Server detached with pid '#{pid}'.", "Run `kill -9 #{pid}' to stop the server."
         else # create a new server thread, then join it with current terminal
           t = Thread.new { s.start }
           trap("INT") { s.shutdown }

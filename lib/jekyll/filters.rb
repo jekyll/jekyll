@@ -124,7 +124,7 @@ module Jekyll
       input.split.length
     end
 
-    # Join an array of things into a string by separating with commes and the
+    # Join an array of things into a string by separating with commas and the
     # word "and" for the last one.
     #
     # array - The Array of Strings to join.
