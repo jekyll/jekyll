@@ -138,12 +138,12 @@ class TestFilters < Test::Unit::TestCase
     end
 
     context "where filter" do
-      should "return the object if it's not an array" do
-        assert_equal {}, @filter.where({}, nil, nil)
+      should "return any input that is not an array" do
+        assert_equal Hash.new, @filter.where(Hash.new, nil, nil)
         assert_equal "some string", @filter.where("some string", "la", "le")
       end
 
-      should "properly filter the objects" do
+      should "filter objects appropriately" do
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
       end
     end
