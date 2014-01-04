@@ -1,19 +1,68 @@
 _jekyll_complete_with_global_opts()
 {
-    local global_opts="-s --source -d --destination"
+    local global_opts="-s --source -d --destination --safe -p --plugins"
+    global_opts+=" --layouts -h --help -v --version -t --trace"
+    
     COMPREPLY=( $(compgen -W "${global_opts} ${1}" -- ${current}) )
 }
 
+
 _jekyll_commands()
 {
-    local commands="build default docs doctor help import new serve"
+    local commands="build docs doctor help import new serve"
     COMPREPLY=( $(compgen -W "${commands}" -- ${current}) )
+}
+
+
+_jekyll_cmd_build()
+{
+    local options="--config --future --limit_posts -w --watch --lsi"
+    options+=" -D --drafts -v --verbose"
+    
+    _jekyll_complete_with_global_opts "${options}"
+}
+
+
+_jekyll_cmd_docs()
+{
+    local options="-p --port -u --host"
+    _jekyll_complete_with_global_opts "${options}"
+}
+
+
+_jekyll_cmd_doctor()
+{
+    local options="--config"
+    _jekyll_complete_with_global_opts "${options}"
+}
+
+
+#todo allow only one argument
+_jekyll_cmd_help()
+{
+    _jekyll_commands
+}
+
+
+_jekyll_cmd_import()
+{
+    local options="--source --file --dbname --user --pass --host"
+    _jekyll_complete_with_global_opts "${options}"
+}
+
+
+_jekyll_cmd_new()
+{
+    local options="--force --blank"
+    _jekyll_complete_with_global_opts "${options}"
 }
 
 
 _jekyll_cmd_serve()
 {
-    local options="--config --future"
+    local options="--config --future --limit_posts -w --watch --lsi -B --detach"
+    options+=" -D --drafts -v --verbose -P --port -H --host -b --baseurl"
+    
     _jekyll_complete_with_global_opts "${options}"
 }
 
@@ -24,8 +73,7 @@ _jekyll()
     COMPREPLY=()
     current="${COMP_WORDS[COMP_CWORD]}"
     
-    # searching for the command
-    # (first non-option argument)
+    # searching for the command (first non-option argument)
     for ((i=1; $i<=$COMP_CWORD; i++)); do
         if [[ ${COMP_WORDS[i]} != -* ]]; then
             cmd="${COMP_WORDS[i]}"
@@ -41,6 +89,8 @@ _jekyll()
     if [ -z "$cmd" ] || [ $COMP_CWORD -eq $i ]; then
         _jekyll_commands
     fi
+    
+    #todo completion for global options and their args
 }
 
 
