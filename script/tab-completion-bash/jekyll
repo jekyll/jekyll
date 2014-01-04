@@ -1,6 +1,12 @@
+_jekyll_complete_with_global_opts()
+{
+    local global_opts="-s --source -d --destination"
+    COMPREPLY=( $(compgen -W "${global_opts} ${1}" -- ${current}) )
+}
+
 _jekyll_commands()
 {
-    local commands="serve build"
+    local commands="build default docs doctor help import new serve"
     COMPREPLY=( $(compgen -W "${commands}" -- ${current}) )
 }
 
@@ -8,7 +14,7 @@ _jekyll_commands()
 _jekyll_cmd_serve()
 {
     local options="--config --future"
-    COMPREPLY=( $(compgen -W "${options}" -- ${current}) )
+    _jekyll_complete_with_global_opts "${options}"
 }
 
 
