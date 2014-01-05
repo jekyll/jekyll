@@ -4,7 +4,7 @@ module Jekyll
 
     def initialize(site, base_directory = nil)
       @site = site
-      @base_directory = derive_base_directory(@site, base_directory.dup)
+      @base_directory = derive_base_directory(@site, base_directory.to_s.dup)
     end
 
     def base_directory
