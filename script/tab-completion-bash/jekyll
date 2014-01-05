@@ -37,7 +37,6 @@ _jekyll_cmd_doctor()
 }
 
 
-#todo allow only one argument
 _jekyll_cmd_help()
 {
     _jekyll_commands
@@ -70,27 +69,40 @@ _jekyll_cmd_serve()
 _jekyll() 
 {
     local current commands items cmd i
+    local global_opts_with_args="-s|--source|-d|--destination|-p|--plugins|--layouts"
     COMPREPLY=()
-    current="${COMP_WORDS[COMP_CWORD]}"
+    current=$2
+    prev=$3
     
     # searching for the command (first non-option argument)
+    # (first non-option argument that doesn't follow a global option that
+    #  receives an argument)
     for ((i=1; $i<=$COMP_CWORD; i++)); do
         if [[ ${COMP_WORDS[i]} != -* ]]; then
-            cmd="${COMP_WORDS[i]}"
-            break
+            if [[ ${COMP_WORDS[i-1]} != @($global_opts_with_args) ]]; then
+                cmd="${COMP_WORDS[i]}"
+                break
+            fi
         fi
     done
     
     if [ "$(type -t "_jekyll_cmd_$cmd")" = function ]; then
 	    "_jekyll_cmd_$cmd"
-	    return 0
+	    return
+	fi
+	
+	if [[ "$current" == -* ]]; then
+	    _jekyll_complete_with_global_opts
+	    return
+	fi
+	
+	if [[ "$prev" == @($global_opts_with_args) ]]; then
+	    return
 	fi
 
     if [ -z "$cmd" ] || [ $COMP_CWORD -eq $i ]; then
         _jekyll_commands
     fi
-    
-    #todo completion for global options and their args
 }
 
 
