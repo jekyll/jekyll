@@ -83,6 +83,12 @@ class TestCoreExt < Test::Unit::TestCase
         assert data.glob_include?("c/a/a.txt")
         assert data.glob_include?("c/a/b/a.txt")
       end
+
+      should "match even if there is no leading slash" do
+        data = ['vendor/bundle']
+        assert data.glob_include?('/vendor/bundle')
+        assert data.glob_include?('vendor/bundle')
+      end
     end
   end
 end

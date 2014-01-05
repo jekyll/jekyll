@@ -18,8 +18,8 @@ class TestEntryFilter < Test::Unit::TestCase
     end
 
     should "filter entries with exclude" do
-      excludes = %w[README TODO]
-      files = %w[index.html site.css .htaccess]
+      excludes = %w[README TODO vendor/bundle]
+      files = %w[index.html site.css .htaccess vendor]
 
       @site.exclude = excludes + ["exclude*"]
       assert_equal files, @site.filter_entries(excludes + files + ["excludeA"])
