@@ -27,6 +27,7 @@ require 'liquid'
 require 'maruku'
 require 'colorator'
 require 'toml'
+require 'tilt'
 
 # internal requires
 require 'jekyll/core_ext'
