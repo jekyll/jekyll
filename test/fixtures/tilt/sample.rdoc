@@ -1,0 +1,6 @@
+== Paragraphs
+
+This is how a paragraph looks.  Since it is difficult to generate good content
+for paragraphs I have chosen to use {Riker Ipsum}[http://rikeripsum.com] for
+nonsense filler content.  In the previous sentence you can see how a link is
+formatted.

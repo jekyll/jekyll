@@ -1,0 +1,6 @@
+== Software
+
+You can install 'package-name' using
+the +gem+ command:
+
+ gem install package-name

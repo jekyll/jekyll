@@ -1,0 +1,7 @@
+== Section ==
+
+A single newline has no
+effect on the layout.
+
+Indentation as used on talk pages:
+:Each colon at the start of a line

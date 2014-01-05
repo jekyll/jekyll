@@ -44,6 +44,14 @@ class Test::Unit::TestCase
     File.join(File.dirname(__FILE__), *subdirs)
   end
 
+  def fixture_path(path)
+    test_dir('fixtures', path)
+  end
+
+  def fixture(path)
+    File.read(fixture_path(path))
+  end
+
   def directory_with_contents(path)
     FileUtils.rm_rf(path)
     FileUtils.mkdir(path)

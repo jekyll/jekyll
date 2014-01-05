@@ -7,10 +7,8 @@ module Jekyll
       TILT_TO_CSS  = %w[sass scss less]
       TILT_TO_JS   = %w[coffee]
       TILT_TO_XML  = %w[builder]
-      TILT_TO_JSON = %w[yajl]
-      TILT_TO_CSV  = %w[rcsv]
 
-      TILT_EXTNAMES = TILT_TO_HTML | TILT_TO_CSS | TILT_TO_JS | TILT_TO_XML | TILT_TO_JSON | TILT_TO_CSV
+      TILT_EXTNAMES = TILT_TO_HTML | TILT_TO_CSS | TILT_TO_JS | TILT_TO_XML
 
       TILT_EXT_REXEP = Regexp.new(
         "(#{TILT_EXTNAMES.map{ |e| ".#{e}"}.join('|').gsub(/\./, '\.')})",
@@ -32,10 +30,6 @@ module Jekyll
           ".js"
         elsif TILT_TO_XML.include?(subject)
           ".xml"
-        elsif TILT_TO_JSON.include?(subject)
-          ".json"
-        elsif TILT_TO_CSV.include?(subject)
-          ".csv"
         end
       end
 
