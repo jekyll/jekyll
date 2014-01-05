@@ -106,4 +106,5 @@ _jekyll()
 }
 
 
-complete -F _jekyll jekyll
+complete -o bashdefault -o default -F _jekyll jekyll \
+    || complete -o default -F _jekyll jekyll
