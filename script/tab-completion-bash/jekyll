@@ -1,3 +1,13 @@
+# Bash completion for Jekyll
+#
+# If you source this file from your .bashrc, Bash should be able to
+# complete a command line that uses Jekyll with all the available commands
+# and options and sometimes even arguments.
+#
+# This implementation is based on Bash completion from Mercurial distributed SCM.
+# Entry point is function named _jekyll at the bottom of this file.
+
+
 _jekyll_complete_with_global_opts()
 {
     local global_opts="-s --source -d --destination --safe -p --plugins"
