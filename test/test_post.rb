@@ -109,7 +109,7 @@ class TestPost < Test::Unit::TestCase
         post.write(dest_dir)
 
         assert !File.exist?(File.expand_path("../baddie.html", dest_dir))
-        assert File.exist(File.expand_path("/baddie.html", dest_dir))
+        assert File.exist?(File.expand_path("baddie.html", dest_dir))
       end
 
       context "with CRLF linebreaks" do

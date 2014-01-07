@@ -50,8 +50,12 @@ module Jekyll
 
     # Returns a sanitized String URL
     def sanitize_url(in_url)
+
+      # prevent escaped periods from bypassing sanitization
+      url = URI.unescape(in_url)
+
       # Remove all double slashes
-      url = in_url.gsub(/\/\//, "/")
+      url = url.gsub(/\/\//, "/")
 
       # Remove every URL segment that consists solely of dots
       url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
@@ -61,7 +65,8 @@ module Jekyll
 
       # Always add a leading slash
       url.gsub!(/\A([^\/])/, '/\1')
-      url
+
+      URI.escape url
     end
   end
 end
