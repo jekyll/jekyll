@@ -133,7 +133,7 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      path = File.join(dest, self.url)
+      path = File.join(dest, File.expand_path(self.url, "/"))
       path = File.join(path, "index.html") if self.url =~ /\/$/
       path
     end
