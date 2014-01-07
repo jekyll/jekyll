@@ -75,6 +75,15 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/my_category/permalinked-post", @post.url
       end
 
+      should "not be writable outside of destination" do
+        post = setup_post("2014-01-06-permalink-traversal.md")
+        do_render(post)
+        post.write(dest_dir)
+
+        assert !File.exist?(File.expand_path("../baddie.html", dest_dir))
+        assert File.exist(File.expand_path("/baddie.html", dest_dir))
+      end
+
       context "with CRLF linebreaks" do
         setup do
           @real_file = "2009-05-24-yaml-linebreak.markdown"
