@@ -63,6 +63,7 @@
   * Add `paginate: nil` to default configuration in docs (#1896)
   * Add link to our License in the site footer (#1889)
   * Add a charset note in "Writing Posts" doc page (#1902)
+  * Disallow selection of path and prompt in bash examples
 
 ## 1.4.2 / 2013-12-16
 
