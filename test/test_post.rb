@@ -80,7 +80,7 @@ class TestPost < Test::Unit::TestCase
         do_render(post)
         post.write(dest_dir)
 
-        assert !File.exist?(File.expand_path("../baddie.html", dest_dir))
+        assert !File.exist?(File.expand_path("../../../baddie.html", dest_dir))
         assert File.exist?(File.expand_path("baddie.html", dest_dir))
       end
 
