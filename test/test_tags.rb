@@ -365,6 +365,21 @@ CONTENT
         end
         assert_no_match /SYMLINK TEST/, @result
       end
+
+      should "not expose the existence of symlinked files" do
+        ex = assert_raise IOError do
+          content = <<CONTENT
+---
+title: Include symlink
+---
+
+{% include tmp/pages-test-does-not-exist %}
+
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+        end
+        assert_match /should exist and should not be a symlink/, ex.message
+      end
     end
 
     context "with one parameter" do
