@@ -347,6 +347,27 @@ CONTENT
   end
 
   context "include tag with parameters" do
+
+    context "with symlink'd include" do
+
+      setup do
+        content = <<CONTENT
+---
+title: Include symlink
+---
+
+{% include about.html %}
+
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "not allow symlink includes" do
+        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+        assert_no_match /SYMLINK TEST/, @result
+      end
+    end
+
     context "with one parameter" do
       setup do
         content = <<CONTENT
