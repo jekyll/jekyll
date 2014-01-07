@@ -350,8 +350,10 @@ CONTENT
 
     context "with symlink'd include" do
 
-      setup do
-        content = <<CONTENT
+      should "not allow symlink includes" do
+        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+        assert_raise IOError do
+          content = <<CONTENT
 ---
 title: Include symlink
 ---
@@ -359,11 +361,8 @@ title: Include symlink
 {% include tmp/pages-test %}
 
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
-      end
-
-      should "not allow symlink includes" do
-        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+        end
         assert_no_match /SYMLINK TEST/, @result
       end
     end
