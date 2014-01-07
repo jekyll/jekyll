@@ -356,10 +356,10 @@ CONTENT
 title: Include symlink
 ---
 
-{% include about.html %}
+{% include tmp/pages-test %}
 
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
       end
 
       should "not allow symlink includes" do
