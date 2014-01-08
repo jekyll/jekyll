@@ -77,7 +77,7 @@ class TestTilt < Test::Unit::TestCase
       end
 
       should "convert wiki" do
-        compare_output("tilt/sample.mediawiki", "<p>\n<h2><span class=\"editsection\">&#91;<a href=\"?section=Section\">edit</a>&#93;</span> <span id=\"Section\" class=\"mw-headline\">Section</span></h2>\n\nA single newline has no\n\neffect on the layout.\n\n</p><p>\nIndentation as used on talk pages:\n\n<dl><dd>Each colon at the start of a line\n</p>")
+        compare_output("tilt/sample.mediawiki", "\n\n<h2><span class=\"editsection\">&#91;<a href=\"?section=Section\" title=\"Edit section: Section\">edit</a>&#93;</span> <a name=\"Section\"></a><span class=\"mw-headline\" id=\"Section\">Section</span></h2>\n\n\n\n<p>A single newline has no\neffect on the layout.\n</p>\n<p>Indentation as used on talk pages:\n<dl><dd>Each colon at the start of a line</dd></dl>\n</p>")
       end
 
       should "convert slim" do
