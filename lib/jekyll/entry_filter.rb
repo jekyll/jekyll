@@ -31,7 +31,7 @@ module Jekyll
     end
 
     def included?(entry)
-      site.include.glob_include?(entry)
+      glob_include?(site.include, entry)
     end
 
     def special?(entry)
@@ -43,13 +43,29 @@ module Jekyll
     end
 
     def excluded?(entry)
-      excluded = site.exclude.glob_include?(relative_to_source(entry))
+      excluded = glob_include?(site.exclude, relative_to_source(entry))
       Jekyll.logger.debug "excluded?(#{relative_to_source(entry)}) ==> #{excluded}"
       excluded
     end
 
     def symlink?(entry)
       File.symlink?(entry) && site.safe
+    end
+
+    def ensure_leading_slash(path)
+      path[0..0] == "/" ? path : "/#{path}"
+    end
+
+    # Returns true if path matches against any glob pattern.
+    # Look for more detail about glob pattern in method File::fnmatch.
+    def glob_include?(enum, e)
+      entry = ensure_leading_slash(e)
+      enum.any? do |exp|
+        item = ensure_leading_slash(exp)
+        Jekyll.logger.debug "glob_include?(#{entry})"
+        Jekyll.logger.debug "    ==> File.fnmatch?(#{item}, #{entry}) == #{File.fnmatch?(item, entry)}"
+        File.fnmatch?(item, entry)
+      end
     end
   end
 end

@@ -53,21 +53,3 @@ class Hash
     dup.symbolize_keys!
   end
 end
-
-module Enumerable
-  def ensure_leading_slash(path)
-    path[0..0] == "/" ? path : "/#{path}"
-  end
-
-  # Returns true if path matches against any glob pattern.
-  # Look for more detail about glob pattern in method File::fnmatch.
-  def glob_include?(e)
-    entry = ensure_leading_slash(e)
-    any? do |exp|
-      item = ensure_leading_slash(exp)
-      Jekyll.logger.debug "glob_include?(#{entry})"
-      Jekyll.logger.debug "    ==> File.fnmatch?(#{item}, #{entry}) == #{File.fnmatch?(item, entry)}"
-      File.fnmatch?(item, entry)
-    end
-  end
-end

@@ -71,4 +71,38 @@ class TestEntryFilter < Test::Unit::TestCase
       assert_not_equal [], site.static_files
     end
   end
+
+  context "glob_include?" do
+    setup do
+      stub(Jekyll).configuration do
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+      end
+      @site = Site.new(Jekyll.configuration)
+      @filter = EntryFilter.new(@site)
+    end
+
+    should "return false with no glob patterns" do
+      assert !@filter.glob_include?([], "a.txt")
+    end
+
+    should "return false with all not match path" do
+      data = ["a*", "b?"]
+      assert !@filter.glob_include?(data, "ca.txt")
+      assert !@filter.glob_include?(data, "ba.txt")
+    end
+
+    should "return true with match path" do
+      data = ["a*", "b?", "**/a*"]
+      assert @filter.glob_include?(data, "a.txt")
+      assert @filter.glob_include?(data, "ba")
+      assert @filter.glob_include?(data, "c/a/a.txt")
+      assert @filter.glob_include?(data, "c/a/b/a.txt")
+    end
+
+    should "match even if there is no leading slash" do
+      data = ['vendor/bundle']
+      assert @filter.glob_include?(data, '/vendor/bundle')
+      assert @filter.glob_include?(data, 'vendor/bundle')
+    end
+  end
 end
