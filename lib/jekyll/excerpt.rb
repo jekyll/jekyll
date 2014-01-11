@@ -17,7 +17,7 @@ module Jekyll
       self.content = extract_excerpt(post.content)
     end
 
-    %w[site name ext].each do |meth|
+    %w[site name ext relative_path].each do |meth|
       define_method(meth) do
         post.send(meth)
       end
@@ -37,7 +37,7 @@ module Jekyll
     end
 
     # 'Path' of the excerpt.
-    # 
+    #
     # Returns the path for the post this excerpt belongs to with #excerpt appended
     def path
       File.join(post.path, "#excerpt")
@@ -45,7 +45,7 @@ module Jekyll
 
     # Check if excerpt includes a string
     #
-    # Returns true if the string passed in 
+    # Returns true if the string passed in
     def include?(something)
       (self.output && self.output.include?(something)) || self.content.include?(something)
     end
