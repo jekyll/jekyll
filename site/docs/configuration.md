@@ -64,7 +64,11 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class='setting'>
       <td>
         <p class='name'><strong>Exclude</strong></p>
-        <p class="description">Exclude directories and/or files from the conversion</p>
+        <p class="description">
+          Exclude directories and/or files from the
+          conversion. These exclusions are relative to the site's
+          source directory.
+        </p>
       </td>
       <td class='align-center'>
         <p><code class="option">exclude: [DIR, FILE, ...]</code></p>
