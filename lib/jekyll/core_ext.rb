@@ -53,11 +53,3 @@ class Hash
     dup.symbolize_keys!
   end
 end
-
-module Enumerable
-  # Returns true if path matches against any glob pattern.
-  # Look for more detail about glob pattern in method File::fnmatch.
-  def glob_include?(e)
-    any? { |exp| File.fnmatch?(exp, e) }
-  end
-end

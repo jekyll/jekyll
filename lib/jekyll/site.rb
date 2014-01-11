@@ -140,7 +140,7 @@ module Jekyll
       base = File.join(self.source, self.config['layouts'])
       return unless File.exists?(base)
       entries = []
-      Dir.chdir(base) { entries = filter_entries(Dir['**/*.*']) }
+      Dir.chdir(base) { entries = filter_entries(Dir['**/*.*'], base) }
 
       entries.each do |f|
         name = f.split(".")[0..-2].join(".")
@@ -157,7 +157,7 @@ module Jekyll
     # Returns nothing.
     def read_directories(dir = '')
       base = File.join(self.source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.')) }
+      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
 
       self.read_posts(dir)
       self.read_drafts(dir) if self.show_drafts
@@ -339,8 +339,8 @@ module Jekyll
     # entries - The Array of String file/directory entries to filter.
     #
     # Returns the Array of filtered entries.
-    def filter_entries(entries)
-      EntryFilter.new(self).filter(entries)
+    def filter_entries(entries, base_directory = nil)
+      EntryFilter.new(self, base_directory).filter(entries)
     end
 
     # Get the implementation class for the given Converter.
@@ -381,7 +381,7 @@ module Jekyll
     def get_entries(dir, subfolder)
       base = File.join(self.source, dir, subfolder)
       return [] unless File.exists?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*']) }
+      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
     end
 

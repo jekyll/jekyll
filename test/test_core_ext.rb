@@ -63,26 +63,4 @@ class TestCoreExt < Test::Unit::TestCase
     end
 
   end
-
-  context "enumerable" do
-    context "glob_include?" do
-      should "return false with no glob patterns" do
-        assert ![].glob_include?("a.txt")
-      end
-
-      should "return false with all not match path" do
-        data = ["a*", "b?"]
-        assert !data.glob_include?("ca.txt")
-        assert !data.glob_include?("ba.txt")
-      end
-
-      should "return true with match path" do
-        data = ["a*", "b?", "**/a*"]
-        assert data.glob_include?("a.txt")
-        assert data.glob_include?("ba")
-        assert data.glob_include?("c/a/a.txt")
-        assert data.glob_include?("c/a/b/a.txt")
-      end
-    end
-  end
 end
