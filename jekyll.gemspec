@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 3.0")
   s.add_runtime_dependency('toml', '~> 0.1.0')
+  s.add_runtime_dependency('tilt', '~> 2.0')
 
   s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")
@@ -53,6 +54,19 @@ Gem::Specification.new do |s|
   s.add_development_dependency('jekyll_test_plugin')
   s.add_development_dependency('jekyll_test_plugin_malicious')
   s.add_development_dependency('rouge', '~> 1.3')
+
+  # Tilt
+  s.add_development_dependency('asciidoctor')
+  s.add_development_dependency('wikicloth')
+  s.add_development_dependency('slim')
+  s.add_development_dependency('sass')
+  s.add_development_dependency('less')
+  s.add_development_dependency('coffee-script')
+  s.add_development_dependency('builder')
+  s.add_development_dependency('markaby')
+  s.add_development_dependency('creole')
+  s.add_development_dependency('radius')
+  s.add_development_dependency('therubyracer') # for less
 
   # = MANIFEST =
   s.files = %w[

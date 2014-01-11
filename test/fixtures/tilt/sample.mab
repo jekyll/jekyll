@@ -1,0 +1,11 @@
+html do
+  head do
+    title 'Products'
+  end
+
+  body do
+    p "Notice", :style => "color: green"
+
+    self << "content"
+  end
+end

@@ -16,6 +16,11 @@ require 'set'
 #   self.path
 module Jekyll
   module Convertible
+    EXTNAMES_TO_HTML = %w[ad adoc asciidoc rdoc wiki creole mediawiki mw slim mab radius]
+    EXTNAMES_TO_CSS  = %w[sass scss less]
+    EXTNAMES_TO_JS   = %w[coffee]
+    EXTNAMES_TO_XML  = %w[builder]
+
     # Returns the contents as a String.
     def to_s
       self.content || ''
@@ -55,11 +60,17 @@ module Jekyll
     #
     # Returns nothing.
     def transform
-      self.content = converter.convert(self.content)
+      self.content = ::Tilt.new(self.path) do
+        self.content
+      end.render
     rescue => e
       Jekyll.logger.error "Conversion error:", "There was an error converting" +
         " '#{self.path}'."
       raise e
+    end
+
+    def converter
+      ::Tilt
     end
 
     # Determine the extension depending on content_type.
@@ -67,15 +78,35 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      converter.output_ext(self.ext)
+      if self.ext =~ markdown_extname_regexp || extnames_to_html.include?(self.ext)
+        '.html'
+      elsif extnames_to_css.include?(self.ext)
+        '.css'
+      elsif extnames_to_js.include?(self.ext)
+        '.js'
+      elsif extnames_to_xml.include?(self.ext)
+        '.xml'
+      end
     end
 
-    # Determine which converter to use based on this convertible's
-    # extension.
-    #
-    # Returns the Converter instance.
-    def converter
-      @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
+    def markdown_extname_regexp
+      Regexp.new('^\.(' + self.site.config['markdown_ext'].gsub(',','|') +')$', Regexp::IGNORECASE)
+    end
+
+    def extnames_to_html
+      EXTNAMES_TO_HTML
+    end
+
+    def extnames_to_css
+      EXTNAMES_TO_CSS
+    end
+
+    def extnames_to_js
+      EXTNAMES_TO_JS
+    end
+
+    def extnames_to_xml
+      EXTNAMES_TO_XML
     end
 
     # Render Liquid in the content
