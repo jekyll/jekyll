@@ -46,6 +46,8 @@
   * Fix the `highlight` tag feature (#1859)
   * Test Jekyll under Ruby 2.1.0 (#1900)
   * Add script/cibuild for fun and profit (#1912)
+  * Use `Forwardable` for delegation between `Excerpt` and `Post`
+    (#1927)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
