@@ -66,6 +66,7 @@
   * Add link to our License in the site footer (#1889)
   * Add a charset note in "Writing Posts" doc page (#1902)
   * Disallow selection of path and prompt in bash examples
+  * Add jekyll-compass to the plugin list (#1923)
 
 ## 1.4.2 / 2013-12-16
 
