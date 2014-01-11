@@ -27,6 +27,7 @@
   * Add a `where` filter to filter arrays based on a key/value pair
     (#1875)
   * Route 404 errors to a custom 404 page in development (#1899)
+  * Excludes are now relative to the site source (#1916)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
