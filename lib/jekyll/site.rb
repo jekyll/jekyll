@@ -186,7 +186,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      posts = read_things(dir, '_posts', Post)
+      posts = read_content(dir, '_posts', Post)
 
       posts.each do |post|
         if post.published && (self.future || post.date <= self.time)
@@ -202,14 +202,14 @@ module Jekyll
     #
     # Returns nothing.
     def read_drafts(dir)
-      drafts = read_things(dir, '_drafts', Draft)
+      drafts = read_content(dir, '_drafts', Draft)
 
       drafts.each do |draft|
         aggregate_post_info(draft)
       end
     end
 
-    def read_things(dir, magic_dir, klass)
+    def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
         klass.new(self, self.source, dir, entry) if klass.valid?(entry)
       end.reject do |entry|
