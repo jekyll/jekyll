@@ -1,9 +1,17 @@
+require 'jekyll/convertible'
+require 'forwardable'
+
 module Jekyll
   class Excerpt
     include Convertible
+    extend Forwardable
 
     attr_accessor :post
     attr_accessor :content, :output, :ext
+    
+    def_delegator :@post, :site, :site
+    def_delegator :@post, :name, :name
+    def_delegator :@post, :ext,  :ext
 
     # Initialize this Post instance.
     #
@@ -15,12 +23,6 @@ module Jekyll
     def initialize(post)
       self.post = post
       self.content = extract_excerpt(post.content)
-    end
-
-    %w[site name ext].each do |meth|
-      define_method(meth) do
-        post.send(meth)
-      end
     end
 
     def to_liquid
