@@ -11,8 +11,12 @@ module Jekyll
       ".css"
     end
 
+    def sass_build_configuration_options(overrides)
+      (@config["sass"] || {}).deep_merge(overrides)
+    end
+
     def convert(content)
-      Object::Sass.compile(content, :syntax => :sass)
+      ::Sass.compile(content, sass_build_configuration_options({"syntax" => :sass}))
     end
   end
 end
