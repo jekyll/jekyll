@@ -77,6 +77,14 @@ CSS
     should "default to :sass syntax when content is empty" do
       assert_equal :sass, converter.sass_configs[:syntax]
     end
+
+    should "not allow sass_dirs outside of site source" do
+      assert_equal source_dir("etc/passwd"), converter({"sass_dir" => "/etc/passwd"}).sass_dir_relative_to_site_source
+    end
+
+    should "override user-set syntax based on content" do
+      assert_equal :sass, converter({"syntax" => :scss}).sass_configs(sass_content)[:syntax]
+    end
   end
 
   context "converting sass" do
