@@ -76,7 +76,7 @@ Mercenary.program(:jekyll) do |p|
     c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
     c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
     c.option 'baseurl', '-b', '--baseurl [URL]', 'Base URL'
-    c.option 'clean', '-c', '--clean', 'Clean up generated files at program exit'
+    c.option 'clean', '--clean', 'Clean up generated files at program exit'
 
     c.action do |args, options|
       options["serving"] ||= true
