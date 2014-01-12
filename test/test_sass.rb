@@ -85,6 +85,10 @@ CSS
     should "override user-set syntax based on content" do
       assert_equal :sass, converter({"syntax" => :scss}).sass_configs(sass_content)[:syntax]
     end
+
+    should "override user-set cache setting" do
+      assert_equal false, converter("cache" => true).sass_configs[:cache]
+    end
   end
 
   context "converting sass" do
