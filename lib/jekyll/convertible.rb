@@ -21,6 +21,11 @@ module Jekyll
       self.content || ''
     end
 
+    # Whether the file is published or not, as indicated in YAML front-matter
+    def published?
+      !(self.data.has_key?('published') && self.data['published'] == false)
+    end
+
     # Returns merged option hash for File.read of self.site (if exists)
     # and a given param
     def merged_file_read_opts(opts)
