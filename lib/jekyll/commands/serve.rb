@@ -77,7 +77,7 @@ module Jekyll
 
       def self.cleanup(destination)
         FileUtils.rm_rf destination
-        Jekyll.logger.info "Cleaned up directory #{destination}"
+        Jekyll.logger.info "Cleaned directory #{destination}"
       end
     end
   end
