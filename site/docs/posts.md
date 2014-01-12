@@ -138,10 +138,17 @@ posts:
   {% raw %}{% for post in site.posts %}{% endraw %}
     <li>
       <a href="{% raw %}{{ post.url }}{% endraw %}">{% raw %}{{ post.title }}{% endraw %}</a>
-      <p>{% raw %}{{ post.excerpt }}{% endraw %}</p>
+      {% raw %}{{ post.excerpt }}{% endraw %}
     </li>
   {% raw %}{% endfor %}{% endraw %}
 </ul>
+{% endhighlight %}
+
+Because Jekyll grabs the first paragraph you will not need to wrap the excerpt in `p` tags,
+which is already done for you. These tags can be removed with the following if you'd prefer:
+
+{% highlight html %}
+{% raw %}{{ post.excerpt | remove: '<p>' | remove: '</p>' }}{% endraw %}
 {% endhighlight %}
 
 If you don't like the automatically-generated post excerpt, it can be overridden by adding
