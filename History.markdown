@@ -69,6 +69,7 @@
   * Add a charset note in "Writing Posts" doc page (#1902)
   * Disallow selection of path and prompt in bash examples
   * Add jekyll-compass to the plugin list (#1923)
+  * Add note in Posts docs about stripping `<p>` tags from excerpt (#1933)
 
 ## 1.4.2 / 2013-12-16
 
