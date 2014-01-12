@@ -35,7 +35,10 @@ module Jekyll
           Jekyll.logger.info "Server detached with pid '#{pid}'.", "Run `kill -9 #{pid}' to stop the server."
         else # create a new server thread, then join it with current terminal
           t = Thread.new { s.start }
-          trap("INT") { s.shutdown }
+          trap("INT") do
+            self.cleanup(options['destination']) if options['clean']
+            s.shutdown
+          end
           t.join()
         end
       end
@@ -69,6 +72,11 @@ module Jekyll
       def self.mime_types
         mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
         WEBrick::HTTPUtils::load_mime_types(mime_types_file)
+      end
+
+      def self.cleanup(destination)
+        FileUtils.rm_rf destination
+        Jekyll.logger.info "Cleaned up directory #{destination}"
       end
     end
   end
