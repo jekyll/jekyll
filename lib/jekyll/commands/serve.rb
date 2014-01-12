@@ -36,8 +36,8 @@ module Jekyll
         else # create a new server thread, then join it with current terminal
           t = Thread.new { s.start }
           trap("INT") do
-            self.cleanup(options['destination']) if options['clean']
             s.shutdown
+            self.cleanup(options['destination']) if options['clean']
           end
           t.join()
         end
