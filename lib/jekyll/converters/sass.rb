@@ -12,7 +12,7 @@ module Jekyll
     end
 
     def convert(content)
-      Sass.compile(content, :syntax => :sass)
+      Object::Sass.compile(content, :syntax => :sass)
     end
   end
 end

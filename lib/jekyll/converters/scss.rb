@@ -1,10 +1,10 @@
 module Jekyll
-  class Sass < Converter
+  class Scss < Converter
     safe true
     priority :low
 
     def matches(ext)
-      ext =~ /^\.sass$/i
+      ext =~ /^\.scss$/i
     end
 
     def output_ext(ext)
@@ -12,7 +12,7 @@ module Jekyll
     end
 
     def convert(content)
-      Sass.compile(content, :syntax => :scss)
+      ::Sass.compile(content, :syntax => :scss)
     end
   end
 end
