@@ -36,4 +36,20 @@ class TestCommand < Test::Unit::TestCase
       end
     end
   end
+  context "when calling serve with --clean" do
+    should "clean up generated content" do
+      stub(Jekyll).configuration do
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+      end
+      site = Site.new(Jekyll.configuration)
+
+      clear_dest
+      StaticFile.reset_cache
+
+      site.process
+      capture_stdout { Jekyll::Commands::Serve.cleanup site.dest }
+
+      assert !File.exist?(site.dest)
+    end
+  end
 end
