@@ -250,6 +250,16 @@ before your site is served.
         <p><code class="flag">-B, --detach</code></p>
       </td>
     </tr>
+    <tr class='setting'>
+      <td>
+        <p class='name'><strong>Clean</strong></p>
+        <p class='description'>Clean up generated static files on program exit</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">clean: BOOL</code></p>
+        <p><code class="flag">--clean</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
