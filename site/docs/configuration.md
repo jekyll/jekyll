@@ -257,7 +257,7 @@ before your site is served.
       </td>
       <td class="align-center">
         <p><code class="option">clean: BOOL</code></p>
-        <p><code class="flag">-c, --clean</code></p>
+        <p><code class="flag">--clean</code></p>
       </td>
     </tr>
   </tbody>
