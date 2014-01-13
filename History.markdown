@@ -71,6 +71,7 @@
   * Disallow selection of path and prompt in bash examples
   * Add jekyll-compass to the plugin list (#1923)
   * Add note in Posts docs about stripping `<p>` tags from excerpt (#1933)
+  * Add additional info about the new exclude behavior (#1938)
 
 ## 1.4.2 / 2013-12-16
 
