@@ -38,10 +38,14 @@ module Jekyll
       )
     end
 
+    def allow_caching?
+      !@config["safe"]
+    end
+
     def sass_configs(content = "")
       sass_build_configuration_options({
         "syntax" => syntax_type_of_content(content),
-        "cache"  => false,
+        "cache"  => allow_caching?,
         "load_paths" => [sass_dir_relative_to_site_source]
       })
     end

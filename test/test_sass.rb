@@ -54,8 +54,14 @@ CSS
   end
 
   context "when building configurations" do
-    should "not allow caching" do
-      assert_equal false, converter.sass_configs[:cache]
+    should "not allow caching in safe mode" do
+      verter = converter
+      verter.instance_variable_get(:@config)["safe"] = true
+      assert_equal false, verter.sass_configs[:cache]
+    end
+
+    should "allow caching in unsafe mode" do
+      assert_equal true, converter.sass_configs[:cache]
     end
 
     should "set the load paths to the _sass dir relative to site source" do
@@ -84,10 +90,6 @@ CSS
 
     should "override user-set syntax based on content" do
       assert_equal :sass, converter({"syntax" => :scss}).sass_configs(sass_content)[:syntax]
-    end
-
-    should "override user-set cache setting" do
-      assert_equal false, converter("cache" => true).sass_configs[:cache]
     end
   end
 
