@@ -50,6 +50,7 @@
   * Use `Forwardable` for delegation between `Excerpt` and `Post`
     (#1927)
   * Rename `read_things` to `read_content` (#1928)
+  * Add `script/branding` script for ASCII art lovin' (#1936)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
