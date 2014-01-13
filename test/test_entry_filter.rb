@@ -72,7 +72,7 @@ class TestEntryFilter < Test::Unit::TestCase
     end
   end
 
-  context "glob_include?" do
+  context "#glob_include?" do
     setup do
       stub(Jekyll).configuration do
         Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
