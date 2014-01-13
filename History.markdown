@@ -72,6 +72,8 @@
   * Add jekyll-compass to the plugin list (#1923)
   * Add note in Posts docs about stripping `<p>` tags from excerpt (#1933)
   * Add additional info about the new exclude behavior (#1938)
+  * Linkify 'awesome contributors' to point to the contributors graph on
+    GitHub (#1940)
 
 ## 1.4.2 / 2013-12-16
 
