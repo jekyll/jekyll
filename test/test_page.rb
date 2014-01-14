@@ -101,6 +101,16 @@ class TestPage < Test::Unit::TestCase
         assert_equal @page.permalink, @page.url
         assert_equal "/about/", @page.dir
       end
+
+      should "not be writable outside of destination" do
+        unexpected = File.expand_path("../../../baddie.html", dest_dir)
+        File.delete unexpected if File.exist?(unexpected)
+        page = setup_page("exploit.md")
+        do_render(page)
+        page.write(dest_dir)
+
+        assert !File.exist?(unexpected)
+      end
     end
 
     context "with specified layout of nil" do

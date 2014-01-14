@@ -78,6 +78,10 @@ class File
     def self.read_with_options(path, opts = {})
       self.read(path)
     end
+
+    def self.realpath(filename)
+      Pathname.new(filename).realpath.to_s
+    end
   else
     def self.read_with_options(path, opts = {})
       self.read(path, opts)
