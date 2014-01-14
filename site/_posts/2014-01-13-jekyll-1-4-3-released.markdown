@@ -23,4 +23,5 @@ traversal, potentially overwriting otherwise-trusted content with arbitrary HTML
 or Javascript depending on your server's configuration.
 
 *Maintainer's note: Many thanks to @gregose and @charliesome for discovering
-these vulnerabilities, and to @BenBalter and @alindeman for writing the patch.*
+these vulnerabilities, and to @BenBalter and @alindeman for writing the patch.
+-Parker*
