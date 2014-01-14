@@ -1,9 +1,25 @@
----
-layout: docs
-title: History
-permalink: /docs/history/
+--- 
 prev_section: contributing
+title: History
+layout: docs
+permalink: /docs/history/
 ---
+
+## 1.4.3 / 2014-01-13
+
+### Bug Fixes
+
+- Patch show-stopping security vulnerabilities ([#1944]({{ site.repository }}/issues/1944))
+
+## 1.4.2 / 2013-12-16
+
+### Bug Fixes
+- Turn on Maruku fenced code blocks by default ([#1830]({{ site.repository }}/issues/1830))
+
+## 1.4.1 / 2013-12-09
+
+### Bug Fixes
+- Don't allow nil entries when loading posts ([#1796]({{ site.repository }}/issues/1796))
 
 ## 1.4.0 / 2013-12-07
 
