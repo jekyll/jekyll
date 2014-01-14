@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+  * Patch show-stopping security vulnerabilities (#1944)
+
 ### Development Fixes
 
 ### Site Enhancements
