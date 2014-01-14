@@ -2,10 +2,10 @@
 
 [![Gem Version](https://badge.fury.io/rb/jekyll.png)](http://badge.fury.io/rb/jekyll)
 
-[![Build Status](https://secure.travis-ci.org/mojombo/jekyll.png?branch=master)](https://travis-ci.org/mojombo/jekyll)
-[![Code Climate](https://codeclimate.com/github/mojombo/jekyll.png)](https://codeclimate.com/github/mojombo/jekyll)
-[![Dependency Status](https://gemnasium.com/mojombo/jekyll.png)](https://gemnasium.com/mojombo/jekyll)
-[![Coverage Status](https://coveralls.io/repos/mojombo/jekyll/badge.png)](https://coveralls.io/r/mojombo/jekyll)
+[![Build Status](https://secure.travis-ci.org/jekyll/jekyll.png?branch=master)](https://travis-ci.org/jekyll/jekyll)
+[![Code Climate](https://codeclimate.com/github/jekyll/jekyll.png)](https://codeclimate.com/github/jekyll/jekyll)
+[![Dependency Status](https://gemnasium.com/jekyll/jekyll.png)](https://gemnasium.com/jekyll/jekyll)
+[![Coverage Status](https://coveralls.io/repos/jekyll/jekyll/badge.png)](https://coveralls.io/r/jekyll/jekyll)
 
 By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!
 
@@ -15,7 +15,7 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 
 * [Install](http://jekyllrb.com/docs/installation/) the gem
 * Read up about its [Usage](http://jekyllrb.com/docs/usage/) and [Configuration](http://jekyllrb.com/docs/configuration/)
-* Take a gander at some existing [Sites](http://wiki.github.com/mojombo/jekyll/sites)
+* Take a gander at some existing [Sites](http://wiki.github.com/jekyll/jekyll/sites)
 * Fork and [Contribute](http://jekyllrb.com/docs/contributing/) your own modifications
 * Have questions? Check out `#jekyll` on irc.freenode.net.
 
@@ -53,4 +53,4 @@ Jekyll is a simple, blog aware, static site generator. It takes a template direc
 
 ## License
 
-See [LICENSE](https://github.com/mojombo/jekyll/blob/master/LICENSE).
+See [LICENSE](https://github.com/jekyll/jekyll/blob/master/LICENSE).
