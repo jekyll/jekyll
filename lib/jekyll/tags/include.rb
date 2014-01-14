@@ -102,7 +102,7 @@ eos
         validate_file_name(file)
 
         path = File.join(dir, file)
-        validate_file(path, context.registers[:site].safe)
+        validate_file(context.registers[:site].source, path, context.registers[:site].safe)
 
         begin
           partial = Liquid::Template.parse(source(path, context))
@@ -122,11 +122,12 @@ eos
         end
       end
 
-      def validate_file(file, safe)
+      def validate_file(sourcedir, file, safe)
+        relative_file = Pathname.new(file).relative_path_from(Pathname.new(sourcedir))
         if !File.exists?(file)
-          raise IOError.new "Included file '#{file}' not found" 
+          raise IOError.new "Included file '#{relative_file}' not found" 
         elsif File.symlink?(file) && safe
-          raise IOError.new "The included file '#{file}' should not be a symlink"
+          raise IOError.new "The included file '#{relative_file}' should not be a symlink"
         end
       end
 
