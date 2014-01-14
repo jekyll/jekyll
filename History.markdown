@@ -6,11 +6,15 @@
 
 ### Bug Fixes
 
-  * Patch show-stopping security vulnerabilities (#1944)
-
 ### Development Fixes
 
 ### Site Enhancements
+
+## 1.4.3 / 2014-01-13
+
+### Bug Fixes
+
+  * Patch show-stopping security vulnerabilities (#1944)
 
 ## 1.4.2 / 2013-12-16
 

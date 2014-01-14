@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.4.2'
+  s.version           = '1.4.3'
   s.license           = 'MIT'
-  s.date              = '2013-12-16'
+  s.date              = '2014-01-13'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -161,6 +161,7 @@ Gem::Specification.new do |s|
     site/_posts/2013-11-26-jekyll-1-3-1-released.markdown
     site/_posts/2013-12-07-jekyll-1-4-0-released.markdown
     site/_posts/2013-12-16-jekyll-1-4-2-released.markdown
+    site/_posts/2014-01-13-jekyll-1-4-3-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
@@ -220,6 +221,7 @@ Gem::Specification.new do |s|
     test/source/_data/products.yml
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
+    test/source/_includes/tmp
     test/source/_layouts/default.html
     test/source/_layouts/post/simple.html
     test/source/_layouts/simple.html
@@ -257,6 +259,7 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-05-10-number-category.textile
     test/source/_posts/2013-07-22-post-excerpt-with-layout.markdown
     test/source/_posts/2013-08-01-mkdn-extension.mkdn
+    test/source/_posts/2014-01-06-permalink-traversal.md
     test/source/_posts/es/2008-11-21-nested.textile
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
@@ -265,6 +268,7 @@ Gem::Specification.new do |s|
     test/source/contacts/index.html
     test/source/css/screen.css
     test/source/deal.with.dots.html
+    test/source/exploit.md
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
     test/source/products.yml
