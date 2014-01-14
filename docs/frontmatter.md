@@ -30,8 +30,7 @@ relies on.
   <p>
     If you use UTF-8 encoding, make sure that no <code>BOM</code> header
     characters exist in your files or very, very bad things will happen to
-    Jekyll. This is especially relevant if you’re running
-    <a href="../windows/">Jekyll on Windows</a>.
+    Jekyll. This is especially relevant if you’re running Jekyll on Windows.
   </p>
 </div>
 
