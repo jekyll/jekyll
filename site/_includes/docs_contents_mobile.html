@@ -1,23 +1,10 @@
 <div class="docs-nav-mobile unit whole show-on-mobiles">
   <select onchange="if (this.value) window.location.href=this.value">
     <option value="">Navigate the docs…</option>
-    <optgroup label="Getting started">
-      {% include docs_option.html items='home quickstart installation usage structure configuration' %}
+    {% for section in site.data.docs %}
+    <optgroup label="{{ section.title }}">
+      {% include docs_option.html items=section.docs %}
     </optgroup>
-    <optgroup label="Your Content">
-      {% include docs_option.html items='frontmatter posts drafts pages variables datafiles migrations' %}
-    </optgroup>
-    <optgroup label="Customization">
-      {% include docs_option.html items='templates permalinks pagination plugins extras' %}
-    </optgroup>
-    <optgroup label="Deployment">
-      {% include docs_option.html items='github-pages deployment-methods' %}
-    </optgroup>
-    <optgroup label="Miscellaneous">
-      {% include docs_option.html items='troubleshooting sites resources upgrading' %}
-    </optgroup>
-    <optgroup label="Meta">
-      {% include docs_option.html items='contributing history' %}
-    </optgroup>
+    {% endfor %}
   </select>
 </div>
