@@ -38,6 +38,7 @@
   * Change short opts for host and port for `jekyll docs` to be consistent with
     other subcommands (#1877)
   * Fix typos (#1910)
+  * Lock Maruku at 0.7.0 to prevent bugs caused by Maruku 0.7.1 (#1958)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
