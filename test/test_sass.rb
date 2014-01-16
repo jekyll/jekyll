@@ -48,7 +48,7 @@ CSS
   end
 
   context "determining the output file extension" do
-    should "output .css file extension" do
+    should "always outputs the .css file extension" do
       assert_equal ".css", converter.output_ext(".always-css")
     end
   end
