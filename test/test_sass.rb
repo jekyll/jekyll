@@ -49,7 +49,7 @@ CSS
 
   context "determining the output file extension" do
     should "output .css file extension" do
-      assert_equal ".css", converter.output_ext(".sass")
+      assert_equal ".css", converter.output_ext(".always-css")
     end
   end
 
