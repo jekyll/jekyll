@@ -76,6 +76,7 @@
   * Linkify 'awesome contributors' to point to the contributors graph on
     GitHub (#1940)
   * Update `docs/sites.md` link to GitHub Training materials (#1949)
+  * Update `master` with the release info from 1.4.3 (#1947)
 
 ## 1.4.3 / 2014-01-13
 
