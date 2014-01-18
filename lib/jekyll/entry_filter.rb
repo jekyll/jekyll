@@ -25,7 +25,7 @@ module Jekyll
     def filter(entries)
       entries.reject do |e|
         unless included?(e)
-          special?(e) || backup?(e) || excluded?(e) || symlink?(e)
+          special?(e) || backup?(e) || excluded?(e) || symlink?(e) || docs?(e)
         end
       end
     end
@@ -50,6 +50,10 @@ module Jekyll
 
     def symlink?(entry)
       File.symlink?(entry) && site.safe
+    end
+
+    def docs?(entry)
+      glob_include(["README.*","CONTRIBUTING.*"], entry)
     end
 
     def ensure_leading_slash(path)
