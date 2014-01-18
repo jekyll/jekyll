@@ -24,10 +24,10 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
-  s.add_runtime_dependency('liquid', "~> 2.5.2")
+  s.add_runtime_dependency('liquid', "~> 2.5.5")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('listen', "~> 1.3")
-  s.add_runtime_dependency('maruku', "~> 0.7.0")
+  s.add_runtime_dependency('maruku', "0.7.0")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('mercenary', "~> 0.2.0")
   s.add_runtime_dependency('safe_yaml', "~> 1.0")
@@ -128,6 +128,8 @@ Gem::Specification.new do |s|
     lib/site_template/css/syntax.css
     lib/site_template/index.html
     script/bootstrap
+    script/branding
+    script/cibuild
     site/.gitignore
     site/CNAME
     site/README
@@ -167,6 +169,9 @@ Gem::Specification.new do |s|
     site/_posts/2013-11-04-jekyll-1-3-0-released.markdown
     site/_posts/2013-11-26-jekyll-1-3-1-released.markdown
     site/_posts/2013-12-07-jekyll-1-4-0-released.markdown
+    site/_posts/2013-12-09-jekyll-1-4-1-released.markdown
+    site/_posts/2013-12-16-jekyll-1-4-2-released.markdown
+    site/_posts/2014-01-13-jekyll-1-4-3-released.markdown
     site/css/screen.css
     site/docs/configuration.md
     site/docs/contributing.md
@@ -195,6 +200,7 @@ Gem::Specification.new do |s|
     site/docs/upgrading.md
     site/docs/usage.md
     site/docs/variables.md
+    site/docs/windows.md
     site/favicon.png
     site/feed.xml
     site/freenode.txt
@@ -221,6 +227,7 @@ Gem::Specification.new do |s|
     test/source/_data/languages.yml
     test/source/_data/members.yaml
     test/source/_data/products.yml
+    test/source/_includes/include.html
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
     test/source/_layouts/default.html
@@ -260,6 +267,8 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-05-10-number-category.textile
     test/source/_posts/2013-07-22-post-excerpt-with-layout.markdown
     test/source/_posts/2013-08-01-mkdn-extension.mkdn
+    test/source/_posts/2013-12-17-include-variable-filters.markdown
+    test/source/_posts/2013-12-20-properties.text
     test/source/_posts/es/2008-11-21-nested.textile
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
@@ -271,6 +280,7 @@ Gem::Specification.new do |s|
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
     test/source/products.yml
+    test/source/properties.html
     test/source/sitemap.xml
     test/source/symlink-test/_data
     test/source/symlink-test/symlinked-dir

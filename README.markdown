@@ -7,7 +7,7 @@
 [![Dependency Status](https://gemnasium.com/jekyll/jekyll.png)](https://gemnasium.com/jekyll/jekyll)
 [![Coverage Status](https://coveralls.io/repos/jekyll/jekyll/badge.png)](https://coveralls.io/r/jekyll/jekyll)
 
-By Tom Preston-Werner, Nick Quaranto, and many awesome contributors!
+By Tom Preston-Werner, Nick Quaranto, and many [awesome contributors](https://github.com/jekyll/jekyll/graphs/contributors)!
 
 Jekyll is a simple, blog aware, static site generator perfect for personal or project sites. Think of it sort of like a file-based CMS, except without all the complexity. Jekyll takes your content, runs it through Markdown converters and Liquid templates, and spits out a complete, static website suitable for serving with Apache, Nginx or your favorite web server. This is also the engine behind [GitHub Pages](http://pages.github.com), which you can use to host your project's page or blog right on GitHub.
 
