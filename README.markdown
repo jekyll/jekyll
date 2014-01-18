@@ -9,11 +9,11 @@
 
 By Tom Preston-Werner, Nick Quaranto, and many [awesome contributors](https://github.com/jekyll/jekyll/graphs/contributors)!
 
-Jekyll is a simple, blog aware, static site generator perfect for personal or project sites. Think of it sort of like a file-based CMS, except without all the complexity. Jekyll takes your content, runs it through Markdown converters and Liquid templates, and spits out a complete, static website suitable for serving with Apache, Nginx or your favorite web server. This is also the engine behind [GitHub Pages](http://pages.github.com), which you can use to host your project's page or blog right on GitHub.
+Jekyll is a simple, blog-aware, static site generator perfect for personal, project, or organization sites. Think of it like a file-based CMS, sans all the complexity. Jekyll takes your content, renders Markdown and Liquid templates, and spits out a complete, static website ready to be served with Apache, Nginx or your favorite web server. Jekyll is the engine behind [GitHub Pages](http://pages.github.com), which you can use to host sites right from your GitHub repositories.
 
 ## Philosophy
 
-Jekyll does what you tell it to do, no more, no less. It doesn't try to outsmart users by making bold assumptions or  burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
+Jekyll does what you tell it to do — no more, no less. It doesn't try to outsmart users by making bold assumptions, nor does it burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
 
 ## Getting Started
 
