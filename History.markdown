@@ -79,6 +79,7 @@
   * Update `docs/sites.md` link to GitHub Training materials (#1949)
   * Update `master` with the release info from 1.4.3 (#1947)
   * Define docs nav in datafile (#1953)
+  * Clarify the docs around the naming convention for posts (#1971)
 
 ## 1.4.3 / 2014-01-13
 
