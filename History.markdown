@@ -53,6 +53,7 @@
   * Rename `read_things` to `read_content` (#1928)
   * Add `script/branding` script for ASCII art lovin' (#1936)
   * Update the README to reflect the repo move (#1943)
+  * Add the project vision to the README (#1935)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
