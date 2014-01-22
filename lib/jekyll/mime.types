@@ -26,7 +26,7 @@ image/x-icon                          ico
 image/x-jng                           jng
 image/x-ms-bmp                        bmp
 
-application/json                      json
+application/json                      json geojson topojson
 application/java-archive              jar ear
 application/mac-binhex40              hqx
 application/msword                    doc
