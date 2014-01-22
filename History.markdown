@@ -82,6 +82,7 @@
   * Define docs nav in datafile (#1953)
   * Clarify the docs around the naming convention for posts (#1971)
   * Add missing `next` and `previous` docs for post layouts and templates (#1970)
+  * Add note to `Writing posts` page about how to strip html from excerpt (#1962)
 
 ## 1.4.3 / 2014-01-13
 
