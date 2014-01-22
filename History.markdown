@@ -4,6 +4,8 @@
 
 ### Minor Enhancements
 
+  * Bump `safe_yaml` dependency to `~> 1.0.0` (#1942)
+
 ### Bug Fixes
 
 ### Development Fixes
