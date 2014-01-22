@@ -35,7 +35,7 @@ module Jekyll
 
     attr_accessor :site
     attr_accessor :data, :extracted_excerpt, :content, :output, :ext
-    attr_accessor :date, :slug, :published, :tags, :categories
+    attr_accessor :date, :slug, :tags, :categories
 
     attr_reader :name
 
@@ -60,18 +60,8 @@ module Jekyll
         self.date = Time.parse(self.data["date"].to_s)
       end
 
-      self.published = self.published?
-
       self.populate_categories
       self.populate_tags
-    end
-
-    def published?
-      if self.data.has_key?('published') && self.data['published'] == false
-        false
-      else
-        true
-      end
     end
 
     def populate_categories

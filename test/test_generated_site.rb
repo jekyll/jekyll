@@ -32,6 +32,10 @@ class TestGeneratedSite < Test::Unit::TestCase
       assert_equal "published.html", published.first
     end
 
+    should "hide unpublished page" do
+      assert !File.exists?(dest_dir('/unpublished.html'))
+    end
+
     should "not copy _posts directory" do
       assert !File.exist?(dest_dir('_posts'))
     end
