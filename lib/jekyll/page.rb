@@ -126,7 +126,10 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      File.join(@dir, @name)
+      File.join([
+        @dir.to_s,
+        @name.to_s
+      ].reject {|x| x.nil? || x.empty?})
     end
 
     # Obtain destination path.
