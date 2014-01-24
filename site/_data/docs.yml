@@ -15,6 +15,7 @@
   - pages
   - variables
   - datafiles
+  - assets
   - migrations
 
 - title: Customization
