@@ -11,12 +11,12 @@ module Jekyll
       ".css"
     end
 
-    def user_sass_configs
+    def jekyll_sass_configuration
       @config["sass"] || {}
     end
 
     def sass_build_configuration_options(overrides)
-      user_sass_configs.deep_merge(overrides).symbolize_keys
+      jekyll_sass_configuration.deep_merge(overrides).symbolize_keys
     end
 
     def syntax_type_of_content(content)
@@ -28,13 +28,14 @@ module Jekyll
     end
 
     def sass_dir
-      user_sass_configs["sass_dir"] || "_sass"
+      return "_sass" if jekyll_sass_configuration["sass_dir"].to_s.empty?
+      jekyll_sass_configuration["sass_dir"]
     end
 
     def sass_dir_relative_to_site_source
       File.join(
         @config["source"],
-        File.expand_path(sass_dir, "/")
+        File.expand_path(sass_dir, "/") # FIXME: Not windows-compatible
       )
     end
 
