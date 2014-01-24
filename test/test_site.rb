@@ -330,7 +330,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration)
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'members.yaml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.yaml'))
 
         assert_equal site.data['members'], file_content
         assert_equal site.site_payload['site']['data']['members'], file_content
@@ -340,7 +340,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration)
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'languages.yml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'languages.yml'))
 
         assert_equal site.data['languages'], file_content
         assert_equal site.site_payload['site']['data']['languages'], file_content
@@ -350,7 +350,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration.merge({'safe' => false}))
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'products.yml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
 
         assert_equal site.data['products'], file_content
         assert_equal site.site_payload['site']['data']['products'], file_content

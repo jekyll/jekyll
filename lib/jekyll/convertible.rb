@@ -45,7 +45,7 @@ module Jekyll
                                  merged_file_read_opts(opts))
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
-          self.data = YAML.safe_load($1)
+          self.data = SafeYAML.load($1)
         end
       rescue SyntaxError => e
         puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
