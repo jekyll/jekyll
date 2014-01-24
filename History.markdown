@@ -38,6 +38,8 @@
   * Change short opts for host and port for `jekyll docs` to be consistent with
     other subcommands (#1877)
   * Fix typos (#1910)
+  * Lock Maruku at 0.7.0 to prevent bugs caused by Maruku 0.7.1 (#1958)
+  * Fixes full path leak to source directory when using include tag (#1951)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
@@ -51,6 +53,8 @@
     (#1927)
   * Rename `read_things` to `read_content` (#1928)
   * Add `script/branding` script for ASCII art lovin' (#1936)
+  * Update the README to reflect the repo move (#1943)
+  * Add the project vision to the README (#1935)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
@@ -71,6 +75,20 @@
   * Disallow selection of path and prompt in bash examples
   * Add jekyll-compass to the plugin list (#1923)
   * Add note in Posts docs about stripping `<p>` tags from excerpt (#1933)
+  * Add additional info about the new exclude behavior (#1938)
+  * Linkify 'awesome contributors' to point to the contributors graph on
+    GitHub (#1940)
+  * Update `docs/sites.md` link to GitHub Training materials (#1949)
+  * Update `master` with the release info from 1.4.3 (#1947)
+  * Define docs nav in datafile (#1953)
+  * Clarify the docs around the naming convention for posts (#1971)
+  * Add missing `next` and `previous` docs for post layouts and templates (#1970)
+  * Add note to `Writing posts` page about how to strip html from excerpt (#1962)
+
+## 1.4.3 / 2014-01-13
+
+### Bug Fixes
+  * Patch show-stopping security vulnerabilities (#1944)
 
 ## 1.4.2 / 2013-12-16
 

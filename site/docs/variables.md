@@ -244,6 +244,24 @@ following is a reference of the available data.
 
       </p></td>
     </tr>
+    <tr>
+      <td><p><code>page.next</code></p></td>
+      <td><p>
+
+        The next post relative to the position of the current post in 
+        <code>site.posts</code>. Returns <code>nil</code> for the last entry.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.previous</code></p></td>
+      <td><p>
+
+        The previous post relative to the position of the current post in 
+        <code>site.posts</code>. Returns <code>nil</code> for the first entry.
+
+      </p></td>
+    </tr>
   </tbody>
 </table>
 </div>

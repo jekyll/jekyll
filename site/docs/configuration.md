@@ -67,7 +67,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">
           Exclude directories and/or files from the
           conversion. These exclusions are relative to the site's
-          source directory.
+          source directory and cannot be outside the source directory.
         </p>
       </td>
       <td class='align-center'>
