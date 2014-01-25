@@ -1,2 +1,2 @@
-source 'https://rubygems.org'
+source 'http://us.yarp.io'
 gemspec
