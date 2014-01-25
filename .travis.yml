@@ -1,7 +1,5 @@
 language: ruby
 cache: bundler
-before_install:
-- gem install bundler
 install:
 - script/rebund download
 - bundle install --path vendor/bundle
