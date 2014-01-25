@@ -271,8 +271,7 @@ module Jekyll
     end
 
     def next
-      pos = self.site.posts.index(self)
-
+      pos = self.site.posts.index {|post| post.equal?(self) }
       if pos && pos < self.site.posts.length-1
         self.site.posts[pos+1]
       else
@@ -281,7 +280,7 @@ module Jekyll
     end
 
     def previous
-      pos = self.site.posts.index(self)
+      pos = self.site.posts.index {|post| post.equal?(self) }
       if pos && pos > 0
         self.site.posts[pos-1]
       else
