@@ -61,6 +61,9 @@ require_all 'jekyll/converters/markdown'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
+# plugins
+require 'jekyll-coffeescript'
+
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
