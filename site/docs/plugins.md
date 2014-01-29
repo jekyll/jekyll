@@ -498,6 +498,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll Image Encode](https://github.com/GSI/jekyll_image_encode) by [GSI](https://github.com/GSI): Tag that renders base64 codes of images fetched from the web.
 - [Jekyll Quick Man](https://github.com/GSI/jekyll_quick_man) by [GSI](https://github.com/GSI): Tag that renders pretty links to man page sources on the internet.
 - [jekyll-font-awesome](https://gist.github.com/23maverick23/8532525): Quickly and easily add Font Awesome icons to your posts.
+- [liquidize_page_tag](https://github.com/r26D/liquidize_page_tag) by [r26D](http://www.r26d.com) & [Dirk Elmendorf](http://www.truckingoffice.com): Allows you to use liquid code in the content of your pages for Jekyll - includes, tags, filters, and variables.
 
 #### Collections
 
