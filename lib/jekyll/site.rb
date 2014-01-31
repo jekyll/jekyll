@@ -233,7 +233,7 @@ module Jekyll
         next if File.symlink?(path) && self.safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
-        self.data[key] = YAML.safe_load_file(path)
+        self.data[key] = SafeYAML.load_file(path)
       end
     end
 
