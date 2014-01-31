@@ -64,6 +64,7 @@
   * Add the project vision to the README (#1935)
   * Speed up Travis CI builds by using Rebund (#1985)
   * Use Yarp as a Gem proxy for Travis CI (#1984)
+  * Remove Yarp as a Gem proxy for Travis CI (#2004)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
