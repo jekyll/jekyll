@@ -47,6 +47,7 @@
   * Lock Maruku at 0.7.0 to prevent bugs caused by Maruku 0.7.1 (#1958)
   * Fixes full path leak to source directory when using include tag (#1951)
   * Don't generate pages that aren't being published (#1931)
+  * Use `SafeYAML.load` to avoid conflicts with other projects (#1982)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
