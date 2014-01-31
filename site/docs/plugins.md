@@ -530,6 +530,8 @@ You can find a few useful plugins at the following locations:
 #### Editors
 
 - [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://sublime.wbond.net/packages/Jekyll).
+- [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate
+  new posts and run `jekyll build` all without leaving vim.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
