@@ -95,6 +95,7 @@
   * Add note to `Writing posts` page about how to strip html from excerpt (#1962)
   * Add `jekyll-humanize` plugin to plugin list (#1998)
   * Add `jekyll-font-awesome` plugin to plugin list (#1999)
+  * Add `sublime-jekyll` to list of Editor plugins (#2001)
 
 ## 1.4.3 / 2014-01-13
 
