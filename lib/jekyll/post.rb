@@ -133,11 +133,7 @@ module Jekyll
 
     # The path to the post source file, relative to the site source
     def relative_path
-      File.join([
-        @dir.to_s,
-        "_posts",
-        @name.to_s
-      ].reject {|x| x.nil? || x.empty?})
+      File.join([@dir, "_posts", @name].map(&:to_s).reject(&:empty?))
     end
 
     # Compares Post objects. First compares the Post date. If the dates are
