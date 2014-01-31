@@ -11,6 +11,7 @@
   * Provide support for Sass (#1932)
   * Provide a 300% improvement when generating sites that use
     `Post#next` or `Post#previous` (#1983)
+  * Provide support for CoffeeScript (#1991)
 
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
