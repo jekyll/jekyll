@@ -73,8 +73,9 @@ module Jekyll
 
     # Internal: Extract excerpt from the content
     #
-    # By default excerpt is your first paragraph of a post: everything before
-    # the first two new lines:
+    # By default excerpt is not generated. An option is to use "\n\n" as the
+    # separator and the excerpt is your first paragraph of a post: everything
+    # before the first two new lines:
     #
     #     ---
     #     title: Example

@@ -305,7 +305,7 @@ markdown:      kramdown
 markdown_ext:  markdown,mkd,mkdn,md
 textile_ext:   textile
 
-excerpt_separator: "\n\n"
+excerpt_separator: nil
 
 safe:        false
 watch:       false    # deprecated
