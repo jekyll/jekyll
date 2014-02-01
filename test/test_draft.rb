@@ -28,10 +28,10 @@ class TestDraft < Test::Unit::TestCase
 
       attrs = {
         categories: %w(foo bar baz),
-        content: "All the properties.\n\nPlus an excerpt.\n",
+        content: "All the properties.\n",
         date: date,
         dir: "/foo/bar/baz/#{ymd}",
-        excerpt: "All the properties.\n\n",
+        excerpt: "",
         foo: 'bar',
         id: "/foo/bar/baz/#{ymd}/draft-properties",
         layout: 'default',

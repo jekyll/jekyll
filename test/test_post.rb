@@ -30,10 +30,10 @@ class TestPost < Test::Unit::TestCase
 
       attrs = {
         categories: %w(foo bar baz),
-        content: "All the properties.\n\nPlus an excerpt.\n",
+        content: "All the properties.\n",
         date: Time.new(2013, 12, 20),
         dir: "/foo/bar/baz/2013/12/20",
-        excerpt: "All the properties.\n\n",
+        excerpt: "",
         foo: 'bar',
         id: "/foo/bar/baz/2013/12/20/properties",
         layout: 'default',
@@ -306,6 +306,9 @@ class TestPost < Test::Unit::TestCase
       context "#excerpt" do
         setup do
           file = "2013-01-02-post-excerpt.markdown"
+
+          @post.site.config['excerpt_separator'] = "\n\n"
+
           @post = setup_post(file)
           @post.process(file)
           @post.read_yaml(@source, file)

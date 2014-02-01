@@ -14,7 +14,7 @@ class TestExcerpt < Test::Unit::TestCase
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'excerpt_separator' => ''})
+        Jekyll::Configuration::DEFAULTS.merge({'excerpt_separator' => nil})
       end
       @site = Site.new(Jekyll.configuration)
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
@@ -29,7 +29,9 @@ class TestExcerpt < Test::Unit::TestCase
   context "An extracted excerpt" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
+      stub(Jekyll).configuration  do
+        Jekyll::Configuration::DEFAULTS.merge({'excerpt_separator' => "\n\n"})
+      end
       @site = Site.new(Jekyll.configuration)
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
       @excerpt = @post.send :extract_excerpt
