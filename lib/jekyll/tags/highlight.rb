@@ -41,13 +41,14 @@ eos
       end
 
       def render(context)
+        code = super.to_s.strip
         case context.registers[:site].highlighter
         when 'pygments'
-          render_pygments(context, super)
+          render_pygments(context, code)
         when 'rouge'
-          render_rouge(context, super)
+          render_rouge(context, code)
         else
-          render_codehighlighter(context, super)
+          render_codehighlighter(context, code)
         end
       end
 
