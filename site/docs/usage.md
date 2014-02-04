@@ -24,6 +24,18 @@ $ jekyll build --watch
 #    watched for changes, and regenerated automatically.
 {% endhighlight %}
 
+<div class="note warning">
+  <h5>Destination folders are cleaned on site builds</h5>
+  <p>
+    Be aware that the contents of the <code>&lt;destination&gt;</code>
+    folder are automatically cleaned when the site is built.  Files or
+    folders that are not created by your site will be removed.  Do not
+    use an important location for <code>&lt;destination&gt;</code>;
+    instead, use it as a staging area and copy files from there to
+    your web server. 
+  </p>
+</div>
+
 Jekyll also comes with a built-in development server that will allow you to
 preview what the generated site will look like in your browser locally.
 
