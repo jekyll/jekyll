@@ -5,9 +5,9 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.2'
 
   s.name              = 'jekyll'
-  s.version           = '1.4.0'
+  s.version           = '1.4.3'
   s.license           = 'MIT'
-  s.date              = '2013-12-09'
+  s.date              = '2014-01-13'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -96,6 +96,7 @@ Gem::Specification.new do |s|
     lib/jekyll/converters/markdown/maruku_parser.rb
     lib/jekyll/converters/markdown/rdiscount_parser.rb
     lib/jekyll/converters/markdown/redcarpet_parser.rb
+    lib/jekyll/converters/sass.rb
     lib/jekyll/converters/textile.rb
     lib/jekyll/convertible.rb
     lib/jekyll/core_ext.rb
@@ -132,10 +133,12 @@ Gem::Specification.new do |s|
     script/bootstrap
     script/branding
     script/cibuild
+    script/rebund
     site/.gitignore
     site/CNAME
     site/README
     site/_config.yml
+    site/_data/docs.yml
     site/_includes/analytics.html
     site/_includes/css/gridism.css
     site/_includes/css/normalize.css
@@ -175,6 +178,7 @@ Gem::Specification.new do |s|
     site/_posts/2013-12-16-jekyll-1-4-2-released.markdown
     site/_posts/2014-01-13-jekyll-1-4-3-released.markdown
     site/css/screen.css
+    site/docs/assets.md
     site/docs/configuration.md
     site/docs/contributing.md
     site/docs/datafiles.md
@@ -228,7 +232,6 @@ Gem::Specification.new do |s|
     test/source/_config.dev.toml
     test/source/_data/languages.yml
     test/source/_data/members.yaml
-    test/source/_data/products.yml
     test/source/_includes/include.html
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
@@ -281,15 +284,15 @@ Gem::Specification.new do |s|
     test/source/deal.with.dots.html
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
+    test/source/js/coffeescript.coffee
     test/source/products.yml
     test/source/properties.html
     test/source/sitemap.xml
-    test/source/symlink-test/_data
-    test/source/symlink-test/symlinked-dir
-    test/source/symlink-test/symlinked-file
+    test/source/unpublished.html
     test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
     test/source/z_category/_posts/2008-9-23-categories.textile
     test/suite.rb
+    test/test_coffeescript.rb
     test/test_command.rb
     test/test_configuration.rb
     test/test_convertible.rb
@@ -307,6 +310,7 @@ Gem::Specification.new do |s|
     test/test_redcarpet.rb
     test/test_redcloth.rb
     test/test_related_posts.rb
+    test/test_sass.rb
     test/test_site.rb
     test/test_tags.rb
     test/test_url.rb
