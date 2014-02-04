@@ -104,4 +104,14 @@ CSS
       assert_equal css_output, converter.convert(scss_content)
     end
   end
+
+  context "importing partials" do
+    setup do
+      content = ""
+    end
+
+    should "import SCSS" do
+      assert_equal ".half { width: 30%; }", content
+    end
+  end
 end
