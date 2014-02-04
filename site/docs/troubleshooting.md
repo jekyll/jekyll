@@ -28,10 +28,13 @@ sudo yum install ruby-devel
 {% endhighlight %}
 
 On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need to run the
-command with the following environment variable:
+following commands before installing Jekyll:
 
 {% highlight bash %}
-RB_USER_INSTALL=true gem install jekyll
+export GEM_HOME=/home/private/gems
+export GEM_PATH=/home/private/gems:/usr/local/lib/ruby/gems/1.8/
+export PATH=$PATH:/home/private/gems/bin
+export RB_USER_INSTALL='true'
 {% endhighlight %}
 
 On OSX, you may need to update RubyGems:
