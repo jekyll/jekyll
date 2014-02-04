@@ -27,12 +27,11 @@ $ jekyll build --watch
 <div class="note warning">
   <h5>Destination folders are cleaned on site builds</h5>
   <p>
-    Be aware that the contents of the <code>&lt;destination&gt;</code>
-    folder are automatically cleaned when the site is built.  Files or
-    folders that are not created by your site will be removed.  Do not
-    use an important location for <code>&lt;destination&gt;</code>;
-    instead, use it as a staging area and copy files from there to
-    your web server. 
+    The contents of <code>&lt;destination&gt;</code> are automatically
+    cleaned when the site is built.  Files or folders that are not
+    created by your site will be removed.  Do not use an important
+    location for <code>&lt;destination&gt;</code>; instead, use it as
+    a staging area and copy files from there to your web server. 
   </p>
 </div>
 
