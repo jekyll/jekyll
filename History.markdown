@@ -99,6 +99,7 @@
   * Add `jekyll-font-awesome` plugin to plugin list (#1999)
   * Add `sublime-jekyll` to list of Editor plugins (#2001)
   * Add `vim-jekyll` to the list of Editor plugins (#2005)
+  * Fix non-semantic nesting of `p` tags in `news_item` layout (#2013)
 
 ## 1.4.3 / 2014-01-13
 
