@@ -40,7 +40,7 @@ module Jekyll
       'textile_ext'   => 'textile',
 
       'port'          => '4000',
-      'host'          => '0.0.0.0',
+      'host'          => '::',
 
       'excerpt_separator' => "\n\n",
 
