@@ -1,16 +1,8 @@
 <div class="unit one-fifth hide-on-mobiles">
   <aside>
-    <h4>Getting Started</h4>
-    {% include docs_ul.html items='home quickstart installation usage structure configuration' %}
-    <h4>Your Content</h4>
-    {% include docs_ul.html items='frontmatter posts drafts pages variables datafiles migrations' %}
-    <h4>Customization</h4>
-    {% include docs_ul.html items='templates permalinks pagination plugins extras' %}
-    <h4>Deployment</h4>
-    {% include docs_ul.html items='github-pages deployment-methods' %}
-    <h4>Miscellaneous</h4>
-    {% include docs_ul.html items='troubleshooting sites resources upgrading' %}
-    <h4>Meta</h4>
-    {% include docs_ul.html items='contributing history' %}
+    {% for section in site.data.docs %}
+    <h4>{{ section.title }}</h4>
+    {% include docs_ul.html items=section.docs %}
+    {% endfor %}
   </aside>
 </div>

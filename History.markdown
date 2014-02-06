@@ -8,6 +8,10 @@
   * Move to jekyll/jekyll from mojombo/jekyll (#1817)
   * Allow custom markdown processors (#1872)
   * Provide support for the Rouge syntax highlighter (#1859)
+  * Provide support for Sass (#1932)
+  * Provide a 300% improvement when generating sites that use
+    `Post#next` or `Post#previous` (#1983)
+  * Provide support for CoffeeScript (#1991)
 
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
@@ -28,6 +32,8 @@
     (#1875)
   * Route 404 errors to a custom 404 page in development (#1899)
   * Excludes are now relative to the site source (#1916)
+  * Bring MIME Types file for `jekyll serve` to complete parity with GH Pages
+    servers (#1993)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
@@ -38,6 +44,10 @@
   * Change short opts for host and port for `jekyll docs` to be consistent with
     other subcommands (#1877)
   * Fix typos (#1910)
+  * Lock Maruku at 0.7.0 to prevent bugs caused by Maruku 0.7.1 (#1958)
+  * Fixes full path leak to source directory when using include tag (#1951)
+  * Don't generate pages that aren't being published (#1931)
+  * Use `SafeYAML.load` to avoid conflicts with other projects (#1982)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
@@ -51,6 +61,11 @@
     (#1927)
   * Rename `read_things` to `read_content` (#1928)
   * Add `script/branding` script for ASCII art lovin' (#1936)
+  * Update the README to reflect the repo move (#1943)
+  * Add the project vision to the README (#1935)
+  * Speed up Travis CI builds by using Rebund (#1985)
+  * Use Yarp as a Gem proxy for Travis CI (#1984)
+  * Remove Yarp as a Gem proxy for Travis CI (#2004)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
@@ -74,6 +89,22 @@
   * Add additional info about the new exclude behavior (#1938)
   * Linkify 'awesome contributors' to point to the contributors graph on
     GitHub (#1940)
+  * Update `docs/sites.md` link to GitHub Training materials (#1949)
+  * Update `master` with the release info from 1.4.3 (#1947)
+  * Define docs nav in datafile (#1953)
+  * Clarify the docs around the naming convention for posts (#1971)
+  * Add missing `next` and `previous` docs for post layouts and templates (#1970)
+  * Add note to `Writing posts` page about how to strip html from excerpt (#1962)
+  * Add `jekyll-humanize` plugin to plugin list (#1998)
+  * Add `jekyll-font-awesome` plugin to plugin list (#1999)
+  * Add `sublime-jekyll` to list of Editor plugins (#2001)
+  * Add `vim-jekyll` to the list of Editor plugins (#2005)
+  * Fix non-semantic nesting of `p` tags in `news_item` layout (#2013)
+
+## 1.4.3 / 2014-01-13
+
+### Bug Fixes
+  * Patch show-stopping security vulnerabilities (#1944)
 
 ## 1.4.2 / 2013-12-16
 

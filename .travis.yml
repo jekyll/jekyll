@@ -1,23 +1,28 @@
 language: ruby
 cache: bundler
-before_install:
-  - gem install bundler
+install:
+- script/rebund download
+- bundle install --path vendor/bundle
 rvm:
-  - 2.1.0
-  - 2.0.0
-  - 1.9.3
-  - 1.9.2
-script: bundle exec rake
+- 2.1.0
+- 2.0.0
+- 1.9.3
+- 1.9.2
+script: script/cibuild
+after_script:
+- script/rebund upload
 notifications:
   irc:
     on_success: change
     on_failure: change
     channels:
-      - "irc.freenode.org#jekyll"
-    #on_success: change
-    #on_failure: change
+    - irc.freenode.org#jekyll
     template:
-      - "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
+    - '%{repository}#%{build_number} (%{branch}) %{message} %{build_url}'
   email:
     on_success: never
     on_failure: never
+env:
+  global:
+  - secure: YFgVNymO2MvA7ieB3hJKQ9cF8zhi5uc3NnBx+ngs6+XF7lV7zYZGMYJ9ufEuPRkXFEI1sSNQJjOQwjmqC71xABrWw6B69XDdYgoTX+53GryVfsrDIPksQo89WAAMKqoPznWtj5fA3OTxUWjHVye2JsduPNuihpniI5j79IzDFQY=
+  - secure: YrDB4baCV00FPyRafR9UTAUsSgK/07Re+7T+blgX2gK/j54DJdof+EYbQPjc3HeWdfQgIzal2+KkwBItEu2lA8/j6qPwUngd9oRWJPLm19xFizECRY9SD1BxU53T3qmnoYqG0jFvKgYfnn9ggHRDEL31YDOA1monhFhq/8S3SdA=

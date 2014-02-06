@@ -170,7 +170,8 @@ module Jekyll
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless self.dest.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
-          pages << Page.new(self, self.source, dir, f)
+          page = Page.new(self, self.source, dir, f)
+          pages << page if page.published?
         else
           static_files << StaticFile.new(self, self.source, dir, f)
         end
@@ -189,7 +190,7 @@ module Jekyll
       posts = read_content(dir, '_posts', Post)
 
       posts.each do |post|
-        if post.published && (self.future || post.date <= self.time)
+        if post.published? && (self.future || post.date <= self.time)
           aggregate_post_info(post)
         end
       end
@@ -232,7 +233,7 @@ module Jekyll
         next if File.symlink?(path) && self.safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
-        self.data[key] = YAML.safe_load_file(path)
+        self.data[key] = SafeYAML.load_file(path)
       end
     end
 

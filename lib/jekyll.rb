@@ -18,7 +18,7 @@ require 'rubygems'
 # stdlib
 require 'fileutils'
 require 'time'
-require 'safe_yaml'
+require 'safe_yaml/load'
 require 'English'
 require 'pathname'
 
@@ -27,6 +27,7 @@ require 'liquid'
 require 'maruku'
 require 'colorator'
 require 'toml'
+require 'sass'
 
 # internal requires
 require 'jekyll/core_ext'
@@ -59,6 +60,9 @@ require_all 'jekyll/converters'
 require_all 'jekyll/converters/markdown'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
+
+# plugins
+require 'jekyll-coffeescript'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 

@@ -522,6 +522,25 @@ CONTENT
       end
     end
 
+    context "include missing file" do
+      setup do
+        @content = <<CONTENT
+---
+title: missing file
+---
+
+{% include missing.html %}
+CONTENT
+      end
+
+      should "raise error relative to source directory" do
+        exception = assert_raise IOError do
+          create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        end
+        assert_equal 'Included file \'_includes/missing.html\' not found', exception.message
+      end
+    end
+
     context "include tag with variable and liquid filters" do
       setup do
         stub(Jekyll).configuration do

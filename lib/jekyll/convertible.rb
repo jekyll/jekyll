@@ -21,6 +21,11 @@ module Jekyll
       self.content || ''
     end
 
+    # Whether the file is published or not, as indicated in YAML front-matter
+    def published?
+      !(self.data.has_key?('published') && self.data['published'] == false)
+    end
+
     # Returns merged option hash for File.read of self.site (if exists)
     # and a given param
     def merged_file_read_opts(opts)
@@ -40,7 +45,7 @@ module Jekyll
                                  merged_file_read_opts(opts))
         if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
-          self.data = YAML.safe_load($1)
+          self.data = SafeYAML.load($1)
         end
       rescue SyntaxError => e
         puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"

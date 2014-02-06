@@ -25,6 +25,11 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/contacts.html", @page.url
       end
 
+      should "not published when published yaml is false" do
+        @page = setup_page("unpublished.html")
+        assert_equal false, @page.published?
+      end
+
       context "in a directory hierarchy" do
         should "create url based on filename" do
           @page = setup_page('/contacts', 'bar.html')

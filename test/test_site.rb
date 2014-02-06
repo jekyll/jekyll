@@ -157,7 +157,7 @@ class TestSite < Test::Unit::TestCase
     should "sort pages alphabetically" do
       stub.proxy(Dir).entries { |entries| entries.reverse }
       @site.process
-      sorted_pages = %w(.htaccess about.html bar.html contacts.html deal.with.dots.html exploit.md foo.md index.html index.html properties.html sitemap.xml symlinked-file)
+      sorted_pages = %w(.htaccess about.html bar.html coffeescript.coffee contacts.html deal.with.dots.html foo.md index.html index.html properties.html sitemap.xml symlinked-file)
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
@@ -330,7 +330,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration)
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'members.yaml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.yaml'))
 
         assert_equal site.data['members'], file_content
         assert_equal site.site_payload['site']['data']['members'], file_content
@@ -340,7 +340,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration)
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'languages.yml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'languages.yml'))
 
         assert_equal site.data['languages'], file_content
         assert_equal site.site_payload['site']['data']['languages'], file_content
@@ -350,7 +350,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration.merge({'safe' => false}))
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'products.yml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
 
         assert_equal site.data['products'], file_content
         assert_equal site.site_payload['site']['data']['products'], file_content
