@@ -33,7 +33,7 @@ module Jekyll
       'permalink'     => 'date',
       'baseurl'       => '/',
       'include'       => ['.htaccess'],
-      'exclude'       => [],
+      'exclude'       => ['vendor'],
       'paginate_path' => '/page:num',
 
       'markdown_ext'  => 'markdown,mkd,mkdn,md',
