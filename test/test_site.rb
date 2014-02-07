@@ -161,11 +161,6 @@ class TestSite < Test::Unit::TestCase
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
-    should "read layouts" do
-      @site.read_layouts
-      assert_equal ["default", "simple", "post/simple"].sort, @site.layouts.keys.sort
-    end
-
     should "read posts" do
       @site.read_posts('')
       posts = Dir[source_dir('_posts', '**', '*')]
