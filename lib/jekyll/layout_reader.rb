@@ -17,7 +17,7 @@ class LayoutReader
 
   def layout_entries
     entries = []
-    with(layout_directory) do
+    within(layout_directory) do
       entries = EntryFilter.new(site).filter(Dir['**/*.*'])
     end
     entries
@@ -27,7 +27,7 @@ class LayoutReader
     file.split(".")[0..-2].join(".")
   end
 
-  def with(directory)
+  def within(directory)
     return unless File.exists?(directory)
     Dir.chdir(directory) { yield }
   end
