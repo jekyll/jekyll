@@ -170,8 +170,8 @@ module Jekyll
     #
     # Returns nothing.
     def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
+      path = destination(dest).sub('/C:/', '/')
+      FileUtils.mkdir_p(File.dirname(path).sub(/^C:/, ''))
       File.open(path, 'wb') do |f|
         f.write(self.output)
       end
