@@ -66,6 +66,7 @@
   * Speed up Travis CI builds by using Rebund (#1985)
   * Use Yarp as a Gem proxy for Travis CI (#1984)
   * Remove Yarp as a Gem proxy for Travis CI (#2004)
+  * Move the reading of layouts into its own class (#2020)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
