@@ -102,6 +102,7 @@
   * Add `vim-jekyll` to the list of Editor plugins (#2005)
   * Fix non-semantic nesting of `p` tags in `news_item` layout (#2013)
   * Document destination folder cleaning (#2016)
+  * Updated instructions for NearlyFreeSpeech.NET installation (#2015)
 
 ## 1.4.3 / 2014-01-13
 
