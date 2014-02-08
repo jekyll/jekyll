@@ -28,7 +28,7 @@ class TestFilters < Test::Unit::TestCase
     end
 
     should "markdownify with simple string" do
-      assert_equal "<p>something <strong>really</strong> simple</p>", @filter.markdownify("something **really** simple")
+      assert_equal "<p>something <strong>really</strong> simple</p>\n", @filter.markdownify("something **really** simple")
     end
 
     should "convert array to sentence string with no args" do

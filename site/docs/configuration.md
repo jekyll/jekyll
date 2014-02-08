@@ -300,7 +300,7 @@ permalink:     date
 paginate_path: 'page:num'
 paginate:      nil
 
-markdown:      maruku
+markdown:      kramdown
 markdown_ext:  markdown,mkd,mkdn,md
 textile_ext:   textile
 

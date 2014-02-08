@@ -54,7 +54,7 @@ CONTENT
   end
 
   context "initialized tag" do
-    should "work" do
+    should "set the correct options" do
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({}, tag.instance_variable_get(:@options))
 
@@ -85,11 +85,11 @@ CONTENT
     end
 
     should "render markdown with pygments" do
-      assert_match %{<pre><code class='text'>test\n</code></pre>}, @result
+      assert_match %{<pre><code class="text">test\n</code></pre>}, @result
     end
 
     should "render markdown with pygments with line numbers" do
-      assert_match %{<pre><code class='text'><span class='lineno'>1</span> test\n</code></pre>}, @result
+      assert_match %{<pre><code class="text"><span class="lineno">1</span> test\n</code></pre>}, @result
     end
   end
 
@@ -99,7 +99,7 @@ CONTENT
     end
 
     should "not embed the file" do
-      assert_match %{<pre><code class='text'>./jekyll.gemspec\n</code></pre>}, @result
+      assert_match %{<pre><code class="text">./jekyll.gemspec\n</code></pre>}, @result
     end
   end
 
@@ -109,7 +109,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre><code class='text'>Æ\n</code></pre>}, @result
+      assert_match %{<pre><code class="text">Æ\n</code></pre>}, @result
     end
   end
 
@@ -268,7 +268,7 @@ CONTENT
       end
 
       should "write script tag" do
-        assert_match "<script src='https://gist.github.com/#{@gist}.js'><![CDATA[\s]]></script>", @result
+        assert_match "<script src=\"https://gist.github.com/#{@gist}.js\">\s</script>", @result
       end
     end
 
@@ -288,7 +288,7 @@ CONTENT
         end
 
         should "write script tag with specific file in gist" do
-          assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'><![CDATA[\s]]></script>", @result
+          assert_match "<script src=\"https://gist.github.com/#{@gist}.js?file=#{@filename}\">\s</script>", @result
         end
       end
 
@@ -324,7 +324,7 @@ CONTENT
       end
 
       should "write script tag with specific file in gist" do
-        assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'><![CDATA[\s]]></script>", @result
+        assert_match "<script src=\"https://gist.github.com/#{@gist}.js?file=#{@filename}\">\s</script>", @result
       end
     end
 
@@ -378,11 +378,11 @@ CONTENT
       end
 
       should "correctly output include variable" do
-        assert_match "<span id='include-param'>value</span>", @result.strip
+        assert_match "<span id=\"include-param\">value</span>", @result.strip
       end
 
       should "ignore parameters if unused" do
-        assert_match "<hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n", @result
+        assert_match "<hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n", @result
       end
     end
 
@@ -430,7 +430,7 @@ CONTENT
       end
 
       should "not include previously used parameters" do
-        assert_match "<span id='include-param' />", @result
+        assert_match "<span id=\"include-param\"></span>", @result
       end
     end
 
@@ -447,7 +447,7 @@ CONTENT
       end
 
       should "include file with empty parameters" do
-        assert_match "<span id='include-param' />", @result
+        assert_match "<span id=\"include-param\"></span>", @result
       end
     end
 
@@ -464,7 +464,7 @@ CONTENT
       end
 
       should "include file with empty parameters within if statement" do
-        assert_match "<span id='include-param' />", @result
+        assert_match "<span id=\"include-param\"></span>", @result
       end
     end
 
@@ -477,6 +477,7 @@ puts "Hello world"
 ```
 CONTENT
         create_post(content, {
+          'markdown' => 'maruku',
           'maruku' => {'fenced_code_blocks' => true}}
         )
       end

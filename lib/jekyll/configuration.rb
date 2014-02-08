@@ -28,7 +28,7 @@ module Jekyll
       'relative_permalinks' => true,     # backwards-compatibility with < 1.0
                                          # will be set to false once 2.0 hits
 
-      'markdown'      => 'maruku',
+      'markdown'      => 'kramdown',
       'highlighter'   => 'pygments',
       'permalink'     => 'date',
       'baseurl'       => '/',
@@ -228,6 +228,12 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
+      end
+      
+      if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
+        Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
+          "Markdown processor. Maruku support has been deprecated and will " +
+          "be removed in 3.0.0. We recommend you switch to Kramdown."
       end
       config
     end

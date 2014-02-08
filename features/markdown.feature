@@ -13,8 +13,8 @@ Feature: Markdown
     When I run jekyll
     Then the _site directory should exist
     And I should see "Index" in "_site/index.html"
-    And I should see "<h1 id=\"my_title\">My Title</h1>" in "_site/2009/03/27/hackers.html"
-    And I should see "<h1 id=\"my_title\">My Title</h1>" in "_site/index.html"
+    And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/2009/03/27/hackers.html"
+    And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/index.html"
 
   Scenario: Markdown in pagination on index
     Given I have a configuration file with "paginate" set to "5"
@@ -26,7 +26,7 @@ Feature: Markdown
     When I run jekyll
     Then the _site directory should exist
     And I should see "Index" in "_site/index.html"
-    And I should see "<h1 id=\"my_title\">My Title</h1>" in "_site/index.html"
+    And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/index.html"
     
   Scenario: Maruku fenced codeblocks
     Given I have a configuration file with "markdown" set to "maruku"
