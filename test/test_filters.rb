@@ -131,7 +131,7 @@ class TestFilters < Test::Unit::TestCase
             assert_equal 2, g["items"].size
           when ""
             assert g["items"].is_a?(Array), "The list of grouped items for '' is not an Array."
-            assert_equal 6, g["items"].size
+            assert_equal 7, g["items"].size
           end
         end
       end
