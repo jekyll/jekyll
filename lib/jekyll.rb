@@ -68,7 +68,7 @@ require 'jekyll-coffeescript'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.4.0'
+  VERSION = '1.4.3'
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
