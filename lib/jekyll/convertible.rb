@@ -158,6 +158,19 @@ module Jekyll
       self.render_all_layouts(layouts, payload, info)
     end
 
+    # Obtain destination path.
+    #
+    # dest - The String path to the destination dir.
+    #
+    # Returns destination file path String.
+    def destination(dest)
+      # The url needs to be unescaped in order to preserve the correct filename
+      # But we need to retain plus and not unescape to a space
+      path = File.join(dest, CGI.unescape(self.url.gsub('+','%2B')))
+      path = File.join(path, "index.html") if path[/\.html$/].nil?
+      path
+    end
+
     # Write the generated page file to the destination directory.
     #
     # dest - The String path to the destination dir.
