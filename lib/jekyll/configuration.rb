@@ -16,7 +16,7 @@ module Jekyll
 
       'timezone'      => nil,           # use the local timezone
 
-      'encoding'      => nil,           # use the system encoding
+      'encoding'      => 'utf-8',       # always use utf-8 encoding. NEVER FORGET
 
       'safe'          => false,
       'detach'        => false,          # default to not detaching the server
