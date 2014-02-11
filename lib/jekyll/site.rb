@@ -124,6 +124,7 @@ module Jekyll
     # Returns nothing.
     def read
       self.layouts = LayoutReader.new(self).read
+      self.collections = CollectionsReader.new(self).read
       read_directories
       read_data(config['data_source'])
     end
@@ -190,6 +191,7 @@ module Jekyll
       end
     end
 
+    # THIS NEEDS A COMMENT WTF DOES THIS DO WTF IS THE MAGIC DIR REALLY
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
         klass.new(self, source, dir, entry) if klass.valid?(entry)
