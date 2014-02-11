@@ -1,8 +1,9 @@
 module Jekylll
   class Collection
-    attr_accessor :name
+    attr_reader :name, :site
 
     def initialize(site, collection_name)
+      @site = site
       @name = collection_name
     end
 
@@ -34,7 +35,7 @@ module Jekylll
     end
 
     def klass_for_collection
-      raise NotImplementedError
+      const_get(name.split("_").map(&:capitalize).join(""))
     end
 
   end

@@ -8,9 +8,9 @@ module Jekyll
 
     # Public: Initialize a new Site.
     #
-    # config - A Hash containing site configuration details.
-    def initialize(config)
-      @config = config.clone
+    # configuration - A Hash containing site configuration details.
+    def initialize(configuration)
+      @config          = configuration.clone
 
       %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
         instance_variable_set("@#{opt}", config[opt])
@@ -137,14 +137,14 @@ module Jekyll
     #
     # Returns the array of `Post` objects
     def posts
-      collections["posts"]
+      collections['posts']
     end
 
     # Fetch the site drafts
     #
     # Returns the array of `Draft` objects
     def drafts
-      collections["drafts"]
+      collections['drafts']
     end
 
     # Recursively traverse directories to find posts, pages and static files

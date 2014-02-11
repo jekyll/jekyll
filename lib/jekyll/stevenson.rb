@@ -7,13 +7,30 @@ module Jekyll
     WARN   = 2
     ERROR  = 3
 
+    SYMBOL_MAP = {
+      :debug => DEBUG,
+      :info  => INFO,
+      :warn  => WARN,
+      :error => ERROR
+    }
+
     # Public: Create a new instance of Stevenson, Jekyll's logger
     #
     # level - (optional, integer) the log level
     #
     # Returns nothing
     def initialize(level = INFO)
-      @log_level = level
+      set_log_level(level)
+    end
+
+    def set_log_level(level)
+      if level.is_a?(Fixnum)
+        @log_level = level
+      elsif (level.is_a?(Symbol) || level.is_a?(String)) && SYMBOL_MAP.has_key?(level.to_sym)
+        @log_level = SYMBOL_MAP[level.to_sym]
+      else
+        abort_with("Log level '#{level}' is not a valid log level.")
+      end
     end
     
     # Public: Print a jekyll debug message to stdout

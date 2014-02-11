@@ -49,6 +49,9 @@ require 'jekyll/related_posts'
 require 'jekyll/cleaner'
 require 'jekyll/entry_filter'
 require 'jekyll/layout_reader'
+require 'jekyll/document'
+require 'jekyll/collection'
+require 'jekyll/collections_reader'
 
 # extensions
 require 'jekyll/plugin'
