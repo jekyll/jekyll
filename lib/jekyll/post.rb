@@ -259,17 +259,6 @@ module Jekyll
       do_layout(payload.merge({"page" => self.to_liquid}), layouts)
     end
 
-    # Obtain destination path.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns destination file path String.
-    def destination(dest)
-      # The url needs to be unescaped in order to preserve the correct filename
-      path = File.join(dest, File.expand_path(CGI.unescape(self.url), "/"))
-      path = File.join(path, "index.html") if path[/\.html$/].nil?
-      path
-    end
 
     # Returns the shorthand String identifier of this Post.
     def inspect

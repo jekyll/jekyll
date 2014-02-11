@@ -51,8 +51,11 @@ module Jekyll
     # Returns a sanitized String URL
     def sanitize_url(in_url)
 
+      # Unescape all URL-encoded dots. 
+      url = in_url.gsub(/%2[eE]/,'.')
+
       # Remove all double slashes
-      url = in_url.gsub(/\/\//, "/")
+      url = url.gsub(/\/\//, "/")
 
       # Remove every URL segment that consists solely of dots
       url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
