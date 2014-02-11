@@ -64,7 +64,7 @@ a:visited { color: #a0a; }
   line-height: 1.5em;
 }
 
-.header a {
+header a {
   font-weight: bold;
   text-decoration: none;
 }
@@ -82,12 +82,12 @@ a:visited { color: #a0a; }
   color: #000;
 }
 
-.header a.extra {
+header a.extra {
   color: #aaa;
   margin-left: 1em;
 }
 
-.header a.extra:hover {
+header a.extra:hover {
   color: #000;
 }
 
@@ -95,7 +95,7 @@ a:visited { color: #a0a; }
   color: #aaa;
 }
 
-.footer {
+footer {
   font-size: 80%;
   color: #666;
   border-top: 4px solid #eee;
@@ -103,22 +103,22 @@ a:visited { color: #a0a; }
   overflow: hidden;
 }
 
-.footer .contact {
+footer .contact {
   float: left;
   margin-right: 3em;
 }
 
-.footer .contact a {
+footer .contact a {
   color: #8085C1;
 }
 
-.footer .rss {
+footer .rss {
   margin-top: 1.1em;
   margin-right: -.2em;
   float: right;
 }
 
-.footer .rss img {
+footer .rss img {
   border: 0;
 }
 
