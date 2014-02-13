@@ -36,6 +36,7 @@
   * Bring MIME Types file for `jekyll serve` to complete parity with GH Pages
     servers (#1993)
   * Adding Breakpoint to make new site template more responsive (#2038)
+  * Default to using the UTF-8 encoding when reading files. (#2031)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
