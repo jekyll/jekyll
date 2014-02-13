@@ -277,11 +277,13 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-12-17-include-variable-filters.markdown
     test/source/_posts/2013-12-20-properties.text
     test/source/_posts/es/2008-11-21-nested.textile
+    test/source/_sass/_grid.scss
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
     test/source/contacts.html
     test/source/contacts/bar.html
     test/source/contacts/index.html
+    test/source/css/main.scss
     test/source/css/screen.css
     test/source/deal.with.dots.html
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
