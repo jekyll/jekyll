@@ -39,6 +39,7 @@ a:visited { color: #a0a; }
   margin-bottom: 2em;
 }
 
+
 .posts li {
   line-height: 1.75em;
 }
@@ -62,6 +63,12 @@ a:visited { color: #a0a; }
   margin: 0 auto 2em;
   padding-top: 3em;
   line-height: 1.5em;
+}
+
+@media screen and (max-width: 44em) {
+  .site {
+    width: 90%;
+  }
 }
 
 .header a {
