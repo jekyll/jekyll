@@ -71,6 +71,7 @@
   * Use Yarp as a Gem proxy for Travis CI (#1984)
   * Remove Yarp as a Gem proxy for Travis CI (#2004)
   * Move the reading of layouts into its own class (#2020)
+  * Test Sass import (#2009)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
