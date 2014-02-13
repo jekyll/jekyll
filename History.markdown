@@ -51,6 +51,7 @@
   * Fixes full path leak to source directory when using include tag (#1951)
   * Don't generate pages that aren't being published (#1931)
   * Use `SafeYAML.load` to avoid conflicts with other projects (#1982)
+  * Relative posts should never fail to build (#1976)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
