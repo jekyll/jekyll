@@ -35,6 +35,7 @@
   * Excludes are now relative to the site source (#1916)
   * Bring MIME Types file for `jekyll serve` to complete parity with GH Pages
     servers (#1993)
+  * Adding Breakpoint to make new site template more responsive (#2038)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
