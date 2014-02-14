@@ -110,6 +110,7 @@
   * Fix non-semantic nesting of `p` tags in `news_item` layout (#2013)
   * Document destination folder cleaning (#2016)
   * Updated instructions for NearlyFreeSpeech.NET installation (#2015)
+  * Update link to rack-jekyll on "Deployment Methods" page (#2047)
 
 ## 1.4.3 / 2014-01-13
 
