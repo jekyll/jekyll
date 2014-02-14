@@ -38,6 +38,7 @@
   * Adding Breakpoint to make new site template more responsive (#2038)
   * Default to using the UTF-8 encoding when reading files. (#2031)
   * Update Redcarpet dependency to ~> 3.1 (#2044)
+  * Remove support for Ruby 1.9.2 (#2045)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
