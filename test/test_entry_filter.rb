@@ -25,6 +25,22 @@ class TestEntryFilter < Test::Unit::TestCase
       assert_equal files, @site.filter_entries(excludes + files + ["excludeA"])
     end
 
+    should "filter entries with exclude relative to site source" do
+      excludes = %w[README TODO css]
+      files = %w[index.html vendor/css .htaccess]
+
+      @site.exclude = excludes
+      assert_equal files, @site.filter_entries(excludes + files + ["css"])
+    end
+
+    should "filter excluded directory and contained files" do
+      excludes = %w[README TODO css]
+      files = %w[index.html .htaccess]
+
+      @site.exclude = excludes
+      assert_equal files, @site.filter_entries(excludes + files + ["css", "css/main.css", "css/vendor.css"])
+    end
+
     should "not filter entries within include" do
       includes = %w[_index.html .htaccess include*]
       files = %w[index.html _index.html .htaccess includeA]
