@@ -38,16 +38,16 @@ Jekyll does what you tell it to do — no more, no less. It doesn't try to outs
 * Colorator: Colorizes command line output (Ruby)
 * Classifier: Generating related posts (Ruby)
 * Directory Watcher: Auto-regeneration of sites (Ruby)
+* Kramdown: Default Markdown engine (Ruby)
 * Liquid: Templating system (Ruby)
-* Maruku: Default markdown engine (Ruby)
 * Pygments.rb: Syntax highlighting (Ruby/Python)
 * RedCarpet: Markdown engine (Ruby)
 * Safe YAML: YAML Parser built for security (Ruby)
 
 ## Developer Dependencies
 
-* Kramdown: Markdown-superset converter (Ruby)
 * Launchy: Cross-platform file launcher (Ruby)
+* Maruku: Markdown-superset interpreter (Ruby)
 * RDiscount: Discount Markdown Processor (Ruby)
 * RedCloth: Textile support (Ruby)
 * RedGreen: Nicer test output (Ruby)
