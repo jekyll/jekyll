@@ -36,7 +36,7 @@ module Jekyll
       'exclude'       => [],
       'paginate_path' => '/page:num',
 
-      'markdown_ext'  => 'markdown,mkd,mkdn,md',
+      'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'textile_ext'   => 'textile',
 
       'port'          => '4000',
