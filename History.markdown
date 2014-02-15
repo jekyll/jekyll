@@ -39,6 +39,7 @@
   * Default to using the UTF-8 encoding when reading files. (#2031)
   * Update Redcarpet dependency to ~> 3.1 (#2044)
   * Remove support for Ruby 1.9.2 (#2045)
+  * Add `.mkdown` as valid Markdown extension (#2048)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
