@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Your New Jekyll Site
 ---
 
 <div id="home">
