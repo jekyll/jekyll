@@ -964,11 +964,11 @@ code.option, code.flag, code.filter, code.output {
 
 .unreleased:after {
   content: "⚒";
-  color: #2b2a12;
+  color: #ffe9c3;
   position: absolute;
-  top: 12px;
-  left: 15px;
-  font-size: 32px;
+  top: 8px;
+  left: 14px;
+  font-size: 38px;
   font-weight: bold;
   text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 }
