@@ -57,6 +57,7 @@
   * Relative posts should never fail to build (#1976)
   * Remove executable bits of non executable files (#2056)
   * `#path` for a draft is now `_drafts` instead of `_posts` (#2042)
+  * Patch a couple show-stopping security vulnerabilities (#1946)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
