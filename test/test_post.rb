@@ -38,7 +38,7 @@ class TestPost < Test::Unit::TestCase
         id: "/foo/bar/baz/2013/12/20/properties",
         layout: 'default',
         name: nil,
-        # path: "properties.html",
+        path: "_posts/2013-12-20-properties.text",
         permalink: nil,
         published: nil,
         tags: %w(ay bee cee),
