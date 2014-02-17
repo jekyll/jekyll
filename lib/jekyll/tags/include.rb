@@ -119,8 +119,12 @@ eos
         if safe && !realpath_prefixed_with?(path, dir)
           raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
         elsif !File.exist?(path)
-          raise IOError.new "Included file '#{path}' not found"
+          raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
         end
+      end
+
+      def path_relative_to_source(dir, path)
+        File.join(INCLUDES_DIR, path.sub(Regexp.new("^#{dir}"), ""))
       end
 
       def realpath_prefixed_with?(path, dir)
