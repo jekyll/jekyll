@@ -45,7 +45,7 @@ module Jekyll
     def layout_directory_in_cwd
       # TODO: Fix on Windows
       dir = File.join(Dir.pwd, File.expand_path(site.config['layouts'], '/'))
-      if Directory.exists?(dir)
+      if File.directory?(dir)
         dir
       else
         nil
