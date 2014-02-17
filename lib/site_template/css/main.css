@@ -64,7 +64,9 @@ a:visited { color: #205caa; }
   line-height: 56px;
 }
 
-.site-nav > a {
+.site-nav .menu-icon { display: none; }
+
+.site-nav .page-link {
   margin-left: 20px;
   color: #727272;
   letter-spacing: -.5px;
@@ -282,3 +284,52 @@ a:visited { color: #205caa; }
 .highlight .vg { color: #008080 } /* Name.Variable.Global */
 .highlight .vi { color: #008080 } /* Name.Variable.Instance */
 .highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+
+
+/* media queries */
+/* ----------------------------------------------------------*/
+
+@media screen and (max-width: 600px) {
+
+  .wrap { padding: 0 12px; }
+
+  .site-nav {
+    position: fixed;
+    z-index: 10;
+    top: 14px; right: 8px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+    cursor: pointer;
+  }
+
+  .site-nav .menu-icon {
+    display: block;
+    font-size: 24px;
+    color: #505050;
+    float: right;
+    width: 36px;
+    text-align: center;
+    line-height: 36px;
+  }
+
+  .site-nav .trigger {
+    clear: both;
+    margin-bottom: 5px;
+    display: none;
+  }
+
+  .site-nav:hover .trigger,
+  .site-nav:active .trigger {
+    display: block;
+  }
+
+  .site-nav .page-link {
+    display: block;
+    text-align: right;
+    line-height: 1.25;
+    padding: 5px 10px;
+    margin: 0;
+  }
+
+}
