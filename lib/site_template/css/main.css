@@ -64,6 +64,12 @@ a:visited { color: #a0a; }
   line-height: 1.5em;
 }
 
+@media screen and (max-width: 44em) {
+  .site {
+    width: 90%;
+  }
+}
+
 .header a {
   font-weight: bold;
   text-decoration: none;

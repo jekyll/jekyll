@@ -2,12 +2,12 @@ Gem::Specification.new do |s|
   s.specification_version = 2 if s.respond_to? :specification_version=
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.rubygems_version = '1.3.5'
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '>= 1.9.3'
 
   s.name              = 'jekyll'
-  s.version           = '1.4.3'
+  s.version           = '2.0.0.alpha.1'
   s.license           = 'MIT'
-  s.date              = '2014-01-13'
+  s.date              = '2014-02-13'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('mercenary', "~> 0.2.0")
   s.add_runtime_dependency('safe_yaml', "~> 1.0")
   s.add_runtime_dependency('colorator', "~> 0.1")
-  s.add_runtime_dependency('redcarpet', "~> 3.0")
+  s.add_runtime_dependency('redcarpet', "~> 3.1")
   s.add_runtime_dependency('toml', '~> 0.1.0')
   s.add_runtime_dependency('sass', '~> 3.2')
   s.add_runtime_dependency('jekyll-coffeescript', '~> 1.0')
@@ -109,6 +109,7 @@ Gem::Specification.new do |s|
     lib/jekyll/generator.rb
     lib/jekyll/generators/pagination.rb
     lib/jekyll/layout.rb
+    lib/jekyll/layout_reader.rb
     lib/jekyll/mime.types
     lib/jekyll/page.rb
     lib/jekyll/plugin.rb
@@ -232,6 +233,7 @@ Gem::Specification.new do |s|
     test/source/_config.dev.toml
     test/source/_data/languages.yml
     test/source/_data/members.yaml
+    test/source/_data/products.yml
     test/source/_includes/include.html
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
@@ -275,11 +277,13 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-12-17-include-variable-filters.markdown
     test/source/_posts/2013-12-20-properties.text
     test/source/_posts/es/2008-11-21-nested.textile
+    test/source/_sass/_grid.scss
     test/source/about.html
     test/source/category/_posts/2008-9-23-categories.textile
     test/source/contacts.html
     test/source/contacts/bar.html
     test/source/contacts/index.html
+    test/source/css/main.scss
     test/source/css/screen.css
     test/source/deal.with.dots.html
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
@@ -288,6 +292,9 @@ Gem::Specification.new do |s|
     test/source/products.yml
     test/source/properties.html
     test/source/sitemap.xml
+    test/source/symlink-test/_data
+    test/source/symlink-test/symlinked-dir
+    test/source/symlink-test/symlinked-file
     test/source/unpublished.html
     test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
     test/source/z_category/_posts/2008-9-23-categories.textile
@@ -302,6 +309,7 @@ Gem::Specification.new do |s|
     test/test_filters.rb
     test/test_generated_site.rb
     test/test_kramdown.rb
+    test/test_layout_reader.rb
     test/test_new_command.rb
     test/test_page.rb
     test/test_pager.rb

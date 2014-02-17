@@ -38,7 +38,7 @@ class TestPost < Test::Unit::TestCase
         id: "/foo/bar/baz/2013/12/20/properties",
         layout: 'default',
         name: nil,
-        # path: "properties.html",
+        path: "_posts/2013-12-20-properties.text",
         permalink: nil,
         published: nil,
         tags: %w(ay bee cee),
@@ -323,7 +323,7 @@ class TestPost < Test::Unit::TestCase
         end
 
         should "return rendered HTML" do
-          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>",
+          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>\n\n",
                        @post.excerpt
         end
 
@@ -543,7 +543,7 @@ class TestPost < Test::Unit::TestCase
           post.site.source = File.join(File.dirname(__FILE__), 'source')
           do_render(post)
 
-          assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", post.output
+          assert_equal "<<< <hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n\n<p>This <em>is</em> cool</p>\n >>>", post.output
         end
 
         should "render date specified in front matter properly" do

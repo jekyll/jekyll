@@ -127,25 +127,9 @@ module Jekyll
     #
     # Returns nothing.
     def read
-      self.read_layouts
+      self.layouts = LayoutReader.new(self).read
       self.read_directories
       self.read_data(config['data_source'])
-    end
-
-    # Read all the files in <source>/<layouts> and create a new Layout object
-    # with each one.
-    #
-    # Returns nothing.
-    def read_layouts
-      base = File.join(self.source, self.config['layouts'])
-      return unless File.exists?(base)
-      entries = []
-      Dir.chdir(base) { entries = filter_entries(Dir['**/*.*'], base) }
-
-      entries.each do |f|
-        name = f.split(".")[0..-2].join(".")
-        self.layouts[name] = Layout.new(self, base, f)
-      end
     end
 
     # Recursively traverse directories to find posts, pages and static files

@@ -4,14 +4,14 @@ class TestConfiguration < Test::Unit::TestCase
   context "#stringify_keys" do
     setup do
       @mixed_keys = Configuration[{
-        'markdown' => 'maruku',
+        'markdown' => 'kramdown',
         :permalink => 'date',
         'baseurl'  => '/',
         :include   => ['.htaccess'],
         :source    => './'
       }]
       @string_keys = Configuration[{
-        'markdown'  => 'maruku',
+        'markdown'  => 'kramdown',
         'permalink' => 'date',
         'baseurl'   => '/',
         'include'   => ['.htaccess'],

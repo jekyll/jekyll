@@ -12,6 +12,7 @@
   * Provide a 300% improvement when generating sites that use
     `Post#next` or `Post#previous` (#1983)
   * Provide support for CoffeeScript (#1991)
+  * Replace Maruku with Kramdown as Default Markdown Processor (#1988)
 
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
@@ -34,6 +35,11 @@
   * Excludes are now relative to the site source (#1916)
   * Bring MIME Types file for `jekyll serve` to complete parity with GH Pages
     servers (#1993)
+  * Adding Breakpoint to make new site template more responsive (#2038)
+  * Default to using the UTF-8 encoding when reading files. (#2031)
+  * Update Redcarpet dependency to ~> 3.1 (#2044)
+  * Remove support for Ruby 1.9.2 (#2045)
+  * Add `.mkdown` as valid Markdown extension (#2048)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
@@ -48,6 +54,9 @@
   * Fixes full path leak to source directory when using include tag (#1951)
   * Don't generate pages that aren't being published (#1931)
   * Use `SafeYAML.load` to avoid conflicts with other projects (#1982)
+  * Relative posts should never fail to build (#1976)
+  * Remove executable bits of non executable files (#2056)
+  * `#path` for a draft is now `_drafts` instead of `_posts` (#2042)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
@@ -66,6 +75,9 @@
   * Speed up Travis CI builds by using Rebund (#1985)
   * Use Yarp as a Gem proxy for Travis CI (#1984)
   * Remove Yarp as a Gem proxy for Travis CI (#2004)
+  * Move the reading of layouts into its own class (#2020)
+  * Test Sass import (#2009)
+  * Switch Maruku and Kramdown in lists of Runtime vs. Development dependencies (#2049)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
@@ -100,6 +112,9 @@
   * Add `sublime-jekyll` to list of Editor plugins (#2001)
   * Add `vim-jekyll` to the list of Editor plugins (#2005)
   * Fix non-semantic nesting of `p` tags in `news_item` layout (#2013)
+  * Document destination folder cleaning (#2016)
+  * Updated instructions for NearlyFreeSpeech.NET installation (#2015)
+  * Update link to rack-jekyll on "Deployment Methods" page (#2047)
 
 ## 1.4.3 / 2014-01-13
 

@@ -157,13 +157,9 @@ class TestSite < Test::Unit::TestCase
     should "sort pages alphabetically" do
       stub.proxy(Dir).entries { |entries| entries.reverse }
       @site.process
-      sorted_pages = %w(.htaccess about.html bar.html coffeescript.coffee contacts.html deal.with.dots.html exploit.md foo.md index.html index.html properties.html sitemap.xml symlinked-file)
+      # files in symlinked directories may appear twice
+      sorted_pages = %w(.htaccess about.html bar.html coffeescript.coffee contacts.html deal.with.dots.html exploit.md foo.md index.html index.html main.scss main.scss properties.html sitemap.xml symlinked-file)
       assert_equal sorted_pages, @site.pages.map(&:name)
-    end
-
-    should "read layouts" do
-      @site.read_layouts
-      assert_equal ["default", "simple", "post/simple"].sort, @site.layouts.keys.sort
     end
 
     should "read posts" do

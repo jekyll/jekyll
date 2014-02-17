@@ -48,6 +48,7 @@ require 'jekyll/errors'
 require 'jekyll/related_posts'
 require 'jekyll/cleaner'
 require 'jekyll/entry_filter'
+require 'jekyll/layout_reader'
 
 # extensions
 require 'jekyll/plugin'
@@ -67,7 +68,7 @@ require 'jekyll-coffeescript'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.4.0'
+  VERSION = '2.0.0.alpha.1'
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
