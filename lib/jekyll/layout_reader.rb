@@ -34,7 +34,22 @@ module Jekyll
     end
 
     def layout_directory
-      File.join(site.source, site.config['layouts'])
+      @layout_directory = (layout_directory_in_cwd || layout_directory_inside_source)
+    end
+
+    def layout_directory_inside_source
+      # TODO: Fix for Windows
+      File.join(site.source, File.expand_path(site.config['layouts'], "/"))
+    end
+
+    def layout_directory_in_cwd
+      # TODO: Fix on Windows
+      dir = File.join(Dir.pwd, File.expand_path(site.config['layouts'], '/'))
+      if Directory.exists?(dir)
+        dir
+      else
+        nil
+      end
     end
   end
 end
