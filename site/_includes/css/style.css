@@ -904,12 +904,29 @@ code.option, code.flag, code.filter, code.output {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9e2812', endColorstr='#6f0d0d',GradientType=0 );
 }
 
+.unreleased {
+  background: rgb(205,146,57); /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NkOTIzOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNhMjc1MjgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  rgba(205,146,57,1) 0%, rgba(162,117,40,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(205,146,57,1)), color-stop(100%,rgba(162,117,40,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(205,146,57,1) 0%,rgba(162,117,40,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(205,146,57,1) 0%,rgba(162,117,40,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(205,146,57,1) 0%,rgba(162,117,40,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(205,146,57,1) 0%,rgba(162,117,40,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cd9239', endColorstr='#a27528',GradientType=0 ); /* IE6-8 */
+}
+
 .info:before {
   border-color: transparent #00617f #00617f transparent;
 }
 
 .warning:before {
   border-color: transparent #6f0d0d #6f0d0d transparent;
+}
+
+.unreleased:before {
+  border-color: transparent #664719 #664719 transparent;
 }
 
 .note:after {
@@ -939,6 +956,17 @@ code.option, code.flag, code.filter, code.output {
   color: #fc0;
   position: absolute;
   top: 15px;
+  left: 15px;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+}
+
+.unreleased:after {
+  content: "⚒";
+  color: #2b2a12;
+  position: absolute;
+  top: 12px;
   left: 15px;
   font-size: 32px;
   font-weight: bold;

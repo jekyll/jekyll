@@ -24,7 +24,7 @@ behind [GitHub Pages](http://pages.github.com), which means you can use Jekyll
 to host your project’s page, blog, or website from GitHub’s servers **for
 free**.
 
-## ProTips™, Notes, and Warnings
+## ProTips™, Notes, Warnings, and Unreleased Features
 
 Throughout this guide there are a number of small-but-handy pieces of
 information that can make using Jekyll easier, more interesting, and less
@@ -44,6 +44,12 @@ hazardous. Here’s what to look out for.
 <div class="note warning">
   <h5>Warnings help you not blow things up</h5>
   <p>Be aware of these messages if you wish to avoid certain death.</p>
+</div>
+
+<div class="note unreleased">
+  <h5>You'll see this by a feature that hasn't been released</h5>
+  <p>Some pieces of this website are for future versions of Jekyll that
+    are not yet released.</p>
 </div>
 
 If you come across anything along the way that we haven’t covered, or if you
