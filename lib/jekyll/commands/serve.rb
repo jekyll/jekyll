@@ -25,6 +25,8 @@ module Jekyll
 
         s = HTTPServer.new(webrick_options(options))
 
+        s.config.store(:DirectoryIndex, s.config[:DirectoryIndex] << "index.xml")
+
         s.mount(options['baseurl'], HTTPServlet::FileHandler, destination, fh_option)
 
         Jekyll.logger.info "Server address:", "http://#{s.config[:BindAddress]}:#{s.config[:Port]}"
