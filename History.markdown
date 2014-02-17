@@ -40,6 +40,7 @@
   * Update Redcarpet dependency to ~> 3.1 (#2044)
   * Remove support for Ruby 1.9.2 (#2045)
   * Add `.mkdown` as valid Markdown extension (#2048)
+  * Add `index.xml` to the list of WEBrick directory index files (#2041)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
