@@ -313,6 +313,8 @@ a:visited { color: #205caa; }
     line-height: 36px;
   }
 
+  .site-nav .menu-icon svg { width: 18px; height: 16px; }
+
   .site-nav .trigger {
     clear: both;
     margin-bottom: 5px;
