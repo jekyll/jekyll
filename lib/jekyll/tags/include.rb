@@ -95,14 +95,13 @@ eos
       end
 
       def render(context)
-        dir = File.join(context.registers[:site].source, INCLUDES_DIR)
-        validate_dir(dir, context.registers[:site].safe)
+        dir = File.join(File.realpath(context.registers[:site].source), INCLUDES_DIR)
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
         path = File.join(dir, file)
-        validate_file(context.registers[:site].source, path, context.registers[:site].safe)
+        validate_path(path, dir, context.registers[:site].safe)
 
         begin
           partial = Liquid::Template.parse(source(path, context))
@@ -116,19 +115,20 @@ eos
         end
       end
 
-      def validate_dir(dir, safe)
-        if File.symlink?(dir) && safe
-          raise IOError.new "Includes directory '#{dir}' cannot be a symlink"
+      def validate_path(path, dir, safe)
+        if safe && !realpath_prefixed_with?(path, dir)
+          raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
+        elsif !File.exist?(path)
+          raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
         end
       end
 
-      def validate_file(sourcedir, file, safe)
-        relative_file = Pathname.new(file).relative_path_from(Pathname.new(sourcedir))
-        if !File.exists?(file)
-          raise IOError.new "Included file '#{relative_file}' not found" 
-        elsif File.symlink?(file) && safe
-          raise IOError.new "The included file '#{relative_file}' should not be a symlink"
-        end
+      def path_relative_to_source(dir, path)
+        File.join(INCLUDES_DIR, path.sub(Regexp.new("^#{dir}"), ""))
+      end
+
+      def realpath_prefixed_with?(path, dir)
+        File.exist?(path) && File.realpath(path).start_with?(dir)
       end
 
       def blank?
