@@ -14,6 +14,10 @@ module Jekyll
       @layouts
     end
 
+    def layout_directory
+      @layout_directory ||= (layout_directory_in_cwd || layout_directory_inside_source)
+    end
+
     private
 
     def layout_entries
@@ -31,10 +35,6 @@ module Jekyll
     def within(directory)
       return unless File.exists?(directory)
       Dir.chdir(directory) { yield }
-    end
-
-    def layout_directory
-      @layout_directory = (layout_directory_in_cwd || layout_directory_inside_source)
     end
 
     def layout_directory_inside_source

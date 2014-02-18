@@ -16,7 +16,7 @@ class TestLayoutReader < Test::Unit::TestCase
 
     context "when no _layouts directory exists in CWD" do
       should "know to use the layout directory relative to the site source" do
-        assert_equal LayoutReader.new(@site).send(:layout_directory), source_dir("_layouts")
+        assert_equal LayoutReader.new(@site).layout_directory, source_dir("_layouts")
       end
     end
 
@@ -27,7 +27,7 @@ class TestLayoutReader < Test::Unit::TestCase
       end
 
       should "know to use the layout directory relative to CWD" do
-        assert_equal LayoutReader.new(@site).send(:layout_directory), source_dir("blah/_layouts")
+        assert_equal LayoutReader.new(@site).layout_directory, source_dir("blah/_layouts")
       end
     end
   end
