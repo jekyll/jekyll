@@ -19,6 +19,11 @@ or `.coffee`) and start the file with two lines of triple dashes, like this:
   font-size: 1.2em
 {% endhighlight %}
 
+Jekyll treats these files the same a regular page, in that the output file
+will be placed in the same directory that it came from. For instance, if you
+have a file named `/css/styles.scss`, Jekyll will process it and put it in
+your site's destination folder under `/css/styles.css`.
+
 ## Sass/SCSS
 
 Jekyll allows you to customize your Sass conversion in certain ways.
