@@ -57,6 +57,8 @@ a:visited { color: #205caa; }
   letter-spacing: -1px;
   float: left;
   line-height: 56px;
+  position: relative;
+  z-index: 1;
 }
 
 .site-nav {
@@ -99,6 +101,15 @@ a:visited { color: #205caa; }
   font-size: 15px;
   letter-spacing: -.3px;
   color: #828282;
+}
+
+.github-icon-svg,
+.twitter-icon-svg {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 3px;
 }
 
 
@@ -300,7 +311,6 @@ a:visited { color: #205caa; }
     background-color: white;
     border-radius: 5px;
     border: 1px solid #e8e8e8;
-    cursor: pointer;
   }
 
   .site-nav .menu-icon {
@@ -321,10 +331,7 @@ a:visited { color: #205caa; }
     display: none;
   }
 
-  .site-nav:hover .trigger,
-  .site-nav:active .trigger {
-    display: block;
-  }
+  .site-nav:hover .trigger { display: block; }
 
   .site-nav .page-link {
     display: block;
