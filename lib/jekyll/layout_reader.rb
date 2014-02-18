@@ -14,6 +14,10 @@ module Jekyll
       @layouts
     end
 
+    def layout_directory
+      @layout_directory ||= (layout_directory_in_cwd || layout_directory_inside_source)
+    end
+
     private
 
     def layout_entries
@@ -33,8 +37,19 @@ module Jekyll
       Dir.chdir(directory) { yield }
     end
 
-    def layout_directory
-      File.join(site.source, site.config['layouts'])
+    def layout_directory_inside_source
+      # TODO: Fix for Windows
+      File.join(site.source, File.expand_path(site.config['layouts'], "/"))
+    end
+
+    def layout_directory_in_cwd
+      # TODO: Fix on Windows
+      dir = File.join(Dir.pwd, File.expand_path(site.config['layouts'], '/'))
+      if File.directory?(dir)
+        dir
+      else
+        nil
+      end
     end
   end
 end
