@@ -41,6 +41,7 @@
   * Remove support for Ruby 1.9.2 (#2045)
   * Add `.mkdown` as valid Markdown extension (#2048)
   * Add `index.xml` to the list of WEBrick directory index files (#2041)
+  * Make the `layouts` config key relative to CWD or to source (#2058)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
