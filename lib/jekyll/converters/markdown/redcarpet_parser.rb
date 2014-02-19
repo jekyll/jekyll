@@ -39,17 +39,19 @@ module Jekyll
         end
 
         module WithRouge
-          require 'rouge'
-          require 'rouge/plugins/redcarpet'
-
-          if Rouge.version < '1.3.0'
-            abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
+          def rouge_setup
+            require 'rouge'
+            require 'rouge/plugins/redcarpet'
+            if Rouge.version < '1.3.0'
+              Jekyll.logger.abort_with "Please install Rouge 1.3.0 or greater and try running Jekyll again."
+            end
+            self.class.include Rouge::Plugins::Redcarpet
+            self.class.include CommonMethods
+            @rouge_setup = true
           end
 
-          include Rouge::Plugins::Redcarpet
-          include CommonMethods
-
           def block_code(code, lang)
+            rouge_setup unless @rouge_setup
             code = "<pre>#{super}</pre>"
 
             output = "<div class=\"highlight\">"
