@@ -307,13 +307,14 @@ module Jekyll
     def site_payload
       {"jekyll" => { "version" => Jekyll::VERSION },
        "site" => self.config.merge({
-          "time"       => self.time,
-          "posts"      => self.posts.sort { |a, b| b <=> a },
-          "pages"      => self.pages,
-          "html_pages" => self.pages.reject { |page| !page.html? },
-          "categories" => post_attr_hash('categories'),
-          "tags"       => post_attr_hash('tags'),
-          "data"       => site_data})}
+          "time"         => self.time,
+          "posts"        => self.posts.sort { |a, b| b <=> a },
+          "pages"        => self.pages,
+          "static_files" => self.static_files
+          "html_pages"   => self.pages.reject { |page| !page.html? },
+          "categories"   => post_attr_hash('categories'),
+          "tags"         => post_attr_hash('tags'),
+          "data"         => site_data})}
     end
 
     # Filter out any files/directories that are hidden or backup files (start
