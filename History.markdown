@@ -120,6 +120,7 @@
   * Updated instructions for NearlyFreeSpeech.NET installation (#2015)
   * Update link to rack-jekyll on "Deployment Methods" page (#2047)
   * Fix typo in /docs/configuration (#2073)
+  * Fix count in docs for `site.static_files` (#2077)
 
 ## 1.4.3 / 2014-01-13
 
