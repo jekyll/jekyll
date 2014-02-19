@@ -174,7 +174,7 @@ class TestSite < Test::Unit::TestCase
         properties.html
         sitemap.xml
         static_files.html
-        symlinked-fil
+        symlinked-file
       )
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
