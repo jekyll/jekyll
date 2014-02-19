@@ -109,10 +109,11 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">
             Set the encoding of files by name. Only available for Ruby
             1.9 or later).
-            The default value is nil, which uses the Ruby default,
-            <code>ASCII-8BIT</code>.
-            Available encoding for the ruby in use, can be shown by
-            command <code>ruby -e 'puts Encoding::list.join("\n")'</code>
+            The default value is <code>utf-8</code> starting in 2.0.0,
+            and <code>nil</code> before 2.0.0, which will yield the Ruby
+            default of <code>ASCII-8BIT</code>.
+            Available encodings can be shown by the
+            command <code>ruby -e 'puts Encoding::list.join("\n")'</code>.
         </p>
       </td>
       <td class='align-center'>
