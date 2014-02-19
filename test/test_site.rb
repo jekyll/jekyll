@@ -158,7 +158,24 @@ class TestSite < Test::Unit::TestCase
       stub.proxy(Dir).entries { |entries| entries.reverse }
       @site.process
       # files in symlinked directories may appear twice
-      sorted_pages = %w(.htaccess about.html bar.html coffeescript.coffee contacts.html deal.with.dots.html exploit.md foo.md index.html index.html main.scss main.scss properties.html sitemap.xml symlinked-file)
+      sorted_pages = %w(
+        .htaccess
+        about.html
+        bar.html
+        coffeescript.coffee
+        contacts.html
+        deal.with.dots.html
+        exploit.md
+        foo.md
+        index.html
+        index.html
+        main.scss
+        main.scss
+        properties.html
+        sitemap.xml
+        static_files.html
+        symlinked-file
+      )
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
@@ -167,6 +184,14 @@ class TestSite < Test::Unit::TestCase
       posts = Dir[source_dir('_posts', '**', '*')]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
+    end
+
+    should "expose jekyll version to site payload" do
+      assert_equal Jekyll::VERSION, @site.site_payload['jekyll']['version']
+    end
+
+    should "expose list of static files to site payload" do
+      assert_equal @site.static_files, @site.site_payload['site']['static_files']
     end
 
     should "deploy payload" do
