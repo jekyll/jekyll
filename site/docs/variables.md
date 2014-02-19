@@ -118,7 +118,7 @@ following is a reference of the available data.
 
         A list of all static files (i.e. files not processed by Jekyll's
         converters or the Liquid renderer). Each file has two properties:
-        <code>path</code> and <code>modified_time</code>
+        <code>path</code>, <code>modified_time</code> and <code>extname</code>.
 
       </p></td>
     </tr>
