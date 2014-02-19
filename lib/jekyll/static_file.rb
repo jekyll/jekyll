@@ -21,6 +21,11 @@ module Jekyll
       File.join(@base, @dir, @name)
     end
 
+    # Returns the source file path relative to the site source
+    def relative_path
+      path.sub(/\A#{@site.source}/, '')
+    end
+
     # Obtain destination path.
     #
     # dest - The String path to the destination dir.
@@ -65,6 +70,13 @@ module Jekyll
     def self.reset_cache
       @@mtimes = Hash.new
       nil
+    end
+
+    def to_liquid
+      {
+        "path"          => relative_path,
+        "modified_time" => mtime.to_s
+      }
     end
   end
 end
