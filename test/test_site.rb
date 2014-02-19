@@ -158,7 +158,24 @@ class TestSite < Test::Unit::TestCase
       stub.proxy(Dir).entries { |entries| entries.reverse }
       @site.process
       # files in symlinked directories may appear twice
-      sorted_pages = %w(.htaccess about.html bar.html coffeescript.coffee contacts.html deal.with.dots.html exploit.md foo.md index.html index.html main.scss main.scss properties.html sitemap.xml symlinked-file)
+      sorted_pages = %w(
+        .htaccess
+        about.html
+        bar.html
+        coffeescript.coffee
+        contacts.html
+        deal.with.dots.html
+        exploit.md
+        foo.md
+        index.html
+        index.html
+        main.scss
+        main.scss
+        properties.html
+        sitemap.xml
+        static_files.html
+        symlinked-fil
+      )
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
 

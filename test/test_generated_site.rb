@@ -44,6 +44,10 @@ class TestGeneratedSite < Test::Unit::TestCase
       assert File.exists?(dest_dir('/about/index.html'))
       assert File.exists?(dest_dir('/contacts.html'))
     end
+
+    should "print a nice list of static files" do
+      assert_equal "", File.read(dest_dir('static_files.html'))
+    end
   end
 
   context "generating limited posts" do
