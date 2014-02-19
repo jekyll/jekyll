@@ -42,6 +42,7 @@
   * Add `.mkdown` as valid Markdown extension (#2048)
   * Add `index.xml` to the list of WEBrick directory index files (#2041)
   * Make the `layouts` config key relative to CWD or to source (#2058)
+  * Update Kramdown to `~> 1.3` (#1894)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
@@ -65,7 +66,6 @@
   * Add a link to the site in the README.md file (#1795)
   * Add in History and site changes from `v1-stable` branch (#1836)
   * Testing additions on the Excerpt class (#1893)
-  * Update Kramdown to `~> 1.3` (#1894)
   * Fix the `highlight` tag feature (#1859)
   * Test Jekyll under Ruby 2.1.0 (#1900)
   * Add script/cibuild for fun and profit (#1912)
