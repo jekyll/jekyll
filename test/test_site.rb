@@ -169,6 +169,14 @@ class TestSite < Test::Unit::TestCase
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
 
+    should "expose jekyll version to site payload" do
+      assert_equal Jekyll::VERSION, @site.site_payload['jekyll']['version']
+    end
+
+    should "expose list of static files to site payload" do
+      assert_equal @site.static_files, @site.site_payload['site']['static_files']
+    end
+
     should "deploy payload" do
       clear_dest
       @site.process
