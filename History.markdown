@@ -13,6 +13,7 @@
     `Post#next` or `Post#previous` (#1983)
   * Provide support for CoffeeScript (#1991)
   * Replace Maruku with Kramdown as Default Markdown Processor (#1988)
+  * Expose `site.static_files` to Liquid (#2075)
 
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
