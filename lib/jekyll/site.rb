@@ -310,7 +310,7 @@ module Jekyll
           "time"         => self.time,
           "posts"        => self.posts.sort { |a, b| b <=> a },
           "pages"        => self.pages,
-          "static_files" => self.static_files,
+          "static_files" => self.static_files.sort { |a, b| a.relative_path <=> b.relative_path },
           "html_pages"   => self.pages.reject { |page| !page.html? },
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
