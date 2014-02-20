@@ -24,7 +24,7 @@ behind [GitHub Pages](http://pages.github.com), which means you can use Jekyll
 to host your project’s page, blog, or website from GitHub’s servers **for
 free**.
 
-## ProTips™, Notes, Warnings, and Unreleased Features
+## Helpful Hints
 
 Throughout this guide there are a number of small-but-handy pieces of
 information that can make using Jekyll easier, more interesting, and less
