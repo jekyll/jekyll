@@ -65,7 +65,7 @@ whilst maintaining the ability to preview your Jekyll site locally.
 1. In `_config.yml`, set the `baseurl` option to `/project-name` -- note the
    leading slash and the **absence** of a trailing slash.
 2. When referencing JS or CSS files, do it like this:
-   `{% raw %}{{ site.baseurl}}/path/to/css.css{% endraw %}` -- note the slash
+   `{% raw %}{{ site.baseurl }}/path/to/css.css{% endraw %}` -- note the slash
    immediately following the variable (just before "path").
 3. When doing permalinks or internal links, do it like this:
    `{% raw %}{{ site.baseurl }}{{ post.url }}{% endraw %}` -- note that there
