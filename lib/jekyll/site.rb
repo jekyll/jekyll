@@ -5,7 +5,7 @@ module Jekyll
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
 
-    attr_accessor :converters, :generators
+    attr_accessor :converters, :generators, :post_processors
 
     # Public: Initialize a new Site.
     #
@@ -39,6 +39,7 @@ module Jekyll
       self.render
       self.cleanup
       self.write
+      self.postprocess
     end
 
     # Reset Site details.
@@ -83,6 +84,7 @@ module Jekyll
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
+      self.post_processors = instantiate_subclasses(Jekyll::PostProcessor)
     end
 
     # Check that the destination dir isn't the source dir or a directory
@@ -227,6 +229,15 @@ module Jekyll
     def generate
       self.generators.each do |generator|
         generator.generate(self)
+      end
+    end
+
+    # Run each of the Processors.
+    #
+    # Returns nothing.
+    def postprocess
+      self.post_processors.each do |post_processor|
+        post_processor.process(self)
       end
     end
 
