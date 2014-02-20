@@ -123,6 +123,7 @@
   * Fix count in docs for `site.static_files` (#2077)
   * Update configuration docs to indicate utf-8 is the default for 2.0.0
     and ASCII for 1.9.3 (#2074)
+  * Add info about unreleased feature to the site (#2061)
 
 ## 1.4.3 / 2014-01-13
 
