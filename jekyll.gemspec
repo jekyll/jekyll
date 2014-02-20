@@ -234,9 +234,11 @@ Gem::Specification.new do |s|
     test/source/_data/languages.yml
     test/source/_data/members.yaml
     test/source/_data/products.yml
+    test/source/_drafts/draft-properties.text
     test/source/_includes/include.html
     test/source/_includes/params.html
     test/source/_includes/sig.markdown
+    test/source/_includes/tmp
     test/source/_layouts/default.html
     test/source/_layouts/post/simple.html
     test/source/_layouts/simple.html
@@ -276,6 +278,7 @@ Gem::Specification.new do |s|
     test/source/_posts/2013-08-01-mkdn-extension.mkdn
     test/source/_posts/2013-12-17-include-variable-filters.markdown
     test/source/_posts/2013-12-20-properties.text
+    test/source/_posts/2014-01-06-permalink-traversal.md
     test/source/_posts/es/2008-11-21-nested.textile
     test/source/_sass/_grid.scss
     test/source/about.html
@@ -286,12 +289,14 @@ Gem::Specification.new do |s|
     test/source/css/main.scss
     test/source/css/screen.css
     test/source/deal.with.dots.html
+    test/source/exploit.md
     test/source/foo/_posts/bar/2008-12-12-topical-post.textile
     test/source/index.html
     test/source/js/coffeescript.coffee
     test/source/products.yml
     test/source/properties.html
     test/source/sitemap.xml
+    test/source/static_files.html
     test/source/symlink-test/_data
     test/source/symlink-test/symlinked-dir
     test/source/symlink-test/symlinked-file
@@ -304,6 +309,7 @@ Gem::Specification.new do |s|
     test/test_configuration.rb
     test/test_convertible.rb
     test/test_core_ext.rb
+    test/test_draft.rb
     test/test_entry_filter.rb
     test/test_excerpt.rb
     test/test_filters.rb
