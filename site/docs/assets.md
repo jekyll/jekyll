@@ -9,7 +9,8 @@ permalink: /docs/assets/
 <div class="note unreleased">
   <h5>Sass and CoffeeScript support is currently unreleased.</h5>
   <p>
-    In order to use this feature, you must install v2.0.0.alpha.1 or above.
+  In order to use this feature, <a href="/docs/installation/#pre-releases">
+  install the latest development version of Jekyll</a>.
   </p>
 </div>
 

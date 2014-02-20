@@ -353,7 +353,7 @@ redcloth:
 <div class="note unreleased">
   <h5>Kramdown as the default is currently unreleased.</h5>
   <p>
-    In v2.0.0.alpha.1 and above, we've deprecated Maruku and will default to
+    In the latest development releases, we've deprecated Maruku and will default to
     Kramdown instead of Maruku. All versions below this will use Maruku as the
     default.
   </p>
