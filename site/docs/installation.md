@@ -55,6 +55,22 @@ community can improve the experience for everyone.
   </p>
 </div>
 
+## Pre-releases
+
+In order to install a pre-release, make sure you have all the requirements
+installed properly and run:
+
+{% highlight bash %}
+gem install jekyll --pre
+{% endhighlight %}
+
+This will install the latest pre-release. If you want a particular pre-release,
+use the `-v` switch to indicate the version you'd like to install:
+
+{% highlight bash %}
+gem install jekyll -v '2.0.0.alpha.1'
+{% endhighlight %}
+
 ## Optional Extras
 
 There are a number of (optional) extra features that Jekyll supports that you
