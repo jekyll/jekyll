@@ -18,18 +18,18 @@ module Jekyll
   module Convertible
     # Returns the contents as a String.
     def to_s
-      self.content || ''
+      content || ''
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
-      !(self.data.has_key?('published') && self.data['published'] == false)
+      !(data.has_key?('published') && data['published'] == false)
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
     # and a given param
     def merged_file_read_opts(opts)
-      (self.site ? self.site.file_read_opts : {}).merge(opts)
+      (site ? site.file_read_opts : {}).merge(opts)
     end
 
     # Read the YAML frontmatter.
@@ -43,7 +43,7 @@ module Jekyll
       begin
         self.content = File.read(File.join(base, name),
                                  merged_file_read_opts(opts))
-        if self.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+        if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = SafeYAML.load($1)
         end
@@ -60,10 +60,10 @@ module Jekyll
     #
     # Returns nothing.
     def transform
-      self.content = converter.convert(self.content)
+      self.content = converter.convert(content)
     rescue => e
       Jekyll.logger.error "Conversion error:", "There was an error converting" +
-        " '#{self.path}'."
+        " '#{path}'."
       raise e
     end
 
@@ -72,7 +72,7 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      converter.output_ext(self.ext)
+      converter.output_ext(ext)
     end
 
     # Determine which converter to use based on this convertible's
@@ -80,7 +80,7 @@ module Jekyll
     #
     # Returns the Converter instance.
     def converter
-      @converter ||= self.site.converters.find { |c| c.matches(self.ext) }
+      @converter ||= site.converters.find { |c| c.matches(ext) }
     end
 
     # Render Liquid in the content
@@ -119,16 +119,16 @@ module Jekyll
     # Returns nothing
     def render_all_layouts(layouts, payload, info)
       # recursively render layouts
-      layout = layouts[self.data["layout"]]
+      layout = layouts[data["layout"]]
       used = Set.new([layout])
 
       while layout
-        payload = payload.deep_merge({"content" => self.output, "page" => layout.data})
+        payload = payload.deep_merge({"content" => output, "page" => layout.data})
 
-        self.output = self.render_liquid(layout.content,
+        self.output = render_liquid(layout.content,
                                          payload,
                                          info,
-                                         File.join(self.site.config['layouts'], layout.name))
+                                         File.join(site.config['layouts'], layout.name))
 
         if layout = layouts[layout.data["layout"]]
           if used.include?(layout)
@@ -147,21 +147,19 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      info = { :filters => [Jekyll::Filters], :registers => { :site => self.site, :page => payload['page'] } }
+      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
       payload["highlighter_prefix"] = converter.highlighter_prefix
       payload["highlighter_suffix"] = converter.highlighter_suffix
 
-      self.content = self.render_liquid(self.content,
-                                        payload,
-                                        info)
-      self.transform
+      self.content = render_liquid(content, payload, info)
+      transform
 
       # output keeps track of what will finally be written
-      self.output = self.content
+      self.output = content
 
-      self.render_all_layouts(layouts, payload, info)
+      render_all_layouts(layouts, payload, info)
     end
 
     # Write the generated page file to the destination directory.
@@ -173,7 +171,7 @@ module Jekyll
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'wb') do |f|
-        f.write(self.output)
+        f.write(output)
       end
     end
 

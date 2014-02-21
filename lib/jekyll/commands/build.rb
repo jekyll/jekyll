@@ -6,8 +6,8 @@ module Jekyll
 
         Jekyll.logger.log_level = Jekyll::Stevenson::ERROR if options['quiet']
 
-        self.build(site, options)
-        self.watch(site, options) if options['watch']
+        build(site, options)
+        watch(site, options) if options['watch']
       end
 
       # Private: Build the site from source into destination.
@@ -22,7 +22,7 @@ module Jekyll
         Jekyll.logger.info "Source:", source
         Jekyll.logger.info "Destination:", destination
         print Jekyll.logger.formatted_topic "Generating..."
-        self.process_site(site)
+        process_site(site)
         puts "done."
       end
 
@@ -52,7 +52,7 @@ module Jekyll
           t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           n = modified.length + added.length + removed.length
           print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
-          self.process_site(site)
+          process_site(site)
           puts  "...done."
         end
         listener.start

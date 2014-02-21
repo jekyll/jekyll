@@ -29,8 +29,8 @@ module Jekyll
 
       self.data = {}
 
-      self.process(name)
-      self.read_yaml(base, name)
+      process(name)
+      read_yaml(base, name)
     end
 
     # Extract information from the layout filename.

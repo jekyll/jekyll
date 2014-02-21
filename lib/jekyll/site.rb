@@ -11,54 +11,50 @@ module Jekyll
     #
     # config - A Hash containing site configuration details.
     def initialize(config)
-      self.config          = config.clone
+      self.config = config.clone
 
       %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
-      self.source          = File.expand_path(config['source'])
-      self.dest            = File.expand_path(config['destination'])
-      self.plugins         = plugins_path
+      self.source = File.expand_path(config['source'])
+      self.dest = File.expand_path(config['destination'])
+      self.plugins = plugins_path
       self.permalink_style = config['permalink'].to_sym
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
-      self.reset
-      self.setup
+      reset
+      setup
     end
 
     # Public: Read, process, and write this Site to output.
     #
     # Returns nothing.
     def process
-      self.reset
-      self.read
-      self.generate
-      self.render
-      self.cleanup
-      self.write
+      reset
+      read
+      generate
+      render
+      cleanup
+      write
     end
 
     # Reset Site details.
     #
     # Returns nothing
     def reset
-      self.time            = if self.config['time']
-                               Time.parse(self.config['time'].to_s)
-                             else
-                               Time.now
-                             end
-      self.layouts         = {}
-      self.posts           = []
-      self.pages           = []
-      self.static_files    = []
-      self.categories      = Hash.new { |hash, key| hash[key] = [] }
-      self.tags            = Hash.new { |hash, key| hash[key] = [] }
-      self.data            = {}
+      self.time = (config['time'] ? Time.parse(config['time'].to_s) : Time.now)
+      self.layouts = {}
+      self.posts = []
+      self.pages = []
+      self.static_files = []
+      self.categories = Hash.new { |hash, key| hash[key] = [] }
+      self.tags = Hash.new { |hash, key| hash[key] = [] }
+      self.data = {}
 
-      if self.limit_posts < 0
+      if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
       end
     end
@@ -71,11 +67,11 @@ module Jekyll
 
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
-      unless self.safe
-        self.plugins.each do |plugins|
-            Dir[File.join(plugins, "**/*.rb")].sort.each do |f|
-              require f
-            end
+      unless safe
+        plugins.each do |plugins|
+          Dir[File.join(plugins, "**/*.rb")].sort.each do |f|
+            require f
+          end
         end
       end
 
@@ -88,16 +84,16 @@ module Jekyll
     # Check that the destination dir isn't the source dir or a directory
     # parent to the source dir.
     def ensure_not_in_dest
-      dest = Pathname.new(self.dest)
-      Pathname.new(self.source).ascend do |path|
-        if path == dest
+      dest_pathname = Pathname.new(dest)
+      Pathname.new(source).ascend do |path|
+        if path == dest_pathname
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
         end
       end
     end
 
     def require_gems
-      self.gems.each do |gem|
+      gems.each do |gem|
         if plugin_allowed?(gem)
           require gem
         end
@@ -105,11 +101,11 @@ module Jekyll
     end
 
     def plugin_allowed?(gem_name)
-      whitelist.include?(gem_name) || !self.safe
+      whitelist.include?(gem_name) || !safe
     end
 
     def whitelist
-      @whitelist ||= Array[self.config['whitelist']].flatten || []
+      @whitelist ||= Array[config['whitelist']].flatten
     end
 
     # Internal: Setup the plugin search path
@@ -117,7 +113,7 @@ module Jekyll
     # Returns an Array of plugin search paths
     def plugins_path
       if (config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [File.join(self.source, config['plugins'])]
+        [File.join(source, config['plugins'])]
       else
         Array(config['plugins']).map { |d| File.expand_path(d) }
       end
@@ -128,8 +124,8 @@ module Jekyll
     # Returns nothing.
     def read
       self.layouts = LayoutReader.new(self).read
-      self.read_directories
-      self.read_data(config['data_source'])
+      read_directories
+      read_data(config['data_source'])
     end
 
     # Recursively traverse directories to find posts, pages and static files
@@ -140,24 +136,24 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      base = File.join(self.source, dir)
+      base = File.join(source, dir)
       entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
 
-      self.read_posts(dir)
-      self.read_drafts(dir) if self.show_drafts
-      self.posts.sort!
+      read_posts(dir)
+      read_drafts(dir) if show_drafts
+      posts.sort!
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
         f_abs = File.join(base, f)
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
-          read_directories(f_rel) unless self.dest.sub(/\/$/, '') == f_abs
+          read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
-          page = Page.new(self, self.source, dir, f)
+          page = Page.new(self, source, dir, f)
           pages << page if page.published?
         else
-          static_files << StaticFile.new(self, self.source, dir, f)
+          static_files << StaticFile.new(self, source, dir, f)
         end
       end
 
@@ -174,7 +170,7 @@ module Jekyll
       posts = read_content(dir, '_posts', Post)
 
       posts.each do |post|
-        if post.published? && (self.future || post.date <= self.time)
+        if post.published? && (future || post.date <= time)
           aggregate_post_info(post)
         end
       end
@@ -196,7 +192,7 @@ module Jekyll
 
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
-        klass.new(self, self.source, dir, entry) if klass.valid?(entry)
+        klass.new(self, source, dir, entry) if klass.valid?(entry)
       end.reject do |entry|
         entry.nil?
       end
@@ -206,15 +202,15 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = File.join(self.source, dir)
-      return unless File.directory?(base) && (!self.safe || !File.symlink?(base))
+      base = File.join(source, dir)
+      return unless File.directory?(base) && (!safe || !File.symlink?(base))
 
       entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
 
       entries.each do |entry|
-        path = File.join(self.source, dir, entry)
-        next if File.symlink?(path) && self.safe
+        path = File.join(source, dir, entry)
+        next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
         self.data[key] = SafeYAML.load_file(path)
@@ -225,7 +221,7 @@ module Jekyll
     #
     # Returns nothing.
     def generate
-      self.generators.each do |generator|
+      generators.each do |generator|
         generator.generate(self)
       end
     end
@@ -237,12 +233,12 @@ module Jekyll
       relative_permalinks_deprecation_method
 
       payload = site_payload
-      [self.posts, self.pages].flatten.each do |page_or_post|
-        page_or_post.render(self.layouts, payload)
+      [posts, pages].flatten.each do |page_or_post|
+        page_or_post.render(layouts, payload)
       end
 
-      self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
-      self.tags.values.map { |ps| ps.sort! { |a, b| b <=> a } }
+      categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
+      tags.values.map { |ps| ps.sort! { |a, b| b <=> a } }
     rescue Errno::ENOENT => e
       # ignore missing layout dir
     end
@@ -258,7 +254,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item| item.write(self.dest) }
+      each_site_file { |item| item.write(dest) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -277,8 +273,8 @@ module Jekyll
     def post_attr_hash(post_attr)
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
-      hash = Hash.new { |hsh, key| hsh[key] = Array.new }
-      self.posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
+      hash = Hash.new { |hash, key| hash[key] = [] }
+      posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
       hash.values.map { |sortme| sortme.sort! { |a, b| b <=> a } }
       hash
     end
@@ -288,7 +284,7 @@ module Jekyll
     #
     # Returns the Hash to be hooked to site.data.
     def site_data
-      self.config['data'] || self.data
+      config['data'] || data
     end
 
     # The Hash payload containing site-wide data.
@@ -306,12 +302,12 @@ module Jekyll
     #                  See Site#post_attr_hash for type info.
     def site_payload
       {"jekyll" => { "version" => Jekyll::VERSION },
-       "site" => self.config.merge({
-          "time"         => self.time,
-          "posts"        => self.posts.sort { |a, b| b <=> a },
-          "pages"        => self.pages,
-          "static_files" => self.static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-          "html_pages"   => self.pages.reject { |page| !page.html? },
+       "site" => config.merge({
+          "time"         => time,
+          "posts"        => posts.sort { |a, b| b <=> a },
+          "pages"        => pages,
+          "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
+          "html_pages"   => pages.reject { |page| !page.html? },
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
           "data"         => site_data})}
@@ -335,7 +331,7 @@ module Jekyll
     #
     # Returns the Converter instance implementing the given Converter.
     def getConverterImpl(klass)
-      matches = self.converters.select { |c| c.class == klass }
+      matches = converters.select { |c| c.class == klass }
       if impl = matches.first
         impl
       else
@@ -352,9 +348,9 @@ module Jekyll
     # Returns array of instances of subclasses of parameter
     def instantiate_subclasses(klass)
       klass.subclasses.select do |c|
-        !self.safe || c.safe
+        !safe || c.safe
       end.sort.map do |c|
-        c.new(self.config)
+        c.new(config)
       end
     end
 
@@ -365,7 +361,7 @@ module Jekyll
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
-      base = File.join(self.source, dir, subfolder)
+      base = File.join(source, dir, subfolder)
       return [] unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
@@ -377,9 +373,9 @@ module Jekyll
     #
     # Returns nothing
     def aggregate_post_info(post)
-      self.posts << post
-      post.categories.each { |c| self.categories[c] << post }
-      post.tags.each { |c| self.tags[c] << post }
+      posts << post
+      post.categories.each { |c| categories[c] << post }
+      post.tags.each { |c| tags[c] << post }
     end
 
     def relative_permalinks_deprecation_method
@@ -396,7 +392,7 @@ module Jekyll
 
     def each_site_file
       %w(posts pages static_files).each do |type|
-        self.send(type).each do |item|
+        send(type).each do |item|
           yield item
         end
       end
@@ -405,7 +401,7 @@ module Jekyll
     private
 
     def has_relative_page?
-      self.pages.any? { |page| page.uses_relative_permalinks }
+      pages.any? { |page| page.uses_relative_permalinks }
     end
 
     def has_yaml_header?(file)
@@ -413,8 +409,8 @@ module Jekyll
     end
 
     def limit_posts!
-      limit = self.posts.length < limit_posts ? self.posts.length : limit_posts
-      self.posts = self.posts[-limit, limit]
+      limit = posts.length < limit_posts ? posts.length : limit_posts
+      self.posts = posts[-limit, limit]
     end
 
     def site_cleaner
@@ -422,9 +418,9 @@ module Jekyll
     end
 
     def sanitize_filename(name)
-      name = name.gsub(/[^\w\s_-]+/, '')
-      name = name.gsub(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
-      name = name.gsub(/\s+/, '_')
+      name.gsub!(/[^\w\s_-]+/, '')
+      name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
+      name.gsub(/\s+/, '_')
     end
   end
 end
