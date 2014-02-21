@@ -45,6 +45,7 @@
   * Make the `layouts` config key relative to CWD or to source (#2058)
   * Update Kramdown to `~> 1.3` (#1894)
   * Remove unnecessary references to `self` (#2090)
+  * Update to Mercenary v0.3.x (#2085)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
