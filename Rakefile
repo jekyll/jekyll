@@ -3,6 +3,7 @@ require 'rake'
 require 'rdoc'
 require 'date'
 require 'yaml'
+require 'html/proofer'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 
@@ -241,6 +242,14 @@ namespace :site do
       end
 
       puts "Created #{filename}"
+    end
+  end
+
+  desc 'Test the site with Proofer'
+  task :test do
+    Dir.chdir('site') do
+      sh 'bundle exec jekyll build --trace'
+      HTML::Proofer.new('./_site').run
     end
   end
 end
