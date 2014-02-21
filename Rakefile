@@ -248,7 +248,9 @@ namespace :site do
   desc 'Test the site with Proofer'
   task :test do
     Dir.chdir('site') do
+      puts 'Building the site...'
       sh 'bundle exec jekyll build --trace'
+      puts 'Proofing the site...'
       HTML::Proofer.new('./_site').run
     end
   end
