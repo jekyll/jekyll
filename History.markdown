@@ -44,6 +44,7 @@
   * Add `index.xml` to the list of WEBrick directory index files (#2041)
   * Make the `layouts` config key relative to CWD or to source (#2058)
   * Update Kramdown to `~> 1.3` (#1894)
+  * Remove unnecessary references to `self` (#2090)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
