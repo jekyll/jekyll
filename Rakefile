@@ -249,7 +249,7 @@ namespace :site do
   task :test do
     Dir.chdir('site') do
       puts 'Building the site...'
-      sh 'bundle exec jekyll build --trace'
+      sh '../bin/jekyll build --trace'
       puts 'Proofing the site...'
       HTML::Proofer.new('./_site').run
     end
