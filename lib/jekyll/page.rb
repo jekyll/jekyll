@@ -135,7 +135,7 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      path = File.join(dest, File.expand_path(url, "/"))
+      path = Jekyll.sanitized_path(dest, url)
       path = File.join(path, "index.html") if url =~ /\/$/
       path
     end
@@ -156,7 +156,7 @@ module Jekyll
     end
 
     def uses_relative_permalinks
-      permalink && @dir != "" && site.config['relative_permalinks']
+      permalink && !@dir.empty? && site.config['relative_permalinks']
     end
   end
 end

@@ -38,13 +38,11 @@ module Jekyll
     end
 
     def layout_directory_inside_source
-      # TODO: Fix for Windows
-      File.join(site.source, File.expand_path(site.config['layouts'], "/"))
+      Jekyll.sanitized_path(site.source, site.config['layouts'])
     end
 
     def layout_directory_in_cwd
-      # TODO: Fix on Windows
-      dir = File.join(Dir.pwd, File.expand_path(site.config['layouts'], '/'))
+      dir = Jekyll.sanitized_path(Dir.pwd, site.config['layouts'])
       if File.directory?(dir)
         dir
       else

@@ -102,4 +102,24 @@ module Jekyll
   def self.logger
     @logger ||= Stevenson.new
   end
+
+  # Public: File system root
+  #
+  # Returns the root of the filesystem as a Pathname
+  def self.fs_root
+    @fs_root ||= traverse_up(Pathname.new(Dir.pwd))
+  end
+
+  def self.sanitized_path(base_directory, questionable_path)
+    clean_path = File.expand_path(questionable_path, fs_root)
+    clean_path.sub(/\A[\w]:\\\\/, '')
+    File.join(base_directory, clean_path)
+  end
+
+  private
+
+  def self.traverse_up(pathname)
+    return pathname if pathname.parent.eql?(pathname)
+    traverse_up(pathname.parent)
+  end
 end
