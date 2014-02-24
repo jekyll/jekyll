@@ -1,5 +1,5 @@
 module Jekyll
-  class Post
+  class Post < Document
     include Comparable
     include Convertible
 
@@ -33,8 +33,7 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site
-    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
+    attr_accessor :extracted_excerpt
     attr_accessor :date, :slug, :tags, :categories
 
     attr_reader :name
@@ -46,20 +45,15 @@ module Jekyll
     # name       - The String filename of the post file.
     #
     # Returns the new Post.
-    def initialize(site, source, dir, name)
-      @site = site
-      @dir = dir
-      @base = containing_dir(source, dir)
-      @name = name
+    def initialize(site, dir, name)
+      super(site, dir, name)
+    end
 
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
-      process(name)
-      read_yaml(@base, name)
-
-      if data.has_key?('date')
-        self.date = Time.parse(data["date"].to_s)
-      end
-
+    def read
+      super
+      @categories        = containing_dir.downcase.split('/').reject { |x| x.empty? }
+      @extracted_excerpt = extract_excerpt
+      @date = Time.parse(data["date"].to_s) if data.has_key?('date')
       populate_categories
       populate_tags
     end
@@ -73,22 +67,6 @@ module Jekyll
 
     def populate_tags
       self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
-    end
-
-    # Get the full path to the directory containing the post files
-    def containing_dir(source, dir)
-      return File.join(source, dir, '_posts')
-    end
-
-    # Read the YAML frontmatter.
-    #
-    # base - The String path to the dir containing the file.
-    # name - The String filename of the file.
-    #
-    # Returns nothing.
-    def read_yaml(base, name)
-      super(base, name)
-      self.extracted_excerpt = extract_excerpt
     end
 
     # The post excerpt. This is either a custom excerpt
@@ -119,11 +97,6 @@ module Jekyll
     # Returns the path to the file relative to the site source
     def path
       data.fetch('path', relative_path.sub(/\A\//, ''))
-    end
-
-    # The path to the post source file, relative to the site source
-    def relative_path
-      File.join(*[@dir, "_posts", @name].map(&:to_s).reject(&:empty?))
     end
 
     # Compares Post objects. First compares the Post date. If the dates are
@@ -157,16 +130,6 @@ module Jekyll
       raise FatalException.new(msg)
     end
 
-    # The generated directory into which the post will be placed
-    # upon generation. This is derived from the permalink or, if
-    # permalink is absent, set to the default date
-    # e.g. "/2008/11/05/" if the permalink style is :date, otherwise nothing.
-    #
-    # Returns the String directory.
-    def dir
-      File.dirname(url)
-    end
-
     # The full path and filename of the post. Defined in the YAML of the post
     # body (optional).
     #
@@ -188,17 +151,6 @@ module Jekyll
       else
         site.permalink_style.to_s
       end
-    end
-
-    # The generated relative url of this post.
-    #
-    # Returns the String url.
-    def url
-      @url ||= URL.new({
-        :template => template,
-        :placeholders => url_placeholders,
-        :permalink => permalink
-      }).to_s
     end
 
     # Returns a hash of URL placeholder names (as symbols) mapping to the

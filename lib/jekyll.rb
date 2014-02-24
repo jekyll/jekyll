@@ -30,9 +30,14 @@ require 'toml'
 
 # internal requires
 require 'jekyll/version'
+
+## utilities
 require 'jekyll/utils'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
+
+## core classes
+require 'jekyll/document'
 require 'jekyll/configuration'
 require 'jekyll/site'
 require 'jekyll/convertible'
@@ -49,7 +54,6 @@ require 'jekyll/related_posts'
 require 'jekyll/cleaner'
 require 'jekyll/entry_filter'
 require 'jekyll/layout_reader'
-require 'jekyll/document'
 require 'jekyll/collection'
 require 'jekyll/collections_reader'
 

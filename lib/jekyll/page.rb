@@ -1,5 +1,5 @@
 module Jekyll
-  class Page
+  class Page < Document
     include Convertible
 
     attr_writer :dir
