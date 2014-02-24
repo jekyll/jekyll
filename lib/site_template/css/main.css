@@ -373,9 +373,7 @@ a:visited { color: #205caa; }
     display: none;
   }
 
-  .site-nav:hover .trigger,
-  .site-nav:active .trigger,
-  .site-nav:focus .trigger, { display: block; }
+  .site-nav:hover .trigger { display: block; }
 
   .site-nav .page-link {
     display: block;
