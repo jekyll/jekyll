@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('liquid', "~> 2.5.5")
   s.add_runtime_dependency('classifier', "~> 1.3")
-  s.add_runtime_dependency('listen', "~> 1.3")
+  s.add_runtime_dependency('listen', "~> 2.5")
   s.add_runtime_dependency('maruku', "0.7.0")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('mercenary', "~> 0.3.1")
