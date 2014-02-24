@@ -130,6 +130,7 @@
   * Add info about unreleased feature to the site (#2061)
   * Add whitespace to liquid example in GitHub Pages docs (#2084)
   * Clarify the way Sass and CoffeeScript files are read in and output (#2067)
+  * Add lyche gallery tag plugin link to list of plugins (#2094)
 
 ## 1.4.3 / 2014-01-13
 
