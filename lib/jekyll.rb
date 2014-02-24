@@ -30,6 +30,7 @@ require 'toml'
 require 'sass'
 
 # internal requires
+require 'jekyll/version'
 require 'jekyll/core_ext'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
@@ -68,8 +69,6 @@ require 'jekyll-coffeescript'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '2.0.0.alpha.1'
-
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
   #
