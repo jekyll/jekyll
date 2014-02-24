@@ -88,6 +88,7 @@
   * Test Sass import (#2009)
   * Switch Maruku and Kramdown in lists of Runtime vs. Development dependencies (#2049)
   * Clean up the gemspec for the project (#2095)
+  * Add Japanese translation of README and CONTRIBUTING docs. (#2081)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
