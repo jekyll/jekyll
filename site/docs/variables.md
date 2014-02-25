@@ -119,6 +119,9 @@ following is a reference of the available data.
         A list of all static files (i.e. files not processed by Jekyll's
         converters or the Liquid renderer). Each file has three properties:
         <code>path</code>, <code>modified_time</code> and <code>extname</code>.
+        <strong>Note: this is only available in <a
+        href="../installation/">the latest development
+        version.</a></strong>
 
       </p></td>
     </tr>
