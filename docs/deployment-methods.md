@@ -86,7 +86,7 @@ this script from within Textmate.
 
 ## Rack-Jekyll
 
-[Rack-Jekyll](https://github.com/adaoraul/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](http://github.com/rtomakyo/shotgun/), [rackup](http://github.com/rack/rack), [mongrel](http://github.com/mongrel/mongrel), [unicorn](http://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
+[Rack-Jekyll](http://github.com/adaoraul/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](http://github.com/rtomakyo/shotgun/), [rackup](http://github.com/rack/rack), [mongrel](http://github.com/mongrel/mongrel), [unicorn](http://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
 
 Read [this post](http://blog.crowdint.com/2010/08/02/instant-blog-using-jekyll-and-heroku.html) on how to deploy to Heroku using Rack-Jekyll.
 
@@ -102,6 +102,11 @@ push your site to Amazon S3 where it can be served like any web server,
 dynamically scaling to almost unlimited traffic. This approach has the
 benefit of being about the cheapest hosting option available for
 low-volume blogs as you only pay for what you use.
+
+## OpenShift
+
+If you'd like to deploy your site to an OpenShift gear, there's [a cartridge
+for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
 
 <div class="note">
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>

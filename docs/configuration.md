@@ -64,7 +64,11 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class='setting'>
       <td>
         <p class='name'><strong>Exclude</strong></p>
-        <p class="description">Exclude directories and/or files from the conversion</p>
+        <p class="description">
+          Exclude directories and/or files from the
+          conversion. These exclusions are relative to the site's
+          source directory and cannot be outside the source directory.
+        </p>
       </td>
       <td class='align-center'>
         <p><code class="option">exclude: [DIR, FILE, ...]</code></p>
@@ -105,10 +109,11 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">
             Set the encoding of files by name. Only available for Ruby
             1.9 or later).
-            The default value is nil, which use Ruby default,
-            <code>ASCII-8BIT</code>.
-            Available encoding for the ruby in use, can be shown by
-            command <code>ruby -e 'puts Encoding::list.join("\n")'</code>
+            The default value is <code>utf-8</code> starting in 2.0.0,
+            and <code>nil</code> before 2.0.0, which will yield the Ruby
+            default of <code>ASCII-8BIT</code>.
+            Available encodings can be shown by the
+            command <code>ruby -e 'puts Encoding::list.join("\n")'</code>.
         </p>
       </td>
       <td class='align-center'>
@@ -288,14 +293,15 @@ encoding:    nil
 future:      true
 show_drafts: nil
 limit_posts: 0
-pygments:    true
+highlighter: pygments
 
 relative_permalinks: true
 
 permalink:     date
 paginate_path: 'page:num'
+paginate:      nil
 
-markdown:      maruku
+markdown:      kramdown
 markdown_ext:  markdown,mkd,mkdn,md
 textile_ext:   textile
 
@@ -344,6 +350,14 @@ redcloth:
   hard_breaks: true
 {% endhighlight %}
 
+<div class="note unreleased">
+  <h5>Kramdown as the default is currently unreleased.</h5>
+  <p>
+    In the latest development releases, we've deprecated Maruku and will default to
+    Kramdown instead of Maruku. All versions below this will use Maruku as the
+    default.
+  </p>
+</div>
 
 ## Markdown Options
 
@@ -363,7 +377,7 @@ Jekyll handles two special Redcarpet extensions:
         # ...ruby code
         ```
 
-    With both fenced code blocks and pygments enabled, this will statically highlight the code; without pygments, it will add a `class="LANGUAGE"` attribute to the `<code>` element, which can be used as a hint by various JavaScript code highlighting libraries.
+    With both fenced code blocks and highlighter enabled, this will statically highlight the code; without any syntax highlighter, it will add a `class="LANGUAGE"` attribute to the `<code>` element, which can be used as a hint by various JavaScript code highlighting libraries.
 - `smart` --- This pseudo-extension turns on SmartyPants, which converts straight quotes to curly quotes and runs of hyphens to em (`---`) and en (`--`) dashes.
 
 All other extensions retain their usual names from Redcarpet, and no renderer options aside from `smart` can be specified in Jekyll. [A list of available extensions can be found in the Redcarpet README file.][redcarpet_extensions] Make sure you're looking at the README for the right version of Redcarpet: Jekyll currently uses v2.2.x, and extensions like `footnotes` and `highlight` weren't added until after version 3.0.0. The most commonly used extensions are:
@@ -373,3 +387,12 @@ All other extensions retain their usual names from Redcarpet, and no renderer op
 - `autolink`
 
 [redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v2.2.2/README.markdown#and-its-like-really-simple-to-use
+
+### Kramdown
+
+In addition to the defaults mentioned above, you can also turn on recognition of Github Flavored Markdown by passing an `input` option with a value of "GFM".
+
+For example, in your `_config.yml`:
+
+    kramdown:
+      input: GFM

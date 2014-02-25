@@ -28,10 +28,13 @@ sudo yum install ruby-devel
 {% endhighlight %}
 
 On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need to run the
-command with the following environment variable:
+following commands before installing Jekyll:
 
 {% highlight bash %}
-RB_USER_INSTALL=true gem install jekyll
+export GEM_HOME=/home/private/gems
+export GEM_PATH=/home/private/gems:/usr/local/lib/ruby/gems/1.8/
+export PATH=$PATH:/home/private/gems/bin
+export RB_USER_INSTALL='true'
 {% endhighlight %}
 
 On OSX, you may need to update RubyGems:
@@ -41,7 +44,7 @@ sudo gem update --system
 {% endhighlight %}
 
 If you still have issues, you may need to [use XCode to install Command Line
-Tools](http://www.zlu.me/blog/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview/)
+Tools](http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html)
 that will allow you to install native gems using the following command:
 
 {% highlight bash %}
@@ -123,8 +126,8 @@ bug](http://aaronqian.com/articles/2009/04/07/redcloth-ate-my-notextile.html)
 and will hopefully be fixed for 4.2. You can still use 4.1.9, but the
 test suite requires that 4.1.0 be installed. If you use a version of
 RedCloth that does not have the notextile tag, you may notice that
-syntax highlighted blocks from Pygments are not formatted correctly,
-among other things. If you’re seeing this just install 4.1.0.
+syntax highlighted blocks from Pygments or Rouge are not formatted
+correctly, among other things. If you’re seeing this just install 4.1.0.
 
 ### Liquid
 

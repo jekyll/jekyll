@@ -1,4 +1,4 @@
-{% assign items = include.items | split: ' ' %}
+{% assign items = include.items %}
 
 <ul>
 {% for item in items %}
@@ -16,5 +16,5 @@
     {% endif %}
   {% endfor %}
 
-{% endfor %}  
+{% endfor %}
 </ul>

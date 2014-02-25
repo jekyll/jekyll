@@ -73,6 +73,7 @@ instances of
 and are available via `site.pages`. Static files become instances of
 [`Jekyll::StaticFile`]({{ site.repository }}/blob/master/lib/jekyll/static_file.rb)
 and are available via `site.static_files`. See
+[the Variables documentation page](../installation/) and
 [`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb)
 for more details.
 
@@ -339,9 +340,9 @@ Liquid::Template.register_filter(Jekyll::AssetFilter)
   <h5>ProTip™: Access the site object using Liquid</h5>
   <p>
     Jekyll lets you access the <code>site</code> object through the
-    <code>context.registers</code> feature of Liquid. For example, you can
+    <code>context.registers</code> feature of Liquid at <code>context.registers[:site]</code>. For example, you can
     access the global configuration file <code>_config.yml</code> using
-    <code>context.registers.config</code>.
+    <code>context.registers[:site].config</code>.
   </p>
 </div>
 
@@ -422,6 +423,8 @@ You can find a few useful plugins at the following locations:
 - [Monthly archive generator by Shigeya Suzuki](https://github.com/shigeya/jekyll-monthly-archive-plugin): Generator and template which renders monthly archive like MovableType style, based on the work by Ilkka Laukkanen and others above.
 - [Category archive generator by Shigeya Suzuki](https://github.com/shigeya/jekyll-category-archive-plugin): Generator and template which renders category archive like MovableType style, based on Monthly archive generator.
 - [Emoji for Jekyll](https://github.com/yihangho/emoji-for-jekyll): Seamlessly enable emoji for all posts and pages.
+- [Compass integration for Jekyll](https://github.com/mscharley/jekyll-compass): Easily integrate Compass and Sass with your Jekyll website.
+- [Pages Directory by Ben Baker-Smith](https://github.com/bbakersmith/jekyll-pages-directory): Defines a `_pages` directory for page files which routes its output relative to the project root.
 
 #### Converters
 
@@ -456,6 +459,7 @@ You can find a few useful plugins at the following locations:
 - [pluralize](https://github.com/bdesham/pluralize): Easily combine a number and a word into a gramatically-correct amount like “1 minute” or “2 minute**s**”.
 - [reading_time](https://github.com/bdesham/reading_time): Count words and estimate reading time for a piece of text, ignoring HTML elements that are unlikely to contain running text.
 - [Table of Content Generator](https://github.com/dafi/jekyll-toc-generator): Generate the HTML code containing a table of content (TOC), the TOC can be customized in many way, for example you can decide which pages can be without TOC.
+- [jekyll-humanize](https://github.com/23maverick23/jekyll-humanize): This is a port of the Django app humanize which adds a "human touch" to data. Each method represents a Fluid type filter that can be used in your Jekyll site templates. Given that Jekyll produces static sites, some of the original methods do not make logical sense to port (e.g. naturaltime).
 
 #### Tags
 
@@ -495,6 +499,8 @@ You can find a few useful plugins at the following locations:
 - [Jekyll Date Chart](https://github.com/GSI/jekyll_date_chart) by [GSI](https://github.com/GSI): Block that renders date line charts based on textile-formatted tables.
 - [Jekyll Image Encode](https://github.com/GSI/jekyll_image_encode) by [GSI](https://github.com/GSI): Tag that renders base64 codes of images fetched from the web.
 - [Jekyll Quick Man](https://github.com/GSI/jekyll_quick_man) by [GSI](https://github.com/GSI): Tag that renders pretty links to man page sources on the internet.
+- [jekyll-font-awesome](https://gist.github.com/23maverick23/8532525): Quickly and easily add Font Awesome icons to your posts.
+- [Lychee Gallery Tag](https://gist.github.com/tobru/9171700) by [tobru](https://github.com/tobru): Include [Lychee](http://lychee.electerious.com/) albums into a post. For an introduction, see [Jekyll meets Lychee - A Liquid Tag plugin](https://tobrunet.ch/articles/jekyll-meets-lychee-a-liquid-tag-plugin/)
 
 #### Collections
 
@@ -523,6 +529,12 @@ You can find a few useful plugins at the following locations:
 - [generator-jekyllrb](https://github.com/robwierzbowski/generator-jekyllrb): A generator that wraps Jekyll in [Yeoman](http://yeoman.io/), a tool collection and workflow for builing modern web apps.
 - [grunt-jekyll](https://github.com/dannygarcia/grunt-jekyll): A straightforward [Grunt](http://gruntjs.com/) plugin for Jekyll.
 - [jekyll-postfiles](https://github.com/indirect/jekyll-postfiles): Add `_postfiles` directory and {% raw %}`{{ postfile }}`{% endraw %} tag so the files a post refers to will always be right there inside your repo.
+
+#### Editors
+
+- [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://sublime.wbond.net/packages/Jekyll).
+- [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate
+  new posts and run `jekyll build` all without leaving vim.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>

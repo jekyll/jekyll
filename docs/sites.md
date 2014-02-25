@@ -11,13 +11,13 @@ with. Below are some Jekyll-powered blogs which were hand-picked for
 learning purposes.
 
 - [Tom Preston-Werner](http://tom.preston-werner.com/)
-    ([source](http://github.com/mojombo/mojombo.github.com))
+    ([source](https://github.com/mojombo/mojombo.github.io))
 - [Nick Quaranto](http://quaran.to/)
     ([source](https://github.com/qrush/qrush.github.com))
 - [Roger Chapman](http://rogchap.com/)
     ([source](https://github.com/rogchap/rogchap.github.com))
-- [GitHub Official Training Materials](http://training.github.com)
-    ([source](https://github.com/github/training-materials))
+- [GitHub Official Teaching Materials](http://teach.github.com)
+    ([source](https://github.com/github/teach.github.com))
 - [Rasmus Andersson](http://rsms.me/)
     ([source](https://github.com/rsms/rsms.github.com))
 - [Scott Chacon](http://schacon.github.com)

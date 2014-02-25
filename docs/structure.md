@@ -113,7 +113,7 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Your dynamic content, so to speak. The format of these files is
+          Your dynamic content, so to speak. The naming convention of these files is
           important, and must follow the format:
           <code>YEAR-MONTH-DAY-title.MARKUP</code>.
           The <a href="../permalinks/">permalinks</a> can be customized for each

@@ -1,4 +1,4 @@
-{% assign items = include.items | split: ' ' %}
+{% assign items = include.items %}
 
 {% for item in items %}
   {% assign item_url = item | prepend:'/docs/' | append:'/' %}

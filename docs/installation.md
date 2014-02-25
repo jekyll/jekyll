@@ -23,10 +23,9 @@ you’ll need to make sure your system has before you start.
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>
   <p>
-    It is possible to get
-    <a href="http://www.madhur.co.in/blog/2011/09/01/runningjekyllwindows.html">
-    Jekyll running on Windows</a>, but the official documentation does not
-    support installation on Windows platforms.
+    While Windows is not officially supported, it is possible to get it running
+    on Windows. Special instructions can be found on our
+    <a href="../windows/#installation">Windows-specific docs page</a>.
   </p>
 </div>
 
@@ -56,6 +55,34 @@ community can improve the experience for everyone.
   </p>
 </div>
 
+## Pre-releases
+
+In order to install a pre-release, make sure you have all the requirements
+installed properly and run:
+
+{% highlight bash %}
+gem install jekyll --pre
+{% endhighlight %}
+
+This will install the latest pre-release. If you want a particular pre-release,
+use the `-v` switch to indicate the version you'd like to install:
+
+{% highlight bash %}
+gem install jekyll -v '2.0.0.alpha.1'
+{% endhighlight %}
+
+If you'd like to install a development version of Jekyll, the process is a bit
+more involved. This gives you the advantage of having the latest and greatest,
+but may be unstable.
+
+{% highlight bash %}
+$ git clone git://github.com/jekyll/jekyll.git
+$ cd jekyll
+$ script/bootstrap
+$ bundle exec rake build
+$ ls pkg/*.gem | head -n 1 | xargs gem install -l
+{% endhighlight %}
+
 ## Optional Extras
 
 There are a number of (optional) extra features that Jekyll supports that you
@@ -67,9 +94,10 @@ Check out [the extras page](../extras/) for more information.
   <h5>ProTip™: Enable Syntax Highlighting</h5>
   <p>
     If you’re the kind of person who is using Jekyll, then chances are you’ll
-    want to enable syntax highlighting using Pygments. You should really
-    <a href="../templates/#code_snippet_highlighting">check out how to do
-    that</a> before you go any further.
+    want to enable syntax highlighting using <a href="http://pygments.org/">Pygments</a>
+    or <a href="https://github.com/jayferd/rouge">Rouge</a>. You should really
+    <a href="../templates/#code_snippet_highlighting">check out how to
+    do that</a> before you go any farther.
   </p>
 </div>
 

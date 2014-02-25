@@ -68,3 +68,5 @@
 .highlight .vg { color: #98fb98} /* Name.Variable.Global */
 .highlight .vi { color: #98fb98} /* Name.Variable.Instance */
 .highlight .il { color: #ffffff} /* Literal.Number.Integer.Long */
+
+.highlight .bash .nv {-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; }

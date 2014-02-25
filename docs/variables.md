@@ -113,6 +113,19 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
+      <td><p><code>site.static_files</code></p></td>
+      <td><p>
+
+        A list of all static files (i.e. files not processed by Jekyll's
+        converters or the Liquid renderer). Each file has three properties:
+        <code>path</code>, <code>modified_time</code> and <code>extname</code>.
+        <strong>Note: this is only available in <a
+        href="../installation/">the latest development
+        version.</a></strong>
+
+      </p></td>
+    </tr>
+    <tr>
       <td><p><code>site.categories.CATEGORY</code></p></td>
       <td><p>
 
@@ -241,6 +254,24 @@ following is a reference of the available data.
         The path to the raw post or page. Example usage: Linking back to the
         page or post’s source on GitHub. This can be overridden in the
         <a href="../frontmatter/">YAML Front Matter</a>.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.next</code></p></td>
+      <td><p>
+
+        The next post relative to the position of the current post in 
+        <code>site.posts</code>. Returns <code>nil</code> for the last entry.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.previous</code></p></td>
+      <td><p>
+
+        The previous post relative to the position of the current post in 
+        <code>site.posts</code>. Returns <code>nil</code> for the first entry.
 
       </p></td>
     </tr>
