@@ -38,8 +38,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 3.1")
   s.add_runtime_dependency('toml', '~> 0.1.0')
-  s.add_runtime_dependency('sass', '~> 3.2')
   s.add_runtime_dependency('jekyll-coffeescript', '~> 1.0')
+  s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0.0.alpha.1')
 
   s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")

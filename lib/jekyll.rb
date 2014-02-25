@@ -27,7 +27,6 @@ require 'liquid'
 require 'maruku'
 require 'colorator'
 require 'toml'
-require 'sass'
 
 # internal requires
 require 'jekyll/version'
