@@ -110,7 +110,7 @@ module Jekyll
       separator     = site.config['excerpt_separator']
       head, _, tail = post_content.partition(separator)
 
-      "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
+      "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n") unless tail.empty?
     end
   end
 end

@@ -13,9 +13,7 @@ class TestExcerpt < Test::Unit::TestCase
   context "With extraction disabled" do
     setup do
       clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'excerpt_separator' => nil})
-      end
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
       @site = Site.new(Jekyll.configuration)
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
     end
@@ -117,6 +115,22 @@ class TestExcerpt < Test::Unit::TestCase
           assert @extracted_excerpt.content.include?("http://www.jekyllrb.com/")
         end
       end
+    end
+  end
+
+  context "No matching excerpt" do
+    setup do
+      clear_dest
+      stub(Jekyll).configuration  do
+        Jekyll::Configuration::DEFAULTS.merge({'excerpt_separator' => "this excerpt separator does not exist"})
+      end
+      @site = Site.new(Jekyll.configuration)
+      @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
+      @excerpt = @post.send :extract_excerpt
+    end
+
+    should "have a nil output" do
+      assert_nil @excerpt.content
     end
   end
 end
