@@ -135,6 +135,7 @@
   * Clarify the way Sass and CoffeeScript files are read in and output (#2067)
   * Add lyche gallery tag plugin link to list of plugins (#2094)
   * Add Jekyll Pages Directory plugin to list of plugins (#2096)
+  * Update Configuration docs page with new markdown extension (#2102)
 
 ## 1.4.3 / 2014-01-13
 
