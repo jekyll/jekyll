@@ -302,7 +302,7 @@ paginate_path: 'page:num'
 paginate:      nil
 
 markdown:      kramdown
-markdown_ext:  markdown,mkd,mkdn,md
+markdown_ext:  markdown,mkdown,mkdn,mkd,md
 textile_ext:   textile
 
 excerpt_separator: "\n\n"
