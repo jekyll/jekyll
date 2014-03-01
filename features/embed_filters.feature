@@ -7,7 +7,7 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout  | content                                     |
+      | title     | date       | layout  | content                                     |
       | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
     And I have a default layout that contains "{{ site.time | date_to_xmlschema }}"
     When I run jekyll
@@ -18,8 +18,9 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title       | date      | layout  | content                                     |
-      | Star & Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
+      | title | date | layout     | content |
+      | Star  & Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
+
     And I have a default layout that contains "{{ page.title | xml_escape }}"
     When I run jekyll
     Then the _site directory should exist
@@ -29,7 +30,7 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout  | content                                     |
+      | title     | date       | layout  | content                                     |
       | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
     And I have a default layout that contains "{{ content | xml_escape }}"
     When I run jekyll
@@ -40,7 +41,7 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout  | tags                   | content                                     |
+      | title     | date       | layout  | tags                   | content                                     |
       | Star Wars | 2009-03-27 | default | [scifi, movies, force] | These aren't the droids you're looking for. |
     And I have a default layout that contains "{{ page.tags | array_to_sentence_string }}"
     When I run jekyll
@@ -51,7 +52,7 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout  | content                                      |
+      | title     | date       | layout  | content                                     |
       | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
     And I have a default layout that contains "By {{ '_Obi-wan_' | textilize }}"
     When I run jekyll

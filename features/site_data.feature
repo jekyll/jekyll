@@ -17,9 +17,9 @@ Feature: Site data
     And I should see "Source path: <path>" in "_site/<path>"
 
     Examples:
-      | dir | path |
-      | .   | index.html |
-      | dir | dir/about.html |
+      | dir        | path                 |
+      | .          | index.html           |
+      | dir        | dir/about.html       |
       | dir/nested | dir/nested/page.html |
 
   Scenario: Override page.path
@@ -38,10 +38,10 @@ Feature: Site data
     Given I have a _posts directory
     And I have an "index.html" page that contains "{{ site.posts.first.title }}: {{ site.posts.first.url }}"
     And I have the following posts:
-      | title       | date      | content         |
-      | First Post  | 2009-03-25 | My First Post   |
-      | Second Post | 2009-03-26 | My Second Post  |
-      | Third Post  | 2009-03-27 | My Third Post   |
+      | title       | date       | content        |
+      | First Post  | 2009-03-25 | My First Post  |
+      | Second Post | 2009-03-26 | My Second Post |
+      | Third Post  | 2009-03-27 | My Third Post  |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Third Post: /2009/03/27/third-post.html" in "_site/index.html"
@@ -50,10 +50,10 @@ Feature: Site data
     Given I have a _posts directory
     And I have an "index.html" page that contains "{% for post in site.posts %} {{ post.title }} {% endfor %}"
     And I have the following posts:
-      | title       | date      | content         |
-      | First Post  | 2009-03-25 | My First Post   |
-      | Second Post | 2009-03-26 | My Second Post  |
-      | Third Post  | 2009-03-27 | My Third Post   |
+      | title       | date       | content        |
+      | First Post  | 2009-03-25 | My First Post  |
+      | Second Post | 2009-03-26 | My Second Post |
+      | Third Post  | 2009-03-27 | My Third Post  |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Third Post  Second Post  First Post" in "_site/index.html"
@@ -62,7 +62,7 @@ Feature: Site data
     Given I have a _posts directory
     And I have an "index.html" page that contains "{% for post in site.categories.code %} {{ post.title }} {% endfor %}"
     And I have the following posts:
-      | title          | date      | category | content            |
+      | title          | date       | category | content            |
       | Awesome Hack   | 2009-03-26 | code     | puts 'Hello World' |
       | Delicious Beer | 2009-03-26 | food     | 1) Yuengling       |
     When I run jekyll
@@ -73,8 +73,8 @@ Feature: Site data
     Given I have a _posts directory
     And I have an "index.html" page that contains "{% for post in site.tags.beer %} {{ post.content }} {% endfor %}"
     And I have the following posts:
-      | title          | date      | tag  | content            |
-      | Delicious Beer | 2009-03-26 | beer | 1) Yuengling       |
+      | title          | date       | tag  | content      |
+      | Delicious Beer | 2009-03-26 | beer | 1) Yuengling |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Yuengling" in "_site/index.html"
@@ -83,7 +83,7 @@ Feature: Site data
   Given I have a _posts directory
   And I have an "index.html" page that contains "{% for post in site.posts %}{{ post.title }}:{{ post.previous.title}},{{ post.next.title}} {% endfor %}"
   And I have the following posts:
-    | title | date      | content |
+    | title | date       | content |
     | first | 2009-02-26 | first   |
     | A     | 2009-03-26 | A       |
     | B     | 2009-03-26 | B       |

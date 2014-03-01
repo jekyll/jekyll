@@ -7,7 +7,7 @@ Feature: Draft Posts
     Given I have a configuration file with "permalink" set to "none"
     And I have a _drafts directory
     And I have the following draft:
-      | title  | date      | layout  | content        |
+      | title  | date       | layout  | content        |
       | Recipe | 2009-03-27 | default | Not baked yet. |
     When I run jekyll with drafts
     Then the _site directory should exist
@@ -18,7 +18,7 @@ Feature: Draft Posts
     And I have an "index.html" page that contains "Totally index"
     And I have a _drafts directory
     And I have the following draft:
-      | title  | date      | layout  | content        |
+      | title  | date       | layout  | content        |
       | Recipe | 2009-03-27 | default | Not baked yet. |
     When I run jekyll
     Then the _site directory should exist
@@ -28,7 +28,7 @@ Feature: Draft Posts
     Given I have a configuration file with "permalink" set to "none"
     And I have a _drafts directory
     And I have the following draft:
-      | title  | date      | layout  | content        |
+      | title  | date       | layout | content                    |
       | Recipe | 2009-03-27 | simple | Post path: {{ page.path }} |
     When I run jekyll with drafts
     Then the _site directory should exist
