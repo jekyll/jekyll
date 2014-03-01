@@ -106,19 +106,16 @@ module Jekyll
   #
   # Returns the root of the filesystem as a Pathname
   def self.fs_root
-    @fs_root ||= traverse_up(Pathname.new(Dir.pwd))
+    @fs_root ||= "/"
   end
 
   def self.sanitized_path(base_directory, questionable_path)
     clean_path = File.expand_path(questionable_path, fs_root)
-    clean_path.sub(/\A[\w]:\\\\/, '')
-    File.join(base_directory, clean_path)
-  end
-
-  private
-
-  def self.traverse_up(pathname)
-    return pathname if pathname.parent.eql?(pathname)
-    traverse_up(pathname.parent)
+    clean_path.gsub!(/\/\w\:\//, '/')
+    unless clean_path.start_with?(base_directory)
+      File.join(base_directory, clean_path)
+    else
+      clean_path
+    end
   end
 end
