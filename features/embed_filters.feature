@@ -18,8 +18,9 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title | date | layout     | content |
-      | Star  & Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
+      | title       | date       | layout  | content                                     |
+      | Star & Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
+
 
     And I have a default layout that contains "{{ page.title | xml_escape }}"
     When I run jekyll
