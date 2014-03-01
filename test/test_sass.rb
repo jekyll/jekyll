@@ -9,7 +9,7 @@ class TestSass < Test::Unit::TestCase
   end
 
   def converter(overrides = {})
-    Jekyll::Sass.new(site_configuration({"sass" => overrides}))
+    Jekyll::Converters::Sass.new(site_configuration({"sass" => overrides}))
   end
 
   def sass_content
