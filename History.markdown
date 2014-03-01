@@ -48,6 +48,7 @@
   * Update Kramdown to `~> 1.3` (#1894)
   * Remove unnecessary references to `self` (#2090)
   * Update to Mercenary v0.3.x (#2085)
+  * Ship Sass support as a separate gem (#2098)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
