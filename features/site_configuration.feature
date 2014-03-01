@@ -116,9 +116,9 @@ Feature: Site configuration
       | future      | false        |
     And I have a _posts directory
     And I have the following posts:
-      | title     | date       | layout  | content                                |
-      | entry1    | 2007-12-31 | post    | content for entry1.                    |
-      | entry2    | 2020-01-31 | post    | content for entry2.                    |
+      | title  | date       | layout | content             |
+      | entry1 | 2007-12-31 | post   | content for entry1. |
+      | entry2 | 2020-01-31 | post   | content for entry2. |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Page Layout: 1 on 2010-01-01" in "_site/index.html"
@@ -136,9 +136,9 @@ Feature: Site configuration
       | future      | true         |
     And I have a _posts directory
     And I have the following posts:
-      | title     | date       | layout  | content                                |
-      | entry1    | 2007-12-31 | post    | content for entry1.                    |
-      | entry2    | 2020-01-31 | post    | content for entry2.                    |
+      | title  | date       | layout | content             |
+      | entry1 | 2007-12-31 | post   | content for entry1. |
+      | entry2 | 2020-01-31 | post   | content for entry2. |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Page Layout: 2 on 2010-01-01" in "_site/index.html"
@@ -191,10 +191,10 @@ Feature: Site configuration
       | key         | value       |
       | limit_posts | 2           |
     And I have the following posts:
-      | title   | date      | content          |
-      | Apples  | 2009-03-27 | An article about apples |
-      | Oranges | 2009-04-01  | An article about oranges |
-      | Bananas | 2009-04-05  | An article about bananas |
+      | title   | date       | content                  |
+      | Apples  | 2009-03-27 | An article about apples  |
+      | Oranges | 2009-04-01 | An article about oranges |
+      | Bananas | 2009-04-05 | An article about bananas |
     When I run jekyll
     Then the _site directory should exist
     And the "_site/2009/04/05/bananas.html" file should exist
@@ -225,9 +225,9 @@ Feature: Site configuration
       | layouts     | _theme       |
     And I have a _posts directory
     And I have the following posts:
-      | title     | date       | layout  | content                                |
-      | entry1    | 2007-12-31 | post    | content for entry1.                    |
-      | entry2    | 2020-01-31 | post    | content for entry2.                    |
+      | title  | date       | layout | content             |
+      | entry1 | 2007-12-31 | post   | content for entry1. |
+      | entry2 | 2020-01-31 | post   | content for entry2. |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Page Layout: 2 on 2010-01-01" in "_site/index.html"
@@ -245,9 +245,9 @@ Feature: Site configuration
   Scenario: Add an empty whitelist to restrict all gems
     Given I have an "index.html" file that contains "Whatever"
     And I have a configuration file with:
-      | key       | value |
+      | key       | value                |
       | gems      | [jekyll_test_plugin] |
-      | whitelist | [] |
+      | whitelist | []                   |
     When I run jekyll in safe mode
     Then the _site directory should exist
     And I should see "Whatever" in "_site/index.html"
@@ -256,9 +256,9 @@ Feature: Site configuration
   Scenario: Add a whitelist to restrict some gems but allow others
     Given I have an "index.html" file that contains "Whatever"
     And I have a configuration file with:
-      | key       | value |
+      | key       | value                                              |
       | gems      | [jekyll_test_plugin, jekyll_test_plugin_malicious] |
-      | whitelist | [jekyll_test_plugin] |
+      | whitelist | [jekyll_test_plugin]                               |
     When I run jekyll in safe mode
     Then the _site directory should exist
     And I should see "Whatever" in "_site/index.html"
