@@ -27,7 +27,6 @@ require 'liquid'
 require 'maruku'
 require 'colorator'
 require 'toml'
-require 'sass'
 
 # internal requires
 require 'jekyll/version'
@@ -65,6 +64,7 @@ require_all 'jekyll/tags'
 
 # plugins
 require 'jekyll-coffeescript'
+require 'jekyll-sass-converter'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
