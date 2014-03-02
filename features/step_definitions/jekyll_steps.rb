@@ -177,6 +177,10 @@ Then /^I should see exactly "(.*)" in "(.*)"$/ do |text, file|
   assert_equal text, file_contents(file).strip
 end
 
+Then /^I should see nothing in "(.*)"$/ do |file|
+  assert_equal '', file_contents(file).strip
+end
+
 Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
   assert_no_match Regexp.new(text), file_contents(file)
 end

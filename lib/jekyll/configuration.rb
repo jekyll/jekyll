@@ -42,7 +42,7 @@ module Jekyll
       'port'          => '4000',
       'host'          => '0.0.0.0',
 
-      'excerpt_separator' => "\n\n",
+      'excerpt_separator' => nil,
 
       'maruku' => {
         'use_tex'    => false,
