@@ -107,7 +107,7 @@ module Jekyll
       further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
         [attribute, send(attribute)]
       }]
-      Utils.hash_deep_merge(data, further_data)
+      Utils.deep_merge_hashes(data, further_data)
     end
 
     # Recursively render layouts
@@ -123,7 +123,7 @@ module Jekyll
       used = Set.new([layout])
 
       while layout
-        payload = Utils.hash_deep_merge(payload, {"content" => output, "page" => layout.data})
+        payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
 
         self.output = render_liquid(layout.content,
                                          payload,

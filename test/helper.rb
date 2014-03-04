@@ -29,7 +29,7 @@ class Test::Unit::TestCase
   include RR::Adapters::TestUnit
 
   def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)
-    Utils.hash_deep_merge(base_hash, overrides)
+    Utils.deep_merge_hashes(base_hash, overrides)
   end
 
   def site_configuration(overrides = {})

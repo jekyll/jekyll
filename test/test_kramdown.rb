@@ -35,7 +35,7 @@ class TestKramdown < Test::Unit::TestCase
       assert_match /<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>/, @markdown.convert(%{"Pit'hy"}).strip
 
       override = { 'kramdown' => { 'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo' } }
-      markdown = Converters::Markdown.new(Utils.hash_deep_merge(@config, override))
+      markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
       assert_match /<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)<\/p>/, markdown.convert(%{"Pit'hy"}).strip
     end
 

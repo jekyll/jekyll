@@ -66,13 +66,13 @@ module Jekyll
 
     def populate_categories
       if categories.empty?
-        self.categories = Utils.hash_pluralized_array(data, 'category', 'categories').map {|c| c.to_s.downcase}
+        self.categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
       end
       categories.flatten!
     end
 
     def populate_tags
-      self.tags = Utils.hash_pluralized_array(data, "tag", "tags").flatten
+      self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
     end
 
     # Get the full path to the directory containing the post files
@@ -241,7 +241,7 @@ module Jekyll
     # Returns nothing.
     def render(layouts, site_payload)
       # construct payload
-      payload = Utils.hash_deep_merge({
+      payload = Utils.deep_merge_hashes({
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
         "page" => to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
       }, site_payload)
