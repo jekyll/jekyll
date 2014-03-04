@@ -28,6 +28,17 @@ STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 class Test::Unit::TestCase
   include RR::Adapters::TestUnit
 
+  def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)
+    Utils.hash_deep_merge(base_hash, overrides)
+  end
+
+  def site_configuration(overrides = {})
+    build_configs({
+      "source"      => source_dir,
+      "destination" => dest_dir
+    }, build_configs(overrides))
+  end
+
   def dest_dir(*subdirs)
     test_dir('dest', *subdirs)
   end

@@ -3,12 +3,14 @@ require 'helper'
 class TestPager < Test::Unit::TestCase
 
   def build_site(config = {})
-    base = Jekyll::Configuration::DEFAULTS.deep_merge({
+    base = build_configs({
       'source'      => source_dir,
       'destination' => dest_dir,
       'paginate'    => 1
     })
-    site = Jekyll::Site.new(base.deep_merge(config))
+    site = Jekyll::Site.new(site_configuration(
+      {"paginate" => 1}.merge(config)
+    ))
     site.process
     site
   end

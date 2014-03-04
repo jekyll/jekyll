@@ -30,7 +30,7 @@ require 'toml'
 
 # internal requires
 require 'jekyll/version'
-require 'jekyll/core_ext'
+require 'jekyll/utils'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
 require 'jekyll/configuration'
@@ -83,7 +83,9 @@ module Jekyll
     config = config.read_config_files(config.config_files(override))
 
     # Merge DEFAULTS < _config.yml < override
-    config = config.deep_merge(override).stringify_keys
+    config = Utils.hash_stringify_keys(
+      Utils.hash_deep_merge(config, override)
+    )
     set_timezone(config['timezone']) if config['timezone']
 
     config
