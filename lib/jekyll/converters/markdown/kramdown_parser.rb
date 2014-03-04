@@ -20,7 +20,7 @@ module Jekyll
             end
           end
 
-          Kramdown::Document.new(content, @config["kramdown"].symbolize_keys).to_html
+          Kramdown::Document.new(content, Utils.symbolize_hash_keys(@config["kramdown"])).to_html
         end
 
       end

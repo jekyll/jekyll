@@ -159,7 +159,7 @@ module Jekyll
       begin
         files.each do |config_file|
           new_config = read_config_file(config_file)
-          configuration = configuration.deep_merge(new_config)
+          configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
       rescue ArgumentError => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " +
@@ -229,7 +229,7 @@ module Jekyll
           config[option] = csv_to_array(config[option])
         end
       end
-      
+
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
         Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
           "Markdown processor. Maruku support has been deprecated and will " +
