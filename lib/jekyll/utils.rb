@@ -16,7 +16,7 @@ module Jekyll
 
         other_hash.keys.each do |key|
           if other_hash[key].is_a? Hash and target[key].is_a? Hash
-            target[key] = Utils.hash_deep_merge(target[key], other_hash[key])
+            target[key] = Utils.deep_merge_hashes(target[key], other_hash[key])
             next
           end
 

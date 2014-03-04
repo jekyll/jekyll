@@ -109,7 +109,7 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-      payload = Utils.hash_deep_merge({
+      payload = Utils.deep_merge_hashes({
         "page" => to_liquid,
         'paginator' => pager.to_liquid
       }, site_payload)

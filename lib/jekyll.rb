@@ -83,9 +83,7 @@ module Jekyll
     config = config.read_config_files(config.config_files(override))
 
     # Merge DEFAULTS < _config.yml < override
-    config = Utils.hash_stringify_keys(
-      Utils.hash_deep_merge(config, override)
-    )
+    config = Utils.deep_merge_hashes(config, override).stringify_keys
     set_timezone(config['timezone']) if config['timezone']
 
     config

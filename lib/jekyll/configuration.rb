@@ -159,7 +159,7 @@ module Jekyll
       begin
         files.each do |config_file|
           new_config = read_config_file(config_file)
-          configuration = Utils.hash_deep_merge(configuration, new_config)
+          configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
       rescue ArgumentError => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " +
