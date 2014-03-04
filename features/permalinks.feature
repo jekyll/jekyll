@@ -6,7 +6,7 @@ Feature: Fancy permalinks
   Scenario: Use none permalink schema
     Given I have a _posts directory
     And I have the following post:
-      | title                 | date      | content          |
+      | title                 | date       | content          |
       | None Permalink Schema | 2009-03-27 | Totally nothing. |
     And I have a configuration file with "permalink" set to "none"
     When I run jekyll
@@ -16,7 +16,7 @@ Feature: Fancy permalinks
   Scenario: Use pretty permalink schema
     Given I have a _posts directory
     And I have the following post:
-      | title                   | date      | content            |
+      | title                   | date       | content            |
       | Pretty Permalink Schema | 2009-03-27 | Totally wordpress. |
     And I have a configuration file with "permalink" set to "pretty"
     When I run jekyll
@@ -37,7 +37,7 @@ Feature: Fancy permalinks
   Scenario: Use custom permalink schema with prefix
     Given I have a _posts directory
     And I have the following post:
-      | title                   | category | date      | content         |
+      | title                   | category | date       | content         |
       | Custom Permalink Schema | stuff    | 2009-03-27 | Totally custom. |
     And I have a configuration file with "permalink" set to "/blog/:year/:month/:day/:title"
     When I run jekyll
@@ -47,7 +47,7 @@ Feature: Fancy permalinks
   Scenario: Use custom permalink schema with category
     Given I have a _posts directory
     And I have the following post:
-      | title                   | category | date      | content         |
+      | title                   | category | date       | content         |
       | Custom Permalink Schema | stuff    | 2009-03-27 | Totally custom. |
     And I have a configuration file with "permalink" set to "/:categories/:title.html"
     When I run jekyll
@@ -57,7 +57,7 @@ Feature: Fancy permalinks
   Scenario: Use custom permalink schema with squished date
     Given I have a _posts directory
     And I have the following post:
-      | title                   | category | date      | content         |
+      | title                   | category | date       | content         |
       | Custom Permalink Schema | stuff    | 2009-03-27 | Totally custom. |
     And I have a configuration file with "permalink" set to "/:month-:day-:year/:title.html"
     When I run jekyll
@@ -67,7 +67,7 @@ Feature: Fancy permalinks
   Scenario: Use per-post permalink
     Given I have a _posts directory
     And I have the following post:
-      | title     | date      | permalink       | content |
+      | title     | date       | permalink       | content |
       | Some post | 2013-04-14 | /custom/posts/1 | bla bla |
     When I run jekyll
     Then the _site directory should exist
@@ -77,7 +77,7 @@ Feature: Fancy permalinks
   Scenario: Use per-post ending in .html
     Given I have a _posts directory
     And I have the following post:
-      | title     | date      | permalink               | content |
+      | title     | date       | permalink               | content |
       | Some post | 2013-04-14 | /custom/posts/some.html | bla bla |
     When I run jekyll
     Then the _site directory should exist

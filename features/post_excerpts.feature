@@ -9,8 +9,8 @@ Feature: Post excerpts
     Given I have an "index.html" page that contains "{% for post in site.posts %}{{ post.excerpt }}{% endfor %}"
     And I have a _posts directory
     And I have the following posts:
-      | title     | date       | layout  | content                                |
-      | entry1    | 2007-12-31 | post    | content for entry1.                    |
+      | title  | date       | layout | content             |
+      | entry1 | 2007-12-31 | post   | content for entry1. |
     When I run jekyll
     Then the _site directory should exist
     And I should see exactly "<p>content for entry1.</p>" in "_site/index.html"
@@ -21,8 +21,8 @@ Feature: Post excerpts
     And I have a _layouts directory
     And I have a post layout that contains "{{ page.excerpt }}"
     And I have the following posts:
-      | title     | date       | layout  | content                                |
-      | entry1    | 2007-12-31 | post    | content for entry1.                    |
+      | title  | date       | layout | content             |
+      | entry1 | 2007-12-31 | post   | content for entry1. |
     When I run jekyll
     Then the _site directory should exist
     And the _site/2007 directory should exist
@@ -38,8 +38,8 @@ Feature: Post excerpts
     And I have a _layouts directory
     And I have a post layout that contains "<html><head></head><body>{{ page.excerpt }}</body></html>"
     And I have the following posts:
-      | title     | date       | layout  | content                                |
-      | entry1    | 2007-12-31 | post    | content for entry1.                    |
+      | title  | date       | layout | content             |
+      | entry1 | 2007-12-31 | post   | content for entry1. |
     When I run jekyll
     Then the _site directory should exist
     And the _site/2007 directory should exist

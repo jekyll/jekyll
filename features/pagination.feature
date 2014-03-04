@@ -9,7 +9,7 @@ Feature: Site pagination
     And I have an "index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
     And I have the following posts:
-      | title     | date      | layout  | content                                |
+      | title     | date       | layout  | content                                |
       | Wargames  | 2009-03-27 | default | The only winning move is not to play.  |
       | Wargames2 | 2009-04-27 | default | The only winning move is not to play2. |
       | Wargames3 | 2009-05-27 | default | The only winning move is not to play3. |
@@ -36,7 +36,7 @@ Feature: Site pagination
     And I have an "blog/index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
     And I have the following posts:
-      | title     | date      | layout  | content                                |
+      | title     | date       | layout  | content                                |
       | Wargames  | 2009-03-27 | default | The only winning move is not to play.  |
       | Wargames2 | 2009-04-27 | default | The only winning move is not to play2. |
       | Wargames3 | 2009-05-27 | default | The only winning move is not to play3. |

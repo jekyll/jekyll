@@ -19,7 +19,7 @@ Feature: Create sites
   Scenario: Basic site with a post
     Given I have a _posts directory
     And I have the following post:
-      | title   | date      | content          |
+      | title   | date       | content          |
       | Hackers | 2009-03-27 | My First Exploit |
     When I run jekyll
     Then the _site directory should exist
@@ -37,7 +37,7 @@ Feature: Create sites
     Given I have a _layouts directory
     And I have a _posts directory
     And I have the following posts:
-      | title    | date      | layout  | content                               |
+      | title    | date       | layout  | content                               |
       | Wargames | 2009-03-27 | default | The only winning move is not to play. |
     And I have a default layout that contains "Post Layout: {{ content }}"
     When I run jekyll
@@ -48,7 +48,7 @@ Feature: Create sites
     Given I have a _layouts directory
     And I have a _posts directory
     And I have the following posts:
-      | title    | date      | layout  | content                               |
+      | title    | date       | layout      | content                               |
       | Wargames | 2009-03-27 | post/simple | The only winning move is not to play. |
     And I have a post/simple layout that contains "Post Layout: {{ content }}"
     When I run jekyll
@@ -66,14 +66,14 @@ Feature: Create sites
     And I have an "another_file" file that contains ""
     And I have a _posts directory
     And I have the following posts:
-      | title     | date      | layout  | content                                |
-      | entry1    | 2009-03-27 | post    | content for entry1.                    |
-      | entry2    | 2009-04-27 | post    | content for entry2.                    |
+      | title  | date       | layout | content             |
+      | entry1 | 2009-03-27 | post   | content for entry1. |
+      | entry2 | 2009-04-27 | post   | content for entry2. |
     And I have a category/_posts directory
     And I have the following posts in "category":
-      | title     | date      | layout  | content                                |
-      | entry3    | 2009-05-27 | post    | content for entry3.                    |
-      | entry4    | 2009-06-27 | post    | content for entry4.                    |
+      | title  | date       | layout | content             |
+      | entry3 | 2009-05-27 | post   | content for entry3. |
+      | entry4 | 2009-06-27 | post   | content for entry4. |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Page : Site contains 2 pages and 4 posts" in "_site/index.html"
@@ -116,9 +116,9 @@ Feature: Create sites
     And I have a configuration file with "permalink" set to "pretty"
     And I have a _posts directory
     And I have the following posts:
-      | title     | date       | layout  | content                                |
-      | entry1    | 2007-12-31 | post    | content for entry1.                    |
-      | entry2    | 2020-01-31 | post    | content for entry2.                    |
+      | title  | date       | layout | content             |
+      | entry1 | 2007-12-31 | post   | content for entry1. |
+      | entry2 | 2020-01-31 | post   | content for entry2. |
     When I run jekyll
     Then the _site directory should exist
     And I should see "URL: /2020/01/31/entry2/" in "_site/index.html"
