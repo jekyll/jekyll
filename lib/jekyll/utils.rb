@@ -11,7 +11,7 @@ module Jekyll
       # http://gemjack.com/gems/tartan-0.1.1/classes/Hash.html
       #
       # Thanks to whoever made it.
-      def hash_deep_merge(master_hash, other_hash)
+      def deep_merge_hashes(master_hash, other_hash)
         target = master_hash.dup
 
         other_hash.keys.each do |key|
@@ -34,7 +34,7 @@ module Jekyll
       # plural_key - the plural key
       #
       # Returns an array
-      def hash_pluralized_array(hash, singular_key, plural_key)
+      def pluralized_array_from_hash(hash, singular_key, plural_key)
         if hash.has_key?(singular_key)
           array = [hash[singular_key]] if hash[singular_key]
         elsif hash.has_key?(plural_key)
@@ -53,10 +53,23 @@ module Jekyll
       # hash - the hash to which to apply this transformation
       #
       # Returns a new hash with symbolized keys
-      def hash_symbolize_keys(hash)
+      def symbolize_hash_keys(hash)
         target = hash.dup
         target.keys.each do |key|
           target[(key.to_sym rescue key) || key] = target.delete(key)
+        end
+        target
+      end
+
+      # Apply #to_s to all keys in the Hash
+      #
+      # hash - the hash to which to apply this transformation
+      #
+      # Returns a new hash with stringified keys
+      def stringify_hash_keys(hash)
+        target = hash.dup
+        target.keys.each do |key|
+          target[(key.to_s rescue key) || key] = target.delete(key)
         end
         target
       end
