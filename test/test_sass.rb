@@ -1,13 +1,6 @@
 require 'helper'
 
 class TestSass < Test::Unit::TestCase
-  def site_configuration(overrides = {})
-    Jekyll::Configuration::DEFAULTS.deep_merge(overrides).deep_merge({
-      "source" => source_dir,
-      "destination" => dest_dir
-    })
-  end
-
   def converter(overrides = {})
     Jekyll::Converters::Sass.new(site_configuration({"sass" => overrides}))
   end

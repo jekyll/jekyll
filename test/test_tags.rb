@@ -6,7 +6,9 @@ class TestTags < Test::Unit::TestCase
 
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     stub(Jekyll).configuration do
-      Jekyll::Configuration::DEFAULTS.deep_merge({'highlighter' => 'pygments'}).deep_merge(override)
+      site_configuration({
+        "highlighter" => "pygments"
+      }.merge(override))
     end
     site = Site.new(Jekyll.configuration)
 
@@ -545,7 +547,7 @@ CONTENT
     context "include tag with variable and liquid filters" do
       setup do
         stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.deep_merge({'pygments' => true}).deep_merge({'source' => source_dir, 'destination' => dest_dir})
+          site_configuration({'pygments' => true})
         end
 
         site = Site.new(Jekyll.configuration)
