@@ -3,9 +3,6 @@ module Jekyll
     include Comparable
     include Convertible
 
-    # Valid post name regex.
-    MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
-
     EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
       title
       url
@@ -25,29 +22,31 @@ module Jekyll
       excerpt
     ]
 
-    # Post name validator. Post filenames must be like:
-    # 2008-11-05-my-awesome-post.textile
-    #
-    # Returns true if valid, false if not.
-    def self.valid?(name)
-      name =~ MATCHER
+    class << self
+      # Post name matcher. Post filenames must be like:
+      # 2008-11-05-my-awesome-post.textile
+      def filename_matcher
+        /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
+      end
+
+      # Class: Validate the post filename, ensuring it is constructed properly
+      #        and that it has a valid date
+      #
+      # Returns true if the name matches the matcher and if it has a valid date
+      def self.valid_filename?(name)
+        super(name) && valid_date?(name)
+      end
+
+      def self.valid_date?(name)
+        p parse_filename(name)
+        Time.parse(parse_filename(name)[2])
+      rescue ArgumentError
+        false
+      end
     end
 
     attr_accessor :extracted_excerpt
     attr_accessor :date, :slug, :tags, :categories
-
-    attr_reader :name
-
-    # Initialize this Post instance.
-    #
-    # site       - The Site.
-    # base       - The String path to the dir containing the post file.
-    # name       - The String filename of the post file.
-    #
-    # Returns the new Post.
-    def initialize(site, dir, name)
-      super(site, dir, name)
-    end
 
     def read
       super
@@ -170,14 +169,6 @@ module Jekyll
       }
     end
 
-    # The UID for this post (useful in feeds).
-    # e.g. /2008/11/05/my-awesome-post
-    #
-    # Returns the String UID.
-    def id
-      File.join(dir, slug)
-    end
-
     # Calculate related posts.
     #
     # Returns an Array of related Posts.
@@ -215,11 +206,6 @@ module Jekyll
       path = Jekyll.sanitized_path(dest, CGI.unescape(url))
       path = File.join(path, "index.html") if path[/\.html$/].nil?
       path
-    end
-
-    # Returns the shorthand String identifier of this Post.
-    def inspect
-      "<Post: #{id}>"
     end
 
     def next

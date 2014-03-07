@@ -54,44 +54,6 @@ module Jekyll
       end
     end
 
-    # The template of the permalink.
-    #
-    # Returns the template String.
-    def template
-      if site.permalink_style == :pretty
-        if index? && html?
-          "/:path/"
-        elsif html?
-          "/:path/:basename/"
-        else
-          "/:path/:basename:output_ext"
-        end
-      else
-        "/:path/:basename:output_ext"
-      end
-    end
-
-    # The generated relative url of this page. e.g. /about.html.
-    #
-    # Returns the String url.
-    def url
-      @url ||= URL.new({
-        :template => template,
-        :placeholders => url_placeholders,
-        :permalink => permalink
-      }).to_s
-    end
-
-    # Returns a hash of URL placeholder names (as symbols) mapping to the
-    # desired placeholder replacements. For details see "url.rb"
-    def url_placeholders
-      {
-        :path       => @dir,
-        :basename   => basename,
-        :output_ext => output_ext
-      }
-    end
-
     # Extract information from the page filename.
     #
     # name - The String filename of the page file.
