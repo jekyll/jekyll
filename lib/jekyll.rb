@@ -28,54 +28,37 @@ require 'maruku'
 require 'colorator'
 require 'toml'
 
-# internal requires
-require 'jekyll/version'
-
-## utilities
-require 'jekyll/utils'
-require 'jekyll/stevenson'
-require 'jekyll/deprecator'
-
-## core classes
-require 'jekyll/document'
-require 'jekyll/configuration'
-require 'jekyll/site'
-require 'jekyll/convertible'
-require 'jekyll/url'
-require 'jekyll/layout'
-require 'jekyll/page'
-require 'jekyll/post'
-require 'jekyll/excerpt'
-require 'jekyll/draft'
-require 'jekyll/filters'
-require 'jekyll/static_file'
-require 'jekyll/errors'
-require 'jekyll/related_posts'
-require 'jekyll/cleaner'
-require 'jekyll/entry_filter'
-require 'jekyll/layout_reader'
-require 'jekyll/collection'
-require 'jekyll/collections_reader'
-
-# extensions
-require 'jekyll/plugin'
-require 'jekyll/converter'
-require 'jekyll/generator'
-require 'jekyll/command'
-
-require_all 'jekyll/commands'
-require_all 'jekyll/converters'
-require_all 'jekyll/converters/markdown'
-require_all 'jekyll/generators'
-require_all 'jekyll/tags'
-
-# plugins
-require 'jekyll-coffeescript'
-require 'jekyll-sass-converter'
-
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
+  autoload :Cleaner,           'jekyll/cleaner'
+  autoload :Collection,        'jekyll/collection'
+  autoload :CollectionsReader, 'jekyll/collections_reader'
+  autoload :Command,           'jekyll/command'
+  autoload :Converter,         'jekyll/converter'
+  autoload :Configuration,     'jekyll/configuration'
+  autoload :Convertible,       'jekyll/convertible'
+  autoload :Deprecator,        'jekyll/deprecator'
+  autoload :Document,          'jekyll/document'
+  autoload :Draft,             'jekyll/draft'
+  autoload :EntryFilter,       'jekyll/entry_filter'
+  autoload :Errors,            'jekyll/errors'
+  autoload :Excerpt,           'jekyll/excerpt'
+  autoload :Filters,           'jekyll/filters'
+  autoload :Generator,         'jekyll/generator'
+  autoload :Layout,            'jekyll/layout'
+  autoload :LayoutReader,      'jekyll/layout_reader'
+  autoload :Page,              'jekyll/page'
+  autoload :Plugin,            'jekyll/plugin'
+  autoload :Post,              'jekyll/post'
+  autoload :RelatedPosts,      'jekyll/related_posts'
+  autoload :Site,              'jekyll/site'
+  autoload :StaticFile,        'jekyll/static_file'
+  autoload :Stevenson,         'jekyll/stevenson'
+  autoload :URL,               'jekyll/url'
+  autoload :Utils,             'jekyll/utils'
+  autoload :VERSION,           'jekyll/version'
+
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
   #
@@ -129,3 +112,13 @@ module Jekyll
     traverse_up(pathname.parent)
   end
 end
+
+require_all 'jekyll/commands'
+require_all 'jekyll/converters'
+require_all 'jekyll/converters/markdown'
+require_all 'jekyll/generators'
+require_all 'jekyll/tags'
+
+# plugins
+require 'jekyll-coffeescript'
+require 'jekyll-sass-converter'
