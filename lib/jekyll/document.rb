@@ -1,8 +1,28 @@
 module Jekyll
   class Document
 
-    attr_reader :site, :filename, :containing_dir
+    attr_reader :site, :collection, :filename, :containing_dir
     attr_accessor :content, :data, :output
+
+    YAML_FRONTMATTER_REGEXP = /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+
+    class << self
+      def filename_matcher
+        /(.*)\.(\w+)/m
+      end
+
+      def parse_filename(name)
+        filename_matcher.match(name)
+      end
+      # Class: Check if the filename is a valid filename for this class
+      #
+      # name - the questionable filename
+      #
+      # Returns true if valid, false if not.
+      def valid_filename?(name)
+        !!parse_filename(name)
+      end
+    end
 
     # Public: Initialize a new Document
     #
@@ -14,10 +34,21 @@ module Jekyll
     def initialize(site, collection, full_path)
       @site           = site
       @collection     = collection
-      @containing_dir = File.dirname(full_path)
+      @containing_dir = full_path.include?("/") ? File.dirname(full_path) : ""
       @filename       = File.basename(full_path)
       @data           = Hash.new
-      @content        = nil
+    end
+
+    # Public: The UID for this document (useful in feeds).
+    #
+    # Returns the String UID.
+    def id
+      relative_path
+    end
+
+    # Returns the shorthand String identifier of this Document
+    def inspect
+      "<#{self.class}(#{id})>"
     end
 
     # Public: Read in and parse the contents of the file.
@@ -25,15 +56,18 @@ module Jekyll
     # Returns the content of the file without the YAML front-matter.
     def read
       begin
-        full_contents = File.read(relative_path)
-        if full_contents =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+        full_contents = File.read(absolute_path)
+        if full_contents =~ YAML_FRONTMATTER_REGEXP
           @content = $POSTMATCH
           @data    = SafeYAML.load($1)
         end
+        true
       rescue SyntaxError => e
-        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "YAML Exception reading #{relative_path}: #{e.message}"
+        false
       rescue Exception => e
-        puts "Error reading file #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "Error reading file #{relative_path}: #{e.message}"
+        false
       end
     end
 
@@ -41,7 +75,14 @@ module Jekyll
     #
     # Returns the full path of the source file relative to the site source
     def relative_path
-      File.join(*[containing_dir, filename].map(&:to_s).reject(&:empty?))
+      File.join(*[collection.relative_directory, containing_dir, filename].map(&:to_s).reject(&:empty?))
+    end
+
+    # Public: Fetch the absolute path to the post source file
+    #
+    # Returns the full path of the source file relative to the site source
+    def absolute_path
+      File.join(*[collection.directory, containing_dir, filename].map(&:to_s).reject(&:empty?))
     end
 
     # Public: The generated URL for this Document relative to the output root.
@@ -55,7 +96,34 @@ module Jekyll
       }).to_s
     end
 
-    # Public:
+    # The template of the permalink.
+    #
+    # Returns the template String.
+    def template
+      if site.permalink_style == :pretty
+        if index? && html?
+          "/:path/"
+        elsif html?
+          "/:path/:basename/"
+        else
+          "/:path/:basename:output_ext"
+        end
+      else
+        "/:path/:basename:output_ext"
+      end
+    end
+
+    # Returns a hash of URL placeholder names (as symbols) mapping to the
+    # desired placeholder replacements. For details see "url.rb"
+    def url_placeholders
+      {
+        :path       => containing_dir,
+        :basename   => filename,
+        :output_ext => output_ext
+      }
+    end
+
+    # Public: Fetches the output directory of
     #
     # Returns the directory of the output file
     def output_directory
