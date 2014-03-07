@@ -1,0 +1,8 @@
+#! /usr/bin/env ruby
+
+require 'pry'
+require File.expand_path("../../lib/jekyll.rb", __FILE__)
+
+module Jekyll
+  binding.pry
+end

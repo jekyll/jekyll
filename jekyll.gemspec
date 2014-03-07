@@ -42,6 +42,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0.0.rc3')
 
   s.add_development_dependency('rake', "~> 10.1")
+  s.add_development_dependency('pry')
+  s.add_development_dependency('pry-debugger')
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 3.5")
