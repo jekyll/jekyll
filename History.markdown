@@ -69,6 +69,7 @@
   * `#path` for a draft is now `_drafts` instead of `_posts` (#2042)
   * Patch a couple show-stopping security vulnerabilities (#1946)
   * Sanitize paths uniformly, in a Windows-friendly way (#2065)
+  * Update gem build steps to work correctly on Windows (#2118)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
