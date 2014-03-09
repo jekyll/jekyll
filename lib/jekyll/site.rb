@@ -69,17 +69,7 @@ module Jekyll
     def setup
       ensure_not_in_dest
 
-      # If safe mode is off, load in any Ruby files under the plugins
-      # directory.
-      unless safe
-        plugins_path.each do |a_plugins_path|
-          Dir[File.join(a_plugins_path, "**/*.rb")].sort.each do |f|
-            require f
-          end
-        end
-      end
-
-      require_gems
+      PluginManager.new(self).require_plugins
 
       @converters = instantiate_subclasses(Jekyll::Converter)
       @generators = instantiate_subclasses(Jekyll::Generator)
@@ -96,28 +86,12 @@ module Jekyll
       end
     end
 
-    def require_gems
-      gems.each do |gem|
-        if plugin_allowed?(gem)
-          require gem
-        end
-      end
-    end
-
-    def plugin_allowed?(gem_name)
-      whitelist.include?(gem_name) || !safe
-    end
-
-    def whitelist
-      @whitelist ||= (Array[config['whitelist']].flatten || [])
-    end
-
     # Internal: Setup the plugin search path
     #
     # Returns an Array of plugin search paths
     def plugins_path
-      if (config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [File.join(source, config['plugins'])]
+      if config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins']
+        [Jekyll.sanitized_path(source, config['plugins'])]
       else
         Array(config['plugins']).map { |d| File.expand_path(d) }
       end
