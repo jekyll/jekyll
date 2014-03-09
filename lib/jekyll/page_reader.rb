@@ -8,7 +8,7 @@ module Jekyll
 
     def pages_collection
       @pages_collection ||= ->() {
-        collection = Jekyll::Collection.new(site, "pages")
+        collection = Jekyll::Collection.new(site, "pages", [])
         collection.relative_directory = ""
         collection
       }.()
@@ -17,9 +17,10 @@ module Jekyll
     def read
       Dir.chdir(site.source) do
         Dir["**/*.*"].map do |entry|
-          Jekyll::Page.new(site, pages_collection, entry)
+          pages_collection.documents << Jekyll::Page.new(site, pages_collection, entry)
         end
       end
+      pages_collection
     end
   end
 end

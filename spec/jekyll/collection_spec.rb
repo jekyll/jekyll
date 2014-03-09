@@ -35,7 +35,7 @@ describe(Jekyll::Collection) do
     end
 
     it "sorts the by date then by name" do
-      expect(collection.documents.sort).
+      expect(collection.documents.sort).to be_true
     end
   end
 

@@ -3,10 +3,11 @@ module Jekyll
     attr_reader :name, :site
     attr_accessor :relative_directory
 
-    def initialize(site, collection_name)
+    def initialize(site, collection_name, documents = nil)
       @site = site
       @name = collection_name
       @relative_directory = "_#{collection_name}"
+      @documents = documents
     end
 
     def documents
