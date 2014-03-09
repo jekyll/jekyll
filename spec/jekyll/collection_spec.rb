@@ -33,6 +33,10 @@ describe(Jekyll::Collection) do
     it "knows to use Jekyll::Post as the class for the collection documents" do
       expect(collection.klass_for_collection).to eql(Jekyll::Post)
     end
+
+    it "sorts the by date then by name" do
+      expect(collection.documents.sort).
+    end
   end
 
   context "for the sass collection" do

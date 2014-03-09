@@ -22,7 +22,7 @@ module Jekyll
       within(directory) do
         Dir['**/*.*'].each do |filename|
           if klass_for_collection.valid_filename?(filename)
-            entries << klass_for_collection.new(site, directory, filename)
+            entries << klass_for_collection.new(site, self, filename)
           else
             Jekyll.logger.debug("#{directory}:", "'#{filename}' is an invalid filename. Skipping.")
           end
@@ -63,6 +63,23 @@ module Jekyll
           File.open(document.destination, 'wb') { File.write(document.output) }
         end
       end
+    end
+
+    def sort!
+      documents.sort!
+    end
+
+    def sort
+      documents.dup.sort
+    end
+
+    def each(&block)
+      documents.each(&block)
+    end
+
+    def limit(max_number_of_documents)
+      limit = [documents.size, max_number_of_documents].min
+      @documents = documents.take(limit)
     end
 
   end

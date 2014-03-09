@@ -16,7 +16,7 @@ module Jekyll
     def read
       collection_names.each do |collection_name|
         @collections[collection_name] = Collection.new(site, collection_name)
-        @collections[collection_name].documents
+        @collections[collection_name].documents.each(&:read)
       end
 
       @collections

@@ -3,7 +3,7 @@ module Jekyll
     attr_reader :config, :layouts, :pages, :static_files, :categories, :exclude,
                 :include, :source, :dest, :lsi, :highlighter, :permalink_style,
                 :tags, :time, :future, :safe, :plugins, :limit_posts,
-                :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
+                :show_drafts, :keep_files, :baseurl, :file_read_opts,
                 :gems, :collections, :converters, :generators
 
     # Public: Initialize a new Site.
@@ -129,8 +129,7 @@ module Jekyll
     def read
       @layouts     = LayoutReader.new(self).read
       @collections = CollectionsReader.new(self).read
-      @pages       = PagesReader.new(self).read
-      @data        = DataReader.new(self).read
+      @pages       = PageReader.new(self).read
     end
 
     # Fetch the site posts
@@ -144,6 +143,13 @@ module Jekyll
     #
     # Returns the array of `Draft` objects
     def drafts
+      collections['drafts']
+    end
+
+    # Fetch the data from the data files
+    #
+    # Returns the array of `Jekyll::Document` objects
+    def data
       collections['drafts']
     end
 
@@ -252,9 +258,10 @@ module Jekyll
     def render
       relative_permalinks_deprecation_method
 
-      payload = site_payload
-      [posts, pages].flatten.each do |page_or_post|
-        page_or_post.render(layouts, payload)
+      collections.each do |name, collection|
+        collection.documents.each do |document|
+          DocumentConverter.new(document).transform
+        end
       end
 
       categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
@@ -330,7 +337,7 @@ module Jekyll
           "html_pages"   => pages.reject { |page| !page.html? },
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
-          "data"         => site_data})}
+          "data"         => site_data })}
     end
 
     # Filter out any files/directories that are hidden or backup files (start
@@ -400,13 +407,11 @@ module Jekyll
 
     def relative_permalinks_deprecation_method
       if config['relative_permalinks'] && has_relative_page?
-        $stderr.puts # Places newline after "Generating..."
         Jekyll.logger.warn "Deprecation:", "Starting in 2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
                                             " directory. Check http://jekyllrb.com/docs/upgrading/"+
                                             " for more info."
-        $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
       end
     end
 
@@ -421,12 +426,11 @@ module Jekyll
     private
 
     def has_relative_page?
-      pages.any? { |page| page.uses_relative_permalinks }
+      pages.any? { |page| page.uses_relative_permalinks? }
     end
 
     def limit_posts!
-      limit = posts.length < limit_posts ? posts.length : limit_posts
-      self.posts = posts[-limit, limit]
+      posts.limit(limit_posts)
     end
 
     def site_cleaner

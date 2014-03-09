@@ -56,50 +56,6 @@ module Jekyll
       self.data ||= {}
     end
 
-    # Transform the contents based on the content type.
-    #
-    # Returns nothing.
-    def transform
-      self.content = converter.convert(content)
-    rescue => e
-      Jekyll.logger.error "Conversion error:", "There was an error converting" +
-        " '#{path}'."
-      raise e
-    end
-
-    # Determine the extension depending on content_type.
-    #
-    # Returns the String extension for the output file.
-    #   e.g. ".html" for an HTML output file.
-    def output_ext
-      converter.output_ext(ext)
-    end
-
-    # Determine which converter to use based on this convertible's
-    # extension.
-    #
-    # Returns the Converter instance.
-    def converter
-      @converter ||= site.converters.find { |c| c.matches(ext) }
-    end
-
-    # Render Liquid in the content
-    #
-    # content - the raw Liquid content to render
-    # payload - the payload for Liquid
-    # info    - the info for Liquid
-    #
-    # Returns the converted content
-    def render_liquid(content, payload, info, path = nil)
-      Liquid::Template.parse(content).render!(payload, info)
-    rescue Tags::IncludeTagError => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
-      raise e
-    rescue Exception => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || self.path}"
-      raise e
-    end
-
     # Convert this Convertible's data to a Hash suitable for use by Liquid.
     #
     # Returns the Hash representation of this Convertible.
@@ -108,36 +64,6 @@ module Jekyll
         [attribute, send(attribute)]
       }]
       Utils.deep_merge_hashes(data, further_data)
-    end
-
-    # Recursively render layouts
-    #
-    # layouts - a list of the layouts
-    # payload - the payload for Liquid
-    # info    - the info for Liquid
-    #
-    # Returns nothing
-    def render_all_layouts(layouts, payload, info)
-      # recursively render layouts
-      layout = layouts[data["layout"]]
-      used = Set.new([layout])
-
-      while layout
-        payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
-
-        self.output = render_liquid(layout.content,
-                                         payload,
-                                         info,
-                                         File.join(site.config['layouts'], layout.name))
-
-        if layout = layouts[layout.data["layout"]]
-          if used.include?(layout)
-            layout = nil # avoid recursive chain
-          else
-            used << layout
-          end
-        end
-      end
     end
 
     # Add any necessary layouts to this convertible document.

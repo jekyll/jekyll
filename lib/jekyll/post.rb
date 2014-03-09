@@ -1,7 +1,6 @@
 module Jekyll
   class Post < Document
     include Comparable
-    include Convertible
 
     EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
       title

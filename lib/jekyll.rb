@@ -40,16 +40,18 @@ module Jekyll
   autoload :Convertible,       'jekyll/convertible'
   autoload :Deprecator,        'jekyll/deprecator'
   autoload :Document,          'jekyll/document'
+  autoload :DocumentConverter, 'jekyll/document_converter'
   autoload :Draft,             'jekyll/draft'
   autoload :EntryFilter,       'jekyll/entry_filter'
-  autoload :Errors,            'jekyll/errors'
   autoload :Excerpt,           'jekyll/excerpt'
   autoload :Filters,           'jekyll/filters'
   autoload :Generator,         'jekyll/generator'
   autoload :Layout,            'jekyll/layout'
   autoload :LayoutReader,      'jekyll/layout_reader'
   autoload :Page,              'jekyll/page'
+  autoload :PageReader,        'jekyll/page_reader'
   autoload :Plugin,            'jekyll/plugin'
+  autoload :PluginManager,     'jekyll/plugin_manager'
   autoload :Post,              'jekyll/post'
   autoload :RelatedPosts,      'jekyll/related_posts'
   autoload :Site,              'jekyll/site'
@@ -58,6 +60,7 @@ module Jekyll
   autoload :URL,               'jekyll/url'
   autoload :Utils,             'jekyll/utils'
   autoload :VERSION,           'jekyll/version'
+  autoload :Writable,          'jekyll/writable'
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
@@ -68,7 +71,7 @@ module Jekyll
   #
   # Returns the final configuration Hash.
   def self.configuration(override)
-    config = Configuration[Configuration::DEFAULTS]
+    config   = Configuration[Configuration::DEFAULTS]
     override = Configuration[override].stringify_keys
     config = config.read_config_files(config.config_files(override))
 
@@ -112,6 +115,8 @@ module Jekyll
     traverse_up(pathname.parent)
   end
 end
+
+require 'jekyll/errors'
 
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
