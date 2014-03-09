@@ -32,7 +32,7 @@ module Jekyll
         abort_with("Log level '#{level}' is not a valid log level.")
       end
     end
-    
+
     # Public: Print a jekyll debug message to stdout
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
@@ -91,7 +91,13 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      msg = formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      messages << msg
+      msg
+    end
+
+    def messages
+      @messages ||= []
     end
 
     # Public: Format the topic
