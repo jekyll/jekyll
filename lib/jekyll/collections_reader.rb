@@ -26,7 +26,7 @@ module Jekyll
     #
     # Returns an array of collection names
     def collection_names
-      [site.config["collections"], %w[posts]].flatten
+      [site.config["collections"], %w[posts data]].flatten.compact
     end
   end
 end
