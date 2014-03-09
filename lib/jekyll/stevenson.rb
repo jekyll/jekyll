@@ -40,7 +40,7 @@ module Jekyll
     #
     # Returns nothing
     def debug(topic, message = nil)
-      $stdout.puts(message(topic, message)) if log_level <= DEBUG
+      tell(message(topic, message), $stdout) if log_level <= DEBUG
     end
 
     # Public: Print a jekyll message to stdout
@@ -50,7 +50,7 @@ module Jekyll
     #
     # Returns nothing
     def info(topic, message = nil)
-      $stdout.puts(message(topic, message)) if log_level <= INFO
+      tell(message(topic, message), $stdout) if log_level <= INFO
     end
 
     # Public: Print a jekyll message to stderr
@@ -60,7 +60,7 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message = nil)
-      $stderr.puts(message(topic, message).yellow) if log_level <= WARN
+      tell(message(topic, message).yellow, $stderr) if log_level <= WARN
     end
 
     # Public: Print a jekyll error message to stderr
@@ -70,7 +70,7 @@ module Jekyll
     #
     # Returns nothing
     def error(topic, message = nil)
-      $stderr.puts(message(topic, message).red) if log_level <= ERROR
+      tell(message(topic, message).red, $stderr) if log_level <= ERROR
     end
 
     # Public: Print a Jekyll error message to stderr and immediately abort the process
@@ -91,11 +91,12 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      msg = formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
-      messages << msg
-      msg
+      formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
     end
 
+    # Public: All the messages which have been printed
+    #
+    # Returns an array of strings which have been printed.
     def messages
       @messages ||= []
     end
@@ -107,6 +108,16 @@ module Jekyll
     # Returns the formatted topic statement
     def formatted_topic(topic)
       "#{topic} ".rjust(20)
+    end
+
+    private
+
+    # Internal: Save the message and print to the output buffer
+    #
+    # Returns nothing
+    def tell(the_message, output_buffer = $stdout)
+      messages << the_message
+      buffer.puts(the_message)
     end
   end
 end
