@@ -1,9 +1,7 @@
-require 'jekyll/convertible'
 require 'forwardable'
 
 module Jekyll
-  class Excerpt
-    include Convertible
+  class Excerpt < Document
     extend Forwardable
 
     attr_accessor :post
@@ -21,8 +19,8 @@ module Jekyll
     #
     # Returns the new Post.
     def initialize(post)
-      self.post = post
-      self.content = extract_excerpt(post.content)
+      @post = post
+      @content = extract_excerpt(post.content)
     end
 
     def to_liquid

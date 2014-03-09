@@ -21,6 +21,7 @@ require 'time'
 require 'safe_yaml/load'
 require 'English'
 require 'pathname'
+require 'set'
 
 # 3rd party
 require 'liquid'

@@ -1,9 +1,11 @@
+# encoding: UTF-8
+
 module Jekyll
   class Document
     include Writable
 
     attr_reader :site, :collection, :filename, :containing_dir
-    attr_accessor :content, :data, :output
+    attr_accessor :content, :output
 
     YAML_FRONTMATTER_REGEXP = /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
 
@@ -13,7 +15,7 @@ module Jekyll
       end
 
       def parse_filename(name)
-        filename_matcher.match(name)
+        name.match(filename_matcher)
       end
       # Class: Check if the filename is a valid filename for this class
       #
@@ -22,6 +24,20 @@ module Jekyll
       # Returns true if valid, false if not.
       def valid_filename?(name)
         !!parse_filename(name)
+      end
+
+      # Class: An Array of attributes of this page which are used to generate
+      #        page data for liquid templates.
+      #
+      # Returns an array of attributes
+      def liquid_attributes
+        @liquid_attributes ||= %w[
+          content
+          dir
+          name
+          path
+          url
+        ]
       end
     end
 
@@ -99,6 +115,21 @@ module Jekyll
     # Returns the basename
     def basename
       filename[0 .. -extname.length - 1]
+    end
+
+    def output_ext
+      DocumentConverter.new(self).output_ext
+    end
+
+    def to_liquid(attrs = nil)
+      further_data = Hash[(attrs || self.class.liquid_attributes).map { |attribute|
+        [attribute, send(attribute)]
+      }]
+      Utils.deep_merge_hashes(data, further_data)
+    end
+
+    def data
+      @data ||= {}
     end
 
     private #==================================================================

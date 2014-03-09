@@ -26,7 +26,7 @@ module Jekyll
 
     def info(payload)
       {
-        :filters => [Jekyll::Filters],
+        :filters   => [Jekyll::Filters],
         :registers => { :site => site, :page => payload["page"] }
       }
     end

@@ -2,24 +2,29 @@ module Jekyll
   class Post < Document
     include Comparable
 
-    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
-      title
-      url
-      dir
-      date
-      id
-      categories
-      next
-      previous
-      tags
-      path
-    ]
+    class << self
+      def excerpt_liquid_attributes
+        @excerpt_liquid_attributes ||= %w[
+          title
+          url
+          dir
+          date
+          id
+          categories
+          next
+          previous
+          tags
+          path
+        ]
+      end
 
-    # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
-      content
-      excerpt
-    ]
+      def liquid_attributes
+        @liquid_attributes ||= (excerpt_liquid_attributes + %w[
+          content
+          excerpt
+        ])
+      end
+    end
 
     class << self
       # Post name matcher. Post filenames must be like:
@@ -37,7 +42,6 @@ module Jekyll
       end
 
       def self.valid_date?(name)
-        p parse_filename(name)
         Time.parse(parse_filename(name)[2])
       rescue ArgumentError
         false
@@ -49,22 +53,23 @@ module Jekyll
 
     def read
       super
+      process(File.join(containing_dir, filename))
       @categories        = containing_dir.downcase.split('/').reject { |x| x.empty? }
       @extracted_excerpt = extract_excerpt
-      @date = Time.parse(data["date"].to_s) if data.has_key?('date')
+      @date              = Time.parse(data["date"].to_s) if data.has_key?('date')
       populate_categories
       populate_tags
     end
 
     def populate_categories
       if categories.empty?
-        self.categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
+        @categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
       end
       categories.flatten!
     end
 
     def populate_tags
-      self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+      @tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
     end
 
     # The post excerpt. This is either a custom excerpt
@@ -117,12 +122,12 @@ module Jekyll
     #
     # Returns nothing.
     def process(name)
-      m, cats, date, slug, ext = *name.match(MATCHER)
-      self.date = Time.parse(date)
-      self.slug = slug
-      self.ext = ext
+      m, cats, date, slug, ext = *self.class.parse_filename(name)
+      @date = Time.parse(date)
+      @slug = slug
+      @ext  = ext
     rescue ArgumentError
-      path = File.join(@dir || "", name)
+      path = File.join(containing_dir || "", name)
       msg  =  "Post '#{path}' does not have a valid date.\n"
       msg  << "Fix the date, or exclude the file or directory from being processed"
       raise FatalException.new(msg)

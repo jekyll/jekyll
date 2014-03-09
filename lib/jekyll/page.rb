@@ -1,22 +1,6 @@
 module Jekyll
   class Page < Document
 
-    class << self
-      # Class: An Array of attributes of this page which are used to generate
-      #        page data for liquid templates.
-      #
-      # Returns an array of attributes
-      def liquid_attributes
-        @liquid_attributes ||= %w[
-          content
-          dir
-          name
-          path
-          url
-        ]
-      end
-    end
-
     # The full path and filename of the post. Defined in the YAML of the post
     # body.
     #
@@ -50,8 +34,7 @@ module Jekyll
 
     # Returns the Boolean of whether this Page is HTML or not.
     def html?
-      p site
-      DocumentConverter.new(self).output_ext == '.html'
+      output_ext == '.html'
     end
 
     # Returns the Boolean of whether this Page is an index file or not.
