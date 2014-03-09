@@ -252,7 +252,7 @@ task :release => :build do
 end
 
 task :build do
-  sh "mkdir -p pkg"
+  mkdir_p "pkg"
   sh "gem build #{gemspec_file}"
   sh "mv #{gem_file} pkg"
 end
