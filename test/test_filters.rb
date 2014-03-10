@@ -125,13 +125,23 @@ class TestFilters < Test::Unit::TestCase
           case g["name"]
           when "default"
             assert g["items"].is_a?(Array), "The list of grouped items for 'default' is not an Array."
-            assert_equal 4, g["items"].size
+            if is_windows
+              # no symlinks means we don't have /symlink-test/symlinked-file (/index.html)
+              assert_equal 3, g["items"].size
+            else
+              assert_equal 4, g["items"].size
+            end
           when "nil"
             assert g["items"].is_a?(Array), "The list of grouped items for 'nil' is not an Array."
             assert_equal 2, g["items"].size
           when ""
             assert g["items"].is_a?(Array), "The list of grouped items for '' is not an Array."
-            assert_equal 10, g["items"].size
+            if is_windows
+              # no symlinks means we don't have /symlink-test/symlinked-dir/main.scss
+              assert_equal 9, g["items"].size
+            else
+              assert_equal 10, g["items"].size
+            end
           end
         end
       end

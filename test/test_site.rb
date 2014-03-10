@@ -13,13 +13,15 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
-      assert_equal ['/tmp/plugins'], site.plugins
+      plugins = Tempfile.new('plugins').path
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => plugins}))
+      assert_equal [plugins], site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
-      assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
+      plugins = [Tempfile.new('plugins').path, Tempfile.new('otherplugins').path]
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => plugins.clone}))
+      assert_equal plugins, site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
@@ -176,6 +178,12 @@ class TestSite < Test::Unit::TestCase
         static_files.html
         symlinked-file
       )
+
+      if self.is_windows
+        # But if we don't support symlinks then they wont! #delete removes all instances.
+        sorted_pages.delete_at sorted_pages.index('main.scss')
+        sorted_pages.delete_at sorted_pages.index('symlinked-file')
+      end
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
@@ -367,40 +375,42 @@ class TestSite < Test::Unit::TestCase
         assert_equal site.site_payload['site']['data']['languages'], file_content
       end
 
-      should "load symlink files in unsafe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => false}))
-        site.process
+      unless is_windows # No symlinks on Windows
+        should "load symlink files in unsafe mode" do
+          site = Site.new(Jekyll.configuration.merge({'safe' => false}))
+          site.process
 
-        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
+          file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
 
-        assert_equal site.data['products'], file_content
-        assert_equal site.site_payload['site']['data']['products'], file_content
-      end
+          assert_equal site.data['products'], file_content
+          assert_equal site.site_payload['site']['data']['products'], file_content
+        end
 
-      should "not load symlink files in safe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => true}))
-        site.process
+        should "not load symlink files in safe mode" do
+          site = Site.new(Jekyll.configuration.merge({'safe' => true}))
+          site.process
 
-        assert_nil site.data['products']
-        assert_nil site.site_payload['site']['data']['products']
-      end
+          assert_nil site.data['products']
+          assert_nil site.site_payload['site']['data']['products']
+        end
 
-      should "load symlink directory in unsafe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => false, 'data_source' => File.join('symlink-test', '_data')}))
-        site.process
+        should "load symlink directory in unsafe mode" do
+          site = Site.new(Jekyll.configuration.merge({'safe' => false, 'data_source' => File.join('symlink-test', '_data')}))
+          site.process
 
-        assert_not_nil site.data['products']
-        assert_not_nil site.data['languages']
-        assert_not_nil site.data['members']
-      end
+          assert_not_nil site.data['products']
+          assert_not_nil site.data['languages']
+          assert_not_nil site.data['members']
+        end
 
-      should "not load symlink directory in safe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => true, 'data_source' => File.join('symlink-test', '_data')}))
-        site.process
+        should "not load symlink directory in safe mode" do
+          site = Site.new(Jekyll.configuration.merge({'safe' => true, 'data_source' => File.join('symlink-test', '_data')}))
+          site.process
 
-        assert_nil site.data['products']
-        assert_nil site.data['languages']
-        assert_nil site.data['members']
+          assert_nil site.data['products']
+          assert_nil site.data['languages']
+          assert_nil site.data['members']
+        end
       end
     end
   end

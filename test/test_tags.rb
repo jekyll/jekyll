@@ -366,12 +366,13 @@ CONTENT
 
   context "include tag with parameters" do
 
-    context "with symlink'd include" do
+    unless is_windows # Windows doesn't have symlinks
+      context "with symlink'd include" do
 
-      should "not allow symlink includes" do
-        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
-        assert_raise IOError do
-          content = <<CONTENT
+        should "not allow symlink includes" do
+          File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+          assert_raise IOError do
+            content = <<CONTENT
 ---
 title: Include symlink
 ---
@@ -379,14 +380,14 @@ title: Include symlink
 {% include tmp/pages-test %}
 
 CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+            create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+          end
+          assert_no_match /SYMLINK TEST/, @result
         end
-        assert_no_match /SYMLINK TEST/, @result
-      end
 
-      should "not expose the existence of symlinked files" do
-        ex = assert_raise IOError do
-          content = <<CONTENT
+        should "not expose the existence of symlinked files" do
+          ex = assert_raise IOError do
+            content = <<CONTENT
 ---
 title: Include symlink
 ---
@@ -394,9 +395,10 @@ title: Include symlink
 {% include tmp/pages-test-does-not-exist %}
 
 CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+            create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+          end
+          assert_match /should exist and should not be a symlink/, ex.message
         end
-        assert_match /should exist and should not be a symlink/, ex.message
       end
     end
 

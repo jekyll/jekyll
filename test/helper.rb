@@ -6,6 +6,8 @@ require 'coveralls'
 Coveralls.wear_merged!
 
 require 'rubygems'
+require 'rbconfig'
+require 'tempfile'
 require 'test/unit'
 require 'ostruct'
 gem 'RedCloth', '>= 4.2.1'
@@ -69,5 +71,13 @@ class Test::Unit::TestCase
     return $stdout.string
   ensure
     $stdout = $old_stdout
+  end
+
+  def is_windows
+    self.class.is_windows
+  end
+
+  def self.is_windows
+    RbConfig::CONFIG['target_os'] =~ /mswin|mingw/i
   end
 end
