@@ -106,7 +106,6 @@ Mercenary.program(:jekyll) do |p|
     c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
 
     c.action do |args, options|
-      options = normalize_options(options)
       options = Jekyll.configuration(options.merge!({
         'source' => File.expand_path("../site", File.dirname(__FILE__)),
         'destination' => File.expand_path("../site/_site", File.dirname(__FILE__))
