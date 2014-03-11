@@ -39,7 +39,7 @@ Jekyll あなたがするように伝えたことをします ― それ以上�
 * [変数](http://jekyllrb.com/docs/variables/)を使ってサイトに情報を表示する
 * posts が生成される時の[パーマリンク](http://jekyllrb.com/docs/permalinks/)をカスタマイズ
 * 人生を容易にするために、組み込みの [Liquid 拡張](http://jekyllrb.com/docs/templates/)を使用する
-* あなたのサイト固有のコンテンツを生成するために、カスタム[プラグイン](http://jekyllrb.com/docs/plugins/)を使用する 
+* あなたのサイト固有のコンテンツを生成するために、カスタム[プラグイン](http://jekyllrb.com/docs/plugins/)を使用する
 
 ## 実行時の依存関係
 

@@ -36,7 +36,7 @@ class TestExcerpt < Test::Unit::TestCase
     end
 
     context "#include(string)" do
-      
+
       setup do
         @excerpt.output = "Here is a fake output stub"
       end
@@ -61,7 +61,7 @@ class TestExcerpt < Test::Unit::TestCase
         assert_equal @excerpt.content, @excerpt.to_s
       end
 
-      should "return its output if output present" do  
+      should "return its output if output present" do
         @excerpt.output = "Fake Output"
         assert_equal @excerpt.output, @excerpt.to_s
       end

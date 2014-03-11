@@ -102,8 +102,8 @@ Jekyll's repo on GitHub.com.
 All documentation pull requests should be directed at `master`.  Pull
 requests directed at another branch will not be accepted.
 
-The [Jekyll wiki]({{ site.repository }}/wiki) on GitHub 
-can be freely updated without a pull request as all 
+The [Jekyll wiki]({{ site.repository }}/wiki) on GitHub
+can be freely updated without a pull request as all
 GitHub users have access.
 
 If you want to add your plugin to the [list of plugins](/docs/plugins/#available_plugins),
