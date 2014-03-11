@@ -31,7 +31,7 @@ $ jekyll build --watch
     cleaned when the site is built.  Files or folders that are not
     created by your site will be removed.  Do not use an important
     location for <code>&lt;destination&gt;</code>; instead, use it as
-    a staging area and copy files from there to your web server. 
+    a staging area and copy files from there to your web server.
   </p>
 </div>
 

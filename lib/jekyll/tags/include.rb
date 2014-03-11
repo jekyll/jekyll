@@ -55,11 +55,11 @@ module Jekyll
             raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
-	#{file}
+  #{file}
 
 Valid syntax:
 
-	#{SYNTAX_EXAMPLE}
+  #{SYNTAX_EXAMPLE}
 
 eos
         end
@@ -71,11 +71,11 @@ eos
           raise ArgumentError.new <<-eos
 Invalid syntax for include tag:
 
-	#{@params}
+  #{@params}
 
 Valid syntax:
 
-	#{SYNTAX_EXAMPLE}
+  #{SYNTAX_EXAMPLE}
 
 eos
         end
