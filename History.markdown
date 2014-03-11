@@ -68,7 +68,7 @@
   * Remove executable bits of non executable files (#2056)
   * `#path` for a draft is now `_drafts` instead of `_posts` (#2042)
   * Patch a couple show-stopping security vulnerabilities (#1946)
-  * Sanitize paths uniformly, in a Windows-friendly way (#2065)
+  * Sanitize paths uniformly, in a Windows-friendly way (#2065, #2109)
   * Update gem build steps to work correctly on Windows (#2118)
   * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121).
 
