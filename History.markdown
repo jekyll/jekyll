@@ -94,6 +94,7 @@
   * Clean up the gemspec for the project (#2095)
   * Add Japanese translation of README and CONTRIBUTING docs. (#2081)
   * Re-align the tables in Cucumber (#2108)
+  * Trim trailing spaces and convert tabs to spaces (#2122)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
