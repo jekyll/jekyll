@@ -7,9 +7,7 @@
 }
 
 body {
-  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 21px;
-  font-weight: 300;
+  font: 300 21px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #ddd;
   background: #333;
   border-top: 5px solid #fc0;
@@ -249,9 +247,7 @@ body > footer a:hover img {
   padding: 5px 0;
   border-radius: 5px 5px 0 0;
   box-shadow: 0 3px 10px rgba(0,0,0,.5);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  font: 400 16px/24px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #444;
   text-shadow: 0 1px 0 rgba(255,255,255,.5);
   background: #f7f7f7;
@@ -621,10 +617,8 @@ pre, code {
   display: inline-block;
   margin: 0;
   padding: 0;
-  font-family: Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
-  font-size: 14px;
+  font: 14px/1.8em Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
   padding: 0 .5em;
-  line-height: 1.8em;
 }
 
 @media (min-width: 768px){
