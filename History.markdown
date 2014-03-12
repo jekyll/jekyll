@@ -143,6 +143,7 @@
   * Add Jekyll Pages Directory plugin to list of plugins (#2096)
   * Update Configuration docs page with new markdown extension (#2102)
   * Add `jekyll-image-set` to the list of third-party plugins (#2105)
+  * Losslessly compress images (#2128)
 
 ## 1.4.3 / 2014-01-13
 
