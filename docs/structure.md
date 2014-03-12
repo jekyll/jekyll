@@ -130,9 +130,9 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Well-formatted site data should be placed here. The jekyll engine will 
-          autoload all yaml files (ends with <code>.yml</code> or <code>.yaml</code>) 
-          in this directory. If there's a file <code>members.yml</code> under the directory, 
+          Well-formatted site data should be placed here. The jekyll engine will
+          autoload all yaml files (ends with <code>.yml</code> or <code>.yaml</code>)
+          in this directory. If there's a file <code>members.yml</code> under the directory,
           then you can access contents of the file through <code>site.data.members</code>.
 
         </p>
