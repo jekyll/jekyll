@@ -31,65 +31,65 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
   </thead>
   <tbody>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Site Source</strong></p>
-        <p class='description'>Change the directory where Jekyll will read files</p>
+        <p class="name"><strong>Site Source</strong></p>
+        <p class="description">Change the directory where Jekyll will read files</p>
       </td>
       <td class="align-center">
         <p><code class="option">source: DIR</code></p>
         <p><code class="flag">-s, --source DIR</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Site Destination</strong></p>
-        <p class='description'>Change the directory where Jekyll will write files</p>
+        <p class="name"><strong>Site Destination</strong></p>
+        <p class="description">Change the directory where Jekyll will write files</p>
       </td>
       <td class="align-center">
         <p><code class="option">destination: DIR</code></p>
         <p><code class="flag">-d, --destination DIR</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Safe</strong></p>
-        <p class='description'>Disable <a href="../plugins/">custom plugins, and ignore symbolic links</a>.</p>
+        <p class="name"><strong>Safe</strong></p>
+        <p class="description">Disable <a href="../plugins/">custom plugins, and ignore symbolic links</a>.</p>
       </td>
       <td class="align-center">
         <p><code class="option">safe: BOOL</code></p>
         <p><code class="flag">--safe</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Exclude</strong></p>
+        <p class="name"><strong>Exclude</strong></p>
         <p class="description">
           Exclude directories and/or files from the
           conversion. These exclusions are relative to the site's
           source directory and cannot be outside the source directory.
         </p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="option">exclude: [DIR, FILE, ...]</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Include</strong></p>
+        <p class="name"><strong>Include</strong></p>
         <p class="description">
           Force inclusion of directories and/or files in the conversion.
           <code>.htaccess</code> is a good example since dotfiles are excluded
           by default.
         </p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="option">include: [DIR, FILE, ...]</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Time Zone</strong></p>
+        <p class="name"><strong>Time Zone</strong></p>
         <p class="description">
             Set the time zone for site generation. This sets the <code>TZ</code>
             environment variable, which Ruby uses to handle time and date
@@ -99,13 +99,13 @@ class="flag">flags</code> (specified on the command-line) that control them.
             is the local time zone, as set by your operating system.
         </p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="option">timezone: TIMEZONE</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Encoding</strong></p>
+        <p class="name"><strong>Encoding</strong></p>
         <p class="description">
             Set the encoding of files by name. Only available for Ruby
             1.9 or later).
@@ -116,7 +116,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
             command <code>ruby -e 'puts Encoding::list.join("\n")'</code>.
         </p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="option">encoding: ENCODING</code></p>
       </td>
     </tr>
@@ -135,59 +135,59 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
   </thead>
   <tbody>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Regeneration</strong></p>
-        <p class='description'>Enable auto-regeneration of the site when files are modified.</p>
+        <p class="name"><strong>Regeneration</strong></p>
+        <p class="description">Enable auto-regeneration of the site when files are modified.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">-w, --watch</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Configuration</strong></p>
+        <p class="name"><strong>Configuration</strong></p>
         <p class="description">Specify config files instead of using <code>_config.yml</code> automatically. Settings in later files override settings in earlier files.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="flag">--config FILE1[,FILE2,...]</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Drafts</strong></p>
+        <p class="name"><strong>Drafts</strong></p>
         <p class="description">Process and render draft posts.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="flag">--drafts</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Future</strong></p>
+        <p class="name"><strong>Future</strong></p>
         <p class="description">Publish posts with a future date.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="option">future: BOOL</code></p>
         <p><code class="flag">--future</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>LSI</strong></p>
+        <p class="name"><strong>LSI</strong></p>
         <p class="description">Produce an index for related posts.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="option">lsi: BOOL</code></p>
         <p><code class="flag">--lsi</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Limit Posts</strong></p>
+        <p class="name"><strong>Limit Posts</strong></p>
         <p class="description">Limit the number of posts to parse and publish.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p><code class="option">limit_posts: NUM</code></p>
         <p><code class="flag">--limit_posts NUM</code></p>
       </td>
@@ -211,40 +211,40 @@ before your site is served.
     </tr>
   </thead>
   <tbody>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Local Server Port</strong></p>
-        <p class='description'>Listen on the given port.</p>
+        <p class="name"><strong>Local Server Port</strong></p>
+        <p class="description">Listen on the given port.</p>
       </td>
       <td class="align-center">
         <p><code class="option">port: PORT</code></p>
         <p><code class="flag">--port PORT</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Local Server Hostname</strong></p>
-        <p class='description'>Listen at the given hostname.</p>
+        <p class="name"><strong>Local Server Hostname</strong></p>
+        <p class="description">Listen at the given hostname.</p>
       </td>
       <td class="align-center">
         <p><code class="option">host: HOSTNAME</code></p>
         <p><code class="flag">--host HOSTNAME</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Base URL</strong></p>
-        <p class='description'>Serve the website from the given base URL</p>
+        <p class="name"><strong>Base URL</strong></p>
+        <p class="description">Serve the website from the given base URL</p>
       </td>
       <td class="align-center">
         <p><code class="option">baseurl: URL</code></p>
         <p><code class="flag">--baseurl URL</code></p>
       </td>
     </tr>
-    <tr class='setting'>
+    <tr class="setting">
       <td>
-        <p class='name'><strong>Detach</strong></p>
-        <p class='description'>Detach the server from the terminal</p>
+        <p class="name"><strong>Detach</strong></p>
+        <p class="description">Detach the server from the terminal</p>
       </td>
       <td class="align-center">
         <p><code class="option">detach: BOOL</code></p>
