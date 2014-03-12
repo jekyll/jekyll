@@ -1,6 +1,6 @@
 {% if site.gauges_id %}
   <!-- Gauges (http://gaug.es/) -->
-  <script type="text/javascript">
+  <script>
     var _gauges = _gauges || [];
     (function() {
       var t   = document.createElement('script');
@@ -17,7 +17,7 @@
 
 {% if site.google_analytics_id %}
   <!-- Google Analytics (http://google.com/analytics) -->
-  <script type="text/javascript">
+  <script>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '{{ site.google_analytics_id }}']);
     _gaq.push(['_setDomainName', '{{ site.url }}']); // Multiple sub-domains
