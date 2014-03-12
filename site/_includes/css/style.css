@@ -616,9 +616,8 @@ pre, code {
   white-space: pre;
   display: inline-block;
   margin: 0;
-  padding: 0;
   font: 14px/1.8em Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
-  padding: 0 .5em;
+  padding: 0 0.5em;
 }
 
 @media (min-width: 768px){
