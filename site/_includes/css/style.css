@@ -203,7 +203,7 @@ body > footer a:hover img {
 }
 
 .quickstart .content {
-  padding: 0px 0;
+  padding: 0;
 }
 
 .quickstart h4 {
@@ -576,7 +576,7 @@ article h2:first-child {
   content: "";
   position: absolute;
   top: -10px;
-  left: 0px;
+  left: 0;
   border-color: transparent #6f0d0d #6f0d0d transparent;
   border-style: solid;
   border-width: 5px;
@@ -846,7 +846,7 @@ code.option, code.flag, code.filter, code.output {
   content: "";
   position: absolute;
   top: -10px;
-  left: 0px;
+  left: 0;
   border-color: transparent #222 #222 transparent;
   border-style: solid;
   border-width: 5px;
