@@ -31,7 +31,7 @@ body {
 
 /* Sections */
 
-body > header, body > section, body > footer {
+header, section, footer {
   float: left;
   width: 100%;
   clear: both;
@@ -39,11 +39,11 @@ body > header, body > section, body > footer {
 
 /* Header */
 
-body > header h1, body > header nav {
+header h1, header nav {
   display: inline-block;
 }
 
-body > header h1 span {
+header h1 span {
   display: none;
 }
 
@@ -148,7 +148,7 @@ nav li {
 
 /* Footer */
 
-body > footer {
+footer {
   background-color: #222;
   font-size: 16px;
   padding-bottom: 5px;
@@ -156,15 +156,15 @@ body > footer {
   margin-top: 40px;
 }
 
-body > footer a {
+footer a {
   color: #fff;
 }
 
-body > footer .align-right p, body > footer img {
+footer .align-right p, footer img {
   display: inline-block;
 }
 
-body > footer img {
+footer img {
   position: relative;
   top: 8px;
   margin-left: 5px;
@@ -176,7 +176,7 @@ body > footer img {
   transition: opacity .2s;
 }
 
-body > footer a:hover img {
+footer a:hover img {
   opacity: 1;
 }
 
