@@ -2,76 +2,105 @@
 module Jekyll
   module Commands
     class Serve < Command
-      def self.process(options)
-        require 'webrick'
-        include WEBrick
 
-        destination = options['destination']
+      class << self
 
-        FileUtils.mkdir_p(destination)
+        def init_with_program(prog)
+          prog.command(:serve) do |c|
+            c.syntax 'serve [options]'
+            c.description 'Serve your site locally'
+            c.alias :server
 
-        # monkey patch WEBrick using custom 404 page (/404.html)
-        if File.exists?(File.join(destination, '404.html'))
-          WEBrick::HTTPResponse.class_eval do
-            def create_error_page
-              @body = IO.read(File.join(@config[:DocumentRoot], '404.html'))
+            add_build_options(c)
+
+            c.option 'detach', '-B', '--detach', 'Run the server in the background (detach)'
+            c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
+            c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
+            c.option 'baseurl', '-b', '--baseurl [URL]', 'Base URL'
+
+            c.action do |args, options|
+              options["serving"] ||= true
+              Jekyll::Commands::Build.process(options)
+              Jekyll::Commands::Serve.process(options)
             end
           end
         end
 
-        # recreate NondisclosureName under utf-8 circumstance
-        fh_option = WEBrick::Config::FileHandler
-        fh_option[:NondisclosureName] = ['.ht*','~*']
+        # Boot up a WEBrick server which points to the compiled site's root.
+        def process(options)
+          options = configuration_from_options(options)
 
-        s = HTTPServer.new(webrick_options(options))
+          require 'webrick'
 
-        s.config.store(:DirectoryIndex, s.config[:DirectoryIndex] << "index.xml")
+          destination = options['destination']
 
-        s.mount(options['baseurl'], HTTPServlet::FileHandler, destination, fh_option)
+          FileUtils.mkdir_p(destination)
 
-        Jekyll.logger.info "Server address:", "http://#{s.config[:BindAddress]}:#{s.config[:Port]}"
+          # monkey patch WEBrick using custom 404 page (/404.html)
+          if File.exists?(File.join(destination, '404.html'))
+            WEBrick::HTTPResponse.class_eval do
+              def create_error_page
+                @body = IO.read(File.join(@config[:DocumentRoot], '404.html'))
+              end
+            end
+          end
 
-        if options['detach'] # detach the server
-          pid = Process.fork { s.start }
-          Process.detach(pid)
-          Jekyll.logger.info "Server detached with pid '#{pid}'.", "Run `kill -9 #{pid}' to stop the server."
-        else # create a new server thread, then join it with current terminal
-          t = Thread.new { s.start }
-          trap("INT") { s.shutdown }
-          t.join()
+          # recreate NondisclosureName under utf-8 circumstance
+          fh_option = WEBrick::Config::FileHandler
+          fh_option[:NondisclosureName] = ['.ht*','~*']
+
+          s = WEBrick::HTTPServer.new(webrick_options(options))
+
+          s.config.store(:DirectoryIndex, s.config[:DirectoryIndex] << "index.xml")
+
+          s.mount(options['baseurl'], WEBrick::HTTPServlet::FileHandler, destination, fh_option)
+
+          Jekyll.logger.info "Server address:", "http://#{s.config[:BindAddress]}:#{s.config[:Port]}"
+
+          if options['detach'] # detach the server
+            pid = Process.fork { s.start }
+            Process.detach(pid)
+            Jekyll.logger.info "Server detached with pid '#{pid}'.", "Run `kill -9 #{pid}' to stop the server."
+          else # create a new server thread, then join it with current terminal
+            t = Thread.new { s.start }
+            trap("INT") { s.shutdown }
+            t.join
+          end
         end
-      end
 
-      def self.webrick_options(config)
-        opts = {
-          :DocumentRoot => config['destination'],
-          :Port => config['port'],
-          :BindAddress => config['host'],
-          :MimeTypes => self.mime_types,
-          :DoNotReverseLookup => true,
-          :StartCallback => start_callback(config['detach'])
-        }
+        def webrick_options(config)
+          opts = {
+            :DocumentRoot       => config['destination'],
+            :Port               => config['port'],
+            :BindAddress        => config['host'],
+            :MimeTypes          => mime_types,
+            :DoNotReverseLookup => true,
+            :StartCallback      => start_callback(config['detach'])
+          }
 
-        if !config['verbose']
-          opts.merge!({
-            :AccessLog => [],
-            :Logger => Log::new([], Log::WARN)
-          })
+          if !config['verbose']
+            opts.merge!({
+              :AccessLog => [],
+              :Logger => WEBrick::Log.new([], WEBrick::Log::WARN)
+            })
+          end
+
+          opts
         end
 
-        opts
-      end
-
-      def self.start_callback(detached)
-        unless detached
-          Proc.new { Jekyll.logger.info "Server running...", "press ctrl-c to stop." }
+        def start_callback(detached)
+          unless detached
+            Proc.new { Jekyll.logger.info "Server running...", "press ctrl-c to stop." }
+          end
         end
+
+        def mime_types
+          mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
+          WEBrick::HTTPUtils::load_mime_types(mime_types_file)
+        end
+
       end
 
-      def self.mime_types
-        mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
-        WEBrick::HTTPUtils::load_mime_types(mime_types_file)
-      end
     end
   end
 end
