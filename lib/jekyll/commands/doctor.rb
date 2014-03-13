@@ -2,8 +2,23 @@ module Jekyll
   module Commands
     class Doctor < Command
       class << self
+
+        def init_with_program(prog)
+          prog.command(:doctor) do |c|
+            c.syntax 'doctor'
+            c.description 'Search site and print specific deprecation warnings'
+            c.alias(:hyde)
+
+            c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
+
+            c.action do |args, options|
+              Jekyll::Commands::Doctor.process(options)
+            end
+          end
+        end
+
         def process(options)
-          site = Jekyll::Site.new(options)
+          site = Jekyll::Site.new(configuration_from_options(options))
           site.read
 
           if healthy?(site)
@@ -61,7 +76,9 @@ module Jekyll
           end
           urls
         end
+
       end
+
     end
   end
 end
