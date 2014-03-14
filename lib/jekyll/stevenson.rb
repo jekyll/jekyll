@@ -7,13 +7,30 @@ module Jekyll
     WARN   = 2
     ERROR  = 3
 
+    SYMBOL_MAP = {
+      :debug => DEBUG,
+      :info  => INFO,
+      :warn  => WARN,
+      :error => ERROR
+    }
+
     # Public: Create a new instance of Stevenson, Jekyll's logger
     #
     # level - (optional, integer) the log level
     #
     # Returns nothing
     def initialize(level = INFO)
-      @log_level = level
+      set_log_level(level)
+    end
+
+    def set_log_level(level)
+      if level.is_a?(Fixnum)
+        @log_level = level
+      elsif (level.is_a?(Symbol) || level.is_a?(String)) && SYMBOL_MAP.has_key?(level.to_sym)
+        @log_level = SYMBOL_MAP[level.to_sym]
+      else
+        abort_with("Log level '#{level}' is not a valid log level.")
+      end
     end
 
     # Public: Print a jekyll debug message to stdout
@@ -23,7 +40,7 @@ module Jekyll
     #
     # Returns nothing
     def debug(topic, message = nil)
-      $stdout.puts(message(topic, message)) if log_level <= DEBUG
+      tell(message(topic, message), $stdout) if log_level <= DEBUG
     end
 
     # Public: Print a jekyll message to stdout
@@ -33,7 +50,7 @@ module Jekyll
     #
     # Returns nothing
     def info(topic, message = nil)
-      $stdout.puts(message(topic, message)) if log_level <= INFO
+      tell(message(topic, message), $stdout) if log_level <= INFO
     end
 
     # Public: Print a jekyll message to stderr
@@ -43,7 +60,7 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message = nil)
-      $stderr.puts(message(topic, message).yellow) if log_level <= WARN
+      tell(message(topic, message).yellow, $stderr) if log_level <= WARN
     end
 
     # Public: Print a jekyll error message to stderr
@@ -53,7 +70,7 @@ module Jekyll
     #
     # Returns nothing
     def error(topic, message = nil)
-      $stderr.puts(message(topic, message).red) if log_level <= ERROR
+      tell(message(topic, message).red, $stderr) if log_level <= ERROR
     end
 
     # Public: Print a Jekyll error message to stderr and immediately abort the process
@@ -77,6 +94,13 @@ module Jekyll
       formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
     end
 
+    # Public: All the messages which have been printed
+    #
+    # Returns an array of strings which have been printed.
+    def messages
+      @messages ||= []
+    end
+
     # Public: Format the topic
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
@@ -84,6 +108,16 @@ module Jekyll
     # Returns the formatted topic statement
     def formatted_topic(topic)
       "#{topic} ".rjust(20)
+    end
+
+    private
+
+    # Internal: Save the message and print to the output buffer
+    #
+    # Returns nothing
+    def tell(the_message, output_buffer = $stdout)
+      messages << the_message
+      buffer.puts(the_message)
     end
   end
 end

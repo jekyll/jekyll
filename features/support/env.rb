@@ -19,7 +19,7 @@ def jekyll_run_output
 end
 
 def run_jekyll(args, output_file)
-  command = "#{JEKYLL_PATH} #{args} > #{jekyll_output_file} 2>&1"
+  command = "#{JEKYLL_PATH} #{args} --trace > #{jekyll_output_file} 2>&1"
   system command
 end
 

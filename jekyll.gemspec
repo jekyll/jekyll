@@ -42,9 +42,12 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0.0.rc3')
 
   s.add_development_dependency('rake', "~> 10.1")
+  s.add_development_dependency('pry')
+  s.add_development_dependency('pry-debugger')
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 3.5")
+  s.add_development_dependency('rspec', '~> 2.14')
   s.add_development_dependency('rr', "~> 1.1")
   s.add_development_dependency('cucumber', "~> 1.3")
   s.add_development_dependency('RedCloth', "~> 4.2")
@@ -56,7 +59,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('coveralls', "~> 0.7.0")
   s.add_development_dependency('mime-types', "~> 1.5")
   s.add_development_dependency('activesupport', '~> 3.2.13')
-  s.add_development_dependency('jekyll_test_plugin')
-  s.add_development_dependency('jekyll_test_plugin_malicious')
   s.add_development_dependency('rouge', '~> 1.3')
 end

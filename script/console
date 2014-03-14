@@ -1,0 +1,33 @@
+#! /usr/bin/env ruby
+
+require 'pry'
+require File.expand_path("../../lib/jekyll.rb", __FILE__)
+
+SOURCE_DIR   = File.expand_path('../test/source', File.dirname(__FILE__))
+DEST_DIR     = File.expand_path('../test/dest', File.dirname(__FILE__))
+FIXTURES_DIR = File.expand_path('../test/fixtures', File.dirname(__FILE__))
+
+def source_dir(*subpaths)
+  File.join(SOURCE_DIR, *subpaths)
+end
+
+def dest_dir(*subpaths)
+  File.join(DEST_DIR, *subpaths)
+end
+
+def fixture(*subpaths)
+  File.join(FIXTURES_DIR, *subpaths)
+end
+
+def site
+  Jekyll::Site.new(
+    Jekyll.configuration(
+      'source' => source_dir,
+      'dest'   => dest_dir
+    )
+  )
+end
+
+module Jekyll
+  binding.pry
+end

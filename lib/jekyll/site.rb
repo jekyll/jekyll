@@ -1,29 +1,28 @@
 module Jekyll
   class Site
-    attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :categories, :exclude, :include, :source, :dest, :lsi, :highlighter,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
-
-    attr_accessor :converters, :generators
+    attr_reader :config, :layouts, :pages, :static_files, :categories, :exclude,
+                :include, :source, :dest, :lsi, :highlighter, :permalink_style,
+                :tags, :time, :future, :safe, :plugins, :limit_posts,
+                :show_drafts, :keep_files, :baseurl, :file_read_opts,
+                :gems, :collections, :converters, :generators
 
     # Public: Initialize a new Site.
     #
-    # config - A Hash containing site configuration details.
-    def initialize(config)
-      self.config = config.clone
+    # configuration - A Hash containing site configuration details.
+    def initialize(configuration)
+      @config          = configuration.clone
 
       %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
-        self.send("#{opt}=", config[opt])
+        instance_variable_set("@#{opt}", config[opt])
       end
 
-      self.source = File.expand_path(config['source'])
-      self.dest = File.expand_path(config['destination'])
-      self.plugins = plugins_path
-      self.permalink_style = config['permalink'].to_sym
+      @source          = File.expand_path(config['source'])
+      @dest            = File.expand_path(config['destination'])
+      @plugins         = plugins_path
+      @permalink_style = config['permalink'].to_sym
 
-      self.file_read_opts = {}
-      self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
+      @file_read_opts = {}
+      @file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
       reset
       setup
@@ -45,14 +44,19 @@ module Jekyll
     #
     # Returns nothing
     def reset
-      self.time = (config['time'] ? Time.parse(config['time'].to_s) : Time.now)
-      self.layouts = {}
-      self.posts = []
-      self.pages = []
-      self.static_files = []
-      self.categories = Hash.new { |hash, key| hash[key] = [] }
-      self.tags = Hash.new { |hash, key| hash[key] = [] }
-      self.data = {}
+      @time            = if config['time']
+                           Time.parse(config['time'].to_s)
+                         else
+                           Time.now
+                         end
+      @layouts         = {}
+      @collections     = {}
+      @posts           = []
+      @pages           = []
+      @static_files    = []
+      @categories      = Hash.new { |hash, key| hash[key] = [] }
+      @tags            = Hash.new { |hash, key| hash[key] = [] }
+      @data            = {}
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
@@ -65,20 +69,10 @@ module Jekyll
     def setup
       ensure_not_in_dest
 
-      # If safe mode is off, load in any Ruby files under the plugins
-      # directory.
-      unless safe
-        plugins.each do |plugins|
-          Dir[File.join(plugins, "**/*.rb")].sort.each do |f|
-            require f
-          end
-        end
-      end
+      PluginManager.new(self).require_plugins
 
-      require_gems
-
-      self.converters = instantiate_subclasses(Jekyll::Converter)
-      self.generators = instantiate_subclasses(Jekyll::Generator)
+      @converters = instantiate_subclasses(Jekyll::Converter)
+      @generators = instantiate_subclasses(Jekyll::Generator)
     end
 
     # Check that the destination dir isn't the source dir or a directory
@@ -92,28 +86,12 @@ module Jekyll
       end
     end
 
-    def require_gems
-      gems.each do |gem|
-        if plugin_allowed?(gem)
-          require gem
-        end
-      end
-    end
-
-    def plugin_allowed?(gem_name)
-      whitelist.include?(gem_name) || !safe
-    end
-
-    def whitelist
-      @whitelist ||= Array[config['whitelist']].flatten
-    end
-
     # Internal: Setup the plugin search path
     #
     # Returns an Array of plugin search paths
     def plugins_path
-      if (config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [File.join(source, config['plugins'])]
+      if config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins']
+        [Jekyll.sanitized_path(source, config['plugins'])]
       else
         Array(config['plugins']).map { |d| File.expand_path(d) }
       end
@@ -123,9 +101,30 @@ module Jekyll
     #
     # Returns nothing.
     def read
-      self.layouts = LayoutReader.new(self).read
-      read_directories
-      read_data(config['data_source'])
+      @layouts     = LayoutReader.new(self).read
+      @collections = CollectionsReader.new(self).read
+      @pages       = PageReader.new(self).read
+    end
+
+    # Fetch the site posts
+    #
+    # Returns the array of `Post` objects
+    def posts
+      collections['posts']
+    end
+
+    # Fetch the site drafts
+    #
+    # Returns the array of `Draft` objects
+    def drafts
+      collections['drafts']
+    end
+
+    # Fetch the data from the data files
+    #
+    # Returns the array of `Jekyll::Document` objects
+    def data
+      collections['drafts']
     end
 
     # Recursively traverse directories to find posts, pages and static files
@@ -190,6 +189,7 @@ module Jekyll
       end
     end
 
+    # THIS NEEDS A COMMENT WTF DOES THIS DO WTF IS THE MAGIC DIR REALLY
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
         klass.new(self, source, dir, entry) if klass.valid?(entry)
@@ -232,9 +232,10 @@ module Jekyll
     def render
       relative_permalinks_deprecation_method
 
-      payload = site_payload
-      [posts, pages].flatten.each do |page_or_post|
-        page_or_post.render(layouts, payload)
+      collections.each do |name, collection|
+        collection.documents.each do |document|
+          DocumentConverter.new(document).transform
+        end
       end
 
       categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
@@ -310,7 +311,7 @@ module Jekyll
           "html_pages"   => pages.reject { |page| !page.html? },
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
-          "data"         => site_data})}
+          "data"         => site_data })}
     end
 
     # Filter out any files/directories that are hidden or backup files (start
@@ -380,13 +381,11 @@ module Jekyll
 
     def relative_permalinks_deprecation_method
       if config['relative_permalinks'] && has_relative_page?
-        $stderr.puts # Places newline after "Generating..."
         Jekyll.logger.warn "Deprecation:", "Starting in 2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
                                             " directory. Check http://jekyllrb.com/docs/upgrading/"+
                                             " for more info."
-        $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
       end
     end
 
@@ -401,16 +400,11 @@ module Jekyll
     private
 
     def has_relative_page?
-      pages.any? { |page| page.uses_relative_permalinks }
-    end
-
-    def has_yaml_header?(file)
-      "---" == File.open(file) { |fd| fd.read(3) }
+      pages.any? { |page| page.uses_relative_permalinks? }
     end
 
     def limit_posts!
-      limit = posts.length < limit_posts ? posts.length : limit_posts
-      self.posts = posts[-limit, limit]
+      posts.limit(limit_posts)
     end
 
     def site_cleaner
