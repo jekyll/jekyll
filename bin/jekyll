@@ -6,18 +6,14 @@ $:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 require 'jekyll'
 require 'mercenary'
 
-Jekyll::Deprecator.process(ARGV)
-
-def add_build_options(c)
-  c.option 'config',  '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
-  c.option 'future',  '--future', 'Publishes posts with a future date'
-  c.option 'limit_posts', '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
-  c.option 'watch',   '-w', '--watch', 'Watch for changes and rebuild'
-  c.option 'lsi',     '--lsi', 'Use LSI for improved related posts'
-  c.option 'show_drafts',  '-D', '--drafts', 'Render posts in the _drafts folder'
-  c.option 'quiet',   '-q', '--quiet', 'Silence output.'
-  c.option 'verbose', '-V', '--verbose', 'Print verbose output.'
+%w[jekyll-import].each do |blessed_gem|
+  begin
+    require blessed_gem
+  rescue LoadError
+  end
 end
+
+Jekyll::Deprecator.process(ARGV)
 
 Mercenary.program(:jekyll) do |p|
   p.version Jekyll::VERSION
@@ -30,112 +26,14 @@ Mercenary.program(:jekyll) do |p|
   p.option 'plugins', '-p', '--plugins PLUGINS_DIR1[,PLUGINS_DIR2[,...]]', Array, 'Plugins directory (defaults to ./_plugins)'
   p.option 'layouts', '--layouts DIR', String, 'Layouts directory (defaults to ./_layouts)'
 
+  Jekyll::Command.subclasses.each { |c| c.init_with_program(p) }
+
   p.action do |args, options|
     if args.empty?
-      p.go(["-h"])
+      puts p
     else
       unless p.has_command?(args.first)
         Jekyll.logger.abort_with "Invalid command. Use --help for more information"
-      end
-    end
-  end
-
-  p.command(:new) do |c|
-    c.syntax 'jekyll new PATH'
-    c.description 'Creates a new Jekyll site scaffold in PATH'
-
-    c.option 'force', '--force', 'Force creation even if PATH already exists'
-    c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
-
-    c.action do |args, options|
-      Jekyll::Commands::New.process(args)
-    end
-  end
-
-  p.command(:build) do |c|
-    c.syntax      'jekyll build [options]'
-    c.description 'Build your site'
-
-    add_build_options(c)
-
-    c.action do |args, options|
-      options["serving"] = false
-      config = Jekyll.configuration(options)
-      Jekyll::Commands::Build.process(config)
-    end
-  end
-
-  p.command(:serve) do |c|
-    c.syntax 'jekyll serve [options]'
-    c.description 'Serve your site locally'
-    c.alias :server
-
-    add_build_options(c)
-
-    c.option 'detach', '-B', '--detach', 'Run the server in the background (detach)'
-    c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
-    c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
-    c.option 'baseurl', '-b', '--baseurl [URL]', 'Base URL'
-
-    c.action do |args, options|
-      options["serving"] ||= true
-      options = Jekyll.configuration(options)
-      Jekyll::Commands::Build.process(options)
-      Jekyll::Commands::Serve.process(options)
-    end
-  end
-
-  p.command(:doctor) do |c|
-    c.syntax 'jekyll doctor'
-    c.description 'Search site and print specific deprecation warnings'
-    c.alias(:hyde)
-
-    c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
-
-    c.action do |args, options|
-      options = Jekyll.configuration(options)
-      Jekyll::Commands::Doctor.process(options)
-    end
-  end
-
-  p.command(:docs) do |c|
-    c.syntax 'jekyll docs'
-    c.description "Launch local server with docs for Jekyll v#{Jekyll::VERSION}"
-
-    c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
-    c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
-
-    c.action do |args, options|
-      options = Jekyll.configuration(options.merge!({
-        'source' => File.expand_path("../site", File.dirname(__FILE__)),
-        'destination' => File.expand_path("../site/_site", File.dirname(__FILE__))
-      }))
-      Jekyll::Commands::Build.process(options)
-      Jekyll::Commands::Serve.process(options)
-    end
-  end
-
-  p.command(:import) do |c|
-    c.syntax 'jekyll import <platform> [options]'
-    c.description 'Import your old blog to Jekyll'
-    importers = []
-
-    begin
-      require 'jekyll-import'
-      importers = JekyllImport.add_importer_commands(c)
-    rescue LoadError
-    end
-
-    c.action do |args, options|
-      unless Object.const_defined?(:JekyllImport)
-        msg  = "You must install the 'jekyll-import' gem before continuing.\n"
-        msg += "* Please see the documentation at http://jekyllrb.com/docs/migrations/ for instructions.\n"
-        abort msg
-      end
-      if args.empty?
-        Jekyll.logger.warn "You must specify an importer."
-        Jekyll.logger.info "Valid options are:"
-        importers.each { |i| Jekyll.logger.info "*", "#{i}" }
       end
     end
   end
