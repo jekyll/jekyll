@@ -50,6 +50,7 @@
   * Update to Mercenary v0.3.x (#2085)
   * Ship Sass support as a separate gem (#2098)
   * Extract core extensions into a Utils module (#2112)
+  * Refactor CLI & Commands For Greater Happiness (#2143)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
