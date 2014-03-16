@@ -6,6 +6,13 @@ $:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 require 'jekyll'
 require 'mercenary'
 
+%w[jekyll-import].each do |blessed_gem|
+  begin
+    require blessed_gem
+  rescue LoadError
+  end
+end
+
 Jekyll::Deprecator.process(ARGV)
 
 Mercenary.program(:jekyll) do |p|
@@ -27,31 +34,6 @@ Mercenary.program(:jekyll) do |p|
     else
       unless p.has_command?(args.first)
         Jekyll.logger.abort_with "Invalid command. Use --help for more information"
-      end
-    end
-  end
-
-  p.command(:import) do |c|
-    c.syntax 'import <platform> [options]'
-    c.description 'Import your old blog to Jekyll'
-    importers = []
-
-    begin
-      require 'jekyll-import'
-      importers = JekyllImport.add_importer_commands(c)
-    rescue LoadError
-    end
-
-    c.action do |args, options|
-      unless Object.const_defined?(:JekyllImport)
-        msg  = "You must install the 'jekyll-import' gem before continuing.\n"
-        msg += "* Please see the documentation at http://jekyllrb.com/docs/migrations/ for instructions.\n"
-        abort msg
-      end
-      if args.empty?
-        Jekyll.logger.warn "You must specify an importer."
-        Jekyll.logger.info "Valid options are:"
-        importers.each { |i| Jekyll.logger.info "*", "#{i}" }
       end
     end
   end
