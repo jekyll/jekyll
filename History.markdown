@@ -72,6 +72,8 @@
   * Sanitize paths uniformly, in a Windows-friendly way (#2065, #2109)
   * Update gem build steps to work correctly on Windows (#2118)
   * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121).
+  * Remove `+` characters from Pygments lexer names when adding as a CSS
+    class (#994)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
