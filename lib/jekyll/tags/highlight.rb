@@ -5,30 +5,18 @@ module Jekyll
 
       # The regular expression syntax checker. Start with the language specifier.
       # Follow that by zero or more space separated options that take one of two
-      # forms:
-      #
-      # 1. name
-      # 2. name=value
+      # forms: name or name=value
       SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=\w+)?)*)$/
 
       def initialize(tag_name, markup, tokens)
         super
         if markup.strip =~ SYNTAX
           @lang = $1.downcase
-          @options = {}
-          if defined?($2) && $2 != ''
-            $2.split.each do |opt|
-              key, value = opt.split('=')
-              if value.nil?
-                if key == 'linenos'
-                  value = 'inline'
-                else
-                  value = true
-                end
-              end
-              @options[key] = value
-            end
-          end
+          @options = Hash[$2.split.map do |opt|
+            key, value = opt.split("=")
+            [key.to_sym, (value || true)]
+          end]
+          @options[:linenos] = "inline" if @options.key?(:linenos) and @options[:linenos] == true
         else
           raise SyntaxError.new <<-eos
 Syntax Error in tag 'highlight' while parsing the following markup:
@@ -41,8 +29,11 @@ eos
       end
 
       def render(context)
+        prefix = context["highlighter_prefix"] || ""
+        suffix = context["highlighter_suffix"] || ""
         code = super.to_s.strip
-        case context.registers[:site].highlighter
+
+        output = case context.registers[:site].highlighter
         when 'pygments'
           render_pygments(context, code)
         when 'rouge'
@@ -50,11 +41,11 @@ eos
         else
           render_codehighlighter(context, code)
         end.strip
+        prefix + add_code_tag(output) + suffix
       end
 
       def render_pygments(context, code)
         require 'pygments'
-
         @options[:encoding] = 'utf-8'
 
         highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
@@ -70,45 +61,24 @@ eos
           raise ArgumentError.new("Pygments.rb returned an unacceptable value when attempting to highlight some code.")
         end
 
-        output = add_code_tags(highlighted_code, @lang)
-
-        output = context["highlighter_prefix"] + output if context["highlighter_prefix"]
-        output << context["highlighter_suffix"] if context["highlighter_suffix"]
-
-        return output
+        highlighted_code
       end
 
       def render_rouge(context, code)
         require 'rouge'
-
-        linenos = @options.keys.include?('linenos')
+        formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
-        formatter = Rouge::Formatters::HTML.new(line_numbers: linenos, wrap: false)
-
-        pre = "<pre>#{formatter.format(lexer.lex(code))}</pre>"
-        output = ""
-
-        output << context["highlighter_prefix"] if context["highlighter_prefix"]
-        output << "<div class=\"highlight\">"
-        output << add_code_tags(pre, @lang)
-        output << "</div>"
-        output << context["highlighter_suffix"] if context["highlighter_suffix"]
-
-        return output
+        code = formatter.format(lexer.lex(code))
+        "<div class=\"highlight\"><pre>#{code}</pre></div>"
       end
 
       def render_codehighlighter(context, code)
-        #The div is required because RDiscount blows ass
-        <<-HTML
-  <div>
-    <pre><code class='#{@lang.to_s.gsub("+", "-")}'>#{h(code).strip}</code></pre>
-  </div>
-        HTML
+        "<div class=\"highlight\"><pre>#{h(code).strip}</pre></div>"
       end
 
-      def add_code_tags(code, lang)
+      def add_code_tag(code)
         # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>\n*/,'<pre><code class="' + lang.to_s.gsub("+", "-") + '">')
+        code = code.sub(/<pre>\n*/,'<pre><code class="' + @lang.to_s.gsub("+", "-") + '">')
         code = code.sub(/\n*<\/pre>/,"</code></pre>")
         code.strip
       end
