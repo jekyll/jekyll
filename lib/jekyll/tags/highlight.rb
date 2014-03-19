@@ -65,7 +65,7 @@ eos
           puts
           Jekyll.logger.error "While attempting to convert the above code, Pygments.rb" +
             " returned an unacceptable value."
-          Jekyll.logger.error "This is usually solved by running `jekyll build` again."
+          Jekyll.logger.error "This is usually a timeout problem solved by running `jekyll build` again."
           raise ArgumentError.new("Pygments.rb returned an unacceptable value when attempting to highlight some code.")
         end
 
