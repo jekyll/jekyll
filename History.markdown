@@ -98,6 +98,7 @@
   * Add Japanese translation of README and CONTRIBUTING docs. (#2081)
   * Re-align the tables in Cucumber (#2108)
   * Trim trailing spaces and convert tabs to spaces (#2122)
+  * Fix the failing Travis scenarios due to Cucumber issues (#2155)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
