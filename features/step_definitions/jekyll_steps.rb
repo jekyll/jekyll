@@ -18,19 +18,19 @@ end
 
 
 Before do
-  FileUtils.mkdir(TEST_DIR)
+  FileUtils.mkdir_p(TEST_DIR) unless File.exists?(TEST_DIR)
   Dir.chdir(TEST_DIR)
 end
 
 After do
-  FileUtils.rm_rf(TEST_DIR)
-  FileUtils.rm_rf(JEKYLL_COMMAND_OUTPUT_FILE)
+  FileUtils.rm_rf(TEST_DIR)   if File.exists?(TEST_DIR)
+  FileUtils.rm(JEKYLL_COMMAND_OUTPUT_FILE)
 end
 
 World(Test::Unit::Assertions)
 
 Given /^I have a blank site in "(.*)"$/ do |path|
-  FileUtils.mkdir_p(path)
+  FileUtils.mkdir_p(path) unless File.exists?(path)
 end
 
 Given /^I do not have a "(.*)" directory$/ do |path|
