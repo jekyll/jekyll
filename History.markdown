@@ -154,6 +154,7 @@
   * Update modernizr to v2.7.1 (#2129)
   * Add `jekyll-ordinal` to list of third-party plugins (#2150)
   * Add `jekyll_figure` to list of third-party plugins (#2158)
+  * Clarify the documentation for safe mode (#2163)
 
 ## 1.4.3 / 2014-01-13
 
