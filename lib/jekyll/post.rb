@@ -1,7 +1,6 @@
 module Jekyll
-  class Post
+  class Post < Item
     include Comparable
-    include Convertible
 
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
@@ -33,35 +32,41 @@ module Jekyll
       name =~ MATCHER
     end
 
-    attr_accessor :site
-    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
-    attr_accessor :date, :slug, :tags, :categories
-
-    attr_reader :name
+    attr_accessor :extracted_excerpt, :date, :slug, :published, :tags, :categories
 
     # Initialize this Post instance.
     #
     # site       - The Site.
-    # base       - The String path to the dir containing the post file.
-    # name       - The String filename of the post file.
+    # path       - The String path of the post file.
     #
     # Returns the new Post.
-    def initialize(site, source, dir, name)
-      @site = site
-      @dir = dir
-      @base = containing_dir(source, dir)
-      @name = name
-
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
-      process(name)
-      read_yaml(@base, name)
+    def initialize(site, path)
+      super(site, path)
+      raise NameError, "Invalid filename" unless self.class.valid?(@name)
+      @dir  = File.dirname(path).sub(site.source, '').sub(/(_posts|_drafts)/, '')
+      self.categories = @dir.downcase.split('/').reject { |x| x.empty? }
+      process(@name)
+      read_yaml(path)
 
       if data.has_key?('date')
         self.date = Time.parse(data["date"].to_s)
       end
 
+      published = self.published?
+
       populate_categories
       populate_tags
+      raise RangeError, "Not published" unless published? && (site.future || self.date <= site.time)
+
+      site.aggregate_post_info(self)
+    end
+
+    def published?
+      if self.data.has_key?('published') && self.data['published'] == false
+        false
+      else
+        true
+      end
     end
 
     def populate_categories
@@ -75,19 +80,14 @@ module Jekyll
       self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
     end
 
-    # Get the full path to the directory containing the post files
-    def containing_dir(source, dir)
-      return File.join(source, dir, '_posts')
-    end
-
     # Read the YAML frontmatter.
     #
     # base - The String path to the dir containing the file.
     # name - The String filename of the file.
     #
     # Returns nothing.
-    def read_yaml(base, name)
-      super(base, name)
+    def read_yaml(path)
+      super(path)
       self.extracted_excerpt = extract_excerpt
     end
 
@@ -167,14 +167,6 @@ module Jekyll
       File.dirname(url)
     end
 
-    # The full path and filename of the post. Defined in the YAML of the post
-    # body (optional).
-    #
-    # Returns the String permalink.
-    def permalink
-      data && data['permalink']
-    end
-
     def template
       case site.permalink_style
       when :pretty
@@ -240,17 +232,11 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-      # construct payload
-      payload = Utils.deep_merge_hashes({
-        "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
-      }, site_payload)
-
-      if generate_excerpt?
-        extracted_excerpt.do_layout(payload, {})
-      end
-
-      do_layout(payload.merge({"page" => to_liquid}), layouts)
+      template = {
+        "page" => self.to_liquid,
+        "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) }
+      }
+      super(template, layouts, site_payload)
     end
 
     # Obtain destination path.

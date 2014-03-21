@@ -2,35 +2,21 @@ module Jekyll
   class Layout
     include Convertible
 
-    # Gets the Site object.
-    attr_reader :site
-
-    # Gets the name of this layout.
-    attr_reader :name
-
-    # Gets/Sets the extension of this layout.
-    attr_accessor :ext
-
-    # Gets/Sets the Hash that holds the metadata for this layout.
-    attr_accessor :data
-
-    # Gets/Sets the content of this layout.
-    attr_accessor :content
+    attr_reader :site, :name
+    attr_accessor :data, :content
 
     # Initialize a new Layout.
     #
     # site - The Site.
-    # base - The String path to the source.
-    # name - The String filename of the post file.
-    def initialize(site, base, name)
+    # path - The String path of the post file.
+    def initialize(site, path)
       @site = site
-      @base = base
-      @name = name
+      @name = File.basename(path)
 
       self.data = {}
 
       process(name)
-      read_yaml(base, name)
+      read_yaml(path)
     end
 
     # Extract information from the layout filename.

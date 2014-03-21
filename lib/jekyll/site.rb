@@ -1,7 +1,7 @@
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :categories, :exclude, :include, :source, :dest, :lsi, :highlighter,
+                  :categories, :exclude, :include, :source, :destination, :lsi, :highlighter,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
 
@@ -18,13 +18,17 @@ module Jekyll
       end
 
       self.source = File.expand_path(config['source'])
-      self.dest = File.expand_path(config['destination'])
+      self.destination = File.expand_path(config['destination'])
       self.plugins = plugins_path
-      self.permalink_style = config['permalink'].to_sym
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
+      if limit_posts < 0
+        raise ArgumentError, "limit_posts must be a non-negative number"
+      end
+
+      ensure_not_in_dest
       reset
       setup
     end
@@ -47,24 +51,17 @@ module Jekyll
     def reset
       self.time = (config['time'] ? Time.parse(config['time'].to_s) : Time.now)
       self.layouts = {}
-      self.posts = []
-      self.pages = []
+      self.files = []
       self.static_files = []
       self.categories = Hash.new { |hash, key| hash[key] = [] }
       self.tags = Hash.new { |hash, key| hash[key] = [] }
       self.data = {}
-
-      if limit_posts < 0
-        raise ArgumentError, "limit_posts must be a non-negative number"
-      end
     end
 
     # Load necessary libraries, plugins, converters, and generators.
     #
     # Returns nothing.
     def setup
-      ensure_not_in_dest
-
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
       unless safe
@@ -84,7 +81,7 @@ module Jekyll
     # Check that the destination dir isn't the source dir or a directory
     # parent to the source dir.
     def ensure_not_in_dest
-      dest_pathname = Pathname.new(dest)
+      dest_pathname = Pathname.new(destination)
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
@@ -119,102 +116,57 @@ module Jekyll
       end
     end
 
-    # Read Site data from disk and load it into internal data structures.
+    # Recursively traverse source directory to find posts, pages, layouts 
+    # and static filesthat will become part of the site according to the rules
+    # in filter_entries.
     #
     # Returns nothing.
     def read
-      self.layouts = LayoutReader.new(self).read
-      read_directories
-      read_data(config['data_source'])
-    end
-
-    # Recursively traverse directories to find posts, pages and static files
-    # that will become part of the site according to the rules in
-    # filter_entries.
-    #
-    # dir - The String relative path of the directory to read. Default: ''.
-    #
-    # Returns nothing.
-    def read_directories(dir = '')
-      base = File.join(source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
-
-      read_posts(dir)
-      read_drafts(dir) if show_drafts
+      filter_entries(Dir["#{source}/**/{*,.*}"]).each do |path|
+        begin
+          klass = if File.directory?(path)
+            nil
+          elsif path =~ /#{config['layouts']}/
+            ext = File.extname(path)
+            name = File.basename(path, ext)
+            layouts[name] = Layout.new(self, path)
+            nil
+          elsif path =~ /_posts/
+            Post
+          elsif path =~ /_drafts/ && show_drafts
+            Draft
+          elsif path.sub(source, '') =~ /\/_/
+            nil
+          elsif has_yaml_header?(path)
+            Page
+          else
+            StaticFile
+          end
+          files << klass.new(self, path) if klass
+        rescue NameError
+          Jekyll.logger.warn "Warning:", "Invalid filename on #{path}"
+        rescue RangeError
+        end
+      end
       posts.sort!
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
-
-      entries.each do |f|
-        f_abs = File.join(base, f)
-        if File.directory?(f_abs)
-          f_rel = File.join(dir, f)
-          read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
-        elsif has_yaml_header?(f_abs)
-          page = Page.new(self, source, dir, f)
-          pages << page if page.published?
-        else
-          static_files << StaticFile.new(self, source, dir, f)
-        end
-      end
-
-      pages.sort_by!(&:name)
     end
 
-    # Read all the files in <source>/<dir>/_posts and create a new Post
-    # object with each one.
-    #
-    # dir - The String relative path of the directory to read.
-    #
-    # Returns nothing.
-    def read_posts(dir)
-      posts = read_content(dir, '_posts', Post)
-
-      posts.each do |post|
-        if post.published? && (future || post.date <= time)
-          aggregate_post_info(post)
-        end
-      end
-   end
-
-    # Read all the files in <source>/<dir>/_drafts and create a new Post
-    # object with each one.
-    #
-    # dir - The String relative path of the directory to read.
-    #
-    # Returns nothing.
-    def read_drafts(dir)
-      drafts = read_content(dir, '_drafts', Draft)
-
-      drafts.each do |draft|
-        aggregate_post_info(draft)
-      end
+    def posts
+      files.select { |file| file.is_a?Post }.sort
     end
 
-    def read_content(dir, magic_dir, klass)
-      get_entries(dir, magic_dir).map do |entry|
-        klass.new(self, source, dir, entry) if klass.valid?(entry)
-      end.reject do |entry|
-        entry.nil?
-      end
+    def posts=(posts)
+      files.delete_if { |file| file.is_a?Post }
+      files.concat(posts)
     end
 
-    # Read and parse all yaml files under <source>/<dir>
-    #
-    # Returns nothing
-    def read_data(dir)
-      base = File.join(source, dir)
-      return unless File.directory?(base) && (!safe || !File.symlink?(base))
+    def pages
+      files.select { |file| file.is_a?Page }
+    end
 
-      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
-
-      entries.each do |entry|
-        path = File.join(source, dir, entry)
-        next if File.symlink?(path) && safe
-
-        key = sanitize_filename(File.basename(entry, '.*'))
-        self.data[key] = SafeYAML.load_file(path)
-      end
+    def static_files
+      files.select { |file| file.is_a?StaticFile }
     end
 
     # Run each of the Generators.
@@ -254,7 +206,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item| item.write(dest) }
+      files.each { |item| item.write(destination) }
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -325,6 +277,14 @@ module Jekyll
       EntryFilter.new(self, base_directory).filter(entries)
     end
 
+    def filter_exclude?(entry)
+      exclude.glob_include?(entry.sub("#{source}/", ''))
+    end
+
+    def filter_include?(entry)
+      include.glob_include?(entry.sub("#{source}/", ''))
+    end
+
     # Get the implementation class for the given Converter.
     #
     # klass - The Class of the Converter to fetch.
@@ -376,18 +336,6 @@ module Jekyll
       posts << post
       post.categories.each { |c| categories[c] << post }
       post.tags.each { |c| tags[c] << post }
-    end
-
-    def relative_permalinks_deprecation_method
-      if config['relative_permalinks'] && has_relative_page?
-        $stderr.puts # Places newline after "Generating..."
-        Jekyll.logger.warn "Deprecation:", "Starting in 2.0, permalinks for pages" +
-                                            " in subfolders must be relative to the" +
-                                            " site source directory, not the parent" +
-                                            " directory. Check http://jekyllrb.com/docs/upgrading/"+
-                                            " for more info."
-        $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
-      end
     end
 
     def each_site_file

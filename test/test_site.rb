@@ -97,7 +97,7 @@ class TestSite < Test::Unit::TestCase
 
       @site.process
       some_static_file = @site.static_files[0].path
-      dest = File.expand_path(@site.static_files[0].destination(@site.dest))
+      dest = File.expand_path(@site.static_files[0].destination(@site.destination))
       mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
 
       # need to sleep because filesystem timestamps have best resolution in seconds
@@ -126,7 +126,7 @@ class TestSite < Test::Unit::TestCase
 
       @site.process
       some_static_file = @site.static_files[0].path
-      dest = File.expand_path(@site.static_files[0].destination(@site.dest))
+      dest = File.expand_path(@site.static_files[0].destination(@site.destination))
       mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
 
       # need to sleep because filesystem timestamps have best resolution in seconds
@@ -180,8 +180,8 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "read posts" do
-      @site.read_posts('')
-      posts = Dir[source_dir('_posts', '**', '*')]
+      @site.read
+      posts = Dir[source_dir('**','_posts', '**', '*')]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
@@ -200,11 +200,11 @@ class TestSite < Test::Unit::TestCase
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
-      categories = %w(2013 bar baz category foo z_category publish_test win).sort
+      categories = %w(2013 bar baz category es foo z_category publish_test win).sort
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
-      assert_equal 5, @site.categories['foo'].size
+      assert_equal 4, @site.categories['foo'].size
     end
 
     context 'error handling' do

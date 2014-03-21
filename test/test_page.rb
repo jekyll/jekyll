@@ -1,14 +1,15 @@
 require 'helper'
 
 class TestPage < Test::Unit::TestCase
-  def setup_page(*args)
-    dir, file = args
-    dir, file = ['', dir] if file.nil?
-    @page = Page.new(@site, source_dir, dir, file)
+  def setup_page(dir, file)
+    path = File.join(source_dir, dir, file)
+    @site.source = source_dir
+    @page = Page.new(@site, path)
   end
 
   def do_render(page)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
+    path = File.join(source_dir('_layouts'), "simple.html")
+    layouts = { "default" => Layout.new(@site, path)}
     page.render(layouts, {"site" => {"posts" => []}})
   end
 
@@ -21,7 +22,7 @@ class TestPage < Test::Unit::TestCase
 
     context "processing pages" do
       should "create url based on filename" do
-        @page = setup_page('contacts.html')
+        @page = setup_page('', 'contacts.html')
         assert_equal "/contacts.html", @page.url
       end
 
@@ -43,12 +44,12 @@ class TestPage < Test::Unit::TestCase
       end
 
       should "deal properly with extensions" do
-        @page = setup_page('deal.with.dots.html')
+        @page = setup_page('', 'deal.with.dots.html')
         assert_equal ".html", @page.ext
       end
 
       should "deal properly with dots" do
-        @page = setup_page('deal.with.dots.html')
+        @page = setup_page('', 'deal.with.dots.html')
         assert_equal "deal.with.dots", @page.basename
       end
 
@@ -81,12 +82,12 @@ class TestPage < Test::Unit::TestCase
         end
 
         should "return dir correctly" do
-          @page = setup_page('contacts.html')
+          @page = setup_page('', 'contacts.html')
           assert_equal '/contacts/', @page.dir
         end
 
         should "return dir correctly for index page" do
-          @page = setup_page('index.html')
+          @page = setup_page('', 'index.html')
           assert_equal '/', @page.dir
         end
 
@@ -116,14 +117,13 @@ class TestPage < Test::Unit::TestCase
       context "with any other url style" do
         should "return dir correctly" do
           @site.permalink_style = nil
-          @page = setup_page('contacts.html')
+          @page = setup_page('', 'contacts.html')
           assert_equal '/', @page.dir
         end
       end
 
       should "respect permalink in yaml front matter" do
-        file = "about.html"
-        @page = setup_page(file)
+        @page = setup_page('', 'about.html')
 
         assert_equal "/about/", @page.permalink
         assert_equal @page.permalink, @page.url
@@ -143,7 +143,7 @@ class TestPage < Test::Unit::TestCase
 
     context "with specified layout of nil" do
       setup do
-        @page = setup_page('sitemap.xml')
+        @page = setup_page('', 'sitemap.xml')
       end
 
       should "layout of nil is respected" do
@@ -157,7 +157,7 @@ class TestPage < Test::Unit::TestCase
       end
 
       should "write properly" do
-        page = setup_page('contacts.html')
+        page = setup_page('', 'contacts.html')
         do_render(page)
         page.write(dest_dir)
 
@@ -175,7 +175,7 @@ class TestPage < Test::Unit::TestCase
       end
 
       should "write properly without html extension" do
-        page = setup_page('contacts.html')
+        page = setup_page('', 'contacts.html')
         page.site.permalink_style = :pretty
         do_render(page)
         page.write(dest_dir)
@@ -185,7 +185,7 @@ class TestPage < Test::Unit::TestCase
       end
 
       should "write properly with extension different from html" do
-        page = setup_page("sitemap.xml")
+        page = setup_page('', 'sitemap.xml')
         page.site.permalink_style = :pretty
         do_render(page)
         page.write(dest_dir)
@@ -197,7 +197,7 @@ class TestPage < Test::Unit::TestCase
       end
 
       should "write dotfiles properly" do
-        page = setup_page('.htaccess')
+        page = setup_page('', '.htaccess')
         do_render(page)
         page.write(dest_dir)
 

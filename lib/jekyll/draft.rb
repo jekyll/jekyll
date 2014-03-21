@@ -13,16 +13,6 @@ module Jekyll
       name =~ MATCHER
     end
 
-    # Get the full path to the directory containing the draft files
-    def containing_dir(source, dir)
-      File.join(source, dir, '_drafts')
-    end
-
-    # The path to the draft source file, relative to the site source
-    def relative_path
-      File.join(@dir, '_drafts', @name)
-    end
-
     # Extract information from the post filename.
     #
     # name - The String filename of the post file.
@@ -30,7 +20,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       m, slug, ext = *name.match(MATCHER)
-      self.date = File.mtime(File.join(@base, name))
+      self.date = File.mtime(self.file_path)
       self.slug = slug
       self.ext = ext
     end

@@ -22,7 +22,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "render latest post's content" do
-      assert @index.include?(@site.posts.last.content)
+      assert @index.include?(@site.posts.last.content.gsub(/<[^>]*>/ui,''))
     end
 
     should "hide unpublished posts" do

@@ -34,23 +34,22 @@ module Jekyll
 
     # Read the YAML frontmatter.
     #
-    # base - The String path to the dir containing the file.
-    # name - The String filename of the file.
+    # path - The String path of the file.
     # opts - optional parameter to File.read, default at site configs
     #
     # Returns nothing.
-    def read_yaml(base, name, opts = {})
+    def read_yaml(path, opts ={})
       begin
-        self.content = File.read(File.join(base, name),
-                                 merged_file_read_opts(opts))
+        self.content = File.read(path, merged_file_read_opts(opts))
+
         if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = SafeYAML.load($1)
         end
       rescue SyntaxError => e
-        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        puts "YAML Exception reading #{path}: #{e.message}"
       rescue Exception => e
-        puts "Error reading file #{File.join(base, name)}: #{e.message}"
+        puts "Error reading file #{path}: #{e.message}"
       end
 
       self.data ||= {}

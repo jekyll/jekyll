@@ -13,7 +13,7 @@ class TestTags < Test::Unit::TestCase
     site = Site.new(Jekyll.configuration)
 
     if override['read_posts']
-      site.read_posts('')
+      site.read
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
@@ -218,8 +218,8 @@ title: Post linking
 
 - 1 {% post_url 2008-11-21-complex %}
 - 2 {% post_url /2008-11-21-complex %}
-- 3 {% post_url es/2008-11-21-nested %}
-- 4 {% post_url /es/2008-11-21-nested %}
+- 3 {% post_url 2008-11-21-nested %}
+- 4 {% post_url /2008-11-21-nested %}
 CONTENT
       create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
     end
@@ -234,8 +234,8 @@ CONTENT
     end
 
     should "have the url to the \"nested\" post from 2008-11-21" do
-      assert_match %r{3\s/2008/11/21/nested/}, @result
-      assert_match %r{4\s/2008/11/21/nested/}, @result
+      assert_match %r{3\s/es/2008/11/21/nested/}, @result
+      assert_match %r{4\s/es/2008/11/21/nested/}, @result
     end
   end
 

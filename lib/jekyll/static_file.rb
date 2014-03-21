@@ -1,24 +1,16 @@
 module Jekyll
   class StaticFile
+    attr_reader :path
     # The cache of last modification times [path] -> mtime.
     @@mtimes = Hash.new
 
     # Initialize a new StaticFile.
     #
     # site - The Site.
-    # base - The String path to the <source>.
-    # dir  - The String path between <source> and the file.
-    # name - The String filename of the file.
-    def initialize(site, base, dir, name)
+    # path  - The File path.
+    def initialize(site, path)
       @site = site
-      @base = base
-      @dir  = dir
-      @name = name
-    end
-
-    # Returns source file path.
-    def path
-      File.join(@base, @dir, @name)
+      @path = path
     end
 
     # Returns the source file path relative to the site source
@@ -32,7 +24,7 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      File.join(dest, @dir, @name)
+      path.sub(@site.source, dest)
     end
 
     # Returns last modification time for this file.
@@ -45,6 +37,10 @@ module Jekyll
     # Returns true if modified since last write.
     def modified?
       @@mtimes[path] != mtime
+    end
+
+    def render(layout, payload)
+      #Quack
     end
 
     # Write the static file to the destination directory (if modified).
