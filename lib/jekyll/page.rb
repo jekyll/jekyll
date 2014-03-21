@@ -86,8 +86,8 @@ module Jekyll
     # desired placeholder replacements. For details see "url.rb"
     def url_placeholders
       {
-        :path       => URL.escape_path(@dir),
-        :basename   => URL.escape_path(basename),
+        :path       => @dir,
+        :basename   => basename,
         :output_ext => output_ext
       }
     end

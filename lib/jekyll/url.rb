@@ -46,7 +46,7 @@ module Jekyll
     # Returns the _unsanitizied_ String URL
     def generate_url
       @placeholders.inject(@template) do |result, token|
-        result.gsub(/:#{token.first}/, token.last)
+        result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
       end
     end
 
