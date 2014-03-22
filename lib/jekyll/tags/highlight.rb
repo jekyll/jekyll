@@ -12,10 +12,13 @@ module Jekyll
         super
         if markup.strip =~ SYNTAX
           @lang = $1.downcase
-          @options = Hash[$2.split.map do |opt|
-            key, value = opt.split("=")
-            [key.to_sym, (value || true)]
-          end]
+          @options = {}
+          if defined?($2) && $2 != ''
+            $2.split.each do |opt|
+              key, value = opt.split('=')
+              @options[key.to_sym] = value || true
+            end
+          end
           @options[:linenos] = "inline" if @options.key?(:linenos) and @options[:linenos] == true
         else
           raise SyntaxError.new <<-eos
