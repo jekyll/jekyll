@@ -35,16 +35,18 @@ eos
 
         output = case context.registers[:site].highlighter
         when 'pygments'
-          render_pygments(context, code)
+          render_pygments(code)
         when 'rouge'
-          render_rouge(context, code)
+          render_rouge(code)
         else
-          render_codehighlighter(context, code)
-        end.strip
-        prefix + add_code_tag(output) + suffix
+          render_codehighlighter(code)
+        end
+
+        rendered_output = add_code_tag(output)
+        prefix + rendered_output + suffix
       end
 
-      def render_pygments(context, code)
+      def render_pygments(code)
         require 'pygments'
         @options[:encoding] = 'utf-8'
 
@@ -64,7 +66,7 @@ eos
         highlighted_code
       end
 
-      def render_rouge(context, code)
+      def render_rouge(code)
         require 'rouge'
         formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
@@ -72,7 +74,7 @@ eos
         "<div class=\"highlight\"><pre>#{code}</pre></div>"
       end
 
-      def render_codehighlighter(context, code)
+      def render_codehighlighter(code)
         "<div class=\"highlight\"><pre>#{h(code).strip}</pre></div>"
       end
 
