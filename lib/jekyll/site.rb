@@ -186,7 +186,9 @@ module Jekyll
       drafts = read_content(dir, '_drafts', Draft)
 
       drafts.each do |draft|
-        aggregate_post_info(draft)
+        if draft.published?
+          aggregate_post_info(draft)
+        end
       end
     end
 
