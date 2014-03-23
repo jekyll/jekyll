@@ -3,7 +3,8 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
+                  :full_rebuild
 
     attr_accessor :converters, :generators
     attr_reader :metadata
@@ -14,7 +15,7 @@ module Jekyll
     def initialize(config)
       self.config = config.clone
 
-      %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
+      %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems full_rebuild].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -61,7 +62,7 @@ module Jekyll
         raise ArgumentError, "limit_posts must be a non-negative number"
       end
 
-      @metadata.read_from_disk
+      @metadata.read_from_disk unless config['full_rebuild']
     end
 
     # Load necessary libraries, plugins, converters, and generators.
