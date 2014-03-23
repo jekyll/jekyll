@@ -52,6 +52,7 @@
   * Extract core extensions into a Utils module (#2112)
   * Refactor CLI & Commands For Greater Happiness (#2143)
   * Provide useful error when Pygments returns `nil` and error out (#2148)
+  * Add support for unpublished drafts (#2164)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
