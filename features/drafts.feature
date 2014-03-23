@@ -24,6 +24,17 @@ Feature: Draft Posts
     Then the _site directory should exist
     And the "_site/recipe.html" file should not exist
 
+  Scenario: Don't preview a draft that is not published
+    Given I have a configuration file with "permalink" set to "none"
+    And I have an "index.html" page that contains "Totally index"
+    And I have a _drafts directory
+    And I have the following draft:
+      | title  | date       | layout  | published | content        |
+      | Recipe | 2009-03-27 | default | false     | Not baked yet. |
+    When I run jekyll with drafts
+    Then the _site directory should exist
+    And the "_site/recipe.html" file should not exist
+
   Scenario: Use page.path variable
     Given I have a configuration file with "permalink" set to "none"
     And I have a _drafts directory
