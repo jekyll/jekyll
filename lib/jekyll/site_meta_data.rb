@@ -27,7 +27,7 @@ module Jekyll
     def read_from_disk
       metadata = PStore.new(metadata_file, true)
       metadata.transaction do
-        @data = metadata["metadata"]
+        @data = metadata["metadata"] || {}
       end
     end
 
