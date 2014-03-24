@@ -127,6 +127,18 @@ class TestPost < Test::Unit::TestCase
         end
       end
 
+      context "with three dots ending YAML header" do
+        setup do
+          @real_file = "2014-03-03-yaml-with-dots.md"
+        end
+        should "should read the YAML header" do
+          @post.read_yaml(@source, @real_file)
+
+          assert_equal({"title" => "Test Post Where YAML Ends in Dots"},
+                       @post.data)
+        end
+      end
+
       context "with embedded triple dash" do
         setup do
           @real_file = "2010-01-08-triple-dash.markdown"
