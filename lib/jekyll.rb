@@ -97,4 +97,17 @@ module Jekyll
   def self.logger
     @logger ||= Stevenson.new
   end
+
+  # Get a subpath without any of the traversal nonsense.
+  #
+  # Returns a pure and clean path
+  def self.sanitized_path(base_directory, questionable_path)
+    clean_path = File.expand_path(questionable_path, "/")
+    clean_path.gsub!(/\w\:\//, '/')
+    unless clean_path.start_with?(base_directory)
+      File.join(base_directory, clean_path)
+    else
+      clean_path
+    end
+  end
 end

@@ -13,7 +13,7 @@ JEKYLL_PATH = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll')
 
 def run_jekyll(opts = {})
   command = JEKYLL_PATH.clone
-  command << " build"
+  command << " build --trace"
   command << " --drafts" if opts[:drafts]
   command << " >> /dev/null 2>&1" if opts[:debug].nil?
   system command
@@ -21,7 +21,7 @@ end
 
 def call_jekyll_new(opts = {})
   command = JEKYLL_PATH.clone
-  command << " new"
+  command << " new --trace"
   command << " #{opts[:path]}" if opts[:path]
   command << " --blank" if opts[:blank]
   command << " >> /dev/null 2>&1" if opts[:debug].nil?
