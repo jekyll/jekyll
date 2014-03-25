@@ -86,7 +86,7 @@ module Jekyll
 
     # Get the full path to the directory containing the post files
     def containing_dir(source, dir)
-      return File.join(source, dir, '_posts')
+      File.join(source, dir, '_posts')
     end
 
     # Read the YAML frontmatter.
@@ -266,7 +266,7 @@ module Jekyll
     # Returns destination file path String.
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
-      path = File.join(dest, File.expand_path(CGI.unescape(self.url), "/"))
+      path = Jekyll.sanitized_path(dest, CGI.unescape(url))
       path = File.join(path, "index.html") if path[/\.html$/].nil?
       path
     end
