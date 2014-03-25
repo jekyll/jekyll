@@ -1,9 +1,25 @@
---- 
-prev_section: contributing
-title: History
-layout: docs
-permalink: /docs/history/
 ---
+layout: docs
+title: History
+permalink: "/docs/history/"
+prev_section: contributing
+---
+
+## 1.5.0 / 2014-03-24
+
+### Minor Enhancements
+
+- Loosen `safe_yaml` dependency to `~> 1.0` ([#2167]({{ site.repository }}/issues/2167))
+- Bump `safe_yaml` dependency to `~> 1.0.0` ([#1942]({{ site.repository }}/issues/1942))
+
+### Bug Fixes
+
+- Fix issue where filesystem traversal restriction broke Windows ([#2167]({{ site.repository }}/issues/2167))
+- Lock `maruku` at `0.7.0` ([#2167]({{ site.repository }}/issues/2167))
+
+### Development Fixes
+
+- Lock `cucmber` at `1.3.11` ([#2167]({{ site.repository }}/issues/2167))
 
 ## 1.4.3 / 2014-01-13
 
