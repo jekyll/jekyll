@@ -4,11 +4,17 @@
 
 ### Minor Enhancements
 
+  * Loosen `safe_yaml` dependency to `~> 1.0` (#2167)
   * Bump `safe_yaml` dependency to `~> 1.0.0` (#1942)
 
 ### Bug Fixes
 
+  * Fix issue where filesystem traversal restriction broke Windows (#2167)
+  * Lock `maruku` at `0.7.0` (#2167)
+
 ### Development Fixes
+
+  * Lock `cucmber` at `1.3.11` (#2167)
 
 ### Site Enhancements
 
