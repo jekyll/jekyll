@@ -171,7 +171,7 @@
 
 ### Development Fixes
 
-  * Lock `cucmber` at `1.3.11` (#2167)
+  * Lock `cucumber` at `1.3.11` (#2167)
 
 ## 1.4.3 / 2014-01-13
 
