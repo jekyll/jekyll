@@ -13,5 +13,7 @@ inability to use Jekyll 1.4.3 on Windows due to a [fun issue with path sanitizin
 
 For a full changelog, check out our [history][] page.
 
+Now, back to work on 2.0.0!
+
 [fun issue with path sanitizing]: https://github.com/jekyll/jekyll/issues/1948
 [history]: /docs/history/#150__20140324
