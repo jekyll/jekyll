@@ -156,6 +156,7 @@
   * Add `jekyll-ordinal` to list of third-party plugins (#2150)
   * Add `jekyll_figure` to list of third-party plugins (#2158)
   * Clarify the documentation for safe mode (#2163)
+  * Some HTML tidying (#2130)
 
 ## 1.5.0 / 2014-03-24
 
