@@ -157,8 +157,6 @@ body > footer img {
   position: relative;
   top: 8px;
   margin-left: 5px;
-  width: 100px;
-  height: 30px;
   opacity: .8;
   padding: 1px;
   -webkit-transition: opacity .2s;
@@ -591,8 +589,6 @@ article h2:first-child {
 }
 
 .avatar {
-  width: 24px;
-  height: 24px;
   border-radius: 3px;
   display: inline-block;
   vertical-align: middle;

@@ -1,7 +1,7 @@
 {% assign items = include.items %}
 
 {% for item in items %}
-  {% assign item_url = item | prepend:'/docs/' | append:'/' %}
+  {% assign item_url = item | prepend:"/docs/" | append:"/" %}
 
   {% for p in site.pages %}
     {% if p.url == item_url %}

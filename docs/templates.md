@@ -25,162 +25,162 @@ common tasks easier.
   <tbody>
     <tr>
       <td>
-        <p class='name'><strong>Date to XML Schema</strong></p>
+        <p class="name"><strong>Date to XML Schema</strong></p>
         <p>Convert a Date into XML Schema (ISO 8601) format.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.time | date_to_xmlschema }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.time | date_to_xmlschema }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>2008-11-07T13:07:54-08:00</code>
+          <code class="output">2008-11-07T13:07:54-08:00</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Date to RFC-822 Format</strong></p>
+        <p class="name"><strong>Date to RFC-822 Format</strong></p>
         <p>Convert a Date into the RFC-822 format used for RSS feeds.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>Mon, 07 Nov 2008 13:07:54 -0800</code>
+          <code class="output">Mon, 07 Nov 2008 13:07:54 -0800</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Date to String</strong></p>
+        <p class="name"><strong>Date to String</strong></p>
         <p>Convert a date to short format.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.time | date_to_string }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.time | date_to_string }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>07 Nov 2008</code>
+          <code class="output">07 Nov 2008</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Date to Long String</strong></p>
+        <p class="name"><strong>Date to Long String</strong></p>
         <p>Format a date to long format.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.time | date_to_long_string }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.time | date_to_long_string }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>07 November 2008</code>
+          <code class="output">07 November 2008</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>XML Escape</strong></p>
+        <p class="name"><strong>XML Escape</strong></p>
         <p>Escape some text for use in XML.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.content | xml_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.content | xml_escape }}{% endraw %}</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>CGI Escape</strong></p>
+        <p class="name"><strong>CGI Escape</strong></p>
         <p>
           CGI escape a string for use in a URL. Replaces any special characters
           with appropriate %XX replacements.
         </p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ “foo,bar;baz?” | cgi_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ “foo,bar;baz?” | cgi_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>foo%2Cbar%3Bbaz%3F</code>
+          <code class="output">foo%2Cbar%3Bbaz%3F</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>URI Escape</strong></p>
+        <p class="name"><strong>URI Escape</strong></p>
         <p>
           URI escape a string.
         </p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ “'foo, bar \\baz?'” | uri_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ “'foo, bar \\baz?'” | uri_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>foo,%20bar%20%5Cbaz?</code>
+          <code class="output">foo,%20bar%20%5Cbaz?</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Number of Words</strong></p>
+        <p class="name"><strong>Number of Words</strong></p>
         <p>Count the number of words in some text.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.content | number_of_words }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.content | number_of_words }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>1337</code>
+          <code class="output">1337</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Array to Sentence</strong></p>
+        <p class="name"><strong>Array to Sentence</strong></p>
         <p>Convert an array into a sentence. Useful for listing tags.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.tags | array_to_sentence_string }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.tags | array_to_sentence_string }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>foo, bar, and baz</code>
+          <code class="output">foo, bar, and baz</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Textilize</strong></p>
+        <p class="name"><strong>Textilize</strong></p>
         <p>Convert a Textile-formatted string into HTML, formatted via RedCloth</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.excerpt | textilize }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.excerpt | textilize }}{% endraw %}</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Markdownify</strong></p>
+        <p class="name"><strong>Markdownify</strong></p>
         <p>Convert a Markdown-formatted string into HTML.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.excerpt | markdownify }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.excerpt | markdownify }}{% endraw %}</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Data To JSON</strong></p>
+        <p class="name"><strong>Data To JSON</strong></p>
         <p>Convert Hash or Array to JSON.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.data.projects | jsonify }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.data.projects | jsonify }}{% endraw %}</code>
         </p>
       </td>
     </tr>
