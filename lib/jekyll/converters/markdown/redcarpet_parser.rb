@@ -16,7 +16,7 @@ module Jekyll
           def block_code(code, lang)
             require 'pygments'
             lang = lang && lang.split.first || "text"
-            output = add_code_tags(
+            add_code_tags(
               Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
               lang
             )
@@ -34,7 +34,7 @@ module Jekyll
 
           def block_code(code, lang)
             lang = lang && lang.split.first || "text"
-            output = add_code_tags(code_wrap(code), lang)
+            add_code_tags(code_wrap(code), lang)
           end
         end
 
