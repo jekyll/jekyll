@@ -174,7 +174,7 @@ module Jekyll
           aggregate_post_info(post)
         end
       end
-   end
+    end
 
     # Read all the files in <source>/<dir>/_drafts and create a new Post
     # object with each one.
