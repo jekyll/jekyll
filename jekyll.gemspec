@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.5.0'
+  s.version           = '1.5.1'
   s.license           = 'MIT'
-  s.date              = '2014-03-24'
+  s.date              = '2014-03-27'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -163,6 +163,7 @@ Gem::Specification.new do |s|
     site/_posts/2013-12-16-jekyll-1-4-2-released.markdown
     site/_posts/2014-01-13-jekyll-1-4-3-released.markdown
     site/_posts/2014-03-24-jekyll-1-5-0-released.markdown
+    site/_posts/2014-03-27-jekyll-1-5-1-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
@@ -292,6 +293,7 @@ Gem::Specification.new do |s|
     test/test_new_command.rb
     test/test_page.rb
     test/test_pager.rb
+    test/test_path_sanitization.rb
     test/test_post.rb
     test/test_rdiscount.rb
     test/test_redcarpet.rb
