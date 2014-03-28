@@ -6,11 +6,15 @@
 
 ### Bug Fixes
 
-* Only strip the drive name if it begins the string (#2176)
-
 ### Development Fixes
 
 ### Site Enhancements
+
+## 1.5.1 / 2014-03-27
+
+### Bug Fixes
+
+* Only strip the drive name if it begins the string (#2176)
 
 ## 1.5.0 / 2014-03-24
 
