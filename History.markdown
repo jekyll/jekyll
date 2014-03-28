@@ -76,6 +76,7 @@
   * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121).
   * Remove `+` characters from Pygments lexer names when adding as a CSS
     class (#994)
+  * Remove some code that caused Ruby interpreter warnings (#2178)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
