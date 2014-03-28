@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+* Only strip the drive name if it begins the string (#2176)
+
 ### Development Fixes
 
 ### Site Enhancements
