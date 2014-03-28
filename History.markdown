@@ -158,6 +158,12 @@
   * Clarify the documentation for safe mode (#2163)
   * Some HTML tidying (#2130)
 
+## 1.5.1 / 2014-03-27
+
+### Bug Fixes
+
+* Only strip the drive name if it begins the string (#2176)
+
 ## 1.5.0 / 2014-03-24
 
 ### Minor Enhancements
