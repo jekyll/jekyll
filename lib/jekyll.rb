@@ -103,7 +103,7 @@ module Jekyll
   # Returns a pure and clean path
   def self.sanitized_path(base_directory, questionable_path)
     clean_path = File.expand_path(questionable_path, "/")
-    clean_path.gsub!(/\w\:\//, '/')
+    clean_path.gsub!(/\A\w\:\//, '/')
     unless clean_path.start_with?(base_directory)
       File.join(base_directory, clean_path)
     else
