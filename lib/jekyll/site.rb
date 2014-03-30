@@ -3,9 +3,11 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
+                  :full_rebuild
 
     attr_accessor :converters, :generators
+    attr_reader :metadata
 
     # Public: Initialize a new Site.
     #
@@ -13,7 +15,7 @@ module Jekyll
     def initialize(config)
       self.config = config.clone
 
-      %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
+      %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems full_rebuild].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -24,6 +26,8 @@ module Jekyll
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
+
+      @metadata = SiteMetaData.new(self)
 
       reset
       setup
@@ -57,6 +61,8 @@ module Jekyll
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
       end
+
+      @metadata.read_from_disk unless config['full_rebuild']
     end
 
     # Load necessary libraries, plugins, converters, and generators.
@@ -150,11 +156,17 @@ module Jekyll
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
-          page = Page.new(self, source, dir, f)
-          pages << page if page.published?
+          unless @metadata[f_abs] && @metadata[f_abs][:modification_time] == File.mtime(f_abs)
+            page = Page.new(self, source, dir, f)
+            pages << page if page.published?
+          end
         else
-          static_files << StaticFile.new(self, source, dir, f)
+          unless @metadata[f_abs] && @metadata[f_abs][:modification_time] == File.mtime(f_abs)
+            static_file = StaticFile.new(self, source, dir, f)
+            static_files << static_file
+          end
         end
+        @metadata.store(f_abs)
       end
 
       pages.sort_by!(&:name)
@@ -249,7 +261,7 @@ module Jekyll
     #
     # Returns nothing.
     def cleanup
-      site_cleaner.cleanup!
+      # site_cleaner.cleanup!
     end
 
     # Write static files, pages, and posts.
@@ -257,6 +269,7 @@ module Jekyll
     # Returns nothing.
     def write
       each_site_file { |item| item.write(dest) }
+      @metadata.write_to_disk
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -367,6 +380,11 @@ module Jekyll
       return [] unless File.exists?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
+      entries.delete_if do |e|
+        file = File.join(base, e)
+        @metadata[file] && @metadata[file][:modification_time] >= File.mtime(file)
+      end
+      entries.each { |e| @metadata.store(File.join(base,e)) }
     end
 
     # Aggregate post information
