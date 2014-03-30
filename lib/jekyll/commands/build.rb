@@ -69,7 +69,11 @@ module Jekyll
 
           Jekyll.logger.info "Auto-regeneration:", "enabled"
 
-          listener = Listen.to(source, :ignore => ignored) do |modified, added, removed|
+          listener = Listen.to(
+            source, 
+            :ignore => ignored, 
+            :force_polling => options['force_polling']
+          ) do |modified, added, removed|
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
             n = modified.length + added.length + removed.length
             print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "

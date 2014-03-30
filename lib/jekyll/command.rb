@@ -67,6 +67,7 @@ module Jekyll
         c.option 'future',  '--future', 'Publishes posts with a future date'
         c.option 'limit_posts', '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
         c.option 'watch',   '-w', '--watch', 'Watch for changes and rebuild'
+        c.option 'force_polling', '--force_polling', 'Force watch to use polling'
         c.option 'lsi',     '--lsi', 'Use LSI for improved related posts'
         c.option 'show_drafts',  '-D', '--drafts', 'Render posts in the _drafts folder'
         c.option 'quiet',   '-q', '--quiet', 'Silence output.'
