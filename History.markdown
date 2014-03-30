@@ -53,6 +53,7 @@
   * Refactor CLI & Commands For Greater Happiness (#2143)
   * Provide useful error when Pygments returns `nil` and error out (#2148)
   * Add support for unpublished drafts (#2164)
+  * Add `force_polling` option to the `serve` command (#2165)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
