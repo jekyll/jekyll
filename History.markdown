@@ -163,6 +163,7 @@
   * Clarify the documentation for safe mode (#2163)
   * Some HTML tidying (#2130)
   * Remove modernizr and use html5shiv.js directly for IE less than v9 (#2131)
+  * Docs: remove unused images (#2187)
 
 ## 1.5.1 / 2014-03-27
 
