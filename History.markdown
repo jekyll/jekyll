@@ -105,6 +105,7 @@
   * Trim trailing spaces and convert tabs to spaces (#2122)
   * Fix the failing Travis scenarios due to Cucumber issues (#2155)
   * Wrap `bundle install` in `travis_retry` to retry when RubyGems fails (#2160)
+  * Refactor tags and categories (#1639)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
