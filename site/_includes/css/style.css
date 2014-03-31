@@ -66,7 +66,7 @@ nav li {
 
 .main-nav li a {
   border-radius: 5px;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 14px;
   padding: 0.5em 1em;
   text-shadow: none;
@@ -103,7 +103,7 @@ nav li {
   text-align: center;
   text-transform: uppercase;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 900;
   padding: 5px;
   border-radius: 5px;
 }
@@ -251,7 +251,7 @@ body > footer a:hover img {
   box-shadow: 0 3px 10px rgba(0,0,0,.5);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 400;
   color: #444;
   text-shadow: 0 1px 0 rgba(255,255,255,.5);
   background: #f7f7f7;
@@ -489,7 +489,7 @@ aside li.current a:before {
 .section-nav .next:after, .section-nav .prev:before {
   font-size: 36px;
   color: #222;
-  font-weight: 800;
+  font-weight: 900;
   text-shadow: 0 1px 0 rgba(255,255,255,.4);
   position: absolute;
   top: -7px;
@@ -560,7 +560,7 @@ article h2:first-child {
 .label {
   float: left;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 700;
   text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 }
 
@@ -867,7 +867,7 @@ code.option, code.flag, code.filter, code.output {
 
 .note h5 {
   line-height: 1.5em;
-  font-weight: 800;
+  font-weight: 900;
   font-style: normal;
 }
 
@@ -932,7 +932,7 @@ code.option, code.flag, code.filter, code.output {
   top: 14px;
   left: 14px;
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
   text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 }
 
@@ -943,7 +943,7 @@ code.option, code.flag, code.filter, code.output {
   top: 15px;
   left: 15px;
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
   text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 }
 
@@ -954,7 +954,7 @@ code.option, code.flag, code.filter, code.output {
   top: 15px;
   left: 15px;
   font-size: 32px;
-  font-weight: bold;
+  font-weight: 700;
   text-shadow: 0 -1px 0 rgba(0,0,0,.5);
 }
 
@@ -965,7 +965,7 @@ code.option, code.flag, code.filter, code.output {
   top: 8px;
   left: 15px;
   font-size: 38px;
-  font-weight: bold;
+  font-weight: 700;
   text-shadow: 0 1px 0 rgba(255,255,255,.25);
 }
 
