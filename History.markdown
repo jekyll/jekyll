@@ -54,6 +54,7 @@
   * Provide useful error when Pygments returns `nil` and error out (#2148)
   * Add support for unpublished drafts (#2164)
   * Add `force_polling` option to the `serve` command (#2165)
+  * Clean up the `<head>` in the site template (#2186)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
