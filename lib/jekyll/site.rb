@@ -1,8 +1,8 @@
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :categories, :exclude, :include, :source, :dest, :lsi, :highlighter,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts,
+                  :exclude, :include, :source, :dest, :lsi, :highlighter,
+                  :permalink_style, :time, :future, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
 
     attr_accessor :converters, :generators
@@ -50,8 +50,6 @@ module Jekyll
       self.posts = []
       self.pages = []
       self.static_files = []
-      self.categories = Hash.new { |hash, key| hash[key] = [] }
-      self.tags = Hash.new { |hash, key| hash[key] = [] }
       self.data = {}
 
       if limit_posts < 0
@@ -238,9 +236,6 @@ module Jekyll
       [posts, pages].flatten.each do |page_or_post|
         page_or_post.render(layouts, payload)
       end
-
-      categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
-      tags.values.map { |ps| ps.sort! { |a, b| b <=> a } }
     rescue Errno::ENOENT => e
       # ignore missing layout dir
     end
@@ -277,8 +272,16 @@ module Jekyll
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
       posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
-      hash.values.map { |sortme| sortme.sort! { |a, b| b <=> a } }
+      hash.values.each { |posts| posts.sort!.reverse! }
       hash
+    end
+
+    def tags
+      post_attr_hash('tags')
+    end
+
+    def categories
+      post_attr_hash('categories')
     end
 
     # Prepare site data for site payload. The method maintains backward compatibility
@@ -376,8 +379,6 @@ module Jekyll
     # Returns nothing
     def aggregate_post_info(post)
       posts << post
-      post.categories.each { |c| categories[c] << post }
-      post.tags.each { |c| tags[c] << post }
     end
 
     def relative_permalinks_deprecation_method
