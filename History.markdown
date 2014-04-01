@@ -164,6 +164,8 @@
   * Some HTML tidying (#2130)
   * Remove modernizr and use html5shiv.js directly for IE less than v9 (#2131)
   * Docs: remove unused images (#2187)
+  * Use `array_to_sentence_string` filter when outputting news item
+    categories (#2191)
 
 ## 1.5.1 / 2014-03-27
 
