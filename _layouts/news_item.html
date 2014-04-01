@@ -8,9 +8,9 @@ layout: news
     <a href="{{ page.url }}" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
-    {% for category in page.categories %}
-    <span class="label">{{ category }}</span>
-    {% endfor %}
+    <span class="label">
+      {{ page.categories | array_to_sentence_string }}
+    </span>
   </span>
   <div class="post-meta">
     <span class="post-date">
