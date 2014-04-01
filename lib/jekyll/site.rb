@@ -177,7 +177,7 @@ module Jekyll
         next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
-        self.data[key] = SafeYAML.load_file(path)
+        (self.data[key] = Jekyll::Document.new(self, path)).read
       end
     end
 
