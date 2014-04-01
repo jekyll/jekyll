@@ -149,5 +149,9 @@ run into these errors, try setting `excerpt_separator: ""` in your
 
 <div class="note">
   <h5>Please report issues you encounter!</h5>
-  <p>If you come across a bug, please <a href="{{ site.repository }}/issues/new">create an issue</a> on GitHub describing the problem and any work-arounds you find so we can document it here for others.</p>
+  <p>
+  If you come across a bug, please <a href="{{ site.help_url }}/issues/new">create an issue</a>
+  on GitHub describing the problem and any work-arounds you find so we can
+  document it here for others.
+  </p>
 </div>
