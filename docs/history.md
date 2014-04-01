@@ -7,7 +7,9 @@ prev_section: contributing
 
 ## 1.5.1 / 2014-03-27
 
-### Bug Fixes- Only strip the drive name if it begins the string ([#2176]({{ site.repository }}/issues/2176))
+### Bug Fixes
+
+- Only strip the drive name if it begins the string ([#2176]({{ site.repository }}/issues/2176))
 
 ## 1.5.0 / 2014-03-24
 
