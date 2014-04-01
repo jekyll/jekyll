@@ -9,13 +9,7 @@ layout: news
   </h2>
   <span class="post-category">
     <span class="label">
-      {% for category in page.categories %}
-        {% if forloop.last  %}
-          {{ category }}
-        {% else %}
-          {{ category | append: ', '}}
-        {% endif %}
-      {% endfor %}
+      {{ page.categories | array_to_sentence_string }}
     </span>
   </span>
   <div class="post-meta">
