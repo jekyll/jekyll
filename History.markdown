@@ -169,7 +169,7 @@
 
 ### Bug Fixes
 
-* Only strip the drive name if it begins the string (#2176)
+  * Only strip the drive name if it begins the string (#2176)
 
 ## 1.5.0 / 2014-03-24
 
