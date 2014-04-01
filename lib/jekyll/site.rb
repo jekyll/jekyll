@@ -19,7 +19,7 @@ module Jekyll
 
       self.source = File.expand_path(config['source'])
       self.dest = File.expand_path(config['destination'])
-      self.plugins = plugins_path
+      self.plugins = Jekyll::PluginManager.plugins_path(config['plugins'])
       self.permalink_style = config['permalink'].to_sym
 
       self.file_read_opts = {}
@@ -63,17 +63,7 @@ module Jekyll
     def setup
       ensure_not_in_dest
 
-      # If safe mode is off, load in any Ruby files under the plugins
-      # directory.
-      unless safe
-        plugins.each do |plugins|
-          Dir[File.join(plugins, "**/*.rb")].sort.each do |f|
-            require f
-          end
-        end
-      end
-
-      require_gems
+      Jekyll::PluginManager.new(self).conscientious_require
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
@@ -87,33 +77,6 @@ module Jekyll
         if path == dest_pathname
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
         end
-      end
-    end
-
-    def require_gems
-      gems.each do |gem|
-        if plugin_allowed?(gem)
-          require gem
-        end
-      end
-    end
-
-    def plugin_allowed?(gem_name)
-      whitelist.include?(gem_name) || !safe
-    end
-
-    def whitelist
-      @whitelist ||= Array[config['whitelist']].flatten
-    end
-
-    # Internal: Setup the plugin search path
-    #
-    # Returns an Array of plugin search paths
-    def plugins_path
-      if (config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [File.join(source, config['plugins'])]
-      else
-        Array(config['plugins']).map { |d| File.expand_path(d) }
       end
     end
 
@@ -307,7 +270,7 @@ module Jekyll
     #                  See Site#post_attr_hash for type info.
     def site_payload
       {"jekyll" => { "version" => Jekyll::VERSION },
-       "site" => config.merge({
+       "site"   => config.merge({
           "time"         => time,
           "posts"        => posts.sort { |a, b| b <=> a },
           "pages"        => pages,
