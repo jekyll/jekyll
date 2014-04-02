@@ -169,6 +169,7 @@
     categories (#2191)
   * Add link to Help repo in primary navigation bar (#2177)
   * Switch to using an ico file for the shortcut icon (#2193)
+  * Use numbers to specify font weights and only bring in font weights used (#2185)
 
 ## 1.5.1 / 2014-03-27
 
