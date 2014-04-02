@@ -92,6 +92,10 @@ module Jekyll
       end
     end
 
+    def render
+      config['render'] || Array.new
+    end
+
     # Read Site data from disk and load it into internal data structures.
     #
     # Returns nothing.
@@ -387,7 +391,7 @@ module Jekyll
       docs = Set.new
       if collections
         collections.each do |label, coll|
-          if config['render'].include?(label)
+          if render.include?(label)
             docs = docs.merge(coll.docs)
           end
         end
