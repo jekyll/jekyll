@@ -22,8 +22,12 @@ module Jekyll
       docs.sort!
     end
 
+    def relative_directory
+      "_#{label}"
+    end
+
     def directory
-      Jekyll.sanitized_path(site.source, "_#{label}")
+      Jekyll.sanitized_path(site.source, relative_directory)
     end
 
     def allowed_document?(path)

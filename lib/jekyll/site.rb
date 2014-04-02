@@ -14,14 +14,13 @@ module Jekyll
     def initialize(config)
       self.config = config.clone
 
-      %w[
-        safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems collections].each do |opt|
+      %w[safe lsi highlighter baseurl exclude include future unpublished
+        show_drafts limit_posts keep_files gems].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
-      self.source = File.expand_path(config['source'])
-      self.dest = File.expand_path(config['destination'])
+      self.source          = File.expand_path(config['source'])
+      self.dest            = File.expand_path(config['destination'])
       self.permalink_style = config['permalink'].to_sym
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
@@ -82,6 +81,14 @@ module Jekyll
         if path == dest_pathname
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
         end
+      end
+    end
+
+    def collections
+      @collections ||= if config['collections']
+        Hash[config['collections'].map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
+      else
+        Hash.new
       end
     end
 
@@ -187,7 +194,6 @@ module Jekyll
     # Returns nothing.
     def read_collections
       if collections
-        self.collections = Hash[collections.map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
         collections.each { |_, collection| collection.read }
       end
     end
@@ -206,6 +212,14 @@ module Jekyll
     # Returns nothing.
     def render
       relative_permalinks_deprecation_method
+
+      if collections
+        collections.each do |label, collection|
+          collection.docs.each do |document|
+            document.output = Jekyll::Renderer.new(self, document).run
+          end
+        end
+      end
 
       payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
@@ -369,8 +383,20 @@ module Jekyll
       end
     end
 
+    def documents
+      docs = Set.new
+      if collections
+        collections.each do |label, coll|
+          if config['render'].include?(label)
+            docs = docs.merge(coll.docs)
+          end
+        end
+      end
+      docs
+    end
+
     def each_site_file
-      %w(posts pages static_files).each do |type|
+      %w(posts pages static_files documents).each do |type|
         send(type).each do |item|
           yield item
         end

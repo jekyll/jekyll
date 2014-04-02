@@ -4,6 +4,8 @@ module Jekyll
   class Site
     # Handles the cleanup of a site's destination before it is built.
     class Cleaner
+      attr_reader :site
+
       def initialize(site)
         @site = site
       end
@@ -27,7 +29,7 @@ module Jekyll
       # Returns a Set with the file paths
       def existing_files
         files = Set.new
-        Dir.glob(File.join(@site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
+        Dir.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
           files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
         end
         files
@@ -38,7 +40,7 @@ module Jekyll
       # Returns a Set with the file paths
       def new_files
         files = Set.new
-        @site.each_site_file { |item| files << item.destination(@site.dest) }
+        site.each_site_file { |item| files << item.destination(site.dest) }
         files
       end
 
@@ -64,7 +66,7 @@ module Jekyll
       #
       # Returns the regular expression
       def keep_file_regex
-        or_list = @site.keep_files.join("|")
+        or_list = site.keep_files.join("|")
         pattern = "\/(#{or_list.gsub(".", "\.")})"
         Regexp.new pattern
       end

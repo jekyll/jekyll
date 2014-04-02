@@ -3,7 +3,7 @@ module Jekyll
     include Comparable
 
     attr_reader   :path, :site
-    attr_accessor :content, :collection
+    attr_accessor :content, :collection, :output
 
     # Create a new Document.
     #
@@ -37,8 +37,64 @@ module Jekyll
       File.extname(path)
     end
 
+    def cleaned_relative_path
+      relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
+    end
+
     def yaml_file?
       %w[.yaml .yml].include?(extname)
+    end
+
+    def sass_file?
+      %w[.sass .scss].include?(extname)
+    end
+
+    def render_with_liquid?
+      !(sass_file? || yaml_file?)
+    end
+
+    def url_template
+      "/:collection/:path:output_ext"
+    end
+
+    def url_placeholders
+      {
+        collection: collection.label,
+        path:       cleaned_relative_path,
+        output_ext: Jekyll::Renderer.new(site, self).output_ext
+      }
+    end
+
+    def permalink
+      return nil if data.nil? || data['permalink'].nil?
+      data['permalink']
+    end
+
+    def url
+      @url ||= URL.new({
+        :template     => url_template,
+        :placeholders => url_placeholders,
+        :permalink    => permalink
+      }).to_s
+    end
+
+    def destination(base_directory)
+      path = Jekyll.sanitized_path(base_directory, url)
+      path = File.join(path, "index.html") if url =~ /\/$/
+      path
+    end
+
+    # Write the generated Document file to the destination directory.
+    #
+    # dest - The String path to the destination dir.
+    #
+    # Returns nothing.
+    def write(dest)
+      path = destination(dest)
+      FileUtils.mkdir_p(File.dirname(path))
+      File.open(path, 'wb') do |f|
+        f.write(output)
+      end
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
@@ -84,8 +140,10 @@ module Jekyll
     # Returns a Hash representing this Document's data.
     def to_liquid
       data.merge({
-        "content" => content,
-        "path"    => path
+        "content"       => content,
+        "path"          => path,
+        "relative_path" => relative_path,
+        "url"           => url
       })
     end
 

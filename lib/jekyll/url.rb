@@ -24,9 +24,9 @@ module Jekyll
     #                           template. Instead, the given permalink will be
     #                           used as URL.
     def initialize(options)
-      @template = options[:template]
+      @template     = options[:template]
       @placeholders = options[:placeholders] || {}
-      @permalink = options[:permalink]
+      @permalink    = options[:permalink]
 
       if (@template || @permalink).nil?
         raise ArgumentError, "One of :template or :permalink must be supplied."
