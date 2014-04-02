@@ -49,7 +49,7 @@ eos
           render_rouge(context, code)
         else
           render_codehighlighter(context, code)
-        end
+        end.strip
       end
 
       def render_pygments(context, code)
@@ -107,8 +107,9 @@ eos
 
       def add_code_tags(code, lang)
         # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>/,'<pre><code class="' + lang.to_s.gsub("+", "-") + '">')
-        code = code.sub(/<\/pre>/,"</code></pre>")
+        code = code.sub(/<pre>\n*/,'<pre><code class="' + lang.to_s.gsub("+", "-") + '">')
+        code = code.sub(/\n*<\/pre>/,"</code></pre>")
+        code.strip
       end
 
     end
