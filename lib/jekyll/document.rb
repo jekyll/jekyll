@@ -89,6 +89,10 @@ module Jekyll
       })
     end
 
+    def inspect
+      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+    end
+
     def <=>(anotherDocument)
       path <=> anotherDocument.path
     end

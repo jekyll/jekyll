@@ -290,7 +290,8 @@ module Jekyll
           "html_pages"   => pages.reject { |page| !page.html? },
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
-          "data"         => site_data})}
+          "data"         => site_data,
+          "collections"  => collections})}
     end
 
     # Filter out any files/directories that are hidden or backup files (start

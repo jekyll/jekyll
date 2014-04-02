@@ -6,9 +6,14 @@ require 'rr'
 require 'test/unit'
 require 'time'
 
+JEKYLL_SOURCE_DIR = File.dirname(File.dirname(File.dirname(__FILE__)))
 TEST_DIR    = File.expand_path(File.join('..', '..', 'tmp', 'jekyll'), File.dirname(__FILE__))
 JEKYLL_PATH = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll')
 JEKYLL_COMMAND_OUTPUT_FILE = File.join(File.dirname(TEST_DIR), 'jekyll_output.txt')
+
+def source_dir(*files)
+  File.join(TEST_DIR, *files)
+end
 
 def jekyll_output_file
   JEKYLL_COMMAND_OUTPUT_FILE

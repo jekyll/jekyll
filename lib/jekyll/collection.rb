@@ -30,5 +30,16 @@ module Jekyll
       !(site.safe && File.symlink?(path))
     end
 
+    def inspect
+      "#<Jekyll::Collection @label=#{label} docs=#{docs}>"
+    end
+
+    def to_liquid
+      {
+        "label" => label,
+        "docs"  => docs
+      }
+    end
+
   end
 end
