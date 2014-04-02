@@ -167,6 +167,7 @@
   * Docs: remove unused images (#2187)
   * Use `array_to_sentence_string` filter when outputting news item
     categories (#2191)
+  * Add link to Help repo in primary navigation bar (#2177)
 
 ## 1.5.1 / 2014-03-27
 
