@@ -46,11 +46,21 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "print a nice list of static files" do
-      expected_output = Regexp.new <<-OUTPUT
+      if is_windows
+        # Symlinks fail on Windows and show up as static files
+        expected_output = Regexp.new <<-OUTPUT
+- /css/screen.css last edited at \\d+ with extname .css
+- /products.yml last edited at \\d+ with extname .yml
+- /symlink-test/symlinked-dir last edited at \\d+ with extname\s
+- /symlink-test/symlinked-file last edited at \\d+ with extname\s
+        OUTPUT
+      else
+        expected_output = Regexp.new <<-OUTPUT
 - /css/screen.css last edited at \\d+ with extname .css
 - /products.yml last edited at \\d+ with extname .yml
 - /symlink-test/symlinked-dir/screen.css last edited at \\d+ with extname .css
-OUTPUT
+        OUTPUT
+      end
       assert_match expected_output, File.read(dest_dir('static_files.html'))
     end
   end
