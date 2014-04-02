@@ -31,6 +31,7 @@ module Jekyll
       payload = Utils.deep_merge_hashes({
         "page" => document.to_liquid
       }, site.site_payload)
+
       info    = {
         filters:   [Jekyll::Filters],
         registers: { :site => site, :page => payload['page'] }
@@ -117,7 +118,7 @@ module Jekyll
           File.join(site.config['layouts'], layout.name)
         )
 
-        if layout = layouts[layout.data["layout"]]
+        if layout = site.layouts[layout.data["layout"]]
           if used.include?(layout)
             layout = nil # avoid recursive chain
           else

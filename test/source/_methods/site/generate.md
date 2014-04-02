@@ -1,5 +1,6 @@
 ---
 title: "Site#generate"
+layout: default
 ---
 
-Run your generators!
+Run your generators! {{ page.layout }}

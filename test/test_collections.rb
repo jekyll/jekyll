@@ -12,7 +12,7 @@ class TestCollections < Test::Unit::TestCase
     end
 
     should "not contain any collections" do
-      assert_nil @site.collections
+      assert_equal @site.collections, Hash.new
     end
   end
 

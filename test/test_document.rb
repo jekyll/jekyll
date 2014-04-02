@@ -2,7 +2,7 @@ require 'helper'
 
 class TestDocument < Test::Unit::TestCase
 
-  context "" do
+  context "a document in a collection" do
     setup do
       @site = Site.new(Jekyll.configuration({
         "collections" => ["methods"],
@@ -40,6 +40,9 @@ class TestDocument < Test::Unit::TestCase
       }, @document.data)
     end
 
+  end
+
+  context " a document part of a rendered collection" do
   end
 
 end
