@@ -181,7 +181,11 @@ module Jekyll
         next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
-        (self.data[key] = Jekyll::Document.new(path, { site: self, collection: data_collection })).read
+
+        doc = Jekyll::Document.new(path, { site: self, collection: data_collection })
+        doc.read
+
+        self.data[key] = doc.data
       end
     end
 
