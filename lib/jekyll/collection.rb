@@ -15,6 +15,7 @@ module Jekyll
       Dir.glob(File.join(directory, "**", "*.*")).each do |file_path|
         if allowed_document?(file_path)
           doc = Jekyll::Document.new(file_path, { site: site, collection: self })
+          doc.read
           docs << doc
         end
       end

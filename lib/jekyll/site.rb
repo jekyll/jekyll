@@ -175,16 +175,9 @@ module Jekyll
       entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
       data_collection = Jekyll::Collection.new(self, "data")
-
-      entries.each do |entry|
-        path = File.join(source, dir, entry)
-        next if File.symlink?(path) && safe
-
-        key = sanitize_filename(File.basename(entry, '.*'))
-
-        doc = Jekyll::Document.new(path, { site: self, collection: data_collection })
-        doc.read
-
+      data_collection.read
+      data_collection.docs.each do |doc|
+        key = sanitize_filename(doc.basename(".*"))
         self.data[key] = doc.data
       end
     end

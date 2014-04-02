@@ -28,6 +28,10 @@ module Jekyll
       Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
     end
 
+    def basename(suffix = "")
+      File.basename(path, suffix)
+    end
+
     def extname
       File.extname(path)
     end
@@ -56,7 +60,7 @@ module Jekyll
     # Read in the file and assign the content and data based on the file contents.
     #
     # Returns nothing.
-    def read
+    def read(opts = {})
       if yaml_file?
         @data = SafeYAML.load_file(path)
       else

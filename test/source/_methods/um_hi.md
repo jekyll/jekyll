@@ -1,1 +1,1 @@
-test/source/_methods/sanitized_path.md
+./site/generate.md
