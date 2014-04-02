@@ -13,6 +13,7 @@ module Jekyll
       'data_source'   =>  '_data',
       'keep_files'    => ['.git','.svn'],
       'gems'          => [],
+      'collections'   => nil,
 
       'timezone'      => nil,           # use the local timezone
 

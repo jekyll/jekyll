@@ -4,7 +4,7 @@ module Jekyll
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
-                  :plugin_manager
+                  :plugin_manager, :collections
 
     attr_accessor :converters, :generators
 
@@ -14,7 +14,9 @@ module Jekyll
     def initialize(config)
       self.config = config.clone
 
-      %w[safe lsi highlighter baseurl exclude include future unpublished show_drafts limit_posts keep_files gems].each do |opt|
+      %w[
+        safe lsi highlighter baseurl exclude include future unpublished
+        show_drafts limit_posts keep_files gems collections].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -90,6 +92,7 @@ module Jekyll
       self.layouts = LayoutReader.new(self).read
       read_directories
       read_data(config['data_source'])
+      read_collections
     end
 
     # Recursively traverse directories to find posts, pages and static files
@@ -171,13 +174,24 @@ module Jekyll
 
       entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
+      data_collection = Jekyll::Collection.new(self, "data")
 
       entries.each do |entry|
         path = File.join(source, dir, entry)
         next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
-        (self.data[key] = Jekyll::Document.new(self, path)).read
+        (self.data[key] = Jekyll::Document.new(path, { site: self, collection: data_collection })).read
+      end
+    end
+
+    # Read in all collections specified in the configuration
+    #
+    # Returns nothing.
+    def read_collections
+      if collections
+        self.collections = Hash[collections.map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
+        collections.each { |_, collection| collection.read }
       end
     end
 

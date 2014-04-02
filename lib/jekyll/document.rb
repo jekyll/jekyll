@@ -1,18 +1,19 @@
 module Jekyll
   class Document
 
-    attr_reader   :path
-    attr_accessor :content
+    attr_reader   :path, :site
+    attr_accessor :content, :collection
 
     # Create a new Document.
     #
-    # site - the Jekyll::Site instance to which this Document belongs
+    # shit - the Jekyll::Site instance to which this Document belongs
     # path - the path to the file
     #
     # Returns nothing.
-    def initialize(site, path)
-      @site = site
+    def initialize(path, relations)
+      @site = relations[:site]
       @path = path
+      @collection = relations[:collection]
     end
 
     # Fetch the Document's data.
@@ -21,6 +22,10 @@ module Jekyll
     #   no data was read.
     def data
       @data ||= Hash.new
+    end
+
+    def relative_path
+      Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
     end
 
     def extname
