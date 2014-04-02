@@ -19,7 +19,7 @@ module Jekyll
           docs << doc
         end
       end
-      docs
+      docs.sort!
     end
 
     def directory

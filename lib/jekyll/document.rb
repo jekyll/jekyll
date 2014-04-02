@@ -1,5 +1,6 @@
 module Jekyll
   class Document
+    include Comparable
 
     attr_reader   :path, :site
     attr_accessor :content, :collection
@@ -86,6 +87,10 @@ module Jekyll
         "content" => content,
         "path"    => path
       })
+    end
+
+    def <=>(anotherDocument)
+      path <=> anotherDocument.path
     end
 
   end
