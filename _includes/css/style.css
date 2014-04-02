@@ -117,8 +117,8 @@ nav li {
 
 .mobile-nav li {
   display: table-cell;
-  width: 25%;
-  padding: 8px;
+  width: 20%;
+  padding: 8px 2px;
 }
 
 @media (max-width: 768px){
