@@ -125,7 +125,7 @@ class TestFilters < Test::Unit::TestCase
           case g["name"]
           when "default"
             assert g["items"].is_a?(Array), "The list of grouped items for 'default' is not an Array."
-            assert_equal 4, g["items"].size
+            assert_equal 5, g["items"].size
           when "nil"
             assert g["items"].is_a?(Array), "The list of grouped items for 'nil' is not an Array."
             assert_equal 2, g["items"].size
