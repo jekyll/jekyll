@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Data Files
-prev_section: variables
+prev_section: collections
 next_section: assets
 permalink: /docs/datafiles/
 ---
