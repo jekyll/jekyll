@@ -364,8 +364,8 @@ class TestSite < Test::Unit::TestCase
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.yaml'))
 
-        assert_equal site.data['members'].data, file_content
-        assert_equal site.site_payload['site']['data']['members'].data, file_content
+        assert_equal site.data['members'], file_content
+        assert_equal site.site_payload['site']['data']['members'], file_content
       end
 
       should 'auto load yml files' do
@@ -374,8 +374,8 @@ class TestSite < Test::Unit::TestCase
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'languages.yml'))
 
-        assert_equal site.data['languages'].data, file_content
-        assert_equal site.site_payload['site']['data']['languages'].data, file_content
+        assert_equal site.data['languages'], file_content
+        assert_equal site.site_payload['site']['data']['languages'], file_content
       end
 
       should "load symlink files in unsafe mode" do
@@ -384,8 +384,8 @@ class TestSite < Test::Unit::TestCase
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
 
-        assert_equal site.data['products'].data, file_content
-        assert_equal site.site_payload['site']['data']['products'].data, file_content
+        assert_equal site.data['products'], file_content
+        assert_equal site.site_payload['site']['data']['products'], file_content
       end
 
       should "not load symlink files in safe mode" do
