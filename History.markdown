@@ -164,10 +164,11 @@
   * Clarify the documentation for safe mode (#2163)
   * Some HTML tidying (#2130)
   * Remove modernizr and use html5shiv.js directly for IE less than v9 (#2131)
-  * Docs: remove unused images (#2187)
+  * Remove unused images (#2187)
   * Use `array_to_sentence_string` filter when outputting news item
     categories (#2191)
   * Add link to Help repo in primary navigation bar (#2177)
+  * Switch to using an ico file for the shortcut icon (#2193)
 
 ## 1.5.1 / 2014-03-27
 
