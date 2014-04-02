@@ -17,7 +17,7 @@ Feature: Collections
     And I have a configuration file with:
       | key         | value       |
       | collections | ['methods'] |
-      | render      | \n  methods: /methods/:collection_name/:subdir/:title:extname |
+      | render      | \n  methods: /methods/:subdir/:title:extname |
     When I run jekyll
     Then the _site directory should exist
     And I should see "Collections: methods" in "_site/index.html"
