@@ -84,6 +84,7 @@
   * Only strip the drive name if it begins the string (#2175)
   * Remove default post with invalid date from site template (#2200)
   * Fix `Post#url` and `Page#url` escape (#1568)
+  * Strip newlines from the `{% highlight %}` block content (#1823)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
