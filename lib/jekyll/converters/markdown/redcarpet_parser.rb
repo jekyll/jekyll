@@ -39,16 +39,6 @@ module Jekyll
         end
 
         module WithRouge
-          require 'rouge'
-          require 'rouge/plugins/redcarpet'
-
-          if Rouge.version < '1.3.0'
-            abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
-          end
-
-          include Rouge::Plugins::Redcarpet
-          include CommonMethods
-
           def block_code(code, lang)
             code = "<pre>#{super}</pre>"
 
@@ -77,6 +67,15 @@ module Jekyll
                           end
                         when 'rouge'
                           Class.new(Redcarpet::Render::HTML) do
+                            require 'rouge'
+                            require 'rouge/plugins/redcarpet'
+
+                            if Rouge.version < '1.3.0'
+                              abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
+                            end
+
+                            include Rouge::Plugins::Redcarpet
+                            include CommonMethods
                             include WithRouge
                           end
                         else
