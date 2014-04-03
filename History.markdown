@@ -85,6 +85,7 @@
   * Remove default post with invalid date from site template (#2200)
   * Fix `Post#url` and `Page#url` escape (#1568)
   * Strip newlines from the `{% highlight %}` block content (#1823)
+  * Load in `rouge` only when it's been requested as the highlighter (#2189)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
