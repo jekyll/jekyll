@@ -112,6 +112,7 @@
   * Fix the failing Travis scenarios due to Cucumber issues (#2155)
   * Wrap `bundle install` in `travis_retry` to retry when RubyGems fails (#2160)
   * Refactor tags and categories (#1639)
+  * Extract plugin management into its own class (#2197)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
