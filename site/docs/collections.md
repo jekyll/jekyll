@@ -56,3 +56,104 @@ This will produce a file for each document in the collection.
 For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
+
+## Liquid Attributes
+
+### Collections
+
+Each collection is part of the `site.collections` array in Liquid. Each collection has the following attributes:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>label</code></p>
+      </td>
+      <td>
+        <p>
+          The name of the collection.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>docs</code></p>
+      </td>
+      <td>
+        <p>
+          An array of Documents contained in this collection.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### Documents
+
+In addition to any YAML front-matter provided in the document's corresponding file, each document has the following attributes:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>content</code></p>
+      </td>
+      <td>
+        <p>
+          The content of the document. If no YAML front-matter is provided,
+          this is the entirety of the file contents. If YAML front-matter
+          is used, then this is all the contents of the file after the terminating
+          `---` of the front-matter.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>path</code></p>
+      </td>
+      <td>
+        <p>
+          The full path to the document's source file.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>relative_path</code></p>
+      </td>
+      <td>
+        <p>
+          The path to the document's source file relative to the site source.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>url</code></p>
+      </td>
+      <td>
+        <p>
+          The URL of the rendered collection. The file is only written to the
+          destination when the name of the collection to which it belongs is
+          included in the <code>render</code> key in the site's configuration file.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
