@@ -3,7 +3,8 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
+                  :plugin_manager
 
     attr_accessor :converters, :generators
 
@@ -19,8 +20,10 @@ module Jekyll
 
       self.source = File.expand_path(config['source'])
       self.dest = File.expand_path(config['destination'])
-      self.plugins = plugins_path(config['plugins'])
       self.permalink_style = config['permalink'].to_sym
+
+      self.plugin_manager = Jekyll::PluginManager.new(self)
+      self.plugins        = plugin_manager.plugins_path
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
@@ -63,7 +66,7 @@ module Jekyll
     def setup
       ensure_not_in_dest
 
-      Jekyll::PluginManager.new(self).conscientious_require
+      plugin_manager.conscientious_require
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
@@ -77,19 +80,6 @@ module Jekyll
         if path == dest_pathname
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
         end
-      end
-    end
-
-    # Public: Setup the plugin search path
-    #
-    # path_from_site - the plugin path from the Site configuration
-    #
-    # Returns an Array of plugin search paths
-    def plugins_path(path_from_site)
-      if (path_from_site == Jekyll::Configuration::DEFAULTS['plugins'])
-        [Jekyll.sanitized_path(source, path_from_site)]
-      else
-        Array(path_from_site).map { |d| File.expand_path(d) }
       end
     end
 
