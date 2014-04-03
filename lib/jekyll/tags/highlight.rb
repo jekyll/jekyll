@@ -41,14 +41,15 @@ eos
       end
 
       def render(context)
+        code = super.to_s.strip
         case context.registers[:site].highlighter
         when 'pygments'
-          render_pygments(context, super)
+          render_pygments(context, code)
         when 'rouge'
-          render_rouge(context, super)
+          render_rouge(context, code)
         else
-          render_codehighlighter(context, super)
-        end
+          render_codehighlighter(context, code)
+        end.strip
       end
 
       def render_pygments(context, code)
@@ -106,8 +107,9 @@ eos
 
       def add_code_tags(code, lang)
         # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>/,'<pre><code class="' + lang.to_s.gsub("+", "-") + '">')
-        code = code.sub(/<\/pre>/,"</code></pre>")
+        code = code.sub(/<pre>\n*/,'<pre><code class="' + lang.to_s.gsub("+", "-") + '">')
+        code = code.sub(/\n*<\/pre>/,"</code></pre>")
+        code.strip
       end
 
     end
