@@ -4,7 +4,7 @@ module Jekyll
 
     def initialize(site, label)
       @site  = site
-      @label = label
+      @label = sanitize_label(label)
     end
 
     def docs
@@ -36,6 +36,10 @@ module Jekyll
 
     def inspect
       "#<Jekyll::Collection @label=#{label} docs=#{docs}>"
+    end
+
+    def sanitize_label(label)
+      label.gsub(/[^a-z0-9_\-]/i, '')
     end
 
     def to_liquid

@@ -2,12 +2,28 @@ require 'helper'
 
 class TestCollections < Test::Unit::TestCase
 
-  context "with no collections specified" do
-    setup do
-      @site = Site.new(Jekyll.configuration({
+  def fixture_site(overrides = {})
+    Jekyll::Site.new(Jekyll.configuration(
+      overrides.merge({
         "source"      => source_dir,
         "destination" => dest_dir
-      }))
+      })
+    ))
+  end
+
+  context "a simple collection" do
+    setup do
+      @collection = Jekyll::Collection.new(fixture_site, "../../etc/password")
+    end
+
+    should "sanitize the label name" do
+      assert_equal @collection.label, "etcpassword"
+    end
+  end
+
+  context "with no collections specified" do
+    setup do
+      @site = fixture_site
       @site.process
     end
 
@@ -18,11 +34,9 @@ class TestCollections < Test::Unit::TestCase
 
   context "with a collection" do
     setup do
-      @site = Site.new(Jekyll.configuration({
-        "collections" => ["methods"],
-        "source"      => source_dir,
-        "destination" => dest_dir
-      }))
+      @site = fixture_site({
+        "collections" => ["methods"]
+      })
       @site.process
     end
 
@@ -49,12 +63,10 @@ class TestCollections < Test::Unit::TestCase
 
   context "in safe mode" do
     setup do
-      @site = Site.new(Jekyll.configuration({
+      @site = fixture_site({
         "collections" => ["methods"],
-        "safe"        => true,
-        "source"      => source_dir,
-        "destination" => dest_dir
-      }))
+        "safe"        => true
+      })
       @site.process
       @collection = @site.collections["methods"]
     end
