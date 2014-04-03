@@ -55,7 +55,7 @@ module Jekyll
       # If safe mode is off, load in any Ruby files under the plugins
       # directory.
       unless site.safe
-        plugins.each do |plugins|
+        site.plugins.each do |plugins|
           Dir[File.join(plugins, "**", "*.rb")].sort.each do |f|
             require f
           end
@@ -63,17 +63,5 @@ module Jekyll
       end
     end
 
-    # Static: Setup the plugin search path
-    #
-    # path_from_site - the plugin path from the Site configuration
-    #
-    # Returns an Array of plugin search paths
-    def self.plugins_path(path_from_site)
-      if (path_from_site == Jekyll::Configuration::DEFAULTS['plugins'])
-        [File.join(source, path_from_site)]
-      else
-        Array(path_from_site).map { |d| File.expand_path(d) }
-      end
-    end
   end
 end

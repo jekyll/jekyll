@@ -19,7 +19,7 @@ module Jekyll
 
       self.source = File.expand_path(config['source'])
       self.dest = File.expand_path(config['destination'])
-      self.plugins = Jekyll::PluginManager.plugins_path(config['plugins'])
+      self.plugins = plugins_path(config['plugins'])
       self.permalink_style = config['permalink'].to_sym
 
       self.file_read_opts = {}
@@ -77,6 +77,19 @@ module Jekyll
         if path == dest_pathname
           raise FatalException.new "Destination directory cannot be or contain the Source directory."
         end
+      end
+    end
+
+    # Public: Setup the plugin search path
+    #
+    # path_from_site - the plugin path from the Site configuration
+    #
+    # Returns an Array of plugin search paths
+    def plugins_path(path_from_site)
+      if (path_from_site == Jekyll::Configuration::DEFAULTS['plugins'])
+        [Jekyll.sanitized_path(source, path_from_site)]
+      else
+        Array(path_from_site).map { |d| File.expand_path(d) }
       end
     end
 
