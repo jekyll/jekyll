@@ -45,12 +45,12 @@ module Jekyll
       %w[.yaml .yml].include?(extname)
     end
 
-    def sass_file?
-      %w[.sass .scss].include?(extname)
+    def asset_file?
+      %w[.sass .scss .coffee].include?(extname)
     end
 
     def render_with_liquid?
-      !(sass_file? || yaml_file?)
+      !(asset_file? || yaml_file?)
     end
 
     def url_template
