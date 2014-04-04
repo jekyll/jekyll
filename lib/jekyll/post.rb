@@ -64,8 +64,6 @@ module Jekyll
         self.date = Time.parse(data["date"].to_s)
       end
 
-      self.published = published?
-
       populate_categories
       populate_tags
     end
