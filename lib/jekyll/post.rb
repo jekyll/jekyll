@@ -56,12 +56,26 @@ module Jekyll
       process(name)
       read_yaml(@base, name)
 
+      data.default_proc = proc do |hash, key|
+        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+      end
+
       if data.has_key?('date')
         self.date = Time.parse(data["date"].to_s)
       end
 
+      self.published = published?
+
       populate_categories
       populate_tags
+    end
+
+    def published?
+      if data.has_key?('published') && data['published'] == false
+        false
+      else
+        true
+      end
     end
 
     def populate_categories

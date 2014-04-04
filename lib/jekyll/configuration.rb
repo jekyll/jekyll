@@ -44,6 +44,8 @@ module Jekyll
 
       'excerpt_separator' => "\n\n",
 
+      'defaults'     => [],
+
       'maruku' => {
         'use_tex'    => false,
         'use_divs'   => false,
@@ -249,6 +251,5 @@ module Jekyll
 
       config
     end
-
   end
 end
