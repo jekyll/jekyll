@@ -178,6 +178,7 @@
   * Use numbers to specify font weights and only bring in font weights used (#2185)
   * Add a link to the list of all tz database time zones (#1824)
   * Clean-up and improve documentation `feed.xml` (#2192)
+  * Remove duplicate entry in list of third-party plugins (#2206)
 
 ## 1.5.1 / 2014-03-27
 
