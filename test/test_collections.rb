@@ -11,13 +11,43 @@ class TestCollections < Test::Unit::TestCase
     ))
   end
 
-  context "a simple collection" do
+  context "an evil collection" do
     setup do
       @collection = Jekyll::Collection.new(fixture_site, "../../etc/password")
     end
 
     should "sanitize the label name" do
       assert_equal @collection.label, "etcpassword"
+    end
+
+    should "have a sanitized relative path name" do
+      assert_equal @collection.relative_directory, "_etcpassword"
+    end
+
+    should "have a sanitized full path" do
+      assert_equal @collection.directory, source_dir("_etcpassword")
+    end
+  end
+
+  context "a simple collection" do
+    setup do
+      @collection = Jekyll::Collection.new(fixture_site, "methods")
+    end
+
+    should "sanitize the label name" do
+      assert_equal @collection.label, "methods"
+    end
+
+    should "contain no docs when initialized" do
+      assert_empty @collection.docs
+    end
+
+    should "know its relative directory" do
+      assert_equal @collection.relative_directory, "_methods"
+    end
+
+    should "know the full path to itself on the filesystem" do
+      assert_equal @collection.directory, source_dir("_methods")
     end
   end
 
