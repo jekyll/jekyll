@@ -25,38 +25,80 @@ module Jekyll
       @data ||= Hash.new
     end
 
+    # The path to the document, relative to the site source.
+    #
+    # Returns a String path which represents the relative path
+    #   from the site source to this document
     def relative_path
       Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
     end
 
+    # The base filename of the document.
+    #
+    # suffix - (optional) the suffix to be removed from the end of the filename
+    #
+    # Returns the base filename of the document.
     def basename(suffix = "")
       File.basename(path, suffix)
     end
 
+    # The extension name of the document.
+    #
+    # Returns the extension name of the document.
     def extname
       File.extname(path)
     end
 
+    # Produces a "cleaned" relative path.
+    # The "cleaned" relative path is the relative path without the extname
+    #   and with the collection's directory removed as well.
+    # This method is useful when building the URL of the document.
+    #
+    # Examples:
+    #   When relative_path is "_methods/site/generate.md":
+    #     cleaned_relative_path
+    #     # => "/site/generate"
+    #
+    # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
     end
 
+    # Determine whether the document is a YAML file.
+    #
+    # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
       %w[.yaml .yml].include?(extname)
     end
 
+    # Determine whether the document is an asset file.
+    # Asset files include CoffeeScript files and Sass/SCSS files.
+    #
+    # Returns true if the extname belongs to the set of extensions
+    #   that asset files use.
     def asset_file?
       %w[.sass .scss .coffee].include?(extname)
     end
 
+    # Determine whether the file should be rendered with Liquid.
+    #
+    # Returns false if the document is either an asset file or a yaml file,
+    #   true otherwise.
     def render_with_liquid?
       !(asset_file? || yaml_file?)
     end
 
+    # The URL template where the document would be accessible.
+    #
+    # Returns the URL template for the document.
     def url_template
       "/:collection/:path:output_ext"
     end
 
+    # Construct a Hash of key-value pairs which contain a mapping between
+    #   a key in the URL template and the corresponding value for this document.
+    #
+    # Returns the Hash of key-value pairs for replacement in the URL.
     def url_placeholders
       {
         collection: collection.label,
@@ -65,11 +107,18 @@ module Jekyll
       }
     end
 
+    # The permalink for this Document.
+    # Permalink is set via the data Hash.
+    #
+    # Returns the permalink or nil if no permalink was set in the data.
     def permalink
       return nil if data.nil? || data['permalink'].nil?
       data['permalink']
     end
 
+    # The computed URL for the document. See `Jekyll::URL#to_s` for more details.
+    #
+    # Returns the computed URL for the document.
     def url
       @url ||= URL.new({
         :template     => url_template,
@@ -78,6 +127,11 @@ module Jekyll
       }).to_s
     end
 
+    # The full path to the output file.
+    #
+    # base_directory - the base path of the output directory
+    #
+    # Returns the full path to the output file of this document.
     def destination(base_directory)
       path = Jekyll.sanitized_path(base_directory, url)
       path = File.join(path, "index.html") if url =~ /\/$/
@@ -102,7 +156,7 @@ module Jekyll
     #
     # opts - override options
     #
-    # Return
+    # Return the file read options hash.
     def merged_file_read_opts(opts)
       (site ? site.file_read_opts : {}).merge(opts)
     end
@@ -147,10 +201,19 @@ module Jekyll
       })
     end
 
+    # The inspect string for this document.
+    # Includes the relative path and the collection label.
+    #
+    # Returns the inspect string for this document.
     def inspect
       "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
     end
 
+    # Compare this document against another document.
+    # Comparison is a comparison between the 2 paths of the documents.
+    #
+    # Returns -1, 0, +1 or nil depending on whether this doc's path is less than,
+    #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(anotherDocument)
       path <=> anotherDocument.path
     end
