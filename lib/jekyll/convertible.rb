@@ -111,7 +111,7 @@ module Jekyll
       }]
 
       defaults = site.frontmatter_defaults.all(relative_path, type)
-      defaults.merge Utils.deep_merge_hashes(data, further_data)
+      Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
     end
 
     def type
