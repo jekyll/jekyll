@@ -209,6 +209,13 @@ module Jekyll
       "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
     end
 
+    # The string representation for this document.
+    #
+    # Returns the content of the document
+    def to_s
+      output || content
+    end
+
     # Compare this document against another document.
     # Comparison is a comparison between the 2 paths of the documents.
     #

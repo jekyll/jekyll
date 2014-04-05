@@ -86,10 +86,7 @@ module Jekyll
     #
     # Returns a representation of this collection for use in Liquid.
     def to_liquid
-      {
-        "label" => label,
-        "docs"  => docs
-      }
+      docs
     end
 
   end
