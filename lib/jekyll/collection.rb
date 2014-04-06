@@ -79,7 +79,7 @@ module Jekyll
 
     # An inspect string.
     #
-    # Returns the inspecr string
+    # Returns the inspect string
     def inspect
       "#<Jekyll::Collection @label=#{label} docs=#{docs}>"
     end

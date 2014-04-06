@@ -7,7 +7,7 @@ module Jekyll
 
     # Create a new Document.
     #
-    # shit - the Jekyll::Site instance to which this Document belongs
+    # site - the Jekyll::Site instance to which this Document belongs
     # path - the path to the file
     #
     # Returns nothing.
@@ -112,8 +112,7 @@ module Jekyll
     #
     # Returns the permalink or nil if no permalink was set in the data.
     def permalink
-      return nil if data.nil? || data['permalink'].nil?
-      data['permalink']
+      data && data['permalink']
     end
 
     # The computed URL for the document. See `Jekyll::URL#to_s` for more details.
@@ -121,9 +120,9 @@ module Jekyll
     # Returns the computed URL for the document.
     def url
       @url ||= URL.new({
-        :template     => url_template,
-        :placeholders => url_placeholders,
-        :permalink    => permalink
+        template:     url_template,
+        placeholders: url_placeholders,
+        permalink:    permalink
       }).to_s
     end
 
@@ -158,7 +157,7 @@ module Jekyll
     #
     # Return the file read options hash.
     def merged_file_read_opts(opts)
-      (site ? site.file_read_opts : {}).merge(opts)
+      site ? site.file_read_opts.merge(opts) : opts
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter

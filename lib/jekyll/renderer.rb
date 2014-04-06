@@ -32,7 +32,7 @@ module Jekyll
         "page" => document.to_liquid
       }, site.site_payload)
 
-      info    = {
+      info = {
         filters:   [Jekyll::Filters],
         registers: { :site => site, :page => payload['page'] }
       }
