@@ -68,6 +68,7 @@ class TestCollections < Test::Unit::TestCase
         "collections" => ["methods"]
       })
       @site.process
+      @collection = @site.collections["methods"]
     end
 
     should "create a Hash on Site with the label mapped to the instance of the Collection" do
@@ -89,6 +90,19 @@ class TestCollections < Test::Unit::TestCase
         ], doc.relative_path
       end
     end
+
+    should "not include files which start with an underscore in the base collection directory" do
+      assert_not_include @collection.filtered_entries, "_do_not_read_me.md"
+    end
+
+    should "not include files which start with an underscore in a subdirectory" do
+      assert_not_include @collection.filtered_entries, "site/_dont_include_me_either.md"
+    end
+
+    should "not include the underscored files in the list of docs" do
+      assert_not_include @collection.docs.map(&:relative_path), "_methods/_do_not_read_me.md"
+      assert_not_include @collection.docs.map(&:relative_path), "_methods/site/_dont_include_me_either.md"
+    end
   end
 
   context "in safe mode" do
@@ -102,11 +116,11 @@ class TestCollections < Test::Unit::TestCase
     end
 
     should "not allow symlinks" do
-      assert !@collection.allowed_document?(File.join(@collection.directory, "um_hi.md"))
+      assert_not_include @collection.filtered_entries, "um_hi.md"
     end
 
     should "not include the symlinked file in the list of docs" do
-      assert_not_include %w[_methods/um_hi.md], @collection.docs.map(&:relative_path)
+      assert_not_include @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end
 

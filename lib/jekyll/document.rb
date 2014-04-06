@@ -193,12 +193,12 @@ module Jekyll
     #
     # Returns a Hash representing this Document's data.
     def to_liquid
-      data.merge({
+      Utils.deep_merge_hashes data, {
         "content"       => content,
         "path"          => path,
         "relative_path" => relative_path,
         "url"           => url
-      })
+      }
     end
 
     # The inspect string for this document.

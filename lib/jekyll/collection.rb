@@ -25,14 +25,32 @@ module Jekyll
     #
     # Returns the sorted array of docs.
     def read
-      Dir.glob(File.join(directory, "**", "*.*")).each do |file_path|
-        if allowed_document?(file_path)
-          doc = Jekyll::Document.new(file_path, { site: site, collection: self })
-          doc.read
-          docs << doc
-        end
+      filtered_entries.each do |file_path|
+        doc = Jekyll::Document.new(Jekyll.sanitized_path(directory, file_path), { site: site, collection: self })
+        doc.read
+        docs << doc
       end
       docs.sort!
+    end
+
+    # All the entries in this collection.
+    #
+    # Returns an Array of file paths to the documents in this collection
+    #   relative to the collection's directory
+    def entries
+      Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
+        entry[File.join(directory, "")] = ''; entry
+      end
+    end
+
+    # Filtered version of the entries in this collection.
+    # See `Jekyll::EntryFilter#filter` for more information.
+    #
+    # Returns a list of filtered entry paths.
+    def filtered_entries
+      Dir.chdir(directory) do
+        entry_filter.filter(entries)
+      end
     end
 
     # The directory for this Collection, relative to the site source.
@@ -51,14 +69,12 @@ module Jekyll
       Jekyll.sanitized_path(site.source, relative_directory)
     end
 
-    # Determine whether the document at a given path is an allowed document.
+    # The entry filter for this collection.
+    # Creates an instance of Jekyll::EntryFilter.
     #
-    # path - the path to the document within this collection
-    #
-    # Returns false if the site is in safe mode and the document is a symlink,
-    #   true otherwise.
-    def allowed_document?(path)
-      !(site.safe && File.symlink?(path))
+    # Returns the instance of Jekyll::EntryFilter for this collection.
+    def entry_filter
+      @entry_filter ||= Jekyll::EntryFilter.new(site, relative_directory)
     end
 
     # An inspect string.
