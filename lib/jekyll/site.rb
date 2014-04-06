@@ -188,8 +188,8 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      unless dir.eql?("_data")
-        Jekyll.logger.warn "Error:", "Data source directories other than '_data' have been removed.\n" +
+      unless dir.to_s.eql?("_data")
+        Jekyll.logger.error "Error:", "Data source directories other than '_data' have been removed.\n" +
           "Please move your YAML files to `_data` and remove the `data_source` key from your `_config.yml`."
       end
 
