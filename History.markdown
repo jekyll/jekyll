@@ -57,6 +57,7 @@
   * Clean up the `<head>` in the site template (#2186)
   * Permit YAML blocks to end with three dots to better conform with the
     YAML spec (#2110)
+  * Use `File.exist?` instead of deprecated `File.exists?` (#2214)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
