@@ -57,8 +57,10 @@ class TestCollections < Test::Unit::TestCase
       @site.process
     end
 
-    should "not contain any collections" do
-      assert_equal @site.collections, Hash.new
+    should "not contain any collections other than the default ones" do
+      collections = @site.collections.dup
+      assert collections.delete("data").is_a?(Jekyll::Collection)
+      assert_equal Hash.new, collections
     end
   end
 
