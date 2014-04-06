@@ -84,6 +84,11 @@ module Jekyll
       end
     end
 
+    # The list of collections and their corresponding Jekyll::Collection instances.
+    # If config['collections'] is set, a new instance is created for each item in the collection.
+    # If config['collections'] is not set, a new hash is returned.
+    #
+    # Returns a Hash containing collection name-to-instance pairs.
     def collections
       @collections ||= if config['collections']
         Hash[config['collections'].map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
@@ -92,8 +97,11 @@ module Jekyll
       end
     end
 
+    # The list of collections to render.
+    #
+    # The array of collection labels to render.
     def to_render
-      config['render'] || Array.new
+      @to_render ||= (config['render'] || Array.new)
     end
 
     # Read Site data from disk and load it into internal data structures.
@@ -180,14 +188,15 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = File.join(source, dir)
-      return unless File.directory?(base) && (!safe || !File.symlink?(base))
+      unless dir.eql?("_data")
+        Jekyll.logger.warn "Error:", "Data source directories other than '_data' have been removed.\n" +
+          "Please move your YAML files to `_data` and remove the `data_source` key from your `_config.yml`."
+      end
 
-      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
-      data_collection = Jekyll::Collection.new(self, "data")
-      data_collection.read
-      data_collection.docs.each do |doc|
+      collections['data'] = Jekyll::Collection.new(self, "data")
+      collections['data'].read
+
+      collections['data'].docs.each do |doc|
         key = sanitize_filename(doc.basename(".*"))
         self.data[key] = doc.data
       end
