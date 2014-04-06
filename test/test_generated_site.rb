@@ -33,7 +33,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "hide unpublished page" do
-      assert !File.exists?(dest_dir('/unpublished.html'))
+      assert !File.exist?(dest_dir('/unpublished.html'))
     end
 
     should "not copy _posts directory" do
@@ -41,8 +41,8 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "process other static files and generate correct permalinks" do
-      assert File.exists?(dest_dir('/about/index.html'))
-      assert File.exists?(dest_dir('/contacts.html'))
+      assert File.exist?(dest_dir('/about/index.html'))
+      assert File.exist?(dest_dir('/contacts.html'))
     end
 
     should "print a nice list of static files" do

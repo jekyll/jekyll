@@ -33,7 +33,7 @@ module Jekyll
     end
 
     def within(directory)
-      return unless File.exists?(directory)
+      return unless File.exist?(directory)
       Dir.chdir(directory) { yield }
     end
 

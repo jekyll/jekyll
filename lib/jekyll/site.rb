@@ -333,7 +333,7 @@ module Jekyll
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
       base = File.join(source, dir, subfolder)
-      return [] unless File.exists?(base)
+      return [] unless File.exist?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
     end

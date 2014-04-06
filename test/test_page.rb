@@ -167,7 +167,7 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir, 'contacts.html'))
+        assert File.exist?(File.join(dest_dir, 'contacts.html'))
       end
 
       should "write even when the folder name is plus and permalink has +" do
@@ -176,7 +176,7 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir, '+', 'plus+in+url'))
+        assert File.exist?(File.join(dest_dir, '+', 'plus+in+url'))
       end
 
       should "write even when permalink has '%# +'" do
@@ -185,7 +185,7 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir, '+', '%# +.html'))
+        assert File.exist?(File.join(dest_dir, '+', '%# +.html'))
       end
 
       should "write properly without html extension" do
@@ -195,7 +195,7 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir, 'contacts', 'index.html'))
+        assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
       end
 
       should "write properly with extension different from html" do
@@ -207,7 +207,7 @@ class TestPage < Test::Unit::TestCase
         assert_equal("/sitemap.xml", page.url)
         assert_nil(page.url[/\.html$/])
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir,'sitemap.xml'))
+        assert File.exist?(File.join(dest_dir,'sitemap.xml'))
       end
 
       should "write dotfiles properly" do
@@ -216,7 +216,7 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir, '.htaccess'))
+        assert File.exist?(File.join(dest_dir, '.htaccess'))
       end
 
       context "in a directory hierarchy" do
@@ -226,7 +226,7 @@ class TestPage < Test::Unit::TestCase
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, 'contacts', 'index.html'))
+          assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
         end
 
         should "write properly" do
@@ -235,7 +235,7 @@ class TestPage < Test::Unit::TestCase
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, 'contacts', 'bar.html'))
+          assert File.exist?(File.join(dest_dir, 'contacts', 'bar.html'))
         end
 
         should "write properly without html extension" do
@@ -245,7 +245,7 @@ class TestPage < Test::Unit::TestCase
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, 'contacts', 'bar', 'index.html'))
+          assert File.exist?(File.join(dest_dir, 'contacts', 'bar', 'index.html'))
         end
       end
     end

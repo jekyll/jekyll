@@ -537,7 +537,7 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
+          assert File.exist?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
         end
 
         should "write properly when url has hash" do
@@ -546,7 +546,7 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, '2009', '03', '12',
+          assert File.exist?(File.join(dest_dir, '2009', '03', '12',
                                         'hash-#1.html'))
         end
 
@@ -556,7 +556,7 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, '2014', '03', '22',
+          assert File.exist?(File.join(dest_dir, '2014', '03', '22',
                                         'escape-+ %20[].html'))
         end
 
@@ -567,7 +567,7 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, 'foo-bar', 'index.html'))
+          assert File.exist?(File.join(dest_dir, 'foo-bar', 'index.html'))
         end
 
         should "insert data" do
