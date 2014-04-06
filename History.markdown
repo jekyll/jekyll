@@ -179,6 +179,7 @@
   * Add a link to the list of all tz database time zones (#1824)
   * Clean-up and improve documentation `feed.xml` (#2192)
   * Remove duplicate entry in list of third-party plugins (#2206)
+  * Reduce the whitespace in the favicon. (#2213)
 
 ## 1.5.1 / 2014-03-27
 
