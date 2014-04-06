@@ -39,7 +39,7 @@ JS
     end
 
     should "write a JS file in place" do
-      assert File.exists?(@test_coffeescript_file), "Can't find the converted CoffeeScript file in the dest_dir."
+      assert File.exist?(@test_coffeescript_file), "Can't find the converted CoffeeScript file in the dest_dir."
     end
 
     should "produce JS" do

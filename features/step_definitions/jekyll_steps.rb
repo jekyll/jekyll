@@ -18,19 +18,19 @@ end
 
 
 Before do
-  FileUtils.mkdir_p(TEST_DIR) unless File.exists?(TEST_DIR)
+  FileUtils.mkdir_p(TEST_DIR) unless File.exist?(TEST_DIR)
   Dir.chdir(TEST_DIR)
 end
 
 After do
-  FileUtils.rm_rf(TEST_DIR)   if File.exists?(TEST_DIR)
+  FileUtils.rm_rf(TEST_DIR)   if File.exist?(TEST_DIR)
   FileUtils.rm(JEKYLL_COMMAND_OUTPUT_FILE)
 end
 
 World(Test::Unit::Assertions)
 
 Given /^I have a blank site in "(.*)"$/ do |path|
-  FileUtils.mkdir_p(path) unless File.exists?(path)
+  FileUtils.mkdir_p(path) unless File.exist?(path)
 end
 
 Given /^I do not have a "(.*)" directory$/ do |path|
@@ -190,7 +190,7 @@ Then /^the "(.*)" file should +exist$/ do |file|
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|
-  assert !File.exists?(file), "The file \"#{file}\" exists"
+  assert !File.exist?(file), "The file \"#{file}\" exists"
 end
 
 Then /^I should see today's time in "(.*)"$/ do |file|

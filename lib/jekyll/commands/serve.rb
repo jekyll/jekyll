@@ -37,7 +37,7 @@ module Jekyll
           FileUtils.mkdir_p(destination)
 
           # monkey patch WEBrick using custom 404 page (/404.html)
-          if File.exists?(File.join(destination, '404.html'))
+          if File.exist?(File.join(destination, '404.html'))
             WEBrick::HTTPResponse.class_eval do
               def create_error_page
                 @body = IO.read(File.join(@config[:DocumentRoot], '404.html'))
