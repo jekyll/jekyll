@@ -134,9 +134,7 @@ module Jekyll
       posts = read_content(dir, '_posts', Post)
 
       posts.each do |post|
-        if post.published? && (future || post.date <= time)
-          aggregate_post_info(post)
-        end
+        aggregate_post_info(post) if publisher.publish?(post)
       end
     end
 
@@ -390,6 +388,10 @@ module Jekyll
       name.gsub!(/[^\w\s_-]+/, '')
       name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
       name.gsub(/\s+/, '_')
+    end
+
+    def publisher
+      @publisher ||= Publisher.new(self)
     end
   end
 end
