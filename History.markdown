@@ -181,6 +181,7 @@
   * Clean-up and improve documentation `feed.xml` (#2192)
   * Remove duplicate entry in list of third-party plugins (#2206)
   * Reduce the whitespace in the favicon. (#2213)
+  * Add `jekyll-page-collections` to list of third-party plugins (#2215)
 
 ## 1.5.1 / 2014-03-27
 
