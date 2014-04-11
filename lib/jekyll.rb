@@ -50,6 +50,7 @@ require 'jekyll/related_posts'
 require 'jekyll/cleaner'
 require 'jekyll/entry_filter'
 require 'jekyll/layout_reader'
+require 'jekyll/highlighter'
 
 # extensions
 require 'jekyll/plugin'
