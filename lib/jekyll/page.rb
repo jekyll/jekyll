@@ -78,11 +78,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-<<<<<<< HEAD
       self.basename = name[0 .. -ext.length - 1]
-=======
-      self.basename = File.basename(name, ext)
->>>>>>> Extract parent object from posts and pages
     end
 
     # Add any necessary layouts to this post
@@ -92,21 +88,12 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-<<<<<<< HEAD
-      payload = Utils.deep_merge_hashes({
-        "page" => to_liquid,
-        'paginator' => pager.to_liquid
-      }, site_payload)
-
-      do_layout(payload, layouts)
-=======
       relative_permalinks_deprecation_method if uses_relative_permalinks
       template = {
-        "page" => self.to_liquid,
+        "page" => to_liquid,
         'paginator' => pager.to_liquid
       }
       super(template, layouts, site_payload)
->>>>>>> Extract parent object from posts and pages
     end
 
     def relative_permalinks_deprecation_method
@@ -144,14 +131,11 @@ module Jekyll
       path
     end
 
-<<<<<<< HEAD
     # Returns the object as a debug String.
     def inspect
       "#<Jekyll:Page @name=#{name.inspect}>"
     end
 
-=======
->>>>>>> Extract parent object from posts and pages
     # Returns the Boolean of whether this Page is HTML or not.
     def html?
       output_ext == '.html'
