@@ -24,7 +24,6 @@ class TestConvertible < Test::Unit::TestCase
       out = capture_stdout do
         ret = @convertible.read_yaml(@base, name)
         assert_equal({}, ret)
-
       end
       assert_match(/YAML Exception|syntax error|Error reading file/, out)
       assert_match(/#{File.join(@base, name)}/, out)
@@ -49,7 +48,6 @@ class TestConvertible < Test::Unit::TestCase
       assert_match(/#{File.join(@base, name)}/, out)
       assert_match(/Please see/, out)
       assert_match(/from line/, out)
-
     end
   end
 end
