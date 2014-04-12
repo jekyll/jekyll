@@ -51,7 +51,7 @@ module Jekyll
         puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue ArgumentError => e
          code = e.message.split(" ").last
-         lines = self.content.lines
+         lines = self.content.lines.to_a
          line_idx = lines.find_index {|line| line.encoding != code}
          char_idx = lines.find_index {|char| char.encoding != code}
          puts "The character: #{lines.fetch(char_idx)}"
