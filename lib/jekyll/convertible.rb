@@ -51,6 +51,10 @@ module Jekyll
         puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue Exception => e
         puts "Error reading file #{File.join(base, name)}: #{e.message}"
+      puts "Please see expression:"
+      puts e.backtrace.first.scan(/in `(.*?)\'/).join
+      puts "from line:"
+      puts caller.join.scan(/\d+/).join
       end
 
       self.data ||= {}
