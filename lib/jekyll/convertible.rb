@@ -49,6 +49,16 @@ module Jekyll
         end
       rescue SyntaxError => e
         puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+      rescue ArgumentError => e
+         code = e.message.split(" ").last
+         lines = self.content.lines.to_a
+         line_idx = lines.find_index {|line| line.encoding != code}
+         char_idx = lines.find_index {|char| char.encoding != code}
+         puts "The character: #{lines.fetch(char_idx)}"
+         puts "from line (#{line_idx}:\n#{lines.fetch(line_idx)}"
+         puts "at column: #{char_idx}"
+         puts "does not match encoding: #{code}"
+         puts "Error reading file #{File.join(base, name)}: #{e.message}"
       rescue Exception => e
         puts "Error reading file #{File.join(base, name)}: #{e.message}"
       end
