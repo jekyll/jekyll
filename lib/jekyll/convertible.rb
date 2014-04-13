@@ -1,6 +1,5 @@
 # encoding: UTF-8
 
-require 'pry'
 require 'set'
 
 # Convertible provides methods for converting a pagelike item
