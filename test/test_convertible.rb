@@ -27,6 +27,8 @@ class TestConvertible < Test::Unit::TestCase
       end
       assert_match(/YAML Exception|syntax error|Error reading file/, out)
       assert_match(/#{File.join(@base, name)}/, out)
+      assert_match(/Please see/, out)
+      assert_match(/from line/, out)
     end
 
     should "not allow ruby objects in yaml" do
@@ -44,7 +46,12 @@ class TestConvertible < Test::Unit::TestCase
       end
       assert_match(/invalid byte sequence in UTF-8/, out)
       assert_match(/#{File.join(@base, name)}/, out)
+<<<<<<< HEAD
       assert_match(/on line 5/, out)
+=======
+      assert_match(/Please see/, out)
+      assert_match(/from line/, out)
+>>>>>>> 8bdb660ce4cae002092f1edad26bc09d0faab4a5
     end
   end
 end
