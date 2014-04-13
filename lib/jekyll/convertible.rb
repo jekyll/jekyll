@@ -1,5 +1,6 @@
 # encoding: UTF-8
 
+require 'pry'
 require 'set'
 
 # Convertible provides methods for converting a pagelike item
@@ -50,15 +51,25 @@ module Jekyll
       rescue SyntaxError => e
         puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue ArgumentError => e
+        puts "Error reading file #{File.join(base, name)}: #{e.message}"
         code = e.message.split(" ").last
         lines = self.content.lines.to_a
-        line_idx = lines.find_index {|line| line.encoding != code}
-        char_idx = lines.find_index {|char| char.encoding != code}
-        puts "The character: #{lines.fetch(char_idx)}"
-        puts "from line (#{line_idx}):\n#{lines.fetch(line_idx)}"
-        puts "at column: #{char_idx}"
-        puts "does not match encoding: #{code}"
-        puts "Error reading file #{File.join(base, name)}: #{e.message}"
+        off_line = []
+        lines.each_index {|idx| off_line << [idx, lines[idx]] }
+        lines = self.content.chars.to_a
+        off_chars = []
+        off_line.each_index do |idx| 
+          characters = off_line[idx].join.chars
+          characters.to_a.each_index do |i|
+            if !characters.to_a[i].valid_encoding? 
+              off_chars << [idx, i, characters.to_a[i]]
+            end
+          end
+        end
+        puts "The following characters do not match encoding: #{code}"
+        off_chars.each do |char| 
+          puts "#{char[2].inspect} on line #{char[0]} at column #{char[1]} "
+        end
       rescue Exception => e
         puts "Error reading file #{File.join(base, name)}: #{e.message}"
       end

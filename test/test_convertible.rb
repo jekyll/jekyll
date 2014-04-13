@@ -38,16 +38,13 @@ class TestConvertible < Test::Unit::TestCase
 
     should "not parse if there is encoding error in file" do
       name = 'broken_front_matter3.erb'
-      lines = @base.lines.to_a
-      line_number = lines.find_index {|line| line.encoding != 'utf-8'}
       out = capture_stdout do
         ret = @convertible.read_yaml(@base, name, :encoding => 'utf-8')
         assert_equal({}, ret)
       end
       assert_match(/invalid byte sequence in UTF-8/, out)
       assert_match(/#{File.join(@base, name)}/, out)
-      assert_match(/from line/, out)
-      assert_match(/#{line_number}/, out)
+      assert_match(/on line 5/, out)
     end
   end
 end
