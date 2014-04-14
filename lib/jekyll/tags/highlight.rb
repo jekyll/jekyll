@@ -42,76 +42,14 @@ eos
 
       def render(context)
         code = super.to_s.strip
-        case context.registers[:site].highlighter
-        when 'pygments'
-          render_pygments(context, code)
-        when 'rouge'
-          render_rouge(context, code)
-        else
-          render_codehighlighter(context, code)
-        end.strip
-      end
-
-      def render_pygments(context, code)
-        require 'pygments'
-
-        @options[:encoding] = 'utf-8'
-
-        highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
-
-        if highlighted_code.nil?
-          Jekyll.logger.error "There was an error highlighting your code:"
-          puts
-          Jekyll.logger.error code
-          puts
-          Jekyll.logger.error "While attempting to convert the above code, Pygments.rb" +
-            " returned an unacceptable value."
-          Jekyll.logger.error "This is usually a timeout problem solved by running `jekyll build` again."
-          raise ArgumentError.new("Pygments.rb returned an unacceptable value when attempting to highlight some code.")
-        end
-
-        output = add_code_tags(highlighted_code, @lang)
-
+        highlighter = Jekyll::Highlighter.new(context.registers[:site].highlighter)
+        output = highlighter.render(code, @lang, @options)
+        
         output = context["highlighter_prefix"] + output if context["highlighter_prefix"]
         output << context["highlighter_suffix"] if context["highlighter_suffix"]
-
-        return output
+        
+        output.strip
       end
-
-      def render_rouge(context, code)
-        require 'rouge'
-
-        linenos = @options.keys.include?('linenos')
-        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
-        formatter = Rouge::Formatters::HTML.new(line_numbers: linenos, wrap: false)
-
-        pre = "<pre>#{formatter.format(lexer.lex(code))}</pre>"
-
-        output = context["highlighter_prefix"] || ""
-        output << "<div class=\"highlight\">"
-        output << add_code_tags(pre, @lang)
-        output << "</div>"
-        output << context["highlighter_suffix"] if context["highlighter_suffix"]
-
-        return output
-      end
-
-      def render_codehighlighter(context, code)
-        #The div is required because RDiscount blows ass
-        <<-HTML
-  <div>
-    <pre><code class='#{@lang.to_s.gsub("+", "-")}'>#{h(code).strip}</code></pre>
-  </div>
-        HTML
-      end
-
-      def add_code_tags(code, lang)
-        # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>\n*/,'<pre><code class="' + lang.to_s.gsub("+", "-") + '">')
-        code = code.sub(/\n*<\/pre>/,"</code></pre>")
-        code.strip
-      end
-
     end
   end
 end
