@@ -192,7 +192,7 @@ class TestSite < Test::Unit::TestCase
       assert_equal true, @site.send(:has_yaml_header?, abs_path)
     end
 
-    should "not read PGP keys as pages" do
+    should "enforce a strict 3-dash limit on the start of the YAML front-matter" do
       abs_path = File.expand_path("pgp.key", @site.source)
       assert_equal false, @site.send(:has_yaml_header?, abs_path)
     end
