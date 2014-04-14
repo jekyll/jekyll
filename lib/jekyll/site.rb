@@ -395,13 +395,13 @@ module Jekyll
     end
 
     def documents
-      docs = Set.new
-      collections.each do |label, coll|
+      collections.reduce(Set.new) do |docs, (label, coll)|
         if to_render.include?(label)
-          docs = docs.merge(coll.docs)
+          docs.merge(coll.docs)
+        else
+          docs
         end
       end
-      docs
     end
 
     def each_site_file

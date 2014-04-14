@@ -60,16 +60,14 @@ module Jekyll
     #
     # Returns the converted content.
     def convert(content)
-      output = content.dup
-      converters.each do |converter|
+      converters.reduce(content) do |output, converter|
         begin
-          output = converter.convert(output)
+          converter.convert output
         rescue => e
           Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error converting '#{document.relative_path}'."
           raise e
         end
       end
-      output
     end
 
     # Render the given content with the payload and info
