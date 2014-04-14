@@ -55,7 +55,6 @@ module Jekyll
         lines = self.content.lines.to_a
         off_line = []
         lines.each_index {|idx| off_line << [idx, lines[idx]] }
-        lines = self.content.chars.to_a
         off_chars = []
         off_line.each_index do |idx| 
           characters = off_line[idx].join.chars
