@@ -48,6 +48,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     should "print a nice list of static files" do
       expected_output = Regexp.new <<-OUTPUT
 - /css/screen.css last edited at \\d+ with extname .css
+- /pgp.key last edited at \\d+ with extname .key
 - /products.yml last edited at \\d+ with extname .yml
 - /symlink-test/symlinked-dir/screen.css last edited at \\d+ with extname .css
 OUTPUT
