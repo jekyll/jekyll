@@ -61,40 +61,7 @@ choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
 ### Collections
 
-Each collection is part of the `site.collections` array in Liquid. Each collection has the following attributes:
-
-<div class="mobile-side-scroller">
-<table>
-  <thead>
-    <tr>
-      <th>Variable</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <p><code>label</code></p>
-      </td>
-      <td>
-        <p>
-          The name of the collection.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>docs</code></p>
-      </td>
-      <td>
-        <p>
-          An array of Documents contained in this collection.
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
+Each collection is accessible via the `site` Liquid variable. For example, if you want to access the `albums` collection found in `_albums`, you'd use `site.albums`. Each collection is itself an array of documents (e.g. `site.albums` is an array of documents, much like `site.pages` and `site.posts`). See below for how to access attributes of those documents.
 
 ### Documents
 
