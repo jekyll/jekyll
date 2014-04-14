@@ -396,23 +396,6 @@ class TestSite < Test::Unit::TestCase
         assert_nil site.site_payload['site']['data']['products']
       end
 
-      should "load symlink directory in unsafe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => false, 'data_source' => File.join('symlink-test', '_data')}))
-        site.process
-
-        assert_not_nil site.data['products']
-        assert_not_nil site.data['languages']
-        assert_not_nil site.data['members']
-      end
-
-      should "not load symlink directory in safe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => true, 'data_source' => File.join('symlink-test', '_data')}))
-        site.process
-
-        assert_nil site.data['products']
-        assert_nil site.data['languages']
-        assert_nil site.data['members']
-      end
     end
   end
 end
