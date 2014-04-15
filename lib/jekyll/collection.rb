@@ -38,6 +38,7 @@ module Jekyll
     # Returns an Array of file paths to the documents in this collection
     #   relative to the collection's directory
     def entries
+      return Array.new unless exists?
       Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
         entry[File.join(directory, "")] = ''; entry
       end
@@ -67,6 +68,16 @@ module Jekyll
     #   is stored on the filesystem.
     def directory
       Jekyll.sanitized_path(site.source, relative_directory)
+    end
+
+    # Checks whether the directory "exists" for this collection.
+    # The directory must exist on the filesystem and must not be a symlink
+    #   if in safe mode.
+    #
+    # Returns false if the directory doesn't exist or if it's a symlink
+    #   and we're in safe mode.
+    def exists?
+      File.directory?(directory) && !(File.symlink?(directory) && site.safe)
     end
 
     # The entry filter for this collection.
