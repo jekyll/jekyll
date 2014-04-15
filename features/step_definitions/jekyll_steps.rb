@@ -130,9 +130,8 @@ Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
   end
 end
 
-
-When /^I run jekyll$/ do
-  run_jekyll_build
+When /^I run jekyll(?: with "(.+)")?$/ do |opt|
+  run_jekyll_build(opt)
 end
 
 When /^I run jekyll in safe mode$/ do

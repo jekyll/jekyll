@@ -2,7 +2,7 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
-                  :permalink_style, :time, :future, :safe, :plugins, :limit_posts,
+                  :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
                   :plugin_manager
 
@@ -14,7 +14,7 @@ module Jekyll
     def initialize(config)
       self.config = config.clone
 
-      %w[safe lsi highlighter baseurl exclude include future show_drafts limit_posts keep_files gems].each do |opt|
+      %w[safe lsi highlighter baseurl exclude include future unpublished show_drafts limit_posts keep_files gems].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -115,7 +115,7 @@ module Jekyll
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
-          pages << page if page.published?
+          pages << page if publisher.publish?(page)
         else
           static_files << StaticFile.new(self, source, dir, f)
         end
@@ -134,9 +134,7 @@ module Jekyll
       posts = read_content(dir, '_posts', Post)
 
       posts.each do |post|
-        if post.published? && (future || post.date <= time)
-          aggregate_post_info(post)
-        end
+        aggregate_post_info(post) if publisher.publish?(post)
       end
     end
 
@@ -390,6 +388,10 @@ module Jekyll
       name.gsub!(/[^\w\s_-]+/, '')
       name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
       name.gsub(/\s+/, '_')
+    end
+
+    def publisher
+      @publisher ||= Publisher.new(self)
     end
   end
 end
