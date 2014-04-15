@@ -1,6 +1,7 @@
 ## HEAD
 
 ### Major Enhancements
+  * Add "Collections" feature (#2199)
   * Add gem-based plugin whitelist to safe mode (#1657)
   * Replace the commander command line parser with a more robust
     solution for our needs called `mercenary` (#1706)
