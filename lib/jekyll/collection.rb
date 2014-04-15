@@ -49,6 +49,7 @@ module Jekyll
     #
     # Returns a list of filtered entry paths.
     def filtered_entries
+      return Array.new unless exists?
       Dir.chdir(directory) do
         entry_filter.filter(entries)
       end
