@@ -4,7 +4,7 @@ module Jekyll
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
-                  :plugin_manager
+                  :plugin_manager, :collections
 
     attr_accessor :converters, :generators
 
@@ -14,12 +14,13 @@ module Jekyll
     def initialize(config)
       self.config = config.clone
 
-      %w[safe lsi highlighter baseurl exclude include future unpublished show_drafts limit_posts keep_files gems].each do |opt|
+      %w[safe lsi highlighter baseurl exclude include future unpublished
+        show_drafts limit_posts keep_files gems].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
-      self.source = File.expand_path(config['source'])
-      self.dest = File.expand_path(config['destination'])
+      self.source          = File.expand_path(config['source'])
+      self.dest            = File.expand_path(config['destination'])
       self.permalink_style = config['permalink'].to_sym
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
@@ -83,6 +84,26 @@ module Jekyll
       end
     end
 
+    # The list of collections and their corresponding Jekyll::Collection instances.
+    # If config['collections'] is set, a new instance is created for each item in the collection.
+    # If config['collections'] is not set, a new hash is returned.
+    #
+    # Returns a Hash containing collection name-to-instance pairs.
+    def collections
+      @collections ||= if config['collections']
+        Hash[config['collections'].map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
+      else
+        Hash.new
+      end
+    end
+
+    # The list of collections to render.
+    #
+    # The array of collection labels to render.
+    def to_render
+      @to_render ||= (config['render'] || Array.new)
+    end
+
     # Read Site data from disk and load it into internal data structures.
     #
     # Returns nothing.
@@ -90,6 +111,7 @@ module Jekyll
       self.layouts = LayoutReader.new(self).read
       read_directories
       read_data(config['data_source'])
+      read_collections
     end
 
     # Recursively traverse directories to find posts, pages and static files
@@ -166,19 +188,25 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = File.join(source, dir)
-      return unless File.directory?(base) && (!safe || !File.symlink?(base))
-
-      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
-
-      entries.each do |entry|
-        path = File.join(source, dir, entry)
-        next if File.symlink?(path) && safe
-
-        key = sanitize_filename(File.basename(entry, '.*'))
-        self.data[key] = SafeYAML.load_file(path)
+      unless dir.to_s.eql?("_data")
+        Jekyll.logger.error "Error:", "Data source directories other than '_data' have been removed.\n" +
+          "Please move your YAML files to `_data` and remove the `data_source` key from your `_config.yml`."
       end
+
+      collections['data'] = Jekyll::Collection.new(self, "data")
+      collections['data'].read
+
+      collections['data'].docs.each do |doc|
+        key = sanitize_filename(doc.basename(".*"))
+        self.data[key] = doc.data
+      end
+    end
+
+    # Read in all collections specified in the configuration
+    #
+    # Returns nothing.
+    def read_collections
+      collections.each { |_, collection| collection.read }
     end
 
     # Run each of the Generators.
@@ -195,6 +223,12 @@ module Jekyll
     # Returns nothing.
     def render
       relative_permalinks_deprecation_method
+
+      to_render.each do |label|
+        collections[label].docs.each do |document|
+          document.output = Jekyll::Renderer.new(self, document).run
+        end
+      end
 
       payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
@@ -271,7 +305,8 @@ module Jekyll
     #                  See Site#post_attr_hash for type info.
     def site_payload
       {"jekyll" => { "version" => Jekyll::VERSION },
-       "site"   => config.merge({
+       "site"   => Utils.deep_merge_hashes(config,
+         Utils.deep_merge_hashes(collections, {
           "time"         => time,
           "posts"        => posts.sort { |a, b| b <=> a },
           "pages"        => pages,
@@ -279,7 +314,9 @@ module Jekyll
           "html_pages"   => pages.reject { |page| !page.html? },
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
-          "data"         => site_data})}
+          "data"         => site_data
+        }))
+      }
     end
 
     # Filter out any files/directories that are hidden or backup files (start
@@ -357,8 +394,18 @@ module Jekyll
       end
     end
 
+    def documents
+      collections.reduce(Set.new) do |docs, (label, coll)|
+        if to_render.include?(label)
+          docs.merge(coll.docs)
+        else
+          docs
+        end
+      end
+    end
+
     def each_site_file
-      %w(posts pages static_files).each do |type|
+      %w(posts pages static_files documents).each do |type|
         send(type).each do |item|
           yield item
         end

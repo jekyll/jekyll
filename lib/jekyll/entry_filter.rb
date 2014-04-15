@@ -1,5 +1,7 @@
 module Jekyll
   class EntryFilter
+    SPECIAL_LEADING_CHARACTERS = ['.', '_', '#'].freeze
+
     attr_reader :site
 
     def initialize(site, base_directory = nil)
@@ -35,7 +37,8 @@ module Jekyll
     end
 
     def special?(entry)
-      ['.', '_', '#'].include?(entry[0..0])
+      SPECIAL_LEADING_CHARACTERS.include?(entry[0..0]) ||
+        SPECIAL_LEADING_CHARACTERS.include?(File.basename(entry)[0..0])
     end
 
     def backup?(entry)
