@@ -59,6 +59,7 @@
     YAML spec (#2110)
   * Use `File.exist?` instead of deprecated `File.exists?` (#2214)
   * Require newline after start of YAML front-matter header (#2211)
+  * Add the ability for pages to be marked as `published: false` (#1492)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
