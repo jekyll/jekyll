@@ -55,6 +55,7 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      @collections = {}
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
