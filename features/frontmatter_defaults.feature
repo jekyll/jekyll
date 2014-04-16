@@ -36,16 +36,16 @@ Feature: frontmatter defaults
     And I have a _posts directory
     And I have the following post:
       | title | date       | content               |
-      | about | 2013-10-14 | info on {{page.name}} |
+      | about | 2013-10-14 | info on {{page.description}} |
     And I have a special/_posts directory
     And I have the following post in "special":
       | title | date       | path  | content               |
-      | about | 2013-10-14 | local | info on {{page.name}} |
+      | about | 2013-10-14 | local | info on {{page.description}} |
 
-    And I have an "index.html" page with title "overview" that contains "Overview for {{page.name}}"
-    And I have an "special/index.html" page with title "section overview" that contains "Overview for {{page.name}}"
+    And I have an "index.html" page with title "overview" that contains "Overview for {{page.description}}"
+    And I have an "special/index.html" page with title "section overview" that contains "Overview for {{page.description}}"
 
-    And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "subfolder", name: "the special section"}}, {scope: {path: ""}, values: {layout: "root", name: "the webpage"}}]"
+    And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "subfolder", description: "the special section"}}, {scope: {path: ""}, values: {layout: "root", description: "the webpage"}}]"
 
     When I run jekyll
     Then the _site directory should exist
