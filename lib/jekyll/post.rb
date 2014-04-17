@@ -12,11 +12,10 @@ module Jekyll
       dir
       date
       id
-      categories
       next
       previous
-      tags
       path
+      classifications
     ]
 
     # Attributes for Liquid templates
@@ -35,7 +34,7 @@ module Jekyll
 
     attr_accessor :site
     attr_accessor :data, :extracted_excerpt, :content, :output, :ext
-    attr_accessor :date, :slug, :tags, :categories
+    attr_accessor :date, :slug, :classifications
 
     attr_reader :name
 
@@ -52,7 +51,8 @@ module Jekyll
       @base = containing_dir(source, dir)
       @name = name
 
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
+      self.classifications = {'categories' => dir.downcase.split('/').reject { |x| x.empty? }}
+
       process(name)
       read_yaml(@base, name)
 
@@ -64,8 +64,7 @@ module Jekyll
         self.date = Time.parse(data["date"].to_s)
       end
 
-      populate_categories
-      populate_tags
+      populate_classifications
     end
 
     def published?
@@ -76,15 +75,37 @@ module Jekyll
       end
     end
 
-    def populate_categories
-      if categories.empty?
-        self.categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
-      end
-      categories.flatten!
+    # Delegate accessors to @classifications for backward compatibility
+    def categories=(c)
+      @classifications ||= {}
+      @classifications['categories'] = c
     end
 
-    def populate_tags
-      self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+    def categories
+      @classifications ||= {}
+      @classifications['categories']
+    end
+
+    def tags=(t)
+      @classifications ||= {}
+      @classifications['tags'] = t
+    end
+
+    def tags
+      @classifications ||= {}
+      @classifications['tags']
+    end
+
+    def populate_classifications
+      @site.classifications.keys.each do |classification|
+        value = Utils.pluralized_array_from_hash(data, ActiveSupport::Inflector.singularize(classification), classification)
+
+        if classification == 'categories'
+          value = self.categories.empty? ? value.map { |c| c.to_s.downcase } : self.categories
+        end
+
+        classifications[classification] = value.flatten
+      end
     end
 
     # Get the full path to the directory containing the post files
@@ -276,6 +297,13 @@ module Jekyll
       path = Jekyll.sanitized_path(dest, URL.unescape_path(url))
       path = File.join(path, "index.html") if path[/\.html$/].nil?
       path
+    end
+
+    # Convert this post into a Hash for use in Liquid templates.
+    #
+    # Returns the representative Hash.
+    def to_liquid(attrs = nil)
+      Utils.deep_merge_hashes(super(attrs), @classifications)
     end
 
     # Returns the shorthand String identifier of this Post.

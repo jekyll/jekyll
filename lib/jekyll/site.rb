@@ -111,6 +111,27 @@ module Jekyll
       end
     end
 
+    # The list of classifications and their corresponding Jekyll::Post instances.
+    #
+    # Returns a Hash containing classifications name-to-posts pairs.
+    def classifications
+      Hash[classification_names.map { |classification| [classification, post_attr_hash(classification)]} ]
+    end
+
+    # The list of classification names.
+    #
+    # Returns an array of classification names from the configuration
+    #   or ["categories", "tags"] if the `classifications` key is not set.
+    def classification_names
+      if !@classifications
+        # Include categories and tags for backward compatibility
+        @classifications = %w(categories tags)
+        # Sanitize classifications
+        @classifications |= (config['classifications'] || []).reject { |c| c !~ /\A[a-z][a-zA-Z_-]*\z/ }
+      end
+      @classifications
+    end
+
     # Read Site data from disk and load it into internal data structures.
     #
     # Returns nothing.
@@ -295,7 +316,13 @@ module Jekyll
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
-      posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
+      posts.each do |p|
+        if p.classifications.keys.include?(post_attr) && !p.respond_to?(post_attr.to_sym)
+          p.classifications[post_attr].each { |t| hash[t] << p }
+        else
+          p.send(post_attr.to_sym).each { |t| hash[t] << p }
+        end
+      end
       hash.values.each { |posts| posts.sort!.reverse! }
       hash
     end
@@ -319,16 +346,19 @@ module Jekyll
     # The Hash payload containing site-wide data.
     #
     # Returns the Hash: { "site" => data } where data is a Hash with keys:
-    #   "time"       - The Time as specified in the configuration or the
-    #                  current time if none was specified.
-    #   "posts"      - The Array of Posts, sorted chronologically by post date
-    #                  and then title.
-    #   "pages"      - The Array of all Pages.
-    #   "html_pages" - The Array of HTML Pages.
-    #   "categories" - The Hash of category values and Posts.
-    #                  See Site#post_attr_hash for type info.
-    #   "tags"       - The Hash of tag values and Posts.
-    #                  See Site#post_attr_hash for type info.
+    #   "time"              - The Time as specified in the configuration or the
+    #                         current time if none was specified.
+    #   "posts"             - The Array of Posts, sorted chronologically by post date
+    #                         and then title.
+    #   "pages"             - The Array of all Pages.
+    #   "html_pages"        - The Array of HTML Pages.
+    #   "classifications"   - The Hash of classification names and Hash of classification values and Posts.
+    #   "categories"        - The Hash of category values and Posts.
+    #                         See Site#post_attr_hash for type info.
+    #   "tags"              - The Hash of tag values and Posts.
+    #                         See Site#post_attr_hash for type info.
+    # For each custom classification, the Hash will also contain a key:
+    #   "#{classification}" - The Hash of custom classification values and Posts.
     def site_payload
       {
         "jekyll" => {
@@ -336,18 +366,18 @@ module Jekyll
           "environment" => Jekyll.env
         },
         "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-            "time"         => time,
-            "posts"        => posts.sort { |a, b| b <=> a },
-            "pages"        => pages,
-            "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-            "html_pages"   => pages.reject { |page| !page.html? },
-            "categories"   => post_attr_hash('categories'),
-            "tags"         => post_attr_hash('tags'),
-            "collections"  => collections,
-            "documents"    => documents,
-            "data"         => site_data
-        }))
+          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}],
+            Utils.deep_merge_hashes(classifications, {
+              "time"            => time,
+              "posts"           => posts.sort { |a, b| b <=> a },
+              "pages"           => pages,
+              "static_files"    => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
+              "html_pages"      => pages.reject { |page| !page.html? },
+              "collections"     => collections,
+              "classifications" => classifications,
+              "documents"       => documents,
+              "data"            => site_data
+        })))
       }
     end
 

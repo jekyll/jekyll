@@ -226,6 +226,8 @@ module Jekyll
     def [](property)
       if self.class::ATTRIBUTES_FOR_LIQUID.include?(property)
         send(property)
+      elsif self.respond_to?(:classifications) && self.classifications.keys.include?(property)
+        self.classifications[property]
       else
         data[property]
       end
