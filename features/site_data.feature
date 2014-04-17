@@ -79,6 +79,19 @@ Feature: Site data
     Then the _site directory should exist
     And I should see "Yuengling" in "_site/index.html"
 
+  Scenario: Use the custom site.projects classification variable
+    Given I have a _posts directory
+    And I have an "index.html" page that contains "{% for post in site.projects.bartender %} {{ post.content }} {% endfor %}"
+    And I have a configuration file with "classifications" set to:
+      | value    |
+      | projects |
+    And I have the following posts:
+      | title     | date       | project   | content                   |
+      | Beer List | 2009-03-26 | bartender | Our most famous beverages |
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Our most famous beverages" in "_site/index.html"
+
   Scenario: Order Posts by name when on the same date
   Given I have a _posts directory
   And I have an "index.html" page that contains "{% for post in site.posts %}{{ post.title }}:{{ post.previous.title}},{{ post.next.title}} {% endfor %}"
