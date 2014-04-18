@@ -41,6 +41,15 @@ file. For example, the following are examples of valid post filenames:
 2012-09-12-how-to-write-a-blog.textile
 {% endhighlight %}
 
+<div class="note">
+  <h5>ProTip™: Link to other posts</h5>
+  <p>
+    Use the <a href="../templates#post_url"><code>post_url</code></a>
+    tag to link to other posts without having to worry about the URL's
+    breaking when the site permalink style changes.
+  </p>
+</div>
+
 ### Content Formats
 
 All blog post files must begin with [YAML front-matter](../frontmatter/). After
