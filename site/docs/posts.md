@@ -44,9 +44,9 @@ file. For example, the following are examples of valid post filenames:
 <div class="note">
   <h5>ProTip™: Link to other posts</h5>
   <p>
-    Use the <a href="../templates#post_url"><code>post_url</code> tag</a>
-    to link to other posts without having to worry about changing URL
-    when you change permalink styles.
+    Use the <a href="../templates#post_url"><code>post_url</code></a>
+    tag to link to other posts without having to worry about changing
+    URL when you change permalink styles.
   </p>
 </div>
 
