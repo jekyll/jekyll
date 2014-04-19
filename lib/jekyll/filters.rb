@@ -83,7 +83,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      CGI.escapeHTML(input)
+      CGI.escapeHTML(input.to_s)
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters

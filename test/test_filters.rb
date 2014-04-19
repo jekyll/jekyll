@@ -93,6 +93,10 @@ class TestFilters < Test::Unit::TestCase
       assert_equal "&lt;code&gt;command &amp;lt;filename&amp;gt;&lt;/code&gt;", @filter.xml_escape("<code>command &lt;filename&gt;</code>")
     end
 
+    should "not error when xml escaping nil" do
+      assert_equal "", @filter.xml_escape(nil)
+    end
+
     should "escape space as plus" do
       assert_equal "my+things", @filter.cgi_escape("my things")
     end
