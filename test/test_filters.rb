@@ -95,7 +95,7 @@ class TestFilters < Test::Unit::TestCase
 
     should "not error when xml escaping nil" do
       assert_equal "", @filter.xml_escape(nil)
-    ned
+    end
 
     should "escape space as plus" do
       assert_equal "my+things", @filter.cgi_escape("my things")
