@@ -61,6 +61,7 @@ require 'jekyll/plugin'
 require 'jekyll/converter'
 require 'jekyll/generator'
 require 'jekyll/command'
+require 'jekyll/liquid_extensions'
 
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
