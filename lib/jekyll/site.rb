@@ -91,10 +91,23 @@ module Jekyll
     #
     # Returns a Hash containing collection name-to-instance pairs.
     def collections
-      @collections ||= if config['collections']
-        Hash[config['collections'].map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
+      @collections ||= Hash[collection_names.map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
+    end
+
+    # The list of collection names.
+    #
+    # Returns an array of collection names from the configuration,
+    #   or an empty array if the `collections` key is not set.
+    def collection_names
+      case config['collections']
+      when Hash
+        config['collections'].keys
+      when Array
+        config['collections']
+      when nil
+        []
       else
-        Hash.new
+        raise ArgumentError, "Your `collections` key must be a hash or an array."
       end
     end
 
