@@ -124,6 +124,7 @@
   * Extract plugin management into its own class (#2197)
   * Add missing tests for `Command` (#2216)
   * Update `rr` link in CONTRIBUTING doc (#2247)
+  * Streamline cucumber execution of `jekyll` subcommands (#2258)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
