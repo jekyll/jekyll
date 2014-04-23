@@ -36,6 +36,10 @@ Given /^I do not have a "(.*)" directory$/ do |path|
   File.directory?("#{TEST_DIR}/#{path}")
 end
 
+Given /^I do not have a "(.*)" file$/ do |path|
+  File.exists?("#{TEST_DIR}/#{path}")
+end
+
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
 Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
   File.open(file, 'w') do |f|
