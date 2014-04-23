@@ -139,24 +139,11 @@ end
 #
 ##################
 
-When /^I run jekyll(?: with "(.+)")?$/ do |opt|
-  run_jekyll_build(opt)
-end
-
-When /^I run jekyll in safe mode$/ do
-  run_jekyll_build("--safe")
-end
-
-When /^I run jekyll with drafts$/ do
-  run_jekyll_build("--drafts")
-end
-
-When /^I call jekyll new with test_blank --blank$/ do
-  run_jekyll_new("test_blank --blank")
-end
-
-When /^I debug jekyll$/ do
-  run_jekyll_build("--verbose")
+When /^I run jekyll(.*)$/ do |args|
+  status = run_jekyll(args)
+  if !status || args.include?("--verbose")
+    puts jekyll_run_output
+  end
 end
 
 When /^I change "(.*)" to contain "(.*)"$/ do |file, text|

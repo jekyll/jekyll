@@ -7,7 +7,7 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {{ site.methods }}"
     And I have fixture collections
     And I have a configuration file with "collections" set to "['methods']"
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: Use `{{ page.title }}` to build a full configuration for use w/Jekyll.\n\nWhatever: {{ page.whatever }}\n`{{ page.title }}` is used to make sure your path is in your source.\nRun your generators! {{ page.layout }}\nCreate dat site.\nRun your generators! {{ page.layout }}" in "_site/index.html"
 
@@ -18,7 +18,7 @@ Feature: Collections
       | key         | value       |
       | collections | ['methods'] |
       | render      | ['methods'] |
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: methods" in "_site/index.html"
     And I should see "<p>Whatever: foo.bar</p>" in "_site/methods/configuration.html"
@@ -31,7 +31,7 @@ Feature: Collections
       | key         | value       |
       | collections | ['methods'] |
       | render      | ['methods'] |
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: methods" in "_site/index.html"
     And I should see "<p>Run your generators! default</p>" in "_site/methods/site/generate.html"

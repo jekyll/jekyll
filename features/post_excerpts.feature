@@ -11,7 +11,7 @@ Feature: Post excerpts
     And I have the following posts:
       | title  | date       | layout | content             |
       | entry1 | 2007-12-31 | post   | content for entry1. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And I should see exactly "<p>content for entry1.</p>" in "_site/index.html"
 
@@ -23,7 +23,7 @@ Feature: Post excerpts
     And I have the following posts:
       | title  | date       | layout | content             |
       | entry1 | 2007-12-31 | post   | content for entry1. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And the _site/2007 directory should exist
     And the _site/2007/12 directory should exist
@@ -40,7 +40,7 @@ Feature: Post excerpts
     And I have the following posts:
       | title  | date       | layout | content             |
       | entry1 | 2007-12-31 | post   | content for entry1. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And the _site/2007 directory should exist
     And the _site/2007/12 directory should exist

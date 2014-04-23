@@ -9,7 +9,7 @@ Feature: Draft Posts
     And I have the following draft:
       | title  | date       | layout  | content        |
       | Recipe | 2009-03-27 | default | Not baked yet. |
-    When I run jekyll with drafts
+    When I run jekyll build --drafts
     Then the _site directory should exist
     And I should see "Not baked yet." in "_site/recipe.html"
 
@@ -20,7 +20,7 @@ Feature: Draft Posts
     And I have the following draft:
       | title  | date       | layout  | content        |
       | Recipe | 2009-03-27 | default | Not baked yet. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And the "_site/recipe.html" file should not exist
 
@@ -31,7 +31,7 @@ Feature: Draft Posts
     And I have the following draft:
       | title  | date       | layout  | published | content        |
       | Recipe | 2009-03-27 | default | false     | Not baked yet. |
-    When I run jekyll with drafts
+    When I run jekyll build --drafts
     Then the _site directory should exist
     And the "_site/recipe.html" file should not exist
 
@@ -41,6 +41,6 @@ Feature: Draft Posts
     And I have the following draft:
       | title  | date       | layout | content                    |
       | Recipe | 2009-03-27 | simple | Post path: {{ page.path }} |
-    When I run jekyll with drafts
+    When I run jekyll build --drafts
     Then the _site directory should exist
     And I should see "Post path: _drafts/recipe.textile" in "_site/recipe.html"

@@ -13,7 +13,7 @@ Feature: Data
         price: 2.5
       """
     And I have an "index.html" page that contains "{% for product in site.data.products %}{{product.name}}{% endfor %}"
-    When I run jekyll
+    When I run jekyll build
     Then the "_site/index.html" file should exist
     And I should see "sugar" in "_site/index.html"
     And I should see "salt" in "_site/index.html"
@@ -28,7 +28,7 @@ Feature: Data
         age: 34
       """
     And I have an "index.html" page that contains "{% for member in site.data.members %}{{member.name}}{% endfor %}"
-    When I run jekyll
+    When I run jekyll build
     Then the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
@@ -43,7 +43,7 @@ Feature: Data
         age: 34
       """
     And I have an "index.html" page that contains "{% for member in site.data.team_members %}{{member.name}}{% endfor %}"
-    When I run jekyll
+    When I run jekyll build
     Then the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
@@ -58,7 +58,7 @@ Feature: Data
           age: 34
       """
     And I have an "index.html" page that contains "{% for member in site.data %}{{member.name}}{% endfor %}"
-    When I run jekyll
+    When I run jekyll build
     Then the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
