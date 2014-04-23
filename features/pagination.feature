@@ -14,7 +14,7 @@ Feature: Site pagination
       | Wargames2 | 2009-04-27 | default | The only winning move is not to play2. |
       | Wargames3 | 2009-05-27 | default | The only winning move is not to play3. |
       | Wargames4 | 2009-06-27 | default | The only winning move is not to play4. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site/page<exist> directory should exist
     And the "_site/page<exist>/index.html" file should exist
     And I should see "<posts>" in "_site/page<exist>/index.html"
@@ -41,7 +41,7 @@ Feature: Site pagination
       | Wargames2 | 2009-04-27 | default | The only winning move is not to play2. |
       | Wargames3 | 2009-05-27 | default | The only winning move is not to play3. |
       | Wargames4 | 2009-06-27 | default | The only winning move is not to play4. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site/blog/page-<exist> directory should exist
     And the "_site/blog/page-<exist>/index.html" file should exist
     And I should see "<posts>" in "_site/blog/page-<exist>/index.html"
@@ -69,7 +69,7 @@ Feature: Site pagination
       | Wargames2 | 2009-04-27 | default | The only winning move is not to play2. |
       | Wargames3 | 2009-05-27 | default | The only winning move is not to play3. |
       | Wargames4 | 2009-06-27 | default | The only winning move is not to play4. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site/blog/page/<exist> directory should exist
     And the "_site/blog/page/<exist>/index.html" file should exist
     And I should see "<posts>" in "_site/blog/page/<exist>/index.html"

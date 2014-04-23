@@ -23,21 +23,8 @@ def jekyll_run_output
   File.read(jekyll_output_file)
 end
 
-def run_jekyll(args, output_file)
-  command = "#{JEKYLL_PATH} #{args} --trace > #{jekyll_output_file} 2>&1"
-  system command
-end
-
-def run_jekyll_build(build_args = "")
-  if !run_jekyll("build #{build_args}", jekyll_output_file) || build_args.eql?("--verbose")
-    puts jekyll_run_output
-  end
-end
-
-def run_jekyll_new(new_args = "")
-  unless run_jekyll("new #{new_args}", jekyll_output_file)
-    puts jekyll_run_output
-  end
+def run_jekyll(args)
+  system "#{JEKYLL_PATH} #{args} --trace > #{jekyll_output_file} 2>&1"
 end
 
 def slug(title)
