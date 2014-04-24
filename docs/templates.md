@@ -209,7 +209,7 @@ root of your source directory. This will embed the contents of
 
     The name of the file you wish to embed can be literal (as in the example above),
     or you can use a variable, using liquid-like variable syntax as in
-    <code>{% raw %}{% include {{ my_variable }} %}{% endraw %}</code>.
+    <code>{% raw %}{% include {{my_variable}} %}{% endraw %}</code>.
 
   </p>
 </div>
