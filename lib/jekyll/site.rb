@@ -111,13 +111,6 @@ module Jekyll
       end
     end
 
-    # The list of collections to render.
-    #
-    # The array of collection labels to render.
-    def to_render
-      @to_render ||= (config['render'] || Array.new)
-    end
-
     # Read Site data from disk and load it into internal data structures.
     #
     # Returns nothing.
@@ -240,8 +233,8 @@ module Jekyll
     def render
       relative_permalinks_deprecation_method
 
-      to_render.each do |label|
-        collections[label].docs.each do |document|
+      collections.each do |label, collection|
+        collection.docs.each do |document|
           document.output = Jekyll::Renderer.new(self, document).run
         end
       end
@@ -411,9 +404,9 @@ module Jekyll
     end
 
     def documents
-      collections.reduce(Set.new) do |docs, (label, coll)|
-        if to_render.include?(label)
-          docs.merge(coll.docs)
+      collections.reduce(Set.new) do |docs, (_, collection)|
+        if collection.write?
+          docs.merge(collection.docs)
         else
           docs
         end

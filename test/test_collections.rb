@@ -107,6 +107,25 @@ class TestCollections < Test::Unit::TestCase
     end
   end
 
+  context "with a collection with metadata" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "foo" => "bar",
+            "baz" => "whoo"
+          }
+        }
+      })
+      @site.process
+      @collection = @site.collections["methods"]
+    end
+
+    should "extract the configuration collection information as metadata" do
+      assert_equal @collection.metadata, {"foo" => "bar", "baz" => "whoo"}
+    end
+  end
+
   context "in safe mode" do
     setup do
       @site = fixture_site({
