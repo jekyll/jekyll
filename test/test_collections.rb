@@ -49,6 +49,35 @@ class TestCollections < Test::Unit::TestCase
     should "know the full path to itself on the filesystem" do
       assert_equal @collection.directory, source_dir("_methods")
     end
+
+    context "when turned into Liquid" do
+      should "have a label attribute" do
+        assert_equal @collection.to_liquid["label"], "methods"
+      end
+
+      should "have a docs attribute" do
+        assert_equal @collection.to_liquid["docs"], Array.new
+      end
+
+      should "have a directory attribute" do
+        assert_equal @collection.to_liquid["directory"], source_dir("_methods")
+      end
+
+      should "have a relative_directory attribute" do
+        assert_equal @collection.to_liquid["relative_directory"], "_methods"
+      end
+
+      should "have a written attribute" do
+        assert_equal @collection.to_liquid["written"], false
+      end
+    end
+
+    should "know whether it should be written or not" do
+      assert_equal @collection.write?, false
+      @collection.metadata['write'] = true
+      assert_equal @collection.write?, true
+      @collection.metadata.delete 'write'
+    end
   end
 
   context "with no collections specified" do
