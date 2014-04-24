@@ -220,7 +220,9 @@ module Jekyll
     #
     # Returns nothing.
     def read_collections
-      collections.each { |_, collection| collection.read }
+      collections.each do |_, collection|
+        collection.read unless collection.label.eql?("data")
+      end
     end
 
     # Run each of the Generators.
