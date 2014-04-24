@@ -195,17 +195,18 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      unless dir.to_s.eql?("_data")
-        Jekyll.logger.error "Error:", "Data source directories other than '_data' have been removed.\n" +
-          "Please move your YAML files to `_data` and remove the `data_source` key from your `_config.yml`."
-      end
+      base = File.join(source, dir)
+      return unless File.directory?(base) && (!safe || !File.symlink?(base))
 
-      collections['data'] = Jekyll::Collection.new(self, "data")
-      collections['data'].read
+      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
+      entries.delete_if { |e| File.directory?(File.join(base, e)) }
 
-      collections['data'].docs.each do |doc|
-        key = sanitize_filename(doc.basename(".*"))
-        self.data[key] = doc.data
+      entries.each do |entry|
+        path = File.join(source, dir, entry)
+        next if File.symlink?(path) && safe
+
+        key = sanitize_filename(File.basename(entry, '.*'))
+        self.data[key] = SafeYAML.load_file(path)
       end
     end
 
