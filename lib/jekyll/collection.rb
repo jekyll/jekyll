@@ -115,7 +115,13 @@ module Jekyll
     #
     # Returns a representation of this collection for use in Liquid.
     def to_liquid
-      docs
+      metadata.merge({
+        "label"     => label,
+        "docs"      => docs,
+        "directory" => directory,
+        "written"   => write?,
+        "relative_directory" => relative_directory
+      })
     end
 
     # Whether the collection's documents ought to be written as individual

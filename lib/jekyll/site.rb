@@ -316,7 +316,7 @@ module Jekyll
     def site_payload
       {"jekyll" => { "version" => Jekyll::VERSION },
        "site"   => Utils.deep_merge_hashes(config,
-         Utils.deep_merge_hashes(collections, {
+         Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
           "time"         => time,
           "posts"        => posts.sort { |a, b| b <=> a },
           "pages"        => pages,
@@ -324,6 +324,7 @@ module Jekyll
           "html_pages"   => pages.reject { |page| !page.html? },
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
+          "collections"  => collections,
           "data"         => site_data
         }))
       }
