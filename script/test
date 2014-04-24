@@ -8,4 +8,4 @@ else
   TEST_FILES="$@"
 fi
 
-/usr/bin/env ruby -I"lib:test" -r rake -r rake/rake_test_loader ${TEST_FILES}
+/usr/bin/env bundle exec ruby -I"lib:test" -r rake -r rake/rake_test_loader ${TEST_FILES}
