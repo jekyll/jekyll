@@ -194,6 +194,7 @@
   * Add `jekyll-page-collections` to list of third-party plugins (#2215)
   * Add a cross-reference about `post_url` (#2243)
   * Add `jekyll-live-tiles` to list of third-party plugins (#2250)
+  * Fixed broken link to GitHub training material site source (#2257)
 
 ## 1.5.1 / 2014-03-27
 
