@@ -131,7 +131,7 @@ module Jekyll
     # Returns the metadata for this collection
     def extract_metadata
       if site.config['collections'].is_a?(Hash)
-        site.config['collections'][label] || {}
+        site.config['collections'][label] || Hash.new
       else
         {}
       end
