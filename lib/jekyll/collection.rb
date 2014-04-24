@@ -1,6 +1,6 @@
 module Jekyll
   class Collection
-    attr_reader :site, :label
+    attr_reader :site, :label, :metadata
 
     # Create a new Collection.
     #
@@ -9,8 +9,9 @@ module Jekyll
     #
     # Returns nothing.
     def initialize(site, label)
-      @site  = site
-      @label = sanitize_label(label)
+      @site     = site
+      @label    = sanitize_label(label)
+      @metadata = extract_metadata
     end
 
     # Fetch the Documents in this collection.
@@ -115,6 +116,25 @@ module Jekyll
     # Returns a representation of this collection for use in Liquid.
     def to_liquid
       docs
+    end
+
+    # Whether the collection's documents ought to be written as individual
+    #   files in the output.
+    #
+    # Returns true if the 'write' metadata is true, false otherwise.
+    def write?
+      !!metadata['write']
+    end
+
+    # Extract options for this collection from the site configuration.
+    #
+    # Returns the metadata for this collection
+    def extract_metadata
+      if site.config['collections'].is_a?(Hash)
+        site.config['collections'][label] || {}
+      else
+        {}
+      end
     end
 
   end
