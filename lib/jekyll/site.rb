@@ -4,7 +4,7 @@ module Jekyll
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
-                  :plugin_manager, :collections
+                  :plugin_manager
 
     attr_accessor :converters, :generators
 
