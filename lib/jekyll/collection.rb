@@ -129,7 +129,7 @@ module Jekyll
     #
     # Returns true if the 'write' metadata is true, false otherwise.
     def write?
-      !!metadata['write']
+      !!metadata['output']
     end
 
     # Extract options for this collection from the site configuration.

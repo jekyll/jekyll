@@ -74,9 +74,9 @@ class TestCollections < Test::Unit::TestCase
 
     should "know whether it should be written or not" do
       assert_equal @collection.write?, false
-      @collection.metadata['write'] = true
+      @collection.metadata['output'] = true
       assert_equal @collection.write?, true
-      @collection.metadata.delete 'write'
+      @collection.metadata.delete 'output'
     end
   end
 

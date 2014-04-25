@@ -20,7 +20,7 @@ Feature: Collections
     """
     collections:
       methods:
-        write: true
+        output: true
         foo:   bar
     """
     When I run jekyll build
@@ -37,7 +37,7 @@ Feature: Collections
     """
     collections:
       methods:
-        write: true
+        output: true
         foo:   bar
     """
     When I run jekyll build
@@ -46,13 +46,26 @@ Feature: Collections
     And I should see "<p>Run your generators! default</p>" in "_site/methods/site/generate.html"
     And I should see "<div class='title'>Tom Preston-Werner</div>" in "_site/methods/site/generate.html"
 
-  Scenario: Collections directly on the site
+  Scenario: Collections specified as an array
     Given I have an "index.html" page that contains "Collections: {% for method in site.methods %}{{ method.relative_path }} {% endfor %}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
     """
     collections:
     - methods
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Collections: _methods/configuration.md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
+
+  Scenario: Collections specified as an hash
+    Given I have an "index.html" page that contains "Collections: {% for method in site.methods %}{{ method.relative_path }} {% endfor %}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      methods:
+        baz: bin
     """
     When I run jekyll build
     Then the _site directory should exist
