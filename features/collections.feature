@@ -51,8 +51,9 @@ Feature: Collections
     And I have fixture collections
     And I have a "_config.yml" file with content:
     """
-    collections: [methods]
+    collections:
+    - methods
     """
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: _methods/configuration.md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
