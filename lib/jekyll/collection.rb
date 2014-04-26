@@ -119,7 +119,7 @@ module Jekyll
         "label"     => label,
         "docs"      => docs,
         "directory" => directory,
-        "written"   => write?,
+        "output"    => write?,
         "relative_directory" => relative_directory
       })
     end
