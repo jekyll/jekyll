@@ -112,7 +112,7 @@ module Jekyll
     #
     # Returns the permalink or nil if no permalink was set in the data.
     def permalink
-      data && data['permalink']
+      data && data.is_a?(Hash) && data['permalink']
     end
 
     # The computed URL for the document. See `Jekyll::URL#to_s` for more details.
@@ -192,12 +192,16 @@ module Jekyll
     #
     # Returns a Hash representing this Document's data.
     def to_liquid
-      Utils.deep_merge_hashes data, {
-        "content"       => content,
-        "path"          => path,
-        "relative_path" => relative_path,
-        "url"           => url
-      }
+      if data.is_a?(Hash)
+        Utils.deep_merge_hashes data, {
+          "content"       => content,
+          "path"          => path,
+          "relative_path" => relative_path,
+          "url"           => url
+        }
+      else
+        data
+      end
     end
 
     # The inspect string for this document.

@@ -4,7 +4,7 @@ module Jekyll
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
-                  :plugin_manager, :collections
+                  :plugin_manager
 
     attr_accessor :converters, :generators
 
@@ -55,6 +55,7 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      @collections = nil
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
@@ -90,18 +91,24 @@ module Jekyll
     #
     # Returns a Hash containing collection name-to-instance pairs.
     def collections
-      @collections ||= if config['collections']
-        Hash[config['collections'].map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
-      else
-        Hash.new
-      end
+      @collections ||= Hash[collection_names.map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
     end
 
-    # The list of collections to render.
+    # The list of collection names.
     #
-    # The array of collection labels to render.
-    def to_render
-      @to_render ||= (config['render'] || Array.new)
+    # Returns an array of collection names from the configuration,
+    #   or an empty array if the `collections` key is not set.
+    def collection_names
+      case config['collections']
+      when Hash
+        config['collections'].keys
+      when Array
+        config['collections']
+      when nil
+        []
+      else
+        raise ArgumentError, "Your `collections` key must be a hash or an array."
+      end
     end
 
     # Read Site data from disk and load it into internal data structures.
@@ -188,17 +195,18 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      unless dir.to_s.eql?("_data")
-        Jekyll.logger.error "Error:", "Data source directories other than '_data' have been removed.\n" +
-          "Please move your YAML files to `_data` and remove the `data_source` key from your `_config.yml`."
-      end
+      base = File.join(source, dir)
+      return unless File.directory?(base) && (!safe || !File.symlink?(base))
 
-      collections['data'] = Jekyll::Collection.new(self, "data")
-      collections['data'].read
+      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
+      entries.delete_if { |e| File.directory?(File.join(base, e)) }
 
-      collections['data'].docs.each do |doc|
-        key = sanitize_filename(doc.basename(".*"))
-        self.data[key] = doc.data
+      entries.each do |entry|
+        path = File.join(source, dir, entry)
+        next if File.symlink?(path) && safe
+
+        key = sanitize_filename(File.basename(entry, '.*'))
+        self.data[key] = SafeYAML.load_file(path)
       end
     end
 
@@ -206,7 +214,9 @@ module Jekyll
     #
     # Returns nothing.
     def read_collections
-      collections.each { |_, collection| collection.read }
+      collections.each do |_, collection|
+        collection.read unless collection.label.eql?("data")
+      end
     end
 
     # Run each of the Generators.
@@ -224,8 +234,8 @@ module Jekyll
     def render
       relative_permalinks_deprecation_method
 
-      to_render.each do |label|
-        collections[label].docs.each do |document|
+      collections.each do |label, collection|
+        collection.docs.each do |document|
           document.output = Jekyll::Renderer.new(self, document).run
         end
       end
@@ -306,7 +316,7 @@ module Jekyll
     def site_payload
       {"jekyll" => { "version" => Jekyll::VERSION },
        "site"   => Utils.deep_merge_hashes(config,
-         Utils.deep_merge_hashes(collections, {
+         Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
           "time"         => time,
           "posts"        => posts.sort { |a, b| b <=> a },
           "pages"        => pages,
@@ -314,6 +324,7 @@ module Jekyll
           "html_pages"   => pages.reject { |page| !page.html? },
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
+          "collections"  => collections,
           "data"         => site_data
         }))
       }
@@ -395,9 +406,9 @@ module Jekyll
     end
 
     def documents
-      collections.reduce(Set.new) do |docs, (label, coll)|
-        if to_render.include?(label)
-          docs.merge(coll.docs)
+      collections.reduce(Set.new) do |docs, (_, collection)|
+        if collection.write?
+          docs.merge(collection.docs)
         else
           docs
         end

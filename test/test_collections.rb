@@ -49,6 +49,35 @@ class TestCollections < Test::Unit::TestCase
     should "know the full path to itself on the filesystem" do
       assert_equal @collection.directory, source_dir("_methods")
     end
+
+    context "when turned into Liquid" do
+      should "have a label attribute" do
+        assert_equal @collection.to_liquid["label"], "methods"
+      end
+
+      should "have a docs attribute" do
+        assert_equal @collection.to_liquid["docs"], Array.new
+      end
+
+      should "have a directory attribute" do
+        assert_equal @collection.to_liquid["directory"], source_dir("_methods")
+      end
+
+      should "have a relative_directory attribute" do
+        assert_equal @collection.to_liquid["relative_directory"], "_methods"
+      end
+
+      should "have a written attribute" do
+        assert_equal @collection.to_liquid["written"], false
+      end
+    end
+
+    should "know whether it should be written or not" do
+      assert_equal @collection.write?, false
+      @collection.metadata['output'] = true
+      assert_equal @collection.write?, true
+      @collection.metadata.delete 'output'
+    end
   end
 
   context "with no collections specified" do
@@ -57,10 +86,8 @@ class TestCollections < Test::Unit::TestCase
       @site.process
     end
 
-    should "not contain any collections other than the default ones" do
-      collections = @site.collections.dup
-      assert collections.delete("data").is_a?(Jekyll::Collection)
-      assert_equal Hash.new, collections
+    should "not contain any collections" do
+      assert_equal Hash.new, @site.collections
     end
   end
 
@@ -104,6 +131,25 @@ class TestCollections < Test::Unit::TestCase
     should "not include the underscored files in the list of docs" do
       assert_not_include @collection.docs.map(&:relative_path), "_methods/_do_not_read_me.md"
       assert_not_include @collection.docs.map(&:relative_path), "_methods/site/_dont_include_me_either.md"
+    end
+  end
+
+  context "with a collection with metadata" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "foo" => "bar",
+            "baz" => "whoo"
+          }
+        }
+      })
+      @site.process
+      @collection = @site.collections["methods"]
+    end
+
+    should "extract the configuration collection information as metadata" do
+      assert_equal @collection.metadata, {"foo" => "bar", "baz" => "whoo"}
     end
   end
 

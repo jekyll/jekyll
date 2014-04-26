@@ -1,0 +1,11 @@
+#! /bin/bash
+
+set -x
+
+if [ -z "$1" ]; then
+  TEST_FILES="test/test*.rb"
+else
+  TEST_FILES="$@"
+fi
+
+/usr/bin/env bundle exec ruby -I"lib:test" -r rake -r rake/rake_test_loader ${TEST_FILES}
