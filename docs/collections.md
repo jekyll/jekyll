@@ -34,6 +34,14 @@ collections:
 - my_collection
 {% endhighlight %}
 
+You can optionally specify metadata for your collection in the configuration:
+
+{% highlight yaml %}
+collections:
+  my_collection:
+    foo: bar
+{% endhighlight %}
+
 ### Step 2: Add your content
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add documents.
@@ -43,11 +51,12 @@ Note: the folder must be named identical to the collection you defined in you co
 
 ### Step 3: Optionally render your collection's documents into independent files
 
-If you'd like Jekyll to create a public-facing, rendered version of each document in your collection, add your collection name to the `render` config key in your `_config.yml`:
+If you'd like Jekyll to create a public-facing, rendered version of each document in your collection, set the `output` key to `true` in your collection metadata in your `_config.yml`:
 
 {% highlight yaml %}
-render:
-- my_collection
+collections:
+  my_collection:
+    output: true
 {% endhighlight %}
 
 This will produce a file for each document in the collection.
@@ -60,6 +69,72 @@ choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 ### Collections
 
 Each collection is accessible via the `site` Liquid variable. For example, if you want to access the `albums` collection found in `_albums`, you'd use `site.albums`. Each collection is itself an array of documents (e.g. `site.albums` is an array of documents, much like `site.pages` and `site.posts`). See below for how to access attributes of those documents.
+
+The collections are also available under `site.collections`, with the metadata you specified in your `_config.yml` (if present) and the following information:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>label</code></p>
+      </td>
+      <td>
+        <p>
+          The name of your collection, e.g. <code>my_collection</code>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>docs</code></p>
+      </td>
+      <td>
+        <p>
+          An array of <a href="#documents">documents</a>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>relative_directory</code></p>
+      </td>
+      <td>
+        <p>
+          The path to the collections's source directory, relative to the site source.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>directory</code></p>
+      </td>
+      <td>
+        <p>
+          The full path to the collections's source directory..
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>output</code></p>
+      </td>
+      <td>
+        <p>
+          Whether the collection's documents will be output as individual files.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 
 ### Documents
 
