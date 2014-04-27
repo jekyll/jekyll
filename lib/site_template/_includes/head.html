@@ -4,9 +4,9 @@
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{ site.description }}">
-    <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html','' }}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl }}">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
 
 </head>
