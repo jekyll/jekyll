@@ -190,6 +190,28 @@ common tasks easier.
 
 ## Tags
 
+### Absolute URLs
+
+Sometimes you can't rely on relative URL's based on the root of your domain, so
+you need to prepend the base URL of the site in order for all your links to work.
+
+The `absolute_url` tag will prepend the value of `site.url` and `site.baseurl` to
+the input:
+
+{% highlight text %}
+{% raw %}{% absolute_url css/screen.css %}{% endraw %}
+{% endhighlight %}
+
+Take the following example `_config.yml`:
+
+{% highlight text %}
+url: http://example.org
+baseurl: project
+{% endhighlight %}
+
+The output of the above call to `absolute_url` would be `http://example.org/project/css/screen.css`.
+To confirm, run `jekyll serve` and preview your site at `http://localhost:4000/project/`.
+
 ### Includes
 
 If you have small page fragments that you wish to include in multiple places on
