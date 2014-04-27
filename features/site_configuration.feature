@@ -105,6 +105,15 @@ Feature: Site configuration
     And I should see "Hello world!" in "_site/index.html"
     And I should see "class=\"highlight\"" in "_site/index.html"
 
+  Scenario: Rouge renders code block once
+    Given I have a configuration file with "highlighter" set to "rouge"
+    And I have a _posts directory
+    And I have the following post:
+      | title | date             | layout  | content                                      |
+      | foo   | 2014-04-27 11:34 | default | {% highlight text %} test {% endhighlight %} |
+    When I run jekyll build
+    Then I should not see "highlight(.*)highlight" in "_site/2014/04/27/foo.html"
+
   Scenario: Set time and no future dated posts
     Given I have a _layouts directory
     And I have a page layout that contains "Page Layout: {{ site.posts.size }} on {{ site.time | date: "%Y-%m-%d" }}"
