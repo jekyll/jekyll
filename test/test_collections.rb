@@ -67,8 +67,8 @@ class TestCollections < Test::Unit::TestCase
         assert_equal @collection.to_liquid["relative_directory"], "_methods"
       end
 
-      should "have a written attribute" do
-        assert_equal @collection.to_liquid["written"], false
+      should "have a output attribute" do
+        assert_equal @collection.to_liquid["output"], false
       end
     end
 
