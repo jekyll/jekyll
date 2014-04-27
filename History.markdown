@@ -95,6 +95,7 @@
   * Load in `rouge` only when it's been requested as the highlighter (#2189)
   * Convert input to string before XML escaping (`xml_escape` liquid filter) (#2244)
   * Modify configuration key for Collections and reset properly. (#2238)
+  * Avoid duplicated output using `highlight` tag (#2264)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
