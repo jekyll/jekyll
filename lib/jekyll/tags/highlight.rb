@@ -86,8 +86,9 @@ eos
         formatter = Rouge::Formatters::HTML.new(line_numbers: linenos, wrap: false)
 
         pre = "<pre>#{formatter.format(lexer.lex(code))}</pre>"
+        output = ""
 
-        output = context["highlighter_prefix"] || ""
+        output << context["highlighter_prefix"] if context["highlighter_prefix"]
         output << "<div class=\"highlight\">"
         output << add_code_tags(pre, @lang)
         output << "</div>"
