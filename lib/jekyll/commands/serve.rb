@@ -29,33 +29,22 @@ module Jekyll
         # Boot up a WEBrick server which points to the compiled site's root.
         def process(options)
           options = configuration_from_options(options)
-
-          require 'webrick'
-
           destination = options['destination']
-
-          FileUtils.mkdir_p(destination)
-
-          # monkey patch WEBrick using custom 404 page (/404.html)
-          if File.exist?(File.join(destination, '404.html'))
-            WEBrick::HTTPResponse.class_eval do
-              def create_error_page
-                @body = IO.read(File.join(@config[:DocumentRoot], '404.html'))
-              end
-            end
-          end
-
-          # recreate NondisclosureName under utf-8 circumstance
-          fh_option = WEBrick::Config::FileHandler
-          fh_option[:NondisclosureName] = ['.ht*','~*']
+          setup(destination)
 
           s = WEBrick::HTTPServer.new(webrick_options(options))
+          s.unmount("")
 
-          s.config.store(:DirectoryIndex, s.config[:DirectoryIndex] << "index.xml")
+          s.mount(
+            options['baseurl'],
+            WEBrick::HTTPServlet::FileHandler,
+            destination,
+            file_handler_options
+          )
 
-          s.mount(options['baseurl'], WEBrick::HTTPServlet::FileHandler, destination, fh_option)
+          Jekyll.logger.info "Server address:", server_address(s, options)
 
-          Jekyll.logger.info "Server address:", "http://#{s.config[:BindAddress]}:#{s.config[:Port]}"
+          p s
 
           if options['detach'] # detach the server
             pid = Process.fork { s.start }
@@ -68,6 +57,21 @@ module Jekyll
           end
         end
 
+        def setup(destination)
+          require 'webrick'
+
+          FileUtils.mkdir_p(destination)
+
+          # monkey patch WEBrick using custom 404 page (/404.html)
+          if File.exist?(File.join(destination, '404.html'))
+            WEBrick::HTTPResponse.class_eval do
+              def create_error_page
+                @body = IO.read(File.join(@config[:DocumentRoot], '404.html'))
+              end
+            end
+          end
+        end
+
         def webrick_options(config)
           opts = {
             :DocumentRoot       => config['destination'],
@@ -75,7 +79,8 @@ module Jekyll
             :BindAddress        => config['host'],
             :MimeTypes          => mime_types,
             :DoNotReverseLookup => true,
-            :StartCallback      => start_callback(config['detach'])
+            :StartCallback      => start_callback(config['detach']),
+            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml)
           }
 
           if !config['verbose']
@@ -97,6 +102,24 @@ module Jekyll
         def mime_types
           mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
           WEBrick::HTTPUtils::load_mime_types(mime_types_file)
+        end
+
+        def server_address(server, options)
+          baseurl = "#{options['baseurl']}/" if options['baseurl']
+          [
+            "http://",
+            server.config[:BindAddress],
+            ":",
+            server.config[:Port],
+            baseurl || ""
+          ].map(&:to_s).join("")
+        end
+
+        # recreate NondisclosureName under utf-8 circumstance
+        def file_handler_options
+          fh_option = WEBrick::Config::FileHandler
+          fh_option[:NondisclosureName] = ['.ht*','~*']
+          fh_option
         end
 
       end
