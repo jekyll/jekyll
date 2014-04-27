@@ -1,5 +1,6 @@
 module Jekyll
   class AbsoluteUrl < Liquid::Tag
+    include Jekyll::LiquidExtensions
 
     def initialize(_, markup, _)
       @markup = markup.to_s.strip
@@ -7,7 +8,7 @@ module Jekyll
 
     def render(context)
       site = context.registers[:site]
-      File.join(site.url, site.baseurl, @markup).strip
+      File.join(site.url, site.baseurl, lookup_variable(context, @markup)).strip
     end
 
   end
