@@ -1,4 +1,4 @@
-module Jekyll
+module Jekyll::Tags
   class AbsoluteUrl < Liquid::Tag
     include Jekyll::LiquidExtensions
 
@@ -10,8 +10,7 @@ module Jekyll
       site = context.registers[:site]
       File.join(site.url, site.baseurl, lookup_variable(context, @markup)).strip
     end
-
   end
 end
 
-Liquid::Template.register_tag(Jekyll::AbsoluteUrl, 'absolute_url')
+Liquid::Template.register_tag('absolute_url', Jekyll::Tags::AbsoluteUrl)
