@@ -128,6 +128,7 @@
   * Update `rr` link in CONTRIBUTING doc (#2247)
   * Streamline cucumber execution of `jekyll` subcommands (#2258)
   * Refactor `Commands::Serve`. (#2269)
+  * Refactor `highlight` tag (#2154)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
