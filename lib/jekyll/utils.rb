@@ -48,17 +48,21 @@ module Jekyll
         array || []
       end
 
+      def transform_keys(hash)
+        result = {}
+        hash.each_key do |key|
+          result[yield(key)] = hash[key]
+        end
+        result
+      end
+
       # Apply #to_sym to all keys in the hash
       #
       # hash - the hash to which to apply this transformation
       #
       # Returns a new hash with symbolized keys
       def symbolize_hash_keys(hash)
-        target = hash.dup
-        target.keys.each do |key|
-          target[(key.to_sym rescue key) || key] = target.delete(key)
-        end
-        target
+        transform_keys(hash) { |key| key.to_sym rescue key }
       end
 
       # Apply #to_s to all keys in the Hash
@@ -67,11 +71,7 @@ module Jekyll
       #
       # Returns a new hash with stringified keys
       def stringify_hash_keys(hash)
-        target = hash.dup
-        target.keys.each do |key|
-          target[(key.to_s rescue key) || key] = target.delete(key)
-        end
-        target
+        transform_keys(hash) { |key| key.to_s rescue key }
       end
 
     end
