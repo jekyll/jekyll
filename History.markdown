@@ -129,6 +129,7 @@
   * Streamline cucumber execution of `jekyll` subcommands (#2258)
   * Refactor `Commands::Serve`. (#2269)
   * Refactor `highlight` tag (#2154)
+  * Update `Util` hash functions with latest from Rails (#2273)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
