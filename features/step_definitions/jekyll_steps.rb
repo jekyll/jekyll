@@ -199,3 +199,8 @@ end
 Then /^I should see today's date in "(.*)"$/ do |file|
   assert_match Regexp.new(Date.today.to_s), file_contents(file)
 end
+
+Then /^a post from today with the name "(.*)" should exist$/ do |file|
+  path = "_posts/#{Time.now.strftime('%Y-%m-%d')}-#{file}"
+  assert File.exist?(path), "The file #{path} does not exist"
+end
