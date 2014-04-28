@@ -8,7 +8,11 @@ module Jekyll::Tags
 
     def render(context)
       config = context.registers[:site].config
-      File.join(config['url'], config['baseurl'], lookup_variable(context, @markup)).strip
+      File.join(*[
+        config['url'],
+        config['baseurl'],
+        lookup_variable(context, @markup)
+      ].compact.map(&:to_s)).strip
     end
   end
 end
