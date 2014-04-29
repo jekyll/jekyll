@@ -17,6 +17,7 @@ module Jekyll
       previous
       tags
       path
+      published?
     ]
 
     # Attributes for Liquid templates

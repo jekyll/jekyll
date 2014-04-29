@@ -105,3 +105,34 @@ Feature: Site data
     When I run jekyll build
     Then the _site directory should exist
     And I should see "\d+\.\d+\.\d+" in "_site/index.html"
+
+  Scenario: Accessing published? in liquid
+    Given I have a _layouts directory
+    And I have a default layout that contains "{{ page.published? }} {% if page.published? %}I'm published!{% else %}Nerp{% endif %} {{content}}"
+    And I have an "index.html" file with content:
+      """
+      ---
+      layout: default
+      title: Am I published?
+      ---
+
+      {{ page.title }}
+      """
+    And I have a _posts directory
+    And I have the following posts:
+      | title | date       | layout  | published |
+      | first | 2014-04-23 | default | true      |
+      | A     | 2014-04-24 | default | false     |
+    And I have the following posts:
+      | title | date       | layout  |
+      | B     | 2014-04-25 | default |
+      | C     | 2014-04-26 | default |
+      | last  | 2014-04-27 | default |
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "true I'm published! Am I published?" in "_site/index.html"
+    And I should see "true I'm published!" in "_site/2014/04/23/first.html"
+    And I should see "true I'm published!" in "_site/2014/04/25/b.html"
+    And I should see "true I'm published!" in "_site/2014/04/26/c.html"
+    And I should see "true I'm published!" in "_site/2014/04/27/last.html"
+    And the _site/2014/04/24 directory should not exist
