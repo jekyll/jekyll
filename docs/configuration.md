@@ -95,7 +95,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
             environment variable, which Ruby uses to handle time and date
             creation and manipulation. Any entry from the
             <a href="http://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
-            Database</a> is valid, e.g. <code>America/New_York</code>. A list of all 
+            Database</a> is valid, e.g. <code>America/New_York</code>. A list of all
             available values can be found <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">
             here</a>. The default is the local time zone, as set by your operating system.
         </p>
@@ -277,6 +277,14 @@ before your site is served.
 </div>
 
 ## Frontmatter defaults
+
+<div class="note unreleased">
+  <h5>The front-matter defaults feature is currently unreleased.</h5>
+  <p>
+  In order to use this feature, <a href="/docs/installation/#pre-releases">
+  install the latest development version of Jekyll</a>.
+  </p>
+</div>
 
 You can set default values for your [YAML frontmatter](../frontmatter/) variables
 in your configuration. This way, you can for example set default layouts or define
