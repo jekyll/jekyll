@@ -102,7 +102,7 @@ CONTENT
       end
       
       should "generate the proper URL" do
-        assert_match Regexp.escape("http://example.org/project/css/screen.css"), @result
+        assert_match /http:\/\/example\.org\/project\/css\/screen\.css/, @result
       end
     end
     
@@ -114,7 +114,7 @@ CONTENT
       end
       
       should "generate the proper URL" do
-        assert_match Regexp.escape("http://example.org/css/screen.css"), @result
+        assert_match /http:\/\/example\.org\/css\/screen\.css/, @result
       end
     end
     
@@ -126,7 +126,7 @@ CONTENT
       end
       
       should "generate the proper URL" do
-        assert_match Regexp.escape("/project/css/screen.css"), @result
+        assert_match /\/project\/css\/screen\.css/, @result
       end
     end
     
@@ -136,7 +136,7 @@ CONTENT
       end
       
       should "generate the proper URL" do
-        assert_match Regexp.escape("/css/screen.css"), @result
+        assert_match /\/css\/screen\.css/, @result
       end
     end
   end

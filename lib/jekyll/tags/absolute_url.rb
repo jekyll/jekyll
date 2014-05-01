@@ -12,7 +12,7 @@ module Jekyll::Tags
         config['url'],
         config['baseurl'],
         lookup_variable(context, @markup)
-      ].compact.map(&:to_s)).strip
+      ].map(&:to_s)).strip
     end
   end
 end
