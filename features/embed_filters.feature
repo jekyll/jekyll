@@ -83,9 +83,9 @@ Feature: Embed filters
       | title  | layout  | content |
       | Bird   | default | Fly     |
     And I have the following page:
-      | title  | layout  | content |
-      | Cat    | default | Jump    |
-    And I have a default layout that contains "{% assign sorted_pages = site.pages | sort: 'title' %}The rule of {{ sorted_pages.size }}: {% for p in sorted_pages %}{{ p.content | strip_html }}, {% endfor %}"
+      | layout  | content |
+      | default | Jump    |
+    And I have a default layout that contains "{% assign sorted_pages = site.pages | sort: 'title' %}The rule of {{ sorted_pages.size }}: {% for p in sorted_pages %}“{{ p.content | strip_html | strip_newlines }}”, {% endfor %}"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see exactly "The rule of 3: Fly, Jump, Run, " in "_site/bird.html"
+    And I should see exactly "The rule of 3: “”, “Fly”, “Run”," in "_site/bird.html"
