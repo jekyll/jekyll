@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/jekyll.png)](http://badge.fury.io/rb/jekyll)
 
-[![Build Status](https://secure.travis-ci.org/jekyll/jekyll.png?branch=master)](https://travis-ci.org/jekyll/jekyll)
+[![Build Status](https://secure.travis-ci.org/jekyll/jekyll.svg?branch=master)](https://travis-ci.org/jekyll/jekyll)
 [![Code Climate](https://codeclimate.com/github/jekyll/jekyll.png)](https://codeclimate.com/github/jekyll/jekyll)
 [![Dependency Status](https://gemnasium.com/jekyll/jekyll.png)](https://gemnasium.com/jekyll/jekyll)
 [![Coverage Status](https://coveralls.io/repos/jekyll/jekyll/badge.png)](https://coveralls.io/r/jekyll/jekyll)
