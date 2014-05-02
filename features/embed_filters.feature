@@ -74,7 +74,7 @@ Feature: Embed filters
     And I should see exactly "Page-2, Page-1" in "_site/page-1.html"
     And I should see exactly "Page-2, Page-1" in "_site/page-2.html"
 
-  Scenario: Sort pages by an title
+  Scenario: Sort pages by the title
     Given I have a _layouts directory
     And I have the following page:
       | title  | layout  | content |
