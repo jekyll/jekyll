@@ -31,7 +31,7 @@ def slug(title)
   if title
     title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
   else
-    time.strftime("%9N") # nanosecond of the second
+    Time.now.strftime("%s%9N") # nanoseconds since the Epoch
   end
 end
 
