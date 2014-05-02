@@ -28,7 +28,11 @@ def run_jekyll(args)
 end
 
 def slug(title)
-  title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+  if title
+    title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+  else
+    time.strftime("%N")
+  end
 end
 
 def location(folder, direction)
