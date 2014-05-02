@@ -73,3 +73,21 @@ Feature: Embed filters
     Then the _site directory should exist
     And I should see exactly "Page-2, Page-1" in "_site/page-1.html"
     And I should see exactly "Page-2, Page-1" in "_site/page-2.html"
+
+  Scenario: Sort pages by an title
+    Given I have a _layouts directory
+    And I have the following page:
+      | title  | layout  | content |
+      | Dog    | default | Run     |
+    And I have the following page:
+      | title  | layout  | content |
+      | Bird   | default | Fly     |
+    And I have the following page:
+      | title  | layout  | content |
+      | Cat    | default | Jump    |
+    And I have a default layout that contains "{% assign sorted_pages = site.pages | sort: 'title' %}{% for p in sorted_pages %}{{ p.content }}, {% endfor %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see exactly "Fly, Jump, Run, " in "_site/bird.html"
+    And I should see exactly "Fly, Jump, Run, " in "_site/cat.html"
+    And I should see exactly "Fly, Jump, Run, " in "_site/dog.html"
