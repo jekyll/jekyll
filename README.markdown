@@ -1,6 +1,6 @@
 # [Jekyll](http://jekyllrb.com/)
 
-[![Gem Version](https://badge.fury.io/rb/jekyll.png)](http://badge.fury.io/rb/jekyll)
+[![Gem Version](https://badge.fury.io/rb/jekyll.svg)](http://badge.fury.io/rb/jekyll)
 
 [![Build Status](https://secure.travis-ci.org/jekyll/jekyll.svg?branch=master)](https://travis-ci.org/jekyll/jekyll)
 [![Code Climate](https://codeclimate.com/github/jekyll/jekyll.png)](https://codeclimate.com/github/jekyll/jekyll)
