@@ -64,6 +64,7 @@
   * Add the ability for pages to be marked as `published: false` (#1492)
   * Add `Jekyll::LiquidExtensions` with `.lookup_variable` method for easy
     looking up of variable values in a Liquid context. (#2253)
+  * Remove literal lang name from class (#2292)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
