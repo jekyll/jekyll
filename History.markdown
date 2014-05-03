@@ -201,6 +201,7 @@
   * Add `jekyll-live-tiles` to list of third-party plugins (#2250)
   * Fixed broken link to GitHub training material site source (#2257)
   * Update link to help repo, now called `jekyll-help` (#2277)
+  * Fix capitalization of 'Jekyll' on Deployment Methods page (#2291)
 
 ## 1.5.1 / 2014-03-27
 
