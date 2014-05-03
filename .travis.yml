@@ -4,14 +4,9 @@ install:
 - script/rebund download
 - travis_retry bundle install --path vendor/bundle
 rvm:
-# 2.1, not 2.1.0 until fixed https://github.com/travis-ci/travis-ci/issues/2220
-- 2.1
+- 2.1.1
 - 2.0.0
 - 1.9.3
-matrix:
-  allow_failures:
-  # until fixed https://github.com/travis-ci/travis-ci/issues/2220
-  - rvm: 2.1
 script: script/cibuild
 after_script:
 - script/rebund upload
