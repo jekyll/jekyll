@@ -130,6 +130,7 @@
   * Refactor `Commands::Serve`. (#2269)
   * Refactor `highlight` tag (#2154)
   * Update `Util` hash functions with latest from Rails (#2273)
+  * Workaround for Travis bug (#2290) 
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
