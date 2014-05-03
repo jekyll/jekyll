@@ -44,8 +44,6 @@ module Jekyll
 
           Jekyll.logger.info "Server address:", server_address(s, options)
 
-          p s
-
           if options['detach'] # detach the server
             pid = Process.fork { s.start }
             Process.detach(pid)
@@ -66,6 +64,7 @@ module Jekyll
           if File.exist?(File.join(destination, '404.html'))
             WEBrick::HTTPResponse.class_eval do
               def create_error_page
+                @header['content-type'] = "text/html; charset=UTF-8"
                 @body = IO.read(File.join(@config[:DocumentRoot], '404.html'))
               end
             end
