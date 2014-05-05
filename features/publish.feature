@@ -7,11 +7,11 @@ Feature: Create sites
     Given I have a _drafts directory
     And I have a _posts directory
     And I have the following draft:
-    | title             | type     |
-    | a-completed-draft | markdown |
+    | title             | type     | content              |
+    | a-completed-draft | markdown | this is some content |
     When I run jekyll publish a-completed-draft.markdown
     Then the "_drafts/a-completed-draft.markdown" file should not exist
-    And a post from today with the name "a-completed-draft.markdown" should exist
+    And a post from today with the name "a-completed-draft.markdown" should contain "this is some content"
 
   Scenario: Publish a draft with a specific date
     Given I have a _drafts directory
