@@ -2,6 +2,7 @@ module Jekyll
   class Page
     include Convertible
 
+    attr_reader :base
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
