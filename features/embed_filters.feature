@@ -89,3 +89,19 @@ Feature: Embed filters
     When I run jekyll build
     Then the _site directory should exist
     And I should see exactly "The rule of 3: Jump, Fly, Run," in "_site/bird.html"
+
+  Scenario: Sort pages by the title ordering pages without title last
+    Given I have a _layouts directory
+    And I have the following page:
+      | title | layout | content |
+      | Dog | default | Run |
+    And I have the following page:
+      | title | layout | content |
+      | Bird | default | Fly |
+    And I have the following page:
+      | layout | content |
+      | default | Jump |
+    And I have a default layout that contains "{% assign sorted_pages = site.pages | sort: 'title', true %}The rule of {{ sorted_pages.size }}: {% for p in sorted_pages %}{{ p.content | strip_html | strip_newlines }}, {% endfor %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see exactly "The rule of 3: Fly, Run, Jump," in "_site/bird.html"
