@@ -7,7 +7,7 @@ version: 2.0.0
 categories: [release]
 ---
 
-One year ago, [we release Jekyll 1.0.0][]. One year later, we present to you the next major version: Jekyll 2.0.
+One year ago, [we released Jekyll 1.0.0][jekyll-1]. One year later, we present to you the next major version: Jekyll 2.0.
 
 Jam-packed with some [highly-requested features and bugfixes galore][changelog], this is the best Jekyll yet. Some notable changes:
 
@@ -25,3 +25,4 @@ Happy developing!
 
 [changelog]: /docs/history/
 [@jglovier]: https://github.com/jglovier
+[jekyll-1]: {% post_url 2013-05-05-jekyll-1-0-0-released %}
