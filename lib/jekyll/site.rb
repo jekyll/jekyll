@@ -405,7 +405,7 @@ module Jekyll
       end
     end
 
-    def documents
+    def docs_to_write
       collections.reduce(Set.new) do |docs, (_, collection)|
         if collection.write?
           docs.merge(collection.docs)
@@ -415,8 +415,14 @@ module Jekyll
       end
     end
 
+    def documents
+      collections.reduce(Set.new) do |docs, (_, collection)|
+        docs.merge(collection.docs)
+      end
+    end
+
     def each_site_file
-      %w(posts pages static_files documents).each do |type|
+      %w(posts pages static_files docs_to_write).each do |type|
         send(type).each do |item|
           yield item
         end
