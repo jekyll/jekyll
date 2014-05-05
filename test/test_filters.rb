@@ -152,5 +152,24 @@ class TestFilters < Test::Unit::TestCase
       end
     end
 
+    context "sort filter" do
+      should "return sorted array" do
+        assert_equal [1, 2, 3, 4], @filter.sort([4, 3, 2, 1])
+      end
+      should "return sorted by property array" do
+        assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}],
+          @filter.sort([{"a" => 4}, {"a" => 3}, {"a" => 1}, {"a" => 2}], "a")
+      end
+      should "return sorted by property array with nils first" do
+        ary = [{"a" => 2}, {"b" => 1}, {"a" => 1}]
+        assert_equal [{"b" => 1}, {"a" => 1}, {"a" => 2}], @filter.sort(ary, "a")
+        assert_equal @filter.sort(ary, "a"), @filter.sort(ary, "a", false)
+      end
+      should "return sorted by property array with nils last" do
+        assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
+          @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", true)
+      end
+    end
+
   end
 end
