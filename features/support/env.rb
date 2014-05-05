@@ -28,7 +28,11 @@ def run_jekyll(args)
 end
 
 def slug(title)
-  title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+  if title
+    title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+  else
+    Time.now.strftime("%s%9N") # nanoseconds since the Epoch
+  end
 end
 
 def location(folder, direction)
