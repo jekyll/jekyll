@@ -6,15 +6,15 @@ layout: none
   <channel>
     <title>{{ site.name | xml_escape }}</title>
     <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}</link>
-    <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
+    <link>{{ site.baseurl }}</link>
+    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl }}" rel="self" type="application/rss+xml" />
     {% for post in site.posts limit:10 %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
         <description>{{ post.content | xml_escape }}</description>
         <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-        <link>{{ site.url }}/{{ post.url }}</link>
-        <guid isPermaLink="true">{{ site.url }}/{{ post.url }}</guid>
+        <link>{{ post.url | prepend: site.baseurl }}</link>
+        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl }}</guid>
       </item>
     {% endfor %}
   </channel>
