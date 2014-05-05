@@ -145,7 +145,13 @@ a:visited { color: #205caa; }
 /* Home styles */
 /* ----------------------------------------------------------*/
 
-.home h1 { margin-bottom: 25px; }
+.home h1 { 
+  font-size: 42px;
+  margin: 10px 0 30px;
+  letter-spacing: -1.75px;
+  line-height: 1;
+  font-weight: 300;
+}
 
 .posts { list-style-type: none; }
 
@@ -226,8 +232,12 @@ a:visited { color: #205caa; }
 .post-content ul,
 .post-content ol { padding-left: 20px; }
 
-.post pre,
-.post code {
+.post ul,
+.post ol { margin-left: 1.35em; }
+
+/* code styles */
+pre,
+code {
   border: 1px solid #d5d5e9;
   background-color: #eef;
   padding: 8px 12px;
@@ -235,12 +245,9 @@ a:visited { color: #205caa; }
   font-size: 15px;
 }
 
-.post code { padding: 1px 5px; }
+code { padding: 1px 5px; }
 
-.post ul,
-.post ol { margin-left: 1.35em; }
-
-.post pre code { border: none; }
+pre code { border: none; }
 
 /* terminal */
 .post pre.terminal {
