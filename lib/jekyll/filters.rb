@@ -190,6 +190,29 @@ module Jekyll
       input.select { |object| object[key] == value }
     end
 
+    # Sort an array of objects
+    #
+    # input - the object array
+    # key - key within each object to filter by
+    # nils_last - nils appear after non-nil values in the sort ordering
+    #
+    # Returns the filtered array of objects
+    def sort(input, key = nil, nils_last = false)
+      if key.nil?
+        input.sort
+      else
+        input.sort { |a, b|
+          if a[key].nil? and !b[key].nil?
+            nils_last ? +1 : -1
+          elsif !a[key].nil? and b[key].nil?
+            nils_last ? -1 : +1
+          else
+            a[key] <=> b[key]
+          end
+        }
+      end
+    end
+
     private
     def time(input)
       case input
