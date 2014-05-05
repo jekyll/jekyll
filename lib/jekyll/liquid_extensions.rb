@@ -12,6 +12,7 @@ module Jekyll
       lookup = context
 
       variable.split(".").each do |value|
+        break unless lookup
         lookup = lookup[value]
       end
 

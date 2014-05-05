@@ -42,6 +42,17 @@ This document results in a markdown error with maruku
 CONTENT
     create_post(content, override)
   end
+  
+  def post_with_content(content, override = {})
+    content = <<CONTENT
+---
+title: Post automatically generated
+---
+
+#{content}
+CONTENT
+    create_post(content, override)
+  end
 
   context "language name" do
     should "match only the required set of chars" do
@@ -78,6 +89,55 @@ CONTENT
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
+    end
+  end
+  
+  context "when fetching an absolute URL" do
+    context "with url and baseurl set" do
+      setup do
+        post_with_content("{% absolute_url css/screen.css %}", {
+          "baseurl" => "project",
+          "url"     => "http://example.org"
+        })
+      end
+      
+      should "generate the proper URL" do
+        assert_match /http:\/\/example\.org\/project\/css\/screen\.css/, @result
+      end
+    end
+    
+    context "with just url set and not baseurl" do
+      setup do
+        post_with_content("{% absolute_url css/screen.css %}", {
+          "url" => "http://example.org"
+        })
+      end
+      
+      should "generate the proper URL" do
+        assert_match /http:\/\/example\.org\/css\/screen\.css/, @result
+      end
+    end
+    
+    context "with just baseurl set and not url" do
+      setup do
+        post_with_content("{% absolute_url css/screen.css %}", {
+          "baseurl" => "project"
+        })
+      end
+      
+      should "generate the proper URL" do
+        assert_match /\/project\/css\/screen\.css/, @result
+      end
+    end
+    
+    context "with neither baseurl or url set" do
+      setup do
+        post_with_content("{% absolute_url css/screen.css %}")
+      end
+      
+      should "generate the proper URL" do
+        assert_match /\/css\/screen\.css/, @result
+      end
     end
   end
 
