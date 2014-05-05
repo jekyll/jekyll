@@ -407,13 +407,7 @@ module Jekyll
     end
 
     def docs_to_write
-      collections.reduce(Set.new) do |docs, (_, collection)|
-        if collection.write?
-          docs.merge(collection.docs)
-        else
-          docs
-        end
-      end
+      documents.select(&:write?)
     end
 
     def documents
