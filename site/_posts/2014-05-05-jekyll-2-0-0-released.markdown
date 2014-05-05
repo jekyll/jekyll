@@ -1,7 +1,6 @@
 ---
 layout: news_item
-title: 'Jekyll 2.0.0 Released'
-date: 2014-05-05 02:50:09 -0400
+title: 'Jekyll turns 2.0.0'
 author: parkr
 version: 2.0.0
 categories: [release]
