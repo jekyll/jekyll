@@ -325,6 +325,7 @@ module Jekyll
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
           "collections"  => collections,
+          "documents"    => documents,
           "data"         => site_data
         }))
       }
