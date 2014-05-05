@@ -7,7 +7,9 @@ version: 2.0.0
 categories: [release]
 ---
 
-It's here. After nearly 1,000 commits and about 5 months, the Jekyll team is excited to announce the release of Jekyll 2.0! Jam-packed with some [highly-requested features and bugfixes galore][changelog], this is the best Jekyll yet. Notable changes:
+One year ago, [we release Jekyll 1.0.0][]. One year later, we present to you the next major version: Jekyll 2.0.
+
+Jam-packed with some [highly-requested features and bugfixes galore][changelog], this is the best Jekyll yet. Some notable changes:
 
 1. [Collections](/docs/collections/)
 2. Brand new site template for `jekyll new` (thanks [@jglovier][]!)
