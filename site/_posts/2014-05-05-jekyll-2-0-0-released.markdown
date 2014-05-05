@@ -15,7 +15,7 @@ Jam-packed with some [highly-requested features and bugfixes galore][changelog],
 3. [Native Sass & CoffeeScript support](/docs/assets/)
 4. [YAML Front-Matter defaults](/docs/configuration/#frontmatter_defaults)
 5. Custom markdown processors
-6. Addition of `where` and `sort_by` Liquid filters
+6. Addition of `where` and `group_by` Liquid filters
 7. Switch from Maruku to Kramdown as default markdown converter
 
 Check out our [changelog][] for a complete list of all (200+) changes.
