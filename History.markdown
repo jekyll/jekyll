@@ -66,6 +66,7 @@
     looking up of variable values in a Liquid context. (#2253)
   * Remove literal lang name from class (#2292)
   * Return `utf-8` encoding in header for  webrick error page response (#2289)
+  * Make template site easier to customize (#2268)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
