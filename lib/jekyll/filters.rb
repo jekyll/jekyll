@@ -197,15 +197,26 @@ module Jekyll
     # nils ('first' | 'last') - nils appear before or after non-nil values
     #
     # Returns the filtered array of objects
-    def sort(input, key = nil, nils = 'first')
+    def sort(input, key = nil, nils = "first")
       if key.nil?
         input.sort
       else
+        case
+        when nils == "first"
+          order = - 1
+        when nils == "last"
+          order = + 1
+        else
+          Jekyll.logger.error "Invalid nils order:",
+            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
+          exit(1)
+        end
+
         input.sort { |a, b|
-          if a[key].nil? and !b[key].nil?
-            nils == 'first' ? -1 : +1
-          elsif !a[key].nil? and b[key].nil?
-            nils == 'first' ? +1 : -1
+          if !a[key].nil? && b[key].nil?
+            - order
+          elsif a[key].nil? && !b[key].nil?
+            + order
           else
             a[key] <=> b[key]
           end
