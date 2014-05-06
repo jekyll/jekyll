@@ -206,6 +206,7 @@
   * Fixed broken link to GitHub training material site source (#2257)
   * Update link to help repo, now called `jekyll-help` (#2277)
   * Fix capitalization of 'Jekyll' on Deployment Methods page (#2291)
+  * Include plugins by sonnym in list of third-party plugins (#2297)
 
 ## 1.5.1 / 2014-03-27
 
