@@ -212,6 +212,7 @@
   * Add deprecated articles keeper filter to list of third-party plugins (#2300)
   * Simplify and improve our CSS. (#2127)
   * Use black text color for the mobile navbar (#2306)
+  * Use the built in date filter and `site.time` for the copyright year. (#2305)
 
 ## 1.5.1 / 2014-03-27
 
