@@ -70,4 +70,14 @@ class Test::Unit::TestCase
   ensure
     $stdout = $old_stdout
   end
+
+  def capture_stderr
+    $old_stderr = $stderr
+    $stderr = StringIO.new
+    yield
+    $stderr.rewind
+    return $stderr.string
+  ensure
+    $stderr = $old_stderr
+  end
 end
