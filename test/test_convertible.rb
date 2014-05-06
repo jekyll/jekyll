@@ -44,6 +44,7 @@ class TestConvertible < Test::Unit::TestCase
       end
       assert_match(/invalid byte sequence in UTF-8/, out)
       assert_match(/#{File.join(@base, name)}/, out)
+      assert_match(/on line 5/, out)
     end
   end
 end
