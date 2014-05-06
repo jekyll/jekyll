@@ -551,6 +551,7 @@ aside li.current a:before {
 }
 
 .docs-nav-mobile select {
+  color: #000;
   width: 100%;
 }
 
