@@ -210,6 +210,23 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Sort</strong></p>
+        <p>Sort an array. Optional arguments for hashes: 1.&nbsp;property name 2.&nbsp;nils order (<em>first</em> or <em>last</em>).</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ page.tags | sort }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.posts | sort: 'author' }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.pages | sort: 'title', 'last' }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>

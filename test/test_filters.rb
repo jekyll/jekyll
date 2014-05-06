@@ -152,5 +152,30 @@ class TestFilters < Test::Unit::TestCase
       end
     end
 
+    context "sort filter" do
+      should "return sorted numbers" do
+        assert_equal [1, 2, 2.2, 3], @filter.sort([3, 2.2, 2, 1])
+      end
+      should "return sorted strings" do
+        assert_equal ["10", "2"], @filter.sort(["10", "2"])
+        assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.sort([{"a" => "10"}, {"a" => "2"}], "a")
+        assert_equal ["FOO", "Foo", "foo"], @filter.sort(["foo", "Foo", "FOO"])
+        assert_equal ["_foo", "foo", "foo_"], @filter.sort(["foo_", "_foo", "foo"])
+      end
+      should "return sorted by property array" do
+        assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}],
+          @filter.sort([{"a" => 4}, {"a" => 3}, {"a" => 1}, {"a" => 2}], "a")
+      end
+      should "return sorted by property array with nils first" do
+        ary = [{"a" => 2}, {"b" => 1}, {"a" => 1}]
+        assert_equal [{"b" => 1}, {"a" => 1}, {"a" => 2}], @filter.sort(ary, "a")
+        assert_equal @filter.sort(ary, "a"), @filter.sort(ary, "a", "first")
+      end
+      should "return sorted by property array with nils last" do
+        assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
+          @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", "last")
+      end
+    end
+
   end
 end
