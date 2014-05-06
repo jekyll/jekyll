@@ -169,6 +169,12 @@ class TestFilters < Test::Unit::TestCase
         assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
           @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", true)
       end
+      should "return lexicographical sorted array" do
+        assert_equal [2, 10], @filter.sort([10, 2])
+        assert_equal [{"a" => 2}, {"a" => 10}], @filter.sort([{"a" => 10}, {"a" => 2}], "a")
+        assert_equal ["10", "2"], @filter.sort(["10", "2"])
+        assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.sort([{"a" => "10"}, {"a" => "2"}], "a")
+      end
     end
 
   end
