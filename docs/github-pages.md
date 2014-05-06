@@ -49,10 +49,10 @@ of your user pages subdomain, such as `username.github.io/project` (unless a
 custom domain is specified—see below).
 
 The Jekyll project repository itself is a perfect example of this branch
-structure—the [master branch]({{ site.repository }}) contains the
+structure—the [master branch]({{ site.github.repository_url }}) contains the
 actual software project for Jekyll, however the Jekyll website (that you’re
 looking at right now) is contained in the [gh-pages
-branch]({{ site.repository }}/tree/gh-pages) of the same repository.
+branch]({{ site.github.repository_url }}/tree/gh-pages) of the same repository.
 
 ### Project Page URL Structure
 

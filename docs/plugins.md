@@ -60,7 +60,7 @@ based on your own rules.
 
 A generator is a subclass of `Jekyll::Generator` that defines a `generate`
 method, which receives an instance of
-[`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb).
+[`Jekyll::Site`]({{ site.github.repository_url }}/blob/master/lib/jekyll/site.rb).
 
 Generation is triggered for its side-effects, the return value of `generate` is
 ignored. Jekyll does not assume any particular side-effect to happen, it just
@@ -69,12 +69,12 @@ runs the method.
 Generators run after Jekyll has made an inventory of the existing content, and
 before the site is generated. Pages with YAML front-matters are stored as
 instances of
-[`Jekyll::Page`]({{ site.repository }}/blob/master/lib/jekyll/page.rb)
+[`Jekyll::Page`]({{ site.github.repository_url }}/blob/master/lib/jekyll/page.rb)
 and are available via `site.pages`. Static files become instances of
-[`Jekyll::StaticFile`]({{ site.repository }}/blob/master/lib/jekyll/static_file.rb)
+[`Jekyll::StaticFile`]({{ site.github.repository_url }}/blob/master/lib/jekyll/static_file.rb)
 and are available via `site.static_files`. See
 [the Variables documentation page](../installation/) and
-[`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb)
+[`Jekyll::Site`]({{ site.github.repository_url }}/blob/master/lib/jekyll/site.rb)
 for more details.
 
 For instance, a generator can inject values computed at build time for template

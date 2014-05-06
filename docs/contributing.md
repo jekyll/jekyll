@@ -96,19 +96,19 @@ open-sourced our docs and we welcome any pull requests if you find it
 lacking.
 
 You can find the documentation for jekyllrb.com in the
-[site]({{ site.repository }}/tree/master/site) directory of
+[site]({{ site.github.repository_url }}/tree/master/site) directory of
 Jekyll's repo on GitHub.com.
 
 All documentation pull requests should be directed at `master`.  Pull
 requests directed at another branch will not be accepted.
 
-The [Jekyll wiki]({{ site.repository }}/wiki) on GitHub
+The [Jekyll wiki]({{ site.github.wiki_url }}) on GitHub
 can be freely updated without a pull request as all
 GitHub users have access.
 
 If you want to add your plugin to the [list of plugins](/docs/plugins/#available_plugins),
 please submit a pull request modifying the [plugins page source
-file]({{ site.repository }}/blob/master/site/docs/plugins.md) by adding a
+file]({{ site.github.repository_url }}/blob/master/site/docs/plugins.md) by adding a
 link to your plugin under the proper subheading depending upon its type.
 
 Gotchas
@@ -127,7 +127,7 @@ Gotchas
   <p>
     Both using and hacking on Jekyll should be fun, simple, and easy, so if for
     some reason you find it’s a pain, please <a
-    href="{{ site.repository }}/issues/new">create an issue</a> on
+    href="{{ site.github.issues_url }}/new">create an issue</a> on
     GitHub describing your experience so we can make it better.
   </p>
 </div>
