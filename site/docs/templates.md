@@ -187,7 +187,7 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Sort</strong></p>
-        <p>Sort array. Optional arguments: property name; nils order (*first* or *last*).</p>
+        <p>Sort array. Optional arguments: property name; nils order (<code>'first'</code> or <code>'last'</code>).</p>
       </td>
       <td class="align-center">
         <p>
