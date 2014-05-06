@@ -25,7 +25,7 @@ module Jekyll
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
 
-          Jekyll.logger.log_level = Jekyll::Stevenson::ERROR if options['quiet']
+          Jekyll.logger.log_level = :error if options['quiet']
 
           build(site, options)
           watch(site, options) if options['watch']
@@ -70,8 +70,8 @@ module Jekyll
           Jekyll.logger.info "Auto-regeneration:", "enabled"
 
           listener = Listen.to(
-            source, 
-            :ignore => ignored, 
+            source,
+            :ignore => ignored,
             :force_polling => options['force_polling']
           ) do |modified, added, removed|
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
