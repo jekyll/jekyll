@@ -65,9 +65,7 @@ module Jekyll
       entry = ensure_leading_slash(e)
       enum.any? do |exp|
         item = ensure_leading_slash(exp)
-        Jekyll.logger.debug "glob_include?(#{entry})"
-        Jekyll.logger.debug "    ==> File.fnmatch?(#{item}, #{entry}) == #{File.fnmatch?(item, entry)}"
-        File.fnmatch?(item, entry)
+        File.fnmatch?(item, entry) || entry.start_with?(item)
       end
     end
   end
