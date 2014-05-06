@@ -71,6 +71,7 @@
   * Make template site easier to customize (#2268)
   * Add two-digit year to permalink template option (#2301)
   * Add `site.documents` to Liquid payload (list of all docs) (#2295)
+  * Take into account missing values in the Liquid sort filter (#2299)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
