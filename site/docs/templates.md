@@ -187,7 +187,7 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Sort</strong></p>
-        <p>Sort an array. Optional arguments for hashes: 1.&nbsp;property name (string) 2.&nbsp;nils order (string <em>first</em> or <em>last</em>).</p>
+        <p>Sort an array. Optional arguments for hashes: 1.&nbsp;property name 2.&nbsp;nils order (<em>first</em> or <em>last</em>).</p>
       </td>
       <td class="align-center">
         <p>
