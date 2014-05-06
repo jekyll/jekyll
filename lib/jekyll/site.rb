@@ -433,7 +433,7 @@ module Jekyll
     end
 
     def has_yaml_header?(file)
-      !!(File.open(file, "rb").read(5) =~ /\A---\r?\n/)
+      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
     def limit_posts!
