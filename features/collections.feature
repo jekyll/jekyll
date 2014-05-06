@@ -70,3 +70,15 @@ Feature: Collections
     When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: _methods/configuration.md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
+
+  Scenario: All the documents
+    Given I have an "index.html" page that contains "All documents: {% for doc in site.documents %}{{ doc.relative_path }} {% endfor %}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+    - methods
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "All documents: _methods/configuration.md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"

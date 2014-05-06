@@ -413,7 +413,7 @@ module Jekyll
     def documents
       collections.reduce(Set.new) do |docs, (_, collection)|
         docs.merge(collection.docs)
-      end
+      end.to_a
     end
 
     def each_site_file
