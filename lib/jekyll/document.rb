@@ -228,5 +228,14 @@ module Jekyll
       path <=> anotherDocument.path
     end
 
+    # Determine whether this document should be written.
+    # Based on the Collection to which it belongs.
+    #
+    # True if the document has a collection and if that collection's #write?
+    #   method returns true, otherwise false.
+    def write?
+      collection && collection.write?
+    end
+
   end
 end

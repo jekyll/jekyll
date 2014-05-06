@@ -325,6 +325,7 @@ module Jekyll
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
           "collections"  => collections,
+          "documents"    => documents,
           "data"         => site_data
         }))
       }
@@ -405,18 +406,18 @@ module Jekyll
       end
     end
 
+    def docs_to_write
+      documents.select(&:write?)
+    end
+
     def documents
       collections.reduce(Set.new) do |docs, (_, collection)|
-        if collection.write?
-          docs.merge(collection.docs)
-        else
-          docs
-        end
-      end
+        docs.merge(collection.docs)
+      end.to_a
     end
 
     def each_site_file
-      %w(posts pages static_files documents).each do |type|
+      %w(posts pages static_files docs_to_write).each do |type|
         send(type).each do |item|
           yield item
         end
