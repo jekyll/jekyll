@@ -19,7 +19,7 @@ See the [History][] page for more information on this release.
 
 {% assign issue_numbers = "1190|1121|1189|1115|1114|1063" | split: "|" %}
 {% for issue in issue_numbers %}
-[#{{ issue }}]: {{ site.repository }}/issues/{{ issue }}
+[#{{ issue }}]: {{ site.github.issues_url }}/{{ issue }}
 {% endfor %}
 
 [History]: /docs/history/#103__20130607

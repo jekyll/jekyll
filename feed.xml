@@ -13,8 +13,8 @@ permalink: /feed.xml
   >
   <channel>
     <title xml:lang="en">Jekyll • Simple, blog-aware, static sites</title>
-    <atom:link type="application/atom+xml" href="http://jekyllrb.com/feed.xml" rel="self"/>
-    <link>http://jekyllrb.com/</link>
+    <atom:link type="application/atom+xml" href="{{ site.github.url }}/feed.xml" rel="self"/>
+    <link>{{ site.github.url }}/</link>
     <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     <language>en-US</language>
@@ -22,16 +22,16 @@ permalink: /feed.xml
     <description>Transform your plain text into static websites and blogs.</description>
     <image>
       <description>Transform your plain text into static websites and blogs.</description>
-      <url>http://jekyllrb.com/img/logo-rss.png</url>
+      <url>{{ site.github.url }}/img/logo-rss.png</url>
       <title>Jekyll • Simple, blog-aware, static sites</title>
-      <link>http://jekyllrb.com/</link>
+      <link>{{ site.github.url }}/</link>
       <width>144</width>
       <height>73</height>
     </image>
     {% for post in site.posts %}
     <item>
       <title>{{ post.title | xml_escape}}</title>
-      <link>http://jekyllrb.com{{ post.url }}</link>
+      <link>{{ site.github.url }}{{ post.url }}</link>
       <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
       <dc:creator>{{ post.author }}</dc:creator>
       {% for tag in post.tags %}
@@ -40,7 +40,7 @@ permalink: /feed.xml
       {% for cat in post.categories %}
       <category>{{ cat | xml_escape }}</category>
       {% endfor %}
-      <guid isPermaLink="true">http://jekyllrb.com{{ post.url }}</guid>
+      <guid isPermaLink="true">{{ site.github.url }}{{ post.url }}</guid>
       <description>{{ post.content | xml_escape }}</description>
     </item>
     {% endfor %}

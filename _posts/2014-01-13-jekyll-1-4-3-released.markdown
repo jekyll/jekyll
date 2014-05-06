@@ -10,7 +10,7 @@ categories: [release]
 Jekyll 1.4.3 contains two **critical** security fixes. If you run Jekyll locally
 and do not run Jekyll in "safe" mode (e.g. you do not build Jekyll sites on behalf
 of others), you are not affected and are not required to update at this time.
-([See pull request.]({{ site.repository }}/pull/1944))
+([See pull request.]({{ site.github.repository_url }}/pull/1944))
 
 Versions of Jekyll prior to 1.4.3 and greater than 1.2.0 may allow malicious
 users to expose the content of files outside the source directory in the
