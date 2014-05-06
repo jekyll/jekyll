@@ -192,7 +192,11 @@ common tasks easier.
       <td class="align-center">
         <p>
          <code class="filter">{% raw %}{{ page.tags | sort }}{% endraw %}</code>
+        </p>
+        <p>
          <code class="filter">{% raw %}{{ site.posts | sort: 'author' }}{% endraw %}</code>
+        </p>
+        <p>
          <code class="filter">{% raw %}{{ site.pages | sort: 'title', 'last' }}{% endraw %}</code>
         </p>
       </td>
