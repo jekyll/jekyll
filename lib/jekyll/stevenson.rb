@@ -2,17 +2,19 @@ module Jekyll
   class Stevenson
     attr_accessor :log_level
 
-    DEBUG  = 0
-    INFO   = 1
-    WARN   = 2
-    ERROR  = 3
+    LOG_LEVELS = {
+      debug: 0,
+      info:  1,
+      warn:  2,
+      error: 3
+    }
 
     # Public: Create a new instance of Stevenson, Jekyll's logger
     #
-    # level - (optional, integer) the log level
+    # level - (optional, symbol) the log level
     #
     # Returns nothing
-    def initialize(level = INFO)
+    def initialize(level = :info)
       @log_level = level
     end
 
@@ -23,7 +25,7 @@ module Jekyll
     #
     # Returns nothing
     def debug(topic, message = nil)
-      $stdout.puts(message(topic, message)) if log_level <= DEBUG
+      $stdout.puts(message(topic, message)) if should_log(:debug)
     end
 
     # Public: Print a jekyll message to stdout
@@ -33,7 +35,7 @@ module Jekyll
     #
     # Returns nothing
     def info(topic, message = nil)
-      $stdout.puts(message(topic, message)) if log_level <= INFO
+      $stdout.puts(message(topic, message)) if should_log(:info)
     end
 
     # Public: Print a jekyll message to stderr
@@ -43,7 +45,7 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message = nil)
-      $stderr.puts(message(topic, message).yellow) if log_level <= WARN
+      $stderr.puts(message(topic, message).yellow) if should_log(:warn)
     end
 
     # Public: Print a jekyll error message to stderr
@@ -53,7 +55,7 @@ module Jekyll
     #
     # Returns nothing
     def error(topic, message = nil)
-      $stderr.puts(message(topic, message).red) if log_level <= ERROR
+      $stderr.puts(message(topic, message).red) if should_log(:error)
     end
 
     # Public: Print a Jekyll error message to stderr and immediately abort the process
@@ -84,6 +86,17 @@ module Jekyll
     # Returns the formatted topic statement
     def formatted_topic(topic)
       "#{topic} ".rjust(20)
+    end
+
+    # Public: Determine whether the current log level warrants logging at the
+    #         proposed level.
+    #
+    # level_of_message - the log level of the message (symbol)
+    #
+    # Returns true if the log level of the message is greater than or equal to
+    #   this logger's log level.
+    def should_log(level_of_message)
+      LOG_LEVELS.fetch(log_level) <= LOG_LEVELS.fetch(level_of_message)
     end
   end
 end

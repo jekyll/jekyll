@@ -41,7 +41,7 @@ module Jekyll
             if page.uses_relative_permalinks
               Jekyll.logger.warn "Deprecation:", "'#{page.path}' uses relative" +
                                   " permalinks which will be deprecated in" +
-                                  " Jekyll v1.2 and beyond."
+                                  " Jekyll v2.0.0 and beyond."
               contains_deprecated_pages = true
             end
           end

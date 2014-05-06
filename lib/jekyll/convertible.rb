@@ -50,9 +50,9 @@ module Jekyll
           self.data = SafeYAML.load($1)
         end
       rescue SyntaxError => e
-        puts "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue Exception => e
-        puts "Error reading file #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "Error reading file #{File.join(base, name)}: #{e.message}"
       end
 
       self.data ||= {}
