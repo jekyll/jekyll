@@ -105,6 +105,7 @@
   * Avoid duplicated output using `highlight` tag (#2264)
   * Only use Jekyll.logger for output (#2307)
   * Close the file descriptor in `has_yaml_header?` (#2310)
+  * Add `output` to `Document` liquid output hash (#2309)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
@@ -221,6 +222,7 @@
   * Add 2.0.0 release post (#2298)
   * Add docs for custom markdown processors (#2298)
   * Add docs for `where` and `group_by` Liquid filters (#2298)
+  * Remove notes in docs for unreleased features (#2309)
 
 ## 1.5.1 / 2014-03-27
 
