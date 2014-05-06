@@ -169,11 +169,11 @@ class TestFilters < Test::Unit::TestCase
       should "return sorted by property array with nils first" do
         ary = [{"a" => 2}, {"b" => 1}, {"a" => 1}]
         assert_equal [{"b" => 1}, {"a" => 1}, {"a" => 2}], @filter.sort(ary, "a")
-        assert_equal @filter.sort(ary, "a"), @filter.sort(ary, "a", false)
+        assert_equal @filter.sort(ary, "a"), @filter.sort(ary, "a", "first")
       end
       should "return sorted by property array with nils last" do
         assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
-          @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", true)
+          @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", "last")
       end
     end
 
