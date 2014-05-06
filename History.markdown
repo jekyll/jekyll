@@ -104,6 +104,7 @@
   * Modify configuration key for Collections and reset properly. (#2238)
   * Avoid duplicated output using `highlight` tag (#2264)
   * Only use Jekyll.logger for output (#2307)
+  * Close the file descriptor in `has_yaml_header?` (#2310)
 
 ### Development Fixes
   * Add a link to the site in the README.md file (#1795)
