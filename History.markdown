@@ -216,6 +216,9 @@
   * Use black text color for the mobile navbar (#2306)
   * Use the built in date filter and `site.time` for the copyright year. (#2305)
   * Update html5shiv to v3.7.2 (#2304)
+  * Add 2.0.0 release post (#2298)
+  * Add docs for custom markdown processors (#2298)
+  * Add docs for `where` and `group_by` Liquid filters (#2298)
 
 ## 1.5.1 / 2014-03-27
 
