@@ -210,6 +210,7 @@
   * Fix capitalization of 'Jekyll' on Deployment Methods page (#2291)
   * Include plugins by sonnym in list of third-party plugins (#2297)
   * Add deprecated articles keeper filter to list of third-party plugins (#2300)
+  * Simplify and improve our CSS. (#2127)
 
 ## 1.5.1 / 2014-03-27
 
