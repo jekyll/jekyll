@@ -126,6 +126,17 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
+      <td><p><code>site.documents</code></p></td>
+      <td><p>
+
+        A list of all the documents in every collection.
+        <strong>Note: this is only available in <a
+        href="../installation/">the latest development
+        version.</a></strong>
+
+      </p></td>
+    </tr>
+    <tr>
       <td><p><code>site.categories.CATEGORY</code></p></td>
       <td><p>
 
