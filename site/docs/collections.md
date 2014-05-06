@@ -6,14 +6,6 @@ next_section: datafiles
 permalink: /docs/collections/
 ---
 
-<div class="note unreleased">
-  <h5>Collections support is currently unreleased.</h5>
-  <p>
-  In order to use this feature, <a href="/docs/installation/#pre-releases">
-  install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 <div class="note warning">
   <h5>Collections support is unstable and may change</h5>
   <p>

@@ -278,14 +278,6 @@ before your site is served.
 
 ## Frontmatter defaults
 
-<div class="note unreleased">
-  <h5>The front-matter defaults feature is currently unreleased.</h5>
-  <p>
-  In order to use this feature, <a href="/docs/installation/#pre-releases">
-  install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 You can set default values for your [YAML frontmatter](../frontmatter/) variables
 in your configuration. This way, you can for example set default layouts or define
 defaults for your custom variables. Of course, any variable actually specified in
@@ -407,15 +399,6 @@ kramdown:
 redcloth:
   hard_breaks: true
 {% endhighlight %}
-
-<div class="note unreleased">
-  <h5>Kramdown as the default is currently unreleased.</h5>
-  <p>
-    In the latest development releases, we've deprecated Maruku and will default to
-    Kramdown instead of Maruku. All versions below this will use Maruku as the
-    default.
-  </p>
-</div>
 
 ## Markdown Options
 

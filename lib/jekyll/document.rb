@@ -194,6 +194,7 @@ module Jekyll
     def to_liquid
       if data.is_a?(Hash)
         Utils.deep_merge_hashes data, {
+          "output"        => output,
           "content"       => content,
           "path"          => path,
           "relative_path" => relative_path,
