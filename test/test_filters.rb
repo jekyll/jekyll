@@ -153,8 +153,14 @@ class TestFilters < Test::Unit::TestCase
     end
 
     context "sort filter" do
-      should "return sorted array" do
-        assert_equal [1, 2, 3, 4], @filter.sort([4, 3, 2, 1])
+      should "return sorted numbers" do
+        assert_equal [1, 2, 2.2, 3], @filter.sort([3, 2.2, 2, 1])
+      end
+      should "return sorted strings" do
+        assert_equal ["10", "2"], @filter.sort(["10", "2"])
+        assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.sort([{"a" => "10"}, {"a" => "2"}], "a")
+        assert_equal ["FOO", "Foo", "foo"], @filter.sort(["foo", "Foo", "FOO"])
+        assert_equal ["_foo", "foo", "foo_"], @filter.sort(["foo_", "_foo", "foo"])
       end
       should "return sorted by property array" do
         assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}],
@@ -168,12 +174,6 @@ class TestFilters < Test::Unit::TestCase
       should "return sorted by property array with nils last" do
         assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
           @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", true)
-      end
-      should "return lexicographical sorted array" do
-        assert_equal [2, 10], @filter.sort([10, 2])
-        assert_equal [{"a" => 2}, {"a" => 10}], @filter.sort([{"a" => 10}, {"a" => 2}], "a")
-        assert_equal ["10", "2"], @filter.sort(["10", "2"])
-        assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.sort([{"a" => "10"}, {"a" => "2"}], "a")
       end
     end
 
