@@ -19,6 +19,7 @@
   * Update Listen from 1.x to 2.x (#2097)
   * Front-matter defaults (#2205)
   * Deprecate `relative_permalinks` configuration option (default to `false`) (#2307)
+  * Exclude files based on prefix as well as `fnmatch?` (#2303)
 
 ### Minor Enhancements
   * Move the EntryFilter class into the Jekyll module to avoid polluting the
