@@ -68,6 +68,7 @@
   * Return `utf-8` encoding in header for  webrick error page response (#2289)
   * Make template site easier to customize (#2268)
   * Add two-digit year to permalink template option (#2301)
+  * Add `site.documents` to Liquid payload (list of all docs) (#2295)
 
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
