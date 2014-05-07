@@ -6,7 +6,7 @@ version: 2.0.0
 categories: [release]
 ---
 
-Almost a year ago to the day, [we released Jekyll 1.0.0][jekyll-1]. One year later, we present to you the next major version: Jekyll 2.0.0.
+A year ago to the day, [we released Jekyll 1.0.0][jekyll-1]. One year later, we present to you the next major version: Jekyll 2.0.0.
 
 Jam-packed with some [highly-requested features and bugfixes galore][changelog], this is the best Jekyll yet. Some notable changes:
 

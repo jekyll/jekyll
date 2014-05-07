@@ -1,6 +1,18 @@
 ## HEAD
 
 ### Major Enhancements
+
+### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 2.0.0 / 2014-05-06
+
+### Major Enhancements
   * Add "Collections" feature (#2199)
   * Add gem-based plugin whitelist to safe mode (#1657)
   * Replace the commander command line parser with a more robust
