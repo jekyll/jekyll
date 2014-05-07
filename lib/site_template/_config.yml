@@ -8,4 +8,4 @@ url: "http://yourdomain.com"
 
 # Build settings
 markdown: kramdown
-permalinks: pretty
+permalink: pretty
