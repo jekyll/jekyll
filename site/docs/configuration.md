@@ -284,7 +284,7 @@ defaults for your custom variables. Of course, any variable actually specified i
 the front matter overrides the defaults.
 
 All defaults go under the `defaults` key, which holds a list of scope-values combinations ("default sets").
-The `scope` key defines for which files the defaults apply, limiting them by their `path` and
+The `scope` key defines for which files the defaults apply, limiting them by their source file `path` and
 optionally by their `type` (`page`, `post` or `draft`). The `values` key holds the actual list of defaults.
 
 For example:

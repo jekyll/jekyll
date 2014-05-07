@@ -82,7 +82,7 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Where</strong></p>
-        <p>Select all the object in an array where the key has the given.</p>
+        <p>Select all the objects in an array where the key has the given value.</p>
       </td>
       <td class="align-center">
         <p>
