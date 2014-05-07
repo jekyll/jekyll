@@ -24,7 +24,7 @@ require 'pathname'
 
 # 3rd party
 require 'liquid'
-require 'maruku'
+require 'kramdown'
 require 'colorator'
 require 'toml'
 
