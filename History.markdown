@@ -10,6 +10,12 @@
 
 ### Site Enhancements
 
+## 2.0.1 / 2014-05-06
+
+### Bug Fixes
+
+* Require `kramdown` gem instead of `maruku` gem
+
 ## 2.0.0 / 2014-05-06
 
 ### Major Enhancements
