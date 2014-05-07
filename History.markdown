@@ -6,6 +6,9 @@
 
 ### Bug Fixes
 
+* Properly prefix links in site template with URL or baseurl depending upon
+  need. (#2319)
+
 ### Development Fixes
 
 ### Site Enhancements
