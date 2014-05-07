@@ -14,5 +14,13 @@ class TestSass < Test::Unit::TestCase
     should "import SCSS partial" do
       assert_equal ".half {\n  width: 50%; }\n", File.read(@test_css_file)
     end
+
+    should "register the SCSS converter" do
+      assert !!@site.getConverterImpl(Jekyll::Converters::Scss), "SCSS converter implementation should exist."
+    end
+
+    should "register the Sass converter" do
+      assert !!@site.getConverterImpl(Jekyll::Converters::Sass), "Sass converter implementation should exist."
+    end
   end
 end

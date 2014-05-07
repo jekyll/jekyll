@@ -365,7 +365,7 @@ module Jekyll
     #
     # Returns array of instances of subclasses of parameter
     def instantiate_subclasses(klass)
-      klass.subclasses.select do |c|
+      klass.descendants.select do |c|
         !safe || c.safe
       end.sort.map do |c|
         c.new(config)
