@@ -359,24 +359,7 @@ You can also use this tag to create a link to a post in Markdown as follows:
 
 ### Gist
 
-Use the `gist` tag to easily embed a GitHub Gist onto your site:
-
-{% highlight text %}
-{% raw %}
-{% gist 5555251 %}
-{% endraw %}
-{% endhighlight %}
-
-You may also optionally specify the filename in the gist to display:
-
-{% highlight text %}
-{% raw %}
-{% gist 5555251 result.md %}
-{% endraw %}
-{% endhighlight %}
-
-The `gist` tag also works with private gists, which require the gist owner's
-github username:
+Use the `gist` tag to easily embed a GitHub Gist onto your site. This works with public or secret gists:
 
 {% highlight text %}
 {% raw %}
@@ -384,4 +367,10 @@ github username:
 {% endraw %}
 {% endhighlight %}
 
-The private gist syntax also supports filenames.
+You may also optionally specify the filename in the gist to display:
+
+{% highlight text %}
+{% raw %}
+{% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
+{% endraw %}
+{% endhighlight %}
