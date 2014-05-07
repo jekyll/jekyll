@@ -29,10 +29,6 @@ def gem_file
   "#{name}-#{version}.gem"
 end
 
-def replace_header(head, header_name)
-  head.sub!(/(\.#{header_name}\s*= ').*'/) { "#{$1}#{send(header_name)}'"}
-end
-
 def normalize_bullets(markdown)
   markdown.gsub(/\s{2}\*{1}/, "-")
 end
