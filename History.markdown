@@ -7,6 +7,7 @@
 ### Bug Fixes
 
 * Correct use of `url` and `baseurl` in the site template. (#2317)
+* Default `baseurl` to `""` (#2317)
 
 ### Development Fixes
 

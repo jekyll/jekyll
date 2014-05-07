@@ -32,7 +32,7 @@ module Jekyll
       'markdown'      => 'kramdown',
       'highlighter'   => 'pygments',
       'permalink'     => 'date',
-      'baseurl'       => '/',
+      'baseurl'       => '',
       'include'       => ['.htaccess'],
       'exclude'       => [],
       'paginate_path' => '/page:num',
