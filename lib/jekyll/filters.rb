@@ -213,12 +213,12 @@ module Jekyll
         end
 
         input.sort { |a, b|
-          if !a[key].nil? && b[key].nil?
+          if !hash_property(a, key).nil? && hash_property(b, key).nil?
             - order
-          elsif a[key].nil? && !b[key].nil?
+          elsif hash_property(a, key).nil? && !hash_property(b, key).nil?
             + order
           else
-            a[key] <=> b[key]
+            hash_property(a, key) <=> hash_property(b, key)
           end
         }
       end
@@ -248,6 +248,16 @@ module Jekyll
         item.data[property.to_s]
       else
         item[property.to_s]
+      end
+    end
+
+    def hash_property(hash, property)
+      if hash.respond_to?('[]'.freeze)
+        hash[property]
+      elsif hash.respond_to?(property)
+        hash.send(property)
+      else
+        nil
       end
     end
   end
