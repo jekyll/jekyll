@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('listen', "~> 2.5")
   s.add_runtime_dependency('kramdown', "~> 1.3")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
-  s.add_runtime_dependency('mercenary', "~> 0.3.1")
+  s.add_runtime_dependency('mercenary', "~> 0.3.3")
   s.add_runtime_dependency('safe_yaml', "~> 1.0")
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 3.1")
