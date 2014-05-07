@@ -9,8 +9,8 @@ prev_section: contributing
 
 ### Bug Fixes
 
-* Correct use of `url` and `baseurl` in the site template. ([#2317]({{ site.repository }}/issues/2317))
-* Default `baseurl` to `""` ([#2317]({{ site.repository }}/issues/2317))
+- Correct use of `url` and `baseurl` in the site template. ([#2317]({{ site.repository }}/issues/2317))
+- Default `baseurl` to `""` ([#2317]({{ site.repository }}/issues/2317))
 
 ### Site Enhancements
 
