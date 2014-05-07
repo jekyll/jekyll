@@ -101,8 +101,7 @@ Feature: Collections
     And I have a "_config.yml" file with content:
     """
     collections:
-      methods:
-        output: true
+    - methods
     """
     When I run jekyll build
     Then the _site directory should exist
