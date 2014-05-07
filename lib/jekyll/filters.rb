@@ -252,6 +252,7 @@ module Jekyll
     end
 
     def hash_property(hash, property)
+      return item_property(hash, property)
       if hash.respond_to?('[]'.freeze)
         hash[property]
       elsif hash.respond_to?(property)
