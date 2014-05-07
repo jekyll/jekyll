@@ -400,7 +400,7 @@ title: Include symlink
 CONTENT
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
-        assert_match /should exist and should not be a symlink/, ex.message
+        assert_match /Included file '_includes\/tmp\/pages-test-does-not-exist' not found/, ex.message
       end
     end
 
