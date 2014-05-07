@@ -14,6 +14,7 @@
   * Instantiate all descendants for converters and generators, not just
     direct subclasses (#2334)
   * Replace all instances of `site.name` with `site.title` in site template (#2324)
+  * `Jekyll::Filters#time` now accepts UNIX timestamps in string or number form (#2339)
 
 ### Development Fixes
 
