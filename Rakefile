@@ -30,7 +30,7 @@ def gem_file
 end
 
 def normalize_bullets(markdown)
-  markdown.gsub(/\s{2}\*{1}/, "-")
+  markdown.gsub(/\n\s{2}\*{1}/, "\n-")
 end
 
 def linkify_prs(markdown)

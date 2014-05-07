@@ -6,8 +6,8 @@
 
 ### Bug Fixes
 
-* Properly prefix links in site template with URL or baseurl depending upon
-  need. (#2319)
+  * Properly prefix links in site template with URL or baseurl depending upon
+    need. (#2319)
 
 ### Development Fixes
 
@@ -17,19 +17,19 @@
 
 ### Bug Fixes
 
-* Correct use of `url` and `baseurl` in the site template. (#2317)
-* Default `baseurl` to `""` (#2317)
+  * Correct use of `url` and `baseurl` in the site template. (#2317)
+  * Default `baseurl` to `""` (#2317)
 
 ### Site Enhancements
 
-* Correct docs for the `gist` plugin so it always includes the username. (#2314)
-* Clarify new (defaults, `where` filter) features in docs (#2316)
+  * Correct docs for the `gist` plugin so it always includes the username. (#2314)
+  * Clarify new (defaults, `where` filter) features in docs (#2316)
 
 ## 2.0.1 / 2014-05-06
 
 ### Bug Fixes
 
-* Require `kramdown` gem instead of `maruku` gem
+  * Require `kramdown` gem instead of `maruku` gem
 
 ## 2.0.0 / 2014-05-06
 

@@ -5,9 +5,23 @@ permalink: "/docs/history/"
 prev_section: contributing
 ---
 
+## 2.0.2 / 2014-05-07
+
+### Bug Fixes
+
+* Correct use of `url` and `baseurl` in the site template. ([#2317]({{ site.repository }}/issues/2317))
+* Default `baseurl` to `""` ([#2317]({{ site.repository }}/issues/2317))
+
+### Site Enhancements
+
+- Correct docs for the `gist` plugin so it always includes the username. ([#2314]({{ site.repository }}/issues/2314))
+- Clarify new (defaults, `where` filter) features in docs ([#2316]({{ site.repository }}/issues/2316))
+
 ## 2.0.1 / 2014-05-06
 
-### Bug Fixes- Require `kramdown` gem instead of `maruku` gem
+### Bug Fixes
+
+- Require `kramdown` gem instead of `maruku` gem
 
 ## 2.0.0 / 2014-05-06
 
