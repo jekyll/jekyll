@@ -73,7 +73,7 @@ instances of
 and are available via `site.pages`. Static files become instances of
 [`Jekyll::StaticFile`]({{ site.repository }}/blob/master/lib/jekyll/static_file.rb)
 and are available via `site.static_files`. See
-[the Variables documentation page](../installation/) and
+[the Variables documentation page](/docs/variables/) and
 [`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb)
 for more details.
 
@@ -445,7 +445,6 @@ You can find a few useful plugins at the following locations:
 - [Jekyll-pandoc-multiple-formats](https://github.com/fauno/jekyll-pandoc-multiple-formats) by [edsl](https://github.com/edsl): Use pandoc to generate your site in multiple formats. Supports pandoc’s markdown extensions.
 - [Transform Layouts](https://gist.github.com/1472645): Allows HAML layouts (you need a HAML Converter plugin for this to work).
 - [Org-mode Converter](https://gist.github.com/abhiyerra/7377603): Org-mode converter for Jekyll.
-- [jekyll_elm by sonnym](https://github.com/sonnym/jekyll_elm): Elm support for Jekyll.
 
 #### Filters
 
@@ -463,6 +462,7 @@ You can find a few useful plugins at the following locations:
 - [Table of Content Generator](https://github.com/dafi/jekyll-toc-generator): Generate the HTML code containing a table of content (TOC), the TOC can be customized in many way, for example you can decide which pages can be without TOC.
 - [jekyll-humanize](https://github.com/23maverick23/jekyll-humanize): This is a port of the Django app humanize which adds a "human touch" to data. Each method represents a Fluid type filter that can be used in your Jekyll site templates. Given that Jekyll produces static sites, some of the original methods do not make logical sense to port (e.g. naturaltime).
 - [Jekyll-Ordinal](https://github.com/PatrickC8t/Jekyll-Ordinal): Jekyll liquid filter to output a date ordinal such as "st", "nd", "rd", or "th".
+- [Deprecated articles keeper](https://github.com/kzykbys/JekyllPlugins) by [Kazuya Kobayashi](http://blog.kazuya.co/): A simple Jekyll filter which monitor how old an article is.
 
 #### Tags
 
@@ -506,7 +506,6 @@ You can find a few useful plugins at the following locations:
 - [Lychee Gallery Tag](https://gist.github.com/tobru/9171700) by [tobru](https://github.com/tobru): Include [Lychee](http://lychee.electerious.com/) albums into a post. For an introduction, see [Jekyll meets Lychee - A Liquid Tag plugin](https://tobrunet.ch/articles/jekyll-meets-lychee-a-liquid-tag-plugin/)
 - [Image Set/Gallery Tag](https://github.com/callmeed/jekyll-image-set) by [callmeed](https://github.com/callmeed): Renders HTML for an image gallery from a folder in your Jekyll site. Just pass it a folder name and class/tag options.
 - [jekyll_figure](https://github.com/lmullen/jekyll_figure): Generate figures and captions with links to the figure in a variety of formats
-- [jekyll_example_embed by sonnym](https://github.com/sonnym/jekyll_example_embed): Embed examples in Jekyll, with source and results.
 
 #### Collections
 

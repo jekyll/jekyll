@@ -69,6 +69,14 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
     </tr>
     <tr>
       <td>
+        <p><code>short_year</code></p>
+      </td>
+      <td>
+        <p>Year from the Post’s filename without the century.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>title</code></p>
       </td>
       <td>

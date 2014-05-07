@@ -278,14 +278,6 @@ before your site is served.
 
 ## Frontmatter defaults
 
-<div class="note unreleased">
-  <h5>The front-matter defaults feature is currently unreleased.</h5>
-  <p>
-  In order to use this feature, <a href="/docs/installation/#pre-releases">
-  install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 You can set default values for your [YAML frontmatter](../frontmatter/) variables
 in your configuration. This way, you can for example set default layouts or define
 defaults for your custom variables. Of course, any variable actually specified in
@@ -408,15 +400,6 @@ redcloth:
   hard_breaks: true
 {% endhighlight %}
 
-<div class="note unreleased">
-  <h5>Kramdown as the default is currently unreleased.</h5>
-  <p>
-    In the latest development releases, we've deprecated Maruku and will default to
-    Kramdown instead of Maruku. All versions below this will use Maruku as the
-    default.
-  </p>
-</div>
-
 ## Markdown Options
 
 The various Markdown renderers supported by Jekyll sometimes have extra options available.
@@ -454,3 +437,30 @@ For example, in your `_config.yml`:
 
     kramdown:
       input: GFM
+
+### Custom Markdown Processors
+
+If you're interested in creating a custom markdown processor, you're in luck! Create a new class in the `Jekyll::Converters::Markdown` namespace:
+
+{% highlight ruby %}
+class Jekyll::Converters::Markdown::MyCustomProcessor
+  def initialize(config)
+    require 'funky_markdown'
+    @config = config
+  rescue LoadError
+    STDERR.puts 'You are missing a library required for Markdown. Please run:'
+    STDERR.puts '  $ [sudo] gem install funky_markdown'
+    raise FatalException.new("Missing dependency: funky_markdown")
+  end
+
+  def convert(content)
+    ::FunkyMarkdown.new(content).convert
+  end
+end
+{% endhighlight %}
+
+Once you've created your class and have it properly setup either as a plugin in the `_plugins` folder or as a gem, specify it in your `_config.yml`:
+
+{% highlight yaml %}
+markdown: MyCustomProcessor
+{% endhighlight %}
