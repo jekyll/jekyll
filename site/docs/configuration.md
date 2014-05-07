@@ -362,7 +362,7 @@ watch:       false    # deprecated
 server:      false    # deprecated
 host:        0.0.0.0
 port:        4000
-baseurl:     /
+baseurl:     ""
 url:         http://localhost:4000
 lsi:         false
 
