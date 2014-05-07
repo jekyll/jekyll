@@ -230,7 +230,9 @@ module Jekyll
       when Time
         input
       when String
-        Time.parse(input)
+        Time.parse(input) rescue Time.at(input.to_i)
+      when Number
+        Time.at(input)
       else
         Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)
