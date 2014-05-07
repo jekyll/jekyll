@@ -13,6 +13,7 @@
   * Don't fail if any of the path objects are nil (#2325)
   * Instantiate all descendants for converters and generators, not just
     direct subclasses (#2334)
+  * Replace all instances of `site.name` with `site.title` in site template (#2324)
 
 ### Development Fixes
 
