@@ -6,10 +6,16 @@
 
 ### Bug Fixes
 
+### Development Fixes
+
+### Site Enhancements
+
+## v2.0.2 / 2014-05-07
+
+### Bug Fixes
+
 * Correct use of `url` and `baseurl` in the site template. (#2317)
 * Default `baseurl` to `""` (#2317)
-
-### Development Fixes
 
 ### Site Enhancements
 
@@ -165,7 +171,7 @@
   * Refactor `Commands::Serve`. (#2269)
   * Refactor `highlight` tag (#2154)
   * Update `Util` hash functions with latest from Rails (#2273)
-  * Workaround for Travis bug (#2290) 
+  * Workaround for Travis bug (#2290)
 
 ### Site Enhancements
   * Document Kramdown's GFM parser option (#1791)
