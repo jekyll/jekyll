@@ -9,6 +9,7 @@
   * Properly prefix links in site template with URL or baseurl depending upon
     need. (#2319)
   * Update gist tag comments and error message to require username (#2326)
+  * Fix `permalink` setting in site template (#2331)
 
 ### Development Fixes
 
