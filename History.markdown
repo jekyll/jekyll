@@ -18,6 +18,8 @@
 
 ### Site Enhancements
 
+  * Add missing "as" to assets docs page (#2337)
+
 ## 2.0.2 / 2014-05-07
 
 ### Bug Fixes
