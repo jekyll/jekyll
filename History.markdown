@@ -10,6 +10,7 @@
     need. (#2319)
   * Update gist tag comments and error message to require username (#2326)
   * Fix `permalink` setting in site template (#2331)
+  * Don't fail if any of the path objects are nil (#2325)
 
 ### Development Fixes
 
