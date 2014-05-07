@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+* Correct use of `url` and `baseurl` in the site template. (#2317)
+
 ### Development Fixes
 
 ### Site Enhancements
