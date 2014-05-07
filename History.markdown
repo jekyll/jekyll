@@ -10,6 +10,8 @@
 
 ### Site Enhancements
 
+* Correct docs for the `gist` plugin so it always includes the username. (#2314)
+
 ## 2.0.1 / 2014-05-06
 
 ### Bug Fixes
