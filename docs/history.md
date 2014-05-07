@@ -152,7 +152,7 @@ prev_section: contributing
 - Refactor `Commands::Serve`. ([#2269]({{ site.repository }}/issues/2269))
 - Refactor `highlight` tag ([#2154]({{ site.repository }}/issues/2154))
 - Update `Util` hash functions with latest from Rails ([#2273]({{ site.repository }}/issues/2273))
-- Workaround for Travis bug ([#2290]({{ site.repository }}/issues/2290)) 
+- Workaround for Travis bug ([#2290]({{ site.repository }}/issues/2290))
 
 ### Site Enhancements
 - Document Kramdown's GFM parser option ([#1791]({{ site.repository }}/issues/1791))
