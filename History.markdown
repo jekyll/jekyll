@@ -11,6 +11,8 @@
   * Update gist tag comments and error message to require username (#2326)
   * Fix `permalink` setting in site template (#2331)
   * Don't fail if any of the path objects are nil (#2325)
+  * Instantiate all descendants for converters and generators, not just
+    direct subclasses (#2334)
 
 ### Development Fixes
 
