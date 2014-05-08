@@ -804,6 +804,7 @@ prev_section: contributing
 - Switch to Simplecov for coverage report ([#765]({{ site.repository }}/issues/765))
 
 ## 0.12.1 / 2013-02-19
+
 ### Minor Enhancements
 - Update Kramdown version to 0.14.1 ([#744]({{ site.repository }}/issues/744))
 - Test Enhancements
@@ -812,6 +813,7 @@ prev_section: contributing
 - Update Redcarpet version to 2.2.2 ([#744]({{ site.repository }}/issues/744))
 
 ## 0.12.0 / 2012-12-22
+
 ### Minor Enhancements
 - Add ability to explicitly specify included files ([#261]({{ site.repository }}/issues/261))
 - Add --default-mimetype option ([#279]({{ site.repository }}/issues/279))
@@ -841,6 +843,7 @@ prev_section: contributing
 - Update dependencies
 
 ## 0.11.0 / 2011-07-10
+
 ### Major Enhancements
 - Add command line importer functionality ([#253]({{ site.repository }}/issues/253))
 - Add Redcarpet Markdown support ([#318]({{ site.repository }}/issues/318))
@@ -865,6 +868,7 @@ prev_section: contributing
 - Add --no-server option.
 
 ## 0.9.0 / 2010-12-15
+
 ### Minor Enhancements
 - Use OptionParser's `[no-]` functionality for better boolean parsing.
 - Add Drupal migrator ([#245]({{ site.repository }}/issues/245))
@@ -873,6 +877,7 @@ prev_section: contributing
 - Add Marley migrator ([#28]({{ site.repository }}/issues/28))
 
 ## 0.8.0 / 2010-11-22
+
 ### Minor Enhancements
 - Add wordpress.com importer ([#207]({{ site.repository }}/issues/207))
 - Add --limit-posts cli option ([#212]({{ site.repository }}/issues/212))
@@ -886,6 +891,7 @@ prev_section: contributing
 - Prevent `_includes` dir from being a symlink
 
 ## 0.7.0 / 2010-08-24
+
 ### Minor Enhancements
 - Add support for rdiscount extensions ([#173]({{ site.repository }}/issues/173))
 - Bug Fixes
@@ -904,6 +910,7 @@ prev_section: contributing
 - Fix Markdown Pygments prefix and suffix ([#178]({{ site.repository }}/issues/178))
 
 ## 0.6.0 / 2010-06-23
+
 ### Major Enhancements
 - Proper plugin system ([#19]({{ site.repository }}/issues/19), [#100]({{ site.repository }}/issues/100))
 - Add safe mode so unsafe converters/generators can be added
@@ -931,6 +938,7 @@ prev_section: contributing
 - Fix source directory binding using Dir.pwd ([#75]({{ site.repository }}/issues/75))
 
 ## 0.5.7 / 2010-01-12
+
 ### Minor Enhancements
 - Allow overriding of post date in the front matter ([#62]({{ site.repository }}/issues/62), [#38]({{ site.repository }}/issues/38))
 - Bug Fixes
@@ -996,6 +1004,7 @@ prev_section: contributing
 - Added Date#xmlschema for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06
+
 ### Major Enhancements
 - Next/previous posts in site payload ([@pantulis](https://github.com/pantulis), [@tomo](https://github.com/tomo))
 - Permalink templating system
@@ -1010,6 +1019,7 @@ prev_section: contributing
 - CGI escaped post titles ([@Chrononaut](https://github.com/Chrononaut))
 
 ## 0.5.0 / 2009-04-07
+
 ### Minor Enhancements
 - Ability to set post categories via YAML ([@qrush](https://github.com/qrush))
 - Ability to set prevent a post from publishing via YAML ([@qrush](https://github.com/qrush))
@@ -1028,12 +1038,14 @@ prev_section: contributing
 - Add Cucumber acceptance test suite ([@qrush](https://github.com/qrush), [@technicalpickles](https://github.com/technicalpickles))
 
 ## 0.4.1
+
 ### Minor Enhancements
 - Changed date format on wordpress converter (zeropadding) ([@dysinger](https://github.com/dysinger))
 - Bug Fixes
 - Add jekyll binary as executable to gemspec ([@dysinger](https://github.com/dysinger))
 
 ## 0.4.0 / 2009-02-03
+
 ### Major Enhancements
 - Switch to Jeweler for packaging tasks
 
@@ -1054,6 +1066,7 @@ prev_section: contributing
 - Fix site payload available to files ([@matrix9180](https://github.com/matrix9180))
 
 ## 0.3.0 / 2008-12-24
+
 ### Major Enhancements
 - Added --server option to start a simple WEBrick server on destination
       directory ([@johnreilly](https://github.com/johnreilly) and [@mchung](https://github.com/mchung))
@@ -1088,6 +1101,7 @@ prev_section: contributing
 - Include files in `_includes` with {% raw %}`{% include x.textile %}`{% endraw %}
 
 ## 0.1.5 / 2008-12-12
+
 ### Major Enhancements
 - Code highlighting with Pygments if --pygments is specified
 - Disable true LSI by default, enable with --lsi
