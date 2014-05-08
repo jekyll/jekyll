@@ -701,8 +701,8 @@ prev_section: contributing
 ## 1.0.0 / 2013-05-06
 
 ### Major Enhancements
-- Add `jekyll new` subcommand: generate a jekyll scaffold ([#764]({{ site.repository }}/issues/764))
-- Refactored jekyll commands into subcommands: build, serve, and migrate. ([#690]({{ site.repository }}/issues/690))
+- Add `jekyll new` subcommand: generate a Jekyll scaffold ([#764]({{ site.repository }}/issues/764))
+- Refactored Jekyll commands into subcommands: build, serve, and migrate. ([#690]({{ site.repository }}/issues/690))
 - Removed importers/migrators from main project, migrated to jekyll-import sub-gem ([#793]({{ site.repository }}/issues/793))
 - Added ability to render drafts in `_drafts` folder via command line ([#833]({{ site.repository }}/issues/833))
 - Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) ([#928]({{ site.repository }}/issues/928))
@@ -742,7 +742,7 @@ prev_section: contributing
 - Relaxed Kramdown version to 0.14 ([#808]({{ site.repository }}/issues/808))
 - Aliased `jekyll server` to `jekyll serve`. ([#792]({{ site.repository }}/issues/792))
 - Updated gem versions for Kramdown, Rake, Shoulda, Cucumber, and RedCarpet. ([#744]({{ site.repository }}/issues/744))
-- Refactored jekyll subcommands into Jekyll::Commands submodule, which now contains them ([#768]({{ site.repository }}/issues/768))
+- Refactored Jekyll subcommands into Jekyll::Commands submodule, which now contains them ([#768]({{ site.repository }}/issues/768))
 - Rescue from import errors in Wordpress.com migrator ([#671]({{ site.repository }}/issues/671))
 - Massively accelerate LSI performance ([#664]({{ site.repository }}/issues/664))
 - Truncate post slugs when importing from Tumblr ([#496]({{ site.repository }}/issues/496))
@@ -1042,7 +1042,7 @@ prev_section: contributing
 ### Minor Enhancements
 - Changed date format on wordpress converter (zeropadding) ([@dysinger](https://github.com/dysinger))
 - Bug Fixes
-- Add jekyll binary as executable to gemspec ([@dysinger](https://github.com/dysinger))
+- Add Jekyll binary as executable to gemspec ([@dysinger](https://github.com/dysinger))
 
 ## 0.4.0 / 2009-02-03
 
