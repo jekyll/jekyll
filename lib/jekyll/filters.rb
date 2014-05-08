@@ -193,12 +193,12 @@ module Jekyll
     # Sort an array of objects
     #
     # input - the object array
-    # key - key within each object to filter by
+    # property - property within each object to filter by
     # nils ('first' | 'last') - nils appear before or after non-nil values
     #
     # Returns the filtered array of objects
-    def sort(input, key = nil, nils = "first")
-      if key.nil?
+    def sort(input, property = nil, nils = "first")
+      if property.nil?
         input.sort
       else
         case
@@ -213,12 +213,15 @@ module Jekyll
         end
 
         input.sort { |a, b|
-          if !hash_property(a, key).nil? && hash_property(b, key).nil?
+          a_p = item_property(a, property)
+          b_p = item_property(b, property)
+
+          if !a_p.nil? && b_p.nil?
             - order
-          elsif hash_property(a, key).nil? && !hash_property(b, key).nil?
+          elsif a_p.nil? && !b_p.nil?
             + order
           else
-            hash_property(a, key) <=> hash_property(b, key)
+            a_p <=> b_p
           end
         }
       end
@@ -248,17 +251,6 @@ module Jekyll
         item.data[property.to_s]
       else
         item[property.to_s]
-      end
-    end
-
-    def hash_property(hash, property)
-      return item_property(hash, property)
-      if hash.respond_to?('[]'.freeze)
-        hash[property]
-      elsif hash.respond_to?(property)
-        hash.send(property)
-      else
-        nil
       end
     end
   end
