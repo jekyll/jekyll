@@ -185,9 +185,9 @@ module Jekyll
     # value - desired value
     #
     # Returns the filtered array of objects
-    def where(input, key, value)
+    def where(input, property, value)
       return input unless input.is_a?(Array)
-      input.select { |object| object[key] == value }
+      input.select { |object| item_property(object, property) == value }
     end
 
     # Sort an array of objects
