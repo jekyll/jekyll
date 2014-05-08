@@ -9,7 +9,7 @@ Feature: Collections
     And I have a configuration file with "collections" set to "['methods']"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Collections: <p>Use <code>Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>\n<p><code>Jekyll.sanitized_path</code> is used to make sure your path is in your source.</p>\n<p>Run your generators! default</p>\n<p>Create dat site.</p>\n<p>Run your generators! default</p>" in "_site/index.html"
+    And I should see "Collections: <p>Use <code>Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>\n<p><code>Jekyll.sanitized_path</code> is used to make sure your path is in your source.</p>\n<p>Run your generators! default</p>\n<p>Page without title.</p>\n<p>Run your generators! default</p>" in "_site/index.html"
     And the "_site/methods/configuration.html" file should not exist
 
   Scenario: Rendered collection
