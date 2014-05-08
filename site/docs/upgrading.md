@@ -35,7 +35,7 @@ rebuild each time a file changes, just add the `--watch` flag at the end.
   <p markdown="1">With the new subcommands, the way sites are previewed locally
    changed a bit. Instead of specifying `server: true` in the site's
    configuration file, use `jekyll serve`. The same hold's true for
-   `watch: true`. Instead, use the `&#45;&#45;watch` flag with either `jekyll serve`
+   `watch: true`. Instead, use the `--watch` flag with either `jekyll serve`
     or `jekyll build`.</p>
 </div>
 
