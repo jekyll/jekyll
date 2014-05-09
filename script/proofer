@@ -1,3 +1,4 @@
 #!/bin/bash
 
-bundle exec rake site:test
+cd ./site
+jekyll build --trace
