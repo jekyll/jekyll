@@ -15,4 +15,4 @@ Thank you to the contributors that contributed code to 2.0.1, 2.0.2, and/or 2.0.
 
 Parker Moore, Yi Zeng, Gabe Ortiz, Aaron Broder, Alberto Grespan, gpxl, David Briggs, Kevin Ingersoll, and Troy Swanson.
 
-Happy Jekylling!
+As always, check out the [changelog](/docs/history/) for more info. Happy Jekylling!
