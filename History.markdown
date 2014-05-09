@@ -9,6 +9,8 @@
 
 ### Development Fixes
 
+  * Test Ruby 2.1.2 instead of 2.1.1 (#2374)
+
 ### Site Enhancements
 
 ## 2.0.3 / 2014-05-08
