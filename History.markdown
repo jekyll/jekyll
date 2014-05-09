@@ -26,6 +26,7 @@
   * Add links to headers who have an ID. (#2342)
   * Use symbol instead of HTML number in `upgrading.md` (#2351)
   * Fix link to frontmatter defaults docs (#2353)
+  * Fix for `History.markdown` in order to fix history page in docs (#2363)
 
 ## 2.0.2 / 2014-05-07
 
