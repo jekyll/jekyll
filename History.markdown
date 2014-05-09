@@ -3,6 +3,7 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+  * Add support for JSON files in the `_data` directory (#2369)
 
 ### Bug Fixes
 
