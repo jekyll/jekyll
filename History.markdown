@@ -16,6 +16,7 @@
   * Replace all instances of `site.name` with `site.title` in site template (#2324)
   * `Jekyll::Filters#time` now accepts UNIX timestamps in string or number form (#2339)
   * Use `item_property` for `where` filter so it doesn't break on collections (#2359)
+  * Rescue errors thrown so `--watch` doesn't fail (#2364)
 
 ### Development Fixes
 
