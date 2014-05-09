@@ -59,5 +59,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency('jekyll_test_plugin')
   s.add_development_dependency('jekyll_test_plugin_malicious')
   s.add_development_dependency('rouge', '~> 1.3')
-  s.add_development_dependency('html-proofer')
 end
