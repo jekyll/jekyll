@@ -8,8 +8,6 @@ rvm:
 - 2.0.0
 - 1.9.3
 script: script/cibuild
-after_success:
-- script/proofer
 after_script:
 - script/rebund upload
 notifications:
@@ -27,6 +25,9 @@ env:
   global:
   - secure: bt5nglPTdsc0N5fB1dOJz2WbM81dGpDuVD8PnhEsxgUfoo6xavhU4+pNrUADlSUqQ1aJrdU+MKW4x+JZ2ZnJS8vOpNzRymuMZSbFaljK4pgFGiKFgBdMKxVikvoYcxKCjLAl7NJZ11W6hUw+JtJScClDZwrJJAQB6I7Isp/LsdM=
   - secure: Ym8nx7nbfGYGo47my92M+deJykaiMkdZdb615EO51liv/xy/0aQ919Jpfieugc9d3zVnm+zFGPbpv4YzRpsik6OlVBNa4lP+BnQ27ptf5YcLWD8Hksi7845WFLecXMoaTCoYer/TvYZsIWJb2nSDMH9qbfZhnd1YZKuvUpK0rEU=
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 matrix:
+  include:
+  - rvm: 2.1
+    gemfile: site/Gemfile
+    env: NOKOGIRI_USE_SYSTEM_LIBRARIES=true
   fast_finish: true
