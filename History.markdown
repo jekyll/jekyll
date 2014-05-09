@@ -615,7 +615,7 @@
   * Update contributor information (#1192)
   * Update URL of article about Blogger migration (#1242)
   * Specify that RedCarpet is the default for new Jekyll sites on Quickstart page (#1247)
-  * Added site.pages to Variables page in docs (#1251)
+  * Added `site.pages` to Variables page in docs (#1251)
   * Add Youku and Tudou Embed link on Plugins page. (#1250)
   * Add note that `gist` tag supports private gists. (#1248)
   * Add `jekyll-timeago` to list of third-party plugins. (#1260)
@@ -699,7 +699,7 @@
 ## 1.0.1 / 2013-05-08
 
 ### Minor Enhancements
-  * Do not force use of toc_token when using generate_tok in RDiscount (#1048)
+  * Do not force use of `toc_token` when using `generate_tok` in RDiscount (#1048)
   * Add newer `language-` class name prefix to code blocks (#1037)
   * Commander error message now preferred over process abort with incorrect args (#1040)
 
@@ -730,7 +730,7 @@
 
 ### Minor Enhancements
   * Site template HTML5-ified (#964)
-  * Use post's directory path when matching for the post_url tag (#998)
+  * Use post's directory path when matching for the `post_url` tag (#998)
   * Loosen dependency on Pygments so it's only required when it's needed (#1015)
   * Parse strings into Time objects for date-related Liquid filters (#1014)
   * Tell the user if there is no subcommand specified (#1008)
@@ -744,7 +744,7 @@
   * Expose new attribute to Liquid via `page`: `page.path` (#951)
   * Accept multiple config files from command line (#945)
   * Add page variable to liquid custom tags and blocks (#413)
-  * Add paginator.previous_page_path and paginator.next_page_path (#942)
+  * Add `paginator.previous_page_path` and `paginator.next_page_path` (#942)
   * Backwards compatibility for 'auto' (#821, #934)
   * Added date_to_rfc822 used on RSS feeds (#892)
   * Upgrade version of pygments.rb to 0.4.2 (#927)
@@ -778,7 +778,7 @@
   * Paginate in subdirectories properly (#1016)
   * Ensure post and page URLs have a leading slash (#992)
   * Catch all exceptions, not just StandardError descendents (#1007)
-  * Bullet-proof limit_posts option (#1004)
+  * Bullet-proof `limit_posts` option (#1004)
   * Read in YAML as UTF-8 to accept non-ASCII chars (#836)
   * Fix the CLI option `--plugins` to actually accept dirs and files (#993)
   * Allow 'excerpt' in YAML Front-Matter to override the extracted excerpt (#946)
@@ -790,10 +790,10 @@
   * Force usage of older directory_watcher gem as 1.5 is broken (#883)
   * Ensure all Post categories are downcase (#842, #872)
   * Force encoding of the rdiscount TOC to UTF8 to avoid conversion errors (#555)
-  * Patch for multibyte URI problem with jekyll serve (#723)
+  * Patch for multibyte URI problem with `jekyll serve` (#723)
   * Order plugin execution by priority (#864)
   * Fixed Page#dir and Page#url for edge cases (#536)
-  * Fix broken post_url with posts with a time in their YAML Front-Matter (#831)
+  * Fix broken `post_url` with posts with a time in their YAML Front-Matter (#831)
   * Look for plugins under the source directory (#654)
   * Tumblr Migrator: finds `_posts` dir correctly, fixes truncation of long
       post names (#775)
@@ -837,9 +837,9 @@
 
 ### Minor Enhancements
   * Add ability to explicitly specify included files (#261)
-  * Add --default-mimetype option (#279)
+  * Add `--default-mimetype` option (#279)
   * Allow setting of RedCloth options (#284)
-  * Add post_url Liquid tag for internal post linking (#369)
+  * Add `post_url` Liquid tag for internal post linking (#369)
   * Allow multiple plugin dirs to be specified (#438)
   * Inline TOC token support for RDiscount (#333)
   * Add the option to specify the paginated url format (#342)
@@ -849,9 +849,9 @@
   * Bug Fixes
   * Allow some special characters in highlight names
   * URL escape category names in URL generation (#360)
-  * Fix error with limit_posts (#442)
+  * Fix error with `limit_posts` (#442)
   * Properly select dotfile during directory scan (#363, #431, #377)
-  * Allow setting of Kramdown smart_quotes (#482)
+  * Allow setting of Kramdown `smart_quotes` (#482)
   * Ensure front-matter is at start of file (#562)
 
 ## 0.11.2 / 2011-12-27
@@ -886,7 +886,7 @@
 
 ## 0.10.0 / 2010-12-16
   * Bug Fixes
-  * Add --no-server option.
+  * Add `--no-server` option.
 
 ## 0.9.0 / 2010-12-15
 
@@ -901,9 +901,9 @@
 
 ### Minor Enhancements
   * Add wordpress.com importer (#207)
-  * Add --limit-posts cli option (#212)
-  * Add uri_escape filter (#234)
-  * Add --base-url cli option (#235)
+  * Add `--limit-posts` cli option (#212)
+  * Add `uri_escape` filter (#234)
+  * Add `--base-url` cli option (#235)
   * Improve MT migrator (#238)
   * Add kramdown support (#239)
   * Bug Fixes
@@ -924,7 +924,7 @@
   * Fix Rakefile 'release' task (tag pushing was missing origin)
   * Ensure that RedCloth is loaded when textilize filter is used (#183)
   * Expand source, destination, and plugin paths (#180)
-  * Fix page.url to include full relative path (#181)
+  * Fix `page.url` to include full relative path (#181)
 
 ## 0.6.1 / 2010-06-24
   * Bug Fixes
@@ -942,9 +942,9 @@
 ### Minor Enhancements
   * Inclusion/exclusion of future dated posts (#59)
   * Generation for a specific time (#59)
-  * Allocate site.time on render not per site_payload invocation (#59)
+  * Allocate `site.time` on render not per site_payload invocation (#59)
   * Pages now present in the site payload and can be used through the
-      site.pages and site.html_pages variables
+      `site.pages` and `site.html_pages` variables
   * Generate phase added to site#process and pagination is now a generator
   * Switch to RakeGem for build/test process
   * Only regenerate static files when they have changed (#142)
@@ -956,7 +956,7 @@
   * Fix extension munging when pretty permalinks are enabled (#64)
   * Stop sorting categories (#33)
   * Preserve generated attributes over front matter (#119)
-  * Fix source directory binding using Dir.pwd (#75)
+  * Fix source directory binding using `Dir.pwd` (#75)
 
 ## 0.5.7 / 2010-01-12
 
@@ -1072,7 +1072,7 @@
 
 ### Minor Enhancements
   * Type importer (@codeslinger)
-  * site.topics accessor (@baz)
+  * `site.topics` accessor (@baz)
   * Add `array_to_sentence_string` filter (@mchung)
   * Add a converter for textpattern (@PerfectlyNormal)
   * Add a working Mephisto / MySQL converter (@ivey)
@@ -1089,7 +1089,7 @@
 ## 0.3.0 / 2008-12-24
 
 ### Major Enhancements
-  * Added --server option to start a simple WEBrick server on destination
+  * Added `--server` option to start a simple WEBrick server on destination
       directory (@johnreilly and @mchung)
 
 ### Minor Enhancements
@@ -1108,14 +1108,14 @@
 ## 0.2.1 / 2008-12-15
   * Major Changes
   * Use Maruku (pure Ruby) for Markdown by default (@mreid)
-  * Allow use of RDiscount with --rdiscount flag
+  * Allow use of RDiscount with `--rdiscount` flag
 
 ### Minor Enhancements
   * Don't load directory_watcher unless it's needed (@pjhyett)
 
 ## 0.2.0 / 2008-12-14
   * Major Changes
-  * related_posts is now found in site.related_posts
+  * related_posts is now found in `site.related_posts`
 
 ## 0.1.6 / 2008-12-13
   * Major Features
@@ -1124,8 +1124,8 @@
 ## 0.1.5 / 2008-12-12
 
 ### Major Enhancements
-  * Code highlighting with Pygments if --pygments is specified
-  * Disable true LSI by default, enable with --lsi
+  * Code highlighting with Pygments if `--pygments` is specified
+  * Disable true LSI by default, enable with `--lsi`
 
 ### Minor Enhancements
   * Output informative message if RDiscount is not available (@JackDanger)
@@ -1144,7 +1144,7 @@
   * Code hilighting (@vanpelt)
   * Autobuild
   * Bug Fixes
-  * Accept both \r\n and \n in YAML header (@vanpelt)
+  * Accept both `\r\n` and `\n` in YAML header (@vanpelt)
 
 ## 0.1.2 / 2008-11-22
   * Major Features
