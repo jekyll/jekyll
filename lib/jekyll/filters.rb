@@ -213,12 +213,12 @@ module Jekyll
         end
 
         input.sort { |a, b|
-          if !a[key].nil? && b[key].nil?
+          if !item_property(a, key).nil? && item_property(b, key).nil?
             - order
-          elsif a[key].nil? && !b[key].nil?
+          elsif item_property(a, key).nil? && !item_property(b, key).nil?
             + order
           else
-            a[key] <=> b[key]
+            item_property(a, key) <=> item_property(b, key)
           end
         }
       end
