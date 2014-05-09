@@ -12,6 +12,13 @@ def require_all(path)
   end
 end
 
+def require_if_exists(pkg)
+  begin
+    require pkg
+  rescue LoadError
+  end
+end
+
 # rubygems
 require 'rubygems'
 
@@ -70,8 +77,8 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 # plugins
-require 'jekyll-coffeescript'
-require 'jekyll-sass-converter'
+require_if_exists 'jekyll-coffeescript'
+require_if_exists 'jekyll-sass-converter'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
