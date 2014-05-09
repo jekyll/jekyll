@@ -24,6 +24,7 @@
   * Update docs to reflect new `baseurl` default (#2341)
   * Add links to headers who have an ID. (#2342)
   * Use symbol instead of HTML number in `upgrading.md` (#2351)
+  * Fix link to frontmatter defaults docs (#2353)
 
 ## 2.0.2 / 2014-05-07
 
