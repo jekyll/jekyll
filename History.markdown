@@ -825,6 +825,7 @@
   * Switch to Simplecov for coverage report (#765)
 
 ## 0.12.1 / 2013-02-19
+
 ### Minor Enhancements
   * Update Kramdown version to 0.14.1 (#744)
   * Test Enhancements
@@ -833,6 +834,7 @@
   * Update Redcarpet version to 2.2.2 (#744)
 
 ## 0.12.0 / 2012-12-22
+
 ### Minor Enhancements
   * Add ability to explicitly specify included files (#261)
   * Add --default-mimetype option (#279)
@@ -862,6 +864,7 @@
   * Update dependencies
 
 ## 0.11.0 / 2011-07-10
+
 ### Major Enhancements
   * Add command line importer functionality (#253)
   * Add Redcarpet Markdown support (#318)
@@ -886,6 +889,7 @@
   * Add --no-server option.
 
 ## 0.9.0 / 2010-12-15
+
 ### Minor Enhancements
   * Use OptionParser's `[no-]` functionality for better boolean parsing.
   * Add Drupal migrator (#245)
@@ -894,6 +898,7 @@
   * Add Marley migrator (#28)
 
 ## 0.8.0 / 2010-11-22
+
 ### Minor Enhancements
   * Add wordpress.com importer (#207)
   * Add --limit-posts cli option (#212)
@@ -907,6 +912,7 @@
   * Prevent `_includes` dir from being a symlink
 
 ## 0.7.0 / 2010-08-24
+
 ### Minor Enhancements
   * Add support for rdiscount extensions (#173)
   * Bug Fixes
@@ -925,6 +931,7 @@
   * Fix Markdown Pygments prefix and suffix (#178)
 
 ## 0.6.0 / 2010-06-23
+
 ### Major Enhancements
   * Proper plugin system (#19, #100)
   * Add safe mode so unsafe converters/generators can be added
@@ -952,6 +959,7 @@
   * Fix source directory binding using Dir.pwd (#75)
 
 ## 0.5.7 / 2010-01-12
+
 ### Minor Enhancements
   * Allow overriding of post date in the front matter (#62, #38)
   * Bug Fixes
@@ -1017,6 +1025,7 @@
   * Added Date#xmlschema for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06
+
 ### Major Enhancements
   * Next/previous posts in site payload (@pantulis, @tomo)
   * Permalink templating system
@@ -1031,6 +1040,7 @@
   * CGI escaped post titles (@Chrononaut)
 
 ## 0.5.0 / 2009-04-07
+
 ### Minor Enhancements
   * Ability to set post categories via YAML (@qrush)
   * Ability to set prevent a post from publishing via YAML (@qrush)
@@ -1049,12 +1059,14 @@
   * Add Cucumber acceptance test suite (@qrush, @technicalpickles)
 
 ## 0.4.1
+
 ### Minor Enhancements
   * Changed date format on wordpress converter (zeropadding) (@dysinger)
   * Bug Fixes
   * Add jekyll binary as executable to gemspec (@dysinger)
 
 ## 0.4.0 / 2009-02-03
+
 ### Major Enhancements
   * Switch to Jeweler for packaging tasks
 
@@ -1075,6 +1087,7 @@
   * Fix site payload available to files (@matrix9180)
 
 ## 0.3.0 / 2008-12-24
+
 ### Major Enhancements
   * Added --server option to start a simple WEBrick server on destination
       directory (@johnreilly and @mchung)
@@ -1109,6 +1122,7 @@
   * Include files in `_includes` with `{% include x.textile %}`
 
 ## 0.1.5 / 2008-12-12
+
 ### Major Enhancements
   * Code highlighting with Pygments if --pygments is specified
   * Disable true LSI by default, enable with --lsi
