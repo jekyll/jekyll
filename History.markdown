@@ -183,7 +183,7 @@
   * Extract plugin management into its own class (#2197)
   * Add missing tests for `Command` (#2216)
   * Update `rr` link in CONTRIBUTING doc (#2247)
-  * Streamline cucumber execution of `jekyll` subcommands (#2258)
+  * Streamline Cucumber execution of `jekyll` subcommands (#2258)
   * Refactor `Commands::Serve`. (#2269)
   * Refactor `highlight` tag (#2154)
   * Update `Util` hash functions with latest from Rails (#2273)
@@ -415,7 +415,7 @@
   * Refactor Site#render (#1638)
   * Remove duplication in command line options (#1637)
   * Add tests for all the coderay options (#1543)
-  * Improve some of the cucumber test code (#1493)
+  * Improve some of the Cucumber test code (#1493)
   * Improve comparisons of timestamps by ignoring the seconds (#1582)
 
 ### Site Enhancements
@@ -585,7 +585,7 @@
   * Latest posts first in non-LSI `related_posts` (#1271)
 
 ### Development Fixes
-  * Merge the theme and layout cucumber steps into one step (#1151)
+  * Merge the theme and layout Cucumber steps into one step (#1151)
   * Restrict activesupport dependency to pre-4.0.0 to maintain compatibility with `<= 1.9.2`
   * Include/exclude deprecation handling simplification (#1284)
   * Convert README to Markdown. (#1267)
@@ -633,7 +633,7 @@
 
 ### Minor Enhancements
   * Add support to gist tag for private gists. (#1189)
-  * Fail loudly when MaRuKu errors out (#1190)
+  * Fail loudly when Maruku errors out (#1190)
   * Move the building of related posts into their own class (#1057)
   * Removed trailing spaces in several places throughout the code (#1116)
   * Add a `--force` option to `jekyll new` (#1115)
@@ -722,8 +722,8 @@
 ## 1.0.0 / 2013-05-06
 
 ### Major Enhancements
-  * Add `jekyll new` subcommand: generate a jekyll scaffold (#764)
-  * Refactored jekyll commands into subcommands: build, serve, and migrate. (#690)
+  * Add `jekyll new` subcommand: generate a Jekyll scaffold (#764)
+  * Refactored Jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
   * Added ability to render drafts in `_drafts` folder via command line (#833)
   * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
@@ -763,7 +763,7 @@
   * Relaxed Kramdown version to 0.14 (#808)
   * Aliased `jekyll server` to `jekyll serve`. (#792)
   * Updated gem versions for Kramdown, Rake, Shoulda, Cucumber, and RedCarpet. (#744)
-  * Refactored jekyll subcommands into Jekyll::Commands submodule, which now contains them (#768)
+  * Refactored Jekyll subcommands into Jekyll::Commands submodule, which now contains them (#768)
   * Rescue from import errors in Wordpress.com migrator (#671)
   * Massively accelerate LSI performance (#664)
   * Truncate post slugs when importing from Tumblr (#496)
@@ -815,7 +815,7 @@
 ### Development Fixes
   * Exclude Cucumber 1.2.4, which causes tests to fail in 1.9.2 (#938)
   * Added "features:html" rake task for debugging purposes, cleaned up
-      cucumber profiles (#832)
+      Cucumber profiles (#832)
   * Explicitly require HTTPS rubygems source in Gemfile (#826)
   * Changed Ruby version for development to 1.9.3-p374 from p362 (#801)
   * Including a link to the GitHub Ruby style guide in CONTRIBUTING.md (#806)
@@ -967,7 +967,7 @@
   * Empty tags causes error in read_posts (#84)
   * Fix pagination to adhere to read/render/write paradigm
   * Test Enhancement
-  * cucumber features no longer use site.posts.first where a better
+  * Cucumber features no longer use site.posts.first where a better
       alternative is available
 
 ## 0.5.6 / 2010-01-08
@@ -1063,7 +1063,7 @@
 ### Minor Enhancements
   * Changed date format on wordpress converter (zeropadding) (@dysinger)
   * Bug Fixes
-  * Add jekyll binary as executable to gemspec (@dysinger)
+  * Add Jekyll binary as executable to gemspec (@dysinger)
 
 ## 0.4.0 / 2009-02-03
 
