@@ -30,4 +30,6 @@ matrix:
   - rvm: 2.1
     gemfile: site/Gemfile
     env: SITE=true
+  allow_failures:
+  - env: SITE=true
   fast_finish: true
