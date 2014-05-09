@@ -227,17 +227,6 @@ namespace :site do
       puts "Created #{filename}"
     end
   end
-
-  desc 'Test the site with Proofer'
-  task :test do
-    require 'html/proofer'
-    Dir.chdir('site') do
-      puts 'Building the site...'
-      sh '../bin/jekyll build --trace'
-      puts 'Proofing the site...'
-      HTML::Proofer.new('./_site').run
-    end
-  end
 end
 
 #############################################################################
