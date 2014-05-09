@@ -198,7 +198,7 @@ module Jekyll
       base = File.join(source, dir)
       return unless File.directory?(base) && (!safe || !File.symlink?(base))
 
-      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
+      entries = Dir.chdir(base) { Dir['*.{yaml,yml,json}'] }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
 
       entries.each do |entry|
