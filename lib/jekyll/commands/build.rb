@@ -25,7 +25,7 @@ module Jekyll
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
 
-          Jekyll.logger.log_level = Jekyll::Stevenson::ERROR if options['quiet']
+          Jekyll.logger.log_level = :error if options['quiet']
 
           build(site, options)
           watch(site, options) if options['watch']
@@ -67,20 +67,26 @@ module Jekyll
             ignored = nil
           end
 
-          Jekyll.logger.info "Auto-regeneration:", "enabled"
-
           listener = Listen.to(
-            source, 
-            :ignore => ignored, 
+            source,
+            :ignore => ignored,
             :force_polling => options['force_polling']
           ) do |modified, added, removed|
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
             n = modified.length + added.length + removed.length
             print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
-            process_site(site)
-            puts  "...done."
+            begin
+              process_site(site)
+              puts  "...done."
+            rescue => e
+              puts "...error:"
+              Jekyll.logger.warn "Error:", e.message
+              Jekyll.logger.warn "Error:", "Run jekyll build --trace for more information."
+            end
           end
           listener.start
+
+          Jekyll.logger.info "Auto-regeneration:", "enabled"
 
           unless options['serving']
             trap("INT") do

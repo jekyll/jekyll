@@ -325,6 +325,7 @@ module Jekyll
           "categories"   => post_attr_hash('categories'),
           "tags"         => post_attr_hash('tags'),
           "collections"  => collections,
+          "documents"    => documents,
           "data"         => site_data
         }))
       }
@@ -364,7 +365,7 @@ module Jekyll
     #
     # Returns array of instances of subclasses of parameter
     def instantiate_subclasses(klass)
-      klass.subclasses.select do |c|
+      klass.descendants.select do |c|
         !safe || c.safe
       end.sort.map do |c|
         c.new(config)
@@ -395,28 +396,26 @@ module Jekyll
 
     def relative_permalinks_deprecation_method
       if config['relative_permalinks'] && has_relative_page?
-        $stderr.puts # Places newline after "Generating..."
         Jekyll.logger.warn "Deprecation:", "Starting in 2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
                                             " directory. Check http://jekyllrb.com/docs/upgrading/"+
                                             " for more info."
-        $stderr.print Jekyll.logger.formatted_topic("") + "..." # for "done."
       end
+    end
+
+    def docs_to_write
+      documents.select(&:write?)
     end
 
     def documents
       collections.reduce(Set.new) do |docs, (_, collection)|
-        if collection.write?
-          docs.merge(collection.docs)
-        else
-          docs
-        end
-      end
+        docs.merge(collection.docs)
+      end.to_a
     end
 
     def each_site_file
-      %w(posts pages static_files documents).each do |type|
+      %w(posts pages static_files docs_to_write).each do |type|
         send(type).each do |item|
           yield item
         end
@@ -434,7 +433,7 @@ module Jekyll
     end
 
     def has_yaml_header?(file)
-      !!(File.open(file, "rb").read(5) =~ /\A---\r?\n/)
+      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
     def limit_posts!

@@ -185,9 +185,43 @@ module Jekyll
     # value - desired value
     #
     # Returns the filtered array of objects
-    def where(input, key, value)
+    def where(input, property, value)
       return input unless input.is_a?(Array)
-      input.select { |object| object[key] == value }
+      input.select { |object| item_property(object, property) == value }
+    end
+
+    # Sort an array of objects
+    #
+    # input - the object array
+    # key - key within each object to filter by
+    # nils ('first' | 'last') - nils appear before or after non-nil values
+    #
+    # Returns the filtered array of objects
+    def sort(input, key = nil, nils = "first")
+      if key.nil?
+        input.sort
+      else
+        case
+        when nils == "first"
+          order = - 1
+        when nils == "last"
+          order = + 1
+        else
+          Jekyll.logger.error "Invalid nils order:",
+            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
+          exit(1)
+        end
+
+        input.sort { |a, b|
+          if !a[key].nil? && b[key].nil?
+            - order
+          elsif a[key].nil? && !b[key].nil?
+            + order
+          else
+            a[key] <=> b[key]
+          end
+        }
+      end
     end
 
     private
@@ -196,7 +230,9 @@ module Jekyll
       when Time
         input
       when String
-        Time.parse(input)
+        Time.parse(input) rescue Time.at(input.to_i)
+      when Number
+        Time.at(input)
       else
         Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)

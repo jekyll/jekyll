@@ -18,7 +18,7 @@ module Jekyll
 
     # Returns source file path.
     def path
-      File.join(@base, @dir, @name)
+      File.join(*[@base, @dir, @name].compact)
     end
 
     # Returns the source file path relative to the site source
@@ -32,7 +32,7 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      File.join(dest, @dir, @name)
+      File.join(*[dest, @dir, @name].compact)
     end
 
     # Returns last modification time for this file.

@@ -194,6 +194,7 @@ module Jekyll
     def to_liquid
       if data.is_a?(Hash)
         Utils.deep_merge_hashes data, {
+          "output"        => output,
           "content"       => content,
           "path"          => path,
           "relative_path" => relative_path,
@@ -226,6 +227,15 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(anotherDocument)
       path <=> anotherDocument.path
+    end
+
+    # Determine whether this document should be written.
+    # Based on the Collection to which it belongs.
+    #
+    # True if the document has a collection and if that collection's #write?
+    #   method returns true, otherwise false.
+    def write?
+      collection && collection.write?
     end
 
   end

@@ -9,7 +9,6 @@
 html, body { height: 100%; }
 
 body {
-  background-color: #FFF;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -231,6 +230,8 @@ a:visited { color: #205caa; }
   border: 1px solid #d5d5e9;
   background-color: #eef;
   padding: 8px 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
   font-size: 15px;
 }
@@ -247,6 +248,8 @@ a:visited { color: #205caa; }
   border: 1px solid #000;
   background-color: #333;
   color: #FFF;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 
@@ -351,6 +354,8 @@ a:visited { color: #205caa; }
     z-index: 10;
     top: 14px; right: 8px;
     background-color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
     border-radius: 5px;
     border: 1px solid #e8e8e8;
   }

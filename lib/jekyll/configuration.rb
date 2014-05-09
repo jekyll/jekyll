@@ -27,13 +27,12 @@ module Jekyll
       'future'        => true,           # remove and make true just default
       'unpublished'   => false,
 
-      'relative_permalinks' => true,     # backwards-compatibility with < 1.0
-                                         # will be set to false once 2.0 hits
+      'relative_permalinks' => false,
 
       'markdown'      => 'kramdown',
       'highlighter'   => 'pygments',
       'permalink'     => 'date',
-      'baseurl'       => '/',
+      'baseurl'       => '',
       'include'       => ['.htaccess'],
       'exclude'       => [],
       'paginate_path' => '/page:num',

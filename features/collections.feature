@@ -70,3 +70,39 @@ Feature: Collections
     When I run jekyll build
     Then the _site directory should exist
     And I should see "Collections: _methods/configuration.md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
+
+  Scenario: All the documents
+    Given I have an "index.html" page that contains "All documents: {% for doc in site.documents %}{{ doc.relative_path }} {% endfor %}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+    - methods
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "All documents: _methods/configuration.md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
+
+  Scenario: Documents have an output attribute, which is the converted HTML
+    Given I have an "index.html" page that contains "First document's output: {{ site.documents.first.output }}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+    - methods
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "First document's output: <p>Use <code>Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
+
+  Scenario: Filter documents by where
+    Given I have an "index.html" page that contains "{% assign items = site.methods | where: 'whatever','foo.bar' %}Item count: {{ items.size }}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+    - methods
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Item count: 1" in "_site/index.html"

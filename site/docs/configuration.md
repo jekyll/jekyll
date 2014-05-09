@@ -130,7 +130,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         </p>
       </td>
       <td class='align-center'>
-        <p>see <a href="#frontmatter_defaults" title="details">below</a></p>
+        <p>see <a href="#frontmatter-defaults" title="details">below</a></p>
       </td>
     </tr>
   </tbody>
@@ -278,21 +278,13 @@ before your site is served.
 
 ## Frontmatter defaults
 
-<div class="note unreleased">
-  <h5>The front-matter defaults feature is currently unreleased.</h5>
-  <p>
-  In order to use this feature, <a href="/docs/installation/#pre-releases">
-  install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 You can set default values for your [YAML frontmatter](../frontmatter/) variables
 in your configuration. This way, you can for example set default layouts or define
 defaults for your custom variables. Of course, any variable actually specified in
 the front matter overrides the defaults.
 
 All defaults go under the `defaults` key, which holds a list of scope-values combinations ("default sets").
-The `scope` key defines for which files the defaults apply, limiting them by their `path` and
+The `scope` key defines for which files the defaults apply, limiting them by their source file `path` and
 optionally by their `type` (`page`, `post` or `draft`). The `values` key holds the actual list of defaults.
 
 For example:
@@ -370,7 +362,7 @@ watch:       false    # deprecated
 server:      false    # deprecated
 host:        0.0.0.0
 port:        4000
-baseurl:     /
+baseurl:     ""
 url:         http://localhost:4000
 lsi:         false
 
@@ -407,15 +399,6 @@ kramdown:
 redcloth:
   hard_breaks: true
 {% endhighlight %}
-
-<div class="note unreleased">
-  <h5>Kramdown as the default is currently unreleased.</h5>
-  <p>
-    In the latest development releases, we've deprecated Maruku and will default to
-    Kramdown instead of Maruku. All versions below this will use Maruku as the
-    default.
-  </p>
-</div>
 
 ## Markdown Options
 
@@ -454,3 +437,30 @@ For example, in your `_config.yml`:
 
     kramdown:
       input: GFM
+
+### Custom Markdown Processors
+
+If you're interested in creating a custom markdown processor, you're in luck! Create a new class in the `Jekyll::Converters::Markdown` namespace:
+
+{% highlight ruby %}
+class Jekyll::Converters::Markdown::MyCustomProcessor
+  def initialize(config)
+    require 'funky_markdown'
+    @config = config
+  rescue LoadError
+    STDERR.puts 'You are missing a library required for Markdown. Please run:'
+    STDERR.puts '  $ [sudo] gem install funky_markdown'
+    raise FatalException.new("Missing dependency: funky_markdown")
+  end
+
+  def convert(content)
+    ::FunkyMarkdown.new(content).convert
+  end
+end
+{% endhighlight %}
+
+Once you've created your class and have it properly setup either as a plugin in the `_plugins` folder or as a gem, specify it in your `_config.yml`:
+
+{% highlight yaml %}
+markdown: MyCustomProcessor
+{% endhighlight %}

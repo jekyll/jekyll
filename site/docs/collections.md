@@ -6,14 +6,6 @@ next_section: datafiles
 permalink: /docs/collections/
 ---
 
-<div class="note unreleased">
-  <h5>Collections support is currently unreleased.</h5>
-  <p>
-  In order to use this feature, <a href="/docs/installation/#pre-releases">
-  install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 <div class="note warning">
   <h5>Collections support is unstable and may change</h5>
   <p>
@@ -155,10 +147,20 @@ In addition to any YAML front-matter provided in the document's corresponding fi
       </td>
       <td>
         <p>
-          The content of the document. If no YAML front-matter is provided,
+          The (unrendered) content of the document. If no YAML front-matter is provided,
           this is the entirety of the file contents. If YAML front-matter
           is used, then this is all the contents of the file after the terminating
           `---` of the front-matter.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>output</code></p>
+      </td>
+      <td>
+        <p>
+          The rendered output of the document, based on the <code>content</code>.
         </p>
       </td>
     </tr>

@@ -2,7 +2,7 @@
 
   <div class="wrap">
 
-    <a class="site-title" href="/">{{ site.name }}</a>
+    <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -17,8 +17,9 @@
         </svg>
       </a>
       <div class="trigger">
-        <a class="page-link" href="/about">About</a>
-        <a class="page-link" href="/projects">Projects</a>
+        {% for page in site.pages %}
+          <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+        {% endfor %}
       </div>
     </nav>
 

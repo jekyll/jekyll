@@ -81,6 +81,32 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Where</strong></p>
+        <p>Select all the objects in an array where the key has the given value.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.members | where:"graduation_year","2014" }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Group By</strong></p>
+        <p>Group an array's items by a given property.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.members | group_by:"graduation_year" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">[{"name"=>"2013", "items"=>[...]},
+{"name"=>"2014", "items"=>[...]}]</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>XML Escape</strong></p>
         <p>Escape some text for use in XML.</p>
       </td>
@@ -181,6 +207,23 @@ common tasks easier.
       <td class="align-center">
         <p>
          <code class="filter">{% raw %}{{ site.data.projects | jsonify }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Sort</strong></p>
+        <p>Sort an array. Optional arguments for hashes: 1.&nbsp;property name 2.&nbsp;nils order (<em>first</em> or <em>last</em>).</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ page.tags | sort }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.posts | sort: 'author' }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.pages | sort: 'title', 'last' }}{% endraw %}</code>
         </p>
       </td>
     </tr>
@@ -316,24 +359,7 @@ You can also use this tag to create a link to a post in Markdown as follows:
 
 ### Gist
 
-Use the `gist` tag to easily embed a GitHub Gist onto your site:
-
-{% highlight text %}
-{% raw %}
-{% gist 5555251 %}
-{% endraw %}
-{% endhighlight %}
-
-You may also optionally specify the filename in the gist to display:
-
-{% highlight text %}
-{% raw %}
-{% gist 5555251 result.md %}
-{% endraw %}
-{% endhighlight %}
-
-The `gist` tag also works with private gists, which require the gist owner's
-github username:
+Use the `gist` tag to easily embed a GitHub Gist onto your site. This works with public or secret gists:
 
 {% highlight text %}
 {% raw %}
@@ -341,4 +367,10 @@ github username:
 {% endraw %}
 {% endhighlight %}
 
-The private gist syntax also supports filenames.
+You may also optionally specify the filename in the gist to display:
+
+{% highlight text %}
+{% raw %}
+{% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
+{% endraw %}
+{% endhighlight %}

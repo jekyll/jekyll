@@ -166,9 +166,9 @@ class TestConfiguration < Test::Unit::TestCase
     end
 
     should "successfully load a TOML file" do
-      Jekyll.logger.log_level = Jekyll::Stevenson::WARN
+      Jekyll.logger.log_level = :warn
       assert_equal Jekyll::Configuration::DEFAULTS.merge({ "baseurl" => "/you-beautiful-blog-you", "title" => "My magnificent site, wut" }), Jekyll.configuration({ "config" => [@paths[:toml]] })
-      Jekyll.logger.log_level = Jekyll::Stevenson::INFO
+      Jekyll.logger.log_level = :info
     end
 
     should "load multiple config files" do

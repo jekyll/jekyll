@@ -32,7 +32,7 @@ class TestRedcarpet < Test::Unit::TestCase
       end
 
       should "render fenced code blocks with syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
+        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
           <<-EOS
 ```ruby
 puts "Hello world"
@@ -48,7 +48,7 @@ puts "Hello world"
       end
 
       should "render fenced code blocks with syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">\"Hello world\"</span>\n</code></pre></div>", @markdown.convert(
+        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">\"Hello world\"</span>\n</code></pre></div>", @markdown.convert(
           <<-EOS
 ```ruby
 puts "Hello world"
@@ -64,7 +64,7 @@ puts "Hello world"
       end
 
       should "render fenced code blocks without syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\">puts &quot;Hello world&quot;\n</code></pre></div>", @markdown.convert(
+        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" data-lang=\"ruby\">puts &quot;Hello world&quot;\n</code></pre></div>", @markdown.convert(
           <<-EOS
 ```ruby
 puts "Hello world"

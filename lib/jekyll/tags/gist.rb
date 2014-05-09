@@ -1,8 +1,8 @@
 # Gist Liquid Tag
 #
 # Example:
-#    {% gist 1234567 %}
-#    {% gist 1234567 file.rb %}
+#    {% gist username/1234567 %}
+#    {% gist username/1234567 file.rb %}
 
 module Jekyll
   class GistTag < Liquid::Tag
@@ -18,8 +18,7 @@ Syntax error in tag 'gist' while parsing the following markup:
   #{@markup}
 
 Valid syntax:
-  for public gists:  {% gist 1234567 %}
-  for private gists: {% gist user/1234567 %}
+  for all gists: {% gist user/1234567 %}
 eos
       end
     end
