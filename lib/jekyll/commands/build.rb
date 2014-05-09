@@ -67,8 +67,6 @@ module Jekyll
             ignored = nil
           end
 
-          Jekyll.logger.info "Auto-regeneration:", "enabled"
-
           listener = Listen.to(
             source,
             :ignore => ignored,
@@ -77,10 +75,18 @@ module Jekyll
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
             n = modified.length + added.length + removed.length
             print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
-            process_site(site)
-            puts  "...done."
+            begin
+              process_site(site)
+              puts  "...done."
+            rescue => e
+              puts "...error:"
+              puts e.message
+              puts "Run jekyll build --trace for more information."
+            end
           end
           listener.start
+
+          Jekyll.logger.info "Auto-regeneration:", "enabled"
 
           unless options['serving']
             trap("INT") do
