@@ -29,5 +29,5 @@ matrix:
   include:
   - rvm: 2.1
     gemfile: site/Gemfile
-    env: NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+    env: SITE
   fast_finish: true
