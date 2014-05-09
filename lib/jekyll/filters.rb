@@ -212,16 +212,16 @@ module Jekyll
           exit(1)
         end
 
-        input.sort { |a, b|
-          a_p = item_property(a, property)
-          b_p = item_property(b, property)
+        input.sort { |apple, orange|
+          apple_property = item_property(apple, property)
+          orange_property = item_property(orange, property)
 
-          if !a_p.nil? && b_p.nil?
+          if !apple_property.nil? && orange_property.nil?
             - order
-          elsif a_p.nil? && !b_p.nil?
+          elsif apple_property.nil? && !orange_property.nil?
             + order
           else
-            a_p <=> b_p
+            apple_property <=> orange_property
           end
         }
       end
