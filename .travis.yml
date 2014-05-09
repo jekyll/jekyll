@@ -7,7 +7,7 @@ rvm:
 - 2.1.1
 - 2.0.0
 - 1.9.3
-script: script/cibuild
+script: if [[ "$SITE" == true ]]; then script/proofer; else script/cibuild; fi
 after_script:
 - script/rebund upload
 notifications:
@@ -29,5 +29,5 @@ matrix:
   include:
   - rvm: 2.1
     gemfile: site/Gemfile
-    env: SITE
+    env: SITE=true
   fast_finish: true
