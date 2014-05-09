@@ -23,6 +23,7 @@
   * Add missing "as" to assets docs page (#2337)
   * Update docs to reflect new `baseurl` default (#2341)
   * Add links to headers who have an ID. (#2342)
+  * Use symbol instead of HTML number in `upgrading.md` (#2351)
 
 ## 2.0.2 / 2014-05-07
 
