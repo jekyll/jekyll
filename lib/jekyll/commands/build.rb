@@ -80,8 +80,8 @@ module Jekyll
               puts  "...done."
             rescue => e
               puts "...error:"
-              puts e.message
-              puts "Run jekyll build --trace for more information."
+              Jekyll.logger.warn "Error:", e.message
+              Jekyll.logger.warn "Error:", "Run jekyll build --trace for more information."
             end
           end
           listener.start
