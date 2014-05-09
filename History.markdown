@@ -6,6 +6,14 @@
 
 ### Bug Fixes
 
+### Development Fixes
+
+### Site Enhancements
+
+## 2.0.3 / 2014-05-08
+
+### Bug Fixes
+
   * Properly prefix links in site template with URL or baseurl depending upon
     need. (#2319)
   * Update gist tag comments and error message to require username (#2326)
@@ -17,8 +25,6 @@
   * `Jekyll::Filters#time` now accepts UNIX timestamps in string or number form (#2339)
   * Use `item_property` for `where` filter so it doesn't break on collections (#2359)
   * Rescue errors thrown so `--watch` doesn't fail (#2364)
-
-### Development Fixes
 
 ### Site Enhancements
 
