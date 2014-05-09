@@ -378,6 +378,16 @@ class TestSite < Test::Unit::TestCase
         assert_equal site.site_payload['site']['data']['languages'], file_content
       end
 
+      should 'auto load json files' do
+        site = Site.new(Jekyll.configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.json'))
+
+        assert_equal site.data['members'], file_content
+        assert_equal site.site_payload['site']['data']['members'], file_content
+      end
+
       should "load symlink files in unsafe mode" do
         site = Site.new(Jekyll.configuration.merge({'safe' => false}))
         site.process
