@@ -31,6 +31,7 @@
   docs:
   - github-pages
   - deployment-methods
+  - continuous-integration
 
 - title: Miscellaneous
   docs:
