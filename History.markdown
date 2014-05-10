@@ -3,9 +3,12 @@
 ### Major Enhancements
 
 ### Minor Enhancements
+
   * Add support for JSON files in the `_data` directory (#2369)
 
 ### Bug Fixes
+
+  * Liquid `sort` filter should sort even if one of the values is `nil` (#2345)
 
 ### Development Fixes
 
