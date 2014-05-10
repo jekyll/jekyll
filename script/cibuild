@@ -10,5 +10,3 @@ if [ "$SITE" ]; then
 else
   bundle exec rake
 fi
-
-
