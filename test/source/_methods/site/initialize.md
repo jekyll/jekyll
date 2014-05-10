@@ -1,5 +1,4 @@
 ---
-title: "Site#initialize"
 ---
 
-Create dat site.
+Page without title.

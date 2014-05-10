@@ -193,12 +193,12 @@ module Jekyll
     # Sort an array of objects
     #
     # input - the object array
-    # key - key within each object to filter by
+    # property - property within each object to filter by
     # nils ('first' | 'last') - nils appear before or after non-nil values
     #
     # Returns the filtered array of objects
-    def sort(input, key = nil, nils = "first")
-      if key.nil?
+    def sort(input, property = nil, nils = "first")
+      if property.nil?
         input.sort
       else
         case
@@ -212,13 +212,16 @@ module Jekyll
           exit(1)
         end
 
-        input.sort { |a, b|
-          if !a[key].nil? && b[key].nil?
+        input.sort { |apple, orange|
+          apple_property = item_property(apple, property)
+          orange_property = item_property(orange, property)
+
+          if !apple_property.nil? && orange_property.nil?
             - order
-          elsif a[key].nil? && !b[key].nil?
+          elsif apple_property.nil? && !orange_property.nil?
             + order
           else
-            a[key] <=> b[key]
+            apple_property <=> orange_property
           end
         }
       end
