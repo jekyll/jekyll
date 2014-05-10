@@ -2,3 +2,4 @@
 
 cd ./site
 bundle exec jekyll build --trace
+htmlproof ./_site
