@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -e
-
-cd ./site
-bundle exec jekyll build --trace
-bundle exec htmlproof ./_site
