@@ -36,6 +36,10 @@ Given /^I do not have a "(.*)" directory$/ do |path|
   File.directory?("#{TEST_DIR}/#{path}")
 end
 
+Given /^I do not have a "(.*)" file$/ do |path|
+  File.exists?("#{TEST_DIR}/#{path}")
+end
+
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
 Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
   File.open(file, 'w') do |f|
@@ -94,6 +98,7 @@ Given /^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$/ do
       dest_folder = ''
       filename = "#{title}.#{ext}"
     when "post"
+      input_hash['date'] = Time.now.strftime('%Y-%m-%d') if input_hash['date'] == 'TODAY'
       parsed_date = Time.xmlschema(input_hash['date']) rescue Time.parse(input_hash['date'])
       dest_folder = '_posts'
       filename = "#{parsed_date.strftime('%Y-%m-%d')}-#{title}.#{ext}"
@@ -194,4 +199,10 @@ end
 
 Then /^I should see today's date in "(.*)"$/ do |file|
   assert_match Regexp.new(Date.today.to_s), file_contents(file)
+end
+
+Then /^a post from today with the name "(.*)" should contain "(.*)"$/ do |file, contents|
+  path = "_posts/#{Time.now.strftime('%Y-%m-%d')}-#{file}"
+  assert File.exist?(path), "The file #{path} does not exist"
+  assert_match Regexp.new(contents, Regexp::MULTILINE), file_contents(path)
 end
