@@ -31,5 +31,5 @@ matrix:
     gemfile: site/Gemfile
     env: SITE=true NOKOGIRI_USE_SYSTEM_LIBRARIES=true
   allow_failures:
-  - env: SITE=true
+  - env: SITE=true NOKOGIRI_USE_SYSTEM_LIBRARIES=true
   fast_finish: true
