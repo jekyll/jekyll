@@ -163,6 +163,7 @@ class TestFilters < Test::Unit::TestCase
         assert_equal ["_foo", "foo", "foo_"], @filter.sort(["foo_", "_foo", "foo"])
         # Cyrillic
         assert_equal ["ВУЗ", "Вуз", "вуз"], @filter.sort(["Вуз", "вуз", "ВУЗ"])
+        assert_equal ["_вуз", "вуз", "вуз_"], @filter.sort(["вуз_", "_вуз", "вуз"])
         # Hebrew
         assert_equal ["אלף", "בית"], @filter.sort(["בית", "אלף"])
       end
