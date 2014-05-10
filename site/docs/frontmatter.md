@@ -36,7 +36,7 @@ relies on.
 </div>
 
 <div class="note">
-  <h5>ProTip™: Front Matter Variables Are Optional</h5>
+  <h5>ProTip™: Front Matter Variables Are Optional under _posts</h5>
   <p>
     If you want to use <a href="../variables/">Liquid tags and variables</a> but
     don’t need anything in your front-matter, just leave it empty! The set of
