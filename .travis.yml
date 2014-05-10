@@ -27,7 +27,7 @@ env:
   - secure: Ym8nx7nbfGYGo47my92M+deJykaiMkdZdb615EO51liv/xy/0aQ919Jpfieugc9d3zVnm+zFGPbpv4YzRpsik6OlVBNa4lP+BnQ27ptf5YcLWD8Hksi7845WFLecXMoaTCoYer/TvYZsIWJb2nSDMH9qbfZhnd1YZKuvUpK0rEU=
 matrix:
   include:
-  - rvm: 2.1
+  - rvm: 2.1.2
     gemfile: site/Gemfile
     env: SITE=true NOKOGIRI_USE_SYSTEM_LIBRARIES=true
   allow_failures:
