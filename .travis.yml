@@ -7,8 +7,7 @@ rvm:
 - 2.1.1
 - 2.0.0
 - 1.9.3
-script:
-- script/cibuild
+script: script/cibuild
 after_script:
 - script/rebund upload
 notifications:
