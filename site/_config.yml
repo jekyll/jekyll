@@ -3,7 +3,6 @@ relative_permalinks: false
 permalink: /news/:year/:month/:day/:title/
 excerpt_separator: noifniof3nioaniof3nioafafinoafnoif
 exclude: [vendor]
-timezone: Europe/London
 
 # custom
 gauges_id: 503c5af6613f5d0f19000027
