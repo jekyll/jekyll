@@ -119,7 +119,7 @@ attributes:
 </div>
 
 <div class="note info">
-  <h5>Pagination does not support tags or categories</h5>
+  <h5>Pagination does not support tags, categories or collections</h5>
   <p>Pagination pages through every post in the <code>posts</code>
   variable regardless of variables defined in the YAML Front Matter of
   each. It does not currently allow paging over groups of posts linked
