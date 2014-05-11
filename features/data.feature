@@ -60,6 +60,18 @@ Feature: Data
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
 
+  Scenario: autoload *.yaml files in subdirectories in _data directory
+    Given I have a _data directory
+    And I have a _data/categories directory
+    And I have a "_data/categories/dairy.yaml" file with content:
+      """
+      name: Dairy Products
+      """
+    And I have an "index.html" page that contains "{{ site.data.categories.dairy.name }}"
+    When I run jekyll build
+    Then the "_site/index.html" file should exist
+    And I should see "Dairy Products" in "_site/index.html"
+
   Scenario: should be backward compatible with site.data in _config.yml
     Given I have a "_config.yml" file with content:
       """

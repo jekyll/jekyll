@@ -388,6 +388,16 @@ class TestSite < Test::Unit::TestCase
         assert_equal site.site_payload['site']['data']['members'], file_content
       end
 
+      should 'auto load yaml files in subdirectory' do
+        site = Site.new(Jekyll.configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'categories', 'dairy.yaml'))
+
+        assert_equal site.data['categories']['dairy'], file_content
+        assert_equal site.site_payload['site']['data']['categories']['dairy'], file_content
+      end
+
       should "load symlink files in unsafe mode" do
         site = Site.new(Jekyll.configuration.merge({'safe' => false}))
         site.process
