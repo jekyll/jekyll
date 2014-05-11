@@ -14,6 +14,7 @@
 ### Development Fixes
 
   * Test Ruby 2.1.2 instead of 2.1.1 (#2374)
+  * Add test for sorting UTF-8 characters (#2384)
 
 ### Site Enhancements
 
