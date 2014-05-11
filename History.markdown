@@ -19,6 +19,8 @@
 
 ### Site Enhancements
 
+  * Set `timezone` to `America/Los_Angeles` (#2394)
+
 ## 2.0.3 / 2014-05-08
 
 ### Bug Fixes
