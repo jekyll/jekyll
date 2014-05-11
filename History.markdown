@@ -10,6 +10,7 @@
 
   * Liquid `sort` filter should sort even if one of the values is `nil` (#2345)
   * Remove padding on `pre code` in the site template CSS (#2383)
+  * Set `log_level` earlier to silence info level configuration output (#2393)
 
 ### Development Fixes
 
