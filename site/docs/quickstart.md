@@ -21,9 +21,9 @@ posts, using the front-matter to control templates and layouts, and taking
 advantage of all the awesome configuration options Jekyll makes available.
 
 <div class="note info">
-  <h5>Redcarpet is the default Markdown engine for new sites</h5>
-  <p>In Jekyll 1.1, we switched the default markdown engine for sites
-     generated with <code>jekyll new</code> to Redcarpet</p>
+  <h5>kramdown is the default Markdown engine for new sites</h5>
+  <p>In Jekyll 2.0, we switched the default markdown engine for sites
+     generated with <code>jekyll new</code> to kramdown</p>
 </div>
 
 If you're running into problems, ensure you have all the [requirements
