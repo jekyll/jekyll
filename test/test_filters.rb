@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require 'helper'
 
 class TestFilters < Test::Unit::TestCase
@@ -161,6 +163,11 @@ class TestFilters < Test::Unit::TestCase
         assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.sort([{"a" => "10"}, {"a" => "2"}], "a")
         assert_equal ["FOO", "Foo", "foo"], @filter.sort(["foo", "Foo", "FOO"])
         assert_equal ["_foo", "foo", "foo_"], @filter.sort(["foo_", "_foo", "foo"])
+        # Cyrillic
+        assert_equal ["ВУЗ", "Вуз", "вуз"], @filter.sort(["Вуз", "вуз", "ВУЗ"])
+        assert_equal ["_вуз", "вуз", "вуз_"], @filter.sort(["вуз_", "_вуз", "вуз"])
+        # Hebrew
+        assert_equal ["אלף", "בית"], @filter.sort(["בית", "אלף"])
       end
       should "return sorted by property array" do
         assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}],
