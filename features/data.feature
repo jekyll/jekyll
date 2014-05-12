@@ -72,6 +72,23 @@ Feature: Data
     Then the "_site/index.html" file should exist
     And I should see "Dairy Products" in "_site/index.html"
 
+  Scenario: folders should have precedence over files with the same name
+    Given I have a _data directory
+    And I have a _data/categories directory
+    And I have a "_data/categories/dairy.yaml" file with content:
+      """
+      name: Dairy Products
+      """
+    And I have a "_data/categories.yaml" file with content:
+      """
+      dairy:
+        name: Should not display this
+      """
+    And I have an "index.html" page that contains "{{ site.data.categories.dairy.name }}"
+    When I run jekyll build
+    Then the "_site/index.html" file should exist
+    And I should see "Dairy Products" in "_site/index.html"
+
   Scenario: should be backward compatible with site.data in _config.yml
     Given I have a "_config.yml" file with content:
       """
