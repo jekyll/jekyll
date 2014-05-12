@@ -10,7 +10,7 @@ In addition to the [built-in variables](../variables/) available from Jekyll,
 you can specify your own custom data that can be accessed via the [Liquid
 templating system](http://wiki.github.com/shopify/liquid/liquid-for-designers).
 
-Jekyll supports loading data from [YAML](http://yaml.org/) files located in the
+Jekyll supports loading data from [YAML](http://yaml.org/) and [JSON](http://www.json.org/) files located in the
 `_data` directory.
 
 This powerful feature allows you to avoid repetition in your templates and to
@@ -22,7 +22,7 @@ Plugins/themes can also leverage Data Files to set configuration variables.
 
 As explained on the [directory structure](../structure/) page, the `_data`
 folder is where you can store additional data for Jekyll to use when generating
-your site. These files must be YAML files (using either the `.yml` or `.yaml`
+your site. These files must be YAML files (using either the `.yml`, `.yaml` or `.json`
 extension) and they will be accessible via `site.data`.
 
 ## Example: List of members
