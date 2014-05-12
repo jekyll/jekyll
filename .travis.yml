@@ -1,6 +1,7 @@
 language: ruby
 cache: bundler
 install:
+- export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 - script/rebund download
 - travis_retry bundle install --path vendor/bundle
 rvm:
@@ -29,7 +30,7 @@ matrix:
   include:
   - rvm: 2.1.2
     gemfile: site/Gemfile
-    env: SITE=true NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+    env: SITE=true
   allow_failures:
-  - env: SITE=true NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+  - env: SITE=true
   fast_finish: true
