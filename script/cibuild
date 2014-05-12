@@ -1,4 +1,12 @@
 #! /bin/bash
 
+set -e
+
 script/branding
-bundle exec rake
+if [ "$SITE" ]; then
+  cd ./site
+  bundle exec jekyll build --trace
+  bundle exec htmlproof ./_site
+else
+  bundle exec rake
+fi
