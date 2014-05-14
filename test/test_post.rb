@@ -450,6 +450,17 @@ class TestPost < Test::Unit::TestCase
         assert_equal Time, post.to_liquid["date"].class
       end
 
+      should "to_liquid should consider inheritance" do
+        klass = Class.new(Jekyll::Post)
+        assert_gets_called = false
+        klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
+        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
+        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        do_render(post)
+
+        assert assert_gets_called, 'assert_gets_called did not get called on post.'
+      end
+
       should "recognize category in yaml" do
         post = setup_post("2009-01-27-category.textile")
         assert post.categories.include?('foo')
