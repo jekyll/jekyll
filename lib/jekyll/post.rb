@@ -256,7 +256,7 @@ module Jekyll
       # construct payload
       payload = Utils.deep_merge_hashes({
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
+        "page" => to_liquid(self.class::EXCERPT_ATTRIBUTES_FOR_LIQUID)
       }, site_payload)
 
       if generate_excerpt?
