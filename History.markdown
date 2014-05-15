@@ -20,9 +20,10 @@
 ### Site Enhancements
 
   * Set `timezone` to `America/Los_Angeles` (#2394)
-  * Improve JavaScript formatting in `anchor_links.html` (#2368)
+  * Improve JavaScript in `anchor_links.html` (#2368)
   * Remove note on Quickstart page about default markdown converter (#2387)
   * Remove broken link in extras.md to a Maruku fork (#2401)
+  * Update Font Awesome to v4.1.0. (2410)
 
 ## 2.0.3 / 2014-05-08
 
