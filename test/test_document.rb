@@ -42,6 +42,45 @@ class TestDocument < Test::Unit::TestCase
 
   end
 
+  context "a document as part of a collection with frontmatter defaults" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["methods"],
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope"=> {"path"=>"", "type"=>"methods"},
+          "values"=> {
+            "nested"=> {
+              "test1"=>"default1",
+              "test2"=>"default1"
+            }
+          }
+        }]
+      }))
+      @site.process
+      @document = @site.collections["methods"].docs.first
+    end
+
+    should "know the frontmatter defaults" do
+      assert_equal({
+        "title"=>"Jekyll.configuration",
+        "nested"=> { 
+          "test1"=>"default1", 
+          "test2"=>"default1"},
+        "whatever"=>"foo.bar"
+      }, @document.data)
+    end
+
+    should "overwrite a default value in the document frontmatter" do
+
+    end
+
+    should "overwrite a nested default value in the document frontmatter" do
+
+    end
+  end
+
   context " a document part of a rendered collection" do
   end
 
