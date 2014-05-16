@@ -13,6 +13,7 @@
   * Remove padding on `pre code` in the site template CSS (#2383)
   * Set `log_level` earlier to silence info level configuration output (#2393)
   * Only list pages which have `title` in site template (#2411)
+  * Accept `Numeric` values for dates, not `Number` values (#2377)
 
 ### Development Fixes
 
