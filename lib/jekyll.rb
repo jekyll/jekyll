@@ -76,6 +76,15 @@ require 'jekyll-sass-converter'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
+
+  # Public: Tells you which Jekyll environment you are building in so you can skip tasks
+  # if you need to.  This is useful when doing expensive compression tasks on css and
+  # images and allows you to skip that when working in development.
+
+  def self.env
+    ENV["JEKYLL_ENV"] || "development"
+  end
+
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
   #
