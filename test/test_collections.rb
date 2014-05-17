@@ -38,6 +38,10 @@ class TestCollections < Test::Unit::TestCase
       assert_equal @collection.label, "methods"
     end
 
+    should "have default url template" do
+      assert_equal @collection.url_template, "/:collection/:path:output_ext"
+    end
+
     should "contain no docs when initialized" do
       assert_empty @collection.docs
     end
@@ -88,6 +92,24 @@ class TestCollections < Test::Unit::TestCase
 
     should "not contain any collections" do
       assert_equal Hash.new, @site.collections
+    end
+  end
+
+  context "a collection with permalink" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "permalink" => "/awesome/:path/"
+          }
+        }
+      })
+      @site.process
+      @collection = @site.collections["methods"]
+    end
+
+    should "have custom url template" do
+      assert_equal @collection.url_template, "/awesome/:path/"
     end
   end
 
