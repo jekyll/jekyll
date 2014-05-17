@@ -314,19 +314,23 @@ module Jekyll
     #   "tags"       - The Hash of tag values and Posts.
     #                  See Site#post_attr_hash for type info.
     def site_payload
-      {"jekyll" => { "version" => Jekyll::VERSION },
-       "site"   => Utils.deep_merge_hashes(config,
-         Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-          "time"         => time,
-          "posts"        => posts.sort { |a, b| b <=> a },
-          "pages"        => pages,
-          "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-          "html_pages"   => pages.reject { |page| !page.html? },
-          "categories"   => post_attr_hash('categories'),
-          "tags"         => post_attr_hash('tags'),
-          "collections"  => collections,
-          "documents"    => documents,
-          "data"         => site_data
+      {
+        "jekyll" => {
+          "version" => Jekyll::VERSION,
+          "environment" => Jekyll.env
+        },
+        "site"   => Utils.deep_merge_hashes(config,
+          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
+            "time"         => time,
+            "posts"        => posts.sort { |a, b| b <=> a },
+            "pages"        => pages,
+            "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
+            "html_pages"   => pages.reject { |page| !page.html? },
+            "categories"   => post_attr_hash('categories'),
+            "tags"         => post_attr_hash('tags'),
+            "collections"  => collections,
+            "documents"    => documents,
+            "data"         => site_data
         }))
       }
     end
