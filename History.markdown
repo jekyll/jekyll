@@ -28,6 +28,7 @@
   * Remove note on Quickstart page about default markdown converter (#2387)
   * Remove broken link in extras.md to a Maruku fork (#2401)
   * Update Font Awesome to v4.1.0. (#2410)
+  * Fix broken link on Installation page to Templates page (#2421)
 
 ## 2.0.3 / 2014-05-08
 
