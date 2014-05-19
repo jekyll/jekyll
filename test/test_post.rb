@@ -100,6 +100,14 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2014/03/22/escape-+ %20[]", @post.id
       end
 
+      should "return a UTF-8 escaped string" do
+        assert_equal Encoding::UTF_8, URL.escape_path("/rails笔记/2014/04/20/escaped/").encoding
+      end
+
+      should "return a UTF-8 unescaped string" do
+        assert_equal Encoding::UTF_8, URL.unescape_path("/rails%E7%AC%94%E8%AE%B0/2014/04/20/escaped/").encoding
+      end
+
       should "respect permalink in yaml front matter" do
         file = "2008-12-03-permalinked-post.textile"
         @post.process(file)
