@@ -89,7 +89,7 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      URI.escape(path, /[^a-zA-Z\d\-._~!$&\'()*+,;=:@\/]/).encode('utf-8')
+      URI.escape(path.force_encoding('utf-8'), /[^a-zA-Z\d\-._~!$&\'()*+,;=:@\/]/).encode('utf-8')
     end
 
     # Unescapes a URL path segment
@@ -103,7 +103,7 @@ module Jekyll
     #
     # Returns the unescaped path.
     def self.unescape_path(path)
-      URI.unescape(path.encode('utf-8'))
+      URI.unescape(path.force_encoding('utf-8'))
     end
   end
 end
