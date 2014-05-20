@@ -7,6 +7,7 @@
   * Add support for JSON files in the `_data` directory (#2369)
   * Allow subclasses to override `EXCERPT_ATTRIBUTES_FOR_LIQUID` (#2408)
   * Add `Jekyll.env` and `jekyll.environment` (the Liquid var) (#2417)
+  * Use `_config.yaml` or `_config.yml` (`.yml` takes precedence) (#2406)
 
 ### Bug Fixes
 
