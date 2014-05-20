@@ -109,7 +109,7 @@ The collections are also available under `site.collections`, with the metadata y
       </td>
       <td>
         <p>
-          The full path to the collections's source directory..
+          The full path to the collections's source directory.
         </p>
       </td>
     </tr>
