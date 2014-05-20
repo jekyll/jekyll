@@ -146,7 +146,7 @@ Given a post named: `/2009-04-29-slap-chop.textile`
 <table>
   <thead>
     <tr>
-      <th>Permalink Setting</th>
+      <th>URL Template</th>
       <th>Resulting Permalink URL</th>
     </tr>
   </thead>
@@ -161,7 +161,7 @@ Given a post named: `/2009-04-29-slap-chop.textile`
     </tr>
     <tr>
       <td>
-        <p><code>permalink: pretty</code></p>
+        <p><code>pretty</code></p>
       </td>
       <td>
         <p><code>/2009/04/29/slap-chop/index.html</code></p>
@@ -169,7 +169,7 @@ Given a post named: `/2009-04-29-slap-chop.textile`
     </tr>
     <tr>
       <td>
-        <p><code>permalink: /:month-:day-:year/:title.html</code></p>
+        <p><code>/:month-:day-:year/:title.html</code></p>
       </td>
       <td>
         <p><code>/04-29-2009/slap-chop.html</code></p>
@@ -177,7 +177,7 @@ Given a post named: `/2009-04-29-slap-chop.textile`
     </tr>
     <tr>
       <td>
-        <p><code>permalink: /blog/:year/:month/:day/:title</code></p>
+        <p><code>/blog/:year/:month/:day/:title</code></p>
       </td>
       <td>
         <p><code>/blog/2009/04/29/slap-chop/index.html</code></p>
