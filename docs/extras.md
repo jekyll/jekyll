@@ -12,9 +12,7 @@ may want to install, depending on how you plan to use Jekyll.
 ## LaTeX Support
 
 Maruku comes with optional support for LaTeX to PNG rendering via blahtex
-(Version 0.6) which must be in your `$PATH` along with `dvips`. If you need
-Maruku to not assume a fixed location for `dvips`, check out [Remi’s Maruku
-fork](http://github.com/remi/maruku).
+(Version 0.6) which must be in your `$PATH` along with `dvips`.
 
 ## Alternative Markdown Processors
 
