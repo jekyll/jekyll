@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'helper'
 
 class TestPost < Test::Unit::TestCase
@@ -101,11 +103,11 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "return a UTF-8 escaped string" do
-        assert_equal Encoding::UTF_8, URL.escape_path("/2014/04/20/escaped/").encoding
+        assert_equal Encoding::UTF_8, URL.escape_path("/rails笔记/2014/04/20/escaped/").encoding
       end
 
       should "return a UTF-8 unescaped string" do
-        assert_equal Encoding::UTF_8, URL.unescape_path("/2014/04/20/escaped/").encoding
+        assert_equal Encoding::UTF_8, URL.unescape_path("/rails%E7%AC%94%E8%AE%B0/2014/04/20/escaped/").encoding
       end
 
       should "respect permalink in yaml front matter" do
