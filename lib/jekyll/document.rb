@@ -88,6 +88,14 @@ module Jekyll
       !(asset_file? || yaml_file?)
     end
 
+    # Determine whether the file should be placed into layouts.
+    #
+    # Returns false if the document is either an asset file or a yaml file,
+    #   true otherwise.
+    def place_in_layout?
+      !(asset_file? || yaml_file?)
+    end
+
     # The URL template where the document would be accessible.
     #
     # Returns the URL template for the document.
