@@ -107,7 +107,7 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "return a UTF-8 unescaped string" do
-        assert_equal Encoding::UTF_8, URL.unescape_path("/rails%E7%AC%94%E8%AE%B0/2014/04/20/escaped/").encoding
+        assert_equal Encoding::UTF_8, URL.unescape_path("/rails%E7%AC%94%E8%AE%B0/2014/04/20/escaped/".encode(Encoding::ASCII)).encoding
       end
 
       should "respect permalink in yaml front matter" do
