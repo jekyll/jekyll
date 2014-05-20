@@ -123,7 +123,10 @@ module Jekyll
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
       if config_files.to_s.empty?
-        config_files = File.join(source(override), "_config.yml")
+        default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
+          File.exists? Jekyll.sanitized_path(source(override), "_config.#{ext}")
+        end
+        config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
       end
       config_files = [config_files] unless config_files.is_a? Array
