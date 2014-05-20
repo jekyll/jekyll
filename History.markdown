@@ -16,6 +16,7 @@
   * Set `log_level` earlier to silence info level configuration output (#2393)
   * Only list pages which have `title` in site template (#2411)
   * Accept `Numeric` values for dates, not `Number` values (#2377)
+  * Prevent code from overflowing container in site template (#2429)
 
 ### Development Fixes
 
