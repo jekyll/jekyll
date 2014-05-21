@@ -35,17 +35,25 @@ module Jekyll
       #
       # Returns an array
       def pluralized_array_from_hash(hash, singular_key, plural_key)
-        if hash.has_key?(singular_key)
-          array = [hash[singular_key]] if hash[singular_key]
-        elsif hash.has_key?(plural_key)
-          case hash[plural_key]
+        [].tap do |array|
+          array << (value_from_singular_key(hash, singular_key) || value_from_plural_key(hash, plural_key))
+        end.flatten.compact
+      end
+      
+      def value_from_singular_key(hash, key)
+        hash[key] if (hash.has_key?(key) || (hash.default_proc && hash[key]))
+      end
+      
+      def value_from_plural_key(hash, key)
+        if hash.has_key?(key) || (hash.default_proc && hash[key])
+          val = hash[key]
+          case val
           when String
-            array = hash[plural_key].split
+            val.split
           when Array
-            array = hash[plural_key].compact
+            val.compact
           end
         end
-        array || []
       end
 
       def transform_keys(hash)

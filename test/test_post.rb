@@ -666,5 +666,61 @@ class TestPost < Test::Unit::TestCase
     end
 
   end
+  
+  context "site config with category" do
+    setup do
+      config = Jekyll::Configuration::DEFAULTS.merge({
+        'defaults' => [
+          'scope' => {
+            'path' => ''
+          },
+          'values' => {
+            'category' => 'article'
+          }
+        ]
+      })
+      @site = Site.new(config)
+    end
+
+    should "return category if post does not specify category" do
+      post = setup_post("2009-01-27-no-category.textile")
+      assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
+    end
+    
+    should "override site category if set on post" do
+      post = setup_post("2009-01-27-category.textile")
+      assert post.categories.include?('foo'), "Expected post.categories to include 'foo' but did not."
+      assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
+    end
+  end
+
+  context "site config with categories" do
+    setup do
+      config = Jekyll::Configuration::DEFAULTS.merge({
+        'defaults' => [
+          'scope' => {
+            'path' => ''
+          },
+          'values' => {
+            'categories' => ['article']
+          }
+        ]
+      })
+      @site = Site.new(config)
+    end
+
+    should "return categories if post does not specify categories" do
+      post = setup_post("2009-01-27-no-category.textile")
+      assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
+    end
+    
+    should "override site categories if set on post" do
+      post = setup_post("2009-01-27-categories.textile")
+      ['foo', 'bar', 'baz'].each do |category|
+        assert post.categories.include?(category), "Expected post.categories to include '#{category}' but did not."
+      end
+      assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
+    end
+  end
 
 end

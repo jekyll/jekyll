@@ -15,9 +15,9 @@ class TestUtils < Test::Unit::TestCase
         assert_equal [], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
       end
 
-      should "return empty array with matching nil singular" do
+      should "return plural array with nil singular" do
         data = { 'foo' => 'bar', 'tag' => nil, 'tags' => ['dog', 'cat'] }
-        assert_equal [], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        assert_equal ['dog', 'cat'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
       end
 
       should "return single value array with matching singular" do
