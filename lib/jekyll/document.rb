@@ -185,7 +185,7 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
-          defaults = @site.frontmatter_defaults.all(path, collection.label.to_sym)
+          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
           unless defaults.empty?
             @data = defaults
           end
