@@ -4,8 +4,8 @@ install:
 - script/rebund download
 - travis_retry bundle install --path vendor/bundle
 rvm:
-- 2.1.2
-- 2.0.0
+- 2.1
+- 2.0
 - 1.9.3
 script: script/cibuild
 after_script:
