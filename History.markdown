@@ -17,6 +17,7 @@
   * Only list pages which have `title` in site template (#2411)
   * Accept `Numeric` values for dates, not `Number` values (#2377)
   * Prevent code from overflowing container in site template (#2429)
+  * Encode URLs in UTF-8 when escaping and unescaping (#2420)
 
 ### Development Fixes
 
