@@ -19,6 +19,7 @@
   * Accept `Numeric` values for dates, not `Number` values (#2377)
   * Prevent code from overflowing container in site template (#2429)
   * Encode URLs in UTF-8 when escaping and unescaping (#2420)
+  * No Layouts or Liquid for Asset Files (#2431)
 
 ### Development Fixes
 
