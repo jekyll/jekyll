@@ -92,7 +92,7 @@ module Jekyll
     #
     # Returns the URL template for the document.
     def url_template
-      "/:collection/:path:output_ext"
+      collection.url_template
     end
 
     # Construct a Hash of key-value pairs which contain a mapping between

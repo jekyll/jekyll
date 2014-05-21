@@ -56,6 +56,54 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
+As for posts with [Permalinks](../Permalinks/), document URL can be customized by setting a `permalink` metadata to the collection:
+
+{% highlight yaml %}
+collections:
+  my_collection:
+    output: true
+    permalink: /awesome/:path/
+{% endhighlight %}
+
+For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>collection</code></p>
+      </td>
+      <td>
+        <p>Label of the containing collection</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>path</code></p>
+      </td>
+      <td>
+        <p>Path to the document relative to the collection's directory</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>output_ext</code></p>
+      </td>
+      <td>
+        <p>Extension of the output file</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 ## Liquid Attributes
 
 ### Collections

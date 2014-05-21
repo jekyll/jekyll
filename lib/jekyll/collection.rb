@@ -132,6 +132,13 @@ module Jekyll
       !!metadata['output']
     end
 
+    # The URL template to render collection's documents at.
+    #
+    # Returns the URL template to render collection's documents at.
+    def url_template
+      metadata.fetch('permalink', "/:collection/:path:output_ext")
+    end
+
     # Extract options for this collection from the site configuration.
     #
     # Returns the metadata for this collection
