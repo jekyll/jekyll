@@ -32,29 +32,6 @@ Jekyll does what you tell it to do — no more, no less. It doesn't try to outs
 * Use the built-in [Liquid Extensions](http://jekyllrb.com/docs/templates/) to make your life easier
 * Use custom [Plugins](http://jekyllrb.com/docs/plugins/) to generate content specific to your site
 
-## Runtime Dependencies
-
-* Commander: Command-line interface constructor (Ruby)
-* Colorator: Colorizes command line output (Ruby)
-* Classifier: Generating related posts (Ruby)
-* Directory Watcher: Auto-regeneration of sites (Ruby)
-* Kramdown: Default Markdown engine (Ruby)
-* Liquid: Templating system (Ruby)
-* Pygments.rb: Syntax highlighting (Ruby/Python)
-* RedCarpet: Markdown engine (Ruby)
-* Safe YAML: YAML Parser built for security (Ruby)
-
-## Developer Dependencies
-
-* Launchy: Cross-platform file launcher (Ruby)
-* Maruku: Markdown-superset interpreter (Ruby)
-* RDiscount: Discount Markdown Processor (Ruby)
-* RedCloth: Textile support (Ruby)
-* RedGreen: Nicer test output (Ruby)
-* RR: Mocking (Ruby)
-* Shoulda: Test framework (Ruby)
-* SimpleCov: Coverage framework (Ruby)
-
 ## License
 
 See [LICENSE](https://github.com/jekyll/jekyll/blob/master/LICENSE).
