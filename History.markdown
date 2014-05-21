@@ -36,6 +36,7 @@
   * Update Font Awesome to v4.1.0. (#2410)
   * Fix broken link on Installation page to Templates page (#2421)
   * Prevent table from extending parent width in permalink style table (#2424)
+  * Add collections to info about pagination support (#2389)
 
 ## 2.0.3 / 2014-05-08
 
