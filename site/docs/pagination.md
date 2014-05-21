@@ -123,7 +123,8 @@ attributes:
   <p>Pagination pages through every post in the <code>posts</code>
   variable regardless of variables defined in the YAML Front Matter of
   each. It does not currently allow paging over groups of posts linked
-  by a common tag or category.</p>
+  by a common tag or category. It cannot include any collection of
+  documents because it is restricted to posts.</p>
 </div>
 
 ## Render the paginated Posts
