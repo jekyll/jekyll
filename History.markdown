@@ -21,6 +21,7 @@
   * Prevent code from overflowing container in site template (#2429)
   * Encode URLs in UTF-8 when escaping and unescaping (#2420)
   * No Layouts or Liquid for Asset Files (#2431)
+  * Allow front-matter defaults to set post categories (#2373)
 
 ### Development Fixes
 
