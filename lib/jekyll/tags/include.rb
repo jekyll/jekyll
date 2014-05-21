@@ -116,10 +116,10 @@ eos
       end
 
       def validate_path(path, dir, safe)
-        if safe && !realpath_prefixed_with?(path, dir)
-          raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
-        elsif !File.exist?(path)
+        if !File.exist?(path)
           raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
+        elsif safe && !realpath_prefixed_with?(path, dir)
+          raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
         end
       end
 
