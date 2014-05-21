@@ -295,6 +295,7 @@ defaults:
       path: "" # empty string for all files
     values:
       layout: "my-site"
+      date: "2014-01-01"
   -
     scope:
       path: "about/blog"
