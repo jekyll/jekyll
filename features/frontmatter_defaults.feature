@@ -28,6 +28,24 @@ Feature: frontmatter defaults
     And I should see "<p>some special data</p><div>Ben</div>" in "_site/2013/09/11/default-data.html"
     And I should see "just some special data by Ben" in "_site/index.html"
 
+  Scenario: Use default date
+    Given I have a _posts directory
+    And I have a "_posts/2014-05-21-default-date.textile" file that contains "---\ntitle: stuff\n---"
+    And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {date: "2000-01-01"}}]"
+    When I run jekyll build
+    Then the _site directory should exist
+    And the "_site/2000/01/01/default-date.html" file should exist
+
+  Scenario: Honor date set in front-matter
+    Given I have a _posts directory
+    And I have the following post:
+      | title | date       | content |
+      | date  | 2014-05-21 | stuff   |
+    And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {date: "2000-01-01"}}]"
+    When I run jekyll build
+    Then the _site directory should exist
+    And the "_site/2014/05/21/date.html" file should exist
+
   Scenario: Override frontmatter defaults by path
     Given I have a _layouts directory
     And I have a root layout that contains "root: {{ content }}"

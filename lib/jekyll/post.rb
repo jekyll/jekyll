@@ -60,7 +60,7 @@ module Jekyll
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
-      if data.has_key?('date')
+      if data["date"] && !data["date"].to_s.empty?
         self.date = Time.parse(data["date"].to_s)
       end
 
