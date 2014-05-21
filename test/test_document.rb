@@ -45,11 +45,41 @@ class TestDocument < Test::Unit::TestCase
   context "a document as part of a collection with frontmatter defaults" do
     setup do
       @site = Site.new(Jekyll.configuration({
-        "collections" => ["methods"],
+        "collections" => ["slides"],
         "source"      => source_dir,
         "destination" => dest_dir,
         "defaults" => [{
-          "scope"=> {"path"=>"", "type"=>"methods"},
+          "scope"=> {"path"=>"", "type"=>"slides"},
+          "values"=> {
+            "nested"=> {
+              "key"=>"myval",
+            }
+          }
+        }]
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs.first
+    end
+
+    should "know the frontmatter defaults" do
+      assert_equal({
+        "title"=>"Example slide",
+        "layout"=>"slide",
+        "nested"=> { 
+          "key"=>"myval"
+        }
+      }, @document.data)
+    end
+  end
+
+  context "a document as part of a collection with overriden default values" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope"=> {"path"=>"", "type"=>"slides"},
           "values"=> {
             "nested"=> {
               "test1"=>"default1",
@@ -59,25 +89,75 @@ class TestDocument < Test::Unit::TestCase
         }]
       }))
       @site.process
-      @document = @site.collections["methods"].docs.first
+      @document = @site.collections["slides"].docs[1]
+    end
+
+    should "override default values in the document frontmatter" do
+      assert_equal({
+        "title"=>"Override title",
+        "layout"=>"slide",
+        "nested"=> { 
+          "test1"=>"override1",
+          "test2"=>"override2"
+        }
+      }, @document.data)
+    end
+  end
+
+  context "a document as part of a collection with valid path" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope"=> {"path"=>"slides", "type"=>"slides"},
+          "values"=> {
+            "nested"=> {
+              "key"=>"value123",
+            }
+          }
+        }]
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs.first
     end
 
     should "know the frontmatter defaults" do
       assert_equal({
-        "title"=>"Jekyll.configuration",
+        "title"=>"Example slide",
+        "layout"=>"slide",
         "nested"=> { 
-          "test1"=>"default1", 
-          "test2"=>"default1"},
-        "whatever"=>"foo.bar"
+          "key"=>"value123"
+        }
       }, @document.data)
     end
+  end
 
-    should "overwrite a default value in the document frontmatter" do
-
+  context "a document as part of a collection with invalid path" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope"=> {"path"=>"somepath", "type"=>"slides"},
+          "values"=> {
+            "nested"=> {
+              "key"=>"myval",
+            }
+          }
+        }]
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs.first
     end
 
-    should "overwrite a nested default value in the document frontmatter" do
-
+    should "not know the specified frontmatter defaults" do
+      assert_equal({
+        "title"=>"Example slide",
+        "layout"=>"slide"
+      }, @document.data)
     end
   end
 
