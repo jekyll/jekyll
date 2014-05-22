@@ -9,7 +9,7 @@ class TestFilters < Test::Unit::TestCase
 
     def initialize(opts = {})
       @site = Jekyll::Site.new(Jekyll.configuration(opts))
-      @context = Liquid::Context.new({}, {}, { :site => @site })
+      @context = Liquid::Context.new({}, {}, { site: @site })
     end
   end
 
@@ -132,12 +132,12 @@ class TestFilters < Test::Unit::TestCase
 
     context "jsonify filter" do
       should "convert hash to json" do
-        assert_equal "{\"age\":18}", @filter.jsonify({:age => 18})
+        assert_equal "{\"age\":18}", @filter.jsonify({age: 18})
       end
 
       should "convert array to json" do
         assert_equal "[1,2]", @filter.jsonify([1, 2])
-        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => 'Jack'}, {:name => 'Smith'}])
+        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{name: 'Jack'}, {name: 'Smith'}])
       end
     end
 

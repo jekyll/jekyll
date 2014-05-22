@@ -190,7 +190,7 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
+      info = { filters: [Jekyll::Filters], registers: { site: site, page: payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
       payload["highlighter_prefix"] = converter.highlighter_prefix

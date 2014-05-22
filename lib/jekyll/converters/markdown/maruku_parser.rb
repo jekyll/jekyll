@@ -45,7 +45,7 @@ module Jekyll
         end
 
         def convert(content)
-          converted = Maruku.new(content, :error_stream => @errors).to_html.strip
+          converted = Maruku.new(content, error_stream: @errors).to_html.strip
           print_errors_and_fail unless @errors.empty?
           converted
         end

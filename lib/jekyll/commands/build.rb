@@ -69,8 +69,8 @@ module Jekyll
 
           listener = Listen.to(
             source,
-            :ignore => ignored,
-            :force_polling => options['force_polling']
+            ignore: ignored,
+            force_polling: options['force_polling']
           ) do |modified, added, removed|
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
             n = modified.length + added.length + removed.length

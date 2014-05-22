@@ -72,9 +72,9 @@ if ENV["TRAVIS"] == "true"
   require 'coveralls/rake/task'
   Coveralls::RakeTask.new
 
-  task :default => [:test, :features, 'coveralls:push']
+  task default: [:test, :features, 'coveralls:push']
 else
-  task :default => [:test, :features]
+  task default: [:test, :features]
 end
 
 require 'rake/testtask'
@@ -148,7 +148,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish => [:history] do
+  task publish: [:history] do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
@@ -235,7 +235,7 @@ end
 #
 #############################################################################
 
-task :release => :build do
+task release: :build do
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
     exit!

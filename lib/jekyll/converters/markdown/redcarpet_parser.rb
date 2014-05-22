@@ -17,7 +17,7 @@ module Jekyll
             require 'pygments'
             lang = lang && lang.split.first || "text"
             add_code_tags(
-              Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
+              Pygments.highlight(code, lexer: lang, options: { encoding: 'utf-8' }),
               lang
             )
           end

@@ -27,7 +27,7 @@ module Jekyll
 
     def build_index
       self.class.lsi ||= begin
-        lsi = Classifier::LSI.new(:auto_rebuild => false)
+        lsi = Classifier::LSI.new(auto_rebuild: false)
         display("Populating LSI...")
 
         site.posts.each do |x|

@@ -207,9 +207,9 @@ module Jekyll
     # Returns the String url.
     def url
       @url ||= URL.new({
-        :template => template,
-        :placeholders => url_placeholders,
-        :permalink => permalink
+        template: template,
+        placeholders: url_placeholders,
+        permalink: permalink
       }).to_s
     end
 
@@ -217,17 +217,17 @@ module Jekyll
     # desired placeholder replacements. For details see "url.rb"
     def url_placeholders
       {
-        :year        => date.strftime("%Y"),
-        :month       => date.strftime("%m"),
-        :day         => date.strftime("%d"),
-        :title       => slug,
-        :i_day       => date.strftime("%d").to_i.to_s,
-        :i_month     => date.strftime("%m").to_i.to_s,
-        :categories  => (categories || []).map { |c| c.to_s }.join('/'),
-        :short_month => date.strftime("%b"),
-        :short_year  => date.strftime("%y"),
-        :y_day       => date.strftime("%j"),
-        :output_ext  => output_ext
+        year:        date.strftime("%Y"),
+        month:       date.strftime("%m"),
+        day:         date.strftime("%d"),
+        title:       slug,
+        i_day:       date.strftime("%d").to_i.to_s,
+        i_month:     date.strftime("%m").to_i.to_s,
+        categories:  (categories || []).map { |c| c.to_s }.join('/'),
+        short_month: date.strftime("%b"),
+        short_year:  date.strftime("%y"),
+        y_day:       date.strftime("%j"),
+        output_ext:  output_ext
       }
     end
 

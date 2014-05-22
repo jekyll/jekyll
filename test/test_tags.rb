@@ -16,7 +16,7 @@ class TestTags < Test::Unit::TestCase
       site.read_posts('')
     end
 
-    info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
+    info = { filters: [Jekyll::Filters], registers: { site: site } }
     @converter = site.converters.find { |c| c.class == converter_class }
     payload = { "highlighter_prefix" => @converter.highlighter_prefix,
                 "highlighter_suffix" => @converter.highlighter_suffix }
@@ -65,16 +65,16 @@ CONTENT
       assert_equal({}, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
+      assert_equal({ linenos: 'inline' }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ linenos: 'table' }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@options))
+      assert_equal({ linenos: 'table', nowrap: true }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ cssclass: 'hl', linenos: 'table' }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
