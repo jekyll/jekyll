@@ -1,10 +1,10 @@
 module Jekyll
   class Plugin
-    PRIORITIES = { :lowest => -100,
-                   :low => -10,
-                   :normal => 0,
-                   :high => 10,
-                   :highest => 100 }
+    PRIORITIES = { lowest: -100,
+                   low: -10,
+                   normal: 0,
+                   high: 10,
+                   highest: 100 }
 
     # Fetch all the subclasses of this class and its subclasses' subclasses.
     #

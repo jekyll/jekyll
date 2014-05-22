@@ -73,19 +73,19 @@ module Jekyll
 
         def webrick_options(config)
           opts = {
-            :DocumentRoot       => config['destination'],
-            :Port               => config['port'],
-            :BindAddress        => config['host'],
-            :MimeTypes          => mime_types,
-            :DoNotReverseLookup => true,
-            :StartCallback      => start_callback(config['detach']),
-            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml)
+            DocumentRoot:       config['destination'],
+            Port:               config['port'],
+            BindAddress:        config['host'],
+            MimeTypes:          mime_types,
+            DoNotReverseLookup: true,
+            StartCallback:      start_callback(config['detach']),
+            DirectoryIndex:     %w(index.html index.htm index.cgi index.rhtml index.xml)
           }
 
           if !config['verbose']
             opts.merge!({
-              :AccessLog => [],
-              :Logger => WEBrick::Log.new([], WEBrick::Log::WARN)
+              AccessLog: [],
+              Logger: WEBrick::Log.new([], WEBrick::Log::WARN)
             })
           end
 

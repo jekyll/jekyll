@@ -5,8 +5,8 @@ require 'uri'
 # Examples
 #
 #   URL.new({
-#     :template => /:categories/:title.html",
-#     :placeholders => {:categories => "ruby", :title => "something"}
+#     template: /:categories/:title.html",
+#     placeholders: {categories: "ruby", title: "something"}
 #   }).to_s
 #
 module Jekyll

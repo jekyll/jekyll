@@ -53,7 +53,7 @@ eos
         require 'pygments'
         @options[:encoding] = 'utf-8'
 
-        highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
+        highlighted_code = Pygments.highlight(code, lexer: @lang, options: @options)
 
         if highlighted_code.nil?
           Jekyll.logger.error "There was an error highlighting your code:"

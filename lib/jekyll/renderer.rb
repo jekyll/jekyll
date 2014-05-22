@@ -34,7 +34,7 @@ module Jekyll
 
       info = {
         filters:   [Jekyll::Filters],
-        registers: { :site => site, :page => payload['page'] }
+        registers: { site: site, page: payload['page'] }
       }
 
       # render and transform content (this becomes the final content of the object)

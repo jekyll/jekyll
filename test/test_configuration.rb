@@ -5,10 +5,10 @@ class TestConfiguration < Test::Unit::TestCase
     setup do
       @mixed_keys = Configuration[{
         'markdown' => 'kramdown',
-        :permalink => 'date',
+        permalink: 'date',
         'baseurl'  => '/',
-        :include   => ['.htaccess'],
-        :source    => './'
+        include:   ['.htaccess'],
+        source:    './'
       }]
       @string_keys = Configuration[{
         'markdown'  => 'kramdown',
@@ -149,10 +149,10 @@ class TestConfiguration < Test::Unit::TestCase
   context "loading config from external file" do
     setup do
       @paths = {
-        :default => File.join(Dir.pwd, '_config.yml'),
-        :other   => File.join(Dir.pwd, '_config.live.yml'),
-        :toml    => source_dir('_config.dev.toml'),
-        :empty   => ""
+        default: File.join(Dir.pwd, '_config.yml'),
+        other:   File.join(Dir.pwd, '_config.live.yml'),
+        toml:    source_dir('_config.dev.toml'),
+        empty:   ""
       }
     end
 
