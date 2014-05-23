@@ -278,21 +278,61 @@ before your site is served.
 
 ## Frontmatter defaults
 
-You can set default values for your [YAML frontmatter](../frontmatter/) variables
-in your configuration. This way, you can for example set default layouts or define
-defaults for your custom variables. Of course, any variable actually specified in
-the front matter overrides the defaults.
+Using [YAML front-matter](../frontmatter/) is one way that you can specify configuration in your
+pages and posts for your site. Things like setting a default layout, or customizing the title,
+or specifying a more precise date/time for the post can all be added to your page or post
+front-matter.
 
-All defaults go under the `defaults` key, which holds a list of scope-values combinations ("default sets").
-The `scope` key defines for which files the defaults apply, limiting them by their source file `path` and
-optionally by their `type` (`page`, `post` or `draft`). The `values` key holds the actual list of defaults.
+Often times, you will find that you are repeating a lot of configuration options. Setting the
+same layout in each file, adding the same category - or categories - to a post, etc. You can even 
+add custom variables like author names, which might be the same for the majority of posts
+in your project.
 
-For example:
+Instead of repeating this configuration each time you create a new post or page, Jekyll provides
+a way to set these defaults in the site front-matter. To do this, you can specify  site-wide
+defaults using the `defaults` key in the `_config.yml` file in your projects root directory.
+
+The `defaults` key holds an array of scope/values pairs that define what defaults should be set for
+a particular file path, and optionally, a file type in that path.
+
+Let's say that you want to add a default layout to all pages and posts in your site. You would add
+this to your `_config.yml` file:
+
 {% highlight yaml %}
 defaults:
   -
     scope:
-      path: "" # empty string for all files
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
+{% endhighlight %}
+
+Here, we are scoping the `values` to any file that exists in the scopes path. Since the path is
+set as an empty string, it will apply to **all files** in your project. You probably don't want
+to set a layout on every file in your project - like css files, for example - so you can also
+specify a `type` value under the `scope` key.
+
+{% highlight yaml %}
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "post"
+    values:
+      layout: "default"
+{% endhighlight %}
+
+Now, this will only set the layout for files where the type is `post`. The different types that
+are available to you are `page`, `post`, or `draft`.
+
+As mentioned earlier, you can set multiple scope/values pairs for `defaults`.
+
+{% highlight yaml %}
+defaults:
+  -
+    scope:
+      path: ""
+      type: "post"
     values:
       layout: "my-site"
   -
@@ -302,16 +342,62 @@ defaults:
     values:
       layout: "meta-blog" # overrides previous default layout
       author: "Dr. Hyde"
+      category: "about"
 {% endhighlight %}
 
-With these defaults, all pages and posts would default to the `my-site` layout except for the posts under `about/blog`,
-who would default to the `meta-blog` layout and also have the `page.author` [liquid variable](../variables/) set to `Dr. Hyde` by default.
+With these defaults, all posts would use the `my-site` layout except for the posts under 
+`about/blog`. Those posts would use the `meta-blog` layout and also have the `page.author` 
+[liquid variable](../variables/) set to `Dr. Hyde` as well as have the category for the post 
+set to `about`.
 
 ### Precedence
-You can have multiple sets of frontmatter defaults that specify defaults for the same setting. In this case, for each page or post,
-the default set with the more specific scope takes precedence. This way, you can specify defaults for a path like `/site/blog` that would
-override any defaults for `/site`. Also, if the paths are equal, a scope with a specified type is more specific. If two sets are equally
-specific, the bottom-most takes precedence.
+
+Jekyll will apply all of the configuration settings you specify in the `defaults` section of your
+`_config.yml` file. However, you can choose to override settings from other scope/values pair
+by specifying a more specific path for the scope.
+
+You can see that in the last example above. First, we set the default layout to `my-site`. Then,
+using a more specific path, we set the default layout for posts in the `about/blog` path to
+`meta-blog`. This can be done with any value that you would set in the page or post front-matter.
+
+Finally, if you set defaults in the site front-matter by adding a `defaults` section to your
+`_config.yml` file, you can override those settings in a post or page file. All you need to do
+is specify the settings in the post or page front-matter. For example:
+
+{% highlight yaml %}
+# In _config.yml
+...
+defaults:
+  -
+    scope:
+      path: ""
+      type: "post"
+    values:
+      layout: "my-site"
+  -
+    scope:
+      path: "about/blog"
+      type: "post"
+    values:
+      layout: "meta-blog"
+      author: "Dr. Hyde"
+      category: "about"
+...
+{% endhighlight %}
+
+{% highlight yaml %}
+# In about/blog/a_post.md
+---
+author: "John Smith"
+layout: "foobar"
+---
+
+Text for the post and such.
+...
+{% endhighlight %}
+
+The `about/blog/a_post.md` would have the layout set to `foobar` and the author set to `John Smith`
+when the site is built.
 
 ## Default Configuration
 
