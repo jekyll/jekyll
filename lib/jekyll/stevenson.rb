@@ -1,4 +1,3 @@
-require 'logger'
 module Jekyll
   class Stevenson < ::Logger
     def initialize
@@ -30,6 +29,16 @@ module Jekyll
       @logdev.puts(
         format_message(format_severity(severity), Time.now, progname, message))
       true
+    end
+
+    # Log a +WARN+ message
+    def warn(progname = nil, &block)
+      add(WARN, nil, progname.yellow, &block)
+    end
+
+    # Log an +ERROR+ message
+    def error(progname = nil, &block)
+      add(ERROR, nil, progname.red, &block)
     end
 
     def close

@@ -1,6 +1,6 @@
 require 'logger'
 module Jekyll
-  class LogWriter
+  class LogAdapter
     attr_reader :writer
 
     LOG_LEVELS = {
@@ -57,7 +57,7 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message = nil)
-      writer.warn(message(topic, message).yellow)
+      writer.warn(message(topic, message))
     end
 
     # Public: Print a jekyll error message
@@ -67,7 +67,7 @@ module Jekyll
     #
     # Returns nothing
     def error(topic, message = nil)
-      writer.error(message(topic, message).red)
+      writer.error(message(topic, message))
     end
 
     # Public: Print a Jekyll error message and immediately abort the process
@@ -81,7 +81,9 @@ module Jekyll
       abort
     end
 
-    # Public: Build a Jekyll topic method
+  private
+
+    # Internal: Build a Jekyll topic method
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -91,7 +93,7 @@ module Jekyll
       formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
     end
 
-    # Public: Format the topic
+    # Internal: Format the topic
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     #
