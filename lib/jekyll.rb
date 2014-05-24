@@ -31,6 +31,7 @@ require 'toml'
 # internal requires
 require 'jekyll/version'
 require 'jekyll/utils'
+require 'jekyll/log_writer'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
 require 'jekyll/configuration'
@@ -115,7 +116,11 @@ module Jekyll
   end
 
   def self.logger
-    @logger ||= Stevenson.new
+    @logger ||= LogWriter.new(Stevenson.new)
+  end
+
+  def self.logger=(writer)
+    @logger = LogWriter.new(writer)
   end
 
   # Public: File system root
