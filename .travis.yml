@@ -1,14 +1,27 @@
 language: ruby
-before_install:
-  - gem install bundler
+cache: bundler
+install:
+- script/rebund download
+- travis_retry bundle install --path vendor/bundle
 rvm:
-  - 2.0.0
-  - 1.9.3
-  - 1.9.2
-  - 1.8.7
-script: bundle exec rake
+- 2.1
+- 2.0
+- 1.9.3
+script: script/cibuild
+after_script:
+- script/rebund upload
 notifications:
-  irc: "irc.freenode.org#jekyll"
+  irc:
+    on_success: change
+    on_failure: change
+    channels:
+    - irc.freenode.org#jekyll
+    template:
+    - '%{repository}#%{build_number} (%{branch}) %{message} %{build_url}'
   email:
     on_success: never
     on_failure: never
+env:
+  global:
+  - secure: bt5nglPTdsc0N5fB1dOJz2WbM81dGpDuVD8PnhEsxgUfoo6xavhU4+pNrUADlSUqQ1aJrdU+MKW4x+JZ2ZnJS8vOpNzRymuMZSbFaljK4pgFGiKFgBdMKxVikvoYcxKCjLAl7NJZ11W6hUw+JtJScClDZwrJJAQB6I7Isp/LsdM=
+  - secure: Ym8nx7nbfGYGo47my92M+deJykaiMkdZdb615EO51liv/xy/0aQ919Jpfieugc9d3zVnm+zFGPbpv4YzRpsik6OlVBNa4lP+BnQ27ptf5YcLWD8Hksi7845WFLecXMoaTCoYer/TvYZsIWJb2nSDMH9qbfZhnd1YZKuvUpK0rEU=

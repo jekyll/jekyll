@@ -23,11 +23,11 @@ If you have direct access yourself to the deployment web server yourself, the pr
 
 ## Automated methods
 
-There are also a number of ways to easily automate the deployment of a Jekyll site. If you’ve got another method that isn’t listed below, we’d love it if you [contributed](../contributing) so that everyone else can benefit too.
+There are also a number of ways to easily automate the deployment of a Jekyll site. If you’ve got another method that isn’t listed below, we’d love it if you [contributed](../contributing/) so that everyone else can benefit too.
 
 ### Git post-update hook
 
-If you store your jekyll site in [Git](http://git-scm.com/) (you are using version control, right?), it’s pretty easy to automate the
+If you store your Jekyll site in [Git](http://git-scm.com/) (you are using version control, right?), it’s pretty easy to automate the
 deployment process by setting up a post-update hook in your Git
 repository, [like
 this](http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/).
@@ -37,7 +37,7 @@ this](http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/0
 To have a remote server handle the deploy for you every time you push changes using Git, you can create a user account which has all the public keys that are authorized to deploy in its `authorized_keys` file. With that in place, setting up the post-receive hook is done as follows:
 
 {% highlight bash %}
-laptop$ ssh deployer@myserver.com
+laptop$ ssh deployer@example.com
 server$ mkdir myrepo.git
 server$ cd myrepo.git
 server$ git --bare init
@@ -63,7 +63,7 @@ Finally, run the following command on any users laptop that needs to be able to
 deploy using this hook:
 
 {% highlight bash %}
-laptops$ git remote add deploy deployer@myserver.com:~/myrepo.git
+laptops$ git remote add deploy deployer@example.com:~/myrepo.git
 {% endhighlight %}
 
 Deploying is now as easy as telling nginx or Apache to look at
@@ -76,7 +76,7 @@ laptops$ git push deploy master
 ### Rake
 
 Another way to deploy your Jekyll site is to use [Rake](https://github.com/jimweirich/rake), [HighLine](https://github.com/JEG2/highline), and
-[Net::SSH](http://net-ssh.rubyforge.org/). A more complex example of deploying Jekyll with Rake that deals with multiple branches can be found in [Git Ready](https://github.com/gitready/gitready/blob/en/Rakefile).
+[Net::SSH](http://net-ssh.rubyforge.org/). A more complex example of deploying Jekyll with Rake that deals with multiple branches can be found in [Git Ready](https://github.com/gitready/gitready/blob/cdfbc4ec5321ff8d18c3ce936e9c749dbbc4f190/Rakefile).
 
 ### rsync
 
@@ -86,7 +86,7 @@ this script from within Textmate.
 
 ## Rack-Jekyll
 
-[Rack-Jekyll](http://github.com/bry4n/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](http://github.com/rtomakyo/shotgun/), [rackup](http://github.com/rack/rack), [mongrel](http://github.com/mongrel/mongrel), [unicorn](http://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
+[Rack-Jekyll](http://github.com/adaoraul/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](http://github.com/rtomakyo/shotgun/), [rackup](http://github.com/rack/rack), [mongrel](http://github.com/mongrel/mongrel), [unicorn](http://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
 
 Read [this post](http://blog.crowdint.com/2010/08/02/instant-blog-using-jekyll-and-heroku.html) on how to deploy to Heroku using Rack-Jekyll.
 
@@ -97,13 +97,18 @@ If you want to maintain Jekyll inside your existing Rails app, [Jekyll-Admin](ht
 ## Amazon S3
 
 If you want to host your site in Amazon S3, you can do so with
-[jekyll-s3](https://github.com/laurilehmijoki/jekyll-s3) application. It will
+[s3_website](https://github.com/laurilehmijoki/s3_website) application. It will
 push your site to Amazon S3 where it can be served like any web server,
 dynamically scaling to almost unlimited traffic. This approach has the
 benefit of being about the cheapest hosting option available for
 low-volume blogs as you only pay for what you use.
 
+## OpenShift
+
+If you'd like to deploy your site to an OpenShift gear, there's [a cartridge
+for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
+
 <div class="note">
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
-  <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages">host your Jekyll-powered website for free</a>.</p>
+  <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages/">host your Jekyll-powered website for free</a>.</p>
 </div>

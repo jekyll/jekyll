@@ -11,13 +11,13 @@ with. Below are some Jekyll-powered blogs which were hand-picked for
 learning purposes.
 
 - [Tom Preston-Werner](http://tom.preston-werner.com/)
-    ([source](http://github.com/mojombo/mojombo.github.com))
+    ([source](https://github.com/mojombo/mojombo.github.io))
 - [Nick Quaranto](http://quaran.to/)
     ([source](https://github.com/qrush/qrush.github.com))
 - [Roger Chapman](http://rogchap.com/)
     ([source](https://github.com/rogchap/rogchap.github.com))
-- [GitHub Official Teaching Materials](http://teach.github.com)
-    ([source](https://github.com/github/teach.github.com))
+- [GitHub Official Teaching Materials](http://training.github.com)
+    ([source](https://github.com/github/training.github.com/tree/7049d7532a6856411e34046aedfce43a4afaf424))
 - [Rasmus Andersson](http://rsms.me/)
     ([source](https://github.com/rsms/rsms.github.com))
 - [Scott Chacon](http://schacon.github.com)
@@ -26,4 +26,4 @@ learning purposes.
 If you would like to explore more examples, you can find a list of sites
 and their sources on the ["Sites" page in the Jekyll wiki][jekyll-sites].
 
-[jekyll-sites]: https://github.com/mojombo/jekyll/wiki/Sites
+[jekyll-sites]: {{ site.repository }}/wiki/Sites

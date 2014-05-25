@@ -1,0 +1,27 @@
+---
+layout: news
+---
+
+<article>
+  <h2>
+    {{ page.title }}
+    <a href="{{ page.url }}" class="permalink" title="Permalink">∞</a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      {{ page.categories | array_to_sentence_string }}
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      {{ page.date | date_to_string }}
+    </span>
+    <a href="https://github.com/{{ page.author }}" class="post-author">
+      <img src="https://github.com/{{ page.author }}.png" class="avatar" alt="{{ page.author }}" width="24" height="24">
+      {{ page.author }}
+    </a>
+  </div>
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

@@ -10,28 +10,34 @@ module Jekyll
       'destination'   => File.join(Dir.pwd, '_site'),
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
+      'data_source'   =>  '_data',
       'keep_files'    => ['.git','.svn'],
+      'gems'          => [],
+      'collections'   => nil,
 
       'timezone'      => nil,           # use the local timezone
 
+      'encoding'      => 'utf-8',       # always use utf-8 encoding. NEVER FORGET
+
       'safe'          => false,
+      'detach'        => false,          # default to not detaching the server
       'show_drafts'   => nil,
       'limit_posts'   => 0,
       'lsi'           => false,
       'future'        => true,           # remove and make true just default
-      'pygments'      => true,
+      'unpublished'   => false,
 
-      'relative_permalinks' => true,     # backwards-compatibility with < 1.0
-                                         # will be set to false once 1.1 hits
+      'relative_permalinks' => false,
 
-      'markdown'      => 'maruku',
+      'markdown'      => 'kramdown',
+      'highlighter'   => 'pygments',
       'permalink'     => 'date',
-      'baseurl'       => '/',
+      'baseurl'       => '',
       'include'       => ['.htaccess'],
       'exclude'       => [],
-      'paginate_path' => 'page:num',
+      'paginate_path' => '/page:num',
 
-      'markdown_ext'  => 'markdown,mkd,mkdn,md',
+      'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'textile_ext'   => 'textile',
 
       'port'          => '4000',
@@ -39,12 +45,15 @@ module Jekyll
 
       'excerpt_separator' => "\n\n",
 
+      'defaults'     => [],
+
       'maruku' => {
         'use_tex'    => false,
         'use_divs'   => false,
         'png_engine' => 'blahtex',
         'png_dir'    => 'images/latex',
-        'png_url'    => '/images/latex'
+        'png_url'    => '/images/latex',
+        'fenced_code_blocks' => true
       },
 
       'rdiscount' => {
@@ -94,6 +103,17 @@ module Jekyll
       override['source'] || self['source'] || DEFAULTS['source']
     end
 
+    def safe_load_file(filename)
+      case File.extname(filename)
+      when '.toml'
+        TOML.load_file(filename)
+      when /\.y(a)?ml/
+        SafeYAML.load_file(filename)
+      else
+        raise ArgumentError, "No parser for '#{filename}' is available. Use a .toml or .y(a)ml file instead."
+      end
+    end
+
     # Public: Generate list of configuration files from the override
     #
     # override - the command-line options hash
@@ -102,7 +122,13 @@ module Jekyll
     def config_files(override)
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
-      config_files = File.join(source(override), "_config.yml") if config_files.to_s.empty?
+      if config_files.to_s.empty?
+        default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
+          File.exists? Jekyll.sanitized_path(source(override), "_config.#{ext}")
+        end
+        config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
+        @default_config_file = true
+      end
       config_files = [config_files] unless config_files.is_a? Array
       config_files
     end
@@ -113,10 +139,18 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
-      next_config = YAML.safe_load_file(file)
-      raise "Configuration file: (INVALID) #{file}".yellow if !next_config.is_a?(Hash)
+      next_config = safe_load_file(file)
+      raise ArgumentError.new("Configuration file: (INVALID) #{file}".yellow) unless next_config.is_a?(Hash)
       Jekyll.logger.info "Configuration file:", file
       next_config
+    rescue SystemCallError
+      if @default_config_file
+        Jekyll.logger.warn "Configuration file:", "none"
+        {}
+      else
+        Jekyll.logger.error "Fatal:", "The configuration file '#{file}' could not be found."
+        raise LoadError, "The Configuration file '#{file}' could not be found."
+      end
     end
 
     # Public: Read in a list of configuration files and merge with this hash
@@ -131,18 +165,15 @@ module Jekyll
       begin
         files.each do |config_file|
           new_config = read_config_file(config_file)
-          configuration = configuration.deep_merge(new_config)
+          configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
-      rescue SystemCallError
-        # Errno:ENOENT = file not found
-        Jekyll.logger.warn "Configuration file:", "none"
-      rescue => err
+      rescue ArgumentError => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " +
                      "Using defaults (and options)."
         $stderr.puts "#{err}"
       end
 
-      configuration.backwards_compatibilize
+      configuration.fix_common_issues.backwards_compatibilize
     end
 
     # Public: Split a CSV string into an array containing its values
@@ -185,24 +216,44 @@ module Jekyll
         config.delete('server_port')
       end
 
-      if config.has_key?('exclude') && config['exclude'].is_a?(String)
-        Jekyll.logger.warn "Deprecation:", "The 'exclude' configuration option" +
-                               " must now be specified as an array, but you specified" +
-                               " a string. For now, we've treated the string you provided" +
-                               " as a list of comma-separated values."
-        config['exclude'] = csv_to_array(config['exclude'])
+      if config.has_key? 'pygments'
+        Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
+                            " has been renamed to 'highlighter'. Please update your" +
+                            " config file accordingly. The allowed values are 'rouge', " +
+                            "'pygments' or null."
+
+        config['highlighter'] = 'pygments' if config['pygments']
+        config.delete('pygments')
       end
 
-      if config.has_key?('include') && config['include'].is_a?(String)
-        Jekyll.logger.warn "Deprecation:", "The 'include' configuration option" +
-                               " must now be specified as an array, but you specified" +
-                               " a string. For now, we've treated the string you provided" +
-                               " as a list of comma-separated values."
-        config['include'] = csv_to_array(config['include'])
+      %w[include exclude].each do |option|
+        if config.fetch(option, []).is_a?(String)
+          Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
+            " must now be specified as an array, but you specified" +
+            " a string. For now, we've treated the string you provided" +
+            " as a list of comma-separated values."
+          config[option] = csv_to_array(config[option])
+        end
+      end
+
+      if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
+        Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
+          "Markdown processor. Maruku support has been deprecated and will " +
+          "be removed in 3.0.0. We recommend you switch to Kramdown."
+      end
+      config
+    end
+
+    def fix_common_issues
+      config = clone
+
+      if config.has_key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
+        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" +
+          " positive integer or nil. It's currently set to '#{config['paginate'].inspect}'."
+        config['paginate'] = nil
       end
 
       config
     end
-
   end
 end

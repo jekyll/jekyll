@@ -14,7 +14,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "ensure post count is as expected" do
-      assert_equal 34, @site.posts.size
+      assert_equal 42, @site.posts.size
     end
 
     should "insert site.posts into the index" do
@@ -32,13 +32,27 @@ class TestGeneratedSite < Test::Unit::TestCase
       assert_equal "published.html", published.first
     end
 
+    should "hide unpublished page" do
+      assert !File.exist?(dest_dir('/unpublished.html'))
+    end
+
     should "not copy _posts directory" do
       assert !File.exist?(dest_dir('_posts'))
     end
 
     should "process other static files and generate correct permalinks" do
-      assert File.exists?(dest_dir('/about/index.html'))
-      assert File.exists?(dest_dir('/contacts.html'))
+      assert File.exist?(dest_dir('/about/index.html'))
+      assert File.exist?(dest_dir('/contacts.html'))
+    end
+
+    should "print a nice list of static files" do
+      expected_output = Regexp.new <<-OUTPUT
+- /css/screen.css last edited at \\d+ with extname .css
+- /pgp.key last edited at \\d+ with extname .key
+- /products.yml last edited at \\d+ with extname .yml
+- /symlink-test/symlinked-dir/screen.css last edited at \\d+ with extname .css
+OUTPUT
+      assert_match expected_output, File.read(dest_dir('static_files.html'))
     end
   end
 

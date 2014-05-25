@@ -1,8 +1,8 @@
 # Gist Liquid Tag
 #
 # Example:
-#    {% gist 1234567 %}
-#    {% gist 1234567 file.rb %}
+#    {% gist username/1234567 %}
+#    {% gist username/1234567 file.rb %}
 
 module Jekyll
   class GistTag < Liquid::Tag
@@ -12,7 +12,14 @@ module Jekyll
         gist_id, filename = tag_contents[0], tag_contents[1]
         gist_script_tag(gist_id, filename)
       else
-        "Error parsing gist id"
+        raise ArgumentError.new <<-eos
+Syntax error in tag 'gist' while parsing the following markup:
+
+  #{@markup}
+
+Valid syntax:
+  for all gists: {% gist user/1234567 %}
+eos
       end
     end
 

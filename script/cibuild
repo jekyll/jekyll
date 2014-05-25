@@ -1,0 +1,4 @@
+#! /bin/bash
+
+script/branding
+bundle exec rake

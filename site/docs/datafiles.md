@@ -1,0 +1,107 @@
+---
+layout: docs
+title: Data Files
+prev_section: collections
+next_section: assets
+permalink: /docs/datafiles/
+---
+
+In addition to the [built-in variables](../variables/) available from Jekyll,
+you can specify your own custom data that can be accessed via the [Liquid
+templating system](http://wiki.github.com/shopify/liquid/liquid-for-designers).
+
+Jekyll supports loading data from [YAML](http://yaml.org/) and [JSON](http://www.json.org/) files located in the
+`_data` directory.
+
+This powerful feature allows you to avoid repetition in your templates and to
+set site specific options without changing `_config.yml`.
+
+Plugins/themes can also leverage Data Files to set configuration variables.
+
+## The Data Folder
+
+As explained on the [directory structure](../structure/) page, the `_data`
+folder is where you can store additional data for Jekyll to use when generating
+your site. These files must be YAML files (using either the `.yml`, `.yaml` or `.json`
+extension) and they will be accessible via `site.data`.
+
+## Example: List of members
+
+Here is a basic example of using Data Files to avoid copy-pasting large chunks of
+code in your Jekyll templates:
+
+In `_data/members.yml`:
+
+{% highlight yaml %}
+- name: Tom Preston-Werner
+  github: mojombo
+
+- name: Parker Moore
+  github: parkr
+
+- name: Liu Fengyun
+  github: liufengyun
+{% endhighlight %}
+
+This data can be accessed via `site.data.members` (notice that the filename
+determines the variable name).
+
+You can now render the list of members in a template:
+
+{% highlight html %}
+{% raw %}
+<ul>
+{% for member in site.data.members %}
+  <li>
+    <a href="https://github.com/{{ member.github }}">
+      {{ member.name }}
+    </a>
+  </li>
+{% endfor %}
+</ul>
+{% endraw %}
+{% endhighlight %}
+
+## Example: Organizations
+
+Data files can also be placed in sub-folders of the `_data` folder. Each folder level will be added to a variable's namespace. The example bellow shows how GitHub organizations could be defined separately in a file under the `orgs` folder:
+
+In `_data/orgs/jekyll.yml`:
+
+{% highlight yaml %}
+username: jekyll
+name: Jekyll
+members:
+  - name: Tom Preston-Werner
+    github: mojombo
+
+  - name: Parker Moore
+    github: parkr
+{% endhighlight %}
+
+In `_data/orgs/doeorg.yml`:
+
+{% highlight yaml %}
+username: doeorg
+name: Doe Org
+members:
+  - name: John Doe
+    github: jdoe
+{% endhighlight %}
+
+The organizations can then be accessed via `site.data.orgs`, followed by the file name:
+
+{% highlight html %}
+{% raw %}
+<ul>
+{% for org in site.data.orgs %}
+  <li>
+    <a href="https://github.com/{{ org.username }}">
+      {{ org.name }}
+    </a>
+    ({{ org.members | size }} members)
+  </li>
+{% endfor %}
+</ul>
+{% endraw %}
+{% endhighlight %}

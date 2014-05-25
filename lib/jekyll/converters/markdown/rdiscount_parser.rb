@@ -24,7 +24,9 @@ module Jekyll
         private
         def replace_generated_toc(rd, html, toc_token)
           if rd.generate_toc && html.include?(toc_token)
-            html.gsub(toc_token, rd.toc_content.force_encoding('utf-8'))
+            utf8_toc = rd.toc_content
+            utf8_toc.force_encoding('utf-8') if utf8_toc.respond_to?(:force_encoding)
+            html.gsub(toc_token, utf8_toc)
           else
             html
           end

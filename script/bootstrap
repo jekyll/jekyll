@@ -1,2 +1,4 @@
 #!/bin/sh
+
+script/branding
 bundle install

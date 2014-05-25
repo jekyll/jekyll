@@ -154,9 +154,31 @@ class TestSite < Test::Unit::TestCase
       assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
     end
 
-    should "read layouts" do
-      @site.read_layouts
-      assert_equal ["default", "simple"].sort, @site.layouts.keys.sort
+    should "sort pages alphabetically" do
+      stub.proxy(Dir).entries { |entries| entries.reverse }
+      @site.process
+      # files in symlinked directories may appear twice
+      sorted_pages = %w(
+        %#\ +.md
+        .htaccess
+        about.html
+        bar.html
+        coffeescript.coffee
+        contacts.html
+        deal.with.dots.html
+        environment.html
+        exploit.md
+        foo.md
+        index.html
+        index.html
+        main.scss
+        main.scss
+        properties.html
+        sitemap.xml
+        static_files.html
+        symlinked-file
+      )
+      assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
     should "read posts" do
@@ -164,6 +186,24 @@ class TestSite < Test::Unit::TestCase
       posts = Dir[source_dir('_posts', '**', '*')]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
+    end
+
+    should "read pages with yaml front matter" do
+      abs_path = File.expand_path("about.html", @site.source)
+      assert_equal true, @site.send(:has_yaml_header?, abs_path)
+    end
+
+    should "enforce a strict 3-dash limit on the start of the YAML front-matter" do
+      abs_path = File.expand_path("pgp.key", @site.source)
+      assert_equal false, @site.send(:has_yaml_header?, abs_path)
+    end
+
+    should "expose jekyll version to site payload" do
+      assert_equal Jekyll::VERSION, @site.site_payload['jekyll']['version']
+    end
+
+    should "expose list of static files to site payload" do
+      assert_equal @site.static_files, @site.site_payload['site']['static_files']
     end
 
     should "deploy payload" do
@@ -176,70 +216,7 @@ class TestSite < Test::Unit::TestCase
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
-      assert_equal 4, @site.categories['foo'].size
-    end
-
-    should "filter entries" do
-      ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
-              .baz.markdow foo.markdown~]
-      ent2 = %w[.htaccess _posts _pages bla.bla]
-
-      assert_equal %w[foo.markdown bar.markdown baz.markdown], @site.filter_entries(ent1)
-      assert_equal %w[.htaccess bla.bla], @site.filter_entries(ent2)
-    end
-
-    should "filter entries with exclude" do
-      excludes = %w[README TODO]
-      files = %w[index.html site.css .htaccess]
-
-      @site.exclude = excludes + ["exclude*"]
-      assert_equal files, @site.filter_entries(excludes + files + ["excludeA"])
-    end
-
-    should "not filter entries within include" do
-      includes = %w[_index.html .htaccess include*]
-      files = %w[index.html _index.html .htaccess includeA]
-
-      @site.include = includes
-      assert_equal files, @site.filter_entries(files)
-    end
-
-    should "filter symlink entries when safe mode enabled" do
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
-      end
-      site = Site.new(Jekyll.configuration)
-      stub(File).symlink?('symlink.js') {true}
-      files = %w[symlink.js]
-      assert_equal [], site.filter_entries(files)
-    end
-
-    should "not filter symlink entries when safe mode disabled" do
-      stub(File).symlink?('symlink.js') {true}
-      files = %w[symlink.js]
-      assert_equal files, @site.filter_entries(files)
-    end
-
-    should "not include symlinks in safe mode" do
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
-      end
-      site = Site.new(Jekyll.configuration)
-
-      site.read_directories("symlink-test")
-      assert_equal [], site.pages
-      assert_equal [], site.static_files
-    end
-
-    should "include symlinks in unsafe mode" do
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => false})
-      end
-      site = Site.new(Jekyll.configuration)
-
-      site.read_directories("symlink-test")
-      assert_not_equal [], site.pages
-      assert_not_equal [], site.static_files
+      assert_equal 5, @site.categories['foo'].size
     end
 
     context 'error handling' do
@@ -318,6 +295,52 @@ class TestSite < Test::Unit::TestCase
       end
     end
 
+    context 'using a non-default markdown processor in the configuration' do
+      should 'use the non-default markdown processor' do
+        class Jekyll::Converters::Markdown::CustomMarkdown
+          def initialize(*args)
+            @args = args
+          end
+
+          def convert(*args)
+            ""
+          end
+        end
+
+        custom_processor = "CustomMarkdown"
+        s = Site.new(Jekyll.configuration.merge({ 'markdown' => custom_processor }))
+        assert_nothing_raised do
+          s.process
+        end
+
+        # Do some cleanup, we don't like straggling stuff's.
+        Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
+      end
+
+      should 'ignore, if there are any bad characters in the class name' do
+        module Jekyll::Converters::Markdown::Custom
+          class Markdown
+            def initialize(*args)
+              @args = args
+            end
+
+            def convert(*args)
+              ""
+            end
+          end
+        end
+
+        bad_processor = "Custom::Markdown"
+        s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+        assert_raise Jekyll::FatalException do
+          s.process
+        end
+
+        # Do some cleanup, we don't like straggling stuff's.
+        Jekyll::Converters::Markdown.send(:remove_const, :Custom)
+      end
+    end
+
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
@@ -331,6 +354,96 @@ class TestSite < Test::Unit::TestCase
         s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
         assert_raise Jekyll::FatalException do
           s.process
+        end
+      end
+    end
+
+    context 'data directory' do
+      should 'auto load yaml files' do
+        site = Site.new(Jekyll.configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.yaml'))
+
+        assert_equal site.data['members'], file_content
+        assert_equal site.site_payload['site']['data']['members'], file_content
+      end
+
+      should 'auto load yml files' do
+        site = Site.new(Jekyll.configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'languages.yml'))
+
+        assert_equal site.data['languages'], file_content
+        assert_equal site.site_payload['site']['data']['languages'], file_content
+      end
+
+      should 'auto load json files' do
+        site = Site.new(Jekyll.configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.json'))
+
+        assert_equal site.data['members'], file_content
+        assert_equal site.site_payload['site']['data']['members'], file_content
+      end
+
+      should 'auto load yaml files in subdirectory' do
+        site = Site.new(Jekyll.configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'categories', 'dairy.yaml'))
+
+        assert_equal site.data['categories']['dairy'], file_content
+        assert_equal site.site_payload['site']['data']['categories']['dairy'], file_content
+      end
+
+      should "load symlink files in unsafe mode" do
+        site = Site.new(Jekyll.configuration.merge({'safe' => false}))
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
+
+        assert_equal site.data['products'], file_content
+        assert_equal site.site_payload['site']['data']['products'], file_content
+      end
+
+      should "not load symlink files in safe mode" do
+        site = Site.new(Jekyll.configuration.merge({'safe' => true}))
+        site.process
+
+        assert_nil site.data['products']
+        assert_nil site.site_payload['site']['data']['products']
+      end
+
+    end
+
+    context "manipulating the Jekyll environment" do
+      setup do
+        @site = Site.new(site_configuration)
+        @site.process
+        @page = @site.pages.find { |p| p.name == "environment.html" }
+      end
+
+      should "default to 'development'" do
+        assert_equal "development", @page.content.strip
+      end
+
+      context "in production" do
+        setup do
+          ENV["JEKYLL_ENV"] = "production"
+          @site = Site.new(site_configuration)
+          @site.process
+          @page = @site.pages.find { |p| p.name == "environment.html" }
+        end
+
+        teardown do
+          ENV.delete("JEKYLL_ENV")
+        end
+
+        should "be overridden by JEKYLL_ENV" do
+          assert_equal "production", @page.content.strip
         end
       end
     end

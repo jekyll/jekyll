@@ -25,6 +25,16 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/contacts.html", @page.url
       end
 
+      should "not published when published yaml is false" do
+        @page = setup_page("unpublished.html")
+        assert_equal false, @page.published?
+      end
+
+      should "create url with non-alphabetic characters" do
+        @page = setup_page('+', '%# +.md')
+        assert_equal "/+/%25%23%20+.html", @page.url
+      end
+
       context "in a directory hierarchy" do
         should "create url based on filename" do
           @page = setup_page('/contacts', 'bar.html')
@@ -45,6 +55,29 @@ class TestPage < Test::Unit::TestCase
       should "deal properly with dots" do
         @page = setup_page('deal.with.dots.html')
         assert_equal "deal.with.dots", @page.basename
+      end
+
+      should "make properties accessible through #[]" do
+        page = setup_page('properties.html')
+        attrs = {
+          content: "All the properties.\n",
+          dir: "/properties/",
+          excerpt: nil,
+          foo: 'bar',
+          layout: 'default',
+          name: "properties.html",
+          path: "properties.html",
+          permalink: '/properties/',
+          published: nil,
+          title: 'Properties Page',
+          url: "/properties/"
+        }
+
+        attrs.each do |attr, val|
+          attr_str = attr.to_s
+          result = page[attr_str]
+          assert_equal val, result, "For <page[\"#{attr_str}\"]>:"
+        end
       end
 
       context "with pretty url style" do
@@ -101,6 +134,16 @@ class TestPage < Test::Unit::TestCase
         assert_equal @page.permalink, @page.url
         assert_equal "/about/", @page.dir
       end
+
+      should "not be writable outside of destination" do
+        unexpected = File.expand_path("../../../baddie.html", dest_dir)
+        File.delete unexpected if File.exist?(unexpected)
+        page = setup_page("exploit.md")
+        do_render(page)
+        page.write(dest_dir)
+
+        assert !File.exist?(unexpected)
+      end
     end
 
     context "with specified layout of nil" do
@@ -124,7 +167,25 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir, 'contacts.html'))
+        assert File.exist?(File.join(dest_dir, 'contacts.html'))
+      end
+
+      should "write even when the folder name is plus and permalink has +" do
+        page = setup_page('+', 'foo.md')
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exist?(File.join(dest_dir, '+', 'plus+in+url'))
+      end
+
+      should "write even when permalink has '%# +'" do
+        page = setup_page('+', '%# +.md')
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exist?(File.join(dest_dir, '+', '%# +.html'))
       end
 
       should "write properly without html extension" do
@@ -134,7 +195,7 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir, 'contacts', 'index.html'))
+        assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
       end
 
       should "write properly with extension different from html" do
@@ -146,7 +207,7 @@ class TestPage < Test::Unit::TestCase
         assert_equal("/sitemap.xml", page.url)
         assert_nil(page.url[/\.html$/])
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir,'sitemap.xml'))
+        assert File.exist?(File.join(dest_dir,'sitemap.xml'))
       end
 
       should "write dotfiles properly" do
@@ -155,7 +216,7 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exists?(File.join(dest_dir, '.htaccess'))
+        assert File.exist?(File.join(dest_dir, '.htaccess'))
       end
 
       context "in a directory hierarchy" do
@@ -165,7 +226,7 @@ class TestPage < Test::Unit::TestCase
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, 'contacts', 'index.html'))
+          assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
         end
 
         should "write properly" do
@@ -174,7 +235,7 @@ class TestPage < Test::Unit::TestCase
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, 'contacts', 'bar.html'))
+          assert File.exist?(File.join(dest_dir, 'contacts', 'bar.html'))
         end
 
         should "write properly without html extension" do
@@ -184,7 +245,7 @@ class TestPage < Test::Unit::TestCase
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, 'contacts', 'bar', 'index.html'))
+          assert File.exist?(File.join(dest_dir, 'contacts', 'bar', 'index.html'))
         end
       end
     end

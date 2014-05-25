@@ -13,31 +13,16 @@ module Jekyll
 
         def convert(content)
           # Check for use of coderay
-          kramdown_configs = if @config['kramdown']['use_coderay']
-            base_kramdown_configs.merge({
-              :coderay_wrap               => @config['kramdown']['coderay']['coderay_wrap'],
-              :coderay_line_numbers       => @config['kramdown']['coderay']['coderay_line_numbers'],
-              :coderay_line_number_start  => @config['kramdown']['coderay']['coderay_line_number_start'],
-              :coderay_tab_width          => @config['kramdown']['coderay']['coderay_tab_width'],
-              :coderay_bold_every         => @config['kramdown']['coderay']['coderay_bold_every'],
-              :coderay_css                => @config['kramdown']['coderay']['coderay_css']
-            })
-          else
-            # not using coderay
-            base_kramdown_configs
+          if @config['kramdown']['use_coderay']
+            %w[wrap line_numbers line_numbers_start tab_width bold_every css default_lang].each do |opt|
+              key = "coderay_#{opt}"
+              @config['kramdown'][key] = @config['kramdown']['coderay'][key] unless @config['kramdown'].has_key?(key)
+            end
           end
-          Kramdown::Document.new(content, kramdown_configs).to_html
+
+          Kramdown::Document.new(content, Utils.symbolize_hash_keys(@config["kramdown"])).to_html
         end
 
-        def base_kramdown_configs
-          {
-            :auto_ids      => @config['kramdown']['auto_ids'],
-            :footnote_nr   => @config['kramdown']['footnote_nr'],
-            :entity_output => @config['kramdown']['entity_output'],
-            :toc_levels    => @config['kramdown']['toc_levels'],
-            :smart_quotes  => @config['kramdown']['smart_quotes']
-          }
-        end
       end
     end
   end

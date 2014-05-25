@@ -7,6 +7,15 @@ module Jekyll
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = %w[
+      content
+      dir
+      name
+      path
+      url
+    ]
+
     # Initialize a new Page.
     #
     # site - The Site object.
@@ -19,8 +28,13 @@ module Jekyll
       @dir  = dir
       @name = name
 
-      self.process(name)
-      self.read_yaml(File.join(base, dir), name)
+
+      process(name)
+      read_yaml(File.join(base, dir), name)
+
+      data.default_proc = proc do |hash, key|
+        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+      end
     end
 
     # The generated directory into which the page will be placed
@@ -37,14 +51,19 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      self.data && self.data['permalink']
+      return nil if data.nil? || data['permalink'].nil?
+      if site.config['relative_permalinks']
+        File.join(@dir, data['permalink'])
+      else
+        data['permalink']
+      end
     end
 
     # The template of the permalink.
     #
     # Returns the template String.
     def template
-      if self.site.permalink_style == :pretty
+      if site.permalink_style == :pretty
         if index? && html?
           "/:path/"
         elsif html?
@@ -61,29 +80,21 @@ module Jekyll
     #
     # Returns the String url.
     def url
-      return @url if @url
+      @url ||= URL.new({
+        :template => template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
+      }).to_s
+    end
 
-      url = if permalink
-        if site.config['relative_permalinks']
-          File.join(@dir, permalink)
-        else
-          permalink
-        end
-      else
-        {
-          "path"       => @dir,
-          "basename"   => self.basename,
-          "output_ext" => self.output_ext,
-        }.inject(template) { |result, token|
-          result.gsub(/:#{token.first}/, token.last)
-        }.gsub(/\/\//, "/")
-      end
-
-      # sanitize url
-      @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
-      @url += "/" if url =~ /\/$/
-      @url.gsub!(/\A([^\/])/, '/\1')
-      @url
+    # Returns a hash of URL placeholder names (as symbols) mapping to the
+    # desired placeholder replacements. For details see "url.rb"
+    def url_placeholders
+      {
+        :path       => @dir,
+        :basename   => basename,
+        :output_ext => output_ext
+      }
     end
 
     # Extract information from the page filename.
@@ -93,7 +104,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0 .. -self.ext.length-1]
+      self.basename = name[0 .. -ext.length - 1]
     end
 
     # Add any necessary layouts to this post
@@ -103,29 +114,24 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-      payload = {
-        "page" => self.to_liquid,
+      payload = Utils.deep_merge_hashes({
+        "page" => to_liquid,
         'paginator' => pager.to_liquid
-      }.deep_merge(site_payload)
+      }, site_payload)
 
       do_layout(payload, layouts)
-    end
-
-    # Convert this Page's data to a Hash suitable for use by Liquid.
-    #
-    # Returns the Hash representation of this Page.
-    def to_liquid
-      self.data.deep_merge({
-        "url"        => self.url,
-        "content"    => self.content,
-        "path"       => self.data['path'] || path })
     end
 
     # The path to the source file
     #
     # Returns the path to the source file
     def path
-      File.join(@dir, @name).sub(/\A\//, '')
+      data.fetch('path', relative_path.sub(/\A\//, ''))
+    end
+
+    # The path to the page source file, relative to the site source
+    def relative_path
+      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?))
     end
 
     # Obtain destination path.
@@ -134,16 +140,14 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      # The url needs to be unescaped in order to preserve the correct
-      # filename.
-      path = File.join(dest, CGI.unescape(self.url))
-      path = File.join(path, "index.html") if self.url =~ /\/$/
+      path = Jekyll.sanitized_path(dest, URL.unescape_path(url))
+      path = File.join(path, "index.html") if url =~ /\/$/
       path
     end
 
     # Returns the object as a debug String.
     def inspect
-      "#<Jekyll:Page @name=#{self.name.inspect}>"
+      "#<Jekyll:Page @name=#{name.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.
@@ -157,7 +161,7 @@ module Jekyll
     end
 
     def uses_relative_permalinks
-      permalink && @dir != "" && site.config['relative_permalinks']
+      permalink && !@dir.empty? && site.config['relative_permalinks']
     end
   end
 end

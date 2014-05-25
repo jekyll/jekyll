@@ -16,7 +16,7 @@ folders you need for paginated listings.
   <p>
     Pagination does not work with Markdown or Textile files in your Jekyll site.
     It will only work when used within HTML files. Since you’ll likely be using
-    this for the list of Posts, this shouldn't be an issue.
+    this for the list of Posts, this shouldn’t be an issue.
   </p>
 </div>
 
@@ -123,7 +123,8 @@ attributes:
   <p>Pagination pages through every post in the <code>posts</code>
   variable regardless of variables defined in the YAML Front Matter of
   each. It does not currently allow paging over groups of posts linked
-  by a common tag or category.</p>
+  by a common tag or category. It cannot include any collection of
+  documents because it is restricted to posts.</p>
 </div>
 
 ## Render the paginated Posts
@@ -182,51 +183,30 @@ page with links to all but the current page.
 
 {% highlight html %}
 {% raw %}
-<div id="post-pagination" class="pagination">
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
   {% if paginator.previous_page %}
-    <p class="previous">
-      {% if paginator.previous_page == 1 %}
-        <a href="/">Previous</a>
-      {% else %}
-        <a href="{{ paginator.previous_page_path }}">Previous</a>
-      {% endif %}
-    </p>
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
   {% else %}
-    <p class="previous disabled">
-      <span>Previous</span>
-    </p>
+    <span>&laquo; Prev</span>
   {% endif %}
 
-  <ul class="pages">
-    <li class="page">
-      {% if paginator.page == 1 %}
-        <span class="current-page">1</span>
-      {% else %}
-        <a href="/">1</a>
-      {% endif %}
-    </li>
-
-    {% for count in (2..paginator.total_pages) %}
-      <li class="page">
-        {% if count == paginator.page %}
-          <span class="current-page">{{ count }}</span>
-        {% else %}
-          <a href="/page{{ count }}">{{ count }}</a>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <em>{{ page }}</em>
+    {% elsif page == 1 %}
+      <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+    {% else %}
+      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
 
   {% if paginator.next_page %}
-    <p class="next">
-      <a href="{{ paginator.next_page_path }}">Next</a>
-    </p>
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
   {% else %}
-    <p class="next disabled">
-      <span>Next</span>
-    </p>
+    <span>Next &raquo;</span>
   {% endif %}
-
 </div>
+{% endif %}
 {% endraw %}
 {% endhighlight %}

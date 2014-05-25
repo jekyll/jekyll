@@ -5,30 +5,21 @@ module Jekyll
 
       # The regular expression syntax checker. Start with the language specifier.
       # Follow that by zero or more space separated options that take one of two
-      # forms:
-      #
-      # 1. name
-      # 2. name=value
+      # forms: name or name=value
       SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=\w+)?)*)$/
 
       def initialize(tag_name, markup, tokens)
         super
         if markup.strip =~ SYNTAX
-          @lang = $1
+          @lang = $1.downcase
           @options = {}
           if defined?($2) && $2 != ''
             $2.split.each do |opt|
               key, value = opt.split('=')
-              if value.nil?
-                if key == 'linenos'
-                  value = 'inline'
-                else
-                  value = true
-                end
-              end
-              @options[key] = value
+              @options[key.to_sym] = value || true
             end
           end
+          @options[:linenos] = "inline" if @options.key?(:linenos) and @options[:linenos] == true
         else
           raise SyntaxError.new <<-eos
 Syntax Error in tag 'highlight' while parsing the following markup:
@@ -41,41 +32,60 @@ eos
       end
 
       def render(context)
-        if context.registers[:site].pygments
-          render_pygments(context, super)
+        prefix = context["highlighter_prefix"] || ""
+        suffix = context["highlighter_suffix"] || ""
+        code = super.to_s.strip
+
+        output = case context.registers[:site].highlighter
+        when 'pygments'
+          render_pygments(code)
+        when 'rouge'
+          render_rouge(code)
         else
-          render_codehighlighter(context, super)
+          render_codehighlighter(code)
         end
+
+        rendered_output = add_code_tag(output)
+        prefix + rendered_output + suffix
       end
 
-      def render_pygments(context, code)
+      def render_pygments(code)
         require 'pygments'
-
         @options[:encoding] = 'utf-8'
 
-        output = add_code_tags(
-          Pygments.highlight(code, :lexer => @lang, :options => @options),
-          @lang
-        )
+        highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
 
-        output = context["pygments_prefix"] + output if context["pygments_prefix"]
-        output = output + context["pygments_suffix"] if context["pygments_suffix"]
-        output
+        if highlighted_code.nil?
+          Jekyll.logger.error "There was an error highlighting your code:"
+          puts
+          Jekyll.logger.error code
+          puts
+          Jekyll.logger.error "While attempting to convert the above code, Pygments.rb" +
+            " returned an unacceptable value."
+          Jekyll.logger.error "This is usually a timeout problem solved by running `jekyll build` again."
+          raise ArgumentError.new("Pygments.rb returned an unacceptable value when attempting to highlight some code.")
+        end
+
+        highlighted_code
       end
 
-      def render_codehighlighter(context, code)
-        #The div is required because RDiscount blows ass
-        <<-HTML
-  <div>
-    <pre><code class='#{@lang}'>#{h(code).strip}</code></pre>
-  </div>
-        HTML
+      def render_rouge(code)
+        require 'rouge'
+        formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
+        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        code = formatter.format(lexer.lex(code))
+        "<div class=\"highlight\"><pre>#{code}</pre></div>"
       end
 
-      def add_code_tags(code, lang)
+      def render_codehighlighter(code)
+        "<div class=\"highlight\"><pre>#{h(code).strip}</pre></div>"
+      end
+
+      def add_code_tag(code)
         # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>/,'<pre><code class="' + lang + '">')
-        code = code.sub(/<\/pre>/,"</code></pre>")
+        code = code.sub(/<pre>\n*/,'<pre><code class="' + @lang.to_s.gsub("+", "-") + '">')
+        code = code.sub(/\n*<\/pre>/,"</code></pre>")
+        code.strip
       end
 
     end

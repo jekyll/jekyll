@@ -7,8 +7,8 @@ permalink: /docs/permalinks/
 ---
 
 Jekyll supports a flexible way to build your site’s URLs. You can specify the
-permalinks for your site through the [Configuration](../configuration) or in the
-[YAML Front Matter](../frontmatter) for each post. You’re free to choose one of
+permalinks for your site through the [Configuration](../configuration/) or in the
+[YAML Front Matter](../frontmatter/) for each post. You’re free to choose one of
 the built-in styles to create your links or craft your own. The default style is
 `date`.
 
@@ -65,6 +65,14 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
       </td>
       <td>
         <p>Day from the Post’s filename without leading zeros.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>short_year</code></p>
+      </td>
+      <td>
+        <p>Year from the Post’s filename without the century.</p>
       </td>
     </tr>
     <tr>
@@ -138,7 +146,7 @@ Given a post named: `/2009-04-29-slap-chop.textile`
 <table>
   <thead>
     <tr>
-      <th>Permalink Setting</th>
+      <th>URL Template</th>
       <th>Resulting Permalink URL</th>
     </tr>
   </thead>
@@ -153,7 +161,7 @@ Given a post named: `/2009-04-29-slap-chop.textile`
     </tr>
     <tr>
       <td>
-        <p><code>permalink: pretty</code></p>
+        <p><code>pretty</code></p>
       </td>
       <td>
         <p><code>/2009/04/29/slap-chop/index.html</code></p>
@@ -161,7 +169,7 @@ Given a post named: `/2009-04-29-slap-chop.textile`
     </tr>
     <tr>
       <td>
-        <p><code>permalink: /:month-:day-:year/:title.html</code></p>
+        <p><code>/:month-:day-:year/:title.html</code></p>
       </td>
       <td>
         <p><code>/04-29-2009/slap-chop.html</code></p>
@@ -169,7 +177,7 @@ Given a post named: `/2009-04-29-slap-chop.textile`
     </tr>
     <tr>
       <td>
-        <p><code>permalink: /blog/:year/:month/:day/:title</code></p>
+        <p><code>/blog/:year/:month/:day/:title</code></p>
       </td>
       <td>
         <p><code>/blog/2009/04/29/slap-chop/index.html</code></p>

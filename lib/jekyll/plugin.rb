@@ -6,22 +6,15 @@ module Jekyll
                    :high => 10,
                    :highest => 100 }
 
-    # Install a hook so that subclasses are recorded. This method is only
-    # ever called by Ruby itself.
+    # Fetch all the subclasses of this class and its subclasses' subclasses.
     #
-    # base - The Class subclass.
-    #
-    # Returns nothing.
-    def self.inherited(base)
-      subclasses << base
-      subclasses.sort!
-    end
-
-    # The list of Classes that have been subclassed.
-    #
-    # Returns an Array of Class objects.
-    def self.subclasses
-      @subclasses ||= []
+    # Returns an array of descendant classes.
+    def self.descendants
+      descendants = []
+      ObjectSpace.each_object(singleton_class) do |k|
+        descendants.unshift k unless k == self
+      end
+      descendants
     end
 
     # Get or set the priority of this plugin. When called without an

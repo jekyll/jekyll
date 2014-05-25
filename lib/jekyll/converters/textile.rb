@@ -3,8 +3,8 @@ module Jekyll
     class Textile < Converter
       safe true
 
-      pygments_prefix '<notextile>'
-      pygments_suffix '</notextile>'
+      highlighter_prefix '<notextile>'
+      highlighter_suffix '</notextile>'
 
       def setup
         return if @setup

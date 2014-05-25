@@ -24,6 +24,17 @@ $ jekyll build --watch
 #    watched for changes, and regenerated automatically.
 {% endhighlight %}
 
+<div class="note warning">
+  <h5>Destination folders are cleaned on site builds</h5>
+  <p>
+    The contents of <code>&lt;destination&gt;</code> are automatically
+    cleaned when the site is built.  Files or folders that are not
+    created by your site will be removed.  Do not use an important
+    location for <code>&lt;destination&gt;</code>; instead, use it as
+    a staging area and copy files from there to your web server.
+  </p>
+</div>
+
 Jekyll also comes with a built-in development server that will allow you to
 preview what the generated site will look like in your browser locally.
 
@@ -31,11 +42,16 @@ preview what the generated site will look like in your browser locally.
 $ jekyll serve
 # => A development server will run at http://localhost:4000/
 
+$ jekyll serve --detach
+# => Same as `jekyll serve` but will detach from the current terminal.
+#    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
+#    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).
+
 $ jekyll serve --watch
-# => As above, but watch for changes and regenerate automatically.
+# => Same as `jekyll serve`, but watch for changes and regenerate automatically.
 {% endhighlight %}
 
-This is just a few of the available [configuration options](../configuration).
+These are just a few of the available [configuration options](../configuration/).
 Many configuration options can either be specified as flags on the command line,
 or alternatively (and more commonly) they can be specified in a `_config.yml`
 file at the root of the source directory. Jekyll will automatically use the
@@ -55,4 +71,4 @@ $ jekyll build --source _source --destination _deploy
 {% endhighlight %}
 
 For more about the possible configuration options, see the
-[configuration](../configuration) page.
+[configuration](../configuration/) page.

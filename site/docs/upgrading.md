@@ -35,14 +35,14 @@ rebuild each time a file changes, just add the `--watch` flag at the end.
   <p markdown="1">With the new subcommands, the way sites are previewed locally
    changed a bit. Instead of specifying `server: true` in the site's
    configuration file, use `jekyll serve`. The same hold's true for
-   `watch: true`. Instead, use the `&#45;&#45;watch` flag with either `jekyll serve`
+   `watch: true`. Instead, use the `--watch` flag with either `jekyll serve`
     or `jekyll build`.</p>
 </div>
 
 ### Absolute Permalinks
 
 In Jekyll v1.0, we introduced absolute permalinks for pages in subdirectories.
-Until v1.1, it is **opt-in**. Starting with v1.1, however, absolute permalinks
+Until v2.0, it is **opt-in**. Starting with v2.0, however, absolute permalinks
 will become **opt-out**, meaning Jekyll will default to using absolute permalinks
 instead of relative permalinks.
 
@@ -50,9 +50,9 @@ instead of relative permalinks.
 * To continue using relative permalinks, set `relative_permalinks: true` in your configuration file.
 
 <div class="note warning" id="absolute-permalinks-warning">
-  <h5 markdown="1">Absolute permalinks will be default in v1.1 and on</h5>
+  <h5 markdown="1">Absolute permalinks will be default in v2.0 and on</h5>
   <p markdown="1">
-    Starting with Jekyll v1.1.0, `relative_permalinks` will default to `false`,
+    Starting with Jekyll v2.0, `relative_permalinks` will default to `false`,
     meaning all pages will be built using the absolute permalink behaviour.
     The switch will still exist until v2.0.
   </p>
@@ -97,13 +97,13 @@ to one or more config files (comma-delimited, no spaces).
 
 <div class="note info">
   <h5>The config flag explicitly specifies your configuration file(s)</h5>
-  <p markdown="1">If you use the `&#45;&#45;config` flag, Jekyll will ignore your
-    `&#95;config.yml` file. Want to merge a custom configuration with the normal
+  <p markdown="1">If you use the `--config` flag, Jekyll will ignore your
+    `_config.yml` file. Want to merge a custom configuration with the normal
     configuration? No problem. Jekyll will accept more than one custom config
     file via the command line. Config files cascade from right to left, such
-    that if I run `jekyll serve &#45;&#45;config &#95;config.yml,&#95;config-dev.yml`,
-    the values in the config files on the right (`&#95;config-dev.yml`) overwrite
-    those on the left (`&#95;config.yml`) when both contain the same key.</p>
+    that if I run `jekyll serve --config _config.yml,_config-dev.yml`,
+    the values in the config files on the right (`_config-dev.yml`) overwrite
+    those on the left (`_config.yml`) when both contain the same key.</p>
 </div>
 
 ### New Config File Options

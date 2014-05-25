@@ -2,14 +2,14 @@
 layout: docs
 title: Variables
 prev_section: pages
-next_section: migrations
+next_section: collections
 permalink: /docs/variables/
 ---
 
 Jekyll traverses your site looking for files to process. Any files with [YAML
-Front Matter](../frontmatter) are subject to processing. For each of these
+Front Matter](../frontmatter/) are subject to processing. For each of these
 files, Jekyll makes a variety of data available via the [Liquid templating
-system](http://wiki.github.com/shopify/liquid/liquid-for-designers). The
+system](http://wiki.shopify.com/Liquid). The
 following is a reference of the available data.
 
 ## Global Variables
@@ -36,7 +36,7 @@ following is a reference of the available data.
       <td><p><code>page</code></p></td>
       <td><p>
 
-        Page specific information + the <a href="../frontmatter">YAML Front
+        Page specific information + the <a href="../frontmatter/">YAML Front
         Matter</a>. Custom variables set via the YAML front matter will be
         available here. See below for details.
 
@@ -57,7 +57,7 @@ following is a reference of the available data.
 
         When the <code>paginate</code> configuration option is set, this
         variable becomes available for use. See <a
-        href="../pagination">Pagination</a> for details.
+        href="../pagination/">Pagination</a> for details.
 
       </p></td>
     </tr>
@@ -85,6 +85,14 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
+      <td><p><code>site.pages</code></p></td>
+      <td><p>
+
+        A list of all Pages.
+
+      </p></td>
+    </tr>
+    <tr>
       <td><p><code>site.posts</code></p></td>
       <td><p>
 
@@ -101,6 +109,24 @@ following is a reference of the available data.
         For high quality but slow to compute results, run the
         <code>jekyll</code> command with the <code>--lsi</code> (latent semantic
         indexing) option.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.static_files</code></p></td>
+      <td><p>
+
+        A list of all static files (i.e. files not processed by Jekyll's
+        converters or the Liquid renderer). Each file has three properties:
+        <code>path</code>, <code>modified_time</code> and <code>extname</code>.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.documents</code></p></td>
+      <td><p>
+
+        A list of all the documents in every collection.
 
       </p></td>
     </tr>
@@ -161,7 +187,7 @@ following is a reference of the available data.
       <td><p><code>page.title</code></p></td>
       <td><p>
 
-        The title of the Post.
+        The title of the Page.
 
       </p></td>
     </tr>
@@ -189,7 +215,9 @@ following is a reference of the available data.
 
         The Date assigned to the Post. This can be overridden in a Post’s front
         matter by specifying a new date/time in the format
-        <code>YYYY-MM-DD HH:MM:SS</code>
+        <code>YYYY-MM-DD HH:MM:SS</code> (assuming UTC), or
+        <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code> (to specify a time zone using
+        an offset from UTC. e.g. <code>2008-12-14 10:30:00 +0900</code>).
 
       </p></td>
     </tr>
@@ -211,7 +239,7 @@ following is a reference of the available data.
         directory. For example, a post at
         <code>/work/code/_posts/2008-12-24-closures.md</code> would have this
         field set to <code>['work', 'code']</code>. These can also be specified
-        in the <a href="../frontmatter">YAML Front Matter</a>.
+        in the <a href="../frontmatter/">YAML Front Matter</a>.
 
       </p></td>
     </tr>
@@ -220,7 +248,7 @@ following is a reference of the available data.
       <td><p>
 
         The list of tags to which this post belongs. These can be specified in
-        the <a href="../frontmatter">YAML Front Matter</a>.
+        the <a href="../frontmatter/">YAML Front Matter</a>.
 
       </p></td>
     </tr>
@@ -229,8 +257,26 @@ following is a reference of the available data.
       <td><p>
 
         The path to the raw post or page. Example usage: Linking back to the
-        page or post's source on GitHub. This can be overridden in the
-        <a href="../frontmatter">YAML Front Matter</a>.
+        page or post’s source on GitHub. This can be overridden in the
+        <a href="../frontmatter/">YAML Front Matter</a>.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.next</code></p></td>
+      <td><p>
+
+        The next post relative to the position of the current post in
+        <code>site.posts</code>. Returns <code>nil</code> for the last entry.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.previous</code></p></td>
+      <td><p>
+
+        The previous post relative to the position of the current post in
+        <code>site.posts</code>. Returns <code>nil</code> for the first entry.
 
       </p></td>
     </tr>

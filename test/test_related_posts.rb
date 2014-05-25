@@ -13,7 +13,12 @@ class TestRelatedPosts < Test::Unit::TestCase
     should "use the most recent posts for related posts" do
       @site.reset
       @site.read
-      assert_equal @site.posts[0..9], Jekyll::RelatedPosts.new(@site.posts.last).build
+
+      last_post     = @site.posts.last
+      related_posts = Jekyll::RelatedPosts.new(last_post).build
+
+      last_10_recent_posts = (@site.posts.reverse - [last_post]).first(10)
+      assert_equal last_10_recent_posts, related_posts
     end
   end
 
@@ -24,6 +29,7 @@ class TestRelatedPosts < Test::Unit::TestCase
                                                'destination' => dest_dir,
                                                'lsi' => true})
       end
+      any_instance_of(Jekyll::RelatedPosts) { |i| stub(i).display }
       @site = Site.new(Jekyll.configuration)
     end
 

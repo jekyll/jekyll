@@ -3,26 +3,26 @@ module Jekyll
     include Comparable
     include Convertible
 
-    class << self
-      attr_accessor :lsi
-    end
-
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
-    # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
+    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
       title
       url
+      dir
       date
       id
       categories
       next
       previous
       tags
+      path
+    ]
+
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
       content
       excerpt
-      path
     ]
 
     # Post name validator. Post filenames must be like:
@@ -35,7 +35,7 @@ module Jekyll
 
     attr_accessor :site
     attr_accessor :data, :extracted_excerpt, :content, :output, :ext
-    attr_accessor :date, :slug, :published, :tags, :categories
+    attr_accessor :date, :slug, :tags, :categories
 
     attr_reader :name
 
@@ -49,25 +49,27 @@ module Jekyll
     def initialize(site, source, dir, name)
       @site = site
       @dir = dir
-      @base = self.containing_dir(source, dir)
+      @base = containing_dir(source, dir)
       @name = name
 
       self.categories = dir.downcase.split('/').reject { |x| x.empty? }
-      self.process(name)
-      self.read_yaml(@base, name)
+      process(name)
+      read_yaml(@base, name)
 
-      if self.data.has_key?('date')
-        self.date = Time.parse(self.data["date"].to_s)
+      data.default_proc = proc do |hash, key|
+        site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
-      self.published = self.published?
+      if data.has_key?('date')
+        self.date = Time.parse(data["date"].to_s)
+      end
 
-      self.populate_categories
-      self.populate_tags
+      populate_categories
+      populate_tags
     end
 
     def published?
-      if self.data.has_key?('published') && self.data['published'] == false
+      if data.has_key?('published') && data['published'] == false
         false
       else
         true
@@ -75,14 +77,14 @@ module Jekyll
     end
 
     def populate_categories
-      if self.categories.empty?
-        self.categories = self.data.pluralized_array('category', 'categories').map {|c| c.to_s.downcase}
+      if categories.empty?
+        self.categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
       end
-      self.categories.flatten!
+      categories.flatten!
     end
 
     def populate_tags
-      self.tags = self.data.pluralized_array("tag", "tags").flatten
+      self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
     end
 
     # Get the full path to the directory containing the post files
@@ -98,7 +100,7 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name)
       super(base, name)
-      self.extracted_excerpt = self.extract_excerpt
+      self.extracted_excerpt = extract_excerpt
     end
 
     # The post excerpt. This is either a custom excerpt
@@ -106,18 +108,19 @@ module Jekyll
     #
     # Returns excerpt string.
     def excerpt
-      if self.data.has_key? 'excerpt'
-        self.data['excerpt']
-      else
-        self.extracted_excerpt
-      end
+      data.fetch('excerpt', extracted_excerpt.to_s)
     end
 
     # Public: the Post title, from the YAML Front-Matter or from the slug
     #
     # Returns the post title
     def title
-      self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+      data.fetch("title", titleized_slug)
+    end
+
+    # Turns the post slug into a suitable title
+    def titleized_slug
+      slug.split('-').select {|w| w.capitalize! || w }.join(' ')
     end
 
     # Public: the path to the post relative to the site source,
@@ -127,7 +130,12 @@ module Jekyll
     #
     # Returns the path to the file relative to the site source
     def path
-      self.data['path'] || File.join(@dir, '_posts', @name).sub(/\A\//, '')
+      data.fetch('path', relative_path.sub(/\A\//, ''))
+    end
+
+    # The path to the post source file, relative to the site source
+    def relative_path
+      File.join(*[@dir, "_posts", @name].map(&:to_s).reject(&:empty?))
     end
 
     # Compares Post objects. First compares the Post date. If the dates are
@@ -155,15 +163,10 @@ module Jekyll
       self.slug = slug
       self.ext = ext
     rescue ArgumentError
-      raise FatalException.new("Post #{name} does not have a valid date.")
-    end
-
-    # Transform the contents and excerpt based on the content type.
-    #
-    # Returns nothing.
-    def transform
-      super
-      self.extracted_excerpt = converter.convert(self.extracted_excerpt)
+      path = File.join(@dir || "", name)
+      msg  =  "Post '#{path}' does not have a valid date.\n"
+      msg  << "Fix the date, or exclude the file or directory from being processed"
+      raise FatalException.new(msg)
     end
 
     # The generated directory into which the post will be placed
@@ -181,11 +184,11 @@ module Jekyll
     #
     # Returns the String permalink.
     def permalink
-      self.data && self.data['permalink']
+      data && data['permalink']
     end
 
     def template
-      case self.site.permalink_style
+      case site.permalink_style
       when :pretty
         "/:categories/:year/:month/:day/:title/"
       when :none
@@ -195,41 +198,37 @@ module Jekyll
       when :ordinal
         "/:categories/:year/:y_day/:title.html"
       else
-        self.site.permalink_style.to_s
+        site.permalink_style.to_s
       end
     end
 
     # The generated relative url of this post.
-    # e.g. /2008/11/05/my-awesome-post.html
     #
-    # Returns the String URL.
+    # Returns the String url.
     def url
-      return @url if @url
+      @url ||= URL.new({
+        :template => template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
+      }).to_s
+    end
 
-      url = if permalink
-        permalink
-      else
-        {
-          "year"       => date.strftime("%Y"),
-          "month"      => date.strftime("%m"),
-          "day"        => date.strftime("%d"),
-          "title"      => CGI.escape(slug),
-          "i_day"      => date.strftime("%d").to_i.to_s,
-          "i_month"    => date.strftime("%m").to_i.to_s,
-          "categories" => categories.map { |c| URI.escape(c.to_s) }.join('/'),
-          "short_month" => date.strftime("%b"),
-          "y_day"      => date.strftime("%j"),
-          "output_ext" => self.output_ext
-        }.inject(template) { |result, token|
-          result.gsub(/:#{Regexp.escape token.first}/, token.last)
-        }.gsub(/\/\//, "/")
-      end
-
-      # sanitize url
-      @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
-      @url += "/" if url =~ /\/$/
-      @url.gsub!(/\A([^\/])/, '/\1')
-      @url
+    # Returns a hash of URL placeholder names (as symbols) mapping to the
+    # desired placeholder replacements. For details see "url.rb"
+    def url_placeholders
+      {
+        :year        => date.strftime("%Y"),
+        :month       => date.strftime("%m"),
+        :day         => date.strftime("%d"),
+        :title       => slug,
+        :i_day       => date.strftime("%d").to_i.to_s,
+        :i_month     => date.strftime("%m").to_i.to_s,
+        :categories  => (categories || []).map { |c| c.to_s }.join('/'),
+        :short_month => date.strftime("%b"),
+        :short_year  => date.strftime("%y"),
+        :y_day       => date.strftime("%j"),
+        :output_ext  => output_ext
+      }
     end
 
     # The UID for this post (useful in feeds).
@@ -237,7 +236,7 @@ module Jekyll
     #
     # Returns the String UID.
     def id
-      File.join(self.dir, self.slug)
+      File.join(dir, slug)
     end
 
     # Calculate related posts.
@@ -255,12 +254,16 @@ module Jekyll
     # Returns nothing.
     def render(layouts, site_payload)
       # construct payload
-      payload = {
+      payload = Utils.deep_merge_hashes({
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => self.to_liquid
-      }.deep_merge(site_payload)
+        "page" => to_liquid(self.class::EXCERPT_ATTRIBUTES_FOR_LIQUID)
+      }, site_payload)
 
-      do_layout(payload, layouts)
+      if generate_excerpt?
+        extracted_excerpt.do_layout(payload, {})
+      end
+
+      do_layout(payload.merge({"page" => to_liquid}), layouts)
     end
 
     # Obtain destination path.
@@ -270,40 +273,29 @@ module Jekyll
     # Returns destination file path String.
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
-      path = File.join(dest, CGI.unescape(self.url))
-      path = File.join(path, "index.html") if template[/\.html$/].nil?
+      path = Jekyll.sanitized_path(dest, URL.unescape_path(url))
+      path = File.join(path, "index.html") if path[/\.html$/].nil?
       path
-    end
-
-    # Convert this post into a Hash for use in Liquid templates.
-    #
-    # Returns the representative Hash.
-    def to_liquid
-      further_data = Hash[ATTRIBUTES_FOR_LIQUID.map { |attribute|
-        [attribute, send(attribute)]
-      }]
-      data.deep_merge(further_data)
     end
 
     # Returns the shorthand String identifier of this Post.
     def inspect
-      "<Post: #{self.id}>"
+      "<Post: #{id}>"
     end
 
     def next
-      pos = self.site.posts.index(self)
-
-      if pos && pos < self.site.posts.length-1
-        self.site.posts[pos+1]
+      pos = site.posts.index {|post| post.equal?(self) }
+      if pos && pos < site.posts.length - 1
+        site.posts[pos + 1]
       else
         nil
       end
     end
 
     def previous
-      pos = self.site.posts.index(self)
+      pos = site.posts.index {|post| post.equal?(self) }
       if pos && pos > 0
-        self.site.posts[pos-1]
+        site.posts[pos - 1]
       else
         nil
       end
@@ -311,45 +303,16 @@ module Jekyll
 
     protected
 
-    # Internal: Extract excerpt from the content
-    #
-    # By default excerpt is your first paragraph of a post: everything before
-    # the first two new lines:
-    #
-    #     ---
-    #     title: Example
-    #     ---
-    #
-    #     First paragraph with [link][1].
-    #
-    #     Second paragraph.
-    #
-    #     [1]: http://example.com/
-    #
-    # This is fairly good option for Markdown and Textile files. But might cause
-    # problems for HTML posts (which is quite unusual for Jekyll). If default
-    # excerpt delimiter is not good for you, you might want to set your own via
-    # configuration option `excerpt_separator`. For example, following is a good
-    # alternative for HTML posts:
-    #
-    #     # file: _config.yml
-    #     excerpt_separator: "<!-- more -->"
-    #
-    # Notice that all markdown-style link references will be appended to the
-    # excerpt. So the example post above will have this excerpt source:
-    #
-    #     First paragraph with [link][1].
-    #
-    #     [1]: http://example.com/
-    #
-    # Excerpts are rendered same time as content is rendered.
-    #
-    # Returns excerpt String
     def extract_excerpt
-      separator     = self.site.config['excerpt_separator']
-      head, _, tail = self.content.partition(separator)
+      if generate_excerpt?
+        Jekyll::Excerpt.new(self)
+      else
+        ""
+      end
+    end
 
-      "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
+    def generate_excerpt?
+      !(site.config['excerpt_separator'].to_s.empty?)
     end
   end
 end

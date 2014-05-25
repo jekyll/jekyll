@@ -19,6 +19,9 @@ A basic Jekyll site usually looks something like this:
 {% highlight bash %}
 .
 ├── _config.yml
+├── _drafts
+|   ├── begin-with-the-crazy-ideas.textile
+|   └── on-simplicity-in-technology.markdown
 ├── _includes
 |   ├── footer.html
 |   └── header.html
@@ -28,6 +31,8 @@ A basic Jekyll site usually looks something like this:
 ├── _posts
 |   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile
 |   └── 2009-04-26-barcamp-boston-4-roundup.textile
+├── _data
+|   └── members.yml
 ├── _site
 └── index.html
 {% endhighlight %}
@@ -50,9 +55,21 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Stores <a href="../configuration">configuration</a> data. Many of
+          Stores <a href="../configuration/">configuration</a> data. Many of
           these options can be specified from the command line executable but
           it’s easier to specify them here so you don’t have to remember them.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>_drafts</code></p>
+      </td>
+      <td>
+        <p>
+
+          Drafts are unpublished posts. The format of these files is without a date: <code>title.MARKUP</code>. Learn how to <a href="../drafts/">work with drafts</a>.
 
         </p>
       </td>
@@ -81,7 +98,7 @@ An overview of what each of these does:
         <p>
 
           These are the templates that wrap posts. Layouts are chosen on a post-
-          by-post basis in the <a href="../frontmatter">YAML front matter</a>,
+          by-post basis in the <a href="../frontmatter/">YAML front matter</a>,
           which is described in the next section. The liquid tag
           <code>{% raw %}{{ content }}{% endraw %}</code>
           is used to inject content into the web page.
@@ -96,12 +113,27 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Your dynamic content, so to speak. The format of these files is
+          Your dynamic content, so to speak. The naming convention of these files is
           important, and must follow the format:
           <code>YEAR-MONTH-DAY-title.MARKUP</code>.
-          The <a href="../permalinks">permalinks</a> can be customized for each
+          The <a href="../permalinks/">permalinks</a> can be customized for each
           post, but the date and markup language are determined solely by the
           file name.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>_data</code></p>
+      </td>
+      <td>
+        <p>
+
+          Well-formatted site data should be placed here. The jekyll engine will
+          autoload all yaml files (ends with <code>.yml</code> or <code>.yaml</code>)
+          in this directory. If there's a file <code>members.yml</code> under the directory,
+          then you can access contents of the file through <code>site.data.members</code>.
 
         </p>
       </td>
@@ -114,7 +146,7 @@ An overview of what each of these does:
         <p>
 
           This is where the generated site will be placed (by default) once
-          Jekyll is done transforming it. It's probably a good idea to add this
+          Jekyll is done transforming it. It’s probably a good idea to add this
           to your <code>.gitignore</code> file.
 
         </p>
@@ -127,10 +159,10 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Provided that the file has a <a href="../frontmatter">YAML Front
+          Provided that the file has a <a href="../frontmatter/">YAML Front
           Matter</a> section, it will be transformed by Jekyll. The same will
           happen for any <code>.html</code>, <code>.markdown</code>,
-          <code>.md</code>, or <code>.textile</code> file in your site's root
+          <code>.md</code>, or <code>.textile</code> file in your site’s root
           directory or directories not listed above.
 
         </p>
@@ -146,8 +178,8 @@ An overview of what each of these does:
           Every other directory and file except for those listed above—such as
           <code>css</code> and <code>images</code> folders,
           <code>favicon.ico</code> files, and so forth—will be copied verbatim
-          to the generated site. There are plenty of <a href="../sites">sites
-          already using Jekyll</a> if you're curious to see how they're laid
+          to the generated site. There are plenty of <a href="../sites/">sites
+          already using Jekyll</a> if you’re curious to see how they’re laid
           out.
 
         </p>

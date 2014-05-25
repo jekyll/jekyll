@@ -18,7 +18,12 @@ module Jekyll
 
     # Returns source file path.
     def path
-      File.join(@base, @dir, @name)
+      File.join(*[@base, @dir, @name].compact)
+    end
+
+    # Returns the source file path relative to the site source
+    def relative_path
+      @relative_path ||= path.sub(/\A#{@site.source}/, '')
     end
 
     # Obtain destination path.
@@ -27,7 +32,7 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      File.join(dest, @dir, @name)
+      File.join(*[dest, @dir, @name].compact)
     end
 
     # Returns last modification time for this file.
@@ -65,6 +70,14 @@ module Jekyll
     def self.reset_cache
       @@mtimes = Hash.new
       nil
+    end
+
+    def to_liquid
+      {
+        "path"          => relative_path,
+        "modified_time" => mtime.to_s,
+        "extname"       => File.extname(relative_path)
+      }
     end
   end
 end

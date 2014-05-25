@@ -30,15 +30,16 @@ relies on.
   <p>
     If you use UTF-8 encoding, make sure that no <code>BOM</code> header
     characters exist in your files or very, very bad things will happen to
-    Jekyll. This is especially relevant if you’re running Jekyll on Windows.
+    Jekyll. This is especially relevant if you’re running
+    <a href="../windows/">Jekyll on Windows</a>.
   </p>
 </div>
 
 <div class="note">
   <h5>ProTip™: Front Matter Variables Are Optional</h5>
   <p>
-    If you want to use <a href="../variables">Liquid tags and variables</a> but
-    don't need anything in your front-matter, just leave it empty! The set of
+    If you want to use <a href="../variables/">Liquid tags and variables</a> but
+    don’t need anything in your front-matter, just leave it empty! The set of
     triple-dashed lines with nothing in between will still get Jekyll to process
     your file. (This is useful for things like CSS and RSS feeds!)
   </p>
@@ -177,4 +178,14 @@ These are available out-of-the-box to be used in the front-matter for a post.
     </tr>
   </tbody>
 </table>
+</div>
+
+<div class="note">
+  <h5>ProTip™: Don't repeat yourself</h5>
+  <p>
+    If you don't want to repeat your frequently used front-matter variables over and over,
+    just define <a href="../configuration/#frontmatter-defaults" title="frontmatter defaults">defaults</a>
+    for them and only override them where necessary (or not at all). This works both for predefined
+    and custom variables.
+  </p>
 </div>
