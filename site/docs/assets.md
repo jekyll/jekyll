@@ -6,9 +6,20 @@ next_section: migrations
 permalink: /docs/assets/
 ---
 
-Jekyll provides built-in support for Sass and CoffeeScript. In order to use
-them, create a file with the proper extension name (one of `.sass`, `.scss`,
-or `.coffee`) and start the file with two lines of triple dashes, like this:
+## Installation
+
+Jekyll provides support for Sass and CoffeeScript in two gems:
+`jekyll-coffeescript`, and `jekyll-sass-converter`. You may install them
+by normal means, either by running `gem install <gem_name>` or by adding
+`gem "<gem_name>"` to your `Gemfile` and running `bundle install`.
+Both gems will be automatically required, so once they are installed, you
+are good to go.
+
+## Usage
+
+In order to use these converters, create a file with the proper extension
+name (one of `.sass`, `.scss`, or `.coffee`) and start the file with two
+lines of triple dashes, like this:
 
 {% highlight sass %}
 ---
