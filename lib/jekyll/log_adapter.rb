@@ -1,13 +1,12 @@
-require 'logger'
 module Jekyll
   class LogAdapter
     attr_reader :writer
 
     LOG_LEVELS = {
-      debug: 0,
-      info:  1,
-      warn:  2,
-      error: 3
+      :debug => ::Logger::DEBUG,
+      :info  => ::Logger::INFO,
+      :warn  => ::Logger::WARN,
+      :error => ::Logger::ERROR
     }
 
     # Public: Create a new instance of Jekyll's log writer
