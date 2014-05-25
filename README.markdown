@@ -25,7 +25,7 @@ Jekyll does what you tell it to do — no more, no less. It doesn't try to outs
 
 ## Diving In
 
-* [Migrate](http://jekyllrb.com/docs/migrations/) from your previous system
+* [Migrate](http://import.jekyllrb.com/docs/) from your previous system
 * Learn how the [YAML Front Matter](http://jekyllrb.com/docs/frontmatter/) works
 * Put information on your site with [Variables](http://jekyllrb.com/docs/variables/)
 * Customize the [Permalinks](http://jekyllrb.com/docs/permalinks/) your posts are generated with
