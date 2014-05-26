@@ -11,11 +11,13 @@ module Jekyll
 
             c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
             c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
+            c.option 'watch',   '-w', '--watch', 'Watch for changes and rebuild'
 
             c.action do |args, options|
               options.merge!({
                 'source'      => File.expand_path("../../../site", File.dirname(__FILE__)),
-                'destination' => File.expand_path("../../../site/_site", File.dirname(__FILE__))
+                'destination' => File.expand_path("../../../site/_site", File.dirname(__FILE__)),
+                'serving'     => true
               })
               Jekyll::Commands::Build.process(options)
               Jekyll::Commands::Serve.process(options)
