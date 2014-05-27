@@ -24,6 +24,7 @@
   * Encode URLs in UTF-8 when escaping and unescaping (#2420)
   * No Layouts or Liquid for Asset Files (#2431)
   * Allow front-matter defaults to set post categories (#2373)
+  * Fix command in subcommand deprecation warning (#2457)
 
 ### Development Fixes
 
