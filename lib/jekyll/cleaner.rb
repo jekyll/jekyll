@@ -49,7 +49,19 @@ module Jekyll
       #
       # Returns a Set with the directory paths
       def new_dirs
-        new_files.map { |file| File.dirname(file) }.to_set
+        new_files.map { |file| parent_dirs(file) }.flatten.to_set
+      end
+
+      # Private: The list of parent directories of a given file
+      #
+      # Returns an Array with the directory paths
+      def parent_dirs(file)
+        parent_dir = File.dirname(file)
+        if parent_dir == site.dest
+          return []
+        else
+          return [parent_dir] + parent_dirs(parent_dir)
+        end
       end
 
       # Private: The list of existing files that will be replaced by a directory during build
