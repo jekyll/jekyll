@@ -72,6 +72,7 @@ require_all 'jekyll/tags'
 # plugins
 require 'jekyll-coffeescript'
 require 'jekyll-sass-converter'
+require 'jekyll-paginate'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
