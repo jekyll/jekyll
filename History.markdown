@@ -11,6 +11,7 @@
   * Override collection url template (#2418)
   * Allow subdirectories in `_data` (#2395)
   * Extract Pagination Generator into gem: `jekyll-paginate` (#2455)
+  * Utilize `date_to_rfc822` filter in site template (#2437)
 
 ### Bug Fixes
 
