@@ -10,6 +10,7 @@
   * Use `_config.yaml` or `_config.yml` (`.yml` takes precedence) (#2406)
   * Override collection url template (#2418)
   * Allow subdirectories in `_data` (#2395)
+  * Extract Pagination Generator into gem: `jekyll-paginate` (#2455)
 
 ### Bug Fixes
 
