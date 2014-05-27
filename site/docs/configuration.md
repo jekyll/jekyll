@@ -278,25 +278,15 @@ before your site is served.
 
 ## Frontmatter defaults
 
-Using [YAML front-matter](../frontmatter/) is one way that you can specify configuration in your
-pages and posts for your site. Things like setting a default layout, or customizing the title,
-or specifying a more precise date/time for the post can all be added to your page or post
-front-matter.
+Using [YAML front-matter](../frontmatter/) is one way that you can specify configuration in your pages and posts for your site. Things like setting a default layout, or customizing the title, or specifying a more precise date/time for the post can all be added to your page or post front-matter.
 
-Often times, you will find that you are repeating a lot of configuration options. Setting the
-same layout in each file, adding the same category - or categories - to a post, etc. You can even 
-add custom variables like author names, which might be the same for the majority of posts
-in your project.
+Often times, you will find that you are repeating a lot of configuration options. Setting the same layout in each file, adding the same category - or categories - to a post, etc. You can even add custom variables like author names, which might be the same for the majority of posts in your project.
 
-Instead of repeating this configuration each time you create a new post or page, Jekyll provides
-a way to set these defaults in the site front-matter. To do this, you can specify  site-wide
-defaults using the `defaults` key in the `_config.yml` file in your projects root directory.
+Instead of repeating this configuration each time you create a new post or page, Jekyll provides a way to set these defaults in the site configuration. To do this, you can specify  site-wide defaults using the `defaults` key in the `_config.yml` file in your projects root directory.
 
-The `defaults` key holds an array of scope/values pairs that define what defaults should be set for
-a particular file path, and optionally, a file type in that path.
+The `defaults` key holds an array of scope/values pairs that define what defaults should be set for a particular file path, and optionally, a file type in that path.
 
-Let's say that you want to add a default layout to all pages and posts in your site. You would add
-this to your `_config.yml` file:
+Let's say that you want to add a default layout to all pages and posts in your site. You would add this to your `_config.yml` file:
 
 {% highlight yaml %}
 defaults:
@@ -337,18 +327,17 @@ defaults:
       layout: "my-site"
   -
     scope:
-      path: "about/blog"
-      type: "post"
+      path: "projects"
+      type: "page"
     values:
-      layout: "meta-blog" # overrides previous default layout
-      author: "Dr. Hyde"
-      category: "about"
+      layout: "project" # overrides previous default layout
+      author: "Mr. Hyde"
+      category: "project"
 {% endhighlight %}
 
-With these defaults, all posts would use the `my-site` layout except for the posts under 
-`about/blog`. Those posts would use the `meta-blog` layout and also have the `page.author` 
-[liquid variable](../variables/) set to `Dr. Hyde` as well as have the category for the post 
-set to `about`.
+With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout. Those files will also have the `page.author` 
+[liquid variable](../variables/) set to `Mr. Hyde` as well as have the category for the page 
+set to `project`.
 
 ### Precedence
 
@@ -360,7 +349,7 @@ You can see that in the last example above. First, we set the default layout to 
 using a more specific path, we set the default layout for posts in the `about/blog` path to
 `meta-blog`. This can be done with any value that you would set in the page or post front-matter.
 
-Finally, if you set defaults in the site front-matter by adding a `defaults` section to your
+Finally, if you set defaults in the site configuration by adding a `defaults` section to your
 `_config.yml` file, you can override those settings in a post or page file. All you need to do
 is specify the settings in the post or page front-matter. For example:
 
