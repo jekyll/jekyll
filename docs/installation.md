@@ -16,7 +16,7 @@ describing the issue you encountered and how we might make the process easier.
 Installing Jekyll is easy and straight-forward, but there are a few requirements
 you’ll need to make sure your system has before you start.
 
-- [Ruby](http://www.ruby-lang.org/en/downloads/)
+- [Ruby (MRI)](http://www.ruby-lang.org/en/downloads/)
 - [RubyGems](http://rubygems.org/pages/download)
 - Linux, Unix, or Mac OS X
 
