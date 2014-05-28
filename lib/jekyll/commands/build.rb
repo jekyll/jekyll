@@ -56,26 +56,9 @@ module Jekyll
         def watch(site, options)
           require 'listen'
 
-          source      = options['source']
-          destination = options['destination']
-          config_files = Configuration[options].config_files(options)
-          paths = config_files + Array(destination)
-          ignored = []
-
-          source_abs = Pathname.new(source).realpath
-          paths.each do |p|
-            path_abs = Pathname.new(p).realpath
-            begin
-              rel_path = path_abs.relative_path_from(source_abs).to_s
-              ignored << Regexp.new(Regexp.escape(rel_path)) unless rel_path.start_with?('../')
-            rescue ArgumentError
-              # Could not find a relative path
-            end
-          end
-
           listener = Listen.to(
-            source,
-            :ignore => ignored,
+            options['source'],
+            :ignore => ignore_paths(options),
             :force_polling => options['force_polling']
           ) do |modified, added, removed|
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
