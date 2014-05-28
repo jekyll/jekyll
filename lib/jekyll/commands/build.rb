@@ -58,13 +58,19 @@ module Jekyll
 
           source      = options['source']
           destination = options['destination']
+          config_files = Configuration[options].config_files(options)
+          paths = config_files + Array(destination)
+          ignored = []
 
-          begin
-            dest    = Pathname.new(destination).relative_path_from(Pathname.new(source)).to_s
-            ignored = Regexp.new(Regexp.escape(dest))
-          rescue ArgumentError
-            # Destination is outside the source, no need to ignore it.
-            ignored = nil
+          source_abs = Pathname.new(source).realpath
+          paths.each do |p|
+            path_abs = Pathname.new(p).realpath
+            begin
+              rel_path = path_abs.relative_path_from(source_abs).to_s
+              ignored << Regexp.new(Regexp.escape(rel_path)) unless rel_path.start_with?('../')
+            rescue ArgumentError
+              # Could not find a relative path
+            end
           end
 
           listener = Listen.to(
