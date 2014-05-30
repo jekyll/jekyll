@@ -1,5 +1,6 @@
 require 'uri'
 require 'json'
+require 'nokogiri'
 
 module Jekyll
   module Filters
@@ -225,6 +226,21 @@ module Jekyll
           end
         }
       end
+    end
+
+    # Compress HTML
+    #
+    # input (string) - HTML document
+    # blocks (string) - block-level tags separated with commas
+    #
+    # Returns the compressed document
+    def compress_html(input, blocks = 'div, li, meta, ol, p, ul')
+      doc = Nokogiri::HTML::DocumentFragment.parse(input)
+      doc.search(blocks).each { |node|
+        next_node = node.next_sibling
+        next_node.remove if next_node && next_node.text.strip == ''
+      }
+      doc.to_html
     end
 
     private
