@@ -207,9 +207,6 @@ class TestFilters < Test::Unit::TestCase
       should "should leave no whitespaces between block tags" do
         assert_equal "<p>1</p><p>2</p>", @filter.compress_html("<p>1</p> <p>2</p>")
       end
-      should "should leave only one whitespace between inline tags" do
-        assert_equal "<b>1</b> <i>2</i>", @filter.compress_html("<b>1</b>  <i>2</i>")
-      end
     end
 
   end
