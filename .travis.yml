@@ -1,5 +1,7 @@
 language: ruby
 cache: bundler
+before_install:
+  - export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 install:
 - script/rebund download
 - travis_retry bundle install --path vendor/bundle
