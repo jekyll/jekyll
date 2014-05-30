@@ -26,6 +26,8 @@
   * Allow front-matter defaults to set post categories (#2373)
   * Fix command in subcommand deprecation warning (#2457)
   * Keep all parent directories of files/dirs in `keep_files` (#2458)
+  * When using RedCarpet and Rouge without Rouge installed, fixed erroneous
+    error which stated that redcarpet was missing, not rouge. (#2464)
 
 ### Development Fixes
 
