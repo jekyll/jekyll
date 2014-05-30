@@ -21,6 +21,7 @@ require 'time'
 require 'safe_yaml/load'
 require 'English'
 require 'pathname'
+require 'logger'
 
 # 3rd party
 require 'liquid'
@@ -31,6 +32,7 @@ require 'toml'
 # internal requires
 require 'jekyll/version'
 require 'jekyll/utils'
+require 'jekyll/log_adapter'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
 require 'jekyll/configuration'
@@ -116,7 +118,11 @@ module Jekyll
   end
 
   def self.logger
-    @logger ||= Stevenson.new
+    @logger ||= LogAdapter.new(Stevenson.new)
+  end
+
+  def self.logger=(writer)
+    @logger = LogAdapter.new(writer)
   end
 
   # Public: File system root
