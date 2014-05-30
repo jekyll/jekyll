@@ -58,9 +58,9 @@ module Jekyll
       def parent_dirs(file)
         parent_dir = File.dirname(file)
         if parent_dir == site.dest
-          return []
+          []
         else
-          return [parent_dir] + parent_dirs(parent_dir)
+          [parent_dir] + parent_dirs(parent_dir)
         end
       end
 
