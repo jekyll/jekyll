@@ -25,6 +25,7 @@
   * No Layouts or Liquid for Asset Files (#2431)
   * Allow front-matter defaults to set post categories (#2373)
   * Fix command in subcommand deprecation warning (#2457)
+  * Keep all parent directories of files/dirs in `keep_files` (#2458)
 
 ### Development Fixes
 
