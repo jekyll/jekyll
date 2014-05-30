@@ -227,6 +227,20 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Compress HTML</strong></p>
+        <p>Compress HTML documents. Optional argument: block-level tags separated with commas.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ '<ul> <li>One</li>  <li>Two</li> </ul>' | compress_html }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output"><ul><li>One</li><li>Two</li></ul></code>
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
