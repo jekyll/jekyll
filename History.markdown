@@ -47,6 +47,8 @@
   * Prevent table from extending parent width in permalink style table (#2424)
   * Add collections to info about pagination support (#2389)
   * Add `jekyll_github_sample` plugin to list of third-party plugins (#2463)
+  * Clarify documentation around front-matter defaults and add details
+    about defaults for collections. (#2439)
 
 ## 2.0.3 / 2014-05-08
 
