@@ -203,5 +203,11 @@ class TestFilters < Test::Unit::TestCase
       end
     end
 
+    context "compress html filter" do
+      should "should leave no whitespaces between block tags" do
+        assert_equal "<p>1</p><p>2</p>", @filter.compress_html("<p>1</p> <p>2</p>")
+      end
+    end
+
   end
 end
