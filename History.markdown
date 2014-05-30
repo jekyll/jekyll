@@ -12,6 +12,8 @@
   * Allow subdirectories in `_data` (#2395)
   * Extract Pagination Generator into gem: `jekyll-paginate` (#2455)
   * Utilize `date_to_rfc822` filter in site template (#2437)
+  * Add categories, last build datetime, and generator to site template
+    feed (#2438)
 
 ### Bug Fixes
 
