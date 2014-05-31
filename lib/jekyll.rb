@@ -32,6 +32,7 @@ require 'toml'
 # internal requires
 require 'jekyll/version'
 require 'jekyll/utils'
+require 'jekyll/io_manager'
 require 'jekyll/log_adapter'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
@@ -126,20 +127,9 @@ module Jekyll
     @logger = LogAdapter.new(writer)
   end
 
-  # Public: File system root
-  #
-  # Returns the root of the filesystem as a Pathname
-  def self.fs_root
-    @fs_root ||= "/"
-  end
-
+  # For backwards-compatibility.
+  # Remove in v3.0.
   def self.sanitized_path(base_directory, questionable_path)
-    clean_path = File.expand_path(questionable_path, fs_root)
-    clean_path.gsub!(/\A\w\:\//, '/')
-    unless clean_path.start_with?(base_directory)
-      File.join(base_directory, clean_path)
-    else
-      clean_path
-    end
+    Jekyll::IOManager.sanitized_path(base_directory, questionable_path)
   end
 end

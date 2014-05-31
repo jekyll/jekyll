@@ -31,7 +31,7 @@ module Jekyll
     # Returns merged option hash for File.read of self.site (if exists)
     # and a given param
     def merged_file_read_opts(opts)
-      (site ? site.file_read_opts : {}).merge(opts)
+      read_options.merge(opts)
     end
 
     # Read the YAML frontmatter.

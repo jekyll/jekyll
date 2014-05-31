@@ -1,5 +1,7 @@
 module Jekyll
   class Site
+    include Jekyll::IOManager
+
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
@@ -19,8 +21,8 @@ module Jekyll
         self.send("#{opt}=", config[opt])
       end
 
-      self.source          = File.expand_path(config['source'])
-      self.dest            = File.expand_path(config['destination'])
+      self.source          = realpath(config['source'])
+      self.dest            = realpath(config['destination'])
       self.permalink_style = config['permalink'].to_sym
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
@@ -129,8 +131,8 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      base = File.join(source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
+      base = sanitized_path(source, dir)
+      entries = Dir.chdir(base) { filter_entries(dir_entries('.'), base) }
 
       read_posts(dir)
       read_drafts(dir) if show_drafts
@@ -138,11 +140,11 @@ module Jekyll
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
-        f_abs = File.join(base, f)
-        if File.directory?(f_abs)
-          f_rel = File.join(dir, f)
-          read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
-        elsif has_yaml_header?(f_abs)
+        absolute_path = sanitized_path(base, f)
+        if directory?(absolute_path)
+          relative_path = sanitized_path(dir, f)
+          read_directories(relative_path) unless dest.sub(/\/$/, '') == absolute_path
+        elsif has_yaml_header?(absolute_path)
           page = Page.new(self, source, dir, f)
           pages << page if publisher.publish?(page)
         else
@@ -195,8 +197,7 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = File.join(source, dir)
-      read_data_to(base, self.data)
+      read_data_to(dir, self.data)
     end
 
     # Read and parse all yaml files under <dir> and add them to the
@@ -207,21 +208,22 @@ module Jekyll
     #
     # Returns nothing
     def read_data_to(dir, data)
-      return unless File.directory?(dir) && (!safe || !File.symlink?(dir))
+      dir = sanitized_path(source, dir)
+      return unless directory?(dir)
 
       entries = Dir.chdir(dir) do
         Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
       end
 
       entries.each do |entry|
-        path = File.join(dir, entry)
-        next if File.symlink?(path) && safe
+        path = sanitized_path(dir, entry)
+        next if !file_allowed?(path)
 
         key = sanitize_filename(File.basename(entry, '.*'))
-        if File.directory?(path)
+        if directory?(path)
           read_data_to(path, data[key] = {})
         else
-          data[key] = SafeYAML.load_file(path)
+          data[key] = SafeYAML.load(file_contents(path))
         end
       end
     end
@@ -399,10 +401,10 @@ module Jekyll
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
-      base = File.join(source, dir, subfolder)
-      return [] unless File.exist?(base)
+      base = sanitized_path(source, File.join(dir, subfolder))
+      return [] unless file_exist?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
+      entries.delete_if { |entry| directory?(sanitized_path(base, entry)) }
     end
 
     # Aggregate post information
@@ -453,7 +455,7 @@ module Jekyll
     end
 
     def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
+      !!(file_contents(file, {:bytes => 5}) =~ /\A---\r?\n/)
     end
 
     def limit_posts!
@@ -463,12 +465,6 @@ module Jekyll
 
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
-    end
-
-    def sanitize_filename(name)
-      name.gsub!(/[^\w\s_-]+/, '')
-      name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
-      name.gsub(/\s+/, '_')
     end
 
     def publisher
