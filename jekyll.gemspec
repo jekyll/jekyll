@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('redcarpet', "~> 3.1")
   s.add_runtime_dependency('toml', '~> 0.1.0')
   s.add_runtime_dependency('jekyll-paginate', '~> 1.0')
-  s.add_runtime_dependency('jekyll-gist', '~> 1.0')
+  s.add_runtime_dependency('jekyll-gist', '~> 1.0.0.rc1')
   s.add_runtime_dependency('jekyll-coffeescript', '~> 1.0')
   s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0')
 
