@@ -108,7 +108,7 @@ Feature: frontmatter defaults
     And I have a "_slides/slide2.html" file with content: 
     """
     ---
-      myval: Override
+    myval: Override
     ---
     Value: {{ page.myval }}
     """
