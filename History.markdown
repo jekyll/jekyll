@@ -15,6 +15,7 @@
   * Add categories, last build datetime, and generator to site template
     feed (#2438)
   * Configurable, replaceable Logger-compliant logger (#2444)
+  * Extract `gist` tag into a separate gem (#2469)
 
 ### Bug Fixes
 
