@@ -50,6 +50,7 @@
   * Add `jekyll_github_sample` plugin to list of third-party plugins (#2463)
   * Clarify documentation around front-matter defaults and add details
     about defaults for collections. (#2439)
+  * Add Jekyll Project Version Tag to list of third-party plugins (#2468)
 
 ## 2.0.3 / 2014-05-08
 
