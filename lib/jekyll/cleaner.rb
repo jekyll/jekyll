@@ -28,8 +28,12 @@ module Jekyll
       def existing_files
         files = Set.new
         Dir.glob(File.join(@site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-          files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
-        end
+			if RUBY_PLATFORM.downcase =~ /mswin(?!ce)|mingw|cygwin|bccwin/ && 
+				file.encoding == Encoding::SJIS
+				file.force_encoding("UTF-8")
+			end
+			files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
+		end
         files
       end
 
