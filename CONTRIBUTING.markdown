@@ -7,7 +7,7 @@ following in mind:
 * **Contributions will not be accepted without tests or necessary documentation updates.**
 * If you're creating a small fix or patch to an existing feature, just a simple
   test will do. Please stay in the confines of the current test suite and use
-  [Shoulda](http://github.com/thoughtbot/shoulda/tree/master) and
+  [Shoulda](https://github.com/thoughtbot/shoulda/tree/master) and
   [RR](https://github.com/rr/rr).
 * If it's a brand new feature, make sure to create a new
   [Cucumber](https://github.com/cucumber/cucumber/) feature and reuse steps

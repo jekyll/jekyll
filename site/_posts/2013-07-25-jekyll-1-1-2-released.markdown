@@ -13,7 +13,7 @@ Community and custom plugins extending the `Liquid::Drop` class may inadvertentl
 
 We recommend you upgrade to Jekyll v1.1.2 immediately if you use `Liquid::Drop` plugins on your Jekyll site.
 
-Many thanks for [Ben Balter](http://github.com/benbalter) for alerting us to the problem
+Many thanks for [Ben Balter](https://github.com/benbalter) for alerting us to the problem
 and [submitting a patch][1349] so quickly.
 
 [230]: https://github.com/Shopify/liquid/pull/230

@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.authors  = ["Tom Preston-Werner"]
   s.email    = 'tom@mojombo.com'
-  s.homepage = 'http://github.com/jekyll/jekyll'
+  s.homepage = 'https://github.com/jekyll/jekyll'
 
   s.files         = `git ls-files`.split($/)
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }

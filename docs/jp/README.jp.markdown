@@ -28,7 +28,7 @@ Jekyll あなたがするように伝えたことをします ― それ以上�
 
 * gem を[インストール](http://jekyllrb.com/docs/installation/)します
 * [使用方法](http://jekyllrb.com/docs/usage/) と [設定方法](http://jekyllrb.com/docs/configuration/) を読みます
-* 既存の [Jekyll で作られたサイト](http://wiki.github.com/jekyll/jekyll/sites) をチラッと見ます
+* 既存の [Jekyll で作られたサイト](https://wiki.github.com/jekyll/jekyll/sites) をチラッと見ます
 * Fork し、あなたの変更を [コントリビュート](http://jekyllrb.com/docs/contributing/) します
 * 質問があったら？ irc.freenode.net の `#jekyll` チャンネルをチェックしてください
 
