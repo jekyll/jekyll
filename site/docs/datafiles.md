@@ -8,7 +8,7 @@ permalink: /docs/datafiles/
 
 In addition to the [built-in variables](../variables/) available from Jekyll,
 you can specify your own custom data that can be accessed via the [Liquid
-templating system](http://wiki.github.com/shopify/liquid/liquid-for-designers).
+templating system](https://wiki.github.com/shopify/liquid/liquid-for-designers).
 
 Jekyll supports loading data from [YAML](http://yaml.org/) and [JSON](http://www.json.org/) files located in the
 `_data` directory.

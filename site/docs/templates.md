@@ -321,7 +321,7 @@ end
 
 In order for the highlighting to show up, you’ll need to include a highlighting
 stylesheet. For an example stylesheet you can look at
-[syntax.css](http://github.com/mojombo/tpw/tree/master/css/syntax.css). These
+[syntax.css](https://github.com/mojombo/tpw/tree/master/css/syntax.css). These
 are the same styles as used by GitHub and you are free to use them for your own
 site. If you use `linenos`, you might want to include an additional CSS class
 definition for the `.lineno` class in `syntax.css` to distinguish the line

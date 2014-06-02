@@ -58,7 +58,7 @@ sudo emerge -av dev-ruby/rubygems
 {% endhighlight %}
 
 On Windows, you may need to install [RubyInstaller
-DevKit](http://wiki.github.com/oneclick/rubyinstaller/development-kit).
+DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
 ## Problems running Jekyll
 
