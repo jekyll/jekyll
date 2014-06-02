@@ -246,7 +246,7 @@ In addition to any YAML front-matter provided in the document's corresponding fi
     </tr>
     <tr>
       <td>
-        <p><code>label</code></p>
+        <p><code>collection</code></p>
       </td>
       <td>
         <p>
