@@ -40,6 +40,10 @@ class TestDocument < Test::Unit::TestCase
       }, @document.data)
     end
 
+    should "output the collection name in the #to_liquid method" do
+      assert_equal @document.to_liquid['collection'], "methods"
+    end
+
   end
 
   context " a document part of a rendered collection" do
