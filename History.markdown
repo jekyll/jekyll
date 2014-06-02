@@ -37,6 +37,7 @@
 
   * Test Ruby 2.1.2 instead of 2.1.1 (#2374)
   * Add test for sorting UTF-8 characters (#2384)
+  * Use `https` for GitHub links in documentation (#2470)
 
 ### Site Enhancements
 
@@ -52,6 +53,7 @@
   * Clarify documentation around front-matter defaults and add details
     about defaults for collections. (#2439)
   * Add Jekyll Project Version Tag to list of third-party plugins (#2468)
+  * Use `https` for GitHub links across whole site (#2470)
 
 ## 2.0.3 / 2014-05-08
 
