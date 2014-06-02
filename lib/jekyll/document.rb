@@ -207,7 +207,7 @@ module Jekyll
           "path"          => path,
           "relative_path" => relative_path,
           "url"           => url,
-          "collection"         => collection.label
+          "collection"    => collection.label
         }
       else
         data
