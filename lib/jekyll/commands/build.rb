@@ -27,7 +27,11 @@ module Jekyll
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
 
-          build(site, options)
+          if options.fetch('skip_initial_build', false)
+            Jekyll.logger.warn "Build Warning:", "Skipping the initial build. This may result in an out-of-date site."
+          else
+            build(site, options)
+          end
           watch(site, options) if options['watch']
         end
 
@@ -86,7 +90,7 @@ module Jekyll
           end
           listener.start
 
-          Jekyll.logger.info "Auto-regeneration:", "enabled"
+          Jekyll.logger.info "Auto-regeneration:", "enabled for '#{source}'"
 
           unless options['serving']
             trap("INT") do
