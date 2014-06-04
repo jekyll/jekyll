@@ -244,6 +244,16 @@ In addition to any YAML front-matter provided in the document's corresponding fi
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p><code>collection</code></p>
+      </td>
+      <td>
+        <p>
+          The name of the document's collection.
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
