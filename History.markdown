@@ -16,6 +16,8 @@
     feed (#2438)
   * Configurable, replaceable Logger-compliant logger (#2444)
   * Extract `gist` tag into a separate gem (#2469)
+  * Add `collection` attribute to `Document#to_liquid` to access the
+    document's collection label. (#2436)
 
 ### Bug Fixes
 
