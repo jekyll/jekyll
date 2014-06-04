@@ -56,6 +56,7 @@
     about defaults for collections. (#2439)
   * Add Jekyll Project Version Tag to list of third-party plugins (#2468)
   * Use `https` for GitHub links across whole site (#2470)
+  * Add StickerMule + Jekyll post (#2476)
 
 ## 2.0.3 / 2014-05-08
 
