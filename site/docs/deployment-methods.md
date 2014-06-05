@@ -108,7 +108,10 @@ low-volume blogs as you only pay for what you use.
 If you'd like to deploy your site to an OpenShift gear, there's [a cartridge
 for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
 
+## GitHub
 <div class="note">
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
   <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages/">host your Jekyll-powered website for free</a>.</p>
 </div>
+
+Deploying to your `gh-pages` branch can be even simpler with [jekyll.workflow](https://github.com/gtramontina/jekyll.workflow). It provides you a set of scripts that deploying is as easy as `make deploy`.
