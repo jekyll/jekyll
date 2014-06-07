@@ -34,7 +34,7 @@
   * Keep all parent directories of files/dirs in `keep_files` (#2458)
   * When using RedCarpet and Rouge without Rouge installed, fixed erroneous
     error which stated that redcarpet was missing, not rouge. (#2464)
-  * Ignore *all* directories and files that merit it on auto-generation #2459
+  * Ignore *all* directories and files that merit it on auto-generation (#2459)
 
 ### Development Fixes
 
