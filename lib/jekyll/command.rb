@@ -19,19 +19,29 @@ module Jekyll
         super(base)
       end
 
-      # Listing of all directories (globbed to include subfiles and folders)
+      # Paths to ignore for the watch option
       #
-      # source - the source path
-      # destination - the destination path
+      # options - A Hash of options passed to the command
       #
-      # Returns an Array of directory globs in the source, excluding the destination
-      def globs(source, destination)
-        Dir.chdir(source) do
-          dirs = Dir['*'].select { |x| File.directory?(x) }
-          dirs -= [destination, File.expand_path(destination), File.basename(destination)]
-          dirs = dirs.map { |x| "#{x}/**/*" }
-          dirs += ['*']
+      # Returns a list of relative paths from source that should be ignored
+      def ignore_paths(options)
+        source      = options['source']
+        destination = options['destination']
+        config_files = Configuration[options].config_files(options)
+        paths = config_files + Array(destination)
+        ignored = []
+
+        source_abs = Pathname.new(source).expand_path
+        paths.each do |p|
+          path_abs = Pathname.new(p).expand_path
+          begin
+            rel_path = path_abs.relative_path_from(source_abs).to_s
+            ignored << Regexp.new(Regexp.escape(rel_path)) unless rel_path.start_with?('../')
+          rescue ArgumentError
+            # Could not find a relative path
+          end
         end
+        ignored
       end
 
       # Run Site#process and catch errors

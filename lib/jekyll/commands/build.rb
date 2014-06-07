@@ -56,20 +56,9 @@ module Jekyll
         def watch(site, options)
           require 'listen'
 
-          source      = options['source']
-          destination = options['destination']
-
-          begin
-            dest    = Pathname.new(destination).relative_path_from(Pathname.new(source)).to_s
-            ignored = Regexp.new(Regexp.escape(dest))
-          rescue ArgumentError
-            # Destination is outside the source, no need to ignore it.
-            ignored = nil
-          end
-
           listener = Listen.to(
-            source,
-            :ignore => ignored,
+            options['source'],
+            :ignore => ignore_paths(options),
             :force_polling => options['force_polling']
           ) do |modified, added, removed|
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
