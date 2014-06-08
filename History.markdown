@@ -18,6 +18,7 @@
   * Extract `gist` tag into a separate gem (#2469)
   * Add `collection` attribute to `Document#to_liquid` to access the
     document's collection label. (#2436)
+  * Upgrade listen to `2.7.6 <= x < 3.0.0` (#2492)
 
 ### Bug Fixes
 
