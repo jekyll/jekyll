@@ -52,7 +52,7 @@ module Jekyll
 
     def display(output)
       $stdout.print("\n")
-      $stdout.print(Jekyll.logger.formatted_topic(output))
+      $stdout.print(Jekyll.logger.send(:formatted_topic, output))
       $stdout.flush
     end
   end

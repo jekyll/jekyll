@@ -63,7 +63,7 @@ module Jekyll
           ) do |modified, added, removed|
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
             n = modified.length + added.length + removed.length
-            print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
+            print Jekyll.logger.send(:message, "Regenerating:", "#{n} files at #{t} ")
             begin
               process_site(site)
               puts  "...done."
