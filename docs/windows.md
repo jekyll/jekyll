@@ -12,7 +12,7 @@ knowledge and lessons that have been unearthed by Windows users.
 
 ## Installation
 
-Madhur Ahuja has written up instructions to get
+Julian Thilo has written up instructions to get
 [Jekyll running on Windows][windows-installation] and it seems to work for most.
 
 ## Encoding
@@ -29,7 +29,7 @@ the site generation process. It can be done with the following command:
 $ chcp 65001
 {% endhighlight %}
 
-[windows-installation]: http://www.madhur.co.in/blog/2011/09/01/runningjekyllwindows.html
+[windows-installation]: https://github.com/juthilo/run-jekyll-on-windows
 
 ## Auto-regeneration
 
