@@ -247,7 +247,9 @@ module Jekyll
     end
 
     def item_property(item, property)
-      if item.respond_to?(:data)
+      if item.respond_to?(:to_liquid)
+        item.to_liquid[property.to_s]
+      elsif item.respond_to?(:data)
         item.data[property.to_s]
       else
         item[property.to_s]
