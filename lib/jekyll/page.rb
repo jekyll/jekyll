@@ -28,11 +28,10 @@ module Jekyll
       @dir  = dir
       @name = name
 
-
       process(name)
       read_yaml(File.join(base, dir), name)
 
-      data.default_proc = proc do |hash, key|
+      data.default_proc = proc do |_hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
     end

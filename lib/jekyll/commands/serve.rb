@@ -18,7 +18,7 @@ module Jekyll
             c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
             c.option 'baseurl', '-b', '--baseurl [URL]', 'Base URL'
 
-            c.action do |args, options|
+            c.action do |_args, options|
               options["serving"] ||= true
               Jekyll::Commands::Build.process(options)
               Jekyll::Commands::Serve.process(options)

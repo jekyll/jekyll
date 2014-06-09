@@ -12,7 +12,7 @@ module Jekyll
             c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
             c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
 
-            c.action do |args, options|
+            c.action do |_args, options|
               options.merge!({
                 'source'      => File.expand_path("../../../site", File.dirname(__FILE__)),
                 'destination' => File.expand_path("../../../site/_site", File.dirname(__FILE__))

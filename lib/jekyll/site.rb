@@ -250,7 +250,7 @@ module Jekyll
     def render
       relative_permalinks_deprecation_method
 
-      collections.each do |label, collection|
+      collections.each do |_label, collection|
         collection.docs.each do |document|
           document.output = Jekyll::Renderer.new(self, document).run
         end

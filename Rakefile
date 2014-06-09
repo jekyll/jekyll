@@ -198,7 +198,7 @@ namespace :site do
 
   namespace :releases do
     desc "Create new release post"
-    task :new, :version do |t, args|
+    task :new, :version do |_, args|
       raise "Specify a version: rake site:releases:new['1.2.3']" unless args.version
       today = Time.new.strftime('%Y-%m-%d')
       release = args.version.to_s
