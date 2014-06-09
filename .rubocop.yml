@@ -6,3 +6,5 @@ AllCops:
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
 
+Lint/EndAlignment:
+  AlignWith: variable
