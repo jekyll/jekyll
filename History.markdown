@@ -42,6 +42,7 @@
   * Test Ruby 2.1.2 instead of 2.1.1 (#2374)
   * Add test for sorting UTF-8 characters (#2384)
   * Use `https` for GitHub links in documentation (#2470)
+  * Remove coverage reporting with Coveralls (#2494)
 
 ### Site Enhancements
 
