@@ -1,3 +1,8 @@
 ---
+AllCops:
+  Exclude:
+   - script/*
+
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
+
