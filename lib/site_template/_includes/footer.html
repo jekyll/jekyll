@@ -13,8 +13,8 @@
 
     <div class="footer-col-2 column">
       <ul>
-        <li>
-          <a href="https://github.com/{{ site.username }}">
+        {% if site.github_username %}<li>
+          <a href="https://github.com/{{ site.github_username }}">
             <span class="icon github">
               <svg version="1.1" class="github-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
@@ -29,11 +29,11 @@
                 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
               </svg>
             </span>
-            <span class="username">{{ site.username }}</span>
+            <span class="username">{{ site.github_username }}</span>
           </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/{{ site.username }}">
+        </li>{% endif %}
+        {% if site.twitter_username %}<li>
+          <a href="https://twitter.com/{{ site.twitter_username }}">
             <span class="icon twitter">
               <svg version="1.1" class="twitter-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
@@ -46,9 +46,9 @@
                 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
               </svg>
             </span>
-            <span class="username">{{ site.username }}</span>
+            <span class="username">{{ site.twitter_username }}</span>
           </a>
-        </li>
+        </li>{% endif %}
       </ul>
     </div>
 
