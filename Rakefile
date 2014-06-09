@@ -68,14 +68,7 @@ end
 #
 #############################################################################
 
-if ENV["TRAVIS"] == "true"
-  require 'coveralls/rake/task'
-  Coveralls::RakeTask.new
-
-  task :default => [:test, :features, 'coveralls:push']
-else
-  task :default => [:test, :features]
-end
+task :default => [:test, :features]
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
