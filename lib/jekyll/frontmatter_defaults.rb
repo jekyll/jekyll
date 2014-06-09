@@ -41,10 +41,10 @@ module Jekyll
         old_scope = nil
         matching_sets(path, type).each do |set|
           if has_precedence?(old_scope, set['scope'])
-            defaults.deep_merge! set['values']
+            defaults = Utils.deep_merge_hashes(defaults, set['values'])
             old_scope = set['scope']
           else
-            defaults = set['values'].deep_merge(defaults)
+            defaults = Utils.deep_merge_hashes(set['values'], defaults)
           end
         end
         defaults
