@@ -8,3 +8,6 @@ Style/HashSyntax:
 
 Lint/EndAlignment:
   AlignWith: variable
+
+Lint/UnusedMethodArgument:
+  Enabled: false
