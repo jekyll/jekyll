@@ -1,9 +1,8 @@
 # [Jekyll](http://jekyllrb.com/)
 
-[![Gem Version](https://badge.fury.io/rb/jekyll.svg)](http://badge.fury.io/rb/jekyll)
-
+[![Gem Version](https://badge.fury.io/rb/jekyll.svg)](https://rubygems.org/gems/jekyll)
 [![Build Status](https://secure.travis-ci.org/jekyll/jekyll.svg?branch=master)](https://travis-ci.org/jekyll/jekyll)
-[![Code Climate](https://codeclimate.com/github/jekyll/jekyll.png)](https://codeclimate.com/github/jekyll/jekyll)
+[![Code Climate](http://img.shields.io/codeclimate/github/jekyll/jekyll.svg)](https://codeclimate.com/github/jekyll/jekyll)
 [![Dependency Status](https://gemnasium.com/jekyll/jekyll.svg)](https://gemnasium.com/jekyll/jekyll)
 
 By Tom Preston-Werner, Nick Quaranto, and many [awesome contributors](https://github.com/jekyll/jekyll/graphs/contributors)!
