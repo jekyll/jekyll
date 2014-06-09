@@ -1,6 +1,5 @@
 module Jekyll
   class Site
-    include Jekyll::IOManager
 
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
@@ -9,6 +8,7 @@ module Jekyll
                   :plugin_manager
 
     attr_accessor :converters, :generators
+    attr_writer   :fs
 
     # Public: Initialize a new Site.
     #
@@ -33,6 +33,14 @@ module Jekyll
 
       reset
       setup
+    end
+
+    # The file system from which to read, to which to write, and of which to ask
+    #   various other questions related to accessing files.
+    #
+    # Returns the file system.
+    def fs
+      @fs ||= Jekyll::FileSystemAdapter.new(source, safe)
     end
 
     # Public: Read, process, and write this Site to output.
@@ -132,7 +140,7 @@ module Jekyll
     # Returns nothing.
     def read_directories(dir = '')
       base = sanitized_path(source, dir)
-      entries = Dir.chdir(base) { filter_entries(dir_entries('.'), base) }
+      entries = site.fs.chdir(base) { filter_entries(dir_entries('.'), base) }
 
       read_posts(dir)
       read_drafts(dir) if show_drafts
@@ -141,7 +149,7 @@ module Jekyll
 
       entries.each do |f|
         absolute_path = sanitized_path(base, f)
-        if directory?(absolute_path)
+        if site.fs.directory?(absolute_path)
           relative_path = sanitized_path(dir, f)
           read_directories(relative_path) unless dest.sub(/\/$/, '') == absolute_path
         elsif has_yaml_header?(absolute_path)
@@ -208,22 +216,22 @@ module Jekyll
     #
     # Returns nothing
     def read_data_to(dir, data)
-      dir = sanitized_path(source, dir)
-      return unless directory?(dir)
+      dir = site.fs.sanitized_path(source, dir)
+      return unless site.fs.directory?(dir)
 
-      entries = Dir.chdir(dir) do
-        Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
+      entries = site.fs.chdir(dir) do
+        site.fs['*.{yaml,yml,json}'] + site.fs['*'].select { |fn| site.fs.directory?(fn) }
       end
 
       entries.each do |entry|
-        path = sanitized_path(dir, entry)
-        next if !file_allowed?(path)
+        path = site.fs.sanitized_path(dir, entry)
+        next if !site.fs.file_allowed?(path)
 
-        key = sanitize_filename(File.basename(entry, '.*'))
-        if directory?(path)
+        key = site.fs.sanitize_filename(site.fs.basename(entry, '.*'))
+        if site.fs.directory?(path)
           read_data_to(path, data[key] = {})
         else
-          data[key] = SafeYAML.load(file_contents(path))
+          data[key] = SafeYAML.load(site.fs.file_contents(path))
         end
       end
     end
@@ -337,19 +345,24 @@ module Jekyll
           "version" => Jekyll::VERSION,
           "environment" => Jekyll.env
         },
-        "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-            "time"         => time,
-            "posts"        => posts.sort { |a, b| b <=> a },
-            "pages"        => pages,
-            "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-            "html_pages"   => pages.reject { |page| !page.html? },
-            "categories"   => post_attr_hash('categories'),
-            "tags"         => post_attr_hash('tags'),
-            "collections"  => collections,
-            "documents"    => documents,
-            "data"         => site_data
-        }))
+        "site"   => Utils.deep_merge_hashes(
+          config,
+          Utils.deep_merge_hashes(
+            Hash[collections.map{|label, coll| [label, coll.docs]}],
+            {
+              "time"         => time,
+              "posts"        => posts.sort { |a, b| b <=> a },
+              "pages"        => pages,
+              "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
+              "html_pages"   => pages.reject { |page| !page.html? },
+              "categories"   => post_attr_hash('categories'),
+              "tags"         => post_attr_hash('tags'),
+              "collections"  => collections,
+              "documents"    => documents,
+              "data"         => site_data
+            }
+          )
+        )
       }
     end
 
@@ -401,10 +414,10 @@ module Jekyll
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
-      base = sanitized_path(source, File.join(dir, subfolder))
-      return [] unless file_exist?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
-      entries.delete_if { |entry| directory?(sanitized_path(base, entry)) }
+      base = site.fs.sanitized_path(source, File.join(dir, subfolder))
+      return [] unless site.fs.exist?(base)
+      entries = site.fs.chdir(base) { filter_entries(site.fs['**/*'], base) }
+      entries.delete_if { |entry| site.fs.directory?(site.fs.sanitized_path(base, entry)) }
     end
 
     # Aggregate post information
@@ -455,7 +468,7 @@ module Jekyll
     end
 
     def has_yaml_header?(file)
-      !!(file_contents(file, {:bytes => 5}) =~ /\A---\r?\n/)
+      !!(site.fs.file_contents(file, {:bytes => 5}) =~ /\A---\r?\n/)
     end
 
     def limit_posts!

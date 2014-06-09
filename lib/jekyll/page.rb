@@ -43,7 +43,7 @@ module Jekyll
     #
     # Returns the String destination directory.
     def dir
-      url[-1, 1] == '/' ? url : File.dirname(url)
+      url[-1, 1] == '/' ? url : site.fs.dirname(url)
     end
 
     # The full path and filename of the post. Defined in the YAML of the post

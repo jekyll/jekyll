@@ -104,7 +104,7 @@ module Jekyll
     end
 
     def safe_load_file(filename)
-      case File.extname(filename)
+      case site.fs.extname(filename)
       when '.toml'
         TOML.load_file(filename)
       when /\.y(a)?ml/
@@ -124,9 +124,9 @@ module Jekyll
       config_files = override.delete('config')
       if config_files.to_s.empty?
         default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
-          File.exists? Jekyll.sanitized_path(source(override), "_config.#{ext}")
+          site.fs.exists? site.fs.sanitized_path(source(override), "_config.#{ext}")
         end
-        config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
+        config_files = site.fs.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
       end
       config_files = [config_files] unless config_files.is_a? Array

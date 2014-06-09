@@ -73,6 +73,7 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 # plugins
+require 'jekyll-filesystem-adapter'
 require 'jekyll-coffeescript'
 require 'jekyll-sass-converter'
 require 'jekyll-paginate'
@@ -130,6 +131,6 @@ module Jekyll
   # For backwards-compatibility.
   # Remove in v3.0.
   def self.sanitized_path(base_directory, questionable_path)
-    Jekyll::IOManager.sanitized_path(base_directory, questionable_path)
+    Jekyll::FileSystemAdapter.sanitized_path(base_directory, questionable_path)
   end
 end

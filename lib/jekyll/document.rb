@@ -140,7 +140,7 @@ module Jekyll
     #
     # Returns the full path to the output file of this document.
     def destination(base_directory)
-      path = Jekyll.sanitized_path(base_directory, url)
+      path = site.fs.sanitized_path(base_directory, url)
       path = File.join(path, "index.html") if url =~ /\/$/
       path
     end
@@ -152,10 +152,8 @@ module Jekyll
     # Returns nothing.
     def write(dest)
       path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
-        f.write(output)
-      end
+      site.fs.mkdir_p(site.fs.dirname(path))
+      site.fs.write(path, output)
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
@@ -182,14 +180,14 @@ module Jekyll
     # Returns nothing.
     def read(opts = {})
       if yaml_file?
-        @data = SafeYAML.load_file(path)
+        @data = site.fs.safe_load_yaml(path)
       else
         begin
           defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
           unless defaults.empty?
             @data = defaults
           end
-          @content = File.read(path, merged_file_read_opts(opts))
+          @content = site.fs.read(path, merged_file_read_opts(opts))
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
             @content = $POSTMATCH
             data_file = SafeYAML.load($1)

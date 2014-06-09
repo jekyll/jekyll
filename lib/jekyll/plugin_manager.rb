@@ -68,7 +68,7 @@ module Jekyll
       if (site.config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
         [Jekyll.sanitized_path(site.source, site.config['plugins'])]
       else
-        Array(site.config['plugins']).map { |d| File.expand_path(d) }
+        Array(site.config['plugins']).map { |d| site.fs.expand_path(d) }
       end
     end
 

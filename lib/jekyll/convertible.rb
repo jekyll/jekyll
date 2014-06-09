@@ -42,17 +42,17 @@ module Jekyll
     #
     # Returns nothing.
     def read_yaml(base, name, opts = {})
+      filename = File.join(base, name)
       begin
-        self.content = File.read(File.join(base, name),
-                                 merged_file_read_opts(opts))
+        self.content = site.fs.read(filename, merged_file_read_opts(opts))
         if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = SafeYAML.load($1)
         end
       rescue SyntaxError => e
-        Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
       rescue Exception => e
-        Jekyll.logger.warn "Error reading file #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
       end
 
       self.data ||= {}
@@ -171,7 +171,7 @@ module Jekyll
         self.output = render_liquid(layout.content,
                                          payload,
                                          info,
-                                         File.join(site.config['layouts'], layout.name))
+                                         site.fs.sanitized_path(site.config['layouts'], layout.name))
 
         if layout = layouts[layout.data["layout"]]
           if used.include?(layout)
@@ -212,10 +212,8 @@ module Jekyll
     # Returns nothing.
     def write(dest)
       path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
-        f.write(output)
-      end
+      site.fs.mkdir_p(site.fs.dirname(path))
+      site.fs.write(path, output)
     end
 
     # Accessor for data properties by Liquid.

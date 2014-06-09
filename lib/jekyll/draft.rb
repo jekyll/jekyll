@@ -30,7 +30,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       m, slug, ext = *name.match(MATCHER)
-      self.date = File.mtime(File.join(@base, name))
+      self.date = site.fs.mtime(File.join(@base, name))
       self.slug = slug
       self.ext = ext
     end

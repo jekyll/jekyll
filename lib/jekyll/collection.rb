@@ -69,7 +69,7 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      Jekyll.sanitized_path(site.source, relative_directory)
+      site.fs.sanitized_path(site.source, relative_directory)
     end
 
     # Checks whether the directory "exists" for this collection.
@@ -79,7 +79,7 @@ module Jekyll
     # Returns false if the directory doesn't exist or if it's a symlink
     #   and we're in safe mode.
     def exists?
-      File.directory?(directory) && !(File.symlink?(directory) && site.safe)
+      site.fs.exist?(directory) && site.fs.directory?(directory)
     end
 
     # The entry filter for this collection.
