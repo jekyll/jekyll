@@ -14,7 +14,7 @@ module Jekyll
       severity ||= UNKNOWN
       @logdev = set_logdevice(severity)
 
-      if @logdev.nil? or severity < @level
+      if @logdev.nil? || severity < @level
         return true
       end
       progname ||= @progname
