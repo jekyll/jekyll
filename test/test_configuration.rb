@@ -65,7 +65,7 @@ class TestConfiguration < Test::Unit::TestCase
         "server"   => true,
         "exclude"  => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
         "include"  => "STOP_THE_PRESSES.txt,.heloses, .git",
-        "pygments" => true,
+        "pygments" => true
       }]
     end
     should "unset 'auto' and 'watch'" do
