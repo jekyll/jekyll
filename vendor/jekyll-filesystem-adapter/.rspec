@@ -1,0 +1,3 @@
+--color
+--warnings
+--require spec_helper
