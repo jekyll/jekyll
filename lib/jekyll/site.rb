@@ -91,7 +91,7 @@ module Jekyll
     #
     # Returns a Hash containing collection name-to-instance pairs.
     def collections
-      @collections ||= Hash[collection_names.map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
+      @collections ||= Hash[collection_names.map { |coll| [coll, Jekyll::Collection.new(self, coll)] }]
     end
 
     # The list of collection names.
