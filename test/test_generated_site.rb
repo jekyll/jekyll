@@ -26,7 +26,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "hide unpublished posts" do
-      published = Dir[dest_dir("publish_test/2008/02/02/*.html")].map {|f| File.basename(f)}
+      published = Dir[dest_dir("publish_test/2008/02/02/*.html")].map { |f| File.basename(f) }
 
       assert_equal 1, published.size
       assert_equal "published.html", published.first

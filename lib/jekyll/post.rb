@@ -78,7 +78,7 @@ module Jekyll
 
     def populate_categories
       if categories.empty?
-        self.categories = Utils.pluralized_array_from_hash(data, "category", "categories").map {|c| c.to_s.downcase}
+        self.categories = Utils.pluralized_array_from_hash(data, "category", "categories").map { |c| c.to_s.downcase }
       end
       categories.flatten!
     end
@@ -120,7 +120,7 @@ module Jekyll
 
     # Turns the post slug into a suitable title
     def titleized_slug
-      slug.split("-").select {|w| w.capitalize! || w }.join(" ")
+      slug.split("-").select { |w| w.capitalize! || w }.join(" ")
     end
 
     # Public: the path to the post relative to the site source,
@@ -284,7 +284,7 @@ module Jekyll
     end
 
     def next
-      pos = site.posts.index {|post| post.equal?(self) }
+      pos = site.posts.index { |post| post.equal?(self) }
       if pos && pos < site.posts.length - 1
         site.posts[pos + 1]
       else
@@ -293,7 +293,7 @@ module Jekyll
     end
 
     def previous
-      pos = site.posts.index {|post| post.equal?(self) }
+      pos = site.posts.index { |post| post.equal?(self) }
       if pos && pos > 0
         site.posts[pos - 1]
       else
