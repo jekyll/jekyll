@@ -156,9 +156,9 @@ module Jekyll
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
-        absolute_path = sanitized_path(base, f)
+        absolute_path = fs.sanitized_path(base, f)
         if fs.directory?(absolute_path)
-          relative_path = sanitized_path(dir, f)
+          relative_path = fs.sanitized_path(dir, f)
           read_directories(relative_path) unless dest.sub(/\/$/, '') == absolute_path
         elsif has_yaml_header?(absolute_path)
           page = Page.new(self, source, dir, f)
@@ -476,7 +476,7 @@ module Jekyll
     end
 
     def has_yaml_header?(file)
-      !!(fs.file_contents(file, {:bytes => 5}) =~ /\A---\r?\n/)
+      !!(fs.read(file, {:bytes => 5}) =~ /\A---\r?\n/)
     end
 
     def limit_posts!
