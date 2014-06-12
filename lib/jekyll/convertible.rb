@@ -171,7 +171,7 @@ module Jekyll
         self.output = render_liquid(layout.content,
                                          payload,
                                          info,
-                                         site.fs.sanitized_path(site.config['layouts'], layout.name))
+                                         site.fs.class.sanitized_path(site.config['layouts'], layout.name))
 
         if layout = layouts[layout.data["layout"]]
           if used.include?(layout)

@@ -21,8 +21,16 @@ module Jekyll
         self.send("#{opt}=", config[opt])
       end
 
-      self.source          = realpath(config['source'])
-      self.dest            = realpath(config['destination'])
+      self.fs              = Jekyll::FileSystemAdapter.new(
+        File.expand_path(config['source']),
+        {
+          safe: config.fetch('safe', false),
+          site: self
+        }
+      )
+
+      self.source          = fs.sanitized_path(config['source'])
+      self.dest            = fs.sanitized_path(config['destination'])
       self.permalink_style = config['permalink'].to_sym
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
@@ -139,8 +147,8 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      base = sanitized_path(source, dir)
-      entries = site.fs.chdir(base) { filter_entries(dir_entries('.'), base) }
+      base = fs.sanitized_path(source, dir)
+      entries = fs.chdir(base) { filter_entries(fs.dir_entries('.'), base) }
 
       read_posts(dir)
       read_drafts(dir) if show_drafts
@@ -149,7 +157,7 @@ module Jekyll
 
       entries.each do |f|
         absolute_path = sanitized_path(base, f)
-        if site.fs.directory?(absolute_path)
+        if fs.directory?(absolute_path)
           relative_path = sanitized_path(dir, f)
           read_directories(relative_path) unless dest.sub(/\/$/, '') == absolute_path
         elsif has_yaml_header?(absolute_path)
@@ -216,22 +224,22 @@ module Jekyll
     #
     # Returns nothing
     def read_data_to(dir, data)
-      dir = site.fs.sanitized_path(source, dir)
-      return unless site.fs.directory?(dir)
+      dir = fs.sanitized_path(source, dir)
+      return unless fs.directory?(dir)
 
-      entries = site.fs.chdir(dir) do
-        site.fs['*.{yaml,yml,json}'] + site.fs['*'].select { |fn| site.fs.directory?(fn) }
+      entries = fs.chdir(dir) do
+        fs.glob('*.{yaml,yml,json}') + fs.glob('*').select { |fn| fs.directory?(fn) }
       end
 
       entries.each do |entry|
-        path = site.fs.sanitized_path(dir, entry)
-        next if !site.fs.file_allowed?(path)
+        path = fs.sanitized_path(dir, entry)
+        next if !fs.file_allowed?(path)
 
-        key = site.fs.sanitize_filename(site.fs.basename(entry, '.*'))
-        if site.fs.directory?(path)
+        key = fs.sanitize_filename(fs.basename(entry, '.*'))
+        if fs.directory?(path)
           read_data_to(path, data[key] = {})
         else
-          data[key] = SafeYAML.load(site.fs.file_contents(path))
+          data[key] = SafeYAML.load(fs.read(path))
         end
       end
     end
@@ -414,10 +422,10 @@ module Jekyll
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
-      base = site.fs.sanitized_path(source, File.join(dir, subfolder))
-      return [] unless site.fs.exist?(base)
-      entries = site.fs.chdir(base) { filter_entries(site.fs['**/*'], base) }
-      entries.delete_if { |entry| site.fs.directory?(site.fs.sanitized_path(base, entry)) }
+      base = fs.sanitized_path(source, File.join(dir, subfolder))
+      return [] unless fs.exist?(base)
+      entries = fs.chdir(base) { filter_entries(fs.glob('**/*'), base) }
+      entries.delete_if { |entry| fs.directory?(fs.sanitized_path(base, entry)) }
     end
 
     # Aggregate post information
@@ -468,7 +476,7 @@ module Jekyll
     end
 
     def has_yaml_header?(file)
-      !!(site.fs.file_contents(file, {:bytes => 5}) =~ /\A---\r?\n/)
+      !!(fs.file_contents(file, {:bytes => 5}) =~ /\A---\r?\n/)
     end
 
     def limit_posts!

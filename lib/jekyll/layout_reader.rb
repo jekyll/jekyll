@@ -23,7 +23,7 @@ module Jekyll
     def layout_entries
       entries = []
       within(layout_directory) do
-        entries = EntryFilter.new(site).filter(site.fs['**/*.*'])
+        entries = EntryFilter.new(site).filter(site.fs.glob('**/*.*'))
       end
       entries
     end
@@ -38,7 +38,7 @@ module Jekyll
     end
 
     def layout_directory_inside_source
-      site.fs.path_with_source(site.config['layouts'])
+      site.fs.sanitized_path(site.config['layouts'])
     end
 
     def layout_directory_in_cwd
