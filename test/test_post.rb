@@ -714,7 +714,7 @@ class TestPost < Test::Unit::TestCase
 
     should "override site categories if set on post" do
       post = setup_post("2009-01-27-categories.textile")
-      ["foo", "bar", "baz"].each do |category|
+      %w(foo bar baz).each do |category|
         assert post.categories.include?(category), "Expected post.categories to include '#{category}' but did not."
       end
       assert !post.categories.include?("article"), "Did not expect post.categories to include 'article' but it did."

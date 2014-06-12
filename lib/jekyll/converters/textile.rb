@@ -33,8 +33,8 @@ module Jekyll
 
         # List of attributes defined on RedCloth
         # (from http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html)
-        attrs = ["filter_classes", "filter_html", "filter_ids", "filter_styles",
-                "hard_breaks", "lite_mode", "no_span_caps", "sanitize_html"]
+        attrs = %w(filter_classes filter_html filter_ids filter_styles
+                   hard_breaks lite_mode no_span_caps sanitize_html)
 
         r = RedCloth.new(content)
 

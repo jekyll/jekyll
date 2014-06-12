@@ -277,8 +277,3 @@ Style/UnlessElse:
 # Cop supports --auto-correct.
 Style/WhileUntilDo:
   Enabled: false
-
-# Offense count: 19
-# Cop supports --auto-correct.
-Style/WordArray:
-  MinSize: 8

@@ -16,17 +16,17 @@ class TestUtils < Test::Unit::TestCase
       end
 
       should "return plural array with nil singular" do
-        data = { "foo" => "bar", "tag" => nil, "tags" => ["dog", "cat"] }
-        assert_equal ["dog", "cat"], Utils.pluralized_array_from_hash(data, "tag", "tags")
+        data = { "foo" => "bar", "tag" => nil, "tags" => %w(dog cat) }
+        assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching singular" do
-        data = { "foo" => "bar", "tag" => "dog", "tags" => ["dog", "cat"] }
+        data = { "foo" => "bar", "tag" => "dog", "tags" => %w(dog cat) }
         assert_equal ["dog"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching singular with spaces" do
-        data = { "foo" => "bar", "tag" => "dog cat", "tags" => ["dog", "cat"] }
+        data = { "foo" => "bar", "tag" => "dog cat", "tags" => %w(dog cat) }
         assert_equal ["dog cat"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
@@ -47,7 +47,7 @@ class TestUtils < Test::Unit::TestCase
 
       should "return multiple value array with matching plural with single string value with spaces" do
         data = { "foo" => "bar", "tags" => "dog cat" }
-        assert_equal ["dog", "cat"], Utils.pluralized_array_from_hash(data, "tag", "tags")
+        assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching plural with single value array" do
@@ -56,8 +56,8 @@ class TestUtils < Test::Unit::TestCase
       end
 
       should "return multiple value array with matching plural with multiple value array" do
-        data = { "foo" => "bar", "tags" => ["dog", "cat"] }
-        assert_equal ["dog", "cat"], Utils.pluralized_array_from_hash(data, "tag", "tags")
+        data = { "foo" => "bar", "tags" => %w(dog cat) }
+        assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
     end

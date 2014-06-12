@@ -4,7 +4,7 @@ class TestRedcarpet < Test::Unit::TestCase
   context "redcarpet" do
     setup do
       @config = {
-        "redcarpet" => { "extensions" => ["smart", "strikethrough", "filter_html"] },
+        "redcarpet" => { "extensions" => %w(smart strikethrough filter_html) },
         "markdown" => "redcarpet"
       }
       @markdown = Converters::Markdown.new @config

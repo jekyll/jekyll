@@ -6,7 +6,7 @@ class TestRdiscount < Test::Unit::TestCase
     setup do
       config = {
         "markdown" => "rdiscount",
-        "rdiscount" => { "extensions" => ["smart", "generate_toc"], "toc_token" => "{:toc}" }
+        "rdiscount" => { "extensions" => %w(smart generate_toc), "toc_token" => "{:toc}" }
       }
       @markdown = Converters::Markdown.new config
     end
