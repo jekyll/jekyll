@@ -228,6 +228,7 @@ module Jekyll
     end
 
     private
+
     def time(input)
       case input
       when Time

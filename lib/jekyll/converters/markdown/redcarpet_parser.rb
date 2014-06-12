@@ -48,6 +48,7 @@ module Jekyll
           end
 
           protected
+
           def rouge_formatter(opts = {})
             Rouge::Formatters::HTML.new(opts.merge(:wrap => false))
           end

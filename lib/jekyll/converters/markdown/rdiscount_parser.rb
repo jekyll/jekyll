@@ -22,6 +22,7 @@ module Jekyll
         end
 
         private
+
         def replace_generated_toc(rd, html, toc_token)
           if rd.generate_toc && html.include?(toc_token)
             utf8_toc = rd.toc_content
