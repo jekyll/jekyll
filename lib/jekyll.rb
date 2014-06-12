@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
