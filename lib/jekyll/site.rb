@@ -419,7 +419,7 @@ module Jekyll
         Jekyll.logger.warn "Deprecation:", "Starting in 2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
-                                            " directory. Check http://jekyllrb.com/docs/upgrading/"+
+                                            " directory. Check http://jekyllrb.com/docs/upgrading/" +
                                             " for more info."
       end
     end

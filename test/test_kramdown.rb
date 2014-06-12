@@ -13,7 +13,7 @@ class TestKramdown < Test::Unit::TestCase
           "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
 
           "use_coderay"   => true,
-          "coderay_bold_every"=> 12,
+          "coderay_bold_every" => 12,
           "coderay" => {
             "coderay_css"        => :style,
             "coderay_bold_every" => 8

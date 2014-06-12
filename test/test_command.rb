@@ -26,7 +26,7 @@ class TestCommand < Test::Unit::TestCase
     end
     context "multiple config files" do
       should "return an array with regex for config files" do
-        config = build_configs("config"=> ["_config.yaml", "_config2.yml"])
+        config = build_configs("config" => ["_config.yaml", "_config2.yml"])
         ignore_paths = Command.ignore_paths(config)
         assert ignore_paths.include?(/_config\.yaml/), "did not include _config.yaml"
         assert ignore_paths.include?(/_config2\.yml/), "did not include _config2.yml"

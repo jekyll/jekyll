@@ -192,7 +192,7 @@ module Jekyll
       # Provide backwards-compatibility
       if config.key?("auto") || config.key?("watch")
         Jekyll.logger.warn "Deprecation:", "Auto-regeneration can no longer" +
-                            " be set from your configuration file(s). Use the"+
+                            " be set from your configuration file(s). Use the" +
                             " --watch/-w command-line option instead."
         config.delete("auto")
         config.delete("watch")
