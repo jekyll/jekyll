@@ -2,7 +2,7 @@ module Jekyll
   class Document
     include Comparable
 
-    attr_reader   :path, :site
+    attr_reader :path, :site
     attr_accessor :content, :collection, :output
 
     # Create a new Document.

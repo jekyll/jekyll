@@ -230,8 +230,3 @@ Style/Semicolon:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/SignalException:
   Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
-  Enabled: false

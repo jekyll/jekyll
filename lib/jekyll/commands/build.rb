@@ -7,7 +7,7 @@ module Jekyll
         # Create the Mercenary command for the Jekyll CLI for this Command
         def init_with_program(prog)
           prog.command(:build) do |c|
-            c.syntax      "build [options]"
+            c.syntax "build [options]"
             c.description "Build your site"
 
             add_build_options(c)
@@ -66,7 +66,7 @@ module Jekyll
             print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
             begin
               process_site(site)
-              puts  "...done."
+              puts "...done."
             rescue => e
               puts "...error:"
               Jekyll.logger.warn "Error:", e.message
