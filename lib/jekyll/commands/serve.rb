@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 module Jekyll
   module Commands
     class Serve < Command
@@ -82,7 +81,7 @@ module Jekyll
             :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml)
           }
 
-          if !config["verbose"]
+          unless config["verbose"]
             opts.merge!({
               :AccessLog => [],
               :Logger => WEBrick::Log.new([], WEBrick::Log::WARN)
