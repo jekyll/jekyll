@@ -9,7 +9,7 @@ module Jekyll
       "plugins"       => "_plugins",
       "layouts"       => "_layouts",
       "data_source"   =>  "_data",
-      "keep_files"    => [".git",".svn"],
+      "keep_files"    => [".git", ".svn"],
       "gems"          => [],
       "collections"   => nil,
 
@@ -89,7 +89,7 @@ module Jekyll
     #
     # Return a copy of the hash where all its keys are strings
     def stringify_keys
-      reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
+      reduce({}) { |hsh, (k, v)| hsh.merge(k.to_s => v) }
     end
 
     # Public: Directory of the Jekyll source folder

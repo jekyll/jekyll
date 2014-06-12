@@ -117,7 +117,7 @@ module Jekyll
         # recreate NondisclosureName under utf-8 circumstance
         def file_handler_options
           fh_option = WEBrick::Config::FileHandler
-          fh_option[:NondisclosureName] = [".ht*","~*"]
+          fh_option[:NondisclosureName] = [".ht*", "~*"]
           fh_option
         end
 

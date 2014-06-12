@@ -235,8 +235,3 @@ Style/SignalException:
 # Cop supports --auto-correct.
 Style/SingleSpaceBeforeFirstArg:
   Enabled: false
-
-# Offense count: 10
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Enabled: false
