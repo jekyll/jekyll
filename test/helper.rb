@@ -55,7 +55,7 @@ class Test::Unit::TestCase
   def directory_with_contents(path)
     FileUtils.rm_rf(path)
     FileUtils.mkdir(path)
-    File.open("#{path}/index.html", "w"){ |f| f.write("I was previously generated.") }
+    File.open("#{path}/index.html", "w") { |f| f.write("I was previously generated.") }
   end
 
   def capture_stdout

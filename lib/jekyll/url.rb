@@ -57,7 +57,7 @@ module Jekyll
       url = in_url.gsub(/\/\//, "/")
 
       # Remove every URL segment that consists solely of dots
-      url = url.split("/").reject{ |part| part =~ /^\.+$/ }.join("/")
+      url = url.split("/").reject { |part| part =~ /^\.+$/ }.join("/")
 
       # Append a trailing slash to the URL if the unsanitized URL had one
       url += "/" if in_url =~ /\/$/
