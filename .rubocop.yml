@@ -1,7 +1,7 @@
 ---
 AllCops:
   Exclude:
-   - script/*
+   - vendor/**/*
 
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
