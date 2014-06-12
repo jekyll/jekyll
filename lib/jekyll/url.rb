@@ -1,4 +1,4 @@
-require 'uri'
+require "uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
@@ -57,7 +57,7 @@ module Jekyll
       url = in_url.gsub(/\/\//, "/")
 
       # Remove every URL segment that consists solely of dots
-      url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
+      url = url.split("/").reject{ |part| part =~ /^\.+$/ }.join("/")
 
       # Append a trailing slash to the URL if the unsanitized URL had one
       url += "/" if in_url =~ /\/$/
@@ -89,7 +89,7 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      URI.escape(path, /[^a-zA-Z\d\-._~!$&\'()*+,;=:@\/]/).encode('utf-8')
+      URI.escape(path, /[^a-zA-Z\d\-._~!$&\'()*+,;=:@\/]/).encode("utf-8")
     end
 
     # Unescapes a URL path segment
@@ -103,7 +103,7 @@ module Jekyll
     #
     # Returns the unescaped path.
     def self.unescape_path(path)
-      URI.unescape(path.encode('utf-8'))
+      URI.unescape(path.encode("utf-8"))
     end
   end
 end

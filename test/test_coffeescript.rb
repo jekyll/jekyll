@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestCoffeeScript < Test::Unit::TestCase
   context "converting CoffeeScript" do

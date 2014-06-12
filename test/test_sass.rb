@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestSass < Test::Unit::TestCase
   context "importing partials" do

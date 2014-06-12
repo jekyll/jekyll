@@ -9,26 +9,26 @@ module Jekyll
       def setup
         return if @setup
         @parser =
-          case @config['markdown'].downcase
-            when 'redcarpet' then RedcarpetParser.new(@config)
-            when 'kramdown' then KramdownParser.new(@config)
-            when 'rdiscount' then RDiscountParser.new(@config)
-            when 'maruku' then MarukuParser.new(@config)
+          case @config["markdown"].downcase
+            when "redcarpet" then RedcarpetParser.new(@config)
+            when "kramdown" then KramdownParser.new(@config)
+            when "rdiscount" then RDiscountParser.new(@config)
+            when "maruku" then MarukuParser.new(@config)
           else
             # So they can't try some tricky bullshit or go down the ancestor chain, I hope.
-            if allowed_custom_class?(@config['markdown'])
-              self.class.const_get(@config['markdown']).new(@config)
+            if allowed_custom_class?(@config["markdown"])
+              self.class.const_get(@config["markdown"]).new(@config)
             else
-              Jekyll.logger.error "Invalid Markdown Processor:", "#{@config['markdown']}"
+              Jekyll.logger.error "Invalid Markdown Processor:", "#{@config["markdown"]}"
               Jekyll.logger.error "", "Valid options are [ maruku | rdiscount | kramdown | redcarpet ]"
-              raise FatalException, "Invalid Markdown Processor: #{@config['markdown']}"
+              raise FatalException, "Invalid Markdown Processor: #{@config["markdown"]}"
             end
           end
         @setup = true
       end
 
       def matches(ext)
-        rgx = '^\.(' + @config['markdown_ext'].gsub(',','|') +')$'
+        rgx = '^\.(' + @config["markdown_ext"].gsub(",","|") +")$"
         ext =~ Regexp.new(rgx, Regexp::IGNORECASE)
       end
 

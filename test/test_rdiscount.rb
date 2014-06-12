@@ -1,12 +1,12 @@
-require 'helper'
+require "helper"
 
 class TestRdiscount < Test::Unit::TestCase
 
   context "rdiscount" do
     setup do
       config = {
-        'markdown' => 'rdiscount',
-        'rdiscount' => { 'extensions' => ['smart', 'generate_toc'], 'toc_token' => '{:toc}' }
+        "markdown" => "rdiscount",
+        "rdiscount" => { "extensions" => ["smart", "generate_toc"], "toc_token" => "{:toc}" }
       }
       @markdown = Converters::Markdown.new config
     end

@@ -6,6 +6,9 @@ AllCops:
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
 
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
 Lint/EndAlignment:
   AlignWith: variable
 

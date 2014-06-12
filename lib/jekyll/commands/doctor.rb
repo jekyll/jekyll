@@ -5,11 +5,11 @@ module Jekyll
 
         def init_with_program(prog)
           prog.command(:doctor) do |c|
-            c.syntax 'doctor'
-            c.description 'Search site and print specific deprecation warnings'
+            c.syntax "doctor"
+            c.description "Search site and print specific deprecation warnings"
             c.alias(:hyde)
 
-            c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
+            c.option "--config CONFIG_FILE[,CONFIG_FILE2,...]", Array, "Custom configuration file"
 
             c.action do |_args, options|
               Jekyll::Commands::Doctor.process(options)

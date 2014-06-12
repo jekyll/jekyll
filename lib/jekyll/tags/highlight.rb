@@ -13,9 +13,9 @@ module Jekyll
         if markup.strip =~ SYNTAX
           @lang = $1.downcase
           @options = {}
-          if defined?($2) && $2 != ''
+          if defined?($2) && $2 != ""
             $2.split.each do |opt|
-              key, value = opt.split('=')
+              key, value = opt.split("=")
               @options[key.to_sym] = value || true
             end
           end
@@ -37,9 +37,9 @@ eos
         code = super.to_s.strip
 
         output = case context.registers[:site].highlighter
-        when 'pygments'
+        when "pygments"
           render_pygments(code)
-        when 'rouge'
+        when "rouge"
           render_rouge(code)
         else
           render_codehighlighter(code)
@@ -50,8 +50,8 @@ eos
       end
 
       def render_pygments(code)
-        require 'pygments'
-        @options[:encoding] = 'utf-8'
+        require "pygments"
+        @options[:encoding] = "utf-8"
 
         highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
 
@@ -70,7 +70,7 @@ eos
       end
 
       def render_rouge(code)
-        require 'rouge'
+        require "rouge"
         formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         code = formatter.format(lexer.lex(code))
@@ -92,4 +92,4 @@ eos
   end
 end
 
-Liquid::Template.register_tag('highlight', Jekyll::Tags::HighlightBlock)
+Liquid::Template.register_tag("highlight", Jekyll::Tags::HighlightBlock)

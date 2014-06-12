@@ -1,12 +1,12 @@
-require 'helper'
+require "helper"
 
 class TestExcerpt < Test::Unit::TestCase
   def setup_post(file)
-    Post.new(@site, source_dir, '', file)
+    Post.new(@site, source_dir, "", file)
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
+    layouts = { "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")}
     post.render(layouts, {"site" => {"posts" => []}})
   end
 
@@ -14,7 +14,7 @@ class TestExcerpt < Test::Unit::TestCase
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'excerpt_separator' => ''})
+        Jekyll::Configuration::DEFAULTS.merge({"excerpt_separator" => ""})
       end
       @site = Site.new(Jekyll.configuration)
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
@@ -91,11 +91,11 @@ class TestExcerpt < Test::Unit::TestCase
         klass = Class.new(Jekyll::Post)
         assert_gets_called = false
         klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
-        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
-        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ["assert_gets_called"])
+        post = klass.new(@site, source_dir, "", "2008-02-02-published.textile")
         Jekyll::Excerpt.new(post).to_liquid
 
-        assert assert_gets_called, 'assert_gets_called did not get called on post.'
+        assert assert_gets_called, "assert_gets_called did not get called on post."
       end
     end
 

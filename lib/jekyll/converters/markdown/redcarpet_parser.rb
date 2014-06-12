@@ -14,17 +14,17 @@ module Jekyll
         module WithPygments
           include CommonMethods
           def block_code(code, lang)
-            require 'pygments'
+            require "pygments"
             lang = lang && lang.split.first || "text"
             add_code_tags(
-              Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
+              Pygments.highlight(code, :lexer => lang, :options => { :encoding => "utf-8" }),
               lang
             )
           end
         end
 
         module WithoutHighlighting
-          require 'cgi'
+          require "cgi"
 
           include CommonMethods
 
@@ -55,21 +55,21 @@ module Jekyll
 
 
         def initialize(config)
-          require 'redcarpet'
+          require "redcarpet"
           @config = config
           @redcarpet_extensions = {}
-          @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
+          @config["redcarpet"]["extensions"].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
-          @renderer ||= case @config['highlighter']
-                        when 'pygments'
+          @renderer ||= case @config["highlighter"]
+                        when "pygments"
                           Class.new(Redcarpet::Render::HTML) do
                             include WithPygments
                           end
-                        when 'rouge'
+                        when "rouge"
                           Class.new(Redcarpet::Render::HTML) do
                             begin
-                              require 'rouge'
-                              require 'rouge/plugins/redcarpet'
+                              require "rouge"
+                              require "rouge/plugins/redcarpet"
                             rescue LoadError => e
                               Jekyll.logger.error "You are missing the 'rouge' gem. Please run:"
                               Jekyll.logger.error " $ [sudo] gem install rouge"
@@ -77,7 +77,7 @@ module Jekyll
                               raise FatalException.new("Missing dependency: rouge")
                             end
 
-                            if Rouge.version < '1.3.0'
+                            if Rouge.version < "1.3.0"
                               abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
                             end
 
@@ -91,8 +91,8 @@ module Jekyll
                           end
                         end
         rescue LoadError
-          STDERR.puts 'You are missing a library required for Markdown. Please run:'
-          STDERR.puts '  $ [sudo] gem install redcarpet'
+          STDERR.puts "You are missing a library required for Markdown. Please run:"
+          STDERR.puts "  $ [sudo] gem install redcarpet"
           raise FatalException.new("Missing dependency: redcarpet")
         end
 

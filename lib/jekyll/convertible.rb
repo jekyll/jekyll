@@ -1,6 +1,4 @@
-# encoding: UTF-8
-
-require 'set'
+require "set"
 
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
@@ -20,12 +18,12 @@ module Jekyll
   module Convertible
     # Returns the contents as a String.
     def to_s
-      content || ''
+      content || ""
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      !(data.has_key?("published") && data["published"] == false)
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
@@ -171,7 +169,7 @@ module Jekyll
         self.output = render_liquid(layout.content,
                                          payload,
                                          info,
-                                         File.join(site.config['layouts'], layout.name))
+                                         File.join(site.config["layouts"], layout.name))
 
         if layout = layouts[layout.data["layout"]]
           if used.include?(layout)
@@ -190,7 +188,7 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
+      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload["page"] } }
 
       # render and transform content (this becomes the final content of the object)
       payload["highlighter_prefix"] = converter.highlighter_prefix
@@ -213,7 +211,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
+      File.open(path, "wb") do |f|
         f.write(output)
       end
     end

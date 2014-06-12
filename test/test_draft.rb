@@ -1,8 +1,8 @@
-require 'helper'
+require "helper"
 
 class TestDraft < Test::Unit::TestCase
   def setup_draft(file)
-    Draft.new(@site, source_dir, '', file)
+    Draft.new(@site, source_dir, "", file)
   end
 
   context "A Draft" do
@@ -21,9 +21,9 @@ class TestDraft < Test::Unit::TestCase
     end
 
     should "make properties accessible through #[]" do
-      draft = setup_draft('draft-properties.text')
+      draft = setup_draft("draft-properties.text")
       # ! need to touch the file! Or get its timestamp
-      date = File.mtime(File.join(source_dir, '_drafts', 'draft-properties.text'))
+      date = File.mtime(File.join(source_dir, "_drafts", "draft-properties.text"))
       ymd = date.strftime("%Y/%m/%d")
 
       attrs = {
@@ -32,15 +32,15 @@ class TestDraft < Test::Unit::TestCase
         date: date,
         dir: "/foo/bar/baz/#{ymd}",
         excerpt: "All the properties.\n\n",
-        foo: 'bar',
+        foo: "bar",
         id: "/foo/bar/baz/#{ymd}/draft-properties",
-        layout: 'default',
+        layout: "default",
         name: nil,
         path: "_drafts/draft-properties.text",
         permalink: nil,
         published: nil,
         tags: %w(ay bee cee),
-        title: 'Properties Draft',
+        title: "Properties Draft",
         url: "/foo/bar/baz/#{ymd}/draft-properties.html"
       }
 

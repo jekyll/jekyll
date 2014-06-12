@@ -2,10 +2,10 @@ def file_content_from_hash(input_hash)
   matter_hash = input_hash.reject { |k, _v| k == "content" }
   matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
 
-  content = if input_hash['input'] && input_hash['filter']
-    "{{ #{input_hash['input']} | #{input_hash['filter']} }}"
+  content = if input_hash["input"] && input_hash["filter"]
+    "{{ #{input_hash["input"]} | #{input_hash["filter"]} }}"
   else
-    input_hash['content']
+    input_hash["content"]
   end
 
   <<EOF
@@ -38,10 +38,10 @@ end
 
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
 Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
-  File.open(file, 'w') do |f|
+  File.open(file, "w") do |f|
     f.write <<EOF
 ---
-#{key || 'layout'}: #{value || 'nil'}
+#{key || "layout"}: #{value || "nil"}
 ---
 #{text}
 EOF
@@ -49,29 +49,29 @@ EOF
 end
 
 Given /^I have an? "(.*)" file that contains "(.*)"$/ do |file, text|
-  File.open(file, 'w') do |f|
+  File.open(file, "w") do |f|
     f.write(text)
   end
 end
 
 Given /^I have an? (.*) (layout|theme) that contains "(.*)"$/ do |name, type, text|
-  folder = if type == 'layout'
-    '_layouts'
+  folder = if type == "layout"
+    "_layouts"
   else
-    '_theme'
+    "_theme"
   end
-  destination_file = File.join(folder, name + '.html')
+  destination_file = File.join(folder, name + ".html")
   destination_path = File.dirname(destination_file)
   unless File.exist?(destination_path)
     FileUtils.mkdir_p(destination_path)
   end
-  File.open(destination_file, 'w') do |f|
+  File.open(destination_file, "w") do |f|
     f.write(text)
   end
 end
 
 Given /^I have an? "(.*)" file with content:$/ do |file, text|
-  File.open(file, 'w') do |f|
+  File.open(file, "w") do |f|
     f.write(text)
   end
 end
@@ -82,38 +82,38 @@ end
 
 Given /^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
   table.hashes.each do |input_hash|
-    title = slug(input_hash['title'])
-    ext = input_hash['type'] || 'textile'
+    title = slug(input_hash["title"])
+    ext = input_hash["type"] || "textile"
     before, after = location(folder, direction)
 
     case status
     when "draft"
-      dest_folder = '_drafts'
+      dest_folder = "_drafts"
       filename = "#{title}.#{ext}"
     when "page"
-      dest_folder = ''
+      dest_folder = ""
       filename = "#{title}.#{ext}"
     when "post"
-      parsed_date = Time.xmlschema(input_hash['date']) rescue Time.parse(input_hash['date'])
-      dest_folder = '_posts'
-      filename = "#{parsed_date.strftime('%Y-%m-%d')}-#{title}.#{ext}"
+      parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+      dest_folder = "_posts"
+      filename = "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.#{ext}"
     end
 
     path = File.join(before, dest_folder, after, filename)
-    File.open(path, 'w') do |f|
+    File.open(path, "w") do |f|
       f.write file_content_from_hash(input_hash)
     end
   end
 end
 
 Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
-  File.open('_config.yml', 'w') do |f|
+  File.open("_config.yml", "w") do |f|
     f.write("#{key}: #{value}\n")
   end
 end
 
 Given /^I have a configuration file with:$/ do |table|
-  File.open('_config.yml', 'w') do |f|
+  File.open("_config.yml", "w") do |f|
     table.hashes.each do |row|
       f.write("#{row["key"]}: #{row["value"]}\n")
     end
@@ -121,7 +121,7 @@ Given /^I have a configuration file with:$/ do |table|
 end
 
 Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
-  File.open('_config.yml', 'w') do |f|
+  File.open("_config.yml", "w") do |f|
     f.write("#{key}:\n")
     table.hashes.each do |row|
       f.write("- #{row["value"]}\n")
@@ -141,13 +141,13 @@ end
 
 When /^I run jekyll(.*)$/ do |args|
   status = run_jekyll(args)
-  if args.include?("--verbose") || ENV['DEBUG']
+  if args.include?("--verbose") || ENV["DEBUG"]
     puts jekyll_run_output
   end
 end
 
 When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
-  File.open(file, 'a') do |f|
+  File.open(file, "a") do |f|
     f.write(text)
   end
 end

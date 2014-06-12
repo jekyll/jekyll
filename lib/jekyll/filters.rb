@@ -1,5 +1,5 @@
-require 'uri'
-require 'json'
+require "uri"
+require "json"
 
 module Jekyll
   module Filters
@@ -145,7 +145,7 @@ module Jekyll
       when 2
         "#{array[0]} #{connector} #{array[1]}"
       else
-        "#{array[0...-1].join(', ')}, #{connector} #{array[-1]}"
+        "#{array[0...-1].join(", ")}, #{connector} #{array[-1]}"
       end
     end
 
