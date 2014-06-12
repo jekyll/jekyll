@@ -98,7 +98,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def cgi_escape(input)
-      CGI::escape(input)
+      CGI.escape(input)
     end
 
     # URI escape a string.

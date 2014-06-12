@@ -82,11 +82,6 @@ Style/ClassVars:
 Style/CollectionMethods:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/ColonMethodCall:
-  Enabled: false
-
 # Offense count: 1
 # Configuration parameters: Keywords.
 Style/CommentAnnotation:
