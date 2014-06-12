@@ -80,7 +80,7 @@ module Jekyll
       abort
     end
 
-  private
+    private
 
     # Internal: Build a Jekyll topic method
     #
