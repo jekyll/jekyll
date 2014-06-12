@@ -41,7 +41,8 @@ module Jekyll
     def entries
       return [] unless exists?
       Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
-        entry[File.join(directory, "")] = ""; entry
+        entry[File.join(directory, "")] = ""
+        entry
       end
     end
 
