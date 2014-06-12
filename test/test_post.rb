@@ -6,8 +6,8 @@ class TestPost < Test::Unit::TestCase
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")}
-    post.render(layouts, {"site" => {"posts" => []}})
+    layouts = { "default" => Layout.new(@site, source_dir("_layouts"), "simple.html") }
+    post.render(layouts, { "site" => { "posts" => [] } })
   end
 
   context "A Post" do
@@ -137,7 +137,7 @@ class TestPost < Test::Unit::TestCase
         should "read yaml front-matter" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
+          assert_equal({ "title" => "Test title", "layout" => "post", "tag" => "Ruby" }, @post.data)
           assert_equal "This is the content", @post.content
         end
       end
@@ -149,7 +149,7 @@ class TestPost < Test::Unit::TestCase
         should "should read the YAML header" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal({"title" => "Test Post Where YAML Ends in Dots"},
+          assert_equal({ "title" => "Test Post Where YAML Ends in Dots" },
                        @post.data)
         end
       end
@@ -161,7 +161,7 @@ class TestPost < Test::Unit::TestCase
         should "consume the embedded dashes" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal({"title" => "Foo --- Bar"}, @post.data)
+          assert_equal({ "title" => "Foo --- Bar" }, @post.data)
           assert_equal "Triple the fun!", @post.content
         end
       end
@@ -318,7 +318,7 @@ class TestPost < Test::Unit::TestCase
       should "read yaml front-matter" do
         @post.read_yaml(@source, @real_file)
 
-        assert_equal({"title" => "Foo Bar", "layout" => "default"}, @post.data)
+        assert_equal({ "title" => "Foo Bar", "layout" => "default" }, @post.data)
         assert_equal "h1. {{ page.title }}\n\nBest *post* ever", @post.content
       end
 

@@ -6,15 +6,15 @@ class TestExcerpt < Test::Unit::TestCase
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")}
-    post.render(layouts, {"site" => {"posts" => []}})
+    layouts = { "default" => Layout.new(@site, source_dir("_layouts"), "simple.html") }
+    post.render(layouts, { "site" => { "posts" => [] } })
   end
 
   context "With extraction disabled" do
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"excerpt_separator" => ""})
+        Jekyll::Configuration::DEFAULTS.merge({ "excerpt_separator" => "" })
       end
       @site = Site.new(Jekyll.configuration)
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")

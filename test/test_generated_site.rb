@@ -5,7 +5,7 @@ class TestGeneratedSite < Test::Unit::TestCase
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir })
       end
 
       @site = Site.new(Jekyll.configuration)
@@ -60,7 +60,7 @@ OUTPUT
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "limit_posts" => 5})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "limit_posts" => 5 })
       end
 
       @site = Site.new(Jekyll.configuration)
@@ -76,7 +76,7 @@ OUTPUT
       assert_raise ArgumentError do
         clear_dest
         stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "limit_posts" => -1})
+          Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "limit_posts" => -1 })
         end
 
         @site = Site.new(Jekyll.configuration)
@@ -87,7 +87,7 @@ OUTPUT
       assert_nothing_raised ArgumentError do
         clear_dest
         stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "limit_posts" => 0})
+          Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "limit_posts" => 0 })
         end
 
         @site = Site.new(Jekyll.configuration)

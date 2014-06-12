@@ -8,8 +8,8 @@ class TestPage < Test::Unit::TestCase
   end
 
   def do_render(page)
-    layouts = { "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")}
-    page.render(layouts, {"site" => {"posts" => []}})
+    layouts = { "default" => Layout.new(@site, source_dir("_layouts"), "simple.html") }
+    page.render(layouts, { "site" => { "posts" => [] } })
   end
 
   context "A Page" do

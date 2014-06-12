@@ -13,7 +13,7 @@ class TestFilters < Test::Unit::TestCase
 
   context "filters" do
     setup do
-      @filter = JekyllFilter.new({"source" => source_dir, "destination" => dest_dir, "timezone" => "UTC"})
+      @filter = JekyllFilter.new({ "source" => source_dir, "destination" => dest_dir, "timezone" => "UTC" })
       @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1399680607
@@ -130,12 +130,12 @@ class TestFilters < Test::Unit::TestCase
 
     context "jsonify filter" do
       should "convert hash to json" do
-        assert_equal "{\"age\":18}", @filter.jsonify({:age => 18})
+        assert_equal "{\"age\":18}", @filter.jsonify({ :age => 18 })
       end
 
       should "convert array to json" do
         assert_equal "[1,2]", @filter.jsonify([1, 2])
-        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => "Jack"}, {:name => "Smith"}])
+        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{ :name => "Jack" }, { :name => "Smith" }])
       end
     end
 
@@ -177,7 +177,7 @@ class TestFilters < Test::Unit::TestCase
       end
       should "return sorted strings" do
         assert_equal %w(10 2), @filter.sort(%w(10 2))
-        assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.sort([{"a" => "10"}, {"a" => "2"}], "a")
+        assert_equal [{ "a" => "10" }, { "a" => "2" }], @filter.sort([{ "a" => "10" }, { "a" => "2" }], "a")
         assert_equal %w(FOO Foo foo), @filter.sort(%w(foo Foo FOO))
         assert_equal %w(_foo foo foo_), @filter.sort(%w(foo_ _foo foo))
         # Cyrillic
@@ -187,17 +187,17 @@ class TestFilters < Test::Unit::TestCase
         assert_equal %w(אלף בית), @filter.sort(%w(בית אלף))
       end
       should "return sorted by property array" do
-        assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}],
-          @filter.sort([{"a" => 4}, {"a" => 3}, {"a" => 1}, {"a" => 2}], "a")
+        assert_equal [{ "a" => 1 }, { "a" => 2 }, { "a" => 3 }, { "a" => 4 }],
+          @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
       end
       should "return sorted by property array with nils first" do
-        ary = [{"a" => 2}, {"b" => 1}, {"a" => 1}]
-        assert_equal [{"b" => 1}, {"a" => 1}, {"a" => 2}], @filter.sort(ary, "a")
+        ary = [{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }]
+        assert_equal [{ "b" => 1 }, { "a" => 1 }, { "a" => 2 }], @filter.sort(ary, "a")
         assert_equal @filter.sort(ary, "a"), @filter.sort(ary, "a", "first")
       end
       should "return sorted by property array with nils last" do
-        assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
-          @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", "last")
+        assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
+          @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
       end
     end
 

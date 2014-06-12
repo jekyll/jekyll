@@ -4,8 +4,8 @@ class TestRelatedPosts < Test::Unit::TestCase
   context "building related posts without lsi" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir,
-                                               "destination" => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir,
+                                                "destination" => dest_dir })
       end
       @site = Site.new(Jekyll.configuration)
     end
@@ -25,9 +25,9 @@ class TestRelatedPosts < Test::Unit::TestCase
   context "building related posts with lsi" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir,
-                                               "destination" => dest_dir,
-                                               "lsi" => true})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir,
+                                                "destination" => dest_dir,
+                                                "lsi" => true })
       end
       any_instance_of(Jekyll::RelatedPosts) { |i| stub(i).display }
       @site = Site.new(Jekyll.configuration)

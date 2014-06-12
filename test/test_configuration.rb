@@ -27,10 +27,10 @@ class TestConfiguration < Test::Unit::TestCase
   end
   context "#config_files" do
     setup do
-      @config = Configuration[{"source" => source_dir}]
+      @config = Configuration[{ "source" => source_dir }]
       @no_override     = {}
-      @one_config_file = {"config" => "config.yml"}
-      @multiple_files  = {"config" => %w[config/site.yml config/deploy.toml configuration.yml]}
+      @one_config_file = { "config" => "config.yml" }
+      @multiple_files  = { "config" => %w[config/site.yml config/deploy.toml configuration.yml] }
     end
 
     should "always return an array" do
@@ -137,7 +137,7 @@ class TestConfiguration < Test::Unit::TestCase
       mock(SafeYAML).load_file(@user_config) { raise SystemCallError, "No such file or directory - #{@user_config}" }
       mock($stderr).puts(("Fatal: ".rjust(20) + "The configuration file '#{@user_config}' could not be found.").red)
       assert_raises LoadError do
-        Jekyll.configuration({"config" => [@user_config]})
+        Jekyll.configuration({ "config" => [@user_config] })
       end
     end
 
@@ -163,7 +163,7 @@ class TestConfiguration < Test::Unit::TestCase
     end
 
     should "load different config if specified" do
-      mock(SafeYAML).load_file(@paths[:other]) { {"baseurl" => "http://wahoo.dev"} }
+      mock(SafeYAML).load_file(@paths[:other]) { { "baseurl" => "http://wahoo.dev" } }
       mock($stdout).puts("Configuration file: #{@paths[:other]}")
       assert_equal Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => @paths[:other] })
     end
@@ -191,8 +191,8 @@ class TestConfiguration < Test::Unit::TestCase
     end
 
     should "load multiple config files and last config should win" do
-      mock(SafeYAML).load_file(@paths[:default]) { {"baseurl" => "http://example.dev"} }
-      mock(SafeYAML).load_file(@paths[:other]) { {"baseurl" => "http://wahoo.dev"} }
+      mock(SafeYAML).load_file(@paths[:default]) { { "baseurl" => "http://example.dev" } }
+      mock(SafeYAML).load_file(@paths[:other]) { { "baseurl" => "http://wahoo.dev" } }
       mock($stdout).puts("Configuration file: #{@paths[:default]}")
       mock($stdout).puts("Configuration file: #{@paths[:other]}")
       assert_equal Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })

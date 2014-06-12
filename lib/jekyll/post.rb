@@ -263,7 +263,7 @@ module Jekyll
         extracted_excerpt.do_layout(payload, {})
       end
 
-      do_layout(payload.merge({"page" => to_liquid}), layouts)
+      do_layout(payload.merge({ "page" => to_liquid }), layouts)
     end
 
     # Obtain destination path.

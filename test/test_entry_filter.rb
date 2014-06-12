@@ -4,7 +4,7 @@ class TestEntryFilter < Test::Unit::TestCase
   context "Filtering entries" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir })
       end
       @site = Site.new(Jekyll.configuration)
     end
@@ -51,7 +51,7 @@ class TestEntryFilter < Test::Unit::TestCase
 
     should "filter symlink entries when safe mode enabled" do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "safe" => true})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "safe" => true })
       end
       site = Site.new(Jekyll.configuration)
       stub(File).symlink?("symlink.js") {true}
@@ -67,7 +67,7 @@ class TestEntryFilter < Test::Unit::TestCase
 
     should "not include symlinks in safe mode" do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "safe" => true})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "safe" => true })
       end
       site = Site.new(Jekyll.configuration)
 
@@ -78,7 +78,7 @@ class TestEntryFilter < Test::Unit::TestCase
 
     should "include symlinks in unsafe mode" do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "safe" => false})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "safe" => false })
       end
       site = Site.new(Jekyll.configuration)
 
@@ -91,7 +91,7 @@ class TestEntryFilter < Test::Unit::TestCase
   context "#glob_include?" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir })
       end
       @site = Site.new(Jekyll.configuration)
       @filter = EntryFilter.new(@site)

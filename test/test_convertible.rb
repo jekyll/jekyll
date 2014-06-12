@@ -11,7 +11,7 @@ class TestConvertible < Test::Unit::TestCase
 
     should "parse the front-matter correctly" do
       ret = @convertible.read_yaml(@base, "front_matter.erb")
-      assert_equal({"test" => "good"}, ret)
+      assert_equal({ "test" => "good" }, ret)
     end
 
     should "not parse if the front-matter is not at the start of the file" do

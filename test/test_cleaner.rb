@@ -5,7 +5,7 @@ class TestCleaner < Test::Unit::TestCase
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir })
       end
 
       FileUtils.mkdir_p(dest_dir("to_keep/child_dir"))
@@ -44,7 +44,7 @@ class TestCleaner < Test::Unit::TestCase
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir })
       end
 
       FileUtils.mkdir_p(source_dir("no_files_inside/child_dir"))
