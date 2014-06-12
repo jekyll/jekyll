@@ -89,7 +89,7 @@ module Jekyll
 
     # Get the full path to the directory containing the post files
     def containing_dir(source, dir)
-      return File.join(source, dir, "_posts")
+      File.join(source, dir, "_posts")
     end
 
     # Read the YAML frontmatter.
@@ -149,7 +149,7 @@ module Jekyll
       if 0 == cmp
        cmp = slug <=> other.slug
       end
-      return cmp
+      cmp
     end
 
     # Extract information from the post filename.
