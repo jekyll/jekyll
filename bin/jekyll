@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w(.. lib))
 
 require "jekyll"
 require "mercenary"
 
-%w[jekyll-import].each do |blessed_gem|
+%w(jekyll-import).each do |blessed_gem|
   begin
     require blessed_gem
   rescue LoadError

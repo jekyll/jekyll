@@ -10,40 +10,40 @@ class TestEntryFilter < Test::Unit::TestCase
     end
 
     should "filter entries" do
-      ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
-              .baz.markdow foo.markdown~ .htaccess _posts _pages]
+      ent1 = %w(foo.markdown bar.markdown baz.markdown #baz.markdown#
+              .baz.markdow foo.markdown~ .htaccess _posts _pages)
 
       entries = EntryFilter.new(@site).filter(ent1)
-      assert_equal %w[foo.markdown bar.markdown baz.markdown .htaccess], entries
+      assert_equal %w(foo.markdown bar.markdown baz.markdown .htaccess), entries
     end
 
     should "filter entries with exclude" do
-      excludes = %w[README TODO vendor/bundle]
-      files = %w[index.html site.css .htaccess vendor]
+      excludes = %w(README TODO vendor/bundle)
+      files = %w(index.html site.css .htaccess vendor)
 
       @site.exclude = excludes + ["exclude*"]
       assert_equal files, @site.filter_entries(excludes + files + ["excludeA"])
     end
 
     should "filter entries with exclude relative to site source" do
-      excludes = %w[README TODO css]
-      files = %w[index.html vendor/css .htaccess]
+      excludes = %w(README TODO css)
+      files = %w(index.html vendor/css .htaccess)
 
       @site.exclude = excludes
       assert_equal files, @site.filter_entries(excludes + files + ["css"])
     end
 
     should "filter excluded directory and contained files" do
-      excludes = %w[README TODO css]
-      files = %w[index.html .htaccess]
+      excludes = %w(README TODO css)
+      files = %w(index.html .htaccess)
 
       @site.exclude = excludes
       assert_equal files, @site.filter_entries(excludes + files + ["css", "css/main.css", "css/vendor.css"])
     end
 
     should "not filter entries within include" do
-      includes = %w[_index.html .htaccess include*]
-      files = %w[index.html _index.html .htaccess includeA]
+      includes = %w(_index.html .htaccess include*)
+      files = %w(index.html _index.html .htaccess includeA)
 
       @site.include = includes
       assert_equal files, @site.filter_entries(files)
@@ -55,13 +55,13 @@ class TestEntryFilter < Test::Unit::TestCase
       end
       site = Site.new(Jekyll.configuration)
       stub(File).symlink?("symlink.js") { true }
-      files = %w[symlink.js]
+      files = %w(symlink.js)
       assert_equal [], site.filter_entries(files)
     end
 
     should "not filter symlink entries when safe mode disabled" do
       stub(File).symlink?("symlink.js") { true }
-      files = %w[symlink.js]
+      files = %w(symlink.js)
       assert_equal files, @site.filter_entries(files)
     end
 

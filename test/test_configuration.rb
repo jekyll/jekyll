@@ -30,7 +30,7 @@ class TestConfiguration < Test::Unit::TestCase
       @config = Configuration[{ "source" => source_dir }]
       @no_override     = {}
       @one_config_file = { "config" => "config.yml" }
-      @multiple_files  = { "config" => %w[config/site.yml config/deploy.toml configuration.yml] }
+      @multiple_files  = { "config" => %w(config/site.yml config/deploy.toml configuration.yml) }
     end
 
     should "always return an array" do
@@ -51,10 +51,10 @@ class TestConfiguration < Test::Unit::TestCase
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
     should "return the config if given one config file" do
-      assert_equal %w[config.yml], @config.config_files(@one_config_file)
+      assert_equal %w(config.yml), @config.config_files(@one_config_file)
     end
     should "return an array of the config files if given many config files" do
-      assert_equal %w[config/site.yml config/deploy.toml configuration.yml], @config.config_files(@multiple_files)
+      assert_equal %w(config/site.yml config/deploy.toml configuration.yml), @config.config_files(@multiple_files)
     end
   end
   context "#backwards_compatibilize" do
@@ -81,12 +81,12 @@ class TestConfiguration < Test::Unit::TestCase
     should "transform string exclude into an array" do
       assert @config.key?("exclude")
       assert @config.backwards_compatibilize.key?("exclude")
-      assert_equal @config.backwards_compatibilize["exclude"], %w[READ-ME.md Gemfile CONTRIBUTING.hello.markdown]
+      assert_equal @config.backwards_compatibilize["exclude"], %w(READ-ME.md Gemfile CONTRIBUTING.hello.markdown)
     end
     should "transform string include into an array" do
       assert @config.key?("include")
       assert @config.backwards_compatibilize.key?("include")
-      assert_equal @config.backwards_compatibilize["include"], %w[STOP_THE_PRESSES.txt .heloses .git]
+      assert_equal @config.backwards_compatibilize["include"], %w(STOP_THE_PRESSES.txt .heloses .git)
     end
     should "set highlighter to pygments" do
       assert @config.key?("pygments")

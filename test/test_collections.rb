@@ -132,13 +132,13 @@ class TestCollections < Test::Unit::TestCase
       assert @site.collections["methods"].docs.is_a? Array
       @site.collections["methods"].docs.each do |doc|
         assert doc.is_a? Jekyll::Document
-        assert_include %w[
+        assert_include %w(
           _methods/configuration.md
           _methods/sanitized_path.md
           _methods/site/generate.md
           _methods/site/initialize.md
           _methods/um_hi.md
-        ], doc.relative_path
+        ), doc.relative_path
       end
     end
 

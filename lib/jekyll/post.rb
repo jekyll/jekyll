@@ -6,7 +6,7 @@ module Jekyll
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
-    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
+    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w(
       title
       url
       dir
@@ -17,13 +17,13 @@ module Jekyll
       previous
       tags
       path
-    ]
+    )
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
+    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w(
       content
       excerpt
-    ]
+    )
 
     # Post name validator. Post filenames must be like:
     # 2008-11-05-my-awesome-post.textile

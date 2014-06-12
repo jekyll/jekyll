@@ -134,7 +134,7 @@ module Jekyll
     # Returns true if the extname belongs to the set of extensions
     #   that asset files use.
     def asset_file?
-      %w[.sass .scss .coffee].include?(ext)
+      %w(.sass .scss .coffee).include?(ext)
     end
 
     # Determine whether the file should be rendered with Liquid.

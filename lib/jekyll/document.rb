@@ -68,7 +68,7 @@ module Jekyll
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
-      %w[.yaml .yml].include?(extname)
+      %w(.yaml .yml).include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -77,7 +77,7 @@ module Jekyll
     # Returns true if the extname belongs to the set of extensions
     #   that asset files use.
     def asset_file?
-      %w[.sass .scss .coffee].include?(extname)
+      %w(.sass .scss .coffee).include?(extname)
     end
 
     # Determine whether the file should be rendered with Liquid.

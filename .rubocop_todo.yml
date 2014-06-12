@@ -173,12 +173,6 @@ Style/OpMethod:
 Style/ParenthesesAroundCondition:
   Enabled: false
 
-# Offense count: 44
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Enabled: false
-
 # Offense count: 6
 # Cop supports --auto-correct.
 Style/PerlBackrefs:

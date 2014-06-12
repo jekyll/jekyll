@@ -612,7 +612,7 @@ class TestPost < Test::Unit::TestCase
     end
 
     should "generate categories and topics" do
-      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), "foo", "bar/2008-12-12-topical-post.textile")
+      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w(source)), "foo", "bar/2008-12-12-topical-post.textile")
       assert_equal ["foo"], post.categories
     end
   end
