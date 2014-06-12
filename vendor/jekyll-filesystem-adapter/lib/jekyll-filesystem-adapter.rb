@@ -85,7 +85,7 @@ module Jekyll
         Dir.glob(full_path)
       else
         Dir.glob(full_path, flags)
-      end.map { |f| filename_relative_to_basedir(f) }.sort
+      end.map { |f| filename_relative_to_current_directory(f) }.sort
     end
 
     def dir_entries(directory)
@@ -93,11 +93,16 @@ module Jekyll
     end
 
     def rm_rf(file_or_files)
-      files = Array(file_or_files).select { |path| exist?(path) }
-      FileUtils.rm_rf(files)
+      files = Array(file_or_files).map do |path|
+        sanitized_path(path)
+      end.select do |path|
+        exist?(path)
+      end
+      FileUtils.rm_r(files, { :secure => true })
     end
 
-    def mkdir_p(directory)
+    def mkdir_p(dir_to_create)
+      directory = sanitized_path(dir_to_create)
       FileUtils.mkdir_p(directory) unless exist?(directory)
     end
 
@@ -121,12 +126,17 @@ module Jekyll
       end
     end
 
-    def filename_relative_to_basedir(absolute_path)
-      absolute_path.sub(/\A#{base_dir}\//, '')
+    def filename_relative_to_current_directory(absolute_path)
+      base_directory = if Dir.pwd.start_with? base_dir
+        Dir.pwd
+      else
+        base_dir
+      end
+      absolute_path.sub(/\A#{base_directory}\//, '')
     end
 
     def sanitize_filename(name)
-      name.gsub(/[^\w\s_-]+/, '')
+      name.gsub(/[^\w\s-]+/, '')
           .gsub(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
           .gsub(/\s+/, '_')
     end

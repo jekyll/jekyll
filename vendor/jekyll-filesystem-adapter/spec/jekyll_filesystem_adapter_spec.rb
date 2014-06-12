@@ -134,9 +134,21 @@ FILE
 
       it "grabs the right files" do
         expect(
-          subject.glob('about/**/*')
+          -> {
+            subject.chdir(source_dir('about')) do
+              subject.glob('about/**/*')
+            end
+          }.call
         ).to eql(
-          %w(about/hansel.md about/index.md)
+          %w(hansel.md index.md)
+        )
+      end
+
+      it "can grab subdirectories" do
+        expect(
+          subject.glob('**/*')
+        ).to eql(
+          %w(about about/hansel.md about/index.md homepage.md symlink.md)
         )
       end
     end
@@ -146,6 +158,31 @@ FILE
         expect(subject.dir_entries(source_dir)).to eql(
           %w(about homepage.md symlink.md)
         )
+      end
+    end
+
+    context "#rm_rf" do
+      subject do
+        described_class.new(tmp_dir, { safe: safe, site: site })
+      end
+      let(:all_files)       { [tmp_dir('not_exist')] + files_to_create }
+      let(:files_to_create) { [tmp_dir('exit'), tmp_dir('exist')] }
+      before(:each) do
+        FileUtils.touch files_to_create
+      end
+
+      it "deletes only the files that exist" do
+        expect(subject.rm_rf(all_files)).to eql(files_to_create)
+      end
+    end
+
+    context "#mkdir_p" do
+      after(:each) do
+        subject.rm_rf('etc')
+      end
+
+      it "creates a folder" do
+        expect(subject.mkdir_p('/etc/hosts')).to eql([source_dir('etc/hosts')])
       end
     end
 
