@@ -22,7 +22,7 @@ module Jekyll
         old_scope = nil
 
         matching_sets(path, type).each do |set|
-          if set["values"].has_key?(setting) && has_precedence?(old_scope, set["scope"])
+          if set["values"].key?(setting) && has_precedence?(old_scope, set["scope"])
             value = set["values"][setting]
             old_scope = set["scope"]
           end
@@ -75,7 +75,7 @@ module Jekyll
       end
 
       def applies_type?(scope, type)
-        !scope.has_key?("type") || scope["type"] == type.to_s
+        !scope.key?("type") || scope["type"] == type.to_s
       end
 
       # Checks if a given set of default values is valid
@@ -101,10 +101,10 @@ module Jekyll
 
         if new_path.length != old_path.length
           new_path.length >= old_path.length
-        elsif new_scope.has_key? "type"
+        elsif new_scope.key? "type"
           true
         else
-          !old_scope.has_key? "type"
+          !old_scope.key? "type"
         end
       end
 

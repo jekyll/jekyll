@@ -107,11 +107,6 @@ Style/CommentAnnotation:
 Style/CyclomaticComplexity:
   Max: 10
 
-# Offense count: 31
-# Cop supports --auto-correct.
-Style/DeprecatedHashMethods:
-  Enabled: false
-
 # Offense count: 88
 Style/Documentation:
   Enabled: false
