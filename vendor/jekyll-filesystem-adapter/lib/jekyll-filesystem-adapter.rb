@@ -52,25 +52,23 @@ module Jekyll
     #
 
     def symlink?(path_to_check)
-      File.symlink?(path_to_check)
+      File.symlink? sanitized_path(path_to_check)
     end
 
     def file?(path_to_check)
-      File.file?(path_to_check)
+      File.file? sanitized_path(path_to_check)
     end
 
     def directory?(path_to_check)
-      File.directory?(path_to_check)
+      File.directory? sanitized_path(path_to_check)
     end
 
     def exist?(path_to_check)
-      full_path = sanitized_path(path_to_check)
-      File.exist?(full_path)
+      File.exist? sanitized_path(path_to_check)
     end
 
     def file_allowed?(path_to_check)
-      full_path = sanitized_path(path_to_check)
-      !safe? || !symlink?(full_path)
+      !safe? || !symlink?(sanitized_path(path_to_check))
     end
 
     #
@@ -82,15 +80,16 @@ module Jekyll
     end
 
     def glob(path_to_glob, flags = nil)
+      full_path = sanitized_path(path_to_glob)
       if flags.nil?
-        Dir.glob(path_to_glob)
+        Dir.glob(full_path)
       else
-        Dir.glob(path_to_glob, flags)
-      end
+        Dir.glob(full_path, flags)
+      end.map { |f| filename_relative_to_basedir(f) }.sort
     end
 
     def dir_entries(directory)
-      glob sanitized_path(directory, File.join('**', '*'))
+      glob sanitized_path(directory, '*')
     end
 
     def rm_rf(file_or_files)
@@ -120,6 +119,10 @@ module Jekyll
       File.open(path, 'wb') do |f|
         f.write(content)
       end
+    end
+
+    def filename_relative_to_basedir(absolute_path)
+      absolute_path.sub(/\A#{base_dir}\//, '')
     end
 
     def sanitize_filename(name)
