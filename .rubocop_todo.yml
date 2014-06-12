@@ -259,10 +259,6 @@ Style/SpaceInsideBlockBraces:
   Enabled: false
 
 # Offense count: 1
-Style/UnlessElse:
-  Enabled: false
-
-# Offense count: 1
 # Cop supports --auto-correct.
 Style/WhileUntilDo:
   Enabled: false
