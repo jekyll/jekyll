@@ -212,7 +212,7 @@ module Jekyll
           exit(1)
         end
 
-        input.sort { |apple, orange|
+        input.sort do |apple, orange|
           apple_property = item_property(apple, property)
           orange_property = item_property(orange, property)
 
@@ -223,7 +223,7 @@ module Jekyll
           else
             apple_property <=> orange_property
           end
-        }
+        end
       end
     end
 

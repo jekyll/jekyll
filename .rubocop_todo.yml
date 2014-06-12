@@ -46,11 +46,6 @@ Style/AlignArray:
 Style/AlignParameters:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/Blocks:
-  Enabled: false
-
 # Offense count: 88
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
