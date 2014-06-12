@@ -104,11 +104,6 @@ Style/DoubleNegation:
 Style/EmptyLinesAroundBody:
   Enabled: false
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/EmptyLiteral:
-  Enabled: false
-
 # Offense count: 4
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:
