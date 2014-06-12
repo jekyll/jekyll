@@ -16,7 +16,7 @@ module Jekyll
 
       %w[safe lsi highlighter baseurl exclude include future unpublished
         show_drafts limit_posts keep_files gems].each do |opt|
-        self.send("#{opt}=", config[opt])
+        send("#{opt}=", config[opt])
       end
 
       self.source          = File.expand_path(config["source"])
@@ -27,7 +27,7 @@ module Jekyll
       self.plugins        = plugin_manager.plugins_path
 
       self.file_read_opts = {}
-      self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
+      file_read_opts[:encoding] = config["encoding"] if config["encoding"]
 
       reset
       setup
@@ -196,7 +196,7 @@ module Jekyll
     # Returns nothing
     def read_data(dir)
       base = File.join(source, dir)
-      read_data_to(base, self.data)
+      read_data_to(base, data)
     end
 
     # Read and parse all yaml files under <dir> and add them to the

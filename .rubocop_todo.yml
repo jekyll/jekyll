@@ -205,11 +205,6 @@ Style/RaiseArgs:
 Style/RedundantReturn:
   Enabled: false
 
-# Offense count: 7
-# Cop supports --auto-correct.
-Style/RedundantSelf:
-  Enabled: false
-
 # Offense count: 17
 # Configuration parameters: MaxSlashes.
 Style/RegexpLiteral:

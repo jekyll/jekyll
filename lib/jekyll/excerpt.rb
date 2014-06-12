@@ -66,7 +66,7 @@ module Jekyll
 
     # Returns the shorthand String identifier of this Post.
     def inspect
-      "<Excerpt: #{self.id}>"
+      "<Excerpt: #{id}>"
     end
 
     protected
