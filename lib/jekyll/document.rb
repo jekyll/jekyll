@@ -109,9 +109,9 @@ module Jekyll
     # Returns the Hash of key-value pairs for replacement in the URL.
     def url_placeholders
       {
-        collection: collection.label,
-        path:       cleaned_relative_path,
-        output_ext: Jekyll::Renderer.new(site, self).output_ext
+        :collection => collection.label,
+        :path => cleaned_relative_path,
+        :output_ext => Jekyll::Renderer.new(site, self).output_ext
       }
     end
 
@@ -128,9 +128,9 @@ module Jekyll
     # Returns the computed URL for the document.
     def url
       @url ||= URL.new({
-        template:     url_template,
-        placeholders: url_placeholders,
-        permalink:    permalink
+        :template => url_template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
       }).to_s
     end
 

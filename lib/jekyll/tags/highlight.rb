@@ -71,7 +71,7 @@ eos
 
       def render_rouge(code)
         require "rouge"
-        formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
+        formatter = Rouge::Formatters::HTML.new(:line_numbers => @options[:linenos], :wrap => false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         code = formatter.format(lexer.lex(code))
         "<div class=\"highlight\"><pre>#{code}</pre></div>"

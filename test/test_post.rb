@@ -29,21 +29,21 @@ class TestPost < Test::Unit::TestCase
       post = setup_post("2013-12-20-properties.text")
 
       attrs = {
-        categories: %w(foo bar baz),
-        content: "All the properties.\n\nPlus an excerpt.\n",
-        date: Time.new(2013, 12, 20),
-        dir: "/foo/bar/baz/2013/12/20",
-        excerpt: "All the properties.\n\n",
-        foo: "bar",
-        id: "/foo/bar/baz/2013/12/20/properties",
-        layout: "default",
-        name: nil,
-        path: "_posts/2013-12-20-properties.text",
-        permalink: nil,
-        published: nil,
-        tags: %w(ay bee cee),
-        title: "Properties Post",
-        url: "/foo/bar/baz/2013/12/20/properties.html"
+        :categories => %w(foo bar baz),
+        :content => "All the properties.\n\nPlus an excerpt.\n",
+        :date => Time.new(2013, 12, 20),
+        :dir => "/foo/bar/baz/2013/12/20",
+        :excerpt => "All the properties.\n\n",
+        :foo => "bar",
+        :id => "/foo/bar/baz/2013/12/20/properties",
+        :layout => "default",
+        :name => nil,
+        :path => "_posts/2013-12-20-properties.text",
+        :permalink => nil,
+        :published => nil,
+        :tags => %w(ay bee cee),
+        :title => "Properties Post",
+        :url => "/foo/bar/baz/2013/12/20/properties.html"
       }
 
       attrs.each do |attr, val|

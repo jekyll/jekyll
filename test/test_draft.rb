@@ -27,21 +27,21 @@ class TestDraft < Test::Unit::TestCase
       ymd = date.strftime("%Y/%m/%d")
 
       attrs = {
-        categories: %w(foo bar baz),
-        content: "All the properties.\n\nPlus an excerpt.\n",
-        date: date,
-        dir: "/foo/bar/baz/#{ymd}",
-        excerpt: "All the properties.\n\n",
-        foo: "bar",
-        id: "/foo/bar/baz/#{ymd}/draft-properties",
-        layout: "default",
-        name: nil,
-        path: "_drafts/draft-properties.text",
-        permalink: nil,
-        published: nil,
-        tags: %w(ay bee cee),
-        title: "Properties Draft",
-        url: "/foo/bar/baz/#{ymd}/draft-properties.html"
+        :categories => %w(foo bar baz),
+        :content => "All the properties.\n\nPlus an excerpt.\n",
+        :date => date,
+        :dir => "/foo/bar/baz/#{ymd}",
+        :excerpt => "All the properties.\n\n",
+        :foo => "bar",
+        :id => "/foo/bar/baz/#{ymd}/draft-properties",
+        :layout => "default",
+        :name => nil,
+        :path => "_drafts/draft-properties.text",
+        :permalink => nil,
+        :published => nil,
+        :tags => %w(ay bee cee),
+        :title => "Properties Draft",
+        :url => "/foo/bar/baz/#{ymd}/draft-properties.html"
       }
 
       attrs.each do |attr, val|

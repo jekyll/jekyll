@@ -60,17 +60,17 @@ class TestPage < Test::Unit::TestCase
       should "make properties accessible through #[]" do
         page = setup_page("properties.html")
         attrs = {
-          content: "All the properties.\n",
-          dir: "/properties/",
-          excerpt: nil,
-          foo: "bar",
-          layout: "default",
-          name: "properties.html",
-          path: "properties.html",
-          permalink: "/properties/",
-          published: nil,
-          title: "Properties Page",
-          url: "/properties/"
+          :content => "All the properties.\n",
+          :dir => "/properties/",
+          :excerpt => nil,
+          :foo => "bar",
+          :layout => "default",
+          :name => "properties.html",
+          :path => "properties.html",
+          :permalink => "/properties/",
+          :published => nil,
+          :title => "Properties Page",
+          :url => "/properties/"
         }
 
         attrs.each do |attr, val|

@@ -27,7 +27,7 @@ module Jekyll
     # Returns the sorted array of docs.
     def read
       filtered_entries.each do |file_path|
-        doc = Jekyll::Document.new(Jekyll.sanitized_path(directory, file_path), { site: site, collection: self })
+        doc = Jekyll::Document.new(Jekyll.sanitized_path(directory, file_path), { :site => site, :collection => self })
         doc.read
         docs << doc
       end
