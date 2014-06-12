@@ -34,7 +34,7 @@ module Jekyll
         params = {}
         markup = @params
 
-        while match = VALID_SYNTAX.match(markup) do
+        while match = VALID_SYNTAX.match(markup)
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
