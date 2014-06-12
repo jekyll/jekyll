@@ -1,3 +1,14 @@
+TEST_DIR    = File.dirname(__FILE__)
+PROJECT_DIR = File.dirname(TEST_DIR)
+TMP_DIR     = File.expand_path('tmp', PROJECT_DIR)
+
+-> {
+  require 'fileutils'
+  FileUtils.mkdir(TMP_DIR) unless File.directory?(TMP_DIR)
+}.call
+
+require File.expand_path('lib/jekyll-filesystem-adapter.rb', PROJECT_DIR)
+
 RSpec.configure do |config|
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
@@ -56,5 +67,17 @@ RSpec.configure do |config|
     # Prevents you from mocking or stubbing a method that does not exist on
     # a real object. This is generally recommended.
     mocks.verify_partial_doubles = true
+  end
+
+  def test_dir(*files)
+    File.join(TEST_DIR, *files)
+  end
+
+  def source_dir(*files)
+    test_dir('source', *files)
+  end
+
+  def tmp_dir(*files)
+    File.join(TMP_DIR, *files)
   end
 end
