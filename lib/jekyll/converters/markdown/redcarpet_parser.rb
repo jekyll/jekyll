@@ -53,7 +53,6 @@ module Jekyll
           end
         end
 
-
         def initialize(config)
           require "redcarpet"
           @config = config

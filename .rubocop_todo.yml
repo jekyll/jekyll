@@ -99,11 +99,6 @@ Style/Documentation:
 Style/DoubleNegation:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Enabled: false
-
 # Offense count: 4
 Style/EmptyLinesAroundAccessModifier:
   Enabled: false
