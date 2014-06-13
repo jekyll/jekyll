@@ -21,20 +21,15 @@ module Jekyll
     private
 
     def layout_entries
-      entries = []
-      within(layout_directory) do
-        entries = EntryFilter.new(site).filter(site.fs.glob('**/*.*'))
-      end
-      entries
+      entries = EntryFilter.new(site).filter(
+        site.fs.glob(File.join(layout_directory, '**', '*')).map do |entry|
+          site.fs.relative_to(layout_directory, entry)
+        end
+      )
     end
 
     def layout_name(file)
       file.split(".")[0..-2].join(".")
-    end
-
-    def within(directory)
-      return unless site.fs.exist?(directory)
-      site.fs.chdir(directory) { yield }
     end
 
     def layout_directory_inside_source

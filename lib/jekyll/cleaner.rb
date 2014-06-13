@@ -35,11 +35,12 @@ module Jekyll
       #
       # Returns a Set with the file paths
       def existing_files
-        files = Set.new
-        fs.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-          files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex || keep_dirs.include?(file)
+        Set.new fs.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH).reject do |file|
+          relative = fs.strip_prefix(File.join(site.dest, ''), file)
+          relative =~ /\/\.{1,2}$/ ||
+            relative =~ keep_file_regex ||
+            keep_dirs.include?(relative)
         end
-        files
       end
 
       # Private: The list of files to be created when site is built.

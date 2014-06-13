@@ -85,11 +85,20 @@ module Jekyll
         Dir.glob(full_path)
       else
         Dir.glob(full_path, flags)
-      end.map { |f| filename_relative_to_current_directory(f) }.sort
+      end.sort
     end
 
     def dir_entries(directory)
-      glob sanitized_path(directory, '*')
+      chdir(sanitized_path(directory)) do
+        glob(sanitized_path(directory, '*')).map do |entry|
+          relative_to(directory, entry)
+        end
+      end
+    end
+
+    def full_directory_glob(directory)
+      full_path = sanitized_path(directory)
+      Dir.glob(File.join(full_path, "**", "*"))
     end
 
     def rm_rf(file_or_files)
@@ -126,13 +135,13 @@ module Jekyll
       end
     end
 
-    def filename_relative_to_current_directory(absolute_path)
-      base_directory = if Dir.pwd.start_with? base_dir
-        Dir.pwd
+    def relative_to(prefix, entry)
+      regexp = Regexp.new("")
+      if prefix.end_with?("/")
+        entry.sub(/\A#{Regexp.escape(prefix)}/, '')
       else
-        base_dir
+        entry.sub(/\A#{Regexp.escape(prefix)}\//, '')
       end
-      absolute_path.sub(/\A#{base_directory}\//, '')
     end
 
     def sanitize_filename(name)

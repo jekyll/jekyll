@@ -40,7 +40,7 @@ module Jekyll
     #   relative to the collection's directory
     def entries
       return Array.new unless exists?
-      Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
+      site.fs.full_directory_glob(directory).map do |entry|
         entry[File.join(directory, "")] = ''; entry
       end
     end

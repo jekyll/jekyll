@@ -31,7 +31,7 @@ module Jekyll
     # Returns merged option hash for File.read of self.site (if exists)
     # and a given param
     def merged_file_read_opts(opts)
-      read_options.merge(opts)
+      (site ? site.file_read_opts : {}).merge(opts)
     end
 
     # Read the YAML frontmatter.
@@ -42,6 +42,9 @@ module Jekyll
     #
     # Returns nothing.
     def read_yaml(base, name, opts = {})
+      if name.start_with?("/")
+        name = name.gsub("#{base}/", "")
+      end
       filename = File.join(base, name)
       begin
         self.content = site.fs.read(filename, merged_file_read_opts(opts))
@@ -171,7 +174,7 @@ module Jekyll
         self.output = render_liquid(layout.content,
                                          payload,
                                          info,
-                                         site.fs.class.sanitized_path(site.config['layouts'], layout.name))
+                                         site.fs.sanitized_path(site.config['layouts'], layout.name))
 
         if layout = layouts[layout.data["layout"]]
           if used.include?(layout)

@@ -147,8 +147,8 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      base = fs.sanitized_path(source, dir)
-      entries = fs.chdir(base) { filter_entries(fs.dir_entries('.'), base) }
+      base = fs.sanitized_path(dir)
+      entries = filter_entries(fs.dir_entries(base), base)
 
       read_posts(dir)
       read_drafts(dir) if show_drafts
@@ -158,7 +158,7 @@ module Jekyll
       entries.each do |f|
         absolute_path = fs.sanitized_path(base, f)
         if fs.directory?(absolute_path)
-          relative_path = fs.sanitized_path(dir, f)
+          relative_path = fs.relative_to(base, absolute_path)
           read_directories(relative_path) unless dest.sub(/\/$/, '') == absolute_path
         elsif has_yaml_header?(absolute_path)
           page = Page.new(self, source, dir, f)
@@ -227,9 +227,14 @@ module Jekyll
       dir = fs.sanitized_path(source, dir)
       return unless fs.directory?(dir)
 
-      entries = fs.chdir(dir) do
-        fs.glob('*.{yaml,yml,json}') + fs.glob('*').select { |fn| fs.directory?(fn) }
+      entries = fs.dir_entries(dir).select do |e|
+        entry = fs.sanitized_path(dir, e)
+        %w(.yaml .yml .json).include?(File.extname(entry)) ||
+          fs.directory?(entry)
       end
+      # entries = fs.chdir(dir) do
+      #   fs.glob('*.{yaml,yml,json}') + fs.glob('*').select { |fn| fs.directory?(fn) }
+      # end
 
       entries.each do |entry|
         path = fs.sanitized_path(dir, entry)
@@ -422,7 +427,7 @@ module Jekyll
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
-      base = fs.sanitized_path(source, File.join(dir, subfolder))
+      base = fs.sanitized_path(fs.sanitized_path(dir, subfolder))
       return [] unless fs.exist?(base)
       entries = fs.chdir(base) { filter_entries(fs.glob('**/*'), base) }
       entries.delete_if { |entry| fs.directory?(fs.sanitized_path(base, entry)) }
