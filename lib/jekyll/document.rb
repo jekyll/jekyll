@@ -176,6 +176,8 @@ module Jekyll
     end
 
     # Read in the file and assign the content and data based on the file contents.
+    # Merge the frontmatter of the file with the frontmatter default
+    # values
     #
     # Returns nothing.
     def read(opts = {})
@@ -183,10 +185,17 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
+          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
+          unless defaults.empty?
+            @data = defaults
+          end
           @content = File.read(path, merged_file_read_opts(opts))
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
             @content = $POSTMATCH
-            @data    = SafeYAML.load($1)
+            data_file = SafeYAML.load($1)
+            unless data_file.nil?
+              @data = Utils.deep_merge_hashes(defaults, data_file)
+            end
           end
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"

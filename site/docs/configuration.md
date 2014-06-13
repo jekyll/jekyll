@@ -309,7 +309,8 @@ defaults:
       layout: "default"
 {% endhighlight %}
 
-Now, this will only set the layout for files where the type is `post`. The different types that are available to you are `page`, `post`, or `draft`. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
+Now, this will only set the layout for files where the type is `post`.
+The different types that are available to you are `page`, `post`, `draft` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
 
 As mentioned earlier, you can set multiple scope/values pairs for `defaults`.
 
@@ -332,6 +333,22 @@ defaults:
 {% endhighlight %}
 
 With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde` as well as have the category for the page set to `project`.
+
+{% highlight yaml %}
+collections:
+  - my_collection:
+    output: true
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "my_collection" # a collection in your site
+    values:
+      layout: "default"
+{% endhighlight %}
+
+In this example the `layout` is set to `default` inside the [collection](../collections) with the name `my_collection`.
 
 ### Precedence
 
