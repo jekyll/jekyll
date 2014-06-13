@@ -21,6 +21,7 @@
   * Upgrade listen to `2.7.6 <= x < 3.0.0` (#2492)
   * Allow configuration of different Twitter and GitHub usernames in site template (#2485)
   * Bump Pygments to v0.6.0 (#2504)
+  * Front-matter defaults for documents in collections (#2419)
 
 ### Bug Fixes
 
