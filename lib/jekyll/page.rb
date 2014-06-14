@@ -5,7 +5,8 @@ module Jekyll
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :content, :output
+    attr_writer   :data
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w[
@@ -14,6 +15,7 @@ module Jekyll
       name
       path
       url
+      published?
     ]
 
     # Initialize a new Page.
@@ -44,6 +46,13 @@ module Jekyll
     # Returns the String destination directory.
     def dir
       url[-1, 1] == '/' ? url : File.dirname(url)
+    end
+
+    # Hash of Page metadata.
+    #
+    # Returns the data from the page or a new Hash if there is none.
+    def data
+      @data ||= Hash.new
     end
 
     # The full path and filename of the post. Defined in the YAML of the post
@@ -162,6 +171,10 @@ module Jekyll
 
     def uses_relative_permalinks
       permalink && !@dir.empty? && site.config['relative_permalinks']
+    end
+
+    def published?
+      !!data.fetch('published', true)
     end
   end
 end
