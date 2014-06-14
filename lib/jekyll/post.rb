@@ -149,7 +149,7 @@ module Jekyll
     def <=>(other)
       cmp = date <=> other.date
       if 0 == cmp
-       cmp = slug <=> other.slug
+        cmp = slug <=> other.slug
       end
       cmp
     end

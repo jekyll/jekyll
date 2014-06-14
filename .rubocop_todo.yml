@@ -109,11 +109,6 @@ Style/IfUnlessModifier:
 Style/IndentHash:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/IndentationWidth:
-  Enabled: false
-
 # Offense count: 25
 # Cop supports --auto-correct.
 Style/LineEndConcatenation:
