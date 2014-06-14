@@ -2,7 +2,6 @@
 
 module Jekyll
   class Renderer
-
     attr_reader :document, :site
 
     def initialize(site, document)
@@ -133,6 +132,5 @@ module Jekyll
 
       output
     end
-
   end
 end

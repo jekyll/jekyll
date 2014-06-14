@@ -3,7 +3,6 @@
 module Jekyll
   module Utils
     class << self
-
       # Merges a master hash with another hash, recursively.
       #
       # master_hash - the "parent" hash whose values will be overridden
@@ -83,7 +82,6 @@ module Jekyll
       def stringify_hash_keys(hash)
         transform_keys(hash) { |key| key.to_s rescue key }
       end
-
     end
   end
 end

@@ -89,7 +89,6 @@ eos
         code = code.sub(/\n*<\/pre>/, "</code></pre>")
         code.strip
       end
-
     end
   end
 end

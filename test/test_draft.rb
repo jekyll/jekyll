@@ -54,5 +54,4 @@ class TestDraft < Test::Unit::TestCase
     end
 
   end
-
 end

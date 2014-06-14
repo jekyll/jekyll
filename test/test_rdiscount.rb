@@ -3,7 +3,6 @@
 require "helper"
 
 class TestRdiscount < Test::Unit::TestCase
-
   context "rdiscount" do
     setup do
       config = {

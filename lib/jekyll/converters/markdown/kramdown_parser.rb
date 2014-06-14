@@ -24,7 +24,6 @@ module Jekyll
 
           Kramdown::Document.new(content, Utils.symbolize_hash_keys(@config["kramdown"])).to_html
         end
-
       end
     end
   end

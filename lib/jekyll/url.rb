@@ -13,7 +13,6 @@ require "uri"
 #
 module Jekyll
   class URL
-
     # options - One of :permalink or :template must be supplied.
     #           :template     - The String used as template for URL generation,
     #                           for example "/:path/:basename:output_ext", where
@@ -54,7 +53,6 @@ module Jekyll
 
     # Returns a sanitized String URL
     def sanitize_url(in_url)
-
       # Remove all double slashes
       url = in_url.gsub(/\/\//, "/")
 

@@ -12,7 +12,6 @@ module Jekyll
     end
 
     class IncludeTag < Liquid::Tag
-
       SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
 
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/

@@ -2,9 +2,7 @@
 
 module Jekyll
   class Command
-
     class << self
-
       # A list of subclasses of Jekyll::Command
       def subclasses
         @subclasses ||= []
@@ -86,8 +84,6 @@ module Jekyll
         c.option "quiet",   "-q", "--quiet", "Silence output."
         c.option "verbose", "-V", "--verbose", "Print verbose output."
       end
-
     end
-
   end
 end

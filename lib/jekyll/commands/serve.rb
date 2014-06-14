@@ -3,9 +3,7 @@
 module Jekyll
   module Commands
     class Serve < Command
-
       class << self
-
         def init_with_program(prog)
           prog.command(:serve) do |c|
             c.syntax "serve [options]"
@@ -121,9 +119,7 @@ module Jekyll
           fh_option[:NondisclosureName] = [".ht*", "~*"]
           fh_option
         end
-
       end
-
     end
   end
 end

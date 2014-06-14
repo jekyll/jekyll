@@ -3,7 +3,6 @@
 require "helper"
 
 class TestLiquidExtensions < Test::Unit::TestCase
-
   context "looking up a variable in a Liquid context" do
     class SayHi < Liquid::Tag
       include Jekyll::LiquidExtensions
@@ -29,5 +28,4 @@ class TestLiquidExtensions < Test::Unit::TestCase
       assert_equal @template.render({ "page" => { "title" => "tobi" } }), "hi page.name"
     end
   end
-
 end

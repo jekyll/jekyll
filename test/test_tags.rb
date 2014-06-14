@@ -3,7 +3,6 @@
 require "helper"
 
 class TestTags < Test::Unit::TestCase
-
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     stub(Jekyll).configuration do
       site_configuration({

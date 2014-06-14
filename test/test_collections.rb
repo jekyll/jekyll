@@ -3,7 +3,6 @@
 require "helper"
 
 class TestCollections < Test::Unit::TestCase
-
   def fixture_site(overrides = {})
     Jekyll::Site.new(Jekyll.configuration(
       overrides.merge({
@@ -195,5 +194,4 @@ class TestCollections < Test::Unit::TestCase
       assert_not_include @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end
-
 end

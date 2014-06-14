@@ -3,7 +3,6 @@
 require "helper"
 
 class TestRedCloth < Test::Unit::TestCase
-
   context "RedCloth default (no explicit config) hard_breaks enabled" do
     setup do
       @textile = Converters::Textile.new

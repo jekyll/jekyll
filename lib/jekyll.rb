@@ -82,7 +82,6 @@ require "jekyll-gist"
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-
   # Public: Tells you which Jekyll environment you are building in so you can skip tasks
   # if you need to.  This is useful when doing expensive compression tasks on css and
   # images and allows you to skip that when working in development.

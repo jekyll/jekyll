@@ -93,11 +93,6 @@ Style/Documentation:
 Style/DoubleNegation:
   Enabled: false
 
-# Offense count: 53
-# Cop supports --auto-correct.
-Style/EmptyLinesAroundBody:
-  Enabled: false
-
 # Offense count: 11
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:

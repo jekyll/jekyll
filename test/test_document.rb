@@ -3,7 +3,6 @@
 require "helper"
 
 class TestDocument < Test::Unit::TestCase
-
   context "a document in a collection" do
     setup do
       @site = Site.new(Jekyll.configuration({
@@ -169,5 +168,4 @@ class TestDocument < Test::Unit::TestCase
 
   context " a document part of a rendered collection" do
   end
-
 end

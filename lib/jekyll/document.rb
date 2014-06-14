@@ -257,6 +257,5 @@ module Jekyll
     def write?
       collection && collection.write?
     end
-
   end
 end

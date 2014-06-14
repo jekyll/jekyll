@@ -722,5 +722,4 @@ class TestPost < Test::Unit::TestCase
       assert !post.categories.include?("article"), "Did not expect post.categories to include 'article' but it did."
     end
   end
-
 end

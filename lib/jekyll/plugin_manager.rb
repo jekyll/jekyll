@@ -73,6 +73,5 @@ module Jekyll
         Array(site.config["plugins"]).map { |d| File.expand_path(d) }
       end
     end
-
   end
 end
