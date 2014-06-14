@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Deprecator
     def self.process(args)

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require "simplecov"
 require "simplecov-gem-adapter"
 SimpleCov.start("gem")

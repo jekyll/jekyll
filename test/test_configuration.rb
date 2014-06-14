@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require "helper"
 
 class TestConfiguration < Test::Unit::TestCase

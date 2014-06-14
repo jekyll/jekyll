@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   module Converters
     class Identity < Converter

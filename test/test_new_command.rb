@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require "helper"
 require "jekyll/commands/new"
 

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require "fileutils"
 require "rr"
 require "test/unit"

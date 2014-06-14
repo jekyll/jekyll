@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Configuration
     # This class handles custom defaults for YAML frontmatter settings.

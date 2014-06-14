@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require "helper"
 
 class TestRedcarpet < Test::Unit::TestCase

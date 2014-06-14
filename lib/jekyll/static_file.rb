@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class StaticFile
     # The cache of last modification times [path] -> mtime.
