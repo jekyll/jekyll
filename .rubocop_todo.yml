@@ -76,12 +76,6 @@ Style/ClassLength:
 Style/ClassVars:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredMethods.
-Style/CollectionMethods:
-  Enabled: false
-
 # Offense count: 1
 # Configuration parameters: Keywords.
 Style/CommentAnnotation:

@@ -172,7 +172,7 @@ module Jekyll
       if groupable?(input)
         input.group_by do |item|
           item_property(item, property).to_s
-        end.inject([]) do |memo, i|
+        end.reduce([]) do |memo, i|
           memo << { "name" => i.first, "items" => i.last }
         end
       else
