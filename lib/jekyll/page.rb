@@ -1,7 +1,5 @@
 module Jekyll
-  class Page
-    include Convertible
-
+  class Page < Document
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
@@ -16,34 +14,13 @@ module Jekyll
       url
     ]
 
-    # Initialize a new Page.
-    #
-    # site - The Site object.
-    # base - The String path to the source.
-    # dir  - The String path between the source and the file.
-    # name - The String filename of the file.
-    def initialize(site, base, dir, name)
-      @site = site
-      @base = base
-      @dir  = dir
-      @name = name
-
-
-      process(name)
-      read_yaml(File.join(base, dir), name)
-
-      data.default_proc = proc do |hash, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
-      end
-    end
-
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, we be '/'
     #
     # Returns the String destination directory.
     def dir
-      url[-1, 1] == '/' ? url : site.fs.dirname(url)
+      url[-1, 1] == '/' ? url : File.dirname(url)
     end
 
     # The full path and filename of the post. Defined in the YAML of the post

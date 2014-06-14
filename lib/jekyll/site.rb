@@ -203,7 +203,7 @@ module Jekyll
 
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
-        klass.new(self, source, dir, entry) if klass.valid?(entry)
+        klass.new(File.join(dir, entry), { site: site,  }) if klass.valid?(entry)
       end.reject do |entry|
         entry.nil?
       end
@@ -232,9 +232,6 @@ module Jekyll
         %w(.yaml .yml .json).include?(File.extname(entry)) ||
           fs.directory?(entry)
       end
-      # entries = fs.chdir(dir) do
-      #   fs.glob('*.{yaml,yml,json}') + fs.glob('*').select { |fn| fs.directory?(fn) }
-      # end
 
       entries.each do |entry|
         path = fs.sanitized_path(dir, entry)
@@ -279,9 +276,8 @@ module Jekyll
         end
       end
 
-      payload = site_payload
-      [posts, pages].flatten.each do |page_or_post|
-        page_or_post.render(layouts, payload)
+      [posts, pages].flatten.each do |document|
+        document.output = Jekyll::Renderer.new(self, document).run
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir

@@ -12,9 +12,30 @@ module Jekyll
     #
     # Returns nothing.
     def initialize(path, relations)
-      @site = relations[:site]
+      @site = relations.fetch(:site)
       @path = path
       @collection = relations[:collection]
+
+      data.default_proc = proc do |hash, key|
+        site.frontmatter_defaults.find(relative_path, type, key)
+      end
+    end
+
+    # The type of a document,
+    #   i.e., its classname downcase'd and to_sym'd if not a document,
+    #
+    #
+    # Returns the type of self.
+    def type
+      if is_a?(Post)
+        :post
+      elsif is_a?(Page)
+        :page
+      elsif is_a?(Draft)
+        :draft
+      else
+        collection.label.to_sym
+      end
     end
 
     # Fetch the Document's data.
@@ -183,17 +204,10 @@ module Jekyll
         @data = site.fs.safe_load_yaml(path)
       else
         begin
-          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
-          unless defaults.empty?
-            @data = defaults
-          end
           @content = site.fs.read(path, merged_file_read_opts(opts))
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+            @data    = SafeYAML.load($1)
             @content = $POSTMATCH
-            data_file = SafeYAML.load($1)
-            unless data_file.nil?
-              @data = Utils.deep_merge_hashes(defaults, data_file)
-            end
           end
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"
