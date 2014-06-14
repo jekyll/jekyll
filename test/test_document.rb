@@ -58,7 +58,7 @@ class TestDocument < Test::Unit::TestCase
           "scope" => { "path" => "", "type" => "slides" },
           "values" => {
             "nested" => {
-              "key" => "myval",
+              "key" => "myval"
             }
           }
         }]
@@ -120,7 +120,7 @@ class TestDocument < Test::Unit::TestCase
           "scope" => { "path" => "slides", "type" => "slides" },
           "values" => {
             "nested" => {
-              "key" => "value123",
+              "key" => "value123"
             }
           }
         }]
@@ -150,7 +150,7 @@ class TestDocument < Test::Unit::TestCase
           "scope" => { "path" => "somepath", "type" => "slides" },
           "values" => {
             "nested" => {
-              "key" => "myval",
+              "key" => "myval"
             }
           }
         }]
