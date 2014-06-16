@@ -94,13 +94,6 @@ module Jekyll
       do_layout(payload, layouts)
     end
 
-    # The path to the source file
-    #
-    # Returns the path to the source file
-    def path
-      data.fetch('path', relative_path.sub(/\A\//, ''))
-    end
-
     # Obtain destination path.
     #
     # dest - The String path to the destination dir.

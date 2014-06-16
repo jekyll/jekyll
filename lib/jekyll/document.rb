@@ -39,13 +39,9 @@ module Jekyll
     # Returns a Hash containing the data. An empty hash is returned if
     #   no data was read.
     def data
-      @data ||= Hash.new
-      if @data.is_a?(Hash)
-        @data.default_proc = -> do |_, key|
-          site.frontmatter_defaults.find(relative_path, type, key)
-        end
+      @data ||= Hash.new do |hash, key|
+        site.frontmatter_defaults.find(relative_path, type, key)
       end
-      @data
     end
 
     # The path to the document, relative to the site source.
