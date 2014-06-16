@@ -126,7 +126,7 @@ module Jekyll
         []
       else
         raise ArgumentError, "Your `collections` key must be a hash or an array."
-      end
+      end + ['pages']
     end
 
     # Read Site data from disk and load it into internal data structures.
@@ -161,7 +161,10 @@ module Jekyll
           relative_path = fs.relative_to(base, absolute_path)
           read_directories(relative_path) unless dest.sub(/\/$/, '') == absolute_path
         elsif has_yaml_header?(absolute_path)
-          page = Page.new(self, source, dir, f)
+          page = Page.new(absolute_path, {
+            :site       => self,
+            :collection => collections['pages']
+          })
           pages << page if publisher.publish?(page)
         else
           static_files << StaticFile.new(self, source, dir, f)
@@ -169,6 +172,10 @@ module Jekyll
       end
 
       pages.sort_by!(&:name)
+    end
+
+    def pages_collection
+
     end
 
     # Read all the files in <source>/<dir>/_posts and create a new Post

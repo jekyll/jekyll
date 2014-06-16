@@ -132,8 +132,16 @@ module Jekyll
       {
         collection: collection.label,
         path:       cleaned_relative_path,
-        output_ext: Jekyll::Renderer.new(site, self).output_ext
+        output_ext: output_ext
       }
+    end
+
+    # The output extension for the document.
+    # Includes the preceding `.` character.
+    #
+    # Returns the output extname for the document.
+    def output_ext
+      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The permalink for this Document.
