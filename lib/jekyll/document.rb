@@ -15,10 +15,6 @@ module Jekyll
       @site = relations.fetch(:site)
       @path = path
       @collection = relations[:collection]
-
-      (@data = Hash.new).default_proc = proc do |hash, key|
-        site.frontmatter_defaults.find(relative_path, type, key)
-      end
     end
 
     # The type of a document,
@@ -44,6 +40,12 @@ module Jekyll
     #   no data was read.
     def data
       @data ||= Hash.new
+      if @data.is_a?(Hash)
+        @data.default_proc = -> do |_, key|
+          site.frontmatter_defaults.find(relative_path, type, key)
+        end
+      end
+      @data
     end
 
     # The path to the document, relative to the site source.
