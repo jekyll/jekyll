@@ -1,7 +1,7 @@
 module Jekyll
   class Site
 
-    attr_accessor :config, :layouts, :posts, :pages, :static_files,
+    attr_accessor :config, :layouts, :posts, :static_files,
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
@@ -70,7 +70,6 @@ module Jekyll
       self.time = (config['time'] ? Time.parse(config['time'].to_s) : Time.now)
       self.layouts = {}
       self.posts = []
-      self.pages = []
       self.static_files = []
       self.data = {}
       @collections = nil
@@ -109,7 +108,15 @@ module Jekyll
     #
     # Returns a Hash containing collection name-to-instance pairs.
     def collections
-      @collections ||= Hash[collection_names.map { |coll| [coll, Jekyll::Collection.new(self, coll)] } ]
+      @collections ||= Hash[collection_names.map do |coll|
+        [coll, Jekyll::Collection.new(self, coll)]
+      end].merge(default_collections)
+    end
+
+    def default_collections
+      default_colls = {"pages" => Jekyll::Collection.new(self, "pages")}
+      default_colls["pages"].metadata["output"] = true
+      default_colls
     end
 
     # The list of collection names.
@@ -126,7 +133,7 @@ module Jekyll
         []
       else
         raise ArgumentError, "Your `collections` key must be a hash or an array."
-      end + ['pages']
+      end
     end
 
     # Read Site data from disk and load it into internal data structures.
@@ -165,6 +172,7 @@ module Jekyll
             :site       => self,
             :collection => collections['pages']
           })
+          p page
           pages << page if publisher.publish?(page)
         else
           static_files << StaticFile.new(self, source, dir, f)
@@ -172,10 +180,6 @@ module Jekyll
       end
 
       pages.sort_by!(&:name)
-    end
-
-    def pages_collection
-
     end
 
     # Read all the files in <source>/<dir>/_posts and create a new Post
@@ -210,7 +214,7 @@ module Jekyll
 
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
-        klass.new(File.join(dir, entry), { site: site,  }) if klass.valid?(entry)
+        klass.new(File.join(dir, entry), { site: site }) if klass.valid?(entry)
       end.reject do |entry|
         entry.nil?
       end
@@ -258,7 +262,7 @@ module Jekyll
     # Returns nothing.
     def read_collections
       collections.each do |_, collection|
-        collection.read unless collection.label.eql?("data")
+        collection.read unless %w(data pages).include?(collection.label)
       end
     end
 
@@ -283,7 +287,7 @@ module Jekyll
         end
       end
 
-      [posts, pages].flatten.each do |document|
+      posts.each do |document|
         document.output = Jekyll::Renderer.new(self, document).run
       end
     rescue Errno::ENOENT => e
@@ -332,6 +336,10 @@ module Jekyll
 
     def categories
       post_attr_hash('categories')
+    end
+
+    def pages
+      collections["pages"].docs
     end
 
     # Prepare site data for site payload. The method maintains backward compatibility

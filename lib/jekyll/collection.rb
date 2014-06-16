@@ -41,8 +41,11 @@ module Jekyll
     def entries
       return Array.new unless exists?
       site.fs.full_directory_glob(directory).map do |entry|
-        entry[File.join(directory, "")] = ''; entry
-      end
+        unless site.fs.directory?(entry)
+          entry[File.join(directory, "")] = ''
+          entry
+        end
+      end.compact
     end
 
     # Filtered version of the entries in this collection.

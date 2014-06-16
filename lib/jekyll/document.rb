@@ -227,7 +227,8 @@ module Jekyll
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"
         rescue Exception => e
-          puts "Error reading file #{path}: #{e.message}"
+          puts caller
+          puts "Error reading document #{path}: #{e.message}"
         end
       end
     end
@@ -255,7 +256,7 @@ module Jekyll
     #
     # Returns the inspect string for this document.
     def inspect
-      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+      "#<#{self.class.name} #{relative_path} collection=#{collection.label}>"
     end
 
     # The string representation for this document.
