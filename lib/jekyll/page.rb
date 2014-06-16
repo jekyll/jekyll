@@ -1,9 +1,6 @@
 module Jekyll
   class Page < Document
-    attr_writer :dir
-    attr_accessor :site, :pager
-    attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :pager
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w[
@@ -58,9 +55,9 @@ module Jekyll
     # Returns the String url.
     def url
       @url ||= URL.new({
-        :template => template,
+        :template     => template,
         :placeholders => url_placeholders,
-        :permalink => permalink
+        :permalink    => permalink
       }).to_s
     end
 
@@ -68,20 +65,10 @@ module Jekyll
     # desired placeholder replacements. For details see "url.rb"
     def url_placeholders
       {
-        :path       => @dir,
-        :basename   => basename,
+        :path       => relative_directory,
+        :basename   => basename('.*'),
         :output_ext => output_ext
       }
-    end
-
-    # Extract information from the page filename.
-    #
-    # name - The String filename of the page file.
-    #
-    # Returns nothing.
-    def process(name)
-      self.ext = File.extname(name)
-      self.basename = name[0 .. -ext.length - 1]
     end
 
     # Add any necessary layouts to this post
@@ -134,7 +121,7 @@ module Jekyll
 
     # Returns the Boolean of whether this Page is an index file or not.
     def index?
-      basename == 'index'
+      basename('.*') == 'index'
     end
 
     def uses_relative_permalinks

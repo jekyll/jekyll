@@ -54,6 +54,15 @@ module Jekyll
       Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
     end
 
+    # The path to the document's containing directory, relative to the site
+    #   source.
+    #
+    # Returns a String path which represents the relative path
+    #  from the site source to this document's containing directory.
+    def relative_directory
+      File.dirname(relative_path)
+    end
+
     # The base filename of the document.
     #
     # suffix - (optional) the suffix to be removed from the end of the filename
