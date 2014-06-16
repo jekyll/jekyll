@@ -16,7 +16,7 @@ module Jekyll
       @path = path
       @collection = relations[:collection]
 
-      data.default_proc = proc do |hash, key|
+      (@data = Hash.new).default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(relative_path, type, key)
       end
     end
