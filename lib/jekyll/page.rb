@@ -20,6 +20,14 @@ module Jekyll
       url[-1, 1] == '/' ? url : File.dirname(url)
     end
 
+    def name
+      basename
+    end
+
+    def dir
+      relative_directory
+    end
+
     # The full path and filename of the post. Defined in the YAML of the post
     # body.
     #
@@ -27,7 +35,7 @@ module Jekyll
     def permalink
       return nil if data.nil? || data['permalink'].nil?
       if site.config['relative_permalinks']
-        File.join(@dir, data['permalink'])
+        File.join(dir, data['permalink'])
       else
         data['permalink']
       end
@@ -93,11 +101,6 @@ module Jekyll
       data.fetch('path', relative_path.sub(/\A\//, ''))
     end
 
-    # The path to the page source file, relative to the site source
-    def relative_path
-      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?))
-    end
-
     # Obtain destination path.
     #
     # dest - The String path to the destination dir.
@@ -125,7 +128,7 @@ module Jekyll
     end
 
     def uses_relative_permalinks
-      permalink && !@dir.empty? && site.config['relative_permalinks']
+      permalink && !dir.empty? && site.config['relative_permalinks']
     end
   end
 end
