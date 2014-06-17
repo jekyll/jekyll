@@ -12,9 +12,26 @@ module Jekyll
     #
     # Returns nothing.
     def initialize(path, relations)
-      @site = relations[:site]
+      @site = relations.fetch(:site)
       @path = path
       @collection = relations[:collection]
+    end
+
+    # The type of a document,
+    #   i.e., its classname downcase'd and to_sym'd if not a document,
+    #
+    #
+    # Returns the type of self.
+    def type
+      if is_a?(Post)
+        :post
+      elsif is_a?(Page)
+        :page
+      elsif is_a?(Draft)
+        :draft
+      else
+        collection.label.to_sym
+      end
     end
 
     # Fetch the Document's data.
@@ -22,7 +39,9 @@ module Jekyll
     # Returns a Hash containing the data. An empty hash is returned if
     #   no data was read.
     def data
-      @data ||= Hash.new
+      @data ||= Hash.new do |hash, key|
+        site.frontmatter_defaults.find(relative_path, type, key)
+      end
     end
 
     # The path to the document, relative to the site source.
@@ -31,6 +50,15 @@ module Jekyll
     #   from the site source to this document
     def relative_path
       Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
+    end
+
+    # The path to the document's containing directory, relative to the site
+    #   source.
+    #
+    # Returns a String path which represents the relative path
+    #  from the site source to this document's containing directory.
+    def relative_directory
+      File.dirname(relative_path)
     end
 
     # The base filename of the document.
@@ -111,8 +139,16 @@ module Jekyll
       {
         collection: collection.label,
         path:       cleaned_relative_path,
-        output_ext: Jekyll::Renderer.new(site, self).output_ext
+        output_ext: output_ext
       }
+    end
+
+    # The output extension for the document.
+    # Includes the preceding `.` character.
+    #
+    # Returns the output extname for the document.
+    def output_ext
+      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The permalink for this Document.
@@ -140,7 +176,7 @@ module Jekyll
     #
     # Returns the full path to the output file of this document.
     def destination(base_directory)
-      path = Jekyll.sanitized_path(base_directory, url)
+      path = site.fs.class.sanitized_path(base_directory, url)
       path = File.join(path, "index.html") if url =~ /\/$/
       path
     end
@@ -152,10 +188,8 @@ module Jekyll
     # Returns nothing.
     def write(dest)
       path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
-        f.write(output)
-      end
+      site.fs.mkdir_p(site.fs.dirname(path))
+      site.fs.write(path, output)
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
@@ -182,25 +216,19 @@ module Jekyll
     # Returns nothing.
     def read(opts = {})
       if yaml_file?
-        @data = SafeYAML.load_file(path)
+        @data = site.fs.safe_load_yaml(path)
       else
         begin
-          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
-          unless defaults.empty?
-            @data = defaults
-          end
-          @content = File.read(path, merged_file_read_opts(opts))
+          @content = site.fs.read(path, merged_file_read_opts(opts))
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+            @data    = SafeYAML.load($1)
             @content = $POSTMATCH
-            data_file = SafeYAML.load($1)
-            unless data_file.nil?
-              @data = Utils.deep_merge_hashes(defaults, data_file)
-            end
           end
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"
         rescue Exception => e
-          puts "Error reading file #{path}: #{e.message}"
+          puts caller
+          puts "Error reading document #{path}: #{e.message}"
         end
       end
     end
@@ -228,7 +256,7 @@ module Jekyll
     #
     # Returns the inspect string for this document.
     def inspect
-      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+      "#<#{self.class.name} #{relative_path} collection=#{collection.label}>"
     end
 
     # The string representation for this document.

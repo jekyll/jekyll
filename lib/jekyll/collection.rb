@@ -40,9 +40,12 @@ module Jekyll
     #   relative to the collection's directory
     def entries
       return Array.new unless exists?
-      Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
-        entry[File.join(directory, "")] = ''; entry
-      end
+      site.fs.full_directory_glob(directory).map do |entry|
+        unless site.fs.directory?(entry)
+          entry[File.join(directory, "")] = ''
+          entry
+        end
+      end.compact
     end
 
     # Filtered version of the entries in this collection.
@@ -69,7 +72,7 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      Jekyll.sanitized_path(site.source, relative_directory)
+      site.fs.sanitized_path(relative_directory)
     end
 
     # Checks whether the directory "exists" for this collection.
@@ -79,7 +82,7 @@ module Jekyll
     # Returns false if the directory doesn't exist or if it's a symlink
     #   and we're in safe mode.
     def exists?
-      File.directory?(directory) && !(File.symlink?(directory) && site.safe)
+      site.fs.exist?(directory) && site.fs.directory?(directory)
     end
 
     # The entry filter for this collection.

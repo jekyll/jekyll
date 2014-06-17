@@ -42,17 +42,20 @@ module Jekyll
     #
     # Returns nothing.
     def read_yaml(base, name, opts = {})
+      if name.start_with?("/")
+        name = name.gsub("#{base}/", "")
+      end
+      filename = File.join(base, name)
       begin
-        self.content = File.read(File.join(base, name),
-                                 merged_file_read_opts(opts))
+        self.content = site.fs.read(filename, merged_file_read_opts(opts))
         if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = SafeYAML.load($1)
         end
       rescue SyntaxError => e
-        Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
       rescue Exception => e
-        Jekyll.logger.warn "Error reading file #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
       end
 
       self.data ||= {}
@@ -125,96 +128,6 @@ module Jekyll
         :page
       elsif is_a?(Draft)
         :draft
-      end
-    end
-
-    # Determine whether the document is an asset file.
-    # Asset files include CoffeeScript files and Sass/SCSS files.
-    #
-    # Returns true if the extname belongs to the set of extensions
-    #   that asset files use.
-    def asset_file?
-      %w[.sass .scss .coffee].include?(ext)
-    end
-
-    # Determine whether the file should be rendered with Liquid.
-    #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
-    def render_with_liquid?
-      !asset_file?
-    end
-
-    # Determine whether the file should be placed into layouts.
-    #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
-    def place_in_layout?
-      !asset_file?
-    end
-
-    # Recursively render layouts
-    #
-    # layouts - a list of the layouts
-    # payload - the payload for Liquid
-    # info    - the info for Liquid
-    #
-    # Returns nothing
-    def render_all_layouts(layouts, payload, info)
-      # recursively render layouts
-      layout = layouts[data["layout"]]
-      used = Set.new([layout])
-
-      while layout
-        payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
-
-        self.output = render_liquid(layout.content,
-                                         payload,
-                                         info,
-                                         File.join(site.config['layouts'], layout.name))
-
-        if layout = layouts[layout.data["layout"]]
-          if used.include?(layout)
-            layout = nil # avoid recursive chain
-          else
-            used << layout
-          end
-        end
-      end
-    end
-
-    # Add any necessary layouts to this convertible document.
-    #
-    # payload - The site payload Hash.
-    # layouts - A Hash of {"name" => "layout"}.
-    #
-    # Returns nothing.
-    def do_layout(payload, layouts)
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
-
-      # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converter.highlighter_prefix
-      payload["highlighter_suffix"] = converter.highlighter_suffix
-
-      self.content = render_liquid(content, payload, info) if render_with_liquid?
-      transform
-
-      # output keeps track of what will finally be written
-      self.output = content
-
-      render_all_layouts(layouts, payload, info) if place_in_layout?
-    end
-
-    # Write the generated page file to the destination directory.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns nothing.
-    def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
-        f.write(output)
       end
     end
 

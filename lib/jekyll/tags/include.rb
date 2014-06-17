@@ -95,13 +95,14 @@ eos
       end
 
       def render(context)
-        dir = File.join(File.realpath(context.registers[:site].source), INCLUDES_DIR)
+        site = context.registers[:site]
+        dir  = site.fs.realpath site.fs.sanitized_path(site.source, INCLUDES_DIR)
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
         path = File.join(dir, file)
-        validate_path(path, dir, context.registers[:site].safe)
+        validate_path(path, dir, context.registers[:site])
 
         begin
           partial = Liquid::Template.parse(source(path, context))
@@ -115,10 +116,10 @@ eos
         end
       end
 
-      def validate_path(path, dir, safe)
-        if safe && !realpath_prefixed_with?(path, dir)
+      def validate_path(path, dir, site)
+        if site.fs.safe? && !site.fs.realpath_prefixed_with?(path, dir)
           raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
-        elsif !File.exist?(path)
+        elsif !site.fs.exist?(path)
           raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
         end
       end
@@ -137,7 +138,7 @@ eos
 
       # This method allows to modify the file content by inheriting from the class.
       def source(file, context)
-        File.read(file, file_read_opts(context))
+        context.registers[:site].fs.read(file, file_read_opts(context))
       end
     end
   end

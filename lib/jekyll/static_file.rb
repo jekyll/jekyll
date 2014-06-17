@@ -37,7 +37,7 @@ module Jekyll
 
     # Returns last modification time for this file.
     def mtime
-      File.stat(path).mtime.to_i
+      site.fs.mtime(path)
     end
 
     # Is source path modified?
@@ -55,11 +55,11 @@ module Jekyll
     def write(dest)
       dest_path = destination(dest)
 
-      return false if File.exist?(dest_path) and !modified?
+      return false if site.fs.exist?(dest_path) and !modified?
       @@mtimes[path] = mtime
 
-      FileUtils.mkdir_p(File.dirname(dest_path))
-      FileUtils.cp(path, dest_path)
+      site.fs.mkdir_p(site.fs.dirname(dest_path))
+      site.fs.cp(path, dest_path)
 
       true
     end

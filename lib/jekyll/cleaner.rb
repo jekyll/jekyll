@@ -12,7 +12,14 @@ module Jekyll
 
       # Cleans up the site's destination directory
       def cleanup!
-        FileUtils.rm_rf(obsolete_files)
+        fs.rm_rf(obsolete_files)
+      end
+
+      def fs
+        @fs ||= Jekyll::FileSystemAdapter.new(site.dest, {
+          :safe => site.safe,
+          :site => site
+        })
       end
 
       private
@@ -28,11 +35,12 @@ module Jekyll
       #
       # Returns a Set with the file paths
       def existing_files
-        files = Set.new
-        Dir.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-          files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex || keep_dirs.include?(file)
+        Set.new fs.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH).reject do |file|
+          relative = fs.strip_prefix(File.join(site.dest, ''), file)
+          relative =~ /\/\.{1,2}$/ ||
+            relative =~ keep_file_regex ||
+            keep_dirs.include?(relative)
         end
-        files
       end
 
       # Private: The list of files to be created when site is built.
@@ -56,7 +64,7 @@ module Jekyll
       #
       # Returns an Array with the directory paths
       def parent_dirs(file)
-        parent_dir = File.dirname(file)
+        parent_dir = fs.dirname(file)
         if parent_dir == site.dest
           []
         else
@@ -68,7 +76,7 @@ module Jekyll
       #
       # Returns a Set with the file paths
       def replaced_files
-        new_dirs.select { |dir| File.file?(dir) }.to_set
+        new_dirs.select { |dir| fs.file?(dir) }.to_set
       end
 
       # Private: The list of directories that need to be kept because they are parent directories

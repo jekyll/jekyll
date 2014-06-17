@@ -52,7 +52,7 @@ module Jekyll
     end
 
     def symlink?(entry)
-      File.symlink?(entry) && site.safe
+      site.fs.symlink?(entry) && site.fs.safe?
     end
 
     def ensure_leading_slash(path)
