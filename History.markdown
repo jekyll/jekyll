@@ -65,6 +65,7 @@
   * Add StickerMule + Jekyll post (#2476)
   * Add Jekyll Asset Pipeline Reborn to list of third-party plugins (#2479)
   * Add link to jekyll-compress-html to list of third-party plugins (#2514)
+  * Add Piwigo Gallery to list of third-party plugins (#2526)
 
 ## 2.0.3 / 2014-05-08
 
