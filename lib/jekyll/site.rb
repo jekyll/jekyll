@@ -341,7 +341,7 @@ module Jekyll
             "posts"        => posts.sort { |a, b| b <=> a },
             "pages"        => pages,
             "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-            "html_pages"   => pages.reject { |page| !page.html? },
+            "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
             "categories"   => post_attr_hash('categories'),
             "tags"         => post_attr_hash('tags'),
             "collections"  => collections,
