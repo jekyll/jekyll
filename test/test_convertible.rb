@@ -4,7 +4,8 @@ require 'ostruct'
 class TestConvertible < Test::Unit::TestCase
   context "yaml front-matter" do
     setup do
-      @convertible = OpenStruct.new
+      @site        = Jekyll::Site.new(site_configuration)
+      @convertible = OpenStruct.new(:site => @site)
       @convertible.extend Jekyll::Convertible
       @base = File.expand_path('../fixtures', __FILE__)
     end
@@ -40,10 +41,10 @@ class TestConvertible < Test::Unit::TestCase
       name = 'broken_front_matter3.erb'
       out = capture_stderr do
         ret = @convertible.read_yaml(@base, name, :encoding => 'utf-8')
-        assert_equal({}, ret)
+        assert_equal({"test" => "good"}, ret)
       end
-      assert_match(/invalid byte sequence in UTF-8/, out)
-      assert_match(/#{File.join(@base, name)}/, out)
+      assert_no_match(/invalid byte sequence in UTF-8/, out)
+      assert_no_match(/#{File.join(@base, name)}/, out)
     end
   end
 end
