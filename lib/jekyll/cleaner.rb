@@ -11,7 +11,7 @@ module Jekyll
       end
 
       def jail
-        Jekyll::FileSystem::Jail.new(site.dest, {
+        @jail ||= Jekyll::FileSystem::Jail.new(site.dest, {
           :safe => site.safe,
           :site => site
         })
@@ -36,7 +36,7 @@ module Jekyll
       # Returns a Set with the file paths
       def existing_files
         files = Set.new
-        jail.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
+        jail.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH).each do |file|
           files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex || keep_dirs.include?(file)
         end
         files
