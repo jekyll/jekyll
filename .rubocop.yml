@@ -1,0 +1,18 @@
+---
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+   - vendor/**/*
+
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Lint/EndAlignment:
+  AlignWith: variable
+
+Lint/UnusedMethodArgument:
+  Enabled: false

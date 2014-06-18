@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   module Commands
     class Build < Command
@@ -7,12 +9,12 @@ module Jekyll
         # Create the Mercenary command for the Jekyll CLI for this Command
         def init_with_program(prog)
           prog.command(:build) do |c|
-            c.syntax      'build [options]'
-            c.description 'Build your site'
+            c.syntax "build [options]"
+            c.description "Build your site"
 
             add_build_options(c)
 
-            c.action do |args, options|
+            c.action do |_args, options|
               options["serving"] = false
               Jekyll::Commands::Build.process(options)
             end
@@ -22,13 +24,13 @@ module Jekyll
         # Build your jekyll site
         # Continuously watch if `watch` is set to true in the config.
         def process(options)
-          Jekyll.logger.log_level = :error if options['quiet']
+          Jekyll.logger.log_level = :error if options["quiet"]
 
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
 
           build(site, options)
-          watch(site, options) if options['watch']
+          watch(site, options) if options["watch"]
         end
 
         # Build your Jekyll site.
@@ -38,8 +40,8 @@ module Jekyll
         #
         # Returns nothing.
         def build(site, options)
-          source      = options['source']
-          destination = options['destination']
+          source      = options["source"]
+          destination = options["destination"]
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
           Jekyll.logger.info "Generating..."
@@ -54,19 +56,19 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
-          require 'listen'
+          require "listen"
 
           listener = Listen.to(
-            options['source'],
+            options["source"],
             :ignore => ignore_paths(options),
-            :force_polling => options['force_polling']
+            :force_polling => options["force_polling"]
           ) do |modified, added, removed|
             t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
             n = modified.length + added.length + removed.length
             print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
             begin
               process_site(site)
-              puts  "...done."
+              puts "...done."
             rescue => e
               puts "...error:"
               Jekyll.logger.warn "Error:", e.message
@@ -77,7 +79,7 @@ module Jekyll
 
           Jekyll.logger.info "Auto-regeneration:", "enabled"
 
-          unless options['serving']
+          unless options["serving"]
             trap("INT") do
               listener.stop
               puts "     Halting auto-regeneration."

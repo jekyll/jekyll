@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class LogAdapter
     attr_reader :writer
@@ -80,7 +82,7 @@ module Jekyll
       abort
     end
 
-  private
+    private
 
     # Internal: Build a Jekyll topic method
     #
@@ -89,7 +91,7 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      formatted_topic(topic) + message.to_s.gsub(/\s+/, " ")
     end
 
     # Internal: Format the topic

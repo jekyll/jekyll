@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 
-require 'pry'
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
-require 'jekyll'
+require "pry"
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w(.. lib))
+require "jekyll"
 
-TEST_DIR = File.expand_path(File.join(File.dirname(__FILE__), *%w{ .. test }))
+TEST_DIR = File.expand_path(File.join(File.dirname(__FILE__), *%w(.. test)))
 
 def fixture_site(overrides = {})
   Jekyll::Site.new(site_configuration(overrides))
@@ -22,11 +23,11 @@ def site_configuration(overrides = {})
 end
 
 def dest_dir(*subdirs)
-  test_dir('dest', *subdirs)
+  test_dir("dest", *subdirs)
 end
 
 def source_dir(*subdirs)
-  test_dir('source', *subdirs)
+  test_dir("source", *subdirs)
 end
 
 def test_dir(*subdirs)
@@ -34,5 +35,5 @@ def test_dir(*subdirs)
 end
 
 module Jekyll
-  binding.pry
+  binding.pry # rubocop:disable Lint/Debugger
 end

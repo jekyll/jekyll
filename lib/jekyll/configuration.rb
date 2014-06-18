@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 
 module Jekyll
   class Configuration < Hash
@@ -6,84 +6,84 @@ module Jekyll
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = {
-      'source'        => Dir.pwd,
-      'destination'   => File.join(Dir.pwd, '_site'),
-      'plugins'       => '_plugins',
-      'layouts'       => '_layouts',
-      'data_source'   =>  '_data',
-      'keep_files'    => ['.git','.svn'],
-      'gems'          => [],
-      'collections'   => nil,
+      "source"        => Dir.pwd,
+      "destination"   => File.join(Dir.pwd, "_site"),
+      "plugins"       => "_plugins",
+      "layouts"       => "_layouts",
+      "data_source"   =>  "_data",
+      "keep_files"    => [".git", ".svn"],
+      "gems"          => [],
+      "collections"   => nil,
 
-      'timezone'      => nil,           # use the local timezone
+      "timezone"      => nil,           # use the local timezone
 
-      'encoding'      => 'utf-8',       # always use utf-8 encoding. NEVER FORGET
+      "encoding"      => "utf-8",       # always use utf-8 encoding. NEVER FORGET
 
-      'safe'          => false,
-      'detach'        => false,          # default to not detaching the server
-      'show_drafts'   => nil,
-      'limit_posts'   => 0,
-      'lsi'           => false,
-      'future'        => true,           # remove and make true just default
-      'unpublished'   => false,
+      "safe"          => false,
+      "detach"        => false,          # default to not detaching the server
+      "show_drafts"   => nil,
+      "limit_posts"   => 0,
+      "lsi"           => false,
+      "future"        => true,           # remove and make true just default
+      "unpublished"   => false,
 
-      'relative_permalinks' => false,
+      "relative_permalinks" => false,
 
-      'markdown'      => 'kramdown',
-      'highlighter'   => 'pygments',
-      'permalink'     => 'date',
-      'baseurl'       => '',
-      'include'       => ['.htaccess'],
-      'exclude'       => [],
-      'paginate_path' => '/page:num',
+      "markdown"      => "kramdown",
+      "highlighter"   => "pygments",
+      "permalink"     => "date",
+      "baseurl"       => "",
+      "include"       => [".htaccess"],
+      "exclude"       => [],
+      "paginate_path" => "/page:num",
 
-      'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
-      'textile_ext'   => 'textile',
+      "markdown_ext"  => "markdown,mkdown,mkdn,mkd,md",
+      "textile_ext"   => "textile",
 
-      'port'          => '4000',
-      'host'          => '0.0.0.0',
+      "port"          => "4000",
+      "host"          => "0.0.0.0",
 
-      'excerpt_separator' => "\n\n",
+      "excerpt_separator" => "\n\n",
 
-      'defaults'     => [],
+      "defaults"     => [],
 
-      'maruku' => {
-        'use_tex'    => false,
-        'use_divs'   => false,
-        'png_engine' => 'blahtex',
-        'png_dir'    => 'images/latex',
-        'png_url'    => '/images/latex',
-        'fenced_code_blocks' => true
+      "maruku" => {
+        "use_tex"    => false,
+        "use_divs"   => false,
+        "png_engine" => "blahtex",
+        "png_dir"    => "images/latex",
+        "png_url"    => "/images/latex",
+        "fenced_code_blocks" => true
       },
 
-      'rdiscount' => {
-        'extensions' => []
+      "rdiscount" => {
+        "extensions" => []
       },
 
-      'redcarpet' => {
-        'extensions' => []
+      "redcarpet" => {
+        "extensions" => []
       },
 
-      'kramdown' => {
-        'auto_ids'      => true,
-        'footnote_nr'   => 1,
-        'entity_output' => 'as_char',
-        'toc_levels'    => '1..6',
-        'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
-        'use_coderay'   => false,
+      "kramdown" => {
+        "auto_ids"      => true,
+        "footnote_nr"   => 1,
+        "entity_output" => "as_char",
+        "toc_levels"    => "1..6",
+        "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
+        "use_coderay"   => false,
 
-        'coderay' => {
-          'coderay_wrap'              => 'div',
-          'coderay_line_numbers'      => 'inline',
-          'coderay_line_number_start' => 1,
-          'coderay_tab_width'         => 4,
-          'coderay_bold_every'        => 10,
-          'coderay_css'               => 'style'
+        "coderay" => {
+          "coderay_wrap"              => "div",
+          "coderay_line_numbers"      => "inline",
+          "coderay_line_number_start" => 1,
+          "coderay_tab_width"         => 4,
+          "coderay_bold_every"        => 10,
+          "coderay_css"               => "style"
         }
       },
 
-      'redcloth' => {
-        'hard_breaks' => true
+      "redcloth" => {
+        "hard_breaks" => true
       }
     }
 
@@ -91,7 +91,7 @@ module Jekyll
     #
     # Return a copy of the hash where all its keys are strings
     def stringify_keys
-      reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
+      reduce({}) { |hsh, (k, v)| hsh.merge(k.to_s => v) }
     end
 
     # Public: Directory of the Jekyll source folder
@@ -100,12 +100,12 @@ module Jekyll
     #
     # Returns the path to the Jekyll source directory
     def source(override)
-      override['source'] || self['source'] || DEFAULTS['source']
+      override["source"] || self["source"] || DEFAULTS["source"]
     end
 
     def safe_load_file(filename)
       case File.extname(filename)
-      when '.toml'
+      when ".toml"
         TOML.load_file(filename)
       when /\.y(a)?ml/
         SafeYAML.load_file(filename)
@@ -121,10 +121,10 @@ module Jekyll
     # Returns an Array of config files
     def config_files(override)
       # Get configuration from <source>/_config.yml or <source>/<config_file>
-      config_files = override.delete('config')
+      config_files = override.delete("config")
       if config_files.to_s.empty?
-        default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
-          File.exists? Jekyll.sanitized_path(source(override), "_config.#{ext}")
+        default = %w(yml yaml).find(Proc.new { "yml" }) do |ext|
+          File.exist? Jekyll.sanitized_path(source(override), "_config.#{ext}")
         end
         config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
@@ -192,41 +192,41 @@ module Jekyll
     def backwards_compatibilize
       config = clone
       # Provide backwards-compatibility
-      if config.has_key?('auto') || config.has_key?('watch')
+      if config.key?("auto") || config.key?("watch")
         Jekyll.logger.warn "Deprecation:", "Auto-regeneration can no longer" +
-                            " be set from your configuration file(s). Use the"+
+                            " be set from your configuration file(s). Use the" +
                             " --watch/-w command-line option instead."
-        config.delete('auto')
-        config.delete('watch')
+        config.delete("auto")
+        config.delete("watch")
       end
 
-      if config.has_key? 'server'
+      if config.key? "server"
         Jekyll.logger.warn "Deprecation:", "The 'server' configuration option" +
                             " is no longer accepted. Use the 'jekyll serve'" +
                             " subcommand to serve your site with WEBrick."
-        config.delete('server')
+        config.delete("server")
       end
 
-      if config.has_key? 'server_port'
+      if config.key? "server_port"
         Jekyll.logger.warn "Deprecation:", "The 'server_port' configuration option" +
                             " has been renamed to 'port'. Please update your config" +
                             " file accordingly."
         # copy but don't overwrite:
-        config['port'] = config['server_port'] unless config.has_key?('port')
-        config.delete('server_port')
+        config["port"] = config["server_port"] unless config.key?("port")
+        config.delete("server_port")
       end
 
-      if config.has_key? 'pygments'
+      if config.key? "pygments"
         Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
                             " has been renamed to 'highlighter'. Please update your" +
                             " config file accordingly. The allowed values are 'rouge', " +
                             "'pygments' or null."
 
-        config['highlighter'] = 'pygments' if config['pygments']
-        config.delete('pygments')
+        config["highlighter"] = "pygments" if config["pygments"]
+        config.delete("pygments")
       end
 
-      %w[include exclude].each do |option|
+      %w(include exclude).each do |option|
         if config.fetch(option, []).is_a?(String)
           Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
             " must now be specified as an array, but you specified" +
@@ -236,7 +236,7 @@ module Jekyll
         end
       end
 
-      if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
+      if config.fetch("markdown", "kramdown").to_s.downcase.eql?("maruku")
         Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
           "Markdown processor. Maruku support has been deprecated and will " +
           "be removed in 3.0.0. We recommend you switch to Kramdown."
@@ -247,10 +247,10 @@ module Jekyll
     def fix_common_issues
       config = clone
 
-      if config.has_key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
+      if config.key?("paginate") && (!config["paginate"].is_a?(Integer) || config["paginate"] < 1)
         Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" +
-          " positive integer or nil. It's currently set to '#{config['paginate'].inspect}'."
-        config['paginate'] = nil
+          " positive integer or nil. It's currently set to '#{config["paginate"].inspect}'."
+        config["paginate"] = nil
       end
 
       config

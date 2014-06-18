@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class RelatedPosts
 
@@ -10,7 +12,7 @@ module Jekyll
     def initialize(post)
       @post = post
       @site = post.site
-      require 'classifier' if site.lsi
+      require "classifier" if site.lsi
     end
 
     def build
@@ -23,7 +25,6 @@ module Jekyll
         most_recent_posts
       end
     end
-
 
     def build_index
       self.class.lsi ||= begin

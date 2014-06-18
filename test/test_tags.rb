@@ -1,6 +1,6 @@
-# coding: utf-8
+# encoding: utf-8
 
-require 'helper'
+require "helper"
 
 class TestTags < Test::Unit::TestCase
 
@@ -12,8 +12,8 @@ class TestTags < Test::Unit::TestCase
     end
     site = Site.new(Jekyll.configuration)
 
-    if override['read_posts']
-      site.read_posts('')
+    if override["read_posts"]
+      site.read_posts("")
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
@@ -61,22 +61,22 @@ CONTENT
 
   context "initialized tag" do
     should "set the correct options" do
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new("highlight", "ruby ", ["test", "{% endhighlight %}", "\n"])
       assert_equal({}, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
+      tag = Jekyll::Tags::HighlightBlock.new("highlight", "ruby linenos ", ["test", "{% endhighlight %}", "\n"])
+      assert_equal({ :linenos => "inline" }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
+      tag = Jekyll::Tags::HighlightBlock.new("highlight", "ruby linenos=table ", ["test", "{% endhighlight %}", "\n"])
+      assert_equal({ :linenos => "table" }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@options))
+      tag = Jekyll::Tags::HighlightBlock.new("highlight", "ruby linenos=table nowrap", ["test", "{% endhighlight %}", "\n"])
+      assert_equal({ :linenos => "table", :nowrap => true }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
+      tag = Jekyll::Tags::HighlightBlock.new("highlight", "ruby linenos=table cssclass=hl", ["test", "{% endhighlight %}", "\n"])
+      assert_equal({ :cssclass => "hl", :linenos => "table" }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new("highlight", "Ruby ", ["test", "{% endhighlight %}", "\n"])
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
     end
   end
@@ -91,11 +91,11 @@ CONTENT
     end
 
     should "render markdown with pygments" do
-      assert_match %{<pre><code class="text">test</code></pre>}, @result
+      assert_match %(<pre><code class="text">test</code></pre>), @result
     end
 
     should "render markdown with pygments with line numbers" do
-      assert_match %{<pre><code class="text"><span class="lineno">1</span> test</code></pre>}, @result
+      assert_match %(<pre><code class="text"><span class="lineno">1</span> test</code></pre>), @result
     end
   end
 
@@ -105,7 +105,7 @@ CONTENT
     end
 
     should "not embed the file" do
-      assert_match %{<pre><code class="text">./jekyll.gemspec</code></pre>}, @result
+      assert_match %(<pre><code class="text">./jekyll.gemspec</code></pre>), @result
     end
   end
 
@@ -115,7 +115,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre><code class="text">Æ</code></pre>}, @result
+      assert_match %(<pre><code class="text">Æ</code></pre>), @result
     end
   end
 
@@ -160,7 +160,7 @@ CONTENT
 
     context "using RDiscount" do
       setup do
-        create_post(@content, 'markdown' => 'rdiscount')
+        create_post(@content, "markdown" => "rdiscount")
       end
 
       should "parse correctly" do
@@ -171,7 +171,7 @@ CONTENT
 
     context "using Kramdown" do
       setup do
-        create_post(@content, 'markdown' => 'kramdown')
+        create_post(@content, "markdown" => "kramdown")
       end
 
       should "parse correctly" do
@@ -182,7 +182,7 @@ CONTENT
 
     context "using Redcarpet" do
       setup do
-        create_post(@content, 'markdown' => 'redcarpet')
+        create_post(@content, "markdown" => "redcarpet")
       end
 
       should "parse correctly" do
@@ -201,7 +201,7 @@ title: Post linking
 
 {% post_url 2008-11-21-complex %}
 CONTENT
-      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
     end
 
     should "not cause an error" do
@@ -225,7 +225,7 @@ title: Post linking
 - 3 {% post_url es/2008-11-21-nested %}
 - 4 {% post_url /es/2008-11-21-nested %}
 CONTENT
-      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
     end
 
     should "not cause an error" do
@@ -254,7 +254,7 @@ title: Invalid post name linking
 CONTENT
 
       assert_raise ArgumentError do
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
       end
     end
   end
@@ -264,7 +264,7 @@ CONTENT
     context "with symlink'd include" do
 
       should "not allow symlink includes" do
-        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+        File.open("/tmp/pages-test", "w") { |file| file.write("SYMLINK TEST") }
         assert_raise IOError do
           content = <<CONTENT
 ---
@@ -274,7 +274,7 @@ title: Include symlink
 {% include tmp/pages-test %}
 
 CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+          create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true, "safe" => true })
         end
         assert_no_match /SYMLINK TEST/, @result
       end
@@ -289,7 +289,7 @@ title: Include symlink
 {% include tmp/pages-test-does-not-exist %}
 
 CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+          create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true, "safe" => true })
         end
         assert_match /should exist and should not be a symlink/, ex.message
       end
@@ -306,7 +306,7 @@ title: Include tag parameters
 
 {% include params.html param="value" %}
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
       end
 
       should "correctly output include variable" do
@@ -328,7 +328,7 @@ title: Invalid parameter syntax
 {% include params.html param s="value" %}
 CONTENT
         assert_raise ArgumentError, 'Did not raise exception on invalid "include" syntax' do
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
         end
 
         content = <<CONTENT
@@ -339,7 +339,7 @@ title: Invalid parameter syntax
 {% include params.html params="value %}
 CONTENT
         assert_raise ArgumentError, 'Did not raise exception on invalid "include" syntax' do
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
         end
       end
     end
@@ -353,12 +353,12 @@ title: multiple include parameters
 
 {% include params.html param1="new_value" param2="another" %}
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
       end
 
       should "list all parameters" do
-        assert_match '<li>param1 = new_value</li>', @result
-        assert_match '<li>param2 = another</li>', @result
+        assert_match "<li>param1 = new_value</li>", @result
+        assert_match "<li>param2 = another</li>", @result
       end
 
       should "not include previously used parameters" do
@@ -375,7 +375,7 @@ title: without parameters
 
 {% include params.html %}
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
       end
 
       should "include file with empty parameters" do
@@ -392,7 +392,7 @@ title: without parameters within if statement
 
 {% if true %}{% include params.html %}{% endif %}
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
       end
 
       should "include file with empty parameters within if statement" do
@@ -409,8 +409,8 @@ puts "Hello world"
 ```
 CONTENT
         create_post(content, {
-          'markdown' => 'maruku',
-          'maruku' => {'fenced_code_blocks' => true}}
+          "markdown" => "maruku",
+          "maruku" => { "fenced_code_blocks" => true } }
         )
       end
 
@@ -433,7 +433,7 @@ CONTENT
 
       should "raise error relative to source directory" do
         exception = assert_raise IOError do
-          create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          create_post(@content, { "permalink" => "pretty", "source" => source_dir, "destination" => dest_dir, "read_posts" => true })
         end
         assert_equal 'Included file \'_includes/missing.html\' not found', exception.message
       end
@@ -442,13 +442,13 @@ CONTENT
     context "include tag with variable and liquid filters" do
       setup do
         stub(Jekyll).configuration do
-          site_configuration({'pygments' => true})
+          site_configuration({ "pygments" => true })
         end
 
         site = Site.new(Jekyll.configuration)
-        post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
-        layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-        post.render(layouts, {"site" => {"posts" => []}})
+        post = Post.new(site, source_dir, "", "2013-12-17-include-variable-filters.markdown")
+        layouts = { "default" => Layout.new(site, source_dir("_layouts"), "simple.html") }
+        post.render(layouts, { "site" => { "posts" => [] } })
         @content = post.content
       end
 
@@ -465,8 +465,8 @@ CONTENT
       end
 
       should "include file as variable and filters with additional parameters" do
-        assert_match '<li>var1 = foo</li>', @content
-        assert_match '<li>var2 = bar</li>', @content
+        assert_match "<li>var1 = foo</li>", @content
+        assert_match "<li>var2 = bar</li>", @content
       end
     end
   end

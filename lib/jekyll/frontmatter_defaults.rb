@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Configuration
     # This class handles custom defaults for YAML frontmatter settings.
@@ -22,9 +24,9 @@ module Jekyll
         old_scope = nil
 
         matching_sets(path, type).each do |set|
-          if set['values'].has_key?(setting) && has_precedence?(old_scope, set['scope'])
-            value = set['values'][setting]
-            old_scope = set['scope']
+          if set["values"].key?(setting) && has_precedence?(old_scope, set["scope"])
+            value = set["values"][setting]
+            old_scope = set["scope"]
           end
         end
         value
@@ -40,11 +42,11 @@ module Jekyll
         defaults = {}
         old_scope = nil
         matching_sets(path, type).each do |set|
-          if has_precedence?(old_scope, set['scope'])
-            defaults.merge! set['values']
-            old_scope = set['scope']
+          if has_precedence?(old_scope, set["scope"])
+            defaults.merge! set["values"]
+            old_scope = set["scope"]
           else
-            defaults = set['values'].merge(defaults)
+            defaults = set["values"].merge(defaults)
           end
         end
         defaults
@@ -64,18 +66,18 @@ module Jekyll
       end
 
       def applies_path?(scope, path)
-        return true if scope['path'].empty?
+        return true if scope["path"].empty?
 
-        scope_path = Pathname.new(scope['path'])
-        Pathname.new(sanitize_path(path)).ascend do |path|
-          if path == scope_path
+        scope_path = Pathname.new(scope["path"])
+        Pathname.new(sanitize_path(path)).ascend do |path_name|
+          if path_name == scope_path
             return true
           end
         end
       end
 
       def applies_type?(scope, type)
-        !scope.has_key?('type') || scope['type'] == type.to_s
+        !scope.key?("type") || scope["type"] == type.to_s
       end
 
       # Checks if a given set of default values is valid
@@ -84,7 +86,7 @@ module Jekyll
       #
       # Returns true if the set is valid and can be used in this class
       def valid?(set)
-        set.is_a?(Hash) && set['scope'].is_a?(Hash) && set['scope']['path'].is_a?(String) && set['values'].is_a?(Hash)
+        set.is_a?(Hash) && set["scope"].is_a?(Hash) && set["scope"]["path"].is_a?(String) && set["values"].is_a?(Hash)
       end
 
       # Determines if a new scope has precedence over an old one
@@ -96,15 +98,15 @@ module Jekyll
       def has_precedence?(old_scope, new_scope)
         return true if old_scope.nil?
 
-        new_path = sanitize_path(new_scope['path'])
-        old_path = sanitize_path(old_scope['path'])
+        new_path = sanitize_path(new_scope["path"])
+        old_path = sanitize_path(old_scope["path"])
 
         if new_path.length != old_path.length
           new_path.length >= old_path.length
-        elsif new_scope.has_key? 'type'
+        elsif new_scope.key? "type"
           true
         else
-          !old_scope.has_key? 'type'
+          !old_scope.key? "type"
         end
       end
 
@@ -113,7 +115,7 @@ module Jekyll
       # Returns an array of hashes
       def matching_sets(path, type)
         valid_sets.select do |set|
-          applies?(set['scope'], path, type)
+          applies?(set["scope"], path, type)
         end
       end
 
@@ -124,7 +126,7 @@ module Jekyll
       #
       # Returns an array of hashes
       def valid_sets
-        sets = @site.config['defaults']
+        sets = @site.config["defaults"]
         return [] unless sets.is_a?(Array)
 
         sets.select do |set|
@@ -140,7 +142,7 @@ module Jekyll
         if path.nil? || path.empty?
           ""
         else
-          path.gsub(/\A\//, '').gsub(/([^\/])\z/, '\1/')
+          path.gsub(/\A\//, "").gsub(/([^\/])\z/, '\1/')
         end
       end
     end

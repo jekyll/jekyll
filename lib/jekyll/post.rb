@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Post
     include Comparable
@@ -6,7 +8,7 @@ module Jekyll
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
-    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
+    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w(
       title
       url
       dir
@@ -17,13 +19,13 @@ module Jekyll
       previous
       tags
       path
-    ]
+    )
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
+    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w(
       content
       excerpt
-    ]
+    )
 
     # Post name validator. Post filenames must be like:
     # 2008-11-05-my-awesome-post.textile
@@ -52,15 +54,15 @@ module Jekyll
       @base = containing_dir(source, dir)
       @name = name
 
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
+      self.categories = dir.downcase.split("/").reject { |x| x.empty? }
       process(name)
       read_yaml(@base, name)
 
-      data.default_proc = proc do |hash, key|
+      data.default_proc = proc do |_hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
-      if data.has_key?('date')
+      if data.key?("date")
         self.date = Time.parse(data["date"].to_s)
       end
 
@@ -69,7 +71,7 @@ module Jekyll
     end
 
     def published?
-      if data.has_key?('published') && data['published'] == false
+      if data.key?("published") && data["published"] == false
         false
       else
         true
@@ -78,7 +80,7 @@ module Jekyll
 
     def populate_categories
       if categories.empty?
-        self.categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
+        self.categories = Utils.pluralized_array_from_hash(data, "category", "categories").map { |c| c.to_s.downcase }
       end
       categories.flatten!
     end
@@ -89,7 +91,7 @@ module Jekyll
 
     # Get the full path to the directory containing the post files
     def containing_dir(source, dir)
-      return File.join(source, dir, '_posts')
+      File.join(source, dir, "_posts")
     end
 
     # Read the YAML frontmatter.
@@ -108,7 +110,7 @@ module Jekyll
     #
     # Returns excerpt string.
     def excerpt
-      data.fetch('excerpt', extracted_excerpt.to_s)
+      data.fetch("excerpt", extracted_excerpt.to_s)
     end
 
     # Public: the Post title, from the YAML Front-Matter or from the slug
@@ -120,7 +122,7 @@ module Jekyll
 
     # Turns the post slug into a suitable title
     def titleized_slug
-      slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+      slug.split("-").select { |w| w.capitalize! || w }.join(" ")
     end
 
     # Public: the path to the post relative to the site source,
@@ -130,7 +132,7 @@ module Jekyll
     #
     # Returns the path to the file relative to the site source
     def path
-      data.fetch('path', relative_path.sub(/\A\//, ''))
+      data.fetch("path", relative_path.sub(/\A\//, ""))
     end
 
     # The path to the post source file, relative to the site source
@@ -145,11 +147,11 @@ module Jekyll
     #
     # Returns -1, 0, 1
     def <=>(other)
-      cmp = self.date <=> other.date
+      cmp = date <=> other.date
       if 0 == cmp
-       cmp = self.slug <=> other.slug
+       cmp = slug <=> other.slug
       end
-      return cmp
+      cmp
     end
 
     # Extract information from the post filename.
@@ -184,7 +186,7 @@ module Jekyll
     #
     # Returns the String permalink.
     def permalink
-      data && data['permalink']
+      data && data["permalink"]
     end
 
     def template
@@ -223,7 +225,7 @@ module Jekyll
         :title       => slug,
         :i_day       => date.strftime("%d").to_i.to_s,
         :i_month     => date.strftime("%m").to_i.to_s,
-        :categories  => (categories || []).map { |c| c.to_s }.join('/'),
+        :categories  => (categories || []).map { |c| c.to_s }.join("/"),
         :short_month => date.strftime("%b"),
         :short_year  => date.strftime("%y"),
         :y_day       => date.strftime("%j"),
@@ -263,7 +265,7 @@ module Jekyll
         extracted_excerpt.do_layout(payload, {})
       end
 
-      do_layout(payload.merge({"page" => to_liquid}), layouts)
+      do_layout(payload.merge({ "page" => to_liquid }), layouts)
     end
 
     # Obtain destination path.
@@ -284,7 +286,7 @@ module Jekyll
     end
 
     def next
-      pos = site.posts.index {|post| post.equal?(self) }
+      pos = site.posts.index { |post| post.equal?(self) }
       if pos && pos < site.posts.length - 1
         site.posts[pos + 1]
       else
@@ -293,7 +295,7 @@ module Jekyll
     end
 
     def previous
-      pos = site.posts.index {|post| post.equal?(self) }
+      pos = site.posts.index { |post| post.equal?(self) }
       if pos && pos > 0
         site.posts[pos - 1]
       else
@@ -312,7 +314,7 @@ module Jekyll
     end
 
     def generate_excerpt?
-      !(site.config['excerpt_separator'].to_s.empty?)
+      !(site.config["excerpt_separator"].to_s.empty?)
     end
   end
 end

@@ -1,4 +1,6 @@
-require 'helper'
+# encoding: utf-8
+
+require "helper"
 
 class TestSass < Test::Unit::TestCase
   context "importing partials" do

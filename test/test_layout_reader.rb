@@ -1,10 +1,12 @@
-require 'helper'
+# encoding: utf-8
+
+require "helper"
 
 class TestLayoutReader < Test::Unit::TestCase
   context "reading layouts" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir })
       end
       @site = Site.new(Jekyll.configuration)
     end

@@ -1,15 +1,17 @@
-require 'erb'
+# encoding: utf-8
+
+require "erb"
 
 module Jekyll
   module Commands
     class New < Command
       def self.init_with_program(prog)
         prog.command(:new) do |c|
-          c.syntax 'new PATH'
-          c.description 'Creates a new Jekyll site scaffold in PATH'
+          c.syntax "new PATH"
+          c.description "Creates a new Jekyll site scaffold in PATH"
 
-          c.option 'force', '--force', 'Force creation even if PATH already exists'
-          c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
+          c.option "force", "--force", "Force creation even if PATH already exists"
+          c.option "blank", "--blank", "Creates scaffolding but with empty files"
 
           c.action do |args, options|
             Jekyll::Commands::New.process(args, options)
@@ -18,7 +20,7 @@ module Jekyll
       end
 
       def self.process(args, options = {})
-        raise ArgumentError.new('You must specify a path.') if args.empty?
+        raise ArgumentError.new("You must specify a path.") if args.empty?
 
         new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
         FileUtils.mkdir_p new_blog_path
@@ -54,7 +56,7 @@ module Jekyll
       #
       # Returns the filename of the sample post, as a String
       def self.initialized_post_name
-        "_posts/#{Time.now.strftime('%Y-%m-%d')}-welcome-to-jekyll.markdown"
+        "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.markdown"
       end
 
       private
@@ -64,7 +66,7 @@ module Jekyll
       end
 
       def self.create_sample_files(path)
-        FileUtils.cp_r site_template + '/.', path
+        FileUtils.cp_r site_template + "/.", path
         FileUtils.rm File.expand_path(scaffold_path, path)
       end
 

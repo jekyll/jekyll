@@ -1,4 +1,6 @@
-require 'helper'
+# encoding: utf-8
+
+require "helper"
 
 class TestDocument < Test::Unit::TestCase
 
@@ -41,7 +43,7 @@ class TestDocument < Test::Unit::TestCase
     end
 
     should "output the collection name in the #to_liquid method" do
-      assert_equal @document.to_liquid['collection'], "methods"
+      assert_equal @document.to_liquid["collection"], "methods"
     end
 
   end
@@ -53,10 +55,10 @@ class TestDocument < Test::Unit::TestCase
         "source"      => source_dir,
         "destination" => dest_dir,
         "defaults" => [{
-          "scope"=> {"path"=>"", "type"=>"slides"},
-          "values"=> {
-            "nested"=> {
-              "key"=>"myval",
+          "scope" => { "path" => "", "type" => "slides" },
+          "values" => {
+            "nested" => {
+              "key" => "myval"
             }
           }
         }]
@@ -67,10 +69,10 @@ class TestDocument < Test::Unit::TestCase
 
     should "know the frontmatter defaults" do
       assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide",
-        "nested"=> { 
-          "key"=>"myval"
+        "title" => "Example slide",
+        "layout" => "slide",
+        "nested" => {
+          "key" => "myval"
         }
       }, @document.data)
     end
@@ -83,11 +85,11 @@ class TestDocument < Test::Unit::TestCase
         "source"      => source_dir,
         "destination" => dest_dir,
         "defaults" => [{
-          "scope"=> {"path"=>"", "type"=>"slides"},
-          "values"=> {
-            "nested"=> {
-              "test1"=>"default1",
-              "test2"=>"default1"
+          "scope" => { "path" => "", "type" => "slides" },
+          "values" => {
+            "nested" => {
+              "test1" => "default1",
+              "test2" => "default1"
             }
           }
         }]
@@ -98,11 +100,11 @@ class TestDocument < Test::Unit::TestCase
 
     should "override default values in the document frontmatter" do
       assert_equal({
-        "title"=>"Override title",
-        "layout"=>"slide",
-        "nested"=> { 
-          "test1"=>"override1",
-          "test2"=>"override2"
+        "title" => "Override title",
+        "layout" => "slide",
+        "nested" => {
+          "test1" => "override1",
+          "test2" => "override2"
         }
       }, @document.data)
     end
@@ -115,10 +117,10 @@ class TestDocument < Test::Unit::TestCase
         "source"      => source_dir,
         "destination" => dest_dir,
         "defaults" => [{
-          "scope"=> {"path"=>"slides", "type"=>"slides"},
-          "values"=> {
-            "nested"=> {
-              "key"=>"value123",
+          "scope" => { "path" => "slides", "type" => "slides" },
+          "values" => {
+            "nested" => {
+              "key" => "value123"
             }
           }
         }]
@@ -129,10 +131,10 @@ class TestDocument < Test::Unit::TestCase
 
     should "know the frontmatter defaults" do
       assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide",
-        "nested"=> { 
-          "key"=>"value123"
+        "title" => "Example slide",
+        "layout" => "slide",
+        "nested" => {
+          "key" => "value123"
         }
       }, @document.data)
     end
@@ -145,10 +147,10 @@ class TestDocument < Test::Unit::TestCase
         "source"      => source_dir,
         "destination" => dest_dir,
         "defaults" => [{
-          "scope"=> {"path"=>"somepath", "type"=>"slides"},
-          "values"=> {
-            "nested"=> {
-              "key"=>"myval",
+          "scope" => { "path" => "somepath", "type" => "slides" },
+          "values" => {
+            "nested" => {
+              "key" => "myval"
             }
           }
         }]
@@ -159,8 +161,8 @@ class TestDocument < Test::Unit::TestCase
 
     should "not know the specified frontmatter defaults" do
       assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide"
+        "title" => "Example slide",
+        "layout" => "slide"
       }, @document.data)
     end
   end

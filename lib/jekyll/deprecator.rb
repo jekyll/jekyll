@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Deprecator
     def self.process(args)
@@ -17,7 +19,7 @@ module Jekyll
     end
 
     def self.no_subcommand(args)
-      if args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
+      if args.size > 0 && args.first =~ /^--/ && !%w(--help --version).include?(args.first)
         Jekyll.logger.error "Deprecation:", "Jekyll now uses subcommands instead of just \
                             switches. Run `jekyll --help' to find out more."
       end

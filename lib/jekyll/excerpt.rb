@@ -1,5 +1,7 @@
-require 'jekyll/convertible'
-require 'forwardable'
+# encoding: utf-8
+
+require "jekyll/convertible"
+require "forwardable"
 
 module Jekyll
   class Excerpt
@@ -66,7 +68,7 @@ module Jekyll
 
     # Returns the shorthand String identifier of this Post.
     def inspect
-      "<Excerpt: #{self.id}>"
+      "<Excerpt: #{id}>"
     end
 
     protected
@@ -106,7 +108,7 @@ module Jekyll
     #
     # Returns excerpt String
     def extract_excerpt(post_content)
-      separator     = site.config['excerpt_separator']
+      separator     = site.config["excerpt_separator"]
       head, _, tail = post_content.partition(separator)
 
       "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")

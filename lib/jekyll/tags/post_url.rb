@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   module Tags
     class PostComparer
@@ -20,6 +22,7 @@ module Jekyll
       end
 
       private
+
       # Construct the directory-aware post slug for a Jekyll::Post
       #
       # other - the Jekyll::Post
@@ -30,7 +33,7 @@ module Jekyll
         if path.nil? || path == ""
           other.slug
         else
-          path + '/' + other.slug
+          path + "/" + other.slug
         end
       end
     end
@@ -69,4 +72,4 @@ eos
   end
 end
 
-Liquid::Template.register_tag('post_url', Jekyll::Tags::PostUrl)
+Liquid::Template.register_tag("post_url", Jekyll::Tags::PostUrl)

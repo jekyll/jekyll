@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Plugin
     PRIORITIES = { :lowest => -100,
@@ -27,7 +29,7 @@ module Jekyll
     # Returns the Symbol priority.
     def self.priority(priority = nil)
       @priority ||= nil
-      if priority && PRIORITIES.has_key?(priority)
+      if priority && PRIORITIES.key?(priority)
         @priority = priority
       end
       @priority || :normal
@@ -53,7 +55,7 @@ module Jekyll
     #
     # Returns -1, 0, 1.
     def self.<=>(other)
-      PRIORITIES[other.priority] <=> PRIORITIES[self.priority]
+      PRIORITIES[other.priority] <=> PRIORITIES[priority]
     end
 
     # Initialize a new plugin. This should be overridden by the subclass.

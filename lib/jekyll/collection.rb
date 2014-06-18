@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Collection
     attr_reader :site, :label, :metadata
@@ -27,7 +29,7 @@ module Jekyll
     # Returns the sorted array of docs.
     def read
       filtered_entries.each do |file_path|
-        doc = Jekyll::Document.new(Jekyll.sanitized_path(directory, file_path), { site: site, collection: self })
+        doc = Jekyll::Document.new(Jekyll.sanitized_path(directory, file_path), { :site => site, :collection => self })
         doc.read
         docs << doc
       end
@@ -39,9 +41,10 @@ module Jekyll
     # Returns an Array of file paths to the documents in this collection
     #   relative to the collection's directory
     def entries
-      return Array.new unless exists?
+      return [] unless exists?
       Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
-        entry[File.join(directory, "")] = ''; entry
+        entry[File.join(directory, "")] = ""
+        entry
       end
     end
 
@@ -50,7 +53,7 @@ module Jekyll
     #
     # Returns a list of filtered entry paths.
     def filtered_entries
-      return Array.new unless exists?
+      return [] unless exists?
       Dir.chdir(directory) do
         entry_filter.filter(entries)
       end
@@ -105,7 +108,7 @@ module Jekyll
     #
     # Returns a sanitized version of the label.
     def sanitize_label(label)
-      label.gsub(/[^a-z0-9_\-]/i, '')
+      label.gsub(/[^a-z0-9_\-]/i, "")
     end
 
     # Produce a representation of this Collection for use in Liquid.
@@ -129,22 +132,22 @@ module Jekyll
     #
     # Returns true if the 'write' metadata is true, false otherwise.
     def write?
-      !!metadata['output']
+      !!metadata["output"]
     end
 
     # The URL template to render collection's documents at.
     #
     # Returns the URL template to render collection's documents at.
     def url_template
-      metadata.fetch('permalink', "/:collection/:path:output_ext")
+      metadata.fetch("permalink", "/:collection/:path:output_ext")
     end
 
     # Extract options for this collection from the site configuration.
     #
     # Returns the metadata for this collection
     def extract_metadata
-      if site.config['collections'].is_a?(Hash)
-        site.config['collections'][label] || Hash.new
+      if site.config["collections"].is_a?(Hash)
+        site.config["collections"][label] || {}
       else
         {}
       end

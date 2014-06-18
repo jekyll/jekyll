@@ -1,8 +1,10 @@
+# encoding: utf-8
+
 module Jekyll
   class Document
     include Comparable
 
-    attr_reader   :path, :site
+    attr_reader :path, :site
     attr_accessor :content, :collection, :output
 
     # Create a new Document.
@@ -22,7 +24,7 @@ module Jekyll
     # Returns a Hash containing the data. An empty hash is returned if
     #   no data was read.
     def data
-      @data ||= Hash.new
+      @data ||= {}
     end
 
     # The path to the document, relative to the site source.
@@ -68,7 +70,7 @@ module Jekyll
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
-      %w[.yaml .yml].include?(extname)
+      %w(.yaml .yml).include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -77,7 +79,7 @@ module Jekyll
     # Returns true if the extname belongs to the set of extensions
     #   that asset files use.
     def asset_file?
-      %w[.sass .scss .coffee].include?(extname)
+      %w(.sass .scss .coffee).include?(extname)
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -109,9 +111,9 @@ module Jekyll
     # Returns the Hash of key-value pairs for replacement in the URL.
     def url_placeholders
       {
-        collection: collection.label,
-        path:       cleaned_relative_path,
-        output_ext: Jekyll::Renderer.new(site, self).output_ext
+        :collection => collection.label,
+        :path => cleaned_relative_path,
+        :output_ext => Jekyll::Renderer.new(site, self).output_ext
       }
     end
 
@@ -120,7 +122,7 @@ module Jekyll
     #
     # Returns the permalink or nil if no permalink was set in the data.
     def permalink
-      data && data.is_a?(Hash) && data['permalink']
+      data && data.is_a?(Hash) && data["permalink"]
     end
 
     # The computed URL for the document. See `Jekyll::URL#to_s` for more details.
@@ -128,9 +130,9 @@ module Jekyll
     # Returns the computed URL for the document.
     def url
       @url ||= URL.new({
-        template:     url_template,
-        placeholders: url_placeholders,
-        permalink:    permalink
+        :template => url_template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
       }).to_s
     end
 
@@ -153,7 +155,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
+      File.open(path, "wb") do |f|
         f.write(output)
       end
     end
@@ -172,7 +174,7 @@ module Jekyll
     #
     # Returns true if the 'published' key is specified in the YAML front-matter and not `false`.
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      !(data.key?("published") && data["published"] == false)
     end
 
     # Read in the file and assign the content and data based on the file contents.

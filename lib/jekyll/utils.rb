@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   module Utils
     class << self
@@ -15,7 +17,7 @@ module Jekyll
         target = master_hash.dup
 
         other_hash.keys.each do |key|
-          if other_hash[key].is_a? Hash and target[key].is_a? Hash
+          if other_hash[key].is_a?(Hash) && target[key].is_a?(Hash)
             target[key] = Utils.deep_merge_hashes(target[key], other_hash[key])
             next
           end
@@ -39,13 +41,13 @@ module Jekyll
           array << (value_from_singular_key(hash, singular_key) || value_from_plural_key(hash, plural_key))
         end.flatten.compact
       end
-      
+
       def value_from_singular_key(hash, key)
-        hash[key] if (hash.has_key?(key) || (hash.default_proc && hash[key]))
+        hash[key] if hash.key?(key) || (hash.default_proc && hash[key])
       end
-      
+
       def value_from_plural_key(hash, key)
-        if hash.has_key?(key) || (hash.default_proc && hash[key])
+        if hash.key?(key) || (hash.default_proc && hash[key])
           val = hash[key]
           case val
           when String

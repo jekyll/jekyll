@@ -1,16 +1,18 @@
-require 'helper'
+# encoding: utf-8
+
+require "helper"
 
 class TestGeneratedSite < Test::Unit::TestCase
   context "generated sites" do
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir })
       end
 
       @site = Site.new(Jekyll.configuration)
       @site.process
-      @index = File.read(dest_dir('index.html'))
+      @index = File.read(dest_dir("index.html"))
     end
 
     should "ensure post count is as expected" do
@@ -26,23 +28,23 @@ class TestGeneratedSite < Test::Unit::TestCase
     end
 
     should "hide unpublished posts" do
-      published = Dir[dest_dir('publish_test/2008/02/02/*.html')].map {|f| File.basename(f)}
+      published = Dir[dest_dir("publish_test/2008/02/02/*.html")].map { |f| File.basename(f) }
 
       assert_equal 1, published.size
       assert_equal "published.html", published.first
     end
 
     should "hide unpublished page" do
-      assert !File.exist?(dest_dir('/unpublished.html'))
+      assert !File.exist?(dest_dir("/unpublished.html"))
     end
 
     should "not copy _posts directory" do
-      assert !File.exist?(dest_dir('_posts'))
+      assert !File.exist?(dest_dir("_posts"))
     end
 
     should "process other static files and generate correct permalinks" do
-      assert File.exist?(dest_dir('/about/index.html'))
-      assert File.exist?(dest_dir('/contacts.html'))
+      assert File.exist?(dest_dir("/about/index.html"))
+      assert File.exist?(dest_dir("/contacts.html"))
     end
 
     should "print a nice list of static files" do
@@ -52,7 +54,7 @@ class TestGeneratedSite < Test::Unit::TestCase
 - /products.yml last edited at \\d+ with extname .yml
 - /symlink-test/symlinked-dir/screen.css last edited at \\d+ with extname .css
 OUTPUT
-      assert_match expected_output, File.read(dest_dir('static_files.html'))
+      assert_match expected_output, File.read(dest_dir("static_files.html"))
     end
   end
 
@@ -60,12 +62,12 @@ OUTPUT
     setup do
       clear_dest
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 5})
+        Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "limit_posts" => 5 })
       end
 
       @site = Site.new(Jekyll.configuration)
       @site.process
-      @index = File.read(dest_dir('index.html'))
+      @index = File.read(dest_dir("index.html"))
     end
 
     should "generate only the specified number of posts" do
@@ -76,7 +78,7 @@ OUTPUT
       assert_raise ArgumentError do
         clear_dest
         stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1})
+          Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "limit_posts" => -1 })
         end
 
         @site = Site.new(Jekyll.configuration)
@@ -87,7 +89,7 @@ OUTPUT
       assert_nothing_raised ArgumentError do
         clear_dest
         stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
+          Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir, "destination" => dest_dir, "limit_posts" => 0 })
         end
 
         @site = Site.new(Jekyll.configuration)

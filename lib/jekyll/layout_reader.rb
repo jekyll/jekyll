@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class LayoutReader
     attr_reader :site
@@ -23,7 +25,7 @@ module Jekyll
     def layout_entries
       entries = []
       within(layout_directory) do
-        entries = EntryFilter.new(site).filter(Dir['**/*.*'])
+        entries = EntryFilter.new(site).filter(Dir["**/*.*"])
       end
       entries
     end
@@ -38,11 +40,11 @@ module Jekyll
     end
 
     def layout_directory_inside_source
-      Jekyll.sanitized_path(site.source, site.config['layouts'])
+      Jekyll.sanitized_path(site.source, site.config["layouts"])
     end
 
     def layout_directory_in_cwd
-      dir = Jekyll.sanitized_path(Dir.pwd, site.config['layouts'])
+      dir = Jekyll.sanitized_path(Dir.pwd, site.config["layouts"])
       if File.directory?(dir)
         dir
       else

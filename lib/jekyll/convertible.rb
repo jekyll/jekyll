@@ -1,6 +1,6 @@
-# encoding: UTF-8
+# encoding: utf-8
 
-require 'set'
+require "set"
 
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
@@ -20,12 +20,12 @@ module Jekyll
   module Convertible
     # Returns the contents as a String.
     def to_s
-      content || ''
+      content || ""
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      !(data.key?("published") && data["published"] == false)
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
@@ -106,9 +106,11 @@ module Jekyll
     #
     # Returns the Hash representation of this Convertible.
     def to_liquid(attrs = nil)
-      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
-        [attribute, send(attribute)]
-      }]
+      further_data = Hash[
+        (attrs || self.class::ATTRIBUTES_FOR_LIQUID).map do |attribute|
+          [attribute, send(attribute)]
+        end
+      ]
 
       defaults = site.frontmatter_defaults.all(relative_path, type)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
@@ -134,7 +136,7 @@ module Jekyll
     # Returns true if the extname belongs to the set of extensions
     #   that asset files use.
     def asset_file?
-      %w[.sass .scss .coffee].include?(ext)
+      %w(.sass .scss .coffee).include?(ext)
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -166,12 +168,12 @@ module Jekyll
       used = Set.new([layout])
 
       while layout
-        payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
+        payload = Utils.deep_merge_hashes(payload, { "content" => output, "page" => layout.data })
 
         self.output = render_liquid(layout.content,
                                          payload,
                                          info,
-                                         File.join(site.config['layouts'], layout.name))
+                                         File.join(site.config["layouts"], layout.name))
 
         if layout = layouts[layout.data["layout"]]
           if used.include?(layout)
@@ -190,7 +192,7 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
+      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload["page"] } }
 
       # render and transform content (this becomes the final content of the object)
       payload["highlighter_prefix"] = converter.highlighter_prefix
@@ -213,7 +215,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
+      File.open(path, "wb") do |f|
         f.write(output)
       end
     end

@@ -1,7 +1,9 @@
+# encoding: utf-8
+
 module Jekyll
   class StaticFile
     # The cache of last modification times [path] -> mtime.
-    @@mtimes = Hash.new
+    @@mtimes = {}
 
     # Initialize a new StaticFile.
     #
@@ -23,7 +25,7 @@ module Jekyll
 
     # Returns the source file path relative to the site source
     def relative_path
-      @relative_path ||= path.sub(/\A#{@site.source}/, '')
+      @relative_path ||= path.sub(/\A#{@site.source}/, "")
     end
 
     # Obtain destination path.
@@ -55,7 +57,7 @@ module Jekyll
     def write(dest)
       dest_path = destination(dest)
 
-      return false if File.exist?(dest_path) and !modified?
+      return false if File.exist?(dest_path) && !modified?
       @@mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
@@ -68,7 +70,7 @@ module Jekyll
     #
     # Returns nothing.
     def self.reset_cache
-      @@mtimes = Hash.new
+      @@mtimes = {}
       nil
     end
 

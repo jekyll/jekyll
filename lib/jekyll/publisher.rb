@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Publisher
     def initialize(site)
@@ -11,7 +13,7 @@ module Jekyll
     private
 
     def can_be_published?(thing)
-      thing.data.fetch('published', true) || @site.unpublished
+      thing.data.fetch("published", true) || @site.unpublished
     end
 
     def hidden_in_the_future?(thing)

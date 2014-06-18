@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Renderer
 
@@ -33,8 +35,8 @@ module Jekyll
       }, site.site_payload)
 
       info = {
-        filters:   [Jekyll::Filters],
-        registers: { :site => site, :page => payload['page'] }
+        :filters => [Jekyll::Filters],
+        :registers => { :site => site, :page => payload["page"] }
       }
 
       # render and transform content (this becomes the final content of the object)
@@ -117,7 +119,7 @@ module Jekyll
           layout.content,
           payload,
           info,
-          File.join(site.config['layouts'], layout.name)
+          File.join(site.config["layouts"], layout.name)
         )
 
         if layout = site.layouts[layout.data["layout"]]

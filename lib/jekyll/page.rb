@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Page
     include Convertible
@@ -8,13 +10,13 @@ module Jekyll
     attr_accessor :data, :content, :output
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
+    ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
       name
       path
       url
-    ]
+    )
 
     # Initialize a new Page.
     #
@@ -28,11 +30,10 @@ module Jekyll
       @dir  = dir
       @name = name
 
-
       process(name)
       read_yaml(File.join(base, dir), name)
 
-      data.default_proc = proc do |hash, key|
+      data.default_proc = proc do |_hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
     end
@@ -43,7 +44,7 @@ module Jekyll
     #
     # Returns the String destination directory.
     def dir
-      url[-1, 1] == '/' ? url : File.dirname(url)
+      url[-1, 1] == "/" ? url : File.dirname(url)
     end
 
     # The full path and filename of the post. Defined in the YAML of the post
@@ -51,11 +52,11 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      return nil if data.nil? || data['permalink'].nil?
-      if site.config['relative_permalinks']
-        File.join(@dir, data['permalink'])
+      return nil if data.nil? || data["permalink"].nil?
+      if site.config["relative_permalinks"]
+        File.join(@dir, data["permalink"])
       else
-        data['permalink']
+        data["permalink"]
       end
     end
 
@@ -116,7 +117,7 @@ module Jekyll
     def render(layouts, site_payload)
       payload = Utils.deep_merge_hashes({
         "page" => to_liquid,
-        'paginator' => pager.to_liquid
+        "paginator" => pager.to_liquid
       }, site_payload)
 
       do_layout(payload, layouts)
@@ -126,7 +127,7 @@ module Jekyll
     #
     # Returns the path to the source file
     def path
-      data.fetch('path', relative_path.sub(/\A\//, ''))
+      data.fetch("path", relative_path.sub(/\A\//, ""))
     end
 
     # The path to the page source file, relative to the site source
@@ -152,16 +153,16 @@ module Jekyll
 
     # Returns the Boolean of whether this Page is HTML or not.
     def html?
-      output_ext == '.html'
+      output_ext == ".html"
     end
 
     # Returns the Boolean of whether this Page is an index file or not.
     def index?
-      basename == 'index'
+      basename == "index"
     end
 
     def uses_relative_permalinks
-      permalink && !@dir.empty? && site.config['relative_permalinks']
+      permalink && !@dir.empty? && site.config["relative_permalinks"]
     end
   end
 end

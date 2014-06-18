@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Jekyll
   class Converter < Plugin
     # Public: Get or set the highlighter prefix. When an argument is specified,

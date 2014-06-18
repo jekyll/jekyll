@@ -1,6 +1,8 @@
-require 'rubygems'
-gem 'test-unit'
-require 'test/unit'
+# encoding: utf-8
+
+require "rubygems"
+gem "test-unit"
+require "test/unit"
 
 # for some reason these tests fail when run via TextMate
 # but succeed when run on the command line.

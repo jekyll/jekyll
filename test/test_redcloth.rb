@@ -1,4 +1,6 @@
-require File.dirname(__FILE__) + '/helper'
+# encoding: utf-8
+
+require "helper"
 
 class TestRedCloth < Test::Unit::TestCase
 
@@ -15,7 +17,7 @@ class TestRedCloth < Test::Unit::TestCase
   context "Default hard_breaks enabled w/ redcloth section, no hard_breaks value" do
     setup do
       config = {
-        'redcloth'      => {}
+        "redcloth" => {}
         }
       @textile = Converters::Textile.new config
     end
@@ -28,8 +30,8 @@ class TestRedCloth < Test::Unit::TestCase
   context "RedCloth with hard_breaks enabled" do
     setup do
       config = {
-        'redcloth'      => {
-          'hard_breaks' => true # default
+        "redcloth"      => {
+          "hard_breaks" => true # default
         }
       }
       @textile = Converters::Textile.new config
@@ -43,8 +45,8 @@ class TestRedCloth < Test::Unit::TestCase
   context "RedCloth with hard_breaks disabled" do
     setup do
       config = {
-        'redcloth'      => {
-          'hard_breaks' => false
+        "redcloth"      => {
+          "hard_breaks" => false
         }
       }
       @textile = Converters::Textile.new config
@@ -58,8 +60,8 @@ class TestRedCloth < Test::Unit::TestCase
   context "RedCloth w/no_span_caps set to false" do
     setup do
       config = {
-        'redcloth'       => {
-          'no_span_caps' => false
+        "redcloth"       => {
+          "no_span_caps" => false
         }
       }
       @textile = Converters::Textile.new config
@@ -72,8 +74,8 @@ class TestRedCloth < Test::Unit::TestCase
   context "RedCloth w/no_span_caps set to true" do
     setup do
       config = {
-        'redcloth'       => {
-          'no_span_caps' => true
+        "redcloth"       => {
+          "no_span_caps" => true
         }
       }
       @textile = Converters::Textile.new config
