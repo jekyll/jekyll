@@ -14,6 +14,13 @@ module Jekyll
       @metadata = extract_metadata
     end
 
+    # The file system jail in which this collection lies.
+    #
+    # Returns the site's instance of the file system jail.
+    def jail
+      site.jail
+    end
+
     # Fetch the Documents in this collection.
     # Defaults to an empty array if no documents have been read in.
     #
@@ -69,7 +76,7 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      Jekyll.sanitized_path(site.source, relative_directory)
+      jail.sanitized_path(relative_directory)
     end
 
     # Checks whether the directory "exists" for this collection.
@@ -79,7 +86,7 @@ module Jekyll
     # Returns false if the directory doesn't exist or if it's a symlink
     #   and we're in safe mode.
     def exists?
-      File.directory?(directory) && !(File.symlink?(directory) && site.safe)
+      jail.directory?(directory) && jail.file_allowed?(directory)
     end
 
     # The entry filter for this collection.
