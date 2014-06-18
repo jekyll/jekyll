@@ -19,7 +19,7 @@ module Jekyll
 
       # Cleans up the site's destination directory
       def cleanup!
-        jail.rm_rf(obsolete_files)
+        FileUtils.rm_rf(obsolete_files)
       end
 
       private

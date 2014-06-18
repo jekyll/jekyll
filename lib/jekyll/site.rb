@@ -4,7 +4,7 @@ module Jekyll
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
-                  :plugin_manager
+                  :plugin_manager, :jail
 
     attr_accessor :converters, :generators
 
@@ -20,6 +20,10 @@ module Jekyll
       end
 
       self.source          = File.expand_path(config['source'])
+      self.jail            = Jekyll::FileSystem::Jail.new(source, {
+        :safe => self.safe,
+        :site => self
+      })
       self.dest            = File.expand_path(config['destination'])
       self.permalink_style = config['permalink'].to_sym
 
@@ -129,8 +133,8 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      base = File.join(source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
+      base    = File.join(source, dir)
+      entries = jail.chdir(base) { filter_entries(jail.glob('*', File::FNM_DOTMATCH), base) }
 
       read_posts(dir)
       read_drafts(dir) if show_drafts
@@ -139,7 +143,7 @@ module Jekyll
 
       entries.each do |f|
         f_abs = File.join(base, f)
-        if File.directory?(f_abs)
+        if jail.directory?(f_abs)
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
@@ -207,21 +211,24 @@ module Jekyll
     #
     # Returns nothing
     def read_data_to(dir, data)
-      return unless File.directory?(dir) && (!safe || !File.symlink?(dir))
+      return unless jail.directory?(dir) && jail.file_allowed?(dir)
 
-      entries = Dir.chdir(dir) do
-        Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
+      entries = jail.chdir(dir) do
+        jail.glob('*').select do |file|
+          jail.directory?(file) ||
+            %w(.yaml .yml .json).include?(File.extname(file))
+        end
       end
 
       entries.each do |entry|
         path = File.join(dir, entry)
-        next if File.symlink?(path) && safe
+        next unless jail.file_allowed?(path)
 
         key = sanitize_filename(File.basename(entry, '.*'))
-        if File.directory?(path)
+        if jail.directory?(path)
           read_data_to(path, data[key] = {})
         else
-          data[key] = SafeYAML.load_file(path)
+          data[key] = SafeYAML.load(jail.read(path))
         end
       end
     end
@@ -400,9 +407,9 @@ module Jekyll
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
       base = File.join(source, dir, subfolder)
-      return [] unless File.exist?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
+      return [] unless jail.directory?(base)
+      entries = jail.chdir(base) { filter_entries(jail.glob('**/*', File::FNM_DOTMATCH), base) }
+      entries.delete_if { |e| jail.directory?(File.join(base, e)) }
     end
 
     # Aggregate post information
@@ -453,7 +460,7 @@ module Jekyll
     end
 
     def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
+      !!(jail.read(file, { :bytes => 5 }) =~ /\A---\r?\n/)
     end
 
     def limit_posts!
