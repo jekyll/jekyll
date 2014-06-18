@@ -10,9 +10,16 @@ module Jekyll
         @site = site
       end
 
+      def jail
+        Jekyll::FileSystem::Jail.new(site.dest, {
+          :safe => site.safe,
+          :site => site
+        })
+      end
+
       # Cleans up the site's destination directory
       def cleanup!
-        FileUtils.rm_rf(obsolete_files)
+        jail.rm_rf(obsolete_files)
       end
 
       private
@@ -29,7 +36,7 @@ module Jekyll
       # Returns a Set with the file paths
       def existing_files
         files = Set.new
-        Dir.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
+        jail.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
           files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex || keep_dirs.include?(file)
         end
         files
@@ -68,7 +75,7 @@ module Jekyll
       #
       # Returns a Set with the file paths
       def replaced_files
-        new_dirs.select { |dir| File.file?(dir) }.to_set
+        new_dirs.select { |dir| jail.file?(dir) }.to_set
       end
 
       # Private: The list of directories that need to be kept because they are parent directories
