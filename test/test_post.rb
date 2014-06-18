@@ -666,7 +666,7 @@ class TestPost < Test::Unit::TestCase
     end
 
   end
-  
+
   context "site config with category" do
     setup do
       config = Jekyll::Configuration::DEFAULTS.merge({
@@ -686,7 +686,7 @@ class TestPost < Test::Unit::TestCase
       post = setup_post("2009-01-27-no-category.textile")
       assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
     end
-    
+
     should "override site category if set on post" do
       post = setup_post("2009-01-27-category.textile")
       assert post.categories.include?('foo'), "Expected post.categories to include 'foo' but did not."
@@ -713,7 +713,7 @@ class TestPost < Test::Unit::TestCase
       post = setup_post("2009-01-27-no-category.textile")
       assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
     end
-    
+
     should "override site categories if set on post" do
       post = setup_post("2009-01-27-categories.textile")
       ['foo', 'bar', 'baz'].each do |category|
