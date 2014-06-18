@@ -77,9 +77,8 @@ module Jekyll
     end
 
     def populate_categories
-      if categories.empty?
-        self.categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
-      end
+      categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
+      self.categories = (Array(categories) + categories_from_data).map {|c| c.to_s.downcase}
       categories.flatten!
     end
 
