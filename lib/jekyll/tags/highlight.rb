@@ -4,9 +4,11 @@ module Jekyll
       include Liquid::StandardFilters
 
       # The regular expression syntax checker. Start with the language specifier.
-      # Follow that by zero or more space separated options that take one of two
-      # forms: name or name=value
-      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=\w+)?)*)$/
+      # Follow that by zero or more space separated options that take one of three
+      # forms: name, name=value, or name="<quoted list>"
+      #
+      # <quoted list> is a space-separated list of numbers
+      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]\s)*[0-9]"))?)*)$/
 
       def initialize(tag_name, markup, tokens)
         super
@@ -14,8 +16,14 @@ module Jekyll
           @lang = $1.downcase
           @options = {}
           if defined?($2) && $2 != ''
-            $2.split.each do |opt|
+            # Split along 3 possible forms -- key="<quoted list>", key=value, or key
+            $2.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
               key, value = opt.split('=')
+              # If a quoted list, convert to array
+              if value and value.include? "\""
+                  value.gsub!(/"/, "")
+                  value = value.split
+              end
               @options[key.to_sym] = value || true
             end
           end
