@@ -20,7 +20,7 @@ module Jekyll
             $2.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
               key, value = opt.split('=')
               # If a quoted list, convert to array
-              if value and value.include? "\""
+              if value && value.include?("\"")
                   value.gsub!(/"/, "")
                   value = value.split
               end
