@@ -79,7 +79,7 @@ CONTENT
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos=3', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
       
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl   ="3 5 6"', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos="3 5 6"', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
       
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
