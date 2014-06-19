@@ -80,8 +80,6 @@ module Jekyll
       abort
     end
 
-  private
-
     # Internal: Build a Jekyll topic method
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
