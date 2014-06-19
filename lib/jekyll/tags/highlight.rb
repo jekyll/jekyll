@@ -8,7 +8,7 @@ module Jekyll
       # forms: name, name=value, or name="<quoted list>"
       #
       # <quoted list> is a space-separated list of numbers
-      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]\s)*[0-9]"))?)*)$/
+      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$/
 
       def initialize(tag_name, markup, tokens)
         super
