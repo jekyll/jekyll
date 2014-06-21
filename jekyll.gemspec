@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
   s.add_runtime_dependency('liquid', "~> 2.5.5")
+  s.add_runtime_dependency('activesupport', "~> 3.2.13")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('listen', [">= 2.7.6", "< 3.0.0"])
   s.add_runtime_dependency('kramdown', "~> 1.3")
@@ -56,7 +57,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('simplecov', "~> 0.7")
   s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
   s.add_development_dependency('mime-types', "~> 1.5")
-  s.add_development_dependency('activesupport', '~> 3.2.13')
   s.add_development_dependency('jekyll_test_plugin')
   s.add_development_dependency('jekyll_test_plugin_malicious')
   s.add_development_dependency('rouge', '~> 1.3')

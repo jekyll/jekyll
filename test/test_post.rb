@@ -15,7 +15,7 @@ class TestPost < Test::Unit::TestCase
   context "A Post" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
+      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS.merge({'classifications' => %w(projects)}) }
       @site = Site.new(Jekyll.configuration)
     end
 
@@ -529,6 +529,11 @@ class TestPost < Test::Unit::TestCase
       should "allow empty yaml" do
         post = setup_post("2009-06-22-empty-yaml.textile")
         assert_equal "Empty YAML.", post.content
+      end
+
+      should "recognize custom project classification in yaml" do
+        post = setup_post("2013-05-28-classifications.md")
+        assert post.classifications['projects'].include?('bartender')
       end
 
       context "rendering" do

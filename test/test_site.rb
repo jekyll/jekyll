@@ -45,7 +45,7 @@ class TestSite < Test::Unit::TestCase
   context "creating sites" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'classifications' => %w(projects)})
       end
       @site = Site.new(Jekyll.configuration)
       @num_invalid_posts = 2
@@ -77,6 +77,7 @@ class TestSite < Test::Unit::TestCase
       before_layouts = @site.layouts.length
       before_categories = @site.categories.length
       before_tags = @site.tags.length
+      before_projects = @site.classifications['projects'].length
       before_pages = @site.pages.length
       before_static_files = @site.static_files.length
       before_time = @site.time
@@ -86,6 +87,7 @@ class TestSite < Test::Unit::TestCase
       assert_equal before_layouts, @site.layouts.length
       assert_equal before_categories, @site.categories.length
       assert_equal before_tags, @site.tags.length
+      assert_equal before_projects, @site.classifications['projects'].length
       assert_equal before_pages, @site.pages.length
       assert_equal before_static_files, @site.static_files.length
       assert before_time <= @site.time
@@ -213,10 +215,13 @@ class TestSite < Test::Unit::TestCase
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
       categories = %w(2013 bar baz category foo z_category publish_test win).sort
+      projects = %w(bartender)
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
+      assert_equal projects, @site.classifications['projects'].keys.sort
       assert_equal 5, @site.categories['foo'].size
+      assert_equal 1, @site.classifications['projects']['bartender'].size
     end
 
     context 'error handling' do
