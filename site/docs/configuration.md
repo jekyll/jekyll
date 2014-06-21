@@ -412,7 +412,7 @@ timezone:    nil
 encoding:    nil
 
 future:      true
-show_drafts: nil
+show_drafts: false
 limit_posts: 0
 highlighter: pygments
 
