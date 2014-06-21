@@ -66,6 +66,7 @@
   * Add Jekyll Asset Pipeline Reborn to list of third-party plugins (#2479)
   * Add link to jekyll-compress-html to list of third-party plugins (#2514)
   * Add Piwigo Gallery to list of third-party plugins (#2526)
+  * Set `show_drafts` to `false` in default configuration listing (#2536)
 
 ## 2.0.3 / 2014-05-08
 
