@@ -26,6 +26,7 @@
   * Include files with a url which ends in `/` in the `site.html_pages` list (#2524)
   * Make `highlight` tag use `language-` prefix in CSS class (#2511)
   * Lookup item property via `item#to_liquid` before `#data` or `#[]` in filters (#2493)
+  * Skip initial build of site on serve with flag (#2477)
 
 ### Bug Fixes
 
