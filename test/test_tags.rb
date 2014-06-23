@@ -91,11 +91,11 @@ CONTENT
     end
 
     should "render markdown with pygments" do
-      assert_match %{<pre><code class="text">test</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">test</code></pre>}, @result
     end
 
     should "render markdown with pygments with line numbers" do
-      assert_match %{<pre><code class="text"><span class="lineno">1</span> test</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> test</code></pre>}, @result
     end
   end
 
@@ -105,7 +105,7 @@ CONTENT
     end
 
     should "not embed the file" do
-      assert_match %{<pre><code class="text">./jekyll.gemspec</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>}, @result
     end
   end
 
@@ -115,7 +115,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre><code class="text">Æ</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">Æ</code></pre>}, @result
     end
   end
 

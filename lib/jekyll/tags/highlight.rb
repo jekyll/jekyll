@@ -83,7 +83,7 @@ eos
 
       def add_code_tag(code)
         # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>\n*/,'<pre><code class="' + @lang.to_s.gsub("+", "-") + '">')
+        code = code.sub(/<pre>\n*/,'<pre><code class="language-' + @lang.to_s.gsub("+", "-") + '" data-lang="' + @lang.to_s + '">')
         code = code.sub(/\n*<\/pre>/,"</code></pre>")
         code.strip
       end
