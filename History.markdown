@@ -39,6 +39,7 @@
   * When using RedCarpet and Rouge without Rouge installed, fixed erroneous
     error which stated that redcarpet was missing, not rouge. (#2464)
   * Ignore *all* directories and files that merit it on auto-generation (#2459)
+  * Before copying file, explicitly remove the old one (#2535)
 
 ### Development Fixes
 
