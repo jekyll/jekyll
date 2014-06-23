@@ -8,6 +8,8 @@ module Jekyll
 
     attr_accessor :converters, :generators
 
+    include Jekyll::Hooks
+
     # Public: Initialize a new Site.
     #
     # config - A Hash containing site configuration details.

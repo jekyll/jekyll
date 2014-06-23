@@ -32,6 +32,7 @@ require 'toml'
 # internal requires
 require 'jekyll/version'
 require 'jekyll/utils'
+require 'jekyll/hooks'
 require 'jekyll/log_adapter'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
