@@ -4,6 +4,7 @@
 
 ### Minor Enhancements
 
+  * Bump to the latest Liquid version, 2.6.1 (#2495)
   * Add support for JSON files in the `_data` directory (#2369)
   * Allow subclasses to override `EXCERPT_ATTRIBUTES_FOR_LIQUID` (#2408)
   * Add `Jekyll.env` and `jekyll.environment` (the Liquid var) (#2417)
