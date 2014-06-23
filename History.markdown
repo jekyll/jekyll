@@ -23,6 +23,7 @@
   * Bump Pygments to v0.6.0 (#2504)
   * Front-matter defaults for documents in collections (#2419)
   * Include files with a url which ends in `/` in the `site.html_pages` list (#2524)
+  * Make `highlight` tag use `language-` prefix in CSS class (#2511)
 
 ### Bug Fixes
 
