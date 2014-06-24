@@ -78,8 +78,9 @@ module Jekyll
 
     def populate_categories
       categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
-      self.categories = (Array(categories) + categories_from_data).map {|c| c.to_s.downcase}
-      categories.flatten!
+      self.categories = (
+        Array(categories) + categories_from_data
+      ).map {|c| c.to_s.downcase}.flatten.uniq
     end
 
     def populate_tags
