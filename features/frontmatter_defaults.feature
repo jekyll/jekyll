@@ -128,3 +128,9 @@ Feature: frontmatter defaults
     When I run jekyll build
     Then the _site directory should exist
     And I should see "Value: Override" in "_site/slides/slide2.html"
+
+  Scenario: Deep merge frontmatter defaults
+    Given I have an "index.html" page with fruit "{orange: 1}" that contains "Fruits: {{ page.fruit.orange | plus: page.fruit.apple }}"
+    And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {fruit: {apple: 2}}}]"
+    When I run jekyll build
+    Then I should see "Fruits: 3" in "_site/index.html"
