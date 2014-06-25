@@ -234,6 +234,7 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
+        config[option].map!(&:to_s)
       end
 
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
