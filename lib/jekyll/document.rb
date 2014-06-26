@@ -244,8 +244,8 @@ module Jekyll
     #
     # Returns -1, 0, +1 or nil depending on whether this doc's path is less than,
     #   equal or greater than the other doc's path. See String#<=> for more details.
-    def <=>(anotherDocument)
-      path <=> anotherDocument.path
+    def <=>(other)
+      path <=> other.path
     end
 
     # Determine whether this document should be written.

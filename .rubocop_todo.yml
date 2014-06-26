@@ -65,10 +65,6 @@ Style/MultilineBlockChain:
 Style/Next:
   Enabled: false
 
-# Offense count: 1
-Style/OpMethod:
-  Enabled: false
-
 # Offense count: 3
 # Configuration parameters: NamePrefixBlacklist.
 Style/PredicateName:
