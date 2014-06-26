@@ -70,7 +70,10 @@ end
 #
 #############################################################################
 
-task :default => [:test, :features]
+task :default => [:test, :features, :rubocop]
+
+require "rubocop/rake_task"
+RuboCop::RakeTask.new
 
 require "rake/testtask"
 Rake::TestTask.new(:test) do |test|
