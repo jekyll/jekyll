@@ -28,3 +28,6 @@ Style/ClassAndModuleChildren:
 
 Style/IndentHash:
   EnforcedStyle: consistent
+
+Style/BracesAroundHashParameters:
+  Enabled: false
