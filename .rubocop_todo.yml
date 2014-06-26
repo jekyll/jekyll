@@ -141,11 +141,6 @@ Style/NumericLiterals:
 Style/OpMethod:
   Enabled: false
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/PerlBackrefs:
-  Enabled: false
-
 # Offense count: 3
 # Configuration parameters: NamePrefixBlacklist.
 Style/PredicateName:

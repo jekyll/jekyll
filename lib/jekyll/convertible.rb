@@ -43,12 +43,10 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name, opts = {})
       begin
-        self.content = File.read(File.join(base, name),
-                                 merged_file_read_opts(opts))
-        if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-          self.content = $POSTMATCH
-          self.data = SafeYAML.load($1)
-        end
+        file_raw = File.read(File.join(base, name), merged_file_read_opts(opts))
+        file_data = file_raw.match(/\A((?<frontmatter>---\s*\n.*?\n?)^(?:(---|\.\.\.)\s*$\n?))?(?<content>.*)/m)
+        self.content = file_data[:content]
+        self.data = SafeYAML.load(file_data[:frontmatter]) if file_data[:frontmatter]
       rescue SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue Exception => e

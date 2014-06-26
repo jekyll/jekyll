@@ -8,15 +8,15 @@ module Jekyll
       # The regular expression syntax checker. Start with the language specifier.
       # Follow that by zero or more space separated options that take one of two
       # forms: name or name=value
-      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=\w+)?)*)$/
+      SYNTAX = /^(?<lang>[a-zA-Z0-9.+#-]+)(?<options>(\s+\w+(=\w+)?)*)$/
 
       def initialize(tag_name, markup, tokens)
         super
-        if markup.strip =~ SYNTAX
-          @lang = $1.downcase
+        if markup_match = markup.strip.match(SYNTAX)
+          @lang = markup_match[:lang].downcase
           @options = {}
-          if defined?($2) && $2 != ""
-            $2.split.each do |opt|
+          unless markup_match[:options].empty?
+            markup_match[:options].split.each do |opt|
               key, value = opt.split("=")
               @options[key.to_sym] = value || true
             end

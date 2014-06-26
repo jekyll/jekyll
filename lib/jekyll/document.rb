@@ -191,13 +191,12 @@ module Jekyll
           unless defaults.empty?
             @data = defaults
           end
-          @content = File.read(path, merged_file_read_opts(opts))
-          if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
-            @content = $POSTMATCH
-            data_file = SafeYAML.load($1)
-            unless data_file.nil?
-              @data = Utils.deep_merge_hashes(defaults, data_file)
-            end
+          file_raw = File.read(path, merged_file_read_opts(opts))
+          file_data = file_raw.match(/\A((?<frontmatter>---\s*\n.*?\n?)^(?:(---|\.\.\.)\s*$\n?))?(?<content>.*)/m)
+          @content = file_data[:content]
+          data_file = SafeYAML.load(file_data[:frontmatter])
+          unless data_file.nil?
+            @data = Utils.deep_merge_hashes(defaults, data_file)
           end
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"
