@@ -11,11 +11,6 @@
 Style/BracesAroundHashParameters:
   Enabled: false
 
-# Offense count: 6
-# Configuration parameters: IndentWhenRelativeTo, SupportedStyles, IndentOneStep.
-Style/CaseIndentation:
-  Enabled: false
-
 # Offense count: 3
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/ClassAndModuleChildren:
