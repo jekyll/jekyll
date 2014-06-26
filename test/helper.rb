@@ -22,7 +22,7 @@ require "rr"
 include Jekyll
 
 # Send STDERR into the void to suppress program output messages
-STDERR.reopen(test(?e, "/dev/null") ? "/dev/null" : "NUL:")
+STDERR.reopen(test("e", "/dev/null") ? "/dev/null" : "NUL:")
 
 class Test::Unit::TestCase
   include RR::Adapters::TestUnit
