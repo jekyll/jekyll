@@ -413,7 +413,7 @@ CONTENT
         )
       end
 
-      # todo: if #112 is merged into maruku, update to remove the newlines inside code block
+      # TODO: if #112 is merged into maruku, update to remove the newlines inside code block
       should "render fenced code blocks" do
         assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">\nputs &quot;Hello world&quot;\n</code></pre>}, @result.strip
       end
