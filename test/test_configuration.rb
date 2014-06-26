@@ -131,7 +131,7 @@ class TestConfiguration < Test::Unit::TestCase
     should "fire warning with bad config" do
       mock(SafeYAML).load_file(@path) { Array.new }
       mock($stderr).puts(("WARNING: ".rjust(20) + "Error reading configuration. Using defaults (and options).").yellow)
-      mock($stderr).puts("Configuration file: (INVALID) #{@path}".yellow)
+      mock($stderr).puts("Configuration file: (INVALID) #{@path} ".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
 

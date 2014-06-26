@@ -9,7 +9,7 @@ module Jekyll
 
       def initialize(name)
         all, path, date, slug = *name.sub(/^\//, "").match(MATCHER)
-        raise ArgumentError.new("'#{name}' does not contain valid date and/or title") unless all
+        raise ArgumentError, "'#{name}' does not contain valid date and/or title" unless all
         @slug = path ? path + slug : slug
         @date = Time.parse(date)
       end
@@ -45,7 +45,7 @@ module Jekyll
         begin
           @post = PostComparer.new(@orig_post)
         rescue
-          raise ArgumentError.new <<-eos
+          raise ArgumentError, <<-eos
 Could not parse name of post "#{@orig_post}" in tag 'post_url'.
 
 Make sure the post exists and the name is correct.
@@ -62,7 +62,7 @@ eos
           end
         end
 
-        raise ArgumentError.new <<-eos
+        raise ArgumentError, <<-eos
 Could not find post "#{@orig_post}" in tag 'post_url'.
 
 Make sure the post exists and the name is correct.

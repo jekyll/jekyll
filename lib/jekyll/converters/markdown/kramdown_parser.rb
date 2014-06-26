@@ -8,9 +8,9 @@ module Jekyll
           require "kramdown"
           @config = config
         rescue LoadError
-          STDERR.puts "You are missing a library required for Markdown. Please run:"
-          STDERR.puts "  $ [sudo] gem install kramdown"
-          raise FatalException.new("Missing dependency: kramdown")
+          Jekyll.logger.error "You are missing a library required for Markdown. Please run:"
+          Jekyll.logger.error "  $ [sudo] gem install kramdown"
+          raise FatalException, "Missing dependency: kramdown"
         end
 
         def convert(content)

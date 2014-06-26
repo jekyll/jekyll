@@ -13,9 +13,9 @@ module Jekyll
         require "redcloth"
         @setup = true
       rescue LoadError
-        STDERR.puts "You are missing a library required for Textile. Please run:"
-        STDERR.puts "  $ [sudo] gem install RedCloth"
-        raise FatalException.new("Missing dependency: RedCloth")
+        Jekyll.logger.error "You are missing a library required for Textile. Please run:"
+        Jekyll.logger.error "  $ [sudo] gem install RedCloth"
+        raise FatalException, "Missing dependency: RedCloth"
       end
 
       def matches(ext)

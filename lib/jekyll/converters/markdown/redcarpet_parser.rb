@@ -75,7 +75,7 @@ module Jekyll
                               Jekyll.logger.error "You are missing the 'rouge' gem. Please run:"
                               Jekyll.logger.error " $ [sudo] gem install rouge"
                               Jekyll.logger.error "Or add 'rouge' to your Gemfile."
-                              raise FatalException.new("Missing dependency: rouge")
+                              raise FatalException, "Missing dependency: rouge"
                             end
 
                             if Rouge.version < "1.3.0"
@@ -92,9 +92,9 @@ module Jekyll
                           end
                         end
         rescue LoadError
-          STDERR.puts "You are missing a library required for Markdown. Please run:"
-          STDERR.puts "  $ [sudo] gem install redcarpet"
-          raise FatalException.new("Missing dependency: redcarpet")
+          Jekyll.logger.error "You are missing a library required for Markdown. Please run:"
+          Jekyll.logger.error "  $ [sudo] gem install redcarpet"
+          raise FatalException, "Missing dependency: redcarpet"
         end
 
         def convert(content)

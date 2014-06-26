@@ -9,9 +9,9 @@ module Jekyll
           @config = config
           @rdiscount_extensions = @config["rdiscount"]["extensions"].map { |e| e.to_sym }
         rescue LoadError
-          STDERR.puts "You are missing a library required for Markdown. Please run:"
-          STDERR.puts "  $ [sudo] gem install rdiscount"
-          raise FatalException.new("Missing dependency: rdiscount")
+          Jekyll.logger.error "You are missing a library required for Markdown. Please run:"
+          Jekyll.logger.error "  $ [sudo] gem install rdiscount"
+          raise FatalException, "Missing dependency: rdiscount"
         end
 
         def convert(content)

@@ -17,7 +17,7 @@ module Jekyll
         rescue LoadError
           STDERR.puts "You are missing a library required for Markdown. Please run:"
           STDERR.puts "  $ [sudo] gem install maruku"
-          raise FatalException.new("Missing dependency: maruku")
+          raise FatalException, "Missing dependency: maruku"
         end
 
         def load_divs_library

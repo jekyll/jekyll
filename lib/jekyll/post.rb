@@ -168,7 +168,7 @@ module Jekyll
       path = File.join(@dir || "", name)
       msg  =  "Post '#{path}' does not have a valid date.\n"
       msg  << "Fix the date, or exclude the file or directory from being processed"
-      raise FatalException.new(msg)
+      raise FatalException, msg
     end
 
     # The generated directory into which the post will be placed

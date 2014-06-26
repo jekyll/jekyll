@@ -70,11 +70,6 @@ Style/Next:
 Style/PredicateName:
   Enabled: false
 
-# Offense count: 19
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/RaiseArgs:
-  Enabled: false
-
 # Offense count: 17
 # Configuration parameters: MaxSlashes.
 Style/RegexpLiteral:
