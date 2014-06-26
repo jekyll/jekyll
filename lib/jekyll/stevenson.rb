@@ -14,7 +14,7 @@ module Jekyll
 
     def add(severity, message = nil, progname = nil, &block)
       severity ||= UNKNOWN
-      @logdev = set_logdevice(severity)
+      @logdev = logdevice(severity)
 
       if @logdev.nil? || severity < @level
         return true
@@ -49,7 +49,7 @@ module Jekyll
 
     private
 
-    def set_logdevice(severity)
+    def logdevice(severity)
       if severity > INFO
         $stderr
       else

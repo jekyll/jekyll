@@ -105,7 +105,7 @@ module Jekyll
 
     # Merge DEFAULTS < _config.yml < override
     config = Utils.deep_merge_hashes(config, override).stringify_keys
-    set_timezone(config["timezone"]) if config["timezone"]
+    self.timezone = config["timezone"] if config["timezone"]
 
     config
   end
@@ -115,7 +115,7 @@ module Jekyll
   # timezone - the IANA Time Zone
   #
   # Returns nothing
-  def self.set_timezone(timezone)
+  def self.timezone=(timezone)
     ENV["TZ"] = timezone
   end
 
