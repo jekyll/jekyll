@@ -109,7 +109,7 @@ module Jekyll
       when /\.y(a)?ml/
         SafeYAML.load_file(filename)
       else
-        raise ArgumentError, "No parser for '#{filename}' is available. Use a .toml or .y(a)ml file instead."
+        fail ArgumentError, "No parser for '#{filename}' is available. Use a .toml or .y(a)ml file instead."
       end
     end
 
@@ -139,7 +139,7 @@ module Jekyll
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
       next_config = safe_load_file(file)
-      raise ArgumentError, "Configuration file: (INVALID) #{file}" unless next_config.is_a?(Hash)
+      fail ArgumentError, "Configuration file: (INVALID) #{file}" unless next_config.is_a?(Hash)
       Jekyll.logger.info "Configuration file:", file
       next_config
     rescue SystemCallError

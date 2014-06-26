@@ -30,7 +30,7 @@ module Jekyll
       @permalink    = options[:permalink]
 
       if (@template || @permalink).nil?
-        raise ArgumentError, "One of :template or :permalink must be supplied."
+        fail ArgumentError, "One of :template or :permalink must be supplied."
       end
     end
 

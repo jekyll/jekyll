@@ -53,7 +53,7 @@ module Jekyll
 
       def validate_file_name(file)
         if file !~ /^[a-zA-Z0-9_\/\.-]+$/ || file =~ /\.\// || file =~ /\/\./
-          raise ArgumentError, <<-eos
+          fail ArgumentError, <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
   #{file}
@@ -69,7 +69,7 @@ eos
       def validate_params
         full_valid_syntax = Regexp.compile('\A\s*(?:' + VALID_SYNTAX.to_s + '(?=\s|\z)\s*)*\z')
         unless @params =~ full_valid_syntax
-          raise ArgumentError, <<-eos
+          fail ArgumentError, <<-eos
 Invalid syntax for include tag:
 
   #{@params}
@@ -118,9 +118,9 @@ eos
 
       def validate_path(path, dir, safe)
         if safe && !realpath_prefixed_with?(path, dir)
-          raise IOError, "The included file '#{path}' should exist and should not be a symlink"
+          fail IOError, "The included file '#{path}' should exist and should not be a symlink"
         elsif !File.exist?(path)
-          raise IOError, "Included file '#{path_relative_to_source(dir, path)}' not found"
+          fail IOError, "Included file '#{path_relative_to_source(dir, path)}' not found"
         end
       end
 

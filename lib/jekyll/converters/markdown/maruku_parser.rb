@@ -43,7 +43,7 @@ module Jekyll
 
         def print_errors_and_fail
           print @errors.join
-          raise MaRuKu::Exception, "MaRuKu encountered problem(s) while converting your markup."
+          fail MaRuKu::Exception, "MaRuKu encountered problem(s) while converting your markup."
         end
 
         def convert(content)

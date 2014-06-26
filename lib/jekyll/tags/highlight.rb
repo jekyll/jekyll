@@ -23,7 +23,7 @@ module Jekyll
           end
           @options[:linenos] = "inline" if @options.key?(:linenos) && @options[:linenos] == true
         else
-          raise SyntaxError, <<-eos
+          fail SyntaxError, <<-eos
 Syntax Error in tag 'highlight' while parsing the following markup:
 
   #{markup}
@@ -63,7 +63,7 @@ eos
           Jekyll.logger.error "While attempting to convert the above code, Pygments.rb" +
             " returned an unacceptable value."
           Jekyll.logger.error "This is usually a timeout problem solved by running `jekyll build` again."
-          raise ArgumentError, "Pygments.rb returned an unacceptable value when attempting to highlight some code."
+          fail ArgumentError, "Pygments.rb returned an unacceptable value when attempting to highlight some code."
         end
 
         highlighted_code

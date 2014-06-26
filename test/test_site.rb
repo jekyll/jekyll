@@ -63,8 +63,8 @@ class TestSite < Test::Unit::TestCase
       class MyGenerator < Generator
         def generate(site)
           site.pages.dup.each do |page|
-            raise "#{page} isn't a page" unless page.is_a?(Page)
-            raise "#{page} doesn't respond to :name" unless page.respond_to?(:name)
+            fail "#{page} isn't a page" unless page.is_a?(Page)
+            fail "#{page} doesn't respond to :name" unless page.respond_to?(:name)
           end
         end
       end

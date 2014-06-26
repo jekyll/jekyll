@@ -60,7 +60,7 @@ module Jekyll
       @collections = nil
 
       if limit_posts < 0
-        raise ArgumentError, "limit_posts must be a non-negative number"
+        fail ArgumentError, "limit_posts must be a non-negative number"
       end
     end
 
@@ -82,7 +82,7 @@ module Jekyll
       dest_pathname = Pathname.new(dest)
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
-          raise FatalException, "Destination directory cannot be or contain the Source directory."
+          fail FatalException, "Destination directory cannot be or contain the Source directory."
         end
       end
     end
@@ -109,7 +109,7 @@ module Jekyll
       when nil
         []
       else
-        raise ArgumentError, "Your `collections` key must be a hash or an array."
+        fail ArgumentError, "Your `collections` key must be a hash or an array."
       end
     end
 
@@ -379,7 +379,7 @@ module Jekyll
       if impl = matches.first
         impl
       else
-        raise "Converter implementation not found for #{klass}"
+        fail "Converter implementation not found for #{klass}"
       end
     end
 

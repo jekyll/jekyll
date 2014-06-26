@@ -78,9 +78,3 @@ Style/RegexpLiteral:
 # Offense count: 4
 Style/RescueModifier:
   Enabled: false
-
-# Offense count: 24
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SignalException:
-  Enabled: false

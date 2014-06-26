@@ -117,7 +117,7 @@ class TestConfiguration < Test::Unit::TestCase
     end
 
     should "fire warning with no _config.yml" do
-      mock(SafeYAML).load_file(@path) { raise SystemCallError, "No such file or directory - #{@path}" }
+      mock(SafeYAML).load_file(@path) { fail SystemCallError, "No such file or directory - #{@path}" }
       mock($stderr).puts("Configuration file: none".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
@@ -136,7 +136,7 @@ class TestConfiguration < Test::Unit::TestCase
     end
 
     should "fire warning when user-specified config file isn't there" do
-      mock(SafeYAML).load_file(@user_config) { raise SystemCallError, "No such file or directory - #{@user_config}" }
+      mock(SafeYAML).load_file(@user_config) { fail SystemCallError, "No such file or directory - #{@user_config}" }
       mock($stderr).puts(("Fatal: ".rjust(20) + "The configuration file '#{@user_config}' could not be found.").red)
       assert_raises LoadError do
         Jekyll.configuration({ "config" => [@user_config] })

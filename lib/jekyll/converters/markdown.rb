@@ -23,7 +23,7 @@ module Jekyll
             else
               Jekyll.logger.error "Invalid Markdown Processor:", "#{@config["markdown"]}"
               Jekyll.logger.error "", "Valid options are [ maruku | rdiscount | kramdown | redcarpet ]"
-              raise FatalException, "Invalid Markdown Processor: #{@config["markdown"]}"
+              fail FatalException, "Invalid Markdown Processor: #{@config["markdown"]}"
             end
           end
         @setup = true

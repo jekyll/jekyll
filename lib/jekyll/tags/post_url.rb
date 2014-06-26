@@ -9,7 +9,7 @@ module Jekyll
 
       def initialize(name)
         all, path, date, slug = *name.sub(/^\//, "").match(MATCHER)
-        raise ArgumentError, "'#{name}' does not contain valid date and/or title" unless all
+        fail ArgumentError, "'#{name}' does not contain valid date and/or title" unless all
         @slug = path ? path + slug : slug
         @date = Time.parse(date)
       end
@@ -62,7 +62,7 @@ eos
           end
         end
 
-        raise ArgumentError, <<-eos
+        fail ArgumentError, <<-eos
 Could not find post "#{@orig_post}" in tag 'post_url'.
 
 Make sure the post exists and the name is correct.
