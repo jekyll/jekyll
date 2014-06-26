@@ -22,3 +22,6 @@ Lint/AmbiguousRegexpLiteral:
 
 Lint/AssignmentInCondition:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false

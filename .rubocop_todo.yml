@@ -11,11 +11,6 @@
 Style/BracesAroundHashParameters:
   Enabled: false
 
-# Offense count: 3
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/ClassAndModuleChildren:
-  Enabled: false
-
 # Offense count: 12
 # Configuration parameters: CountComments.
 Style/ClassLength:
