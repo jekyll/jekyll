@@ -17,7 +17,7 @@ module Jekyll
       self.config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems).each do |opt|
+         show_drafts limit_posts keep_files gems).each do |opt|
         send("#{opt}=", config[opt])
       end
 

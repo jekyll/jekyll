@@ -13,7 +13,7 @@ class TestEntryFilter < Test::Unit::TestCase
 
     should "filter entries" do
       ent1 = %w(foo.markdown bar.markdown baz.markdown #baz.markdown#
-              .baz.markdow foo.markdown~ .htaccess _posts _pages)
+                .baz.markdow foo.markdown~ .htaccess _posts _pages)
 
       entries = EntryFilter.new(@site).filter(ent1)
       assert_equal %w(foo.markdown bar.markdown baz.markdown .htaccess), entries
