@@ -88,7 +88,7 @@ module Jekyll
     rescue Tags::IncludeTagError => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || document.relative_path}"
       raise e
-    rescue Exception => e
+    rescue => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || document.relative_path}"
       raise e
     end

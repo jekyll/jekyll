@@ -49,7 +49,7 @@ module Jekyll
         self.data = SafeYAML.load(file_data[:frontmatter]) if file_data[:frontmatter]
       rescue SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
-      rescue Exception => e
+      rescue => e
         Jekyll.logger.warn "Error reading file #{File.join(base, name)}: #{e.message}"
       end
 
@@ -95,7 +95,7 @@ module Jekyll
     rescue Tags::IncludeTagError => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
       raise e
-    rescue Exception => e
+    rescue => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || self.path}"
       raise e
     end

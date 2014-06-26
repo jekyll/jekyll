@@ -9,11 +9,6 @@
 Lint/HandleExceptions:
   Enabled: false
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Lint/RescueException:
-  Enabled: false
-
 # Offense count: 1
 Lint/UselessAccessModifier:
   Enabled: false

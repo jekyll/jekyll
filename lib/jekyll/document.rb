@@ -200,7 +200,7 @@ module Jekyll
           end
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"
-        rescue Exception => e
+        rescue => e
           puts "Error reading file #{path}: #{e.message}"
         end
       end
