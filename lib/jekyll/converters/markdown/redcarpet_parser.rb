@@ -8,7 +8,7 @@ module Jekyll
           def add_code_tags(code, lang)
             code = code.to_s
             code = code.sub(/<pre>/, "<pre><code class=\"language-#{lang}\" data-lang=\"#{lang}\">")
-            code = code.sub(/<\/pre>/, "</code></pre>")
+            code.sub(/<\/pre>/, "</code></pre>")
           end
         end
 
@@ -71,7 +71,7 @@ module Jekyll
                             begin
                               require "rouge"
                               require "rouge/plugins/redcarpet"
-                            rescue LoadError => e
+                            rescue LoadError
                               Jekyll.logger.error "You are missing the 'rouge' gem. Please run:"
                               Jekyll.logger.error " $ [sudo] gem install rouge"
                               Jekyll.logger.error "Or add 'rouge' to your Gemfile."

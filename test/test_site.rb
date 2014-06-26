@@ -127,7 +127,6 @@ class TestSite < Test::Unit::TestCase
       StaticFile.reset_cache
 
       @site.process
-      some_static_file = @site.static_files[0].path
       dest = File.expand_path(@site.static_files[0].destination(@site.dest))
       mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
 
@@ -228,7 +227,7 @@ class TestSite < Test::Unit::TestCase
         end
 
         assert_raise Jekyll::FatalException do
-          site = Site.new(Jekyll.configuration)
+          Site.new(Jekyll.configuration)
         end
       end
 
@@ -238,7 +237,7 @@ class TestSite < Test::Unit::TestCase
         end
 
         assert_raise Jekyll::FatalException do
-          site = Site.new(Jekyll.configuration)
+          Site.new(Jekyll.configuration)
         end
       end
     end

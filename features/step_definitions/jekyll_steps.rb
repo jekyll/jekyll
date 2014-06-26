@@ -142,7 +142,7 @@ end
 ##################
 
 When /^I run jekyll(.*)$/ do |args|
-  status = run_jekyll(args)
+  run_jekyll(args)
   if args.include?("--verbose") || ENV["DEBUG"]
     puts jekyll_run_output
   end
