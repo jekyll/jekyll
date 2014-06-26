@@ -17,7 +17,7 @@ class TestRedCloth < Test::Unit::TestCase
     setup do
       config = {
         "redcloth" => {}
-        }
+      }
       @textile = Converters::Textile.new config
     end
 

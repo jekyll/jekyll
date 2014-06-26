@@ -25,3 +25,6 @@ Lint/AssignmentInCondition:
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Style/IndentHash:
+  EnforcedStyle: consistent
