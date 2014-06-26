@@ -59,8 +59,6 @@ module Jekyll
         "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.markdown"
       end
 
-      private
-
       def self.preserve_source_location?(path, options)
         !options["force"] && !Dir["#{path}/**/*"].empty?
       end
