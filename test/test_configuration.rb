@@ -98,7 +98,7 @@ class TestConfiguration < Test::Unit::TestCase
   end
   context "#fix_common_issues" do
     setup do
-      @config = Proc.new do |val|
+      @config = proc do |val|
         Configuration[{
           "paginate" => val
         }]

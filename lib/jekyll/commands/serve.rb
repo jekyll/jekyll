@@ -93,7 +93,7 @@ module Jekyll
 
         def start_callback(detached)
           unless detached
-            Proc.new { Jekyll.logger.info "Server running...", "press ctrl-c to stop." }
+            proc { Jekyll.logger.info "Server running...", "press ctrl-c to stop." }
           end
         end
 
