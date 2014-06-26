@@ -374,13 +374,19 @@ module Jekyll
     # klass - The Class of the Converter to fetch.
     #
     # Returns the Converter instance implementing the given Converter.
-    def getConverterImpl(klass)
+    def get_converter_impl(klass)
       matches = converters.select { |c| c.class == klass }
       if impl = matches.first
         impl
       else
         raise "Converter implementation not found for #{klass}"
       end
+    end
+
+    def getConverterImpl(klass) # rubocop:disable Style/MethodName
+      Jekyll.logger.warn "Deprecation:", "Method renamed to match styleguide, \
+                                          use #get_converter_impl instead"
+      get_converter_impl(klass)
     end
 
     # Create array of instances of the subclasses of the class or module
