@@ -263,7 +263,7 @@ module Jekyll
         page_or_post.render(layouts, payload)
       end
     rescue Errno::ENOENT => e
-      # ignore missing layout dir
+      Jekyll.logger.debug "Directory is missing: #{e.message}"
     end
 
     # Remove orphaned files and empty directories in destination.

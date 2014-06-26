@@ -11,7 +11,8 @@ require "mercenary"
 %w(jekyll-import).each do |blessed_gem|
   begin
     require blessed_gem
-  rescue LoadError
+  rescue LoadError => e
+    Jekyll.logger.debug "Failed to load #{blessed_gem}: #{e.message}"
   end
 end
 

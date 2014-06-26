@@ -37,8 +37,8 @@ module Jekyll
           begin
             rel_path = path_abs.relative_path_from(source_abs).to_s
             ignored << Regexp.new(Regexp.escape(rel_path)) unless rel_path.start_with?("../")
-          rescue ArgumentError
-            # Could not find a relative path
+          rescue ArgumentError => e
+            Jekyll.logger.debug "Could not find a relative path: #{e.message}"
           end
         end
         ignored
