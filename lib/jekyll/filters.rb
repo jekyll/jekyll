@@ -209,9 +209,10 @@ module Jekyll
         when nils == "last"
           order = + 1
         else
-          Jekyll.logger.error "Invalid nils order:",
+          Jekyll.logger.abort_with(
+            "Invalid nils order:",
             "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
-          exit(1)
+          )
         end
 
         input.sort do |apple, orange|

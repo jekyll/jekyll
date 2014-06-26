@@ -190,7 +190,7 @@ class TestFilters < Test::Unit::TestCase
       end
       should "return sorted by property array" do
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "a" => 3 }, { "a" => 4 }],
-          @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
+                     @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
       end
       should "return sorted by property array with nils first" do
         ary = [{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }]
@@ -199,7 +199,7 @@ class TestFilters < Test::Unit::TestCase
       end
       should "return sorted by property array with nils last" do
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
-          @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
+                     @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
       end
     end
 

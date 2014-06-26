@@ -168,10 +168,12 @@ module Jekyll
       while layout
         payload = Utils.deep_merge_hashes(payload, { "content" => output, "page" => layout.data })
 
-        self.output = render_liquid(layout.content,
-                                         payload,
-                                         info,
-                                         File.join(site.config["layouts"], layout.name))
+        self.output = render_liquid(
+          layout.content,
+          payload,
+          info,
+          File.join(site.config["layouts"], layout.name)
+        )
 
         if layout = layouts[layout.data["layout"]]
           if used.include?(layout)

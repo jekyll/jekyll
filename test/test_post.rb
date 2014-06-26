@@ -558,7 +558,7 @@ class TestPost < Test::Unit::TestCase
 
           assert File.directory?(dest_dir)
           assert File.exist?(File.join(dest_dir, "2009", "03", "12",
-                                        "hash-#1.html"))
+                                       "hash-#1.html"))
         end
 
         should "write properly when url has space" do
@@ -568,7 +568,7 @@ class TestPost < Test::Unit::TestCase
 
           assert File.directory?(dest_dir)
           assert File.exist?(File.join(dest_dir, "2014", "03", "22",
-                                        "escape-+ %20[].html"))
+                                       "escape-+ %20[].html"))
         end
 
         should "write properly without html extension" do
