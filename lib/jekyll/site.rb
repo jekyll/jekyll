@@ -186,9 +186,10 @@ module Jekyll
     end
 
     def read_content(dir, magic_dir, klass)
-      get_entries(dir, magic_dir).map do |entry|
+      entries = get_entries(dir, magic_dir).map do |entry|
         klass.new(self, source, dir, entry) if klass.valid?(entry)
-      end.reject do |entry|
+      end
+      entries.reject do |entry|
         entry.nil?
       end
     end
@@ -397,9 +398,10 @@ module Jekyll
     #
     # Returns array of instances of subclasses of parameter
     def instantiate_subclasses(klass)
-      klass.descendants.select do |c|
+      descendants = klass.descendants.select do |c|
         !safe || c.safe
-      end.sort.map do |c|
+      end
+      descendants.sort.map do |c|
         c.new(config)
       end
     end

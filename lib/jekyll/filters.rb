@@ -170,9 +170,10 @@ module Jekyll
     #   "items" => [...] } # all the items where `property` == "larry"
     def group_by(input, property)
       if groupable?(input)
-        input.group_by do |item|
+        input = input.group_by do |item|
           item_property(item, property).to_s
-        end.reduce([]) do |memo, i|
+        end
+        input.reduce([]) do |memo, i|
           memo << { "name" => i.first, "items" => i.last }
         end
       else
