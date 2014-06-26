@@ -16,3 +16,6 @@ Lint/EndAlignment:
 
 Lint/UnusedMethodArgument:
   Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
