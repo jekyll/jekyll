@@ -19,3 +19,6 @@ Lint/UnusedMethodArgument:
 
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
