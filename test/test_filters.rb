@@ -18,7 +18,7 @@ class TestFilters < Test::Unit::TestCase
       @filter = JekyllFilter.new({ "source" => source_dir, "destination" => dest_dir, "timezone" => "UTC" })
       @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
       @time_as_string = "September 11, 2001 12:46:30 -0000"
-      @time_as_numeric = 1399680607
+      @time_as_numeric = 1_399_680_607
       @array_of_objects = [
         { "color" => "red",  "size" => "large"  },
         { "color" => "red",  "size" => "medium" },
