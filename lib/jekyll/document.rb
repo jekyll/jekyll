@@ -152,10 +152,8 @@ module Jekyll
     # Returns nothing.
     def write(dest)
       path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
-        f.write(output)
-      end
+      FileUtils.mkdir_p(File.dirname(path)) unless jail.directory?(File.dirname(path))
+      jail.write(path, output)
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
@@ -182,14 +180,14 @@ module Jekyll
     # Returns nothing.
     def read(opts = {})
       if yaml_file?
-        @data = SafeYAML.load_file(path)
+        @data = SafeYAML.load(jail.read(path))
       else
         begin
           defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
           unless defaults.empty?
             @data = defaults
           end
-          @content = File.read(path, merged_file_read_opts(opts))
+          @content = jail.read(path, merged_file_read_opts(opts))
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
             @content = $POSTMATCH
             data_file = SafeYAML.load($1)
@@ -254,6 +252,17 @@ module Jekyll
     #   method returns true, otherwise false.
     def write?
       collection && collection.write?
+    end
+
+    # The file system jail in which this document lies.
+    #
+    # Returns the site's instance of the file system jail, or
+    #   a new file system jail rooted to the directory of this
+    #   document and with safe turned on (default).
+    def jail
+      @jail ||= (site.jail || Jekyll::FileSystem::Jail.new(File.dirname(path), {
+        :safe => true
+      }))
     end
 
   end

@@ -383,7 +383,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration)
         site.process
 
-        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.json'))
+        file_content = SafeYAML.load_file(source_dir('_data', 'members.json'))
 
         assert_equal site.data['members'], file_content
         assert_equal site.site_payload['site']['data']['members'], file_content

@@ -95,13 +95,13 @@ eos
       end
 
       def render(context)
-        dir = File.join(File.realpath(context.registers[:site].source), INCLUDES_DIR)
+        dir = File.join(jail(context).realpath(context.registers[:site].source), INCLUDES_DIR)
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
         path = File.join(dir, file)
-        validate_path(path, dir, context.registers[:site].safe)
+        validate_path(path, dir, context.registers[:site].safe, jail(context))
 
         begin
           partial = Liquid::Template.parse(source(path, context))
@@ -115,8 +115,8 @@ eos
         end
       end
 
-      def validate_path(path, dir, safe)
-        if safe && !realpath_prefixed_with?(path, dir)
+      def validate_path(path, dir, safe, jail)
+        if safe && !realpath_prefixed_with?(path, dir, jail)
           raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
         elsif !File.exist?(path)
           raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
@@ -127,8 +127,8 @@ eos
         File.join(INCLUDES_DIR, path.sub(Regexp.new("^#{dir}"), ""))
       end
 
-      def realpath_prefixed_with?(path, dir)
-        File.exist?(path) && File.realpath(path).start_with?(dir)
+      def realpath_prefixed_with?(path, dir, jail)
+        jail.exist?(path) && jail.realpath(path).start_with?(dir)
       end
 
       def blank?
@@ -137,7 +137,11 @@ eos
 
       # This method allows to modify the file content by inheriting from the class.
       def source(file, context)
-        File.read(file, file_read_opts(context))
+        jail(context).read(file, file_read_opts(context))
+      end
+
+      def jail(context)
+        context.registers[:site].jail
       end
     end
   end

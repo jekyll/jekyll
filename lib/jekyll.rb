@@ -72,6 +72,7 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 # plugins
+require 'jekyll-filesystem-jail'
 require 'jekyll-coffeescript'
 require 'jekyll-sass-converter'
 require 'jekyll-paginate'
@@ -133,13 +134,8 @@ module Jekyll
     @fs_root ||= "/"
   end
 
+  # FIXME: Remove me in 3.0, just here for backwards-compatibility
   def self.sanitized_path(base_directory, questionable_path)
-    clean_path = File.expand_path(questionable_path, fs_root)
-    clean_path.gsub!(/\A\w\:\//, '/')
-    unless clean_path.start_with?(base_directory)
-      File.join(base_directory, clean_path)
-    else
-      clean_path
-    end
+    Jekyll::FileSystem::Jail.sanitized_path(base_directory, questionable_path)
   end
 end
