@@ -58,38 +58,8 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
-          require 'listen'
-
-          listener = Listen.to(
-            options['source'],
-            :ignore => ignore_paths(options),
-            :force_polling => options['force_polling']
-          ) do |modified, added, removed|
-            t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-            n = modified.length + added.length + removed.length
-            print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
-            begin
-              process_site(site)
-              puts  "...done."
-            rescue => e
-              puts "...error:"
-              Jekyll.logger.warn "Error:", e.message
-              Jekyll.logger.warn "Error:", "Run jekyll build --trace for more information."
-            end
-          end
-          listener.start
-
-          Jekyll.logger.info "Auto-regeneration:", "enabled for '#{options['source']}'"
-
-          unless options['serving']
-            trap("INT") do
-              listener.stop
-              puts "     Halting auto-regeneration."
-              exit 0
-            end
-
-            loop { sleep 1000 }
-          end
+          require 'jekyll-watch'
+          Jekyll::Commands::Watch.watch(site, options)
         end
 
       end # end of class << self

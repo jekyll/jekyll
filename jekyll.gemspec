@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('liquid', "~> 2.6.1")
   s.add_runtime_dependency('classifier', "~> 1.3")
-  s.add_runtime_dependency('listen', [">= 2.7.6", "< 3.0.0"])
   s.add_runtime_dependency('kramdown', "~> 1.3")
   s.add_runtime_dependency('pygments.rb', "~> 0.6.0")
   s.add_runtime_dependency('mercenary', "~> 0.3.3")
@@ -42,6 +41,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('jekyll-gist', '~> 1.0')
   s.add_runtime_dependency('jekyll-coffeescript', '~> 1.0')
   s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0')
+  s.add_runtime_dependency('jekyll-watch', '~> 1.0.0.rc2')
 
   s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")
