@@ -78,6 +78,7 @@
   * Add Piwigo Gallery to list of third-party plugins (#2526)
   * Set `show_drafts` to `false` in default configuration listing (#2536)
   * Provide an updated link for Windows installation instructions (#2544)
+  * Remove `url` from configuration docs (#2547)
 
 ## 2.0.3 / 2014-05-08
 
