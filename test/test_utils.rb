@@ -67,5 +67,4 @@ describe Jekyll::Utils do
 
   end
 
-
 end
