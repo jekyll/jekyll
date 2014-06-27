@@ -14,7 +14,7 @@ private repositories.
 [0]: https://travis-ci.org/
 [1]: https://github.com/
 
-## Enabling Travis and GitHub
+## 1. Enabling Travis and GitHub
 
 Enabling Travis builds for your GitHub repository is pretty simple:
 
@@ -25,7 +25,7 @@ Enabling Travis builds for your GitHub repository is pretty simple:
    configuration happens in you `.travis.yml` file. More details on that
    below.
 
-## The Test Script
+## 2. The Test Script
 
 The simplest test script simply runs `jekyll build` and ensures that Jekyll
 doesn't fail to build the site. It doesn't check the resulting site, but it
@@ -36,29 +36,29 @@ This tool checks your resulting site to ensure all links and images exist.
 Utilize it either with the convenient `html-proof` command-line executable,
 or write a Ruby script which utilizes the gem.
 
-### The `html-proof` Executable
+### The HTML Proofer Executable
 
-```bash
+{% highlight bash %}
 #!/usr/bin/env bash
 
 jekyll build
 html-proof ./_site
-```
+{% endhighlight %}
 
 Some options can be specified via command-line switches. Check out the
 `html-proofer` README for more information about these switches, or run
 `html-proof --help` locally.
 
-### The `html/proofer` Library
+### The HTML Proofer Library
 
 You can also invoke `html-proofer` in Ruby scripts (e.g. in a Rakefile):
 
-```ruby
+{% highlight ruby %}
 #!/usr/bin/env ruby
 
 require 'html/proofer'
 HTML::Proofer.new("./_site").run
-```
+{% endhighlight %}
 
 Options are given as a second argument to `.new`, and are encoded in a
 symbol-keyed Ruby Hash. More information about the configuration options,
@@ -66,14 +66,14 @@ check out `html-proofer`'s README file.
 
 [2]: https://github.com/gjtorikian/html-proofer
 
-## Configuring Your Travis Builds
+## 3. Configuring Your Travis Builds
 
 This file is used to configure your Travis builds. Because Jekyll is built
 with Ruby and requires RubyGems to install, we use the Ruby language build
 environment. Below is a sample `.travis.yml` file, and what follows that is
 an explanation of each line.
 
-```yaml
+{% highlight yaml %}
 language: ruby
 rvm:
 - 2.1
@@ -88,7 +88,7 @@ branches:
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
-```
+{% endhighlight %}
 
 Ok, now for an explanation of each line:
 
@@ -155,7 +155,7 @@ which it must compile each time it is installed. Luckily, you can
 dramatically increase the install time of Nokogiri by setting the
 environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
-## Gotchas
+## 4. Gotchas
 
 ### Exclude `vendor`
 
