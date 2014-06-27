@@ -1,23 +1,21 @@
-require 'helper'
+require 'minitest/autorun'
 
-class TestURL < Test::Unit::TestCase
-  context "The URL class" do
+describe Jekyll::URL do
+  describe "The URL class" do
 
-    should "throw an exception if neither permalink or template is specified" do
-      assert_raises ArgumentError do
-        URL.new(:placeholders => {})
-      end
+    it "throw an exception if neither permalink or template is specified" do
+      proc {URL.new(:placeholders => {})}.must_raise ArgumentError
     end
 
-    should "replace placeholders in templates" do
-      assert_equal "/foo/bar", URL.new(
+    it "replace placeholders in templates" do
+      "/foo/bar".must_equal URL.new(
         :template => "/:x/:y",
         :placeholders => {:x => "foo", :y => "bar"}
       ).to_s
     end
 
-    should "return permalink if given" do
-      assert_equal "/le/perma/link", URL.new(
+    it "return permalink if given" do
+      "/le/perma/link".must_equal URL.new(
         :template => "/:x/:y",
         :placeholders => {:x => "foo", :y => "bar"},
         :permalink => "/le/perma/link"
