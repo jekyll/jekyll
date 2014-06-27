@@ -40,9 +40,10 @@ or write a Ruby script which utilizes the gem.
 
 {% highlight bash %}
 #!/usr/bin/env bash
+set -e # halt script on error
 
-jekyll build
-htmlproof ./_site
+bundle exec jekyll build
+bundle exec htmlproof ./_site
 {% endhighlight %}
 
 Some options can be specified via command-line switches. Check out the
