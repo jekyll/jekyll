@@ -33,7 +33,7 @@ does ensure things are built properly.
 
 When testing Jekyll output, there is no better tool than [html-proofer][2].
 This tool checks your resulting site to ensure all links and images exist.
-Utilize it either with the convenient `html-proof` command-line executable,
+Utilize it either with the convenient `htmlproof` command-line executable,
 or write a Ruby script which utilizes the gem.
 
 ### The HTML Proofer Executable
@@ -42,12 +42,12 @@ or write a Ruby script which utilizes the gem.
 #!/usr/bin/env bash
 
 jekyll build
-html-proof ./_site
+htmlproof ./_site
 {% endhighlight %}
 
 Some options can be specified via command-line switches. Check out the
 `html-proofer` README for more information about these switches, or run
-`html-proof --help` locally.
+`htmlproof --help` locally.
 
 ### The HTML Proofer Library
 
@@ -119,7 +119,7 @@ customizable. If your script won't change much, you can write your test
 incantation here directly:
 
 {% highlight yaml %}
-script: jekyll build && html-proof ./_site
+script: jekyll build && htmlproof ./_site
 {% endhighlight %}
 
 The `script` directive can be absolutely any valid shell command.
