@@ -41,7 +41,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('jekyll-gist', '~> 1.0')
   s.add_runtime_dependency('jekyll-coffeescript', '~> 1.0')
   s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0')
-  s.add_runtime_dependency('jekyll-watch', '~> 1.0.0.rc2')
+  s.add_runtime_dependency('jekyll-watch', '~> 1.0')
 
   s.add_development_dependency('rake', "~> 10.1")
   s.add_development_dependency('rdoc', "~> 3.11")
