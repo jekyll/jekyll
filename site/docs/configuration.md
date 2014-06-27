@@ -434,7 +434,6 @@ server:      false    # deprecated
 host:        0.0.0.0
 port:        4000
 baseurl:     ""
-url:         http://localhost:4000
 lsi:         false
 
 maruku:
