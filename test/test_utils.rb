@@ -1,4 +1,3 @@
-require 'helper'
 require 'minitest/autorun'
 
 describe Jekyll::Utils do
