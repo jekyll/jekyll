@@ -50,6 +50,8 @@
   * Merge file system categories with categories from YAML. (#2531)
   * Deep merge front matter defaults (#2490)
   * Ensure exclude and include arrays are arrays of strings (#2542)
+  * Allow collections to have dots in their filenames (#2552)
+  * Collections shouldn't try to read in directories as files (#2552)
 
 ### Development Fixes
 
