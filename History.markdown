@@ -52,6 +52,7 @@
   * Ensure exclude and include arrays are arrays of strings (#2542)
   * Allow collections to have dots in their filenames (#2552)
   * Collections shouldn't try to read in directories as files (#2552)
+  * Be quiet very quickly. (#2520)
 
 ### Development Fixes
 
