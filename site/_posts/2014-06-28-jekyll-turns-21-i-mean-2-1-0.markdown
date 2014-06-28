@@ -1,0 +1,24 @@
+---
+layout: news_item
+title: 'Jekyll Turns 21! Err... I mean 2.1.0.'
+date: 2014-06-28 17:26:59 -0400
+author: parkr
+version: 2.1.0
+categories: [release]
+---
+
+Jekyll's finally [legal to drink in the States](http://en.wikipedia.org/wiki/Legal_drinking_age).
+And he's done a lot of learning in the process! Here are some of the new
+things to look forward to:
+
+- Uses the latest Liquid version (2.6.1) (#2495)
+- Set front-matter defaults for collections (#2419)
+- Set a collection-specific URL template (#2418)
+- `pygments.rb` 0.6.0! (#2504)
+- `.json` files in `_data` (#2369)
+- New `--skip_initial_build` flag for `jekyll serve` (#2477)
+- A bajilion bug fixes and site updates!
+
+Let's go party!
+
+*Check out the [full changelog](/docs/history/) for more.*
