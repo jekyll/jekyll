@@ -17,15 +17,15 @@ class TestCollections < Test::Unit::TestCase
     end
 
     should "sanitize the label name" do
-      assert_equal @collection.label, "etcpassword"
+      assert_equal @collection.label, "....etcpassword"
     end
 
     should "have a sanitized relative path name" do
-      assert_equal @collection.relative_directory, "_etcpassword"
+      assert_equal @collection.relative_directory, "_....etcpassword"
     end
 
     should "have a sanitized full path" do
-      assert_equal @collection.directory, source_dir("_etcpassword")
+      assert_equal @collection.directory, source_dir("_....etcpassword")
     end
   end
 
@@ -191,6 +191,33 @@ class TestCollections < Test::Unit::TestCase
 
     should "not include the symlinked file in the list of docs" do
       assert_not_include @collection.docs.map(&:relative_path), "_methods/um_hi.md"
+    end
+  end
+
+  context "with dots in the filenames" do
+    setup do
+      @site = fixture_site({
+        "collections" => ["with.dots"],
+        "safe"        => true
+      })
+      @site.process
+      @collection = @site.collections["with.dots"]
+    end
+
+    should "exist" do
+      assert_not_nil @collection
+    end
+
+    should "contain one document" do
+      assert_equal 2, @collection.docs.size
+    end
+
+    should "allow dots in the filename" do
+      assert_equal "_with.dots", @collection.relative_directory
+    end
+
+    should "read document in subfolders with dots" do
+      assert @collection.docs.any? { |d| d.path.include?("all.dots") }
     end
   end
 
