@@ -52,7 +52,7 @@ module Jekyll
     def filtered_entries
       return Array.new unless exists?
       Dir.chdir(directory) do
-        entry_filter.filter(entries)
+        entry_filter.filter(entries).reject { |f| File.directory?(f) }
       end
     end
 
