@@ -40,6 +40,7 @@ module Jekyll
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'textile_ext'   => 'textile',
 
+      'quiet'         => false,
       'port'          => '4000',
       'host'          => '0.0.0.0',
 
@@ -103,6 +104,10 @@ module Jekyll
       override['source'] || self['source'] || DEFAULTS['source']
     end
 
+    def quiet?(override = {})
+      override['quiet'] || self['quiet'] || DEFAULTS['quiet']
+    end
+
     def safe_load_file(filename)
       case File.extname(filename)
       when '.toml'
@@ -120,6 +125,9 @@ module Jekyll
     #
     # Returns an Array of config files
     def config_files(override)
+      # Be quiet quickly.
+      Jekyll.logger.log_level = :error if quiet?(override)
+
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
       if config_files.to_s.empty?
