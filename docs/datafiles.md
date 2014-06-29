@@ -8,7 +8,7 @@ permalink: /docs/datafiles/
 
 In addition to the [built-in variables](../variables/) available from Jekyll,
 you can specify your own custom data that can be accessed via the [Liquid
-templating system](http://wiki.github.com/shopify/liquid/liquid-for-designers).
+templating system](https://wiki.github.com/shopify/liquid/liquid-for-designers).
 
 Jekyll supports loading data from [YAML](http://yaml.org/) and [JSON](http://www.json.org/) files located in the
 `_data` directory.
@@ -56,6 +56,50 @@ You can now render the list of members in a template:
     <a href="https://github.com/{{ member.github }}">
       {{ member.name }}
     </a>
+  </li>
+{% endfor %}
+</ul>
+{% endraw %}
+{% endhighlight %}
+
+## Example: Organizations
+
+Data files can also be placed in sub-folders of the `_data` folder. Each folder level will be added to a variable's namespace. The example bellow shows how GitHub organizations could be defined separately in a file under the `orgs` folder:
+
+In `_data/orgs/jekyll.yml`:
+
+{% highlight yaml %}
+username: jekyll
+name: Jekyll
+members:
+  - name: Tom Preston-Werner
+    github: mojombo
+
+  - name: Parker Moore
+    github: parkr
+{% endhighlight %}
+
+In `_data/orgs/doeorg.yml`:
+
+{% highlight yaml %}
+username: doeorg
+name: Doe Org
+members:
+  - name: John Doe
+    github: jdoe
+{% endhighlight %}
+
+The organizations can then be accessed via `site.data.orgs`, followed by the file name:
+
+{% highlight html %}
+{% raw %}
+<ul>
+{% for org in site.data.orgs %}
+  <li>
+    <a href="https://github.com/{{ org.username }}">
+      {{ org.name }}
+    </a>
+    ({{ org.members | size }} members)
   </li>
 {% endfor %}
 </ul>

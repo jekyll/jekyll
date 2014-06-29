@@ -21,8 +21,8 @@ of the other three pre-defined markdown parsers or define your own.
 
 ### RDiscount
 
-If you prefer to use [RDiscount](http://github.com/rtomayko/rdiscount) instead
-of [Maruku](http://github.com/bhollis/maruku) for Markdown, just make sure you have
+If you prefer to use [RDiscount](https://github.com/rtomayko/rdiscount) instead
+of [Maruku](https://github.com/bhollis/maruku) for Markdown, just make sure you have
 it installed:
 
 {% highlight bash %}
