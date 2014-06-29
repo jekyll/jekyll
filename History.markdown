@@ -10,6 +10,8 @@
 
 ### Site Enhancements
 
+  * Add vertical margin to `highlight` to separate code blocks (#2558)
+
 ## 2.1.0 / 2014-06-28
 
 ### Minor Enhancements
