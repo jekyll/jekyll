@@ -25,3 +25,7 @@ things to look forward to:
 Let's go party!
 
 *Check out the [full changelog](/docs/history/) for more.*
+
+Many thanks to these 37 contributors for the 2.1.0 release:
+
+Alberto Grespan, Alessandro Lorenzi, Alex Medearis, Alfred Xing, Anatol Broder, Ben, Ben Balter, Bud Parr, Chezou, Denilson Figueiredo de Sá, Denilson Sá, Ivan Tse, Jens Nazarenus, Jesse shawl, Jordon Bedwell, Josh Davis, János Rusiczki, Marc Ransome, Mathieu Bruyen, Matt Rogers, Parker Moore, Pat Hawks, Paul Henry, Peter Rhoades, Philipp Rudloff, Quinn Shanahan, Renaud Martinet, Rob Murray, Rodrigo Dumont, Simon Sarris, Terry, Terry Schmidt, Tomer Cohen, XhmikosR, Yihang Ho, jaybe@jekyll, and mikecole.
