@@ -38,7 +38,7 @@ module Jekyll
         # Build your Jekyll site.
         #
         # site - the Jekyll::Site instance to build
-        # options - the
+        # options - A Hash of options passed to the command
         #
         # Returns nothing.
         def build(site, options)
