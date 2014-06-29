@@ -70,6 +70,7 @@
   * Add test for sorting UTF-8 characters (#2384)
   * Use `https` for GitHub links in documentation (#2470)
   * Remove coverage reporting with Coveralls (#2494)
+  * Fix a bit of missing TomDoc to `Jekyll::Commands::Build#build` (#2554)
 
 ### Site Enhancements
 
