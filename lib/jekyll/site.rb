@@ -195,7 +195,7 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = File.join(source, dir)
+      base = Jekyll.sanitized_path(source, dir)
       read_data_to(base, self.data)
     end
 
@@ -214,7 +214,7 @@ module Jekyll
       end
 
       entries.each do |entry|
-        path = File.join(dir, entry)
+        path = Jekyll.sanitized_path(dir, entry)
         next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
