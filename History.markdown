@@ -4,6 +4,8 @@
 
 ### Minor Enhancements
 
+  * Patch read vulnerabilities for data & confirm none for layouts (#2563)
+
 ### Bug Fixes
 
 ### Development Fixes
