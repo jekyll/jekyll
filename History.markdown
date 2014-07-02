@@ -4,14 +4,19 @@
 
 ### Minor Enhancements
 
-  * Patch read vulnerabilities for data & confirm none for layouts (#2563)
-  * Update Maruku dependency to allow use of the latest version (#2576)
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 2.1.1 / 2014-07-01
 
 ### Bug Fixes
 
+  * Patch read vulnerabilities for data & confirm none for layouts (#2563)
+  * Update Maruku dependency to allow use of the latest version (#2576)
   * Remove conditional assignment from document URL to prevent stale urls (#2575)
-
-### Development Fixes
 
 ### Site Enhancements
 
