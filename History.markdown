@@ -4,19 +4,101 @@
 
 ### Minor Enhancements
 
+  * Patch read vulnerabilities for data & confirm none for layouts (#2563)
+
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+  * Add vertical margin to `highlight` to separate code blocks (#2558)
+
+## 2.1.0 / 2014-06-28
+
+### Minor Enhancements
+
+  * Bump to the latest Liquid version, 2.6.1 (#2495)
   * Add support for JSON files in the `_data` directory (#2369)
+  * Allow subclasses to override `EXCERPT_ATTRIBUTES_FOR_LIQUID` (#2408)
+  * Add `Jekyll.env` and `jekyll.environment` (the Liquid var) (#2417)
+  * Use `_config.yaml` or `_config.yml` (`.yml` takes precedence) (#2406)
+  * Override collection url template (#2418)
+  * Allow subdirectories in `_data` (#2395)
+  * Extract Pagination Generator into gem: `jekyll-paginate` (#2455)
+  * Utilize `date_to_rfc822` filter in site template (#2437)
+  * Add categories, last build datetime, and generator to site template
+    feed (#2438)
+  * Configurable, replaceable Logger-compliant logger (#2444)
+  * Extract `gist` tag into a separate gem (#2469)
+  * Add `collection` attribute to `Document#to_liquid` to access the
+    document's collection label. (#2436)
+  * Upgrade listen to `2.7.6 <= x < 3.0.0` (#2492)
+  * Allow configuration of different Twitter and GitHub usernames in site template (#2485)
+  * Bump Pygments to v0.6.0 (#2504)
+  * Front-matter defaults for documents in collections (#2419)
+  * Include files with a url which ends in `/` in the `site.html_pages` list (#2524)
+  * Make `highlight` tag use `language-` prefix in CSS class (#2511)
+  * Lookup item property via `item#to_liquid` before `#data` or `#[]` in filters (#2493)
+  * Skip initial build of site on serve with flag (#2477)
+  * Add support for `hl_lines` in `highlight` tag (#2532)
+  * Spike out `--watch` flag into a separate gem (#2550)
 
 ### Bug Fixes
 
   * Liquid `sort` filter should sort even if one of the values is `nil` (#2345)
   * Remove padding on `pre code` in the site template CSS (#2383)
+  * Set `log_level` earlier to silence info level configuration output (#2393)
+  * Only list pages which have `title` in site template (#2411)
+  * Accept `Numeric` values for dates, not `Number` values (#2377)
+  * Prevent code from overflowing container in site template (#2429)
+  * Encode URLs in UTF-8 when escaping and unescaping (#2420)
+  * No Layouts or Liquid for Asset Files (#2431)
+  * Allow front-matter defaults to set post categories (#2373)
+  * Fix command in subcommand deprecation warning (#2457)
+  * Keep all parent directories of files/dirs in `keep_files` (#2458)
+  * When using RedCarpet and Rouge without Rouge installed, fixed erroneous
+    error which stated that redcarpet was missing, not rouge. (#2464)
+  * Ignore *all* directories and files that merit it on auto-generation (#2459)
+  * Before copying file, explicitly remove the old one (#2535)
+  * Merge file system categories with categories from YAML. (#2531)
+  * Deep merge front matter defaults (#2490)
+  * Ensure exclude and include arrays are arrays of strings (#2542)
+  * Allow collections to have dots in their filenames (#2552)
+  * Collections shouldn't try to read in directories as files (#2552)
+  * Be quiet very quickly. (#2520)
 
 ### Development Fixes
 
   * Test Ruby 2.1.2 instead of 2.1.1 (#2374)
   * Add test for sorting UTF-8 characters (#2384)
+  * Use `https` for GitHub links in documentation (#2470)
+  * Remove coverage reporting with Coveralls (#2494)
+  * Fix a bit of missing TomDoc to `Jekyll::Commands::Build#build` (#2554)
 
 ### Site Enhancements
+
+  * Set `timezone` to `America/Los_Angeles` (#2394)
+  * Improve JavaScript in `anchor_links.html` (#2368)
+  * Remove note on Quickstart page about default markdown converter (#2387)
+  * Remove broken link in extras.md to a Maruku fork (#2401)
+  * Update Font Awesome to v4.1.0. (#2410)
+  * Fix broken link on Installation page to Templates page (#2421)
+  * Prevent table from extending parent width in permalink style table (#2424)
+  * Add collections to info about pagination support (#2389)
+  * Add `jekyll_github_sample` plugin to list of third-party plugins (#2463)
+  * Clarify documentation around front-matter defaults and add details
+    about defaults for collections. (#2439)
+  * Add Jekyll Project Version Tag to list of third-party plugins (#2468)
+  * Use `https` for GitHub links across whole site (#2470)
+  * Add StickerMule + Jekyll post (#2476)
+  * Add Jekyll Asset Pipeline Reborn to list of third-party plugins (#2479)
+  * Add link to jekyll-compress-html to list of third-party plugins (#2514)
+  * Add Piwigo Gallery to list of third-party plugins (#2526)
+  * Set `show_drafts` to `false` in default configuration listing (#2536)
+  * Provide an updated link for Windows installation instructions (#2544)
+  * Remove `url` from configuration docs (#2547)
+  * Documentation for Continuous Integration for your Jekyll Site (#2432)
 
 ## 2.0.3 / 2014-05-08
 

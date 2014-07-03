@@ -166,6 +166,7 @@ class TestSite < Test::Unit::TestCase
         coffeescript.coffee
         contacts.html
         deal.with.dots.html
+        environment.html
         exploit.md
         foo.md
         index.html
@@ -388,6 +389,16 @@ class TestSite < Test::Unit::TestCase
         assert_equal site.site_payload['site']['data']['members'], file_content
       end
 
+      should 'auto load yaml files in subdirectory' do
+        site = Site.new(Jekyll.configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'categories', 'dairy.yaml'))
+
+        assert_equal site.data['categories']['dairy'], file_content
+        assert_equal site.site_payload['site']['data']['categories']['dairy'], file_content
+      end
+
       should "load symlink files in unsafe mode" do
         site = Site.new(Jekyll.configuration.merge({'safe' => false}))
         site.process
@@ -407,5 +418,35 @@ class TestSite < Test::Unit::TestCase
       end
 
     end
+
+    context "manipulating the Jekyll environment" do
+      setup do
+        @site = Site.new(site_configuration)
+        @site.process
+        @page = @site.pages.find { |p| p.name == "environment.html" }
+      end
+
+      should "default to 'development'" do
+        assert_equal "development", @page.content.strip
+      end
+
+      context "in production" do
+        setup do
+          ENV["JEKYLL_ENV"] = "production"
+          @site = Site.new(site_configuration)
+          @site.process
+          @page = @site.pages.find { |p| p.name == "environment.html" }
+        end
+
+        teardown do
+          ENV.delete("JEKYLL_ENV")
+        end
+
+        should "be overridden by JEKYLL_ENV" do
+          assert_equal "production", @page.content.strip
+        end
+      end
+    end
+
   end
 end

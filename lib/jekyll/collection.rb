@@ -52,7 +52,7 @@ module Jekyll
     def filtered_entries
       return Array.new unless exists?
       Dir.chdir(directory) do
-        entry_filter.filter(entries)
+        entry_filter.filter(entries).reject { |f| File.directory?(f) }
       end
     end
 
@@ -105,7 +105,7 @@ module Jekyll
     #
     # Returns a sanitized version of the label.
     def sanitize_label(label)
-      label.gsub(/[^a-z0-9_\-]/i, '')
+      label.gsub(/[^a-z0-9_\-\.]/i, '')
     end
 
     # Produce a representation of this Collection for use in Liquid.
@@ -130,6 +130,13 @@ module Jekyll
     # Returns true if the 'write' metadata is true, false otherwise.
     def write?
       !!metadata['output']
+    end
+
+    # The URL template to render collection's documents at.
+    #
+    # Returns the URL template to render collection's documents at.
+    def url_template
+      metadata.fetch('permalink', "/:collection/:path:output_ext")
     end
 
     # Extract options for this collection from the site configuration.

@@ -195,18 +195,34 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = File.join(source, dir)
-      return unless File.directory?(base) && (!safe || !File.symlink?(base))
+      base = Jekyll.sanitized_path(source, dir)
+      read_data_to(base, self.data)
+    end
 
-      entries = Dir.chdir(base) { Dir['*.{yaml,yml,json}'] }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
+    # Read and parse all yaml files under <dir> and add them to the
+    # <data> variable.
+    #
+    # dir - The string absolute path of the directory to read.
+    # data - The variable to which data will be added.
+    #
+    # Returns nothing
+    def read_data_to(dir, data)
+      return unless File.directory?(dir) && (!safe || !File.symlink?(dir))
+
+      entries = Dir.chdir(dir) do
+        Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
+      end
 
       entries.each do |entry|
-        path = File.join(source, dir, entry)
+        path = Jekyll.sanitized_path(dir, entry)
         next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
-        self.data[key] = SafeYAML.load_file(path)
+        if File.directory?(path)
+          read_data_to(path, data[key] = {})
+        else
+          data[key] = SafeYAML.load_file(path)
+        end
       end
     end
 
@@ -314,19 +330,23 @@ module Jekyll
     #   "tags"       - The Hash of tag values and Posts.
     #                  See Site#post_attr_hash for type info.
     def site_payload
-      {"jekyll" => { "version" => Jekyll::VERSION },
-       "site"   => Utils.deep_merge_hashes(config,
-         Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-          "time"         => time,
-          "posts"        => posts.sort { |a, b| b <=> a },
-          "pages"        => pages,
-          "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-          "html_pages"   => pages.reject { |page| !page.html? },
-          "categories"   => post_attr_hash('categories'),
-          "tags"         => post_attr_hash('tags'),
-          "collections"  => collections,
-          "documents"    => documents,
-          "data"         => site_data
+      {
+        "jekyll" => {
+          "version" => Jekyll::VERSION,
+          "environment" => Jekyll.env
+        },
+        "site"   => Utils.deep_merge_hashes(config,
+          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
+            "time"         => time,
+            "posts"        => posts.sort { |a, b| b <=> a },
+            "pages"        => pages,
+            "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
+            "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
+            "categories"   => post_attr_hash('categories'),
+            "tags"         => post_attr_hash('tags'),
+            "collections"  => collections,
+            "documents"    => documents,
+            "data"         => site_data
         }))
       }
     end

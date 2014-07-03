@@ -40,6 +40,7 @@ module Jekyll
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'textile_ext'   => 'textile',
 
+      'quiet'         => false,
       'port'          => '4000',
       'host'          => '0.0.0.0',
 
@@ -103,6 +104,10 @@ module Jekyll
       override['source'] || self['source'] || DEFAULTS['source']
     end
 
+    def quiet?(override = {})
+      override['quiet'] || self['quiet'] || DEFAULTS['quiet']
+    end
+
     def safe_load_file(filename)
       case File.extname(filename)
       when '.toml'
@@ -120,10 +125,16 @@ module Jekyll
     #
     # Returns an Array of config files
     def config_files(override)
+      # Be quiet quickly.
+      Jekyll.logger.log_level = :error if quiet?(override)
+
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
       if config_files.to_s.empty?
-        config_files = File.join(source(override), "_config.yml")
+        default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
+          File.exists? Jekyll.sanitized_path(source(override), "_config.#{ext}")
+        end
+        config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
       end
       config_files = [config_files] unless config_files.is_a? Array
@@ -231,6 +242,7 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
+        config[option].map!(&:to_s)
       end
 
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")

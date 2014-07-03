@@ -59,6 +59,7 @@ module Jekyll
       @@mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
+      FileUtils.rm(dest_path) if File.exist?(dest_path)
       FileUtils.cp(path, dest_path)
 
       true

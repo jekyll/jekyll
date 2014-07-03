@@ -1,38 +1,35 @@
 require 'helper'
 
 class TestCommand < Test::Unit::TestCase
-  context "when calling .globs" do
-    context "when non-default dest & source dirs" do
-      setup do
-        @source = source_dir
-        @dest   = dest_dir
-        directory_with_contents(@dest)
-        @globs  = Command.globs(@source, @dest)
-      end
-      should "return an array without the destination dir" do
-        assert @globs.is_a?(Array)
-        assert !@globs.include?(@dest)
-      end
-      teardown do
-        clear_dest
-      end
-    end
-    context "when using default dest dir" do
-      setup do
-        @source = test_dir
-        @dest   = test_dir('_site')
-        directory_with_contents(@dest)
-        @globs  = Command.globs(@source, @dest)
-      end
-      should "return an array without the destination dir" do
-        assert @globs.is_a?(Array)
-        assert !@globs.include?(@dest)
-        @globs.each do |glob|
-           assert !glob.include?(File.basename(@dest))
+  context "when calling .ignore_paths" do
+    context "when source is absolute" do
+      setup { @source = source_dir }
+      should "return an array with regex for destination" do
+        absolute = source_dir('dest')
+        relative = Pathname.new(source_dir('dest')).relative_path_from(Pathname.new('.').expand_path).to_s
+        [absolute, relative].each do |dest|
+          config = build_configs("source" => @source, "destination" => dest)
+          assert Command.ignore_paths(config).include?(/dest/), "failed with destination: #{dest}"
         end
       end
-      teardown do
-        FileUtils.rm_r(@dest)
+    end
+    context "when source is relative" do
+      setup { @source = Pathname.new(source_dir).relative_path_from(Pathname.new('.').expand_path).to_s }
+      should "return an array with regex for destination" do
+        absolute = source_dir('dest')
+        relative = Pathname.new(source_dir('dest')).relative_path_from(Pathname.new('.').expand_path).to_s
+        [absolute, relative].each do |dest|
+          config = build_configs("source" => @source, "destination" => dest)
+          assert Command.ignore_paths(config).include?(/dest/), "failed with destination: #{dest}"
+        end
+      end
+    end
+    context "multiple config files" do
+      should "return an array with regex for config files" do
+        config = build_configs("config"=> ["_config.yaml", "_config2.yml"])
+        ignore_paths = Command.ignore_paths(config)
+        assert ignore_paths.include?(/_config\.yaml/), 'did not include _config.yaml'
+        assert ignore_paths.include?(/_config2\.yml/), 'did not include _config2.yml'
       end
     end
   end

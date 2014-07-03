@@ -7,8 +7,8 @@
 * **テストなしではコントリビュートはできません。**
 * もし、既存の機能への小さな修正やパッチを作成したなら、シンプルなテストを行います。
   現在のテストスイートの範囲にとどまり、そして
-  [Shoulda](http://github.com/thoughtbot/shoulda/tree/master) や
-  [RR](http://github.com/btakita/rr/tree/master) を使用してください。
+  [Shoulda](https://github.com/thoughtbot/shoulda/tree/master) や
+  [RR](https://github.com/btakita/rr/tree/master) を使用してください。
 * もし、それが新しい機能の場合は、必ず新しい
   [Cucumber](https://github.com/cucumber/cucumber/) の機能を作成し、
   必要に応じて手順を再利用します。

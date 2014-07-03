@@ -141,7 +141,7 @@ end
 
 When /^I run jekyll(.*)$/ do |args|
   status = run_jekyll(args)
-  if !status || args.include?("--verbose")
+  if args.include?("--verbose") || ENV['DEBUG']
     puts jekyll_run_output
   end
 end
@@ -194,4 +194,8 @@ end
 
 Then /^I should see today's date in "(.*)"$/ do |file|
   assert_match Regexp.new(Date.today.to_s), file_contents(file)
+end
+
+Then /^I should see "(.*)" in the build output$/ do |text|
+  assert_match Regexp.new(text), jekyll_run_output
 end

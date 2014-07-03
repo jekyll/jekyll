@@ -56,6 +56,54 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
+As for posts with [Permalinks](../Permalinks/), document URL can be customized by setting a `permalink` metadata to the collection:
+
+{% highlight yaml %}
+collections:
+  my_collection:
+    output: true
+    permalink: /awesome/:path/
+{% endhighlight %}
+
+For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>collection</code></p>
+      </td>
+      <td>
+        <p>Label of the containing collection</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>path</code></p>
+      </td>
+      <td>
+        <p>Path to the document relative to the collection's directory</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>output_ext</code></p>
+      </td>
+      <td>
+        <p>Extension of the output file</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 ## Liquid Attributes
 
 ### Collections
@@ -109,7 +157,7 @@ The collections are also available under `site.collections`, with the metadata y
       </td>
       <td>
         <p>
-          The full path to the collections's source directory..
+          The full path to the collections's source directory.
         </p>
       </td>
     </tr>
@@ -193,6 +241,16 @@ In addition to any YAML front-matter provided in the document's corresponding fi
           The URL of the rendered collection. The file is only written to the
           destination when the name of the collection to which it belongs is
           included in the <code>render</code> key in the site's configuration file.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>collection</code></p>
+      </td>
+      <td>
+        <p>
+          The name of the document's collection.
         </p>
       </td>
     </tr>

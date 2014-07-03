@@ -1,6 +1,3 @@
-require 'coveralls'
-Coveralls.wear_merged!
-
 require 'fileutils'
 require 'rr'
 require 'test/unit'

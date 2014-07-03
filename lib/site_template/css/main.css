@@ -234,6 +234,7 @@ a:visited { color: #205caa; }
   -moz-border-radius: 3px;
   border-radius: 3px;
   font-size: 15px;
+  overflow:scroll;
 }
 
 .post code { padding: 1px 5px; }

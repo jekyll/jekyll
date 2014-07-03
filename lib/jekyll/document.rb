@@ -88,11 +88,19 @@ module Jekyll
       !(asset_file? || yaml_file?)
     end
 
+    # Determine whether the file should be placed into layouts.
+    #
+    # Returns false if the document is either an asset file or a yaml file,
+    #   true otherwise.
+    def place_in_layout?
+      !(asset_file? || yaml_file?)
+    end
+
     # The URL template where the document would be accessible.
     #
     # Returns the URL template for the document.
     def url_template
-      "/:collection/:path:output_ext"
+      collection.url_template
     end
 
     # Construct a Hash of key-value pairs which contain a mapping between
@@ -168,6 +176,8 @@ module Jekyll
     end
 
     # Read in the file and assign the content and data based on the file contents.
+    # Merge the frontmatter of the file with the frontmatter default
+    # values
     #
     # Returns nothing.
     def read(opts = {})
@@ -175,10 +185,17 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
+          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
+          unless defaults.empty?
+            @data = defaults
+          end
           @content = File.read(path, merged_file_read_opts(opts))
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
             @content = $POSTMATCH
-            @data    = SafeYAML.load($1)
+            data_file = SafeYAML.load($1)
+            unless data_file.nil?
+              @data = Utils.deep_merge_hashes(defaults, data_file)
+            end
           end
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"
@@ -198,7 +215,8 @@ module Jekyll
           "content"       => content,
           "path"          => path,
           "relative_path" => relative_path,
-          "url"           => url
+          "url"           => url,
+          "collection"    => collection.label
         }
       else
         data

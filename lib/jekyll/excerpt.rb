@@ -26,7 +26,7 @@ module Jekyll
     end
 
     def to_liquid
-      post.to_liquid(Post::EXCERPT_ATTRIBUTES_FOR_LIQUID)
+      post.to_liquid(post.class::EXCERPT_ATTRIBUTES_FOR_LIQUID)
     end
 
     # Fetch YAML front-matter data from related post, without layout key

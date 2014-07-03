@@ -5,7 +5,6 @@
 [![Build Status](https://secure.travis-ci.org/jekyll/jekyll.png?branch=master)](https://travis-ci.org/jekyll/jekyll)
 [![Code Climate](https://codeclimate.com/github/jekyll/jekyll.png)](https://codeclimate.com/github/jekyll/jekyll)
 [![Dependency Status](https://gemnasium.com/jekyll/jekyll.png)](https://gemnasium.com/jekyll/jekyll)
-[![Coverage Status](https://coveralls.io/repos/jekyll/jekyll/badge.png)](https://coveralls.io/r/jekyll/jekyll)
 
 Tom Preston-Werner, Nick Quaranto や多くの[素晴らしいコントリビュータ](https://github.com/jekyll/jekyll/graphs/contributors)によって作成されています！
 
@@ -28,7 +27,7 @@ Jekyll あなたがするように伝えたことをします ― それ以上�
 
 * gem を[インストール](http://jekyllrb.com/docs/installation/)します
 * [使用方法](http://jekyllrb.com/docs/usage/) と [設定方法](http://jekyllrb.com/docs/configuration/) を読みます
-* 既存の [Jekyll で作られたサイト](http://wiki.github.com/jekyll/jekyll/sites) をチラッと見ます
+* 既存の [Jekyll で作られたサイト](https://wiki.github.com/jekyll/jekyll/sites) をチラッと見ます
 * Fork し、あなたの変更を [コントリビュート](http://jekyllrb.com/docs/contributing/) します
 * 質問があったら？ irc.freenode.net の `#jekyll` チャンネルをチェックしてください
 

@@ -14,7 +14,7 @@ require 'jekyll/version'
 #############################################################################
 
 def name
-  @name ||= Dir['*.gemspec'].first.split('.').first
+  @name ||= File.basename(Dir['*.gemspec'].first, ".*")
 end
 
 def version
@@ -68,14 +68,7 @@ end
 #
 #############################################################################
 
-if ENV["TRAVIS"] == "true"
-  require 'coveralls/rake/task'
-  Coveralls::RakeTask.new
-
-  task :default => [:test, :features, 'coveralls:push']
-else
-  task :default => [:test, :features]
-end
+task :default => [:test, :features]
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
@@ -235,6 +228,7 @@ end
 #
 #############################################################################
 
+desc "Release #{name} v#{version}"
 task :release => :build do
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
@@ -247,6 +241,7 @@ task :release => :build do
   sh "gem push pkg/#{name}-#{version}.gem"
 end
 
+desc "Build #{name} v#{version} into pkg/"
 task :build do
   mkdir_p "pkg"
   sh "gem build #{gemspec_file}"

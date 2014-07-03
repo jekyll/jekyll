@@ -43,7 +43,7 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name, opts = {})
       begin
-        self.content = File.read(File.join(base, name),
+        self.content = File.read(Jekyll.sanitized_path(base, name),
                                  merged_file_read_opts(opts))
         if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
@@ -114,6 +114,10 @@ module Jekyll
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
     end
 
+    # The type of a document,
+    #   i.e., its classname downcase'd and to_sym'd.
+    #
+    # Returns the type of self.
     def type
       if is_a?(Post)
         :post
@@ -122,6 +126,31 @@ module Jekyll
       elsif is_a?(Draft)
         :draft
       end
+    end
+
+    # Determine whether the document is an asset file.
+    # Asset files include CoffeeScript files and Sass/SCSS files.
+    #
+    # Returns true if the extname belongs to the set of extensions
+    #   that asset files use.
+    def asset_file?
+      %w[.sass .scss .coffee].include?(ext)
+    end
+
+    # Determine whether the file should be rendered with Liquid.
+    #
+    # Returns false if the document is either an asset file or a yaml file,
+    #   true otherwise.
+    def render_with_liquid?
+      !asset_file?
+    end
+
+    # Determine whether the file should be placed into layouts.
+    #
+    # Returns false if the document is either an asset file or a yaml file,
+    #   true otherwise.
+    def place_in_layout?
+      !asset_file?
     end
 
     # Recursively render layouts
@@ -167,13 +196,13 @@ module Jekyll
       payload["highlighter_prefix"] = converter.highlighter_prefix
       payload["highlighter_suffix"] = converter.highlighter_suffix
 
-      self.content = render_liquid(content, payload, info)
+      self.content = render_liquid(content, payload, info) if render_with_liquid?
       transform
 
       # output keeps track of what will finally be written
       self.output = content
 
-      render_all_layouts(layouts, payload, info)
+      render_all_layouts(layouts, payload, info) if place_in_layout?
     end
 
     # Write the generated page file to the destination directory.

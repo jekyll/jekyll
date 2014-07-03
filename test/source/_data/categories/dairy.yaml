@@ -1,0 +1,6 @@
+name: Dairy
+products:
+- name: cheese
+  price: 5.3
+- name: milk
+  price: 2.5

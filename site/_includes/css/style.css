@@ -590,6 +590,10 @@ article h2:first-child {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9e2812', endColorstr='#6f0d0d',GradientType=0 );
 }
 
+.post-content img {
+  max-width: 100%
+}
+
 .label {
   float: left;
   text-transform: uppercase;
@@ -695,6 +699,7 @@ pre, code {
 }
 
 .highlight {
+  margin: 1em 0;
   padding: 10px 0;
   width: 100%;
   overflow: auto;

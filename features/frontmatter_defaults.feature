@@ -77,3 +77,60 @@ Feature: frontmatter defaults
     Then I should see "a blog by some guy" in "_site/frontmatter.html"
     And I should see "nothing" in "_site/override.html"
     But the "_site/perma.html" file should not exist
+
+  Scenario: Use frontmatter defaults in collections
+    Given I have a _slides directory
+    And I have a "index.html" file that contains "nothing"
+    And I have a "_slides/slide1.html" file with content: 
+    """
+    Value: {{ page.myval }}
+    """
+    And I have a "_config.yml" file with content:
+    """
+      collections:
+        slides:
+          output: true
+      defaults:
+        -
+          scope:
+            path: ""
+            type: slides
+          values:
+            myval: "Test"
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Value: Test" in "_site/slides/slide1.html"
+
+  Scenario: Override frontmatter defaults inside a collection
+    Given I have a _slides directory
+    And I have a "index.html" file that contains "nothing"
+    And I have a "_slides/slide2.html" file with content: 
+    """
+    ---
+    myval: Override
+    ---
+    Value: {{ page.myval }}
+    """
+    And I have a "_config.yml" file with content:
+    """
+      collections:
+        slides:
+          output: true
+      defaults:
+        -
+          scope:
+            path: ""
+            type: slides
+          values:
+            myval: "Test"
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Value: Override" in "_site/slides/slide2.html"
+
+  Scenario: Deep merge frontmatter defaults
+    Given I have an "index.html" page with fruit "{orange: 1}" that contains "Fruits: {{ page.fruit.orange | plus: page.fruit.apple }}"
+    And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {fruit: {apple: 2}}}]"
+    When I run jekyll build
+    Then I should see "Fruits: 3" in "_site/index.html"

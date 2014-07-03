@@ -86,6 +86,17 @@ class TestExcerpt < Test::Unit::TestCase
         assert_equal %w[first second third jekyllrb.com], @excerpt.to_liquid["tags"]
         assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown", @excerpt.to_liquid["path"]
       end
+
+      should "consider inheritance" do
+        klass = Class.new(Jekyll::Post)
+        assert_gets_called = false
+        klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
+        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
+        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        Jekyll::Excerpt.new(post).to_liquid
+
+        assert assert_gets_called, 'assert_gets_called did not get called on post.'
+      end
     end
 
     context "#content" do

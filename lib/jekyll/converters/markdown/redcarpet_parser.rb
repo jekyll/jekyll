@@ -67,8 +67,15 @@ module Jekyll
                           end
                         when 'rouge'
                           Class.new(Redcarpet::Render::HTML) do
-                            require 'rouge'
-                            require 'rouge/plugins/redcarpet'
+                            begin
+                              require 'rouge'
+                              require 'rouge/plugins/redcarpet'
+                            rescue LoadError => e
+                              Jekyll.logger.error "You are missing the 'rouge' gem. Please run:"
+                              Jekyll.logger.error " $ [sudo] gem install rouge"
+                              Jekyll.logger.error "Or add 'rouge' to your Gemfile."
+                              raise FatalException.new("Missing dependency: rouge")
+                            end
 
                             if Rouge.version < '1.3.0'
                               abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."

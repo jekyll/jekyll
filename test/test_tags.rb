@@ -75,7 +75,13 @@ CONTENT
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
-
+      
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos=3', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
+      
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos="3 5 6"', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
+      
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
     end
@@ -91,11 +97,11 @@ CONTENT
     end
 
     should "render markdown with pygments" do
-      assert_match %{<pre><code class="text">test</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">test</code></pre>}, @result
     end
 
     should "render markdown with pygments with line numbers" do
-      assert_match %{<pre><code class="text"><span class="lineno">1</span> test</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> test</code></pre>}, @result
     end
   end
 
@@ -105,7 +111,7 @@ CONTENT
     end
 
     should "not embed the file" do
-      assert_match %{<pre><code class="text">./jekyll.gemspec</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>}, @result
     end
   end
 
@@ -115,7 +121,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre><code class="text">Æ</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">Æ</code></pre>}, @result
     end
   end
 
@@ -255,115 +261,6 @@ CONTENT
 
       assert_raise ArgumentError do
         create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
-      end
-    end
-  end
-
-  context "gist tag" do
-    context "simple" do
-      setup do
-        @gist = 358471
-        content = <<CONTENT
----
-title: My Cool Gist
----
-
-{% gist #{@gist} %}
-CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
-      end
-
-      should "write script tag" do
-        assert_match "<script src=\"https://gist.github.com/#{@gist}.js\">\s</script>", @result
-      end
-    end
-
-    context "for private gist" do
-      context "when valid" do
-        setup do
-          @gist = "mattr-/24081a1d93d2898ecf0f"
-          @filename = "myfile.ext"
-          content = <<CONTENT
-  ---
-  title: My Cool Gist
-  ---
-
-  {% gist #{@gist} #{@filename} %}
-CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
-        end
-
-        should "write script tag with specific file in gist" do
-          assert_match "<script src=\"https://gist.github.com/#{@gist}.js?file=#{@filename}\">\s</script>", @result
-        end
-      end
-
-      should "raise ArgumentError when invalid" do
-        @gist = "mattr-24081a1d93d2898ecf0f"
-        @filename = "myfile.ext"
-        content = <<CONTENT
-  ---
-  title: My Cool Gist
-  ---
-
-  {% gist #{@gist} #{@filename} %}
-CONTENT
-
-        assert_raise ArgumentError do
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
-        end
-      end
-    end
-
-    context "with specific file" do
-      setup do
-        @gist = 358471
-        @filename = 'somefile.rb'
-        content = <<CONTENT
----
-title: My Cool Gist
----
-
-{% gist #{@gist} #{@filename} %}
-CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
-      end
-
-      should "write script tag with specific file in gist" do
-        assert_match "<script src=\"https://gist.github.com/#{@gist}.js?file=#{@filename}\">\s</script>", @result
-      end
-    end
-
-    context "with blank gist id" do
-      should "raise ArgumentError" do
-        content = <<CONTENT
----
-title: My Cool Gist
----
-
-{% gist %}
-CONTENT
-
-        assert_raise ArgumentError do
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
-        end
-      end
-    end
-
-    context "with invalid gist id" do
-      should "raise ArgumentError" do
-        invalid_gist = 'invalid'
-        content = <<CONTENT
----
-title: My Cool Gist
----
-
-{% gist #{invalid_gist} %}
-CONTENT
-
-        assert_raise ArgumentError do
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
-        end
       end
     end
   end

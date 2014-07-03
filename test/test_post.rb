@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'helper'
 
 class TestPost < Test::Unit::TestCase
@@ -98,6 +100,14 @@ class TestPost < Test::Unit::TestCase
         @post.process("2014-03-22-escape-+ %20[].markdown")
         assert_equal "/2014/03/22/escape-+%20%2520%5B%5D.html", @post.url
         assert_equal "/2014/03/22/escape-+ %20[]", @post.id
+      end
+
+      should "return a UTF-8 escaped string" do
+        assert_equal Encoding::UTF_8, URL.escape_path("/rails笔记/2014/04/20/escaped/").encoding
+      end
+
+      should "return a UTF-8 unescaped string" do
+        assert_equal Encoding::UTF_8, URL.unescape_path("/rails%E7%AC%94%E8%AE%B0/2014/04/20/escaped/".encode(Encoding::ASCII)).encoding
       end
 
       should "respect permalink in yaml front matter" do
@@ -450,6 +460,17 @@ class TestPost < Test::Unit::TestCase
         assert_equal Time, post.to_liquid["date"].class
       end
 
+      should "to_liquid should consider inheritance" do
+        klass = Class.new(Jekyll::Post)
+        assert_gets_called = false
+        klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
+        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
+        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        do_render(post)
+
+        assert assert_gets_called, 'assert_gets_called did not get called on post.'
+      end
+
       should "recognize category in yaml" do
         post = setup_post("2009-01-27-category.textile")
         assert post.categories.include?('foo')
@@ -644,6 +665,62 @@ class TestPost < Test::Unit::TestCase
       assert conv.kind_of? Jekyll::Converters::Textile
     end
 
+  end
+
+  context "site config with category" do
+    setup do
+      config = Jekyll::Configuration::DEFAULTS.merge({
+        'defaults' => [
+          'scope' => {
+            'path' => ''
+          },
+          'values' => {
+            'category' => 'article'
+          }
+        ]
+      })
+      @site = Site.new(config)
+    end
+
+    should "return category if post does not specify category" do
+      post = setup_post("2009-01-27-no-category.textile")
+      assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
+    end
+
+    should "override site category if set on post" do
+      post = setup_post("2009-01-27-category.textile")
+      assert post.categories.include?('foo'), "Expected post.categories to include 'foo' but did not."
+      assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
+    end
+  end
+
+  context "site config with categories" do
+    setup do
+      config = Jekyll::Configuration::DEFAULTS.merge({
+        'defaults' => [
+          'scope' => {
+            'path' => ''
+          },
+          'values' => {
+            'categories' => ['article']
+          }
+        ]
+      })
+      @site = Site.new(config)
+    end
+
+    should "return categories if post does not specify categories" do
+      post = setup_post("2009-01-27-no-category.textile")
+      assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
+    end
+
+    should "override site categories if set on post" do
+      post = setup_post("2009-01-27-categories.textile")
+      ['foo', 'bar', 'baz'].each do |category|
+        assert post.categories.include?(category), "Expected post.categories to include '#{category}' but did not."
+      end
+      assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
+    end
   end
 
 end

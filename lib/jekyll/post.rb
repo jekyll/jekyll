@@ -77,10 +77,10 @@ module Jekyll
     end
 
     def populate_categories
-      if categories.empty?
-        self.categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
-      end
-      categories.flatten!
+      categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
+      self.categories = (
+        Array(categories) + categories_from_data
+      ).map {|c| c.to_s.downcase}.flatten.uniq
     end
 
     def populate_tags
@@ -256,7 +256,7 @@ module Jekyll
       # construct payload
       payload = Utils.deep_merge_hashes({
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => to_liquid(EXCERPT_ATTRIBUTES_FOR_LIQUID)
+        "page" => to_liquid(self.class::EXCERPT_ATTRIBUTES_FOR_LIQUID)
       }, site_payload)
 
       if generate_excerpt?

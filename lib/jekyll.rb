@@ -21,6 +21,7 @@ require 'time'
 require 'safe_yaml/load'
 require 'English'
 require 'pathname'
+require 'logger'
 
 # 3rd party
 require 'liquid'
@@ -31,6 +32,7 @@ require 'toml'
 # internal requires
 require 'jekyll/version'
 require 'jekyll/utils'
+require 'jekyll/log_adapter'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
 require 'jekyll/configuration'
@@ -72,10 +74,21 @@ require_all 'jekyll/tags'
 # plugins
 require 'jekyll-coffeescript'
 require 'jekyll-sass-converter'
+require 'jekyll-paginate'
+require 'jekyll-gist'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
+
+  # Public: Tells you which Jekyll environment you are building in so you can skip tasks
+  # if you need to.  This is useful when doing expensive compression tasks on css and
+  # images and allows you to skip that when working in development.
+
+  def self.env
+    ENV["JEKYLL_ENV"] || "development"
+  end
+
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
   #
@@ -106,7 +119,11 @@ module Jekyll
   end
 
   def self.logger
-    @logger ||= Stevenson.new
+    @logger ||= LogAdapter.new(Stevenson.new)
+  end
+
+  def self.logger=(writer)
+    @logger = LogAdapter.new(writer)
   end
 
   # Public: File system root

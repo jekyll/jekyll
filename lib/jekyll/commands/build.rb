@@ -22,19 +22,23 @@ module Jekyll
         # Build your jekyll site
         # Continuously watch if `watch` is set to true in the config.
         def process(options)
+          Jekyll.logger.log_level = :error if options['quiet']
+
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
 
-          Jekyll.logger.log_level = :error if options['quiet']
-
-          build(site, options)
+          if options.fetch('skip_initial_build', false)
+            Jekyll.logger.warn "Build Warning:", "Skipping the initial build. This may result in an out-of-date site."
+          else
+            build(site, options)
+          end
           watch(site, options) if options['watch']
         end
 
         # Build your Jekyll site.
         #
         # site - the Jekyll::Site instance to build
-        # options - the
+        # options - A Hash of options passed to the command
         #
         # Returns nothing.
         def build(site, options)
@@ -54,49 +58,8 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
-          require 'listen'
-
-          source      = options['source']
-          destination = options['destination']
-
-          begin
-            dest    = Pathname.new(destination).relative_path_from(Pathname.new(source)).to_s
-            ignored = Regexp.new(Regexp.escape(dest))
-          rescue ArgumentError
-            # Destination is outside the source, no need to ignore it.
-            ignored = nil
-          end
-
-          listener = Listen.to(
-            source,
-            :ignore => ignored,
-            :force_polling => options['force_polling']
-          ) do |modified, added, removed|
-            t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-            n = modified.length + added.length + removed.length
-            print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
-            begin
-              process_site(site)
-              puts  "...done."
-            rescue => e
-              puts "...error:"
-              Jekyll.logger.warn "Error:", e.message
-              Jekyll.logger.warn "Error:", "Run jekyll build --trace for more information."
-            end
-          end
-          listener.start
-
-          Jekyll.logger.info "Auto-regeneration:", "enabled"
-
-          unless options['serving']
-            trap("INT") do
-              listener.stop
-              puts "     Halting auto-regeneration."
-              exit 0
-            end
-
-            loop { sleep 1000 }
-          end
+          require 'jekyll-watch'
+          Jekyll::Commands::Watch.watch(site, options)
         end
 
       end # end of class << self
