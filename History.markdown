@@ -13,6 +13,7 @@
 ### Site Enhancements
 
   * Add vertical margin to `highlight` to separate code blocks (#2558)
+  * Add `html_pages` to Variables docs (#2567)
 
 ## 2.1.0 / 2014-06-28
 
