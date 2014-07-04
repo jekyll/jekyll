@@ -123,6 +123,30 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
+      <td><p><code>site.html_pages</code></p></td>
+      <td><p>
+
+        A list of all HTML Pages.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.collections</code></p></td>
+      <td><p>
+
+        A list of all the collections.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.data</code></p></td>
+      <td><p>
+
+        A list containing the data loaded from the YAML files located in the <code>_data</code> directory.
+
+      </p></td>
+    </tr>
+    <tr>
       <td><p><code>site.documents</code></p></td>
       <td><p>
 
