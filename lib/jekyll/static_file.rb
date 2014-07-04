@@ -60,7 +60,11 @@ module Jekyll
 
       FileUtils.mkdir_p(File.dirname(dest_path))
       FileUtils.rm(dest_path) if File.exist?(dest_path)
-      FileUtils.cp(path, dest_path)
+      begin
+        FileUtils.ln(path, dest_path)
+      rescue
+        FileUtils.cp(path, dest_path)
+      end
 
       true
     end
