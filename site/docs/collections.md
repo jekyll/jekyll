@@ -56,7 +56,7 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
-As for posts with [Permalinks](../Permalinks/), document URL can be customized by setting a `permalink` metadata to the collection:
+As for posts with [Permalinks](../permalinks/), document URL can be customized by setting a `permalink` metadata to the collection:
 
 {% highlight yaml %}
 collections:
