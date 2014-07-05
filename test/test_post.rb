@@ -31,13 +31,13 @@ class TestPost < Test::Unit::TestCase
       post = setup_post('2013-12-20-properties.text')
 
       attrs = {
-        categories: %w(foo bar baz),
+        categories: %w(foo bar baz MixedCase),
         content: "All the properties.\n\nPlus an excerpt.\n",
         date: Time.new(2013, 12, 20),
-        dir: "/foo/bar/baz/2013/12/20",
+        dir: "/foo/bar/baz/mixedcase/2013/12/20",
         excerpt: "All the properties.\n\n",
         foo: 'bar',
-        id: "/foo/bar/baz/2013/12/20/properties",
+        id: "/foo/bar/baz/mixedcase/2013/12/20/properties",
         layout: 'default',
         name: nil,
         path: "_posts/2013-12-20-properties.text",
@@ -45,7 +45,7 @@ class TestPost < Test::Unit::TestCase
         published: nil,
         tags: %w(ay bee cee),
         title: 'Properties Post',
-        url: "/foo/bar/baz/2013/12/20/properties.html"
+        url: "/foo/bar/baz/mixedcase/2013/12/20/properties.html"
       }
 
       attrs.each do |attr, val|
@@ -253,14 +253,26 @@ class TestPost < Test::Unit::TestCase
 
         context "with space (categories)" do
           setup do
-            @post.categories << "French cuisine"
-            @post.categories << "Belgian beer"
+            @post.categories << "french cuisine"
+            @post.categories << "belgian beer"
             @post.process(@fake_file)
           end
 
           should "process the url correctly" do
             assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
-            assert_equal "/French%20cuisine/Belgian%20beer/2008/09/09/foo-bar.html", @post.url
+            assert_equal "/french%20cuisine/belgian%20beer/2008/09/09/foo-bar.html", @post.url
+          end
+        end
+
+        context "with mixed case (category)" do
+          setup do
+            @post.categories << "MixedCase"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/mixedcase/2008/09/09/foo-bar.html", @post.url
           end
         end
 
@@ -517,6 +529,12 @@ class TestPost < Test::Unit::TestCase
         assert !post.categories.include?(2013)
       end
 
+      should "recognize mixed case category in yaml" do
+        post = setup_post("2014-07-05-mixed-case-category.markdown")
+        assert post.categories.include?('MixedCase')
+        assert !post.categories.include?('mixedcase')
+      end
+
       should "recognize tag in yaml" do
         post = setup_post("2009-05-18-tag.textile")
         assert post.tags.include?('code')
@@ -587,6 +605,20 @@ class TestPost < Test::Unit::TestCase
           assert File.directory?(dest_dir)
           assert File.exist?(File.join(dest_dir, '2014', '03', '22',
                                         'escape-+ %20[].html'))
+        end
+
+        should "write properly when category has different letter case" do
+          %w(2014-07-05-mixed-case-category.markdown 2014-07-05-another-mixed-case-category.markdown).each do |file|
+            post = setup_post(file)
+            do_render(post)
+            post.write(dest_dir)
+          end
+
+          assert File.directory?(dest_dir)
+          assert File.exist?(File.join(dest_dir, 'mixedcase', '2014', '07', '05',
+                                        'mixed-case-category.html'))
+          assert File.exist?(File.join(dest_dir, 'mixedcase', '2014', '07', '05',
+                                        'another-mixed-case-category.html'))
         end
 
         should "write properly without html extension" do

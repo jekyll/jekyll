@@ -52,7 +52,7 @@ module Jekyll
       @base = containing_dir(source, dir)
       @name = name
 
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
+      self.categories = dir.split('/').reject { |x| x.empty? }
       process(name)
       read_yaml(@base, name)
 
@@ -80,7 +80,7 @@ module Jekyll
       categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
       self.categories = (
         Array(categories) + categories_from_data
-      ).map {|c| c.to_s.downcase}.flatten.uniq
+      ).map { |c| c.to_s }.flatten.uniq
     end
 
     def populate_tags
@@ -218,7 +218,7 @@ module Jekyll
         :title       => slug,
         :i_day       => date.strftime("%-d"),
         :i_month     => date.strftime("%-m"),
-        :categories  => (categories || []).map { |c| c.to_s }.join('/'),
+        :categories  => (categories || []).map { |c| c.to_s.downcase }.join('/'),
         :short_month => date.strftime("%b"),
         :short_year  => date.strftime("%y"),
         :y_day       => date.strftime("%j"),

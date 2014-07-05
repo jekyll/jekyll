@@ -1,5 +1,5 @@
 ---
-categories: foo bar baz
+categories: foo bar baz MixedCase
 foo: bar
 layout: default
 tags: ay bee cee
