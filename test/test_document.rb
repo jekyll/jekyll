@@ -165,6 +165,23 @@ class TestDocument < Test::Unit::TestCase
     end
   end
 
+  context "a document in a collection with a custom permalink" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs[2]
+    end
+
+    should "know its permalink" do
+      assert_equal @document.permalink, "/slide/3"
+    end
+  end
+
+
   context " a document part of a rendered collection" do
   end
 
