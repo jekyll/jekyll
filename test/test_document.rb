@@ -179,11 +179,10 @@ class TestDocument < Test::Unit::TestCase
 
     should "know its permalink" do
       assert_equal "/slide/3/", @document.permalink
-      assert_equal "/slide/3/index.html", @document.url
     end
 
-    should "be written to its permalink" do
-      assert File.exist?(@dest_file), "Can't find the rendered file in the dest_dir."
+    should "produce the right URL" do
+      assert_equal "/slide/3/", @document.url
     end
   end
 
