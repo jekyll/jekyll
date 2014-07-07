@@ -174,10 +174,16 @@ class TestDocument < Test::Unit::TestCase
       }))
       @site.process
       @document = @site.collections["slides"].docs[2]
+      @dest_file = dest_dir("slide/3/index.html")
     end
 
     should "know its permalink" do
-      assert_equal @document.permalink, "/slide/3"
+      assert_equal "/slide/3/", @document.permalink
+      assert_equal "/slide/3/index.html", @document.url
+    end
+
+    should "be written to its permalink" do
+      assert File.exist?(@dest_file), "Can't find the rendered file in the dest_dir."
     end
   end
 
