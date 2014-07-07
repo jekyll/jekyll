@@ -218,7 +218,7 @@ module Jekyll
         :title       => slug,
         :i_day       => date.strftime("%-d"),
         :i_month     => date.strftime("%-m"),
-        :categories  => (categories || []).map { |c| c.to_s.downcase }.join('/'),
+        :categories  => (categories || []).map { |c| c.to_s.downcase }.uniq.join('/'),
         :short_month => date.strftime("%b"),
         :short_year  => date.strftime("%y"),
         :y_day       => date.strftime("%j"),
