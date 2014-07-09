@@ -94,7 +94,8 @@ The organizations can then be accessed via `site.data.orgs`, followed by the fil
 {% highlight html %}
 {% raw %}
 <ul>
-{% for org in site.data.orgs %}
+{% for org_hash in site.data.orgs %}
+{% assign org = org_hash[1] %}
   <li>
     <a href="https://github.com/{{ org.username }}">
       {{ org.name }}
