@@ -29,7 +29,7 @@ the site generation process. It can be done with the following command:
 $ chcp 65001
 {% endhighlight %}
 
-[windows-installation]: https://github.com/juthilo/run-jekyll-on-windows
+[windows-installation]: http://jekyll-windows.juthilo.com/
 
 ## Auto-regeneration
 
