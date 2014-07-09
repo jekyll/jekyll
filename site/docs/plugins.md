@@ -540,6 +540,7 @@ You can find a few useful plugins at the following locations:
 - [grunt-jekyll](https://github.com/dannygarcia/grunt-jekyll): A straightforward [Grunt](http://gruntjs.com/) plugin for Jekyll.
 - [jekyll-postfiles](https://github.com/indirect/jekyll-postfiles): Add `_postfiles` directory and {% raw %}`{{ postfile }}`{% endraw %} tag so the files a post refers to will always be right there inside your repo.
 - [A layout that compresses HTML](https://github.com/penibelst/jekyll-compress-html) by [Anatol Broder](http://penibelst.de/): Github Pages compatible, configurable way to compress HTML files on site build.
+- [jekyll-git-last-modified](https://github.com/nquinlan/jekyll-git-last-modified) by  [Nick Quinlan](http://nicholasquinlan.com): A utility for Jekyll sites under git to add accurate last modified dates to pages and posts that may then be used in templates or by other plugins.
 
 #### Editors
 
