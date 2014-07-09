@@ -15,6 +15,7 @@
   * Add vertical margin to `highlight` to separate code blocks (#2558)
   * Add `html_pages` to Variables docs (#2567)
   * Fixed broken link to Permalinks page (#2572)
+  * Update link to Windows installation guide (#2578)
 
 ## 2.1.0 / 2014-06-28
 
