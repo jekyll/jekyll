@@ -5,6 +5,21 @@ permalink: "/docs/history/"
 prev_section: contributing
 ---
 
+## 2.1.1 / 2014-07-01
+
+### Bug Fixes
+
+- Patch read vulnerabilities for data & confirm none for layouts ([#2563]({{ site.repository }}/issues/2563))
+- Update Maruku dependency to allow use of the latest version ([#2576]({{ site.repository }}/issues/2576))
+- Remove conditional assignment from document URL to prevent stale urls ([#2575]({{ site.repository }}/issues/2575))
+
+### Site Enhancements
+
+- Add vertical margin to `highlight` to separate code blocks ([#2558]({{ site.repository }}/issues/2558))
+- Add `html_pages` to Variables docs ([#2567]({{ site.repository }}/issues/2567))
+- Fixed broken link to Permalinks page ([#2572]({{ site.repository }}/issues/2572))
+- Update link to Windows installation guide ([#2578]({{ site.repository }}/issues/2578))
+
 ## 2.1.0 / 2014-06-28
 
 ### Minor Enhancements
