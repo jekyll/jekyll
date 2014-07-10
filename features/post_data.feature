@@ -94,6 +94,18 @@ Feature: Post data
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/film/scifi/2009/03/27/star-wars.html"
 
+  Scenario: Use post.categories variable when category is in a folder and duplicated category is in YAML
+    Given I have a movies directory
+    And I have a movies/_posts directory
+    And I have a _layouts directory
+    And I have the following post in "movies":
+      | title     | date       | layout | category | content                 |
+      | Star Wars | 2009-03-27 | simple | movies   | Luke, I am your father. |
+    And I have a simple layout that contains "Post category: {{ page.categories }}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
+
   Scenario: Use post.tags variable
     Given I have a _posts directory
     And I have a _layouts directory
@@ -163,6 +175,17 @@ Feature: Post data
     When I run jekyll build
     Then the _site directory should exist
     And I should see "Post categories: scifi and movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
+
+  Scenario: Use post.categories variable when categories are in YAML and are duplicated
+    Given I have a _posts directory
+    And I have a _layouts directory
+    And I have the following post:
+      | title     | date       | layout | categories           | content                 |
+      | Star Wars | 2009-03-27 | simple | ['movies', 'movies'] | Luke, I am your father. |
+    And I have a simple layout that contains "Post category: {{ page.categories }}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
 
   Scenario: Use post.categories variable when categories are in YAML with mixed case
     Given I have a _posts directory
