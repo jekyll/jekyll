@@ -5,6 +5,7 @@
 ### Minor Enhancements
 
   * Patch read vulnerabilities for data & confirm none for layouts (#2563)
+  * Update Maruku dependency to allow use of the latest version (#2576)
 
 ### Bug Fixes
 
