@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rr', "~> 1.1")
   s.add_development_dependency('cucumber', "1.3.11")
   s.add_development_dependency('RedCloth', "~> 4.2")
-  s.add_development_dependency('maruku', "0.7.0")
+  s.add_development_dependency('maruku', "~> 0.7.0")
   s.add_development_dependency('rdiscount', "~> 1.6")
   s.add_development_dependency('launchy', "~> 2.3")
   s.add_development_dependency('simplecov', "~> 0.7")
