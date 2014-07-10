@@ -141,16 +141,16 @@ Feature: Post data
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
 
-  Scenario: Use post.categories variable when category is in YAML
+  Scenario: Use post.categories variable when categories are in YAML
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date       | layout | category | content                 |
-      | Star Wars | 2009-03-27 | simple | movies   | Luke, I am your father. |
-    And I have a simple layout that contains "Post category: {{ page.categories }}"
+      | title     | date       | layout | categories          | content                 |
+      | Star Wars | 2009-03-27 | simple | ['scifi', 'movies'] | Luke, I am your father. |
+    And I have a simple layout that contains "Post categories: {{ page.categories | array_to_sentence_string }}"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
+    And I should see "Post categories: scifi and movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
 
   Scenario: Use post.categories variable when categories are in YAML with mixed case
     Given I have a _posts directory
