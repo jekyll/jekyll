@@ -70,17 +70,29 @@ Feature: Post data
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
 
+  Scenario: Use post.categories variable when category is in a folder and has category in YAML
+    Given I have a movies directory
+    And I have a movies/_posts directory
+    And I have a _layouts directory
+    And I have the following post in "movies":
+      | title     | date       | layout | category | content                 |
+      | Star Wars | 2009-03-27 | simple | film     | Luke, I am your father. |
+    And I have a simple layout that contains "Post category: {{ page.categories }}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Post category: movies" in "_site/movies/film/2009/03/27/star-wars.html"
+
   Scenario: Use post.categories variable when category is in a folder and has categories in YAML
     Given I have a movies directory
     And I have a movies/_posts directory
     And I have a _layouts directory
     And I have the following post in "movies":
-      | title     | date       | layout | categories | content                 |
-      | Star Wars | 2009-03-27 | simple | [film]     | Luke, I am your father. |
+      | title     | date       | layout | categories        | content                 |
+      | Star Wars | 2009-03-27 | simple | [film, scifi]     | Luke, I am your father. |
     And I have a simple layout that contains "Post category: {{ page.categories }}"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Post category: movies" in "_site/movies/film/2009/03/27/star-wars.html"
+    And I should see "Post category: movies" in "_site/movies/film/scifi/2009/03/27/star-wars.html"
 
   Scenario: Use post.tags variable
     Given I have a _posts directory
