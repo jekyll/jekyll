@@ -8,6 +8,8 @@
 
 ### Bug Fixes
 
+  * Remove conditional assignment from document URL to prevent stale urls (#2575)
+
 ### Development Fixes
 
 ### Site Enhancements
