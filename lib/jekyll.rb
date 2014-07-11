@@ -57,6 +57,7 @@ require 'jekyll/entry_filter'
 require 'jekyll/layout_reader'
 require 'jekyll/publisher'
 require 'jekyll/renderer'
+require 'jekyll/highlighter'
 
 # extensions
 require 'jekyll/plugin'

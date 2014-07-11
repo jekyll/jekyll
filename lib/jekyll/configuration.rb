@@ -85,6 +85,12 @@ module Jekyll
 
       'redcloth' => {
         'hard_breaks' => true
+      },
+
+      'tags' => {
+        'highlight' => {
+          'linenos' => false
+        }
       }
     }
 
