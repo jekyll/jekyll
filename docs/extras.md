@@ -39,7 +39,7 @@ markdown: rdiscount
 
 ### Kramdown
 
-You can also use [Kramdown](http://kramdown.rubyforge.org/) instead of Maruku
+You can also use [Kramdown](http://kramdown.gettalong.org/) instead of Maruku
 for Markdown. Make sure that Kramdown is installed:
 
 {% highlight bash %}
