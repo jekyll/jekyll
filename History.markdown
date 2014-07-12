@@ -10,6 +10,8 @@
 
 ### Site Enhancements
 
+  * Update Kramdown urls (#2588)
+
 ## 2.1.1 / 2014-07-01
 
 ### Bug Fixes
