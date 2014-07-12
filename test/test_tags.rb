@@ -65,7 +65,7 @@ CONTENT
       assert_equal({}, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'inline' }, Highlighter.get_config({}, tag.instance_variable_get(:@options)))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
@@ -75,13 +75,13 @@ CONTENT
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
-      
+
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos=3', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
-      
+
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos="3 5 6"', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
-      
+
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
     end
@@ -102,6 +102,21 @@ CONTENT
 
     should "render markdown with pygments with line numbers" do
       assert_match %{<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> test</code></pre>}, @result
+    end
+  end
+
+  context "post content has highlight tag and default config" do
+    setup do
+      fill_post("config", {
+        'tags' => { 'highlight' => { 'linenos' => 'table' } }
+      })
+    end
+
+    should "render markdown with pygments with tabled line numbers by default" do
+      assert_match %{<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-text" data-lang="text">1</code></pre></div></td><td class="code"><div class="highlight"><pre>config\n</pre></div>\n</td></tr></table>}, @result
+    end
+    should "render markdown with pygments with inline line numbers" do
+      assert_match %{<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> config</code></pre>}, @result
     end
   end
 

@@ -34,7 +34,7 @@ module Jekyll
       end
 
       def get_config(config, options={})
-        config = Utils.symbolize_hash_keys(config["tags"] && config["tags"]["highlight"])
+        config = Utils.symbolize_hash_keys(config["tags"] && config["tags"]["highlight"] || {})
         options = Utils.deep_merge_hashes(config, options)
         options[:linenos] = "inline" if options.key?(:linenos) and options[:linenos] == true
         options
