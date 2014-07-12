@@ -68,7 +68,12 @@ end
 #
 #############################################################################
 
-task :default => [:test, :features]
+task :default => [:test, :features, :rubocop]
+
+require 'rubocop/rake_task'
+RuboCop::RakeTask.new(:rubocop) do |rubocop|
+  rubocop.formatters = %w(simple offenses)
+end
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
