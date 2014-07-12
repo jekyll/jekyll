@@ -14,7 +14,7 @@ module Jekyll
         module WithPygments
           include CommonMethods
           def block_code(code, lang)
-            require 'pygments'
+            Jekyll::Deprecator.gracefully_require("pygments")
             lang = lang && lang.split.first || "text"
             add_code_tags(
               Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
@@ -55,45 +55,40 @@ module Jekyll
 
 
         def initialize(config)
-          require 'redcarpet'
+          Deprecator.gracefully_require("redcarpet")
           @config = config
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
-          @renderer ||= case @config['highlighter']
-                        when 'pygments'
-                          Class.new(Redcarpet::Render::HTML) do
-                            include WithPygments
-                          end
-                        when 'rouge'
-                          Class.new(Redcarpet::Render::HTML) do
-                            begin
-                              require 'rouge'
-                              require 'rouge/plugins/redcarpet'
-                            rescue LoadError => e
-                              Jekyll.logger.error "You are missing the 'rouge' gem. Please run:"
-                              Jekyll.logger.error " $ [sudo] gem install rouge"
-                              Jekyll.logger.error "Or add 'rouge' to your Gemfile."
-                              raise FatalException.new("Missing dependency: rouge")
-                            end
+          @renderer ||= class_with_proper_highlighter(@config['highlighter'])
+        end
 
-                            if Rouge.version < '1.3.0'
-                              abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
-                            end
+        def class_with_proper_highlighter(highlighter)
+          case highlighter
+          when "pygments"
+            Class.new(Redcarpet::Render::HTML) do
+              include WithPygments
+            end
+          when "rouge"
+            Class.new(Redcarpet::Render::HTML) do
+              Jekyll::Deprecator.gracefully_require(%w[
+                rouge
+                rouge/plugins/redcarpet
+              ])
 
-                            include Rouge::Plugins::Redcarpet
-                            include CommonMethods
-                            include WithRouge
-                          end
-                        else
-                          Class.new(Redcarpet::Render::HTML) do
-                            include WithoutHighlighting
-                          end
-                        end
-        rescue LoadError
-          STDERR.puts 'You are missing a library required for Markdown. Please run:'
-          STDERR.puts '  $ [sudo] gem install redcarpet'
-          raise FatalException.new("Missing dependency: redcarpet")
+              if Rouge.version < '1.3.0'
+                abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
+              end
+
+              include Rouge::Plugins::Redcarpet
+              include CommonMethods
+              include WithRouge
+            end
+          else
+            Class.new(Redcarpet::Render::HTML) do
+              include WithoutHighlighting
+            end
+          end
         end
 
         def convert(content)

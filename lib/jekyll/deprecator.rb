@@ -1,5 +1,5 @@
 module Jekyll
-  class Deprecator
+  module Deprecator
     def self.process(args)
       no_subcommand(args)
       arg_is_present? args, "--server", "The --server command has been replaced by the \
@@ -31,6 +31,24 @@ module Jekyll
 
     def self.deprecation_message(message)
       Jekyll.logger.error "Deprecation:", message
+    end
+
+    def self.gracefully_require(gem_name)
+      Array(gem_name).each do |name|
+        begin
+          require name
+        rescue LoadError => e
+          Jekyll.logger.error "Dependency Error:", <<-MSG
+  Yikes! It looks like you don't have #{name} or one of its dependencies installed.
+  In order to use Jekyll as currently contfigured, you'll need to install this gem.
+
+  The full error message from Ruby is: '#{e.message}'
+
+  If you run into trouble, you can find helpful resources at http://jekyllrb.com/help/!
+  MSG
+          raise Errors::MissingDependencyException.new(name)
+        end
+      end
     end
   end
 end
