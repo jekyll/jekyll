@@ -39,7 +39,7 @@ markdown: rdiscount
 
 ### Kramdown
 
-You can also use [Kramdown](http://kramdown.rubyforge.org/) instead of Maruku
+You can also use [Kramdown](http://kramdown.gettalong.org/) instead of Maruku
 for Markdown. Make sure that Kramdown is installed:
 
 {% highlight bash %}
@@ -56,7 +56,7 @@ markdown: kramdown
 Kramdown has various options for customizing the HTML output. The
 [Configuration](/docs/configuration/) page lists the default options used by
 Jekyll. A complete list of options is also available on the [Kramdown
-website](http://kramdown.rubyforge.org/options.html).
+website](http://kramdown.gettalong.org/options.html).
 
 ### User-Defined
 
