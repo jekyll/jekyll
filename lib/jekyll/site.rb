@@ -80,7 +80,7 @@ module Jekyll
       dest_pathname = Pathname.new(dest)
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
-          raise FatalException.new "Destination directory cannot be or contain the Source directory."
+          raise Errors::FatalException.new "Destination directory cannot be or contain the Source directory."
         end
       end
     end
@@ -443,7 +443,7 @@ module Jekyll
     end
 
     def frontmatter_defaults
-      @frontmatter_defaults ||= Configuration::FrontmatterDefaults.new(self)
+      @frontmatter_defaults ||= FrontmatterDefaults.new(self)
     end
 
     private

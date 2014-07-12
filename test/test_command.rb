@@ -44,7 +44,7 @@ class TestCommand < Test::Unit::TestCase
     context "when fatal error occurs" do
       should "exit with non-zero error code" do
         site = Object.new
-        stub(site).process { raise Jekyll::FatalException }
+        stub(site).process { raise Jekyll::Errors::FatalException }
         error = assert_raise(SystemExit) { Command.process_site(site) }
         assert_not_equal 0, error.status
       end
