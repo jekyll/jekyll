@@ -2,49 +2,33 @@ module Jekyll
   module Converters
     class Markdown
       class RedcarpetParser
-
-        module CommonMethods
-          def add_code_tags(code, lang)
-            code = code.to_s
-            code = code.sub(/<pre>/, "<pre><code class=\"language-#{lang}\" data-lang=\"#{lang}\">")
-            code = code.sub(/<\/pre>/,"</code></pre>")
+        module ConfigHighlighter
+          def initialize(renderer, options)
+            super(renderer)
+            @options = options
           end
         end
 
         module WithPygments
-          include CommonMethods
+          include ConfigHighlighter
           def block_code(code, lang)
-            require 'pygments'
             lang = lang && lang.split.first || "text"
-            add_code_tags(
-              Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
-              lang
-            )
+            Highlighter.render_pygments(code, lang, @options)
           end
         end
 
         module WithoutHighlighting
-          require 'cgi'
-
-          include CommonMethods
-
-          def code_wrap(code)
-            "<div class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></div>"
-          end
-
+          include ConfigHighlighter
           def block_code(code, lang)
             lang = lang && lang.split.first || "text"
-            add_code_tags(code_wrap(code), lang)
+            Highlighter.render_codehighlighter(code, lang)
           end
         end
 
         module WithRouge
+          include ConfigHighlighter
           def block_code(code, lang)
-            code = "<pre>#{super}</pre>"
-
-            output = "<div class=\"highlight\">"
-            output << add_code_tags(code, lang)
-            output << "</div>"
+            Highlighter.render_rouge(code, lang, @options)
           end
 
           protected
@@ -59,6 +43,7 @@ module Jekyll
           @config = config
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
+          @options = Highlighter.get_config(@config, {})
 
           @renderer ||= case @config['highlighter']
                         when 'pygments'
@@ -82,7 +67,6 @@ module Jekyll
                             end
 
                             include Rouge::Plugins::Redcarpet
-                            include CommonMethods
                             include WithRouge
                           end
                         else
@@ -99,7 +83,7 @@ module Jekyll
         def convert(content)
           @redcarpet_extensions[:fenced_code_blocks] = !@redcarpet_extensions[:no_fenced_code_blocks]
           @renderer.send :include, Redcarpet::Render::SmartyPants if @redcarpet_extensions[:smart]
-          markdown = Redcarpet::Markdown.new(@renderer.new(@redcarpet_extensions), @redcarpet_extensions)
+          markdown = Redcarpet::Markdown.new(@renderer.new(@redcarpet_extensions, @options), @redcarpet_extensions)
           markdown.render(content)
         end
       end

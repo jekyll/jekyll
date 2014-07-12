@@ -24,10 +24,14 @@ module Jekyll
                   value.gsub!(/"/, "")
                   value = value.split
               end
-              @options[key.to_sym] = value || true
+              if value == "true" || value.nil?
+                value = true
+              elsif value == "false"
+                value = false
+              end
+              @options[key.to_sym] = value
             end
           end
-          @options[:linenos] = "inline" if @options.key?(:linenos) and @options[:linenos] == true
         else
           raise SyntaxError.new <<-eos
 Syntax Error in tag 'highlight' while parsing the following markup:
@@ -43,57 +47,20 @@ eos
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.strip
+        site = context.registers[:site]
 
-        output = case context.registers[:site].highlighter
-        when 'pygments'
-          render_pygments(code)
-        when 'rouge'
-          render_rouge(code)
-        else
-          render_codehighlighter(code)
-        end
+        @options = Highlighter.get_config(site.config, @options)
 
-        rendered_output = add_code_tag(output)
-        prefix + rendered_output + suffix
-      end
+        output = case site.highlighter
+                 when 'pygments'
+                   Highlighter.render_pygments(code, @lang, @options)
+                 when 'rouge'
+                   Highlighter.render_rouge(code, @lang, @options)
+                 else
+                   Highlighter.render_codehighlighter(code)
+                 end
 
-      def render_pygments(code)
-        require 'pygments'
-        @options[:encoding] = 'utf-8'
-
-        highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
-
-        if highlighted_code.nil?
-          Jekyll.logger.error "There was an error highlighting your code:"
-          puts
-          Jekyll.logger.error code
-          puts
-          Jekyll.logger.error "While attempting to convert the above code, Pygments.rb" +
-            " returned an unacceptable value."
-          Jekyll.logger.error "This is usually a timeout problem solved by running `jekyll build` again."
-          raise ArgumentError.new("Pygments.rb returned an unacceptable value when attempting to highlight some code.")
-        end
-
-        highlighted_code
-      end
-
-      def render_rouge(code)
-        require 'rouge'
-        formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
-        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
-        code = formatter.format(lexer.lex(code))
-        "<div class=\"highlight\"><pre>#{code}</pre></div>"
-      end
-
-      def render_codehighlighter(code)
-        "<div class=\"highlight\"><pre>#{h(code).strip}</pre></div>"
-      end
-
-      def add_code_tag(code)
-        # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>\n*/,'<pre><code class="language-' + @lang.to_s.gsub("+", "-") + '" data-lang="' + @lang.to_s + '">')
-        code = code.sub(/\n*<\/pre>/,"</code></pre>")
-        code.strip
+        prefix + output + suffix
       end
 
     end
