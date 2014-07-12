@@ -27,7 +27,6 @@ require 'logger'
 require 'liquid'
 require 'kramdown'
 require 'colorator'
-require 'toml'
 
 # internal requires
 require 'jekyll/version'
@@ -74,8 +73,15 @@ require_all 'jekyll/tags'
 # plugins
 require 'jekyll-coffeescript'
 require 'jekyll-sass-converter'
-require 'jekyll-paginate'
-require 'jekyll-gist'
+
+# Eventually remove these for 3.0 as non-core
+require "classifier"
+require "pygments.rb"
+require "toml"
+require "jekyll-paginate"
+require "jekyll-gist"
+require "jekyll-coffeescript"
+require "jekyll-sass-converter"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
