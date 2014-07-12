@@ -56,7 +56,7 @@ markdown: kramdown
 Kramdown has various options for customizing the HTML output. The
 [Configuration](/docs/configuration/) page lists the default options used by
 Jekyll. A complete list of options is also available on the [Kramdown
-website](http://kramdown.rubyforge.org/options.html).
+website](http://kramdown.gettalong.org/options.html).
 
 ### User-Defined
 
