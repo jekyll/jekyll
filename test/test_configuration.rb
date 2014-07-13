@@ -1,21 +1,21 @@
-require 'helper'
+require "helper"
 
 class TestConfiguration < Test::Unit::TestCase
   context "#stringify_keys" do
     setup do
       @mixed_keys = Configuration[{
-        'markdown' => 'kramdown',
-        :permalink => 'date',
-        'baseurl'  => '/',
-        :include   => ['.htaccess'],
-        :source    => './'
+        "markdown" => "kramdown",
+        :permalink => "date",
+        "baseurl"  => "/",
+        :include   => [".htaccess"],
+        :source    => "./"
       }]
       @string_keys = Configuration[{
-        'markdown'  => 'kramdown',
-        'permalink' => 'date',
-        'baseurl'   => '/',
-        'include'   => ['.htaccess'],
-        'source'    => './'
+        "markdown"  => "kramdown",
+        "permalink" => "date",
+        "baseurl"   => "/",
+        "include"   => [".htaccess"],
+        "source"    => "./"
       }]
     end
     should "stringify symbol keys" do
@@ -98,19 +98,19 @@ class TestConfiguration < Test::Unit::TestCase
     setup do
       @config = Proc.new do |val|
         Configuration[{
-          'paginate' => val
+          "paginate" => val
         }]
       end
     end
     should "sets an invalid 'paginate' value to nil" do
-      assert_nil @config.call(0).fix_common_issues['paginate']
-      assert_nil @config.call(-1).fix_common_issues['paginate']
-      assert_nil @config.call(true).fix_common_issues['paginate']
+      assert_nil @config.call(0).fix_common_issues["paginate"]
+      assert_nil @config.call(-1).fix_common_issues["paginate"]
+      assert_nil @config.call(true).fix_common_issues["paginate"]
     end
   end
   context "loading configuration" do
     setup do
-      @path = File.join(Dir.pwd, '_config.yml')
+      @path = File.join(Dir.pwd, "_config.yml")
       @user_config = File.join(Dir.pwd, "my_config_file.yml")
     end
 
@@ -137,21 +137,21 @@ class TestConfiguration < Test::Unit::TestCase
       mock(SafeYAML).load_file(@user_config) { raise SystemCallError, "No such file or directory - #{@user_config}" }
       mock($stderr).puts(("Fatal: ".rjust(20) + "The configuration file '#{@user_config}' could not be found.").red)
       assert_raises LoadError do
-        Jekyll.configuration({'config' => [@user_config]})
+        Jekyll.configuration({"config" => [@user_config]})
       end
     end
 
     should "not clobber YAML.load to the dismay of other libraries" do
-      assert_equal :foo, YAML.load(':foo')
+      assert_equal :foo, YAML.load(":foo")
       # as opposed to: assert_equal ':foo', SafeYAML.load(':foo')
     end
   end
   context "loading config from external file" do
     setup do
       @paths = {
-        :default => File.join(Dir.pwd, '_config.yml'),
-        :other   => File.join(Dir.pwd, '_config.live.yml'),
-        :toml    => source_dir('_config.dev.toml'),
+        :default => File.join(Dir.pwd, "_config.yml"),
+        :other   => File.join(Dir.pwd, "_config.live.yml"),
+        :toml    => source_dir("_config.dev.toml"),
         :empty   => ""
       }
     end

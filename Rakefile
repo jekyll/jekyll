@@ -1,11 +1,11 @@
-require 'rubygems'
-require 'rake'
-require 'rdoc'
-require 'date'
-require 'yaml'
+require "rubygems"
+require "rake"
+require "rdoc"
+require "date"
+require "yaml"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
-require 'jekyll/version'
+require "jekyll/version"
 
 #############################################################################
 #
@@ -14,7 +14,7 @@ require 'jekyll/version'
 #############################################################################
 
 def name
-  @name ||= File.basename(Dir['*.gemspec'].first, ".*")
+  @name ||= File.basename(Dir["*.gemspec"].first, ".*")
 end
 
 def version
@@ -65,7 +65,7 @@ def custom_release_header_anchors(markdown)
 end
 
 def sluffigy(header)
-  header.gsub(/#/, '').strip.downcase.gsub(/\s+/, '-')
+  header.gsub(/#/, "").strip.downcase.gsub(/\s+/, "-")
 end
 
 def remove_head_from_history(markdown)
@@ -89,28 +89,28 @@ end
 
 task :default => [:test, :features, :rubocop]
 
-require 'rubocop/rake_task'
+require "rubocop/rake_task"
 RuboCop::RakeTask.new(:rubocop) do |rubocop|
   rubocop.formatters = %w(simple offenses)
 end
 
-require 'rake/testtask'
+require "rake/testtask"
 Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.libs << "lib" << "test"
+  test.pattern = "test/**/test_*.rb"
   test.verbose = true
 end
 
-require 'rdoc/task'
+require "rdoc/task"
 Rake::RDocTask.new do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
+  rdoc.rdoc_dir = "rdoc"
   rdoc.title = "#{name} #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+  rdoc.rdoc_files.include("README*")
+  rdoc.rdoc_files.include("lib/**/*.rb")
 end
 
 begin
-  require 'cucumber/rake/task'
+  require "cucumber/rake/task"
   Cucumber::Rake::Task.new(:features) do |t|
     t.profile = "travis"
   end
@@ -118,9 +118,9 @@ begin
     t.profile = "html_report"
   end
 rescue LoadError
-  desc 'Cucumber rake task not available'
+  desc "Cucumber rake task not available"
   task :features do
-    abort 'Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin'
+    abort "Cucumber rake task is not available. Be sure to install cucumber as a gem or plugin"
   end
 end
 
@@ -151,7 +151,7 @@ namespace :site do
     # Generate the site in server mode.
     puts "Running Jekyll..."
     Dir.chdir("site") do
-      sh "#{File.expand_path('bin/jekyll', File.dirname(__FILE__))} serve --watch"
+      sh "#{File.expand_path("bin/jekyll", File.dirname(__FILE__))} serve --watch"
     end
   end
 
@@ -177,7 +177,7 @@ namespace :site do
     end
 
     # Ensure gh-pages branch is up to date.
-    Dir.chdir('gh-pages') do
+    Dir.chdir("gh-pages") do
       sh "git pull origin gh-pages"
     end
 
@@ -191,12 +191,12 @@ namespace :site do
     # Commit and push.
     puts "Committing and pushing to GitHub Pages..."
     sha = `git log`.match(/[a-z0-9]{40}/)[0]
-    Dir.chdir('gh-pages') do
+    Dir.chdir("gh-pages") do
       sh "git add ."
       sh "git commit --allow-empty -m 'Updating to #{sha}.'"
       sh "git push origin gh-pages"
     end
-    puts 'Done.'
+    puts "Done."
   end
 
   desc "Create a nicely formatted history page for the jekyll site based on the repo history."
@@ -209,7 +209,7 @@ namespace :site do
         "permalink" => "/docs/history/",
         "prev_section" => "contributing"
       }
-      Dir.chdir('site/docs/') do
+      Dir.chdir("site/docs/") do
         File.open("history.md", "w") do |file|
           file.write("#{front_matter.to_yaml}---\n\n")
           file.write(converted_history(history_file))
@@ -224,15 +224,15 @@ namespace :site do
     desc "Create new release post"
     task :new, :version do |t, args|
       raise "Specify a version: rake site:releases:new['1.2.3']" unless args.version
-      today = Time.new.strftime('%Y-%m-%d')
+      today = Time.new.strftime("%Y-%m-%d")
       release = args.version.to_s
-      filename = "site/_posts/#{today}-jekyll-#{release.split('.').join('-')}-released.markdown"
+      filename = "site/_posts/#{today}-jekyll-#{release.split(".").join("-")}-released.markdown"
 
       File.open(filename, "wb") do |post|
         post.puts("---")
         post.puts("layout: news_item")
         post.puts("title: 'Jekyll #{release} Released'")
-        post.puts("date: #{Time.new.strftime('%Y-%m-%d %H:%M:%S %z')}")
+        post.puts("date: #{Time.new.strftime("%Y-%m-%d %H:%M:%S %z")}")
         post.puts("author: ")
         post.puts("version: #{release}")
         post.puts("categories: [release]")

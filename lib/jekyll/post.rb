@@ -52,7 +52,7 @@ module Jekyll
       @base = containing_dir(source, dir)
       @name = name
 
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
+      self.categories = dir.downcase.split("/").reject { |x| x.empty? }
       process(name)
       read_yaml(@base, name)
 
@@ -60,7 +60,7 @@ module Jekyll
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
-      if data.has_key?('date')
+      if data.has_key?("date")
         self.date = Time.parse(data["date"].to_s)
       end
 
@@ -69,7 +69,7 @@ module Jekyll
     end
 
     def published?
-      if data.has_key?('published') && data['published'] == false
+      if data.has_key?("published") && data["published"] == false
         false
       else
         true
@@ -77,7 +77,7 @@ module Jekyll
     end
 
     def populate_categories
-      categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
+      categories_from_data = Utils.pluralized_array_from_hash(data, "category", "categories")
       self.categories = (
         Array(categories) + categories_from_data
       ).map {|c| c.to_s.downcase}.flatten.uniq
@@ -89,7 +89,7 @@ module Jekyll
 
     # Get the full path to the directory containing the post files
     def containing_dir(source, dir)
-      return File.join(source, dir, '_posts')
+      return File.join(source, dir, "_posts")
     end
 
     # Read the YAML frontmatter.
@@ -108,7 +108,7 @@ module Jekyll
     #
     # Returns excerpt string.
     def excerpt
-      data.fetch('excerpt', extracted_excerpt.to_s)
+      data.fetch("excerpt", extracted_excerpt.to_s)
     end
 
     # Public: the Post title, from the YAML Front-Matter or from the slug
@@ -120,7 +120,7 @@ module Jekyll
 
     # Turns the post slug into a suitable title
     def titleized_slug
-      slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+      slug.split("-").select {|w| w.capitalize! || w }.join(" ")
     end
 
     # Public: the path to the post relative to the site source,
@@ -130,7 +130,7 @@ module Jekyll
     #
     # Returns the path to the file relative to the site source
     def path
-      data.fetch('path', relative_path.sub(/\A\//, ''))
+      data.fetch("path", relative_path.sub(/\A\//, ""))
     end
 
     # The path to the post source file, relative to the site source
@@ -160,7 +160,7 @@ module Jekyll
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
       self.categories ||= []
-      self.categories += (cats || '').downcase.split('/')
+      self.categories += (cats || "").downcase.split("/")
       self.date = Time.parse(date)
       self.slug = slug
       self.ext = ext
@@ -186,7 +186,7 @@ module Jekyll
     #
     # Returns the String permalink.
     def permalink
-      data && data['permalink']
+      data && data["permalink"]
     end
 
     def template
@@ -225,7 +225,7 @@ module Jekyll
         :title       => slug,
         :i_day       => date.strftime("%d").to_i.to_s,
         :i_month     => date.strftime("%m").to_i.to_s,
-        :categories  => (categories || []).map { |c| c.to_s }.join('/'),
+        :categories  => (categories || []).map { |c| c.to_s }.join("/"),
         :short_month => date.strftime("%b"),
         :short_year  => date.strftime("%y"),
         :y_day       => date.strftime("%j"),
@@ -314,7 +314,7 @@ module Jekyll
     end
 
     def generate_excerpt?
-      !(site.config['excerpt_separator'].to_s.empty?)
+      !(site.config["excerpt_separator"].to_s.empty?)
     end
   end
 end

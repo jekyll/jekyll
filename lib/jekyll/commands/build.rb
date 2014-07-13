@@ -7,8 +7,8 @@ module Jekyll
         # Create the Mercenary command for the Jekyll CLI for this Command
         def init_with_program(prog)
           prog.command(:build) do |c|
-            c.syntax      'build [options]'
-            c.description 'Build your site'
+            c.syntax      "build [options]"
+            c.description "Build your site"
 
             add_build_options(c)
 
@@ -22,17 +22,17 @@ module Jekyll
         # Build your jekyll site
         # Continuously watch if `watch` is set to true in the config.
         def process(options)
-          Jekyll.logger.log_level = :error if options['quiet']
+          Jekyll.logger.log_level = :error if options["quiet"]
 
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
 
-          if options.fetch('skip_initial_build', false)
+          if options.fetch("skip_initial_build", false)
             Jekyll.logger.warn "Build Warning:", "Skipping the initial build. This may result in an out-of-date site."
           else
             build(site, options)
           end
-          watch(site, options) if options['watch']
+          watch(site, options) if options["watch"]
         end
 
         # Build your Jekyll site.
@@ -42,8 +42,8 @@ module Jekyll
         #
         # Returns nothing.
         def build(site, options)
-          source      = options['source']
-          destination = options['destination']
+          source      = options["source"]
+          destination = options["destination"]
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
           Jekyll.logger.info "Generating..."
@@ -58,7 +58,7 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
-          Deprecator.gracefully_require 'jekyll-watch'
+          Deprecator.gracefully_require "jekyll-watch"
           Jekyll::Commands::Watch.watch(site, options)
         end
 

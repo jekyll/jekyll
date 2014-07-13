@@ -15,10 +15,10 @@ module Jekyll
         if markup.strip =~ SYNTAX
           @lang = $1.downcase
           @options = {}
-          if defined?($2) && $2 != ''
+          if defined?($2) && $2 != ""
             # Split along 3 possible forms -- key="<quoted list>", key=value, or key
             $2.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
-              key, value = opt.split('=')
+              key, value = opt.split("=")
               # If a quoted list, convert to array
               if value && value.include?("\"")
                   value.gsub!(/"/, "")
@@ -47,9 +47,9 @@ eos
         is_safe = !!context.registers[:site].safe
 
         output = case context.registers[:site].highlighter
-        when 'pygments'
+        when "pygments"
           render_pygments(code, is_safe)
-        when 'rouge'
+        when "rouge"
           render_rouge(code)
         else
           render_codehighlighter(code)
@@ -65,7 +65,7 @@ eos
             [:startinline, opts.fetch(:startinline, nil)],
             [:hl_linenos,  opts.fetch(:hl_linenos, nil)],
             [:linenos,     opts.fetch(:linenos, nil)],
-            [:encoding,    opts.fetch(:encoding, 'utf-8')],
+            [:encoding,    opts.fetch(:encoding, "utf-8")],
             [:cssclass,    opts.fetch(:cssclass, nil)]
           ].reject {|f| f.last.nil? }]
         else
@@ -74,9 +74,9 @@ eos
       end
 
       def render_pygments(code, is_safe)
-        require 'pygments'
+        require "pygments"
 
-        @options[:encoding] = 'utf-8'
+        @options[:encoding] = "utf-8"
 
         highlighted_code = Pygments.highlight(
           code,
@@ -99,7 +99,7 @@ eos
       end
 
       def render_rouge(code)
-        require 'rouge'
+        require "rouge"
         formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         code = formatter.format(lexer.lex(code))
@@ -121,4 +121,4 @@ eos
   end
 end
 
-Liquid::Template.register_tag('highlight', Jekyll::Tags::HighlightBlock)
+Liquid::Template.register_tag("highlight", Jekyll::Tags::HighlightBlock)

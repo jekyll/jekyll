@@ -1,6 +1,6 @@
-require 'rubygems'
-gem 'test-unit'
-require 'test/unit'
+require "rubygems"
+gem "test-unit"
+require "test/unit"
 
 # for some reason these tests fail when run via TextMate
 # but succeed when run on the command line.

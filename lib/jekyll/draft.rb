@@ -15,12 +15,12 @@ module Jekyll
 
     # Get the full path to the directory containing the draft files
     def containing_dir(source, dir)
-      File.join(source, dir, '_drafts')
+      File.join(source, dir, "_drafts")
     end
 
     # The path to the draft source file, relative to the site source
     def relative_path
-      File.join(@dir, '_drafts', @name)
+      File.join(@dir, "_drafts", @name)
     end
 
     # Extract information from the post filename.

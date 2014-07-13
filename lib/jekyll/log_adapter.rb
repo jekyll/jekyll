@@ -87,7 +87,7 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      formatted_topic(topic) + message.to_s.gsub(/\s+/, " ")
     end
 
     # Internal: Format the topic

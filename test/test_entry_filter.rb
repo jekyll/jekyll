@@ -1,10 +1,10 @@
-require 'helper'
+require "helper"
 
 class TestEntryFilter < Test::Unit::TestCase
   context "Filtering entries" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir})
       end
       @site = Site.new(Jekyll.configuration)
     end
@@ -51,23 +51,23 @@ class TestEntryFilter < Test::Unit::TestCase
 
     should "filter symlink entries when safe mode enabled" do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
+        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "safe" => true})
       end
       site = Site.new(Jekyll.configuration)
-      stub(File).symlink?('symlink.js') {true}
+      stub(File).symlink?("symlink.js") {true}
       files = %w[symlink.js]
       assert_equal [], site.filter_entries(files)
     end
 
     should "not filter symlink entries when safe mode disabled" do
-      stub(File).symlink?('symlink.js') {true}
+      stub(File).symlink?("symlink.js") {true}
       files = %w[symlink.js]
       assert_equal files, @site.filter_entries(files)
     end
 
     should "not include symlinks in safe mode" do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => true})
+        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "safe" => true})
       end
       site = Site.new(Jekyll.configuration)
 
@@ -78,7 +78,7 @@ class TestEntryFilter < Test::Unit::TestCase
 
     should "include symlinks in unsafe mode" do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'safe' => false})
+        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir, "safe" => false})
       end
       site = Site.new(Jekyll.configuration)
 
@@ -91,7 +91,7 @@ class TestEntryFilter < Test::Unit::TestCase
   context "#glob_include?" do
     setup do
       stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+        Jekyll::Configuration::DEFAULTS.merge({"source" => source_dir, "destination" => dest_dir})
       end
       @site = Site.new(Jekyll.configuration)
       @filter = EntryFilter.new(@site)
@@ -116,9 +116,9 @@ class TestEntryFilter < Test::Unit::TestCase
     end
 
     should "match even if there is no leading slash" do
-      data = ['vendor/bundle']
-      assert @filter.glob_include?(data, '/vendor/bundle')
-      assert @filter.glob_include?(data, 'vendor/bundle')
+      data = ["vendor/bundle"]
+      assert @filter.glob_include?(data, "/vendor/bundle")
+      assert @filter.glob_include?(data, "vendor/bundle")
     end
   end
 end

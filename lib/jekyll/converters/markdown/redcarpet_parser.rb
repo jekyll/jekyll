@@ -17,14 +17,14 @@ module Jekyll
             Jekyll::Deprecator.gracefully_require("pygments")
             lang = lang && lang.split.first || "text"
             add_code_tags(
-              Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
+              Pygments.highlight(code, :lexer => lang, :options => { :encoding => "utf-8" }),
               lang
             )
           end
         end
 
         module WithoutHighlighting
-          require 'cgi'
+          require "cgi"
 
           include CommonMethods
 
@@ -58,9 +58,9 @@ module Jekyll
           Deprecator.gracefully_require("redcarpet")
           @config = config
           @redcarpet_extensions = {}
-          @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
+          @config["redcarpet"]["extensions"].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
-          @renderer ||= class_with_proper_highlighter(@config['highlighter'])
+          @renderer ||= class_with_proper_highlighter(@config["highlighter"])
         end
 
         def class_with_proper_highlighter(highlighter)
@@ -76,7 +76,7 @@ module Jekyll
                 rouge/plugins/redcarpet
               ])
 
-              if Rouge.version < '1.3.0'
+              if Rouge.version < "1.3.0"
                 abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
               end
 
