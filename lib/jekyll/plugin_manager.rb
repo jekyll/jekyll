@@ -45,7 +45,7 @@ module Jekyll
     # Returns an array of strings, each string being the name of a gem name
     #   that is allowed to be used.
     def whitelist
-      @whitelist ||= Array[site.config['whitelist']].flatten
+      @whitelist ||= Array[site.config["whitelist"]].flatten
     end
 
     # Require all .rb files if safe mode is off
@@ -65,10 +65,10 @@ module Jekyll
     #
     # Returns an Array of plugin search paths
     def plugins_path
-      if (site.config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [Jekyll.sanitized_path(site.source, site.config['plugins'])]
+      if (site.config["plugins"] == Jekyll::Configuration::DEFAULTS["plugins"])
+        [Jekyll.sanitized_path(site.source, site.config["plugins"])]
       else
-        Array(site.config['plugins']).map { |d| File.expand_path(d) }
+        Array(site.config["plugins"]).map { |d| File.expand_path(d) }
       end
     end
 

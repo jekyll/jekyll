@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestURL < Test::Unit::TestCase
   context "The URL class" do

@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestPathSanitization < Test::Unit::TestCase
   context "on Windows with absolute source" do

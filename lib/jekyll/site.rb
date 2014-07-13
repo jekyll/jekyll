@@ -19,15 +19,15 @@ module Jekyll
         self.send("#{opt}=", config[opt])
       end
 
-      self.source          = File.expand_path(config['source'])
-      self.dest            = File.expand_path(config['destination'])
-      self.permalink_style = config['permalink'].to_sym
+      self.source          = File.expand_path(config["source"])
+      self.dest            = File.expand_path(config["destination"])
+      self.permalink_style = config["permalink"].to_sym
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
 
       self.file_read_opts = {}
-      self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
+      self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
 
       reset
       setup
@@ -49,7 +49,7 @@ module Jekyll
     #
     # Returns nothing
     def reset
-      self.time = (config['time'] ? Time.parse(config['time'].to_s) : Time.now)
+      self.time = (config["time"] ? Time.parse(config["time"].to_s) : Time.now)
       self.layouts = {}
       self.posts = []
       self.pages = []
@@ -99,11 +99,11 @@ module Jekyll
     # Returns an array of collection names from the configuration,
     #   or an empty array if the `collections` key is not set.
     def collection_names
-      case config['collections']
+      case config["collections"]
       when Hash
-        config['collections'].keys
+        config["collections"].keys
       when Array
-        config['collections']
+        config["collections"]
       when nil
         []
       else
@@ -117,7 +117,7 @@ module Jekyll
     def read
       self.layouts = LayoutReader.new(self).read
       read_directories
-      read_data(config['data_source'])
+      read_data(config["data_source"])
       read_collections
     end
 
@@ -128,9 +128,9 @@ module Jekyll
     # dir - The String relative path of the directory to read. Default: ''.
     #
     # Returns nothing.
-    def read_directories(dir = '')
+    def read_directories(dir = "")
       base = File.join(source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
+      entries = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
 
       read_posts(dir)
       read_drafts(dir) if show_drafts
@@ -141,7 +141,7 @@ module Jekyll
         f_abs = File.join(base, f)
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
-          read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
+          read_directories(f_rel) unless dest.sub(/\/$/, "") == f_abs
         elsif has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
           pages << page if publisher.publish?(page)
@@ -160,7 +160,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      posts = read_content(dir, '_posts', Post)
+      posts = read_content(dir, "_posts", Post)
 
       posts.each do |post|
         aggregate_post_info(post) if publisher.publish?(post)
@@ -174,7 +174,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_drafts(dir)
-      drafts = read_content(dir, '_drafts', Draft)
+      drafts = read_content(dir, "_drafts", Draft)
 
       drafts.each do |draft|
         if draft.published?
@@ -210,14 +210,14 @@ module Jekyll
       return unless File.directory?(dir) && (!safe || !File.symlink?(dir))
 
       entries = Dir.chdir(dir) do
-        Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
+        Dir["*.{yaml,yml,json}"] + Dir["*"].select { |fn| File.directory?(fn) }
       end
 
       entries.each do |entry|
         path = Jekyll.sanitized_path(dir, entry)
         next if File.symlink?(path) && safe
 
-        key = sanitize_filename(File.basename(entry, '.*'))
+        key = sanitize_filename(File.basename(entry, ".*"))
         if File.directory?(path)
           read_data_to(path, data[key] = {})
         else
@@ -301,11 +301,11 @@ module Jekyll
     end
 
     def tags
-      post_attr_hash('tags')
+      post_attr_hash("tags")
     end
 
     def categories
-      post_attr_hash('categories')
+      post_attr_hash("categories")
     end
 
     # Prepare site data for site payload. The method maintains backward compatibility
@@ -313,7 +313,7 @@ module Jekyll
     #
     # Returns the Hash to be hooked to site.data.
     def site_data
-      config['data'] || data
+      config["data"] || data
     end
 
     # The Hash payload containing site-wide data.
@@ -342,8 +342,8 @@ module Jekyll
             "pages"        => pages,
             "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
             "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
-            "categories"   => post_attr_hash('categories'),
-            "tags"         => post_attr_hash('tags'),
+            "categories"   => post_attr_hash("categories"),
+            "tags"         => post_attr_hash("tags"),
             "collections"  => collections,
             "documents"    => documents,
             "data"         => site_data
@@ -401,7 +401,7 @@ module Jekyll
     def get_entries(dir, subfolder)
       base = File.join(source, dir, subfolder)
       return [] unless File.exist?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
+      entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(File.join(base, e)) }
     end
 
@@ -415,7 +415,7 @@ module Jekyll
     end
 
     def relative_permalinks_deprecation_method
-      if config['relative_permalinks'] && has_relative_page?
+      if config["relative_permalinks"] && has_relative_page?
         Jekyll.logger.warn "Deprecation:", "Starting in 2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
@@ -453,7 +453,7 @@ module Jekyll
     end
 
     def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
+      !!(File.open(file, "rb") { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
     def limit_posts!
@@ -466,9 +466,9 @@ module Jekyll
     end
 
     def sanitize_filename(name)
-      name.gsub!(/[^\w\s_-]+/, '')
+      name.gsub!(/[^\w\s_-]+/, "")
       name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
-      name.gsub(/\s+/, '_')
+      name.gsub(/\s+/, "_")
     end
 
     def publisher

@@ -30,7 +30,7 @@ module Jekyll
         if path.nil? || path == ""
           other.slug
         else
-          path + '/' + other.slug
+          path + "/" + other.slug
         end
       end
     end
@@ -69,4 +69,4 @@ eos
   end
 end
 
-Liquid::Template.register_tag('post_url', Jekyll::Tags::PostUrl)
+Liquid::Template.register_tag("post_url", Jekyll::Tags::PostUrl)

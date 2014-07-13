@@ -120,7 +120,7 @@ module Jekyll
     #
     # Returns the permalink or nil if no permalink was set in the data.
     def permalink
-      data && data.is_a?(Hash) && data['permalink']
+      data && data.is_a?(Hash) && data["permalink"]
     end
 
     # The computed URL for the document. See `Jekyll::URL#to_s` for more details.
@@ -153,7 +153,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
+      File.open(path, "wb") do |f|
         f.write(output)
       end
     end
@@ -172,7 +172,7 @@ module Jekyll
     #
     # Returns true if the 'published' key is specified in the YAML front-matter and not `false`.
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      !(data.has_key?("published") && data["published"] == false)
     end
 
     # Read in the file and assign the content and data based on the file contents.

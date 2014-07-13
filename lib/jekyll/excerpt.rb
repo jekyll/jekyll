@@ -1,4 +1,4 @@
-require 'forwardable'
+require "forwardable"
 
 module Jekyll
   class Excerpt
@@ -105,7 +105,7 @@ module Jekyll
     #
     # Returns excerpt String
     def extract_excerpt(post_content)
-      separator     = site.config['excerpt_separator']
+      separator     = site.config["excerpt_separator"]
       head, _, tail = post_content.partition(separator)
 
       "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
