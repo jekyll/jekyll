@@ -18,68 +18,55 @@ require 'rubygems'
 # stdlib
 require 'fileutils'
 require 'time'
-require 'safe_yaml/load'
 require 'English'
 require 'pathname'
 require 'logger'
 
 # 3rd party
+require 'safe_yaml/load'
 require 'liquid'
 require 'kramdown'
 require 'colorator'
-require 'toml'
-
-# internal requires
-require 'jekyll/version'
-require 'jekyll/utils'
-require 'jekyll/log_adapter'
-require 'jekyll/stevenson'
-require 'jekyll/deprecator'
-require 'jekyll/configuration'
-require 'jekyll/document'
-require 'jekyll/collection'
-require 'jekyll/plugin_manager'
-require 'jekyll/frontmatter_defaults'
-require 'jekyll/site'
-require 'jekyll/convertible'
-require 'jekyll/url'
-require 'jekyll/layout'
-require 'jekyll/page'
-require 'jekyll/post'
-require 'jekyll/excerpt'
-require 'jekyll/draft'
-require 'jekyll/filters'
-require 'jekyll/static_file'
-require 'jekyll/errors'
-require 'jekyll/related_posts'
-require 'jekyll/cleaner'
-require 'jekyll/entry_filter'
-require 'jekyll/layout_reader'
-require 'jekyll/publisher'
-require 'jekyll/renderer'
-
-# extensions
-require 'jekyll/plugin'
-require 'jekyll/converter'
-require 'jekyll/generator'
-require 'jekyll/command'
-require 'jekyll/liquid_extensions'
-
-require_all 'jekyll/commands'
-require_all 'jekyll/converters'
-require_all 'jekyll/converters/markdown'
-require_all 'jekyll/generators'
-require_all 'jekyll/tags'
-
-# plugins
-require 'jekyll-coffeescript'
-require 'jekyll-sass-converter'
-require 'jekyll-paginate'
-require 'jekyll-gist'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
+
+  # internal requires
+  autoload :Cleaner,             'jekyll/cleaner'
+  autoload :Collection,          'jekyll/collection'
+  autoload :Configuration,       'jekyll/configuration'
+  autoload :Convertible,         'jekyll/convertible'
+  autoload :Deprecator,          'jekyll/deprecator'
+  autoload :Document,            'jekyll/document'
+  autoload :Draft,               'jekyll/draft'
+  autoload :EntryFilter,         'jekyll/entry_filter'
+  autoload :Errors,              'jekyll/errors'
+  autoload :Excerpt,             'jekyll/excerpt'
+  autoload :Filters,             'jekyll/filters'
+  autoload :FrontmatterDefaults, 'jekyll/frontmatter_defaults'
+  autoload :Layout,              'jekyll/layout'
+  autoload :LayoutReader,        'jekyll/layout_reader'
+  autoload :LogAdapter,          'jekyll/log_adapter'
+  autoload :Page,                'jekyll/page'
+  autoload :PluginManager,       'jekyll/plugin_manager'
+  autoload :Post,                'jekyll/post'
+  autoload :Publisher,           'jekyll/publisher'
+  autoload :RelatedPosts,        'jekyll/related_posts'
+  autoload :Renderer,            'jekyll/renderer'
+  autoload :Site,                'jekyll/site'
+  autoload :StaticFile,          'jekyll/static_file'
+  autoload :Stevenson,           'jekyll/stevenson'
+  autoload :URL,                 'jekyll/url'
+  autoload :Utils,               'jekyll/utils'
+  autoload :VERSION,             'jekyll/version'
+
+  # extensions
+  require 'jekyll/plugin'
+  require 'jekyll/converter'
+  require 'jekyll/generator'
+  require 'jekyll/command'
+  require 'jekyll/liquid_extensions'
 
   # Public: Tells you which Jekyll environment you are building in so you can skip tasks
   # if you need to.  This is useful when doing expensive compression tasks on css and
@@ -143,3 +130,19 @@ module Jekyll
     end
   end
 end
+
+require_all 'jekyll/commands'
+require_all 'jekyll/converters'
+require_all 'jekyll/converters/markdown'
+require_all 'jekyll/generators'
+require_all 'jekyll/tags'
+
+# Eventually remove these for 3.0 as non-core
+Jekyll::Deprecator.gracefully_require(%w[
+  classifier
+  toml
+  jekyll-paginate
+  jekyll-gist
+  jekyll-coffeescript
+  jekyll-sass-converter
+])

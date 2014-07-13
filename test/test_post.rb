@@ -83,7 +83,7 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "raise a good error on invalid post date" do
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           @post.process("2009-27-03-foo-bar.textile")
         end
       end

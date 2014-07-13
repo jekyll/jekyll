@@ -225,7 +225,7 @@ class TestSite < Test::Unit::TestCase
           Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => source_dir})
         end
 
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           site = Site.new(Jekyll.configuration)
         end
       end
@@ -235,7 +235,7 @@ class TestSite < Test::Unit::TestCase
           Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => File.join(source_dir, "..")})
         end
 
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           site = Site.new(Jekyll.configuration)
         end
       end
@@ -332,7 +332,7 @@ class TestSite < Test::Unit::TestCase
 
         bad_processor = "Custom::Markdown"
         s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           s.process
         end
 
@@ -352,7 +352,7 @@ class TestSite < Test::Unit::TestCase
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
         s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           s.process
         end
       end

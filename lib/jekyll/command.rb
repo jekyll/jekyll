@@ -51,7 +51,7 @@ module Jekyll
       # Returns nothing
       def process_site(site)
         site.process
-      rescue Jekyll::FatalException => e
+      rescue Jekyll::Errors::FatalException => e
         Jekyll.logger.error "ERROR:", "YOUR SITE COULD NOT BE BUILT:"
         Jekyll.logger.error "", "------------------------------------"
         Jekyll.logger.error "", e.message
