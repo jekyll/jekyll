@@ -8,6 +8,8 @@
 
 ### Development Fixes
 
+  * Refactoring Errors & Requires of Third-Party stuff (#2591)
+
 ### Site Enhancements
 
   * Update Kramdown urls (#2588)
