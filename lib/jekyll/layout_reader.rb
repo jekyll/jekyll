@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Jekyll
   class LayoutReader
     attr_reader :site

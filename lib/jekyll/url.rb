@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'uri'
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.

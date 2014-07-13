@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'rubygems'
 gem 'test-unit'
 require 'test/unit'

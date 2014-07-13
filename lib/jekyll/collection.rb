@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Jekyll
   class Collection
     attr_reader :site, :label, :metadata

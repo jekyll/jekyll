@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 
 class TestURL < Test::Unit::TestCase

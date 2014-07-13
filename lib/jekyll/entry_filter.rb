@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Jekyll
   class EntryFilter
     SPECIAL_LEADING_CHARACTERS = ['.', '_', '#'].freeze

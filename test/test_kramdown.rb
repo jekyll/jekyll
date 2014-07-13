@@ -1,5 +1,4 @@
-# encoding: UTF-8
-
+# encoding: utf-8
 require 'helper'
 
 class TestKramdown < Test::Unit::TestCase

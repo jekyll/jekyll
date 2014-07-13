@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
