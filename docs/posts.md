@@ -18,7 +18,7 @@ and web-based CMS systems, this will be a welcome change!
 As explained on the [directory structure](../structure/) page, the `_posts`
 folder is where your blog posts will live. These files can be either
 [Markdown](http://daringfireball.net/projects/markdown/) or
-[Textile](http://textile.sitemonks.com/) formatted text files, and as long as
+[Textile](http://redcloth.org/textile) formatted text files, and as long as
 they have [YAML front-matter](../frontmatter/), they will be converted from their
 source format into an HTML page that is part of your static site.
 
@@ -44,7 +44,7 @@ file. For example, the following are examples of valid post filenames:
 <div class="note">
   <h5>ProTip™: Link to other posts</h5>
   <p>
-    Use the <a href="../templates#post_url"><code>post_url</code></a>
+    Use the <a href="../templates#post-url"><code>post_url</code></a>
     tag to link to other posts without having to worry about the URL's
     breaking when the site permalink style changes.
   </p>
@@ -56,7 +56,7 @@ All blog post files must begin with [YAML front-matter](../frontmatter/). After
 that, it's simply a matter of deciding which format you prefer. Jekyll supports
 two popular content markup formats:
 [Markdown](http://daringfireball.net/projects/markdown/) and
-[Textile](http://textile.sitemonks.com/). These formats each have their own way
+[Textile](http://redcloth.org/textile). These formats each have their own way
 of marking up different types of content within a post, so you should
 familiarize yourself with these formats and decide which one best suits your
 needs.
