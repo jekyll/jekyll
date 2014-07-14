@@ -34,7 +34,7 @@ you’ll need to make sure your system has before you start.
 ## Install with RubyGems
 
 The best way to install Jekyll is via
-[RubyGems](http://docs.rubygems.org/read/chapter/3). At the terminal prompt,
+[RubyGems](http://rubygems.org/pages/download). At the terminal prompt,
 simply run the following command to install Jekyll:
 
 {% highlight bash %}

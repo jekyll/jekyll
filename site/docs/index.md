@@ -16,7 +16,7 @@ development of Jekyll itself.
 Jekyll is a simple, blog-aware, static site generator. It takes a template
 directory containing raw text files in various formats, runs it through
 [Markdown](http://daringfireball.net/projects/markdown/) (or
-[Textile](http://textile.sitemonks.com/)) and
+[Textile](http://redcloth.org/textile)) and
 [Liquid](http://wiki.shopify.com/Liquid)
 converters, and spits out a complete, ready-to-publish static website suitable
 for serving with your favorite web server. Jekyll also happens to be the engine
