@@ -1,0 +1,12 @@
+language: ruby
+cache: bundler
+install:
+- gem install github-pages
+- gem install html-proofer
+script:
+- jekyll --version
+- jekyll build
+- htmlproof ./_site
+branches:
+  only:
+    - gh-pages
