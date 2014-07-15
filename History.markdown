@@ -16,6 +16,7 @@
   * Update Kramdown urls (#2588)
   * Add `Jekyll::AutolinkEmail` and `Jekyll::GitMetadata` to the list of
     third-party plugins (#2596)
+  * Fix a bunch of broken links in the site (#2601)
 
 ## 2.1.1 / 2014-07-01
 
