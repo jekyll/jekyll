@@ -53,13 +53,22 @@ def liquid_escape(markdown)
   markdown.gsub(/(`{[{%].+[}%]}`)/, "{% raw %}\\1{% endraw %}")
 end
 
+def custom_release_headers(markdown)
+  header_regexp = /## (\d{1,2})\.(\d{1,2})\.(\d{1,2}) \/ \d{4}-\d{2}-\d{2}/
+  markdown.gsub(header_regexp, "\\0\n{: #v\\1-\\2-\\3}")
+end
+
 def remove_head_from_history(markdown)
   index = markdown =~ /^##\s+\d+\.\d+\.\d+/
   markdown[index..-1]
 end
 
 def converted_history(markdown)
-  remove_head_from_history(liquid_escape(linkify(normalize_bullets(markdown))))
+  remove_head_from_history(
+    custom_release_headers(
+      liquid_escape(
+        linkify(
+          normalize_bullets(markdown)))))
 end
 
 #############################################################################

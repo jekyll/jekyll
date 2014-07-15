@@ -6,6 +6,7 @@ prev_section: contributing
 ---
 
 ## 2.1.1 / 2014-07-01
+{: #v2-1-1}
 
 ### Bug Fixes
 
@@ -21,6 +22,7 @@ prev_section: contributing
 - Update link to Windows installation guide ([#2578]({{ site.repository }}/issues/2578))
 
 ## 2.1.0 / 2014-06-28
+{: #v2-1-0}
 
 ### Minor Enhancements
 
@@ -107,6 +109,7 @@ prev_section: contributing
 - Documentation for Continuous Integration for your Jekyll Site ([#2432]({{ site.repository }}/issues/2432))
 
 ## 2.0.3 / 2014-05-08
+{: #v2-0-3}
 
 ### Bug Fixes
 
@@ -132,6 +135,7 @@ prev_section: contributing
 - Fix for `History.markdown` in order to fix history page in docs ([#2363]({{ site.repository }}/issues/2363))
 
 ## 2.0.2 / 2014-05-07
+{: #v2-0-2}
 
 ### Bug Fixes
 
@@ -144,12 +148,14 @@ prev_section: contributing
 - Clarify new (defaults, `where` filter) features in docs ([#2316]({{ site.repository }}/issues/2316))
 
 ## 2.0.1 / 2014-05-06
+{: #v2-0-1}
 
 ### Bug Fixes
 
 - Require `kramdown` gem instead of `maruku` gem
 
 ## 2.0.0 / 2014-05-06
+{: #v2-0-0}
 
 ### Major Enhancements
 - Add "Collections" feature ([#2199]({{ site.repository }}/issues/2199))
@@ -377,12 +383,14 @@ prev_section: contributing
 - Remove notes in docs for unreleased features ([#2309]({{ site.repository }}/issues/2309))
 
 ## 1.5.1 / 2014-03-27
+{: #v1-5-1}
 
 ### Bug Fixes
 
 - Only strip the drive name if it begins the string ([#2176]({{ site.repository }}/issues/2176))
 
 ## 1.5.0 / 2014-03-24
+{: #v1-5-0}
 
 ### Minor Enhancements
 
@@ -399,21 +407,25 @@ prev_section: contributing
 - Lock `cucumber` at `1.3.11` ([#2167]({{ site.repository }}/issues/2167))
 
 ## 1.4.3 / 2014-01-13
+{: #v1-4-3}
 
 ### Bug Fixes
 - Patch show-stopping security vulnerabilities ([#1944]({{ site.repository }}/issues/1944))
 
 ## 1.4.2 / 2013-12-16
+{: #v1-4-2}
 
 ### Bug Fixes
 - Turn on Maruku fenced code blocks by default ([#1830]({{ site.repository }}/issues/1830))
 
 ## 1.4.1 / 2013-12-09
+{: #v1-4-1}
 
 ### Bug Fixes
 - Don't allow nil entries when loading posts ([#1796]({{ site.repository }}/issues/1796))
 
 ## 1.4.0 / 2013-12-07
+{: #v1-4-0}
 
 ### Major Enhancements
 - Add support for TOML config files ([#1765]({{ site.repository }}/issues/1765))
@@ -435,6 +447,7 @@ prev_section: contributing
 - Fixed the mime type for the favicon ([#1772]({{ site.repository }}/issues/1772))
 
 ## 1.3.1 / 2013-11-26
+{: #v1-3-1}
 
 ### Minor Enhancements
 - Add a `--prefix` option to passthrough for the importers ([#1669]({{ site.repository }}/issues/1669))
@@ -468,6 +481,7 @@ prev_section: contributing
 - Update the docs to point to `example.com` ([#1448]({{ site.repository }}/issues/1448))
 
 ## 1.3.0 / 2013-11-04
+{: #v1-3-0}
 
 ### Major Enhancements
 - Add support for adding data as YAML files under a site's `_data`
@@ -542,6 +556,7 @@ prev_section: contributing
 - Fix an error with the data documentation ([#1691]({{ site.repository }}/issues/1691))
 
 ## 1.2.1 / 2013-09-14
+{: #v1-2-1}
 
 ### Minor Enhancements
 - Print better messages for detached server. Mute output on detach. ([#1518]({{ site.repository }}/issues/1518))
@@ -566,6 +581,7 @@ prev_section: contributing
 - Expand 1.2 release post title to 1.2.0 ([#1516]({{ site.repository }}/issues/1516))
 
 ## 1.2.0 / 2013-09-06
+{: #v1-2-0}
 
 ### Major Enhancements
 - Disable automatically-generated excerpts when `excerpt_separator` is `""`. ([#1386]({{ site.repository }}/issues/1386))
@@ -635,11 +651,13 @@ prev_section: contributing
 - Add `jekyll-toc-generator` to list of third-party plugins ([#1506]({{ site.repository }}/issues/1506))
 
 ## 1.1.2 / 2013-07-25
+{: #v1-1-2}
 
 ### Bug Fixes
 - Require Liquid 2.5.1 ([#1349]({{ site.repository }}/issues/1349))
 
 ## 1.1.1 / 2013-07-24
+{: #v1-1-1}
 
 ### Minor Enhancements
 - Remove superfluous `table` selector from main.css in `jekyll new` template ([#1328]({{ site.repository }}/issues/1328))
@@ -663,6 +681,7 @@ prev_section: contributing
 - Add an RSS feed for commits to Jekyll ([#1343]({{ site.repository }}/issues/1343))
 
 ## 1.1.0 / 2013-07-14
+{: #v1-1-0}
 
 ### Major Enhancements
 - Add `docs` subcommand to read Jekyll's docs when offline. ([#1046]({{ site.repository }}/issues/1046))
@@ -735,6 +754,7 @@ prev_section: contributing
     date ([#1304]({{ site.repository }}/issues/1304))
 
 ## 1.0.3 / 2013-06-07
+{: #v1-0-3}
 
 ### Minor Enhancements
 - Add support to gist tag for private gists. ([#1189]({{ site.repository }}/issues/1189))
@@ -780,6 +800,7 @@ prev_section: contributing
 - Use ISO formatted dates in Cucumber features ([#1150]({{ site.repository }}/issues/1150))
 
 ## 1.0.2 / 2013-05-12
+{: #v1-0-2}
 
 ### Major Enhancements
 - Add `jekyll doctor` command to check site for any known compatibility problems ([#1081]({{ site.repository }}/issues/1081))
@@ -802,6 +823,7 @@ prev_section: contributing
 - Updated links to Liquid documentation ([#1073]({{ site.repository }}/issues/1073))
 
 ## 1.0.1 / 2013-05-08
+{: #v1-0-1}
 
 ### Minor Enhancements
 - Do not force use of `toc_token` when using `generate_tok` in RDiscount ([#1048]({{ site.repository }}/issues/1048))
@@ -825,6 +847,7 @@ prev_section: contributing
 - Update links on README to point to new jekyllrb.com ([#1018]({{ site.repository }}/issues/1018))
 
 ## 1.0.0 / 2013-05-06
+{: #v1-0-0}
 
 ### Major Enhancements
 - Add `jekyll new` subcommand: generate a Jekyll scaffold ([#764]({{ site.repository }}/issues/764))
@@ -930,6 +953,7 @@ prev_section: contributing
 - Switch to Simplecov for coverage report ([#765]({{ site.repository }}/issues/765))
 
 ## 0.12.1 / 2013-02-19
+{: #v0-12-1}
 
 ### Minor Enhancements
 - Update Kramdown version to 0.14.1 ([#744]({{ site.repository }}/issues/744))
@@ -939,6 +963,7 @@ prev_section: contributing
 - Update Redcarpet version to 2.2.2 ([#744]({{ site.repository }}/issues/744))
 
 ## 0.12.0 / 2012-12-22
+{: #v0-12-0}
 
 ### Minor Enhancements
 - Add ability to explicitly specify included files ([#261]({{ site.repository }}/issues/261))
@@ -960,15 +985,18 @@ prev_section: contributing
 - Ensure front-matter is at start of file ([#562]({{ site.repository }}/issues/562))
 
 ## 0.11.2 / 2011-12-27
+{: #v0-11-2}
 - Bug Fixes
 - Fix gemspec
 
 ## 0.11.1 / 2011-12-27
+{: #v0-11-1}
 - Bug Fixes
 - Fix extra blank line in highlight blocks ([#409]({{ site.repository }}/issues/409))
 - Update dependencies
 
 ## 0.11.0 / 2011-07-10
+{: #v0-11-0}
 
 ### Major Enhancements
 - Add command line importer functionality ([#253]({{ site.repository }}/issues/253))
@@ -990,10 +1018,12 @@ prev_section: contributing
 - Secure additional path exploits
 
 ## 0.10.0 / 2010-12-16
+{: #v0-10-0}
 - Bug Fixes
 - Add `--no-server` option.
 
 ## 0.9.0 / 2010-12-15
+{: #v0-9-0}
 
 ### Minor Enhancements
 - Use OptionParser's `[no-]` functionality for better boolean parsing.
@@ -1003,6 +1033,7 @@ prev_section: contributing
 - Add Marley migrator ([#28]({{ site.repository }}/issues/28))
 
 ## 0.8.0 / 2010-11-22
+{: #v0-8-0}
 
 ### Minor Enhancements
 - Add wordpress.com importer ([#207]({{ site.repository }}/issues/207))
@@ -1017,6 +1048,7 @@ prev_section: contributing
 - Prevent `_includes` dir from being a symlink
 
 ## 0.7.0 / 2010-08-24
+{: #v0-7-0}
 
 ### Minor Enhancements
 - Add support for rdiscount extensions ([#173]({{ site.repository }}/issues/173))
@@ -1025,6 +1057,7 @@ prev_section: contributing
 - The site configuration may not always provide a 'time' setting ([#184]({{ site.repository }}/issues/184))
 
 ## 0.6.2 / 2010-06-25
+{: #v0-6-2}
 - Bug Fixes
 - Fix Rakefile 'release' task (tag pushing was missing origin)
 - Ensure that RedCloth is loaded when textilize filter is used ([#183]({{ site.repository }}/issues/183))
@@ -1032,10 +1065,12 @@ prev_section: contributing
 - Fix `page.url` to include full relative path ([#181]({{ site.repository }}/issues/181))
 
 ## 0.6.1 / 2010-06-24
+{: #v0-6-1}
 - Bug Fixes
 - Fix Markdown Pygments prefix and suffix ([#178]({{ site.repository }}/issues/178))
 
 ## 0.6.0 / 2010-06-23
+{: #v0-6-0}
 
 ### Major Enhancements
 - Proper plugin system ([#19]({{ site.repository }}/issues/19), [#100]({{ site.repository }}/issues/100))
@@ -1064,6 +1099,7 @@ prev_section: contributing
 - Fix source directory binding using `Dir.pwd` ([#75]({{ site.repository }}/issues/75))
 
 ## 0.5.7 / 2010-01-12
+{: #v0-5-7}
 
 ### Minor Enhancements
 - Allow overriding of post date in the front matter ([#62]({{ site.repository }}/issues/62), [#38]({{ site.repository }}/issues/38))
@@ -1076,6 +1112,7 @@ prev_section: contributing
       alternative is available
 
 ## 0.5.6 / 2010-01-08
+{: #v0-5-6}
 - Bug Fixes
 - Require redcloth >= 4.2.1 in tests ([#92]({{ site.repository }}/issues/92))
 - Don't break on triple dashes in yaml frontmatter ([#93]({{ site.repository }}/issues/93))
@@ -1087,6 +1124,7 @@ prev_section: contributing
 - Add javascript mime type for webrick ([#98]({{ site.repository }}/issues/98))
 
 ## 0.5.5 / 2010-01-08
+{: #v0-5-5}
 - Bug Fixes
 - Fix pagination % 0 bug ([#78]({{ site.repository }}/issues/78))
 - Ensure all posts are processed first ([#71]({{ site.repository }}/issues/71))
@@ -1096,15 +1134,18 @@ prev_section: contributing
     that is what the commit log is for.
 
 ## 0.5.4 / 2009-08-23
+{: #v0-5-4}
 - Bug Fixes
 - Do not allow symlinks (security vulnerability)
 
 ## 0.5.3 / 2009-07-14
+{: #v0-5-3}
 - Bug Fixes
 - Solving the permalink bug where non-html files wouldn't work
       ([@jeffrydegrande](https://github.com/jeffrydegrande))
 
 ## 0.5.2 / 2009-06-24
+{: #v0-5-2}
 - Enhancements
 - Added --paginate option to the executable along with a paginator object
       for the payload ([@calavera](https://github.com/calavera))
@@ -1130,6 +1171,7 @@ prev_section: contributing
 - Added Date#xmlschema for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06
+{: #v0-5-1}
 
 ### Major Enhancements
 - Next/previous posts in site payload ([@pantulis](https://github.com/pantulis), [@tomo](https://github.com/tomo))
@@ -1145,6 +1187,7 @@ prev_section: contributing
 - CGI escaped post titles ([@Chrononaut](https://github.com/Chrononaut))
 
 ## 0.5.0 / 2009-04-07
+{: #v0-5-0}
 
 ### Minor Enhancements
 - Ability to set post categories via YAML ([@qrush](https://github.com/qrush))
@@ -1171,6 +1214,7 @@ prev_section: contributing
 - Add Jekyll binary as executable to gemspec ([@dysinger](https://github.com/dysinger))
 
 ## 0.4.0 / 2009-02-03
+{: #v0-4-0}
 
 ### Major Enhancements
 - Switch to Jeweler for packaging tasks
@@ -1192,6 +1236,7 @@ prev_section: contributing
 - Fix site payload available to files ([@matrix9180](https://github.com/matrix9180))
 
 ## 0.3.0 / 2008-12-24
+{: #v0-3-0}
 
 ### Major Enhancements
 - Added `--server` option to start a simple WEBrick server on destination
@@ -1211,6 +1256,7 @@ prev_section: contributing
 - Properly reject directories in `_layouts`
 
 ## 0.2.1 / 2008-12-15
+{: #v0-2-1}
 - Major Changes
 - Use Maruku (pure Ruby) for Markdown by default ([@mreid](https://github.com/mreid))
 - Allow use of RDiscount with `--rdiscount` flag
@@ -1219,14 +1265,17 @@ prev_section: contributing
 - Don't load directory_watcher unless it's needed ([@pjhyett](https://github.com/pjhyett))
 
 ## 0.2.0 / 2008-12-14
+{: #v0-2-0}
 - Major Changes
 - related_posts is now found in `site.related_posts`
 
 ## 0.1.6 / 2008-12-13
+{: #v0-1-6}
 - Major Features
 - Include files in `_includes` with {% raw %}`{% include x.textile %}`{% endraw %}
 
 ## 0.1.5 / 2008-12-12
+{: #v0-1-5}
 
 ### Major Enhancements
 - Code highlighting with Pygments if `--pygments` is specified
@@ -1239,10 +1288,12 @@ prev_section: contributing
 - Skip `related_posts` when there is only one post ([@JackDanger](https://github.com/JackDanger))
 
 ## 0.1.4 / 2008-12-08
+{: #v0-1-4}
 - Bug Fixes
 - DATA does not work properly with rubygems
 
 ## 0.1.3 / 2008-12-06
+{: #v0-1-3}
 - Major Features
 - Markdown support ([@vanpelt](https://github.com/vanpelt))
 - Mephisto and CSV converters ([@vanpelt](https://github.com/vanpelt))
@@ -1252,6 +1303,7 @@ prev_section: contributing
 - Accept both `\r\n` and `\n` in YAML header ([@vanpelt](https://github.com/vanpelt))
 
 ## 0.1.2 / 2008-11-22
+{: #v0-1-2}
 - Major Features
 - Add a real "related posts" implementation using Classifier
 - Command Line Changes
@@ -1259,14 +1311,17 @@ prev_section: contributing
       if they are omitted
 
 ## 0.1.1 / 2008-11-22
+{: #v0-1-1}
 - Minor Additions
 - Posts now support introspectional data e.g. {% raw %}`{{ page.url }}`{% endraw %}
 
 ## 0.1.0 / 2008-11-05
+{: #v0-1-0}
 - First release
 - Converts posts written in Textile
 - Converts regular site pages
 - Simple copy of binary files
 
 ## 0.0.0 / 2008-10-19
+{: #v0-0-0}
 - Birthday!
