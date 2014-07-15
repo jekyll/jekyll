@@ -53,9 +53,19 @@ def liquid_escape(markdown)
   markdown.gsub(/(`{[{%].+[}%]}`)/, "{% raw %}\\1{% endraw %}")
 end
 
-def custom_release_headers(markdown)
-  header_regexp = /## (\d{1,2})\.(\d{1,2})\.(\d{1,2}) \/ \d{4}-\d{2}-\d{2}/
-  markdown.gsub(header_regexp, "\\0\n{: #v\\1-\\2-\\3}")
+def custom_release_header_anchors(markdown)
+  header_regexp = /^(\d{1,2})\.(\d{1,2})\.(\d{1,2}) \/ \d{4}-\d{2}-\d{2}/
+  section_regexp = /^### \w+ \w+$/
+  markdown.split(/^##\s/).map do |release_notes|
+    _, major, minor, patch = *release_notes.match(header_regexp)
+    release_notes
+      .gsub(header_regexp, "\\0\n{: #v\\1-\\2-\\3}")
+      .gsub(section_regexp) { |section| "#{section}\n{: ##{sluffigy(section)}-v#{major}-#{minor}-#{patch}}" }
+  end.join("\n## ")
+end
+
+def sluffigy(header)
+  header.gsub(/#/, '').strip.downcase.gsub(/\s+/, '-')
 end
 
 def remove_head_from_history(markdown)
@@ -65,7 +75,7 @@ end
 
 def converted_history(markdown)
   remove_head_from_history(
-    custom_release_headers(
+    custom_release_header_anchors(
       liquid_escape(
         linkify(
           normalize_bullets(markdown)))))

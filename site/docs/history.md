@@ -9,22 +9,26 @@ prev_section: contributing
 {: #v2-1-1}
 
 ### Bug Fixes
+{: #bug-fixes-v2-1-1}
 
 - Patch read vulnerabilities for data & confirm none for layouts ([#2563]({{ site.repository }}/issues/2563))
 - Update Maruku dependency to allow use of the latest version ([#2576]({{ site.repository }}/issues/2576))
 - Remove conditional assignment from document URL to prevent stale urls ([#2575]({{ site.repository }}/issues/2575))
 
 ### Site Enhancements
+{: #site-enhancements-v2-1-1}
 
 - Add vertical margin to `highlight` to separate code blocks ([#2558]({{ site.repository }}/issues/2558))
 - Add `html_pages` to Variables docs ([#2567]({{ site.repository }}/issues/2567))
 - Fixed broken link to Permalinks page ([#2572]({{ site.repository }}/issues/2572))
 - Update link to Windows installation guide ([#2578]({{ site.repository }}/issues/2578))
 
+
 ## 2.1.0 / 2014-06-28
 {: #v2-1-0}
 
 ### Minor Enhancements
+{: #minor-enhancements-v2-1-0}
 
 - Bump to the latest Liquid version, 2.6.1 ([#2495]({{ site.repository }}/issues/2495))
 - Add support for JSON files in the `_data` directory ([#2369]({{ site.repository }}/issues/2369))
@@ -53,6 +57,7 @@ prev_section: contributing
 - Spike out `--watch` flag into a separate gem ([#2550]({{ site.repository }}/issues/2550))
 
 ### Bug Fixes
+{: #bug-fixes-v2-1-0}
 
 - Liquid `sort` filter should sort even if one of the values is `nil` ([#2345]({{ site.repository }}/issues/2345))
 - Remove padding on `pre code` in the site template CSS ([#2383]({{ site.repository }}/issues/2383))
@@ -77,6 +82,7 @@ prev_section: contributing
 - Be quiet very quickly. ([#2520]({{ site.repository }}/issues/2520))
 
 ### Development Fixes
+{: #development-fixes-v2-1-0}
 
 - Test Ruby 2.1.2 instead of 2.1.1 ([#2374]({{ site.repository }}/issues/2374))
 - Add test for sorting UTF-8 characters ([#2384]({{ site.repository }}/issues/2384))
@@ -85,6 +91,7 @@ prev_section: contributing
 - Fix a bit of missing TomDoc to `Jekyll::Commands::Build#build` ([#2554]({{ site.repository }}/issues/2554))
 
 ### Site Enhancements
+{: #site-enhancements-v2-1-0}
 
 - Set `timezone` to `America/Los_Angeles` ([#2394]({{ site.repository }}/issues/2394))
 - Improve JavaScript in `anchor_links.html` ([#2368]({{ site.repository }}/issues/2368))
@@ -108,10 +115,12 @@ prev_section: contributing
 - Remove `url` from configuration docs ([#2547]({{ site.repository }}/issues/2547))
 - Documentation for Continuous Integration for your Jekyll Site ([#2432]({{ site.repository }}/issues/2432))
 
+
 ## 2.0.3 / 2014-05-08
 {: #v2-0-3}
 
 ### Bug Fixes
+{: #bug-fixes-v2-0-3}
 
 - Properly prefix links in site template with URL or baseurl depending upon
     need. ([#2319]({{ site.repository }}/issues/2319))
@@ -126,6 +135,7 @@ prev_section: contributing
 - Rescue errors thrown so `--watch` doesn't fail ([#2364]({{ site.repository }}/issues/2364))
 
 ### Site Enhancements
+{: #site-enhancements-v2-0-3}
 
 - Add missing "as" to assets docs page ([#2337]({{ site.repository }}/issues/2337))
 - Update docs to reflect new `baseurl` default ([#2341]({{ site.repository }}/issues/2341))
@@ -134,30 +144,37 @@ prev_section: contributing
 - Fix link to frontmatter defaults docs ([#2353]({{ site.repository }}/issues/2353))
 - Fix for `History.markdown` in order to fix history page in docs ([#2363]({{ site.repository }}/issues/2363))
 
+
 ## 2.0.2 / 2014-05-07
 {: #v2-0-2}
 
 ### Bug Fixes
+{: #bug-fixes-v2-0-2}
 
 - Correct use of `url` and `baseurl` in the site template. ([#2317]({{ site.repository }}/issues/2317))
 - Default `baseurl` to `""` ([#2317]({{ site.repository }}/issues/2317))
 
 ### Site Enhancements
+{: #site-enhancements-v2-0-2}
 
 - Correct docs for the `gist` plugin so it always includes the username. ([#2314]({{ site.repository }}/issues/2314))
 - Clarify new (defaults, `where` filter) features in docs ([#2316]({{ site.repository }}/issues/2316))
+
 
 ## 2.0.1 / 2014-05-06
 {: #v2-0-1}
 
 ### Bug Fixes
+{: #bug-fixes-v2-0-1}
 
 - Require `kramdown` gem instead of `maruku` gem
+
 
 ## 2.0.0 / 2014-05-06
 {: #v2-0-0}
 
 ### Major Enhancements
+{: #major-enhancements-v2-0-0}
 - Add "Collections" feature ([#2199]({{ site.repository }}/issues/2199))
 - Add gem-based plugin whitelist to safe mode ([#1657]({{ site.repository }}/issues/1657))
 - Replace the commander command line parser with a more robust
@@ -179,6 +196,7 @@ prev_section: contributing
 - Exclude files based on prefix as well as `fnmatch?` ([#2303]({{ site.repository }}/issues/2303))
 
 ### Minor Enhancements
+{: #minor-enhancements-v2-0-0}
 - Move the EntryFilter class into the Jekyll module to avoid polluting the
     global namespace ([#1800]({{ site.repository }}/issues/1800))
 - Add `group_by` Liquid filter create lists of items grouped by a common
@@ -231,6 +249,7 @@ prev_section: contributing
 - Take into account missing values in the Liquid sort filter ([#2299]({{ site.repository }}/issues/2299))
 
 ### Bug Fixes
+{: #bug-fixes-v2-0-0}
 - Don't allow nil entries when loading posts ([#1796]({{ site.repository }}/issues/1796))
 - Remove the scrollbar that's always displayed in new sites generated
     from the site template ([#1805]({{ site.repository }}/issues/1805))
@@ -266,6 +285,7 @@ prev_section: contributing
 - Add `output` to `Document` liquid output hash ([#2309]({{ site.repository }}/issues/2309))
 
 ### Development Fixes
+{: #development-fixes-v2-0-0}
 - Add a link to the site in the README.md file ([#1795]({{ site.repository }}/issues/1795))
 - Add in History and site changes from `v1-stable` branch ([#1836]({{ site.repository }}/issues/1836))
 - Testing additions on the Excerpt class ([#1893]({{ site.repository }}/issues/1893))
@@ -301,6 +321,7 @@ prev_section: contributing
 - Workaround for Travis bug ([#2290]({{ site.repository }}/issues/2290))
 
 ### Site Enhancements
+{: #site-enhancements-v2-0-0}
 - Document Kramdown's GFM parser option ([#1791]({{ site.repository }}/issues/1791))
 - Move CSS to includes & update normalize.css to v2.1.3 ([#1787]({{ site.repository }}/issues/1787))
 - Minify CSS only in production ([#1803]({{ site.repository }}/issues/1803))
@@ -382,91 +403,114 @@ prev_section: contributing
 - Add docs for `where` and `group_by` Liquid filters ([#2298]({{ site.repository }}/issues/2298))
 - Remove notes in docs for unreleased features ([#2309]({{ site.repository }}/issues/2309))
 
+
 ## 1.5.1 / 2014-03-27
 {: #v1-5-1}
 
 ### Bug Fixes
+{: #bug-fixes-v1-5-1}
 
 - Only strip the drive name if it begins the string ([#2176]({{ site.repository }}/issues/2176))
+
 
 ## 1.5.0 / 2014-03-24
 {: #v1-5-0}
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-5-0}
 
 - Loosen `safe_yaml` dependency to `~> 1.0` ([#2167]({{ site.repository }}/issues/2167))
 - Bump `safe_yaml` dependency to `~> 1.0.0` ([#1942]({{ site.repository }}/issues/1942))
 
 ### Bug Fixes
+{: #bug-fixes-v1-5-0}
 
 - Fix issue where filesystem traversal restriction broke Windows ([#2167]({{ site.repository }}/issues/2167))
 - Lock `maruku` at `0.7.0` ([#2167]({{ site.repository }}/issues/2167))
 
 ### Development Fixes
+{: #development-fixes-v1-5-0}
 
 - Lock `cucumber` at `1.3.11` ([#2167]({{ site.repository }}/issues/2167))
+
 
 ## 1.4.3 / 2014-01-13
 {: #v1-4-3}
 
 ### Bug Fixes
+{: #bug-fixes-v1-4-3}
 - Patch show-stopping security vulnerabilities ([#1944]({{ site.repository }}/issues/1944))
+
 
 ## 1.4.2 / 2013-12-16
 {: #v1-4-2}
 
 ### Bug Fixes
+{: #bug-fixes-v1-4-2}
 - Turn on Maruku fenced code blocks by default ([#1830]({{ site.repository }}/issues/1830))
+
 
 ## 1.4.1 / 2013-12-09
 {: #v1-4-1}
 
 ### Bug Fixes
+{: #bug-fixes-v1-4-1}
 - Don't allow nil entries when loading posts ([#1796]({{ site.repository }}/issues/1796))
+
 
 ## 1.4.0 / 2013-12-07
 {: #v1-4-0}
 
 ### Major Enhancements
+{: #major-enhancements-v1-4-0}
 - Add support for TOML config files ([#1765]({{ site.repository }}/issues/1765))
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-4-0}
 - Sort plugins as a way to establish a load order ([#1682]({{ site.repository }}/issues/1682))
 - Update Maruku to 0.7.0 ([#1775]({{ site.repository }}/issues/1775))
 
 ### Bug Fixes
+{: #bug-fixes-v1-4-0}
 - Add a space between two words in a Pagination warning message ([#1769]({{ site.repository }}/issues/1769))
 - Upgrade `toml` gem to `v0.1.0` to maintain compat with Ruby 1.8.7 ([#1778]({{ site.repository }}/issues/1778))
 
 ### Development Fixes
+{: #development-fixes-v1-4-0}
 - Remove some whitespace in the code ([#1755]({{ site.repository }}/issues/1755))
 - Remove some duplication in the reading of posts and drafts ([#1779]({{ site.repository }}/issues/1779))
 
 ### Site Enhancements
+{: #site-enhancements-v1-4-0}
 - Fixed case of a word in the Jekyll v1.3.0 release post ([#1762]({{ site.repository }}/issues/1762))
 - Fixed the mime type for the favicon ([#1772]({{ site.repository }}/issues/1772))
+
 
 ## 1.3.1 / 2013-11-26
 {: #v1-3-1}
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-3-1}
 - Add a `--prefix` option to passthrough for the importers ([#1669]({{ site.repository }}/issues/1669))
 - Push the paginator plugin lower in the plugin priority order so
     other plugins run before it ([#1759]({{ site.repository }}/issues/1759))
 
 ### Bug Fixes
+{: #bug-fixes-v1-3-1}
 - Fix the include tag when ran in a loop ([#1726]({{ site.repository }}/issues/1726))
 - Fix errors when using `--watch` on 1.8.7 ([#1730]({{ site.repository }}/issues/1730))
 - Specify where the include is called from if an included file is
     missing ([#1746]({{ site.repository }}/issues/1746))
 
 ### Development Fixes
+{: #development-fixes-v1-3-1}
 - Extract `Site#filter_entries` into its own object ([#1697]({{ site.repository }}/issues/1697))
 - Enable Travis' bundle caching ([#1734]({{ site.repository }}/issues/1734))
 - Remove trailing whitespace in some files ([#1736]({{ site.repository }}/issues/1736))
 - Fix a duplicate test name ([#1754]({{ site.repository }}/issues/1754))
 
 ### Site Enhancements
+{: #site-enhancements-v1-3-1}
 - Update link to example Rakefile to point to specific commit ([#1741]({{ site.repository }}/issues/1741))
 - Fix drafts docs to indicate that draft time is based on file modification
     time, not `Time.now` ([#1695]({{ site.repository }}/issues/1695))
@@ -480,16 +524,19 @@ prev_section: contributing
 - Add docs for `post_url` when posts are in subdirectories ([#1718]({{ site.repository }}/issues/1718))
 - Update the docs to point to `example.com` ([#1448]({{ site.repository }}/issues/1448))
 
+
 ## 1.3.0 / 2013-11-04
 {: #v1-3-0}
 
 ### Major Enhancements
+{: #major-enhancements-v1-3-0}
 - Add support for adding data as YAML files under a site's `_data`
     directory ([#1003]({{ site.repository }}/issues/1003))
 - Allow variables to be used with `include` tags ([#1495]({{ site.repository }}/issues/1495))
 - Allow using gems for plugin management ([#1557]({{ site.repository }}/issues/1557))
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-3-0}
 - Decrease the specificity in the site template CSS ([#1574]({{ site.repository }}/issues/1574))
 - Add `encoding` configuration option ([#1449]({{ site.repository }}/issues/1449))
 - Provide better error handling for Jekyll's custom Liquid tags
@@ -507,6 +554,7 @@ prev_section: contributing
     missing ([#1662]({{ site.repository }}/issues/1662))
 
 ### Bug Fixes
+{: #bug-fixes-v1-3-0}
 - Fix up matching against source and destination when the two
     locations are similar ([#1556]({{ site.repository }}/issues/1556))
 - Fix the missing `pathname` require in certain cases ([#1255]({{ site.repository }}/issues/1255))
@@ -522,6 +570,7 @@ prev_section: contributing
     incompatibilities ([#1687]({{ site.repository }}/issues/1687))
 
 ### Development Fixes
+{: #development-fixes-v1-3-0}
 - Add coverage reporting with Coveralls ([#1539]({{ site.repository }}/issues/1539))
 - Refactor the Liquid `include` tag ([#1490]({{ site.repository }}/issues/1490))
 - Update launchy dependency to `~> 2.3` ([#1608]({{ site.repository }}/issues/1608))
@@ -538,6 +587,7 @@ prev_section: contributing
 - Improve comparisons of timestamps by ignoring the seconds ([#1582]({{ site.repository }}/issues/1582))
 
 ### Site Enhancements
+{: #site-enhancements-v1-3-0}
 - Fix params for `JekyllImport::WordPress.process` arguments ([#1554]({{ site.repository }}/issues/1554))
 - Add `jekyll-suggested-tweet` to list of third-party plugins ([#1555]({{ site.repository }}/issues/1555))
 - Link to Liquid's docs for tags and filters ([#1553]({{ site.repository }}/issues/1553))
@@ -555,39 +605,47 @@ prev_section: contributing
 - Fix navigation in the "Working with Drafts" page ([#1667]({{ site.repository }}/issues/1667))
 - Fix an error with the data documentation ([#1691]({{ site.repository }}/issues/1691))
 
+
 ## 1.2.1 / 2013-09-14
 {: #v1-2-1}
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-2-1}
 - Print better messages for detached server. Mute output on detach. ([#1518]({{ site.repository }}/issues/1518))
 - Disable reverse lookup when running `jekyll serve` ([#1363]({{ site.repository }}/issues/1363))
 - Upgrade RedCarpet dependency to `~> 2.3.0` ([#1515]({{ site.repository }}/issues/1515))
 - Upgrade to Liquid `>= 2.5.2, < 2.6` ([#1536]({{ site.repository }}/issues/1536))
 
 ### Bug Fixes
+{: #bug-fixes-v1-2-1}
 - Fix file discrepancy in gemspec ([#1522]({{ site.repository }}/issues/1522))
 - Force rendering of Include tag ([#1525]({{ site.repository }}/issues/1525))
 
 ### Development Fixes
+{: #development-fixes-v1-2-1}
 - Add a rake task to generate a new release post ([#1404]({{ site.repository }}/issues/1404))
 - Mute LSI output in tests ([#1531]({{ site.repository }}/issues/1531))
 - Update contributor documentation ([#1537]({{ site.repository }}/issues/1537))
 
 ### Site Enhancements
+{: #site-enhancements-v1-2-1}
 - Fix a couple of validation errors on the site ([#1511]({{ site.repository }}/issues/1511))
 - Make navigation menus reusable ([#1507]({{ site.repository }}/issues/1507))
 - Fix link to History page from Release v1.2.0 notes post.
 - Fix markup in History file for command line options ([#1512]({{ site.repository }}/issues/1512))
 - Expand 1.2 release post title to 1.2.0 ([#1516]({{ site.repository }}/issues/1516))
 
+
 ## 1.2.0 / 2013-09-06
 {: #v1-2-0}
 
 ### Major Enhancements
+{: #major-enhancements-v1-2-0}
 - Disable automatically-generated excerpts when `excerpt_separator` is `""`. ([#1386]({{ site.repository }}/issues/1386))
 - Add checking for URL conflicts when running `jekyll doctor` ([#1389]({{ site.repository }}/issues/1389))
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-2-0}
 - Catch and fix invalid `paginate` values ([#1390]({{ site.repository }}/issues/1390))
 - Remove superfluous `div.container` from the default html template for
     `jekyll new` ([#1315]({{ site.repository }}/issues/1315))
@@ -603,6 +661,7 @@ prev_section: contributing
     `jekyll.version` variable ([#1481]({{ site.repository }}/issues/1481))
 
 ### Bug Fixes
+{: #bug-fixes-v1-2-0}
 - Markdown extension matching matches only exact matches ([#1382]({{ site.repository }}/issues/1382))
 - Fixed NoMethodError when message passed to `Stevenson#message` is nil ([#1388]({{ site.repository }}/issues/1388))
 - Use binary mode when writing file ([#1364]({{ site.repository }}/issues/1364))
@@ -618,6 +677,7 @@ prev_section: contributing
     tag ([#1494]({{ site.repository }}/issues/1494))
 
 ### Development Fixes
+{: #development-fixes-v1-2-0}
 - Remove redundant argument to
     Jekyll::Commands::New#scaffold_post_content ([#1356]({{ site.repository }}/issues/1356))
 - Add new dependencies to the README ([#1360]({{ site.repository }}/issues/1360))
@@ -629,6 +689,7 @@ prev_section: contributing
 - Add Gem version and dependency badge to README ([#1497]({{ site.repository }}/issues/1497))
 
 ### Site Enhancements
+{: #site-enhancements-v1-2-0}
 - Add info about new releases ([#1353]({{ site.repository }}/issues/1353))
 - Update plugin list with jekyll-rss plugin ([#1354]({{ site.repository }}/issues/1354))
 - Update the site list page with Ruby's official site ([#1358]({{ site.repository }}/issues/1358))
@@ -650,23 +711,29 @@ prev_section: contributing
 - XML escape the blog post title in our feed ([#1501]({{ site.repository }}/issues/1501))
 - Add `jekyll-toc-generator` to list of third-party plugins ([#1506]({{ site.repository }}/issues/1506))
 
+
 ## 1.1.2 / 2013-07-25
 {: #v1-1-2}
 
 ### Bug Fixes
+{: #bug-fixes-v1-1-2}
 - Require Liquid 2.5.1 ([#1349]({{ site.repository }}/issues/1349))
+
 
 ## 1.1.1 / 2013-07-24
 {: #v1-1-1}
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-1-1}
 - Remove superfluous `table` selector from main.css in `jekyll new` template ([#1328]({{ site.repository }}/issues/1328))
 - Abort with non-zero exit codes ([#1338]({{ site.repository }}/issues/1338))
 
 ### Bug Fixes
+{: #bug-fixes-v1-1-1}
 - Fix up the rendering of excerpts ([#1339]({{ site.repository }}/issues/1339))
 
 ### Site Enhancements
+{: #site-enhancements-v1-1-1}
 - Add Jekyll Image Tag to the plugins list ([#1306]({{ site.repository }}/issues/1306))
 - Remove erroneous statement that `site.pages` are sorted alphabetically.
 - Add info about the `_drafts` directory to the directory structure
@@ -680,15 +747,18 @@ prev_section: contributing
     will automatically convert them. ([#1303]({{ site.repository }}/issues/1303))
 - Add an RSS feed for commits to Jekyll ([#1343]({{ site.repository }}/issues/1343))
 
+
 ## 1.1.0 / 2013-07-14
 {: #v1-1-0}
 
 ### Major Enhancements
+{: #major-enhancements-v1-1-0}
 - Add `docs` subcommand to read Jekyll's docs when offline. ([#1046]({{ site.repository }}/issues/1046))
 - Support passing parameters to templates in `include` tag ([#1204]({{ site.repository }}/issues/1204))
 - Add support for Liquid tags to post excerpts ([#1302]({{ site.repository }}/issues/1302))
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-1-0}
 - Search the hierarchy of pagination path up to site root to determine template page for
     pagination. ([#1198]({{ site.repository }}/issues/1198))
 - Add the ability to generate a new Jekyll site without a template ([#1171]({{ site.repository }}/issues/1171))
@@ -702,6 +772,7 @@ prev_section: contributing
 - Allow for all options for Kramdown HTML Converter ([#1201]({{ site.repository }}/issues/1201))
 
 ### Bug Fixes
+{: #bug-fixes-v1-1-0}
 - Fix pagination in subdirectories. ([#1198]({{ site.repository }}/issues/1198))
 - Fix an issue with directories and permalinks that have a plus sign
     (+) in them ([#1215]({{ site.repository }}/issues/1215))
@@ -709,6 +780,7 @@ prev_section: contributing
 - Latest posts first in non-LSI `related_posts` ([#1271]({{ site.repository }}/issues/1271))
 
 ### Development Fixes
+{: #development-fixes-v1-1-0}
 - Merge the theme and layout Cucumber steps into one step ([#1151]({{ site.repository }}/issues/1151))
 - Restrict activesupport dependency to pre-4.0.0 to maintain compatibility with `<= 1.9.2`
 - Include/exclude deprecation handling simplification ([#1284]({{ site.repository }}/issues/1284))
@@ -716,6 +788,7 @@ prev_section: contributing
 - Refactor Jekyll::Site ([#1144]({{ site.repository }}/issues/1144))
 
 ### Site Enhancements
+{: #site-enhancements-v1-1-0}
 - Add "News" section for release notes, along with an RSS feed ([#1093]({{ site.repository }}/issues/1093), [#1285]({{ site.repository }}/issues/1285), [#1286]({{ site.repository }}/issues/1286))
 - Add "History" page.
 - Restructured docs sections to include "Meta" section.
@@ -753,10 +826,12 @@ prev_section: contributing
 - Add information about time zones to the documentation for a page's
     date ([#1304]({{ site.repository }}/issues/1304))
 
+
 ## 1.0.3 / 2013-06-07
 {: #v1-0-3}
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-0-3}
 - Add support to gist tag for private gists. ([#1189]({{ site.repository }}/issues/1189))
 - Fail loudly when Maruku errors out ([#1190]({{ site.repository }}/issues/1190))
 - Move the building of related posts into their own class ([#1057]({{ site.repository }}/issues/1057))
@@ -765,6 +840,7 @@ prev_section: contributing
 - Convert IDs in the site template to classes ([#1170]({{ site.repository }}/issues/1170))
 
 ### Bug Fixes
+{: #bug-fixes-v1-0-3}
 - Fix typo in Stevenson constant "ERROR". ([#1166]({{ site.repository }}/issues/1166))
 - Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue ([#1106]({{ site.repository }}/issues/1106))
 - Exit with a non-zero exit code when dealing with a Liquid error ([#1121]({{ site.repository }}/issues/1121))
@@ -775,6 +851,7 @@ prev_section: contributing
     ([#1156]({{ site.repository }}/issues/1156))
 
 ### Site Enhancements
+{: #site-enhancements-v1-0-3}
 - Add a Pro Tip to docs about front matter variables being optional ([#1147]({{ site.repository }}/issues/1147))
 - Add changelog to site as History page in /docs/ ([#1065]({{ site.repository }}/issues/1065))
 - Add note to Upgrading page about new config options in 1.0.x ([#1146]({{ site.repository }}/issues/1146))
@@ -794,62 +871,75 @@ prev_section: contributing
 - Add the Jekyll Gallery Plugin to the plugin list ([#1143]({{ site.repository }}/issues/1143))
 
 ### Development Fixes
+{: #development-fixes-v1-0-3}
 - Use Jekyll.logger instead of Jekyll::Stevenson to log things ([#1149]({{ site.repository }}/issues/1149))
 - Fix pesky Cucumber infinite loop ([#1139]({{ site.repository }}/issues/1139))
 - Do not write posts with timezones in Cucumber tests ([#1124]({{ site.repository }}/issues/1124))
 - Use ISO formatted dates in Cucumber features ([#1150]({{ site.repository }}/issues/1150))
 
+
 ## 1.0.2 / 2013-05-12
 {: #v1-0-2}
 
 ### Major Enhancements
+{: #major-enhancements-v1-0-2}
 - Add `jekyll doctor` command to check site for any known compatibility problems ([#1081]({{ site.repository }}/issues/1081))
 - Backwards-compatibilize relative permalinks ([#1081]({{ site.repository }}/issues/1081))
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-0-2}
 - Add a `data-lang="<lang>"` attribute to Redcarpet code blocks ([#1066]({{ site.repository }}/issues/1066))
 - Deprecate old config `server_port`, match to `port` if `port` isn't set ([#1084]({{ site.repository }}/issues/1084))
 - Update pygments.rb version to 0.5.0 ([#1061]({{ site.repository }}/issues/1061))
 - Update Kramdown version to 1.0.2 ([#1067]({{ site.repository }}/issues/1067))
 
 ### Bug Fixes
+{: #bug-fixes-v1-0-2}
 - Fix issue when categories are numbers ([#1078]({{ site.repository }}/issues/1078))
 - Catching that Redcarpet gem isn't installed ([#1059]({{ site.repository }}/issues/1059))
 
 ### Site Enhancements
+{: #site-enhancements-v1-0-2}
 - Add documentation about `relative_permalinks` ([#1081]({{ site.repository }}/issues/1081))
 - Remove pygments-installation instructions, as pygments.rb is bundled with it ([#1079]({{ site.repository }}/issues/1079))
 - Move pages to be Pages for realz ([#985]({{ site.repository }}/issues/985))
 - Updated links to Liquid documentation ([#1073]({{ site.repository }}/issues/1073))
 
+
 ## 1.0.1 / 2013-05-08
 {: #v1-0-1}
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-0-1}
 - Do not force use of `toc_token` when using `generate_tok` in RDiscount ([#1048]({{ site.repository }}/issues/1048))
 - Add newer `language-` class name prefix to code blocks ([#1037]({{ site.repository }}/issues/1037))
 - Commander error message now preferred over process abort with incorrect args ([#1040]({{ site.repository }}/issues/1040))
 
 ### Bug Fixes
+{: #bug-fixes-v1-0-1}
 - Make Redcarpet respect the pygments configuration option ([#1053]({{ site.repository }}/issues/1053))
 - Fix the index build with LSI ([#1045]({{ site.repository }}/issues/1045))
 - Don't print deprecation warning when no arguments are specified. ([#1041]({{ site.repository }}/issues/1041))
 - Add missing `</div>` to site template used by `new` subcommand, fixed typos in code ([#1032]({{ site.repository }}/issues/1032))
 
 ### Site Enhancements
+{: #site-enhancements-v1-0-1}
 - Changed https to http in the GitHub Pages link ([#1051]({{ site.repository }}/issues/1051))
 - Remove CSS cruft, fix typos, fix HTML errors ([#1028]({{ site.repository }}/issues/1028))
 - Removing manual install of Pip and Distribute ([#1025]({{ site.repository }}/issues/1025))
 - Updated URL for Markdown references plugin ([#1022]({{ site.repository }}/issues/1022))
 
 ### Development Fixes
+{: #development-fixes-v1-0-1}
 - Markdownify history file ([#1027]({{ site.repository }}/issues/1027))
 - Update links on README to point to new jekyllrb.com ([#1018]({{ site.repository }}/issues/1018))
+
 
 ## 1.0.0 / 2013-05-06
 {: #v1-0-0}
 
 ### Major Enhancements
+{: #major-enhancements-v1-0-0}
 - Add `jekyll new` subcommand: generate a Jekyll scaffold ([#764]({{ site.repository }}/issues/764))
 - Refactored Jekyll commands into subcommands: build, serve, and migrate. ([#690]({{ site.repository }}/issues/690))
 - Removed importers/migrators from main project, migrated to jekyll-import sub-gem ([#793]({{ site.repository }}/issues/793))
@@ -857,6 +947,7 @@ prev_section: contributing
 - Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) ([#928]({{ site.repository }}/issues/928))
 
 ### Minor Enhancements
+{: #minor-enhancements-v1-0-0}
 - Site template HTML5-ified ([#964]({{ site.repository }}/issues/964))
 - Use post's directory path when matching for the `post_url` tag ([#998]({{ site.repository }}/issues/998))
 - Loosen dependency on Pygments so it's only required when it's needed ([#1015]({{ site.repository }}/issues/1015))
@@ -931,6 +1022,7 @@ prev_section: contributing
 - Prevent custom destination from causing continuous regen on watch ([#528]({{ site.repository }}/issues/528), [#820]({{ site.repository }}/issues/820), [#862]({{ site.repository }}/issues/862))
 
 ### Site Enhancements
+{: #site-enhancements-v1-0-0}
 - Responsify ([#860]({{ site.repository }}/issues/860))
 - Fix spelling, punctuation and phrasal errors ([#989]({{ site.repository }}/issues/989))
 - Update quickstart instructions with `new` command ([#966]({{ site.repository }}/issues/966))
@@ -941,6 +1033,7 @@ prev_section: contributing
 - Redesigned site ([#583]({{ site.repository }}/issues/583))
 
 ### Development Fixes
+{: #development-fixes-v1-0-0}
 - Exclude Cucumber 1.2.4, which causes tests to fail in 1.9.2 ([#938]({{ site.repository }}/issues/938))
 - Added "features:html" rake task for debugging purposes, cleaned up
       Cucumber profiles ([#832]({{ site.repository }}/issues/832))
@@ -952,20 +1045,24 @@ prev_section: contributing
       of greater than 1.9 ([#771]({{ site.repository }}/issues/771))
 - Switch to Simplecov for coverage report ([#765]({{ site.repository }}/issues/765))
 
+
 ## 0.12.1 / 2013-02-19
 {: #v0-12-1}
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-12-1}
 - Update Kramdown version to 0.14.1 ([#744]({{ site.repository }}/issues/744))
 - Test Enhancements
 - Update Rake version to 10.0.3 ([#744]({{ site.repository }}/issues/744))
 - Update Shoulda version to 3.3.2 ([#744]({{ site.repository }}/issues/744))
 - Update Redcarpet version to 2.2.2 ([#744]({{ site.repository }}/issues/744))
 
+
 ## 0.12.0 / 2012-12-22
 {: #v0-12-0}
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-12-0}
 - Add ability to explicitly specify included files ([#261]({{ site.repository }}/issues/261))
 - Add `--default-mimetype` option ([#279]({{ site.repository }}/issues/279))
 - Allow setting of RedCloth options ([#284]({{ site.repository }}/issues/284))
@@ -984,10 +1081,12 @@ prev_section: contributing
 - Allow setting of Kramdown `smart_quotes` ([#482]({{ site.repository }}/issues/482))
 - Ensure front-matter is at start of file ([#562]({{ site.repository }}/issues/562))
 
+
 ## 0.11.2 / 2011-12-27
 {: #v0-11-2}
 - Bug Fixes
 - Fix gemspec
+
 
 ## 0.11.1 / 2011-12-27
 {: #v0-11-1}
@@ -995,16 +1094,19 @@ prev_section: contributing
 - Fix extra blank line in highlight blocks ([#409]({{ site.repository }}/issues/409))
 - Update dependencies
 
+
 ## 0.11.0 / 2011-07-10
 {: #v0-11-0}
 
 ### Major Enhancements
+{: #major-enhancements-v0-11-0}
 - Add command line importer functionality ([#253]({{ site.repository }}/issues/253))
 - Add Redcarpet Markdown support ([#318]({{ site.repository }}/issues/318))
 - Make markdown/textile extensions configurable ([#312]({{ site.repository }}/issues/312))
 - Add `markdownify` filter
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-11-0}
 - Switch to Albino gem
 - Bundler support
 - Use English library to avoid hoops ([#292]({{ site.repository }}/issues/292))
@@ -1017,25 +1119,30 @@ prev_section: contributing
 - Bug Fixes
 - Secure additional path exploits
 
+
 ## 0.10.0 / 2010-12-16
 {: #v0-10-0}
 - Bug Fixes
 - Add `--no-server` option.
 
+
 ## 0.9.0 / 2010-12-15
 {: #v0-9-0}
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-9-0}
 - Use OptionParser's `[no-]` functionality for better boolean parsing.
 - Add Drupal migrator ([#245]({{ site.repository }}/issues/245))
 - Complain about YAML and Liquid errors ([#249]({{ site.repository }}/issues/249))
 - Remove orphaned files during regeneration ([#247]({{ site.repository }}/issues/247))
 - Add Marley migrator ([#28]({{ site.repository }}/issues/28))
 
+
 ## 0.8.0 / 2010-11-22
 {: #v0-8-0}
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-8-0}
 - Add wordpress.com importer ([#207]({{ site.repository }}/issues/207))
 - Add `--limit-posts` cli option ([#212]({{ site.repository }}/issues/212))
 - Add `uri_escape` filter ([#234]({{ site.repository }}/issues/234))
@@ -1047,14 +1154,17 @@ prev_section: contributing
 - Set mode to UTF8 on Sequel connections ([#237]({{ site.repository }}/issues/237))
 - Prevent `_includes` dir from being a symlink
 
+
 ## 0.7.0 / 2010-08-24
 {: #v0-7-0}
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-7-0}
 - Add support for rdiscount extensions ([#173]({{ site.repository }}/issues/173))
 - Bug Fixes
 - Highlight should not be able to render local files
 - The site configuration may not always provide a 'time' setting ([#184]({{ site.repository }}/issues/184))
+
 
 ## 0.6.2 / 2010-06-25
 {: #v0-6-2}
@@ -1064,15 +1174,18 @@ prev_section: contributing
 - Expand source, destination, and plugin paths ([#180]({{ site.repository }}/issues/180))
 - Fix `page.url` to include full relative path ([#181]({{ site.repository }}/issues/181))
 
+
 ## 0.6.1 / 2010-06-24
 {: #v0-6-1}
 - Bug Fixes
 - Fix Markdown Pygments prefix and suffix ([#178]({{ site.repository }}/issues/178))
 
+
 ## 0.6.0 / 2010-06-23
 {: #v0-6-0}
 
 ### Major Enhancements
+{: #major-enhancements-v0-6-0}
 - Proper plugin system ([#19]({{ site.repository }}/issues/19), [#100]({{ site.repository }}/issues/100))
 - Add safe mode so unsafe converters/generators can be added
 - Maruku is now the only processor dependency installed by default.
@@ -1080,6 +1193,7 @@ prev_section: contributing
       user to install them when necessary) ([#57]({{ site.repository }}/issues/57))
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-6-0}
 - Inclusion/exclusion of future dated posts ([#59]({{ site.repository }}/issues/59))
 - Generation for a specific time ([#59]({{ site.repository }}/issues/59))
 - Allocate `site.time` on render not per site_payload invocation ([#59]({{ site.repository }}/issues/59))
@@ -1098,10 +1212,12 @@ prev_section: contributing
 - Preserve generated attributes over front matter ([#119]({{ site.repository }}/issues/119))
 - Fix source directory binding using `Dir.pwd` ([#75]({{ site.repository }}/issues/75))
 
+
 ## 0.5.7 / 2010-01-12
 {: #v0-5-7}
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-5-7}
 - Allow overriding of post date in the front matter ([#62]({{ site.repository }}/issues/62), [#38]({{ site.repository }}/issues/38))
 - Bug Fixes
 - Categories isn't always an array ([#73]({{ site.repository }}/issues/73))
@@ -1111,6 +1227,7 @@ prev_section: contributing
 - Cucumber features no longer use site.posts.first where a better
       alternative is available
 
+
 ## 0.5.6 / 2010-01-08
 {: #v0-5-6}
 - Bug Fixes
@@ -1118,10 +1235,12 @@ prev_section: contributing
 - Don't break on triple dashes in yaml frontmatter ([#93]({{ site.repository }}/issues/93))
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-5-6}
 - Allow .mkd as markdown extension
 - Use $stdout/err instead of constants ([#99]({{ site.repository }}/issues/99))
 - Properly wrap code blocks ([#91]({{ site.repository }}/issues/91))
 - Add javascript mime type for webrick ([#98]({{ site.repository }}/issues/98))
+
 
 ## 0.5.5 / 2010-01-08
 {: #v0-5-5}
@@ -1129,20 +1248,24 @@ prev_section: contributing
 - Fix pagination % 0 bug ([#78]({{ site.repository }}/issues/78))
 - Ensure all posts are processed first ([#71]({{ site.repository }}/issues/71))
 
+
 ## NOTE
 - After this point I will no longer be giving credit in the history;
     that is what the commit log is for.
+
 
 ## 0.5.4 / 2009-08-23
 {: #v0-5-4}
 - Bug Fixes
 - Do not allow symlinks (security vulnerability)
 
+
 ## 0.5.3 / 2009-07-14
 {: #v0-5-3}
 - Bug Fixes
 - Solving the permalink bug where non-html files wouldn't work
       ([@jeffrydegrande](https://github.com/jeffrydegrande))
+
 
 ## 0.5.2 / 2009-06-24
 {: #v0-5-2}
@@ -1170,10 +1293,12 @@ prev_section: contributing
 - Allow CRLFs in yaml frontmatter ([@juretta](https://github.com/juretta))
 - Added Date#xmlschema for Ruby versions < 1.9
 
+
 ## 0.5.1 / 2009-05-06
 {: #v0-5-1}
 
 ### Major Enhancements
+{: #major-enhancements-v0-5-1}
 - Next/previous posts in site payload ([@pantulis](https://github.com/pantulis), [@tomo](https://github.com/tomo))
 - Permalink templating system
 - Moved most of the README out to the GitHub wiki
@@ -1186,10 +1311,12 @@ prev_section: contributing
       after highlight ([@henrik](https://github.com/henrik))
 - CGI escaped post titles ([@Chrononaut](https://github.com/Chrononaut))
 
+
 ## 0.5.0 / 2009-04-07
 {: #v0-5-0}
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-5-0}
 - Ability to set post categories via YAML ([@qrush](https://github.com/qrush))
 - Ability to set prevent a post from publishing via YAML ([@qrush](https://github.com/qrush))
 - Add textilize filter ([@willcodeforfoo](https://github.com/willcodeforfoo))
@@ -1206,20 +1333,25 @@ prev_section: contributing
 - Fix tests and convert to Shoulda ([@qrush](https://github.com/qrush), [@technicalpickles](https://github.com/technicalpickles))
 - Add Cucumber acceptance test suite ([@qrush](https://github.com/qrush), [@technicalpickles](https://github.com/technicalpickles))
 
+
 ## 0.4.1
 
 ### Minor Enhancements
+{: #minor-enhancements-v--}
 - Changed date format on wordpress converter (zeropadding) ([@dysinger](https://github.com/dysinger))
 - Bug Fixes
 - Add Jekyll binary as executable to gemspec ([@dysinger](https://github.com/dysinger))
+
 
 ## 0.4.0 / 2009-02-03
 {: #v0-4-0}
 
 ### Major Enhancements
+{: #major-enhancements-v0-4-0}
 - Switch to Jeweler for packaging tasks
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-4-0}
 - Type importer ([@codeslinger](https://github.com/codeslinger))
 - `site.topics` accessor ([@baz](https://github.com/baz))
 - Add `array_to_sentence_string` filter ([@mchung](https://github.com/mchung))
@@ -1235,14 +1367,17 @@ prev_section: contributing
 - Test and fix the site.categories hash ([@zzot](https://github.com/zzot))
 - Fix site payload available to files ([@matrix9180](https://github.com/matrix9180))
 
+
 ## 0.3.0 / 2008-12-24
 {: #v0-3-0}
 
 ### Major Enhancements
+{: #major-enhancements-v0-3-0}
 - Added `--server` option to start a simple WEBrick server on destination
       directory ([@johnreilly](https://github.com/johnreilly) and [@mchung](https://github.com/mchung))
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-3-0}
 - Added post categories based on directories containing `_posts` ([@mreid](https://github.com/mreid))
 - Added post topics based on directories underneath `_posts`
 - Added new date filter that shows the full month name ([@mreid](https://github.com/mreid))
@@ -1255,6 +1390,7 @@ prev_section: contributing
       templates ([@mreid](https://github.com/mreid))
 - Properly reject directories in `_layouts`
 
+
 ## 0.2.1 / 2008-12-15
 {: #v0-2-1}
 - Major Changes
@@ -1262,35 +1398,43 @@ prev_section: contributing
 - Allow use of RDiscount with `--rdiscount` flag
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-2-1}
 - Don't load directory_watcher unless it's needed ([@pjhyett](https://github.com/pjhyett))
+
 
 ## 0.2.0 / 2008-12-14
 {: #v0-2-0}
 - Major Changes
 - related_posts is now found in `site.related_posts`
 
+
 ## 0.1.6 / 2008-12-13
 {: #v0-1-6}
 - Major Features
 - Include files in `_includes` with {% raw %}`{% include x.textile %}`{% endraw %}
 
+
 ## 0.1.5 / 2008-12-12
 {: #v0-1-5}
 
 ### Major Enhancements
+{: #major-enhancements-v0-1-5}
 - Code highlighting with Pygments if `--pygments` is specified
 - Disable true LSI by default, enable with `--lsi`
 
 ### Minor Enhancements
+{: #minor-enhancements-v0-1-5}
 - Output informative message if RDiscount is not available ([@JackDanger](https://github.com/JackDanger))
 - Bug Fixes
 - Prevent Jekyll from picking up the output directory as a source ([@JackDanger](https://github.com/JackDanger))
 - Skip `related_posts` when there is only one post ([@JackDanger](https://github.com/JackDanger))
 
+
 ## 0.1.4 / 2008-12-08
 {: #v0-1-4}
 - Bug Fixes
 - DATA does not work properly with rubygems
+
 
 ## 0.1.3 / 2008-12-06
 {: #v0-1-3}
@@ -1302,6 +1446,7 @@ prev_section: contributing
 - Bug Fixes
 - Accept both `\r\n` and `\n` in YAML header ([@vanpelt](https://github.com/vanpelt))
 
+
 ## 0.1.2 / 2008-11-22
 {: #v0-1-2}
 - Major Features
@@ -1310,10 +1455,12 @@ prev_section: contributing
 - Allow cli to be called with 0, 1, or 2 args intuiting dir paths
       if they are omitted
 
+
 ## 0.1.1 / 2008-11-22
 {: #v0-1-1}
 - Minor Additions
 - Posts now support introspectional data e.g. {% raw %}`{{ page.url }}`{% endraw %}
+
 
 ## 0.1.0 / 2008-11-05
 {: #v0-1-0}
@@ -1321,6 +1468,7 @@ prev_section: contributing
 - Converts posts written in Textile
 - Converts regular site pages
 - Simple copy of binary files
+
 
 ## 0.0.0 / 2008-10-19
 {: #v0-0-0}
