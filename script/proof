@@ -6,17 +6,17 @@
 set -e
 
 git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep '^site/' || {
-    echo "No site files changed. We'll skip proofing."
+    echo "No site files changed. We’ll skip proofing."
     exit 0
 }
 
-echo "Some site files have been changed! Proofing..."
+echo "Some site files have been changed. Proofing..."
 
 command -v htmlproof || {
-    echo "Installing HTML::Proofer!"
+    echo "Installing Proofer..."
     gem install html-proofer -- --use-system-libraries
 }
 
 bundle exec jekyll build -s site -d _site --trace
-echo -e "\e[0;36mProofing begins now!\e[0m\n"
+echo -e "\e[0;36mProofing begins...\e[0m\n"
 htmlproof ./_site
