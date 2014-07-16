@@ -1,0 +1,20 @@
+#! /bin/bash
+
+# Check if any site files have changed
+if [[ $(git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep '^/site') == "" ]]; then
+	echo "No site files changed"
+	# exit 0
+fi
+
+# Site files have been changed, continue
+echo "Site files have been changed, proofing"
+if ! [[ $(command -v htmlproof) ]]; then
+	echo "Installing HTML::Proofer"
+	gem install nokogiri -- --use-system-libraries
+	gem install html-proofer
+fi
+
+printf "\nGenerating site...     "
+jekyll build -s site -d _site -q
+printf "done.\n\n\e[0;36mProofing begins now!\e[0m\n"
+htmlproof ./_site
