@@ -4,7 +4,7 @@
 #   script/test
 #   script/test <hi>
 
-git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep -v '^/site' || {
+git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep -v '^site/' || {
     echo "No lib files have changed, skipping Jekyll tests!"
     exit 0
 }
