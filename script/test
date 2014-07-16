@@ -1,11 +1,20 @@
 #! /bin/bash
+#
+# Usage:
+#   script/test
+#   script/test <hi>
 
-set -x
+git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep -v '^/site' || {
+    echo "No lib files have changed, skipping Jekyll tests!"
+    exit 0
+}
 
 if [ -z "$1" ]; then
-  TEST_FILES="test/test*.rb"
+  TEST_FILES="test/test_*.rb"
 else
   TEST_FILES="$@"
 fi
+
+set -x
 
 /usr/bin/env bundle exec ruby -I"lib:test" -r rake -r rake/rake_test_loader ${TEST_FILES}

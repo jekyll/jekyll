@@ -2,4 +2,4 @@
 
 script/branding
 script/proof
-bundle exec rake
+script/test
