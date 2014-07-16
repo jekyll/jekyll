@@ -116,11 +116,15 @@ module Jekyll
     # Returns nothing.
     def read
       self.layouts = LayoutReader.new(self).read
-      Reader.new(self).read_all!
+      reader.read_all!
       pages.sort_by!(&:name)
       aggregate_post_info
       posts.sort!
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
+    end
+
+    def reader
+      Reader.new(self)
     end
 
     # Aggregate post information
