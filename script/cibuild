@@ -1,4 +1,5 @@
 #! /bin/bash
 
 script/branding
+script/proof
 bundle exec rake
