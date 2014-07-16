@@ -3,7 +3,7 @@
 # Check if any site files have changed
 if [[ $(git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep '^/site') == "" ]]; then
 	echo "No site files changed"
-	# exit 0
+	exit 0
 fi
 
 # Site files have been changed, continue
