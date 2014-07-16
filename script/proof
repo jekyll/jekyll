@@ -10,8 +10,7 @@ fi
 echo "Site files have been changed, proofing"
 if ! [[ $(command -v htmlproof) ]]; then
 	echo "Installing HTML::Proofer"
-	gem install nokogiri -- --use-system-libraries
-	gem install html-proofer
+	gem install html-proofer -- --use-system-libraries
 fi
 
 printf "\nGenerating site...     "
