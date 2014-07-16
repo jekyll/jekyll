@@ -123,6 +123,9 @@ module Jekyll
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
     end
 
+    # The site's reader.
+    #
+    # Return the site's very own reader.
     def reader
       Reader.new(self)
     end
@@ -135,7 +138,7 @@ module Jekyll
     def aggregate_post_info
       (drafts || []).each do |draft|
         if draft.published?
-          posts << post
+          posts << draft
         end
       end
     end
