@@ -26,7 +26,7 @@ class TestKramdown < Test::Unit::TestCase
       @markdown = Converters::Markdown.new(@config)
     end
 
-    # http://kramdown.rubyforge.org/converter/html.html#options
+    # http://kramdown.gettalong.org/converter/html.html#options
     should "pass kramdown options" do
       assert_equal "<h1>Some Header</h1>", @markdown.convert('# Some Header #').strip
     end
