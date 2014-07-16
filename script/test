@@ -17,4 +17,4 @@ fi
 
 set -x
 
-/usr/bin/env bundle exec ruby -I"lib:test" -r rake -r rake/rake_test_loader ${TEST_FILES}
+bundle exec rake
