@@ -3,6 +3,8 @@
 # Usage:
 #   script/proof
 
+set -e
+
 git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep '^site/' || {
     echo "No site files changed. We'll skip proofing."
     exit 0
@@ -15,6 +17,6 @@ command -v htmlproof || {
     gem install html-proofer -- --use-system-libraries
 }
 
-jekyll build -s site -d _site --trace
+bundle exec jekyll build -s site -d _site --trace
 echo -e "\e[0;36mProofing begins now!\e[0m\n"
 htmlproof ./_site
