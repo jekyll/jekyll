@@ -32,7 +32,7 @@ module Jekyll
         return RedCloth.new(content).to_html if @config['redcloth'].nil?
 
         # List of attributes defined on RedCloth
-        # (from http://redcloth.rubyforge.org/classes/RedCloth/TextileDoc.html)
+        # (from https://github.com/jgarber/redcloth/blob/master/lib/redcloth/textile_doc.rb)
         attrs = ['filter_classes', 'filter_html', 'filter_ids', 'filter_styles',
                 'hard_breaks', 'lite_mode', 'no_span_caps', 'sanitize_html']
 

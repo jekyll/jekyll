@@ -19,5 +19,5 @@ examples and for compiling this list):
 
 Take a look at the [Upgrading][] page in the docs for more detailed information.
 
-[history]: /docs/history/#100__20130506
+[history]: /docs/history/#v1-0-0
 [Upgrading]: /docs/upgrading/
