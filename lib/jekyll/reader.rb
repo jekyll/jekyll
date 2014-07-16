@@ -65,7 +65,8 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      (site.posts ||= []).concat read_content(dir, '_posts', Post)
+      posts = read_content(dir, '_posts', Post)
+      (site.posts ||= []).concat posts.select {|post| site.publisher.publish?(post) }
     end
 
     # Read all the files in <source>/<dir>/_drafts and create a new Post
