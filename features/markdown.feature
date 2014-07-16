@@ -45,7 +45,7 @@ Feature: Markdown
     When I run jekyll build
     Then the _site directory should exist
     And I should see "My awesome code" in "_site/index.html"
-    And I should see "<pre><code>My awesome code</code></pre>" in "_site/index.html"
+    And I should see "<pre><code>\nMy awesome code\n</code></pre>" in "_site/index.html"
 
   Scenario: Maruku fenced codeblocks
     Given I have a configuration file with "markdown" set to "maruku"
