@@ -10,6 +10,7 @@
 
   * Refactoring Errors & Requires of Third-Party stuff (#2591)
   * Add further tests for categories (#2584)
+  * Proof site with html-proofer on change (#2605)
 
 ### Site Enhancements
 
