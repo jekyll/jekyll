@@ -1,6 +1,6 @@
 # coding: utf-8
 
-require 'helper'
+require "helper"
 
 class TestFilters < Test::Unit::TestCase
   class JekyllFilter
@@ -137,7 +137,7 @@ class TestFilters < Test::Unit::TestCase
 
       should "convert array to json" do
         assert_equal "[1,2]", @filter.jsonify([1, 2])
-        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => 'Jack'}, {:name => 'Smith'}])
+        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => "Jack"}, {:name => "Smith"}])
       end
     end
 
@@ -146,7 +146,7 @@ class TestFilters < Test::Unit::TestCase
         @filter.site.process
         grouping = @filter.group_by(@filter.site.pages, "layout")
         grouping.each do |g|
-          assert ["default", "nil", ""].include?(g["name"]), "#{g['name']} isn't a valid grouping."
+          assert ["default", "nil", ""].include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "default"
             assert g["items"].is_a?(Array), "The list of grouped items for 'default' is not an Array."

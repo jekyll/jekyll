@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'pry'
+require "pry"
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
-require 'jekyll'
+require "jekyll"
 
 TEST_DIR = File.expand_path(File.join(File.dirname(__FILE__), *%w{ .. test }))
 
@@ -22,11 +22,11 @@ def site_configuration(overrides = {})
 end
 
 def dest_dir(*subdirs)
-  test_dir('dest', *subdirs)
+  test_dir("dest", *subdirs)
 end
 
 def source_dir(*subdirs)
-  test_dir('source', *subdirs)
+  test_dir("source", *subdirs)
 end
 
 def test_dir(*subdirs)

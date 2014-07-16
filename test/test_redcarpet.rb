@@ -1,17 +1,17 @@
-require 'helper'
+require "helper"
 
 class TestRedcarpet < Test::Unit::TestCase
   context "redcarpet" do
     setup do
       @config = {
-        'redcarpet' => { 'extensions' => ['smart', 'strikethrough', 'filter_html'] },
-        'markdown' => 'redcarpet'
+        "redcarpet" => { "extensions" => ["smart", "strikethrough", "filter_html"] },
+        "markdown" => "redcarpet"
       }
       @markdown = Converters::Markdown.new @config
     end
 
     should "pass redcarpet options" do
-      assert_equal "<h1>Some Header</h1>", @markdown.convert('# Some Header #').strip
+      assert_equal "<h1>Some Header</h1>", @markdown.convert("# Some Header #").strip
     end
 
     should "pass redcarpet SmartyPants options" do
@@ -19,16 +19,16 @@ class TestRedcarpet < Test::Unit::TestCase
     end
 
     should "pass redcarpet extensions" do
-      assert_equal "<p><del>deleted</del></p>", @markdown.convert('~~deleted~~').strip
+      assert_equal "<p><del>deleted</del></p>", @markdown.convert("~~deleted~~").strip
     end
 
     should "pass redcarpet render options" do
-      assert_equal "<p><strong>bad code not here</strong>: i am bad</p>", @markdown.convert('**bad code not here**: <script>i am bad</script>').strip
+      assert_equal "<p><strong>bad code not here</strong>: i am bad</p>", @markdown.convert("**bad code not here**: <script>i am bad</script>").strip
     end
 
     context "with pygments enabled" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => 'pygments' })
+        @markdown = Converters::Markdown.new @config.merge({ "highlighter" => "pygments" })
       end
 
       should "render fenced code blocks with syntax highlighting" do
@@ -44,7 +44,7 @@ puts "Hello world"
 
     context "with rouge enabled" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => 'rouge' })
+        @markdown = Converters::Markdown.new @config.merge({ "highlighter" => "rouge" })
       end
 
       should "render fenced code blocks with syntax highlighting" do
@@ -60,7 +60,7 @@ puts "Hello world"
 
     context "without any highlighter" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => nil })
+        @markdown = Converters::Markdown.new @config.merge({ "highlighter" => nil })
       end
 
       should "render fenced code blocks without syntax highlighting" do

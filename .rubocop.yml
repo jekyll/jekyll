@@ -1,0 +1,8 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+   - vendor/**/* # Used by Travis CI
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

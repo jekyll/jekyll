@@ -1,26 +1,26 @@
-require 'simplecov'
-require 'simplecov-gem-adapter'
-SimpleCov.start('gem')
+require "simplecov"
+require "simplecov-gem-adapter"
+SimpleCov.start("gem")
 
-require 'rubygems'
-require 'test/unit'
-require 'ostruct'
-gem 'RedCloth', '>= 4.2.1'
+require "rubygems"
+require "test/unit"
+require "ostruct"
+gem "RedCloth", ">= 4.2.1"
 
-require 'jekyll'
+require "jekyll"
 
-require 'RedCloth'
-require 'rdiscount'
-require 'kramdown'
-require 'redcarpet'
+require "RedCloth"
+require "rdiscount"
+require "kramdown"
+require "redcarpet"
 
-require 'shoulda'
-require 'rr'
+require "shoulda"
+require "rr"
 
 include Jekyll
 
 # Send STDERR into the void to suppress program output messages
-STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
+STDERR.reopen(test(?e, "/dev/null") ? "/dev/null" : "NUL:")
 
 class Test::Unit::TestCase
   include RR::Adapters::TestUnit
@@ -37,11 +37,11 @@ class Test::Unit::TestCase
   end
 
   def dest_dir(*subdirs)
-    test_dir('dest', *subdirs)
+    test_dir("dest", *subdirs)
   end
 
   def source_dir(*subdirs)
-    test_dir('source', *subdirs)
+    test_dir("source", *subdirs)
   end
 
   def clear_dest

@@ -1,14 +1,14 @@
 # encoding: utf-8
 
-require 'helper'
+require "helper"
 
 class TestPost < Test::Unit::TestCase
   def setup_post(file)
-    Post.new(@site, source_dir, '', file)
+    Post.new(@site, source_dir, "", file)
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
+    layouts = { "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")}
     post.render(layouts, {"site" => {"posts" => []}})
   end
 
@@ -28,7 +28,7 @@ class TestPost < Test::Unit::TestCase
     end
 
     should "make properties accessible through #[]" do
-      post = setup_post('2013-12-20-properties.text')
+      post = setup_post("2013-12-20-properties.text")
 
       attrs = {
         categories: %w(foo bar baz),
@@ -36,15 +36,15 @@ class TestPost < Test::Unit::TestCase
         date: Time.new(2013, 12, 20),
         dir: "/foo/bar/baz/2013/12/20",
         excerpt: "All the properties.\n\n",
-        foo: 'bar',
+        foo: "bar",
         id: "/foo/bar/baz/2013/12/20/properties",
-        layout: 'default',
+        layout: "default",
         name: nil,
         path: "_posts/2013-12-20-properties.text",
         permalink: nil,
         published: nil,
         tags: %w(ay bee cee),
-        title: 'Properties Post',
+        title: "Properties Post",
         url: "/foo/bar/baz/2013/12/20/properties.html"
       }
 
@@ -62,7 +62,7 @@ class TestPost < Test::Unit::TestCase
 
         @real_file = "2008-10-18-foo-bar.textile"
         @fake_file = "2008-09-09-foo-bar.textile"
-        @source = source_dir('_posts')
+        @source = source_dir("_posts")
       end
 
       should "keep date, title, and markup type" do
@@ -134,7 +134,7 @@ class TestPost < Test::Unit::TestCase
       context "with CRLF linebreaks" do
         setup do
           @real_file = "2009-05-24-yaml-linebreak.markdown"
-          @source = source_dir('win/_posts')
+          @source = source_dir("win/_posts")
         end
         should "read yaml front-matter" do
           @post.read_yaml(@source, @real_file)
@@ -210,7 +210,7 @@ class TestPost < Test::Unit::TestCase
 
         context "with specified layout of nil" do
           setup do
-            file = '2013-01-12-nil-layout.textile'
+            file = "2013-01-12-nil-layout.textile"
             @post = setup_post(file)
             @post.process(file)
           end
@@ -284,7 +284,7 @@ class TestPost < Test::Unit::TestCase
 
         context "with custom date permalink" do
           setup do
-            @post.site.permalink_style = '/:categories/:year/:i_month/:i_day/:title/'
+            @post.site.permalink_style = "/:categories/:year/:i_month/:i_day/:title/"
             @post.process(@fake_file)
           end
 
@@ -295,7 +295,7 @@ class TestPost < Test::Unit::TestCase
 
         context "with custom abbreviated month date permalink" do
           setup do
-            @post.site.permalink_style = '/:categories/:year/:short_month/:day/:title/'
+            @post.site.permalink_style = "/:categories/:year/:short_month/:day/:title/"
             @post.process(@fake_file)
           end
 
@@ -360,7 +360,7 @@ class TestPost < Test::Unit::TestCase
           setup do
             file = "2013-01-02-post-excerpt.markdown"
 
-            @post.site.config['excerpt_separator'] = "\n---\n"
+            @post.site.config["excerpt_separator"] = "\n---\n"
 
             @post.process(file)
             @post.read_yaml(@source, file)
@@ -403,8 +403,8 @@ class TestPost < Test::Unit::TestCase
         clear_dest
         stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
         @site = Site.new(Jekyll.configuration)
-        @site.posts = [setup_post('2008-02-02-published.textile'),
-                       setup_post('2009-01-27-categories.textile')]
+        @site.posts = [setup_post("2008-02-02-published.textile"),
+                       setup_post("2009-01-27-categories.textile")]
       end
 
       should "have next post" do
@@ -464,23 +464,23 @@ class TestPost < Test::Unit::TestCase
         klass = Class.new(Jekyll::Post)
         assert_gets_called = false
         klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
-        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
-        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ["assert_gets_called"])
+        post = klass.new(@site, source_dir, "", "2008-02-02-published.textile")
         do_render(post)
 
-        assert assert_gets_called, 'assert_gets_called did not get called on post.'
+        assert assert_gets_called, "assert_gets_called did not get called on post."
       end
 
       should "recognize category in yaml" do
         post = setup_post("2009-01-27-category.textile")
-        assert post.categories.include?('foo')
+        assert post.categories.include?("foo")
       end
 
       should "recognize several categories in yaml" do
         post = setup_post("2009-01-27-categories.textile")
-        assert post.categories.include?('foo')
-        assert post.categories.include?('bar')
-        assert post.categories.include?('baz')
+        assert post.categories.include?("foo")
+        assert post.categories.include?("bar")
+        assert post.categories.include?("baz")
       end
 
       should "recognize empty category in yaml" do
@@ -495,20 +495,20 @@ class TestPost < Test::Unit::TestCase
 
       should "recognize number category in yaml" do
         post = setup_post("2013-05-10-number-category.textile")
-        assert post.categories.include?('2013')
+        assert post.categories.include?("2013")
         assert !post.categories.include?(2013)
       end
 
       should "recognize tag in yaml" do
         post = setup_post("2009-05-18-tag.textile")
-        assert post.tags.include?('code')
+        assert post.tags.include?("code")
       end
 
       should "recognize tags in yaml" do
         post = setup_post("2009-05-18-tags.textile")
-        assert post.tags.include?('food')
-        assert post.tags.include?('cooking')
-        assert post.tags.include?('pizza')
+        assert post.tags.include?("food")
+        assert post.tags.include?("cooking")
+        assert post.tags.include?("pizza")
       end
 
       should "recognize empty tag in yaml" do
@@ -548,7 +548,7 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
+          assert File.exist?(File.join(dest_dir, "2008", "10", "18", "foo-bar.html"))
         end
 
         should "write properly when url has hash" do
@@ -557,8 +557,8 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, '2009', '03', '12',
-                                        'hash-#1.html'))
+          assert File.exist?(File.join(dest_dir, "2009", "03", "12",
+                                        "hash-#1.html"))
         end
 
         should "write properly when url has space" do
@@ -567,8 +567,8 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, '2014', '03', '22',
-                                        'escape-+ %20[].html'))
+          assert File.exist?(File.join(dest_dir, "2014", "03", "22",
+                                        "escape-+ %20[].html"))
         end
 
         should "write properly without html extension" do
@@ -578,7 +578,7 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, 'foo-bar', 'index.html'))
+          assert File.exist?(File.join(dest_dir, "foo-bar", "index.html"))
         end
 
         should "insert data" do
@@ -590,7 +590,7 @@ class TestPost < Test::Unit::TestCase
 
         should "include templates" do
           post = setup_post("2008-12-13-include.markdown")
-          post.site.source = File.join(File.dirname(__FILE__), 'source')
+          post.site.source = File.join(File.dirname(__FILE__), "source")
           do_render(post)
 
           assert_equal "<<< <hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n\n<p>This <em>is</em> cool</p>\n >>>", post.output
@@ -614,8 +614,8 @@ class TestPost < Test::Unit::TestCase
     end
 
     should "generate categories and topics" do
-      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
-      assert_equal ['foo'], post.categories
+      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), "foo", "bar/2008-12-12-topical-post.textile")
+      assert_equal ["foo"], post.categories
     end
   end
 
@@ -626,41 +626,41 @@ class TestPost < Test::Unit::TestCase
     end
 
     should "process .md as markdown under default configuration" do
-      post = setup_post '2011-04-12-md-extension.md'
+      post = setup_post "2011-04-12-md-extension.md"
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .text as identity under default configuration" do
-      post = setup_post '2011-04-12-text-extension.text'
+      post = setup_post "2011-04-12-text-extension.text"
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Identity
     end
 
     should "process .text as markdown under alternate configuration" do
-      @site.config['markdown_ext'] = 'markdown,mdw,mdwn,md,text'
-      post = setup_post '2011-04-12-text-extension.text'
+      @site.config["markdown_ext"] = "markdown,mdw,mdwn,md,text"
+      post = setup_post "2011-04-12-text-extension.text"
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .md as markdown under alternate configuration" do
-      @site.config['markdown_ext'] = 'markdown,mkd,mkdn,md,text'
-      post = setup_post '2011-04-12-text-extension.text'
+      @site.config["markdown_ext"] = "markdown,mkd,mkdn,md,text"
+      post = setup_post "2011-04-12-text-extension.text"
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .mkdn under text if it is not in the markdown config" do
-      @site.config['markdown_ext'] = 'markdown,mkd,md,text'
-      post = setup_post '2013-08-01-mkdn-extension.mkdn'
+      @site.config["markdown_ext"] = "markdown,mkd,md,text"
+      post = setup_post "2013-08-01-mkdn-extension.mkdn"
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Identity
     end
 
     should "process .text as textile under alternate configuration" do
-      @site.config['textile_ext'] = 'textile,text'
-      post = setup_post '2011-04-12-text-extension.text'
+      @site.config["textile_ext"] = "textile,text"
+      post = setup_post "2011-04-12-text-extension.text"
       conv = post.converter
       assert conv.kind_of? Jekyll::Converters::Textile
     end
@@ -670,12 +670,12 @@ class TestPost < Test::Unit::TestCase
   context "site config with category" do
     setup do
       config = Jekyll::Configuration::DEFAULTS.merge({
-        'defaults' => [
-          'scope' => {
-            'path' => ''
+        "defaults" => [
+          "scope" => {
+            "path" => ""
           },
-          'values' => {
-            'category' => 'article'
+          "values" => {
+            "category" => "article"
           }
         ]
       })
@@ -684,25 +684,25 @@ class TestPost < Test::Unit::TestCase
 
     should "return category if post does not specify category" do
       post = setup_post("2009-01-27-no-category.textile")
-      assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
+      assert post.categories.include?("article"), "Expected post.categories to include 'article' but did not."
     end
 
     should "override site category if set on post" do
       post = setup_post("2009-01-27-category.textile")
-      assert post.categories.include?('foo'), "Expected post.categories to include 'foo' but did not."
-      assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
+      assert post.categories.include?("foo"), "Expected post.categories to include 'foo' but did not."
+      assert !post.categories.include?("article"), "Did not expect post.categories to include 'article' but it did."
     end
   end
 
   context "site config with categories" do
     setup do
       config = Jekyll::Configuration::DEFAULTS.merge({
-        'defaults' => [
-          'scope' => {
-            'path' => ''
+        "defaults" => [
+          "scope" => {
+            "path" => ""
           },
-          'values' => {
-            'categories' => ['article']
+          "values" => {
+            "categories" => ["article"]
           }
         ]
       })
@@ -711,15 +711,15 @@ class TestPost < Test::Unit::TestCase
 
     should "return categories if post does not specify categories" do
       post = setup_post("2009-01-27-no-category.textile")
-      assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
+      assert post.categories.include?("article"), "Expected post.categories to include 'article' but did not."
     end
 
     should "override site categories if set on post" do
       post = setup_post("2009-01-27-categories.textile")
-      ['foo', 'bar', 'baz'].each do |category|
+      ["foo", "bar", "baz"].each do |category|
         assert post.categories.include?(category), "Expected post.categories to include '#{category}' but did not."
       end
-      assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
+      assert !post.categories.include?("article"), "Did not expect post.categories to include 'article' but it did."
     end
   end
 

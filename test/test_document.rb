@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestDocument < Test::Unit::TestCase
 
@@ -41,7 +41,7 @@ class TestDocument < Test::Unit::TestCase
     end
 
     should "output the collection name in the #to_liquid method" do
-      assert_equal @document.to_liquid['collection'], "methods"
+      assert_equal @document.to_liquid["collection"], "methods"
     end
 
   end

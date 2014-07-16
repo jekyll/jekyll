@@ -16,16 +16,16 @@ module Jekyll
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\})(?<params>.*)/
 
-      INCLUDES_DIR = '_includes'
+      INCLUDES_DIR = "_includes"
 
       def initialize(tag_name, markup, tokens)
         super
         matched = markup.strip.match(VARIABLE_SYNTAX)
         if matched
-          @file = matched['variable'].strip
-          @params = matched['params'].strip
+          @file = matched["variable"].strip
+          @params = matched["params"].strip
         else
-          @file, @params = markup.strip.split(' ', 2);
+          @file, @params = markup.strip.split(" ", 2);
         end
         validate_params if @params
       end
@@ -107,7 +107,7 @@ eos
           partial = Liquid::Template.parse(source(path, context))
 
           context.stack do
-            context['include'] = parse_params(context) if @params
+            context["include"] = parse_params(context) if @params
             partial.render!(context)
           end
         rescue => e
@@ -143,4 +143,4 @@ eos
   end
 end
 
-Liquid::Template.register_tag('include', Jekyll::Tags::IncludeTag)
+Liquid::Template.register_tag("include", Jekyll::Tags::IncludeTag)

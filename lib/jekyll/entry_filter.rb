@@ -1,6 +1,6 @@
 module Jekyll
   class EntryFilter
-    SPECIAL_LEADING_CHARACTERS = ['.', '_', '#'].freeze
+    SPECIAL_LEADING_CHARACTERS = [".", "_", "#"].freeze
 
     attr_reader :site
 
@@ -42,7 +42,7 @@ module Jekyll
     end
 
     def backup?(entry)
-      entry[-1..-1] == '~'
+      entry[-1..-1] == "~"
     end
 
     def excluded?(entry)
