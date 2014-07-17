@@ -83,6 +83,8 @@ Feature: frontmatter defaults
     And I have a "index.html" file that contains "nothing"
     And I have a "_slides/slide1.html" file with content: 
     """
+    ---
+    ---
     Value: {{ page.myval }}
     """
     And I have a "_config.yml" file with content:
