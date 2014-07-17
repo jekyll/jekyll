@@ -421,7 +421,7 @@ CONTENT
       end
 
       should "render fenced code blocks" do
-        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">\nputs &quot;Hello world&quot;\n</code></pre>}, @result.strip
+        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">puts &quot;Hello world&quot;</code></pre>}, @result.strip
       end
     end
 
