@@ -24,7 +24,7 @@ things to look forward to:
 
 Let's go party!
 
-*Check out the [full changelog](/docs/history/) for more.*
+*Check out the [full changelog](/docs/history/#v2-1-0) for more.*
 
 Many thanks to these 37 contributors for the 2.1.0 release:
 
