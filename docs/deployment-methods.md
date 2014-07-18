@@ -73,18 +73,10 @@ Deploying is now as easy as telling nginx or Apache to look at
 laptops$ git push deploy master
 {% endhighlight %}
 
-### Jekyll-hook
-
-You can also use jekyll-hook, a server that listens for webhook posts from GitHub, generates a website with Jekyll, and moves it somewhere to be published. Use this to run your own GitHub Pages-style web server. 
-
-This method is useful if you need to serve your websites behind a firewall, need extra server-level features like HTTP basic authentication or want to host your site directly on a CDN or file host like S3.
-
-Setup steps are fully documented [here](https://github.com/developmentseed/jekyll-hook).
-
 ### Rake
 
 Another way to deploy your Jekyll site is to use [Rake](https://github.com/jimweirich/rake), [HighLine](https://github.com/JEG2/highline), and
-[Net::SSH](http://net-ssh.rubyforge.org/). A more complex example of deploying Jekyll with Rake that deals with multiple branches can be found in [Git Ready](https://github.com/gitready/gitready/blob/cdfbc4ec5321ff8d18c3ce936e9c749dbbc4f190/Rakefile).
+[Net::SSH](https://github.com/net-ssh/net-ssh). A more complex example of deploying Jekyll with Rake that deals with multiple branches can be found in [Git Ready](https://github.com/gitready/gitready/blob/cdfbc4ec5321ff8d18c3ce936e9c749dbbc4f190/Rakefile).
 
 ### rsync
 
@@ -94,7 +86,7 @@ this script from within Textmate.
 
 ## Rack-Jekyll
 
-[Rack-Jekyll](https://github.com/adaoraul/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](https://github.com/rtomakyo/shotgun/), [rackup](https://github.com/rack/rack), [mongrel](https://github.com/mongrel/mongrel), [unicorn](https://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
+[Rack-Jekyll](https://github.com/adaoraul/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](https://github.com/rtomayko/shotgun/), [rackup](https://github.com/rack/rack), [mongrel](https://github.com/mongrel/mongrel), [unicorn](https://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
 
 Read [this post](http://blog.crowdint.com/2010/08/02/instant-blog-using-jekyll-and-heroku.html) on how to deploy to Heroku using Rack-Jekyll.
 
