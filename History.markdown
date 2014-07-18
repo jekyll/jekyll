@@ -21,6 +21,7 @@
     third-party plugins (#2596)
   * Fix a bunch of broken links in the site (#2601)
   * Replace dead links with working links (#2611)
+  * Add jekyll-hook to deployment methods (#2617)
 
 ## 2.1.1 / 2014-07-01
 
