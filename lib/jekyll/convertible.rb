@@ -163,6 +163,11 @@ module Jekyll
     def render_all_layouts(layouts, payload, info)
       # recursively render layouts
       layout = layouts[data["layout"]]
+
+      if !data["layout"].nil? && data["layout"] != "none" && layout.nil?
+        Jekyll.logger.warn("Build Warning:", "Layout #{data["layout"]} does not exist.")
+      end
+
       used = Set.new([layout])
 
       while layout
