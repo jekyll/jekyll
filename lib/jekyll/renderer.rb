@@ -101,6 +101,11 @@ module Jekyll
     def place_in_layouts(content, payload, info)
       output = content.dup
       layout = site.layouts[document.data["layout"]]
+
+      if !data["layout"].nil? && data["layout"] != "none" && layout.nil?
+        Jekyll.logger.warn("Build Warning:", "Layout #{data["layout"]} does not exist.")
+      end
+
       used   = Set.new([layout])
 
       while layout
