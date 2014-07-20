@@ -111,7 +111,7 @@ module Jekyll
       output = content.dup
       layout = site.layouts[document.data["layout"]]
 
-      Jekyll.logger.warn("Build Warning:", "Layout #{document.data["layout"]} does not exist.") if invalid_layout? layout
+      Jekyll.logger.warn("Build Warning:", "Layout '#{document.data["layout"]}' requested in #{document.relative_path} does not exist.") if invalid_layout? layout
 
       used   = Set.new([layout])
 

@@ -173,7 +173,7 @@ module Jekyll
       # recursively render layouts
       layout = layouts[data["layout"]]
 
-      Jekyll.logger.warn("Build Warning:", "Layout #{data["layout"]} does not exist.") if invalid_layout? layout
+      Jekyll.logger.warn("Build Warning:", "Layout '#{data["layout"]}' requested in #{relative_path} does not exist.") if invalid_layout? layout
 
       used = Set.new([layout])
 
