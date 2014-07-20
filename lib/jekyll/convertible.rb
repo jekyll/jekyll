@@ -159,7 +159,7 @@ module Jekyll
     #
     # Returns true if the layout is invalid, false if otherwise
     def invalid_layout?(layout)
-      !data["layout"].nil? && data["layout"] != "none" && layout.nil?
+      !data["layout"].nil? && data["layout"] != "none" && layout.nil? && self.class.to_s != "Jekyll::Excerpt"
     end
 
     # Recursively render layouts
