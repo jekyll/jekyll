@@ -15,4 +15,4 @@ Kramdown comes with optional support for LaTeX to PNG rendering via [MathJax](ht
 
 ## Alternative Markdown Processors
 
-See the Markdown section on the [configuration page](/docs/configuration/#markdown-options) for instructions on how to use and configure alternative Markdown processors, as well as how to create [custom processors](http://jekyll.dev/docs/configuration/#custom-markdown-processors).
+See the Markdown section on the [configuration page](/docs/configuration/#markdown-options) for instructions on how to use and configure alternative Markdown processors, as well as how to create [custom processors](/docs/configuration/#custom-markdown-processors).
