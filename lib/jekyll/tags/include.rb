@@ -131,10 +131,6 @@ eos
         File.exist?(path) && File.realpath(path).start_with?(dir)
       end
 
-      def blank?
-        false
-      end
-
       # This method allows to modify the file content by inheriting from the class.
       def source(file, context)
         File.read(file, file_read_opts(context))
