@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+  * Remove unnecessary `Jekyll::Tags::IncludeTag#blank?` method (#2625)
+
 ### Development Fixes
 
   * Refactoring Errors & Requires of Third-Party stuff (#2591)
