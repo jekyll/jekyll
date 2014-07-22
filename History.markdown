@@ -23,6 +23,7 @@
   * Replace dead links with working links (#2611)
   * Add jekyll-hook to deployment methods (#2617)
   * Added kramdown-with-pygments plugin to the list of third-party plugins (#2623)
+  * Update outdated "Extras" page and remove duplicate documentation (#2622)
 
 ## 2.1.1 / 2014-07-01
 
