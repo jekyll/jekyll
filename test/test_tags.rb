@@ -61,28 +61,28 @@ CONTENT
 
   context "initialized tag" do
     should "set the correct options" do
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.parse('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"], {})
       assert_equal({}, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.parse('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"], {})
       assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.parse('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"], {})
       assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.parse('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"], {})
       assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.parse('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"], {})
       assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos=3', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.parse('highlight', 'ruby linenos=table cssclass=hl hl_linenos=3', ["test", "{% endhighlight %}", "\n"], {})
       assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos="3 5 6"', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.parse('highlight', 'ruby linenos=table cssclass=hl hl_linenos="3 5 6"', ["test", "{% endhighlight %}", "\n"], {})
       assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
+      tag = Jekyll::Tags::HighlightBlock.parse('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"], {})
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
     end
   end
