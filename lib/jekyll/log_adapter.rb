@@ -87,7 +87,9 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      msg = formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      messages << msg
+      msg
     end
 
     # Internal: Format the topic
@@ -97,6 +99,13 @@ module Jekyll
     # Returns the formatted topic statement
     def formatted_topic(topic)
       "#{topic} ".rjust(20)
+    end
+
+    # Public: All the messages Stevenson has printed so far
+    #
+    # Returns an Array of all messages Stevenson has built so far using #message
+    def messages
+      @messages ||= Array.new
     end
   end
 end
