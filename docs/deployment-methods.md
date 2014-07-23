@@ -73,6 +73,19 @@ Deploying is now as easy as telling nginx or Apache to look at
 laptops$ git push deploy master
 {% endhighlight %}
 
+### Jekyll-hook
+
+You can also use jekyll-hook, a server that listens for webhook posts from
+GitHub, generates a website with Jekyll, and moves it somewhere to be
+published. Use this to run your own GitHub Pages-style web server.
+
+This method is useful if you need to serve your websites behind a firewall,
+need extra server-level features like HTTP basic authentication or want to
+host your site directly on a CDN or file host like S3.
+
+Setup steps are fully documented
+[in the `jekyll-hook` repo](https://github.com/developmentseed/jekyll-hook).
+
 ### Rake
 
 Another way to deploy your Jekyll site is to use [Rake](https://github.com/jimweirich/rake), [HighLine](https://github.com/JEG2/highline), and
