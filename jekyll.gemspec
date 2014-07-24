@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
-  s.add_runtime_dependency('liquid',    "~> 3.0.0")
+  s.add_runtime_dependency('liquid',    "~> 3.0.0.rc1")
   s.add_runtime_dependency('kramdown',  "~> 1.3")
   s.add_runtime_dependency('mercenary', "~> 0.3.3")
   s.add_runtime_dependency('safe_yaml', "~> 1.0")
