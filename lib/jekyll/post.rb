@@ -159,6 +159,8 @@ module Jekyll
     # Returns nothing.
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
+      self.categories ||= []
+      self.categories += (cats || '').split('/')
       self.date = Time.parse(date)
       self.slug = slug
       self.ext = ext
