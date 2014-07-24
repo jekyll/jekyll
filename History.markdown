@@ -1135,9 +1135,9 @@
   * Configuration options set in config.yml are now available through the
       site payload (@vilcans)
   * Posts can now have an empty YAML front matter or none at all
-      (@bahuvrihi)
+      (@ bahuvrihi)
   * Bug Fixes
-  * Fixing Ruby 1.9 issue that requires to_s on the err object
+  * Fixing Ruby 1.9 issue that requires `#to_s` on the err object
       (@Chrononaut)
   * Fixes for pagination and ordering posts on the same day (@ujh)
   * Made pages respect permalinks style and permalinks in yml front matter
@@ -1147,7 +1147,7 @@
   * Added trailing slash to pretty permalink style so Apache is happy
       (@eugenebolshakov)
   * Bad markdown processor in config fails sooner and with better message
-      (@gcnovus)
+      (@ gcnovus)
   * Allow CRLFs in yaml frontmatter (@juretta)
   * Added Date#xmlschema for Ruby versions < 1.9
 
