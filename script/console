@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
+require 'bundler'
+Bundler.require
 require 'pry'
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 require 'jekyll'
