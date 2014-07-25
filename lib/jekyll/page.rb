@@ -1,20 +1,22 @@
 module Jekyll
   class Page
-    include Convertible
-
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
-      content
-      dir
-      name
-      path
-      url
-    ]
+    class << self
+      def liquid_attributes
+        @liquid_attributes ||= %w[
+          content
+          dir
+          name
+          path
+          url
+        ]
+      end
+    end
 
     # Initialize a new Page.
     #
@@ -22,15 +24,12 @@ module Jekyll
     # base - The String path to the source.
     # dir  - The String path between the source and the file.
     # name - The String filename of the file.
-    def initialize(site, base, dir, name)
+    def initialize(path, relations)
       @site = site
-      @base = base
-      @dir  = dir
-      @name = name
-
-
+      @dir  = File.dirname(path)
+      @name = File.basename(path)
       process(name)
-      read_yaml(File.join(base, dir), name)
+      @data = Hash.new
 
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
@@ -74,6 +73,10 @@ module Jekyll
       else
         "/:path/:basename:output_ext"
       end
+    end
+
+    def type
+      :page
     end
 
     # The generated relative url of this page. e.g. /about.html.

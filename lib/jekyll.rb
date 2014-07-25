@@ -38,6 +38,7 @@ module Jekyll
   autoload :Configuration,       'jekyll/configuration'
   autoload :Deprecator,          'jekyll/deprecator'
   autoload :Document,            'jekyll/document'
+  autoload :DocumentReader,      'jekyll/document_reader'
   autoload :Draft,               'jekyll/draft'
   autoload :EntryFilter,         'jekyll/entry_filter'
   autoload :Errors,              'jekyll/errors'

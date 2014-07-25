@@ -183,6 +183,10 @@ module Jekyll
       @type ||= self.class.to_s.downcase.to_sym
     end
 
+    def defaults_key
+      coll.label.to_sym
+    end
+
     # Create a Liquid-understandable version of this Document.
     #
     # Returns a Hash representing this Document's data.

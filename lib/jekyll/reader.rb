@@ -37,7 +37,7 @@ module Jekyll
     def read_collection(coll)
       filtered_entries(coll).each do |file_path|
         full_path = Jekyll.sanitized_path(coll.directory, file_path)
-        docs << read_document(full_path, coll)
+        docs << read_document(Jekyll::Document.new(full_path, { site: site, collection: coll }))
       end
     end
 
@@ -46,27 +46,8 @@ module Jekyll
     # values
     #
     # Returns the Document with its content populated.
-    def read_document(full_path, coll)
-      doc = Jekyll::Document.new(full_path, { site: site, collection: coll })
-      begin
-        defaults = site.frontmatter_defaults.all(url, coll.label.to_sym)
-        unless defaults.empty?
-          doc.data = defaults
-        end
-        doc.content = File.read(path, merged_file_read_opts(opts))
-        if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
-          doc.content = $POSTMATCH
-          data_file = SafeYAML.load($1)
-          unless data_file.nil?
-            doc.data = Utils.deep_merge_hashes(defaults, data_file)
-          end
-        end
-      rescue SyntaxError => e
-        puts "YAML Exception reading #{doc.path}: #{e.message}"
-      rescue Exception => e
-        puts "Error reading file #{doc.path}: #{e.message}"
-      end
-      doc
+    def read_document(doc)
+      DocumentReader.new(doc).read
     end
 
     # All the entries in this collection.
@@ -149,7 +130,7 @@ module Jekyll
     # Returns an array of
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
-        klass.new(site, site.source, dir, entry) if klass.valid?(entry)
+        DocumentReader.new(klass.new(File.join(dir, entry), { :site => site })).read if klass.valid?(entry)
       end.reject do |entry|
         entry.nil?
       end

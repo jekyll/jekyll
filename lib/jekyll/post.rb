@@ -1,41 +1,45 @@
 module Jekyll
-  class Post
+  class Post < Document
     include Comparable
-    include Convertible
 
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
-    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
-      title
-      url
-      dir
-      date
-      id
-      categories
-      next
-      previous
-      tags
-      path
-    ]
+    class << self
+      # Post name validator. Post filenames must be like:
+      # 2008-11-05-my-awesome-post.textile
+      #
+      # Returns true if valid, false if not.
+      def valid?(name)
+        name =~ MATCHER
+      end
 
-    # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
-      content
-      excerpt
-    ]
+      def liquid_attributes_for_excerpt
+        @liquid_attributes_for_excerpt ||= %w[
+          title
+          url
+          dir
+          date
+          id
+          categories
+          next
+          previous
+          tags
+          path
+        ]
+      end
 
-    # Post name validator. Post filenames must be like:
-    # 2008-11-05-my-awesome-post.textile
-    #
-    # Returns true if valid, false if not.
-    def self.valid?(name)
-      name =~ MATCHER
+      def liquid_attributes
+        liquid_attributes_for_excerpt + %w[
+          content
+          excerpt
+        ]
+      end
     end
 
     attr_accessor :site
-    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
-    attr_accessor :date, :slug, :tags, :categories
+    attr_accessor :extracted_excerpt, :content, :output, :ext
+    attr_accessor :slug, :tags, :categories
 
     attr_reader :name
 
@@ -46,26 +50,37 @@ module Jekyll
     # name       - The String filename of the post file.
     #
     # Returns the new Post.
-    def initialize(site, source, dir, name)
-      @site = site
-      @dir = dir
-      @base = containing_dir(source, dir)
-      @name = name
+    def initialize(path, relations)
+      @site = relations.fetch(:site)
+      @dir = File.dirname(path)
+      @base = containing_dir(site.source, dir)
+      @name = File.basename(path)
 
       self.categories = dir.downcase.split('/').reject { |x| x.empty? }
       process(name)
-      read_yaml(@base, name)
 
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
-      if data.has_key?('date')
-        self.date = Time.parse(data["date"].to_s)
-      end
-
       populate_categories
       populate_tags
+    end
+
+    def date
+      if data.has_key?('date')
+        Time.parse(data["date"].to_s)
+      else
+        @date
+      end
+    end
+
+    def data
+      @data ||= Hash.new
+    end
+
+    def type
+      :post
     end
 
     def published?
@@ -159,7 +174,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
-      self.date = Time.parse(date)
+      @date = Time.parse(date)
       self.slug = slug
       self.ext = ext
     rescue ArgumentError

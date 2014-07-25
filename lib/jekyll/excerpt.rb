@@ -2,7 +2,6 @@ require 'forwardable'
 
 module Jekyll
   class Excerpt
-    include Convertible
     extend Forwardable
 
     attr_accessor :post
@@ -25,7 +24,7 @@ module Jekyll
     end
 
     def to_liquid
-      post.to_liquid(post.class::EXCERPT_ATTRIBUTES_FOR_LIQUID)
+      post.to_liquid(post.class.liquid_attributes_for_excerpt)
     end
 
     # Fetch YAML front-matter data from related post, without layout key
