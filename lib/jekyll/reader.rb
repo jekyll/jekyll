@@ -186,7 +186,7 @@ module Jekyll
           read_data_to(path, data[key] = {})
         elsif File.extname(path).eql?('.csv')
           require 'csv'
-          data[key] = CSV.read(path, { :converters => all })
+          data[key] = CSV.read(path, { :converters => :all })
         else
           data[key] = SafeYAML.load_file(path)
         end
