@@ -9,7 +9,7 @@ module Jekyll
     def read
       begin
         doc.content = File.read(doc.full_path, { :encoding => "utf-8" })
-        if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+        if doc.content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           doc.content = $POSTMATCH
           front_matter = SafeYAML.load($1)
           unless front_matter.nil?
@@ -18,9 +18,9 @@ module Jekyll
           end
         end
       rescue SyntaxError => e
-        puts "YAML Exception reading #{doc.path}: #{e.message}"
+        puts "YAML Exception reading #{doc.full_path}: #{e.message}"
       rescue Exception => e
-        puts "Error reading file #{doc.path}: #{e.message}"
+        puts "Error reading file #{doc.full_path}: #{e.message}"
       end
       doc
     end

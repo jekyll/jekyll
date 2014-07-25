@@ -96,7 +96,7 @@ module Jekyll
           relative_path = File.join(dir, f)
           read_directories(relative_path) unless site.dest.sub(/\/$/, '') == absolute_path
         elsif has_yaml_header?(absolute_path)
-          page = Page.new(site, site.source, dir, f)
+          page = Page.new(File.join(dir, f), { :site => site })
           site.pages << page if site.publisher.publish?(page)
         else
           site.static_files << StaticFile.new(site, site.source, dir, f)

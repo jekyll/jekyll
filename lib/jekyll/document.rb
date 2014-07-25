@@ -111,8 +111,15 @@ module Jekyll
       {
         collection: collection.label,
         path:       cleaned_relative_path,
-        output_ext: Jekyll::Renderer.new(site, self).output_ext
+        output_ext: output_ext
       }
+    end
+
+    # The extensions for the output file.
+    #
+    # Returns the extname for the eventual output file, e.g. `.html`.
+    def output_ext
+      Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The permalink for this Document.
@@ -172,7 +179,7 @@ module Jekyll
     #
     # Returns true if the 'published' key is specified in the YAML front-matter and not `false`.
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      Publisher.new(site).publish?(self)
     end
 
     # The type of a document,

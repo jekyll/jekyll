@@ -5,11 +5,28 @@ module Jekyll
     extend Forwardable
 
     attr_accessor :post
-    attr_accessor :content, :output, :ext
+    attr_accessor :content, :output
 
     def_delegator :@post, :site, :site
     def_delegator :@post, :name, :name
-    def_delegator :@post, :ext,  :ext
+    def_delegator :@post, :extname, :extname
+
+    class << self
+      def liquid_attributes
+        @liquid_attributes ||= %w[
+          title
+          url
+          dir
+          date
+          id
+          categories
+          next
+          previous
+          tags
+          path
+        ]
+      end
+    end
 
     # Initialize this Post instance.
     #
@@ -24,7 +41,7 @@ module Jekyll
     end
 
     def to_liquid
-      post.to_liquid(post.class.liquid_attributes_for_excerpt)
+      Liquidator.new(self).to_liquid
     end
 
     # Fetch YAML front-matter data from related post, without layout key

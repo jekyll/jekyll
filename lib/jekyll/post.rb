@@ -14,23 +14,8 @@ module Jekyll
         name =~ MATCHER
       end
 
-      def liquid_attributes_for_excerpt
-        @liquid_attributes_for_excerpt ||= %w[
-          title
-          url
-          dir
-          date
-          id
-          categories
-          next
-          previous
-          tags
-          path
-        ]
-      end
-
       def liquid_attributes
-        liquid_attributes_for_excerpt + %w[
+        Excerpt.liquid_attributes + %w[
           content
           excerpt
         ]
@@ -38,7 +23,7 @@ module Jekyll
     end
 
     attr_accessor :site
-    attr_accessor :extracted_excerpt, :content, :output, :ext
+    attr_accessor :content, :output, :extname
     attr_accessor :slug, :tags, :categories
 
     attr_reader :name
@@ -53,10 +38,10 @@ module Jekyll
     def initialize(path, relations)
       @site = relations.fetch(:site)
       @dir = File.dirname(path)
-      @base = containing_dir(site.source, dir)
+      @base = containing_dir(site.source, @dir)
       @name = File.basename(path)
 
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
+      self.categories = @dir.downcase.split('/').reject { |x| x.empty? }
       process(name)
 
       data.default_proc = proc do |hash, key|
@@ -84,11 +69,7 @@ module Jekyll
     end
 
     def published?
-      if data.has_key?('published') && data['published'] == false
-        false
-      else
-        true
-      end
+      Publisher.new(site).publish?(self)
     end
 
     def populate_categories
@@ -105,17 +86,6 @@ module Jekyll
     # Get the full path to the directory containing the post files
     def containing_dir(source, dir)
       return File.join(source, dir, '_posts')
-    end
-
-    # Read the YAML frontmatter.
-    #
-    # base - The String path to the dir containing the file.
-    # name - The String filename of the file.
-    #
-    # Returns nothing.
-    def read_yaml(base, name)
-      super(base, name)
-      self.extracted_excerpt = extract_excerpt
     end
 
     # The post excerpt. This is either a custom excerpt
@@ -176,7 +146,7 @@ module Jekyll
       m, cats, date, slug, ext = *name.match(MATCHER)
       @date = Time.parse(date)
       self.slug = slug
-      self.ext = ext
+      self.extname = ext
     rescue ArgumentError
       path = File.join(@dir || "", name)
       msg  =  "Post '#{path}' does not have a valid date.\n"
@@ -316,10 +286,30 @@ module Jekyll
       end
     end
 
+    # The extensions for the output file.
+    #
+    # Returns the extname for the eventual output file, e.g. `.html`.
+    def output_ext
+      Jekyll::Renderer.new(site, self).output_ext
+    end
+
+    # Accessor for data properties by Liquid.
+    #
+    # property - The String name of the property to retrieve.
+    #
+    # Returns the String value or nil if the property isn't included.
+    def [](property)
+      if respond_to?(property.to_sym)
+        public_send(property.to_sym)
+      else
+        to_liquid[property.to_s]
+      end
+    end
+
     protected
 
-    def extract_excerpt
-      if generate_excerpt?
+    def extracted_excerpt
+      @extracted_excerpt ||= if generate_excerpt?
         Jekyll::Excerpt.new(self)
       else
         ""

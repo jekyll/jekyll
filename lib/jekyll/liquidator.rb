@@ -17,9 +17,9 @@ module Jekyll
       elsif @obj.respond_to?(:to_liquid)
         @obj.to_liquid
       else
-        @obj.class.liquid_attributes.map do |attribute, attr_proc|
+        Hash[@obj.class.liquid_attributes.map do |attribute, attr_proc|
           [attribute, object.send(attribute)]
-        end
+        end]
       end
     end
 
