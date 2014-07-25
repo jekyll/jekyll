@@ -46,6 +46,7 @@ module Jekyll
   autoload :FrontmatterDefaults, 'jekyll/frontmatter_defaults'
   autoload :Layout,              'jekyll/layout'
   autoload :LayoutReader,        'jekyll/layout_reader'
+  autoload :Liquidator,          'jekyll/liquidator'
   autoload :LogAdapter,          'jekyll/log_adapter'
   autoload :Page,                'jekyll/page'
   autoload :PluginManager,       'jekyll/plugin_manager'
