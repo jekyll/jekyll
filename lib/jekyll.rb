@@ -36,7 +36,6 @@ module Jekyll
   autoload :Cleaner,             'jekyll/cleaner'
   autoload :Collection,          'jekyll/collection'
   autoload :Configuration,       'jekyll/configuration'
-  autoload :Convertible,         'jekyll/convertible'
   autoload :Deprecator,          'jekyll/deprecator'
   autoload :Document,            'jekyll/document'
   autoload :Draft,               'jekyll/draft'
