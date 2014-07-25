@@ -18,5 +18,5 @@ command -v htmlproof || {
 }
 
 bundle exec jekyll build -s site -d _site --trace
-echo -e "\e[0;36mProofing begins now!\e[0m\n"
+printf "\e[0;36mProofing begins now!\e[0m\n"
 htmlproof ./_site
