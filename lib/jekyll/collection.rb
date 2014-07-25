@@ -22,38 +22,9 @@ module Jekyll
       @docs ||= []
     end
 
-    # Read the allowed documents into the collection's array of docs.
-    #
-    # Returns the sorted array of docs.
-    def read
-      filtered_entries.each do |file_path|
-        doc = Jekyll::Document.new(Jekyll.sanitized_path(directory, file_path), { site: site, collection: self })
-        doc.read
-        docs << doc
-      end
+    def add_docs(new_docs)
+      docs.concat(new_docs)
       docs.sort!
-    end
-
-    # All the entries in this collection.
-    #
-    # Returns an Array of file paths to the documents in this collection
-    #   relative to the collection's directory
-    def entries
-      return Array.new unless exists?
-      Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
-        entry[File.join(directory, "")] = ''; entry
-      end
-    end
-
-    # Filtered version of the entries in this collection.
-    # See `Jekyll::EntryFilter#filter` for more information.
-    #
-    # Returns a list of filtered entry paths.
-    def filtered_entries
-      return Array.new unless exists?
-      Dir.chdir(directory) do
-        entry_filter.filter(entries).reject { |f| File.directory?(f) }
-      end
     end
 
     # The directory for this Collection, relative to the site source.

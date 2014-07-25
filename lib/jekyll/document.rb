@@ -175,36 +175,6 @@ module Jekyll
       !(data.has_key?('published') && data['published'] == false)
     end
 
-    # Read in the file and assign the content and data based on the file contents.
-    # Merge the frontmatter of the file with the frontmatter default
-    # values
-    #
-    # Returns nothing.
-    def read(opts = {})
-      if yaml_file?
-        @data = SafeYAML.load_file(path)
-      else
-        begin
-          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
-          unless defaults.empty?
-            @data = defaults
-          end
-          @content = File.read(path, merged_file_read_opts(opts))
-          if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
-            @content = $POSTMATCH
-            data_file = SafeYAML.load($1)
-            unless data_file.nil?
-              @data = Utils.deep_merge_hashes(defaults, data_file)
-            end
-          end
-        rescue SyntaxError => e
-          puts "YAML Exception reading #{path}: #{e.message}"
-        rescue Exception => e
-          puts "Error reading file #{path}: #{e.message}"
-        end
-      end
-    end
-
     # The type of a document,
     #   i.e., its classname downcase'd and to_sym'd.
     #
@@ -217,21 +187,10 @@ module Jekyll
     #
     # Returns a Hash representing this Document's data.
     def to_liquid
-      # further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
-      #   [attribute, send(attribute)]
-      # }]
-      #
-      # defaults = site.frontmatter_defaults.all(relative_path, type)
-      # Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
       if data.is_a?(Hash)
-        Utils.deep_merge_hashes data, {
-          "output"        => output,
-          "content"       => content,
-          "path"          => path,
-          "relative_path" => relative_path,
-          "url"           => url,
-          "collection"    => collection.label
-        }
+        local_data = Liquidator.new(self).to_liquid
+        defaults = site.frontmatter_defaults.all(relative_path, type)
+        Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, local_data)
       else
         data
       end

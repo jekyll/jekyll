@@ -164,9 +164,8 @@ module Jekyll
         end
       end
 
-      payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
-        page_or_post.render(layouts, payload)
+        page_or_post.output = Jekyll::Renderer.new(self, page_or_post).run
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir
@@ -224,38 +223,14 @@ module Jekyll
       config['data'] || data
     end
 
-    # The Hash payload containing site-wide data.
+    # The Hash payload containing site-wide & Jekyll data.
     #
-    # Returns the Hash: { "site" => data } where data is a Hash with keys:
-    #   "time"       - The Time as specified in the configuration or the
-    #                  current time if none was specified.
-    #   "posts"      - The Array of Posts, sorted chronologically by post date
-    #                  and then title.
-    #   "pages"      - The Array of all Pages.
-    #   "html_pages" - The Array of HTML Pages.
-    #   "categories" - The Hash of category values and Posts.
-    #                  See Site#post_attr_hash for type info.
-    #   "tags"       - The Hash of tag values and Posts.
-    #                  See Site#post_attr_hash for type info.
+    # Returns a hash with two keys: `jekyll` and `site`.
+    # Each contains the relevant data transformed into Liquid.
     def site_payload
       {
-        "jekyll" => {
-          "version" => Jekyll::VERSION,
-          "environment" => Jekyll.env
-        },
-        "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-            "time"         => time,
-            "posts"        => posts.sort { |a, b| b <=> a },
-            "pages"        => pages,
-            "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-            "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
-            "categories"   => post_attr_hash('categories'),
-            "tags"         => post_attr_hash('tags'),
-            "collections"  => collections,
-            "documents"    => documents,
-            "data"         => site_data
-        }))
+        "jekyll" => Liquidator.new(Jekyll).to_liquid,
+        "site"   => Liquidator.new(self).to_liquid
       }
     end
 

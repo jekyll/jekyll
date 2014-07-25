@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Jekyll
   class Reader
     attr_reader :site
@@ -26,7 +27,71 @@ module Jekyll
     # Returns nothing.
     def read_collections
       site.collections.each do |_, collection|
-        collection.read unless collection.label.eql?("data")
+        collection.add_docs(read_collection(collection)) unless collection.label.eql?("data")
+      end
+    end
+
+    # Read in the one collection.
+    #
+    # Returns the docs for this collection.
+    def read_collection(coll)
+      filtered_entries(coll).each do |file_path|
+        full_path = Jekyll.sanitized_path(coll.directory, file_path)
+        docs << read_document(full_path, coll)
+      end
+    end
+
+    # Read in the file and assign the content and data based on the file contents.
+    # Merge the frontmatter of the file with the frontmatter default
+    # values
+    #
+    # Returns the Document with its content populated.
+    def read_document(full_path, coll)
+      doc = Jekyll::Document.new(full_path, { site: site, collection: coll })
+      begin
+        defaults = site.frontmatter_defaults.all(url, coll.label.to_sym)
+        unless defaults.empty?
+          doc.data = defaults
+        end
+        doc.content = File.read(path, merged_file_read_opts(opts))
+        if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+          doc.content = $POSTMATCH
+          data_file = SafeYAML.load($1)
+          unless data_file.nil?
+            doc.data = Utils.deep_merge_hashes(defaults, data_file)
+          end
+        end
+      rescue SyntaxError => e
+        puts "YAML Exception reading #{doc.path}: #{e.message}"
+      rescue Exception => e
+        puts "Error reading file #{doc.path}: #{e.message}"
+      end
+      doc
+    end
+
+    # All the entries in this collection.
+    #
+    # coll - the Jekyll::Collection
+    #
+    # Returns an Array of file paths to the documents in this collection
+    #   relative to the collection's directory
+    def entries(coll)
+      return Array.new unless coll.exists?
+      Dir.glob(File.join(coll.directory, "**", "*.*")).map do |entry|
+        entry[File.join(coll.directory, "")] = ''; entry
+      end
+    end
+
+    # Filtered version of the entries in this collection.
+    # See `Jekyll::EntryFilter#filter` for more information.
+    #
+    # coll - the Jekyll::Collection
+    #
+    # Returns a list of filtered entry paths.
+    def filtered_entries(coll)
+      return Array.new unless coll.exists?
+      Dir.chdir(coll.directory) do
+        entry_filter.filter(coll.entries).reject { |f| File.directory?(f) }
       end
     end
 
@@ -109,7 +174,7 @@ module Jekyll
       return unless safe_directory?(dir)
 
       entries = Dir.chdir(dir) do
-        Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
+        Dir['*.{yaml,yml,json,csv}'] + Dir['*'].select { |fn| File.directory?(fn) }
       end
 
       entries.each do |entry|
@@ -119,6 +184,9 @@ module Jekyll
         key = sanitize_filename(File.basename(entry, '.*'))
         if File.directory?(path)
           read_data_to(path, data[key] = {})
+        elsif File.extname(path).eql?('.csv')
+          require 'csv'
+          data[key] = CSV.read(path, { :converters => all })
         else
           data[key] = SafeYAML.load_file(path)
         end
