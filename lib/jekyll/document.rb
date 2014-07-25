@@ -205,10 +205,24 @@ module Jekyll
       end
     end
 
+    # The type of a document,
+    #   i.e., its classname downcase'd and to_sym'd.
+    #
+    # Returns the type of self.
+    def type
+      @type ||= self.class.to_s.downcase.to_sym
+    end
+
     # Create a Liquid-understandable version of this Document.
     #
     # Returns a Hash representing this Document's data.
     def to_liquid
+      # further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
+      #   [attribute, send(attribute)]
+      # }]
+      #
+      # defaults = site.frontmatter_defaults.all(relative_path, type)
+      # Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
       if data.is_a?(Hash)
         Utils.deep_merge_hashes data, {
           "output"        => output,
@@ -220,6 +234,19 @@ module Jekyll
         }
       else
         data
+      end
+    end
+
+    # Accessor for data properties by Liquid.
+    #
+    # property - The String name of the property to retrieve.
+    #
+    # Returns the String value or nil if the property isn't included.
+    def [](property)
+      if respond_to?(property.to_sym)
+        public_send(property.to_sym)
+      else
+        to_liquid[property.to_s]
       end
     end
 
