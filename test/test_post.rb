@@ -85,7 +85,7 @@ class TestPost < Test::Unit::TestCase
 
         post = Post.allocate
         post.site = @site
-        post.process("cat2/cat3/2008-09-09-foo-bar.textile")
+        post.process("cat2/CAT3/2008-09-09-foo-bar.textile")
         assert_equal 2, post.categories.size
         assert_equal "cat2", post.categories[0]
         assert_equal "cat3", post.categories[1]

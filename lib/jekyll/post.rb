@@ -160,7 +160,7 @@ module Jekyll
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
       self.categories ||= []
-      self.categories += (cats || '').split('/')
+      self.categories += (cats || '').downcase.split('/')
       self.date = Time.parse(date)
       self.slug = slug
       self.ext = ext
