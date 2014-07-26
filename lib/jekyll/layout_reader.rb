@@ -8,7 +8,7 @@ module Jekyll
 
     def read
       layout_entries.each do |f|
-        @layouts[layout_name(f)] = Layout.new(site, layout_directory, f)
+        @layouts[layout_name(f)] = DocumentReader.new(Layout.new(site, layout_directory, f)).read
       end
 
       @layouts

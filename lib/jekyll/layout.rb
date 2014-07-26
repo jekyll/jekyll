@@ -1,7 +1,5 @@
 module Jekyll
   class Layout
-    include Convertible
-
     # Gets the Site object.
     attr_reader :site
 
@@ -9,7 +7,7 @@ module Jekyll
     attr_reader :name
 
     # Gets/Sets the extension of this layout.
-    attr_accessor :ext
+    attr_accessor :extname
 
     # Gets/Sets the Hash that holds the metadata for this layout.
     attr_accessor :data
@@ -30,7 +28,6 @@ module Jekyll
       self.data = {}
 
       process(name)
-      read_yaml(base, name)
     end
 
     # Extract information from the layout filename.
@@ -39,7 +36,15 @@ module Jekyll
     #
     # Returns nothing.
     def process(name)
-      self.ext = File.extname(name)
+      self.extname =  File.extname(name)
+    end
+
+    def defaults_key
+      :layout
+    end
+
+    def full_path
+      File.join(*[@base, @name].map(&:to_s).reject(&:empty?))
     end
   end
 end

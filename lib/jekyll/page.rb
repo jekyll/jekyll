@@ -1,20 +1,22 @@
 module Jekyll
   class Page
-    include Convertible
-
     attr_writer :dir
     attr_accessor :site, :pager
-    attr_accessor :name, :ext, :basename
+    attr_accessor :name, :extname, :basename
     attr_accessor :data, :content, :output
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
-      content
-      dir
-      name
-      path
-      url
-    ]
+    class << self
+      def liquid_attributes
+        @liquid_attributes ||= %w[
+          content
+          dir
+          name
+          path
+          url
+        ]
+      end
+    end
 
     # Initialize a new Page.
     #
@@ -22,15 +24,12 @@ module Jekyll
     # base - The String path to the source.
     # dir  - The String path between the source and the file.
     # name - The String filename of the file.
-    def initialize(site, base, dir, name)
-      @site = site
-      @base = base
-      @dir  = dir
-      @name = name
-
-
+    def initialize(path, relations)
+      @site = relations.fetch(:site)
+      @dir  = File.dirname(path)
+      @name = File.basename(path)
       process(name)
-      read_yaml(File.join(base, dir), name)
+      @data = Hash.new
 
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
@@ -76,6 +75,10 @@ module Jekyll
       end
     end
 
+    def type
+      :page
+    end
+
     # The generated relative url of this page. e.g. /about.html.
     #
     # Returns the String url.
@@ -103,8 +106,37 @@ module Jekyll
     #
     # Returns nothing.
     def process(name)
-      self.ext = File.extname(name)
-      self.basename = name[0 .. -ext.length - 1]
+      self.extname = File.extname(name)
+      self.basename = name[0 .. -extname.length - 1]
+    end
+
+    # The liquid representation for this page.
+    # Keys will equal Page.liquid_attributes, and
+    # values will be their values on this object.
+    #
+    # Returns the liquid representation for this object.
+    def to_liquid
+      Liquidator.new(self).to_liquid
+    end
+
+    # The extensions for the output file.
+    #
+    # Returns the extname for the eventual output file, e.g. `.html`.
+    def output_ext
+      Jekyll::Renderer.new(site, self).output_ext
+    end
+
+    # Accessor for data properties by Liquid.
+    #
+    # property - The String name of the property to retrieve.
+    #
+    # Returns the String value or nil if the property isn't included.
+    def [](property)
+      if respond_to?(property.to_sym)
+        public_send(property.to_sym)
+      else
+        to_liquid[property.to_s]
+      end
     end
 
     # Add any necessary layouts to this post
@@ -162,6 +194,10 @@ module Jekyll
 
     def uses_relative_permalinks
       permalink && !@dir.empty? && site.config['relative_permalinks']
+    end
+
+    def published?
+      Publisher.new(site).publish?(self)
     end
   end
 end

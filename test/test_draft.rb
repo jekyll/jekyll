@@ -2,7 +2,7 @@ require 'helper'
 
 class TestDraft < Test::Unit::TestCase
   def setup_draft(file)
-    Draft.new(@site, source_dir, '', file)
+    Draft.new(file, :site => @site)
   end
 
   context "A Draft" do

@@ -13,7 +13,7 @@ class TestTags < Test::Unit::TestCase
     site = Site.new(Jekyll.configuration)
 
     if override['read_posts']
-      site.read_posts('')
+      site.reader.read_posts('')
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
@@ -451,7 +451,7 @@ CONTENT
         end
 
         site = Site.new(Jekyll.configuration)
-        post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
+        post = Post.new('/2013-12-17-include-variable-filters.markdown', :site => site)
         layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
         post.render(layouts, {"site" => {"posts" => []}})
         @content = post.content

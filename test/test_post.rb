@@ -4,11 +4,11 @@ require 'helper'
 
 class TestPost < Test::Unit::TestCase
   def setup_post(file)
-    Post.new(@site, source_dir, '', file)
+    Post.new(file, { :site => @site })
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
+    layouts = { "default" => DocumentReader.new(Layout.new(@site, source_dir('_layouts'), "simple.html")).read}
     post.render(layouts, {"site" => {"posts" => []}})
   end
 
@@ -464,8 +464,8 @@ class TestPost < Test::Unit::TestCase
         klass = Class.new(Jekyll::Post)
         assert_gets_called = false
         klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
-        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
-        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        Excerpt.liquid_attributes << 'assert_gets_called'
+        post = klass.new('/2008-02-02-published.textile', :site => @site)
         do_render(post)
 
         assert assert_gets_called, 'assert_gets_called did not get called on post.'
@@ -614,7 +614,7 @@ class TestPost < Test::Unit::TestCase
     end
 
     should "generate categories and topics" do
-      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
+      post = Post.new(File.join(File.dirname(__FILE__), 'source', 'foo', 'bar/2008-12-12-topical-post.textile'), :site => @site)
       assert_equal ['foo'], post.categories
     end
   end

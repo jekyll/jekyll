@@ -24,7 +24,7 @@ module Jekyll
     end
 
     ######################
-    ## DAT RENDER THO
+    ## RENDER
     ######################
 
     def run

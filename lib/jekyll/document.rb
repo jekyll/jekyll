@@ -111,8 +111,15 @@ module Jekyll
       {
         collection: collection.label,
         path:       cleaned_relative_path,
-        output_ext: Jekyll::Renderer.new(site, self).output_ext
+        output_ext: output_ext
       }
+    end
+
+    # The extensions for the output file.
+    #
+    # Returns the extname for the eventual output file, e.g. `.html`.
+    def output_ext
+      Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The permalink for this Document.
@@ -172,37 +179,19 @@ module Jekyll
     #
     # Returns true if the 'published' key is specified in the YAML front-matter and not `false`.
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      Publisher.new(site).publish?(self)
     end
 
-    # Read in the file and assign the content and data based on the file contents.
-    # Merge the frontmatter of the file with the frontmatter default
-    # values
+    # The type of a document,
+    #   i.e., its classname downcase'd and to_sym'd.
     #
-    # Returns nothing.
-    def read(opts = {})
-      if yaml_file?
-        @data = SafeYAML.load_file(path)
-      else
-        begin
-          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
-          unless defaults.empty?
-            @data = defaults
-          end
-          @content = File.read(path, merged_file_read_opts(opts))
-          if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
-            @content = $POSTMATCH
-            data_file = SafeYAML.load($1)
-            unless data_file.nil?
-              @data = Utils.deep_merge_hashes(defaults, data_file)
-            end
-          end
-        rescue SyntaxError => e
-          puts "YAML Exception reading #{path}: #{e.message}"
-        rescue Exception => e
-          puts "Error reading file #{path}: #{e.message}"
-        end
-      end
+    # Returns the type of self.
+    def type
+      @type ||= self.class.to_s.downcase.to_sym
+    end
+
+    def defaults_key
+      coll.label.to_sym
     end
 
     # Create a Liquid-understandable version of this Document.
@@ -210,16 +199,24 @@ module Jekyll
     # Returns a Hash representing this Document's data.
     def to_liquid
       if data.is_a?(Hash)
-        Utils.deep_merge_hashes data, {
-          "output"        => output,
-          "content"       => content,
-          "path"          => path,
-          "relative_path" => relative_path,
-          "url"           => url,
-          "collection"    => collection.label
-        }
+        local_data = Liquidator.new(self).to_liquid
+        defaults = site.frontmatter_defaults.all(relative_path, type)
+        Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, local_data)
       else
         data
+      end
+    end
+
+    # Accessor for data properties by Liquid.
+    #
+    # property - The String name of the property to retrieve.
+    #
+    # Returns the String value or nil if the property isn't included.
+    def [](property)
+      if respond_to?(property.to_sym)
+        public_send(property.to_sym)
+      else
+        to_liquid[property.to_s]
       end
     end
 

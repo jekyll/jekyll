@@ -1,41 +1,30 @@
 module Jekyll
-  class Post
+  class Post < Document
     include Comparable
-    include Convertible
 
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
-    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
-      title
-      url
-      dir
-      date
-      id
-      categories
-      next
-      previous
-      tags
-      path
-    ]
+    class << self
+      # Post name validator. Post filenames must be like:
+      # 2008-11-05-my-awesome-post.textile
+      #
+      # Returns true if valid, false if not.
+      def valid?(name)
+        name =~ MATCHER
+      end
 
-    # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
-      content
-      excerpt
-    ]
-
-    # Post name validator. Post filenames must be like:
-    # 2008-11-05-my-awesome-post.textile
-    #
-    # Returns true if valid, false if not.
-    def self.valid?(name)
-      name =~ MATCHER
+      def liquid_attributes
+        Excerpt.liquid_attributes + %w[
+          content
+          excerpt
+        ]
+      end
     end
 
     attr_accessor :site
-    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
-    attr_accessor :date, :slug, :tags, :categories
+    attr_accessor :content, :output, :extname
+    attr_accessor :slug, :tags, :categories
 
     attr_reader :name
 
@@ -46,34 +35,41 @@ module Jekyll
     # name       - The String filename of the post file.
     #
     # Returns the new Post.
-    def initialize(site, source, dir, name)
-      @site = site
-      @dir = dir
-      @base = containing_dir(source, dir)
-      @name = name
+    def initialize(path, relations)
+      @site = relations.fetch(:site)
+      @dir = File.dirname(path)
+      @base = containing_dir(site.source, @dir)
+      @name = File.basename(path)
 
-      self.categories = dir.downcase.split('/').reject { |x| x.empty? }
+      self.categories = @dir.downcase.split('/').reject { |x| x.empty? }
       process(name)
-      read_yaml(@base, name)
 
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
-      end
-
-      if data.has_key?('date')
-        self.date = Time.parse(data["date"].to_s)
       end
 
       populate_categories
       populate_tags
     end
 
-    def published?
-      if data.has_key?('published') && data['published'] == false
-        false
+    def date
+      if data.has_key?('date')
+        Time.parse(data["date"].to_s)
       else
-        true
+        @date
       end
+    end
+
+    def data
+      @data ||= Hash.new
+    end
+
+    def type
+      :post
+    end
+
+    def published?
+      Publisher.new(site).publish?(self)
     end
 
     def populate_categories
@@ -90,17 +86,6 @@ module Jekyll
     # Get the full path to the directory containing the post files
     def containing_dir(source, dir)
       return File.join(source, dir, '_posts')
-    end
-
-    # Read the YAML frontmatter.
-    #
-    # base - The String path to the dir containing the file.
-    # name - The String filename of the file.
-    #
-    # Returns nothing.
-    def read_yaml(base, name)
-      super(base, name)
-      self.extracted_excerpt = extract_excerpt
     end
 
     # The post excerpt. This is either a custom excerpt
@@ -159,9 +144,9 @@ module Jekyll
     # Returns nothing.
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
-      self.date = Time.parse(date)
+      @date = Time.parse(date)
       self.slug = slug
-      self.ext = ext
+      self.extname = ext
     rescue ArgumentError
       path = File.join(@dir || "", name)
       msg  =  "Post '#{path}' does not have a valid date.\n"
@@ -301,10 +286,30 @@ module Jekyll
       end
     end
 
+    # The extensions for the output file.
+    #
+    # Returns the extname for the eventual output file, e.g. `.html`.
+    def output_ext
+      Jekyll::Renderer.new(site, self).output_ext
+    end
+
+    # Accessor for data properties by Liquid.
+    #
+    # property - The String name of the property to retrieve.
+    #
+    # Returns the String value or nil if the property isn't included.
+    def [](property)
+      if respond_to?(property.to_sym)
+        public_send(property.to_sym)
+      else
+        to_liquid[property.to_s]
+      end
+    end
+
     protected
 
-    def extract_excerpt
-      if generate_excerpt?
+    def extracted_excerpt
+      @extracted_excerpt ||= if generate_excerpt?
         Jekyll::Excerpt.new(self)
       else
         ""

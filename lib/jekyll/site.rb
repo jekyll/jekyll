@@ -4,7 +4,7 @@ module Jekyll
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
-                  :plugin_manager
+                  :plugin_manager, :drafts
 
     attr_accessor :converters, :generators
 
@@ -116,122 +116,30 @@ module Jekyll
     # Returns nothing.
     def read
       self.layouts = LayoutReader.new(self).read
-      read_directories
-      read_data(config['data_source'])
-      read_collections
-    end
-
-    # Recursively traverse directories to find posts, pages and static files
-    # that will become part of the site according to the rules in
-    # filter_entries.
-    #
-    # dir - The String relative path of the directory to read. Default: ''.
-    #
-    # Returns nothing.
-    def read_directories(dir = '')
-      base = File.join(source, dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
-
-      read_posts(dir)
-      read_drafts(dir) if show_drafts
+      reader.read_all!
+      pages.sort_by!(&:name)
+      aggregate_post_info
       posts.sort!
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
-
-      entries.each do |f|
-        f_abs = File.join(base, f)
-        if File.directory?(f_abs)
-          f_rel = File.join(dir, f)
-          read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
-        elsif has_yaml_header?(f_abs)
-          page = Page.new(self, source, dir, f)
-          pages << page if publisher.publish?(page)
-        else
-          static_files << StaticFile.new(self, source, dir, f)
-        end
-      end
-
-      pages.sort_by!(&:name)
     end
 
-    # Read all the files in <source>/<dir>/_posts and create a new Post
-    # object with each one.
+    # The site's reader.
     #
-    # dir - The String relative path of the directory to read.
-    #
-    # Returns nothing.
-    def read_posts(dir)
-      posts = read_content(dir, '_posts', Post)
-
-      posts.each do |post|
-        aggregate_post_info(post) if publisher.publish?(post)
-      end
+    # Return the site's very own reader.
+    def reader
+      Reader.new(self)
     end
 
-    # Read all the files in <source>/<dir>/_drafts and create a new Post
-    # object with each one.
+    # Aggregate post information
     #
-    # dir - The String relative path of the directory to read.
+    # post - The Post object to aggregate information for
     #
-    # Returns nothing.
-    def read_drafts(dir)
-      drafts = read_content(dir, '_drafts', Draft)
-
-      drafts.each do |draft|
+    # Returns nothing
+    def aggregate_post_info
+      (drafts || []).each do |draft|
         if draft.published?
-          aggregate_post_info(draft)
+          posts << draft
         end
-      end
-    end
-
-    def read_content(dir, magic_dir, klass)
-      get_entries(dir, magic_dir).map do |entry|
-        klass.new(self, source, dir, entry) if klass.valid?(entry)
-      end.reject do |entry|
-        entry.nil?
-      end
-    end
-
-    # Read and parse all yaml files under <source>/<dir>
-    #
-    # Returns nothing
-    def read_data(dir)
-      base = Jekyll.sanitized_path(source, dir)
-      read_data_to(base, self.data)
-    end
-
-    # Read and parse all yaml files under <dir> and add them to the
-    # <data> variable.
-    #
-    # dir - The string absolute path of the directory to read.
-    # data - The variable to which data will be added.
-    #
-    # Returns nothing
-    def read_data_to(dir, data)
-      return unless File.directory?(dir) && (!safe || !File.symlink?(dir))
-
-      entries = Dir.chdir(dir) do
-        Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
-      end
-
-      entries.each do |entry|
-        path = Jekyll.sanitized_path(dir, entry)
-        next if File.symlink?(path) && safe
-
-        key = sanitize_filename(File.basename(entry, '.*'))
-        if File.directory?(path)
-          read_data_to(path, data[key] = {})
-        else
-          data[key] = SafeYAML.load_file(path)
-        end
-      end
-    end
-
-    # Read in all collections specified in the configuration
-    #
-    # Returns nothing.
-    def read_collections
-      collections.each do |_, collection|
-        collection.read unless collection.label.eql?("data")
       end
     end
 
@@ -256,9 +164,8 @@ module Jekyll
         end
       end
 
-      payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
-        page_or_post.render(layouts, payload)
+        page_or_post.output = Jekyll::Renderer.new(self, page_or_post).run
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir
@@ -316,51 +223,15 @@ module Jekyll
       config['data'] || data
     end
 
-    # The Hash payload containing site-wide data.
+    # The Hash payload containing site-wide & Jekyll data.
     #
-    # Returns the Hash: { "site" => data } where data is a Hash with keys:
-    #   "time"       - The Time as specified in the configuration or the
-    #                  current time if none was specified.
-    #   "posts"      - The Array of Posts, sorted chronologically by post date
-    #                  and then title.
-    #   "pages"      - The Array of all Pages.
-    #   "html_pages" - The Array of HTML Pages.
-    #   "categories" - The Hash of category values and Posts.
-    #                  See Site#post_attr_hash for type info.
-    #   "tags"       - The Hash of tag values and Posts.
-    #                  See Site#post_attr_hash for type info.
+    # Returns a hash with two keys: `jekyll` and `site`.
+    # Each contains the relevant data transformed into Liquid.
     def site_payload
       {
-        "jekyll" => {
-          "version" => Jekyll::VERSION,
-          "environment" => Jekyll.env
-        },
-        "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-            "time"         => time,
-            "posts"        => posts.sort { |a, b| b <=> a },
-            "pages"        => pages,
-            "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-            "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
-            "categories"   => post_attr_hash('categories'),
-            "tags"         => post_attr_hash('tags'),
-            "collections"  => collections,
-            "documents"    => documents,
-            "data"         => site_data
-        }))
+        "jekyll" => Liquidator.new(Jekyll).to_liquid,
+        "site"   => Liquidator.new(self).to_liquid
       }
-    end
-
-    # Filter out any files/directories that are hidden or backup files (start
-    # with "." or "#" or end with "~"), or contain site content (start with "_"),
-    # or are excluded in the site configuration, unless they are web server
-    # files such as '.htaccess'.
-    #
-    # entries - The Array of String file/directory entries to filter.
-    #
-    # Returns the Array of filtered entries.
-    def filter_entries(entries, base_directory = nil)
-      EntryFilter.new(self, base_directory).filter(entries)
     end
 
     # Get the implementation class for the given Converter.
@@ -390,28 +261,6 @@ module Jekyll
       end.sort.map do |c|
         c.new(config)
       end
-    end
-
-    # Read the entries from a particular directory for processing
-    #
-    # dir - The String relative path of the directory to read
-    # subfolder - The String directory to read
-    #
-    # Returns the list of entries to process
-    def get_entries(dir, subfolder)
-      base = File.join(source, dir, subfolder)
-      return [] unless File.exist?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
-    end
-
-    # Aggregate post information
-    #
-    # post - The Post object to aggregate information for
-    #
-    # Returns nothing
-    def aggregate_post_info(post)
-      posts << post
     end
 
     def relative_permalinks_deprecation_method
@@ -446,14 +295,8 @@ module Jekyll
       @frontmatter_defaults ||= FrontmatterDefaults.new(self)
     end
 
-    private
-
     def has_relative_page?
       pages.any? { |page| page.uses_relative_permalinks }
-    end
-
-    def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
     def limit_posts!
@@ -463,12 +306,6 @@ module Jekyll
 
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
-    end
-
-    def sanitize_filename(name)
-      name.gsub!(/[^\w\s_-]+/, '')
-      name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
-      name.gsub(/\s+/, '_')
     end
 
     def publisher

@@ -4,7 +4,7 @@ class TestPage < Test::Unit::TestCase
   def setup_page(*args)
     dir, file = args
     dir, file = ['', dir] if file.nil?
-    @page = Page.new(@site, source_dir, dir, file)
+    @page = Page.new(File.join(dir, file), :site => @site)
   end
 
   def do_render(page)
@@ -49,7 +49,7 @@ class TestPage < Test::Unit::TestCase
 
       should "deal properly with extensions" do
         @page = setup_page('deal.with.dots.html')
-        assert_equal ".html", @page.ext
+        assert_equal ".html", @page.extname
       end
 
       should "deal properly with dots" do

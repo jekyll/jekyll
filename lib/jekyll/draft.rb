@@ -32,7 +32,11 @@ module Jekyll
       m, slug, ext = *name.match(MATCHER)
       self.date = File.mtime(File.join(@base, name))
       self.slug = slug
-      self.ext = ext
+      self.extname =  ext
+    end
+
+    def type
+      :draft
     end
 
   end
