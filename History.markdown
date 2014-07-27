@@ -7,6 +7,7 @@
 ### Bug Fixes
 
   * Remove unnecessary `Jekyll::Tags::IncludeTag#blank?` method (#2625)
+  * Categories in the path are ignored (#2633)
 
 ### Development Fixes
 
