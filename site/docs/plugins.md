@@ -448,6 +448,7 @@ You can find a few useful plugins at the following locations:
 - [Transform Layouts](https://gist.github.com/1472645): Allows HAML layouts (you need a HAML Converter plugin for this to work).
 - [Org-mode Converter](https://gist.github.com/abhiyerra/7377603): Org-mode converter for Jekyll.
 - [Customized Kramdown Converter](https://github.com/mvdbos/kramdown-with-pygments): Enable Pygments syntax highlighting for Kramdown-parsed fenced code blocks.
+- [Jekyll CO₂](https://github.com/wdenton/jekyll-co2): Generates small chunk of HTML showing the change in atmospheric CO₂ at the Mauna Loa observatory in Hawaii. 
 
 #### Filters
 
