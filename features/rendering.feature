@@ -33,3 +33,17 @@ Feature: Rendering
     When I run jekyll build
     Then the _site directory should exist
     And I should see "hey = 'for cicada';" in "_site/index.js"
+
+  Scenario: Don't let layout data override page data
+    Given I have a "yo-dawg.html" page with layout "simple" that contains "Yo dawg, I heard you liked <code>_layouts</code>? So I gave all your layouts a layout."
+    And I have a default layout that contains "{{ content }}"
+    And I have a "_layouts/simple.html" file with content:
+      """
+      ---
+      layout: default
+      ---
+      {{ content }} The layout is {{ page.layout }}
+      """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "The layout is simple" in "_site/yo-dawg.html"
