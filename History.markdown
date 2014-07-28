@@ -27,6 +27,7 @@
   * Add jekyll-hook to deployment methods (#2617)
   * Added kramdown-with-pygments plugin to the list of third-party plugins (#2623)
   * Update outdated "Extras" page and remove duplicate documentation (#2622)
+  * Add co2 plugin to list of third-party plugins (#2639)
 
 ## 2.1.1 / 2014-07-01
 
