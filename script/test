@@ -6,13 +6,6 @@
 
 set -x
 
-if [[ "$TRAVIS_PULL_REQUEST" != "" ]] || [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then
-  git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep -v '^site/' || {
-    echo "No lib files have changed, skipping Jekyll tests!"
-    exit 0
-  }
-fi
-
 if [ -z "$1" ]; then
   TEST_FILES="test/test_*.rb"
 else
