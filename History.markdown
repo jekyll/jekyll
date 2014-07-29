@@ -4,6 +4,16 @@
 
 ### Minor Enhancements
 
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 2.2.0 / 2014-07-29
+
+### Minor Enhancements
+
   * Throw a warning if the specified layout does not exist (#2620)
   * Whitelist Pygments options in safe mode (#2642)
 

@@ -5,6 +5,45 @@ permalink: "/docs/history/"
 prev_section: contributing
 ---
 
+## 2.2.0 / 2014-07-29
+{: #v2-2-0}
+
+### Minor Enhancements
+{: #minor-enhancements-v2-2-0}
+
+- Throw a warning if the specified layout does not exist ([#2620]({{ site.repository }}/issues/2620))
+- Whitelist Pygments options in safe mode ([#2642]({{ site.repository }}/issues/2642))
+
+### Bug Fixes
+{: #bug-fixes-v2-2-0}
+
+- Remove unnecessary `Jekyll::Tags::IncludeTag#blank?` method ([#2625]({{ site.repository }}/issues/2625))
+- Categories in the path are ignored ([#2633]({{ site.repository }}/issues/2633))
+
+### Development Fixes
+{: #development-fixes-v2-2-0}
+
+- Refactoring Errors & Requires of Third-Party stuff ([#2591]({{ site.repository }}/issues/2591))
+- Add further tests for categories ([#2584]({{ site.repository }}/issues/2584))
+- Proof site with html-proofer on change ([#2605]({{ site.repository }}/issues/2605))
+- Fix up bug in [#2605]({{ site.repository }}/issues/2605) which caused proofing the site not to function ([#2608]({{ site.repository }}/issues/2608))
+- Use `bundle exec` in `script/proof` ([#2610]({{ site.repository }}/issues/2610))
+
+### Site Enhancements
+{: #site-enhancements-v2-2-0}
+
+- Update Kramdown urls ([#2588]({{ site.repository }}/issues/2588))
+- Add `Jekyll::AutolinkEmail` and `Jekyll::GitMetadata` to the list of
+    third-party plugins ([#2596]({{ site.repository }}/issues/2596))
+- Fix a bunch of broken links in the site ([#2601]({{ site.repository }}/issues/2601))
+- Replace dead links with working links ([#2611]({{ site.repository }}/issues/2611))
+- Add jekyll-hook to deployment methods ([#2617]({{ site.repository }}/issues/2617))
+- Added kramdown-with-pygments plugin to the list of third-party plugins ([#2623]({{ site.repository }}/issues/2623))
+- Update outdated "Extras" page and remove duplicate documentation ([#2622]({{ site.repository }}/issues/2622))
+- Add co2 plugin to list of third-party plugins ([#2639]({{ site.repository }}/issues/2639))
+- Attempt to clarify the way Sass imports happen ([#2642]({{ site.repository }}/issues/2642))
+
+
 ## 2.1.1 / 2014-07-01
 {: #v2-1-1}
 
