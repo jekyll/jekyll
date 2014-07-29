@@ -92,6 +92,15 @@ module Jekyll
       raise e
     end
 
+    # Checks if the layout specified in the document actually exists
+    #
+    # layout - the layout to check
+    #
+    # Returns true if the layout is invalid, false if otherwise
+    def invalid_layout?(layout)
+      !document.data["layout"].nil? && layout.nil?
+    end
+
     # Render layouts and place given content inside.
     #
     # content - the content to be placed in the layout
@@ -101,6 +110,9 @@ module Jekyll
     def place_in_layouts(content, payload, info)
       output = content.dup
       layout = site.layouts[document.data["layout"]]
+
+      Jekyll.logger.warn("Build Warning:", "Layout '#{document.data["layout"]}' requested in #{document.relative_path} does not exist.") if invalid_layout? layout
+
       used   = Set.new([layout])
 
       while layout

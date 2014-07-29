@@ -153,6 +153,15 @@ module Jekyll
       !asset_file?
     end
 
+    # Checks if the layout specified in the document actually exists
+    #
+    # layout - the layout to check
+    #
+    # Returns true if the layout is invalid, false if otherwise
+    def invalid_layout?(layout)
+      !data["layout"].nil? && data["layout"] != "none" && layout.nil? && !(self.is_a? Jekyll::Excerpt)
+    end
+
     # Recursively render layouts
     #
     # layouts - a list of the layouts
@@ -163,6 +172,9 @@ module Jekyll
     def render_all_layouts(layouts, payload, info)
       # recursively render layouts
       layout = layouts[data["layout"]]
+
+      Jekyll.logger.warn("Build Warning:", "Layout '#{data["layout"]}' requested in #{path} does not exist.") if invalid_layout? layout
+
       used = Set.new([layout])
 
       while layout
