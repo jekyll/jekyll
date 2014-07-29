@@ -4,6 +4,8 @@
 
 ### Minor Enhancements
 
+  * Throw a warning if the specified layout does not exist (#2620)
+
 ### Bug Fixes
 
   * Remove unnecessary `Jekyll::Tags::IncludeTag#blank?` method (#2625)
