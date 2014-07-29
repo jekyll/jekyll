@@ -98,7 +98,7 @@ module Jekyll
     #
     # Returns true if the layout is invalid, false if otherwise
     def invalid_layout?(layout)
-      !document.data["layout"].nil? && document.data["layout"] != "none" && layout.nil?
+      !document.data["layout"].nil? && layout.nil?
     end
 
     # Render layouts and place given content inside.
