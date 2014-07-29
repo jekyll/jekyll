@@ -87,6 +87,37 @@ CONTENT
     end
   end
 
+  context "in safe mode" do
+    setup do
+      @tag = Jekyll::Tags::HighlightBlock.new('highlight', 'text ', ["test", "{% endhighlight %}", "\n"])
+    end
+
+    should "allow linenos" do
+      sanitized = @tag.sanitized_opts({:linenos => true}, true)
+      assert_equal true, sanitized[:linenos]
+    end
+
+    should "allow hl_linenos" do
+      sanitized = @tag.sanitized_opts({:hl_linenos => %w[1 2 3 4]}, true)
+      assert_equal %w[1 2 3 4], sanitized[:hl_linenos]
+    end
+
+    should "allow cssclass" do
+      sanitized = @tag.sanitized_opts({:cssclass => "ahoy"}, true)
+      assert_equal "ahoy", sanitized[:cssclass]
+    end
+
+    should "allow startinline" do
+      sanitized = @tag.sanitized_opts({:startinline => true}, true)
+      assert_equal true, sanitized[:startinline]
+    end
+
+    should "strip unknown options" do
+      sanitized = @tag.sanitized_opts({:light => true}, true)
+      assert_nil sanitized[:light]
+    end
+  end
+
   context "post content has highlight tag" do
     setup do
       fill_post("test")
