@@ -5,6 +5,7 @@
 ### Minor Enhancements
 
   * Throw a warning if the specified layout does not exist (#2620)
+  * Whitelist Pygments options in safe mode (#2642)
 
 ### Bug Fixes
 
@@ -30,6 +31,7 @@
   * Added kramdown-with-pygments plugin to the list of third-party plugins (#2623)
   * Update outdated "Extras" page and remove duplicate documentation (#2622)
   * Add co2 plugin to list of third-party plugins (#2639)
+  * Attenpt to clarify the way Sass imports happen (#2642)
 
 ## 2.1.1 / 2014-07-01
 
