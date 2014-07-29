@@ -44,9 +44,11 @@ eos
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.strip
 
+        is_safe = !!context.registers[:site].safe
+
         output = case context.registers[:site].highlighter
         when 'pygments'
-          render_pygments(code)
+          render_pygments(code, is_safe)
         when 'rouge'
           render_rouge(code)
         else
@@ -57,8 +59,17 @@ eos
         prefix + rendered_output + suffix
       end
 
-      def render_pygments(code)
+      def render_pygments(code, is_safe)
         require 'pygments'
+
+        if is_safe
+          @options = {
+            :startinline => @options.fetch(:startinline, nil),
+            :hl_lines    => @options.fetch(:hl_lines, nil),
+            :linenos     => @options.fetch(:linenos, nil)
+          }
+        end
+
         @options[:encoding] = 'utf-8'
 
         highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
