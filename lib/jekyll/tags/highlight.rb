@@ -44,9 +44,11 @@ eos
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.strip
 
+        is_safe = !!context.registers[:site].safe
+
         output = case context.registers[:site].highlighter
         when 'pygments'
-          render_pygments(code)
+          render_pygments(code, is_safe)
         when 'rouge'
           render_rouge(code)
         else
@@ -57,11 +59,30 @@ eos
         prefix + rendered_output + suffix
       end
 
-      def render_pygments(code)
+      def sanitized_opts(opts, is_safe)
+        if is_safe
+          Hash[[
+            [:startinline, opts.fetch(:startinline, nil)],
+            [:hl_linenos,  opts.fetch(:hl_linenos, nil)],
+            [:linenos,     opts.fetch(:linenos, nil)],
+            [:encoding,    opts.fetch(:encoding, 'utf-8')],
+            [:cssclass,    opts.fetch(:cssclass, nil)]
+          ].reject {|f| f.last.nil? }]
+        else
+          opts
+        end
+      end
+
+      def render_pygments(code, is_safe)
         require 'pygments'
+
         @options[:encoding] = 'utf-8'
 
-        highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
+        highlighted_code = Pygments.highlight(
+          code,
+          :lexer   => @lang,
+          :options => sanitized_opts(@options, is_safe)
+        )
 
         if highlighted_code.nil?
           Jekyll.logger.error "There was an error highlighting your code:"
