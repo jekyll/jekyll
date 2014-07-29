@@ -21,9 +21,9 @@ or `.coffee`) and start the file with two lines of triple dashes, like this:
 
 Jekyll treats these files the same as a regular page, in that the output file
 will be placed in the same directory that it came from. For instance, if you
-have a file named `/css/styles.scss` in your site's source folder, Jekyll
+have a file named `css/styles.scss` in your site's source folder, Jekyll
 will process it and put it in your site's destination folder under
-`/css/styles.css`.
+`css/styles.css`.
 
 ## Sass/SCSS
 
@@ -38,7 +38,21 @@ sass:
     sass_dir: _sass
 {% endhighlight %}
 
-The Sass converter will default to `_sass`.
+The Sass converter will default the `sass_dir` configuration option to
+`_sass`.
+
+<div class="note info">
+  <h5>The <code>sass_dir</code> is only used by Sass</h5>
+  <p>
+
+    Note that the `sass_dir` becomes the load path for Sass imports,
+    nothing more. This means that Jekyll does not know about these files
+    directly, so any files here should not contain the YAML front matter as
+    described above nor will they be transformed as described above. This
+    folder should only contain imports.
+
+  </p>
+</div>
 
 You may also specify the output style with the `style` option in your
 `_config.yml` file:
