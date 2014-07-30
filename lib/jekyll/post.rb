@@ -61,7 +61,14 @@ module Jekyll
       end
 
       if data.key?('date')
-        self.date = Time.parse(data["date"].to_s)
+        begin
+          self.date = Time.parse(data["date"].to_s)
+        rescue ArgumentError
+            path = File.join(@dir || "", name)
+            msg  =  "Post '#{path}' does not have a valid date in the YAML front matter.\n"
+            msg  << "Fix the date, or exclude the file or directory from being processed"
+            raise Errors::FatalException.new(msg)
+        end
       end
 
       populate_categories
