@@ -69,28 +69,28 @@ class TestConfiguration < Test::Unit::TestCase
       }]
     end
     should "unset 'auto' and 'watch'" do
-      assert @config.has_key?("auto")
-      assert @config.has_key?("watch")
-      assert !@config.backwards_compatibilize.has_key?("auto")
-      assert !@config.backwards_compatibilize.has_key?("watch")
+      assert @config.key?("auto")
+      assert @config.key?("watch")
+      assert !@config.backwards_compatibilize.key?("auto")
+      assert !@config.backwards_compatibilize.key?("watch")
     end
     should "unset 'server'" do
-      assert @config.has_key?("server")
-      assert !@config.backwards_compatibilize.has_key?("server")
+      assert @config.key?("server")
+      assert !@config.backwards_compatibilize.key?("server")
     end
     should "transform string exclude into an array" do
-      assert @config.has_key?("exclude")
-      assert @config.backwards_compatibilize.has_key?("exclude")
+      assert @config.key?("exclude")
+      assert @config.backwards_compatibilize.key?("exclude")
       assert_equal @config.backwards_compatibilize["exclude"], %w[READ-ME.md Gemfile CONTRIBUTING.hello.markdown]
     end
     should "transform string include into an array" do
-      assert @config.has_key?("include")
-      assert @config.backwards_compatibilize.has_key?("include")
+      assert @config.key?("include")
+      assert @config.backwards_compatibilize.key?("include")
       assert_equal @config.backwards_compatibilize["include"], %w[STOP_THE_PRESSES.txt .heloses .git]
     end
     should "set highlighter to pygments" do
-      assert @config.has_key?("pygments")
-      assert !@config.backwards_compatibilize.has_key?("pygments")
+      assert @config.key?("pygments")
+      assert !@config.backwards_compatibilize.key?("pygments")
       assert_equal @config.backwards_compatibilize["highlighter"], "pygments"
     end
   end

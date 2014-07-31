@@ -22,8 +22,8 @@ Before do
 end
 
 After do
-  FileUtils.rm_rf(TEST_DIR)   if File.exists?(TEST_DIR)
-  FileUtils.rm(JEKYLL_COMMAND_OUTPUT_FILE) if File.exists?(JEKYLL_COMMAND_OUTPUT_FILE)
+  FileUtils.rm_rf(TEST_DIR)   if File.exist?(TEST_DIR)
+  FileUtils.rm(JEKYLL_COMMAND_OUTPUT_FILE) if File.exist?(JEKYLL_COMMAND_OUTPUT_FILE)
 end
 
 World(Test::Unit::Assertions)

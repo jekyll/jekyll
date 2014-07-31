@@ -60,7 +60,7 @@ module Jekyll
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
-      if data.has_key?('date')
+      if data.key?('date')
         self.date = Time.parse(data["date"].to_s)
       end
 
@@ -69,7 +69,7 @@ module Jekyll
     end
 
     def published?
-      if data.has_key?('published') && data['published'] == false
+      if data.key?('published') && data['published'] == false
         false
       else
         true

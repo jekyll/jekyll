@@ -200,7 +200,7 @@ module Jekyll
     def backwards_compatibilize
       config = clone
       # Provide backwards-compatibility
-      if config.has_key?('auto') || config.has_key?('watch')
+      if config.key?('auto') || config.key?('watch')
         Jekyll.logger.warn "Deprecation:", "Auto-regeneration can no longer" +
                             " be set from your configuration file(s). Use the"+
                             " --watch/-w command-line option instead."
@@ -208,23 +208,23 @@ module Jekyll
         config.delete('watch')
       end
 
-      if config.has_key? 'server'
+      if config.key? 'server'
         Jekyll.logger.warn "Deprecation:", "The 'server' configuration option" +
                             " is no longer accepted. Use the 'jekyll serve'" +
                             " subcommand to serve your site with WEBrick."
         config.delete('server')
       end
 
-      if config.has_key? 'server_port'
+      if config.key? 'server_port'
         Jekyll.logger.warn "Deprecation:", "The 'server_port' configuration option" +
                             " has been renamed to 'port'. Please update your config" +
                             " file accordingly."
         # copy but don't overwrite:
-        config['port'] = config['server_port'] unless config.has_key?('port')
+        config['port'] = config['server_port'] unless config.key?('port')
         config.delete('server_port')
       end
 
-      if config.has_key? 'pygments'
+      if config.key? 'pygments'
         Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
                             " has been renamed to 'highlighter'. Please update your" +
                             " config file accordingly. The allowed values are 'rouge', " +
@@ -256,7 +256,7 @@ module Jekyll
     def fix_common_issues
       config = clone
 
-      if config.has_key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
+      if config.key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
         Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" +
           " positive integer or nil. It's currently set to '#{config['paginate'].inspect}'."
         config['paginate'] = nil
