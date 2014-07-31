@@ -30,7 +30,7 @@ repository](https://github.com/mojombo/mojombo.github.io) has the name
 Content from the `master` branch of your repository will be used to build and
 publish the GitHub Pages site, so make sure your Jekyll site is stored there.
 
-<div class="note info">
+<div class="note warning">
   <h5>Custom domains do not affect repository names</h5>
   <p>
     GitHub Pages are initially configured to live under the
@@ -53,6 +53,14 @@ structure—the [master branch]({{ site.repository }}) contains the
 actual software project for Jekyll, however the Jekyll website (that you’re
 looking at right now) is contained in the [gh-pages
 branch]({{ site.repository }}/tree/gh-pages) of the same repository.
+
+<div class="note">
+  <h5>Source Files Must be in the Root Directory</h5>
+  <p>Github Pages [overrides](https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting) the ["Site Source"](http://jekyllrb.com/docs/configuration/#global-configuration) configuration value, so if you locate your files anywhere other than the root directory, your site may not build correctly.
+
+  </p>
+</div>
+
 
 ### Project Page URL Structure
 
