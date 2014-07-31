@@ -203,7 +203,8 @@ following is a reference of the available data.
       <td><p><code>page.content</code></p></td>
       <td><p>
 
-        The un-rendered content of the Page.
+        The content of the Page, rendered or un-rendered depending upon
+        what Liquid is being processed and what `page` is.
 
       </p></td>
     </tr>
