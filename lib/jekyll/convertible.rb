@@ -74,7 +74,7 @@ module Jekyll
         begin
           converter.convert output
         rescue => e
-          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error converting '#{document.relative_path}'."
+          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error converting '#{File.join(base, name)}'."
           raise e
         end
       end
