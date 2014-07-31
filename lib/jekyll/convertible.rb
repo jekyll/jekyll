@@ -51,8 +51,10 @@ module Jekyll
         end
       rescue SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        raise e
       rescue Exception => e
         Jekyll.logger.warn "Error reading file #{File.join(base, name)}: #{e.message}"
+        raise e
       end
 
       self.data ||= {}
