@@ -204,7 +204,7 @@ namespace :site do
         "permalink" => "/docs/history/",
         "prev_section" => "contributing"
       }
-      Dir.chdir('site/docs/') do
+      Dir.chdir('site/_docs/') do
         File.open("history.md", "w") do |file|
           file.write("#{front_matter.to_yaml}---\n\n")
           file.write(converted_history(history_file))
