@@ -667,6 +667,10 @@ pre, code {
   padding: 0 0.5em;
 }
 
+pre {
+  max-width: 100%;
+}
+
 @media (min-width: 768px) {
   pre, code {
     font-size: 16px;
