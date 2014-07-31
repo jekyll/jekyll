@@ -7,3 +7,7 @@ excerpt_separator: noifniof3nioaniof3nioafafinoafnoif
 repository: https://github.com/jekyll/jekyll
 help_url: https://github.com/jekyll/jekyll-help
 google_analytics_id: UA-50755011-1
+
+collections:
+  docs:
+    output: true
