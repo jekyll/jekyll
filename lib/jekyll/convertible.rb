@@ -58,15 +58,26 @@ module Jekyll
       self.data ||= {}
     end
 
+    # Determine which converters to use based on this document's
+    # extension.
+    #
+    # Returns an array of Converter instances.
+    def converters
+      @converters ||= site.converters.select { |c| c.matches(document.extname) }
+    end
+
     # Transform the contents based on the content type.
     #
     # Returns nothing.
     def transform
-      self.content = converter.convert(content)
-    rescue => e
-      Jekyll.logger.error "Conversion error:", "There was an error converting" +
-        " '#{path}'."
-      raise e
+      converters.reduce(content) do |output, converter|
+        begin
+          converter.convert output
+        rescue => e
+          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error converting '#{document.relative_path}'."
+          raise e
+        end
+      end
     end
 
     # Determine the extension depending on content_type.
@@ -74,15 +85,7 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      converter.output_ext(ext)
-    end
-
-    # Determine which converter to use based on this convertible's
-    # extension.
-    #
-    # Returns the Converter instance.
-    def converter
-      @converter ||= site.converters.find { |c| c.matches(ext) }
+      converters.map {|c| c.output_ext(ext) }.uniq.join("")
     end
 
     # Render Liquid in the content
@@ -205,8 +208,8 @@ module Jekyll
       info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converter.highlighter_prefix
-      payload["highlighter_suffix"] = converter.highlighter_suffix
+      payload["highlighter_prefix"] = converters.first.highlighter_prefix
+      payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
       self.content = render_liquid(content, payload, info) if render_with_liquid?
       transform

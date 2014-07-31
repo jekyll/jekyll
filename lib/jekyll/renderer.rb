@@ -20,7 +20,7 @@ module Jekyll
     #
     # Returns the output extname including the leading period.
     def output_ext
-      converters.first.output_ext(document.extname)
+      converters.map {|c| c.output_ext(ext) }.uniq.join("")
     end
 
     ######################
