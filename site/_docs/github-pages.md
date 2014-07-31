@@ -30,7 +30,7 @@ repository](https://github.com/mojombo/mojombo.github.io) has the name
 Content from the `master` branch of your repository will be used to build and
 publish the GitHub Pages site, so make sure your Jekyll site is stored there.
 
-<div class="note">
+<div class="note info">
   <h5>Custom domains do not affect repository names</h5>
   <p>
     GitHub Pages are initially configured to live under the
