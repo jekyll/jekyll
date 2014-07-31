@@ -173,5 +173,5 @@ exclude: [vendor]
 This entire guide is open-source. Go ahead and [edit it][3] if you have a
 fix or [ask for help][4] if you run into trouble and need some help.
 
-[3]: https://github.com/jekyll/jekyll/edit/master/site/docs/continuous-integration.md
+[3]: https://github.com/jekyll/jekyll/edit/master/site/_docs/continuous-integration.md
 [4]: https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question
