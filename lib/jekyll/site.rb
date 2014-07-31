@@ -144,9 +144,13 @@ module Jekyll
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
         elsif has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
-          pages << page if publisher.publish?(page)
+          if publisher.publish?(page)
+            pages << page
+            logger.debug("New Page registered:", page.path)
+          end
         else
           static_files << StaticFile.new(self, source, dir, f)
+          logger.debug("New StaticFile registered:", static_files.last.path)
         end
       end
 
@@ -185,10 +189,12 @@ module Jekyll
 
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
-        klass.new(self, source, dir, entry) if klass.valid?(entry)
-      end.reject do |entry|
-        entry.nil?
-      end
+        if klass.valid? entry
+          item = klass.new(self, source, dir, entry)
+          logger.debug("New #{klass} registered:", item.relative_path)
+          item
+        end
+      end.compact
     end
 
     # Read and parse all yaml files under <source>/<dir>
