@@ -10,6 +10,8 @@
 
 ### Site Enhancements
 
+  * Use Sass and a Docs Collection (#2651)
+
 ## 2.2.0 / 2014-07-29
 
 ### Minor Enhancements
