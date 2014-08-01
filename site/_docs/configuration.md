@@ -130,7 +130,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         </p>
       </td>
       <td class='align-center'>
-        <p>see <a href="#frontmatter-defaults" title="details">below</a></p>
+        <p>see <a href="#front-matter-defaults" title="details">below</a></p>
       </td>
     </tr>
   </tbody>
