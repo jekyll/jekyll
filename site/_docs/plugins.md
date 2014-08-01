@@ -67,7 +67,7 @@ ignored. Jekyll does not assume any particular side-effect to happen, it just
 runs the method.
 
 Generators run after Jekyll has made an inventory of the existing content, and
-before the site is generated. Pages with YAML front-matters are stored as
+before the site is generated. Pages with YAML Front Matters are stored as
 instances of
 [`Jekyll::Page`]({{ site.repository }}/blob/master/lib/jekyll/page.rb)
 and are available via `site.pages`. Static files become instances of
@@ -166,7 +166,7 @@ include it by implementing your own converter. Both the Markdown and Textile
 markup languages are implemented using this method.
 
 <div class="note info">
-  <h5>Remember your YAML front-matter</h5>
+  <h5>Remember your YAML Front Matter</h5>
   <p>
     Jekyll will only convert files that have a YAML header at the top, even for
     converters you add using a plugin.
@@ -234,7 +234,7 @@ Converters should implement at a minimum 3 methods:
       </td>
       <td><p>
         Logic to do the content conversion. Takes one argument: the raw content
-        of the file (without YAML front matter). Must return a String.
+        of the file (without YAML Front Matter). Must return a String.
       </p></td>
     </tr>
   </tbody>
@@ -543,7 +543,7 @@ You can find a few useful plugins at the following locations:
 - [grunt-jekyll](https://github.com/dannygarcia/grunt-jekyll): A straightforward [Grunt](http://gruntjs.com/) plugin for Jekyll.
 - [jekyll-postfiles](https://github.com/indirect/jekyll-postfiles): Add `_postfiles` directory and {% raw %}`{{ postfile }}`{% endraw %} tag so the files a post refers to will always be right there inside your repo.
 - [A layout that compresses HTML](https://github.com/penibelst/jekyll-compress-html) by [Anatol Broder](http://penibelst.de/): Github Pages compatible, configurable way to compress HTML files on site build.
-- [Jekyll CO₂](https://github.com/wdenton/jekyll-co2): Generates HTML showing the monthly change in atmospheric CO₂ at the Mauna Loa observatory in Hawaii. 
+- [Jekyll CO₂](https://github.com/wdenton/jekyll-co2): Generates HTML showing the monthly change in atmospheric CO₂ at the Mauna Loa observatory in Hawaii.
 
 #### Editors
 

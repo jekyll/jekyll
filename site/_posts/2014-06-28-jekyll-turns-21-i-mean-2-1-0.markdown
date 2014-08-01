@@ -12,13 +12,13 @@ And he's done a lot of learning in the process! Here are some of the new
 things to look forward to:
 
 - Uses the latest Liquid version (2.6.1) (#2495)
-- Set front-matter defaults for collections (#2419)
+- Set front matter defaults for collections (#2419)
 - Set a collection-specific URL template (#2418)
 - `pygments.rb` 0.6.0! (#2504)
 - `.json` files in `_data` (#2369)
 - Allow subdirectories in `_data` (#2395)
 - Add support for `hl_lines` in `highlight` tag (#2532)
-- Post categories now merge with directory, front-matter, and defaults (#2373)
+- Post categories now merge with directory, front matter, and defaults (#2373)
 - New `--skip_initial_build` flag for `jekyll serve` (#2477)
 - A bajilion bug fixes and site updates!
 

@@ -17,7 +17,7 @@ For the impatient, here's how to get a boilerplate Jekyll site up and running.
 {% endhighlight %}
 
 That's nothing, though. The real magic happens when you start creating blog
-posts, using the front-matter to control templates and layouts, and taking
+posts, using the front matter to control templates and layouts, and taking
 advantage of all the awesome configuration options Jekyll makes available.
 
 If you're running into problems, ensure you have all the [requirements
