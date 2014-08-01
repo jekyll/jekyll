@@ -54,6 +54,14 @@ actual software project for Jekyll, however the Jekyll website (that you’re
 looking at right now) is contained in the [gh-pages
 branch]({{ site.repository }}/tree/gh-pages) of the same repository.
 
+<div class="note warning">
+  <h5>Source Files Must be in the Root Directory</h5>
+  <p>Github Pages [overrides](https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting) the ["Site Source"](http://jekyllrb.com/docs/configuration/#global-configuration) configuration value, so if you locate your files anywhere other than the root directory, your site may not build correctly.
+
+  </p>
+</div>
+
+
 ### Project Page URL Structure
 
 Sometimes it's nice to preview your Jekyll site before you push your `gh-pages`
