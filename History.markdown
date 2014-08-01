@@ -8,6 +8,8 @@
 
 ### Development Fixes
 
+  * Only include lib files in the gem (#2671)
+
 ### Site Enhancements
 
   * Use Sass and a Docs Collection (#2651)
