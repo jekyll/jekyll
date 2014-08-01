@@ -56,12 +56,19 @@ module Jekyll
       end
     end
 
+    # The location of this Collection
+
+    def collection_location
+      metadata.fetch('collection_location')
+    end
+
+
     # The directory for this Collection, relative to the site source.
     #
     # Returns a String containing the directory name where the collection
     #   is stored on the filesystem.
     def relative_directory
-      "_#{label}"
+      "#{collection_location}/_#{label}"
     end
 
     # The full path to the directory containing the
@@ -120,7 +127,8 @@ module Jekyll
         "docs"      => docs,
         "directory" => directory,
         "output"    => write?,
-        "relative_directory" => relative_directory
+        "relative_directory" => relative_directory,
+        "collection_location" => collection_location
       })
     end
 
