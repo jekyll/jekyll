@@ -9,6 +9,7 @@
 ### Development Fixes
 
   * Only include lib files in the gem (#2671)
+  * Fix `git diff` command in `proof` script (#2672)
 
 ### Site Enhancements
 
