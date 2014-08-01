@@ -1039,7 +1039,7 @@ prev_section: contributing
 - Bullet-proof `limit_posts` option ([#1004]({{ site.repository }}/issues/1004))
 - Read in YAML as UTF-8 to accept non-ASCII chars ([#836]({{ site.repository }}/issues/836))
 - Fix the CLI option `--plugins` to actually accept dirs and files ([#993]({{ site.repository }}/issues/993))
-- Allow 'excerpt' in YAML Front Matter to override the extracted excerpt ([#946]({{ site.repository }}/issues/946))
+- Allow 'excerpt' in YAML front matter to override the extracted excerpt ([#946]({{ site.repository }}/issues/946))
 - Fix cascade problem with site.baseurl, site.port and site.host. ([#935]({{ site.repository }}/issues/935))
 - Filter out directories with valid post names ([#875]({{ site.repository }}/issues/875))
 - Fix symlinked static files not being correctly built in unsafe mode ([#909]({{ site.repository }}/issues/909))
@@ -1051,7 +1051,7 @@ prev_section: contributing
 - Patch for multibyte URI problem with `jekyll serve` ([#723]({{ site.repository }}/issues/723))
 - Order plugin execution by priority ([#864]({{ site.repository }}/issues/864))
 - Fixed Page#dir and Page#url for edge cases ([#536]({{ site.repository }}/issues/536))
-- Fix broken `post_url` with posts with a time in their YAML Front Matter ([#831]({{ site.repository }}/issues/831))
+- Fix broken `post_url` with posts with a time in their YAML front matter ([#831]({{ site.repository }}/issues/831))
 - Look for plugins under the source directory ([#654]({{ site.repository }}/issues/654))
 - Tumblr Migrator: finds `_posts` dir correctly, fixes truncation of long
       post names ([#775]({{ site.repository }}/issues/775))
@@ -1271,7 +1271,7 @@ prev_section: contributing
 {: #v0-5-6}
 - Bug Fixes
 - Require redcloth >= 4.2.1 in tests ([#92]({{ site.repository }}/issues/92))
-- Don't break on triple dashes in YAML Front Matter ([#93]({{ site.repository }}/issues/93))
+- Don't break on triple dashes in yaml front matter ([#93]({{ site.repository }}/issues/93))
 
 ### Minor Enhancements
 {: #minor-enhancements-v0-5-6}
@@ -1315,7 +1315,7 @@ prev_section: contributing
       again.
 - Configuration options set in config.yml are now available through the
       site payload ([@vilcans](https://github.com/vilcans))
-- Posts can now have an empty YAML Front Matter or none at all
+- Posts can now have an empty YAML front matter or none at all
       (@ bahuvrihi)
 - Bug Fixes
 - Fixing Ruby 1.9 issue that requires `#to_s` on the err object
@@ -1329,7 +1329,7 @@ prev_section: contributing
       ([@eugenebolshakov](https://github.com/eugenebolshakov))
 - Bad markdown processor in config fails sooner and with better message
       (@ gcnovus)
-- Allow CRLFs in YAML Front Matter ([@juretta](https://github.com/juretta))
+- Allow CRLFs in yaml front matter ([@juretta](https://github.com/juretta))
 - Added Date#xmlschema for Ruby versions < 1.9
 
 
@@ -1420,7 +1420,7 @@ prev_section: contributing
 - Added post categories based on directories containing `_posts` ([@mreid](https://github.com/mreid))
 - Added post topics based on directories underneath `_posts`
 - Added new date filter that shows the full month name ([@mreid](https://github.com/mreid))
-- Merge Post's YAML Front Matter into its to_liquid payload ([@remi](https://github.com/remi))
+- Merge Post's YAML front matter into its to_liquid payload ([@remi](https://github.com/remi))
 - Restrict includes to regular files underneath `_includes`
 - Bug Fixes
 - Change YAML delimiter matcher so as to not chew up 2nd level markdown
