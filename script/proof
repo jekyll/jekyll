@@ -5,7 +5,7 @@
 
 set -e
 
-git diff --name-only origin $(git log --pretty=format:"%h" -2 | tail -1) | grep '^site/' || {
+git diff --name-only ..master | grep '^site/' || {
     echo "No site files changed. We'll skip proofing."
     exit 0
 }
