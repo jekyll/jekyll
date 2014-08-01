@@ -60,6 +60,13 @@ sudo emerge -av dev-ruby/rubygems
 On Windows, you may need to install [RubyInstaller
 DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
+### Could not find a JavaScript runtime. (ExecJS::RuntimeUnavailable)
+
+This error can occur during the installation of `jekyll-coffeescript` when
+you don't have a proper JavaScript runtime. To solve this, either install
+`execjs` and `therubyracer` gems, or install `nodejs`. Check out
+[issue #2327](https://github.com/jekyll/jekyll/issues/2327) for more info.
+
 ## Problems running Jekyll
 
 On Debian or Ubuntu, you may need to add `/var/lib/gems/1.8/bin/` to your path
