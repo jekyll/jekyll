@@ -20,9 +20,9 @@ Gem::Specification.new do |s|
   s.email    = 'tom@mojombo.com'
   s.homepage = 'https://github.com/jekyll/jekyll'
 
-  s.files         = `git ls-files -z`.split("\x0").select{|p|p.start_with?("lib/")}
-  s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+  all_files       = `git ls-files -z`.split("\x0")
+  s.files         = all_files.grep(%r{^(bin|lib)/})
+  s.executables   = all_files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.require_paths = ["lib"]
 
   s.rdoc_options = ["--charset=UTF-8"]
