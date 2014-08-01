@@ -63,7 +63,7 @@ module Jekyll
     end
 
     def applies_path?(scope, path)
-      return true if scope['path'].empty?
+      return true if !scope.has_key?('path') || scope['path'].empty?
 
       scope_path = Pathname.new(scope['path'])
       Pathname.new(sanitize_path(path)).ascend do |path|
@@ -83,7 +83,7 @@ module Jekyll
     #
     # Returns true if the set is valid and can be used in this class
     def valid?(set)
-      set.is_a?(Hash) && set['scope'].is_a?(Hash) && set['scope']['path'].is_a?(String) && set['values'].is_a?(Hash)
+      set.is_a?(Hash) && set['values'].is_a?(Hash)
     end
 
     # Determines if a new scope has precedence over an old one
@@ -112,7 +112,7 @@ module Jekyll
     # Returns an array of hashes
     def matching_sets(path, type)
       valid_sets.select do |set|
-        applies?(set['scope'], path, type)
+        !set.has_key?('scope') || applies?(set['scope'], path, type)
       end
     end
 
