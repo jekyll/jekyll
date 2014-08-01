@@ -5,6 +5,7 @@
 ### Minor Enhancements
 
   * Use `.scss` for `site_template` styles. (#2667)
+  * Don't require the `scope` key in front matter defaults (#2659)
 
 ### Bug Fixes
 
