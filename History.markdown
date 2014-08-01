@@ -18,6 +18,7 @@
 
   * Use Sass and a Docs Collection (#2651)
   * Be more ambiguous about `page.content`. But more transparent. (#2522)
+  * Streamlining front matter wording (instead of front-matter/frontmatter) (#2674)
 
 ## 2.2.0 / 2014-07-29
 
