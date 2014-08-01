@@ -108,7 +108,7 @@ GitHub users have access.
 
 If you want to add your plugin to the [list of plugins](/docs/plugins/#available-plugins),
 please submit a pull request modifying the [plugins page source
-file]({{ site.repository }}/blob/master/site/docs/plugins.md) by adding a
+file]({{ site.repository }}/blob/master/site/_docs/plugins.md) by adding a
 link to your plugin under the proper subheading depending upon its type.
 
 Gotchas

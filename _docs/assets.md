@@ -29,6 +29,11 @@ will process it and put it in your site's destination folder under
 
 Jekyll allows you to customize your Sass conversion in certain ways.
 
+Place all your partials in your `sass_dir`, which defaults to
+`<source>/_sass`. Place your main SCSS or Sass files in the place you want
+them to be in the output file, such as `<source>/css`. For an example, take
+a look at [this example site using Sass support in Jekyll][example-sass].
+
 If you are using Sass `@import` statements, you'll need to ensure that your
 `sass_dir` is set to the base directory that contains your Sass files. You
 can do that thusly:
@@ -41,13 +46,15 @@ sass:
 The Sass converter will default the `sass_dir` configuration option to
 `_sass`.
 
+[example-sass]: https://github.com/jekyll/jekyll-sass-converter/tree/master/example
+
 <div class="note info">
   <h5>The <code>sass_dir</code> is only used by Sass</h5>
   <p>
 
     Note that the `sass_dir` becomes the load path for Sass imports,
     nothing more. This means that Jekyll does not know about these files
-    directly, so any files here should not contain the YAML front matter as
+    directly, so any files here should not contain the YAML Front Matter as
     described above nor will they be transformed as described above. This
     folder should only contain imports.
 

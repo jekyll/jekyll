@@ -7,7 +7,7 @@ permalink: /docs/variables/
 ---
 
 Jekyll traverses your site looking for files to process. Any files with [YAML
-Front Matter](../frontmatter/) are subject to processing. For each of these
+front matter](../frontmatter/) are subject to processing. For each of these
 files, Jekyll makes a variety of data available via the [Liquid templating
 system](http://wiki.shopify.com/Liquid). The
 following is a reference of the available data.
@@ -36,8 +36,8 @@ following is a reference of the available data.
       <td><p><code>page</code></p></td>
       <td><p>
 
-        Page specific information + the <a href="../frontmatter/">YAML Front
-        Matter</a>. Custom variables set via the YAML front matter will be
+        Page specific information + the <a href="../frontmatter/">YAML front
+        matter</a>. Custom variables set via the YAML Front Matter will be
         available here. See below for details.
 
       </p></td>
@@ -203,7 +203,8 @@ following is a reference of the available data.
       <td><p><code>page.content</code></p></td>
       <td><p>
 
-        The un-rendered content of the Page.
+        The content of the Page, rendered or un-rendered depending upon
+        what Liquid is being processed and what `page` is.
 
       </p></td>
     </tr>
@@ -309,7 +310,7 @@ following is a reference of the available data.
 </div>
 
 <div class="note">
-  <h5>ProTip™: Use custom front-matter</h5>
+  <h5>ProTip™: Use Custom Front Matter</h5>
   <p>
 
     Any custom front matter that you specify will be available under

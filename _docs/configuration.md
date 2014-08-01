@@ -125,12 +125,12 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class='name'><strong>Defaults</strong></p>
         <p class='description'>
-            Set defaults for <a href="../frontmatter/" title="YAML frontmatter">YAML frontmatter</a>
+            Set defaults for <a href="../frontmatter/" title="YAML Front Matter">YAML Front Matter</a>
             variables.
         </p>
       </td>
       <td class='align-center'>
-        <p>see <a href="#frontmatter-defaults" title="details">below</a></p>
+        <p>see <a href="#front-matter-defaults" title="details">below</a></p>
       </td>
     </tr>
   </tbody>
@@ -276,9 +276,9 @@ before your site is served.
   </p>
 </div>
 
-## Frontmatter defaults
+## Front Matter defaults
 
-Using [YAML front-matter](../frontmatter/) is one way that you can specify configuration in the pages and posts for your site. Setting things like a default layout, or customizing the title, or specifying a more precise date/time for the post can all be added to your page or post front-matter.
+Using [YAML Front Matter](../frontmatter/) is one way that you can specify configuration in the pages and posts for your site. Setting things like a default layout, or customizing the title, or specifying a more precise date/time for the post can all be added to your page or post front matter.
 
 Often times, you will find that you are repeating a lot of configuration options. Setting the same layout in each file, adding the same category - or categories - to a post, etc. You can even add custom variables like author names, which might be the same for the majority of posts on your blog.
 
@@ -354,9 +354,9 @@ In this example the `layout` is set to `default` inside the [collection](../coll
 
 Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
 
-You can see that in the last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front-matter.
+You can see that in the last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
 
-Finally, if you set defaults in the site configuration by adding a `defaults` section to your `_config.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front-matter. For example:
+Finally, if you set defaults in the site configuration by adding a `defaults` section to your `_config.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:
 
 {% highlight yaml %}
 # In _config.yml
