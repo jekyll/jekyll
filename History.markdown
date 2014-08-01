@@ -4,6 +4,8 @@
 
 ### Minor Enhancements
 
+  * Use `.scss` for `site_template` styles. (#2667)
+
 ### Bug Fixes
 
 ### Development Fixes
