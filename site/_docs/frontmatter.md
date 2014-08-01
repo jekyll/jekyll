@@ -1,12 +1,12 @@
 ---
 layout: docs
-title: Front-matter
+title: Front Matter
 prev_section: configuration
 next_section: posts
 permalink: /docs/frontmatter/
 ---
 
-The front-matter is where Jekyll starts to get really cool. Any file that
+The front matter is where Jekyll starts to get really cool. Any file that
 contains a [YAML](http://yaml.org/) front matter block will be processed by
 Jekyll as a special file. The front matter must be the first thing in the file
 and must take the form of valid YAML set between triple-dashed lines. Here is a
@@ -39,7 +39,7 @@ relies on.
   <h5>ProTip™: Front Matter Variables Are Optional</h5>
   <p>
     If you want to use <a href="../variables/">Liquid tags and variables</a> but
-    don’t need anything in your front-matter, just leave it empty! The set of
+    don’t need anything in your front matter, just leave it empty! The set of
     triple-dashed lines with nothing in between will still get Jekyll to process
     your file. (This is useful for things like CSS and RSS feeds!)
   </p>
@@ -48,7 +48,7 @@ relies on.
 ## Predefined Global Variables
 
 There are a number of predefined global variables that you can set in the
-front-matter of a page or post.
+front matter of a page or post.
 
 <div class="mobile-side-scroller">
 <table>
@@ -154,7 +154,7 @@ title:
 
 ## Predefined Variables for Posts
 
-These are available out-of-the-box to be used in the front-matter for a post.
+These are available out-of-the-box to be used in the front matter for a post.
 
 <div class="mobile-side-scroller">
 <table>
@@ -183,8 +183,8 @@ These are available out-of-the-box to be used in the front-matter for a post.
 <div class="note">
   <h5>ProTip™: Don't repeat yourself</h5>
   <p>
-    If you don't want to repeat your frequently used front-matter variables over and over,
-    just define <a href="../configuration/#frontmatter-defaults" title="frontmatter defaults">defaults</a>
+    If you don't want to repeat your frequently used front matter variables over and over,
+    just define <a href="../configuration/#front-matter-defaults" title="Front Matter defaults">defaults</a>
     for them and only override them where necessary (or not at all). This works both for predefined
     and custom variables.
   </p>

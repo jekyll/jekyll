@@ -98,7 +98,7 @@ An overview of what each of these does:
         <p>
 
           These are the templates that wrap posts. Layouts are chosen on a post-
-          by-post basis in the <a href="../frontmatter/">YAML front matter</a>,
+          by-post basis in the <a href="../frontmatter/">YAML Front Matter</a>,
           which is described in the next section. The liquid tag
           <code>{% raw %}{{ content }}{% endraw %}</code>
           is used to inject content into the web page.

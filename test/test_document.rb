@@ -69,7 +69,7 @@ class TestDocument < Test::Unit::TestCase
       assert_equal({
         "title"=>"Example slide",
         "layout"=>"slide",
-        "nested"=> { 
+        "nested"=> {
           "key"=>"myval"
         }
       }, @document.data)
@@ -100,7 +100,7 @@ class TestDocument < Test::Unit::TestCase
       assert_equal({
         "title"=>"Override title",
         "layout"=>"slide",
-        "nested"=> { 
+        "nested"=> {
           "test1"=>"override1",
           "test2"=>"override2"
         }
@@ -131,7 +131,7 @@ class TestDocument < Test::Unit::TestCase
       assert_equal({
         "title"=>"Example slide",
         "layout"=>"slide",
-        "nested"=> { 
+        "nested"=> {
           "key"=>"value123"
         }
       }, @document.data)

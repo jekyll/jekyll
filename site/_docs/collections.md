@@ -37,7 +37,7 @@ collections:
 ### Step 2: Add your content
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add documents.
-YAML front-matter is read in as data if it exists, if not, then everything is just stuck in the Document's `content` attribute.
+YAML Front Matter is read in as data if it exists, if not, then everything is just stuck in the Document's `content` attribute.
 
 Note: the folder must be named identical to the collection you defined in you config.yml file, with the addition of the preceding `_` character.
 
@@ -178,7 +178,7 @@ The collections are also available under `site.collections`, with the metadata y
 
 ### Documents
 
-In addition to any YAML front-matter provided in the document's corresponding file, each document has the following attributes:
+In addition to any YAML Front Matter provided in the document's corresponding file, each document has the following attributes:
 
 <div class="mobile-side-scroller">
 <table>
@@ -195,10 +195,10 @@ In addition to any YAML front-matter provided in the document's corresponding fi
       </td>
       <td>
         <p>
-          The (unrendered) content of the document. If no YAML front-matter is provided,
-          this is the entirety of the file contents. If YAML front-matter
+          The (unrendered) content of the document. If no YAML Front Matter is provided,
+          this is the entirety of the file contents. If YAML Front Matter
           is used, then this is all the contents of the file after the terminating
-          `---` of the front-matter.
+          `---` of the front matter.
         </p>
       </td>
     </tr>
