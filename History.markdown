@@ -10,6 +10,7 @@
 ### Bug Fixes
 
   * Use non padded config in `strftime` to avoid parse string twice (#2673)
+  * Replace deprecated Ruby methods with undeprecated ones (#2664)
 
 ### Development Fixes
 
