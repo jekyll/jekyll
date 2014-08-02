@@ -64,4 +64,37 @@ class TestUtils < Test::Unit::TestCase
 
   end
 
+  context "The \`Utils.parse_date\` method" do
+    should "parse a properly formatted date" do
+      assert Utils.parse_date("2014-08-02 14:43:06 PDT").is_a? Time
+    end
+
+    should "throw an error if the input contains no date data" do
+      assert_raise Jekyll::Errors::FatalException do
+        Utils.parse_date("Blah")
+      end
+    end
+
+    should "throw an error if the input is out of range" do
+      assert_raise Jekyll::Errors::FatalException do
+        Utils.parse_date("9999-99-99")
+      end
+    end
+
+    should "throw an error with the default message if no message is passed in" do
+      date = "Blah this is invalid"
+      assert_raise Jekyll::Errors::FatalException, "Invalid date '#{date}': Input could not be parsed." do
+        Utils.parse_date(date)
+      end
+    end
+
+    should "throw an error with the provided message if a message is passed in" do
+      date = "Blah this is invalid"
+      message = "Aaaah, the world has exploded!"
+      assert_raise Jekyll::Errors::FatalException, "Invalid date '#{date}': #{message}" do
+        Utils.parse_date(date, message)
+      end
+    end
+  end
+
 end
