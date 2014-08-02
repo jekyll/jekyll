@@ -187,7 +187,33 @@ class TestDocument < Test::Unit::TestCase
   end
 
 
-  context " a document part of a rendered collection" do
+  context "a static file in a collection" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => {
+          "slides" => {
+            "output" => true
+          }
+        },
+        "source"      => source_dir,
+        "destination" => dest_dir
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs.find { |doc| doc.relative_path == "_slides/octojekyll.png" }
+      @dest_file = dest_dir("slides/octojekyll.png")
+    end
+
+    should "be a document" do
+      assert !@document.nil?
+    end
+
+    should "not be rendered with Liquid" do
+      assert !@document.render_with_liquid?
+    end
+
+    should "be output in the correct place" do
+      assert File.file? @dest_file
+    end
   end
 
 end
