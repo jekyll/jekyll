@@ -56,8 +56,8 @@ branch]({{ site.repository }}/tree/gh-pages) of the same repository.
 
 <div class="note warning">
   <h5>Source Files Must be in the Root Directory</h5>
-  <p>Github Pages <a href="https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting">overrides</a> the <a href="http://jekyllrb.com/docs/configuration/#global-configuration">Site Source"</a> configuration value, so if you locate your files anywhere other than the root directory, your site may not build correctly.
-
+  <p>
+Github Pages <a href="https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting">overrides</a> the <a href="http://jekyllrb.com/docs/configuration/#global-configuration">“Site Source”</a> configuration value, so if you locate your files anywhere other than the root directory, your site may not build correctly.
   </p>
 </div>
 
