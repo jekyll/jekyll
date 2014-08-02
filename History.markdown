@@ -6,6 +6,7 @@
 
   * Use `.scss` for `site_template` styles. (#2667)
   * Don't require the `scope` key in front matter defaults (#2659)
+  * No longer set `permalink: pretty` in the `_config.yml` for the site template (#2680)
 
 ### Bug Fixes
 
