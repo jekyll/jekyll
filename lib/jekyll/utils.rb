@@ -82,6 +82,19 @@ module Jekyll
         transform_keys(hash) { |key| key.to_s rescue key }
       end
 
+      # Parse a date/time and throw an error if invalid
+      #
+      # input - the date/time to parse
+      # msg - (optional) the error message to show the user
+      #
+      # Returns the parsed date if successful, throws a FatalException
+      # if not
+      def parse_date(input, msg = "Invalid date: could not be parsed.")
+        Time.parse(input)
+      rescue ArgumentError
+        raise Errors::FatalException.new(msg)
+      end
+
     end
   end
 end

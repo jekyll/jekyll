@@ -61,14 +61,7 @@ module Jekyll
       end
 
       if data.key?('date')
-        begin
-          self.date = Time.parse(data["date"].to_s)
-        rescue ArgumentError
-            path = File.join(@dir || "", name)
-            msg  =  "Post '#{relative_path}' does not have a valid date in the YAML front matter.\n"
-            msg  << "Fix the date, or exclude the file or directory from being processed"
-            raise Errors::FatalException.new(msg)
-        end
+        self.date = Utils.parse_date(data["date"].to_s, "Post '#{relative_path}' does not have a valid date in the YAML front matter.")
       end
 
       populate_categories
@@ -168,14 +161,9 @@ module Jekyll
       m, cats, date, slug, ext = *name.match(MATCHER)
       self.categories ||= []
       self.categories += (cats || '').downcase.split('/')
-      self.date = Time.parse(date)
+      self.date = Utils.parse_date(date, "Post '#{relative_path}' does not have a valid date in the filename.")
       self.slug = slug
       self.ext = ext
-    rescue ArgumentError
-      path = File.join(@dir || "", name)
-      msg  =  "Post '#{relative_path}' does not have a valid date.\n"
-      msg  << "Fix the date, or exclude the file or directory from being processed"
-      raise Errors::FatalException.new(msg)
     end
 
     # The generated directory into which the post will be placed

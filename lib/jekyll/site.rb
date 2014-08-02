@@ -49,7 +49,7 @@ module Jekyll
     #
     # Returns nothing
     def reset
-      self.time = (config['time'] ? Time.parse(config['time'].to_s) : Time.now)
+      self.time = (config['time'] ? Utils.parse_date(config['time'].to_s, "Invalid time in _config.yml.") : Time.now)
       self.layouts = {}
       self.posts = []
       self.pages = []
