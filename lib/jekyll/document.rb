@@ -15,6 +15,7 @@ module Jekyll
       @site = relations[:site]
       @path = path
       @collection = relations[:collection]
+      @has_yaml_header = nil
     end
 
     # Fetch the Document's data.
@@ -84,7 +85,8 @@ module Jekyll
     # 
     # Returns true if the file starts with three dashes
     def has_yaml_header?
-      !!(File.open(path, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
+      @has_yaml_header unless @has_yaml_header.nil?
+      @has_yaml_header = !!(File.open(path, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
     # Determine whether the file should be rendered with Liquid.
