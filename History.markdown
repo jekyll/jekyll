@@ -20,6 +20,7 @@
   * Be more ambiguous about `page.content`. But more transparent. (#2522)
   * Streamlining front matter wording (instead of front-matter/frontmatter) (#2674)
   * Add note that source directory cannot be modified in GitHub Pages (#2669)
+  * Fix links from #2669 to be actual HTML. Whoops. (#2679)
 
 ## 2.2.0 / 2014-07-29
 
