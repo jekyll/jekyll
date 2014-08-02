@@ -9,6 +9,8 @@
 
 ### Bug Fixes
 
+  * Use non padded config in `strftime` to avoid parse string twice (#2673)
+
 ### Development Fixes
 
   * Only include lib files in the gem (#2671)
