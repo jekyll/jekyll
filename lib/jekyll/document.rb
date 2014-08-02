@@ -172,7 +172,7 @@ module Jekyll
     #
     # Returns true if the 'published' key is specified in the YAML front-matter and not `false`.
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      !(data.key?('published') && data['published'] == false)
     end
 
     # Read in the file and assign the content and data based on the file contents.

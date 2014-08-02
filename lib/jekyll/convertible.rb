@@ -25,7 +25,7 @@ module Jekyll
 
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      !(data.key?('published') && data['published'] == false)
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
