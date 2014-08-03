@@ -42,7 +42,7 @@
     width: 45%;
 }
 
-@media screen and (max-width: 800px) {
+@include media-query($on-laptop) {
     .footer-col-1,
     .footer-col-2 {
         width: 50%;
@@ -53,7 +53,7 @@
     }
 }
 
-@media screen and (max-width: 600px) {
+@include media-query($on-palm) {
     .footer-col {
         float: none;
         width: 100%;

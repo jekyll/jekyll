@@ -41,7 +41,7 @@
         }
     }
 
-    @media screen and (max-width: 600px) {
+    @include media-query($on-palm) {
         position: absolute;
         top: 9px;
         right: 30px;

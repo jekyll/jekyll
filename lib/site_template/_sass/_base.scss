@@ -84,7 +84,7 @@ li {
     padding-left: $spacing-unit;
     @extend %clearfix;
 
-    @media screen and (max-width: 800px) {
+    @include media-query($on-laptop) {
         padding-right: $spacing-unit / 2;
         padding-left: $spacing-unit / 2;
     }
