@@ -17,8 +17,8 @@
     margin-bottom: 0;
     float: left;
 
-    > a {
-        font-weight: 300;
+    &,
+    &:visited {
         color: $grey-color-dark;
     }
 }
