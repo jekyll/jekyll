@@ -60,9 +60,12 @@
             text-align: center;
 
             > svg {
-                fill: $grey-color-dark;
                 width: 18px;
                 height: 15px;
+
+                path {
+                    fill: $grey-color-dark;
+                }
             }
         }
 

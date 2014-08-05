@@ -112,10 +112,13 @@ li {
 .icon {
 
     > svg {
-        fill: $grey-color;
         display: inline-block;
         width: 16px;
         height: 16px;
         vertical-align: middle;
+
+        path {
+            fill: $grey-color;
+        }
     }
 }
