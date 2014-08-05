@@ -18,7 +18,7 @@ module Jekyll
 
     def self.no_subcommand(args)
       if args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
-        Jekyll.logger.error "Deprecation:", "Jekyll now uses subcommands instead of just \
+        deprecation_message "Jekyll now uses subcommands instead of just \
                             switches. Run `jekyll --help' to find out more."
       end
     end
@@ -45,7 +45,7 @@ module Jekyll
   The full error message from Ruby is: '#{e.message}'
 
   If you run into trouble, you can find helpful resources at http://jekyllrb.com/help/!
-  MSG
+MSG
           raise Errors::MissingDependencyException.new(name)
         end
       end
