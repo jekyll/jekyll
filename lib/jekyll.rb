@@ -139,7 +139,6 @@ require_all 'jekyll/tags'
 
 # Eventually remove these for 3.0 as non-core
 Jekyll::Deprecator.gracefully_require(%w[
-  classifier
   toml
   jekyll-paginate
   jekyll-gist
