@@ -27,6 +27,7 @@
   * Streamlining front matter wording (instead of front-matter/frontmatter) (#2674)
   * Add note that source directory cannot be modified in GitHub Pages (#2669)
   * Fix links from #2669 to be actual HTML. Whoops. (#2679)
+  * Add link to `jekyll-slim` in list of third-party plugins (#2689)
 
 ## 2.2.0 / 2014-07-29
 
