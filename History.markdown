@@ -14,6 +14,7 @@
   * Replace deprecated Ruby methods with undeprecated ones (#2664)
   * Catch errors when parsing Post `date` front matter value & produce nice error message (#2649)
   * Allow static files in Collections (#2615)
+  * Fixed typo in `Deprecator#gracefully_require` error message (#2694)
 
 ### Development Fixes
 
