@@ -15,6 +15,7 @@
   * Catch errors when parsing Post `date` front matter value & produce nice error message (#2649)
   * Allow static files in Collections (#2615)
   * Fixed typo in `Deprecator#gracefully_require` error message (#2694)
+  * Remove preemptive loading of the 'classifier' gem. (#2697)
 
 ### Development Fixes
 
