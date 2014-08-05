@@ -40,7 +40,7 @@ module Jekyll
         rescue LoadError => e
           Jekyll.logger.error "Dependency Error:", <<-MSG
   Yikes! It looks like you don't have #{name} or one of its dependencies installed.
-  In order to use Jekyll as currently contfigured, you'll need to install this gem.
+  In order to use Jekyll as currently configured, you'll need to install this gem.
 
   The full error message from Ruby is: '#{e.message}'
 
