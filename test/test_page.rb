@@ -25,11 +25,6 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/contacts.html", @page.url
       end
 
-      should "not published when published yaml is false" do
-        @page = setup_page("unpublished.html")
-        assert_equal false, @page.published?
-      end
-
       should "create url with non-alphabetic characters" do
         @page = setup_page('+', '%# +.md')
         assert_equal "/+/%25%23%20+.html", @page.url

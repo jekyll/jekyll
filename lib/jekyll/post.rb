@@ -1,5 +1,5 @@
 module Jekyll
-  class Post
+  class Post < Page
     include Comparable
     include Convertible
 
@@ -54,7 +54,10 @@ module Jekyll
 
       self.categories = dir.downcase.split('/').reject { |x| x.empty? }
       process(name)
-      read_yaml(@base, name)
+
+      self.content           = File.read(Jekyll.sanitized_path(@base, @name))
+      @content, @data        = Utils.parse_front_matter(content)
+      self.extracted_excerpt = extract_excerpt
 
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
@@ -68,12 +71,8 @@ module Jekyll
       populate_tags
     end
 
-    def published?
-      if data.key?('published') && data['published'] == false
-        false
-      else
-        true
-      end
+    def type
+      :post
     end
 
     def populate_categories
@@ -90,17 +89,6 @@ module Jekyll
     # Get the full path to the directory containing the post files
     def containing_dir(source, dir)
       return File.join(source, dir, '_posts')
-    end
-
-    # Read the YAML frontmatter.
-    #
-    # base - The String path to the dir containing the file.
-    # name - The String filename of the file.
-    #
-    # Returns nothing.
-    def read_yaml(base, name)
-      super(base, name)
-      self.extracted_excerpt = extract_excerpt
     end
 
     # The post excerpt. This is either a custom excerpt
@@ -249,18 +237,19 @@ module Jekyll
     # site_payload - The site payload hash.
     #
     # Returns nothing.
-    def render(layouts, site_payload)
+    def render(layouts = Hash.new, site_payload = Hash.new)
       # construct payload
-      payload = Utils.deep_merge_hashes({
-        "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => to_liquid(self.class::EXCERPT_ATTRIBUTES_FOR_LIQUID)
-      }, site_payload)
+      site_related_posts = {"site" => {
+        "related_posts" => related_posts(site_payload["site"]["posts"])
+      }}
 
+      renderer.add_to_payload(site_related_posts)
       if generate_excerpt?
-        extracted_excerpt.do_layout(payload, {})
+        extracted_excerpt.renderer.add_to_payload(site_related_posts)
+        extracted_excerpt.render
       end
 
-      do_layout(payload.merge({"page" => to_liquid}), layouts)
+      self.output = renderer.run
     end
 
     # Obtain destination path.

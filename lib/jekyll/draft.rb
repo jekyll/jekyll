@@ -35,6 +35,10 @@ module Jekyll
       self.ext = ext
     end
 
+    def type
+      :draft
+    end
+
   end
 
 end

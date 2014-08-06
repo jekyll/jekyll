@@ -7,6 +7,8 @@ module Jekyll
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
+    alias_method :extname, :ext
+
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w[
       content
@@ -30,11 +32,16 @@ module Jekyll
 
 
       process(name)
-      read_yaml(File.join(base, dir), name)
+      self.content    = File.read(Jekyll.sanitized_path(base, name))
+      @content, @data = Utils.parse_front_matter(content)
 
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
+    end
+
+    def type
+      :page
     end
 
     # The generated directory into which the page will be placed
@@ -114,12 +121,34 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-      payload = Utils.deep_merge_hashes({
-        "page" => to_liquid,
-        'paginator' => pager.to_liquid
-      }, site_payload)
+      renderer.add_to_payload("paginator" => pager.to_liquid)
+      renderer.run
+    end
 
-      do_layout(payload, layouts)
+    # The Jekyll::Renderer instance specific to this Page.
+    #
+    # Returns an instance of
+    def renderer
+      @renderer ||= Jekyll::Renderer.new(site, self)
+    end
+
+    # The extname the output file will have.
+    #
+    # Returns the extname of the output file.
+    def output_ext
+      renderer.output_ext
+    end
+
+    # The liquid Hash representation of this Page.
+    #
+    # Returns a Hash for use in Liquid.
+    def to_liquid(attrs = nil)
+      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
+        [attribute, send(attribute)]
+      }]
+
+      defaults = site.frontmatter_defaults.all(relative_path, type)
+      Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
     end
 
     # The path to the source file
@@ -152,7 +181,7 @@ module Jekyll
 
     # Returns the Boolean of whether this Page is HTML or not.
     def html?
-      output_ext == '.html'
+      output_ext == '.html' || destination("/").end_with?(".html")
     end
 
     # Returns the Boolean of whether this Page is an index file or not.

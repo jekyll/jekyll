@@ -10,6 +10,7 @@ module Jekyll
 
     # Gets/Sets the extension of this layout.
     attr_accessor :ext
+    alias_method :extname, :ext
 
     # Gets/Sets the Hash that holds the metadata for this layout.
     attr_accessor :data
@@ -27,10 +28,10 @@ module Jekyll
       @base = base
       @name = name
 
-      self.data = {}
-
       process(name)
-      read_yaml(base, name)
+
+      self.content    = File.read(Jekyll.sanitized_path(base, name))
+      @content, @data = Utils.parse_front_matter(content)
     end
 
     # Extract information from the layout filename.
