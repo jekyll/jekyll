@@ -44,10 +44,6 @@ $on-laptop:        800px;
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
         "base",
-        "typography",
-        "site-header",
-        "site-footer",
-        "page-content",
-        "posts",
+        "layout",
         "syntax-highlighting"
 ;
