@@ -504,6 +504,10 @@ CONTENT
         assert_match '<li>var1 = foo</li>', @content
         assert_match '<li>var2 = bar</li>', @content
       end
+
+      should "include file as partial variable" do
+        assert_match %r{8 included}, @content
+      end
     end
   end
 end

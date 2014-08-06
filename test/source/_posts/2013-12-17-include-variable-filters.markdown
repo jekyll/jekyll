@@ -5,6 +5,7 @@ include1: include.html
 include2: include
 include3: INCLUDE
 include4: params
+include5: clude
 ---
 
 Liquid tests
@@ -19,3 +20,6 @@ Whitespace tests
 
 Parameters test
 - 7 {% include {{ page.include4 | append: '.html' }} var1='foo' var2='bar' %}
+
+Partial variable test
+- 8 {% include in{{ page.include5 }}.html %}
