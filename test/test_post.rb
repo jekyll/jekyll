@@ -78,14 +78,19 @@ class TestPost < Test::Unit::TestCase
 
       should "ignore subfolders" do
         post = Post.allocate
+        post.categories = ['foo']
         post.site = @site
         post.process("cat1/2008-09-09-foo-bar.textile")
-        assert_equal 0, post.categories.size
+        assert_equal 1, post.categories.size
+        assert_equal "foo", post.categories[0]
 
         post = Post.allocate
+        post.categories = ['foo', 'bar']
         post.site = @site
         post.process("cat2/CAT3/2008-09-09-foo-bar.textile")
-        assert_equal 0, post.categories.size
+        assert_equal 2, post.categories.size
+        assert_equal "foo", post.categories[0]
+        assert_equal "bar", post.categories[1]
 
       end
 
