@@ -400,42 +400,57 @@ configuration file or on the command-line, Jekyll will run using these options.
 </div>
 
 {% highlight yaml %}
+# Where things are
 source:      .
 destination: ./_site
 plugins:     ./_plugins
 layouts:     ./_layouts
-include:     ['.htaccess']
-exclude:     []
-keep_files:  ['.git','.svn']
-gems:        []
-timezone:    nil
-encoding:    nil
+data_source: ./_data
+collections: nil
 
-future:      true
-show_drafts: false
+# Handling Reading
+safe:         false
+include:      [".htaccess"]
+exclude:      []
+keep_files:   [".git", ".svn"]
+encoding:     "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+textile_ext:  "textile"
+
+# Filtering Content
+show_drafts: nil
 limit_posts: 0
+future:      true
+unpublished: false
+
+# Plugins
+whitelist: []
+gems:      []
+
+# Conversion
+markdown:    kramdown
 highlighter: pygments
-
-relative_permalinks: true
-
-permalink:     date
-paginate_path: 'page:num'
-paginate:      nil
-
-markdown:      kramdown
-markdown_ext:  markdown,mkdown,mkdn,mkd,md
-textile_ext:   textile
-
+lsi:         false
 excerpt_separator: "\n\n"
 
-safe:        false
-watch:       false    # deprecated
-server:      false    # deprecated
-host:        0.0.0.0
-port:        4000
-baseurl:     ""
-lsi:         false
+# Serving
+detach:  false
+port:    4000
+host:    0.0.0.0
+baseurl: "" # does not include hostname
 
+# Backwards-compatibility
+relative_permalinks: false
+
+# Outputting
+permalink:     date
+paginate_path: /page:num
+timezone:      nil
+
+quiet:    false
+defaults: []
+
+# Markdown Processors
 maruku:
   use_tex:    false
   use_divs:   false
@@ -451,20 +466,20 @@ redcarpet:
   extensions: []
 
 kramdown:
-  auto_ids: true
-  footnote_nr: 1
+  auto_ids:      true
+  footnote_nr:   1
   entity_output: as_char
-  toc_levels: 1..6
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
-  use_coderay: false
+  toc_levels:    1..6
+  smart_quotes:  lsquo,rsquo,ldquo,rdquo
+  use_coderay:   false
 
   coderay:
-    coderay_wrap: div
-    coderay_line_numbers: inline
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: style
+    coderay_wrap:              div
+    coderay_line_numbers:      inline
+    coderay_line_number_start: 1
+    coderay_tab_width:         4
+    coderay_bold_every:        10
+    coderay_css:               style
 
 redcloth:
   hard_breaks: true
