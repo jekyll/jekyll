@@ -159,8 +159,6 @@ module Jekyll
     # Returns nothing.
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
-      self.categories ||= []
-      self.categories += (cats || '').downcase.split('/')
       self.date = Utils.parse_date(date, "Post '#{relative_path}' does not have a valid date in the filename.")
       self.slug = slug
       self.ext = ext

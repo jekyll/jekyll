@@ -275,8 +275,8 @@ CONTENT
     end
 
     should "have the url to the \"nested\" post from 2008-11-21" do
-      assert_match %r{3\s/es/2008/11/21/nested/}, @result
-      assert_match %r{4\s/es/2008/11/21/nested/}, @result
+      assert_match %r{3\s/2008/11/21/nested/}, @result
+      assert_match %r{4\s/2008/11/21/nested/}, @result
     end
   end
 
