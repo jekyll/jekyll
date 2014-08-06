@@ -1,16 +1,4 @@
 /**
- * The box model how it should be
- */
-*,
-*:before,
-*:after {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-}
-
-
-
-/**
  * Reset some basic elements
  */
 body, h1, h2, h3, h4, h5, h6,
@@ -77,7 +65,8 @@ li {
  * Wrapper
  */
 .wrapper {
-    max-width: 800px;
+    max-width: -webkit-calc(800px - (#{$spacing-unit} * 2));
+    max-width:         calc(800px - (#{$spacing-unit} * 2));
     margin-right: auto;
     margin-left: auto;
     padding-right: $spacing-unit;
@@ -85,6 +74,8 @@ li {
     @extend %clearfix;
 
     @include media-query($on-laptop) {
+        max-width: -webkit-calc(800px - (#{$spacing-unit}));
+        max-width:         calc(800px - (#{$spacing-unit}));
         padding-right: $spacing-unit / 2;
         padding-left: $spacing-unit / 2;
     }
