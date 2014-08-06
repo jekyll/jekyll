@@ -13,14 +13,20 @@ module Jekyll
     #
     # Returns an array of Converter instances.
     def converters
-      @converters ||= site.converters.select { |c| c.matches(document.extname) }
+      @converters ||= site.converters.select { |c| c.matches(document.extname) }.sort
     end
 
     # Determine the extname the outputted file should have
     #
     # Returns the output extname including the leading period.
     def output_ext
-      converters.map {|c| c.output_ext(ext) }.uniq.join("")
+      if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
+        document.extname
+      else
+        converters.map {|c|
+          c.output_ext(document.extname) unless c.is_a?(Jekyll::Converters::Identity)
+        }.compact.uniq.join("")
+      end
     end
 
     ######################
