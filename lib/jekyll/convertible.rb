@@ -62,11 +62,14 @@ module Jekyll
     #
     # Returns nothing.
     def transform
-      self.content = converter.convert(content)
-    rescue => e
-      Jekyll.logger.error "Conversion error:", "There was an error converting" +
-        " '#{path}'."
-      raise e
+      converters.reduce(content) do |output, converter|
+        begin
+          converter.convert output
+        rescue => e
+          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error converting '#{path}'."
+          raise e
+        end
+      end
     end
 
     # Determine the extension depending on content_type.
@@ -74,15 +77,21 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      converter.output_ext(ext)
+      if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
+        ext
+      else
+        converters.map {|c|
+          c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
+        }.compact.uniq.join("")
+      end
     end
 
     # Determine which converter to use based on this convertible's
     # extension.
     #
     # Returns the Converter instance.
-    def converter
-      @converter ||= site.converters.find { |c| c.matches(ext) }
+    def converters
+      @converters ||= site.converters.select { |c| c.matches(ext) }.sort
     end
 
     # Render Liquid in the content
@@ -159,7 +168,7 @@ module Jekyll
     #
     # Returns true if the layout is invalid, false if otherwise
     def invalid_layout?(layout)
-      !data["layout"].nil? && data["layout"] != "none" && layout.nil? && !(self.is_a? Jekyll::Excerpt)
+      !data["layout"].nil? && layout.nil? && !(self.is_a? Jekyll::Excerpt)
     end
 
     # Recursively render layouts
@@ -205,11 +214,11 @@ module Jekyll
       info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converter.highlighter_prefix
-      payload["highlighter_suffix"] = converter.highlighter_suffix
+      payload["highlighter_prefix"] = converters.first.highlighter_prefix
+      payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
       self.content = render_liquid(content, payload, info) if render_with_liquid?
-      transform
+      self.content = transform
 
       # output keeps track of what will finally be written
       self.output = content
