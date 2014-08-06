@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 require 'helper'
 
 class TestPost < Test::Unit::TestCase

@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 
 class TestEntryFilter < Test::Unit::TestCase

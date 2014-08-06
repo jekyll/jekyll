@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Jekyll
   module Errors
     class FatalException < RuntimeError

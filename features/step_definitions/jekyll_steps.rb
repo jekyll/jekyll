@@ -1,3 +1,4 @@
+# encoding: utf-8
 def file_content_from_hash(input_hash)
   matter_hash = input_hash.reject { |k, v| k == "content" }
   matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp

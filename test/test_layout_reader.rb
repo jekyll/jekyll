@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'helper'
 
 class TestLayoutReader < Test::Unit::TestCase
