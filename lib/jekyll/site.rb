@@ -185,10 +185,16 @@ module Jekyll
 
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
-        klass.new(self, source, dir, entry) if klass.valid?(entry)
-      end.reject do |entry|
-        entry.nil?
-      end
+        if klass.valid?(entry)
+          if File.exist?(entry)
+            if has_yaml_header?(entry)
+              klass.new(self, source, dir, entry)
+            end
+          else
+            klass.new(self, source, dir, entry)
+          end
+        end
+      end.compact
     end
 
     # Read and parse all yaml files under <source>/<dir>
