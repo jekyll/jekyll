@@ -8,6 +8,7 @@
   * Don't require the `scope` key in front matter defaults (#2659)
   * No longer set `permalink: pretty` in the `_config.yml` for the site template (#2680)
   * Rework site template to utilize Sass (#2687)
+  * Notify the user when auto-regeneration is disabled. (#2696)
 
 ### Bug Fixes
 
