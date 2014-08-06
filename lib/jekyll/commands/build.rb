@@ -32,7 +32,12 @@ module Jekyll
           else
             build(site, options)
           end
-          watch(site, options) if options['watch']
+
+          if options.fetch('watch', false)
+            watch(site, options)
+          else
+            Jekyll.logger.info "Auto-regeneration:", "disabled. Use --watch to enable."
+          end
         end
 
         # Build your Jekyll site.
