@@ -218,7 +218,7 @@ module Jekyll
       payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
       self.content = render_liquid(content, payload, info) if render_with_liquid?
-      transform
+      self.content = transform
 
       # output keeps track of what will finally be written
       self.output = content
