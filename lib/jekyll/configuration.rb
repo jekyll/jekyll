@@ -6,47 +6,55 @@ module Jekyll
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = {
+      # Where things are
       'source'        => Dir.pwd,
       'destination'   => File.join(Dir.pwd, '_site'),
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
       'data_source'   =>  '_data',
-      'keep_files'    => ['.git','.svn'],
-      'gems'          => [],
       'collections'   => nil,
 
-      'timezone'      => nil,           # use the local timezone
-
-      'encoding'      => 'utf-8',       # always use utf-8 encoding. NEVER FORGET
-
+      # Handling Reading
       'safe'          => false,
-      'detach'        => false,          # default to not detaching the server
-      'show_drafts'   => nil,
-      'limit_posts'   => 0,
-      'lsi'           => false,
-      'future'        => true,           # remove and make true just default
-      'unpublished'   => false,
-
-      'relative_permalinks' => false,
-
-      'markdown'      => 'kramdown',
-      'highlighter'   => 'pygments',
-      'permalink'     => 'date',
-      'baseurl'       => '',
       'include'       => ['.htaccess'],
       'exclude'       => [],
-      'paginate_path' => '/page:num',
-
+      'keep_files'    => ['.git','.svn'],
+      'encoding'      => 'utf-8',
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'textile_ext'   => 'textile',
 
-      'quiet'         => false,
-      'port'          => '4000',
-      'host'          => '0.0.0.0',
+      # Filtering Content
+      'show_drafts'   => nil,
+      'limit_posts'   => 0,
+      'future'        => true,           # remove and make true just default
+      'unpublished'   => false,
 
+      # Plugins
+      'whitelist'     => [],
+      'gems'          => [],
+
+      # Conversion
+      'markdown'      => 'kramdown',
+      'highlighter'   => 'pygments',
+      'lsi'           => false,
       'excerpt_separator' => "\n\n",
 
-      'defaults'     => [],
+      # Serving
+      'detach'        => false,          # default to not detaching the server
+      'port'          => '4000',
+      'host'          => '0.0.0.0',
+      'baseurl'       => '',
+
+      # Backwards-compatibility options
+      'relative_permalinks' => false,
+
+      # Output Configuration
+      'permalink'     => 'date',
+      'paginate_path' => '/page:num',
+      'timezone'      => nil,           # use the local timezone
+
+      'quiet'         => false,
+      'defaults'      => [],
 
       'maruku' => {
         'use_tex'    => false,
