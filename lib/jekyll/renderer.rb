@@ -98,13 +98,12 @@ module Jekyll
     #
     # Returns true if the layout is invalid, false if otherwise
     def invalid_layout?(layout)
-      !document.data["layout"].nil? && layout.nil?
+      !document.data["layout"].nil? && document.data["layout"] != "nil" && layout.nil?
     end
 
     # Render layouts and place given content inside.
     #
     # content - the content to be placed in the layout
-    #
     #
     # Returns the content placed in the Liquid-rendered layouts
     def place_in_layouts(content, payload, info)
