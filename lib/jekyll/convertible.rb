@@ -63,7 +63,7 @@ module Jekyll
     #
     # Returns an array of Converter instances.
     def converters
-      @converters ||= site.converters.select { |c| c.matches(ext) }
+      @converters ||= site.converters.select { |c| c.matches(ext) }.sort
     end
 
     # Transform the contents based on the content type.
