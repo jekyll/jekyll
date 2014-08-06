@@ -10,6 +10,7 @@
   * Rework site template to utilize Sass (#2687)
   * Notify the user when auto-regeneration is disabled. (#2696)
   * Allow partial variables in include tag filename argument (#2693)
+  * Move instances of `Time.parse` into a Utils method (#2682)
 
 ### Bug Fixes
 
