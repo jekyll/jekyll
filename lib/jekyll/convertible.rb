@@ -85,7 +85,13 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      converters.map {|c| c.output_ext(ext) }.uniq.join("")
+      if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
+        ext
+      else
+        converters.map {|c|
+          c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
+        }.compact.uniq.join("")
+      end
     end
 
     # Render Liquid in the content
