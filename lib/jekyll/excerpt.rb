@@ -7,6 +7,7 @@ module Jekyll
 
     attr_accessor :post
     attr_accessor :content, :output, :ext
+    alias_method :extname, :ext
 
     def_delegator :@post, :site, :site
     def_delegator :@post, :name, :name
@@ -66,6 +67,14 @@ module Jekyll
     # Returns the shorthand String identifier of this Post.
     def inspect
       "<Excerpt: #{self.id}>"
+    end
+
+    def renderer
+      @renderer ||= Jekyll::Renderer.new(post.site, self)
+    end
+
+    def render
+      self.output = renderer.run
     end
 
     protected

@@ -56,6 +56,15 @@ module Jekyll
       PRIORITIES[other.priority] <=> PRIORITIES[self.priority]
     end
 
+    # Spaceship is priority [higher -> lower]
+    #
+    # other - The instance to be compared.
+    #
+    # Returns -1, 0, 1.
+    def <=>(other)
+      PRIORITIES[other.class.priority] <=> PRIORITIES[self.class.priority]
+    end
+
     # Initialize a new plugin. This should be overridden by the subclass.
     #
     # config - The Hash of configuration options.

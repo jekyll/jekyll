@@ -13,33 +13,60 @@ module Jekyll
     #
     # Returns an array of Converter instances.
     def converters
-      @converters ||= site.converters.select { |c| c.matches(document.extname) }
+      @converters ||= site.converters.select { |c| c.matches(document.extname) }.sort
     end
 
     # Determine the extname the outputted file should have
     #
     # Returns the output extname including the leading period.
     def output_ext
-      converters.first.output_ext(document.extname)
+      if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
+        document.extname
+      else
+        converters.map {|c|
+          c.output_ext(document.extname) unless c.is_a?(Jekyll::Converters::Identity)
+        }.compact.uniq.join("")
+      end
+    end
+
+    # The constructed Liquid payload.
+    #
+    # Returns the full Liquid payload
+    def payload
+      @payload ||= Utils.deep_merge_hashes({
+        "page" => document.to_liquid
+      }, site.site_payload)
+    end
+
+    # Adds data to the Liquid payload.
+    #
+    # more_payload - a Hash of data
+    #
+    # Returns the merged payload with the added info
+    def add_to_payload(more_payload)
+      @payload = Utils.deep_merge_hashes(payload, more_payload)
+    end
+
+    # The Liquid info, including the filters and registers.
+    #
+    # Returns the Liquid info.
+    def info
+      @info ||= {
+        :filters   => [Jekyll::Filters],
+        :registers => { :site => site, :page => payload['page'] }
+      }
     end
 
     ######################
     ## DAT RENDER THO
     ######################
 
-    def run
-      payload = Utils.deep_merge_hashes({
-        "page" => document.to_liquid
-      }, site.site_payload)
-
-      info = {
-        filters:   [Jekyll::Filters],
-        registers: { :site => site, :page => payload['page'] }
-      }
-
+    def run(extra_payload = {})
       # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converters.first.highlighter_prefix
-      payload["highlighter_suffix"] = converters.first.highlighter_suffix
+      add_to_payload(
+        "highlighter_prefix" => converters.first.highlighter_prefix,
+        "highlighter_suffix" => converters.first.highlighter_suffix
+      )
 
       output = document.content
 
