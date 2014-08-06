@@ -76,6 +76,19 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2008/09/09/foo-bar", @post.id
       end
 
+      should "ignore subfolders" do
+        post = Post.allocate
+        post.site = @site
+        post.process("cat1/2008-09-09-foo-bar.textile")
+        assert_equal 0, post.categories.size
+
+        post = Post.allocate
+        post.site = @site
+        post.process("cat2/CAT3/2008-09-09-foo-bar.textile")
+        assert_equal 0, post.categories.size
+
+      end
+
       should "create url based on date and title" do
         @post.categories = []
         @post.process(@fake_file)
