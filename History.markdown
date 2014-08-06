@@ -33,6 +33,7 @@
   * Add note that source directory cannot be modified in GitHub Pages (#2669)
   * Fix links from #2669 to be actual HTML. Whoops. (#2679)
   * Add link to `jekyll-slim` in list of third-party plugins (#2689)
+  * Add Barry Clark's Smashing Magazine tutorial to resources page (#2688)
 
 ## 2.2.0 / 2014-07-29
 
