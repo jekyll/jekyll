@@ -9,13 +9,22 @@ module Jekyll
             c.description 'Show the help message, optionally for a given subcommand.'
 
             c.action do |args, _|
+              cmd = (args.first || "").to_sym
               if args.empty?
                 puts prog
+              elsif prog.has_command? cmd
+                puts prog.commands[cmd]
               else
-                puts prog.commands[args.first.to_sym]
+                invalid_command(prog, cmd)
+                abort
               end
             end
           end
+        end
+
+        def invalid_command(prog, cmd)
+          Jekyll.logger.error "Error:", "Hmm... we don't know what the '#{cmd}' command is."
+          Jekyll.logger.info  "Valid commands:", prog.commands.keys.join(", ")
         end
 
       end
