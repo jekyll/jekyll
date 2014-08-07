@@ -76,19 +76,22 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2008/09/09/foo-bar", @post.id
       end
 
-      should "keep categories" do
+      should "ignore subfolders" do
         post = Post.allocate
+        post.categories = ['foo']
         post.site = @site
         post.process("cat1/2008-09-09-foo-bar.textile")
         assert_equal 1, post.categories.size
-        assert_equal "cat1", post.categories[0]
+        assert_equal "foo", post.categories[0]
 
         post = Post.allocate
+        post.categories = ['foo', 'bar']
         post.site = @site
         post.process("cat2/CAT3/2008-09-09-foo-bar.textile")
         assert_equal 2, post.categories.size
-        assert_equal "cat2", post.categories[0]
-        assert_equal "cat3", post.categories[1]
+        assert_equal "foo", post.categories[0]
+        assert_equal "bar", post.categories[1]
+
       end
 
       should "create url based on date and title" do
@@ -630,7 +633,7 @@ class TestPost < Test::Unit::TestCase
 
     should "generate categories and topics" do
       post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
-      assert_equal ['foo', 'bar'], post.categories
+      assert_equal ['foo'], post.categories
     end
   end
 
