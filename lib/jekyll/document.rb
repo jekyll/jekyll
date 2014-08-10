@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Jekyll
   class Document
     include Comparable
@@ -82,7 +84,7 @@ module Jekyll
     end
 
     # Determine whether the document has a YAML header.
-    # 
+    #
     # Returns true if the file starts with three dashes
     def has_yaml_header?
       @has_yaml_header unless @has_yaml_header.nil?
