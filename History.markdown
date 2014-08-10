@@ -38,6 +38,7 @@
   * Add link to `jekyll-slim` in list of third-party plugins (#2689)
   * Add Barry Clark's Smashing Magazine tutorial to resources page (#2688)
   * Reorganize and update default configuration settings (#2456)
+  * Fixing indentation in the configuration docs about Redcarpet exts (#2717)
 
 ## 2.2.0 / 2014-07-29
 
