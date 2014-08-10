@@ -10,7 +10,7 @@ module Jekyll
     def initialize(post)
       @post = post
       @site = post.site
-      require 'classifier' if site.lsi
+      require 'classifier-reborn' if site.lsi
     end
 
     def build
@@ -27,7 +27,7 @@ module Jekyll
 
     def build_index
       self.class.lsi ||= begin
-        lsi = Classifier::LSI.new(:auto_rebuild => false)
+        lsi = ClassifierReborn::LSI.new(:auto_rebuild => false)
         display("Populating LSI...")
 
         site.posts.each do |x|
