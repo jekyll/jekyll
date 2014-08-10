@@ -406,7 +406,7 @@ destination: ./_site
 plugins:     ./_plugins
 layouts:     ./_layouts
 data_source: ./_data
-collections: nil
+collections: null
 
 # Handling Reading
 safe:         false
@@ -418,7 +418,7 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 textile_ext:  "textile"
 
 # Filtering Content
-show_drafts: nil
+show_drafts: null
 limit_posts: 0
 future:      true
 unpublished: false
@@ -445,7 +445,7 @@ relative_permalinks: false
 # Outputting
 permalink:     date
 paginate_path: /page:num
-timezone:      nil
+timezone:      null
 
 quiet:    false
 defaults: []
