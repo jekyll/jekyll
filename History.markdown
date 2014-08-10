@@ -23,6 +23,7 @@
   * Fixed typo in `Deprecator#gracefully_require` error message (#2694)
   * Remove preemptive loading of the 'classifier' gem. (#2697)
   * Use case-insensitive checking for the file extensions when loading config files (#2718)
+  * When Reading Documents, Respect `encoding` Option (#2720)
 
 ### Development Fixes
 
