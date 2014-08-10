@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Jekyll
   class Document
     include Comparable
@@ -82,7 +84,7 @@ module Jekyll
     end
 
     # Determine whether the document has a YAML header.
-    # 
+    #
     # Returns true if the file starts with three dashes
     def has_yaml_header?
       @has_yaml_header unless @has_yaml_header.nil?
@@ -198,7 +200,7 @@ module Jekyll
           unless defaults.empty?
             @data = defaults
           end
-          @content = File.open(path, "rb") { |f| f.read }
+          @content = File.open(path, "rb", merged_file_read_opts(opts)) { |f| f.read }
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
             @content = $POSTMATCH
             data_file = SafeYAML.load($1)

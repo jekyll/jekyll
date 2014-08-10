@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Jekyll
   module Tags
     class IncludeTagError < StandardError
