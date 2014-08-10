@@ -42,6 +42,7 @@
   * Reorganize and update default configuration settings (#2456)
   * Fixing indentation in the configuration docs about Redcarpet exts (#2717)
   * Use `null` in YAML instead of `nil` in default config list (#2719)
+  * Fix typo in Continuous Integration docs (#2708)
 
 ## 2.2.0 / 2014-07-29
 
