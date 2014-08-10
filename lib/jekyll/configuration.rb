@@ -120,7 +120,7 @@ module Jekyll
       case File.extname(filename)
       when /\.toml/i
         TOML.load_file(filename)
-      when /\.y(a)?ml/i
+      when /\.ya?ml/i
         SafeYAML.load_file(filename)
       else
         raise ArgumentError, "No parser for '#{filename}' is available. Use a .toml or .y(a)ml file instead."
