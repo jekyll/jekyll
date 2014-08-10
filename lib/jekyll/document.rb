@@ -198,7 +198,7 @@ module Jekyll
           unless defaults.empty?
             @data = defaults
           end
-          @content = File.open(path, "rb") { |f| f.read }
+          @content = File.open(path, "rb:UTF-8") { |f| f.read }
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
             @content = $POSTMATCH
             data_file = SafeYAML.load($1)
