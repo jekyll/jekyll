@@ -5,6 +5,63 @@ permalink: "/docs/history/"
 prev_section: contributing
 ---
 
+## 2.3.0 / 2014-08-10
+{: #v2-3-0}
+
+### Minor Enhancements
+{: #minor-enhancements-v2-3-0}
+
+- Allow Convertibles to be converted by >= 1 converters ([#2704]({{ site.repository }}/issues/2704))
+- Allow Sass files to be rendered in Liquid, but never place them in layouts. ([#2733]({{ site.repository }}/issues/2733))
+- Add `jekyll help` command ([#2707]({{ site.repository }}/issues/2707))
+- Use `.scss` for `site_template` styles. ([#2667]({{ site.repository }}/issues/2667))
+- Don't require the `scope` key in front matter defaults ([#2659]({{ site.repository }}/issues/2659))
+- No longer set `permalink: pretty` in the `_config.yml` for the site template ([#2680]({{ site.repository }}/issues/2680))
+- Rework site template to utilize Sass ([#2687]({{ site.repository }}/issues/2687))
+- Notify the user when auto-regeneration is disabled. ([#2696]({{ site.repository }}/issues/2696))
+- Allow partial variables in include tag filename argument ([#2693]({{ site.repository }}/issues/2693))
+- Move instances of `Time.parse` into a Utils method ([#2682]({{ site.repository }}/issues/2682))
+- Ignore subfolders in the `_posts` folder ([#2705]({{ site.repository }}/issues/2705)) REVERTS ([#2633]({{ site.repository }}/issues/2633))
+- Front Matter default types should always be pluralized ([#2732]({{ site.repository }}/issues/2732))
+
+### Bug Fixes
+{: #bug-fixes-v2-3-0}
+
+- Use only the last extname when multiple converters exist ([#2722]({{ site.repository }}/issues/2722))
+- Call `#to_liquid` before calling `#to_json` in jsonify filter ([#2729]({{ site.repository }}/issues/2729))
+- Use non padded config in `strftime` to avoid parse string twice ([#2673]({{ site.repository }}/issues/2673))
+- Replace deprecated Ruby methods with undeprecated ones ([#2664]({{ site.repository }}/issues/2664))
+- Catch errors when parsing Post `date` front matter value & produce nice error message ([#2649]({{ site.repository }}/issues/2649))
+- Allow static files in Collections ([#2615]({{ site.repository }}/issues/2615))
+- Fixed typo in `Deprecator#gracefully_require` error message ([#2694]({{ site.repository }}/issues/2694))
+- Remove preemptive loading of the 'classifier' gem. ([#2697]({{ site.repository }}/issues/2697))
+- Use case-insensitive checking for the file extensions when loading config files ([#2718]({{ site.repository }}/issues/2718))
+- When Reading Documents, Respect `encoding` Option ([#2720]({{ site.repository }}/issues/2720))
+- Refactor based on jekyll-watch clean-up. ([#2716]({{ site.repository }}/issues/2716))
+- `Document#to_s` should produce just the content of the document ([#2731]({{ site.repository }}/issues/2731))
+
+### Development Fixes
+{: #development-fixes-v2-3-0}
+
+- Only include lib files in the gem ([#2671]({{ site.repository }}/issues/2671))
+- Fix `git diff` command in `proof` script ([#2672]({{ site.repository }}/issues/2672))
+
+### Site Enhancements
+{: #site-enhancements-v2-3-0}
+
+- Use Sass and a Docs Collection ([#2651]({{ site.repository }}/issues/2651))
+- Be more ambiguous about `page.content`. But more transparent. ([#2522]({{ site.repository }}/issues/2522))
+- Streamlining front matter wording (instead of front-matter/frontmatter) ([#2674]({{ site.repository }}/issues/2674))
+- Add note that source directory cannot be modified in GitHub Pages ([#2669]({{ site.repository }}/issues/2669))
+- Fix links from [#2669]({{ site.repository }}/issues/2669) to be actual HTML. Whoops. ([#2679]({{ site.repository }}/issues/2679))
+- Add link to `jekyll-slim` in list of third-party plugins ([#2689]({{ site.repository }}/issues/2689))
+- Add Barry Clark's Smashing Magazine tutorial to resources page ([#2688]({{ site.repository }}/issues/2688))
+- Reorganize and update default configuration settings ([#2456]({{ site.repository }}/issues/2456))
+- Fixing indentation in the configuration docs about Redcarpet exts ([#2717]({{ site.repository }}/issues/2717))
+- Use `null` in YAML instead of `nil` in default config list ([#2719]({{ site.repository }}/issues/2719))
+- Fix typo in Continuous Integration docs ([#2708]({{ site.repository }}/issues/2708))
+
+
 ## 2.2.0 / 2014-07-29
 {: #v2-2-0}
 

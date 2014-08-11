@@ -4,6 +4,16 @@
 
 ### Minor Enhancements
 
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 2.3.0 / 2014-08-10
+
+### Minor Enhancements
+
   * Allow Convertibles to be converted by >= 1 converters (#2704)
   * Allow Sass files to be rendered in Liquid, but never place them in layouts. (#2733)
   * Add `jekyll help` command (#2707)
