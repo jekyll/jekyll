@@ -345,9 +345,7 @@ class TestPost < Test::Unit::TestCase
       should "transform textile" do
         @post.process(@real_file)
         @post.read_yaml(@source, @real_file)
-        @post.transform
-
-        assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.content
+        assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.transform
       end
 
       context "#excerpt" do
@@ -645,41 +643,41 @@ class TestPost < Test::Unit::TestCase
 
     should "process .md as markdown under default configuration" do
       post = setup_post '2011-04-12-md-extension.md'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .text as identity under default configuration" do
       post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Identity
     end
 
     should "process .text as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mdw,mdwn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .md as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mkd,mkdn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .mkdn under text if it is not in the markdown config" do
       @site.config['markdown_ext'] = 'markdown,mkd,md,text'
       post = setup_post '2013-08-01-mkdn-extension.mkdn'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Identity
     end
 
     should "process .text as textile under alternate configuration" do
       @site.config['textile_ext'] = 'textile,text'
       post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Textile
     end
 
