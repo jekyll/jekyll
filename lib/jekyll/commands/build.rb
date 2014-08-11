@@ -64,7 +64,7 @@ module Jekyll
         # Returns nothing.
         def watch(site, options)
           Deprecator.gracefully_require 'jekyll-watch'
-          Jekyll::Commands::Watch.watch(site, options)
+          Jekyll::Watcher.watch(options)
         end
 
       end # end of class << self
