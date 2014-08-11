@@ -4,6 +4,7 @@
 
 ### Minor Enhancements
 
+  * Allow Convertibles to be converted by >= 1 converters (#2704)
   * Add `jekyll help` command (#2707)
   * Use `.scss` for `site_template` styles. (#2667)
   * Don't require the `scope` key in front matter defaults (#2659)
