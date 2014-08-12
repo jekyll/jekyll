@@ -10,19 +10,24 @@ module Jekyll
       @site = site
     end
 
-    def update_deprecated_types(scope)
-      if scope['type'].eql?('page')
-        defaults_deprecate_type('page', 'pages')
-        scope['type'] = 'pages'
-      elsif scope['type'].eql?('post')
-        defaults_deprecate_type('post', 'posts')
-        type.to_s.eql?('posts')
-        scope['type'] = 'posts'
-      elsif scope['type'].eql?('draft')
-        defaults_deprecate_type('draft', 'drafts')
-        scope['type'] = 'drafts'
+    def update_deprecated_types(set)
+      return set unless set.key?('scope') && set['scope'].key?('type')
+
+      set['scope']['type'] = case set['scope']['type']
+      when 'page'
+        Deprecator.defaults_deprecate_type('page', 'pages')
+        'pages'
+      when 'post'
+        Deprecator.defaults_deprecate_type('post', 'posts')
+        'posts'
+      when 'draft'
+        Deprecator.defaults_deprecate_type('draft', 'drafts')
+        'drafts'
+      else
+        set['scope']['type']
       end
-      scope
+
+      set
     end
 
     # Finds a default value for a given setting, filtered by path and type
