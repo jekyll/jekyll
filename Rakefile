@@ -87,7 +87,7 @@ end
 #
 #############################################################################
 
-task :default => [:test, :features]
+multitask :default => [:test, :features]
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
