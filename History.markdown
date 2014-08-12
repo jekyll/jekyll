@@ -29,6 +29,7 @@
   * Use case-insensitive checking for the file extensions when loading config files (#2718)
   * When Reading Documents, Respect `encoding` Option (#2720)
   * Refactor based on jekyll-watch clean-up. (#2716)
+  * Document#to_s should produce just the content of the document (#2731)
 
 ### Development Fixes
 
