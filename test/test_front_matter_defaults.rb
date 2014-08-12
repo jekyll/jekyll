@@ -53,7 +53,7 @@ class TestFrontMatterDefaults < Test::Unit::TestCase
     end
   end
 
-  context "A site with front matter defaults with no path" do
+  context "A site with front matter defaults with no path and a deprecated type" do
     setup do
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
@@ -61,6 +61,31 @@ class TestFrontMatterDefaults < Test::Unit::TestCase
         "defaults" => [{
           "scope" => {
             "type" => "page"
+          },
+          "values" => {
+            "key" => "val"
+          }
+        }]
+      }))
+      @site.process
+      @affected = @site.pages
+      @not_affected = @site.posts
+    end
+
+    should "affect only the specified type and all paths" do
+      assert_equal @affected.reject { |page| page.data["key"] == "val" }, []
+      assert_equal @not_affected.reject { |page| page.data["key"] == "val" }, @not_affected
+    end
+  end
+
+  context "A site with front matter defaults with no path" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope" => {
+            "type" => "pages"
           },
           "values" => {
             "key" => "val"

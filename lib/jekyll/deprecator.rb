@@ -1,6 +1,8 @@
 module Jekyll
   module Deprecator
-    def self.process(args)
+    extend self
+
+    def process(args)
       no_subcommand(args)
       arg_is_present? args, "--server", "The --server command has been replaced by the \
                           'serve' subcommand."
@@ -16,24 +18,29 @@ module Jekyll
       arg_is_present? args, "--url", "The 'url' setting can only be set in your config files."
     end
 
-    def self.no_subcommand(args)
+    def no_subcommand(args)
       if args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
         deprecation_message "Jekyll now uses subcommands instead of just \
                             switches. Run `jekyll --help' to find out more."
       end
     end
 
-    def self.arg_is_present?(args, deprecated_argument, message)
+    def arg_is_present?(args, deprecated_argument, message)
       if args.include?(deprecated_argument)
         deprecation_message(message)
       end
     end
 
-    def self.deprecation_message(message)
+    def deprecation_message(message)
       Jekyll.logger.error "Deprecation:", message
     end
 
-    def self.gracefully_require(gem_name)
+    def defaults_deprecate_type(old, current)
+      Jekyll.logger.warn "Defaults:", "The '#{old}' type has become '#{current}'."
+      Jekyll.logger.warn "Defaults:", "Please update your front-matter defaults to use 'type: #{current}'."
+    end
+
+    def gracefully_require(gem_name)
       Array(gem_name).each do |name|
         begin
           require name

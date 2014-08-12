@@ -10,6 +10,26 @@ module Jekyll
       @site = site
     end
 
+    def update_deprecated_types(set)
+      return set unless set.key?('scope') && set['scope'].key?('type')
+
+      set['scope']['type'] = case set['scope']['type']
+      when 'page'
+        Deprecator.defaults_deprecate_type('page', 'pages')
+        'pages'
+      when 'post'
+        Deprecator.defaults_deprecate_type('post', 'posts')
+        'posts'
+      when 'draft'
+        Deprecator.defaults_deprecate_type('draft', 'drafts')
+        'drafts'
+      else
+        set['scope']['type']
+      end
+
+      set
+    end
+
     # Finds a default value for a given setting, filtered by path and type
     #
     # path - the path (relative to the source) of the page, post or :draft the default is used in
@@ -73,8 +93,19 @@ module Jekyll
       end
     end
 
+    # Determines whether the scope applies to type.
+    # The scope applies to the type if:
+    #   1. no 'type' is specified
+    #   2. the 'type' in the scope is the same as the type asked about
+    #
+    # scope - the Hash defaults set being asked about application
+    # type  - the type of the document being processed / asked about
+    #         its defaults.
+    #
+    # Returns true if either of the above conditions are satisfied,
+    #   otherwise returns false
     def applies_type?(scope, type)
-      !scope.key?('type') || scope['type'] == type.to_s
+      !scope.key?('type') || scope['type'].eql?(type.to_s)
     end
 
     # Checks if a given set of default values is valid
@@ -126,12 +157,15 @@ module Jekyll
       sets = @site.config['defaults']
       return [] unless sets.is_a?(Array)
 
-      sets.select do |set|
-        unless valid?(set)
-          Jekyll.logger.warn "Default:", "An invalid default set was found"
+      sets.map do |set|
+        if valid?(set)
+          update_deprecated_types(set)
+        else
+          Jekyll.logger.warn "Defaults:", "An invalid front-matter default set was found:"
+          Jekyll.logger.warn "#{set}"
+          nil
         end
-        valid?(set)
-      end
+      end.compact
     end
 
     # Sanitizes the given path by removing a leading and addding a trailing slash
