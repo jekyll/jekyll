@@ -1,3 +1,0 @@
-default: --format pretty
-travis: --format progress
-html_report: --format progress --format html --out=features_report.html
