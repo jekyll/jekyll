@@ -105,7 +105,7 @@ module Jekyll
     # Returns true if either of the above conditions are satisfied,
     #   otherwise returns false
     def applies_type?(scope, type)
-      !scope.key('type') || scope['type'].eql?(type.to_s)
+      !scope.key?('type') || scope['type'].eql?(type.to_s)
     end
 
     # Checks if a given set of default values is valid
