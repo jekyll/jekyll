@@ -14,4 +14,4 @@ fi
 
 set -x
 
-bundle exec rake
+bundle exec rake test

@@ -3,5 +3,4 @@
 set -e
 
 script/branding
-script/proof
-script/test
+ls -1 script/{test,cucumber,proof} | xargs -P 3 -L 1 /bin/bash
