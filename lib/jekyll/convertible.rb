@@ -80,9 +80,9 @@ module Jekyll
       if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
         ext
       else
-        converters.map {|c|
+        converters.map { |c|
           c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
-        }.compact.uniq.join("")
+        }.compact.last
       end
     end
 
