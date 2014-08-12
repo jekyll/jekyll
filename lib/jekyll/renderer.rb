@@ -49,14 +49,17 @@ module Jekyll
         output = render_liquid(output, payload, info)
       end
 
+      output = convert(output)
+      document.content = output
+
       if document.place_in_layout?
         place_in_layouts(
-          convert(output),
+          output,
           payload,
           info
         )
       else
-        convert(output)
+        output
       end
     end
 
