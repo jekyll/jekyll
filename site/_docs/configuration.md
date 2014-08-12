@@ -304,13 +304,13 @@ defaults:
   -
     scope:
       path: "" # an empty string here means all files in the project
-      type: "post"
+      type: "posts"
     values:
       layout: "default"
 {% endhighlight %}
 
-Now, this will only set the layout for files where the type is `post`.
-The different types that are available to you are `page`, `post`, `draft` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
+Now, this will only set the layout for files where the type is `posts`.
+The different types that are available to you are `pages`, `posts`, `drafts` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
 
 As mentioned earlier, you can set multiple scope/values pairs for `defaults`.
 
@@ -319,17 +319,16 @@ defaults:
   -
     scope:
       path: ""
-      type: "post"
+      type: "posts"
     values:
       layout: "my-site"
   -
     scope:
       path: "projects"
-      type: "page"
+      type: "pages"
     values:
       layout: "project" # overrides previous default layout
       author: "Mr. Hyde"
-      category: "project"
 {% endhighlight %}
 
 With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde` as well as have the category for the page set to `project`.
@@ -343,7 +342,7 @@ defaults:
   -
     scope:
       path: ""
-      type: "my_collection" # a collection in your site
+      type: "my_collection" # a collection in your site, in plural form
     values:
       layout: "default"
 {% endhighlight %}
@@ -365,7 +364,7 @@ defaults:
   -
     scope:
       path: "projects"
-      type: "page"
+      type: "pages"
     values:
       layout: "project"
       author: "Mr. Hyde"
