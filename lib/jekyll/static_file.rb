@@ -37,10 +37,14 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
+      File.join(*[dest, destination_rel_dir, @name].compact)
+    end
+
+    def destination_rel_dir
       if @collection
-        File.join(*[dest, @dir.gsub(/\A_/, ''), @name].compact)
+        @dir.gsub(/\A_/, '')
       else
-        File.join(*[dest, @dir, @name].compact)
+        @dir
       end
     end
 
