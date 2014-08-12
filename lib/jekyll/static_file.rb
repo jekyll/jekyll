@@ -9,11 +9,12 @@ module Jekyll
     # base - The String path to the <source>.
     # dir  - The String path between <source> and the file.
     # name - The String filename of the file.
-    def initialize(site, base, dir, name)
+    def initialize(site, base, dir, name, collection = nil)
       @site = site
       @base = base
       @dir  = dir
       @name = name
+      @collection = collection
     end
 
     # Returns source file path.
@@ -23,7 +24,11 @@ module Jekyll
 
     # Returns the source file path relative to the site source
     def relative_path
-      @relative_path ||= path.sub(/\A#{@site.source}/, '')
+      @relative_path ||= File.join(*[@dir, @name].compact)
+    end
+
+    def extname
+      File.extname(path)
     end
 
     # Obtain destination path.
@@ -32,7 +37,11 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      File.join(*[dest, @dir, @name].compact)
+      if @collection
+        File.join(*[dest, @dir.gsub(/\A_/, ''), @name].compact)
+      else
+        File.join(*[dest, @dir, @name].compact)
+      end
     end
 
     # Returns last modification time for this file.
@@ -45,6 +54,13 @@ module Jekyll
     # Returns true if modified since last write.
     def modified?
       @@mtimes[path] != mtime
+    end
+
+    # Whether to write the file to the filesystem
+    #
+    # Returns true.
+    def write?
+      true
     end
 
     # Write the static file to the destination directory (if modified).
@@ -75,7 +91,7 @@ module Jekyll
 
     def to_liquid
       {
-        "path"          => relative_path,
+        "path"          => File.join("", relative_path),
         "modified_time" => mtime.to_s,
         "extname"       => File.extname(relative_path)
       }

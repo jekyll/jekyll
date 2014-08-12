@@ -62,7 +62,7 @@ class TestDocument < Test::Unit::TestCase
         }]
       }))
       @site.process
-      @document = @site.collections["slides"].docs.first
+      @document = @site.collections["slides"].docs.select{|d| d.is_a?(Document) }.first
     end
 
     should "know the frontmatter defaults" do
@@ -199,20 +199,24 @@ class TestDocument < Test::Unit::TestCase
         "destination" => dest_dir
       }))
       @site.process
-      @document = @site.collections["slides"].docs.find { |doc| doc.relative_path == "_slides/octojekyll.png" }
+      @document = @site.collections["slides"].files.find { |doc| doc.relative_path == "_slides/octojekyll.png" }
       @dest_file = dest_dir("slides/octojekyll.png")
     end
 
-    should "be a document" do
-      assert !@document.nil?
+    should "be a static file" do
+      assert_equal true, @document.is_a?(StaticFile)
     end
 
-    should "not be rendered with Liquid" do
-      assert !@document.render_with_liquid?
+    should "be set to write" do
+      assert @document.write?
+    end
+
+    should "be in the list of docs_to_write" do
+      assert @site.docs_to_write.include?(@document)
     end
 
     should "be output in the correct place" do
-      assert File.file? @dest_file
+      assert_equal true, File.file?(@dest_file)
     end
   end
 

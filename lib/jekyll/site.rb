@@ -144,7 +144,7 @@ module Jekyll
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
-        elsif has_yaml_header?(f_abs)
+        elsif Utils.has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
           pages << page if publisher.publish?(page)
         else
@@ -432,7 +432,7 @@ module Jekyll
 
     def documents
       collections.reduce(Set.new) do |docs, (_, collection)|
-        docs.merge(collection.docs)
+        docs + collection.docs + collection.files
       end.to_a
     end
 
@@ -452,10 +452,6 @@ module Jekyll
 
     def has_relative_page?
       pages.any? { |page| page.uses_relative_permalinks }
-    end
-
-    def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
     def limit_posts!

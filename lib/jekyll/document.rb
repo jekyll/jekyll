@@ -97,20 +97,12 @@ module Jekyll
       '.coffee'.eql?(extname)
     end
 
-    # Determine whether the document has a YAML header.
-    #
-    # Returns true if the file starts with three dashes
-    def has_yaml_header?
-      @has_yaml_header unless @has_yaml_header.nil?
-      @has_yaml_header = !!(File.open(path, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
-    end
-
     # Determine whether the file should be rendered with Liquid.
     #
     # Returns false if the document is either an asset file or a yaml file,
     #   true otherwise.
     def render_with_liquid?
-      !(coffeescript_file? || yaml_file?) && has_yaml_header?
+      !(coffeescript_file? || yaml_file?)
     end
 
     # Determine whether the file should be placed into layouts.
@@ -118,7 +110,7 @@ module Jekyll
     # Returns false if the document is either an asset file or a yaml file,
     #   true otherwise.
     def place_in_layout?
-      !(asset_file? || yaml_file?) && has_yaml_header?
+      !(asset_file? || yaml_file?)
     end
 
     # The URL template where the document would be accessible.
@@ -214,7 +206,7 @@ module Jekyll
           unless defaults.empty?
             @data = defaults
           end
-          @content = File.open(path, "rb", merged_file_read_opts(opts)) { |f| f.read }
+          @content = File.read(path, merged_file_read_opts(opts))
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
             @content = $POSTMATCH
             data_file = SafeYAML.load($1)
