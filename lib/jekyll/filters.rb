@@ -155,7 +155,7 @@ module Jekyll
     #
     # Returns the converted json string
     def jsonify(input)
-      input.to_json
+      as_liquid(input).to_json
     end
 
     # Group an array of items by a property
@@ -253,6 +253,10 @@ module Jekyll
       else
         item[property.to_s]
       end
+    end
+
+    def as_liquid(item)
+      item.respond_to?(:to_liquid) ? item.to_liquid : item
     end
   end
 end
