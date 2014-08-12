@@ -1,9 +1,5 @@
 #!/bin/bash
 
-if test -z "$TRAVIS"; then
-  PROFILE="--format pretty"
-else
-  PROFILE="--format progress"
-fi
-
-bundle exec cucumber $PROFILE "$@"
+time bundle exec cucumber \
+  -f Features::Support::Overview \
+  "$@"
