@@ -246,7 +246,7 @@ module Jekyll
     #
     # Returns the content of the document
     def to_s
-      output || content
+      content || ''
     end
 
     # Compare this document against another document.
