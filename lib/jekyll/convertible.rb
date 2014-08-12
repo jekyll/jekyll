@@ -128,12 +128,12 @@ module Jekyll
     #
     # Returns the type of self.
     def type
-      if is_a?(Post)
+      if is_a?(Draft)
+        :drafts
+      elsif is_a?(Post)
         :posts
       elsif is_a?(Page)
         :pages
-      elsif is_a?(Draft)
-        :drafts
       end
     end
 
