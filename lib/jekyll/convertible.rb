@@ -150,14 +150,14 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w[.sass .scss].include?(extname)
+      %w[.sass .scss].include?(ext)
     end
 
     # Determine whether the document is a CoffeeScript file.
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      '.coffee'.eql?(extname)
+      '.coffee'.eql?(ext)
     end
 
     # Determine whether the file should be rendered with Liquid.
