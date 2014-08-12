@@ -36,6 +36,7 @@
 
   * Only include lib files in the gem (#2671)
   * Fix `git diff` command in `proof` script (#2672)
+  * Make default rake task a multitask so tests run in parallel (#2735)
 
 ### Site Enhancements
 
