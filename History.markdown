@@ -17,6 +17,7 @@
 
 ### Bug Fixes
 
+  * Call `#to_liquid` before calling `#to_json` in jsonify filter (#2729)
   * Use non padded config in `strftime` to avoid parse string twice (#2673)
   * Replace deprecated Ruby methods with undeprecated ones (#2664)
   * Catch errors when parsing Post `date` front matter value & produce nice error message (#2649)
