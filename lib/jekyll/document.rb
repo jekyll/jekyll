@@ -80,7 +80,21 @@ module Jekyll
     # Returns true if the extname belongs to the set of extensions
     #   that asset files use.
     def asset_file?
-      %w[.sass .scss .coffee].include?(extname)
+      sass_file? || coffeescript_file?
+    end
+
+    # Determine whether the document is a Sass file.
+    #
+    # Returns true if extname == .sass or .scss, false otherwise.
+    def sass_file?
+      %w[.sass .scss].include?(extname)
+    end
+
+    # Determine whether the document is a CoffeeScript file.
+    #
+    # Returns true if extname == .coffee, false otherwise.
+    def coffeescript_file?
+      '.coffee'.eql?(extname)
     end
 
     # Determine whether the document has a YAML header.
@@ -96,7 +110,7 @@ module Jekyll
     # Returns false if the document is either an asset file or a yaml file,
     #   true otherwise.
     def render_with_liquid?
-      !(asset_file? || yaml_file?) && has_yaml_header?
+      !(coffeescript_file? || yaml_file?) && has_yaml_header?
     end
 
     # Determine whether the file should be placed into layouts.
