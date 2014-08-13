@@ -25,6 +25,28 @@ module Jekyll
       converter.convert(input)
     end
 
+    # Convert a Sass string into CSS output.
+    #
+    # input - The Sass String to convert.
+    #
+    # Returns the CSS formatted String.
+    def sassify(input)
+      site = @context.registers[:site]
+      converter = site.getConverterImpl(Jekyll::Converters::Sass)
+      converter.convert(input)
+    end
+
+    # Convert a Scss string into CSS output.
+    #
+    # input - The Scss String to convert.
+    #
+    # Returns the CSS formatted String.
+    def scssify(input)
+      site = @context.registers[:site]
+      converter = site.getConverterImpl(Jekyll::Converters::Scss)
+      converter.convert(input)
+    end
+
     # Format a date in short format e.g. "27 Jan 2011".
     #
     # date - the Time to format.
