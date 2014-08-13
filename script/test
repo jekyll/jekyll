@@ -2,16 +2,19 @@
 #
 # Usage:
 #   script/test
-#   script/test <hi>
-
-set -x
+#   script/test <test_file>
 
 if [ -z "$1" ]; then
-  TEST_FILES="test/test_*.rb"
+  TEST_FILES="./test/test_*.rb"
 else
   TEST_FILES="$@"
 fi
 
+RAKE_LIB_DIR=$(ruby -e "puts Gem::Specification.find_by_name('rake').gem_dir + '/lib'")
+
 set -x
 
-bundle exec rake
+time bundle exec ruby -I"lib:test" \
+  -I"${RAKE_LIB_DIR}" \
+  "${RAKE_LIB_DIR}/rake/rake_test_loader.rb" \
+  $TEST_FILES

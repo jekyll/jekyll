@@ -22,14 +22,28 @@ module Jekyll
       @docs ||= []
     end
 
+    # Fetch the static files in this collection.
+    # Defaults to an empty array if no static files have been read in.
+    #
+    # Returns an array of Jekyll::StaticFile objects.
+    def files
+      @files ||= []
+    end
+
     # Read the allowed documents into the collection's array of docs.
     #
     # Returns the sorted array of docs.
     def read
       filtered_entries.each do |file_path|
-        doc = Jekyll::Document.new(Jekyll.sanitized_path(directory, file_path), { site: site, collection: self })
-        doc.read
-        docs << doc
+        full_path = Jekyll.sanitized_path(directory, file_path)
+        if Utils.has_yaml_header? full_path
+          doc = Jekyll::Document.new(full_path, { site: site, collection: self })
+          doc.read
+          docs << doc
+        else
+          relative_dir = File.join(relative_directory, File.dirname(file_path)).chomp("/.")
+          files << StaticFile.new(site, site.source, relative_dir, File.basename(full_path), self)
+        end
       end
       docs.sort!
     end
@@ -118,6 +132,7 @@ module Jekyll
       metadata.merge({
         "label"     => label,
         "docs"      => docs,
+        "files"     => files,
         "directory" => directory,
         "output"    => write?,
         "relative_directory" => relative_directory

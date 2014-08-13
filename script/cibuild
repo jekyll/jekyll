@@ -2,6 +2,15 @@
 
 set -e
 
+parallelize_tests() {
+  ls -1 script/{test,cucumber,proof} | xargs -P 3 -L 1 /bin/bash
+}
+
+serialize_tests() {
+  script/proof
+  script/test
+  script/cucumber
+}
+
 script/branding
-script/proof
-script/test
+time parallelize_tests
