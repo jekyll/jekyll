@@ -101,6 +101,16 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
 
 ## Built-in permalink styles
 
+**Note:** these may only apply to posts, not to pages, collections or
+static files. For example, `pretty` changes page permalinks from
+`/:path/:basename:output_ext` to `/:page/:basename/` if the page is HTML,
+thus "prettyifying" the page permalink. The `date`, `none`, and all custom
+values do not apply to pages. No permalink style applies to static files,
+and collections have their own means of specifying permalinks. It's all
+rather confusing but check out [Issue #2691](https://github.com/jekyll/jekyll/issues/2691)
+for more background on the subject, and submit a PR if you're adventurous
+enough to fix it all!
+
 <div class="mobile-side-scroller">
 <table>
   <thead>

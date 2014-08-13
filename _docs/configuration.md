@@ -304,13 +304,13 @@ defaults:
   -
     scope:
       path: "" # an empty string here means all files in the project
-      type: "post"
+      type: "posts"
     values:
       layout: "default"
 {% endhighlight %}
 
-Now, this will only set the layout for files where the type is `post`.
-The different types that are available to you are `page`, `post`, `draft` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
+Now, this will only set the layout for files where the type is `posts`.
+The different types that are available to you are `pages`, `posts`, `drafts` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
 
 As mentioned earlier, you can set multiple scope/values pairs for `defaults`.
 
@@ -319,17 +319,16 @@ defaults:
   -
     scope:
       path: ""
-      type: "post"
+      type: "posts"
     values:
       layout: "my-site"
   -
     scope:
       path: "projects"
-      type: "page"
+      type: "pages"
     values:
       layout: "project" # overrides previous default layout
       author: "Mr. Hyde"
-      category: "project"
 {% endhighlight %}
 
 With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde` as well as have the category for the page set to `project`.
@@ -343,7 +342,7 @@ defaults:
   -
     scope:
       path: ""
-      type: "my_collection" # a collection in your site
+      type: "my_collection" # a collection in your site, in plural form
     values:
       layout: "default"
 {% endhighlight %}
@@ -365,7 +364,7 @@ defaults:
   -
     scope:
       path: "projects"
-      type: "page"
+      type: "pages"
     values:
       layout: "project"
       author: "Mr. Hyde"
@@ -406,7 +405,7 @@ destination: ./_site
 plugins:     ./_plugins
 layouts:     ./_layouts
 data_source: ./_data
-collections: nil
+collections: null
 
 # Handling Reading
 safe:         false
@@ -418,7 +417,7 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 textile_ext:  "textile"
 
 # Filtering Content
-show_drafts: nil
+show_drafts: null
 limit_posts: 0
 future:      true
 unpublished: false
@@ -445,7 +444,7 @@ relative_permalinks: false
 # Outputting
 permalink:     date
 paginate_path: /page:num
-timezone:      nil
+timezone:      null
 
 quiet:    false
 defaults: []
@@ -497,13 +496,14 @@ Jekyll handles two special Redcarpet extensions:
 
 - `no_fenced_code_blocks` --- By default, Jekyll sets the `fenced_code_blocks` extension (for delimiting code blocks with triple tildes or triple backticks) to `true`, probably because GitHub's eager adoption of them is starting to make them inescapable. Redcarpet's normal `fenced_code_blocks` extension is inert when used with Jekyll; instead, you can use this inverted version of the extension for disabling fenced code.
 
-    Note that you can also specify a language for highlighting after the first delimiter:
+Note that you can also specify a language for highlighting after the first delimiter:
 
         ```ruby
         # ...ruby code
         ```
 
-    With both fenced code blocks and highlighter enabled, this will statically highlight the code; without any syntax highlighter, it will add a `class="LANGUAGE"` attribute to the `<code>` element, which can be used as a hint by various JavaScript code highlighting libraries.
+With both fenced code blocks and highlighter enabled, this will statically highlight the code; without any syntax highlighter, it will add a `class="LANGUAGE"` attribute to the `<code>` element, which can be used as a hint by various JavaScript code highlighting libraries.
+
 - `smart` --- This pseudo-extension turns on SmartyPants, which converts straight quotes to curly quotes and runs of hyphens to em (`---`) and en (`--`) dashes.
 
 All other extensions retain their usual names from Redcarpet, and no renderer options aside from `smart` can be specified in Jekyll. [A list of available extensions can be found in the Redcarpet README file.][redcarpet_extensions] Make sure you're looking at the README for the right version of Redcarpet: Jekyll currently uses v2.2.x, and extensions like `footnotes` and `highlight` weren't added until after version 3.0.0. The most commonly used extensions are:

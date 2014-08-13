@@ -201,6 +201,18 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Converting Sass/SCSS</strong></p>
+        <p>Convert a Sass- or SCSS-formatted string into CSS.</p>
+      </td>
+      <td class="align-center">
+        <p>
+          <code class="filter">{% raw %}{{ some_scss | scssify }}{% endraw %}</code>
+          <code class="filter">{% raw %}{{ some_sass | sassify }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Data To JSON</strong></p>
         <p>Convert Hash or Array to JSON.</p>
       </td>

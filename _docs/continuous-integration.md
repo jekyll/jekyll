@@ -98,7 +98,7 @@ language: ruby
 {% endhighlight %}
 
 This line tells Travis to use a Ruby build container. It gives your script
-access to Bundler, RubyGems, and and Ruby runtime.
+access to Bundler, RubyGems, and a Ruby runtime.
 
 {% highlight yaml %}
 rvm:
