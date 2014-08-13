@@ -28,6 +28,7 @@
   * Front Matter default types should always be pluralized (#2732)
   * Read in static files into `collection.files` as `StaticFile`s (#2737)
   * Add `sassify` and `scssify` Liquid filters (#2739)
+  * Replace `classifier` gem with `classifier-reborn` (#2721)
 
 ### Bug Fixes
 
