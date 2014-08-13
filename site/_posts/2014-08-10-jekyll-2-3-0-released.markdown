@@ -11,14 +11,17 @@ This latest release of Jekyll includes a slew of enhancements and bug
 fixes. Some of the highlights:
 
 * Pages, Posts, and Drafts can now be converted by multiple converters.
+* Static files can now be safely included in collections. They'll be placed
+  in a `collection.files` array. `collection.docs` still holds exclusively
+  content with YAML front matter.
 * Sass files can once again be rendered by Liquid. However, neither Sass
-  nor CoffeeScript can ever have a layout.
+  nor CoffeeScript can ever have a layout. Bonus: `scssify` and `sassify`
+  Liquid filters.
 * Partial variables allowed now in the path argument of `include` calls
 * We added a `jekyll help` command. Pass it a subcommand to see more info
   about that subcommand. Or don't, to see the help for `jekyll` itself.
 * Lots of fixes to the site template we use for `jekyll new`, including
   converting the CSS into SCSS.
-* Fix for static files in collections (e.g. images)
 * The `jsonify` filter will now call `#to_liquid` for you
 * Lots, lots more!
 
