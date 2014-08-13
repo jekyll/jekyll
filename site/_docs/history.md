@@ -25,6 +25,7 @@ prev_section: contributing
 - Front Matter default types should always be pluralized ([#2732]({{ site.repository }}/issues/2732))
 - Read in static files into `collection.files` as `StaticFile`s ([#2737]({{ site.repository }}/issues/2737))
 - Add `sassify` and `scssify` Liquid filters ([#2739]({{ site.repository }}/issues/2739))
+- Replace `classifier` gem with `classifier-reborn` ([#2721]({{ site.repository }}/issues/2721))
 
 ### Bug Fixes
 {: #bug-fixes-v2-3-0}
@@ -53,6 +54,7 @@ prev_section: contributing
 {: #site-enhancements-v2-3-0}
 
 - Use Sass and a Docs Collection ([#2651]({{ site.repository }}/issues/2651))
+- Add `latest_version.txt` file to the site ([#2740]({{ site.repository }}/issues/2740))
 - Be more ambiguous about `page.content`. But more transparent. ([#2522]({{ site.repository }}/issues/2522))
 - Streamlining front matter wording (instead of front-matter/frontmatter) ([#2674]({{ site.repository }}/issues/2674))
 - Add note that source directory cannot be modified in GitHub Pages ([#2669]({{ site.repository }}/issues/2669))
