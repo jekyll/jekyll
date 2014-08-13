@@ -10,6 +10,9 @@
 
 ### Site Enhancements
 
+  * Remove deprecated `jekyll-projectlist` plugin from list of third-party
+    plugins (#2742)
+
 ## 2.3.0 / 2014-08-10
 
 ### Minor Enhancements
