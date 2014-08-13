@@ -16,6 +16,7 @@
   * Move instances of `Time.parse` into a Utils method (#2682)
   * Ignore subfolders in the `_posts` folder (#2705) REVERTS (#2633)
   * Front Matter default types should always be pluralized (#2732)
+  * Read in static files into `collection.files` as `StaticFile`s (#2737)
 
 ### Bug Fixes
 
