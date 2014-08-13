@@ -54,6 +54,7 @@
 ### Site Enhancements
 
   * Use Sass and a Docs Collection (#2651)
+  * Add `latest_version.txt` file to the site (#2740)
   * Be more ambiguous about `page.content`. But more transparent. (#2522)
   * Streamlining front matter wording (instead of front-matter/frontmatter) (#2674)
   * Add note that source directory cannot be modified in GitHub Pages (#2669)
