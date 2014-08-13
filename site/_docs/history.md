@@ -23,6 +23,8 @@ prev_section: contributing
 - Move instances of `Time.parse` into a Utils method ([#2682]({{ site.repository }}/issues/2682))
 - Ignore subfolders in the `_posts` folder ([#2705]({{ site.repository }}/issues/2705)) REVERTS ([#2633]({{ site.repository }}/issues/2633))
 - Front Matter default types should always be pluralized ([#2732]({{ site.repository }}/issues/2732))
+- Read in static files into `collection.files` as `StaticFile`s ([#2737]({{ site.repository }}/issues/2737))
+- Add `sassify` and `scssify` Liquid filters ([#2739]({{ site.repository }}/issues/2739))
 
 ### Bug Fixes
 {: #bug-fixes-v2-3-0}
@@ -45,6 +47,7 @@ prev_section: contributing
 
 - Only include lib files in the gem ([#2671]({{ site.repository }}/issues/2671))
 - Fix `git diff` command in `proof` script ([#2672]({{ site.repository }}/issues/2672))
+- Make default rake task a multitask so tests run in parallel ([#2735]({{ site.repository }}/issues/2735))
 
 ### Site Enhancements
 {: #site-enhancements-v2-3-0}
