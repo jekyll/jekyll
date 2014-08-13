@@ -160,7 +160,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish => [:history] do
+  task :publish => [:history, :version_file] do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
@@ -213,6 +213,11 @@ namespace :site do
     else
       abort "You seem to have misplaced your History.markdown file. I can haz?"
     end
+  end
+
+  desc "Write the site latest_version.txt file"
+  task :version_file do
+    File.open('site/latest_version.txt', 'wb') { |f| f.write(version) }
   end
 
   namespace :releases do
