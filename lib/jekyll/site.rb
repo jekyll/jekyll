@@ -187,7 +187,7 @@ module Jekyll
 
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
-        full_path = Jekyll.sanitized_path(source, File.join(dir, entry))
+        full_path = Jekyll.sanitized_path(source, File.join(dir, magic_dir, entry))
         if klass.valid?(entry) && Utils.has_yaml_header?(full_path)
           klass.new(self, source, dir, entry)
         end
