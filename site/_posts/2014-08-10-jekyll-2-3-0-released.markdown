@@ -10,6 +10,8 @@ categories: [release]
 This latest release of Jekyll includes a slew of enhancements and bug
 fixes. Some of the highlights:
 
+* Strange bug around spacing/indentation should be resolved. [It was a
+  curious bug indeed.](https://github.com/jekyll/jekyll/issues/2676)
 * Pages, Posts, and Drafts can now be converted by multiple converters.
 * Static files can now be safely included in collections. They'll be placed
   in a `collection.files` array. `collection.docs` still holds exclusively
