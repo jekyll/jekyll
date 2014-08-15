@@ -31,7 +31,7 @@ module Jekyll
       @path = url
 
       @data = {
-        "layout" => site.config['archive_layout']
+        "layout" => site.config['archive']['layout']
       }
       @content = ""
     end
@@ -40,12 +40,7 @@ module Jekyll
     #
     # Returns the template String.
     def template
-      case type
-      when "year"
-        "/archive/:name/"
-      else
-        "/:type/:name/"
-      end
+      site.config['archive']['permalinks'][type]
     end
 
     # Returns a hash of URL placeholder names (as symbols) mapping to the

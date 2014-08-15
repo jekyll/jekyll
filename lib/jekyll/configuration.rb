@@ -96,7 +96,14 @@ module Jekyll
       },
 
       # Archives configuration
-      'archive_layout' => 'archive'
+      'archive' => {
+        'layout' => 'archive',
+        'permalinks' => {
+          'year' => '/archive/:name/',
+          'tag' => '/tag/:name/',
+          'category' => '/category/:name/'
+        }
+      }
     }
 
     # Public: Turn all keys into string
