@@ -32,7 +32,8 @@ SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
 
-  # internal requires
+  # internal requires\
+  autoload :Archive,             'jekyll/archive'
   autoload :Cleaner,             'jekyll/cleaner'
   autoload :Collection,          'jekyll/collection'
   autoload :Configuration,       'jekyll/configuration'

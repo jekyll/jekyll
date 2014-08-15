@@ -93,7 +93,10 @@ module Jekyll
 
       'redcloth' => {
         'hard_breaks' => true
-      }
+      },
+
+      # Archives configuration
+      'archive_layout' => 'archive'
     }
 
     # Public: Turn all keys into string
