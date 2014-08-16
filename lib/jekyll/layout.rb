@@ -14,6 +14,9 @@ module Jekyll
     # Gets/Sets the Hash that holds the metadata for this layout.
     attr_accessor :data
 
+    # Gets/Sets the raw content of this layout.
+    attr_accessor :raw
+
     # Gets/Sets the content of this layout.
     attr_accessor :content
 

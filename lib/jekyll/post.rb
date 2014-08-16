@@ -21,6 +21,7 @@ module Jekyll
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
+      raw
       content
       excerpt
     ]
@@ -34,7 +35,7 @@ module Jekyll
     end
 
     attr_accessor :site
-    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
+    attr_accessor :data, :extracted_excerpt, :raw, :content, :output, :ext
     attr_accessor :date, :slug, :tags, :categories
 
     attr_reader :name

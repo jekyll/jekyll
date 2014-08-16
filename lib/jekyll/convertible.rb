@@ -7,6 +7,8 @@ require 'set'
 #
 # Requires
 #   self.site -> Jekyll::Site
+#   self.raw
+#   self.raw=
 #   self.content
 #   self.content=
 #   self.data=
@@ -55,6 +57,7 @@ module Jekyll
         Jekyll.logger.warn "Error reading file #{File.join(base, name)}: #{e.message}"
       end
 
+      self.raw = self.content
       self.data ||= {}
     end
 
