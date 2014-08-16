@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'csv'
 
 module Jekyll
   class Site
@@ -212,7 +213,7 @@ module Jekyll
       return unless File.directory?(dir) && (!safe || !File.symlink?(dir))
 
       entries = Dir.chdir(dir) do
-        Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
+        Dir['*.{yaml,yml,json,csv}'] + Dir['*'].select { |fn| File.directory?(fn) }
       end
 
       entries.each do |entry|
@@ -223,7 +224,12 @@ module Jekyll
         if File.directory?(path)
           read_data_to(path, data[key] = {})
         else
-          data[key] = SafeYAML.load_file(path)
+          case File.extname(path).downcase
+          when '.csv'
+            data[key] = CSV.read(path, headers: true).map{|x| x.to_hash}
+          else
+            data[key] = SafeYAML.load_file(path)
+          end
         end
       end
     end
