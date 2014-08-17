@@ -226,7 +226,7 @@ module Jekyll
         else
           case File.extname(path).downcase
           when '.csv'
-            data[key] = CSV.read(path, headers: true).map(&:to_hash)
+            data[key] = CSV.read(path, :headers => true).map(&:to_hash)
           else
             data[key] = SafeYAML.load_file(path)
           end
