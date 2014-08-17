@@ -12,6 +12,7 @@ module Jekyll
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
       'data_source'   =>  '_data',
+      'data_destination' => nil,
       'collections'   => nil,
 
       # Handling Reading
