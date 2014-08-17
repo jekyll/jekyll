@@ -263,8 +263,8 @@ module Jekyll
         page_or_post.render(layouts, payload)
       end
       
-      if config['data_target']
-        FileUtils.cp_r "#{config['data_source']}/.", config['data_target']
+      if config['data_destination']
+        FileUtils.cp_r "#{config['data_source']}/.", config['data_destination']
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir

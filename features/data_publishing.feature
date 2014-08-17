@@ -20,7 +20,7 @@ Feature: Data
   Scenario: Publish all files from _data directory if config var is set
     Given I have a "_config.yml" file with content:
       """
-      data_target: data
+      data_destination: data
       """
     When I run jekyll build
     Then the "data/products.yaml" file should exist
