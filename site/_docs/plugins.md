@@ -369,7 +369,7 @@ There are two flags to be aware of when writing a plugin:
           executed in an environment where arbitrary code execution is not
           allowed. This is used by GitHub Pages to determine which core plugins
           may be used, and which are unsafe to run. If your plugin does not
-          allow for arbitrary code, execution, set this to <code>true</code>.
+          allow for arbitrary code execution, set this to <code>true</code>.
           GitHub Pages still won’t load your plugin, but if you submit it for
           inclusion in core, it’s best for this to be correct!
         </p>
