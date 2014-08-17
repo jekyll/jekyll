@@ -18,6 +18,7 @@
   * Add `markdown-writer` package for Atom Editor to list of third-party
     plugins (#2763)
   * Fix typo in site documentation for collections (#2764)
+  * Fix minor typo on plugins docs page (#2765)
 
 ## 2.3.0 / 2014-08-10
 
