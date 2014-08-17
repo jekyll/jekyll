@@ -93,6 +93,16 @@ module Jekyll
 
       'redcloth' => {
         'hard_breaks' => true
+      },
+
+      # Archives configuration
+      'archive' => {
+        'layout' => 'archive',
+        'permalinks' => {
+          'year' => '/archive/:name/',
+          'tag' => '/tag/:name/',
+          'category' => '/category/:name/'
+        }
       }
     }
 

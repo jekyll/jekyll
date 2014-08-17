@@ -2,7 +2,7 @@
 
 module Jekyll
   class Site
-    attr_accessor :config, :layouts, :posts, :pages, :static_files,
+    attr_accessor :config, :layouts, :posts, :pages, :static_files, :archives,
                   :exclude, :include, :source, :dest, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
@@ -56,6 +56,7 @@ module Jekyll
       self.posts = []
       self.pages = []
       self.static_files = []
+      self.archives = []
       self.data = {}
       @collections = nil
 
@@ -121,6 +122,7 @@ module Jekyll
       read_directories
       read_data(config['data_source'])
       read_collections
+      read_archives
     end
 
     # Recursively traverse directories to find posts, pages and static files
@@ -237,6 +239,21 @@ module Jekyll
       end
     end
 
+    # Generate all archive pages
+    #
+    # Returns nothing.
+    def read_archives
+      tags.each do |tag|
+        archives << Archive.new(self, tag[1], "tag", tag[0])
+      end
+      categories.each do |category|
+        archives << Archive.new(self, category[1], "category", category[0])
+      end
+      years.each do |year|
+        archives << Archive.new(self, year[1], "year", year[0])
+      end
+    end
+
     # Run each of the Generators.
     #
     # Returns nothing.
@@ -261,6 +278,10 @@ module Jekyll
       payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
         page_or_post.render(layouts, payload)
+      end
+
+      archives.each do |archive|
+        archive.render(layouts, payload)
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir
@@ -308,6 +329,14 @@ module Jekyll
 
     def categories
       post_attr_hash('categories')
+    end
+
+    # Custom `post_attr_hash` method for years
+    def years
+      hash = Hash.new { |h, key| h[key] = [] }
+      posts.each { |p| hash[p.date.year.to_s] << p }
+      hash.values.each { |posts| posts.sort!.reverse! }
+      hash
     end
 
     # Prepare site data for site payload. The method maintains backward compatibility
@@ -437,7 +466,7 @@ module Jekyll
     end
 
     def each_site_file
-      %w(posts pages static_files docs_to_write).each do |type|
+      %w(posts pages static_files docs_to_write archives).each do |type|
         send(type).each do |item|
           yield item
         end
