@@ -8,6 +8,8 @@
 
 ### Development Fixes
 
+  * Update simplecov gem to 0.9 (#2748)
+
 ### Site Enhancements
 
   * Remove deprecated `jekyll-projectlist` plugin from list of third-party
