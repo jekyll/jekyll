@@ -14,6 +14,7 @@
 
   * Remove deprecated `jekyll-projectlist` plugin from list of third-party
     plugins (#2742)
+  * Remove tag plugins that are built in to Jekyll (#2751)
 
 ## 2.3.0 / 2014-08-10
 
