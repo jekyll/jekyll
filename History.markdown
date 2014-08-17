@@ -17,6 +17,7 @@
   * Remove tag plugins that are built in to Jekyll (#2751)
   * Add `markdown-writer` package for Atom Editor to list of third-party
     plugins (#2763)
+  * Fix typo in site documentation for collections (#2764)
 
 ## 2.3.0 / 2014-08-10
 
