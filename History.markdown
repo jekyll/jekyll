@@ -11,6 +11,7 @@
 ### Development Fixes
 
   * Update simplecov gem to 0.9 (#2748)
+  * Remove `docs/` dir (#2768)
 
 ### Site Enhancements
 
