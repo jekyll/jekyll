@@ -4,7 +4,7 @@
 
 ### Minor Enhancements
 
-* Add support for CSV files in the `_data` directory (#2761)
+  * Add support for CSV files in the `_data` directory (#2761)
 
 ### Bug Fixes
 
