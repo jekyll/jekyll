@@ -57,7 +57,7 @@ module Jekyll
       read_yaml(@base, name)
 
       data.default_proc = proc do |hash, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+        site.frontmatter_defaults.find(relative_path, type, key)
       end
 
       if data.key?('date')
