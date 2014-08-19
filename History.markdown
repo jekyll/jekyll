@@ -8,6 +8,8 @@
 
 ### Bug Fixes
 
+  * Fix encoding of `main.scss` in site template (#2771)
+
 ### Development Fixes
 
   * Update simplecov gem to 0.9 (#2748)
