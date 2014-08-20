@@ -25,7 +25,7 @@ module Jekyll
 
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      !(data.key?('published') && data['published'] == false)
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
@@ -43,7 +43,7 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name, opts = {})
       begin
-        self.content = File.read(File.join(base, name),
+        self.content = File.read(Jekyll.sanitized_path(base, name),
                                  merged_file_read_opts(opts))
         if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
@@ -62,11 +62,14 @@ module Jekyll
     #
     # Returns nothing.
     def transform
-      self.content = converter.convert(content)
-    rescue => e
-      Jekyll.logger.error "Conversion error:", "There was an error converting" +
-        " '#{path}'."
-      raise e
+      converters.reduce(content) do |output, converter|
+        begin
+          converter.convert output
+        rescue => e
+          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error converting '#{path}'."
+          raise e
+        end
+      end
     end
 
     # Determine the extension depending on content_type.
@@ -74,15 +77,21 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      converter.output_ext(ext)
+      if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
+        ext
+      else
+        converters.map { |c|
+          c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
+        }.compact.last
+      end
     end
 
     # Determine which converter to use based on this convertible's
     # extension.
     #
     # Returns the Converter instance.
-    def converter
-      @converter ||= site.converters.find { |c| c.matches(ext) }
+    def converters
+      @converters ||= site.converters.select { |c| c.matches(ext) }.sort
     end
 
     # Render Liquid in the content
@@ -119,12 +128,12 @@ module Jekyll
     #
     # Returns the type of self.
     def type
-      if is_a?(Post)
-        :post
+      if is_a?(Draft)
+        :drafts
+      elsif is_a?(Post)
+        :posts
       elsif is_a?(Page)
-        :page
-      elsif is_a?(Draft)
-        :draft
+        :pages
       end
     end
 
@@ -134,7 +143,21 @@ module Jekyll
     # Returns true if the extname belongs to the set of extensions
     #   that asset files use.
     def asset_file?
-      %w[.sass .scss .coffee].include?(ext)
+      sass_file? || coffeescript_file?
+    end
+
+    # Determine whether the document is a Sass file.
+    #
+    # Returns true if extname == .sass or .scss, false otherwise.
+    def sass_file?
+      %w[.sass .scss].include?(ext)
+    end
+
+    # Determine whether the document is a CoffeeScript file.
+    #
+    # Returns true if extname == .coffee, false otherwise.
+    def coffeescript_file?
+      '.coffee'.eql?(ext)
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -142,7 +165,7 @@ module Jekyll
     # Returns false if the document is either an asset file or a yaml file,
     #   true otherwise.
     def render_with_liquid?
-      !asset_file?
+      !coffeescript_file?
     end
 
     # Determine whether the file should be placed into layouts.
@@ -151,6 +174,15 @@ module Jekyll
     #   true otherwise.
     def place_in_layout?
       !asset_file?
+    end
+
+    # Checks if the layout specified in the document actually exists
+    #
+    # layout - the layout to check
+    #
+    # Returns true if the layout is invalid, false if otherwise
+    def invalid_layout?(layout)
+      !data["layout"].nil? && layout.nil? && !(self.is_a? Jekyll::Excerpt)
     end
 
     # Recursively render layouts
@@ -163,6 +195,9 @@ module Jekyll
     def render_all_layouts(layouts, payload, info)
       # recursively render layouts
       layout = layouts[data["layout"]]
+
+      Jekyll.logger.warn("Build Warning:", "Layout '#{data["layout"]}' requested in #{path} does not exist.") if invalid_layout? layout
+
       used = Set.new([layout])
 
       while layout
@@ -193,11 +228,11 @@ module Jekyll
       info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converter.highlighter_prefix
-      payload["highlighter_suffix"] = converter.highlighter_suffix
+      payload["highlighter_prefix"] = converters.first.highlighter_prefix
+      payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
       self.content = render_liquid(content, payload, info) if render_with_liquid?
-      transform
+      self.content = transform
 
       # output keeps track of what will finally be written
       self.output = content

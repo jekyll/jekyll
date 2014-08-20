@@ -36,8 +36,8 @@ class TestRelatedPosts < Test::Unit::TestCase
     should "use lsi for the related posts" do
       @site.reset
       @site.read
-      require 'classifier'
-      any_instance_of(::Classifier::LSI) do |c|
+      require 'classifier-reborn'
+      any_instance_of(::ClassifierReborn::LSI) do |c|
         stub(c).find_related { @site.posts[-1..-9] }
         stub(c).build_index
       end

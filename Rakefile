@@ -14,7 +14,7 @@ require 'jekyll/version'
 #############################################################################
 
 def name
-  @name ||= Dir['*.gemspec'].first.split('.').first
+  @name ||= File.basename(Dir['*.gemspec'].first, ".*")
 end
 
 def version
@@ -53,13 +53,32 @@ def liquid_escape(markdown)
   markdown.gsub(/(`{[{%].+[}%]}`)/, "{% raw %}\\1{% endraw %}")
 end
 
+def custom_release_header_anchors(markdown)
+  header_regexp = /^(\d{1,2})\.(\d{1,2})\.(\d{1,2}) \/ \d{4}-\d{2}-\d{2}/
+  section_regexp = /^### \w+ \w+$/
+  markdown.split(/^##\s/).map do |release_notes|
+    _, major, minor, patch = *release_notes.match(header_regexp)
+    release_notes
+      .gsub(header_regexp, "\\0\n{: #v\\1-\\2-\\3}")
+      .gsub(section_regexp) { |section| "#{section}\n{: ##{sluffigy(section)}-v#{major}-#{minor}-#{patch}}" }
+  end.join("\n## ")
+end
+
+def sluffigy(header)
+  header.gsub(/#/, '').strip.downcase.gsub(/\s+/, '-')
+end
+
 def remove_head_from_history(markdown)
   index = markdown =~ /^##\s+\d+\.\d+\.\d+/
   markdown[index..-1]
 end
 
 def converted_history(markdown)
-  remove_head_from_history(liquid_escape(linkify(normalize_bullets(markdown))))
+  remove_head_from_history(
+    custom_release_header_anchors(
+      liquid_escape(
+        linkify(
+          normalize_bullets(markdown)))))
 end
 
 #############################################################################
@@ -68,14 +87,7 @@ end
 #
 #############################################################################
 
-if ENV["TRAVIS"] == "true"
-  require 'coveralls/rake/task'
-  Coveralls::RakeTask.new
-
-  task :default => [:test, :features, 'coveralls:push']
-else
-  task :default => [:test, :features]
-end
+multitask :default => [:test, :features]
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
@@ -148,7 +160,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish => [:history] do
+  task :publish => [:history, :version_file] do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
@@ -192,7 +204,7 @@ namespace :site do
         "permalink" => "/docs/history/",
         "prev_section" => "contributing"
       }
-      Dir.chdir('site/docs/') do
+      Dir.chdir('site/_docs/') do
         File.open("history.md", "w") do |file|
           file.write("#{front_matter.to_yaml}---\n\n")
           file.write(converted_history(history_file))
@@ -201,6 +213,11 @@ namespace :site do
     else
       abort "You seem to have misplaced your History.markdown file. I can haz?"
     end
+  end
+
+  desc "Write the site latest_version.txt file"
+  task :version_file do
+    File.open('site/latest_version.txt', 'wb') { |f| f.write(version) }
   end
 
   namespace :releases do
@@ -235,18 +252,20 @@ end
 #
 #############################################################################
 
+desc "Release #{name} v#{version}"
 task :release => :build do
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
     exit!
   end
-  sh "git commit --allow-empty -m 'Release #{version}'"
+  sh "git commit --allow-empty -m 'Release :gem: #{version}'"
   sh "git tag v#{version}"
   sh "git push origin master"
   sh "git push origin v#{version}"
   sh "gem push pkg/#{name}-#{version}.gem"
 end
 
+desc "Build #{name} v#{version} into pkg/"
 task :build do
   mkdir_p "pkg"
   sh "gem build #{gemspec_file}"

@@ -19,21 +19,6 @@ module Jekyll
         super(base)
       end
 
-      # Listing of all directories (globbed to include subfiles and folders)
-      #
-      # source - the source path
-      # destination - the destination path
-      #
-      # Returns an Array of directory globs in the source, excluding the destination
-      def globs(source, destination)
-        Dir.chdir(source) do
-          dirs = Dir['*'].select { |x| File.directory?(x) }
-          dirs -= [destination, File.expand_path(destination), File.basename(destination)]
-          dirs = dirs.map { |x| "#{x}/**/*" }
-          dirs += ['*']
-        end
-      end
-
       # Run Site#process and catch errors
       #
       # site - the Jekyll::Site object
@@ -41,7 +26,7 @@ module Jekyll
       # Returns nothing
       def process_site(site)
         site.process
-      rescue Jekyll::FatalException => e
+      rescue Jekyll::Errors::FatalException => e
         Jekyll.logger.error "ERROR:", "YOUR SITE COULD NOT BE BUILT:"
         Jekyll.logger.error "", "------------------------------------"
         Jekyll.logger.error "", e.message

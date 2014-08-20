@@ -1,3 +1,6 @@
+# encoding: UTF-8
+require 'csv'
+
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
@@ -49,7 +52,7 @@ module Jekyll
     #
     # Returns nothing
     def reset
-      self.time = (config['time'] ? Time.parse(config['time'].to_s) : Time.now)
+      self.time = (config['time'] ? Utils.parse_date(config['time'].to_s, "Invalid time in _config.yml.") : Time.now)
       self.layouts = {}
       self.posts = []
       self.pages = []
@@ -80,7 +83,7 @@ module Jekyll
       dest_pathname = Pathname.new(dest)
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
-          raise FatalException.new "Destination directory cannot be or contain the Source directory."
+          raise Errors::FatalException.new "Destination directory cannot be or contain the Source directory."
         end
       end
     end
@@ -142,7 +145,7 @@ module Jekyll
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
-        elsif has_yaml_header?(f_abs)
+        elsif Utils.has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
           pages << page if publisher.publish?(page)
         else
@@ -195,7 +198,7 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = File.join(source, dir)
+      base = Jekyll.sanitized_path(source, dir)
       read_data_to(base, self.data)
     end
 
@@ -210,18 +213,23 @@ module Jekyll
       return unless File.directory?(dir) && (!safe || !File.symlink?(dir))
 
       entries = Dir.chdir(dir) do
-        Dir['*.{yaml,yml,json}'] + Dir['*'].select { |fn| File.directory?(fn) }
+        Dir['*.{yaml,yml,json,csv}'] + Dir['*'].select { |fn| File.directory?(fn) }
       end
 
       entries.each do |entry|
-        path = File.join(dir, entry)
+        path = Jekyll.sanitized_path(dir, entry)
         next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
         if File.directory?(path)
           read_data_to(path, data[key] = {})
         else
-          data[key] = SafeYAML.load_file(path)
+          case File.extname(path).downcase
+          when '.csv'
+            data[key] = CSV.read(path, :headers => true).map(&:to_hash)
+          else
+            data[key] = SafeYAML.load_file(path)
+          end
         end
       end
     end
@@ -341,7 +349,7 @@ module Jekyll
             "posts"        => posts.sort { |a, b| b <=> a },
             "pages"        => pages,
             "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
-            "html_pages"   => pages.reject { |page| !page.html? },
+            "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
             "categories"   => post_attr_hash('categories'),
             "tags"         => post_attr_hash('tags'),
             "collections"  => collections,
@@ -430,7 +438,7 @@ module Jekyll
 
     def documents
       collections.reduce(Set.new) do |docs, (_, collection)|
-        docs.merge(collection.docs)
+        docs + collection.docs + collection.files
       end.to_a
     end
 
@@ -443,17 +451,13 @@ module Jekyll
     end
 
     def frontmatter_defaults
-      @frontmatter_defaults ||= Configuration::FrontmatterDefaults.new(self)
+      @frontmatter_defaults ||= FrontmatterDefaults.new(self)
     end
 
     private
 
     def has_relative_page?
       pages.any? { |page| page.uses_relative_permalinks }
-    end
-
-    def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
     def limit_posts!

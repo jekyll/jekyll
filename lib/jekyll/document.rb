@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Jekyll
   class Document
     include Comparable
@@ -15,6 +17,7 @@ module Jekyll
       @site = relations[:site]
       @path = path
       @collection = relations[:collection]
+      @has_yaml_header = nil
     end
 
     # Fetch the Document's data.
@@ -77,7 +80,21 @@ module Jekyll
     # Returns true if the extname belongs to the set of extensions
     #   that asset files use.
     def asset_file?
-      %w[.sass .scss .coffee].include?(extname)
+      sass_file? || coffeescript_file?
+    end
+
+    # Determine whether the document is a Sass file.
+    #
+    # Returns true if extname == .sass or .scss, false otherwise.
+    def sass_file?
+      %w[.sass .scss].include?(extname)
+    end
+
+    # Determine whether the document is a CoffeeScript file.
+    #
+    # Returns true if extname == .coffee, false otherwise.
+    def coffeescript_file?
+      '.coffee'.eql?(extname)
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -85,7 +102,7 @@ module Jekyll
     # Returns false if the document is either an asset file or a yaml file,
     #   true otherwise.
     def render_with_liquid?
-      !(asset_file? || yaml_file?)
+      !(coffeescript_file? || yaml_file?)
     end
 
     # Determine whether the file should be placed into layouts.
@@ -127,7 +144,7 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url ||= URL.new({
+      @url = URL.new({
         template:     url_template,
         placeholders: url_placeholders,
         permalink:    permalink
@@ -172,10 +189,12 @@ module Jekyll
     #
     # Returns true if the 'published' key is specified in the YAML front-matter and not `false`.
     def published?
-      !(data.has_key?('published') && data['published'] == false)
+      !(data.key?('published') && data['published'] == false)
     end
 
     # Read in the file and assign the content and data based on the file contents.
+    # Merge the frontmatter of the file with the frontmatter default
+    # values
     #
     # Returns nothing.
     def read(opts = {})
@@ -183,10 +202,17 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
+          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
+          unless defaults.empty?
+            @data = defaults
+          end
           @content = File.read(path, merged_file_read_opts(opts))
           if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
             @content = $POSTMATCH
-            @data    = SafeYAML.load($1)
+            data_file = SafeYAML.load($1)
+            unless data_file.nil?
+              @data = Utils.deep_merge_hashes(defaults, data_file)
+            end
           end
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"
@@ -226,7 +252,7 @@ module Jekyll
     #
     # Returns the content of the document
     def to_s
-      output || content
+      content || ''
     end
 
     # Compare this document against another document.

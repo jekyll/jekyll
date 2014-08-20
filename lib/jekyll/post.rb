@@ -60,8 +60,8 @@ module Jekyll
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
-      if data.has_key?('date')
-        self.date = Time.parse(data["date"].to_s)
+      if data.key?('date')
+        self.date = Utils.parse_date(data["date"].to_s, "Post '#{relative_path}' does not have a valid date in the YAML front matter.")
       end
 
       populate_categories
@@ -69,7 +69,7 @@ module Jekyll
     end
 
     def published?
-      if data.has_key?('published') && data['published'] == false
+      if data.key?('published') && data['published'] == false
         false
       else
         true
@@ -77,10 +77,10 @@ module Jekyll
     end
 
     def populate_categories
-      if categories.empty?
-        self.categories = Utils.pluralized_array_from_hash(data, 'category', 'categories').map {|c| c.to_s.downcase}
-      end
-      categories.flatten!
+      categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
+      self.categories = (
+        Array(categories) + categories_from_data
+      ).map {|c| c.to_s.downcase}.flatten.uniq
     end
 
     def populate_tags
@@ -159,14 +159,9 @@ module Jekyll
     # Returns nothing.
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
-      self.date = Time.parse(date)
+      self.date = Utils.parse_date(date, "Post '#{relative_path}' does not have a valid date in the filename.")
       self.slug = slug
       self.ext = ext
-    rescue ArgumentError
-      path = File.join(@dir || "", name)
-      msg  =  "Post '#{path}' does not have a valid date.\n"
-      msg  << "Fix the date, or exclude the file or directory from being processed"
-      raise FatalException.new(msg)
     end
 
     # The generated directory into which the post will be placed
@@ -221,8 +216,8 @@ module Jekyll
         :month       => date.strftime("%m"),
         :day         => date.strftime("%d"),
         :title       => slug,
-        :i_day       => date.strftime("%d").to_i.to_s,
-        :i_month     => date.strftime("%m").to_i.to_s,
+        :i_day       => date.strftime("%-d"),
+        :i_month     => date.strftime("%-m"),
         :categories  => (categories || []).map { |c| c.to_s }.join('/'),
         :short_month => date.strftime("%b"),
         :short_year  => date.strftime("%y"),

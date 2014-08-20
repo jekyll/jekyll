@@ -6,46 +6,55 @@ module Jekyll
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = {
+      # Where things are
       'source'        => Dir.pwd,
       'destination'   => File.join(Dir.pwd, '_site'),
       'plugins'       => '_plugins',
       'layouts'       => '_layouts',
       'data_source'   =>  '_data',
-      'keep_files'    => ['.git','.svn'],
-      'gems'          => [],
       'collections'   => nil,
 
-      'timezone'      => nil,           # use the local timezone
-
-      'encoding'      => 'utf-8',       # always use utf-8 encoding. NEVER FORGET
-
+      # Handling Reading
       'safe'          => false,
-      'detach'        => false,          # default to not detaching the server
-      'show_drafts'   => nil,
-      'limit_posts'   => 0,
-      'lsi'           => false,
-      'future'        => true,           # remove and make true just default
-      'unpublished'   => false,
-
-      'relative_permalinks' => false,
-
-      'markdown'      => 'kramdown',
-      'highlighter'   => 'pygments',
-      'permalink'     => 'date',
-      'baseurl'       => '',
       'include'       => ['.htaccess'],
       'exclude'       => [],
-      'paginate_path' => '/page:num',
-
+      'keep_files'    => ['.git','.svn'],
+      'encoding'      => 'utf-8',
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'textile_ext'   => 'textile',
 
-      'port'          => '4000',
-      'host'          => '0.0.0.0',
+      # Filtering Content
+      'show_drafts'   => nil,
+      'limit_posts'   => 0,
+      'future'        => true,           # remove and make true just default
+      'unpublished'   => false,
 
+      # Plugins
+      'whitelist'     => [],
+      'gems'          => [],
+
+      # Conversion
+      'markdown'      => 'kramdown',
+      'highlighter'   => 'pygments',
+      'lsi'           => false,
       'excerpt_separator' => "\n\n",
 
-      'defaults'     => [],
+      # Serving
+      'detach'        => false,          # default to not detaching the server
+      'port'          => '4000',
+      'host'          => '0.0.0.0',
+      'baseurl'       => '',
+
+      # Backwards-compatibility options
+      'relative_permalinks' => false,
+
+      # Output Configuration
+      'permalink'     => 'date',
+      'paginate_path' => '/page:num',
+      'timezone'      => nil,           # use the local timezone
+
+      'quiet'         => false,
+      'defaults'      => [],
 
       'maruku' => {
         'use_tex'    => false,
@@ -103,11 +112,15 @@ module Jekyll
       override['source'] || self['source'] || DEFAULTS['source']
     end
 
+    def quiet?(override = {})
+      override['quiet'] || self['quiet'] || DEFAULTS['quiet']
+    end
+
     def safe_load_file(filename)
       case File.extname(filename)
-      when '.toml'
+      when /\.toml/i
         TOML.load_file(filename)
-      when /\.y(a)?ml/
+      when /\.ya?ml/i
         SafeYAML.load_file(filename)
       else
         raise ArgumentError, "No parser for '#{filename}' is available. Use a .toml or .y(a)ml file instead."
@@ -120,6 +133,9 @@ module Jekyll
     #
     # Returns an Array of config files
     def config_files(override)
+      # Be quiet quickly.
+      Jekyll.logger.log_level = :error if quiet?(override)
+
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
       if config_files.to_s.empty?
@@ -192,7 +208,7 @@ module Jekyll
     def backwards_compatibilize
       config = clone
       # Provide backwards-compatibility
-      if config.has_key?('auto') || config.has_key?('watch')
+      if config.key?('auto') || config.key?('watch')
         Jekyll.logger.warn "Deprecation:", "Auto-regeneration can no longer" +
                             " be set from your configuration file(s). Use the"+
                             " --watch/-w command-line option instead."
@@ -200,23 +216,23 @@ module Jekyll
         config.delete('watch')
       end
 
-      if config.has_key? 'server'
+      if config.key? 'server'
         Jekyll.logger.warn "Deprecation:", "The 'server' configuration option" +
                             " is no longer accepted. Use the 'jekyll serve'" +
                             " subcommand to serve your site with WEBrick."
         config.delete('server')
       end
 
-      if config.has_key? 'server_port'
+      if config.key? 'server_port'
         Jekyll.logger.warn "Deprecation:", "The 'server_port' configuration option" +
                             " has been renamed to 'port'. Please update your config" +
                             " file accordingly."
         # copy but don't overwrite:
-        config['port'] = config['server_port'] unless config.has_key?('port')
+        config['port'] = config['server_port'] unless config.key?('port')
         config.delete('server_port')
       end
 
-      if config.has_key? 'pygments'
+      if config.key? 'pygments'
         Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
                             " has been renamed to 'highlighter'. Please update your" +
                             " config file accordingly. The allowed values are 'rouge', " +
@@ -234,6 +250,7 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
+        config[option].map!(&:to_s)
       end
 
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
@@ -247,7 +264,7 @@ module Jekyll
     def fix_common_issues
       config = clone
 
-      if config.has_key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
+      if config.key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
         Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" +
           " positive integer or nil. It's currently set to '#{config['paginate'].inspect}'."
         config['paginate'] = nil

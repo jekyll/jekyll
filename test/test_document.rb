@@ -46,7 +46,178 @@ class TestDocument < Test::Unit::TestCase
 
   end
 
-  context " a document part of a rendered collection" do
+  context "a document as part of a collection with frontmatter defaults" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope"=> {"path"=>"", "type"=>"slides"},
+          "values"=> {
+            "nested"=> {
+              "key"=>"myval",
+            }
+          }
+        }]
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs.select{|d| d.is_a?(Document) }.first
+    end
+
+    should "know the frontmatter defaults" do
+      assert_equal({
+        "title"=>"Example slide",
+        "layout"=>"slide",
+        "nested"=> {
+          "key"=>"myval"
+        }
+      }, @document.data)
+    end
+  end
+
+  context "a document as part of a collection with overriden default values" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope"=> {"path"=>"", "type"=>"slides"},
+          "values"=> {
+            "nested"=> {
+              "test1"=>"default1",
+              "test2"=>"default1"
+            }
+          }
+        }]
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs[1]
+    end
+
+    should "override default values in the document frontmatter" do
+      assert_equal({
+        "title"=>"Override title",
+        "layout"=>"slide",
+        "nested"=> {
+          "test1"=>"override1",
+          "test2"=>"override2"
+        }
+      }, @document.data)
+    end
+  end
+
+  context "a document as part of a collection with valid path" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope"=> {"path"=>"slides", "type"=>"slides"},
+          "values"=> {
+            "nested"=> {
+              "key"=>"value123",
+            }
+          }
+        }]
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs.first
+    end
+
+    should "know the frontmatter defaults" do
+      assert_equal({
+        "title"=>"Example slide",
+        "layout"=>"slide",
+        "nested"=> {
+          "key"=>"value123"
+        }
+      }, @document.data)
+    end
+  end
+
+  context "a document as part of a collection with invalid path" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope"=> {"path"=>"somepath", "type"=>"slides"},
+          "values"=> {
+            "nested"=> {
+              "key"=>"myval",
+            }
+          }
+        }]
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs.first
+    end
+
+    should "not know the specified frontmatter defaults" do
+      assert_equal({
+        "title"=>"Example slide",
+        "layout"=>"slide"
+      }, @document.data)
+    end
+  end
+
+  context "a document in a collection with a custom permalink" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => ["slides"],
+        "source"      => source_dir,
+        "destination" => dest_dir
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs[2]
+      @dest_file = dest_dir("slide/3/index.html")
+    end
+
+    should "know its permalink" do
+      assert_equal "/slide/3/", @document.permalink
+    end
+
+    should "produce the right URL" do
+      assert_equal "/slide/3/", @document.url
+    end
+  end
+
+
+  context "a static file in a collection" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => {
+          "slides" => {
+            "output" => true
+          }
+        },
+        "source"      => source_dir,
+        "destination" => dest_dir
+      }))
+      @site.process
+      @document = @site.collections["slides"].files.find { |doc| doc.relative_path == "_slides/octojekyll.png" }
+      @dest_file = dest_dir("slides/octojekyll.png")
+    end
+
+    should "be a static file" do
+      assert_equal true, @document.is_a?(StaticFile)
+    end
+
+    should "be set to write" do
+      assert @document.write?
+    end
+
+    should "be in the list of docs_to_write" do
+      assert @site.docs_to_write.include?(@document)
+    end
+
+    should "be output in the correct place" do
+      assert_equal true, File.file?(@dest_file)
+    end
   end
 
 end

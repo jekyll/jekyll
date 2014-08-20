@@ -76,8 +76,45 @@ CONTENT
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
       assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
 
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos=3', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
+
+      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos="3 5 6"', ["test", "{% endhighlight %}", "\n"])
+      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
+
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
+    end
+  end
+
+  context "in safe mode" do
+    setup do
+      @tag = Jekyll::Tags::HighlightBlock.new('highlight', 'text ', ["test", "{% endhighlight %}", "\n"])
+    end
+
+    should "allow linenos" do
+      sanitized = @tag.sanitized_opts({:linenos => true}, true)
+      assert_equal true, sanitized[:linenos]
+    end
+
+    should "allow hl_linenos" do
+      sanitized = @tag.sanitized_opts({:hl_linenos => %w[1 2 3 4]}, true)
+      assert_equal %w[1 2 3 4], sanitized[:hl_linenos]
+    end
+
+    should "allow cssclass" do
+      sanitized = @tag.sanitized_opts({:cssclass => "ahoy"}, true)
+      assert_equal "ahoy", sanitized[:cssclass]
+    end
+
+    should "allow startinline" do
+      sanitized = @tag.sanitized_opts({:startinline => true}, true)
+      assert_equal true, sanitized[:startinline]
+    end
+
+    should "strip unknown options" do
+      sanitized = @tag.sanitized_opts({:light => true}, true)
+      assert_nil sanitized[:light]
     end
   end
 
@@ -91,11 +128,11 @@ CONTENT
     end
 
     should "render markdown with pygments" do
-      assert_match %{<pre><code class="text">test</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">test</code></pre>}, @result
     end
 
     should "render markdown with pygments with line numbers" do
-      assert_match %{<pre><code class="text"><span class="lineno">1</span> test</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> test</code></pre>}, @result
     end
   end
 
@@ -105,7 +142,7 @@ CONTENT
     end
 
     should "not embed the file" do
-      assert_match %{<pre><code class="text">./jekyll.gemspec</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>}, @result
     end
   end
 
@@ -115,7 +152,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre><code class="text">Æ</code></pre>}, @result
+      assert_match %{<pre><code class="language-text" data-lang="text">Æ</code></pre>}, @result
     end
   end
 
@@ -414,9 +451,8 @@ CONTENT
         )
       end
 
-      # todo: if #112 is merged into maruku, update to remove the newlines inside code block
       should "render fenced code blocks" do
-        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">\nputs &quot;Hello world&quot;\n</code></pre>}, @result.strip
+        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">puts &quot;Hello world&quot;</code></pre>}, @result.strip
       end
     end
 
@@ -467,6 +503,10 @@ CONTENT
       should "include file as variable and filters with additional parameters" do
         assert_match '<li>var1 = foo</li>', @content
         assert_match '<li>var2 = bar</li>', @content
+      end
+
+      should "include file as partial variable" do
+        assert_match %r{8 included}, @content
       end
     end
   end

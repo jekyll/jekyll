@@ -4,6 +4,136 @@
 
 ### Minor Enhancements
 
+  * Add support for CSV files in the `_data` directory (#2761)
+
+### Bug Fixes
+
+  * Fix encoding of `main.scss` in site template (#2771)
+
+### Development Fixes
+
+  * Update simplecov gem to 0.9 (#2748)
+  * Remove `docs/` dir (#2768)
+
+### Site Enhancements
+
+  * Remove deprecated `jekyll-projectlist` plugin from list of third-party
+    plugins (#2742)
+  * Remove tag plugins that are built in to Jekyll (#2751)
+  * Add `markdown-writer` package for Atom Editor to list of third-party
+    plugins (#2763)
+  * Fix typo in site documentation for collections (#2764)
+  * Fix minor typo on plugins docs page (#2765)
+
+## 2.3.0 / 2014-08-10
+
+### Minor Enhancements
+
+  * Allow Convertibles to be converted by >= 1 converters (#2704)
+  * Allow Sass files to be rendered in Liquid, but never place them in layouts. (#2733)
+  * Add `jekyll help` command (#2707)
+  * Use `.scss` for `site_template` styles. (#2667)
+  * Don't require the `scope` key in front matter defaults (#2659)
+  * No longer set `permalink: pretty` in the `_config.yml` for the site template (#2680)
+  * Rework site template to utilize Sass (#2687)
+  * Notify the user when auto-regeneration is disabled. (#2696)
+  * Allow partial variables in include tag filename argument (#2693)
+  * Move instances of `Time.parse` into a Utils method (#2682)
+  * Ignore subfolders in the `_posts` folder (#2705) REVERTS (#2633)
+  * Front Matter default types should always be pluralized (#2732)
+  * Read in static files into `collection.files` as `StaticFile`s (#2737)
+  * Add `sassify` and `scssify` Liquid filters (#2739)
+  * Replace `classifier` gem with `classifier-reborn` (#2721)
+
+### Bug Fixes
+
+  * Use only the last extname when multiple converters exist (#2722)
+  * Call `#to_liquid` before calling `#to_json` in jsonify filter (#2729)
+  * Use non padded config in `strftime` to avoid parse string twice (#2673)
+  * Replace deprecated Ruby methods with undeprecated ones (#2664)
+  * Catch errors when parsing Post `date` front matter value & produce nice error message (#2649)
+  * Allow static files in Collections (#2615)
+  * Fixed typo in `Deprecator#gracefully_require` error message (#2694)
+  * Remove preemptive loading of the 'classifier' gem. (#2697)
+  * Use case-insensitive checking for the file extensions when loading config files (#2718)
+  * When Reading Documents, Respect `encoding` Option (#2720)
+  * Refactor based on jekyll-watch clean-up. (#2716)
+  * `Document#to_s` should produce just the content of the document (#2731)
+
+### Development Fixes
+
+  * Only include lib files in the gem (#2671)
+  * Fix `git diff` command in `proof` script (#2672)
+  * Make default rake task a multitask so tests run in parallel (#2735)
+
+### Site Enhancements
+
+  * Use Sass and a Docs Collection (#2651)
+  * Add `latest_version.txt` file to the site (#2740)
+  * Be more ambiguous about `page.content`. But more transparent. (#2522)
+  * Streamlining front matter wording (instead of front-matter/frontmatter) (#2674)
+  * Add note that source directory cannot be modified in GitHub Pages (#2669)
+  * Fix links from #2669 to be actual HTML. Whoops. (#2679)
+  * Add link to `jekyll-slim` in list of third-party plugins (#2689)
+  * Add Barry Clark's Smashing Magazine tutorial to resources page (#2688)
+  * Reorganize and update default configuration settings (#2456)
+  * Fixing indentation in the configuration docs about Redcarpet exts (#2717)
+  * Use `null` in YAML instead of `nil` in default config list (#2719)
+  * Fix typo in Continuous Integration docs (#2708)
+
+## 2.2.0 / 2014-07-29
+
+### Minor Enhancements
+
+  * Throw a warning if the specified layout does not exist (#2620)
+  * Whitelist Pygments options in safe mode (#2642)
+
+### Bug Fixes
+
+  * Remove unnecessary `Jekyll::Tags::IncludeTag#blank?` method (#2625)
+  * Categories in the path are ignored (#2633)
+
+### Development Fixes
+
+  * Refactoring Errors & Requires of Third-Party stuff (#2591)
+  * Add further tests for categories (#2584)
+  * Proof site with html-proofer on change (#2605)
+  * Fix up bug in #2605 which caused proofing the site not to function (#2608)
+  * Use `bundle exec` in `script/proof` (#2610)
+
+### Site Enhancements
+
+  * Update Kramdown urls (#2588)
+  * Add `Jekyll::AutolinkEmail` and `Jekyll::GitMetadata` to the list of
+    third-party plugins (#2596)
+  * Fix a bunch of broken links in the site (#2601)
+  * Replace dead links with working links (#2611)
+  * Add jekyll-hook to deployment methods (#2617)
+  * Added kramdown-with-pygments plugin to the list of third-party plugins (#2623)
+  * Update outdated "Extras" page and remove duplicate documentation (#2622)
+  * Add co2 plugin to list of third-party plugins (#2639)
+  * Attempt to clarify the way Sass imports happen (#2642)
+
+## 2.1.1 / 2014-07-01
+
+### Bug Fixes
+
+  * Patch read vulnerabilities for data & confirm none for layouts (#2563)
+  * Update Maruku dependency to allow use of the latest version (#2576)
+  * Remove conditional assignment from document URL to prevent stale urls (#2575)
+
+### Site Enhancements
+
+  * Add vertical margin to `highlight` to separate code blocks (#2558)
+  * Add `html_pages` to Variables docs (#2567)
+  * Fixed broken link to Permalinks page (#2572)
+  * Update link to Windows installation guide (#2578)
+
+## 2.1.0 / 2014-06-28
+
+### Minor Enhancements
+
+  * Bump to the latest Liquid version, 2.6.1 (#2495)
   * Add support for JSON files in the `_data` directory (#2369)
   * Allow subclasses to override `EXCERPT_ATTRIBUTES_FOR_LIQUID` (#2408)
   * Add `Jekyll.env` and `jekyll.environment` (the Liquid var) (#2417)
@@ -18,6 +148,16 @@
   * Extract `gist` tag into a separate gem (#2469)
   * Add `collection` attribute to `Document#to_liquid` to access the
     document's collection label. (#2436)
+  * Upgrade listen to `2.7.6 <= x < 3.0.0` (#2492)
+  * Allow configuration of different Twitter and GitHub usernames in site template (#2485)
+  * Bump Pygments to v0.6.0 (#2504)
+  * Front matter defaults for documents in collections (#2419)
+  * Include files with a url which ends in `/` in the `site.html_pages` list (#2524)
+  * Make `highlight` tag use `language-` prefix in CSS class (#2511)
+  * Lookup item property via `item#to_liquid` before `#data` or `#[]` in filters (#2493)
+  * Skip initial build of site on serve with flag (#2477)
+  * Add support for `hl_lines` in `highlight` tag (#2532)
+  * Spike out `--watch` flag into a separate gem (#2550)
 
 ### Bug Fixes
 
@@ -29,17 +169,27 @@
   * Prevent code from overflowing container in site template (#2429)
   * Encode URLs in UTF-8 when escaping and unescaping (#2420)
   * No Layouts or Liquid for Asset Files (#2431)
-  * Allow front-matter defaults to set post categories (#2373)
+  * Allow front matter defaults to set post categories (#2373)
   * Fix command in subcommand deprecation warning (#2457)
   * Keep all parent directories of files/dirs in `keep_files` (#2458)
   * When using RedCarpet and Rouge without Rouge installed, fixed erroneous
     error which stated that redcarpet was missing, not rouge. (#2464)
+  * Ignore *all* directories and files that merit it on auto-generation (#2459)
+  * Before copying file, explicitly remove the old one (#2535)
+  * Merge file system categories with categories from YAML. (#2531)
+  * Deep merge front matter defaults (#2490)
+  * Ensure exclude and include arrays are arrays of strings (#2542)
+  * Allow collections to have dots in their filenames (#2552)
+  * Collections shouldn't try to read in directories as files (#2552)
+  * Be quiet very quickly. (#2520)
 
 ### Development Fixes
 
   * Test Ruby 2.1.2 instead of 2.1.1 (#2374)
   * Add test for sorting UTF-8 characters (#2384)
   * Use `https` for GitHub links in documentation (#2470)
+  * Remove coverage reporting with Coveralls (#2494)
+  * Fix a bit of missing TomDoc to `Jekyll::Commands::Build#build` (#2554)
 
 ### Site Enhancements
 
@@ -52,11 +202,18 @@
   * Prevent table from extending parent width in permalink style table (#2424)
   * Add collections to info about pagination support (#2389)
   * Add `jekyll_github_sample` plugin to list of third-party plugins (#2463)
-  * Clarify documentation around front-matter defaults and add details
+  * Clarify documentation around front matter defaults and add details
     about defaults for collections. (#2439)
   * Add Jekyll Project Version Tag to list of third-party plugins (#2468)
   * Use `https` for GitHub links across whole site (#2470)
   * Add StickerMule + Jekyll post (#2476)
+  * Add Jekyll Asset Pipeline Reborn to list of third-party plugins (#2479)
+  * Add link to jekyll-compress-html to list of third-party plugins (#2514)
+  * Add Piwigo Gallery to list of third-party plugins (#2526)
+  * Set `show_drafts` to `false` in default configuration listing (#2536)
+  * Provide an updated link for Windows installation instructions (#2544)
+  * Remove `url` from configuration docs (#2547)
+  * Documentation for Continuous Integration for your Jekyll Site (#2432)
 
 ## 2.0.3 / 2014-05-08
 
@@ -80,7 +237,7 @@
   * Update docs to reflect new `baseurl` default (#2341)
   * Add links to headers who have an ID. (#2342)
   * Use symbol instead of HTML number in `upgrading.md` (#2351)
-  * Fix link to frontmatter defaults docs (#2353)
+  * Fix link to front matter defaults docs (#2353)
   * Fix for `History.markdown` in order to fix history page in docs (#2363)
 
 ## 2.0.2 / 2014-05-07
@@ -120,7 +277,7 @@
   * Expose `site.static_files` to Liquid (#2075)
   * Complete redesign of the template site generated by `jekyll new` (#2050)
   * Update Listen from 1.x to 2.x (#2097)
-  * Front-matter defaults (#2205)
+  * Front matter defaults (#2205)
   * Deprecate `relative_permalinks` configuration option (default to `false`) (#2307)
   * Exclude files based on prefix as well as `fnmatch?` (#2303)
 
@@ -165,7 +322,7 @@
   * Permit YAML blocks to end with three dots to better conform with the
     YAML spec (#2110)
   * Use `File.exist?` instead of deprecated `File.exists?` (#2214)
-  * Require newline after start of YAML front-matter header (#2211)
+  * Require newline after start of YAML Front Matter header (#2211)
   * Add the ability for pages to be marked as `published: false` (#1492)
   * Add `Jekyll::LiquidExtensions` with `.lookup_variable` method for easy
     looking up of variable values in a Liquid context. (#2253)
@@ -838,7 +995,7 @@
   * Bullet-proof `limit_posts` option (#1004)
   * Read in YAML as UTF-8 to accept non-ASCII chars (#836)
   * Fix the CLI option `--plugins` to actually accept dirs and files (#993)
-  * Allow 'excerpt' in YAML Front-Matter to override the extracted excerpt (#946)
+  * Allow 'excerpt' in YAML front matter to override the extracted excerpt (#946)
   * Fix cascade problem with site.baseurl, site.port and site.host. (#935)
   * Filter out directories with valid post names (#875)
   * Fix symlinked static files not being correctly built in unsafe mode (#909)
@@ -850,7 +1007,7 @@
   * Patch for multibyte URI problem with `jekyll serve` (#723)
   * Order plugin execution by priority (#864)
   * Fixed Page#dir and Page#url for edge cases (#536)
-  * Fix broken `post_url` with posts with a time in their YAML Front-Matter (#831)
+  * Fix broken `post_url` with posts with a time in their YAML front matter (#831)
   * Look for plugins under the source directory (#654)
   * Tumblr Migrator: finds `_posts` dir correctly, fixes truncation of long
       post names (#775)
@@ -909,7 +1066,7 @@
   * Fix error with `limit_posts` (#442)
   * Properly select dotfile during directory scan (#363, #431, #377)
   * Allow setting of Kramdown `smart_quotes` (#482)
-  * Ensure front-matter is at start of file (#562)
+  * Ensure front matter is at start of file (#562)
 
 ## 0.11.2 / 2011-12-27
   * Bug Fixes
@@ -1030,7 +1187,7 @@
 ## 0.5.6 / 2010-01-08
   * Bug Fixes
   * Require redcloth >= 4.2.1 in tests (#92)
-  * Don't break on triple dashes in yaml frontmatter (#93)
+  * Don't break on triple dashes in yaml front matter (#93)
 
 ### Minor Enhancements
   * Allow .mkd as markdown extension
@@ -1065,9 +1222,9 @@
   * Configuration options set in config.yml are now available through the
       site payload (@vilcans)
   * Posts can now have an empty YAML front matter or none at all
-      (@bahuvrihi)
+      (@ bahuvrihi)
   * Bug Fixes
-  * Fixing Ruby 1.9 issue that requires to_s on the err object
+  * Fixing Ruby 1.9 issue that requires `#to_s` on the err object
       (@Chrononaut)
   * Fixes for pagination and ordering posts on the same day (@ujh)
   * Made pages respect permalinks style and permalinks in yml front matter
@@ -1077,8 +1234,8 @@
   * Added trailing slash to pretty permalink style so Apache is happy
       (@eugenebolshakov)
   * Bad markdown processor in config fails sooner and with better message
-      (@gcnovus)
-  * Allow CRLFs in yaml frontmatter (@juretta)
+      (@ gcnovus)
+  * Allow CRLFs in yaml front matter (@juretta)
   * Added Date#xmlschema for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06

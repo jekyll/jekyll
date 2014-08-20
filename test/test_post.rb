@@ -76,6 +76,24 @@ class TestPost < Test::Unit::TestCase
         assert_equal "/2008/09/09/foo-bar", @post.id
       end
 
+      should "ignore subfolders" do
+        post = Post.allocate
+        post.categories = ['foo']
+        post.site = @site
+        post.process("cat1/2008-09-09-foo-bar.textile")
+        assert_equal 1, post.categories.size
+        assert_equal "foo", post.categories[0]
+
+        post = Post.allocate
+        post.categories = ['foo', 'bar']
+        post.site = @site
+        post.process("cat2/CAT3/2008-09-09-foo-bar.textile")
+        assert_equal 2, post.categories.size
+        assert_equal "foo", post.categories[0]
+        assert_equal "bar", post.categories[1]
+
+      end
+
       should "create url based on date and title" do
         @post.categories = []
         @post.process(@fake_file)
@@ -83,7 +101,7 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "raise a good error on invalid post date" do
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           @post.process("2009-27-03-foo-bar.textile")
         end
       end
@@ -327,9 +345,7 @@ class TestPost < Test::Unit::TestCase
       should "transform textile" do
         @post.process(@real_file)
         @post.read_yaml(@source, @real_file)
-        @post.transform
-
-        assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.content
+        assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.transform
       end
 
       context "#excerpt" do
@@ -627,46 +643,46 @@ class TestPost < Test::Unit::TestCase
 
     should "process .md as markdown under default configuration" do
       post = setup_post '2011-04-12-md-extension.md'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .text as identity under default configuration" do
       post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Identity
     end
 
     should "process .text as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mdw,mdwn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .md as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mkd,mkdn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Markdown
     end
 
     should "process .mkdn under text if it is not in the markdown config" do
       @site.config['markdown_ext'] = 'markdown,mkd,md,text'
       post = setup_post '2013-08-01-mkdn-extension.mkdn'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Identity
     end
 
     should "process .text as textile under alternate configuration" do
       @site.config['textile_ext'] = 'textile,text'
       post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converter
+      conv = post.converters.first
       assert conv.kind_of? Jekyll::Converters::Textile
     end
 
   end
-  
+
   context "site config with category" do
     setup do
       config = Jekyll::Configuration::DEFAULTS.merge({
@@ -686,7 +702,7 @@ class TestPost < Test::Unit::TestCase
       post = setup_post("2009-01-27-no-category.textile")
       assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
     end
-    
+
     should "override site category if set on post" do
       post = setup_post("2009-01-27-category.textile")
       assert post.categories.include?('foo'), "Expected post.categories to include 'foo' but did not."
@@ -713,7 +729,7 @@ class TestPost < Test::Unit::TestCase
       post = setup_post("2009-01-27-no-category.textile")
       assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
     end
-    
+
     should "override site categories if set on post" do
       post = setup_post("2009-01-27-categories.textile")
       ['foo', 'bar', 'baz'].each do |category|

@@ -27,7 +27,7 @@ module Jekyll
     # Returns the Symbol priority.
     def self.priority(priority = nil)
       @priority ||= nil
-      if priority && PRIORITIES.has_key?(priority)
+      if priority && PRIORITIES.key?(priority)
         @priority = priority
       end
       @priority || :normal
@@ -54,6 +54,15 @@ module Jekyll
     # Returns -1, 0, 1.
     def self.<=>(other)
       PRIORITIES[other.priority] <=> PRIORITIES[self.priority]
+    end
+
+    # Spaceship is priority [higher -> lower]
+    #
+    # other - The class to be compared.
+    #
+    # Returns -1, 0, 1.
+    def <=>(other)
+      self.class <=> other.class
     end
 
     # Initialize a new plugin. This should be overridden by the subclass.

@@ -17,6 +17,7 @@ module Jekyll
             c.option 'port', '-P', '--port [PORT]', 'Port to listen on'
             c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
             c.option 'baseurl', '-b', '--baseurl [URL]', 'Base URL'
+            c.option 'skip_initial_build', '--skip-initial-build', 'Skips the initial site build which occurs before the server is started.'
 
             c.action do |args, options|
               options["serving"] ||= true

@@ -190,12 +190,12 @@ class TestSite < Test::Unit::TestCase
 
     should "read pages with yaml front matter" do
       abs_path = File.expand_path("about.html", @site.source)
-      assert_equal true, @site.send(:has_yaml_header?, abs_path)
+      assert_equal true, Utils.has_yaml_header?(abs_path)
     end
 
     should "enforce a strict 3-dash limit on the start of the YAML front-matter" do
       abs_path = File.expand_path("pgp.key", @site.source)
-      assert_equal false, @site.send(:has_yaml_header?, abs_path)
+      assert_equal false, Utils.has_yaml_header?(abs_path)
     end
 
     should "expose jekyll version to site payload" do
@@ -225,7 +225,7 @@ class TestSite < Test::Unit::TestCase
           Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => source_dir})
         end
 
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           site = Site.new(Jekyll.configuration)
         end
       end
@@ -235,7 +235,7 @@ class TestSite < Test::Unit::TestCase
           Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => File.join(source_dir, "..")})
         end
 
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           site = Site.new(Jekyll.configuration)
         end
       end
@@ -332,7 +332,7 @@ class TestSite < Test::Unit::TestCase
 
         bad_processor = "Custom::Markdown"
         s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           s.process
         end
 
@@ -352,7 +352,7 @@ class TestSite < Test::Unit::TestCase
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
         s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
-        assert_raise Jekyll::FatalException do
+        assert_raise Jekyll::Errors::FatalException do
           s.process
         end
       end

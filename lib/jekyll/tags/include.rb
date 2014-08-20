@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Jekyll
   module Tags
     class IncludeTagError < StandardError
@@ -14,7 +16,7 @@ module Jekyll
       SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
 
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
-      VARIABLE_SYNTAX = /(?<variable>\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\})(?<params>.*)/
+      VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
       INCLUDES_DIR = '_includes'
 
@@ -129,10 +131,6 @@ eos
 
       def realpath_prefixed_with?(path, dir)
         File.exist?(path) && File.realpath(path).start_with?(dir)
-      end
-
-      def blank?
-        false
       end
 
       # This method allows to modify the file content by inheriting from the class.

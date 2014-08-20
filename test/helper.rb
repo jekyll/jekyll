@@ -2,9 +2,6 @@ require 'simplecov'
 require 'simplecov-gem-adapter'
 SimpleCov.start('gem')
 
-require 'coveralls'
-Coveralls.wear_merged!
-
 require 'rubygems'
 require 'test/unit'
 require 'ostruct'

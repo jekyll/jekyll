@@ -25,6 +25,28 @@ module Jekyll
       converter.convert(input)
     end
 
+    # Convert a Sass string into CSS output.
+    #
+    # input - The Sass String to convert.
+    #
+    # Returns the CSS formatted String.
+    def sassify(input)
+      site = @context.registers[:site]
+      converter = site.getConverterImpl(Jekyll::Converters::Sass)
+      converter.convert(input)
+    end
+
+    # Convert a Scss string into CSS output.
+    #
+    # input - The Scss String to convert.
+    #
+    # Returns the CSS formatted String.
+    def scssify(input)
+      site = @context.registers[:site]
+      converter = site.getConverterImpl(Jekyll::Converters::Scss)
+      converter.convert(input)
+    end
+
     # Format a date in short format e.g. "27 Jan 2011".
     #
     # date - the Time to format.
@@ -155,7 +177,7 @@ module Jekyll
     #
     # Returns the converted json string
     def jsonify(input)
-      input.to_json
+      as_liquid(input).to_json
     end
 
     # Group an array of items by a property
@@ -207,9 +229,8 @@ module Jekyll
         when nils == "last"
           order = + 1
         else
-          Jekyll.logger.error "Invalid nils order:",
-            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
-          exit(1)
+          raise ArgumentError.new("Invalid nils order: " +
+            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'.")
         end
 
         input.sort { |apple, orange|
@@ -247,11 +268,17 @@ module Jekyll
     end
 
     def item_property(item, property)
-      if item.respond_to?(:data)
+      if item.respond_to?(:to_liquid)
+        item.to_liquid[property.to_s]
+      elsif item.respond_to?(:data)
         item.data[property.to_s]
       else
         item[property.to_s]
       end
+    end
+
+    def as_liquid(item)
+      item.respond_to?(:to_liquid) ? item.to_liquid : item
     end
   end
 end

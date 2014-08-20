@@ -1,0 +1,22 @@
+#! /bin/bash
+#
+# Usage:
+#   script/proof
+
+set -e
+
+git diff --name-only ..master | grep '^site/' || {
+    echo "No site files changed. We'll skip proofing."
+    exit 0
+}
+
+echo "Some site files have been changed! Proofing..."
+
+command -v htmlproof || {
+    echo "Installing HTML::Proofer!"
+    gem install html-proofer -- --use-system-libraries
+}
+
+bundle exec jekyll build -s site -d _site --trace
+printf "\e[0;36mProofing begins now!\e[0m\n"
+htmlproof ./_site

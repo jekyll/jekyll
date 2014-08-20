@@ -66,3 +66,14 @@ Feature: Include tags
     When I run jekyll build
     Then the _site directory should exist
     And I should see "one included" in "_site/index.html"
+
+  Scenario: Include a file with partial variables
+    Given I have an _includes directory
+    And I have an "_includes/one.html" file that contains "one included"
+    And I have a configuration file with:
+    | key          | value |
+    | include_file | one   |
+    And I have an "index.html" page that contains "{% include {{ site.include_file }}.html %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "one included" in "_site/index.html"

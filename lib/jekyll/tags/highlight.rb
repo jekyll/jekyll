@@ -4,9 +4,11 @@ module Jekyll
       include Liquid::StandardFilters
 
       # The regular expression syntax checker. Start with the language specifier.
-      # Follow that by zero or more space separated options that take one of two
-      # forms: name or name=value
-      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=\w+)?)*)$/
+      # Follow that by zero or more space separated options that take one of three
+      # forms: name, name=value, or name="<quoted list>"
+      #
+      # <quoted list> is a space-separated list of numbers
+      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$/
 
       def initialize(tag_name, markup, tokens)
         super
@@ -14,8 +16,14 @@ module Jekyll
           @lang = $1.downcase
           @options = {}
           if defined?($2) && $2 != ''
-            $2.split.each do |opt|
+            # Split along 3 possible forms -- key="<quoted list>", key=value, or key
+            $2.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
               key, value = opt.split('=')
+              # If a quoted list, convert to array
+              if value && value.include?("\"")
+                  value.gsub!(/"/, "")
+                  value = value.split
+              end
               @options[key.to_sym] = value || true
             end
           end
@@ -36,9 +44,11 @@ eos
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.strip
 
+        is_safe = !!context.registers[:site].safe
+
         output = case context.registers[:site].highlighter
         when 'pygments'
-          render_pygments(code)
+          render_pygments(code, is_safe)
         when 'rouge'
           render_rouge(code)
         else
@@ -49,11 +59,30 @@ eos
         prefix + rendered_output + suffix
       end
 
-      def render_pygments(code)
+      def sanitized_opts(opts, is_safe)
+        if is_safe
+          Hash[[
+            [:startinline, opts.fetch(:startinline, nil)],
+            [:hl_linenos,  opts.fetch(:hl_linenos, nil)],
+            [:linenos,     opts.fetch(:linenos, nil)],
+            [:encoding,    opts.fetch(:encoding, 'utf-8')],
+            [:cssclass,    opts.fetch(:cssclass, nil)]
+          ].reject {|f| f.last.nil? }]
+        else
+          opts
+        end
+      end
+
+      def render_pygments(code, is_safe)
         require 'pygments'
+
         @options[:encoding] = 'utf-8'
 
-        highlighted_code = Pygments.highlight(code, :lexer => @lang, :options => @options)
+        highlighted_code = Pygments.highlight(
+          code,
+          :lexer   => @lang,
+          :options => sanitized_opts(@options, is_safe)
+        )
 
         if highlighted_code.nil?
           Jekyll.logger.error "There was an error highlighting your code:"
@@ -83,7 +112,7 @@ eos
 
       def add_code_tag(code)
         # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>\n*/,'<pre><code class="' + @lang.to_s.gsub("+", "-") + '">')
+        code = code.sub(/<pre>\n*/,'<pre><code class="language-' + @lang.to_s.gsub("+", "-") + '" data-lang="' + @lang.to_s + '">')
         code = code.sub(/\n*<\/pre>/,"</code></pre>")
         code.strip
       end

@@ -1,4 +1,3 @@
-require 'jekyll/convertible'
 require 'forwardable'
 
 module Jekyll
