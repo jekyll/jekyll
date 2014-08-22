@@ -304,13 +304,13 @@ defaults:
   -
     scope:
       path: "" # an empty string here means all files in the project
-      type: "posts"
+      type: "post"
     values:
       layout: "default"
 {% endhighlight %}
 
-Now, this will only set the layout for files where the type is `posts`.
-The different types that are available to you are `pages`, `posts`, `drafts` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
+Now, this will only set the layout for files where the type is `post`.
+The different types that are available to you are `page`, `post`, `draft` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
 
 As mentioned earlier, you can set multiple scope/values pairs for `defaults`.
 
@@ -319,13 +319,13 @@ defaults:
   -
     scope:
       path: ""
-      type: "posts"
+      type: "post"
     values:
       layout: "my-site"
   -
     scope:
       path: "projects"
-      type: "pages"
+      type: "page"
     values:
       layout: "project" # overrides previous default layout
       author: "Mr. Hyde"
