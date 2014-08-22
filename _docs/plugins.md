@@ -369,7 +369,7 @@ There are two flags to be aware of when writing a plugin:
           executed in an environment where arbitrary code execution is not
           allowed. This is used by GitHub Pages to determine which core plugins
           may be used, and which are unsafe to run. If your plugin does not
-          allow for arbitrary code, execution, set this to <code>true</code>.
+          allow for arbitrary code execution, set this to <code>true</code>.
           GitHub Pages still won’t load your plugin, but if you submit it for
           inclusion in core, it’s best for this to be correct!
         </p>
@@ -547,6 +547,7 @@ You can find a few useful plugins at the following locations:
 - [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://sublime.wbond.net/packages/Jekyll).
 - [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate
   new posts and run `jekyll build` all without leaving vim.
+- [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>

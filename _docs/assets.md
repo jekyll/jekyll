@@ -52,7 +52,7 @@ The Sass converter will default the `sass_dir` configuration option to
   <h5>The <code>sass_dir</code> is only used by Sass</h5>
   <p>
 
-    Note that the `sass_dir` becomes the load path for Sass imports,
+    Note that the <code>sass_dir</code> becomes the load path for Sass imports,
     nothing more. This means that Jekyll does not know about these files
     directly, so any files here should not contain the YAML Front Matter as
     described above nor will they be transformed as described above. This

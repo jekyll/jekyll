@@ -304,13 +304,23 @@ defaults:
   -
     scope:
       path: "" # an empty string here means all files in the project
-      type: "posts"
+      type: "posts" # previously `post` in Jekyll 2.2.
     values:
       layout: "default"
 {% endhighlight %}
 
 Now, this will only set the layout for files where the type is `posts`.
 The different types that are available to you are `pages`, `posts`, `drafts` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
+
+<div class="note warning">
+  <h5>GitHub Pages uses singular types</h5>
+  <p>
+    When specifying the <code>type</code> (see above), be sure to use the
+    <em>singular</em> form if you're deploying to GitHub Pages. Pages is
+    still running Jekyll 2.2.0, which uses the singular forms, so use either
+    <code>page</code> or <code>post</code> for <code>type</code>.
+  </p>
+</div>
 
 As mentioned earlier, you can set multiple scope/values pairs for `defaults`.
 
