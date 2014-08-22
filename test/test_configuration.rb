@@ -145,6 +145,7 @@ class TestConfiguration < Test::Unit::TestCase
       assert_equal :foo, YAML.load(':foo')
       # as opposed to: assert_equal ':foo', SafeYAML.load(':foo')
     end
+
   end
   context "loading config from external file" do
     setup do

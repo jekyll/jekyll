@@ -1,9 +1,10 @@
 require 'erb'
+require 'pry'
 
 module Jekyll
   module Commands
     class New < Command
-      class << self 
+      class << self
         def init_with_program(prog)
           prog.command(:new) do |c|
             c.syntax 'new PATH'
@@ -11,34 +12,38 @@ module Jekyll
 
             c.option 'force', '--force', 'Force creation even if PATH already exists'
             c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
-            
+            c.option 'config', '-c', '--config EXTENSION', 'Choose yaml or toml format for config file'
             c.action do |args, options|
               Jekyll::Commands::New.process(args, options)
             end
-          end
+          end  
         end
 
         def process(args, options = {})
           raise ArgumentError.new('You must specify a path.') if args.empty?
 
-          new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
-          FileUtils.mkdir_p new_blog_path
-          if preserve_source_location?(new_blog_path, options)
-            Jekyll.logger.abort_with "Conflict:", "#{new_blog_path} exists and is not empty."
+          @new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
+          FileUtils.mkdir_p @new_blog_path
+          if preserve_source_location?(@new_blog_path, options)
+            Jekyll.logger.abort_with "Conflict:", "#{@new_blog_path} exists and is not empty."
           end
 
           if options["blank"]
-            create_blank_site new_blog_path
+            create_blank_site @new_blog_path
           else
-            create_sample_files new_blog_path
-
-            File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
+            create_sample_files @new_blog_path
+            File.open(File.expand_path(initialized_post_name, @new_blog_path), "w") do |f|
               f.write(scaffold_post_content)
             end
           end
+          options["config"] == 'toml' ? delete_config('yml') : delete_config('toml')
 
-          Jekyll.logger.info "New jekyll site installed in #{new_blog_path}."
+          Jekyll.logger.info "New jekyll site installed in #{@new_blog_path}."
         end
+
+        def delete_config(extension)
+          #FileUtils.rm Dir["#{@new_blog_path}/*.#{extension}"]
+        end  
 
         def create_blank_site(path)
           Dir.chdir(path) do
