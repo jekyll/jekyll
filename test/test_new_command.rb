@@ -1,6 +1,6 @@
 require 'helper'
 require 'jekyll/commands/new'
-
+require 'pry'
 class TestNewCommand < Test::Unit::TestCase
   def dir_contents(path)
     Dir["#{path}/**/*"].each do |file|
@@ -11,6 +11,11 @@ class TestNewCommand < Test::Unit::TestCase
   def site_template
     File.expand_path("../lib/site_template", File.dirname(__FILE__))
   end
+
+  def create_with_config(config)
+    options = {:config => config}
+    Jekyll::Commands::New.process(@args, options)
+  end  
 
   context 'when args contains a path' do
     setup do
@@ -70,6 +75,36 @@ class TestNewCommand < Test::Unit::TestCase
 
       assert_same_elements erb_template_files, new_site_files
     end
+    
+    context 'and config arg is specified' do
+      context 'as yaml' do
+        setup do
+          create_with_config 'yaml' 
+        end  
+        should 'have a yaml config' do
+          assert Dir["#{@full_path}/*.yml"].any?
+        end
+        should 'have not a toml config' do
+          assert !Dir["#{@full_path}/*.toml"].any?
+        end  
+      end
+
+      # context 'as toml' do
+      #   setup do
+      #     create_with_config 'toml' 
+      #   end
+
+      #   shoild 'have not a yaml config' do
+      #     assert !Dir["#{@full_path}/*.yaml"].any?
+      #   end  
+        
+      #   should 'have a toml config' do
+      #     assert Dir["#{@full_path}/*.toml"].any?
+      #   end
+      # end
+
+    end
+  
   end
 
   context 'when multiple args are given' do
