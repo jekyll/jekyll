@@ -186,6 +186,26 @@ class TestDocument < Test::Unit::TestCase
     end
   end
 
+  context "a document in a collection with custom permalinks" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => {
+          "slides" => {
+            "output"    => true,
+            "permalink" => "/slides/test/:title"
+          }
+        },
+        "source"      => source_dir,
+        "destination" => dest_dir
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs[0]
+    end
+
+    should "produce the right URL" do
+      assert_equal "/slides/test/example-slide-1", @document.url
+    end
+  end
 
   context "a static file in a collection" do
     setup do
