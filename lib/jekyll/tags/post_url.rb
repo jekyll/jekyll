@@ -14,9 +14,9 @@ module Jekyll
 
       def ==(other)
         slug == post_slug(other) &&
-          date.year  == other.date.year &&
-          date.month == other.date.month &&
-          date.day   == other.date.day
+        date.year  == other.date.year &&
+        date.month == other.date.month &&
+        date.day   == other.date.day
       end
 
       private
