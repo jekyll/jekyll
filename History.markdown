@@ -14,6 +14,7 @@
 
   * Update simplecov gem to 0.9 (#2748)
   * Remove `docs/` dir (#2768)
+  * add class `<< self` idiom to `New` command (#2817)
 
 ### Site Enhancements
 
