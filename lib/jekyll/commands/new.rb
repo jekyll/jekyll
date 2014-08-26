@@ -11,6 +11,7 @@ module Jekyll
 
             c.option 'force', '--force', 'Force creation even if PATH already exists'
             c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
+            c.option 'config', '-c', '--config EXTENSION', 'Choose yaml or toml format for config file'
             
             c.action do |args, options|
               Jekyll::Commands::New.process(args, options)
@@ -31,7 +32,8 @@ module Jekyll
             create_blank_site new_blog_path
           else
             create_sample_files new_blog_path
-
+            remove_config(options['config'], new_blog_path)
+            
             File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
               f.write(scaffold_post_content)
             end
@@ -76,6 +78,14 @@ module Jekyll
         def scaffold_path
           "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
         end
+
+        def remove_config(extension, path)
+          extension.nil? || ['yaml','yml'].include?('extension') ? remove_with_extension('toml', path) : remove_with_extension('yml', path)
+        end
+
+        def remove_with_extension(extension, path)
+          Dir["#{path}/*.#{extension}"].each { |file| FileUtils.rm file }
+        end  
       end  
     end
   end
