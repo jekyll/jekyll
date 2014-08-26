@@ -129,7 +129,7 @@ module Jekyll
         collection: collection.label,
         path:       cleaned_relative_path,
         output_ext: Jekyll::Renderer.new(site, self).output_ext,
-        title:      basename(".*")
+        name:       basename(".*")
       }
     end
 

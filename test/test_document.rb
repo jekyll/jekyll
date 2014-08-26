@@ -192,7 +192,7 @@ class TestDocument < Test::Unit::TestCase
         "collections" => {
           "slides" => {
             "output"    => true,
-            "permalink" => "/slides/test/:title"
+            "permalink" => "/slides/test/:name"
           }
         },
         "source"      => source_dir,
