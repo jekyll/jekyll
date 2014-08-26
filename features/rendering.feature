@@ -27,8 +27,8 @@ Feature: Rendering
     Then the _site directory should not exist
     And I should see "Invalid CSS after" in the build output
 
-  Scenario: Don't render liquid in CoffeeScript
-    Given I have an "index.coffee" page that contains "hey='for {{site.animal}}'"
+  Scenario: Render liquid in CoffeeScript
+    Given I have an "index.coffee" page with animal "cicada" that contains "hey='for {{page.animal}}'"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "hey = 'for {{site.animal}}';" in "_site/index.js"
+    And I should see "hey = 'for cicada';" in "_site/index.js"
