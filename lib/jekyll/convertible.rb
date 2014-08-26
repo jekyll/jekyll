@@ -162,16 +162,14 @@ module Jekyll
 
     # Determine whether the file should be rendered with Liquid.
     #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
+    # Always returns true.
     def render_with_liquid?
       true
     end
 
     # Determine whether the file should be placed into layouts.
     #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
+    # Returns false if the document is an asset file.
     def place_in_layout?
       !asset_file?
     end
