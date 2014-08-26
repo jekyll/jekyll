@@ -165,7 +165,7 @@ module Jekyll
     # Returns false if the document is either an asset file or a yaml file,
     #   true otherwise.
     def render_with_liquid?
-      !coffeescript_file?
+      true
     end
 
     # Determine whether the file should be placed into layouts.
