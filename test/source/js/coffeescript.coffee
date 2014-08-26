@@ -1,4 +1,5 @@
 ---
+message: "I knew it!"
 ---
 
 $ ->
@@ -7,4 +8,4 @@ $ ->
   cube   = (x) -> square(x) * x
   cubes  = (math.cube num for num in list)
 
-  alert "I knew it!" if elvis?
+  alert "{{ page.message }}" if elvis?
