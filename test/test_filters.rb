@@ -181,6 +181,12 @@ class TestFilters < Test::Unit::TestCase
       end
     end
 
+    context "at filter" do
+      should "return the second item of array" do
+        assert_equal @array_of_objects[1], @filter.at(@array_of_objects, 1)
+      end
+    end
+
     context "sort filter" do
       should "return sorted numbers" do
         assert_equal [1, 2, 2.2, 3], @filter.sort([3, 2.2, 2, 1])
