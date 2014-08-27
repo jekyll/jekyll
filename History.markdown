@@ -19,6 +19,7 @@
 
 ### Site Enhancements
 
+  * Adds info about installing jekyll in current dir (#2839)
   * Remove deprecated `jekyll-projectlist` plugin from list of third-party
     plugins (#2742)
   * Remove tag plugins that are built in to Jekyll (#2751)
