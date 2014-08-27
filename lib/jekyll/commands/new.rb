@@ -11,7 +11,7 @@ module Jekyll
 
             c.option 'force', '--force', 'Force creation even if PATH already exists'
             c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
-            c.option 'config', '-c', '--config EXTENSION', 'Choose yaml or toml format for config file'
+            c.option 'config', '-c', '--config EXTENSION', 'Choose yaml or toml extension for config file. Default: yaml'
             
             c.action do |args, options|
               Jekyll::Commands::New.process(args, options)
