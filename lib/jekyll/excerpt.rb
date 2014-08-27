@@ -6,7 +6,7 @@ module Jekyll
     extend Forwardable
 
     attr_accessor :post
-    attr_accessor :content, :output, :ext
+    attr_accessor :raw, :content, :output, :ext
 
     def_delegator :@post, :site, :site
     def_delegator :@post, :name, :name
