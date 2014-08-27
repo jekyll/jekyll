@@ -98,6 +98,13 @@ module Jekyll
       Jekyll.sanitized_path(source, path)
     end
 
+    # Public: Prefix a given path with the destination directory.
+    #
+    # Returns a path which is prefixed with the destination directory.
+    def in_dest_dir(path)
+      Jekyll.sanitized_path(dest, path)
+    end
+
     # The list of collections and their corresponding Jekyll::Collection instances.
     # If config['collections'] is set, a new instance is created for each item in the collection.
     # If config['collections'] is not set, a new hash is returned.
