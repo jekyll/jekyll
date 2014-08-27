@@ -68,66 +68,86 @@ module Jekyll
   require 'jekyll/command'
   require 'jekyll/liquid_extensions'
 
-  # Public: Tells you which Jekyll environment you are building in so you can skip tasks
-  # if you need to.  This is useful when doing expensive compression tasks on css and
-  # images and allows you to skip that when working in development.
+  class << self
+    # Public: Tells you which Jekyll environment you are building in so you can skip tasks
+    # if you need to.  This is useful when doing expensive compression tasks on css and
+    # images and allows you to skip that when working in development.
 
-  def self.env
-    ENV["JEKYLL_ENV"] || "development"
-  end
-
-  # Public: Generate a Jekyll configuration Hash by merging the default
-  # options with anything in _config.yml, and adding the given options on top.
-  #
-  # override - A Hash of config directives that override any options in both
-  #            the defaults and the config file. See Jekyll::Configuration::DEFAULTS for a
-  #            list of option names and their defaults.
-  #
-  # Returns the final configuration Hash.
-  def self.configuration(override)
-    config = Configuration[Configuration::DEFAULTS]
-    override = Configuration[override].stringify_keys
-    config = config.read_config_files(config.config_files(override))
-
-    # Merge DEFAULTS < _config.yml < override
-    config = Utils.deep_merge_hashes(config, override).stringify_keys
-    set_timezone(config['timezone']) if config['timezone']
-
-    config
-  end
-
-  # Static: Set the TZ environment variable to use the timezone specified
-  #
-  # timezone - the IANA Time Zone
-  #
-  # Returns nothing
-  def self.set_timezone(timezone)
-    ENV['TZ'] = timezone
-  end
-
-  def self.logger
-    @logger ||= LogAdapter.new(Stevenson.new)
-  end
-
-  def self.logger=(writer)
-    @logger = LogAdapter.new(writer)
-  end
-
-  # Public: File system root
-  #
-  # Returns the root of the filesystem as a Pathname
-  def self.fs_root
-    @fs_root ||= "/"
-  end
-
-  def self.sanitized_path(base_directory, questionable_path)
-    clean_path = File.expand_path(questionable_path, fs_root)
-    clean_path.gsub!(/\A\w\:\//, '/')
-    unless clean_path.start_with?(base_directory)
-      File.join(base_directory, clean_path)
-    else
-      clean_path
+    def env
+      ENV["JEKYLL_ENV"] || "development"
     end
+
+    # Public: Generate a Jekyll configuration Hash by merging the default
+    # options with anything in _config.yml, and adding the given options on top.
+    #
+    # override - A Hash of config directives that override any options in both
+    #            the defaults and the config file. See Jekyll::Configuration::DEFAULTS for a
+    #            list of option names and their defaults.
+    #
+    # Returns the final configuration Hash.
+    def configuration(override)
+      config = Configuration[Configuration::DEFAULTS]
+      override = Configuration[override].stringify_keys
+      config = config.read_config_files(config.config_files(override))
+
+      # Merge DEFAULTS < _config.yml < override
+      config = Utils.deep_merge_hashes(config, override).stringify_keys
+      set_timezone(config['timezone']) if config['timezone']
+
+      config
+    end
+
+    # Public: Set the TZ environment variable to use the timezone specified
+    #
+    # timezone - the IANA Time Zone
+    #
+    # Returns nothing
+    def set_timezone(timezone)
+      ENV['TZ'] = timezone
+    end
+
+    # Public: Fetch the logger instance for this Jekyll process.
+    #
+    # Returns the LogAdapter instance.
+    def logger
+      @logger ||= LogAdapter.new(Stevenson.new)
+    end
+
+    # Public: Set the log writer.
+    #         New log writer must respond to the same methods
+    #         as Ruby's interal Logger.
+    #
+    # writer - the new Logger-compatible log transport
+    #
+    # Returns the new logger.
+    def logger=(writer)
+      @logger = LogAdapter.new(writer)
+    end
+
+    # Public: An array of sites
+    #
+    # Returns the Jekyll sites created.
+    def sites
+      @sites ||= []
+    end
+
+    # Public: Ensures the questionable path is prefixed with the base directory
+    #         and prepends the questionable path with the base directory if false.
+    #
+    # base_directory - the directory with which to prefix the questionable path
+    # questionable_path - the path we're unsure about, and want prefixed
+    #
+    # Returns the sanitized path.
+    def sanitized_path(base_directory, questionable_path)
+      clean_path = File.expand_path(questionable_path, "/")
+      clean_path.gsub!(/\A\w\:\//, '/')
+      unless clean_path.start_with?(base_directory)
+        File.join(base_directory, clean_path)
+      else
+        clean_path
+      end
+    end
+
   end
 end
 
