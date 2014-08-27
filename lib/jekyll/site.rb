@@ -3,8 +3,9 @@ require 'csv'
 
 module Jekyll
   class Site
+    attr_reader   :source, :dest
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :exclude, :include, :source, :dest, :lsi, :highlighter,
+                  :exclude, :include, :lsi, :highlighter,
                   :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
                   :plugin_manager
@@ -22,8 +23,8 @@ module Jekyll
         self.send("#{opt}=", config[opt])
       end
 
-      self.source          = File.expand_path(config['source'])
-      self.dest            = File.expand_path(config['destination'])
+      @source              = File.expand_path(config['source']).freeze
+      @dest                = File.expand_path(config['destination']).freeze
       self.permalink_style = config['permalink'].to_sym
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
