@@ -33,6 +33,8 @@ module Jekyll
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
+      Jekyll.sites << self
+
       reset
       setup
     end
