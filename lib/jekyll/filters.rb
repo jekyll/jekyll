@@ -203,7 +203,7 @@ module Jekyll
     # Filter an array of objects
     #
     # input - the object array
-    # key - key within each object to filter by
+    # property - property within each object to filter by
     # value - desired value
     #
     # Returns the filtered array of objects
