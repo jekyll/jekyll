@@ -254,7 +254,7 @@ module Jekyll
     # input - The Object to be converted
     #
     # Returns a YAML representation of the object.
-    def debug(input)
+    def inspect(input)
       CGI.escapeHTML(input.to_yaml)
     end
 
