@@ -41,7 +41,7 @@ module Jekyll
           doc.read
           docs << doc
         else
-          relative_dir = File.join(relative_directory, File.dirname(file_path)).chomp("/.")
+          relative_dir = Jekyll.sanitized_path(relative_directory, File.dirname(file_path)).chomp("/.")
           files << StaticFile.new(site, site.source, relative_dir, File.basename(full_path), self)
         end
       end
