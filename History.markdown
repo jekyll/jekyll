@@ -4,6 +4,7 @@
 
 ### Minor Enhancements
 
+  * Render Liquid in CoffeeScript files (#2830)
   * Add support for CSV files in the `_data` directory (#2761)
   * Add the `name` variable to collection permalinks (#2799)
 
