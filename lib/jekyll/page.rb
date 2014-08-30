@@ -28,7 +28,6 @@ module Jekyll
       @dir  = dir
       @name = name
 
-
       process(name)
       read_yaml(File.join(base, dir), name)
 
@@ -87,20 +86,34 @@ module Jekyll
     #
     # Returns the String url.
     def url
-      @url ||= URL.new({
-        :template => template,
-        :placeholders => url_placeholders,
-        :permalink => permalink
-      }).to_s
+      @url ||= begin
+        tmpl = template
+
+        # Optimization: fingerprint computation requires another call
+        # for `transform`, do it only if the URL needs it
+        uses_fingerprint = tmpl =~ /:fingerprint/
+
+        url = URL.new(
+          :template     => tmpl,
+          :placeholders => url_placeholders(uses_fingerprint),
+          :permalink    => permalink
+        ).to_s
+
+        # Optimization: store the fingerprint only if it's in the URL
+        site.path_fingerprints[path] = url if uses_fingerprint
+
+        url
+      end
     end
 
     # Returns a hash of URL placeholder names (as symbols) mapping to the
     # desired placeholder replacements. For details see "url.rb"
-    def url_placeholders
+    def url_placeholders(uses_fingerprint)
       {
-        :path       => @dir,
-        :basename   => basename,
-        :output_ext => output_ext
+        :path        => @dir,
+        :basename    => basename,
+        :output_ext  => output_ext,
+        :fingerprint => uses_fingerprint ? content_fingerprint : ""
       }
     end
 

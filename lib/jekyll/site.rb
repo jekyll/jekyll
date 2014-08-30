@@ -4,9 +4,11 @@ require 'csv'
 module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :exclude, :include, :source, :dest, :lsi, :highlighter,
-                  :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
+                  :exclude, :include, :source, :dest, :lsi,
+                  :highlighter, :permalink_style, :time, :future,
+                  :unpublished, :safe, :plugins, :limit_posts,
+                  :path_fingerprints, :show_drafts, :keep_files,
+                  :baseurl, :data, :file_read_opts, :gems,
                   :plugin_manager
 
     attr_accessor :converters, :generators
@@ -58,6 +60,7 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      self.path_fingerprints = {}
       @collections = nil
 
       if limit_posts < 0

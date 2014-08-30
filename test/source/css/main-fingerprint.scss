@@ -1,0 +1,9 @@
+---
+permalink: "/:path/:basename-:fingerprint:output_ext"
+---
+
+@import "grid";
+
+p {
+  background-image: url("{{ page.url }}");
+}

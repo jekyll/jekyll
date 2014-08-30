@@ -1,5 +1,6 @@
 # encoding: UTF-8
 
+require 'digest/md5'
 require 'set'
 
 # Convertible provides methods for converting a pagelike item
@@ -173,6 +174,10 @@ module Jekyll
     # Returns false if the document is an asset file.
     def place_in_layout?
       !asset_file?
+    end
+
+    def content_fingerprint
+      Digest::MD5.hexdigest(transform)
     end
 
     # Checks if the layout specified in the document actually exists

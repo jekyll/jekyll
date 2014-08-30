@@ -16,6 +16,8 @@ class TestTags < Test::Unit::TestCase
       site.read_posts('')
     end
 
+    yield site if block_given?
+
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
     payload = { "highlighter_prefix" => @converter.highlighter_prefix,
@@ -293,6 +295,25 @@ CONTENT
       assert_raise ArgumentError do
         create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
       end
+    end
+  end
+
+  context "simple page with fingerprint linking" do
+    setup do
+      content = <<CONTENT
+---
+title: Fingerprint linking
+---
+
+{% fingerprint_url assets/screen.scss %}
+CONTENT
+      create_post(content) do |site|
+        site.path_fingerprints = {"assets/screen.scss" => "assets/screen-dc05dce5b949131d74c76245c465e16d.css"}
+      end
+    end
+
+    should "contain the fingerprinted URL of the page" do
+      assert_match %r{assets/screen-dc05dce5b949131d74c76245c465e16d\.css}, @result
     end
   end
 

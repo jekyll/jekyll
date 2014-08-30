@@ -171,8 +171,12 @@ class TestSite < Test::Unit::TestCase
         foo.md
         index.html
         index.html
+        main-fingerprint.scss
+        main-fingerprint.scss
         main.scss
         main.scss
+        print-fingerprint.css
+        print-fingerprint.css
         properties.html
         sitemap.xml
         static_files.html
