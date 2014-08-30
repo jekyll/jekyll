@@ -105,5 +105,9 @@ module Jekyll
     def self.unescape_path(path)
       URI.unescape(path.encode('utf-8'))
     end
+
+    def self.template?(path)
+      path =~ /:\w+/
+    end
   end
 end

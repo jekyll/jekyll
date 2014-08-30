@@ -49,21 +49,28 @@ module Jekyll
     # The full path and filename of the post. Defined in the YAML of the post
     # body.
     #
-    # Returns the String permalink or nil if none has been set.
+    # Returns the String permalink or nil if none has been set or if the
+    # permalink is a template.
     def permalink
       return nil if data.nil? || data['permalink'].nil?
+      plink = !URL.template?(data['permalink']) && data['permalink']
       if site.config['relative_permalinks']
-        File.join(@dir, data['permalink'])
+        File.join(@dir, plink)
       else
-        data['permalink']
+        plink
       end
     end
 
-    # The template of the permalink.
+    # The template of the permalink. If the permalink of the page is template,
+    # return it. Otherwise, return the template from site configuration.
     #
     # Returns the template String.
     def template
-      if site.permalink_style == :pretty
+      page_template = URL.template?(data['permalink']) && data['permalink']
+
+      if page_template
+        page_template
+      elsif site.permalink_style == :pretty
         if index? && html?
           "/:path/"
         elsif html?

@@ -24,5 +24,9 @@ class TestURL < Test::Unit::TestCase
       ).to_s
     end
 
+    should "recognize URL template" do
+      assert URL.template?("/:path")
+      refute URL.template?("/path")
+    end
   end
 end
