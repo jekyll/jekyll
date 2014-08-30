@@ -146,7 +146,7 @@ namespace :site do
     # Generate the site in server mode.
     puts "Running Jekyll..."
     Dir.chdir("site") do
-      sh "#{File.expand_path('bin/jekyll', File.dirname(__FILE__))} serve --watch"
+      sh "#{File.expand_path('bin/jekyll', File.dirname(__FILE__))} serve"
     end
   end
 
