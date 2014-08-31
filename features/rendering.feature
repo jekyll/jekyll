@@ -26,7 +26,7 @@ Feature: Rendering
     And I have a configuration file with "color" set to "red"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see ".foo-bar {\n  color:red; }" in "_site/index.css"
+    And I should see ".foo-bar {\n  color: red; }" in "_site/index.css"
 
   Scenario: Render liquid in CoffeeScript
     Given I have an "index.coffee" page with animal "cicada" that contains "hey='for {{page.animal}}'"
