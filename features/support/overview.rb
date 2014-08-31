@@ -122,11 +122,6 @@ module Features
       end
 
       def doc_string(string)
-        return if @options[:no_multiline] || @hide_this_step
-        s = %{"""\n#{string}\n"""}.indent(@indent)
-        s = s.split("\n").map{|l| l =~ /^\s+$/ ? '' : l}.join("\n")
-        @io.puts(format_string(s, @current_step.status))
-        @io.flush
       end
 
       def exception(exception, status)
