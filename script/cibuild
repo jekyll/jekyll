@@ -1,16 +1,4 @@
 #! /bin/bash
 
-set -e
-
-parallelize_tests() {
-  ls -1 script/{test,cucumber,proof} | xargs -P 3 -L 1 /bin/bash
-}
-
-serialize_tests() {
-  script/proof
-  script/test
-  script/cucumber
-}
-
 script/branding
-bundle exec rake $TEST_SUITE
+script/$TEST_SUITE

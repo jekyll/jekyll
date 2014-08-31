@@ -27,4 +27,4 @@ env:
   - secure: Ym8nx7nbfGYGo47my92M+deJykaiMkdZdb615EO51liv/xy/0aQ919Jpfieugc9d3zVnm+zFGPbpv4YzRpsik6OlVBNa4lP+BnQ27ptf5YcLWD8Hksi7845WFLecXMoaTCoYer/TvYZsIWJb2nSDMH9qbfZhnd1YZKuvUpK0rEU=
   matrix:
   - TEST_SUITE=test
-  - TEST_SUITE=features
+  - TEST_SUITE=cucumber
