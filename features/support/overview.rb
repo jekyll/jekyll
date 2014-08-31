@@ -112,6 +112,7 @@ module Features
 
       def exception(exception, status)
         return if @hide_this_step
+        @io.puts
         print_exception(exception, status, @indent)
         @io.flush
       end
