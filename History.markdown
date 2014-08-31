@@ -10,6 +10,7 @@
 
 ### Bug Fixes
 
+  * Use `Jekyll.sanitized_path` when adding static files to Collections (#2849)
   * Fix encoding of `main.scss` in site template (#2771)
 
 ### Development Fixes
