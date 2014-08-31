@@ -24,6 +24,7 @@
 
 ### Site Enhancements
 
+  * Document the `name` variable for collection permalinks (#2829)
   * Adds info about installing jekyll in current dir (#2839)
   * Remove deprecated `jekyll-projectlist` plugin from list of third-party
     plugins (#2742)
