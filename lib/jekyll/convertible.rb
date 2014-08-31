@@ -67,6 +67,7 @@ module Jekyll
           converter.convert output
         rescue => e
           Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error converting '#{path}'."
+          Jekyll.logger.error("Conversion error:", e.to_s)
           raise e
         end
       end
