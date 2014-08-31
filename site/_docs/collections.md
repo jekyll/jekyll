@@ -94,6 +94,14 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be wr
     </tr>
     <tr>
       <td>
+        <p><code>name</code></p>
+      </td>
+      <td>
+        <p>The document's base filename, with every sequence of spaces and non-alphanumeric characters replaced by a hyphen</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>output_ext</code></p>
       </td>
       <td>
