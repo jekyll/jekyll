@@ -20,7 +20,8 @@ module Jekyll
             c.option 'skip_initial_build', '--skip-initial-build', 'Skips the initial site build which occurs before the server is started.'
 
             c.action do |args, options|
-              options["serving"] ||= true
+              options["serving"] = true
+              options["watch"] = true unless options.key?("watch")
               Jekyll::Commands::Build.process(options)
               Jekyll::Commands::Serve.process(options)
             end
