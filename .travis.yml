@@ -25,3 +25,5 @@ env:
   global:
   - secure: bt5nglPTdsc0N5fB1dOJz2WbM81dGpDuVD8PnhEsxgUfoo6xavhU4+pNrUADlSUqQ1aJrdU+MKW4x+JZ2ZnJS8vOpNzRymuMZSbFaljK4pgFGiKFgBdMKxVikvoYcxKCjLAl7NJZ11W6hUw+JtJScClDZwrJJAQB6I7Isp/LsdM=
   - secure: Ym8nx7nbfGYGo47my92M+deJykaiMkdZdb615EO51liv/xy/0aQ919Jpfieugc9d3zVnm+zFGPbpv4YzRpsik6OlVBNa4lP+BnQ27ptf5YcLWD8Hksi7845WFLecXMoaTCoYer/TvYZsIWJb2nSDMH9qbfZhnd1YZKuvUpK0rEU=
+  - TEST_SUITE=test
+  - TEST_SUITE=features

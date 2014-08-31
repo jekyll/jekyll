@@ -13,4 +13,4 @@ serialize_tests() {
 }
 
 script/branding
-time parallelize_tests
+bundle exec rake $TEST_SUITE
