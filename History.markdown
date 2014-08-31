@@ -18,6 +18,7 @@
   * Remove `docs/` dir (#2768)
   * add class `<< self` idiom to `New` command (#2817)
   * Allow Travis to 'parallelize' our tests (#2859)
+  * Fix test for Liquid rendering in Sass (#2856)
 
 ### Site Enhancements
 
