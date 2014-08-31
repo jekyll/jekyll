@@ -34,6 +34,7 @@ module Features
       end
 
       def after_features(features)
+        @io.puts
         print_summary(features)
       end
 
@@ -73,18 +74,6 @@ module Features
         print_feature_element_name(keyword, name, file_colon_line, source_indent)
       end
 
-      def before_examples_array(examples_array)
-      end
-
-      def examples_name(keyword, name)
-      end
-
-      def before_outline_table(outline_table)
-      end
-
-      def after_outline_table(outline_table)
-      end
-
       def scenario_name(keyword, name, file_colon_line, source_indent)
         print_feature_element_name(keyword, name, file_colon_line, source_indent)
       end
@@ -121,31 +110,10 @@ module Features
         @io.print CHARS[status]
       end
 
-      def doc_string(string)
-      end
-
       def exception(exception, status)
         return if @hide_this_step
         print_exception(exception, status, @indent)
         @io.flush
-      end
-
-      def before_multiline_arg(multiline_arg)
-      end
-
-      def after_multiline_arg(multiline_arg)
-      end
-
-      def before_table_row(table_row)
-      end
-
-      def after_table_row(table_row)
-      end
-
-      def after_table_cell(cell)
-      end
-
-      def table_cell_value(value, status)
       end
 
       private
