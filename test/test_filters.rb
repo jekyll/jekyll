@@ -211,5 +211,11 @@ class TestFilters < Test::Unit::TestCase
       end
     end
 
+    context "inspect filter" do
+      should "return a HTML-escaped YAML representation of an object" do
+        assert_equal "---\n&quot;&lt;a&gt;&quot;: 1\n", @filter.inspect({ "<a>" => 1 })
+      end
+    end
+
   end
 end

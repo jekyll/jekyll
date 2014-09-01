@@ -1,5 +1,6 @@
 require 'uri'
 require 'json'
+require 'yaml'
 
 module Jekyll
   module Filters
@@ -246,6 +247,15 @@ module Jekyll
           end
         }
       end
+    end
+
+    # Convert an object into its YAML format for debugging
+    #
+    # input - The Object to be converted
+    #
+    # Returns a YAML representation of the object.
+    def inspect(input)
+      CGI.escapeHTML(input.to_yaml)
     end
 
     private
