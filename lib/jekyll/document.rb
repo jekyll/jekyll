@@ -136,11 +136,14 @@ module Jekyll
     #
     # Returns the Hash of key-value pairs for replacement in the URL.
     def url_placeholders
+      name_slug  = slug(File.basename(path, ".*"))
+      title_slug = data['title'].nil? ? name_slug : slug(data['title'])
       {
         collection: collection.label,
         path:       cleaned_relative_path,
         output_ext: Jekyll::Renderer.new(site, self).output_ext,
-        name:       slug(File.basename(path, ".*"))
+        name:       name_slug,
+        title:      title_slug
       }
     end
 
