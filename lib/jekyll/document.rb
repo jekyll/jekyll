@@ -53,7 +53,7 @@ module Jekyll
     # sequence of spaces and non-alphanumeric characters replaced with a
     # hyphen.
     def slug(name)
-      name.downcase.gsub(/[\W\s]+/, '-')
+      name.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
     end
 
     # The extension name of the document.

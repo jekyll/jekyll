@@ -213,18 +213,18 @@ class TestDocument < Test::Unit::TestCase
         "collections" => {
           "slides" => {
             "output"    => true,
-            "permalink" => "/slides/test/:title"
+            "permalink" => "/slides/:title"
           }
         },
         "source"      => source_dir,
         "destination" => dest_dir
       }))
       @site.process
-      @document = @site.collections["slides"].docs[0]
+      @document = @site.collections["slides"].docs[3]
     end
 
     should "produce the right URL" do
-      assert_equal "/slides/test/example-slide", @document.url
+      assert_equal "/slides/so-what-is-jekyll-exactly", @document.url
     end
   end
 
