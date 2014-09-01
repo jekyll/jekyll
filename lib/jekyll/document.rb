@@ -45,15 +45,19 @@ module Jekyll
       File.basename(path, suffix)
     end
 
-    # A sluggified filename or title.
+    # Sluggify a filename or title.
     #
     # name - the filename or title to sluggify
     #
     # Returns the given filename or title in lowercase, with every
     # sequence of spaces and non-alphanumeric characters replaced with a
     # hyphen.
-    def slug(name)
-      name.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+    def sluggify(name)
+      if name.nil?
+        nil
+      else
+        name.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+      end
     end
 
     # The extension name of the document.
@@ -136,14 +140,12 @@ module Jekyll
     #
     # Returns the Hash of key-value pairs for replacement in the URL.
     def url_placeholders
-      name_slug  = slug(File.basename(path, ".*"))
-      title_slug = data['title'].nil? ? name_slug : slug(data['title'])
       {
         collection: collection.label,
         path:       cleaned_relative_path,
         output_ext: Jekyll::Renderer.new(site, self).output_ext,
-        name:       name_slug,
-        title:      title_slug
+        name:       sluggify(basename(".*")),
+        title:      sluggify(data['title']) || sluggify(basename(".*"))
       }
     end
 
