@@ -248,6 +248,15 @@ module Jekyll
       end
     end
 
+    # Convert an object into its String representation for debugging
+    #
+    # input - The Object to be converted
+    #
+    # Returns a String representation of the object.
+    def inspect(input)
+      CGI.escapeHTML(input.inspect)
+    end
+
     private
     def time(input)
       case input
