@@ -17,6 +17,7 @@ module Jekyll
     def conscientious_require
       require_plugin_files
       require_gems
+      require_from_bundler
     end
 
     # Require each of the gem plugins specified.
@@ -28,6 +29,15 @@ module Jekyll
           require gem
         end
       end
+    end
+
+    def require_from_bundler
+      unless site.safe
+        require "bundler/setup"
+        Bundler.require(:jekyll_plugins)
+      end
+    rescue LoadError
+      false
     end
 
     # Check whether a gem plugin is allowed to be used during this build.
