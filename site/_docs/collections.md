@@ -81,7 +81,7 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be wr
         <p><code>collection</code></p>
       </td>
       <td>
-        <p>Label of the containing collection</p>
+        <p>Label of the containing collection.</p>
       </td>
     </tr>
     <tr>
@@ -89,7 +89,7 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be wr
         <p><code>path</code></p>
       </td>
       <td>
-        <p>Path to the document relative to the collection's directory</p>
+        <p>Path to the document relative to the collection's directory.</p>
       </td>
     </tr>
     <tr>
@@ -97,7 +97,15 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be wr
         <p><code>name</code></p>
       </td>
       <td>
-        <p>The document's base filename, with every sequence of spaces and non-alphanumeric characters replaced by a hyphen</p>
+        <p>The document's base filename, with every sequence of spaces and non-alphanumeric characters replaced by a hyphen.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>title</code></p>
+      </td>
+      <td>
+        <p>The document's lowercase title (as defined in its <a href="/docs/frontmatter/">front matter</a>), with every sequence of spaces and non-alphanumeric characters replaced by a hyphen. If the document does not define a title in its <a href="/docs/frontmatter/">front matter</a>, this is equivalent to <code>name</code>.</p>
       </td>
     </tr>
     <tr>
@@ -105,7 +113,7 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be wr
         <p><code>output_ext</code></p>
       </td>
       <td>
-        <p>Extension of the output file</p>
+        <p>Extension of the output file.</p>
       </td>
     </tr>
   </tbody>
