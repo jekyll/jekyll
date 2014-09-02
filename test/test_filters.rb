@@ -211,5 +211,11 @@ class TestFilters < Test::Unit::TestCase
       end
     end
 
+    context "inspect filter" do
+      should "return a HTML-escaped string representation of an object" do
+        assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect({ "<a>" => 1 })
+      end
+    end
+
   end
 end
