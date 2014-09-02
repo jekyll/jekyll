@@ -110,10 +110,12 @@ module Jekyll
     # sequence of spaces and non-alphanumeric characters replaced with a
     # hyphen.
     def slugify(string)
-      if string.nil?
-        nil
-      else
-        string.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+      unless string.nil?
+        # Replace each non-alphanumeric character sequence with a hyphen
+        slug = string.gsub(/[^a-z0-9]+/i, '-')
+        # Remove leading/trailing hyphen
+        slug.gsub!(/^\-|\-$/i, '')
+        slug.downcase
       end
     end
 
