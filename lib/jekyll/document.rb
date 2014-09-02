@@ -45,21 +45,6 @@ module Jekyll
       File.basename(path, suffix)
     end
 
-    # Sluggify a filename or title.
-    #
-    # name - the filename or title to sluggify
-    #
-    # Returns the given filename or title in lowercase, with every
-    # sequence of spaces and non-alphanumeric characters replaced with a
-    # hyphen.
-    def sluggify(name)
-      if name.nil?
-        nil
-      else
-        name.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
-      end
-    end
-
     # The extension name of the document.
     #
     # Returns the extension name of the document.
@@ -144,8 +129,8 @@ module Jekyll
         collection: collection.label,
         path:       cleaned_relative_path,
         output_ext: Jekyll::Renderer.new(site, self).output_ext,
-        name:       sluggify(basename(".*")),
-        title:      sluggify(data['title']) || sluggify(basename(".*"))
+        name:       Utils.slugify(basename(".*")),
+        title:      Utils.slugify(data['title']) || Utils.slugify(basename(".*"))
       }
     end
 
