@@ -97,4 +97,48 @@ class TestUtils < Test::Unit::TestCase
     end
   end
 
+  context "The \`Utils.slugify\` method" do
+    should "return nil if passed nil" do
+      begin
+        assert Utils.slugify(nil).nil?
+      rescue NoMethodError
+        assert false, "Threw NoMethodError"
+      end
+    end
+
+    should "replace whitespace with hyphens" do
+      assert_equal "working-with-drafts", Utils.slugify("Working with drafts")
+    end
+
+    should "replace consecutive whitespace with a single hyphen" do
+      assert_equal "basic-usage", Utils.slugify("Basic   Usage")
+    end
+
+    should "trim leading and trailing whitespace" do
+      assert_equal "working-with-drafts", Utils.slugify("  Working with drafts   ")
+    end
+
+    should "drop trailing punctuation" do
+      assert_equal "so-what-is-jekyll-exactly", Utils.slugify("So what is Jekyll, exactly?")
+    end
+
+    should "ignore hyphens" do
+      assert_equal "pre-releases", Utils.slugify("Pre-releases")
+    end
+
+    should "replace underscores with hyphens" do
+      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file")
+    end
+
+    should "combine adjacent hyphens and spaces" do
+      assert_equal "customizing-git-git-hooks", Utils.slugify("Customizing Git - Git Hooks")
+    end
+
+    should "not modify the original string" do
+      title = "Quick-start guide"
+      Utils.slugify(title)
+      assert_equal "Quick-start guide", title
+    end
+  end
+
 end
