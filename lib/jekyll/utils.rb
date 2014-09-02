@@ -109,11 +109,11 @@ module Jekyll
     # Returns the given filename or title in lowercase, with every
     # sequence of spaces and non-alphanumeric characters replaced with a
     # hyphen.
-    def slugify(name)
-      if name.nil?
+    def slugify(string)
+      if string.nil?
         nil
       else
-        name.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+        string.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
       end
     end
 
