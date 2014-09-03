@@ -48,7 +48,7 @@ class TestSite < Test::Unit::TestCase
         Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
       end
       @site = Site.new(Jekyll.configuration)
-      @num_invalid_posts = 2
+      @num_invalid_posts = 4
     end
 
     should "have an empty tag hash by default" do

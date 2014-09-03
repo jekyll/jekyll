@@ -18,9 +18,15 @@ module Jekyll
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
-      INCLUDES_DIR = '_includes'
-
       def initialize(tag_name, markup, tokens)
+        @tag_name = tag_name
+        case tag_name
+        when 'include'
+          @includes_dir = '_includes'
+        when 'relative_include'
+          @includes_dir = ''
+        end
+
         super
         matched = markup.strip.match(VARIABLE_SYNTAX)
         if matched
@@ -97,8 +103,12 @@ eos
       end
 
       def render(context)
-        dir = File.join(File.realpath(context.registers[:site].source), INCLUDES_DIR)
-
+        case @tag_name
+        when 'include'
+          dir = File.join(File.realpath(context.registers[:site].source), @includes_dir)
+        when 'relative_include'
+          dir = File.join(File.realpath(context.registers[:site].source), File.dirname(context.registers[:page]["path"]))
+        end
         file = render_variable(context) || @file
         validate_file_name(file)
 
@@ -113,7 +123,7 @@ eos
             partial.render!(context)
           end
         rescue => e
-          raise IncludeTagError.new e.message, File.join(INCLUDES_DIR, @file)
+          raise IncludeTagError.new e.message, File.join(@includes_dir, @file)
         end
       end
 
@@ -126,7 +136,7 @@ eos
       end
 
       def path_relative_to_source(dir, path)
-        File.join(INCLUDES_DIR, path.sub(Regexp.new("^#{dir}"), ""))
+        File.join(@includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
       end
 
       def realpath_prefixed_with?(path, dir)
@@ -138,7 +148,11 @@ eos
         File.read(file, file_read_opts(context))
       end
     end
+
+    class RelativeIncludeTag < IncludeTag
+    end
   end
 end
 
 Liquid::Template.register_tag('include', Jekyll::Tags::IncludeTag)
+Liquid::Template.register_tag('relative_include', Jekyll::Tags::RelativeIncludeTag)
