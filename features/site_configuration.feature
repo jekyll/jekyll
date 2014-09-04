@@ -243,37 +243,6 @@ Feature: Site configuration
     And I should see "Post Layout: <p>content for entry1.</p>" in "_site/2007/12/31/entry1.html"
     And I should see "Post Layout: <p>content for entry2.</p>" in "_site/2020/01/31/entry2.html"
 
-  Scenario: Add a gem-based plugin
-    Given I have an "index.html" file that contains "Whatever"
-    And I have a configuration file with "gems" set to "[jekyll_test_plugin]"
-    When I run jekyll build
-    Then the _site directory should exist
-    And I should see "Whatever" in "_site/index.html"
-    And I should see "this is a test" in "_site/test.txt"
-
-  Scenario: Add an empty whitelist to restrict all gems
-    Given I have an "index.html" file that contains "Whatever"
-    And I have a configuration file with:
-      | key       | value                |
-      | gems      | [jekyll_test_plugin] |
-      | whitelist | []                   |
-    When I run jekyll build --safe
-    Then the _site directory should exist
-    And I should see "Whatever" in "_site/index.html"
-    And the "_site/test.txt" file should not exist
-
-  Scenario: Add a whitelist to restrict some gems but allow others
-    Given I have an "index.html" file that contains "Whatever"
-    And I have a configuration file with:
-      | key       | value                                              |
-      | gems      | [jekyll_test_plugin, jekyll_test_plugin_malicious] |
-      | whitelist | [jekyll_test_plugin]                               |
-    When I run jekyll build --safe
-    Then the _site directory should exist
-    And I should see "Whatever" in "_site/index.html"
-    And the "_site/test.txt" file should exist
-    And I should see "this is a test" in "_site/test.txt"
-
   Scenario: arbitrary file reads via layouts
     Given I have an "index.html" page with layout "page" that contains "FOO"
     And I have a "_config.yml" file that contains "layouts: '../../../../../../../../../../../../../../usr/include'"
