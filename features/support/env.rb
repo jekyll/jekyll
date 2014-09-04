@@ -21,9 +21,17 @@ def jekyll_run_output
   File.read(jekyll_output_file) if File.file?(jekyll_output_file)
 end
 
+def run_bundle(args)
+  child = run_in_shell('bundle', *args.strip.split(' '))
+end
+
 def run_jekyll(args)
-  child = POSIX::Spawn::Child.new JEKYLL_PATH, *args.strip.split(' '), "--trace", :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"]
+  child = run_in_shell(JEKYLL_PATH, *args.strip.split(' '), "--trace")
   child.status.exitstatus == 0
+end
+
+def run_in_shell(args, options)
+  POSIX::Spawn::Child.new *args, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"])
 end
 
 def slug(title)

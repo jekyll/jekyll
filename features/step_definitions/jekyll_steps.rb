@@ -146,6 +146,13 @@ When /^I run jekyll(.*)$/ do |args|
   end
 end
 
+When /^I run bundle(.*)$/ do |args|
+  status = run_bundle(args)
+  if args.include?("--verbose") || ENV['DEBUG']
+    puts jekyll_run_output
+  end
+end
+
 When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
   File.open(file, 'a') do |f|
     f.write(text)
