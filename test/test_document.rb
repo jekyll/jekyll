@@ -186,7 +186,7 @@ class TestDocument < Test::Unit::TestCase
     end
   end
 
-  context "a document in a collection with custom permalinks" do
+  context "a document in a collection with custom filename permalinks" do
     setup do
       @site = Site.new(Jekyll.configuration({
         "collections" => {
@@ -204,6 +204,32 @@ class TestDocument < Test::Unit::TestCase
 
     should "produce the right URL" do
       assert_equal "/slides/test/example-slide-1", @document.url
+    end
+  end
+
+  context "documents in a collection with custom title permalinks" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => {
+          "slides" => {
+            "output"    => true,
+            "permalink" => "/slides/:title"
+          }
+        },
+        "source"      => source_dir,
+        "destination" => dest_dir
+      }))
+      @site.process
+      @document = @site.collections["slides"].docs[3]
+      @document_without_title = @site.collections["slides"].docs[4]
+    end
+
+    should "produce the right URL if they have a title" do
+      assert_equal "/slides/so-what-is-jekyll-exactly", @document.url
+    end
+
+    should "produce the right URL if they don't have a title" do
+      assert_equal "/slides/example-slide-5", @document_without_title.url
     end
   end
 

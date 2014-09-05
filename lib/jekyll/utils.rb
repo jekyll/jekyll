@@ -102,5 +102,22 @@ module Jekyll
       !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
+    # Slugify a filename or title.
+    #
+    # name - the filename or title to slugify
+    #
+    # Returns the given filename or title in lowercase, with every
+    # sequence of spaces and non-alphanumeric characters replaced with a
+    # hyphen.
+    def slugify(string)
+      unless string.nil?
+        # Replace each non-alphanumeric character sequence with a hyphen
+        slug = string.gsub(/[^a-z0-9]+/i, '-')
+        # Remove leading/trailing hyphen
+        slug.gsub!(/^\-|\-$/i, '')
+        slug.downcase
+      end
+    end
+
   end
 end

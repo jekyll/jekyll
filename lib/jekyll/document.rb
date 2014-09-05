@@ -45,15 +45,6 @@ module Jekyll
       File.basename(path, suffix)
     end
 
-    # The sluggified base filename of the document.
-    #
-    # Returns the base filename of the document in lowercase, with every
-    # sequence of spaces and non-alphanumeric characters replaced with a
-    # hyphen.
-    def slug
-      File.basename(path, ".*").downcase.gsub(/[\W\s]+/, '-')
-    end
-
     # The extension name of the document.
     #
     # Returns the extension name of the document.
@@ -138,7 +129,8 @@ module Jekyll
         collection: collection.label,
         path:       cleaned_relative_path,
         output_ext: Jekyll::Renderer.new(site, self).output_ext,
-        name:       slug
+        name:       Utils.slugify(basename(".*")),
+        title:      Utils.slugify(data['title']) || Utils.slugify(basename(".*"))
       }
     end
 
