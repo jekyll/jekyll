@@ -65,7 +65,7 @@ You can now render the list of members in a template:
 
 ## Example: Organizations
 
-Data files can also be placed in sub-folders of the `_data` folder. Each folder level will be added to a variable's namespace. The example bellow shows how GitHub organizations could be defined separately in a file under the `orgs` folder:
+Data files can also be placed in sub-folders of the `_data` folder. Each folder level will be added to a variable's namespace. The example below shows how GitHub organizations could be defined separately in a file under the `orgs` folder:
 
 In `_data/orgs/jekyll.yml`:
 
