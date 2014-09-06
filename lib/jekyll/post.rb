@@ -162,6 +162,7 @@ module Jekyll
       self.date = Utils.parse_date(date, "Post '#{relative_path}' does not have a valid date in the filename.")
       self.slug = slug
       self.ext = ext
+      self.ide = File.join(cats, "#{date}-#{slug}")
     end
 
     # The generated directory into which the post will be placed
