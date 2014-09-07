@@ -15,8 +15,11 @@ class TestPage < Test::Unit::TestCase
   context "A Page" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
-      @site = Site.new(Jekyll.configuration)
+      @site = Site.new(Jekyll.configuration({
+        "source" => source_dir,
+        "destination" => dest_dir,
+        "skip_config_files" => true
+      }))
     end
 
     context "processing pages" do
