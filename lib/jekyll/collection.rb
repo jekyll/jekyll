@@ -35,7 +35,7 @@ module Jekyll
     # Returns the sorted array of docs.
     def read
       filtered_entries.each do |file_path|
-        full_path = Jekyll.sanitized_path(directory, file_path)
+        full_path = collection_dir(file_path)
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
@@ -78,12 +78,23 @@ module Jekyll
       @relative_directory ||= "_#{label}"
     end
 
-    # The full path to the directory containing the
+    # The full path to the directory containing the collection.
     #
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      @directory ||= Jekyll.sanitized_path(site.source, relative_directory)
+      @directory ||= site.in_source_dir(relative_directory)
+    end
+
+    # The full path to the directory containing the collection.
+    #
+    # *files - (optional) any other path pieces relative to the
+    #           directory to append to the path
+    #
+    # Returns a String containing th directory name where the collection
+    #   is stored on the filesystem.
+    def collection_dir(*files)
+      site.in_source_dir(File.join(directory, *files))
     end
 
     # Checks whether the directory "exists" for this collection.
