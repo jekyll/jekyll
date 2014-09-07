@@ -36,6 +36,7 @@ module Jekyll
     def read
       filtered_entries.each do |file_path|
         full_path = collection_dir(file_path)
+        next if File.directory?(full_path)
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
@@ -86,7 +87,8 @@ module Jekyll
       @directory ||= site.in_source_dir(relative_directory)
     end
 
-    # The full path to the directory containing the collection.
+    # The full path to the directory containing the collection, with
+    #   optional subpaths.
     #
     # *files - (optional) any other path pieces relative to the
     #           directory to append to the path
