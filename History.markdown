@@ -10,6 +10,7 @@
   * Add support for CSV files in the `_data` directory (#2761)
   * Add the `name` variable to collection permalinks (#2799)
   * Add `inspect` liquid filter. (#2867)
+  * Add a `slugify` Liquid filter (#2880)
 
 ### Bug Fixes
 
