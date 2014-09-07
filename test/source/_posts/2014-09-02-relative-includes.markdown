@@ -23,3 +23,7 @@ Parameters test
 
 Partial variable test
 - 8 {% include_relative include_relative/rel_in{{ page.include5 }}.html %}
+
+Relative to self test:
+
+- 9 {% include_relative 2014-03-03-yaml-with-dots.md %}

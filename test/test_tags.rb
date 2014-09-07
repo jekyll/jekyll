@@ -544,5 +544,9 @@ CONTENT
     should "include file as partial variable" do
       assert_match %r{8 relative_include}, @content
     end
+
+    should "include files relative to self" do
+      assert_match %r{9 —\ntitle: Test Post Where YAML}, @content
+    end
   end
 end
