@@ -38,6 +38,7 @@
   * Fix minor typo on plugins docs page (#2765)
   * Replace markdown with HTML in `sass_dir` note on assets page (#2791)
   * Fixed "bellow" typo in datafiles docs (#2879)
+  * Fix code/markdown issue in documentation for variables (#2877)
 
 ## 2.3.0 / 2014-08-10
 
