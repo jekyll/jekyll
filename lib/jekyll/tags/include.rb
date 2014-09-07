@@ -23,7 +23,7 @@ module Jekyll
         case tag_name
         when 'include'
           @includes_dir = '_includes'
-        when 'relative_include'
+        when 'include_relative'
           @includes_dir = ''
         end
 
@@ -106,7 +106,7 @@ eos
         case @tag_name
         when 'include'
           dir = File.join(File.realpath(context.registers[:site].source), @includes_dir)
-        when 'relative_include'
+        when 'include_relative'
           dir = File.join(File.realpath(context.registers[:site].source), File.dirname(context.registers[:page]["path"]))
         end
         file = render_variable(context) || @file
@@ -152,4 +152,4 @@ eos
 end
 
 Liquid::Template.register_tag('include', Jekyll::Tags::IncludeTag)
-Liquid::Template.register_tag('relative_include', Jekyll::Tags::RelativeIncludeTag)
+Liquid::Template.register_tag('include_relative', Jekyll::Tags::IncludeTag)

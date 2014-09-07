@@ -2,24 +2,24 @@
 title: Post
 layout: post
 include1: rel_include.html
-include2: relative_includes/rel_include
+include2: include_relative/rel_include
 include3: rel_INCLUDE
 include4: params
 include5: clude
 ---
 
 Liquid tests
-- 1 {% relative_include relative_includes/{{ page.include1 }} %}
-- 2 {% relative_include {{ page.include2 | append: '.html' }} %}
-- 3 {% relative_include relative_includes/{{ page.include3 | downcase | append: '.html' }} %}
+- 1 {% include_relative include_relative/{{ page.include1 }} %}
+- 2 {% include_relative {{ page.include2 | append: '.html' }} %}
+- 3 {% include_relative include_relative/{{ page.include3 | downcase | append: '.html' }} %}
 
 Whitespace tests
-- 4 {% relative_include relative_includes/{{page.include1}} %}
-- 5 {% relative_include relative_includes/{{   page.include1}} %}
-- 6 {% relative_include relative_includes/{{  page.include3   | downcase |   append:  '.html'}} %}
+- 4 {% include_relative include_relative/{{page.include1}} %}
+- 5 {% include_relative include_relative/{{   page.include1}} %}
+- 6 {% include_relative include_relative/{{  page.include3   | downcase |   append:  '.html'}} %}
 
 Parameters test
-- 7 {% relative_include relative_includes/{{ page.include4 | append: '.html' }} var1='foo' var2='bar' %}
+- 7 {% include_relative include_relative/{{ page.include4 | append: '.html' }} var1='foo' var2='bar' %}
 
 Partial variable test
-- 8 {% relative_include relative_includes/rel_in{{ page.include5 }}.html %}
+- 8 {% include_relative include_relative/rel_in{{ page.include5 }}.html %}
