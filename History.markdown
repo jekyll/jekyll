@@ -4,6 +4,7 @@
 
 ### Minor Enhancements
 
+  * Support a new `relative_include` tag (#2870)
   * Auto-enable watch on 'serve' (#2858)
   * Render Liquid in CoffeeScript files (#2830)
   * Add `:title` to collection URL template fillers (#2864)
