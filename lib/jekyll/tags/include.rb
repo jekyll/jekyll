@@ -151,7 +151,8 @@ eos
       end
 
       def dir_to_include(context)
-        File.join(File.realpath(context.registers[:site].source), File.dirname(context.registers[:page]["path"]))
+        page_path = context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
+        File.join(File.realpath(context.registers[:site].source), page_path)
       end
     end
   end

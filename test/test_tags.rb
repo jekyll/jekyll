@@ -548,5 +548,60 @@ CONTENT
     should "include files relative to self" do
       assert_match %r{9 —\ntitle: Test Post Where YAML}, @content
     end
+
+    context "trying to do bad stuff" do
+      context "include missing file" do
+        setup do
+          @content = <<CONTENT
+---
+title: missing file
+---
+
+{% include_relative missing.html %}
+CONTENT
+        end
+
+        should "raise error relative to source directory" do
+          exception = assert_raise IOError do
+            create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          end
+          assert_equal 'Included file \'./missing.html\' not found', exception.message
+        end
+      end
+    end
+
+    context "with symlink'd include" do
+
+      should "not allow symlink includes" do
+        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+        assert_raise IOError do
+          content = <<CONTENT
+---
+title: Include symlink
+---
+
+{% include_relative tmp/pages-test %}
+
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+        end
+        assert_no_match /SYMLINK TEST/, @result
+      end
+
+      should "not expose the existence of symlinked files" do
+        ex = assert_raise IOError do
+          content = <<CONTENT
+---
+title: Include symlink
+---
+
+{% include_relative tmp/pages-test-does-not-exist %}
+
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+        end
+        assert_match /should exist and should not be a symlink/, ex.message
+      end
+    end
   end
 end
