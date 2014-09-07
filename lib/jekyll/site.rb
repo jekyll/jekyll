@@ -23,15 +23,17 @@ module Jekyll
         self.send("#{opt}=", config[opt])
       end
 
+      # Source and destination may not be changed after the site has been created.
       @source              = File.expand_path(config['source']).freeze
       @dest                = File.expand_path(config['destination']).freeze
-      self.permalink_style = config['permalink'].to_sym
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
+
+      self.permalink_style = config['permalink'].to_sym
 
       Jekyll.sites << self
 
@@ -93,16 +95,22 @@ module Jekyll
 
     # Public: Prefix a given path with the source directory.
     #
+    # paths - (optional) path elements to a file or directory within the
+    #         source directory
+    #
     # Returns a path which is prefixed with the source directory.
-    def in_source_dir(path)
-      Jekyll.sanitized_path(source, path)
+    def in_source_dir(*paths)
+      Jekyll.sanitized_path(source, File.join(*paths.flatten))
     end
 
     # Public: Prefix a given path with the destination directory.
     #
+    # paths - (optional) path elements to a file or directory within the
+    #         destination directory
+    #
     # Returns a path which is prefixed with the destination directory.
-    def in_dest_dir(path)
-      Jekyll.sanitized_path(dest, path)
+    def in_dest_dir(*paths)
+      Jekyll.sanitized_path(dest, File.join(*paths))
     end
 
     # The list of collections and their corresponding Jekyll::Collection instances.
@@ -149,7 +157,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      base = File.join(source, dir)
+      base = in_source_dir(dir)
       entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
 
       read_posts(dir)
@@ -158,7 +166,7 @@ module Jekyll
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
-        f_abs = File.join(base, f)
+        f_abs = in_source_dir(base, f)
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
@@ -215,7 +223,7 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = Jekyll.sanitized_path(source, dir)
+      base = in_source_dir(dir)
       read_data_to(base, self.data)
     end
 
@@ -234,7 +242,7 @@ module Jekyll
       end
 
       entries.each do |entry|
-        path = Jekyll.sanitized_path(dir, entry)
+        path = in_source_dir(dir, entry)
         next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
@@ -424,10 +432,10 @@ module Jekyll
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
-      base = File.join(source, dir, subfolder)
+      base = in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
-      entries.delete_if { |e| File.directory?(File.join(base, e)) }
+      entries.delete_if { |e| File.directory?(in_source_dir(base, e)) }
     end
 
     # Aggregate post information

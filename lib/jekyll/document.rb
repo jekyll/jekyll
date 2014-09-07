@@ -159,7 +159,7 @@ module Jekyll
     #
     # Returns the full path to the output file of this document.
     def destination(base_directory)
-      path = Jekyll.sanitized_path(base_directory, url)
+      path = site.in_dest_dir(base_directory, url)
       path = File.join(path, "index.html") if url =~ /\/$/
       path
     end

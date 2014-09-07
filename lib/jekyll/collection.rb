@@ -54,8 +54,8 @@ module Jekyll
     #   relative to the collection's directory
     def entries
       return Array.new unless exists?
-      Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
-        entry[File.join(directory, "")] = ''; entry
+      Dir.glob(collection_dir("**", "*.*")).map do |entry|
+        entry[collection_dir("")] = ''; entry
       end
     end
 
@@ -94,7 +94,8 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def collection_dir(*files)
-      site.in_source_dir(File.join(directory, *files))
+      return directory if files.empty?
+      site.in_source_dir(relative_directory, *files)
     end
 
     # Checks whether the directory "exists" for this collection.
