@@ -3,12 +3,12 @@ require 'csv'
 
 module Jekyll
   class Site
-    attr_reader   :source, :dest
-    attr_accessor :config, :layouts, :posts, :pages, :static_files,
-                  :exclude, :include, :lsi, :highlighter,
-                  :permalink_style, :time, :future, :unpublished, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts, :gems,
-                  :plugin_manager
+    attr_reader   :source, :dest, :config
+    attr_accessor :layouts, :posts, :pages, :static_files,
+                  :exclude, :include, :lsi, :highlighter, :permalink_style,
+                  :time, :future, :unpublished, :safe, :plugins, :limit_posts,
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
+                  :gems, :plugin_manager
 
     attr_accessor :converters, :generators
 
@@ -16,7 +16,7 @@ module Jekyll
     #
     # config - A Hash containing site configuration details.
     def initialize(config)
-      self.config = config.clone
+      @config = config.clone
 
       %w[safe lsi highlighter baseurl exclude include future unpublished
         show_drafts limit_posts keep_files gems].each do |opt|

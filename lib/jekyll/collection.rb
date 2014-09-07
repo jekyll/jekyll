@@ -36,6 +36,7 @@ module Jekyll
     def read
       filtered_entries.each do |file_path|
         full_path = collection_dir(file_path)
+        next if File.directory?(full_path)
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
@@ -78,7 +79,8 @@ module Jekyll
       "_#{label}"
     end
 
-    # The full path to the directory containing the collection.
+    # The full path to the directory containing the collection, with
+    #   optional subpaths.
     #
     # *files - (optional) any other path pieces relative to the
     #           directory to append to the path
@@ -86,9 +88,19 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def collection_dir(*files)
-      site.in_source_dir(relative_directory, *files)
+      Jekyll.sanitized_path(directory, File.join(*files))
     end
-    alias_method :directory, :collection_dir
+
+    # The full path to the directory containing the collection.
+    #
+    # *files - (optional) any other path pieces relative to the
+    #           directory to append to the path
+    #
+    # Returns a String containing th directory name where the collection
+    #   is stored on the filesystem.
+    def directory
+      site.in_source_dir(relative_directory)
+    end
 
     # Checks whether the directory "exists" for this collection.
     # The directory must exist on the filesystem and must not be a symlink

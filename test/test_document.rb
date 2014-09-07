@@ -10,7 +10,12 @@ class TestDocument < Test::Unit::TestCase
         "destination" => dest_dir
       }))
       @site.process
+      p @site.collections["methods"]
       @document = @site.collections["methods"].docs.first
+    end
+
+    should "exist" do
+      assert !@document.nil?
     end
 
     should "know its relative path" do
@@ -220,6 +225,7 @@ class TestDocument < Test::Unit::TestCase
         "destination" => dest_dir
       }))
       @site.process
+      p @site.collections["slides"]
       @document = @site.collections["slides"].docs[3]
       @document_without_title = @site.collections["slides"].docs[4]
     end
