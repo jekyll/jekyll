@@ -66,7 +66,7 @@ module Jekyll
     # Returns an Array of plugin search paths
     def plugins_path
       if (site.config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [Jekyll.sanitized_path(site.source, site.config['plugins'])]
+        [site.in_source_dir(site.config['plugins'])]
       else
         Array(site.config['plugins']).map { |d| File.expand_path(d) }
       end

@@ -4,7 +4,11 @@ require 'ostruct'
 class TestConvertible < Test::Unit::TestCase
   context "yaml front-matter" do
     setup do
-      @convertible = OpenStruct.new
+      @convertible = OpenStruct.new(
+        "site" => Site.new(Jekyll.configuration(
+          "source" => File.expand_path('../fixtures', __FILE__)
+        ))
+      )
       @convertible.extend Jekyll::Convertible
       @base = File.expand_path('../fixtures', __FILE__)
     end
