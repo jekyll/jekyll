@@ -18,8 +18,6 @@ module Jekyll
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
-      INCLUDES_DIR = '_includes'
-
       def initialize(tag_name, markup, tokens)
         super
         matched = markup.strip.match(VARIABLE_SYNTAX)
@@ -96,8 +94,12 @@ eos
         end
       end
 
+      def includes_dir
+        '_includes'
+      end
+
       def render(context)
-        dir = File.join(File.realpath(context.registers[:site].source), INCLUDES_DIR)
+        dir = resolved_includes_dir(context)
 
         file = render_variable(context) || @file
         validate_file_name(file)
@@ -113,8 +115,12 @@ eos
             partial.render!(context)
           end
         rescue => e
-          raise IncludeTagError.new e.message, File.join(INCLUDES_DIR, @file)
+          raise IncludeTagError.new e.message, File.join(includes_dir, @file)
         end
+      end
+
+      def resolved_includes_dir(context)
+        File.join(File.realpath(context.registers[:site].source), includes_dir)
       end
 
       def validate_path(path, dir, safe)
@@ -126,7 +132,7 @@ eos
       end
 
       def path_relative_to_source(dir, path)
-        File.join(INCLUDES_DIR, path.sub(Regexp.new("^#{dir}"), ""))
+        File.join(includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
       end
 
       def realpath_prefixed_with?(path, dir)
@@ -138,7 +144,19 @@ eos
         File.read(file, file_read_opts(context))
       end
     end
+
+    class IncludeRelativeTag < IncludeTag
+      def includes_dir
+        '.'
+      end
+
+      def resolved_includes_dir(context)
+        page_path = context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
+        Jekyll.sanitized_path(context.registers[:site].source, page_path)
+      end
+    end
   end
 end
 
 Liquid::Template.register_tag('include', Jekyll::Tags::IncludeTag)
+Liquid::Template.register_tag('include_relative', Jekyll::Tags::IncludeRelativeTag)

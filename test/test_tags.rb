@@ -510,4 +510,98 @@ CONTENT
       end
     end
   end
+
+  context "relative include tag with variable and liquid filters" do
+    setup do
+      stub(Jekyll).configuration do
+        site_configuration({'pygments' => true})
+      end
+
+      site = Site.new(Jekyll.configuration)
+      post = Post.new(site, source_dir, '', "2014-09-02-relative-includes.markdown")
+      layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
+      post.render(layouts, {"site" => {"posts" => []}})
+      @content = post.content
+    end
+
+    should "include file as variable with liquid filters" do
+      assert_match %r{1 relative_include}, @content
+      assert_match %r{2 relative_include}, @content
+      assert_match %r{3 relative_include}, @content
+    end
+
+    should "include file as variable and liquid filters with arbitrary whitespace" do
+      assert_match %r{4 relative_include}, @content
+      assert_match %r{5 relative_include}, @content
+      assert_match %r{6 relative_include}, @content
+    end
+
+    should "include file as variable and filters with additional parameters" do
+      assert_match '<li>var1 = foo</li>', @content
+      assert_match '<li>var2 = bar</li>', @content
+    end
+
+    should "include file as partial variable" do
+      assert_match %r{8 relative_include}, @content
+    end
+
+    should "include files relative to self" do
+      assert_match %r{9 —\ntitle: Test Post Where YAML}, @content
+    end
+
+    context "trying to do bad stuff" do
+      context "include missing file" do
+        setup do
+          @content = <<CONTENT
+---
+title: missing file
+---
+
+{% include_relative missing.html %}
+CONTENT
+        end
+
+        should "raise error relative to source directory" do
+          exception = assert_raise IOError do
+            create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          end
+          assert_equal 'Included file \'./missing.html\' not found', exception.message
+        end
+      end
+    end
+
+    context "with symlink'd include" do
+
+      should "not allow symlink includes" do
+        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+        assert_raise IOError do
+          content = <<CONTENT
+---
+title: Include symlink
+---
+
+{% include_relative tmp/pages-test %}
+
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+        end
+        assert_no_match /SYMLINK TEST/, @result
+      end
+
+      should "not expose the existence of symlinked files" do
+        ex = assert_raise IOError do
+          content = <<CONTENT
+---
+title: Include symlink
+---
+
+{% include_relative tmp/pages-test-does-not-exist %}
+
+CONTENT
+          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+        end
+        assert_match /should exist and should not be a symlink/, ex.message
+      end
+    end
+  end
 end

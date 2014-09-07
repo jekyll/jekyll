@@ -292,6 +292,17 @@ These parameters are available via Liquid in the include:
 {% raw %}{{ include.param }}{% endraw %}
 {% endhighlight %}
 
+### Including files relative to another file
+
+You can also choose to include files relative to the current file:
+
+{% highlight ruby %}
+{% raw %}{% include_relative somedir/footer.html %}{% endraw %}
+{% endhighlight %}
+
+You won't need to place your included content within the `_includes` directory.
+All the other capaibilities of the `include` tag are available to the `include_relative` tag.
+
 ### Code snippet highlighting
 
 Jekyll has built in support for syntax highlighting of [over 100
