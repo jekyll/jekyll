@@ -19,14 +19,6 @@ module Jekyll
       VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
       def initialize(tag_name, markup, tokens)
-        @tag_name = tag_name
-        case tag_name
-        when 'include'
-          @includes_dir = '_includes'
-        when 'include_relative'
-          @includes_dir = ''
-        end
-
         super
         matched = markup.strip.match(VARIABLE_SYNTAX)
         if matched
@@ -102,13 +94,13 @@ eos
         end
       end
 
+      def includes_dir
+        '_includes'
+      end
+
       def render(context)
-        case @tag_name
-        when 'include'
-          dir = File.join(File.realpath(context.registers[:site].source), @includes_dir)
-        when 'include_relative'
-          dir = File.join(File.realpath(context.registers[:site].source), File.dirname(context.registers[:page]["path"]))
-        end
+        dir = dir_to_include(context)
+
         file = render_variable(context) || @file
         validate_file_name(file)
 
@@ -123,8 +115,12 @@ eos
             partial.render!(context)
           end
         rescue => e
-          raise IncludeTagError.new e.message, File.join(@includes_dir, @file)
+          raise IncludeTagError.new e.message, File.join(includes_dir, @file)
         end
+      end
+
+      def dir_to_include(context)
+        File.join(File.realpath(context.registers[:site].source), includes_dir)
       end
 
       def validate_path(path, dir, safe)
@@ -136,7 +132,7 @@ eos
       end
 
       def path_relative_to_source(dir, path)
-        File.join(@includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
+        File.join(includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
       end
 
       def realpath_prefixed_with?(path, dir)
@@ -148,8 +144,18 @@ eos
         File.read(file, file_read_opts(context))
       end
     end
+
+    class IncludeRelativeTag < IncludeTag
+      def includes_dir
+        '.'
+      end
+
+      def dir_to_include(context)
+        File.join(File.realpath(context.registers[:site].source), File.dirname(context.registers[:page]["path"]))
+      end
+    end
   end
 end
 
 Liquid::Template.register_tag('include', Jekyll::Tags::IncludeTag)
-Liquid::Template.register_tag('include_relative', Jekyll::Tags::IncludeTag)
+Liquid::Template.register_tag('include_relative', Jekyll::Tags::IncludeRelativeTag)
