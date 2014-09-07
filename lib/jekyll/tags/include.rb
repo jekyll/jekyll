@@ -148,9 +148,6 @@ eos
         File.read(file, file_read_opts(context))
       end
     end
-
-    class RelativeIncludeTag < IncludeTag
-    end
   end
 end
 
