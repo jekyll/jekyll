@@ -165,6 +165,7 @@ class TestSite < Test::Unit::TestCase
         bar.html
         coffeescript.coffee
         contacts.html
+        content.textile
         deal.with.dots.html
         environment.html
         exploit.md

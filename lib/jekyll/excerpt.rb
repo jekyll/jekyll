@@ -6,7 +6,8 @@ module Jekyll
     extend Forwardable
 
     attr_accessor :post
-    attr_accessor :content, :output, :ext
+    attr_accessor :content, :unrendered_content, :rendered_content, :output
+    attr_accessor :ext
 
     def_delegator :@post, :site, :site
     def_delegator :@post, :name, :name
@@ -22,6 +23,7 @@ module Jekyll
     def initialize(post)
       self.post = post
       self.content = extract_excerpt(post.content)
+      self.unrendered_content = self.content
     end
 
     def to_liquid

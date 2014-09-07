@@ -49,6 +49,10 @@ module Jekyll
           self.content = $POSTMATCH
           self.data = SafeYAML.load($1)
         end
+
+        if self.respond_to?(:unrendered_content)
+          self.unrendered_content = self.content
+        end
       rescue SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue Exception => e
@@ -232,6 +236,11 @@ module Jekyll
 
       self.content = render_liquid(content, payload, info) if render_with_liquid?
       self.content = transform
+
+      # tell rendered_content to layouts
+      if self.respond_to?(:rendered_content)
+        payload['page']['rendered_content'] = self.rendered_content = content
+      end
 
       # output keeps track of what will finally be written
       self.output = content

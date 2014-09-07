@@ -8,7 +8,8 @@ class TestPage < Test::Unit::TestCase
   end
 
   def do_render(page)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
+    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html"),
+      "content" => Layout.new(@site, source_dir('_layouts'), "content.html")}
     page.render(layouts, {"site" => {"posts" => []}})
   end
 
@@ -159,6 +160,16 @@ class TestPage < Test::Unit::TestCase
     context "rendering" do
       setup do
         clear_dest
+      end
+
+      should "render content properly" do
+        page = setup_page('content.textile')
+        do_render(page)
+
+        assert_equal '*my content*', page.unrendered_content
+        assert_equal '<p><strong>my content</strong></p>', page.content
+        assert_equal page.content, page.rendered_content
+        assert_equal "*my content*\n<p><strong>my content</strong></p>\n", page.output
       end
 
       should "write properly" do

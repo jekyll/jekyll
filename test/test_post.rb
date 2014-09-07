@@ -8,7 +8,8 @@ class TestPost < Test::Unit::TestCase
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
+    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html"),
+      "content" => Layout.new(@site, source_dir('_layouts'), "content.html")}
     post.render(layouts, {"site" => {"posts" => []}})
   end
 
@@ -556,6 +557,15 @@ class TestPost < Test::Unit::TestCase
           post = setup_post("2008-10-18-foo-bar.textile")
           do_render(post)
           assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", post.output
+        end
+
+        should "render content properly" do
+          post = setup_post("2014-09-06-content.textile")
+          do_render(post)
+          assert_equal "*my content*", post.unrendered_content
+          assert_equal "<p><strong>my content</strong></p>", post.content
+          assert_equal post.content, post.rendered_content
+          assert_equal "*my content*\n<p><strong>my content</strong></p>\n", post.output
         end
 
         should "write properly" do

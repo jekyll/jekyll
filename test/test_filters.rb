@@ -154,11 +154,14 @@ class TestFilters < Test::Unit::TestCase
         @filter.site.process
         grouping = @filter.group_by(@filter.site.pages, "layout")
         grouping.each do |g|
-          assert ["default", "nil", ""].include?(g["name"]), "#{g['name']} isn't a valid grouping."
+          assert ["default", "content", "nil", ""].include?(g["name"]), "#{g['name']} isn't a valid grouping."
           case g["name"]
           when "default"
             assert g["items"].is_a?(Array), "The list of grouped items for 'default' is not an Array."
             assert_equal 5, g["items"].size
+          when "content"
+            assert g["items"].is_a?(Array), "The list of grouped items for 'content' is not an Array."
+            assert_equal 1, g["items"].size
           when "nil"
             assert g["items"].is_a?(Array), "The list of grouped items for 'nil' is not an Array."
             assert_equal 2, g["items"].size

@@ -1,0 +1,4 @@
+---
+layout: content
+---
+*my content*

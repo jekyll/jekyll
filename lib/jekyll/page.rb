@@ -5,11 +5,13 @@ module Jekyll
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :data, :content, :unrendered_content, :rendered_content, :output
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w[
       content
+      unrendered_content
+      rendered_content
       dir
       name
       path
