@@ -47,6 +47,17 @@ module Jekyll
       converter.convert(input)
     end
 
+    # Slugify a filename or title.
+    #
+    # input - The filename or title to slugify.
+    #
+    # Returns the given filename or title as a lowercase String, with every
+    # sequence of spaces and non-alphanumeric characters replaced with a
+    # hyphen.
+    def slugify(input)
+      Utils.slugify(input)
+    end
+
     # Format a date in short format e.g. "27 Jan 2011".
     #
     # date - the Time to format.
