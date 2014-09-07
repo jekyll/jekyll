@@ -4,15 +4,16 @@ class TestCleaner < Test::Unit::TestCase
   context "directory in keep_files" do
     setup do
       clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
-      end
 
       FileUtils.mkdir_p(dest_dir('to_keep/child_dir'))
       FileUtils.touch(File.join(dest_dir('to_keep'), 'index.html'))
       FileUtils.touch(File.join(dest_dir('to_keep/child_dir'), 'index.html'))
 
-      @site = Site.new(Jekyll.configuration)
+      @site = Site.new(Jekyll.configuration({
+        "skip_config_files" => true,
+        "source" => source_dir,
+        "destination" => dest_dir
+      }))
       @site.keep_files = ['to_keep/child_dir']
 
       @cleaner = Site::Cleaner.new(@site)
@@ -43,14 +44,15 @@ class TestCleaner < Test::Unit::TestCase
   context "directory containing no files and non-empty directories" do
     setup do
       clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
-      end
 
       FileUtils.mkdir_p(source_dir('no_files_inside/child_dir'))
       FileUtils.touch(File.join(source_dir('no_files_inside/child_dir'), 'index.html'))
 
-      @site = Site.new(Jekyll.configuration)
+      @site = Site.new(Jekyll.configuration({
+        "skip_config_files" => true,
+        "source" => source_dir,
+        "destination" => dest_dir
+      }))
       @site.process
 
       @cleaner = Site::Cleaner.new(@site)
