@@ -38,7 +38,7 @@ module Jekyll
     end
 
     def layout_directory_inside_source
-      Jekyll.sanitized_path(site.source, site.config['layouts'])
+      site.in_source_dir(site.config['layouts'])
     end
 
     def layout_directory_in_cwd
