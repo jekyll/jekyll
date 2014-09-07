@@ -209,6 +209,23 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
+      <td><p><code>page.unrendered_content</code></p></td>
+      <td><p>
+
+        The un-rendered content of the Page, e.g. <code># title</code>
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>page.rendered_content</code></p></td>
+      <td><p>
+
+        The rendred content of the Page, e.g.
+        <code>&lt;h1&gt;title&lt;/h1&gt;</code>
+
+      </p></td>
+    </tr>
+    <tr>
       <td><p><code>page.title</code></p></td>
       <td><p>
 
