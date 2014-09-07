@@ -152,7 +152,7 @@ eos
 
       def resolved_includes_dir(context)
         page_path = context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
-        File.join(File.realpath(context.registers[:site].source), page_path)
+        Jekyll.sanitized_path(context.registers[:site].source, page_path)
       end
     end
   end
