@@ -99,7 +99,7 @@ eos
       end
 
       def render(context)
-        dir = dir_to_include(context)
+        dir = resolved_includes_dir(context)
 
         file = render_variable(context) || @file
         validate_file_name(file)
@@ -119,7 +119,7 @@ eos
         end
       end
 
-      def dir_to_include(context)
+      def resolved_includes_dir(context)
         File.join(File.realpath(context.registers[:site].source), includes_dir)
       end
 
@@ -150,7 +150,7 @@ eos
         '.'
       end
 
-      def dir_to_include(context)
+      def resolved_includes_dir(context)
         page_path = context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
         File.join(File.realpath(context.registers[:site].source), page_path)
       end
