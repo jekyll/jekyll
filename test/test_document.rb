@@ -10,7 +10,6 @@ class TestDocument < Test::Unit::TestCase
         "destination" => dest_dir
       }))
       @site.process
-      p @site.collections["methods"]
       @document = @site.collections["methods"].docs.first
     end
 
@@ -225,7 +224,6 @@ class TestDocument < Test::Unit::TestCase
         "destination" => dest_dir
       }))
       @site.process
-      p @site.collections["slides"]
       @document = @site.collections["slides"].docs[3]
       @document_without_title = @site.collections["slides"].docs[4]
     end
