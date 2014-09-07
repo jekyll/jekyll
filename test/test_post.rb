@@ -15,8 +15,11 @@ class TestPost < Test::Unit::TestCase
   context "A Post" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
-      @site = Site.new(Jekyll.configuration)
+      @site = Site.new(Jekyll.configuration({
+        "skip_config_files" => true,
+        "source" => source_dir,
+        "destination" => dest_dir
+      }))
     end
 
     should "ensure valid posts are valid" do
@@ -145,7 +148,7 @@ class TestPost < Test::Unit::TestCase
         do_render(post)
         post.write(dest_dir)
 
-        assert !File.exist?(unexpected)
+        assert !File.exist?(unexpected), "../../../baddie.html should not exist."
         assert File.exist?(File.expand_path("baddie.html", dest_dir))
       end
 
@@ -606,7 +609,7 @@ class TestPost < Test::Unit::TestCase
 
         should "include templates" do
           post = setup_post("2008-12-13-include.markdown")
-          post.site.source = File.join(File.dirname(__FILE__), 'source')
+          post.site.instance_variable_set(:@source, File.join(File.dirname(__FILE__), 'source'))
           do_render(post)
 
           assert_equal "<<< <hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n\n<p>This <em>is</em> cool</p>\n >>>", post.output
