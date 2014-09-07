@@ -29,7 +29,7 @@ module Jekyll
       # Returns a Set with the file paths
       def existing_files
         files = Set.new
-        Dir.glob(File.join(site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
+        Dir.glob(site.in_dest_dir("**", "*"), File::FNM_DOTMATCH) do |file|
           files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex || keep_dirs.include?(file)
         end
         files
@@ -76,7 +76,7 @@ module Jekyll
       #
       # Returns a Set with the directory paths
       def keep_dirs
-        site.keep_files.map { |file| parent_dirs(File.join(site.dest, file)) }.flatten.to_set
+        site.keep_files.map { |file| parent_dirs(site.in_dest_dir(file)) }.flatten.to_set
       end
 
       # Private: Creates a regular expression from the config's keep_files array
