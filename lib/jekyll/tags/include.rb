@@ -26,10 +26,11 @@ module Jekyll
           @file, @params = markup.strip.split(' ', 2);
         end
         validate_params if @params
+        @tag_name = tag_name
       end
 
       def syntax_example
-        "{% include file.ext param='value' param2='value' %}"
+        "{% #{@tag_name} file.ext param='value' param2='value' %}"
       end
 
       def parse_params(context)
@@ -155,10 +156,6 @@ eos
       def resolved_includes_dir(context)
         page_path = context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
         Jekyll.sanitized_path(context.registers[:site].source, page_path)
-      end
-
-      def syntax_example
-        "{% include_relative file.ext param='value' param2='value' %}"
       end
     end
   end
