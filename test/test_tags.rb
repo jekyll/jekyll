@@ -568,6 +568,25 @@ CONTENT
           assert_equal 'Included file \'./missing.html\' not found', exception.message
         end
       end
+
+      context "include existing file above you" do
+        setup do
+          @content = <<CONTENT
+---
+title: higher file
+---
+
+{% include_relative ../README.markdown %}
+CONTENT
+        end
+
+        should "raise error relative to source directory" do
+          exception = assert_raise ArgumentError do
+            create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          end
+          assert_equal "Invalid syntax for include tag. File contains invalid characters or sequences:\n\n  ../README.markdown\n\nValid syntax:\n\n  {% include_relative file.ext param='value' param2='value' %}\n\n", exception.message
+        end
+      end
     end
 
     context "with symlink'd include" do

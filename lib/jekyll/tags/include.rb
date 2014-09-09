@@ -13,8 +13,6 @@ module Jekyll
 
     class IncludeTag < Liquid::Tag
 
-      SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
-
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
@@ -28,6 +26,11 @@ module Jekyll
           @file, @params = markup.strip.split(' ', 2);
         end
         validate_params if @params
+        @tag_name = tag_name
+      end
+
+      def syntax_example
+        "{% #{@tag_name} file.ext param='value' param2='value' %}"
       end
 
       def parse_params(context)
@@ -59,7 +62,7 @@ Invalid syntax for include tag. File contains invalid characters or sequences:
 
 Valid syntax:
 
-  #{SYNTAX_EXAMPLE}
+  #{syntax_example}
 
 eos
         end
@@ -75,7 +78,7 @@ Invalid syntax for include tag:
 
 Valid syntax:
 
-  #{SYNTAX_EXAMPLE}
+  #{syntax_example}
 
 eos
         end

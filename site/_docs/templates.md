@@ -292,16 +292,22 @@ These parameters are available via Liquid in the include:
 {% raw %}{{ include.param }}{% endraw %}
 {% endhighlight %}
 
-### Including files relative to another file
+#### Including files relative to another file
 
-You can also choose to include files relative to the current file:
+You can also choose to include file fragments relative to the current file:
 
 {% highlight ruby %}
 {% raw %}{% include_relative somedir/footer.html %}{% endraw %}
 {% endhighlight %}
 
-You won't need to place your included content within the `_includes` directory.
-All the other capaibilities of the `include` tag are available to the `include_relative` tag.
+You won't need to place your included content within the `_includes` directory. Instead,
+the inclusion is specifically relative to the file where the tag is being used. For example,
+if `_posts/2014-09-03-my-file.markdown` uses the `include_relative` tag, the included file
+must be within the `_posts` directory, or one of it's subdirectories. You cannot include
+files in other locations.
+
+All the other capaibilities of the `include` tag are available to the `include_relative` tag,
+such as using variables.
 
 ### Code snippet highlighting
 
