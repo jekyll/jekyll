@@ -1,7 +1,7 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
-@charset "utf-8";
+@charset 'utf-8';
 
 
 
@@ -28,22 +28,18 @@ $on-laptop:        800px;
 
 // Using media queries with like this:
 // @include media-query($palm) {
-//     .wrapper {
-//         padding-right: $spacing-unit / 2;
-//         padding-left: $spacing-unit / 2;
-//     }
+//   .wrapper {
+//     padding-left: $spacing-unit / 2;
+//     padding-right: $spacing-unit / 2;
+//   }
 // }
 @mixin media-query($device) {
-    @media screen and (max-width: $device) {
-        @content;
-    }
+  @media screen and (max-width: $device) {
+    @content;
+  }
 }
 
 
 
 // Import partials from `sass_dir` (defaults to `_sass`)
-@import
-        "base",
-        "layout",
-        "syntax-highlighting"
-;
+@import 'base', 'layout', 'syntax-highlighting';
