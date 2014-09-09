@@ -26,6 +26,7 @@
   * add class `<< self` idiom to `New` command (#2817)
   * Allow Travis to 'parallelize' our tests (#2859)
   * Fix test for Liquid rendering in Sass (#2856)
+  * Fixing "vertycal" typo in site template's `_base.scss` (#2889)
 
 ### Site Enhancements
 
