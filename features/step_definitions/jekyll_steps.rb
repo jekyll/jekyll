@@ -133,6 +133,13 @@ Given /^I have fixture collections$/ do
   FileUtils.cp_r File.join(JEKYLL_SOURCE_DIR, "test", "source", "_methods"), source_dir
 end
 
+Given(/^I have a gemfile than contains jekyll_plugins group$/) do
+  content = File.read(TEST_GEMFILE_PATH )
+  File.open(JEKYLL_GEMFILE,'a') do |file|
+    file << "\n" + content + "\n"
+  end
+end
+
 ##################
 #
 # Changing stuff
@@ -161,6 +168,14 @@ end
 
 When /^I delete the file "(.*)"$/ do |file|
   File.delete(file)
+end
+
+When /^I delete jekyll_plugins group from gemfile$/  do
+  content = File.read(JEKYLL_GEMFILE)
+  content.gsub!(/\ngroup\ :jekyll_plugins\ do.*jekyll_test_plugin.*end\n/m,"")
+  File.open(JEKYLL_GEMFILE,'w') do |f|
+    f.puts(content)
+  end  
 end
 
 Then /^the (.*) directory should +exist$/ do |dir|

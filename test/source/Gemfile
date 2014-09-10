@@ -1,0 +1,3 @@
+group :jekyll_plugins do
+  gem 'jekyll_test_plugin'
+end

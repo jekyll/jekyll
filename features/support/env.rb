@@ -3,12 +3,12 @@ require 'posix-spawn'
 require 'rr'
 require 'test/unit'
 require 'time'
-
 JEKYLL_SOURCE_DIR = File.dirname(File.dirname(File.dirname(__FILE__)))
 TEST_DIR    = File.expand_path(File.join('..', '..', 'tmp', 'jekyll'), File.dirname(__FILE__))
+TEST_GEMFILE_PATH = File.expand_path('test/source/Gemfile', JEKYLL_SOURCE_DIR)
 JEKYLL_PATH = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll'))
 JEKYLL_COMMAND_OUTPUT_FILE = File.join(File.dirname(TEST_DIR), 'jekyll_output.txt')
-
+JEKYLL_GEMFILE = File.expand_path('Gemfile', JEKYLL_SOURCE_DIR)
 def source_dir(*files)
   File.join(TEST_DIR, *files)
 end
@@ -26,12 +26,12 @@ def run_bundle(args)
 end
 
 def run_jekyll(args)
-  child = run_in_shell(JEKYLL_PATH, *args.strip.split(' '), "--trace")
+  child = run_in_shell(JEKYLL_PATH, *args.strip.split, "--trace")
   child.status.exitstatus == 0
 end
 
-def run_in_shell(args, options)
-  POSIX::Spawn::Child.new *args, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"])
+def run_in_shell(path, *args, options)
+  POSIX::Spawn::Child.new path, *args, options, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"]
 end
 
 def slug(title)

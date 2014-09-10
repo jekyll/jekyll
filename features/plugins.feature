@@ -32,3 +32,24 @@ Feature: Configuring and using plugins
     And I should see "Whatever" in "_site/index.html"
     And the "_site/test.txt" file should exist
     And I should see "this is a test" in "_site/test.txt"
+    
+  Scenario: In safe mode add gem-based plugin to jekyll_groups
+    Given I have an "index.html" file that contains "Whatever"
+    And I have a gemfile than contains jekyll_plugins group
+    When I run bundle install
+    When I run jekyll build
+    And I delete jekyll_plugins group from gemfile
+    Then the _site directory should exist
+    And I should see "Whatever" in "_site/index.html"
+    And the "_site/test.txt" file should exist
+    And I should see "this is a test" in "_site/test.txt"
+
+  Scenario: In no-safe mode add gem-based plugin to jekyll_groups  
+    Given I have an "index.html" file that contains "Whatever"
+    And I have a gemfile than contains jekyll_plugins group
+    When I run bundle install
+    When I run jekyll build --safe
+    And I delete jekyll_plugins group from gemfile
+    Then the _site directory should exist
+    And I should see "Whatever" in "_site/index.html"
+    And the "_site/test.txt" file should not exist
