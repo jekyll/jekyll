@@ -204,7 +204,7 @@ following is a reference of the available data.
       <td><p>
 
         The content of the Page, rendered or un-rendered depending upon
-        what Liquid is being processed and what `page` is.
+        what Liquid is being processed and what <code>page</code> is.
 
       </p></td>
     </tr>

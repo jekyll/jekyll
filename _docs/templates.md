@@ -213,6 +213,17 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Slugify</strong></p>
+        <p>Convert a string into a lowercase URL "slug" by replacing every sequence of spaces and non-alphanumeric characters with a hyphen.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ page.title | slugify }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Data To JSON</strong></p>
         <p>Convert Hash or Array to JSON.</p>
       </td>
@@ -280,6 +291,23 @@ These parameters are available via Liquid in the include:
 {% highlight ruby %}
 {% raw %}{{ include.param }}{% endraw %}
 {% endhighlight %}
+
+#### Including files relative to another file
+
+You can also choose to include file fragments relative to the current file:
+
+{% highlight ruby %}
+{% raw %}{% include_relative somedir/footer.html %}{% endraw %}
+{% endhighlight %}
+
+You won't need to place your included content within the `_includes` directory. Instead,
+the inclusion is specifically relative to the file where the tag is being used. For example,
+if `_posts/2014-09-03-my-file.markdown` uses the `include_relative` tag, the included file
+must be within the `_posts` directory, or one of it's subdirectories. You cannot include
+files in other locations.
+
+All the other capaibilities of the `include` tag are available to the `include_relative` tag,
+such as using variables.
 
 ### Code snippet highlighting
 
