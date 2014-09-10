@@ -37,7 +37,7 @@ class TestNewCommand < Test::Unit::TestCase
 
     should 'copy the static files in site template to the new directory' do
       static_template_files = dir_contents(site_template).reject do |f|
-        File.extname(f) == '.erb'
+        ['.erb','.toml'].include? File.extname(f) 
       end
 
       capture_stdout { Jekyll::Commands::New.process(@args) }
@@ -69,6 +69,18 @@ class TestNewCommand < Test::Unit::TestCase
       end
 
       assert_same_elements erb_template_files, new_site_files
+    end
+    
+    should 'remove another toml config' do
+      options = { config: 'yaml' }
+      capture_stdout { Jekyll::Commands::New.process(@args,options) }
+      assert !Dir["#{@full_path}/**.toml"].any?
+    end
+    
+    should 'remove another yaml config' do
+      options = { config: 'toml' }
+      capture_stdout { Jekyll::Commands::New.process(@args,options) }
+      assert !Dir["#{@full_path}/**.yaml"].any?
     end
   end
 

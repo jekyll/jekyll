@@ -10,6 +10,18 @@ Feature: Create sites
     And the test_blank/_posts directory should exist
     And the "test_blank/index.html" file should exist
 
+  Scenario: Basic site with yaml config
+    Given I do not have a "test_blank" directory
+    When I run jekyll new test_blank
+    Then the "test_blank/_config.toml" file should not exist
+    And the "test_blank/_config.yml" file should exist
+
+  Scenario: Basic site with toml config
+    Given I do not have a "test_blank" directory
+    When I run jekyll new test_blank --config toml
+    Then the "test_blank/_config.toml" file should exist
+    And the "test_blank/_config.yml" file should not exist  
+
   Scenario: Basic site
     Given I have an "index.html" file that contains "Basic Site"
     When I run jekyll build
