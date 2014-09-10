@@ -5,6 +5,57 @@ permalink: "/docs/history/"
 prev_section: contributing
 ---
 
+## 2.4.0 / 2014-09-09
+{: #v2-4-0}
+
+### Minor Enhancements
+{: #minor-enhancements-v2-4-0}
+
+- Support a new `relative_include` tag ([#2870]({{ site.repository }}/issues/2870))
+- Auto-enable watch on 'serve' ([#2858]({{ site.repository }}/issues/2858))
+- Render Liquid in CoffeeScript files ([#2830]({{ site.repository }}/issues/2830))
+- Add `:title` to collection URL template fillers ([#2864]({{ site.repository }}/issues/2864))
+- Add support for CSV files in the `_data` directory ([#2761]({{ site.repository }}/issues/2761))
+- Add the `name` variable to collection permalinks ([#2799]({{ site.repository }}/issues/2799))
+- Add `inspect` liquid filter. ([#2867]({{ site.repository }}/issues/2867))
+- Add a `slugify` Liquid filter ([#2880]({{ site.repository }}/issues/2880))
+
+### Bug Fixes
+{: #bug-fixes-v2-4-0}
+
+- Use `Jekyll.sanitized_path` when adding static files to Collections ([#2849]({{ site.repository }}/issues/2849))
+- Fix encoding of `main.scss` in site template ([#2771]({{ site.repository }}/issues/2771))
+- Fix orientation bugs in default site template ([#2862]({{ site.repository }}/issues/2862))
+
+### Development Fixes
+{: #development-fixes-v2-4-0}
+
+- Update simplecov gem to 0.9 ([#2748]({{ site.repository }}/issues/2748))
+- Remove `docs/` dir ([#2768]({{ site.repository }}/issues/2768))
+- add class `<< self` idiom to `New` command ([#2817]({{ site.repository }}/issues/2817))
+- Allow Travis to 'parallelize' our tests ([#2859]({{ site.repository }}/issues/2859))
+- Fix test for Liquid rendering in Sass ([#2856]({{ site.repository }}/issues/2856))
+- Fixing "vertycal" typo in site template's `_base.scss` ([#2889]({{ site.repository }}/issues/2889))
+
+### Site Enhancements
+{: #site-enhancements-v2-4-0}
+
+- Document the `name` variable for collection permalinks ([#2829]({{ site.repository }}/issues/2829))
+- Adds info about installing jekyll in current dir ([#2839]({{ site.repository }}/issues/2839))
+- Remove deprecated `jekyll-projectlist` plugin from list of third-party
+    plugins ([#2742]({{ site.repository }}/issues/2742))
+- Remove tag plugins that are built in to Jekyll ([#2751]({{ site.repository }}/issues/2751))
+- Add `markdown-writer` package for Atom Editor to list of third-party
+    plugins ([#2763]({{ site.repository }}/issues/2763))
+- Fix typo in site documentation for collections ([#2764]({{ site.repository }}/issues/2764))
+- Fix minor typo on plugins docs page ([#2765]({{ site.repository }}/issues/2765))
+- Replace markdown with HTML in `sass_dir` note on assets page ([#2791]({{ site.repository }}/issues/2791))
+- Fixed "bellow" typo in datafiles docs ([#2879]({{ site.repository }}/issues/2879))
+- Fix code/markdown issue in documentation for variables ([#2877]({{ site.repository }}/issues/2877))
+- Remove Good Include third-party plugin from plugins page ([#2881]({{ site.repository }}/issues/2881))
+- Add some more docs on `include_relative` ([#2884]({{ site.repository }}/issues/2884))
+
+
 ## 2.3.0 / 2014-08-10
 {: #v2-3-0}
 
