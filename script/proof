@@ -5,10 +5,12 @@
 
 set -e
 
-git diff --name-only ..master | grep '^site/' || {
-    echo "No site files changed. We'll skip proofing."
+if [[ "$1" != "-f" ]]; then
+  git diff --name-only ..master | grep '^site/' || {
+    echo "No site files changed. We'll skip proofing. Run with -f to force."
     exit 0
-}
+  }
+fi
 
 echo "Some site files have been changed! Proofing..."
 
