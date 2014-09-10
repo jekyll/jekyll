@@ -11,6 +11,7 @@ Well, lookie here! A new release of Jekyll! v2.4.0 contains lots of goodies, inc
 
 - A new `relative_include` Liquid tag ([#2870]({{ site.repository }}/issues/2870))
 - Render Liquid in CoffeeScript files ([#2830]({{ site.repository }}/issues/2830))
+- Add 4 new array Liquid filters: `push`, `pop`, `shift`, and `unshift` ([#2895]({{ site.repository }}/pulls/2895))
 - Auto-enable watch on 'serve' ([#2858]({{ site.repository }}/issues/2858)). No more `-w`!
 - Add `:title` and `:name` to collection URL template fillers ([#2864]({{ site.repository }}/issues/2864) & [#2799]({{ site.repository }}/issues/2799))
 - Add support for CSV files in the `_data` directory ([#2761]({{ site.repository }}/issues/2761))
