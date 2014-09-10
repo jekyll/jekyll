@@ -14,6 +14,7 @@ prev_section: contributing
 - Support a new `relative_include` tag ([#2870]({{ site.repository }}/issues/2870))
 - Auto-enable watch on 'serve' ([#2858]({{ site.repository }}/issues/2858))
 - Render Liquid in CoffeeScript files ([#2830]({{ site.repository }}/issues/2830))
+- Array Liquid filters: `push`, `pop`, `unshift`, `shift` ([#2895]({{ site.repository }}/issues/2895))
 - Add `:title` to collection URL template fillers ([#2864]({{ site.repository }}/issues/2864))
 - Add support for CSV files in the `_data` directory ([#2761]({{ site.repository }}/issues/2761))
 - Add the `name` variable to collection permalinks ([#2799]({{ site.repository }}/issues/2799))
