@@ -8,7 +8,7 @@ class TestFilters < Test::Unit::TestCase
     attr_accessor :site, :context
 
     def initialize(opts = {})
-      @site = Jekyll::Site.new(Jekyll.configuration(opts))
+      @site = Jekyll::Site.new(Jekyll.configuration(opts.merge('skip_config_files' => true)))
       @context = Liquid::Context.new({}, {}, { :site => @site })
     end
   end
@@ -220,6 +220,46 @@ class TestFilters < Test::Unit::TestCase
     context "slugify filter" do
       should "return a slugified string" do
         assert_equal "q-bert-says", @filter.slugify(" Q*bert says @!#?@!")
+      end
+    end
+
+    context "push filter" do
+      should "return a new array with the element pushed to the end" do
+        assert_equal %w{hi there bernie}, @filter.push(%w{hi there}, "bernie")
+      end
+    end
+
+    context "pop filter" do
+      should "return a new array with the last element popped" do
+        assert_equal %w{hi there}, @filter.pop(%w{hi there bernie})
+      end
+
+      should "allow multiple els to be popped" do
+        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, 2)
+      end
+
+      should "cast string inputs for # into nums" do
+        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, "2")
+      end
+    end
+
+    context "shift filter" do
+      should "return a new array with the element removed from the front" do
+        assert_equal %w{a friendly greeting}, @filter.shift(%w{just a friendly greeting})
+      end
+
+      should "allow multiple els to be shifted" do
+        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, 2)
+      end
+
+      should "cast string inputs for # into nums" do
+        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, "2")
+      end
+    end
+
+    context "unshift filter" do
+      should "return a new array with the element put at the front" do
+        assert_equal %w{aloha there bernie}, @filter.unshift(%w{there bernie}, "aloha")
       end
     end
 
