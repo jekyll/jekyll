@@ -4,6 +4,16 @@
 
 ### Minor Enhancements
 
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 2.4.0 / 2014-09-09
+
+### Minor Enhancements
+
   * Support a new `relative_include` tag (#2870)
   * Auto-enable watch on 'serve' (#2858)
   * Render Liquid in CoffeeScript files (#2830)
