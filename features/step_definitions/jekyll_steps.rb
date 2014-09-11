@@ -134,9 +134,8 @@ Given /^I have fixture collections$/ do
 end
 
 Given(/^I have a gemfile than contains jekyll_plugins group$/) do
-  content = File.read(TEST_GEMFILE_PATH )
   File.open(JEKYLL_GEMFILE,'a') do |file|
-    file << "\n" + content + "\n"
+    file << "\n" + File.read(TEST_GEMFILE_PATH) + "\n"
   end
 end
 

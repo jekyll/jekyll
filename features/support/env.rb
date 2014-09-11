@@ -26,7 +26,7 @@ def run_bundle(args)
 end
 
 def run_jekyll(args)
-  child = run_in_shell(JEKYLL_PATH, *args.strip.split, "--trace")
+  child = run_in_shell(JEKYLL_PATH, *args.strip.split(" "), "--trace")
   child.status.exitstatus == 0
 end
 
