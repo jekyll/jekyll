@@ -44,6 +44,10 @@ class TestDocument < Test::Unit::TestCase
       assert_equal @document.to_liquid['collection'], "methods"
     end
 
+    should "output its relative path as path in Liquid" do
+      assert_equal @document.to_liquid['path'], "_methods/configuration.md"
+    end
+
   end
 
   context "a document as part of a collection with frontmatter defaults" do

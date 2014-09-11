@@ -232,8 +232,7 @@ module Jekyll
         Utils.deep_merge_hashes data, {
           "output"        => output,
           "content"       => content,
-          "path"          => path,
-          "relative_path" => relative_path,
+          "path"          => relative_path,
           "url"           => url,
           "collection"    => collection.label
         }
