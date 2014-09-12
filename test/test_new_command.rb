@@ -70,6 +70,12 @@ class TestNewCommand < Test::Unit::TestCase
 
       assert_same_elements erb_template_files, new_site_files
     end
+
+    should 'create blank project' do
+      blank_contents = %w(/_drafts /_layouts /_posts /index.html)
+      capture_stdout { Jekyll::Commands::New.process(@args, '--blank') }
+      assert_same_elements blank_contents, dir_contents(@full_path)
+    end  
   end
 
   context 'when multiple args are given' do
