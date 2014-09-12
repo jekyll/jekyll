@@ -12,6 +12,7 @@
 
   * Update Font Awesome to v4.2.0. (#2898)
   * Fix link to #2895 in 2.4.0 release post. (#2899)
+  * Add Big Footnotes for Kramdown plugin to list of third-party plugins (#2916)
 
 ## 2.4.0 / 2014-09-09
 
