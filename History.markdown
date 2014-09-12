@@ -8,6 +8,8 @@
 
 ### Development Fixes
 
+  * Add integration test for `jekyll new --blank` in TestUnit (#2913)
+
 ### Site Enhancements
 
   * Update Font Awesome to v4.2.0. (#2898)
