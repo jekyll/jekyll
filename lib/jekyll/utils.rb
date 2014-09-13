@@ -104,19 +104,50 @@ module Jekyll
 
     # Slugify a filename or title.
     #
-    # name - the filename or title to slugify
+    # string - the filename or title to slugify
+    # mode - how string is slugified
     #
-    # Returns the given filename or title in lowercase, with every
-    # sequence of spaces and non-alphanumeric characters replaced with a
-    # hyphen.
-    def slugify(string)
-      unless string.nil?
-        # Replace each non-alphanumeric character sequence with a hyphen
-        slug = string.gsub(/[^a-z0-9]+/i, '-')
-        # Remove leading/trailing hyphen
-        slug.gsub!(/^\-|\-$/i, '')
-        slug.downcase
+    # When mode is "none", return the given string in lowercase.
+    #
+    # When mode is "raw", return the given string in lowercase,
+    # with every sequence of spaces characters replaced with a hyphen.
+    #
+    # When mode is "default" or nil, non-alphabetic characters are
+    # replaced with a hyphen too.
+    #
+    # When mode is "pretty", some non-alphabetic characters (._~!$&'()+,;=@)
+    # are not replaced with hyphen.
+    #
+    # Examples:
+    #   slugify("The _config.yml file")
+    #   # => "the-config-yml-file"
+    #
+    #   slugify("The _config.yml file", "pretty")
+    #   # => "the-_config.yml-file"
+    #
+    # Returns the slugified string.
+    def slugify(string, mode=nil)
+      mode ||= 'default'
+      return nil if string.nil?
+
+      # Replace each character sequence with a hyphen
+      re = case mode
+      when 'raw'
+        Regexp.new('\\s+')
+      when 'default'
+        Regexp.new('[^a-zA-Z0-9]+')
+      when 'pretty'
+        # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
+        # and is allowed in both extN and NTFS.
+        Regexp.new("[^a-zA-Z0-9._~!$&'()+,;=@]+")
+      else
+        return string.downcase
       end
+      slug = string.gsub(re, '-')
+
+      # Remove leading/trailing hyphen
+      slug.gsub!(/^\-|\-$/i, '')
+      slug.downcase
     end
 
   end

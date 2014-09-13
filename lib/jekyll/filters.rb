@@ -50,12 +50,12 @@ module Jekyll
     # Slugify a filename or title.
     #
     # input - The filename or title to slugify.
+    # mode - how string is slugified
     #
-    # Returns the given filename or title as a lowercase String, with every
-    # sequence of spaces and non-alphanumeric characters replaced with a
-    # hyphen.
-    def slugify(input)
-      Utils.slugify(input)
+    # Returns the given filename or title as a lowercase URL String.
+    # See Utils.slugify for more detail.
+    def slugify(input, mode=nil)
+      Utils.slugify(input, mode)
     end
 
     # Format a date in short format e.g. "27 Jan 2011".
