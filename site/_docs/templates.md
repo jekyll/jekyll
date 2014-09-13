@@ -126,7 +126,7 @@ common tasks easier.
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ “foo,bar;baz?” | cgi_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "foo,bar;baz?" | cgi_escape }}{% endraw %}</code>
         </p>
         <p>
           <code class="output">foo%2Cbar%3Bbaz%3F</code>
@@ -142,7 +142,7 @@ common tasks easier.
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ “'foo, bar \\baz?'” | uri_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "foo, bar \baz?" | uri_escape }}{% endraw %}</code>
         </p>
         <p>
           <code class="output">foo,%20bar%20%5Cbaz?</code>
