@@ -221,6 +221,10 @@ class TestFilters < Test::Unit::TestCase
       should "return a slugified string" do
         assert_equal "q-bert-says", @filter.slugify(" Q*bert says @!#?@!")
       end
+
+      should "return a slugified string with mode" do
+        assert_equal "q-bert-says-@!-@!", @filter.slugify(" Q*bert says @!#?@!", "pretty")
+      end
     end
 
     context "push filter" do
