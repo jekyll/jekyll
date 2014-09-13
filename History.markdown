@@ -16,6 +16,7 @@
   * Fix link to #2895 in 2.4.0 release post. (#2899)
   * Add Big Footnotes for Kramdown plugin to list of third-party plugins (#2916)
   * Remove warning regarding GHP use of singular types for front matter defaults (#2919)
+  * Fix quote character typo in site documentation for templates (#2917)
 
 ## 2.4.0 / 2014-09-09
 
