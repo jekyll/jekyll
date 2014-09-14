@@ -589,7 +589,7 @@ class TestPost < Test::Unit::TestCase
 
         should "write properly without html extension" do
           post = setup_post("2008-10-18-foo-bar.textile")
-          post.site.permalink_style = ":title"
+          post.site.permalink_style = ":title/"
           do_render(post)
           post.write(dest_dir)
 
