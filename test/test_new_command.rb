@@ -75,6 +75,11 @@ class TestNewCommand < Test::Unit::TestCase
       blank_contents = %w(/_drafts /_layouts /_posts /index.html)
       capture_stdout { Jekyll::Commands::New.process(@args, '--blank') }
       assert_same_elements blank_contents, dir_contents(@full_path)
+    end
+
+    should 'force created folder' do
+      capture_stdout { Jekyll::Commands::New.process(@args) }
+      assert_nothing_raised(SystemExit) { Jekyll::Commands::New.process(@args, '--force') }
     end  
   end
 
