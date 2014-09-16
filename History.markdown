@@ -9,6 +9,7 @@
 ### Development Fixes
 
   * Add integration test for `jekyll new --blank` in TestUnit (#2913)
+  * Add unit test for `jekyll new --force` logic (#2929)
 
 ### Site Enhancements
 
@@ -18,7 +19,6 @@
   * Remove warning regarding GHP use of singular types for front matter defaults (#2919)
   * Fix quote character typo in site documentation for templates (#2917)
   * Point Liquid links to Liquid’s Github wiki (#2887)
-  * Add unit test for `jekyll new --force` logic (#2929)
 
 ## 2.4.0 / 2014-09-09
 
