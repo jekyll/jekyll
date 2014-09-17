@@ -6,6 +6,9 @@
 
 ### Bug Fixes
 
+  * Remove `--watch` from the site template blog post since it defaults
+    to watching in in 2.4.0 (#2922)
+
 ### Development Fixes
 
   * Add integration test for `jekyll new --blank` in TestUnit (#2913)
