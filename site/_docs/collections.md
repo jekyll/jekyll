@@ -39,7 +39,7 @@ collections:
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add documents.
 YAML Front Matter is read in as data if it exists, if not, then everything is just stuck in the Document's `content` attribute.
 
-Note: the folder must be named identical to the collection you defined in your config.yml file, with the addition of the preceding `_` character.
+Note: the folder must be named identically to the collection you defined in your `_config.yml` file, with the addition of the preceding `_` character.
 
 ### Step 3: Optionally render your collection's documents into independent files
 
