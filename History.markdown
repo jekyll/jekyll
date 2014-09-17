@@ -20,6 +20,7 @@
   * Fix quote character typo in site documentation for templates (#2917)
   * Point Liquid links to Liquid’s Github wiki (#2887)
   * Add HTTP Basic Auth (.htaccess) plugin to list of third-party plugins (#2931)
+  * (Minor) Grammar & `_config.yml` filename fixes (#2911)
 
 ## 2.4.0 / 2014-09-09
 
