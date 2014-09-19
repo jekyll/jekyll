@@ -510,6 +510,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll Github Sample Tag](https://github.com/bwillis/jekyll-github-sample): A liquid tag to include a sample of a github repo file in your Jekyll site.
 - [Jekyll Project Version Tag](https://github.com/rob-murray/jekyll-version-plugin): A Liquid tag plugin that renders a version identifier for your Jekyll site sourced from the git repository containing your code.
 - [Piwigo Gallery](https://github.com/AlessandroLorenzi/piwigo_gallery) by [Alessandro Lorenzi](http://www.alorenzi.eu/): Jekyll plugin to generate thumbnails from a Piwigo gallery and display them with a Liquid tag
+- [mathml.rb](https://github.com/tmthrgd/jekyll-plugins) by [Tom Thorogood](http://tomthorogood.co.uk/): A plugin to convert TeX mathematics into MathML for display.
 
 
 #### Collections
