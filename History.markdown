@@ -24,6 +24,7 @@
   * Point Liquid links to Liquid’s Github wiki (#2887)
   * Add HTTP Basic Auth (.htaccess) plugin to list of third-party plugins (#2931)
   * (Minor) Grammar & `_config.yml` filename fixes (#2911)
+  * Added `mathml.rb` to the list of third-party plugins. (#2937)
 
 ## 2.4.0 / 2014-09-09
 
