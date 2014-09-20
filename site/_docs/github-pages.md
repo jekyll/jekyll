@@ -12,6 +12,32 @@ organizations, and repositories, that are freely hosted on GitHub's
 powered by Jekyll behind the scenes, so in addition to supporting regular HTML
 content, they’re also a great way to host your Jekyll-powered website for free.
 
+
+<div class="note protip">
+  <h5>Use the <code>github-pages</code> gem</h5>
+  <p>
+    Our friends at GitHub have provided the
+    <a href="https://github.com/github/pages-gem">github-pages</a>
+    gem which is used to manage Jekyll and its dependencies on
+    GitHub Pages. To use the currently-deployed version of the
+    gem in your project, add the following to your `Gemfile`:
+    
+    {% highlight ruby %}
+    source 'https://rubygems.org'
+
+    require 'json'
+    require 'open-uri'
+    versions = JSON.parse(open('https://pages.github.com/versions.json').read)
+
+
+    gem 'github-pages', versions['github-pages']
+    {% endhighlight %}
+    
+    This will ensure that when you run <code>bundle install</code>, you
+    have the correct version of the <code>github-pages</code> gem.
+  </p>
+</div>
+
 ## Deploying Jekyll to GitHub Pages
 
 GitHub Pages work by looking at certain branches of repositories on GitHub.
