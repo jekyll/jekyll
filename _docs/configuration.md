@@ -205,6 +205,15 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--limit_posts NUM</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Force polling</strong></p>
+        <p class="description">Force watch to use polling.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">--force_polling</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>

@@ -525,12 +525,12 @@ aside li.current a:before {
 }
 
 .section-nav .next:after {
-  content: "›";
+  content: '\203A';
   right: 10px;
 }
 
 .section-nav .prev:before {
-  content: "‹";
+  content: '\2039';
   left: 10px;
 }
 
@@ -991,7 +991,7 @@ code.option, code.flag, code.filter, code.output {
 }
 
 .note:after {
-  content: "★";
+  content: '\2605';
   color: #fc0;
   position: absolute;
   top: 14px;
@@ -1002,7 +1002,7 @@ code.option, code.flag, code.filter, code.output {
 }
 
 .info:after {
-  content: "ⓘ";
+  content: '\24D8';
   color: #fff;
   position: absolute;
   top: 15px;
@@ -1013,7 +1013,7 @@ code.option, code.flag, code.filter, code.output {
 }
 
 .warning:after {
-  content: "‼";
+  content: '\203C';
   color: #fc0;
   position: absolute;
   top: 15px;
@@ -1024,7 +1024,7 @@ code.option, code.flag, code.filter, code.output {
 }
 
 .unreleased:after {
-  content: "⚒";
+  content: '\2692';
   color: #2b2a12;
   position: absolute;
   top: 8px;
