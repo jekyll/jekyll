@@ -214,6 +214,15 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--force_polling</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Verbose output</strong></p>
+        <p class="description">Print verbose output.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">-V, --verbose</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
