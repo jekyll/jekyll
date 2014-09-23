@@ -27,6 +27,7 @@
   * Added `mathml.rb` to the list of third-party plugins. (#2937)
   * Add `--force_polling` to the list of configuration options (#2943)
   * Escape unicode characters in site CSS (#2906)
+  * Add note about using the github-pages gem via pages.github.com/versions.json (#2939)
 
 ## 2.4.0 / 2014-09-09
 
