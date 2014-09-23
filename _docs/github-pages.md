@@ -19,6 +19,33 @@ There are two basic types available: user/organization pages and project pages.
 The way to deploy these two types of sites are nearly identical, except for a
 few minor details.
 
+<div class="note protip">
+  <h5>Use the <code>github-pages</code> gem</h5>
+  <p>
+    Our friends at GitHub have provided the
+    <a href="https://github.com/github/pages-gem">github-pages</a>
+    gem which is used to manage Jekyll and its dependencies on
+    GitHub Pages. Using it in your projects means that when you deploy
+    your site to GitHub Pages, you will not be caught by unexpected
+    differences between various versions of the gems. To use the
+    currently-deployed version of the gem in your project, add the
+    following to your <code>Gemfile</code>:
+
+{% highlight ruby %}
+source 'https://rubygems.org'
+
+require 'json'
+require 'open-uri'
+versions = JSON.parse(open('https://pages.github.com/versions.json').read)
+
+gem 'github-pages', versions['github-pages']
+{% endhighlight %}
+
+    This will ensure that when you run <code>bundle install</code>, you
+    have the correct version of the <code>github-pages</code> gem.
+  </p>
+</div>
+
 ### User and Organization Pages
 
 User and organization pages live in a special GitHub repository dedicated to
