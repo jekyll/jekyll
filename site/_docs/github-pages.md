@@ -12,6 +12,12 @@ organizations, and repositories, that are freely hosted on GitHub's
 powered by Jekyll behind the scenes, so in addition to supporting regular HTML
 content, they’re also a great way to host your Jekyll-powered website for free.
 
+## Deploying Jekyll to GitHub Pages
+
+GitHub Pages work by looking at certain branches of repositories on GitHub.
+There are two basic types available: user/organization pages and project pages.
+The way to deploy these two types of sites are nearly identical, except for a
+few minor details.
 
 <div class="note protip">
   <h5>Use the <code>github-pages</code> gem</h5>
@@ -39,13 +45,6 @@ gem 'github-pages', versions['github-pages']
     have the correct version of the <code>github-pages</code> gem.
   </p>
 </div>
-
-## Deploying Jekyll to GitHub Pages
-
-GitHub Pages work by looking at certain branches of repositories on GitHub.
-There are two basic types available: user/organization pages and project pages.
-The way to deploy these two types of sites are nearly identical, except for a
-few minor details.
 
 ### User and Organization Pages
 
