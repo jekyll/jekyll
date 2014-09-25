@@ -6,8 +6,11 @@
 
 ### Bug Fixes
 
+  * Fix Rouge's RedCarpet plugin interface integration (#2951)
   * Remove `--watch` from the site template blog post since it defaults
     to watching in in 2.4.0 (#2922)
+  * Fix code for media query mixin in site template (#2946)
+  * Allow post URL's to have `.htm` extensions (#2925)
 
 ### Development Fixes
 
@@ -27,6 +30,7 @@
   * Added `mathml.rb` to the list of third-party plugins. (#2937)
   * Add `--force_polling` to the list of configuration options (#2943)
   * Escape unicode characters in site CSS (#2906)
+  * Add note about using the github-pages gem via pages.github.com/versions.json (#2939)
 
 ## 2.4.0 / 2014-09-09
 
