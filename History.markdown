@@ -10,6 +10,7 @@
   * Remove `--watch` from the site template blog post since it defaults
     to watching in in 2.4.0 (#2922)
   * Fix code for media query mixin in site template (#2946)
+  * Allow post URL's to have `.htm` extensions (#2925)
 
 ### Development Fixes
 
