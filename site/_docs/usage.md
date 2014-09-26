@@ -46,9 +46,6 @@ $ jekyll serve --detach
 # => Same as `jekyll serve` but will detach from the current terminal.
 #    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
 #    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).
-
-$ jekyll serve --watch
-# => Same as `jekyll serve`, but watch for changes and regenerate automatically.
 {% endhighlight %}
 
 These are just a few of the available [configuration options](../configuration/).
