@@ -60,7 +60,7 @@ module Jekyll
 
     # Transform the contents based on the content type.
     #
-    # Returns nothing.
+    # Returns the transformed contents.
     def transform
       converters.reduce(content) do |output, converter|
         begin
