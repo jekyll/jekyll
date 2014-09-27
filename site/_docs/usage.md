@@ -58,7 +58,7 @@ $ jekyll serve --detach
 
 {% highlight bash %}
 $ jekyll serve --no-watch
-# => A development server will run at http://localhost:4000/
+# => Same as `jekyll serve` but will not watch for changes.
 {% endhighlight %}
 
 These are just a few of the available [configuration options](../configuration/).
