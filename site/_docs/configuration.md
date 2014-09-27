@@ -273,6 +273,15 @@ before your site is served.
         <p><code class="flag">-B, --detach</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Skips the initial site build.</strong></p>
+        <p class="description">Skips the initial site build which occurs before the server is started.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">--skip-initial-build</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
