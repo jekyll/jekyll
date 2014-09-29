@@ -306,7 +306,7 @@ if `_posts/2014-09-03-my-file.markdown` uses the `include_relative` tag, the inc
 must be within the `_posts` directory, or one of it's subdirectories. You cannot include
 files in other locations.
 
-All the other capaibilities of the `include` tag are available to the `include_relative` tag,
+All the other capabilities of the `include` tag are available to the `include_relative` tag,
 such as using variables.
 
 ### Code snippet highlighting
