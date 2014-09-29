@@ -36,6 +36,7 @@
   * Add note about using the github-pages gem via pages.github.com/versions.json (#2939)
   * Update usage documentation to reflect 2.4 auto-enabling of `--watch`. (#2954)
   * Add `--skip-initial-build` to configuration docs (#2949)
+  * Fix a minor typo in Templates docs page (#2959)
 
 ## 2.4.0 / 2014-09-09
 
