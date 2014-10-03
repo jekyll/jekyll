@@ -9,7 +9,7 @@ categories: [release]
 
 Well, lookie here! A new release of Jekyll! v2.4.0 contains lots of goodies, including some brilliant new additions:
 
-- A new `relative_include` Liquid tag ([#2870]({{ site.repository }}/issues/2870))
+- A new `include_relative` Liquid tag ([#2870]({{ site.repository }}/issues/2870))
 - Render Liquid in CoffeeScript files ([#2830]({{ site.repository }}/issues/2830))
 - Add 4 new array Liquid filters: `push`, `pop`, `shift`, and `unshift` ([#2895]({{ site.repository }}/pull/2895))
 - Auto-enable watch on 'serve' ([#2858]({{ site.repository }}/issues/2858)). No more `-w`!
