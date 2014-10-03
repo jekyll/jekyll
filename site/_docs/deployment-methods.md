@@ -125,3 +125,16 @@ for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
   <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages/">host your Jekyll-powered website for free</a>.</p>
 </div>
+
+## Github Pages
+
+You can deploy your Jekyll site to [Github Pages](https://pages.github.com/)
+using [jgd](https://github.com/yegor256/jekyll-github-deploy) Ruby gem:
+
+{% highlight bash %}
+laptops$ gem install jgd
+laptops$ jgd
+{% endhighlight %}
+
+That's all you need to. The gem will checkout `gh-pages` branch,
+build the site, commit changes and push the branch.
