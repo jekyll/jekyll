@@ -11,7 +11,7 @@ prev_section: contributing
 ### Minor Enhancements
 {: #minor-enhancements-v2-4-0}
 
-- Support a new `relative_include` tag ([#2870]({{ site.repository }}/issues/2870))
+- Support a new `include_relative` tag ([#2870]({{ site.repository }}/issues/2870))
 - Auto-enable watch on 'serve' ([#2858]({{ site.repository }}/issues/2858))
 - Render Liquid in CoffeeScript files ([#2830]({{ site.repository }}/issues/2830))
 - Array Liquid filters: `push`, `pop`, `unshift`, `shift` ([#2895]({{ site.repository }}/issues/2895))
