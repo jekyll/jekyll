@@ -93,19 +93,19 @@ Including an image asset in a post:
 
 {% highlight text %}
 … which is shown in the screenshot below:
-![My helpful screenshot]({% raw %}{{ site.url }}{% endraw %}/assets/screenshot.jpg)
+![My helpful screenshot]({% raw %}{{ site.baseurl }}{% endraw %}/assets/screenshot.jpg)
 {% endhighlight %}
 
 Linking to a PDF for readers to download:
 
 {% highlight text %}
-… you can [get the PDF]({% raw %}{{ site.url }}{% endraw %}/assets/mydoc.pdf) directly.
+… you can [get the PDF]({% raw %}{{ site.baseurl }}{% endraw %}/assets/mydoc.pdf) directly.
 {% endhighlight %}
 
 <div class="note">
   <h5>ProTip™: Link using just the site root URL</h5>
   <p>
-    You can skip the <code>{% raw %}{{ site.url }}{% endraw %}</code> variable
+    You can skip the <code>{% raw %}{{ site.baseurl }}{% endraw %}</code> variable
     if you <strong>know</strong> your site will only ever be displayed at the
     root URL of your domain. In this case you can reference assets directly with
     just <code>/path/file.jpg</code>.
