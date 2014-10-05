@@ -4,6 +4,8 @@
 
 ### Minor Enhancements
 
+  * Meta descriptions in the site template now use `page.excerpt` if it's available (#2964)
+
 ### Bug Fixes
 
   * Fix Rouge's RedCarpet plugin interface integration (#2951)
