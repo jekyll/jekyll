@@ -41,6 +41,7 @@
   * Add `--skip-initial-build` to configuration docs (#2949)
   * Fix a minor typo in Templates docs page (#2959)
   * Add a ditaa-ditaa plugin under Other section on the Plugins page (#2967)
+  * Add `build/serve -V` option to configuration documentation (#2948)
 
 ## 2.4.0 / 2014-09-09
 
