@@ -6,6 +6,7 @@
 
   * Meta descriptions in the site template now use `page.excerpt` if it's available (#2964)
   * Change indentation in `head.html` of site template to 2 spaces from 4 (#2973)
+  * Use a `$content-width` variable instead of a fixed value in the site template CSS (#2972)
 
 ### Bug Fixes
 
