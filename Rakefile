@@ -152,10 +152,10 @@ namespace :site do
 
   desc "Update normalize.css library to the latest version and minify"
   task :update_normalize_css do
-    Dir.chdir("site/_includes/css") do
+    Dir.chdir("site/_sass") do
       sh 'curl "http://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
-      sh 'sass "normalize.scss":"normalize.css" --style compressed'
-      sh 'rm "normalize.scss"'
+      sh 'sass "normalize.scss":"_normalize.scss" --style compressed'
+      rm ['normalize.scss', Dir.glob('*.map')].flatten
     end
   end
 
