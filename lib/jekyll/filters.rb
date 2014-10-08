@@ -219,7 +219,7 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def where(input, property, value)
-      return input unless input.is_a?(Enumerable)
+      return input unless input.is_a?(Array)
       input.select { |object| item_property(object, property) == value }
     end
 
