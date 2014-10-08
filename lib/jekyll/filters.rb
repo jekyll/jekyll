@@ -219,7 +219,8 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def where(input, property, value)
-      return input unless input.is_a?(Array)
+      return input unless input.is_a?(Enumerable)
+      input = input.values if input.is_a?(Hash)
       input.select { |object| item_property(object, property) == value }
     end
 
