@@ -45,6 +45,7 @@
   * Add a ditaa-ditaa plugin under Other section on the Plugins page (#2967)
   * Add `build/serve -V` option to configuration documentation (#2948)
   * Add 'Jekyll Twitter Plugin' to list of third-party plugins (#2979)
+  * Docs: Update normalize.css to v3.0.2. (#2981)
 
 ## 2.4.0 / 2014-09-09
 
