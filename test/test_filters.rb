@@ -176,7 +176,9 @@ class TestFilters < Test::Unit::TestCase
       end
 
       should "filter objects in a hash appropriately" do
-        assert_equal 1, @filter.where({"a"=>{"color"=>"red"}, "b"=>{"color"=>"blue"}}, "color", "red").length
+        hash = {"a"=>{"color"=>"red"}, "b"=>{"color"=>"blue"}}
+        assert_equal 1, @filter.where(hash, "color", "red").length
+        assert_equal [{"color"=>"red"}], @filter.where(hash, "color", "red")
       end
 
       should "filter objects appropriately" do
