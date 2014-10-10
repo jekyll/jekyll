@@ -262,8 +262,8 @@ module Jekyll
     def pop(array, input = 1)
       return array unless array.is_a?(Array)
       new_ary = array.dup
-      new_ary.pop(input.to_i || 1)
-      new_ary
+      popped  = new_ary.pop(input.to_i || 1)
+      popped
     end
 
     def push(array, input)
@@ -276,8 +276,8 @@ module Jekyll
     def shift(array, input = 1)
       return array unless array.is_a?(Array)
       new_ary = array.dup
-      new_ary.shift(input.to_i || 1)
-      new_ary
+      shifted = new_ary.shift(input.to_i || 1)
+      shifted
     end
 
     def unshift(array, input)

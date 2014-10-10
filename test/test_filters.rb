@@ -230,30 +230,30 @@ class TestFilters < Test::Unit::TestCase
     end
 
     context "pop filter" do
-      should "return a new array with the last element popped" do
-        assert_equal %w{hi there}, @filter.pop(%w{hi there bernie})
+      should "return last element of an array" do
+        assert_equal %w{bernie}, @filter.pop(%w{hi there bernie})
       end
 
-      should "allow multiple els to be popped" do
-        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, 2)
+      should "return an array of n last elements of an array" do
+        assert_equal %w{and ernie}, @filter.pop(%w{hi there bert and ernie}, 2)
       end
 
       should "cast string inputs for # into nums" do
-        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, "2")
+        assert_equal %w{and ernie}, @filter.pop(%w{hi there bert and ernie}, "2")
       end
     end
 
     context "shift filter" do
-      should "return a new array with the element removed from the front" do
-        assert_equal %w{a friendly greeting}, @filter.shift(%w{just a friendly greeting})
+      should "return first element of an array" do
+        assert_equal %w{just}, @filter.shift(%w{just a friendly greeting})
       end
 
-      should "allow multiple els to be shifted" do
-        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, 2)
+      should "return an array of n first elements of an array" do
+        assert_equal %w{hi there}, @filter.shift(%w{hi there bert and ernie}, 2)
       end
 
       should "cast string inputs for # into nums" do
-        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, "2")
+        assert_equal %w{hi there}, @filter.shift(%w{hi there bert and ernie}, "2")
       end
     end
 
