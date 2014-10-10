@@ -238,7 +238,6 @@ namespace :site do
         post.puts("categories: [release]")
         post.puts("---")
         post.puts
-        post.puts
       end
 
       puts "Created #{filename}"
