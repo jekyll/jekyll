@@ -3,7 +3,7 @@
 set -e
 
 export BENCHMARK=true
-script/bootstrap
+command -v stackprof || script/bootstrap
 
 TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site'})"
 PROF_OUTPUT_FILE=tmp/stackprof-$(date +%Y%m%d).dump
