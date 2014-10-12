@@ -98,7 +98,7 @@ eos
       end
 
       def includes_dir
-        '_includes'
+        @includes_dir ||= '_includes'
       end
 
       def render(context)
@@ -150,7 +150,7 @@ eos
 
     class IncludeRelativeTag < IncludeTag
       def includes_dir
-        '.'
+        @includes_dir ||= '.'
       end
 
       def resolved_includes_dir(context)
