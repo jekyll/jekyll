@@ -2,7 +2,7 @@ language: ruby
 cache: bundler
 install:
 - script/rebund download
-- travis_retry bundle install --path vendor/bundle
+- travis_retry bundle install --path vendor/bundle -j8
 rvm:
 - 2.1
 - 2.0
