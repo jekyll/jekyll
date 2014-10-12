@@ -8,6 +8,9 @@ command -v stackprof > /dev/null || script/bootstrap
 TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site'})"
 PROF_OUTPUT_FILE=tmp/stackprof-$(date +%Y%m%d).dump
 
-bundle exec ruby -r./lib/jekyll -rstackprof -e "StackProf.run(mode: :cpu, out: '${PROF_OUTPUT_FILE}') { ${TEST_SCRIPT} }"
+test -f "$PROF_OUTPUT_FILE" || {
+  bundle exec ruby -r./lib/jekyll -rstackprof \
+    -e "StackProf.run(mode: :cpu, out: '${PROF_OUTPUT_FILE}') { ${TEST_SCRIPT} }"
+}
 
 bundle exec stackprof $PROF_OUTPUT_FILE $@
