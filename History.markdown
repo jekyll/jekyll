@@ -24,6 +24,7 @@
   * Add unit test for `jekyll new --force` logic (#2929)
   * Update outdated comment for `Convertible#transform` (#2957)
   * Add Hakiri badge to README. (#2953)
+  * Add some simple benchmarking tools. (#2993)
 
 ### Site Enhancements
 
