@@ -4,7 +4,7 @@ module Jekyll
   class Document
     include Comparable
 
-    attr_reader   :path, :site
+    attr_reader   :path, :site, :extname
     attr_accessor :content, :collection, :output
 
     # Create a new Document.
@@ -16,6 +16,7 @@ module Jekyll
     def initialize(path, relations)
       @site = relations[:site]
       @path = path
+      @extname = File.extname(path)
       @collection = relations[:collection]
       @has_yaml_header = nil
     end
@@ -33,23 +34,21 @@ module Jekyll
     # Returns a String path which represents the relative path
     #   from the site source to this document
     def relative_path
-      Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
+      @relative_path ||= Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
+    end
+
+    # The base filename of the document, without the file extname.
+    #
+    # Returns the basename without the file extname.
+    def basename_without_ext
+      @basename_without_ext ||= File.basename(path, '.*')
     end
 
     # The base filename of the document.
     #
-    # suffix - (optional) the suffix to be removed from the end of the filename
-    #
     # Returns the base filename of the document.
-    def basename(suffix = "")
-      File.basename(path, suffix)
-    end
-
-    # The extension name of the document.
-    #
-    # Returns the extension name of the document.
-    def extname
-      File.extname(path)
+    def basename
+      @basename ||= File.basename(path)
     end
 
     # Produces a "cleaned" relative path.
@@ -64,7 +63,8 @@ module Jekyll
     #
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
-      relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
+      @cleaned_relative_path ||=
+        relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
     end
 
     # Determine whether the document is a YAML file.
@@ -129,8 +129,8 @@ module Jekyll
         collection: collection.label,
         path:       cleaned_relative_path,
         output_ext: Jekyll::Renderer.new(site, self).output_ext,
-        name:       Utils.slugify(basename(".*")),
-        title:      Utils.slugify(data['title']) || Utils.slugify(basename(".*"))
+        name:       Utils.slugify(basename_without_ext),
+        title:      Utils.slugify(data['title']) || Utils.slugify(basename_without_ext)
       }
     end
 

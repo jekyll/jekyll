@@ -75,7 +75,7 @@ module Jekyll
     # Returns a String containing the directory name where the collection
     #   is stored on the filesystem.
     def relative_directory
-      "_#{label}"
+      @relative_directory ||= "_#{label}"
     end
 
     # The full path to the directory containing the
@@ -83,7 +83,7 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      Jekyll.sanitized_path(site.source, relative_directory)
+      @directory ||= Jekyll.sanitized_path(site.source, relative_directory)
     end
 
     # Checks whether the directory "exists" for this collection.
