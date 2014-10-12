@@ -25,8 +25,8 @@ class TestDocument < Test::Unit::TestCase
       assert_equal "configuration.md", @document.basename
     end
 
-    should "allow the suffix to be specified for the basename" do
-      assert_equal "configuration", @document.basename(".*")
+    should "know its basename without extname" do
+      assert_equal "configuration", @document.basename_without_ext
     end
 
     should "know whether its a yaml file" do
