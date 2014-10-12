@@ -9,7 +9,6 @@ module Jekyll
       def setup
         return if @setup
         require 'redcloth'
-        @regexp = build_extname_regexp
         @setup = true
       rescue LoadError
         STDERR.puts 'You are missing a library required for Textile. Please run:'
@@ -17,13 +16,15 @@ module Jekyll
         raise Errors::FatalException.new("Missing dependency: RedCloth")
       end
 
-      def build_extname_regexp
-        rgx = '(' + @config['textile_ext'].gsub(',','|') +')$'
-        Regexp.new(rgx, Regexp::IGNORECASE)
+      def extname_matches_regexp
+        @extname_matches_regexp ||= Regexp.new(
+          '(' + @config['textile_ext'].gsub(',','|') +')$',
+          Regexp::IGNORECASE
+        )
       end
 
       def matches(ext)
-        ext =~ @regexp
+        ext =~ extname_matches_regexp
       end
 
       def output_ext(ext)
