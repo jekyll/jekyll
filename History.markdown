@@ -9,6 +9,7 @@
   * Use a `$content-width` variable instead of a fixed value in the site template CSS (#2972)
   * Strip newlines in site template `<meta>` description. (#2982)
   * Add link to atom feed in `head` of site template files (#2996)
+  * Performance optimizations (#2994)
 
 ### Bug Fixes
 
