@@ -13,3 +13,4 @@ site/_site/
 coverage
 .ruby-version
 .sass-cache
+tmp/stackprof-*
