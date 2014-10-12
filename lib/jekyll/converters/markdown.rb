@@ -8,6 +8,7 @@ module Jekyll
 
       def setup
         return if @setup
+        @regexp = build_extname_regexp
         @parser =
           case @config['markdown'].downcase
             when 'redcarpet' then RedcarpetParser.new(@config)
@@ -25,6 +26,11 @@ module Jekyll
             end
           end
         @setup = true
+      end
+
+      def build_extname_regexp
+        rgx = '^\.(' + @config['markdown_ext'].gsub(',','|') +')$'
+        Regexp.new(rgx, Regexp::IGNORECASE)
       end
 
       def valid_processors
@@ -47,8 +53,7 @@ module Jekyll
       end
 
       def matches(ext)
-        rgx = '^\.(' + @config['markdown_ext'].gsub(',','|') +')$'
-        ext =~ Regexp.new(rgx, Regexp::IGNORECASE)
+        ext =~ @regexp
       end
 
       def output_ext(ext)
