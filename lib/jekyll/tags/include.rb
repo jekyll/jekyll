@@ -156,12 +156,12 @@ eos
         '.'
       end
 
-      def page_path
+      def page_path(context)
         context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
       end
 
       def resolved_includes_dir(context)
-        Jekyll.sanitized_path(context.registers[:site].source, page_path)
+        Jekyll.sanitized_path(context.registers[:site].source, page_path(context))
       end
     end
   end
