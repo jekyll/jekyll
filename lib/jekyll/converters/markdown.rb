@@ -46,9 +46,15 @@ module Jekyll
         ].map(&:to_sym)
       end
 
+      def extname_matches_regexp
+        @extname_matches_regexp ||= Regexp.new(
+          '(' + @config['markdown_ext'].gsub(',','|') +')$',
+          Regexp::IGNORECASE
+        )
+      end
+
       def matches(ext)
-        rgx = '^\.(' + @config['markdown_ext'].gsub(',','|') +')$'
-        ext =~ Regexp.new(rgx, Regexp::IGNORECASE)
+        ext =~ extname_matches_regexp
       end
 
       def output_ext(ext)

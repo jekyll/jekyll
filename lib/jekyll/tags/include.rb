@@ -13,11 +13,14 @@ module Jekyll
 
     class IncludeTag < Liquid::Tag
 
+      attr_reader :includes_dir
+
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
       def initialize(tag_name, markup, tokens)
         super
+        @includes_dir = tag_includes_dir
         matched = markup.strip.match(VARIABLE_SYNTAX)
         if matched
           @file = matched['variable'].strip
@@ -97,7 +100,7 @@ eos
         end
       end
 
-      def includes_dir
+      def tag_includes_dir
         '_includes'
       end
 
@@ -118,12 +121,12 @@ eos
             partial.render!(context)
           end
         rescue => e
-          raise IncludeTagError.new e.message, File.join(includes_dir, @file)
+          raise IncludeTagError.new e.message, File.join(@includes_dir, @file)
         end
       end
 
       def resolved_includes_dir(context)
-        File.join(File.realpath(context.registers[:site].source), includes_dir)
+        File.join(File.realpath(context.registers[:site].source), @includes_dir)
       end
 
       def validate_path(path, dir, safe)
@@ -135,7 +138,7 @@ eos
       end
 
       def path_relative_to_source(dir, path)
-        File.join(includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
+        File.join(@includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
       end
 
       def realpath_prefixed_with?(path, dir)
@@ -149,13 +152,16 @@ eos
     end
 
     class IncludeRelativeTag < IncludeTag
-      def includes_dir
+      def tag_includes_dir
         '.'
       end
 
+      def page_path(context)
+        context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
+      end
+
       def resolved_includes_dir(context)
-        page_path = context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
-        Jekyll.sanitized_path(context.registers[:site].source, page_path)
+        Jekyll.sanitized_path(context.registers[:site].source, page_path(context))
       end
     end
   end

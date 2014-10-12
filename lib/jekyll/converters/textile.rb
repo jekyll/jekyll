@@ -16,9 +16,15 @@ module Jekyll
         raise Errors::FatalException.new("Missing dependency: RedCloth")
       end
 
+      def extname_matches_regexp
+        @extname_matches_regexp ||= Regexp.new(
+          '(' + @config['textile_ext'].gsub(',','|') +')$',
+          Regexp::IGNORECASE
+        )
+      end
+
       def matches(ext)
-        rgx = '(' + @config['textile_ext'].gsub(',','|') +')'
-        ext =~ Regexp.new(rgx, Regexp::IGNORECASE)
+        ext =~ extname_matches_regexp
       end
 
       def output_ext(ext)
