@@ -43,6 +43,10 @@ CONTENT
     create_post(content, override)
   end
 
+  def highlight_block_with_opts(options_string)
+    Jekyll::Tags::HighlightBlock.parse('highlight', options_string, ["test", "{% endhighlight %}", "\n"], {})
+  end
+
   context "language name" do
     should "match only the required set of chars" do
       r = Jekyll::Tags::HighlightBlock::SYNTAX
@@ -59,37 +63,51 @@ CONTENT
     end
   end
 
-  context "initialized tag" do
-    should "set the correct options" do
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
+  context "highlight tag in unsafe mode" do
+    should "set the no options with just a language name" do
+      tag = highlight_block_with_opts('ruby ')
       assert_equal({}, tag.instance_variable_get(:@options))
+    end
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
+    should "set the linenos option as 'inline' if no linenos value" do
+      tag = highlight_block_with_opts('ruby linenos ')
       assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
+    end
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
+    should "set the linenos option to 'table' if the linenos key is given the table value" do
+      tag = highlight_block_with_opts('ruby linenos=table ')
       assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
+    end
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
+    should "recognize nowrap option with linenos set" do
+      tag = highlight_block_with_opts('ruby linenos=table nowrap ')
       assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@options))
+    end
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
+    should "recognize the cssclass option" do
+      tag = highlight_block_with_opts('ruby linenos=table cssclass=hl ')
       assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
+    end
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos=3', ["test", "{% endhighlight %}", "\n"])
+    should "recognize the hl_linenos option and its value" do
+      tag = highlight_block_with_opts('ruby linenos=table cssclass=hl hl_linenos=3 ')
       assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
+    end
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl hl_linenos="3 5 6"', ["test", "{% endhighlight %}", "\n"])
+    should "recognize multiple values of hl_linenos" do
+      tag = highlight_block_with_opts('ruby linenos=table cssclass=hl hl_linenos="3 5 6" ')
       assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
+    end
 
-      tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
+    should "treat language name as case insensitive" do
+      tag = highlight_block_with_opts('Ruby ')
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
     end
   end
 
   context "in safe mode" do
     setup do
-      @tag = Jekyll::Tags::HighlightBlock.new('highlight', 'text ', ["test", "{% endhighlight %}", "\n"])
+      @tag = highlight_block_with_opts('text ')
     end
 
     should "allow linenos" do
