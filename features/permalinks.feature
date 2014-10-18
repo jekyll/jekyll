@@ -39,7 +39,7 @@ Feature: Fancy permalinks
     And I have the following post:
       | title                   | category | date       | content         |
       | Custom Permalink Schema | stuff    | 2009-03-27 | Totally custom. |
-    And I have a configuration file with "permalink" set to "/blog/:year/:month/:day/:title"
+    And I have a configuration file with "permalink" set to "/blog/:year/:month/:day/:title/"
     When I run jekyll build
     Then the _site directory should exist
     And I should see "Totally custom." in "_site/blog/2009/03/27/custom-permalink-schema/index.html"
@@ -68,7 +68,7 @@ Feature: Fancy permalinks
     Given I have a _posts directory
     And I have the following post:
       | title     | date       | permalink       | content |
-      | Some post | 2013-04-14 | /custom/posts/1 | bla bla |
+      | Some post | 2013-04-14 | /custom/posts/1/ | bla bla |
     When I run jekyll build
     Then the _site directory should exist
     And the _site/custom/posts/1 directory should exist
