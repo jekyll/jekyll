@@ -18,7 +18,6 @@
     to watching in in 2.4.0 (#2922)
   * Fix code for media query mixin in site template (#2946)
   * Allow post URL's to have `.htm` extensions (#2925)
-  * Make permalink parsing consistent with pages, such that any file ext is allowed (#2921)
 
 ### Development Fixes
 
