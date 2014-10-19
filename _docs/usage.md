@@ -41,14 +41,24 @@ preview what the generated site will look like in your browser locally.
 {% highlight bash %}
 $ jekyll serve
 # => A development server will run at http://localhost:4000/
+# Auto-regeneration: enabled. Use `--no-watch` to disable.
 
 $ jekyll serve --detach
 # => Same as `jekyll serve` but will detach from the current terminal.
 #    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
 #    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).
+{% endhighlight %}
 
-$ jekyll serve --watch
-# => Same as `jekyll serve`, but watch for changes and regenerate automatically.
+<div class="note info">
+  <h5>Be aware of default behavior</h5>
+  <p>
+    As of version 2.4, the <code>serve</code> command will watch for changes automatically. To disable this, you can use <code>jekyll serve --no-watch</code>, which preserves the old behavior.
+  </p>
+</div>
+
+{% highlight bash %}
+$ jekyll serve --no-watch
+# => Same as `jekyll serve` but will not watch for changes.
 {% endhighlight %}
 
 These are just a few of the available [configuration options](../configuration/).

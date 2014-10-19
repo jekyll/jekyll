@@ -214,6 +214,15 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--force_polling</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Verbose output</strong></p>
+        <p class="description">Print verbose output.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">-V, --verbose</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -271,6 +280,15 @@ before your site is served.
       <td class="align-center">
         <p><code class="option">detach: BOOL</code></p>
         <p><code class="flag">-B, --detach</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Skips the initial site build.</strong></p>
+        <p class="description">Skips the initial site build which occurs before the server is started.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">--skip-initial-build</code></p>
       </td>
     </tr>
   </tbody>
