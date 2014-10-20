@@ -10,6 +10,8 @@
   * Strip newlines in site template `<meta>` description. (#2982)
   * Add link to atom feed in `head` of site template files (#2996)
   * Performance optimizations (#2994)
+  * Use `Hash#each_key` instead of `Hash#keys.each` to speed up iteration
+    over hash keys. (#3017)
 
 ### Bug Fixes
 
