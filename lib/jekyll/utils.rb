@@ -14,7 +14,7 @@ module Jekyll
     def deep_merge_hashes(master_hash, other_hash)
       target = master_hash.dup
 
-      other_hash.keys.each do |key|
+      other_hash.each_key do |key|
         if other_hash[key].is_a? Hash and target[key].is_a? Hash
           target[key] = Utils.deep_merge_hashes(target[key], other_hash[key])
           next
