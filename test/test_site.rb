@@ -8,7 +8,7 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "look for plugins under the site directory by default" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'source' => File.expand_path(source_dir)}))
+      site = Site.new(site_configuration)
       assert_equal [File.join(source_dir, '_plugins')], site.plugins
     end
 
@@ -44,11 +44,14 @@ class TestSite < Test::Unit::TestCase
   end
   context "creating sites" do
     setup do
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
-      end
-      @site = Site.new(Jekyll.configuration)
+      @site = Site.new(site_configuration)
       @num_invalid_posts = 4
+    end
+
+    teardown do
+      if defined?(MyGenerator)
+        self.class.send(:remove_const, :MyGenerator)
+      end
     end
 
     should "have an empty tag hash by default" do
@@ -56,18 +59,20 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "give site with parsed pages and posts to generators" do
-      @site.reset
-      @site.read
       class MyGenerator < Generator
         def generate(site)
           site.pages.dup.each do |page|
             raise "#{page} isn't a page" unless page.is_a?(Page)
             raise "#{page} doesn't respond to :name" unless page.respond_to?(:name)
           end
+          site.file_read_opts[:secret_message] = 'hi'
         end
       end
+      @site = Site.new(site_configuration)
+      @site.read
       @site.generate
       assert_not_equal 0, @site.pages.size
+      assert_equal 'hi', @site.file_read_opts[:secret_message]
     end
 
     should "reset data before processing" do
@@ -221,22 +226,14 @@ class TestSite < Test::Unit::TestCase
 
     context 'error handling' do
       should "raise if destination is included in source" do
-        stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => source_dir})
-        end
-
         assert_raise Jekyll::Errors::FatalException do
-          site = Site.new(Jekyll.configuration)
+          site = Site.new(site_configuration('destination' => source_dir))
         end
       end
 
       should "raise if destination is source" do
-        stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => File.join(source_dir, "..")})
-        end
-
         assert_raise Jekyll::Errors::FatalException do
-          site = Site.new(Jekyll.configuration)
+          site = Site.new(site_configuration('destination' => File.join(source_dir, "..")))
         end
       end
     end
@@ -281,7 +278,7 @@ class TestSite < Test::Unit::TestCase
       end
 
       should 'remove orphaned files in destination - keep_files .svn' do
-        config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'keep_files' => ['.svn']})
+        config = site_configuration('keep_files' => %w{.svn})
         @site = Site.new(config)
         @site.process
         assert !File.exist?(dest_dir('.htpasswd'))
@@ -308,7 +305,7 @@ class TestSite < Test::Unit::TestCase
         end
 
         custom_processor = "CustomMarkdown"
-        s = Site.new(Jekyll.configuration.merge({ 'markdown' => custom_processor }))
+        s = Site.new(site_configuration('markdown' => custom_processor))
         assert_nothing_raised do
           s.process
         end
@@ -331,7 +328,7 @@ class TestSite < Test::Unit::TestCase
         end
 
         bad_processor = "Custom::Markdown"
-        s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+        s = Site.new(site_configuration('markdown' => bad_processor))
         assert_raise Jekyll::Errors::FatalException do
           s.process
         end
@@ -345,13 +342,13 @@ class TestSite < Test::Unit::TestCase
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
         assert_nothing_raised do
-          Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+          Site.new(site_configuration('markdown' => bad_processor))
         end
       end
 
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
-        s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+        s = Site.new(site_configuration('markdown' => bad_processor))
         assert_raise Jekyll::Errors::FatalException do
           s.process
         end
@@ -360,7 +357,7 @@ class TestSite < Test::Unit::TestCase
 
     context 'data directory' do
       should 'auto load yaml files' do
-        site = Site.new(Jekyll.configuration)
+        site = Site.new(site_configuration)
         site.process
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.yaml'))
@@ -370,7 +367,7 @@ class TestSite < Test::Unit::TestCase
       end
 
       should 'auto load yml files' do
-        site = Site.new(Jekyll.configuration)
+        site = Site.new(site_configuration)
         site.process
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'languages.yml'))
@@ -380,7 +377,7 @@ class TestSite < Test::Unit::TestCase
       end
 
       should 'auto load json files' do
-        site = Site.new(Jekyll.configuration)
+        site = Site.new(site_configuration)
         site.process
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.json'))
@@ -390,7 +387,7 @@ class TestSite < Test::Unit::TestCase
       end
 
       should 'auto load yaml files in subdirectory' do
-        site = Site.new(Jekyll.configuration)
+        site = Site.new(site_configuration)
         site.process
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'categories', 'dairy.yaml'))
@@ -400,7 +397,7 @@ class TestSite < Test::Unit::TestCase
       end
 
       should "load symlink files in unsafe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => false}))
+        site = Site.new(site_configuration('safe' => false))
         site.process
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
@@ -410,7 +407,7 @@ class TestSite < Test::Unit::TestCase
       end
 
       should "not load symlink files in safe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => true}))
+        site = Site.new(site_configuration('safe' => true))
         site.process
 
         assert_nil site.data['products']
