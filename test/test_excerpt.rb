@@ -13,10 +13,7 @@ class TestExcerpt < Test::Unit::TestCase
   context "With extraction disabled" do
     setup do
       clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'excerpt_separator' => ''})
-      end
-      @site = Site.new(Jekyll.configuration)
+      @site = Site.new(site_configuration('excerpt_separator' => ''))
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
     end
 
@@ -29,8 +26,7 @@ class TestExcerpt < Test::Unit::TestCase
   context "An extracted excerpt" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
-      @site = Site.new(Jekyll.configuration)
+      @site = Site.new(site_configuration)
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
       @excerpt = @post.send :extract_excerpt
     end

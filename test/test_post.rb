@@ -688,7 +688,7 @@ class TestPost < Test::Unit::TestCase
 
   context "site config with category" do
     setup do
-      config = Jekyll::Configuration::DEFAULTS.merge({
+      config = site_configuration({
         'defaults' => [
           'scope' => {
             'path' => ''
@@ -715,7 +715,7 @@ class TestPost < Test::Unit::TestCase
 
   context "site config with categories" do
     setup do
-      config = Jekyll::Configuration::DEFAULTS.merge({
+      config = site_configuration({
         'defaults' => [
           'scope' => {
             'path' => ''
