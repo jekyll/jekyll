@@ -110,7 +110,7 @@ module Jekyll
     #
     # Returns a path which is prefixed with the destination directory.
     def in_dest_dir(*paths)
-      Jekyll.sanitized_path(dest, File.join(*paths))
+      Jekyll.sanitized_path(dest, File.join(*paths.flatten))
     end
 
     # The list of collections and their corresponding Jekyll::Collection instances.
