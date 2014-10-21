@@ -85,7 +85,7 @@ module Jekyll
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
-    def configuration(override)
+    def configuration(override = Hash.new)
       config = Configuration[Configuration::DEFAULTS]
       override = Configuration[override].stringify_keys
       unless override.delete('skip_config_files')
