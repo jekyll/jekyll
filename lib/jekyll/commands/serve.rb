@@ -75,13 +75,13 @@ module Jekyll
 
         def webrick_options(config)
           opts = {
-            :DocumentRoot       => config['destination'],
-            :Port               => config['port'],
             :BindAddress        => config['host'],
-            :MimeTypes          => mime_types,
+            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml),
+            :DocumentRoot       => config['destination'],
             :DoNotReverseLookup => true,
-            :StartCallback      => start_callback(config['detach']),
-            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml)
+            :MimeTypes          => mime_types,
+            :Port               => config['port'],
+            :StartCallback      => start_callback(config['detach'])
           }
 
           if !config['verbose']
