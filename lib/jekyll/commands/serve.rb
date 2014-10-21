@@ -84,7 +84,11 @@ module Jekyll
             :StartCallback      => start_callback(config['detach'])
           }
 
-          if !config['verbose']
+          if config['verbose']
+            opts.merge!({
+              :Logger => WEBrick::Log.new($stdout, WEBrick::Log::DEBUG)
+            })
+          else
             opts.merge!({
               :AccessLog => [],
               :Logger => WEBrick::Log.new([], WEBrick::Log::WARN)
