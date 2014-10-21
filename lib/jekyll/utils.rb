@@ -111,11 +111,13 @@ module Jekyll
     # hyphen.
     def slugify(string)
       unless string.nil?
-        # Replace each non-alphanumeric character sequence with a hyphen
-        slug = string.gsub(/[^a-z0-9]+/i, '-')
-        # Remove leading/trailing hyphen
-        slug.gsub!(/^\-|\-$/i, '')
-        slug.downcase
+        string \
+          # Replace each non-alphanumeric character sequence with a hyphen
+          .gsub(/[^a-z0-9]+/i, '-') \
+          # Remove leading/trailing hyphen
+          .gsub(/^\-|\-$/i, '') \
+          # Downcase it
+          .downcase
       end
     end
 
