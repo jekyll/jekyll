@@ -21,6 +21,7 @@
     to watching in in 2.4.0 (#2922)
   * Fix code for media query mixin in site template (#2946)
   * Allow post URL's to have `.htm` extensions (#2925)
+  * `Utils.slugify`: Don't create new objects when gsubbing (#2997)
 
 ### Development Fixes
 
