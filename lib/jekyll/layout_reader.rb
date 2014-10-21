@@ -43,7 +43,7 @@ module Jekyll
 
     def layout_directory_in_cwd
       dir = Jekyll.sanitized_path(Dir.pwd, site.config['layouts'])
-      if File.directory?(dir)
+      if File.directory?(dir) && !site.safe
         dir
       else
         nil
