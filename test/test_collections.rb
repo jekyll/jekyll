@@ -187,6 +187,7 @@ class TestCollections < Test::Unit::TestCase
 
     should "not allow symlinks" do
       assert_not_include @collection.filtered_entries, "um_hi.md"
+      assert_not_include @collection.filtered_entries, "/um_hi.md"
     end
 
     should "not include the symlinked file in the list of docs" do

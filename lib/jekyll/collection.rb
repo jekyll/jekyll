@@ -55,9 +55,10 @@ module Jekyll
     #   relative to the collection's directory
     def entries
       return Array.new unless exists?
-      Dir.glob(collection_dir("**", "*.*")).map do |entry|
-        entry[collection_dir("")] = ''; entry
-      end
+      @entries ||=
+        Dir.glob(collection_dir("**", "*.*")).map do |entry|
+          entry["#{collection_dir}/"] = ''; entry
+        end
     end
 
     # Filtered version of the entries in this collection.
@@ -66,9 +67,13 @@ module Jekyll
     # Returns a list of filtered entry paths.
     def filtered_entries
       return Array.new unless exists?
-      Dir.chdir(directory) do
-        entry_filter.filter(entries).reject { |f| File.directory?(f) }
-      end
+      @filtered_entries ||=
+        Dir.chdir(directory) do
+          entry_filter.filter(entries).reject do |f|
+            path = collection_dir(f)
+            File.directory?(path) || (File.symlink?(f) && site.safe)
+          end
+        end
     end
 
     # The directory for this Collection, relative to the site source.
