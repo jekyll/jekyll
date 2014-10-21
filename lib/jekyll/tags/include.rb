@@ -161,7 +161,7 @@ eos
       end
 
       def resolved_includes_dir(context)
-        Jekyll.sanitized_path(context.registers[:site].source, page_path(context))
+        context.registers[:site].in_source_dir(page_path(context))
       end
     end
   end
