@@ -18,6 +18,7 @@ module Jekyll
             c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
             c.option 'baseurl', '-b', '--baseurl [URL]', 'Base URL'
             c.option 'skip_initial_build', '--skip-initial-build', 'Skips the initial site build which occurs before the server is started.'
+            c.option 'dirlist', '-l', '--dirlist', 'Show a file listing for directories with no index file'
 
             c.action do |args, options|
               options["serving"] = true
@@ -41,7 +42,7 @@ module Jekyll
             options['baseurl'],
             WEBrick::HTTPServlet::FileHandler,
             destination,
-            file_handler_options
+            file_handler_options(options['dirlist'])
           )
 
           Jekyll.logger.info "Server address:", server_address(s, options)
@@ -81,7 +82,8 @@ module Jekyll
             :MimeTypes          => mime_types,
             :DoNotReverseLookup => true,
             :StartCallback      => start_callback(config['detach']),
-            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml)
+            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml),
+            :FancyIndexing      => true
           }
 
           if !config['verbose']
@@ -117,9 +119,10 @@ module Jekyll
         end
 
         # recreate NondisclosureName under utf-8 circumstance
-        def file_handler_options
+        def file_handler_options(fancy_indexing)
           fh_option = WEBrick::Config::FileHandler
           fh_option[:NondisclosureName] = ['.ht*','~*']
+          fh_option[:FancyIndexing] = fancy_indexing
           fh_option
         end
 
