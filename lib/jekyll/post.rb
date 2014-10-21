@@ -270,7 +270,7 @@ module Jekyll
       # The url needs to be unescaped in order to preserve the correct filename
       dest = site.in_dest_dir(dest)
       path = Jekyll.sanitized_path(dest, URL.unescape_path(url))
-      path = File.join(path, "index.html") if path[/\.html$/].nil?
+      path = File.join(path, "index.html") if path[/\.html?$/].nil?
       path
     end
 
