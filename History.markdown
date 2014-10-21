@@ -53,6 +53,7 @@
   * Add 'Jekyll Twitter Plugin' to list of third-party plugins (#2979)
   * Docs: Update normalize.css to v3.0.2. (#2981)
   * Fix typo in Continuous Integration documentation (#2984)
+  * Clarify behavior of `:categories` in permalinks (#3011)
 
 ## 2.4.0 / 2014-09-09
 
