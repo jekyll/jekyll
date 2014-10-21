@@ -30,10 +30,10 @@ class Test::Unit::TestCase
   end
 
   def site_configuration(overrides = {})
+    full_overrides = build_configs(overrides, build_configs({"destination" => dest_dir}))
     build_configs({
       "source"      => source_dir,
-      "destination" => dest_dir
-    }, build_configs(overrides))
+    }, full_overrides)
   end
 
   def dest_dir(*subdirs)
