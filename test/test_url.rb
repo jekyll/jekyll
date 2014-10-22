@@ -16,6 +16,13 @@ class TestURL < Test::Unit::TestCase
       ).to_s
     end
 
+    should "handle multiple of the same key in the template" do
+      assert_equal '/foo/bar/foo/', URL.new(
+        :template => "/:x/:y/:x/",
+        :placeholders => {:x => "foo", :y => "bar"}
+      ).to_s
+    end
+
     should "return permalink if given" do
       assert_equal "/le/perma/link", URL.new(
         :template => "/:x/:y",
