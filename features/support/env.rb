@@ -30,8 +30,8 @@ def run_jekyll(args)
   child.status.exitstatus == 0
 end
 
-def run_in_shell(args, options)
-  POSIX::Spawn::Child.new *args, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"])
+def run_in_shell(*args)
+  POSIX::Spawn::Child.new *args, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"]
 end
 
 def slug(title)
