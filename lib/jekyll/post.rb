@@ -108,14 +108,14 @@ module Jekyll
     #
     # Returns excerpt string.
     def excerpt
-      data.fetch('excerpt', extracted_excerpt.to_s)
+      data.fetch('excerpt') { extracted_excerpt.to_s }
     end
 
     # Public: the Post title, from the YAML Front-Matter or from the slug
     #
     # Returns the post title
     def title
-      data.fetch("title", titleized_slug)
+      data.fetch("title") { titleized_slug }
     end
 
     # Turns the post slug into a suitable title
@@ -130,7 +130,7 @@ module Jekyll
     #
     # Returns the path to the file relative to the site source
     def path
-      data.fetch('path', relative_path.sub(/\A\//, ''))
+      data.fetch('path') { relative_path.sub(/\A\//, '') }
     end
 
     # The path to the post source file, relative to the site source
