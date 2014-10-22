@@ -49,7 +49,7 @@ module Jekyll
       #
       # Returns a Set with the directory paths
       def new_dirs
-        new_files.flat_map { |file| parent_dirs(file) }.to_set
+        new_files.map { |file| parent_dirs(file) }.flatten.to_set
       end
 
       # Private: The list of parent directories of a given file
@@ -76,7 +76,7 @@ module Jekyll
       #
       # Returns a Set with the directory paths
       def keep_dirs
-        site.keep_files.flat_map { |file| parent_dirs(File.join(site.dest, file)) }.to_set
+        site.keep_files.map { |file| parent_dirs(File.join(site.dest, file)) }.flatten.to_set
       end
 
       # Private: Creates a regular expression from the config's keep_files array

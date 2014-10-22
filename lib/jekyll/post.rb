@@ -115,7 +115,7 @@ module Jekyll
     #
     # Returns the post title
     def title
-      data.fetch("title") { titleized_slug }
+      data.fetch('title') { titleized_slug }
     end
 
     # Turns the post slug into a suitable title
