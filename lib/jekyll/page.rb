@@ -126,7 +126,7 @@ module Jekyll
     #
     # Returns the path to the source file
     def path
-      data.fetch('path', relative_path.sub(/\A\//, ''))
+      data.fetch('path') { relative_path.sub(/\A\//, '') }
     end
 
     # The path to the page source file, relative to the site source
