@@ -46,24 +46,23 @@ module Jekyll
     # Returns the _unsanitizied_ String URL
     def generate_url
       @placeholders.inject(@template) do |result, token|
+        break result if result.index(':').nil?
         result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
       end
     end
 
     # Returns a sanitized String URL
     def sanitize_url(in_url)
-
-      # Remove all double slashes
-      url = in_url.gsub(/\/\//, "/")
-
-      # Remove every URL segment that consists solely of dots
-      url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
+      url = in_url \
+        # Remove all double slashes
+        .gsub(/\/\//, '/') \
+        # Remove every URL segment that consists solely of dots
+        .split('/').reject{ |part| part =~ /^\.+$/ }.join('/') \
+        # Always add a leading slash
+        .gsub(/\A([^\/])/, '/\1')
 
       # Append a trailing slash to the URL if the unsanitized URL had one
-      url += "/" if in_url =~ /\/$/
-
-      # Always add a leading slash
-      url.gsub!(/\A([^\/])/, '/\1')
+      url << "/" if in_url[-1].eql?('/')
 
       url
     end

@@ -76,7 +76,7 @@ module Jekyll
       #
       # Returns a Set with the directory paths
       def keep_dirs
-        site.keep_files.map{|file| parent_dirs(File.join(site.dest, file))}.flatten.to_set
+        site.keep_files.map { |file| parent_dirs(File.join(site.dest, file)) }.flatten.to_set
       end
 
       # Private: Creates a regular expression from the config's keep_files array
