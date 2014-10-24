@@ -14,6 +14,7 @@
   * Performance optimizations (#2994)
   * Use `Hash#each_key` instead of `Hash#keys.each` to speed up iteration
     over hash keys. (#3017)
+  * Further minor performance enhancements. (#3022)
 
 ### Bug Fixes
 
