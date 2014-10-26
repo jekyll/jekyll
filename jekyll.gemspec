@@ -29,18 +29,18 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
   s.add_runtime_dependency('colorator', "~> 0.1")
-  s.add_runtime_dependency('kramdown',  "~> 1.3")
+  s.add_runtime_dependency('kramdown',  "~> 1.5")
   s.add_runtime_dependency('liquid',    "~> 2.6.1")
-  s.add_runtime_dependency('mercenary', "~> 0.3.3")
+  s.add_runtime_dependency('mercenary', "~> 0.3.4")
   s.add_runtime_dependency('safe_yaml', "~> 1.0")
 
   # Before 3.0 drops, phase the following gems out as dev dependencies
   # and gracefully handle their absence.
   s.add_runtime_dependency('classifier-reborn', "~> 2.0")
   s.add_runtime_dependency('jekyll-coffeescript', '~> 1.0')
-  s.add_runtime_dependency('jekyll-gist', '~> 1.0')
-  s.add_runtime_dependency('jekyll-paginate', '~> 1.0')
-  s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0')
+  s.add_runtime_dependency('jekyll-gist', '~> 1.1')
+  s.add_runtime_dependency('jekyll-paginate', '~> 1.1')
+  s.add_runtime_dependency('jekyll-sass-converter', '~> 1.2')
   s.add_runtime_dependency('jekyll-watch', '~> 1.1')
   s.add_runtime_dependency('pygments.rb', "~> 0.6.0")
   s.add_runtime_dependency('redcarpet', "~> 3.1")
@@ -50,10 +50,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency('cucumber', "1.3.11")
   s.add_development_dependency('jekyll_test_plugin')
   s.add_development_dependency('jekyll_test_plugin_malicious')
-  s.add_development_dependency('launchy', "~> 2.3")
-  s.add_development_dependency('maruku', "~> 0.7.0")
+  s.add_development_dependency('launchy', "~> 2.4")
+  s.add_development_dependency('maruku', "~> 0.7.2")
   s.add_development_dependency('mime-types', "~> 1.5")
-  s.add_development_dependency('rake', "~> 10.1")
+  s.add_development_dependency('rake', "~> 10.3")
   s.add_development_dependency('rdiscount', "~> 1.6")
   s.add_development_dependency('rdoc', "~> 3.11")
   s.add_development_dependency('RedCloth', "~> 4.2")
