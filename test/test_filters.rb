@@ -147,6 +147,15 @@ class TestFilters < Test::Unit::TestCase
         assert_equal "[1,2]", @filter.jsonify([1, 2])
         assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => 'Jack'}, {:name => 'Smith'}])
       end
+
+      should "call #to_liquid " do
+        class AThing < Struct.new(:name)
+          def to_liquid
+            { "name" => name, :v => 1 }
+          end
+        end
+        assert_equal "[{\"name\":\"Jeremiah\",\"v\":1},{\"name\":\"Smathers\",\"v\":1}]", @filter.jsonify([AThing.new("Jeremiah"), AThing.new("Smathers")])
+      end
     end
 
     context "group_by filter" do
