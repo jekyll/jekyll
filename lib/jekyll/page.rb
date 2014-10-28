@@ -28,7 +28,6 @@ module Jekyll
       @dir  = dir
       @name = name
 
-
       process(name)
       read_yaml(File.join(base, dir), name)
 
@@ -49,21 +48,28 @@ module Jekyll
     # The full path and filename of the post. Defined in the YAML of the post
     # body.
     #
-    # Returns the String permalink or nil if none has been set.
+    # Returns the String permalink or nil if none has been set or if the
+    # permalink is a template.
     def permalink
       return nil if data.nil? || data['permalink'].nil?
+      plink = !URL.template?(data['permalink']) && data['permalink']
       if site.config['relative_permalinks']
-        File.join(@dir, data['permalink'])
+        File.join(@dir, plink)
       else
-        data['permalink']
+        plink
       end
     end
 
-    # The template of the permalink.
+    # The template of the permalink. If the permalink of the page is template,
+    # return it. Otherwise, return the template from site configuration.
     #
     # Returns the template String.
     def template
-      if site.permalink_style == :pretty
+      page_template = URL.template?(data['permalink']) && data['permalink']
+
+      if page_template
+        page_template
+      elsif site.permalink_style == :pretty
         if index? && html?
           "/:path/"
         elsif html?
@@ -80,20 +86,34 @@ module Jekyll
     #
     # Returns the String url.
     def url
-      @url ||= URL.new({
-        :template => template,
-        :placeholders => url_placeholders,
-        :permalink => permalink
-      }).to_s
+      @url ||= begin
+        tmpl = template
+
+        # Optimization: fingerprint computation requires another call
+        # for `transform`, do it only if the URL needs it
+        uses_fingerprint = tmpl =~ /:fingerprint/
+
+        url = URL.new(
+          :template     => tmpl,
+          :placeholders => url_placeholders(uses_fingerprint),
+          :permalink    => permalink
+        ).to_s
+
+        # Optimization: store the fingerprint only if it's in the URL
+        site.path_fingerprints[path] = url if uses_fingerprint
+
+        url
+      end
     end
 
     # Returns a hash of URL placeholder names (as symbols) mapping to the
     # desired placeholder replacements. For details see "url.rb"
-    def url_placeholders
+    def url_placeholders(uses_fingerprint)
       {
-        :path       => @dir,
-        :basename   => basename,
-        :output_ext => output_ext
+        :path        => @dir,
+        :basename    => basename,
+        :output_ext  => output_ext,
+        :fingerprint => uses_fingerprint ? content_fingerprint : ""
       }
     end
 

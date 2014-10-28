@@ -35,6 +35,11 @@ class TestPage < Test::Unit::TestCase
         assert_equal "/+/%25%23%20+.html", @page.url
       end
 
+      should "create url with fingerprint" do
+        @page = setup_page('/css', 'print-fingerprint.css')
+        assert_equal "/css/print-fingerprint-e7665d36280646dcecb9c50375df1922.css", @page.url
+      end
+
       context "in a directory hierarchy" do
         should "create url based on filename" do
           @page = setup_page('/contacts', 'bar.html')
