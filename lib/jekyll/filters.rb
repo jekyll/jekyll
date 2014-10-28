@@ -327,7 +327,12 @@ module Jekyll
     end
 
     def as_liquid(item)
-      item.respond_to?(:to_liquid) ? item.to_liquid : item
+      case item
+      when Array
+        item.map{ |i| as_liquid(i) }
+      else
+        item.respond_to?(:to_liquid) ? item.to_liquid : item
+      end
     end
   end
 end
