@@ -24,6 +24,7 @@
   * Fix code for media query mixin in site template (#2946)
   * Allow post URL's to have `.htm` extensions (#2925)
   * `Utils.slugify`: Don't create new objects when gsubbing (#2997)
+  * The jsonify filter should deep-convert to Liquid when given an Array. (#3032)
 
 ### Development Fixes
 
