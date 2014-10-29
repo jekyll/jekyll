@@ -4,6 +4,7 @@
 
 ### Minor Enhancements
 
+  * Allow placeholders in permalinks (#3031)
   * Fancy Indexing with WEBrick (#3018)
   * Allow Enumerables to be used with `where` filter. (#2986)
   * Meta descriptions in the site template now use `page.excerpt` if it's available (#2964)
