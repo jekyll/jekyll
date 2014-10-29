@@ -37,15 +37,29 @@ module Jekyll
     #
     # Returns the String URL
     def to_s
-      sanitize_url(@permalink || generate_url)
+      sanitize_url(generated_permalink || generated_url)
+    end
+
+    # Generates a URL from the permalink
+    #
+    # Returns the _unsanitized String URL
+    def generated_permalink
+      (@generated_permlink ||= generate_url(@permalink)) if @permalink
+    end
+
+    # Generates a URL from the template
+    #
+    # Returns the _unsanitized String URL
+    def generated_url
+      @generated_url ||= generate_url(@template)
     end
 
     # Internal: Generate the URL by replacing all placeholders with their
-    # respective values
+    # respective values in the given template
     #
     # Returns the _unsanitizied_ String URL
-    def generate_url
-      @placeholders.inject(@template) do |result, token|
+    def generate_url(template)
+      @placeholders.inject(template) do |result, token|
         break result if result.index(':').nil?
         result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
       end
