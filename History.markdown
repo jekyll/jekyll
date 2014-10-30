@@ -37,6 +37,7 @@
 
 ### Site Enhancements
 
+  * `NOKOGIRI_USE_SYSTEM_LIBRARIES=true` **decreases** installation time. (#3040)
   * Add FormKeep to resources as Jekyll form backend (#3010)
   * Fixing a mistake in the name of the new Liquid tag (#2969)
   * Update Font Awesome to v4.2.0. (#2898)
