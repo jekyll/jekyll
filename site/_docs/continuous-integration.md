@@ -153,7 +153,7 @@ env:
 Using `html-proofer`? You'll want this environment variable. Nokogiri, used
 to parse HTML files in your compiled site, comes bundled with libraries
 which it must compile each time it is installed. Luckily, you can
-dramatically increase the install time of Nokogiri by setting the
+dramatically decrease the install time of Nokogiri by setting the
 environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
 ## 4. Gotchas
