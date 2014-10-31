@@ -120,6 +120,7 @@ class TestUtils < Test::Unit::TestCase
 
     should "drop trailing punctuation" do
       assert_equal "so-what-is-jekyll-exactly", Utils.slugify("So what is Jekyll, exactly?")
+      assert_equal "كيف-حالك", Utils.slugify("كيف حالك؟")
     end
 
     should "ignore hyphens" do
@@ -132,6 +133,10 @@ class TestUtils < Test::Unit::TestCase
 
     should "combine adjacent hyphens and spaces" do
       assert_equal "customizing-git-git-hooks", Utils.slugify("Customizing Git - Git Hooks")
+    end
+
+    should "replace punctuation in any scripts by hyphens" do
+      assert_equal "5時-6時-三-一四", Utils.slugify("5時〜6時 三・一四")
     end
 
     should "not modify the original string" do

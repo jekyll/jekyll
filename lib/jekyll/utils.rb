@@ -113,7 +113,7 @@ module Jekyll
       unless string.nil?
         string \
           # Replace each non-alphanumeric character sequence with a hyphen
-          .gsub(/[^a-z0-9]+/i, '-') \
+          .gsub(/[^[:alnum:]]+/i, '-') \
           # Remove leading/trailing hyphen
           .gsub(/^\-|\-$/i, '') \
           # Downcase it
