@@ -29,6 +29,7 @@
 
 ### Development Fixes
 
+  * Fix a typo in the doc block for `Jekyll::URL.escape_path` (#3052)
   * Add integration test for `jekyll new --blank` in TestUnit (#2913)
   * Add unit test for `jekyll new --force` logic (#2929)
   * Update outdated comment for `Convertible#transform` (#2957)
