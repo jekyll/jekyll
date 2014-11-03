@@ -92,7 +92,7 @@ module Jekyll
     #
     # Returns the escaped path.
     def self.escape_path(path)
-      # Because URI.escape doesn't escape '?', '[' and ']' by defaut,
+      # Because URI.escape doesn't escape '?', '[' and ']' by default,
       # specify unsafe string (except unreserved, sub-delims, ":", "@" and "/").
       #
       # URI path segment is defined in RFC 3986 as follows:
