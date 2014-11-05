@@ -134,6 +134,7 @@ namespace :site do
   desc "Generate and view the site locally"
   task :preview do
     require "launchy"
+    require "jekyll"
 
     # Yep, it's a hack! Wait a few seconds for the Jekyll site to generate and
     # then open it in a browser. Someday we can do better than this, I hope.
@@ -145,9 +146,19 @@ namespace :site do
 
     # Generate the site in server mode.
     puts "Running Jekyll..."
-    Dir.chdir("site") do
-      sh "#{File.expand_path('bin/jekyll', File.dirname(__FILE__))} serve"
-    end
+    Jekyll::Commands::Serve.process({
+      "source"      => File.expand_path("site"),
+      "destination" => File.expand_path("site/_site")
+    })
+  end
+
+  desc "Generate the site"
+  task :generate => [:history, :version_file] do
+    require "jekyll"
+    Jekyll::Commands::Build.process({
+      "source"      => File.expand_path("site"),
+      "destination" => File.expand_path("site/_site")
+    })
   end
 
   desc "Update normalize.css library to the latest version and minify"
