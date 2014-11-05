@@ -5,6 +5,80 @@ permalink: "/docs/history/"
 prev_section: contributing
 ---
 
+## 2.5.0 / 2014-11-06
+{: #v2-5-0}
+
+### Minor Enhancements
+{: #minor-enhancements-v2-5-0}
+
+- Require gems in `:jekyll_plugins` Gemfile group unless `JEKYLL_NO_BUNDLER_REQUIRE` is specified in the environment. ([#2865]({{ site.repository }}/issues/2865))
+- Centralize path sanitation in the `Site` object ([#2882]({{ site.repository }}/issues/2882))
+- Allow placeholders in permalinks ([#3031]({{ site.repository }}/issues/3031))
+- Fancy Indexing with WEBrick ([#3018]({{ site.repository }}/issues/3018))
+- Allow Enumerables to be used with `where` filter. ([#2986]({{ site.repository }}/issues/2986))
+- Meta descriptions in the site template now use `page.excerpt` if it's available ([#2964]({{ site.repository }}/issues/2964))
+- Change indentation in `head.html` of site template to 2 spaces from 4 ([#2973]({{ site.repository }}/issues/2973))
+- Use a `$content-width` variable instead of a fixed value in the site template CSS ([#2972]({{ site.repository }}/issues/2972))
+- Strip newlines in site template `<meta>` description. ([#2982]({{ site.repository }}/issues/2982))
+- Add link to atom feed in `head` of site template files ([#2996]({{ site.repository }}/issues/2996))
+- Performance optimizations ([#2994]({{ site.repository }}/issues/2994))
+- Use `Hash#each_key` instead of `Hash#keys.each` to speed up iteration
+    over hash keys. ([#3017]({{ site.repository }}/issues/3017))
+- Further minor performance enhancements. ([#3022]({{ site.repository }}/issues/3022))
+- Add 'b' and 's' aliases for build and serve, respectively ([#3065]({{ site.repository }}/issues/3065))
+
+### Bug Fixes
+{: #bug-fixes-v2-5-0}
+
+- Fix Rouge's RedCarpet plugin interface integration ([#2951]({{ site.repository }}/issues/2951))
+- Remove `--watch` from the site template blog post since it defaults
+    to watching in in 2.4.0 ([#2922]({{ site.repository }}/issues/2922))
+- Fix code for media query mixin in site template ([#2946]({{ site.repository }}/issues/2946))
+- Allow post URL's to have `.htm` extensions ([#2925]({{ site.repository }}/issues/2925))
+- `Utils.slugify`: Don't create new objects when gsubbing ([#2997]({{ site.repository }}/issues/2997))
+- The jsonify filter should deep-convert to Liquid when given an Array. ([#3032]({{ site.repository }}/issues/3032))
+- Apply `jsonify` filter to Hashes deeply and effectively ([#3063]({{ site.repository }}/issues/3063))
+- Use `127.0.0.1` as default host instead of `0.0.0.0` ([#3053]({{ site.repository }}/issues/3053))
+
+### Development Fixes
+{: #development-fixes-v2-5-0}
+
+- Fix a typo in the doc block for `Jekyll::URL.escape_path` ([#3052]({{ site.repository }}/issues/3052))
+- Add integration test for `jekyll new --blank` in TestUnit ([#2913]({{ site.repository }}/issues/2913))
+- Add unit test for `jekyll new --force` logic ([#2929]({{ site.repository }}/issues/2929))
+- Update outdated comment for `Convertible#transform` ([#2957]({{ site.repository }}/issues/2957))
+- Add Hakiri badge to README. ([#2953]({{ site.repository }}/issues/2953))
+- Add some simple benchmarking tools. ([#2993]({{ site.repository }}/issues/2993))
+
+### Site Enhancements
+{: #site-enhancements-v2-5-0}
+
+- `NOKOGIRI_USE_SYSTEM_LIBRARIES=true` **decreases** installation time. ([#3040]({{ site.repository }}/issues/3040))
+- Add FormKeep to resources as Jekyll form backend ([#3010]({{ site.repository }}/issues/3010))
+- Fixing a mistake in the name of the new Liquid tag ([#2969]({{ site.repository }}/issues/2969))
+- Update Font Awesome to v4.2.0. ([#2898]({{ site.repository }}/issues/2898))
+- Fix link to [#2895]({{ site.repository }}/issues/2895) in 2.4.0 release post. ([#2899]({{ site.repository }}/issues/2899))
+- Add Big Footnotes for Kramdown plugin to list of third-party plugins ([#2916]({{ site.repository }}/issues/2916))
+- Remove warning regarding GHP use of singular types for front matter defaults ([#2919]({{ site.repository }}/issues/2919))
+- Fix quote character typo in site documentation for templates ([#2917]({{ site.repository }}/issues/2917))
+- Point Liquid links to Liquid’s Github wiki ([#2887]({{ site.repository }}/issues/2887))
+- Add HTTP Basic Auth (.htaccess) plugin to list of third-party plugins ([#2931]({{ site.repository }}/issues/2931))
+- (Minor) Grammar & `_config.yml` filename fixes ([#2911]({{ site.repository }}/issues/2911))
+- Added `mathml.rb` to the list of third-party plugins. ([#2937]({{ site.repository }}/issues/2937))
+- Add `--force_polling` to the list of configuration options ([#2943]({{ site.repository }}/issues/2943))
+- Escape unicode characters in site CSS ([#2906]({{ site.repository }}/issues/2906))
+- Add note about using the github-pages gem via pages.github.com/versions.json ([#2939]({{ site.repository }}/issues/2939))
+- Update usage documentation to reflect 2.4 auto-enabling of `--watch`. ([#2954]({{ site.repository }}/issues/2954))
+- Add `--skip-initial-build` to configuration docs ([#2949]({{ site.repository }}/issues/2949))
+- Fix a minor typo in Templates docs page ([#2959]({{ site.repository }}/issues/2959))
+- Add a ditaa-ditaa plugin under Other section on the Plugins page ([#2967]({{ site.repository }}/issues/2967))
+- Add `build/serve -V` option to configuration documentation ([#2948]({{ site.repository }}/issues/2948))
+- Add 'Jekyll Twitter Plugin' to list of third-party plugins ([#2979]({{ site.repository }}/issues/2979))
+- Docs: Update normalize.css to v3.0.2. ([#2981]({{ site.repository }}/issues/2981))
+- Fix typo in Continuous Integration documentation ([#2984]({{ site.repository }}/issues/2984))
+- Clarify behavior of `:categories` in permalinks ([#3011]({{ site.repository }}/issues/3011))
+
+
 ## 2.4.0 / 2014-09-09
 {: #v2-4-0}
 
