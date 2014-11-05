@@ -49,7 +49,7 @@ module Jekyll
     def initialize(site, source, dir, name)
       @site = site
       @dir = dir
-      @base = containing_dir(source, dir)
+      @base = containing_dir(dir)
       @name = name
 
       self.categories = dir.downcase.split('/').reject { |x| x.empty? }
@@ -88,8 +88,8 @@ module Jekyll
     end
 
     # Get the full path to the directory containing the post files
-    def containing_dir(source, dir)
-      return File.join(source, dir, '_posts')
+    def containing_dir(dir)
+      site.in_source_dir(dir, '_posts')
     end
 
     # Read the YAML frontmatter.
@@ -268,7 +268,7 @@ module Jekyll
     # Returns destination file path String.
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
-      path = Jekyll.sanitized_path(dest, URL.unescape_path(url))
+      path = site.in_dest_dir(dest, URL.unescape_path(url))
       path = File.join(path, "index.html") if path[/\.html?$/].nil?
       path
     end

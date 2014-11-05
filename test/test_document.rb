@@ -13,6 +13,10 @@ class TestDocument < Test::Unit::TestCase
       @document = @site.collections["methods"].docs.first
     end
 
+    should "exist" do
+      assert !@document.nil?
+    end
+
     should "know its relative path" do
       assert_equal "_methods/configuration.md", @document.relative_path
     end

@@ -35,7 +35,8 @@ module Jekyll
     # Returns the sorted array of docs.
     def read
       filtered_entries.each do |file_path|
-        full_path = Jekyll.sanitized_path(directory, file_path)
+        full_path = collection_dir(file_path)
+        next if File.directory?(full_path)
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
@@ -54,9 +55,10 @@ module Jekyll
     #   relative to the collection's directory
     def entries
       return Array.new unless exists?
-      Dir.glob(File.join(directory, "**", "*.*")).map do |entry|
-        entry[File.join(directory, "")] = ''; entry
-      end
+      @entries ||=
+        Dir.glob(collection_dir("**", "*.*")).map do |entry|
+          entry["#{collection_dir}/"] = ''; entry
+        end
     end
 
     # Filtered version of the entries in this collection.
@@ -65,9 +67,13 @@ module Jekyll
     # Returns a list of filtered entry paths.
     def filtered_entries
       return Array.new unless exists?
-      Dir.chdir(directory) do
-        entry_filter.filter(entries).reject { |f| File.directory?(f) }
-      end
+      @filtered_entries ||=
+        Dir.chdir(directory) do
+          entry_filter.filter(entries).reject do |f|
+            path = collection_dir(f)
+            File.directory?(path) || (File.symlink?(f) && site.safe)
+          end
+        end
     end
 
     # The directory for this Collection, relative to the site source.
@@ -78,12 +84,25 @@ module Jekyll
       @relative_directory ||= "_#{label}"
     end
 
-    # The full path to the directory containing the
+    # The full path to the directory containing the collection.
     #
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      @directory ||= Jekyll.sanitized_path(site.source, relative_directory)
+      @directory ||= site.in_source_dir(relative_directory)
+    end
+
+    # The full path to the directory containing the collection, with
+    #   optional subpaths.
+    #
+    # *files - (optional) any other path pieces relative to the
+    #           directory to append to the path
+    #
+    # Returns a String containing th directory name where the collection
+    #   is stored on the filesystem.
+    def collection_dir(*files)
+      return directory if files.empty?
+      site.in_source_dir(relative_directory, *files)
     end
 
     # Checks whether the directory "exists" for this collection.

@@ -8,8 +8,7 @@ class TestDraft < Test::Unit::TestCase
   context "A Draft" do
     setup do
       clear_dest
-      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
-      @site = Site.new(Jekyll.configuration)
+      @site = Site.new(site_configuration)
     end
 
     should "ensure valid drafts are valid" do
