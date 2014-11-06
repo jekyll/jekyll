@@ -42,7 +42,7 @@ module Jekyll
         ENV["JEKYLL_NO_BUNDLER_REQUIRE"] = "true"
         true
       end
-    rescue LoadError
+    rescue LoadError, Bundler::GemfileNotFound
       false
     end
 
