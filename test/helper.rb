@@ -58,6 +58,13 @@ class Test::Unit::TestCase
     File.open("#{path}/index.html", "w"){ |f| f.write("I was previously generated.") }
   end
 
+  def with_env(key, value)
+    old_value = ENV[key]
+    ENV[key] = value
+    yield
+    ENV[key] = old_value
+  end
+
   def capture_stdout
     $old_stdout = $stdout
     $stdout = StringIO.new

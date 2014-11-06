@@ -17,6 +17,7 @@ module Jekyll
     def conscientious_require
       require_plugin_files
       require_gems
+      self.class.require_from_bundler
     end
 
     # Require each of the gem plugins specified.
@@ -25,9 +26,24 @@ module Jekyll
     def require_gems
       site.gems.each do |gem|
         if plugin_allowed?(gem)
+          Jekyll.logger.debug("PluginManager:", "Requiring #{gem}")
           require gem
         end
       end
+    end
+
+    def self.require_from_bundler
+      if ENV["JEKYLL_NO_BUNDLER_REQUIRE"]
+        false
+      else
+        require "bundler"
+        required_gems = Bundler.require(:jekyll_plugins)
+        Jekyll.logger.debug("PluginManager:", "Required #{required_gems.map(&:name).join(', ')}")
+        ENV["JEKYLL_NO_BUNDLER_REQUIRE"] = "true"
+        true
+      end
+    rescue LoadError
+      false
     end
 
     # Check whether a gem plugin is allowed to be used during this build.
