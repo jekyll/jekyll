@@ -13,6 +13,8 @@ require 'mercenary'
   end
 end
 
+Jekyll::PluginManager.require_from_bundler
+
 Jekyll::Deprecator.process(ARGV)
 
 Mercenary.program(:jekyll) do |p|
