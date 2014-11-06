@@ -17,7 +17,7 @@ module Jekyll
     def conscientious_require
       require_plugin_files
       require_gems
-      self.require_from_bundler
+      self.class.require_from_bundler
     end
 
     # Require each of the gem plugins specified.
@@ -33,9 +33,9 @@ module Jekyll
 
     def self.require_from_bundler
       unless ENV["JEKYLL_NO_BUNDLER_REQUIRE"]
-        require "bundler/setup"
+        require "bundler"
         Bundler.require(:jekyll_plugins)
-        ENV["JEKYLL_NO_BUNDLER_REQUIRE"] = true
+        ENV["JEKYLL_NO_BUNDLER_REQUIRE"] = "true"
       end
     rescue LoadError
       false
