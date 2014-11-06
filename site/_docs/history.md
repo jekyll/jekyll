@@ -14,6 +14,7 @@ prev_section: contributing
 - Require gems in `:jekyll_plugins` Gemfile group unless `JEKYLL_NO_BUNDLER_REQUIRE` is specified in the environment. ([#2865]({{ site.repository }}/issues/2865))
 - Centralize path sanitation in the `Site` object ([#2882]({{ site.repository }}/issues/2882))
 - Allow placeholders in permalinks ([#3031]({{ site.repository }}/issues/3031))
+- Allow users to specify the log level via `JEKYLL_LOG_LEVEL`. ([#3067]({{ site.repository }}/issues/3067))
 - Fancy Indexing with WEBrick ([#3018]({{ site.repository }}/issues/3018))
 - Allow Enumerables to be used with `where` filter. ([#2986]({{ site.repository }}/issues/2986))
 - Meta descriptions in the site template now use `page.excerpt` if it's available ([#2964]({{ site.repository }}/issues/2964))
@@ -39,6 +40,7 @@ prev_section: contributing
 - The jsonify filter should deep-convert to Liquid when given an Array. ([#3032]({{ site.repository }}/issues/3032))
 - Apply `jsonify` filter to Hashes deeply and effectively ([#3063]({{ site.repository }}/issues/3063))
 - Use `127.0.0.1` as default host instead of `0.0.0.0` ([#3053]({{ site.repository }}/issues/3053))
+- In the case that a Gemfile does not exist, ensure Jekyll doesn't fail on requiring the Gemfile group ([#3066]({{ site.repository }}/issues/3066))
 
 ### Development Fixes
 {: #development-fixes-v2-5-0}

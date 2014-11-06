@@ -22,6 +22,7 @@ highlights:
 * Performance optimizations thanks to @tmm1's [stackprof](https://github.com/tmm1/stackprof)
 * Fix for Rouge's Redcarpet interface
 * Security auditors will love this: path sanitation has now been centralized.
+* Specify a log level with `JEKYLL_LOG_LEVEL`: debug, info, warn, or error.
 
 ...and a whole bunch of other fixes and enhancements you can read more
 about in [the changelog!](/docs/history/)
