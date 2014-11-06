@@ -148,13 +148,26 @@ class TestFilters < Test::Unit::TestCase
         assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => 'Jack'}, {:name => 'Smith'}])
       end
 
-      should "call #to_liquid " do
-        class AThing < Struct.new(:name)
-          def to_liquid
-            { "name" => name, :v => 1 }
-          end
+      class M < Struct.new(:message)
+        def to_liquid
+          [message]
         end
-        assert_equal "[{\"name\":\"Jeremiah\",\"v\":1},{\"name\":\"Smathers\",\"v\":1}]", @filter.jsonify([AThing.new("Jeremiah"), AThing.new("Smathers")])
+      end
+      class T < Struct.new(:name)
+        def to_liquid
+          { "name" => name, :v => 1, :thing => M.new({:kay => "jewelers"}) }
+        end
+      end
+
+      should "call #to_liquid " do
+        expected = "[{\"name\":\"Jeremiah\",\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}]},{\"name\":\"Smathers\",\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}]}]"
+        assert_equal expected, @filter.jsonify([T.new("Jeremiah"), T.new("Smathers")])
+      end
+
+      should "handle hashes with all sorts of weird keys and values" do
+        my_hash = { "posts" => Array.new(5) { |i| T.new(i) } }
+        expected = "{\"posts\":[{\"name\":0,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}]},{\"name\":1,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}]},{\"name\":2,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}]},{\"name\":3,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}]},{\"name\":4,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}]}]}"
+        assert_equal expected, @filter.jsonify(my_hash)
       end
     end
 
