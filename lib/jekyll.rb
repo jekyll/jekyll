@@ -112,7 +112,7 @@ module Jekyll
     #
     # Returns the LogAdapter instance.
     def logger
-      @logger ||= LogAdapter.new(Stevenson.new)
+      @logger ||= LogAdapter.new(Stevenson.new, (ENV["JEKYLL_LOG_LEVEL"] || :info).to_sym)
     end
 
     # Public: Set the log writer.
