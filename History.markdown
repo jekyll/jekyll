@@ -41,6 +41,7 @@
   * The jsonify filter should deep-convert to Liquid when given an Array. (#3032)
   * Apply `jsonify` filter to Hashes deeply and effectively (#3063)
   * Use `127.0.0.1` as default host instead of `0.0.0.0` (#3053)
+  * In the case that a Gemfile does not exist, ensure Jekyll doesn't fail on requiring the Gemfile group (#3066)
 
 ### Development Fixes
 
