@@ -27,6 +27,7 @@
   * Allow post URL's to have `.htm` extensions (#2925)
   * `Utils.slugify`: Don't create new objects when gsubbing (#2997)
   * The jsonify filter should deep-convert to Liquid when given an Array. (#3032)
+  * Apply `jsonify` filter to Hashes deeply and effectively (#3063)
   * Use `127.0.0.1` as default host instead of `0.0.0.0` (#3053)
 
 ### Development Fixes
