@@ -26,16 +26,21 @@ module Jekyll
     def require_gems
       site.gems.each do |gem|
         if plugin_allowed?(gem)
+          Jekyll.logger.debug("PluginManager:", "Requiring #{gem}")
           require gem
         end
       end
     end
 
     def self.require_from_bundler
-      unless ENV["JEKYLL_NO_BUNDLER_REQUIRE"]
+      if ENV["JEKYLL_NO_BUNDLER_REQUIRE"]
+        false
+      else
         require "bundler"
-        Bundler.require(:jekyll_plugins)
+        required_gems = Bundler.require(:jekyll_plugins)
+        Jekyll.logger.debug("PluginManager:", "Required #{required_gems.map(&:name).join(', ')}")
         ENV["JEKYLL_NO_BUNDLER_REQUIRE"] = "true"
+        true
       end
     rescue LoadError
       false
