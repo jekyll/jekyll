@@ -10,6 +10,7 @@ module Jekyll
             c.syntax 'serve [options]'
             c.description 'Serve your site locally'
             c.alias :server
+            c.alias :s
 
             add_build_options(c)
 

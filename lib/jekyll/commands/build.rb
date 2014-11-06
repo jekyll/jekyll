@@ -9,6 +9,7 @@ module Jekyll
           prog.command(:build) do |c|
             c.syntax      'build [options]'
             c.description 'Build your site'
+            c.alias :b
 
             add_build_options(c)
 
