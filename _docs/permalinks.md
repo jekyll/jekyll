@@ -89,9 +89,10 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
       </td>
       <td>
         <p>
-          The specified categories for this Post. Jekyll automatically parses
-          out double slashes in the URLs, so if no categories are present, it
-          will ignore this.
+          The specified categories for this Post. If a post has multiple
+          categories, Jekyll will create a hierarchy (e.g. <code>/category1/category2</code>).
+          Also Jekyll automatically parses out double slashes in the URLs,
+          so if no categories are present, it will ignore this.
         </p>
       </td>
     </tr>
