@@ -8,6 +8,8 @@
 
 ### Development Fixes
 
+  * Add development time dependencies on minitest and test-unit to gemspec for cygwin (#3064)
+
 ### Site Enhancements
 
 ## 2.5.0 / 2014-11-06
