@@ -17,6 +17,7 @@
   * Use `Hash#each_key` instead of `Hash#keys.each` to speed up iteration
     over hash keys. (#3017)
   * Further minor performance enhancements. (#3022)
+  * Add 'b' and 's' aliases for build and serve, respectively (#3065)
 
 ### Bug Fixes
 
