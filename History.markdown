@@ -17,6 +17,7 @@
   * Require gems in `:jekyll_plugins` Gemfile group unless `JEKYLL_NO_BUNDLER_REQUIRE` is specified in the environment. (#2865)
   * Centralize path sanitation in the `Site` object (#2882)
   * Allow placeholders in permalinks (#3031)
+  * Allow users to specify the log level via `JEKYLL_LOG_LEVEL`. (#3067)
   * Fancy Indexing with WEBrick (#3018)
   * Allow Enumerables to be used with `where` filter. (#2986)
   * Meta descriptions in the site template now use `page.excerpt` if it's available (#2964)
