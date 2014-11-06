@@ -146,10 +146,14 @@ namespace :site do
 
     # Generate the site in server mode.
     puts "Running Jekyll..."
-    Jekyll::Commands::Serve.process({
+    options = {
       "source"      => File.expand_path("site"),
-      "destination" => File.expand_path("site/_site")
-    })
+      "destination" => File.expand_path("site/_site"),
+      "watch"       => true,
+      "serving"     => true
+    }
+    Jekyll::Commands::Build.process(options)
+    Jekyll::Commands::Serve.process(options)
   end
 
   desc "Generate the site"

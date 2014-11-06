@@ -25,7 +25,7 @@ having to modify the Jekyll source itself.
 
 ## Installing a plugin
 
-You have 2 options for installing plugins:
+You have 3 options for installing plugins:
 
 1. In your site source root, make a `_plugins` directory. Place your plugins here.
     Any file ending in `*.rb` inside this directory will be loaded before Jekyll
@@ -35,6 +35,12 @@ You have 2 options for installing plugins:
 
         gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
         # This will require each of these gems automatically.
+3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
+    example:
+
+        group :jekyll_plugins do
+          gem "my-jekyll-plugin"
+        end
 
 <div class="note info">
   <h5>
@@ -246,6 +252,67 @@ In our example, `UpcaseConverter#matches` checks if our filename extension is
 `UpcaseConverter#convert` to process the content. In our simple converter we’re
 simply uppercasing the entire content string. Finally, when it saves the page,
 it will do so with a `.html` extension.
+
+## Command
+
+As of version 2.5.0, Jekyll can be extended with plugins which provide
+subcommands for the `jekyll` executable. This is possible by including the
+relevant plugins in a `Gemfile` group called `:jekyll_plugins`:
+
+{% highlight ruby %}
+group :jekyll_plugins do
+  gem "my_fancy_jekyll_plugin"
+end
+{% endhighlight %}
+
+Each `Command` must be a subclass of the `Jekyll::Command` class and must
+contain one class method: `init_with_program`. An example:
+
+{% highlight ruby %}
+class MyNewCommand < Jekyll::Command
+  class << self
+    def init_with_program(prog)
+      prog.command(:new) do |c|
+        c.syntax "new [options]"
+        c.description 'Create a new Jekyll site.'
+
+        c.option 'dest', '-d DEST, 'Where the site should go.'
+
+        c.action do |args, options|
+          Jekyll::Site.new_site_at(options['dest'])
+        end
+      end
+    end
+  end
+end
+{% endhighlight %}
+
+Commands should implement this single class method:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>init_with_program</code></p>
+      </td>
+      <td><p>
+        This method accepts one parameter, the
+        <code><a href="http://github.com/jekyll/mercenary#readme">Mercenary::Program</a></code>
+        instance, which is the Jekyll program itself. Upon the program,
+        commands may be created using the above syntax. For more details,
+        visit the Mercenary repository on GitHub.com.
+      </p></td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Tags
 
