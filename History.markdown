@@ -4,6 +4,16 @@
 
 ### Minor Enhancements
 
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 2.5.0 / 2014-11-06
+
+### Minor Enhancements
+
   * Require gems in `:jekyll_plugins` Gemfile group unless `JEKYLL_NO_BUNDLER_REQUIRE` is specified in the environment. (#2865)
   * Centralize path sanitation in the `Site` object (#2882)
   * Allow placeholders in permalinks (#3031)
