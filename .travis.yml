@@ -1,5 +1,6 @@
 language: ruby
 cache: bundler
+sudo: false
 install:
 - script/rebund download
 - travis_retry bundle install --path vendor/bundle -j8
