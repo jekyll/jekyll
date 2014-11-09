@@ -5,6 +5,21 @@ permalink: "/docs/history/"
 prev_section: contributing
 ---
 
+## 2.5.1 / 2014-11-08
+{: #v2-5-1}
+
+### Bug Fixes
+{: #bug-fixes-v2-5-1}
+
+- Fix path sanitation bug related to Windows drive names ([#3077]({{ site.repository }}/issues/3077))
+
+### Development Fixes
+{: #development-fixes-v2-5-1}
+
+- Add development time dependencies on minitest and test-unit to gemspec for cygwin ([#3064]({{ site.repository }}/issues/3064))
+- Use Travis's built-in caching. ([#3075]({{ site.repository }}/issues/3075))
+
+
 ## 2.5.0 / 2014-11-06
 {: #v2-5-0}
 
