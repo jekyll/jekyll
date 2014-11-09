@@ -38,3 +38,10 @@ tidbits, such as the old name for Jekyll was "autoblog", and was first
 released via Rubyforge. What a difference 6 years has made!*
 
 Thanks to the following contributors for making this release possible:
+
+Parker Moore, XhmikosR, Alfred Xing, Ruslan Korolev, Pat Hawks,
+chrisfinazzo, Mike Kruk, Tanguy Krotoff, Matt Hickford, Philipp Rudloff,
+Rob Murray, Sean Collins, Seth Warburton, Tom Thorogood, Vasily Vasinov,
+Veres Lajos, feivel, mitaa, nitoyon, snrbrnjna, tmthrgd, Bret Comnes,
+Charles Baynham, Christian Mayer, Dan Croak, Frederic Hemberger, Glauco
+Custódio, Igor Kapkov, and Kevin Ndung'u!
