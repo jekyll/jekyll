@@ -9,6 +9,7 @@
 ### Development Fixes
 
   * Add development time dependencies on minitest and test-unit to gemspec for cygwin (#3064)
+  * Use Travis's built-in caching. (#3075)
 
 ### Site Enhancements
 
