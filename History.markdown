@@ -6,14 +6,20 @@
 
 ### Bug Fixes
 
+### Development Fixes
+
+### Site Enhancements
+
+## 2.5.1 / 2014-11-08
+
+### Bug Fixes
+
   * Fix path sanitation bug related to Windows drive names (#3077)
 
 ### Development Fixes
 
   * Add development time dependencies on minitest and test-unit to gemspec for cygwin (#3064)
   * Use Travis's built-in caching. (#3075)
-
-### Site Enhancements
 
 ## 2.5.0 / 2014-11-06
 
