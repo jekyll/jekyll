@@ -5,7 +5,7 @@ permalink: "/docs/history/"
 prev_section: contributing
 ---
 
-## 2.5.1 / 2014-11-08
+## 2.5.1 / 2014-11-09
 {: #v2-5-1}
 
 ### Bug Fixes
