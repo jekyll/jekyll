@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+  * Fix path sanitation bug related to Windows drive names (#3077)
+
 ### Development Fixes
 
   * Add development time dependencies on minitest and test-unit to gemspec for cygwin (#3064)
