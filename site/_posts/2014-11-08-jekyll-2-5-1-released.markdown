@@ -1,7 +1,7 @@
 ---
 layout: news_item
 title: 'Jekyll 2.5.1 Released'
-date: 2014-11-08 22:11:07 -0800
+date: 2014-11-09 09:47:52 -0800
 author: parkr
 version: 2.5.1
 categories: [release]
@@ -26,4 +26,4 @@ and Alfred Xing.
 
 Happy Jekylling!
 
-[Windows Test Force]: https://github.com/jekyll/jekyll/issues/3069
+[**Windows Test Force**]: https://github.com/jekyll/jekyll/issues/3069
