@@ -3,15 +3,39 @@ module Jekyll
     class PostComparer
       MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)$/
 
-      attr_accessor :path, :date, :slug
+      attr_reader :path, :date, :slug, :name
 
       def initialize(name)
+        @name = name
         all, @path, @date, @slug = *name.sub(/^\//, "").match(MATCHER)
         raise ArgumentError.new("'#{name}' does not contain valid date and/or title.") unless all
       end
 
       def ==(other)
         other.name.match(/^#{path}#{date}-#{slug}\.[^.]+/)
+      end
+
+      def deprecated_equality(other)
+        date = Utils.parse_date(name, "'#{name}' does not contain valid date and/or title.")
+        slug == post_slug(other) &&
+          date.year  == other.date.year &&
+          date.month == other.date.month &&
+          date.day   == other.date.day
+      end
+
+      private
+      # Construct the directory-aware post slug for a Jekyll::Post
+      #
+      # other - the Jekyll::Post
+      #
+      # Returns the post slug with the subdirectory (relative to _posts)
+      def post_slug(other)
+        path = other.name.split("/")[0...-1].join("/")
+        if path.nil? || path == ""
+          other.slug
+        else
+          path + '/' + other.slug
+        end
       end
     end
 
@@ -35,6 +59,19 @@ eos
 
         site.posts.each do |p|
           if @post == p
+            return p.url
+          end
+        end
+
+        # New matching method did not match, fall back to old method
+        # with deprecation warning if this matches
+
+        site.posts.each do |p|
+          if @post.deprecated_equality p
+            Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{name} }}' did not match " +
+              "a post using the new matching method of checking name " +
+              "(path-date-slug) equality. Please make sure that you " +
+              "change this tag to match the post's name exactly."
             return p.url
           end
         end
