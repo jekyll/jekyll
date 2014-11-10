@@ -7,6 +7,7 @@
 ### Bug Fixes
 
   * Remove duplicate `Conversion error:` message in `Convertible` (#3088)
+  * Print full conversion error message in `Renderer#convert` (#3090)
 
 ### Development Fixes
 
