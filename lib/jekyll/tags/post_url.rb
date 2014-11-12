@@ -9,10 +9,12 @@ module Jekyll
         @name = name
         all, @path, @date, @slug = *name.sub(/^\//, "").match(MATCHER)
         raise ArgumentError.new("'#{name}' does not contain valid date and/or title.") unless all
+
+        @name_regex = /^#{path}#{date}-#{slug}\.[^.]+/
       end
 
       def ==(other)
-        other.name.match(/^#{path}#{date}-#{slug}\.[^.]+/)
+        other.name.match(@name_regex)
       end
 
       def deprecated_equality(other)
