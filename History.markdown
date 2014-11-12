@@ -13,6 +13,8 @@
 
 ### Site Enhancements
 
+  * Change variable names in Google Analytics script (#3093)
+
 ## 2.5.1 / 2014-11-09
 
 ### Bug Fixes
