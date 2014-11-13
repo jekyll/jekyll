@@ -144,9 +144,9 @@ module Jekyll
       return base_directory if base_directory.eql?(questionable_path)
 
       clean_path = File.expand_path(questionable_path, "/")
-      clean_path = clean_path.sub(/^\A\w\:\//, '/')
+      clean_path = clean_path.sub(/\A\w\:\//, '/')
 
-      unless clean_path.start_with?(base_directory.sub(/^\A\w\:\//, '/'))
+      unless clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
         File.join(base_directory, clean_path)
       else
         clean_path
