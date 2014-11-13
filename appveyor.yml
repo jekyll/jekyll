@@ -1,20 +1,29 @@
 ---
 version: "{build}"
-#branches:
-#  only:
-#    - master
+
 clone_depth: 10
+
+#shallow_clone: true
+
 install:
-  - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
+#  - gem update --system --quiet --no-ri --no-rdoc
+  - gem install bundler --quiet --no-ri --no-rdoc
+  - bundle install
+
+build: off
+
+test_script:
   - ruby --version
   - gem --version
-  - gem install bundler --quiet --no-ri --no-rdoc
   - bundler --version
-  - bundle install -j4
-test_script:
-  - ./script/cibuild
+  - bash ./script/cibuild
+
 #artifacts:
 #  - path: pkg\*.gem
+
+#cache:
+#  - C:\Ruby%ruby_version%\lib\ruby\gems\1.9.1
+#  - C:\Ruby%ruby_version%\bin
 
 environment:
   matrix:
@@ -23,3 +32,6 @@ environment:
     - ruby_version: "200-x64"
     - ruby_version: "21"
     - ruby_version: "21-x64"
+
+matrix:
+  fast_finish: true
