@@ -1,25 +1,34 @@
----
 version: "{build}"
-#branches:
-#  only:
-#    - master
+
 clone_depth: 10
+
+build: off
+
 install:
-  - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
+  - SET PATH=C:\Ruby%ruby_folder_version%\bin;%PATH%
+  - bundle install --retry 3
+
+test_script:
   - ruby --version
   - gem --version
-  - gem install bundler --quiet --no-ri --no-rdoc
   - bundler --version
-  - bundle install -j4
-test_script:
-  - ./script/cibuild
-#artifacts:
-#  - path: pkg\*.gem
+  - bash ./script/cibuild
 
 environment:
   matrix:
-    - ruby_version: "193"
-    - ruby_version: "200"
-    - ruby_version: "200-x64"
-    - ruby_version: "21"
-    - ruby_version: "21-x64"
+    - ruby_folder_version: "200"
+      ruby_gems_folder: "2.0.0"
+    - ruby_folder_version: "21"
+      ruby_gems_folder: "2.1.0"
+    - ruby_folder_version: "22"
+      ruby_gems_folder: "2.2.0"
+    - ruby_folder_version: "22-x64"
+      ruby_gems_folder: "2.2.0"
+
+matrix:
+  fast_finish: true
+
+cache:
+  - '%USERPROFILE%\.gem -> Gemfile,jekyll.gemspec'
+  - C:\Ruby%ruby_folder_version%\bin -> Gemfile,jekyll.gemspec
+  - C:\Ruby%ruby_folder_version%\lib\ruby\gems\%ruby_gems_folder% -> Gemfile,jekyll.gemspec
