@@ -6,6 +6,7 @@
 
 ### Bug Fixes
 
+  * Remove duplicate regexp phrase: `^\A` (#3089)
   * Remove duplicate `Conversion error:` message in `Convertible` (#3088)
   * Print full conversion error message in `Renderer#convert` (#3090)
 
