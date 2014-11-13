@@ -44,6 +44,15 @@ In `_data/members.yml`:
   github: liufengyun
 {% endhighlight %}
 
+Or `_data/members.csv`:
+
+{% highlight csv %}
+name,github
+Tom Preston-Werner,mojombo
+Parker Moore,parkr
+Liu Fengyun,liufengyun
+{% endhighlight %}
+
 This data can be accessed via `site.data.members` (notice that the filename
 determines the variable name).
 
