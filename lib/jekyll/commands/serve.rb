@@ -77,7 +77,7 @@ module Jekyll
         def webrick_options(config)
           opts = {
             :BindAddress        => config['host'],
-            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml),
+            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml index.php),
             :DocumentRoot       => config['destination'],
             :DoNotReverseLookup => true,
             :MimeTypes          => mime_types,
