@@ -1,6 +1,6 @@
 -# These are the same MIME types that GitHub Pages uses as of 26 January 2014
 
-text/html                             html htm shtml
+text/html                             html htm shtml php
 text/css                              css
 text/xml                              xml rss xsl xsd
 image/gif                             gif
