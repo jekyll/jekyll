@@ -1,46 +1,13 @@
 module Jekyll
   module Tags
-    class PostComparer
+    class PostUrl < Liquid::Tag
       MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)$/
 
-      attr_accessor :date, :slug
-
-      def initialize(name)
-        all, path, date, slug = *name.sub(/^\//, "").match(MATCHER)
-        raise ArgumentError.new("'#{name}' does not contain valid date and/or title.") unless all
-        @slug = path ? path + slug : slug
-        @date = Utils.parse_date(date, "'#{name}' does not contain valid date.")
-      end
-
-      def ==(other)
-        slug == post_slug(other) &&
-          date.year  == other.date.year &&
-          date.month == other.date.month &&
-          date.day   == other.date.day
-      end
-
-      private
-      # Construct the directory-aware post slug for a Jekyll::Post
-      #
-      # other - the Jekyll::Post
-      #
-      # Returns the post slug with the subdirectory (relative to _posts)
-      def post_slug(other)
-        path = other.name.split("/")[0...-1].join("/")
-        if path.nil? || path == ""
-          other.slug
-        else
-          path + '/' + other.slug
-        end
-      end
-    end
-
-    class PostUrl < Liquid::Tag
       def initialize(tag_name, post, tokens)
         super
         @orig_post = post.strip
         begin
-          @post = PostComparer.new(@orig_post)
+          @post = parse_input_filename(@orig_post)
         rescue
           raise ArgumentError.new <<-eos
 Could not parse name of post "#{@orig_post}" in tag 'post_url'.
@@ -50,14 +17,16 @@ eos
         end
       end
 
+      def parse_input_filename(post)
+        all, path, date, slug = *name.sub(/^\//, "").match(MATCHER)
+        raise ArgumentError.new("'#{name}' does not contain valid date and/or title.") unless all
+        File.join(date.to_s, slug.to_s)
+      end
+
       def render(context)
         site = context.registers[:site]
 
-        site.posts.each do |p|
-          if @post == p
-            return p.url
-          end
-        end
+        site.posts.find { |p| @post.match(p.url) }.url
 
         raise ArgumentError.new <<-eos
 Could not find post "#{@orig_post}" in tag 'post_url'.
