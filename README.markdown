@@ -2,6 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/jekyll.svg)](https://rubygems.org/gems/jekyll)
 [![Build Status](https://secure.travis-ci.org/jekyll/jekyll.svg?branch=master)](https://travis-ci.org/jekyll/jekyll)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/4g2dfq8nw8nxdgv1?svg=true)](https://ci.appveyor.com/project/parkr/jekyll)
 [![Code Climate](http://img.shields.io/codeclimate/github/jekyll/jekyll.svg)](https://codeclimate.com/github/jekyll/jekyll)
 [![Dependency Status](https://gemnasium.com/jekyll/jekyll.svg)](https://gemnasium.com/jekyll/jekyll)
 [![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)](https://hakiri.io/github/jekyll/jekyll/master)
