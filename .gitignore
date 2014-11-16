@@ -14,3 +14,4 @@ coverage
 .ruby-version
 .sass-cache
 tmp/stackprof-*
+.jekyll-metadata
