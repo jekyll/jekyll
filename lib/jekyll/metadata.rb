@@ -62,10 +62,10 @@ module Jekyll
 
     # Add a dependency of a path
     #
-    # Returns true.
+    # Returns nothing.
     def add_dependency(path, dependency)
       @metadata[path]["deps"] << dependency unless @metadata[path]["deps"].include? dependency
-      add(dependency)
+      regenerate? dependency
     end
 
     # Write the metadata to disk
