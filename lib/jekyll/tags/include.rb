@@ -105,13 +105,20 @@ eos
       end
 
       def render(context)
+        site = context.registers[:site]
         dir = resolved_includes_dir(context)
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
         path = File.join(dir, file)
-        validate_path(path, dir, context.registers[:site].safe)
+        validate_path(path, dir, site.safe)
+
+        # Add include to dependency tree
+        site.metadata.add_dependency(
+          Jekyll.sanitized_path(site.source, context.registers[:page]["path"]),
+          path
+        )
 
         begin
           partial = Liquid::Template.parse(source(path, context))

@@ -48,6 +48,7 @@ module Jekyll
   autoload :Layout,              'jekyll/layout'
   autoload :LayoutReader,        'jekyll/layout_reader'
   autoload :LogAdapter,          'jekyll/log_adapter'
+  autoload :Metadata,            'jekyll/metadata'
   autoload :Page,                'jekyll/page'
   autoload :PluginManager,       'jekyll/plugin_manager'
   autoload :Post,                'jekyll/post'
