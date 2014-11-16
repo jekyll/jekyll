@@ -16,5 +16,6 @@ set -x
 
 time bundle exec ruby -I"lib:test" \
   -I"${RAKE_LIB_DIR}" \
+  -I"test/" \
   "${RAKE_LIB_DIR}/rake/rake_test_loader.rb" \
   $TEST_FILES
