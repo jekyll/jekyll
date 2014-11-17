@@ -20,6 +20,7 @@
   * Mention CSV files in the docs for data files (#3101)
   * Add trailing slash to `paginate_path` example. (#3091)
   * Get rid of noifniof (`excerpt_separator`) (#3094)
+  * Sass improvements, around nesting mostly. (#3123)
 
 ## 2.5.1 / 2014-11-09
 
