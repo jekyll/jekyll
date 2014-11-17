@@ -33,7 +33,7 @@ module Jekyll
     end
 
     def self.require_from_bundler
-      if ENV["JEKYLL_NO_BUNDLER_REQUIRE"]
+      if ENV["JEKYLL_NO_BUNDLER_REQUIRE"] || !File.file?("Gemfile")
         false
       else
         require "bundler"
