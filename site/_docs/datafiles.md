@@ -46,7 +46,7 @@ In `_data/members.yml`:
 
 Or `_data/members.csv`:
 
-{% highlight csv %}
+{% highlight text %}
 name,github
 Tom Preston-Werner,mojombo
 Parker Moore,parkr
