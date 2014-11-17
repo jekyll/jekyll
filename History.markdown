@@ -4,6 +4,16 @@
 
 ### Minor Enhancements
 
+### Bug Fixes
+
+### Development Fixes
+
+### Site Enhancements
+
+## 2.5.2 / 2014-11-17
+
+### Minor Enhancements
+
   * `post_url` should match `post.name` instead of slugs and dates (#3058)
 
 ### Bug Fixes
@@ -12,8 +22,6 @@
   * Remove duplicate regexp phrase: `^\A` (#3089)
   * Remove duplicate `Conversion error:` message in `Convertible` (#3088)
   * Print full conversion error message in `Renderer#convert` (#3090)
-
-### Development Fixes
 
 ### Site Enhancements
 
