@@ -4,6 +4,8 @@
 
 ### Minor Enhancements
 
+  * `post_url` should match `post.name` instead of slugs and dates (#3058)
+
 ### Bug Fixes
 
   * Remove duplicate regexp phrase: `^\A` (#3089)
