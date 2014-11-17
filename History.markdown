@@ -16,6 +16,7 @@
 
   * Change variable names in Google Analytics script (#3093)
   * Mention CSV files in the docs for data files (#3101)
+  * Add trailing slash to `paginate_path` example. (#3091)
 
 ## 2.5.1 / 2014-11-09
 
