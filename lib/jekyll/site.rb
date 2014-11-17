@@ -293,17 +293,20 @@ module Jekyll
 
       collections.each do |label, collection|
         collection.docs.each do |document|
-          if @metadata.regenerate?(document.path)
-            document.output = Jekyll::Renderer.new(self, document).run
+          document.output = Jekyll::Renderer.new(self, document).run if (
+            @metadata.regenerate?(document.path) ||
+            document.data['regenerate']
+          )
           end
         end
       end
 
       payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
-        if @metadata.regenerate?(Jekyll.sanitized_path(source, page_or_post.relative_path))
-          page_or_post.render(layouts, payload)
-        end
+        page_or_post.render(layouts, payload) if (
+          @metadata.regenerate?(Jekyll.sanitized_path(source, page_or_post.relative_path)) ||
+          page_or_post.data['regenerate']
+        )
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir
@@ -321,9 +324,10 @@ module Jekyll
     # Returns nothing.
     def write
       each_site_file { |item|
-        if @metadata.regenerate? Jekyll.sanitized_path(source, item.path)
-          item.write(dest)
-        end
+        item.write(dest) if (
+          @metadata.regenerate?(Jekyll.sanitized_path(source, item.path)) ||
+          (item.respond_to?(:data) && item.data['regenerate'])
+        )
       }
       @metadata.write
     end
