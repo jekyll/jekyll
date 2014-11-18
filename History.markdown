@@ -21,6 +21,7 @@
   * Add trailing slash to `paginate_path` example. (#3091)
   * Get rid of noifniof (`excerpt_separator`) (#3094)
   * Sass improvements, around nesting mostly. (#3123)
+  * Add webmentions.io plugin to the list of third-party plugins (#3127)
 
 ## 2.5.1 / 2014-11-09
 
