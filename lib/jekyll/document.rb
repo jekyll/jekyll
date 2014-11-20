@@ -210,7 +210,7 @@ module Jekyll
             @data = defaults
           end
           @content = File.read(path, merged_file_read_opts(opts))
-          if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+          if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
             @content = $POSTMATCH
             data_file = SafeYAML.load($1)
             unless data_file.nil?

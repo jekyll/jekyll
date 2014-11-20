@@ -138,6 +138,7 @@ class TestCollections < Test::Unit::TestCase
           _methods/site/generate.md
           _methods/site/initialize.md
           _methods/um_hi.md
+          _methods/yaml_with_dots.md
         ], doc.relative_path
       end
     end
