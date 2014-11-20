@@ -22,6 +22,7 @@
   * Get rid of noifniof (`excerpt_separator`) (#3094)
   * Sass improvements, around nesting mostly. (#3123)
   * Add webmentions.io plugin to the list of third-party plugins (#3127)
+  * Add Sass mixins and use them. (#2904)
 
 ## 2.5.1 / 2014-11-09
 
