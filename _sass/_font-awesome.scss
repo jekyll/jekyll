@@ -20,24 +20,3 @@
 .fa-link:before {
   content: "\f0c1";
 }
-/*
- * This code is courtesy Ben Balter, modified by Parker Moore for jekyllrb.com
- * http://ben.balter.com/2014/03/13/pages-anchor-links/
- */
-.header-link {
-  position: relative;
-  left: 0.5em;
-  opacity: 0;
-  font-size: 0.8em;
-  -webkit-transition: opacity 0.2s ease-in-out 0.1s;
-  -moz-transition: opacity 0.2s ease-in-out 0.1s;
-  -o-transition: opacity 0.2s ease-in-out 0.1s;
-  transition: opacity 0.2s ease-in-out 0.1s;
-}
-h2:hover .header-link,
-h3:hover .header-link,
-h4:hover .header-link,
-h5:hover .header-link,
-h6:hover .header-link {
-  opacity: 1;
-}
