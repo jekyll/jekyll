@@ -23,6 +23,7 @@
   * Sass improvements, around nesting mostly. (#3123)
   * Add webmentions.io plugin to the list of third-party plugins (#3127)
   * Add Sass mixins and use them. (#2904)
+  * Slightly compress jekyll-sticker.jpg. (#3133)
 
 ## 2.5.1 / 2014-11-09
 
