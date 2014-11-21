@@ -25,6 +25,7 @@
   * Add Sass mixins and use them. (#2904)
   * Slightly compress jekyll-sticker.jpg. (#3133)
   * Update gridism and separate out related but custom styles. (#3132)
+  * Add remote-include plugin to list of third-party plugins (#3136)
 
 ## 2.5.1 / 2014-11-09
 
