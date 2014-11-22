@@ -17,7 +17,6 @@ module Jekyll
 
         def process(args)
           raise ArgumentError.new('You must specify a post title.') if args.empty?
-
           FileUtils.touch(initialize_post_name(args))
         end
 
