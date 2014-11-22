@@ -13,7 +13,7 @@ module Jekyll
       # Cleans up the site's destination directory
       def cleanup!
         FileUtils.rm_rf(obsolete_files)
-        FileUtils.rm_rf(metadata_file) if @site.config["clean"]
+        FileUtils.rm_rf(metadata_file) if @site.config["full_rebuild"]
       end
 
       private

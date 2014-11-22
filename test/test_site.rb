@@ -331,7 +331,7 @@ class TestSite < Test::Unit::TestCase
         end
 
         bad_processor = "Custom::Markdown"
-        s = Site.new(site_configuration('markdown' => bad_processor, 'clean' => true))
+        s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
         assert_raise Jekyll::Errors::FatalException do
           s.process
         end
@@ -351,7 +351,7 @@ class TestSite < Test::Unit::TestCase
 
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
-        s = Site.new(site_configuration('markdown' => bad_processor, 'clean' => true))
+        s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
         assert_raise Jekyll::Errors::FatalException do
           s.process
         end
@@ -422,7 +422,7 @@ class TestSite < Test::Unit::TestCase
     context "manipulating the Jekyll environment" do
       setup do
         @site = Site.new(site_configuration({
-          "clean" => true
+          'full_rebuild' => true
         }))
         @site.process
         @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -436,7 +436,7 @@ class TestSite < Test::Unit::TestCase
         setup do
           ENV["JEKYLL_ENV"] = "production"
           @site = Site.new(site_configuration({
-            "clean" => true
+            'full_rebuild' => true
           }))
           @site.process
           @page = @site.pages.find { |p| p.name == "environment.html" }
