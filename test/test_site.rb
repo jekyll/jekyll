@@ -99,6 +99,7 @@ class TestSite < Test::Unit::TestCase
     should "write only modified static files" do
       clear_dest
       StaticFile.reset_cache
+      @site.metadata.clear
 
       @site.process
       some_static_file = @site.static_files[0].path
@@ -128,6 +129,7 @@ class TestSite < Test::Unit::TestCase
     should "write static files if not modified but missing in destination" do
       clear_dest
       StaticFile.reset_cache
+      @site.metadata.clear
 
       @site.process
       some_static_file = @site.static_files[0].path
@@ -241,6 +243,7 @@ class TestSite < Test::Unit::TestCase
     context 'with orphaned files in destination' do
       setup do
         clear_dest
+        @site.metadata.clear
         @site.process
         # generate some orphaned files:
         # single file
@@ -328,7 +331,7 @@ class TestSite < Test::Unit::TestCase
         end
 
         bad_processor = "Custom::Markdown"
-        s = Site.new(site_configuration('markdown' => bad_processor))
+        s = Site.new(site_configuration('markdown' => bad_processor, 'clean' => true))
         assert_raise Jekyll::Errors::FatalException do
           s.process
         end
@@ -348,7 +351,7 @@ class TestSite < Test::Unit::TestCase
 
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
-        s = Site.new(site_configuration('markdown' => bad_processor))
+        s = Site.new(site_configuration('markdown' => bad_processor, 'clean' => true))
         assert_raise Jekyll::Errors::FatalException do
           s.process
         end
@@ -418,7 +421,9 @@ class TestSite < Test::Unit::TestCase
 
     context "manipulating the Jekyll environment" do
       setup do
-        @site = Site.new(site_configuration)
+        @site = Site.new(site_configuration({
+          "clean" => true
+        }))
         @site.process
         @page = @site.pages.find { |p| p.name == "environment.html" }
       end
@@ -430,7 +435,9 @@ class TestSite < Test::Unit::TestCase
       context "in production" do
         setup do
           ENV["JEKYLL_ENV"] = "production"
-          @site = Site.new(site_configuration)
+          @site = Site.new(site_configuration({
+            "clean" => true
+          }))
           @site.process
           @page = @site.pages.find { |p| p.name == "environment.html" }
         end

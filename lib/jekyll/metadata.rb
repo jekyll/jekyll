@@ -33,10 +33,18 @@ module Jekyll
       @cache[path] = true
     end
 
+    # Clear the metadata and cache
+    #
+    # Returns nothing
+    def clear
+      @metadata = {}
+      @cache = {}
+    end
+
     # Checks if a path should be regenerated
     #
     # Returns a boolean.
-    def regenerate?(path)
+    def regenerate?(path, add = true)
       # Check for path in cache
       if @cache.has_key? path
         return @cache[path]
@@ -52,18 +60,19 @@ module Jekyll
         if data["mtime"] == File.mtime(path)
           return @cache[path] = false
         else
-          return add(path)
+          return !add || add(path)
         end
       end
 
       # Path does not exist in metadata, add it
-      return add(path)
+      return !add || add(path)
     end
 
     # Add a dependency of a path
     #
     # Returns nothing.
     def add_dependency(path, dependency)
+      add(path) if @metadata[path].nil?
       @metadata[path]["deps"] << dependency unless @metadata[path]["deps"].include? dependency
       regenerate? dependency
     end

@@ -142,7 +142,7 @@ module Jekyll
         site.metadata.add_dependency(
           Jekyll.sanitized_path(site.source, document.path),
           Jekyll.sanitized_path(site.source, layout.path)
-        )
+        ) if document.write?
 
         if layout = site.layouts[layout.data["layout"]]
           if used.include?(layout)

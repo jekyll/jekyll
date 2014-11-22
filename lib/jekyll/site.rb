@@ -53,7 +53,7 @@ module Jekyll
       read
       generate
       render
-      cleanup if config['clean']
+      cleanup
       write
     end
 
@@ -294,10 +294,9 @@ module Jekyll
       collections.each do |label, collection|
         collection.docs.each do |document|
           document.output = Jekyll::Renderer.new(self, document).run if (
-            @metadata.regenerate?(document.path) ||
+            @metadata.regenerate?(document.path, document.write?) ||
             document.data['regenerate']
           )
-          end
         end
       end
 

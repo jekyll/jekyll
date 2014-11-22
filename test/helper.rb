@@ -46,6 +46,7 @@ class Test::Unit::TestCase
 
   def clear_dest
     FileUtils.rm_rf(dest_dir)
+    FileUtils.rm_rf(source_dir('.jekyll-metadata'))
   end
 
   def test_dir(*subdirs)

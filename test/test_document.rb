@@ -246,7 +246,8 @@ class TestDocument < Test::Unit::TestCase
           }
         },
         "source"      => source_dir,
-        "destination" => dest_dir
+        "destination" => dest_dir,
+        "clean"       => true
       }))
       @site.process
       @document = @site.collections["slides"].files.find { |doc| doc.relative_path == "_slides/octojekyll.png" }
