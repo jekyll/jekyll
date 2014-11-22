@@ -115,10 +115,12 @@ eos
         validate_path(path, dir, site.safe)
 
         # Add include to dependency tree
-        site.metadata.add_dependency(
-          Jekyll.sanitized_path(site.source, context.registers[:page]["path"]),
-          path
-        )
+        if context.registers[:page] and context.registers[:page].has_key? "path"
+          site.metadata.add_dependency(
+            Jekyll.sanitized_path(site.source, context.registers[:page]["path"]),
+            path
+          )
+        end
 
         begin
           partial = Liquid::Template.parse(source(path, context))
