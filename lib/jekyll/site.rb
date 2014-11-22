@@ -294,7 +294,7 @@ module Jekyll
       collections.each do |label, collection|
         collection.docs.each do |document|
           document.output = Jekyll::Renderer.new(self, document).run if (
-            @metadata.regenerate?(document.path, document.write?) ||
+            metadata.regenerate?(document.path, document.write?) ||
             document.data['regenerate']
           )
         end
@@ -303,7 +303,7 @@ module Jekyll
       payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
         page_or_post.render(layouts, payload) if (
-          @metadata.regenerate?(Jekyll.sanitized_path(source, page_or_post.relative_path)) ||
+          metadata.regenerate?(Jekyll.sanitized_path(source, page_or_post.relative_path)) ||
           page_or_post.data['regenerate']
         )
       end
@@ -324,11 +324,11 @@ module Jekyll
     def write
       each_site_file { |item|
         item.write(dest) if (
-          @metadata.regenerate?(Jekyll.sanitized_path(source, item.path)) ||
+          metadata.regenerate?(Jekyll.sanitized_path(source, item.path)) ||
           (item.respond_to?(:data) && item.data['regenerate'])
         )
       }
-      @metadata.write
+      metadata.write
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.

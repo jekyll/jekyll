@@ -7,9 +7,8 @@ module Jekyll
     def initialize(site)
       @site = site
 
-      # Initialize metadata store by reading YAML file,
-      # or an empty hash if file does not exist
-      @metadata = (File.file?(metadata_file) && !(site.config['clean'])) ? SafeYAML.load(File.read(metadata_file)) : {}
+      # Read metadata from file
+      read_metadata
 
       # Initialize cache to an empty hash
       @cache = {}
@@ -91,6 +90,16 @@ module Jekyll
     # Returns the String path of the file.
     def metadata_file
       Jekyll.sanitized_path(site.source, '.jekyll-metadata')
+    end
+
+    private
+
+    # Read metadata from the metadata file, if no file is found,
+    # initialize with an empty hash
+    #
+    # Returns the read metadata.
+    def read_metadata
+      @metadata = (File.file?(metadata_file) && !(site.config['full_rebuild'])) ? SafeYAML.load(File.read(metadata_file)) : {}
     end
   end
 end
