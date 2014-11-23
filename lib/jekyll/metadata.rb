@@ -16,8 +16,10 @@ module Jekyll
 
     # Add a path to the metadata
     #
-    # Returns true.
+    # Returns true, also on failure.
     def add(path)
+      return true if not File.exist? path
+
       @metadata[path] = {
         "mtime" => File.mtime(path),
         "deps" => []
@@ -71,7 +73,8 @@ module Jekyll
     #
     # Returns nothing.
     def add_dependency(path, dependency)
-      add(path) if @metadata[path].nil?
+      return if @metadata[path].nil?
+
       @metadata[path]["deps"] << dependency unless @metadata[path]["deps"].include? dependency
       regenerate? dependency
     end
