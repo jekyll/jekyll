@@ -3,7 +3,6 @@ require 'jekyll/commands/post'
 
 class TestPostCommand < Test::Unit::TestCase
 
-
   context 'when args given' do
     setup do
       @path = '_posts'
@@ -27,7 +26,6 @@ class TestPostCommand < Test::Unit::TestCase
     end
   end
 
-
   context 'when no args given' do 
     setup do 
       @empty_args = []
@@ -40,5 +38,4 @@ class TestPostCommand < Test::Unit::TestCase
       assert_equal 'You must specify a post title.', exception.message
     end
   end
-
 end
