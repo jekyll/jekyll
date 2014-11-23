@@ -17,7 +17,6 @@ module Jekyll
     def conscientious_require
       require_plugin_files
       require_gems
-      self.class.require_from_bundler
     end
 
     # Require each of the gem plugins specified.
@@ -33,15 +32,15 @@ module Jekyll
     end
 
     def self.require_from_bundler
-      if ENV["JEKYLL_NO_BUNDLER_REQUIRE"] || !File.file?("Gemfile")
-        false
-      else
+      if !ENV["JEKYLL_NO_BUNDLER_REQUIRE"] && File.file?("Gemfile")
         require "bundler"
         Bundler.setup # puts all groups on the load path
         required_gems = Bundler.require(:jekyll_plugins) # requires the gems in this group only
         Jekyll.logger.debug("PluginManager:", "Required #{required_gems.map(&:name).join(', ')}")
         ENV["JEKYLL_NO_BUNDLER_REQUIRE"] = "true"
         true
+      else
+        false
       end
     rescue LoadError, Bundler::GemfileNotFound
       false
