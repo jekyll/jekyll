@@ -21,6 +21,7 @@ require 'time'
 require 'English'
 require 'pathname'
 require 'logger'
+require 'set'
 
 # 3rd party
 require 'safe_yaml/load'

@@ -29,7 +29,7 @@ module Jekyll
       @site = site
       @base = base
       @name = name
-      @path = Jekyll.sanitized_path(site.source, File.join(base, name))
+      @path = site.in_source_dir(base, name)
 
       self.data = {}
 

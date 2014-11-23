@@ -105,6 +105,14 @@ module Jekyll
       !(coffeescript_file? || yaml_file?)
     end
 
+    # Determine whether the document should be regenerated based on metadata.
+    #
+    # Returns true if the document needs to be regenerated.
+    def regenerate?
+      site.metadata.regenerate?(path, write?) ||
+        data['regenerate']
+    end
+
     # Determine whether the file should be placed into layouts.
     #
     # Returns false if the document is either an asset file or a yaml file,
