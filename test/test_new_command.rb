@@ -79,8 +79,10 @@ class TestNewCommand < Test::Unit::TestCase
 
     should 'force created folder' do
       capture_stdout { Jekyll::Commands::New.process(@args) }
-      assert_nothing_raised(SystemExit) { Jekyll::Commands::New.process(@args, '--force') }
-    end  
+      assert_nothing_raised(SystemExit) do
+        capture_stdout {Jekyll::Commands::New.process(@args, '--force') }
+      end
+    end
   end
 
   context 'when multiple args are given' do
