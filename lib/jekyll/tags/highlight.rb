@@ -46,14 +46,15 @@ eos
 
         is_safe = !!context.registers[:site].safe
 
-        output = case context.registers[:site].highlighter
-        when 'pygments'
-          render_pygments(code, is_safe)
-        when 'rouge'
-          render_rouge(code)
-        else
-          render_codehighlighter(code)
-        end
+        output =
+          case context.registers[:site].highlighter
+            when 'pygments'
+              render_pygments(code, is_safe)
+            when 'rouge'
+              render_rouge(code)
+            else
+              render_codehighlighter(code)
+            end
 
         rendered_output = add_code_tag(output)
         prefix + rendered_output + suffix
