@@ -7,7 +7,7 @@ module Jekyll
         def init_with_program(prog)
           prog.command(:post) do |c|
             c.syntax 'post "TITLE"'
-            c.description "Create a new jekyll post"
+            c.description 'Create a new jekyll post'
 
             c.action do |args|
               Jekyll::Commands::Post.process(args)
@@ -17,11 +17,13 @@ module Jekyll
 
         def process(args)
           raise ArgumentError.new('You must specify a post title.') if args.empty?
+          Dir.mkdir('_posts') unless Dir.exist?('_posts') 
+
           FileUtils.touch(initialize_post_name(args))
         end
 
         def initialize_post_name(args)
-          post_time = Time.now.strftime("%Y-%m-%d")
+          post_time = Time.now.strftime('%Y-%m-%d')
           post_name = args[0].split(' ').join('-') 
 
           "_posts/#{post_time}-#{post_name}.md"

@@ -5,17 +5,20 @@ class TestPostCommand < Test::Unit::TestCase
 
 
   context 'when args given' do
-    setup do 
+    setup do
       @path = '_posts'
       @args = ['This Is A Test Post']
-      @full_path = File.expand(@path, Dir.pwd)
+      @full_path = File.expand_path(@path, Dir.pwd)
     end
 
-    should 'Create a new post in the _posts directory' do 
+    teardown do
+      FileUtils.rm_r @full_path
+    end
+
+    should 'create a new post in the _posts directory' do 
       Jekyll::Commands::Post.process(@args)
-      assert File.exist?('This-Is-A-Test-Post')
+      assert File.exist?(Jekyll::Commands::Post.initialize_post_name(@args))
     end
-
   end
 
 
