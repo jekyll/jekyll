@@ -6,7 +6,7 @@ module Jekyll
 
         def init_with_program(prog)
           prog.command(:post) do |c|
-            c.syntax 'post "TITLE"'
+            c.syntax 'post "TITLE" [MARKUP]'
             c.description 'Create a new jekyll post'
 
             c.action do |args|
@@ -24,9 +24,10 @@ module Jekyll
 
         def initialize_post_name(args)
           post_time = Time.now.strftime('%Y-%m-%d')
-          post_name = args[0].split(' ').join('-') 
+          post_name = args[0].split(' ').join('-')
+          markup = args[1] || 'md'
 
-          "_posts/#{post_time}-#{post_name}.md"
+          "_posts/#{post_time}-#{post_name}.#{markup}"
         end
 
       end
