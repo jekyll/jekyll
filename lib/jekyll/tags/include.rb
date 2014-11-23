@@ -117,7 +117,7 @@ eos
         # Add include to dependency tree
         if context.registers[:page] and context.registers[:page].has_key? "path"
           site.metadata.add_dependency(
-            Jekyll.sanitized_path(site.source, context.registers[:page]["path"]),
+            site.in_source_dir(context.registers[:page]["path"]),
             path
           )
         end
