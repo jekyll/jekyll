@@ -328,7 +328,7 @@ module Jekyll
           (item.respond_to?(:data) && item.data['regenerate'])
         )
       }
-      metadata.write
+      metadata.write unless site.config['no_metadata']
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
