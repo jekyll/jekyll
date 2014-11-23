@@ -46,6 +46,8 @@ module Jekyll
     #
     # Returns a boolean.
     def regenerate?(path, add = true)
+      return true if site.config['no_metadata']
+
       # Check for path in cache
       if @cache.has_key? path
         return @cache[path]
@@ -73,7 +75,7 @@ module Jekyll
     #
     # Returns nothing.
     def add_dependency(path, dependency)
-      return if @metadata[path].nil?
+      return if (@metadata[path].nil? || site.config['no_metadata'])
 
       @metadata[path]["deps"] << dependency unless @metadata[path]["deps"].include? dependency
       regenerate? dependency
@@ -102,7 +104,11 @@ module Jekyll
     #
     # Returns the read metadata.
     def read_metadata
-      @metadata = (File.file?(metadata_file) && !(site.config['full_rebuild'])) ? SafeYAML.load(File.read(metadata_file)) : {}
+      @metadata = if !(site.config['full_rebuild'] || site.config['no_metadata']) && File.file?(metadata_file)
+        SafeYAML.load(File.read(metadata_file))
+      else
+        {}
+      end
     end
   end
 end
