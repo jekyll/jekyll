@@ -1,5 +1,6 @@
-_site/
 *.swp
+.DS_Store
+.sass-cache/
+_site/
 pkg/
 test/
-.DS_Store
