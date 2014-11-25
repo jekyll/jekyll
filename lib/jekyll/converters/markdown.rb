@@ -48,7 +48,7 @@ module Jekyll
 
       def extname_matches_regexp
         @extname_matches_regexp ||= Regexp.new(
-          '(' + @config['markdown_ext'].gsub(',','|') +')$',
+          '^\.(' + @config['markdown_ext'].gsub(',','|') +')$',
           Regexp::IGNORECASE
         )
       end
