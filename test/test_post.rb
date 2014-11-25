@@ -677,6 +677,13 @@ class TestPost < Test::Unit::TestCase
       assert conv.kind_of? Jekyll::Converters::Identity
     end
 
+    should "process .Rmd under text if it is not in the markdown config" do
+      @site.config['markdown_ext'] = 'markdown,mkd,md,text'
+      post = setup_post '2014-11-24-Rmd-extension.Rmd'
+      conv = post.converters.first
+      assert conv.kind_of? Jekyll::Converters::Identity
+    end
+
     should "process .text as textile under alternate configuration" do
       @site.config['textile_ext'] = 'textile,text'
       post = setup_post '2011-04-12-text-extension.text'
