@@ -44,9 +44,6 @@ header {
   h1,
   nav { display: inline-block; }
 
-  h1 {
-    span { display: none; }
-  }
 }
 
 nav {
@@ -165,10 +162,10 @@ h6:hover .header-link {
 /* Footer */
 
 footer {
-  background-color: #222;
+  background-color: #212121;
   font-size: 16px;
   padding-bottom: 5px;
-  color: #888;
+  color: #c0c0c0;
   margin-top: 40px;
 
   a {
@@ -230,7 +227,7 @@ footer {
 
   .content { padding: 0; }
 
-  h4 {
+  h3 {
     font-size: 24px;
     line-height: 24px;
     margin-top: 20px;
@@ -253,7 +250,7 @@ footer {
       float: right;
     }
 
-    h4 {
+    h3 {
       margin: 50px 0 0;
       text-align: center;
     }
@@ -295,7 +292,7 @@ footer {
       padding: 20px;
       text-shadow: none;
       margin: 0 20px;
-      background-color: #3d3d3d;
+      background-color: #171717;
       @include border-radius(0 0 5px 5px);
       @include box-shadow(0 5px 30px rgba(0,0,0,.3));
     }
@@ -333,7 +330,7 @@ footer {
 .free-hosting {
 
   .pane {
-    background-color: #444;
+    background-color: #3e3e3e;
     @include border-radius(10px);
     text-shadow: none;
     position: relative;
@@ -483,7 +480,7 @@ aside {
     @include border-radius(5px);
     /*border: 1px solid #333;*/
     @include box-shadow(0 1px 3px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.5));
-    background-color: #777;
+    background-color: #767676;
   }
 
   a:hover {
@@ -597,7 +594,7 @@ article h2:first-child { margin-top: 0; }
 
 .post-meta {
   padding: 5px 0;
-  color: #aaa;
+  color: #c0c0c0;
   font-weight: 600;
   text-shadow: 0 -1px 0 #000;
 }
@@ -635,7 +632,7 @@ p > nobr > code,
 li > code,
 h5 > code,
 .note > code {
-  background-color: #333;
+  background-color: #2b2b2b;
   color: #fff;
   @include border-radius(5px);
   @include box-shadow(inset 0 1px 10px rgba(0,0,0,.3),
@@ -970,4 +967,19 @@ code.output {
   a .show-on-mobiles {
     display: inline !important;
   }
+}
+
+
+/* Helper class taken from Bootstrap.
+   Hides an element to all devices except screen readers.
+*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
