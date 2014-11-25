@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+  * When checking a Markdown extname, include position of the `.` (#3147)
+
 ### Development Fixes
 
 ### Site Enhancements
