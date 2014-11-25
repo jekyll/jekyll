@@ -80,7 +80,7 @@ If you are using base-url option like:
 jekyll serve --baseurl '/blog'
 {% endhighlight %}
 
-… then make sure that you access the site at:
+... then make sure that you access the site at:
 
 {% highlight bash %}
 http://localhost:4000/blog/index.html
