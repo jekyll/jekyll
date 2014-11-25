@@ -226,7 +226,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Silence Output</strong></p>
-        <p class="description">Silence output.</p>
+        <p class="description">Silence the normal output from Jekyll
+        during a build</p>
       </td>
       <td class="align-center">
         <p><code class="flag">-q, --quiet</code></p>
