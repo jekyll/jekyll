@@ -198,6 +198,11 @@ namespace :site do
       sh "cp -R #{path} gh-pages/"
     end
 
+    # Change any configuration settings for production.
+    config = YAML.load_file("gh-pages/_config.yml")
+    config.merge!({'sass' => {'style' => 'compressed'}})
+    File.write('gh-pages/_config.yml', YAML.dump(config))
+
     # Commit and push.
     puts "Committing and pushing to GitHub Pages..."
     sha = `git log`.match(/[a-z0-9]{40}/)[0]
