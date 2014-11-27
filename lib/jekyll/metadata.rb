@@ -5,10 +5,6 @@ module Jekyll
     def initialize(site)
       @site = site
 
-      # Configuration options
-      @full_rebuild = site.config['full_rebuild']
-      @disabled = site.config['no_metadata']
-
       # Read metadata from file
       read_metadata
 
@@ -48,7 +44,7 @@ module Jekyll
     #
     # Returns a boolean.
     def regenerate?(path, add = true)
-      return true if @disabled
+      return true if disabled?
 
       # Check for path in cache
       if cache.has_key? path
@@ -56,7 +52,8 @@ module Jekyll
       end
 
       # Check path that exists in metadata
-      if data = metadata[path]
+      data = metadata[path]
+      if data
         data["deps"].each do |dependency|
           if regenerate?(dependency)
             return cache[dependency] = cache[path] = true
@@ -99,6 +96,14 @@ module Jekyll
       site.in_source_dir('.jekyll-metadata')
     end
 
+    # Check if metadata has been disabled
+    #
+    # Returns a Boolean (true for disabled, false for enabled).
+    def disabled?
+      @disabled = site.config['full_rebuild'] if @disabled.nil?
+      @disabled
+    end
+
     private
 
     # Read metadata from the metadata file, if no file is found,
@@ -106,7 +111,7 @@ module Jekyll
     #
     # Returns the read metadata.
     def read_metadata
-      @metadata = if !(@full_rebuild || @disabled) && File.file?(metadata_file)
+      @metadata = if !disabled? && File.file?(metadata_file)
         SafeYAML.load(File.read(metadata_file))
       else
         {}

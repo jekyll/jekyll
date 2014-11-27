@@ -319,7 +319,7 @@ module Jekyll
       each_site_file { |item|
         item.write(dest) if item.regenerate?
       }
-      metadata.write unless config['no_metadata']
+      metadata.write unless config['full_rebuild']
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
