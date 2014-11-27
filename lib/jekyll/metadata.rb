@@ -36,8 +36,8 @@ module Jekyll
     #
     # Returns nothing
     def clear
-      metadata = {}
-      cache = {}
+      @metadata = {}
+      @cache = {}
     end
 
     # Checks if a path should be regenerated
