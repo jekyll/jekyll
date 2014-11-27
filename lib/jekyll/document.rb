@@ -109,8 +109,7 @@ module Jekyll
     #
     # Returns true if the document needs to be regenerated.
     def regenerate?
-      site.metadata.regenerate?(path, write?) ||
-        data['regenerate']
+      data['regenerate'] || site.metadata.regenerate?(path, write?)
     end
 
     # Determine whether the file should be placed into layouts.
