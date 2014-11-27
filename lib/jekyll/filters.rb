@@ -328,7 +328,7 @@ module Jekyll
 
     def as_liquid(item)
       case item
-      when String, Numeric, nil
+      when String, Numeric, true, false, nil
         item.to_liquid
       when Hash
         Hash[item.map { |k, v| [as_liquid(k), as_liquid(v)] }]
