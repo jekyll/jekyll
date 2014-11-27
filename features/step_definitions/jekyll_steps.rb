@@ -133,6 +133,10 @@ Given /^I have fixture collections$/ do
   FileUtils.cp_r File.join(JEKYLL_SOURCE_DIR, "test", "source", "_methods"), source_dir
 end
 
+Given /^I wait (\d+) second(s?)$/ do |time, plural|
+  sleep(time.to_f)
+end
+
 ##################
 #
 # Changing stuff
