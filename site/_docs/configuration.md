@@ -467,7 +467,7 @@ gems:      []
 markdown:    kramdown
 highlighter: pygments
 lsi:         false
-excerpt_separator: "\n\n"
+excerpt_separator: ""
 
 # Serving
 detach:  false
