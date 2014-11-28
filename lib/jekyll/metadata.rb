@@ -16,7 +16,7 @@ module Jekyll
     #
     # Returns true, also on failure.
     def add(path)
-      return true if not File.exist? path
+      return true unless File.exist?(path)
 
       metadata[path] = {
         "mtime" => File.mtime(path),
@@ -100,7 +100,7 @@ module Jekyll
     #
     # Returns a Boolean (true for disabled, false for enabled).
     def disabled?
-      @disabled = site.config['full_rebuild'] if @disabled.nil?
+      @disabled = site.full_rebuild? if @disabled.nil?
       @disabled
     end
 

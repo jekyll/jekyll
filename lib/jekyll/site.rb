@@ -319,7 +319,7 @@ module Jekyll
       each_site_file { |item|
         item.write(dest) if item.regenerate?
       }
-      metadata.write unless config['full_rebuild']
+      metadata.write unless full_rebuild?
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -488,6 +488,13 @@ module Jekyll
 
     def frontmatter_defaults
       @frontmatter_defaults ||= FrontmatterDefaults.new(self)
+    end
+
+    # Whether to perform a full rebuild without metadata
+    #
+    # Returns a Boolean: true for a full rebuild, false for normal build
+    def full_rebuild?(override = {})
+      override['full_rebuild'] || config['full_rebuild']
     end
 
     private
