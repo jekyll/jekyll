@@ -2,7 +2,7 @@
 layout: docs
 title: Deployment methods
 prev_section: github-pages
-next_section: troubleshooting
+next_section: continuous-integration
 permalink: /docs/deployment-methods/
 ---
 
