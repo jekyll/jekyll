@@ -31,7 +31,8 @@ module Jekyll
         def healthy?(site)
           [
             !deprecated_relative_permalinks(site),
-            !conflicting_urls(site)
+            !conflicting_urls(site),
+            !urls_only_differ_by_case(site)
           ].all?
         end
 
@@ -63,6 +64,22 @@ module Jekyll
           conflicting_urls
         end
 
+        def urls_only_differ_by_case(site)
+          urls_only_differ_by_case = false
+          urls = {}
+          urls = collect_urls_case_insensitive(urls, site.pages, site.dest)
+          urls = collect_urls_case_insensitive(urls, site.posts, site.dest)
+          urls.each do |case_insensitive_url, real_urls|
+            if real_urls.uniq.size > 1
+              urls_only_differ_by_case = true
+              Jekyll.logger.warn "Warning:", "The following URLs only differ" +
+                " by case. On a case-insensitive file system one of the URLs" +
+                " will be overwritten by the other: #{real_urls.join(", ")}"
+            end
+          end
+          urls_only_differ_by_case
+        end
+
         private
 
         def collect_urls(urls, things, destination)
@@ -77,6 +94,17 @@ module Jekyll
           urls
         end
 
+        def collect_urls_case_insensitive(urls, things, destination)
+          things.each do |thing|
+            dest = thing.destination(destination) 
+            if urls[dest.downcase]
+              urls[dest.downcase] << dest
+            else
+              urls[dest.downcase] = [dest]
+            end
+          end
+          urls
+        end
       end
 
     end
