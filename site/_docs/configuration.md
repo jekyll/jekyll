@@ -151,6 +151,17 @@ class="flag">flags</code> (specified on the command-line) that control them.
 </table>
 </div>
 
+<div class="note warning">
+  <h5>Destination folders are cleaned on site builds</h5>
+  <p>
+    The contents of <code>&lt;destination&gt;</code> are automatically
+    cleaned when the site is built. Files or folders that are not
+    created by your site will be removed.  Do not use an important
+    location for <code>&lt;destination&gt;</code>; instead, use it as
+    a staging area and copy files from there to your web server.
+  </p>
+</div>
+
 ### Build Command Options
 
 <div class="mobile-side-scroller">
