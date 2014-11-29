@@ -16,6 +16,7 @@
   * Document the `-q` option for the `build` and `serve` commands (#3149)
   * Fix some minor typos/flow fixes in documentation website content (#3165)
   * Add `keep_files` to configuration documentation (#3162)
+  * Repeat warning about cleaning of the `destination` directory (#3161)
 
 ## 2.5.2 / 2014-11-17
 
