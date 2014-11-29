@@ -40,7 +40,7 @@ module Jekyll
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
-          docs << doc
+          docs << doc if publisher.publish?(doc)
         else
           relative_dir = Jekyll.sanitized_path(relative_directory, File.dirname(file_path)).chomp("/.")
           files << StaticFile.new(site, site.source, relative_dir, File.basename(full_path), self)
@@ -182,6 +182,17 @@ module Jekyll
       else
         {}
       end
+    end
+
+
+    private
+
+    # A Publisher object used to determine which documents should be
+    # added to the docs list
+    #
+    # Returns a Publisher object.
+    def publisher
+      @publisher ||= Publisher.new(site)
     end
 
   end
