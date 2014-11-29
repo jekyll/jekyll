@@ -17,6 +17,7 @@
   * Fix some minor typos/flow fixes in documentation website content (#3165)
   * Add `keep_files` to configuration documentation (#3162)
   * Repeat warning about cleaning of the `destination` directory (#3161)
+  * Add jekyll-500px-embed to list of third-party plugins (#3163)
 
 ## 2.5.2 / 2014-11-17
 
