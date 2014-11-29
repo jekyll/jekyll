@@ -14,6 +14,7 @@
 ### Site Enhancements
 
   * Document the `-q` option for the `build` and `serve` commands (#3149)
+  * Fix some minor typos/flow fixes in documentation website content (#3165)
 
 ## 2.5.2 / 2014-11-17
 
