@@ -95,13 +95,10 @@ module Jekyll
         end
 
         def collect_urls_case_insensitive(urls, things, destination)
-          things.each do |thing|
-            dest = thing.destination(destination) 
-            if urls[dest.downcase]
-              urls[dest.downcase] << dest
-            else
-              urls[dest.downcase] = [dest]
-            end
+          things.inject(urls) do |memo, thing|
+            dest = thing.destination(destination)
+            (memo[dest.downcase] ||= []) << dest
+            memo
           end
           urls
         end
