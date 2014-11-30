@@ -8,6 +8,7 @@
 
   * When checking a Markdown extname, include position of the `.` (#3147)
   * Fix `jsonify` Liquid filter handling of boolean values (#3154)
+  * Add comma to value of `viewport` meta tag (#3170)
 
 ### Development Fixes
 
