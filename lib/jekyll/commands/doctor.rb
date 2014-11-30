@@ -66,9 +66,7 @@ module Jekyll
 
         def urls_only_differ_by_case(site)
           urls_only_differ_by_case = false
-          urls = {}
-          urls = collect_urls_case_insensitive(urls, site.pages, site.dest)
-          urls = collect_urls_case_insensitive(urls, site.posts, site.dest)
+          urls = case_insensitive_urls(site.pages + site.posts, site.dest)
           urls.each do |case_insensitive_url, real_urls|
             if real_urls.uniq.size > 1
               urls_only_differ_by_case = true
@@ -94,13 +92,12 @@ module Jekyll
           urls
         end
 
-        def collect_urls_case_insensitive(urls, things, destination)
-          things.inject(urls) do |memo, thing|
+        def case_insensitive_urls(things, destination)
+          things.inject(Hash.new) do |memo, thing|
             dest = thing.destination(destination)
             (memo[dest.downcase] ||= []) << dest
             memo
           end
-          urls
         end
       end
 
