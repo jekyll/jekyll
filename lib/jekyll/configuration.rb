@@ -92,11 +92,6 @@ module Jekyll
       override[config_key] || self[config_key] || DEFAULTS[config_key]
     end
 
-    # Public: Directory of the Jekyll source folder
-    #
-    # override - the command-line options hash
-    #
-    # Returns the path to the Jekyll source directory
     def source(override)
       get_config_value_with_override('source', override)
     end
@@ -110,6 +105,10 @@ module Jekyll
       get_config_value_with_override('verbose', override)
     end
     alias_method :verbose?, :verbose
+
+    def in_source(override, path)
+      Jekyll.sanitized_path(source(override), path)
+    end
 
     def safe_load_file(filename)
       case File.extname(filename)
@@ -136,13 +135,25 @@ module Jekyll
       config_files = override.delete('config')
       if config_files.to_s.empty?
         default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
-          File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))
+          File.exist? in_source(override, "_config.#{ext}")
         end
-        config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
+        config_files = in_source(override, "_config.#{default}")
         @default_config_file = true
       end
-      config_files = [config_files] unless config_files.is_a? Array
+      config_files = Array(config_files)
+
+      if File.exist? in_source(override, env_config_file)
+        config_files << in_source(override, env_config_file)
+      end
+
       config_files
+    end
+
+    # Public: The config filename for the current Jekyll environment.
+    #
+    # Returns the filename for the JEKYLL_ENV-specific configuration file.
+    def env_config_file
+      "_config_#{Jekyll.env.downcase}.yml"
     end
 
     # Public: Read configuration and return merged Hash
