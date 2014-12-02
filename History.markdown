@@ -9,6 +9,7 @@
   * When checking a Markdown extname, include position of the `.` (#3147)
   * Fix `jsonify` Liquid filter handling of boolean values (#3154)
   * Add comma to value of `viewport` meta tag (#3170)
+  * Set the link type for the RSS feed to `application/rss+xml` (#3176)
 
 ### Development Fixes
 
