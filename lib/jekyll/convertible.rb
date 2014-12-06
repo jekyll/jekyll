@@ -172,7 +172,9 @@ module Jekyll
     #
     # Returns true if file needs to be regenerated
     def regenerate?
-      data['regenerate'] || site.metadata.regenerate?(site.in_source_dir(relative_path))
+      asset_file? ||
+      data['regenerate'] ||
+      site.metadata.regenerate?(site.in_source_dir(relative_path))
     end
 
     # Determine whether the file should be placed into layouts.
