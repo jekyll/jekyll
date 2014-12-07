@@ -13,6 +13,8 @@
 
 ### Development Fixes
 
+  * Exclude built-in bundles from being added to coverage report (#3180)
+
 ### Site Enhancements
 
   * Document the `-q` option for the `build` and `serve` commands (#3149)
