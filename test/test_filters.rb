@@ -160,14 +160,70 @@ class TestFilters < Test::Unit::TestCase
       end
 
       should "call #to_liquid " do
-        expected = "[{\"name\":\"Jeremiah\",\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}],\"stuff\":true},{\"name\":\"Smathers\",\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}],\"stuff\":true}]"
-        assert_equal expected, @filter.jsonify([T.new("Jeremiah"), T.new("Smathers")])
+        expected = [
+          {
+            "name"  => "Jeremiah",
+            "v"     => 1,
+            "thing" => [
+              {
+                "kay" => "jewelers"
+              }
+            ],
+            "stuff" => true
+          },
+          {
+            "name"  => "Smathers",
+            "v"     => 1,
+            "thing" => [
+              {
+                "kay" => "jewelers"
+              }
+            ],
+            "stuff" => true
+          }
+        ]
+        result = @filter.jsonify([T.new("Jeremiah"), T.new("Smathers")])
+        assert_equal expected, JSON.parse(result)
       end
 
       should "handle hashes with all sorts of weird keys and values" do
-        my_hash = { "posts" => Array.new(5) { |i| T.new(i) } }
-        expected = "{\"posts\":[{\"name\":0,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}],\"stuff\":true},{\"name\":1,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}],\"stuff\":true},{\"name\":2,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}],\"stuff\":true},{\"name\":3,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}],\"stuff\":true},{\"name\":4,\"v\":1,\"thing\":[{\"kay\":\"jewelers\"}],\"stuff\":true}]}"
-        assert_equal expected, @filter.jsonify(my_hash)
+        my_hash = { "posts" => Array.new(3) { |i| T.new(i) } }
+        expected = {
+          "posts" => [
+            {
+              "name"  => 0,
+              "v"     => 1,
+              "thing" => [
+                {
+                  "kay" => "jewelers"
+                }
+              ],
+              "stuff" => true
+            },
+            {
+              "name"  => 1,
+              "v"     => 1,
+              "thing" => [
+                {
+                  "kay" => "jewelers"
+                }
+              ],
+              "stuff" => true
+            },
+            {
+              "name"  => 2,
+              "v"     => 1,
+              "thing" => [
+                {
+                  "kay" => "jewelers"
+                }
+              ],
+              "stuff" => true
+            }
+          ]
+        }
+        result = @filter.jsonify(my_hash)
+        assert_equal expected, JSON.parse(result)
       end
     end
 
