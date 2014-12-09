@@ -327,21 +327,24 @@ module Jekyll
     end
 
     def as_liquid(item)
-      if item.class == Hash
+      case item
+      when Hash
         pairs = item.map { |k, v| as_liquid([k, v]) }
         Hash[pairs]
-      elsif item.class == Array
+      when Array
         item.map{ |i| as_liquid(i) }
-      elsif item.respond_to?(:to_liquid)
-        liquidated = item.to_liquid
-        # prevent infinite recursion for simple types (which return `self`)
-        if liquidated == item
-          item
-        else
-          as_liquid(liquidated)
-        end
       else
-        item
+        if item.respond_to?(:to_liquid)
+          liquidated = item.to_liquid
+          # prevent infinite recursion for simple types (which return `self`)
+          if liquidated == item
+            item
+          else
+            as_liquid(liquidated)
+          end
+        else
+          item
+        end
       end
     end
   end
