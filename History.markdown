@@ -24,6 +24,7 @@
   * Repeat warning about cleaning of the `destination` directory (#3161)
   * Add jekyll-500px-embed to list of third-party plugins (#3163)
   * Simplified platform detection in Gemfile example for Windows (#3177)
+  * Add the `jekyll-jalali` plugin added to the list of third-party plugins. (#3198)
 
 ## 2.5.2 / 2014-11-17
 
