@@ -10,6 +10,7 @@
   * Fix `jsonify` Liquid filter handling of boolean values (#3154)
   * Add comma to value of `viewport` meta tag (#3170)
   * Set the link type for the RSS feed to `application/rss+xml` (#3176)
+  * Refactor `#as_liquid` (#3158)
 
 ### Development Fixes
 
