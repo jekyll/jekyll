@@ -11,6 +11,12 @@ that might be of help. If the problem you’re experiencing isn’t covered belo
 please [report an issue]({{site.help_url}}/issues/new) so the
 Jekyll community can make everyone’s experience better.
 
+- [Installation Problems](#installation-problems)
+- [Problems running Jekyll](#problems-running-jekyll)
+- [Base-URL Problems](#base-url-problems)
+- [Configuration problems](#configuration-problems)
+- [Markup Problems](#markup-problems)
+
 ## Installation Problems
 
 If you encounter errors during gem installation, you may need to install
