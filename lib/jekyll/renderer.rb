@@ -3,12 +3,12 @@
 module Jekyll
   class Renderer
 
-    attr_reader :document, :site, :payload
+    attr_reader :document, :site, :site_payload
 
-    def initialize(site, document, payload = nil)
-      @site     = site
-      @document = document
-      @payload  = payload
+    def initialize(site, document, site_payload = nil)
+      @site         = site
+      @document     = document
+      @site_payload = site_payload
     end
 
     # Determine which converters to use based on this document's
@@ -33,7 +33,7 @@ module Jekyll
     def run
       payload = Utils.deep_merge_hashes({
         "page" => document.to_liquid
-      }, payload || site.site_payload)
+      }, site_payload || site.site_payload)
 
       info = {
         filters:   [Jekyll::Filters],
