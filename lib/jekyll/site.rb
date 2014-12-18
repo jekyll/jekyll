@@ -292,9 +292,10 @@ module Jekyll
     def render
       relative_permalinks_deprecation_method
 
+      payload = site_payload
       collections.each do |label, collection|
         collection.docs.each do |document|
-          document.output = Jekyll::Renderer.new(self, document).run if document.regenerate?
+          document.output = Jekyll::Renderer.new(self, document, payload).run if document.regenerate?
         end
       end
 
