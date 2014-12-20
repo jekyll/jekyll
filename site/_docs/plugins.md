@@ -583,6 +583,7 @@ You can find a few useful plugins at the following locations:
 - [webmention_io.rb](https://github.com/aarongustafson/jekyll-webmention_io) by [Aaron Gustafson](http://aaron-gustafson.com/): A plugin to enable [webmention](http://indiewebcamp.com/webmention) integration using [Webmention.io](http://webmention.io). Includes an optional JavaScript for updating webmentions automatically between publishes and, if available, in realtime using WebSockets.
 - [Jekyll 500px Embed](https://github.com/lkorth/jekyll-500px-embed) by [Luke Korth](https://lukekorth.com/). A Liquid tag plugin that embeds [500px](https://500px.com/) photos.
 - [inline\_highlight](https://github.com/bdesham/inline_highlight): A tag for inline syntax highlighting.
+- [jekyll-mermaid](https://github.com/jasonbellamy/jekyll-mermaid): Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.
 
 #### Collections
 
