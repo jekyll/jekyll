@@ -28,6 +28,7 @@
   * Add the `jekyll-jalali` plugin added to the list of third-party plugins. (#3198)
   * Add Table of Contents to Troubleshooting page (#3196)
   * Add `inline_highlight` plugin to list of third-party plugins (#3212)
+  * Add `jekyll-mermaid` plugin to list of third-party plugins (#3222)
 
 ## 2.5.2 / 2014-11-17
 
