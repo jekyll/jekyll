@@ -2,6 +2,8 @@
 
 ### Major Enhancements
 
+  * Incremental regeneration (#3116)
+
 ### Minor Enhancements
 
 ### Bug Fixes
