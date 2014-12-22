@@ -50,8 +50,10 @@ module Jekyll
         def build(site, options)
           source      = options['source']
           destination = options['destination']
+          full_build  = options['full_rebuild']
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
+          Jekyll.logger.info "Incremental build:", (full_build ? "disabled" : "enabled")
           Jekyll.logger.info "Generating..."
           process_site(site)
           Jekyll.logger.info "", "done."

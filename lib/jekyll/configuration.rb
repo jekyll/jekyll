@@ -22,6 +22,7 @@ module Jekyll
       'encoding'      => 'utf-8',
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'textile_ext'   => 'textile',
+      'full_rebuild'  => false,
 
       # Filtering Content
       'show_drafts'   => nil,

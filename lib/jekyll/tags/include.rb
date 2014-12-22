@@ -105,13 +105,22 @@ eos
       end
 
       def render(context)
+        site = context.registers[:site]
         dir = resolved_includes_dir(context)
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
         path = File.join(dir, file)
-        validate_path(path, dir, context.registers[:site].safe)
+        validate_path(path, dir, site.safe)
+
+        # Add include to dependency tree
+        if context.registers[:page] and context.registers[:page].has_key? "path"
+          site.metadata.add_dependency(
+            site.in_source_dir(context.registers[:page]["path"]),
+            path
+          )
+        end
 
         begin
           partial = Liquid::Template.parse(source(path, context))

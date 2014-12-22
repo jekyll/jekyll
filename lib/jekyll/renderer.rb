@@ -138,6 +138,12 @@ module Jekyll
           File.join(site.config['layouts'], layout.name)
         )
 
+        # Add layout to dependency tree
+        site.metadata.add_dependency(
+          site.in_source_dir(document.path),
+          site.in_source_dir(layout.path)
+        ) if document.write?
+
         if layout = site.layouts[layout.data["layout"]]
           if used.include?(layout)
             layout = nil # avoid recursive chain

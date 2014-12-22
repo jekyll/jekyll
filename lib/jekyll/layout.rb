@@ -8,6 +8,9 @@ module Jekyll
     # Gets the name of this layout.
     attr_reader :name
 
+    # Gets the path to this layout.
+    attr_reader :path
+
     # Gets/Sets the extension of this layout.
     attr_accessor :ext
 
@@ -26,6 +29,7 @@ module Jekyll
       @site = site
       @base = base
       @name = name
+      @path = site.in_source_dir(base, name)
 
       self.data = {}
 

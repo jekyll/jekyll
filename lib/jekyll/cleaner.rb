@@ -13,6 +13,7 @@ module Jekyll
       # Cleans up the site's destination directory
       def cleanup!
         FileUtils.rm_rf(obsolete_files)
+        FileUtils.rm_rf(metadata_file) if @site.full_rebuild?
       end
 
       private
@@ -22,6 +23,13 @@ module Jekyll
       # Returns an Array of the file and directory paths
       def obsolete_files
         (existing_files - new_files - new_dirs + replaced_files).to_a
+      end
+
+      # Private: The metadata file storing dependency tree and build history
+      #
+      # Returns an Array with the metdata file as the only item
+      def metadata_file
+        [site.metadata.metadata_file]
       end
 
       # Private: The list of existing files, apart from those included in keep_files and hidden files.

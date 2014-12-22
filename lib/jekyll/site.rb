@@ -11,6 +11,7 @@ module Jekyll
                   :gems, :plugin_manager
 
     attr_accessor :converters, :generators
+    attr_reader   :metadata
 
     # Public: Initialize a new Site.
     #
@@ -26,6 +27,9 @@ module Jekyll
       # Source and destination may not be changed after the site has been created.
       @source              = File.expand_path(config['source']).freeze
       @dest                = File.expand_path(config['destination']).freeze
+
+      # Build metadata
+      @metadata = Metadata.new(self)
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
@@ -289,13 +293,13 @@ module Jekyll
 
       collections.each do |label, collection|
         collection.docs.each do |document|
-          document.output = Jekyll::Renderer.new(self, document).run
+          document.output = Jekyll::Renderer.new(self, document).run if document.regenerate?
         end
       end
 
       payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
-        page_or_post.render(layouts, payload)
+        page_or_post.render(layouts, payload) if page_or_post.regenerate?
       end
     rescue Errno::ENOENT => e
       # ignore missing layout dir
@@ -312,7 +316,10 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item| item.write(dest) }
+      each_site_file { |item|
+        item.write(dest) if item.regenerate?
+      }
+      metadata.write unless full_rebuild?
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -481,6 +488,13 @@ module Jekyll
 
     def frontmatter_defaults
       @frontmatter_defaults ||= FrontmatterDefaults.new(self)
+    end
+
+    # Whether to perform a full rebuild without metadata
+    #
+    # Returns a Boolean: true for a full rebuild, false for normal build
+    def full_rebuild?(override = {})
+      override['full_rebuild'] || config['full_rebuild']
     end
 
     private

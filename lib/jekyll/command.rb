@@ -58,6 +58,7 @@ module Jekyll
         c.option 'unpublished', '--unpublished', 'Render posts that were marked as unpublished'
         c.option 'quiet',   '-q', '--quiet', 'Silence output.'
         c.option 'verbose', '-V', '--verbose', 'Print verbose output.'
+        c.option 'full_rebuild', '-f', '--full-rebuild', 'Disable incremental rebuild.'
       end
 
     end
