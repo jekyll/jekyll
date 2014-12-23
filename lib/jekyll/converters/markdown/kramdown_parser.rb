@@ -14,10 +14,13 @@ module Jekyll
         def convert(content)
           # Check for use of coderay
           if @config['kramdown']['use_coderay']
+            @config['kramdown']['enable_coderay'] = true
             %w[wrap line_numbers line_numbers_start tab_width bold_every css default_lang].each do |opt|
               key = "coderay_#{opt}"
               @config['kramdown'][key] = @config['kramdown']['coderay'][key] unless @config['kramdown'].key?(key)
             end
+          else
+            @config['kramdown']['enable_coderay'] = false
           end
 
           Kramdown::Document.new(content, Utils.symbolize_hash_keys(@config["kramdown"])).to_html
