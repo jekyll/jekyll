@@ -12,6 +12,8 @@
 
 ### Site Enhancements
 
+  * Fixing the default host on docs (#3229)
+
 ## 2.5.3 / 2014-12-22
 
 ### Bug Fixes
