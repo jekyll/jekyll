@@ -13,8 +13,8 @@ having to modify the Jekyll source itself.
 <div class="note info">
   <h5>Plugins on GitHub Pages</h5>
   <p>
-    <a href="http://pages.github.com/">GitHub Pages</a> is powered by Jekyll,
-    however all Pages sites are generated using the <code>--safe</code> option
+    <a href="http://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
+    However, all Pages sites are generated using the <code>--safe</code> option
     to disable custom plugins for security reasons. Unfortunately, this means
     your plugins won’t work if you’re deploying to GitHub Pages.<br><br>
     You can still use GitHub Pages to publish your site, but you’ll need to
@@ -68,8 +68,8 @@ A generator is a subclass of `Jekyll::Generator` that defines a `generate`
 method, which receives an instance of
 [`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb).
 
-Generation is triggered for its side-effects, the return value of `generate` is
-ignored. Jekyll does not assume any particular side-effect to happen, it just
+Because generation is triggered for its side effects, the return value of `generate` is
+ignored. Jekyll does not assume any particular side effect to happen---it just
 runs the method.
 
 Generators run after Jekyll has made an inventory of the existing content, and
