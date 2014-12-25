@@ -68,9 +68,9 @@ A generator is a subclass of `Jekyll::Generator` that defines a `generate`
 method, which receives an instance of
 [`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb).
 
-Because generation is triggered for its side effects, the return value of `generate` is
-ignored. Jekyll does not assume any particular side effect to happen---it just
-runs the method.
+The return value of `generate` is ignored, since generation is triggered for
+its side effects. Jekyll does not expect any particular side effect to
+happen---it just runs the method.
 
 Generators run after Jekyll has made an inventory of the existing content, and
 before the site is generated. Pages with YAML Front Matters are stored as
