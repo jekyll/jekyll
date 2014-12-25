@@ -4,7 +4,6 @@ sudo: false
 rvm:
 - 2.1
 - 2.0
-- 1.9.3
 env:
   matrix:
   - TEST_SUITE=test
