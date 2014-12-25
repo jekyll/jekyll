@@ -24,6 +24,7 @@ end
 After do
   FileUtils.rm_rf(TEST_DIR)   if File.exist?(TEST_DIR)
   FileUtils.rm(JEKYLL_COMMAND_OUTPUT_FILE) if File.exist?(JEKYLL_COMMAND_OUTPUT_FILE)
+  Dir.chdir(File.dirname(TEST_DIR))
 end
 
 World(Test::Unit::Assertions)
