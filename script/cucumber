@@ -1,5 +1,8 @@
 #!/bin/bash
 
+ls /usr/share/zoneinfo
+ls /usr/share/zoneinfo/Australia
+
 time bundle exec cucumber \
   -f Features::Support::Overview \
   "$@"
