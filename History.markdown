@@ -8,6 +8,8 @@
 
 ### Bug Fixes
 
+  * Remove unneeded end tag for `link` in site template (#3236)
+
 ### Development Fixes
 
 ### Site Enhancements
