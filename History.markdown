@@ -3,6 +3,7 @@
 ### Major Enhancements
 
   * Incremental regeneration (#3116)
+  * Drop support for Ruby 1.9.3. (#3235)
 
 ### Minor Enhancements
 
