@@ -8,6 +8,8 @@
 
 ### Minor Enhancements
 
+  * Sort static files just once, and call `site_payload` once for all collections (#3204)
+
 ### Bug Fixes
 
   * Remove unneeded end tag for `link` in site template (#3236)
