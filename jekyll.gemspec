@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ['--charset=UTF-8']
   s.extra_rdoc_files = %w[README.markdown LICENSE]
 
-  s.add_runtime_dependency('liquid',    '~> 2.6.1')
+  s.add_runtime_dependency('liquid',    '~> 3.0')
   s.add_runtime_dependency('kramdown',  '~> 1.3')
   s.add_runtime_dependency('mercenary', '~> 0.3.3')
   s.add_runtime_dependency('safe_yaml', '~> 1.0')
@@ -63,6 +63,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('jekyll_test_plugin')
   s.add_development_dependency('jekyll_test_plugin_malicious')
   s.add_development_dependency('rouge', '~> 1.7')
+  s.add_development_dependency('liquid-c', '~> 0.0.3')
   s.add_development_dependency('minitest') if RUBY_PLATFORM =~ /cygwin/
   s.add_development_dependency('test-unit') if RUBY_PLATFORM =~ /cygwin/
 end
