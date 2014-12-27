@@ -75,12 +75,12 @@ module Jekyll
       },
 
       'kramdown' => {
-        'auto_ids'      => true,
-        'footnote_nr'   => 1,
-        'entity_output' => 'as_char',
-        'toc_levels'    => '1..6',
-        'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
-        'use_coderay'   => false,
+        'auto_ids'       => true,
+        'footnote_nr'    => 1,
+        'entity_output'  => 'as_char',
+        'toc_levels'     => '1..6',
+        'smart_quotes'   => 'lsquo,rsquo,ldquo,rdquo',
+        'enable_coderay' => false,
 
         'coderay' => {
           'coderay_wrap'              => 'div',
