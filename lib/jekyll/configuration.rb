@@ -75,12 +75,12 @@ module Jekyll
       },
 
       'kramdown' => {
-        'auto_ids'      => true,
-        'footnote_nr'   => 1,
-        'entity_output' => 'as_char',
-        'toc_levels'    => '1..6',
-        'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
-        'use_coderay'   => false,
+        'auto_ids'       => true,
+        'footnote_nr'    => 1,
+        'entity_output'  => 'as_char',
+        'toc_levels'     => '1..6',
+        'smart_quotes'   => 'lsquo,rsquo,ldquo,rdquo',
+        'enable_coderay' => false,
 
         'coderay' => {
           'coderay_wrap'              => 'div',
@@ -252,6 +252,12 @@ module Jekyll
           config[option] = csv_to_array(config[option])
         end
         config[option].map!(&:to_s)
+      end
+
+      if (config['kramdown'] || {}).key?('use_coderay')
+        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" +
+          " to 'enable_coderay' in your configuration file."
+        config['kramdown']['use_coderay'] = config['kramdown'].delete('enable_coderay')
       end
 
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
