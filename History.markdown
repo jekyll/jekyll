@@ -4,6 +4,7 @@
 
   * Incremental regeneration (#3116)
   * Drop support for Ruby 1.9.3. (#3235)
+  * Upgrade to Liquid 3.0.0 (#3002)
 
 ### Minor Enhancements
 
