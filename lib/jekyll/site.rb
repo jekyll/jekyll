@@ -187,6 +187,7 @@ module Jekyll
       end
 
       pages.sort_by!(&:name)
+      static_files.sort_by!(&:relative_path)
     end
 
     # Read all the files in <source>/<dir>/_posts and create a new Post
@@ -291,9 +292,10 @@ module Jekyll
     def render
       relative_permalinks_deprecation_method
 
+      payload = site_payload
       collections.each do |label, collection|
         collection.docs.each do |document|
-          document.output = Jekyll::Renderer.new(self, document).run if document.regenerate?
+          document.output = Jekyll::Renderer.new(self, document, payload).run if document.regenerate?
         end
       end
 
@@ -384,7 +386,7 @@ module Jekyll
             "time"         => time,
             "posts"        => posts.sort { |a, b| b <=> a },
             "pages"        => pages,
-            "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
+            "static_files" => static_files,
             "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
             "categories"   => post_attr_hash('categories'),
             "tags"         => post_attr_hash('tags'),
