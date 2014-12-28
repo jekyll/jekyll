@@ -66,7 +66,7 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
-          Deprecator.gracefully_require 'jekyll-watch'
+          External.require_with_graceful_fail 'jekyll-watch'
           Jekyll::Watcher.watch(options)
         end
 

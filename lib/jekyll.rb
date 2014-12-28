@@ -29,12 +29,6 @@ require 'liquid'
 require 'kramdown'
 require 'colorator'
 
-# Conditional optimizations
-begin
-  require 'liquid-c'
-rescue LoadError
-end
-
 SafeYAML::OPTIONS[:suppress_warnings] = true
 Liquid::Template.error_mode = :strict
 
@@ -51,6 +45,7 @@ module Jekyll
   autoload :EntryFilter,         'jekyll/entry_filter'
   autoload :Errors,              'jekyll/errors'
   autoload :Excerpt,             'jekyll/excerpt'
+  autoload :External,            'jekyll/external'
   autoload :Filters,             'jekyll/filters'
   autoload :FrontmatterDefaults, 'jekyll/frontmatter_defaults'
   autoload :Layout,              'jekyll/layout'
@@ -162,6 +157,9 @@ module Jekyll
       end
     end
 
+    # Conditional optimizations
+    Jekyll::External.require_if_present('liquid-c')
+
   end
 end
 
@@ -172,7 +170,7 @@ require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
 # Eventually remove these for 3.0 as non-core
-Jekyll::Deprecator.gracefully_require(%w[
+Jekyll::External.require_with_graceful_fail(%w[
   toml
   jekyll-paginate
   jekyll-gist
