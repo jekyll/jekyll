@@ -72,6 +72,15 @@ module Jekyll
               end
             end
           end
+
+          WEBrick::HTTPUtils.module_eval do
+            def mime_type(filename, mime_tab)
+              suffix1 = (/\.(\w+)$/ =~ filename && $1.downcase)
+              suffix2 = (/\.(\w+)\.[\w\-]+$/ =~ filename && $1.downcase)
+              mime_tab[suffix1] || mime_tab[suffix2] || "text/html"
+            end
+            module_function :mime_type
+          end
         end
 
         def webrick_options(config)
