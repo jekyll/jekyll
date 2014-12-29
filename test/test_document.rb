@@ -275,4 +275,34 @@ class TestDocument < Test::Unit::TestCase
     end
   end
 
+  context "a document in a collection with non-alphabetic file name" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => {
+          "methods" => {
+            "output" => true
+          }
+        },
+        "source"      => source_dir,
+        "destination" => dest_dir
+      }))
+      @site.process
+      @document = @site.collections["methods"].docs.find { |doc| doc.relative_path == "_methods/escape-+ #%20[].md" }
+      @dest_file = dest_dir("methods/escape-+ #%20[].html")
+    end
+
+    should "produce the right URL" do
+      assert_equal "/methods/escape-+%20%23%2520%5B%5D.html", @document.url
+    end
+
+    should "produce the right destination" do
+      assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "be output in the correct place" do
+      assert_equal true, File.file?(@dest_file)
+    end
+
+  end
+
 end
