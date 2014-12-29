@@ -147,7 +147,17 @@ module Jekyll
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
 
-      clean_path = File.expand_path(questionable_path, "/")
+      begin
+        previous = questionable_path
+        questionable_path = questionable_path.sub(%r((?:^|/)[^/]+/\.\.(?:/|$)), '/')
+      end until previous == questionable_path
+
+      begin
+        previous = questionable_path
+        questionable_path = questionable_path.sub(%r((?:^|/)\.{1,2}(?:/|$)), '/')
+      end until previous == questionable_path
+
+      clean_path = questionable_path.gsub(%r(//), '/').sub(/\/$/, '')
       clean_path = clean_path.sub(/\A\w\:\//, '/')
 
       unless clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
