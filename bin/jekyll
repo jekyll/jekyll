@@ -6,12 +6,9 @@ $:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 require 'jekyll'
 require 'mercenary'
 
-%w[jekyll-import].each do |blessed_gem|
-  begin
-    require blessed_gem
-  rescue LoadError
-  end
-end
+Jekyll::External.require_if_present(
+  Jekyll::External.blessed_gems
+)
 
 Jekyll::PluginManager.require_from_bundler
 
@@ -32,6 +29,7 @@ Mercenary.program(:jekyll) do |p|
 
   p.action do |args, options|
     if args.empty?
+      Jekyll.logger.error "A subcommand is required."
       puts p
     else
       unless p.has_command?(args.first)

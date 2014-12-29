@@ -14,7 +14,7 @@ module Jekyll
         module WithPygments
           include CommonMethods
           def block_code(code, lang)
-            Jekyll::Deprecator.gracefully_require("pygments")
+            Jekyll::External.require_with_graceful_fail("pygments")
             lang = lang && lang.split.first || "text"
             add_code_tags(
               Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
@@ -55,7 +55,7 @@ module Jekyll
 
 
         def initialize(config)
-          Deprecator.gracefully_require("redcarpet")
+          External.require_with_graceful_fail("redcarpet")
           @config = config
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
@@ -71,7 +71,7 @@ module Jekyll
             end
           when "rouge"
             Class.new(Redcarpet::Render::HTML) do
-              Jekyll::Deprecator.gracefully_require(%w[
+              Jekyll::External.require_with_graceful_fail(%w[
                 rouge
                 rouge/plugins/redcarpet
               ])

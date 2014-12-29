@@ -3,7 +3,7 @@ module Jekyll
     class Markdown
       class RDiscountParser
         def initialize(config)
-          Jekyll::Deprecator.gracefully_require "rdiscount"
+          Jekyll::External.require_with_graceful_fail "rdiscount"
           @config = config
           @rdiscount_extensions = @config['rdiscount']['extensions'].map { |e| e.to_sym }
         end
