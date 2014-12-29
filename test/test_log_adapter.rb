@@ -3,6 +3,11 @@ require 'helper'
 class TestLogAdapter < Test::Unit::TestCase
   class LoggerDouble
     attr_accessor :level
+
+    def debug(*); end
+    def info(*); end
+    def warn(*); end
+    def error(*); end
   end
 
   context "#log_level=" do
@@ -54,6 +59,22 @@ class TestLogAdapter < Test::Unit::TestCase
       logger = Jekyll::LogAdapter.new(LoggerDouble.new)
       stub(logger).error('topic', 'log message') { true }
       assert_raise(SystemExit) { logger.abort_with('topic', 'log message') }
+    end
+  end
+
+  context "#messages" do
+    should "return an array" do
+      assert_equal [], Jekyll::LogAdapter.new(LoggerDouble.new).messages
+    end
+
+    should "store each log value in the array" do
+      logger = Jekyll::LogAdapter.new(LoggerDouble.new)
+      values = %w{one two three four}
+      logger.debug(values[0])
+      logger.info(values[1])
+      logger.warn(values[2])
+      logger.error(values[3])
+      assert_equal values.map { |value| "#{value} ".rjust(20) }, logger.messages
     end
   end
 end
