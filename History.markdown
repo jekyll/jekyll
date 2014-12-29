@@ -10,6 +10,7 @@
 
   * Sort static files just once, and call `site_payload` once for all collections (#3204)
   * Separate `jekyll docs` and optimize external gem handling (#3241)
+  * Improve `Site#getConverterImpl` and call it `Site#find_converter_instance` (#3240)
 
 ### Bug Fixes
 
