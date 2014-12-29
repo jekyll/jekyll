@@ -13,6 +13,7 @@
   * Improve `Site#getConverterImpl` and call it `Site#find_converter_instance` (#3240)
   * Use relative path for `path` Liquid variable in Documents for consistency (#2908)
   * Generalize `Utils#slugify` for any scripts (#3047)
+  * Added basic microdata to post template in site template (#3189)
 
 ### Bug Fixes
 
