@@ -436,7 +436,7 @@ class TestSite < JekyllUnitTest
       end
 
       should "default to 'development'" do
-        assert_equal "development", @page.content.strip
+        assert_equal "local", @page.content.strip
       end
 
       context "in production" do
