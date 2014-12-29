@@ -1,6 +1,6 @@
 module Jekyll
   class LogAdapter
-    attr_reader :writer
+    attr_reader :writer, :messages
 
     LOG_LEVELS = {
       :debug => ::Logger::DEBUG,
@@ -16,6 +16,7 @@ module Jekyll
     #
     # Returns nothing
     def initialize(writer, level = :info)
+      @messages = []
       @writer = writer
       self.log_level = level
     end
@@ -99,13 +100,6 @@ module Jekyll
     # Returns the formatted topic statement
     def formatted_topic(topic)
       "#{topic} ".rjust(20)
-    end
-
-    # Public: All the messages Stevenson has printed so far
-    #
-    # Returns an Array of all messages Stevenson has built so far using #message
-    def messages
-      @messages ||= Array.new
     end
   end
 end
