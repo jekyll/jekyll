@@ -56,6 +56,18 @@ class TestConfiguration < JekyllUnitTest
     should "return an array of the config files if given many config files" do
       assert_equal %w[config/site.yml config/deploy.toml configuration.yml], @config.config_files(@multiple_files)
     end
+
+    context "environment-specific configuration" do
+      should "default to _config.local.yml" do
+        assert_equal "_config.local.yml", @config.env_config_file
+      end
+
+      should "use value of JEKYLL_ENV" do
+        with_env('JEKYLL_ENV', 'github') do
+          assert_equal "_config.github.yml", @config.env_config_file
+        end
+      end
+    end
   end
   context "#backwards_compatibilize" do
     setup do
