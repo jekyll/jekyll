@@ -27,6 +27,7 @@
   * Fixing the default host on docs (#3229)
   * Add `jekyll-thumbnail-filter` to list of third-party plugins (#2790)
   * Add link to 'Adding Ajax pagination to Jekyll' to Resources page (#3186)
+  * Add a Resources link to tutorial on building dynamic navbars (#3185)
 
 ## 2.5.3 / 2014-12-22
 
