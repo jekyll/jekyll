@@ -177,3 +177,5 @@ Jekyll::External.require_with_graceful_fail(%w[
   jekyll-coffeescript
   jekyll-sass-converter
 ])
+
+require '../jekyll.bundle'
