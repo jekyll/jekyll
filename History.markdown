@@ -19,6 +19,7 @@
 
   * Remove unneeded end tag for `link` in site template (#3236)
   * Kramdown: Use `enable_coderay` key instead of `use_coderay` (#3237)
+  * Unescape `Document` output path (#2924)
 
 ### Development Fixes
 
