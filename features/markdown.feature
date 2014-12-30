@@ -47,7 +47,7 @@ Feature: Markdown
     And I should see "My awesome code" in "_site/index.html"
     And I should see "<pre><code>My awesome code</code></pre>" in "_site/index.html"
 
-  Scenario: Maruku fenced codeblocks
+  Scenario: Maruku fenced codeblocks with syntax highlighting
     Given I have a configuration file with "markdown" set to "maruku"
     And I have an "index.markdown" file with content:
        """
