@@ -56,17 +56,14 @@ VALUE method_jekyll_url_sanitize_url(VALUE self, VALUE url) {
   char* cUrl = rb_string_value_cstr(&url);
 
   int n = strlen(cUrl);
-  int searching = 1;
 
   // Helpful variables for string manipulation.
+  int searching;
   int theIndex;
-  int newN = n;
   int offset;
   char naughtyForDots[] = {'.', '/'};
   char naughtyForSlashes[] = {'/'};
   char* result;
-  char* result1;
-  char* result2;
 
   // Remove all dot segments
   while((result = strstr(cUrl, "/..")) != NULL || (result = strstr(cUrl, "../")) != NULL) {
