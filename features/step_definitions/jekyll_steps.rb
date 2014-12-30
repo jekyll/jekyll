@@ -193,7 +193,15 @@ Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
 end
 
 Then /^the "(.*)" file should +exist$/ do |file|
-  assert File.file?(file), "The file \"#{file}\" does not exist"
+  file_does_exist = File.file?(file)
+  unless file_does_exist
+    all_steps_to_path(file).each do |dir|
+      STDERR.puts ""
+      STDERR.puts "Dir #{dir}:"
+      STDERR.puts Dir["#{dir}/**/*"]
+    end
+  end
+  assert file_does_exist, "The file \"#{file}\" does not exist.\n"
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|
