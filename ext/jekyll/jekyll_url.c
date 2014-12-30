@@ -61,15 +61,22 @@ VALUE method_jekyll_url_sanitize_url(VALUE self, VALUE url) {
   // Helpful variables for string manipulation.
   int theIndex;
   int newN = n;
-  int offset = 0;
+  int offset;
   char naughtyForDots[] = {'.', '/'};
   char naughtyForSlashes[] = {'/'};
   char* result;
+  char* result1;
+  char* result2;
 
   // Remove all dot segments
-  while((result = strstr(cUrl, "/./")) != NULL || (result = strstr(cUrl, "/../")) != NULL) {
+  while((result = strstr(cUrl, "/..")) != NULL || (result = strstr(cUrl, "../")) != NULL) {
     theIndex = (int)(result - cUrl);
-    for(int c = theIndex + 1; c < n; c++) {
+    if(result[0] == '/') {
+      theIndex += 1;
+    }
+    offset = 0;
+    searching = 1;
+    for(int c = theIndex + offset ; c < n; c++) {
       if(array_include_char(naughtyForDots, cUrl[c]) && searching > 0) {
         offset++;
         continue;
@@ -87,8 +94,14 @@ VALUE method_jekyll_url_sanitize_url(VALUE self, VALUE url) {
 
   // Remove all double slashes
   while((result = strstr(cUrl, "//")) != NULL) {
+    offset = 0;
+    searching = 1;
     theIndex = (int)(result - cUrl);
     for(int c = theIndex + 1; c < n; c++) {
+      if(n - 1 == theIndex) {
+        n--;
+        break;
+      }
       if(array_include_char(naughtyForSlashes, cUrl[c]) && searching > 0) {
         offset++;
         continue;
@@ -115,5 +128,6 @@ VALUE method_jekyll_url_sanitize_url(VALUE self, VALUE url) {
 
   // Chomp the string at the end.
   cUrl[n] = '\0';
+
   return rb_utf8_str_new_cstr(cUrl);
 }

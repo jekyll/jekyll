@@ -52,6 +52,10 @@ class TestURL < Test::Unit::TestCase
         assert_equal '/foo/bar', Jekyll::URL.sanitize_url('/foo/bar')
       end
 
+      should "not modify an acceptable url with a trailing slash" do
+        assert_equal '/foo/bar/', Jekyll::URL.sanitize_url('/foo/bar/')
+      end
+
       should "strip multiple slashes" do
         assert_equal '/foo/bar', Jekyll::URL.sanitize_url('//foo//bar')
       end
@@ -66,6 +70,18 @@ class TestURL < Test::Unit::TestCase
 
       should "remove segments consisting solely of dots" do
         assert_equal '/foo/bar/', Jekyll::URL.sanitize_url('/foo/../bar/')
+      end
+
+      should "remove dots at the end of the path" do
+        assert_equal '/foo/bar/', Jekyll::URL.sanitize_url('/foo/bar/..')
+      end
+
+      should "remove dots at the end of the string" do
+        assert_equal '/foo/bar/', Jekyll::URL.sanitize_url('/foo//bar/..')
+      end
+
+      should "remove dots at the beginning of the string" do
+        assert_equal '/foo/bar/', Jekyll::URL.sanitize_url('../foo//bar/..')
       end
     end
 
