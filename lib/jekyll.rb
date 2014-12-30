@@ -178,4 +178,4 @@ Jekyll::External.require_with_graceful_fail(%w[
   jekyll-sass-converter
 ])
 
-require '../jekyll.bundle'
+require File.expand_path('../jekyll.bundle', __FILE__)
