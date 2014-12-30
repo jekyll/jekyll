@@ -32,6 +32,15 @@ void Init_jekyll() {
   rb_define_singleton_method(JekyllUrl, "sanitize_url", method_jekyll_url_sanitize_url, 1);
 }
 
+int array_include_char(char values[], char questionable) {
+  for(int i = 0; i < strlen(values); i++) {
+    if (questionable == values[i]) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
 // The business logic -- this is the function we're exposing to Ruby. It returns
 // a Ruby VALUE, and takes three VALUE arguments: the receiver object, and the
 // method parameters. Notes on APIs used here:
@@ -49,15 +58,19 @@ VALUE method_jekyll_url_sanitize_url(VALUE self, VALUE url) {
   int n = strlen(cUrl);
   int searching = 1;
 
-  // Remove all double slashes
+  // Helpful variables for string manipulation.
   int theIndex;
   int newN = n;
   int offset = 0;
+  char naughtyForDots[] = {'.', '/'};
+  char naughtyForSlashes[] = {'/'};
   char* result;
-  while((result = strstr(cUrl, "//")) != NULL) {
+
+  // Remove all dot segments
+  while((result = strstr(cUrl, "/./")) != NULL || (result = strstr(cUrl, "/../")) != NULL) {
     theIndex = (int)(result - cUrl);
     for(int c = theIndex + 1; c < n; c++) {
-      if(cUrl[c] == '/' && searching > 0) {
+      if(array_include_char(naughtyForDots, cUrl[c]) && searching > 0) {
         offset++;
         continue;
       } else {
@@ -72,13 +85,23 @@ VALUE method_jekyll_url_sanitize_url(VALUE self, VALUE url) {
     cUrl[n] = '\0';
   }
 
-  // Remove dots
-  while((result = strstr(cUrl, "/./")) != NULL) {
-    theIndex = (int)(result - cUrl) + 1;
-    for (int c = theIndex; c < n - 1 ; c++) {
-      cUrl[c] = cUrl[c+1];
+  // Remove all double slashes
+  while((result = strstr(cUrl, "//")) != NULL) {
+    theIndex = (int)(result - cUrl);
+    for(int c = theIndex + 1; c < n; c++) {
+      if(array_include_char(naughtyForSlashes, cUrl[c]) && searching > 0) {
+        offset++;
+        continue;
+      } else {
+        cUrl[c-offset] = cUrl[c];
+        if (searching > 0) {
+          searching = 0;
+          continue;
+        }
+      }
     }
-    n--;
+    n -= offset;
+    cUrl[n] = '\0';
   }
 
   // Ensure there's a leading slash.

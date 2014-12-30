@@ -22,8 +22,7 @@ test -d "${RAKE_LIB_DIR}" || {
   bundle show rake | cut -d'/' -f12 | cut -d'-' -f 2 | xargs bundle exec gem install rake -v
 }
 
-# Compile.
-bundle exec rake compile
+script/compile
 
 set -x
 
