@@ -72,11 +72,11 @@ class TestFilters < Test::Unit::TestCase
         end
 
         should "format a time with xmlschema" do
-          assert_equal "2013-03-27T11:22:33Z", @filter.date_to_xmlschema(@sample_time)
+          assert_equal "2013-03-27T11:22:33+00:00", @filter.date_to_xmlschema(@sample_time)
         end
 
         should "format a time according to RFC-822" do
-          assert_equal "Wed, 27 Mar 2013 11:22:33 -0000", @filter.date_to_rfc822(@sample_time)
+          assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
         end
       end
 
@@ -90,11 +90,11 @@ class TestFilters < Test::Unit::TestCase
         end
 
         should "format a time with xmlschema" do
-          assert_equal "2001-09-11T12:46:30Z", @filter.date_to_xmlschema(@time_as_string)
+          assert_equal "2001-09-11T12:46:30+00:00", @filter.date_to_xmlschema(@time_as_string)
         end
 
         should "format a time according to RFC-822" do
-          assert_equal "Tue, 11 Sep 2001 12:46:30 -0000", @filter.date_to_rfc822(@time_as_string)
+          assert_equal "Tue, 11 Sep 2001 12:46:30 +0000", @filter.date_to_rfc822(@time_as_string)
         end
       end
 
