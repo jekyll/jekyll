@@ -13,6 +13,17 @@ def source_dir(*files)
   File.join(TEST_DIR, *files)
 end
 
+def all_steps_to_path(path)
+  source = Pathname.new(source_dir('_site')).expand_path
+  dest   = Pathname.new(path).expand_path
+  paths  = []
+  dest.ascend do |f|
+    break if f.eql? source
+    paths.unshift f.to_s
+  end
+  paths
+end
+
 def jekyll_output_file
   JEKYLL_COMMAND_OUTPUT_FILE
 end

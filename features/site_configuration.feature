@@ -180,7 +180,7 @@ Feature: Site configuration
       And I have an "index.html" page with layout "page" that contains "site index page"
       And I have a configuration file with:
         | key         | value               |
-        | timezone    | Australia/Sydney |
+        | timezone    | Australia/Melbourne |
       And I have a _posts directory
       And I have the following posts:
         | title     | date                   | layout  | content             |

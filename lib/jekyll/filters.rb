@@ -309,7 +309,7 @@ module Jekyll
       else
         Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)
-      end
+      end.localtime
     end
 
     def groupable?(element)
