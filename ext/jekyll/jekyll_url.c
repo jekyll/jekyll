@@ -1,6 +1,8 @@
-// ext/faye_websocket/faye_websocket.c
+// ext/jekyll/jekyll_url.c
 
+#include <stdio.h>
 #include <ruby.h>
+#include <ruby/encoding.h>
 
 // Allocate two VALUE variables to hold the modules we'll create. Ruby values
 // are all of type VALUE. Qnil is the C representation of Ruby's nil.
@@ -10,7 +12,7 @@ VALUE JekyllUrl = Qnil;
 // when this file is loaded, and the second is the actual business logic we're
 // implementing.
 void Init_jekyll();
-VALUE method_jekyll_url_generate_url(VALUE self, VALUE placeholders, VALUE template);
+VALUE method_jekyll_url_sanitize_url(VALUE self, VALUE url);
 
 // Initial setup function, takes no arguments and returns nothing. Some API
 // notes:
@@ -26,8 +28,8 @@ VALUE method_jekyll_url_generate_url(VALUE self, VALUE placeholders, VALUE templ
 //
 void Init_jekyll() {
   Jekyll = rb_define_module("Jekyll");
-  JekyllUrl = rb_define_module_under(Jekyll, "URL");
-  rb_define_singleton_method(JekyllUrl, "generate_url", method_jekyll_url_generate_url, 2);
+  JekyllUrl = rb_define_class_under(Jekyll, "URL", rb_cObject);
+  rb_define_singleton_method(JekyllUrl, "sanitize_url", method_jekyll_url_sanitize_url, 1);
 }
 
 // The business logic -- this is the function we're exposing to Ruby. It returns
@@ -41,6 +43,54 @@ void Init_jekyll() {
 // * INT2NUM converts a C int to a Ruby Fixnum object
 // * rb_ary_store(VALUE, int, VALUE) sets the nth element of a Ruby array
 //
-VALUE method_jekyll_url_generate_url(VALUE self, VALUE placeholders, VALUE template) {
-  return template;
+VALUE method_jekyll_url_sanitize_url(VALUE self, VALUE url) {
+  char* cUrl = rb_string_value_cstr(&url);
+
+  int n = strlen(cUrl);
+  int searching = 1;
+
+  // Remove all double slashes
+  int theIndex;
+  int newN = n;
+  int offset = 0;
+  char* result;
+  while((result = strstr(cUrl, "//")) != NULL) {
+    theIndex = (int)(result - cUrl);
+    for(int c = theIndex + 1; c < n; c++) {
+      if(cUrl[c] == '/' && searching > 0) {
+        offset++;
+        continue;
+      } else {
+        cUrl[c-offset] = cUrl[c];
+        if (searching > 0) {
+          searching = 0;
+          continue;
+        }
+      }
+    }
+    n -= offset;
+    cUrl[n] = '\0';
+  }
+
+  // Remove dots
+  while((result = strstr(cUrl, "/./")) != NULL) {
+    theIndex = (int)(result - cUrl) + 1;
+    for (int c = theIndex; c < n - 1 ; c++) {
+      cUrl[c] = cUrl[c+1];
+    }
+    n--;
+  }
+
+  // Ensure there's a leading slash.
+  if(cUrl[0] != '/') {
+    n++;
+    for (int c = n-1; c >= 0; c--) {
+      cUrl[c+1] = cUrl[c];
+    }
+    cUrl[0] = '/';
+  }
+
+  // Chomp the string at the end.
+  cUrl[n] = '\0';
+  return rb_utf8_str_new_cstr(cUrl);
 }

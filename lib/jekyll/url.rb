@@ -37,7 +37,7 @@ module Jekyll
     #
     # Returns the String URL
     def to_s
-      sanitize_url(generated_permalink || generated_url)
+      self.class.sanitize_url(generated_permalink || generated_url)
     end
 
     # Generates a URL from the permalink
