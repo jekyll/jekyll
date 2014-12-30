@@ -1,6 +1,6 @@
 module Jekyll
   class LogAdapter
-    attr_reader :writer
+    attr_reader :writer, :messages
 
     LOG_LEVELS = {
       :debug => ::Logger::DEBUG,
@@ -16,6 +16,7 @@ module Jekyll
     #
     # Returns nothing
     def initialize(writer, level = :info)
+      @messages = []
       @writer = writer
       self.log_level = level
     end
@@ -87,7 +88,9 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      msg = formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      messages << msg
+      msg
     end
 
     # Internal: Format the topic
