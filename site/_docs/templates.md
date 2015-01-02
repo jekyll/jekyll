@@ -303,7 +303,7 @@ You can also choose to include file fragments relative to the current file:
 You won't need to place your included content within the `_includes` directory. Instead,
 the inclusion is specifically relative to the file where the tag is being used. For example,
 if `_posts/2014-09-03-my-file.markdown` uses the `include_relative` tag, the included file
-must be within the `_posts` directory, or one of it's subdirectories. You cannot include
+must be within the `_posts` directory, or one of its subdirectories. You cannot include
 files in other locations.
 
 All the other capabilities of the `include` tag are available to the `include_relative` tag,
