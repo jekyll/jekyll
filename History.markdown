@@ -25,6 +25,8 @@
 
 ### Development Fixes
 
+  * Improve the grammar in the documentation (#3233)
+
 ### Site Enhancements
 
   * Fixing the default host on docs (#3229)
