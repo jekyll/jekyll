@@ -26,6 +26,7 @@
 ### Development Fixes
 
   * Improve the grammar in the documentation (#3233)
+  * Update the LICENSE text to match the MIT license exactly (#3253)
 
 ### Site Enhancements
 
