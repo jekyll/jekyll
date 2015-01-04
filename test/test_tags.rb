@@ -319,7 +319,7 @@ CONTENT
     context "with symlink'd include" do
 
       should "not allow symlink includes" do
-        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+        File.open("tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
         assert_raise IOError do
           content = <<CONTENT
 ---
@@ -610,7 +610,7 @@ CONTENT
     context "with symlink'd include" do
 
       should "not allow symlink includes" do
-        File.open("/tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
+        File.open("tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
         assert_raise IOError do
           content = <<CONTENT
 ---
