@@ -179,22 +179,32 @@ namespace :site do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
-      puts "No gh-pages directory found. Run the following commands first:"
-      puts "  `git clone git@github.com:jekyll/jekyll gh-pages"
-      puts "  `cd gh-pages"
-      puts "  `git checkout gh-pages`"
-      exit(1)
+      puts "Creating gh-pages dir..."
+      sh "git clone git@github.com:jekyll/jekyll gh-pages"
     end
 
-    # Ensure gh-pages branch is up to date.
+    # Ensure latest gh-pages branch history.
     Dir.chdir('gh-pages') do
+      sh "git checkout gh-pages"
       sh "git pull origin gh-pages"
     end
 
-    # Copy to gh-pages dir.
+    # Proceed to purge all files in case we removed a file in this release.
+    puts "Cleaning gh-pages directory..."
+    Dir.glob("gh-pages/{*,.*}") do |path|
+      next if path.eql? "gh-pages/."
+      next if path.eql? "gh-pages/.."
+      next if path.eql? "gh-pages/.git"
+      sh "rm -rf #{path}"
+    end
+
+    # Copy site to gh-pages dir.
     puts "Copying site to gh-pages branch..."
-    Dir.glob("site/*") do |path|
-      next if path.include? "_site"
+    Dir.glob("site/{*,.*}") do |path|
+      next if path.eql? "site/."
+      next if path.eql? "site/.."
+      next if path.eql? "site/.jekyll-metadata"
+      next if path.eql? "site/_site"
       sh "cp -R #{path} gh-pages/"
     end
 
