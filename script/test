@@ -4,6 +4,10 @@
 #   script/test
 #   script/test <test_file>
 
+if [ ! -d tmp ]; then
+  mkdir tmp
+fi
+
 if [ -z "$1" ]; then
   TEST_FILES="./test/test_*.rb"
 else
