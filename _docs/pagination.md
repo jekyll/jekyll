@@ -32,7 +32,7 @@ paginate: 5
 The number should be the maximum number of Posts you’d like to be displayed per-
 page in the generated site.
 
-You may also specify where the destination of the pagination pages:
+You may also specify the destination of the pagination pages:
 
 {% highlight yaml %}
 paginate_path: "blog/page:num/"
