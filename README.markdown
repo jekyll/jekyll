@@ -1,9 +1,9 @@
 # [Jekyll](http://jekyllrb.com/)
 
-[![Gem Version](https://badge.fury.io/rb/jekyll.svg)](https://rubygems.org/gems/jekyll)
-[![Build Status](https://secure.travis-ci.org/jekyll/jekyll.svg?branch=master)](https://travis-ci.org/jekyll/jekyll)
-[![Code Climate](http://img.shields.io/codeclimate/github/jekyll/jekyll.svg)](https://codeclimate.com/github/jekyll/jekyll)
-[![Dependency Status](https://gemnasium.com/jekyll/jekyll.svg)](https://gemnasium.com/jekyll/jekyll)
+[![Gem Version](https://img.shields.io/gem/v/jekyll.svg)](https://rubygems.org/gems/jekyll)
+[![Build Status](https://img.shields.io/travis/jekyll/jekyll/master.svg)](https://travis-ci.org/jekyll/jekyll)
+[![Code Climate](https://img.shields.io/codeclimate/github/jekyll/jekyll.svg)](https://codeclimate.com/github/jekyll/jekyll)
+[![Dependency Status](https://img.shields.io/gemnasium/jekyll/jekyll.svg)](https://gemnasium.com/jekyll/jekyll)
 [![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)](https://hakiri.io/github/jekyll/jekyll/master)
 
 By Tom Preston-Werner, Nick Quaranto, Parker Moore, and many [awesome contributors](https://github.com/jekyll/jekyll/graphs/contributors)!
