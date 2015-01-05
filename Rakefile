@@ -191,20 +191,24 @@ namespace :site do
 
     # Proceed to purge all files in case we removed a file in this release.
     puts "Cleaning gh-pages directory..."
-    Dir.glob("gh-pages/{*,.*}") do |path|
-      next if path.eql? "gh-pages/."
-      next if path.eql? "gh-pages/.."
-      next if path.eql? "gh-pages/.git"
+    purge_exclude = %w[
+      gh-pages/.
+      gh-pages/..
+      gh-pages/.git
+    ]
+    FileList["gh-pages/{*,.*}"].exclude(*purge_exclude).each do |path|
       sh "rm -rf #{path}"
     end
 
     # Copy site to gh-pages dir.
     puts "Copying site to gh-pages branch..."
-    Dir.glob("site/{*,.*}") do |path|
-      next if path.eql? "site/."
-      next if path.eql? "site/.."
-      next if path.eql? "site/.jekyll-metadata"
-      next if path.eql? "site/_site"
+    copy_exclude = %w[
+      site/.
+      site/..
+      site/.jekyll-metadata
+      site/_site
+    ]
+    FileList["site/{*,.*}"].exclude(*copy_exclude).each do |path|
       sh "cp -R #{path} gh-pages/"
     end
 
