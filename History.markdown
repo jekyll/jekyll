@@ -29,6 +29,7 @@
   * Update the LICENSE text to match the MIT license exactly (#3253)
   * Update rake task `site:publish` to fix minor bugs. (#3254)
   * Switch to shields.io for the README badges. (#3255)
+  * Use `FileList` instead of `Dir.glob` in `site:publish` rake task (#3261)
 
 ### Site Enhancements
 
