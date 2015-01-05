@@ -28,6 +28,7 @@
   * Improve the grammar in the documentation (#3233)
   * Update the LICENSE text to match the MIT license exactly (#3253)
   * Update rake task `site:publish` to fix minor bugs. (#3254)
+  * Switch to shields.io for the README badges. (#3255)
 
 ### Site Enhancements
 
