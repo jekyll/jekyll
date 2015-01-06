@@ -494,6 +494,10 @@ module Jekyll
       override['full_rebuild'] || config['full_rebuild']
     end
 
+    def publisher
+      @publisher ||= Publisher.new(self)
+    end
+
     private
 
     def has_relative_page?
@@ -513,10 +517,6 @@ module Jekyll
       name.gsub!(/[^\w\s_-]+/, '')
       name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
       name.gsub(/\s+/, '_')
-    end
-
-    def publisher
-      @publisher ||= Publisher.new(self)
     end
   end
 end

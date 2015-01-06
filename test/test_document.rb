@@ -241,6 +241,34 @@ class TestDocument < Test::Unit::TestCase
     end
   end
 
+  context "documents in a collection" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "collections" => {
+          "slides" => {
+            "output" => true
+          }
+        },
+        "source"      => source_dir,
+        "destination" => dest_dir
+      }))
+      @site.process
+      @files = @site.collections["slides"].docs
+    end
+
+    context "without output overrides" do
+      should "be output according to collection defaults" do
+        assert_not_nil @files.find { |doc| doc.relative_path == "_slides/example-slide-4.html" }
+      end
+    end
+
+    context "with output overrides" do
+      should "be output according its front matter" do
+        assert_nil @files.find { |doc| doc.relative_path == "_slides/non-outputted-slide.html" }
+      end
+    end
+  end
+
   context "a static file in a collection" do
     setup do
       @site = Site.new(Jekyll.configuration({
