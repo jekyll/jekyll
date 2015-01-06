@@ -16,6 +16,7 @@
   * Generalize `Utils#slugify` for any scripts (#3047)
   * Added basic microdata to post template in site template (#3189)
   * Store log messages in an array of messages. (#3244)
+  * Allow collection documents to override `output` property in front matter (#3172)
 
 ### Bug Fixes
 
