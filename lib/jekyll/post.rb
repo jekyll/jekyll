@@ -23,6 +23,7 @@ module Jekyll
     ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
       content
       excerpt
+      excerpt_separator
     ]
 
     # Post name validator. Post filenames must be like:
@@ -116,6 +117,13 @@ module Jekyll
     # Returns the post title
     def title
       data.fetch('title') { titleized_slug }
+    end
+
+    # Public: the Post excerpt_separator, from the YAML Front-Matter or empty string
+    #
+    # Returns the post excerpt_separator
+    def excerpt_separator
+      data.fetch('excerpt_separator') { "" }
     end
 
     # Turns the post slug into a suitable title
@@ -307,7 +315,7 @@ module Jekyll
     end
 
     def generate_excerpt?
-      !(site.config['excerpt_separator'].to_s.empty?)
+      !site.config['excerpt_separator'].to_s.empty? || !excerpt_separator.empty?
     end
   end
 end

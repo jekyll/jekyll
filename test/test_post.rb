@@ -397,6 +397,22 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with page's excerpt_separator setting" do
+          setup do
+            file = "2015-01-08-post-excerpt-separator.markdown"
+
+            @post.process(file)
+            @post.read_yaml(@source, file)
+            @post.transform
+          end
+
+          should "respect given separator" do
+            assert @post.excerpt.include?("First paragraph"), "contains first paragraph"
+            assert @post.excerpt.include?("Second paragraph"), "contains second paragraph"
+            assert !@post.excerpt.include?("Third paragraph"), "does not contains third paragraph"
+          end
+        end
+
         context "with custom excerpt" do
           setup do
             file = "2013-04-11-custom-excerpt.markdown"
