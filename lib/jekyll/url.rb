@@ -37,7 +37,7 @@ module Jekyll
     #
     # Returns the String URL
     def to_s
-      sanitize_url(generated_permalink || generated_url)
+      self.class.sanitize_url(generated_permalink || generated_url)
     end
 
     # Generates a URL from the permalink
@@ -63,22 +63,6 @@ module Jekyll
         break result if result.index(':').nil?
         result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
       end
-    end
-
-    # Returns a sanitized String URL
-    def sanitize_url(in_url)
-      url = in_url \
-        # Remove all double slashes
-        .gsub(/\/\//, '/') \
-        # Remove every URL segment that consists solely of dots
-        .split('/').reject{ |part| part =~ /^\.+$/ }.join('/') \
-        # Always add a leading slash
-        .gsub(/\A([^\/])/, '/\1')
-
-      # Append a trailing slash to the URL if the unsanitized URL had one
-      url << "/" if in_url[-1].eql?('/')
-
-      url
     end
 
     # Escapes a path to be a valid URL path segment

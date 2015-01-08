@@ -124,6 +124,10 @@ task :console do
   sh "irb -rubygems -r ./lib/#{name}.rb"
 end
 
+require 'rake/extensiontask'
+spec = Gem::Specification.load(gemspec_file)
+Rake::ExtensionTask.new(name, spec)
+
 #############################################################################
 #
 # Site tasks - http://jekyllrb.com

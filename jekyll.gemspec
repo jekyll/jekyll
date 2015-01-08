@@ -21,8 +21,9 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/jekyll/jekyll'
 
   all_files       = `git ls-files -z`.split("\x0")
-  s.files         = all_files.grep(%r{^(bin|lib)/})
+  s.files         = all_files.grep(%r{^(bin|lib|ext)/})
   s.executables   = all_files.grep(%r{^bin/}) { |f| File.basename(f) }
+  s.extensions    = ['ext/jekyll/extconf.rb']
   s.require_paths = ['lib']
 
   s.rdoc_options = ['--charset=UTF-8']

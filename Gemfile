@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake', '~> 10.1'
+gem 'rake-compiler', '~> 0.9'
 gem 'rdoc', '~> 3.11'
 gem 'redgreen', '~> 1.2'
 gem 'shoulda', '~> 3.5'
