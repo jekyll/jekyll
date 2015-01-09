@@ -42,7 +42,7 @@ eos
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
-        code = super.to_s.strip
+        code = super.to_s.gsub(/^\n+|\n+$/, '')
 
         is_safe = !!context.registers[:site].safe
 
