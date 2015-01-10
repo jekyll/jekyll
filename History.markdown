@@ -45,6 +45,7 @@
   * Semantic structure improvements to the post and page layouts (#3251)
   * Add new AsciiDoc plugin to list of third-party plugins. (#3277)
   * Specify that all transformable collection documents must contain YAML front matter (#3271)
+  * Assorted accessibility fixes (#3256)
 
 ## 2.5.3 / 2014-12-22
 
