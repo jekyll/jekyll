@@ -174,6 +174,46 @@ CONTENT
     end
   end
 
+  context "post content has highlight tag with preceding spaces & lines" do
+    setup do
+      fill_post <<-EOS
+
+
+     [,1] [,2]
+[1,] FALSE TRUE
+[2,] FALSE TRUE
+EOS
+    end
+
+    should "only strip the preceding newlines" do
+      assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+    end
+  end
+
+  context "post content has highlight tag with preceding spaces & Windows-style newlines" do
+    setup do
+      fill_post "\r\n\r\n\r\n     [,1] [,2]"
+    end
+
+    should "only strip the preceding newlines" do
+      assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+    end
+  end
+
+  context "post content has highlight tag with only preceding spaces" do
+    setup do
+      fill_post <<-EOS
+     [,1] [,2]
+[1,] FALSE TRUE
+[2,] FALSE TRUE
+EOS
+    end
+
+    should "only strip the preceding newlines" do
+      assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+    end
+  end
+
   context "simple post with markdown and pre tags" do
     setup do
       @content = <<CONTENT
