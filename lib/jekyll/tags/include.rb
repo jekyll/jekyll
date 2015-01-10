@@ -18,6 +18,12 @@ module Jekyll
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
+      class << self
+        def source_cache
+          @@source_cache ||= {}
+        end
+      end
+
       def initialize(tag_name, markup, tokens)
         super
         @includes_dir = tag_includes_dir
@@ -156,7 +162,7 @@ eos
 
       # This method allows to modify the file content by inheriting from the class.
       def source(file, context)
-        File.read(file, file_read_opts(context))
+        self.class.source_cache[file] ||= File.read(file, file_read_opts(context))
       end
     end
 

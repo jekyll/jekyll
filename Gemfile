@@ -23,6 +23,7 @@ gem 'minitest' if RUBY_PLATFORM =~ /cygwin/
 gem 'test-unit' if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
 
 if ENV['BENCHMARK']
+  gem 'benchmark-ips'
   gem 'rbtrace'
   gem 'stackprof'
 end
