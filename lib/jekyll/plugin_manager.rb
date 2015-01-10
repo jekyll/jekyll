@@ -35,7 +35,7 @@ module Jekyll
       if !ENV["JEKYLL_NO_BUNDLER_REQUIRE"] && File.file?("Gemfile")
         require "bundler"
         Bundler.setup # puts all groups on the load path
-        required_gems = Bundler.require(:jekyll_plugins) # requires the gems in this group only
+        required_gems = Bundler.require
         Jekyll.logger.debug("PluginManager:", "Required #{required_gems.map(&:name).join(', ')}")
         ENV["JEKYLL_NO_BUNDLER_REQUIRE"] = "true"
         true
