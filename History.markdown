@@ -40,6 +40,7 @@
   * Add link to 'Adding Ajax pagination to Jekyll' to Resources page (#3186)
   * Add a Resources link to tutorial on building dynamic navbars (#3185)
   * Semantic structure improvements to the post and page layouts (#3251)
+  * Add new AsciiDoc plugin to list of third-party plugins. (#3277)
 
 ## 2.5.3 / 2014-12-22
 
