@@ -6,6 +6,7 @@
   * Drop support for Ruby 1.9.3. (#3235)
   * Upgrade to Liquid 3.0.0 (#3002)
   * Support Ruby v2.2 (#3234)
+  * Support RDiscount 2 (#2767)
 
 ### Minor Enhancements
 
