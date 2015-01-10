@@ -5,24 +5,11 @@
 #   script/test <test_file>
 
 if [ -z "$1" ]; then
-  TEST_FILES="./test/test_*.rb"
+  TEST_FILES=$(ruby -e "puts Dir.glob('test/test_*.rb')")
 else
   TEST_FILES="$@"
 fi
 
-# bundle exec gem env
-GEM_DIR=$(bundle exec gem env | grep -C 1 "GEM PATHS" | tail -1 | cut -d '-' -f2 | cut -d' ' -f2)
-RAKE_LIB_WITH_VERSION=$(bundle exec ruby -e "puts Gem::Specification.find_by_name('rake').gem_dir.split('/').last + '/lib'")
-RAKE_LIB_DIR="${GEM_DIR}/gems/${RAKE_LIB_WITH_VERSION}"
-
-test -d "${RAKE_LIB_DIR}" || {
-  echo "No ${RAKE_LIB_DIR}. Installing Rake."
-  bundle show rake | cut -d'/' -f12 | cut -d'-' -f 2 | xargs bundle exec gem install rake -v
-}
-
 set -x
 
-time bundle exec ruby -I"lib:test" \
-  -I"${RAKE_LIB_DIR}" \
-  "${RAKE_LIB_DIR}/rake/rake_test_loader.rb" \
-  $TEST_FILES
+time bundle exec ruby -I"lib:test" -rloader $TEST_FILES
