@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Sites using Jekyll
-prev_section: troubleshooting
-next_section: resources
 permalink: /docs/sites/
 ---
 

@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Blog migrations
-prev_section: assets
-next_section: templates
 permalink: /docs/migrations/
 ---
 

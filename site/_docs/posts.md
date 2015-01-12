@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Writing posts
-prev_section: frontmatter
-next_section: drafts
 permalink: /docs/posts/
 ---
 

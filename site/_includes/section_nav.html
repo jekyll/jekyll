@@ -1,22 +1,48 @@
-<div class="section-nav">
-  <div class="left align-right">
-    {% if page.prev_section != null %}
-      <a href="/docs/{{ page.prev_section }}/" class="prev">
-        Back
-      </a>
-    {% else %}
-      <span class="prev disabled">Back</span>
-    {% endif %}
-  </div>
-  <div class="right align-left">
-    {% if page.next_section != null %}
-      <a href="/docs/{{ page.next_section }}/" class="next">
-        Next
-      </a>
-    {% else %}
-      <span class="next disabled">Next</span>
-    {% endif %}
-  </div>
-  <div class="clear"></div>
-</div>
+{% comment %}
+Lets turn our yaml into a structured list of documents without titles.
+{% endcomment %}
 
+{% assign docs = site.data.docs | map: 'docs' %}
+{% capture document_array_string %}
+{% for doc in docs %}
+  {% assign last_last = forloop.last %}
+  {% for title in doc %}
+    {{title}}{% unless forloop.last and last_last %},{% endunless %}
+  {% endfor %}
+{% endfor %}
+{% endcapture %}
+{% assign document_array = document_array_string | strip_newlines | split: ',' %}
+
+{% comment %}
+Because this is built for every page, lets find where we are in the document list by comparing url strings.
+Then if there's something previous or next, lets build links to it.
+Note: When arrays are accessed directly, they are zero based.
+{% endcomment %}
+
+{% for document in document_array %}
+  {% assign document_url = document | prepend:"/docs/" | append:"/" %}
+  {% if document_url == page.url %}
+    <div class="section-nav">
+      <div class="left align-right">
+          {% if forloop.first %}
+            <span class="prev disabled">Back</span>
+          {% else %}
+            {% assign previous = forloop.index0 | minus: 1 %}
+            {% assign previous_page = document_array[previous] | prepend:"/docs/" | append:"/" %}
+            <a href="{{ previous_page }}" class="prev">Back</a>
+          {% endif %}
+      </div>
+      <div class="right align-left">
+          {% if forloop.last %}
+            <span class="next disabled">Next</span>
+          {% else %}
+            {% assign next = forloop.index0 | plus: 1 %}
+            {% assign next_page = document_array[next] | prepend:"/docs/" | append:"/" %}
+            <a href="{{ next_page }}" class="next">Next</a>
+          {% endif %}
+      </div>
+    </div>
+    <div class="clear"></div>
+    {% break %}
+  {% endif %}
+{% endfor %}

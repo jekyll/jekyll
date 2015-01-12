@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Assets
-prev_section: datafiles
-next_section: migrations
 permalink: /docs/assets/
 ---
 

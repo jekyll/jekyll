@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Plugins
-prev_section: pagination
-next_section: extras
 permalink: /docs/plugins/
 ---
 

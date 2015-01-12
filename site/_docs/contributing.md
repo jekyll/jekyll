@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Contributing
-prev_section: upgrading
-next_section: history
 permalink: /docs/contributing/
 ---
 
