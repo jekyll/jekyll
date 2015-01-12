@@ -156,7 +156,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
   <p>
     The contents of <code>&lt;destination&gt;</code> are automatically
     cleaned, by default, when the site is built. Files or folders that are not
-    created by your site will be removed. The <code>&lt;keep_files&gt;</code> configuration directive can optionally retain generated content in `destination`.
+    created by your site will be removed. Some files could be retained by specifying them within the  <code>&lt;keep_files&gt;</code> configuration directive.
   </p>
   <p>
     Do not use an important location for <code>&lt;destination&gt;</code>; instead, use it as
