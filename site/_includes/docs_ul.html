@@ -13,6 +13,7 @@
   {% for p in site.docs %}
     {% if p.url == item_url %}
       <li class="{{ c }}"><a href="{{ site.url }}{{ p.url }}">{{ p.title }}</a></li>
+      {% break %}
     {% endif %}
   {% endfor %}
 
