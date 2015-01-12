@@ -195,6 +195,7 @@ namespace :site do
       gh-pages/.
       gh-pages/..
       gh-pages/.git
+      gh-pages/.gitignore
     ]
     FileList["gh-pages/{*,.*}"].exclude(*purge_exclude).each do |path|
       sh "rm -rf #{path}"
@@ -206,6 +207,7 @@ namespace :site do
       site/.
       site/..
       site/.jekyll-metadata
+      site/.sass-cache
       site/_site
     ]
     FileList["site/{*,.*}"].exclude(*copy_exclude).each do |path|
