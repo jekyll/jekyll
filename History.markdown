@@ -48,6 +48,7 @@
   * Specify that all transformable collection documents must contain YAML front matter (#3271)
   * Assorted accessibility fixes (#3256)
   * Update configuration docs to mention `keep_files` for `destination` (#3288)
+  * Break when we successfully generate nav link to save CPU cycles. (#3291)
 
 ## 2.5.3 / 2014-12-22
 
