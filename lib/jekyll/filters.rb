@@ -1,5 +1,6 @@
 require 'uri'
 require 'json'
+require 'date'
 
 module Jekyll
   module Filters
@@ -302,6 +303,8 @@ module Jekyll
       case input
       when Time
         input
+      when Date
+        input.to_time
       when String
         Time.parse(input) rescue Time.at(input.to_i)
       when Numeric
