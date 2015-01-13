@@ -1,5 +1,6 @@
 require 'uri'
 require 'json'
+require 'date'
 
 module Jekyll
   module Filters
