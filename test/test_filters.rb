@@ -17,6 +17,7 @@ class TestFilters < Test::Unit::TestCase
     setup do
       @filter = JekyllFilter.new({"source" => source_dir, "destination" => dest_dir, "timezone" => "UTC"})
       @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
+      @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1399680607
       @array_of_objects = [
@@ -77,6 +78,24 @@ class TestFilters < Test::Unit::TestCase
 
         should "format a time according to RFC-822" do
           assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
+        end
+      end
+
+      context "with Date object" do
+        should "format a date with short format" do
+          assert_equal "27 Mar 2013", @filter.date_to_string(@sample_date)
+        end
+
+        should "format a date with long format" do
+          assert_equal "27 March 2013", @filter.date_to_long_string(@sample_date)
+        end
+
+        should "format a time with xmlschema" do
+          assert_equal "2013-03-27T00:00:00+00:00", @filter.date_to_xmlschema(@sample_date)
+        end
+
+        should "format a time according to RFC-822" do
+          assert_equal "Wed, 27 Mar 2013 00:00:00 +0000", @filter.date_to_rfc822(@sample_date)
         end
       end
 
