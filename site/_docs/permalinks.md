@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Permalinks
-prev_section: templates
-next_section: pagination
 permalink: /docs/permalinks/
 ---
 

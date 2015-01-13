@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Resources
-prev_section: sites
-next_section: upgrading
 permalink: /docs/resources/
 ---
 

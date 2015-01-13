@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Variables
-prev_section: pages
-next_section: collections
 permalink: /docs/variables/
 ---
 

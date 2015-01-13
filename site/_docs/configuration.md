@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Configuration
-prev_section: structure
-next_section: frontmatter
 permalink: /docs/configuration/
 ---
 

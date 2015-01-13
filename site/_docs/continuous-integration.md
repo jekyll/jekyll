@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Continuous Integration
-prev_section: deployment-methods
-next_section: troubleshooting
 permalink: /docs/continuous-integration/
 ---
 
