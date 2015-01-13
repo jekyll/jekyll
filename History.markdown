@@ -21,6 +21,7 @@
 
 ### Bug Fixes
 
+  * `time()`pre-filter method should accept a `Date` object (#3299)
   * Remove unneeded end tag for `link` in site template (#3236)
   * Kramdown: Use `enable_coderay` key instead of `use_coderay` (#3237)
   * Unescape `Document` output path (#2924)
