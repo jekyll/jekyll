@@ -49,6 +49,7 @@
   * Assorted accessibility fixes (#3256)
   * Update configuration docs to mention `keep_files` for `destination` (#3288, #3296)
   * Break when we successfully generate nav link to save CPU cycles. (#3291)
+  * Update usage docs to mention `keep_files` and a warning about `destination` cleaning (#3295)
 
 ## 2.5.3 / 2014-12-22
 
