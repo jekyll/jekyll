@@ -15,3 +15,4 @@ coverage
 .sass-cache
 tmp/*
 .jekyll-metadata
+/vendor
