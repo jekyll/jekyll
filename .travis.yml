@@ -7,8 +7,12 @@ rvm:
 - 2.0
 env:
   matrix:
-    - TEST_SUITE=test
-    - TEST_SUITE=cucumber
+    - "ACTIVE_SUPPORT_VERSION=3.2 TEST_SUITE=test"
+    - "ACTIVE_SUPPORT_VERSION=4.1 TEST_SUITE=test"
+    - "ACTIVE_SUPPORT_VERSION=4.2 TEST_SUITE=test"
+    - "ACTIVE_SUPPORT_VERSION=3.2 TEST_SUITE=cucumber"
+    - "ACTIVE_SUPPORT_VERSION=4.1 TEST_SUITE=cucumber"
+    - "ACTIVE_SUPPORT_VERSION=4.2 TEST_SUITE=cucumber"
 before_script: bundle update
 script: script/cibuild
 notifications:
