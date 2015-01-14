@@ -53,6 +53,7 @@
   * Break when we successfully generate nav link to save CPU cycles. (#3291)
   * Update usage docs to mention `keep_files` and a warning about `destination` cleaning (#3295)
   * Add logic to automatically generate the `next_section` and `prev_section` navigation items (#3292)
+  * Some small fixes for the Plugins TOC. (#3306)
 
 ## 2.5.3 / 2014-12-22
 
