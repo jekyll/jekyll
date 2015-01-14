@@ -53,9 +53,10 @@ You have 3 options for installing plugins:
 
 In general, plugins you make will fall into one of three categories:
 
-1. Generators
-2. Converters
-3. Tags
+1. [Generators](#Generators)
+2. [Converters](#Converters)
+3. [Commands](#Commands)
+4. [Tags](#Tags)
 
 ## Generators
 
@@ -248,7 +249,7 @@ In our example, `UpcaseConverter#matches` checks if our filename extension is
 simply uppercasing the entire content string. Finally, when it saves the page,
 it will do so with a `.html` extension.
 
-## Command
+## Commands
 
 As of version 2.5.0, Jekyll can be extended with plugins which provide
 subcommands for the `jekyll` executable. This is possible by including the
