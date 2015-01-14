@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestExcerpt < Test::Unit::TestCase
+class TestExcerpt < Minitest::Test
   def setup_post(file)
     Post.new(@site, source_dir, '', file)
   end

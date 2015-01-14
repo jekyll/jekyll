@@ -1,3 +1,4 @@
+
 require 'simplecov'
 require 'simplecov-gem-adapter'
 SimpleCov.start('gem') do
@@ -5,9 +6,9 @@ SimpleCov.start('gem') do
   add_filter "/vendor/gem"
 end
 
-require 'rubygems'
-require 'test/unit'
 require 'ostruct'
+require 'minitest/autorun'
+require 'minitest/reporters'
 gem 'RedCloth', '>= 4.2.1'
 
 require 'jekyll'
@@ -21,11 +22,15 @@ require 'shoulda'
 require 'rr'
 
 include Jekyll
+Minitest::Reporters.use! [
+  Minitest::Reporters::DefaultReporter.new({
+    :color => true, :slow_count => 1
+  })
+]
 
-# Send STDERR into the void to suppress program output messages
 STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 
-class Test::Unit::TestCase
+class Minitest::Test
   include RR::Adapters::TestUnit
 
   def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)

@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCoffeeScript < Test::Unit::TestCase
+class TestCoffeeScript < Minitest::Test
   context "converting CoffeeScript" do
     setup do
       @site = Jekyll::Site.new(Jekyll.configuration({

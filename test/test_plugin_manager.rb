@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestPluginManager < Test::Unit::TestCase
+class TestPluginManager < Minitest::Test
   def with_no_gemfile
     FileUtils.mv "Gemfile", "Gemfile.old"
     yield

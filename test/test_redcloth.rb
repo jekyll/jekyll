@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
-class TestRedCloth < Test::Unit::TestCase
+class TestRedCloth < Minitest::Test
 
   context "RedCloth default (no explicit config) hard_breaks enabled" do
     setup do
