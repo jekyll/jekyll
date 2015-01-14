@@ -7,8 +7,8 @@ rvm:
 - 2.0
 env:
   matrix:
-  - TEST_SUITE=test
-  - TEST_SUITE=cucumber
+    - TEST_SUITE=test
+    - TEST_SUITE=cucumber
 before_script: bundle update
 script: script/cibuild
 notifications:
@@ -16,9 +16,9 @@ notifications:
     on_success: change
     on_failure: change
     channels:
-    - irc.freenode.org#jekyll
+      - irc.freenode.org#jekyll
     template:
-    - "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
+      - "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
   email:
     on_success: never
     on_failure: never
