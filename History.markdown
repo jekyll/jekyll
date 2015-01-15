@@ -538,7 +538,7 @@
   * Add `Jekyll::LiquidExtensions` with `.lookup_variable` method for easy
     looking up of variable values in a Liquid context. (#2253)
   * Remove literal lang name from class (#2292)
-  * Return `utf-8` encoding in header for  webrick error page response (#2289)
+  * Return `utf-8` encoding in header for webrick error page response (#2289)
   * Make template site easier to customize (#2268)
   * Add two-digit year to permalink template option (#2301)
   * Add `site.documents` to Liquid payload (list of all docs) (#2295)

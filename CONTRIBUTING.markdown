@@ -67,7 +67,7 @@ You can find the documentation for jekyllrb.com in the
 [site](https://github.com/jekyll/jekyll/tree/master/site) directory of
 Jekyll's repo on GitHub.com.
 
-All documentation pull requests should be directed at `master`.  Pull
+All documentation pull requests should be directed at `master`. Pull
 requests directed at another branch will not be accepted.
 
 The [Jekyll wiki](https://github.com/jekyll/jekyll/wiki) on GitHub
