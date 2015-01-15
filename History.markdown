@@ -38,6 +38,7 @@
   * Use `FileList` instead of `Dir.glob` in `site:publish` rake task (#3261)
   * Fix test script to be platform-independent (#3279)
   * Instead of symlinking `/tmp`, create and symlink a local `tmp` in the tests (#3258)
+  * Fix some spacing (#3312)
 
 ### Site Enhancements
 
