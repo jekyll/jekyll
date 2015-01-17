@@ -269,7 +269,13 @@ module Jekyll
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
       path = site.in_dest_dir(dest, URL.unescape_path(url))
-      path = File.join(path, "index.html") if path[/\.html?$/].nil?
+      if path[/\.html?$/].nil?
+        if self.site.use_post_dirs
+          path = File.join(path, "index.html")
+        else
+          path += ".html"
+        end
+      end
       path
     end
 

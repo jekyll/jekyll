@@ -590,7 +590,7 @@ class TestPost < Test::Unit::TestCase
                                         'escape-+ %20[].html'))
         end
 
-        should "write properly without html extension" do
+        should "write properly without html extension and with post dirs" do
           post = setup_post("2008-10-18-foo-bar.textile")
           post.site.permalink_style = ":title"
           do_render(post)
@@ -598,6 +598,17 @@ class TestPost < Test::Unit::TestCase
 
           assert File.directory?(dest_dir)
           assert File.exist?(File.join(dest_dir, 'foo-bar', 'index.html'))
+        end
+
+        should "write properly without html extension or post dirs" do
+          post = setup_post("2008-10-18-foo-bar.textile")
+          post.site.permalink_style = ":title"
+          post.site.use_post_dirs = false
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exists?(File.join(dest_dir, 'foo-bar.html'))
         end
 
         should "insert data" do

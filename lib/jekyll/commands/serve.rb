@@ -4,6 +4,24 @@ module Jekyll
     class Serve < Command
 
       class << self
+        require 'webrick'
+
+        class JekyllFileHandler < WEBrick::HTTPServlet::FileHandler
+          def initialize(server, root, options={}, default=WEBrick::Config::FileHandler)
+            @default_suffix = options['default_suffix']
+            super(server, root, options, default)
+          end
+
+          def search_file(req, res, basename)
+            found = super(req, res, basename)
+            # Redirect to .html if use_post_dirs is not set.
+            if !found && @default_suffix
+              basename += @default_suffix
+              found = super(req, res, basename)
+            end
+            return found
+          end
+        end
 
         def init_with_program(prog)
           prog.command(:serve) do |c|
@@ -40,9 +58,9 @@ module Jekyll
 
           s.mount(
             options['baseurl'],
-            WEBrick::HTTPServlet::FileHandler,
+            JekyllFileHandler,
             destination,
-            file_handler_options
+            file_handler_options(options)
           )
 
           Jekyll.logger.info "Server address:", server_address(s, options)
@@ -59,8 +77,6 @@ module Jekyll
         end
 
         def setup(destination)
-          require 'webrick'
-
           FileUtils.mkdir_p(destination)
 
           # monkey patch WEBrick using custom 404 page (/404.html)
@@ -122,11 +138,15 @@ module Jekyll
         end
 
         # recreate NondisclosureName under utf-8 circumstance
-        def file_handler_options
-          WEBrick::Config::FileHandler.merge({
+        def file_handler_options(options)
+          fh_option = WEBrick::Config::FileHandler.merge({
             :FancyIndexing     => true,
             :NondisclosureName => ['.ht*','~*']
           })
+          if options['permalink'][/\.html?$/].nil? && !options['use_post_dirs']
+            fh_option['default_suffix'] = '.html'
+          end
+          fh_option
         end
 
       end
