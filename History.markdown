@@ -56,6 +56,7 @@
   * Update usage docs to mention `keep_files` and a warning about `destination` cleaning (#3295)
   * Add logic to automatically generate the `next_section` and `prev_section` navigation items (#3292)
   * Some small fixes for the Plugins TOC. (#3306)
+  * Added versioning comment to configuration file (#3314)
 
 ## 2.5.3 / 2014-12-22
 
