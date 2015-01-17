@@ -19,6 +19,7 @@
   * Store log messages in an array of messages. (#3244)
   * Allow collection documents to override `output` property in front matter (#3172)
   * Keep file modification times between builds for static files (#3220)
+  * Only downcase mixed-case categories for the URL (#2571)
 
 ### Bug Fixes
 
