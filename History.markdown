@@ -20,6 +20,7 @@
   * Allow collection documents to override `output` property in front matter (#3172)
   * Keep file modification times between builds for static files (#3220)
   * Only downcase mixed-case categories for the URL (#2571)
+  * Added per post `excerpt_separator` functionality (#3274)
 
 ### Bug Fixes
 
