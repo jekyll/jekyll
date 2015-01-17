@@ -8,7 +8,7 @@ def file_content_from_hash(input_hash)
     input_hash['content']
   end
 
-  <<EOF
+  <<-EOF
 ---
 #{matter}
 ---
@@ -40,7 +40,7 @@ end
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
 Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
   File.open(file, 'w') do |f|
-    f.write <<EOF
+    f.write <<-EOF
 ---
 #{key || 'layout'}: #{value || 'nil'}
 ---
