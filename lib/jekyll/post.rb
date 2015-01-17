@@ -124,7 +124,7 @@ module Jekyll
     #
     # Returns the post excerpt_separator
     def excerpt_separator
-      data.fetch('excerpt_separator') { site.config['excerpt_separator'].to_s }
+      (data['excerpt_separator'] || site.config['excerpt_separator']).to_s
     end
 
     # Turns the post slug into a suitable title
