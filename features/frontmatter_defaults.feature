@@ -25,7 +25,7 @@ Feature: frontmatter defaults
     And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {custom: "some special data", author: "Ben"}}]"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "<p>some special data</p><div>Ben</div>" in "_site/2013/09/11/default-data.html"
+    And I should see "<p>some special data</p>\n<div>Ben</div>" in "_site/2013/09/11/default-data.html"
     And I should see "just some special data by Ben" in "_site/index.html"
 
   Scenario: Override frontmatter defaults by path
