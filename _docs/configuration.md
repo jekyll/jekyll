@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Configuration
-prev_section: structure
-next_section: frontmatter
 permalink: /docs/configuration/
 ---
 
@@ -390,7 +388,7 @@ defaults:
   -
     scope:
       path: "projects"
-      type: "pages"
+      type: "pages" # previously `page` in Jekyll 2.2.
     values:
       layout: "project" # overrides previous default layout
       author: "Mr. Hyde"

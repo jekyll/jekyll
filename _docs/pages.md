@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Creating pages
-prev_section: drafts
-next_section: variables
 permalink: /docs/pages/
 ---
 

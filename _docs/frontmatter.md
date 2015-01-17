@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Front Matter
-prev_section: configuration
-next_section: posts
 permalink: /docs/frontmatter/
 ---
 

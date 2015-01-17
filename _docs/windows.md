@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Jekyll on Windows
-prev_section: configuration
-next_section: posts
 permalink: /docs/windows/
 ---
 

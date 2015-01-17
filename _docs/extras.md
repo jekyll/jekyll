@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Extras
-prev_section: plugins
-next_section: github-pages
 permalink: /docs/extras/
 ---
 
