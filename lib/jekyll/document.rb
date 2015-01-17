@@ -7,6 +7,8 @@ module Jekyll
     attr_reader   :path, :site, :extname
     attr_accessor :content, :collection, :output
 
+    YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+
     # Create a new Document.
     #
     # site - the Jekyll::Site instance to which this Document belongs
@@ -217,7 +219,7 @@ module Jekyll
             @data = defaults
           end
           @content = File.read(path, merged_file_read_opts(opts))
-          if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
+          if content =~ YAML_FRONT_MATTER_REGEXP
             @content = $POSTMATCH
             data_file = SafeYAML.load($1)
             unless data_file.nil?

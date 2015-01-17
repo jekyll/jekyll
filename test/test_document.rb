@@ -44,6 +44,26 @@ class TestDocument < Test::Unit::TestCase
       }, @document.data)
     end
 
+    context "with YAML ending in three dots" do
+
+      setup do
+        @site = Site.new(Jekyll.configuration({
+          "collections" => ["methods"],
+          "source"      => source_dir,
+          "destination" => dest_dir
+        }))
+        @site.process
+        @document = @site.collections["methods"].docs.last
+      end
+
+      should "know its data" do
+        assert_equal({
+          "title" => "YAML with Dots",
+          "whatever" => "foo.bar"
+          }, @document.data)
+      end
+    end
+
     should "output the collection name in the #to_liquid method" do
       assert_equal @document.to_liquid['collection'], "methods"
     end
