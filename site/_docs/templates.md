@@ -177,17 +177,6 @@ common tasks easier.
     </tr>
     <tr>
       <td>
-        <p class="name"><strong>Textilize</strong></p>
-        <p>Convert a Textile-formatted string into HTML, formatted via RedCloth</p>
-      </td>
-      <td class="align-center">
-        <p>
-         <code class="filter">{% raw %}{{ page.excerpt | textilize }}{% endraw %}</code>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
         <p class="name"><strong>Markdownify</strong></p>
         <p>Convert a Markdown-formatted string into HTML.</p>
       </td>

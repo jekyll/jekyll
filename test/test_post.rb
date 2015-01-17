@@ -746,13 +746,6 @@ class TestPost < Test::Unit::TestCase
       assert conv.kind_of?(Jekyll::Converters::Identity), "The converter for .Rmd should be the Identity converter."
     end
 
-    should "process .text as textile under alternate configuration" do
-      @site.config['textile_ext'] = 'textile,text'
-      post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Textile
-    end
-
   end
 
   context "site config with category" do

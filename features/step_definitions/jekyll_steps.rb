@@ -84,7 +84,7 @@ end
 Given /^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash['title'])
-    ext = input_hash['type'] || 'textile'
+    ext = input_hash['type'] || 'markdown'
     before, after = location(folder, direction)
 
     case status

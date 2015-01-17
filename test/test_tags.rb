@@ -231,17 +231,6 @@ puts "3..2..1.."
 CONTENT
     end
 
-    context "using Textile" do
-      setup do
-        create_post(@content, {}, Jekyll::Converters::Textile)
-      end
-
-      # Broken in RedCloth 4.1.9
-      should "not textilize highlight block" do
-        assert_no_match %r{3\.\.2\.\.1\.\.&quot;</span><br />}, @result
-      end
-    end
-
     context "using Maruku" do
       setup do
         create_post(@content)

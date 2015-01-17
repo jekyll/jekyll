@@ -27,10 +27,6 @@ class TestFilters < Test::Unit::TestCase
       ]
     end
 
-    should "textilize with simple string" do
-      assert_equal "<p>something <strong>really</strong> simple</p>", @filter.textilize("something *really* simple")
-    end
-
     should "markdownify with simple string" do
       assert_equal "<p>something <strong>really</strong> simple</p>\n", @filter.markdownify("something **really** simple")
     end
