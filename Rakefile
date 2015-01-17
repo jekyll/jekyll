@@ -238,8 +238,7 @@ namespace :site do
       front_matter = {
         "layout" => "docs",
         "title" => "History",
-        "permalink" => "/docs/history/",
-        "prev_section" => "contributing"
+        "permalink" => "/docs/history/"
       }
       Dir.chdir('site/_docs/') do
         File.open("history.md", "w") do |file|
