@@ -54,6 +54,28 @@ Feature: frontmatter defaults
     And I should see "root: Overview for the webpage" in "_site/index.html"
     And I should see "subfolder: Overview for the special section" in "_site/special/index.html"
 
+  Scenario: Use frontmatter variables by relative path
+    Given I have a _layouts directory
+    And I have a main layout that contains "main: {{ content }}"
+
+    And I have a _posts directory
+    And I have the following post:
+      | title | date       | content                               |
+      | about | 2013-10-14 | content of site/2013/10/14/about.html |
+    And I have a special/_posts directory
+    And I have the following post in "special":
+      | title  | date       | path  | content                                        |
+      | about1 | 2013-10-14 | local | content of site/special/2013/10/14/about1.html |
+      | about2 | 2013-10-14 | local | content of site/special/2013/10/14/about2.html |
+
+    And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "main"}}, {scope: {path: "special/_posts"}, values: {layout: "main"}}, {scope: {path: "_posts"}, values: {layout: "main"}}]"
+
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "main: <p>content of site/2013/10/14/about.html</p>" in "_site/2013/10/14/about.html"
+    And I should see "main: <p>content of site/special/2013/10/14/about1.html</p>" in "_site/special/2013/10/14/about1.html"
+    And I should see "main: <p>content of site/special/2013/10/14/about2.html</p>" in "_site/special/2013/10/14/about2.html"
+
   Scenario: Override frontmatter defaults by type
     Given I have a _posts directory
     And I have the following post:
@@ -81,7 +103,7 @@ Feature: frontmatter defaults
   Scenario: Use frontmatter defaults in collections
     Given I have a _slides directory
     And I have a "index.html" file that contains "nothing"
-    And I have a "_slides/slide1.html" file with content: 
+    And I have a "_slides/slide1.html" file with content:
     """
     ---
     ---
@@ -107,7 +129,7 @@ Feature: frontmatter defaults
   Scenario: Override frontmatter defaults inside a collection
     Given I have a _slides directory
     And I have a "index.html" file that contains "nothing"
-    And I have a "_slides/slide2.html" file with content: 
+    And I have a "_slides/slide2.html" file with content:
     """
     ---
     myval: Override
