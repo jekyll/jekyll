@@ -100,6 +100,15 @@ Feature: frontmatter defaults
     And I should see "nothing" in "_site/override.html"
     But the "_site/perma.html" file should not exist
 
+  Scenario: Define permalink default for posts
+    Given I have a _posts directory
+    And I have the following post:
+      | title          | date       | category | content |
+      | testpost       | 2013-10-14 | blog     | blabla  |
+    And I have a configuration file with "defaults" set to "[{scope: {path: "", type: "posts"}, values: {permalink: "/:categories/:title/"}}]"
+    When I run jekyll build
+    Then I should see "blabla" in "_site/blog/testpost/index.html"
+
   Scenario: Use frontmatter defaults in collections
     Given I have a _slides directory
     And I have a "index.html" file that contains "nothing"
