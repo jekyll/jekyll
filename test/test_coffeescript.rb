@@ -3,10 +3,7 @@ require 'helper'
 class TestCoffeeScript < Test::Unit::TestCase
   context "converting CoffeeScript" do
     setup do
-      @site = Jekyll::Site.new(Jekyll.configuration({
-        "source" => source_dir,
-        "destination" => dest_dir
-      }))
+      @site = fixture_site
       @site.process
       @test_coffeescript_file = dest_dir("js/coffeescript.js")
       @js_output = <<-JS

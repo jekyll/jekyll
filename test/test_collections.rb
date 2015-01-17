@@ -1,16 +1,6 @@
 require 'helper'
 
 class TestCollections < Test::Unit::TestCase
-
-  def fixture_site(overrides = {})
-    Jekyll::Site.new(Jekyll.configuration(
-      overrides.merge({
-        "source"      => source_dir,
-        "destination" => dest_dir
-      })
-    ))
-  end
-
   context "an evil collection" do
     setup do
       @collection = Jekyll::Collection.new(fixture_site, "../../etc/password")
