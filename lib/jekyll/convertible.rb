@@ -45,7 +45,7 @@ module Jekyll
       begin
         self.content = File.read(site.in_source_dir(base, name),
                                  merged_file_read_opts(opts))
-        if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+        if content =~ /\A(---\s*\n.*?\n?)^(---\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = SafeYAML.load($1)
         end

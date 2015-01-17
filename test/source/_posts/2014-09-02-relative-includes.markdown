@@ -26,4 +26,4 @@ Partial variable test
 
 Relative to self test:
 
-- 9 {% include_relative 2014-03-03-yaml-with-dots.md %}
+- 9 {% include_relative 2010-01-08-triple-dash.markdown %}
