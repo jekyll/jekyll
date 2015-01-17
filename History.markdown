@@ -21,6 +21,7 @@
   * Keep file modification times between builds for static files (#3220)
   * Only downcase mixed-case categories for the URL (#2571)
   * Added per post `excerpt_separator` functionality (#3274)
+  * Allow collections YAML to end with three dots (#3134)
 
 ### Bug Fixes
 
