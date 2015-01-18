@@ -118,7 +118,7 @@ Feature: Collections
     """
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Item count: 1" in "_site/index.html"
+    And I should see "Item count: 2" in "_site/index.html"
 
   Scenario: Sort by title
     Given I have an "index.html" page that contains "{% assign items = site.methods | sort: 'title' %}1. of {{ items.size }}: {{ items.first.output }}"
@@ -130,7 +130,7 @@ Feature: Collections
     """
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "1. of 6: <p>Page without title.</p>" in "_site/index.html"
+    And I should see "1. of 7: <p>Page without title.</p>" in "_site/index.html"
 
   Scenario: Sort by relative_path
     Given I have an "index.html" page that contains "Collections: {% assign methods = site.methods | sort: 'relative_path' %}{% for method in methods %}{{ method.title }}, {% endfor %}"
