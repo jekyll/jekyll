@@ -22,6 +22,7 @@
   * Only downcase mixed-case categories for the URL (#2571)
   * Added per post `excerpt_separator` functionality (#3274)
   * Allow collections YAML to end with three dots (#3134)
+  * Add mode parameter to `slugify` Liquid filter (#2918)
 
 ### Bug Fixes
 
