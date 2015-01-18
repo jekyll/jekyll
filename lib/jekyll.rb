@@ -169,11 +169,4 @@ require_all 'jekyll/converters/markdown'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
-# Eventually remove these for 3.0 as non-core
-Jekyll::External.require_with_graceful_fail(%w[
-  toml
-  jekyll-paginate
-  jekyll-gist
-  jekyll-coffeescript
-  jekyll-sass-converter
-])
+require 'jekyll-sass-converter'

@@ -3,6 +3,7 @@ require 'helper'
 class TestCoffeeScript < Test::Unit::TestCase
   context "converting CoffeeScript" do
     setup do
+      External.require_with_graceful_fail('jekyll-coffeescript')
       @site = fixture_site
       @site.process
       @test_coffeescript_file = dest_dir("js/coffeescript.js")

@@ -33,16 +33,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('mercenary', '~> 0.3.3')
   s.add_runtime_dependency('safe_yaml', '~> 1.0')
   s.add_runtime_dependency('colorator', '~> 0.1')
-
-  # Before 3.0 drops, phase the following gems out as dev dependencies
-  # and gracefully handle their absence.
-  s.add_runtime_dependency('redcarpet', '~> 3.1')
-  s.add_runtime_dependency('toml', '~> 0.1.0')
-  s.add_runtime_dependency('jekyll-paginate', '~> 1.0')
-  s.add_runtime_dependency('jekyll-gist', '~> 1.0')
-  s.add_runtime_dependency('jekyll-coffeescript', '~> 1.0')
   s.add_runtime_dependency('rouge', '~> 1.7')
   s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0')
   s.add_runtime_dependency('jekyll-watch', '~> 1.1')
-  s.add_runtime_dependency('classifier-reborn', '~> 2.0')
 end

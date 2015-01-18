@@ -115,6 +115,7 @@ module Jekyll
     def safe_load_file(filename)
       case File.extname(filename)
       when /\.toml/i
+        Jekyll::External.require_with_graceful_fail('toml') unless defined?(TOML)
         TOML.load_file(filename)
       when /\.ya?ml/i
         SafeYAML.load_file(filename)
