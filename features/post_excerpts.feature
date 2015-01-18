@@ -46,5 +46,5 @@ Feature: Post excerpts
     And the _site/2007/12 directory should exist
     And the _site/2007/12/31 directory should exist
     And the "_site/2007/12/31/entry1.html" file should exist
-    And I should see exactly "<p>content for entry1.</p>" in "_site/index.html"
-    And I should see exactly "<html><head></head><body><p>content for entry1.</p></body></html>" in "_site/2007/12/31/entry1.html"
+    And I should see "<p>content for entry1.</p>" in "_site/index.html"
+    And I should see "<html><head></head><body><p>content for entry1.</p>\n\n</body></html>" in "_site/2007/12/31/entry1.html"

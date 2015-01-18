@@ -43,4 +43,4 @@ Feature: Draft Posts
       | Recipe | 2009-03-27 | simple | Post path: {{ page.path }} |
     When I run jekyll build --drafts
     Then the _site directory should exist
-    And I should see "Post path: _drafts/recipe.textile" in "_site/recipe.html"
+    And I should see "Post path: _drafts/recipe.markdown" in "_site/recipe.html"

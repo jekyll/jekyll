@@ -14,11 +14,12 @@ and web-based CMS systems, this will be a welcome change!
 ## The Posts Folder
 
 As explained on the [directory structure](../structure/) page, the `_posts`
-folder is where your blog posts will live. These files can be either
-[Markdown](http://daringfireball.net/projects/markdown/) or
-[Textile](http://redcloth.org/textile) formatted text files, and as long as
-they have [YAML Front Matter](../frontmatter/), they will be converted from their
-source format into an HTML page that is part of your static site.
+folder is where your blog posts will live. These files are generally
+[Markdown](http://daringfireball.net/projects/markdown/) or HTML, but can
+be other formats with the proper converter installed.
+All posts must have [YAML Front Matter](../frontmatter/), and they will be
+converted from their source format into an HTML page that is part of your
+static site.
 
 ### Creating Post Files
 
@@ -52,12 +53,12 @@ file. For example, the following are examples of valid post filenames:
 
 All blog post files must begin with [YAML Front Matter](../frontmatter/). After
 that, it's simply a matter of deciding which format you prefer. Jekyll supports
-two popular content markup formats:
-[Markdown](http://daringfireball.net/projects/markdown/) and
-[Textile](http://redcloth.org/textile). These formats each have their own way
-of marking up different types of content within a post, so you should
-familiarize yourself with these formats and decide which one best suits your
-needs.
+[Markdown](http://daringfireball.net/projects/markdown/) out of the box,
+and has [myriad extensions for other formats as well](/docs/plugins/#converters-1),
+including the popular [Textile](http://redcloth.org/textile) format. These
+formats each have their own way of marking up different types of content
+within a post, so you should familiarize yourself with these formats and
+decide which one best suits your needs.
 
 <div class="note info">
   <h5>Be aware of character sets</h5>

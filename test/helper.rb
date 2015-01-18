@@ -8,11 +8,9 @@ end
 require 'rubygems'
 require 'test/unit'
 require 'ostruct'
-gem 'RedCloth', '>= 4.2.1'
 
 require 'jekyll'
 
-require 'RedCloth'
 require 'rdiscount'
 require 'kramdown'
 require 'redcarpet'
@@ -27,6 +25,10 @@ STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 
 class Test::Unit::TestCase
   include RR::Adapters::TestUnit
+
+  def fixture_site(overrides = {})
+    Jekyll::Site.new(site_configuration(overrides))
+  end
 
   def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)
     Utils.deep_merge_hashes(base_hash, overrides)

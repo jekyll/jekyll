@@ -21,7 +21,6 @@ module Jekyll
       'keep_files'    => ['.git','.svn'],
       'encoding'      => 'utf-8',
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
-      'textile_ext'   => 'textile',
       'full_rebuild'  => false,
 
       # Filtering Content
@@ -90,10 +89,6 @@ module Jekyll
           'coderay_bold_every'        => 10,
           'coderay_css'               => 'style'
         }
-      },
-
-      'redcloth' => {
-        'hard_breaks' => true
       }
     }
 

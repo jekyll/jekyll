@@ -15,18 +15,17 @@ class TestPost < Test::Unit::TestCase
   context "A Post" do
     setup do
       clear_dest
-      @site = Site.new(Jekyll.configuration({
-        "skip_config_files" => true,
-        "source" => source_dir,
-        "destination" => dest_dir
-      }))
+      @site = fixture_site
     end
 
     should "ensure valid posts are valid" do
       assert Post.valid?("2008-09-09-foo-bar.textile")
       assert Post.valid?("foo/bar/2008-09-09-foo-bar.textile")
+      assert Post.valid?("2008-09-09-foo-bar.markdown")
+      assert Post.valid?("foo/bar/2008-09-09-foo-bar.markdown")
 
       assert !Post.valid?("lol2008-09-09-foo-bar.textile")
+      assert !Post.valid?("lol2008-09-09-foo-bar.markdown")
       assert !Post.valid?("blah")
     end
 
@@ -63,8 +62,8 @@ class TestPost < Test::Unit::TestCase
         @post = Post.allocate
         @post.site = @site
 
-        @real_file = "2008-10-18-foo-bar.textile"
-        @fake_file = "2008-09-09-foo-bar.textile"
+        @real_file = "2008-10-18-foo-bar.markdown"
+        @fake_file = "2008-09-09-foo-bar.markdown"
         @source = source_dir('_posts')
       end
 
@@ -74,7 +73,7 @@ class TestPost < Test::Unit::TestCase
 
         assert_equal Time.parse("2008-09-09"), @post.date
         assert_equal "foo-bar", @post.slug
-        assert_equal ".textile", @post.ext
+        assert_equal ".markdown", @post.ext
         assert_equal "/2008/09/09", @post.dir
         assert_equal "/2008/09/09/foo-bar", @post.id
       end
@@ -367,13 +366,13 @@ class TestPost < Test::Unit::TestCase
         @post.read_yaml(@source, @real_file)
 
         assert_equal({"title" => "Foo Bar", "layout" => "default"}, @post.data)
-        assert_equal "h1. {{ page.title }}\n\nBest *post* ever", @post.content
+        assert_equal "# {{ page.title }}\n\nBest **post** ever", @post.content
       end
 
       should "transform textile" do
         @post.process(@real_file)
         @post.read_yaml(@source, @real_file)
-        assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.transform
+        assert_equal "<h1 id=\"pagetitle-\">{{ page.title }}</h1>\n\n<p>Best <strong>post</strong> ever</p>", @post.transform.strip
       end
 
       context "#excerpt" do
@@ -461,8 +460,7 @@ class TestPost < Test::Unit::TestCase
     context "when in a site" do
       setup do
         clear_dest
-        stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
-        @site = Site.new(Jekyll.configuration)
+        @site = fixture_site
         @site.posts = [setup_post('2008-02-02-published.textile'),
                        setup_post('2009-01-27-categories.textile')]
       end
@@ -486,30 +484,30 @@ class TestPost < Test::Unit::TestCase
 
     context "initializing posts" do
       should "recognize date in yaml" do
-        post = setup_post("2010-01-09-date-override.textile")
+        post = setup_post("2010-01-09-date-override.markdown")
         do_render(post)
         assert_equal Time, post.date.class
         assert_equal Time, post.to_liquid["date"].class
         assert_equal "/2010/01/10/date-override.html", post.url
-        assert_equal "<p>Post with a front matter date</p>\n<p>10 Jan 2010</p>", post.output
+        assert_equal "<p>Post with a front matter date</p>\n\n<p>10 Jan 2010</p>", post.output.strip
       end
 
       should "recognize time in yaml" do
-        post = setup_post("2010-01-09-time-override.textile")
+        post = setup_post("2010-01-09-time-override.markdown")
         do_render(post)
         assert_equal Time, post.date.class
         assert_equal Time, post.to_liquid["date"].class
         assert_equal "/2010/01/10/time-override.html", post.url
-        assert_equal "<p>Post with a front matter time</p>\n<p>10 Jan 2010</p>", post.output
+        assert_equal "<p>Post with a front matter time</p>\n\n<p>10 Jan 2010</p>", post.output.strip
       end
 
       should "recognize time with timezone in yaml" do
-        post = setup_post("2010-01-09-timezone-override.textile")
+        post = setup_post("2010-01-09-timezone-override.markdown")
         do_render(post)
         assert_equal Time, post.date.class
         assert_equal Time, post.to_liquid["date"].class
         assert_equal "/2010/01/10/timezone-override.html", post.url
-        assert_equal "<p>Post with a front matter time with timezone</p>\n<p>10 Jan 2010</p>", post.output
+        assert_equal "<p>Post with a front matter time with timezone</p>\n\n<p>10 Jan 2010</p>", post.output.strip
       end
 
       should "to_liquid prioritizes post attributes over data" do
@@ -603,13 +601,13 @@ class TestPost < Test::Unit::TestCase
         end
 
         should "render properly" do
-          post = setup_post("2008-10-18-foo-bar.textile")
+          post = setup_post("2008-10-18-foo-bar.markdown")
           do_render(post)
-          assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", post.output
+          assert_equal "<<< <h1 id=\"foo-bar\">Foo Bar</h1>\n\n<p>Best <strong>post</strong> ever</p>\n >>>", post.output
         end
 
         should "write properly" do
-          post = setup_post("2008-10-18-foo-bar.textile")
+          post = setup_post("2008-10-18-foo-bar.markdown")
           do_render(post)
           post.write(dest_dir)
 
@@ -652,7 +650,7 @@ class TestPost < Test::Unit::TestCase
         end
 
         should "write properly without html extension" do
-          post = setup_post("2008-10-18-foo-bar.textile")
+          post = setup_post("2008-10-18-foo-bar.markdown")
           post.site.permalink_style = ":title/"
           do_render(post)
           post.write(dest_dir)
@@ -662,32 +660,31 @@ class TestPost < Test::Unit::TestCase
         end
 
         should "insert data" do
-          post = setup_post("2008-11-21-complex.textile")
+          post = setup_post("2008-11-21-complex.markdown")
           do_render(post)
 
-          assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", post.output
+          assert_equal "<<< <p>url: /2008/11/21/complex.html\ndate: #{Time.parse("2008-11-21")}\nid: /2008/11/21/complex</p>\n >>>", post.output
         end
 
         should "include templates" do
           post = setup_post("2008-12-13-include.markdown")
-          post.site.instance_variable_set(:@source, File.join(File.dirname(__FILE__), 'source'))
           do_render(post)
 
           assert_equal "<<< <hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n\n<p>This <em>is</em> cool</p>\n >>>", post.output
         end
 
         should "render date specified in front matter properly" do
-          post = setup_post("2010-01-09-date-override.textile")
+          post = setup_post("2010-01-09-date-override.markdown")
           do_render(post)
 
-          assert_equal "<p>Post with a front matter date</p>\n<p>10 Jan 2010</p>", post.output
+          assert_equal "<p>Post with a front matter date</p>\n\n<p>10 Jan 2010</p>", post.output.strip
         end
 
         should "render time specified in front matter properly" do
-          post = setup_post("2010-01-09-time-override.textile")
+          post = setup_post("2010-01-09-time-override.markdown")
           do_render(post)
 
-          assert_equal "<p>Post with a front matter time</p>\n<p>10 Jan 2010</p>", post.output
+          assert_equal "<p>Post with a front matter time</p>\n\n<p>10 Jan 2010</p>", post.output.strip
         end
 
       end
@@ -701,8 +698,7 @@ class TestPost < Test::Unit::TestCase
 
   context "converter file extension settings" do
     setup do
-      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
-      @site = Site.new(Jekyll.configuration)
+      @site = fixture_site
     end
 
     should "process .md as markdown under default configuration" do
@@ -746,28 +742,17 @@ class TestPost < Test::Unit::TestCase
       assert conv.kind_of?(Jekyll::Converters::Identity), "The converter for .Rmd should be the Identity converter."
     end
 
-    should "process .text as textile under alternate configuration" do
-      @site.config['textile_ext'] = 'textile,text'
-      post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Textile
-    end
-
   end
 
   context "site config with category" do
     setup do
-      config = site_configuration({
-        'defaults' => [
-          'scope' => {
-            'path' => ''
-          },
-          'values' => {
-            'category' => 'article'
-          }
-        ]
-      })
-      @site = Site.new(config)
+      front_matter_defaults = {
+        'defaults' => [{
+          'scope' =>  { 'path' => '' },
+          'values' => { 'category' => 'article' }
+        }]
+      }
+      @site = fixture_site(front_matter_defaults)
     end
 
     should "return category if post does not specify category" do
@@ -784,17 +769,13 @@ class TestPost < Test::Unit::TestCase
 
   context "site config with categories" do
     setup do
-      config = site_configuration({
-        'defaults' => [
-          'scope' => {
-            'path' => ''
-          },
-          'values' => {
-            'categories' => ['article']
-          }
-        ]
-      })
-      @site = Site.new(config)
+      front_matter_defaults = {
+        'defaults' => [{
+          'scope' =>  { 'path' => '' },
+          'values' => { 'categories' => ['article'] }
+        }]
+      }
+      @site = fixture_site(front_matter_defaults)
     end
 
     should "return categories if post does not specify categories" do

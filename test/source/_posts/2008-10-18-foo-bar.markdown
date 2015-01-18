@@ -3,6 +3,6 @@ layout: default
 title: Foo Bar
 ---
 
-h1. {{ page.title }}
+# {{ page.title }}
 
-Best *post* ever
+Best **post** ever

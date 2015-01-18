@@ -303,7 +303,7 @@ module Jekyll
       [posts, pages].flatten.each do |page_or_post|
         page_or_post.render(layouts, payload) if page_or_post.regenerate?
       end
-    rescue Errno::ENOENT => e
+    rescue Errno::ENOENT
       # ignore missing layout dir
     end
 
