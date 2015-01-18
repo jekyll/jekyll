@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestFrontMatterDefaults < Test::Unit::TestCase
+class TestFrontMatterDefaults < Minitest::Test
 
   context "A site with full front matter defaults" do
     setup do

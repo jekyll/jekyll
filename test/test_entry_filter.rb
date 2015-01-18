@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestEntryFilter < Test::Unit::TestCase
+class TestEntryFilter < Minitest::Test
   context "Filtering entries" do
     setup do
       @site = Site.new(site_configuration)
@@ -71,8 +71,8 @@ class TestEntryFilter < Test::Unit::TestCase
       site = Site.new(site_configuration)
 
       site.read_directories("symlink-test")
-      assert_not_equal [], site.pages
-      assert_not_equal [], site.static_files
+      refute_equal [], site.pages
+      refute_equal [], site.static_files
     end
   end
 

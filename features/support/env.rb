@@ -1,8 +1,18 @@
-require 'fileutils'
+require 'minitest/spec'
 require 'posix-spawn'
+require 'fileutils'
 require 'rr'
-require 'test/unit'
 require 'time'
+
+# Thanks Cucumber Wiki!
+class MinitestWorld
+  extend Minitest::Assertions
+  attr_accessor :assertions
+
+  def initialize
+    self.assertions = 0
+  end
+end
 
 JEKYLL_SOURCE_DIR = File.dirname(File.dirname(File.dirname(__FILE__)))
 TEST_DIR    = File.expand_path(File.join('..', '..', 'tmp', 'jekyll'), File.dirname(__FILE__))
@@ -33,7 +43,7 @@ def jekyll_run_output
 end
 
 def run_bundle(args)
-  child = run_in_shell('bundle', *args.strip.split(' '))
+  run_in_shell('bundle', *args.strip.split(' '))
 end
 
 def run_jekyll(args)
@@ -42,7 +52,7 @@ def run_jekyll(args)
 end
 
 def run_in_shell(*args)
-  POSIX::Spawn::Child.new *args, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"]
+  POSIX::Spawn::Child.new(*args, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"])
 end
 
 def slug(title)
