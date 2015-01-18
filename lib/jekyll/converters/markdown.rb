@@ -46,15 +46,12 @@ module Jekyll
         ].map(&:to_sym)
       end
 
-      def extname_matches_regexp
-        @extname_matches_regexp ||= Regexp.new(
-          '^\.(' + @config['markdown_ext'].gsub(',','|') +')$',
-          Regexp::IGNORECASE
-        )
+      def extname_list
+        @extname_list ||= @config['markdown_ext'].split(',').map { |e| ".#{e.downcase}" }
       end
 
       def matches(ext)
-        ext =~ extname_matches_regexp
+        extname_list.include? ext.downcase
       end
 
       def output_ext(ext)

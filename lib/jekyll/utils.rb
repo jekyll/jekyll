@@ -2,6 +2,12 @@ module Jekyll
   module Utils
     extend self
 
+    # Constants for use in #slugify
+    SLUGIFY_MODES = %w{raw default pretty}
+    SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
+    SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
+    SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
+
     # Merges a master hash with another hash, recursively.
     #
     # master_hash - the "parent" hash whose values will be overridden
@@ -129,19 +135,18 @@ module Jekyll
     def slugify(string, mode=nil)
       mode ||= 'default'
       return nil if string.nil?
+      return string.downcase unless SLUGIFY_MODES.include?(mode)
 
       # Replace each character sequence with a hyphen
       re = case mode
       when 'raw'
-        Regexp.new('\\s+')
+        SLUGIFY_RAW_REGEXP
       when 'default'
-        Regexp.new('[^[:alnum:]]+')
+        SLUGIFY_DEFAULT_REGEXP
       when 'pretty'
         # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
         # and is allowed in both extN and NTFS.
-        Regexp.new("[^a-zA-Z0-9._~!$&'()+,;=@]+")
-      else
-        return string.downcase
+        SLUGIFY_PRETTY_REGEXP
       end
 
       string.
