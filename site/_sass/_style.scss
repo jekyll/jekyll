@@ -834,12 +834,8 @@ td {
   padding: .5em .75em;
 }
 
-td p, td ul, article td li {
+td p {
   margin: 0;
-}
-
-td ul {
-  padding: 0 0 0 1.2em;
 }
 
 th {
@@ -865,7 +861,7 @@ tbody td {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1affffff', endColorstr='#00ffffff',GradientType=0 );
 }
 
-td p, td ul {
+td p {
   font-size: 16px;
 }
 
