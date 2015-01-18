@@ -140,7 +140,7 @@ module Jekyll
         )
 
         # Add layout to dependency tree
-        site.metadata.add_dependency(
+        site.regenerator.add_dependency(
           site.in_source_dir(document.path),
           site.in_source_dir(layout.path)
         ) if document.write?

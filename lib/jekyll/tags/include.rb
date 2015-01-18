@@ -116,7 +116,7 @@ eos
 
         # Add include to dependency tree
         if context.registers[:page] and context.registers[:page].has_key? "path"
-          site.metadata.add_dependency(
+          site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path
           )

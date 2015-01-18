@@ -99,7 +99,7 @@ class TestSite < Test::Unit::TestCase
     should "write only modified static files" do
       clear_dest
       StaticFile.reset_cache
-      @site.metadata.clear
+      @site.regenerator.clear
 
       @site.process
       some_static_file = @site.static_files[0].path
@@ -129,7 +129,7 @@ class TestSite < Test::Unit::TestCase
     should "write static files if not modified but missing in destination" do
       clear_dest
       StaticFile.reset_cache
-      @site.metadata.clear
+      @site.regenerator.clear
 
       @site.process
       dest = File.expand_path(@site.static_files[0].destination(@site.dest))
@@ -243,7 +243,7 @@ class TestSite < Test::Unit::TestCase
     context 'with orphaned files in destination' do
       setup do
         clear_dest
-        @site.metadata.clear
+        @site.regenerator.clear
         @site.process
         # generate some orphaned files:
         # single file

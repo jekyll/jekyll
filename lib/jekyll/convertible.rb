@@ -168,15 +168,6 @@ module Jekyll
       true
     end
 
-    # Determine whether to regenerate the file based on metadata.
-    #
-    # Returns true if file needs to be regenerated
-    def regenerate?
-      asset_file? ||
-        data['regenerate'] ||
-        site.metadata.regenerate?(site.in_source_dir(relative_path))
-    end
-
     # Determine whether the file should be placed into layouts.
     #
     # Returns false if the document is an asset file.
@@ -217,7 +208,7 @@ module Jekyll
                                          File.join(site.config['layouts'], layout.name))
 
         # Add layout to dependency tree
-        site.metadata.add_dependency(
+        site.regenerator.add_dependency(
           site.in_source_dir(path),
           site.in_source_dir(layout.path)
         )

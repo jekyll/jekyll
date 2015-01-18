@@ -29,7 +29,7 @@ module Jekyll
       #
       # Returns an Array with the metdata file as the only item
       def metadata_file
-        [site.metadata.metadata_file]
+        [site.regenerator.metadata_file]
       end
 
       # Private: The list of existing files, apart from those included in keep_files and hidden files.

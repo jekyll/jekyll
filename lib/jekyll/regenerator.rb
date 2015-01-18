@@ -1,5 +1,5 @@
 module Jekyll
-  class Metadata
+  class Regenerator
     attr_reader :site, :metadata, :cache
 
     def initialize(site)
@@ -10,6 +10,25 @@ module Jekyll
 
       # Initialize cache to an empty hash
       @cache = {}
+    end
+
+    # Checks if a renderable object needs to be regenerated
+    #
+    # Returns a boolean.
+    def regenerate?(document)
+      case document
+      when Post, Page
+        document.asset_file? || document.data['regenerate'] ||
+          modified?(site.in_source_dir(document.relative_path))
+      when Document
+        !document.write? || document.data['regenerate'] || modified?(document.path)
+      else
+        if document.respond_to?(:path)
+          modified?(document.path)
+        else
+          true
+        end
+      end
     end
 
     # Add a path to the metadata
@@ -40,10 +59,11 @@ module Jekyll
       @cache = {}
     end
 
-    # Checks if a path should be regenerated
+    # Checks if a path's (or one of its dependencies)
+    # mtime has changed
     #
     # Returns a boolean.
-    def regenerate?(path, add = true)
+    def modified?(path)
       return true if disabled?
 
       # Check for path in cache
@@ -55,19 +75,19 @@ module Jekyll
       data = metadata[path]
       if data
         data["deps"].each do |dependency|
-          if regenerate?(dependency)
+          if modified?(dependency)
             return cache[dependency] = cache[path] = true
           end
         end
         if data["mtime"].eql? File.mtime(path)
           return cache[path] = false
         else
-          return !add || add(path)
+          return add(path)
         end
       end
 
       # Path does not exist in metadata, add it
-      return !add || add(path)
+      return add(path)
     end
 
     # Add a dependency of a path
