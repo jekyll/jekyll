@@ -23,6 +23,8 @@
   * Added per post `excerpt_separator` functionality (#3274)
   * Allow collections YAML to end with three dots (#3134)
   * Add mode parameter to `slugify` Liquid filter (#2918)
+  * Perf: `Markdown#matches` should avoid regexp (#3321)
+  * Perf: Use frozen regular expressions for `Utils#slugify` (#3321)
 
 ### Bug Fixes
 
