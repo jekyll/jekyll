@@ -35,7 +35,7 @@ module Jekyll
 
       # Conversion
       'markdown'      => 'kramdown',
-      'highlighter'   => 'pygments',
+      'highlighter'   => 'rouge',
       'lsi'           => false,
       'excerpt_separator' => "\n\n",
 
