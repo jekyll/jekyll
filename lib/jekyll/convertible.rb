@@ -209,7 +209,7 @@ module Jekyll
       used = Set.new([layout])
 
       while layout
-        payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
+        payload = Utils.deep_merge_hashes(payload, {"content" => output})
 
         self.output = render_liquid(layout.content,
                                          payload,
