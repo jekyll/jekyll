@@ -212,11 +212,20 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Slugify</strong></p>
-        <p>Convert a string into a lowercase URL "slug" by replacing every sequence of spaces and non-alphanumeric characters with a hyphen.</p>
+        <p>Convert a string into a lowercase URL "slug". See below for options.</p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ page.title | slugify }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "The _config.yml file" | slugify }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-config-yml-file</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The _config.yml file" | slugify: 'pretty' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-_config.yml-file</code>
         </p>
       </td>
     </tr>
@@ -251,6 +260,16 @@ common tasks easier.
   </tbody>
 </table>
 </div>
+
+### Options for the `slugify` filter
+
+The `slugify` filter accepts an option, each specifying what to filter.
+The default is `default`. The are as follows (with what they filter):
+
+- `none`: no characters
+- `raw`: spaces
+- `default`: spaces and non-alphanumeric characters
+- `pretty`: spaces and non-alphanumeric characters except for `._~!$&'()+,;=@`
 
 ## Tags
 
