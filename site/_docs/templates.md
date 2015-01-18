@@ -214,14 +214,7 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Slugify</strong></p>
-        <p>Convert a string into a lowercase URL "slug".</p>
-	<p>Optional argument mode specify what characters are replaced with a hyphen. The default value is 'default'.</p>
-	<ul>
-	  <li>'none': no characters</li>
-	  <li>'raw': spaces</li>
-	  <li>'default': spaces and non-alphanumeric characters</li>
-	  <li>'pretty': spaces and non-alphanumeric characters except for <em>._~!$&amp;'()+,;=@</em></li>
-	</ul>
+        <p>Convert a string into a lowercase URL "slug". See below for options.</p>
       </td>
       <td class="align-center">
         <p>
@@ -269,6 +262,16 @@ common tasks easier.
   </tbody>
 </table>
 </div>
+
+### Options for the `slugify` filter
+
+The `slugify` filter accepts an option, each specifying what to filter.
+The default is `default`. The are as follows (with what they filter):
+
+- `none`: no characters
+- `raw`: spaces
+- `default`: spaces and non-alphanumeric characters
+- `pretty`: spaces and non-alphanumeric characters except for `._~!$&'()+,;=@`
 
 ## Tags
 
