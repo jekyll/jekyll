@@ -325,43 +325,132 @@ class TestFilters < Test::Unit::TestCase
       end
     end
 
+    # tests are following ruby pop description
+    # @see http://www.ruby-doc.org/core-2.2.0/Array.html#method-i-pop
+    # Removes the last element from self and returns it, or nil if the array is empty.
+    # If a number n is given, returns an array of the last n elements (or less)
+    # just like array.slice!(-n, n) does.
+    context "pop filter" do
+      should "return a new array containing the last element removed from original array when no index passed" do
+        array = %w{hi there bernie}
+        assert_equal %w{bernie}, @filter.pop(array)
+        assert_equal %w{hi there}, array
+      end
+
+      should "return a new array containing the n last elements removed from original array when index passed" do
+        array = %w{hi there bernie}
+        assert_equal %w{there bernie}, @filter.pop(array, 2)
+        assert_equal %w{hi}, array
+      end
+
+      should "return empty array when empty array is passed" do
+        array = %w{}
+        assert_equal [], @filter.pop(array)
+      end
+
+      should "return a new array containing all elements removed from original array when index passed is greater than array length" do
+        array = %w{hi there bernie}
+        assert_equal %w{hi there bernie}, @filter.pop(array, 4)
+        assert_equal [], array
+      end
+
+      should "cast string inputs for # into nums" do
+        assert_equal %w{and ernie}, @filter.pop(%w{hi there bert and ernie}, "2")
+      end
+    end
+
     context "push filter" do
       should "return a new array with the element pushed to the end" do
         assert_equal %w{hi there bernie}, @filter.push(%w{hi there}, "bernie")
       end
     end
 
-    context "pop filter" do
-      should "return a new array with the last element popped" do
-        assert_equal %w{hi there}, @filter.pop(%w{hi there bernie})
-      end
-
-      should "allow multiple els to be popped" do
-        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, 2)
-      end
-
-      should "cast string inputs for # into nums" do
-        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, "2")
-      end
-    end
-
+    # tests are following ruby shift description
+    # @see: http://www.ruby-doc.org/core-2.2.0/Array.html#method-i-shift
+    # Removes the first element of self and returns it (shifting all other elements down by one).
+    # Returns nil if the array is empty.
+    # If a number n is given, returns an array of the first n elements (or less) just like array.slice!(0, n) does.
+    # With ary containing only the remainder elements, not including what was shifted to new_ary.
     context "shift filter" do
-      should "return a new array with the element removed from the front" do
-        assert_equal %w{a friendly greeting}, @filter.shift(%w{just a friendly greeting})
+      should "return a new array containing the first element removed from original array when no index passed" do
+        array = %w{hi there bernie}
+        assert_equal %w{hi}, @filter.shift(array)
+        assert_equal %w{there bernie}, array
       end
 
-      should "allow multiple els to be shifted" do
-        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, 2)
+      should "return a new array containing the first n elements removed from original array when index passed" do
+        array = %w{hi there bernie}
+        assert_equal %w{hi there}, @filter.shift(array, 2)
+        assert_equal %w{bernie}, array
       end
 
       should "cast string inputs for # into nums" do
-        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, "2")
+        assert_equal %w{hi there}, @filter.shift(%w{hi there bert and ernie}, "2")
+      end
+
+      should "return a new array containing all elements removed from original array when index passed is greater than array length" do
+        array = %w{hi there bernie}
+        assert_equal %w{hi there bernie}, @filter.shift(array, 4)
+        assert_equal [], array
+      end
+
+      should "return empty array when empty array is passed" do
+        array = %w{}
+        assert_equal [], @filter.shift(array)
       end
     end
 
     context "unshift filter" do
       should "return a new array with the element put at the front" do
         assert_equal %w{aloha there bernie}, @filter.unshift(%w{there bernie}, "aloha")
+      end
+    end
+
+    # tests are following ruby first description
+    # @see: http://www.ruby-doc.org/core-2.2.0/Array.html#method-i-first
+    # Returns the first element, or the first n elements, of the array.
+    # If the array is empty, ... returns an empty array.
+    context "first filter" do
+      should "return a new array containing the first element from original array when no index passed" do
+        assert_equal %w{hi}, @filter.first(%w{hi there bernie})
+      end
+
+      should "return a new array containing the first n elements from original array when index passed" do
+        assert_equal %w{hi there}, @filter.first(%w{hi there bernie}, 2)
+      end
+
+      should "cast string inputs for # into nums" do
+        assert_equal %w{hi there}, @filter.first(%w{hi there bert and ernie}, "2")
+      end
+
+      should "return a new array containing all elements from original array when index passed is greater than array length" do
+        assert_equal %w{hi there bernie}, @filter.shift(%w{hi there bernie}, 4)
+      end
+
+      should "return an empty array when passed array is empty" do
+        assert_equal [], @filter.shift(%w{}, 2)
+      end
+    end
+
+    # tests are following ruby last description
+    # @see: http://www.ruby-doc.org/core-2.2.0/Array.html#method-i-last
+    # Returns the last element(s) of self.
+    context "last filter" do
+      should "return a new array containing the last element from original array when no index passed" do
+        assert_equal %w{bernie}, @filter.last(%w{hi there bernie})
+      end
+
+      should "return a new array containing the last n elements from original array when index passed" do
+        assert_equal %w{there bernie}, @filter.last(%w{hi there bernie}, 2)
+      end
+
+      should "cast string inputs for # into nums" do
+        assert_equal %w{and ernie}, @filter.last(%w{hi there bert and ernie}, "2")
+      end
+
+      should "return a new array containing all elements from original array when index passed is greater than array length" do
+        array = %w{hi there bernie}
+        assert_equal %w{hi there bernie}, @filter.last(array, 4)
       end
     end
 

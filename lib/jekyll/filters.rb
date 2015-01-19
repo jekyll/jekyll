@@ -252,30 +252,34 @@ module Jekyll
 
     def pop(array, input = 1)
       return array unless array.is_a?(Array)
-      new_ary = array.dup
-      new_ary.pop(input.to_i || 1)
-      new_ary
+      array.pop(input.to_i || 1)
     end
 
     def push(array, input)
       return array unless array.is_a?(Array)
       new_ary = array.dup
       new_ary.push(input)
-      new_ary
     end
 
     def shift(array, input = 1)
       return array unless array.is_a?(Array)
-      new_ary = array.dup
-      new_ary.shift(input.to_i || 1)
-      new_ary
+      array.shift(input.to_i || 1)
     end
 
     def unshift(array, input)
       return array unless array.is_a?(Array)
       new_ary = array.dup
       new_ary.unshift(input)
-      new_ary
+    end
+
+    def first(array, input = 1)
+      return array unless array.respond_to?(:first)
+      array.first(input.to_i || 1)
+    end
+
+    def last(array, input = 1)
+      return array unless array.respond_to?(:last)
+      array.last(input.to_i || 1)
     end
 
     # Convert an object into its String representation for debugging

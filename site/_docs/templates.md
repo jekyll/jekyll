@@ -246,6 +246,128 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>First</strong></p>
+        <p>Returns the first element, or the first n elements, of the array.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ page.tags | first }}{% endraw %}</code>
+        </p>       
+        <p>
+         <code class="filter">{% raw %}{{ page.tags | first: 2 }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Last</strong></p>
+        <p>Returns the last element, or the lasts n elements, of the array.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ page.tags | last }}{% endraw %}</code>
+        </p>       
+        <p>
+         <code class="filter">{% raw %}{{ page.tags | last: 2 }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Pop</strong></p>
+        <p>Remove n last elements to the array and return it/them.</p>
+        <p><strong>This modifies the original array</strong></p>
+      </td>
+      <td class="align-center">
+        <p>
+          <code class="output">variable myarray = ['a', 'b', 'c']</code>
+        </p>      
+        <p>
+         <code class="filter">{% raw %}{% assign popped = myarray | pop %}{% endraw %}</code>
+        </p>       
+        <p>
+          <code class="output">popped => ['c']
+myarray = ['a', 'b']</code>
+        </p>  
+        <hr>
+        <p>
+          <code class="output">variable myarray = ['a', 'b', 'c']</code>
+        </p>      
+        <p>
+         <code class="filter">{% raw %}{% assign popped = myarray | pop: 2 %}{% endraw %}</code>
+        </p>       
+        <p>
+          <code class="output">popped => ['b', 'c']
+myarray = ['a']</code>
+        </p>          
+      </td>
+    </tr>      
+    <tr>
+      <td>
+        <p class="name"><strong>Push</strong></p>
+        <p><em>Push</em> an element at the end of the array.</p>
+      </td>
+      <td class="align-center">
+        <p>
+          <code class="output">variable myarray = ['a', 'b']</code>
+        </p>      
+        <p>
+         <code class="filter">{% raw %}{{ myarray | push: 'c' }}{% endraw %}</code>
+        </p>       
+        <p>
+          <code class="output">myarray => ['a', 'b', 'c']</code>
+        </p>  
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Shift</strong></p>
+        <p>Remove n first elements to the array and return it/them.</p>
+        <p><strong>This modifies the original array</strong></p>
+      </td>
+      <td class="align-center">
+        <p>
+          <code class="output">variable myarray = ['a', 'b', 'c']</code>
+        </p>      
+        <p>
+         <code class="filter">{% raw %}{% assign shifted = myarray | shift %}{% endraw %}</code>
+        </p>       
+        <p>
+          <code class="output">shifted => ['a']
+myarray = ['b', 'c']</code>
+        </p>
+        <hr>
+        <p>
+          <code class="output">variable myarray = ['a', 'b', 'c']</code>
+        </p>      
+        <p>
+         <code class="filter">{% raw %}{% assign shifted = myarray | shift: 2 %}{% endraw %}</code>
+        </p>       
+        <p>
+          <code class="output">shifted => ['a', 'b']
+myarray = ['c']</code>
+        </p>        
+      </td>
+    </tr>      
+    <tr>
+      <td>
+        <p class="name"><strong>Unshift</strong></p>
+        <p>Add an element at the beginning of the array.</p>
+      </td>
+      <td class="align-center">
+        <p>
+          <code class="output">variable myarray = ['a', 'b']</code>
+        </p>      
+        <p>
+         <code class="filter">{% raw %}{{ myarray | unshift: 'c' }}{% endraw %}</code>
+        </p>       
+        <p>
+          <code class="output">myarray => ['c', 'a', 'b']</code>
+        </p>  
+      </td>
+    </tr>    
   </tbody>
 </table>
 </div>
