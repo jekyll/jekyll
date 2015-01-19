@@ -250,33 +250,90 @@ module Jekyll
       end
     end
 
+    # Public: proxy to ruby array::pop
+    #
+    # array  - An array
+    # input  - An optional integer number of element to pop - default to 1
+    #
+    # Removes the last element from array and returns it, or nil if the array is empty.
+    # If a number n is given, returns an array of the last n elements (or less)
+    # just like array.slice!(-n, n) does.
+    #
+    # Note the original array is modified
+    #
+    # Returns array
     def pop(array, input = 1)
       return array unless array.is_a?(Array)
       array.pop(input.to_i || 1)
     end
 
+    # Public: proxy to ruby array::push
+    #
+    # array  - An array
+    # input  - An object
+    #
+    # Append --- Pushes the given object on to the end of this array.
+    #
+    # Returns array
     def push(array, input)
       return array unless array.is_a?(Array)
       new_ary = array.dup
       new_ary.push(input)
     end
 
+    # Public: proxy to ruby array::shift
+    #
+    # array  - An array
+    # input  - An optional integer number of element to shift - default to 1
+    #
+    # Removes the first element of array and returns it (shifting all other
+    # elements down by one).
+    # If a number n is given, returns an array of the first n elements (or less)
+    # just like array.slice!(0, n) does.
+    #
+    # Note the original array is modified
+    #
+    # Returns array
     def shift(array, input = 1)
       return array unless array.is_a?(Array)
       array.shift(input.to_i || 1)
     end
 
+    # Public: proxy to ruby array::unshift
+    #
+    # array  - An array
+    # input  - An object
+    #
+    # Prepend object to the front of array, moving other elements upwards.
+    #
+    # Returns array
     def unshift(array, input)
       return array unless array.is_a?(Array)
       new_ary = array.dup
       new_ary.unshift(input)
     end
 
+    # Public: proxy to ruby array::first
+    #
+    # array  - An array
+    # input  - An optional integer number of element to extract - default to 1
+    #
+    # Returns the first element, or the first +input+ elements, of the array.
+    #
+    # Returns array
     def first(array, input = 1)
       return array unless array.respond_to?(:first)
       array.first(input.to_i || 1)
     end
 
+    # Public: proxy to ruby array::last
+    #
+    # array  - An array
+    # input  - An optional integer number of element to extract - default to 1
+    #
+    # Returns the last element, or the last +input+ elements, of the array.
+    #
+    # Returns array
     def last(array, input = 1)
       return array unless array.respond_to?(:last)
       array.last(input.to_i || 1)
