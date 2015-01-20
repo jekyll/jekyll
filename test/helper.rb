@@ -37,8 +37,7 @@ class Test::Unit::TestCase
   def site_configuration(overrides = {})
     full_overrides = build_configs(overrides, build_configs({"destination" => dest_dir}))
     build_configs({
-      "source"       => source_dir,
-      "full_rebuild" => true
+      "source" => source_dir
     }, full_overrides)
   end
 

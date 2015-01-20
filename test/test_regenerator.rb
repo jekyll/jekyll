@@ -5,15 +5,13 @@ class TestRegenerator < Test::Unit::TestCase
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
 
-      @site = Site.new(Jekyll.configuration({
-        "source" => source_dir,
-        "destination" => dest_dir,
+      @site = fixture_site({
         "collections" => {
           "methods" => {
             "output" => true
           }
         }
-      }))
+      })
 
       @site.read
       @page = @site.pages.first
