@@ -50,6 +50,7 @@
   * Instead of symlinking `/tmp`, create and symlink a local `tmp` in the tests (#3258)
   * Fix some spacing (#3312)
   * Fix comment typo in `lib/jekyll/frontmatter_defaults.rb` (#3322)
+  * Move all `regenerate?` checking to `Regenerator` (#3326)
 
 ### Site Enhancements
 
