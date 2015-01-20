@@ -325,7 +325,7 @@ module Jekyll
       each_site_file { |item|
         item.write(dest) if regenerator.regenerate?(item)
       }
-      regenerator.write unless full_rebuild?
+      regenerator.write_metadata unless full_rebuild?
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.

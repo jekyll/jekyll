@@ -35,7 +35,7 @@ class TestRegenerator < Test::Unit::TestCase
       @regenerator.regenerate?(@document)
       @regenerator.regenerate?(@asset_file)
 
-      @regenerator.write
+      @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
       assert !@regenerator.regenerate?(@page)
@@ -77,7 +77,7 @@ class TestRegenerator < Test::Unit::TestCase
     should "write to the metadata file" do
       @regenerator.clear
       @regenerator.add(@path)
-      @regenerator.write
+      @regenerator.write_metadata
       assert File.file?(source_dir(".jekyll-metadata"))
     end
 
@@ -122,7 +122,7 @@ class TestRegenerator < Test::Unit::TestCase
     should "not regenerate a path if it is not modified" do
       @regenerator.clear
       @regenerator.add(@path)
-      @regenerator.write
+      @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
       assert !@regenerator.modified?(@path)
@@ -131,7 +131,7 @@ class TestRegenerator < Test::Unit::TestCase
     should "not regenerate if path in cache is false" do
       @regenerator.clear
       @regenerator.add(@path)
-      @regenerator.write
+      @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
       assert !@regenerator.modified?(@path)
@@ -159,7 +159,7 @@ class TestRegenerator < Test::Unit::TestCase
       @regenerator.clear
       @regenerator.add(@path)
       @regenerator.metadata[@path]["mtime"] = Time.at(0)
-      @regenerator.write
+      @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
       assert_not_same File.mtime(@path), @regenerator.metadata[@path]["mtime"]
@@ -169,7 +169,7 @@ class TestRegenerator < Test::Unit::TestCase
     should "regenerate if dependency is modified" do
       @regenerator.clear
       @regenerator.add(@path)
-      @regenerator.write
+      @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
       @regenerator.add_dependency(@path, "new.dependency")
@@ -182,7 +182,7 @@ class TestRegenerator < Test::Unit::TestCase
       @site.config["full_rebuild"] = true
       @regenerator.clear
       @regenerator.add(@path)
-      @regenerator.write
+      @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
       assert @regenerator.modified?(@path)

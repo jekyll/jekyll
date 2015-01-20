@@ -103,7 +103,7 @@ module Jekyll
     # Write the metadata to disk
     #
     # Returns nothing.
-    def write
+    def write_metadata
       File.open(metadata_file, 'w') do |f|
         f.write(metadata.to_yaml)
       end
