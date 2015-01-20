@@ -11,7 +11,7 @@ module Jekyll
                   :gems, :plugin_manager
 
     attr_accessor :converters, :generators
-    attr_reader   :metadata
+    attr_reader   :regenerator
 
     # Public: Initialize a new Site.
     #
@@ -28,8 +28,8 @@ module Jekyll
       @source              = File.expand_path(config['source']).freeze
       @dest                = File.expand_path(config['destination']).freeze
 
-      # Build metadata
-      @metadata = Metadata.new(self)
+      # Initialize incremental regenerator
+      @regenerator = Regenerator.new(self)
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
@@ -295,13 +295,17 @@ module Jekyll
       payload = site_payload
       collections.each do |label, collection|
         collection.docs.each do |document|
-          document.output = Jekyll::Renderer.new(self, document, payload).run if document.regenerate?
+          if regenerator.regenerate?(document)
+            document.output = Jekyll::Renderer.new(self, document, payload).run
+          end
         end
       end
 
       payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
-        page_or_post.render(layouts, payload) if page_or_post.regenerate?
+        if regenerator.regenerate?(page_or_post)
+          page_or_post.render(layouts, payload)
+        end
       end
     rescue Errno::ENOENT
       # ignore missing layout dir
@@ -319,9 +323,9 @@ module Jekyll
     # Returns nothing.
     def write
       each_site_file { |item|
-        item.write(dest) if item.regenerate?
+        item.write(dest) if regenerator.regenerate?(item)
       }
-      metadata.write unless full_rebuild?
+      regenerator.write_metadata unless full_rebuild?
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -487,7 +491,7 @@ module Jekyll
       @frontmatter_defaults ||= FrontmatterDefaults.new(self)
     end
 
-    # Whether to perform a full rebuild without metadata
+    # Whether to perform a full rebuild without incremental regeneration
     #
     # Returns a Boolean: true for a full rebuild, false for normal build
     def full_rebuild?(override = {})
