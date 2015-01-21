@@ -26,6 +26,8 @@
   * Perf: `Markdown#matches` should avoid regexp (#3321)
   * Perf: Use frozen regular expressions for `Utils#slugify` (#3321)
   * Split off Textile support into jekyll-textile-converter (#3319)
+  * Improve the navigation menu alignment in the site template on small
+    screens (#3331)
 
 ### Bug Fixes
 
