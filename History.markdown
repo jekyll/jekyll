@@ -71,6 +71,7 @@
   * Some small fixes for the Plugins TOC. (#3306)
   * Added versioning comment to configuration file (#3314)
   * Add `jekyll-minifier` to list of third-party plugins (#3333)
+  * Add blog post about the Jekyll meet-up (#3332)
 
 ## 2.5.3 / 2014-12-22
 
