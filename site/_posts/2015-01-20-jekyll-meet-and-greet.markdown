@@ -7,8 +7,8 @@ categories: [meetup]
 ---
 
 Hey! Our friends at GitHub have agreed to host a Jekyll meet & greet on
-**February 5, 2015 at 7pm**. The event will be hosted at [GitHub's
-Headquarters](https://www.google.com/maps/place/GitHub/@37.782084,-122.391403)
+**February 5, 2015 at 7pm**. The event will be hosted at
+[GitHub's Headquarters](http://goo.gl/qMeBi5)
 here in San Francisco, CA. Pizza & beer will be available for those interested,
 and there will be much time to sit and chat about all things Jekyll. This would
 be an especially good time to get help with bugs you've encountered or to talk
