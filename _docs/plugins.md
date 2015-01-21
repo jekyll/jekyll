@@ -164,8 +164,9 @@ Generators are only required to implement one method:
 ## Converters
 
 If you have a new markup language you’d like to use with your site, you can
-include it by implementing your own converter. Both the Markdown and Textile
-markup languages are implemented using this method.
+include it by implementing your own converter. Both the Markdown and
+[Textile](https://github.com/jekyll/jekyll-textile-converter) markup
+languages are implemented using this method.
 
 <div class="note info">
   <h5>Remember your YAML Front Matter</h5>
@@ -495,6 +496,7 @@ You can find a few useful plugins at the following locations:
 
 #### Converters
 
+- [Textile converter](https://github.com/jekyll/jekyll-textile-converter): Convert `.textile` files into HTML. Also includes the `textilize` Liquid filter.
 - [Slim plugin](https://github.com/slim-template/jekyll-slim): Slim converter and includes for Jekyll with support for Liquid tags.
 - [Jade plugin by John Papandriopoulos](https://github.com/snappylabs/jade-jekyll-plugin): Jade converter for Jekyll.
 - [HAML plugin by Sam Z](https://gist.github.com/517556): HAML converter for Jekyll.
@@ -615,6 +617,7 @@ You can find a few useful plugins at the following locations:
 - [A layout that compresses HTML](https://github.com/penibelst/jekyll-compress-html) by [Anatol Broder](http://penibelst.de/): Github Pages compatible, configurable way to compress HTML files on site build.
 - [Jekyll CO₂](https://github.com/wdenton/jekyll-co2): Generates HTML showing the monthly change in atmospheric CO₂ at the Mauna Loa observatory in Hawaii.
 - [remote-include](http://www.northfieldx.co.uk/remote-include/): Includes files using remote URLs
+- [jekyll-minifier](https://github.com/digitalsparky/jekyll-minifier): Minifies HTML, XML, CSS, and Javascript both inline and as separate files utilising yui-compressor and htmlcompressor.
 
 #### Editors
 

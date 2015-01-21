@@ -149,7 +149,7 @@ enough to fix it all!
 
 ## Permalink style examples
 
-Given a post named: `/2009-04-29-slap-chop.textile`
+Given a post named: `/2009-04-29-slap-chop.md`
 
 <div class="mobile-side-scroller">
 <table>

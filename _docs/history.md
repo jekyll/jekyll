@@ -2,7 +2,6 @@
 layout: docs
 title: History
 permalink: "/docs/history/"
-prev_section: contributing
 ---
 
 ## 2.5.3 / 2014-12-22
