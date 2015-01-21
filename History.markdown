@@ -72,6 +72,7 @@
   * Added versioning comment to configuration file (#3314)
   * Add `jekyll-minifier` to list of third-party plugins (#3333)
   * Add blog post about the Jekyll meet-up (#3332)
+  * Use `highlight` Liquid tag instead of the four-space tabs for code (#3336)
 
 ## 2.5.3 / 2014-12-22
 
