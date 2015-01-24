@@ -15,10 +15,14 @@ to get a feel for what changes are afoot. Key features:
 
 1. **Speed.** Jekyll now features incremental regeneration and greatly
    improved problematic code that caused slow-downs.
-2. **Reduced dependencies.** Hate installing 20 gems every time you want
-   Jekyll? Us too. So we stripped it down to 5 -- the bare essentials.
-3. Gobs of bugfixes and customization.
-4. Uniformity and sanity to Jekyll extensions of Liquid.
+2. Gobs of bugfixes and customization.
+3. Uniformity and sanity to Jekyll extensions of Liquid.
+
+To install just run:
+
+{% highlight bash %}
+$ gem install jekyll --pre
+{% endhighlight %}
 
 Future versions will include [some awesome new
 features](https://github.com/jekyll/jekyll/issues/3324) that we haven't
