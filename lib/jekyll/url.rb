@@ -61,7 +61,12 @@ module Jekyll
     def generate_url(template)
       @placeholders.inject(template) do |result, token|
         break result if result.index(':').nil?
-        result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
+        if token.last.nil?
+          # Remove leading '/' to avoid generating urls with `//`
+          result.gsub(/\/:#{token.first}/, '')
+        else
+          result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
+        end
       end
     end
 

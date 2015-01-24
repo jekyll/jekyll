@@ -47,5 +47,12 @@ class TestURL < Test::Unit::TestCase
       ).to_s
     end
 
+    should "handle nil values for keys in the template" do
+      assert_equal '/foo/bar/', URL.new(
+        :template => "/:x/:y/:z/",
+        :placeholders => {:x => "foo", :y => "bar", :z => nil}
+      ).to_s
+    end
+
   end
 end
