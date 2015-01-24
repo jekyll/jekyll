@@ -40,6 +40,7 @@
   * Highlight: Only Strip Newlines/Carriage Returns, not Spaces (#3278)
   * Find variables in front matter defaults by searching with relative file path. (#2774)
   * Allow variables (e.g `:categories`) in YAML front matter permalinks (#3320)
+  * Handle nil URL placeholders in permalinks (#3325)
 
 ### Development Fixes
 
