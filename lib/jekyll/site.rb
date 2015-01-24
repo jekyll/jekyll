@@ -251,7 +251,7 @@ module Jekyll
             "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
             "categories"   => post_attr_hash('categories'),
             "tags"         => post_attr_hash('tags'),
-            "collections"  => collections,
+            "collections"  => collections.values.map(&:to_liquid),
             "documents"    => documents,
             "data"         => site_data
         }))
