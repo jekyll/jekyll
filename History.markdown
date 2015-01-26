@@ -3,7 +3,7 @@
 ### Major Enhancements
 
   * Incremental regeneration (#3116)
-  * Drop support for Ruby 1.9.3. (#3235)
+  * Drop support for Ruby 1.9.3 (#3235)
   * Upgrade to Liquid 3.0.0 (#3002)
   * Support Ruby v2.2 (#3234)
   * Support RDiscount 2 (#2767)
@@ -32,7 +32,7 @@
 ### Bug Fixes
 
   * Make permalink parsing consistent with pages (#3014)
-  * `time()`pre-filter method should accept a `Date` object (#3299)
+  * `time()` pre-filter method should accept a `Date` object (#3299)
   * Remove unneeded end tag for `link` in site template (#3236)
   * Kramdown: Use `enable_coderay` key instead of `use_coderay` (#3237)
   * Unescape `Document` output path (#2924)
@@ -371,7 +371,7 @@
   * Allow subclasses to override `EXCERPT_ATTRIBUTES_FOR_LIQUID` (#2408)
   * Add `Jekyll.env` and `jekyll.environment` (the Liquid var) (#2417)
   * Use `_config.yaml` or `_config.yml` (`.yml` takes precedence) (#2406)
-  * Override collection url template (#2418)
+  * Override collection URL template (#2418)
   * Allow subdirectories in `_data` (#2395)
   * Extract Pagination Generator into gem: `jekyll-paginate` (#2455)
   * Utilize `date_to_rfc822` filter in site template (#2437)
@@ -385,7 +385,7 @@
   * Allow configuration of different Twitter and GitHub usernames in site template (#2485)
   * Bump Pygments to v0.6.0 (#2504)
   * Front matter defaults for documents in collections (#2419)
-  * Include files with a url which ends in `/` in the `site.html_pages` list (#2524)
+  * Include files with a URL which ends in `/` in the `site.html_pages` list (#2524)
   * Make `highlight` tag use `language-` prefix in CSS class (#2511)
   * Lookup item property via `item#to_liquid` before `#data` or `#[]` in filters (#2493)
   * Skip initial build of site on serve with flag (#2477)
@@ -859,7 +859,7 @@
   * Update rake dependency to `~> 10.1` (#1603)
   * Clean up `site.rb` comments to be more concise/uniform (#1616)
   * Use the master branch for the build badge in the readme (#1636)
-  * Refactor Site#render (#1638)
+  * Refactor `Site#render` (#1638)
   * Remove duplication in command line options (#1637)
   * Add tests for all the coderay options (#1543)
   * Improve some of the Cucumber test code (#1493)
@@ -945,10 +945,10 @@
 
 ### Development Fixes
   * Remove redundant argument to
-    Jekyll::Commands::New#scaffold_post_content (#1356)
+    `Jekyll::Commands::New#scaffold_post_content` (#1356)
   * Add new dependencies to the README (#1360)
   * Fix link to contributing page in README (#1424)
-  * Update TomDoc in Pager#initialize to match params (#1441)
+  * Update TomDoc in `Pager#initialize` to match params (#1441)
   * Refactor `Site#cleanup` into `Jekyll::Site::Cleaner` class (#1429)
   * Several other small minor refactorings (#1341)
   * Ignore `_site` in jekyllrb.com deploy (#1480)
@@ -1098,7 +1098,7 @@
 
 ### Site Enhancements
   * Add a Pro Tip to docs about front matter variables being optional (#1147)
-  * Add changelog to site as History page in /docs/ (#1065)
+  * Add changelog to site as History page in `/docs/` (#1065)
   * Add note to Upgrading page about new config options in 1.0.x (#1146)
   * Documentation for `date_to_rfc822` and `uri_escape` (#1142)
   * Documentation highlight boxes shouldn't show scrollbars if not necessary (#1123)
@@ -1173,7 +1173,7 @@
   * Refactored Jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
   * Added ability to render drafts in `_drafts` folder via command line (#833)
-  * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
+  * Add ordinal date permalink style (`/:categories/:year/:y_day/:title.html`) (#928)
 
 ### Minor Enhancements
   * Site template HTML5-ified (#964)
@@ -1186,14 +1186,14 @@
   * Add deprecation messages for pre-1.0 CLI options (#959)
   * Refactor and colorize logging (#959)
   * Refactor Markdown parsing (#955)
-  * Added application/vnd.apple.pkpass to mime.types served by WEBrick (#907)
+  * Added `application/vnd.apple.pkpass` to mime.types served by WEBrick (#907)
   * Move template site to default markdown renderer (#961)
   * Expose new attribute to Liquid via `page`: `page.path` (#951)
   * Accept multiple config files from command line (#945)
   * Add page variable to liquid custom tags and blocks (#413)
   * Add `paginator.previous_page_path` and `paginator.next_page_path` (#942)
   * Backwards compatibility for 'auto' (#821, #934)
-  * Added date_to_rfc822 used on RSS feeds (#892)
+  * Added `date_to_rfc822` used on RSS feeds (#892)
   * Upgrade version of pygments.rb to 0.4.2 (#927)
   * Added short month (e.g. "Sep") to permalink style options for posts (#890)
   * Expose site.baseurl to Liquid templates (#869)
@@ -1232,18 +1232,18 @@
   * Fix cascade problem with site.baseurl, site.port and site.host. (#935)
   * Filter out directories with valid post names (#875)
   * Fix symlinked static files not being correctly built in unsafe mode (#909)
-  * Fix integration with directory_watcher 1.4.x (#916)
+  * Fix integration with `directory_watcher` 1.4.x (#916)
   * Accepting strings as arguments to jekyll-import command (#910)
-  * Force usage of older directory_watcher gem as 1.5 is broken (#883)
+  * Force usage of older `directory_watcher` gem as 1.5 is broken (#883)
   * Ensure all Post categories are downcase (#842, #872)
   * Force encoding of the rdiscount TOC to UTF8 to avoid conversion errors (#555)
   * Patch for multibyte URI problem with `jekyll serve` (#723)
   * Order plugin execution by priority (#864)
-  * Fixed Page#dir and Page#url for edge cases (#536)
+  * Fixed `Page#dir` and `Page#url` for edge cases (#536)
   * Fix broken `post_url` with posts with a time in their YAML front matter (#831)
   * Look for plugins under the source directory (#654)
   * Tumblr Migrator: finds `_posts` dir correctly, fixes truncation of long
-      post names (#775)
+    post names (#775)
   * Force Categories to be Strings (#767)
   * Safe YAML plugin to prevent vulnerability (#777)
   * Add SVG support to Jekyll/WEBrick. (#407, #406)
@@ -1262,13 +1262,13 @@
 ### Development Fixes
   * Exclude Cucumber 1.2.4, which causes tests to fail in 1.9.2 (#938)
   * Added "features:html" rake task for debugging purposes, cleaned up
-      Cucumber profiles (#832)
+    Cucumber profiles (#832)
   * Explicitly require HTTPS rubygems source in Gemfile (#826)
   * Changed Ruby version for development to 1.9.3-p374 from p362 (#801)
   * Including a link to the GitHub Ruby style guide in CONTRIBUTING.md (#806)
   * Added script/bootstrap (#776)
   * Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version
-      of greater than 1.9 (#771)
+    of greater than 1.9 (#771)
   * Switch to Simplecov for coverage report (#765)
 
 ## 0.12.1 / 2013-02-19
@@ -1289,7 +1289,7 @@
   * Add `post_url` Liquid tag for internal post linking (#369)
   * Allow multiple plugin dirs to be specified (#438)
   * Inline TOC token support for RDiscount (#333)
-  * Add the option to specify the paginated url format (#342)
+  * Add the option to specify the paginated URL format (#342)
   * Swap out albino for pygments.rb (#569)
   * Support Redcarpet 2 and fenced code blocks (#619)
   * Better reporting of Liquid errors (#624)
@@ -1383,16 +1383,16 @@
   * Proper plugin system (#19, #100)
   * Add safe mode so unsafe converters/generators can be added
   * Maruku is now the only processor dependency installed by default.
-      Other processors will be lazy-loaded when necessary (and prompt the
-      user to install them when necessary) (#57)
+    Other processors will be lazy-loaded when necessary (and prompt the
+    user to install them when necessary) (#57)
 
 ### Minor Enhancements
   * Inclusion/exclusion of future dated posts (#59)
   * Generation for a specific time (#59)
-  * Allocate `site.time` on render not per site_payload invocation (#59)
+  * Allocate `site.time` on render not per `site_payload` invocation (#59)
   * Pages now present in the site payload and can be used through the
-      `site.pages` and `site.html_pages` variables
-  * Generate phase added to site#process and pagination is now a generator
+    `site.pages` and `site.html_pages` variables
+  * Generate phase added to `site#process` and pagination is now a generator
   * Switch to RakeGem for build/test process
   * Only regenerate static files when they have changed (#142)
   * Allow arbitrary options to Pygments (#31)
@@ -1411,11 +1411,11 @@
   * Allow overriding of post date in the front matter (#62, #38)
   * Bug Fixes
   * Categories isn't always an array (#73)
-  * Empty tags causes error in read_posts (#84)
+  * Empty tags causes error in `read_posts` (#84)
   * Fix pagination to adhere to read/render/write paradigm
   * Test Enhancement
   * Cucumber features no longer use site.posts.first where a better
-      alternative is available
+    alternative is available
 
 ## 0.5.6 / 2010-01-08
   * Bug Fixes
@@ -1444,32 +1444,32 @@
 ## 0.5.3 / 2009-07-14
   * Bug Fixes
   * Solving the permalink bug where non-html files wouldn't work
-      (@jeffrydegrande)
+    (@jeffrydegrande)
 
 ## 0.5.2 / 2009-06-24
   * Enhancements
   * Added --paginate option to the executable along with a paginator object
-      for the payload (@calavera)
+    for the payload (@calavera)
   * Upgraded RedCloth to 4.2.1, which makes `<notextile>` tags work once
-      again.
+    again.
   * Configuration options set in config.yml are now available through the
-      site payload (@vilcans)
+    site payload (@vilcans)
   * Posts can now have an empty YAML front matter or none at all
-      (@ bahuvrihi)
+    (@ bahuvrihi)
   * Bug Fixes
   * Fixing Ruby 1.9 issue that requires `#to_s` on the err object
-      (@Chrononaut)
+    (@Chrononaut)
   * Fixes for pagination and ordering posts on the same day (@ujh)
   * Made pages respect permalinks style and permalinks in yml front matter
-      (@eugenebolshakov)
+    (@eugenebolshakov)
   * Index.html file should always have index.html permalink
-      (@eugenebolshakov)
+    (@eugenebolshakov)
   * Added trailing slash to pretty permalink style so Apache is happy
-      (@eugenebolshakov)
+    (@eugenebolshakov)
   * Bad markdown processor in config fails sooner and with better message
-      (@ gcnovus)
+    (@ gcnovus)
   * Allow CRLFs in yaml front matter (@juretta)
-  * Added Date#xmlschema for Ruby versions < 1.9
+  * Added `Date#xmlschema` for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06
 
@@ -1478,12 +1478,12 @@
   * Permalink templating system
   * Moved most of the README out to the GitHub wiki
   * Exclude option in configuration so specified files won't be brought over
-      with generated site (@duritong)
+    with generated site (@duritong)
   * Bug Fixes
   * Making sure config.yaml references are all gone, using only config.yml
   * Fixed syntax highlighting breaking for UTF-8 code (@henrik)
   * Worked around RDiscount bug that prevents Markdown from getting parsed
-      after highlight (@henrik)
+    after highlight (@henrik)
   * CGI escaped post titles (@Chrononaut)
 
 ## 0.5.0 / 2009-04-07
@@ -1537,19 +1537,19 @@
 
 ### Major Enhancements
   * Added `--server` option to start a simple WEBrick server on destination
-      directory (@johnreilly and @mchung)
+    directory (@johnreilly and @mchung)
 
 ### Minor Enhancements
   * Added post categories based on directories containing `_posts` (@mreid)
   * Added post topics based on directories underneath `_posts`
   * Added new date filter that shows the full month name (@mreid)
-  * Merge Post's YAML front matter into its to_liquid payload (@remi)
+  * Merge Post's YAML front matter into its `to_liquid` payload (@remi)
   * Restrict includes to regular files underneath `_includes`
   * Bug Fixes
   * Change YAML delimiter matcher so as to not chew up 2nd level markdown
-      headers (@mreid)
+    headers (@mreid)
   * Fix bug that meant page data (such as the date) was not available in
-      templates (@mreid)
+    templates (@mreid)
   * Properly reject directories in `_layouts`
 
 ## 0.2.1 / 2008-12-15
@@ -1558,11 +1558,11 @@
   * Allow use of RDiscount with `--rdiscount` flag
 
 ### Minor Enhancements
-  * Don't load directory_watcher unless it's needed (@pjhyett)
+  * Don't load `directory_watcher` unless it's needed (@pjhyett)
 
 ## 0.2.0 / 2008-12-14
   * Major Changes
-  * related_posts is now found in `site.related_posts`
+  * `related_posts` is now found in `site.related_posts`
 
 ## 0.1.6 / 2008-12-13
   * Major Features
@@ -1598,7 +1598,7 @@
   * Add a real "related posts" implementation using Classifier
   * Command Line Changes
   * Allow cli to be called with 0, 1, or 2 args intuiting dir paths
-      if they are omitted
+    if they are omitted
 
 ## 0.1.1 / 2008-11-22
   * Minor Additions
