@@ -1,13 +1,13 @@
 ---
 layout: default
 ---
-<article class="post">
+<article class="post" itemscope itemtype="http://schema.org/Article">
 
   <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
+      <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
   </header>
 
-  <div class="post-content">
+  <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
 
