@@ -16,4 +16,4 @@ fi
 
 set -x
 
-time bundle exec ruby -I"lib:test" -rloader $TEST_FILES
+time bundle exec ruby -Ilib -Itest -rloader $TEST_FILES
