@@ -9,6 +9,25 @@ dl, dd, ol, ul, figure {
 }
 
 
+/**
+ * Correct html5 display definition for older browsers
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+
 
 /**
  * Basic styling
