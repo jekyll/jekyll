@@ -42,6 +42,7 @@
   * Allow variables (e.g `:categories`) in YAML front matter permalinks (#3320)
   * Handle nil URL placeholders in permalinks (#3325)
   * Template: Fix nav items alignment when in "burger" mode (#3329)
+  * Template: Remove `!important` from nav SCSS introduced in #3329 (#3375)
 
 ### Development Fixes
 
