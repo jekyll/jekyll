@@ -28,6 +28,7 @@
   * Split off Textile support into jekyll-textile-converter (#3319)
   * Improve the navigation menu alignment in the site template on small
     screens (#3331)
+  * Show the regeneration time after the initial generation (#3378)
 
 ### Bug Fixes
 
