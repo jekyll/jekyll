@@ -83,7 +83,9 @@
             display: block;
             padding: 5px 10px;
 
-            margin-right: 0 !important;
+            &:not(:last-child) {
+                margin-right: 0;
+            }
             margin-left: 20px;
         }
     }
