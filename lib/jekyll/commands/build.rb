@@ -48,6 +48,7 @@ module Jekyll
         #
         # Returns nothing.
         def build(site, options)
+          t = Time.now
           source      = options['source']
           destination = options['destination']
           full_build  = options['full_rebuild']
@@ -56,7 +57,7 @@ module Jekyll
           Jekyll.logger.info "Incremental build:", (full_build ? "disabled" : "enabled")
           Jekyll.logger.info "Generating..."
           process_site(site)
-          Jekyll.logger.info "", "done."
+          Jekyll.logger.info "", "done in #{Time.now - t} seconds."
         end
 
         # Private: Watch for file changes and rebuild the site.
