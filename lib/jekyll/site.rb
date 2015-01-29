@@ -258,16 +258,23 @@ module Jekyll
         if File.directory?(path)
           read_data_to(path, data[key] = {})
         else
-          case File.extname(path).downcase
-          when '.csv'
-            data[key] = CSV.read(path, :headers => true).map(&:to_hash)
-          else
-            data[key] = SafeYAML.load_file(path)
-          end
+          data[key] = read_data_file(path)
         end
       end
     end
-
+    
+    # Determines how to read a data file.
+    #
+    # Returns the contents of the data file.
+    def read_data_file(path)
+      case File.extname(path).downcase
+      when '.csv'
+        CSV.read(path, :headers => true).map(&:to_hash)
+      else
+        SafeYAML.load_file(path)
+      end
+    end
+      
     # Read in all collections specified in the configuration
     #
     # Returns nothing.
