@@ -48,6 +48,7 @@ module Jekyll
   autoload :External,            'jekyll/external'
   autoload :Filters,             'jekyll/filters'
   autoload :FrontmatterDefaults, 'jekyll/frontmatter_defaults'
+  autoload :Hooks,               'jekyll/hooks'
   autoload :Layout,              'jekyll/layout'
   autoload :LayoutReader,        'jekyll/layout_reader'
   autoload :LogAdapter,          'jekyll/log_adapter'

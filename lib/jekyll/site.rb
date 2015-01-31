@@ -10,6 +10,8 @@ module Jekyll
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
                   :gems, :plugin_manager
 
+    attr_accessor :page_hooks, :post_hooks, :site_hooks, :doc_hooks, :all_hooks
+
     attr_accessor :converters, :generators
     attr_reader   :regenerator
 
@@ -79,11 +81,21 @@ module Jekyll
     # Returns nothing.
     def setup
       ensure_not_in_dest
-
       plugin_manager.conscientious_require
+      load_plugins
+    end
 
+    # Instantiates all of the plugins
+    #
+    # Returns nothing.
+    def load_plugins
       self.converters = instantiate_subclasses(Jekyll::Converter)
       self.generators = instantiate_subclasses(Jekyll::Generator)
+      self.site_hooks = instantiate_subclasses(Jekyll::Hooks::Site) || []
+      self.page_hooks = instantiate_subclasses(Jekyll::Hooks::Page) || []
+      self.post_hooks = instantiate_subclasses(Jekyll::Hooks::Post) || []
+      self.doc_hooks  = instantiate_subclasses(Jekyll::Hooks::Document) || []
+      self.all_hooks  = instantiate_subclasses(Jekyll::Hooks::All) || []
     end
 
     # Check that the destination dir isn't the source dir or a directory
@@ -151,10 +163,12 @@ module Jekyll
     #
     # Returns nothing.
     def read
+      execute_hooks(:site, :pre_read)
       self.layouts = LayoutReader.new(self).read
       read_directories
       read_data(config['data_source'])
       read_collections
+      execute_hooks(:site, :post_read)
     end
 
     # Recursively traverse directories to find posts, pages and static files
@@ -262,7 +276,7 @@ module Jekyll
         end
       end
     end
-    
+
     # Determines how to read a data file.
     #
     # Returns the contents of the data file.
@@ -274,7 +288,7 @@ module Jekyll
         SafeYAML.load_file(path)
       end
     end
-      
+
     # Read in all collections specified in the configuration
     #
     # Returns nothing.
@@ -297,6 +311,7 @@ module Jekyll
     #
     # Returns nothing.
     def render
+      execute_hooks(:site, :pre_render)
       relative_permalinks_deprecation_method
 
       payload = site_payload
@@ -332,6 +347,7 @@ module Jekyll
       each_site_file { |item|
         item.write(dest) if regenerator.regenerate?(item)
       }
+      execute_hooks(:site, :post_write)
       regenerator.write_metadata unless full_rebuild?
     end
 
@@ -387,25 +403,38 @@ module Jekyll
     #   "tags"       - The Hash of tag values and Posts.
     #                  See Site#post_attr_hash for type info.
     def site_payload
-      {
+      payload = {
         "jekyll" => {
           "version" => Jekyll::VERSION,
           "environment" => Jekyll.env
         },
-        "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-            "time"         => time,
-            "posts"        => posts.sort { |a, b| b <=> a },
-            "pages"        => pages,
-            "static_files" => static_files,
-            "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
-            "categories"   => post_attr_hash('categories'),
-            "tags"         => post_attr_hash('tags'),
-            "collections"  => collections,
-            "documents"    => documents,
-            "data"         => site_data
-        }))
+        "site" => Utils.deep_merge_hashes(
+          config,
+          Utils.deep_merge_hashes(
+            Hash[collections.map{|label, coll| [label, coll.docs]}],
+            {
+              "time"         => time,
+              "posts"        => posts.sort { |a, b| b <=> a },
+              "pages"        => pages,
+              "static_files" => static_files,
+              "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
+              "categories"   => post_attr_hash('categories'),
+              "tags"         => post_attr_hash('tags'),
+              "collections"  => collections,
+              "documents"    => documents,
+              "data"         => site_data
+            }
+          )
+        )
       }
+
+      site_hooks.each do |hook|
+        merged_payload = hook.merge_payload(payload, self) || {}
+        if !merged_payload.empty?
+          payload = Jekyll::Utils.deep_merge_hashes(payload, p)
+        end
+      end
+      payload
     end
 
     # Filter out any files/directories that are hidden or backup files (start
@@ -507,6 +536,12 @@ module Jekyll
 
     def publisher
       @publisher ||= Publisher.new(self)
+    end
+
+    def execute_hooks(domain, hook_name, subject = self, *args)
+      self.public_send("#{domain}_hooks").each do |hook|
+        hook.public_send(subject, *args)
+      end
     end
 
     private
