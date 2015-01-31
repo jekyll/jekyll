@@ -4,7 +4,10 @@ Feature: Site pagination
   I want divide the posts in several pages
 
   Scenario Outline: Paginate with N posts per page
-    Given I have a configuration file with "paginate" set to "<num>"
+    Given I have a configuration file with:
+      | key      | value             |
+      | paginate | <num>             |
+      | gems     | [jekyll-paginate] |
     And I have a _layouts directory
     And I have an "index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
@@ -32,6 +35,7 @@ Feature: Site pagination
       | paginate      | 1                              |
       | paginate_path | /blog/page-:num                |
       | permalink     | /blog/:year/:month/:day/:title |
+      | gems          | [jekyll-paginate]              |
     And I have a blog directory
     And I have an "blog/index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
@@ -59,6 +63,7 @@ Feature: Site pagination
       | paginate      | 1                              |
       | paginate_path | /blog/page/:num                |
       | permalink     | /blog/:year/:month/:day/:title |
+      | gems          | [jekyll-paginate]              |
     And I have a blog directory
     And I have an "blog/index.html" page that contains "{{ paginator.posts.size }}"
     And I have an "index.html" page that contains "Don't pick me!"
