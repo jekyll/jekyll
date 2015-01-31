@@ -101,9 +101,9 @@ http://localhost:4000/blog
 The order of precedence for conflicting [configuration settings](../configuration/)
 is as follows:
 
-1.  Command-line flags
-2.  Configuration file settings
-3.  Defaults
+1. Command-line flags
+2. Configuration file settings
+3. Defaults
 
 That is: defaults are overridden by options specified in `_config.yml`,
 and flags specified at the command-line will override all other settings
