@@ -373,7 +373,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(site_configuration)
         site.process
 
-        file_content = site.read_data_file(File.join(source_dir, '_data', 'members.yaml'))
+        file_content = site.read_data_file(source_dir('_data', 'members.yaml'))
 
         assert_equal site.data['members'], file_content
         assert_equal site.site_payload['site']['data']['members'], file_content
