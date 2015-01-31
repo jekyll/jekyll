@@ -450,7 +450,8 @@ The `projects/foo_project.md` would have the `layout` set to `foobar` instead of
 
 Jekyll runs with the following configuration options by default. Unless
 alternative settings for these options are explicitly specified in the
-configuration file or on the command-line, Jekyll will run using these options.
+configuration file or on the command-line, Jekyll will run using these
+options.
 
 <div class="note warning">
   <h5>There are two unsupported kramdown options</h5>

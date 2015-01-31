@@ -60,7 +60,7 @@ HTML::Proofer.new("./_site").run
 {% endhighlight %}
 
 Options are given as a second argument to `.new`, and are encoded in a
-symbol-keyed Ruby Hash. More information about the configuration options,
+symbol-keyed Ruby Hash. For more information about the configuration options,
 check out `html-proofer`'s README file.
 
 [2]: https://github.com/gjtorikian/html-proofer
