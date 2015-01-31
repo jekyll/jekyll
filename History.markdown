@@ -45,6 +45,7 @@
   * Handle nil URL placeholders in permalinks (#3325)
   * Template: Fix nav items alignment when in "burger" mode (#3329)
   * Template: Remove `!important` from nav SCSS introduced in #3329 (#3375)
+  * The `:title` URL placeholder for collections should be the filename slug. (#3383)
 
 ### Development Fixes
 
