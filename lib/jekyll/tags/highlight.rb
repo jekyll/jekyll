@@ -75,7 +75,7 @@ eos
       end
 
       def render_pygments(code, is_safe)
-        require 'pygments'
+        Jekyll::External.require_with_graceful_fail 'pygments'
 
         @options[:encoding] = 'utf-8'
 
@@ -100,7 +100,7 @@ eos
       end
 
       def render_rouge(code)
-        require 'rouge'
+        Jekyll::External.require_with_graceful_fail 'rouge'
         formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         code = formatter.format(lexer.lex(code))
