@@ -132,7 +132,7 @@ module Jekyll
         path:       cleaned_relative_path,
         output_ext: Jekyll::Renderer.new(site, self).output_ext,
         name:       Utils.slugify(basename_without_ext),
-        title:      Utils.slugify(data['title']) || Utils.slugify(basename_without_ext)
+        title:      Utils.slugify(data['slug']) || Utils.slugify(basename_without_ext)
       }
     end
 

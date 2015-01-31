@@ -249,15 +249,20 @@ class TestDocument < Test::Unit::TestCase
       }))
       @site.process
       @document = @site.collections["slides"].docs[3]
-      @document_without_title = @site.collections["slides"].docs[4]
+      @document_without_slug = @site.collections["slides"].docs[4]
+      @document_with_strange_slug = @site.collections["slides"].docs[5]
     end
 
-    should "produce the right URL if they have a title" do
+    should "produce the right URL if they have a slug" do
       assert_equal "/slides/so-what-is-jekyll-exactly", @document.url
     end
 
-    should "produce the right URL if they don't have a title" do
-      assert_equal "/slides/example-slide-5", @document_without_title.url
+    should "produce the right URL if they don't have a slug" do
+      assert_equal "/slides/example-slide-5", @document_without_slug.url
+    end
+
+    should "produce the right URL if they have a wild slug" do
+      assert_equal "/slides/well-so-what-is-jekyll-then", @document_with_strange_slug.url
     end
   end
 

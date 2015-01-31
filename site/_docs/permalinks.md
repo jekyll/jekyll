@@ -78,7 +78,10 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
         <p><code>title</code></p>
       </td>
       <td>
-        <p>Title from the Post’s filename</p>
+        <p>
+            Title from the document’s filename. May be overridden via the
+            document’s <code>slug</code> YAML front matter.
+        </p>
       </td>
     </tr>
     <tr>
