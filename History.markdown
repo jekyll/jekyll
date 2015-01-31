@@ -7,6 +7,8 @@
   * Upgrade to Liquid 3.0.0 (#3002)
   * Support Ruby v2.2 (#3234)
   * Support RDiscount 2 (#2767)
+  * Remove most runtime deps (#3323)
+  * Move to Rouge as default highlighter (#3323)
 
 ### Minor Enhancements
 
