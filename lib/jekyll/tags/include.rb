@@ -101,7 +101,7 @@ eos
       end
 
       def tag_includes_dir
-        '_includes'
+        '_includes'.freeze
       end
 
       def render(context)
@@ -123,7 +123,7 @@ eos
         end
 
         begin
-          partial = Liquid::Template.parse(source(path, context))
+          partial = Liquid::Template.parse(read_file(path, context))
 
           context.stack do
             context['include'] = parse_params(context) if @params
@@ -135,7 +135,7 @@ eos
       end
 
       def resolved_includes_dir(context)
-        File.join(File.realpath(context.registers[:site].source), @includes_dir)
+        context.registers[:site].in_source_dir(@includes_dir)
       end
 
       def validate_path(path, dir, safe)
@@ -155,14 +155,14 @@ eos
       end
 
       # This method allows to modify the file content by inheriting from the class.
-      def source(file, context)
+      def read_file(file, context)
         File.read(file, file_read_opts(context))
       end
     end
 
     class IncludeRelativeTag < IncludeTag
       def tag_includes_dir
-        '.'
+        '.'.freeze
       end
 
       def page_path(context)
