@@ -59,6 +59,7 @@
   * Fix some spacing (#3312)
   * Fix comment typo in `lib/jekyll/frontmatter_defaults.rb` (#3322)
   * Move all `regenerate?` checking to `Regenerator` (#3326)
+  * Factor out a `read_data_file` call to keep things clean (#3380)
 
 ### Site Enhancements
 
