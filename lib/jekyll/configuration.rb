@@ -255,10 +255,12 @@ module Jekyll
         config['kramdown']['use_coderay'] = config['kramdown'].delete('enable_coderay')
       end
 
-      if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
-        Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
-          "Markdown processor. Maruku support has been deprecated and will " +
-          "be removed in 3.0.0. We recommend you switch to Kramdown."
+      if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku") && !(config['gems'] || []).include?('jekyll-maruku')
+        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " +
+          "Markdown processor, which has been removed from Jekyll core. " +
+          "To continue using it, add `jekyll-maruku` to the `gems` directive " +
+          "in your configuration file and ensure you have the `jekyll-maruku` " +
+          "installed. It is recommended to switch to 'kramdown' at this time."
       end
       config
     end
