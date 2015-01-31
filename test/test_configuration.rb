@@ -181,6 +181,8 @@ class TestConfiguration < Test::Unit::TestCase
     end
 
     should "load multiple config files" do
+      External.require_with_graceful_fail('toml')
+
       mock(SafeYAML).load_file(@paths[:default]) { Hash.new }
       mock(SafeYAML).load_file(@paths[:other]) { Hash.new }
       mock(TOML).load_file(@paths[:toml]) { Hash.new }

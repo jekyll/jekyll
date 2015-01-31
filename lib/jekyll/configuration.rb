@@ -35,7 +35,7 @@ module Jekyll
 
       # Conversion
       'markdown'      => 'kramdown',
-      'highlighter'   => 'pygments',
+      'highlighter'   => 'rouge',
       'lsi'           => false,
       'excerpt_separator' => "\n\n",
 
@@ -115,6 +115,7 @@ module Jekyll
     def safe_load_file(filename)
       case File.extname(filename)
       when /\.toml/i
+        Jekyll::External.require_with_graceful_fail('toml') unless defined?(TOML)
         TOML.load_file(filename)
       when /\.ya?ml/i
         SafeYAML.load_file(filename)
@@ -259,6 +260,12 @@ module Jekyll
         Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
           "Markdown processor. Maruku support has been deprecated and will " +
           "be removed in 3.0.0. We recommend you switch to Kramdown."
+      end
+
+      if config.key?('paginate') && config['paginate'] && !(config['gems'] || []).include?('jekyll-paginate')
+        Jekyll::Deprecator.deprecation_message "You appear to have pagination " +
+          "turned on, but you haven't included the `jekyll-paginate` gem. " +
+          "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
       end
       config
     end

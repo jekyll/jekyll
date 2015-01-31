@@ -17,7 +17,10 @@ Feature: Markdown
     And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/index.html"
 
   Scenario: Markdown in pagination on index
-    Given I have a configuration file with "paginate" set to "5"
+    Given I have a configuration file with:
+      | key      | value             |
+      | paginate | 5                 |
+      | gems     | [jekyll-paginate] |
     And I have an "index.html" page that contains "Index - {% for post in paginator.posts %} {{ post.content }} {% endfor %}"
     And I have a _posts directory
     And I have the following post:
