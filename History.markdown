@@ -11,7 +11,6 @@
   * Move to Rouge as default highlighter (#3323)
 
 ### Minor Enhancements
-
   * Sort static files just once, and call `site_payload` once for all collections (#3204)
   * Separate `jekyll docs` and optimize external gem handling (#3241)
   * Improve `Site#getConverterImpl` and call it `Site#find_converter_instance` (#3240)
@@ -33,6 +32,7 @@
   * Show the regeneration time after the initial generation (#3378)
   * Site template: Switch default font to Helvetica Neue (#3376)
   * Make the `include` tag a teensy bit faster. (#3391)
+  * Add `pkill -f jekyll` to ways to kill. (#3397)
 
 ### Bug Fixes
 
