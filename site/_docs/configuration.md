@@ -449,7 +449,7 @@ The `projects/foo_project.md` would have the `layout` set to `foobar` instead of
 ## Default Configuration
 
 Jekyll runs with the following configuration options by default. Alternative
-settings for these options can be explicitly specified in the Configuration
+settings for these options can be explicitly specified in the configuration
 file or on the command-line.
 
 <div class="note warning">
