@@ -26,7 +26,7 @@ def gemspec_file
 end
 
 def gem_file
-  "#{name}-#{version}.gem"
+  "#{name}-#{Gem::Version.new(version).to_s}.gem"
 end
 
 def normalize_bullets(markdown)
