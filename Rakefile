@@ -125,6 +125,50 @@ task :console do
   sh "irb -rubygems -r ./lib/#{name}.rb"
 end
 
+
+#############################################################################
+#
+# Site template tasks - lib/site_template/
+#
+#############################################################################
+
+namespace :site_template do
+  desc "Generate and view the site template locally"
+  task :preview do
+    require "launchy"
+    require "jekyll"
+
+    # Yep, it's a hack! Wait a few seconds for the Jekyll site to generate and
+    # then open it in a browser. Someday we can do better than this, I hope.
+    Thread.new do
+      sleep 4
+      puts "Opening in browser..."
+      Launchy.open("http://localhost:4000")
+    end
+
+    # Generate the site template in server mode.
+    puts "Running Jekyll..."
+    options = {
+      "source"      => File.expand_path("lib/site_template"),
+      "destination" => File.expand_path("lib/site_template/_site"),
+      "watch"       => true,
+      "serving"     => true
+    }
+    Jekyll::Commands::Build.process(options)
+    Jekyll::Commands::Serve.process(options)
+  end
+
+  desc "Generate the site template"
+  task :generate do
+    require "jekyll"
+    Jekyll::Commands::Build.process({
+      "source"      => File.expand_path("lib/site_template"),
+      "destination" => File.expand_path("lib/site_template/_site")
+    })
+  end
+end
+
+
 #############################################################################
 #
 # Site tasks - http://jekyllrb.com

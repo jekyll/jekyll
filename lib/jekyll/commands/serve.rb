@@ -32,6 +32,7 @@ module Jekyll
         # Boot up a WEBrick server which points to the compiled site's root.
         def process(options)
           options = configuration_from_options(options)
+          options['host'] = '0.0.0.0'
           destination = options['destination']
           setup(destination)
 
