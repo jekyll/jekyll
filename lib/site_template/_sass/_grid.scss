@@ -17,15 +17,14 @@ $grid-columns: 12;
 
 @mixin make-grid-columns-float($class) {
     $list: "";
-    $i: 1;
-    @for $i from 2 through $grid-columns {
+    @for $i from 1 through $grid-columns {
         $list: ".col-#{$class}-#{$i}, #{$list}";
     }
     #{$list} { float: left }
 }
 
 @mixin make-grid($class) {
-    @for $i from 0 through $grid-columns {
+    @for $i from 1 through $grid-columns {
         .col-#{$class}-#{$i} { width: percentage($i / $grid-columns) }
     }
 }
