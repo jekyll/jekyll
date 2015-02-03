@@ -30,8 +30,8 @@ $grid-columns: 12;
 }
 
 
-@include make-grid(xs);
 @include make-grid-columns-float(xs);
+@include make-grid(xs);
 
 @media (min-width: $on-palm) {
     @include make-grid-columns-float(sm);
