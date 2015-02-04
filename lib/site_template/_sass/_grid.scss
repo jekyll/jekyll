@@ -9,6 +9,9 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
 
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+
     padding-left: $spacing-unit / 2;
 }
 
