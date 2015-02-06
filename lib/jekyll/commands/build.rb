@@ -57,7 +57,7 @@ module Jekyll
           Jekyll.logger.info "Incremental build:", (full_build ? "disabled" : "enabled")
           Jekyll.logger.info "Generating..."
           process_site(site)
-          Jekyll.logger.info "", "done in #{Time.now - t} seconds."
+          Jekyll.logger.info "", "done in #{(Time.now - t).round 2} seconds."
         end
 
         # Private: Watch for file changes and rebuild the site.
