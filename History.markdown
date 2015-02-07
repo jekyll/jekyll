@@ -35,6 +35,7 @@
   * Make the `include` tag a teensy bit faster. (#3391)
   * Add `pkill -f jekyll` to ways to kill. (#3397)
   * Site template: collapsed, variable-driven font declaration (#3360)
+  * Site template: Don't always show the scrollbar in code blocks (#3419)
 
 ### Bug Fixes
 
