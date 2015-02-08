@@ -53,10 +53,10 @@ You have 3 options for installing plugins:
 
 In general, plugins you make will fall into one of four categories:
 
-1. [Generators](#Generators)
-2. [Converters](#Converters)
-3. [Commands](#Commands)
-4. [Tags](#Tags)
+1. [Generators](#generators)
+2. [Converters](#converters)
+3. [Commands](#commands)
+4. [Tags](#tags)
 
 ## Generators
 
@@ -273,7 +273,7 @@ class MyNewCommand < Jekyll::Command
         c.syntax "new [options]"
         c.description 'Create a new Jekyll site.'
 
-        c.option 'dest', '-d DEST, 'Where the site should go.'
+        c.option 'dest', '-d DEST', 'Where the site should go.'
 
         c.action do |args, options|
           Jekyll::Site.new_site_at(options['dest'])
@@ -560,7 +560,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll-citation](https://github.com/archome/jekyll-citation): Render BibTeX-formatted bibliographies/citations included in posts and pages (pure Ruby).
 - [Jekyll Dribbble Set Tag](https://github.com/ericdfields/Jekyll-Dribbble-Set-Tag): Builds Dribbble image galleries from any user.
 - [Debbugs](https://gist.github.com/2218470): Allows posting links to Debian BTS easily.
-- [Refheap_tag](https://github.com/aburdette/refheap_tag): Liquid tag that allows embedding pastes from [refheap](https://refheap.com).
+- [Refheap_tag](https://github.com/aburdette/refheap_tag): Liquid tag that allows embedding pastes from [refheap](https://www.refheap.com/).
 - [Jekyll-devonly_tag](https://gist.github.com/2403522): A block tag for including markup only during development.
 - [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) by [redwallhp](https://github.com/redwallhp): Generates thumbnails from a directory of images and displays them in a grid.
 - [Youku and Tudou Embed](https://gist.github.com/Yexiaoxing/5891929): Liquid plugin for embedding Youku and Tudou videos.
@@ -585,7 +585,7 @@ You can find a few useful plugins at the following locations:
 - [inline\_highlight](https://github.com/bdesham/inline_highlight): A tag for inline syntax highlighting.
 - [jekyll-mermaid](https://github.com/jasonbellamy/jekyll-mermaid): Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.
 - [twa](https://github.com/Ezmyrelda/twa): Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.
-- 
+-
 #### Collections
 
 - [Jekyll Plugins by Recursive Design](http://recursive-design.com/projects/jekyll-plugins/): Plugins to generate Project pages from GitHub readmes, a Category page, and a Sitemap generator.
