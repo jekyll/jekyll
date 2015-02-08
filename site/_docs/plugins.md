@@ -579,9 +579,9 @@ You can find a few useful plugins at the following locations:
 - [Jekyll Github Sample Tag](https://github.com/bwillis/jekyll-github-sample): A liquid tag to include a sample of a github repo file in your Jekyll site.
 - [Jekyll Project Version Tag](https://github.com/rob-murray/jekyll-version-plugin): A Liquid tag plugin that renders a version identifier for your Jekyll site sourced from the git repository containing your code.
 - [Piwigo Gallery](https://github.com/AlessandroLorenzi/piwigo_gallery) by [Alessandro Lorenzi](http://www.alorenzi.eu/): Jekyll plugin to generate thumbnails from a Piwigo gallery and display them with a Liquid tag
-- [mathml.rb](https://github.com/tmthrgd/jekyll-plugins) by [Tom Thorogood](http://tomthorogood.co.uk/): A plugin to convert TeX mathematics into MathML for display.
+- [mathml.rb](https://github.com/tmthrgd/jekyll-plugins) by Tom Thorogood: A plugin to convert TeX mathematics into MathML for display.
 - [webmention_io.rb](https://github.com/aarongustafson/jekyll-webmention_io) by [Aaron Gustafson](http://aaron-gustafson.com/): A plugin to enable [webmention](http://indiewebcamp.com/webmention) integration using [Webmention.io](http://webmention.io). Includes an optional JavaScript for updating webmentions automatically between publishes and, if available, in realtime using WebSockets.
-- [Jekyll 500px Embed](https://github.com/lkorth/jekyll-500px-embed) by [Luke Korth](https://lukekorth.com/). A Liquid tag plugin that embeds [500px](https://500px.com/) photos.
+- [Jekyll 500px Embed](https://github.com/lkorth/jekyll-500px-embed) by Luke Korth. A Liquid tag plugin that embeds [500px](https://500px.com/) photos.
 - [inline\_highlight](https://github.com/bdesham/inline_highlight): A tag for inline syntax highlighting.
 - [jekyll-mermaid](https://github.com/jasonbellamy/jekyll-mermaid): Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.
 - [twa](https://github.com/Ezmyrelda/twa): Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.
@@ -594,7 +594,7 @@ You can find a few useful plugins at the following locations:
 
 #### Other
 
-- [ditaa-ditaa](https://github.com/tmthrgd/ditaa-ditaa) by [Tom Thorogood](http://tomthorogood.co.uk/): a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.
+- [ditaa-ditaa](https://github.com/tmthrgd/ditaa-ditaa) by Tom Thorogood: a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.
 - [Pygments Cache Path by Raimonds Simanovskis](https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb): Plugin to cache syntax-highlighted code from Pygments.
 - [Draft/Publish Plugin by Michael Ivey](https://gist.github.com/49630): Save posts as drafts.
 - [Growl Notification Generator by Tate Johnson](https://gist.github.com/490101): Send Jekyll notifications to Growl.
