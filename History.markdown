@@ -52,6 +52,7 @@
   * Template: Fix nav items alignment when in "burger" mode (#3329)
   * Template: Remove `!important` from nav SCSS introduced in #3329 (#3375)
   * The `:title` URL placeholder for collections should be the filename slug. (#3383)
+  * Trim the generate time diff to just 3 places past the decimal place (#3415)
 
 ### Development Fixes
 
