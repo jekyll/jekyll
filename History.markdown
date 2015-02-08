@@ -91,6 +91,7 @@
   * Remove extra spaces (#3388)
   * Fix small grammar errors on a couple pages (#3396)
   * Fix typo on Templates docs page (#3420)
+  * s/three/four for plugin type list (#3424)
 
 ## 2.5.3 / 2014-12-22
 
