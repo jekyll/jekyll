@@ -51,7 +51,7 @@ You have 3 options for installing plugins:
   </p>
 </div>
 
-In general, plugins you make will fall into one of three categories:
+In general, plugins you make will fall into one of four categories:
 
 1. [Generators](#Generators)
 2. [Converters](#Converters)
