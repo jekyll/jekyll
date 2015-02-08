@@ -6,8 +6,7 @@ permalink: /docs/troubleshooting/
 
 If you ever run into problems installing or using Jekyll, here are a few tips
 that might be of help. If the problem you’re experiencing isn’t covered below,
-please [report an issue]({{site.help_url}}/issues/new) so the
-Jekyll community can make everyone’s experience better.
+**please [check out our other help resources](/help/)** as well.
 
 - [Installation Problems](#installation-problems)
 - [Problems running Jekyll](#problems-running-jekyll)
