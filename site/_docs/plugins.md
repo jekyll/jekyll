@@ -53,10 +53,10 @@ You have 3 options for installing plugins:
 
 In general, plugins you make will fall into one of four categories:
 
-1. [Generators](#Generators)
-2. [Converters](#Converters)
-3. [Commands](#Commands)
-4. [Tags](#Tags)
+1. [Generators](#generators)
+2. [Converters](#converters)
+3. [Commands](#commands)
+4. [Tags](#tags)
 
 ## Generators
 
@@ -273,7 +273,7 @@ class MyNewCommand < Jekyll::Command
         c.syntax "new [options]"
         c.description 'Create a new Jekyll site.'
 
-        c.option 'dest', '-d DEST, 'Where the site should go.'
+        c.option 'dest', '-d DEST', 'Where the site should go.'
 
         c.action do |args, options|
           Jekyll::Site.new_site_at(options['dest'])
@@ -560,7 +560,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll-citation](https://github.com/archome/jekyll-citation): Render BibTeX-formatted bibliographies/citations included in posts and pages (pure Ruby).
 - [Jekyll Dribbble Set Tag](https://github.com/ericdfields/Jekyll-Dribbble-Set-Tag): Builds Dribbble image galleries from any user.
 - [Debbugs](https://gist.github.com/2218470): Allows posting links to Debian BTS easily.
-- [Refheap_tag](https://github.com/aburdette/refheap_tag): Liquid tag that allows embedding pastes from [refheap](https://refheap.com).
+- [Refheap_tag](https://github.com/aburdette/refheap_tag): Liquid tag that allows embedding pastes from [refheap](https://www.refheap.com/).
 - [Jekyll-devonly_tag](https://gist.github.com/2403522): A block tag for including markup only during development.
 - [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) by [redwallhp](https://github.com/redwallhp): Generates thumbnails from a directory of images and displays them in a grid.
 - [Youku and Tudou Embed](https://gist.github.com/Yexiaoxing/5891929): Liquid plugin for embedding Youku and Tudou videos.
@@ -579,13 +579,13 @@ You can find a few useful plugins at the following locations:
 - [Jekyll Github Sample Tag](https://github.com/bwillis/jekyll-github-sample): A liquid tag to include a sample of a github repo file in your Jekyll site.
 - [Jekyll Project Version Tag](https://github.com/rob-murray/jekyll-version-plugin): A Liquid tag plugin that renders a version identifier for your Jekyll site sourced from the git repository containing your code.
 - [Piwigo Gallery](https://github.com/AlessandroLorenzi/piwigo_gallery) by [Alessandro Lorenzi](http://www.alorenzi.eu/): Jekyll plugin to generate thumbnails from a Piwigo gallery and display them with a Liquid tag
-- [mathml.rb](https://github.com/tmthrgd/jekyll-plugins) by [Tom Thorogood](http://tomthorogood.co.uk/): A plugin to convert TeX mathematics into MathML for display.
+- [mathml.rb](https://github.com/tmthrgd/jekyll-plugins) by Tom Thorogood: A plugin to convert TeX mathematics into MathML for display.
 - [webmention_io.rb](https://github.com/aarongustafson/jekyll-webmention_io) by [Aaron Gustafson](http://aaron-gustafson.com/): A plugin to enable [webmention](http://indiewebcamp.com/webmention) integration using [Webmention.io](http://webmention.io). Includes an optional JavaScript for updating webmentions automatically between publishes and, if available, in realtime using WebSockets.
-- [Jekyll 500px Embed](https://github.com/lkorth/jekyll-500px-embed) by [Luke Korth](https://lukekorth.com/). A Liquid tag plugin that embeds [500px](https://500px.com/) photos.
+- [Jekyll 500px Embed](https://github.com/lkorth/jekyll-500px-embed) by Luke Korth. A Liquid tag plugin that embeds [500px](https://500px.com/) photos.
 - [inline\_highlight](https://github.com/bdesham/inline_highlight): A tag for inline syntax highlighting.
 - [jekyll-mermaid](https://github.com/jasonbellamy/jekyll-mermaid): Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.
 - [twa](https://github.com/Ezmyrelda/twa): Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.
-- 
+-
 #### Collections
 
 - [Jekyll Plugins by Recursive Design](http://recursive-design.com/projects/jekyll-plugins/): Plugins to generate Project pages from GitHub readmes, a Category page, and a Sitemap generator.
@@ -594,7 +594,7 @@ You can find a few useful plugins at the following locations:
 
 #### Other
 
-- [ditaa-ditaa](https://github.com/tmthrgd/ditaa-ditaa) by [Tom Thorogood](http://tomthorogood.co.uk/): a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.
+- [ditaa-ditaa](https://github.com/tmthrgd/ditaa-ditaa) by Tom Thorogood: a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.
 - [Pygments Cache Path by Raimonds Simanovskis](https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb): Plugin to cache syntax-highlighted code from Pygments.
 - [Draft/Publish Plugin by Michael Ivey](https://gist.github.com/49630): Save posts as drafts.
 - [Growl Notification Generator by Tate Johnson](https://gist.github.com/490101): Send Jekyll notifications to Growl.

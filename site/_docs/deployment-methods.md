@@ -91,7 +91,7 @@ Another way to deploy your Jekyll site is to use [Rake](https://github.com/jimwe
 
 ### rsync
 
-Once you’ve generated the `_site` directory, you can easily rsync it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy). You’d obviously need to change the values to reflect your site’s details. There is even [a matching TextMate command](http://gist.github.com/214959) that will help you run
+Once you’ve generated the `_site` directory, you can easily rsync it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy). You’d obviously need to change the values to reflect your site’s details. There is even [a matching TextMate command](http://gist.github.com/214959) that will help you run
 this script from within Textmate.
 
 

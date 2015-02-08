@@ -1,0 +1,9 @@
+machine:
+  timezone: UTC
+  ruby:
+    version: 2.1.5
+  environment:
+    PROOF: true
+test:
+  override:
+    - script/proof -f

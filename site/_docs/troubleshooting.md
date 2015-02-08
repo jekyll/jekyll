@@ -31,7 +31,7 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 sudo yum install ruby-devel
 {% endhighlight %}
 
-On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need to run the
+On [NearlyFreeSpeech](https://www.nearlyfreespeech.net/) you need to run the
 following commands before installing Jekyll:
 
 {% highlight bash %}

@@ -32,3 +32,7 @@ if ENV['BENCHMARK']
   gem 'rbtrace'
   gem 'stackprof'
 end
+
+if ENV['PROOF']
+  gem 'html-proofer', '~> 2.0'
+end
