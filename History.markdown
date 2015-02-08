@@ -93,6 +93,7 @@
   * Fix small grammar errors on a couple pages (#3396)
   * Fix typo on Templates docs page (#3420)
   * s/three/four for plugin type list (#3424)
+  * Release jekyllrb.com as a locally-compiled site. (#3426)
 
 ## 2.5.3 / 2014-12-22
 
