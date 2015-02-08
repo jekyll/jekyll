@@ -7,3 +7,8 @@ machine:
 test:
   override:
     - script/proof -f
+general:
+  branches:
+    ignore:
+      - gh-pages # no proof script here
+      - master   # don't need to duplicate work
