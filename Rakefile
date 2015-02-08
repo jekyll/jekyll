@@ -203,26 +203,21 @@ namespace :site do
     end
 
     # Copy site to gh-pages dir.
-    puts "Copying site to gh-pages branch..."
-    copy_exclude = %w[
-      site/.
-      site/..
-      site/.jekyll-metadata
-      site/.sass-cache
-      site/_site
-    ]
-    FileList["site/{*,.*}"].exclude(*copy_exclude).each do |path|
-      sh "cp -R #{path} gh-pages/"
-    end
+    puts "Building site into gh-pages branch..."
+    ENV['JEKYLL_ENV'] = 'production'
+    require "jekyll"
+    Jekyll::Commands::Build.process({
+      "source"       => File.expand_path("site"),
+      "destination"  => File.expand_path("gh-pages"),
+      "sass"         => { "style" => "compressed" },
+      "full_rebuild" => true
+    })
 
-    # Change any configuration settings for production.
-    config = YAML.load_file("gh-pages/_config.yml")
-    config.merge!({'sass' => {'style' => 'compressed'}})
-    File.write('gh-pages/_config.yml', YAML.dump(config))
+    File.open('gh-pages/.nojekyll', 'wb') { |f| f.puts(":dog: food.") }
 
     # Commit and push.
     puts "Committing and pushing to GitHub Pages..."
-    sha = `git log`.match(/[a-z0-9]{40}/)[0]
+    sha = `git rev-parse HEAD`.strip
     Dir.chdir('gh-pages') do
       sh "git add ."
       sh "git commit --allow-empty -m 'Updating to #{sha}.'"
