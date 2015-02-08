@@ -11,8 +11,8 @@
     <title xml:lang="en">Jekyll • Simple, blog-aware, static sites</title>
     <atom:link type="application/atom+xml" href="http://jekyllrb.com/feed.xml" rel="self"/>
     <link>http://jekyllrb.com/</link>
-    <pubDate>Sat, 07 Feb 2015 22:09:05 -0800</pubDate>
-    <lastBuildDate>Sat, 07 Feb 2015 22:09:05 -0800</lastBuildDate>
+    <pubDate>Sat, 07 Feb 2015 23:54:36 -0800</pubDate>
+    <lastBuildDate>Sat, 07 Feb 2015 23:54:36 -0800</lastBuildDate>
     <language>en-US</language>
     <generator>Jekyll v3.0.0-beta1</generator>
     <description>Transform your plain text into static websites and blogs.</description>
@@ -350,7 +350,7 @@ will now work properly).&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;As always, a full list of the updates are on the
-&lt;a href=&quot;/docs/history#v2-2-0&quot;&gt;history page&lt;/a&gt;. Happy Jekylling!&lt;/p&gt;
+&lt;a href=&quot;/docs/history/#v2-2-0&quot;&gt;history page&lt;/a&gt;. Happy Jekylling!&lt;/p&gt;
 </description>
     </item>
     
@@ -483,7 +483,7 @@ swell on your favourite hardware.&lt;/a&gt;&lt;/p&gt;
       <category>release</category>
       
       <guid isPermaLink="true">http://jekyllrb.com/news/2014/05/06/jekyll-turns-2-0-0/</guid>
-      <description>&lt;p&gt;A year ago to the day, &lt;a href=&quot;/news/2013/05/06/jekyll-1-0-0-released/&quot;&gt;we released Jekyll 1.0.0&lt;/a&gt;. One year later, we present to you the next major version: Jekyll 2.0.0.&lt;/p&gt;
+      <description>&lt;p&gt;A year ago to the day, &lt;a href=&quot;/news/2013/05/05/jekyll-1-0-0-released/&quot;&gt;we released Jekyll 1.0.0&lt;/a&gt;. One year later, we present to you the next major version: Jekyll 2.0.0.&lt;/p&gt;
 
 &lt;p&gt;Jam-packed with some &lt;a href=&quot;/docs/history/&quot;&gt;highly-requested features and bugfixes galore&lt;/a&gt;, this is the best Jekyll yet. Some notable changes:&lt;/p&gt;
 

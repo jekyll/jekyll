@@ -31,7 +31,7 @@
     <a href="/news/">News</a>
   </li>
   <li>
-    <a href="https://github.com/jekyll/jekyll-help">Help</a>
+    <a href="/help/">Help</a>
   </li>
   <li>
     <a href="https://github.com/jekyll/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
@@ -60,7 +60,7 @@
     <a href="/news/">News</a>
   </li>
   <li>
-    <a href="https://github.com/jekyll/jekyll-help">Help</a>
+    <a href="/help/">Help</a>
   </li>
   <li>
     <a href="https://github.com/jekyll/jekyll"><span class="hide-on-mobiles">View on </span>GitHub</a>
@@ -2100,10 +2100,10 @@ having to modify the Jekyll source itself.</p>
 <p>In general, plugins you make will fall into one of four categories:</p>
 
 <ol>
-  <li><a href="#Generators">Generators</a></li>
-  <li><a href="#Converters">Converters</a></li>
-  <li><a href="#Commands">Commands</a></li>
-  <li><a href="#Tags">Tags</a></li>
+  <li><a href="#generators">Generators</a></li>
+  <li><a href="#converters">Converters</a></li>
+  <li><a href="#commands">Commands</a></li>
+  <li><a href="#tags">Tags</a></li>
 </ol>
 
 <h2 id="generators">Generators</h2>
@@ -2290,8 +2290,8 @@ contain one class method: <code>init_with_program</code>. An example:</p>
     <span class="k">def</span> <span class="nf">init_with_program</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span>
       <span class="n">prog</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
         <span class="n">c</span><span class="o">.</span><span class="n">syntax</span> <span class="s2">&quot;new [options]&quot;</span>
-        <span class="n">c</span><span class="o">.</span><span class="n">description</span> <span class="s1">&#39;Create a new Jekyll site.&#39;</span>        <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">&#39;dest&#39;</span><span class="p">,</span> <span class="s1">&#39;-d DEST, &#39;</span><span class="no">Where</span> <span class="n">the</span> <span class="n">site</span> <span class="n">should</span> <span class="n">go</span><span class="o">.</span><span class="s1">&#39;        c.action do |args, options|</span>
-<span class="s1">          Jekyll::Site.new_site_at(options[&#39;</span><span class="n">dest</span><span class="err">&#39;</span><span class="o">]</span><span class="p">)</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">description</span> <span class="s1">&#39;Create a new Jekyll site.&#39;</span>        <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">&#39;dest&#39;</span><span class="p">,</span> <span class="s1">&#39;-d DEST&#39;</span><span class="p">,</span> <span class="s1">&#39;Where the site should go.&#39;</span>        <span class="n">c</span><span class="o">.</span><span class="n">action</span> <span class="k">do</span> <span class="o">|</span><span class="n">args</span><span class="p">,</span> <span class="n">options</span><span class="o">|</span>
+          <span class="no">Jekyll</span><span class="o">::</span><span class="no">Site</span><span class="o">.</span><span class="n">new_site_at</span><span class="p">(</span><span class="n">options</span><span class="o">[</span><span class="s1">&#39;dest&#39;</span><span class="o">]</span><span class="p">)</span>
         <span class="k">end</span>
       <span class="k">end</span>
     <span class="k">end</span>
@@ -2559,7 +2559,7 @@ specify these two flags:</p>
   <li><a href="https://github.com/archome/jekyll-citation">Jekyll-citation</a>: Render BibTeX-formatted bibliographies/citations included in posts and pages (pure Ruby).</li>
   <li><a href="https://github.com/ericdfields/Jekyll-Dribbble-Set-Tag">Jekyll Dribbble Set Tag</a>: Builds Dribbble image galleries from any user.</li>
   <li><a href="https://gist.github.com/2218470">Debbugs</a>: Allows posting links to Debian BTS easily.</li>
-  <li><a href="https://github.com/aburdette/refheap_tag">Refheap_tag</a>: Liquid tag that allows embedding pastes from <a href="https://refheap.com">refheap</a>.</li>
+  <li><a href="https://github.com/aburdette/refheap_tag">Refheap_tag</a>: Liquid tag that allows embedding pastes from <a href="https://www.refheap.com/">refheap</a>.</li>
   <li><a href="https://gist.github.com/2403522">Jekyll-devonly_tag</a>: A block tag for including markup only during development.</li>
   <li><a href="https://github.com/redwallhp/JekyllGalleryTag">JekyllGalleryTag</a> by <a href="https://github.com/redwallhp">redwallhp</a>: Generates thumbnails from a directory of images and displays them in a grid.</li>
   <li><a href="https://gist.github.com/Yexiaoxing/5891929">Youku and Tudou Embed</a>: Liquid plugin for embedding Youku and Tudou videos.</li>
@@ -2578,14 +2578,14 @@ specify these two flags:</p>
   <li><a href="https://github.com/bwillis/jekyll-github-sample">Jekyll Github Sample Tag</a>: A liquid tag to include a sample of a github repo file in your Jekyll site.</li>
   <li><a href="https://github.com/rob-murray/jekyll-version-plugin">Jekyll Project Version Tag</a>: A Liquid tag plugin that renders a version identifier for your Jekyll site sourced from the git repository containing your code.</li>
   <li><a href="https://github.com/AlessandroLorenzi/piwigo_gallery">Piwigo Gallery</a> by <a href="http://www.alorenzi.eu/">Alessandro Lorenzi</a>: Jekyll plugin to generate thumbnails from a Piwigo gallery and display them with a Liquid tag</li>
-  <li><a href="https://github.com/tmthrgd/jekyll-plugins">mathml.rb</a> by <a href="http://tomthorogood.co.uk/">Tom Thorogood</a>: A plugin to convert TeX mathematics into MathML for display.</li>
+  <li><a href="https://github.com/tmthrgd/jekyll-plugins">mathml.rb</a> by Tom Thorogood: A plugin to convert TeX mathematics into MathML for display.</li>
   <li><a href="https://github.com/aarongustafson/jekyll-webmention_io">webmention_io.rb</a> by <a href="http://aaron-gustafson.com/">Aaron Gustafson</a>: A plugin to enable <a href="http://indiewebcamp.com/webmention">webmention</a> integration using <a href="http://webmention.io">Webmention.io</a>. Includes an optional JavaScript for updating webmentions automatically between publishes and, if available, in realtime using WebSockets.</li>
-  <li><a href="https://github.com/lkorth/jekyll-500px-embed">Jekyll 500px Embed</a> by <a href="https://lukekorth.com/">Luke Korth</a>. A Liquid tag plugin that embeds <a href="https://500px.com/">500px</a> photos.</li>
+  <li><a href="https://github.com/lkorth/jekyll-500px-embed">Jekyll 500px Embed</a> by Luke Korth. A Liquid tag plugin that embeds <a href="https://500px.com/">500px</a> photos.</li>
   <li><a href="https://github.com/bdesham/inline_highlight">inline_highlight</a>: A tag for inline syntax highlighting.</li>
   <li><a href="https://github.com/jasonbellamy/jekyll-mermaid">jekyll-mermaid</a>: Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.</li>
-  <li><a href="https://github.com/Ezmyrelda/twa">twa</a>: Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.</li>
   <li>
-    <h4 id="collections">Collections</h4>
+    <h2 id="twahttpsgithubcomezmyreldatwa-twemoji-awesome-plugin-for-jekyll-liquid-tag-allowing-you-to-use-twitter-emoji-in-your-jekyll-pages"><a href="https://github.com/Ezmyrelda/twa">twa</a>: Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.</h2>
+    <p>#### Collections</p>
   </li>
   <li><a href="http://recursive-design.com/projects/jekyll-plugins/">Jekyll Plugins by Recursive Design</a>: Plugins to generate Project pages from GitHub readmes, a Category page, and a Sitemap generator.</li>
   <li><a href="https://github.com/flatterline/jekyll-plugins">Company website and blog plugins</a> by Flatterline, a <a href="http://flatterline.com/">Ruby on Rails development company</a>: Portfolio/project page generator, team/individual page generator, an author bio liquid tag for use on posts, and a few other smaller plugins.</li>
@@ -2595,7 +2595,7 @@ specify these two flags:</p>
 <h4 id="other">Other</h4>
 
 <ul>
-  <li><a href="https://github.com/tmthrgd/ditaa-ditaa">ditaa-ditaa</a> by <a href="http://tomthorogood.co.uk/">Tom Thorogood</a>: a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.</li>
+  <li><a href="https://github.com/tmthrgd/ditaa-ditaa">ditaa-ditaa</a> by Tom Thorogood: a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.</li>
   <li><a href="https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb">Pygments Cache Path by Raimonds Simanovskis</a>: Plugin to cache syntax-highlighted code from Pygments.</li>
   <li><a href="https://gist.github.com/49630">Draft/Publish Plugin by Michael Ivey</a>: Save posts as drafts.</li>
   <li><a href="https://gist.github.com/490101">Growl Notification Generator by Tate Johnson</a>: Send Jekyll notifications to Growl.</li>
