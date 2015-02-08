@@ -25,4 +25,4 @@ bundle exec jekyll build -s $SOURCE -d $DESTINATION --full-rebuild --trace
 
 # 3.
 msg "Proofing..."
-bundle exec htmlproof ./$DESTINATION --href-ignore /Chrononaut/,/twitter.com/
+time bundle exec htmlproof ./$DESTINATION --href-ignore /Chrononaut/,/twitter.com/
