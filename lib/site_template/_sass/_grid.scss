@@ -1,5 +1,7 @@
 .row {
-    margin-left: -$spacing-unit / 2;
+    margin-left: - $spacing-unit / 4;
+    margin-right: - $spacing-unit / 4;
+
     @extend %clearfix;
 }
 
@@ -10,7 +12,9 @@
     // Prevent columns from collapsing when empty
     min-height: 1px;
 
-    padding-left: $spacing-unit / 2;
+    // Space between columns: 15px = 2 * $spacing-unit / 4 = $spacing-unit / 2
+    padding-left: $spacing-unit / 4;
+    padding-right: $spacing-unit / 4;
 }
 
 
