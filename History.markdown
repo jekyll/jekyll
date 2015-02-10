@@ -53,6 +53,7 @@
   * Template: Remove `!important` from nav SCSS introduced in #3329 (#3375)
   * The `:title` URL placeholder for collections should be the filename slug. (#3383)
   * Trim the generate time diff to just 3 places past the decimal place (#3415)
+  * The highlight tag should only clip the newlines before and after the *entire* block, not in between (#3401)
 
 ### Development Fixes
 
