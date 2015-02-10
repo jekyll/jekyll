@@ -77,8 +77,6 @@ eos
       def render_pygments(code, is_safe)
         Jekyll::External.require_with_graceful_fail('pygments')
 
-        @options[:encoding] = 'utf-8'
-
         highlighted_code = Pygments.highlight(
           code,
           :lexer   => @lang,
@@ -96,26 +94,26 @@ eos
           raise ArgumentError.new("Pygments.rb returned an unacceptable value when attempting to highlight some code.")
         end
 
-        highlighted_code
+        highlighted_code.sub('<div class="highlight"><pre>', '').sub('</pre></div>', '')
       end
 
       def render_rouge(code)
         Jekyll::External.require_with_graceful_fail('rouge')
         formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
-        code = formatter.format(lexer.lex(code))
-        "<div class=\"highlight\"><pre>#{code}</pre></div>"
+        formatter.format(lexer.lex(code))
       end
 
       def render_codehighlighter(code)
-        "<div class=\"highlight\"><pre>#{h(code).strip}</pre></div>"
+        h(code).strip
       end
 
       def add_code_tag(code)
-        # Add nested <code> tags to code blocks
-        code = code.sub(/<pre>\n*/,'<pre><code class="language-' + @lang.to_s.gsub("+", "-") + '" data-lang="' + @lang.to_s + '">')
-        code = code.sub(/\n*<\/pre>/,"</code></pre>")
-        code.strip
+        code_attributes = [
+          "class=\"language-#{@lang.to_s.gsub('+', '-')}\"",
+          "data-lang=\"#{@lang.to_s}\""
+        ].join(" ")
+        "<div class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></div>"
       end
 
     end

@@ -7,7 +7,7 @@ class TestTags < Test::Unit::TestCase
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     stub(Jekyll).configuration do
       site_configuration({
-        "highlighter" => "pygments"
+        "highlighter" => "rouge"
       }.merge(override))
     end
     site = Site.new(Jekyll.configuration)
@@ -136,63 +136,65 @@ CONTENT
     end
   end
 
-  context "post content has highlight tag" do
-    setup do
-      fill_post("test")
+  context "with the pygments highlighter" do
+    context "post content has highlight tag" do
+      setup do
+        fill_post("test", {'highlighter' => 'pygments'})
+      end
+
+      should "not cause a markdown error" do
+        assert_no_match /markdown\-html\-error/, @result
+      end
+
+      should "render markdown with pygments" do
+        assert_match %{<pre><code class="language-text" data-lang="text">test</code></pre>}, @result
+      end
+
+      should "render markdown with pygments with line numbers" do
+        assert_match %{<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> test</code></pre>}, @result
+      end
     end
 
-    should "not cause a markdown error" do
-      assert_no_match /markdown\-html\-error/, @result
+    context "post content has highlight with file reference" do
+      setup do
+        fill_post("./jekyll.gemspec", {'highlighter' => 'pygments'})
+      end
+
+      should "not embed the file" do
+        assert_match %{<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>}, @result
+      end
     end
 
-    should "render markdown with pygments" do
-      assert_match %{<pre><code class="language-text" data-lang="text">test</code></pre>}, @result
+    context "post content has highlight tag with UTF character" do
+      setup do
+        fill_post("Æ", {'highlighter' => 'pygments'})
+      end
+
+      should "render markdown with pygments line handling" do
+        assert_match %{<pre><code class="language-text" data-lang="text">Æ</code></pre>}, @result
+      end
     end
 
-    should "render markdown with pygments with line numbers" do
-      assert_match %{<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> test</code></pre>}, @result
-    end
-  end
-
-  context "post content has highlight with file reference" do
-    setup do
-      fill_post("./jekyll.gemspec")
-    end
-
-    should "not embed the file" do
-      assert_match %{<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>}, @result
-    end
-  end
-
-  context "post content has highlight tag with UTF character" do
-    setup do
-      fill_post("Æ")
-    end
-
-    should "render markdown with pygments line handling" do
-      assert_match %{<pre><code class="language-text" data-lang="text">Æ</code></pre>}, @result
-    end
-  end
-
-  context "post content has highlight tag with preceding spaces & lines" do
-    setup do
-      fill_post <<-EOS
+    context "post content has highlight tag with preceding spaces & lines" do
+      setup do
+        code = <<-EOS
 
 
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
 EOS
+        fill_post(code, {'highlighter' => 'pygments'})
+      end
+
+      should "only strip the preceding newlines" do
+        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+      end
     end
 
-    should "only strip the preceding newlines" do
-      assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
-    end
-  end
-
-  context "post content has highlight tag with preceding spaces & lines in several places" do
-    setup do
-      fill_post <<-EOS
+    context "post content has highlight tag with preceding spaces & lines in several places" do
+      setup do
+        code = <<-EOS
 
 
      [,1] [,2]
@@ -203,34 +205,133 @@ EOS
 
 
 EOS
+        fill_post(code, {'highlighter' => 'pygments'})
+      end
+
+      should "only strip the newlines which precede and succeed the entire block" do
+        assert_match "<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>", @result
+      end
     end
 
-    should "only strip the newlines which precede and succeed the entire block" do
-      assert_match "<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>", @result
-    end
-  end
+    context "post content has highlight tag with preceding spaces & Windows-style newlines" do
+      setup do
+        fill_post "\r\n\r\n\r\n     [,1] [,2]", {'highlighter' => 'pygments'}
+      end
 
-  context "post content has highlight tag with preceding spaces & Windows-style newlines" do
-    setup do
-      fill_post "\r\n\r\n\r\n     [,1] [,2]"
+      should "only strip the preceding newlines" do
+        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+      end
     end
 
-    should "only strip the preceding newlines" do
-      assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
-    end
-  end
-
-  context "post content has highlight tag with only preceding spaces" do
-    setup do
-      fill_post <<-EOS
+    context "post content has highlight tag with only preceding spaces" do
+      setup do
+        code = <<-EOS
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
 EOS
+        fill_post(code, {'highlighter' => 'pygments'})
+      end
+
+      should "only strip the preceding newlines" do
+        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+      end
+    end
+  end
+
+  context "with the rouge highlighter" do
+    context "post content has highlight tag" do
+      setup do
+        fill_post("test")
+      end
+
+      should "render markdown with rouge" do
+        assert_match %{<pre><code class="language-text" data-lang="text">test</code></pre>}, @result
+      end
+
+      should "render markdown with rouge with line numbers" do
+        assert_match %{<table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">\n</span></pre></td></tr></tbody></table>}, @result
+      end
     end
 
-    should "only strip the preceding newlines" do
-      assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+    context "post content has highlight with file reference" do
+      setup do
+        fill_post("./jekyll.gemspec")
+      end
+
+      should "not embed the file" do
+        assert_match %{<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>}, @result
+      end
+    end
+
+    context "post content has highlight tag with UTF character" do
+      setup do
+        fill_post("Æ")
+      end
+
+      should "render markdown with pygments line handling" do
+        assert_match %{<pre><code class="language-text" data-lang="text">Æ</code></pre>}, @result
+      end
+    end
+
+    context "post content has highlight tag with preceding spaces & lines" do
+      setup do
+        fill_post <<-EOS
+
+
+     [,1] [,2]
+[1,] FALSE TRUE
+[2,] FALSE TRUE
+EOS
+      end
+
+      should "only strip the preceding newlines" do
+        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+      end
+    end
+
+    context "post content has highlight tag with preceding spaces & lines in several places" do
+      setup do
+        fill_post <<-EOS
+
+
+     [,1] [,2]
+
+
+[1,] FALSE TRUE
+[2,] FALSE TRUE
+
+
+EOS
+      end
+
+      should "only strip the newlines which precede and succeed the entire block" do
+        assert_match "<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>", @result
+      end
+    end
+
+    context "post content has highlight tag with preceding spaces & Windows-style newlines" do
+      setup do
+        fill_post "\r\n\r\n\r\n     [,1] [,2]"
+      end
+
+      should "only strip the preceding newlines" do
+        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+      end
+    end
+
+    context "post content has highlight tag with only preceding spaces" do
+      setup do
+        fill_post <<-EOS
+     [,1] [,2]
+[1,] FALSE TRUE
+[2,] FALSE TRUE
+EOS
+      end
+
+      should "only strip the preceding newlines" do
+        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+      end
     end
   end
 
