@@ -2068,9 +2068,13 @@ few minor details.</p>
     following to your <code>Gemfile</code>:
 
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span><span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
+
+<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
-<span class="n">versions</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;https://pages.github.com/versions.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">)</span><span class="n">gem</span> <span class="s1">&#39;github-pages&#39;</span><span class="p">,</span> <span class="n">versions</span><span class="o">[</span><span class="s1">&#39;github-pages&#39;</span><span class="o">]</span></code></pre></div>
+<span class="n">versions</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;https://pages.github.com/versions.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">)</span>
+
+<span class="n">gem</span> <span class="s1">&#39;github-pages&#39;</span><span class="p">,</span> <span class="n">versions</span><span class="o">[</span><span class="s1">&#39;github-pages&#39;</span><span class="o">]</span></code></pre></div>
 
 
     This will ensure that when you run <code>bundle install</code>, you

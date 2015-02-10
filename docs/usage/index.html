@@ -2046,9 +2046,15 @@
 window. You can use this command in a number of ways:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>jekyll build
-<span class="c"># =&gt; The current folder will be generated into ./_site$ jekyll build --destination &lt;destination&gt;</span>
-<span class="c"># =&gt; The current folder will be generated into &lt;destination&gt;$ jekyll build --source &lt;source&gt; --destination &lt;destination&gt;</span>
-<span class="c"># =&gt; The &lt;source&gt; folder will be generated into &lt;destination&gt;$ jekyll build --watch</span>
+<span class="c"># =&gt; The current folder will be generated into ./_site</span>
+
+<span class="nv">$ </span>jekyll build --destination &lt;destination&gt;
+<span class="c"># =&gt; The current folder will be generated into &lt;destination&gt;</span>
+
+<span class="nv">$ </span>jekyll build --source &lt;<span class="nb">source</span>&gt; --destination &lt;destination&gt;
+<span class="c"># =&gt; The &lt;source&gt; folder will be generated into &lt;destination&gt;</span>
+
+<span class="nv">$ </span>jekyll build --watch
 <span class="c"># =&gt; The current folder will be generated into ./_site,</span>
 <span class="c">#    watched for changes, and regenerated automatically.</span></code></pre></div>
 
@@ -2072,7 +2078,9 @@ preview what the generated site will look like in your browser locally.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>jekyll serve
 <span class="c"># =&gt; A development server will run at http://localhost:4000/</span>
-<span class="c"># Auto-regeneration: enabled. Use `--no-watch` to disable.$ jekyll serve --detach</span>
+<span class="c"># Auto-regeneration: enabled. Use `--no-watch` to disable.</span>
+
+<span class="nv">$ </span>jekyll serve --detach
 <span class="c"># =&gt; Same as `jekyll serve` but will detach from the current terminal.</span>
 <span class="c">#    If you need to kill the server, you can `kill -9 1234` where &quot;1234&quot; is the PID.</span>
 <span class="c">#    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).</span></code></pre></div>

@@ -2074,7 +2074,9 @@ or write a Ruby script which utilizes the gem.</p>
 <h3 id="the-html-proofer-executable">The HTML Proofer Executable</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/usr/bin/env bash</span>
-<span class="nb">set</span> -e <span class="c"># halt script on errorbundle exec jekyll build</span>
+<span class="nb">set</span> -e <span class="c"># halt script on error</span>
+
+bundle <span class="nb">exec </span>jekyll build
 bundle <span class="nb">exec </span>htmlproof ./_site</code></pre></div>
 
 <p>Some options can be specified via command-line switches. Check out the
@@ -2085,7 +2087,9 @@ bundle <span class="nb">exec </span>htmlproof ./_site</code></pre></div>
 
 <p>You can also invoke <code>html-proofer</code> in Ruby scripts (e.g. in a Rakefile):</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#!/usr/bin/env rubyrequire &#39;html/proofer&#39;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+
+<span class="nb">require</span> <span class="s1">&#39;html/proofer&#39;</span>
 <span class="no">HTML</span><span class="o">::</span><span class="no">Proofer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;./_site&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span></code></pre></div>
 
 <p>Options are given as a second argument to <code>.new</code>, and are encoded in a
@@ -2102,11 +2106,15 @@ an explanation of each line.</p>
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ruby</span>
 <span class="l-Scalar-Plain">rvm</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">2.1</span>
-<span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./script/cibuild# branch whitelist</span>
+<span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./script/cibuild</span>
+
+<span class="c1"># branch whitelist</span>
 <span class="l-Scalar-Plain">branches</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">only</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gh-pages</span>     <span class="c1"># test the gh-pages branch</span>
-  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/pages-(.*)/</span> <span class="c1"># test every branch which starts with &quot;pages-&quot;env:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/pages-(.*)/</span> <span class="c1"># test every branch which starts with &quot;pages-&quot;</span>
+
+<span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">global</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">NOKOGIRI_USE_SYSTEM_LIBRARIES=true</span> <span class="c1"># speeds up installation of html-proofer</span></code></pre></div>
 

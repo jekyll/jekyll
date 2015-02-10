@@ -2084,7 +2084,9 @@ installed on the server:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">GIT_REPO</span><span class="o">=</span><span class="nv">$HOME</span>/myrepo.git
 <span class="nv">TMP_GIT_CLONE</span><span class="o">=</span><span class="nv">$HOME</span>/tmp/myrepo
-<span class="nv">PUBLIC_WWW</span><span class="o">=</span>/var/www/myrepogit clone <span class="nv">$GIT_REPO</span> <span class="nv">$TMP_GIT_CLONE</span>
+<span class="nv">PUBLIC_WWW</span><span class="o">=</span>/var/www/myrepo
+
+git clone <span class="nv">$GIT_REPO</span> <span class="nv">$TMP_GIT_CLONE</span>
 jekyll build -s <span class="nv">$TMP_GIT_CLONE</span> -d <span class="nv">$PUBLIC_WWW</span>
 rm -Rf <span class="nv">$TMP_GIT_CLONE</span>
 <span class="nb">exit</span></code></pre></div>

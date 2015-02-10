@@ -2428,7 +2428,9 @@ The different types that are available to you are <code>pages</code>, <code>post
 
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">my_collection</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">output</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">truedefaults</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">output</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+
+<span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span>
     <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
       <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span>
@@ -2489,47 +2491,73 @@ file or on the command-line.</p>
 <span class="l-Scalar-Plain">plugins</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">./_plugins</span>
 <span class="l-Scalar-Plain">layouts</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">./_layouts</span>
 <span class="l-Scalar-Plain">data_source</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./_data</span>
-<span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">null# Handling Reading</span>
+<span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">null</span>
+
+<span class="c1"># Handling Reading</span>
 <span class="l-Scalar-Plain">safe</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">false</span>
 <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span>      <span class="p-Indicator">[</span><span class="s">&quot;.htaccess&quot;</span><span class="p-Indicator">]</span>
 <span class="l-Scalar-Plain">exclude</span><span class="p-Indicator">:</span>      <span class="p-Indicator">[]</span>
 <span class="l-Scalar-Plain">keep_files</span><span class="p-Indicator">:</span>   <span class="p-Indicator">[</span><span class="s">&quot;.git&quot;</span><span class="p-Indicator">,</span> <span class="s">&quot;.svn&quot;</span><span class="p-Indicator">]</span>
 <span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span>     <span class="s">&quot;utf-8&quot;</span>
-<span class="l-Scalar-Plain">markdown_ext</span><span class="p-Indicator">:</span> <span class="s">&quot;markdown,mkdown,mkdn,mkd,md&quot;</span><span class="c1"># Filtering Content</span>
+<span class="l-Scalar-Plain">markdown_ext</span><span class="p-Indicator">:</span> <span class="s">&quot;markdown,mkdown,mkdn,mkd,md&quot;</span>
+
+<span class="c1"># Filtering Content</span>
 <span class="l-Scalar-Plain">show_drafts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">null</span>
 <span class="l-Scalar-Plain">limit_posts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
 <span class="l-Scalar-Plain">future</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">true</span>
-<span class="l-Scalar-Plain">unpublished</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false# Plugins</span>
+<span class="l-Scalar-Plain">unpublished</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
+
+<span class="c1"># Plugins</span>
 <span class="l-Scalar-Plain">whitelist</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span>
-<span class="l-Scalar-Plain">gems</span><span class="p-Indicator">:</span>      <span class="p-Indicator">[]</span><span class="c1"># Conversion</span>
+<span class="l-Scalar-Plain">gems</span><span class="p-Indicator">:</span>      <span class="p-Indicator">[]</span>
+
+<span class="c1"># Conversion</span>
 <span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">kramdown</span>
 <span class="l-Scalar-Plain">highlighter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">rouge</span>
 <span class="l-Scalar-Plain">lsi</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">false</span>
-<span class="l-Scalar-Plain">excerpt_separator</span><span class="p-Indicator">:</span> <span class="s">&quot;\n\n&quot;</span><span class="c1"># Serving</span>
+<span class="l-Scalar-Plain">excerpt_separator</span><span class="p-Indicator">:</span> <span class="s">&quot;\n\n&quot;</span>
+
+<span class="c1"># Serving</span>
 <span class="l-Scalar-Plain">detach</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">false</span>
 <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">4000</span>
 <span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">127.0.0.1</span>
-<span class="l-Scalar-Plain">baseurl</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span> <span class="c1"># does not include hostname# Backwards-compatibility</span>
-<span class="l-Scalar-Plain">relative_permalinks</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false# Outputting</span>
+<span class="l-Scalar-Plain">baseurl</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span> <span class="c1"># does not include hostname</span>
+
+<span class="c1"># Backwards-compatibility</span>
+<span class="l-Scalar-Plain">relative_permalinks</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
+
+<span class="c1"># Outputting</span>
 <span class="l-Scalar-Plain">permalink</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">date</span>
 <span class="l-Scalar-Plain">paginate_path</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/page:num</span>
-<span class="l-Scalar-Plain">timezone</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">nullquiet</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">false</span>
-<span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span><span class="c1"># Markdown Processors</span>
+<span class="l-Scalar-Plain">timezone</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">null</span>
+
+<span class="l-Scalar-Plain">quiet</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">false</span>
+<span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span>
+
+<span class="c1"># Markdown Processors</span>
 <span class="l-Scalar-Plain">maruku</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">use_tex</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">false</span>
   <span class="l-Scalar-Plain">use_divs</span><span class="p-Indicator">:</span>   <span class="l-Scalar-Plain">false</span>
   <span class="l-Scalar-Plain">png_engine</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">blahtex</span>
   <span class="l-Scalar-Plain">png_dir</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">images/latex</span>
   <span class="l-Scalar-Plain">png_url</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">/images/latex</span>
-  <span class="l-Scalar-Plain">fenced_code_blocks</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">truerdiscount</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span><span class="l-Scalar-Plain">redcarpet</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span><span class="l-Scalar-Plain">kramdown</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">fenced_code_blocks</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+
+<span class="l-Scalar-Plain">rdiscount</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span>
+
+<span class="l-Scalar-Plain">redcarpet</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span>
+
+<span class="l-Scalar-Plain">kramdown</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">auto_ids</span><span class="p-Indicator">:</span>       <span class="l-Scalar-Plain">true</span>
   <span class="l-Scalar-Plain">footnote_nr</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">1</span>
   <span class="l-Scalar-Plain">entity_output</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">as_char</span>
   <span class="l-Scalar-Plain">toc_levels</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">1..6</span>
   <span class="l-Scalar-Plain">smart_quotes</span><span class="p-Indicator">:</span>   <span class="l-Scalar-Plain">lsquo,rsquo,ldquo,rdquo</span>
-  <span class="l-Scalar-Plain">enable_coderay</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false  coderay</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">enable_coderay</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
+
+  <span class="l-Scalar-Plain">coderay</span><span class="p-Indicator">:</span>
     <span class="l-Scalar-Plain">coderay_wrap</span><span class="p-Indicator">:</span>              <span class="l-Scalar-Plain">div</span>
     <span class="l-Scalar-Plain">coderay_line_numbers</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">inline</span>
     <span class="l-Scalar-Plain">coderay_line_number_start</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
@@ -2594,7 +2622,9 @@ file or on the command-line.</p>
     <span class="no">STDERR</span><span class="o">.</span><span class="n">puts</span> <span class="s1">&#39;You are missing a library required for Markdown. Please run:&#39;</span>
     <span class="no">STDERR</span><span class="o">.</span><span class="n">puts</span> <span class="s1">&#39;  $ [sudo] gem install funky_markdown&#39;</span>
     <span class="k">raise</span> <span class="no">FatalException</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Missing dependency: funky_markdown&quot;</span><span class="p">)</span>
-  <span class="k">end</span>  <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
     <span class="o">::</span><span class="no">FunkyMarkdown</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></div>

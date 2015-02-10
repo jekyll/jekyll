@@ -2169,7 +2169,9 @@ way of rendering paginated Posts in a HTML file:</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html">---
 layout: default
 title: My Blog
----<span class="c">&lt;!-- This loops through the paginated posts --&gt;</span>
+---
+
+<span class="c">&lt;!-- This loops through the paginated posts --&gt;</span>
 {% for post in paginator.posts %}
   <span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ post.url }}&quot;</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
   <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;author&quot;</span><span class="nt">&gt;</span>
@@ -2178,7 +2180,9 @@ title: My Blog
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
     {{ post.content }}
   <span class="nt">&lt;/div&gt;</span>
-{% endfor %}<span class="c">&lt;!-- Pagination links --&gt;</span>
+{% endfor %}
+
+<span class="c">&lt;!-- Pagination links --&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;pagination&quot;</span><span class="nt">&gt;</span>
   {% if paginator.previous_page %}
     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ paginator.previous_page_path }}&quot;</span> <span class="na">class=</span><span class="s">&quot;previous&quot;</span><span class="nt">&gt;</span>Previous<span class="nt">&lt;/a&gt;</span>
@@ -2211,7 +2215,9 @@ page with links to all but the current page.</p>
     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ paginator.previous_page_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; }}&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;laquo;</span> Prev<span class="nt">&lt;/a&gt;</span>
   {% else %}
     <span class="nt">&lt;span&gt;</span><span class="ni">&amp;laquo;</span> Prev<span class="nt">&lt;/span&gt;</span>
-  {% endif %}  {% for page in (1..paginator.total_pages) %}
+  {% endif %}
+
+  {% for page in (1..paginator.total_pages) %}
     {% if page == paginator.page %}
       <span class="nt">&lt;em&gt;</span>{{ page }}<span class="nt">&lt;/em&gt;</span>
     {% elsif page == 1 %}
@@ -2219,7 +2225,9 @@ page with links to all but the current page.</p>
     {% else %}
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ site.paginate_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; | replace: &#39;:num&#39;, page }}&quot;</span><span class="nt">&gt;</span>{{ page }}<span class="nt">&lt;/a&gt;</span>
     {% endif %}
-  {% endfor %}  {% if paginator.next_page %}
+  {% endfor %}
+
+  {% if paginator.next_page %}
     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ paginator.next_page_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; }}&quot;</span><span class="nt">&gt;</span>Next <span class="ni">&amp;raquo;</span><span class="nt">&lt;/a&gt;</span>
   {% else %}
     <span class="nt">&lt;span&gt;</span>Next <span class="ni">&amp;raquo;</span><span class="nt">&lt;/span&gt;</span>

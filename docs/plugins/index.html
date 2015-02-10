@@ -2134,7 +2134,9 @@ variables <code>ongoing</code> and <code>done</code> that we fill in the generat
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Reading</span>
   <span class="k">class</span> <span class="nc">Generator</span> <span class="o">&lt;</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">Generator</span>
     <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
-      <span class="n">ongoing</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="no">Book</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:ongoing?</span><span class="p">)</span>      <span class="n">reading</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">detect</span> <span class="p">{</span><span class="o">|</span><span class="n">page</span><span class="o">|</span> <span class="n">page</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;reading.html&#39;</span><span class="p">}</span>
+      <span class="n">ongoing</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="no">Book</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:ongoing?</span><span class="p">)</span>
+
+      <span class="n">reading</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">detect</span> <span class="p">{</span><span class="o">|</span><span class="n">page</span><span class="o">|</span> <span class="n">page</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;reading.html&#39;</span><span class="p">}</span>
       <span class="n">reading</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;ongoing&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">ongoing</span>
       <span class="n">reading</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;done&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">done</span>
     <span class="k">end</span>
@@ -2143,18 +2145,28 @@ variables <code>ongoing</code> and <code>done</code> that we fill in the generat
 
 <p>This is a more complex generator that generates new pages:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>  <span class="k">class</span> <span class="nc">CategoryPage</span> <span class="o">&lt;</span> <span class="no">Page</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
+
+  <span class="k">class</span> <span class="nc">CategoryPage</span> <span class="o">&lt;</span> <span class="no">Page</span>
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
       <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
       <span class="vi">@base</span> <span class="o">=</span> <span class="n">base</span>
       <span class="vi">@dir</span> <span class="o">=</span> <span class="n">dir</span>
-      <span class="vi">@name</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>      <span class="nb">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
+      <span class="vi">@name</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>
+
+      <span class="nb">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
       <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;category_index.html&#39;</span><span class="p">)</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;category&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">category</span>      <span class="n">category_title_prefix</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_title_prefix&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;Category: &#39;</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;category&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">category</span>
+
+      <span class="n">category_title_prefix</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_title_prefix&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;Category: &#39;</span>
       <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">category_title_prefix</span><span class="si">}#{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">end</span>
-  <span class="k">end</span>  <span class="k">class</span> <span class="nc">CategoryPageGenerator</span> <span class="o">&lt;</span> <span class="no">Generator</span>
-    <span class="n">safe</span> <span class="kp">true</span>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">CategoryPageGenerator</span> <span class="o">&lt;</span> <span class="no">Generator</span>
+    <span class="n">safe</span> <span class="kp">true</span>
+
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">&#39;category_index&#39;</span>
         <span class="n">dir</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_dir&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;categories&#39;</span>
         <span class="n">site</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">each_key</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
@@ -2162,7 +2174,9 @@ variables <code>ongoing</code> and <code>done</code> that we fill in the generat
         <span class="k">end</span>
       <span class="k">end</span>
     <span class="k">end</span>
-  <span class="n">endend</span></code></pre></div>
+  <span class="k">end</span>
+
+<span class="k">end</span></code></pre></div>
 
 <p>In this example, our generator will create a series of files under the
 <code>categories</code> directory for each category, listing the posts in each category
@@ -2212,11 +2226,17 @@ them using the <code>UpcaseConverter</code>:</p>
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
   <span class="k">class</span> <span class="nc">UpcaseConverter</span> <span class="o">&lt;</span> <span class="no">Converter</span>
     <span class="n">safe</span> <span class="kp">true</span>
-    <span class="n">priority</span> <span class="ss">:low</span>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
+    <span class="n">priority</span> <span class="ss">:low</span>
+
+    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
       <span class="n">ext</span> <span class="o">=~</span> <span class="sr">/^\.upcase$/i</span>
-    <span class="k">end</span>    <span class="k">def</span> <span class="nf">output_ext</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">output_ext</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
       <span class="s2">&quot;.html&quot;</span>
-    <span class="k">end</span>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
       <span class="n">content</span><span class="o">.</span><span class="n">upcase</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -2290,7 +2310,11 @@ contain one class method: <code>init_with_program</code>. An example:</p>
     <span class="k">def</span> <span class="nf">init_with_program</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span>
       <span class="n">prog</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
         <span class="n">c</span><span class="o">.</span><span class="n">syntax</span> <span class="s2">&quot;new [options]&quot;</span>
-        <span class="n">c</span><span class="o">.</span><span class="n">description</span> <span class="s1">&#39;Create a new Jekyll site.&#39;</span>        <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">&#39;dest&#39;</span><span class="p">,</span> <span class="s1">&#39;-d DEST&#39;</span><span class="p">,</span> <span class="s1">&#39;Where the site should go.&#39;</span>        <span class="n">c</span><span class="o">.</span><span class="n">action</span> <span class="k">do</span> <span class="o">|</span><span class="n">args</span><span class="p">,</span> <span class="n">options</span><span class="o">|</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">description</span> <span class="s1">&#39;Create a new Jekyll site.&#39;</span>
+
+        <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">&#39;dest&#39;</span><span class="p">,</span> <span class="s1">&#39;-d DEST&#39;</span><span class="p">,</span> <span class="s1">&#39;Where the site should go.&#39;</span>
+
+        <span class="n">c</span><span class="o">.</span><span class="n">action</span> <span class="k">do</span> <span class="o">|</span><span class="n">args</span><span class="p">,</span> <span class="n">options</span><span class="o">|</span>
           <span class="no">Jekyll</span><span class="o">::</span><span class="no">Site</span><span class="o">.</span><span class="n">new_site_at</span><span class="p">(</span><span class="n">options</span><span class="o">[</span><span class="s1">&#39;dest&#39;</span><span class="o">]</span><span class="p">)</span>
         <span class="k">end</span>
       <span class="k">end</span>
@@ -2333,14 +2357,20 @@ hooking into the tagging system. Built-in examples added by Jekyll include the
 will output the time the page was rendered:</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
-  <span class="k">class</span> <span class="nc">RenderTimeTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
+  <span class="k">class</span> <span class="nc">RenderTimeTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
       <span class="k">super</span>
       <span class="vi">@text</span> <span class="o">=</span> <span class="n">text</span>
-    <span class="k">end</span>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
       <span class="s2">&quot;</span><span class="si">#{</span><span class="vi">@text</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="n">endLiquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;render_time&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></div>
+<span class="k">end</span>
+
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;render_time&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></div>
 
 <p>At a minimum, liquid tags must implement:</p>
 
@@ -2392,7 +2422,9 @@ the filter. The return value will be the output of the filter.</p>
       <span class="s2">&quot;http://www.example.com/</span><span class="si">#{</span><span class="n">input</span><span class="si">}</span><span class="s2">?</span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_i</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="n">endLiquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_filter</span><span class="p">(</span><span class="no">Jekyll</span><span class="o">::</span><span class="no">AssetFilter</span><span class="p">)</span></code></pre></div>
+<span class="k">end</span>
+
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_filter</span><span class="p">(</span><span class="no">Jekyll</span><span class="o">::</span><span class="no">AssetFilter</span><span class="p">)</span></code></pre></div>
 
 <div class="note">
   <h5>ProTip™: Access the site object using Liquid</h5>
