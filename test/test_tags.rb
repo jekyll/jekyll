@@ -190,6 +190,26 @@ EOS
     end
   end
 
+  context "post content has highlight tag with preceding spaces & lines in several places" do
+    setup do
+      fill_post <<-EOS
+
+
+     [,1] [,2]
+
+
+[1,] FALSE TRUE
+[2,] FALSE TRUE
+
+
+EOS
+    end
+
+    should "only strip the newlines which precede and succeed the entire block" do
+      assert_match "<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>", @result
+    end
+  end
+
   context "post content has highlight tag with preceding spaces & Windows-style newlines" do
     setup do
       fill_post "\r\n\r\n\r\n     [,1] [,2]"
