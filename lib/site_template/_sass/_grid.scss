@@ -1,0 +1,49 @@
+.row {
+    margin-left: - $spacing-unit / 4;
+    margin-right: - $spacing-unit / 4;
+
+    @extend %clearfix;
+}
+
+[class*="col-"] {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+
+    // Space between columns: 15px = 2 * $spacing-unit / 4 = $spacing-unit / 2
+    padding-left: $spacing-unit / 4;
+    padding-right: $spacing-unit / 4;
+}
+
+
+$grid-columns: 12;
+
+@mixin make-grid-columns-float($class) {
+    $list: "";
+    @for $i from 1 through $grid-columns {
+        $list: ".col-#{$class}-#{$i}, #{$list}";
+    }
+    #{$list} { float: left }
+}
+
+@mixin make-grid($class) {
+    @for $i from 1 through $grid-columns {
+        .col-#{$class}-#{$i} { width: percentage($i / $grid-columns) }
+    }
+}
+
+
+@include make-grid-columns-float(xs);
+@include make-grid(xs);
+
+@media (min-width: $on-palm) {
+    @include make-grid-columns-float(sm);
+    @include make-grid(sm);
+}
+
+@media (min-width: $on-laptop) {
+    @include make-grid-columns-float(md);
+    @include make-grid(md);
+}

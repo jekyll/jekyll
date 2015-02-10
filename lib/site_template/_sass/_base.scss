@@ -173,7 +173,6 @@ pre {
  * Clearfix
  */
 %clearfix {
-
     &:after {
         content: "";
         display: table;
@@ -187,7 +186,6 @@ pre {
  * Icons
  */
 .icon {
-
     > svg {
         display: inline-block;
         width: 16px;
