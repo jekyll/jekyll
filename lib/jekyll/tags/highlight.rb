@@ -111,10 +111,21 @@ eos
         "<div class=\"highlight\"><pre>#{h(code).strip}</pre></div>"
       end
 
+      def string_rsub(str, pattern, replacement)
+        last_match = nil
+        while true
+          pos = last_match.nil? ? 0 : last_match.end(0)
+          m = pattern.match(str, pos)
+          break if m.nil?
+          last_match = m
+        end
+        last_match ? (last_match.pre_match + replacement + last_match.post_match) : str
+      end
+ 
       def add_code_tag(code)
         # Add nested <code> tags to code blocks
         code = code.sub(/<pre>\n*/,'<pre><code class="language-' + @lang.to_s.gsub("+", "-") + '" data-lang="' + @lang.to_s + '">')
-        code = code.sub(/\n*<\/pre>/,"</code></pre>")
+        code = string_rsub(code, /\n*<\/pre>/,"</code></pre>")
         code.strip
       end
 
