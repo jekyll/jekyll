@@ -49,8 +49,8 @@ module Jekyll
       # Returns nothing
       def add_build_options(c)
         c.option 'config',  '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
-        c.option 'destination', '--destination <destination>', 'The current folder will be generated into <destination>'
-        c.option 'source', '--source <source> --destination <destination>', 'The <source> folder will be generated into <destination>'
+        c.option 'destination', '-d', '--destination <destination>', 'The current folder will be generated into <destination>'
+        c.option 'source', '-s', '--source <source> --destination <destination>', 'The <source> folder will be generated into <destination>'
         c.option 'future',  '--future', 'Publishes posts with a future date'
         c.option 'limit_posts', '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
         c.option 'watch',   '-w', '--[no-]watch', 'Watch for changes and rebuild'
