@@ -37,6 +37,7 @@
   * Site template: collapsed, variable-driven font declaration (#3360)
   * Site template: Don't always show the scrollbar in code blocks (#3419)
   * Site template: Remove undefined `text` class from `p` element (#3440)
+  * Site template: Optimize text rendering for legibility (#3382)
 
 ### Bug Fixes
 
