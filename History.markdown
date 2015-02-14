@@ -105,6 +105,7 @@
   * Add a jekyllrb.com/help page which elucidates places from which to get help (#3428)
   * Remove extraneous dash on Plugins doc page which caused a formatting error (#3431)
   * Fix broken link to Jordan Thornquest's website. (#3438)
+  * Change the link to an extension (#3457)
 
 ## 2.5.3 / 2014-12-22
 
