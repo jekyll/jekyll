@@ -40,7 +40,7 @@ module Jekyll
 
           s.mount(
             options['baseurl'],
-            WEBrick::HTTPServlet::FileHandler,
+            custom_file_handler,
             destination,
             file_handler_options
           )
@@ -97,6 +97,21 @@ module Jekyll
           end
 
           opts
+        end
+
+        # Custom WEBrick FileHandler servlet for serving "/file.html" at "/file"
+        # when no exact match is found. This mirrors the behavior of GitHub
+        # Pages and many static web server configs.
+        def custom_file_handler
+          Class.new WEBrick::HTTPServlet::FileHandler do
+            def search_file(req, res, basename)
+              if file = super
+                file
+              else
+                super(req, res, "#{basename}.html")
+              end
+            end
+          end
         end
 
         def start_callback(detached)
