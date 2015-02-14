@@ -24,6 +24,7 @@ module Jekyll
       content
       excerpt
       excerpt_separator
+      draft?
     ]
 
     # Post name validator. Post filenames must be like:
@@ -303,6 +304,11 @@ module Jekyll
       else
         nil
       end
+    end
+
+    # Returns if this Post is a Draft
+    def draft?
+      is_a?(Jekyll::Draft)
     end
 
     protected
