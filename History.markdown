@@ -39,6 +39,7 @@
   * Site template: Don't always show the scrollbar in code blocks (#3419)
   * Site template: Remove undefined `text` class from `p` element (#3440)
   * Site template: Optimize text rendering for legibility (#3382)
+  * Add `draft?` method to identify if Post is a Draft & expose to Liquid (#3456)
 
 ### Bug Fixes
 
