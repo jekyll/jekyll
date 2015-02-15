@@ -123,7 +123,6 @@ Pages and posts can also access a specific item. The example below shows how to 
 {% highlight yaml %}
 dave:
     name: David Smith
-    link: /bitcoin-expert/
     twitter: DavidSilvaSmith
 {% endhighlight %}
 
