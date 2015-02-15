@@ -114,3 +114,30 @@ The organizations can then be accessed via `site.data.orgs`, followed by the fil
 </ul>
 {% endraw %}
 {% endhighlight %}
+
+## Example: Accessing a specific author
+
+Pages and posts can also access a specific item. The example below shows how to access a specific item:
+
+'_data/peoplejekyll.yml':
+{% highlight yaml %}
+dave:
+    name: David Smith
+    link: /bitcoin-expert/
+    twitter: DavidSilvaSmith
+{% endhighlight %}
+
+The author can then be specified as a page variable in a post's frontmatter:
+
+{% highlight html %}
+{% raw %}
+---
+title: sample post
+author: dave
+---
+
+{% assign author = site.data.people.[page.author] %}
+<a rel="author" href="{{ author.twitter }}" title="{{ author.name }}">author.name</a>
+
+{% endraw %}
+{% endhighlight %}
