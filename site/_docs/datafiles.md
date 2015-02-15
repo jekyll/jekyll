@@ -119,7 +119,7 @@ The organizations can then be accessed via `site.data.orgs`, followed by the fil
 
 Pages and posts can also access a specific data item. The example below shows how to access a specific item:
 
-'_data/peoplejekyll.yml`:
+`_data/peoplejekyll.yml`:
 {% highlight yaml %}
 dave:
     name: David Smith
