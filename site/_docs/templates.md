@@ -325,7 +325,7 @@ file.
 
 Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to highlight
 your code snippets. It doesn't support as many languages as Pygments, however it
-should fit in most cases. Also, since [Rouge](https://github.com/jayferd/rouge)
+should suit most use cases. Also, since [Rouge](https://github.com/jayferd/rouge)
 is written in pure Ruby, you don't need Python on your system!
 
 To render a code block with syntax highlighting, surround your code as follows:
