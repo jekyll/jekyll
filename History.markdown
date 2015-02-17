@@ -108,6 +108,7 @@
   * Fix broken link to Jordan Thornquest's website. (#3438)
   * Change the link to an extension (#3457)
   * Fix Twitter link on the help page (#3466)
+  * Fix wording in code snippet highlighting section (#3475)
 
 ## 2.5.3 / 2014-12-22
 
