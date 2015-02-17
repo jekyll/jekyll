@@ -30,7 +30,7 @@ Jekyll IRC channel.
 Search through the issues on the main Jekyll development. Think you've
 found a bug? File a new issue.
 
-### [@jekyllrb on Twitter](https://twitter.com)
+### [@jekyllrb on Twitter](https://twitter.com/jekyllrb)
 
 The official Jekyll Twitter account. It's not checked often, so try the
 above first.
