@@ -14,7 +14,7 @@ class TestKramdown < Test::Unit::TestCase
           'toc_levels'    => '1..6',
           'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
 
-          'use_coderay'   => true,
+          'enable_coderay'   => true,
           'coderay_bold_every'=> 12,
           'coderay' => {
             'coderay_css'        => :style,
@@ -26,7 +26,7 @@ class TestKramdown < Test::Unit::TestCase
       @markdown = Converters::Markdown.new(@config)
     end
 
-    # http://kramdown.rubyforge.org/converter/html.html#options
+    # http://kramdown.gettalong.org/converter/html.html#options
     should "pass kramdown options" do
       assert_equal "<h1>Some Header</h1>", @markdown.convert('# Some Header #').strip
     end
@@ -35,7 +35,7 @@ class TestKramdown < Test::Unit::TestCase
       assert_match /<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>/, @markdown.convert(%{"Pit'hy"}).strip
 
       override = { 'kramdown' => { 'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo' } }
-      markdown = Converters::Markdown.new(@config.deep_merge(override))
+      markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
       assert_match /<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)<\/p>/, markdown.convert(%{"Pit'hy"}).strip
     end
 

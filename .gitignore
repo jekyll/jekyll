@@ -12,4 +12,8 @@ gh-pages/
 site/_site/
 coverage
 .ruby-version
+.ruby-gemset
 .sass-cache
+tmp/*
+.jekyll-metadata
+/vendor

@@ -1,35 +1,56 @@
-if RUBY_VERSION > '1.9'
-  require 'coveralls'
-  Coveralls.wear_merged!
-end
-
 require 'fileutils'
+require 'posix-spawn'
 require 'rr'
 require 'test/unit'
 require 'time'
 
-TEST_DIR    = File.join('/', 'tmp', 'jekyll')
-JEKYLL_PATH = File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll')
+JEKYLL_SOURCE_DIR = File.dirname(File.dirname(File.dirname(__FILE__)))
+TEST_DIR    = File.expand_path(File.join('..', '..', 'tmp', 'jekyll'), File.dirname(__FILE__))
+JEKYLL_PATH = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'bin', 'jekyll'))
+JEKYLL_COMMAND_OUTPUT_FILE = File.join(File.dirname(TEST_DIR), 'jekyll_output.txt')
 
-def run_jekyll(opts = {})
-  command = JEKYLL_PATH.clone
-  command << " build"
-  command << " --drafts" if opts[:drafts]
-  command << " >> /dev/null 2>&1" if opts[:debug].nil?
-  system command
+def source_dir(*files)
+  File.join(TEST_DIR, *files)
 end
 
-def call_jekyll_new(opts = {})
-  command = JEKYLL_PATH.clone
-  command << " new"
-  command << " #{opts[:path]}" if opts[:path]
-  command << " --blank" if opts[:blank]
-  command << " >> /dev/null 2>&1" if opts[:debug].nil?
-  system command
+def all_steps_to_path(path)
+  source = Pathname.new(source_dir('_site')).expand_path
+  dest   = Pathname.new(path).expand_path
+  paths  = []
+  dest.ascend do |f|
+    break if f.eql? source
+    paths.unshift f.to_s
+  end
+  paths
+end
+
+def jekyll_output_file
+  JEKYLL_COMMAND_OUTPUT_FILE
+end
+
+def jekyll_run_output
+  File.read(jekyll_output_file) if File.file?(jekyll_output_file)
+end
+
+def run_bundle(args)
+  child = run_in_shell('bundle', *args.strip.split(' '))
+end
+
+def run_jekyll(args)
+  child = run_in_shell(JEKYLL_PATH, *args.strip.split(' '), "--trace")
+  child.status.exitstatus == 0
+end
+
+def run_in_shell(*args)
+  POSIX::Spawn::Child.new *args, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"]
 end
 
 def slug(title)
-  title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+  if title
+    title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+  else
+    Time.now.strftime("%s%9N") # nanoseconds since the Epoch
+  end
 end
 
 def location(folder, direction)
@@ -47,15 +68,8 @@ def file_contents(path)
 end
 
 def seconds_agnostic_datetime(datetime = Time.now)
-  pieces = datetime.to_s.split(" ")
-  if pieces.size == 6 # Ruby 1.8.7
-    date = pieces[0..2].join(" ")
-    time = seconds_agnostic_time(pieces[3]) 
-    zone = pieces[4..5].join(" ")
-  else # Ruby 1.9.1 or greater
-    date, time, zone = pieces
-    time = seconds_agnostic_time(time)
-  end
+  date, time, zone = datetime.to_s.split(" ")
+  time = seconds_agnostic_time(time)
   [
     Regexp.escape(date),
     "#{time}:\\d{2}",
@@ -70,6 +84,3 @@ def seconds_agnostic_time(time)
   hour, minutes, _ = time.split(":")
   "#{hour}:#{minutes}"
 end
-
-# work around "invalid option: --format" cucumber bug (see #296)
-Test::Unit.run = true if RUBY_VERSION < '1.9'

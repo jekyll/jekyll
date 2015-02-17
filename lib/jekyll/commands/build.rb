@@ -1,70 +1,78 @@
 module Jekyll
   module Commands
     class Build < Command
-      def self.process(options)
-        site = Jekyll::Site.new(options)
 
-        self.build(site, options)
-        self.watch(site, options) if options['watch']
-      end
+      class << self
 
-      # Private: Build the site from source into destination.
-      #
-      # site - A Jekyll::Site instance
-      # options - A Hash of options passed to the command
-      #
-      # Returns nothing.
-      def self.build(site, options)
-        source = options['source']
-        destination = options['destination']
-        Jekyll.logger.info "Source:", source
-        Jekyll.logger.info "Destination:", destination
-        print Jekyll.logger.formatted_topic "Generating..."
-        self.process_site(site)
-        puts "done."
-      end
+        # Create the Mercenary command for the Jekyll CLI for this Command
+        def init_with_program(prog)
+          prog.command(:build) do |c|
+            c.syntax      'build [options]'
+            c.description 'Build your site'
+            c.alias :b
 
-      # Private: Watch for file changes and rebuild the site.
-      #
-      # site - A Jekyll::Site instance
-      # options - A Hash of options passed to the command
-      #
-      # Returns nothing.
-      def self.watch(site, options)
-        require 'listen'
+            add_build_options(c)
 
-        source = options['source']
-        destination = options['destination']
-
-        begin
-          dest = Pathname.new(destination).relative_path_from(Pathname.new(source)).to_path
-          ignored = Regexp.new(Regexp.escape(dest))
-        rescue ArgumentError
-          # Destination is outside the source, no need to ignore it.
-          ignored = nil
+            c.action do |args, options|
+              options["serving"] = false
+              Jekyll::Commands::Build.process(options)
+            end
+          end
         end
 
-        Jekyll.logger.info "Auto-regeneration:", "enabled"
+        # Build your jekyll site
+        # Continuously watch if `watch` is set to true in the config.
+        def process(options)
+          Jekyll.logger.log_level = :error if options['quiet']
 
-        listener = Listen::Listener.new(source, :ignore => ignored) do |modified, added, removed|
-          t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-          n = modified.length + added.length + removed.length
-          print Jekyll.logger.formatted_topic("Regenerating:") + "#{n} files at #{t} "
-          self.process_site(site)
-          puts  "...done."
-        end
-        listener.start
+          options = configuration_from_options(options)
+          site = Jekyll::Site.new(options)
 
-        unless options['serving']
-          trap("INT") do
-            listener.stop
-            puts "     Halting auto-regeneration."
-            exit 0
+          if options.fetch('skip_initial_build', false)
+            Jekyll.logger.warn "Build Warning:", "Skipping the initial build. This may result in an out-of-date site."
+          else
+            build(site, options)
           end
 
-          loop { sleep 1000 }
+          if options.fetch('watch', false)
+            watch(site, options)
+          else
+            Jekyll.logger.info "Auto-regeneration:", "disabled. Use --watch to enable."
+          end
         end
-      end
+
+        # Build your Jekyll site.
+        #
+        # site - the Jekyll::Site instance to build
+        # options - A Hash of options passed to the command
+        #
+        # Returns nothing.
+        def build(site, options)
+          t = Time.now
+          source      = options['source']
+          destination = options['destination']
+          full_build  = options['full_rebuild']
+          Jekyll.logger.info "Source:", source
+          Jekyll.logger.info "Destination:", destination
+          Jekyll.logger.info "Incremental build:", (full_build ? "disabled" : "enabled")
+          Jekyll.logger.info "Generating..."
+          process_site(site)
+          Jekyll.logger.info "", "done in #{(Time.now - t).round(3)} seconds."
+        end
+
+        # Private: Watch for file changes and rebuild the site.
+        #
+        # site - A Jekyll::Site instance
+        # options - A Hash of options passed to the command
+        #
+        # Returns nothing.
+        def watch(site, options)
+          External.require_with_graceful_fail 'jekyll-watch'
+          Jekyll::Watcher.watch(options)
+        end
+
+      end # end of class << self
+
     end
   end
 end

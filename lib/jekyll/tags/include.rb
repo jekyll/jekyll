@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Jekyll
   module Tags
     class IncludeTagError < StandardError
@@ -11,16 +13,27 @@ module Jekyll
 
     class IncludeTag < Liquid::Tag
 
-      SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
+      attr_reader :includes_dir
 
-      VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/      
-
-      INCLUDES_DIR = '_includes'
+      VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
+      VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
       def initialize(tag_name, markup, tokens)
         super
-        @file, @params = markup.strip.split(' ', 2);
+        @includes_dir = tag_includes_dir
+        matched = markup.strip.match(VARIABLE_SYNTAX)
+        if matched
+          @file = matched['variable'].strip
+          @params = matched['params'].strip
+        else
+          @file, @params = markup.strip.split(' ', 2);
+        end
         validate_params if @params
+        @tag_name = tag_name
+      end
+
+      def syntax_example
+        "{% #{@tag_name} file.ext param='value' param2='value' %}"
       end
 
       def parse_params(context)
@@ -43,16 +56,16 @@ module Jekyll
         params
       end
 
-      def validate_file_name
-        if @file !~ /^[a-zA-Z0-9_\/\.-]+$/ || @file =~ /\.\// || @file =~ /\/\./
+      def validate_file_name(file)
+        if file !~ /^[a-zA-Z0-9_\/\.-]+$/ || file =~ /\.\// || file =~ /\/\./
             raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
-	#{@file}
+  #{file}
 
 Valid syntax:
 
-	#{SYNTAX_EXAMPLE}
+  #{syntax_example}
 
 eos
         end
@@ -64,11 +77,11 @@ eos
           raise ArgumentError.new <<-eos
 Invalid syntax for include tag:
 
-	#{@params}
+  #{@params}
 
 Valid syntax:
 
-	#{SYNTAX_EXAMPLE}
+  #{syntax_example}
 
 eos
         end
@@ -79,57 +92,89 @@ eos
         context.registers[:site].file_read_opts
       end
 
-      def retrieve_variable(context)
-        if /\{\{([\w\-\.]+)\}\}/ =~ @file
-          raise ArgumentError.new("No variable #{$1} was found in include tag") if context[$1].nil?
-          @file = context[$1]
+      # Render the variable if required
+      def render_variable(context)
+        if @file.match(VARIABLE_SYNTAX)
+          partial = Liquid::Template.parse(@file)
+          partial.render!(context)
         end
+      end
+
+      def tag_includes_dir
+        '_includes'.freeze
       end
 
       def render(context)
-        dir = File.join(context.registers[:site].source, INCLUDES_DIR)
-        validate_dir(dir, context.registers[:site].safe)
+        site = context.registers[:site]
+        dir = resolved_includes_dir(context)
 
-        retrieve_variable(context)
-        validate_file_name
+        file = render_variable(context) || @file
+        validate_file_name(file)
 
-        file = File.join(dir, @file)
-        validate_file(file, context.registers[:site].safe)
+        path = File.join(dir, file)
+        validate_path(path, dir, site.safe)
 
-        partial = Liquid::Template.parse(source(file, context))
-
-        context.stack do
-          context['include'] = parse_params(context) if @params
-          partial.render!(context)
+        # Add include to dependency tree
+        if context.registers[:page] and context.registers[:page].has_key? "path"
+          site.regenerator.add_dependency(
+            site.in_source_dir(context.registers[:page]["path"]),
+            path
+          )
         end
-      rescue => e
-        raise IncludeTagError.new e.message, File.join(INCLUDES_DIR, @file)
-      end
 
-      def validate_dir(dir, safe)
-        if File.symlink?(dir) && safe
-          raise IOError.new "Includes directory '#{dir}' cannot be a symlink"
-        end
-      end
+        begin
+          partial = Liquid::Template.parse(read_file(path, context))
 
-      def validate_file(file, safe)
-        if !File.exists?(file)
-          raise IOError.new "Included file '#{@file}' not found in '#{INCLUDES_DIR}' directory"
-        elsif File.symlink?(file) && safe
-          raise IOError.new "The included file '#{INCLUDES_DIR}/#{@file}' should not be a symlink"
+          context.stack do
+            context['include'] = parse_params(context) if @params
+            partial.render!(context)
+          end
+        rescue => e
+          raise IncludeTagError.new e.message, File.join(@includes_dir, @file)
         end
       end
 
-      def blank?
-        false
+      def resolved_includes_dir(context)
+        context.registers[:site].in_source_dir(@includes_dir)
+      end
+
+      def validate_path(path, dir, safe)
+        if safe && !realpath_prefixed_with?(path, dir)
+          raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
+        elsif !File.exist?(path)
+          raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
+        end
+      end
+
+      def path_relative_to_source(dir, path)
+        File.join(@includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
+      end
+
+      def realpath_prefixed_with?(path, dir)
+        File.exist?(path) && File.realpath(path).start_with?(dir)
       end
 
       # This method allows to modify the file content by inheriting from the class.
-      def source(file, context)
-        File.read_with_options(file, file_read_opts(context))
+      def read_file(file, context)
+        File.read(file, file_read_opts(context))
+      end
+    end
+
+    class IncludeRelativeTag < IncludeTag
+      def tag_includes_dir
+        '.'.freeze
+      end
+
+      def page_path(context)
+        context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
+      end
+
+      def resolved_includes_dir(context)
+        context.registers[:site].in_source_dir(page_path(context))
       end
     end
   end
 end
 
 Liquid::Template.register_tag('include', Jekyll::Tags::IncludeTag)
+Liquid::Template.register_tag('include_relative', Jekyll::Tags::IncludeRelativeTag)

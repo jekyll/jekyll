@@ -1,2 +1,4 @@
 #!/bin/sh
-bundle install
+
+script/branding
+bundle install -j8

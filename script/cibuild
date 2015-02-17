@@ -1,0 +1,12 @@
+#! /bin/bash
+
+script/branding
+
+set -e
+
+if test -z "$TEST_SUITE"; then
+  script/test
+  script/cucumber
+else
+  script/$TEST_SUITE
+fi

@@ -4,6 +4,8 @@ module Jekyll
   class Site
     # Handles the cleanup of a site's destination before it is built.
     class Cleaner
+      attr_reader :site
+
       def initialize(site)
         @site = site
       end
@@ -11,6 +13,7 @@ module Jekyll
       # Cleans up the site's destination directory
       def cleanup!
         FileUtils.rm_rf(obsolete_files)
+        FileUtils.rm_rf(metadata_file) if @site.full_rebuild?
       end
 
       private
@@ -22,13 +25,20 @@ module Jekyll
         (existing_files - new_files - new_dirs + replaced_files).to_a
       end
 
+      # Private: The metadata file storing dependency tree and build history
+      #
+      # Returns an Array with the metdata file as the only item
+      def metadata_file
+        [site.regenerator.metadata_file]
+      end
+
       # Private: The list of existing files, apart from those included in keep_files and hidden files.
       #
       # Returns a Set with the file paths
       def existing_files
         files = Set.new
-        Dir.glob(File.join(@site.dest, "**", "*"), File::FNM_DOTMATCH) do |file|
-          files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex
+        Dir.glob(site.in_dest_dir("**", "*"), File::FNM_DOTMATCH) do |file|
+          files << file unless file =~ /\/\.{1,2}$/ || file =~ keep_file_regex || keep_dirs.include?(file)
         end
         files
       end
@@ -38,7 +48,7 @@ module Jekyll
       # Returns a Set with the file paths
       def new_files
         files = Set.new
-        @site.each_site_file { |item| files << item.destination(@site.dest) }
+        site.each_site_file { |item| files << item.destination(site.dest) }
         files
       end
 
@@ -47,7 +57,19 @@ module Jekyll
       #
       # Returns a Set with the directory paths
       def new_dirs
-        new_files.map { |file| File.dirname(file) }.to_set
+        new_files.map { |file| parent_dirs(file) }.flatten.to_set
+      end
+
+      # Private: The list of parent directories of a given file
+      #
+      # Returns an Array with the directory paths
+      def parent_dirs(file)
+        parent_dir = File.dirname(file)
+        if parent_dir == site.dest
+          []
+        else
+          [parent_dir] + parent_dirs(parent_dir)
+        end
       end
 
       # Private: The list of existing files that will be replaced by a directory during build
@@ -57,6 +79,14 @@ module Jekyll
         new_dirs.select { |dir| File.file?(dir) }.to_set
       end
 
+      # Private: The list of directories that need to be kept because they are parent directories
+      # of files specified in keep_files
+      #
+      # Returns a Set with the directory paths
+      def keep_dirs
+        site.keep_files.map { |file| parent_dirs(site.in_dest_dir(file)) }.flatten.to_set
+      end
+
       # Private: Creates a regular expression from the config's keep_files array
       #
       # Examples
@@ -64,7 +94,7 @@ module Jekyll
       #
       # Returns the regular expression
       def keep_file_regex
-        or_list = @site.keep_files.join("|")
+        or_list = site.keep_files.join("|")
         pattern = "\/(#{or_list.gsub(".", "\.")})"
         Regexp.new pattern
       end

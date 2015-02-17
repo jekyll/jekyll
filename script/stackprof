@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+
+export BENCHMARK=true
+command -v stackprof > /dev/null || script/bootstrap
+
+TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site', 'full_rebuild' => true})"
+PROF_OUTPUT_FILE=tmp/stackprof-$(date +%Y%m%d%H%M).dump
+
+test -f "$PROF_OUTPUT_FILE" || {
+  bundle exec ruby -r./lib/jekyll -rstackprof \
+    -e "StackProf.run(mode: :cpu, interval: 100, out: '${PROF_OUTPUT_FILE}') { ${TEST_SCRIPT} }"
+}
+
+bundle exec stackprof $PROF_OUTPUT_FILE $@

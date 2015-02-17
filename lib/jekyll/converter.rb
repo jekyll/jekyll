@@ -1,27 +1,27 @@
 module Jekyll
   class Converter < Plugin
-    # Public: Get or set the pygments prefix. When an argument is specified,
+    # Public: Get or set the highlighter prefix. When an argument is specified,
     # the prefix will be set. If no argument is specified, the current prefix
     # will be returned.
     #
-    # pygments_prefix - The String prefix (default: nil).
+    # highlighter_prefix - The String prefix (default: nil).
     #
     # Returns the String prefix.
-    def self.pygments_prefix(pygments_prefix = nil)
-      @pygments_prefix = pygments_prefix if pygments_prefix
-      @pygments_prefix
+    def self.highlighter_prefix(highlighter_prefix = nil)
+      @highlighter_prefix = highlighter_prefix if highlighter_prefix
+      @highlighter_prefix
     end
 
-    # Public: Get or set the pygments suffix. When an argument is specified,
+    # Public: Get or set the highlighter suffix. When an argument is specified,
     # the suffix will be set. If no argument is specified, the current suffix
     # will be returned.
     #
-    # pygments_suffix - The String suffix (default: nil).
+    # highlighter_suffix - The String suffix (default: nil).
     #
     # Returns the String suffix.
-    def self.pygments_suffix(pygments_suffix = nil)
-      @pygments_suffix = pygments_suffix if pygments_suffix
-      @pygments_suffix
+    def self.highlighter_suffix(highlighter_suffix = nil)
+      @highlighter_suffix = highlighter_suffix if highlighter_suffix
+      @highlighter_suffix
     end
 
     # Initialize the converter.
@@ -31,18 +31,18 @@ module Jekyll
       @config = config
     end
 
-    # Get the pygments prefix.
+    # Get the highlighter prefix.
     #
     # Returns the String prefix.
-    def pygments_prefix
-      self.class.pygments_prefix
+    def highlighter_prefix
+      self.class.highlighter_prefix
     end
 
-    # Get the pygments suffix.
+    # Get the highlighter suffix.
     #
     # Returns the String suffix.
-    def pygments_suffix
-      self.class.pygments_suffix
+    def highlighter_suffix
+      self.class.highlighter_suffix
     end
   end
 end

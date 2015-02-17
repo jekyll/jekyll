@@ -1,0 +1,19 @@
+#! /bin/bash
+#
+# Usage:
+#   script/test
+#   script/test <test_file>
+
+if [ ! -d tmp ]; then
+  mkdir tmp
+fi
+
+if [ -z "$1" ]; then
+  TEST_FILES=$(ruby -e "puts Dir.glob('test/test_*.rb')")
+else
+  TEST_FILES="$@"
+fi
+
+set -x
+
+time bundle exec ruby -Ilib -Itest -rloader $TEST_FILES

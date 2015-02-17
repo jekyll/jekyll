@@ -5,6 +5,7 @@ require 'date'
 require 'yaml'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
+require 'jekyll/version'
 
 #############################################################################
 #
@@ -13,24 +14,11 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 #############################################################################
 
 def name
-  @name ||= Dir['*.gemspec'].first.split('.').first
+  @name ||= File.basename(Dir['*.gemspec'].first, ".*")
 end
 
 def version
-  line = File.read("lib/#{name}.rb")[/^\s*VERSION\s*=\s*.*/]
-  line.match(/.*VERSION\s*=\s*['"](.*)['"]/)[1]
-end
-
-def date
-  Date.today.to_s
-end
-
-def file_date
-  Date.today.strftime("%F")
-end
-
-def rubyforge_project
-  name
+  Jekyll::VERSION
 end
 
 def gemspec_file
@@ -38,15 +26,11 @@ def gemspec_file
 end
 
 def gem_file
-  "#{name}-#{version}.gem"
-end
-
-def replace_header(head, header_name)
-  head.sub!(/(\.#{header_name}\s*= ').*'/) { "#{$1}#{send(header_name)}'"}
+  "#{name}-#{Gem::Version.new(version).to_s}.gem"
 end
 
 def normalize_bullets(markdown)
-  markdown.gsub(/\s{2}\*{1}/, "-")
+  markdown.gsub(/\n\s{2}\*{1}/, "\n-")
 end
 
 def linkify_prs(markdown)
@@ -69,13 +53,32 @@ def liquid_escape(markdown)
   markdown.gsub(/(`{[{%].+[}%]}`)/, "{% raw %}\\1{% endraw %}")
 end
 
+def custom_release_header_anchors(markdown)
+  header_regexp = /^(\d{1,2})\.(\d{1,2})\.(\d{1,2}) \/ \d{4}-\d{2}-\d{2}/
+  section_regexp = /^### \w+ \w+$/
+  markdown.split(/^##\s/).map do |release_notes|
+    _, major, minor, patch = *release_notes.match(header_regexp)
+    release_notes
+      .gsub(header_regexp, "\\0\n{: #v\\1-\\2-\\3}")
+      .gsub(section_regexp) { |section| "#{section}\n{: ##{sluffigy(section)}-v#{major}-#{minor}-#{patch}}" }
+  end.join("\n## ")
+end
+
+def sluffigy(header)
+  header.gsub(/#/, '').strip.downcase.gsub(/\s+/, '-')
+end
+
 def remove_head_from_history(markdown)
   index = markdown =~ /^##\s+\d+\.\d+\.\d+/
   markdown[index..-1]
 end
 
 def converted_history(markdown)
-  remove_head_from_history(liquid_escape(linkify(normalize_bullets(markdown))))
+  remove_head_from_history(
+    custom_release_header_anchors(
+      liquid_escape(
+        linkify(
+          normalize_bullets(markdown)))))
 end
 
 #############################################################################
@@ -84,15 +87,9 @@ end
 #
 #############################################################################
 
-if RUBY_VERSION > '1.9' && ENV["TRAVIS"] == "true"
-  require 'coveralls/rake/task'
-  Coveralls::RakeTask.new
+multitask :default => [:test, :features]
 
-  task :default => [:test, :features, 'coveralls:push']
-else
-  task :default => [:test, :features]
-end
-
+task :spec => :test
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
@@ -138,6 +135,7 @@ namespace :site do
   desc "Generate and view the site locally"
   task :preview do
     require "launchy"
+    require "jekyll"
 
     # Yep, it's a hack! Wait a few seconds for the Jekyll site to generate and
     # then open it in a browser. Someday we can do better than this, I hope.
@@ -149,50 +147,80 @@ namespace :site do
 
     # Generate the site in server mode.
     puts "Running Jekyll..."
-    Dir.chdir("site") do
-      sh "#{File.expand_path('bin/jekyll', File.dirname(__FILE__))} serve --watch"
-    end
+    options = {
+      "source"      => File.expand_path("site"),
+      "destination" => File.expand_path("site/_site"),
+      "watch"       => true,
+      "serving"     => true
+    }
+    Jekyll::Commands::Build.process(options)
+    Jekyll::Commands::Serve.process(options)
+  end
+
+  desc "Generate the site"
+  task :generate => [:history, :version_file] do
+    require "jekyll"
+    Jekyll::Commands::Build.process({
+      "source"      => File.expand_path("site"),
+      "destination" => File.expand_path("site/_site")
+    })
   end
 
   desc "Update normalize.css library to the latest version and minify"
   task :update_normalize_css do
-    Dir.chdir("site/css") do
+    Dir.chdir("site/_sass") do
       sh 'curl "http://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
-      sh 'sass "normalize.scss":"normalize.css" --style compressed'
-      sh 'rm "normalize.scss"'
+      sh 'sass "normalize.scss":"_normalize.scss" --style compressed'
+      rm ['normalize.scss', Dir.glob('*.map')].flatten
     end
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish => [:history] do
+  task :publish => [:history, :version_file] do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
-      puts "No gh-pages directory found. Run the following commands first:"
-      puts "  `git clone git@github.com:mojombo/jekyll gh-pages"
-      puts "  `cd gh-pages"
-      puts "  `git checkout gh-pages`"
-      exit(1)
+      puts "Creating gh-pages dir..."
+      sh "git clone git@github.com:jekyll/jekyll gh-pages"
     end
 
-    # Ensure gh-pages branch is up to date.
+    # Ensure latest gh-pages branch history.
     Dir.chdir('gh-pages') do
+      sh "git checkout gh-pages"
       sh "git pull origin gh-pages"
     end
 
-    # Copy to gh-pages dir.
-    puts "Copying site to gh-pages branch..."
-    Dir.glob("site/*") do |path|
-      next if path.include? "_site"
-      sh "cp -R #{path} gh-pages/"
+    # Proceed to purge all files in case we removed a file in this release.
+    puts "Cleaning gh-pages directory..."
+    purge_exclude = %w[
+      gh-pages/.
+      gh-pages/..
+      gh-pages/.git
+      gh-pages/.gitignore
+    ]
+    FileList["gh-pages/{*,.*}"].exclude(*purge_exclude).each do |path|
+      sh "rm -rf #{path}"
     end
+
+    # Copy site to gh-pages dir.
+    puts "Building site into gh-pages branch..."
+    ENV['JEKYLL_ENV'] = 'production'
+    require "jekyll"
+    Jekyll::Commands::Build.process({
+      "source"       => File.expand_path("site"),
+      "destination"  => File.expand_path("gh-pages"),
+      "sass"         => { "style" => "compressed" },
+      "full_rebuild" => true
+    })
+
+    File.open('gh-pages/.nojekyll', 'wb') { |f| f.puts(":dog: food.") }
 
     # Commit and push.
     puts "Committing and pushing to GitHub Pages..."
-    sha = `git log`.match(/[a-z0-9]{40}/)[0]
+    sha = `git rev-parse HEAD`.strip
     Dir.chdir('gh-pages') do
       sh "git add ."
-      sh "git commit -m 'Updating to #{sha}.'"
+      sh "git commit --allow-empty -m 'Updating to #{sha}.'"
       sh "git push origin gh-pages"
     end
     puts 'Done.'
@@ -205,10 +233,9 @@ namespace :site do
       front_matter = {
         "layout" => "docs",
         "title" => "History",
-        "permalink" => "/docs/history/",
-        "prev_section" => "contributing"
+        "permalink" => "/docs/history/"
       }
-      Dir.chdir('site/docs/') do
+      Dir.chdir('site/_docs/') do
         File.open("history.md", "w") do |file|
           file.write("#{front_matter.to_yaml}---\n\n")
           file.write(converted_history(history_file))
@@ -218,7 +245,12 @@ namespace :site do
       abort "You seem to have misplaced your History.markdown file. I can haz?"
     end
   end
-  
+
+  desc "Write the site latest_version.txt file"
+  task :version_file do
+    File.open('site/latest_version.txt', 'wb') { |f| f.puts(version) } unless version =~ /(beta|rc|alpha)/i
+  end
+
   namespace :releases do
     desc "Create new release post"
     task :new, :version do |t, args|
@@ -233,7 +265,7 @@ namespace :site do
         post.puts("title: 'Jekyll #{release} Released'")
         post.puts("date: #{Time.new.strftime('%Y-%m-%d %H:%M:%S %z')}")
         post.puts("author: ")
-        post.puts("version: #{version}")
+        post.puts("version: #{release}")
         post.puts("categories: [release]")
         post.puts("---")
         post.puts
@@ -251,48 +283,22 @@ end
 #
 #############################################################################
 
+desc "Release #{name} v#{version}"
 task :release => :build do
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
     exit!
   end
-  sh "git commit --allow-empty -m 'Release #{version}'"
+  sh "git commit --allow-empty -m 'Release :gem: #{version}'"
   sh "git tag v#{version}"
   sh "git push origin master"
   sh "git push origin v#{version}"
   sh "gem push pkg/#{name}-#{version}.gem"
 end
 
-task :build => :gemspec do
-  sh "mkdir -p pkg"
+desc "Build #{name} v#{version} into pkg/"
+task :build do
+  mkdir_p "pkg"
   sh "gem build #{gemspec_file}"
   sh "mv #{gem_file} pkg"
-end
-
-task :gemspec do
-  # read spec file and split out manifest section
-  spec = File.read(gemspec_file)
-  head, manifest, tail = spec.split("  # = MANIFEST =\n")
-
-  # replace name version and date
-  replace_header(head, :name)
-  replace_header(head, :version)
-  replace_header(head, :date)
-  #comment this out if your rubyforge_project has a different name
-  replace_header(head, :rubyforge_project)
-
-  # determine file list from git ls-files
-  files = `git ls-files`.
-    split("\n").
-    sort.
-    reject { |file| file =~ /^\./ }.
-    reject { |file| file =~ /^(rdoc|pkg|coverage)/ }.
-    map { |file| "    #{file}" }.
-    join("\n")
-
-  # piece file back together and write
-  manifest = "  s.files = %w[\n#{files}\n  ]\n"
-  spec = [head, manifest, tail].join("  # = MANIFEST =\n")
-  File.open(gemspec_file, 'w') { |io| io.write(spec) }
-  puts "Updated #{gemspec_file}"
 end

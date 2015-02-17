@@ -1,0 +1,46 @@
+- title: Getting Started
+  docs:
+  - home
+  - quickstart
+  - installation
+  - usage
+  - structure
+  - configuration
+
+- title: Your Content
+  docs:
+  - frontmatter
+  - posts
+  - drafts
+  - pages
+  - variables
+  - collections
+  - datafiles
+  - assets
+  - migrations
+
+- title: Customization
+  docs:
+  - templates
+  - permalinks
+  - pagination
+  - plugins
+  - extras
+
+- title: Deployment
+  docs:
+  - github-pages
+  - deployment-methods
+  - continuous-integration
+
+- title: Miscellaneous
+  docs:
+  - troubleshooting
+  - sites
+  - resources
+  - upgrading
+
+- title: Meta
+  docs:
+  - contributing
+  - history

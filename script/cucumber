@@ -1,0 +1,5 @@
+#!/bin/bash
+
+time bundle exec cucumber \
+  -f Features::Support::Overview \
+  "$@"

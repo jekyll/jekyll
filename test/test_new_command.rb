@@ -24,14 +24,14 @@ class TestNewCommand < Test::Unit::TestCase
     end
 
     should 'create a new directory' do
-      assert !File.exists?(@full_path)
+      assert !File.exist?(@full_path)
       capture_stdout { Jekyll::Commands::New.process(@args) }
-      assert File.exists?(@full_path)
+      assert File.exist?(@full_path)
     end
 
     should 'display a success message' do
       output = capture_stdout { Jekyll::Commands::New.process(@args) }
-      success_message = "New jekyll site installed in #{@full_path}.\n"
+      success_message = "New jekyll site installed in #{@full_path}. \n"
       assert_equal success_message, output
     end
 
@@ -70,6 +70,19 @@ class TestNewCommand < Test::Unit::TestCase
 
       assert_same_elements erb_template_files, new_site_files
     end
+
+    should 'create blank project' do
+      blank_contents = %w(/_drafts /_layouts /_posts /index.html)
+      capture_stdout { Jekyll::Commands::New.process(@args, '--blank') }
+      assert_same_elements blank_contents, dir_contents(@full_path)
+    end
+
+    should 'force created folder' do
+      capture_stdout { Jekyll::Commands::New.process(@args) }
+      assert_nothing_raised(SystemExit) do
+        capture_stdout {Jekyll::Commands::New.process(@args, '--force') }
+      end
+    end
   end
 
   context 'when multiple args are given' do
@@ -83,9 +96,9 @@ class TestNewCommand < Test::Unit::TestCase
     end
 
     should 'create a new directory' do
-      assert !File.exists?(@site_name_with_spaces)
+      assert !File.exist?(@site_name_with_spaces)
       capture_stdout { Jekyll::Commands::New.process(@multiple_args) }
-      assert File.exists?(@site_name_with_spaces)
+      assert File.exist?(@site_name_with_spaces)
     end
   end
 
