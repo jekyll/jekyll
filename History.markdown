@@ -76,6 +76,7 @@
   * Move all `regenerate?` checking to `Regenerator` (#3326)
   * Factor out a `read_data_file` call to keep things clean (#3380)
   * Proof the site with CircleCI. (#3427)
+  * Update LICENSE to 2015. (#3477)
 
 ### Site Enhancements
 
