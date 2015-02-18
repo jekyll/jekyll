@@ -118,6 +118,7 @@ customizable. If your script won't change much, you can write your test
 incantation here directly:
 
 {% highlight yaml %}
+before_install: gem install jekyll html-proofer
 script: jekyll build && htmlproof ./_site
 {% endhighlight %}
 
