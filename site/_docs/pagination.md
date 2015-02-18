@@ -33,7 +33,7 @@ page in the generated site.
 You may also specify the destination of the pagination pages:
 
 {% highlight yaml %}
-paginate_path: "blog/page:num/"
+paginate_path: "/blog/page:num/"
 {% endhighlight %}
 
 This will read in `blog/index.html`, send it each pagination page in Liquid as `paginator`
