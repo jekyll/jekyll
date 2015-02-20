@@ -57,6 +57,10 @@ class TestPost < Test::Unit::TestCase
       end
     end
 
+    should "return nil when compared with a non-Post" do
+      assert_nil Post.allocate <=> nil
+    end
+
     context "processing posts" do
       setup do
         @post = Post.allocate

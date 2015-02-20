@@ -155,6 +155,9 @@ module Jekyll
     #
     # Returns -1, 0, 1
     def <=>(other)
+      return unless other.respond_to?(:date) &&
+                    other.respond_to?(:slug)
+
       cmp = self.date <=> other.date
       if 0 == cmp
        cmp = self.slug <=> other.slug
