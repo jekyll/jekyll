@@ -6,8 +6,8 @@ SimpleCov.start('gem') do
 end
 
 require 'rubygems'
-require 'test/unit'
 require 'ostruct'
+require 'minitest/autorun'
 
 require 'jekyll'
 
@@ -23,9 +23,7 @@ include Jekyll
 # Send STDERR into the void to suppress program output messages
 STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 
-class Test::Unit::TestCase
-  include RR::Adapters::TestUnit
-
+class Minitest::Test
   def fixture_site(overrides = {})
     Jekyll::Site.new(site_configuration(overrides))
   end
