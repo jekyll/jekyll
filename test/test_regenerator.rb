@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestRegenerator < Test::Unit::TestCase
+class TestRegenerator < Minitest::Test
   context "The site regenerator" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
@@ -162,7 +162,7 @@ class TestRegenerator < Test::Unit::TestCase
       @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
-      assert_not_same File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      refute_same File.mtime(@path), @regenerator.metadata[@path]["mtime"]
       assert @regenerator.modified?(@path)
     end
 

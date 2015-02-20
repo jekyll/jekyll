@@ -1,7 +1,7 @@
 require 'helper'
 require 'jekyll/commands/new'
 
-class TestNewCommand < Test::Unit::TestCase
+class TestNewCommand < Minitest::Test
   def dir_contents(path)
     Dir["#{path}/**/*"].each do |file|
       file.gsub! path, ''
@@ -79,7 +79,7 @@ class TestNewCommand < Test::Unit::TestCase
 
     should 'force created folder' do
       capture_stdout { Jekyll::Commands::New.process(@args) }
-      assert_nothing_raised(SystemExit) do
+      refute_raises(SystemExit) do
         capture_stdout {Jekyll::Commands::New.process(@args, '--force') }
       end
     end
@@ -108,7 +108,7 @@ class TestNewCommand < Test::Unit::TestCase
     end
 
     should 'raise an ArgumentError' do
-      exception = assert_raise ArgumentError do
+      exception = assert_raises ArgumentError do
         Jekyll::Commands::New.process(@empty_args)
       end
       assert_equal 'You must specify a path.', exception.message

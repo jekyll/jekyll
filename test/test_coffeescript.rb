@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCoffeeScript < Test::Unit::TestCase
+class TestCoffeeScript < Minitest::Test
   context "converting CoffeeScript" do
     setup do
       External.require_with_graceful_fail('jekyll-coffeescript')

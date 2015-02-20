@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestDocument < Test::Unit::TestCase
+class TestDocument < Minitest::Test
 
   context "a document in a collection" do
     setup do
@@ -283,7 +283,7 @@ class TestDocument < Test::Unit::TestCase
 
     context "without output overrides" do
       should "be output according to collection defaults" do
-        assert_not_nil @files.find { |doc| doc.relative_path == "_slides/example-slide-4.html" }
+        refute_nil @files.find { |doc| doc.relative_path == "_slides/example-slide-4.html" }
       end
     end
 

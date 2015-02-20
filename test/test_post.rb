@@ -2,7 +2,7 @@
 
 require 'helper'
 
-class TestPost < Test::Unit::TestCase
+class TestPost < Minitest::Test
   def setup_post(file)
     Post.new(@site, source_dir, '', file)
   end
@@ -103,7 +103,7 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "raise a good error on invalid post date" do
-        assert_raise Jekyll::Errors::FatalException do
+        assert_raises Jekyll::Errors::FatalException do
           @post.process("2009-27-03-foo-bar.textile")
         end
       end

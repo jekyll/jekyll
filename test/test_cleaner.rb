@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCleaner < Test::Unit::TestCase
+class TestCleaner < Minitest::Test
   context "directory in keep_files" do
     setup do
       clear_dest

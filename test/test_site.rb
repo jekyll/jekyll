@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestSite < Test::Unit::TestCase
+class TestSite < Minitest::Test
   context "configuring sites" do
     should "have an array for plugins by default" do
       site = Site.new(Jekyll::Configuration::DEFAULTS)
@@ -71,7 +71,7 @@ class TestSite < Test::Unit::TestCase
       @site = Site.new(site_configuration)
       @site.read
       @site.generate
-      assert_not_equal 0, @site.pages.size
+      refute_equal 0, @site.pages.size
       assert_equal 'hi', @site.file_read_opts[:secret_message]
     end
 
@@ -118,7 +118,7 @@ class TestSite < Test::Unit::TestCase
       sleep 1
       @site.process
       mtime3 = File.stat(dest).mtime.to_i
-      assert_not_equal mtime2, mtime3 # must be regenerated!
+      refute_equal mtime2, mtime3 # must be regenerated!
 
       sleep 1
       @site.process
@@ -228,13 +228,13 @@ class TestSite < Test::Unit::TestCase
 
     context 'error handling' do
       should "raise if destination is included in source" do
-        assert_raise Jekyll::Errors::FatalException do
+        assert_raises Jekyll::Errors::FatalException do
           site = Site.new(site_configuration('destination' => source_dir))
         end
       end
 
       should "raise if destination is source" do
-        assert_raise Jekyll::Errors::FatalException do
+        assert_raises Jekyll::Errors::FatalException do
           site = Site.new(site_configuration('destination' => File.join(source_dir, "..")))
         end
       end
@@ -309,7 +309,7 @@ class TestSite < Test::Unit::TestCase
 
         custom_processor = "CustomMarkdown"
         s = Site.new(site_configuration('markdown' => custom_processor))
-        assert_nothing_raised do
+        refute_raises do
           s.process
         end
 
@@ -332,7 +332,7 @@ class TestSite < Test::Unit::TestCase
 
         bad_processor = "Custom::Markdown"
         s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
-        assert_raise Jekyll::Errors::FatalException do
+        assert_raises Jekyll::Errors::FatalException do
           s.process
         end
 
@@ -344,7 +344,7 @@ class TestSite < Test::Unit::TestCase
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
-        assert_nothing_raised do
+        refute_raises do
           Site.new(site_configuration('markdown' => bad_processor))
         end
       end
@@ -352,7 +352,7 @@ class TestSite < Test::Unit::TestCase
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
         s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
-        assert_raise Jekyll::Errors::FatalException do
+        assert_raises Jekyll::Errors::FatalException do
           s.process
         end
       end

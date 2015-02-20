@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestPathSanitization < Test::Unit::TestCase
+class TestPathSanitization < Minitest::Test
   context "on Windows with absolute source" do
     setup do
       @source = "C:/Users/xmr/Desktop/mpc-hc.org"
