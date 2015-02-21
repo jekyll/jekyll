@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCleaner < Minitest::Test
+class TestCleaner < JekyllUnitTest
   context "directory in keep_files" do
     setup do
       clear_dest

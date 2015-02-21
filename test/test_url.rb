@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestURL < Minitest::Test
+class TestURL < JekyllUnitTest
   context "The URL class" do
 
     should "throw an exception if neither permalink or template is specified" do

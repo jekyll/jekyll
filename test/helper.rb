@@ -27,7 +27,7 @@ STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 # Report with color.
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
-class Minitest::Test
+class JekyllUnitTest < Minitest::Test
   def fixture_site(overrides = {})
     Jekyll::Site.new(site_configuration(overrides))
   end

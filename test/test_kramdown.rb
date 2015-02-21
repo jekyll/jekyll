@@ -2,7 +2,7 @@
 
 require 'helper'
 
-class TestKramdown < Minitest::Test
+class TestKramdown < JekyllUnitTest
   context "kramdown" do
     setup do
       @config = {

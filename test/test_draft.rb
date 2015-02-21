@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestDraft < Minitest::Test
+class TestDraft < JekyllUnitTest
   def setup_draft(file)
     Draft.new(@site, source_dir, '', file)
   end

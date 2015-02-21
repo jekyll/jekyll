@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestFrontMatterDefaults < Minitest::Test
+class TestFrontMatterDefaults < JekyllUnitTest
 
   context "A site with full front matter defaults" do
     setup do

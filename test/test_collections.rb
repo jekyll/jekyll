@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCollections < Minitest::Test
+class TestCollections < JekyllUnitTest
   context "an evil collection" do
     setup do
       @collection = Jekyll::Collection.new(fixture_site, "../../etc/password")

@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestRegenerator < Minitest::Test
+class TestRegenerator < JekyllUnitTest
   context "The site regenerator" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))

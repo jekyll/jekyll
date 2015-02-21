@@ -1,7 +1,7 @@
 require 'helper'
 require 'ostruct'
 
-class TestConvertible < Minitest::Test
+class TestConvertible < JekyllUnitTest
   context "yaml front-matter" do
     setup do
       @convertible = OpenStruct.new(

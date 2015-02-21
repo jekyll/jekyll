@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestGeneratedSite < Minitest::Test
+class TestGeneratedSite < JekyllUnitTest
   context "generated sites" do
     setup do
       clear_dest

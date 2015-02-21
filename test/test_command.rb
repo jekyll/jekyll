@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCommand < Minitest::Test
+class TestCommand < JekyllUnitTest
   context "when calling .add_build_options" do
     should "add common options" do
       cmd = Object.new

@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestDocument < Minitest::Test
+class TestDocument < JekyllUnitTest
 
   context "a document in a collection" do
     setup do

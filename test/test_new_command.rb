@@ -1,7 +1,7 @@
 require 'helper'
 require 'jekyll/commands/new'
 
-class TestNewCommand < Minitest::Test
+class TestNewCommand < JekyllUnitTest
   def dir_contents(path)
     Dir["#{path}/**/*"].each do |file|
       file.gsub! path, ''

@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestSite < Minitest::Test
+class TestSite < JekyllUnitTest
   context "configuring sites" do
     should "have an array for plugins by default" do
       site = Site.new(Jekyll::Configuration::DEFAULTS)

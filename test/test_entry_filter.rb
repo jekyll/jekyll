@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestEntryFilter < Minitest::Test
+class TestEntryFilter < JekyllUnitTest
   context "Filtering entries" do
     setup do
       @site = Site.new(site_configuration)

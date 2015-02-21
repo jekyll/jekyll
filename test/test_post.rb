@@ -2,7 +2,7 @@
 
 require 'helper'
 
-class TestPost < Minitest::Test
+class TestPost < JekyllUnitTest
   def setup_post(file)
     Post.new(@site, source_dir, '', file)
   end

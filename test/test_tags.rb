@@ -2,7 +2,7 @@
 
 require 'helper'
 
-class TestTags < Minitest::Test
+class TestTags < JekyllUnitTest
 
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     stub(Jekyll).configuration do

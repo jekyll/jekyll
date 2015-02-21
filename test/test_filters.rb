@@ -2,7 +2,7 @@
 
 require 'helper'
 
-class TestFilters < Minitest::Test
+class TestFilters < JekyllUnitTest
   class JekyllFilter
     include Jekyll::Filters
     attr_accessor :site, :context

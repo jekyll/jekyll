@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestLiquidExtensions < Minitest::Test
+class TestLiquidExtensions < JekyllUnitTest
 
   context "looking up a variable in a Liquid context" do
     class SayHi < Liquid::Tag

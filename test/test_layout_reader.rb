@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestLayoutReader < Minitest::Test
+class TestLayoutReader < JekyllUnitTest
   context "reading layouts" do
     setup do
       stub(Jekyll).configuration do

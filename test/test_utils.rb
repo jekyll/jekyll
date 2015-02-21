@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestUtils < Minitest::Test
+class TestUtils < JekyllUnitTest
   context "hash" do
 
     context "pluralized_array" do

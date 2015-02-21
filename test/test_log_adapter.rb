@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestLogAdapter < Minitest::Test
+class TestLogAdapter < JekyllUnitTest
   class LoggerDouble
     attr_accessor :level
 
