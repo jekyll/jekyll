@@ -77,6 +77,7 @@
   * Factor out a `read_data_file` call to keep things clean (#3380)
   * Proof the site with CircleCI. (#3427)
   * Update LICENSE to 2015. (#3477)
+  * Upgrade tests to use Minitest (#3492)
 
 ### Site Enhancements
 
