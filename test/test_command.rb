@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCommand < Test::Unit::TestCase
+class TestCommand < JekyllUnitTest
   context "when calling .add_build_options" do
     should "add common options" do
       cmd = Object.new
@@ -13,8 +13,8 @@ class TestCommand < Test::Unit::TestCase
       should "exit with non-zero error code" do
         site = Object.new
         stub(site).process { raise Jekyll::Errors::FatalException }
-        error = assert_raise(SystemExit) { Command.process_site(site) }
-        assert_not_equal 0, error.status
+        error = assert_raises(SystemExit) { Command.process_site(site) }
+        refute_equal 0, error.status
       end
     end
   end

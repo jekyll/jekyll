@@ -6,8 +6,9 @@ SimpleCov.start('gem') do
 end
 
 require 'rubygems'
-require 'test/unit'
 require 'ostruct'
+require 'minitest/autorun'
+require 'minitest/reporters'
 
 require 'jekyll'
 
@@ -23,9 +24,10 @@ include Jekyll
 # Send STDERR into the void to suppress program output messages
 STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 
-class Test::Unit::TestCase
-  include RR::Adapters::TestUnit
+# Report with color.
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
+class JekyllUnitTest < Minitest::Test
   def fixture_site(overrides = {})
     Jekyll::Site.new(site_configuration(overrides))
   end
@@ -35,7 +37,10 @@ class Test::Unit::TestCase
   end
 
   def site_configuration(overrides = {})
-    full_overrides = build_configs(overrides, build_configs({"destination" => dest_dir}))
+    full_overrides = build_configs(overrides, build_configs({
+      "destination" => dest_dir,
+      "full_rebuild" => true
+    }))
     build_configs({
       "source" => source_dir
     }, full_overrides)

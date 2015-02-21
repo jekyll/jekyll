@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestPage < Test::Unit::TestCase
+class TestPage < JekyllUnitTest
   def setup_page(*args)
     dir, file = args
     dir, file = ['', dir] if file.nil?

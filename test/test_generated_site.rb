@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestGeneratedSite < Test::Unit::TestCase
+class TestGeneratedSite < JekyllUnitTest
   context "generated sites" do
     setup do
       clear_dest
@@ -73,7 +73,7 @@ OUTPUT
     end
 
     should "ensure limit posts is 0 or more" do
-      assert_raise ArgumentError do
+      assert_raises ArgumentError do
         clear_dest
         stub(Jekyll).configuration do
           Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1})
@@ -84,14 +84,12 @@ OUTPUT
     end
 
     should "acceptable limit post is 0" do
-      assert_nothing_raised ArgumentError do
-        clear_dest
-        stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
-        end
-
-        @site = Site.new(Jekyll.configuration)
+      clear_dest
+      stub(Jekyll).configuration do
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
       end
+
+      assert Site.new(Jekyll.configuration), "Couldn't create a site with the given limit_posts."
     end
   end
 end

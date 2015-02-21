@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestLogAdapter < Test::Unit::TestCase
+class TestLogAdapter < JekyllUnitTest
   class LoggerDouble
     attr_accessor :level
 
@@ -58,7 +58,7 @@ class TestLogAdapter < Test::Unit::TestCase
     should "call #error and abort" do
       logger = Jekyll::LogAdapter.new(LoggerDouble.new)
       stub(logger).error('topic', 'log message') { true }
-      assert_raise(SystemExit) { logger.abort_with('topic', 'log message') }
+      assert_raises(SystemExit) { logger.abort_with('topic', 'log message') }
     end
   end
 

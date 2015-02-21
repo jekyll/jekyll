@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestSass < Test::Unit::TestCase
+class TestSass < JekyllUnitTest
   context "importing partials" do
     setup do
       @site = Jekyll::Site.new(Jekyll.configuration({

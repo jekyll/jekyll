@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestConfiguration < Test::Unit::TestCase
+class TestConfiguration < JekyllUnitTest
   context "#stringify_keys" do
     setup do
       @mixed_keys = Configuration[{

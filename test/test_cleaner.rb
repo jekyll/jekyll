@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCleaner < Test::Unit::TestCase
+class TestCleaner < JekyllUnitTest
   context "directory in keep_files" do
     setup do
       clear_dest
@@ -12,7 +12,7 @@ class TestCleaner < Test::Unit::TestCase
       @site = fixture_site
       @site.keep_files = ['to_keep/child_dir']
 
-      @cleaner = Site::Cleaner.new(@site)
+      @cleaner = Cleaner.new(@site)
       @cleaner.cleanup!
     end
 
@@ -47,7 +47,7 @@ class TestCleaner < Test::Unit::TestCase
       @site = fixture_site
       @site.process
 
-      @cleaner = Site::Cleaner.new(@site)
+      @cleaner = Cleaner.new(@site)
       @cleaner.cleanup!
     end
 

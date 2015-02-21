@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestRelatedPosts < Test::Unit::TestCase
+class TestRelatedPosts < JekyllUnitTest
   context "building related posts without lsi" do
     setup do
       stub(Jekyll).configuration do

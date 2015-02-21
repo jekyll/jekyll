@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestRdiscount < Test::Unit::TestCase
+class TestRdiscount < JekyllUnitTest
 
   context "rdiscount" do
     setup do

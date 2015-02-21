@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCoffeeScript < Test::Unit::TestCase
+class TestCoffeeScript < JekyllUnitTest
   context "converting CoffeeScript" do
     setup do
       External.require_with_graceful_fail('jekyll-coffeescript')
@@ -19,16 +19,16 @@ class TestCoffeeScript < Test::Unit::TestCase
       return square(x) * x;
     };
     cubes = (function() {
-      var _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = list.length; _i < _len; _i++) {
-        num = list[_i];
-        _results.push(math.cube(num));
+      var i, len, results;
+      results = [];
+      for (i = 0, len = list.length; i < len; i++) {
+        num = list[i];
+        results.push(math.cube(num));
       }
-      return _results;
+      return results;
     })();
-    if (typeof elvis !== \"undefined\" && elvis !== null) {
-      return alert(\"I knew it!\");
+    if (typeof elvis !== "undefined" && elvis !== null) {
+      return alert("I knew it!");
     }
   });
 

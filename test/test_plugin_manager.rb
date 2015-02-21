@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestPluginManager < Test::Unit::TestCase
+class TestPluginManager < JekyllUnitTest
   def with_no_gemfile
     FileUtils.mv "Gemfile", "Gemfile.old"
     yield

@@ -1,7 +1,7 @@
 require 'helper'
 require 'ostruct'
 
-class TestConvertible < Test::Unit::TestCase
+class TestConvertible < JekyllUnitTest
   context "yaml front-matter" do
     setup do
       @convertible = OpenStruct.new(
@@ -37,7 +37,7 @@ class TestConvertible < Test::Unit::TestCase
       out = capture_stderr do
         @convertible.read_yaml(@base, 'exploit_front_matter.erb')
       end
-      assert_no_match /undefined class\/module DoesNotExist/, out
+      refute_match /undefined class\/module DoesNotExist/, out
     end
 
     should "not parse if there is encoding error in file" do
