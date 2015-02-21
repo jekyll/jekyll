@@ -309,9 +309,7 @@ class TestSite < Minitest::Test
 
         custom_processor = "CustomMarkdown"
         s = Site.new(site_configuration('markdown' => custom_processor))
-        refute_raises do
-          s.process
-        end
+        assert !!s.process
 
         # Do some cleanup, we don't like straggling stuff's.
         Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
@@ -344,9 +342,7 @@ class TestSite < Minitest::Test
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
-        refute_raises do
-          Site.new(site_configuration('markdown' => bad_processor))
-        end
+        assert Site.new(site_configuration('markdown' => bad_processor))
       end
 
       should 'throw FatalException at process time' do

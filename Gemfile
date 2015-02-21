@@ -26,6 +26,7 @@ gem 'jekyll_test_plugin'
 gem 'jekyll_test_plugin_malicious'
 gem 'liquid-c', '~> 0.0.3'
 gem 'minitest'
+gem 'minitest-reporters'
 gem 'test-unit' if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
 
 if ENV['BENCHMARK']

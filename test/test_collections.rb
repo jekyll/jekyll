@@ -122,7 +122,7 @@ class TestCollections < Minitest::Test
       assert @site.collections["methods"].docs.is_a? Array
       @site.collections["methods"].docs.each do |doc|
         assert doc.is_a? Jekyll::Document
-        assert_include %w[
+        assert_includes %w[
           _methods/configuration.md
           _methods/sanitized_path.md
           _methods/site/generate.md
@@ -135,16 +135,16 @@ class TestCollections < Minitest::Test
     end
 
     should "not include files which start with an underscore in the base collection directory" do
-      refute_include @collection.filtered_entries, "_do_not_read_me.md"
+      refute_includes @collection.filtered_entries, "_do_not_read_me.md"
     end
 
     should "not include files which start with an underscore in a subdirectory" do
-      refute_include @collection.filtered_entries, "site/_dont_include_me_either.md"
+      refute_includes @collection.filtered_entries, "site/_dont_include_me_either.md"
     end
 
     should "not include the underscored files in the list of docs" do
-      refute_include @collection.docs.map(&:relative_path), "_methods/_do_not_read_me.md"
-      refute_include @collection.docs.map(&:relative_path), "_methods/site/_dont_include_me_either.md"
+      refute_includes @collection.docs.map(&:relative_path), "_methods/_do_not_read_me.md"
+      refute_includes @collection.docs.map(&:relative_path), "_methods/site/_dont_include_me_either.md"
     end
   end
 
@@ -178,12 +178,12 @@ class TestCollections < Minitest::Test
     end
 
     should "not allow symlinks" do
-      refute_include @collection.filtered_entries, "um_hi.md"
-      refute_include @collection.filtered_entries, "/um_hi.md"
+      refute_includes @collection.filtered_entries, "um_hi.md"
+      refute_includes @collection.filtered_entries, "/um_hi.md"
     end
 
     should "not include the symlinked file in the list of docs" do
-      refute_include @collection.docs.map(&:relative_path), "_methods/um_hi.md"
+      refute_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end
 

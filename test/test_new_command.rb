@@ -79,9 +79,8 @@ class TestNewCommand < Minitest::Test
 
     should 'force created folder' do
       capture_stdout { Jekyll::Commands::New.process(@args) }
-      refute_raises(SystemExit) do
-        capture_stdout {Jekyll::Commands::New.process(@args, '--force') }
-      end
+      output = capture_stdout { Jekyll::Commands::New.process(@args, '--force') }
+      assert_match /New jekyll site installed in/, output
     end
   end
 

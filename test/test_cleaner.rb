@@ -12,7 +12,7 @@ class TestCleaner < Minitest::Test
       @site = fixture_site
       @site.keep_files = ['to_keep/child_dir']
 
-      @cleaner = Site::Cleaner.new(@site)
+      @cleaner = Cleaner.new(@site)
       @cleaner.cleanup!
     end
 
@@ -47,7 +47,7 @@ class TestCleaner < Minitest::Test
       @site = fixture_site
       @site.process
 
-      @cleaner = Site::Cleaner.new(@site)
+      @cleaner = Cleaner.new(@site)
       @cleaner.cleanup!
     end
 

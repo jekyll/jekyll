@@ -84,14 +84,12 @@ OUTPUT
     end
 
     should "acceptable limit post is 0" do
-      refute_raises ArgumentError do
-        clear_dest
-        stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
-        end
-
-        @site = Site.new(Jekyll.configuration)
+      clear_dest
+      stub(Jekyll).configuration do
+        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
       end
+
+      assert Site.new(Jekyll.configuration), "Couldn't create a site with the given limit_posts."
     end
   end
 end

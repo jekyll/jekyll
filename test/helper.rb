@@ -8,6 +8,7 @@ end
 require 'rubygems'
 require 'ostruct'
 require 'minitest/autorun'
+require 'minitest/reporters'
 
 require 'jekyll'
 
@@ -23,6 +24,9 @@ include Jekyll
 # Send STDERR into the void to suppress program output messages
 STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 
+# Report with color.
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+
 class Minitest::Test
   def fixture_site(overrides = {})
     Jekyll::Site.new(site_configuration(overrides))
@@ -33,7 +37,10 @@ class Minitest::Test
   end
 
   def site_configuration(overrides = {})
-    full_overrides = build_configs(overrides, build_configs({"destination" => dest_dir}))
+    full_overrides = build_configs(overrides, build_configs({
+      "destination" => dest_dir,
+      "full_rebuild" => true
+    }))
     build_configs({
       "source" => source_dir
     }, full_overrides)

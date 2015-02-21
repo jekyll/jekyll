@@ -10,7 +10,8 @@ class TestRegenerator < Minitest::Test
           "methods" => {
             "output" => true
           }
-        }
+        },
+        "full_rebuild" => false
       })
 
       @site.read
