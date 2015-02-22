@@ -35,6 +35,8 @@ module Jekyll
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
+
+      post_init if respond_to?(:post_init) && hooks
     end
 
     # The generated directory into which the page will be placed
@@ -162,6 +164,10 @@ module Jekyll
 
     def uses_relative_permalinks
       permalink && !@dir.empty? && site.config['relative_permalinks']
+    end
+
+    def hooks
+      @hooks ||= site.all_hooks + site.page_hooks
     end
   end
 end
