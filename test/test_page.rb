@@ -57,7 +57,11 @@ class TestPage < JekyllUnitTest
 
       should "deal properly with dots" do
         @page = setup_page('deal.with.dots.html')
+        @dest_file = dest_dir("deal.with.dots.html")
+
         assert_equal "deal.with.dots", @page.basename
+        assert_equal "/deal.with.dots", @page.url
+        assert_equal @dest_file, @page.destination(dest_dir)
       end
 
       should "make properties accessible through #[]" do
@@ -83,14 +87,18 @@ class TestPage < JekyllUnitTest
         end
       end
 
-      context "with pretty url style" do
+      context "with pretty permalink style" do
         setup do
           @site.permalink_style = :pretty
         end
 
-        should "return dir correctly" do
+        should "return dir, url, and destination correctly" do
           @page = setup_page('contacts.html')
+          @dest_file = dest_dir("contacts/index.html")
+
           assert_equal '/contacts/', @page.dir
+          assert_equal '/contacts/', @page.url
+          assert_equal @dest_file, @page.destination(dest_dir)
         end
 
         should "return dir correctly for index page" do
@@ -121,7 +129,7 @@ class TestPage < JekyllUnitTest
         end
       end
 
-      context "with any other url style" do
+      context "with any other permalink style" do
         should "return dir correctly" do
           @site.permalink_style = nil
           @page = setup_page('contacts.html')
@@ -179,7 +187,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, '+', 'plus+in+url'))
+        assert File.exist?(File.join(dest_dir, '+', 'plus+in+url.html'))
       end
 
       should "write even when permalink has '%# +'" do
