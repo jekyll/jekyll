@@ -62,6 +62,7 @@
   * highlight: fix problem with linenos and rouge. (#3436)
   * `Site#read_data_file`: read CSV's with proper file encoding (#3455)
   * Ignore `.jekyll-metadata` in site template (#3496)
+  * Template: Point documentation link to the documentation pages (#3502)
 
 ### Development Fixes
 
