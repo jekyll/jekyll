@@ -3,7 +3,7 @@ require 'erb'
 module Jekyll
   module Commands
     class New < Command
-      class << self 
+      class << self
         def init_with_program(prog)
           prog.command(:new) do |c|
             c.syntax 'new PATH'
@@ -11,7 +11,7 @@ module Jekyll
 
             c.option 'force', '--force', 'Force creation even if PATH already exists'
             c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
-            
+
             c.action do |args, options|
               Jekyll::Commands::New.process(args, options)
             end
@@ -76,7 +76,7 @@ module Jekyll
         def scaffold_path
           "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
         end
-      end  
+      end
     end
   end
 end
