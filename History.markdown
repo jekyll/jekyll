@@ -61,6 +61,7 @@
   * The highlight tag should only clip the newlines before and after the *entire* block, not in between (#3401)
   * highlight: fix problem with linenos and rouge. (#3436)
   * `Site#read_data_file`: read CSV's with proper file encoding (#3455)
+  * Ignore `.jekyll-metadata` in site template (#3496)
 
 ### Development Fixes
 
