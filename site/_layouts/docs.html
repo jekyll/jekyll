@@ -13,6 +13,9 @@ layout: default
           {{ content }}
           {% include section_nav.html %}
         </article>
+        <div class="sub-footer center align-center">
+          <a href="https://github.com/jekyll/jekyll/edit/master/site{{ site.branch }}/{{ page.path }}" class="edit">Edit this page <i class="fa fa-pencil"></i></a>
+        </div>
       </div>
 
       {% include docs_contents.html %}

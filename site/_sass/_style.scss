@@ -528,6 +528,11 @@ aside {
   }
 }
 
+.sub-footer {
+  padding: 15px;
+  font-size: 16px;
+}
+
 .docs-nav-mobile select {
   color: #000;
   width: 100%;
@@ -678,6 +683,7 @@ p { line-height: 1.5em; }
 
 .left { float: left; }
 .right { float: right; }
+.center { margin: 0 auto; }
 .align-right { text-align: right; }
 .align-left { text-align: left; }
 .align-center { text-align: center; }
