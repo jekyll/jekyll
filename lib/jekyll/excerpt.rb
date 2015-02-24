@@ -107,6 +107,25 @@ module Jekyll
     def extract_excerpt(post_content)
       head, _, tail = post_content.to_s.partition(post.excerpt_separator)
 
+     
+      emCount = head.scan("<em>").count
+      strongCount = head.scan("<strong>").count
+      emCCount = head.scan("</em>").count
+      strongCCount = head.scan("</strong>").count
+
+      moreEm = emCount - emCCount
+      moreStrong = strongCount - strongCCount
+
+      if moreEm > 0
+        moreEm.times { head << "</em>" }
+      end
+
+
+      if moreStrong > 0
+        moreStrong.times { head << "</strong>" }
+      end
+      
+
       "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
     end
   end
