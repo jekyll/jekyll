@@ -6,8 +6,7 @@
 }
 
 [class*="col-"] {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
 
     // Prevent columns from collapsing when empty
     min-height: 1px;
