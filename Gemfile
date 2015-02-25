@@ -7,6 +7,7 @@ gem 'toml', '~> 0.1.0'
 gem 'jekyll-paginate', '~> 1.0'
 gem 'jekyll-gist', '~> 1.0'
 gem 'jekyll-coffeescript', '~> 1.0'
+gem 'jekyll-textile-converter', '~> 0.1.0'
 gem 'classifier-reborn', '~> 2.0'
 
 gem 'rake', '~> 10.1'
@@ -32,6 +33,7 @@ gem 'test-unit' if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
 if ENV['BENCHMARK']
   gem 'rbtrace'
   gem 'stackprof'
+  gem 'benchmark-ips'
 end
 
 if ENV['PROOF']
