@@ -2041,6 +2041,9 @@
 
       <div class="unit four-fifths">
         <article>
+          <div class="improve right">
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/pagination.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+          </div>
           <h1>Pagination</h1>
           <p>With many websites—especially blogs—it’s very common to break the main listing
 of posts up into smaller lists and display them over multiple pages. Jekyll has
@@ -2068,7 +2071,7 @@ page in the generated site.</p>
 
 <p>You may also specify the destination of the pagination pages:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">paginate_path</span><span class="p-Indicator">:</span> <span class="s">&quot;blog/page:num/&quot;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">paginate_path</span><span class="p-Indicator">:</span> <span class="s">&quot;/blog/page:num/&quot;</span></code></pre></div>
 
 <p>This will read in <code>blog/index.html</code>, send it each pagination page in Liquid as <code>paginator</code>
 and write the output to <code>blog/page:num/</code>, where <code>:num</code> is the pagination page number,

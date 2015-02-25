@@ -11,8 +11,8 @@
     <title xml:lang="en">Jekyll • Simple, blog-aware, static sites</title>
     <atom:link type="application/atom+xml" href="http://jekyllrb.com/feed.xml" rel="self"/>
     <link>http://jekyllrb.com/</link>
-    <pubDate>Mon, 09 Feb 2015 23:25:22 -0800</pubDate>
-    <lastBuildDate>Mon, 09 Feb 2015 23:25:22 -0800</lastBuildDate>
+    <pubDate>Tue, 24 Feb 2015 21:21:24 -0800</pubDate>
+    <lastBuildDate>Tue, 24 Feb 2015 21:21:24 -0800</lastBuildDate>
     <language>en-US</language>
     <generator>Jekyll v3.0.0-beta1</generator>
     <description>Transform your plain text into static websites and blogs.</description>
@@ -625,7 +625,6 @@ keep on writing without any problems.&lt;/p&gt;
 
 &lt;p&gt;As always, you can find the full list of fixes in this release in the
 &lt;a href=&quot;/docs/history/&quot;&gt;change log&lt;/a&gt;!&lt;/p&gt;
-
 </description>
     </item>
     
@@ -768,7 +767,6 @@ greatest code a spin without having to clone a repository from git.&lt;/p&gt;
 &lt;p&gt;Please take this prerelease for a spin and &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/new&quot;&gt;let us
 know&lt;/a&gt; if you run into any
 issues!&lt;/p&gt;
-
 </description>
     </item>
     
