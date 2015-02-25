@@ -81,6 +81,7 @@
   * Update LICENSE to 2015. (#3477)
   * Upgrade tests to use Minitest (#3492)
   * Remove trailing whitespace (#3497)
+  * Use `fixture_site` for Document tests (#3511)
 
 ### Site Enhancements
 
