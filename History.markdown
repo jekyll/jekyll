@@ -116,6 +116,7 @@
   * Fix Twitter link on the help page (#3466)
   * Fix wording in code snippet highlighting section (#3475)
   * Add a `/` to `paginate_path` in the Pagination documentation (#3479)
+  * Add a link on all the docs pages to "Improve this page". (#3510)
 
 ## 2.5.3 / 2014-12-22
 
