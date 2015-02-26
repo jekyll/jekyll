@@ -14,6 +14,11 @@ Add **jekyll** to almost any query, and you'll find just what you need.
 Search through the issues that the fine folks on the **@jekyll/help** team
 have answered, or ask your own.
 
+### [Jekyll Talk](https://talk.jekyllrb.com/)
+
+Jekyll Talk is our official Discourse forum. Here, users and contributors
+can ask questions and discuss all aspects of Jekyll.
+
 ### [Jekyll on StackOverflow](http://stackoverflow.com/questions/tagged/jekyll)
 
 StackOverflow is a staple of any developer's diet. Check out the Jekyll tag
