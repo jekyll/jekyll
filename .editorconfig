@@ -1,5 +1,5 @@
 # This file is used by editors and IDEs to unify coding standards
-# @see https://EditorConfig.org
+# @see http://EditorConfig.org
 # @styling https://github.com/styleguide/ruby
 
 root = true
