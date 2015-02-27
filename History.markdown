@@ -86,6 +86,7 @@
 
 ### Site Enhancements
 
+  * Add blog post announcing Jekyll Help (#3523)
   * Add Jekyll Talk to Help page on site (#3518)
   * Fixing the default host on docs (#3229)
   * Add `jekyll-thumbnail-filter` to list of third-party plugins (#2790)
