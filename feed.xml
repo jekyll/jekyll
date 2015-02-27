@@ -11,8 +11,8 @@
     <title xml:lang="en">Jekyll • Simple, blog-aware, static sites</title>
     <atom:link type="application/atom+xml" href="http://jekyllrb.com/feed.xml" rel="self"/>
     <link>http://jekyllrb.com/</link>
-    <pubDate>Wed, 25 Feb 2015 16:10:38 -0800</pubDate>
-    <lastBuildDate>Wed, 25 Feb 2015 16:10:38 -0800</lastBuildDate>
+    <pubDate>Fri, 27 Feb 2015 13:07:43 -0800</pubDate>
+    <lastBuildDate>Fri, 27 Feb 2015 13:07:43 -0800</lastBuildDate>
     <language>en-US</language>
     <generator>Jekyll v3.0.0-beta1</generator>
     <description>Transform your plain text into static websites and blogs.</description>
@@ -24,6 +24,26 @@
       <width>144</width>
       <height>73</height>
     </image>
+    
+    <item>
+      <title>Join the Discussion at Jekyll Talk</title>
+      <link>http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/</link>
+      <pubDate>Thu, 26 Feb 2015 21:06:51 -0800</pubDate>
+      <dc:creator>alfredxing</dc:creator>
+      
+      
+      <category>community</category>
+      
+      <guid isPermaLink="true">http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/</guid>
+      <description>&lt;p&gt;We’re super excited to announce the launch of &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;Jekyll Talk&lt;/a&gt;, a Discourse forum for anything related to Jekyll!&lt;/p&gt;
+
+&lt;p&gt;The forum was set up by &lt;a href=&quot;https://github.com/envygeeks&quot;&gt;@envygeeks&lt;/a&gt; to build a community more accessible to Jekyll users and more suitable for general discussion.&lt;/p&gt;
+
+&lt;p&gt;There’s already been a lot of interesting topics, including a &lt;a href=&quot;https://talk.jekyllrb.com/t/showcase-sites-made-using-jekyll/18&quot;&gt;site showcase&lt;/a&gt; and &lt;a href=&quot;https://talk.jekyllrb.com/t/poll-installation-priorities-for-3-0/106/9&quot;&gt;a poll for Jekyll 3.0 priorities&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Come join the fun!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Jekyll 3.0.0.beta1 Released</title>
