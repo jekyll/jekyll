@@ -88,7 +88,7 @@ class TestExcerpt < JekyllUnitTest
         assert_gets_called = false
         klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
         klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
-        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        post = klass.new(@site, source_dir, '', "2008-02-02-published.markdown")
         Jekyll::Excerpt.new(post).to_liquid
 
         assert assert_gets_called, 'assert_gets_called did not get called on post.'

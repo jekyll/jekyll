@@ -82,14 +82,14 @@ class TestPost < JekyllUnitTest
         post = Post.allocate
         post.categories = ['foo']
         post.site = @site
-        post.process("cat1/2008-09-09-foo-bar.textile")
+        post.process("cat1/2008-09-09-foo-bar.markdown")
         assert_equal 1, post.categories.size
         assert_equal "foo", post.categories[0]
 
         post = Post.allocate
         post.categories = ['foo', 'bar']
         post.site = @site
-        post.process("cat2/CAT3/2008-09-09-foo-bar.textile")
+        post.process("cat2/CAT3/2008-09-09-foo-bar.markdown")
         assert_equal 2, post.categories.size
         assert_equal "foo", post.categories[0]
         assert_equal "bar", post.categories[1]
@@ -104,7 +104,7 @@ class TestPost < JekyllUnitTest
 
       should "raise a good error on invalid post date" do
         assert_raises Jekyll::Errors::FatalException do
-          @post.process("2009-27-03-foo-bar.textile")
+          @post.process("2009-27-03-foo-bar.markdown")
         end
       end
 
@@ -131,7 +131,7 @@ class TestPost < JekyllUnitTest
       end
 
       should "respect permalink in yaml front matter" do
-        file = "2008-12-03-permalinked-post.textile"
+        file = "2008-12-03-permalinked-post.markdown"
         @post.process(file)
         @post.read_yaml(@source, file)
 
@@ -230,7 +230,7 @@ class TestPost < JekyllUnitTest
 
         context "with specified layout of nil" do
           setup do
-            file = '2013-01-12-nil-layout.textile'
+            file = '2013-01-12-nil-layout.markdown'
             @post = setup_post(file)
             @post.process(file)
           end
@@ -369,7 +369,7 @@ class TestPost < JekyllUnitTest
         assert_equal "# {{ page.title }}\n\nBest **post** ever", @post.content
       end
 
-      should "transform textile" do
+      should "transform markdown" do
         @post.process(@real_file)
         @post.read_yaml(@source, @real_file)
         assert_equal "<h1 id=\"pagetitle-\">{{ page.title }}</h1>\n\n<p>Best <strong>post</strong> ever</p>", @post.transform.strip
@@ -461,8 +461,8 @@ class TestPost < JekyllUnitTest
       setup do
         clear_dest
         @site = fixture_site
-        @site.posts = [setup_post('2008-02-02-published.textile'),
-                       setup_post('2009-01-27-categories.textile')]
+        @site.posts = [setup_post('2008-02-02-published.markdown'),
+                       setup_post('2009-01-27-categories.markdown')]
       end
 
       should "have next post" do
@@ -511,7 +511,7 @@ class TestPost < JekyllUnitTest
       end
 
       should "to_liquid prioritizes post attributes over data" do
-        post = setup_post("2010-01-16-override-data.textile")
+        post = setup_post("2010-01-16-override-data.markdown")
         assert_equal Array, post.tags.class
         assert_equal Array, post.to_liquid["tags"].class
         assert_equal Time, post.date.class
@@ -523,36 +523,36 @@ class TestPost < JekyllUnitTest
         assert_gets_called = false
         klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
         klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
-        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        post = klass.new(@site, source_dir, '', "2008-02-02-published.markdown")
         do_render(post)
 
         assert assert_gets_called, 'assert_gets_called did not get called on post.'
       end
 
       should "recognize category in yaml" do
-        post = setup_post("2009-01-27-category.textile")
+        post = setup_post("2009-01-27-category.markdown")
         assert post.categories.include?('foo')
       end
 
       should "recognize several categories in yaml" do
-        post = setup_post("2009-01-27-categories.textile")
+        post = setup_post("2009-01-27-categories.markdown")
         assert post.categories.include?('foo')
         assert post.categories.include?('bar')
         assert post.categories.include?('baz')
       end
 
       should "recognize empty category in yaml" do
-        post = setup_post("2009-01-27-empty-category.textile")
+        post = setup_post("2009-01-27-empty-category.markdown")
         assert_equal [], post.categories
       end
 
       should "recognize empty categories in yaml" do
-        post = setup_post("2009-01-27-empty-categories.textile")
+        post = setup_post("2009-01-27-empty-categories.markdown")
         assert_equal [], post.categories
       end
 
       should "recognize number category in yaml" do
-        post = setup_post("2013-05-10-number-category.textile")
+        post = setup_post("2013-05-10-number-category.markdown")
         assert post.categories.include?('2013')
         assert !post.categories.include?(2013)
       end
@@ -564,34 +564,34 @@ class TestPost < JekyllUnitTest
       end
 
       should "recognize tag in yaml" do
-        post = setup_post("2009-05-18-tag.textile")
+        post = setup_post("2009-05-18-tag.markdown")
         assert post.tags.include?('code')
       end
 
       should "recognize tags in yaml" do
-        post = setup_post("2009-05-18-tags.textile")
+        post = setup_post("2009-05-18-tags.markdown")
         assert post.tags.include?('food')
         assert post.tags.include?('cooking')
         assert post.tags.include?('pizza')
       end
 
       should "recognize empty tag in yaml" do
-        post = setup_post("2009-05-18-empty-tag.textile")
+        post = setup_post("2009-05-18-empty-tag.markdown")
         assert_equal [], post.tags
       end
 
       should "recognize empty tags in yaml" do
-        post = setup_post("2009-05-18-empty-tags.textile")
+        post = setup_post("2009-05-18-empty-tags.markdown")
         assert_equal [], post.tags
       end
 
       should "allow no yaml" do
-        post = setup_post("2009-06-22-no-yaml.textile")
+        post = setup_post("2009-06-22-no-yaml.markdown")
         assert_equal "No YAML.", post.content
       end
 
       should "allow empty yaml" do
-        post = setup_post("2009-06-22-empty-yaml.textile")
+        post = setup_post("2009-06-22-empty-yaml.markdown")
         assert_equal "Empty YAML.", post.content
       end
 
@@ -691,7 +691,7 @@ class TestPost < JekyllUnitTest
     end
 
     should "generate categories and topics" do
-      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
+      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.markdown')
       assert_equal ['foo'], post.categories
     end
   end
@@ -756,12 +756,12 @@ class TestPost < JekyllUnitTest
     end
 
     should "return category if post does not specify category" do
-      post = setup_post("2009-01-27-no-category.textile")
+      post = setup_post("2009-01-27-no-category.markdown")
       assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
     end
 
     should "override site category if set on post" do
-      post = setup_post("2009-01-27-category.textile")
+      post = setup_post("2009-01-27-category.markdown")
       assert post.categories.include?('foo'), "Expected post.categories to include 'foo' but did not."
       assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
     end
@@ -779,12 +779,12 @@ class TestPost < JekyllUnitTest
     end
 
     should "return categories if post does not specify categories" do
-      post = setup_post("2009-01-27-no-category.textile")
+      post = setup_post("2009-01-27-no-category.markdown")
       assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
     end
 
     should "override site categories if set on post" do
-      post = setup_post("2009-01-27-categories.textile")
+      post = setup_post("2009-01-27-categories.markdown")
       ['foo', 'bar', 'baz'].each do |category|
         assert post.categories.include?(category), "Expected post.categories to include '#{category}' but did not."
       end
