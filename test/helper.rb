@@ -1,5 +1,4 @@
-require 'simplecov'
-require 'simplecov-gem-adapter'
+require 'simplecov_custom_profile'
 SimpleCov.start('gem') do
   add_filter "/vendor/bundle"
   add_filter "/vendor/gem"
