@@ -41,6 +41,7 @@
   * Site template: Optimize text rendering for legibility (#3382)
   * Add `draft?` method to identify if Post is a Draft & expose to Liquid (#3456)
   * Write regeneration metadata even on full rebuild (#3464)
+  * Perf: Use `String#end_with?("/")` instead of regexp when checking paths (#3516)
 
 ### Bug Fixes
 
