@@ -158,5 +158,45 @@ module Jekyll
         downcase
     end
 
+    # Add an appropriate suffix to template so that it matches the specified
+    # permalink style.
+    #
+    # template - permalink template without trailing slash or file extension
+    # permalink_style - permalink style, either built-in or custom
+    #
+    # The returned permalink template will use the same ending style as
+    # specified in permalink_style.  For example, if permalink_style contains a
+    # trailing slash (or is :pretty, which indirectly has a trailing slash),
+    # then so will the returned template.  If permalink_style has a trailing
+    # ":output_ext" (or is :none, :date, or :ordinal) then so will the returned
+    # template.  Otherwise, template will be returned without modification.
+    #
+    # Examples:
+    #   add_permalink_suffix("/:basename", :pretty)
+    #   # => "/:basename/"
+    #
+    #   add_permalink_suffix("/:basename", :date)
+    #   # => "/:basename:output_ext"
+    #
+    #   add_permalink_suffix("/:basename", "/:year/:month/:title/")
+    #   # => "/:basename/"
+    #
+    #   add_permalink_suffix("/:basename", "/:year/:month/:title")
+    #   # => "/:basename"
+    #
+    # Returns the updated permalink template
+    def add_permalink_suffix(template, permalink_style)
+      case permalink_style
+      when :pretty
+        template << "/"
+      when :date, :ordinal, :none
+        template << ":output_ext"
+      else
+        template << "/" if permalink_style.to_s.end_with?("/")
+        template << ":output_ext" if permalink_style.to_s.end_with?(":output_ext")
+      end
+      template
+    end
+
   end
 end
