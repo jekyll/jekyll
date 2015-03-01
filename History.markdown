@@ -84,6 +84,7 @@
   * Upgrade tests to use Minitest (#3492)
   * Remove trailing whitespace (#3497)
   * Use `fixture_site` for Document tests (#3511)
+  * Remove adapters deprecation warning (#3529)
 
 ### Site Enhancements
 
