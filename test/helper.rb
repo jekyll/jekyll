@@ -1,7 +1,9 @@
-require 'simplecov_custom_profile'
-SimpleCov.start('gem') do
-  add_filter "/vendor/bundle"
-  add_filter "/vendor/gem"
+unless ENV['TRAVIS']
+  require File.expand_path('../simplecov_custom_profile', __FILE__)
+  SimpleCov.start('gem') do
+    add_filter "/vendor/bundle"
+    add_filter "/vendor/gem"
+  end
 end
 
 require 'rubygems'
