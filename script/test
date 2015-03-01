@@ -20,4 +20,4 @@ fi
 
 set -x
 
-time bundle exec ruby -Ilib -Itest -rloader $TEST_FILES
+time bundle exec ruby -Ilib -Itest -rloader $TEST_FILES --profile
