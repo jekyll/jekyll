@@ -1,14 +1,16 @@
-require 'simplecov'
-require 'simplecov-gem-adapter'
-SimpleCov.start('gem') do
-  add_filter "/vendor/bundle"
-  add_filter "/vendor/gem"
+unless ENV['TRAVIS']
+  require File.expand_path('../simplecov_custom_profile', __FILE__)
+  SimpleCov.start('gem') do
+    add_filter "/vendor/bundle"
+    add_filter "/vendor/gem"
+  end
 end
 
 require 'rubygems'
 require 'ostruct'
 require 'minitest/autorun'
 require 'minitest/reporters'
+require 'minitest/profile'
 
 require 'jekyll'
 
