@@ -287,6 +287,7 @@
   * Allow Travis to 'parallelize' our tests (#2859)
   * Fix test for Liquid rendering in Sass (#2856)
   * Fixing "vertycal" typo in site template's `_base.scss` (#2889)
+  * Convert remaining textile test documents to markdown (#3528)
 
 ### Site Enhancements
 
