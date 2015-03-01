@@ -284,7 +284,7 @@ class TestFilters < JekyllUnitTest
         err = assert_raises ArgumentError do
           @filter.sort(nil)
         end
-        assert_equal "Nil object array given. Sort cannot process an empty object array.", err.message
+        assert_equal "Sort: cannot sort a null object.", err.message
       end
       should "return sorted numbers" do
         assert_equal [1, 2, 2.2, 3], @filter.sort([3, 2.2, 2, 1])
