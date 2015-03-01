@@ -7,7 +7,6 @@ gem 'toml', '~> 0.1.0'
 gem 'jekyll-paginate', '~> 1.0'
 gem 'jekyll-gist', '~> 1.0'
 gem 'jekyll-coffeescript', '~> 1.0'
-gem 'jekyll-textile-converter', '~> 0.1.0'
 gem 'classifier-reborn', '~> 2.0'
 
 gem 'rake', '~> 10.1'
