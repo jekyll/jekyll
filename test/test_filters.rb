@@ -280,6 +280,12 @@ class TestFilters < JekyllUnitTest
     end
 
     context "sort filter" do
+      should "raise Exception when input is nil" do
+        err = assert_raises ArgumentError do
+          @filter.sort(nil)
+        end
+        assert_equal "Nil object array given. Sort cannot process an empty object array.", err.message
+      end
       should "return sorted numbers" do
         assert_equal [1, 2, 2.2, 3], @filter.sort([3, 2.2, 2, 1])
       end

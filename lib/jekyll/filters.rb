@@ -223,7 +223,7 @@ module Jekyll
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
       if input.nil?
-          raise ArgumentError.new("Invalid object array given. Object array is null.")
+          raise ArgumentError.new("Nil object array given. Sort cannot process an empty object array.")
       end
       if property.nil?
         input.sort
