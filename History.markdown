@@ -44,6 +44,7 @@
   * Perf: Use `String#end_with?("/")` instead of regexp when checking paths (#3516)
   * Docs: document 'ordinal' built-in permalink style (#3532)
   * Upgrade liquid-c to 3.x (#3531)
+  * Use consistent syntax for deprecation warning (#3535)
 
 ### Bug Fixes
 
