@@ -140,6 +140,14 @@ enough to fix it all!
     </tr>
     <tr>
       <td>
+        <p><code>ordinal</code></p>
+      </td>
+      <td>
+        <p><code>/:categories/:year/:y_day/:title.html</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>none</code></p>
       </td>
       <td>
