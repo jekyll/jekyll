@@ -42,6 +42,7 @@
   * Add `draft?` method to identify if Post is a Draft & expose to Liquid (#3456)
   * Write regeneration metadata even on full rebuild (#3464)
   * Perf: Use `String#end_with?("/")` instead of regexp when checking paths (#3516)
+  * Docs: document 'ordinal' built-in permalink style (#3532)
 
 ### Bug Fixes
 
