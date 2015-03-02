@@ -230,19 +230,29 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
+      pre_render if respond_to?(:pre_render) && hooks
+
+      if respond_to?(:merge_payload) && hooks
+        layout_payload = merge_payload(payload.dup)
+      else
+        layout_payload = payload
+      end
+
+      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => layout_payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converters.first.highlighter_prefix
-      payload["highlighter_suffix"] = converters.first.highlighter_suffix
+      layout_payload["highlighter_prefix"] = converters.first.highlighter_prefix
+      layout_payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
-      self.content = render_liquid(content, payload, info) if render_with_liquid?
+      self.content = render_liquid(content, layout_payload, info) if render_with_liquid?
       self.content = transform
 
       # output keeps track of what will finally be written
       self.output = content
 
-      render_all_layouts(layouts, payload, info) if place_in_layout?
+      render_all_layouts(layouts, layout_payload, info) if place_in_layout?
+
+      post_render if respond_to?(:post_render) && hooks
     end
 
     # Write the generated page file to the destination directory.
@@ -256,6 +266,50 @@ module Jekyll
       File.open(path, 'wb') do |f|
         f.write(output)
       end
+      post_write if respond_to?(:post_write) && hooks
+    end
+
+    def hooks
+      []
+    end
+
+    def post_init
+      hooks.each do |hook|
+        hook.post_init(self)
+      end
+    end
+
+    def merge_payload(payload)
+      hooks.each do |hook|
+        p = hook.merge_payload(payload, self)
+        next unless p && p.is_a?(Hash)
+        payload = Jekyll::Utils.deep_merge_hashes(payload, p)
+      end
+      payload
+    end
+
+    def pre_render
+      hooks.each do |hook|
+        hook.pre_render(self)
+      end
+    end
+
+    def post_render
+      hooks.each do |hook|
+        hook.post_render(self)
+      end
+    end
+
+    def post_write
+      hooks.each do |hook|
+        hook.post_write(self)
+      end
+    end
+
+    # Returns the full url of the post, including the configured url
+    #
+    def full_url
+      File.join(site.config['url'], url)
     end
 
     # Accessor for data properties by Liquid.
