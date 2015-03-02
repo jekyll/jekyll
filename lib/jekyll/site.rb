@@ -471,7 +471,7 @@ module Jekyll
 
     def relative_permalinks_deprecation_method
       if config['relative_permalinks'] && has_relative_page?
-        Jekyll.logger.warn "Deprecation:", "Since v2.0, permalinks for pages" +
+        Jekyll::Deprecator.deprecation_message "Since v2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
                                             " directory. Check http://jekyllrb.com/docs/upgrading/"+

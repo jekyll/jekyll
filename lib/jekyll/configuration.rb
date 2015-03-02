@@ -206,7 +206,7 @@ module Jekyll
       config = clone
       # Provide backwards-compatibility
       if config.key?('auto') || config.key?('watch')
-        Jekyll.logger.warn "Deprecation:", "Auto-regeneration can no longer" +
+        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" +
                             " be set from your configuration file(s). Use the"+
                             " --[no-]watch/-w command-line option instead."
         config.delete('auto')
@@ -214,14 +214,14 @@ module Jekyll
       end
 
       if config.key? 'server'
-        Jekyll.logger.warn "Deprecation:", "The 'server' configuration option" +
+        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" +
                             " is no longer accepted. Use the 'jekyll serve'" +
                             " subcommand to serve your site with WEBrick."
         config.delete('server')
       end
 
       if config.key? 'server_port'
-        Jekyll.logger.warn "Deprecation:", "The 'server_port' configuration option" +
+        Jekyll::Deprecator.deprecation_message "The 'server_port' configuration option" +
                             " has been renamed to 'port'. Please update your config" +
                             " file accordingly."
         # copy but don't overwrite:
@@ -230,7 +230,7 @@ module Jekyll
       end
 
       if config.key? 'pygments'
-        Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
+        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" +
                             " has been renamed to 'highlighter'. Please update your" +
                             " config file accordingly. The allowed values are 'rouge', " +
                             "'pygments' or null."
@@ -241,7 +241,7 @@ module Jekyll
 
       %w[include exclude].each do |option|
         if config.fetch(option, []).is_a?(String)
-          Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
+          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" +
             " must now be specified as an array, but you specified" +
             " a string. For now, we've treated the string you provided" +
             " as a list of comma-separated values."
