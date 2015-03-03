@@ -4,7 +4,7 @@ module Jekyll
   class Document
     include Comparable
 
-    attr_reader   :path, :site, :extname
+    attr_reader   :path, :site, :extname, :output_ext
     attr_accessor :content, :collection, :output
 
     YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
@@ -19,6 +19,7 @@ module Jekyll
       @site = relations[:site]
       @path = path
       @extname = File.extname(path)
+      @output_ext = Jekyll::Renderer.new(site, self).output_ext
       @collection = relations[:collection]
       @has_yaml_header = nil
     end
@@ -130,7 +131,7 @@ module Jekyll
       {
         collection: collection.label,
         path:       cleaned_relative_path,
-        output_ext: Jekyll::Renderer.new(site, self).output_ext,
+        output_ext: output_ext,
         name:       Utils.slugify(basename_without_ext),
         title:      Utils.slugify(data['slug']) || Utils.slugify(basename_without_ext)
       }
@@ -164,6 +165,7 @@ module Jekyll
       dest = site.in_dest_dir(base_directory)
       path = site.in_dest_dir(dest, URL.unescape_path(url))
       path = File.join(path, "index.html") if url.end_with?("/")
+      path << output_ext unless path.end_with?(output_ext)
       path
     end
 

@@ -659,6 +659,26 @@ class TestPost < JekyllUnitTest
           assert File.exist?(File.join(dest_dir, 'foo-bar', 'index.html'))
         end
 
+        should "write properly with extensionless site permalink" do
+          post = setup_post("2008-10-18-foo-bar.markdown")
+          post.site.permalink_style = ":title"
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exist?(File.join(dest_dir, 'foo-bar.html'))
+        end
+
+        should "write properly with extensionless post permalink" do
+          post = setup_post("2015-02-20-extensionless-permalink.markdown")
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exist?(File.join(dest_dir, 'extensionless-permalink.html'))
+          assert_equal "<p>/extensionless-permalink</p>\n", post.content
+        end
+
         should "insert data" do
           post = setup_post("2008-11-21-complex.markdown")
           do_render(post)

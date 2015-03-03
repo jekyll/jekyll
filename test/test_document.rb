@@ -212,10 +212,15 @@ class TestDocument < JekyllUnitTest
       })
       @site.process
       @document = @site.collections["slides"].docs[0]
+      @dest_file = dest_dir("slides/test/example-slide-1.html")
     end
 
     should "produce the right URL" do
       assert_equal "/slides/test/example-slide-1", @document.url
+    end
+
+    should "produce the right destination" do
+      assert_equal @dest_file, @document.destination(dest_dir)
     end
   end
 
@@ -238,13 +243,25 @@ class TestDocument < JekyllUnitTest
     should "produce the right URL if they have a slug" do
       assert_equal "/slides/so-what-is-jekyll-exactly", @document.url
     end
+    should "produce the right destination file if they have a slug" do
+      dest_file = dest_dir("slides/so-what-is-jekyll-exactly.html")
+      assert_equal dest_file, @document.destination(dest_dir)
+    end
 
     should "produce the right URL if they don't have a slug" do
       assert_equal "/slides/example-slide-5", @document_without_slug.url
     end
+    should "produce the right destination file if they don't have a slug" do
+      dest_file = dest_dir("slides/example-slide-5.html")
+      assert_equal dest_file, @document_without_slug.destination(dest_dir)
+    end
 
     should "produce the right URL if they have a wild slug" do
       assert_equal "/slides/well-so-what-is-jekyll-then", @document_with_strange_slug.url
+    end
+    should "produce the right destination file if they have a wild slug" do
+      dest_file = dest_dir("/slides/well-so-what-is-jekyll-then.html")
+      assert_equal dest_file, @document_with_strange_slug.destination(dest_dir)
     end
   end
 
