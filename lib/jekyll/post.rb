@@ -278,7 +278,7 @@ module Jekyll
     # Returns destination file path String.
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
-      path = site.in_dest_dir(dest, URL.unescape_path(url))
+      path = site.reader.in_dest_dir(dest, URL.unescape_path(url))
       path = File.join(path, "index.html") if self.url.end_with?("/")
       path << output_ext unless path.end_with?(output_ext)
       path

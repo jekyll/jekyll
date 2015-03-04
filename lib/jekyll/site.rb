@@ -99,16 +99,6 @@ module Jekyll
       end
     end
 
-    # Public: Prefix a given path with the destination directory.
-    #
-    # paths - (optional) path elements to a file or directory within the
-    #         destination directory
-    #
-    # Returns a path which is prefixed with the destination directory.
-    def in_dest_dir(*paths)
-      reader.in_dest_dir(*paths)
-    end
-
     # The list of collections and their corresponding Jekyll::Collection instances.
     # If config['collections'] is set, a new instance is created for each item in the collection.
     # If config['collections'] is not set, a new hash is returned.
