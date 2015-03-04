@@ -98,7 +98,7 @@ module Jekyll
       read_posts(dir)
       read_drafts(dir) if site.show_drafts
       site.posts.sort!
-      limit_posts() if site.limit_posts > 0 # limit the posts if :limit_posts option is set
+      limit_posts if site.limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
         f_abs = in_source_dir(base, f)
@@ -147,6 +147,15 @@ module Jekyll
       end
     end
 
+    # Read all the content files from <source>/<dir>/magic_dir
+    #   and return them with the type klass.
+    #
+    # dir - The String relative path of the directory to read.
+    # magic_dir - The String relative directory to <dir>,
+    #   looks for content here.
+    # klass - The return type of the content.
+    #
+    # Returns klass type of content files
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
         klass.new(site, site.source, dir, entry) if klass.valid?(entry)
@@ -195,7 +204,7 @@ module Jekyll
     # Returns nothing.
     def read_collections
       site.collections.each do |_, collection|
-        collection.read unless collection.label.eql?("data")
+        collection.read unless collection.label.eql?('data')
       end
     end
 
@@ -214,8 +223,12 @@ module Jekyll
       site.posts << post
     end
 
+    private
 
-    def limit_posts()
+    # Limits the current posts; removes the posts which exceed the limit_posts
+    #
+    # Returns nothing
+    def limit_posts
       limit = site.posts.length < site.limit_posts ? site.posts.length : site.limit_posts
       site.posts = site.posts[-limit, limit]
     end
