@@ -175,7 +175,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      posts = read_content(dir, '_posts', Post)
+      posts = reader.read_content(dir, '_posts', Post)
 
       posts.each do |post|
         aggregate_post_info(post) if publisher.publish?(post)
@@ -189,20 +189,12 @@ module Jekyll
     #
     # Returns nothing.
     def read_drafts(dir)
-      drafts = read_content(dir, '_drafts', Draft)
+      drafts = reader.read_content(dir, '_drafts', Draft)
 
       drafts.each do |draft|
         if draft.published?
           aggregate_post_info(draft)
         end
-      end
-    end
-
-    def read_content(dir, magic_dir, klass)
-      reader.get_entries(dir, magic_dir).map do |entry|
-        klass.new(self, source, dir, entry) if klass.valid?(entry)
-      end.reject do |entry|
-        entry.nil?
       end
     end
 

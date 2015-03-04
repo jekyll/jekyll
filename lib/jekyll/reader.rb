@@ -74,6 +74,14 @@ module Jekyll
       end
     end
 
+    def read_content(dir, magic_dir, klass)
+      get_entries(dir, magic_dir).map do |entry|
+        klass.new(site, site.source, dir, entry) if klass.valid?(entry)
+      end.reject do |entry|
+        entry.nil?
+      end
+    end
+
     # Read and parse all yaml files under <source>/<dir>
     #
     # Returns nothing
