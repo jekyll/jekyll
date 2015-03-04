@@ -131,6 +131,7 @@
   * Add jekyll-auto-image generator to the list of third-party plugins (#3489)
   * Replace link to the proposed `picture` element spec (#3530)
   * Add frontmatter date formatting information (#3469)
+  * Improve consistency and clarity of plugins options note (#3546)
 
 ## 2.5.3 / 2014-12-22
 
