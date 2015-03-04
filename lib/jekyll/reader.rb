@@ -9,6 +9,16 @@ module Jekyll
       @site = site
     end
 
+    # Read Site data from disk and load it into internal data structures.
+    #
+    # Returns nothing.
+    def read
+      site.layouts = LayoutReader.new(site).read
+      read_directories
+      read_data(site.config['data_source'])
+      read_collections
+    end
+
     # Public: Prefix a given path with the source directory.
     #
     # paths - (optional) path elements to a file or directory within the

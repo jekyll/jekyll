@@ -129,10 +129,7 @@ module Jekyll
     #
     # Returns nothing.
     def read
-      self.layouts = LayoutReader.new(self).read
-      reader.read_directories
-      reader.read_data(config['data_source'])
-      reader.read_collections
+      reader.read
     end
 
     # Run each of the Generators.
