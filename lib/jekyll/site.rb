@@ -232,7 +232,7 @@ module Jekyll
         path = reader.in_source_dir(dir, entry)
         next if File.symlink?(path) && safe
 
-        key = sanitize_filename(File.basename(entry, '.*'))
+        key = reader.sanitize_filename(File.basename(entry, '.*'))
         if File.directory?(path)
           read_data_to(path, data[key] = {})
         else
@@ -463,12 +463,6 @@ module Jekyll
 
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
-    end
-
-    def sanitize_filename(name)
-      name.gsub!(/[^\w\s_-]+/, '')
-      name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
-      name.gsub(/\s+/, '_')
     end
   end
 end

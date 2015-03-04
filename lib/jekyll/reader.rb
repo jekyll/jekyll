@@ -73,5 +73,11 @@ module Jekyll
           SafeYAML.load_file(path)
       end
     end
+
+    def sanitize_filename(name)
+      name.gsub!(/[^\w\s_-]+/, '')
+      name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
+      name.gsub(/\s+/, '_')
+    end
   end
 end
