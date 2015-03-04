@@ -189,7 +189,7 @@ class TestSite < JekyllUnitTest
     end
 
     should "read posts" do
-      @site.read_posts('')
+      @site.reader.read_posts('')
       posts = Dir[source_dir('_posts', '**', '*')]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
       assert_equal posts.size - @num_invalid_posts, @site.posts.size

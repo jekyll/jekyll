@@ -146,7 +146,7 @@ module Jekyll
       base = reader.in_source_dir(dir)
       entries = Dir.chdir(base) { reader.filter_entries(Dir.entries('.'), base) }
 
-      read_posts(dir)
+      reader.read_posts(dir)
       reader.read_drafts(dir) if show_drafts
       posts.sort!
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
@@ -166,20 +166,6 @@ module Jekyll
 
       pages.sort_by!(&:name)
       static_files.sort_by!(&:relative_path)
-    end
-
-    # Read all the files in <source>/<dir>/_posts and create a new Post
-    # object with each one.
-    #
-    # dir - The String relative path of the directory to read.
-    #
-    # Returns nothing.
-    def read_posts(dir)
-      posts = reader.read_content(dir, '_posts', Post)
-
-      posts.each do |post|
-        reader.aggregate_post_info(post) if publisher.publish?(post)
-      end
     end
 
     # Read in all collections specified in the configuration
