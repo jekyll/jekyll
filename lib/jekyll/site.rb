@@ -236,23 +236,8 @@ module Jekyll
         if File.directory?(path)
           read_data_to(path, data[key] = {})
         else
-          data[key] = read_data_file(path)
+          data[key] = reader.read_data_file(path)
         end
-      end
-    end
-
-    # Determines how to read a data file.
-    #
-    # Returns the contents of the data file.
-    def read_data_file(path)
-      case File.extname(path).downcase
-      when '.csv'
-        CSV.read(path, {
-          :headers => true,
-          :encoding => config['encoding']
-        }).map(&:to_hash)
-      else
-        SafeYAML.load_file(path)
       end
     end
 
