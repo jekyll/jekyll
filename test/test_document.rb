@@ -219,7 +219,31 @@ class TestDocument < JekyllUnitTest
       assert_equal "/slides/test/example-slide-1", @document.url
     end
 
-    should "produce the right destination" do
+    should "produce the right destination file" do
+      assert_equal @dest_file, @document.destination(dest_dir)
+    end
+  end
+
+  context "a document in a collection with pretty permalink style" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "slides" => {
+            "output"    => true,
+          }
+        },
+      })
+      @site.permalink_style = :pretty
+      @site.process
+      @document = @site.collections["slides"].docs[0]
+      @dest_file = dest_dir("slides/example-slide-1/index.html")
+    end
+
+    should "produce the right URL" do
+      assert_equal "/slides/example-slide-1/", @document.url
+    end
+
+    should "produce the right destination file" do
       assert_equal @dest_file, @document.destination(dest_dir)
     end
   end
