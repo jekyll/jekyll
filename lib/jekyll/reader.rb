@@ -74,6 +74,22 @@ module Jekyll
       end
     end
 
+    # Read all the files in <source>/<dir>/_drafts and create a new Post
+    # object with each one.
+    #
+    # dir - The String relative path of the directory to read.
+    #
+    # Returns nothing.
+    def read_drafts(dir)
+      drafts = read_content(dir, '_drafts', Draft)
+
+      drafts.each do |draft|
+        if draft.published?
+          aggregate_post_info(draft)
+        end
+      end
+    end
+
     def read_content(dir, magic_dir, klass)
       get_entries(dir, magic_dir).map do |entry|
         klass.new(site, site.source, dir, entry) if klass.valid?(entry)
