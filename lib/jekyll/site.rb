@@ -145,7 +145,7 @@ module Jekyll
     #
     # Returns nothing.
     def render
-      relative_permalinks_deprecation_method
+      deprecated_rel_permalink
 
       payload = site_payload
       collections.each do |label, collection|
@@ -280,7 +280,11 @@ module Jekyll
       end
     end
 
-    def relative_permalinks_deprecation_method
+    # Warns the user if permanent links are relative tot the parent
+    # directory. As this is a deprecated function of Jekyll.
+    #
+    # Returns
+    def deprecated_rel_permalink
       if config['relative_permalinks'] && has_relative_page?
         Jekyll::Deprecator.deprecation_message "Since v2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
@@ -290,15 +294,22 @@ module Jekyll
       end
     end
 
+    # Get the to be written documents
+    #
+    # Returns an Array of Documents which should be written
     def docs_to_write
       documents.select(&:write?)
     end
 
+    # Get all the documents
+    #
+    # Returns an Array of all Documents
     def documents
       collections.reduce(Set.new) do |docs, (_, collection)|
         docs + collection.docs + collection.files
       end.to_a
     end
+
 
     def each_site_file
       %w(posts pages static_files docs_to_write).each do |type|
@@ -308,6 +319,10 @@ module Jekyll
       end
     end
 
+    # Returns the FrontmatterDefaults or creates a new FrontmatterDefaults
+    # if it doesn't already exist.
+    #
+    # Returns The FrontmatterDefaults
     def frontmatter_defaults
       @frontmatter_defaults ||= FrontmatterDefaults.new(self)
     end
@@ -319,16 +334,28 @@ module Jekyll
       override['full_rebuild'] || config['full_rebuild']
     end
 
+    # Returns the publisher or creates a new publisher if it doesn't
+    # already exist.
+    #
+    # Returns The Publisher
     def publisher
       @publisher ||= Publisher.new(self)
     end
 
     private
 
+    # Checks if the site has any pages containing relative links
+    #
+    # Returns a Boolean: true for usage of relateive permalinks, false
+    # if it doesn't
     def has_relative_page?
       pages.any? { |page| page.uses_relative_permalinks }
     end
 
+    # Returns the Cleaner or creates a new Cleaner if it doesn't
+    # already exist.
+    #
+    # Returns The Cleaner
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
     end
