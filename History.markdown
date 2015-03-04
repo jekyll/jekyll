@@ -46,6 +46,7 @@
   * Docs: document 'ordinal' built-in permalink style (#3532)
   * Upgrade liquid-c to 3.x (#3531)
   * Use consistent syntax for deprecation warning (#3535)
+  * Added build --destination and --source flags (#3418)
 
 ### Bug Fixes
 
