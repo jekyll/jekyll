@@ -74,6 +74,14 @@ module Jekyll
       end
     end
 
+    # Read and parse all yaml files under <source>/<dir>
+    #
+    # Returns nothing
+    def read_data(dir)
+      base = in_source_dir(dir)
+      read_data_to(base, site.data)
+    end
+
     # Read and parse all yaml files under <dir> and add them to the
     # <data> variable.
     #

@@ -131,7 +131,7 @@ module Jekyll
     def read
       self.layouts = LayoutReader.new(self).read
       read_directories
-      read_data(config['data_source'])
+      reader.read_data(config['data_source'])
       read_collections
     end
 
@@ -204,14 +204,6 @@ module Jekyll
       end.reject do |entry|
         entry.nil?
       end
-    end
-
-    # Read and parse all yaml files under <source>/<dir>
-    #
-    # Returns nothing
-    def read_data(dir)
-      base = reader.in_source_dir(dir)
-      reader.read_data_to(base, self.data)
     end
 
     # Read in all collections specified in the configuration
