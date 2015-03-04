@@ -29,7 +29,7 @@ module Jekyll
       @permalink    = options[:permalink]
 
       if (@template || @permalink).nil?
-        raise ArgumentError, 'One of :template or :permalink must be supplied.'
+        raise ArgumentError, "One of :template or :permalink must be supplied."
       end
     end
 
@@ -81,7 +81,7 @@ module Jekyll
         .gsub(/\A([^\/])/, '/\1')
 
       # Append a trailing slash to the URL if the unsanitized URL had one
-      url << '/' if in_url[-1].eql?('/')
+      url << "/" if in_url.end_with?("/")
 
       url
     end
