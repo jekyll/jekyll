@@ -161,5 +161,12 @@ module Jekyll
     def aggregate_post_info(post)
       site.posts << post
     end
+
+
+    def limit_posts()
+      limit = site.posts.length < site.limit_posts ? site.posts.length : site.limit_posts
+      site.posts = site.posts[-limit, limit]
+    end
+
   end
 end

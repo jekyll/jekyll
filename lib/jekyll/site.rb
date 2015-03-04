@@ -149,7 +149,7 @@ module Jekyll
       reader.read_posts(dir)
       reader.read_drafts(dir) if show_drafts
       posts.sort!
-      limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
+      reader.limit_posts() if limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
         f_abs = reader.in_source_dir(base, f)
@@ -372,11 +372,6 @@ module Jekyll
 
     def has_relative_page?
       pages.any? { |page| page.uses_relative_permalinks }
-    end
-
-    def limit_posts!
-      limit = posts.length < limit_posts ? posts.length : limit_posts
-      self.posts = posts[-limit, limit]
     end
 
     def site_cleaner
