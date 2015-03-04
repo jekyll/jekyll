@@ -132,16 +132,7 @@ module Jekyll
       self.layouts = LayoutReader.new(self).read
       reader.read_directories
       reader.read_data(config['data_source'])
-      read_collections
-    end
-
-    # Read in all collections specified in the configuration
-    #
-    # Returns nothing.
-    def read_collections
-      collections.each do |_, collection|
-        collection.read unless collection.label.eql?("data")
-      end
+      reader.read_collections
     end
 
     # Run each of the Generators.

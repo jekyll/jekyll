@@ -180,6 +180,15 @@ module Jekyll
       end
     end
 
+    # Read in all collections specified in the configuration
+    #
+    # Returns nothing.
+    def read_collections
+      site.collections.each do |_, collection|
+        collection.read unless collection.label.eql?("data")
+      end
+    end
+
     def sanitize_filename(name)
       name.gsub!(/[^\w\s_-]+/, '')
       name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
