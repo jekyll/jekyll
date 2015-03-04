@@ -211,34 +211,7 @@ module Jekyll
     # Returns nothing
     def read_data(dir)
       base = reader.in_source_dir(dir)
-      read_data_to(base, self.data)
-    end
-
-    # Read and parse all yaml files under <dir> and add them to the
-    # <data> variable.
-    #
-    # dir - The string absolute path of the directory to read.
-    # data - The variable to which data will be added.
-    #
-    # Returns nothing
-    def read_data_to(dir, data)
-      return unless File.directory?(dir) && (!safe || !File.symlink?(dir))
-
-      entries = Dir.chdir(dir) do
-        Dir['*.{yaml,yml,json,csv}'] + Dir['*'].select { |fn| File.directory?(fn) }
-      end
-
-      entries.each do |entry|
-        path = reader.in_source_dir(dir, entry)
-        next if File.symlink?(path) && safe
-
-        key = reader.sanitize_filename(File.basename(entry, '.*'))
-        if File.directory?(path)
-          read_data_to(path, data[key] = {})
-        else
-          data[key] = reader.read_data_file(path)
-        end
-      end
+      reader.read_data_to(base, self.data)
     end
 
     # Read in all collections specified in the configuration
