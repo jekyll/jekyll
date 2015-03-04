@@ -62,7 +62,7 @@ class TestEntryFilter < JekyllUnitTest
     should "not include symlinks in safe mode" do
       site = Site.new(site_configuration('safe' => true))
 
-      site.read_directories("symlink-test")
+      site.reader.read_directories("symlink-test")
       assert_equal [], site.pages
       assert_equal [], site.static_files
     end
@@ -70,7 +70,7 @@ class TestEntryFilter < JekyllUnitTest
     should "include symlinks in unsafe mode" do
       site = Site.new(site_configuration)
 
-      site.read_directories("symlink-test")
+      site.reader.read_directories("symlink-test")
       refute_equal [], site.pages
       refute_equal [], site.static_files
     end

@@ -130,42 +130,9 @@ module Jekyll
     # Returns nothing.
     def read
       self.layouts = LayoutReader.new(self).read
-      read_directories
+      reader.read_directories
       reader.read_data(config['data_source'])
       read_collections
-    end
-
-    # Recursively traverse directories to find posts, pages and static files
-    # that will become part of the site according to the rules in
-    # filter_entries.
-    #
-    # dir - The String relative path of the directory to read. Default: ''.
-    #
-    # Returns nothing.
-    def read_directories(dir = '')
-      base = reader.in_source_dir(dir)
-      entries = Dir.chdir(base) { reader.filter_entries(Dir.entries('.'), base) }
-
-      reader.read_posts(dir)
-      reader.read_drafts(dir) if show_drafts
-      posts.sort!
-      reader.limit_posts() if limit_posts > 0 # limit the posts if :limit_posts option is set
-
-      entries.each do |f|
-        f_abs = reader.in_source_dir(base, f)
-        if File.directory?(f_abs)
-          f_rel = File.join(dir, f)
-          read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
-        elsif Utils.has_yaml_header?(f_abs)
-          page = Page.new(self, source, dir, f)
-          pages << page if publisher.publish?(page)
-        else
-          static_files << StaticFile.new(self, source, dir, f)
-        end
-      end
-
-      pages.sort_by!(&:name)
-      static_files.sort_by!(&:relative_path)
     end
 
     # Read in all collections specified in the configuration

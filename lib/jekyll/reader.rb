@@ -74,6 +74,39 @@ module Jekyll
       end
     end
 
+    # Recursively traverse directories to find posts, pages and static files
+    # that will become part of the site according to the rules in
+    # filter_entries.
+    #
+    # dir - The String relative path of the directory to read. Default: ''.
+    #
+    # Returns nothing.
+    def read_directories(dir = '')
+      base = in_source_dir(dir)
+      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
+
+      read_posts(dir)
+      read_drafts(dir) if site.show_drafts
+      site.posts.sort!
+      limit_posts() if site.limit_posts > 0 # limit the posts if :limit_posts option is set
+
+      entries.each do |f|
+        f_abs = in_source_dir(base, f)
+        if File.directory?(f_abs)
+          f_rel = File.join(dir, f)
+          read_directories(f_rel) unless site.dest.sub(/\/$/, '') == f_abs
+        elsif Utils.has_yaml_header?(f_abs)
+          page = Page.new(site, site.source, dir, f)
+          site.pages << page if site.publisher.publish?(page)
+        else
+          site.static_files << StaticFile.new(site, site.source, dir, f)
+        end
+      end
+
+      site.pages.sort_by!(&:name)
+      site.static_files.sort_by!(&:relative_path)
+    end
+
     # Read all the files in <source>/<dir>/_posts and create a new Post
     # object with each one.
     #
