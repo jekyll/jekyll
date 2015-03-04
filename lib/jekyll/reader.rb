@@ -122,5 +122,14 @@ module Jekyll
       name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
       name.gsub(/\s+/, '_')
     end
+
+    # Aggregate post information
+    #
+    # post - The Post object to aggregate information for
+    #
+    # Returns nothing
+    def aggregate_post_info(post)
+      site.posts << post
+    end
   end
 end

@@ -178,7 +178,7 @@ module Jekyll
       posts = reader.read_content(dir, '_posts', Post)
 
       posts.each do |post|
-        aggregate_post_info(post) if publisher.publish?(post)
+        reader.aggregate_post_info(post) if publisher.publish?(post)
       end
     end
 
@@ -193,7 +193,7 @@ module Jekyll
 
       drafts.each do |draft|
         if draft.published?
-          aggregate_post_info(draft)
+          reader.aggregate_post_info(draft)
         end
       end
     end
@@ -353,15 +353,6 @@ module Jekyll
       end.sort.map do |c|
         c.new(config)
       end
-    end
-
-    # Aggregate post information
-    #
-    # post - The Post object to aggregate information for
-    #
-    # Returns nothing
-    def aggregate_post_info(post)
-      posts << post
     end
 
     def relative_permalinks_deprecation_method
