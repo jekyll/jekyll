@@ -199,7 +199,7 @@ module Jekyll
     end
 
     def read_content(dir, magic_dir, klass)
-      get_entries(dir, magic_dir).map do |entry|
+      reader.get_entries(dir, magic_dir).map do |entry|
         klass.new(self, source, dir, entry) if klass.valid?(entry)
       end.reject do |entry|
         entry.nil?
@@ -411,19 +411,6 @@ module Jekyll
       end.sort.map do |c|
         c.new(config)
       end
-    end
-
-    # Read the entries from a particular directory for processing
-    #
-    # dir - The String relative path of the directory to read
-    # subfolder - The String directory to read
-    #
-    # Returns the list of entries to process
-    def get_entries(dir, subfolder)
-      base = reader.in_source_dir(dir, subfolder)
-      return [] unless File.exist?(base)
-      entries = Dir.chdir(base) { reader.filter_entries(Dir['**/*'], base) }
-      entries.delete_if { |e| File.directory?(reader.in_source_dir(base, e)) }
     end
 
     # Aggregate post information

@@ -44,5 +44,18 @@ module Jekyll
     def filter_entries(entries, base_directory = nil)
       EntryFilter.new(site, base_directory).filter(entries)
     end
+
+    # Read the entries from a particular directory for processing
+    #
+    # dir - The String relative path of the directory to read
+    # subfolder - The String directory to read
+    #
+    # Returns the list of entries to process
+    def get_entries(dir, subfolder)
+      base = in_source_dir(dir, subfolder)
+      return [] unless File.exist?(base)
+      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
+      entries.delete_if { |e| File.directory?(in_source_dir(base, e)) }
+    end
   end
 end
