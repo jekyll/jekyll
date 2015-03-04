@@ -82,7 +82,7 @@ module Jekyll
     # Returns an Array of plugin search paths
     def plugins_path
       if (site.config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [site.in_source_dir(site.config['plugins'])]
+        [site.reader.in_source_dir(site.config['plugins'])]
       else
         Array(site.config['plugins']).map { |d| File.expand_path(d) }
       end

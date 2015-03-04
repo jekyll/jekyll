@@ -10,7 +10,7 @@ module Jekyll
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
                   :gems, :plugin_manager
 
-    attr_accessor :converters, :generators
+    attr_accessor :converters, :generators, :reader
     attr_reader   :regenerator
 
     # Public: Initialize a new Site.
@@ -27,6 +27,8 @@ module Jekyll
       # Source and destination may not be changed after the site has been created.
       @source              = File.expand_path(config['source']).freeze
       @dest                = File.expand_path(config['destination']).freeze
+
+      @reader = Reader.new(@source,@dest);
 
       # Initialize incremental regenerator
       @regenerator = Regenerator.new(self)
@@ -97,18 +99,6 @@ module Jekyll
       end
     end
 
-    # Public: Prefix a given path with the source directory.
-    #
-    # paths - (optional) path elements to a file or directory within the
-    #         source directory
-    #
-    # Returns a path which is prefixed with the source directory.
-    def in_source_dir(*paths)
-      paths.reduce(source) do |base, path|
-        Jekyll.sanitized_path(base, path)
-      end
-    end
-
     # Public: Prefix a given path with the destination directory.
     #
     # paths - (optional) path elements to a file or directory within the
@@ -116,9 +106,7 @@ module Jekyll
     #
     # Returns a path which is prefixed with the destination directory.
     def in_dest_dir(*paths)
-      paths.reduce(dest) do |base, path|
-        Jekyll.sanitized_path(base, path)
-      end
+      reader.in_dest_dir(*paths)
     end
 
     # The list of collections and their corresponding Jekyll::Collection instances.
@@ -165,7 +153,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      base = in_source_dir(dir)
+      base = reader.in_source_dir(dir)
       entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
 
       read_posts(dir)
@@ -174,7 +162,7 @@ module Jekyll
       limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
-        f_abs = in_source_dir(base, f)
+        f_abs = reader.in_source_dir(base, f)
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
@@ -232,7 +220,7 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = in_source_dir(dir)
+      base = reader.in_source_dir(dir)
       read_data_to(base, self.data)
     end
 
@@ -251,7 +239,7 @@ module Jekyll
       end
 
       entries.each do |entry|
-        path = in_source_dir(dir, entry)
+        path = reader.in_source_dir(dir, entry)
         next if File.symlink?(path) && safe
 
         key = sanitize_filename(File.basename(entry, '.*'))
@@ -454,10 +442,10 @@ module Jekyll
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
-      base = in_source_dir(dir, subfolder)
+      base = reader.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
-      entries.delete_if { |e| File.directory?(in_source_dir(base, e)) }
+      entries.delete_if { |e| File.directory?(reader.in_source_dir(base, e)) }
     end
 
     # Aggregate post information

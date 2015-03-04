@@ -43,7 +43,7 @@ module Jekyll
     # Returns nothing.
     def read_yaml(base, name, opts = {})
       begin
-        self.content = File.read(site.in_source_dir(base, name),
+        self.content = File.read(site.reader.in_source_dir(base, name),
                                  merged_file_read_opts(opts))
         if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
@@ -209,8 +209,8 @@ module Jekyll
 
         # Add layout to dependency tree
         site.regenerator.add_dependency(
-          site.in_source_dir(path),
-          site.in_source_dir(layout.path)
+          site.reader.in_source_dir(path),
+          site.reader.in_source_dir(layout.path)
         )
 
         if layout = layouts[layout.data["layout"]]

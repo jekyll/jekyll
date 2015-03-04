@@ -91,7 +91,7 @@ module Jekyll
 
     # Get the full path to the directory containing the post files
     def containing_dir(dir)
-      site.in_source_dir(dir, '_posts')
+      site.reader.in_source_dir(dir, '_posts')
     end
 
     # Read the YAML frontmatter.

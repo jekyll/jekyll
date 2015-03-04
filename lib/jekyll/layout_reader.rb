@@ -38,7 +38,7 @@ module Jekyll
     end
 
     def layout_directory_inside_source
-      site.in_source_dir(site.config['layouts'])
+      site.reader.in_source_dir(site.config['layouts'])
     end
 
     def layout_directory_in_cwd

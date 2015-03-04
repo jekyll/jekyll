@@ -55,6 +55,7 @@ module Jekyll
   autoload :PluginManager,       'jekyll/plugin_manager'
   autoload :Post,                'jekyll/post'
   autoload :Publisher,           'jekyll/publisher'
+  autoload :Reader,              'jekyll/reader'
   autoload :Regenerator,         'jekyll/regenerator'
   autoload :RelatedPosts,        'jekyll/related_posts'
   autoload :Renderer,            'jekyll/renderer'

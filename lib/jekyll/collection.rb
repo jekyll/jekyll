@@ -89,7 +89,7 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      @directory ||= site.in_source_dir(relative_directory)
+      @directory ||= site.reader.in_source_dir(relative_directory)
     end
 
     # The full path to the directory containing the collection, with
@@ -102,7 +102,7 @@ module Jekyll
     #   is stored on the filesystem.
     def collection_dir(*files)
       return directory if files.empty?
-      site.in_source_dir(relative_directory, *files)
+      site.reader.in_source_dir(relative_directory, *files)
     end
 
     # Checks whether the directory "exists" for this collection.

@@ -63,7 +63,7 @@ class TestRegenerator < JekyllUnitTest
       }))
 
       @site.process
-      @path = @site.in_source_dir(@site.pages.first.path)
+      @path = @site.reader.in_source_dir(@site.pages.first.path)
       @regenerator = @site.regenerator
     end
 
