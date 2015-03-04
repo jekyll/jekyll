@@ -28,7 +28,7 @@ module Jekyll
       @source              = File.expand_path(config['source']).freeze
       @dest                = File.expand_path(config['destination']).freeze
 
-      @reader = Reader.new(@source,@dest);
+      @reader = Jekyll::Reader.new(self)
 
       # Initialize incremental regenerator
       @regenerator = Regenerator.new(self)
@@ -144,7 +144,7 @@ module Jekyll
     # Returns nothing.
     def read_directories(dir = '')
       base = reader.in_source_dir(dir)
-      entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
+      entries = Dir.chdir(base) { reader.filter_entries(Dir.entries('.'), base) }
 
       read_posts(dir)
       read_drafts(dir) if show_drafts
@@ -389,18 +389,6 @@ module Jekyll
       }
     end
 
-    # Filter out any files/directories that are hidden or backup files (start
-    # with "." or "#" or end with "~"), or contain site content (start with "_"),
-    # or are excluded in the site configuration, unless they are web server
-    # files such as '.htaccess'.
-    #
-    # entries - The Array of String file/directory entries to filter.
-    #
-    # Returns the Array of filtered entries.
-    def filter_entries(entries, base_directory = nil)
-      EntryFilter.new(self, base_directory).filter(entries)
-    end
-
     # Get the implementation class for the given Converter.
     #
     # klass - The Class of the Converter to fetch.
@@ -434,7 +422,7 @@ module Jekyll
     def get_entries(dir, subfolder)
       base = reader.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
+      entries = Dir.chdir(base) { reader.filter_entries(Dir['**/*'], base) }
       entries.delete_if { |e| File.directory?(reader.in_source_dir(base, e)) }
     end
 
