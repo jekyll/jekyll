@@ -11,6 +11,7 @@
   * Move to Rouge as default highlighter (#3323)
   * Mimic GitHub Pages `.html` extension stripping behavior in WEBrick (#3452)
   * Always include file extension on output files (#3490)
+  * Improved permalinks for pages and collections (#3538)
 
 ### Minor Enhancements
 
