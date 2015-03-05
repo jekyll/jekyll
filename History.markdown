@@ -48,6 +48,7 @@
   * Upgrade liquid-c to 3.x (#3531)
   * Use consistent syntax for deprecation warning (#3535)
   * Added build --destination and --source flags (#3418)
+  * Site template: remove unused `page.meta` attribute (#3537)
 
 ### Bug Fixes
 
