@@ -49,6 +49,7 @@
   * Use consistent syntax for deprecation warning (#3535)
   * Added build --destination and --source flags (#3418)
   * Site template: remove unused `page.meta` attribute (#3537)
+  * Improve the error message when sorting null objects (#3520)
 
 ### Bug Fixes
 
