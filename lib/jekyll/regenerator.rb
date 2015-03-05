@@ -19,7 +19,7 @@ module Jekyll
       case document
       when Post, Page
         document.asset_file? || document.data['regenerate'] ||
-          modified?(site.reader.in_source_dir(document.relative_path))
+          modified?(site.in_source_dir(document.relative_path))
       when Document
         !document.write? || document.data['regenerate'] || modified?(document.path)
       else
@@ -113,7 +113,7 @@ module Jekyll
     #
     # Returns the String path of the file.
     def metadata_file
-      site.reader.in_source_dir('.jekyll-metadata')
+      site.in_source_dir('.jekyll-metadata')
     end
 
     # Check if metadata has been disabled

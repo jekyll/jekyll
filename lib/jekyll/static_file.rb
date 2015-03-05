@@ -35,7 +35,7 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      @site.reader.in_dest_dir(*[dest, destination_rel_dir, @name].compact)
+      @site.in_dest_dir(*[dest, destination_rel_dir, @name].compact)
     end
 
     def destination_rel_dir

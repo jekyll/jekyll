@@ -15,7 +15,7 @@ module Jekyll
 
     # Get the full path to the directory containing the draft files
     def containing_dir(dir)
-      site.reader.in_source_dir(dir, '_drafts')
+      site.in_source_dir(dir, '_drafts')
     end
 
     # The path to the draft source file, relative to the site source

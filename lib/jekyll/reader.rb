@@ -19,30 +19,6 @@ module Jekyll
       read_collections
     end
 
-    # Public: Prefix a given path with the source directory.
-    #
-    # paths - (optional) path elements to a file or directory within the
-    #         source directory
-    #
-    # Returns a path which is prefixed with the source directory.
-    def in_source_dir(*paths)
-      paths.reduce(site.source) do |base, path|
-        Jekyll.sanitized_path(base, path)
-      end
-    end
-
-    # Public: Prefix a given path with the destination directory.
-    #
-    # paths - (optional) path elements to a file or directory within the
-    #         destination directory
-    #
-    # Returns a path which is prefixed with the destination directory.
-    def in_dest_dir(*paths)
-      paths.reduce(site.dest) do |base, path|
-        Jekyll.sanitized_path(base, path)
-      end
-    end
-
     # Filter out any files/directories that are hidden or backup files (start
     # with "." or "#" or end with "~"), or contain site content (start with "_"),
     # or are excluded in the site configuration, unless they are web server
@@ -62,10 +38,10 @@ module Jekyll
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)
-      base = in_source_dir(dir, subfolder)
+      base = site.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
       entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
-      entries.delete_if { |e| File.directory?(in_source_dir(base, e)) }
+      entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
     end
 
 
@@ -92,7 +68,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      base = in_source_dir(dir)
+      base = site.in_source_dir(dir)
       entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
 
       read_posts(dir)
@@ -101,7 +77,7 @@ module Jekyll
       limit_posts if site.limit_posts > 0 # limit the posts if :limit_posts option is set
 
       entries.each do |f|
-        f_abs = in_source_dir(base, f)
+        f_abs = site.in_source_dir(base, f)
         if File.directory?(f_abs)
           f_rel = File.join(dir, f)
           read_directories(f_rel) unless site.dest.sub(/\/$/, '') == f_abs
@@ -168,7 +144,7 @@ module Jekyll
     #
     # Returns nothing
     def read_data(dir)
-      base = in_source_dir(dir)
+      base = site.in_source_dir(dir)
       read_data_to(base, site.data)
     end
 
@@ -187,7 +163,7 @@ module Jekyll
       end
 
       entries.each do |entry|
-        path = in_source_dir(dir, entry)
+        path = site.in_source_dir(dir, entry)
         next if File.symlink?(path) && site.safe
 
         key = sanitize_filename(File.basename(entry, '.*'))

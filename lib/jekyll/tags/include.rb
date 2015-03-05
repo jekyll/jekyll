@@ -117,7 +117,7 @@ eos
         # Add include to dependency tree
         if context.registers[:page] and context.registers[:page].has_key? "path"
           site.regenerator.add_dependency(
-            site.reader.in_source_dir(context.registers[:page]["path"]),
+            site.in_source_dir(context.registers[:page]["path"]),
             path
           )
         end
@@ -135,7 +135,7 @@ eos
       end
 
       def resolved_includes_dir(context)
-        context.registers[:site].reader.in_source_dir(@includes_dir)
+        context.registers[:site].in_source_dir(@includes_dir)
       end
 
       def validate_path(path, dir, safe)
@@ -170,7 +170,7 @@ eos
       end
 
       def resolved_includes_dir(context)
-        context.registers[:site].reader.in_source_dir(page_path(context))
+        context.registers[:site].in_source_dir(page_path(context))
       end
     end
   end
