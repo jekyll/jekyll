@@ -93,6 +93,7 @@
   * Use `fixture_site` for Document tests (#3511)
   * Remove adapters deprecation warning (#3529)
   * Minor fixes to `url.rb` to follow GitHub style guide (#3544)
+  * Minor changes to resolve deprecation warnings (#3547)
 
 ### Site Enhancements
 
