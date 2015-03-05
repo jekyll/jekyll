@@ -94,6 +94,7 @@
   * Remove adapters deprecation warning (#3529)
   * Minor fixes to `url.rb` to follow GitHub style guide (#3544)
   * Minor changes to resolve deprecation warnings (#3547)
+  * Convert remaining textile test documents to markdown (#3528)
 
 ### Site Enhancements
 
@@ -299,7 +300,6 @@
   * Allow Travis to 'parallelize' our tests (#2859)
   * Fix test for Liquid rendering in Sass (#2856)
   * Fixing "vertycal" typo in site template's `_base.scss` (#2889)
-  * Convert remaining textile test documents to markdown (#3528)
 
 ### Site Enhancements
 
