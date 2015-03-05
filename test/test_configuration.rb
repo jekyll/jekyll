@@ -42,12 +42,12 @@ class TestConfiguration < JekyllUnitTest
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
     should "return .yaml if it exists but .yml does not" do
-      mock(File).exists?(source_dir("_config.yml")) { false }
-      mock(File).exists?(source_dir("_config.yaml")) { true }
+      mock(File).exist?(source_dir("_config.yml")) { false }
+      mock(File).exist?(source_dir("_config.yaml")) { true }
       assert_equal [source_dir("_config.yaml")], @config.config_files(@no_override)
     end
     should "return .yml if both .yml and .yaml exist" do
-      mock(File).exists?(source_dir("_config.yml")) { true }
+      mock(File).exist?(source_dir("_config.yml")) { true }
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
     should "return the config if given one config file" do

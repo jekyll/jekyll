@@ -143,7 +143,7 @@ class TestSite < JekyllUnitTest
 
       # simulate destination file deletion
       File.unlink dest
-      refute File.exists?(dest)
+      refute File.exist?(dest)
 
       sleep 1
       @site.process

@@ -137,7 +137,7 @@ module Jekyll
       config_files = override.delete('config')
       if config_files.to_s.empty?
         default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
-          File.exists? Jekyll.sanitized_path(source(override), "_config.#{ext}")
+          File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))
         end
         config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
