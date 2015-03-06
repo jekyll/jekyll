@@ -71,8 +71,12 @@ module Jekyll
       base = site.in_source_dir(dir)
       entries = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
 
-      read_posts(dir)
-      read_drafts(dir) if site.show_drafts
+      site.posts += PostReader.new(site).read(dir)
+
+      if site.show_drafts
+        site.posts += DraftReader.new(site).read(dir)
+      end
+
       site.posts.sort!
       limit_posts if site.limit_posts > 0 # limit the posts if :limit_posts option is set
 
@@ -88,39 +92,8 @@ module Jekyll
           site.static_files << StaticFile.new(site, site.source, dir, f)
         end
       end
-
       site.pages.sort_by!(&:name)
       site.static_files.sort_by!(&:relative_path)
-    end
-
-    # Read all the files in <source>/<dir>/_posts and create a new Post
-    # object with each one.
-    #
-    # dir - The String relative path of the directory to read.
-    #
-    # Returns nothing.
-    def read_posts(dir)
-      posts = read_content(dir, '_posts', Post)
-
-      posts.each do |post|
-        aggregate_post_info(post) if site.publisher.publish?(post)
-      end
-    end
-
-    # Read all the files in <source>/<dir>/_drafts and create a new Post
-    # object with each one.
-    #
-    # dir - The String relative path of the directory to read.
-    #
-    # Returns nothing.
-    def read_drafts(dir)
-      drafts = read_content(dir, '_drafts', Draft)
-
-      drafts.each do |draft|
-        if draft.published?
-          aggregate_post_info(draft)
-        end
-      end
     end
 
     # Read all the content files from <source>/<dir>/magic_dir
