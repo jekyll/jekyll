@@ -44,12 +44,12 @@ module Jekyll
     #
     # Returns the _unsanitized String URL
     def generated_permalink
-      (@generated_permlink ||= generate_url(@permalink)) if @permalink
+      (@generated_permalink ||= generate_url(@permalink)) if @permalink
     end
 
     # Generates a URL from the template
     #
-    # Returns the _unsanitized String URL
+    # Returns the unsanitized String URL
     def generated_url
       @generated_url ||= generate_url(@template)
     end
@@ -57,7 +57,7 @@ module Jekyll
     # Internal: Generate the URL by replacing all placeholders with their
     # respective values in the given template
     #
-    # Returns the _unsanitizied_ String URL
+    # Returns the unsanitized String URL
     def generate_url(template)
       @placeholders.inject(template) do |result, token|
         break result if result.index(':').nil?
@@ -81,7 +81,7 @@ module Jekyll
         .gsub(/\A([^\/])/, '/\1')
 
       # Append a trailing slash to the URL if the unsanitized URL had one
-      url << "/" if in_url[-1].eql?('/')
+      url << "/" if in_url.end_with?("/")
 
       url
     end
@@ -107,7 +107,7 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      URI.escape(path, /[^a-zA-Z\d\-._~!$&\'()*+,;=:@\/]/).encode('utf-8')
+      URI.escape(path, /[^a-zA-Z\d\-._~!$&'()*+,;=:@\/]/).encode('utf-8')
     end
 
     # Unescapes a URL path segment

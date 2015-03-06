@@ -63,16 +63,12 @@ module Jekyll
     #
     # Returns the template String.
     def template
-      if site.permalink_style == :pretty
-        if index? && html?
-          "/:path/"
-        elsif html?
-          "/:path/:basename/"
-        else
-          "/:path/:basename:output_ext"
-        end
-      else
+      if !html?
         "/:path/:basename:output_ext"
+      elsif index?
+        "/:path/"
+      else
+        Utils.add_permalink_suffix("/:path/:basename", site.permalink_style)
       end
     end
 

@@ -130,6 +130,7 @@ module Jekyll
     # Returns nothing.
     def read
       reader.read
+      limit_posts!
     end
 
     # Run each of the Generators.
@@ -382,6 +383,16 @@ module Jekyll
     # Returns The Cleaner
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
+    end
+
+    # Limits the current posts; removes the posts which exceed the limit_posts
+    #
+    # Returns nothing
+    def limit_posts!
+      if limit_posts > 0
+        limit = posts.length < limit_posts ? posts.length : limit_posts
+        self.posts = posts[-limit, limit]
+      end
     end
   end
 end

@@ -11,6 +11,7 @@
   * Move to Rouge as default highlighter (#3323)
   * Mimic GitHub Pages `.html` extension stripping behavior in WEBrick (#3452)
   * Always include file extension on output files (#3490)
+  * Improved permalinks for pages and collections (#3538)
 
 ### Minor Enhancements
 
@@ -46,6 +47,9 @@
   * Docs: document 'ordinal' built-in permalink style (#3532)
   * Upgrade liquid-c to 3.x (#3531)
   * Use consistent syntax for deprecation warning (#3535)
+  * Added build --destination and --source flags (#3418)
+  * Site template: remove unused `page.meta` attribute (#3537)
+  * Improve the error message when sorting null objects (#3520)
 
 ### Bug Fixes
 
@@ -89,6 +93,9 @@
   * Remove trailing whitespace (#3497)
   * Use `fixture_site` for Document tests (#3511)
   * Remove adapters deprecation warning (#3529)
+  * Minor fixes to `url.rb` to follow GitHub style guide (#3544)
+  * Minor changes to resolve deprecation warnings (#3547)
+  * Convert remaining textile test documents to markdown (#3528)
 
 ### Site Enhancements
 
@@ -129,6 +136,7 @@
   * Add jekyll-auto-image generator to the list of third-party plugins (#3489)
   * Replace link to the proposed `picture` element spec (#3530)
   * Add frontmatter date formatting information (#3469)
+  * Improve consistency and clarity of plugins options note (#3546)
 
 ## 2.5.3 / 2014-12-22
 
@@ -293,7 +301,6 @@
   * Allow Travis to 'parallelize' our tests (#2859)
   * Fix test for Liquid rendering in Sass (#2856)
   * Fixing "vertycal" typo in site template's `_base.scss` (#2889)
-  * Convert remaining textile test documents to markdown (#3528)
 
 ### Site Enhancements
 

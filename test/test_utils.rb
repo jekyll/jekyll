@@ -166,4 +166,18 @@ class TestUtils < JekyllUnitTest
     end
   end
 
+  context "The \`Utils.add_permalink_suffix\` method" do
+    should "handle built-in permalink styles" do
+      assert_equal "/:basename/", Utils.add_permalink_suffix("/:basename", :pretty)
+      assert_equal "/:basename:output_ext", Utils.add_permalink_suffix("/:basename", :date)
+      assert_equal "/:basename:output_ext", Utils.add_permalink_suffix("/:basename", :ordinal)
+      assert_equal "/:basename:output_ext", Utils.add_permalink_suffix("/:basename", :none)
+    end
+
+    should "handle custom permalink styles" do
+      assert_equal "/:basename/", Utils.add_permalink_suffix("/:basename", "/:title/")
+      assert_equal "/:basename:output_ext", Utils.add_permalink_suffix("/:basename", "/:title:output_ext")
+      assert_equal "/:basename", Utils.add_permalink_suffix("/:basename", "/:title")
+    end
+  end
 end
