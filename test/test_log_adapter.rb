@@ -22,7 +22,7 @@ class TestLogAdapter < JekyllUnitTest
     should "call #debug on writer return true" do
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer)
-      stub(writer).debug('topic '.rjust(20) + 'log message') { true }
+      allow(writer).to receive(:debug).with('topic '.rjust(20) + 'log message').and_return(true)
       assert logger.debug('topic', 'log message')
     end
   end
@@ -31,7 +31,7 @@ class TestLogAdapter < JekyllUnitTest
     should "call #info on writer return true" do
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer)
-      stub(writer).info('topic '.rjust(20) + 'log message') { true }
+      allow(writer).to receive(:info).with('topic '.rjust(20) + 'log message').and_return(true)
       assert logger.info('topic', 'log message')
     end
   end
@@ -40,7 +40,7 @@ class TestLogAdapter < JekyllUnitTest
     should "call #warn on writer return true" do
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer)
-      stub(writer).warn('topic '.rjust(20) + 'log message') { true }
+      allow(writer).to receive(:warn).with('topic '.rjust(20) + 'log message').and_return(true)
       assert logger.warn('topic', 'log message')
     end
   end
@@ -49,7 +49,7 @@ class TestLogAdapter < JekyllUnitTest
     should "call #error on writer return true" do
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer)
-      stub(writer).error('topic '.rjust(20) + 'log message') { true }
+      allow(writer).to receive(:error).with('topic '.rjust(20) + 'log message').and_return(true)
       assert logger.error('topic', 'log message')
     end
   end
@@ -57,7 +57,7 @@ class TestLogAdapter < JekyllUnitTest
   context "#abort_with" do
     should "call #error and abort" do
       logger = Jekyll::LogAdapter.new(LoggerDouble.new)
-      stub(logger).error('topic', 'log message') { true }
+      allow(logger).to receive(:error).with('topic', 'log message').and_return(true)
       assert_raises(SystemExit) { logger.abort_with('topic', 'log message') }
     end
   end

@@ -11,6 +11,7 @@ require 'ostruct'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/profile'
+require 'rspec/mocks'
 
 require 'jekyll'
 
@@ -19,7 +20,6 @@ require 'kramdown'
 require 'redcarpet'
 
 require 'shoulda'
-require 'rr'
 
 include Jekyll
 
@@ -30,6 +30,20 @@ STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
 class JekyllUnitTest < Minitest::Test
+  include ::RSpec::Mocks::ExampleMethods
+
+  def before_setup
+    ::RSpec::Mocks.setup
+    super
+  end
+
+  def after_teardown
+    super
+    ::RSpec::Mocks.verify
+  ensure
+    ::RSpec::Mocks.teardown
+  end
+
   def fixture_site(overrides = {})
     Jekyll::Site.new(site_configuration(overrides))
   end

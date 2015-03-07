@@ -48,13 +48,13 @@ class TestEntryFilter < JekyllUnitTest
 
     should "filter symlink entries when safe mode enabled" do
       site = Site.new(site_configuration('safe' => true))
-      stub(File).symlink?('symlink.js') {true}
+      allow(File).to receive(:symlink?).with('symlink.js').and_return(true)
       files = %w[symlink.js]
       assert_equal [], site.filter_entries(files)
     end
 
     should "not filter symlink entries when safe mode disabled" do
-      stub(File).symlink?('symlink.js') {true}
+      allow(File).to receive(:symlink?).with('symlink.js').and_return(true)
       files = %w[symlink.js]
       assert_equal files, @site.filter_entries(files)
     end

@@ -4,11 +4,9 @@ class TestGeneratedSite < JekyllUnitTest
   context "generated sites" do
     setup do
       clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
-      end
+      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
 
-      @site = Site.new(Jekyll.configuration)
+      @site = fixture_site config
       @site.process
       @index = File.read(dest_dir('index.html'))
     end
@@ -59,11 +57,8 @@ OUTPUT
   context "generating limited posts" do
     setup do
       clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 5})
-      end
-
-      @site = Site.new(Jekyll.configuration)
+      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 5})
+      @site = fixture_site config
       @site.process
       @index = File.read(dest_dir('index.html'))
     end
@@ -75,21 +70,17 @@ OUTPUT
     should "ensure limit posts is 0 or more" do
       assert_raises ArgumentError do
         clear_dest
-        stub(Jekyll).configuration do
-          Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1})
-        end
+        config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1})
 
-        @site = Site.new(Jekyll.configuration)
+        @site = fixture_site config
       end
     end
 
     should "acceptable limit post is 0" do
       clear_dest
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
-      end
+      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
 
-      assert Site.new(Jekyll.configuration), "Couldn't create a site with the given limit_posts."
+      assert Site.new(config), "Couldn't create a site with the given limit_posts."
     end
   end
 end

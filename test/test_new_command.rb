@@ -55,7 +55,7 @@ class TestNewCommand < JekyllUnitTest
       end
 
       stubbed_date = '2013-01-01'
-      stub.instance_of(Time).strftime { stubbed_date }
+      allow_any_instance_of(Time).to receive(:strftime) { stubbed_date }
 
       erb_template_files.each do |f|
         f.chomp! '.erb'
