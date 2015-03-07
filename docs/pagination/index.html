@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Pagination</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0-beta1">
+  <meta name="generator" content="Jekyll v3.0.0.beta2">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2078,6 +2078,13 @@ and write the output to <code>blog/page:num/</code>, where <code>:num</code> is 
 starting with <code>2</code>. If a site has 12 posts and specifies <code>paginate: 5</code>, Jekyll will write
 <code>blog/index.html</code> with the first 5 posts, <code>blog/page2/index.html</code> with the next 5 posts
 and <code>blog/page3/index.html</code> with the last 2 posts into the destination directory.</p>
+
+<div class="note warning">
+  <h5>Don't set a permalink</h5>
+  <p>
+    Setting a permalink in the front matter of your blog page will cause pagination to break. Just omit the permalink.
+  </p>
+</div>
 
 <h2 id="liquid-attributes-available">Liquid Attributes Available</h2>
 
