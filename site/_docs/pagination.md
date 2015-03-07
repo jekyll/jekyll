@@ -42,6 +42,13 @@ starting with `2`. If a site has 12 posts and specifies `paginate: 5`, Jekyll wi
 `blog/index.html` with the first 5 posts, `blog/page2/index.html` with the next 5 posts
 and `blog/page3/index.html` with the last 2 posts into the destination directory.
 
+<div class="note warning">
+  <h5>Don't set a permalink</h5>
+  <p>
+    Setting a permalink in the front matter of your blog page will cause pagination to break. Just omit the permalink.
+  </p>
+</div>
+
 ## Liquid Attributes Available
 
 The pagination plugin exposes the `paginator` liquid object with the following
