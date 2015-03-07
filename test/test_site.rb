@@ -162,7 +162,8 @@ class TestSite < JekyllUnitTest
     end
 
     should "sort pages alphabetically" do
-      stub.proxy(Dir).entries { |entries| entries.reverse }
+      method = Dir.method(:entries)
+      allow(Dir).to receive(:entries) { |*args, &block| method.call(*args, &block).reverse }
       @site.process
       # files in symlinked directories may appear twice
       sorted_pages = %w(
