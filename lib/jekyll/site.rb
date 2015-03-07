@@ -75,6 +75,8 @@ module Jekyll
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
       end
+
+      Jekyll::Hooks.trigger self, :reset
     end
 
     # Load necessary libraries, plugins, converters, and generators.
@@ -132,6 +134,7 @@ module Jekyll
     def read
       reader.read
       limit_posts!
+      Jekyll::Hooks.trigger self, :post_read
     end
 
     # Run each of the Generators.
@@ -150,6 +153,9 @@ module Jekyll
       relative_permalinks_are_deprecated
 
       payload = site_payload
+
+      Jekyll::Hooks.trigger self, :pre_render, payload
+
       collections.each do |label, collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
@@ -158,7 +164,6 @@ module Jekyll
         end
       end
 
-      payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
         if regenerator.regenerate?(page_or_post)
           page_or_post.render(layouts, payload)
@@ -183,6 +188,7 @@ module Jekyll
         item.write(dest) if regenerator.regenerate?(item)
       }
       regenerator.write_metadata
+      Jekyll::Hooks.trigger self, :post_write
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.

@@ -35,6 +35,8 @@ module Jekyll
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
+
+      Jekyll::Hooks.trigger self, :post_init
     end
 
     # The generated directory into which the page will be placed
