@@ -5,12 +5,7 @@ require 'helper'
 class TestTags < JekyllUnitTest
 
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
-    stub(Jekyll).configuration do
-      site_configuration({
-        "highlighter" => "rouge"
-      }.merge(override))
-    end
-    site = Site.new(Jekyll.configuration)
+    site = fixture_site({"highlighter" => "rouge"}.merge(override))
 
     if override['read_posts']
       site.read_posts('')
@@ -645,11 +640,7 @@ CONTENT
 
     context "include tag with variable and liquid filters" do
       setup do
-        stub(Jekyll).configuration do
-          site_configuration({'pygments' => true})
-        end
-
-        site = Site.new(Jekyll.configuration)
+        site = fixture_site({'pygments' => true})
         post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
         layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
         post.render(layouts, {"site" => {"posts" => []}})
@@ -681,11 +672,7 @@ CONTENT
 
   context "relative include tag with variable and liquid filters" do
     setup do
-      stub(Jekyll).configuration do
-        site_configuration({'pygments' => true})
-      end
-
-      site = Site.new(Jekyll.configuration)
+      site = fixture_site('pygments' => true)
       post = Post.new(site, source_dir, '', "2014-09-02-relative-includes.markdown")
       layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
       post.render(layouts, {"site" => {"posts" => []}})

@@ -1,6 +1,5 @@
 require 'fileutils'
 require 'posix-spawn'
-require 'rr'
 require 'minitest/assertions'
 require 'time'
 

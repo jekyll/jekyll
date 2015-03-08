@@ -13,7 +13,6 @@ gem 'rake', '~> 10.1'
 gem 'rdoc', '~> 3.11'
 gem 'redgreen', '~> 1.2'
 gem 'shoulda', '~> 3.5'
-gem 'rr', '~> 1.1'
 gem 'cucumber', '1.3.18'
 gem 'maruku', '~> 0.7.0'
 gem 'rdiscount', '~> 2.0'
@@ -28,6 +27,7 @@ gem 'minitest'
 gem 'minitest-reporters'
 gem 'minitest-profile'
 gem 'test-unit' if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
+gem 'rspec-mocks'
 
 if ENV['BENCHMARK']
   gem 'rbtrace'
