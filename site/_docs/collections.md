@@ -7,7 +7,7 @@ permalink: /docs/collections/
 <div class="note warning">
   <h5>Collections support is unstable and may change</h5>
   <p>
-    This is an experimental feature and that the API may likely change until the feature stabilizes.
+    This is an experimental feature and the API may change until the feature stabilizes.
   </p>
 </div>
 
