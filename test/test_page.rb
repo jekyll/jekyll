@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestPage < Test::Unit::TestCase
+class TestPage < JekyllUnitTest
   def setup_page(*args)
     dir, file = args
     dir, file = ['', dir] if file.nil?
@@ -46,7 +46,7 @@ class TestPage < Test::Unit::TestCase
 
         should "create index url based on filename" do
           @page = setup_page('/contacts', 'index.html')
-          assert_equal "/contacts/index.html", @page.url
+          assert_equal "/contacts/", @page.url
         end
       end
 
@@ -57,7 +57,11 @@ class TestPage < Test::Unit::TestCase
 
       should "deal properly with dots" do
         @page = setup_page('deal.with.dots.html')
+        @dest_file = dest_dir("deal.with.dots.html")
+
         assert_equal "deal.with.dots", @page.basename
+        assert_equal "/deal.with.dots", @page.url
+        assert_equal @dest_file, @page.destination(dest_dir)
       end
 
       should "make properties accessible through #[]" do
@@ -83,14 +87,18 @@ class TestPage < Test::Unit::TestCase
         end
       end
 
-      context "with pretty url style" do
+      context "with pretty permalink style" do
         setup do
           @site.permalink_style = :pretty
         end
 
-        should "return dir correctly" do
+        should "return dir, url, and destination correctly" do
           @page = setup_page('contacts.html')
+          @dest_file = dest_dir("contacts/index.html")
+
           assert_equal '/contacts/', @page.dir
+          assert_equal '/contacts/', @page.url
+          assert_equal @dest_file, @page.destination(dest_dir)
         end
 
         should "return dir correctly for index page" do
@@ -121,7 +129,59 @@ class TestPage < Test::Unit::TestCase
         end
       end
 
-      context "with any other url style" do
+      context "with date permalink style" do
+        setup do
+          @site.permalink_style = :date
+        end
+
+        should "return url and destination correctly" do
+          @page = setup_page('contacts.html')
+          @dest_file = dest_dir("contacts.html")
+          assert_equal '/contacts.html', @page.url
+          assert_equal @dest_file, @page.destination(dest_dir)
+        end
+      end
+
+      context "with custom permalink style with trailing slash" do
+        setup do
+          @site.permalink_style = "/:title/"
+        end
+
+        should "return url and destination correctly" do
+          @page = setup_page('contacts.html')
+          @dest_file = dest_dir("contacts/index.html")
+          assert_equal '/contacts/', @page.url
+          assert_equal @dest_file, @page.destination(dest_dir)
+        end
+      end
+
+      context "with custom permalink style with file extension" do
+        setup do
+          @site.permalink_style = "/:title:output_ext"
+        end
+
+        should "return url and destination correctly" do
+          @page = setup_page('contacts.html')
+          @dest_file = dest_dir("contacts.html")
+          assert_equal '/contacts.html', @page.url
+          assert_equal @dest_file, @page.destination(dest_dir)
+        end
+      end
+
+      context "with custom permalink style with no extension" do
+        setup do
+          @site.permalink_style = "/:title"
+        end
+
+        should "return url and destination correctly" do
+          @page = setup_page('contacts.html')
+          @dest_file = dest_dir("contacts.html")
+          assert_equal '/contacts', @page.url
+          assert_equal @dest_file, @page.destination(dest_dir)
+        end
+      end
+
+      context "with any other permalink style" do
         should "return dir correctly" do
           @site.permalink_style = nil
           @page = setup_page('contacts.html')
@@ -179,7 +239,7 @@ class TestPage < Test::Unit::TestCase
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, '+', 'plus+in+url'))
+        assert File.exist?(File.join(dest_dir, '+', 'plus+in+url.html'))
       end
 
       should "write even when permalink has '%# +'" do

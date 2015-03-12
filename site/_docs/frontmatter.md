@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Front Matter
-prev_section: configuration
-next_section: posts
 permalink: /docs/frontmatter/
 ---
 
@@ -172,7 +170,9 @@ These are available out-of-the-box to be used in the front matter for a post.
       <td>
         <p>
           A date here overrides the date from the name of the post. This can be
-          used to ensure correct sorting of posts.
+          used to ensure correct sorting of posts. A date is specified in the format
+          <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code>; hours, minutes, seconds, and timezone offset
+          are optional.
         </p>
       </td>
     </tr>

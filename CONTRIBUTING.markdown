@@ -4,6 +4,7 @@ Contribute
 So you've got an awesome idea to throw into Jekyll. Great! Please keep the
 following in mind:
 
+* **Use https://talk.jekyllrb.com for non-technical or indirect Jekyll questions that are not bugs.**
 * **Contributions will not be accepted without tests or necessary documentation updates.**
 * If you're creating a small fix or patch to an existing feature, just a simple
   test will do. Please stay in the confines of the current test suite and use
@@ -67,7 +68,7 @@ You can find the documentation for jekyllrb.com in the
 [site](https://github.com/jekyll/jekyll/tree/master/site) directory of
 Jekyll's repo on GitHub.com.
 
-All documentation pull requests should be directed at `master`.  Pull
+All documentation pull requests should be directed at `master`. Pull
 requests directed at another branch will not be accepted.
 
 The [Jekyll wiki](https://github.com/jekyll/jekyll/wiki) on GitHub

@@ -2,7 +2,7 @@
 
 require 'helper'
 
-class TestKramdown < Test::Unit::TestCase
+class TestKramdown < JekyllUnitTest
   context "kramdown" do
     setup do
       @config = {
@@ -14,7 +14,7 @@ class TestKramdown < Test::Unit::TestCase
           'toc_levels'    => '1..6',
           'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
 
-          'use_coderay'   => true,
+          'enable_coderay'   => true,
           'coderay_bold_every'=> 12,
           'coderay' => {
             'coderay_css'        => :style,

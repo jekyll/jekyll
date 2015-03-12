@@ -25,7 +25,7 @@ Feature: frontmatter defaults
     And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {custom: "some special data", author: "Ben"}}]"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "<p>some special data</p><div>Ben</div>" in "_site/2013/09/11/default-data.html"
+    And I should see "<p>some special data</p>\n<div>Ben</div>" in "_site/2013/09/11/default-data.html"
     And I should see "just some special data by Ben" in "_site/index.html"
 
   Scenario: Override frontmatter defaults by path
@@ -54,6 +54,28 @@ Feature: frontmatter defaults
     And I should see "root: Overview for the webpage" in "_site/index.html"
     And I should see "subfolder: Overview for the special section" in "_site/special/index.html"
 
+  Scenario: Use frontmatter variables by relative path
+    Given I have a _layouts directory
+    And I have a main layout that contains "main: {{ content }}"
+
+    And I have a _posts directory
+    And I have the following post:
+      | title | date       | content                               |
+      | about | 2013-10-14 | content of site/2013/10/14/about.html |
+    And I have a special/_posts directory
+    And I have the following post in "special":
+      | title  | date       | path  | content                                        |
+      | about1 | 2013-10-14 | local | content of site/special/2013/10/14/about1.html |
+      | about2 | 2013-10-14 | local | content of site/special/2013/10/14/about2.html |
+
+    And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "main"}}, {scope: {path: "special/_posts"}, values: {layout: "main"}}, {scope: {path: "_posts"}, values: {layout: "main"}}]"
+
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "main: <p>content of site/2013/10/14/about.html</p>" in "_site/2013/10/14/about.html"
+    And I should see "main: <p>content of site/special/2013/10/14/about1.html</p>" in "_site/special/2013/10/14/about1.html"
+    And I should see "main: <p>content of site/special/2013/10/14/about2.html</p>" in "_site/special/2013/10/14/about2.html"
+
   Scenario: Override frontmatter defaults by type
     Given I have a _posts directory
     And I have the following post:
@@ -78,10 +100,19 @@ Feature: frontmatter defaults
     And I should see "nothing" in "_site/override.html"
     But the "_site/perma.html" file should not exist
 
+  Scenario: Define permalink default for posts
+    Given I have a _posts directory
+    And I have the following post:
+      | title          | date       | category | content |
+      | testpost       | 2013-10-14 | blog     | blabla  |
+    And I have a configuration file with "defaults" set to "[{scope: {path: "", type: "posts"}, values: {permalink: "/:categories/:title/"}}]"
+    When I run jekyll build
+    Then I should see "blabla" in "_site/blog/testpost/index.html"
+
   Scenario: Use frontmatter defaults in collections
     Given I have a _slides directory
     And I have a "index.html" file that contains "nothing"
-    And I have a "_slides/slide1.html" file with content: 
+    And I have a "_slides/slide1.html" file with content:
     """
     ---
     ---
@@ -107,7 +138,7 @@ Feature: frontmatter defaults
   Scenario: Override frontmatter defaults inside a collection
     Given I have a _slides directory
     And I have a "index.html" file that contains "nothing"
-    And I have a "_slides/slide2.html" file with content: 
+    And I have a "_slides/slide2.html" file with content:
     """
     ---
     myval: Override

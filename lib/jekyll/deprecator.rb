@@ -21,7 +21,7 @@ module Jekyll
     def no_subcommand(args)
       if args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
         deprecation_message "Jekyll now uses subcommands instead of just \
-                            switches. Run `jekyll --help' to find out more."
+                            switches. Run `jekyll --help` to find out more."
       end
     end
 
@@ -40,22 +40,5 @@ module Jekyll
       Jekyll.logger.warn "Defaults:", "Please update your front-matter defaults to use 'type: #{current}'."
     end
 
-    def gracefully_require(gem_name)
-      Array(gem_name).each do |name|
-        begin
-          require name
-        rescue LoadError => e
-          Jekyll.logger.error "Dependency Error:", <<-MSG
-  Yikes! It looks like you don't have #{name} or one of its dependencies installed.
-  In order to use Jekyll as currently configured, you'll need to install this gem.
-
-  The full error message from Ruby is: '#{e.message}'
-
-  If you run into trouble, you can find helpful resources at http://jekyllrb.com/help/!
-MSG
-          raise Errors::MissingDependencyException.new(name)
-        end
-      end
-    end
   end
 end

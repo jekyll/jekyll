@@ -21,6 +21,7 @@ require 'time'
 require 'English'
 require 'pathname'
 require 'logger'
+require 'set'
 
 # 3rd party
 require 'safe_yaml/load'
@@ -29,6 +30,7 @@ require 'kramdown'
 require 'colorator'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
+Liquid::Template.error_mode = :strict
 
 module Jekyll
 
@@ -43,6 +45,7 @@ module Jekyll
   autoload :EntryFilter,         'jekyll/entry_filter'
   autoload :Errors,              'jekyll/errors'
   autoload :Excerpt,             'jekyll/excerpt'
+  autoload :External,            'jekyll/external'
   autoload :Filters,             'jekyll/filters'
   autoload :FrontmatterDefaults, 'jekyll/frontmatter_defaults'
   autoload :Layout,              'jekyll/layout'
@@ -52,6 +55,7 @@ module Jekyll
   autoload :PluginManager,       'jekyll/plugin_manager'
   autoload :Post,                'jekyll/post'
   autoload :Publisher,           'jekyll/publisher'
+  autoload :Regenerator,         'jekyll/regenerator'
   autoload :RelatedPosts,        'jekyll/related_posts'
   autoload :Renderer,            'jekyll/renderer'
   autoload :Site,                'jekyll/site'
@@ -153,6 +157,9 @@ module Jekyll
       end
     end
 
+    # Conditional optimizations
+    Jekyll::External.require_if_present('liquid-c')
+
   end
 end
 
@@ -162,11 +169,4 @@ require_all 'jekyll/converters/markdown'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
-# Eventually remove these for 3.0 as non-core
-Jekyll::Deprecator.gracefully_require(%w[
-  toml
-  jekyll-paginate
-  jekyll-gist
-  jekyll-coffeescript
-  jekyll-sass-converter
-])
+require 'jekyll-sass-converter'

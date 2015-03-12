@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Pagination
-prev_section: permalinks
-next_section: plugins
 permalink: /docs/pagination/
 ---
 
@@ -32,10 +30,10 @@ paginate: 5
 The number should be the maximum number of Posts you’d like to be displayed per-
 page in the generated site.
 
-You may also specify where the destination of the pagination pages:
+You may also specify the destination of the pagination pages:
 
 {% highlight yaml %}
-paginate_path: "blog/page:num/"
+paginate_path: "/blog/page:num/"
 {% endhighlight %}
 
 This will read in `blog/index.html`, send it each pagination page in Liquid as `paginator`
@@ -43,6 +41,13 @@ and write the output to `blog/page:num/`, where `:num` is the pagination page nu
 starting with `2`. If a site has 12 posts and specifies `paginate: 5`, Jekyll will write
 `blog/index.html` with the first 5 posts, `blog/page2/index.html` with the next 5 posts
 and `blog/page3/index.html` with the last 2 posts into the destination directory.
+
+<div class="note warning">
+  <h5>Don't set a permalink</h5>
+  <p>
+    Setting a permalink in the front matter of your blog page will cause pagination to break. Just omit the permalink.
+  </p>
+</div>
 
 ## Liquid Attributes Available
 

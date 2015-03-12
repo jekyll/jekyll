@@ -21,7 +21,7 @@ module Jekyll
       'keep_files'    => ['.git','.svn'],
       'encoding'      => 'utf-8',
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
-      'textile_ext'   => 'textile',
+      'full_rebuild'  => false,
 
       # Filtering Content
       'show_drafts'   => nil,
@@ -35,7 +35,7 @@ module Jekyll
 
       # Conversion
       'markdown'      => 'kramdown',
-      'highlighter'   => 'pygments',
+      'highlighter'   => 'rouge',
       'lsi'           => false,
       'excerpt_separator' => "\n\n",
 
@@ -74,12 +74,12 @@ module Jekyll
       },
 
       'kramdown' => {
-        'auto_ids'      => true,
-        'footnote_nr'   => 1,
-        'entity_output' => 'as_char',
-        'toc_levels'    => '1..6',
-        'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
-        'use_coderay'   => false,
+        'auto_ids'       => true,
+        'footnote_nr'    => 1,
+        'entity_output'  => 'as_char',
+        'toc_levels'     => '1..6',
+        'smart_quotes'   => 'lsquo,rsquo,ldquo,rdquo',
+        'enable_coderay' => false,
 
         'coderay' => {
           'coderay_wrap'              => 'div',
@@ -89,10 +89,6 @@ module Jekyll
           'coderay_bold_every'        => 10,
           'coderay_css'               => 'style'
         }
-      },
-
-      'redcloth' => {
-        'hard_breaks' => true
       }
     }
 
@@ -119,6 +115,7 @@ module Jekyll
     def safe_load_file(filename)
       case File.extname(filename)
       when /\.toml/i
+        Jekyll::External.require_with_graceful_fail('toml') unless defined?(TOML)
         TOML.load_file(filename)
       when /\.ya?ml/i
         SafeYAML.load_file(filename)
@@ -140,7 +137,7 @@ module Jekyll
       config_files = override.delete('config')
       if config_files.to_s.empty?
         default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
-          File.exists? Jekyll.sanitized_path(source(override), "_config.#{ext}")
+          File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))
         end
         config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
@@ -209,7 +206,7 @@ module Jekyll
       config = clone
       # Provide backwards-compatibility
       if config.key?('auto') || config.key?('watch')
-        Jekyll.logger.warn "Deprecation:", "Auto-regeneration can no longer" +
+        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" +
                             " be set from your configuration file(s). Use the"+
                             " --[no-]watch/-w command-line option instead."
         config.delete('auto')
@@ -217,14 +214,14 @@ module Jekyll
       end
 
       if config.key? 'server'
-        Jekyll.logger.warn "Deprecation:", "The 'server' configuration option" +
+        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" +
                             " is no longer accepted. Use the 'jekyll serve'" +
                             " subcommand to serve your site with WEBrick."
         config.delete('server')
       end
 
       if config.key? 'server_port'
-        Jekyll.logger.warn "Deprecation:", "The 'server_port' configuration option" +
+        Jekyll::Deprecator.deprecation_message "The 'server_port' configuration option" +
                             " has been renamed to 'port'. Please update your config" +
                             " file accordingly."
         # copy but don't overwrite:
@@ -233,7 +230,7 @@ module Jekyll
       end
 
       if config.key? 'pygments'
-        Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
+        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" +
                             " has been renamed to 'highlighter'. Please update your" +
                             " config file accordingly. The allowed values are 'rouge', " +
                             "'pygments' or null."
@@ -244,7 +241,7 @@ module Jekyll
 
       %w[include exclude].each do |option|
         if config.fetch(option, []).is_a?(String)
-          Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
+          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" +
             " must now be specified as an array, but you specified" +
             " a string. For now, we've treated the string you provided" +
             " as a list of comma-separated values."
@@ -253,10 +250,22 @@ module Jekyll
         config[option].map!(&:to_s)
       end
 
+      if (config['kramdown'] || {}).key?('use_coderay')
+        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" +
+          " to 'enable_coderay' in your configuration file."
+        config['kramdown']['use_coderay'] = config['kramdown'].delete('enable_coderay')
+      end
+
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
         Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
           "Markdown processor. Maruku support has been deprecated and will " +
           "be removed in 3.0.0. We recommend you switch to Kramdown."
+      end
+
+      if config.key?('paginate') && config['paginate'] && !(config['gems'] || []).include?('jekyll-paginate')
+        Jekyll::Deprecator.deprecation_message "You appear to have pagination " +
+          "turned on, but you haven't included the `jekyll-paginate` gem. " +
+          "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
       end
       config
     end

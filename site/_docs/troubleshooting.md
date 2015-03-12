@@ -1,15 +1,18 @@
 ---
 layout: docs
 title: Troubleshooting
-prev_section: deployment-methods
-next_section: sites
 permalink: /docs/troubleshooting/
 ---
 
 If you ever run into problems installing or using Jekyll, here are a few tips
 that might be of help. If the problem you’re experiencing isn’t covered below,
-please [report an issue]({{site.help_url}}/issues/new) so the
-Jekyll community can make everyone’s experience better.
+**please [check out our other help resources](/help/)** as well.
+
+- [Installation Problems](#installation-problems)
+- [Problems running Jekyll](#problems-running-jekyll)
+- [Base-URL Problems](#base-url-problems)
+- [Configuration problems](#configuration-problems)
+- [Markup Problems](#markup-problems)
 
 ## Installation Problems
 
@@ -27,7 +30,7 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 sudo yum install ruby-devel
 {% endhighlight %}
 
-On [NearlyFreeSpeech](http://nearlyfreespeech.net/) you need to run the
+On [NearlyFreeSpeech](https://www.nearlyfreespeech.net/) you need to run the
 following commands before installing Jekyll:
 
 {% highlight bash %}
@@ -97,9 +100,9 @@ http://localhost:4000/blog
 The order of precedence for conflicting [configuration settings](../configuration/)
 is as follows:
 
-1.  Command-line flags
-2.  Configuration file settings
-3.  Defaults
+1. Command-line flags
+2. Configuration file settings
+3. Defaults
 
 That is: defaults are overridden by options specified in `_config.yml`,
 and flags specified at the command-line will override all other settings

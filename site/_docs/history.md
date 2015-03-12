@@ -2,8 +2,40 @@
 layout: docs
 title: History
 permalink: "/docs/history/"
-prev_section: contributing
 ---
+
+## 2.5.3 / 2014-12-22
+{: #v2-5-3}
+
+### Bug Fixes
+{: #bug-fixes-v2-5-3}
+
+- When checking a Markdown extname, include position of the `.` ([#3147]({{ site.repository }}/issues/3147))
+- Fix `jsonify` Liquid filter handling of boolean values ([#3154]({{ site.repository }}/issues/3154))
+- Add comma to value of `viewport` meta tag ([#3170]({{ site.repository }}/issues/3170))
+- Set the link type for the RSS feed to `application/rss+xml` ([#3176]({{ site.repository }}/issues/3176))
+- Refactor `#as_liquid` ([#3158]({{ site.repository }}/issues/3158))
+
+### Development Fixes
+{: #development-fixes-v2-5-3}
+
+- Exclude built-in bundles from being added to coverage report ([#3180]({{ site.repository }}/issues/3180))
+
+### Site Enhancements
+{: #site-enhancements-v2-5-3}
+
+- Add `[@alfredxing](https://github.com/alfredxing)` to the `[@jekyll](https://github.com/jekyll)/core` team. :tada: ([#3218]({{ site.repository }}/issues/3218))
+- Document the `-q` option for the `build` and `serve` commands ([#3149]({{ site.repository }}/issues/3149))
+- Fix some minor typos/flow fixes in documentation website content ([#3165]({{ site.repository }}/issues/3165))
+- Add `keep_files` to configuration documentation ([#3162]({{ site.repository }}/issues/3162))
+- Repeat warning about cleaning of the `destination` directory ([#3161]({{ site.repository }}/issues/3161))
+- Add jekyll-500px-embed to list of third-party plugins ([#3163]({{ site.repository }}/issues/3163))
+- Simplified platform detection in Gemfile example for Windows ([#3177]({{ site.repository }}/issues/3177))
+- Add the `jekyll-jalali` plugin added to the list of third-party plugins. ([#3198]({{ site.repository }}/issues/3198))
+- Add Table of Contents to Troubleshooting page ([#3196]({{ site.repository }}/issues/3196))
+- Add `inline_highlight` plugin to list of third-party plugins ([#3212]({{ site.repository }}/issues/3212))
+- Add `jekyll-mermaid` plugin to list of third-party plugins ([#3222]({{ site.repository }}/issues/3222))
+
 
 ## 2.5.2 / 2014-11-17
 {: #v2-5-2}
@@ -517,7 +549,7 @@ prev_section: contributing
 - Add `Jekyll::LiquidExtensions` with `.lookup_variable` method for easy
     looking up of variable values in a Liquid context. ([#2253]({{ site.repository }}/issues/2253))
 - Remove literal lang name from class ([#2292]({{ site.repository }}/issues/2292))
-- Return `utf-8` encoding in header for  webrick error page response ([#2289]({{ site.repository }}/issues/2289))
+- Return `utf-8` encoding in header for webrick error page response ([#2289]({{ site.repository }}/issues/2289))
 - Make template site easier to customize ([#2268]({{ site.repository }}/issues/2268))
 - Add two-digit year to permalink template option ([#2301]({{ site.repository }}/issues/2301))
 - Add `site.documents` to Liquid payload (list of all docs) ([#2295]({{ site.repository }}/issues/2295))

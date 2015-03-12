@@ -3,11 +3,12 @@
 module Jekyll
   class Renderer
 
-    attr_reader :document, :site
+    attr_reader :document, :site, :site_payload
 
-    def initialize(site, document)
-      @site     = site
-      @document = document
+    def initialize(site, document, site_payload = nil)
+      @site         = site
+      @document     = document
+      @site_payload = site_payload
     end
 
     # Determine which converters to use based on this document's
@@ -32,7 +33,7 @@ module Jekyll
     def run
       payload = Utils.deep_merge_hashes({
         "page" => document.to_liquid
-      }, site.site_payload)
+      }, site_payload || site.site_payload)
 
       info = {
         filters:   [Jekyll::Filters],
@@ -137,6 +138,12 @@ module Jekyll
           info,
           File.join(site.config['layouts'], layout.name)
         )
+
+        # Add layout to dependency tree
+        site.regenerator.add_dependency(
+          site.in_source_dir(document.path),
+          site.in_source_dir(layout.path)
+        ) if document.write?
 
         if layout = site.layouts[layout.data["layout"]]
           if used.include?(layout)

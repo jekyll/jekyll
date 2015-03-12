@@ -5,20 +5,29 @@
 
 set -e
 
-if [[ "$1" != "-f" ]]; then
-  git diff --name-only ..master | grep '^site/' || {
-    echo "No site files changed. We'll skip proofing. Run with -f to force."
-    exit 0
-  }
-fi
-
-echo "Some site files have been changed! Proofing..."
-
-command -v htmlproof || {
-    echo "Installing HTML::Proofer!"
-    gem install html-proofer -- --use-system-libraries
+function msg {
+	printf "\e[0;37m==> $1\e[0m\n"
 }
 
-bundle exec jekyll build -s site -d _site --trace
-printf "\e[0;36mProofing begins now!\e[0m\n"
-htmlproof ./_site
+INGORE_HREFS=$(ruby -e 'puts %w{
+	Chrononaut
+	twitter.com
+	nearlyfreespeech.net
+}.map{|h| "/#{h}/"}.join(",")')
+SOURCE="site"
+DESTINATION="_site"
+
+export PROOF=true
+export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+
+# 1.
+msg "Installing..."
+bundle install -j8 > /dev/null || bundle install > /dev/null
+
+# 2.
+msg "Building..."
+bundle exec jekyll build -s $SOURCE -d $DESTINATION --full-rebuild --trace
+
+# 3.
+msg "Proofing..."
+time bundle exec htmlproof ./$DESTINATION --href-ignore $INGORE_HREFS

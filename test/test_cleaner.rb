@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestCleaner < Test::Unit::TestCase
+class TestCleaner < JekyllUnitTest
   context "directory in keep_files" do
     setup do
       clear_dest
@@ -9,14 +9,10 @@ class TestCleaner < Test::Unit::TestCase
       FileUtils.touch(File.join(dest_dir('to_keep'), 'index.html'))
       FileUtils.touch(File.join(dest_dir('to_keep/child_dir'), 'index.html'))
 
-      @site = Site.new(Jekyll.configuration({
-        "skip_config_files" => true,
-        "source" => source_dir,
-        "destination" => dest_dir
-      }))
+      @site = fixture_site
       @site.keep_files = ['to_keep/child_dir']
 
-      @cleaner = Site::Cleaner.new(@site)
+      @cleaner = Cleaner.new(@site)
       @cleaner.cleanup!
     end
 
@@ -48,14 +44,10 @@ class TestCleaner < Test::Unit::TestCase
       FileUtils.mkdir_p(source_dir('no_files_inside/child_dir'))
       FileUtils.touch(File.join(source_dir('no_files_inside/child_dir'), 'index.html'))
 
-      @site = Site.new(Jekyll.configuration({
-        "skip_config_files" => true,
-        "source" => source_dir,
-        "destination" => dest_dir
-      }))
+      @site = fixture_site
       @site.process
 
-      @cleaner = Site::Cleaner.new(@site)
+      @cleaner = Cleaner.new(@site)
       @cleaner.cleanup!
     end
 

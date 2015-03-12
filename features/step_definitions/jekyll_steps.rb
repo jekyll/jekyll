@@ -8,7 +8,7 @@ def file_content_from_hash(input_hash)
     input_hash['content']
   end
 
-  <<EOF
+  <<-EOF
 ---
 #{matter}
 ---
@@ -24,9 +24,10 @@ end
 After do
   FileUtils.rm_rf(TEST_DIR)   if File.exist?(TEST_DIR)
   FileUtils.rm(JEKYLL_COMMAND_OUTPUT_FILE) if File.exist?(JEKYLL_COMMAND_OUTPUT_FILE)
+  Dir.chdir(File.dirname(TEST_DIR))
 end
 
-World(Test::Unit::Assertions)
+World(Minitest::Assertions)
 
 Given /^I have a blank site in "(.*)"$/ do |path|
   FileUtils.mkdir_p(path) unless File.exist?(path)
@@ -39,7 +40,7 @@ end
 # Like "I have a foo file" but gives a yaml front matter so jekyll actually processes it
 Given /^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$/ do |file, key, value, text|
   File.open(file, 'w') do |f|
-    f.write <<EOF
+    f.write <<-EOF
 ---
 #{key || 'layout'}: #{value || 'nil'}
 ---
@@ -83,7 +84,7 @@ end
 Given /^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash['title'])
-    ext = input_hash['type'] || 'textile'
+    ext = input_hash['type'] || 'markdown'
     before, after = location(folder, direction)
 
     case status
@@ -133,6 +134,10 @@ Given /^I have fixture collections$/ do
   FileUtils.cp_r File.join(JEKYLL_SOURCE_DIR, "test", "source", "_methods"), source_dir
 end
 
+Given /^I wait (\d+) second(s?)$/ do |time, plural|
+  sleep(time.to_f)
+end
+
 ##################
 #
 # Changing stuff
@@ -163,6 +168,12 @@ When /^I delete the file "(.*)"$/ do |file|
   File.delete(file)
 end
 
+##################
+#
+# Checking stuff
+#
+##################
+
 Then /^the (.*) directory should +exist$/ do |dir|
   assert File.directory?(dir), "The directory \"#{dir}\" does not exist"
 end
@@ -180,7 +191,7 @@ Then /^I should see exactly "(.*)" in "(.*)"$/ do |text, file|
 end
 
 Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
-  assert_no_match Regexp.new(text, Regexp::MULTILINE), file_contents(file)
+  refute_match Regexp.new(text, Regexp::MULTILINE), file_contents(file)
 end
 
 Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
@@ -188,7 +199,15 @@ Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
 end
 
 Then /^the "(.*)" file should +exist$/ do |file|
-  assert File.file?(file), "The file \"#{file}\" does not exist"
+  file_does_exist = File.file?(file)
+  unless file_does_exist
+    all_steps_to_path(file).each do |dir|
+      STDERR.puts ""
+      STDERR.puts "Dir #{dir}:"
+      STDERR.puts Dir["#{dir}/**/*"]
+    end
+  end
+  assert file_does_exist, "The file \"#{file}\" does not exist.\n"
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|

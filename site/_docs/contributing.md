@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Contributing
-prev_section: upgrading
-next_section: history
 permalink: /docs/contributing/
 ---
 
@@ -99,7 +97,7 @@ You can find the documentation for jekyllrb.com in the
 [site]({{ site.repository }}/tree/master/site) directory of
 Jekyll's repo on GitHub.com.
 
-All documentation pull requests should be directed at `master`.  Pull
+All documentation pull requests should be directed at `master`. Pull
 requests directed at another branch will not be accepted.
 
 The [Jekyll wiki]({{ site.repository }}/wiki) on GitHub

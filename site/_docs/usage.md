@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Basic Usage
-prev_section: installation
-next_section: structure
 permalink: /docs/usage/
 ---
 
@@ -28,10 +26,14 @@ $ jekyll build --watch
   <h5>Destination folders are cleaned on site builds</h5>
   <p>
     The contents of <code>&lt;destination&gt;</code> are automatically
-    cleaned when the site is built.  Files or folders that are not
-    created by your site will be removed.  Do not use an important
-    location for <code>&lt;destination&gt;</code>; instead, use it as
-    a staging area and copy files from there to your web server.
+    cleaned, by default, when the site is built. Files or folders that are not
+    created by your site will be removed. Files and folders you wish to retain
+    in <code>&lt;destination&gt;</code> may be specified within the <code>&lt;keep_files&gt;</code>
+    configuration directive.
+  </p>
+  <p>
+    Do not use an important location for <code>&lt;destination&gt;</code>;
+    instead, use it as a staging area and copy files from there to your web server.
   </p>
 </div>
 
@@ -82,3 +84,6 @@ $ jekyll build --source _source --destination _deploy
 
 For more about the possible configuration options, see the
 [configuration](../configuration/) page.
+
+If you're interested in browsing these docs on-the-go, install the
+`jekyll-docs` gem and run `jekyll docs` in your terminal.

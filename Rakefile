@@ -26,7 +26,7 @@ def gemspec_file
 end
 
 def gem_file
-  "#{name}-#{version}.gem"
+  "#{name}-#{Gem::Version.new(version).to_s}.gem"
 end
 
 def normalize_bullets(markdown)
@@ -89,6 +89,7 @@ end
 
 multitask :default => [:test, :features]
 
+task :spec => :test
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
@@ -179,33 +180,44 @@ namespace :site do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
-      puts "No gh-pages directory found. Run the following commands first:"
-      puts "  `git clone git@github.com:jekyll/jekyll gh-pages"
-      puts "  `cd gh-pages"
-      puts "  `git checkout gh-pages`"
-      exit(1)
+      puts "Creating gh-pages dir..."
+      sh "git clone git@github.com:jekyll/jekyll gh-pages"
     end
 
-    # Ensure gh-pages branch is up to date.
+    # Ensure latest gh-pages branch history.
     Dir.chdir('gh-pages') do
+      sh "git checkout gh-pages"
       sh "git pull origin gh-pages"
     end
 
-    # Copy to gh-pages dir.
-    puts "Copying site to gh-pages branch..."
-    Dir.glob("site/*") do |path|
-      next if path.include? "_site"
-      sh "cp -R #{path} gh-pages/"
+    # Proceed to purge all files in case we removed a file in this release.
+    puts "Cleaning gh-pages directory..."
+    purge_exclude = %w[
+      gh-pages/.
+      gh-pages/..
+      gh-pages/.git
+      gh-pages/.gitignore
+    ]
+    FileList["gh-pages/{*,.*}"].exclude(*purge_exclude).each do |path|
+      sh "rm -rf #{path}"
     end
 
-    # Change any configuration settings for production.
-    config = YAML.load_file("gh-pages/_config.yml")
-    config.merge!({'sass' => {'style' => 'compressed'}})
-    File.write('gh-pages/_config.yml', YAML.dump(config))
+    # Copy site to gh-pages dir.
+    puts "Building site into gh-pages branch..."
+    ENV['JEKYLL_ENV'] = 'production'
+    require "jekyll"
+    Jekyll::Commands::Build.process({
+      "source"       => File.expand_path("site"),
+      "destination"  => File.expand_path("gh-pages"),
+      "sass"         => { "style" => "compressed" },
+      "full_rebuild" => true
+    })
+
+    File.open('gh-pages/.nojekyll', 'wb') { |f| f.puts(":dog: food.") }
 
     # Commit and push.
     puts "Committing and pushing to GitHub Pages..."
-    sha = `git log`.match(/[a-z0-9]{40}/)[0]
+    sha = `git rev-parse HEAD`.strip
     Dir.chdir('gh-pages') do
       sh "git add ."
       sh "git commit --allow-empty -m 'Updating to #{sha}.'"
@@ -221,8 +233,7 @@ namespace :site do
       front_matter = {
         "layout" => "docs",
         "title" => "History",
-        "permalink" => "/docs/history/",
-        "prev_section" => "contributing"
+        "permalink" => "/docs/history/"
       }
       Dir.chdir('site/_docs/') do
         File.open("history.md", "w") do |file|
@@ -237,7 +248,7 @@ namespace :site do
 
   desc "Write the site latest_version.txt file"
   task :version_file do
-    File.open('site/latest_version.txt', 'wb') { |f| f.write(version) }
+    File.open('site/latest_version.txt', 'wb') { |f| f.puts(version) } unless version =~ /(beta|rc|alpha)/i
   end
 
   namespace :releases do

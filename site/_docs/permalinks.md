@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Permalinks
-prev_section: templates
-next_section: pagination
 permalink: /docs/permalinks/
 ---
 
@@ -80,7 +78,10 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
         <p><code>title</code></p>
       </td>
       <td>
-        <p>Title from the Post’s filename</p>
+        <p>
+            Title from the document’s filename. May be overridden via the
+            document’s <code>slug</code> YAML front matter.
+        </p>
       </td>
     </tr>
     <tr>
@@ -139,6 +140,14 @@ enough to fix it all!
     </tr>
     <tr>
       <td>
+        <p><code>ordinal</code></p>
+      </td>
+      <td>
+        <p><code>/:categories/:year/:y_day/:title.html</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>none</code></p>
       </td>
       <td>
@@ -151,7 +160,7 @@ enough to fix it all!
 
 ## Permalink style examples
 
-Given a post named: `/2009-04-29-slap-chop.textile`
+Given a post named: `/2009-04-29-slap-chop.md`
 
 <div class="mobile-side-scroller">
 <table>

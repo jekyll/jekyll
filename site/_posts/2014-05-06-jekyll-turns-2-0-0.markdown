@@ -28,4 +28,4 @@ Happy developing!
 
 [changelog]: /docs/history/
 [@jglovier]: https://github.com/jglovier
-[jekyll-1]: /news/2013/05/06/jekyll-1-0-0-released/
+[jekyll-1]: {% post_url 2013-05-06-jekyll-1-0-0-released %}

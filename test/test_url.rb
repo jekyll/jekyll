@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestURL < Test::Unit::TestCase
+class TestURL < JekyllUnitTest
   context "The URL class" do
 
     should "throw an exception if neither permalink or template is specified" do
@@ -44,6 +44,13 @@ class TestURL < Test::Unit::TestCase
         :template => "/baz",
         :permalink => "/:x/:y/:x/",
         :placeholders => {:x => "foo", :y => "bar"}
+      ).to_s
+    end
+
+    should "handle nil values for keys in the template" do
+      assert_equal '/foo/bar/', URL.new(
+        :template => "/:x/:y/:z/",
+        :placeholders => {:x => "foo", :y => "bar", :z => nil}
       ).to_s
     end
 

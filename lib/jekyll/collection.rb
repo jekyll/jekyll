@@ -40,7 +40,7 @@ module Jekyll
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
-          docs << doc
+          docs << doc if site.publisher.publish?(doc)
         else
           relative_dir = Jekyll.sanitized_path(relative_directory, File.dirname(file_path)).chomp("/.")
           files << StaticFile.new(site, site.source, relative_dir, File.basename(full_path), self)
@@ -170,7 +170,9 @@ module Jekyll
     #
     # Returns the URL template to render collection's documents at.
     def url_template
-      metadata.fetch('permalink', "/:collection/:path:output_ext")
+      metadata.fetch('permalink') do
+          Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
+      end
     end
 
     # Extract options for this collection from the site configuration.
@@ -183,6 +185,5 @@ module Jekyll
         {}
       end
     end
-
   end
 end

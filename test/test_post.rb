@@ -2,7 +2,7 @@
 
 require 'helper'
 
-class TestPost < Test::Unit::TestCase
+class TestPost < JekyllUnitTest
   def setup_post(file)
     Post.new(@site, source_dir, '', file)
   end
@@ -15,18 +15,17 @@ class TestPost < Test::Unit::TestCase
   context "A Post" do
     setup do
       clear_dest
-      @site = Site.new(Jekyll.configuration({
-        "skip_config_files" => true,
-        "source" => source_dir,
-        "destination" => dest_dir
-      }))
+      @site = fixture_site
     end
 
     should "ensure valid posts are valid" do
       assert Post.valid?("2008-09-09-foo-bar.textile")
       assert Post.valid?("foo/bar/2008-09-09-foo-bar.textile")
+      assert Post.valid?("2008-09-09-foo-bar.markdown")
+      assert Post.valid?("foo/bar/2008-09-09-foo-bar.markdown")
 
       assert !Post.valid?("lol2008-09-09-foo-bar.textile")
+      assert !Post.valid?("lol2008-09-09-foo-bar.markdown")
       assert !Post.valid?("blah")
     end
 
@@ -34,13 +33,13 @@ class TestPost < Test::Unit::TestCase
       post = setup_post('2013-12-20-properties.text')
 
       attrs = {
-        categories: %w(foo bar baz),
+        categories: %w(foo bar baz MixedCase),
         content: "All the properties.\n\nPlus an excerpt.\n",
         date: Time.new(2013, 12, 20),
-        dir: "/foo/bar/baz/2013/12/20",
+        dir: "/foo/bar/baz/mixedcase/2013/12/20",
         excerpt: "All the properties.\n\n",
         foo: 'bar',
-        id: "/foo/bar/baz/2013/12/20/properties",
+        id: "/foo/bar/baz/mixedcase/2013/12/20/properties",
         layout: 'default',
         name: nil,
         path: "_posts/2013-12-20-properties.text",
@@ -48,7 +47,7 @@ class TestPost < Test::Unit::TestCase
         published: nil,
         tags: %w(ay bee cee),
         title: 'Properties Post',
-        url: "/foo/bar/baz/2013/12/20/properties.html"
+        url: "/foo/bar/baz/mixedcase/2013/12/20/properties.html"
       }
 
       attrs.each do |attr, val|
@@ -63,8 +62,8 @@ class TestPost < Test::Unit::TestCase
         @post = Post.allocate
         @post.site = @site
 
-        @real_file = "2008-10-18-foo-bar.textile"
-        @fake_file = "2008-09-09-foo-bar.textile"
+        @real_file = "2008-10-18-foo-bar.markdown"
+        @fake_file = "2008-09-09-foo-bar.markdown"
         @source = source_dir('_posts')
       end
 
@@ -74,7 +73,7 @@ class TestPost < Test::Unit::TestCase
 
         assert_equal Time.parse("2008-09-09"), @post.date
         assert_equal "foo-bar", @post.slug
-        assert_equal ".textile", @post.ext
+        assert_equal ".markdown", @post.ext
         assert_equal "/2008/09/09", @post.dir
         assert_equal "/2008/09/09/foo-bar", @post.id
       end
@@ -83,14 +82,14 @@ class TestPost < Test::Unit::TestCase
         post = Post.allocate
         post.categories = ['foo']
         post.site = @site
-        post.process("cat1/2008-09-09-foo-bar.textile")
+        post.process("cat1/2008-09-09-foo-bar.markdown")
         assert_equal 1, post.categories.size
         assert_equal "foo", post.categories[0]
 
         post = Post.allocate
         post.categories = ['foo', 'bar']
         post.site = @site
-        post.process("cat2/CAT3/2008-09-09-foo-bar.textile")
+        post.process("cat2/CAT3/2008-09-09-foo-bar.markdown")
         assert_equal 2, post.categories.size
         assert_equal "foo", post.categories[0]
         assert_equal "bar", post.categories[1]
@@ -104,8 +103,8 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "raise a good error on invalid post date" do
-        assert_raise Jekyll::Errors::FatalException do
-          @post.process("2009-27-03-foo-bar.textile")
+        assert_raises Jekyll::Errors::FatalException do
+          @post.process("2009-27-03-foo-bar.markdown")
         end
       end
 
@@ -132,7 +131,7 @@ class TestPost < Test::Unit::TestCase
       end
 
       should "respect permalink in yaml front matter" do
-        file = "2008-12-03-permalinked-post.textile"
+        file = "2008-12-03-permalinked-post.markdown"
         @post.process(file)
         @post.read_yaml(@source, file)
 
@@ -231,7 +230,7 @@ class TestPost < Test::Unit::TestCase
 
         context "with specified layout of nil" do
           setup do
-            file = '2013-01-12-nil-layout.textile'
+            file = '2013-01-12-nil-layout.markdown'
             @post = setup_post(file)
             @post.process(file)
           end
@@ -256,14 +255,39 @@ class TestPost < Test::Unit::TestCase
 
         context "with space (categories)" do
           setup do
-            @post.categories << "French cuisine"
-            @post.categories << "Belgian beer"
+            @post.categories << "french cuisine"
+            @post.categories << "belgian beer"
             @post.process(@fake_file)
           end
 
           should "process the url correctly" do
             assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
-            assert_equal "/French%20cuisine/Belgian%20beer/2008/09/09/foo-bar.html", @post.url
+            assert_equal "/french%20cuisine/belgian%20beer/2008/09/09/foo-bar.html", @post.url
+          end
+        end
+
+        context "with mixed case (category)" do
+          setup do
+            @post.categories << "MixedCase"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/mixedcase/2008/09/09/foo-bar.html", @post.url
+          end
+        end
+
+        context "with duplicated mixed case (categories)" do
+          setup do
+            @post.categories << "MixedCase"
+            @post.categories << "Mixedcase"
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/:categories/:year/:month/:day/:title.html", @post.template
+            assert_equal "/mixedcase/2008/09/09/foo-bar.html", @post.url
           end
         end
 
@@ -342,13 +366,13 @@ class TestPost < Test::Unit::TestCase
         @post.read_yaml(@source, @real_file)
 
         assert_equal({"title" => "Foo Bar", "layout" => "default"}, @post.data)
-        assert_equal "h1. {{ page.title }}\n\nBest *post* ever", @post.content
+        assert_equal "# {{ page.title }}\n\nBest **post** ever", @post.content
       end
 
-      should "transform textile" do
+      should "transform markdown" do
         @post.process(@real_file)
         @post.read_yaml(@source, @real_file)
-        assert_equal "<h1>{{ page.title }}</h1>\n<p>Best <strong>post</strong> ever</p>", @post.transform
+        assert_equal "<h1 id=\"pagetitle-\">{{ page.title }}</h1>\n\n<p>Best <strong>post</strong> ever</p>", @post.transform.strip
       end
 
       context "#excerpt" do
@@ -397,6 +421,22 @@ class TestPost < Test::Unit::TestCase
           end
         end
 
+        context "with page's excerpt_separator setting" do
+          setup do
+            file = "2015-01-08-post-excerpt-separator.markdown"
+
+            @post.process(file)
+            @post.read_yaml(@source, file)
+            @post.transform
+          end
+
+          should "respect given separator" do
+            assert @post.excerpt.include?("First paragraph"), "contains first paragraph"
+            assert @post.excerpt.include?("Second paragraph"), "contains second paragraph"
+            assert !@post.excerpt.include?("Third paragraph"), "does not contains third paragraph"
+          end
+        end
+
         context "with custom excerpt" do
           setup do
             file = "2013-04-11-custom-excerpt.markdown"
@@ -420,10 +460,9 @@ class TestPost < Test::Unit::TestCase
     context "when in a site" do
       setup do
         clear_dest
-        stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
-        @site = Site.new(Jekyll.configuration)
-        @site.posts = [setup_post('2008-02-02-published.textile'),
-                       setup_post('2009-01-27-categories.textile')]
+        @site = fixture_site
+        @site.posts = [setup_post('2008-02-02-published.markdown'),
+                       setup_post('2009-01-27-categories.markdown')]
       end
 
       should "have next post" do
@@ -445,34 +484,34 @@ class TestPost < Test::Unit::TestCase
 
     context "initializing posts" do
       should "recognize date in yaml" do
-        post = setup_post("2010-01-09-date-override.textile")
+        post = setup_post("2010-01-09-date-override.markdown")
         do_render(post)
         assert_equal Time, post.date.class
         assert_equal Time, post.to_liquid["date"].class
         assert_equal "/2010/01/10/date-override.html", post.url
-        assert_equal "<p>Post with a front matter date</p>\n<p>10 Jan 2010</p>", post.output
+        assert_equal "<p>Post with a front matter date</p>\n\n<p>10 Jan 2010</p>", post.output.strip
       end
 
       should "recognize time in yaml" do
-        post = setup_post("2010-01-09-time-override.textile")
+        post = setup_post("2010-01-09-time-override.markdown")
         do_render(post)
         assert_equal Time, post.date.class
         assert_equal Time, post.to_liquid["date"].class
         assert_equal "/2010/01/10/time-override.html", post.url
-        assert_equal "<p>Post with a front matter time</p>\n<p>10 Jan 2010</p>", post.output
+        assert_equal "<p>Post with a front matter time</p>\n\n<p>10 Jan 2010</p>", post.output.strip
       end
 
       should "recognize time with timezone in yaml" do
-        post = setup_post("2010-01-09-timezone-override.textile")
+        post = setup_post("2010-01-09-timezone-override.markdown")
         do_render(post)
         assert_equal Time, post.date.class
         assert_equal Time, post.to_liquid["date"].class
         assert_equal "/2010/01/10/timezone-override.html", post.url
-        assert_equal "<p>Post with a front matter time with timezone</p>\n<p>10 Jan 2010</p>", post.output
+        assert_equal "<p>Post with a front matter time with timezone</p>\n\n<p>10 Jan 2010</p>", post.output.strip
       end
 
       should "to_liquid prioritizes post attributes over data" do
-        post = setup_post("2010-01-16-override-data.textile")
+        post = setup_post("2010-01-16-override-data.markdown")
         assert_equal Array, post.tags.class
         assert_equal Array, post.to_liquid["tags"].class
         assert_equal Time, post.date.class
@@ -484,69 +523,75 @@ class TestPost < Test::Unit::TestCase
         assert_gets_called = false
         klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
         klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
-        post = klass.new(@site, source_dir, '', "2008-02-02-published.textile")
+        post = klass.new(@site, source_dir, '', "2008-02-02-published.markdown")
         do_render(post)
 
         assert assert_gets_called, 'assert_gets_called did not get called on post.'
       end
 
       should "recognize category in yaml" do
-        post = setup_post("2009-01-27-category.textile")
+        post = setup_post("2009-01-27-category.markdown")
         assert post.categories.include?('foo')
       end
 
       should "recognize several categories in yaml" do
-        post = setup_post("2009-01-27-categories.textile")
+        post = setup_post("2009-01-27-categories.markdown")
         assert post.categories.include?('foo')
         assert post.categories.include?('bar')
         assert post.categories.include?('baz')
       end
 
       should "recognize empty category in yaml" do
-        post = setup_post("2009-01-27-empty-category.textile")
+        post = setup_post("2009-01-27-empty-category.markdown")
         assert_equal [], post.categories
       end
 
       should "recognize empty categories in yaml" do
-        post = setup_post("2009-01-27-empty-categories.textile")
+        post = setup_post("2009-01-27-empty-categories.markdown")
         assert_equal [], post.categories
       end
 
       should "recognize number category in yaml" do
-        post = setup_post("2013-05-10-number-category.textile")
+        post = setup_post("2013-05-10-number-category.markdown")
         assert post.categories.include?('2013')
         assert !post.categories.include?(2013)
       end
 
+      should "recognize mixed case category in yaml" do
+        post = setup_post("2014-07-05-mixed-case-category.markdown")
+        assert post.categories.include?('MixedCase')
+        assert !post.categories.include?('mixedcase')
+      end
+
       should "recognize tag in yaml" do
-        post = setup_post("2009-05-18-tag.textile")
+        post = setup_post("2009-05-18-tag.markdown")
         assert post.tags.include?('code')
       end
 
       should "recognize tags in yaml" do
-        post = setup_post("2009-05-18-tags.textile")
+        post = setup_post("2009-05-18-tags.markdown")
         assert post.tags.include?('food')
         assert post.tags.include?('cooking')
         assert post.tags.include?('pizza')
       end
 
       should "recognize empty tag in yaml" do
-        post = setup_post("2009-05-18-empty-tag.textile")
+        post = setup_post("2009-05-18-empty-tag.markdown")
         assert_equal [], post.tags
       end
 
       should "recognize empty tags in yaml" do
-        post = setup_post("2009-05-18-empty-tags.textile")
+        post = setup_post("2009-05-18-empty-tags.markdown")
         assert_equal [], post.tags
       end
 
       should "allow no yaml" do
-        post = setup_post("2009-06-22-no-yaml.textile")
+        post = setup_post("2009-06-22-no-yaml.markdown")
         assert_equal "No YAML.", post.content
       end
 
       should "allow empty yaml" do
-        post = setup_post("2009-06-22-empty-yaml.textile")
+        post = setup_post("2009-06-22-empty-yaml.markdown")
         assert_equal "Empty YAML.", post.content
       end
 
@@ -556,13 +601,13 @@ class TestPost < Test::Unit::TestCase
         end
 
         should "render properly" do
-          post = setup_post("2008-10-18-foo-bar.textile")
+          post = setup_post("2008-10-18-foo-bar.markdown")
           do_render(post)
-          assert_equal "<<< <h1>Foo Bar</h1>\n<p>Best <strong>post</strong> ever</p> >>>", post.output
+          assert_equal "<<< <h1 id=\"foo-bar\">Foo Bar</h1>\n\n<p>Best <strong>post</strong> ever</p>\n >>>", post.output
         end
 
         should "write properly" do
-          post = setup_post("2008-10-18-foo-bar.textile")
+          post = setup_post("2008-10-18-foo-bar.markdown")
           do_render(post)
           post.write(dest_dir)
 
@@ -590,9 +635,23 @@ class TestPost < Test::Unit::TestCase
                                         'escape-+ %20[].html'))
         end
 
+        should "write properly when category has different letter case" do
+          %w(2014-07-05-mixed-case-category.markdown 2014-07-05-another-mixed-case-category.markdown).each do |file|
+            post = setup_post(file)
+            do_render(post)
+            post.write(dest_dir)
+          end
+
+          assert File.directory?(dest_dir)
+          assert File.exist?(File.join(dest_dir, 'mixedcase', '2014', '07', '05',
+                                        'mixed-case-category.html'))
+          assert File.exist?(File.join(dest_dir, 'mixedcase', '2014', '07', '05',
+                                        'another-mixed-case-category.html'))
+        end
+
         should "write properly without html extension" do
-          post = setup_post("2008-10-18-foo-bar.textile")
-          post.site.permalink_style = ":title"
+          post = setup_post("2008-10-18-foo-bar.markdown")
+          post.site.permalink_style = ":title/"
           do_render(post)
           post.write(dest_dir)
 
@@ -600,48 +659,66 @@ class TestPost < Test::Unit::TestCase
           assert File.exist?(File.join(dest_dir, 'foo-bar', 'index.html'))
         end
 
+        should "write properly with extensionless site permalink" do
+          post = setup_post("2008-10-18-foo-bar.markdown")
+          post.site.permalink_style = ":title"
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exist?(File.join(dest_dir, 'foo-bar.html'))
+        end
+
+        should "write properly with extensionless post permalink" do
+          post = setup_post("2015-02-20-extensionless-permalink.markdown")
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exist?(File.join(dest_dir, 'extensionless-permalink.html'))
+          assert_equal "<p>/extensionless-permalink</p>\n", post.content
+        end
+
         should "insert data" do
-          post = setup_post("2008-11-21-complex.textile")
+          post = setup_post("2008-11-21-complex.markdown")
           do_render(post)
 
-          assert_equal "<<< <p>url: /2008/11/21/complex.html<br />\ndate: #{Time.parse("2008-11-21")}<br />\nid: /2008/11/21/complex</p> >>>", post.output
+          assert_equal "<<< <p>url: /2008/11/21/complex.html\ndate: #{Time.parse("2008-11-21")}\nid: /2008/11/21/complex</p>\n >>>", post.output
         end
 
         should "include templates" do
           post = setup_post("2008-12-13-include.markdown")
-          post.site.instance_variable_set(:@source, File.join(File.dirname(__FILE__), 'source'))
           do_render(post)
 
           assert_equal "<<< <hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n\n<p>This <em>is</em> cool</p>\n >>>", post.output
         end
 
         should "render date specified in front matter properly" do
-          post = setup_post("2010-01-09-date-override.textile")
+          post = setup_post("2010-01-09-date-override.markdown")
           do_render(post)
 
-          assert_equal "<p>Post with a front matter date</p>\n<p>10 Jan 2010</p>", post.output
+          assert_equal "<p>Post with a front matter date</p>\n\n<p>10 Jan 2010</p>", post.output.strip
         end
 
         should "render time specified in front matter properly" do
-          post = setup_post("2010-01-09-time-override.textile")
+          post = setup_post("2010-01-09-time-override.markdown")
           do_render(post)
 
-          assert_equal "<p>Post with a front matter time</p>\n<p>10 Jan 2010</p>", post.output
+          assert_equal "<p>Post with a front matter time</p>\n\n<p>10 Jan 2010</p>", post.output.strip
         end
 
       end
     end
 
     should "generate categories and topics" do
-      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.textile')
+      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.markdown')
       assert_equal ['foo'], post.categories
     end
   end
 
   context "converter file extension settings" do
     setup do
-      stub(Jekyll).configuration { Jekyll::Configuration::DEFAULTS }
-      @site = Site.new(Jekyll.configuration)
+      @site = fixture_site
     end
 
     should "process .md as markdown under default configuration" do
@@ -680,41 +757,31 @@ class TestPost < Test::Unit::TestCase
     should "process .Rmd under text if it is not in the markdown config" do
       @site.config['markdown_ext'] = 'markdown,mkd,md,text'
       post = setup_post '2014-11-24-Rmd-extension.Rmd'
+      assert_equal 1, post.converters.size
       conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Identity
-    end
-
-    should "process .text as textile under alternate configuration" do
-      @site.config['textile_ext'] = 'textile,text'
-      post = setup_post '2011-04-12-text-extension.text'
-      conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Textile
+      assert conv.kind_of?(Jekyll::Converters::Identity), "The converter for .Rmd should be the Identity converter."
     end
 
   end
 
   context "site config with category" do
     setup do
-      config = site_configuration({
-        'defaults' => [
-          'scope' => {
-            'path' => ''
-          },
-          'values' => {
-            'category' => 'article'
-          }
-        ]
-      })
-      @site = Site.new(config)
+      front_matter_defaults = {
+        'defaults' => [{
+          'scope' =>  { 'path' => '' },
+          'values' => { 'category' => 'article' }
+        }]
+      }
+      @site = fixture_site(front_matter_defaults)
     end
 
     should "return category if post does not specify category" do
-      post = setup_post("2009-01-27-no-category.textile")
+      post = setup_post("2009-01-27-no-category.markdown")
       assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
     end
 
     should "override site category if set on post" do
-      post = setup_post("2009-01-27-category.textile")
+      post = setup_post("2009-01-27-category.markdown")
       assert post.categories.include?('foo'), "Expected post.categories to include 'foo' but did not."
       assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
     end
@@ -722,26 +789,22 @@ class TestPost < Test::Unit::TestCase
 
   context "site config with categories" do
     setup do
-      config = site_configuration({
-        'defaults' => [
-          'scope' => {
-            'path' => ''
-          },
-          'values' => {
-            'categories' => ['article']
-          }
-        ]
-      })
-      @site = Site.new(config)
+      front_matter_defaults = {
+        'defaults' => [{
+          'scope' =>  { 'path' => '' },
+          'values' => { 'categories' => ['article'] }
+        }]
+      }
+      @site = fixture_site(front_matter_defaults)
     end
 
     should "return categories if post does not specify categories" do
-      post = setup_post("2009-01-27-no-category.textile")
+      post = setup_post("2009-01-27-no-category.markdown")
       assert post.categories.include?('article'), "Expected post.categories to include 'article' but did not."
     end
 
     should "override site categories if set on post" do
-      post = setup_post("2009-01-27-categories.textile")
+      post = setup_post("2009-01-27-categories.markdown")
       ['foo', 'bar', 'baz'].each do |category|
         assert post.categories.include?(category), "Expected post.categories to include '#{category}' but did not."
       end

@@ -35,16 +35,16 @@
         color: $text-color;
         line-height: $base-line-height;
 
-        // Gaps between nav items, but not on the first one
-        &:not(:first-child) {
-            margin-left: 20px;
+        // Gaps between nav items, but not on the last one
+        &:not(:last-child) {
+            margin-right: 20px;
         }
     }
 
     @include media-query($on-palm) {
         position: absolute;
         top: 9px;
-        right: 30px;
+        right: $spacing-unit / 2;
         background-color: $background-color;
         border: 1px solid $grey-color-light;
         border-radius: 5px;
@@ -82,6 +82,11 @@
         .page-link {
             display: block;
             padding: 5px 10px;
+
+            &:not(:last-child) {
+                margin-right: 0;
+            }
+            margin-left: 20px;
         }
     }
 }

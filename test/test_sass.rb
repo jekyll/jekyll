@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestSass < Test::Unit::TestCase
+class TestSass < JekyllUnitTest
   context "importing partials" do
     setup do
       @site = Jekyll::Site.new(Jekyll.configuration({
@@ -16,11 +16,11 @@ class TestSass < Test::Unit::TestCase
     end
 
     should "register the SCSS converter" do
-      assert !!@site.getConverterImpl(Jekyll::Converters::Scss), "SCSS converter implementation should exist."
+      assert !!@site.find_converter_instance(Jekyll::Converters::Scss), "SCSS converter implementation should exist."
     end
 
     should "register the Sass converter" do
-      assert !!@site.getConverterImpl(Jekyll::Converters::Sass), "Sass converter implementation should exist."
+      assert !!@site.find_converter_instance(Jekyll::Converters::Sass), "Sass converter implementation should exist."
     end
   end
 end

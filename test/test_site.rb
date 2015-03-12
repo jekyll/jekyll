@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestSite < Test::Unit::TestCase
+class TestSite < JekyllUnitTest
   context "configuring sites" do
     should "have an array for plugins by default" do
       site = Site.new(Jekyll::Configuration::DEFAULTS)
@@ -71,7 +71,7 @@ class TestSite < Test::Unit::TestCase
       @site = Site.new(site_configuration)
       @site.read
       @site.generate
-      assert_not_equal 0, @site.pages.size
+      refute_equal 0, @site.pages.size
       assert_equal 'hi', @site.file_read_opts[:secret_message]
     end
 
@@ -99,6 +99,7 @@ class TestSite < Test::Unit::TestCase
     should "write only modified static files" do
       clear_dest
       StaticFile.reset_cache
+      @site.regenerator.clear
 
       @site.process
       some_static_file = @site.static_files[0].path
@@ -117,7 +118,7 @@ class TestSite < Test::Unit::TestCase
       sleep 1
       @site.process
       mtime3 = File.stat(dest).mtime.to_i
-      assert_not_equal mtime2, mtime3 # must be regenerated!
+      refute_equal mtime2, mtime3 # must be regenerated!
 
       sleep 1
       @site.process
@@ -128,9 +129,9 @@ class TestSite < Test::Unit::TestCase
     should "write static files if not modified but missing in destination" do
       clear_dest
       StaticFile.reset_cache
+      @site.regenerator.clear
 
       @site.process
-      some_static_file = @site.static_files[0].path
       dest = File.expand_path(@site.static_files[0].destination(@site.dest))
       mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
 
@@ -142,16 +143,17 @@ class TestSite < Test::Unit::TestCase
 
       # simulate destination file deletion
       File.unlink dest
+      refute File.exist?(dest)
 
       sleep 1
       @site.process
       mtime3 = File.stat(dest).mtime.to_i
-      assert_not_equal mtime2, mtime3 # must be regenerated and differ!
+      assert_equal mtime2, mtime3 # must be regenerated and with original mtime!
 
       sleep 1
       @site.process
       mtime4 = File.stat(dest).mtime.to_i
-      assert_equal mtime3, mtime4 # no modifications, so must be the same
+      assert_equal mtime3, mtime4 # no modifications, so remain the same
     end
 
     should "setup plugins in priority order" do
@@ -160,7 +162,8 @@ class TestSite < Test::Unit::TestCase
     end
 
     should "sort pages alphabetically" do
-      stub.proxy(Dir).entries { |entries| entries.reverse }
+      method = Dir.method(:entries)
+      allow(Dir).to receive(:entries) { |*args, &block| method.call(*args, &block).reverse }
       @site.process
       # files in symlinked directories may appear twice
       sorted_pages = %w(
@@ -217,7 +220,7 @@ class TestSite < Test::Unit::TestCase
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
-      categories = %w(2013 bar baz category foo z_category publish_test win).sort
+      categories = %w(2013 bar baz category foo z_category MixedCase Mixedcase publish_test win).sort
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
@@ -226,13 +229,13 @@ class TestSite < Test::Unit::TestCase
 
     context 'error handling' do
       should "raise if destination is included in source" do
-        assert_raise Jekyll::Errors::FatalException do
+        assert_raises Jekyll::Errors::FatalException do
           site = Site.new(site_configuration('destination' => source_dir))
         end
       end
 
       should "raise if destination is source" do
-        assert_raise Jekyll::Errors::FatalException do
+        assert_raises Jekyll::Errors::FatalException do
           site = Site.new(site_configuration('destination' => File.join(source_dir, "..")))
         end
       end
@@ -241,6 +244,7 @@ class TestSite < Test::Unit::TestCase
     context 'with orphaned files in destination' do
       setup do
         clear_dest
+        @site.regenerator.clear
         @site.process
         # generate some orphaned files:
         # single file
@@ -306,9 +310,7 @@ class TestSite < Test::Unit::TestCase
 
         custom_processor = "CustomMarkdown"
         s = Site.new(site_configuration('markdown' => custom_processor))
-        assert_nothing_raised do
-          s.process
-        end
+        assert !!s.process
 
         # Do some cleanup, we don't like straggling stuff's.
         Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
@@ -328,8 +330,8 @@ class TestSite < Test::Unit::TestCase
         end
 
         bad_processor = "Custom::Markdown"
-        s = Site.new(site_configuration('markdown' => bad_processor))
-        assert_raise Jekyll::Errors::FatalException do
+        s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
+        assert_raises Jekyll::Errors::FatalException do
           s.process
         end
 
@@ -341,15 +343,13 @@ class TestSite < Test::Unit::TestCase
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
-        assert_nothing_raised do
-          Site.new(site_configuration('markdown' => bad_processor))
-        end
+        assert Site.new(site_configuration('markdown' => bad_processor))
       end
 
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
-        s = Site.new(site_configuration('markdown' => bad_processor))
-        assert_raise Jekyll::Errors::FatalException do
+        s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
+        assert_raises Jekyll::Errors::FatalException do
           s.process
         end
       end
@@ -361,6 +361,16 @@ class TestSite < Test::Unit::TestCase
         site.process
 
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.yaml'))
+
+        assert_equal site.data['members'], file_content
+        assert_equal site.site_payload['site']['data']['members'], file_content
+      end
+
+      should 'load yaml files from extracted method' do
+        site = Site.new(site_configuration)
+        site.process
+
+        file_content = site.read_data_file(source_dir('_data', 'members.yaml'))
 
         assert_equal site.data['members'], file_content
         assert_equal site.site_payload['site']['data']['members'], file_content
@@ -418,7 +428,9 @@ class TestSite < Test::Unit::TestCase
 
     context "manipulating the Jekyll environment" do
       setup do
-        @site = Site.new(site_configuration)
+        @site = Site.new(site_configuration({
+          'full_rebuild' => true
+        }))
         @site.process
         @page = @site.pages.find { |p| p.name == "environment.html" }
       end
@@ -430,7 +442,9 @@ class TestSite < Test::Unit::TestCase
       context "in production" do
         setup do
           ENV["JEKYLL_ENV"] = "production"
-          @site = Site.new(site_configuration)
+          @site = Site.new(site_configuration({
+            'full_rebuild' => true
+          }))
           @site.process
           @page = @site.pages.find { |p| p.name == "environment.html" }
         end

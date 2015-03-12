@@ -15,5 +15,3 @@ greatest code a spin without having to clone a repository from git.
 Please take this prerelease for a spin and [let us
 know](https://github.com/jekyll/jekyll/issues/new) if you run into any
 issues!
-
-

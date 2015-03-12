@@ -1,15 +1,13 @@
 ---
 layout: docs
 title: Collections
-prev_section: variables
-next_section: datafiles
 permalink: /docs/collections/
 ---
 
 <div class="note warning">
   <h5>Collections support is unstable and may change</h5>
   <p>
-    This is an experimental feature and that the API may likely change until the feature stabilizes.
+    This is an experimental feature and the API may change until the feature stabilizes.
   </p>
 </div>
 
@@ -37,7 +35,7 @@ collections:
 ### Step 2: Add your content
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add documents.
-YAML Front Matter is read in as data if it exists, if not, then everything is just stuck in the Document's `content` attribute.
+YAML Front Matter is read in as data if it exists, and everything after it is stuck in the Document's `content` attribute. If no YAML Front Matter is provided, Jekyll will not generate the file in your collection.
 
 Note: the folder must be named identically to the collection you defined in your `_config.yml` file, with the addition of the preceding `_` character.
 
@@ -211,8 +209,7 @@ In addition to any YAML Front Matter provided in the document's corresponding fi
       </td>
       <td>
         <p>
-          The (unrendered) content of the document. If no YAML Front Matter is provided,
-          this is the entirety of the file contents. If YAML Front Matter
+          The (unrendered) content of the document. If no YAML Front Matter is provided, Jekyll will not generate the file in your collection. If YAML Front Matter
           is used, then this is all the contents of the file after the terminating
           `---` of the front matter.
         </p>

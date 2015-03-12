@@ -63,16 +63,12 @@ module Jekyll
     #
     # Returns the template String.
     def template
-      if site.permalink_style == :pretty
-        if index? && html?
-          "/:path/"
-        elsif html?
-          "/:path/:basename/"
-        else
-          "/:path/:basename:output_ext"
-        end
-      else
+      if !html?
         "/:path/:basename:output_ext"
+      elsif index?
+        "/:path/"
+      else
+        Utils.add_permalink_suffix("/:path/:basename", site.permalink_style)
       end
     end
 
@@ -141,7 +137,8 @@ module Jekyll
     # Returns the destination file path String.
     def destination(dest)
       path = site.in_dest_dir(dest, URL.unescape_path(url))
-      path = File.join(path, "index.html") if url =~ /\/$/
+      path = File.join(path, "index.html") if url.end_with?("/")
+      path << output_ext unless path.end_with?(output_ext)
       path
     end
 

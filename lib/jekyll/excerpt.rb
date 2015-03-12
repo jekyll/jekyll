@@ -105,8 +105,7 @@ module Jekyll
     #
     # Returns excerpt String
     def extract_excerpt(post_content)
-      separator     = site.config['excerpt_separator']
-      head, _, tail = post_content.to_s.partition(separator)
+      head, _, tail = post_content.to_s.partition(post.excerpt_separator)
 
       "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
     end

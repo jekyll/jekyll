@@ -20,8 +20,6 @@ Feature: Embed filters
     And I have the following post:
       | title       | date       | layout  | content                                     |
       | Star & Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
-
-
     And I have a default layout that contains "{{ page.title | xml_escape }}"
     When I run jekyll build
     Then the _site directory should exist
@@ -33,7 +31,7 @@ Feature: Embed filters
     And I have the following post:
       | title     | date       | layout  | content                                     |
       | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
-    And I have a default layout that contains "{{ content | xml_escape }}"
+    And I have a default layout that contains "{{ content | number_of_words }}"
     When I run jekyll build
     Then the _site directory should exist
     And I should see "7" in "_site/2009/03/27/star-wars.html"
@@ -49,13 +47,13 @@ Feature: Embed filters
     Then the _site directory should exist
     And I should see "scifi, movies, and force" in "_site/2009/03/27/star-wars.html"
 
-  Scenario: Textilize a given string
+  Scenario: Markdownify a given string
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
       | title     | date       | layout  | content                                     |
       | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
-    And I have a default layout that contains "By {{ '_Obi-wan_' | textilize }}"
+    And I have a default layout that contains "By {{ '_Obi-wan_' | markdownify }}"
     When I run jekyll build
     Then the _site directory should exist
     And I should see "By <p><em>Obi-wan</em></p>" in "_site/2009/03/27/star-wars.html"

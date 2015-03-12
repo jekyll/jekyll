@@ -40,7 +40,7 @@ module Jekyll
 
           s.mount(
             options['baseurl'],
-            WEBrick::HTTPServlet::FileHandler,
+            custom_file_handler,
             destination,
             file_handler_options
           )
@@ -50,7 +50,7 @@ module Jekyll
           if options['detach'] # detach the server
             pid = Process.fork { s.start }
             Process.detach(pid)
-            Jekyll.logger.info "Server detached with pid '#{pid}'.", "Run `kill -9 #{pid}' to stop the server."
+            Jekyll.logger.info "Server detached with pid '#{pid}'.", "Run `pkill -f jekyll' or `kill -9 #{pid}' to stop the server."
           else # create a new server thread, then join it with current terminal
             t = Thread.new { s.start }
             trap("INT") { s.shutdown }
@@ -97,6 +97,21 @@ module Jekyll
           end
 
           opts
+        end
+
+        # Custom WEBrick FileHandler servlet for serving "/file.html" at "/file"
+        # when no exact match is found. This mirrors the behavior of GitHub
+        # Pages and many static web server configs.
+        def custom_file_handler
+          Class.new WEBrick::HTTPServlet::FileHandler do
+            def search_file(req, res, basename)
+              if file = super
+                file
+              else
+                super(req, res, "#{basename}.html")
+              end
+            end
+          end
         end
 
         def start_callback(detached)

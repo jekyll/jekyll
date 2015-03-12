@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestRedcarpet < Test::Unit::TestCase
+class TestRedcarpet < JekyllUnitTest
   context "redcarpet" do
     setup do
       @config = {

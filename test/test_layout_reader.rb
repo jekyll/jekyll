@@ -1,12 +1,10 @@
 require 'helper'
 
-class TestLayoutReader < Test::Unit::TestCase
+class TestLayoutReader < JekyllUnitTest
   context "reading layouts" do
     setup do
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
-      end
-      @site = Site.new(Jekyll.configuration)
+      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+      @site = fixture_site config
     end
 
     should "read layouts" do
@@ -22,8 +20,8 @@ class TestLayoutReader < Test::Unit::TestCase
 
     context "when a _layouts directory exists in CWD" do
       setup do
-        stub(File).directory? { true }
-        stub(Dir).pwd { source_dir("blah") }
+        allow(File).to receive(:directory?).and_return(true)
+        allow(Dir).to receive(:pwd).and_return(source_dir("blah"))
       end
 
       should "know to use the layout directory relative to CWD" do

@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestEntryFilter < Test::Unit::TestCase
+class TestEntryFilter < JekyllUnitTest
   context "Filtering entries" do
     setup do
       @site = Site.new(site_configuration)
@@ -48,13 +48,13 @@ class TestEntryFilter < Test::Unit::TestCase
 
     should "filter symlink entries when safe mode enabled" do
       site = Site.new(site_configuration('safe' => true))
-      stub(File).symlink?('symlink.js') {true}
+      allow(File).to receive(:symlink?).with('symlink.js').and_return(true)
       files = %w[symlink.js]
       assert_equal [], site.filter_entries(files)
     end
 
     should "not filter symlink entries when safe mode disabled" do
-      stub(File).symlink?('symlink.js') {true}
+      allow(File).to receive(:symlink?).with('symlink.js').and_return(true)
       files = %w[symlink.js]
       assert_equal files, @site.filter_entries(files)
     end
@@ -71,8 +71,8 @@ class TestEntryFilter < Test::Unit::TestCase
       site = Site.new(site_configuration)
 
       site.read_directories("symlink-test")
-      assert_not_equal [], site.pages
-      assert_not_equal [], site.static_files
+      refute_equal [], site.pages
+      refute_equal [], site.static_files
     end
   end
 

@@ -11,6 +11,7 @@ module Jekyll
                   :gems, :plugin_manager
 
     attr_accessor :converters, :generators
+    attr_reader   :regenerator
 
     # Public: Initialize a new Site.
     #
@@ -26,6 +27,9 @@ module Jekyll
       # Source and destination may not be changed after the site has been created.
       @source              = File.expand_path(config['source']).freeze
       @dest                = File.expand_path(config['destination']).freeze
+
+      # Initialize incremental regenerator
+      @regenerator = Regenerator.new(self)
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
@@ -183,6 +187,7 @@ module Jekyll
       end
 
       pages.sort_by!(&:name)
+      static_files.sort_by!(&:relative_path)
     end
 
     # Read all the files in <source>/<dir>/_posts and create a new Post
@@ -253,13 +258,23 @@ module Jekyll
         if File.directory?(path)
           read_data_to(path, data[key] = {})
         else
-          case File.extname(path).downcase
-          when '.csv'
-            data[key] = CSV.read(path, :headers => true).map(&:to_hash)
-          else
-            data[key] = SafeYAML.load_file(path)
-          end
+          data[key] = read_data_file(path)
         end
+      end
+    end
+
+    # Determines how to read a data file.
+    #
+    # Returns the contents of the data file.
+    def read_data_file(path)
+      case File.extname(path).downcase
+      when '.csv'
+        CSV.read(path, {
+          :headers => true,
+          :encoding => config['encoding']
+        }).map(&:to_hash)
+      else
+        SafeYAML.load_file(path)
       end
     end
 
@@ -287,17 +302,22 @@ module Jekyll
     def render
       relative_permalinks_deprecation_method
 
+      payload = site_payload
       collections.each do |label, collection|
         collection.docs.each do |document|
-          document.output = Jekyll::Renderer.new(self, document).run
+          if regenerator.regenerate?(document)
+            document.output = Jekyll::Renderer.new(self, document, payload).run
+          end
         end
       end
 
       payload = site_payload
       [posts, pages].flatten.each do |page_or_post|
-        page_or_post.render(layouts, payload)
+        if regenerator.regenerate?(page_or_post)
+          page_or_post.render(layouts, payload)
+        end
       end
-    rescue Errno::ENOENT => e
+    rescue Errno::ENOENT
       # ignore missing layout dir
     end
 
@@ -312,7 +332,10 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item| item.write(dest) }
+      each_site_file { |item|
+        item.write(dest) if regenerator.regenerate?(item)
+      }
+      regenerator.write_metadata
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -377,7 +400,7 @@ module Jekyll
             "time"         => time,
             "posts"        => posts.sort { |a, b| b <=> a },
             "pages"        => pages,
-            "static_files" => static_files.sort { |a, b| a.relative_path <=> b.relative_path },
+            "static_files" => static_files,
             "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
             "categories"   => post_attr_hash('categories'),
             "tags"         => post_attr_hash('tags'),
@@ -405,13 +428,8 @@ module Jekyll
     # klass - The Class of the Converter to fetch.
     #
     # Returns the Converter instance implementing the given Converter.
-    def getConverterImpl(klass)
-      matches = converters.select { |c| c.class == klass }
-      if impl = matches.first
-        impl
-      else
-        raise "Converter implementation not found for #{klass}"
-      end
+    def find_converter_instance(klass)
+      converters.find { |c| c.class == klass } || proc { raise "No converter for #{klass}" }.call
     end
 
     # Create array of instances of the subclasses of the class or module
@@ -453,7 +471,7 @@ module Jekyll
 
     def relative_permalinks_deprecation_method
       if config['relative_permalinks'] && has_relative_page?
-        Jekyll.logger.warn "Deprecation:", "Starting in 2.0, permalinks for pages" +
+        Jekyll::Deprecator.deprecation_message "Since v2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
                                             " directory. Check http://jekyllrb.com/docs/upgrading/"+
@@ -483,6 +501,17 @@ module Jekyll
       @frontmatter_defaults ||= FrontmatterDefaults.new(self)
     end
 
+    # Whether to perform a full rebuild without incremental regeneration
+    #
+    # Returns a Boolean: true for a full rebuild, false for normal build
+    def full_rebuild?(override = {})
+      override['full_rebuild'] || config['full_rebuild']
+    end
+
+    def publisher
+      @publisher ||= Publisher.new(self)
+    end
+
     private
 
     def has_relative_page?
@@ -499,13 +528,9 @@ module Jekyll
     end
 
     def sanitize_filename(name)
-      name.gsub!(/[^\w\s_-]+/, '')
+      name.gsub!(/[^\w\s-]+/, '')
       name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
       name.gsub(/\s+/, '_')
-    end
-
-    def publisher
-      @publisher ||= Publisher.new(self)
     end
   end
 end

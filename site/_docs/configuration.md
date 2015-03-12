@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Configuration
-prev_section: structure
-next_section: frontmatter
 permalink: /docs/configuration/
 ---
 
@@ -155,9 +153,12 @@ class="flag">flags</code> (specified on the command-line) that control them.
   <h5>Destination folders are cleaned on site builds</h5>
   <p>
     The contents of <code>&lt;destination&gt;</code> are automatically
-    cleaned when the site is built. Files or folders that are not
-    created by your site will be removed.  Do not use an important
-    location for <code>&lt;destination&gt;</code>; instead, use it as
+    cleaned, by default, when the site is built. Files or folders that are not
+    created by your site will be removed. Some files could be retained
+    by specifying them within the <code>&lt;keep_files&gt;</code> configuration directive.
+  </p>
+  <p>
+    Do not use an important location for <code>&lt;destination&gt;</code>; instead, use it as
     a staging area and copy files from there to your web server.
   </p>
 </div>
@@ -387,7 +388,7 @@ defaults:
   -
     scope:
       path: "projects"
-      type: "pages"
+      type: "pages" # previously `page` in Jekyll 2.2.
     values:
       layout: "project" # overrides previous default layout
       author: "Mr. Hyde"
@@ -409,7 +410,7 @@ defaults:
       layout: "default"
 {% endhighlight %}
 
-In this example the `layout` is set to `default` inside the [collection](../collections) with the name `my_collection`.
+In this example the `layout` is set to `default` inside the [collection](../collections/) with the name `my_collection`.
 
 ### Precedence
 
@@ -447,9 +448,9 @@ The `projects/foo_project.md` would have the `layout` set to `foobar` instead of
 
 ## Default Configuration
 
-Jekyll runs with the following configuration options by default. Unless
-alternative settings for these options are explicitly specified in the
-configuration file or on the command-line, Jekyll will run using these options.
+Jekyll runs with the following configuration options by default. Alternative
+settings for these options can be explicitly specified in the configuration
+file or on the command-line.
 
 <div class="note warning">
   <h5>There are two unsupported kramdown options</h5>
@@ -476,7 +477,6 @@ exclude:      []
 keep_files:   [".git", ".svn"]
 encoding:     "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-textile_ext:  "textile"
 
 # Filtering Content
 show_drafts: null
@@ -490,14 +490,14 @@ gems:      []
 
 # Conversion
 markdown:    kramdown
-highlighter: pygments
+highlighter: rouge
 lsi:         false
 excerpt_separator: "\n\n"
 
 # Serving
 detach:  false
 port:    4000
-host:    0.0.0.0
+host:    127.0.0.1
 baseurl: "" # does not include hostname
 
 # Backwards-compatibility
@@ -527,12 +527,12 @@ redcarpet:
   extensions: []
 
 kramdown:
-  auto_ids:      true
-  footnote_nr:   1
-  entity_output: as_char
-  toc_levels:    1..6
-  smart_quotes:  lsquo,rsquo,ldquo,rdquo
-  use_coderay:   false
+  auto_ids:       true
+  footnote_nr:    1
+  entity_output:  as_char
+  toc_levels:     1..6
+  smart_quotes:   lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
 
   coderay:
     coderay_wrap:              div
@@ -541,9 +541,6 @@ kramdown:
     coderay_tab_width:         4
     coderay_bold_every:        10
     coderay_css:               style
-
-redcloth:
-  hard_breaks: true
 {% endhighlight %}
 
 ## Markdown Options

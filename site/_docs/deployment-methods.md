@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Deployment methods
-prev_section: github-pages
-next_section: continuous-integration
 permalink: /docs/deployment-methods/
 ---
 
@@ -93,7 +91,7 @@ Another way to deploy your Jekyll site is to use [Rake](https://github.com/jimwe
 
 ### rsync
 
-Once you’ve generated the `_site` directory, you can easily rsync it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/henrik/henrik.nyh.se/blob/master/tasks/deploy). You’d obviously need to change the values to reflect your site’s details. There is even [a matching TextMate command](http://gist.github.com/214959) that will help you run
+Once you’ve generated the `_site` directory, you can easily rsync it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy). You’d obviously need to change the values to reflect your site’s details. There is even [a matching TextMate command](http://gist.github.com/214959) that will help you run
 this script from within Textmate.
 
 
@@ -109,9 +107,10 @@ If you want to maintain Jekyll inside your existing Rails app, [Jekyll-Admin](ht
 
 ## Amazon S3
 
-If you want to host your site in Amazon S3, you can do so with
-[s3_website](https://github.com/laurilehmijoki/s3_website) application. It will
-push your site to Amazon S3 where it can be served like any web server,
+If you want to host your site in Amazon S3, you can do so by
+using the [s3_website](https://github.com/laurilehmijoki/s3_website)
+application. It will push your site to Amazon S3 where it can be served like
+any web server,
 dynamically scaling to almost unlimited traffic. This approach has the
 benefit of being about the cheapest hosting option available for
 low-volume blogs as you only pay for what you use.

@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Creating pages
-prev_section: drafts
-next_section: variables
 permalink: /docs/pages/
 ---
 
@@ -60,7 +58,7 @@ and associated URLs might look like:
 
 ### Named folders containing index HTML files
 
-There is nothing wrong with the above method, however some people like to keep
+There is nothing wrong with the above method. However, some people like to keep
 their URLs free from things like filename extensions. To achieve clean URLs for
 pages using Jekyll, you simply need to create a folder for each top-level page
 you want, and then place an `index.html` file in each page’s folder. This way

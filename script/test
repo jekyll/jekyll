@@ -4,17 +4,20 @@
 #   script/test
 #   script/test <test_file>
 
+if [ ! -d tmp ]; then
+  mkdir tmp
+fi
+
+if [ -d test/dest ]; then
+  rm -r test/dest
+fi
+
 if [ -z "$1" ]; then
-  TEST_FILES="./test/test_*.rb"
+  TEST_FILES=$(ruby -e "puts Dir.glob('test/test_*.rb')")
 else
   TEST_FILES="$@"
 fi
 
-RAKE_LIB_DIR=$(ruby -e "puts Gem::Specification.find_by_name('rake').gem_dir + '/lib'")
-
 set -x
 
-time bundle exec ruby -I"lib:test" \
-  -I"${RAKE_LIB_DIR}" \
-  "${RAKE_LIB_DIR}/rake/rake_test_loader.rb" \
-  $TEST_FILES
+time bundle exec ruby -Ilib -Itest -rloader $TEST_FILES --profile

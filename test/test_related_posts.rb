@@ -1,13 +1,9 @@
 require 'helper'
 
-class TestRelatedPosts < Test::Unit::TestCase
+class TestRelatedPosts < JekyllUnitTest
   context "building related posts without lsi" do
     setup do
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir,
-                                               'destination' => dest_dir})
-      end
-      @site = Site.new(Jekyll.configuration)
+      @site = fixture_site
     end
 
     should "use the most recent posts for related posts" do
@@ -24,23 +20,17 @@ class TestRelatedPosts < Test::Unit::TestCase
 
   context "building related posts with lsi" do
     setup do
-      stub(Jekyll).configuration do
-        Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir,
-                                               'destination' => dest_dir,
-                                               'lsi' => true})
-      end
-      any_instance_of(Jekyll::RelatedPosts) { |i| stub(i).display }
-      @site = Site.new(Jekyll.configuration)
+      allow_any_instance_of(Jekyll::RelatedPosts).to receive(:display)
+      @site = fixture_site({"lsi" => true})
     end
 
     should "use lsi for the related posts" do
       @site.reset
       @site.read
       require 'classifier-reborn'
-      any_instance_of(::ClassifierReborn::LSI) do |c|
-        stub(c).find_related { @site.posts[-1..-9] }
-        stub(c).build_index
-      end
+      allow_any_instance_of(::ClassifierReborn::LSI).to receive(:find_related).and_return(@site.posts[-1..-9])
+      allow_any_instance_of(::ClassifierReborn::LSI).to receive(:build_index)
+
       assert_equal @site.posts[-1..-9], Jekyll::RelatedPosts.new(@site.posts.last).build
     end
   end

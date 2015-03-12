@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Continuous Integration
-prev_section: deployment-methods
-next_section: troubleshooting
 permalink: /docs/continuous-integration/
 ---
 
@@ -62,7 +60,7 @@ HTML::Proofer.new("./_site").run
 {% endhighlight %}
 
 Options are given as a second argument to `.new`, and are encoded in a
-symbol-keyed Ruby Hash. More information about the configuration options,
+symbol-keyed Ruby Hash. For more information about the configuration options,
 check out `html-proofer`'s README file.
 
 [2]: https://github.com/gjtorikian/html-proofer
@@ -71,7 +69,7 @@ check out `html-proofer`'s README file.
 
 This file is used to configure your Travis builds. Because Jekyll is built
 with Ruby and requires RubyGems to install, we use the Ruby language build
-environment. Below is a sample `.travis.yml` file, and what follows that is
+environment. Below is a sample `.travis.yml` file, followed by
 an explanation of each line.
 
 {% highlight yaml %}
