@@ -115,10 +115,11 @@ Gotchas
 * If you want to bump the gem version, please put that in a separate commit.
   This way, the maintainers can control when the gem gets released.
 * Try to keep your patch(es) based from the latest commit on jekyll/jekyll.
-  The easier it is to apply your work, the less work the maintainers have to do,
-  which is always a good thing.
-* Please don't tag your GitHub issue with \[fix\], \[feature\], etc. The maintainers
-  actively read the issues and will label it once they come across it.
+  The easier it is to apply your work, the less work the maintainers have to
+  do, which is always a good thing.
+* Please don't tag your GitHub issue with \[fix\], \[feature\], etc. The
+  maintainers actively read the issues and will label it once they come across
+  it.
 
 <div class="note">
   <h5>Let us know what could be better!</h5>

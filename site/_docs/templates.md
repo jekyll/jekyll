@@ -405,7 +405,8 @@ You can also use this tag to create a link to a post in Markdown as follows:
 
 ### Gist
 
-Use the `gist` tag to easily embed a GitHub Gist onto your site. This works with public or secret gists:
+Use the `gist` tag to easily embed a GitHub Gist onto your site. This works
+with public or secret gists:
 
 {% highlight text %}
 {% raw %}

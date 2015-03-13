@@ -444,7 +444,9 @@ layout: "foobar"
 The post text goes here...
 {% endhighlight %}
 
-The `projects/foo_project.md` would have the `layout` set to `foobar` instead of `project` and the `author` set to `John Smith` instead of `Mr. Hyde` when the site is built.
+The `projects/foo_project.md` would have the `layout` set to `foobar` instead
+of `project` and the `author` set to `John Smith` instead of `Mr. Hyde` when
+the site is built.
 
 ## Default Configuration
 
@@ -456,8 +458,8 @@ file or on the command-line.
   <h5>There are two unsupported kramdown options</h5>
   <p>
     Please note that both <code>remove_block_html_tags</code> and
-    <code>remove_span_html_tags</code> are currently unsupported in Jekyll due to the
-    fact that they are not included within the kramdown HTML converter.
+    <code>remove_span_html_tags</code> are currently unsupported in Jekyll due
+    to the fact that they are not included within the kramdown HTML converter.
   </p>
 </div>
 
@@ -545,27 +547,47 @@ kramdown:
 
 ## Markdown Options
 
-The various Markdown renderers supported by Jekyll sometimes have extra options available.
+The various Markdown renderers supported by Jekyll sometimes have extra options
+available.
 
 ### Redcarpet
 
-Redcarpet can be configured by providing an `extensions` sub-setting, whose value should be an array of strings. Each string should be the name of one of the `Redcarpet::Markdown` class's extensions; if present in the array, it will set the corresponding extension to `true`.
+Redcarpet can be configured by providing an `extensions` sub-setting, whose
+value should be an array of strings. Each string should be the name of one of
+the `Redcarpet::Markdown` class's extensions; if present in the array, it will
+set the corresponding extension to `true`.
 
 Jekyll handles two special Redcarpet extensions:
 
-- `no_fenced_code_blocks` --- By default, Jekyll sets the `fenced_code_blocks` extension (for delimiting code blocks with triple tildes or triple backticks) to `true`, probably because GitHub's eager adoption of them is starting to make them inescapable. Redcarpet's normal `fenced_code_blocks` extension is inert when used with Jekyll; instead, you can use this inverted version of the extension for disabling fenced code.
+- `no_fenced_code_blocks` --- By default, Jekyll sets the `fenced_code_blocks`
+extension (for delimiting code blocks with triple tildes or triple backticks)
+to `true`, probably because GitHub's eager adoption of them is starting to make
+them inescapable. Redcarpet's normal `fenced_code_blocks` extension is inert
+when used with Jekyll; instead, you can use this inverted version of the
+extension for disabling fenced code.
 
-Note that you can also specify a language for highlighting after the first delimiter:
+Note that you can also specify a language for highlighting after the first
+delimiter:
 
         ```ruby
         # ...ruby code
         ```
 
-With both fenced code blocks and highlighter enabled, this will statically highlight the code; without any syntax highlighter, it will add a `class="LANGUAGE"` attribute to the `<code>` element, which can be used as a hint by various JavaScript code highlighting libraries.
+With both fenced code blocks and highlighter enabled, this will statically
+highlight the code; without any syntax highlighter, it will add a
+`class="LANGUAGE"` attribute to the `<code>` element, which can be used as a
+hint by various JavaScript code highlighting libraries.
 
-- `smart` --- This pseudo-extension turns on SmartyPants, which converts straight quotes to curly quotes and runs of hyphens to em (`---`) and en (`--`) dashes.
+- `smart` --- This pseudo-extension turns on SmartyPants, which converts
+  straight quotes to curly quotes and runs of hyphens to em (`---`) and en (`--`) dashes.
 
-All other extensions retain their usual names from Redcarpet, and no renderer options aside from `smart` can be specified in Jekyll. [A list of available extensions can be found in the Redcarpet README file.][redcarpet_extensions] Make sure you're looking at the README for the right version of Redcarpet: Jekyll currently uses v2.2.x, and extensions like `footnotes` and `highlight` weren't added until after version 3.0.0. The most commonly used extensions are:
+All other extensions retain their usual names from Redcarpet, and no renderer
+options aside from `smart` can be specified in Jekyll. [A list of available
+extensions can be found in the Redcarpet README file.][redcarpet_extensions]
+Make sure you're looking at the README for the right version of
+Redcarpet: Jekyll currently uses v2.2.x, and extensions like `footnotes` and
+`highlight` weren't added until after version 3.0.0. The most commonly used
+extensions are:
 
 - `tables`
 - `no_intra_emphasis`
@@ -575,7 +597,8 @@ All other extensions retain their usual names from Redcarpet, and no renderer op
 
 ### Kramdown
 
-In addition to the defaults mentioned above, you can also turn on recognition of Github Flavored Markdown by passing an `input` option with a value of "GFM".
+In addition to the defaults mentioned above, you can also turn on recognition
+of Github Flavored Markdown by passing an `input` option with a value of "GFM".
 
 For example, in your `_config.yml`:
 
@@ -603,7 +626,8 @@ class Jekyll::Converters::Markdown::MyCustomProcessor
 end
 {% endhighlight %}
 
-Once you've created your class and have it properly setup either as a plugin in the `_plugins` folder or as a gem, specify it in your `_config.yml`:
+Once you've created your class and have it properly setup either as a plugin in
+the `_plugins` folder or as a gem, specify it in your `_config.yml`:
 
 {% highlight yaml %}
 markdown: MyCustomProcessor

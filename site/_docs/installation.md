@@ -11,8 +11,8 @@ describing the issue you encountered and how we might make the process easier.
 
 ### Requirements
 
-Installing Jekyll is easy and straight-forward, but there are a few requirements
-you’ll need to make sure your system has before you start.
+Installing Jekyll is easy and straight-forward, but there are a few
+requirements you’ll need to make sure your system has before you start.
 
 - [Ruby](http://www.ruby-lang.org/en/downloads/) (including development
   headers)
