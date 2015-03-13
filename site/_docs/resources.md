@@ -43,4 +43,6 @@ A guide to implementing a tag cloud and per-tag content pages using Jekyll.
 
 - [Using your Rails layouts in Jekyll](http://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
 
+- [Adding Ajax pagination to Jekyll](https://eduardoboucas.com/blog/2014/11/10/adding-ajax-pagination-to-jekyll.html)
+
 - [Using Jekyll’s Data Files to build a dynamic navbar](http://www.jordanthornquest.com/blog/building-dynamic-navbars-with-jekyll/)
