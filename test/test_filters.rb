@@ -32,7 +32,7 @@ class TestFilters < JekyllUnitTest
     end
 
     should "smartify with simple string" do
-      assert_equal "I’m", @filter.smartify("I'm")
+      assert_equal "I&rsquo;m", @filter.smartify("I'm")
     end
 
     should "sassify with simple string" do

@@ -1,9 +1,20 @@
 require 'uri'
 require 'json'
 require 'date'
+require 'redcarpet'
 
 module Jekyll
   module Filters
+    # Convert plain ASCII characters into their corresponding typographic symbols.
+    #
+    # Example
+    #
+    # smartify('The Files "in" the Computer --- Zoolander')
+    # => "The Files “in” the Computer — Zoolander"
+    def smartify(input)
+      Redcarpet::Render::SmartyPants.render(input)
+    end
+
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.
