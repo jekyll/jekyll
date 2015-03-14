@@ -1,7 +1,6 @@
 require 'uri'
 require 'json'
 require 'date'
-require 'redcarpet'
 
 module Jekyll
   module Filters
@@ -12,7 +11,9 @@ module Jekyll
     # smartify('The Files "in" the Computer --- Zoolander')
     # => "The Files “in” the Computer — Zoolander"
     def smartify(input)
-      Redcarpet::Render::SmartyPants.render(input)
+      site = @context.registers[:site]
+      converter = site.find_converter_instance(Jekyll::Converters::Smartypants)
+      converter.convert(input)
     end
 
     # Convert a Markdown string into HTML output.
