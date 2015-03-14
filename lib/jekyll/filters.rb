@@ -4,6 +4,18 @@ require 'date'
 
 module Jekyll
   module Filters
+    # Convert plain ASCII characters into their corresponding typographic symbols.
+    #
+    # Example
+    #
+    # smartify('The Files "in" the Computer --- Zoolander')
+    # => "The Files “in” the Computer — Zoolander"
+    def smartify(input)
+      site = @context.registers[:site]
+      converter = site.find_converter_instance(Jekyll::Converters::Smartypants)
+      converter.convert(input)
+    end
+
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.
