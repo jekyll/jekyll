@@ -535,6 +535,7 @@ You can find a few useful plugins at the following locations:
 - [Deprecated articles keeper](https://github.com/kzykbys/JekyllPlugins) by [Kazuya Kobayashi](http://blog.kazuya.co/): A simple Jekyll filter which monitor how old an article is.
 - [Jekyll-jalali](https://github.com/mehdisadeghi/jekyll-jalali) by [Mehdi Sadeghi](http://mehdix.ir): A simple Gregorian to Jalali date converter filter.
 - [Jekyll Thumbnail Filter](https://github.com/matallo/jekyll-thumbnail-filter): Related posts thumbnail filter.
+- [Jekyll-Smartify](https://github.com/pathawks/jekyll-smartify): SmartyPants filter. Make &quot;quotes&quot; &ldquo;curly&rdquo;
 
 #### Tags
 
