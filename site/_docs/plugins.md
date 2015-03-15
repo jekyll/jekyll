@@ -25,11 +25,11 @@ having to modify the Jekyll source itself.
 
 You have 3 options for installing plugins:
 
-1. In your site source root, make a `_plugins` directory. Place your plugins here.
-    Any file ending in `*.rb` inside this directory will be loaded before Jekyll
-    generates your site.
-2. In your `_config.yml` file, add a new array with the key `gems` and the values
-    of the gem names of the plugins you'd like to use. An example:
+1. In your site source root, make a `_plugins` directory. Place your plugins
+here. Any file ending in `*.rb` inside this directory will be loaded before
+Jekyll generates your site.
+2. In your `_config.yml` file, add a new array with the key `gems` and the
+values of the gem names of the plugins you'd like to use. An example:
 
         gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
         # This will require each of these gems automatically.
@@ -47,7 +47,8 @@ You have 3 options for installing plugins:
   </h5>
   <p>
     You may use any of the aforementioned plugin options simultaneously in the
-    same site if you so choose. Use of one does not restrict the use of the others.
+    same site if you so choose. Use of one does not restrict the use of the
+    others.
   </p>
 </div>
 
@@ -383,10 +384,10 @@ And we would get something like this on the page:
 
 ### Liquid filters
 
-You can add your own filters to the Liquid template system much like you can add
-tags above. Filters are simply modules that export their methods to liquid. All
-methods will have to take at least one parameter which represents the input of
-the filter. The return value will be the output of the filter.
+You can add your own filters to the Liquid template system much like you can
+add tags above. Filters are simply modules that export their methods to liquid.
+All methods will have to take at least one parameter which represents the input
+of the filter. The return value will be the output of the filter.
 
 {% highlight ruby %}
 module Jekyll
@@ -476,7 +477,8 @@ You can find a few useful plugins at the following locations:
 #### Generators
 
 - [ArchiveGenerator by Ilkka Laukkanen](https://gist.github.com/707909): Uses [this archive page](https://gist.github.com/707020) to generate archives.
-- [LESS.js Generator by Andy Fowler](https://gist.github.com/642739): Renders LESS.js files during generation.
+- [LESS.js Generator by Andy Fowler](https://gist.github.com/642739): Renders
+LESS.js files during generation.
 - [Version Reporter by Blake Smith](https://gist.github.com/449491): Creates a version.html file containing the Jekyll version.
 - [Sitemap.xml Generator by Michael Levin](https://github.com/kinnetica/jekyll-plugins): Generates a sitemap.xml file by traversing all of the available posts and pages.
 - [Full-text search by Pascal Widdershoven](https://github.com/PascalW/jekyll_indextank): Adds full-text search to your Jekyll site with a plugin and a bit of JavaScript.

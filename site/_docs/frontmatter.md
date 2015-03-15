@@ -36,10 +36,10 @@ relies on.
 <div class="note">
   <h5>ProTip™: Front Matter Variables Are Optional</h5>
   <p>
-    If you want to use <a href="../variables/">Liquid tags and variables</a> but
-    don’t need anything in your front matter, just leave it empty! The set of
-    triple-dashed lines with nothing in between will still get Jekyll to process
-    your file. (This is useful for things like CSS and RSS feeds!)
+    If you want to use <a href="../variables/">Liquid tags and variables</a>
+    but don’t need anything in your front matter, just leave it empty! The set
+    of triple-dashed lines with nothing in between will still get Jekyll to
+    process your file. (This is useful for things like CSS and RSS feeds!)
   </p>
 </div>
 
@@ -122,8 +122,8 @@ front matter of a page or post.
         <p>
 
           Similar to categories, one or multiple tags can be added to a post.
-          Also like categories, tags can be specified as a YAML list or a space-
-          separated string.
+          Also like categories, tags can be specified as a YAML list or a
+          space-separated string.
 
         </p>
       </td>
@@ -170,8 +170,8 @@ These are available out-of-the-box to be used in the front matter for a post.
       <td>
         <p>
           A date here overrides the date from the name of the post. This can be
-          used to ensure correct sorting of posts. A date is specified in the format
-          <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code>; hours, minutes, seconds, and timezone offset
+          used to ensure correct sorting of posts. A date is specified in the
+          format <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code>; hours, minutes, seconds, and timezone offset
           are optional.
         </p>
       </td>
@@ -183,9 +183,9 @@ These are available out-of-the-box to be used in the front matter for a post.
 <div class="note">
   <h5>ProTip™: Don't repeat yourself</h5>
   <p>
-    If you don't want to repeat your frequently used front matter variables over and over,
-    just define <a href="../configuration/#front-matter-defaults" title="Front Matter defaults">defaults</a>
-    for them and only override them where necessary (or not at all). This works both for predefined
-    and custom variables.
+    If you don't want to repeat your frequently used front matter variables
+    over and over, just define <a href="../configuration/#front-matter-defaults" title="Front Matter defaults">defaults</a>
+    for them and only override them where necessary (or not at all). This works
+    both for predefined and custom variables.
   </p>
 </div>

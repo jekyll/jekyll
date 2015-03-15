@@ -103,10 +103,10 @@ whilst maintaining the ability to preview your Jekyll site locally.
 3. When doing permalinks or internal links, do it like this:
    `{% raw %}{{ site.baseurl }}{{ post.url }}{% endraw %}` -- note that there
    is **no** slash between the two variables.
-4. Finally, if you'd like to preview your site before committing/deploying using
-   `jekyll serve`, be sure to pass an **empty string** to the `--baseurl` option,
-   so that you can view everything at `localhost:4000` normally (without
-   `/project-name` at the beginning): `jekyll serve --baseurl ''`
+4. Finally, if you'd like to preview your site before committing/deploying
+   using `jekyll serve`, be sure to pass an **empty string** to the `--baseurl`
+   option, so that you can view everything at `localhost:4000` normally
+   (without `/project-name` at the beginning): `jekyll serve --baseurl ''`
 
 This way you can preview your site locally from the site root on localhost,
 but when GitHub generates your pages from the gh-pages branch all the URLs
