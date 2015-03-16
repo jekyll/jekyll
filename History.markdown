@@ -77,6 +77,7 @@
 
 ### Development Fixes
 
+  * Remove loader.rb and "modernize" `script/test`. (#3574)
   * Improve the grammar in the documentation (#3233)
   * Update the LICENSE text to match the MIT license exactly (#3253)
   * Update rake task `site:publish` to fix minor bugs. (#3254)
