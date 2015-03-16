@@ -1,5 +1,5 @@
 #! /bin/bash
-set -xe
+set -e
 
 # Usage:
 #   script/test
