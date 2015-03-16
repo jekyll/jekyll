@@ -101,6 +101,7 @@
 
 ### Site Enhancements
 
+  * Update the permalinks documentation to reflect the updates for 3.0 (#3556)
   * Add blog post announcing Jekyll Help (#3523)
   * Add Jekyll Talk to Help page on site (#3518)
   * Change Ajax pagination resource link to use HTTPS (#3570)
