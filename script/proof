@@ -10,9 +10,10 @@ function msg {
 }
 
 INGORE_HREFS=$(ruby -e 'puts %w{
-	Chrononaut
-	twitter.com
-	nearlyfreespeech.net
+  Chrononaut
+  twitter.com
+  nearlyfreespeech.net
+  eduardoboucas.com
 }.map{|h| "/#{h}/"}.join(",")')
 SOURCE="site"
 DESTINATION="_site"
