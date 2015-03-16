@@ -79,7 +79,7 @@ front matter of a page or post.
         <p>
 
           If you need your processed blog post URLs to be something other than
-          the default <code>/year/month/day/title.html</code> then you can set
+          the site-wide style (default <code>/year/month/day/title.html</code>), then you can set
           this variable and it will be used as the final URL.
 
         </p>

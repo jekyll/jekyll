@@ -103,15 +103,8 @@ permalink is defined as `/:categories/:year/:month/:day/:title.html`.
 
 ## Built-in permalink styles
 
-**Note:** these may only apply to posts, not to pages, collections or
-static files. For example, `pretty` changes page permalinks from
-`/:path/:basename:output_ext` to `/:page/:basename/` if the page is HTML,
-thus "prettyifying" the page permalink. The `date`, `none`, and all custom
-values do not apply to pages. No permalink style applies to static files,
-and collections have their own means of specifying permalinks. It's all
-rather confusing but check out [Issue #2691](https://github.com/jekyll/jekyll/issues/2691)
-for more background on the subject, and submit a PR if you're adventurous
-enough to fix it all!
+While you can specify a custom permalink style using [template variables](#template-variables),
+Jekyll also provides the following built-in styles for convenience.
 
 <div class="mobile-side-scroller">
 <table>
@@ -158,6 +151,33 @@ enough to fix it all!
 </table>
 </div>
 
+## Pages and collections
+
+<div class="note unreleased">
+  <h5>Support for improved page and collection permalinks is currently unreleased.</h5>
+  <p>
+    In order to use this feature, <a href="/docs/installation/#pre-releases">
+    install the latest development version of Jekyll</a>.
+  </p>
+</div>
+
+The `permalink` configuration setting specifies the permalink style used for
+posts.  Pages and collections each have their own default permalink style; the
+default style for pages is `/:path/:basename` and the default for collections is
+`/:collection/:path`.
+
+These styles are modified to match the suffix style specified in the post
+permalink setting.  For example, a permalink style of `pretty`, which contains a
+trailing slash, will update page permalinks to also contain a trailing slash:
+`/:path/:basename/`.  A permalink style of `date`, which contains a trailing
+file extension, will update page permalinks to also contain a file extension:
+`/:path/:basename:output_ext`.  The same is true for any custom permalink style.
+
+The permalink for an individual page or collection document can always be
+overridden in the [YAML Front Matter](../frontmatter/) for the page or document.
+Additionally, permalinks for a given collection can be customized [in the
+collections configuration](../collections/).
+
 ## Permalink style examples
 
 Given a post named: `/2009-04-29-slap-chop.md`
@@ -197,12 +217,65 @@ Given a post named: `/2009-04-29-slap-chop.md`
     </tr>
     <tr>
       <td>
-        <p><code>/blog/:year/:month/:day/:title</code></p>
+        <p><code>/blog/:year/:month/:day/:title/</code></p>
       </td>
       <td>
-        <p><code>/blog/2009/04/29/slap-chop/index.html</code></p>
+        <p><code>/blog/2009/04/29/slap-chop/</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>/:year/:month/:title</code></p>
+        <p>See <a href="#extensionless-permalinks">extensionless permalinks</a> for details.</p>
+      </td>
+      <td>
+        <p><code>/2009/04/slap-chop</code></p>
       </td>
     </tr>
   </tbody>
 </table>
 </div>
+
+## Extensionless permalinks
+
+<div class="note unreleased">
+  <h5>Support for extensionless permalink is currently unreleased.</h5>
+  <p>
+    In order to use this feature, <a href="/docs/installation/#pre-releases">
+    install the latest development version of Jekyll</a>.
+  </p>
+</div>
+
+Jekyll supports permalinks that contain neither a trailing slash nor a file
+extension, but this requires additional support from the web server to properly
+serve.  When using extensionless permalinks, output files written to disk will
+still have the proper file extension (typically `.html`), so the web server
+must be able to map requests without file extensions to these files.
+
+Both [GitHub Pages](../github-pages/) and the Jekyll's built-in WEBrick server
+handle these requests properly without any additional work.
+
+### Apache
+
+The Apache web server has very extensive support for content negotiation and can
+handle extensionless URLs by setting the [multiviews][] option in your
+`httpd.conf` or `.htaccess` file:
+
+[multiviews]: https://httpd.apache.org/docs/current/content-negotiation.html#multiviews
+
+{% highlight apache %}
+Options +MultiViews
+{% endhighlight %}
+
+### Nginx
+
+The [try_files][] directive allows you to specify a list of files to search for
+to process a request.  The following configuration will instruct nginx to search
+for a file with an `.html` extension if an exact match for the requested URI is
+not found.
+
+[try_files]: http://nginx.org/en/docs/http/ngx_http_core_module.html#try_files
+
+{% highlight nginx %}
+try_files $uri $uri.html $uri/ =404;
+{% endhighlight %}
