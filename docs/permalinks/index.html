@@ -2046,13 +2046,13 @@
           </div>
           <h1>Permalinks</h1>
           <p>Jekyll supports a flexible way to build your site’s URLs. You can specify the
-permalinks for your site through the <a href="../configuration/">Configuration</a> or in the
-<a href="../frontmatter/">YAML Front Matter</a> for each post. You’re free to choose one of
-the built-in styles to create your links or craft your own. The default style is
-<code>date</code>.</p>
+permalinks for your site through the <a href="../configuration/">Configuration</a> or in
+the <a href="../frontmatter/">YAML Front Matter</a> for each post. You’re free to choose
+one of the built-in styles to create your links or craft your own. The default
+style is <code>date</code>.</p>
 
-<p>Permalinks are constructed by creating a template URL where dynamic elements are
-represented by colon-prefixed keywords. For example, the default <code>date</code>
+<p>Permalinks are constructed by creating a template URL where dynamic elements
+are represented by colon-prefixed keywords. For example, the default <code>date</code>
 permalink is defined as <code>/:categories/:year/:month/:day/:title.html</code>.</p>
 
 <h2 id="template-variables">Template variables</h2>
@@ -2144,15 +2144,8 @@ permalink is defined as <code>/:categories/:year/:month/:day/:title.html</code>.
 
 <h2 id="built-in-permalink-styles">Built-in permalink styles</h2>
 
-<p><strong>Note:</strong> these may only apply to posts, not to pages, collections or
-static files. For example, <code>pretty</code> changes page permalinks from
-<code>/:path/:basename:output_ext</code> to <code>/:page/:basename/</code> if the page is HTML,
-thus “prettyifying” the page permalink. The <code>date</code>, <code>none</code>, and all custom
-values do not apply to pages. No permalink style applies to static files,
-and collections have their own means of specifying permalinks. It’s all
-rather confusing but check out <a href="https://github.com/jekyll/jekyll/issues/2691">Issue #2691</a>
-for more background on the subject, and submit a PR if you’re adventurous
-enough to fix it all!</p>
+<p>While you can specify a custom permalink style using <a href="#template-variables">template variables</a>,
+Jekyll also provides the following built-in styles for convenience.</p>
 
 <div class="mobile-side-scroller">
 <table>
@@ -2199,6 +2192,33 @@ enough to fix it all!</p>
 </table>
 </div>
 
+<h2 id="pages-and-collections">Pages and collections</h2>
+
+<div class="note unreleased">
+  <h5>Support for improved page and collection permalinks is currently unreleased.</h5>
+  <p>
+    In order to use this feature, <a href="/docs/installation/#pre-releases">
+    install the latest development version of Jekyll</a>.
+  </p>
+</div>
+
+<p>The <code>permalink</code> configuration setting specifies the permalink style used for
+posts.  Pages and collections each have their own default permalink style; the
+default style for pages is <code>/:path/:basename</code> and the default for collections is
+<code>/:collection/:path</code>.</p>
+
+<p>These styles are modified to match the suffix style specified in the post
+permalink setting.  For example, a permalink style of <code>pretty</code>, which contains a
+trailing slash, will update page permalinks to also contain a trailing slash:
+<code>/:path/:basename/</code>.  A permalink style of <code>date</code>, which contains a trailing
+file extension, will update page permalinks to also contain a file extension:
+<code>/:path/:basename:output_ext</code>.  The same is true for any custom permalink style.</p>
+
+<p>The permalink for an individual page or collection document can always be
+overridden in the <a href="../frontmatter/">YAML Front Matter</a> for the page or document.
+Additionally, permalinks for a given collection can be customized <a href="../collections/">in the
+collections configuration</a>.</p>
+
 <h2 id="permalink-style-examples">Permalink style examples</h2>
 
 <p>Given a post named: <code>/2009-04-29-slap-chop.md</code></p>
@@ -2238,15 +2258,61 @@ enough to fix it all!</p>
     </tr>
     <tr>
       <td>
-        <p><code>/blog/:year/:month/:day/:title</code></p>
+        <p><code>/blog/:year/:month/:day/:title/</code></p>
       </td>
       <td>
-        <p><code>/blog/2009/04/29/slap-chop/index.html</code></p>
+        <p><code>/blog/2009/04/29/slap-chop/</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>/:year/:month/:title</code></p>
+        <p>See <a href="#extensionless-permalinks">extensionless permalinks</a> for details.</p>
+      </td>
+      <td>
+        <p><code>/2009/04/slap-chop</code></p>
       </td>
     </tr>
   </tbody>
 </table>
 </div>
+
+<h2 id="extensionless-permalinks">Extensionless permalinks</h2>
+
+<div class="note unreleased">
+  <h5>Support for extensionless permalink is currently unreleased.</h5>
+  <p>
+    In order to use this feature, <a href="/docs/installation/#pre-releases">
+    install the latest development version of Jekyll</a>.
+  </p>
+</div>
+
+<p>Jekyll supports permalinks that contain neither a trailing slash nor a file
+extension, but this requires additional support from the web server to properly
+serve.  When using extensionless permalinks, output files written to disk will
+still have the proper file extension (typically <code>.html</code>), so the web server
+must be able to map requests without file extensions to these files.</p>
+
+<p>Both <a href="../github-pages/">GitHub Pages</a> and the Jekyll’s built-in WEBrick server
+handle these requests properly without any additional work.</p>
+
+<h3 id="apache">Apache</h3>
+
+<p>The Apache web server has very extensive support for content negotiation and can
+handle extensionless URLs by setting the <a href="https://httpd.apache.org/docs/current/content-negotiation.html#multiviews">multiviews</a> option in your
+<code>httpd.conf</code> or <code>.htaccess</code> file:</p>
+
+<div class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="nb">Options</span> +MultiViews</code></pre></div>
+
+<h3 id="nginx">Nginx</h3>
+
+<p>The <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#try_files">try_files</a> directive allows you to specify a list of files to search for
+to process a request.  The following configuration will instruct nginx to search
+for a file with an <code>.html</code> extension if an exact match for the requested URI is
+not found.</p>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri.html</span> <span class="nv">$uri/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span></code></pre></div>
+
 
           
 

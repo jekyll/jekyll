@@ -2062,13 +2062,14 @@ set site specific options without changing <code>_config.yml</code>.</p>
 
 <p>As explained on the <a href="../structure/">directory structure</a> page, the <code>_data</code>
 folder is where you can store additional data for Jekyll to use when generating
-your site. These files must be YAML files (using either the <code>.yml</code>, <code>.yaml</code>, <code>.json</code>
-or <code>csv</code> extension) and they will be accessible via <code>site.data</code>.</p>
+your site. These files must be YAML files
+(using either the <code>.yml</code>, <code>.yaml</code>, <code>.json</code> or <code>csv</code> extension) and they will be
+accessible via <code>site.data</code>.</p>
 
 <h2 id="example-list-of-members">Example: List of members</h2>
 
-<p>Here is a basic example of using Data Files to avoid copy-pasting large chunks of
-code in your Jekyll templates:</p>
+<p>Here is a basic example of using Data Files to avoid copy-pasting large chunks
+of code in your Jekyll templates:</p>
 
 <p>In <code>_data/members.yml</code>:</p>
 
@@ -2105,7 +2106,10 @@ determines the variable name).</p>
 
 <h2 id="example-organizations">Example: Organizations</h2>
 
-<p>Data files can also be placed in sub-folders of the <code>_data</code> folder. Each folder level will be added to a variable’s namespace. The example below shows how GitHub organizations could be defined separately in a file under the <code>orgs</code> folder:</p>
+<p>Data files can also be placed in sub-folders of the <code>_data</code> folder. Each folder
+level will be added to a variable’s namespace. The example below shows how
+GitHub organizations could be defined separately in a file under the <code>orgs</code>
+folder:</p>
 
 <p>In <code>_data/orgs/jekyll.yml</code>:</p>
 
@@ -2126,7 +2130,8 @@ determines the variable name).</p>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">John Doe</span>
     <span class="l-Scalar-Plain">github</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jdoe</span></code></pre></div>
 
-<p>The organizations can then be accessed via <code>site.data.orgs</code>, followed by the file name:</p>
+<p>The organizations can then be accessed via <code>site.data.orgs</code>, followed by the
+file name:</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
 {% for org_hash in site.data.orgs %}

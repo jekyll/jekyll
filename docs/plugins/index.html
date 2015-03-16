@@ -2067,12 +2067,12 @@ having to modify the Jekyll source itself.</p>
 <p>You have 3 options for installing plugins:</p>
 
 <ol>
-  <li>In your site source root, make a <code>_plugins</code> directory. Place your plugins here.
- Any file ending in <code>*.rb</code> inside this directory will be loaded before Jekyll
- generates your site.</li>
+  <li>In your site source root, make a <code>_plugins</code> directory. Place your plugins
+here. Any file ending in <code>*.rb</code> inside this directory will be loaded before
+Jekyll generates your site.</li>
   <li>
-    <p>In your <code>_config.yml</code> file, add a new array with the key <code>gems</code> and the values
- of the gem names of the plugins you’d like to use. An example:</p>
+    <p>In your <code>_config.yml</code> file, add a new array with the key <code>gems</code> and the
+values of the gem names of the plugins you’d like to use. An example:</p>
 
     <pre><code> gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
  # This will require each of these gems automatically.
@@ -2096,7 +2096,8 @@ having to modify the Jekyll source itself.</p>
   </h5>
   <p>
     You may use any of the aforementioned plugin options simultaneously in the
-    same site if you so choose. Use of one does not restrict the use of the others.
+    same site if you so choose. Use of one does not restrict the use of the
+    others.
   </p>
 </div>
 
@@ -2414,10 +2415,10 @@ pages:</p>
 
 <h3 id="liquid-filters">Liquid filters</h3>
 
-<p>You can add your own filters to the Liquid template system much like you can add
-tags above. Filters are simply modules that export their methods to liquid. All
-methods will have to take at least one parameter which represents the input of
-the filter. The return value will be the output of the filter.</p>
+<p>You can add your own filters to the Liquid template system much like you can
+add tags above. Filters are simply modules that export their methods to liquid.
+All methods will have to take at least one parameter which represents the input
+of the filter. The return value will be the output of the filter.</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
   <span class="k">module</span> <span class="nn">AssetFilter</span>
@@ -2504,7 +2505,8 @@ specify these two flags:</p>
 
 <ul>
   <li><a href="https://gist.github.com/707909">ArchiveGenerator by Ilkka Laukkanen</a>: Uses <a href="https://gist.github.com/707020">this archive page</a> to generate archives.</li>
-  <li><a href="https://gist.github.com/642739">LESS.js Generator by Andy Fowler</a>: Renders LESS.js files during generation.</li>
+  <li><a href="https://gist.github.com/642739">LESS.js Generator by Andy Fowler</a>: Renders
+LESS.js files during generation.</li>
   <li><a href="https://gist.github.com/449491">Version Reporter by Blake Smith</a>: Creates a version.html file containing the Jekyll version.</li>
   <li><a href="https://github.com/kinnetica/jekyll-plugins">Sitemap.xml Generator by Michael Levin</a>: Generates a sitemap.xml file by traversing all of the available posts and pages.</li>
   <li><a href="https://github.com/PascalW/jekyll_indextank">Full-text search by Pascal Widdershoven</a>: Adds full-text search to your Jekyll site with a plugin and a bit of JavaScript.</li>
@@ -2567,6 +2569,7 @@ specify these two flags:</p>
   <li><a href="https://github.com/kzykbys/JekyllPlugins">Deprecated articles keeper</a> by <a href="http://blog.kazuya.co/">Kazuya Kobayashi</a>: A simple Jekyll filter which monitor how old an article is.</li>
   <li><a href="https://github.com/mehdisadeghi/jekyll-jalali">Jekyll-jalali</a> by <a href="http://mehdix.ir">Mehdi Sadeghi</a>: A simple Gregorian to Jalali date converter filter.</li>
   <li><a href="https://github.com/matallo/jekyll-thumbnail-filter">Jekyll Thumbnail Filter</a>: Related posts thumbnail filter.</li>
+  <li><a href="https://github.com/pathawks/jekyll-smartify">Jekyll-Smartify</a>: SmartyPants filter. Make "quotes" “curly”</li>
 </ul>
 
 <h4 id="tags-1">Tags</h4>

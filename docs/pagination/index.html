@@ -2047,15 +2047,15 @@
           <h1>Pagination</h1>
           <p>With many websites—especially blogs—it’s very common to break the main listing
 of posts up into smaller lists and display them over multiple pages. Jekyll has
-pagination built-in, so you can automatically generate the appropriate files and
-folders you need for paginated listings.</p>
+pagination built-in, so you can automatically generate the appropriate files
+and folders you need for paginated listings.</p>
 
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
   <p>
-    Pagination does not work with Markdown or Textile files in your Jekyll site.
-    It will only work when used within HTML files. Since you’ll likely be using
-    this for the list of Posts, this shouldn’t be an issue.
+    Pagination does not work with Markdown or Textile files in your Jekyll
+    site. It will only work when used within HTML files. Since you’ll likely be
+    using this for the list of Posts, this shouldn’t be an issue.
   </p>
 </div>
 
@@ -2066,23 +2066,25 @@ specifies how many items should be displayed per page:</p>
 
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">paginate</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span></code></pre></div>
 
-<p>The number should be the maximum number of Posts you’d like to be displayed per-
-page in the generated site.</p>
+<p>The number should be the maximum number of Posts you’d like to be displayed
+per-page in the generated site.</p>
 
 <p>You may also specify the destination of the pagination pages:</p>
 
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">paginate_path</span><span class="p-Indicator">:</span> <span class="s">&quot;/blog/page:num/&quot;</span></code></pre></div>
 
-<p>This will read in <code>blog/index.html</code>, send it each pagination page in Liquid as <code>paginator</code>
-and write the output to <code>blog/page:num/</code>, where <code>:num</code> is the pagination page number,
-starting with <code>2</code>. If a site has 12 posts and specifies <code>paginate: 5</code>, Jekyll will write
-<code>blog/index.html</code> with the first 5 posts, <code>blog/page2/index.html</code> with the next 5 posts
-and <code>blog/page3/index.html</code> with the last 2 posts into the destination directory.</p>
+<p>This will read in <code>blog/index.html</code>, send it each pagination page in Liquid as
+<code>paginator</code> and write the output to <code>blog/page:num/</code>, where <code>:num</code> is the
+pagination page number, starting with <code>2</code>. If a site has 12 posts and specifies
+<code>paginate: 5</code>, Jekyll will write <code>blog/index.html</code> with the first 5 posts, <code>blog/page2/index.html</code> with the next 5 posts
+and <code>blog/page3/index.html</code> with the last 2 posts into the destination
+directory.</p>
 
 <div class="note warning">
   <h5>Don't set a permalink</h5>
   <p>
-    Setting a permalink in the front matter of your blog page will cause pagination to break. Just omit the permalink.
+    Setting a permalink in the front matter of your blog page will cause
+    pagination to break. Just omit the permalink.
   </p>
 </div>
 
@@ -2172,9 +2174,9 @@ attributes:</p>
 <h2 id="render-the-paginated-posts">Render the paginated Posts</h2>
 
 <p>The next thing you need to do is to actually display your posts in a list using
-the <code>paginator</code> variable that will now be available to you. You’ll probably want
-to do this in one of the main pages of your site. Here’s one example of a simple
-way of rendering paginated Posts in a HTML file:</p>
+the <code>paginator</code> variable that will now be available to you. You’ll probably
+want to do this in one of the main pages of your site. Here’s one example of a
+simple way of rendering paginated Posts in a HTML file:</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html">---
 layout: default

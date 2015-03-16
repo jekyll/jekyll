@@ -2471,7 +2471,9 @@ The different types that are available to you are <code>pages</code>, <code>post
 <span class="nn">---</span>
 <span class="l-Scalar-Plain">The post text goes here...</span></code></pre></div>
 
-<p>The <code>projects/foo_project.md</code> would have the <code>layout</code> set to <code>foobar</code> instead of <code>project</code> and the <code>author</code> set to <code>John Smith</code> instead of <code>Mr. Hyde</code> when the site is built.</p>
+<p>The <code>projects/foo_project.md</code> would have the <code>layout</code> set to <code>foobar</code> instead
+of <code>project</code> and the <code>author</code> set to <code>John Smith</code> instead of <code>Mr. Hyde</code> when
+the site is built.</p>
 
 <h2 id="default-configuration">Default Configuration</h2>
 
@@ -2483,8 +2485,8 @@ file or on the command-line.</p>
   <h5>There are two unsupported kramdown options</h5>
   <p>
     Please note that both <code>remove_block_html_tags</code> and
-    <code>remove_span_html_tags</code> are currently unsupported in Jekyll due to the
-    fact that they are not included within the kramdown HTML converter.
+    <code>remove_span_html_tags</code> are currently unsupported in Jekyll due
+    to the fact that they are not included within the kramdown HTML converter.
   </p>
 </div>
 
@@ -2570,32 +2572,52 @@ file or on the command-line.</p>
 
 <h2 id="markdown-options">Markdown Options</h2>
 
-<p>The various Markdown renderers supported by Jekyll sometimes have extra options available.</p>
+<p>The various Markdown renderers supported by Jekyll sometimes have extra options
+available.</p>
 
 <h3 id="redcarpet">Redcarpet</h3>
 
-<p>Redcarpet can be configured by providing an <code>extensions</code> sub-setting, whose value should be an array of strings. Each string should be the name of one of the <code>Redcarpet::Markdown</code> class’s extensions; if present in the array, it will set the corresponding extension to <code>true</code>.</p>
+<p>Redcarpet can be configured by providing an <code>extensions</code> sub-setting, whose
+value should be an array of strings. Each string should be the name of one of
+the <code>Redcarpet::Markdown</code> class’s extensions; if present in the array, it will
+set the corresponding extension to <code>true</code>.</p>
 
 <p>Jekyll handles two special Redcarpet extensions:</p>
 
 <ul>
-  <li><code>no_fenced_code_blocks</code> — By default, Jekyll sets the <code>fenced_code_blocks</code> extension (for delimiting code blocks with triple tildes or triple backticks) to <code>true</code>, probably because GitHub’s eager adoption of them is starting to make them inescapable. Redcarpet’s normal <code>fenced_code_blocks</code> extension is inert when used with Jekyll; instead, you can use this inverted version of the extension for disabling fenced code.</li>
+  <li><code>no_fenced_code_blocks</code> — By default, Jekyll sets the <code>fenced_code_blocks</code>
+extension (for delimiting code blocks with triple tildes or triple backticks)
+to <code>true</code>, probably because GitHub’s eager adoption of them is starting to make
+them inescapable. Redcarpet’s normal <code>fenced_code_blocks</code> extension is inert
+when used with Jekyll; instead, you can use this inverted version of the
+extension for disabling fenced code.</li>
 </ul>
 
-<p>Note that you can also specify a language for highlighting after the first delimiter:</p>
+<p>Note that you can also specify a language for highlighting after the first
+delimiter:</p>
 
 <pre><code>    ```ruby
     # ...ruby code
     ```
 </code></pre>
 
-<p>With both fenced code blocks and highlighter enabled, this will statically highlight the code; without any syntax highlighter, it will add a <code>class="LANGUAGE"</code> attribute to the <code>&lt;code&gt;</code> element, which can be used as a hint by various JavaScript code highlighting libraries.</p>
+<p>With both fenced code blocks and highlighter enabled, this will statically
+highlight the code; without any syntax highlighter, it will add a
+<code>class="LANGUAGE"</code> attribute to the <code>&lt;code&gt;</code> element, which can be used as a
+hint by various JavaScript code highlighting libraries.</p>
 
 <ul>
-  <li><code>smart</code> — This pseudo-extension turns on SmartyPants, which converts straight quotes to curly quotes and runs of hyphens to em (<code>---</code>) and en (<code>--</code>) dashes.</li>
+  <li><code>smart</code> — This pseudo-extension turns on SmartyPants, which converts
+straight quotes to curly quotes and runs of hyphens to em (<code>---</code>) and en (<code>--</code>) dashes.</li>
 </ul>
 
-<p>All other extensions retain their usual names from Redcarpet, and no renderer options aside from <code>smart</code> can be specified in Jekyll. <a href="https://github.com/vmg/redcarpet/blob/v2.2.2/README.markdown#and-its-like-really-simple-to-use">A list of available extensions can be found in the Redcarpet README file.</a> Make sure you’re looking at the README for the right version of Redcarpet: Jekyll currently uses v2.2.x, and extensions like <code>footnotes</code> and <code>highlight</code> weren’t added until after version 3.0.0. The most commonly used extensions are:</p>
+<p>All other extensions retain their usual names from Redcarpet, and no renderer
+options aside from <code>smart</code> can be specified in Jekyll. <a href="https://github.com/vmg/redcarpet/blob/v2.2.2/README.markdown#and-its-like-really-simple-to-use">A list of available
+extensions can be found in the Redcarpet README file.</a>
+Make sure you’re looking at the README for the right version of
+Redcarpet: Jekyll currently uses v2.2.x, and extensions like <code>footnotes</code> and
+<code>highlight</code> weren’t added until after version 3.0.0. The most commonly used
+extensions are:</p>
 
 <ul>
   <li><code>tables</code></li>
@@ -2605,7 +2627,8 @@ file or on the command-line.</p>
 
 <h3 id="kramdown">Kramdown</h3>
 
-<p>In addition to the defaults mentioned above, you can also turn on recognition of Github Flavored Markdown by passing an <code>input</code> option with a value of “GFM”.</p>
+<p>In addition to the defaults mentioned above, you can also turn on recognition
+of Github Flavored Markdown by passing an <code>input</code> option with a value of “GFM”.</p>
 
 <p>For example, in your <code>_config.yml</code>:</p>
 
@@ -2632,7 +2655,8 @@ file or on the command-line.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></div>
 
-<p>Once you’ve created your class and have it properly setup either as a plugin in the <code>_plugins</code> folder or as a gem, specify it in your <code>_config.yml</code>:</p>
+<p>Once you’ve created your class and have it properly setup either as a plugin in
+the <code>_plugins</code> folder or as a gem, specify it in your <code>_config.yml</code>:</p>
 
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">MyCustomProcessor</span></code></pre></div>
 
