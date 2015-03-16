@@ -126,12 +126,12 @@ module Jekyll
         end
 
         def server_address_info(server, options)
-          addr = server.config[:BindAddress].to_s
-          burl = "#{options['baseurl']}/" if options['baseurl']
-          ladr = addr == "0.0.0.0" ? "localhost" : a
+          bind_addr = server.config[:BindAddress].to_s
+          listen_addr = bind_addr == "0.0.0.0" ? "localhost" : bind_addr
+          base_url  = "#{options['baseurl']}/" if options['baseurl']
 
-          rtn = "http://#{ladr}:#{server.config[:Port]}#{burl}"
-          rtn = "#{rtn} (listening on all interfaces)" if addr == "0.0.0.0"
+          rtn = "http://#{listen_addr}:#{server.config[:Port]}#{base_url}"
+          rtn = "#{rtn} (listening on all interfaces)" if bind_addr == "0.0.0.0"
         rtn
         end
 
