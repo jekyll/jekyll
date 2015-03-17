@@ -54,6 +54,7 @@
 
 ### Bug Fixes
 
+  * Perform jekyll-paginate deprecation warning correctly. (#3580)
   * Make permalink parsing consistent with pages (#3014)
   * `time()`pre-filter method should accept a `Date` object (#3299)
   * Remove unneeded end tag for `link` in site template (#3236)
