@@ -47,8 +47,7 @@ Matter is provided, Jekyll will not generate the file in your collection.
 Note: the folder must be named identically to the collection you defined in
 your `_config.yml` file, with the addition of the preceding `_` character.
 
-### Step 3: Optionally render your collection's documents into independent
-files
+### Step 3: Optionally render your collection's documents into independent files
 
 If you'd like Jekyll to create a public-facing, rendered version of each
 document in your collection, set the `output` key to `true` in your collection
