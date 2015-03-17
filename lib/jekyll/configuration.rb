@@ -262,11 +262,6 @@ module Jekyll
           "be removed in 3.0.0. We recommend you switch to Kramdown."
       end
 
-      if config.key?('paginate') && config['paginate'] && !(config['gems'] || []).include?('jekyll-paginate')
-        Jekyll::Deprecator.deprecation_message "You appear to have pagination " +
-          "turned on, but you haven't included the `jekyll-paginate` gem. " +
-          "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
-      end
       config
     end
 

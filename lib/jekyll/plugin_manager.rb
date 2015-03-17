@@ -17,6 +17,7 @@ module Jekyll
     def conscientious_require
       require_plugin_files
       require_gems
+      deprecation_checks
     end
 
     # Require each of the gem plugins specified.
@@ -85,6 +86,15 @@ module Jekyll
         [site.in_source_dir(site.config['plugins'])]
       else
         Array(site.config['plugins']).map { |d| File.expand_path(d) }
+      end
+    end
+
+    def deprecation_checks
+      pagination_included = (site.config['gems'] || []).include?('jekyll-paginate') || defined?(Jekyll::Paginate)
+      if site.config['paginate'] && !pagination_included
+        Jekyll::Deprecator.deprecation_message "You appear to have pagination " +
+          "turned on, but you haven't included the `jekyll-paginate` gem. " +
+          "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
       end
     end
 
