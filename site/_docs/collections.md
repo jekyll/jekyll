@@ -77,6 +77,18 @@ collections:
 For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be
 written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
 
+N.B. Files in collections that do not have front matter are treated as static
+files and simply copied to their output location without processing. To force
+processing to occur, use the `render` option:
+
+{% highlight yaml %}
+collections:
+  my_collection:
+    render: true
+{% endhighlight %}
+
+This is particularly useful with plugins that process source files.
+
 <div class="mobile-side-scroller">
 <table>
   <thead>
