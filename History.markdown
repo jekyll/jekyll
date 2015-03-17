@@ -145,6 +145,7 @@
   * Add permalink warning to pagination docs (#3551)
   * Fix grammar in Collections docs API stability warning (#3560)
   * Restructure `excerpt_separator` documentation for clarity (#3550)
+  * Fix accidental line break in collections docs (#3585)
 
 ## 2.5.3 / 2014-12-22
 
