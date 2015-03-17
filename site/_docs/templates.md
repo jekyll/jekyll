@@ -286,7 +286,7 @@ root of your source directory. This will embed the contents of
   </p>
 </div>
 
-You can also pass parameters to an include. Note that the variable parameter is NOT surrounded with the usual liquid curly brackets:
+You can also pass parameters to an include. Note that the variable parameter is **not** surrounded with the usual Liquid curly brackets:
 
 {% highlight ruby %}
 {% raw %}{% include footer.html param="value" variable-param=page.variable %}{% endraw %}
