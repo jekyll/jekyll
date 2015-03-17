@@ -39,7 +39,7 @@ module Jekyll
 
         next if File.directory?(full_path)
 
-        if Utils.has_yaml_header? full_path
+        if Utils.has_yaml_header?(full_path) || metadata['render']
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
           docs << doc if site.publisher.publish?(doc)
