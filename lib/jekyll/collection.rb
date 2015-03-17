@@ -36,7 +36,9 @@ module Jekyll
     def read
       filtered_entries.each do |file_path|
         full_path = collection_dir(file_path)
+
         next if File.directory?(full_path)
+
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
@@ -46,6 +48,7 @@ module Jekyll
           files << StaticFile.new(site, site.source, relative_dir, File.basename(full_path), self)
         end
       end
+
       docs.sort!
     end
 
