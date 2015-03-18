@@ -464,6 +464,7 @@ CONTENT
     context "with symlink'd include" do
 
       should "not allow symlink includes" do
+        Dir.mkdir("tmp") unless File.exists?("tmp")
         File.open("tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
         assert_raises IOError do
           content = <<CONTENT
@@ -747,6 +748,7 @@ CONTENT
     context "with symlink'd include" do
 
       should "not allow symlink includes" do
+        Dir.mkdir("tmp") unless File.exists?("tmp")
         File.open("tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
         assert_raises IOError do
           content = <<CONTENT
