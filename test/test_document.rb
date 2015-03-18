@@ -346,6 +346,38 @@ class TestDocument < JekyllUnitTest
     end
   end
 
+  context "a static file in a collection set to render" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "uncompiled_slides" => {
+            "output" => true,
+            "render" => true
+          }
+        }
+      })
+      @site.process
+      @document = @site.collections["uncompiled_slides"].docs.find { |doc| doc.relative_path == "_uncompiled_slides/foo.md" }
+      @dest_file = dest_dir("uncompiled_slides/foo.html")
+    end
+
+    should "be a document" do
+      assert_equal true, @document.is_a?(Document)
+    end
+
+    should "be set to write" do
+      assert @document.write?
+    end
+
+    should "be in the list of docs_to_write" do
+      assert @site.docs_to_write.include?(@document)
+    end
+
+    should "be output in the correct place" do
+      assert_equal true, File.file?(@dest_file)
+    end
+  end
+
   context "a document in a collection with non-alphabetic file name" do
     setup do
       @site = fixture_site({
