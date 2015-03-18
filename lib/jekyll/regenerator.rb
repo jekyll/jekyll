@@ -59,6 +59,14 @@ module Jekyll
       @cache = {}
     end
 
+
+    # Clear just the cache
+    #
+    # Returns nothing
+    def clear_cache
+      @cache = {}
+    end
+
     # Checks if a path's (or one of its dependencies)
     # mtime has changed
     #
