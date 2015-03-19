@@ -51,8 +51,8 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_posts(dir)
-      site.posts += PostReader.new(site).read(dir)
-      site.posts += DraftReader.new(site).read(dir) if site.show_drafts
+      site.posts.concat(PostReader.new(site).read(dir))
+      site.posts.concat(DraftReader.new(site).read(dir)) if site.show_drafts
       site.posts.sort!
     end
 
@@ -72,7 +72,7 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_pages(dir, dot_pages)
-      site.pages += PageReader.new(site, dir).read(dot_pages)
+      site.pages.concat(PageReader.new(site, dir).read(dot_pages))
       site.pages.sort_by!(&:name)
     end
 
@@ -81,7 +81,7 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_static_files(dir, dot_static_files)
-      site.static_files += StaticFileReader.new(site, dir).read(dot_static_files)
+      site.static_files.concat(StaticFileReader.new(site, dir).read(dot_static_files))
       site.static_files.sort_by!(&:relative_path)
     end
 

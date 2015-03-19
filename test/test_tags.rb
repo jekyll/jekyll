@@ -13,7 +13,7 @@ class TestTags < JekyllUnitTest
     site = Site.new(Jekyll.configuration)
 
     if override['read_posts']
-      site.posts += PostReader.new(site).read('')
+      site.posts.concat(PostReader.new(site).read(''))
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
