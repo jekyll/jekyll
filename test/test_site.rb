@@ -459,5 +459,43 @@ class TestSite < JekyllUnitTest
       end
     end
 
+    context "incremental build" do
+      setup do
+        @site = Site.new(site_configuration({
+          'full_rebuild' => false
+        }))
+        @site.read
+      end
+
+      should "build incrementally" do
+        contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
+        @site.process
+
+        source = @site.in_source_dir(contacts_html.path)
+        dest = File.expand_path(contacts_html.destination(@site.dest))
+        mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
+
+        # need to sleep because filesystem timestamps have best resolution in seconds
+        sleep 1
+        @site.process
+        mtime2 = File.stat(dest).mtime.to_i
+        assert_equal mtime1, mtime2 # no modifications, so remain the same
+
+        # simulate file modification by user
+        FileUtils.touch source
+
+        sleep 1
+        @site.process
+        mtime3 = File.stat(dest).mtime.to_i
+        refute_equal mtime2, mtime3 # must be regenerated 
+
+        sleep 1
+        @site.process
+        mtime4 = File.stat(dest).mtime.to_i
+        assert_equal mtime3, mtime4 # no modifications, so remain the same
+      end
+
+    end
+
   end
 end
