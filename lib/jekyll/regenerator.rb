@@ -9,7 +9,7 @@ module Jekyll
       read_metadata
 
       # Initialize cache to an empty hash
-      @cache = {}
+      clear_cache
     end
 
     # Checks if a renderable object needs to be regenerated
@@ -56,7 +56,7 @@ module Jekyll
     # Returns nothing
     def clear
       @metadata = {}
-      @cache = {}
+      clear_cache
     end
 
 
