@@ -27,27 +27,24 @@ module Jekyll
     #
     # Returns nothing.
     def read_directories(dir = '')
-      retrieve_posts(dir)
-
-      # Obtain sub-directories in order to recursively read them.
       base = site.in_source_dir(dir)
+
       dot = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
       dot_dirs = dot.select{ |file| File.directory?(@site.in_source_dir(base,file)) }
-      retrieve_dirs(base, dir, dot_dirs)
-
       dot_files = (dot - dot_dirs)
-
-      # Obtain all the pages.
       dot_pages = dot_files.select{ |file| Utils.has_yaml_header?(@site.in_source_dir(base,file)) }
-      retrieve_pages(dir, dot_pages)
-
-      # Assume the remaining files to be static files.
       dot_static_files = dot_files - dot_pages
+
+      retrieve_posts(dir)
+      retrieve_dirs(base, dir, dot_dirs)
+      retrieve_pages(dir, dot_pages)
       retrieve_static_files(dir, dot_static_files)
     end
 
     # Retrieves all the posts(posts/drafts) from the given directory
     # and add them to the site and sort them.
+    #
+    # dir - The String representing the directory to retrieve the posts from.
     #
     # Returns nothing.
     def retrieve_posts(dir)
@@ -57,6 +54,10 @@ module Jekyll
     end
 
     # Recursively traverse directories with the read_directories function.
+    #
+    # base - The String representing the site's base directory.
+    # dir - The String representing the directory to traverse down.
+    # dot_dirs - The Array of subdirectories in the dir.
     #
     # Returns nothing.
     def retrieve_dirs(base, dir, dot_dirs)
@@ -70,6 +71,9 @@ module Jekyll
     # Retrieve all the pages from the current directory,
     # add them to the site and sort them.
     #
+    # dir - The String representing the directory retrieve the pages from.
+    # dot_pages - The Array of pages in the dir.
+    #
     # Returns nothing.
     def retrieve_pages(dir, dot_pages)
       site.pages.concat(PageReader.new(site, dir).read(dot_pages))
@@ -78,6 +82,9 @@ module Jekyll
 
     # Retrieve all the static files from the current directory,
     # add them to the site and sort them.
+    #
+    # dir - The directory retrieve the static files from.
+    # dot_static_files - The static files in the dir.
     #
     # Returns nothing.
     def retrieve_static_files(dir, dot_static_files)
@@ -91,6 +98,7 @@ module Jekyll
     # files such as '.htaccess'.
     #
     # entries - The Array of String file/directory entries to filter.
+    # base_directory - The string representing the optional base directory.
     #
     # Returns the Array of filtered entries.
     def filter_entries(entries, base_directory = nil)
@@ -99,8 +107,8 @@ module Jekyll
 
     # Read the entries from a particular directory for processing
     #
-    # dir - The String relative path of the directory to read
-    # subfolder - The String directory to read
+    # dir - The String representing the relative path of the directory to read.
+    # subfolder - The String representing the directory to read.
     #
     # Returns the list of entries to process
     def get_entries(dir, subfolder)

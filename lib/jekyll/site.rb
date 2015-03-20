@@ -146,7 +146,7 @@ module Jekyll
     #
     # Returns nothing.
     def render
-      deprecated_rel_permalink
+      relative_permalinks_are_deprecated
 
       payload = site_payload
       collections.each do |label, collection|
@@ -281,12 +281,12 @@ module Jekyll
       end
     end
 
-    # Warns the user if permanent links are relative tot the parent
+    # Warns the user if permanent links are relative to the parent
     # directory. As this is a deprecated function of Jekyll.
     #
     # Returns
-    def deprecated_rel_permalink
-      if config['relative_permalinks'] && has_relative_page?
+    def relative_permalinks_are_deprecated
+    if config['relative_permalinks'] && has_relative_page?
         Jekyll::Deprecator.deprecation_message "Since v2.0, permalinks for pages" +
                                             " in subfolders must be relative to the" +
                                             " site source directory, not the parent" +
@@ -377,14 +377,6 @@ module Jekyll
       pages.any? { |page| page.uses_relative_permalinks }
     end
 
-    # Returns the Cleaner or creates a new Cleaner if it doesn't
-    # already exist.
-    #
-    # Returns The Cleaner
-    def site_cleaner
-      @site_cleaner ||= Cleaner.new(self)
-    end
-
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
     # Returns nothing
@@ -393,6 +385,14 @@ module Jekyll
         limit = posts.length < limit_posts ? posts.length : limit_posts
         self.posts = posts[-limit, limit]
       end
+    end
+
+    # Returns the Cleaner or creates a new Cleaner if it doesn't
+    # already exist.
+    #
+    # Returns The Cleaner
+    def site_cleaner
+      @site_cleaner ||= Cleaner.new(self)
     end
   end
 end
