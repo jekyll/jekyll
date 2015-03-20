@@ -51,6 +51,7 @@
   * Site template: remove unused `page.meta` attribute (#3537)
   * Improve the error message when sorting null objects (#3520)
   * Add jekyll-smartify plugin (#3572)
+  * Added liquid-md5 plugin (#3598)
 
 ### Bug Fixes
 
