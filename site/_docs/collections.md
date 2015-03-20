@@ -48,7 +48,7 @@ Matter is provided, Jekyll will not generate the file in your collection.
   <h5>Be sure to name your directories correctly</h5>
   <p>
 The folder must be named identically to the collection you defined in
-your `_config.yml` file, with the addition of the preceding `_` character.
+your <code>_config.yml</code> file, with the addition of the preceding <code>_</code> character.
   </p>
 </div>
 
