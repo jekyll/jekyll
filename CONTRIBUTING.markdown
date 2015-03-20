@@ -16,7 +16,7 @@ following in mind:
   would be appreciated, and once merged it will be transferred over to the main
   `site`, jekyllrb.com.
 * If your contribution changes any Jekyll behavior, make sure to update the
-  documentation. It lives in `site/docs`. If the docs are missing information,
+  documentation. It lives in `site/_docs`. If the docs are missing information,
   please feel free to add it in. Great docs make a great project!
 * Please follow the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby)
   when modifying Ruby code.
