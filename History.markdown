@@ -52,6 +52,7 @@
   * Improve the error message when sorting null objects (#3520)
   * Add jekyll-smartify plugin (#3572)
   * Added liquid-md5 plugin (#3598)
+  * Documentation: RR replaced with RSpec Mocks (#3600)
 
 ### Bug Fixes
 
