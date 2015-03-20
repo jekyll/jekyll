@@ -77,6 +77,10 @@ collections:
 For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be
 written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
 
+**Note that files in collections that do not have front matter are treated
+as static files and simply copied to their output location without
+processing.**
+
 <div class="mobile-side-scroller">
 <table>
   <thead>
@@ -170,6 +174,16 @@ you specified in your `_config.yml` (if present) and the following information:
       <td>
         <p>
           An array of <a href="#documents">documents</a>.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>files</code></p>
+      </td>
+      <td>
+        <p>
+          An array of static files in the collection.
         </p>
       </td>
     </tr>
