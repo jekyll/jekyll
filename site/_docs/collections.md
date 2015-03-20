@@ -96,9 +96,9 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
 <div class="note info">
   <h5>Don't forget to add YAML for processing</h5>
   <p>
-Files in collections that do not have front matter are treated
-as static files and simply copied to their output location without
-processing.
+  Files in collections that do not have front matter are treated as
+  <a href="/docs/static-files">static files</a> and simply copied to their
+  output location without processing.
   </p>
 </div>
 
