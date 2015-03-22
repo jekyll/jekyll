@@ -3,7 +3,7 @@ require 'helper'
 class TestRegenerator < JekyllUnitTest
   context "The site regenerator" do
     setup do
-      FileUtils.rm_rf(source_dir(".jekyll-metadata"))
+      FileUtils.rm_rf(source_dir(".jekyll.yml-metadata"))
 
       @site = fixture_site({
         "collections" => {
@@ -55,7 +55,7 @@ class TestRegenerator < JekyllUnitTest
 
   context "The site metadata" do
     setup do
-      FileUtils.rm_rf(source_dir(".jekyll-metadata"))
+      FileUtils.rm_rf(source_dir(".jekyll.yml-metadata"))
 
       @site = Site.new(Jekyll.configuration({
         "source" => source_dir,
@@ -79,7 +79,7 @@ class TestRegenerator < JekyllUnitTest
       @regenerator.clear
       @regenerator.add(@path)
       @regenerator.write_metadata
-      assert File.file?(source_dir(".jekyll-metadata"))
+      assert File.file?(source_dir(".jekyll.yml-metadata"))
     end
 
     should "read from the metadata file" do

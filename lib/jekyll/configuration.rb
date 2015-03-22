@@ -3,7 +3,7 @@
 module Jekyll
   class Configuration < Hash
 
-    # Default options. Overridden by values in _config.yml.
+    # Default options. Overridden by values in .jekyll.yml.
     # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = {
       # Where things are
@@ -133,13 +133,13 @@ module Jekyll
       # Be quiet quickly.
       Jekyll.logger.log_level = :error if quiet?(override)
 
-      # Get configuration from <source>/_config.yml or <source>/<config_file>
+      # Get configuration from <source>/.jekyll.yml or <source>/<config_file>
       config_files = override.delete('config')
       if config_files.to_s.empty?
         default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
-          File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))
+          File.exist?(Jekyll.sanitized_path(source(override), ".jekyll.#{ext}"))
         end
-        config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
+        config_files = Jekyll.sanitized_path(source(override), ".jekyll.#{default}")
         @default_config_file = true
       end
       config_files = [config_files] unless config_files.is_a? Array

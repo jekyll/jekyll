@@ -99,11 +99,11 @@ class TestExcerpt < JekyllUnitTest
 
       context "before render" do
         should "be the first paragraph of the page" do
-          assert_equal "First paragraph with [link ref][link].\n\n[link]: http://www.jekyllrb.com/", @excerpt.content
+          assert_equal "First paragraph with [link ref][link].\n\n[link]: http://www.jekyll.ymlrb.com/", @excerpt.content
         end
 
         should "contain any refs at the bottom of the page" do
-          assert @excerpt.content.include?("[link]: http://www.jekyllrb.com/")
+          assert @excerpt.content.include?("[link]: http://www.jekyll.ymlrb.com/")
         end
       end
 
@@ -115,11 +115,11 @@ class TestExcerpt < JekyllUnitTest
         end
 
         should "be the first paragraph of the page" do
-          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>\n\n", @extracted_excerpt.content
+          assert_equal "<p>First paragraph with <a href=\"http://www.jekyll.ymlrb.com/\">link ref</a>.</p>\n\n", @extracted_excerpt.content
         end
 
         should "link properly" do
-          assert @extracted_excerpt.content.include?("http://www.jekyllrb.com/")
+          assert @extracted_excerpt.content.include?("http://www.jekyll.ymlrb.com/")
         end
       end
     end

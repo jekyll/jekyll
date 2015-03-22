@@ -16,7 +16,7 @@ A basic Jekyll site usually looks something like this:
 
 {% highlight bash %}
 .
-├── _config.yml
+├── .jekyll.yml
 ├── _drafts
 |   ├── begin-with-the-crazy-ideas.textile
 |   └── on-simplicity-in-technology.markdown
@@ -32,7 +32,7 @@ A basic Jekyll site usually looks something like this:
 ├── _data
 |   └── members.yml
 ├── _site
-├── .jekyll-metadata
+├── .jekyll.yml-metadata
 └── index.html
 {% endhighlight %}
 
@@ -49,7 +49,7 @@ An overview of what each of these does:
   <tbody>
     <tr>
       <td>
-        <p><code>_config.yml</code></p>
+        <p><code>.jekyll.yml</code></p>
       </td>
       <td>
         <p>
@@ -158,7 +158,7 @@ An overview of what each of these does:
     </tr>
     <tr>
       <td>
-        <p><code>.jekyll-metadata</code></p>
+        <p><code>.jekyll.yml-metadata</code></p>
       </td>
       <td>
         <p>

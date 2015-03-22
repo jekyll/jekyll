@@ -391,11 +391,11 @@ class TestPost < JekyllUnitTest
         end
 
         should "correctly resolve link references" do
-          assert @post.excerpt.include?("www.jekyllrb.com"), "contains referenced link URL"
+          assert @post.excerpt.include?("www.jekyll.ymlrb.com"), "contains referenced link URL"
         end
 
         should "return rendered HTML" do
-          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>\n\n",
+          assert_equal "<p>First paragraph with <a href=\"http://www.jekyll.ymlrb.com/\">link ref</a>.</p>\n\n",
                        @post.excerpt
         end
 

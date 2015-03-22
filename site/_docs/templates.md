@@ -205,16 +205,16 @@ common tasks easier.
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "The _config.yml file" | slugify }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "The .jekyll.yml file" | slugify }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">the-config-yml-file</code>
+          <code class="output">the-jekyll-yml-file</code>
         </p>
         <p>
-         <code class="filter">{% raw %}{{ "The _config.yml file" | slugify: 'pretty' }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "The .jekyll.yml file" | slugify: 'pretty' }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">the-_config.yml-file</code>
+          <code class="output">the-.jekyll.yml-file</code>
         </p>
       </td>
     </tr>

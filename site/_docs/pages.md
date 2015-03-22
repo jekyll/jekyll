@@ -46,7 +46,7 @@ and associated URLs might look like:
 
 {% highlight bash %}
 .
-|-- _config.yml
+|-- .jekyll.yml
 |-- _includes/
 |-- _layouts/
 |-- _posts/
@@ -68,7 +68,7 @@ might look like:
 
 {% highlight bash %}
 .
-├── _config.yml
+├── .jekyll.yml
 ├── _includes/
 ├── _layouts/
 ├── _posts/

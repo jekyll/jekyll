@@ -28,7 +28,7 @@ You have 3 options for installing plugins:
 1. In your site source root, make a `_plugins` directory. Place your plugins
 here. Any file ending in `*.rb` inside this directory will be loaded before
 Jekyll generates your site.
-2. In your `_config.yml` file, add a new array with the key `gems` and the
+2. In your `.jekyll.yml` file, add a new array with the key `gems` and the
 values of the gem names of the plugins you'd like to use. An example:
 
         gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
@@ -42,7 +42,7 @@ values of the gem names of the plugins you'd like to use. An example:
 
 <div class="note info">
   <h5>
-    <code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code>
+    <code>_plugins</code>, <code>.jekyll.yml</code> and <code>Gemfile</code>
     can be used simultaneously
   </h5>
   <p>
@@ -406,7 +406,7 @@ Liquid::Template.register_filter(Jekyll::AssetFilter)
   <p>
     Jekyll lets you access the <code>site</code> object through the
     <code>context.registers</code> feature of Liquid at <code>context.registers[:site]</code>. For example, you can
-    access the global configuration file <code>_config.yml</code> using
+    access the global configuration file <code>.jekyll.yml</code> using
     <code>context.registers[:site].config</code>.
   </p>
 </div>

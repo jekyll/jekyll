@@ -61,7 +61,7 @@ module Jekyll
     #
     # Returns nothing
     def reset
-      self.time = (config['time'] ? Utils.parse_date(config['time'].to_s, "Invalid time in _config.yml.") : Time.now)
+      self.time = (config['time'] ? Utils.parse_date(config['time'].to_s, "Invalid time in .jekyll.yml.") : Time.now)
       self.layouts = {}
       self.posts = []
       self.pages = []
@@ -369,7 +369,7 @@ module Jekyll
     end
 
     # Prepare site data for site payload. The method maintains backward compatibility
-    # if the key 'data' is already used in _config.yml.
+    # if the key 'data' is already used in .jekyll.yml.
     #
     # Returns the Hash to be hooked to site.data.
     def site_data

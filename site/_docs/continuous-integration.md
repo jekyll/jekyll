@@ -160,7 +160,7 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
 Travis bundles all gems in the `vendor` directory on its build servers,
 which Jekyll will mistakenly read and explode on. To avoid this, exclude
-`vendor` in your `_config.yml`:
+`vendor` in your `.jekyll.yml`:
 
 {% highlight yaml %}
 exclude: [vendor]

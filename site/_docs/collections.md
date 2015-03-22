@@ -21,7 +21,7 @@ namespace.
 
 ### Step 1: Tell Jekyll to read in your collection
 
-Add the following to your site's `_config.yml` file, replacing `my_collection`
+Add the following to your site's `.jekyll.yml` file, replacing `my_collection`
 with the name of your collection:
 
 {% highlight yaml %}
@@ -48,7 +48,7 @@ Matter is provided, Jekyll will not generate the file in your collection.
   <h5>Be sure to name your directories correctly</h5>
   <p>
 The folder must be named identically to the collection you defined in
-your <code>_config.yml</code> file, with the addition of the preceding <code>_</code> character.
+your <code>.jekyll.yml</code> file, with the addition of the preceding <code>_</code> character.
   </p>
 </div>
 
@@ -56,7 +56,7 @@ your <code>_config.yml</code> file, with the addition of the preceding <code>_</
 
 If you'd like Jekyll to create a public-facing, rendered version of each
 document in your collection, set the `output` key to `true` in your collection
-metadata in your `_config.yml`:
+metadata in your `.jekyll.yml`:
 
 {% highlight yaml %}
 collections:
@@ -156,7 +156,7 @@ you want to access the `albums` collection found in `_albums`, you'd use
 `site.posts`). See below for how to access attributes of those documents.
 
 The collections are also available under `site.collections`, with the metadata
-you specified in your `_config.yml` (if present) and the following information:
+you specified in your `.jekyll.yml` (if present) and the following information:
 
 <div class="mobile-side-scroller">
 <table>

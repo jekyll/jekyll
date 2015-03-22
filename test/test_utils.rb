@@ -128,7 +128,7 @@ class TestUtils < JekyllUnitTest
     end
 
     should "replace underscores with hyphens" do
-      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file")
+      assert_equal "the-jekyll-yml-file", Utils.slugify("The .jekyll.yml file")
     end
 
     should "combine adjacent hyphens and spaces" do
@@ -146,23 +146,23 @@ class TestUtils < JekyllUnitTest
     end
 
     should "not change behaviour if mode is default" do
-      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file?", "default")
+      assert_equal "the-jekyll-yml-file", Utils.slugify("The .jekyll.yml file?", "default")
     end
 
     should "not change behaviour if mode is nil" do
-      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file?", nil)
+      assert_equal "the-jekyll-yml-file", Utils.slugify("The .jekyll.yml file?", nil)
     end
 
     should "not replace period and underscore if mode is pretty" do
-      assert_equal "the-_config.yml-file", Utils.slugify("The _config.yml file?", "pretty")
+      assert_equal "the-.jekyll.yml-file", Utils.slugify("The .jekyll.yml file?", "pretty")
     end
 
     should "only replace whitespace if mode is raw" do
-      assert_equal "the-_config.yml-file?", Utils.slugify("The _config.yml file?", "raw")
+      assert_equal "the-.jekyll.yml-file?", Utils.slugify("The .jekyll.yml file?", "raw")
     end
 
     should "return the given string if mode is none" do
-      assert_equal "the _config.yml file?", Utils.slugify("The _config.yml file?", "none")
+      assert_equal "the .jekyll.yml file?", Utils.slugify("The .jekyll.yml file?", "none")
     end
   end
 

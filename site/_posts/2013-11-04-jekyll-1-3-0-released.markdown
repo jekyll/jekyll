@@ -17,7 +17,7 @@ Here are a few things we think you'll want to know about this release:
 * You can add [arbitrary data][] to the site by adding YAML files under a
   site's `_data` directory. This will allow you to avoid
   repetition in your templates and to set site specific options without
-  changing `_config.yml`.
+  changing `.jekyll.yml`.
 
 * You can now run `jekyll serve --detach` to boot up a WEBrick server in the
   background. **Note:** you'll need to run `kill [server_pid]` to shut

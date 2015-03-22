@@ -108,13 +108,13 @@ Given /^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$/ do
 end
 
 Given /^I have a configuration file with "(.*)" set to "(.*)"$/ do |key, value|
-  File.open('_config.yml', 'w') do |f|
+  File.open('.jekyll', 'w') do |f|
     f.write("#{key}: #{value}\n")
   end
 end
 
 Given /^I have a configuration file with:$/ do |table|
-  File.open('_config.yml', 'w') do |f|
+  File.open('.jekyll', 'w') do |f|
     table.hashes.each do |row|
       f.write("#{row["key"]}: #{row["value"]}\n")
     end
@@ -122,7 +122,7 @@ Given /^I have a configuration file with:$/ do |table|
 end
 
 Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
-  File.open('_config.yml', 'w') do |f|
+  File.open('.jekyll', 'w') do |f|
     f.write("#{key}:\n")
     table.hashes.each do |row|
       f.write("- #{row["value"]}\n")

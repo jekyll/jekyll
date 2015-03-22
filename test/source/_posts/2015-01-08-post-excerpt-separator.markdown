@@ -12,4 +12,4 @@ Second paragraph
 
 Third paragraph
 
-[link]: http://www.jekyllrb.com/
+[link]: http://www.jekyll.ymlrb.com/
