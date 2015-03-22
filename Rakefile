@@ -91,12 +91,8 @@ multitask :default => [:test, :features]
 
 task :spec => :test
 
-task :setup_for_tests do
-  FileUtils.mkdir_p("tmp") unless File.directory?("tmp")
-end
-
 require 'rake/testtask'
-Rake::TestTask.new(:test => :setup_for_tests ) do |test|
+Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true

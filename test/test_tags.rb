@@ -460,6 +460,9 @@ CONTENT
   end
 
   context "include tag with parameters" do
+    setup do
+      FileUtils.mkdir_p("tmp") unless File.directory?("tmp")
+    end
 
     context "with symlink'd include" do
 
