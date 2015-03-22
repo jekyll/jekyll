@@ -18,16 +18,21 @@ module Jekyll
     def regenerate?(document)
       case document
       when Post, Page
-        document.asset_file? || document.data['regenerate'] ||
-          modified?(site.in_source_dir(document.relative_path))
+        return ( document.asset_file? || 
+                 document.data['regenerate'] || 
+                 source_modified_or_dest_missing?(
+                   site.in_source_dir(document.relative_path),
+                   document.destination(@site.dest)) )
       when Document
-        !document.write? || document.data['regenerate'] || modified?(document.path)
+        return ( !document.write? ||
+                document.data['regenerate'] ||
+                source_modified_or_dest_missing?(
+                    document.path, 
+                    document.destination(@site.dest)) )
       else
-        if document.respond_to?(:path)
-          modified?(document.path)
-        else
-          true
-        end
+        source_path = document.respond_to?(:path)        ? document.path                    : nil
+        dest_path   = document.respond_to?(:destination) ? document.destination(@site.dest) : nil
+        return source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
 
@@ -65,6 +70,17 @@ module Jekyll
     # Returns nothing
     def clear_cache
       @cache = {}
+    end
+
+
+    # Checks if the source has been modified or the
+    # destination is missing
+    #
+    # returns a boolean
+    def source_modified_or_dest_missing?(source_path, dest_path)
+      source_modified = source_path ? modified?(source_path)  : true
+      dest_missing    = dest_path   ? !File.exist?(dest_path) : false
+      return source_modified || dest_missing
     end
 
     # Checks if a path's (or one of its dependencies)

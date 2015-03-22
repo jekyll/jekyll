@@ -36,12 +36,48 @@ class TestRegenerator < JekyllUnitTest
       @regenerator.regenerate?(@document)
       @regenerator.regenerate?(@asset_file)
 
+      # we need to create the destinations for these files,
+      # because regenerate? checks if the destination exists
+      [@page, @post, @document, @asset_file].each do |item|
+        if item.respond_to?(:destination) 
+          dest = item.destination(@site.dest)
+          FileUtils.mkdir_p(File.dirname(dest))
+          FileUtils.touch(dest)
+        end
+      end
       @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
+      # these should pass, since nothing has changed, and the
+      # loop above made sure the desinations exist
       assert !@regenerator.regenerate?(@page)
       assert !@regenerator.regenerate?(@post)
       assert !@regenerator.regenerate?(@document)
+    end
+
+    should "regenerate if destination missing" do
+      # Process files
+      @regenerator.regenerate?(@page)
+      @regenerator.regenerate?(@post)
+      @regenerator.regenerate?(@document)
+      @regenerator.regenerate?(@asset_file)
+
+      @regenerator.write_metadata
+      @regenerator = Regenerator.new(@site)
+
+      # make sure the files don't actually exist
+      [@page, @post, @document, @asset_file].each do |item|
+        if item.respond_to?(:destination) 
+          dest = item.destination(@site.dest)
+          File.unlink(dest) unless !File.exist?(dest)
+        end
+      end
+
+      # while nothing has changed, the output files were not
+      # generated, so they still need to be regenerated
+      assert @regenerator.regenerate?(@page)
+      assert @regenerator.regenerate?(@post)
+      assert @regenerator.regenerate?(@document)
     end
 
     should "always regenerate asset files" do

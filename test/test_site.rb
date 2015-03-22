@@ -495,6 +495,25 @@ class TestSite < JekyllUnitTest
         assert_equal mtime3, mtime4 # no modifications, so remain the same
       end
 
+      should "regnerate files that have had their destination deleted" do
+        contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
+        @site.process
+
+        source = @site.in_source_dir(contacts_html.path)
+        dest = File.expand_path(contacts_html.destination(@site.dest))
+        mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
+
+        # simulate file modification by user
+        File.unlink dest
+        refute File.exist?(dest)
+
+        sleep 1
+        @site.process
+        assert File.exist?(dest)
+        mtime2 = File.stat(dest).mtime.to_i
+        refute_equal mtime1, mtime2 # must be regenerated 
+      end
+
     end
 
   end
