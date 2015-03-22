@@ -44,8 +44,13 @@ documents. YAML Front Matter is read in as data if it exists, and everything
 after it is stuck in the Document's `content` attribute. If no YAML Front
 Matter is provided, Jekyll will not generate the file in your collection.
 
-Note: the folder must be named identically to the collection you defined in
-your `_config.yml` file, with the addition of the preceding `_` character.
+<div class="note info">
+  <h5>Be sure to name your directories correctly</h5>
+  <p>
+The folder must be named identically to the collection you defined in
+your <code>_config.yml</code> file, with the addition of the preceding <code>_</code> character.
+  </p>
+</div>
 
 ### Step 3: Optionally render your collection's documents into independent files
 
@@ -64,8 +69,8 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
-As for posts with [Permalinks](../permalinks/), document URL can be customized
-by setting a `permalink` metadata to the collection:
+As for posts with [Permalinks](../permalinks/), the document
+URL can be customized by setting `permalink` metadata for the collection:
 
 {% highlight yaml %}
 collections:
@@ -77,9 +82,14 @@ collections:
 For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be
 written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
 
-**Note that files in collections that do not have front matter are treated
+<div class="note info">
+  <h5>Don't forget to add YAML for processing</h5>
+  <p>
+Files in collections that do not have front matter are treated
 as static files and simply copied to their output location without
-processing.**
+processing.
+  </p>
+</div>
 
 <div class="mobile-side-scroller">
 <table>
