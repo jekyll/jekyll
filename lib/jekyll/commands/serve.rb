@@ -45,7 +45,7 @@ module Jekyll
             file_handler_options
           )
 
-          Jekyll.logger.info "Server address:", server_address(s, options)
+          Jekyll.logger.info "Server address:", server_address_info(s, options)
 
           if options['detach'] # detach the server
             pid = Process.fork { s.start }
@@ -125,15 +125,14 @@ module Jekyll
           WEBrick::HTTPUtils::load_mime_types(mime_types_file)
         end
 
-        def server_address(server, options)
-          baseurl = "#{options['baseurl']}/" if options['baseurl']
-          [
-            "http://",
-            server.config[:BindAddress],
-            ":",
-            server.config[:Port],
-            baseurl || ""
-          ].map(&:to_s).join("")
+        def server_address_info(server, options)
+          bind_addr = server.config[:BindAddress].to_s
+          listen_addr = bind_addr == "0.0.0.0" ? "localhost" : bind_addr
+          base_url  = "#{options['baseurl']}/" if options['baseurl']
+
+          rtn = "http://#{listen_addr}:#{server.config[:Port]}#{base_url}"
+          rtn = "#{rtn} (listening on all interfaces)" if bind_addr == "0.0.0.0"
+        rtn
         end
 
         # recreate NondisclosureName under utf-8 circumstance
