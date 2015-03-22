@@ -95,7 +95,8 @@ Check out [the extras page](../extras/) for more information.
   <h5>ProTip™: Enable Syntax Highlighting</h5>
   <p>
     If you’re the kind of person who is using Jekyll, then chances are you’ll
-    want to enable syntax highlighting using <a href="http://pygments.org/">Pygments</a>
+    want to enable syntax highlighting
+    using <a href="http://pygments.org/">Pygments</a>
     or <a href="https://github.com/jayferd/rouge">Rouge</a>. You should really
     <a href="../templates/#code-snippet-highlighting">check out how to
     do that</a> before you go any farther.

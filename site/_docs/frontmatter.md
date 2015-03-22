@@ -79,7 +79,8 @@ front matter of a page or post.
         <p>
 
           If you need your processed blog post URLs to be something other than
-          the site-wide style (default <code>/year/month/day/title.html</code>), then you can set
+          the site-wide style (default
+          <code>/year/month/day/title.html</code>), then you can set
           this variable and it will be used as the final URL.
 
         </p>
@@ -171,7 +172,8 @@ These are available out-of-the-box to be used in the front matter for a post.
         <p>
           A date here overrides the date from the name of the post. This can be
           used to ensure correct sorting of posts. A date is specified in the
-          format <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code>; hours, minutes, seconds, and timezone offset
+          format <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code>; hours,
+          minutes, seconds, and timezone offset
           are optional.
         </p>
       </td>
@@ -184,7 +186,8 @@ These are available out-of-the-box to be used in the front matter for a post.
   <h5>ProTip™: Don't repeat yourself</h5>
   <p>
     If you don't want to repeat your frequently used front matter variables
-    over and over, just define <a href="../configuration/#front-matter-defaults" title="Front Matter defaults">defaults</a>
+    over and over, just define
+    <a href="../configuration/#front-matter-defaults" title="Front Matter defaults">defaults</a>
     for them and only override them where necessary (or not at all). This works
     both for predefined and custom variables.
   </p>

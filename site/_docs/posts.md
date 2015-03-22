@@ -7,9 +7,8 @@ permalink: /docs/posts/
 One of Jekyll’s best aspects is that it is “blog aware”. What does this mean,
 exactly? Well, simply put, it means that blogging is baked into Jekyll’s
 functionality. If you write articles and publish them online, this means that
-you can publish and maintain a blog simply by managing a folder of text-files on
-your computer. Compared to the hassle of configuring and maintaining databases
-and web-based CMS systems, this will be a welcome change!
+you can publish and maintain a blog simply by managing a folder of text-files
+on your computer. Compared to the hassle of configuring and maintaining databases and web-based CMS systems, this will be a welcome change!
 
 ## The Posts Folder
 
@@ -106,8 +105,8 @@ Linking to a PDF for readers to download:
   <p>
     You can skip the <code>{% raw %}{{ site.url }}{% endraw %}</code> variable
     if you <strong>know</strong> your site will only ever be displayed at the
-    root URL of your domain. In this case you can reference assets directly with
-    just <code>/path/file.jpg</code>.
+    root URL of your domain. In this case you can reference assets directly
+    with just <code>/path/file.jpg</code>.
   </p>
 </div>
 
@@ -141,7 +140,8 @@ variable instead.
 ## Post excerpts
 
 Each post automatically takes the first block of text, from the beginning of
-the content to the first occurrence of `excerpt_separator`, and sets it as the `post.excerpt`.
+the content to the first occurrence of `excerpt_separator`, and sets it as
+the `post.excerpt`.
 Take the above example of an index of posts. Perhaps you want to include
 a little hint about the post's content by adding the first paragraph of each of
 your posts:
