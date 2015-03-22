@@ -24,9 +24,8 @@ $ gem update jekyll
 
 For better clarity, Jekyll now accepts the commands `build` and `serve`.
 Whereas before you might simply run the command `jekyll` to generate a site
-and `jekyll --server` to view it locally, now use the subcommands `jekyll build`
-and `jekyll serve` to do the same. And if you want Jekyll to automatically
-rebuild each time a file changes, just add the `--watch` flag at the end.
+and `jekyll --server` to view it locally, in v2.0 (and later) you should use the subcommands `jekyll build`
+and `jekyll serve` to build and preview your site.
 
 <div class="note info">
   <h5>Watching and Serving</h5>
