@@ -106,6 +106,7 @@
 
 ### Site Enhancements
 
+  * Remove extra spaces, make the last sentence less awkward in permalink docs (#3603)
   * Update the permalinks documentation to reflect the updates for 3.0 (#3556)
   * Add blog post announcing Jekyll Help (#3523)
   * Add Jekyll Talk to Help page on site (#3518)
