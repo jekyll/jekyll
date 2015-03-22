@@ -90,6 +90,7 @@ end
 multitask :default => [:test, :features]
 
 task :spec => :test
+
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'

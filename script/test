@@ -5,10 +5,6 @@ set -e
 #   script/test
 #   script/test <test_file>
 
-if [ ! -d tmp ]
-  then mkdir tmp
-fi
-
 if [ -d test/dest ]
   then rm -r test/dest
 fi
