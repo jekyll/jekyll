@@ -12,7 +12,7 @@ style is `date`.
 
 Permalinks are constructed by creating a template URL where dynamic elements
 are represented by colon-prefixed keywords. For example, the default `date`
-permalink is defined as `/:categories/:year/:month/:day/:title.html`.
+permalink is defined according to the format `/:categories/:year/:month/:day/:title.html`.
 
 ## Template variables
 
@@ -162,16 +162,16 @@ Jekyll also provides the following built-in styles for convenience.
 </div>
 
 The `permalink` configuration setting specifies the permalink style used for
-posts.  Pages and collections each have their own default permalink style; the
+posts. Pages and collections each have their own default permalink style; the
 default style for pages is `/:path/:basename` and the default for collections is
 `/:collection/:path`.
 
 These styles are modified to match the suffix style specified in the post
-permalink setting.  For example, a permalink style of `pretty`, which contains a
+permalink setting. For example, a permalink style of `pretty`, which contains a
 trailing slash, will update page permalinks to also contain a trailing slash:
-`/:path/:basename/`.  A permalink style of `date`, which contains a trailing
+`/:path/:basename/`. A permalink style of `date`, which contains a trailing
 file extension, will update page permalinks to also contain a file extension:
-`/:path/:basename:output_ext`.  The same is true for any custom permalink style.
+`/:path/:basename:output_ext`. The same is true for any custom permalink style.
 
 The permalink for an individual page or collection document can always be
 overridden in the [YAML Front Matter](../frontmatter/) for the page or document.
@@ -248,7 +248,7 @@ Given a post named: `/2009-04-29-slap-chop.md`
 
 Jekyll supports permalinks that contain neither a trailing slash nor a file
 extension, but this requires additional support from the web server to properly
-serve.  When using extensionless permalinks, output files written to disk will
+serve. When using extensionless permalinks, output files written to disk will
 still have the proper file extension (typically `.html`), so the web server
 must be able to map requests without file extensions to these files.
 
@@ -270,7 +270,7 @@ Options +MultiViews
 ### Nginx
 
 The [try_files][] directive allows you to specify a list of files to search for
-to process a request.  The following configuration will instruct nginx to search
+to process a request. The following configuration will instruct nginx to search
 for a file with an `.html` extension if an exact match for the requested URI is
 not found.
 
