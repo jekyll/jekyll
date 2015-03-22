@@ -12,7 +12,8 @@ style is `date`.
 
 Permalinks are constructed by creating a template URL where dynamic elements
 are represented by colon-prefixed keywords. For example, the default `date`
-permalink is defined according to the format `/:categories/:year/:month/:day/:title.html`.
+permalink is defined according to the
+format `/:categories/:year/:month/:day/:title.html`.
 
 ## Template variables
 

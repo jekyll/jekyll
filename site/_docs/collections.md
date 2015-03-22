@@ -7,7 +7,8 @@ permalink: /docs/collections/
 <div class="note warning">
   <h5>Collections support is unstable and may change</h5>
   <p>
-    This is an experimental feature and the API may change until the feature stabilizes.
+    This is an experimental feature and the API may change until the
+    feature stabilizes.
   </p>
 </div>
 
@@ -52,7 +53,8 @@ your <code>_config.yml</code> file, with the addition of the preceding <code>_</
   </p>
 </div>
 
-### Step 3: Optionally render your collection's documents into independent files
+### Step 3: Optionally render your collection's documents into independent
+files
 
 If you'd like Jekyll to create a public-facing, rendered version of each
 document in your collection, set the `output` key to `true` in your collection
@@ -130,7 +132,12 @@ processing.
         <p><code>title</code></p>
       </td>
       <td>
-        <p>The document's lowercase title (as defined in its <a href="/docs/frontmatter/">front matter</a>), with every sequence of spaces and non-alphanumeric characters replaced by a hyphen. If the document does not define a title in its <a href="/docs/frontmatter/">front matter</a>, this is equivalent to <code>name</code>.</p>
+        <p>The document's lowercase title (as defined in
+        its <a href="/docs/frontmatter/">front matter</a>), with every sequence
+         of spaces and non-alphanumeric characters replaced by a hyphen.
+         If the document does not define a title in
+         its <a href="/docs/frontmatter/">front matter</a>, this is
+         equivalent to <code>name</code>.</p>
       </td>
     </tr>
     <tr>

@@ -44,8 +44,8 @@ following is a reference of the available data.
       <td><p><code>content</code></p></td>
       <td><p>
 
-        In layout files, the rendered content of the Post or Page being wrapped.
-        Not defined in Post or Page files.
+        In layout files, the rendered content of the Post or Page being
+        wrapped. Not defined in Post or Page files.
 
       </p></td>
     </tr>
@@ -102,11 +102,11 @@ following is a reference of the available data.
       <td><p><code>site.related_posts</code></p></td>
       <td><p>
 
-        If the page being processed is a Post, this contains a list of up to ten
-        related Posts. By default, these are low quality but fast to compute.
-        For high quality but slow to compute results, run the
-        <code>jekyll</code> command with the <code>--lsi</code> (latent semantic
-        indexing) option.
+        If the page being processed is a Post, this contains a list of up to
+        ten related Posts. By default, these are low quality but
+        fast to compute. For high quality but slow to compute results, run the
+        <code>jekyll</code> command with the <code>--lsi</code>
+        (latent semantic indexing) option.
 
       </p></td>
     </tr>
@@ -140,7 +140,8 @@ following is a reference of the available data.
       <td><p><code>site.data</code></p></td>
       <td><p>
 
-        A list containing the data loaded from the YAML files located in the <code>_data</code> directory.
+        A list containing the data loaded from the YAML files
+        located in the <code>_data</code> directory.
 
       </p></td>
     </tr>
@@ -312,7 +313,8 @@ following is a reference of the available data.
   <p>
 
     Any custom front matter that you specify will be available under
-    <code>page</code>. For example, if you specify <code>custom_css: true</code>
+    <code>page</code>. For example, if you
+    specify <code>custom_css: true</code>
     in a page’s front matter, that value will be available as
     <code>page.custom_css</code>.
 

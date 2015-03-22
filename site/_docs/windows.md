@@ -11,7 +11,8 @@ knowledge and lessons that have been unearthed by Windows users.
 ## Installation
 
 Julian Thilo has written up instructions to get
-[Jekyll running on Windows][windows-installation] and it seems to work for most.
+[Jekyll running on Windows][windows-installation] and it seems to work for
+most.
 
 ## Encoding
 
@@ -19,9 +20,10 @@ If you use UTF-8 encoding, make sure that no `BOM` header
 characters exist in your files or very, very bad things will happen to
 Jekyll. This is especially relevant if you're running Jekyll on Windows.
 
-Additionally, you might need to change the code page of the console window to UTF-8
-in case you get a "Liquid Exception: Incompatible character encoding" error during
-the site generation process. It can be done with the following command:
+Additionally, you might need to change the code page of the console window
+to UTF-8 in case you get a "Liquid Exception: Incompatible character encoding"
+error during the site generation process. It can be done with the
+following command:
 
 {% highlight bash %}
 $ chcp 65001
