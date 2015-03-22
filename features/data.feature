@@ -103,8 +103,8 @@ Feature: Data
     Then the "_site/index.html" file should exist
     And I should see "Dairy Products" in "_site/index.html"
 
-  Scenario: should be backward compatible with site.data in _config.yml
-    Given I have a "_config.yml" file with content:
+  Scenario: should be backward compatible with site.data in .jekyll
+    Given I have a ".jekyll" file with content:
       """
       data:
         - name: Jack

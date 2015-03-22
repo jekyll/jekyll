@@ -118,7 +118,7 @@ Feature: frontmatter defaults
     ---
     Value: {{ page.myval }}
     """
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
       collections:
         slides:
@@ -145,7 +145,7 @@ Feature: frontmatter defaults
     ---
     Value: {{ page.myval }}
     """
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
       collections:
         slides:

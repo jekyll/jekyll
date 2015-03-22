@@ -65,10 +65,10 @@ $ jekyll serve --no-watch
 
 These are just a few of the available [configuration options](../configuration/).
 Many configuration options can either be specified as flags on the command line,
-or alternatively (and more commonly) they can be specified in a `_config.yml`
+or alternatively (and more commonly) they can be specified in a `.jekyll.yml`
 file at the root of the source directory. Jekyll will automatically use the
 options from this file when run. For example, if you place the following lines
-in your `_config.yml` file:
+in your `.jekyll.yml` file:
 
 {% highlight yaml %}
 source:      _source

@@ -20,7 +20,7 @@ and folders you need for paginated listings.
 
 ## Enable pagination
 
-To enable pagination for your blog, add a line to the `_config.yml` file that
+To enable pagination for your blog, add a line to the `.jekyll.yml` file that
 specifies how many items should be displayed per page:
 
 {% highlight yaml %}

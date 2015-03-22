@@ -125,11 +125,11 @@ module Jekyll
     # are not replaced with hyphen.
     #
     # Examples:
-    #   slugify("The _config.yml file")
-    #   # => "the-config-yml-file"
+    #   slugify("The .jekyll.yml file")
+    #   # => "the-jekyll-yml-file"
     #
-    #   slugify("The _config.yml file", "pretty")
-    #   # => "the-_config.yml-file"
+    #   slugify("The .jekyll.yml file", "pretty")
+    #   # => "the-.jekyll.yml-file"
     #
     # Returns the slugified string.
     def slugify(string, mode=nil)

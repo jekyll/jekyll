@@ -29,7 +29,7 @@ class TestConfiguration < JekyllUnitTest
     setup do
       @config = Configuration[{"source" => source_dir}]
       @no_override     = {}
-      @one_config_file = {"config" => "config.yml"}
+      @one_config_file = {"config" => ".jekyll.yml"}
       @multiple_files  = {"config" => %w[config/site.yml config/deploy.toml configuration.yml]}
     end
 
@@ -39,19 +39,19 @@ class TestConfiguration < JekyllUnitTest
       assert @config.config_files(@multiple_files).is_a?(Array)
     end
     should "return the default config path if no config files are specified" do
-      assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
+      assert_equal [source_dir(".jekyll.yml")], @config.config_files(@no_override)
     end
     should "return .yaml if it exists but .yml does not" do
-      allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(false)
-      allow(File).to receive(:exist?).with(source_dir("_config.yaml")).and_return(true)
-      assert_equal [source_dir("_config.yaml")], @config.config_files(@no_override)
+      allow(File).to receive(:exist?).with(source_dir(".jekyll.yml")).and_return(false)
+      allow(File).to receive(:exist?).with(source_dir(".jekyll.yaml")).and_return(true)
+      assert_equal [source_dir(".jekyll.yaml")], @config.config_files(@no_override)
     end
     should "return .yml if both .yml and .yaml exist" do
-      allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
-      assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
+      allow(File).to receive(:exist?).with(source_dir(".jekyll.yml")).and_return(true)
+      assert_equal [source_dir(".jekyll.yml")], @config.config_files(@no_override)
     end
     should "return the config if given one config file" do
-      assert_equal %w[config.yml], @config.config_files(@one_config_file)
+      assert_equal %w[.jekyll.yml], @config.config_files(@one_config_file)
     end
     should "return an array of the config files if given many config files" do
       assert_equal %w[config/site.yml config/deploy.toml configuration.yml], @config.config_files(@multiple_files)
@@ -110,11 +110,11 @@ class TestConfiguration < JekyllUnitTest
   end
   context "loading configuration" do
     setup do
-      @path = File.join(Dir.pwd, '_config.yml')
+      @path = File.join(Dir.pwd, '.jekyll.yml')
       @user_config = File.join(Dir.pwd, "my_config_file.yml")
     end
 
-    should "fire warning with no _config.yml" do
+    should "fire warning with no .jekyll.yml" do
       allow(SafeYAML).to receive(:load_file).with(@path) { raise SystemCallError, "No such file or directory - #{@path}" }
       allow($stderr).to receive(:puts).with("Configuration file: none".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
@@ -149,7 +149,7 @@ class TestConfiguration < JekyllUnitTest
   context "loading config from external file" do
     setup do
       @paths = {
-        :default => File.join(Dir.pwd, '_config.yml'),
+        :default => File.join(Dir.pwd, '.jekyll.yml'),
         :other   => File.join(Dir.pwd, '_config.live.yml'),
         :toml    => source_dir('_config.dev.toml'),
         :empty   => ""

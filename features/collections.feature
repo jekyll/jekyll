@@ -16,7 +16,7 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {{ site.collections }}"
     And I have an "collection_metadata.html" page that contains "Methods metadata: {{ site.collections.methods.foo }} {{ site.collections.methods }}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
       methods:
@@ -32,7 +32,7 @@ Feature: Collections
   Scenario: Rendered collection at a custom URL
     Given I have an "index.html" page that contains "Collections: {{ site.collections }}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
       methods:
@@ -47,7 +47,7 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {{ site.collections }}"
     And I have a default layout that contains "<div class='title'>Tom Preston-Werner</div> {{content}}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
       methods:
@@ -63,7 +63,7 @@ Feature: Collections
   Scenario: Collections specified as an array
     Given I have an "index.html" page that contains "Collections: {% for method in site.methods %}{{ method.relative_path }} {% endfor %}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
     - methods
@@ -75,7 +75,7 @@ Feature: Collections
   Scenario: Collections specified as an hash
     Given I have an "index.html" page that contains "Collections: {% for method in site.methods %}{{ method.relative_path }} {% endfor %}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
     - methods
@@ -87,7 +87,7 @@ Feature: Collections
   Scenario: All the documents
     Given I have an "index.html" page that contains "All documents: {% for doc in site.documents %}{{ doc.relative_path }} {% endfor %}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
     - methods
@@ -99,7 +99,7 @@ Feature: Collections
   Scenario: Documents have an output attribute, which is the converted HTML
     Given I have an "index.html" page that contains "First document's output: {{ site.documents.first.output }}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
     - methods
@@ -111,7 +111,7 @@ Feature: Collections
   Scenario: Filter documents by where
     Given I have an "index.html" page that contains "{% assign items = site.methods | where: 'whatever','foo.bar' %}Item count: {{ items.size }}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
     - methods
@@ -123,7 +123,7 @@ Feature: Collections
   Scenario: Sort by title
     Given I have an "index.html" page that contains "{% assign items = site.methods | sort: 'title' %}1. of {{ items.size }}: {{ items.first.output }}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
     - methods
@@ -135,7 +135,7 @@ Feature: Collections
   Scenario: Sort by relative_path
     Given I have an "index.html" page that contains "Collections: {% assign methods = site.methods | sort: 'relative_path' %}{% for method in methods %}{{ method.title }}, {% endfor %}"
     And I have fixture collections
-    And I have a "_config.yml" file with content:
+    And I have a ".jekyll" file with content:
     """
     collections:
     - methods

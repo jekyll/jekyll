@@ -72,7 +72,7 @@ class JekyllUnitTest < Minitest::Test
 
   def clear_dest
     FileUtils.rm_rf(dest_dir)
-    FileUtils.rm_rf(source_dir('.jekyll-metadata'))
+    FileUtils.rm_rf(source_dir('.jekyll.yml-metadata'))
   end
 
   def test_dir(*subdirs)

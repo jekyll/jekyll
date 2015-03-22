@@ -69,7 +69,7 @@ The Sass converter will default the `sass_dir` configuration option to
 </div>
 
 You may also specify the output style with the `style` option in your
-`_config.yml` file:
+`.jekyll.yml` file:
 
 {% highlight yaml %}
 sass:

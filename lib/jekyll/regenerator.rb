@@ -113,7 +113,7 @@ module Jekyll
     #
     # Returns the String path of the file.
     def metadata_file
-      site.in_source_dir('.jekyll-metadata')
+      site.in_source_dir('.jekyll.yml-metadata')
     end
 
     # Check if metadata has been disabled

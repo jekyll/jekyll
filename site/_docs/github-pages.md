@@ -95,7 +95,7 @@ Project Pages complicates the proper resolution of URLs. Here is an approach to
 utilizing the GitHub Project Page URL structure (`username.github.io/project-name/`)
 whilst maintaining the ability to preview your Jekyll site locally.
 
-1. In `_config.yml`, set the `baseurl` option to `/project-name` -- note the
+1. In `.jekyll.yml`, set the `baseurl` option to `/project-name` -- note the
    leading slash and the **absence** of a trailing slash.
 2. When referencing JS or CSS files, do it like this:
    `{% raw %}{{ site.baseurl }}/path/to/css.css{% endraw %}` -- note the slash

@@ -96,12 +96,12 @@ to one or more config files (comma-delimited, no spaces).
 <div class="note info">
   <h5>The config flag explicitly specifies your configuration file(s)</h5>
   <p markdown="1">If you use the `--config` flag, Jekyll will ignore your
-    `_config.yml` file. Want to merge a custom configuration with the normal
+    `.jekyll.yml` file. Want to merge a custom configuration with the normal
     configuration? No problem. Jekyll will accept more than one custom config
     file via the command line. Config files cascade from right to left, such
-    that if I run `jekyll serve --config _config.yml,_config-dev.yml`,
+    that if I run `jekyll serve --config .jekyll.yml,_config-dev.yml`,
     the values in the config files on the right (`_config-dev.yml`) overwrite
-    those on the left (`_config.yml`) when both contain the same key.</p>
+    those on the left (`.jekyll.yml`) when both contain the same key.</p>
 </div>
 
 ### New Config File Options
@@ -124,7 +124,7 @@ if so, make sure that you're using them properly:
 Often, you'll want the ability to run a Jekyll site in multiple places, such as
 previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes that
 easier with the new `--baseurl` flag. To take advantage of this feature, first
-add the production `baseurl` to your site's `_config.yml` file. Then,
+add the production `baseurl` to your site's `.jekyll.yml` file. Then,
 throughout the site, simply prefix relative URLs with `{% raw %}{{ site.baseurl }}{% endraw %}`.
 When you're ready to preview your site locally, pass along the `--baseurl` flag
 with your local baseurl (most likely `/`) to `jekyll serve` and Jekyll will

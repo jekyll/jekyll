@@ -13,7 +13,7 @@ and [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) files located in
 Note that CSV files *must* contain a header row.
 
 This powerful feature allows you to avoid repetition in your templates and to
-set site specific options without changing `_config.yml`.
+set site specific options without changing `.jekyll.yml`.
 
 Plugins/themes can also leverage Data Files to set configuration variables.
 

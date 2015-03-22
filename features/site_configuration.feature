@@ -245,7 +245,7 @@ Feature: Site configuration
 
   Scenario: arbitrary file reads via layouts
     Given I have an "index.html" page with layout "page" that contains "FOO"
-    And I have a "_config.yml" file that contains "layouts: '../../../../../../../../../../../../../../usr/include'"
+    And I have a ".jekyll" file that contains "layouts: '../../../../../../../../../../../../../../usr/include'"
     When I run jekyll build
     Then the _site directory should exist
     And I should see "FOO" in "_site/index.html"

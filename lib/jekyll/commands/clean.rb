@@ -17,7 +17,7 @@ module Jekyll
         def process(options)
           options = configuration_from_options(options)
           destination = options['destination']
-          metadata_file = File.join(options['source'], '.jekyll-metadata')
+          metadata_file = File.join(options['source'], '.jekyll.yml-metadata')
 
           if File.directory? destination
             Jekyll.logger.info "Cleaning #{destination}..."

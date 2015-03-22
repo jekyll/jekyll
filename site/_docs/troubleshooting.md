@@ -104,7 +104,7 @@ is as follows:
 2. Configuration file settings
 3. Defaults
 
-That is: defaults are overridden by options specified in `_config.yml`,
+That is: defaults are overridden by options specified in `.jekyll.yml`,
 and flags specified at the command-line will override all other settings
 specified elsewhere.
 
@@ -145,7 +145,7 @@ Since v1.0.0, Jekyll has had automatically-generated post excerpts. Since
 v1.1.0, Jekyll also passes these excerpts through Liquid, which can cause
 strange errors where references don't exist or a tag hasn't been closed. If you
 run into these errors, try setting `excerpt_separator: ""` in your
-`_config.yml`, or set it to some nonsense string.
+`.jekyll.yml`, or set it to some nonsense string.
 
 <div class="note">
   <h5>Please report issues you encounter!</h5>

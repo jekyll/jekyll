@@ -6,7 +6,7 @@ permalink: /docs/configuration/
 
 Jekyll allows you to concoct your sites in any way you can dream up, and it’s
 thanks to the powerful and flexible configuration options that this is possible.
-These options can either be specified in a `_config.yml` file placed in your
+These options can either be specified in a `.jekyll.yml` file placed in your
 site’s root directory, or can be specified as flags for the `jekyll` executable
 in the terminal.
 
@@ -186,7 +186,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Configuration</strong></p>
-        <p class="description">Specify config files instead of using <code>_config.yml</code> automatically. Settings in later files override settings in earlier files.</p>
+        <p class="description">Specify config files instead of using <code>.jekyll.yml</code> automatically. Settings in later files override settings in earlier files.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">--config FILE1[,FILE2,...]</code></p>
@@ -345,11 +345,11 @@ Using [YAML Front Matter](../frontmatter/) is one way that you can specify confi
 
 Often times, you will find that you are repeating a lot of configuration options. Setting the same layout in each file, adding the same category - or categories - to a post, etc. You can even add custom variables like author names, which might be the same for the majority of posts on your blog.
 
-Instead of repeating this configuration each time you create a new post or page, Jekyll provides a way to set these defaults in the site configuration. To do this, you can specify  site-wide defaults using the `defaults` key in the `_config.yml` file in your projects root directory.
+Instead of repeating this configuration each time you create a new post or page, Jekyll provides a way to set these defaults in the site configuration. To do this, you can specify  site-wide defaults using the `defaults` key in the `.jekyll.yml` file in your projects root directory.
 
 The `defaults` key holds an array of scope/values pairs that define what defaults should be set for a particular file path, and optionally, a file type in that path.
 
-Let's say that you want to add a default layout to all pages and posts in your site. You would add this to your `_config.yml` file:
+Let's say that you want to add a default layout to all pages and posts in your site. You would add this to your `.jekyll.yml` file:
 
 {% highlight yaml %}
 defaults:
@@ -414,14 +414,14 @@ In this example the `layout` is set to `default` inside the [collection](../coll
 
 ### Precedence
 
-Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
+Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `.jekyll.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
 
 You can see that in the last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
 
-Finally, if you set defaults in the site configuration by adding a `defaults` section to your `_config.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:
+Finally, if you set defaults in the site configuration by adding a `defaults` section to your `.jekyll.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:
 
 {% highlight yaml %}
-# In _config.yml
+# In .jekyll.yml
 ...
 defaults:
   -
@@ -600,7 +600,7 @@ extensions are:
 In addition to the defaults mentioned above, you can also turn on recognition
 of Github Flavored Markdown by passing an `input` option with a value of "GFM".
 
-For example, in your `_config.yml`:
+For example, in your `.jekyll.yml`:
 
     kramdown:
       input: GFM
@@ -627,7 +627,7 @@ end
 {% endhighlight %}
 
 Once you've created your class and have it properly setup either as a plugin in
-the `_plugins` folder or as a gem, specify it in your `_config.yml`:
+the `_plugins` folder or as a gem, specify it in your `.jekyll.yml`:
 
 {% highlight yaml %}
 markdown: MyCustomProcessor

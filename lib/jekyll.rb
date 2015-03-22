@@ -82,7 +82,7 @@ module Jekyll
     end
 
     # Public: Generate a Jekyll configuration Hash by merging the default
-    # options with anything in _config.yml, and adding the given options on top.
+    # options with anything in .jekyll.yml, and adding the given options on top.
     #
     # override - A Hash of config directives that override any options in both
     #            the defaults and the config file. See Jekyll::Configuration::DEFAULTS for a
@@ -96,7 +96,7 @@ module Jekyll
         config = config.read_config_files(config.config_files(override))
       end
 
-      # Merge DEFAULTS < _config.yml < override
+      # Merge DEFAULTS < .jekyll.yml < override
       config = Utils.deep_merge_hashes(config, override).stringify_keys
       set_timezone(config['timezone']) if config['timezone']
 

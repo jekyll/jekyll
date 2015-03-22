@@ -26,7 +26,7 @@ following is a reference of the available data.
       <td><p>
 
           Sitewide information + configuration settings from
-          <code>_config.yml</code>. See below for details.
+          <code>.jekyll.yml</code>. See below for details.
 
       </p></td>
     </tr>
@@ -173,11 +173,11 @@ following is a reference of the available data.
       <td><p>
 
         All the variables set via the command line and your
-        <code>_config.yml</code> are available through the <code>site</code>
+        <code>.jekyll.yml</code> are available through the <code>site</code>
         variable. For example, if you have <code>url: http://mysite.com</code>
         in your configuration file, then in your Posts and Pages it will be
         stored in <code>site.url</code>. Jekyll does not parse changes to
-        <code>_config.yml</code> in <code>watch</code> mode, you must restart
+        <code>.jekyll.yml</code> in <code>watch</code> mode, you must restart
         Jekyll to see changes to variables.
 
       </p></td>
