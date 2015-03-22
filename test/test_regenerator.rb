@@ -75,6 +75,15 @@ class TestRegenerator < JekyllUnitTest
       assert @regenerator.cache[@path]
     end
 
+    should "clear the cache on clear_cache" do
+      # @path will be in the cache because the
+      # site will have processed it
+      assert @regenerator.cache[@path]
+
+      @regenerator.clear_cache
+      assert_equal  @regenerator.cache, {}
+    end
+
     should "write to the metadata file" do
       @regenerator.clear
       @regenerator.add(@path)
