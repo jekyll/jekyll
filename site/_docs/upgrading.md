@@ -39,9 +39,9 @@ rebuild each time a file changes, just add the `--watch` flag at the end.
 
 ### Absolute Permalinks
 
-In Jekyll v1.0, we introduced absolute permalinks for pages in subdirectories.
-Until v2.0, it is **opt-in**. Starting with v2.0, however, absolute permalinks
-will become **opt-out**, meaning Jekyll will default to using absolute permalinks
+In Jekyll v1.0, we introduced absolute permalinks for pages in
+subdirectories. Starting with v2.0, absolute permalinks are opt-out,
+meaning Jekyll will default to using absolute permalinks
 instead of relative permalinks.
 
 * To use absolute permalinks, set `relative_permalinks: false` in your configuration file.
