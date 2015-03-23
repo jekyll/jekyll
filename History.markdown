@@ -54,6 +54,7 @@
   * Added liquid-md5 plugin (#3598)
   * Documentation: RR replaced with RSpec Mocks (#3600)
   * Documentation: Fix subpath. (#3599)
+  * Create 'tmp' dir for test_tags if it doesn't exist (#3609)
 
 ### Bug Fixes
 
