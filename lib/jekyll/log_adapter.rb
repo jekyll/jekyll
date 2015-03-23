@@ -30,7 +30,7 @@ module Jekyll
       writer.level = LOG_LEVELS.fetch(level)
     end
 
-    # Public: Print a jekyll debug message
+    # Public: Print a Jekyll debug message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -40,7 +40,7 @@ module Jekyll
       writer.debug(message(topic, message))
     end
 
-    # Public: Print a jekyll message
+    # Public: Print a Jekyll message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -50,7 +50,7 @@ module Jekyll
       writer.info(message(topic, message))
     end
 
-    # Public: Print a jekyll message
+    # Public: Print a Jekyll message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -60,7 +60,7 @@ module Jekyll
       writer.warn(message(topic, message))
     end
 
-    # Public: Print a jekyll error message
+    # Public: Print a Jekyll error message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
