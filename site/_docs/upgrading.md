@@ -16,17 +16,18 @@ $ gem update jekyll
 <div class="note feature">
   <h5 markdown="1">Diving in</h5>
   <p markdown="1">Want to get a new Jekyll site up and running quickly? Simply
-   run <code>jekyll new SITENAME</code> to create a new folder with a bare bones
-   Jekyll site.</p>
+   run <code>jekyll new SITENAME</code> to create a new folder with a bare
+   bones Jekyll site.</p>
 </div>
 
 ### The Jekyll Command
 
 For better clarity, Jekyll now accepts the commands `build` and `serve`.
 Whereas before you might simply run the command `jekyll` to generate a site
-and `jekyll --server` to view it locally, now use the subcommands `jekyll build`
-and `jekyll serve` to do the same. And if you want Jekyll to automatically
-rebuild each time a file changes, just add the `--watch` flag at the end.
+and `jekyll --server` to view it locally, now use the
+subcommands `jekyll build` and `jekyll serve` to do the same. And if you want
+ Jekyll to automatically rebuild each time a file changes, just add the
+  `--watch` flag at the end.
 
 <div class="note info">
   <h5>Watching and Serving</h5>
@@ -41,11 +42,14 @@ rebuild each time a file changes, just add the `--watch` flag at the end.
 
 In Jekyll v1.0, we introduced absolute permalinks for pages in subdirectories.
 Until v2.0, it is **opt-in**. Starting with v2.0, however, absolute permalinks
-will become **opt-out**, meaning Jekyll will default to using absolute permalinks
+will become **opt-out**, meaning Jekyll will default to using
+absolute permalinks
 instead of relative permalinks.
 
-* To use absolute permalinks, set `relative_permalinks: false` in your configuration file.
-* To continue using relative permalinks, set `relative_permalinks: true` in your configuration file.
+* To use absolute permalinks, set `relative_permalinks: false` in 
+your configuration file.
+* To continue using relative permalinks, set `relative_permalinks: true` 
+in your configuration file.
 
 <div class="note warning" id="absolute-permalinks-warning">
   <h5 markdown="1">Absolute permalinks will be default in v2.0 and on</h5>
@@ -107,8 +111,8 @@ to one or more config files (comma-delimited, no spaces).
 ### New Config File Options
 
 Jekyll 1.0 introduced several new config file options. Before you upgrade, you
-should check to see if any of these are present in your pre-1.0 config file, and
-if so, make sure that you're using them properly:
+should check to see if any of these are present in your pre-1.0 config file,
+and if so, make sure that you're using them properly:
 
 * `excerpt_separator`
 * `host`
@@ -125,7 +129,8 @@ Often, you'll want the ability to run a Jekyll site in multiple places, such as
 previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes that
 easier with the new `--baseurl` flag. To take advantage of this feature, first
 add the production `baseurl` to your site's `_config.yml` file. Then,
-throughout the site, simply prefix relative URLs with `{% raw %}{{ site.baseurl }}{% endraw %}`.
+throughout the site, simply prefix relative URLs with
+ `{% raw %}{{ site.baseurl }}{% endraw %}`.
 When you're ready to preview your site locally, pass along the `--baseurl` flag
 with your local baseurl (most likely `/`) to `jekyll serve` and Jekyll will
 swap in whatever you've passed along, ensuring all your links work as you'd
