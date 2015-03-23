@@ -4,6 +4,10 @@ require 'helper'
 
 class TestTags < JekyllUnitTest
 
+  def setup
+    FileUtils.mkdir_p("tmp")
+  end
+
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     site = fixture_site({"highlighter" => "rouge"}.merge(override))
 
