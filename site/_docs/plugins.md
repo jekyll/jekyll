@@ -636,7 +636,7 @@ LESS.js files during generation.
   <h5>Jekyll Plugins Wanted</h5>
   <p>
     If you have a Jekyll plugin that you would like to see added to this list,
-    you should <a href="../contributing/">read the contributing page</a> to find
-    out how to make that happen.
+    you should <a href="../contributing/">read the contributing page</a> to 
+    find out how to make that happen.
   </p>
 </div>
