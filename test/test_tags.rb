@@ -12,7 +12,7 @@ class TestTags < JekyllUnitTest
     site = fixture_site({"highlighter" => "rouge"}.merge(override))
 
     if override['read_posts']
-      site.read_posts('')
+      site.posts.concat(PostReader.new(site).read(''))
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
