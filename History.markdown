@@ -155,6 +155,7 @@
   * Restructure `excerpt_separator` documentation for clarity (#3550)
   * Fix accidental line break in collections docs (#3585)
   * Add information about the `.jekyll-metadata` file (#3597)
+  * Document addition of variable parameters to an include (#3581)
 
 ## 2.5.3 / 2014-12-22
 
