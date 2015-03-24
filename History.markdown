@@ -55,6 +55,7 @@
   * Documentation: RR replaced with RSpec Mocks (#3600)
   * Documentation: Fix subpath. (#3599)
   * Create 'tmp' dir for test_tags if it doesn't exist (#3609)
+  * Extract reading of data from `Site` to reduce responsibilities. (#3545)
 
 ### Bug Fixes
 
