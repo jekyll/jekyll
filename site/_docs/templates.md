@@ -4,8 +4,10 @@ title: Templates
 permalink: /docs/templates/
 ---
 
-Jekyll uses the [Liquid](https://github.com/Shopify/liquid/wiki) templating language to
-process templates. All of the standard Liquid [tags](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers#tags) and
+Jekyll uses the [Liquid](https://github.com/Shopify/liquid/wiki)
+templating language to process templates. All of the standard
+Liquid [tags](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers#tags)
+ and
 [filters](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers#standard-filters) are
 supported. Jekyll even adds a few handy filters and tags of its own to make
 common tasks easier.
@@ -80,7 +82,8 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Where</strong></p>
-        <p>Select all the objects in an array where the key has the given value.</p>
+        <p>Select all the objects in an array where the key has the
+        given value.</p>
       </td>
       <td class="align-center">
         <p>
@@ -271,8 +274,8 @@ your site, you can use the `include` tag.
 {% raw %}{% include footer.html %}{% endraw %}
 {% endhighlight %}
 
-Jekyll expects all include files to be placed in an `_includes` directory at the
-root of your source directory. This will embed the contents of
+Jekyll expects all include files to be placed in an `_includes` directory at
+the root of your source directory. This will embed the contents of
 `<source>/_includes/footer.html` into the calling file.
 
 <div class="note">
@@ -306,26 +309,30 @@ You can also choose to include file fragments relative to the current file:
 {% raw %}{% include_relative somedir/footer.html %}{% endraw %}
 {% endhighlight %}
 
-You won't need to place your included content within the `_includes` directory. Instead,
-the inclusion is specifically relative to the file where the tag is being used. For example,
-if `_posts/2014-09-03-my-file.markdown` uses the `include_relative` tag, the included file
-must be within the `_posts` directory, or one of its subdirectories. You cannot include
-files in other locations.
+You won't need to place your included content within the `_includes`
+directory. Instead, the inclusion is specifically relative to the file
+where the tag is being used.
+For example, if `_posts/2014-09-03-my-file.markdown` uses
+the `include_relative` tag, the included file must be within the
+`_posts` directory, or one of its subdirectories. You cannot include files
+in other locations.
 
-All the other capabilities of the `include` tag are available to the `include_relative` tag,
-such as using variables.
+All the other capabilities of the `include` tag are available to
+the `include_relative` tag, such as using variables.
 
 ### Code snippet highlighting
 
 Jekyll has built in support for syntax highlighting of [over 100
 languages](http://pygments.org/languages/) thanks to
-[Pygments](http://pygments.org/). To use Pygments, you must have Python installed
+[Pygments](http://pygments.org/). To use Pygments, you must have
+Python installed
 on your system and set `highlighter` to `pygments` in your site's configuration
 file.
 
-Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to highlight
-your code snippets. It doesn't support as many languages as Pygments, however it
-should suit most use cases. Also, since [Rouge](https://github.com/jayferd/rouge)
+Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to
+highlight your code snippets. It doesn't support as many languages as
+Pygments, however it should suit most use cases.
+Also, since [Rouge](https://github.com/jayferd/rouge)
 is written in pure Ruby, you don't need Python on your system!
 
 To render a code block with syntax highlighting, surround your code as follows:
@@ -349,9 +356,9 @@ wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexe
 #### Line numbers
 
 There is a second argument to `highlight` called `linenos` that is optional.
-Including the `linenos` argument will force the highlighted code to include line
-numbers. For instance, the following code block would include line numbers next
-to each line:
+Including the `linenos` argument will force the highlighted code to include
+line numbers. For instance, the following code block would include line
+numbers next to each line:
 
 {% highlight text %}
 {% raw %}
