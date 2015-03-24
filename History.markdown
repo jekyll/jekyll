@@ -106,6 +106,7 @@
   * Minor changes to resolve deprecation warnings (#3547)
   * Convert remaining textile test documents to markdown (#3528)
   * Migrate the tests to use rspec-mocks (#3552)
+  * Remove `activesupport` (#3612)
 
 ### Site Enhancements
 
