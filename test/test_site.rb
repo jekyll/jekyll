@@ -505,11 +505,11 @@ class TestSite < JekyllUnitTest
 
         # simulate file modification by user
         File.unlink dest
-        refute File.exist?(dest)
+        refute File.file?(dest)
 
-        sleep 1
+        sleep 1 # sleep for 1 second, since mtimes have 1s resolution
         @site.process
-        assert File.exist?(dest)
+        assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
         refute_equal mtime1, mtime2 # must be regenerated 
       end

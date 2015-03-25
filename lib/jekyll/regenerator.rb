@@ -18,21 +18,19 @@ module Jekyll
     def regenerate?(document)
       case document
       when Post, Page
-        return ( document.asset_file? || 
-                 document.data['regenerate'] || 
-                 source_modified_or_dest_missing?(
-                   site.in_source_dir(document.relative_path),
-                   document.destination(@site.dest)) )
+        document.asset_file? || document.data['regenerate'] || 
+          source_modified_or_dest_missing?(
+            site.in_source_dir(document.relative_path), document.destination(@site.dest)
+          )
       when Document
-        return ( !document.write? ||
-                document.data['regenerate'] ||
-                source_modified_or_dest_missing?(
-                    document.path, 
-                    document.destination(@site.dest)) )
+        !document.write? || document.data['regenerate'] ||
+          source_modified_or_dest_missing?(
+            document.path, document.destination(@site.dest)
+          )
       else
         source_path = document.respond_to?(:path)        ? document.path                    : nil
         dest_path   = document.respond_to?(:destination) ? document.destination(@site.dest) : nil
-        return source_modified_or_dest_missing?(source_path, dest_path)
+        source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
 
@@ -78,9 +76,7 @@ module Jekyll
     #
     # returns a boolean
     def source_modified_or_dest_missing?(source_path, dest_path)
-      source_modified = source_path ? modified?(source_path)  : true
-      dest_missing    = dest_path   ? !File.exist?(dest_path) : false
-      return source_modified || dest_missing
+      modified?(source_path) || ((dest_path and !File.exist?(dest_path)) or false)
     end
 
     # Checks if a path's (or one of its dependencies)
@@ -89,6 +85,9 @@ module Jekyll
     # Returns a boolean.
     def modified?(path)
       return true if disabled?
+
+      # objects that don't have a path are always regenerated
+      return true if path.nil? 
 
       # Check for path in cache
       if cache.has_key? path
