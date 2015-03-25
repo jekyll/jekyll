@@ -76,7 +76,7 @@ module Jekyll
     #
     # returns a boolean
     def source_modified_or_dest_missing?(source_path, dest_path)
-      modified?(source_path) || ((dest_path and !File.exist?(dest_path)) or false)
+      modified?(source_path) || (dest_path and !File.exist?(dest_path))
     end
 
     # Checks if a path's (or one of its dependencies)
