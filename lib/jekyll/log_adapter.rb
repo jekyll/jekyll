@@ -9,7 +9,7 @@ module Jekyll
       :error => ::Logger::ERROR
     }
 
-    # Public: Create a new instance of Jekyll's log writer
+    # Public: Create a new instance of a log writer
     #
     # writer - Logger compatible instance
     # log_level - (optional, symbol) the log level
@@ -30,7 +30,7 @@ module Jekyll
       writer.level = LOG_LEVELS.fetch(level)
     end
 
-    # Public: Print a jekyll debug message
+    # Public: Print a debug message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -40,7 +40,7 @@ module Jekyll
       writer.debug(message(topic, message))
     end
 
-    # Public: Print a jekyll message
+    # Public: Print a message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -50,7 +50,7 @@ module Jekyll
       writer.info(message(topic, message))
     end
 
-    # Public: Print a jekyll message
+    # Public: Print a message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -60,7 +60,7 @@ module Jekyll
       writer.warn(message(topic, message))
     end
 
-    # Public: Print a jekyll error message
+    # Public: Print an error message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -70,7 +70,7 @@ module Jekyll
       writer.error(message(topic, message))
     end
 
-    # Public: Print a Jekyll error message and immediately abort the process
+    # Public: Print an error message and immediately abort the process
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail (can be omitted)
@@ -81,7 +81,7 @@ module Jekyll
       abort
     end
 
-    # Internal: Build a Jekyll topic method
+    # Internal: Build a topic method
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
