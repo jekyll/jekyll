@@ -87,7 +87,7 @@ to one or more config files (comma-delimited, no spaces).
 
 * `--no-server`
 * `--no-auto`
-* `--auto` (now `--watch` and `--no-watch`)
+* `--auto` (now `--watch` and `--no-watch`, defaults to `--watch`)
 * `--server`
 * `--url=`
 * `--maruku`, `--rdiscount`, and `--redcarpet`
