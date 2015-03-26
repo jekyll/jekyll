@@ -57,6 +57,7 @@
   * Create 'tmp' dir for test_tags if it doesn't exist (#3609)
   * Extract reading of data from `Site` to reduce responsibilities. (#3545)
   * Removed the word 'Jekyll' a few times from the comments (#3617)
+  * `bin/jekyll`: with no args, exit with exit code 1 (#3619)
 
 ### Bug Fixes
 
