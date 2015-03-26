@@ -31,6 +31,7 @@ Mercenary.program(:jekyll) do |p|
     if args.empty?
       Jekyll.logger.error "A subcommand is required."
       puts p
+      abort
     else
       unless p.has_command?(args.first)
         Jekyll.logger.abort_with "Invalid command. Use --help for more information"
