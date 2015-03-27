@@ -156,8 +156,6 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
 ## 4. Gotchas
 
-### Exclude `vendor`
-
 <div class="note warning">
   <h5>Be sure to exclude <code>vendor</code> from your <code>_config.yml</code></h5>
   <p>Travis bundles all gems in the <code>vendor</code> directory on its build servers,
