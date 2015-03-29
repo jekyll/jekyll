@@ -18,16 +18,19 @@ module Jekyll
     def regenerate?(document)
       case document
       when Post, Page
-        document.asset_file? || document.data['regenerate'] ||
-          modified?(site.in_source_dir(document.relative_path))
+        document.asset_file? || document.data['regenerate'] || 
+          source_modified_or_dest_missing?(
+            site.in_source_dir(document.relative_path), document.destination(@site.dest)
+          )
       when Document
-        !document.write? || document.data['regenerate'] || modified?(document.path)
+        !document.write? || document.data['regenerate'] ||
+          source_modified_or_dest_missing?(
+            document.path, document.destination(@site.dest)
+          )
       else
-        if document.respond_to?(:path)
-          modified?(document.path)
-        else
-          true
-        end
+        source_path = document.respond_to?(:path)        ? document.path                    : nil
+        dest_path   = document.respond_to?(:destination) ? document.destination(@site.dest) : nil
+        source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
 
@@ -67,12 +70,24 @@ module Jekyll
       @cache = {}
     end
 
+
+    # Checks if the source has been modified or the
+    # destination is missing
+    #
+    # returns a boolean
+    def source_modified_or_dest_missing?(source_path, dest_path)
+      modified?(source_path) || (dest_path and !File.exist?(dest_path))
+    end
+
     # Checks if a path's (or one of its dependencies)
     # mtime has changed
     #
     # Returns a boolean.
     def modified?(path)
       return true if disabled?
+
+      # objects that don't have a path are always regenerated
+      return true if path.nil? 
 
       # Check for path in cache
       if cache.has_key? path
