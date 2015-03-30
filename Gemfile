@@ -24,7 +24,6 @@ gem 'jekyll_test_plugin_malicious'
 gem 'liquid-c', '~> 3.0'
 gem 'minitest'
 gem 'minitest-reporters'
-gem 'minitest-profile'
 gem 'test-unit' if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
 gem 'rspec-mocks'
 
