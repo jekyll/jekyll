@@ -10,6 +10,6 @@ if [ -d test/dest ]
 fi
 
 if [[ $# -lt 1 ]]
- then time bundle exec rake test
- else time bundle exec ruby -Itest "$@"
+ then time bundle exec rake TESTOPTS='--profile' test 
+ else time bundle exec ruby -Itest "$@" --profile
 fi
