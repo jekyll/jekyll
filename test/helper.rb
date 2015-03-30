@@ -10,7 +10,6 @@ require 'rubygems'
 require 'ostruct'
 require 'minitest/autorun'
 require 'minitest/reporters'
-require 'minitest/profile'
 require 'rspec/mocks'
 
 require 'jekyll'
