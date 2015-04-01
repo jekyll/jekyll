@@ -25,10 +25,6 @@ module Jekyll
       File.join(*[@base, @dir, @name].compact)
     end
 
-    def extname
-      File.extname(path)
-    end
-
     # Obtain destination path.
     #
     # dest - The String path to the destination dir.
