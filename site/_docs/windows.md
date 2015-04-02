@@ -13,6 +13,8 @@ knowledge and lessons that have been unearthed by Windows users.
 Julian Thilo has written up instructions to get
 [Jekyll running on Windows][windows-installation] and it seems to work for most.
 
+[windows-installation]: http://jekyll-windows.juthilo.com/
+
 ## Encoding
 
 If you use UTF-8 encoding, make sure that no `BOM` header
@@ -26,8 +28,6 @@ the site generation process. It can be done with the following command:
 {% highlight bash %}
 $ chcp 65001
 {% endhighlight %}
-
-[windows-installation]: http://jekyll-windows.juthilo.com/
 
 ## Auto-regeneration
 

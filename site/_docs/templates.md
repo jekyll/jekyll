@@ -4,11 +4,13 @@ title: Templates
 permalink: /docs/templates/
 ---
 
-Jekyll uses the [Liquid](https://github.com/Shopify/liquid/wiki) templating language to
+Jekyll uses the [Liquid][] templating language to
 process templates. All of the standard Liquid [tags](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers#tags) and
 [filters](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers#standard-filters) are
 supported. Jekyll even adds a few handy filters and tags of its own to make
 common tasks easier.
+
+[Liquid]: https://github.com/Shopify/liquid/wiki
 
 ## Filters
 
@@ -323,10 +325,10 @@ languages](http://pygments.org/languages/) thanks to
 on your system and set `highlighter` to `pygments` in your site's configuration
 file.
 
-Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to highlight
-your code snippets. It doesn't support as many languages as Pygments, however it
-should suit most use cases. Also, since [Rouge](https://github.com/jayferd/rouge)
-is written in pure Ruby, you don't need Python on your system!
+Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to
+ highlight your code snippets. It doesn't support as many languages as 
+ Pygments, however it should suit most use cases. Also, since Rouge is written 
+ in pure Ruby, you don't need Python on your system!
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -343,8 +345,11 @@ end
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
 you want to highlight, look for the “short name” on the [Pygments' Lexers
-page](http://pygments.org/docs/lexers/) or the [Rouge
+page][] or the [Rouge
 wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers).
+
+[Pygments' Lexers
+page]: http://pygments.org/docs/lexers/
 
 #### Line numbers
 
@@ -367,11 +372,13 @@ end
 
 In order for the highlighting to show up, you’ll need to include a highlighting
 stylesheet. For an example stylesheet you can look at
-[syntax.css](https://github.com/mojombo/tpw/tree/master/css/syntax.css). These
+[syntax.css][]. These
 are the same styles as used by GitHub and you are free to use them for your own
 site. If you use `linenos`, you might want to include an additional CSS class
 definition for the `.lineno` class in `syntax.css` to distinguish the line
 numbers from the highlighted code.
+
+[syntax.css]: https://github.com/mojombo/tpw/tree/master/css/syntax.css
 
 ### Post URL
 

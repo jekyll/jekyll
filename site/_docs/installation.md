@@ -14,12 +14,16 @@ describing the issue you encountered and how we might make the process easier.
 Installing Jekyll is easy and straight-forward, but there are a few
 requirements you’ll need to make sure your system has before you start.
 
-- [Ruby](http://www.ruby-lang.org/en/downloads/) (including development
+- [Ruby][] (including development
   headers)
-- [RubyGems](http://rubygems.org/pages/download)
+- [RubyGems][]
 - Linux, Unix, or Mac OS X
-- [NodeJS](http://nodejs.org), or another JavaScript runtime (for
+- [NodeJS][], or another JavaScript runtime (for
   CoffeeScript support).
+
+[Ruby]: http://www.ruby-lang.org/en/downloads/
+[RubyGems]: http://rubygems.org/pages/download
+[NodeJS]: http://nodejs.org
 
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>
@@ -32,8 +36,7 @@ requirements you’ll need to make sure your system has before you start.
 
 ## Install with RubyGems
 
-The best way to install Jekyll is via
-[RubyGems](http://rubygems.org/pages/download). At the terminal prompt,
+The best way to install Jekyll is via RubyGems. At the terminal prompt,
 simply run the following command to install Jekyll:
 
 {% highlight bash %}
