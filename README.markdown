@@ -20,7 +20,7 @@ Jekyll does what you tell it to do — no more, no less. It doesn't try to outs
 * Read up about its [Usage](http://jekyllrb.com/docs/usage/) and [Configuration](http://jekyllrb.com/docs/configuration/)
 * Take a gander at some existing [Sites](https://wiki.github.com/jekyll/jekyll/sites)
 * Fork and [Contribute](http://jekyllrb.com/docs/contributing/) your own modifications
-* Have questions? Check out [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/).
+* Have questions? Check out [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/)
 
 ## Diving In
 
