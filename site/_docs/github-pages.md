@@ -4,11 +4,13 @@ title: GitHub Pages
 permalink: /docs/github-pages/
 ---
 
-[GitHub Pages](http://pages.github.com) are public web pages for users,
+[GitHub Pages][] are public web pages for users,
 organizations, and repositories, that are freely hosted on GitHub's
 `github.io` domain or on a custom domain name of your choice. GitHub Pages are
 powered by Jekyll behind the scenes, so in addition to supporting regular HTML
 content, they’re also a great way to host your Jekyll-powered website for free.
+
+[GitHub Pages]: https://pages.github.com
 
 ## Deploying Jekyll to GitHub Pages
 
@@ -28,7 +30,8 @@ few minor details.
     differences between various versions of the gems. To use the
     currently-deployed version of the gem in your project, add the
     following to your <code>Gemfile</code>:
-
+  </p>
+  
 {% highlight ruby %}
 source 'https://rubygems.org'
 
@@ -38,7 +41,8 @@ versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
 gem 'github-pages', versions['github-pages']
 {% endhighlight %}
-
+  
+  <p>
     This will ensure that when you run <code>bundle install</code>, you
     have the correct version of the <code>github-pages</code> gem.
   </p>
@@ -49,8 +53,10 @@ gem 'github-pages', versions['github-pages']
 User and organization pages live in a special GitHub repository dedicated to
 only the GitHub Pages files. This repository must be named after the account
 name. For example, [@mojombo’s user page
-repository](https://github.com/mojombo/mojombo.github.io) has the name
+repository][] has the name
 `mojombo.github.io`.
+
+[@mojombo's user page repository]: https://github.com/mojombo/mojombo.github.io
 
 Content from the `master` branch of your repository will be used to build and
 publish the GitHub Pages site, so make sure your Jekyll site is stored there.

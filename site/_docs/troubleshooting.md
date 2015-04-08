@@ -68,7 +68,9 @@ DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 This error can occur during the installation of `jekyll-coffeescript` when
 you don't have a proper JavaScript runtime. To solve this, either install
 `execjs` and `therubyracer` gems, or install `nodejs`. Check out
-[issue #2327](https://github.com/jekyll/jekyll/issues/2327) for more info.
+[issue #2327][] for more info.
+
+[issue #2327]: https://github.com/jekyll/jekyll/issues/2327
 
 ## Problems running Jekyll
 

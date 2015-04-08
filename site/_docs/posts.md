@@ -53,22 +53,25 @@ file. For example, the following are examples of valid post filenames:
 
 All blog post files must begin with [YAML Front Matter](../frontmatter/). After
 that, it's simply a matter of deciding which format you prefer. Jekyll supports
-[Markdown](http://daringfireball.net/projects/markdown/) out of the box,
+[Markdown][] out of the box,
 and has [myriad extensions for other formats as well](/docs/plugins/#converters-1),
-including the popular [Textile](http://redcloth.org/textile) format. These
+including the popular [Textile][] format. These
 formats each have their own way of marking up different types of content
 within a post, so you should familiarize yourself with these formats and
 decide which one best suits your needs.
+
+[Markdown]: http://daringfireball.net/projects/markdown/
+[Textile]: http://redcloth.org/textile
 
 <div class="note info">
   <h5>Be aware of character sets</h5>
   <p>
     Content processors can modify certain characters to make them look nicer.
-    For example, the <code>smart</code> extension in Redcarpet converts standard,
-    ASCII quotation characters to curly, Unicode ones. In order for the browser
-    to display those characters properly, define the charset meta value by
-    including <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> in the
-    <code>&lt;head&gt;</code> of your layout.
+    For example, the <code>smart</code> extension in Redcarpet converts
+     standard, ASCII quotation characters to curly, Unicode ones. In order for 
+     the browser to display those characters properly, define the charset meta 
+     value by including <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> in 
+     the <code>&lt;head&gt;</code> of your layout.
   </p>
 </div>
 
@@ -115,9 +118,10 @@ Linking to a PDF for readers to download:
 
 It’s all well and good to have posts in a folder, but a blog is no use unless
 you have a list of posts somewhere. Creating an index of posts on another page
-(or in a [template](../templates/)) is easy, thanks to the [Liquid template
-language](http://wiki.shopify.com/Liquid) and its tags. Here’s a basic example
+(or in a [template](../templates/)) is easy, thanks to the [Liquid template language][] and its tags. Here’s a basic example
 of how to create a list of links to your blog posts:
+
+[Liquid template language]: http://wiki.shopify.com/Liquid
 
 {% highlight html %}
 <ul>

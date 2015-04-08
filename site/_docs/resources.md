@@ -4,27 +4,36 @@ title: Resources
 permalink: /docs/resources/
 ---
 
-Jekyll’s growing use is producing a wide variety of tutorials, frameworks, extensions, examples, and other resources that can be very helpful. Below is a collection of links to some of the most popular Jekyll resources.
+Jekyll’s growing use is producing a wide variety of tutorials, frameworks,
+ extensions, examples, and other resources that can be very helpful. Below is a
+  collection of links to some of the most popular Jekyll resources.
 
 ### Jekyll tips & tricks, and examples
 
-- [Tips for working with GitHub Pages Integration](https://gist.github.com/2890453)
+- [Tips for working with GitHub Pages Integration][]
+
+[Tips for working with GitHub Pages Integration]: https://gist.github.com/2890453
 
   Code example reuse, and keeping documentation up to date.
 
-- [Use FormKeep for Jekyll form backend and webhooks](https://formkeep.com/)
-- [Use Simple Form to integrate a simple contact
-  form](http://getsimpleform.com/)
-- [JekyllBootstrap.com](http://jekyllbootstrap.com)
+- [Use FormKeep for Jekyll form backend and webhooks][]
+- [Use Simple Form to integrate a simple contact form][]
+- [Jekyll Bootstrap][]
 
   Provides detailed explanations, examples, and helper-code to make
   getting started with Jekyll easier.
+
+[Use FormKeep for Jekyll form backend and webhooks]: https://formkeep.com/
+[Use Simple Form to integrate a simple contact form]: http://getsimpleform.com/
+[Jekyll Bootstrap]: http://jekyllbootstrap.com
 
 ### Tutorials
 
 #### Integrating Jekyll with Git
 
-- [Blogging with Git, Emacs and Jekyll](http://metajack.im/2009/01/23/blogging-with-git-emacs-and-jekyll/)
+- [Blogging with Git, Emacs, and Jekyll][]
+
+[Blogging with Git, Emacs, and Jekyll]: http://metajack.im/2009/01/23/blogging-with-git-emacs-and-jekyll/
 
 #### Other hacks
 

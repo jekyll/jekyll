@@ -9,7 +9,11 @@ may want to install, depending on how you plan to use Jekyll.
 
 ## Math Support
 
-Kramdown comes with optional support for LaTeX to PNG rendering via [MathJax](http://www.mathjax.org/) within math blocks. See the Kramdown documentation on [math blocks](http://kramdown.gettalong.org/syntax.html#math-blocks) and [math support](http://kramdown.gettalong.org/converter/html.html#math-support) for more details.
+Kramdown comes with optional support for LaTeX to PNG rendering via [MathJax][] within math blocks. See the Kramdown documentation on [math blocks][] and [math support][] for more details.
+
+[MathJax]: http://www.mathjax.org/
+[math blocks]: http://kramdown.gettalong.org/syntax.html#math-blocks
+[math support]: http://kramdown.gettalong.org/converter/html.html#math-support
 
 ## Alternative Markdown Processors
 
