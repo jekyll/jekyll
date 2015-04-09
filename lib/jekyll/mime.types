@@ -32,6 +32,7 @@ image/x-ms-bmp                        bmp
 application/vnd.ms-fontobject         eot
 application/x-font-ttf                ttf
 application/x-font-woff               woff
+application/font-woff2                woff2
 font/opentype                         otf
 
 application/java-archive              jar ear
