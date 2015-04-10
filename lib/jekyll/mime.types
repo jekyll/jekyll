@@ -1,8 +1,8 @@
 -# These are the same MIME types that GitHub Pages uses as of 26 January 2014
 
-text/html                             html htm shtml
+text/html;charset=utf-8               html htm shtml
 text/css                              css
-text/xml                              xml rss xsl xsd
+text/xml;charset=utf-8                xml rss xsl xsd
 image/gif                             gif
 image/jpeg                            jpeg jpg
 application/x-javascript              js
