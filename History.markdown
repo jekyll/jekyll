@@ -168,6 +168,7 @@
   * Add `jekyll-files` to the list of third-party plugins. (#3586)
   * Define the `install` step in the CI example `.travis.yml` (#3622)
   * Expand collections documentation. (#3638)
+  * Add the "warning" note label to excluding `vendor` in the CI docs page (#3623)
 
 ## 2.5.3 / 2014-12-22
 
