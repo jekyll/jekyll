@@ -5,10 +5,10 @@ permalink: /docs/configuration/
 ---
 
 Jekyll allows you to concoct your sites in any way you can dream up, and it’s
-thanks to the powerful and flexible configuration options that this is possible.
-These options can either be specified in a `_config.yml` file placed in your
-site’s root directory, or can be specified as flags for the `jekyll` executable
-in the terminal.
+thanks to the powerful and flexible configuration options that this is
+possible. These options can either be specified in a `_config.yml` file placed
+ in your site’s root directory, or can be specified as flags for the `jekyll`
+  executable in the terminal.
 
 ## Configuration Settings
 
@@ -32,7 +32,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Site Source</strong></p>
-        <p class="description">Change the directory where Jekyll will read files</p>
+        <p class="description">Change the directory where Jekyll will
+        read files</p>
       </td>
       <td class="align-center">
         <p><code class="option">source: DIR</code></p>
@@ -42,7 +43,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Site Destination</strong></p>
-        <p class="description">Change the directory where Jekyll will write files</p>
+        <p class="description">Change the directory where Jekyll will
+         write files</p>
       </td>
       <td class="align-center">
         <p><code class="option">destination: DIR</code></p>
@@ -52,7 +54,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Safe</strong></p>
-        <p class="description">Disable <a href="../plugins/">custom plugins, and ignore symbolic links</a>.</p>
+        <p class="description">Disable <a href="../plugins/">custom plugins,
+         and ignore symbolic links</a>.</p>
       </td>
       <td class="align-center">
         <p><code class="option">safe: BOOL</code></p>
@@ -103,8 +106,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class="name"><strong>Time Zone</strong></p>
         <p class="description">
-            Set the time zone for site generation. This sets the <code>TZ</code>
-            environment variable, which Ruby uses to handle time and date
+            Set the time zone for site generation. This sets the
+             <code>TZ</code> environment variable, which Ruby uses to handle
+              time and date
             creation and manipulation. Any entry from the
             <a href="http://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
             Database</a> is valid, e.g. <code>America/New_York</code>. A list of all
@@ -155,10 +159,12 @@ class="flag">flags</code> (specified on the command-line) that control them.
     The contents of <code>&lt;destination&gt;</code> are automatically
     cleaned, by default, when the site is built. Files or folders that are not
     created by your site will be removed. Some files could be retained
-    by specifying them within the <code>&lt;keep_files&gt;</code> configuration directive.
+    by specifying them within the <code>&lt;keep_files&gt;</code> configuration
+     directive.
   </p>
   <p>
-    Do not use an important location for <code>&lt;destination&gt;</code>; instead, use it as
+    Do not use an important location for <code>&lt;destination&gt;</code>; 
+    instead, use it as
     a staging area and copy files from there to your web server.
   </p>
 </div>
@@ -177,7 +183,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Regeneration</strong></p>
-        <p class="description">Enable auto-regeneration of the site when files are modified.</p>
+        <p class="description">Enable auto-regeneration of the site when files 
+        are modified.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">-w, --watch</code></p>
@@ -186,7 +193,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Configuration</strong></p>
-        <p class="description">Specify config files instead of using <code>_config.yml</code> automatically. Settings in later files override settings in earlier files.</p>
+        <p class="description">Specify config files instead of
+        using <code>_config.yml</code> automatically. Settings in later files
+         override settings in earlier files.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">--config FILE1[,FILE2,...]</code></p>
@@ -224,7 +233,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Limit Posts</strong></p>
-        <p class="description">Limit the number of posts to parse and publish.</p>
+        <p class="description">Limit the number of posts to parse
+        and publish.</p>
       </td>
       <td class="align-center">
         <p><code class="option">limit_posts: NUM</code></p>
@@ -265,9 +275,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
 
 ### Serve Command Options
 
-In addition to the options below, the `serve` sub-command can accept any of the options
-for the `build` sub-command, which are then applied to the site build which occurs right
-before your site is served.
+In addition to the options below, the `serve` sub-command can accept any of the
+ options for the `build` sub-command, which are then applied to the site build
+  which occurs right before your site is served.
 
 <div class="mobile-side-scroller">
 <table>
@@ -321,7 +331,8 @@ before your site is served.
     <tr class="setting">
       <td>
         <p class="name"><strong>Skips the initial site build.</strong></p>
-        <p class="description">Skips the initial site build which occurs before the server is started.</p>
+        <p class="description">Skips the initial site build which occurs
+        before the server is started.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">--skip-initial-build</code></p>
@@ -341,15 +352,28 @@ before your site is served.
 
 ## Front Matter defaults
 
-Using [YAML Front Matter](../frontmatter/) is one way that you can specify configuration in the pages and posts for your site. Setting things like a default layout, or customizing the title, or specifying a more precise date/time for the post can all be added to your page or post front matter.
+Using [YAML Front Matter](../frontmatter/) is one way that you can
+specify configuration in the pages and posts for your site. Setting things like
+ a default layout, or customizing the title, or specifying a more precise
+  date/time for the post can all be added to your page or post front matter.
 
-Often times, you will find that you are repeating a lot of configuration options. Setting the same layout in each file, adding the same category - or categories - to a post, etc. You can even add custom variables like author names, which might be the same for the majority of posts on your blog.
+Often times, you will find that you are repeating a lot of
+configuration options. Setting the same layout in each file, adding the same
+ category - or categories - to a post, etc. You can even add custom variables
+  like author names, which might be the same for the majority of posts on your
+   blog.
 
-Instead of repeating this configuration each time you create a new post or page, Jekyll provides a way to set these defaults in the site configuration. To do this, you can specify  site-wide defaults using the `defaults` key in the `_config.yml` file in your projects root directory.
+Instead of repeating this configuration each time you create a new post or
+page, Jekyll provides a way to set these defaults in the site configuration. 
+To do this, you can specify  site-wide defaults using the `defaults` key in the
+ `_config.yml` file in your projects root directory.
 
-The `defaults` key holds an array of scope/values pairs that define what defaults should be set for a particular file path, and optionally, a file type in that path.
+The `defaults` key holds an array of scope/values pairs that define what
+ defaults should be set for a particular file path, and optionally, a file type
+  in that path.
 
-Let's say that you want to add a default layout to all pages and posts in your site. You would add this to your `_config.yml` file:
+Let's say that you want to add a default layout to all pages and posts in your
+ site. You would add this to your `_config.yml` file:
 
 {% highlight yaml %}
 defaults:
@@ -360,7 +384,11 @@ defaults:
       layout: "default"
 {% endhighlight %}
 
-Here, we are scoping the `values` to any file that exists in the scopes path. Since the path is set as an empty string, it will apply to **all files** in your project. You probably don't want to set a layout on every file in your project - like css files, for example - so you can also specify a `type` value under the `scope` key.
+Here, we are scoping the `values` to any file that exists in the scopes path.
+ Since the path is set as an empty string, it will apply to **all files** in
+  your project. You probably don't want to set a layout on every file in your
+   project - like css files, for example - so you can also specify a `type`
+    value under the `scope` key.
 
 {% highlight yaml %}
 defaults:
@@ -373,7 +401,9 @@ defaults:
 {% endhighlight %}
 
 Now, this will only set the layout for files where the type is `posts`.
-The different types that are available to you are `pages`, `posts`, `drafts` or any collection in your site. While `type` is optional, you must specify a value for `path` when creating a `scope/values` pair.
+The different types that are available to you are `pages`, `posts`, `drafts` or
+ any collection in your site. While `type` is optional, you must specify a
+ value for `path` when creating a `scope/values` pair.
 
 As mentioned earlier, you can set multiple scope/values pairs for `defaults`.
 
@@ -394,7 +424,11 @@ defaults:
       author: "Mr. Hyde"
 {% endhighlight %}
 
-With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde` as well as have the category for the page set to `project`.
+With these defaults, all posts would use the `my-site` layout. Any html files
+ that exist in the `projects/` folder will use the `project` layout, if it
+  exists. Those files will also have the
+  `page.author` [liquid variable](../variables/) set to `Mr. Hyde` as well as
+   have the category for the page set to `project`.
 
 {% highlight yaml %}
 collections:
@@ -414,11 +448,20 @@ In this example the `layout` is set to `default` inside the [collection](../coll
 
 ### Precedence
 
-Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
+Jekyll will apply all of the configuration settings you specify in
+the `defaults` section of your `_config.yml` file. However, you can choose to
+ override settings from other scope/values pair by specifying a more specific
+  path for the scope.
 
-You can see that in the last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
+You can see that in the last example above. First, we set the default layout
+to `my-site`. Then, using a more specific path, we set the default layout for
+ files in the `projects/` path to `project`. This can be done with any value
+  that you would set in the page or post front matter.
 
-Finally, if you set defaults in the site configuration by adding a `defaults` section to your `_config.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:
+Finally, if you set defaults in the site configuration by adding a
+`defaults` section to your `_config.yml` file, you can override those settings
+ in a post or page file. All you need to do is specify the settings in the post
+  or page front matter. For example:
 
 {% highlight yaml %}
 # In _config.yml
@@ -607,7 +650,8 @@ For example, in your `_config.yml`:
 
 ### Custom Markdown Processors
 
-If you're interested in creating a custom markdown processor, you're in luck! Create a new class in the `Jekyll::Converters::Markdown` namespace:
+If you're interested in creating a custom markdown processor, you're in
+luck! Create a new class in the `Jekyll::Converters::Markdown` namespace:
 
 {% highlight ruby %}
 class Jekyll::Converters::Markdown::MyCustomProcessor

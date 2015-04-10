@@ -47,14 +47,18 @@ $ jekyll serve
 
 $ jekyll serve --detach
 # => Same as `jekyll serve` but will detach from the current terminal.
-#    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
-#    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).
+#    If you need to kill the server, you can `kill -9 1234` where "1234" is
+the PID.
+#    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill
+the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).
 {% endhighlight %}
 
 <div class="note info">
   <h5>Be aware of default behavior</h5>
   <p>
-    As of version 2.4, the <code>serve</code> command will watch for changes automatically. To disable this, you can use <code>jekyll serve --no-watch</code>, which preserves the old behavior.
+    As of version 2.4, the <code>serve</code> command will watch for
+    changes automatically. To disable this, you can use
+    <code>jekyll serve --no-watch</code>, which preserves the old behavior.
   </p>
 </div>
 
@@ -64,11 +68,11 @@ $ jekyll serve --no-watch
 {% endhighlight %}
 
 These are just a few of the available [configuration options](../configuration/).
-Many configuration options can either be specified as flags on the command line,
-or alternatively (and more commonly) they can be specified in a `_config.yml`
-file at the root of the source directory. Jekyll will automatically use the
-options from this file when run. For example, if you place the following lines
-in your `_config.yml` file:
+Many configuration options can either be specified as flags on the command
+line, or alternatively (and more commonly) they can be specified in
+a `_config.yml` file at the root of the source directory. Jekyll
+will automatically use the options from this file when run. For example,
+if you place the following lines in your `_config.yml` file:
 
 {% highlight yaml %}
 source:      _source
