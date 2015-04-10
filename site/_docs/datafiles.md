@@ -119,3 +119,33 @@ file name:
 </ul>
 {% endraw %}
 {% endhighlight %}
+
+## Example: Accessing a specific author
+
+Pages and posts can also access a specific data item. The example below shows how to access a specific item:
+
+`_data/people.yml`:
+{% highlight yaml %}
+dave:
+    name: David Smith
+    twitter: DavidSilvaSmith
+{% endhighlight %}
+
+The author can then be specified as a page variable in a post's frontmatter:
+
+{% highlight html %}
+{% raw %}
+---
+title: sample post
+author: dave
+---
+
+{% assign author = site.data.people[page.author] %}
+<a rel="author"
+  href="{{ author.twitter }}"
+  title="{{ author.name }}">
+    {{ author.name }}
+</a>
+
+{% endraw %}
+{% endhighlight %}

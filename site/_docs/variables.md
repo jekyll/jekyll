@@ -103,10 +103,10 @@ following is a reference of the available data.
       <td><p>
 
         If the page being processed is a Post, this contains a list of up to ten
-        related Posts. By default, these are low quality but fast to compute.
+        related Posts. By default, these are the ten most recent posts.
         For high quality but slow to compute results, run the
         <code>jekyll</code> command with the <code>--lsi</code> (latent semantic
-        indexing) option.
+        indexing) option. Also note Github pages does not support the <code>lsi</code> option when generating sites.
 
       </p></td>
     </tr>
