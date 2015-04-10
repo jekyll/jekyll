@@ -85,6 +85,7 @@
   * Removed the trailing slash from the example `/blog` baseurl comment (#3485)
   * Clear the regenerator cache every time we process (#3592)
   * Readd (bring back) minitest-profile (#3628)
+  * Add WOFF2 font MIME type to Jekyll server MIME types (#3647)
 
 ### Development Fixes
 
