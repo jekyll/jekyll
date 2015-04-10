@@ -172,6 +172,7 @@
   * Expand collections documentation. (#3638)
   * Add the "warning" note label to excluding `vendor` in the CI docs page (#3623)
   * Upgrade pieces of the Ugrading guide for Jekyll 3 (#3607)
+  * Showing how to access specific data items (#3468)
 
 ## 2.5.3 / 2014-12-22
 
