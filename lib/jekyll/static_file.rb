@@ -3,7 +3,7 @@ module Jekyll
     # The cache of last modification times [path] -> mtime.
     @@mtimes = Hash.new
 
-    attr_reader :relative_path
+    attr_reader :relative_path, :extname
 
     # Initialize a new StaticFile.
     #
@@ -18,6 +18,7 @@ module Jekyll
       @name = name
       @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
+      @extname = File.extname(@relative_path)
     end
 
     # Returns source file path.
@@ -92,7 +93,7 @@ module Jekyll
       {
         "path"          => File.join("", relative_path),
         "modified_time" => mtime.to_s,
-        "extname"       => File.extname(relative_path)
+        "extname"       => extname
       }
     end
   end
