@@ -135,11 +135,11 @@ title: sample post
 author: dave
 ---
 
-{% assign author = site.data.people.[page.author] %}
-<a rel="author" 
-  href="{{ author.twitter }}" 
+{% assign author = site.data.people[page.author] %}
+<a rel="author"
+  href="{{ author.twitter }}"
   title="{{ author.name }}">
-    {{author.name}}
+    {{ author.name }}
 </a>
 
 {% endraw %}
