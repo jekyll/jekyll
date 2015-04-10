@@ -111,6 +111,7 @@
   * Convert remaining textile test documents to markdown (#3528)
   * Migrate the tests to use rspec-mocks (#3552)
   * Remove `activesupport` (#3612)
+  * Added tests for `Jekyll:StaticFile` (#3633)
 
 ### Site Enhancements
 
