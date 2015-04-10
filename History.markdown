@@ -88,6 +88,7 @@
   * Add WOFF2 font MIME type to Jekyll server MIME types (#3647)
   * Be smarter about extracting the extname in `StaticFile` (#3632)
   * Process metadata for all dependencies (#3608)
+  * Show error message if the YAML front matter on a page/post is invalid. (#3643)
 
 ### Development Fixes
 
