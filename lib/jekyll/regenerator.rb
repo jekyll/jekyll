@@ -119,7 +119,10 @@ module Jekyll
     def add_dependency(path, dependency)
       return if (metadata[path].nil? || @disabled)
 
-      metadata[path]["deps"] << dependency unless metadata[path]["deps"].include? dependency
+      if !metadata[path]["deps"].include? dependency
+        metadata[path]["deps"] << dependency
+        add(dependency) unless metadata.include?(dependency)
+      end
       regenerate? dependency
     end
 

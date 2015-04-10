@@ -224,6 +224,20 @@ class TestRegenerator < JekyllUnitTest
       assert @regenerator.modified?(@path)
     end
 
+    should "not regenerate again if multiple dependencies" do
+      multi_deps = @regenerator.metadata.select {|k,v| v['deps'].length > 2}
+      multi_dep_path = multi_deps.keys.first
+
+      assert @regenerator.metadata[multi_dep_path]["deps"].length > 2
+
+      assert @regenerator.modified?(multi_dep_path)
+
+      @site.process
+      @regenerator.clear_cache
+
+      refute @regenerator.modified?(multi_dep_path)
+    end
+
     should "regenerate everything if metadata is disabled" do
       @site.config["full_rebuild"] = true
       @regenerator.clear
