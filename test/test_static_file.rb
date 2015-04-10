@@ -1,95 +1,86 @@
 require 'helper'
 
 class TestStaticFile < JekyllUnitTest
-    def make_dummy_file(file_name)
-        temp_file = File.new(file_name, "w")
-        temp_file.puts("some content")
-        temp_file.close
+  def make_dummy_file(filename)
+    File.write(source_dir(filename), "some content")
+  end
+
+  def modify_dummy_file(filename)
+    offset = "some content".size
+    File.write(source_dir(filename), "more content", offset)
+  end
+
+  def remove_dummy_file(filename)
+    File.delete(source_dir(filename))
+  end
+
+  def setup_static_file(base, dir, name)
+    StaticFile.new(@site, base, dir, name)
+  end
+
+  context "A StaticFile" do
+    setup do
+      clear_dest
+      @old_pwd = Dir.pwd
+      Dir.chdir source_dir
+      @site = fixture_site
+      @filename = "static_file.txt"
+      make_dummy_file(@filename)
+      @static_file = setup_static_file(nil, nil, @filename)
     end
 
-    def modify_dummy_file(file_name)
-        temp_file = File.open(file_name, "w")
-        temp_file.puts("more content")
-        temp_file.close
+    teardown do
+      remove_dummy_file(@filename) if File.exist?(source_dir(@filename))
+      Dir.chdir @old_pwd
     end
 
-    def remove_dummy_file(file_name)
-        File.delete(file_name)
+    should "have a source file path" do
+      static_file = setup_static_file("root", "dir", @filename)
+      assert_equal "root/dir/#{@filename}", static_file.path
     end
 
-    def setup_static_file(base, dir, name)
-        @static_file = StaticFile.new(@site, base, dir, name)
+    should "ignore a nil base or dir" do
+      assert_equal "dir/#{@filename}", setup_static_file(nil, "dir", @filename).path
+      assert_equal "base/#{@filename}", setup_static_file("base", nil, @filename).path
     end
 
-    context "A StaticFile" do
-        setup do
-            clear_dest
-            @site = Site.new(site_configuration)
-        end
-
-        should "have a source file path" do
-            static_file = setup_static_file("root", "dir", "file_name.html")
-            assert_equal "root/dir/file_name.html", static_file.path
-        end
-
-        should "have a destination relative directory without a collection" do
-            static_file = setup_static_file("root", "dir/subdir", "file.html")
-            assert "dir/subdir", static_file.destination_rel_dir 
-        end
-
-        should "know its last modification time" do
-            file_name = "file.html"
-            static_file = setup_static_file(nil, nil, "file.html")
-            make_dummy_file(file_name)
-            assert_equal Time.new.to_i, static_file.mtime
-            remove_dummy_file(file_name)
-        end
-
-        should "known if the source path is modified, when it is" do
-            file_name = "file_name.txt"
-            make_dummy_file(file_name)
-            static_file = setup_static_file(nil, nil, file_name)
-            sleep 1
-            modify_dummy_file(file_name) 
-            assert static_file.modified?
-            remove_dummy_file(file_name)
-        end
-
-        should "known if the source path is modified, when its not" do
-            file_name = "file_name.txt"
-            make_dummy_file(file_name)
-            static_file = setup_static_file(nil, nil, file_name)
-            static_file.write(nil)
-            sleep 1 # wait, else the times are still the same
-            assert !static_file.modified?
-            remove_dummy_file(file_name)
-        end
-
-        should "known whether to write the file to the filesystem" do
-            static_file = setup_static_file("root", "dir", "file_name.txt")
-            assert static_file.write?, "always true, with current implementation"
-        end
-
-        should "be able to write itself to the desitination direcotry" do
-            file_name = "file_name.txt"
-            make_dummy_file(file_name)
-            static_file = setup_static_file(nil, nil, file_name)
-            assert static_file.write(nil)
-            remove_dummy_file(file_name)
-        end
-
-        should "be able to convert to liquid" do
-            file_name = "file_name.txt"
-            make_dummy_file(file_name)
-            static_file = setup_static_file(nil, nil, "file_name.txt")
-            expected = {
-                "path"=>"/file_name.txt", 
-                "modified_time"=> static_file.mtime.to_s,
-                "extname"=>".txt"
-            }
-            assert expected.eql?(static_file.to_liquid), "map is not the same"
-            remove_dummy_file(file_name)
-        end
+    should "have a destination relative directory without a collection" do
+      static_file = setup_static_file("root", "dir/subdir", "file.html")
+      assert "dir/subdir", static_file.destination_rel_dir
     end
+
+    should "know its last modification time" do
+      assert_equal Time.new.to_i, @static_file.mtime
+    end
+
+    should "known if the source path is modified, when it is" do
+      sleep 1
+      modify_dummy_file(@filename)
+      assert @static_file.modified?
+    end
+
+    should "known if the source path is modified, when its not" do
+      @static_file.write(dest_dir)
+      sleep 1 # wait, else the times are still the same
+      assert !@static_file.modified?
+    end
+
+    should "known whether to write the file to the filesystem" do
+      assert @static_file.write?, "always true, with current implementation"
+    end
+
+    should "be able to write itself to the desitination direcotry" do
+      assert @static_file.write(dest_dir)
+    end
+
+    should "be able to convert to liquid" do
+      expected = {
+          "path" => "/static_file.txt",
+          "modified_time" => @static_file.mtime.to_s,
+          "extname" => ".txt"
+      }
+      assert_equal expected, @static_file.to_liquid
+    end
+  end
 end
 
