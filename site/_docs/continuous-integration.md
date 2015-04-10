@@ -155,13 +155,12 @@ which it must compile each time it is installed. Luckily, you can
 dramatically decrease the install time of Nokogiri by setting the
 environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
-## 4. Gotchas
-
-### Exclude `vendor`
-
-Travis bundles all gems in the `vendor` directory on its build servers,
-which Jekyll will mistakenly read and explode on. To avoid this, exclude
-`vendor` in your `_config.yml`:
+<div class="note warning">
+  <h5>Be sure to exclude <code>vendor</code> from your
+   <code>_config.yml</code></h5>
+  <p>Travis bundles all gems in the <code>vendor</code> directory on its build
+   servers, which Jekyll will mistakenly read and explode on.</p>
+</div>
 
 {% highlight yaml %}
 exclude: [vendor]
