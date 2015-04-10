@@ -24,9 +24,9 @@ $ gem update jekyll
 
 For better clarity, Jekyll now accepts the commands `build` and `serve`.
 Whereas before you might simply run the command `jekyll` to generate a site
-and `jekyll --server` to view it locally, in v2.0 (and later) you should use
-the subcommands `jekyll build`
-and `jekyll serve` to build and preview your site.
+and `jekyll --server` to view it locally, in v2.0 (and later) you should
+use the subcommands `jekyll build` and `jekyll serve` to build and preview
+your site.
 
 <div class="note info">
   <h5>Watching and Serving</h5>
@@ -41,11 +41,11 @@ and `jekyll serve` to build and preview your site.
 
 In Jekyll v1.0, we introduced absolute permalinks for pages in
 subdirectories. Starting with v2.0, absolute permalinks are opt-out,
-meaning Jekyll will default to using absolute permalinks
-instead of relative permalinks.
+meaning Jekyll will default to using absolute permalinks instead of
+relative permalinks.
 
-* To use absolute permalinks, set `relative_permalinks: false` in
-your configuration file.
+* To use absolute permalinks, set `relative_permalinks: false` in your
+configuration file.
 * To continue using relative permalinks, set `relative_permalinks: true` in
 your configuration file.
 
@@ -77,17 +77,17 @@ and add a new markdown file to it. To preview your new post, simply run the
 
 ### Custom Config File
 
-Rather than passing individual flags via the command line, you can now pass an
-entire custom Jekyll config file. This helps to distinguish between
-environments, or lets you programmatically override user-specified defaults.
-Simply add the `--config` flag to the `jekyll` command, followed by the path
-to one or more config files (comma-delimited, no spaces).
+Rather than passing individual flags via the command line, you can now pass
+an entire custom Jekyll config file. This helps to distinguish between
+environments, or lets you programmatically override user-specified
+defaults.  Simply add the `--config` flag to the `jekyll` command, followed
+by the path to one or more config files (comma-delimited, no spaces).
 
 #### As a result, the following command line flags are now deprecated:
 
 * `--no-server`
-* `--no-auto`
-* `--auto` (now `--watch` and `--no-watch`, defaults to `--watch`)
+* `--no-auto` (now `--no-watch`)
+* `--auto` (now `--watch`)
 * `--server`
 * `--url=`
 * `--maruku`, `--rdiscount`, and `--redcarpet`
@@ -108,9 +108,9 @@ to one or more config files (comma-delimited, no spaces).
 
 ### New Config File Options
 
-Jekyll 1.0 introduced several new config file options. Before you upgrade, you
-should check to see if any of these are present in your pre-1.0 config file,
-and if so, make sure that you're using them properly:
+Jekyll 1.0 introduced several new config file options. Before you upgrade,
+you should check to see if any of these are present in your pre-1.0 config
+file, and if so, make sure that you're using them properly:
 
 * `excerpt_separator`
 * `host`
@@ -123,16 +123,16 @@ and if so, make sure that you're using them properly:
 
 ### Baseurl
 
-Often, you'll want the ability to run a Jekyll site in multiple places, such as
-previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes that
-easier with the new `--baseurl` flag. To take advantage of this feature, first
-add the production `baseurl` to your site's `_config.yml` file. Then,
-throughout the site, simply prefix relative URLs
+Often, you'll want the ability to run a Jekyll site in multiple places,
+such as previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes
+that easier with the new `--baseurl` flag. To take advantage of this
+feature, first add the production `baseurl` to your site's `_config.yml`
+file. Then, throughout the site, simply prefix relative URLs
 with `{% raw %}{{ site.baseurl }}{% endraw %}`.
-When you're ready to preview your site locally, pass along the `--baseurl` flag
-with your local baseurl (most likely `/`) to `jekyll serve` and Jekyll will
-swap in whatever you've passed along, ensuring all your links work as you'd
-expect in both environments.
+When you're ready to preview your site locally, pass along the `--baseurl`
+flag with your local baseurl (most likely `/`) to `jekyll serve` and Jekyll
+will swap in whatever you've passed along, ensuring all your links work as
+you'd expect in both environments.
 
 
 <div class="note warning">
