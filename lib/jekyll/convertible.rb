@@ -60,6 +60,8 @@ module Jekyll
       unless self.data.is_a?(Hash)
         Jekyll.logger.abort_with "Fatal:", "Invalid YAML front matter in #{File.join(base, name)}"
       end
+
+      self.data
     end
 
     # Transform the contents based on the content type.
