@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'pygments.rb', '~> 0.6.0'
-gem 'redcarpet', '~> 3.2.3'
+gem 'redcarpet', '~> 3.2', '>= 3.2.3'
 gem 'toml', '~> 0.1.0'
 gem 'jekyll-paginate', '~> 1.0'
 gem 'jekyll-gist', '~> 1.0'
