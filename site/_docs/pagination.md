@@ -12,8 +12,11 @@ folders you need for paginated listings.
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
   <p>
-    Pagination does not work from within Markdown or Textile files from your Jekyll site.
-    Pagination works when called from within the HTML file, named `index.html`, which optionally may reside in and         produce pagination from within a subdirectory, via the `pagination_path` _config.yml configuration value.
+    Pagination does not work from within Markdown or Textile files from
+    your Jekyll site.  Pagination works when called from within the HTML
+    file, named <code>index.html</code>, which optionally may reside in and
+    produce pagination from within a subdirectory, via the
+    <code>pagination_path</code> configuration value.
   </p>
 </div>
 
