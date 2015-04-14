@@ -13,7 +13,6 @@ module Jekyll
             when 'redcarpet' then RedcarpetParser.new(@config)
             when 'kramdown'  then KramdownParser.new(@config)
             when 'rdiscount' then RDiscountParser.new(@config)
-            when 'maruku'    then MarukuParser.new(@config)
           else
             # So they can't try some tricky bullshit or go down the ancestor chain, I hope.
             if allowed_custom_class?(@config['markdown'])
@@ -29,7 +28,6 @@ module Jekyll
 
       def valid_processors
         %w[
-          maruku
           rdiscount
           kramdown
           redcarpet
@@ -39,7 +37,6 @@ module Jekyll
       def third_party_processors
         self.class.constants - %w[
           KramdownParser
-          MarukuParser
           RDiscountParser
           RedcarpetParser
           PRIORITIES

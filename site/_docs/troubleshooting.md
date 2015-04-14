@@ -114,21 +114,6 @@ The various markup engines that Jekyll uses may have some issues. This
 page will document them to help others who may run into the same
 problems.
 
-### Maruku
-
-If your link has characters that need to be escaped, you need to use
-this syntax:
-
-{% highlight text %}
-![Alt text](http://yuml.me/diagram/class/[Project]->[Task])
-{% endhighlight %}
-
-If you have an empty tag, i.e. `<script src="js.js"></script>`, Maruku
-transforms this into `<script src="js.js" />`. This causes problems in
-Firefox and possibly other browsers and is [discouraged in
-XHTML.](http://www.w3.org/TR/xhtml1/#C_3) An easy fix is to put a space
-between the opening and closing tags.
-
 ### Liquid
 
 The latest version, version 2.0, seems to break the use of `{{ "{{" }}` in
