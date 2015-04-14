@@ -61,6 +61,7 @@
   * `bin/jekyll`: with no args, exit with exit code 1 (#3619)
   * Incremental build if destination file missing (#3614)
   * Static files `mtime` liquid should return a `Time` obj (#3596)
+  * Use `Jekyll::Post`s for both LSI indexing and lookup. (#3629)
 
 ### Bug Fixes
 
