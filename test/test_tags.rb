@@ -30,7 +30,7 @@ class TestTags < JekyllUnitTest
 title: This is a test
 ---
 
-This document results in a markdown error with maruku
+This document has some highlighted code in it.
 
 {% highlight text %}
 #{code}
@@ -338,7 +338,7 @@ EOS
     setup do
       @content = <<CONTENT
 ---
-title: Maruku vs. RDiscount
+title: Kramdown vs. RDiscount vs. Redcarpet
 ---
 
 _FIGHT!_
@@ -349,17 +349,6 @@ puts "3..2..1.."
 
 *FINISH HIM*
 CONTENT
-    end
-
-    context "using Maruku" do
-      setup do
-        create_post(@content)
-      end
-
-      should "parse correctly" do
-        assert_match %r{<em>FIGHT!</em>}, @result
-        assert_match %r{<em>FINISH HIM</em>}, @result
-      end
     end
 
     context "using RDiscount" do
@@ -601,25 +590,6 @@ CONTENT
 
       should "include file with empty parameters within if statement" do
         assert_match "<span id=\"include-param\"></span>", @result
-      end
-    end
-
-    context "with fenced code blocks with backticks" do
-
-      setup do
-        content = <<CONTENT
-```ruby
-puts "Hello world"
-```
-CONTENT
-        create_post(content, {
-          'markdown' => 'maruku',
-          'maruku' => {'fenced_code_blocks' => true}}
-        )
-      end
-
-      should "render fenced code blocks" do
-        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">puts &quot;Hello world&quot;</code></pre>}, @result.strip
       end
     end
 
