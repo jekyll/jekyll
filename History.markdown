@@ -117,6 +117,7 @@
   * Migrate the tests to use rspec-mocks (#3552)
   * Remove `activesupport` (#3612)
   * Added tests for `Jekyll:StaticFile` (#3633)
+  * Force minitest version to 5.5.1 (#3657)
 
 ### Site Enhancements
 
