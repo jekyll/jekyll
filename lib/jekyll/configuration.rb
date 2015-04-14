@@ -56,15 +56,6 @@ module Jekyll
       'quiet'         => false,
       'defaults'      => [],
 
-      'maruku' => {
-        'use_tex'    => false,
-        'use_divs'   => false,
-        'png_engine' => 'blahtex',
-        'png_dir'    => 'images/latex',
-        'png_url'    => '/images/latex',
-        'fenced_code_blocks' => true
-      },
-
       'rdiscount' => {
         'extensions' => []
       },
@@ -257,9 +248,11 @@ module Jekyll
       end
 
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
-        Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
-          "Markdown processor. Maruku support has been deprecated and will " +
-          "be removed in 3.0.0. We recommend you switch to Kramdown."
+        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " +
+          "Markdown processor, which has been removed as of 3.0.0. " +
+          "We recommend you switch to Kramdown. To do this, replace " +
+          "`markdown: maruku` with `markdown: kramdown` in your " +
+          "`_config.yml` file."
       end
 
       config
