@@ -114,9 +114,10 @@ following is a reference of the available data.
       <td><p><code>site.static_files</code></p></td>
       <td><p>
 
-        A list of all static files (i.e. files not processed by Jekyll's
-        converters or the Liquid renderer). Each file has three properties:
-        <code>path</code>, <code>modified_time</code> and <code>extname</code>.
+        A list of all <a href="/docs/static-files/">static files</a> (i.e.
+        files not processed by Jekyll's converters or the Liquid renderer).
+        Each file has three properties: <code>path</code>,
+        <code>modified_time</code> and <code>extname</code>.
 
       </p></td>
     </tr>

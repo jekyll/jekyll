@@ -44,11 +44,12 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "print a nice list of static files" do
+      time_regexp = "\\d+:\\d+"
       expected_output = Regexp.new <<-OUTPUT
-- /css/screen.css last edited at \\d+ with extname .css
-- /pgp.key last edited at \\d+ with extname .key
-- /products.yml last edited at \\d+ with extname .yml
-- /symlink-test/symlinked-dir/screen.css last edited at \\d+ with extname .css
+- /css/screen.css last edited at #{time_regexp} with extname .css
+- /pgp.key last edited at #{time_regexp} with extname .key
+- /products.yml last edited at #{time_regexp} with extname .yml
+- /symlink-test/symlinked-dir/screen.css last edited at #{time_regexp} with extname .css
 OUTPUT
       assert_match expected_output, File.read(dest_dir('static_files.html'))
     end
