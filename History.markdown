@@ -60,6 +60,7 @@
   * Removed the word 'Jekyll' a few times from the comments (#3617)
   * `bin/jekyll`: with no args, exit with exit code 1 (#3619)
   * Incremental build if destination file missing (#3614)
+  * Static files `mtime` liquid should return a `Time` obj (#3596)
 
 ### Bug Fixes
 
