@@ -42,7 +42,7 @@ module Jekyll
     end
 
     def lsi_related_posts
-      self.class.lsi.find_related(post.content, 11) - [post]
+      self.class.lsi.find_related(post, 11)
     end
 
     def most_recent_posts
