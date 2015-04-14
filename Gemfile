@@ -22,7 +22,7 @@ gem 'mime-types', '~> 1.5'
 gem 'jekyll_test_plugin'
 gem 'jekyll_test_plugin_malicious'
 gem 'liquid-c', '~> 3.0'
-gem 'minitest'
+gem 'minitest', '5.5.1'
 gem 'minitest-reporters'
 gem 'minitest-profile'
 gem 'test-unit' if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
