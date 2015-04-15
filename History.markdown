@@ -62,6 +62,7 @@
   * Incremental build if destination file missing (#3614)
   * Static files `mtime` liquid should return a `Time` obj (#3596)
   * Use `Jekyll::Post`s for both LSI indexing and lookup. (#3629)
+  * Add `charset=utf-8` for HTML and XML pages in WEBrick (#3649)
 
 ### Bug Fixes
 
