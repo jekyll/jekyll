@@ -53,7 +53,8 @@ module Jekyll
         when '.csv'
           CSV.read(path, {
                            :headers => true,
-                           :encoding => site.config['encoding']
+                           :encoding => site.config['encoding'],
+                           :header_converters=> lambda {|f| f.strip},
                        }).map(&:to_hash)
         else
           SafeYAML.load_file(path)
