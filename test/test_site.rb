@@ -410,6 +410,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration('safe' => false))
         site.process
 
+
         file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
 
         assert_equal site.data['products'], file_content
@@ -422,6 +423,17 @@ class TestSite < JekyllUnitTest
 
         assert_nil site.data['products']
         assert_nil site.site_payload['site']['data']['products']
+      end
+
+      should "trim keys in a CSV" do
+        site = Site.new(site_configuration('safe' => false))
+        site.process
+
+        file_content = CSV.read(File.join(source_dir, '_data', 'people.csv'))
+
+        site.data['people'].first.keys.each_with_index do |key, index|
+          assert_equal key, file_content.first[index].strip
+        end
       end
 
     end
@@ -487,7 +499,7 @@ class TestSite < JekyllUnitTest
         sleep 1
         @site.process
         mtime3 = File.stat(dest).mtime.to_i
-        refute_equal mtime2, mtime3 # must be regenerated 
+        refute_equal mtime2, mtime3 # must be regenerated
 
         sleep 1
         @site.process
@@ -511,7 +523,7 @@ class TestSite < JekyllUnitTest
         @site.process
         assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
-        refute_equal mtime1, mtime2 # must be regenerated 
+        refute_equal mtime1, mtime2 # must be regenerated
       end
 
     end
