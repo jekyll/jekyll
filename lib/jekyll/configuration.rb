@@ -91,22 +91,28 @@ module Jekyll
       reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
     end
 
+    def get_config_value_with_override(config_key, override)
+      override[config_key] || self[config_key] || DEFAULTS[config_key]
+    end
+
     # Public: Directory of the Jekyll source folder
     #
     # override - the command-line options hash
     #
     # Returns the path to the Jekyll source directory
     def source(override)
-      override['source'] || self['source'] || DEFAULTS['source']
+      get_config_value_with_override('source', override)
     end
 
-    def quiet?(override = {})
-      override['quiet'] || self['quiet'] || DEFAULTS['quiet']
+    def quiet(override = {})
+      get_config_value_with_override('quiet', override)
     end
+    alias_method :quiet?, :quiet
 
-    def verbose?(override = {})
-      override['verbose'] || self['verbose'] || DEFAULTS['verbose']
+    def verbose(override = {})
+      get_config_value_with_override('verbose', override)
     end
+    alias_method :verbose?, :verbose
 
     def safe_load_file(filename)
       case File.extname(filename)
