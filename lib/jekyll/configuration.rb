@@ -54,6 +54,7 @@ module Jekyll
       'timezone'      => nil,           # use the local timezone
 
       'quiet'         => false,
+      'verbose'       => false,
       'defaults'      => [],
 
       'rdiscount' => {
@@ -103,6 +104,10 @@ module Jekyll
       override['quiet'] || self['quiet'] || DEFAULTS['quiet']
     end
 
+    def verbose?(override = {})
+      override['verbose'] || self['verbose'] || DEFAULTS['verbose']
+    end
+
     def safe_load_file(filename)
       case File.extname(filename)
       when /\.toml/i
@@ -121,8 +126,8 @@ module Jekyll
     #
     # Returns an Array of config files
     def config_files(override)
-      # Be quiet quickly.
-      Jekyll.logger.log_level = :error if quiet?(override)
+      # Adjust verbosity quickly
+      Jekyll.logger.adjust_verbosity(:quiet => quiet?(override), :verbose => verbose?(override))
 
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')

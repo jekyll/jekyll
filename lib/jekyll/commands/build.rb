@@ -23,7 +23,8 @@ module Jekyll
         # Build your jekyll site
         # Continuously watch if `watch` is set to true in the config.
         def process(options)
-          Jekyll.logger.log_level = :error if options['quiet']
+          # Adjust verbosity quickly
+          Jekyll.logger.adjust_verbosity(options)
 
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
