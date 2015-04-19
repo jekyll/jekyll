@@ -49,7 +49,7 @@ class TestLogAdapter < JekyllUnitTest
     should "call #debug on writer return true" do
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer)
-      allow(writer).to receive(:debug).with('Logging at level: '.rjust(20) + 'info').and_return(true)
+      allow(writer).to receive(:debug).and_return(true)
       assert logger.adjust_verbosity
     end
   end
