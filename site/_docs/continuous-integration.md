@@ -76,6 +76,11 @@ an explanation of each line.
 language: ruby
 rvm:
 - 2.1
+
+before_install:
+- travis_retry gem install html-proofer
+- travis_retry gem install jekyll
+
 script: ./script/cibuild
 
 # branch whitelist
@@ -106,6 +111,13 @@ rvm:
 RVM is a popular Ruby Version Manager (like rbenv, chruby, etc). This
 directive tells Travis the Ruby version to use when running your test
 script.
+
+{% highlight yaml %}
+before_install:
+- travis_retry gem install html-proofer
+- travis_retry gem install jekyll
+{% endhighlight %}
+jekyll and htmlproof are not preinstalled, so we need to tell travis to install them.
 
 {% highlight yaml %}
 script: ./script/cibuild
