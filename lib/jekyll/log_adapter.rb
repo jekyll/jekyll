@@ -30,6 +30,16 @@ module Jekyll
       writer.level = LOG_LEVELS.fetch(level)
     end
 
+    def adjust_verbosity(options = {})
+      # Quiet always wins.
+      if options[:quiet]
+        self.log_level = :error
+      elsif options[:verbose]
+        self.log_level = :debug
+      end
+      debug "Logging at level:", LOG_LEVELS.key(writer.level).to_s
+    end
+
     # Public: Print a debug message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.

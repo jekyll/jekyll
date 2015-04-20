@@ -54,6 +54,7 @@ module Jekyll
       'timezone'      => nil,           # use the local timezone
 
       'quiet'         => false,
+      'verbose'       => false,
       'defaults'      => [],
 
       'rdiscount' => {
@@ -90,18 +91,28 @@ module Jekyll
       reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
     end
 
+    def get_config_value_with_override(config_key, override)
+      override[config_key] || self[config_key] || DEFAULTS[config_key]
+    end
+
     # Public: Directory of the Jekyll source folder
     #
     # override - the command-line options hash
     #
     # Returns the path to the Jekyll source directory
     def source(override)
-      override['source'] || self['source'] || DEFAULTS['source']
+      get_config_value_with_override('source', override)
     end
 
-    def quiet?(override = {})
-      override['quiet'] || self['quiet'] || DEFAULTS['quiet']
+    def quiet(override = {})
+      get_config_value_with_override('quiet', override)
     end
+    alias_method :quiet?, :quiet
+
+    def verbose(override = {})
+      get_config_value_with_override('verbose', override)
+    end
+    alias_method :verbose?, :verbose
 
     def safe_load_file(filename)
       case File.extname(filename)
@@ -121,8 +132,8 @@ module Jekyll
     #
     # Returns an Array of config files
     def config_files(override)
-      # Be quiet quickly.
-      Jekyll.logger.log_level = :error if quiet?(override)
+      # Adjust verbosity quickly
+      Jekyll.logger.adjust_verbosity(:quiet => quiet?(override), :verbose => verbose?(override))
 
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
