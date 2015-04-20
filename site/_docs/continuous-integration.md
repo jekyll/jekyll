@@ -76,6 +76,7 @@ an explanation of each line.
 language: ruby
 rvm:
 - 2.1
+# Assume bundler is being used, install step will run `bundle install`.
 script: ./script/cibuild
 
 # branch whitelist
