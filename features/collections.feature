@@ -14,7 +14,7 @@ Feature: Collections
 
   Scenario: Rendered collection
     Given I have an "index.html" page that contains "Collections: {{ site.collections }}"
-    And I have an "collection_metadata.html" page that contains "Methods metadata: {{ site.collections.methods.foo }} {{ site.collections.methods }}"
+    And I have an "collection_metadata.html" page that contains "Methods metadata: {{ site.collections[0].foo }} {{ site.collections[0] }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
     """
@@ -25,7 +25,8 @@ Feature: Collections
     """
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Collections: {\"methods" in "_site/index.html"
+    And I should see "Collections: {\"output\"=>true" in "_site/index.html"
+    And I should see "\"label\"=>\"methods\"," in "_site/index.html"
     And I should see "Methods metadata: bar" in "_site/collection_metadata.html"
     And I should see "<p>Whatever: foo.bar</p>" in "_site/methods/configuration.html"
 
@@ -56,7 +57,8 @@ Feature: Collections
     """
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Collections: {\"methods" in "_site/index.html"
+    And I should see "Collections: {\"output\"=>true" in "_site/index.html"
+    And I should see "\"label\"=>\"methods\"," in "_site/index.html"
     And I should see "<p>Run your generators! default</p>" in "_site/methods/site/generate.html"
     And I should see "<div class='title'>Tom Preston-Werner</div>" in "_site/methods/site/generate.html"
 
