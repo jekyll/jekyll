@@ -181,6 +181,7 @@
   * Upgrade pieces of the Ugrading guide for Jekyll 3 (#3607)
   * Showing how to access specific data items (#3468)
   * Clarify pagination works from within HTML files (#3467)
+  * Add note to `excerpt_separator` documentation that it can be set globally (#3667)
 
 ## 2.5.3 / 2014-12-22
 
