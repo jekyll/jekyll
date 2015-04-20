@@ -1,7 +1,16 @@
 require 'fileutils'
 require 'posix-spawn'
-require 'minitest/assertions'
+require 'minitest/spec'
 require 'time'
+
+class MinitestWorld
+  extend Minitest::Assertions
+  attr_accessor :assertions
+
+  def initialize
+    self.assertions = 0
+  end
+end
 
 JEKYLL_SOURCE_DIR = File.dirname(File.dirname(File.dirname(__FILE__)))
 TEST_DIR    = File.expand_path(File.join('..', '..', 'tmp', 'jekyll'), File.dirname(__FILE__))
