@@ -89,6 +89,15 @@ env:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
 {% endhighlight %}
 
+**Note:** You will need this Gemfile as well, [Travis will automatically install](http://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the gerefenced gems:
+
+{% highlight ruby %}
+source "https://rubygems.org"
+
+gem "jekyll"
+gem "html-proofer"
+{% endhighlight %}
+
 Ok, now for an explanation of each line:
 
 {% highlight yaml %}
