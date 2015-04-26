@@ -64,6 +64,7 @@
   * Use `Jekyll::Post`s for both LSI indexing and lookup. (#3629)
   * Add `charset=utf-8` for HTML and XML pages in WEBrick (#3649)
   * Set log level to debug when verbose flag is set (#3665)
+  * Added a mention on the Gemfile to complete the instructions (#3671)
 
 ### Bug Fixes
 
