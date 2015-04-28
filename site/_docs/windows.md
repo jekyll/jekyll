@@ -11,7 +11,8 @@ knowledge and lessons that have been unearthed by Windows users.
 ## Installation
 
 Julian Thilo has written up instructions to get
-[Jekyll running on Windows][windows-installation] and it seems to work for most.
+[Jekyll running on Windows][windows-installation] and it seems to work for
+most.
 
 ## Encoding
 

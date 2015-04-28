@@ -40,7 +40,7 @@ export PATH=$PATH:/home/private/gems/bin
 export RB_USER_INSTALL='true'
 {% endhighlight %}
 
-On OSX, you may need to update RubyGems:
+On OS X, you may need to update RubyGems:
 
 {% highlight bash %}
 sudo gem update --system

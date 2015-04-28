@@ -271,8 +271,8 @@ your site, you can use the `include` tag.
 {% raw %}{% include footer.html %}{% endraw %}
 {% endhighlight %}
 
-Jekyll expects all include files to be placed in an `_includes` directory at the
-root of your source directory. This will embed the contents of
+Jekyll expects all include files to be placed in an `_includes` directory at
+the root of your source directory. This will embed the contents of
 `<source>/_includes/footer.html` into the calling file.
 
 <div class="note">
@@ -286,7 +286,8 @@ root of your source directory. This will embed the contents of
   </p>
 </div>
 
-You can also pass parameters to an include. Omit the quotation marks to send a variable's value. Liquid curly brackets should not be used here:
+You can also pass parameters to an include. Omit the quotation marks to send a 
+variable's value. Liquid curly brackets should not be used here:
 
 {% highlight ruby %}
 {% raw %}{% include footer.html param="value" variable-param=page.variable %}{% endraw %}
@@ -306,14 +307,15 @@ You can also choose to include file fragments relative to the current file:
 {% raw %}{% include_relative somedir/footer.html %}{% endraw %}
 {% endhighlight %}
 
-You won't need to place your included content within the `_includes` directory. Instead,
-the inclusion is specifically relative to the file where the tag is being used. For example,
-if `_posts/2014-09-03-my-file.markdown` uses the `include_relative` tag, the included file
-must be within the `_posts` directory, or one of its subdirectories. You cannot include
-files in other locations.
+You won't need to place your included content within the `_includes`
+directory.Instead, the inclusion is specifically relative to the file where the
+tag is being used. For example,if `_posts/2014-09-03-my-file.markdown` uses the
+`include_relative` tag, the included file must be within the `_posts` 
+directory, or one of its subdirectories. You cannot include files in other
+locations.
 
-All the other capabilities of the `include` tag are available to the `include_relative` tag,
-such as using variables.
+All the other capabilities of the `include` tag are available to the
+`include_relative` tag, such as using variables.
 
 ### Code snippet highlighting
 
@@ -349,9 +351,9 @@ wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexe
 #### Line numbers
 
 There is a second argument to `highlight` called `linenos` that is optional.
-Including the `linenos` argument will force the highlighted code to include line
-numbers. For instance, the following code block would include line numbers next
-to each line:
+Including the `linenos` argument will force the highlighted code to include
+line numbers. For instance, the following code block would include line numbers
+next to each line:
 
 {% highlight text %}
 {% raw %}
