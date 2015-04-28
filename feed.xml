@@ -11,10 +11,10 @@
     <title xml:lang="en">Jekyll • Simple, blog-aware, static sites</title>
     <atom:link type="application/atom+xml" href="http://jekyllrb.com/feed.xml" rel="self"/>
     <link>http://jekyllrb.com/</link>
-    <pubDate>Tue, 17 Mar 2015 16:27:17 -0700</pubDate>
-    <lastBuildDate>Tue, 17 Mar 2015 16:27:17 -0700</lastBuildDate>
+    <pubDate>Tue, 28 Apr 2015 12:55:04 -0700</pubDate>
+    <lastBuildDate>Tue, 28 Apr 2015 12:55:04 -0700</lastBuildDate>
     <language>en-US</language>
-    <generator>Jekyll v3.0.0.beta2</generator>
+    <generator>Jekyll v3.0.0.pre.beta2</generator>
     <description>Transform your plain text into static websites and blogs.</description>
     <image>
       <description>Transform your plain text into static websites and blogs.</description>

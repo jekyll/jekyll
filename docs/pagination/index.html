@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Pagination</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.beta2">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta2">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -148,6 +148,8 @@
   
     
   
+    
+  
 
   
 
@@ -194,6 +196,8 @@
   
     
       <option value="/docs/quickstart/">Quick-start guide</option>
+    
+  
     
   
     
@@ -280,9 +284,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -349,6 +357,8 @@
 
   
 
+  
+    
   
     
   
@@ -478,6 +488,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -509,6 +521,8 @@
   
     
       <option value="/docs/frontmatter/">Front Matter</option>
+    
+  
     
   
     
@@ -617,6 +631,8 @@
   
     
   
+    
+  
 
   
 
@@ -637,6 +653,8 @@
   
     
       <option value="/docs/drafts/">Working with drafts</option>
+    
+  
     
   
     
@@ -749,9 +767,81 @@
   
     
   
+    
+  
 
   
 
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <option value="/docs/static-files/">Static Files</option>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
   
     
   
@@ -881,6 +971,8 @@
   
     
   
+    
+  
 
   
 
@@ -947,12 +1039,16 @@
   
     
   
+    
+  
 
   
 
   
     
       <option value="/docs/assets/">Assets</option>
+    
+  
     
   
     
@@ -1079,6 +1175,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1089,6 +1187,8 @@
 
   
 
+  
+    
   
     
   
@@ -1218,6 +1318,8 @@
   
     
   
+    
+  
 
   
 
@@ -1256,6 +1358,8 @@
   
     
       <option value="/docs/pagination/">Pagination</option>
+    
+  
     
   
     
@@ -1350,6 +1454,8 @@
   
     
   
+    
+  
 
   
 
@@ -1372,6 +1478,8 @@
   
     
       <option value="/docs/extras/">Extras</option>
+    
+  
     
   
     
@@ -1489,6 +1597,8 @@
   
     
   
+    
+  
 
   
 
@@ -1507,6 +1617,8 @@
   
     
       <option value="/docs/deployment-methods/">Deployment methods</option>
+    
+  
     
   
     
@@ -1621,6 +1733,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1631,6 +1745,8 @@
 
   
 
+  
+    
   
     
   
@@ -1760,6 +1876,8 @@
   
     
   
+    
+  
 
   
 
@@ -1826,9 +1944,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -1965,6 +2087,8 @@
   
     
   
+    
+  
 
   
 
@@ -2031,6 +2155,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -2053,9 +2179,11 @@ and folders you need for paginated listings.</p>
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
   <p>
-    Pagination does not work with Markdown or Textile files in your Jekyll
-    site. It will only work when used within HTML files. Since you’ll likely be
-    using this for the list of Posts, this shouldn’t be an issue.
+    Pagination does not work from within Markdown or Textile files from
+    your Jekyll site. Pagination works when called from within the HTML
+    file, named <code>index.html</code>, which optionally may reside in and
+    produce pagination from within a subdirectory, via the
+    <code>pagination_path</code> configuration value.
   </p>
 </div>
 
@@ -2253,6 +2381,9 @@ page with links to all but the current page.</p>
 
 
 
+
+  
+  
 
   
   
@@ -2516,6 +2647,8 @@ page with links to all but the current page.</p>
     
   
     
+  
+    
       <li class=""><a href="/docs/usage/">Basic Usage</a></li>
       
 
@@ -2524,6 +2657,8 @@ page with links to all but the current page.</p>
 
   
 
+  
+    
   
     
   
@@ -2790,6 +2925,64 @@ page with links to all but the current page.</p>
     
   
     
+      <li class=""><a href="/docs/static-files/">Static Files</a></li>
+      
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
     
   
@@ -2896,6 +3089,8 @@ page with links to all but the current page.</p>
 
   
 
+  
+    
   
     
   
@@ -3248,6 +3443,8 @@ page with links to all but the current page.</p>
     
   
     
+  
+    
       <li class=""><a href="/docs/troubleshooting/">Troubleshooting</a></li>
       
 
@@ -3362,6 +3559,8 @@ page with links to all but the current page.</p>
 
   
 
+  
+    
   
     
   

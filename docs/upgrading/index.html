@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Upgrading</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.beta2">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta2">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -148,6 +148,8 @@
   
     
   
+    
+  
 
   
 
@@ -194,6 +196,8 @@
   
     
       <option value="/docs/quickstart/">Quick-start guide</option>
+    
+  
     
   
     
@@ -280,9 +284,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -349,6 +357,8 @@
 
   
 
+  
+    
   
     
   
@@ -478,6 +488,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -509,6 +521,8 @@
   
     
       <option value="/docs/frontmatter/">Front Matter</option>
+    
+  
     
   
     
@@ -617,6 +631,8 @@
   
     
   
+    
+  
 
   
 
@@ -637,6 +653,8 @@
   
     
       <option value="/docs/drafts/">Working with drafts</option>
+    
+  
     
   
     
@@ -749,9 +767,81 @@
   
     
   
+    
+  
 
   
 
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <option value="/docs/static-files/">Static Files</option>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
   
     
   
@@ -881,6 +971,8 @@
   
     
   
+    
+  
 
   
 
@@ -947,12 +1039,16 @@
   
     
   
+    
+  
 
   
 
   
     
       <option value="/docs/assets/">Assets</option>
+    
+  
     
   
     
@@ -1079,6 +1175,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1089,6 +1187,8 @@
 
   
 
+  
+    
   
     
   
@@ -1218,6 +1318,8 @@
   
     
   
+    
+  
 
   
 
@@ -1256,6 +1358,8 @@
   
     
       <option value="/docs/pagination/">Pagination</option>
+    
+  
     
   
     
@@ -1350,6 +1454,8 @@
   
     
   
+    
+  
 
   
 
@@ -1372,6 +1478,8 @@
   
     
       <option value="/docs/extras/">Extras</option>
+    
+  
     
   
     
@@ -1489,6 +1597,8 @@
   
     
   
+    
+  
 
   
 
@@ -1507,6 +1617,8 @@
   
     
       <option value="/docs/deployment-methods/">Deployment methods</option>
+    
+  
     
   
     
@@ -1621,6 +1733,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1631,6 +1745,8 @@
 
   
 
+  
+    
   
     
   
@@ -1760,6 +1876,8 @@
   
     
   
+    
+  
 
   
 
@@ -1826,9 +1944,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -1965,6 +2087,8 @@
   
     
   
+    
+  
 
   
 
@@ -1993,6 +2117,8 @@
   
     
       <option value="/docs/history/">History</option>
+    
+  
     
   
     
@@ -2063,29 +2189,31 @@ that you’ll want to know about.</p>
 
 <p>For better clarity, Jekyll now accepts the commands <code>build</code> and <code>serve</code>.
 Whereas before you might simply run the command <code>jekyll</code> to generate a site
-and <code>jekyll --server</code> to view it locally, now use the subcommands <code>jekyll build</code>
-and <code>jekyll serve</code> to do the same. And if you want Jekyll to automatically
-rebuild each time a file changes, just add the <code>--watch</code> flag at the end.</p>
+and <code>jekyll --server</code> to view it locally, in v2.0 (and later) you should
+use the subcommands <code>jekyll build</code> and <code>jekyll serve</code> to build and preview
+your site.</p>
 
 <div class="note info">
   <h5>Watching and Serving</h5>
   <p>With the new subcommands, the way sites are previewed locally
    changed a bit. Instead of specifying <code>server: true</code> in the site’s
-   configuration file, use <code>jekyll serve</code>. The same hold’s true for
+   configuration file, use <code>jekyll serve</code>. The same holds true for
    <code>watch: true</code>. Instead, use the <code>--watch</code> flag with either <code>jekyll serve</code>
     or <code>jekyll build</code>.</p>
 </div>
 
 <h3 id="absolute-permalinks">Absolute Permalinks</h3>
 
-<p>In Jekyll v1.0, we introduced absolute permalinks for pages in subdirectories.
-Until v2.0, it is <strong>opt-in</strong>. Starting with v2.0, however, absolute permalinks
-will become <strong>opt-out</strong>, meaning Jekyll will default to using absolute permalinks
-instead of relative permalinks.</p>
+<p>In Jekyll v1.0, we introduced absolute permalinks for pages in
+subdirectories. Starting with v2.0, absolute permalinks are opt-out,
+meaning Jekyll will default to using absolute permalinks instead of
+relative permalinks.</p>
 
 <ul>
-  <li>To use absolute permalinks, set <code>relative_permalinks: false</code> in your configuration file.</li>
-  <li>To continue using relative permalinks, set <code>relative_permalinks: true</code> in your configuration file.</li>
+  <li>To use absolute permalinks, set <code>relative_permalinks: false</code> in your
+configuration file.</li>
+  <li>To continue using relative permalinks, set <code>relative_permalinks: true</code> in
+your configuration file.</li>
 </ul>
 
 <div class="note warning" id="absolute-permalinks-warning">
@@ -2116,17 +2244,17 @@ and add a new markdown file to it. To preview your new post, simply run the
 
 <h3 id="custom-config-file">Custom Config File</h3>
 
-<p>Rather than passing individual flags via the command line, you can now pass an
-entire custom Jekyll config file. This helps to distinguish between
-environments, or lets you programmatically override user-specified defaults.
-Simply add the <code>--config</code> flag to the <code>jekyll</code> command, followed by the path
-to one or more config files (comma-delimited, no spaces).</p>
+<p>Rather than passing individual flags via the command line, you can now pass
+an entire custom Jekyll config file. This helps to distinguish between
+environments, or lets you programmatically override user-specified
+defaults. Simply add the <code>--config</code> flag to the <code>jekyll</code> command, followed
+by the path to one or more config files (comma-delimited, no spaces).</p>
 
 <h4 id="as-a-result-the-following-command-line-flags-are-now-deprecated">As a result, the following command line flags are now deprecated:</h4>
 
 <ul>
   <li><code>--no-server</code></li>
-  <li><code>--no-auto</code></li>
+  <li><code>--no-auto</code> (now <code>--no-watch</code>)</li>
   <li><code>--auto</code> (now <code>--watch</code>)</li>
   <li><code>--server</code></li>
   <li><code>--url=</code></li>
@@ -2149,9 +2277,9 @@ to one or more config files (comma-delimited, no spaces).</p>
 
 <h3 id="new-config-file-options">New Config File Options</h3>
 
-<p>Jekyll 1.0 introduced several new config file options. Before you upgrade, you
-should check to see if any of these are present in your pre-1.0 config file, and
-if so, make sure that you’re using them properly:</p>
+<p>Jekyll 1.0 introduced several new config file options. Before you upgrade,
+you should check to see if any of these are present in your pre-1.0 config
+file, and if so, make sure that you’re using them properly:</p>
 
 <ul>
   <li><code>excerpt_separator</code></li>
@@ -2166,15 +2294,16 @@ if so, make sure that you’re using them properly:</p>
 
 <h3 id="baseurl">Baseurl</h3>
 
-<p>Often, you’ll want the ability to run a Jekyll site in multiple places, such as
-previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes that
-easier with the new <code>--baseurl</code> flag. To take advantage of this feature, first
-add the production <code>baseurl</code> to your site’s <code>_config.yml</code> file. Then,
-throughout the site, simply prefix relative URLs with <code>{{ site.baseurl }}</code>.
-When you’re ready to preview your site locally, pass along the <code>--baseurl</code> flag
-with your local baseurl (most likely <code>/</code>) to <code>jekyll serve</code> and Jekyll will
-swap in whatever you’ve passed along, ensuring all your links work as you’d
-expect in both environments.</p>
+<p>Often, you’ll want the ability to run a Jekyll site in multiple places,
+such as previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes
+that easier with the new <code>--baseurl</code> flag. To take advantage of this
+feature, first add the production <code>baseurl</code> to your site’s <code>_config.yml</code>
+file. Then, throughout the site, simply prefix relative URLs
+with <code>{{ site.baseurl }}</code>.
+When you’re ready to preview your site locally, pass along the <code>--baseurl</code>
+flag with your local baseurl (most likely <code>/</code>) to <code>jekyll serve</code> and Jekyll
+will swap in whatever you’ve passed along, ensuring all your links work as
+you’d expect in both environments.</p>
 
 <div class="note warning">
   <h5>All page and post URLs contain leading slashes</h5>
@@ -2192,6 +2321,9 @@ expect in both environments.</p>
 
 
 
+
+  
+  
 
   
   
@@ -2482,6 +2614,8 @@ expect in both environments.</p>
     
   
     
+  
+    
       <li class=""><a href="/docs/usage/">Basic Usage</a></li>
       
 
@@ -2490,6 +2624,8 @@ expect in both environments.</p>
 
   
 
+  
+    
   
     
   
@@ -2756,6 +2892,64 @@ expect in both environments.</p>
     
   
     
+      <li class=""><a href="/docs/static-files/">Static Files</a></li>
+      
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
     
   
@@ -2862,6 +3056,8 @@ expect in both environments.</p>
 
   
 
+  
+    
   
     
   
@@ -3214,6 +3410,8 @@ expect in both environments.</p>
     
   
     
+  
+    
       <li class=""><a href="/docs/troubleshooting/">Troubleshooting</a></li>
       
 
@@ -3328,6 +3526,8 @@ expect in both environments.</p>
 
   
 
+  
+    
   
     
   

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Collections</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.beta2">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta2">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -148,6 +148,8 @@
   
     
   
+    
+  
 
   
 
@@ -194,6 +196,8 @@
   
     
       <option value="/docs/quickstart/">Quick-start guide</option>
+    
+  
     
   
     
@@ -280,9 +284,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -349,6 +357,8 @@
 
   
 
+  
+    
   
     
   
@@ -478,6 +488,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -509,6 +521,8 @@
   
     
       <option value="/docs/frontmatter/">Front Matter</option>
+    
+  
     
   
     
@@ -617,6 +631,8 @@
   
     
   
+    
+  
 
   
 
@@ -637,6 +653,8 @@
   
     
       <option value="/docs/drafts/">Working with drafts</option>
+    
+  
     
   
     
@@ -749,9 +767,81 @@
   
     
   
+    
+  
 
   
 
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <option value="/docs/static-files/">Static Files</option>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
   
     
   
@@ -881,6 +971,8 @@
   
     
   
+    
+  
 
   
 
@@ -947,12 +1039,16 @@
   
     
   
+    
+  
 
   
 
   
     
       <option value="/docs/assets/">Assets</option>
+    
+  
     
   
     
@@ -1079,6 +1175,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1089,6 +1187,8 @@
 
   
 
+  
+    
   
     
   
@@ -1218,6 +1318,8 @@
   
     
   
+    
+  
 
   
 
@@ -1256,6 +1358,8 @@
   
     
       <option value="/docs/pagination/">Pagination</option>
+    
+  
     
   
     
@@ -1350,6 +1454,8 @@
   
     
   
+    
+  
 
   
 
@@ -1372,6 +1478,8 @@
   
     
       <option value="/docs/extras/">Extras</option>
+    
+  
     
   
     
@@ -1489,6 +1597,8 @@
   
     
   
+    
+  
 
   
 
@@ -1507,6 +1617,8 @@
   
     
       <option value="/docs/deployment-methods/">Deployment methods</option>
+    
+  
     
   
     
@@ -1621,6 +1733,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1631,6 +1745,8 @@
 
   
 
+  
+    
   
     
   
@@ -1760,6 +1876,8 @@
   
     
   
+    
+  
 
   
 
@@ -1826,9 +1944,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -1965,6 +2087,8 @@
   
     
   
+    
+  
 
   
 
@@ -1993,6 +2117,8 @@
   
     
       <option value="/docs/history/">History</option>
+    
+  
     
   
     
@@ -2074,6 +2200,15 @@ with the name of your collection:</p>
   <span class="l-Scalar-Plain">my_collection</span><span class="p-Indicator">:</span>
     <span class="l-Scalar-Plain">foo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">bar</span></code></pre></div>
 
+<p>Default attributes can also be set for a collection:</p>
+
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+      <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">my_collection</span>
+    <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">page</span></code></pre></div>
+
 <h3 id="step-2-add-your-content">Step 2: Add your content</h3>
 
 <p>Create a corresponding folder (e.g. <code>&lt;source&gt;/_my_collection</code>) and add
@@ -2081,8 +2216,13 @@ documents. YAML Front Matter is read in as data if it exists, and everything
 after it is stuck in the Document’s <code>content</code> attribute. If no YAML Front
 Matter is provided, Jekyll will not generate the file in your collection.</p>
 
-<p>Note: the folder must be named identically to the collection you defined in
-your <code>_config.yml</code> file, with the addition of the preceding <code>_</code> character.</p>
+<div class="note info">
+  <h5>Be sure to name your directories correctly</h5>
+  <p>
+The folder must be named identically to the collection you defined in
+your <code>_config.yml</code> file, with the addition of the preceding <code>_</code> character.
+  </p>
+</div>
 
 <h3 id="step-3-optionally-render-your-collections-documents-into-independent-files">Step 3: Optionally render your collection’s documents into independent files</h3>
 
@@ -2099,8 +2239,8 @@ For example, if you have <code>_my_collection/some_subdir/some_doc.md</code>,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to <code>&lt;dest&gt;/my_collection/some_subdir/some_doc.html</code>.</p>
 
-<p>As for posts with <a href="../permalinks/">Permalinks</a>, document URL can be customized
-by setting a <code>permalink</code> metadata to the collection:</p>
+<p>As for posts with <a href="../permalinks/">Permalinks</a>, the document
+URL can be customized by setting <code>permalink</code> metadata for the collection:</p>
 
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">my_collection</span><span class="p-Indicator">:</span>
@@ -2109,6 +2249,15 @@ by setting a <code>permalink</code> metadata to the collection:</p>
 
 <p>For example, if you have <code>_my_collection/some_subdir/some_doc.md</code>, it will be
 written out to <code>&lt;dest&gt;/awesome/some_subdir/some_doc/index.html</code>.</p>
+
+<div class="note info">
+  <h5>Don't forget to add YAML for processing</h5>
+  <p>
+  Files in collections that do not have front matter are treated as
+  <a href="/docs/static-files">static files</a> and simply copied to their
+  output location without processing.
+  </p>
+</div>
 
 <div class="mobile-side-scroller">
 <table>
@@ -2208,11 +2357,21 @@ you specified in your <code>_config.yml</code> (if present) and the following in
     </tr>
     <tr>
       <td>
+        <p><code>files</code></p>
+      </td>
+      <td>
+        <p>
+          An array of static files in the collection.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>relative_directory</code></p>
       </td>
       <td>
         <p>
-          The path to the collections's source directory, relative to the site
+          The path to the collection's source directory, relative to the site
           source.
         </p>
       </td>
@@ -2328,11 +2487,57 @@ file, each document has the following attributes:</p>
 </table>
 </div>
 
+<h2 id="accessing-collection-attributes">Accessing Collection Attributes</h2>
+
+<p>Attributes from the YAML front matter can be accessed as data anywhere in the 
+site. Using the above example for configuring a collection as <code>site.albums</code>,
+one might have front matter in an individual file structured as follows (which
+must use a supported markup format, and cannot be saved with a <code>.yaml</code>
+extension):</p>
+
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;Josquin:</span><span class="nv"> </span><span class="s">Missa</span><span class="nv"> </span><span class="s">De</span><span class="nv"> </span><span class="s">beata</span><span class="nv"> </span><span class="s">virgine</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">Missa</span><span class="nv"> </span><span class="s">Ave</span><span class="nv"> </span><span class="s">maris</span><span class="nv"> </span><span class="s">stella&quot;</span>
+<span class="l-Scalar-Plain">artist</span><span class="p-Indicator">:</span> <span class="s">&quot;The</span><span class="nv"> </span><span class="s">Tallis</span><span class="nv"> </span><span class="s">Scholars&quot;</span>
+<span class="l-Scalar-Plain">director</span><span class="p-Indicator">:</span> <span class="s">&quot;Peter</span><span class="nv"> </span><span class="s">Phillips&quot;</span>
+<span class="l-Scalar-Plain">works</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;Missa</span><span class="nv"> </span><span class="s">De</span><span class="nv"> </span><span class="s">beata</span><span class="nv"> </span><span class="s">virgine&quot;</span>
+    <span class="l-Scalar-Plain">composer</span><span class="p-Indicator">:</span> <span class="s">&quot;Josquin</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">Prez&quot;</span>
+    <span class="l-Scalar-Plain">tracks</span><span class="p-Indicator">:</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;Kyrie&quot;</span>
+        <span class="l-Scalar-Plain">duration</span><span class="p-Indicator">:</span> <span class="s">&quot;4:25&quot;</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;Gloria&quot;</span>
+        <span class="l-Scalar-Plain">duration</span><span class="p-Indicator">:</span> <span class="s">&quot;9:53&quot;</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;Credo&quot;</span>
+        <span class="l-Scalar-Plain">duration</span><span class="p-Indicator">:</span> <span class="s">&quot;9:09&quot;</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;Sanctus</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">Benedictus&quot;</span>
+        <span class="l-Scalar-Plain">duration</span><span class="p-Indicator">:</span> <span class="s">&quot;7:47&quot;</span>
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="s">&quot;Agnus</span><span class="nv"> </span><span class="s">Dei</span><span class="nv"> </span><span class="s">I,</span><span class="nv"> </span><span class="s">II</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">III&quot;</span>
+        <span class="l-Scalar-Plain">duration</span><span class="p-Indicator">:</span> <span class="s">&quot;6:49&quot;</span></code></pre></div>
+
+<p>Every album in the collection could be listed on a single page with a template:</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">{% for album in site.albums %}
+  <span class="nt">&lt;h2&gt;</span>{{ album.title }}<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Performed by {{ album.artist }}{% if album.director %}, directed by {{ album.director }}{% endif %}<span class="nt">&lt;/p&gt;</span>
+  {% for work in album.works %}
+    <span class="nt">&lt;h3&gt;</span>{{ work.title }}<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Composed by {{ work.composer }}<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+    {% for track in work.tracks %}
+      <span class="nt">&lt;li&gt;</span>{{ track.title }} ({{ track.duration }})<span class="nt">&lt;/li&gt;</span>
+    {% endfor %}
+    <span class="nt">&lt;/ul&gt;</span>
+  {% endfor %}
+{% endfor %}</code></pre></div>
+
+
           
 
 
 
 
+
+  
+  
 
   
   
@@ -2578,6 +2783,8 @@ file, each document has the following attributes:</p>
     
   
     
+  
+    
       <li class=""><a href="/docs/usage/">Basic Usage</a></li>
       
 
@@ -2586,6 +2793,8 @@ file, each document has the following attributes:</p>
 
   
 
+  
+    
   
     
   
@@ -2852,6 +3061,64 @@ file, each document has the following attributes:</p>
     
   
     
+      <li class=""><a href="/docs/static-files/">Static Files</a></li>
+      
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
     
   
@@ -2958,6 +3225,8 @@ file, each document has the following attributes:</p>
 
   
 
+  
+    
   
     
   
@@ -3310,6 +3579,8 @@ file, each document has the following attributes:</p>
     
   
     
+  
+    
       <li class=""><a href="/docs/troubleshooting/">Troubleshooting</a></li>
       
 
@@ -3424,6 +3695,8 @@ file, each document has the following attributes:</p>
 
   
 
+  
+    
   
     
   

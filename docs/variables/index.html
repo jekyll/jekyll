@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Variables</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.beta2">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta2">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -148,6 +148,8 @@
   
     
   
+    
+  
 
   
 
@@ -194,6 +196,8 @@
   
     
       <option value="/docs/quickstart/">Quick-start guide</option>
+    
+  
     
   
     
@@ -280,9 +284,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -349,6 +357,8 @@
 
   
 
+  
+    
   
     
   
@@ -478,6 +488,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -509,6 +521,8 @@
   
     
       <option value="/docs/frontmatter/">Front Matter</option>
+    
+  
     
   
     
@@ -617,6 +631,8 @@
   
     
   
+    
+  
 
   
 
@@ -637,6 +653,8 @@
   
     
       <option value="/docs/drafts/">Working with drafts</option>
+    
+  
     
   
     
@@ -749,9 +767,81 @@
   
     
   
+    
+  
 
   
 
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <option value="/docs/static-files/">Static Files</option>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
   
     
   
@@ -881,6 +971,8 @@
   
     
   
+    
+  
 
   
 
@@ -947,12 +1039,16 @@
   
     
   
+    
+  
 
   
 
   
     
       <option value="/docs/assets/">Assets</option>
+    
+  
     
   
     
@@ -1079,6 +1175,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1089,6 +1187,8 @@
 
   
 
+  
+    
   
     
   
@@ -1218,6 +1318,8 @@
   
     
   
+    
+  
 
   
 
@@ -1256,6 +1358,8 @@
   
     
       <option value="/docs/pagination/">Pagination</option>
+    
+  
     
   
     
@@ -1350,6 +1454,8 @@
   
     
   
+    
+  
 
   
 
@@ -1372,6 +1478,8 @@
   
     
       <option value="/docs/extras/">Extras</option>
+    
+  
     
   
     
@@ -1489,6 +1597,8 @@
   
     
   
+    
+  
 
   
 
@@ -1507,6 +1617,8 @@
   
     
       <option value="/docs/deployment-methods/">Deployment methods</option>
+    
+  
     
   
     
@@ -1621,6 +1733,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1631,6 +1745,8 @@
 
   
 
+  
+    
   
     
   
@@ -1760,6 +1876,8 @@
   
     
   
+    
+  
 
   
 
@@ -1826,9 +1944,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -1965,6 +2087,8 @@
   
     
   
+    
+  
 
   
 
@@ -1993,6 +2117,8 @@
   
     
       <option value="/docs/history/">History</option>
+    
+  
     
   
     
@@ -2143,10 +2269,10 @@ following is a reference of the available data.</p>
       <td><p>
 
         If the page being processed is a Post, this contains a list of up to ten
-        related Posts. By default, these are low quality but fast to compute.
+        related Posts. By default, these are the ten most recent posts.
         For high quality but slow to compute results, run the
         <code>jekyll</code> command with the <code>--lsi</code> (latent semantic
-        indexing) option.
+        indexing) option. Also note Github pages does not support the <code>lsi</code> option when generating sites.
 
       </p></td>
     </tr>
@@ -2154,9 +2280,10 @@ following is a reference of the available data.</p>
       <td><p><code>site.static_files</code></p></td>
       <td><p>
 
-        A list of all static files (i.e. files not processed by Jekyll's
-        converters or the Liquid renderer). Each file has three properties:
-        <code>path</code>, <code>modified_time</code> and <code>extname</code>.
+        A list of all <a href="/docs/static-files/">static files</a> (i.e.
+        files not processed by Jekyll's converters or the Liquid renderer).
+        Each file has three properties: <code>path</code>,
+        <code>modified_time</code> and <code>extname</code>.
 
       </p></td>
     </tr>
@@ -2458,12 +2585,15 @@ following is a reference of the available data.</p>
 
   
   
+
+  
+  
     <div class="section-nav">
       <div class="left align-right">
           
             
             
-            <a href="/docs/pages/" class="prev">Back</a>
+            <a href="/docs/static-files/" class="prev">Back</a>
           
       </div>
       <div class="right align-left">
@@ -2667,6 +2797,8 @@ following is a reference of the available data.</p>
     
   
     
+  
+    
       <li class=""><a href="/docs/usage/">Basic Usage</a></li>
       
 
@@ -2675,6 +2807,8 @@ following is a reference of the available data.</p>
 
   
 
+  
+    
   
     
   
@@ -2941,6 +3075,64 @@ following is a reference of the available data.</p>
     
   
     
+      <li class=""><a href="/docs/static-files/">Static Files</a></li>
+      
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
     
   
@@ -3047,6 +3239,8 @@ following is a reference of the available data.</p>
 
   
 
+  
+    
   
     
   
@@ -3399,6 +3593,8 @@ following is a reference of the available data.</p>
     
   
     
+  
+    
       <li class=""><a href="/docs/troubleshooting/">Troubleshooting</a></li>
       
 
@@ -3513,6 +3709,8 @@ following is a reference of the available data.</p>
 
   
 
+  
+    
   
     
   

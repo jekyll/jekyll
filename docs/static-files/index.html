@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Blog migrations</title>
+  <title>Static Files</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.0.pre.beta2">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
@@ -2168,33 +2168,61 @@
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/migrations.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/static_files.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
           </div>
-          <h1>Blog migrations</h1>
-          <p>If you’re switching to Jekyll from another blogging system, Jekyll’s importers
-can help you with the move. To learn more about importing your site to Jekyll,
-visit our <a href="http://import.jekyllrb.com/docs/home/"><code>jekyll-import</code> docs site</a>.</p>
+          <h1>Static Files</h1>
+          <p>In addition to renderable and convertible content, we also have <strong>static
+files</strong>.</p>
+
+<p>A static file is a file that does not contain any YAML front matter. These
+include images, PDFs, and other un-rendered content.</p>
+
+<p>They’re accessible in Liquid via <code>site.static_files</code> and contain the
+following metadata:</p>
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p><code>file.path</code></p></td>
+      <td><p>
+
+        The relative path to the file.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>file.modified_time</code></p></td>
+      <td><p>
+
+        The `Time` the file was last modified.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>file.extname</code></p></td>
+      <td><p>
+
+        The extension name for the file, e.g.
+        <code>.jpg</code> for <code>image.jpg</code>
+
+      </p></td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
           
 
 
 
 
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
 
   
   
@@ -2233,14 +2261,14 @@ visit our <a href="http://import.jekyllrb.com/docs/home/"><code>jekyll-import</c
           
             
             
-            <a href="/docs/assets/" class="prev">Back</a>
+            <a href="/docs/pages/" class="prev">Back</a>
           
       </div>
       <div class="right align-left">
           
             
             
-            <a href="/docs/templates/" class="next">Next</a>
+            <a href="/docs/variables/" class="next">Next</a>
           
       </div>
     </div>
@@ -2715,7 +2743,7 @@ visit our <a href="http://import.jekyllrb.com/docs/home/"><code>jekyll-import</c
     
   
     
-      <li class=""><a href="/docs/static-files/">Static Files</a></li>
+      <li class="current"><a href="/docs/static-files/">Static Files</a></li>
       
 
 
@@ -2863,7 +2891,7 @@ visit our <a href="http://import.jekyllrb.com/docs/home/"><code>jekyll-import</c
     
   
     
-      <li class="current"><a href="/docs/migrations/">Blog migrations</a></li>
+      <li class=""><a href="/docs/migrations/">Blog migrations</a></li>
       
 
 

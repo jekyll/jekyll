@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Continuous Integration</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.beta2">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta2">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -148,6 +148,8 @@
   
     
   
+    
+  
 
   
 
@@ -194,6 +196,8 @@
   
     
       <option value="/docs/quickstart/">Quick-start guide</option>
+    
+  
     
   
     
@@ -280,9 +284,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -349,6 +357,8 @@
 
   
 
+  
+    
   
     
   
@@ -478,6 +488,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -509,6 +521,8 @@
   
     
       <option value="/docs/frontmatter/">Front Matter</option>
+    
+  
     
   
     
@@ -617,6 +631,8 @@
   
     
   
+    
+  
 
   
 
@@ -637,6 +653,8 @@
   
     
       <option value="/docs/drafts/">Working with drafts</option>
+    
+  
     
   
     
@@ -749,9 +767,81 @@
   
     
   
+    
+  
 
   
 
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <option value="/docs/static-files/">Static Files</option>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
   
     
   
@@ -881,6 +971,8 @@
   
     
   
+    
+  
 
   
 
@@ -947,12 +1039,16 @@
   
     
   
+    
+  
 
   
 
   
     
       <option value="/docs/assets/">Assets</option>
+    
+  
     
   
     
@@ -1079,6 +1175,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1089,6 +1187,8 @@
 
   
 
+  
+    
   
     
   
@@ -1218,6 +1318,8 @@
   
     
   
+    
+  
 
   
 
@@ -1256,6 +1358,8 @@
   
     
       <option value="/docs/pagination/">Pagination</option>
+    
+  
     
   
     
@@ -1350,6 +1454,8 @@
   
     
   
+    
+  
 
   
 
@@ -1372,6 +1478,8 @@
   
     
       <option value="/docs/extras/">Extras</option>
+    
+  
     
   
     
@@ -1489,6 +1597,8 @@
   
     
   
+    
+  
 
   
 
@@ -1507,6 +1617,8 @@
   
     
       <option value="/docs/deployment-methods/">Deployment methods</option>
+    
+  
     
   
     
@@ -1621,6 +1733,8 @@
   
     
   
+    
+  
 
 
     </optgroup>
@@ -1631,6 +1745,8 @@
 
   
 
+  
+    
   
     
   
@@ -1760,6 +1876,8 @@
   
     
   
+    
+  
 
   
 
@@ -1826,9 +1944,13 @@
   
     
   
+    
+  
 
   
 
+  
+    
   
     
   
@@ -1965,6 +2087,8 @@
   
     
   
+    
+  
 
   
 
@@ -1993,6 +2117,8 @@
   
     
       <option value="/docs/history/">History</option>
+    
+  
     
   
     
@@ -2106,9 +2232,17 @@ with Ruby and requires RubyGems to install, we use the Ruby language build
 environment. Below is a sample <code>.travis.yml</code> file, followed by
 an explanation of each line.</p>
 
+<p><strong>Note:</strong> You will need a Gemfile as well, <a href="http://docs.travis-ci.com/user/languages/ruby/#Dependency-Management">Travis will automatically install</a> the dependencies based on the referenced gems:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s2">&quot;https://rubygems.org&quot;</span>
+
+<span class="n">gem</span> <span class="s2">&quot;jekyll&quot;</span>
+<span class="n">gem</span> <span class="s2">&quot;html-proofer&quot;</span></code></pre></div>
+
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ruby</span>
 <span class="l-Scalar-Plain">rvm</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">2.1</span>
+<span class="c1"># Assume bundler is being used, install step will run `bundle install`.</span>
 <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./script/cibuild</span>
 
 <span class="c1"># branch whitelist</span>
@@ -2143,7 +2277,8 @@ directory, and to call your test script <code>cibuild</code>. This line is compl
 customizable. If your script won’t change much, you can write your test
 incantation here directly:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jekyll build &amp;&amp; htmlproof ./_site</span></code></pre></div>
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">gem install jekyll html-proofer</span>
+<span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jekyll build &amp;&amp; htmlproof ./_site</span></code></pre></div>
 
 <p>The <code>script</code> directive can be absolutely any valid shell command.</p>
 
@@ -2174,13 +2309,12 @@ which it must compile each time it is installed. Luckily, you can
 dramatically decrease the install time of Nokogiri by setting the
 environment variable <code>NOKOGIRI_USE_SYSTEM_LIBRARIES</code> to <code>true</code>.</p>
 
-<h2 id="gotchas">4. Gotchas</h2>
-
-<h3 id="exclude-vendor">Exclude <code>vendor</code></h3>
-
-<p>Travis bundles all gems in the <code>vendor</code> directory on its build servers,
-which Jekyll will mistakenly read and explode on. To avoid this, exclude
-<code>vendor</code> in your <code>_config.yml</code>:</p>
+<div class="note warning">
+  <h5>Be sure to exclude <code>vendor</code> from your
+   <code>_config.yml</code></h5>
+  <p>Travis bundles all gems in the <code>vendor</code> directory on its build
+   servers, which Jekyll will mistakenly read and explode on.</p>
+</div>
 
 <div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">exclude</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">vendor</span><span class="p-Indicator">]</span></code></pre></div>
 
@@ -2195,6 +2329,9 @@ fix or <a href="https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question">a
 
 
 
+
+  
+  
 
   
   
@@ -2473,6 +2610,8 @@ fix or <a href="https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question">a
     
   
     
+  
+    
       <li class=""><a href="/docs/usage/">Basic Usage</a></li>
       
 
@@ -2481,6 +2620,8 @@ fix or <a href="https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question">a
 
   
 
+  
+    
   
     
   
@@ -2747,6 +2888,64 @@ fix or <a href="https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question">a
     
   
     
+      <li class=""><a href="/docs/static-files/">Static Files</a></li>
+      
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
     
   
@@ -2853,6 +3052,8 @@ fix or <a href="https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question">a
 
   
 
+  
+    
   
     
   
@@ -3205,6 +3406,8 @@ fix or <a href="https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question">a
     
   
     
+  
+    
       <li class=""><a href="/docs/troubleshooting/">Troubleshooting</a></li>
       
 
@@ -3319,6 +3522,8 @@ fix or <a href="https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question">a
 
   
 
+  
+    
   
     
   
