@@ -287,12 +287,12 @@ module Jekyll
     #
     # Returns
     def relative_permalinks_are_deprecated
-    if config['relative_permalinks'] && has_relative_page?
-        Jekyll::Deprecator.deprecation_message "Since v2.0, permalinks for pages" +
-                                            " in subfolders must be relative to the" +
-                                            " site source directory, not the parent" +
-                                            " directory. Check http://jekyllrb.com/docs/upgrading/"+
-                                            " for more info."
+      if config['relative_permalinks']
+        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" +
+                                " in subfolders must be relative to the" +
+                                " site source directory, not the parent" +
+                                " directory. Check http://jekyllrb.com/docs/upgrading/"+
+                                " for more info."
       end
     end
 
@@ -369,14 +369,6 @@ module Jekyll
     end
 
     private
-
-    # Checks if the site has any pages containing relative links
-    #
-    # Returns a Boolean: true for usage of relateive permalinks, false
-    # if it doesn't
-    def has_relative_page?
-      pages.any? { |page| page.uses_relative_permalinks }
-    end
 
     # Limits the current posts; removes the posts which exceed the limit_posts
     #

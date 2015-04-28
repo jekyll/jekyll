@@ -502,9 +502,6 @@ port:    4000
 host:    127.0.0.1
 baseurl: "" # does not include hostname
 
-# Backwards-compatibility
-relative_permalinks: false
-
 # Outputting
 permalink:     date
 paginate_path: /page:num
