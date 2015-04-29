@@ -435,8 +435,8 @@ class TestSite < JekyllUnitTest
         @page = @site.pages.find { |p| p.name == "environment.html" }
       end
 
-      should "default to 'development'" do
-        assert_equal "local", @page.content.strip
+      should "default to 'dev'" do
+        assert_equal "dev", @page.content.strip
       end
 
       context "in production" do
@@ -487,7 +487,7 @@ class TestSite < JekyllUnitTest
         sleep 1
         @site.process
         mtime3 = File.stat(dest).mtime.to_i
-        refute_equal mtime2, mtime3 # must be regenerated 
+        refute_equal mtime2, mtime3 # must be regenerated
 
         sleep 1
         @site.process
@@ -511,7 +511,7 @@ class TestSite < JekyllUnitTest
         @site.process
         assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
-        refute_equal mtime1, mtime2 # must be regenerated 
+        refute_equal mtime1, mtime2 # must be regenerated
       end
 
     end
