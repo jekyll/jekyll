@@ -27,7 +27,9 @@ After do
   Dir.chdir(File.dirname(TEST_DIR))
 end
 
-World(Minitest::Assertions)
+World do
+  MinitestWorld.new
+end
 
 Given /^I have a blank site in "(.*)"$/ do |path|
   FileUtils.mkdir_p(path) unless File.exist?(path)
