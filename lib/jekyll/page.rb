@@ -52,11 +52,7 @@ module Jekyll
     # Returns the String permalink or nil if none has been set.
     def permalink
       return nil if data.nil? || data['permalink'].nil?
-      if site.config['relative_permalinks']
-        File.join(@dir, data['permalink'])
-      else
-        data['permalink']
-      end
+      data['permalink']
     end
 
     # The template of the permalink.
@@ -155,10 +151,6 @@ module Jekyll
     # Returns the Boolean of whether this Page is an index file or not.
     def index?
       basename == 'index'
-    end
-
-    def uses_relative_permalinks
-      permalink && !@dir.empty? && site.config['relative_permalinks']
     end
   end
 end

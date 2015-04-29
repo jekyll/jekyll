@@ -36,16 +36,12 @@ module Jekyll
         end
 
         def deprecated_relative_permalinks(site)
-          contains_deprecated_pages = false
-          site.pages.each do |page|
-            if page.uses_relative_permalinks
-              Jekyll::Deprecator.deprecation_message "'#{page.path}' uses relative" +
-                                  " permalinks which will be deprecated in" +
-                                  " Jekyll v2.0.0 and beyond."
-              contains_deprecated_pages = true
-            end
+          if site.config['relative_permalinks']
+            Jekyll::Deprecator.deprecation_message "Your site still uses relative" +
+                                " permalinks, which was removed in" +
+                                " Jekyll v3.0.0."
+            return true
           end
-          contains_deprecated_pages
         end
 
         def conflicting_urls(site)

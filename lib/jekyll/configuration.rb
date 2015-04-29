@@ -45,9 +45,6 @@ module Jekyll
       'host'          => '127.0.0.1',
       'baseurl'       => '',
 
-      # Backwards-compatibility options
-      'relative_permalinks' => false,
-
       # Output Configuration
       'permalink'     => 'date',
       'paginate_path' => '/page:num',

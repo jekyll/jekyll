@@ -42,19 +42,12 @@ your site.
 In Jekyll v1.0, we introduced absolute permalinks for pages in
 subdirectories. Starting with v2.0, absolute permalinks are opt-out,
 meaning Jekyll will default to using absolute permalinks instead of
-relative permalinks.
-
-* To use absolute permalinks, set `relative_permalinks: false` in your
-configuration file.
-* To continue using relative permalinks, set `relative_permalinks: true` in
-your configuration file.
+relative permalinks. Relative permalink backwards-compatibility was removed in v3.0.
 
 <div class="note warning" id="absolute-permalinks-warning">
-  <h5 markdown="1">Absolute permalinks will be default in v2.0 and on</h5>
+  <h5 markdown="1">Absolute permalinks will be required in v3.0 and on</h5>
   <p markdown="1">
-    Starting with Jekyll v2.0, `relative_permalinks` will default to `false`,
-    meaning all pages will be built using the absolute permalink behaviour.
-    The switch will still exist until v2.0.
+    Starting with Jekyll v3.0, relative permalinks functionality will be removed and thus unavailable for use.
   </p>
 </div>
 
