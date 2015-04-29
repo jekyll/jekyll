@@ -13,6 +13,7 @@
   * Always include file extension on output files (#3490)
   * Improved permalinks for pages and collections (#3538)
   * Sunset (i.e. remove) Maruku (#3655)
+  * Remove support for relative permalinks (#3679)
 
 ### Minor Enhancements
 
