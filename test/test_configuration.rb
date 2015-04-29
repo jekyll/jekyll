@@ -44,10 +44,14 @@ class TestConfiguration < JekyllUnitTest
     should "return .yaml if it exists but .yml does not" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(false)
       allow(File).to receive(:exist?).with(source_dir("_config.yaml")).and_return(true)
+      allow(File).to receive(:exist?).with(source_dir("_config.dev.yml")).and_return(false)
+      allow(File).to receive(:exist?).with(source_dir("_config.dev.yaml")).and_return(false)
       assert_equal [source_dir("_config.yaml")], @config.config_files(@no_override)
     end
     should "return .yml if both .yml and .yaml exist" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
+      allow(File).to receive(:exist?).with(source_dir("_config.dev.yml")).and_return(false)
+      allow(File).to receive(:exist?).with(source_dir("_config.dev.yaml")).and_return(false)
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
     should "return the config if given one config file" do
@@ -58,14 +62,35 @@ class TestConfiguration < JekyllUnitTest
     end
 
     context "environment-specific configuration" do
-      should "default to _config.local.yml" do
-        assert_equal "_config.local.yml", @config.env_config_file
+      should "default to _config.dev.yml" do
+        with_env('JEKYLL_ENV', nil) do
+          assert_equal "_config.dev", @config.env_config_file_basename
+        end
       end
 
       should "use value of JEKYLL_ENV" do
         with_env('JEKYLL_ENV', 'github') do
-          assert_equal "_config.github.yml", @config.env_config_file
+          assert_equal "_config.github", @config.env_config_file_basename
         end
+      end
+
+      should "return both config and the env config if the env config exists" do
+        allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
+        allow(File).to receive(:exist?).with(source_dir("_config.dev.yml")).and_return(true)
+        assert_equal [source_dir("_config.yml"), source_dir("_config.dev.yml")], @config.config_files(@no_override)
+      end
+
+      should "return allow the env config to be .yaml too" do
+        allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
+        allow(File).to receive(:exist?).with(source_dir("_config.dev.yml")).and_return(false)
+        allow(File).to receive(:exist?).with(source_dir("_config.dev.yaml")).and_return(true)
+        assert_equal [source_dir("_config.yml"), source_dir("_config.dev.yaml")], @config.config_files(@no_override)
+      end
+
+      should "skip the env stuff if a config file is passed" do
+        allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
+        allow(File).to receive(:exist?).with(source_dir("_config.dev.yml")).and_return(true)
+        assert_equal %w[config.yml], @config.config_files(@one_config_file)
       end
     end
   end

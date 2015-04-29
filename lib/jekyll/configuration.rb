@@ -122,6 +122,13 @@ module Jekyll
       end
     end
 
+    def config_file_with_flexible_extname(basename, override)
+      default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
+        File.exist? in_source(override, "#{basename}.#{ext}")
+      end
+      in_source(override, "#{basename}.#{default}")
+    end
+
     # Public: Generate list of configuration files from the override
     #
     # override - the command-line options hash
@@ -134,17 +141,17 @@ module Jekyll
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
       if config_files.to_s.empty?
-        default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
-          File.exist? in_source(override, "_config.#{ext}")
+        config_file = config_file_with_flexible_extname('_config', override)
+        env_filename = config_file_with_flexible_extname(env_config_file_basename, override)
+        if File.exist? env_filename
+          config_files = [config_file, env_filename]
+        else
+          config_files = [config_file]
         end
-        config_files = in_source(override, "_config.#{default}")
         @default_config_file = true
       end
       config_files = Array(config_files)
 
-      if File.exist? in_source(override, env_config_file)
-        config_files << in_source(override, env_config_file)
-      end
 
       config_files
     end
@@ -152,8 +159,8 @@ module Jekyll
     # Public: The config filename for the current Jekyll environment.
     #
     # Returns the filename for the JEKYLL_ENV-specific configuration file.
-    def env_config_file
-      "_config.#{Jekyll.env.downcase}.yml"
+    def env_config_file_basename
+      "_config.#{Jekyll.env.downcase}"
     end
 
     # Public: Read configuration and return merged Hash
