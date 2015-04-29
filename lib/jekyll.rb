@@ -26,7 +26,6 @@ require 'set'
 # 3rd party
 require 'safe_yaml/load'
 require 'liquid'
-require 'kramdown'
 require 'colorator'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
