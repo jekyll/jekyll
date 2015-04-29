@@ -14,6 +14,7 @@
   * Improved permalinks for pages and collections (#3538)
   * Sunset (i.e. remove) Maruku (#3655)
   * Remove support for relative permalinks (#3679)
+  * Iterate over `site.collections` as an array instead of a hash. (#3670)
 
 ### Minor Enhancements
 
