@@ -163,10 +163,10 @@ An overview of what each of these does:
       <td>
         <p>
 
-          This is file helps Jekyll keep track of which files have not been
-          modified since the site was last built, and which files will need to
-          be regenerated on the next build. This file will not be included in
-          the generated site. It’s probably a good idea to add this to your
+          This helps Jekyll keep track of which files have not been modified
+          since the site was last built, and which files will need to be
+          regenerated on the next build. This file will not be included in the
+          generated site. It’s probably a good idea to add this to your
           <code>.gitignore</code> file.
 
         </p>
