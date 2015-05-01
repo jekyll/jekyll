@@ -17,11 +17,11 @@ that might be of help. If the problem you’re experiencing isn’t covered belo
 ## Installation Problems
 
 If you encounter errors during gem installation, you may need to install
-the header files for compiling extension modules for ruby 1.9.1. This
+the header files for compiling extension modules for Ruby 2.0.0. This
 can be done on Ubuntu or Debian by running:
 
 {% highlight bash %}
-sudo apt-get install ruby1.9.1-dev
+sudo apt-get install ruby2.0.0-dev
 {% endhighlight %}
 
 On Red Hat, CentOS, and Fedora systems you can do this by running:
@@ -40,13 +40,13 @@ export PATH=$PATH:/home/private/gems/bin
 export RB_USER_INSTALL='true'
 {% endhighlight %}
 
-On OSX, you may need to update RubyGems:
+On Mac OS X, you may need to update RubyGems:
 
 {% highlight bash %}
 sudo gem update --system
 {% endhighlight %}
 
-If you still have issues, you may need to [use XCode to install Command Line
+If you still have issues, you may need to [use Xcode to install Command Line
 Tools](http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html)
 that will allow you to install native gems using the following command:
 
