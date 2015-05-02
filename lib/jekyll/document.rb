@@ -175,11 +175,15 @@ module Jekyll
     #
     # Returns nothing.
     def write(dest)
+      Jekyll::Hooks.trigger self, :post_render
+
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'wb') do |f|
         f.write(output)
       end
+
+      Jekyll::Hooks.trigger self, :post_write
     end
 
     # Returns merged option hash for File.read of self.site (if exists)

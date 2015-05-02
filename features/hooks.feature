@@ -6,7 +6,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register Jekyll::Site, :reset do |site|
+    Jekyll::Hooks.register :site, :reset do |site|
       pageklass = Class.new(Jekyll::Page) do
         def initialize(site, base)
           @site = site
@@ -32,7 +32,7 @@ Feature: Hooks
     And I have a "index.html" page that contains "{{ site.injected }}!"
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register Jekyll::Site, :pre_render do |site, payload|
+    Jekyll::Hooks.register :site, :pre_render do |site, payload|
       payload['site']['injected'] = 'myparam'
     end
     """
@@ -46,7 +46,7 @@ Feature: Hooks
     And I have a "page2.html" page that contains "page2"
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register Jekyll::Site, :post_read do |site|
+    Jekyll::Hooks.register :site, :post_read do |site|
       site.pages.delete_if { |p| p.name == 'page1.html' }
     end
     """
@@ -59,7 +59,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register Jekyll::Site, :post_write do |site|
+    Jekyll::Hooks.register :site, :post_write do |site|
       firstpage = site.pages.first
       content = File.read firstpage.destination(site.dest)
       File.write(File.join(site.dest, 'firstpage.html'), content)
@@ -74,7 +74,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register Jekyll::Page, :post_init do |page|
+    Jekyll::Hooks.register :page, :post_init do |page|
       page.name = 'renamed.html'
       page.process(page.name)
     end
@@ -88,7 +88,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register Jekyll::Page, :pre_render do |page, payload|
+    Jekyll::Hooks.register :page, :pre_render do |page, payload|
       payload['myparam'] = 'special' if page.name == 'page1.html'
     end
     """
@@ -103,7 +103,7 @@ Feature: Hooks
     And I have a "index.html" page that contains "WRAP ME"
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register Jekyll::Page, :post_render do |page|
+    Jekyll::Hooks.register :page, :post_render do |page|
       page.output = "{{{{{ #{page.output.chomp} }}}}}"
     end
     """
@@ -115,7 +115,7 @@ Feature: Hooks
     And I have a "index.html" page that contains "HELLO FROM A PAGE"
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register Jekyll::Page, :post_write do |page|
+    Jekyll::Hooks.register :page, :post_write do |page|
       require 'fileutils'
       filename = page.destination(page.site.dest)
       FileUtils.mv(filename, "#{filename}.moved")
@@ -129,7 +129,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     # rot13 translate
-    Jekyll::Hooks.register Jekyll::Post, :post_init do |post|
+    Jekyll::Hooks.register :post, :post_init do |post|
       post.content.tr!('abcdefghijklmnopqrstuvwxyz',
         'nopqrstuvwxyzabcdefghijklm')
     end
@@ -148,7 +148,7 @@ Feature: Hooks
     """
     # Add myvar = 'old' to posts before 2015-03-15, and myvar = 'new' for
     # others
-    Jekyll::Hooks.register Jekyll::Post, :pre_render do |post, payload|
+    Jekyll::Hooks.register :post, :pre_render do |post, payload|
       if post.date < Time.new(2015, 3, 15)
         payload['myvar'] = 'old'
       else
@@ -170,7 +170,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     # Replace content after rendering
-    Jekyll::Hooks.register Jekyll::Post, :post_render do |post|
+    Jekyll::Hooks.register :post, :post_render do |post|
       post.output.gsub! /42/, 'the answer to life, the universe and everything'
     end
     """
@@ -188,7 +188,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     # Log all post filesystem writes
-    Jekyll::Hooks.register Jekyll::Post, :post_write do |post|
+    Jekyll::Hooks.register :post, :post_write do |post|
       filename = post.destination(post.site.dest)
       open('_site/post-build.log', 'a') do |f|
         f.puts "Wrote #{filename} at #{Time.now}"
@@ -203,3 +203,125 @@ Feature: Hooks
     When I run jekyll build
     Then I should see "_site/2015/03/14/entry1.html at" in "_site/post-build.log"
     Then I should see "_site/2015/03/15/entry2.html at" in "_site/post-build.log"
+
+  Scenario: Register a hook on multiple owners at the same time
+    Given I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register [:page, :post], :post_render do |owner|
+      owner.output = "{{{{{ #{owner.output.chomp} }}}}}"
+    end
+    """
+    And I have a "index.html" page that contains "WRAP ME"
+    And I have a _posts directory
+    And I have the following posts:
+      | title  | date       | layout | content   |
+      | entry1 | 2015-03-14 | nil    | entry one |
+    When I run jekyll build
+    Then I should see "{{{{{ WRAP ME }}}}}" in "_site/index.html"
+    And I should see "{{{{{ <p>entry one</p> }}}}}" in "_site/2015/03/14/entry1.html"
+
+  Scenario: Allow hooks to have a named priority
+    Given I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :page, :post_render, priority: :normal do |owner|
+      # first normal runs second
+      owner.output = "1 #{owner.output.chomp}"
+    end
+    Jekyll::Hooks.register :page, :post_render, priority: :high do |owner|
+      # high runs last
+      owner.output = "2 #{owner.output.chomp}"
+    end
+    Jekyll::Hooks.register :page, :post_render do |owner|
+      # second normal runs third (normal is default)
+      owner.output = "3 #{owner.output.chomp}"
+    end
+    Jekyll::Hooks.register :page, :post_render, priority: :low do |owner|
+      # low runs first
+      owner.output = "4 #{owner.output.chomp}"
+    end
+    """
+    And I have a "index.html" page that contains "WRAP ME"
+    When I run jekyll build
+    Then I should see "2 3 1 4 WRAP ME" in "_site/index.html"
+
+  Scenario: Alter a document right after it is initialized
+    Given I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :document, :pre_render do |doc, payload|
+      doc.data['text'] = doc.data['text'] << ' are belong to us'
+    end
+    """
+    And I have a "_config.yml" file that contains "collections: [ memes ]"
+    And I have a _memes directory
+    And I have a "_memes/doc1.md" file with content:
+    """
+    ---
+    text: all your base
+    ---
+    """
+    And I have an "index.md" file with content:
+    """
+    ---
+    ---
+    {{ site.memes.first.text }}
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "all your base are belong to us" in "_site/index.html"
+
+  Scenario: Update a document after rendering it, but before writing it to disk
+    Given I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :document, :post_render do |doc|
+      doc.output.gsub! /<p>/, '<p class="meme">'
+    end
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      memes:
+        output: true
+    """
+    And I have a _memes directory
+    And I have a "_memes/doc1.md" file with content:
+    """
+    ---
+    text: all your base are belong to us
+    ---
+    {{ page.text }}
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "<p class=\"meme\">all your base are belong to us" in "_site/memes/doc1.html"
+
+  Scenario: Perform an action after every document is written
+    Given I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :document, :post_write do |doc|
+      open('_site/document-build.log', 'a') do |f|
+        f.puts "Wrote document #{doc.collection.docs.index doc} at #{Time.now}"
+      end
+    end
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      memes:
+        output: true
+    """
+    And I have a _memes directory
+    And I have a "_memes/doc1.md" file with content:
+    """
+    ---
+    text: all your base are belong to us
+    ---
+    {{ page.text }}
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Wrote document 0" in "_site/document-build.log"

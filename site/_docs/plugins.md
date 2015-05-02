@@ -491,16 +491,16 @@ custom functionality every time Jekyll renders a post, you could register a
 hook like this:
 
 {% highlight ruby %}
-Jekyll::Hooks.register Jekyll::Post, :post_render do |post|
+Jekyll::Hooks.register :post, :post_render do |post|
   # code to call after Jekyll renders a post
 end
 {% endhighlight %}
 
-Jekyll provides hooks for <code>Jekyll::Site</code>, <code>Jekyll::Page</code>
-and <code>Jekyll::Post</code>. In all cases, Jekyll calls your hooks with the
-container object as the first callback parameter. But in the case of
-<code>:pre_render</code>, your hook will also receive a payload hash as a
-second parameter which allows you full control over the variables that are
+Jekyll provides hooks for <code>:site</code>, <code>:page</code>,
+<code>:post</code>, and <code>:document</code>. In all cases, Jekyll calls your
+hooks with the container object as the first callback parameter. But in the
+case of <code>:pre_render</code>, your hook will also receive a payload hash as
+a second parameter which allows you full control over the variables that are
 available while rendering.
 
 The complete list of available hooks is below:
@@ -517,7 +517,7 @@ The complete list of available hooks is below:
   <tbody>
     <tr>
       <td>
-        <p><code>Jekyll::Site</code></p>
+        <p><code>:site</code></p>
       </td>
       <td>
         <p><code>:reset</code></p>
@@ -528,7 +528,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Site</code></p>
+        <p><code>:site</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -539,7 +539,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Site</code></p>
+        <p><code>:site</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -550,7 +550,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Site</code></p>
+        <p><code>:site</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>
@@ -561,7 +561,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Page</code></p>
+        <p><code>:page</code></p>
       </td>
       <td>
         <p><code>:post_init</code></p>
@@ -572,7 +572,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Page</code></p>
+        <p><code>:page</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -583,7 +583,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Page</code></p>
+        <p><code>:page</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -594,7 +594,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Page</code></p>
+        <p><code>:page</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>
@@ -605,7 +605,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Post</code></p>
+        <p><code>:post</code></p>
       </td>
       <td>
         <p><code>:post_init</code></p>
@@ -616,7 +616,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Post</code></p>
+        <p><code>:post</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -627,7 +627,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Post</code></p>
+        <p><code>:post</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -638,13 +638,46 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>Jekyll::Post</code></p>
+        <p><code>:post</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>
       </td>
       <td>
         <p>After writing a post to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:document</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering a document</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:document</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering a document, but before writing it to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:document</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing a document to disk</p>
       </td>
     </tr>
   </tbody>
