@@ -76,7 +76,7 @@ module Jekyll
         raise ArgumentError, "limit_posts must be a non-negative number"
       end
 
-      Jekyll::Hooks.trigger self, :reset
+      Jekyll::Hooks.trigger self, :after_reset
     end
 
     # Load necessary libraries, plugins, converters, and generators.

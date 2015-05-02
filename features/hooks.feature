@@ -2,11 +2,11 @@ Feature: Hooks
   As a plugin author
   I want to be able to run code during various stages of the build process
 
-  Scenario: Run some code on site reset
+  Scenario: Run some code after site reset
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :site, :reset do |site|
+    Jekyll::Hooks.register :site, :after_reset do |site|
       pageklass = Class.new(Jekyll::Page) do
         def initialize(site, base)
           @site = site

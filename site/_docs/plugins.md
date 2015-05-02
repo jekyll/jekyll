@@ -520,7 +520,7 @@ The complete list of available hooks is below:
         <p><code>:site</code></p>
       </td>
       <td>
-        <p><code>:reset</code></p>
+        <p><code>:after_reset</code></p>
       </td>
       <td>
         <p>Just after site reset</p>
