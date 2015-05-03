@@ -160,6 +160,7 @@ module Jekyll
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run
+            Jekyll::Hooks.trigger document, :post_render
           end
         end
       end

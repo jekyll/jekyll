@@ -175,8 +175,6 @@ module Jekyll
     #
     # Returns nothing.
     def write(dest)
-      Jekyll::Hooks.trigger self, :post_render
-
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'wb') do |f|
