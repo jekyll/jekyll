@@ -5,6 +5,10 @@ rvm:
 - 2.2
 - 2.1
 - 2.0
+- jruby-head
+matrix:
+  allow_failures:
+    - rvm: jruby-head
 env:
   matrix:
     - TEST_SUITE=test
