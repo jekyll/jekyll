@@ -43,7 +43,6 @@ module Jekyll
       dot_pages = dot_files.select{ |file| Utils.has_yaml_header?(@site.in_source_dir(base,file)) }
       dot_static_files = dot_files - dot_pages
 
-      retrieve_posts(dir)
       retrieve_dirs(base, dir, dot_dirs)
       retrieve_pages(dir, dot_pages)
       retrieve_static_files(dir, dot_static_files)

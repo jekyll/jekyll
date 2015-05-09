@@ -27,14 +27,6 @@ module Jekyll
       draft?
     ]
 
-    # Post name validator. Post filenames must be like:
-    # 2008-11-05-my-awesome-post.textile
-    #
-    # Returns true if valid, false if not.
-    def self.valid?(name)
-      name =~ MATCHER
-    end
-
     attr_accessor :site
     attr_accessor :data, :extracted_excerpt, :content, :output, :ext
     attr_accessor :date, :slug, :tags, :categories
@@ -70,25 +62,6 @@ module Jekyll
       populate_tags
 
       Jekyll::Hooks.trigger :post, :post_init, self
-    end
-
-    def published?
-      if data.key?('published') && data['published'] == false
-        false
-      else
-        true
-      end
-    end
-
-    def populate_categories
-      categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
-      self.categories = (
-        Array(categories) + categories_from_data
-      ).map { |c| c.to_s }.flatten.uniq
-    end
-
-    def populate_tags
-      self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
     end
 
     # Get the full path to the directory containing the post files
@@ -194,21 +167,6 @@ module Jekyll
       data && data['permalink']
     end
 
-    def template
-      case site.permalink_style
-      when :pretty
-        "/:categories/:year/:month/:day/:title/"
-      when :none
-        "/:categories/:title.html"
-      when :date
-        "/:categories/:year/:month/:day/:title.html"
-      when :ordinal
-        "/:categories/:year/:y_day/:title.html"
-      else
-        site.permalink_style.to_s
-      end
-    end
-
     # The generated relative url of this post.
     #
     # Returns the String url.
@@ -218,42 +176,6 @@ module Jekyll
         :placeholders => url_placeholders,
         :permalink => permalink
       }).to_s
-    end
-
-    # Returns a hash of URL placeholder names (as symbols) mapping to the
-    # desired placeholder replacements. For details see "url.rb"
-    def url_placeholders
-      {
-        :year        => date.strftime("%Y"),
-        :month       => date.strftime("%m"),
-        :day         => date.strftime("%d"),
-        :hour        => date.strftime("%H"),
-        :minute      => date.strftime("%M"),
-        :second      => date.strftime("%S"),
-        :title       => slug,
-        :i_day       => date.strftime("%-d"),
-        :i_month     => date.strftime("%-m"),
-        :categories  => (categories || []).map { |c| c.to_s.downcase }.uniq.join('/'),
-        :short_month => date.strftime("%b"),
-        :short_year  => date.strftime("%y"),
-        :y_day       => date.strftime("%j"),
-        :output_ext  => output_ext
-      }
-    end
-
-    # The UID for this post (useful in feeds).
-    # e.g. /2008/11/05/my-awesome-post
-    #
-    # Returns the String UID.
-    def id
-      File.join(dir, slug)
-    end
-
-    # Calculate related posts.
-    #
-    # Returns an Array of related Posts.
-    def related_posts(posts)
-      Jekyll::RelatedPosts.new(self).build
     end
 
     # Add any necessary layouts to this post.

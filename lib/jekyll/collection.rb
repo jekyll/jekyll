@@ -37,7 +37,7 @@ module Jekyll
       filtered_entries.each do |file_path|
         full_path = collection_dir(file_path)
         next if File.directory?(full_path)
-        if Utils.has_yaml_header? full_path
+        if Utils.has_yaml_header?(full_path) && valid_doc_filename?(full_path)
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
           docs << doc if site.publisher.publish?(doc)
@@ -127,7 +127,7 @@ module Jekyll
     #
     # Returns the inspect string
     def inspect
-      "#<Jekyll::Collection @label=#{label} docs=#{docs}>"
+      "#<Jekyll::Collection @label=#{label} docs=#{docs} metadata=#{metadata}>"
     end
 
     # Produce a sanitized label name
@@ -171,7 +171,7 @@ module Jekyll
     # Returns the URL template to render collection's documents at.
     def url_template
       metadata.fetch('permalink') do
-          Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
+        Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
       end
     end
 
@@ -183,6 +183,22 @@ module Jekyll
         site.config['collections'][label] || Hash.new
       else
         {}
+      end
+    end
+
+    # Filename name validator.
+    #
+    # Post filenames must be like:
+    #   2008-11-05-my-awesome-post.textile
+    #
+    # All other filenames can be anything.
+    #
+    # Returns true if valid, false if not.
+    def valid_doc_filename?(path)
+      if label.eql?('posts')
+        Traits::Dated.dated_filename? path
+      else
+        true
       end
     end
   end

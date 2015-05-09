@@ -18,6 +18,10 @@ module Jekyll
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
 
+      @@realpath_prefixed_with_cache = {}
+      @@read_file_cache = {}
+      @@exists_cache = {}
+
       def initialize(tag_name, markup, tokens)
         super
         matched = markup.strip.match(VARIABLE_SYNTAX)
@@ -141,7 +145,7 @@ eos
       def validate_path(path, dir, safe)
         if safe && !realpath_prefixed_with?(path, dir)
           raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
-        elsif !File.exist?(path)
+        elsif !exists?(path)
           raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
         end
       end
@@ -150,13 +154,17 @@ eos
         File.join(@includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
       end
 
+      def exists?(path)
+        @@exists_cache[path] ||= File.exist?(path)
+      end
+
       def realpath_prefixed_with?(path, dir)
-        File.exist?(path) && File.realpath(path).start_with?(dir)
+        @@realpath_prefixed_with_cache[path] ||= exists?(path) && File.realpath(path).start_with?(dir)
       end
 
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)
-        File.read(file, file_read_opts(context))
+        @@read_file_cache[file] ||= File.read(file, file_read_opts(context))
       end
     end
 

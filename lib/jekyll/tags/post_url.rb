@@ -14,7 +14,7 @@ module Jekyll
       end
 
       def ==(other)
-        other.name.match(@name_regex)
+        other.basename.match(@name_regex)
       end
 
       def deprecated_equality(other)

@@ -97,6 +97,7 @@ module Jekyll
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || document.relative_path}"
       raise e
     rescue Exception => e
+      p document
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || document.relative_path}"
       raise e
     end

@@ -3,10 +3,15 @@
 module Jekyll
   class Document
     include Comparable
+    include Traits::Categorable
+    include Traits::Dated
+    include Traits::Publishable
+    include Traits::Taggable
 
-    attr_reader :path, :site, :extname, :output_ext, :content, :output, :collection
+    attr_reader :path, :site, :extname, :output_ext, :content,
+                :output, :collection, :name, :cleaned_relative_path, :data
 
-    YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+    YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m.freeze
 
     # Create a new Document.
     #
@@ -21,6 +26,8 @@ module Jekyll
       @output_ext = Jekyll::Renderer.new(site, self).output_ext
       @collection = relations[:collection]
       @has_yaml_header = nil
+      @cleaned_relative_path = generate_cleaned_relative_path
+      @data = Hash.new
     end
 
     def output=(output)
@@ -31,14 +38,6 @@ module Jekyll
     def content=(content)
       @to_liquid = nil
       @content = content
-    end
-
-    # Fetch the Document's data.
-    #
-    # Returns a Hash containing the data. An empty hash is returned if
-    #   no data was read.
-    def data
-      @data ||= Hash.new
     end
 
     # The path to the document, relative to the site source.
@@ -61,22 +60,6 @@ module Jekyll
     # Returns the base filename of the document.
     def basename
       @basename ||= File.basename(path)
-    end
-
-    # Produces a "cleaned" relative path.
-    # The "cleaned" relative path is the relative path without the extname
-    #   and with the collection's directory removed as well.
-    # This method is useful when building the URL of the document.
-    #
-    # Examples:
-    #   When relative_path is "_methods/site/generate.md":
-    #     cleaned_relative_path
-    #     # => "/site/generate"
-    #
-    # Returns the cleaned relative path of the document.
-    def cleaned_relative_path
-      @cleaned_relative_path ||=
-        relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
     end
 
     # Determine whether the document is a YAML file.
@@ -137,13 +120,16 @@ module Jekyll
     #
     # Returns the Hash of key-value pairs for replacement in the URL.
     def url_placeholders
-      {
+      @url_placeholders ||= {
         collection: collection.label,
         path:       cleaned_relative_path,
         output_ext: output_ext,
         name:       Utils.slugify(basename_without_ext),
-        title:      Utils.slugify(data['slug']) || Utils.slugify(basename_without_ext)
-      }
+
+        # Metadata
+        categories: categories.map { |c| c.to_s.downcase }.compact.uniq.join('/'),
+        title:      Utils.slugify(data['slug']) || Utils.slugify(cleaned_relative_path)
+      }.merge(date_url_placeholders)
     end
 
     # The permalink for this Document.
@@ -234,6 +220,10 @@ module Jekyll
               @data = Utils.deep_merge_hashes(defaults, data_file)
             end
           end
+
+          # TODO: replace these with post_read hooks
+          populate_categories
+          populate_tags
         rescue SyntaxError => e
           puts "YAML Exception reading #{path}: #{e.message}"
         rescue Exception => e
@@ -253,7 +243,8 @@ module Jekyll
           "relative_path" => relative_path,
           "path"          => relative_path,
           "url"           => url,
-          "collection"    => collection.label
+          "collection"    => collection.label,
+          "date"          => date
         }
       else
         data
@@ -265,7 +256,7 @@ module Jekyll
     #
     # Returns the inspect string for this document.
     def inspect
-      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+      "#<Jekyll::Document #{relative_path} collection=#{collection.label} data=#{data}>"
     end
 
     # The string representation for this document.
@@ -291,6 +282,25 @@ module Jekyll
     #   method returns true, otherwise false.
     def write?
       collection && collection.write?
+    end
+
+    # Produces a "cleaned" relative path.
+    # The "cleaned" relative path is the relative path without the extname
+    #   and with the collection's directory removed as well.
+    # This method is useful when building the URL of the document.
+    #
+    # Examples:
+    #   When relative_path is "_methods/site/generate.md":
+    #     cleaned_relative_path
+    #     # => "/site/generate"
+    #
+    # Returns the cleaned relative path of the document.
+    def generate_cleaned_relative_path
+      cleaned = relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
+      if collection.label == "posts".freeze && Traits::Dated::dated_cleansed_filename?(cleaned)
+        cleaned = Traits::Dated::matched_dated_cleaned_filename(cleaned)[2]
+      end
+      cleaned
     end
   end
 end
