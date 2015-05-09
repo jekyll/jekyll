@@ -5,12 +5,6 @@ rvm:
 - 2.2
 - 2.1
 - 2.0
-- jruby-21mode
-- jruby-20mode
-matrix:
-  allow_failures:
-    - rvm: jruby-20mode
-    - rvm: jruby-21mode
 env:
   matrix:
     - TEST_SUITE=test
