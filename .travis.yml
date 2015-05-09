@@ -5,10 +5,12 @@ rvm:
 - 2.2
 - 2.1
 - 2.0
-- jruby-head
+- jruby-21mode
+- jruby-20mode
 matrix:
   allow_failures:
-    - rvm: jruby-head
+    - rvm: jruby-20mode
+    - rvm: jruby-21mode
 env:
   matrix:
     - TEST_SUITE=test
