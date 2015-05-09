@@ -188,6 +188,7 @@
   * Clarify pagination works from within HTML files (#3467)
   * Add note to `excerpt_separator` documentation that it can be set globally (#3667)
   * Fix some names on Troubleshooting page (#3683)
+  * Add `remote_file_content` tag plugin to list of third-party plugins (#3691)
 
 ## 2.5.3 / 2014-12-22
 
