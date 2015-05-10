@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Troubleshooting</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta2">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta4">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2186,10 +2186,10 @@ that might be of help. If the problem you’re experiencing isn’t covered belo
 <h2 id="installation-problems">Installation Problems</h2>
 
 <p>If you encounter errors during gem installation, you may need to install
-the header files for compiling extension modules for ruby 1.9.1. This
+the header files for compiling extension modules for Ruby 2.0.0. This
 can be done on Ubuntu or Debian by running:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install ruby1.9.1-dev</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install ruby2.0.0-dev</code></pre></div>
 
 <p>On Red Hat, CentOS, and Fedora systems you can do this by running:</p>
 
@@ -2203,11 +2203,11 @@ following commands before installing Jekyll:</p>
 <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/home/private/gems/bin
 <span class="nb">export </span><span class="nv">RB_USER_INSTALL</span><span class="o">=</span><span class="s1">&#39;true&#39;</span></code></pre></div>
 
-<p>On OSX, you may need to update RubyGems:</p>
+<p>On Mac OS X, you may need to update RubyGems:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem update --system</code></pre></div>
 
-<p>If you still have issues, you may need to <a href="http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html">use XCode to install Command Line
+<p>If you still have issues, you may need to <a href="http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html">use Xcode to install Command Line
 Tools</a>
 that will allow you to install native gems using the following command:</p>
 

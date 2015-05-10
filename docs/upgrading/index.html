@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Upgrading</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta2">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta4">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2207,21 +2207,12 @@ your site.</p>
 <p>In Jekyll v1.0, we introduced absolute permalinks for pages in
 subdirectories. Starting with v2.0, absolute permalinks are opt-out,
 meaning Jekyll will default to using absolute permalinks instead of
-relative permalinks.</p>
-
-<ul>
-  <li>To use absolute permalinks, set <code>relative_permalinks: false</code> in your
-configuration file.</li>
-  <li>To continue using relative permalinks, set <code>relative_permalinks: true</code> in
-your configuration file.</li>
-</ul>
+relative permalinks. Relative permalink backwards-compatibility was removed in v3.0.</p>
 
 <div class="note warning" id="absolute-permalinks-warning">
-  <h5>Absolute permalinks will be default in v2.0 and on</h5>
+  <h5>Absolute permalinks will be required in v3.0 and on</h5>
   <p>
-    Starting with Jekyll v2.0, <code>relative_permalinks</code> will default to <code>false</code>,
-    meaning all pages will be built using the absolute permalink behaviour.
-    The switch will still exist until v2.0.
+    Starting with Jekyll v3.0, relative permalinks functionality will be removed and thus unavailable for use.
   </p>
 </div>
 
