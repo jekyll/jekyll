@@ -28,6 +28,7 @@ gem 'test-unit' if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
 gem 'rspec-mocks'
 
 if ENV['BENCHMARK']
+  gem 'ruby-prof'
   gem 'rbtrace'
   gem 'stackprof'
   gem 'benchmark-ips'
