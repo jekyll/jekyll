@@ -128,6 +128,7 @@
   * Added tests for `Jekyll:StaticFile` (#3633)
   * Force minitest version to 5.5.1 (#3657)
   * Update the way cucumber accesses Minitest assertions (#3678)
+  * Add `script/rubyprof` to generate cachegrind callgraphs (#3692)
 
 ### Site Enhancements
 
