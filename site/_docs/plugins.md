@@ -470,6 +470,220 @@ module Jekyll
 end
 {% endhighlight %}
 
+## Hooks
+
+<div class="note unreleased">
+  <h5>Support for hooks is currently unreleased.</h5>
+  <p>
+    In order to use this feature, <a href="/docs/installation/#pre-releases">
+    install the latest development version of Jekyll</a>.
+  </p>
+</div>
+
+Using hooks, your plugin can exercise fine-grained control over various aspects
+of the build process. If your plugin defines any hooks, Jekyll will call them
+at pre-defined points.
+
+Hooks are registered to a container and an event name. To register one, you
+call Jekyll::Hooks.register, and pass the container, event name, and code to
+call whenever the hook is triggered. For example, if you want to execute some
+custom functionality every time Jekyll renders a post, you could register a
+hook like this:
+
+{% highlight ruby %}
+Jekyll::Hooks.register :post, :post_render do |post|
+  # code to call after Jekyll renders a post
+end
+{% endhighlight %}
+
+Jekyll provides hooks for <code>:site</code>, <code>:page</code>,
+<code>:post</code>, and <code>:document</code>. In all cases, Jekyll calls your
+hooks with the container object as the first callback parameter. But in the
+case of <code>:pre_render</code>, your hook will also receive a payload hash as
+a second parameter which allows you full control over the variables that are
+available while rendering.
+
+The complete list of available hooks is below:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Container</th>
+      <th>Event</th>
+      <th>Called</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:after_reset</code></p>
+      </td>
+      <td>
+        <p>Just after site reset</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering the whole site</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering the whole site, but before writing any files</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing the whole site to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:page</code></p>
+      </td>
+      <td>
+        <p><code>:post_init</code></p>
+      </td>
+      <td>
+        <p>Whenever a page is initialized</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:page</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering a page</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:page</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering a page, but before writing it to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:page</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing a page to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:post</code></p>
+      </td>
+      <td>
+        <p><code>:post_init</code></p>
+      </td>
+      <td>
+        <p>Whenever a post is initialized</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:post</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering a post</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:post</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering a post, but before writing it to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:post</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing a post to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:document</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering a document</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:document</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering a document, but before writing it to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:document</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing a document to disk</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 ## Available Plugins
 
 You can find a few useful plugins at the following locations:

@@ -35,6 +35,8 @@ module Jekyll
         "page" => document.to_liquid
       }, site_payload || site.site_payload)
 
+      Jekyll::Hooks.trigger document, :pre_render, payload
+
       info = {
         filters:   [Jekyll::Filters],
         registers: { :site => site, :page => payload['page'] }

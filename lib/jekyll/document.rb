@@ -189,6 +189,8 @@ module Jekyll
       File.open(path, 'wb') do |f|
         f.write(output)
       end
+
+      Jekyll::Hooks.trigger self, :post_write
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
