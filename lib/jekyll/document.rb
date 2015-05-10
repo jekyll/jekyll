@@ -4,8 +4,7 @@ module Jekyll
   class Document
     include Comparable
 
-    attr_reader   :path, :site, :extname, :output_ext
-    attr_accessor :content, :collection, :output
+    attr_reader :path, :site, :extname, :output_ext, :content, :output, :collection
 
     YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
 
@@ -22,6 +21,16 @@ module Jekyll
       @output_ext = Jekyll::Renderer.new(site, self).output_ext
       @collection = relations[:collection]
       @has_yaml_header = nil
+    end
+
+    def output=(output)
+      @to_liquid = nil
+      @output = output
+    end
+
+    def content=(content)
+      @to_liquid = nil
+      @content = content
     end
 
     # Fetch the Document's data.
@@ -205,6 +214,8 @@ module Jekyll
     #
     # Returns nothing.
     def read(opts = {})
+      @to_liquid = nil
+
       if yaml_file?
         @data = SafeYAML.load_file(path)
       else
@@ -213,9 +224,9 @@ module Jekyll
           unless defaults.empty?
             @data = defaults
           end
-          @content = File.read(path, merged_file_read_opts(opts))
+          self.content = File.read(path, merged_file_read_opts(opts))
           if content =~ YAML_FRONT_MATTER_REGEXP
-            @content = $POSTMATCH
+            self.content = $POSTMATCH
             data_file = SafeYAML.load($1)
             unless data_file.nil?
               @data = Utils.deep_merge_hashes(defaults, data_file)
@@ -233,7 +244,7 @@ module Jekyll
     #
     # Returns a Hash representing this Document's data.
     def to_liquid
-      if data.is_a?(Hash)
+      @to_liquid ||= if data.is_a?(Hash)
         Utils.deep_merge_hashes data, {
           "output"        => output,
           "content"       => content,
@@ -279,6 +290,5 @@ module Jekyll
     def write?
       collection && collection.write?
     end
-
   end
 end
