@@ -108,6 +108,11 @@ module Jekyll
       !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
+    def binary_file_extension?(file)
+      ext = file.split(".").last.downcase
+      %w{jpg jpeg gif png pdf zip ico ttf}.include?(ext)
+    end
+
     # Slugify a filename or title.
     #
     # string - the filename or title to slugify
