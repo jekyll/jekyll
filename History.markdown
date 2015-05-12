@@ -69,6 +69,8 @@
   * Set log level to debug when verbose flag is set (#3665)
   * Added a mention on the Gemfile to complete the instructions (#3671)
   * Perf: Cache `Document#to_liquid` and invalidate where necessary (#3693)
+  * Perf: `Jekyll::Cleaner#existing_files`: Call `keep_file_regex` and
+    `keep_dirs` only once, not once per iteration (#3696)
 
 ### Bug Fixes
 
