@@ -32,7 +32,7 @@ module Jekyll
       dot = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
       dot_dirs = dot.select{ |file| File.directory?(@site.in_source_dir(base,file)) }
       dot_files = (dot - dot_dirs)
-      dot_pages = dot_files.select{ |file| Utils.has_yaml_header?(@site.in_source_dir(base,file)) }
+      dot_pages = dot_files.select{ |file| !Utils.binary_file_extension?(file) && Utils.has_yaml_header?(@site.in_source_dir(base,file)) }
       dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
