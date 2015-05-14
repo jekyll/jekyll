@@ -7,10 +7,10 @@ build: off
 install:
   - SET PATH=C:\Ruby%ruby_folder_version%\bin;%PATH%
 
-  - ps: Get-DnsClient | Where-Object {$_.InterfaceAlias -like '*ethernet*'} | Set-DnsClientServerAddress -ServerAddresses ("8.8.8.8","8.8.4.4") -PassThru | Get-DnsClientServerAddress
-  - gem update --system 2.3.0 --quiet --no-ri --no-rdoc
+#  - ps: Get-DnsClient | Where-Object {$_.InterfaceAlias -like '*ethernet*'} | Set-DnsClientServerAddress -ServerAddresses ("8.8.8.8","8.8.4.4") -PassThru | Get-DnsClientServerAddress
+#  - gem update --system 2.3.0 --quiet --no-ri --no-rdoc
 
-  - bundle install --retry 3
+  - bundle install --retry 5
 
 test_script:
   - ruby --version
