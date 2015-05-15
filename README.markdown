@@ -1,7 +1,8 @@
 # [Jekyll](http://jekyllrb.com/)
 
 [![Gem Version](https://img.shields.io/gem/v/jekyll.svg)](https://rubygems.org/gems/jekyll)
-[![Build Status](https://img.shields.io/travis/jekyll/jekyll/master.svg)](https://travis-ci.org/jekyll/jekyll)
+[![Linux Build Status](https://img.shields.io/travis/jekyll/jekyll/master.svg?label=Linux%20build)](https://travis-ci.org/jekyll/jekyll)
+[![Windows Build status](https://img.shields.io/appveyor/ci/jekyll/jekyll/master.svg?label=Windows%20build)](https://ci.appveyor.com/project/jekyll/jekyll/branch/master)
 [![Code Climate](https://img.shields.io/codeclimate/github/jekyll/jekyll.svg)](https://codeclimate.com/github/jekyll/jekyll)
 [![Dependency Status](https://img.shields.io/gemnasium/jekyll/jekyll.svg)](https://gemnasium.com/jekyll/jekyll)
 [![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)](https://hakiri.io/github/jekyll/jekyll/master)

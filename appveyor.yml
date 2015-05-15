@@ -1,0 +1,38 @@
+version: "{build}"
+
+clone_depth: 10
+
+build: off
+
+install:
+  - SET PATH=C:\Ruby%ruby_folder_version%\bin;%PATH%
+
+#  - ps: Get-DnsClient | Where-Object {$_.InterfaceAlias -like '*ethernet*'} | Set-DnsClientServerAddress -ServerAddresses ("8.8.8.8","8.8.4.4") -PassThru | Get-DnsClientServerAddress
+#  - gem update --system 2.3.0 --quiet --no-ri --no-rdoc
+
+  - bundle install --retry 5
+
+test_script:
+  - ruby --version
+  - gem --version
+  - bundler --version
+  - bash ./script/cibuild
+
+environment:
+  matrix:
+    - ruby_folder_version: "200"
+      ruby_gems_folder: "2.0.0"
+    - ruby_folder_version: "21"
+      ruby_gems_folder: "2.1.0"
+    - ruby_folder_version: "22"
+      ruby_gems_folder: "2.2.0"
+    - ruby_folder_version: "22-x64"
+      ruby_gems_folder: "2.2.0"
+
+matrix:
+  fast_finish: true
+
+cache:
+  - '%USERPROFILE%\.gem -> Gemfile,jekyll.gemspec'
+  - C:\Ruby%ruby_folder_version%\bin -> Gemfile,jekyll.gemspec
+  - C:\Ruby%ruby_folder_version%\lib\ruby\gems\%ruby_gems_folder% -> Gemfile,jekyll.gemspec
