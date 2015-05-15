@@ -136,6 +136,14 @@ CONTENT
   end
 
   context "with the pygments highlighter" do
+    setup do
+      if jruby?
+        then skip(
+          "JRuby does not support Pygments."
+        )
+      end
+    end
+
     context "post content has highlight tag" do
       setup do
         fill_post("test", {'highlighter' => 'pygments'})
@@ -353,7 +361,15 @@ CONTENT
 
     context "using RDiscount" do
       setup do
-        create_post(@content, 'markdown' => 'rdiscount')
+        if jruby?
+          then skip(
+            "JRuby does not perform well with CExt, test disabled."
+          )
+        end
+
+        create_post(@content, {
+          'markdown' => 'rdiscount'
+        })
       end
 
       should "parse correctly" do
@@ -375,7 +391,15 @@ CONTENT
 
     context "using Redcarpet" do
       setup do
-        create_post(@content, 'markdown' => 'redcarpet')
+        if jruby?
+          skip(
+            "JRuby does not perform well with CExt, test disabled."
+          )
+        end
+
+        create_post(@content, {
+          'markdown' => 'redcarpet'
+        })
       end
 
       should "parse correctly" do

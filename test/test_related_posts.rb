@@ -20,8 +20,17 @@ class TestRelatedPosts < JekyllUnitTest
 
   context "building related posts with lsi" do
     setup do
+      if jruby?
+        skip(
+          "JRuby does not perform well with CExt, test disabled."
+        )
+      end
+
       allow_any_instance_of(Jekyll::RelatedPosts).to receive(:display)
-      @site = fixture_site({"lsi" => true})
+      @site = fixture_site({
+        "lsi" => true
+      })
+
       @site.reset
       @site.read
       require 'classifier-reborn'
@@ -38,7 +47,7 @@ class TestRelatedPosts < JekyllUnitTest
       post = @site.posts.last
       allow_any_instance_of(::ClassifierReborn::LSI).to receive(:build_index)
       expect_any_instance_of(::ClassifierReborn::LSI).to receive(:find_related).with(post, 11).and_return(@site.posts[-1..-9])
-      
+
       Jekyll::RelatedPosts.new(post).build
     end
 

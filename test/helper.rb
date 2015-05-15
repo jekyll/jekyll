@@ -1,3 +1,7 @@
+def jruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+end
+
 unless ENV['TRAVIS']
   require File.expand_path('../simplecov_custom_profile', __FILE__)
   SimpleCov.start('gem') do
@@ -15,19 +19,25 @@ require 'rspec/mocks'
 
 require 'jekyll'
 
-require 'rdiscount'
-require 'kramdown'
-require 'redcarpet'
+unless jruby?
+  require 'rdiscount'
+  require 'redcarpet'
+end
 
+require 'kramdown'
 require 'shoulda'
 
 include Jekyll
 
-# Send STDERR into the void to suppress program output messages
+# FIXME: If we really need this we lost the game.
 STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 
 # Report with color.
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+Minitest::Reporters.use! [
+  Minitest::Reporters::DefaultReporter.new(
+    :color => true
+  )
+]
 
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
