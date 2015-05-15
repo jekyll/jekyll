@@ -72,6 +72,7 @@
   * Perf: Cache `Document#to_liquid` and invalidate where necessary (#3693)
   * Perf: `Jekyll::Cleaner#existing_files`: Call `keep_file_regex` and
     `keep_dirs` only once, not once per iteration (#3696)
+  * Omit jekyll/jekyll-help from list of resources. (#3698)
 
 ### Bug Fixes
 
