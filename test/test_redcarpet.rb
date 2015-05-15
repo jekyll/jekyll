@@ -3,10 +3,21 @@ require 'helper'
 class TestRedcarpet < JekyllUnitTest
   context "redcarpet" do
     setup do
+      if jruby?
+        then skip(
+          "JRuby does not perform well with CExt, test disabled."
+        )
+      end
+
       @config = {
-        'redcarpet' => { 'extensions' => ['smart', 'strikethrough', 'filter_html'] },
-        'markdown' => 'redcarpet'
+        'markdown' => 'redcarpet',
+        'redcarpet' => {
+          'extensions' => [
+            'smart', 'strikethrough', 'filter_html'
+          ]
+        }
       }
+
       @markdown = Converters::Markdown.new @config
     end
 
