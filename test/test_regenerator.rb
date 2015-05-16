@@ -132,6 +132,18 @@ class TestRegenerator < JekyllUnitTest
       assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
     end
 
+    should "read legacy yaml metadata" do
+      metadata_file = source_dir(".jekyll-metadata")
+      @regenerator = Regenerator.new(@site)
+
+      File.open(metadata_file, 'w') do |f|
+        f.write(@regenerator.metadata.to_yaml)
+      end
+
+      @regenerator = Regenerator.new(@site)
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+    end
+
     # Methods
 
     should "be able to add a path to the metadata" do
