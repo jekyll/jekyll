@@ -1,6 +1,6 @@
 module Jekyll
-  module Utils
-    extend self
+  module Utils extend self
+    autoload :Platforms, 'jekyll/utils/platforms'
 
     # Constants for use in #slugify
     SLUGIFY_MODES = %w{raw default pretty}
