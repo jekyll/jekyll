@@ -20,6 +20,8 @@ learning purposes.
     ([source](https://github.com/rsms/rsms.github.com))
 - [Scott Chacon](http://schacon.github.com)
     ([source](https://github.com/schacon/schacon.github.com))
+- [Ozon OS](http://ozonos.github.io)
+    ([source](https://github.com/ozonos/ozonos.github.io))
 
 If you would like to explore more examples, you can find a list of sites
 and their sources on the ["Sites" page in the Jekyll wiki][jekyll-sites].
