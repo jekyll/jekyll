@@ -75,6 +75,7 @@
   * Omit jekyll/jekyll-help from list of resources. (#3698)
   * Add basic `jekyll doctor` test to detect fsnotify (OSX) anomalies. (#3704)
   * Added talk.jekyllrb.com to "Have questions?" (#3694)
+  * Performance: Sort files only once (#3707)
 
 ### Bug Fixes
 
