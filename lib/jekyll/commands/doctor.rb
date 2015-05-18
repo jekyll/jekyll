@@ -30,6 +30,7 @@ module Jekyll
 
         def healthy?(site)
           [
+            fsnotify_buggy?(site),
             !deprecated_relative_permalinks(site),
             !conflicting_urls(site)
           ].all?
@@ -59,8 +60,23 @@ module Jekyll
           conflicting_urls
         end
 
-        private
+        def fsnotify_buggy?(site)
+          return true if !Utils::Platforms.osx?
+          if Dir.pwd != `pwd`.strip
+            Jekyll.logger.error "  " + <<-STR.strip.gsub(/\n\s+/, "\n  ")
+              We have detected that there might be trouble using fsevent on your
+              operating system, you can read https://github.com/thibaudgg/rb-fsevent/wiki/no-fsevents-fired-(OSX-bug)
+              for possible work arounds or you can work around it immediately
+              with `--force-polling`.
+            STR
 
+            false
+          end
+
+          true
+        end
+
+        private
         def collect_urls(urls, things, destination)
           things.each do |thing|
             dest = thing.destination(destination)
