@@ -15,8 +15,16 @@ module Jekyll
     def read
       @site.layouts = LayoutReader.new(site).read
       read_directories
+      sort_files!
       @site.data = DataReader.new(site).read(site.config['data_source'])
       CollectionReader.new(site).read
+    end
+
+    # Sorts posts, pages, and static files.
+    def sort_files!
+      site.posts.sort!
+      site.pages.sort_by!(&:name)
+      site.static_files.sort_by!(&:relative_path)
     end
 
     # Recursively traverse directories to find posts, pages and static files
@@ -50,7 +58,6 @@ module Jekyll
     def retrieve_posts(dir)
       site.posts.concat(PostReader.new(site).read(dir))
       site.posts.concat(DraftReader.new(site).read(dir)) if site.show_drafts
-      site.posts.sort!
     end
 
     # Recursively traverse directories with the read_directories function.
@@ -77,7 +84,6 @@ module Jekyll
     # Returns nothing.
     def retrieve_pages(dir, dot_pages)
       site.pages.concat(PageReader.new(site, dir).read(dot_pages))
-      site.pages.sort_by!(&:name)
     end
 
     # Retrieve all the static files from the current directory,
@@ -89,7 +95,6 @@ module Jekyll
     # Returns nothing.
     def retrieve_static_files(dir, dot_static_files)
       site.static_files.concat(StaticFileReader.new(site, dir).read(dot_static_files))
-      site.static_files.sort_by!(&:relative_path)
     end
 
     # Filter out any files/directories that are hidden or backup files (start
