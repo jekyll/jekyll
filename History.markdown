@@ -73,6 +73,7 @@
   * Perf: `Jekyll::Cleaner#existing_files`: Call `keep_file_regex` and
     `keep_dirs` only once, not once per iteration (#3696)
   * Omit jekyll/jekyll-help from list of resources. (#3698)
+  * Add basic `jekyll doctor` test to detect fsnotify (OSX) anomalies. (#3704)
 
 ### Bug Fixes
 
