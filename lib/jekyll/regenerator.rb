@@ -131,7 +131,7 @@ module Jekyll
     # Returns nothing.
     def write_metadata
       File.open(metadata_file, 'w') do |f|
-        f.write(metadata.to_yaml)
+        f.write(Marshal.dump(metadata))
       end
     end
 
@@ -158,7 +158,13 @@ module Jekyll
     # Returns the read metadata.
     def read_metadata
       @metadata = if !disabled? && File.file?(metadata_file)
-        SafeYAML.load(File.read(metadata_file))
+        content = File.read(metadata_file)
+
+        begin
+          Marshal.load(content)
+        rescue TypeError
+          SafeYAML.load(content)
+        end
       else
         {}
       end
