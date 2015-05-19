@@ -144,6 +144,16 @@ class TestRegenerator < JekyllUnitTest
       assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
     end
 
+    should "not crash when reading corrupted marshal file" do
+      metadata_file = source_dir(".jekyll-metadata")
+      File.open(metadata_file, "w") do |file|
+        file.puts Marshal.dump({ foo: 'bar' })[0,5]
+      end
+
+      @regenerator = Regenerator.new(@site)
+      assert_equal({}, @regenerator.metadata)
+    end
+
     # Methods
 
     should "be able to add a path to the metadata" do
