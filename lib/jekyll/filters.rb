@@ -253,6 +253,26 @@ module Jekyll
       end
     end
 
+    # Sort an array of objects according to one or more properties.
+    #
+    # input      - The object array.
+    # properties - A formatted String describing the property and the direction to
+    #              order by (format: '<property> <direction>[, <property> <direction>...]').
+    #              :property  - The property within each object to order by.
+    #                           Nested properties are supported with 'property.sub_property'.
+    #                           Supports up to Jekyll::Sorter::MAX_NESTING_LEVEL level of nesting.
+    #              :direction - The direction to order by (default: ASC).
+    #                           See Jekyll::Sorter::VALID_DIRECTIONS for a list of
+    #                           valid direction.
+    #              You can compare a maximum of Jekyll::Sorter::MAX_SORTING_FIELDS properties
+    #              separated by a comma (ie. property1 dir1, property2 dir2).
+    #
+    # Returns the filtered array of objects.
+    def order_by(input, properties)
+      raise ArgumentError, 'Cannot order by a null or empty property.' if properties.nil? || properties.empty?
+      Jekyll::Sorter.order(input, properties, in_liquid: true, allow_nil: true)
+    end
+
     def pop(array, input = 1)
       return array unless array.is_a?(Array)
       new_ary = array.dup

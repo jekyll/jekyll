@@ -53,6 +53,11 @@ module Jekyll
     #                               of Hashes (default: false).
     #            :allow_nil       - A Boolean that switch between accepting nil values
     #                               or raising exceptions (default: false).
+    #            :in_liquid       - A Boolean that switch between directly accessing
+    #                               the fields (faster), or extracting them from
+    #                               objects available in Liquid (slower).
+    #                               Set this to true if you want to use order in
+    #                               a Liquid context (like a Filter) (default: false).
     #            :in_place        - A Boolean that switch between copy
     #                               and in_place! sorting (default: false).
     #
@@ -82,6 +87,7 @@ module Jekyll
       @cached_methods ||= {}
       options = {
         in_place: false,
+        in_liquid: false,
         array_of_hashes: false,
       }.merge(options)
 
@@ -186,10 +192,16 @@ module Jekyll
     #                              as attributes (of an Object) or as keys (of a Hash).
     #                              Set this to true if you want to order an Array
     #                              of Hashes (default: false).
+    #           :in_liquid       - A Boolean that switch between directly accessing
+    #                              the fields (faster), or extracting them from
+    #                              objects available in Liquid (slower).
+    #                              Set this to true if you want to use order in
+    #                              a Liquid context (like a Filter) (default: false).
     #
     # Return a String containing the code to compare elements of an Array.
     def self.generate_comparison_code(args, options = {})
       options = {
+        in_liquid: false,
         array_of_hashes: false,
       }.merge(options)
 
@@ -210,29 +222,55 @@ module Jekyll
           raise ArgumentError, "Can't order by '#{field}' (in '#{field} #{dir}')." \
                                if options[:allowed_fields] && !options[:allowed_fields].include?(field)
 
-          if options[:array_of_hashes]
-            field_access = "fetch('#{field}', nil)"
-          else
-            field_access = field
+          if !options[:in_liquid]
+            if options[:array_of_hashes]
+              field_access = "fetch('#{field}', nil)"
+            else
+              field_access = field
+            end
           end
-
         else
           attribute = levels.shift
           raise ArgumentError, "Can't order by '#{field}' (in '#{field} #{dir}')." \
                                if options[:allowed_fields] && !options[:nestable_fields].include?(attribute)
 
-          if options[:array_of_hashes]
+          if !options[:in_liquid]
+            if options[:array_of_hashes]
+              if options[:allow_nil]
+                attribute = "fetch('#{attribute}', {})"
+              else
+                attribute = "fetch('#{attribute}', nil)"
+              end
+            end
+
             if options[:allow_nil]
-              attribute = "fetch('#{attribute}', {})"
+              field_access = %Q{#{attribute}.fetch('#{levels.join("', {}).fetch('")}', nil)}
             else
-              attribute = "fetch('#{attribute}', nil)"
+              field_access = %Q{#{attribute}['#{levels.join("']['")}']}
             end
           end
+        end
 
-          if options[:allow_nil]
-            field_access = %Q{#{attribute}.fetch('#{levels.join("', {}).fetch('")}', nil)}
-          else
-            field_access = %Q{#{attribute}['#{levels.join("']['")}']}
+        if options[:in_liquid]
+          field_access = []
+          field.split('.').each do |property|
+            if options[:allow_nil]
+              field_access << "item = if item.respond_to?(:to_liquid)"
+              field_access << "  item.to_liquid && item.to_liquid['#{property}']"
+              field_access << "elsif item.respond_to?(:data)"
+              field_access << "  item.data && item.data['#{property}']"
+              field_access << "else"
+              field_access << "  item && item['#{property}']"
+              field_access << "end"
+            else
+              field_access << "item = if item.respond_to?(:to_liquid)"
+              field_access << "  item.to_liquid['#{property}']"
+              field_access << "elsif item.respond_to?(:data)"
+              field_access << "  item.data['#{property}']"
+              field_access << "else"
+              field_access << "  item['#{property}']"
+              field_access << "end"
+            end
           end
         end
 
@@ -249,12 +287,22 @@ module Jekyll
           tab = '  '
         end
 
-        if options[:allow_nil]
-          str << %Q{#{tab}a_prop = a.nil? ? nil : a.#{field_access}\n}
-          str << %Q{#{tab}b_prop = b.nil? ? nil : b.#{field_access}\n}
+        if options[:in_liquid]
+          str << %Q{#{tab}item = a#{options[:allow_nil] ? ' || {}' : ''}\n}
+          str << %Q{#{tab}#{field_access.join("\n#{tab}")}\n}
+          str << %Q{#{tab}a_prop = item\n\n}
+
+          str << %Q{#{tab}item = b#{options[:allow_nil] ? ' || {}' : ''}\n}
+          str << %Q{#{tab}#{field_access.join("\n#{tab}")}\n}
+          str << %Q{#{tab}b_prop = item\n\n}
         else
-          str << %Q{#{tab}a_prop = a.#{field_access}\n}
-          str << %Q{#{tab}b_prop = b.#{field_access}\n}
+          if options[:allow_nil]
+            str << %Q{#{tab}a_prop = a.nil? ? nil : a.#{field_access}\n}
+            str << %Q{#{tab}b_prop = b.nil? ? nil : b.#{field_access}\n}
+          else
+            str << %Q{#{tab}a_prop = a.#{field_access}\n}
+            str << %Q{#{tab}b_prop = b.#{field_access}\n}
+          end
         end
 
         if options[:allow_nil]
