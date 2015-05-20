@@ -130,7 +130,7 @@ module Jekyll
     #
     # Returns nothing.
     def write_metadata
-      File.open(metadata_file, 'w') do |f|
+      File.open(metadata_file, 'wb') do |f|
         f.write(Marshal.dump(metadata))
       end
     end
@@ -164,6 +164,9 @@ module Jekyll
           Marshal.load(content)
         rescue TypeError
           SafeYAML.load(content)
+        rescue ArgumentError => e
+          Jekyll.logger.warn("Failed to load #{metadata_file}: #{e}")
+          {}
         end
       else
         {}
