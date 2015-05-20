@@ -11,10 +11,10 @@
     <title xml:lang="en">Jekyll • Simple, blog-aware, static sites</title>
     <atom:link type="application/atom+xml" href="http://jekyllrb.com/feed.xml" rel="self"/>
     <link>http://jekyllrb.com/</link>
-    <pubDate>Sun, 10 May 2015 11:21:47 -0700</pubDate>
-    <lastBuildDate>Sun, 10 May 2015 11:21:47 -0700</lastBuildDate>
+    <pubDate>Wed, 20 May 2015 13:15:11 +0700</pubDate>
+    <lastBuildDate>Wed, 20 May 2015 13:15:11 +0700</lastBuildDate>
     <language>en-US</language>
-    <generator>Jekyll v3.0.0.pre.beta4</generator>
+    <generator>Jekyll v3.0.0.pre.beta5</generator>
     <description>Transform your plain text into static websites and blogs.</description>
     <image>
       <description>Transform your plain text into static websites and blogs.</description>
@@ -27,14 +27,14 @@
     
     <item>
       <title>Join the Discussion at Jekyll Talk</title>
-      <link>http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/</link>
-      <pubDate>Thu, 26 Feb 2015 21:06:51 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2015/02/27/introducing-jekyll-talk/</link>
+      <pubDate>Fri, 27 Feb 2015 12:06:51 +0700</pubDate>
       <dc:creator>alfredxing</dc:creator>
       
       
       <category>community</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2015/02/27/introducing-jekyll-talk/</guid>
       <description>&lt;p&gt;We’re super excited to announce the launch of &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;Jekyll Talk&lt;/a&gt;, a Discourse forum for anything related to Jekyll!&lt;/p&gt;
 
 &lt;p&gt;The forum was set up by &lt;a href=&quot;https://github.com/envygeeks&quot;&gt;@envygeeks&lt;/a&gt; to build a community more accessible to Jekyll users and more suitable for general discussion.&lt;/p&gt;
@@ -48,7 +48,7 @@
     <item>
       <title>Jekyll 3.0.0.beta1 Released</title>
       <link>http://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released/</link>
-      <pubDate>Sat, 24 Jan 2015 00:42:31 -0800</pubDate>
+      <pubDate>Sat, 24 Jan 2015 15:42:31 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
@@ -91,14 +91,14 @@ We’re always looking to make Jekyll easier to use!&lt;/p&gt;
     
     <item>
       <title>Jekyll Meet &amp; Greet at GitHub HQ</title>
-      <link>http://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet/</link>
-      <pubDate>Tue, 20 Jan 2015 19:23:12 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2015/01/21/jekyll-meet-and-greet/</link>
+      <pubDate>Wed, 21 Jan 2015 10:23:12 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>meetup</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2015/01/21/jekyll-meet-and-greet/</guid>
       <description>&lt;p&gt;Hey! Our friends at GitHub have agreed to host a Jekyll meet &amp;amp; greet on
 &lt;strong&gt;February 5, 2015 at 7pm&lt;/strong&gt;. The event will be hosted at
 &lt;a href=&quot;https://goo.gl/maps/Bmy7i&quot;&gt;GitHub’s Headquarters&lt;/a&gt;
@@ -117,7 +117,7 @@ all possible! You rock.&lt;/p&gt;
     <item>
       <title>Jekyll Release for the Holidays! v2.5.3 Out</title>
       <link>http://jekyllrb.com/news/2014/12/22/jekyll-2-5-3-released/</link>
-      <pubDate>Mon, 22 Dec 2014 06:03:30 -0800</pubDate>
+      <pubDate>Mon, 22 Dec 2014 21:03:30 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
@@ -140,14 +140,14 @@ Feel free to chime in over on GitHub.&lt;/p&gt;
     
     <item>
       <title>Alfred Xing has joined the Jekyll core team</title>
-      <link>http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core/</link>
-      <pubDate>Wed, 17 Dec 2014 11:16:21 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2014/12/18/alfredxing-welcome-to-jekyll-core/</link>
+      <pubDate>Thu, 18 Dec 2014 02:16:21 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>team</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/12/18/alfredxing-welcome-to-jekyll-core/</guid>
       <description>&lt;p&gt;We’re excited to announce that &lt;a href=&quot;https://github.com/alfredxing&quot;&gt;@alfredxing&lt;/a&gt; has joined the @jekyll/core
 team!&lt;/p&gt;
 
@@ -169,14 +169,14 @@ place!&lt;/p&gt;
     
     <item>
       <title>Jekyll 2.5.2 Released</title>
-      <link>http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released/</link>
-      <pubDate>Wed, 12 Nov 2014 18:49:08 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2014/11/13/jekyll-2-5-2-released/</link>
+      <pubDate>Thu, 13 Nov 2014 09:49:08 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/13/jekyll-2-5-2-released/</guid>
       <description>&lt;p&gt;A very minor release, 2.5.2 fixes a bug with path sanitation that 2.5.1
 introduced. It also improves the &lt;code&gt;post_url&lt;/code&gt; tag such that it checks the
 posts’ name (e.g. &lt;code&gt;2014-03-03-my-cool-post&lt;/code&gt;) instead of a compiled time and
@@ -191,14 +191,14 @@ on timezone discrepancies.&lt;/p&gt;
     
     <item>
       <title>Jekyll 2.5.1 Released</title>
-      <link>http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released/</link>
-      <pubDate>Sun, 09 Nov 2014 09:47:52 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2014/11/10/jekyll-2-5-1-released/</link>
+      <pubDate>Mon, 10 Nov 2014 00:47:52 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/10/jekyll-2-5-1-released/</guid>
       <description>&lt;p&gt;Hot on the heels of v2.5.0, this release brings relief to our Windows
 users. It includes a fix for a 2.5.0 path sanitation change that has been
 confirmed to work on Windows.&lt;/p&gt;
@@ -223,14 +223,14 @@ and Alfred Xing.&lt;/p&gt;
     
     <item>
       <title>Jekyll&#39;s Mid-Life Crisis (Or, Jekyll turns 2.5.0)</title>
-      <link>http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/</link>
-      <pubDate>Wed, 05 Nov 2014 10:48:22 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2014/11/06/jekylls-midlife-crisis-jekyll-turns-2-5-0/</link>
+      <pubDate>Thu, 06 Nov 2014 01:48:22 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/06/jekylls-midlife-crisis-jekyll-turns-2-5-0/</guid>
       <description>&lt;p&gt;A new day, a new release! Jekyll just turned 2.5.0 and has gained a lot of
 wisdom along the way. This 2.5.0 release also comes just a few weeks after
 Jekyll turned 6 years old! In fashion, we’re celebrating this huge
@@ -276,14 +276,14 @@ Custódio, Igor Kapkov, and Kevin Ndung’u!&lt;/p&gt;
     
     <item>
       <title>A Wild Jekyll 2.4.0 Appeared!</title>
-      <link>http://jekyllrb.com/news/2014/09/09/jekyll-2-4-0-released/</link>
-      <pubDate>Tue, 09 Sep 2014 21:10:33 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/09/10/jekyll-2-4-0-released/</link>
+      <pubDate>Wed, 10 Sep 2014 11:10:33 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/09/09/jekyll-2-4-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/09/10/jekyll-2-4-0-released/</guid>
       <description>&lt;p&gt;Well, lookie here! A new release of Jekyll! v2.4.0 contains lots of goodies, including some brilliant new additions:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -307,14 +307,14 @@ Custódio, Igor Kapkov, and Kevin Ndung’u!&lt;/p&gt;
     
     <item>
       <title>Jekyll 2.3.0 Released</title>
-      <link>http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released/</link>
-      <pubDate>Sun, 10 Aug 2014 17:38:34 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/08/11/jekyll-2-3-0-released/</link>
+      <pubDate>Mon, 11 Aug 2014 07:38:34 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/08/11/jekyll-2-3-0-released/</guid>
       <description>&lt;p&gt;This latest release of Jekyll includes a slew of enhancements and bug
 fixes. Some of the highlights:&lt;/p&gt;
 
@@ -351,14 +351,14 @@ page&lt;/a&gt;! Happy Jekylling!&lt;/p&gt;
     
     <item>
       <title>Jekyll 2.2.0 Released</title>
-      <link>http://jekyllrb.com/news/2014/07/29/jekyll-2-2-0-released/</link>
-      <pubDate>Tue, 29 Jul 2014 15:59:13 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/07/30/jekyll-2-2-0-released/</link>
+      <pubDate>Wed, 30 Jul 2014 05:59:13 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/07/29/jekyll-2-2-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/07/30/jekyll-2-2-0-released/</guid>
       <description>&lt;p&gt;Jekyll 2.2.0 contains a few key updates:&lt;/p&gt;
 
 &lt;ol&gt;
@@ -376,14 +376,14 @@ will now work properly).&lt;/li&gt;
     
     <item>
       <title>Jekyll 2.1.1 Released</title>
-      <link>http://jekyllrb.com/news/2014/07/01/jekyll-2-1-1-released/</link>
-      <pubDate>Tue, 01 Jul 2014 17:16:43 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/07/02/jekyll-2-1-1-released/</link>
+      <pubDate>Wed, 02 Jul 2014 07:16:43 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/07/01/jekyll-2-1-1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/07/02/jekyll-2-1-1-released/</guid>
       <description>&lt;p&gt;This is a minor release for Jekyll 2.1.0. It fixes a couple bugs and
 introduces fixes for a couple security-related issues.&lt;/p&gt;
 
@@ -412,14 +412,14 @@ fixed with document URLs.&lt;/p&gt;
     
     <item>
       <title>Jekyll Turns 21! Err... I mean 2.1.0.</title>
-      <link>http://jekyllrb.com/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/</link>
-      <pubDate>Sat, 28 Jun 2014 14:26:59 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/06/29/jekyll-turns-21-i-mean-2-1-0/</link>
+      <pubDate>Sun, 29 Jun 2014 04:26:59 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/06/29/jekyll-turns-21-i-mean-2-1-0/</guid>
       <description>&lt;p&gt;Jekyll’s finally &lt;a href=&quot;http://en.wikipedia.org/wiki/Legal_drinking_age&quot;&gt;legal to drink in the States&lt;/a&gt;.
 And he’s done a lot of learning in the process! Here are some of the new
 things to look forward to:&lt;/p&gt;
@@ -449,14 +449,14 @@ things to look forward to:&lt;/p&gt;
     
     <item>
       <title>Pick Up your $1 Jekyll Sticker</title>
-      <link>http://jekyllrb.com/news/2014/06/04/jekyll-stickers-1-dollar-stickermule/</link>
-      <pubDate>Wed, 04 Jun 2014 12:46:53 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/06/05/jekyll-stickers-1-dollar-stickermule/</link>
+      <pubDate>Thu, 05 Jun 2014 02:46:53 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>partners</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/06/04/jekyll-stickers-1-dollar-stickermule/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/06/05/jekyll-stickers-1-dollar-stickermule/</guid>
       <description>&lt;p&gt;&lt;img src=&quot;/img/jekyll-sticker.jpg&quot; alt=&quot;Jekyll Sticker&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You may have heard that &lt;a href=&quot;https://github.com/cobyism&quot;&gt;@cobyism&lt;/a&gt;’s excellent
@@ -473,14 +473,14 @@ swell on your favourite hardware.&lt;/a&gt;&lt;/p&gt;
     
     <item>
       <title>Jekyll 2.0.3 Released</title>
-      <link>http://jekyllrb.com/news/2014/05/08/jekyll-2-0-3-released/</link>
-      <pubDate>Thu, 08 May 2014 19:43:17 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/05/09/jekyll-2-0-3-released/</link>
+      <pubDate>Fri, 09 May 2014 09:43:17 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/05/08/jekyll-2-0-3-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/05/09/jekyll-2-0-3-released/</guid>
       <description>&lt;p&gt;Hey again! Just wanted to let you know we’ve released another version of Jekyll, jam-packed with bug fixes.&lt;/p&gt;
 
 &lt;p&gt;A huge “thank you” is in order for all the folks who have submitted bug reports over the last 2 days — your input is what allows this project to continue. It’s always a pain to deal with a MAJOR version bump release, but it’s been pretty smooth so far and you have all been nice about the flaws you’ve found in the tool. Keep filing those reports so we can continue to make Jekyll even better!&lt;/p&gt;
@@ -496,14 +496,14 @@ swell on your favourite hardware.&lt;/a&gt;&lt;/p&gt;
     <item>
       <title>Jekyll turns 2.0.0</title>
       <link>http://jekyllrb.com/news/2014/05/06/jekyll-turns-2-0-0/</link>
-      <pubDate>Tue, 06 May 2014 00:00:00 -0700</pubDate>
+      <pubDate>Tue, 06 May 2014 00:00:00 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
       <guid isPermaLink="true">http://jekyllrb.com/news/2014/05/06/jekyll-turns-2-0-0/</guid>
-      <description>&lt;p&gt;A year ago to the day, &lt;a href=&quot;/news/2013/05/05/jekyll-1-0-0-released/&quot;&gt;we released Jekyll 1.0.0&lt;/a&gt;. One year later, we present to you the next major version: Jekyll 2.0.0.&lt;/p&gt;
+      <description>&lt;p&gt;A year ago to the day, &lt;a href=&quot;/news/2013/05/06/jekyll-1-0-0-released/&quot;&gt;we released Jekyll 1.0.0&lt;/a&gt;. One year later, we present to you the next major version: Jekyll 2.0.0.&lt;/p&gt;
 
 &lt;p&gt;Jam-packed with some &lt;a href=&quot;/docs/history/&quot;&gt;highly-requested features and bugfixes galore&lt;/a&gt;, this is the best Jekyll yet. Some notable changes:&lt;/p&gt;
 
@@ -530,14 +530,14 @@ swell on your favourite hardware.&lt;/a&gt;&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.5.1 Released</title>
-      <link>http://jekyllrb.com/news/2014/03/27/jekyll-1-5-1-released/</link>
-      <pubDate>Thu, 27 Mar 2014 19:43:48 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/03/28/jekyll-1-5-1-released/</link>
+      <pubDate>Fri, 28 Mar 2014 09:43:48 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/03/27/jekyll-1-5-1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/03/28/jekyll-1-5-1-released/</guid>
       <description>&lt;p&gt;The hawk-eyed &lt;a href=&quot;https://github.com/gregose&quot;&gt;@gregose&lt;/a&gt; spotted a bug in our
 &lt;code&gt;Jekyll.sanitized_path&lt;/code&gt; code:&lt;/p&gt;
 
@@ -556,14 +556,14 @@ the masses. Thanks, Greg!&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.5.0 Released</title>
-      <link>http://jekyllrb.com/news/2014/03/24/jekyll-1-5-0-released/</link>
-      <pubDate>Mon, 24 Mar 2014 17:37:59 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2014/03/25/jekyll-1-5-0-released/</link>
+      <pubDate>Tue, 25 Mar 2014 07:37:59 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/03/24/jekyll-1-5-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/03/25/jekyll-1-5-0-released/</guid>
       <description>&lt;p&gt;As work continues on Jekyll 2.0.0, we felt it was important to address two key
 issues of Jekyll 1.4.3, namely the &lt;code&gt;safe_yaml&lt;/code&gt; dependency below 1.0 and the
 inability to use Jekyll 1.4.3 on Windows due to a &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1948&quot;&gt;fun issue with path sanitizing&lt;/a&gt;.&lt;/p&gt;
@@ -577,14 +577,14 @@ inability to use Jekyll 1.4.3 on Windows due to a &lt;a href=&quot;https://githu
     
     <item>
       <title>Jekyll 1.4.3 Released</title>
-      <link>http://jekyllrb.com/news/2014/01/13/jekyll-1-4-3-released/</link>
-      <pubDate>Mon, 13 Jan 2014 17:43:32 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2014/01/14/jekyll-1-4-3-released/</link>
+      <pubDate>Tue, 14 Jan 2014 08:43:32 +0700</pubDate>
       <dc:creator>benbalter</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/01/13/jekyll-1-4-3-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2014/01/14/jekyll-1-4-3-released/</guid>
       <description>&lt;p&gt;Jekyll 1.4.3 contains two &lt;strong&gt;critical&lt;/strong&gt; security fixes. If you run Jekyll locally
 and do not run Jekyll in “safe” mode (e.g. you do not build Jekyll sites on behalf
 of others), you are not affected and are not required to update at this time.
@@ -607,14 +607,14 @@ these vulnerabilities, and to @BenBalter and @alindeman for writing the patch.&l
     
     <item>
       <title>Jekyll 1.4.2 Released</title>
-      <link>http://jekyllrb.com/news/2013/12/16/jekyll-1-4-2-released/</link>
-      <pubDate>Mon, 16 Dec 2013 16:48:13 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2013/12/17/jekyll-1-4-2-released/</link>
+      <pubDate>Tue, 17 Dec 2013 07:48:13 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/16/jekyll-1-4-2-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/17/jekyll-1-4-2-released/</guid>
       <description>&lt;p&gt;This release fixes &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/1830&quot;&gt;a regression&lt;/a&gt; where Maruku fenced code blocks were turned
 off, instead of the previous default to on. We’ve added a new default
 configuration to our &lt;code&gt;maruku&lt;/code&gt; config key: &lt;code&gt;fenced_code_blocks&lt;/code&gt; and set it to
@@ -628,14 +628,14 @@ off in your site’s configuration file.&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.4.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/12/09/jekyll-1-4-1-released/</link>
-      <pubDate>Mon, 09 Dec 2013 18:44:13 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2013/12/10/jekyll-1-4-1-released/</link>
+      <pubDate>Tue, 10 Dec 2013 09:44:13 +0700</pubDate>
       <dc:creator>mattr-</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/09/jekyll-1-4-1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/10/jekyll-1-4-1-released/</guid>
       <description>&lt;p&gt;Another quick turnover, anyone? A &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1794&quot;&gt;critical
 bug&lt;/a&gt; in the reading of
 posts snuck itself into the 1.4.0 release.&lt;/p&gt;
@@ -650,14 +650,14 @@ keep on writing without any problems.&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.4.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/12/07/jekyll-1-4-0-released/</link>
-      <pubDate>Sat, 07 Dec 2013 11:55:28 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2013/12/08/jekyll-1-4-0-released/</link>
+      <pubDate>Sun, 08 Dec 2013 02:55:28 +0700</pubDate>
       <dc:creator>mattr-</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/07/jekyll-1-4-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/08/jekyll-1-4-0-released/</guid>
       <description>&lt;p&gt;About a month after the release of Jekyll v1.3.0, we are releasing
 Jekyll v1.4.0. This release will be the last non-patch release to support Ruby
 1.8.7 and our next release will be Jekyll 2.0.0.&lt;/p&gt;
@@ -690,14 +690,14 @@ Karékinian, Jordon Bedwell, Matthew Iversen, Persa Zula, and Yi Zeng.&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.3.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/11/26/jekyll-1-3-1-released/</link>
-      <pubDate>Tue, 26 Nov 2013 17:52:20 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2013/11/27/jekyll-1-3-1-released/</link>
+      <pubDate>Wed, 27 Nov 2013 08:52:20 +0700</pubDate>
       <dc:creator>mattr-</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/11/26/jekyll-1-3-1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/11/27/jekyll-1-3-1-released/</guid>
       <description>&lt;p&gt;Just in time for the US holiday Thanksgiving, we’re releasing version
 1.3.1 of Jekyll to address some of the issues seen since the
 release of 1.3.0.&lt;/p&gt;
@@ -715,14 +715,14 @@ albertogg, andrewhavens, maul.esel, and thomasdao&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.3.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/11/04/jekyll-1-3-0-released/</link>
-      <pubDate>Mon, 04 Nov 2013 19:46:02 -0800</pubDate>
+      <link>http://jekyllrb.com/news/2013/11/05/jekyll-1-3-0-released/</link>
+      <pubDate>Tue, 05 Nov 2013 10:46:02 +0700</pubDate>
       <dc:creator>mattr-</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/11/04/jekyll-1-3-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/11/05/jekyll-1-3-0-released/</guid>
       <description>&lt;p&gt;It’s been about six weeks since v1.2.0 and the Jekyll team is happy to
 announce the arrival of v1.3.0. This is a &lt;strong&gt;huge&lt;/strong&gt; release full of all
 sorts of new features, bug fixes, and other things that you’re sure to
@@ -771,14 +771,14 @@ variable.&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.3.0.rc1 Released</title>
-      <link>http://jekyllrb.com/news/2013/10/28/jekyll-1-3-0-rc1-released/</link>
-      <pubDate>Mon, 28 Oct 2013 18:14:39 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2013/10/29/jekyll-1-3-0-rc1-released/</link>
+      <pubDate>Tue, 29 Oct 2013 08:14:39 +0700</pubDate>
       <dc:creator>mattr-</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/10/28/jekyll-1-3-0-rc1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/10/29/jekyll-1-3-0-rc1-released/</guid>
       <description>&lt;p&gt;Jekyll 1.3.0 is going to be a big release! In order to make sure we
 didn’t screw anything up too badly, we’re making a release candidate
 available for any early adopters who want to give the latest and
@@ -792,14 +792,14 @@ issues!&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.2.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/09/14/jekyll-1-2-1-released/</link>
-      <pubDate>Sat, 14 Sep 2013 17:46:50 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2013/09/15/jekyll-1-2-1-released/</link>
+      <pubDate>Sun, 15 Sep 2013 07:46:50 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/09/14/jekyll-1-2-1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/09/15/jekyll-1-2-1-released/</guid>
       <description>&lt;p&gt;Quick turnover, anyone? A &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/1525&quot;&gt;recent incompatibility with Liquid
 v2.5.2&lt;/a&gt; produced a nasty bug in
 which &lt;code&gt;include&lt;/code&gt; tags were not rendered properly within &lt;code&gt;if&lt;/code&gt; blocks.&lt;/p&gt;
@@ -815,14 +815,14 @@ log&lt;/a&gt;!&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.2.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/09/06/jekyll-1-2-0-released/</link>
-      <pubDate>Fri, 06 Sep 2013 19:02:41 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2013/09/07/jekyll-1-2-0-released/</link>
+      <pubDate>Sat, 07 Sep 2013 09:02:41 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/09/06/jekyll-1-2-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/09/07/jekyll-1-2-0-released/</guid>
       <description>&lt;p&gt;After nearly a month and a half of hard work, the Jekyll team is happy to
 announce the release of v1.2.0. It’s chock full of bug fixes and some
 enhancements that we think you’ll love.&lt;/p&gt;
@@ -845,7 +845,7 @@ enhancements that we think you’ll love.&lt;/p&gt;
     <item>
       <title>Jekyll 1.1.2 Released</title>
       <link>http://jekyllrb.com/news/2013/07/25/jekyll-1-1-2-released/</link>
-      <pubDate>Thu, 25 Jul 2013 00:08:38 -0700</pubDate>
+      <pubDate>Thu, 25 Jul 2013 14:08:38 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
@@ -867,7 +867,7 @@ and &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1349&quot;&gt;submi
     <item>
       <title>Jekyll 1.0.4 Released</title>
       <link>http://jekyllrb.com/news/2013/07/25/jekyll-1-0-4-released/</link>
-      <pubDate>Thu, 25 Jul 2013 00:08:38 -0700</pubDate>
+      <pubDate>Thu, 25 Jul 2013 14:08:38 +0700</pubDate>
       <dc:creator>mattr-</dc:creator>
       
       
@@ -888,14 +888,14 @@ and &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1349&quot;&gt;submi
     
     <item>
       <title>Jekyll 1.1.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/07/24/jekyll-1-1-1-released/</link>
-      <pubDate>Wed, 24 Jul 2013 13:24:14 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2013/07/25/jekyll-1-1-1-released/</link>
+      <pubDate>Thu, 25 Jul 2013 03:24:14 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/07/24/jekyll-1-1-1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/07/25/jekyll-1-1-1-released/</guid>
       <description>&lt;p&gt;Coming just 10 days after the release of v1.1.0, v1.1.1 is out with a patch for the nasty
 excerpt inception bug (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1339&quot;&gt;#1339&lt;/a&gt;) and non-zero exit codes for invalid commands
 (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1338&quot;&gt;#1338&lt;/a&gt;).&lt;/p&gt;
@@ -914,14 +914,14 @@ v1.1.0!&lt;/a&gt;&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.1.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/07/14/jekyll-1-1-0-released/</link>
-      <pubDate>Sun, 14 Jul 2013 10:38:02 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2013/07/15/jekyll-1-1-0-released/</link>
+      <pubDate>Mon, 15 Jul 2013 00:38:02 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/07/14/jekyll-1-1-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/07/15/jekyll-1-1-0-released/</guid>
       <description>&lt;p&gt;After a month of hard work, the Jekyll core team is excited to announce the release of
 Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new additions:&lt;/p&gt;
 
@@ -941,14 +941,14 @@ Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new add
     
     <item>
       <title>Jekyll 1.0.3 Released</title>
-      <link>http://jekyllrb.com/news/2013/06/07/jekyll-1-0-3-released/</link>
-      <pubDate>Fri, 07 Jun 2013 12:02:13 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2013/06/08/jekyll-1-0-3-released/</link>
+      <pubDate>Sat, 08 Jun 2013 02:02:13 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/06/07/jekyll-1-0-3-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/06/08/jekyll-1-0-3-released/</guid>
       <description>&lt;p&gt;v1.0.3 contains some key enhancements and bug fixes:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -967,7 +967,7 @@ Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new add
     <item>
       <title>Jekyll 1.0.2 Released</title>
       <link>http://jekyllrb.com/news/2013/05/12/jekyll-1-0-2-released/</link>
-      <pubDate>Sun, 12 May 2013 05:45:00 -0700</pubDate>
+      <pubDate>Sun, 12 May 2013 19:45:00 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
@@ -994,14 +994,14 @@ releases, and fix some other annoying bugs:&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.0.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/05/08/jekyll-1-0-1-released/</link>
-      <pubDate>Wed, 08 May 2013 14:46:11 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2013/05/09/jekyll-1-0-1-released/</link>
+      <pubDate>Thu, 09 May 2013 04:46:11 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/05/08/jekyll-1-0-1-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/05/09/jekyll-1-0-1-released/</guid>
       <description>&lt;p&gt;Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1021,14 +1021,14 @@ releases, and fix some other annoying bugs:&lt;/p&gt;
     
     <item>
       <title>Jekyll 1.0.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/05/05/jekyll-1-0-0-released/</link>
-      <pubDate>Sun, 05 May 2013 17:12:52 -0700</pubDate>
+      <link>http://jekyllrb.com/news/2013/05/06/jekyll-1-0-0-released/</link>
+      <pubDate>Mon, 06 May 2013 07:12:52 +0700</pubDate>
       <dc:creator>parkr</dc:creator>
       
       
       <category>release</category>
       
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/05/05/jekyll-1-0-0-released/</guid>
+      <guid isPermaLink="true">http://jekyllrb.com/news/2013/05/06/jekyll-1-0-0-released/</guid>
       <description>&lt;p&gt;Hey! After many months of hard work by Jekyll’s contributors, we’re excited
 to announce the first major release of the project in a long while. v1.0.0 is
 finally here! While the list of improvements and bug fixes is &lt;a href=&quot;/docs/history/#v1-0-0&quot;&gt;quite lengthy&lt;/a&gt;,
