@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.4 Released</title>
+  <title>Jekyll 1.2.0 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
@@ -159,8 +159,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.4 Released
-    <a href="/news/2013/07/25/jekyll-1-0-4-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 1.2.0 Released
+    <a href="/news/2013/09/06/jekyll-1-2-0-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -169,23 +169,30 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      25 Jul 2013
+      06 Sep 2013
     </span>
-    <a href="https://github.com/mattr-" class="post-author">
-      <img src="https://github.com/mattr-.png" class="avatar" alt="mattr- avatar" width="24" height="24">
-      mattr-
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
     </a>
   </div>
   <div class="post-content">
-    <p>Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
+    <p>After nearly a month and a half of hard work, the Jekyll team is happy to
+announce the release of v1.2.0. It’s chock full of bug fixes and some
+enhancements that we think you’ll love.</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<p>Here are a few things we think you’ll want to know about this release:</p>
 
-<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
+<ul>
+  <li>Run <code>jekyll serve --detach</code> to boot up a WEBrick server in the background. <strong>Note:</strong> you’ll need to run <code>kill [server_pid]</code> to shut the server down.</li>
+  <li>You can now <strong>disable automatically-generated excerpts</strong> if you set <code>excerpt_separator</code> to <code>""</code>.</li>
+  <li>If you’re moving around pages and post, you can now check for <strong>URL conflicts</strong> by running <code>jekyll doctor</code>.</li>
+  <li>If you’re a fan of the drafts feature, you’ll be happy to know we’ve added <code>-D</code>, a shortened version of <code>--drafts</code>.</li>
+  <li>Permalinks with special characters should now generate without errors.</li>
+  <li>Expose the current Jekyll version as the <code>jekyll.version</code> Liquid variable.</li>
+</ul>
 
-<p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
-and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
-
+<p>For a full run-down, visit our <a href="/docs/history/">change log</a>!</p>
 
   </div>
 </article>

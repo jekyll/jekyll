@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.4 Released</title>
+  <title>Jekyll 1.5.1 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
@@ -159,8 +159,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.4 Released
-    <a href="/news/2013/07/25/jekyll-1-0-4-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 1.5.1 Released
+    <a href="/news/2014/03/27/jekyll-1-5-1-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -169,23 +169,27 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      25 Jul 2013
+      27 Mar 2014
     </span>
-    <a href="https://github.com/mattr-" class="post-author">
-      <img src="https://github.com/mattr-.png" class="avatar" alt="mattr- avatar" width="24" height="24">
-      mattr-
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
     </a>
   </div>
   <div class="post-content">
-    <p>Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
+    <p>The hawk-eyed <a href="https://github.com/gregose">@gregose</a> spotted a bug in our
+<code>Jekyll.sanitized_path</code> code:</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/../../../etc/passwd&quot;</span></code></pre></div>
 
-<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
+<p>Well, we can’t have that! In 1.5.1, you’ll instead see:</p>
 
-<p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
-and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/..c:/..c:/..c:/etc/passwd&quot;</span></code></pre></div>
 
+<p>Luckily not affecting 1.4.x, this fix will make 1.5.0 that much safer for
+the masses. Thanks, Greg!</p>
 
   </div>
 </article>

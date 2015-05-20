@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.4 Released</title>
+  <title>Jekyll 1.0.0 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
@@ -159,8 +159,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.4 Released
-    <a href="/news/2013/07/25/jekyll-1-0-4-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 1.0.0 Released
+    <a href="/news/2013/05/05/jekyll-1-0-0-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -169,22 +169,27 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      25 Jul 2013
+      05 May 2013
     </span>
-    <a href="https://github.com/mattr-" class="post-author">
-      <img src="https://github.com/mattr-.png" class="avatar" alt="mattr- avatar" width="24" height="24">
-      mattr-
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
     </a>
   </div>
   <div class="post-content">
-    <p>Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
+    <p>Hey! After many months of hard work by Jekyll’s contributors, we’re excited
+to announce the first major release of the project in a long while. v1.0.0 is
+finally here! While the list of improvements and bug fixes is <a href="/docs/history/#v1-0-0">quite lengthy</a>,
+here are the highlights (thanks to <a href="http://twitter.com/BenBalter">@benbalter</a> for the
+examples and for compiling this list):</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<ul>
+  <li>Support for the Gist tag for easily embedding Gists (<a href="https://gist.github.com/benbalter/5555251">example</a>)</li>
+  <li>Automatically generated post excerpts (<a href="https://gist.github.com/benbalter/5555369">example</a>)</li>
+  <li>Save and preview drafts before publishing (<a href="https://gist.github.com/benbalter/5555992">example</a>)</li>
+</ul>
 
-<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
-
-<p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
-and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
+<p>Take a look at the <a href="/docs/upgrading/">Upgrading</a> page in the docs for more detailed information.</p>
 
 
   </div>

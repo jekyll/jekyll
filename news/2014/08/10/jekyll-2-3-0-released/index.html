@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.4 Released</title>
+  <title>Jekyll 2.3.0 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
@@ -159,8 +159,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.4 Released
-    <a href="/news/2013/07/25/jekyll-1-0-4-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 2.3.0 Released
+    <a href="/news/2014/08/10/jekyll-2-3-0-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -169,23 +169,45 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      25 Jul 2013
+      10 Aug 2014
     </span>
-    <a href="https://github.com/mattr-" class="post-author">
-      <img src="https://github.com/mattr-.png" class="avatar" alt="mattr- avatar" width="24" height="24">
-      mattr-
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
     </a>
   </div>
   <div class="post-content">
-    <p>Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
+    <p>This latest release of Jekyll includes a slew of enhancements and bug
+fixes. Some of the highlights:</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<ul>
+  <li>Strange bug around spacing/indentation should be resolved. <a href="https://github.com/jekyll/jekyll/issues/2676">It was a
+curious bug indeed.</a></li>
+  <li>Pages, Posts, and Drafts can now be converted by multiple converters.</li>
+  <li>Static files can now be safely included in collections. They’ll be placed
+in a <code>collection.files</code> array. <code>collection.docs</code> still holds exclusively
+content with YAML front matter.</li>
+  <li>Sass files can once again be rendered by Liquid. However, neither Sass
+nor CoffeeScript can ever have a layout. Bonus: <code>scssify</code> and <code>sassify</code>
+Liquid filters.</li>
+  <li>Partial variables allowed now in the path argument of <code>include</code> calls</li>
+  <li>We added a <code>jekyll help</code> command. Pass it a subcommand to see more info
+about that subcommand. Or don’t, to see the help for <code>jekyll</code> itself.</li>
+  <li>Lots of fixes to the site template we use for <code>jekyll new</code>, including
+converting the CSS into SCSS.</li>
+  <li>The <code>jsonify</code> filter will now call <code>#to_liquid</code> for you</li>
+  <li>Lots, lots more!</li>
+</ul>
 
-<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
+<p>One change deserves special note. In <a href="https://github.com/jekyll/jekyll/issues/2633">#2633</a>, subfolders <em>inside</em> a
+<code>_posts</code> folder were processed and added as categories to the posts. It
+turns out, this behaviour was unwanted by a large number of individuals, as
+it is a handy way to organize posts. Ultimately, we decided to revert this
+change in <a href="https://github.com/jekyll/jekyll/issues/2705">#2705</a>, because it was a change in behaviour that was already
+well-established (at least since Jekyll v0.7.0), and was convenient.</p>
 
-<p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
-and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
-
+<p>For more excellent CHANGELOG reading material, check out the <a href="/docs/history/">History
+page</a>! Happy Jekylling!</p>
 
   </div>
 </article>

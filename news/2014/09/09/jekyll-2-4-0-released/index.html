@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.4 Released</title>
+  <title>A Wild Jekyll 2.4.0 Appeared!</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
@@ -159,8 +159,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.4 Released
-    <a href="/news/2013/07/25/jekyll-1-0-4-released/" class="permalink" title="Permalink">∞</a>
+    A Wild Jekyll 2.4.0 Appeared!
+    <a href="/news/2014/09/09/jekyll-2-4-0-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -169,23 +169,32 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      25 Jul 2013
+      09 Sep 2014
     </span>
-    <a href="https://github.com/mattr-" class="post-author">
-      <img src="https://github.com/mattr-.png" class="avatar" alt="mattr- avatar" width="24" height="24">
-      mattr-
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
     </a>
   </div>
   <div class="post-content">
-    <p>Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
+    <p>Well, lookie here! A new release of Jekyll! v2.4.0 contains lots of goodies, including some brilliant new additions:</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<ul>
+  <li>A new <code>relative_include</code> Liquid tag (<a href="https://github.com/jekyll/jekyll/issues/2870">#2870</a>)</li>
+  <li>Render Liquid in CoffeeScript files (<a href="https://github.com/jekyll/jekyll/issues/2830">#2830</a>)</li>
+  <li>Add 4 new array Liquid filters: <code>push</code>, <code>pop</code>, <code>shift</code>, and <code>unshift</code> (<a href="https://github.com/jekyll/jekyll/pull/2895">#2895</a>)</li>
+  <li>Auto-enable watch on ‘serve’ (<a href="https://github.com/jekyll/jekyll/issues/2858">#2858</a>). No more <code>-w</code>!</li>
+  <li>Add <code>:title</code> and <code>:name</code> to collection URL template fillers (<a href="https://github.com/jekyll/jekyll/issues/2864">#2864</a> &amp; <a href="https://github.com/jekyll/jekyll/issues/2799">#2799</a>)</li>
+  <li>Add support for CSV files in the <code>_data</code> directory (<a href="https://github.com/jekyll/jekyll/issues/2761">#2761</a>)</li>
+  <li>Add <code>inspect</code> liquid filter (<a href="https://github.com/jekyll/jekyll/issues/2867">#2867</a>)</li>
+  <li>Add a <code>slugify</code> Liquid filter (<a href="https://github.com/jekyll/jekyll/issues/2880">#2880</a>)</li>
+</ul>
 
-<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
+<p>Some other wunderbar bug fixes in there as well. Check out the <a href="/docs/history/">full changelog</a> for the whole scoop.</p>
 
-<p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
-and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
+<p>As always, many thanks to our amazing contributors who made this release possible: Chris Frederick, Garen Torikian, James Smith, Ruslan Korolev, Joel Glovier, Michael Kühnel, Minn Soe, Pat Hawks, Peter deHaan, Shu Uesugi, TJ, Zhuochun, Alfred Xing, nitoyon, Anatol Broder, Faruk AYDIN, Frederic Hemberger, and Gordon Gao. Thank you!!</p>
 
+<p>Happy Jekylling!</p>
 
   </div>
 </article>

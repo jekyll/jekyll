@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.4 Released</title>
+  <title>Jekyll 2.1.1 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
@@ -159,8 +159,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.4 Released
-    <a href="/news/2013/07/25/jekyll-1-0-4-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 2.1.1 Released
+    <a href="/news/2014/07/01/jekyll-2-1-1-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -169,23 +169,37 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      25 Jul 2013
+      01 Jul 2014
     </span>
-    <a href="https://github.com/mattr-" class="post-author">
-      <img src="https://github.com/mattr-.png" class="avatar" alt="mattr- avatar" width="24" height="24">
-      mattr-
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
     </a>
   </div>
   <div class="post-content">
-    <p>Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
+    <p>This is a minor release for Jekyll 2.1.0. It fixes a couple bugs and
+introduces fixes for a couple security-related issues.</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<p>It covers two security vulnerabilities:</p>
 
-<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
+<ol>
+  <li>One in the reading of data</li>
+  <li>One in the <code>layouts</code> setting</li>
+</ol>
 
-<p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
-and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
+<p>They were identified in Jekyll 1.5.1 and has been confirmed as patched
+in this version and the version used by GitHub Pages. If you are in the
+business of building Jekyll sites, please ensure you upgrade to 2.1.1 as
+soon as possible.</p>
 
+<p>For more, check out <a href="https://github.com/jekyll/jekyll/pull/2563"><code>jekyll/jekyll#2563</code></a>.</p>
+
+<p>Additionally, the dependency on Maruku has been loosened and a bug was
+fixed with document URLs.</p>
+
+<p>As always, check out the <a href="/docs/history/">full changelog</a> for more info!</p>
+
+<p>Happy Jekylling!</p>
 
   </div>
 </article>
