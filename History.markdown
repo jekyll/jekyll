@@ -109,6 +109,7 @@
   * Show error message if the YAML front matter on a page/post is invalid. (#3643)
   * Upgrade redcarpet to 3.2 (Security fix: OSVDB-120415) (#3652)
   * Create #mock_expects that goes directly to RSpec Mocks. (#3658)
+  * Open `.jekyll-metadata` in binary mode to read binary Marshal data (#3713)
 
 ### Development Fixes
 
