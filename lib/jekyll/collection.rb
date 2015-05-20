@@ -46,7 +46,18 @@ module Jekyll
           files << StaticFile.new(site, site.source, relative_dir, File.basename(full_path), self)
         end
       end
-      docs.sort!
+      Jekyll::Sorter.order!(docs, self.order, {
+        allow_nil: true,
+        allowed_fields: Document::ATTRIBUTES_FOR_SORTING,
+        nestable_fields: Document::ATTRIBUTES_FOR_NESTED_SORTING
+      })
+    end
+
+    # Get the sort order from the metadata or use the default one
+    #
+    # Returns the configured sorter method or the default
+    def order
+      @metadata['order'] ||= 'path ASC'
     end
 
     # All the entries in this collection.

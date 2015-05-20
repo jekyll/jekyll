@@ -67,6 +67,7 @@ module Jekyll
   autoload :RelatedPosts,        'jekyll/related_posts'
   autoload :Renderer,            'jekyll/renderer'
   autoload :Site,                'jekyll/site'
+  autoload :Sorter,              'jekyll/sorter'
   autoload :StaticFile,          'jekyll/static_file'
   autoload :Stevenson,           'jekyll/stevenson'
   autoload :URL,                 'jekyll/url'

@@ -8,6 +8,12 @@ module Jekyll
 
     YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
 
+    # Attributes that can be used when sorting posts
+    ATTRIBUTES_FOR_SORTING = %w[path]
+
+    # Attributes that can be used with nesting when sorting posts
+    ATTRIBUTES_FOR_NESTED_SORTING = %w[data]
+
     # Create a new Document.
     #
     # site - the Jekyll::Site instance to which this Document belongs

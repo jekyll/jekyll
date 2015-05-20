@@ -210,7 +210,7 @@ module Jekyll
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
       posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
-      hash.values.each { |posts| posts.sort!.reverse! }
+      hash.values.each { |posts| Jekyll::Sorter.order!(posts, 'date DESC, slug DESC') }
       hash
     end
 
@@ -252,7 +252,7 @@ module Jekyll
         "site"   => Utils.deep_merge_hashes(config,
           Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
             "time"         => time,
-            "posts"        => posts.sort { |a, b| b <=> a },
+            "posts"        => Jekyll::Sorter.order(posts, 'date DESC, slug DESC'),
             "pages"        => pages,
             "static_files" => static_files,
             "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
