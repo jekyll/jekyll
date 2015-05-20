@@ -89,6 +89,41 @@ class TestRegenerator < JekyllUnitTest
     end
   end
 
+  context "The site regenerator" do
+    setup do
+      FileUtils.rm_rf(source_dir(".jekyll-metadata"))
+
+      @site = fixture_site({
+        "full_rebuild" => false
+      })
+
+      @site.read
+      @post = @site.posts.first
+      @regenerator = @site.regenerator
+      @regenerator.regenerate?(@post)
+
+      @layout_path = source_dir("_layouts/default.html")
+    end
+
+    teardown do
+      File.rename(@layout_path + ".tmp", @layout_path)
+    end
+
+    should "handle deleted/nonexistent dependencies" do
+      assert_equal 1, @regenerator.metadata.size
+      path = @regenerator.metadata.keys[0]
+
+      assert File.exist?(@layout_path)
+      @regenerator.add_dependency(path, @layout_path)
+
+      File.rename(@layout_path, @layout_path + ".tmp")
+      refute File.exist?(@layout_path)
+
+      @regenerator.clear_cache
+      assert @regenerator.regenerate?(@post)
+    end
+  end
+
   context "The site metadata" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
