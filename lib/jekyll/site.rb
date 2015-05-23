@@ -250,7 +250,7 @@ module Jekyll
           "environment" => Jekyll.env
         },
         "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
+          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, LiquidHashWithArray[coll.classifications.map(&:fast_access_indexed_docs)].attach(coll.docs)]}], {
             "time"         => time,
             "posts"        => posts.sort { |a, b| b <=> a },
             "pages"        => pages,

@@ -26,6 +26,7 @@ require 'set'
 # 3rd party
 require 'safe_yaml/load'
 require 'liquid'
+require 'active_support/inflector'
 require 'kramdown'
 require 'colorator'
 
@@ -36,6 +37,7 @@ module Jekyll
 
   # internal requires
   autoload :Cleaner,             'jekyll/cleaner'
+  autoload :Classification,      'jekyll/classification'
   autoload :Collection,          'jekyll/collection'
   autoload :Configuration,       'jekyll/configuration'
   autoload :Convertible,         'jekyll/convertible'

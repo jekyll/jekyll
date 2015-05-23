@@ -1,6 +1,6 @@
 module Jekyll
   class Collection
-    attr_reader :site, :label, :metadata
+    attr_reader :site, :label, :metadata, :classifications
 
     # Create a new Collection.
     #
@@ -12,6 +12,7 @@ module Jekyll
       @site     = site
       @label    = sanitize_label(label)
       @metadata = extract_metadata
+      @classifications = extract_classifications
     end
 
     # Fetch the Documents in this collection.
@@ -142,9 +143,10 @@ module Jekyll
     end
 
     # Produce a representation of this Collection for use in Liquid.
-    # Exposes two attributes:
+    # Exposes three attributes:
     #   - label
     #   - docs
+    #   - classifications
     #
     # Returns a representation of this collection for use in Liquid.
     def to_liquid
@@ -154,6 +156,7 @@ module Jekyll
         "files"     => files,
         "directory" => directory,
         "output"    => write?,
+        "classifications"    => classifications.to_liquid,
         "relative_directory" => relative_directory
       })
     end
@@ -185,5 +188,23 @@ module Jekyll
         {}
       end
     end
+
+    # FIXME: Document this
+    def extract_classifications
+      classifications = @metadata['classifications']
+      if classifications.is_a?(Hash)
+        LiquidHashWithValues[classifications.map{|label, attrs| [label, Classification.new(self, label, attrs)]}]
+      elsif classifications.is_a?(Array)
+        LiquidHashWithValues[classifications.map {|label| [label, Classification.new(self, label)]}]
+      else
+        LiquidHashWithValues.new
+      end
+    end
+
+    # FIXME: Remove this, it shouldn't be used anymore!
+    def [](classification)
+      @classifications[classification]
+    end
+
   end
 end
