@@ -163,7 +163,7 @@ class TestCollections < JekyllUnitTest
     end
 
     should "extract the configuration collection information as metadata" do
-      assert_equal @collection.metadata, {"foo" => "bar", "baz" => "whoo"}
+      assert_equal @collection.metadata, {"foo" => "bar", "baz" => "whoo", "order" => "path ASC"}
     end
   end
 
