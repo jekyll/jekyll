@@ -12,3 +12,10 @@ help_url: https://github.com/jekyll/jekyll-help
 collections:
   docs:
     output: true
+
+name: Jekyll • Simple, blog-aware, static sites
+description: Transform your plain text into static websites and blogs
+url: http://jekyllrb.com
+
+gems:
+  - jekyll-feed

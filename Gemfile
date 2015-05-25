@@ -6,6 +6,7 @@ gem 'toml', '~> 0.1.0'
 gem 'jekyll-paginate', '~> 1.0'
 gem 'jekyll-gist', '~> 1.0'
 gem 'jekyll-coffeescript', '~> 1.0'
+gem 'jekyll-feed'
 
 platform :ruby, :mswin, :mingw do
   gem 'pygments.rb', '~> 0.6.0'
