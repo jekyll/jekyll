@@ -37,6 +37,14 @@ collections:
     foo: bar
 {% endhighlight %}
 
+You can optionally use the `order` metadata to specify how the documents should be ordered:
+
+{% highlight yaml %}
+collections:
+  my_collection:
+    order: data.date DESC, data.slug ASC
+{% endhighlight %}
+
 Default attributes can also be set for a collection:
 
 {% highlight yaml %}

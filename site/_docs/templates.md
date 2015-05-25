@@ -246,6 +246,20 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Order</strong></p>
+        <p>Sort an array according to one or more properties specified in an order string.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.posts | order: 'author ASC' }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.events | order: 'date DESC, time.start ASC' }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
