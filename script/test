@@ -49,7 +49,7 @@ for ruby in $rubies; do
       rake TESTOPTS='--profile' test
    else
     set -x
-    time $ruby bundle exec ruby -Itest \
+    time $ruby -S bundle exec ruby -Itest \
       "$@" --profile
   fi
 done
