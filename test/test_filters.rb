@@ -315,6 +315,84 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "order filter" do
+      should "raise Exception when input is nil" do
+        err = assert_raises ArgumentError do
+          @filter.order_by(nil, "a")
+        end
+        assert_equal "Cannot sort a null object.", err.message
+      end
+      should "raise Exception when properties are nil" do
+        err = assert_raises ArgumentError do
+          @filter.order_by({"a" => 1}, nil)
+        end
+        assert_equal "Cannot order by a null or empty property.", err.message
+      end
+      should "raise Exception when properties are empty" do
+        err = assert_raises ArgumentError do
+          @filter.order_by({"a" => 1}, "")
+        end
+        assert_equal "Cannot order by a null or empty property.", err.message
+      end
+      should "return sorted by property array" do
+        assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}],
+          @filter.order_by([{"a" => 4}, {"a" => 3}, {"a" => 1}, {"a" => 2}], "a")
+      end
+      should "return sorted by property array desc" do
+        assert_equal [{"a" => 4}, {"a" => 3}, {"a" => 2}, {"a" => 1}],
+          @filter.order_by([{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}], "a desc")
+      end
+      should "return sorted by multiple properties array" do
+        assert_equal [{"a" => 1, "b" => 1}, {"a" => 1, "b" => 2}, {"a" => 2, "b" => 1}],
+          @filter.order_by([{"a" => 2, "b" => 1}, {"a" => 1, "b" => 2}, {"a" => 1, "b" => 1}], "a, b")
+      end
+      should "return sorted by multiple properties array asc+desc" do
+        assert_equal [{"a" => 1, "b" => 2}, {"a" => 1, "b" => 1}, {"a" => 2, "b" => 1}],
+          @filter.order_by([{"a" => 2, "b" => 1}, {"a" => 1, "b" => 2}, {"a" => 1, "b" => 1}], "a, b desc")
+      end
+      should "return sorted by multiple properties array desc+asc" do
+        assert_equal [{"a" => 2, "b" => 1}, {"a" => 1, "b" => 1}, {"a" => 1, "b" => 2}],
+          @filter.order_by([{"a" => 1, "b" => 2}, {"a" => 2, "b" => 1}, {"a" => 1, "b" => 1}], "a desc, b")
+      end
+      should "return sorted by multiple properties array desc+desc" do
+        assert_equal [{"a" => 2, "b" => 1}, {"a" => 1, "b" => 2}, {"a" => 1, "b" => 1}],
+          @filter.order_by([{"a" => 1, "b" => 1}, {"a" => 1, "b" => 2}, {"a" => 2, "b" => 1}], "a desc, b desc")
+      end
+      should "return sorted by nested properties array" do
+        assert_equal [{"a" => {"b" => 1}}, {"a" => {"b" => 2}}, {"a" => {"b" => 3}}],
+          @filter.order_by([{"a" => {"b" => 3}}, {"a" => {"b" => 2}}, {"a" => {"b" => 1}}], "a.b")
+      end
+      should "return sorted by nested properties array desc" do
+        assert_equal [{"a" => {"b" => 3}}, {"a" => {"b" => 2}}, {"a" => {"b" => 1}}],
+          @filter.order_by([{"a" => {"b" => 1}}, {"a" => {"b" => 2}}, {"a" => {"b" => 3}}], "a.b desc")
+      end
+      should "return sorted by multiple nested properties array" do
+        assert_equal [{"a" => {"b" => 3, "c" => 1}}, {"a" => {"b" => 2, "c" => 1}}, {"a" => {"b" => 1, "c" => 2}}],
+          @filter.order_by([{"a" => {"b" => 1, "c" => 2}}, {"a" => {"b" => 2, "c" => 1}}, {"a" => {"b" => 3, "c" => 1}}], "a.c, a.b desc")
+      end
+      should "return sorted by property array of numbers" do
+        assert_equal [1, 2, 2.2, 3], @filter.order_by([{"a" => 3}, {"a" => 2.2}, {"a" => 2}, {"a" => 1}], "a").map(&:values).flatten
+      end
+      should "return sorted by property array with nils first" do
+        ary = [{"a" => 2}, {"b" => 1}, {"a" => 1}]
+        assert_equal [{"b" => 1}, {"a" => 1}, {"a" => 2}], @filter.order_by(ary, "a")
+        assert_equal @filter.order_by(ary, "a"), @filter.order_by(ary, "a nulls first")
+      end
+      should "return sorted by property array with nils last" do
+        assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
+          @filter.order_by([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a NULLS LAST")
+      end
+      should "return sorted by property array of strings" do
+        assert_equal ["10", "2"], @filter.order_by([{'a' => "10"}, {'a' => "2"}], "a").map(&:values).flatten
+        assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.order_by([{"a" => "10"}, {"a" => "2"}], "a")
+        assert_equal ["FOO", "Foo", "foo"], @filter.order_by([{"a" => "foo"}, {"a" => "Foo"}, {"a" => "FOO"}], "a").map(&:values).flatten
+        assert_equal ["_foo", "foo", "foo_"], @filter.order_by([{"a" => "foo_"}, {"a" => "_foo"}, {"a" => "foo"}], "a").map(&:values).flatten
+        # Cyrillic
+        assert_equal ["ВУЗ", "Вуз", "вуз"], @filter.order_by([{"a" => "Вуз"}, {"a" => "вуз"}, {"a" => "ВУЗ"}], "a").map(&:values).flatten
+        assert_equal ["_вуз", "вуз", "вуз_"], @filter.order_by([{"a" => "вуз_"}, {"a" => "_вуз"}, {"a" => "вуз"}], "a").map(&:values).flatten
+      end
+    end
+
     context "inspect filter" do
       should "return a HTML-escaped string representation of an object" do
         assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect({ "<a>" => 1 })
