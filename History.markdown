@@ -202,6 +202,7 @@
   * Fix some names on Troubleshooting page (#3683)
   * Add `remote_file_content` tag plugin to list of third-party plugins (#3691)
   * Update the Redcarpet version on the Configuration page. (#3743)
+  * Update the link in the welcome post to point to Jekyll Talk (#3745)
 
 ## 2.5.3 / 2014-12-22
 
