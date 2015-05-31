@@ -110,6 +110,7 @@
   * Upgrade redcarpet to 3.2 (Security fix: OSVDB-120415) (#3652)
   * Create #mock_expects that goes directly to RSpec Mocks. (#3658)
   * Open `.jekyll-metadata` in binary mode to read binary Marshal data (#3713)
+  * Incremental regeneration: handle deleted, renamed, and moved dependencies (#3717)
 
 ### Development Fixes
 
