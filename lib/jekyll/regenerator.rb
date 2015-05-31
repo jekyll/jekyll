@@ -102,7 +102,7 @@ module Jekyll
             return cache[dependency] = cache[path] = true
           end
         end
-        if data["mtime"].eql? File.mtime(path)
+        if File.exist?(path) && data["mtime"].eql?(File.mtime(path))
           return cache[path] = false
         else
           return add(path)
