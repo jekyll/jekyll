@@ -122,6 +122,34 @@ Feature: Collections
     Then the _site directory should exist
     And I should see "Item count: 2" in "_site/index.html"
 
+  Scenario: Ordered Collections
+    Given I have an "index.html" page that contains "1. of {{ site.methods.size }}: {{ site.methods.first.output }}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      methods:
+        output: true
+        order: data.title
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "1. of 7: <p>Page without title.</p>" in "_site/index.html"
+
+  Scenario: Ordered Collections with NULLS specified
+    Given I have an "index.html" page that contains "1. of {{ site.methods.size }}: {{ site.methods.first.output }}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      methods:
+        output: true
+        order: data.title DESC NULLS FIRST
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "1. of 7: <p>Page without title.</p>" in "_site/index.html"
+
   Scenario: Sort by title
     Given I have an "index.html" page that contains "{% assign items = site.methods | sort: 'title' %}1. of {{ items.size }}: {{ items.first.output }}"
     And I have fixture collections
