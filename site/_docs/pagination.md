@@ -16,7 +16,7 @@ and folders you need for paginated listings.
     your Jekyll site. Pagination works when called from within the HTML
     file, named <code>index.html</code>, which optionally may reside in and
     produce pagination from within a subdirectory, via the
-    <code>pagination_path</code> configuration value.
+    <code>paginate_path</code> configuration value.
   </p>
 </div>
 
