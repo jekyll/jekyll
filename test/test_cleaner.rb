@@ -10,7 +10,7 @@ class TestCleaner < JekyllUnitTest
       FileUtils.touch(File.join(dest_dir('to_keep/child_dir'), 'index.html'))
 
       @site = fixture_site
-      @site.keep_files = ['to_keep/child_dir']
+      @site.keep_files = ['to_keep/child_dir', '$']
 
       @cleaner = Cleaner.new(@site)
       @cleaner.cleanup!
@@ -34,6 +34,10 @@ class TestCleaner < JekyllUnitTest
 
     should "delete the file in the directory not in keep_files" do
       assert !File.exist?(File.join(dest_dir('to_keep'), 'index.html'))
+    end
+
+    should "escape the keep_files" do
+      assert_equal @cleaner.send(:keep_files_regex) /\to_keep\/child_dir\/|\$/
     end
   end
 

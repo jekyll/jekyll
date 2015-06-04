@@ -98,7 +98,9 @@ module Jekyll
     #
     # Returns the regular expression
     def keep_file_regex
-      Regexp.union(site.keep_files)
+      # Escape user input to avoid regex errors
+      keep_files = site.keep_files.map { |f| Regexp.escape(f) }
+      Regexp.union(keep_files)
     end
   end
 end
