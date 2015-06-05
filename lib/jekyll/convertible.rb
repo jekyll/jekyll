@@ -108,8 +108,8 @@ module Jekyll
     # info    - the info for Liquid
     #
     # Returns the converted content
-    def render_liquid(content, payload, info, path = nil)
-      Liquid::Template.parse(content).render!(payload, info)
+    def render_liquid(content, payload, info, path)
+      site.liquid_renderer.file(path).parse(content).render(payload, info)
     rescue Tags::IncludeTagError => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
       raise e
@@ -243,7 +243,7 @@ module Jekyll
       payload["highlighter_prefix"] = converters.first.highlighter_prefix
       payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
-      self.content = render_liquid(content, payload, info) if render_with_liquid?
+      self.content = render_liquid(content, payload, info, path) if render_with_liquid?
       self.content = transform
 
       # output keeps track of what will finally be written
