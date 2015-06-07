@@ -22,6 +22,11 @@ module Jekyll
       end
     end
 
+    def increment_bytes(filename, bytes)
+      @stats[filename][:bytes] ||= 0
+      @stats[filename][:bytes] += bytes
+    end
+
     def increment_time(filename, time)
       @stats[filename][:time] ||= 0.0
       @stats[filename][:time] += time

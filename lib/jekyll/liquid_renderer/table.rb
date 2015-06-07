@@ -57,11 +57,11 @@ module Jekyll
     end
 
     def table_widths(data)
-      widths = [ 0, 0, 0 ]
+      widths = []
 
       data.each do |row|
         row.each_with_index do |cell, index|
-          widths[index] = [ cell.length, widths[index] ].max
+          widths[index] = [ cell.length, widths[index] ].compact.max
         end
       end
 
@@ -72,17 +72,23 @@ module Jekyll
       sorted = @stats.sort_by{ |filename, file_stats| -file_stats[:time] }
       sorted = sorted.slice(0, n)
 
-      table = [[ 'Filename', 'Count', 'Total time' ]]
+      table = [[ 'Filename', 'Count', 'Bytes', 'Time' ]]
 
       sorted.each do |filename, file_stats|
         row = []
         row << filename
         row << file_stats[:count].to_s
+        row << format_bytes(file_stats[:bytes])
         row << "%.3f" % file_stats[:time]
         table << row
       end
 
       table
+    end
+
+    def format_bytes(bytes)
+      bytes /= 1024.0
+      "%.2fK" % bytes
     end
   end
 end

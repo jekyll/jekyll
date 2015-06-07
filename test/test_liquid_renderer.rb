@@ -13,9 +13,9 @@ class TestLiquidRenderer < JekyllUnitTest
       output = @renderer.stats_table
 
       expected = [
-        /^Filename\s+|\s+Count\s+|\s+Total time$/,
-        /^-+\++-+\++-+$/,
-        /^_posts\/2010-01-09-date-override\.markdown\s+|\s+\d+\s+|\s+\d+\.\d{3}$/,
+        /^Filename\s+|\s+Count\s+|\s+Bytes\s+|\s+Time$/,
+        /^-+\++-+\++-+\++-+$/,
+        /^_posts\/2010-01-09-date-override\.markdown\s+|\s+\d+\s+|\s+\d+\.\d{2}K\s+|\s+\d+\.\d{3}$/,
       ]
 
       expected.each do |regexp|
