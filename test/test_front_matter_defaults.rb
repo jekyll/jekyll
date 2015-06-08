@@ -28,7 +28,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     end
   end
 
-  context "A site with fron matter type pages and an extension" do
+  context "A site with front matter type pages and an extension" do
     setup do
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
