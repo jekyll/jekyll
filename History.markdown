@@ -208,6 +208,7 @@
   * Update the link in the welcome post to point to Jekyll Talk (#3745)
   * Update link for navbars with data attributes tutorial (#3728)
   * Add `jekyll-asciinema` to list of third-party plugins (#3750)
+  * Update pagination example to be agnostic to first pagination dir (#3763)
 
 ## 2.5.3 / 2014-12-22
 
