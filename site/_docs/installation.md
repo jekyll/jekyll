@@ -20,6 +20,7 @@ requirements you’ll need to make sure your system has before you start.
 - Linux, Unix, or Mac OS X
 - [NodeJS](http://nodejs.org), or another JavaScript runtime (for
   CoffeeScript support).
+- Python (Jekyll 2 and earlier)
 
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>
