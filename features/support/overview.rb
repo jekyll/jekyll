@@ -22,7 +22,9 @@ module Features
       attr_reader :runtime
 
       def initialize(runtime, path_or_io, options)
-        @runtime, @io, @options = runtime, ensure_io(path_or_io, "pretty"), options
+        @runtime = runtime
+        @io = ensure_io(path_or_io, "pretty")
+        @options = options
         @exceptions = []
         @indent = 0
         @prefixes = options[:prefixes] || {}
@@ -99,11 +101,11 @@ module Features
       end
 
       CHARS = {
-        :failed    => "x".red,
-        :pending   => "?".yellow,
-        :undefined => "x".red,
-        :passed    => ".".green,
-        :skipped   => "-".blue
+        failed: "x".red,
+        pending: "?".yellow,
+        undefined: "x".red,
+        passed: ".".green,
+        skipped: "-".blue
       }
 
       def step_name(keyword, step_match, status, source_indent, background, file_colon_line)

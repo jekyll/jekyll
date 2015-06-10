@@ -8,13 +8,13 @@ module Jekyll
     attr_accessor :data, :content, :output
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
+    ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
       name
       path
       url
-    ]
+    )
 
     # Initialize a new Page.
     #
@@ -27,7 +27,6 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
-
 
       process(name)
       read_yaml(File.join(base, dir), name)
@@ -75,9 +74,9 @@ module Jekyll
     # Returns the String url.
     def url
       @url ||= URL.new({
-        :template => template,
-        :placeholders => url_placeholders,
-        :permalink => permalink
+        template: template,
+        placeholders: url_placeholders,
+        permalink: permalink
       }).to_s
     end
 
@@ -85,9 +84,9 @@ module Jekyll
     # desired placeholder replacements. For details see "url.rb"
     def url_placeholders
       {
-        :path       => @dir,
-        :basename   => basename,
-        :output_ext => output_ext
+        path: @dir,
+        basename: basename,
+        output_ext: output_ext
       }
     end
 
@@ -98,7 +97,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0 .. -ext.length - 1]
+      self.basename = name[0..-ext.length - 1]
     end
 
     # Add any necessary layouts to this post

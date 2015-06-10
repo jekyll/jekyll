@@ -1,16 +1,15 @@
 module Jekyll
   module External
     class << self
-
       #
       # Gems that, if installed, should be loaded.
       # Usually contain subcommands.
       #
       def blessed_gems
-        %w{
+        %w(
           jekyll-docs
           jekyll-import
-        }
+        )
       end
 
       #
@@ -53,7 +52,6 @@ If you run into trouble, you can find helpful resources at http://jekyllrb.com/h
           end
         end
       end
-
     end
   end
 end

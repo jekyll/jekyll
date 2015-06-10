@@ -4,7 +4,7 @@ require 'rdoc'
 require 'date'
 require 'yaml'
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w(lib)))
 require 'jekyll/version'
 
 #############################################################################
@@ -26,7 +26,7 @@ def gemspec_file
 end
 
 def gem_file
-  "#{name}-#{Gem::Version.new(version).to_s}.gem"
+  "#{name}-#{Gem::Version.new(version)}.gem"
 end
 
 def normalize_bullets(markdown)
@@ -87,9 +87,9 @@ end
 #
 #############################################################################
 
-multitask :default => [:test, :features]
+multitask default: [:test, :features]
 
-task :spec => :test
+task spec: :test
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
@@ -158,7 +158,7 @@ namespace :site do
   end
 
   desc "Generate the site"
-  task :generate => [:history, :version_file] do
+  task generate: [:history, :version_file] do
     require "jekyll"
     Jekyll::Commands::Build.process({
       "source"      => File.expand_path("site"),
@@ -176,7 +176,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish => [:history, :version_file] do
+  task publish: [:history, :version_file] do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
@@ -192,12 +192,12 @@ namespace :site do
 
     # Proceed to purge all files in case we removed a file in this release.
     puts "Cleaning gh-pages directory..."
-    purge_exclude = %w[
+    purge_exclude = %w(
       gh-pages/.
       gh-pages/..
       gh-pages/.git
       gh-pages/.gitignore
-    ]
+    )
     FileList["gh-pages/{*,.*}"].exclude(*purge_exclude).each do |path|
       sh "rm -rf #{path}"
     end
@@ -284,7 +284,7 @@ end
 #############################################################################
 
 desc "Release #{name} v#{version}"
-task :release => :build do
+task release: :build do
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
     exit!

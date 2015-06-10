@@ -14,6 +14,5 @@ module Jekyll
         collection.read unless collection.label.eql?('data')
       end
     end
-
   end
 end

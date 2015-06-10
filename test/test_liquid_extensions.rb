@@ -1,7 +1,6 @@
 require 'helper'
 
 class TestLiquidExtensions < JekyllUnitTest
-
   context "looking up a variable in a Liquid context" do
     class SayHi < Liquid::Tag
       include Jekyll::LiquidExtensions
@@ -20,12 +19,11 @@ class TestLiquidExtensions < JekyllUnitTest
     end
 
     should "extract the var properly" do
-      assert_equal @template.render({'page' => {'name' => 'tobi'}}), 'hi tobi'
+      assert_equal @template.render({ 'page' => { 'name' => 'tobi' } }), 'hi tobi'
     end
 
     should "return the variable name if the value isn't there" do
-      assert_equal @template.render({'page' => {'title' => 'tobi'}}), 'hi page.name'
+      assert_equal @template.render({ 'page' => { 'title' => 'tobi' } }), 'hi page.name'
     end
   end
-
 end

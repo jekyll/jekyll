@@ -3,15 +3,15 @@ require 'csv'
 
 module Jekyll
   class Site
-    attr_reader   :source, :dest, :config
+    attr_reader :source, :dest, :config
     attr_accessor :layouts, :posts, :pages, :static_files, :drafts,
-                  :exclude, :include, :lsi, :highlighter, :permalink_style,
-                  :time, :future, :unpublished, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :plugin_manager
+      :exclude, :include, :lsi, :highlighter, :permalink_style,
+      :time, :future, :unpublished, :safe, :plugins, :limit_posts,
+      :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
+      :gems, :plugin_manager
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator
+    attr_reader :regenerator
 
     # Public: Initialize a new Site.
     #
@@ -19,9 +19,9 @@ module Jekyll
     def initialize(config)
       @config = config.clone
 
-      %w[safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems].each do |opt|
-        self.send("#{opt}=", config[opt])
+      %w(safe lsi highlighter baseurl exclude include future unpublished
+         show_drafts limit_posts keep_files gems).each do |opt|
+        send("#{opt}=", config[opt])
       end
 
       # Source and destination may not be changed after the site has been created.
@@ -37,7 +37,7 @@ module Jekyll
       self.plugins        = plugin_manager.plugins_path
 
       self.file_read_opts = {}
-      self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
+      file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
       self.permalink_style = config['permalink'].to_sym
 
@@ -70,7 +70,7 @@ module Jekyll
       self.static_files = []
       self.data = {}
       @collections = nil
-      @regenerator.clear_cache()
+      @regenerator.clear_cache
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
@@ -185,9 +185,9 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item|
+      each_site_file do |item|
         item.write(dest) if regenerator.regenerate?(item)
-      }
+      end
       regenerator.write_metadata
       Jekyll::Hooks.trigger self, :post_write
     end
@@ -250,7 +250,7 @@ module Jekyll
           "environment" => Jekyll.env
         },
         "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
+          Utils.deep_merge_hashes(Hash[collections.map{ |label, coll| [label, coll.docs] }], {
             "time"         => time,
             "posts"        => posts.sort { |a, b| b <=> a },
             "pages"        => pages,
@@ -261,7 +261,7 @@ module Jekyll
             "collections"  => collections.values.map(&:to_liquid),
             "documents"    => documents,
             "data"         => site_data
-        }))
+          }))
       }
     end
 
@@ -295,10 +295,10 @@ module Jekyll
     # Returns
     def relative_permalinks_are_deprecated
       if config['relative_permalinks']
-        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" +
-                                " in subfolders must be relative to the" +
-                                " site source directory, not the parent" +
-                                " directory. Check http://jekyllrb.com/docs/upgrading/"+
+        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
+                                " in subfolders must be relative to the" \
+                                " site source directory, not the parent" \
+                                " directory. Check http://jekyllrb.com/docs/upgrading/"\
                                 " for more info."
       end
     end
@@ -318,7 +318,6 @@ module Jekyll
         docs + collection.docs + collection.files
       end.to_a
     end
-
 
     def each_site_file
       %w(posts pages static_files docs_to_write).each do |type|

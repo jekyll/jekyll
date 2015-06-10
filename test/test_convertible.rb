@@ -6,7 +6,7 @@ class TestConvertible < JekyllUnitTest
     setup do
       @convertible = OpenStruct.new(
         "site" => Site.new(Jekyll.configuration(
-          "source" => File.expand_path('../fixtures', __FILE__)
+                             "source" => File.expand_path('../fixtures', __FILE__)
         ))
       )
       @convertible.extend Jekyll::Convertible
@@ -15,7 +15,7 @@ class TestConvertible < JekyllUnitTest
 
     should "parse the front-matter correctly" do
       ret = @convertible.read_yaml(@base, 'front_matter.erb')
-      assert_equal({'test' => 'good'}, ret)
+      assert_equal({ 'test' => 'good' }, ret)
     end
 
     should "not parse if the front-matter is not at the start of the file" do
@@ -43,7 +43,7 @@ class TestConvertible < JekyllUnitTest
     should "not parse if there is encoding error in file" do
       name = 'broken_front_matter3.erb'
       out = capture_stderr do
-        ret = @convertible.read_yaml(@base, name, :encoding => 'utf-8')
+        ret = @convertible.read_yaml(@base, name, encoding: 'utf-8')
         assert_equal({}, ret)
       end
       assert_match(/invalid byte sequence in UTF-8/, out)

@@ -1,6 +1,5 @@
 module Jekyll
   class RelatedPosts
-
     class << self
       attr_accessor :lsi
     end
@@ -24,10 +23,9 @@ module Jekyll
       end
     end
 
-
     def build_index
       self.class.lsi ||= begin
-        lsi = ClassifierReborn::LSI.new(:auto_rebuild => false)
+        lsi = ClassifierReborn::LSI.new(auto_rebuild: false)
         display("Populating LSI...")
 
         site.posts.each do |x|

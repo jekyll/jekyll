@@ -2,9 +2,7 @@ require 'helper'
 
 class TestUtils < JekyllUnitTest
   context "hash" do
-
     context "pluralized_array" do
-
       should "return empty array with no values" do
         data = {}
         assert_equal [], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
@@ -59,9 +57,7 @@ class TestUtils < JekyllUnitTest
         data = { 'foo' => 'bar', 'tags' => ['dog', 'cat'] }
         assert_equal ['dog', 'cat'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
       end
-
     end
-
   end
 
   context "The \`Utils.parse_date\` method" do

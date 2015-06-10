@@ -1,7 +1,6 @@
 require 'helper'
 
 class TestDocument < JekyllUnitTest
-
   context "a document in a collection" do
     setup do
       @site = fixture_site({
@@ -43,7 +42,6 @@ class TestDocument < JekyllUnitTest
     end
 
     context "with YAML ending in three dots" do
-
       setup do
         @site = fixture_site({
           "collections" => ["methods"],
@@ -56,7 +54,7 @@ class TestDocument < JekyllUnitTest
         assert_equal({
           "title" => "YAML with Dots",
           "whatever" => "foo.bar"
-          }, @document.data)
+        }, @document.data)
       end
     end
 
@@ -67,7 +65,6 @@ class TestDocument < JekyllUnitTest
     should "output its relative path as path in Liquid" do
       assert_equal @document.to_liquid['path'], "_methods/configuration.md"
     end
-
   end
 
   context "a document as part of a collection with frontmatter defaults" do
@@ -75,24 +72,24 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => ["slides"],
         "defaults" => [{
-          "scope"=> {"path"=>"", "type"=>"slides"},
-          "values"=> {
-            "nested"=> {
-              "key"=>"myval",
+          "scope" => { "path" => "", "type" => "slides" },
+          "values" => {
+            "nested" => {
+              "key" => "myval",
             }
           }
         }]
       })
       @site.process
-      @document = @site.collections["slides"].docs.select{|d| d.is_a?(Document) }.first
+      @document = @site.collections["slides"].docs.find{ |d| d.is_a?(Document) }
     end
 
     should "know the frontmatter defaults" do
       assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide",
-        "nested"=> {
-          "key"=>"myval"
+        "title" => "Example slide",
+        "layout" => "slide",
+        "nested" => {
+          "key" => "myval"
         }
       }, @document.data)
     end
@@ -103,11 +100,11 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => ["slides"],
         "defaults" => [{
-          "scope"=> {"path"=>"", "type"=>"slides"},
-          "values"=> {
-            "nested"=> {
-              "test1"=>"default1",
-              "test2"=>"default1"
+          "scope" => { "path" => "", "type" => "slides" },
+          "values" => {
+            "nested" => {
+              "test1" => "default1",
+              "test2" => "default1"
             }
           }
         }]
@@ -118,11 +115,11 @@ class TestDocument < JekyllUnitTest
 
     should "override default values in the document frontmatter" do
       assert_equal({
-        "title"=>"Override title",
-        "layout"=>"slide",
-        "nested"=> {
-          "test1"=>"override1",
-          "test2"=>"override2"
+        "title" => "Override title",
+        "layout" => "slide",
+        "nested" => {
+          "test1" => "override1",
+          "test2" => "override2"
         }
       }, @document.data)
     end
@@ -133,10 +130,10 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => ["slides"],
         "defaults" => [{
-          "scope"=> {"path"=>"slides", "type"=>"slides"},
-          "values"=> {
-            "nested"=> {
-              "key"=>"value123",
+          "scope" => { "path" => "slides", "type" => "slides" },
+          "values" => {
+            "nested" => {
+              "key" => "value123",
             }
           }
         }]
@@ -147,10 +144,10 @@ class TestDocument < JekyllUnitTest
 
     should "know the frontmatter defaults" do
       assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide",
-        "nested"=> {
-          "key"=>"value123"
+        "title" => "Example slide",
+        "layout" => "slide",
+        "nested" => {
+          "key" => "value123"
         }
       }, @document.data)
     end
@@ -161,10 +158,10 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => ["slides"],
         "defaults" => [{
-          "scope"=> {"path"=>"somepath", "type"=>"slides"},
-          "values"=> {
-            "nested"=> {
-              "key"=>"myval",
+          "scope" => { "path" => "somepath", "type" => "slides" },
+          "values" => {
+            "nested" => {
+              "key" => "myval",
             }
           }
         }]
@@ -175,8 +172,8 @@ class TestDocument < JekyllUnitTest
 
     should "not know the specified frontmatter defaults" do
       assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide"
+        "title" => "Example slide",
+        "layout" => "slide"
       }, @document.data)
     end
   end
@@ -371,7 +368,5 @@ class TestDocument < JekyllUnitTest
     should "be output in the correct place" do
       assert_equal true, File.file?(@dest_file)
     end
-
   end
-
 end

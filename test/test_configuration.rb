@@ -27,10 +27,10 @@ class TestConfiguration < JekyllUnitTest
   end
   context "#config_files" do
     setup do
-      @config = Configuration[{"source" => source_dir}]
+      @config = Configuration[{ "source" => source_dir }]
       @no_override     = {}
-      @one_config_file = {"config" => "config.yml"}
-      @multiple_files  = {"config" => %w[config/site.yml config/deploy.toml configuration.yml]}
+      @one_config_file = { "config" => "config.yml" }
+      @multiple_files  = { "config" => %w(config/site.yml config/deploy.toml configuration.yml) }
     end
 
     should "always return an array" do
@@ -51,10 +51,10 @@ class TestConfiguration < JekyllUnitTest
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
     should "return the config if given one config file" do
-      assert_equal %w[config.yml], @config.config_files(@one_config_file)
+      assert_equal %w(config.yml), @config.config_files(@one_config_file)
     end
     should "return an array of the config files if given many config files" do
-      assert_equal %w[config/site.yml config/deploy.toml configuration.yml], @config.config_files(@multiple_files)
+      assert_equal %w(config/site.yml config/deploy.toml configuration.yml), @config.config_files(@multiple_files)
     end
   end
   context "#backwards_compatibilize" do
@@ -81,12 +81,12 @@ class TestConfiguration < JekyllUnitTest
     should "transform string exclude into an array" do
       assert @config.key?("exclude")
       assert @config.backwards_compatibilize.key?("exclude")
-      assert_equal @config.backwards_compatibilize["exclude"], %w[READ-ME.md Gemfile CONTRIBUTING.hello.markdown]
+      assert_equal @config.backwards_compatibilize["exclude"], %w(READ-ME.md Gemfile CONTRIBUTING.hello.markdown)
     end
     should "transform string include into an array" do
       assert @config.key?("include")
       assert @config.backwards_compatibilize.key?("include")
-      assert_equal @config.backwards_compatibilize["include"], %w[STOP_THE_PRESSES.txt .heloses .git]
+      assert_equal @config.backwards_compatibilize["include"], %w(STOP_THE_PRESSES.txt .heloses .git)
     end
     should "set highlighter to pygments" do
       assert @config.key?("pygments")
@@ -96,7 +96,7 @@ class TestConfiguration < JekyllUnitTest
   end
   context "#fix_common_issues" do
     setup do
-      @config = Proc.new do |val|
+      @config = proc do |val|
         Configuration[{
           'paginate' => val
         }]
@@ -121,13 +121,13 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load configuration as hash" do
-      allow(SafeYAML).to receive(:load_file).with(@path).and_return(Hash.new)
+      allow(SafeYAML).to receive(:load_file).with(@path).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@path}")
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
     end
 
     should "fire warning with bad config" do
-      allow(SafeYAML).to receive(:load_file).with(@path).and_return(Array.new)
+      allow(SafeYAML).to receive(:load_file).with(@path).and_return([])
       allow($stderr).to receive(:puts).and_return(("WARNING: ".rjust(20) + "Error reading configuration. Using defaults (and options).").yellow)
       allow($stderr).to receive(:puts).and_return("Configuration file: (INVALID) #{@path}".yellow)
       assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
@@ -137,7 +137,7 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML).to receive(:load_file).with(@user_config) { raise SystemCallError, "No such file or directory - #{@user_config}" }
       allow($stderr).to receive(:puts).with(("Fatal: ".rjust(20) + "The configuration file '#{@user_config}' could not be found.").red)
       assert_raises LoadError do
-        Jekyll.configuration({'config' => [@user_config]})
+        Jekyll.configuration({ 'config' => [@user_config] })
       end
     end
 
@@ -149,10 +149,10 @@ class TestConfiguration < JekyllUnitTest
   context "loading config from external file" do
     setup do
       @paths = {
-        :default => File.join(Dir.pwd, '_config.yml'),
-        :other   => File.join(Dir.pwd, '_config.live.yml'),
-        :toml    => source_dir('_config.dev.toml'),
-        :empty   => ""
+        default: File.join(Dir.pwd, '_config.yml'),
+        other: File.join(Dir.pwd, '_config.live.yml'),
+        toml: source_dir('_config.dev.toml'),
+        empty: ""
       }
     end
 
@@ -163,7 +163,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load different config if specified" do
-      allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({"baseurl" => "http://wahoo.dev"})
+      allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({ "baseurl" => "http://wahoo.dev" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => @paths[:other] })
     end
@@ -183,9 +183,9 @@ class TestConfiguration < JekyllUnitTest
     should "load multiple config files" do
       External.require_with_graceful_fail('toml')
 
-      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return(Hash.new)
-      allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return(Hash.new)
-      allow(TOML).to receive(:load_file).with(@paths[:toml]).and_return(Hash.new)
+      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
+      allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({})
+      allow(TOML).to receive(:load_file).with(@paths[:toml]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:toml]}")
@@ -193,8 +193,8 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load multiple config files and last config should win" do
-      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({"baseurl" => "http://example.dev"})
-      allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({"baseurl" => "http://wahoo.dev"})
+      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({ "baseurl" => "http://example.dev" })
+      allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({ "baseurl" => "http://wahoo.dev" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })

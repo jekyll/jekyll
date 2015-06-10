@@ -8,8 +8,8 @@ class TestPost < JekyllUnitTest
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
-    post.render(layouts, {"site" => {"posts" => []}})
+    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html") }
+    post.render(layouts, { "site" => { "posts" => [] } })
   end
 
   context "A Post" do
@@ -93,7 +93,6 @@ class TestPost < JekyllUnitTest
         assert_equal 2, post.categories.size
         assert_equal "foo", post.categories[0]
         assert_equal "bar", post.categories[1]
-
       end
 
       should "create url based on date and title" do
@@ -159,7 +158,7 @@ class TestPost < JekyllUnitTest
         should "read yaml front-matter" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
+          assert_equal({ "title" => "Test title", "layout" => "post", "tag" => "Ruby" }, @post.data)
           assert_equal "This is the content", @post.content
         end
       end
@@ -171,8 +170,8 @@ class TestPost < JekyllUnitTest
         should "should read the YAML header" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal({"title" => "Test Post Where YAML Ends in Dots"},
-                       @post.data)
+          assert_equal({ "title" => "Test Post Where YAML Ends in Dots" },
+            @post.data)
         end
       end
 
@@ -183,7 +182,7 @@ class TestPost < JekyllUnitTest
         should "consume the embedded dashes" do
           @post.read_yaml(@source, @real_file)
 
-          assert_equal({"title" => "Foo --- Bar"}, @post.data)
+          assert_equal({ "title" => "Foo --- Bar" }, @post.data)
           assert_equal "Triple the fun!", @post.content
         end
       end
@@ -365,7 +364,7 @@ class TestPost < JekyllUnitTest
       should "read yaml front-matter" do
         @post.read_yaml(@source, @real_file)
 
-        assert_equal({"title" => "Foo Bar", "layout" => "default"}, @post.data)
+        assert_equal({ "title" => "Foo Bar", "layout" => "default" }, @post.data)
         assert_equal "# {{ page.title }}\n\nBest **post** ever", @post.content
       end
 
@@ -396,7 +395,7 @@ class TestPost < JekyllUnitTest
 
         should "return rendered HTML" do
           assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>\n\n",
-                       @post.excerpt
+            @post.excerpt
         end
 
         context "with excerpt_separator setting" do
@@ -451,9 +450,7 @@ class TestPost < JekyllUnitTest
           should "expose custom excerpt to liquid" do
             assert @post.content.include?("I can use the excerpt: <quote>I can set a custom excerpt</quote>"), "Exposes incorrect excerpt to liquid."
           end
-
         end
-
       end
     end
 
@@ -622,7 +619,7 @@ class TestPost < JekyllUnitTest
 
           assert File.directory?(dest_dir)
           assert File.exist?(File.join(dest_dir, '2009', '03', '12',
-                                        'hash-#1.html'))
+            'hash-#1.html'))
         end
 
         should "write properly when url has space" do
@@ -632,7 +629,7 @@ class TestPost < JekyllUnitTest
 
           assert File.directory?(dest_dir)
           assert File.exist?(File.join(dest_dir, '2014', '03', '22',
-                                        'escape-+ %20[].html'))
+            'escape-+ %20[].html'))
         end
 
         should "write properly when category has different letter case" do
@@ -644,9 +641,9 @@ class TestPost < JekyllUnitTest
 
           assert File.directory?(dest_dir)
           assert File.exist?(File.join(dest_dir, 'mixedcase', '2014', '07', '05',
-                                        'mixed-case-category.html'))
+            'mixed-case-category.html'))
           assert File.exist?(File.join(dest_dir, 'mixedcase', '2014', '07', '05',
-                                        'another-mixed-case-category.html'))
+            'another-mixed-case-category.html'))
         end
 
         should "write properly without html extension" do
@@ -706,12 +703,11 @@ class TestPost < JekyllUnitTest
 
           assert_equal "<p>Post with a front matter time</p>\n\n<p>10 Jan 2010</p>", post.output.strip
         end
-
       end
     end
 
     should "generate categories and topics" do
-      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w[source]), 'foo', 'bar/2008-12-12-topical-post.markdown')
+      post = Post.new(@site, File.join(File.dirname(__FILE__), *%w(source)), 'foo', 'bar/2008-12-12-topical-post.markdown')
       assert_equal ['foo'], post.categories
     end
   end
@@ -724,34 +720,34 @@ class TestPost < JekyllUnitTest
     should "process .md as markdown under default configuration" do
       post = setup_post '2011-04-12-md-extension.md'
       conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Markdown
+      assert conv.is_a? Jekyll::Converters::Markdown
     end
 
     should "process .text as identity under default configuration" do
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Identity
+      assert conv.is_a? Jekyll::Converters::Identity
     end
 
     should "process .text as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mdw,mdwn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Markdown
+      assert conv.is_a? Jekyll::Converters::Markdown
     end
 
     should "process .md as markdown under alternate configuration" do
       @site.config['markdown_ext'] = 'markdown,mkd,mkdn,md,text'
       post = setup_post '2011-04-12-text-extension.text'
       conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Markdown
+      assert conv.is_a? Jekyll::Converters::Markdown
     end
 
     should "process .mkdn under text if it is not in the markdown config" do
       @site.config['markdown_ext'] = 'markdown,mkd,md,text'
       post = setup_post '2013-08-01-mkdn-extension.mkdn'
       conv = post.converters.first
-      assert conv.kind_of? Jekyll::Converters::Identity
+      assert conv.is_a? Jekyll::Converters::Identity
     end
 
     should "process .Rmd under text if it is not in the markdown config" do
@@ -759,9 +755,8 @@ class TestPost < JekyllUnitTest
       post = setup_post '2014-11-24-Rmd-extension.Rmd'
       assert_equal 1, post.converters.size
       conv = post.converters.first
-      assert conv.kind_of?(Jekyll::Converters::Identity), "The converter for .Rmd should be the Identity converter."
+      assert conv.is_a?(Jekyll::Converters::Identity), "The converter for .Rmd should be the Identity converter."
     end
-
   end
 
   context "site config with category" do
@@ -811,5 +806,4 @@ class TestPost < JekyllUnitTest
       assert !post.categories.include?('article'), "Did not expect post.categories to include 'article' but it did."
     end
   end
-
 end

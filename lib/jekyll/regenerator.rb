@@ -18,7 +18,7 @@ module Jekyll
     def regenerate?(document)
       case document
       when Post, Page
-        document.asset_file? || document.data['regenerate'] || 
+        document.asset_file? || document.data['regenerate'] ||
           source_modified_or_dest_missing?(
             site.in_source_dir(document.relative_path), document.destination(@site.dest)
           )
@@ -28,7 +28,7 @@ module Jekyll
             document.path, document.destination(@site.dest)
           )
       else
-        source_path = document.respond_to?(:path)        ? document.path                    : nil
+        source_path = document.respond_to?(:path) ? document.path : nil
         dest_path   = document.respond_to?(:destination) ? document.destination(@site.dest) : nil
         source_modified_or_dest_missing?(source_path, dest_path)
       end
@@ -62,14 +62,12 @@ module Jekyll
       clear_cache
     end
 
-
     # Clear just the cache
     #
     # Returns nothing
     def clear_cache
       @cache = {}
     end
-
 
     # Checks if the source has been modified or the
     # destination is missing
@@ -87,7 +85,7 @@ module Jekyll
       return true if disabled?
 
       # objects that don't have a path are always regenerated
-      return true if path.nil? 
+      return true if path.nil?
 
       # Check for path in cache
       if cache.has_key? path
@@ -110,16 +108,16 @@ module Jekyll
       end
 
       # Path does not exist in metadata, add it
-      return add(path)
+      add(path)
     end
 
     # Add a dependency of a path
     #
     # Returns nothing.
     def add_dependency(path, dependency)
-      return if (metadata[path].nil? || @disabled)
+      return if metadata[path].nil? || @disabled
 
-      if !metadata[path]["deps"].include? dependency
+      unless metadata[path]["deps"].include? dependency
         metadata[path]["deps"] << dependency
         add(dependency) unless metadata.include?(dependency)
       end

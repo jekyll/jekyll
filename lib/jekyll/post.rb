@@ -6,7 +6,7 @@ module Jekyll
     # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
-    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
+    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w(
       title
       url
       dir
@@ -17,15 +17,15 @@ module Jekyll
       previous
       tags
       path
-    ]
+    )
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
+    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w(
       content
       excerpt
       excerpt_separator
       draft?
-    ]
+    )
 
     # Post name validator. Post filenames must be like:
     # 2008-11-05-my-awesome-post.textile
@@ -54,7 +54,7 @@ module Jekyll
       @base = containing_dir(dir)
       @name = name
 
-      self.categories = dir.split('/').reject { |x| x.empty? }
+      self.categories = dir.split('/').reject(&:empty?)
       process(name)
       read_yaml(@base, name)
 
@@ -84,7 +84,7 @@ module Jekyll
       categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
       self.categories = (
         Array(categories) + categories_from_data
-      ).map { |c| c.to_s }.flatten.uniq
+      ).map(&:to_s).flatten.uniq
     end
 
     def populate_tags
@@ -132,7 +132,7 @@ module Jekyll
 
     # Turns the post slug into a suitable title
     def titleized_slug
-      slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+      slug.split('-').select { |w| w.capitalize! || w }.join(' ')
     end
 
     # Public: the path to the post relative to the site source,
@@ -157,11 +157,11 @@ module Jekyll
     #
     # Returns -1, 0, 1
     def <=>(other)
-      cmp = self.date <=> other.date
+      cmp = date <=> other.date
       if 0 == cmp
-       cmp = self.slug <=> other.slug
+        cmp = slug <=> other.slug
       end
-      return cmp
+      cmp
     end
 
     # Extract information from the post filename.
@@ -214,9 +214,9 @@ module Jekyll
     # Returns the String url.
     def url
       @url ||= URL.new({
-        :template => template,
-        :placeholders => url_placeholders,
-        :permalink => permalink
+        template: template,
+        placeholders: url_placeholders,
+        permalink: permalink
       }).to_s
     end
 
@@ -224,17 +224,17 @@ module Jekyll
     # desired placeholder replacements. For details see "url.rb"
     def url_placeholders
       {
-        :year        => date.strftime("%Y"),
-        :month       => date.strftime("%m"),
-        :day         => date.strftime("%d"),
-        :title       => slug,
-        :i_day       => date.strftime("%-d"),
-        :i_month     => date.strftime("%-m"),
-        :categories  => (categories || []).map { |c| c.to_s.downcase }.uniq.join('/'),
-        :short_month => date.strftime("%b"),
-        :short_year  => date.strftime("%y"),
-        :y_day       => date.strftime("%j"),
-        :output_ext  => output_ext
+        year: date.strftime("%Y"),
+        month: date.strftime("%m"),
+        day: date.strftime("%d"),
+        title: slug,
+        i_day: date.strftime("%-d"),
+        i_month: date.strftime("%-m"),
+        categories: (categories || []).map { |c| c.to_s.downcase }.uniq.join('/'),
+        short_month: date.strftime("%b"),
+        short_year: date.strftime("%y"),
+        y_day: date.strftime("%j"),
+        output_ext: output_ext
       }
     end
 
@@ -270,7 +270,7 @@ module Jekyll
         extracted_excerpt.do_layout(payload, {})
       end
 
-      do_layout(payload.merge({"page" => to_liquid}), layouts)
+      do_layout(payload.merge({ "page" => to_liquid }), layouts)
     end
 
     # Obtain destination path.
@@ -281,7 +281,7 @@ module Jekyll
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
       path = site.in_dest_dir(dest, URL.unescape_path(url))
-      path = File.join(path, "index.html") if self.url.end_with?("/")
+      path = File.join(path, "index.html") if url.end_with?("/")
       path << output_ext unless path.end_with?(output_ext)
       path
     end
@@ -292,20 +292,16 @@ module Jekyll
     end
 
     def next
-      pos = site.posts.index {|post| post.equal?(self) }
+      pos = site.posts.index { |post| post.equal?(self) }
       if pos && pos < site.posts.length - 1
         site.posts[pos + 1]
-      else
-        nil
       end
     end
 
     def previous
-      pos = site.posts.index {|post| post.equal?(self) }
+      pos = site.posts.index { |post| post.equal?(self) }
       if pos && pos > 0
         site.posts[pos - 1]
-      else
-        nil
       end
     end
 

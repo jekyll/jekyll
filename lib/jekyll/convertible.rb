@@ -44,7 +44,7 @@ module Jekyll
     def read_yaml(base, name, opts = {})
       begin
         self.content = File.read(site.in_source_dir(base, name),
-                                 merged_file_read_opts(opts))
+          merged_file_read_opts(opts))
         if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = SafeYAML.load($1)
@@ -87,9 +87,9 @@ module Jekyll
       if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
         ext
       else
-        converters.map { |c|
+        converters.map do |c|
           c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
-        }.compact.last
+        end.compact.last
       end
     end
 
@@ -122,9 +122,9 @@ module Jekyll
     #
     # Returns the Hash representation of this Convertible.
     def to_liquid(attrs = nil)
-      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
+      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map do |attribute|
         [attribute, send(attribute)]
-      }]
+      end]
 
       defaults = site.frontmatter_defaults.all(relative_path, type)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
@@ -157,7 +157,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w[.sass .scss].include?(ext)
+      %w(.sass .scss).include?(ext)
     end
 
     # Determine whether the document is a CoffeeScript file.
@@ -206,12 +206,12 @@ module Jekyll
       used = Set.new([layout])
 
       while layout
-        payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
+        payload = Utils.deep_merge_hashes(payload, { "content" => output, "page" => layout.data })
 
         self.output = render_liquid(layout.content,
-                                         payload,
-                                         info,
-                                         File.join(site.config['layouts'], layout.name))
+          payload,
+          info,
+          File.join(site.config['layouts'], layout.name))
 
         # Add layout to dependency tree
         site.regenerator.add_dependency(
@@ -237,7 +237,7 @@ module Jekyll
     # Returns nothing.
     def do_layout(payload, layouts)
       Jekyll::Hooks.trigger self, :pre_render, payload
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
+      info = { filters: [Jekyll::Filters], registers: { site: site, page: payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
       payload["highlighter_prefix"] = converters.first.highlighter_prefix

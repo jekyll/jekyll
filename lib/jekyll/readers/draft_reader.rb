@@ -3,7 +3,7 @@ module Jekyll
     attr_reader :site, :unfiltered_content
     def initialize(site)
       @site = site
-      @unfiltered_content = Array.new
+      @unfiltered_content = []
     end
 
     # Read all the files in <source>/<dir>/_drafts and create a new Draft
@@ -29,9 +29,7 @@ module Jekyll
     def read_content(dir, magic_dir)
       @site.reader.get_entries(dir, magic_dir).map do |entry|
         Draft.new(site, site.source, dir, entry) if Draft.valid?(entry)
-      end.reject do |entry|
-        entry.nil?
-      end
+      end.reject(&:nil?)
     end
   end
 end

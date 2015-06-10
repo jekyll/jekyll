@@ -13,22 +13,22 @@ class TestSite < JekyllUnitTest
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({ 'plugins' => '/tmp/plugins' }))
       assert_equal ['/tmp/plugins'], site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({ 'plugins' => ['/tmp/plugins', '/tmp/otherplugins'] }))
       assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => []}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({ 'plugins' => [] }))
       assert_equal [], site.plugins
     end
 
     should "have an empty array for plugins if nil is passed" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => nil}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({ 'plugins' => nil }))
       assert_equal [], site.plugins
     end
 
@@ -38,7 +38,7 @@ class TestSite < JekyllUnitTest
     end
 
     should "expose baseurl passed in from config" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'baseurl' => '/blog'}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({ 'baseurl' => '/blog' }))
       assert_equal '/blog', site.baseurl
     end
   end
@@ -157,8 +157,8 @@ class TestSite < JekyllUnitTest
     end
 
     should "setup plugins in priority order" do
-      assert_equal @site.converters.sort_by(&:class).map{|c|c.class.priority}, @site.converters.map{|c|c.class.priority}
-      assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
+      assert_equal @site.converters.sort_by(&:class).map{ |c| c.class.priority }, @site.converters.map{ |c| c.class.priority }
+      assert_equal @site.generators.sort_by(&:class).map{ |g| g.class.priority }, @site.generators.map{ |g| g.class.priority }
     end
 
     should "sort pages alphabetically" do
@@ -282,7 +282,7 @@ class TestSite < JekyllUnitTest
       end
 
       should 'remove orphaned files in destination - keep_files .svn' do
-        config = site_configuration('keep_files' => %w{.svn})
+        config = site_configuration('keep_files' => %w(.svn))
         @site = Site.new(config)
         @site.process
         assert !File.exist?(dest_dir('.htpasswd'))
@@ -423,7 +423,6 @@ class TestSite < JekyllUnitTest
         assert_nil site.data['products']
         assert_nil site.site_payload['site']['data']['products']
       end
-
     end
 
     context "manipulating the Jekyll environment" do
@@ -487,7 +486,7 @@ class TestSite < JekyllUnitTest
         sleep 1
         @site.process
         mtime3 = File.stat(dest).mtime.to_i
-        refute_equal mtime2, mtime3 # must be regenerated 
+        refute_equal mtime2, mtime3 # must be regenerated
 
         sleep 1
         @site.process
@@ -511,10 +510,8 @@ class TestSite < JekyllUnitTest
         @site.process
         assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
-        refute_equal mtime1, mtime2 # must be regenerated 
+        refute_equal mtime1, mtime2 # must be regenerated
       end
-
     end
-
   end
 end

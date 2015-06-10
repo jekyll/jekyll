@@ -9,13 +9,13 @@ class TestFilters < JekyllUnitTest
 
     def initialize(opts = {})
       @site = Jekyll::Site.new(Jekyll.configuration(opts.merge('skip_config_files' => true)))
-      @context = Liquid::Context.new({}, {}, { :site => @site })
+      @context = Liquid::Context.new({}, {}, { site: @site })
     end
   end
 
   context "filters" do
     setup do
-      @filter = JekyllFilter.new({"source" => source_dir, "destination" => dest_dir, "timezone" => "UTC"})
+      @filter = JekyllFilter.new({ "source" => source_dir, "destination" => dest_dir, "timezone" => "UTC" })
       @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
       @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
@@ -155,12 +155,12 @@ class TestFilters < JekyllUnitTest
 
     context "jsonify filter" do
       should "convert hash to json" do
-        assert_equal "{\"age\":18}", @filter.jsonify({:age => 18})
+        assert_equal "{\"age\":18}", @filter.jsonify({ age: 18 })
       end
 
       should "convert array to json" do
         assert_equal "[1,2]", @filter.jsonify([1, 2])
-        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => 'Jack'}, {:name => 'Smith'}])
+        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{ name: 'Jack' }, { name: 'Smith' }])
       end
 
       class M < Struct.new(:message)
@@ -170,7 +170,7 @@ class TestFilters < JekyllUnitTest
       end
       class T < Struct.new(:name)
         def to_liquid
-          { "name" => name, :v => 1, :thing => M.new({:kay => "jewelers"}), :stuff => true }
+          { "name" => name, :v => 1, :thing => M.new({ kay: "jewelers" }), :stuff => true }
         end
       end
 
@@ -269,9 +269,9 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter objects in a hash appropriately" do
-        hash = {"a"=>{"color"=>"red"}, "b"=>{"color"=>"blue"}}
+        hash = { "a" => { "color" => "red" }, "b" => { "color" => "blue" } }
         assert_equal 1, @filter.where(hash, "color", "red").length
-        assert_equal [{"color"=>"red"}], @filter.where(hash, "color", "red")
+        assert_equal [{ "color" => "red" }], @filter.where(hash, "color", "red")
       end
 
       should "filter objects appropriately" do
@@ -291,7 +291,7 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted strings" do
         assert_equal ["10", "2"], @filter.sort(["10", "2"])
-        assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.sort([{"a" => "10"}, {"a" => "2"}], "a")
+        assert_equal [{ "a" => "10" }, { "a" => "2" }], @filter.sort([{ "a" => "10" }, { "a" => "2" }], "a")
         assert_equal ["FOO", "Foo", "foo"], @filter.sort(["foo", "Foo", "FOO"])
         assert_equal ["_foo", "foo", "foo_"], @filter.sort(["foo_", "_foo", "foo"])
         # Cyrillic
@@ -301,17 +301,17 @@ class TestFilters < JekyllUnitTest
         assert_equal ["אלף", "בית"], @filter.sort(["בית", "אלף"])
       end
       should "return sorted by property array" do
-        assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}],
-          @filter.sort([{"a" => 4}, {"a" => 3}, {"a" => 1}, {"a" => 2}], "a")
+        assert_equal [{ "a" => 1 }, { "a" => 2 }, { "a" => 3 }, { "a" => 4 }],
+          @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
       end
       should "return sorted by property array with nils first" do
-        ary = [{"a" => 2}, {"b" => 1}, {"a" => 1}]
-        assert_equal [{"b" => 1}, {"a" => 1}, {"a" => 2}], @filter.sort(ary, "a")
+        ary = [{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }]
+        assert_equal [{ "b" => 1 }, { "a" => 1 }, { "a" => 2 }], @filter.sort(ary, "a")
         assert_equal @filter.sort(ary, "a"), @filter.sort(ary, "a", "first")
       end
       should "return sorted by property array with nils last" do
-        assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
-          @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", "last")
+        assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
+          @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
       end
     end
 
@@ -333,43 +333,42 @@ class TestFilters < JekyllUnitTest
 
     context "push filter" do
       should "return a new array with the element pushed to the end" do
-        assert_equal %w{hi there bernie}, @filter.push(%w{hi there}, "bernie")
+        assert_equal %w(hi there bernie), @filter.push(%w(hi there), "bernie")
       end
     end
 
     context "pop filter" do
       should "return a new array with the last element popped" do
-        assert_equal %w{hi there}, @filter.pop(%w{hi there bernie})
+        assert_equal %w(hi there), @filter.pop(%w(hi there bernie))
       end
 
       should "allow multiple els to be popped" do
-        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, 2)
+        assert_equal %w(hi there bert), @filter.pop(%w(hi there bert and ernie), 2)
       end
 
       should "cast string inputs for # into nums" do
-        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, "2")
+        assert_equal %w(hi there bert), @filter.pop(%w(hi there bert and ernie), "2")
       end
     end
 
     context "shift filter" do
       should "return a new array with the element removed from the front" do
-        assert_equal %w{a friendly greeting}, @filter.shift(%w{just a friendly greeting})
+        assert_equal %w(a friendly greeting), @filter.shift(%w(just a friendly greeting))
       end
 
       should "allow multiple els to be shifted" do
-        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, 2)
+        assert_equal %w(bert and ernie), @filter.shift(%w(hi there bert and ernie), 2)
       end
 
       should "cast string inputs for # into nums" do
-        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, "2")
+        assert_equal %w(bert and ernie), @filter.shift(%w(hi there bert and ernie), "2")
       end
     end
 
     context "unshift filter" do
       should "return a new array with the element put at the front" do
-        assert_equal %w{aloha there bernie}, @filter.unshift(%w{there bernie}, "aloha")
+        assert_equal %w(aloha there bernie), @filter.unshift(%w(there bernie), "aloha")
       end
     end
-
   end
 end

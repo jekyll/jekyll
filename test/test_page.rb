@@ -8,8 +8,8 @@ class TestPage < JekyllUnitTest
   end
 
   def do_render(page)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
-    page.render(layouts, {"site" => {"posts" => []}})
+    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html") }
+    page.render(layouts, { "site" => { "posts" => [] } })
   end
 
   context "A Page" do
@@ -270,7 +270,7 @@ class TestPage < JekyllUnitTest
         assert_equal("/sitemap.xml", page.url)
         assert_nil(page.url[/\.html$/])
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir,'sitemap.xml'))
+        assert File.exist?(File.join(dest_dir, 'sitemap.xml'))
       end
 
       should "write dotfiles properly" do
@@ -312,6 +312,5 @@ class TestPage < JekyllUnitTest
         end
       end
     end
-
   end
 end

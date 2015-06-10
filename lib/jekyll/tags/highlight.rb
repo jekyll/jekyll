@@ -21,8 +21,8 @@ module Jekyll
               key, value = opt.split('=')
               # If a quoted list, convert to array
               if value && value.include?("\"")
-                  value.gsub!(/"/, "")
-                  value = value.split
+                value.gsub!(/"/, "")
+                value = value.split
               end
               @options[key.to_sym] = value || true
             end
@@ -68,7 +68,7 @@ eos
             [:linenos,     opts.fetch(:linenos, nil)],
             [:encoding,    opts.fetch(:encoding, 'utf-8')],
             [:cssclass,    opts.fetch(:cssclass, nil)]
-          ].reject {|f| f.last.nil? }]
+          ].reject { |f| f.last.nil? }]
         else
           opts
         end
@@ -79,8 +79,8 @@ eos
 
         highlighted_code = Pygments.highlight(
           code,
-          :lexer   => @lang,
-          :options => sanitized_opts(@options, is_safe)
+          lexer: @lang,
+          options: sanitized_opts(@options, is_safe)
         )
 
         if highlighted_code.nil?
@@ -88,7 +88,7 @@ eos
           puts
           Jekyll.logger.error code
           puts
-          Jekyll.logger.error "While attempting to convert the above code, Pygments.rb" +
+          Jekyll.logger.error "While attempting to convert the above code, Pygments.rb" \
             " returned an unacceptable value."
           Jekyll.logger.error "This is usually a timeout problem solved by running `jekyll build` again."
           raise ArgumentError.new("Pygments.rb returned an unacceptable value when attempting to highlight some code.")
@@ -111,11 +111,10 @@ eos
       def add_code_tag(code)
         code_attributes = [
           "class=\"language-#{@lang.to_s.gsub('+', '-')}\"",
-          "data-lang=\"#{@lang.to_s}\""
+          "data-lang=\"#{@lang}\""
         ].join(" ")
         "<div class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></div>"
       end
-
     end
   end
 end

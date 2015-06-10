@@ -3,10 +3,10 @@ module Jekyll
     attr_reader :writer, :messages
 
     LOG_LEVELS = {
-      :debug => ::Logger::DEBUG,
-      :info  => ::Logger::INFO,
-      :warn  => ::Logger::WARN,
-      :error => ::Logger::ERROR
+      debug: ::Logger::DEBUG,
+      info: ::Logger::INFO,
+      warn: ::Logger::WARN,
+      error: ::Logger::ERROR
     }
 
     # Public: Create a new instance of a log writer
