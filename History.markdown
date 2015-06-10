@@ -77,6 +77,7 @@
   * Added talk.jekyllrb.com to "Have questions?" (#3694)
   * Performance: Sort files only once (#3707)
   * Performance: Marshal metadata (#3706)
+  * Upgrade highlight wrapper from `div` to `figure` (#3779)
 
 ### Bug Fixes
 
