@@ -122,12 +122,7 @@ module Jekyll
     #
     # Returns the Hash representation of this Convertible.
     def to_liquid(attrs = nil)
-      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
-        [attribute, send(attribute)]
-      }]
-
-      defaults = site.frontmatter_defaults.all(relative_path, type)
-      Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
+      to_liquid_cache[attrs || self.class::ATTRIBUTES_FOR_LIQUID]
     end
 
     # The type of a document,
@@ -237,6 +232,8 @@ module Jekyll
     # Returns nothing.
     def do_layout(payload, layouts)
       Jekyll::Hooks.trigger self, :pre_render, payload
+      @to_liquid_cache = nil
+
       info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
@@ -277,6 +274,19 @@ module Jekyll
         send(property)
       else
         data[property]
+      end
+    end
+
+    private
+
+    def to_liquid_cache
+      @to_liquid_cache ||= Hash.new do |cache, attrs|
+        further_data = Hash[attrs.map { |attribute|
+          [attribute, send(attribute)]
+        }]
+
+        defaults = site.frontmatter_defaults.all(relative_path, type)
+        cache[attrs] = Utils.deep_merge_hashes(defaults, Utils.deep_merge_hashes(data, further_data))
       end
     end
   end
