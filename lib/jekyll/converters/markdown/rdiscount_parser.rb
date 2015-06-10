@@ -5,7 +5,7 @@ module Jekyll
         def initialize(config)
           Jekyll::External.require_with_graceful_fail "rdiscount"
           @config = config
-          @rdiscount_extensions = @config['rdiscount']['extensions'].map { |e| e.to_sym }
+          @rdiscount_extensions = @config['rdiscount']['extensions'].map(&:to_sym)
         end
 
         def convert(content)
@@ -18,6 +18,7 @@ module Jekyll
         end
 
         private
+
         def replace_generated_toc(rd, html, toc_token)
           if rd.generate_toc && html.include?(toc_token)
             utf8_toc = rd.toc_content

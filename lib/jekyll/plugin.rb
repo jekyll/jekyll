@@ -1,10 +1,10 @@
 module Jekyll
   class Plugin
-    PRIORITIES = { :lowest => -100,
-                   :low => -10,
-                   :normal => 0,
-                   :high => 10,
-                   :highest => 100 }
+    PRIORITIES = { lowest: -100,
+                   low: -10,
+                   normal: 0,
+                   high: 10,
+                   highest: 100 }
 
     # Fetch all the subclasses of this class and its subclasses' subclasses.
     #
@@ -53,7 +53,7 @@ module Jekyll
     #
     # Returns -1, 0, 1.
     def self.<=>(other)
-      PRIORITIES[other.priority] <=> PRIORITIES[self.priority]
+      PRIORITIES[other.priority] <=> PRIORITIES[priority]
     end
 
     # Spaceship is priority [higher -> lower]

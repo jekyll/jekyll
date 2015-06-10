@@ -12,7 +12,6 @@ module Jekyll
     end
 
     class IncludeTag < Liquid::Tag
-
       attr_reader :includes_dir
 
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
@@ -26,7 +25,7 @@ module Jekyll
           @file = matched['variable'].strip
           @params = matched['params'].strip
         else
-          @file, @params = markup.strip.split(' ', 2);
+          @file, @params = markup.strip.split(' ', 2)
         end
         validate_params if @params
         @tag_name = tag_name
@@ -40,7 +39,7 @@ module Jekyll
         params = {}
         markup = @params
 
-        while match = VALID_SYNTAX.match(markup) do
+        while match = VALID_SYNTAX.match(markup)
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
@@ -58,7 +57,7 @@ module Jekyll
 
       def validate_file_name(file)
         if file !~ /^[a-zA-Z0-9_\/\.-]+$/ || file =~ /\.\// || file =~ /\/\./
-            raise ArgumentError.new <<-eos
+          raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
   #{file}

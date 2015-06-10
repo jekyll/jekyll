@@ -6,8 +6,8 @@ class TestExcerpt < JekyllUnitTest
   end
 
   def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
-    post.render(layouts, {"site" => {"posts" => []}})
+    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html") }
+    post.render(layouts, { "site" => { "posts" => [] } })
   end
 
   context "With extraction disabled" do
@@ -32,7 +32,6 @@ class TestExcerpt < JekyllUnitTest
     end
 
     context "#include(string)" do
-
       setup do
         @excerpt.output = "Here is a fake output stub"
       end
@@ -78,8 +77,8 @@ class TestExcerpt < JekyllUnitTest
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
         assert_equal "/bar/baz/z_category/mixedcase/2013/07/22/post-excerpt-with-layout.html", @excerpt.to_liquid["url"]
         assert_equal Time.parse("2013-07-22"), @excerpt.to_liquid["date"]
-        assert_equal %w[bar baz z_category MixedCase], @excerpt.to_liquid["categories"]
-        assert_equal %w[first second third jekyllrb.com], @excerpt.to_liquid["tags"]
+        assert_equal %w(bar baz z_category MixedCase), @excerpt.to_liquid["categories"]
+        assert_equal %w(first second third jekyllrb.com), @excerpt.to_liquid["tags"]
         assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown", @excerpt.to_liquid["path"]
       end
 
@@ -96,7 +95,6 @@ class TestExcerpt < JekyllUnitTest
     end
 
     context "#content" do
-
       context "before render" do
         should "be the first paragraph of the page" do
           assert_equal "First paragraph with [link ref][link].\n\n[link]: http://www.jekyllrb.com/", @excerpt.content

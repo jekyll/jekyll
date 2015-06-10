@@ -50,7 +50,7 @@ class TestCollections < JekyllUnitTest
       end
 
       should "have a docs attribute" do
-        assert_equal @collection.to_liquid["docs"], Array.new
+        assert_equal @collection.to_liquid["docs"], []
       end
 
       should "have a directory attribute" do
@@ -122,7 +122,7 @@ class TestCollections < JekyllUnitTest
       assert @site.collections["methods"].docs.is_a? Array
       @site.collections["methods"].docs.each do |doc|
         assert doc.is_a? Jekyll::Document
-        assert_includes %w[
+        assert_includes %w(
           _methods/configuration.md
           _methods/sanitized_path.md
           _methods/site/generate.md
@@ -130,7 +130,7 @@ class TestCollections < JekyllUnitTest
           _methods/um_hi.md
           _methods/escape-+\ #%20[].md
           _methods/yaml_with_dots.md
-        ], doc.relative_path
+        ), doc.relative_path
       end
     end
 
@@ -163,7 +163,7 @@ class TestCollections < JekyllUnitTest
     end
 
     should "extract the configuration collection information as metadata" do
-      assert_equal @collection.metadata, {"foo" => "bar", "baz" => "whoo"}
+      assert_equal @collection.metadata, { "foo" => "bar", "baz" => "whoo" }
     end
   end
 
@@ -213,5 +213,4 @@ class TestCollections < JekyllUnitTest
       assert @collection.docs.any? { |d| d.path.include?("all.dots") }
     end
   end
-
 end

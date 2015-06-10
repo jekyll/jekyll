@@ -3,19 +3,18 @@
 require 'helper'
 
 class TestTags < JekyllUnitTest
-
   def setup
     FileUtils.mkdir_p("tmp")
   end
 
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
-    site = fixture_site({"highlighter" => "rouge"}.merge(override))
+    site = fixture_site({ "highlighter" => "rouge" }.merge(override))
 
     if override['read_posts']
       site.posts.concat(PostReader.new(site).read(''))
     end
 
-    info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
+    info = { filters: [Jekyll::Filters], registers: { site: site } }
     @converter = site.converters.find { |c| c.class == converter_class }
     payload = { "highlighter_prefix" => @converter.highlighter_prefix,
                 "highlighter_suffix" => @converter.highlighter_suffix }
@@ -70,32 +69,32 @@ CONTENT
 
     should "set the linenos option as 'inline' if no linenos value" do
       tag = highlight_block_with_opts('ruby linenos ')
-      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
+      assert_equal({ linenos: 'inline' }, tag.instance_variable_get(:@options))
     end
 
     should "set the linenos option to 'table' if the linenos key is given the table value" do
       tag = highlight_block_with_opts('ruby linenos=table ')
-      assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ linenos: 'table' }, tag.instance_variable_get(:@options))
     end
 
     should "recognize nowrap option with linenos set" do
       tag = highlight_block_with_opts('ruby linenos=table nowrap ')
-      assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@options))
+      assert_equal({ linenos: 'table', nowrap: true }, tag.instance_variable_get(:@options))
     end
 
     should "recognize the cssclass option" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ cssclass: 'hl', linenos: 'table' }, tag.instance_variable_get(:@options))
     end
 
     should "recognize the hl_linenos option and its value" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl hl_linenos=3 ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
+      assert_equal({ cssclass: 'hl', linenos: 'table', hl_linenos: '3' }, tag.instance_variable_get(:@options))
     end
 
     should "recognize multiple values of hl_linenos" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl hl_linenos="3 5 6" ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
+      assert_equal({ cssclass: 'hl', linenos: 'table', hl_linenos: ['3', '5', '6'] }, tag.instance_variable_get(:@options))
     end
 
     should "treat language name as case insensitive" do
@@ -110,27 +109,27 @@ CONTENT
     end
 
     should "allow linenos" do
-      sanitized = @tag.sanitized_opts({:linenos => true}, true)
+      sanitized = @tag.sanitized_opts({ linenos: true }, true)
       assert_equal true, sanitized[:linenos]
     end
 
     should "allow hl_linenos" do
-      sanitized = @tag.sanitized_opts({:hl_linenos => %w[1 2 3 4]}, true)
-      assert_equal %w[1 2 3 4], sanitized[:hl_linenos]
+      sanitized = @tag.sanitized_opts({ hl_linenos: %w(1 2 3 4) }, true)
+      assert_equal %w(1 2 3 4), sanitized[:hl_linenos]
     end
 
     should "allow cssclass" do
-      sanitized = @tag.sanitized_opts({:cssclass => "ahoy"}, true)
+      sanitized = @tag.sanitized_opts({ cssclass: "ahoy" }, true)
       assert_equal "ahoy", sanitized[:cssclass]
     end
 
     should "allow startinline" do
-      sanitized = @tag.sanitized_opts({:startinline => true}, true)
+      sanitized = @tag.sanitized_opts({ startinline: true }, true)
       assert_equal true, sanitized[:startinline]
     end
 
     should "strip unknown options" do
-      sanitized = @tag.sanitized_opts({:light => true}, true)
+      sanitized = @tag.sanitized_opts({ light: true }, true)
       assert_nil sanitized[:light]
     end
   end
@@ -146,7 +145,7 @@ CONTENT
 
     context "post content has highlight tag" do
       setup do
-        fill_post("test", {'highlighter' => 'pygments'})
+        fill_post("test", { 'highlighter' => 'pygments' })
       end
 
       should "not cause a markdown error" do
@@ -154,31 +153,31 @@ CONTENT
       end
 
       should "render markdown with pygments" do
-        assert_match %{<pre><code class="language-text" data-lang="text">test</code></pre>}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">test</code></pre>), @result
       end
 
       should "render markdown with pygments with line numbers" do
-        assert_match %{<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> test</code></pre>}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text"><span class="lineno">1</span> test</code></pre>), @result
       end
     end
 
     context "post content has highlight with file reference" do
       setup do
-        fill_post("./jekyll.gemspec", {'highlighter' => 'pygments'})
+        fill_post("./jekyll.gemspec", { 'highlighter' => 'pygments' })
       end
 
       should "not embed the file" do
-        assert_match %{<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>), @result
       end
     end
 
     context "post content has highlight tag with UTF character" do
       setup do
-        fill_post("Æ", {'highlighter' => 'pygments'})
+        fill_post("Æ", { 'highlighter' => 'pygments' })
       end
 
       should "render markdown with pygments line handling" do
-        assert_match %{<pre><code class="language-text" data-lang="text">Æ</code></pre>}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">Æ</code></pre>), @result
       end
     end
 
@@ -191,11 +190,11 @@ CONTENT
 [1,] FALSE TRUE
 [2,] FALSE TRUE
 EOS
-        fill_post(code, {'highlighter' => 'pygments'})
+        fill_post(code, { 'highlighter' => 'pygments' })
       end
 
       should "only strip the preceding newlines" do
-        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">     [,1] [,2]), @result
       end
     end
 
@@ -212,7 +211,7 @@ EOS
 
 
 EOS
-        fill_post(code, {'highlighter' => 'pygments'})
+        fill_post(code, { 'highlighter' => 'pygments' })
       end
 
       should "only strip the newlines which precede and succeed the entire block" do
@@ -222,11 +221,11 @@ EOS
 
     context "post content has highlight tag with preceding spaces & Windows-style newlines" do
       setup do
-        fill_post "\r\n\r\n\r\n     [,1] [,2]", {'highlighter' => 'pygments'}
+        fill_post "\r\n\r\n\r\n     [,1] [,2]", { 'highlighter' => 'pygments' }
       end
 
       should "only strip the preceding newlines" do
-        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">     [,1] [,2]), @result
       end
     end
 
@@ -237,11 +236,11 @@ EOS
 [1,] FALSE TRUE
 [2,] FALSE TRUE
 EOS
-        fill_post(code, {'highlighter' => 'pygments'})
+        fill_post(code, { 'highlighter' => 'pygments' })
       end
 
       should "only strip the preceding newlines" do
-        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">     [,1] [,2]), @result
       end
     end
   end
@@ -253,11 +252,12 @@ EOS
       end
 
       should "render markdown with rouge" do
-        assert_match %{<pre><code class="language-text" data-lang="text">test</code></pre>}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">test</code></pre>), @result
       end
 
       should "render markdown with rouge with line numbers" do
-        assert_match %{<table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">\n</span></pre></td></tr></tbody></table>}, @result
+        assert_match %(<table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">
+</span></pre></td></tr></tbody></table>), @result
       end
     end
 
@@ -267,7 +267,7 @@ EOS
       end
 
       should "not embed the file" do
-        assert_match %{<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">./jekyll.gemspec</code></pre>), @result
       end
     end
 
@@ -277,7 +277,7 @@ EOS
       end
 
       should "render markdown with pygments line handling" do
-        assert_match %{<pre><code class="language-text" data-lang="text">Æ</code></pre>}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">Æ</code></pre>), @result
       end
     end
 
@@ -293,7 +293,7 @@ EOS
       end
 
       should "only strip the preceding newlines" do
-        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">     [,1] [,2]), @result
       end
     end
 
@@ -323,7 +323,7 @@ EOS
       end
 
       should "only strip the preceding newlines" do
-        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">     [,1] [,2]), @result
       end
     end
 
@@ -337,7 +337,7 @@ EOS
       end
 
       should "only strip the preceding newlines" do
-        assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+        assert_match %(<pre><code class="language-text" data-lang="text">     [,1] [,2]), @result
       end
     end
   end
@@ -418,7 +418,7 @@ title: Post linking
 
 {% post_url 2008-11-21-complex %}
 CONTENT
-      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
     end
 
     should "not cause an error" do
@@ -442,7 +442,7 @@ title: Post linking
 - 3 {% post_url es/2008-11-21-nested %}
 - 4 {% post_url /es/2008-11-21-nested %}
 CONTENT
-      create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
     end
 
     should "not cause an error" do
@@ -471,15 +471,13 @@ title: Invalid post name linking
 CONTENT
 
       assert_raises ArgumentError do
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
       end
     end
   end
 
   context "include tag with parameters" do
-
     context "with symlink'd include" do
-
       should "not allow symlink includes" do
         File.open("tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
         assert_raises IOError do
@@ -491,7 +489,7 @@ title: Include symlink
 {% include tmp/pages-test %}
 
 CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+          create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
         refute_match /SYMLINK TEST/, @result
       end
@@ -506,7 +504,7 @@ title: Include symlink
 {% include tmp/pages-test-does-not-exist %}
 
 CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+          create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
         assert_match /should exist and should not be a symlink/, ex.message
       end
@@ -523,7 +521,7 @@ title: Include tag parameters
 
 {% include params.html param="value" %}
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
       end
 
       should "correctly output include variable" do
@@ -545,7 +543,7 @@ title: Invalid parameter syntax
 {% include params.html param s="value" %}
 CONTENT
         assert_raises ArgumentError, 'Did not raise exception on invalid "include" syntax' do
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
         end
 
         content = <<CONTENT
@@ -556,7 +554,7 @@ title: Invalid parameter syntax
 {% include params.html params="value %}
 CONTENT
         assert_raises ArgumentError, 'Did not raise exception on invalid "include" syntax' do
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
         end
       end
     end
@@ -570,7 +568,7 @@ title: multiple include parameters
 
 {% include params.html param1="new_value" param2="another" %}
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
       end
 
       should "list all parameters" do
@@ -592,7 +590,7 @@ title: without parameters
 
 {% include params.html %}
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
       end
 
       should "include file with empty parameters" do
@@ -609,7 +607,7 @@ title: without parameters within if statement
 
 {% if true %}{% include params.html %}{% endif %}
 CONTENT
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
       end
 
       should "include file with empty parameters within if statement" do
@@ -630,7 +628,7 @@ CONTENT
 
       should "raise error relative to source directory" do
         exception = assert_raises IOError do
-          create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+          create_post(@content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
         end
         assert_equal 'Included file \'_includes/missing.html\' not found', exception.message
       end
@@ -638,10 +636,10 @@ CONTENT
 
     context "include tag with variable and liquid filters" do
       setup do
-        site = fixture_site({'pygments' => true})
+        site = fixture_site({ 'pygments' => true })
         post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
-        layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-        post.render(layouts, {"site" => {"posts" => []}})
+        layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html") }
+        post.render(layouts, { "site" => { "posts" => [] } })
         @content = post.content
       end
 
@@ -672,8 +670,8 @@ CONTENT
     setup do
       site = fixture_site('pygments' => true)
       post = Post.new(site, source_dir, '', "2014-09-02-relative-includes.markdown")
-      layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-      post.render(layouts, {"site" => {"posts" => []}})
+      layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html") }
+      post.render(layouts, { "site" => { "posts" => [] } })
       @content = post.content
     end
 
@@ -716,7 +714,7 @@ CONTENT
 
         should "raise error relative to source directory" do
           exception = assert_raises IOError do
-            create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+            create_post(@content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
           end
           assert_equal 'Included file \'./missing.html\' not found', exception.message
         end
@@ -735,7 +733,7 @@ CONTENT
 
         should "raise error relative to source directory" do
           exception = assert_raises ArgumentError do
-            create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+            create_post(@content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true })
           end
           assert_equal "Invalid syntax for include tag. File contains invalid characters or sequences:\n\n  ../README.markdown\n\nValid syntax:\n\n  {% include_relative file.ext param='value' param2='value' %}\n\n", exception.message
         end
@@ -743,7 +741,6 @@ CONTENT
     end
 
     context "with symlink'd include" do
-
       should "not allow symlink includes" do
         File.open("tmp/pages-test", 'w') { |file| file.write("SYMLINK TEST") }
         assert_raises IOError do
@@ -755,7 +752,7 @@ title: Include symlink
 {% include_relative tmp/pages-test %}
 
 CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+          create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
         refute_match /SYMLINK TEST/, @result
       end
@@ -770,7 +767,7 @@ title: Include symlink
 {% include_relative tmp/pages-test-does-not-exist %}
 
 CONTENT
-          create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
+          create_post(content, { 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
         assert_match /should exist and should not be a symlink/, ex.message
       end

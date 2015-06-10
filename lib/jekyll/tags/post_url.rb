@@ -20,12 +20,13 @@ module Jekyll
       def deprecated_equality(other)
         date = Utils.parse_date(name, "'#{name}' does not contain valid date and/or title.")
         slug == post_slug(other) &&
-          date.year  == other.date.year &&
+          date.year == other.date.year &&
           date.month == other.date.month &&
-          date.day   == other.date.day
+          date.day == other.date.day
       end
 
       private
+
       # Construct the directory-aware post slug for a Jekyll::Post
       #
       # other - the Jekyll::Post
@@ -70,9 +71,9 @@ eos
 
         site.posts.each do |p|
           if @post.deprecated_equality p
-            Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{name} }}' did not match " +
-              "a post using the new matching method of checking name " +
-              "(path-date-slug) equality. Please make sure that you " +
+            Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{name} }}' did not match " \
+              "a post using the new matching method of checking name " \
+              "(path-date-slug) equality. Please make sure that you " \
               "change this tag to match the post's name exactly."
             return p.url
           end

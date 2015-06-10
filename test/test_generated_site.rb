@@ -4,7 +4,7 @@ class TestGeneratedSite < JekyllUnitTest
   context "generated sites" do
     setup do
       clear_dest
-      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+      config = Jekyll::Configuration::DEFAULTS.merge({ 'source' => source_dir, 'destination' => dest_dir })
 
       @site = fixture_site config
       @site.process
@@ -24,7 +24,7 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "hide unpublished posts" do
-      published = Dir[dest_dir('publish_test/2008/02/02/*.html')].map {|f| File.basename(f)}
+      published = Dir[dest_dir('publish_test/2008/02/02/*.html')].map { |f| File.basename(f) }
 
       assert_equal 1, published.size
       assert_equal "published.html", published.first
@@ -58,7 +58,7 @@ OUTPUT
   context "generating limited posts" do
     setup do
       clear_dest
-      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 5})
+      config = Jekyll::Configuration::DEFAULTS.merge({ 'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 5 })
       @site = fixture_site config
       @site.process
       @index = File.read(dest_dir('index.html'))
@@ -71,7 +71,7 @@ OUTPUT
     should "ensure limit posts is 0 or more" do
       assert_raises ArgumentError do
         clear_dest
-        config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1})
+        config = Jekyll::Configuration::DEFAULTS.merge({ 'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1 })
 
         @site = fixture_site config
       end
@@ -79,7 +79,7 @@ OUTPUT
 
     should "acceptable limit post is 0" do
       clear_dest
-      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
+      config = Jekyll::Configuration::DEFAULTS.merge({ 'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0 })
 
       assert Site.new(config), "Couldn't create a site with the given limit_posts."
     end

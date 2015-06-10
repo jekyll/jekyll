@@ -1,7 +1,5 @@
 module Jekyll
-
   class Draft < Post
-
     # Valid post name regex (no date)
     MATCHER = /^(.*)(\.[^.]+)$/
 
@@ -34,7 +32,5 @@ module Jekyll
       self.slug = slug
       self.ext = ext
     end
-
   end
-
 end

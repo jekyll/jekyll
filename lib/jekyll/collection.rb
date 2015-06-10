@@ -54,7 +54,7 @@ module Jekyll
     # Returns an Array of file paths to the documents in this collection
     #   relative to the collection's directory
     def entries
-      return Array.new unless exists?
+      return [] unless exists?
       @entries ||=
         Dir.glob(collection_dir("**", "*.*")).map do |entry|
           entry["#{collection_dir}/"] = ''; entry
@@ -66,7 +66,7 @@ module Jekyll
     #
     # Returns a list of filtered entry paths.
     def filtered_entries
-      return Array.new unless exists?
+      return [] unless exists?
       @filtered_entries ||=
         Dir.chdir(directory) do
           entry_filter.filter(entries).reject do |f|
@@ -171,7 +171,7 @@ module Jekyll
     # Returns the URL template to render collection's documents at.
     def url_template
       metadata.fetch('permalink') do
-          Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
+        Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
       end
     end
 
@@ -180,7 +180,7 @@ module Jekyll
     # Returns the metadata for this collection
     def extract_metadata
       if site.config['collections'].is_a?(Hash)
-        site.config['collections'][label] || Hash.new
+        site.config['collections'][label] || {}
       else
         {}
       end

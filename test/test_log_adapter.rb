@@ -5,8 +5,11 @@ class TestLogAdapter < JekyllUnitTest
     attr_accessor :level
 
     def debug(*); end
+
     def info(*); end
+
     def warn(*); end
+
     def error(*); end
   end
 
@@ -21,31 +24,31 @@ class TestLogAdapter < JekyllUnitTest
   context "#adjust_verbosity" do
     should "set the writers logging level to error when quiet" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
-      subject.adjust_verbosity(:quiet => true)
+      subject.adjust_verbosity(quiet: true)
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
     end
-    
+
     should "set the writers logging level to debug when verbose" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
-      subject.adjust_verbosity(:verbose => true)
+      subject.adjust_verbosity(verbose: true)
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:debug], subject.writer.level
     end
-    
+
     should "set the writers logging level to error when quiet and verbose are both set" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
-      subject.adjust_verbosity(:quiet => true, :verbose => true)
+      subject.adjust_verbosity(quiet: true, verbose: true)
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
     end
-    
+
     should "not change the writer's logging level when neither verbose or quiet" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       original_level = subject.writer.level
       refute_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
       refute_equal Jekyll::LogAdapter::LOG_LEVELS[:debug], subject.writer.level
-      subject.adjust_verbosity(:quiet => false, :verbose => false)
+      subject.adjust_verbosity(quiet: false, verbose: false)
       assert_equal original_level, subject.writer.level
     end
-    
+
     should "call #debug on writer return true" do
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer)
@@ -105,7 +108,7 @@ class TestLogAdapter < JekyllUnitTest
 
     should "store each log value in the array" do
       logger = Jekyll::LogAdapter.new(LoggerDouble.new)
-      values = %w{one two three four}
+      values = %w(one two three four)
       logger.debug(values[0])
       logger.info(values[1])
       logger.warn(values[2])

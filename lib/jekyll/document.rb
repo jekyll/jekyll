@@ -38,7 +38,7 @@ module Jekyll
     # Returns a Hash containing the data. An empty hash is returned if
     #   no data was read.
     def data
-      @data ||= Hash.new
+      @data ||= {}
     end
 
     # The path to the document, relative to the site source.
@@ -76,14 +76,14 @@ module Jekyll
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
     end
 
     # Determine whether the document is a YAML file.
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
-      %w[.yaml .yml].include?(extname)
+      %w(.yaml .yml).include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -99,7 +99,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w[.sass .scss].include?(extname)
+      %w(.sass .scss).include?(extname)
     end
 
     # Determine whether the document is a CoffeeScript file.

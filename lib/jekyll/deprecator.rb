@@ -19,7 +19,7 @@ module Jekyll
     end
 
     def no_subcommand(args)
-      if args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
+      if args.size > 0 && args.first =~ /^--/ && !%w(--help --version).include?(args.first)
         deprecation_message "Jekyll now uses subcommands instead of just \
                             switches. Run `jekyll --help` to find out more."
       end
@@ -39,6 +39,5 @@ module Jekyll
       Jekyll.logger.warn "Defaults:", "The '#{old}' type has become '#{current}'."
       Jekyll.logger.warn "Defaults:", "Please update your front-matter defaults to use 'type: #{current}'."
     end
-
   end
 end

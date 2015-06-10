@@ -1,7 +1,6 @@
 require 'helper'
 
 class TestFrontMatterDefaults < JekyllUnitTest
-
   context "A site with full front matter defaults" do
     setup do
       @site = Site.new(Jekyll.configuration({
@@ -174,5 +173,4 @@ class TestFrontMatterDefaults < JekyllUnitTest
       assert_equal @not_affected.reject { |page| page.data["key"] == "val" }, []
     end
   end
-
 end

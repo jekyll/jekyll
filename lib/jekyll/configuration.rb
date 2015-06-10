@@ -2,7 +2,6 @@
 
 module Jekyll
   class Configuration < Hash
-
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = {
@@ -18,7 +17,7 @@ module Jekyll
       'safe'          => false,
       'include'       => ['.htaccess'],
       'exclude'       => [],
-      'keep_files'    => ['.git','.svn'],
+      'keep_files'    => ['.git', '.svn'],
       'encoding'      => 'utf-8',
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'full_rebuild'  => false,
@@ -85,7 +84,7 @@ module Jekyll
     #
     # Return a copy of the hash where all its keys are strings
     def stringify_keys
-      reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
+      reduce({}) { |hsh, (k, v)| hsh.merge(k.to_s => v) }
     end
 
     def get_config_value_with_override(config_key, override)
@@ -130,12 +129,12 @@ module Jekyll
     # Returns an Array of config files
     def config_files(override)
       # Adjust verbosity quickly
-      Jekyll.logger.adjust_verbosity(:quiet => quiet?(override), :verbose => verbose?(override))
+      Jekyll.logger.adjust_verbosity(quiet: quiet?(override), verbose: verbose?(override))
 
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
       if config_files.to_s.empty?
-        default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
+        default = %w(yml yaml).find(proc { 'yml' }) do |ext|
           File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))
         end
         config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
@@ -180,7 +179,7 @@ module Jekyll
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
       rescue ArgumentError => err
-        Jekyll.logger.warn "WARNING:", "Error reading configuration. " +
+        Jekyll.logger.warn "WARNING:", "Error reading configuration. " \
                      "Using defaults (and options)."
         $stderr.puts "#{err}"
       end
@@ -205,23 +204,23 @@ module Jekyll
       config = clone
       # Provide backwards-compatibility
       if config.key?('auto') || config.key?('watch')
-        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" +
-                            " be set from your configuration file(s). Use the"+
+        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" \
+                            " be set from your configuration file(s). Use the"\
                             " --[no-]watch/-w command-line option instead."
         config.delete('auto')
         config.delete('watch')
       end
 
       if config.key? 'server'
-        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" +
-                            " is no longer accepted. Use the 'jekyll serve'" +
+        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" \
+                            " is no longer accepted. Use the 'jekyll serve'" \
                             " subcommand to serve your site with WEBrick."
         config.delete('server')
       end
 
       if config.key? 'server_port'
-        Jekyll::Deprecator.deprecation_message "The 'server_port' configuration option" +
-                            " has been renamed to 'port'. Please update your config" +
+        Jekyll::Deprecator.deprecation_message "The 'server_port' configuration option" \
+                            " has been renamed to 'port'. Please update your config" \
                             " file accordingly."
         # copy but don't overwrite:
         config['port'] = config['server_port'] unless config.key?('port')
@@ -229,20 +228,20 @@ module Jekyll
       end
 
       if config.key? 'pygments'
-        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" +
-                            " has been renamed to 'highlighter'. Please update your" +
-                            " config file accordingly. The allowed values are 'rouge', " +
+        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" \
+                            " has been renamed to 'highlighter'. Please update your" \
+                            " config file accordingly. The allowed values are 'rouge', " \
                             "'pygments' or null."
 
         config['highlighter'] = 'pygments' if config['pygments']
         config.delete('pygments')
       end
 
-      %w[include exclude].each do |option|
+      %w(include exclude).each do |option|
         if config.fetch(option, []).is_a?(String)
-          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" +
-            " must now be specified as an array, but you specified" +
-            " a string. For now, we've treated the string you provided" +
+          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" \
+            " must now be specified as an array, but you specified" \
+            " a string. For now, we've treated the string you provided" \
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
@@ -250,16 +249,16 @@ module Jekyll
       end
 
       if (config['kramdown'] || {}).key?('use_coderay')
-        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" +
+        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" \
           " to 'enable_coderay' in your configuration file."
         config['kramdown']['use_coderay'] = config['kramdown'].delete('enable_coderay')
       end
 
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
-        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " +
-          "Markdown processor, which has been removed as of 3.0.0. " +
-          "We recommend you switch to Kramdown. To do this, replace " +
-          "`markdown: maruku` with `markdown: kramdown` in your " +
+        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " \
+          "Markdown processor, which has been removed as of 3.0.0. " \
+          "We recommend you switch to Kramdown. To do this, replace " \
+          "`markdown: maruku` with `markdown: kramdown` in your " \
           "`_config.yml` file."
       end
 
@@ -270,7 +269,7 @@ module Jekyll
       config = clone
 
       if config.key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
-        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" +
+        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" \
           " positive integer or nil. It's currently set to '#{config['paginate'].inspect}'."
         config['paginate'] = nil
       end

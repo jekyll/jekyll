@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'pry'
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w(.. lib))
 require 'jekyll'
 
-TEST_DIR = File.expand_path(File.join(File.dirname(__FILE__), *%w{ .. test }))
+TEST_DIR = File.expand_path(File.join(File.dirname(__FILE__), *%w(.. test)))
 
 def fixture_site(overrides = {})
   Jekyll::Site.new(site_configuration(overrides))

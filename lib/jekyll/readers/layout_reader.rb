@@ -45,8 +45,6 @@ module Jekyll
       dir = Jekyll.sanitized_path(Dir.pwd, site.config['layouts'])
       if File.directory?(dir) && !site.safe
         dir
-      else
-        nil
       end
     end
   end

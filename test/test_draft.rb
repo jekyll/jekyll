@@ -49,7 +49,5 @@ class TestDraft < JekyllUnitTest
         assert_equal val, result, "For <draft[\"#{attr_str}\"]>:"
       end
     end
-
   end
-
 end

@@ -2,7 +2,6 @@ module Jekyll
   module Commands
     class Doctor < Command
       class << self
-
         def init_with_program(prog)
           prog.command(:doctor) do |c|
             c.syntax 'doctor'
@@ -38,8 +37,8 @@ module Jekyll
 
         def deprecated_relative_permalinks(site)
           if site.config['relative_permalinks']
-            Jekyll::Deprecator.deprecation_message "Your site still uses relative" +
-                                " permalinks, which was removed in" +
+            Jekyll::Deprecator.deprecation_message "Your site still uses relative" \
+                                " permalinks, which was removed in" \
                                 " Jekyll v3.0.0."
             return true
           end
@@ -53,7 +52,7 @@ module Jekyll
           urls.each do |url, paths|
             if paths.size > 1
               conflicting_urls = true
-              Jekyll.logger.warn "Conflict:", "The URL '#{url}' is the destination" +
+              Jekyll.logger.warn "Conflict:", "The URL '#{url}' is the destination" \
                 " for the following pages: #{paths.join(", ")}"
             end
           end
@@ -61,7 +60,7 @@ module Jekyll
         end
 
         def fsnotify_buggy?(site)
-          return true if !Utils::Platforms.osx?
+          return true unless Utils::Platforms.osx?
           if Dir.pwd != `pwd`.strip
             Jekyll.logger.error "  " + <<-STR.strip.gsub(/\n\s+/, "\n  ")
               We have detected that there might be trouble using fsevent on your
@@ -77,6 +76,7 @@ module Jekyll
         end
 
         private
+
         def collect_urls(urls, things, destination)
           things.each do |thing|
             dest = thing.destination(destination)
@@ -88,9 +88,7 @@ module Jekyll
           end
           urls
         end
-
       end
-
     end
   end
 end

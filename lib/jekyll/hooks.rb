@@ -19,25 +19,25 @@ module Jekyll
 
     # initial empty hooks
     @registry = {
-      :site => {
+      site: {
         after_reset: [],
         post_read: [],
         pre_render: [],
         post_write: [],
       },
-      :page => {
+      page: {
         post_init: [],
         pre_render: [],
         post_render: [],
         post_write: [],
       },
-      :post => {
+      post: {
         post_init: [],
         pre_render: [],
         post_render: [],
         post_write: [],
       },
-      :document => {
+      document: {
         pre_render: [],
         post_render: [],
         post_write: [],
@@ -66,12 +66,12 @@ module Jekyll
     # register a single hook to be called later, internal API
     def self.register_one(owner, event, priority, &block)
       unless @registry[owner]
-        raise NotAvailable, "Hooks are only available for the following " <<
+        raise NotAvailable, "Hooks are only available for the following " \
           "classes: #{@registry.keys.inspect}"
       end
 
       unless @registry[owner][event]
-        raise NotAvailable, "Invalid hook. #{owner} supports only the " <<
+        raise NotAvailable, "Invalid hook. #{owner} supports only the " \
           "following hooks #{@registry[owner].keys.inspect}"
       end
 

@@ -50,7 +50,7 @@ def run_jekyll(args)
 end
 
 def run_in_shell(*args)
-  POSIX::Spawn::Child.new *args, :out => [JEKYLL_COMMAND_OUTPUT_FILE, "w"]
+  POSIX::Spawn::Child.new *args, out: [JEKYLL_COMMAND_OUTPUT_FILE, "w"]
 end
 
 def slug(title)
@@ -89,6 +89,6 @@ def seconds_agnostic_time(time)
   if time.is_a? Time
     time = time.strftime("%H:%M:%S")
   end
-  hour, minutes, _ = time.split(":")
+  hour, minutes, = time.split(":")
   "#{hour}:#{minutes}"
 end

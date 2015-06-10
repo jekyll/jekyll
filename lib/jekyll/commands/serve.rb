@@ -2,9 +2,7 @@
 module Jekyll
   module Commands
     class Serve < Command
-
       class << self
-
         def init_with_program(prog)
           prog.command(:serve) do |c|
             c.syntax 'serve [options]'
@@ -76,23 +74,23 @@ module Jekyll
 
         def webrick_options(config)
           opts = {
-            :BindAddress        => config['host'],
-            :DirectoryIndex     => %w(index.html index.htm index.cgi index.rhtml index.xml),
-            :DocumentRoot       => config['destination'],
-            :DoNotReverseLookup => true,
-            :MimeTypes          => mime_types,
-            :Port               => config['port'],
-            :StartCallback      => start_callback(config['detach'])
+            BindAddress: config['host'],
+            DirectoryIndex: %w(index.html index.htm index.cgi index.rhtml index.xml),
+            DocumentRoot: config['destination'],
+            DoNotReverseLookup: true,
+            MimeTypes: mime_types,
+            Port: config['port'],
+            StartCallback: start_callback(config['detach'])
           }
 
           if config['verbose']
             opts.merge!({
-              :Logger => WEBrick::Log.new($stdout, WEBrick::Log::DEBUG)
+              Logger: WEBrick::Log.new($stdout, WEBrick::Log::DEBUG)
             })
           else
             opts.merge!({
-              :AccessLog => [],
-              :Logger => WEBrick::Log.new([], WEBrick::Log::WARN)
+              AccessLog: [],
+              Logger: WEBrick::Log.new([], WEBrick::Log::WARN)
             })
           end
 
@@ -116,13 +114,13 @@ module Jekyll
 
         def start_callback(detached)
           unless detached
-            Proc.new { Jekyll.logger.info "Server running...", "press ctrl-c to stop." }
+            proc { Jekyll.logger.info "Server running...", "press ctrl-c to stop." }
           end
         end
 
         def mime_types
           mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
-          WEBrick::HTTPUtils::load_mime_types(mime_types_file)
+          WEBrick::HTTPUtils.load_mime_types(mime_types_file)
         end
 
         def server_address(server, options)
@@ -139,13 +137,11 @@ module Jekyll
         # recreate NondisclosureName under utf-8 circumstance
         def file_handler_options
           WEBrick::Config::FileHandler.merge({
-            :FancyIndexing     => true,
-            :NondisclosureName => ['.ht*','~*']
+            FancyIndexing: true,
+            NondisclosureName: ['.ht*', '~*']
           })
         end
-
       end
-
     end
   end
 end

@@ -30,12 +30,12 @@ require 'shoulda'
 include Jekyll
 
 # FIXME: If we really need this we lost the game.
-STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
+STDERR.reopen(test('e', '/dev/null') ? '/dev/null' : 'NUL:')
 
 # Report with color.
 Minitest::Reporters.use! [
   Minitest::Reporters::DefaultReporter.new(
-    :color => true
+    color: true
   )
 ]
 
@@ -43,8 +43,8 @@ class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
 
   def mocks_expect(*args)
-    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect).\
-      bind(self).call(*args)
+    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect)\
+      .bind(self).call(*args)
   end
 
   def before_setup

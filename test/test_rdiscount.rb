@@ -1,7 +1,6 @@
 require 'helper'
 
 class TestRdiscount < JekyllUnitTest
-
   context "rdiscount" do
     setup do
       if jruby?

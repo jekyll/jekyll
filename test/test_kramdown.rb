@@ -15,7 +15,7 @@ class TestKramdown < JekyllUnitTest
           'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
 
           'enable_coderay'   => true,
-          'coderay_bold_every'=> 12,
+          'coderay_bold_every' => 12,
           'coderay' => {
             'coderay_css'        => :style,
             'coderay_bold_every' => 8
@@ -32,11 +32,11 @@ class TestKramdown < JekyllUnitTest
     end
 
     should "convert quotes to smart quotes" do
-      assert_match /<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>/, @markdown.convert(%{"Pit'hy"}).strip
+      assert_match /<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>/, @markdown.convert(%("Pit'hy")).strip
 
       override = { 'kramdown' => { 'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo' } }
       markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-      assert_match /<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)<\/p>/, markdown.convert(%{"Pit'hy"}).strip
+      assert_match /<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)<\/p>/, markdown.convert(%("Pit'hy")).strip
     end
 
     context "moving up nested coderay options" do

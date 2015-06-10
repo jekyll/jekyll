@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
@@ -33,7 +33,6 @@ SafeYAML::OPTIONS[:suppress_warnings] = true
 Liquid::Template.error_mode = :strict
 
 module Jekyll
-
   # internal requires
   autoload :Cleaner,             'jekyll/cleaner'
   autoload :Collection,          'jekyll/collection'
@@ -97,7 +96,7 @@ module Jekyll
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
-    def configuration(override = Hash.new)
+    def configuration(override = {})
       config = Configuration[Configuration::DEFAULTS]
       override = Configuration[override].stringify_keys
       unless override.delete('skip_config_files')
@@ -167,7 +166,6 @@ module Jekyll
 
     # Conditional optimizations
     Jekyll::External.require_if_present('liquid-c')
-
   end
 end
 
