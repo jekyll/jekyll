@@ -20,7 +20,6 @@ module Jekyll
 
       def initialize(tag_name, markup, tokens)
         super
-        @includes_dir = tag_includes_dir
         matched = markup.strip.match(VARIABLE_SYNTAX)
         if matched
           @file = matched['variable'].strip
@@ -100,12 +99,13 @@ eos
         end
       end
 
-      def tag_includes_dir
-        '_includes'.freeze
+      def tag_includes_dir(context)
+        context.registers[:site].config['includes_dir'].freeze
       end
 
       def render(context)
         site = context.registers[:site]
+        @includes_dir = tag_includes_dir(context)
         dir = resolved_includes_dir(context)
 
         file = render_variable(context) || @file
@@ -161,7 +161,7 @@ eos
     end
 
     class IncludeRelativeTag < IncludeTag
-      def tag_includes_dir
+      def tag_includes_dir(context)
         '.'.freeze
       end
 
