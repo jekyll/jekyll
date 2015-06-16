@@ -2,11 +2,12 @@
 
 ### Major Enhancements
 
-  * Add basic support for JRuby (commit: 0f4477)
+  * Liquid profiler (i.e. know how fast or slow your templates render) (#3762)
   * Incremental regeneration (#3116)
   * Add Hooks: a new kind of plugin (#3553)
-  * Drop support for Ruby 1.9.3. (#3235)
   * Upgrade to Liquid 3.0.0 (#3002)
+  * Add basic support for JRuby (commit: 0f4477)
+  * Drop support for Ruby 1.9.3. (#3235)
   * Support Ruby v2.2 (#3234)
   * Support RDiscount 2 (#2767)
   * Remove most runtime deps (#3323)
