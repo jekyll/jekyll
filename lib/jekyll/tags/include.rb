@@ -95,7 +95,7 @@ eos
       # Render the variable if required
       def render_variable(context)
         if @file.match(VARIABLE_SYNTAX)
-          partial = Liquid::Template.parse(@file)
+          partial = context.registers[:site].liquid_renderer.file("(variable)").parse(@file)
           partial.render!(context)
         end
       end
@@ -123,7 +123,7 @@ eos
         end
 
         begin
-          partial = Liquid::Template.parse(read_file(path, context))
+          partial = site.liquid_renderer.file(path).parse(read_file(path, context))
 
           context.stack do
             context['include'] = parse_params(context) if @params
