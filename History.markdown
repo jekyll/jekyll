@@ -79,6 +79,7 @@
   * Performance: Sort files only once (#3707)
   * Performance: Marshal metadata (#3706)
   * Upgrade highlight wrapper from `div` to `figure` (#3779)
+  * Upgrade mime-types to `~> 2.6` (#3795)
 
 ### Bug Fixes
 
@@ -145,6 +146,7 @@
   * Force minitest version to 5.5.1 (#3657)
   * Update the way cucumber accesses Minitest assertions (#3678)
   * Add `script/rubyprof` to generate cachegrind callgraphs (#3692)
+  * Upgrade cucumber to 2.x (#3795)
 
 ### Site Enhancements
 
