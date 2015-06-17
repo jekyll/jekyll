@@ -20,13 +20,13 @@ if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
 end
 
 gem 'rake', '~> 10.1'
-gem 'rdoc', '~> 3.11'
+gem 'rdoc', '~> 4.2'
 gem 'redgreen', '~> 1.2'
 gem 'shoulda', '~> 3.5'
-gem 'cucumber', '1.3.18'
+gem 'cucumber', '~> 2.0'
 gem 'launchy', '~> 2.3'
 gem 'simplecov', '~> 0.9'
-gem 'mime-types', '~> 1.5'
+gem 'mime-types', '~> 2.6'
 gem 'kramdown', '~> 1.7.0'
 gem 'jekyll_test_plugin'
 gem 'jekyll_test_plugin_malicious'
