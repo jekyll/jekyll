@@ -11,11 +11,16 @@ unless ENV['TRAVIS']
 end
 
 require 'rubygems'
+<<<<<<< HEAD
 require 'ostruct'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/profile'
 require 'rspec/mocks'
+=======
+require 'test/unit'
+gem 'RedCloth', '>= 4.2.1'
+>>>>>>> jekyll/0.12.1-release
 
 require 'jekyll'
 
