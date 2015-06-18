@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 source 'https://rubygems.org'
+=======
+source "https://rubygems.org"
+>>>>>>> jekyll/0.12.1-release
 gemspec
 
 gem 'pry'

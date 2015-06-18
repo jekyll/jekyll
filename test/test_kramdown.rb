@@ -32,6 +32,7 @@ class TestKramdown < JekyllUnitTest
     end
 
     should "convert quotes to smart quotes" do
+<<<<<<< HEAD
       assert_match /<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>/, @markdown.convert(%{"Pit'hy"}).strip
 
       override = { 'kramdown' => { 'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo' } }
@@ -57,6 +58,14 @@ class TestKramdown < JekyllUnitTest
       should "not overwrite" do
         assert_equal 12, @converter_config['coderay_bold_every']
       end
+=======
+      markdown = MarkdownConverter.new(@config)
+      assert_equal "<p>&#8220;Pit&#8217;hy&#8221;</p>", markdown.convert(%{"Pit'hy"}).strip
+
+      override = { 'kramdown' => { 'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo' } }
+      markdown = MarkdownConverter.new(@config.deep_merge(override))
+      assert_equal "<p>&#171;Pit&#8250;hy&#187;</p>", markdown.convert(%{"Pit'hy"}).strip
+>>>>>>> jekyll/0.12.1-release
     end
   end
 end
