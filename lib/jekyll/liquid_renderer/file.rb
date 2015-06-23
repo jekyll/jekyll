@@ -33,9 +33,9 @@ module Jekyll
       private
 
       def measure_bytes
-        str = yield
-      ensure
-        @renderer.increment_bytes(@filename, str.bytesize)
+        yield.tap do |str|
+          @renderer.increment_bytes(@filename, str.bytesize)
+        end
       end
 
       def measure_time
