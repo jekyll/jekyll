@@ -12,6 +12,8 @@ knowledge and lessons that have been unearthed by Windows users.
 
 Julian Thilo has written up instructions to get
 [Jekyll running on Windows][windows-installation] and it seems to work for most.
+The instructions were written for Ruby 2.0.0, but should work for later versions
+[prior to 2.2][hitimes-issue].
 
 ## Encoding
 
@@ -28,6 +30,7 @@ $ chcp 65001
 {% endhighlight %}
 
 [windows-installation]: http://jekyll-windows.juthilo.com/
+[hitimes-issue]: https://github.com/copiousfreetime/hitimes/issues/40
 
 ## Auto-regeneration
 
