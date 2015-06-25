@@ -21,13 +21,13 @@ the header files for compiling extension modules for Ruby 2.0.0. This
 can be done on Ubuntu or Debian by running:
 
 {% highlight bash %}
-apt-get install ruby2.0.0-dev
+[sudo] apt-get install ruby2.0.0-dev
 {% endhighlight %}
 
 On Red Hat, CentOS, and Fedora systems you can do this by running:
 
 {% highlight bash %}
-yum install ruby-devel
+[sudo] yum install ruby-devel
 {% endhighlight %}
 
 On [NearlyFreeSpeech](https://www.nearlyfreespeech.net/) you need to run the
