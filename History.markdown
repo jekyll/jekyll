@@ -80,6 +80,7 @@
   * Performance: Marshal metadata (#3706)
   * Upgrade highlight wrapper from `div` to `figure` (#3779)
   * Upgrade mime-types to `~> 2.6` (#3795)
+  * Update windows.md with Ruby version info (#3818)
 
 ### Bug Fixes
 
