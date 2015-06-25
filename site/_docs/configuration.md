@@ -180,7 +180,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Enable auto-regeneration of the site when files are modified.</p>
       </td>
       <td class="align-center">
-        <p><code class="flag">-w, --watch</code></p>
+        <p><code class="flag">-w, --watch, --no-watch</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -604,7 +604,7 @@ class Jekyll::Converters::Markdown::MyCustomProcessor
     @config = config
   rescue LoadError
     STDERR.puts 'You are missing a library required for Markdown. Please run:'
-    STDERR.puts '  $ [sudo] gem install funky_markdown'
+    STDERR.puts '  $ gem install funky_markdown'
     raise FatalException.new("Missing dependency: funky_markdown")
   end
 

@@ -20,6 +20,8 @@ requirements you’ll need to make sure your system has before you start.
 - Linux, Unix, or Mac OS X
 - [NodeJS](http://nodejs.org), or another JavaScript runtime (for
   CoffeeScript support).
+- A Ruby manager of your choosing (usually [rbenv](http://rbenv.org) or
+  [RVM](http://rvm.io))
 
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>

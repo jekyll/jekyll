@@ -21,13 +21,13 @@ the header files for compiling extension modules for Ruby 2.0.0. This
 can be done on Ubuntu or Debian by running:
 
 {% highlight bash %}
-sudo apt-get install ruby2.0.0-dev
+apt-get install ruby2.0.0-dev
 {% endhighlight %}
 
 On Red Hat, CentOS, and Fedora systems you can do this by running:
 
 {% highlight bash %}
-sudo yum install ruby-devel
+yum install ruby-devel
 {% endhighlight %}
 
 On [NearlyFreeSpeech](https://www.nearlyfreespeech.net/) you need to run the
@@ -51,7 +51,7 @@ Tools](http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-nati
 that will allow you to install native gems using the following command:
 
 {% highlight bash %}
-sudo gem install jekyll
+gem install jekyll
 {% endhighlight %}
 
 To install RubyGems on Gentoo:
