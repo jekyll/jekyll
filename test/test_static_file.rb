@@ -18,6 +18,16 @@ class TestStaticFile < JekyllUnitTest
     StaticFile.new(@site, base, dir, name)
   end
 
+  def setup_static_file_with_collection(base, dir, name, label, metadata)
+    site = fixture_site 'collections' => {label => metadata}
+    StaticFile.new(site, base, dir, name, site.collections[label])
+  end
+
+  def setup_static_file_with_defaults(base, dir, name, defaults)
+    site = fixture_site 'defaults' => defaults
+    StaticFile.new(site, base, dir, name)
+  end
+
   context "A StaticFile" do
     setup do
       clear_dest
@@ -46,7 +56,44 @@ class TestStaticFile < JekyllUnitTest
 
     should "have a destination relative directory without a collection" do
       static_file = setup_static_file("root", "dir/subdir", "file.html")
-      assert "dir/subdir", static_file.destination_rel_dir
+      assert_equal nil, static_file.type
+      assert_equal "dir/subdir/file.html", static_file.url
+      assert_equal "dir/subdir", static_file.destination_rel_dir
+    end
+
+    should "have a destination relative directory with a collection" do
+      static_file = setup_static_file_with_collection(
+        "root", "_foo/dir/subdir", "file.html", "foo", {"output" => true})
+      assert_equal :foo, static_file.type
+      assert_equal "/foo/dir/subdir/file.html", static_file.url
+      assert_equal "/foo/dir/subdir", static_file.destination_rel_dir
+    end
+
+    should "use its collection's permalink template for the destination relative directory" do
+      static_file = setup_static_file_with_collection(
+        "root", "_foo/dir/subdir", "file.html", "foo",
+        {"output" => true, "permalink" => "/:path/"})
+      assert_equal :foo, static_file.type
+      assert_equal "/dir/subdir/file.html", static_file.url
+      assert_equal "/dir/subdir", static_file.destination_rel_dir
+    end
+
+    should "be writable by default" do
+      static_file = setup_static_file("root", "dir/subdir", "file.html")
+      assert(static_file.write?,
+        "static_file.write? should return true by default")
+    end
+
+    should "use the _config.yml defaults to determine writability" do
+      defaults = [{
+        "scope" => {"path" => "private"},
+        "values" => {"published" => false}
+      }]
+      static_file = setup_static_file_with_defaults(
+        "root", "private/dir/subdir", "file.html", defaults)
+      assert(!static_file.write?,
+        "static_file.write? should return false when _config.yml sets " +
+        "`published: false`")
     end
 
     should "know its last modification time" do
