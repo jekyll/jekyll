@@ -119,6 +119,7 @@
   * Fix typo on line 19 of pagination.md (#3760)
   * Fix it so that 'blog.html' matches 'blog.html' (#3732)
   * Remove occasionally-problematic `ensure` in `LiquidRenderer` (#3811)
+  * Fixed an unclear code comment in site template SCSS (#3837)
 
 ### Development Fixes
 
