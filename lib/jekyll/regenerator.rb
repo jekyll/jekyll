@@ -130,9 +130,7 @@ module Jekyll
     #
     # Returns nothing.
     def write_metadata
-      File.open(metadata_file, 'wb') do |f|
-        f.write(Marshal.dump(metadata))
-      end
+      File.binwrite(metadata_file, Marshal.dump(metadata))
     end
 
     # Produce the absolute path of the metadata file
@@ -158,7 +156,7 @@ module Jekyll
     # Returns the read metadata.
     def read_metadata
       @metadata = if !disabled? && File.file?(metadata_file)
-        content = File.read(metadata_file)
+        content = File.binread(metadata_file)
 
         begin
           Marshal.load(content)
