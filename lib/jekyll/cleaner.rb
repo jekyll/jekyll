@@ -95,11 +95,11 @@ module Jekyll
     #
     # Examples
     #   ['.git','.svn'] with site.dest "/myblog/_site" creates 
-    #   the following regex: /\/myblog\/_site\/(\.git|\/.svn)/
+    #   the following regex: /\A\/myblog\/_site\/(\.git|\/.svn)/
     #
     # Returns the regular expression
     def keep_file_regex
-      /#{Regexp.quote(site.dest)}\/(#{Regexp.union(site.keep_files).source})/
+      /\A#{Regexp.quote(site.dest)}\/(#{Regexp.union(site.keep_files).source})/
     end
   end
 end
