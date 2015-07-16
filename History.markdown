@@ -152,6 +152,7 @@
   * Update the way cucumber accesses Minitest assertions (#3678)
   * Add `script/rubyprof` to generate cachegrind callgraphs (#3692)
   * Upgrade cucumber to 2.x (#3795)
+  * Update Kramdown. (#3853)
 
 ### Site Enhancements
 
