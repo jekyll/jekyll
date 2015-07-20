@@ -153,6 +153,7 @@
   * Add `script/rubyprof` to generate cachegrind callgraphs (#3692)
   * Upgrade cucumber to 2.x (#3795)
   * Update Kramdown. (#3853)
+  * Updated the scripts shebang for portability (#3858)
 
 ### Site Enhancements
 
