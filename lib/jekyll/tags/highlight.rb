@@ -113,7 +113,7 @@ eos
           "class=\"language-#{@lang.to_s.gsub('+', '-')}\"",
           "data-lang=\"#{@lang.to_s}\""
         ].join(" ")
-        "<div class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></div>"
+        "<figure class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></figure>"
       end
 
     end

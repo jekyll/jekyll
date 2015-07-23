@@ -574,15 +574,14 @@ All other extensions retain their usual names from Redcarpet, and no renderer
 options aside from `smart` can be specified in Jekyll. [A list of available
 extensions can be found in the Redcarpet README file.][redcarpet_extensions]
 Make sure you're looking at the README for the right version of
-Redcarpet: Jekyll currently uses v2.2.x, and extensions like `footnotes` and
-`highlight` weren't added until after version 3.0.0. The most commonly used
+Redcarpet: Jekyll currently uses v3.2.x. The most commonly used
 extensions are:
 
 - `tables`
 - `no_intra_emphasis`
 - `autolink`
 
-[redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v2.2.2/README.markdown#and-its-like-really-simple-to-use
+[redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v3.2.2/README.markdown#and-its-like-really-simple-to-use
 
 ### Kramdown
 

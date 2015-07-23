@@ -29,7 +29,7 @@ module Jekyll
           include CommonMethods
 
           def code_wrap(code)
-            "<div class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></div>"
+            "<figure class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></figure>"
           end
 
           def block_code(code, lang)
