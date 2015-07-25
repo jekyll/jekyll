@@ -154,6 +154,7 @@
   * Upgrade cucumber to 2.x (#3795)
   * Update Kramdown. (#3853)
   * Updated the scripts shebang for portability (#3858)
+  * Update JRuby testing to 9K ([3ab386f](https://github.com/jekyll/jekyll/commit/3ab386f1b096be25a24fe038fc70fd0fb08d545d))
 
 ### Site Enhancements
 
