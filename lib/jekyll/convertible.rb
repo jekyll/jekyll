@@ -144,6 +144,15 @@ module Jekyll
       end
     end
 
+    # returns the owner symbol for hook triggering
+    def hook_owner
+      if is_a?(Post)
+        :post
+      elsif is_a?(Page)
+        :page
+      end
+    end
+
     # Determine whether the document is an asset file.
     # Asset files include CoffeeScript files and Sass/SCSS files.
     #
@@ -236,7 +245,7 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      Jekyll::Hooks.trigger self, :pre_render, payload
+      Jekyll::Hooks.trigger hook_owner, :pre_render, self, payload
       info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
@@ -250,7 +259,7 @@ module Jekyll
       self.output = content
 
       render_all_layouts(layouts, payload, info) if place_in_layout?
-      Jekyll::Hooks.trigger self, :post_render
+      Jekyll::Hooks.trigger hook_owner, :post_render, self
     end
 
     # Write the generated page file to the destination directory.
@@ -264,7 +273,7 @@ module Jekyll
       File.open(path, 'wb') do |f|
         f.write(output)
       end
-      Jekyll::Hooks.trigger self, :post_write
+      Jekyll::Hooks.trigger hook_owner, :post_write, self
     end
 
     # Accessor for data properties by Liquid.

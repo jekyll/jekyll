@@ -1,13 +1,5 @@
 module Jekyll
   module Hooks
-    # Helps look up hooks from the registry by owner's class
-    OWNER_MAP = {
-      Jekyll::Site => :site,
-      Jekyll::Page => :page,
-      Jekyll::Post => :post,
-      Jekyll::Document => :document,
-    }.freeze
-
     DEFAULT_PRIORITY = 20
 
     # compatibility layer for octopress-hooks users
@@ -88,19 +80,17 @@ module Jekyll
     end
 
     # interface for Jekyll core components to trigger hooks
-    def self.trigger(instance, event, *args)
-      owner_symbol = OWNER_MAP[instance.class]
-
+    def self.trigger(owner, event, *args)
       # proceed only if there are hooks to call
-      return unless @registry[owner_symbol]
-      return unless @registry[owner_symbol][event]
+      return unless @registry[owner]
+      return unless @registry[owner][event]
 
       # hooks to call for this owner and event
-      hooks = @registry[owner_symbol][event]
+      hooks = @registry[owner][event]
 
       # sort and call hooks according to priority and load order
       hooks.sort_by { |h| @hook_priority[h] }.each do |hook|
-        hook.call(instance, *args)
+        hook.call(*args)
       end
     end
   end

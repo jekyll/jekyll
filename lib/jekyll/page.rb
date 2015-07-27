@@ -36,7 +36,7 @@ module Jekyll
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
-      Jekyll::Hooks.trigger self, :post_init
+      Jekyll::Hooks.trigger :page, :post_init, self
     end
 
     # The generated directory into which the page will be placed
