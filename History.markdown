@@ -121,6 +121,7 @@
   * Remove occasionally-problematic `ensure` in `LiquidRenderer` (#3811)
   * Fixed an unclear code comment in site template SCSS (#3837)
   * Fix reading of binary metadata file (#3845)
+  * Remove var collision with site template header menu iteration variable (#3838)
 
 ### Development Fixes
 
