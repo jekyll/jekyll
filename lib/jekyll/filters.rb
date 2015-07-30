@@ -155,7 +155,7 @@ module Jekyll
     # Examples
     #
     #   array_to_sentence_string(["apples", "oranges", "grapes"])
-    #   # => "apples, oranges, and grapes"
+    #   # => "apples, oranges and grapes"
     #
     # Returns the formatted String.
     def array_to_sentence_string(array)
