@@ -54,8 +54,8 @@ class TestFilters < JekyllUnitTest
     end
 
     should "convert array to sentence string with multiple args" do
-      assert_equal "1, 2, 3, and 4", @filter.array_to_sentence_string([1, 2, 3, 4])
-      assert_equal "chunky, bacon, bits, and pieces", @filter.array_to_sentence_string(["chunky", "bacon", "bits", "pieces"])
+      assert_equal "1, 2, 3 and 4", @filter.array_to_sentence_string([1, 2, 3, 4])
+      assert_equal "chunky, bacon, bits and pieces", @filter.array_to_sentence_string(["chunky", "bacon", "bits", "pieces"])
     end
 
     context "date filters" do
