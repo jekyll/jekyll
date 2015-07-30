@@ -63,12 +63,12 @@ your <code>_config.yml</code> file, with the addition of the preceding <code>_</
   </p>
 </div>
 
-Alternatively, you can place your collection folder wherever you like, and specify the path to this folder in the collection's metadata under `relative_path`:
+Alternatively, you can place your collection folder wherever you like, and specify the path to this folder in the collection's metadata under `relative_directory`:
 
 {% highlight yaml %}
 collections:
   my_collection:
-      relative_path: path/to/my/collection
+      relative_directory: path/to/my/collection
 {% endhighlight %}
 
 In the above example, the collection would be located at `<source>/path/to/my/collection` instead of `<source>/_my_collection`.
