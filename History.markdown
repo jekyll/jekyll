@@ -226,6 +226,7 @@
   * Detailed instructions for rsync deployment method (#3848)
   * Add Jekyll Portfolio Generator to list of plugins (#3883)
   * Add `site.html_files` to variables docs (#3880)
+  * Add Static Publisher tool to list of deployment methods (#3865)
 
 ## 2.5.3 / 2014-12-22
 
