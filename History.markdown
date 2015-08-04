@@ -224,6 +224,7 @@
   * Add `jekyll-asciinema` to list of third-party plugins (#3750)
   * Update pagination example to be agnostic to first pagination dir (#3763)
   * Detailed instructions for rsync deployment method (#3848)
+  * Add Jekyll Portfolio Generator to list of plugins (#3883)
 
 ## 2.5.3 / 2014-12-22
 
