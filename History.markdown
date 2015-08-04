@@ -122,6 +122,7 @@
   * Fixed an unclear code comment in site template SCSS (#3837)
   * Fix reading of binary metadata file (#3845)
   * Remove var collision with site template header menu iteration variable (#3838)
+  * Change non-existent `hl_linenos` to `hl_lines` to allow passthrough in safe mode (#3787)
 
 ### Development Fixes
 
