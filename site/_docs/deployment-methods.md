@@ -84,6 +84,10 @@ host your site directly on a CDN or file host like S3.
 Setup steps are fully documented
 [in the `jekyll-hook` repo](https://github.com/developmentseed/jekyll-hook).
 
+### Static Publisher
+
+[Static Publisher](https://github.com/static-publisher/static-publisher) is another automated deployment option with a server listening for webhook posts, though it's not tied to GitHub specifically. It has a one-click deploy to Heroku, it can watch multiple projects from one server, it has an easy to user admin interface and can publish to either S3 or to a git repository (e.g. gh-pages).
+
 ### Rake
 
 Another way to deploy your Jekyll site is to use [Rake](https://github.com/jimweirich/rake), [HighLine](https://github.com/JEG2/highline), and
