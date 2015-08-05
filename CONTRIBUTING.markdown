@@ -40,7 +40,7 @@ Before you start, run the tests and make sure that they pass (to confirm your
 environment is configured properly):
 
     $ bundle exec rake test
-    $ bundle exec rake features
+    $ bundle exec script/cucumber
 
 Workflow
 --------
