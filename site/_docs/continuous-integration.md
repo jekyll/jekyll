@@ -29,6 +29,8 @@ The simplest test script simply runs `jekyll build` and ensures that Jekyll
 doesn't fail to build the site. It doesn't check the resulting site, but it
 does ensure things are built properly.
 
+Save the script commands in a file: ```./script/cibuild```
+
 When testing Jekyll output, there is no better tool than [html-proofer][2].
 This tool checks your resulting site to ensure all links and images exist.
 Utilize it either with the convenient `htmlproof` command-line executable,
@@ -47,6 +49,10 @@ bundle exec htmlproof ./_site
 Some options can be specified via command-line switches. Check out the
 `html-proofer` README for more information about these switches, or run
 `htmlproof --help` locally.
+
+For example to avoid testing external sites, use this command:
+
+    bundle exec htmlproof ./_site --disable-external
 
 ### The HTML Proofer Library
 
@@ -81,11 +87,16 @@ gem "jekyll"
 gem "html-proofer"
 {% endhighlight %}
 
+Your ``.travis.yml`` file should look like this:
 
 {% highlight yaml %}
 language: ruby
 rvm:
 - 2.1
+
+before_script:
+ - chmod +x ./script/cibuild
+
 # Assume bundler is being used, install step will run `bundle install`.
 script: ./script/cibuild
 
@@ -117,6 +128,14 @@ rvm:
 RVM is a popular Ruby Version Manager (like rbenv, chruby, etc). This
 directive tells Travis the Ruby version to use when running your test
 script.
+
+{% highlight yaml %}
+before_script:
+ - chmod +x ./script/cibuild
+{% endhighlight %}
+
+The build script file needs to have the *executable* attribute set or
+Travis will fail with a permission denied error.
 
 {% highlight yaml %}
 script: ./script/cibuild
@@ -152,7 +171,8 @@ a pull request flow for proposing changes, you may wish to enforce a
 convention for your builds such that all branches containing edits are
 prefixed, exemplified above with the `/pages-(.*)/` regular expression.
 
-The `branches` directive is completely optional.
+The `branches` directive is completely optional. Travis will build from every
+push to the ``master`` branch of your repo if leave it out.
 
 {% highlight yaml %}
 env:
@@ -176,6 +196,15 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 {% highlight yaml %}
 exclude: [vendor]
 {% endhighlight %}
+
+### Troubleshooting
+
+**Travis error:** *"You are trying to install in deployment mode after changing
+your Gemfile. Run `bundle install` elsewhere and add the updated Gemfile.lock
+to version control."*
+
+**Workaround:** remove the ``Gemfile.lock`` file from your repository and add an
+entry in the ``.gitignore`` file to avoid it from being checked in again.
 
 ### Questions?
 
