@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Releases</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -194,7 +194,7 @@ improved problematic code that caused slow-downs.</li>
 
 <p>To install just run:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll --pre</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll --pre</code></pre></figure>
 
 <p>Future versions will include <a href="https://github.com/jekyll/jekyll/issues/3324">some awesome new
 features</a> that we haven’t
@@ -743,13 +743,13 @@ things to look forward to:</p>
     <p>The hawk-eyed <a href="https://github.com/gregose">@gregose</a> spotted a bug in our
 <code>Jekyll.sanitized_path</code> code:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
-<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/../../../etc/passwd&quot;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/../../../etc/passwd&quot;</span></code></pre></figure>
 
 <p>Well, we can’t have that! In 1.5.1, you’ll instead see:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
-<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/..c:/..c:/..c:/etc/passwd&quot;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/..c:/..c:/..c:/etc/passwd&quot;</span></code></pre></figure>
 
 <p>Luckily not affecting 1.4.x, this fix will make 1.5.0 that much safer for
 the masses. Thanks, Greg!</p>

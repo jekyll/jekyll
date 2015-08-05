@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Contributing</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2175,10 +2175,12 @@
 following in mind:</p>
 
 <ul>
+  <li><strong>Use https://talk.jekyllrb.com for non-technical or indirect Jekyll questions that are not bugs.</strong></li>
+  <li><strong>Contributions will not be accepted without tests or necessary documentation updates.</strong></li>
   <li>If you’re creating a small fix or patch to an existing feature, just a simple
 test will do. Please stay in the confines of the current test suite and use
 <a href="https://github.com/thoughtbot/shoulda/tree/master">Shoulda</a> and
-<a href="https://github.com/rspec/rspec-mocks/">RSpec Mocks</a>.</li>
+<a href="https://github.com/rspec/rspec-mocks">RSpec-Mocks</a>.</li>
   <li>If it’s a brand new feature, make sure to create a new
 <a href="https://github.com/cucumber/cucumber/">Cucumber</a> feature and reuse steps
 where appropriate. Also, whipping up some documentation in your fork’s <code>site</code>
@@ -2208,16 +2210,29 @@ will also speed up review time.</li>
 <h2 id="test-dependencies">Test Dependencies</h2>
 
 <p>To run the test suite and build the gem you’ll need to install Jekyll’s
-dependencies. Jekyll uses Bundler, so a quick run of the <code>bundle</code> command and
-you’re all set!</p>
+dependencies. Simply run this command to get all setup:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle</code></pre></div>
+<pre><code>$ script/bootstrap
+</code></pre>
 
 <p>Before you start, run the tests and make sure that they pass (to confirm your
 environment is configured properly):</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rake <span class="nb">test</span>
-<span class="nv">$ </span>bundle <span class="nb">exec </span>rake features</code></pre></div>
+<pre><code>$ script/cibuild
+</code></pre>
+
+<p>If you are only updating a file in <code>test/</code>, you can use the command:</p>
+
+<pre><code>$ script/test test/blah_test.rb
+</code></pre>
+
+<p>If you are only updating a <code>.feature</code> file, you can use the command:</p>
+
+<pre><code>$ script/cucumber features/blah.feature
+</code></pre>
+
+<p>Both <code>script/test</code> and <code>script/cucumber</code> can be run without arguments to
+run its entire respective suite.</p>
 
 <h2 id="workflow">Workflow</h2>
 
@@ -2225,29 +2240,14 @@ environment is configured properly):</p>
 
 <ul>
   <li>Fork the project.</li>
-  <li>Clone down your fork:</li>
-</ul>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone git://github.com/&lt;username&gt;/jekyll.git</code></pre></div>
-
-<ul>
-  <li>Create a topic branch to contain your change:</li>
-</ul>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git checkout -b my_awesome_feature</code></pre></div>
-
-<ul>
+  <li>Clone down your fork ( <code>git clone git@github.com:[username]/jekyll.git</code> ).</li>
+  <li>Create a topic branch to contain your change ( <code>git checkout -b my_awesome_feature</code> ).</li>
   <li>Hack away, add tests. Not necessarily in that order.</li>
-  <li>Make sure everything still passes by running <code>rake</code>.</li>
+  <li>Make sure everything still passes by running <code>script/cibuild</code>.</li>
   <li>If necessary, rebase your commits into logical chunks, without errors.</li>
-  <li>Push the branch up:</li>
-</ul>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git push origin my_awesome_feature</code></pre></div>
-
-<ul>
-  <li>Create a pull request against jekyll/jekyll:master and describe what your
-change does and the why you think it should be merged.</li>
+  <li>Push the branch up ( <code>git push origin my_awesome_feature</code> ).</li>
+  <li>Create a pull request against jekyll/jekyll and describe what your change
+does and the why you think it should be merged.</li>
 </ul>
 
 <h2 id="updating-documentation">Updating Documentation</h2>
@@ -2264,8 +2264,7 @@ Jekyll’s repo on GitHub.com.</p>
 requests directed at another branch will not be accepted.</p>
 
 <p>The <a href="https://github.com/jekyll/jekyll/wiki">Jekyll wiki</a> on GitHub
-can be freely updated without a pull request as all
-GitHub users have access.</p>
+can be freely updated without a pull request as all GitHub users have access.</p>
 
 <p>If you want to add your plugin to the <a href="/docs/plugins/#available-plugins">list of plugins</a>,
 please submit a pull request modifying the <a href="https://github.com/jekyll/jekyll/blob/master/site/_docs/plugins.md">plugins page source
@@ -2275,15 +2274,15 @@ link to your plugin under the proper subheading depending upon its type.</p>
 <h2 id="gotchas">Gotchas</h2>
 
 <ul>
-  <li>If you want to bump the gem version, please put that in a separate commit.
-This way, the maintainers can control when the gem gets released.</li>
+  <li>Please do not bump the gem version in your pull requests.</li>
   <li>Try to keep your patch(es) based from the latest commit on jekyll/jekyll.
-The easier it is to apply your work, the less work the maintainers have to
-do, which is always a good thing.</li>
-  <li>Please don’t tag your GitHub issue with [fix], [feature], etc. The
-maintainers actively read the issues and will label it once they come across
-it.</li>
+The easier it is to apply your work, the less work the maintainers have to do,
+which is always a good thing.</li>
+  <li>Please don’t tag your GitHub issue with [fix], [feature], etc. The maintainers
+actively read the issues and will label it once they come across it.</li>
 </ul>
+
+<h2 id="finally">Finally…</h2>
 
 <div class="note">
   <h5>Let us know what could be better!</h5>

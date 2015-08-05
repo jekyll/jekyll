@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Templates</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2436,7 +2436,7 @@ The default is <code>default</code>. They are as follows (with what they filter)
 <p>If you have small page fragments that you wish to include in multiple places on
 your site, you can use the <code>include</code> tag.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span><span class="o">%</span> <span class="kp">include</span> <span class="n">footer</span><span class="o">.</span><span class="n">html</span> <span class="o">%</span><span class="p">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span><span class="o">%</span> <span class="kp">include</span> <span class="n">footer</span><span class="o">.</span><span class="n">html</span> <span class="o">%</span><span class="p">}</span></code></pre></figure>
 
 <p>Jekyll expects all include files to be placed in an <code>_includes</code> directory at the
 root of your source directory. This will embed the contents of
@@ -2455,17 +2455,17 @@ root of your source directory. This will embed the contents of
 
 <p>You can also pass parameters to an include. Omit the quotation marks to send a variable’s value. Liquid curly brackets should not be used here:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span><span class="o">%</span> <span class="kp">include</span> <span class="n">footer</span><span class="o">.</span><span class="n">html</span> <span class="n">param</span><span class="o">=</span><span class="s2">&quot;value&quot;</span> <span class="n">variable</span><span class="o">-</span><span class="n">param</span><span class="o">=</span><span class="n">page</span><span class="o">.</span><span class="n">variable</span> <span class="o">%</span><span class="p">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span><span class="o">%</span> <span class="kp">include</span> <span class="n">footer</span><span class="o">.</span><span class="n">html</span> <span class="n">param</span><span class="o">=</span><span class="s2">&quot;value&quot;</span> <span class="n">variable</span><span class="o">-</span><span class="n">param</span><span class="o">=</span><span class="n">page</span><span class="o">.</span><span class="n">variable</span> <span class="o">%</span><span class="p">}</span></code></pre></figure>
 
 <p>These parameters are available via Liquid in the include:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{{</span> <span class="kp">include</span><span class="o">.</span><span class="n">param</span> <span class="p">}}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{{</span> <span class="kp">include</span><span class="o">.</span><span class="n">param</span> <span class="p">}}</span></code></pre></figure>
 
 <h4 id="including-files-relative-to-another-file">Including files relative to another file</h4>
 
 <p>You can also choose to include file fragments relative to the current file:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span><span class="o">%</span> <span class="n">include_relative</span> <span class="n">somedir</span><span class="o">/</span><span class="n">footer</span><span class="o">.</span><span class="n">html</span> <span class="o">%</span><span class="p">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span><span class="o">%</span> <span class="n">include_relative</span> <span class="n">somedir</span><span class="o">/</span><span class="n">footer</span><span class="o">.</span><span class="n">html</span> <span class="o">%</span><span class="p">}</span></code></pre></figure>
 
 <p>You won’t need to place your included content within the <code>_includes</code> directory. Instead,
 the inclusion is specifically relative to the file where the tag is being used. For example,
@@ -2491,11 +2491,11 @@ is written in pure Ruby, you don’t need Python on your system!</p>
 
 <p>To render a code block with syntax highlighting, surround your code as follows:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">{% highlight ruby %}
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% highlight ruby %}
 def foo
   puts &#39;foo&#39;
 end
-{% endhighlight %}</code></pre></div>
+{% endhighlight %}</code></pre></figure>
 
 <p>The argument to the <code>highlight</code> tag (<code>ruby</code> in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
@@ -2510,11 +2510,11 @@ Including the <code>linenos</code> argument will force the highlighted code to i
 numbers. For instance, the following code block would include line numbers next
 to each line:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">{% highlight ruby linenos %}
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% highlight ruby linenos %}
 def foo
   puts &#39;foo&#39;
 end
-{% endhighlight %}</code></pre></div>
+{% endhighlight %}</code></pre></figure>
 
 <h4 id="stylesheets-for-syntax-highlighting">Stylesheets for syntax highlighting</h4>
 
@@ -2531,29 +2531,29 @@ numbers from the highlighted code.</p>
 <p>If you would like to include a link to a post on your site, the <code>post_url</code> tag
 will generate the correct permalink URL for the post you specify.</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">{% post_url 2010-07-21-name-of-post %}</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% post_url 2010-07-21-name-of-post %}</code></pre></figure>
 
 <p>If you organize your posts in subdirectories, you need to include subdirectory
 path to the post:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">{% post_url /subdir/2010-07-21-name-of-post %}</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% post_url /subdir/2010-07-21-name-of-post %}</code></pre></figure>
 
 <p>There is no need to include the file extension when using the <code>post_url</code> tag.</p>
 
 <p>You can also use this tag to create a link to a post in Markdown as follows:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">[Name of Link]({% post_url 2010-07-21-name-of-post %})</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">[Name of Link]({% post_url 2010-07-21-name-of-post %})</code></pre></figure>
 
 <h3 id="gist">Gist</h3>
 
 <p>Use the <code>gist</code> tag to easily embed a GitHub Gist onto your site. This works
 with public or secret gists:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">{% gist parkr/931c1c8d465a04042403 %}</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% gist parkr/931c1c8d465a04042403 %}</code></pre></figure>
 
 <p>You may also optionally specify the filename in the gist to display:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">{% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}</code></pre></figure>
 
 
           

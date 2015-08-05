@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Plugins</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2261,7 +2261,7 @@ for more details.</p>
 variables. In the following example the template <code>reading.html</code> has two
 variables <code>ongoing</code> and <code>done</code> that we fill in the generator:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Reading</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Reading</span>
   <span class="k">class</span> <span class="nc">Generator</span> <span class="o">&lt;</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">Generator</span>
     <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
       <span class="n">ongoing</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="no">Book</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:ongoing?</span><span class="p">)</span>
@@ -2271,11 +2271,11 @@ variables <code>ongoing</code> and <code>done</code> that we fill in the generat
       <span class="n">reading</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;done&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">done</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>This is a more complex generator that generates new pages:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
 
   <span class="k">class</span> <span class="nc">CategoryPage</span> <span class="o">&lt;</span> <span class="no">Page</span>
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
@@ -2306,7 +2306,7 @@ variables <code>ongoing</code> and <code>done</code> that we fill in the generat
     <span class="k">end</span>
   <span class="k">end</span>
 
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>In this example, our generator will create a series of files under the
 <code>categories</code> directory for each category, listing the posts in each category
@@ -2353,7 +2353,7 @@ languages are implemented using this method.</p>
 <p>Below is a converter that will take all posts ending in <code>.upcase</code> and process
 them using the <code>UpcaseConverter</code>:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
   <span class="k">class</span> <span class="nc">UpcaseConverter</span> <span class="o">&lt;</span> <span class="no">Converter</span>
     <span class="n">safe</span> <span class="kp">true</span>
     <span class="n">priority</span> <span class="ss">:low</span>
@@ -2370,7 +2370,7 @@ them using the <code>UpcaseConverter</code>:</p>
       <span class="n">content</span><span class="o">.</span><span class="n">upcase</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>Converters should implement at a minimum 3 methods:</p>
 
@@ -2428,14 +2428,14 @@ it will do so with a <code>.html</code> extension.</p>
 subcommands for the <code>jekyll</code> executable. This is possible by including the
 relevant plugins in a <code>Gemfile</code> group called <code>:jekyll_plugins</code>:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
   <span class="n">gem</span> <span class="s2">&quot;my_fancy_jekyll_plugin&quot;</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>Each <code>Command</code> must be a subclass of the <code>Jekyll::Command</code> class and must
 contain one class method: <code>init_with_program</code>. An example:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">MyNewCommand</span> <span class="o">&lt;</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">Command</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">MyNewCommand</span> <span class="o">&lt;</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">Command</span>
   <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
     <span class="k">def</span> <span class="nf">init_with_program</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span>
       <span class="n">prog</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
@@ -2450,7 +2450,7 @@ contain one class method: <code>init_with_program</code>. An example:</p>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>Commands should implement this single class method:</p>
 
@@ -2486,7 +2486,7 @@ hooking into the tagging system. Built-in examples added by Jekyll include the
 <code>highlight</code> and <code>include</code> tags. Below is an example of a custom liquid tag that
 will output the time the page was rendered:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
   <span class="k">class</span> <span class="nc">RenderTimeTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
 
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
@@ -2500,7 +2500,7 @@ will output the time the page was rendered:</p>
   <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;render_time&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></div>
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;render_time&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></figure>
 
 <p>At a minimum, liquid tags must implement:</p>
 
@@ -2528,16 +2528,16 @@ will output the time the page was rendered:</p>
 <p>You must also register the custom tag with the Liquid template engine as
 follows:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;render_time&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;render_time&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></figure>
 
 <p>In the example above, we can place the following tag anywhere in one of our
 pages:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="p">{</span><span class="o">%</span> <span class="n">render_time</span> <span class="n">page</span> <span class="n">rendered</span> <span class="ss">at</span><span class="p">:</span> <span class="o">%</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="p">{</span><span class="o">%</span> <span class="n">render_time</span> <span class="n">page</span> <span class="n">rendered</span> <span class="ss">at</span><span class="p">:</span> <span class="o">%</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p&gt;</span></code></pre></figure>
 
 <p>And we would get something like this on the page:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p&gt;</span>page rendered at: Tue June 22 23:38:47 –0500 2010<span class="nt">&lt;/p&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p&gt;</span>page rendered at: Tue June 22 23:38:47 –0500 2010<span class="nt">&lt;/p&gt;</span></code></pre></figure>
 
 <h3 id="liquid-filters">Liquid filters</h3>
 
@@ -2546,7 +2546,7 @@ add tags above. Filters are simply modules that export their methods to liquid.
 All methods will have to take at least one parameter which represents the input
 of the filter. The return value will be the output of the filter.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
   <span class="k">module</span> <span class="nn">AssetFilter</span>
     <span class="k">def</span> <span class="nf">asset_url</span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
       <span class="s2">&quot;http://www.example.com/</span><span class="si">#{</span><span class="n">input</span><span class="si">}</span><span class="s2">?</span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_i</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -2554,7 +2554,7 @@ of the filter. The return value will be the output of the filter.</p>
   <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_filter</span><span class="p">(</span><span class="no">Jekyll</span><span class="o">::</span><span class="no">AssetFilter</span><span class="p">)</span></code></pre></div>
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_filter</span><span class="p">(</span><span class="no">Jekyll</span><span class="o">::</span><span class="no">AssetFilter</span><span class="p">)</span></code></pre></figure>
 
 <div class="note">
   <h5>ProTip™: Access the site object using Liquid</h5>
@@ -2615,13 +2615,13 @@ of the filter. The return value will be the output of the filter.</p>
 <p>To use one of the example plugins above as an illustration, here is how you’d
 specify these two flags:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
   <span class="k">class</span> <span class="nc">UpcaseConverter</span> <span class="o">&lt;</span> <span class="no">Converter</span>
     <span class="n">safe</span> <span class="kp">true</span>
     <span class="n">priority</span> <span class="ss">:low</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <h2 id="hooks">Hooks</h2>
 
@@ -2643,9 +2643,9 @@ call whenever the hook is triggered. For example, if you want to execute some
 custom functionality every time Jekyll renders a post, you could register a
 hook like this:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="o">.</span><span class="n">register</span> <span class="ss">:post</span><span class="p">,</span> <span class="ss">:post_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="o">.</span><span class="n">register</span> <span class="ss">:post</span><span class="p">,</span> <span class="ss">:post_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
   <span class="c1"># code to call after Jekyll renders a post</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>Jekyll provides hooks for <code>:site</code>, <code>:page</code>,
 <code>:post</code>, and <code>:document</code>. In all cases, Jekyll calls your
@@ -2863,6 +2863,7 @@ LESS.js files during generation.</li>
   <li><a href="https://github.com/ivantsepp/jekyll-git_metadata">Jekyll::GitMetadata by Ivan Tse</a>: Expose Git metadata for your templates.</li>
   <li><a href="https://gist.github.com/snrbrnjna/422a4b7e017192c284b3">Jekyll Http Basic Auth Plugin</a>: Plugin to manage http basic auth for jekyll generated pages and directories.</li>
   <li><a href="https://github.com/merlos/jekyll-auto-image">Jekyll Auto Image by Merlos</a>: Gets the first image of a post. Useful to list your posts with images or to add <a href="https://dev.twitter.com/cards/overview">twitter cards</a> to your site.</li>
+  <li><a href="https://github.com/codeinpink/jekyll-portfolio-generator">Jekyll Portfolio Generator by Shannon Babincsak</a>: Generates project pages and computes related projects out of project data files.</li>
 </ul>
 
 <h4 id="converters-1">Converters</h4>
@@ -2965,6 +2966,7 @@ LESS.js files during generation.</li>
   <li><a href="https://github.com/Ezmyrelda/twa">twa</a>: Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.</li>
   <li><a href="https://github.com/x43x61x69/jekyll-files">jekyll-files</a> by <a href="http://vox.vg/">Zhi-Wei Cai</a>: Output relative path strings and other info regarding specific assets.</li>
   <li><a href="https://github.com/dimitri-koenig/jekyll-plugins">Fetch remote file content</a> by <a href="https://www.dimitrikoenig.net/">Dimitri König</a>: Using <code>remote_file_content</code> tag you can fetch the content of a remote file and include it as if you would put the content right into your markdown file yourself. Very useful for including code from github repo’s to always have a current repo version.</li>
+  <li><a href="https://github.com/mnuessler/jekyll-asciinema">jekyll-asciinema</a>: A tag for embedding asciicasts recorded with <a href="https://asciinema.org">asciinema</a> in your Jekyll pages.</li>
 </ul>
 
 <h4 id="collections">Collections</h4>

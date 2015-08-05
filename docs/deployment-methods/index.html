@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Deployment methods</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2201,34 +2201,34 @@ this</a>.</p>
 
 <p>To have a remote server handle the deploy for you every time you push changes using Git, you can create a user account which has all the public keys that are authorized to deploy in its <code>authorized_keys</code> file. With that in place, setting up the post-receive hook is done as follows:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">laptop<span class="nv">$ </span>ssh deployer@example.com
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">laptop<span class="nv">$ </span>ssh deployer@example.com
 server<span class="nv">$ </span>mkdir myrepo.git
 server<span class="nv">$ </span><span class="nb">cd </span>myrepo.git
 server<span class="nv">$ </span>git --bare init
 server<span class="nv">$ </span>cp hooks/post-receive.sample hooks/post-receive
-server<span class="nv">$ </span>mkdir /var/www/myrepo</code></pre></div>
+server<span class="nv">$ </span>mkdir /var/www/myrepo</code></pre></figure>
 
 <p>Next, add the following lines to hooks/post-receive and be sure Jekyll is
 installed on the server:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">GIT_REPO</span><span class="o">=</span><span class="nv">$HOME</span>/myrepo.git
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">GIT_REPO</span><span class="o">=</span><span class="nv">$HOME</span>/myrepo.git
 <span class="nv">TMP_GIT_CLONE</span><span class="o">=</span><span class="nv">$HOME</span>/tmp/myrepo
 <span class="nv">PUBLIC_WWW</span><span class="o">=</span>/var/www/myrepo
 
 git clone <span class="nv">$GIT_REPO</span> <span class="nv">$TMP_GIT_CLONE</span>
 jekyll build -s <span class="nv">$TMP_GIT_CLONE</span> -d <span class="nv">$PUBLIC_WWW</span>
 rm -Rf <span class="nv">$TMP_GIT_CLONE</span>
-<span class="nb">exit</span></code></pre></div>
+<span class="nb">exit</span></code></pre></figure>
 
 <p>Finally, run the following command on any users laptop that needs to be able to
 deploy using this hook:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">laptops<span class="nv">$ </span>git remote add deploy deployer@example.com:~/myrepo.git</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">laptops<span class="nv">$ </span>git remote add deploy deployer@example.com:~/myrepo.git</code></pre></figure>
 
 <p>Deploying is now as easy as telling nginx or Apache to look at
 <code>/var/www/myrepo</code> and running the following:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">laptops<span class="nv">$ </span>git push deploy master</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">laptops<span class="nv">$ </span>git push deploy master</code></pre></figure>
 
 <h3 id="jekyll-hook">Jekyll-hook</h3>
 
@@ -2243,15 +2243,79 @@ host your site directly on a CDN or file host like S3.</p>
 <p>Setup steps are fully documented
 <a href="https://github.com/developmentseed/jekyll-hook">in the <code>jekyll-hook</code> repo</a>.</p>
 
+<h3 id="static-publisher">Static Publisher</h3>
+
+<p><a href="https://github.com/static-publisher/static-publisher">Static Publisher</a> is another automated deployment option with a server listening for webhook posts, though it’s not tied to GitHub specifically. It has a one-click deploy to Heroku, it can watch multiple projects from one server, it has an easy to user admin interface and can publish to either S3 or to a git repository (e.g. gh-pages).</p>
+
 <h3 id="rake">Rake</h3>
 
 <p>Another way to deploy your Jekyll site is to use <a href="https://github.com/jimweirich/rake">Rake</a>, <a href="https://github.com/JEG2/highline">HighLine</a>, and
 <a href="https://github.com/net-ssh/net-ssh">Net::SSH</a>. A more complex example of deploying Jekyll with Rake that deals with multiple branches can be found in <a href="https://github.com/gitready/gitready/blob/cdfbc4ec5321ff8d18c3ce936e9c749dbbc4f190/Rakefile">Git Ready</a>.</p>
 
+<h3 id="scp">scp</h3>
+
+<p>Once you’ve generated the <code>_site</code> directory, you can easily scp it using a <code>tasks/deploy</code> shell script similar to <a href="https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy">this deploy script here</a>. You’d obviously need to change the values to reflect your site’s details. There is even <a href="http://gist.github.com/214959">a matching TextMate command</a> that will help you run this script from within Textmate.</p>
+
 <h3 id="rsync">rsync</h3>
 
-<p>Once you’ve generated the <code>_site</code> directory, you can easily rsync it using a <code>tasks/deploy</code> shell script similar to <a href="https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy">this deploy script here</a>. You’d obviously need to change the values to reflect your site’s details. There is even <a href="http://gist.github.com/214959">a matching TextMate command</a> that will help you run
-this script from within Textmate.</p>
+<p>Once you’ve generated the <code>_site</code> directory, you can easily rsync it using a <code>tasks/deploy</code> shell script similar to <a href="https://github.com/vitalyrepin/vrepinblog/blob/master/transfer.sh">this deploy script here</a>. You’d obviously need to change the values to reflect your site’s details.</p>
+
+<h4 id="step-1-install-rrsync-to-your-home-folder-server-side">Step 1: Install rrsync to your home folder (server-side)</h4>
+
+<p>We will use certificate-based authorization to simplify the publishing process. It makes sense to restrict rsync access only to the directory which it is supposed to sync.</p>
+
+<p>That’s why rrsync wrapper shall be installed. If it is not already installed by your hoster you can do it yourself:</p>
+
+<ul>
+  <li><a href="http://ftp.samba.org/pub/unpacked/rsync/support/rrsync">download rrsync</a></li>
+  <li>Put it to the bin subdirectory of your home folder  (<code>~/bin</code>)</li>
+  <li>Make it executable (<code>chmod +x</code>)</li>
+</ul>
+
+<h4 id="step-2-setup-certificate-based-ssh-access-server-side">Step 2: Setup certificate-based ssh access (server side)</h4>
+
+<p><a href="https://wiki.gentoo.org/wiki/SSH#Passwordless_Authentication">This process is described in a lot of places in the net</a>. We will not cover it here. What is different from usual approach is to put the restriction to certificate-based authorization in <code>~/.ssh/authorized_keys</code>). We will launch <code>rrsync</code> utility and supply it with the folder it shall have read-write access to:</p>
+
+<p><code>
+command="$HOME/bin/rrsync &lt;folder&gt;",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa &lt;cert&gt;
+</code></p>
+
+<p><code>&lt;folder&gt;</code> is the path to your site. E.g., <code>~/public_html/you.org/blog-html/</code>.</p>
+
+<h4 id="step-3-rsync-client-side">Step 3: Rsync! (client-side)</h4>
+
+<p>Add the script <code>deploy</code> to the web site source folder:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
+
+rsync -avr --rsh<span class="o">=</span><span class="s1">&#39;ssh -p2222&#39;</span> --delete-after --delete-excluded   &lt;folder&gt; &lt;user&gt;@&lt;site&gt;:</code></pre></figure>
+
+<p>Command line parameters are:</p>
+
+<ul>
+  <li><code>--rsh='ssh -p2222'</code> It is needed if your hoster provides ssh access using ssh port different from default one (e.g., this is what hostgator is doing)</li>
+  <li><code>&lt;folder&gt;</code> is the name of the local folder with generated web content. By default it is <code>_site/</code> for Jekyll</li>
+  <li><code>&lt;user&gt;</code> — ssh user name for your hosting account</li>
+  <li><code>&lt;site&gt;</code> — your hosting server</li>
+</ul>
+
+<p>Example command line is:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">rsync -avr --rsh<span class="o">=</span><span class="s1">&#39;ssh -p2222&#39;</span> --delete-after --delete-excluded   _site/ hostuser@vrepin.org:</code></pre></figure>
+
+<p>Don’t forget column ‘:’ after server name!</p>
+
+<h4 id="optional-step-4-exclude-transfersh-from-being-copied-to-the-output-folder-by-jekyll">Optional step 4: exclude transfer.sh from being copied to the output folder by Jekyll</h4>
+
+<p>This step is recommended if you use this how-to to deploy Jekyll-based web site. If you put <code>deploy</code> script to the root folder of your project, Jekyll copies it to the output folder.
+This behavior can be changed in <code>_config.yml</code>. Just add the following line there:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Do not copy these file to the output directory</span>
+<span class="l-Scalar-Plain">exclude</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">&quot;deploy&quot;</span><span class="p-Indicator">]</span></code></pre></figure>
+
+<h4 id="we-are-done">We are done!</h4>
+
+<p>Now it’s possible to publish your web site by launching <code>deploy</code> script. If your ssh certificate  is <a href="https://martin.kleppmann.com/2013/05/24/improving-security-of-ssh-private-keys.html">passphrase-protected</a>, you are asked to enter the password.</p>
 
 <h2 id="rack-jekyll">Rack-Jekyll</h2>
 

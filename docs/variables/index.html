@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Variables</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2291,7 +2291,15 @@ following is a reference of the available data.</p>
       <td><p><code>site.html_pages</code></p></td>
       <td><p>
 
-        A list of all HTML Pages.
+        A subset of `site.pages` listing those which end in `.html`.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.html_files</code></p></td>
+      <td><p>
+
+        A subset of `site.static_files` listing those which end in `.html`.
 
       </p></td>
     </tr>

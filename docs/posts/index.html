@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Writing posts</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2194,14 +2194,14 @@ static site.</p>
 directory. How you name files in this folder is important. Jekyll requires blog
 post files to be named according to the following format:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">YEAR-MONTH-DAY-title.MARKUP</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">YEAR-MONTH-DAY-title.MARKUP</code></pre></figure>
 
 <p>Where <code>YEAR</code> is a four-digit number, <code>MONTH</code> and <code>DAY</code> are both two-digit
 numbers, and <code>MARKUP</code> is the file extension representing the format used in the
 file. For example, the following are examples of valid post filenames:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">2011-12-31-new-years-eve-is-awesome.md
-2012-09-12-how-to-write-a-blog.textile</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">2011-12-31-new-years-eve-is-awesome.md
+2012-09-12-how-to-write-a-blog.textile</code></pre></figure>
 
 <div class="note">
   <h5>ProTip™: Link to other posts</h5>
@@ -2253,12 +2253,12 @@ variable in a post.</p>
 
 <p>Including an image asset in a post:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">… which is shown in the screenshot below:
-![My helpful screenshot]({{ site.url }}/assets/screenshot.jpg)</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">… which is shown in the screenshot below:
+![My helpful screenshot]({{ site.url }}/assets/screenshot.jpg)</code></pre></figure>
 
 <p>Linking to a PDF for readers to download:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">… you can [get the PDF]({{ site.url }}/assets/mydoc.pdf) directly.</code></pre></div>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">… you can [get the PDF]({{ site.url }}/assets/mydoc.pdf) directly.</code></pre></figure>
 
 <div class="note">
   <h5>ProTip™: Link using just the site root URL</h5>
@@ -2278,13 +2278,13 @@ you have a list of posts somewhere. Creating an index of posts on another page
 language</a> and its tags. Here’s a basic example
 of how to create a list of links to your blog posts:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
   {% for post in site.posts %}
     <span class="nt">&lt;li&gt;</span>
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ post.url }}&quot;</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;</span>
     <span class="nt">&lt;/li&gt;</span>
   {% endfor %}
-<span class="nt">&lt;/ul&gt;</span></code></pre></div>
+<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
 
 <p>Of course, you have full control over how (and where) you display your posts,
 and how you structure your site. You should read more about <a href="../templates/">how templates
@@ -2303,33 +2303,33 @@ Take the above example of an index of posts. Perhaps you want to include
 a little hint about the post’s content by adding the first paragraph of each of
 your posts:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
   {% for post in site.posts %}
     <span class="nt">&lt;li&gt;</span>
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ post.url }}&quot;</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;</span>
       {{ post.excerpt }}
     <span class="nt">&lt;/li&gt;</span>
   {% endfor %}
-<span class="nt">&lt;/ul&gt;</span></code></pre></div>
+<span class="nt">&lt;/ul&gt;</span></code></pre></figure>
 
 <p>Because Jekyll grabs the first paragraph you will not need to wrap the excerpt
 in <code>p</code> tags, which is already done for you. These tags can be removed with the
 following if you’d prefer:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html">{{ post.excerpt | remove: &#39;<span class="nt">&lt;p&gt;</span>&#39; | remove: &#39;<span class="nt">&lt;/p&gt;</span>&#39; }}</code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{{ post.excerpt | remove: &#39;<span class="nt">&lt;p&gt;</span>&#39; | remove: &#39;<span class="nt">&lt;/p&gt;</span>&#39; }}</code></pre></figure>
 
 <p>If you don’t like the automatically-generated post excerpt, it can be
 explicitly overridden by adding an <code>excerpt</code> value to your post’s YAML
 Front Matter. Alternatively, you can choose to define a custom
 <code>excerpt_separator</code> in the post’s YAML front matter:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">---
+<figure class="highlight"><pre><code class="language-text" data-lang="text">---
 excerpt_separator: &lt;!--more--&gt;
 ---
 
 Excerpt
 &lt;!--more--&gt;
-Out-of-excerpt</code></pre></div>
+Out-of-excerpt</code></pre></figure>
 
 <p>You can also set the <code>excerpt_separator</code> globally in your <code>_config.yml</code>
 configuration file.</p>
@@ -2348,7 +2348,7 @@ html tags along with the content is not desirable.</p>
 either Pygments or Rouge, and including a code snippet in any post is easy.
 Just use the dedicated Liquid tag as follows:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">{% highlight ruby %}
+<figure class="highlight"><pre><code class="language-text" data-lang="text">{% highlight ruby %}
 def show
   @widget = Widget(params[:id])
   respond_to do |format|
@@ -2356,17 +2356,17 @@ def show
     format.json { render json: @widget }
   end
 end
-{% endhighlight %}</code></pre></div>
+{% endhighlight %}</code></pre></figure>
 
 <p>And the output will look like this:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">show</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">show</span>
   <span class="vi">@widget</span> <span class="o">=</span> <span class="no">Widget</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
   <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
     <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="c1"># show.html.erb</span>
     <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@widget</span> <span class="p">}</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <div class="note">
   <h5>ProTip™: Show line numbers</h5>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Continuous Integration</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2200,26 +2200,32 @@ This tool checks your resulting site to ensure all links and images exist.
 Utilize it either with the convenient <code>htmlproof</code> command-line executable,
 or write a Ruby script which utilizes the gem.</p>
 
+<p>Save the commands you want to run and succeed in a file: <code>./script/cibuild</code></p>
+
 <h3 id="the-html-proofer-executable">The HTML Proofer Executable</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/usr/bin/env bash</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/usr/bin/env bash</span>
 <span class="nb">set</span> -e <span class="c"># halt script on error</span>
 
 bundle <span class="nb">exec </span>jekyll build
-bundle <span class="nb">exec </span>htmlproof ./_site</code></pre></div>
+bundle <span class="nb">exec </span>htmlproof ./_site</code></pre></figure>
 
 <p>Some options can be specified via command-line switches. Check out the
 <code>html-proofer</code> README for more information about these switches, or run
 <code>htmlproof --help</code> locally.</p>
 
+<p>For example to avoid testing external sites, use this command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>htmlproof ./_site --disable-external</code></pre></figure>
+
 <h3 id="the-html-proofer-library">The HTML Proofer Library</h3>
 
 <p>You can also invoke <code>html-proofer</code> in Ruby scripts (e.g. in a Rakefile):</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#!/usr/bin/env ruby</span>
 
 <span class="nb">require</span> <span class="s1">&#39;html/proofer&#39;</span>
-<span class="no">HTML</span><span class="o">::</span><span class="no">Proofer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;./_site&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span></code></pre></div>
+<span class="no">HTML</span><span class="o">::</span><span class="no">Proofer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;./_site&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">run</span></code></pre></figure>
 
 <p>Options are given as a second argument to <code>.new</code>, and are encoded in a
 symbol-keyed Ruby Hash. For more information about the configuration options,
@@ -2234,18 +2240,25 @@ an explanation of each line.</p>
 
 <p><strong>Note:</strong> You will need a Gemfile as well, <a href="http://docs.travis-ci.com/user/languages/ruby/#Dependency-Management">Travis will automatically install</a> the dependencies based on the referenced gems:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s2">&quot;https://rubygems.org&quot;</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s2">&quot;https://rubygems.org&quot;</span>
 
 <span class="n">gem</span> <span class="s2">&quot;jekyll&quot;</span>
-<span class="n">gem</span> <span class="s2">&quot;html-proofer&quot;</span></code></pre></div>
+<span class="n">gem</span> <span class="s2">&quot;html-proofer&quot;</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ruby</span>
+<p>Your <code>.travis.yml</code> file should look like this:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ruby</span>
 <span class="l-Scalar-Plain">rvm</span><span class="p-Indicator">:</span>
 <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">2.1</span>
-<span class="c1"># Assume bundler is being used, install step will run `bundle install`.</span>
+
+<span class="l-Scalar-Plain">before_script</span><span class="p-Indicator">:</span>
+ <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">chmod +x ./script/cibuild</span> <span class="c1"># or do this locally and commit</span>
+
+<span class="c1"># Assume bundler is being used, therefore</span>
+<span class="c1"># the `install` step will run `bundle install` by default.</span>
 <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./script/cibuild</span>
 
-<span class="c1"># branch whitelist</span>
+<span class="c1"># branch whitelist, only for GitHub Pages</span>
 <span class="l-Scalar-Plain">branches</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">only</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gh-pages</span>     <span class="c1"># test the gh-pages branch</span>
@@ -2253,23 +2266,31 @@ an explanation of each line.</p>
 
 <span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">global</span><span class="p-Indicator">:</span>
-  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">NOKOGIRI_USE_SYSTEM_LIBRARIES=true</span> <span class="c1"># speeds up installation of html-proofer</span></code></pre></div>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">NOKOGIRI_USE_SYSTEM_LIBRARIES=true</span> <span class="c1"># speeds up installation of html-proofer</span></code></pre></figure>
 
 <p>Ok, now for an explanation of each line:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ruby</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ruby</span></code></pre></figure>
 
 <p>This line tells Travis to use a Ruby build container. It gives your script
 access to Bundler, RubyGems, and a Ruby runtime.</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">rvm</span><span class="p-Indicator">:</span>
-<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">2.1</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">rvm</span><span class="p-Indicator">:</span>
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">2.1</span></code></pre></figure>
 
 <p>RVM is a popular Ruby Version Manager (like rbenv, chruby, etc). This
 directive tells Travis the Ruby version to use when running your test
 script.</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./script/cibuild</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">before_script</span><span class="p-Indicator">:</span>
+ <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">chmod +x ./script/cibuild</span></code></pre></figure>
+
+<p>The build script file needs to have the <em>executable</em> attribute set or
+Travis will fail with a permission denied error. You can also run this
+locally and commit the permissions directly, thus rendering this step
+irrelevant.</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./script/cibuild</span></code></pre></figure>
 
 <p>Travis allows you to run any arbitrary shell script to test your site. One
 convention is to put all scripts for your project in the <code>script</code>
@@ -2277,16 +2298,16 @@ directory, and to call your test script <code>cibuild</code>. This line is compl
 customizable. If your script won’t change much, you can write your test
 incantation here directly:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">gem install jekyll html-proofer</span>
-<span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jekyll build &amp;&amp; htmlproof ./_site</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">gem install jekyll html-proofer</span>
+<span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">jekyll build &amp;&amp; htmlproof ./_site</span></code></pre></figure>
 
 <p>The <code>script</code> directive can be absolutely any valid shell command.</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># branch whitelist</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># branch whitelist, only for GitHub Pages</span>
 <span class="l-Scalar-Plain">branches</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">only</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">gh-pages</span>     <span class="c1"># test the gh-pages branch</span>
-  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/pages-(.*)/</span> <span class="c1"># test every branch which starts with &quot;pages-&quot;</span></code></pre></div>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/pages-(.*)/</span> <span class="c1"># test every branch which starts with &quot;pages-&quot;</span></code></pre></figure>
 
 <p>You want to ensure the Travis builds for your site are being run only on
 the branch or branches which contain your site. One means of ensuring this
@@ -2297,11 +2318,12 @@ a pull request flow for proposing changes, you may wish to enforce a
 convention for your builds such that all branches containing edits are
 prefixed, exemplified above with the <code>/pages-(.*)/</code> regular expression.</p>
 
-<p>The <code>branches</code> directive is completely optional.</p>
+<p>The <code>branches</code> directive is completely optional. Travis will build from every
+push to any branch of your repo if leave it out.</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">global</span><span class="p-Indicator">:</span>
-  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">NOKOGIRI_USE_SYSTEM_LIBRARIES=true</span> <span class="c1"># speeds up installation of html-proofer</span></code></pre></div>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">NOKOGIRI_USE_SYSTEM_LIBRARIES=true</span> <span class="c1"># speeds up installation of html-proofer</span></code></pre></figure>
 
 <p>Using <code>html-proofer</code>? You’ll want this environment variable. Nokogiri, used
 to parse HTML files in your compiled site, comes bundled with libraries
@@ -2316,12 +2338,22 @@ environment variable <code>NOKOGIRI_USE_SYSTEM_LIBRARIES</code> to <code>true</c
    servers, which Jekyll will mistakenly read and explode on.</p>
 </div>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">exclude</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">vendor</span><span class="p-Indicator">]</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">exclude</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">vendor</span><span class="p-Indicator">]</span></code></pre></figure>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+<p><strong>Travis error:</strong> <em>“You are trying to install in deployment mode after changing
+your Gemfile. Run bundle install elsewhere and add the updated Gemfile.lock
+to version control.”</em></p>
+
+<p><strong>Workaround:</strong> Either run <code>bundle install</code> locally and commit your changes to
+<code>Gemfile.lock</code>, or remove the <code>Gemfile.lock</code> file from your repository and add
+an entry in the <code>.gitignore</code> file to avoid it from being checked in again.</p>
 
 <h3 id="questions">Questions?</h3>
 
 <p>This entire guide is open-source. Go ahead and <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/continuous-integration.md">edit it</a> if you have a
-fix or <a href="https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question">ask for help</a> if you run into trouble and need some help.</p>
+fix or <a href="http://jekyllrb.com/help/">ask for help</a> if you run into trouble and need some help.</p>
 
 
           

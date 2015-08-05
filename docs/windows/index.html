@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Jekyll on Windows</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2178,7 +2178,9 @@ knowledge and lessons that have been unearthed by Windows users.</p>
 <h2 id="installation">Installation</h2>
 
 <p>Julian Thilo has written up instructions to get
-<a href="http://jekyll-windows.juthilo.com/">Jekyll running on Windows</a> and it seems to work for most.</p>
+<a href="http://jekyll-windows.juthilo.com/">Jekyll running on Windows</a> and it seems to work for most.
+The instructions were written for Ruby 2.0.0, but should work for later versions
+<a href="https://github.com/copiousfreetime/hitimes/issues/40">prior to 2.2</a>.</p>
 
 <h2 id="encoding">Encoding</h2>
 
@@ -2190,7 +2192,7 @@ Jekyll. This is especially relevant if you’re running Jekyll on Windows.</p>
 in case you get a “Liquid Exception: Incompatible character encoding” error during
 the site generation process. It can be done with the following command:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>chcp 65001</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>chcp 65001</code></pre></figure>
 
 <h2 id="auto-regeneration">Auto-regeneration</h2>
 
@@ -2199,7 +2201,7 @@ the site generation process. It can be done with the following command:</p>
 built-in support for UNIX systems, it requires an extra gem for compatibility
 with Windows. Add the following to the Gemfile for your site:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">&#39;wdm&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.1.0&#39;</span> <span class="k">if</span> <span class="no">Gem</span><span class="o">.</span><span class="n">win_platform?</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">&#39;wdm&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.1.0&#39;</span> <span class="k">if</span> <span class="no">Gem</span><span class="o">.</span><span class="n">win_platform?</span></code></pre></figure>
 
 
           

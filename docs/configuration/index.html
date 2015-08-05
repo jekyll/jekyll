@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Configuration</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2345,7 +2345,7 @@ in the terminal.</p>
         <p class="description">Enable auto-regeneration of the site when files are modified.</p>
       </td>
       <td class="align-center">
-        <p><code class="flag">-w, --watch</code></p>
+        <p><code class="flag">-w, --[no-]watch</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -2516,29 +2516,29 @@ before your site is served.</p>
 
 <p>Let’s say that you want to add a default layout to all pages and posts in your site. You would add this to your <code>_config.yml</code> file:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span>
     <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
       <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span> <span class="c1"># an empty string here means all files in the project</span>
     <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></div>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></figure>
 
 <p>Here, we are scoping the <code>values</code> to any file that exists in the scopes path. Since the path is set as an empty string, it will apply to <strong>all files</strong> in your project. You probably don’t want to set a layout on every file in your project - like css files, for example - so you can also specify a <code>type</code> value under the <code>scope</code> key.</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span>
     <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
       <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span> <span class="c1"># an empty string here means all files in the project</span>
       <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="s">&quot;posts&quot;</span> <span class="c1"># previously `post` in Jekyll 2.2.</span>
     <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></div>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></figure>
 
 <p>Now, this will only set the layout for files where the type is <code>posts</code>.
 The different types that are available to you are <code>pages</code>, <code>posts</code>, <code>drafts</code> or any collection in your site. While <code>type</code> is optional, you must specify a value for <code>path</code> when creating a <code>scope/values</code> pair.</p>
 
 <p>As mentioned earlier, you can set multiple scope/values pairs for <code>defaults</code>.</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span>
     <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
       <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span>
@@ -2551,11 +2551,11 @@ The different types that are available to you are <code>pages</code>, <code>post
       <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="s">&quot;pages&quot;</span> <span class="c1"># previously `page` in Jekyll 2.2.</span>
     <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
       <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;project&quot;</span> <span class="c1"># overrides previous default layout</span>
-      <span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="s">&quot;Mr.</span><span class="nv"> </span><span class="s">Hyde&quot;</span></code></pre></div>
+      <span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="s">&quot;Mr.</span><span class="nv"> </span><span class="s">Hyde&quot;</span></code></pre></figure>
 
 <p>With these defaults, all posts would use the <code>my-site</code> layout. Any html files that exist in the <code>projects/</code> folder will use the <code>project</code> layout, if it exists. Those files will also have the <code>page.author</code> <a href="../variables/">liquid variable</a> set to <code>Mr. Hyde</code> as well as have the category for the page set to <code>project</code>.</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">my_collection</span><span class="p-Indicator">:</span>
     <span class="l-Scalar-Plain">output</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
 
@@ -2565,7 +2565,7 @@ The different types that are available to you are <code>pages</code>, <code>post
       <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span>
       <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="s">&quot;my_collection&quot;</span> <span class="c1"># a collection in your site, in plural form</span>
     <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></div>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></figure>
 
 <p>In this example the <code>layout</code> is set to <code>default</code> inside the <a href="../collections/">collection</a> with the name <code>my_collection</code>.</p>
 
@@ -2577,7 +2577,7 @@ The different types that are available to you are <code>pages</code>, <code>post
 
 <p>Finally, if you set defaults in the site configuration by adding a <code>defaults</code> section to your <code>_config.yml</code> file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># In _config.yml</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># In _config.yml</span>
 <span class="nn">...</span>
 <span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
   <span class="p-Indicator">-</span>
@@ -2588,14 +2588,14 @@ The different types that are available to you are <code>pages</code>, <code>post
       <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;project&quot;</span>
       <span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="s">&quot;Mr.</span><span class="nv"> </span><span class="s">Hyde&quot;</span>
       <span class="l-Scalar-Plain">category</span><span class="p-Indicator">:</span> <span class="s">&quot;project&quot;</span>
-<span class="nn">...</span></code></pre></div>
+<span class="nn">...</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># In projects/foo_project.md</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># In projects/foo_project.md</span>
 <span class="nn">---</span>
 <span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="s">&quot;John</span><span class="nv"> </span><span class="s">Smith&quot;</span>
 <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;foobar&quot;</span>
 <span class="nn">---</span>
-<span class="l-Scalar-Plain">The post text goes here...</span></code></pre></div>
+<span class="l-Scalar-Plain">The post text goes here...</span></code></pre></figure>
 
 <p>The <code>projects/foo_project.md</code> would have the <code>layout</code> set to <code>foobar</code> instead
 of <code>project</code> and the <code>author</code> set to <code>John Smith</code> instead of <code>Mr. Hyde</code> when
@@ -2616,7 +2616,7 @@ file or on the command-line.</p>
   </p>
 </div>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Where things are</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Where things are</span>
 <span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">.</span>
 <span class="l-Scalar-Plain">destination</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./_site</span>
 <span class="l-Scalar-Plain">plugins</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">./_plugins</span>
@@ -2683,7 +2683,7 @@ file or on the command-line.</p>
     <span class="l-Scalar-Plain">coderay_line_number_start</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
     <span class="l-Scalar-Plain">coderay_tab_width</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">4</span>
     <span class="l-Scalar-Plain">coderay_bold_every</span><span class="p-Indicator">:</span>        <span class="l-Scalar-Plain">10</span>
-    <span class="l-Scalar-Plain">coderay_css</span><span class="p-Indicator">:</span>               <span class="l-Scalar-Plain">style</span></code></pre></div>
+    <span class="l-Scalar-Plain">coderay_css</span><span class="p-Indicator">:</span>               <span class="l-Scalar-Plain">style</span></code></pre></figure>
 
 <h2 id="markdown-options">Markdown Options</h2>
 
@@ -2727,11 +2727,10 @@ straight quotes to curly quotes and runs of hyphens to em (<code>---</code>) and
 </ul>
 
 <p>All other extensions retain their usual names from Redcarpet, and no renderer
-options aside from <code>smart</code> can be specified in Jekyll. <a href="https://github.com/vmg/redcarpet/blob/v2.2.2/README.markdown#and-its-like-really-simple-to-use">A list of available
+options aside from <code>smart</code> can be specified in Jekyll. <a href="https://github.com/vmg/redcarpet/blob/v3.2.2/README.markdown#and-its-like-really-simple-to-use">A list of available
 extensions can be found in the Redcarpet README file.</a>
 Make sure you’re looking at the README for the right version of
-Redcarpet: Jekyll currently uses v2.2.x, and extensions like <code>footnotes</code> and
-<code>highlight</code> weren’t added until after version 3.0.0. The most commonly used
+Redcarpet: Jekyll currently uses v3.2.x. The most commonly used
 extensions are:</p>
 
 <ul>
@@ -2755,7 +2754,7 @@ of Github Flavored Markdown by passing an <code>input</code> option with a value
 
 <p>If you’re interested in creating a custom markdown processor, you’re in luck! Create a new class in the <code>Jekyll::Converters::Markdown</code> namespace:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Jekyll</span><span class="o">::</span><span class="no">Converters</span><span class="o">::</span><span class="no">Markdown</span><span class="o">::</span><span class="no">MyCustomProcessor</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Jekyll</span><span class="o">::</span><span class="no">Converters</span><span class="o">::</span><span class="no">Markdown</span><span class="o">::</span><span class="no">MyCustomProcessor</span>
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
     <span class="nb">require</span> <span class="s1">&#39;funky_markdown&#39;</span>
     <span class="vi">@config</span> <span class="o">=</span> <span class="n">config</span>
@@ -2768,12 +2767,12 @@ of Github Flavored Markdown by passing an <code>input</code> option with a value
   <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
     <span class="o">::</span><span class="no">FunkyMarkdown</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>Once you’ve created your class and have it properly setup either as a plugin in
 the <code>_plugins</code> folder or as a gem, specify it in your <code>_config.yml</code>:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">MyCustomProcessor</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">MyCustomProcessor</span></code></pre></figure>
 
 
           

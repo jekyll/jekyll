@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Troubleshooting</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2189,33 +2189,33 @@ that might be of help. If the problem you’re experiencing isn’t covered belo
 the header files for compiling extension modules for Ruby 2.0.0. This
 can be done on Ubuntu or Debian by running:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install ruby2.0.0-dev</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install ruby2.0.0-dev</code></pre></figure>
 
 <p>On Red Hat, CentOS, and Fedora systems you can do this by running:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo yum install ruby-devel</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo yum install ruby-devel</code></pre></figure>
 
 <p>On <a href="https://www.nearlyfreespeech.net/">NearlyFreeSpeech</a> you need to run the
 following commands before installing Jekyll:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">GEM_HOME</span><span class="o">=</span>/home/private/gems
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">GEM_HOME</span><span class="o">=</span>/home/private/gems
 <span class="nb">export </span><span class="nv">GEM_PATH</span><span class="o">=</span>/home/private/gems:/usr/local/lib/ruby/gems/1.8/
 <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/home/private/gems/bin
-<span class="nb">export </span><span class="nv">RB_USER_INSTALL</span><span class="o">=</span><span class="s1">&#39;true&#39;</span></code></pre></div>
+<span class="nb">export </span><span class="nv">RB_USER_INSTALL</span><span class="o">=</span><span class="s1">&#39;true&#39;</span></code></pre></figure>
 
 <p>On Mac OS X, you may need to update RubyGems:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem update --system</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem update --system</code></pre></figure>
 
 <p>If you still have issues, you may need to <a href="http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html">use Xcode to install Command Line
 Tools</a>
 that will allow you to install native gems using the following command:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem install jekyll</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem install jekyll</code></pre></figure>
 
 <p>To install RubyGems on Gentoo:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo emerge -av dev-ruby/rubygems</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo emerge -av dev-ruby/rubygems</code></pre></figure>
 
 <p>On Windows, you may need to install <a href="https://wiki.github.com/oneclick/rubyinstaller/development-kit">RubyInstaller
 DevKit</a>.</p>
@@ -2236,15 +2236,15 @@ in order to have the <code>jekyll</code> executable be available in your Termina
 
 <p>If you are using base-url option like:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll serve --baseurl <span class="s1">&#39;/blog&#39;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll serve --baseurl <span class="s1">&#39;/blog&#39;</span></code></pre></figure>
 
 <p>… then make sure that you access the site at:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">http://localhost:4000/blog/index.html</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">http://localhost:4000/blog/index.html</code></pre></figure>
 
 <p>It won’t work to just access:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">http://localhost:4000/blog</code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">http://localhost:4000/blog</code></pre></figure>
 
 <h2 id="configuration-problems">Configuration problems</h2>
 
@@ -2273,7 +2273,7 @@ problems.</p>
 templates. Unlike previous versions, using <code>{{</code> in 2.0 triggers the
 following error:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s1">&#39;{{&#39;</span> was not properly terminated with regexp: /<span class="se">\}\}</span>/  <span class="o">(</span>Liquid::SyntaxError<span class="o">)</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s1">&#39;{{&#39;</span> was not properly terminated with regexp: /<span class="se">\}\}</span>/  <span class="o">(</span>Liquid::SyntaxError<span class="o">)</span></code></pre></figure>
 
 <h3 id="excerpts">Excerpts</h3>
 

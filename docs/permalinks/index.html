@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Permalinks</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2428,7 +2428,7 @@ handle these requests properly without any additional work.</p>
 handle extensionless URLs by setting the <a href="https://httpd.apache.org/docs/current/content-negotiation.html#multiviews">multiviews</a> option in your
 <code>httpd.conf</code> or <code>.htaccess</code> file:</p>
 
-<div class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="nb">Options</span> +MultiViews</code></pre></div>
+<figure class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="nb">Options</span> +MultiViews</code></pre></figure>
 
 <h3 id="nginx">Nginx</h3>
 
@@ -2437,7 +2437,7 @@ to process a request. The following configuration will instruct nginx to search
 for a file with an <code>.html</code> extension if an exact match for the requested URI is
 not found.</p>
 
-<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri.html</span> <span class="nv">$uri/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri.html</span> <span class="nv">$uri/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span></code></pre></figure>
 
 
           

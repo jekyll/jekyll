@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Pagination</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2183,7 +2183,7 @@ and folders you need for paginated listings.</p>
     your Jekyll site. Pagination works when called from within the HTML
     file, named <code>index.html</code>, which optionally may reside in and
     produce pagination from within a subdirectory, via the
-    <code>pagination_path</code> configuration value.
+    <code>paginate_path</code> configuration value.
   </p>
 </div>
 
@@ -2192,14 +2192,14 @@ and folders you need for paginated listings.</p>
 <p>To enable pagination for your blog, add a line to the <code>_config.yml</code> file that
 specifies how many items should be displayed per page:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">paginate</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">paginate</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">5</span></code></pre></figure>
 
 <p>The number should be the maximum number of Posts you’d like to be displayed
 per-page in the generated site.</p>
 
 <p>You may also specify the destination of the pagination pages:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">paginate_path</span><span class="p-Indicator">:</span> <span class="s">&quot;/blog/page:num/&quot;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">paginate_path</span><span class="p-Indicator">:</span> <span class="s">&quot;/blog/page:num/&quot;</span></code></pre></figure>
 
 <p>This will read in <code>blog/index.html</code>, send it each pagination page in Liquid as
 <code>paginator</code> and write the output to <code>blog/page:num/</code>, where <code>:num</code> is the
@@ -2306,7 +2306,7 @@ the <code>paginator</code> variable that will now be available to you. You’ll 
 want to do this in one of the main pages of your site. Here’s one example of a
 simple way of rendering paginated Posts in a HTML file:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html">---
+<figure class="highlight"><pre><code class="language-html" data-lang="html">---
 layout: default
 title: My Blog
 ---
@@ -2335,7 +2335,7 @@ title: My Blog
   {% else %}
     <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;next &quot;</span><span class="nt">&gt;</span>Next<span class="nt">&lt;/span&gt;</span>
   {% endif %}
-<span class="nt">&lt;/div&gt;</span></code></pre></div>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
 
 <div class="note warning">
   <h5>Beware the page one edge-case</h5>
@@ -2349,7 +2349,7 @@ title: My Blog
 <p>The following HTML snippet should handle page one, and render a list of each
 page with links to all but the current page.</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html">{% if paginator.total_pages &gt; 1 %}
+<figure class="highlight"><pre><code class="language-html" data-lang="html">{% if paginator.total_pages &gt; 1 %}
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;pagination&quot;</span><span class="nt">&gt;</span>
   {% if paginator.previous_page %}
     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ paginator.previous_page_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; }}&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;laquo;</span> Prev<span class="nt">&lt;/a&gt;</span>
@@ -2361,7 +2361,7 @@ page with links to all but the current page.</p>
     {% if page == paginator.page %}
       <span class="nt">&lt;em&gt;</span>{{ page }}<span class="nt">&lt;/em&gt;</span>
     {% elsif page == 1 %}
-      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ &#39;/index.html&#39; | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; }}&quot;</span><span class="nt">&gt;</span>{{ page }}<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ paginator.previous_page_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; }}&quot;</span><span class="nt">&gt;</span>{{ page }}<span class="nt">&lt;/a&gt;</span>
     {% else %}
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ site.paginate_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; | replace: &#39;:num&#39;, page }}&quot;</span><span class="nt">&gt;</span>{{ page }}<span class="nt">&lt;/a&gt;</span>
     {% endif %}
@@ -2373,7 +2373,7 @@ page with links to all but the current page.</p>
     <span class="nt">&lt;span&gt;</span>Next <span class="ni">&amp;raquo;</span><span class="nt">&lt;/span&gt;</span>
   {% endif %}
 <span class="nt">&lt;/div&gt;</span>
-{% endif %}</code></pre></div>
+{% endif %}</code></pre></figure>
 
 
           

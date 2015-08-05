@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Front Matter</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta5">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
   <link rel="alternate" type="application/rss+xml" title="Jekyll • Simple, blog-aware, static sites - Feed" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2177,10 +2177,10 @@ Jekyll as a special file. The front matter must be the first thing in the file
 and must take the form of valid YAML set between triple-dashed lines. Here is a
 basic example:</p>
 
-<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="nn">---</span>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="nn">---</span>
 <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">post</span>
 <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Blogging Like a Hacker</span>
-<span class="nn">---</span></code></pre></div>
+<span class="nn">---</span></code></pre></figure>
 
 <p>Between these triple-dashed lines, you can set predefined variables (see below
 for a reference) or even create custom ones of your own. These variables will
@@ -2303,13 +2303,13 @@ data that is sent to the Liquid templating engine during the conversion. For
 instance, if you set a title, you can use that in your layout to set the page
 title:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;title&gt;</span>{{ page.title }}<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
-    ...</code></pre></div>
+    ...</code></pre></figure>
 
 <h2 id="predefined-variables-for-posts">Predefined Variables for Posts</h2>
 
