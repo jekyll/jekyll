@@ -7,10 +7,12 @@ permalink: /docs/contributing/
 So you've got an awesome idea to throw into Jekyll. Great! Please keep the
 following in mind:
 
+* **Use https://talk.jekyllrb.com for non-technical or indirect Jekyll questions that are not bugs.**
+* **Contributions will not be accepted without tests or necessary documentation updates.**
 * If you're creating a small fix or patch to an existing feature, just a simple
   test will do. Please stay in the confines of the current test suite and use
   [Shoulda](https://github.com/thoughtbot/shoulda/tree/master) and
-  [RSpec Mocks](https://github.com/rspec/rspec-mocks/).
+  [RSpec-Mocks](https://github.com/rspec/rspec-mocks).
 * If it's a brand new feature, make sure to create a new
   [Cucumber](https://github.com/cucumber/cucumber/) feature and reuse steps
   where appropriate. Also, whipping up some documentation in your fork's `site`
@@ -36,24 +38,30 @@ following in mind:
   </p>
 </div>
 
+
 Test Dependencies
 -----------------
 
 To run the test suite and build the gem you'll need to install Jekyll's
-dependencies. Jekyll uses Bundler, so a quick run of the `bundle` command and
-you're all set!
+dependencies. Simply run this command to get all setup:
 
-{% highlight bash %}
-$ bundle
-{% endhighlight %}
+    $ script/bootstrap
 
 Before you start, run the tests and make sure that they pass (to confirm your
 environment is configured properly):
 
-{% highlight bash %}
-$ bundle exec rake test
-$ bundle exec rake features
-{% endhighlight %}
+    $ script/cibuild
+
+If you are only updating a file in `test/`, you can use the command:
+
+    $ script/test test/blah_test.rb
+
+If you are only updating a `.feature` file, you can use the command:
+
+    $ script/cucumber features/blah.feature
+
+Both `script/test` and `script/cucumber` can be run without arguments to
+run its entire respective suite.
 
 Workflow
 --------
@@ -61,30 +69,14 @@ Workflow
 Here's the most direct way to get your work merged into the project:
 
 * Fork the project.
-* Clone down your fork:
-
-{% highlight bash %}
-git clone git://github.com/<username>/jekyll.git
-{% endhighlight %}
-
-* Create a topic branch to contain your change:
-
-{% highlight bash %}
-git checkout -b my_awesome_feature
-{% endhighlight %}
-
-
+* Clone down your fork ( `git clone git@github.com:[username]/jekyll.git` ).
+* Create a topic branch to contain your change ( `git checkout -b my_awesome_feature` ).
 * Hack away, add tests. Not necessarily in that order.
-* Make sure everything still passes by running `rake`.
+* Make sure everything still passes by running `script/cibuild`.
 * If necessary, rebase your commits into logical chunks, without errors.
-* Push the branch up:
-
-{% highlight bash %}
-git push origin my_awesome_feature
-{% endhighlight %}
-
-* Create a pull request against jekyll/jekyll:master and describe what your
-  change does and the why you think it should be merged.
+* Push the branch up ( `git push origin my_awesome_feature` ).
+* Create a pull request against jekyll/jekyll and describe what your change
+  does and the why you think it should be merged.
 
 Updating Documentation
 ----------------------
@@ -101,8 +93,7 @@ All documentation pull requests should be directed at `master`. Pull
 requests directed at another branch will not be accepted.
 
 The [Jekyll wiki]({{ site.repository }}/wiki) on GitHub
-can be freely updated without a pull request as all
-GitHub users have access.
+can be freely updated without a pull request as all GitHub users have access.
 
 If you want to add your plugin to the [list of plugins](/docs/plugins/#available-plugins),
 please submit a pull request modifying the [plugins page source
@@ -112,14 +103,15 @@ link to your plugin under the proper subheading depending upon its type.
 Gotchas
 -------
 
-* If you want to bump the gem version, please put that in a separate commit.
-  This way, the maintainers can control when the gem gets released.
+* Please do not bump the gem version in your pull requests.
 * Try to keep your patch(es) based from the latest commit on jekyll/jekyll.
-  The easier it is to apply your work, the less work the maintainers have to
-  do, which is always a good thing.
-* Please don't tag your GitHub issue with \[fix\], \[feature\], etc. The
-  maintainers actively read the issues and will label it once they come across
-  it.
+  The easier it is to apply your work, the less work the maintainers have to do,
+  which is always a good thing.
+* Please don't tag your GitHub issue with [fix], [feature], etc. The maintainers
+  actively read the issues and will label it once they come across it.
+
+Finally...
+----------
 
 <div class="note">
   <h5>Let us know what could be better!</h5>
