@@ -126,7 +126,7 @@ command="$HOME/bin/rrsync <folder>",no-agent-forwarding,no-port-forwarding,no-pt
 
 Add the script ```deploy``` to the web site source folder:
 
-{% highlight shell %}
+{% highlight bash %}
 #!/bin/sh
 
 rsync -avr --rsh='ssh -p2222' --delete-after --delete-excluded   <folder> <user>@<site>:
@@ -141,7 +141,7 @@ Command line parameters are:
 
 Example command line is:
 
-{% highlight shell %}
+{% highlight bash %}
 rsync -avr --rsh='ssh -p2222' --delete-after --delete-excluded   _site/ hostuser@vrepin.org:
 {% endhighlight %}
 
