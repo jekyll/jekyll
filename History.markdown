@@ -161,6 +161,7 @@
   * Update JRuby testing to 9K ([3ab386f](https://github.com/jekyll/jekyll/commit/3ab386f1b096be25a24fe038fc70fd0fb08d545d))
   * Organize dependencies into dev and test groups. (#3852)
   * Contributing.md should refer to `script/cucumber` (#3894)
+  * Update contributing documentation to reflect workflow updates (#3895)
 
 ### Site Enhancements
 
