@@ -87,16 +87,6 @@ gem "jekyll"
 gem "html-proofer"
 {% endhighlight %}
 
-When you're on Windows, your ``Gemfile`` probably looks like this:
-
-{% highlight ruby %}
-source 'https://rubygems.org'
-gem 'jekyll'
-gem 'html-proofer'
-gem 'github-pages'
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-{% endhighlight %}
-
 Your ``.travis.yml`` file should look like this:
 
 {% highlight yaml %}
@@ -144,9 +134,8 @@ before_script:
  - chmod +x ./script/cibuild
 {% endhighlight %}
 
-The build script file needs to have correct executable rights set or
-Travis will fail with a permission denied error. The ``chmod`` command
-tells the OS it is okay to run the file as an executable.
+The build script file needs to have the *executable* attribute set or
+Travis will fail with a permission denied error.
 
 {% highlight yaml %}
 script: ./script/cibuild
@@ -211,10 +200,11 @@ exclude: [vendor]
 ### Troubleshooting
 
 **Travis error:** *"You are trying to install in deployment mode after changing
-your Gemfile. Run `bundle install` elsewhere and add the
-updated Gemfile.lock to version control."*
+your Gemfile. Run `bundle install` elsewhere and add the updated Gemfile.lock
+to version control."*
 
-**Solution:** remove the Gemfile.lock file from your repository.
+**Workaround:** remove the ``Gemfile.lock`` file from your repository and add an
+entry in the ``.gitignore`` file to avoid it from being checked in again.
 
 ### Questions?
 
