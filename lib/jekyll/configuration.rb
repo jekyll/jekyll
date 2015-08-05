@@ -26,7 +26,7 @@ module Jekyll
       # Filtering Content
       'show_drafts'   => nil,
       'limit_posts'   => 0,
-      'future'        => true,           # remove and make true just default
+      'future'        => false,
       'unpublished'   => false,
 
       # Plugins

@@ -483,7 +483,7 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 # Filtering Content
 show_drafts: null
 limit_posts: 0
-future:      true
+future:      false
 unpublished: false
 
 # Plugins
