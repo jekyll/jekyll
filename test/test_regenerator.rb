@@ -49,7 +49,7 @@ class TestRegenerator < JekyllUnitTest
       @regenerator = Regenerator.new(@site)
 
       # these should pass, since nothing has changed, and the
-      # loop above made sure the desinations exist
+      # loop above made sure the designations exist
       assert !@regenerator.regenerate?(@page)
       assert !@regenerator.regenerate?(@post)
       assert !@regenerator.regenerate?(@document)
