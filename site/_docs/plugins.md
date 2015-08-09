@@ -711,6 +711,7 @@ LESS.js files during generation.
 - [Jekyll::GitMetadata by Ivan Tse](https://github.com/ivantsepp/jekyll-git_metadata): Expose Git metadata for your templates.
 - [Jekyll Http Basic Auth Plugin](https://gist.github.com/snrbrnjna/422a4b7e017192c284b3): Plugin to manage http basic auth for jekyll generated pages and directories.
 - [Jekyll Auto Image by Merlos](https://github.com/merlos/jekyll-auto-image): Gets the first image of a post. Useful to list your posts with images or to add [twitter cards](https://dev.twitter.com/cards/overview) to your site.
+- [Jekyll Portfolio Generator by Shannon Babincsak](https://github.com/codeinpink/jekyll-portfolio-generator): Generates project pages and computes related projects out of project data files.
 
 #### Converters
 
@@ -744,7 +745,7 @@ LESS.js files during generation.
 - [Smilify](https://github.com/SaswatPadhi/jekyll_smilify) by [SaswatPadhi](https://github.com/SaswatPadhi): Convert text emoticons in your content to themeable smiley pics.
 - [Read in X Minutes](https://gist.github.com/zachleat/5792681) by [zachleat](https://github.com/zachleat): Estimates the reading time of a string (for blog post content).
 - [Jekyll-timeago](https://github.com/markets/jekyll-timeago): Converts a time value to the time ago in words.
-- [pluralize](https://github.com/bdesham/pluralize): Easily combine a number and a word into a gramatically-correct amount like “1 minute” or “2 minute**s**”.
+- [pluralize](https://github.com/bdesham/pluralize): Easily combine a number and a word into a grammatically-correct amount like “1 minute” or “2 minute**s**”.
 - [reading_time](https://github.com/bdesham/reading_time): Count words and estimate reading time for a piece of text, ignoring HTML elements that are unlikely to contain running text.
 - [Table of Content Generator](https://github.com/dafi/jekyll-toc-generator): Generate the HTML code containing a table of content (TOC), the TOC can be customized in many way, for example you can decide which pages can be without TOC.
 - [jekyll-humanize](https://github.com/23maverick23/jekyll-humanize): This is a port of the Django app humanize which adds a "human touch" to data. Each method represents a Fluid type filter that can be used in your Jekyll site templates. Given that Jekyll produces static sites, some of the original methods do not make logical sense to port (e.g. naturaltime).

@@ -2,11 +2,12 @@
 
 ### Major Enhancements
 
-  * Add basic support for JRuby (commit: 0f4477)
+  * Liquid profiler (i.e. know how fast or slow your templates render) (#3762)
   * Incremental regeneration (#3116)
   * Add Hooks: a new kind of plugin (#3553)
-  * Drop support for Ruby 1.9.3. (#3235)
   * Upgrade to Liquid 3.0.0 (#3002)
+  * Add basic support for JRuby (commit: 0f4477)
+  * Drop support for Ruby 1.9.3. (#3235)
   * Support Ruby v2.2 (#3234)
   * Support RDiscount 2 (#2767)
   * Remove most runtime deps (#3323)
@@ -17,6 +18,7 @@
   * Sunset (i.e. remove) Maruku (#3655)
   * Remove support for relative permalinks (#3679)
   * Iterate over `site.collections` as an array instead of a hash. (#3670)
+  * Adapt StaticFile for collections, config defaults (#3823)
 
 ### Minor Enhancements
 
@@ -78,6 +80,8 @@
   * Performance: Sort files only once (#3707)
   * Performance: Marshal metadata (#3706)
   * Upgrade highlight wrapper from `div` to `figure` (#3779)
+  * Upgrade mime-types to `~> 2.6` (#3795)
+  * Update windows.md with Ruby version info (#3818)
 
 ### Bug Fixes
 
@@ -114,6 +118,13 @@
   * Incremental regeneration: handle deleted, renamed, and moved dependencies (#3717)
   * Fix typo on line 19 of pagination.md (#3760)
   * Fix it so that 'blog.html' matches 'blog.html' (#3732)
+  * Remove occasionally-problematic `ensure` in `LiquidRenderer` (#3811)
+  * Fixed an unclear code comment in site template SCSS (#3837)
+  * Fix reading of binary metadata file (#3845)
+  * Remove var collision with site template header menu iteration variable (#3838)
+  * Change non-existent `hl_linenos` to `hl_lines` to allow passthrough in safe mode (#3787)
+  * Add missing flag to disable the watcher (#3820)
+  * Update CI guide to include more direct explanations of the flow (#3891)
 
 ### Development Fixes
 
@@ -144,6 +155,13 @@
   * Force minitest version to 5.5.1 (#3657)
   * Update the way cucumber accesses Minitest assertions (#3678)
   * Add `script/rubyprof` to generate cachegrind callgraphs (#3692)
+  * Upgrade cucumber to 2.x (#3795)
+  * Update Kramdown. (#3853)
+  * Updated the scripts shebang for portability (#3858)
+  * Update JRuby testing to 9K ([3ab386f](https://github.com/jekyll/jekyll/commit/3ab386f1b096be25a24fe038fc70fd0fb08d545d))
+  * Organize dependencies into dev and test groups. (#3852)
+  * Contributing.md should refer to `script/cucumber` (#3894)
+  * Update contributing documentation to reflect workflow updates (#3895)
 
 ### Site Enhancements
 
@@ -210,6 +228,11 @@
   * Update link for navbars with data attributes tutorial (#3728)
   * Add `jekyll-asciinema` to list of third-party plugins (#3750)
   * Update pagination example to be agnostic to first pagination dir (#3763)
+  * Detailed instructions for rsync deployment method (#3848)
+  * Add Jekyll Portfolio Generator to list of plugins (#3883)
+  * Add `site.html_files` to variables docs (#3880)
+  * Add Static Publisher tool to list of deployment methods (#3865)
+  * Fix a few typos. (#3897)
 
 ## 2.5.3 / 2014-12-22
 

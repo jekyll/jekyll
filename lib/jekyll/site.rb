@@ -11,7 +11,7 @@ module Jekyll
                   :gems, :plugin_manager
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator
+    attr_reader   :regenerator, :liquid_renderer
 
     # Public: Initialize a new Site.
     #
@@ -32,6 +32,8 @@ module Jekyll
 
       # Initialize incremental regenerator
       @regenerator = Regenerator.new(self)
+
+      @liquid_renderer = LiquidRenderer.new(self)
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
@@ -57,6 +59,13 @@ module Jekyll
       render
       cleanup
       write
+      print_stats
+    end
+
+    def print_stats
+      if @config['profile']
+        puts @liquid_renderer.stats_table
+      end
     end
 
     # Reset Site details.
@@ -70,7 +79,8 @@ module Jekyll
       self.static_files = []
       self.data = {}
       @collections = nil
-      @regenerator.clear_cache()
+      @regenerator.clear_cache
+      @liquid_renderer.reset
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
@@ -318,7 +328,6 @@ module Jekyll
         docs + collection.docs + collection.files
       end.to_a
     end
-
 
     def each_site_file
       %w(posts pages static_files docs_to_write).each do |type|

@@ -310,7 +310,7 @@ class TestSite < JekyllUnitTest
 
         custom_processor = "CustomMarkdown"
         s = Site.new(site_configuration('markdown' => custom_processor))
-        assert !!s.process
+        s.process
 
         # Do some cleanup, we don't like straggling stuff's.
         Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
@@ -456,6 +456,17 @@ class TestSite < JekyllUnitTest
         should "be overridden by JEKYLL_ENV" do
           assert_equal "production", @page.content.strip
         end
+      end
+    end
+
+    context "with liquid profiling" do
+      setup do
+        @site = Site.new(site_configuration('profile' => true))
+      end
+
+      should "print profile table" do
+        @site.liquid_renderer.should_receive(:stats_table)
+        @site.process
       end
     end
 

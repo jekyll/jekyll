@@ -114,9 +114,9 @@ CONTENT
       assert_equal true, sanitized[:linenos]
     end
 
-    should "allow hl_linenos" do
-      sanitized = @tag.sanitized_opts({:hl_linenos => %w[1 2 3 4]}, true)
-      assert_equal %w[1 2 3 4], sanitized[:hl_linenos]
+    should "allow hl_lines" do
+      sanitized = @tag.sanitized_opts({:hl_lines => %w[1 2 3 4]}, true)
+      assert_equal %w[1 2 3 4], sanitized[:hl_lines]
     end
 
     should "allow cssclass" do
