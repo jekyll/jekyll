@@ -125,6 +125,7 @@
   * Change non-existent `hl_linenos` to `hl_lines` to allow passthrough in safe mode (#3787)
   * Add missing flag to disable the watcher (#3820)
   * Update CI guide to include more direct explanations of the flow (#3891)
+  * Set `future` to `false` in the default config (#3892)
 
 ### Development Fixes
 
