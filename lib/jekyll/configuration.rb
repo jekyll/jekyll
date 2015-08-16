@@ -220,14 +220,10 @@ module Jekyll
         config.delete('server')
       end
 
-      if config.key? 'server_port'
-        Jekyll::Deprecator.deprecation_message "The 'server_port' configuration option" +
-                            " has been renamed to 'port'. Please update your config" +
-                            " file accordingly."
-        # copy but don't overwrite:
-        config['port'] = config['server_port'] unless config.key?('port')
-        config.delete('server_port')
-      end
+      renamed_key 'server_port', 'port', config
+      renamed_key 'plugins', 'plugins_dir', config
+      renamed_key 'layouts', 'layouts_dir', config
+      renamed_key 'data_source', 'data_dir', config
 
       if config.key? 'pygments'
         Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" +
@@ -264,33 +260,6 @@ module Jekyll
           "`_config.yml` file."
       end
 
-      if config.key? 'plugins'
-        Jekyll::Deprecator.deprecation_message "The 'plugins'" +
-          " configuration option has been renamed to 'plugins_dir'." +
-          " Please update your config file accordingly."
-        # copy but don't overwrite:
-        config['plugins_dir'] = config['plugins'] unless config.key?('plugins_dir')
-        config.delete('plugins')
-      end
-
-      if config.key? 'layouts'
-        Jekyll::Deprecator.deprecation_message "The 'layouts'" +
-          " configuration option has been renamed to 'layouts_dir'." +
-          " Please update your config file accordingly."
-        # copy but don't overwrite:
-        config['layouts_dir'] = config['layouts'] unless config.key?('layouts_dir')
-        config.delete('layouts')
-      end
-
-      if config.key? 'data_source'
-        Jekyll::Deprecator.deprecation_message "The 'data_source'" +
-          " configuration option has been renamed to 'data_dir'." +
-          " Please update your config file accordingly."
-        # copy but don't overwrite:
-        config['data_dir'] = config['data_source'] unless config.key?('data_dir')
-        config.delete('data_source')
-      end
-
       config
     end
 
@@ -304,6 +273,15 @@ module Jekyll
       end
 
       config
+    end
+
+    def renamed_key(old, new, config, allowed_values = nil)
+      if config.key?(old)
+        Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" +
+          "option has been renamed to '#{new}'. Please update your config " +
+          "file accordingly."
+        config[new] = config.delete(old)
+      end
     end
   end
 end
