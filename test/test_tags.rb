@@ -600,6 +600,23 @@ CONTENT
       end
     end
 
+    context "with custom includes directory" do
+      setup do
+        content = <<CONTENT
+---
+title: custom includes directory
+---
+
+{% include custom.html %}
+CONTENT
+        create_post(content, {'includes_dir' => '_includes_custom', 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "include file from custom directory" do
+        assert_match "custom_included", @result
+      end
+    end
+
     context "without parameters within if statement" do
       setup do
         content = <<CONTENT

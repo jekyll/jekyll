@@ -9,9 +9,10 @@ module Jekyll
       # Where things are
       'source'        => Dir.pwd,
       'destination'   => File.join(Dir.pwd, '_site'),
-      'plugins'       => '_plugins',
-      'layouts'       => '_layouts',
-      'data_source'   =>  '_data',
+      'plugins_dir'   => '_plugins',
+      'layouts_dir'   => '_layouts',
+      'data_dir'      => '_data',
+      'includes_dir'  => '_includes',
       'collections'   => nil,
 
       # Handling Reading
@@ -219,14 +220,10 @@ module Jekyll
         config.delete('server')
       end
 
-      if config.key? 'server_port'
-        Jekyll::Deprecator.deprecation_message "The 'server_port' configuration option" +
-                            " has been renamed to 'port'. Please update your config" +
-                            " file accordingly."
-        # copy but don't overwrite:
-        config['port'] = config['server_port'] unless config.key?('port')
-        config.delete('server_port')
-      end
+      renamed_key 'server_port', 'port', config
+      renamed_key 'plugins', 'plugins_dir', config
+      renamed_key 'layouts', 'layouts_dir', config
+      renamed_key 'data_source', 'data_dir', config
 
       if config.key? 'pygments'
         Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" +
@@ -276,6 +273,15 @@ module Jekyll
       end
 
       config
+    end
+
+    def renamed_key(old, new, config, allowed_values = nil)
+      if config.key?(old)
+        Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" +
+          "option has been renamed to '#{new}'. Please update your config " +
+          "file accordingly."
+        config[new] = config.delete(old)
+      end
     end
   end
 end

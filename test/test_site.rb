@@ -13,22 +13,22 @@ class TestSite < JekyllUnitTest
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => '/tmp/plugins'}))
       assert_equal ['/tmp/plugins'], site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => ['/tmp/plugins', '/tmp/otherplugins']}))
       assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => []}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => []}))
       assert_equal [], site.plugins
     end
 
     should "have an empty array for plugins if nil is passed" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => nil}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => nil}))
       assert_equal [], site.plugins
     end
 

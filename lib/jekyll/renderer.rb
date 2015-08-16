@@ -138,7 +138,7 @@ module Jekyll
           layout.content,
           payload,
           info,
-          File.join(site.config['layouts'], layout.name)
+          File.join(site.config['layouts_dir'], layout.name)
         )
 
         # Add layout to dependency tree
