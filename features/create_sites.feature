@@ -162,9 +162,11 @@ Feature: Create sites
     And I have the following post:
       | title  | date       | layout | content             |
       | entry1 | 2020-12-31 | post   | content for entry1. |
+      | entry2 | 2007-12-31 | post   | content for entry2. |
     When I run jekyll build
-    Then the _site directory should not exist
-
+    Then the _site directory should exist
+    And I should see "content for entry2" in "_site/2007/12/31/entry2.html"
+    And the "_site/2020/12/31/entry1.html" file should not exist
     When I run jekyll build --future
     Then the _site directory should exist
     And the "_site/2020/12/31/entry1.html" file should exist
