@@ -82,6 +82,9 @@
   * Upgrade highlight wrapper from `div` to `figure` (#3779)
   * Upgrade mime-types to `~> 2.6` (#3795)
   * Update windows.md with Ruby version info (#3818)
+  * Make the directory for includes configurable (#3782)
+  * Rename directory configurations to match `*_dir` convention for consistency (#3782)
+
 
 ### Bug Fixes
 
