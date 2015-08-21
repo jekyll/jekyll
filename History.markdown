@@ -19,6 +19,7 @@
   * Remove support for relative permalinks (#3679)
   * Iterate over `site.collections` as an array instead of a hash. (#3670)
   * Adapt StaticFile for collections, config defaults (#3823)
+  * Add a Code of Conduct for the Jekyll project (#3925)
 
 ### Minor Enhancements
 
