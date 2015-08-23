@@ -85,7 +85,7 @@
   * Update windows.md with Ruby version info (#3818)
   * Make the directory for includes configurable (#3782)
   * Rename directory configurations to match `*_dir` convention for consistency (#3782)
-
+  * Internal: trigger hooks by owner symbol (#3871)
 
 ### Bug Fixes
 
