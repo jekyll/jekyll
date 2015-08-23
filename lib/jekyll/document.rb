@@ -190,7 +190,7 @@ module Jekyll
         f.write(output)
       end
 
-      Jekyll::Hooks.trigger self, :post_write
+      Jekyll::Hooks.trigger :document, :post_write, self
     end
 
     # Returns merged option hash for File.read of self.site (if exists)
