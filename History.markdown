@@ -86,6 +86,7 @@
   * Make the directory for includes configurable (#3782)
   * Rename directory configurations to match `*_dir` convention for consistency (#3782)
   * Internal: trigger hooks by owner symbol (#3871)
+  * Update MIME types from mime-db (#3933)
 
 ### Bug Fixes
 
@@ -167,6 +168,7 @@
   * Organize dependencies into dev and test groups. (#3852)
   * Contributing.md should refer to `script/cucumber` (#3894)
   * Update contributing documentation to reflect workflow updates (#3895)
+  * Add script to vendor mime types (#3933)
 
 ### Site Enhancements
 
