@@ -3,6 +3,8 @@
 require 'helper'
 
 class TestFilters < JekyllUnitTest
+  BYTE_ORDER_MARK = [0xEF, 0xBB, 0xBF]
+
   class JekyllFilter
     include Jekyll::Filters
     attr_accessor :site, :context
@@ -35,8 +37,34 @@ class TestFilters < JekyllUnitTest
       assert_equal "p {\n  color: #123456; }\n", @filter.sassify("$blue:#123456\np\n  color: $blue")
     end
 
+    should "sassify in compressed mode with utf-8 without BOM" do
+      filter = JekyllFilter.new({
+        "source" => source_dir,
+        "destination" => dest_dir,
+        "timezone" => "UTC",
+        "sass" => { "style" => "compressed" }
+      })
+      result = filter.sassify("a\n  content: \"\"")
+      first_three_bytes = result.bytes.to_a[0..2]
+      assert first_three_bytes != BYTE_ORDER_MARK
+      assert_equal "@charset \"UTF-8\";a{content:\"\"}\n", result
+    end
+
     should "scssify with simple string" do
       assert_equal "p {\n  color: #123456; }\n", @filter.scssify("$blue:#123456; p{color: $blue}")
+    end
+
+    should "scssify in compressed mode with utf-8 without BOM" do
+      filter = JekyllFilter.new({
+        "source" => source_dir,
+        "destination" => dest_dir,
+        "timezone" => "UTC",
+        "sass" => { "style" => "compressed" }
+      })
+      result = filter.scssify("a{content:\"\"}")
+      first_three_bytes = result.bytes.to_a[0..2]
+      assert first_three_bytes != BYTE_ORDER_MARK
+      assert_equal "@charset \"UTF-8\";a{content:\"\"}\n", result
     end
 
     should "convert array to sentence string with no args" do

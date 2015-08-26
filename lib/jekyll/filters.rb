@@ -23,7 +23,7 @@ module Jekyll
     def sassify(input)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::Sass)
-      converter.convert(input)
+      converter.convert(input).sub(/^\xEF\xBB\xBF/, '@charset "UTF-8";')
     end
 
     # Convert a Scss string into CSS output.
@@ -34,7 +34,7 @@ module Jekyll
     def scssify(input)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::Scss)
-      converter.convert(input)
+      converter.convert(input).sub(/^\xEF\xBB\xBF/, '@charset "UTF-8";')
     end
 
     # Slugify a filename or title.
