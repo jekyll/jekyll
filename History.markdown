@@ -240,6 +240,7 @@
   * Add `site.html_files` to variables docs (#3880)
   * Add Static Publisher tool to list of deployment methods (#3865)
   * Fix a few typos. (#3897)
+  * Add `jekyll-youtube` to the list of third-party plugins (#3931)
 
 ## 2.5.3 / 2014-12-22
 
