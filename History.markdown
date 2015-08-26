@@ -131,6 +131,7 @@
   * Add missing flag to disable the watcher (#3820)
   * Update CI guide to include more direct explanations of the flow (#3891)
   * Set `future` to `false` in the default config (#3892)
+  * filters: `where` should compare stringified versions of input & comparator (#3935)
 
 ### Development Fixes
 
