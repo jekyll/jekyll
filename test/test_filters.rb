@@ -277,6 +277,23 @@ class TestFilters < JekyllUnitTest
       should "filter objects appropriately" do
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
       end
+
+      should "stringify during comparison for compatibility with liquid parsing" do
+        hash = {
+          "The Words" => {"rating" => 1.2, "featured" => false},
+          "Limitless" => {"rating" => 9.2, "featured" => true},
+          "Hustle"    => {"rating" => 4.7, "featured" => true},
+        }
+
+        results = @filter.where(hash, "featured", "true")
+        assert_equal 2, results.length
+        assert_equal 9.2, results[0]["rating"]
+        assert_equal 4.7, results[1]["rating"]
+
+        results = @filter.where(hash, "rating", 4.7)
+        assert_equal 1, results.length
+        assert_equal 4.7, results[0]["rating"]
+      end
     end
 
     context "sort filter" do
