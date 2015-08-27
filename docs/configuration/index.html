@@ -2617,12 +2617,13 @@ file or on the command-line.</p>
 </div>
 
 <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Where things are</span>
-<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">.</span>
-<span class="l-Scalar-Plain">destination</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./_site</span>
-<span class="l-Scalar-Plain">plugins</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">./_plugins</span>
-<span class="l-Scalar-Plain">layouts</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">./_layouts</span>
-<span class="l-Scalar-Plain">data_source</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./_data</span>
-<span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">null</span>
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>       <span class="l-Scalar-Plain">.</span>
+<span class="l-Scalar-Plain">destination</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">./_site</span>
+<span class="l-Scalar-Plain">plugins_dir</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">./_plugins</span>
+<span class="l-Scalar-Plain">layouts_dir</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">./_layouts</span>
+<span class="l-Scalar-Plain">data_dir</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">./_data</span>
+<span class="l-Scalar-Plain">includes_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./_includes</span>
+<span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">null</span>
 
 <span class="c1"># Handling Reading</span>
 <span class="l-Scalar-Plain">safe</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">false</span>
@@ -2635,7 +2636,7 @@ file or on the command-line.</p>
 <span class="c1"># Filtering Content</span>
 <span class="l-Scalar-Plain">show_drafts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">null</span>
 <span class="l-Scalar-Plain">limit_posts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
-<span class="l-Scalar-Plain">future</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">true</span>
+<span class="l-Scalar-Plain">future</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">false</span>
 <span class="l-Scalar-Plain">unpublished</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
 
 <span class="c1"># Plugins</span>
