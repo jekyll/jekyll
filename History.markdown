@@ -242,6 +242,7 @@
   * Add Static Publisher tool to list of deployment methods (#3865)
   * Fix a few typos. (#3897)
   * Add `jekyll-youtube` to the list of third-party plugins (#3931)
+  * Add Views Router plugin (#3950)
 
 ## 2.5.3 / 2014-12-22
 
