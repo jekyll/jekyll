@@ -41,6 +41,7 @@ end
 
 gem 'jekyll-paginate', '~> 1.0'
 gem 'jekyll-coffeescript', '~> 1.0'
+gem 'jekyll-feed'
 gem 'jekyll-gist', '~> 1.0'
 gem 'mime-types', '~> 2.6'
 gem 'kramdown', '~> 1.8.0'
