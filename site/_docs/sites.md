@@ -20,7 +20,7 @@ learning purposes.
     ([source](https://github.com/rsms/rsms.github.com))
 - [Scott Chacon](http://schacon.github.com)
     ([source](https://github.com/schacon/schacon.github.com))
-- [Leonard Lamprecht](http://leo.github.io)
+- [Leonard Lamprecht](http://leo.im)
     ([source](https://github.com/leo/leo.github.io))
 
 If you would like to explore more examples, you can find a list of sites
