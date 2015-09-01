@@ -173,7 +173,7 @@ module Jekyll
       if path.nil? || path.empty?
         ""
       else
-        path.gsub(/\A\//, '').gsub(/([^\/])\z/, '\1/')
+        path.gsub(/\A\//, '').gsub(/([^\/])\z/, '\1')
       end
     end
   end

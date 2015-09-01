@@ -11,7 +11,7 @@ module Jekyll
                   :gems, :plugin_manager
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator
+    attr_reader   :regenerator, :liquid_renderer
 
     # Public: Initialize a new Site.
     #
@@ -32,6 +32,8 @@ module Jekyll
 
       # Initialize incremental regenerator
       @regenerator = Regenerator.new(self)
+
+      @liquid_renderer = LiquidRenderer.new(self)
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
@@ -57,6 +59,13 @@ module Jekyll
       render
       cleanup
       write
+      print_stats
+    end
+
+    def print_stats
+      if @config['profile']
+        puts @liquid_renderer.stats_table
+      end
     end
 
     # Reset Site details.
@@ -70,13 +79,14 @@ module Jekyll
       self.static_files = []
       self.data = {}
       @collections = nil
-      @regenerator.clear_cache()
+      @regenerator.clear_cache
+      @liquid_renderer.reset
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
       end
 
-      Jekyll::Hooks.trigger self, :after_reset
+      Jekyll::Hooks.trigger :site, :after_reset, self
     end
 
     # Load necessary libraries, plugins, converters, and generators.
@@ -134,7 +144,7 @@ module Jekyll
     def read
       reader.read
       limit_posts!
-      Jekyll::Hooks.trigger self, :post_read
+      Jekyll::Hooks.trigger :site, :post_read, self
     end
 
     # Run each of the Generators.
@@ -154,13 +164,13 @@ module Jekyll
 
       payload = site_payload
 
-      Jekyll::Hooks.trigger self, :pre_render, payload
+      Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
       collections.each do |label, collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run
-            Jekyll::Hooks.trigger document, :post_render
+            Jekyll::Hooks.trigger :document, :post_render, document
           end
         end
       end
@@ -189,7 +199,7 @@ module Jekyll
         item.write(dest) if regenerator.regenerate?(item)
       }
       regenerator.write_metadata
-      Jekyll::Hooks.trigger self, :post_write
+      Jekyll::Hooks.trigger :site, :post_write, self
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -318,7 +328,6 @@ module Jekyll
         docs + collection.docs + collection.files
       end.to_a
     end
-
 
     def each_site_file
       %w(posts pages static_files docs_to_write).each do |type|

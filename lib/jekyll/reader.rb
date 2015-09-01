@@ -16,7 +16,7 @@ module Jekyll
       @site.layouts = LayoutReader.new(site).read
       read_directories
       sort_files!
-      @site.data = DataReader.new(site).read(site.config['data_source'])
+      @site.data = DataReader.new(site).read(site.config['data_dir'])
       CollectionReader.new(site).read
     end
 

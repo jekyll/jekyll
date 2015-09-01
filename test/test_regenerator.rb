@@ -49,7 +49,7 @@ class TestRegenerator < JekyllUnitTest
       @regenerator = Regenerator.new(@site)
 
       # these should pass, since nothing has changed, and the
-      # loop above made sure the desinations exist
+      # loop above made sure the designations exist
       assert !@regenerator.regenerate?(@page)
       assert !@regenerator.regenerate?(@post)
       assert !@regenerator.regenerate?(@document)
@@ -86,6 +86,41 @@ class TestRegenerator < JekyllUnitTest
 
     should "always regenerate objects that don't respond to :path" do
       assert @regenerator.regenerate?(Object.new)
+    end
+  end
+
+  context "The site regenerator" do
+    setup do
+      FileUtils.rm_rf(source_dir(".jekyll-metadata"))
+
+      @site = fixture_site({
+        "full_rebuild" => false
+      })
+
+      @site.read
+      @post = @site.posts.first
+      @regenerator = @site.regenerator
+      @regenerator.regenerate?(@post)
+
+      @layout_path = source_dir("_layouts/default.html")
+    end
+
+    teardown do
+      File.rename(@layout_path + ".tmp", @layout_path)
+    end
+
+    should "handle deleted/nonexistent dependencies" do
+      assert_equal 1, @regenerator.metadata.size
+      path = @regenerator.metadata.keys[0]
+
+      assert File.exist?(@layout_path)
+      @regenerator.add_dependency(path, @layout_path)
+
+      File.rename(@layout_path, @layout_path + ".tmp")
+      refute File.exist?(@layout_path)
+
+      @regenerator.clear_cache
+      assert @regenerator.regenerate?(@post)
     end
   end
 

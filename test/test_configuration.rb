@@ -66,6 +66,9 @@ class TestConfiguration < JekyllUnitTest
         "exclude"  => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
         "include"  => "STOP_THE_PRESSES.txt,.heloses, .git",
         "pygments" => true,
+        "plugins" => true,
+        "layouts" => true,
+        "data_source" => true,
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -92,6 +95,17 @@ class TestConfiguration < JekyllUnitTest
       assert @config.key?("pygments")
       assert !@config.backwards_compatibilize.key?("pygments")
       assert_equal @config.backwards_compatibilize["highlighter"], "pygments"
+    end
+    should "adjust directory names" do
+      assert @config.key?("plugins")
+      assert !@config.backwards_compatibilize.key?("plugins")
+      assert @config.backwards_compatibilize["plugins_dir"]
+      assert @config.key?("layouts")
+      assert !@config.backwards_compatibilize.key?("layouts")
+      assert @config.backwards_compatibilize["layouts_dir"]
+      assert @config.key?("data_source")
+      assert !@config.backwards_compatibilize.key?("data_source")
+      assert @config.backwards_compatibilize["data_dir"]
     end
   end
   context "#fix_common_issues" do

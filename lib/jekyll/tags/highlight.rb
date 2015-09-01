@@ -64,7 +64,7 @@ eos
         if is_safe
           Hash[[
             [:startinline, opts.fetch(:startinline, nil)],
-            [:hl_linenos,  opts.fetch(:hl_linenos, nil)],
+            [:hl_lines,    opts.fetch(:hl_lines, nil)],
             [:linenos,     opts.fetch(:linenos, nil)],
             [:encoding,    opts.fetch(:encoding, 'utf-8')],
             [:cssclass,    opts.fetch(:cssclass, nil)]
@@ -113,7 +113,7 @@ eos
           "class=\"language-#{@lang.to_s.gsub('+', '-')}\"",
           "data-lang=\"#{@lang.to_s}\""
         ].join(" ")
-        "<div class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></div>"
+        "<figure class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></figure>"
       end
 
     end

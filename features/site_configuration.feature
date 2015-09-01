@@ -224,7 +224,7 @@ Feature: Site configuration
       | key         | value        |
       | time        | 2010-01-01   |
       | future      | true         |
-      | layouts     | _theme       |
+      | layouts_dir | _theme       |
     And I have a _posts directory
     And I have the following posts:
       | title  | date       | layout | content             |

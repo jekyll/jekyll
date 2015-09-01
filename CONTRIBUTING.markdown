@@ -31,16 +31,25 @@ Test Dependencies
 -----------------
 
 To run the test suite and build the gem you'll need to install Jekyll's
-dependencies. Jekyll uses Bundler, so a quick run of the bundle command and
-you're all set!
+dependencies. Simply run this command to get all setup:
 
-    $ bundle
+    $ script/bootstrap
 
 Before you start, run the tests and make sure that they pass (to confirm your
 environment is configured properly):
 
-    $ bundle exec rake test
-    $ bundle exec rake features
+    $ script/cibuild
+
+If you are only updating a file in `test/`, you can use the command:
+
+    $ script/test test/blah_test.rb
+
+If you are only updating a `.feature` file, you can use the command:
+
+    $ script/cucumber features/blah.feature
+
+Both `script/test` and `script/cucumber` can be run without arguments to
+run its entire respective suite.
 
 Workflow
 --------
@@ -48,10 +57,10 @@ Workflow
 Here's the most direct way to get your work merged into the project:
 
 * Fork the project.
-* Clone down your fork ( `git clone git@github.com:<username>/jekyll.git` ).
+* Clone down your fork ( `git clone git@github.com:[username]/jekyll.git` ).
 * Create a topic branch to contain your change ( `git checkout -b my_awesome_feature` ).
 * Hack away, add tests. Not necessarily in that order.
-* Make sure everything still passes by running `rake`.
+* Make sure everything still passes by running `script/cibuild`.
 * If necessary, rebase your commits into logical chunks, without errors.
 * Push the branch up ( `git push origin my_awesome_feature` ).
 * Create a pull request against jekyll/jekyll and describe what your change
@@ -74,11 +83,16 @@ requests directed at another branch will not be accepted.
 The [Jekyll wiki](https://github.com/jekyll/jekyll/wiki) on GitHub
 can be freely updated without a pull request as all GitHub users have access.
 
+If you want to add your plugin to the
+[list of plugins](http://jekyllrb.com/docs/plugins/#available-plugins),
+please submit a pull request modifying the
+[plugins page source file](site/_docs/plugins.md) by adding a
+link to your plugin under the proper subheading depending upon its type.
+
 Gotchas
 -------
 
-* If you want to bump the gem version, please put that in a separate commit.
-  This way, the maintainers can control when the gem gets released.
+* Please do not bump the gem version in your pull requests.
 * Try to keep your patch(es) based from the latest commit on jekyll/jekyll.
   The easier it is to apply your work, the less work the maintainers have to do,
   which is always a good thing.

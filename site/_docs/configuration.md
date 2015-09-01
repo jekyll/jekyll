@@ -180,7 +180,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Enable auto-regeneration of the site when files are modified.</p>
       </td>
       <td class="align-center">
-        <p><code class="flag">-w, --watch</code></p>
+        <p><code class="flag">-w, --[no-]watch</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -465,12 +465,13 @@ file or on the command-line.
 
 {% highlight yaml %}
 # Where things are
-source:      .
-destination: ./_site
-plugins:     ./_plugins
-layouts:     ./_layouts
-data_source: ./_data
-collections: null
+source:       .
+destination:  ./_site
+plugins_dir:  ./_plugins
+layouts_dir:  ./_layouts
+data_dir:     ./_data
+includes_dir: ./_includes
+collections:  null
 
 # Handling Reading
 safe:         false
@@ -483,7 +484,7 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 # Filtering Content
 show_drafts: null
 limit_posts: 0
-future:      true
+future:      false
 unpublished: false
 
 # Plugins
@@ -574,15 +575,14 @@ All other extensions retain their usual names from Redcarpet, and no renderer
 options aside from `smart` can be specified in Jekyll. [A list of available
 extensions can be found in the Redcarpet README file.][redcarpet_extensions]
 Make sure you're looking at the README for the right version of
-Redcarpet: Jekyll currently uses v2.2.x, and extensions like `footnotes` and
-`highlight` weren't added until after version 3.0.0. The most commonly used
+Redcarpet: Jekyll currently uses v3.2.x. The most commonly used
 extensions are:
 
 - `tables`
 - `no_intra_emphasis`
 - `autolink`
 
-[redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v2.2.2/README.markdown#and-its-like-really-simple-to-use
+[redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v3.2.2/README.markdown#and-its-like-really-simple-to-use
 
 ### Kramdown
 

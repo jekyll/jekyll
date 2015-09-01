@@ -114,9 +114,9 @@ CONTENT
       assert_equal true, sanitized[:linenos]
     end
 
-    should "allow hl_linenos" do
-      sanitized = @tag.sanitized_opts({:hl_linenos => %w[1 2 3 4]}, true)
-      assert_equal %w[1 2 3 4], sanitized[:hl_linenos]
+    should "allow hl_lines" do
+      sanitized = @tag.sanitized_opts({:hl_lines => %w[1 2 3 4]}, true)
+      assert_equal %w[1 2 3 4], sanitized[:hl_lines]
     end
 
     should "allow cssclass" do
@@ -597,6 +597,23 @@ CONTENT
 
       should "include file with empty parameters" do
         assert_match "<span id=\"include-param\"></span>", @result
+      end
+    end
+
+    context "with custom includes directory" do
+      setup do
+        content = <<CONTENT
+---
+title: custom includes directory
+---
+
+{% include custom.html %}
+CONTENT
+        create_post(content, {'includes_dir' => '_includes_custom', 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "include file from custom directory" do
+        assert_match "custom_included", @result
       end
     end
 

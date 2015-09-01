@@ -28,6 +28,32 @@ class TestFrontMatterDefaults < JekyllUnitTest
     end
   end
 
+  context "A site with front matter type pages and an extension" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "scope" => {
+            "path" => "index.html"
+          },
+          "values" => {
+            "key" => "val"
+          }
+        }]
+      }))
+
+      @site.process
+      @affected = @site.pages.find { |page| page.relative_path == "index.html" }
+      @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
+    end
+
+    should "affect only the specified path" do
+      assert_equal @affected.data["key"], "val"
+      assert_equal @not_affected.data["key"], nil
+    end
+  end
+
   context "A site with front matter defaults with no type" do
     setup do
       @site = Site.new(Jekyll.configuration({
