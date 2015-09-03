@@ -8,6 +8,8 @@ module Jekyll
             c.syntax 'clean [subcommand]'
             c.description 'Clean the site (removes site output and metadata file) without building.'
 
+            add_build_options(c)
+
             c.action do |args, _|
               Jekyll::Commands::Clean.process({})
             end
