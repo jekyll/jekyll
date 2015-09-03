@@ -39,6 +39,7 @@ module Jekyll
       'highlighter'   => 'rouge',
       'lsi'           => false,
       'excerpt_separator' => "\n\n",
+      'add_charset'   => true,
 
       # Serving
       'detach'        => false,          # default to not detaching the server
