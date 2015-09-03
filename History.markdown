@@ -132,6 +132,7 @@
   * Update CI guide to include more direct explanations of the flow (#3891)
   * Set `future` to `false` in the default config (#3892)
   * filters: `where` should compare stringified versions of input & comparator (#3935)
+  * Read build options for `jekyll clean` command (#3828)
 
 ### Development Fixes
 
