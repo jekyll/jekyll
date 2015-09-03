@@ -50,6 +50,20 @@ class TestFilters < JekyllUnitTest
       assert_equal "@charset \"UTF-8\";a{content:\"\"}\n", result
     end
 
+    should "sassify in compressed mode removing BOM and not inserting charset" do
+      filter = JekyllFilter.new({
+        "source" => source_dir,
+        "destination" => dest_dir,
+        "timezone" => "UTC",
+        "sass" => { "style" => "compressed" },
+        "add_charset" => false
+      })
+      result = filter.sassify("a\n  content: \"\"")
+      first_three_bytes = result.bytes.to_a[0..2]
+      assert first_three_bytes != BYTE_ORDER_MARK
+      assert_equal "a{content:\"\"}\n", result
+    end
+
     should "scssify with simple string" do
       assert_equal "p {\n  color: #123456; }\n", @filter.scssify("$blue:#123456; p{color: $blue}")
     end
@@ -65,6 +79,20 @@ class TestFilters < JekyllUnitTest
       first_three_bytes = result.bytes.to_a[0..2]
       assert first_three_bytes != BYTE_ORDER_MARK
       assert_equal "@charset \"UTF-8\";a{content:\"\"}\n", result
+    end
+
+    should "scssify in compressed mode removing BOM and not inserting charset" do
+      filter = JekyllFilter.new({
+        "source" => source_dir,
+        "destination" => dest_dir,
+        "timezone" => "UTC",
+        "sass" => { "style" => "compressed" },
+        "add_charset" => false
+      })
+      result = filter.scssify("a{content:\"\"}")
+      first_three_bytes = result.bytes.to_a[0..2]
+      assert first_three_bytes != BYTE_ORDER_MARK
+      assert_equal "a{content:\"\"}\n", result
     end
 
     should "convert array to sentence string with no args" do
