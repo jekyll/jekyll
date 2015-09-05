@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #
 # rebund(1)
 #
@@ -37,14 +37,10 @@
 : ${REBUND_BUNDLE_DIR:=vendor/bundle}
 
 
+die() { echo "$@" 1>&2 ; exit 1; }
 
 log() {
   echo "rebund: $*" > /dev/stderr
-}
-
-die() {
-  echo "fatal: $*" > /dev/stderr
-  exit 1
 }
 
 success() {
@@ -53,7 +49,9 @@ success() {
 }
 
 on_error() {
-  die 'unknown error.'
+  echo "prout"
+  echo 'unknown error.' > /dev/stderr
+  exit 1
 }
 
 get_ruby_version() {
@@ -110,11 +108,7 @@ rebund_usage() {
   success "usage: $0 [-v] [upload|download]"
 }
 
-# cath errors
-trap on_error ERR
-
-# inherit the ERR trap in subprocesses
-set -E
+set -e
 
 while test $# -gt 0 ; do
   case $1 in

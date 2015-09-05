@@ -1,12 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 script/branding
 
-if [[ -z "$TEST_SUITE" ]]
+if [ -z "$TEST_SUITE" ]
 then
   script/test  ci
   script/cucumber
-elif [[ -x "script/$TEST_SUITE" ]]
+elif [ -x "script/$TEST_SUITE" ]
 then
   script/$TEST_SUITE
 else

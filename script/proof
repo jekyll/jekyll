@@ -5,8 +5,8 @@
 
 set -e
 
-function msg {
-	printf "\e[0;37m==> $1\e[0m\n"
+msg() {
+	printf "==> $1\n"
 }
 
 INGORE_HREFS=$(ruby -e 'puts %w{
