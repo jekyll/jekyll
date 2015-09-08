@@ -1,61 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"
-  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xmlns:atom="http://www.w3.org/2005/Atom"
-  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
-  xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
-  >
-  <channel>
-    <title xml:lang="en">Jekyll • Simple, blog-aware, static sites</title>
-    <atom:link type="application/atom+xml" href="http://jekyllrb.com/feed.xml" rel="self"/>
-    <link>http://jekyllrb.com/</link>
-    <pubDate>Thu, 27 Aug 2015 13:35:06 -0700</pubDate>
-    <lastBuildDate>Thu, 27 Aug 2015 13:35:06 -0700</lastBuildDate>
-    <language>en-US</language>
-    <generator>Jekyll v3.0.0.pre.beta8</generator>
-    <description>Transform your plain text into static websites and blogs.</description>
-    <image>
-      <description>Transform your plain text into static websites and blogs.</description>
-      <url>http://jekyllrb.com/img/logo-rss.png</url>
-      <title>Jekyll • Simple, blog-aware, static sites</title>
-      <link>http://jekyllrb.com/</link>
-      <width>144</width>
-      <height>73</height>
-    </image>
-    
-    <item>
-      <title>Join the Discussion at Jekyll Talk</title>
-      <link>http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/</link>
-      <pubDate>Thu, 26 Feb 2015 21:06:51 -0800</pubDate>
-      <dc:creator>alfredxing</dc:creator>
-      
-      
-      <category>community</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/</guid>
-      <description>&lt;p&gt;We’re super excited to announce the launch of &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;Jekyll Talk&lt;/a&gt;, a Discourse forum for anything related to Jekyll!&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom">
+<generator uri="http://jekyllrb.com" version="3.0.0.pre.beta8">Jekyll</generator>
+<link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
+<link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
+<updated>2015-09-07T22:04:41-07:00</updated>
+<id>http://jekyllrb.com/</id>
+<title>Jekyll • Simple, blog-aware, static sites</title>
+<subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Join the Discussion at Jekyll Talk</title>
+<link href="http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/" rel="alternate" type="text/html" title="Join the Discussion at Jekyll Talk" />
+<published>2015-02-26T21:06:51-08:00</published>
+<updated>2015-02-26T21:06:51-08:00</updated>
+<id>http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/">&lt;p&gt;We’re super excited to announce the launch of &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;Jekyll Talk&lt;/a&gt;, a Discourse forum for anything related to Jekyll!&lt;/p&gt;
 
 &lt;p&gt;The forum was set up by &lt;a href=&quot;https://github.com/envygeeks&quot;&gt;@envygeeks&lt;/a&gt; to build a community more accessible to Jekyll users and more suitable for general discussion.&lt;/p&gt;
 
 &lt;p&gt;There’s already been a lot of interesting topics, including a &lt;a href=&quot;https://talk.jekyllrb.com/t/showcase-sites-made-using-jekyll/18&quot;&gt;site showcase&lt;/a&gt; and &lt;a href=&quot;https://talk.jekyllrb.com/t/poll-installation-priorities-for-3-0/106/9&quot;&gt;a poll for Jekyll 3.0 priorities&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Come join the fun!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 3.0.0.beta1 Released</title>
-      <link>http://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released/</link>
-      <pubDate>Sat, 24 Jan 2015 00:42:31 -0800</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released/</guid>
-      <description>&lt;p&gt;Hey!&lt;/p&gt;
+</content>
+<author>
+<name>alfredxing</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Jekyll 3.0.0.beta1 Released</title>
+<link href="http://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released/" rel="alternate" type="text/html" title="Jekyll 3.0.0.beta1 Released" />
+<published>2015-01-24T00:42:31-08:00</published>
+<updated>2015-01-24T00:42:31-08:00</updated>
+<id>http://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released/">&lt;p&gt;Hey!&lt;/p&gt;
 
 &lt;p&gt;Exciting news! First beta for Jekyll 3 is out. Check out the &lt;a href=&quot;https://github.com/jekyll/jekyll/blob/v3.0.0.beta1/History.markdown#head&quot;&gt;sizable
 changelog&lt;/a&gt;
@@ -70,7 +47,9 @@ improved problematic code that caused slow-downs.&lt;/li&gt;
 
 &lt;p&gt;To install just run:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install jekyll --pre&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;{% highlight bash %}
+$ gem install jekyll –pre
+{% endhighlight %}&lt;/p&gt;
 
 &lt;p&gt;Future versions will include &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/3324&quot;&gt;some awesome new
 features&lt;/a&gt; that we haven’t
@@ -86,20 +65,19 @@ can reproduce.&lt;/p&gt;
 We’re always looking to make Jekyll easier to use!&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll Meet &amp; Greet at GitHub HQ</title>
-      <link>http://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet/</link>
-      <pubDate>Tue, 20 Jan 2015 19:23:12 -0800</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>meetup</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet/</guid>
-      <description>&lt;p&gt;Hey! Our friends at GitHub have agreed to host a Jekyll meet &amp;amp; greet on
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Jekyll Meet &amp;amp; Greet at GitHub HQ</title>
+<link href="http://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet/" rel="alternate" type="text/html" title="Jekyll Meet &amp; Greet at GitHub HQ" />
+<published>2015-01-20T19:23:12-08:00</published>
+<updated>2015-01-20T19:23:12-08:00</updated>
+<id>http://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet/">&lt;p&gt;Hey! Our friends at GitHub have agreed to host a Jekyll meet &amp;amp; greet on
 &lt;strong&gt;February 5, 2015 at 7pm&lt;/strong&gt;. The event will be hosted at
 &lt;a href=&quot;https://goo.gl/maps/Bmy7i&quot;&gt;GitHub’s Headquarters&lt;/a&gt;
 here in San Francisco, CA. Pizza &amp;amp; beer will be available for those interested,
@@ -111,44 +89,42 @@ over a potential feature with the core team in attendance.&lt;/p&gt;
 all possible! You rock.&lt;/p&gt;
 
 &lt;p&gt;We look forward to meeting all you fine folks. Cheers!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll Release for the Holidays! v2.5.3 Out</title>
-      <link>http://jekyllrb.com/news/2014/12/22/jekyll-2-5-3-released/</link>
-      <pubDate>Mon, 22 Dec 2014 06:03:30 -0800</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/12/22/jekyll-2-5-3-released/</guid>
-      <description>&lt;p&gt;Happy Holidays, everyone.&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Jekyll Release for the Holidays! v2.5.3 Out</title>
+<link href="http://jekyllrb.com/news/2014/12/22/jekyll-2-5-3-released/" rel="alternate" type="text/html" title="Jekyll Release for the Holidays! v2.5.3 Out" />
+<published>2014-12-22T06:03:30-08:00</published>
+<updated>2014-12-22T06:03:30-08:00</updated>
+<id>http://jekyllrb.com/news/2014/12/22/jekyll-2-5-3-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2014/12/22/jekyll-2-5-3-released/">&lt;p&gt;Happy Holidays, everyone.&lt;/p&gt;
 
 &lt;p&gt;Jekyll v2.5.3 is a quick patch release, containing some minor fixes. See the
 &lt;a href=&quot;/docs/history/&quot;&gt;full history&lt;/a&gt; for more info. If you notice any problems,
-please &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;let us know&lt;/a&gt;.&lt;/p&gt;
+please &lt;a href=&quot;{{ site.help_url }}&quot;&gt;let us know&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;This release also marks the start of Jekyll 3 development. I wrote about it
 over on my personal blog: &lt;a href=&quot;https://byparker.com/blog/2014/jekyll-3-the-road-ahead/&quot;&gt;Jekyll 3 — The Road Ahead&lt;/a&gt;.
 Feel free to chime in over on GitHub.&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Alfred Xing has joined the Jekyll core team</title>
-      <link>http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core/</link>
-      <pubDate>Wed, 17 Dec 2014 11:16:21 -0800</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>team</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core/</guid>
-      <description>&lt;p&gt;We’re excited to announce that &lt;a href=&quot;https://github.com/alfredxing&quot;&gt;@alfredxing&lt;/a&gt; has joined the @jekyll/core
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Alfred Xing has joined the Jekyll core team</title>
+<link href="http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core/" rel="alternate" type="text/html" title="Alfred Xing has joined the Jekyll core team" />
+<published>2014-12-17T11:16:21-08:00</published>
+<updated>2014-12-17T11:16:21-08:00</updated>
+<id>http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core/">&lt;p&gt;We’re excited to announce that &lt;a href=&quot;https://github.com/alfredxing&quot;&gt;@alfredxing&lt;/a&gt; has joined the @jekyll/core
 team!&lt;/p&gt;
 
 &lt;p&gt;He hails from Vancouver, BC, Canada, where he is studying Economics and
@@ -164,20 +140,19 @@ place!&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
 
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 2.5.2 Released</title>
-      <link>http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released/</link>
-      <pubDate>Wed, 12 Nov 2014 18:49:08 -0800</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released/</guid>
-      <description>&lt;p&gt;A very minor release, 2.5.2 fixes a bug with path sanitation that 2.5.1
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Jekyll 2.5.2 Released</title>
+<link href="http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released/" rel="alternate" type="text/html" title="Jekyll 2.5.2 Released" />
+<published>2014-11-12T18:49:08-08:00</published>
+<updated>2014-11-12T18:49:08-08:00</updated>
+<id>http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released/">&lt;p&gt;A very minor release, 2.5.2 fixes a bug with path sanitation that 2.5.1
 introduced. It also improves the &lt;code&gt;post_url&lt;/code&gt; tag such that it checks the
 posts’ name (e.g. &lt;code&gt;2014-03-03-my-cool-post&lt;/code&gt;) instead of a compiled time and
 name. This fixes issues where posts are created and the day changes based
@@ -186,20 +161,19 @@ on timezone discrepancies.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;/docs/history/&quot;&gt;Full history here.&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 2.5.1 Released</title>
-      <link>http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released/</link>
-      <pubDate>Sun, 09 Nov 2014 09:47:52 -0800</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released/</guid>
-      <description>&lt;p&gt;Hot on the heels of v2.5.0, this release brings relief to our Windows
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Jekyll 2.5.1 Released</title>
+<link href="http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released/" rel="alternate" type="text/html" title="Jekyll 2.5.1 Released" />
+<published>2014-11-09T09:47:52-08:00</published>
+<updated>2014-11-09T09:47:52-08:00</updated>
+<id>http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released/">&lt;p&gt;Hot on the heels of v2.5.0, this release brings relief to our Windows
 users. It includes a fix for a 2.5.0 path sanitation change that has been
 confirmed to work on Windows.&lt;/p&gt;
 
@@ -218,20 +192,19 @@ and Alfred Xing.&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
 
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll&#39;s Mid-Life Crisis (Or, Jekyll turns 2.5.0)</title>
-      <link>http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/</link>
-      <pubDate>Wed, 05 Nov 2014 10:48:22 -0800</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/</guid>
-      <description>&lt;p&gt;A new day, a new release! Jekyll just turned 2.5.0 and has gained a lot of
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Jekyll’s Mid-Life Crisis (Or, Jekyll turns 2.5.0)</title>
+<link href="http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/" rel="alternate" type="text/html" title="Jekyll&#39;s Mid-Life Crisis (Or, Jekyll turns 2.5.0)" />
+<published>2014-11-05T10:48:22-08:00</published>
+<updated>2014-11-05T10:48:22-08:00</updated>
+<id>http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/">&lt;p&gt;A new day, a new release! Jekyll just turned 2.5.0 and has gained a lot of
 wisdom along the way. This 2.5.0 release also comes just a few weeks after
 Jekyll turned 6 years old! In fashion, we’re celebrating this huge
 milestone with a pretty big release. What’s changed in 2.5.0? Here are some
@@ -253,9 +226,9 @@ highlights:&lt;/p&gt;
 &lt;p&gt;…and a whole bunch of other fixes and enhancements you can read more
 about in &lt;a href=&quot;/docs/history/&quot;&gt;the changelog!&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;As always, if you run into issues, please &lt;a href=&quot;https://github.com/jekyll/jekyll/issues&quot;&gt;check the issues&lt;/a&gt;
-and &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/new&quot;&gt;create an issue if one doesn’t exist for the bug you encountered&lt;/a&gt;.
-If you just need some help, the extraordinary &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;jekyll help team is here for
+&lt;p&gt;As always, if you run into issues, please &lt;a href=&quot;{{ site.repository }}/issues&quot;&gt;check the issues&lt;/a&gt;
+and &lt;a href=&quot;{{ site.repository }}/issues/new&quot;&gt;create an issue if one doesn’t exist for the bug you encountered&lt;/a&gt;.
+If you just need some help, the extraordinary &lt;a href=&quot;{{ site.help_url }}&quot;&gt;jekyll help team is here for
 you!&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;When was the &lt;a href=&quot;https://github.com/jekyll/jekyll/commit/d189e05d236769c1e5594af9db4d6eacb86fc16e&quot;&gt;first commit to Jekyll&lt;/a&gt;?
@@ -271,30 +244,29 @@ Rob Murray, Sean Collins, Seth Warburton, Tom Thorogood, Vasily Vasinov,
 Veres Lajos, feivel, mitaa, nitoyon, snrbrnjna, tmthrgd, Bret Comnes,
 Charles Baynham, Christian Mayer, Dan Croak, Frederic Hemberger, Glauco
 Custódio, Igor Kapkov, and Kevin Ndung’u!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Wild Jekyll 2.4.0 Appeared!</title>
-      <link>http://jekyllrb.com/news/2014/09/09/jekyll-2-4-0-released/</link>
-      <pubDate>Tue, 09 Sep 2014 21:10:33 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/09/09/jekyll-2-4-0-released/</guid>
-      <description>&lt;p&gt;Well, lookie here! A new release of Jekyll! v2.4.0 contains lots of goodies, including some brilliant new additions:&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>A Wild Jekyll 2.4.0 Appeared!</title>
+<link href="http://jekyllrb.com/news/2014/09/09/jekyll-2-4-0-released/" rel="alternate" type="text/html" title="A Wild Jekyll 2.4.0 Appeared!" />
+<published>2014-09-09T21:10:33-07:00</published>
+<updated>2014-09-09T21:10:33-07:00</updated>
+<id>http://jekyllrb.com/news/2014/09/09/jekyll-2-4-0-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2014/09/09/jekyll-2-4-0-released/">&lt;p&gt;Well, lookie here! A new release of Jekyll! v2.4.0 contains lots of goodies, including some brilliant new additions:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;A new &lt;code&gt;relative_include&lt;/code&gt; Liquid tag (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2870&quot;&gt;#2870&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Render Liquid in CoffeeScript files (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2830&quot;&gt;#2830&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add 4 new array Liquid filters: &lt;code&gt;push&lt;/code&gt;, &lt;code&gt;pop&lt;/code&gt;, &lt;code&gt;shift&lt;/code&gt;, and &lt;code&gt;unshift&lt;/code&gt; (&lt;a href=&quot;https://github.com/jekyll/jekyll/pull/2895&quot;&gt;#2895&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Auto-enable watch on ‘serve’ (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2858&quot;&gt;#2858&lt;/a&gt;). No more &lt;code&gt;-w&lt;/code&gt;!&lt;/li&gt;
-  &lt;li&gt;Add &lt;code&gt;:title&lt;/code&gt; and &lt;code&gt;:name&lt;/code&gt; to collection URL template fillers (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2864&quot;&gt;#2864&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2799&quot;&gt;#2799&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add support for CSV files in the &lt;code&gt;_data&lt;/code&gt; directory (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2761&quot;&gt;#2761&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add &lt;code&gt;inspect&lt;/code&gt; liquid filter (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2867&quot;&gt;#2867&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add a &lt;code&gt;slugify&lt;/code&gt; Liquid filter (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2880&quot;&gt;#2880&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;A new &lt;code&gt;relative_include&lt;/code&gt; Liquid tag (&lt;a href=&quot;{{ site.repository }}/issues/2870&quot;&gt;#2870&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Render Liquid in CoffeeScript files (&lt;a href=&quot;{{ site.repository }}/issues/2830&quot;&gt;#2830&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Add 4 new array Liquid filters: &lt;code&gt;push&lt;/code&gt;, &lt;code&gt;pop&lt;/code&gt;, &lt;code&gt;shift&lt;/code&gt;, and &lt;code&gt;unshift&lt;/code&gt; (&lt;a href=&quot;{{ site.repository }}/pull/2895&quot;&gt;#2895&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Auto-enable watch on ‘serve’ (&lt;a href=&quot;{{ site.repository }}/issues/2858&quot;&gt;#2858&lt;/a&gt;). No more &lt;code&gt;-w&lt;/code&gt;!&lt;/li&gt;
+  &lt;li&gt;Add &lt;code&gt;:title&lt;/code&gt; and &lt;code&gt;:name&lt;/code&gt; to collection URL template fillers (&lt;a href=&quot;{{ site.repository }}/issues/2864&quot;&gt;#2864&lt;/a&gt; &amp;amp; &lt;a href=&quot;{{ site.repository }}/issues/2799&quot;&gt;#2799&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Add support for CSV files in the &lt;code&gt;_data&lt;/code&gt; directory (&lt;a href=&quot;{{ site.repository }}/issues/2761&quot;&gt;#2761&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Add &lt;code&gt;inspect&lt;/code&gt; liquid filter (&lt;a href=&quot;{{ site.repository }}/issues/2867&quot;&gt;#2867&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Add a &lt;code&gt;slugify&lt;/code&gt; Liquid filter (&lt;a href=&quot;{{ site.repository }}/issues/2880&quot;&gt;#2880&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Some other wunderbar bug fixes in there as well. Check out the &lt;a href=&quot;/docs/history/&quot;&gt;full changelog&lt;/a&gt; for the whole scoop.&lt;/p&gt;
@@ -302,20 +274,19 @@ Custódio, Igor Kapkov, and Kevin Ndung’u!&lt;/p&gt;
 &lt;p&gt;As always, many thanks to our amazing contributors who made this release possible: Chris Frederick, Garen Torikian, James Smith, Ruslan Korolev, Joel Glovier, Michael Kühnel, Minn Soe, Pat Hawks, Peter deHaan, Shu Uesugi, TJ, Zhuochun, Alfred Xing, nitoyon, Anatol Broder, Faruk AYDIN, Frederic Hemberger, and Gordon Gao. Thank you!!&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 2.3.0 Released</title>
-      <link>http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released/</link>
-      <pubDate>Sun, 10 Aug 2014 17:38:34 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released/</guid>
-      <description>&lt;p&gt;This latest release of Jekyll includes a slew of enhancements and bug
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Jekyll 2.3.0 Released</title>
+<link href="http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released/" rel="alternate" type="text/html" title="Jekyll 2.3.0 Released" />
+<published>2014-08-10T17:38:34-07:00</published>
+<updated>2014-08-10T17:38:34-07:00</updated>
+<id>http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released/">&lt;p&gt;This latest release of Jekyll includes a slew of enhancements and bug
 fixes. Some of the highlights:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -337,714 +308,19 @@ converting the CSS into SCSS.&lt;/li&gt;
   &lt;li&gt;Lots, lots more!&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;One change deserves special note. In &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2633&quot;&gt;#2633&lt;/a&gt;, subfolders &lt;em&gt;inside&lt;/em&gt; a
+&lt;p&gt;One change deserves special note. In &lt;a href=&quot;{{ site.repository }}/issues/2633&quot;&gt;#2633&lt;/a&gt;, subfolders &lt;em&gt;inside&lt;/em&gt; a
 &lt;code&gt;_posts&lt;/code&gt; folder were processed and added as categories to the posts. It
 turns out, this behaviour was unwanted by a large number of individuals, as
 it is a handy way to organize posts. Ultimately, we decided to revert this
-change in &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2705&quot;&gt;#2705&lt;/a&gt;, because it was a change in behaviour that was already
+change in &lt;a href=&quot;{{ site.repository }}/issues/2705&quot;&gt;#2705&lt;/a&gt;, because it was a change in behaviour that was already
 well-established (at least since Jekyll v0.7.0), and was convenient.&lt;/p&gt;
 
 &lt;p&gt;For more excellent CHANGELOG reading material, check out the &lt;a href=&quot;/docs/history/&quot;&gt;History
 page&lt;/a&gt;! Happy Jekylling!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 2.2.0 Released</title>
-      <link>http://jekyllrb.com/news/2014/07/29/jekyll-2-2-0-released/</link>
-      <pubDate>Tue, 29 Jul 2014 15:59:13 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/07/29/jekyll-2-2-0-released/</guid>
-      <description>&lt;p&gt;Jekyll 2.2.0 contains a few key updates:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;A warning will now fire if you specify a layout in any of your pages or
- posts that doesn’t exist.&lt;/li&gt;
-  &lt;li&gt;Certain Pygments options are now whitelisted in safe mode&lt;/li&gt;
-  &lt;li&gt;Categories in a post’s path are now respected (i.e. folders in &lt;code&gt;_posts&lt;/code&gt;
-will now work properly).&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;As always, a full list of the updates are on the
-&lt;a href=&quot;/docs/history/#v2-2-0&quot;&gt;history page&lt;/a&gt;. Happy Jekylling!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 2.1.1 Released</title>
-      <link>http://jekyllrb.com/news/2014/07/01/jekyll-2-1-1-released/</link>
-      <pubDate>Tue, 01 Jul 2014 17:16:43 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/07/01/jekyll-2-1-1-released/</guid>
-      <description>&lt;p&gt;This is a minor release for Jekyll 2.1.0. It fixes a couple bugs and
-introduces fixes for a couple security-related issues.&lt;/p&gt;
-
-&lt;p&gt;It covers two security vulnerabilities:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;One in the reading of data&lt;/li&gt;
-  &lt;li&gt;One in the &lt;code&gt;layouts&lt;/code&gt; setting&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;They were identified in Jekyll 1.5.1 and has been confirmed as patched
-in this version and the version used by GitHub Pages. If you are in the
-business of building Jekyll sites, please ensure you upgrade to 2.1.1 as
-soon as possible.&lt;/p&gt;
-
-&lt;p&gt;For more, check out &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/2563&quot;&gt;&lt;code&gt;jekyll/jekyll#2563&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Additionally, the dependency on Maruku has been loosened and a bug was
-fixed with document URLs.&lt;/p&gt;
-
-&lt;p&gt;As always, check out the &lt;a href=&quot;/docs/history/&quot;&gt;full changelog&lt;/a&gt; for more info!&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll Turns 21! Err... I mean 2.1.0.</title>
-      <link>http://jekyllrb.com/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/</link>
-      <pubDate>Sat, 28 Jun 2014 14:26:59 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/</guid>
-      <description>&lt;p&gt;Jekyll’s finally &lt;a href=&quot;http://en.wikipedia.org/wiki/Legal_drinking_age&quot;&gt;legal to drink in the States&lt;/a&gt;.
-And he’s done a lot of learning in the process! Here are some of the new
-things to look forward to:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Uses the latest Liquid version (2.6.1) (#2495)&lt;/li&gt;
-  &lt;li&gt;Set front matter defaults for collections (#2419)&lt;/li&gt;
-  &lt;li&gt;Set a collection-specific URL template (#2418)&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;pygments.rb&lt;/code&gt; 0.6.0! (#2504)&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;.json&lt;/code&gt; files in &lt;code&gt;_data&lt;/code&gt; (#2369)&lt;/li&gt;
-  &lt;li&gt;Allow subdirectories in &lt;code&gt;_data&lt;/code&gt; (#2395)&lt;/li&gt;
-  &lt;li&gt;Add support for &lt;code&gt;hl_lines&lt;/code&gt; in &lt;code&gt;highlight&lt;/code&gt; tag (#2532)&lt;/li&gt;
-  &lt;li&gt;Post categories now merge with directory, front matter, and defaults (#2373)&lt;/li&gt;
-  &lt;li&gt;New &lt;code&gt;--skip_initial_build&lt;/code&gt; flag for &lt;code&gt;jekyll serve&lt;/code&gt; (#2477)&lt;/li&gt;
-  &lt;li&gt;A bajilion bug fixes and site updates!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Let’s go party!&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Check out the &lt;a href=&quot;/docs/history/#v2-1-0&quot;&gt;full changelog&lt;/a&gt; for more.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Many thanks to these 37 contributors for the 2.1.0 release:&lt;/p&gt;
-
-&lt;p&gt;Alberto Grespan, Alessandro Lorenzi, Alex Medearis, Alfred Xing, Anatol Broder, Ben, Ben Balter, Bud Parr, Chezou, Denilson Figueiredo de Sá, Denilson Sá, Ivan Tse, Jens Nazarenus, Jesse Shawl, Jordon Bedwell, Josh Davis, János Rusiczki, Marc Ransome, Mathieu Bruyen, Matt Rogers, Parker Moore, Pat Hawks, Paul Henry, Peter Rhoades, Philipp Rudloff, Quinn Shanahan, Renaud Martinet, Rob Murray, Rodrigo Dumont, Simon Sarris, Terry, Terry Schmidt, Tomer Cohen, XhmikosR, Yihang Ho, jaybe@jekyll, and mikecole.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Pick Up your $1 Jekyll Sticker</title>
-      <link>http://jekyllrb.com/news/2014/06/04/jekyll-stickers-1-dollar-stickermule/</link>
-      <pubDate>Wed, 04 Jun 2014 12:46:53 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>partners</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/06/04/jekyll-stickers-1-dollar-stickermule/</guid>
-      <description>&lt;p&gt;&lt;img src=&quot;/img/jekyll-sticker.jpg&quot; alt=&quot;Jekyll Sticker&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You may have heard that &lt;a href=&quot;https://github.com/cobyism&quot;&gt;@cobyism&lt;/a&gt;’s excellent
-Jekyll logo has been made into a sticker. You may have sat idly by, wishing
-that you could have a sticker honoring your beloved Jekyll.&lt;/p&gt;
-
-&lt;p&gt;The StickerMule team says, &lt;em&gt;“Pine no longer!”&lt;/em&gt; StickerMule has &lt;strong&gt;&lt;a href=&quot;http://www.stickermule.com/marketplace/825-jekyll-stickers&quot;&gt;discounted the
-price of Jekyll stickers down to $1 and are offering free (domestic)
-shipping&lt;/a&gt;!&lt;/strong&gt;
-Go grab one now on the StickerMule marketplace – &lt;a href=&quot;https://twitter.com/parkr/status/430826309707902976/photo/1&quot;&gt;they’ll look
-swell on your favourite hardware.&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 2.0.3 Released</title>
-      <link>http://jekyllrb.com/news/2014/05/08/jekyll-2-0-3-released/</link>
-      <pubDate>Thu, 08 May 2014 19:43:17 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/05/08/jekyll-2-0-3-released/</guid>
-      <description>&lt;p&gt;Hey again! Just wanted to let you know we’ve released another version of Jekyll, jam-packed with bug fixes.&lt;/p&gt;
-
-&lt;p&gt;A huge “thank you” is in order for all the folks who have submitted bug reports over the last 2 days — your input is what allows this project to continue. It’s always a pain to deal with a MAJOR version bump release, but it’s been pretty smooth so far and you have all been nice about the flaws you’ve found in the tool. Keep filing those reports so we can continue to make Jekyll even better!&lt;/p&gt;
-
-&lt;p&gt;Thank you to the contributors that contributed code to 2.0.1, 2.0.2, and/or 2.0.3:&lt;/p&gt;
-
-&lt;p&gt;Parker Moore, Yi Zeng, Gabe Ortiz, Aaron Broder, Alberto Grespan, gpxl, David Briggs, Kevin Ingersoll, and Troy Swanson.&lt;/p&gt;
-
-&lt;p&gt;As always, check out the &lt;a href=&quot;/docs/history/&quot;&gt;changelog&lt;/a&gt; for more info. Happy Jekylling!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll turns 2.0.0</title>
-      <link>http://jekyllrb.com/news/2014/05/06/jekyll-turns-2-0-0/</link>
-      <pubDate>Tue, 06 May 2014 00:00:00 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/05/06/jekyll-turns-2-0-0/</guid>
-      <description>&lt;p&gt;A year ago to the day, &lt;a href=&quot;/news/2013/05/05/jekyll-1-0-0-released/&quot;&gt;we released Jekyll 1.0.0&lt;/a&gt;. One year later, we present to you the next major version: Jekyll 2.0.0.&lt;/p&gt;
-
-&lt;p&gt;Jam-packed with some &lt;a href=&quot;/docs/history/&quot;&gt;highly-requested features and bugfixes galore&lt;/a&gt;, this is the best Jekyll yet. Some notable changes:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;/docs/collections/&quot;&gt;Collections&lt;/a&gt; - Collections allow you to define an unlimited number of custom document types (beyond just posts and pages) for different types of content you may want to author in Jekyll such as API documentation or a cookbook!&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/jekyll/jekyll/pull/2050#issuecomment-35938016&quot;&gt;Brand new site template&lt;/a&gt; (thanks &lt;a href=&quot;https://github.com/jglovier&quot;&gt;@jglovier&lt;/a&gt;!) - Getting started with Jekyll just got a lot easier and a lot more beautiful. Just run &lt;code&gt;jekyll new &amp;lt;path&amp;gt;&lt;/code&gt; and you’re good to go.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/docs/assets/&quot;&gt;Native Sass &amp;amp; CoffeeScript support&lt;/a&gt; - We love CSS and JavaScript as much as the next guy, but there will always be a special place in our hearts for Sass and CoffeeScript. We now offer native support for these file types — no more messing around with Rake or Grunt!&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/docs/configuration/#front-matter-defaults&quot;&gt;YAML Front Matter defaults&lt;/a&gt; - If you’ve set &lt;code&gt;layout: post&lt;/code&gt; more than once in your life, you’ll love this new feature: set front matter defaults for a given directory or type.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/docs/configuration/#custom-markdown-processors&quot;&gt;Custom markdown processors&lt;/a&gt; - Always wanted to use your favourite home-grown Markdown converter, but couldn’t with Jekyll? Now you can. Simply specify &lt;code&gt;markdown: MyConverterClass&lt;/code&gt; and you’re on your way.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/docs/templates/#filters&quot;&gt;Addition of &lt;code&gt;where&lt;/code&gt; and &lt;code&gt;group_by&lt;/code&gt; Liquid filters&lt;/a&gt; - Simplifying your Liquid templates one filter at a time. The &lt;code&gt;where&lt;/code&gt; filter selects from an array all items within which have a given value for a property. The &lt;code&gt;group_by&lt;/code&gt; filter groups all items in an array which have the same value for a given property.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/jekyll/jekyll/pull/1988&quot;&gt;Switch from Maruku to Kramdown as default markdown converter&lt;/a&gt; - Maruku is dead. We’ve replaced it with the converter which has the closest feature parity: Kramdown!&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Check out our &lt;a href=&quot;/docs/history/&quot;&gt;changelog&lt;/a&gt; for a complete list of all (200+) changes.&lt;/p&gt;
-
-&lt;p&gt;Many thanks to these 183 contributors for making Jekyll 2.0.0 happen:&lt;/p&gt;
-
-&lt;p&gt;Parker Moore, Matt Rogers, maul.esel, Anatol Broder, Zach Gersh, Joel Glovier, Ben Balter, XhmikosR, Coby Chapple, John Piasetzki, Aidan Feldman, Robin Dupret, Pascal Borreli, Troy Swanson, Erik Michaels-Ober, albertogg, Lucas Jenss, Matt Rogers &amp;amp; Persa Zula, Eric Mill, Shigeya Suzuki, Jens Nazarenus, ddavison, Pat Hawks, Rob Wierzbowski, MURAOKA Taro, Casey Lang, Fabian Rodriguez, Greg Karékinian, Zlatan Vasović, Christopher Nicotera, Dmitry Chestnykh, Ryan Morrissey, Jordon, John Hughes, akira yamada, Matt Swanson, Jashank Jeremy, Matthew Iversen, Meeka, liufengyun, Anand Narayan, nitoyon, Geoff Shannon, Benjamin J. Balter, Juan Ignacio Donoso, David Briggs, Benjamin Esham, Slava Pavlutin, Assaf Gelber, Josh Brown, Nick Fagerlund, Davide Ficano, pilosus, Anthony Smith, André Arko, Mikael Konutgan, Matthew Scharley, Dan Tao, scribu, Mort Yao, m, Stephen McDonald, Marcus Stollsteimer, Thomas Torsney-Weir, Jordon Bedwell, Tom Preston-Werner, Lincoln Mullen, Philip Poots, Ivan Tse, Christopher Giroir, Valery Tolstov, Wlodek Bzyl, Xavier Noria, Yi Zeng, Persa Zula, Phil Leggetter, Pirogov Evgenij, Rafael Revi, Rob McGuire-Dale, Rob Muhlestein, Robin Mehner, Roland Warmerdam, Rusty Geldmacher, Sam Rayner, Santeri Paavolainen, Sebastian Morr, Stephan Groß, Steven Spasbo, Tobias Brunner, Tuomas Kareinen, Tyler Margison, Uwe Dauernheim, Yihang Ho, Zach Leatherman, Zequez, andrew morton, andrewhavens, imathis, jannypie, jaybe@jekyll, kk_Ataka, markets, redwallhp, schneems, szymzet, thomasdao, tomsugden, wǒis神仙, 张君君, Noah Slater, Abhi Yerra, Adam Heckler, Ahmed Hazem, Aigars Dzerviniks, Aleksey V. Zapparov, Andreas Möller, Andy Lindeman, Arlen Cuss, Aziz Shamim, Ben Baker-Smith, Ben Hanzl, Ben Hildred, Brian Kim, Brice, Carol Nichols, Chezou, Chris Jones, Christian Grobmeier, Christoph Hochstrasser, Christoph Schiessl, Clint Shryock, Colin Dean, Corey Ward, Damian Lettie, Daniel Schauenberg, David Ensinger, David Paschich, David Sawyer, David Silva Smith, Donald Perry, Doug Johnston, Edward Ball, Eric Dobson, Erik Dungan, Florent Guilleux, Francis, Frederic ROS, GSI2013, Garen Torikian, George Anderson, Giuseppe Capizzi, Ishibashi Hideto, Jarrod Birch, Jeff Kolesky, Jens Bissinger, Jens Krause, John Firebaugh, John Papandriopoulos, Josh Branchaud, Katy DeCorah, Lachlan Holden, Mark Prins, Markus Roth, Martin Charles, Matt Iversen, Matt Sheehan, Matt Swensen, Matthias Vogelgesang, Michael Parker, Miha Rekar, Nathan Youngman, Nick Quaranto, Nick Quinlan, Nick Schonning, Nicolas Alpi, Nicolás Reynolds, Nikkau, 4ensicLog, Octavian Damiean, Olov Lassus, PatrickC8t, Paul Annesley, and Paul Oppenheim.&lt;/p&gt;
-
-&lt;p&gt;Happy developing!&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.5.1 Released</title>
-      <link>http://jekyllrb.com/news/2014/03/27/jekyll-1-5-1-released/</link>
-      <pubDate>Thu, 27 Mar 2014 19:43:48 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/03/27/jekyll-1-5-1-released/</guid>
-      <description>&lt;p&gt;The hawk-eyed &lt;a href=&quot;https://github.com/gregose&quot;&gt;@gregose&lt;/a&gt; spotted a bug in our
-&lt;code&gt;Jekyll.sanitized_path&lt;/code&gt; code:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sanitized_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/tmp/foobar/jail&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;..c:/..c:/..c:/etc/passwd&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/tmp/foobar/jail/../../../etc/passwd&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Well, we can’t have that! In 1.5.1, you’ll instead see:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sanitized_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/tmp/foobar/jail&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;..c:/..c:/..c:/etc/passwd&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/tmp/foobar/jail/..c:/..c:/..c:/etc/passwd&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Luckily not affecting 1.4.x, this fix will make 1.5.0 that much safer for
-the masses. Thanks, Greg!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.5.0 Released</title>
-      <link>http://jekyllrb.com/news/2014/03/24/jekyll-1-5-0-released/</link>
-      <pubDate>Mon, 24 Mar 2014 17:37:59 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/03/24/jekyll-1-5-0-released/</guid>
-      <description>&lt;p&gt;As work continues on Jekyll 2.0.0, we felt it was important to address two key
-issues of Jekyll 1.4.3, namely the &lt;code&gt;safe_yaml&lt;/code&gt; dependency below 1.0 and the
-inability to use Jekyll 1.4.3 on Windows due to a &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1948&quot;&gt;fun issue with path sanitizing&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;For a full changelog, check out our &lt;a href=&quot;/docs/history/#v1-5-0&quot;&gt;history&lt;/a&gt; page.&lt;/p&gt;
-
-&lt;p&gt;Now, back to work on 2.0.0!&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.4.3 Released</title>
-      <link>http://jekyllrb.com/news/2014/01/13/jekyll-1-4-3-released/</link>
-      <pubDate>Mon, 13 Jan 2014 17:43:32 -0800</pubDate>
-      <dc:creator>benbalter</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2014/01/13/jekyll-1-4-3-released/</guid>
-      <description>&lt;p&gt;Jekyll 1.4.3 contains two &lt;strong&gt;critical&lt;/strong&gt; security fixes. If you run Jekyll locally
-and do not run Jekyll in “safe” mode (e.g. you do not build Jekyll sites on behalf
-of others), you are not affected and are not required to update at this time.
-(&lt;a href=&quot;https://github.com/jekyll/jekyll/pull/1944&quot;&gt;See pull request.&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;Versions of Jekyll prior to 1.4.3 and greater than 1.2.0 may allow malicious
-users to expose the content of files outside the source directory in the
-generated output via improper symlink sanitization, potentially resulting in an
-inadvertent information disclosure.&lt;/p&gt;
-
-&lt;p&gt;Versions of Jekyll prior to 1.4.3 may also allow malicious users to write
-arbitrary &lt;code&gt;.html&lt;/code&gt; files outside of the destination folder via relative path
-traversal, potentially overwriting otherwise-trusted content with arbitrary HTML
-or Javascript depending on your server’s configuration.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Maintainer’s note: Many thanks to @gregose and @charliesome for discovering
-these vulnerabilities, and to @BenBalter and @alindeman for writing the patch.&lt;/em&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.4.2 Released</title>
-      <link>http://jekyllrb.com/news/2013/12/16/jekyll-1-4-2-released/</link>
-      <pubDate>Mon, 16 Dec 2013 16:48:13 -0800</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/16/jekyll-1-4-2-released/</guid>
-      <description>&lt;p&gt;This release fixes &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/1830&quot;&gt;a regression&lt;/a&gt; where Maruku fenced code blocks were turned
-off, instead of the previous default to on. We’ve added a new default
-configuration to our &lt;code&gt;maruku&lt;/code&gt; config key: &lt;code&gt;fenced_code_blocks&lt;/code&gt; and set it to
-default to &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you do not wish to use Maruku fenced code blocks, you may turn this option
-off in your site’s configuration file.&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.4.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/12/09/jekyll-1-4-1-released/</link>
-      <pubDate>Mon, 09 Dec 2013 18:44:13 -0800</pubDate>
-      <dc:creator>mattr-</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/09/jekyll-1-4-1-released/</guid>
-      <description>&lt;p&gt;Another quick turnover, anyone? A &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1794&quot;&gt;critical
-bug&lt;/a&gt; in the reading of
-posts snuck itself into the 1.4.0 release.&lt;/p&gt;
-
-&lt;p&gt;To address this issue, we’re releasing v1.4.1 of Jekyll so that you can
-keep on writing without any problems.&lt;/p&gt;
-
-&lt;p&gt;As always, you can find the full list of fixes in this release in the
-&lt;a href=&quot;/docs/history/&quot;&gt;change log&lt;/a&gt;!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.4.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/12/07/jekyll-1-4-0-released/</link>
-      <pubDate>Sat, 07 Dec 2013 11:55:28 -0800</pubDate>
-      <dc:creator>mattr-</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/12/07/jekyll-1-4-0-released/</guid>
-      <description>&lt;p&gt;About a month after the release of Jekyll v1.3.0, we are releasing
-Jekyll v1.4.0. This release will be the last non-patch release to support Ruby
-1.8.7 and our next release will be Jekyll 2.0.0.&lt;/p&gt;
-
-&lt;p&gt;Here are a few things we think you’ll want to know about this release:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;TOML is now a supported markup language for config files.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Maruku has been updated to 0.7.0 which provides some new features and
-a ton of bugfixes over the previous 0.6.x releases.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Non-&lt;code&gt;gem&lt;/code&gt; Plugins are now sorted alphabetically by filename before they’re
-processed, which can provide a rudimentary way to establish a load order for
-plugins.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For a full run-down, visit our &lt;a href=&quot;/docs/history/&quot;&gt;change log&lt;/a&gt;!&lt;/p&gt;
-
-&lt;p&gt;As always, Jekyll wouldn’t be possible without the contributions from
-others in the Jekyll community. We’d like to thank the following people
-for contributing to this release: Anatol Broder, David Sawyer, Greg
-Karékinian, Jordon Bedwell, Matthew Iversen, Persa Zula, and Yi Zeng.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.3.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/11/26/jekyll-1-3-1-released/</link>
-      <pubDate>Tue, 26 Nov 2013 17:52:20 -0800</pubDate>
-      <dc:creator>mattr-</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/11/26/jekyll-1-3-1-released/</guid>
-      <description>&lt;p&gt;Just in time for the US holiday Thanksgiving, we’re releasing version
-1.3.1 of Jekyll to address some of the issues seen since the
-release of 1.3.0.&lt;/p&gt;
-
-&lt;p&gt;In addition to a couple of other smaller bug fixes, the biggest thing
-we’ve fixed is an issue with the &lt;code&gt;--watch&lt;/code&gt; option with Ruby 1.8.7. For a
-full run-down, visit our &lt;a href=&quot;/docs/history/&quot;&gt;change log&lt;/a&gt;!&lt;/p&gt;
-
-&lt;p&gt;Thanks to all the people who have contributed to this release! They are
-(in alphabetical order): Abhi Yerra, Anatol Broder, Andreas Möller, Greg
-Karékinian, Sam Rayner, Santeri Paavolainen, Shigeya Suzuki, Yihang Ho,
-albertogg, andrewhavens, maul.esel, and thomasdao&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.3.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/11/04/jekyll-1-3-0-released/</link>
-      <pubDate>Mon, 04 Nov 2013 19:46:02 -0800</pubDate>
-      <dc:creator>mattr-</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/11/04/jekyll-1-3-0-released/</guid>
-      <description>&lt;p&gt;It’s been about six weeks since v1.2.0 and the Jekyll team is happy to
-announce the arrival of v1.3.0. This is a &lt;strong&gt;huge&lt;/strong&gt; release full of all
-sorts of new features, bug fixes, and other things that you’re sure to
-love.&lt;/p&gt;
-
-&lt;p&gt;Here are a few things we think you’ll want to know about this release:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;You can add &lt;a href=&quot;/docs/datafiles/&quot;&gt;arbitrary data&lt;/a&gt; to the site by adding YAML files under a
-site’s &lt;code&gt;_data&lt;/code&gt; directory. This will allow you to avoid
-repetition in your templates and to set site specific options without
-changing &lt;code&gt;_config.yml&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;You can now run &lt;code&gt;jekyll serve --detach&lt;/code&gt; to boot up a WEBrick server in the
-background. &lt;strong&gt;Note:&lt;/strong&gt; you’ll need to run &lt;code&gt;kill [server_pid]&lt;/code&gt; to shut
-the server down. When ran, you’ll get a process id that you can use in
-place of &lt;code&gt;[server_pid]&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;You can now &lt;strong&gt;disable automatically-generated excerpts&lt;/strong&gt; if you set
-&lt;code&gt;excerpt_separator&lt;/code&gt; to &lt;code&gt;&quot;&quot;&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;If you’re moving pages and posts, you can now check for &lt;strong&gt;URL
-conflicts&lt;/strong&gt; by running &lt;code&gt;jekyll doctor&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;If you’re a fan of the drafts feature, you’ll be happy to know we’ve
-added &lt;code&gt;-D&lt;/code&gt;, a shortened version of &lt;code&gt;--drafts&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Permalinks with special characters should now generate without errors.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Expose the current Jekyll version as the &lt;code&gt;jekyll.version&lt;/code&gt; Liquid
-variable.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For a full run-down, visit our &lt;a href=&quot;/docs/history/&quot;&gt;change log&lt;/a&gt;!&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.3.0.rc1 Released</title>
-      <link>http://jekyllrb.com/news/2013/10/28/jekyll-1-3-0-rc1-released/</link>
-      <pubDate>Mon, 28 Oct 2013 18:14:39 -0700</pubDate>
-      <dc:creator>mattr-</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/10/28/jekyll-1-3-0-rc1-released/</guid>
-      <description>&lt;p&gt;Jekyll 1.3.0 is going to be a big release! In order to make sure we
-didn’t screw anything up too badly, we’re making a release candidate
-available for any early adopters who want to give the latest and
-greatest code a spin without having to clone a repository from git.&lt;/p&gt;
-
-&lt;p&gt;Please take this prerelease for a spin and &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/new&quot;&gt;let us
-know&lt;/a&gt; if you run into any
-issues!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.2.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/09/14/jekyll-1-2-1-released/</link>
-      <pubDate>Sat, 14 Sep 2013 17:46:50 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/09/14/jekyll-1-2-1-released/</guid>
-      <description>&lt;p&gt;Quick turnover, anyone? A &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/1525&quot;&gt;recent incompatibility with Liquid
-v2.5.2&lt;/a&gt; produced a nasty bug in
-which &lt;code&gt;include&lt;/code&gt; tags were not rendered properly within &lt;code&gt;if&lt;/code&gt; blocks.&lt;/p&gt;
-
-&lt;p&gt;This release also includes a better handling of detached servers (prints pid and
-the command for killing the process). &lt;strong&gt;Note&lt;/strong&gt;: the &lt;code&gt;--detach&lt;/code&gt; flag and
-&lt;code&gt;--watch&lt;/code&gt; flags are presently incompatible in 1.2.x. Fix for that coming soon!&lt;/p&gt;
-
-&lt;p&gt;For a full list of the fixes in this release, check out &lt;a href=&quot;/docs/history/&quot;&gt;the change
-log&lt;/a&gt;!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.2.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/09/06/jekyll-1-2-0-released/</link>
-      <pubDate>Fri, 06 Sep 2013 19:02:41 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/09/06/jekyll-1-2-0-released/</guid>
-      <description>&lt;p&gt;After nearly a month and a half of hard work, the Jekyll team is happy to
-announce the release of v1.2.0. It’s chock full of bug fixes and some
-enhancements that we think you’ll love.&lt;/p&gt;
-
-&lt;p&gt;Here are a few things we think you’ll want to know about this release:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Run &lt;code&gt;jekyll serve --detach&lt;/code&gt; to boot up a WEBrick server in the background. &lt;strong&gt;Note:&lt;/strong&gt; you’ll need to run &lt;code&gt;kill [server_pid]&lt;/code&gt; to shut the server down.&lt;/li&gt;
-  &lt;li&gt;You can now &lt;strong&gt;disable automatically-generated excerpts&lt;/strong&gt; if you set &lt;code&gt;excerpt_separator&lt;/code&gt; to &lt;code&gt;&quot;&quot;&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;If you’re moving around pages and post, you can now check for &lt;strong&gt;URL conflicts&lt;/strong&gt; by running &lt;code&gt;jekyll doctor&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;If you’re a fan of the drafts feature, you’ll be happy to know we’ve added &lt;code&gt;-D&lt;/code&gt;, a shortened version of &lt;code&gt;--drafts&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Permalinks with special characters should now generate without errors.&lt;/li&gt;
-  &lt;li&gt;Expose the current Jekyll version as the &lt;code&gt;jekyll.version&lt;/code&gt; Liquid variable.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For a full run-down, visit our &lt;a href=&quot;/docs/history/&quot;&gt;change log&lt;/a&gt;!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.1.2 Released</title>
-      <link>http://jekyllrb.com/news/2013/07/25/jekyll-1-1-2-released/</link>
-      <pubDate>Thu, 25 Jul 2013 00:08:38 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/07/25/jekyll-1-1-2-released/</guid>
-      <description>&lt;p&gt;Version 1.1.2 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.&lt;/p&gt;
-
-&lt;p&gt;Community and custom plugins extending the &lt;code&gt;Liquid::Drop&lt;/code&gt; class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.&lt;/p&gt;
-
-&lt;p&gt;We recommend you upgrade to Jekyll v1.1.2 immediately if you use &lt;code&gt;Liquid::Drop&lt;/code&gt; plugins on your Jekyll site.&lt;/p&gt;
-
-&lt;p&gt;Many thanks for &lt;a href=&quot;https://github.com/benbalter&quot;&gt;Ben Balter&lt;/a&gt; for alerting us to the problem
-and &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1349&quot;&gt;submitting a patch&lt;/a&gt; so quickly.&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.0.4 Released</title>
-      <link>http://jekyllrb.com/news/2013/07/25/jekyll-1-0-4-released/</link>
-      <pubDate>Thu, 25 Jul 2013 00:08:38 -0700</pubDate>
-      <dc:creator>mattr-</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/07/25/jekyll-1-0-4-released/</guid>
-      <description>&lt;p&gt;Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.&lt;/p&gt;
-
-&lt;p&gt;Community and custom plugins extending the &lt;code&gt;Liquid::Drop&lt;/code&gt; class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.&lt;/p&gt;
-
-&lt;p&gt;We recommend you upgrade to Jekyll v1.0.4 immediately if you use &lt;code&gt;Liquid::Drop&lt;/code&gt; plugins on your Jekyll site.&lt;/p&gt;
-
-&lt;p&gt;Many thanks for &lt;a href=&quot;https://github.com/benbalter&quot;&gt;Ben Balter&lt;/a&gt; for alerting us to the problem
-and &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1349&quot;&gt;submitting a patch&lt;/a&gt; so quickly.&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.1.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/07/24/jekyll-1-1-1-released/</link>
-      <pubDate>Wed, 24 Jul 2013 13:24:14 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/07/24/jekyll-1-1-1-released/</guid>
-      <description>&lt;p&gt;Coming just 10 days after the release of v1.1.0, v1.1.1 is out with a patch for the nasty
-excerpt inception bug (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1339&quot;&gt;#1339&lt;/a&gt;) and non-zero exit codes for invalid commands
-(&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1338&quot;&gt;#1338&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;To all those affected by the &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1321&quot;&gt;strange excerpt bug in v1.1.0&lt;/a&gt;, I’m sorry. I think we
-have it all patched up and it should be deployed to &lt;a href=&quot;http://pages.github.com&quot;&gt;GitHub Pages&lt;/a&gt; in the next
-couple weeks. Thank you for your patience!&lt;/p&gt;
-
-&lt;p&gt;If you’re checking out v1.1.x for the first time, definitely check out &lt;a href=&quot;https://github.com/jekyll/jekyll/releases/tag/v1.1.0&quot;&gt;what shipped with
-v1.1.0!&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;See the &lt;a href=&quot;https://github.com/jekyll/jekyll/releases/tag/v1.1.1&quot;&gt;GitHub Release&lt;/a&gt; page for more a more detailed changelog for this release.&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.1.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/07/14/jekyll-1-1-0-released/</link>
-      <pubDate>Sun, 14 Jul 2013 10:38:02 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/07/14/jekyll-1-1-0-released/</guid>
-      <description>&lt;p&gt;After a month of hard work, the Jekyll core team is excited to announce the release of
-Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new additions:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add &lt;code&gt;docs&lt;/code&gt; subcommand to read Jekyll’s docs when offline. (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1046&quot;&gt;#1046&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Support passing parameters to templates in &lt;code&gt;include&lt;/code&gt; tag (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1204&quot;&gt;#1204&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add support for Liquid tags to post excerpts (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1302&quot;&gt;#1302&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Fix pagination for subdirectories (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1198&quot;&gt;#1198&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Provide better error reporting when generating sites (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1253&quot;&gt;#1253&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Latest posts first in non-LSI &lt;code&gt;related_posts&lt;/code&gt; (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1271&quot;&gt;#1271&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;See the &lt;a href=&quot;https://github.com/jekyll/jekyll/releases/tag/v1.1.0&quot;&gt;GitHub Release&lt;/a&gt; page for more a more detailed changelog for this release.&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.0.3 Released</title>
-      <link>http://jekyllrb.com/news/2013/06/07/jekyll-1-0-3-released/</link>
-      <pubDate>Fri, 07 Jun 2013 12:02:13 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/06/07/jekyll-1-0-3-released/</guid>
-      <description>&lt;p&gt;v1.0.3 contains some key enhancements and bug fixes:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Fail with non-zero exit code when MaRuKu errors (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1190&quot;&gt;#1190&lt;/a&gt;) or Liquid errors (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1121&quot;&gt;#1121&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add support for private gists to &lt;code&gt;gist&lt;/code&gt; tag (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1189&quot;&gt;#1189&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add &lt;code&gt;--force&lt;/code&gt; option to &lt;code&gt;jekyll new&lt;/code&gt; (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1115&quot;&gt;#1115&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Fix compatibility with &lt;code&gt;exclude&lt;/code&gt; and &lt;code&gt;include&lt;/code&gt; with pre-1.0 Jekyll (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1114&quot;&gt;#1114&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Fix pagination issue regarding &lt;code&gt;File.basename&lt;/code&gt; and &lt;code&gt;page:num&lt;/code&gt; (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1063&quot;&gt;#1063&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;See the &lt;a href=&quot;/docs/history/#v1-0-3&quot;&gt;History&lt;/a&gt; page for more information on this release.&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.0.2 Released</title>
-      <link>http://jekyllrb.com/news/2013/05/12/jekyll-1-0-2-released/</link>
-      <pubDate>Sun, 12 May 2013 05:45:00 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/05/12/jekyll-1-0-2-released/</guid>
-      <description>&lt;p&gt;v1.0.2 has some key bugfixes that optionally restore some behaviour from pre-1.0
-releases, and fix some other annoying bugs:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Backwards-compatibilize relative permalinks (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1081&quot;&gt;#1081&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add &lt;code&gt;jekyll doctor&lt;/code&gt; command to check site for any known compatibility problems (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1081&quot;&gt;#1081&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Deprecate old config &lt;code&gt;server_port&lt;/code&gt;, match to &lt;code&gt;port&lt;/code&gt; if &lt;code&gt;port&lt;/code&gt; isn’t set (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1084&quot;&gt;#1084&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Update pygments.rb and kramdon versions to 0.5.0 and 1.0.2, respectively (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1061&quot;&gt;#1061&lt;/a&gt;, &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1067&quot;&gt;#1067&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Fix issue when post categories are numbers (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1078&quot;&gt;#1078&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add a &lt;code&gt;data-lang=&quot;&amp;lt;lang&amp;gt;&quot;&lt;/code&gt; attribute to Redcarpet code blocks (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1066&quot;&gt;#1066&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Catching that Redcarpet gem isn’t installed (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1059&quot;&gt;#1059&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;See the &lt;a href=&quot;/docs/history/#v1-0-2&quot;&gt;History&lt;/a&gt; page for more information on this release.&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.0.1 Released</title>
-      <link>http://jekyllrb.com/news/2013/05/08/jekyll-1-0-1-released/</link>
-      <pubDate>Wed, 08 May 2013 14:46:11 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/05/08/jekyll-1-0-1-released/</guid>
-      <description>&lt;p&gt;Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add newer &lt;code&gt;language-&lt;/code&gt; class name prefix to code blocks (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1037&quot;&gt;#1037&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Commander error message now preferred over process abort with incorrect args (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1040&quot;&gt;#1040&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Do not force use of toc_token when using generate_toc in RDiscount (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1048&quot;&gt;#1048&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Make Redcarpet respect the pygments configuration option (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1053&quot;&gt;#1053&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Fix the index build with LSI (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1045&quot;&gt;#1045&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Don’t print deprecation warning when no arguments are specified. (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1041&quot;&gt;#1041&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Add missing &lt;code&gt;&amp;lt;/div&amp;gt;&lt;/code&gt; to site template used by &lt;code&gt;new&lt;/code&gt; subcommand, fixed typos in code (&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/1032&quot;&gt;#1032&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;See the &lt;a href=&quot;/docs/history/#v1-0-1&quot;&gt;History&lt;/a&gt; page for more information on this release.&lt;/p&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Jekyll 1.0.0 Released</title>
-      <link>http://jekyllrb.com/news/2013/05/05/jekyll-1-0-0-released/</link>
-      <pubDate>Sun, 05 May 2013 17:12:52 -0700</pubDate>
-      <dc:creator>parkr</dc:creator>
-      
-      
-      <category>release</category>
-      
-      <guid isPermaLink="true">http://jekyllrb.com/news/2013/05/05/jekyll-1-0-0-released/</guid>
-      <description>&lt;p&gt;Hey! After many months of hard work by Jekyll’s contributors, we’re excited
-to announce the first major release of the project in a long while. v1.0.0 is
-finally here! While the list of improvements and bug fixes is &lt;a href=&quot;/docs/history/#v1-0-0&quot;&gt;quite lengthy&lt;/a&gt;,
-here are the highlights (thanks to &lt;a href=&quot;http://twitter.com/BenBalter&quot;&gt;@benbalter&lt;/a&gt; for the
-examples and for compiling this list):&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Support for the Gist tag for easily embedding Gists (&lt;a href=&quot;https://gist.github.com/benbalter/5555251&quot;&gt;example&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Automatically generated post excerpts (&lt;a href=&quot;https://gist.github.com/benbalter/5555369&quot;&gt;example&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Save and preview drafts before publishing (&lt;a href=&quot;https://gist.github.com/benbalter/5555992&quot;&gt;example&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Take a look at the &lt;a href=&quot;/docs/upgrading/&quot;&gt;Upgrading&lt;/a&gt; page in the docs for more detailed information.&lt;/p&gt;
-
-</description>
-    </item>
-    
-  </channel>
-</rss>
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+</feed>
