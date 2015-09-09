@@ -712,6 +712,7 @@ LESS.js files during generation.
 - [Jekyll Http Basic Auth Plugin](https://gist.github.com/snrbrnjna/422a4b7e017192c284b3): Plugin to manage http basic auth for jekyll generated pages and directories.
 - [Jekyll Auto Image by Merlos](https://github.com/merlos/jekyll-auto-image): Gets the first image of a post. Useful to list your posts with images or to add [twitter cards](https://dev.twitter.com/cards/overview) to your site.
 - [Jekyll Portfolio Generator by Shannon Babincsak](https://github.com/codeinpink/jekyll-portfolio-generator): Generates project pages and computes related projects out of project data files.
+- [Jekyll-Umlauts by Arne Gockeln](https://github.com/webchef/jekyll-umlauts): This generator replaces all german umlauts (äöüß) case sensitive with html.
 
 #### Converters
 
