@@ -133,6 +133,7 @@
   * Set `future` to `false` in the default config (#3892)
   * filters: `where` should compare stringified versions of input & comparator (#3935)
   * Read build options for `jekyll clean` command (#3828)
+  * Fix #3970: Use Gem::Version to compare versions, not >.
 
 ### Development Fixes
 
