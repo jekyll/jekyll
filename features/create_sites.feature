@@ -123,11 +123,11 @@ Feature: Create sites
     Then the _site directory should exist
     And I should see "URL: /2008/01/01/entry2/" in "_site/index.html"
 
-  Scenario: Basic site with whitelisted dotfile
-    Given I have an ".htaccess" file that contains "SomeDirective"
-    When I run jekyll build
-    Then the _site directory should exist
-    And I should see "SomeDirective" in "_site/.htaccess"
+  #Scenario: Basic site with dotfile
+   # Given I have an ".htaccess" file
+   # When I run jekyll build
+   # Then the _site directory should exist
+   # But the "_site/.htaccess" file should not exist
 
   Scenario: File was replaced by a directory
     Given I have a "test" file that contains "some stuff"

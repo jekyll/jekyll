@@ -8,15 +8,15 @@ class TestEntryFilter < JekyllUnitTest
 
     should "filter entries" do
       ent1 = %w[foo.markdown bar.markdown baz.markdown #baz.markdown#
-              .baz.markdow foo.markdown~ .htaccess _posts _pages]
+              .baz.markdow foo.markdown~ _posts _pages]
 
       entries = EntryFilter.new(@site).filter(ent1)
-      assert_equal %w[foo.markdown bar.markdown baz.markdown .htaccess], entries
+      assert_equal %w[foo.markdown bar.markdown baz.markdown], entries
     end
 
     should "filter entries with exclude" do
       excludes = %w[README TODO vendor/bundle]
-      files = %w[index.html site.css .htaccess vendor]
+      files = %w[index.html site.css vendor]
 
       @site.exclude = excludes + ["exclude*"]
       assert_equal files, @site.reader.filter_entries(excludes + files + ["excludeA"])
@@ -24,7 +24,7 @@ class TestEntryFilter < JekyllUnitTest
 
     should "filter entries with exclude relative to site source" do
       excludes = %w[README TODO css]
-      files = %w[index.html vendor/css .htaccess]
+      files = %w[index.html vendor/css]
 
       @site.exclude = excludes
       assert_equal files, @site.reader.filter_entries(excludes + files + ["css"])
@@ -32,15 +32,15 @@ class TestEntryFilter < JekyllUnitTest
 
     should "filter excluded directory and contained files" do
       excludes = %w[README TODO css]
-      files = %w[index.html .htaccess]
+      files = %w[index.html]
 
       @site.exclude = excludes
       assert_equal files, @site.reader.filter_entries(excludes + files + ["css", "css/main.css", "css/vendor.css"])
     end
 
     should "not filter entries within include" do
-      includes = %w[_index.html .htaccess include*]
-      files = %w[index.html _index.html .htaccess includeA]
+      includes = %w[_index.html include*]
+      files = %w[index.html _index.html includeA]
 
       @site.include = includes
       assert_equal files, @site.reader.filter_entries(files)
