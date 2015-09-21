@@ -248,6 +248,7 @@
   * Update install docs (Core dependencies, Windows reqs, etc) (#3769)
   * Use Jekyll Feed for jekyllrb.com (#3736)
   * Add jekyll-umlauts to plugins.md ($3966)
+  * Troubleshooting: fix broken link, add other mac-specific info (#3968)
 
 ## 2.5.3 / 2014-12-22
 
