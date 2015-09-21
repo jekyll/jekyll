@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Troubleshooting</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta8">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta9">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2203,15 +2203,25 @@ following commands before installing Jekyll:</p>
 <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/home/private/gems/bin
 <span class="nb">export </span><span class="nv">RB_USER_INSTALL</span><span class="o">=</span><span class="s1">&#39;true&#39;</span></code></pre></figure>
 
-<p>On Mac OS X, you may need to update RubyGems:</p>
+<p>On Mac OS X, you may need to update RubyGems (using <code>sudo</code> only if necessary):</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem update --system</code></pre></figure>
 
-<p>If you still have issues, you may need to <a href="http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html">use Xcode to install Command Line
-Tools</a>
-that will allow you to install native gems using the following command:</p>
+<p>If you still have issues, you can download and install new Command Line
+Tools (such as <code>gcc</code>) using the command</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">xcode-select --install</code></pre></figure>
+
+<p>which may allow you to install native gems using this command (again using
+<code>sudo</code> only if necessary):</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem install jekyll</code></pre></figure>
+
+<p>Note that upgrading MacOS X does not automatically upgrade Xcode itself
+(that can be done separately via the App Store), and having an out-of-date
+Xcode.app can interfere with the command line tools downloaded above. If
+you run into this issue, upgrade Xcode and install the upgraded Command
+Line Tools.</p>
 
 <p>To install RubyGems on Gentoo:</p>
 
