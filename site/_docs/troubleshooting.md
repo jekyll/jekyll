@@ -40,19 +40,31 @@ export PATH=$PATH:/home/private/gems/bin
 export RB_USER_INSTALL='true'
 {% endhighlight %}
 
-On Mac OS X, you may need to update RubyGems:
+On Mac OS X, you may need to update RubyGems (using `sudo` only if necessary):
 
 {% highlight bash %}
 sudo gem update --system
 {% endhighlight %}
 
-If you still have issues, you may need to [use Xcode to install Command Line
-Tools](http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html)
-that will allow you to install native gems using the following command:
+If you still have issues, you can download and install new Command Line
+Tools (such as `gcc`) using the command
+
+{% highlight bash %}
+xcode-select --install
+{% endhighlight %}
+
+which may allow you to install native gems using this command (again using
+`sudo` only if necessary):
 
 {% highlight bash %}
 sudo gem install jekyll
 {% endhighlight %}
+
+Note that upgrading MacOS X does not automatically upgrade Xcode itself
+(that can be done separately via the App Store), and having an out-of-date
+Xcode.app can interfere with the command line tools downloaded above. If
+you run into this issue, upgrade Xcode and install the upgraded Command
+Line Tools.
 
 To install RubyGems on Gentoo:
 
