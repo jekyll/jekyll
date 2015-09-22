@@ -201,14 +201,15 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--drafts</code></p>
       </td>
     </tr>
-        <tr class="setting">
+    <tr class="setting">
       <td>
         <p class="name"><strong>Environment</strong></p>
-        <p class="description">Use a specific environment value in the build</p>
+        <p class="description">Use a specific environment value in the build.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">JEKYLL_ENV=production</code></p>
       </td>
+    </tr>
     <tr class="setting">
       <td>
         <p class="name"><strong>Future</strong></p>
@@ -270,7 +271,6 @@ class="flag">flags</code> (specified on the command-line) that control them.
   </tbody>
 </table>
 </div>
-
 
 
 ### Serve Command Options
@@ -358,7 +358,7 @@ For example, suppose you set this conditional statement in your code:
 ```liquid
  {% raw %}
  {% if jekyll.environment == "production" %}
- {% include disqus.html %} 
+   {% include disqus.html %} 
  {% endif %}
  {% endraw %}
 ```
@@ -373,7 +373,7 @@ Specifying an environment value allows you to make certain content available onl
 
 The default value for `JEKYLL_ENV` is `development`. Therefore if you omit `JEKYLL_ENV` from the build arguments, the default value will be `JEKYLL_ENV=development`. Any content inside `{% raw %}{% if jekyll.environment == "development" %}{% raw %}` tags will automatically appear in the build.
 
-Your environment values can be anything you want (not just `development` or `production`). Some elements you might want to hide in development environments include Disqus comment forms or Google Analytics. Conversely, you might want to expose an "Edit me in Github" button in a development environment but not include it in production environments.
+Your environment values can be anything you want (not just `development` or `production`). Some elements you might want to hide in development environments include Disqus comment forms or Google Analytics. Conversely, you might want to expose an "Edit me in GitHub" button in a development environment but not include it in production environments.
 
 By specifying the option in the build command, you avoid having to change values in your configuration files when moving from one environment to another.
 
