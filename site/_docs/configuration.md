@@ -201,6 +201,14 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--drafts</code></p>
       </td>
     </tr>
+        <tr class="setting">
+      <td>
+        <p class="name"><strong>Environment</strong></p>
+        <p class="description">Use a specific environment value in the build</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">JEKYLL_ENV=production</code></p>
+      </td>
     <tr class="setting">
       <td>
         <p class="name"><strong>Future</strong></p>
@@ -262,6 +270,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
   </tbody>
 </table>
 </div>
+
+
 
 ### Serve Command Options
 
@@ -338,6 +348,34 @@ before your site is served.
     default settings. Use spaces instead.
   </p>
 </div>
+
+## Specifying a Jekyll environment at build time
+
+In the build (or serve) arguments, you can specify a Jekyll environment and value. The build will then apply this value in any conditional statements in your content. 
+
+For example, suppose you set this conditional statement in your code:
+
+```liquid
+ {% raw %}
+ {% if jekyll.environment == "production" %}
+ {% include disqus.html %} 
+ {% endif %}
+ {% endraw %}
+```
+
+When you build your Jekyll site, the content inside the `if` statement won't be run unless you also specify a `production` environment in the build command, like this:
+
+```bash
+JEKYLL_ENV=production jekyll build 
+```
+
+Specifying an environment value allows you to make certain content available only within specific environments.
+
+The default value for `JEKYLL_ENV` is `development`. Therefore if you omit `JEKYLL_ENV` from the build arguments, the default value will be `JEKYLL_ENV=development`. Any content inside `{% raw %}{% if jekyll.environment == "development" %}{% raw %}` tags will automatically appear in the build.
+
+Your environment values can be anything you want (not just `development` or `production`). Some elements you might want to hide in development environments include Disqus comment forms or Google Analytics. Conversely, you might want to expose an "Edit me in Github" button in a development environment but not include it in production environments.
+
+By specifying the option in the build command, you avoid having to change values in your configuration files when moving from one environment to another.
 
 ## Front Matter defaults
 
