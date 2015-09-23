@@ -250,6 +250,7 @@
   * Add jekyll-umlauts to plugins.md ($3966)
   * Troubleshooting: fix broken link, add other mac-specific info (#3968)
   * Add a new site for learning purposes (#3917)
+  * Added documentation for Jekyll environment variables (#3989)
 
 ## 2.5.3 / 2014-12-22
 
