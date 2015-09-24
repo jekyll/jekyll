@@ -41,6 +41,16 @@ gem 'github-pages', versions['github-pages']
 
     This will ensure that when you run <code>bundle install</code>, you
     have the correct version of the <code>github-pages</code> gem.
+
+    If that fails, simplify it:
+
+{% highlight ruby %}
+source 'https://rubygems.org'
+
+gem 'github-pages'
+{% endhighlight %}
+
+    And be sure to run <code>bundle update</code> often.
   </p>
 </div>
 
