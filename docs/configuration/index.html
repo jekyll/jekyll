@@ -2519,23 +2519,17 @@ before your site is served.</p>
 
 <p>For example, suppose you set this conditional statement in your code:</p>
 
-<p>```liquid</p>
-
-<p>{% if jekyll.environment == “production” %}
-   {% include disqus.html %} 
- {% endif %}</p>
-
-<p>```</p>
+<figure class="highlight"><pre><code class="language-liquid" data-lang="liquid"><span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">jekyll</span><span class="p">.</span><span class="nv">environment</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;production&quot;</span><span class="w"> </span><span class="p">%}</span>
+   <span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>disqus.html<span class="w"> </span><span class="p">%}</span>
+<span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span></code></pre></figure>
 
 <p>When you build your Jekyll site, the content inside the <code>if</code> statement won’t be run unless you also specify a <code>production</code> environment in the build command, like this:</p>
 
-<p><code>bash
-JEKYLL_ENV=production jekyll build 
-</code></p>
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nv">JEKYLL_ENV</span><span class="o">=</span>production jekyll build</code></pre></figure>
 
 <p>Specifying an environment value allows you to make certain content available only within specific environments.</p>
 
-<p>The default value for <code>JEKYLL_ENV</code> is <code>development</code>. Therefore if you omit <code>JEKYLL_ENV</code> from the build arguments, the default value will be <code>JEKYLL_ENV=development</code>. Any content inside <code>{% if jekyll.environment == "development" %}{% raw %}</code> tags will automatically appear in the build.</p>
+<p>The default value for <code>JEKYLL_ENV</code> is <code>development</code>. Therefore if you omit <code>JEKYLL_ENV</code> from the build arguments, the default value will be <code>JEKYLL_ENV=development</code>. Any content inside <code>{% if jekyll.environment == "development" %}</code> tags will automatically appear in the build.</p>
 
 <p>Your environment values can be anything you want (not just <code>development</code> or <code>production</code>). Some elements you might want to hide in development environments include Disqus comment forms or Google Analytics. Conversely, you might want to expose an “Edit me in GitHub” button in a development environment but not include it in production environments.</p>
 
@@ -2553,64 +2547,56 @@ JEKYLL_ENV=production jekyll build
 
 <p>Let’s say that you want to add a default layout to all pages and posts in your site. You would add this to your <code>_config.yml</code> file:</p>
 
-<p>{% highlight yaml %}
-defaults:
-  -
-    scope:
-      path: “” # an empty string here means all files in the project
-    values:
-      layout: “default”
-{% endhighlight %}</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span>
+    <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span> <span class="c1"># an empty string here means all files in the project</span>
+    <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></figure>
 
 <p>Here, we are scoping the <code>values</code> to any file that exists in the scopes path. Since the path is set as an empty string, it will apply to <strong>all files</strong> in your project. You probably don’t want to set a layout on every file in your project - like css files, for example - so you can also specify a <code>type</code> value under the <code>scope</code> key.</p>
 
-<p>{% highlight yaml %}
-defaults:
-  -
-    scope:
-      path: “” # an empty string here means all files in the project
-      type: “posts” # previously <code>post</code> in Jekyll 2.2.
-    values:
-      layout: “default”
-{% endhighlight %}</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span>
+    <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span> <span class="c1"># an empty string here means all files in the project</span>
+      <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="s">&quot;posts&quot;</span> <span class="c1"># previously `post` in Jekyll 2.2.</span>
+    <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></figure>
 
 <p>Now, this will only set the layout for files where the type is <code>posts</code>.
 The different types that are available to you are <code>pages</code>, <code>posts</code>, <code>drafts</code> or any collection in your site. While <code>type</code> is optional, you must specify a value for <code>path</code> when creating a <code>scope/values</code> pair.</p>
 
 <p>As mentioned earlier, you can set multiple scope/values pairs for <code>defaults</code>.</p>
 
-<p>{% highlight yaml %}
-defaults:
-  -
-    scope:
-      path: “”
-      type: “posts”
-    values:
-      layout: “my-site”
-  -
-    scope:
-      path: “projects”
-      type: “pages” # previously <code>page</code> in Jekyll 2.2.
-    values:
-      layout: “project” # overrides previous default layout
-      author: “Mr. Hyde”
-{% endhighlight %}</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span>
+    <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+      <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="s">&quot;posts&quot;</span>
+    <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;my-site&quot;</span>
+  <span class="p-Indicator">-</span>
+    <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;projects&quot;</span>
+      <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="s">&quot;pages&quot;</span> <span class="c1"># previously `page` in Jekyll 2.2.</span>
+    <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;project&quot;</span> <span class="c1"># overrides previous default layout</span>
+      <span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="s">&quot;Mr.</span><span class="nv"> </span><span class="s">Hyde&quot;</span></code></pre></figure>
 
 <p>With these defaults, all posts would use the <code>my-site</code> layout. Any html files that exist in the <code>projects/</code> folder will use the <code>project</code> layout, if it exists. Those files will also have the <code>page.author</code> <a href="../variables/">liquid variable</a> set to <code>Mr. Hyde</code> as well as have the category for the page set to <code>project</code>.</p>
 
-<p>{% highlight yaml %}
-collections:
-  - my_collection:
-    output: true</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">my_collection</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">output</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
 
-<p>defaults:
-  -
-    scope:
-      path: “”
-      type: “my_collection” # a collection in your site, in plural form
-    values:
-      layout: “default”
-{% endhighlight %}</p>
+<span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span>
+    <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span>
+      <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="s">&quot;my_collection&quot;</span> <span class="c1"># a collection in your site, in plural form</span>
+    <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;default&quot;</span></code></pre></figure>
 
 <p>In this example the <code>layout</code> is set to <code>default</code> inside the <a href="../collections/">collection</a> with the name <code>my_collection</code>.</p>
 
@@ -2622,29 +2608,25 @@ collections:
 
 <p>Finally, if you set defaults in the site configuration by adding a <code>defaults</code> section to your <code>_config.yml</code> file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:</p>
 
-<p>{% highlight yaml %}
-# In _config.yml
-…
-defaults:
-  -
-    scope:
-      path: “projects”
-      type: “pages”
-    values:
-      layout: “project”
-      author: “Mr. Hyde”
-      category: “project”
-…
-{% endhighlight %}</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># In _config.yml</span>
+<span class="nn">...</span>
+<span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span>
+    <span class="l-Scalar-Plain">scope</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;projects&quot;</span>
+      <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="s">&quot;pages&quot;</span>
+    <span class="l-Scalar-Plain">values</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;project&quot;</span>
+      <span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="s">&quot;Mr.</span><span class="nv"> </span><span class="s">Hyde&quot;</span>
+      <span class="l-Scalar-Plain">category</span><span class="p-Indicator">:</span> <span class="s">&quot;project&quot;</span>
+<span class="nn">...</span></code></pre></figure>
 
-<p>{% highlight yaml %}
-# In projects/foo_project.md
-—
-author: “John Smith”
-layout: “foobar”
-—
-The post text goes here…
-{% endhighlight %}</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># In projects/foo_project.md</span>
+<span class="nn">---</span>
+<span class="l-Scalar-Plain">author</span><span class="p-Indicator">:</span> <span class="s">&quot;John</span><span class="nv"> </span><span class="s">Smith&quot;</span>
+<span class="l-Scalar-Plain">layout</span><span class="p-Indicator">:</span> <span class="s">&quot;foobar&quot;</span>
+<span class="nn">---</span>
+<span class="l-Scalar-Plain">The post text goes here...</span></code></pre></figure>
 
 <p>The <code>projects/foo_project.md</code> would have the <code>layout</code> set to <code>foobar</code> instead
 of <code>project</code> and the <code>author</code> set to <code>John Smith</code> instead of <code>Mr. Hyde</code> when
@@ -2665,77 +2647,75 @@ file or on the command-line.</p>
   </p>
 </div>
 
-<p>{% highlight yaml %}
-# Where things are
-source:       .
-destination:  ./_site
-plugins_dir:  ./_plugins
-layouts_dir:  ./_layouts
-data_dir:     ./_data
-includes_dir: ./_includes
-collections:  null</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Where things are</span>
+<span class="l-Scalar-Plain">source</span><span class="p-Indicator">:</span>       <span class="l-Scalar-Plain">.</span>
+<span class="l-Scalar-Plain">destination</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">./_site</span>
+<span class="l-Scalar-Plain">plugins_dir</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">./_plugins</span>
+<span class="l-Scalar-Plain">layouts_dir</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">./_layouts</span>
+<span class="l-Scalar-Plain">data_dir</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">./_data</span>
+<span class="l-Scalar-Plain">includes_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">./_includes</span>
+<span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">null</span>
 
-<h1 id="handling-reading">Handling Reading</h1>
-<p>safe:         false
-include:      [“.htaccess”]
-exclude:      []
-keep_files:   [“.git”, “.svn”]
-encoding:     “utf-8”
-markdown_ext: “markdown,mkdown,mkdn,mkd,md”</p>
+<span class="c1"># Handling Reading</span>
+<span class="l-Scalar-Plain">safe</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">false</span>
+<span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span>      <span class="p-Indicator">[</span><span class="s">&quot;.htaccess&quot;</span><span class="p-Indicator">]</span>
+<span class="l-Scalar-Plain">exclude</span><span class="p-Indicator">:</span>      <span class="p-Indicator">[]</span>
+<span class="l-Scalar-Plain">keep_files</span><span class="p-Indicator">:</span>   <span class="p-Indicator">[</span><span class="s">&quot;.git&quot;</span><span class="p-Indicator">,</span> <span class="s">&quot;.svn&quot;</span><span class="p-Indicator">]</span>
+<span class="l-Scalar-Plain">encoding</span><span class="p-Indicator">:</span>     <span class="s">&quot;utf-8&quot;</span>
+<span class="l-Scalar-Plain">markdown_ext</span><span class="p-Indicator">:</span> <span class="s">&quot;markdown,mkdown,mkdn,mkd,md&quot;</span>
 
-<h1 id="filtering-content">Filtering Content</h1>
-<p>show_drafts: null
-limit_posts: 0
-future:      false
-unpublished: false</p>
+<span class="c1"># Filtering Content</span>
+<span class="l-Scalar-Plain">show_drafts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">null</span>
+<span class="l-Scalar-Plain">limit_posts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">0</span>
+<span class="l-Scalar-Plain">future</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">false</span>
+<span class="l-Scalar-Plain">unpublished</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
 
-<h1 id="plugins">Plugins</h1>
-<p>whitelist: []
-gems:      []</p>
+<span class="c1"># Plugins</span>
+<span class="l-Scalar-Plain">whitelist</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span>
+<span class="l-Scalar-Plain">gems</span><span class="p-Indicator">:</span>      <span class="p-Indicator">[]</span>
 
-<h1 id="conversion">Conversion</h1>
-<p>markdown:    kramdown
-highlighter: rouge
-lsi:         false
-excerpt_separator: “\n\n”</p>
+<span class="c1"># Conversion</span>
+<span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">kramdown</span>
+<span class="l-Scalar-Plain">highlighter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">rouge</span>
+<span class="l-Scalar-Plain">lsi</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">false</span>
+<span class="l-Scalar-Plain">excerpt_separator</span><span class="p-Indicator">:</span> <span class="s">&quot;\n\n&quot;</span>
 
-<h1 id="serving">Serving</h1>
-<p>detach:  false
-port:    4000
-host:    127.0.0.1
-baseurl: “” # does not include hostname</p>
+<span class="c1"># Serving</span>
+<span class="l-Scalar-Plain">detach</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">false</span>
+<span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">4000</span>
+<span class="l-Scalar-Plain">host</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">127.0.0.1</span>
+<span class="l-Scalar-Plain">baseurl</span><span class="p-Indicator">:</span> <span class="s">&quot;&quot;</span> <span class="c1"># does not include hostname</span>
 
-<h1 id="outputting">Outputting</h1>
-<p>permalink:     date
-paginate_path: /page:num
-timezone:      null</p>
+<span class="c1"># Outputting</span>
+<span class="l-Scalar-Plain">permalink</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">date</span>
+<span class="l-Scalar-Plain">paginate_path</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/page:num</span>
+<span class="l-Scalar-Plain">timezone</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">null</span>
 
-<p>quiet:    false
-defaults: []</p>
+<span class="l-Scalar-Plain">quiet</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">false</span>
+<span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span>
 
-<h1 id="markdown-processors">Markdown Processors</h1>
-<p>rdiscount:
-  extensions: []</p>
+<span class="c1"># Markdown Processors</span>
+<span class="l-Scalar-Plain">rdiscount</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span>
 
-<p>redcarpet:
-  extensions: []</p>
+<span class="l-Scalar-Plain">redcarpet</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">extensions</span><span class="p-Indicator">:</span> <span class="p-Indicator">[]</span>
 
-<p>kramdown:
-  auto_ids:       true
-  footnote_nr:    1
-  entity_output:  as_char
-  toc_levels:     1..6
-  smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  enable_coderay: false</p>
+<span class="l-Scalar-Plain">kramdown</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">auto_ids</span><span class="p-Indicator">:</span>       <span class="l-Scalar-Plain">true</span>
+  <span class="l-Scalar-Plain">footnote_nr</span><span class="p-Indicator">:</span>    <span class="l-Scalar-Plain">1</span>
+  <span class="l-Scalar-Plain">entity_output</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">as_char</span>
+  <span class="l-Scalar-Plain">toc_levels</span><span class="p-Indicator">:</span>     <span class="l-Scalar-Plain">1..6</span>
+  <span class="l-Scalar-Plain">smart_quotes</span><span class="p-Indicator">:</span>   <span class="l-Scalar-Plain">lsquo,rsquo,ldquo,rdquo</span>
+  <span class="l-Scalar-Plain">enable_coderay</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
 
-<p>coderay:
-    coderay_wrap:              div
-    coderay_line_numbers:      inline
-    coderay_line_number_start: 1
-    coderay_tab_width:         4
-    coderay_bold_every:        10
-    coderay_css:               style
-{% endhighlight %}</p>
+  <span class="l-Scalar-Plain">coderay</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">coderay_wrap</span><span class="p-Indicator">:</span>              <span class="l-Scalar-Plain">div</span>
+    <span class="l-Scalar-Plain">coderay_line_numbers</span><span class="p-Indicator">:</span>      <span class="l-Scalar-Plain">inline</span>
+    <span class="l-Scalar-Plain">coderay_line_number_start</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+    <span class="l-Scalar-Plain">coderay_tab_width</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">4</span>
+    <span class="l-Scalar-Plain">coderay_bold_every</span><span class="p-Indicator">:</span>        <span class="l-Scalar-Plain">10</span>
+    <span class="l-Scalar-Plain">coderay_css</span><span class="p-Indicator">:</span>               <span class="l-Scalar-Plain">style</span></code></pre></figure>
 
 <h2 id="markdown-options">Markdown Options</h2>
 
@@ -2806,29 +2786,26 @@ of Github Flavored Markdown by passing an <code>input</code> option with a value
 
 <p>If you’re interested in creating a custom markdown processor, you’re in luck! Create a new class in the <code>Jekyll::Converters::Markdown</code> namespace:</p>
 
-<p>{% highlight ruby %}
-class Jekyll::Converters::Markdown::MyCustomProcessor
-  def initialize(config)
-    require ‘funky_markdown’
-    @config = config
-  rescue LoadError
-    STDERR.puts ‘You are missing a library required for Markdown. Please run:’
-    STDERR.puts ‘  $ [sudo] gem install funky_markdown’
-    raise FatalException.new(“Missing dependency: funky_markdown”)
-  end</p>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Jekyll</span><span class="o">::</span><span class="no">Converters</span><span class="o">::</span><span class="no">Markdown</span><span class="o">::</span><span class="no">MyCustomProcessor</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="nb">require</span> <span class="s1">&#39;funky_markdown&#39;</span>
+    <span class="vi">@config</span> <span class="o">=</span> <span class="n">config</span>
+  <span class="k">rescue</span> <span class="no">LoadError</span>
+    <span class="no">STDERR</span><span class="o">.</span><span class="n">puts</span> <span class="s1">&#39;You are missing a library required for Markdown. Please run:&#39;</span>
+    <span class="no">STDERR</span><span class="o">.</span><span class="n">puts</span> <span class="s1">&#39;  $ [sudo] gem install funky_markdown&#39;</span>
+    <span class="k">raise</span> <span class="no">FatalException</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Missing dependency: funky_markdown&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
 
-<p>def convert(content)
-    ::FunkyMarkdown.new(content).convert
-  end
-end
-{% endhighlight %}</p>
+  <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="o">::</span><span class="no">FunkyMarkdown</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
 
 <p>Once you’ve created your class and have it properly setup either as a plugin in
 the <code>_plugins</code> folder or as a gem, specify it in your <code>_config.yml</code>:</p>
 
-<p>{% highlight yaml %}
-markdown: MyCustomProcessor
-{% endhighlight %}</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">MyCustomProcessor</span></code></pre></figure>
+
 
           
 
