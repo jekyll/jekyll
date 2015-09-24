@@ -64,6 +64,19 @@ Feature: Fancy permalinks
     Then the _site directory should exist
     And I should see "Totally custom." in "_site/03-27-2009/custom-permalink-schema.html"
 
+  Scenario: Use custom permalink schema with date and time
+    Given I have a _posts directory
+    And I have the following post:
+      | title                   | category | date                | content         |
+      | Custom Permalink Schema | stuff    | 2009-03-27 22:31:07 | Totally custom. |
+    And I have a configuration file with:
+      | key         | value              |
+      | permalink   | "/:year:month:day:hour:minute:second.html" |
+      | timezone    | UTC                |
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Totally custom." in "_site/20090327223107.html"
+
   Scenario: Use per-post permalink
     Given I have a _posts directory
     And I have the following post:

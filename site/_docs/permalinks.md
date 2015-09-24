@@ -75,6 +75,36 @@ permalink is defined according to the format `/:categories/:year/:month/:day/:ti
     </tr>
     <tr>
       <td>
+        <p><code>hour</code></p>
+      </td>
+      <td>
+        <p>
+          Hour of the day, 24-hour clock, zero-padded from the Post’s filename. (00..23)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>minute</code></p>
+      </td>
+      <td>
+        <p>
+          Minute of the hour from the Post’s filename. (00..59)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>second</code></p>
+      </td>
+      <td>
+        <p>
+          Second of the minute from the Post’s filename. (00..60)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>title</code></p>
       </td>
       <td>
