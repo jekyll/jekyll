@@ -88,6 +88,7 @@
   * Rename directory configurations to match `*_dir` convention for consistency (#3782)
   * Internal: trigger hooks by owner symbol (#3871)
   * Update MIME types from mime-db (#3933)
+  * Add header to site template `_config.yml` for clarity & direction (#3997)
 
 ### Bug Fixes
 
