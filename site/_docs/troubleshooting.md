@@ -60,11 +60,42 @@ which may allow you to install native gems using this command (again using
 sudo gem install jekyll
 {% endhighlight %}
 
-Note that upgrading MacOS X does not automatically upgrade Xcode itself
+Note that upgrading Mac OS X does not automatically upgrade Xcode itself
 (that can be done separately via the App Store), and having an out-of-date
 Xcode.app can interfere with the command line tools downloaded above. If
 you run into this issue, upgrade Xcode and install the upgraded Command
 Line Tools.
+
+### Jekyll &amp; Mac OS X 10.11
+
+With the introduction of System Integrity Protection, several directories
+that were previously writable are now considered system locations and are no
+longer available. As a result, it is recommended that you choose one of a
+number of available Ruby environments ([RVM][], [rbenv][], [chruby][], etc.) in
+which to install Jekyll.
+
+[RVM]: https://rvm.io
+[rbenv]: http://rbenv.org
+[chruby]: https://github.com/postmodern/chruby
+
+If you elect to use a method other than Homebrew to install Ruby, it may be
+necessary to modify your `$PATH` variable using the following command:
+
+{% highlight bash %}
+export PATH=/usr/local/bin:$PATH
+{% endhighlight %}
+
+GUI apps can modify the `$PATH` as follows:
+
+{% highlight bash %}
+launchctl setenv PATH "/usr/local/bin:$PATH"
+{% endhighlight %}
+
+This approach is useful because `/usr/local` is considered a "safe" location on
+systems which have SIP enabled, it avoids potential conflicts with the
+version of Ruby included by Apple, and it keeps Jekyll and its
+dependencies in a sandboxed environment. Therefore, individual gems
+can be added or removed according to your specific needs.
 
 To install RubyGems on Gentoo:
 
