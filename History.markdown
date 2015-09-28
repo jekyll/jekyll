@@ -89,6 +89,7 @@
   * Internal: trigger hooks by owner symbol (#3871)
   * Update MIME types from mime-db (#3933)
   * Add header to site template `_config.yml` for clarity & direction (#3997)
+  * Site template: add timezone offset to post date frontmatter (#4001)
 
 ### Bug Fixes
 
