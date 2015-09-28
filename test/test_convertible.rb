@@ -49,5 +49,14 @@ class TestConvertible < JekyllUnitTest
       assert_match(/invalid byte sequence in UTF-8/, out)
       assert_match(/#{File.join(@base, name)}/, out)
     end
+
+    should "parse the front-matter but show an error if permalink is empty" do
+      name = 'empty_permalink.erb'
+      out = capture_stderr do
+        @convertible.read_yaml(@base, name)
+      end
+      assert_match(/Invalid permalink/, out)
+      assert_match(/#{File.join(@base, name)}/, out)
+    end
   end
 end
