@@ -71,15 +71,17 @@ Line Tools.
 With the introduction of System Integrity Protection, several directories
 that were previously writable are now considered system locations and are no
 longer available. As a result, it is recommended that you choose one of a
-number of available Ruby environments ([RVM][], [rbenv][], [chruby][], etc.) in
+number of Ruby version managers ([RVM][], [rbenv][], [chruby][], [etc][].) in
 which to install Jekyll.
 
 [RVM]: https://rvm.io
 [rbenv]: http://rbenv.org
 [chruby]: https://github.com/postmodern/chruby
+[etc]: https://github.com/rvm/rvm/blob/master/docs/alt.md
 
-If you elect to use a method other than Homebrew to install Ruby, it may be
-necessary to modify your `$PATH` variable using the following command:
+If you elect to use a method other than those listed above to install
+Ruby (such as Homebrew), it may be necessary to modify your `$PATH`
+variable using the following command:
 
 {% highlight bash %}
 export PATH=/usr/local/bin:$PATH
@@ -91,11 +93,14 @@ GUI apps can modify the `$PATH` as follows:
 launchctl setenv PATH "/usr/local/bin:$PATH"
 {% endhighlight %}
 
+Once you've done that, `brew install ruby` and `gem install jekyll` should work
+as expected.
+
 This approach is useful because `/usr/local` is considered a "safe" location on
 systems which have SIP enabled, it avoids potential conflicts with the
 version of Ruby included by Apple, and it keeps Jekyll and its
-dependencies in a sandboxed environment. Therefore, individual gems
-can be added or removed according to your specific needs.
+dependencies in a sandboxed environment. Therefore, individual gems can be
+added or removed according to your specific needs.
 
 To install RubyGems on Gentoo:
 
