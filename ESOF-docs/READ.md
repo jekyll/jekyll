@@ -1,0 +1,1 @@
+Jekyll é um gerador de websites estáticos em open source desenvolvido em Ruby(na sua grande maioria) que utiliza diretórios em template, contendo ficheiros em vários formatos de texto. 
