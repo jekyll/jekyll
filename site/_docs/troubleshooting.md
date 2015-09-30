@@ -40,6 +40,15 @@ export PATH=$PATH:/home/private/gems/bin
 export RB_USER_INSTALL='true'
 {% endhighlight %}
 
+To install RubyGems on Gentoo:
+
+{% highlight bash %}
+sudo emerge -av dev-ruby/rubygems
+{% endhighlight %}
+
+On Windows, you may need to install [RubyInstaller
+DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
+
 On Mac OS X, you may need to update RubyGems (using `sudo` only if necessary):
 
 {% highlight bash %}
@@ -70,7 +79,21 @@ Line Tools.
 
 With the introduction of System Integrity Protection, several directories
 that were previously writable are now considered system locations and are no
-longer available. As a result, it is recommended that you choose one of a
+longer available. Given these changes, the simplest way to get up and running
+is to install Homebrew and then use it to set up Ruby. This can be done as
+follows:
+
+{% highlight bash %}
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+{% endhighlight %}
+
+Once Homebrew is installed, the second step is easy:
+
+{% highlight bash %}
+brew install ruby
+{% endhighlight %}
+
+Advanced users (with more complex needs) may find it helpful to choose one of a
 number of Ruby version managers ([RVM][], [rbenv][], [chruby][], [etc][].) in
 which to install Jekyll.
 
@@ -79,9 +102,8 @@ which to install Jekyll.
 [chruby]: https://github.com/postmodern/chruby
 [etc]: https://github.com/rvm/rvm/blob/master/docs/alt.md
 
-If you elect to use a method other than those listed above to install
-Ruby (such as Homebrew), it may be necessary to modify your `$PATH`
-variable using the following command:
+If you elect to use one of the above methods to install Ruby, it might be
+necessary to modify your `$PATH` variable using the following command:
 
 {% highlight bash %}
 export PATH=/usr/local/bin:$PATH
@@ -93,23 +115,11 @@ GUI apps can modify the `$PATH` as follows:
 launchctl setenv PATH "/usr/local/bin:$PATH"
 {% endhighlight %}
 
-Once you've done that, `brew install ruby` and `gem install jekyll` should work
-as expected.
-
-This approach is useful because `/usr/local` is considered a "safe" location on
-systems which have SIP enabled, it avoids potential conflicts with the
-version of Ruby included by Apple, and it keeps Jekyll and its
-dependencies in a sandboxed environment. Therefore, individual gems can be
-added or removed according to your specific needs.
-
-To install RubyGems on Gentoo:
-
-{% highlight bash %}
-sudo emerge -av dev-ruby/rubygems
-{% endhighlight %}
-
-On Windows, you may need to install [RubyInstaller
-DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
+Either of these approaches are useful because `/usr/local` is considered a
+"safe" location on systems which have SIP enabled, they avoid potential
+conflicts with the version of Ruby included by Apple, and it keeps Jekyll and
+its dependencies in a sandboxed environment. This also has the added
+benefit of not requiring `sudo` when you want to add or remove a gem.
 
 ### Could not find a JavaScript runtime. (ExecJS::RuntimeUnavailable)
 
