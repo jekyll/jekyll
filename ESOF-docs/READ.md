@@ -4,13 +4,13 @@ Jekyll is a static website generator in open source developed in Ruby (among oth
 
 ##Why prefer Jekyll?
 
-*Ability to write content in markdown or textile in your favorite text-editor.
-*Ability to write and preview your content via localhost.
-*No internet connection required.
-*Ability to publish via git.
-*Ability to host your blog on a static web-server.
-*Ability to host freely on GitHub Pages.
-*No database required.
+* Ability to write content in markdown or textile in your favorite text-editor.
+* Ability to write and preview your content via localhost.
+* No internet connection required.
+* Ability to publish via git.
+* Ability to host your blog on a static web-server.
+* Ability to host freely on GitHub Pages.
+* No database required.
 
 
 ##Languages used to date(percentages):
