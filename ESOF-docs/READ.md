@@ -13,7 +13,7 @@ Jekyll is a static website generator in open source developed in Ruby (among oth
 *No database required.
 
 
-##Languages used up to date(percentages):
+##Languages used to date(percentages):
 
 1. Ruby (67.9 %)
 2. Cucumber (17.9 %)
