@@ -124,4 +124,23 @@ class TestExcerpt < JekyllUnitTest
       end
     end
   end
+
+  context "A whole-post excerpt" do
+    setup do
+      clear_dest
+      @site = Site.new(site_configuration)
+      @post = setup_post("2008-02-02-published.markdown")
+      @excerpt = @post.send :extract_excerpt
+    end
+
+    should "be generated" do
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+
+    context "#content" do
+      should "match the post content" do
+        assert_equal @post.content, @excerpt.content
+      end
+    end
+  end
 end

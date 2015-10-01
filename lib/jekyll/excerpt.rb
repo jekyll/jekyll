@@ -107,7 +107,11 @@ module Jekyll
     def extract_excerpt(post_content)
       head, _, tail = post_content.to_s.partition(post.excerpt_separator)
 
-      "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
+      if tail.empty?
+        head
+      else
+        "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
+      end
     end
   end
 end
