@@ -23,11 +23,31 @@ Jekyll is a static website generator in open source developed in Ruby (among oth
 5. Shell (1.2 %)
 	* A shell script is a computer program designed to be run by a command line interpreter
 
+##Number of contributors to date: 483
+
+##Number of releases to date: 82
+
+##Number of branches to date: 21
+
 
 ##Development methods:
 
-Every project needs a project planing.
+Jekyll is based in the waterfall method since it only has 2 major contributors. It allows to focus more in each task and complete it before moving to the next step. 
 
+The project planning for Jekyll should look something like:
+
+1. Conceiving idea of what is intended
+2. Design
+3. Code and unit test
+4. Perform system testing
+5. Perform user acceptance testing
+6. Fix any issues
+7. Deliver the finished product
+
+In a Waterfall project each of these represent diferent software stages. The project progress is easier to measure and test scripts can be written while the actual code is still underway. 
+But some changes to the features of the project itself might be difficult to perform since the is already code on top of it and some bugs are more dificult to fix because they are detected in a late state of the project. 
+
+In what regards to Jekyll, we believe that the Waterfall method is what most favors it, since it is mostly coded by 2 contributors(parkr and mojombo, parkr being the master with more than 2000 commits). The project direction will never change to the point of having major trouble in features implementation.  
 
 
 
