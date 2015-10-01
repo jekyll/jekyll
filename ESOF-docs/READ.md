@@ -23,11 +23,11 @@ Jekyll is a static website generator in open source developed in Ruby (among oth
 5. Shell (1.2 %)
 	* A shell script is a computer program designed to be run by a command line interpreter
 
-##Number of contributors to date: 483
+###Number of contributors to date: 483
 
-##Number of releases to date: 82
+###Number of releases to date: 82
 
-##Number of branches to date: 21
+###Number of branches to date: 21
 
 
 ##Development methods:
