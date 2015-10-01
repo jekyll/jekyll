@@ -32,22 +32,13 @@ Jekyll is a static website generator in open source developed in Ruby (among oth
 
 ##Development methods:
 
-Jekyll is based in the waterfall method since it only has 2 major contributors. It allows to focus more in each task and complete it before moving to the next step. 
+Jekyll is based in the *GitHub Flow* method which has similarities with *Agile*. It allows the team to focus in different features since it is based in producing the code in diferent branches. Every master branch is deployable, so it's extremely important that your new branch is created off of master when working on a feature or a fix. We sent several emails to Jekyll main contributors and posted on the official Jekyll's forum and we got a reply from *parkr* where he explains their use of *GitHub Flow*. Quoting his answer: "We use GitHub Flow to collaborate on code, with heavy use of labels. Our releases are mostly arbitrary".
+We also asked about his reusage of code and he said they reuse multiple code via RubyGems dependencies. 
 
-The project planning for Jekyll should look something like:
 
-1. Conceiving idea of what is intended
-2. Design
-3. Code and unit test
-4. Perform system testing
-5. Perform user acceptance testing
-6. Fix any issues
-7. Deliver the finished product
+##Our undestarnding
 
-In a Waterfall project each of these represent diferent software stages. The project progress is easier to measure and test scripts can be written while the actual code is still underway. 
-But some changes to the features of the project itself might be difficult to perform since the is already code on top of it and some bugs are more dificult to fix because they are detected in a late state of the project. 
-
-In what regards to Jekyll, we believe that the Waterfall method is what most favors it, since it is mostly coded by 2 contributors(parkr and mojombo, parkr being the master with more than 2000 commits). The project direction will never change to the point of having major trouble in features implementation.  
+In what regards to Jekyll, we believe that the GitHub FLow method is what most favors it.   
 
 
 
