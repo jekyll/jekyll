@@ -23,22 +23,23 @@ Jekyll is a static website generator in open source developed in Ruby (among oth
 5. Shell (1.2 %)
 	* A shell script is a computer program designed to be run by a command line interpreter
 
-###Number of contributors to date: 483
+####Number of contributors to date: 483
 
-###Number of releases to date: 82
+####Number of releases to date: 82
 
-###Number of branches to date: 21
+####Number of branches to date: 21
 
 
 ##Development methods:
 
-Jekyll is based in the *GitHub Flow* method which has similarities with *Agile*. It allows the team to focus in different features since it is based in producing the code in diferent branches. Every master branch is deployable, so it's extremely important that your new branch is created off of master when working on a feature or a fix. We sent several emails to Jekyll main contributors and posted on the official Jekyll's forum and we got a reply from *parkr* where he explains their use of *GitHub Flow*. Quoting his answer: "We use GitHub Flow to collaborate on code, with heavy use of labels. Our releases are mostly arbitrary".
+Jekyll is based in the *GitHub Flow* method which has similarities with *Agile*.
+It allows the team to focus in different features since it is based in producing the code in diferent branches. Every master branch is deployable, so it's extremely important that your new branch is created off of master when working on a feature or a fix. We sent several emails to Jekyll main contributors and posted on the official Jekyll's forum and we got a reply from *parkr* where he explains their use of *GitHub Flow*. Quoting his answer: "We use GitHub Flow to collaborate on code, with heavy use of labels. Our releases are mostly arbitrary".
 We also asked about his reusage of code and he said they reuse multiple code via RubyGems dependencies. 
 
 
 ##Our undestarnding
 
-In what regards to Jekyll, we believe that the GitHub FLow method is what most favors it.   
+In what regards to Jekyll, we believe that the GitHub FLow method is what most favors it. This method allows multiple features and bug fixes at the same time due to the branching method.   
 
 
 
