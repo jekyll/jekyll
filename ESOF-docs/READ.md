@@ -6,7 +6,7 @@ Jekyll is a static website generator in open source developed in Ruby (among oth
 
 1. Ruby (67.9 %)
 2. Cucumber (17.9 %)
-	*Ruby testing software that runs automated acceptant tests
+	* Ruby testing software that runs automated acceptant tests
 3. CSS (8.4 %)
 4. HTML (4.6 %)
 5. Shell (1.2 %)
