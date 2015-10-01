@@ -2203,6 +2203,13 @@ following commands before installing Jekyll:</p>
 <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/home/private/gems/bin
 <span class="nb">export </span><span class="nv">RB_USER_INSTALL</span><span class="o">=</span><span class="s1">&#39;true&#39;</span></code></pre></figure>
 
+<p>To install RubyGems on Gentoo:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo emerge -av dev-ruby/rubygems</code></pre></figure>
+
+<p>On Windows, you may need to install <a href="https://wiki.github.com/oneclick/rubyinstaller/development-kit">RubyInstaller
+DevKit</a>.</p>
+
 <p>On Mac OS X, you may need to update RubyGems (using <code>sudo</code> only if necessary):</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem update --system</code></pre></figure>
@@ -2217,18 +2224,44 @@ Tools (such as <code>gcc</code>) using the command</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo gem install jekyll</code></pre></figure>
 
-<p>Note that upgrading MacOS X does not automatically upgrade Xcode itself
+<p>Note that upgrading Mac OS X does not automatically upgrade Xcode itself
 (that can be done separately via the App Store), and having an out-of-date
 Xcode.app can interfere with the command line tools downloaded above. If
 you run into this issue, upgrade Xcode and install the upgraded Command
 Line Tools.</p>
 
-<p>To install RubyGems on Gentoo:</p>
+<h3 id="jekyll-amp-mac-os-x-1011">Jekyll &amp; Mac OS X 10.11</h3>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo emerge -av dev-ruby/rubygems</code></pre></figure>
+<p>With the introduction of System Integrity Protection, several directories
+that were previously writable are now considered system locations and are no
+longer available. Given these changes, the simplest way to get up and running
+is to install Homebrew and then use it to set up Ruby. This can be done as
+follows:</p>
 
-<p>On Windows, you may need to install <a href="https://wiki.github.com/oneclick/rubyinstaller/development-kit">RubyInstaller
-DevKit</a>.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ruby -e <span class="s2">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span></code></pre></figure>
+
+<p>Once Homebrew is installed, the second step is easy:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">brew install ruby</code></pre></figure>
+
+<p>Advanced users (with more complex needs) may find it helpful to choose one of a
+number of Ruby version managers (<a href="https://rvm.io">RVM</a>, <a href="http://rbenv.org">rbenv</a>, <a href="https://github.com/postmodern/chruby">chruby</a>, <a href="https://github.com/rvm/rvm/blob/master/docs/alt.md">etc</a>.) in
+which to install Jekyll.</p>
+
+<p>If you elect to use one of the above methods to install Ruby, it might be
+necessary to modify your <code>$PATH</code> variable using the following command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:<span class="nv">$PATH</span></code></pre></figure>
+
+<p>GUI apps can modify the <code>$PATH</code> as follows:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">launchctl setenv PATH <span class="s2">&quot;/usr/local/bin:$PATH&quot;</span></code></pre></figure>
+
+<p>Either of these approaches are useful because <code>/usr/local</code> is considered a
+“safe” location on systems which have SIP enabled, they avoid potential
+conflicts with the version of Ruby included by Apple, and it keeps Jekyll and
+its dependencies in a sandboxed environment. This also has the added
+benefit of not requiring <code>sudo</code> when you want to add or remove a gem.</p>
 
 <h3 id="could-not-find-a-javascript-runtime-execjsruntimeunavailable">Could not find a JavaScript runtime. (ExecJS::RuntimeUnavailable)</h3>
 
