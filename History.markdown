@@ -256,6 +256,7 @@
   * Add a new site for learning purposes (#3917)
   * Added documentation for Jekyll environment variables (#3989)
   * Fix broken configuration documentation page (#3994)
+  * Add troubleshooting docs for installing on El Capitan (#3999)
 
 ## 2.5.3 / 2014-12-22
 
