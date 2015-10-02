@@ -39,7 +39,7 @@ We sent several emails to Jekyll main contributors and posted on the official Je
 We also asked about his reusage of code and he said they reuse multiple code via RubyGems dependencies. 
 
 
-##Our undestarnding
+##Our understarnding
 
 In what regards to Jekyll, we believe that the *GitHub Flow* method is a good method to be used. This method allows multiple features and bug fixes at the same time due to the branching method. In spite of this, the better method would be *Agile with Scrum* but since they cannot assemble proper team gatherings, it becomes problematic to implement it. *Agile* would make it easier to share and divide the work among the team and it would figure out the time spent to a certain feature accomplishment. This would make their releases more profitable because they would know better when they should do them.
 
