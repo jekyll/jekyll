@@ -33,7 +33,9 @@ Jekyll is a static website generator in open source developed in Ruby (among oth
 ##Development methods:
 
 Jekyll is based in the *GitHub Flow* method which has similarities with *Agile*.
-It allows the team to focus in different features since it is based in producing the code in diferent branches. Every master branch is deployable, so it's extremely important that your new branch is created off of master when working on a feature or a fix. We sent several emails to Jekyll main contributors and posted on the official Jekyll's forum and we got a reply from *parkr* where he explains their use of *GitHub Flow*. Quoting his answer: "We use GitHub Flow to collaborate on code, with heavy use of labels. Our releases are mostly arbitrary".
+It allows the team to focus in different features since it is based in producing the code in diferent branches. Every master branch is deployable, so it's extremely important that your new branch is created off of master when working on a feature or a fix.
+
+We sent several emails to Jekyll main contributors and posted on the official Jekyll's forum and we got a reply from *parkr* where he explains their use of *GitHub Flow*. Quoting his answer: "We use GitHub Flow to collaborate on code, with heavy use of labels. Our releases are mostly arbitrary".
 We also asked about his reusage of code and he said they reuse multiple code via RubyGems dependencies. 
 
 
@@ -43,8 +45,8 @@ In what regards to Jekyll, we believe that the *GitHub Flow* method is a good me
 
 ###Group members
 
--Andre Maia
--Joao Gouveia
+* Andre Maia
+* Joao Gouveia
 
 
 
