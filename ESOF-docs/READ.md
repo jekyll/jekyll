@@ -1,4 +1,4 @@
-#**First report of ESOF**		
+#**First report of ESOF - Jekyll** 		
 
 Jekyll is a static website generator in open source developed in Ruby (among other languages), which uses template directories and it is able to read several files with diferent text files(Markdown, Liquid, HTML and CSS). It allows you to create a website where your content is what matters most, easy to use and understand. Jekyll is not a blogging software, it is a parsing device. GitHub pages are powered by Jekyll so you can easily deploy your website usig GitHub.
 
@@ -39,7 +39,15 @@ We also asked about his reusage of code and he said they reuse multiple code via
 
 ##Our undestarnding
 
-In what regards to Jekyll, we believe that the GitHub FLow method is what most favors it. This method allows multiple features and bug fixes at the same time due to the branching method.   
+In what regards to Jekyll, we believe that the *GitHub Flow* method is a good method to be used. This method allows multiple features and bug fixes at the same time due to the branching method. In spite of this, the better method would be *Agile with Scrum* but since they cannot assemble proper team gatherings, it becomes problematic to implement it. *Agile* would make it easier to share and divide the work among the team and it would figure out the time spent to a certain feature accomplishment. This would make their releases more profitable because they would know better when they should do them.
+
+###Group members
+
+-Andre Maia
+-Joao Gouveia
+
+
+
 
 
 
