@@ -45,8 +45,8 @@ In what regards to Jekyll, we believe that the *GitHub Flow* method is a good me
 
 ###Group members
 
-* Andre Maia
-* Joao Gouveia
+* Andre Maia up201200674
+* Joao Gouveia up201303988
 
 
 
