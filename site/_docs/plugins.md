@@ -29,7 +29,7 @@ You have 3 options for installing plugins:
 here. Any file ending in `*.rb` inside this directory will be loaded before
 Jekyll generates your site.
 2. In your `_config.yml` file, add a new array with the key `gems` and the
-values of the gem names of the plugins you'd like to use. An example:
+values of the gem names of the plugins you'd like to use. Don't foreget to install your plugins using `gem install my-jekyll-plugin` prior running jekyll. An example:
 
         gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
         # This will require each of these gems automatically.
