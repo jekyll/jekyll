@@ -28,19 +28,26 @@ You have 3 options for installing plugins:
 1. In your site source root, make a `_plugins` directory. Place your plugins
 here. Any file ending in `*.rb` inside this directory will be loaded before
 Jekyll generates your site.
-2. In your `_config.yml` file, add a new array with the key `gems` and the
+2. * In your `_config.yml` file, add a new array with the key `gems` and the
 values of the gem names of the plugins you'd like to use. An example:
 
+        ```rb
         gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
         # This will require each of these gems automatically.
-3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
+        ```
+        
+    * Install your plugins using `gem install jekyll-test-plugin`
+3. * Add the relevant plugins to a Bundler group in your `Gemfile`. An
     example:
 
+        ```rb
         group :jekyll_plugins do
           gem "my-jekyll-plugin"
         end
+        ```
+        
+    * Run `bundle install`
 
-Both option 2 and 3 require you to install your plugins using `gem install my-jekyll-plugin` prior running jekyll.
 
 <div class="note info">
   <h5>
