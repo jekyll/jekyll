@@ -257,6 +257,7 @@
   * Added documentation for Jekyll environment variables (#3989)
   * Fix broken configuration documentation page (#3994)
   * Add troubleshooting docs for installing on El Capitan (#3999)
+  * Add Lazy Tweet Embedding to the list of third-party plugins (#4015)
 
 ## 2.5.3 / 2014-12-22
 
