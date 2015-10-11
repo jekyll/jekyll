@@ -79,8 +79,15 @@ Line Tools.
 
 With the introduction of System Integrity Protection, several directories
 that were previously writable are now considered system locations and are no
-longer available. Given these changes, the simplest way to get up and running
-is to install Homebrew and then use it to set up Ruby. This can be done as
+longer available. Given these changes, there are a couple of simple ways to get up and
+running.  One option is to change the location where the gem will be installed (again using
+`sudo` only if necessary):
+
+{% highlight bash %}
+sudo gem install -n /usr/local/bin jekyll
+{% endhighlight %}
+
+Alternatively, Homebrew can be install and used to set up Ruby. This can be done as
 follows:
 
 {% highlight bash %}
