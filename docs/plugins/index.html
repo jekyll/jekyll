@@ -2203,6 +2203,8 @@ values of the gem names of the plugins you’d like to use. An example:</p>
     <pre><code> gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
  # This will require each of these gems automatically.
 </code></pre>
+
+    <p>Then install your plugins using <code>gem install jekyll-test-plugin jekyll-jsonify jekyll-assets</code></p>
   </li>
   <li>
     <p>Add the relevant plugins to a Bundler group in your <code>Gemfile</code>. An
@@ -2210,8 +2212,11 @@ values of the gem names of the plugins you’d like to use. An example:</p>
 
     <pre><code> group :jekyll_plugins do
    gem "my-jekyll-plugin"
+   gem "another-jekyll-plugin"
  end
 </code></pre>
+
+    <p>Now you need to install all plugins from your Bundler group by running single command <code>bundle install</code></p>
   </li>
 </ol>
 
@@ -2890,6 +2895,7 @@ LESS.js files during generation.</li>
   <li><a href="https://github.com/mvdbos/kramdown-with-pygments">Customized Kramdown Converter</a>: Enable Pygments syntax highlighting for Kramdown-parsed fenced code blocks.</li>
   <li><a href="https://github.com/TheFox/jekyll-bigfootnotes">Bigfootnotes Plugin</a>: Enables big footnotes for Kramdown.</li>
   <li><a href="https://github.com/asciidoctor/jekyll-asciidoc">AsciiDoc Plugin</a>: AsciiDoc convertor for Jekyll using <a href="http://asciidoctor.org/">Asciidoctor</a>.</li>
+  <li><a href="https://github.com/takuti/jekyll-lazy-tweet-embedding">Lazy Tweet Embedding</a>: Automatically convert tweet urls into twitter cards.</li>
 </ul>
 
 <h4 id="filters">Filters</h4>
