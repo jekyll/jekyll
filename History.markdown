@@ -259,6 +259,7 @@
   * Add troubleshooting docs for installing on El Capitan (#3999)
   * Add Lazy Tweet Embedding to the list of third-party plugins (#4015)
   * Add installation instructions for 2 of 3 options for plugins (#4013)
+  * Add alternative jekyll gem installation instructions (#4018)
 
 ## 2.5.3 / 2014-12-22
 
