@@ -258,6 +258,7 @@
   * Fix broken configuration documentation page (#3994)
   * Add troubleshooting docs for installing on El Capitan (#3999)
   * Add Lazy Tweet Embedding to the list of third-party plugins (#4015)
+  * Add installation instructions for 2 of 3 options for plugins (#4013)
 
 ## 2.5.3 / 2014-12-22
 
