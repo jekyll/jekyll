@@ -260,6 +260,7 @@
   * Add Lazy Tweet Embedding to the list of third-party plugins (#4015)
   * Add installation instructions for 2 of 3 options for plugins (#4013)
   * Add alternative jekyll gem installation instructions (#4018)
+  * Fix a few typos and formatting problems. (#4022)
 
 ## 2.5.3 / 2014-12-22
 
