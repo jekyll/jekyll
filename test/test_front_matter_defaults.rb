@@ -18,7 +18,7 @@ class TestFrontMatterDefaults < Test::Unit::TestCase
         }]
       }))
       @site.process
-      @affected = @site.pages.find { |page| page.relative_path == "/contacts/bar.html" }
+      @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
 
@@ -43,7 +43,7 @@ class TestFrontMatterDefaults < Test::Unit::TestCase
         }]
       }))
       @site.process
-      @affected = @site.posts.find { |page| page.relative_path =~ /^\/win/ }
+      @affected = @site.posts.find { |page| page.relative_path =~ /^win/ }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
 
