@@ -234,7 +234,7 @@ Given a post named: `/2009-04-29-slap-chop.md`
         <p><code>pretty</code></p>
       </td>
       <td>
-        <p><code>/2009/04/29/slap-chop/index.html</code></p>
+        <p><code>/2009/04/29/slap-chop/</code></p>
       </td>
     </tr>
     <tr>
