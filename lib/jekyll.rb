@@ -141,12 +141,15 @@ module Jekyll
     #
     # Returns the sanitized path.
     def sanitized_path(base_directory, questionable_path)
-      return base_directory if base_directory.eql?(questionable_path)
+      windows_drive_path_regexp = /\A\w\:\//
+      return base_directory if base_directory.eql?(questionable_path) || questionable_path.empty?
 
       clean_path = File.expand_path(questionable_path, "/")
-      clean_path = clean_path.sub(/\A\w\:\//, '/')
+      clean_path = clean_path.sub(windows_drive_path_regexp, '/')
+      clean_base = base_directory.sub(windows_drive_path_regexp, "/") + '/'
 
-      unless clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
+      ultra_clean_path = clean_path + '/'
+      unless ultra_clean_path.start_with?(clean_base)
         File.join(base_directory, clean_path)
       else
         clean_path

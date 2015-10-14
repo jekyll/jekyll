@@ -172,7 +172,7 @@ module Jekyll
       entries.each do |f|
         f_abs = in_source_dir(base, f)
         if File.directory?(f_abs)
-          f_rel = File.join(dir, f)
+          f_rel = dir.empty? ? f : File.join(dir, f)
           read_directories(f_rel) unless dest.sub(/\/$/, '') == f_abs
         elsif Utils.has_yaml_header?(f_abs)
           page = Page.new(self, source, dir, f)
