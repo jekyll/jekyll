@@ -261,6 +261,7 @@
   * Add installation instructions for 2 of 3 options for plugins (#4013)
   * Add alternative jekyll gem installation instructions (#4018)
   * Fix a few typos and formatting problems. (#4022)
+  * Fix pretty permalink example (#4029)
 
 ## 2.5.3 / 2014-12-22
 
