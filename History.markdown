@@ -177,6 +177,7 @@
   * Contributing.md should refer to `script/cucumber` (#3894)
   * Update contributing documentation to reflect workflow updates (#3895)
   * Add script to vendor mime types (#3933)
+  * Ignore .bundle dir in SimpleCov (#4033)
 
 ### Site Enhancements
 
