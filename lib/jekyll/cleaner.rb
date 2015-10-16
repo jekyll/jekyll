@@ -3,6 +3,7 @@ require 'set'
 module Jekyll
   # Handles the cleanup of a site's destination before it is built.
   class Cleaner
+    HIDDEN_FILE_REGEX = /\/\.{1,2}$/
     attr_reader :site
 
     def initialize(site)
@@ -40,7 +41,7 @@ module Jekyll
       dirs = keep_dirs
 
       Dir.glob(site.in_dest_dir("**", "*"), File::FNM_DOTMATCH) do |file|
-        next if file =~ /\/\.{1,2}$/ || file =~ regex || dirs.include?(file)
+        next if file =~ HIDDEN_FILE_REGEX || file =~ regex || dirs.include?(file)
         files << file
       end
 
