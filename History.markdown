@@ -138,6 +138,7 @@
   * Read build options for `jekyll clean` command (#3828)
   * Fix #3970: Use Gem::Version to compare versions, not >.
   * Abort if no subcommand. Fixes confusing message. (#3992)
+  * Whole-post excerpts should match the post content (#4004)
 
 ### Development Fixes
 
