@@ -7,6 +7,7 @@ unless ENV['TRAVIS']
   SimpleCov.start('gem') do
     add_filter "/vendor/bundle"
     add_filter "/vendor/gem"
+    add_filter ".bundle"
   end
 end
 
