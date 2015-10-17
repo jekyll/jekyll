@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Basic Usage</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta9">
+  <meta name="generator" content="Jekyll v3.0.0.pre.beta10">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2186,6 +2186,18 @@ window. You can use this command in a number of ways:</p>
 <span class="nv">$ </span>jekyll build --watch
 <span class="c"># =&gt; The current folder will be generated into ./_site,</span>
 <span class="c">#    watched for changes, and regenerated automatically.</span></code></pre></figure>
+
+<div class="note info">
+  <h5>Changes to _config.yml are not included during automatic regeneration.</h5>
+  <p>
+    The <code>_config.yml</code> master configuration file contains global configurations
+    and variable definitions that are read once at execution time. Changes made to <code>_config.yml</code>
+    during automatic regeneration are not loaded until the next execution.
+  </p>
+  <p>
+    Note <a href="../datafiles">Data Files</a> are included and reloaded during automatic regeneration.
+  </p>
+</div>
 
 <div class="note warning">
   <h5>Destination folders are cleaned on site builds</h5>
