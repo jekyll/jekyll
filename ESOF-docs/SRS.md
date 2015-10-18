@@ -15,6 +15,6 @@ Since Jekyll is still in development, adding new features and fixing bugs, it is
 The majority of pull requests ask for a more user friendly aproach and a improved user support. 
 Jekyll developed Jekyll Talk in response to the matter. 
 
-![Jekyll Talk front page](./Resources/configuration.png)
+![Jekyll Talk front page](./Resources/jekyll_talk_front.png)
 
 It is a debate forum where you can ask, answer and discuss anything Jekyll related, fromn your late masterings of Jekyll to your troubleshooting. Its a great platform. It stores info in diversed categories and allows you to sort the content that you are really looking for.
