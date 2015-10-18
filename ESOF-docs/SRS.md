@@ -11,7 +11,7 @@
 
 <a name="description"/>
 ##Description
-Jekyll stands as a software able to read your markup files and process them into a static website. It is all based on your content, rather than databases or comment moderation. You can read more about Jekyll in our first: report https://github.com/jmepg/jekyll/blob/master/ESOF-docs/First%20report.md or directly on Jekyll website: https://jekyllrb.com/
+Jekyll stands as a software able to read your markup files and process them into a static website. It is all based on your content, rather than databases or comment moderation. You can read more about Jekyll in our first report: https://github.com/jmepg/jekyll/blob/master/ESOF-docs/First%20report.md or directly on Jekyll website: https://jekyllrb.com/
 
 <a name="system_requirements"/>
 ##System Requirements
@@ -40,7 +40,7 @@ Jekyll developed Jekyll Talk in response to the matter.
 
 ![Jekyll Talk front page](./Resources/jkTalkFront.png)
 
-It is a debate forum where you can ask, answer and discuss anything Jekyll related, fromn your late masterings of Jekyll to your troubleshooting. Its a great platform. It stores info in diversed categories and allows you to sort the content that you are really looking for. In addiction they have a *troubleshooting* area to answer FAQS, which you can find here: http://jekyllrb.com/docs/troubleshooting/
+It is a debate forum where you can ask, answer and discuss anything Jekyll related, from your late masterings of Jekyll to your troubleshooting. Its a great platform. It stores info in diversed categories and allows you to sort the content that you are really looking for. In addiction they have a *troubleshooting* area to answer FAQS, which you can find here: http://jekyllrb.com/docs/troubleshooting/
 
 <a name="hosts"/>
 ##Hosts
