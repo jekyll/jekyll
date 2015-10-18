@@ -17,8 +17,8 @@ module Jekyll
     # Returns a boolean.
     def regenerate?(document)
       case document
-      when Post, Page
-        document.asset_file? || document.data['regenerate'] || 
+      when Page
+        document.asset_file? || document.data['regenerate'] ||
           source_modified_or_dest_missing?(
             site.in_source_dir(document.relative_path), document.destination(@site.dest)
           )
@@ -87,7 +87,7 @@ module Jekyll
       return true if disabled?
 
       # objects that don't have a path are always regenerated
-      return true if path.nil? 
+      return true if path.nil?
 
       # Check for path in cache
       if cache.has_key? path

@@ -17,19 +17,19 @@ module Jekyll
         pre_render: [],
         post_write: [],
       },
-      :page => {
+      :pages => {
         post_init: [],
         pre_render: [],
         post_render: [],
         post_write: [],
       },
-      :post => {
+      :posts => {
         post_init: [],
         pre_render: [],
         post_render: [],
         post_write: [],
       },
-      :document => {
+      :documents => {
         pre_render: [],
         post_render: [],
         post_write: [],
@@ -57,10 +57,12 @@ module Jekyll
 
     # register a single hook to be called later, internal API
     def self.register_one(owner, event, priority, &block)
-      unless @registry[owner]
-        raise NotAvailable, "Hooks are only available for the following " <<
-          "classes: #{@registry.keys.inspect}"
-      end
+      @registry[owner] ||={
+        post_init: [],
+        pre_render: [],
+        post_render: [],
+        post_write: [],
+      }
 
       unless @registry[owner][event]
         raise NotAvailable, "Invalid hook. #{owner} supports only the " <<

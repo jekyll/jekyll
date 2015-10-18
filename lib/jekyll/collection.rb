@@ -1,6 +1,7 @@
 module Jekyll
   class Collection
     attr_reader :site, :label, :metadata
+    attr_writer :docs
 
     # Create a new Collection.
     #
@@ -22,6 +23,14 @@ module Jekyll
       @docs ||= []
     end
 
+    [:sort, :sort!, :each, :[], :reject, :first, :last, :size, :length].each do |method|
+      class_eval %Q"
+        def #{method}(*args, &blk)
+          docs.#{method}(*args, &blk)
+        end
+      "
+    end
+
     # Fetch the static files in this collection.
     # Defaults to an empty array if no static files have been read in.
     #
@@ -40,7 +49,7 @@ module Jekyll
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
-          docs << doc if site.publisher.publish?(doc)
+          docs << doc if site.publisher.publish?(doc) || !write?
         else
           relative_dir = Jekyll.sanitized_path(relative_directory, File.dirname(file_path)).chomp("/.")
           files << StaticFile.new(site, site.source, relative_dir, File.basename(full_path), self)
@@ -163,7 +172,7 @@ module Jekyll
     #
     # Returns true if the 'write' metadata is true, false otherwise.
     def write?
-      !!metadata['output']
+      !!metadata.fetch('output', false)
     end
 
     # The URL template to render collection's documents at.

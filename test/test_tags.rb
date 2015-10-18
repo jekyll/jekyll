@@ -12,7 +12,7 @@ class TestTags < JekyllUnitTest
     site = fixture_site({"highlighter" => "rouge"}.merge(override))
 
     if override['read_posts']
-      site.posts.concat(PostReader.new(site).read(''))
+      site.posts.docs.concat(PostReader.new(site).read_posts(''))
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
@@ -455,8 +455,8 @@ CONTENT
     end
 
     should "have the url to the \"nested\" post from 2008-11-21" do
-      assert_match %r{3\s/2008/11/21/nested/}, @result
-      assert_match %r{4\s/2008/11/21/nested/}, @result
+      assert_match %r{3\s/es/2008/11/21/nested/}, @result
+      assert_match %r{4\s/es/2008/11/21/nested/}, @result
     end
   end
 
@@ -655,11 +655,9 @@ CONTENT
 
     context "include tag with variable and liquid filters" do
       setup do
-        site = fixture_site({'pygments' => true})
-        post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
-        layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-        post.render(layouts, {"site" => {"posts" => []}})
-        @content = post.content
+        site = fixture_site({'pygments' => true}).tap(&:read).tap(&:render)
+        post = site.posts.docs.find {|p| p.basename.eql? "2013-12-17-include-variable-filters.markdown" }
+        @content = post.output
       end
 
       should "include file as variable with liquid filters" do
@@ -687,11 +685,9 @@ CONTENT
 
   context "relative include tag with variable and liquid filters" do
     setup do
-      site = fixture_site('pygments' => true)
-      post = Post.new(site, source_dir, '', "2014-09-02-relative-includes.markdown")
-      layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-      post.render(layouts, {"site" => {"posts" => []}})
-      @content = post.content
+      site = fixture_site({'pygments' => true}).tap(&:read).tap(&:render)
+      post = site.posts.docs.find {|p| p.basename.eql? "2014-09-02-relative-includes.markdown" }
+      @content = post.output
     end
 
     should "include file as variable with liquid filters" do

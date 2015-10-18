@@ -190,9 +190,9 @@ class TestSite < JekyllUnitTest
     end
 
     should "read posts" do
-      @site.posts.concat(PostReader.new(@site).read(''))
+      @site.posts.docs.concat(PostReader.new(@site).read_posts(''))
       posts = Dir[source_dir('_posts', '**', '*')]
-      posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
+      posts.delete_if { |post| File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER) }
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
 
@@ -219,8 +219,8 @@ class TestSite < JekyllUnitTest
       @site.process
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
-      posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
-      categories = %w(2013 bar baz category foo z_category MixedCase Mixedcase publish_test win).sort
+      posts.delete_if { |post| File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER) }
+      categories = %w(2013 bar baz category foo z_category MixedCase Mixedcase es publish_test win).sort
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
@@ -498,7 +498,7 @@ class TestSite < JekyllUnitTest
         sleep 1
         @site.process
         mtime3 = File.stat(dest).mtime.to_i
-        refute_equal mtime2, mtime3 # must be regenerated 
+        refute_equal mtime2, mtime3 # must be regenerated
 
         sleep 1
         @site.process
@@ -522,7 +522,7 @@ class TestSite < JekyllUnitTest
         @site.process
         assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
-        refute_equal mtime1, mtime2 # must be regenerated 
+        refute_equal mtime1, mtime2 # must be regenerated
       end
 
     end

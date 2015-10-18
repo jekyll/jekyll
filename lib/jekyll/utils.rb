@@ -8,6 +8,13 @@ module Jekyll
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
 
+    # Non-destructive version of deep_merge_hashes! See that method.
+    #
+    # Returns the merged hashes.
+    def deep_merge_hashes(master_hash, other_hash)
+      deep_merge_hashes!(master_hash.dup, other_hash)
+    end
+
     # Merges a master hash with another hash, recursively.
     #
     # master_hash - the "parent" hash whose values will be overridden
@@ -17,16 +24,14 @@ module Jekyll
     # http://gemjack.com/gems/tartan-0.1.1/classes/Hash.html
     #
     # Thanks to whoever made it.
-    def deep_merge_hashes(master_hash, other_hash)
-      target = master_hash.dup
-
-      other_hash.each_key do |key|
-        if other_hash[key].is_a? Hash and target[key].is_a? Hash
-          target[key] = Utils.deep_merge_hashes(target[key], other_hash[key])
+    def deep_merge_hashes!(target, overwrite)
+      overwrite.each_key do |key|
+        if overwrite[key].is_a? Hash and target[key].is_a? Hash
+          target[key] = Utils.deep_merge_hashes(target[key], overwrite[key])
           next
         end
 
-        target[key] = other_hash[key]
+        target[key] = overwrite[key]
       end
 
       target

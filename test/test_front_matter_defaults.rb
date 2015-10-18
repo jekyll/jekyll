@@ -69,7 +69,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       }))
       @site.process
-      @affected = @site.posts.find { |page| page.relative_path =~ /^\/win/ }
+      @affected = @site.posts.docs.find { |page| page.relative_path =~ /win\// }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
 
@@ -95,7 +95,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       }))
       @site.process
       @affected = @site.pages
-      @not_affected = @site.posts
+      @not_affected = @site.posts.docs
     end
 
     should "affect only the specified type and all paths" do
@@ -120,7 +120,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       }))
       @site.process
       @affected = @site.pages
-      @not_affected = @site.posts
+      @not_affected = @site.posts.docs
     end
 
     should "affect only the specified type and all paths" do

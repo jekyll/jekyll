@@ -20,6 +20,8 @@ require 'rspec/mocks'
 
 require 'jekyll'
 
+Jekyll.logger = Logger.new(StringIO.new)
+
 unless jruby?
   require 'rdiscount'
   require 'redcarpet'
@@ -31,7 +33,7 @@ require 'shoulda'
 include Jekyll
 
 # FIXME: If we really need this we lost the game.
-STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
+# STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 
 # Report with color.
 Minitest::Reporters.use! [
@@ -66,6 +68,7 @@ class JekyllUnitTest < Minitest::Test
 
   def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)
     Utils.deep_merge_hashes(base_hash, overrides)
+      .fix_common_issues.backwards_compatibilize.add_default_collections
   end
 
   def site_configuration(overrides = {})
@@ -108,23 +111,13 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
-  def capture_stdout
-    $old_stdout = $stdout
-    $stdout = StringIO.new
+  def capture_output
+    stderr = StringIO.new
+    Jekyll.logger = Logger.new stderr
     yield
-    $stdout.rewind
-    return $stdout.string
-  ensure
-    $stdout = $old_stdout
+    stderr.rewind
+    return stderr.string.to_s
   end
-
-  def capture_stderr
-    $old_stderr = $stderr
-    $stderr = StringIO.new
-    yield
-    $stderr.rewind
-    return $stderr.string
-  ensure
-    $stderr = $old_stderr
-  end
+  alias_method :capture_stdout, :capture_output
+  alias_method :capture_stderr, :capture_output
 end

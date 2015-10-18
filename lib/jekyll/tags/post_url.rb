@@ -14,7 +14,7 @@ module Jekyll
       end
 
       def ==(other)
-        other.name.match(@name_regex)
+        other.basename.match(@name_regex)
       end
 
       def deprecated_equality(other)
@@ -32,11 +32,11 @@ module Jekyll
       #
       # Returns the post slug with the subdirectory (relative to _posts)
       def post_slug(other)
-        path = other.name.split("/")[0...-1].join("/")
+        path = other.basename.split("/")[0...-1].join("/")
         if path.nil? || path == ""
-          other.slug
+          other.data['slug']
         else
-          path + '/' + other.slug
+          path + '/' + other.data['slug']
         end
       end
     end

@@ -30,7 +30,6 @@ require 'kramdown'
 require 'colorator'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
-Liquid::Template.error_mode = :strict
 
 module Jekyll
 
@@ -53,7 +52,6 @@ module Jekyll
   autoload :CollectionReader,    'jekyll/readers/collection_reader'
   autoload :DataReader,          'jekyll/readers/data_reader'
   autoload :LayoutReader,        'jekyll/readers/layout_reader'
-  autoload :DraftReader,         'jekyll/readers/draft_reader'
   autoload :PostReader,          'jekyll/readers/post_reader'
   autoload :PageReader,          'jekyll/readers/page_reader'
   autoload :StaticFileReader,    'jekyll/readers/static_file_reader'
@@ -136,7 +134,7 @@ module Jekyll
     #
     # Returns the new logger.
     def logger=(writer)
-      @logger = LogAdapter.new(writer)
+      @logger = LogAdapter.new(writer, (ENV["JEKYLL_LOG_LEVEL"] || :info).to_sym)
     end
 
     # Public: An array of sites
