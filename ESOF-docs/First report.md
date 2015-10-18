@@ -1,5 +1,7 @@
 #**First report of ESOF - Jekyll** 		
 
+![Jekyll Logo](./Resources/logo.png)
+
 Jekyll is a static website generator in open source developed in Ruby (among other languages), which uses template directories and it is able to read several files with diferent text files(Markdown, Liquid, HTML and CSS). It allows you to create a website where your content is what matters most, easy to use and understand. Jekyll is not a blogging software, it is a parsing device. GitHub pages are powered by Jekyll so you can easily deploy your website usig GitHub.
 
 ##Why prefer Jekyll?
