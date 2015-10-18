@@ -18,12 +18,10 @@ Jekyll stands as a software able to read your markup files and process them into
  So the software must be able to read *markup languages* (Markdown, Textile, HTML). 
 Jekyll is best supported by *Linux* (although you are still able to use with it through some other operative systems). You are required  to have *Ruby* and *RubyGems* in order to run the software.
 
-<<<<<<< HEAD
 ![System Requirements](./Resources/sysReq.png)
 
-=======
+
 <a name="user_files"/>
->>>>>>> c42493226d68a08c3e7c15a69376077f515854d4
 ##User Files
 The directory structure of your files should look like this:
 
