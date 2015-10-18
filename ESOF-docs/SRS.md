@@ -1,9 +1,10 @@
-#Requirements:
+#Requirement Specification:
 
 ##Description:
-Jekyll stands as a software able to read your markup files and process them into a static website. So the software must be able to read *markup languages* (Markdown, Textile, HTML). 
+Jekyll stands as a software able to read your markup files and process them into a static website. It is all based on your content, rather than databases or comment moderation. You can read more about Jekyll in our first: report https://github.com/jmepg/jekyll/blob/master/ESOF-docs/First%20report.md or directly on Jekyll website: https://jekyllrb.com/
 
 ##System Requirements:
+ So the software must be able to read *markup languages* (Markdown, Textile, HTML). 
 Jekyll is best supported by *Linux* (although you are still able to use with it through some other operative systems). You are required  to have *Ruby* and *RubyGems* in order to run the software.
 
 ##User Files
