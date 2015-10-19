@@ -653,8 +653,8 @@ class Jekyll::Converters::Markdown::MyCustomProcessor
 end
 {% endhighlight %}
 
-Once you've created your class and have it properly setup either as a plugin in
-the `_plugins` folder or as a gem, specify it in your `_config.yml`:
+Once you've created your class and have it properly set up either as a plugin
+in the `_plugins` folder or as a gem, specify it in your `_config.yml`:
 
 {% highlight yaml %}
 markdown: MyCustomProcessor

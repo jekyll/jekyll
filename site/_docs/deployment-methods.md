@@ -112,7 +112,7 @@ That's why rrsync wrapper shall be installed. If it is not already installed by 
 - Put it to the bin subdirectory of your home folder  (```~/bin```)
 - Make it executable (```chmod +x```)
 
-#### Step 2: Setup certificate-based ssh access (server side)
+#### Step 2: Set up certificate-based ssh access (server side)
 
 [This process is described in a lot of places in the net](https://wiki.gentoo.org/wiki/SSH#Passwordless_Authentication). We will not cover it here. What is different from usual approach is to put the restriction to certificate-based authorization in ```~/.ssh/authorized_keys```). We will launch ```rrsync``` utility and supply it with the folder it shall have read-write access to:
 
