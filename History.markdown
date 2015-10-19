@@ -265,7 +265,8 @@
   * Add alternative jekyll gem installation instructions (#4018)
   * Fix a few typos and formatting problems. (#4022)
   * Fix pretty permalink example (#4029)
-  * Note that _config.yml is not reloaded during regeneration (#4034)
+  * Note that `_config.yml` is not reloaded during regeneration (#4034)
+  * Apply code block figure syntax to blocks in CONTRIBUTING (#4046)
 
 ## 2.5.3 / 2014-12-22
 
