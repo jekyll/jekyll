@@ -16,25 +16,13 @@
         <ul class="social-media-list">
           {% if site.github_username %}
           <li>
-            <a href="https://github.com/{{ site.github_username }}">
-              <span class="icon icon--github">
-                {% include icon-github.svg %}
-              </span>
-
-              <span class="username">{{ site.github_username }}</span>
-            </a>
+            {% include icon-github.html username=site.github_username %}
           </li>
           {% endif %}
 
           {% if site.twitter_username %}
           <li>
-            <a href="https://twitter.com/{{ site.twitter_username }}">
-              <span class="icon icon--twitter">
-                {% include icon-twitter.svg %}
-              </span>
-
-              <span class="username">{{ site.twitter_username }}</span>
-            </a>
+            {% include icon-twitter.html username=site.twitter_username %}
           </li>
           {% endif %}
         </ul>
