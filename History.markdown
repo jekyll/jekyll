@@ -91,6 +91,7 @@
   * Add header to site template `_config.yml` for clarity & direction (#3997)
   * Site template: add timezone offset to post date frontmatter (#4001)
   * Make a constant for the regex to find hidden files (#4032)
+  * Site template: refactor github & twitter icons into includes (#4049)
 
 ### Bug Fixes
 
