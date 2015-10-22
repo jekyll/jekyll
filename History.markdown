@@ -138,9 +138,10 @@
   * Set `future` to `false` in the default config (#3892)
   * filters: `where` should compare stringified versions of input & comparator (#3935)
   * Read build options for `jekyll clean` command (#3828)
-  * Fix #3970: Use Gem::Version to compare versions, not >.
+  * Fix #3970: Use Gem::Version to compare versions, not `>`.
   * Abort if no subcommand. Fixes confusing message. (#3992)
   * Whole-post excerpts should match the post content (#4004)
+  * Change default font weight to 400 to fix bold/strong text issues (#4050)
 
 ### Development Fixes
 
