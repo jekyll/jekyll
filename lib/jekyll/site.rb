@@ -4,7 +4,7 @@ require 'csv'
 module Jekyll
   class Site
     attr_reader   :source, :dest, :config
-    attr_accessor :layouts, :posts, :pages, :static_files, :drafts,
+    attr_accessor :layouts, :pages, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
@@ -12,6 +12,8 @@ module Jekyll
 
     attr_accessor :converters, :generators, :reader
     attr_reader   :regenerator, :liquid_renderer
+
+    DEFAULT_COLLECTIONS = %w{drafts posts}
 
     # Public: Initialize a new Site.
     #
@@ -74,17 +76,22 @@ module Jekyll
     def reset
       self.time = (config['time'] ? Utils.parse_date(config['time'].to_s, "Invalid time in _config.yml.") : Time.now)
       self.layouts = {}
-      self.posts = []
       self.pages = []
       self.static_files = []
       self.data = {}
       @collections = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
+      @posts = nil
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
       end
+
+      collections["posts"].metadata.merge!({
+        "output"    => true,
+        "permalink" => Jekyll::Traits::Dated.url_template(permalink_style)
+      })
 
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
@@ -135,6 +142,17 @@ module Jekyll
         []
       else
         raise ArgumentError, "Your `collections` key must be a hash or an array."
+      end + ["posts"]
+    end
+
+    # Special accessor for posts.
+    #
+    # Returns the "posts" collection.
+    def posts
+      @posts ||= if show_drafts
+        collections["posts"].docs + collections["drafts"].docs
+      else
+        collections["posts"].docs
       end
     end
 
@@ -175,7 +193,7 @@ module Jekyll
         end
       end
 
-      [posts, pages].flatten.each do |page_or_post|
+      [pages].flatten.each do |page_or_post|
         if regenerator.regenerate?(page_or_post)
           page_or_post.render(layouts, payload)
         end
@@ -219,7 +237,7 @@ module Jekyll
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
-      posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
+      posts.each { |p| p.public_send(post_attr.to_sym).each { |t| hash[t] << p } }
       hash.values.each { |posts| posts.sort!.reverse! }
       hash
     end
