@@ -59,6 +59,34 @@ class TestConfiguration < JekyllUnitTest
       assert_equal %w[config/site.yml config/deploy.toml configuration.yml], @config.config_files(@multiple_files)
     end
   end
+
+  context "#read_config_file" do
+    setup do
+      @config = Configuration[{"source" => source_dir('empty.yml')}]
+    end
+
+    should "not raise an error on empty files" do
+      allow(SafeYAML).to receive(:load_file).with('empty.yml').and_return(false)
+      Jekyll.logger.log_level = :warn
+      @config.read_config_file('empty.yml')
+      Jekyll.logger.log_level = :info
+    end
+  end
+
+  context "#read_config_files" do
+    setup do
+      @config = Configuration[{"source" => source_dir}]
+    end
+
+    should "continue to read config files if one is empty" do
+      allow(SafeYAML).to receive(:load_file).with('empty.yml').and_return(false)
+      allow(SafeYAML).to receive(:load_file).with('not_empty.yml').and_return({'foo' => 'bar', 'include' => '', 'exclude' => ''})
+      Jekyll.logger.log_level = :warn
+      read_config = @config.read_config_files(['empty.yml', 'not_empty.yml'])
+      Jekyll.logger.log_level = :info
+      assert_equal 'bar', read_config['foo']
+    end
+  end
   context "#backwards_compatibilize" do
     setup do
       @config = Configuration[{

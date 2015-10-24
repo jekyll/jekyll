@@ -118,7 +118,7 @@ module Jekyll
         Jekyll::External.require_with_graceful_fail('toml') unless defined?(TOML)
         TOML.load_file(filename)
       when /\.ya?ml/i
-        SafeYAML.load_file(filename)
+        SafeYAML.load_file(filename) || {}
       else
         raise ArgumentError, "No parser for '#{filename}' is available. Use a .toml or .y(a)ml file instead."
       end
@@ -153,7 +153,7 @@ module Jekyll
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
       next_config = safe_load_file(file)
-      raise ArgumentError.new("Configuration file: (INVALID) #{file}".yellow) unless next_config.is_a?(Hash)
+      check_config_is_hash!(next_config, file)
       Jekyll.logger.info "Configuration file:", file
       next_config
     rescue SystemCallError
@@ -236,7 +236,8 @@ module Jekyll
       end
 
       %w[include exclude].each do |option|
-        if config.fetch(option, []).is_a?(String)
+        config[option] ||= []
+        if config[option].is_a?(String)
           Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" +
             " must now be specified as an array, but you specified" +
             " a string. For now, we've treated the string you provided" +
@@ -300,6 +301,7 @@ module Jekyll
     end
 
     private
+
     def style_to_permalink(permalink_style)
       case permalink_style.to_sym
       when :pretty
@@ -312,6 +314,18 @@ module Jekyll
         "/:categories/:year/:y_day/:title.html"
       else
         permalink_style.to_s
+      end
+    end
+
+    # Private: Checks if a given config is a hash
+    #
+    # extracted_config - the value to check
+    # file - the file from which the config was extracted
+    #
+    # Raises an ArgumentError if given config is not a hash
+    def check_config_is_hash!(extracted_config, file)
+      unless extracted_config.is_a?(Hash)
+        raise ArgumentError.new("Configuration file: (INVALID) #{file}".yellow)
       end
     end
   end
