@@ -22,7 +22,7 @@
   * Adapt StaticFile for collections, config defaults (#3823)
   * Add a Code of Conduct for the Jekyll project (#3925)
   * Added permalink time variables (#3990)
-  * Add `--increment` flag to enable incremental regen (disabled by default) (#4059)
+  * Add `--incremental` flag to enable incremental regen (disabled by default) (#4059)
 
 ### Minor Enhancements
 
@@ -62,7 +62,6 @@
   * Added build --destination and --source flags (#3418)
   * Site template: remove unused `page.meta` attribute (#3537)
   * Improve the error message when sorting null objects (#3520)
-  * Add jekyll-smartify plugin (#3572)
   * Added liquid-md5 plugin (#3598)
   * Documentation: RR replaced with RSpec Mocks (#3600)
   * Documentation: Fix subpath. (#3599)
@@ -274,6 +273,7 @@
   * Fix pretty permalink example (#4029)
   * Note that `_config.yml` is not reloaded during regeneration (#4034)
   * Apply code block figure syntax to blocks in CONTRIBUTING (#4046)
+  * Add jekyll-smartify to the list of third-party plugins (#3572)
 
 ## 2.5.3 / 2014-12-22
 
