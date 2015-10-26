@@ -431,5 +431,22 @@ module Jekyll
     def related_posts
       Jekyll::RelatedPosts.new(self).build
     end
+
+    # Override of normal respond_to? to match method_missing's logic for
+    # looking in @data.
+    def respond_to?(method, include_private = false)
+      data.key?(method.to_s) || super
+    end
+
+    # Override of method_missing to check in @data for the key.
+    def method_missing(method, *args, &blck)
+      if data.key?(method.to_s)
+        Jekyll.logger.warn "Deprecation:", "Document##{method} is now a key in the #data hash."
+        Jekyll.logger.warn "", "Called by #{caller.first}."
+        data[method.to_s]
+      else
+        super
+      end
+    end
   end
 end

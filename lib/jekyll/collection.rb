@@ -23,12 +23,21 @@ module Jekyll
       @docs ||= []
     end
 
-    [:sort, :sort!, :each, :[], :reject, :first, :last, :size, :length].each do |method|
-      class_eval %Q"
-        def #{method}(*args, &blk)
-          docs.#{method}(*args, &blk)
-        end
-      "
+    # Override of normal respond_to? to match method_missing's logic for
+    # looking in @data.
+    def respond_to?(method, include_private = false)
+      docs.respond_to?(method.to_sym, include_private) || super
+    end
+
+    # Override of method_missing to check in @data for the key.
+    def method_missing(method, *args, &blck)
+      if docs.respond_to?(method.to_sym)
+        Jekyll.logger.warn "Deprecation:", "Collection##{method} should be called on the #docs array directly."
+        Jekyll.logger.warn "", "Called by #{caller.first}."
+        docs.public_send(method.to_sym, *args, &blck)
+      else
+        super
+      end
     end
 
     # Fetch the static files in this collection.
