@@ -130,7 +130,8 @@ class TestRegenerator < JekyllUnitTest
 
       @site = Site.new(Jekyll.configuration({
         "source" => source_dir,
-        "destination" => dest_dir
+        "destination" => dest_dir,
+        "full_rebuild" => false
       }))
 
       @site.process
