@@ -74,7 +74,7 @@ class JekyllUnitTest < Minitest::Test
   def site_configuration(overrides = {})
     full_overrides = build_configs(overrides, build_configs({
       "destination" => dest_dir,
-      "full_rebuild" => true
+      "incremental" => false
     }))
     build_configs({
       "source" => source_dir

@@ -144,7 +144,7 @@ module Jekyll
     #
     # Returns a Boolean (true for disabled, false for enabled).
     def disabled?
-      @disabled = site.full_rebuild? if @disabled.nil?
+      @disabled = !site.incremental? if @disabled.nil?
       @disabled
     end
 

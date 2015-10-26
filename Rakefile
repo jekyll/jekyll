@@ -209,8 +209,7 @@ namespace :site do
     Jekyll::Commands::Build.process({
       "source"       => File.expand_path("site"),
       "destination"  => File.expand_path("gh-pages"),
-      "sass"         => { "style" => "compressed" },
-      "full_rebuild" => true
+      "sass"         => { "style" => "compressed" }
     })
 
     File.open('gh-pages/.nojekyll', 'wb') { |f| f.puts(":dog: food.") }

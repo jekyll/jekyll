@@ -52,10 +52,10 @@ module Jekyll
           t = Time.now
           source      = options['source']
           destination = options['destination']
-          full_build  = options['full_rebuild']
+          incremental = options['incremental']
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
-          Jekyll.logger.info "Incremental build:", (full_build ? "disabled" : "enabled")
+          Jekyll.logger.info "Incremental build:", (incremental ? "enabled" : "disabled. Enable with --incremental")
           Jekyll.logger.info "Generating..."
           process_site(site)
           Jekyll.logger.info "", "done in #{(Time.now - t).round(3)} seconds."
