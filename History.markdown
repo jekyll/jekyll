@@ -99,6 +99,7 @@
 
 ### Bug Fixes
 
+  * `post_url`: fix access deprecation warning & fix deprecation msg (#4060)
   * Perform jekyll-paginate deprecation warning correctly. (#3580)
   * Make permalink parsing consistent with pages (#3014)
   * `time()`pre-filter method should accept a `Date` object (#3299)
