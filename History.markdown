@@ -6,6 +6,7 @@
   * Incremental regeneration (#3116)
   * Add Hooks: a new kind of plugin (#3553)
   * Upgrade to Liquid 3.0.0 (#3002)
+  * `site.posts` is now a Collection instead of an Array (#4055)
   * Add basic support for JRuby (commit: 0f4477)
   * Drop support for Ruby 1.9.3. (#3235)
   * Support Ruby v2.2 (#3234)
