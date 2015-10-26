@@ -11,7 +11,7 @@ class TestRegenerator < JekyllUnitTest
             "output" => true
           }
         },
-        "full_rebuild" => false
+        "incremental" => true
       })
 
       @site.read
@@ -94,7 +94,7 @@ class TestRegenerator < JekyllUnitTest
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
 
       @site = fixture_site({
-        "full_rebuild" => false
+        "incremental" => true
       })
 
       @site.read
@@ -131,7 +131,7 @@ class TestRegenerator < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source" => source_dir,
         "destination" => dest_dir,
-        "full_rebuild" => false
+        "incremental" => true
       }))
 
       @site.process
@@ -297,7 +297,7 @@ class TestRegenerator < JekyllUnitTest
     end
 
     should "regenerate everything if metadata is disabled" do
-      @site.config["full_rebuild"] = true
+      @site.config["incremental"] = false
       @regenerator.clear
       @regenerator.add(@path)
       @regenerator.write_metadata

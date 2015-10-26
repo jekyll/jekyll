@@ -22,7 +22,6 @@ module Jekyll
       'keep_files'    => ['.git','.svn'],
       'encoding'      => 'utf-8',
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
-      'full_rebuild'  => true,
 
       # Filtering Content
       'show_drafts'   => nil,
@@ -39,6 +38,7 @@ module Jekyll
       'highlighter'   => 'rouge',
       'lsi'           => false,
       'excerpt_separator' => "\n\n",
+      'incremental'   => false,
 
       # Serving
       'detach'        => false,          # default to not detaching the server

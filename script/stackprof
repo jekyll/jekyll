@@ -5,7 +5,7 @@ set -e
 export BENCHMARK=true
 command -v stackprof > /dev/null || script/bootstrap
 
-TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site', 'full_rebuild' => true})"
+TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site'})"
 PROF_OUTPUT_FILE=tmp/stackprof-$(date +%Y%m%d%H%M).dump
 
 test -f "$PROF_OUTPUT_FILE" || {

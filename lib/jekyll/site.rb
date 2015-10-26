@@ -351,8 +351,8 @@ module Jekyll
     # Whether to perform a full rebuild without incremental regeneration
     #
     # Returns a Boolean: true for a full rebuild, false for normal build
-    def full_rebuild?(override = {})
-      override['full_rebuild'] || config['full_rebuild']
+    def incremental?(override = {})
+      override['incremental'] || config['incremental']
     end
 
     # Returns the publisher or creates a new publisher if it doesn't

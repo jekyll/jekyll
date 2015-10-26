@@ -330,7 +330,7 @@ class TestSite < JekyllUnitTest
         end
 
         bad_processor = "Custom::Markdown"
-        s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
+        s = Site.new(site_configuration('markdown' => bad_processor, 'incremental' => false))
         assert_raises Jekyll::Errors::FatalException do
           s.process
         end
@@ -348,7 +348,7 @@ class TestSite < JekyllUnitTest
 
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
-        s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
+        s = Site.new(site_configuration('markdown' => bad_processor, 'incremental' => false))
         assert_raises Jekyll::Errors::FatalException do
           s.process
         end
@@ -429,7 +429,7 @@ class TestSite < JekyllUnitTest
     context "manipulating the Jekyll environment" do
       setup do
         @site = Site.new(site_configuration({
-          'full_rebuild' => true
+          'incremental' => false
         }))
         @site.process
         @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -443,7 +443,7 @@ class TestSite < JekyllUnitTest
         setup do
           ENV["JEKYLL_ENV"] = "production"
           @site = Site.new(site_configuration({
-            'full_rebuild' => true
+            'incremental' => false
           }))
           @site.process
           @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -473,7 +473,7 @@ class TestSite < JekyllUnitTest
     context "incremental build" do
       setup do
         @site = Site.new(site_configuration({
-          'full_rebuild' => false
+          'incremental' => true
         }))
         @site.read
       end
