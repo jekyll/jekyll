@@ -22,6 +22,7 @@
   * Adapt StaticFile for collections, config defaults (#3823)
   * Add a Code of Conduct for the Jekyll project (#3925)
   * Added permalink time variables (#3990)
+  * Add `--increment` flag to enable incremental regen (disabled by default) (#4059)
 
 ### Minor Enhancements
 
