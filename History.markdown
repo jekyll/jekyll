@@ -25,6 +25,7 @@
 
 ### Minor Enhancements
 
+  * Deprecate access to Document#data properties and Collection#docs methods (#4058)
   * Sort static files just once, and call `site_payload` once for all collections (#3204)
   * Separate `jekyll docs` and optimize external gem handling (#3241)
   * Improve `Site#getConverterImpl` and call it `Site#find_converter_instance` (#3240)
