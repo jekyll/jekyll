@@ -307,7 +307,7 @@ module Jekyll
       populate_tags
 
       if generate_excerpt?
-        data['excerpt'] = Jekyll::Excerpt.new(self)
+        data['excerpt'] ||= Jekyll::Excerpt.new(self)
       end
     end
 
