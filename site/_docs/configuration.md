@@ -268,6 +268,21 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">-q, --quiet</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Incremental build</strong></p>
+        <p class="description">
+            Enable the experimental incremental build feature. Incremental build only
+            re-builds posts and pages that have changed, resulting in significant performance
+            improvements for large sites, but may also break site generation in certain
+            cases.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">incremental: BOOL</code></p>
+        <p><code class="flag">-I, --incremental</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -534,6 +549,7 @@ markdown:    kramdown
 highlighter: rouge
 lsi:         false
 excerpt_separator: "\n\n"
+incremental: false
 
 # Serving
 detach:  false
