@@ -5,7 +5,7 @@ module Jekyll
 
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
-    DEFAULTS = {
+    DEFAULTS = Configuration[{
       # Where things are
       'source'        => Dir.pwd,
       'destination'   => File.join(Dir.pwd, '_site'),
@@ -13,7 +13,7 @@ module Jekyll
       'layouts_dir'   => '_layouts',
       'data_dir'      => '_data',
       'includes_dir'  => '_includes',
-      'collections'   => nil,
+      'collections'   => {},
 
       # Handling Reading
       'safe'          => false,
@@ -80,7 +80,7 @@ module Jekyll
           'coderay_css'               => 'style'
         }
       }
-    }
+    }]
 
     # Public: Turn all keys into string
     #
@@ -186,7 +186,7 @@ module Jekyll
         $stderr.puts "#{err}"
       end
 
-      configuration.fix_common_issues.backwards_compatibilize
+      configuration.fix_common_issues.backwards_compatibilize.add_default_collections
     end
 
     # Public: Split a CSV string into an array containing its values
@@ -275,12 +275,43 @@ module Jekyll
       config
     end
 
+    def add_default_collections
+      config = clone
+
+      return config if config['collections'].nil?
+
+      if config['collections'].is_a?(Array)
+        config['collections'] = Hash[config['collections'].map{|c| [c, {}]}]
+      end
+      config['collections']['posts'] ||= {}
+      config['collections']['posts']['output'] = true
+      config['collections']['posts']['permalink'] = style_to_permalink(config['permalink'])
+
+      config
+    end
+
     def renamed_key(old, new, config, allowed_values = nil)
       if config.key?(old)
         Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" +
           "option has been renamed to '#{new}'. Please update your config " +
           "file accordingly."
         config[new] = config.delete(old)
+      end
+    end
+
+    private
+    def style_to_permalink(permalink_style)
+      case permalink_style.to_sym
+      when :pretty
+        "/:categories/:year/:month/:day/:title/"
+      when :none
+        "/:categories/:title.html"
+      when :date
+        "/:categories/:year/:month/:day/:title.html"
+      when :ordinal
+        "/:categories/:year/:y_day/:title.html"
+      else
+        permalink_style.to_s
       end
     end
   end

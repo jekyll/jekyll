@@ -74,7 +74,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :page, :post_init do |page|
+    Jekyll::Hooks.register :pages, :post_init do |page|
       page.name = 'renamed.html'
       page.process(page.name)
     end
@@ -88,7 +88,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :page, :pre_render do |page, payload|
+    Jekyll::Hooks.register :pages, :pre_render do |page, payload|
       payload['myparam'] = 'special' if page.name == 'page1.html'
     end
     """
@@ -103,7 +103,7 @@ Feature: Hooks
     And I have a "index.html" page that contains "WRAP ME"
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :page, :post_render do |page|
+    Jekyll::Hooks.register :pages, :post_render do |page|
       page.output = "{{{{{ #{page.output.chomp} }}}}}"
     end
     """
@@ -115,7 +115,7 @@ Feature: Hooks
     And I have a "index.html" page that contains "HELLO FROM A PAGE"
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :page, :post_write do |page|
+    Jekyll::Hooks.register :pages, :post_write do |page|
       require 'fileutils'
       filename = page.destination(page.site.dest)
       FileUtils.mv(filename, "#{filename}.moved")
@@ -128,16 +128,15 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    # rot13 translate
-    Jekyll::Hooks.register :post, :post_init do |post|
-      post.content.tr!('abcdefghijklmnopqrstuvwxyz',
-        'nopqrstuvwxyzabcdefghijklm')
+    Jekyll::Hooks.register :posts, :post_init do |post|
+      post.data['harold'] = "content for entry1.".tr!('abcdefghijklmnopqrstuvwxyz',
+            'nopqrstuvwxyzabcdefghijklm')
     end
     """
     And I have a _posts directory
     And I have the following posts:
-      | title  | date       | layout | content             |
-      | entry1 | 2015-03-14 | nil    | content for entry1. |
+      | title  | date       | layout | content               |
+      | entry1 | 2015-03-14 | nil    | {{ page.harold }} |
     When I run jekyll build
     Then the _site directory should exist
     And I should see "pbagrag sbe ragel1." in "_site/2015/03/14/entry1.html"
@@ -148,7 +147,7 @@ Feature: Hooks
     """
     # Add myvar = 'old' to posts before 2015-03-15, and myvar = 'new' for
     # others
-    Jekyll::Hooks.register :post, :pre_render do |post, payload|
+    Jekyll::Hooks.register :posts, :pre_render do |post, payload|
       if post.date < Time.new(2015, 3, 15)
         payload['myvar'] = 'old'
       else
@@ -170,7 +169,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     # Replace content after rendering
-    Jekyll::Hooks.register :post, :post_render do |post|
+    Jekyll::Hooks.register :posts, :post_render do |post|
       post.output.gsub! /42/, 'the answer to life, the universe and everything'
     end
     """
@@ -188,7 +187,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     # Log all post filesystem writes
-    Jekyll::Hooks.register :post, :post_write do |post|
+    Jekyll::Hooks.register :posts, :post_write do |post|
       filename = post.destination(post.site.dest)
       open('_site/post-build.log', 'a') do |f|
         f.puts "Wrote #{filename} at #{Time.now}"
@@ -208,7 +207,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register [:page, :post], :post_render do |owner|
+    Jekyll::Hooks.register [:pages, :posts], :post_render do |owner|
       owner.output = "{{{{{ #{owner.output.chomp} }}}}}"
     end
     """
@@ -225,19 +224,19 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :page, :post_render, priority: :normal do |owner|
+    Jekyll::Hooks.register :pages, :post_render, priority: :normal do |owner|
       # first normal runs second
       owner.output = "1 #{owner.output.chomp}"
     end
-    Jekyll::Hooks.register :page, :post_render, priority: :high do |owner|
+    Jekyll::Hooks.register :pages, :post_render, priority: :high do |owner|
       # high runs last
       owner.output = "2 #{owner.output.chomp}"
     end
-    Jekyll::Hooks.register :page, :post_render do |owner|
+    Jekyll::Hooks.register :pages, :post_render do |owner|
       # second normal runs third (normal is default)
       owner.output = "3 #{owner.output.chomp}"
     end
-    Jekyll::Hooks.register :page, :post_render, priority: :low do |owner|
+    Jekyll::Hooks.register :pages, :post_render, priority: :low do |owner|
       # low runs first
       owner.output = "4 #{owner.output.chomp}"
     end
@@ -250,7 +249,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :document, :pre_render do |doc, payload|
+    Jekyll::Hooks.register :documents, :pre_render do |doc, payload|
       doc.data['text'] = doc.data['text'] << ' are belong to us'
     end
     """
@@ -276,7 +275,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :document, :post_render do |doc|
+    Jekyll::Hooks.register :documents, :post_render do |doc|
       doc.output.gsub! /<p>/, '<p class="meme">'
     end
     """
@@ -302,7 +301,7 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :document, :post_write do |doc|
+    Jekyll::Hooks.register :documents, :post_write do |doc|
       open('_site/document-build.log', 'a') do |f|
         f.puts "Wrote document #{doc.collection.docs.index doc} at #{Time.now}"
       end

@@ -15,7 +15,7 @@ module Jekyll
     end
 
     def hidden_in_the_future?(thing)
-      thing.is_a?(Post) && !@site.future && thing.date > @site.time
+      thing.respond_to?(:date) && !@site.future && thing.date.to_i > @site.time.to_i
     end
   end
 end

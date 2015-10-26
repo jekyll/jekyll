@@ -2,6 +2,10 @@ require 'helper'
 
 class TestDocument < JekyllUnitTest
 
+  def assert_equal_value(key, one, other)
+    assert_equal(one[key], other[key])
+  end
+
   context "a document in a collection" do
     setup do
       @site = fixture_site({
@@ -36,10 +40,8 @@ class TestDocument < JekyllUnitTest
     end
 
     should "know its data" do
-      assert_equal({
-        "title" => "Jekyll.configuration",
-        "whatever" => "foo.bar"
-      }, @document.data)
+      assert_equal "Jekyll.configuration", @document.data["title"]
+      assert_equal "foo.bar", @document.data["whatever"]
     end
 
     context "with YAML ending in three dots" do
@@ -53,10 +55,8 @@ class TestDocument < JekyllUnitTest
       end
 
       should "know its data" do
-        assert_equal({
-          "title" => "YAML with Dots",
-          "whatever" => "foo.bar"
-          }, @document.data)
+        assert_equal "YAML with Dots", @document.data["title"]
+        assert_equal "foo.bar", @document.data["whatever"]
       end
     end
 
@@ -88,13 +88,9 @@ class TestDocument < JekyllUnitTest
     end
 
     should "know the frontmatter defaults" do
-      assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide",
-        "nested"=> {
-          "key"=>"myval"
-        }
-      }, @document.data)
+      assert_equal "Example slide", @document.data["title"]
+      assert_equal "slide", @document.data["layout"]
+      assert_equal({"key"=>"myval"}, @document.data["nested"])
     end
   end
 
@@ -117,14 +113,9 @@ class TestDocument < JekyllUnitTest
     end
 
     should "override default values in the document frontmatter" do
-      assert_equal({
-        "title"=>"Override title",
-        "layout"=>"slide",
-        "nested"=> {
-          "test1"=>"override1",
-          "test2"=>"override2"
-        }
-      }, @document.data)
+      assert_equal "Override title", @document.data["title"]
+      assert_equal "slide", @document.data["layout"]
+      assert_equal({"test1"=>"override1","test2"=>"override2"}, @document.data["nested"])
     end
   end
 
@@ -146,13 +137,9 @@ class TestDocument < JekyllUnitTest
     end
 
     should "know the frontmatter defaults" do
-      assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide",
-        "nested"=> {
-          "key"=>"value123"
-        }
-      }, @document.data)
+      assert_equal "Example slide", @document.data["title"]
+      assert_equal "slide", @document.data["layout"]
+      assert_equal({"key"=>"value123"}, @document.data["nested"])
     end
   end
 
@@ -174,10 +161,9 @@ class TestDocument < JekyllUnitTest
     end
 
     should "not know the specified frontmatter defaults" do
-      assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide"
-      }, @document.data)
+      assert_equal "Example slide", @document.data["title"]
+      assert_equal "slide", @document.data["layout"]
+      assert_equal nil, @document.data["nested"]
     end
   end
 

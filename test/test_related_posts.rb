@@ -13,7 +13,7 @@ class TestRelatedPosts < JekyllUnitTest
       last_post     = @site.posts.last
       related_posts = Jekyll::RelatedPosts.new(last_post).build
 
-      last_10_recent_posts = (@site.posts.reverse - [last_post]).first(10)
+      last_10_recent_posts = (@site.posts.docs.reverse - [last_post]).first(10)
       assert_equal last_10_recent_posts, related_posts
     end
   end
@@ -38,8 +38,8 @@ class TestRelatedPosts < JekyllUnitTest
     end
 
     should "index Jekyll::Post objects" do
-      @site.posts = @site.posts.first(1)
-      expect_any_instance_of(::ClassifierReborn::LSI).to receive(:add_item).with(kind_of(Jekyll::Post))
+      @site.posts.docs = @site.posts.docs.first(1)
+      expect_any_instance_of(::ClassifierReborn::LSI).to receive(:add_item).with(kind_of(Jekyll::Document))
       Jekyll::RelatedPosts.new(@site.posts.last).build_index
     end
 

@@ -46,7 +46,7 @@ module Jekyll
     end
 
     def most_recent_posts
-      @most_recent_posts ||= (site.posts.reverse - [post]).first(10)
+      @most_recent_posts ||= (site.posts.docs.reverse - [post]).first(10)
     end
 
     def display(output)

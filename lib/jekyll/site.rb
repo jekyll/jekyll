@@ -4,7 +4,7 @@ require 'csv'
 module Jekyll
   class Site
     attr_reader   :source, :dest, :config
-    attr_accessor :layouts, :posts, :pages, :static_files, :drafts,
+    attr_accessor :layouts, :pages, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
@@ -74,7 +74,6 @@ module Jekyll
     def reset
       self.time = (config['time'] ? Utils.parse_date(config['time'].to_s, "Invalid time in _config.yml.") : Time.now)
       self.layouts = {}
-      self.posts = []
       self.pages = []
       self.static_files = []
       self.data = {}
@@ -170,14 +169,14 @@ module Jekyll
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run
-            Jekyll::Hooks.trigger :document, :post_render, document
+            document.trigger_hooks(:post_render)
           end
         end
       end
 
-      [posts, pages].flatten.each do |page_or_post|
-        if regenerator.regenerate?(page_or_post)
-          page_or_post.render(layouts, payload)
+      pages.flatten.each do |page|
+        if regenerator.regenerate?(page)
+          page.render(layouts, payload)
         end
       end
     rescue Errno::ENOENT
@@ -202,6 +201,10 @@ module Jekyll
       Jekyll::Hooks.trigger :site, :post_write, self
     end
 
+    def posts
+      collections['posts'] ||= Collection.new(self, 'posts')
+    end
+
     # Construct a Hash of Posts indexed by the specified Post attribute.
     #
     # post_attr - The String name of the Post attribute.
@@ -219,7 +222,7 @@ module Jekyll
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
-      posts.each { |p| p.send(post_attr.to_sym).each { |t| hash[t] << p } }
+      posts.each { |p| p.data[post_attr].each { |t| hash[t] << p } }
       hash.values.each { |posts| posts.sort!.reverse! }
       hash
     end
@@ -391,8 +394,8 @@ module Jekyll
     # Returns nothing
     def limit_posts!
       if limit_posts > 0
-        limit = posts.length < limit_posts ? posts.length : limit_posts
-        self.posts = posts[-limit, limit]
+        limit = posts.docs.length < limit_posts ? posts.docs.length : limit_posts
+        self.posts.docs = posts.docs[-limit, limit]
       end
     end
 

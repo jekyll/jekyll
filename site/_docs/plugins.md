@@ -504,8 +504,8 @@ Jekyll::Hooks.register :post, :post_render do |post|
 end
 {% endhighlight %}
 
-Jekyll provides hooks for <code>:site</code>, <code>:page</code>,
-<code>:post</code>, and <code>:document</code>. In all cases, Jekyll calls your
+Jekyll provides hooks for <code>:site</code>, <code>:pages</code>,
+<code>:posts</code>, and <code>:documents</code>. In all cases, Jekyll calls your
 hooks with the container object as the first callback parameter. But in the
 case of <code>:pre_render</code>, your hook will also receive a payload hash as
 a second parameter which allows you full control over the variables that are
@@ -569,7 +569,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:page</code></p>
+        <p><code>:pages</code></p>
       </td>
       <td>
         <p><code>:post_init</code></p>
@@ -580,7 +580,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:page</code></p>
+        <p><code>:pages</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -591,7 +591,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:page</code></p>
+        <p><code>:pages</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -602,7 +602,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:page</code></p>
+        <p><code>:pages</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>
@@ -613,7 +613,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:post</code></p>
+        <p><code>:posts</code></p>
       </td>
       <td>
         <p><code>:post_init</code></p>
@@ -624,7 +624,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:post</code></p>
+        <p><code>:posts</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -635,7 +635,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:post</code></p>
+        <p><code>:posts</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -646,7 +646,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:post</code></p>
+        <p><code>:posts</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>
@@ -657,7 +657,18 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:document</code></p>
+        <p><code>:documents</code></p>
+      </td>
+      <td>
+        <p><code>:post_init</code></p>
+      </td>
+      <td>
+        <p>Whenever a document is initialized</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:documents</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -668,7 +679,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:document</code></p>
+        <p><code>:documents</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -679,7 +690,7 @@ The complete list of available hooks is below:
     </tr>
     <tr>
       <td>
-        <p><code>:document</code></p>
+        <p><code>:documents</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>
@@ -854,7 +865,7 @@ LESS.js files during generation.
 - [Jekyll CO₂](https://github.com/wdenton/jekyll-co2): Generates HTML showing the monthly change in atmospheric CO₂ at the Mauna Loa observatory in Hawaii.
 - [remote-include](http://www.northfieldx.co.uk/remote-include/): Includes files using remote URLs
 - [jekyll-minifier](https://github.com/digitalsparky/jekyll-minifier): Minifies HTML, XML, CSS, and Javascript both inline and as separate files utilising yui-compressor and htmlcompressor.
-- [Jekyll views router](https://bitbucket.org/nyufac/jekyll-views-router): Simple router between generator plugins and templates. 
+- [Jekyll views router](https://bitbucket.org/nyufac/jekyll-views-router): Simple router between generator plugins and templates.
 
 #### Editors
 

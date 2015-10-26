@@ -80,8 +80,9 @@ class TestCollections < JekyllUnitTest
       @site.process
     end
 
-    should "not contain any collections" do
-      assert_equal Hash.new, @site.collections
+    should "contain only the defaul collections" do
+      refute_equal Hash.new, @site.collections
+      refute_nil @site.collections
     end
   end
 
