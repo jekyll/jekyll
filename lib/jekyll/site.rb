@@ -222,7 +222,7 @@ module Jekyll
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
-      posts.each { |p| p.data[post_attr].each { |t| hash[t] << p } }
+      posts.docs.each { |p| p.data[post_attr].each { |t| hash[t] << p } }
       hash.values.each { |posts| posts.sort!.reverse! }
       hash
     end
@@ -265,7 +265,7 @@ module Jekyll
         "site"   => Utils.deep_merge_hashes(config,
           Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
             "time"         => time,
-            "posts"        => posts.sort { |a, b| b <=> a },
+            "posts"        => posts.docs.sort { |a, b| b <=> a },
             "pages"        => pages,
             "static_files" => static_files,
             "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
@@ -333,7 +333,7 @@ module Jekyll
     end
 
     def each_site_file
-      %w(posts pages static_files docs_to_write).each do |type|
+      %w(pages static_files docs_to_write).each do |type|
         send(type).each do |item|
           yield item
         end
