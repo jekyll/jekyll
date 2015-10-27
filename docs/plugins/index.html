@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Plugins</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta10">
+  <meta name="generator" content="Jekyll v3.0.0">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2630,14 +2630,6 @@ specify these two flags:</p>
 
 <h2 id="hooks">Hooks</h2>
 
-<div class="note unreleased">
-  <h5>Support for hooks is currently unreleased.</h5>
-  <p>
-    In order to use this feature, <a href="/docs/installation/#pre-releases">
-    install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 <p>Using hooks, your plugin can exercise fine-grained control over various aspects
 of the build process. If your plugin defines any hooks, Jekyll will call them
 at pre-defined points.</p>
@@ -2652,8 +2644,8 @@ hook like this:</p>
   <span class="c1"># code to call after Jekyll renders a post</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>Jekyll provides hooks for <code>:site</code>, <code>:page</code>,
-<code>:post</code>, and <code>:document</code>. In all cases, Jekyll calls your
+<p>Jekyll provides hooks for <code>:site</code>, <code>:pages</code>,
+<code>:posts</code>, and <code>:documents</code>. In all cases, Jekyll calls your
 hooks with the container object as the first callback parameter. But in the
 case of <code>:pre_render</code>, your hook will also receive a payload hash as
 a second parameter which allows you full control over the variables that are
@@ -2717,7 +2709,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:page</code></p>
+        <p><code>:pages</code></p>
       </td>
       <td>
         <p><code>:post_init</code></p>
@@ -2728,7 +2720,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:page</code></p>
+        <p><code>:pages</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -2739,7 +2731,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:page</code></p>
+        <p><code>:pages</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -2750,7 +2742,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:page</code></p>
+        <p><code>:pages</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>
@@ -2761,7 +2753,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:post</code></p>
+        <p><code>:posts</code></p>
       </td>
       <td>
         <p><code>:post_init</code></p>
@@ -2772,7 +2764,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:post</code></p>
+        <p><code>:posts</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -2783,7 +2775,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:post</code></p>
+        <p><code>:posts</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -2794,7 +2786,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:post</code></p>
+        <p><code>:posts</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>
@@ -2805,7 +2797,18 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:document</code></p>
+        <p><code>:documents</code></p>
+      </td>
+      <td>
+        <p><code>:post_init</code></p>
+      </td>
+      <td>
+        <p>Whenever a document is initialized</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:documents</code></p>
       </td>
       <td>
         <p><code>:pre_render</code></p>
@@ -2816,7 +2819,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:document</code></p>
+        <p><code>:documents</code></p>
       </td>
       <td>
         <p><code>:post_render</code></p>
@@ -2827,7 +2830,7 @@ available while rendering.</p>
     </tr>
     <tr>
       <td>
-        <p><code>:document</code></p>
+        <p><code>:documents</code></p>
       </td>
       <td>
         <p><code>:post_write</code></p>

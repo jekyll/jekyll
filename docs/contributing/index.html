@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Contributing</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta10">
+  <meta name="generator" content="Jekyll v3.0.0">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2212,24 +2212,20 @@ will also speed up review time.</li>
 <p>To run the test suite and build the gem you’ll need to install Jekyll’s
 dependencies. Simply run this command to get all setup:</p>
 
-<pre><code>$ script/bootstrap
-</code></pre>
+<figure class="highlight"><pre><code>$ script/bootstrap</code></pre></figure>
 
 <p>Before you start, run the tests and make sure that they pass (to confirm your
 environment is configured properly):</p>
 
-<pre><code>$ script/cibuild
-</code></pre>
+<figure class="highlight"><pre><code>$ script/cibuild</code></pre></figure>
 
 <p>If you are only updating a file in <code>test/</code>, you can use the command:</p>
 
-<pre><code>$ script/test test/blah_test.rb
-</code></pre>
+<figure class="highlight"><pre><code>$ script/test test/blah_test.rb</code></pre></figure>
 
 <p>If you are only updating a <code>.feature</code> file, you can use the command:</p>
 
-<pre><code>$ script/cucumber features/blah.feature
-</code></pre>
+<figure class="highlight"><pre><code>$ script/cucumber features/blah.feature</code></pre></figure>
 
 <p>Both <code>script/test</code> and <code>script/cucumber</code> can be run without arguments to
 run its entire respective suite.</p>

@@ -1,12 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-<generator uri="http://jekyllrb.com" version="3.0.0.pre.beta10">Jekyll</generator>
+<generator uri="http://jekyllrb.com" version="3.0.0">Jekyll</generator>
 <link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2015-10-17T11:12:34-07:00</updated>
+<updated>2015-10-26T21:13:07-07:00</updated>
 <id>http://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.0 Released</title>
+<link href="http://jekyllrb.com/news/2015/10/26/jekyll-3-0-released/" rel="alternate" type="text/html" title="Jekyll 3.0 Released" />
+<published>2015-10-26T15:37:30-07:00</published>
+<updated>2015-10-26T15:37:30-07:00</updated>
+<id>http://jekyllrb.com/news/2015/10/26/jekyll-3-0-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2015/10/26/jekyll-3-0-released/">&lt;p&gt;The much-anticipated Jekyll 3.0 has been released! Key changes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Incremental regeneration (experimental, enable with &lt;code&gt;--incremental&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;Liquid profiler (add &lt;code&gt;--profile&lt;/code&gt; to a build or serve)&lt;/li&gt;
+  &lt;li&gt;Hook plugin API (no more monkey-patching!)&lt;/li&gt;
+  &lt;li&gt;Dependencies reduced from 14 to 8, none contain C extensions. We’re hoping to reduce this even more in the future.&lt;/li&gt;
+  &lt;li&gt;Changed version support: no support for Ruby 1.9.3, added basic JRuby support. Better Windows support.&lt;/li&gt;
+  &lt;li&gt;Extension-less URLs&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;site.collections&lt;/code&gt; is an array of collections, thus:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;collection[0]&lt;/code&gt; becomes &lt;code&gt;collection.label&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;collection[1]&lt;/code&gt; becomes &lt;code&gt;collection&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Default highlighter is now Rouge instead of Pygments&lt;/li&gt;
+  &lt;li&gt;Lots of performance improvements&lt;/li&gt;
+  &lt;li&gt;… and lots more!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We also added a &lt;a href=&quot;{{ site.repository }}/blob/master/CONDUCT.md&quot;&gt;Code of Conduct&lt;/a&gt; to encourage a happier, nicer community where contributions and discussion is protected from negative behaviour.&lt;/p&gt;
+
+&lt;p&gt;A huge shout-out to the amazing Jekyll Core Team members Jordon Bedwell, Alfred Xing, and Matt Rogers for all their hard work in making Jekyll 3 the best release yet.&lt;/p&gt;
+
+&lt;p&gt;We also added &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;Jekyll Talk&lt;/a&gt;, managed solely by Jordon, which offers a modern forum experience for Jekyllers across the globe to talk and learn about Jekyll!&lt;/p&gt;
+
+&lt;p&gt;As always, check out the &lt;a href=&quot;/docs/history/#v3-0-0&quot;&gt;full history&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;p&gt;Our contributors are the core of what makes Jekyll great! Many thanks to the 132 contributors who made this release possible (in alphabetical order): AJ Acevedo, Adam Richeimer, Alan Scherger, Alfred Xing, Anatol Broder, Andrew Dunning, Anna Debenham, Anton, Arne Gockeln, Arthur Hammer, Arthur Neves, BRAVO, Ben Balter, Bernardo Dias, BigBlueHat, Brandon Mathis, Bruce Smith, Cai⚡️, Carlos Matallín, ChaYoung You, Christian Vuerings, Cory Simmons, David Herman, David Silva Smith, David Smith, David Wales, David Williamson, DigitalSparky, Dimitri König, Dominik, Eduardo Boucas, Eduardo Bouças, Eduardo Bouças, Erlend Sogge Heggen, Eugene Pirogov, Ezmyrelda Andrade, Fabian Rodriguez, Fabian Tamp, Fabio Niephaus, Falko Richter, Florian Weingarten, Fonso, Garen Torikian, Guillaume LARIVIERE, Günter Kits, I´m a robot, Jason Ly, Jedd Ahyoung, Jensen Kuras, Jesse Pinho, Jesse W, Jim Meyer, Joel Glovier, Johan Bové, Joop Aué, Jordan Thornquest, Jordon Bedwell, Joseph Anderson, Julien Bourdeau, Justin Weiss, Kamil Dziemianowicz, Kevin Locke, Kevin Ushey, Leonard, Lukas, Mads Ohm Larsen, Malo Skrylevo, Marcus Stollsteimer, Mark Phelps, Mark Tareshawty, Martijn den Hoedt, Martin Jorn Rogalla, Martin Rogalla, Matt Rogers, Matt Sheehan, Matthias Nuessler, Max, Max Beizer, Max White, Merlos, Michael Giuffrida, Michael Tu, Mike Bland, Mike Callan, MonsieurV, Nate Berkopec, Neil Faccly, Nic West, Nicholas Burlett, Nicolas Hoizey, Parker Moore, Pascal Borreli, Pat Hawks, Paul Rayner, Pedro Euko, Peter Robins, Philipp Rudloff, Philippe Loctaux, Rafael Picanço, Renaud Martinet, Robert Papp, Ryan Burnette, Ryan Tomayko, Seb, Seth Warburton, Shannon, Stephen Crosby, Stuart Kent, Suriyaa Kudo, Sylvester Keil, Tanguy Krotoff, Toddy69, Tom Johnson, Tony Eichelberger, Tunghsiao Liu, Veres Lajos, Vitaly Repin, Will Norris, William Entriken, XhmikosR, chrisfinazzo, eksperimental, hartmel, jaybe@jekyll, kaatt, nightsense, nitoyon, robschia, schneems, sonnym, takuti, and tasken.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Join the Discussion at Jekyll Talk</title>
 <link href="http://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/" rel="alternate" type="text/html" title="Join the Discussion at Jekyll Talk" />
@@ -274,49 +317,6 @@ Custódio, Igor Kapkov, and Kevin Ndung’u!&lt;/p&gt;
 &lt;p&gt;As always, many thanks to our amazing contributors who made this release possible: Chris Frederick, Garen Torikian, James Smith, Ruslan Korolev, Joel Glovier, Michael Kühnel, Minn Soe, Pat Hawks, Peter deHaan, Shu Uesugi, TJ, Zhuochun, Alfred Xing, nitoyon, Anatol Broder, Faruk AYDIN, Frederic Hemberger, and Gordon Gao. Thank you!!&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll 2.3.0 Released</title>
-<link href="http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released/" rel="alternate" type="text/html" title="Jekyll 2.3.0 Released" />
-<published>2014-08-10T17:38:34-07:00</published>
-<updated>2014-08-10T17:38:34-07:00</updated>
-<id>http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released</id>
-<content type="html" xml:base="http://jekyllrb.com/news/2014/08/10/jekyll-2-3-0-released/">&lt;p&gt;This latest release of Jekyll includes a slew of enhancements and bug
-fixes. Some of the highlights:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Strange bug around spacing/indentation should be resolved. &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/2676&quot;&gt;It was a
-curious bug indeed.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Pages, Posts, and Drafts can now be converted by multiple converters.&lt;/li&gt;
-  &lt;li&gt;Static files can now be safely included in collections. They’ll be placed
-in a &lt;code&gt;collection.files&lt;/code&gt; array. &lt;code&gt;collection.docs&lt;/code&gt; still holds exclusively
-content with YAML front matter.&lt;/li&gt;
-  &lt;li&gt;Sass files can once again be rendered by Liquid. However, neither Sass
-nor CoffeeScript can ever have a layout. Bonus: &lt;code&gt;scssify&lt;/code&gt; and &lt;code&gt;sassify&lt;/code&gt;
-Liquid filters.&lt;/li&gt;
-  &lt;li&gt;Partial variables allowed now in the path argument of &lt;code&gt;include&lt;/code&gt; calls&lt;/li&gt;
-  &lt;li&gt;We added a &lt;code&gt;jekyll help&lt;/code&gt; command. Pass it a subcommand to see more info
-about that subcommand. Or don’t, to see the help for &lt;code&gt;jekyll&lt;/code&gt; itself.&lt;/li&gt;
-  &lt;li&gt;Lots of fixes to the site template we use for &lt;code&gt;jekyll new&lt;/code&gt;, including
-converting the CSS into SCSS.&lt;/li&gt;
-  &lt;li&gt;The &lt;code&gt;jsonify&lt;/code&gt; filter will now call &lt;code&gt;#to_liquid&lt;/code&gt; for you&lt;/li&gt;
-  &lt;li&gt;Lots, lots more!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;One change deserves special note. In &lt;a href=&quot;{{ site.repository }}/issues/2633&quot;&gt;#2633&lt;/a&gt;, subfolders &lt;em&gt;inside&lt;/em&gt; a
-&lt;code&gt;_posts&lt;/code&gt; folder were processed and added as categories to the posts. It
-turns out, this behaviour was unwanted by a large number of individuals, as
-it is a handy way to organize posts. Ultimately, we decided to revert this
-change in &lt;a href=&quot;{{ site.repository }}/issues/2705&quot;&gt;#2705&lt;/a&gt;, because it was a change in behaviour that was already
-well-established (at least since Jekyll v0.7.0), and was convenient.&lt;/p&gt;
-
-&lt;p&gt;For more excellent CHANGELOG reading material, check out the &lt;a href=&quot;/docs/history/&quot;&gt;History
-page&lt;/a&gt;! Happy Jekylling!&lt;/p&gt;
 </content>
 <author>
 <name>parkr</name>

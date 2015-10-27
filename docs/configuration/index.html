@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Configuration</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta10">
+  <meta name="generator" content="Jekyll v3.0.0">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2433,6 +2433,21 @@ in the terminal.</p>
         <p><code class="flag">-q, --quiet</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Incremental build</strong></p>
+        <p class="description">
+            Enable the experimental incremental build feature. Incremental build only
+            re-builds posts and pages that have changed, resulting in significant performance
+            improvements for large sites, but may also break site generation in certain
+            cases.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">incremental: BOOL</code></p>
+        <p><code class="flag">-I, --incremental</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -2679,6 +2694,7 @@ file or on the command-line.</p>
 <span class="l-Scalar-Plain">highlighter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">rouge</span>
 <span class="l-Scalar-Plain">lsi</span><span class="p-Indicator">:</span>         <span class="l-Scalar-Plain">false</span>
 <span class="l-Scalar-Plain">excerpt_separator</span><span class="p-Indicator">:</span> <span class="s">&quot;\n\n&quot;</span>
+<span class="l-Scalar-Plain">incremental</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
 
 <span class="c1"># Serving</span>
 <span class="l-Scalar-Plain">detach</span><span class="p-Indicator">:</span>  <span class="l-Scalar-Plain">false</span>

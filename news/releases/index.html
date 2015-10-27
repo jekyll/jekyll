@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Releases</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0.pre.beta10">
+  <meta name="generator" content="Jekyll v3.0.0">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -80,6 +80,8 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="v1.x">
+      
+      <option value="/news/2015/10/26/jekyll-3-0-released/">Jekyll 3.0 Released</option>
       
       <option value="/news/2015/02/26/introducing-jekyll-talk/">Join the Discussion at Jekyll Talk</option>
       
@@ -158,6 +160,63 @@
 
       <div class="unit four-fifths">
         
+  <article>
+  <h2>
+    <a href="/news/2015/10/26/jekyll-3-0-released/">
+      Jekyll 3.0 Released
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      release
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      26 Oct 2015
+    </span>
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
+    </a>
+  </div>
+  <div class="post-content">
+    <p>The much-anticipated Jekyll 3.0 has been released! Key changes:</p>
+
+<ul>
+  <li>Incremental regeneration (experimental, enable with <code>--incremental</code>)</li>
+  <li>Liquid profiler (add <code>--profile</code> to a build or serve)</li>
+  <li>Hook plugin API (no more monkey-patching!)</li>
+  <li>Dependencies reduced from 14 to 8, none contain C extensions. We’re hoping to reduce this even more in the future.</li>
+  <li>Changed version support: no support for Ruby 1.9.3, added basic JRuby support. Better Windows support.</li>
+  <li>Extension-less URLs</li>
+  <li><code>site.collections</code> is an array of collections, thus:
+    <ul>
+      <li><code>collection[0]</code> becomes <code>collection.label</code></li>
+      <li><code>collection[1]</code> becomes <code>collection</code></li>
+    </ul>
+  </li>
+  <li>Default highlighter is now Rouge instead of Pygments</li>
+  <li>Lots of performance improvements</li>
+  <li>… and lots more!</li>
+</ul>
+
+<p>We also added a <a href="https://github.com/jekyll/jekyll/blob/master/CONDUCT.md">Code of Conduct</a> to encourage a happier, nicer community where contributions and discussion is protected from negative behaviour.</p>
+
+<p>A huge shout-out to the amazing Jekyll Core Team members Jordon Bedwell, Alfred Xing, and Matt Rogers for all their hard work in making Jekyll 3 the best release yet.</p>
+
+<p>We also added <a href="https://talk.jekyllrb.com">Jekyll Talk</a>, managed solely by Jordon, which offers a modern forum experience for Jekyllers across the globe to talk and learn about Jekyll!</p>
+
+<p>As always, check out the <a href="/docs/history/#v3-0-0">full history</a> for more details.</p>
+
+<p>Our contributors are the core of what makes Jekyll great! Many thanks to the 132 contributors who made this release possible (in alphabetical order): AJ Acevedo, Adam Richeimer, Alan Scherger, Alfred Xing, Anatol Broder, Andrew Dunning, Anna Debenham, Anton, Arne Gockeln, Arthur Hammer, Arthur Neves, BRAVO, Ben Balter, Bernardo Dias, BigBlueHat, Brandon Mathis, Bruce Smith, Cai⚡️, Carlos Matallín, ChaYoung You, Christian Vuerings, Cory Simmons, David Herman, David Silva Smith, David Smith, David Wales, David Williamson, DigitalSparky, Dimitri König, Dominik, Eduardo Boucas, Eduardo Bouças, Eduardo Bouças, Erlend Sogge Heggen, Eugene Pirogov, Ezmyrelda Andrade, Fabian Rodriguez, Fabian Tamp, Fabio Niephaus, Falko Richter, Florian Weingarten, Fonso, Garen Torikian, Guillaume LARIVIERE, Günter Kits, I´m a robot, Jason Ly, Jedd Ahyoung, Jensen Kuras, Jesse Pinho, Jesse W, Jim Meyer, Joel Glovier, Johan Bové, Joop Aué, Jordan Thornquest, Jordon Bedwell, Joseph Anderson, Julien Bourdeau, Justin Weiss, Kamil Dziemianowicz, Kevin Locke, Kevin Ushey, Leonard, Lukas, Mads Ohm Larsen, Malo Skrylevo, Marcus Stollsteimer, Mark Phelps, Mark Tareshawty, Martijn den Hoedt, Martin Jorn Rogalla, Martin Rogalla, Matt Rogers, Matt Sheehan, Matthias Nuessler, Max, Max Beizer, Max White, Merlos, Michael Giuffrida, Michael Tu, Mike Bland, Mike Callan, MonsieurV, Nate Berkopec, Neil Faccly, Nic West, Nicholas Burlett, Nicolas Hoizey, Parker Moore, Pascal Borreli, Pat Hawks, Paul Rayner, Pedro Euko, Peter Robins, Philipp Rudloff, Philippe Loctaux, Rafael Picanço, Renaud Martinet, Robert Papp, Ryan Burnette, Ryan Tomayko, Seb, Seth Warburton, Shannon, Stephen Crosby, Stuart Kent, Suriyaa Kudo, Sylvester Keil, Tanguy Krotoff, Toddy69, Tom Johnson, Tony Eichelberger, Tunghsiao Liu, Veres Lajos, Vitaly Repin, Will Norris, William Entriken, XhmikosR, chrisfinazzo, eksperimental, hartmel, jaybe@jekyll, kaatt, nightsense, nitoyon, robschia, schneems, sonnym, takuti, and tasken.</p>
+
+<p>Happy Jekylling!</p>
+
+  </div>
+</article>
+
+
   <article>
   <h2>
     <a href="/news/2015/01/24/jekyll-3-0-0-beta1-released/">
@@ -1501,6 +1560,10 @@ examples and for compiling this list):</p>
     <ul>
       
       <li class="">
+        <a href="/news/2015/10/26/jekyll-3-0-released/">Version 3.0</a>
+      </li>
+      
+      <li class="">
         <a href="/news/2015/01/24/jekyll-3-0-0-beta1-released/">Version 3.0.0.beta1</a>
       </li>
       
@@ -1516,16 +1579,14 @@ examples and for compiling this list):</p>
         <a href="/news/2014/11/09/jekyll-2-5-1-released/">Version 2.5.1</a>
       </li>
       
-      <li class="">
-        <a href="/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/">Version 2.5.0</a>
-      </li>
-      
       <li>
         <a href="/docs/history/">History »</a>
       </li>
     </ul>
     <h4>Other News</h4>
     <ul>
+        
+        
         
         
         <li class="">
