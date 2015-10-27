@@ -480,14 +480,6 @@ end
 
 ## Hooks
 
-<div class="note unreleased">
-  <h5>Support for hooks is currently unreleased.</h5>
-  <p>
-    In order to use this feature, <a href="/docs/installation/#pre-releases">
-    install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 Using hooks, your plugin can exercise fine-grained control over various aspects
 of the build process. If your plugin defines any hooks, Jekyll will call them
 at pre-defined points.

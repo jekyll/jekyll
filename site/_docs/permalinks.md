@@ -183,14 +183,6 @@ Jekyll also provides the following built-in styles for convenience.
 
 ## Pages and collections
 
-<div class="note unreleased">
-  <h5>Support for improved page and collection permalinks is currently unreleased.</h5>
-  <p>
-    In order to use this feature, <a href="/docs/installation/#pre-releases">
-    install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 The `permalink` configuration setting specifies the permalink style used for
 posts. Pages and collections each have their own default permalink style; the
 default style for pages is `/:path/:basename` and the default for collections is
@@ -267,14 +259,6 @@ Given a post named: `/2009-04-29-slap-chop.md`
 </div>
 
 ## Extensionless permalinks
-
-<div class="note unreleased">
-  <h5>Support for extensionless permalink is currently unreleased.</h5>
-  <p>
-    In order to use this feature, <a href="/docs/installation/#pre-releases">
-    install the latest development version of Jekyll</a>.
-  </p>
-</div>
 
 Jekyll supports permalinks that contain neither a trailing slash nor a file
 extension, but this requires additional support from the web server to properly
