@@ -1,4 +1,4 @@
-## HEAD
+## 3.0.0 / 2015-10-26
 
 ### Major Enhancements
 
