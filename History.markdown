@@ -147,6 +147,8 @@
   * Whole-post excerpts should match the post content (#4004)
   * Change default font weight to 400 to fix bold/strong text issues (#4050)
   * Document: Only auto-generate the excerpt if it's not overridden (#4062)
+  * Utils: `deep_merge_hashes` should also merge `default_proc` (45f69bb)
+  * Defaults: compare paths in `applies_path?` as `String`s to avoid confusion (7b81f00)
 
 ### Development Fixes
 
