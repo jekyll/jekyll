@@ -34,6 +34,10 @@ module Jekyll
         target[key] = overwrite[key]
       end
 
+      if target.default_proc.nil?
+        target.default_proc = overwrite.default_proc
+      end
+
       target
     end
 
