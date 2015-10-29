@@ -24,6 +24,7 @@ end
 After do
   FileUtils.rm_rf(TEST_DIR)   if File.exist?(TEST_DIR)
   FileUtils.rm(JEKYLL_COMMAND_OUTPUT_FILE) if File.exist?(JEKYLL_COMMAND_OUTPUT_FILE)
+  FileUtils.rm(JEKYLL_COMMAND_STATUS_FILE) if File.exist?(JEKYLL_COMMAND_STATUS_FILE)
   Dir.chdir(File.dirname(TEST_DIR))
 end
 
@@ -226,4 +227,8 @@ end
 
 Then /^I should see "(.*)" in the build output$/ do |text|
   assert_match Regexp.new(text), jekyll_run_output
+end
+
+Then /^I should get a non-zero exit(?:\-| )status$/ do
+  assert jekyll_run_status > 0
 end
