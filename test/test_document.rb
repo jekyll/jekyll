@@ -328,7 +328,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "be output in the correct place" do
-      assert_equal true, File.file?(@dest_file)
+      assert File.file?(@dest_file)
     end
   end
 

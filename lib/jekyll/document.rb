@@ -366,11 +366,10 @@ module Jekyll
     #
     # Returns -1, 0, +1 or nil depending on whether this doc's path is less than,
     #   equal or greater than the other doc's path. See String#<=> for more details.
-    def <=>(anotherDocument)
-      cmp = data['date'] <=> anotherDocument.data['date']
-      if 0 == cmp
-        cmp = path <=> anotherDocument.path
-      end
+    def <=>(other)
+      return nil if !other.respond_to?(:data)
+      cmp = data['date'] <=> other.data['date']
+      cmp = path <=> other.path if cmp == 0
       cmp
     end
 
