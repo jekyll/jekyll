@@ -465,7 +465,7 @@ class TestSite < JekyllUnitTest
       end
 
       should "print profile table" do
-        @site.liquid_renderer.should_receive(:stats_table)
+        expect(@site.liquid_renderer).to receive(:stats_table)
         @site.process
       end
     end
