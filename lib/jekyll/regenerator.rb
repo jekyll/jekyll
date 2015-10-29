@@ -130,7 +130,9 @@ module Jekyll
     #
     # Returns nothing.
     def write_metadata
-      File.binwrite(metadata_file, Marshal.dump(metadata))
+      unless disabled?
+        File.binwrite(metadata_file, Marshal.dump(metadata))
+      end
     end
 
     # Produce the absolute path of the metadata file
