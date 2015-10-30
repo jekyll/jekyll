@@ -109,7 +109,7 @@ module Jekyll
     #
     # Returns the converted content
     def render_liquid(content, payload, info, path)
-      site.liquid_renderer.file(path).parse(content).render(payload, info)
+      site.liquid_renderer.file(path).parse(content).render!(payload, info)
     rescue Tags::IncludeTagError => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
       raise e

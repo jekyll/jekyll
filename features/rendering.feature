@@ -5,6 +5,13 @@ Feature: Rendering
   But I want to make it as simply as possible
   So render with Liquid and place in Layouts
 
+  Scenario: When receiving bad Liquid
+    Given I have a "index.html" page with layout "simple" that contains "{% include invalid.html %}"
+    And   I have a simple layout that contains "{{ content }}"
+    When  I run jekyll build
+    Then  I should get a non-zero exit-status
+    And   I should see "Liquid Exception" in the build output
+
   Scenario: Render Liquid and place in layout
     Given I have a "index.html" page with layout "simple" that contains "Hi there, Jekyll {{ jekyll.environment }}!"
     And I have a simple layout that contains "{{ content }}Ahoy, indeed!"
