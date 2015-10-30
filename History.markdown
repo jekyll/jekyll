@@ -9,6 +9,9 @@
 
   * Fix test warnings when doing rake {test,spec} or script/test (#4078)
 
+### Site Enhancements
+  * Update normalize.css to v3.0.3. (#4085)
+
 ## 3.0.0 / 2015-10-26
 
 ### Major Enhancements
