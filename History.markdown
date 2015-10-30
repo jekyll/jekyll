@@ -1,6 +1,11 @@
 ## HEAD
 
+### Bug Fixes
+
+  * `Convertible#render_liquid` should use `render!` to cause failure on bad Liquid (#4077)
+
 ### Development Fixes
+
   * Fix test warnings when doing rake {test,spec} or script/test (#4078)
 
 ## 3.0.0 / 2015-10-26
