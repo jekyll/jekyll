@@ -244,6 +244,25 @@ EOS
         assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
       end
     end
+
+    context "works with implicit raw tag" do
+      setup do
+        @content = <<CONTENT
+---
+title: Raw output
+---
+
+{% highlight raw %}
+{% highlight %}
+{% endhighlight %}
+CONTENT
+        create_post(@content, {'highlighter' => 'pygments'})
+      end
+
+      should "parse correctly" do
+        assert_match %r{<code class=\"language-text\" data-lang=\"text\">{% highlight %}</code>}, @result
+      end
+    end
   end
 
   context "with the rouge highlighter" do
@@ -338,6 +357,25 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match %{<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]}, @result
+      end
+    end
+
+    context "works with implicit raw tag" do
+      setup do
+        @content = <<CONTENT
+---
+title: Raw output
+---
+
+{% highlight raw %}
+{% highlight %}
+{% endhighlight %}
+CONTENT
+        create_post(@content, {'highlighter' => 'rouge'})
+      end
+
+      should "parse correctly" do
+        assert_match %r{<code class=\"language-text\" data-lang=\"text\">{% highlight %}</code>}, @result
       end
     end
   end
