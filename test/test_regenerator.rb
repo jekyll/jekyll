@@ -39,7 +39,7 @@ class TestRegenerator < JekyllUnitTest
       # we need to create the destinations for these files,
       # because regenerate? checks if the destination exists
       [@page, @post, @document, @asset_file].each do |item|
-        if item.respond_to?(:destination) 
+        if item.respond_to?(:destination)
           dest = item.destination(@site.dest)
           FileUtils.mkdir_p(File.dirname(dest))
           FileUtils.touch(dest)
@@ -67,7 +67,7 @@ class TestRegenerator < JekyllUnitTest
 
       # make sure the files don't actually exist
       [@page, @post, @document, @asset_file].each do |item|
-        if item.respond_to?(:destination) 
+        if item.respond_to?(:destination)
           dest = item.destination(@site.dest)
           File.unlink(dest) unless !File.exist?(dest)
         end
@@ -92,7 +92,6 @@ class TestRegenerator < JekyllUnitTest
   context "The site regenerator" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
-
       @site = fixture_site({
         "incremental" => true
       })
@@ -304,6 +303,25 @@ class TestRegenerator < JekyllUnitTest
       @regenerator = Regenerator.new(@site)
 
       assert @regenerator.modified?(@path)
+    end
+  end
+
+  context "when incremental regen is disabled" do
+    setup do
+      FileUtils.rm_rf(source_dir(".jekyll-metadata"))
+      @site = Site.new(Jekyll.configuration({
+        "source" => source_dir,
+        "destination" => dest_dir,
+        "incremental" => false
+      }))
+
+      @site.process
+      @path = @site.in_source_dir(@site.pages.first.path)
+      @regenerator = @site.regenerator
+    end
+
+    should "not create .jekyll-metadata" do
+      refute File.file?(source_dir(".jekyll-metadata"))
     end
   end
 end
