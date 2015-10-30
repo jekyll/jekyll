@@ -11,6 +11,7 @@
 
 ### Site Enhancements
   * Update normalize.css to v3.0.3. (#4085)
+  * Update Font Awesome to v4.4.0. (#4086)
 
 ## 3.0.0 / 2015-10-26
 
