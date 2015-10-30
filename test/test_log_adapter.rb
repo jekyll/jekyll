@@ -24,19 +24,19 @@ class TestLogAdapter < JekyllUnitTest
       subject.adjust_verbosity(:quiet => true)
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
     end
-    
+
     should "set the writers logging level to debug when verbose" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       subject.adjust_verbosity(:verbose => true)
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:debug], subject.writer.level
     end
-    
+
     should "set the writers logging level to error when quiet and verbose are both set" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       subject.adjust_verbosity(:quiet => true, :verbose => true)
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
     end
-    
+
     should "not change the writer's logging level when neither verbose or quiet" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       original_level = subject.writer.level
@@ -45,7 +45,7 @@ class TestLogAdapter < JekyllUnitTest
       subject.adjust_verbosity(:quiet => false, :verbose => false)
       assert_equal original_level, subject.writer.level
     end
-    
+
     should "call #debug on writer return true" do
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer)

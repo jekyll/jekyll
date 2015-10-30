@@ -333,7 +333,7 @@ file, each document has the following attributes:
 
 ## Accessing Collection Attributes
 
-Attributes from the YAML front matter can be accessed as data anywhere in the 
+Attributes from the YAML front matter can be accessed as data anywhere in the
 site. Using the above example for configuring a collection as `site.albums`,
 one might have front matter in an individual file structured as follows (which
 must use a supported markup format, and cannot be saved with a `.yaml`
