@@ -39,6 +39,16 @@ class TestKramdown < JekyllUnitTest
       assert_match /<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)<\/p>/, markdown.convert(%{"Pit'hy"}).strip
     end
 
+    should "render fenced code blocks with syntax highlighting" do
+      assert_equal "<div class=\"highlighter-rouge\"><pre class=\"highlight\"><code><span class=\"nb\">puts</span> <span class=\"s2\">\"Hello world\"</span>\n</code></pre>\n</div>", @markdown.convert(
+        <<-EOS
+~~~ruby
+puts "Hello world"
+~~~
+        EOS
+      ).strip
+    end
+
     context "moving up nested coderay options" do
       setup do
         @markdown.convert('some markup')
