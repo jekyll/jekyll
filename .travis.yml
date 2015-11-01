@@ -9,6 +9,9 @@ rvm:
 matrix:
   allow_failures:
     - rvm: jruby-9.0.3.0
+  exclude:
+    - rvm: jruby-9.0.3.0
+      env: TEST_SUITE=cucumber
 env:
   matrix:
     - TEST_SUITE=test
