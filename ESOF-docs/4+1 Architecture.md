@@ -7,7 +7,6 @@
 3. [Process View](#process_view)
 4. [Implementation View](#implementation_view)
 5. [Deployment View](#deployment_view)
-6. [Use case diagram](#use_case_diagram)
 
 <a name="intro"/>
 ##Intro
