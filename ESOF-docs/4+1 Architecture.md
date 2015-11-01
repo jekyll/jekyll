@@ -1,5 +1,15 @@
 # 4+1 Architecture
 
+<a name="index"/>
+##Index
+1. [Intro](#intro)
+2. [Logical View](#logical_view)
+3. [Process View](#process_view)
+4. [Implementation View](#implementation_view)
+5. [Deployment View](#deployment_view)
+6. [Use case diagram](#use_case_diagram)
+
+<a name="intro"/>
 ##Intro
 
 In this report we will focus on the 4+1 architecture of Jekyll and its view model. 
@@ -11,7 +21,7 @@ But what is 4+1 Architecture?
 
 ![4+1 Architecture](./Resources/4+1Architecture.png)
 
-
+<a name="logical_view"/>
 ##Logical View
 
 The Logical View is the one about the structure, packaging and classes of the software we are analysing. In Jekyll it goes like this:
@@ -29,7 +39,7 @@ Jekyll divides itself in 4 main packages: **Conversion**, **Commands**, **Render
 
 *The **Content** package contains the user files. The **Data files** manages files like *.yml* and *.yaml*, *.json* and finally *.csv*. Then the **Document ** package contains the rest of the information about your website. 
 
-
+<a name="process_view"/>
 ##Process View
 
 The Process View relates to the behavior of the software during its execution.
@@ -38,6 +48,7 @@ The Process View relates to the behavior of the software during its execution.
 
 Jekyll renders your files (*HTML*) and after generating it using [*Middleman*](https://middlemanapp.com/), hosts it (preferebly in GitHub).
 
+<a name="implementation_view"/>
 ##Implementation View
 
 The Implementation View shows the **component** diagram that shows how the differnt components of the software relate between themselves.
@@ -46,6 +57,7 @@ The Implementation View shows the **component** diagram that shows how the diffe
 
 All the components (Layout files, Recipe files, Include files, Resouces, External Libraries) are bound together through Jekyll and combined with the Data Sources generate your static website.
 
+<a name="deployment_view"/>
 ##Deployment View
 
 The Deployment View allows to see how the artifacts(software components) of the software system in study are represented and distributed through hardware nodes. 
