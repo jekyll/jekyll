@@ -5,6 +5,11 @@ module Jekyll
         def initialize(config)
           require 'kramdown'
           @config = config
+          # If kramdown supported highlighter enabled, use that
+          highlighter = @config['highlighter']
+          if highlighter == 'rouge' || highlighter == 'coderay'
+            @config['kramdown']['syntax_highlighter'] ||= highlighter
+          end
         rescue LoadError
           STDERR.puts 'You are missing a library required for Markdown. Please run:'
           STDERR.puts '  $ [sudo] gem install kramdown'
