@@ -4,6 +4,7 @@
 
   * `Convertible#render_liquid` should use `render!` to cause failure on bad Liquid (#4077)
   * Don't generate `.jekyll-metadata` in non-incremental build (#4079)
+  * Set `highlighter` config val to `kramdown.syntax_highlighter` (#4090)
 
 ### Development Fixes
 
