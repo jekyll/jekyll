@@ -179,6 +179,8 @@ module Jekyll
           page.render(layouts, payload)
         end
       end
+
+      Jekyll::Hooks.trigger :site, :post_render, self, payload
     rescue Errno::ENOENT
       # ignore missing layout dir
     end
