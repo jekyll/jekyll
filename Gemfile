@@ -18,8 +18,9 @@ group :test do
   gem 'jekyll_test_plugin_malicious'
   gem 'minitest-reporters'
   gem 'minitest-profile'
-  gem 'minitest'
   gem 'rspec-mocks'
+  gem 'minitest'
+  gem "nokogiri"
 
   if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
     gem 'test-unit'
