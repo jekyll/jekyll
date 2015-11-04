@@ -11,8 +11,10 @@
   * Fix test warnings when doing rake {test,spec} or script/test (#4078)
 
 ### Site Enhancements
+
   * Update normalize.css to v3.0.3. (#4085)
   * Update Font Awesome to v4.4.0. (#4086)
+  * Adds a note about installing the jekyll-gist gem to make gist tag work (#4101)
 
 ## 3.0.0 / 2015-10-26
 
