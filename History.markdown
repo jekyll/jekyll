@@ -5,6 +5,7 @@
   * `Convertible#render_liquid` should use `render!` to cause failure on bad Liquid (#4077)
   * Don't generate `.jekyll-metadata` in non-incremental build (#4079)
   * Set `highlighter` config val to `kramdown.syntax_highlighter` (#4090)
+  * Align hooks implementation with documentation (#4104)
 
 ### Development Fixes
 
@@ -15,6 +16,7 @@
   * Update normalize.css to v3.0.3. (#4085)
   * Update Font Awesome to v4.4.0. (#4086)
   * Adds a note about installing the jekyll-gist gem to make gist tag work (#4101)
+  * Align hooks documentation with implementation (#4104)
 
 ## 3.0.0 / 2015-10-26
 
