@@ -15,6 +15,7 @@ module Jekyll
         after_reset: [],
         post_read: [],
         pre_render: [],
+        post_render: [],
         post_write: [],
       },
       :pages => {
@@ -30,6 +31,7 @@ module Jekyll
         post_write: [],
       },
       :documents => {
+        post_init: [],
         pre_render: [],
         post_render: [],
         post_write: [],

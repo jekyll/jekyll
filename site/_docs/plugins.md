@@ -491,7 +491,7 @@ custom functionality every time Jekyll renders a post, you could register a
 hook like this:
 
 {% highlight ruby %}
-Jekyll::Hooks.register :post, :post_render do |post|
+Jekyll::Hooks.register :posts, :post_render do |post|
   # code to call after Jekyll renders a post
 end
 {% endhighlight %}
@@ -524,6 +524,17 @@ The complete list of available hooks is below:
       </td>
       <td>
         <p>Just after site reset</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:post_read</code></p>
+      </td>
+      <td>
+        <p>After site data has been read and loaded from disk</p>
       </td>
     </tr>
     <tr>
