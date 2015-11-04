@@ -421,3 +421,5 @@ You may also optionally specify the filename in the gist to display:
 {% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
 {% endraw %}
 {% endhighlight %}
+
+To use the `gist` tag, you'll need to add the [jekyll-gist](https://github.com/jekyll/jekyll-gist) gem to your project. 
