@@ -24,10 +24,11 @@ module Jekyll
       @collection = relations[:collection]
       @has_yaml_header = nil
 
-      subdirs = relative_path.split(File::SEPARATOR).reject do |c|
-        c.empty? || c.eql?(collection.relative_directory) || c.eql?("_drafts") || c.eql?(basename)
+      if draft?
+        categories_from_path("_drafts")
+      else
+        categories_from_path(collection.relative_directory)
       end
-      merge_data!({'categories' => subdirs })
 
       data.default_proc = proc do |hash, key|
         site.frontmatter_defaults.find(relative_path, collection.label, key)
@@ -73,6 +74,15 @@ module Jekyll
 
     def date
       data['date'] ||= site.time
+    end
+
+    # Returns whether the document is a draft. This is only the case if
+    # the document is in the 'posts' collection but in a different
+    # directory than '_posts'.
+    #
+    # Returns whether the document is a draft.
+    def draft?
+      data['draft'] ||= relative_path.index(collection.relative_directory).nil? && collection.label == "posts"
     end
 
     # The path to the document, relative to the site source.
@@ -311,9 +321,21 @@ module Jekyll
       end
     end
 
+    # Add superdirectories of the special_dir to categories.
+    # In the case of es/_posts, 'es' is added as a category.
+    # In the case of _posts/es, 'es' is NOT added as a category.
+    #
+    # Returns nothing.
+    def categories_from_path(special_dir)
+      superdirs = relative_path.sub(/#{special_dir}(.*)/, '').split(File::SEPARATOR).reject do |c|
+        c.empty? || c.eql?(special_dir) || c.eql?(basename)
+      end
+      merge_data!({ 'categories' => superdirs })
+    end
+
     def populate_categories
       merge_data!({
-        "categories" => (
+        'categories' => (
           Array(data['categories']) + Utils.pluralized_array_from_hash(data, 'category', 'categories')
         ).map { |c| c.to_s }.flatten.uniq
       })

@@ -187,6 +187,24 @@ Feature: Post data
     Then the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
 
+  Scenario: Superdirectories of _posts applied to post.categories
+    Given I have a movies/_posts directory
+    And I have a "movies/_posts/2009-03-27-star-wars.html" page with layout "simple" that contains "hi"
+    And I have a _layouts directory
+    And I have a simple layout that contains "Post category: {{ page.categories }}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
+
+  Scenario: Subdirectories of _posts not applied to post.categories
+    Given I have a movies/_posts/scifi directory
+    And I have a "movies/_posts/scifi/2009-03-27-star-wars.html" page with layout "simple" that contains "hi"
+    And I have a _layouts directory
+    And I have a simple layout that contains "Post category: {{ page.categories }}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
+
   Scenario: Use post.categories variable when categories are in YAML with mixed case
     Given I have a _posts directory
     And I have a _layouts directory
