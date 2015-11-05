@@ -220,7 +220,7 @@ class TestSite < JekyllUnitTest
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if { |post| File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER) }
-      categories = %w(2013 bar baz category foo z_category MixedCase Mixedcase es publish_test win).sort
+      categories = %w(2013 bar baz category foo z_category MixedCase Mixedcase publish_test win).sort
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
