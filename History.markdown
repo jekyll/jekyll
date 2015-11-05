@@ -17,6 +17,7 @@
   * Update Font Awesome to v4.4.0. (#4086)
   * Adds a note about installing the jekyll-gist gem to make gist tag work (#4101)
   * Align hooks documentation with implementation (#4104)
+  * Add Jekyll Flickr Plugin to the list of third party plugins (#4111)
 
 ## 3.0.0 / 2015-10-26
 
