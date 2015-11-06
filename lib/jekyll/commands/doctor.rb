@@ -49,7 +49,7 @@ module Jekyll
           conflicting_urls = false
           urls = {}
           urls = collect_urls(urls, site.pages, site.dest)
-          urls = collect_urls(urls, site.posts, site.dest)
+          urls = collect_urls(urls, site.posts.docs, site.dest)
           urls.each do |url, paths|
             if paths.size > 1
               conflicting_urls = true
