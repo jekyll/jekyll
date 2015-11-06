@@ -7,6 +7,7 @@
   * Don't generate `.jekyll-metadata` in non-incremental build (#4079)
   * Set `highlighter` config val to `kramdown.syntax_highlighter` (#4090)
   * Align hooks implementation with documentation (#4104)
+  * Fix the deprecation warning in the doctor command (#4114)
 
 ### Development Fixes
 
