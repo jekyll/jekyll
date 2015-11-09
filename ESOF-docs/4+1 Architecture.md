@@ -7,6 +7,7 @@
 3. [Process View](#process_view)
 4. [Implementation View](#implementation_view)
 5. [Deployment View](#deployment_view)
+6. [Comment](#comment)
 
 <a name="intro"/>
 ##Intro
@@ -64,3 +65,9 @@ The Deployment View allows to see how the artifacts(software components) of the 
 ![Deployment View](./Resources/deploymentViewDiagram.png)
 
 As explained in the diagram above, in the hardware level Jekyll divides itself in **Plugins**, **External Dependencies**, **Internal Organization Dependencies** and **Offsprings**. All the devices are help support, build environment software and hosts.   
+
+<a name="Coment"/>
+##Comment
+
+  With the creation of these UML diagrams, we understood more about how Jekyll is structured, not only from the user point of view, but also from hardware and logical.
+
