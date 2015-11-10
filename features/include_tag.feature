@@ -77,3 +77,15 @@ Feature: Include tags
     When I run jekyll build
     Then the _site directory should exist
     And I should see "one included" in "_site/index.html"
+
+  Scenario: Include a file and rebuild when include content is changed
+    Given I have an _includes directory
+    And I have an "_includes/one.html" file that contains "include"
+    And I have an "index.html" page that contains "{% include one.html %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "include" in "_site/index.html"
+    When I wait 1 second
+    Then I have an "_includes/one.html" file that contains "include content changed"
+    When I run jekyll build
+    Then I should see "include content changed" in "_site/index.html"
