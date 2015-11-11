@@ -58,7 +58,6 @@ module Jekyll
   autoload :LogAdapter,          'jekyll/log_adapter'
   autoload :Page,                'jekyll/page'
   autoload :PluginManager,       'jekyll/plugin_manager'
-  autoload :Post,                'jekyll/post'
   autoload :Publisher,           'jekyll/publisher'
   autoload :Reader,              'jekyll/reader'
   autoload :Regenerator,         'jekyll/regenerator'
