@@ -37,7 +37,7 @@ The **Commands** package is responsible for understanding your parsing commands,
 
 The **Rendering** package deals with the rendering of your files (the highlightning, pagination,assets,...).
 
-The **Content** package contains the user files. The **Data files** manages files like *.yml* and *.yaml*, *.json* and finally *.csv*. Then the **Document ** package contains the rest of the information about your website. 
+The **Content** package contains the user files. The **Data files** manages files like *.yml* and *.yaml*, *.json* and finally *.csv*. Then the **Document** package contains the rest of the information about your website. 
 
 <a name="process_view"/>
 ##Process View
