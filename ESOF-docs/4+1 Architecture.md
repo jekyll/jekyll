@@ -35,7 +35,7 @@ The **Conversion** package contains the **Parser** class (with all the parsing m
 
 The **Commands** package is responsible for understanding your parsing commands, which are converted by the previous package.
 
-The **Rendering* package deals with the rendering of your files (the highlightning, pagination,assets,...)
+The **Rendering** package deals with the rendering of your files (the highlightning, pagination,assets,...).
 
 The **Content** package contains the user files. The **Data files** manages files like *.yml* and *.yaml*, *.json* and finally *.csv*. Then the **Document ** package contains the rest of the information about your website. 
 
