@@ -118,14 +118,14 @@ If it is not already installed by your host, you can do it yourself:
 This [process](https://wiki.gentoo.org/wiki/SSH#Passwordless_Authentication) is
 described in several places online. What is different from the typical approach
 is to put the restriction to certificate-based authorization in
-```~/.ssh/authorized_keys```. Then, aunch `rrsync` and supply
+`~/.ssh/authorized_keys`. Then, launch `rrsync` and supply
 it with the folder it shall have read-write access to:
 
 {% highlight bash %}
 command="$HOME/bin/rrsync <folder>",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa <cert>
 {% endhighlight %}
 
-```<folder>``` is the path to your site. E.g., ```~/public_html/you.org/blog-html/```.
+`<folder>` is the path to your site. E.g., `~/public_html/you.org/blog-html/`.
 
 #### Step 3: Rsync (client-side)
 
@@ -139,7 +139,7 @@ rsync -crvz --rsh=ssh -p2222' --delete-after --delete-excluded   <folder> <user>
 
 Command line parameters are:
 
-- ````--rsh=ssh -p2222```` &mdash; The port for SSH access. It is required if
+- `--rsh=ssh -p2222` &mdash; The port for SSH access. It is required if
 your host uses a different port than the default (e.g, HostGator)
 - `<folder>` &mdash; The name of the local output folder (defaults to `_site`)
 - `<user>` &mdash; The username for your hosting account
