@@ -2640,7 +2640,7 @@ call whenever the hook is triggered. For example, if you want to execute some
 custom functionality every time Jekyll renders a post, you could register a
 hook like this:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="o">.</span><span class="n">register</span> <span class="ss">:post</span><span class="p">,</span> <span class="ss">:post_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Jekyll</span><span class="o">::</span><span class="no">Hooks</span><span class="o">.</span><span class="n">register</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">:post_render</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
   <span class="c1"># code to call after Jekyll renders a post</span>
 <span class="k">end</span></code></pre></figure>
 
@@ -2672,6 +2672,17 @@ available while rendering.</p>
       </td>
       <td>
         <p>Just after site reset</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:post_read</code></p>
+      </td>
+      <td>
+        <p>After site data has been read and loaded from disk</p>
       </td>
     </tr>
     <tr>
@@ -2873,6 +2884,7 @@ LESS.js files during generation.</li>
   <li><a href="https://github.com/merlos/jekyll-auto-image">Jekyll Auto Image by Merlos</a>: Gets the first image of a post. Useful to list your posts with images or to add <a href="https://dev.twitter.com/cards/overview">twitter cards</a> to your site.</li>
   <li><a href="https://github.com/codeinpink/jekyll-portfolio-generator">Jekyll Portfolio Generator by Shannon Babincsak</a>: Generates project pages and computes related projects out of project data files.</li>
   <li><a href="https://github.com/webchef/jekyll-umlauts">Jekyll-Umlauts by Arne Gockeln</a>: This generator replaces all german umlauts (äöüß) case sensitive with html.</li>
+  <li><a href="https://github.com/lawmurray/indii-jekyll-flickr">Jekyll Flickr Plugin</a> by <a href="http://www.indii.org">Lawrence Murray</a>: Generates posts for photos uploaded to a Flickr photostream.</li>
 </ul>
 
 <h4 id="converters-1">Converters</h4>
@@ -2978,6 +2990,7 @@ LESS.js files during generation.</li>
   <li><a href="https://github.com/dimitri-koenig/jekyll-plugins">Fetch remote file content</a> by <a href="https://www.dimitrikoenig.net/">Dimitri König</a>: Using <code>remote_file_content</code> tag you can fetch the content of a remote file and include it as if you would put the content right into your markdown file yourself. Very useful for including code from github repo’s to always have a current repo version.</li>
   <li><a href="https://github.com/mnuessler/jekyll-asciinema">jekyll-asciinema</a>: A tag for embedding asciicasts recorded with <a href="https://asciinema.org">asciinema</a> in your Jekyll pages.</li>
   <li><a href="https://github.com/dommmel/jekyll-youtube">Jekyll-Youtube</a>  A Liquid tag that embeds Youtube videos. The default emded markup is responsive but you can also specify your own by using an include/partial.</li>
+  <li><a href="https://github.com/lawmurray/indii-jekyll-flickr">Jekyll Flickr Plugin</a> by <a href="http://www.indii.org">Lawrence Murray</a>: Embeds Flickr photosets (albums) as a gallery of thumbnails, with lightbox links to larger images.</li>
 </ul>
 
 <h4 id="collections">Collections</h4>

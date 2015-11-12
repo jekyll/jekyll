@@ -2360,7 +2360,7 @@ page with links to all but the current page.</p>
   {% for page in (1..paginator.total_pages) %}
     {% if page == paginator.page %}
       <span class="nt">&lt;em&gt;</span>{{ page }}<span class="nt">&lt;/em&gt;</span>
-    {% elsif page == 1 %}
+    {% elif page == 1 %}
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ paginator.previous_page_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; }}&quot;</span><span class="nt">&gt;</span>{{ page }}<span class="nt">&lt;/a&gt;</span>
     {% else %}
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ site.paginate_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; | replace: &#39;:num&#39;, page }}&quot;</span><span class="nt">&gt;</span>{{ page }}<span class="nt">&lt;/a&gt;</span>
