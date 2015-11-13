@@ -5,9 +5,11 @@ rvm:
 - 2.2
 - 2.1
 - 2.0
+- ruby-head
 - jruby-9.0.3.0
 matrix:
   allow_failures:
+    - rvm: ruby-head
     - rvm: jruby-9.0.3.0
   exclude:
     - rvm: jruby-9.0.3.0
