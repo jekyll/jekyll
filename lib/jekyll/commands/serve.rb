@@ -19,6 +19,7 @@ module Jekyll
             c.option 'host', '-H', '--host [HOST]', 'Host to bind to'
             c.option 'baseurl', '-b', '--baseurl [URL]', 'Base URL'
             c.option 'skip_initial_build', '--skip-initial-build', 'Skips the initial site build which occurs before the server is started.'
+            c.option 'open_url', '-o', '--open-url', 'Opens the local URL in your default browser'
 
             c.action do |args, options|
               options["serving"] = true
@@ -45,7 +46,24 @@ module Jekyll
             file_handler_options
           )
 
-          Jekyll.logger.info "Server address:", server_address(s, options)
+          server_address_str = server_address(s, options)
+          Jekyll.logger.info "Server address:", server_address_str
+
+          begin
+            command_name = ""
+
+            if Utils::Platforms.windows?
+              command_name = "start"
+            elsif Utils::Platforms.osx?
+              command_name = "open"
+            elsif Utils::Platforms.linux?
+              command_name = "xdg-open"
+            end
+
+            system("#{command_name} #{server_address_str}")
+          rescue
+            Jekyll.logger.info "Could not open URL, exception was thrown"
+          end if options['open_url']
 
           if options['detach'] # detach the server
             pid = Process.fork { s.start }
