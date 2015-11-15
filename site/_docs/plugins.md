@@ -873,6 +873,7 @@ LESS.js files during generation.
 - [jekyll-minifier](https://github.com/digitalsparky/jekyll-minifier): Minifies HTML, XML, CSS, and Javascript both inline and as separate files utilising yui-compressor and htmlcompressor.
 - [Jekyll views router](https://bitbucket.org/nyufac/jekyll-views-router): Simple router between generator plugins and templates.
 - [Jekyll Language Plugin](https://github.com/vwochnik/jekyll-language-plugin): Jekyll 3.0-compatible multi-language plugin for posts, pages and includes.
+- [jekyll-post-unslugify](https://github.com/rebornix/jekyll-post-unslugify): Keep the title of post unslugified in Jekyll 3.0 and above.
 
 #### Editors
 
