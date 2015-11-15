@@ -780,6 +780,7 @@ LESS.js files during generation.
 - [Jekyll Thumbnail Filter](https://github.com/matallo/jekyll-thumbnail-filter): Related posts thumbnail filter.
 - [Jekyll-Smartify](https://github.com/pathawks/jekyll-smartify): SmartyPants filter. Make &quot;quotes&quot; &ldquo;curly&rdquo;
 - [liquid-md5](https://github.com/pathawks/liquid-md5): Returns an MD5 hash. Helpful for generating Gravatars in templates.
+- [jekyll-roman](https://github.com/paulrobertlloyd/jekyll-roman): Converts numbers into Roman numerals.
 
 #### Tags
 
@@ -836,6 +837,8 @@ LESS.js files during generation.
 - [jekyll-asciinema](https://github.com/mnuessler/jekyll-asciinema): A tag for embedding asciicasts recorded with [asciinema](https://asciinema.org) in your Jekyll pages.
 - [Jekyll-Youtube](https://github.com/dommmel/jekyll-youtube)  A Liquid tag that embeds Youtube videos. The default emded markup is responsive but you can also specify your own by using an include/partial.
 - [Jekyll Flickr Plugin](https://github.com/lawmurray/indii-jekyll-flickr) by [Lawrence Murray](http://www.indii.org): Embeds Flickr photosets (albums) as a gallery of thumbnails, with lightbox links to larger images.
+- [jekyll-figure](https://github.com/paulrobertlloyd/jekyll-figure): Generates `<figure>` elements, with optional caption and class attributes.
+- [jekyll-typogriphy](https://github.com/myles/jekyll-typogrify): Improves typography on your Jekyll site using [typogruby](http://avdgaag.github.io/typogruby/).
 
 
 #### Collections
@@ -873,6 +876,7 @@ LESS.js files during generation.
 - [jekyll-minifier](https://github.com/digitalsparky/jekyll-minifier): Minifies HTML, XML, CSS, and Javascript both inline and as separate files utilising yui-compressor and htmlcompressor.
 - [Jekyll views router](https://bitbucket.org/nyufac/jekyll-views-router): Simple router between generator plugins and templates.
 - [Jekyll Language Plugin](https://github.com/vwochnik/jekyll-language-plugin): Jekyll 3.0-compatible multi-language plugin for posts, pages and includes.
+- [jekyll-slugify_underscore](https://github.com/paulrobertlloyd/jekyll-slugify_underscore): Patch Jekyll's slugify utility so that it uses underscores instead of hyphens.
 
 #### Editors
 
