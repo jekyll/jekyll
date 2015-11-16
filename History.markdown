@@ -25,6 +25,7 @@
   * Add jekyll-language-plugin to plugins.md (#4134)
   * Updated to reflect feedback in #4129 (#4137)
   * Calrify assets.md based on feedback of #4129 (#4142)
+  * Re-correct the liquid syntax in the pagination docs (#4140)
 
 ## 3.0.0 / 2015-10-26
 
