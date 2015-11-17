@@ -36,13 +36,18 @@ module Jekyll
     #
     # Returns a Set with the file paths
     def existing_files
+      return Set.new unless Dir.exist?(site.in_dest_dir)
+
       files = Set.new
       regex = keep_file_regex
       dirs = keep_dirs
 
-      Dir.glob(site.in_dest_dir("**", "*"), File::FNM_DOTMATCH) do |file|
-        next if file =~ HIDDEN_FILE_REGEX || file =~ regex || dirs.include?(file)
-        files << file
+      Dir.chdir(site.in_dest_dir) do
+        Dir.glob("**/*", File::FNM_DOTMATCH).each do |f|
+          file = File.join(site.in_dest_dir, f)
+          next if file =~ HIDDEN_FILE_REGEX || file =~ regex || dirs.include?(file)
+          files << file
+        end
       end
 
       files
