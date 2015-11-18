@@ -14,11 +14,15 @@ require 'jekyll/version'
 #############################################################################
 
 def name
-  'jekyll'.freeze
+  "jekyll"
 end
 
 def version
   Jekyll::VERSION
+end
+
+def docs_name
+  "#{name}-docs"
 end
 
 def gemspec_file
@@ -300,4 +304,28 @@ task :build do
   mkdir_p "pkg"
   sh "gem build #{gemspec_file}"
   sh "mv #{gem_file} pkg"
+end
+
+#############################################################################
+#
+# Packaging tasks for jekyll-docs
+#
+#############################################################################
+
+namespace :docs do
+  desc "Release #{docs_name} v#{version}"
+  task :release => :build do
+    unless `git branch` =~ /^\* master$/
+      puts "You must be on the master branch to release!"
+      exit!
+    end
+    sh "gem push pkg/#{docs_name}-#{version}.gem"
+  end
+
+  desc "Build #{docs_name} v#{version} into pkg/"
+  task :build do
+    mkdir_p "pkg"
+    sh "gem build #{docs_name}.gemspec"
+    sh "mv #{docs_name}-#{version}.gem pkg"
+  end
 end
