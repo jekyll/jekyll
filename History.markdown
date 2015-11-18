@@ -8,6 +8,7 @@
   * Set `highlighter` config val to `kramdown.syntax_highlighter` (#4090)
   * Align hooks implementation with documentation (#4104)
   * Fix the deprecation warning in the doctor command (#4114)
+  * Fix case in `:title` and add `:slug` which is downcased (#4100)
 
 ### Development Fixes
 
