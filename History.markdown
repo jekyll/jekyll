@@ -1,5 +1,9 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Cache parsed include file to save liquid parsing time. (#4120)
+
 ### Development Fixes
 
   * `jekyll-docs` should be easily release-able (#4152)
