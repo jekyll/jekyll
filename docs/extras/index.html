@@ -2176,7 +2176,11 @@ may want to install, depending on how you plan to use Jekyll.</p>
 
 <h2 id="math-support">Math Support</h2>
 
-<p>Kramdown comes with optional support for LaTeX to PNG rendering via <a href="http://www.mathjax.org/">MathJax</a> within math blocks. See the Kramdown documentation on <a href="http://kramdown.gettalong.org/syntax.html#math-blocks">math blocks</a> and <a href="http://kramdown.gettalong.org/converter/html.html#math-support">math support</a> for more details.</p>
+<p>Kramdown comes with optional support for LaTeX to PNG rendering via <a href="http://www.mathjax.org/">MathJax</a> within math blocks. See the Kramdown documentation on <a href="http://kramdown.gettalong.org/syntax.html#math-blocks">math blocks</a> and <a href="http://kramdown.gettalong.org/converter/html.html#math-support">math support</a> for more details. MathJax requires you to include JavaScript or CSS to render the LaTeX, e.g.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;&lt;/script&gt;</span></code></pre></figure>
+
+<p>For more information about getting started, check out <a href="http://gastonsanchez.com/blog/opinion/2014/02/16/Mathjax-with-jekyll.html">this excellent blog post</a>.</p>
 
 <h2 id="alternative-markdown-processors">Alternative Markdown Processors</h2>
 
