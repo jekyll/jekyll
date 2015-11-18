@@ -207,5 +207,34 @@ module Jekyll
       template
     end
 
+
+    # Work the same way as Dir.glob but seperating the input into two parts
+    # ('dir' + '/' + 'pattern') to make sure the first part('dir') does not act
+    # as a pattern.
+    #
+    # For example, Dir.glob("path[/*") always returns an empty array,
+    # because the method fails to find the closing pattern to '[' which is ']'
+    #
+    # Examples:
+    #   safe_glob("path[", "*")
+    #   # => ["path[/file1", "path[/file2"]
+    #
+    #   safe_glob("path", "*", File::FNM_DOTMATCH)
+    #   # => ["path/.", "path/..", "path/file1"]
+    #
+    # dir     - the dir where glob will be executed under
+    #           (the dir will be included to each result)
+    # pattern - the pattern which will be applied under the dir
+    # flags   - the flags which will be applied to the pattern
+    #
+    # Returns matched pathes
+    def safe_glob(dir, pattern, flags = 0)
+      return [] unless Dir.exist?(dir)
+      return [dir] if pattern.nil? || pattern.empty?
+      Dir.chdir(dir) do
+        Dir.glob(pattern, flags).map { |f| File.join(dir, f) }
+      end
+    end
+
   end
 end
