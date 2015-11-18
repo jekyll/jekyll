@@ -121,10 +121,12 @@ module Jekyll
     #
     # string - the filename or title to slugify
     # mode - how string is slugified
+    # cased - whether to replace all  uppercase letters with their
+    # lowercase counterparts
     #
-    # When mode is "none", return the given string in lowercase.
+    # When mode is "none", return the given string.
     #
-    # When mode is "raw", return the given string in lowercase,
+    # When mode is "raw", return the given string,
     # with every sequence of spaces characters replaced with a hyphen.
     #
     # When mode is "default" or nil, non-alphabetic characters are
@@ -133,6 +135,9 @@ module Jekyll
     # When mode is "pretty", some non-alphabetic characters (._~!$&'()+,;=@)
     # are not replaced with hyphen.
     #
+    # If cased is true, all uppercase letters in the result string are
+    # replaced with their lowercase counterparts.
+    #
     # Examples:
     #   slugify("The _config.yml file")
     #   # => "the-config-yml-file"
@@ -140,11 +145,17 @@ module Jekyll
     #   slugify("The _config.yml file", "pretty")
     #   # => "the-_config.yml-file"
     #
+    #   slugify("The _config.yml file", "pretty", true)
+    #   # => "The-_config.yml file"
+    #
     # Returns the slugified string.
-    def slugify(string, mode=nil)
+    def slugify(string, mode: nil, cased: false)
       mode ||= 'default'
       return nil if string.nil?
-      return string.downcase unless SLUGIFY_MODES.include?(mode)
+
+      unless SLUGIFY_MODES.include?(mode)
+        return cased ? string : string.downcase
+      end
 
       # Replace each character sequence with a hyphen
       re = case mode
@@ -158,13 +169,13 @@ module Jekyll
         SLUGIFY_PRETTY_REGEXP
       end
 
-      string.
+      slug = string.
         # Strip according to the mode
         gsub(re, '-').
         # Remove leading/trailing hyphen
-        gsub(/^\-|\-$/i, '').
-        # Downcase
-        downcase
+        gsub(/^\-|\-$/i, '')
+
+      cased ? slug : slug.downcase
     end
 
     # Add an appropriate suffix to template so that it matches the specified

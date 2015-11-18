@@ -96,3 +96,27 @@ Feature: Fancy permalinks
     Then the _site directory should exist
     And the _site/custom/posts directory should exist
     And I should see "bla bla" in "_site/custom/posts/some.html"
+
+  Scenario: Use pretty permalink schema with cased file name
+    Given I have a _posts directory
+    And I have an "_posts/2009-03-27-Pretty-Permalink-Schema.md" page that contains "Totally wordpress"
+    And I have a configuration file with "permalink" set to "pretty"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Totally wordpress." in "_site/2009/03/27/Pretty-Permalink-Schema/index.html"
+
+  Scenario: Use custom permalink schema with cased file name
+    Given I have a _posts directory
+    And I have an "_posts/2009-03-27-Custom-Schema.md" page with title "Custom Schema" that contains "Totally awesome"
+    And I have a configuration file with "permalink" set to "/:year/:month/:day/:slug/"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Totally awesome" in "_site/2009/03/27/custom-schema/index.html"
+
+  Scenario: Use pretty permalink schema with title containing underscore
+    Given I have a _posts directory
+    And I have an "_posts/2009-03-27-Custom_Schema.md" page with title "Custom Schema" that contains "Totally awesome"
+    And I have a configuration file with "permalink" set to "pretty"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Totally awesome" in "_site/2009/03/27/Custom_Schema/index.html"
