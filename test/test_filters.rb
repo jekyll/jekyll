@@ -388,5 +388,14 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "random filter" do
+      should "return a single item that exists in the array" do
+        ary = (1..100).to_a
+        single_item = @filter.random(ary)
+        assert_equal 1, single_item.length
+        assert_equal true, ary.include?(single_item[0])
+      end
+    end
+
   end
 end
