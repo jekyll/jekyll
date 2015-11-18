@@ -10,12 +10,8 @@
     {% assign c = "" %}
   {% endif %}
 
-  {% for p in site.docs %}
-    {% if p.url == item_url %}
-      <li class="{{ c }}"><a href="{{ site.url }}{{ p.url }}">{{ p.title }}</a></li>
-      {% break %}
-    {% endif %}
-  {% endfor %}
+  {% assign p = site.docs | where:"url",item_url | first %}
+  <li class="{{ c }}"><a href="{{ site.url }}{{ p.url }}">{{ p.title }}</a></li>
 
 {% endfor %}
 </ul>
