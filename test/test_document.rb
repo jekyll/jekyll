@@ -234,6 +234,26 @@ class TestDocument < JekyllUnitTest
     end
   end
 
+  context "a document in a collection with cased file name" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "slides" => {
+             "output" => true,
+          }
+        },
+      })
+      @site.permalink_style = :pretty
+      @site.process
+      @document = @site.collections["slides"].docs[6]
+      @dest_file = dest_dir("slides/example-slide-Upper-Cased/index.html")
+    end
+
+    should "produce the right cased URL" do
+      assert_equal "/slides/example-slide-Upper-Cased/", @document.url
+    end
+  end
+
   context "documents in a collection with custom title permalinks" do
     setup do
       @site = fixture_site({
@@ -267,10 +287,10 @@ class TestDocument < JekyllUnitTest
     end
 
     should "produce the right URL if they have a wild slug" do
-      assert_equal "/slides/well-so-what-is-jekyll-then", @document_with_strange_slug.url
+      assert_equal "/slides/Well,-so-what-is-Jekyll,-then", @document_with_strange_slug.url
     end
     should "produce the right destination file if they have a wild slug" do
-      dest_file = dest_dir("/slides/well-so-what-is-jekyll-then.html")
+      dest_file = dest_dir("/slides/Well,-so-what-is-Jekyll,-then.html")
       assert_equal dest_file, @document_with_strange_slug.destination(dest_dir)
     end
   end

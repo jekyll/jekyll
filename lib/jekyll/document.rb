@@ -186,7 +186,9 @@ module Jekyll
         path:        cleaned_relative_path,
         output_ext:  output_ext,
         name:        Utils.slugify(basename_without_ext),
-        title:       Utils.slugify(data['slug']) || Utils.slugify(basename_without_ext),
+        title:       Utils.slugify(data['slug'], mode: "pretty", cased: true) || Utils
+                       .slugify(basename_without_ext, mode: "pretty", cased: true),
+        slug:        Utils.slugify(data['slug']) || Utils.slugify(basename_without_ext),
         year:        date.strftime("%Y"),
         month:       date.strftime("%m"),
         day:         date.strftime("%d"),

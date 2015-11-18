@@ -146,23 +146,38 @@ class TestUtils < JekyllUnitTest
     end
 
     should "not change behaviour if mode is default" do
-      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file?", "default")
+      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file?", mode: "default")
     end
 
     should "not change behaviour if mode is nil" do
-      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file?", nil)
+      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file?")
     end
 
     should "not replace period and underscore if mode is pretty" do
-      assert_equal "the-_config.yml-file", Utils.slugify("The _config.yml file?", "pretty")
+      assert_equal "the-_config.yml-file", Utils.slugify("The _config.yml file?", mode: "pretty")
     end
 
     should "only replace whitespace if mode is raw" do
-      assert_equal "the-_config.yml-file?", Utils.slugify("The _config.yml file?", "raw")
+      assert_equal "the-_config.yml-file?", Utils.slugify("The _config.yml file?", mode: "raw")
     end
 
     should "return the given string if mode is none" do
-      assert_equal "the _config.yml file?", Utils.slugify("The _config.yml file?", "none")
+      assert_equal "the _config.yml file?", Utils.slugify("The _config.yml file?", mode: "none")
+    end
+
+    should "Keep all uppercase letters if cased is true" do
+      assert_equal "Working-with-drafts", Utils.slugify("Working with drafts", cased: true)
+      assert_equal "Basic-Usage", Utils.slugify("Basic   Usage", cased: true)
+      assert_equal "Working-with-drafts", Utils.slugify("  Working with drafts   ", cased: true)
+      assert_equal "So-what-is-Jekyll-exactly", Utils.slugify("So what is Jekyll, exactly?", cased: true)
+      assert_equal "Pre-releases", Utils.slugify("Pre-releases", cased: true)
+      assert_equal "The-config-yml-file", Utils.slugify("The _config.yml file", cased: true)
+      assert_equal "Customizing-Git-Git-Hooks", Utils.slugify("Customizing Git - Git Hooks", cased: true)
+      assert_equal "The-config-yml-file", Utils.slugify("The _config.yml file?", mode: "default", cased: true)
+      assert_equal "The-config-yml-file", Utils.slugify("The _config.yml file?", cased: true)
+      assert_equal "The-_config.yml-file", Utils.slugify("The _config.yml file?", mode: "pretty", cased: true)
+      assert_equal "The-_config.yml-file?", Utils.slugify("The _config.yml file?", mode: "raw", cased: true)
+      assert_equal "The _config.yml file?", Utils.slugify("The _config.yml file?", mode: "none", cased: true)
     end
   end
 

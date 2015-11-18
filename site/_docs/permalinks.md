@@ -109,8 +109,20 @@ permalink is defined according to the format `/:categories/:year/:month/:day/:ti
       </td>
       <td>
         <p>
-            Title from the document’s filename. May be overridden via the
-            document’s <code>slug</code> YAML front matter.
+            Title from the document’s filename. May be overridden via
+            the document’s <code>slug</code> YAML front matter.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>slug</code></p>
+      </td>
+      <td>
+        <p>
+            Slugified title from the document’s filename ( any character
+            except numbers and letters is replaced as hyphen ). May be
+            overridden via the document’s <code>slug</code> YAML front matter.
         </p>
       </td>
     </tr>
