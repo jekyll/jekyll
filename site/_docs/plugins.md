@@ -32,10 +32,10 @@ Jekyll generates your site.
 values of the gem names of the plugins you'd like to use. An example:
 
 
-        gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
+        gems: [jekyll-coffeescript, jekyll-watch, jekyll-assets]
         # This will require each of these gems automatically.
 
-    Then install your plugins using `gem install jekyll-test-plugin jekyll-jsonify jekyll-assets`
+    Then install your plugins using `gem install jekyll-coffeescript jekyll-watch jekyll-assets`
 
 3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
     example:
