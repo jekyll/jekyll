@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * `jekyll-docs` should be easily release-able (#4152)
+
 ## 3.0.1 / 2015-11-17
 
 ### Bug Fixes
