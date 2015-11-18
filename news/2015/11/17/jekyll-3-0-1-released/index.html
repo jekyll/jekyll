@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.3 Released</title>
+  <title>Jekyll 3.0.1 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
@@ -163,8 +163,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.3 Released
-    <a href="/news/2013/06/07/jekyll-1-0-3-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 3.0.1 Released
+    <a href="/news/2015/11/17/jekyll-3-0-1-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -173,7 +173,7 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      07 Jun 2013
+      17 Nov 2015
     </span>
     <a href="https://github.com/parkr" class="post-author">
       <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
@@ -181,18 +181,24 @@
     </a>
   </div>
   <div class="post-content">
-    <p>v1.0.3 contains some key enhancements and bug fixes:</p>
+    <p>Hey, folks! Bunch of bug fixes here. Notables:</p>
 
 <ul>
-  <li>Fail with non-zero exit code when MaRuKu errors (<a href="https://github.com/jekyll/jekyll/issues/1190">#1190</a>) or Liquid errors (<a href="https://github.com/jekyll/jekyll/issues/1121">#1121</a>)</li>
-  <li>Add support for private gists to <code>gist</code> tag (<a href="https://github.com/jekyll/jekyll/issues/1189">#1189</a>)</li>
-  <li>Add <code>--force</code> option to <code>jekyll new</code> (<a href="https://github.com/jekyll/jekyll/issues/1115">#1115</a>)</li>
-  <li>Fix compatibility with <code>exclude</code> and <code>include</code> with pre-1.0 Jekyll (<a href="https://github.com/jekyll/jekyll/issues/1114">#1114</a>)</li>
-  <li>Fix pagination issue regarding <code>File.basename</code> and <code>page:num</code> (<a href="https://github.com/jekyll/jekyll/issues/1063">#1063</a>)</li>
+  <li>Only superdirectories of <code>_posts</code> will be categories.</li>
+  <li><code>:title</code> in permalink templates are now properly cased as before</li>
+  <li><code>.jekyll-metadata</code> being erroneously written when not using incremental build.</li>
+  <li>Failure in liquid will now always fail the <code>jekyll</code> process.</li>
+  <li>All hooks should now be properly registered &amp; documented</li>
 </ul>
 
-<p>See the <a href="/docs/history/#v1-0-3">History</a> page for more information on this release.</p>
+<p>And a bunch more changes which you can see over in the
+<a href="/docs/history">changelog</a>.</p>
 
+<p>Thanks to the 17 developers who contributed code and documentation to this
+patch release: Alfred Xing, Christian Trosell, Jordan Thornquest, Jordon
+Bedwell, Larry Fox, Lawrence Murray, Lewis Cowles, Matt Rogers, Nicole
+White, Parker Moore, Paul Robert Lloyd, Sarah Kuehnle, Vincent Wochnik,
+Will Norris, XhmikosR, chrisfinazzo, and rebornix.</p>
 
   </div>
 </article>
@@ -212,7 +218,7 @@
     <h4>Recent Releases</h4>
     <ul>
       
-      <li class="">
+      <li class="current">
         <a href="/news/2015/11/17/jekyll-3-0-1-released/">Version 3.0.1</a>
       </li>
       

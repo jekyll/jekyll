@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Pagination</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0">
+  <meta name="generator" content="Jekyll v3.0.1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2360,7 +2360,7 @@ page with links to all but the current page.</p>
   {% for page in (1..paginator.total_pages) %}
     {% if page == paginator.page %}
       <span class="nt">&lt;em&gt;</span>{{ page }}<span class="nt">&lt;/em&gt;</span>
-    {% elif page == 1 %}
+    {% elsif page == 1 %}
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ paginator.previous_page_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; }}&quot;</span><span class="nt">&gt;</span>{{ page }}<span class="nt">&lt;/a&gt;</span>
     {% else %}
       <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ site.paginate_path | prepend: site.baseurl | replace: &#39;//&#39;, &#39;/&#39; | replace: &#39;:num&#39;, page }}&quot;</span><span class="nt">&gt;</span>{{ page }}<span class="nt">&lt;/a&gt;</span>

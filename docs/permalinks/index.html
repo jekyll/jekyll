@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Permalinks</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0">
+  <meta name="generator" content="Jekyll v3.0.1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2276,8 +2276,20 @@ permalink is defined according to the format <code>/:categories/:year/:month/:da
       </td>
       <td>
         <p>
-            Title from the document’s filename. May be overridden via the
-            document’s <code>slug</code> YAML front matter.
+            Title from the document’s filename. May be overridden via
+            the document’s <code>slug</code> YAML front matter.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>slug</code></p>
+      </td>
+      <td>
+        <p>
+            Slugified title from the document’s filename ( any character
+            except numbers and letters is replaced as hyphen ). May be
+            overridden via the document’s <code>slug</code> YAML front matter.
         </p>
       </td>
     </tr>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>History</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.0">
+  <meta name="generator" content="Jekyll v3.0.1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2171,7 +2171,43 @@
             <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/history.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
           </div>
           <h1>History</h1>
-          <h2 id="v3-0-0">3.0.0 / 2015-10-26</h2>
+          <h2 id="v3-0-1">3.0.1 / 2015-11-17</h2>
+
+<h3 id="bug-fixes-v3-0-1">Bug Fixes</h3>
+
+<ul>
+  <li>Document: only superdirectories of the collection are categories (<a href="https://github.com/jekyll/jekyll/issues/4110">#4110</a>)</li>
+  <li><code>Convertible#render_liquid</code> should use <code>render!</code> to cause failure on bad Liquid (<a href="https://github.com/jekyll/jekyll/issues/4077">#4077</a>)</li>
+  <li>Don’t generate <code>.jekyll-metadata</code> in non-incremental build (<a href="https://github.com/jekyll/jekyll/issues/4079">#4079</a>)</li>
+  <li>Set <code>highlighter</code> config val to <code>kramdown.syntax_highlighter</code> (<a href="https://github.com/jekyll/jekyll/issues/4090">#4090</a>)</li>
+  <li>Align hooks implementation with documentation (<a href="https://github.com/jekyll/jekyll/issues/4104">#4104</a>)</li>
+  <li>Fix the deprecation warning in the doctor command (<a href="https://github.com/jekyll/jekyll/issues/4114">#4114</a>)</li>
+  <li>Fix case in <code>:title</code> and add <code>:slug</code> which is downcased (<a href="https://github.com/jekyll/jekyll/issues/4100">#4100</a>)</li>
+</ul>
+
+<h3 id="development-fixes-v3-0-1">Development Fixes</h3>
+
+<ul>
+  <li>Fix test warnings when doing rake {test,spec} or script/test (<a href="https://github.com/jekyll/jekyll/issues/4078">#4078</a>)</li>
+</ul>
+
+<h3 id="site-enhancements-v3-0-1">Site Enhancements</h3>
+
+<ul>
+  <li>Update normalize.css to v3.0.3. (<a href="https://github.com/jekyll/jekyll/issues/4085">#4085</a>)</li>
+  <li>Update Font Awesome to v4.4.0. (<a href="https://github.com/jekyll/jekyll/issues/4086">#4086</a>)</li>
+  <li>Adds a note about installing the jekyll-gist gem to make gist tag work (<a href="https://github.com/jekyll/jekyll/issues/4101">#4101</a>)</li>
+  <li>Align hooks documentation with implementation (<a href="https://github.com/jekyll/jekyll/issues/4104">#4104</a>)</li>
+  <li>Add Jekyll Flickr Plugin to the list of third party plugins (<a href="https://github.com/jekyll/jekyll/issues/4111">#4111</a>)</li>
+  <li>Remove link to now-deleted blog post (<a href="https://github.com/jekyll/jekyll/issues/4125">#4125</a>)</li>
+  <li>Update the liquid syntax in the pagination docs (<a href="https://github.com/jekyll/jekyll/issues/4130">#4130</a>)</li>
+  <li>Add jekyll-language-plugin to plugins.md (<a href="https://github.com/jekyll/jekyll/issues/4134">#4134</a>)</li>
+  <li>Updated to reflect feedback in <a href="https://github.com/jekyll/jekyll/issues/4129">#4129</a> (<a href="https://github.com/jekyll/jekyll/issues/4137">#4137</a>)</li>
+  <li>Clarify assets.md based on feedback of <a href="https://github.com/jekyll/jekyll/issues/4129">#4129</a> (<a href="https://github.com/jekyll/jekyll/issues/4142">#4142</a>)</li>
+  <li>Re-correct the liquid syntax in the pagination docs (<a href="https://github.com/jekyll/jekyll/issues/4140">#4140</a>)</li>
+</ul>
+
+<h2 id="v3-0-0">3.0.0 / 2015-10-26</h2>
 
 <h3 id="major-enhancements-v3-0-0">Major Enhancements</h3>
 
