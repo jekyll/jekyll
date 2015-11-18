@@ -4,6 +4,41 @@ title: History
 permalink: "/docs/history/"
 ---
 
+## 3.0.1 / 2015-11-17
+{: #v3-0-1}
+
+### Bug Fixes
+{: #bug-fixes-v3-0-1}
+
+- Document: only superdirectories of the collection are categories ([#4110]({{ site.repository }}/issues/4110))
+- `Convertible#render_liquid` should use `render!` to cause failure on bad Liquid ([#4077]({{ site.repository }}/issues/4077))
+- Don't generate `.jekyll-metadata` in non-incremental build ([#4079]({{ site.repository }}/issues/4079))
+- Set `highlighter` config val to `kramdown.syntax_highlighter` ([#4090]({{ site.repository }}/issues/4090))
+- Align hooks implementation with documentation ([#4104]({{ site.repository }}/issues/4104))
+- Fix the deprecation warning in the doctor command ([#4114]({{ site.repository }}/issues/4114))
+- Fix case in `:title` and add `:slug` which is downcased ([#4100]({{ site.repository }}/issues/4100))
+
+### Development Fixes
+{: #development-fixes-v3-0-1}
+
+- Fix test warnings when doing rake {test,spec} or script/test ([#4078]({{ site.repository }}/issues/4078))
+
+### Site Enhancements
+{: #site-enhancements-v3-0-1}
+
+- Update normalize.css to v3.0.3. ([#4085]({{ site.repository }}/issues/4085))
+- Update Font Awesome to v4.4.0. ([#4086]({{ site.repository }}/issues/4086))
+- Adds a note about installing the jekyll-gist gem to make gist tag work ([#4101]({{ site.repository }}/issues/4101))
+- Align hooks documentation with implementation ([#4104]({{ site.repository }}/issues/4104))
+- Add Jekyll Flickr Plugin to the list of third party plugins ([#4111]({{ site.repository }}/issues/4111))
+- Remove link to now-deleted blog post ([#4125]({{ site.repository }}/issues/4125))
+- Update the liquid syntax in the pagination docs ([#4130]({{ site.repository }}/issues/4130))
+- Add jekyll-language-plugin to plugins.md ([#4134]({{ site.repository }}/issues/4134))
+- Updated to reflect feedback in [#4129]({{ site.repository }}/issues/4129) ([#4137]({{ site.repository }}/issues/4137))
+- Clarify assets.md based on feedback of [#4129]({{ site.repository }}/issues/4129) ([#4142]({{ site.repository }}/issues/4142))
+- Re-correct the liquid syntax in the pagination docs ([#4140]({{ site.repository }}/issues/4140))
+
+
 ## 3.0.0 / 2015-10-26
 {: #v3-0-0}
 

@@ -14,7 +14,7 @@ require 'jekyll/version'
 #############################################################################
 
 def name
-  @name ||= File.basename(Dir['*.gemspec'].first, ".*")
+  'jekyll'.freeze
 end
 
 def version

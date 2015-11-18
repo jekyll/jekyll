@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gemspec
+gemspec name: 'jekyll'
 
 gem 'rake', '~> 10.1'
 group :development do
