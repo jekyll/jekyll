@@ -137,7 +137,7 @@ end
 
 namespace :site do
   desc "Generate and view the site locally"
-  task :preview do
+  task :preview => [:history, :version_file] do
     require "launchy"
     require "jekyll"
 
