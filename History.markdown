@@ -11,6 +11,7 @@
 ### Site Enhancements
 
   * Add three plugins to directory (#4163)
+  * Add upgrading docs from 2.x to 3.x (#4157)
 
 ## 3.0.1 / 2015-11-17
 
