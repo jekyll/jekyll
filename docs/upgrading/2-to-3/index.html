@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Contributing</title>
+  <title>Upgrading from 2.x to 3.x</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
@@ -2360,135 +2360,75 @@
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/contributing.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/upgrading/2-to-3.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
           </div>
-          <h1>Contributing</h1>
-          <p>So you’ve got an awesome idea to throw into Jekyll. Great! Please keep the
-following in mind:</p>
+          <h1>Upgrading from 2.x to 3.x</h1>
+          <p>Upgrading from an older version of Jekyll? A few things have changed in 3.0
+that you’ll want to know about.</p>
 
-<ul>
-  <li><strong>Use https://talk.jekyllrb.com for non-technical or indirect Jekyll questions that are not bugs.</strong></li>
-  <li><strong>Contributions will not be accepted without tests or necessary documentation updates.</strong></li>
-  <li>If you’re creating a small fix or patch to an existing feature, just a simple
-test will do. Please stay in the confines of the current test suite and use
-<a href="https://github.com/thoughtbot/shoulda/tree/master">Shoulda</a> and
-<a href="https://github.com/rspec/rspec-mocks">RSpec-Mocks</a>.</li>
-  <li>If it’s a brand new feature, make sure to create a new
-<a href="https://github.com/cucumber/cucumber/">Cucumber</a> feature and reuse steps
-where appropriate. Also, whipping up some documentation in your fork’s <code>site</code>
-would be appreciated, and once merged it will be transferred over to the main
-<code>site</code>, jekyllrb.com.</li>
-  <li>If your contribution changes any Jekyll behavior, make sure to update the
-documentation. It lives in <code>site/_docs</code>. If the docs are missing information,
-please feel free to add it in. Great docs make a great project!</li>
-  <li>Please follow the <a href="https://github.com/styleguide/ruby">GitHub Ruby Styleguide</a>
-when modifying Ruby code.</li>
-  <li>Please do your best to submit <strong>small pull requests</strong>. The easier the proposed
-change is to review, the more likely it will be merged.</li>
-  <li>When submitting a pull request, please make judicious use of the pull request
-body. A description of what changes were made, the motivations behind the
-changes and <a href="http://git.io/gfm-tasks">any tasks completed or left to complete</a>
-will also speed up review time.</li>
-</ul>
+<p>Before we dive in, go ahead and fetch the latest version of Jekyll:</p>
 
-<div class="note warning">
-  <h5>Contributions will not be accepted without tests</h5>
-  <p>
-    If you’re creating a small fix or patch to an existing feature, just
-    a simple test will do.
-  </p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem update jekyll</code></pre></figure>
+
+<div class="note feature">
+  <h5>Diving in</h5>
+  <p>Want to get a new Jekyll site up and running quickly? Simply
+   run <code>jekyll new SITENAME</code> to create a new folder with a bare bones
+   Jekyll site.</p>
 </div>
 
-<h2 id="test-dependencies">Test Dependencies</h2>
+<h3 id="sitecollections-has-changed">site.collections has changed</h3>
 
-<p>To run the test suite and build the gem you’ll need to install Jekyll’s
-dependencies. Simply run this command to get all setup:</p>
-
-<figure class="highlight"><pre><code>$ script/bootstrap</code></pre></figure>
-
-<p>Before you start, run the tests and make sure that they pass (to confirm your
-environment is configured properly):</p>
-
-<figure class="highlight"><pre><code>$ script/cibuild</code></pre></figure>
-
-<p>If you are only updating a file in <code>test/</code>, you can use the command:</p>
-
-<figure class="highlight"><pre><code>$ script/test test/blah_test.rb</code></pre></figure>
-
-<p>If you are only updating a <code>.feature</code> file, you can use the command:</p>
-
-<figure class="highlight"><pre><code>$ script/cucumber features/blah.feature</code></pre></figure>
-
-<p>Both <code>script/test</code> and <code>script/cucumber</code> can be run without arguments to
-run its entire respective suite.</p>
-
-<h2 id="workflow">Workflow</h2>
-
-<p>Here’s the most direct way to get your work merged into the project:</p>
+<p>In 2.x, your iterations over <code>site.collections</code> yielded an array with the collection
+label and the collection object as the first and second items, respectively. In 3.x,
+this complication has been removed and iterations now yield simply the collection object.
+A simple conversion must be made in your templates:</p>
 
 <ul>
-  <li>Fork the project.</li>
-  <li>Clone down your fork ( <code>git clone git@github.com:[username]/jekyll.git</code> ).</li>
-  <li>Create a topic branch to contain your change ( <code>git checkout -b my_awesome_feature</code> ).</li>
-  <li>Hack away, add tests. Not necessarily in that order.</li>
-  <li>Make sure everything still passes by running <code>script/cibuild</code>.</li>
-  <li>If necessary, rebase your commits into logical chunks, without errors.</li>
-  <li>Push the branch up ( <code>git push origin my_awesome_feature</code> ).</li>
-  <li>Create a pull request against jekyll/jekyll and describe what your change
-does and the why you think it should be merged.</li>
+  <li><code>collection[0]</code> becomes <code>collection.label</code></li>
+  <li><code>collection[1]</code> becomes <code>collection</code></li>
 </ul>
 
-<h2 id="updating-documentation">Updating Documentation</h2>
+<p>When iterating over <code>site.collections</code>, ensure the above conversions are made.</p>
 
-<p>We want the Jekyll documentation to be the best it can be. We’ve
-open-sourced our docs and we welcome any pull requests if you find it
-lacking.</p>
+<h3 id="dropped-dependencies">Dropped dependencies</h3>
 
-<p>You can find the documentation for jekyllrb.com in the
-<a href="https://github.com/jekyll/jekyll/tree/master/site">site</a> directory of
-Jekyll’s repo on GitHub.com.</p>
-
-<p>All documentation pull requests should be directed at <code>master</code>. Pull
-requests directed at another branch will not be accepted.</p>
-
-<p>The <a href="https://github.com/jekyll/jekyll/wiki">Jekyll wiki</a> on GitHub
-can be freely updated without a pull request as all GitHub users have access.</p>
-
-<p>If you want to add your plugin to the <a href="/docs/plugins/#available-plugins">list of plugins</a>,
-please submit a pull request modifying the <a href="https://github.com/jekyll/jekyll/blob/master/site/_docs/plugins.md">plugins page source
-file</a> by adding a
-link to your plugin under the proper subheading depending upon its type.</p>
-
-<h2 id="gotchas">Gotchas</h2>
+<p>We dropped a number of dependencies the Core Team felt were optional. As such, in 3.0, they must be explicitly installed and included if you use any of the features. They are:</p>
 
 <ul>
-  <li>Please do not bump the gem version in your pull requests.</li>
-  <li>Try to keep your patch(es) based from the latest commit on jekyll/jekyll.
-The easier it is to apply your work, the less work the maintainers have to do,
-which is always a good thing.</li>
-  <li>Please don’t tag your GitHub issue with [fix], [feature], etc. The maintainers
-actively read the issues and will label it once they come across it.</li>
+  <li>jekyll-paginate – Jekyll’s pagination solution from days past</li>
+  <li>jekyll-coffeescript – processing of CoffeeScript</li>
+  <li>jekyll-gist – the <code>gist</code> Liquid tag</li>
+  <li>pygments.rb – the Pygments highlighter</li>
+  <li>redcarpet – the Markdown processor</li>
+  <li>toml – an alternative to YAML for configuration files</li>
+  <li>classifier-reborn – for <code>site.related_posts</code></li>
 </ul>
 
-<h2 id="finally">Finally…</h2>
+<h3 id="future-posts">Future posts</h3>
 
-<div class="note">
-  <h5>Let us know what could be better!</h5>
-  <p>
-    Both using and hacking on Jekyll should be fun, simple, and easy, so if for
-    some reason you find it’s a pain, please <a href="https://github.com/jekyll/jekyll/issues/new">create an issue</a> on
-    GitHub describing your experience so we can make it better.
-  </p>
-</div>
+<p>A seeming feature regression in 2.x, the <code>--future</code> flag was automatically <em>enabled</em>.
+The future flag allows post authors to give the post a date in the future and to have
+it excluded from the build until the system time is equal or after the post time.
+In Jekyll 3, this has been corrected. <strong>Now, <code>--future</code> is disabled by default.</strong>
+This means you will need to include <code>--future</code> if you want your future-dated posts to
+generate when running <code>jekyll build</code> or <code>jekyll serve</code>.</p>
+
+<h3 id="layout-metadata">Layout metadata</h3>
+
+<p>Introducing: <code>layout</code>. In Jekyll 2 and below, any metadata in the layout was munged onto
+the <code>page</code> variable in Liquid. This caused a lot of confusion in the way the data was
+merged and some unexpected behaviour. In Jekyll 3, all layout data is accessible via <code>layout</code>
+in Liquid. For example, if your layout has <code>class: my-layout</code> in its YAML front matter,
+then the layout can access that via <code>{{ layout.class }}</code>.</p>
+
+<p><em>Did we miss something? Please click “Improve this page” above and add a section. Thanks!</em></p>
 
           
 
 
 
 
-
-  
-  
 
   
   
@@ -2581,14 +2521,14 @@ actively read the issues and will label it once they come across it.</li>
           
             
             
-            <a href="/docs/upgrading/2-to-3/" class="prev">Back</a>
+            <a href="/docs/upgrading/0-to-2/" class="prev">Back</a>
           
       </div>
       <div class="right align-left">
           
             
             
-            <a href="/docs/history/" class="next">Next</a>
+            <a href="/docs/contributing/" class="next">Next</a>
           
       </div>
     </div>
@@ -2866,7 +2806,7 @@ actively read the issues and will label it once they come across it.</li>
   
 
   
-  <li class=""><a href="http://jekyllrb.com/docs/upgrading/2-to-3/">Upgrading from 2.x to 3.x</a></li>
+  <li class="current"><a href="http://jekyllrb.com/docs/upgrading/2-to-3/">Upgrading from 2.x to 3.x</a></li>
 
 
 </ul>
@@ -2882,7 +2822,7 @@ actively read the issues and will label it once they come across it.</li>
   
 
   
-  <li class="current"><a href="http://jekyllrb.com/docs/contributing/">Contributing</a></li>
+  <li class=""><a href="http://jekyllrb.com/docs/contributing/">Contributing</a></li>
 
 
   

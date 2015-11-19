@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Contributing</title>
+  <title>Upgrading from 0.x to 2.x</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.0.1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
@@ -2360,125 +2360,143 @@
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/contributing.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/upgrading/0-to-2.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
           </div>
-          <h1>Contributing</h1>
-          <p>So you’ve got an awesome idea to throw into Jekyll. Great! Please keep the
-following in mind:</p>
+          <h1>Upgrading from 0.x to 2.x</h1>
+          <p>Upgrading from an older version of Jekyll? A few things have changed in 1.0
+and 2.0 that you’ll want to know about.</p>
 
-<ul>
-  <li><strong>Use https://talk.jekyllrb.com for non-technical or indirect Jekyll questions that are not bugs.</strong></li>
-  <li><strong>Contributions will not be accepted without tests or necessary documentation updates.</strong></li>
-  <li>If you’re creating a small fix or patch to an existing feature, just a simple
-test will do. Please stay in the confines of the current test suite and use
-<a href="https://github.com/thoughtbot/shoulda/tree/master">Shoulda</a> and
-<a href="https://github.com/rspec/rspec-mocks">RSpec-Mocks</a>.</li>
-  <li>If it’s a brand new feature, make sure to create a new
-<a href="https://github.com/cucumber/cucumber/">Cucumber</a> feature and reuse steps
-where appropriate. Also, whipping up some documentation in your fork’s <code>site</code>
-would be appreciated, and once merged it will be transferred over to the main
-<code>site</code>, jekyllrb.com.</li>
-  <li>If your contribution changes any Jekyll behavior, make sure to update the
-documentation. It lives in <code>site/_docs</code>. If the docs are missing information,
-please feel free to add it in. Great docs make a great project!</li>
-  <li>Please follow the <a href="https://github.com/styleguide/ruby">GitHub Ruby Styleguide</a>
-when modifying Ruby code.</li>
-  <li>Please do your best to submit <strong>small pull requests</strong>. The easier the proposed
-change is to review, the more likely it will be merged.</li>
-  <li>When submitting a pull request, please make judicious use of the pull request
-body. A description of what changes were made, the motivations behind the
-changes and <a href="http://git.io/gfm-tasks">any tasks completed or left to complete</a>
-will also speed up review time.</li>
-</ul>
+<p>Before we dive in, go ahead and fetch the latest version of Jekyll:</p>
 
-<div class="note warning">
-  <h5>Contributions will not be accepted without tests</h5>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem update jekyll</code></pre></figure>
+
+<div class="note feature">
+  <h5>Diving in</h5>
+  <p>Want to get a new Jekyll site up and running quickly? Simply
+   run <code>jekyll new SITENAME</code> to create a new folder with a bare bones
+   Jekyll site.</p>
+</div>
+
+<h3 id="the-jekyll-command">The Jekyll Command</h3>
+
+<p>For better clarity, Jekyll now accepts the commands <code>build</code> and <code>serve</code>.
+Whereas before you might simply run the command <code>jekyll</code> to generate a site
+and <code>jekyll --server</code> to view it locally, in v2.0 (and later) you should
+use the subcommands <code>jekyll build</code> and <code>jekyll serve</code> to build and preview
+your site.</p>
+
+<div class="note info">
+  <h5>Watching and Serving</h5>
+  <p>With the new subcommands, the way sites are previewed locally
+   changed a bit. Instead of specifying <code>server: true</code> in the site’s
+   configuration file, use <code>jekyll serve</code>. The same holds true for
+   <code>watch: true</code>. Instead, use the <code>--watch</code> flag with either <code>jekyll serve</code>
+    or <code>jekyll build</code>.</p>
+</div>
+
+<h3 id="absolute-permalinks">Absolute Permalinks</h3>
+
+<p>In Jekyll v1.0, we introduced absolute permalinks for pages in
+subdirectories. Starting with v2.0, absolute permalinks are opt-out,
+meaning Jekyll will default to using absolute permalinks instead of
+relative permalinks. Relative permalink backwards-compatibility was removed in v3.0.</p>
+
+<div class="note warning" id="absolute-permalinks-warning">
+  <h5>Absolute permalinks will be required in v3.0 and on</h5>
   <p>
-    If you’re creating a small fix or patch to an existing feature, just
-    a simple test will do.
+    Starting with Jekyll v3.0, relative permalinks functionality will be removed and thus unavailable for use.
   </p>
 </div>
 
-<h2 id="test-dependencies">Test Dependencies</h2>
+<h3 id="draft-posts">Draft Posts</h3>
 
-<p>To run the test suite and build the gem you’ll need to install Jekyll’s
-dependencies. Simply run this command to get all setup:</p>
+<p>Jekyll now lets you write draft posts, and allows you to easily preview how
+they will look prior to publishing. To start a draft, simply create a folder
+called <code>_drafts</code> in your site’s source directory (e.g., alongside <code>_posts</code>),
+and add a new markdown file to it. To preview your new post, simply run the
+<code>jekyll serve</code> command with the <code>--drafts</code> flag.</p>
 
-<figure class="highlight"><pre><code>$ script/bootstrap</code></pre></figure>
-
-<p>Before you start, run the tests and make sure that they pass (to confirm your
-environment is configured properly):</p>
-
-<figure class="highlight"><pre><code>$ script/cibuild</code></pre></figure>
-
-<p>If you are only updating a file in <code>test/</code>, you can use the command:</p>
-
-<figure class="highlight"><pre><code>$ script/test test/blah_test.rb</code></pre></figure>
-
-<p>If you are only updating a <code>.feature</code> file, you can use the command:</p>
-
-<figure class="highlight"><pre><code>$ script/cucumber features/blah.feature</code></pre></figure>
-
-<p>Both <code>script/test</code> and <code>script/cucumber</code> can be run without arguments to
-run its entire respective suite.</p>
-
-<h2 id="workflow">Workflow</h2>
-
-<p>Here’s the most direct way to get your work merged into the project:</p>
-
-<ul>
-  <li>Fork the project.</li>
-  <li>Clone down your fork ( <code>git clone git@github.com:[username]/jekyll.git</code> ).</li>
-  <li>Create a topic branch to contain your change ( <code>git checkout -b my_awesome_feature</code> ).</li>
-  <li>Hack away, add tests. Not necessarily in that order.</li>
-  <li>Make sure everything still passes by running <code>script/cibuild</code>.</li>
-  <li>If necessary, rebase your commits into logical chunks, without errors.</li>
-  <li>Push the branch up ( <code>git push origin my_awesome_feature</code> ).</li>
-  <li>Create a pull request against jekyll/jekyll and describe what your change
-does and the why you think it should be merged.</li>
-</ul>
-
-<h2 id="updating-documentation">Updating Documentation</h2>
-
-<p>We want the Jekyll documentation to be the best it can be. We’ve
-open-sourced our docs and we welcome any pull requests if you find it
-lacking.</p>
-
-<p>You can find the documentation for jekyllrb.com in the
-<a href="https://github.com/jekyll/jekyll/tree/master/site">site</a> directory of
-Jekyll’s repo on GitHub.com.</p>
-
-<p>All documentation pull requests should be directed at <code>master</code>. Pull
-requests directed at another branch will not be accepted.</p>
-
-<p>The <a href="https://github.com/jekyll/jekyll/wiki">Jekyll wiki</a> on GitHub
-can be freely updated without a pull request as all GitHub users have access.</p>
-
-<p>If you want to add your plugin to the <a href="/docs/plugins/#available-plugins">list of plugins</a>,
-please submit a pull request modifying the <a href="https://github.com/jekyll/jekyll/blob/master/site/_docs/plugins.md">plugins page source
-file</a> by adding a
-link to your plugin under the proper subheading depending upon its type.</p>
-
-<h2 id="gotchas">Gotchas</h2>
-
-<ul>
-  <li>Please do not bump the gem version in your pull requests.</li>
-  <li>Try to keep your patch(es) based from the latest commit on jekyll/jekyll.
-The easier it is to apply your work, the less work the maintainers have to do,
-which is always a good thing.</li>
-  <li>Please don’t tag your GitHub issue with [fix], [feature], etc. The maintainers
-actively read the issues and will label it once they come across it.</li>
-</ul>
-
-<h2 id="finally">Finally…</h2>
-
-<div class="note">
-  <h5>Let us know what could be better!</h5>
+<div class="note info">
+  <h5>Drafts don’t have dates</h5>
   <p>
-    Both using and hacking on Jekyll should be fun, simple, and easy, so if for
-    some reason you find it’s a pain, please <a href="https://github.com/jekyll/jekyll/issues/new">create an issue</a> on
-    GitHub describing your experience so we can make it better.
-  </p>
+    Unlike posts, drafts don’t have a date, since they haven’t
+    been published yet. Rather than naming your draft something like
+    <code>2013-07-01-my-draft-post.md</code>, simply name the file what you’d like your
+    post to eventually be titled, here <code>my-draft-post.md</code>.</p>
+</div>
+
+<h3 id="custom-config-file">Custom Config File</h3>
+
+<p>Rather than passing individual flags via the command line, you can now pass
+an entire custom Jekyll config file. This helps to distinguish between
+environments, or lets you programmatically override user-specified
+defaults. Simply add the <code>--config</code> flag to the <code>jekyll</code> command, followed
+by the path to one or more config files (comma-delimited, no spaces).</p>
+
+<h4 id="as-a-result-the-following-command-line-flags-are-now-deprecated">As a result, the following command line flags are now deprecated:</h4>
+
+<ul>
+  <li><code>--no-server</code></li>
+  <li><code>--no-auto</code> (now <code>--no-watch</code>)</li>
+  <li><code>--auto</code> (now <code>--watch</code>)</li>
+  <li><code>--server</code></li>
+  <li><code>--url=</code></li>
+  <li><code>--maruku</code>, <code>--rdiscount</code>, and <code>--redcarpet</code></li>
+  <li><code>--pygments</code></li>
+  <li><code>--permalink=</code></li>
+  <li><code>--paginate</code></li>
+</ul>
+
+<div class="note info">
+  <h5>The config flag explicitly specifies your configuration file(s)</h5>
+  <p>If you use the <code>--config</code> flag, Jekyll will ignore your
+    <code>_config.yml</code> file. Want to merge a custom configuration with the normal
+    configuration? No problem. Jekyll will accept more than one custom config
+    file via the command line. Config files cascade from right to left, such
+    that if I run <code>jekyll serve --config _config.yml,_config-dev.yml</code>,
+    the values in the config files on the right (<code>_config-dev.yml</code>) overwrite
+    those on the left (<code>_config.yml</code>) when both contain the same key.</p>
+</div>
+
+<h3 id="new-config-file-options">New Config File Options</h3>
+
+<p>Jekyll 1.0 introduced several new config file options. Before you upgrade,
+you should check to see if any of these are present in your pre-1.0 config
+file, and if so, make sure that you’re using them properly:</p>
+
+<ul>
+  <li><code>excerpt_separator</code></li>
+  <li><code>host</code></li>
+  <li><code>include</code></li>
+  <li><code>keep_files</code></li>
+  <li><code>layouts</code></li>
+  <li><code>show_drafts</code></li>
+  <li><code>timezone</code></li>
+  <li><code>url</code></li>
+</ul>
+
+<h3 id="baseurl">Baseurl</h3>
+
+<p>Often, you’ll want the ability to run a Jekyll site in multiple places,
+such as previewing locally before pushing to GitHub Pages. Jekyll 1.0 makes
+that easier with the new <code>--baseurl</code> flag. To take advantage of this
+feature, first add the production <code>baseurl</code> to your site’s <code>_config.yml</code>
+file. Then, throughout the site, simply prefix relative URLs
+with <code>{{ site.baseurl }}</code>.
+When you’re ready to preview your site locally, pass along the <code>--baseurl</code>
+flag with your local baseurl (most likely <code>/</code>) to <code>jekyll serve</code> and Jekyll
+will swap in whatever you’ve passed along, ensuring all your links work as
+you’d expect in both environments.</p>
+
+<div class="note warning">
+  <h5>All page and post URLs contain leading slashes</h5>
+  <p>If you use the method described above, please remember
+  that the URLs for all posts and pages contain a leading slash. Therefore,
+  concatenating the site baseurl and the post/page url where
+  <code>site.baseurl = /</code> and <code>post.url = /2013/06/05/my-fun-post/</code> will
+  result in two leading slashes, which will break links. It is thus
+  suggested that prefixing with <code>site.baseurl</code> only be used when the
+  <code>baseurl</code> is something other than the default of <code>/</code>.</p>
 </div>
 
           
@@ -2486,12 +2504,6 @@ actively read the issues and will label it once they come across it.</li>
 
 
 
-
-  
-  
-
-  
-  
 
   
   
@@ -2581,14 +2593,14 @@ actively read the issues and will label it once they come across it.</li>
           
             
             
-            <a href="/docs/upgrading/2-to-3/" class="prev">Back</a>
+            <a href="/docs/resources/" class="prev">Back</a>
           
       </div>
       <div class="right align-left">
           
             
             
-            <a href="/docs/history/" class="next">Next</a>
+            <a href="/docs/upgrading/2-to-3/" class="next">Next</a>
           
       </div>
     </div>
@@ -2858,7 +2870,7 @@ actively read the issues and will label it once they come across it.</li>
   
 
   
-  <li class=""><a href="http://jekyllrb.com/docs/upgrading/0-to-2/">Upgrading from 0.x to 2.x</a></li>
+  <li class="current"><a href="http://jekyllrb.com/docs/upgrading/0-to-2/">Upgrading from 0.x to 2.x</a></li>
 
 
   
@@ -2882,7 +2894,7 @@ actively read the issues and will label it once they come across it.</li>
   
 
   
-  <li class="current"><a href="http://jekyllrb.com/docs/contributing/">Contributing</a></li>
+  <li class=""><a href="http://jekyllrb.com/docs/contributing/">Contributing</a></li>
 
 
   
