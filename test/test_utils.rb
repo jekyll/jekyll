@@ -212,6 +212,11 @@ class TestUtils < JekyllUnitTest
       assert_equal Dir.glob(dir + "/*", File::FNM_DOTMATCH),
                    Utils.safe_glob(dir, "*", File::FNM_DOTMATCH)
     end
+
+    should "support pattern as an array to support windows" do
+      dir = "test"
+      assert_equal Dir.glob(dir + "/**/*"), Utils.safe_glob(dir, ["**", "*"])
+    end
   end
 
 end
