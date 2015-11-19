@@ -780,6 +780,8 @@ LESS.js files during generation.
 - [Jekyll Thumbnail Filter](https://github.com/matallo/jekyll-thumbnail-filter): Related posts thumbnail filter.
 - [Jekyll-Smartify](https://github.com/pathawks/jekyll-smartify): SmartyPants filter. Make &quot;quotes&quot; &ldquo;curly&rdquo;
 - [liquid-md5](https://github.com/pathawks/liquid-md5): Returns an MD5 hash. Helpful for generating Gravatars in templates.
+- [jekyll-roman](https://github.com/paulrobertlloyd/jekyll-roman): A liquid filter for Jekyll that converts numbers into Roman numerals.
+- [jekyll-typogrify](https://github.com/myles/jekyll-typogrify): A Jekyll plugin that brings the functions of [typogruby](http://avdgaag.github.io/typogruby/).
 
 #### Tags
 
@@ -836,7 +838,7 @@ LESS.js files during generation.
 - [jekyll-asciinema](https://github.com/mnuessler/jekyll-asciinema): A tag for embedding asciicasts recorded with [asciinema](https://asciinema.org) in your Jekyll pages.
 - [Jekyll-Youtube](https://github.com/dommmel/jekyll-youtube)  A Liquid tag that embeds Youtube videos. The default emded markup is responsive but you can also specify your own by using an include/partial.
 - [Jekyll Flickr Plugin](https://github.com/lawmurray/indii-jekyll-flickr) by [Lawrence Murray](http://www.indii.org): Embeds Flickr photosets (albums) as a gallery of thumbnails, with lightbox links to larger images.
-
+- [jekyll-figure](https://github.com/paulrobertlloyd/jekyll-figure): A liquid tag for Jekyll that generates `<figure>` elements.
 
 #### Collections
 
