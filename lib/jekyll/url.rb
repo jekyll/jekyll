@@ -73,10 +73,8 @@ module Jekyll
     # Returns a sanitized String URL
     def sanitize_url(in_url)
       url = in_url \
-        # Remove all double slashes
-        .gsub(/\/\//, '/') \
-        # Remove every URL segment that consists solely of dots
-        .split('/').reject{ |part| part =~ /^\.+$/ }.join('/') \
+        # Remove empty URL segments and every URL segment that consists solely of dots
+        .split('/').reject{ |s| s.empty? || s =~ /^\.+$/ }.join('/') \
         # Always add a leading slash
         .gsub(/\A([^\/])/, '/\1')
 
