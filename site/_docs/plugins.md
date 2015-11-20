@@ -31,7 +31,7 @@ Jekyll generates your site.
 2. In your `_config.yml` file, add a new array with the key `gems` and the
 values of the gem names of the plugins you'd like to use. An example:
 
-{% highlight text %}
+{% highlight yaml %}
 gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
 # This will require each of these gems automatically.
 {% endhighlight %}
