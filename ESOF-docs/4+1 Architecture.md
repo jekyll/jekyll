@@ -30,7 +30,7 @@ The Logical View is the one about the structure, packaging and classes of the so
 
 Jekyll divides itself in 4 main packages: **Conversion**, **Commands**, **Rendering** and **Content**. 
 
-The **Conversion** package contains the **Parser** class (with all the parsing methods needed from [*Kramdown*](http://kramdown.gettalong.org/), [*Maruku*](https://github.com/bhollis/maruku), [*Red Carpet*](https://github.com/vmg/redcarpet), [RDiscount](https://github.com/davidfstr/rdiscount) to plugin parser. These are mainly different 
+The **Conversion** package contains the **Parser** class (with all the parsing methods needed from [*Kramdown*](http://kramdown.gettalong.org/), [*Maruku*](https://github.com/bhollis/maruku), [*Red Carpet*](https://github.com/vmg/redcarpet), [*RDiscount*](https://github.com/davidfstr/rdiscount) to plugin parser. These are mainly different 
 *Mardown* parsers) aswell as the **Format** class ([*Mardown*](https://help.github.com/articles/markdown-basics/), [*Latex*](https://www.latex-project.org/) and some other formats that you files may include).
 
 The **Commands** package is responsible for understanding your parsing commands, which are converted by the previous package.
