@@ -13,6 +13,7 @@
 
   * Add three plugins to directory (#4163)
   * Add upgrading docs from 2.x to 3.x (#4157)
+  * Add protect_email to the plugins index. (#4169)
 
 ## 3.0.1 / 2015-11-17
 
