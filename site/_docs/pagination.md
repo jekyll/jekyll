@@ -5,9 +5,11 @@ permalink: /docs/pagination/
 ---
 
 With many websites—especially blogs—it’s very common to break the main listing
-of posts up into smaller lists and display them over multiple pages. Jekyll has
-pagination built-in, so you can automatically generate the appropriate files
-and folders you need for paginated listings.
+of posts up into smaller lists and display them over multiple pages. However, 
+Jekyll has decided to remove the built-in pagination, so you have to search for
+a hopefully better maintained third-party plugin.
+
+The rest of this page is still valid for Jekyll 2.
 
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
