@@ -3,6 +3,7 @@
 ### Minor Enhancements
 
   * Cache parsed include file to save liquid parsing time. (#4120)
+  * Slightly speed up url sanitization and handle multiples of ///. (#4168)
 
 ### Development Fixes
 
