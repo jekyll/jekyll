@@ -70,20 +70,11 @@ module Jekyll
       end
     end
 
-    # Returns a sanitized String URL
-    def sanitize_url(in_url)
-      url = in_url \
-        # Remove all double slashes
-        .gsub(/\/\//, '/') \
-        # Remove every URL segment that consists solely of dots
-        .split('/').reject{ |part| part =~ /^\.+$/ }.join('/') \
-        # Always add a leading slash
-        .gsub(/\A([^\/])/, '/\1')
+    # Returns a sanitized String URL, stripping "../../" and multiples of "/",
+    # as well as the beginning "/" so we can enforce and ensure it.
 
-      # Append a trailing slash to the URL if the unsanitized URL had one
-      url << "/" if in_url.end_with?("/")
-
-      url
+    def sanitize_url(str)
+      "/" + str.gsub(/\/{2,}/, "/").gsub(%r!\.+\/|\A/+!, "")
     end
 
     # Escapes a path to be a valid URL path segment
