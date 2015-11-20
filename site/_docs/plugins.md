@@ -782,6 +782,7 @@ LESS.js files during generation.
 - [liquid-md5](https://github.com/pathawks/liquid-md5): Returns an MD5 hash. Helpful for generating Gravatars in templates.
 - [jekyll-roman](https://github.com/paulrobertlloyd/jekyll-roman): A liquid filter for Jekyll that converts numbers into Roman numerals.
 - [jekyll-typogrify](https://github.com/myles/jekyll-typogrify): A Jekyll plugin that brings the functions of [typogruby](http://avdgaag.github.io/typogruby/).
+- [Jekyll Email Protect](https://github.com/vwochnik/jekyll-email-protect): Email protection liquid filter for Jekyll
 
 #### Tags
 
