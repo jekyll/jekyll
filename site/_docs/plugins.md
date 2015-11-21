@@ -49,8 +49,7 @@ Then install your plugins using `gem install jekyll-test-plugin jekyll-jsonify j
 {% endhighlight %}
 
 
-Now you need to install all plugins from your Bundler group by running single
-command `bundle install`.
+Install the plugins from your Bundler group using `bundle install`.
 
 <div class="note info">
   <h5>
