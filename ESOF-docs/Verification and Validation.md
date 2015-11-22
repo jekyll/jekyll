@@ -54,5 +54,28 @@ This is just an example of the analisys of a Jekyll branch. As you can see. The 
 This way, Jekyll's tests are certain to retrieve useful and useable information about it's features.
 
 
+###Isolateability
 
-[![Coverage Status](https://coveralls.io/repos/jekyll/jekyll/badge.svg?branch=ruby-2-1&service=github)](https://coveralls.io/github/jekyll/jekyll?branch=ruby-2-1)
+**Isolateability** is pretty much if your test cases isn't depending on some external dependency to the portion of code is currently testing.
+
+
+###Separation of concerns
+
+Since Jekyll is a truly big project, it is really important that it is well structured and each feature is separeted so that the so called spaghetti code smell doesn't happen. 
+
+Jekyll separates its code in 5 different layers:
+
+1. **Presentation Layer**: provides the final user experience.
+2. **Application Layer**: controls the data and provides services to various components in the system.
+3. **Utility Layer**: is used by every other layer and contains all shared services.
+4. **Domain Layer**: contains all the program’s logic, such as Draft, Layouts and Plugins.
+5. **Data Access Layer**: provides all the raw data. In this case folders from the disk.
+
+There are some dependencies between the layers as showed below:
+
+![Module Organization](./Resources/moduleOrganization.png)
+
+
+
+
+
