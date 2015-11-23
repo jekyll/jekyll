@@ -2670,16 +2670,16 @@ such as using variables.</p>
 
 <h3 id="code-snippet-highlighting">Code snippet highlighting</h3>
 
-<p>Jekyll has built in support for syntax highlighting of <a href="http://pygments.org/languages/">over 100
-languages</a> thanks to
-<a href="http://pygments.org/">Pygments</a>. To use Pygments, you must have Python installed
-on your system and set <code>highlighter</code> to <code>pygments</code> in your site’s configuration
-file.</p>
+<p>Jekyll has built in support for syntax highlighting of over 60 languages
+thanks to <a href="http://rouge.jneen.net">Rouge</a>. Rouge is the default highlighter
+in Jekyll 3 and above. To use it in Jekyll 2, set <code>highlighter</code> to <code>rouge</code>
+and ensure the <code>rouge</code> gem is installed properly.</p>
 
-<p>Alternatively, you can use <a href="https://github.com/jayferd/rouge">Rouge</a> to highlight
-your code snippets. It doesn’t support as many languages as Pygments, however it
-should suit most use cases. Also, since <a href="https://github.com/jayferd/rouge">Rouge</a>
-is written in pure Ruby, you don’t need Python on your system!</p>
+<p>Alternatively, you can use <a href="http://pygments.org">Pygments</a> to highlight
+your code snippets. To use Pygments, you must have Python installed on your
+system, have the <code>pygments.rb</code> gem installed and set <code>highlighter</code> to
+<code>pygments</code> in your site’s configuration file. Pygments supports <a href="http://pygments.org/languages/">over 100
+languages</a></p>
 
 <p>To render a code block with syntax highlighting, surround your code as follows:</p>
 
@@ -2691,9 +2691,9 @@ end
 
 <p>The argument to the <code>highlight</code> tag (<code>ruby</code> in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
-you want to highlight, look for the “short name” on the <a href="http://pygments.org/docs/lexers/">Pygments’ Lexers
-page</a> or the <a href="https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers">Rouge
-wiki</a>.</p>
+you want to highlight, look for the “short name” on the <a href="https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers">Rouge
+wiki</a>
+or the <a href="http://pygments.org/docs/lexers/">Pygments’ Lexers page</a>.</p>
 
 <h4 id="line-numbers">Line numbers</h4>
 
@@ -2747,7 +2747,8 @@ with public or secret gists:</p>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">{% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}</code></pre></figure>
 
-<p>To use the <code>gist</code> tag, you’ll need to add the <a href="https://github.com/jekyll/jekyll-gist">jekyll-gist</a> gem to your project.</p>
+<p>To use the <code>gist</code> tag, you’ll need to add the
+<a href="https://github.com/jekyll/jekyll-gist">jekyll-gist</a> gem to your project.</p>
 
           
 
