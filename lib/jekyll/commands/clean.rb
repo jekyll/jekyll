@@ -10,8 +10,8 @@ module Jekyll
 
             add_build_options(c)
 
-            c.action do |args, _|
-              Jekyll::Commands::Clean.process({})
+            c.action do |args, options|
+              Jekyll::Commands::Clean.process(options)
             end
           end
         end
