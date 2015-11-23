@@ -317,16 +317,16 @@ such as using variables.
 
 ### Code snippet highlighting
 
-Jekyll has built in support for syntax highlighting of [over 100
-languages](http://pygments.org/languages/) thanks to
-[Pygments](http://pygments.org/). To use Pygments, you must have Python installed
-on your system and set `highlighter` to `pygments` in your site's configuration
-file.
+Jekyll has built in support for syntax highlighting of over 60 languages
+thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
+in Jekyll 3 and above. To use it in Jekyll 2, set `highlighter` to `rouge`
+and ensure the `rouge` gem is installed properly.
 
-Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to highlight
-your code snippets. It doesn't support as many languages as Pygments, however it
-should suit most use cases. Also, since [Rouge](https://github.com/jayferd/rouge)
-is written in pure Ruby, you don't need Python on your system!
+Alternatively, you can use [Pygments](http://pygments.org) to highlight
+your code snippets. To use Pygments, you must have Python installed on your
+system, have the `pygments.rb` gem installed and set `highlighter` to
+`pygments` in your site's configuration file. Pygments supports [over 100
+languages](http://pygments.org/languages/)
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -342,9 +342,9 @@ end
 
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
-you want to highlight, look for the “short name” on the [Pygments' Lexers
-page](http://pygments.org/docs/lexers/) or the [Rouge
-wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers).
+you want to highlight, look for the “short name” on the [Rouge
+wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers)
+or the [Pygments' Lexers page](http://pygments.org/docs/lexers/).
 
 #### Line numbers
 
@@ -422,4 +422,5 @@ You may also optionally specify the filename in the gist to display:
 {% endraw %}
 {% endhighlight %}
 
-To use the `gist` tag, you'll need to add the [jekyll-gist](https://github.com/jekyll/jekyll-gist) gem to your project. 
+To use the `gist` tag, you'll need to add the
+[jekyll-gist](https://github.com/jekyll/jekyll-gist) gem to your project.
