@@ -9,6 +9,7 @@ module Jekyll
       #
       # <quoted list> is a space-separated list of numbers
       SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$/
+      END_HIGHLIGHT = /\A(.*){%\s*endhighlight\s*(.*)?%}\z/
 
       def initialize(tag_name, markup, tokens)
         super
@@ -37,6 +38,17 @@ Syntax Error in tag 'highlight' while parsing the following markup:
 Valid syntax: highlight <lang> [linenos]
 eos
         end
+      end
+
+      def parse(tokens)
+        if @lang == 'raw'
+          end_pos = tokens.rindex{|x| x =~ END_HIGHLIGHT }
+          unless end_pos.nil?
+            tokens.insert(0, "{% raw %}")
+            tokens.insert(end_pos+1, "{% endraw %}")
+          end
+        end
+        super
       end
 
       def render(context)
@@ -79,7 +91,7 @@ eos
 
         highlighted_code = Pygments.highlight(
           code,
-          :lexer   => @lang,
+          :lexer   => highlight_lang,
           :options => sanitized_opts(@options, is_safe)
         )
 
@@ -100,7 +112,7 @@ eos
       def render_rouge(code)
         Jekyll::External.require_with_graceful_fail('rouge')
         formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
-        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        lexer = Rouge::Lexer.find_fancy(highlight_lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
 
@@ -110,10 +122,16 @@ eos
 
       def add_code_tag(code)
         code_attributes = [
-          "class=\"language-#{@lang.to_s.gsub('+', '-')}\"",
-          "data-lang=\"#{@lang.to_s}\""
+          "class=\"language-#{highlight_lang.to_s.gsub('+', '-')}\"",
+          "data-lang=\"#{highlight_lang.to_s}\""
         ].join(" ")
         "<figure class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></figure>"
+      end
+
+      private
+
+      def highlight_lang
+        @lang == 'raw' ? 'text' : @lang
       end
 
     end
