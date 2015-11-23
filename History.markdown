@@ -5,6 +5,10 @@
   * Cache parsed include file to save liquid parsing time. (#4120)
   * Slightly speed up url sanitization and handle multiples of ///. (#4168)
 
+### Bug Fixes
+
+  * Pass build options into `clean` command (#4177)
+
 ### Development Fixes
 
   * `jekyll-docs` should be easily release-able (#4152)
