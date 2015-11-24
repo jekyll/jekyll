@@ -4,6 +4,7 @@
 
   * Cache parsed include file to save liquid parsing time. (#4120)
   * Slightly speed up url sanitization and handle multiples of ///. (#4168)
+  * Print debug message when a document is skipped from reading (#4180)
 
 ### Bug Fixes
 
