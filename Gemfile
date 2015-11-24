@@ -43,7 +43,7 @@ gem 'jekyll-paginate', '~> 1.0'
 gem 'jekyll-coffeescript', '~> 1.0'
 gem 'jekyll-feed'
 gem 'jekyll-gist', '~> 1.0'
-gem 'mime-types', '~> 2.6'
+gem 'mime-types', '~> 3.0'
 gem 'kramdown', '~> 1.9'
 
 platform :ruby, :mswin, :mingw do
