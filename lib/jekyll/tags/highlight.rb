@@ -14,7 +14,7 @@ module Jekyll
         super
         if markup.strip =~ SYNTAX
           @lang = $1.downcase
-          @options = {}
+          @highlight_options = {}
           if defined?($2) && $2 != ''
             # Split along 3 possible forms -- key="<quoted list>", key=value, or key
             $2.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
@@ -24,10 +24,10 @@ module Jekyll
                   value.gsub!(/"/, "")
                   value = value.split
               end
-              @options[key.to_sym] = value || true
+              @highlight_options[key.to_sym] = value || true
             end
           end
-          @options[:linenos] = "inline" if @options.key?(:linenos) and @options[:linenos] == true
+          @highlight_options[:linenos] = "inline" if @highlight_options.key?(:linenos) and @highlight_options[:linenos] == true
         else
           raise SyntaxError.new <<-eos
 Syntax Error in tag 'highlight' while parsing the following markup:
@@ -80,7 +80,7 @@ eos
         highlighted_code = Pygments.highlight(
           code,
           :lexer   => @lang,
-          :options => sanitized_opts(@options, is_safe)
+          :options => sanitized_opts(@highlight_options, is_safe)
         )
 
         if highlighted_code.nil?
@@ -99,7 +99,7 @@ eos
 
       def render_rouge(code)
         Jekyll::External.require_with_graceful_fail('rouge')
-        formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
+        formatter = Rouge::Formatters::HTML.new(line_numbers: @highlight_options[:linenos], wrap: false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
