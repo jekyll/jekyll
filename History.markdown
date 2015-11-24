@@ -18,6 +18,7 @@
   * Add three plugins to directory (#4163)
   * Add upgrading docs from 2.x to 3.x (#4157)
   * Add protect_email to the plugins index. (#4169)
+  * Add `jekyll-deploy` to list of third-party plugins (#4179)
 
 ## 3.0.1 / 2015-11-17
 
