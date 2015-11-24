@@ -30,6 +30,7 @@
   * Align hooks implementation with documentation (#4104)
   * Fix the deprecation warning in the doctor command (#4114)
   * Fix case in `:title` and add `:slug` which is downcased (#4100)
+  * Rename @options so that it does not impact Liquid. (#4173)
 
 ### Development Fixes
 
