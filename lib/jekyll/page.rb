@@ -16,6 +16,15 @@ module Jekyll
       url
     ]
 
+    # A set of extensions that are considered HTML or HTML-like so we
+    # should not alter them,  this includes .xhtml through XHTM5.
+
+    HTML_EXTENSIONS = %W(
+      .html
+      .xhtml
+      .htm
+    )
+
     # Initialize a new Page.
     #
     # site - The Site object.
@@ -135,8 +144,8 @@ module Jekyll
     # Returns the destination file path String.
     def destination(dest)
       path = site.in_dest_dir(dest, URL.unescape_path(url))
-      path = File.join(path, "index.html") if url.end_with?("/")
-      path << output_ext unless path.end_with?(output_ext)
+      path = File.join(path, "index") if url.end_with?("/")
+      path <<  output_ext unless path.end_with?(output_ext)
       path
     end
 
@@ -147,7 +156,7 @@ module Jekyll
 
     # Returns the Boolean of whether this Page is HTML or not.
     def html?
-      output_ext == '.html'
+      HTML_EXTENSIONS.include?(output_ext)
     end
 
     # Returns the Boolean of whether this Page is an index file or not.
