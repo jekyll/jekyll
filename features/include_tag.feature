@@ -15,7 +15,7 @@ Feature: Include tags
       | Ignore params if unused             | 2013-03-21 | html | {% include ignore.html date="today" %}                                                                                  |
       | List multiple parameters            | 2013-03-21 | html | {% include params.html date="today" start="tomorrow" %}                                                                 |
       | Dont keep parameters                | 2013-03-21 | html | {% include ignore.html param="test" %}\n{% include header.html %}                                                       |
-      | Allow params with spaces and quotes | 2013-04-07 | html | {% include params.html cool="param with spaces" super="\"quoted\"" single='has "quotes"' escaped='\'single\' quotes' %} |
+      | Allow params with spaces and quotes | 2013-04-07 | html | {% include params.html cool="param with spaces" super="\\"quoted\\"" single='has "quotes"' escaped='\\'single\\' quotes' %} |
       | Parameter syntax                    | 2013-04-12 | html | {% include params.html param1_or_2="value" %}                                                                           |
       | Pass a variable                     | 2013-06-22 | html | {% assign var = 'some text' %}{% include params.html local=var title=page.title %}                                    |
     When I run jekyll build
