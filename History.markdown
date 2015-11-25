@@ -9,6 +9,7 @@
 ### Bug Fixes
 
   * Pass build options into `clean` command (#4177)
+  * Allow users to use .htm and .xhtml (XHTML5.) (#4160)
 
 ### Development Fixes
 
