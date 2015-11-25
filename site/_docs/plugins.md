@@ -31,22 +31,25 @@ Jekyll generates your site.
 2. In your `_config.yml` file, add a new array with the key `gems` and the
 values of the gem names of the plugins you'd like to use. An example:
 
+{% highlight yaml %}
+gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
+# This will require each of these gems automatically.
+{% endhighlight %}
 
-        gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
-        # This will require each of these gems automatically.
 
-    Then install your plugins using `gem install jekyll-test-plugin jekyll-jsonify jekyll-assets`
+Then install your plugins using `gem install jekyll-test-plugin jekyll-jsonify jekyll-assets`
 
-3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
-    example:
+3. Add the relevant plugins to a Bundler group in your `Gemfile`. For example:
 
-        group :jekyll_plugins do
-          gem "my-jekyll-plugin"
-          gem "another-jekyll-plugin"
-        end
+{% highlight ruby %}
+  group :jekyll_plugins do
+    gem "my-jekyll-plugin"
+    gem "another-jekyll-plugin"
+  end
+{% endhighlight %}
 
-    Now you need to install all plugins from your Bundler group by running single command `bundle install`
 
+Install the plugins from your Bundler group using `bundle install`.
 
 <div class="note info">
   <h5>
