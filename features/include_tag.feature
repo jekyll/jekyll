@@ -89,3 +89,11 @@ Feature: Include tags
     Then I have an "_includes/one.html" file that contains "include content changed"
     When I run jekyll build
     Then I should see "include content changed" in "_site/index.html"
+
+  Scenario: Include a file with multiple variables
+    Given I have an _includes directory
+    And I have an "_includes/header-en.html" file that contains "include"
+    And I have an "index.html" page that contains "{% assign name = 'header' %}{% assign locale = 'en' %}{% include {{name}}-{{locale}}.html %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "include" in "_site/index.html"
