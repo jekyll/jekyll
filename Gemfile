@@ -12,7 +12,7 @@ end
 group :test do
   gem 'redgreen', '~> 1.2'
   gem 'shoulda', '~> 3.5'
-  gem 'cucumber', '~> 2.0', '< 2.1'
+  gem 'cucumber', '~> 2.1'
   gem 'simplecov', '~> 0.9'
   gem 'jekyll_test_plugin'
   gem 'jekyll_test_plugin_malicious'
