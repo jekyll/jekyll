@@ -30,7 +30,7 @@ module Jekyll
       set
     end
 
-    def parse_quoted_date(set)
+    def ensure_time!(set)
       return set unless set.key?('values') && set['values'].key?('date')
       return set if set['values']['date'].is_a?(Time)
       set['values']['date'] = Utils.parse_date(set['values']['date'], "Front matter defaults does not have a valid date.")
@@ -166,7 +166,7 @@ module Jekyll
 
       sets.map do |set|
         if valid?(set)
-          parse_quoted_date(update_deprecated_types(set))
+          ensure_time!(update_deprecated_types(set))
         else
           Jekyll.logger.warn "Defaults:", "An invalid front-matter default set was found:"
           Jekyll.logger.warn "#{set}"
