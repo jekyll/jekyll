@@ -14,6 +14,7 @@
 ### Development Fixes
 
   * `jekyll-docs` should be easily release-able (#4152)
+  * Allow use of Cucumber 2.1 or greater (#4181)
 
 ### Site Enhancements
 
