@@ -1,0 +1,62 @@
+# https://www.appveyor.com/docs/appveyor-yml
+
+version: "{build}"
+
+clone_depth: 10
+
+branches:
+  only:
+    - master
+    - themes
+
+build: off
+
+install:
+  - SET PATH=C:\Ruby%ruby_folder_version%\bin;%PATH%
+  - bundle install --retry 5
+
+environment:
+  BUNDLE_WITHOUT: "benchmark:site:development"
+  matrix:
+    - ruby_folder_version: "23"
+      ruby_gems_folder: "2.3.0"
+      TEST_SUITE: "test"
+    - ruby_folder_version: "23"
+      ruby_gems_folder: "2.3.0"
+      TEST_SUITE: "cucumber"
+    - ruby_folder_version: "23"
+      ruby_gems_folder: "2.3.0"
+      TEST_SUITE: "fmt"
+    - ruby_folder_version: "23-x64"
+      ruby_gems_folder: "2.3.0"
+      TEST_SUITE: "cucumber"
+    - ruby_folder_version: "23-x64"
+      ruby_gems_folder: "2.3.0"
+      TEST_SUITE: "test"
+    - ruby_folder_version: "22"
+      ruby_gems_folder: "2.2.0"
+      TEST_SUITE: "test"
+    - ruby_folder_version: "22"
+      ruby_gems_folder: "2.2.0"
+      TEST_SUITE: "cucumber"
+    - ruby_folder_version: "21"
+      ruby_gems_folder: "2.1.0"
+      TEST_SUITE: "test"
+    - ruby_folder_version: "21"
+      ruby_gems_folder: "2.1.0"
+      TEST_SUITE: "cucumber"
+    - ruby_folder_version: "200"
+      ruby_gems_folder: "2.0.0"
+
+test_script:
+  - ruby --version
+  - gem --version
+  - bundler --version
+  - bash ./script/cibuild
+
+matrix:
+  fast_finish: true
+
+cache:
+  - C:\Ruby%ruby_folder_version%\bin -> Gemfile,jekyll.gemspec
+  - C:\Ruby%ruby_folder_version%\lib\ruby\gems\%ruby_gems_folder% -> Gemfile,jekyll.gemspec
