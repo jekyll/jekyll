@@ -8,7 +8,7 @@ module Jekyll
     attr_accessor :content, :output
 
     YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-    DATELESS_FILENAME_MATCHER = /^(.*)(\.[^.]+)$/
+    DATELESS_FILENAME_MATCHER = /^(.+\/)*(.*)(\.[^.]+)$/
     DATE_FILENAME_MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
     # Create a new Document.
@@ -299,6 +299,9 @@ module Jekyll
         if data['date'].nil? || data['date'].to_i == site.time.to_i
           merge_data!({"date" => date}, source: "filename")
         end
+      elsif DATELESS_FILENAME_MATCHER =~ relative_path
+        m, cats, slug, ext = *relative_path.match(DATELESS_FILENAME_MATCHER)
+        data['title'] ||= slug.split('-').select {|w| w.capitalize! || w }.join(' ')
       end
       populate_categories
       populate_tags
