@@ -7,7 +7,7 @@ module Jekyll
     attr_reader :path, :site, :extname, :output_ext, :content, :output, :collection
 
     YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-    DATELESS_FILENAME_MATCHER = /^(.*)(\.[^.]+)$/
+    DATELESS_FILENAME_MATCHER = /^(.+\/)*(.*)(\.[^.]+)$/
     DATE_FILENAME_MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
     # Create a new Document.
@@ -313,6 +313,9 @@ module Jekyll
           "ext"  => ext
         })
         merge_data!({"date" => date}) if data['date'].nil? || data['date'].to_i == site.time.to_i
+        data['title'] ||= slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+      elsif DATELESS_FILENAME_MATCHER =~ relative_path
+        m, cats, slug, ext = *relative_path.match(DATELESS_FILENAME_MATCHER)
         data['title'] ||= slug.split('-').select {|w| w.capitalize! || w }.join(' ')
       end
       populate_categories
