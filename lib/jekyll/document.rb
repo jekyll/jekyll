@@ -286,24 +286,21 @@ module Jekyll
     end
 
     def post_read
-      if DATE_FILENAME_MATCHER =~ relative_path
-        _, _, date, slug, ext = *relative_path.match(DATE_FILENAME_MATCHER)
-        merge_data!({
-          "slug" => slug,
-          "ext"  => ext
-        })
-        merge_data!({ "date" => date }) if data['date'].nil? || data['date'].to_i == site.time.to_i
-        data['title'] ||= slug.split('-').select(&:capitalize).join(' ')
+      if relative_path =~ DATE_FILENAME_MATCHER
+        cats, date, slug, ext = $1, $2, $3, $4
+        merge_data!("date" => date) if !data['date'] || data['date'].to_i == site.time.to_i
       elsif DATELESS_FILENAME_MATCHER =~ relative_path
-        m, cats, slug, ext = *relative_path.match(DATELESS_FILENAME_MATCHER)
-        data['title'] ||= slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+        cats, slug, ext = $1, $2, $3
       end
+      
+      merge_data!("slug" => slug, "ext" => ext)
+      
+      # Try to ensure the user gets a title.
+      data["title"] ||= Utils.titleize_slug(slug)
+      
       populate_categories
       populate_tags
-
-      if generate_excerpt?
-        data['excerpt'] ||= Jekyll::Excerpt.new(self)
-      end
+      generate_excerpt
     end
 
     # Add superdirectories of the special_dir to categories.
@@ -438,6 +435,13 @@ module Jekyll
         data[method.to_s]
       else
         super
+      end
+    end
+    
+    private # :nodoc:
+    def generate_excerpt
+      if generate_excerpt?
+        data["excerpt"] ||= Jekyll::Excerpt.new(self)
       end
     end
   end
