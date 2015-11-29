@@ -25,6 +25,7 @@
   * Add protect_email to the plugins index. (#4169)
   * Add `jekyll-deploy` to list of third-party plugins (#4179)
   * Clarify plugin docs (#4154)
+  * Add Kickster to deployment methods in documentation (#4190)
 
 ## 3.0.1 / 2015-11-17
 
