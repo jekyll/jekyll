@@ -6,6 +6,7 @@
   * Slightly speed up url sanitization and handle multiples of ///. (#4168)
   * Print debug message when a document is skipped from reading (#4180)
   * Include tag should accept multiple variables in the include name (#4183)
+  * Add `-o` option to serve command which opens server URL (#4144)
 
 ### Bug Fixes
 
