@@ -190,3 +190,11 @@ for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
   <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages/">host your Jekyll-powered website for free</a>.</p>
 </div>
+
+## Kickster
+
+Use [Kickster](http://kickster.nielsenramon.com/) for easy (automated) deploys to Github Pages when using unsupported plugins on Github Pages.
+
+Kickster provides a basic Jekyll project setup packed with web best practises and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
+
+Setting up Kickster is very easy, just install the gem and you are good to go. More documentation can here found [here](https://github.com/nielsenramon/kickster#kickster). If you do not want to use the gem or start a new project you can just copy paste the deployment scripts for [Travis CI](https://github.com/nielsenramon/kickster/tree/master/snippets/travis) or [Circle CI](https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci).
