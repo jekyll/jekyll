@@ -46,24 +46,16 @@ module Jekyll
             file_handler_options
           )
 
+
           server_address_str = server_address(s, options)
           Jekyll.logger.info "Server address:", server_address_str
 
-          begin
-            command_name = ""
-
-            if Utils::Platforms.windows?
-              command_name = "start"
-            elsif Utils::Platforms.osx?
-              command_name = "open"
-            elsif Utils::Platforms.linux?
-              command_name = "xdg-open"
-            end
-
-            system("#{command_name} #{server_address_str}")
-          rescue
-            Jekyll.logger.info "Could not open URL, exception was thrown"
-          end if options['open_url']
+          if options["open_url"]
+            command = Utils::Platforms.windows?? "start" : Utils::Platforms.osx?? \
+              "open" : "xdg-open"
+              
+            system command, server_address_str
+          end
 
           if options['detach'] # detach the server
             pid = Process.fork { s.start }
