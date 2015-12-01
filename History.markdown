@@ -14,6 +14,7 @@
   * Allow users to use .htm and .xhtml (XHTML5.) (#4160)
   * Prevent Shell Injection. (#4200)
   * Convertible should make layout data accessible via `layout` instead of `page` (#4205)
+  * Avoid using `Dir.glob` with absolute path to allow special characters in the path (#4150)
 
 ### Development Fixes
 
