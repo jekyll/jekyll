@@ -210,7 +210,13 @@ module Jekyll
 
       while layout
         Jekyll.logger.debug "Rendering Layout:", path
-        payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
+        payload = Utils.deep_merge_hashes(
+          payload,
+          {
+            "content" => output,
+            "layout"  => layout.data
+          }
+        )
 
         self.output = render_liquid(layout.content,
                                          payload,
