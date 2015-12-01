@@ -13,6 +13,7 @@
   * Pass build options into `clean` command (#4177)
   * Allow users to use .htm and .xhtml (XHTML5.) (#4160)
   * Prevent Shell Injection. (#4200)
+  * Convertible should make layout data accessible via `layout` instead of `page` (#4205)
 
 ### Development Fixes
 
