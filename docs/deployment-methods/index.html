@@ -2468,9 +2468,7 @@ host your site directly on a CDN or file host like S3.</p>
 
 <p><a href="https://wiki.gentoo.org/wiki/SSH#Passwordless_Authentication">This process is described in a lot of places in the net</a>. We will not cover it here. What is different from usual approach is to put the restriction to certificate-based authorization in <code>~/.ssh/authorized_keys</code>). We will launch <code>rrsync</code> utility and supply it with the folder it shall have read-write access to:</p>
 
-<p><code>
-command="$HOME/bin/rrsync &lt;folder&gt;",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa &lt;cert&gt;
-</code></p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">command</span><span class="o">=</span><span class="s2">&quot;$HOME/bin/rrsync &lt;folder&gt;&quot;</span>,no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa &lt;cert&gt;</code></pre></figure>
 
 <p><code>&lt;folder&gt;</code> is the path to your site. E.g., <code>~/public_html/you.org/blog-html/</code>.</p>
 
