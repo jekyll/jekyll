@@ -15,6 +15,8 @@ Julian Thilo has written up instructions to get
 The instructions were written for Ruby 2.0.0, but should work for later versions
 [prior to 2.2][hitimes-issue].
 
+Alternatively David Burela has written instructions on [how to install Jekyll via Chocolately with 3 command prompt entries](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/)
+
 ## Encoding
 
 If you use UTF-8 encoding, make sure that no `BOM` header
