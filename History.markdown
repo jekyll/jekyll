@@ -29,6 +29,7 @@
   * Add `jekyll-deploy` to list of third-party plugins (#4179)
   * Clarify plugin docs (#4154)
   * Add Kickster to deployment methods in documentation (#4190)
+  * Add DavidBurela's tutorial for Windows to Windows docs page (#4210)
 
 ## 3.0.1 / 2015-11-17
 
