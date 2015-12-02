@@ -25,11 +25,12 @@
 
   * Add three plugins to directory (#4163)
   * Add upgrading docs from 2.x to 3.x (#4157)
-  * Add protect_email to the plugins index. (#4169)
+  * Add `protect_email` to the plugins index. (#4169)
   * Add `jekyll-deploy` to list of third-party plugins (#4179)
   * Clarify plugin docs (#4154)
   * Add Kickster to deployment methods in documentation (#4190)
   * Add DavidBurela's tutorial for Windows to Windows docs page (#4210)
+  * Change GitHub code block to highlight tag to avoid it overlaps parent div (#4121)
 
 ## 3.0.1 / 2015-11-17
 
