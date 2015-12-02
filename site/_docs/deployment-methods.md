@@ -116,9 +116,9 @@ That's why rrsync wrapper shall be installed. If it is not already installed by 
 
 [This process is described in a lot of places in the net](https://wiki.gentoo.org/wiki/SSH#Passwordless_Authentication). We will not cover it here. What is different from usual approach is to put the restriction to certificate-based authorization in ```~/.ssh/authorized_keys```). We will launch ```rrsync``` utility and supply it with the folder it shall have read-write access to:
 
-```
+{% highlight bash %}
 command="$HOME/bin/rrsync <folder>",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa <cert>
-```
+{% endhighlight %}
 
 ```<folder>``` is the path to your site. E.g., ```~/public_html/you.org/blog-html/```.
 
