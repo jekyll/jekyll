@@ -168,7 +168,6 @@ class TestSite < JekyllUnitTest
       # files in symlinked directories may appear twice
       sorted_pages = %w(
         %#\ +.md
-        .htaccess
         about.html
         bar.html
         coffeescript.coffee

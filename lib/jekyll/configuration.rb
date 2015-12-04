@@ -17,7 +17,7 @@ module Jekyll
 
       # Handling Reading
       'safe'          => false,
-      'include'       => ['.htaccess'],
+      'include'       => [],
       'exclude'       => [],
       'keep_files'    => ['.git','.svn'],
       'encoding'      => 'utf-8',
