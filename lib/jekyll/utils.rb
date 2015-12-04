@@ -8,6 +8,10 @@ module Jekyll
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
 
+    def strip_heredoc(str)
+      str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
+    end
+
     # Non-destructive version of deep_merge_hashes! See that method.
     #
     # Returns the merged hashes.

@@ -11,13 +11,13 @@ unless ENV['TRAVIS']
   end
 end
 
+require "nokogiri"
 require 'rubygems'
 require 'ostruct'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/profile'
 require 'rspec/mocks'
-
 require 'jekyll'
 
 Jekyll.logger = Logger.new(StringIO.new)
@@ -51,15 +51,15 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def before_setup
-    ::RSpec::Mocks.setup
+    RSpec::Mocks.setup
     super
   end
 
   def after_teardown
     super
-    ::RSpec::Mocks.verify
+    RSpec::Mocks.verify
   ensure
-    ::RSpec::Mocks.teardown
+    RSpec::Mocks.teardown
   end
 
   def fixture_site(overrides = {})
@@ -120,4 +120,10 @@ class JekyllUnitTest < Minitest::Test
   end
   alias_method :capture_stdout, :capture_output
   alias_method :capture_stderr, :capture_output
+
+  def nokogiri_fragment(str)
+    Nokogiri::HTML.fragment(
+      str
+    )
+  end
 end
