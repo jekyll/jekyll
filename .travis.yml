@@ -8,6 +8,7 @@ rvm:
 - ruby-head
 - jruby-9.0.3.0
 matrix:
+  fast_finish: true
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-9.0.3.0
