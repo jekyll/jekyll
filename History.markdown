@@ -7,6 +7,7 @@
   * Print debug message when a document is skipped from reading (#4180)
   * Include tag should accept multiple variables in the include name (#4183)
   * Add `-o` option to serve command which opens server URL (#4144)
+  * Add CodeClimate platform for better code quality. (#4220)
 
 ### Bug Fixes
 
