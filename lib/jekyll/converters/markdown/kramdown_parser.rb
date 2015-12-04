@@ -6,12 +6,12 @@ module Jekyll
     class Markdown
       class KramdownParser
         CODERAY_DEFAULTS = {
-          "css" => "style",
-          "bold_every" => 10,
-          "line_numbers" => "inline",
+          "css"               => "style",
+          "bold_every"        => 10,
+          "line_numbers"      => "inline",
           "line_number_start" => 1,
-          "tab_width" => 4,
-          "wrap" => "div"
+          "tab_width"         => 4,
+          "wrap"              => "div"
         }
 
         def initialize(config)
@@ -47,7 +47,7 @@ module Jekyll
           @highlighter ||= begin
             if highlighter = @config["syntax_highlighter"] then highlighter
             elsif @config.key?("enable_coderay") && @config["enable_coderay"]
-              Jekyll.logger.warn "DEPRECATION: You are using 'enable_coderay', use syntax_highlighter: coderay."
+              Jekyll::Deprecator.deprecation_message "You are using 'enable_coderay', use syntax_highlighter: coderay in your configuration file."
               "coderay"
             else
               @main_fallback_highlighter
@@ -59,7 +59,7 @@ module Jekyll
         def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
             cleaned_key = key.gsub(/\Acoderay_/, "")
-            Jekyll.logger.warn "You are using '#{key}'.  Normalizing to #{cleaned_key}." if key != cleaned_key
+            Jekyll::Deprecator.deprecation_message "You are using '#{key}'. Normalizing to #{cleaned_key}." if key != cleaned_key
             hsh[cleaned_key] = val
           end
         end
@@ -71,7 +71,7 @@ module Jekyll
         private
         def modernize_coderay_config
           if highlighter == "coderay"
-            Jekyll.logger.warn "DEPRECATION: kramdown.coderay is deprecated use syntax_highlighter_opts."
+            Jekyll::Deprecator.deprecation_message "You are using 'kramdown.coderay' in your configuration, please use 'syntax_highlighter_opts' instead."
             @config["syntax_highlighter_opts"] = begin
               strip_coderay_prefix(
                 @config["syntax_highlighter_opts"] \

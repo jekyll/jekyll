@@ -20,7 +20,7 @@ group :test do
   gem 'minitest-profile'
   gem 'rspec-mocks'
   gem 'minitest'
-  gem "nokogiri"
+  gem 'nokogiri'
 
   if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
     gem 'test-unit'
