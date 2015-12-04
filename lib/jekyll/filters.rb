@@ -283,11 +283,11 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
-      sampling = input.sample(num)
-      if num == 1
-        sampling.first
+      n = num.to_i rescue 1
+      if n == 1
+        input.sample
       else
-        sampling
+        input.sample(n)
       end
     end
 
