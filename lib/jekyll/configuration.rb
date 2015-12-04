@@ -65,10 +65,12 @@ module Jekyll
 
       'kramdown' => {
         'auto_ids'       => true,
-        'footnote_nr'    => 1,
-        'entity_output'  => 'as_char',
         'toc_levels'     => '1..6',
-        'smart_quotes'   => 'lsquo,rsquo,ldquo,rdquo'
+        'entity_output'  => 'as_char',
+        'smart_quotes'   => 'lsquo,rsquo,ldquo,rdquo',
+        'input'          => "GFM",
+        'hard_wrap'      => false,
+        'footnote_nr'    => 1
       }
     }]
 
