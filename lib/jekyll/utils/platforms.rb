@@ -1,6 +1,7 @@
 module Jekyll
   module Utils
-    module Platforms extend self
+    module Platforms
+      extend self
 
       # Provides jruby? and mri? which respectively detect these two types of
       # tested Engines we support, in the future we might probably support the

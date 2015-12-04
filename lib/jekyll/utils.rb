@@ -1,6 +1,7 @@
 module Jekyll
   module Utils extend self
     autoload :Platforms, 'jekyll/utils/platforms'
+    autoload :Ansi, "jekyll/utils/ansi"
 
     # Constants for use in #slugify
     SLUGIFY_MODES = %w{raw default pretty}
