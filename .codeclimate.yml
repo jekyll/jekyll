@@ -1,0 +1,46 @@
+engines:
+  rubocop:
+    enabled: true
+    checks:
+      Rubocop/Style/SpaceInsideBrackets: { enabled: false }
+      Rubocop/Style/BracesAroundHashParameters: { enabled: false}
+      Rubocop/Style/EmptyLinesAroundAccessModifier: { enabled: false }
+      Rubocop/Style/EmptyLinesAroundModuleBody: { enabled: false }
+      Rubocop/Lint/FormatParameterMismatch: { enabled: false }
+      Rubocop/Lint/UselessAccessModifier:   { enabled: false }
+      Rubocop/Lint/AssignmentInCondition:   { enabled: false }
+      Rubocop/Style/SpaceAroundOperators:   { enabled: false }
+      Rubocop/Style/AlignParameters:        { enabled: false }
+      Rubocop/Style/SignalException:        { enabled: false }
+      Rubocop/Style/Documentation:          { enabled: false }
+      Rubocop/Style/DoubleNegation:         { enabled: false }
+      Rubocop/Style/UnneededCapitalW:       { enabled: false }
+      Rubocop/Style/IfUnlessModifier:       { enabled: false }
+      Rubocop/Style/RescueModifier:         { enabled: false }
+      Rubocop/Style/RegexpLiteral:          { enabled: false }
+      Rubocop/Style/GuardClause:            { enabled: false }
+      Rubocop/Style/FileName:               { enabled: false }
+  fixme:
+    enabled: false
+exclude_paths:
+- .rubocop.yml
+- .codeclimate.yml
+- .travis.yml
+- .gitignore
+- .rspec
+
+- Gemfile.lock
+- CHANGELOG.md
+- readme.md
+- README.md
+- Readme.md
+- ReadMe.md
+- COPYING
+- LICENSE
+
+- test/**/*
+- script/**/*
+- spec/**/*
+ratings:
+  paths:
+  - lib/**/*
