@@ -18,6 +18,9 @@ env:
   matrix:
     - TEST_SUITE=test
     - TEST_SUITE=cucumber
+branches:
+  only:
+    - master
 before_script: bundle update
 script: script/cibuild
 notifications:
