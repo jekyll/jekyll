@@ -246,6 +246,20 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Sample</strong></p>
+        <p>Pick a random value from an array. Optional: pick multiple values.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.pages | sample }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.pages | sample:2 }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
