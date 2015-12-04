@@ -397,7 +397,7 @@ class TestFilters < JekyllUnitTest
       should "allow sampling of multiple values (n > 1)" do
         input = %w(hey there bernie)
         @filter.sample(input, 2).each do |val|
-          assert_includes val, input
+          assert_includes input, val
         end
       end
     end

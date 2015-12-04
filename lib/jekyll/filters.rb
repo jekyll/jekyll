@@ -283,7 +283,12 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
-      input.sample(num)
+      sampling = input.sample(num)
+      if num == 1
+        sampling.first
+      else
+        sampling
+      end
     end
 
     # Convert an object into its String representation for debugging
