@@ -281,6 +281,16 @@ module Jekyll
       new_ary
     end
 
+    # Get a random value from an array
+    #
+    # array - the array to select from
+    #
+    # Returns a single item in the array
+    def random(array)
+      return array unless array.is_a?(Array)
+      array.sample(1)
+    end
+
     # Convert an object into its String representation for debugging
     #
     # input - The Object to be converted
