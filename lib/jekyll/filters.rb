@@ -281,9 +281,9 @@ module Jekyll
       new_ary
     end
 
-    def sample(input)
+    def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
-      input.sample(1)
+      input.sample(num)
     end
 
     # Convert an object into its String representation for debugging

@@ -393,6 +393,13 @@ class TestFilters < JekyllUnitTest
         input = %w(hey there bernie)
         assert_includes input, @filter.sample(input)
       end
+
+      should "allow sampling of multiple values (n > 1)" do
+        input = %w(hey there bernie)
+        @filter.sample(input, 2).each do |val|
+          assert_includes val, input
+        end
+      end
     end
 
   end
