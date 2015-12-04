@@ -281,6 +281,11 @@ module Jekyll
       new_ary
     end
 
+    def sample(input)
+      return input unless input.respond_to?(:sample)
+      input.sample(1)
+    end
+
     # Convert an object into its String representation for debugging
     #
     # input - The Object to be converted
