@@ -33,7 +33,7 @@ module Jekyll
     def ensure_time!(set)
       return set unless set.key?('values') && set['values'].key?('date')
       return set if set['values']['date'].is_a?(Time)
-      set['values']['date'] = Utils.parse_date(set['values']['date'], "Front matter defaults does not have a valid date.")
+      set['values']['date'] = Utils.parse_date(set['values']['date'], "An invalid date format was found in a front-matter default set: #{set}")
       set
     end
 
