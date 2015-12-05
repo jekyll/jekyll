@@ -18,24 +18,26 @@ module Jekyll
           return super
         end
 
-        # ---------------------------------------------------------------------
         # file > file/index.html > file.html > directory -> Having a directory
-        # with the same name as a file will result in the file being served the
-        # way that Nginx behaves (probably not exactly...) For browsing.
-        # ---------------------------------------------------------------------
+        # with the same name as a file will result in the file being served the way
+        # that Nginx behaves (probably not exactly...) For browsing.
 
         def search_file(req, res, basename)
-          return file if (file = super) || (file = super req, res, "#{basename}.html")
+          file = super || super(req, res, "#{basename}.html")
 
+          return file if file
           file = "#{req.path.gsub(/\/\Z/, "")}.html"
           if file && File.file?(File.join(@config[:DocumentRoot], file))
             return ".html"
           end
-        nil
+
+          nil
         end
 
         def extract_headers(opts)
-          @headers = add_defaults(opts.fetch("webrick", {}).fetch("headers", {}))
+          @headers = add_defaults(opts.fetch("webrick", {}).fetch("headers", {
+            # Nothing.
+          }))
         end
 
         def add_defaults(opts)
