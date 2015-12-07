@@ -32,7 +32,7 @@ module Jekyll
     # Override of method_missing to check in @data for the key.
     def method_missing(method, *args, &blck)
       if docs.respond_to?(method.to_sym)
-        Jekyll.logger.warn "Deprecation:", "Collection##{method} should be called on the #docs array directly."
+        Jekyll.logger.warn "Deprecation:", "Collection##{method} should be called on posts#docs instead of on #posts."
         Jekyll.logger.warn "", "Called by #{caller.first}."
         docs.public_send(method.to_sym, *args, &blck)
       else
