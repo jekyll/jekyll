@@ -15,7 +15,7 @@ Feature: Include tags
       | Ignore params if unused             | 2013-03-21 | html | {% include ignore.html date="today" %}                                                                                  |
       | List multiple parameters            | 2013-03-21 | html | {% include params.html date="today" start="tomorrow" %}                                                                 |
       | Dont keep parameters                | 2013-03-21 | html | {% include ignore.html param="test" %}\n{% include header.html %}                                                       |
-      | Allow params with spaces and quotes | 2013-04-07 | html | {% include params.html cool="param with spaces" super="\"quoted\"" single='has "quotes"' escaped='\'single\' quotes' %} |
+      | Allow params with spaces and quotes | 2013-04-07 | html | {% include params.html cool="param with spaces" super="\\"quoted\\"" single='has "quotes"' escaped='\\'single\\' quotes' %} |
       | Parameter syntax                    | 2013-04-12 | html | {% include params.html param1_or_2="value" %}                                                                           |
       | Pass a variable                     | 2013-06-22 | html | {% assign var = 'some text' %}{% include params.html local=var title=page.title %}                                    |
     When I run jekyll build
@@ -77,3 +77,23 @@ Feature: Include tags
     When I run jekyll build
     Then the _site directory should exist
     And I should see "one included" in "_site/index.html"
+
+  Scenario: Include a file and rebuild when include content is changed
+    Given I have an _includes directory
+    And I have an "_includes/one.html" file that contains "include"
+    And I have an "index.html" page that contains "{% include one.html %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "include" in "_site/index.html"
+    When I wait 1 second
+    Then I have an "_includes/one.html" file that contains "include content changed"
+    When I run jekyll build
+    Then I should see "include content changed" in "_site/index.html"
+
+  Scenario: Include a file with multiple variables
+    Given I have an _includes directory
+    And I have an "_includes/header-en.html" file that contains "include"
+    And I have an "index.html" page that contains "{% assign name = 'header' %}{% assign locale = 'en' %}{% include {{name}}-{{locale}}.html %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "include" in "_site/index.html"

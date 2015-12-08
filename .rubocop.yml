@@ -1,0 +1,27 @@
+Style/IndentHash: { EnforcedStyle: align_braces }
+Style/StringLiteralsInInterpolation: { EnforcedStyle: double_quotes }
+Style/StringLiterals: { EnforcedStyle: none }
+Metrics/MethodLength: { Max:  24 }
+Metrics/ClassLength:  { Max: 240 }
+Metrics/ModuleLength: { Max: 240 }
+Metrics/LineLength:   { Max: 112 }
+
+Style/HashSyntax:
+  UseHashRocketsWithSymbolValues: false
+  SupportedStyles: [ruby19 ruby19_no_mixed_keys, hash_rockets]
+  EnforcedStyle: ruby19
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+  SupportedStyles:
+    - indented
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%q': '{}'
+    '%Q': '{}'
+    '%r': '!!'
+    '%s': '()'
+    '%w': '()'
+    '%W': '()'
+    '%x': '()'

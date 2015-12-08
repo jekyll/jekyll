@@ -65,37 +65,37 @@ CONTENT
   context "highlight tag in unsafe mode" do
     should "set the no options with just a language name" do
       tag = highlight_block_with_opts('ruby ')
-      assert_equal({}, tag.instance_variable_get(:@options))
+      assert_equal({}, tag.instance_variable_get(:@highlight_options))
     end
 
     should "set the linenos option as 'inline' if no linenos value" do
       tag = highlight_block_with_opts('ruby linenos ')
-      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "set the linenos option to 'table' if the linenos key is given the table value" do
       tag = highlight_block_with_opts('ruby linenos=table ')
-      assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "recognize nowrap option with linenos set" do
       tag = highlight_block_with_opts('ruby linenos=table nowrap ')
-      assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "recognize the cssclass option" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "recognize the hl_linenos option and its value" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl hl_linenos=3 ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
+      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "recognize multiple values of hl_linenos" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl hl_linenos="3 5 6" ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
+      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "treat language name as case insensitive" do

@@ -39,6 +39,7 @@ module Jekyll
       def require_with_graceful_fail(names)
         Array(names).each do |name|
           begin
+            Jekyll.logger.debug("Requiring #{name}")
             require name
           rescue LoadError => e
             Jekyll.logger.error "Dependency Error:", <<-MSG

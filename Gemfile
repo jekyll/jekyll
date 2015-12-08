@@ -12,14 +12,15 @@ end
 group :test do
   gem 'redgreen', '~> 1.2'
   gem 'shoulda', '~> 3.5'
-  gem 'cucumber', '~> 2.0', '< 2.1'
+  gem 'cucumber', '~> 2.1'
   gem 'simplecov', '~> 0.9'
   gem 'jekyll_test_plugin'
   gem 'jekyll_test_plugin_malicious'
   gem 'minitest-reporters'
   gem 'minitest-profile'
-  gem 'minitest'
   gem 'rspec-mocks'
+  gem 'minitest'
+  gem 'nokogiri'
 
   if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
     gem 'test-unit'
@@ -43,7 +44,7 @@ gem 'jekyll-paginate', '~> 1.0'
 gem 'jekyll-coffeescript', '~> 1.0'
 gem 'jekyll-feed'
 gem 'jekyll-gist', '~> 1.0'
-gem 'mime-types', '~> 2.6'
+gem 'mime-types', '~> 3.0'
 gem 'kramdown', '~> 1.9'
 
 platform :ruby, :mswin, :mingw do

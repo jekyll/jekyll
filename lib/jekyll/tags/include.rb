@@ -16,7 +16,7 @@ module Jekyll
       attr_reader :includes_dir
 
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
-      VARIABLE_SYNTAX = /(?<variable>[^{]*\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\}[^\s}]*)(?<params>.*)/
+      VARIABLE_SYNTAX = /(?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)(?<params>.*)/
 
       def initialize(tag_name, markup, tokens)
         super
@@ -123,7 +123,7 @@ eos
         end
 
         begin
-          partial = site.liquid_renderer.file(path).parse(read_file(path, context))
+          partial = load_cached_partial(path, context)
 
           context.stack do
             context['include'] = parse_params(context) if @params
@@ -131,6 +131,17 @@ eos
           end
         rescue => e
           raise IncludeTagError.new e.message, File.join(@includes_dir, @file)
+        end
+      end
+
+      def load_cached_partial(path, context)
+        context.registers[:cached_partials] ||= {}
+        cached_partial = context.registers[:cached_partials]
+
+        if cached_partial.has_key?(path)
+          cached_partial[path]
+        else
+          cached_partial[path] = context.registers[:site].liquid_renderer.file(path).parse(read_file(path, context))
         end
       end
 

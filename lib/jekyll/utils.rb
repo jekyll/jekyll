@@ -1,12 +1,17 @@
 module Jekyll
   module Utils extend self
     autoload :Platforms, 'jekyll/utils/platforms'
+    autoload :Ansi, "jekyll/utils/ansi"
 
     # Constants for use in #slugify
     SLUGIFY_MODES = %w{raw default pretty}
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
+
+    def strip_heredoc(str)
+      str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
+    end
 
     # Non-destructive version of deep_merge_hashes! See that method.
     #
@@ -216,6 +221,39 @@ module Jekyll
         template << ":output_ext" if permalink_style.to_s.end_with?(":output_ext")
       end
       template
+    end
+
+
+    # Work the same way as Dir.glob but seperating the input into two parts
+    # ('dir' + '/' + 'pattern') to make sure the first part('dir') does not act
+    # as a pattern.
+    #
+    # For example, Dir.glob("path[/*") always returns an empty array,
+    # because the method fails to find the closing pattern to '[' which is ']'
+    #
+    # Examples:
+    #   safe_glob("path[", "*")
+    #   # => ["path[/file1", "path[/file2"]
+    #
+    #   safe_glob("path", "*", File::FNM_DOTMATCH)
+    #   # => ["path/.", "path/..", "path/file1"]
+    #
+    #   safe_glob("path", ["**", "*"])
+    #   # => ["path[/file1", "path[/folder/file2"]
+    #
+    # dir      - the dir where glob will be executed under
+    #           (the dir will be included to each result)
+    # patterns - the patterns (or the pattern) which will be applied under the dir
+    # flags    - the flags which will be applied to the pattern
+    #
+    # Returns matched pathes
+    def safe_glob(dir, patterns, flags = 0)
+      return [] unless Dir.exist?(dir)
+      pattern = File.join(Array patterns)
+      return [dir] if pattern.empty?
+      Dir.chdir(dir) do
+        Dir.glob(pattern, flags).map { |f| File.join(dir, f) }
+      end
     end
 
   end

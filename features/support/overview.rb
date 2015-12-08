@@ -2,7 +2,6 @@ require 'fileutils'
 require 'colorator'
 require 'cucumber/formatter/console'
 require 'cucumber/formatter/io'
-require 'gherkin/formatter/escaping'
 
 module Features
   module Support
@@ -17,12 +16,11 @@ module Features
       include FileUtils
       include Cucumber::Formatter::Console
       include Cucumber::Formatter::Io
-      include Gherkin::Formatter::Escaping
       attr_writer :indent
       attr_reader :runtime
 
       def initialize(runtime, path_or_io, options)
-        @runtime, @io, @options = runtime, ensure_io(path_or_io, "pretty"), options
+        @runtime, @io, @options = runtime, ensure_io(path_or_io), options
         @exceptions = []
         @indent = 0
         @prefixes = options[:prefixes] || {}

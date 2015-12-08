@@ -261,6 +261,26 @@ class TestPage < JekyllUnitTest
         assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
       end
 
+      should "support .htm extension and respects that" do
+        page = setup_page('contacts.htm')
+        page.site.permalink_style = :pretty
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exist?(File.join(dest_dir, 'contacts', 'index.htm'))
+      end
+
+      should "support .xhtml extension and respects that" do
+        page = setup_page('contacts.xhtml')
+        page.site.permalink_style = :pretty
+        do_render(page)
+        page.write(dest_dir)
+
+        assert File.directory?(dest_dir)
+        assert File.exist?(File.join(dest_dir, 'contacts', 'index.xhtml'))
+      end
+
       should "write properly with extension different from html" do
         page = setup_page("sitemap.xml")
         page.site.permalink_style = :pretty

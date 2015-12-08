@@ -388,5 +388,19 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "sample filter" do
+      should "return a random item from the array" do
+        input = %w(hey there bernie)
+        assert_includes input, @filter.sample(input)
+      end
+
+      should "allow sampling of multiple values (n > 1)" do
+        input = %w(hey there bernie)
+        @filter.sample(input, 2).each do |val|
+          assert_includes input, val
+        end
+      end
+    end
+
   end
 end
