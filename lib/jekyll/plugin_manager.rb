@@ -24,12 +24,7 @@ module Jekyll
     #
     # Returns nothing.
     def require_gems
-      site.gems.each do |gem|
-        if plugin_allowed?(gem)
-          Jekyll.logger.debug("PluginManager:", "Requiring #{gem}")
-          require gem
-        end
-      end
+      Jekyll::External.require_with_graceful_fail(site.gems.select { |gem| plugin_allowed?(gem) })
     end
 
     def self.require_from_bundler
@@ -70,10 +65,9 @@ module Jekyll
     # Returns nothing.
     def require_plugin_files
       unless site.safe
-        plugins_path.each do |plugins|
-          Dir[File.join(plugins, "**", "*.rb")].sort.each do |f|
-            require f
-          end
+        plugins_path.each do |plugin_search_path|
+          plugin_files = Utils.safe_glob(plugin_search_path, File.join("**", "*.rb"))
+          Jekyll::External.require_with_graceful_fail(plugin_files)
         end
       end
     end
