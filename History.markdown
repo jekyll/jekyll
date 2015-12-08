@@ -11,6 +11,7 @@
   * Add CodeClimate platform for better code quality. (#4220)
   * General improvements for WEBrick via jekyll serve such as SSL & custom headers (#4224, #4228)
   * Add a default charset to content-type on webrick. (#4231)
+  * Switch `PluginManager` to use `require_with_graceful_fail` for better UX (#4233)
 
 ### Bug Fixes
 
