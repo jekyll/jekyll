@@ -37,6 +37,7 @@
   * Add Kickster to deployment methods in documentation (#4190)
   * Add DavidBurela's tutorial for Windows to Windows docs page (#4210)
   * Change GitHub code block to highlight tag to avoid it overlaps parent div (#4121)
+  * Update FormKeep link to be something more specific to Jekyll (#4243)
 
 ## 3.0.1 / 2015-11-17
 
