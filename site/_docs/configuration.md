@@ -198,6 +198,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Process and render draft posts.</p>
       </td>
       <td class="align-center">
+        <p><code class="option">show_drafts: BOOL</code></p>
         <p><code class="flag">--drafts</code></p>
       </td>
     </tr>
