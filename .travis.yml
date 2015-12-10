@@ -33,7 +33,9 @@ notifications:
     template:
       - "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
   email:
+    recipients:
+      - jordon@envygeeks.io
     on_success: never
-    on_failure: never
+    on_failure: always
   slack:
     secure: dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4YGEilNRzKPz18AsFptVXofpwyqcBxaCfmHP809NX5PHBaadydveLm+TNVao2XeLXSWu+HUNAYO1AanCUbJSEyJTju347xCBGzESU=
