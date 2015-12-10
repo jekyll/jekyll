@@ -38,6 +38,7 @@
   * Add DavidBurela's tutorial for Windows to Windows docs page (#4210)
   * Change GitHub code block to highlight tag to avoid it overlaps parent div (#4121)
   * Update FormKeep link to be something more specific to Jekyll (#4243)
+  * Remove example Roger Chapman site, as the domain doesn't exist (#4249)
 
 ## 3.0.1 / 2015-11-17
 
