@@ -12,8 +12,6 @@ learning purposes.
     ([source](https://github.com/mojombo/mojombo.github.io))
 - [Nick Quaranto](http://quaran.to/)
     ([source](https://github.com/qrush/qrush.github.com))
-- [Roger Chapman](http://rogchap.com/)
-    ([source](https://github.com/rogchap/rogchap.github.com))
 - [GitHub Official Teaching Materials](http://training.github.com)
     ([source](https://github.com/github/training.github.com/tree/7049d7532a6856411e34046aedfce43a4afaf424))
 - [Rasmus Andersson](http://rsms.me/)
