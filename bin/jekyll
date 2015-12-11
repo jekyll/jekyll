@@ -6,7 +6,7 @@ $:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
 require 'jekyll'
 require 'mercenary'
 
-%w[jekyll-import].each do |blessed_gem|
+%w[jekyll-import jekyll-docs].each do |blessed_gem|
   begin
     require blessed_gem
   rescue LoadError
