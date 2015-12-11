@@ -43,7 +43,7 @@ Test Dependencies
 -----------------
 
 To run the test suite and build the gem you'll need to install Jekyll's
-dependencies. Simply run this command to get all setup:
+dependencies. Simply run this command to get all set up:
 
 <figure class="highlight"><pre><code>$ script/bootstrap</code></pre></figure>
 
