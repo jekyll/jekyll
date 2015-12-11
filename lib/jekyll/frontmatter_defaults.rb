@@ -30,6 +30,13 @@ module Jekyll
       set
     end
 
+    def ensure_time!(set)
+      return set unless set.key?('values') && set['values'].key?('date')
+      return set if set['values']['date'].is_a?(Time)
+      set['values']['date'] = Utils.parse_date(set['values']['date'], "An invalid date format was found in a front-matter default set: #{set}")
+      set
+    end
+
     # Finds a default value for a given setting, filtered by path and type
     #
     # path - the path (relative to the source) of the page, post or :draft the default is used in
@@ -159,7 +166,7 @@ module Jekyll
 
       sets.map do |set|
         if valid?(set)
-          update_deprecated_types(set)
+          ensure_time!(update_deprecated_types(set))
         else
           Jekyll.logger.warn "Defaults:", "An invalid front-matter default set was found:"
           Jekyll.logger.warn "#{set}"
