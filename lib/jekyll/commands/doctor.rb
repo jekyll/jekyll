@@ -32,7 +32,8 @@ module Jekyll
           [
             fsnotify_buggy?(site),
             !deprecated_relative_permalinks(site),
-            !conflicting_urls(site)
+            !conflicting_urls(site),
+            !urls_only_differ_by_case(site)
           ].all?
         end
 
@@ -76,6 +77,20 @@ module Jekyll
           true
         end
 
+        def urls_only_differ_by_case(site)
+          urls_only_differ_by_case = false
+          urls = case_insensitive_urls(site.pages + site.docs_to_write, site.dest)
+          urls.each do |case_insensitive_url, real_urls|
+            if real_urls.uniq.size > 1
+              urls_only_differ_by_case = true
+              Jekyll.logger.warn "Warning:", "The following URLs only differ" +
+                " by case. On a case-insensitive file system one of the URLs" +
+                " will be overwritten by the other: #{real_urls.join(", ")}"
+            end
+          end
+          urls_only_differ_by_case
+        end
+
         private
         def collect_urls(urls, things, destination)
           things.each do |thing|
@@ -89,6 +104,13 @@ module Jekyll
           urls
         end
 
+        def case_insensitive_urls(things, destination)
+          things.inject(Hash.new) do |memo, thing|
+            dest = thing.destination(destination)
+            (memo[dest.downcase] ||= []) << dest
+            memo
+          end
+        end
       end
 
     end
