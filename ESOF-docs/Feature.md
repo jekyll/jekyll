@@ -8,7 +8,7 @@ As we have been trying to show, Jekyll is quite a big project. It has been quite
 
 #Feature implementation
 
-The commit is in (https://github.com/jekyll/jekyll/commit/31b0e88b0788cbaf01c4b9159ef3c0df7bdfb030)["here"]. 
+The commit is in [here](https://github.com/jekyll/jekyll/commit/31b0e88b0788cbaf01c4b9159ef3c0df7bdfb030). 
 The purpose of this feature is, has the commit describes, "For blessed gems, shim their commands so users know how to use them".
 
 Here is the feature:
