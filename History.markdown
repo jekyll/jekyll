@@ -23,6 +23,7 @@
   * Convertible should make layout data accessible via `layout` instead of `page` (#4205)
   * Avoid using `Dir.glob` with absolute path to allow special characters in the path (#4150)
   * Handle empty config files (#4052)
+  * Rename `@options` so that it does not impact Liquid. (#4173)
 
 ### Development Fixes
 
@@ -57,7 +58,6 @@
   * Align hooks implementation with documentation (#4104)
   * Fix the deprecation warning in the doctor command (#4114)
   * Fix case in `:title` and add `:slug` which is downcased (#4100)
-  * Rename @options so that it does not impact Liquid. (#4173)
 
 ### Development Fixes
 
