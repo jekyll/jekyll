@@ -29,6 +29,7 @@
   * `jekyll-docs` should be easily release-able (#4152)
   * Allow use of Cucumber 2.1 or greater (#4181)
   * Modernize Kramdown for Markdown converter. (#4109)
+  * Change TestDoctorCommand to JekyllUnitTest... (#4263)
 
 ### Site Enhancements
 
