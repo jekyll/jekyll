@@ -169,6 +169,7 @@ namespace :site do
       "destination" => File.expand_path("site/_site")
     })
   end
+  task :build => :generate
 
   desc "Update normalize.css library to the latest version and minify"
   task :update_normalize_css do
