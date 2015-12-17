@@ -34,7 +34,13 @@ module Jekyll
 
         # Otherwise, render
         Jekyll.logger.debug "Content Tag:", "Rendering included document"
-        Jekyll::Renderer.new(site, @document, site.site_payload).run
+        if @document.is_a? Jekyll::Document
+          Jekyll::Renderer.new(site, @document, site.site_payload).run
+        else
+          @document.render(site.layouts, site.site_payload)
+        end
+
+        # Return rendered content
         return @document.content
       end
     end
