@@ -7,10 +7,17 @@ module Jekyll
 
       def render(context)
         site = context.registers[:site]
+        @document = context[@name]
+        register = context.registers[:page]
+
+        # Return if referencing itself
+        if (register and register.has_key? "path" and register["path"] == @document["path"])
+          Jekyll.logger.debug "Content Tag:", "Returning due to reference to itself"
+          return @document["content"]
+        end
 
         # Chunk of logic to get the Document/Page object from the context object
         # by comparing paths
-        @document = context[@name]
         if @document["type"] == "document"
           collection = site.collections[@document["collection"]]
           @document = collection.docs.find { |doc| doc.relative_path == @document["path"] }
@@ -21,10 +28,10 @@ module Jekyll
         end
 
         # Store dependency in metadata
-        if context.registers[:page] and context.registers[:page].has_key? "path"
+        if register and register.has_key? "path"
           Jekyll.logger.debug "Content Tag:", "Adding dependency to regenerator metadata"
           site.regenerator.add_dependency(
-            site.in_source_dir(context.registers[:page]["path"]),
+            site.in_source_dir(register["path"]),
             @document.path
           )
         end
