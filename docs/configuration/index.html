@@ -2555,6 +2555,7 @@ in the terminal.</p>
         <p class="description">Process and render draft posts.</p>
       </td>
       <td class="align-center">
+        <p><code class="option">show_drafts: BOOL</code></p>
         <p><code class="flag">--drafts</code></p>
       </td>
     </tr>
@@ -2708,6 +2709,24 @@ before your site is served.</p>
         <p><code class="flag">--skip-initial-build</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>X.509 (SSL) Private Key</strong></p>
+        <p class="description">SSL Private Key.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">--ssl-key</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>X.509 (SSL) Certificate</strong></p>
+        <p class="description">SSL Public certificate.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">--ssl-cert</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -2719,6 +2738,22 @@ before your site is served.</p>
     default settings. Use spaces instead.
   </p>
 </div>
+
+<h2 id="custom-webrick-headers">Custom WEBRick Headers</h2>
+
+<p>You can provide custom headers for your site by adding them to <code>_config.yml</code></p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># File: _config.yml</span>
+<span class="l-Scalar-Plain">webrick</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">headers</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">My-Header</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My-Value</span>
+    <span class="l-Scalar-Plain">My-Other-Header</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">My-Other-Value</span></code></pre></figure>
+
+<h3 id="defaults">Defaults</h3>
+
+<p>We only provide on default and that’s a Content-Type header that disables
+caching in development so that you don’t have to fight with Chrome’s aggressive
+caching when you are in development mode.</p>
 
 <h2 id="specifying-a-jekyll-environment-at-build-time">Specifying a Jekyll environment at build time</h2>
 
@@ -3009,8 +3044,8 @@ of Github Flavored Markdown by passing an <code>input</code> option with a value
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>Once you’ve created your class and have it properly setup either as a plugin in
-the <code>_plugins</code> folder or as a gem, specify it in your <code>_config.yml</code>:</p>
+<p>Once you’ve created your class and have it properly set up either as a plugin
+in the <code>_plugins</code> folder or as a gem, specify it in your <code>_config.yml</code>:</p>
 
 <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">MyCustomProcessor</span></code></pre></figure>
 

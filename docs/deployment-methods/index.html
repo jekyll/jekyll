@@ -2452,60 +2452,73 @@ host your site directly on a CDN or file host like S3.</p>
 
 <p>Once you’ve generated the <code>_site</code> directory, you can easily rsync it using a <code>tasks/deploy</code> shell script similar to <a href="https://github.com/vitalyrepin/vrepinblog/blob/master/transfer.sh">this deploy script here</a>. You’d obviously need to change the values to reflect your site’s details.</p>
 
+<p>Certificate-based authorization is another way to simplify the publishing
+process. It makes sense to restrict rsync access only to the directory which it is supposed to sync. This can be done using rrsync.</p>
+
 <h4 id="step-1-install-rrsync-to-your-home-folder-server-side">Step 1: Install rrsync to your home folder (server-side)</h4>
 
-<p>We will use certificate-based authorization to simplify the publishing process. It makes sense to restrict rsync access only to the directory which it is supposed to sync.</p>
-
-<p>That’s why rrsync wrapper shall be installed. If it is not already installed by your hoster you can do it yourself:</p>
+<p>If it is not already installed by your host, you can do it yourself:</p>
 
 <ul>
-  <li><a href="http://ftp.samba.org/pub/unpacked/rsync/support/rrsync">download rrsync</a></li>
-  <li>Put it to the bin subdirectory of your home folder  (<code>~/bin</code>)</li>
+  <li><a href="http://ftp.samba.org/pub/unpacked/rsync/support/rrsync">Download rrsync</a></li>
+  <li>Place it in the <code>bin</code> subdirectory of your home folder  (<code>~/bin</code>)</li>
   <li>Make it executable (<code>chmod +x</code>)</li>
 </ul>
 
-<h4 id="step-2-setup-certificate-based-ssh-access-server-side">Step 2: Setup certificate-based ssh access (server side)</h4>
+<h4 id="step-2-set-up-certificate-based-ssh-access-server-side">Step 2: Set up certificate-based SSH access (server side)</h4>
 
-<p><a href="https://wiki.gentoo.org/wiki/SSH#Passwordless_Authentication">This process is described in a lot of places in the net</a>. We will not cover it here. What is different from usual approach is to put the restriction to certificate-based authorization in <code>~/.ssh/authorized_keys</code>). We will launch <code>rrsync</code> utility and supply it with the folder it shall have read-write access to:</p>
+<p>This <a href="https://wiki.gentoo.org/wiki/SSH#Passwordless_Authentication">process</a> is
+described in several places online. What is different from the typical approach
+is to put the restriction to certificate-based authorization in
+<code>~/.ssh/authorized_keys</code>. Then, launch <code>rrsync</code> and supply
+it with the folder it shall have read-write access to:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">command</span><span class="o">=</span><span class="s2">&quot;$HOME/bin/rrsync &lt;folder&gt;&quot;</span>,no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa &lt;cert&gt;</code></pre></figure>
 
 <p><code>&lt;folder&gt;</code> is the path to your site. E.g., <code>~/public_html/you.org/blog-html/</code>.</p>
 
-<h4 id="step-3-rsync-client-side">Step 3: Rsync! (client-side)</h4>
+<h4 id="step-3-rsync-client-side">Step 3: Rsync (client-side)</h4>
 
-<p>Add the script <code>deploy</code> to the web site source folder:</p>
+<p>Add the <code>deploy</code> script to the site source folder:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
 
-rsync -avr --rsh<span class="o">=</span><span class="s1">&#39;ssh -p2222&#39;</span> --delete-after --delete-excluded   &lt;folder&gt; &lt;user&gt;@&lt;site&gt;:</code></pre></figure>
+rsync -crvz --rsh<span class="o">=</span>ssh -p2222<span class="err">&#39;</span> --delete-after --delete-excluded   &lt;folder&gt; &lt;user&gt;@&lt;site&gt;:</code></pre></figure>
 
 <p>Command line parameters are:</p>
 
 <ul>
-  <li><code>--rsh='ssh -p2222'</code> It is needed if your hoster provides ssh access using ssh port different from default one (e.g., this is what hostgator is doing)</li>
-  <li><code>&lt;folder&gt;</code> is the name of the local folder with generated web content. By default it is <code>_site/</code> for Jekyll</li>
-  <li><code>&lt;user&gt;</code> — ssh user name for your hosting account</li>
-  <li><code>&lt;site&gt;</code> — your hosting server</li>
+  <li><code>--rsh=ssh -p2222</code> — The port for SSH access. It is required if
+your host uses a different port than the default (e.g, HostGator)</li>
+  <li><code>&lt;folder&gt;</code> — The name of the local output folder (defaults to <code>_site</code>)</li>
+  <li><code>&lt;user&gt;</code> — The username for your hosting account</li>
+  <li><code>&lt;site&gt;</code> — Your hosting server</li>
 </ul>
 
-<p>Example command line is:</p>
+<p>Using this setup, you might run the following command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">rsync -avr --rsh<span class="o">=</span><span class="s1">&#39;ssh -p2222&#39;</span> --delete-after --delete-excluded   _site/ hostuser@vrepin.org:</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">rsync -crvz --rsh<span class="o">=</span><span class="s1">&#39;ssh -p2222&#39;</span> --delete-after --delete-excluded   _site/ hostuser@example.org:</code></pre></figure>
 
-<p>Don’t forget column ‘:’ after server name!</p>
+<p>Don’t forget the column <code>:</code> after server name!</p>
 
-<h4 id="optional-step-4-exclude-transfersh-from-being-copied-to-the-output-folder-by-jekyll">Optional step 4: exclude transfer.sh from being copied to the output folder by Jekyll</h4>
+<h4 id="step-4-optional-exclude-the-transfer-script-from-being-copied-to-the-output-folder">Step 4 (Optional): Exclude the transfer script from being copied to the output folder.</h4>
 
-<p>This step is recommended if you use this how-to to deploy Jekyll-based web site. If you put <code>deploy</code> script to the root folder of your project, Jekyll copies it to the output folder.
-This behavior can be changed in <code>_config.yml</code>. Just add the following line there:</p>
+<p>This step is recommended if you use these instructions to deploy your site. If
+you put the <code>deploy</code> script in the root folder of your project, Jekyll will
+copy it to the output folder. This behavior can be changed in <code>_config.yml</code>.</p>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Do not copy these file to the output directory</span>
+<p>Just add the following line:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Do not copy these files to the output directory</span>
 <span class="l-Scalar-Plain">exclude</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">&quot;deploy&quot;</span><span class="p-Indicator">]</span></code></pre></figure>
 
-<h4 id="we-are-done">We are done!</h4>
+<p>Alternatively, you can use an <code>rsync-exclude.txt</code> file to control which files will be transferred to your server.</p>
 
-<p>Now it’s possible to publish your web site by launching <code>deploy</code> script. If your ssh certificate  is <a href="https://martin.kleppmann.com/2013/05/24/improving-security-of-ssh-private-keys.html">passphrase-protected</a>, you are asked to enter the password.</p>
+<h4 id="done">Done!</h4>
+
+<p>Now it’s possible to publish your website simply by running the  <code>deploy</code> 
+script. If your SSH certificate  is <a href="https://martin.kleppmann.com/2013/05/24/improving-security-of-ssh-private-keys.html">passphrase-protected</a>, you will be asked to enter it when the
+script executes.</p>
 
 <h2 id="rack-jekyll">Rack-Jekyll</h2>
 
