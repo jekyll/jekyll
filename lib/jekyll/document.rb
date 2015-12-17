@@ -364,6 +364,7 @@ module Jekyll
           "next"          => next_doc,
           "previous"      => previous_doc,
           "id"            => id,
+          "type"          => "document"
         }, data), { 'excerpt' => data['excerpt'].to_s }
       else
         data
