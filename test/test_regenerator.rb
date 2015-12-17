@@ -306,6 +306,38 @@ class TestRegenerator < JekyllUnitTest
     end
   end
 
+  # Make sure appropriate dependencies are handled
+  context "The site metadata" do
+    setup do
+      FileUtils.rm_rf(source_dir(".jekyll-metadata"))
+
+      @site = Site.new(Jekyll.configuration({
+        "source" => source_dir,
+        "destination" => dest_dir,
+        "incremental" => true
+      }))
+
+      @site.process
+      @layout_post = (@site.posts.find { |post| post.data["layout"] == "default" }).path
+      @includes_post = (@site.posts.find { |post| post.data["title"] == "Include" }).path
+      @regenerator = @site.regenerator
+    end
+
+    should "add layouts as a dependency" do
+      layout_dep = @regenerator.metadata[@layout_post]["deps"].find { |dep|
+        dep =~ /_layouts\/default.html$/
+      }
+      assert !layout_dep.nil?
+    end
+
+    should "add includes as a dependency" do
+      includes_dep = @regenerator.metadata[@includes_post]["deps"].find { |dep|
+        dep =~ /_includes\/sig.markdown$/
+      }
+      assert !includes_dep.nil?
+    end
+  end
+
   context "when incremental regen is disabled" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
