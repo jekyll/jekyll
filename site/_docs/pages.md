@@ -27,12 +27,14 @@ homepage of your Jekyll-generated site.
 
 ## Where additional pages live
 
-Where you put HTML files for pages depends on how you want the pages to work.
+Where you put HTML or [Markdown](http://daringfireball.net/projects/markdown/)
+files for pages depends on how you want the pages to work.
 There are two main ways of creating pages:
 
-- Place named HTML files for each page in your site's root folder.
+- Place named HTML or [Markdown](http://daringfireball.net/projects/markdown/)
+files for each page in your site's root folder.
 - Create a folder in the site's root for each page, and place an index.html
-file in each page folder.
+or index.md file in each page folder.
 
 Both methods work fine (and can be used in conjunction with each other),
 with the only real difference being the resulting URLs.
@@ -53,6 +55,7 @@ and associated URLs might look like:
 |-- _site/
 |-- about.html    # => http://example.com/about.html
 |-- index.html    # => http://example.com/
+|-- other.md      # => http://example.com/other.html
 └── contact.html  # => http://example.com/contact.html
 {% endhighlight %}
 
@@ -77,6 +80,8 @@ might look like:
 |   └── index.html  # => http://example.com/about/
 ├── contact/
 |   └── index.html  # => http://example.com/contact/
+|── other/
+|   └── index.md    # => http://example.com/other.html
 └── index.html      # => http://example.com/
 {% endhighlight %}
 
