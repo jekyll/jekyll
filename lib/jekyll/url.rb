@@ -59,6 +59,14 @@ module Jekyll
     #
     # Returns the unsanitized String URL
     def generate_url(template)
+      if @placeholders.is_a? Drops::UrlDrop
+        generate_url_from_drop(template)
+      else
+        generate_url_from_hash(template)
+      end
+    end
+
+    def generate_url_from_hash(template)
       @placeholders.inject(template) do |result, token|
         break result if result.index(':').nil?
         if token.last.nil?
@@ -68,6 +76,12 @@ module Jekyll
           result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
         end
       end
+    end
+
+    def generate_url_from_drop(template)
+      template.gsub(/(:[a-z_]+)/) do |match|
+        @placeholders.public_send(match.sub(':', ''))
+      end.gsub(/\/\//, '/')
     end
 
     # Returns a sanitized String URL, stripping "../../" and multiples of "/",

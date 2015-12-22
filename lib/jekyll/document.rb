@@ -38,12 +38,10 @@ module Jekyll
     end
 
     def output=(output)
-      @to_liquid = nil
       @output = output
     end
 
     def content=(content)
-      @to_liquid = nil
       @content = content
     end
 
@@ -181,27 +179,7 @@ module Jekyll
     #
     # Returns the Hash of key-value pairs for replacement in the URL.
     def url_placeholders
-      {
-        collection:  collection.label,
-        path:        cleaned_relative_path,
-        output_ext:  output_ext,
-        name:        Utils.slugify(basename_without_ext),
-        title:       Utils.slugify(data['slug'], mode: "pretty", cased: true) || Utils
-                       .slugify(basename_without_ext, mode: "pretty", cased: true),
-        slug:        Utils.slugify(data['slug']) || Utils.slugify(basename_without_ext),
-        year:        date.strftime("%Y"),
-        month:       date.strftime("%m"),
-        day:         date.strftime("%d"),
-        hour:        date.strftime("%H"),
-        minute:      date.strftime("%M"),
-        second:      date.strftime("%S"),
-        i_day:       date.strftime("%-d"),
-        i_month:     date.strftime("%-m"),
-        categories:  (data['categories'] || []).map { |c| c.to_s.downcase }.uniq.join('/'),
-        short_month: date.strftime("%b"),
-        short_year:  date.strftime("%y"),
-        y_day:       date.strftime("%j"),
-      }
+      @url_placeholders ||= Drops::UrlDrop.new(self)
     end
 
     # The permalink for this Document.
@@ -278,8 +256,6 @@ module Jekyll
     #
     # Returns nothing.
     def read(opts = {})
-      @to_liquid = nil
-
       Jekyll.logger.debug "Reading:", relative_path
 
       if yaml_file?
@@ -353,21 +329,7 @@ module Jekyll
     #
     # Returns a Hash representing this Document's data.
     def to_liquid
-      @to_liquid ||= if data.is_a?(Hash)
-        Utils.deep_merge_hashes Utils.deep_merge_hashes({
-          "output"        => output,
-          "content"       => content,
-          "relative_path" => relative_path,
-          "path"          => relative_path,
-          "url"           => url,
-          "collection"    => collection.label,
-          "next"          => next_doc,
-          "previous"      => previous_doc,
-          "id"            => id,
-        }, data), { 'excerpt' => data['excerpt'].to_s }
-      else
-        data
-      end
+      @to_liquid ||= Drops::DocumentDrop.new(self)
     end
 
     # The inspect string for this document.

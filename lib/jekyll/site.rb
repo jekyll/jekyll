@@ -259,25 +259,7 @@ module Jekyll
     #   "tags"       - The Hash of tag values and Posts.
     #                  See Site#post_attr_hash for type info.
     def site_payload
-      {
-        "jekyll" => {
-          "version" => Jekyll::VERSION,
-          "environment" => Jekyll.env
-        },
-        "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-            "time"         => time,
-            "posts"        => posts.docs.sort { |a, b| b <=> a },
-            "pages"        => pages,
-            "static_files" => static_files,
-            "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
-            "categories"   => post_attr_hash('categories'),
-            "tags"         => post_attr_hash('tags'),
-            "collections"  => collections.values.map(&:to_liquid),
-            "documents"    => documents,
-            "data"         => site_data
-        }))
-      }
+      Drops::UnifiedPayloadDrop.new self
     end
 
     # Get the implementation class for the given Converter.

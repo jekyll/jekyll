@@ -170,14 +170,7 @@ module Jekyll
     #
     # Returns a representation of this collection for use in Liquid.
     def to_liquid
-      metadata.merge({
-        "label"     => label,
-        "docs"      => docs,
-        "files"     => files,
-        "directory" => directory,
-        "output"    => write?,
-        "relative_directory" => relative_directory
-      })
+      Drops::CollectionDrop.new self
     end
 
     # Whether the collection's documents ought to be written as individual
