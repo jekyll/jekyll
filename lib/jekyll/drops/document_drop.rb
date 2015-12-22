@@ -3,18 +3,10 @@
 module Jekyll
   module Drops
     class DocumentDrop < ImmutableDrop
+      extend Forwardable
 
-      def output
-        @obj.output
-      end
+      def_delegators :@obj, :id, :output, :content, :to_s, :relative_path, :url
 
-      def content
-        @obj.content
-      end
-
-      def relative_path
-        @obj.relative_path
-      end
       alias_method :path, :relative_path
 
       def url
@@ -31,10 +23,6 @@ module Jekyll
 
       def previous
         @obj.previous_doc
-      end
-
-      def id
-        @obj.id
       end
 
       def excerpt
