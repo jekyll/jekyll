@@ -46,6 +46,7 @@
   * Remove example Roger Chapman site, as the domain doesn't exist (#4249)
   * Added configuration options for `draft_posts` to configuration docs (#4251)
   * Fix checklist in _assets.md (#4259)
+  * Add Markdown examples to Pages docs (#4275)
 
 ## 3.0.1 / 2015-11-17
 
