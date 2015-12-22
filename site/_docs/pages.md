@@ -81,7 +81,7 @@ might look like:
 ├── contact/
 |   └── index.html  # => http://example.com/contact/
 |── other/
-|   └── index.md    # => http://example.com/other.html
+|   └── index.md    # => http://example.com/other/
 └── index.html      # => http://example.com/
 {% endhighlight %}
 
