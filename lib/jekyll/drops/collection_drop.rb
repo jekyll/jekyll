@@ -6,7 +6,12 @@ module Jekyll
     class CollectionDrop < ImmutableDrop
       extend Forwardable
 
-      def_delegators :@obj, :label, :docs, :files, :directory, :relative_directory
+      def_delegators :@obj, :label, :docs, :files, :directory,
+                            :relative_directory
+
+      def to_s
+        @obj.docs.map(&:to_s).join(' ')
+      end
 
       def output
         @obj.write?
