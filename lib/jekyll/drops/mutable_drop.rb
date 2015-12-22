@@ -15,7 +15,7 @@ module Jekyll
         elsif respond_to? key
           public_send key
         else
-          data[key]
+          fallback_data[key]
         end
       end
 

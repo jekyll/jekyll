@@ -13,7 +13,7 @@ module Jekyll
       end
 
       private
-      def data
+      def fallback_data
         @obj.metadata
       end
 

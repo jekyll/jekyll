@@ -12,7 +12,7 @@ module Jekyll
         if respond_to? key
           public_send key
         else
-          data[key]
+          fallback_data[key]
         end
       end
 
@@ -20,7 +20,7 @@ module Jekyll
         if respond_to? key
           raise ArgumentError.new("Key #{key} cannot be set in the drop.")
         else
-          data[key] = val
+          fallback_data[key] = val
         end
       end
 

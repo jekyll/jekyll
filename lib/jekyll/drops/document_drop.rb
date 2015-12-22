@@ -38,10 +38,11 @@ module Jekyll
       end
 
       def excerpt
-        data['excerpt'].to_s
+        fallback_data['excerpt'].to_s
       end
 
-      def data
+      private
+      def fallback_data
         @obj.data
       end
 

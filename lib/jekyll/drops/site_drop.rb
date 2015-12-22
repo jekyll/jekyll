@@ -8,6 +8,14 @@ module Jekyll
       def_delegator  :@obj, :site_data, :data
       def_delegators :@obj, :time, :pages, :static_files, :documents
 
+      def [](key)
+        if !respond_to?(key) && @obj.collections.key?(key)
+          @obj.collections[key].docs
+        else
+          super(key)
+        end
+      end
+
       def posts
         @site_posts ||= @obj.posts.docs.sort { |a, b| b <=> a }
       end
@@ -29,7 +37,7 @@ module Jekyll
       end
 
       private
-      def data
+      def fallback_data
         @obj.config
       end
 
