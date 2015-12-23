@@ -240,7 +240,7 @@ Feature: Post data
       | override | 2013-04-12 | override-path.html | Non-custom path: {{ page.path }} |
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Non-custom path: _posts/2013-04-12-override.markdown in "_site/2013/04/12/override.html"
+    And I should see "Non-custom path: _posts/2013-04-12-override.markdown" in "_site/2013/04/12/override.html"
 
   Scenario: Disable a post from being published
     Given I have a _posts directory
