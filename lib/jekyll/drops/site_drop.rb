@@ -6,10 +6,11 @@ module Jekyll
       extend Forwardable
 
       def_delegator  :@obj, :site_data, :data
-      def_delegators :@obj, :time, :pages, :static_files, :documents
+      def_delegators :@obj, :time, :pages, :static_files, :documents,
+                            :tags, :categories
 
       def [](key)
-        if !respond_to?(key) && @obj.collections.key?(key)
+        if @obj.collections.key?(key) && key != "posts"
           @obj.collections[key].docs
         else
           super(key)
@@ -22,14 +23,6 @@ module Jekyll
 
       def html_pages
         @site_html_pages ||= @obj.pages.select { |page| page.html? || page.url.end_with?("/") }
-      end
-
-      def categories
-        @site_categories ||= @obj.post_attr_hash('categories')
-      end
-
-      def tags
-        @site_tags ||= @obj.post_attr_hash('tags')
       end
 
       def collections

@@ -10,7 +10,7 @@ module Jekyll
                             :relative_directory
 
       def to_s
-        @obj.docs.map(&:to_s).join(' ')
+        docs.to_s
       end
 
       def output

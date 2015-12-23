@@ -9,10 +9,6 @@ module Jekyll
 
       alias_method :path, :relative_path
 
-      def url
-        @obj.url
-      end
-
       def collection
         @obj.collection.label
       end
@@ -30,9 +26,7 @@ module Jekyll
       end
 
       private
-      def fallback_data
-        @obj.data
-      end
+      def_delegator :@obj, :data, :fallback_data
 
     end
   end

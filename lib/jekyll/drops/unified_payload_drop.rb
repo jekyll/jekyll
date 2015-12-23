@@ -2,7 +2,7 @@
 
 module Jekyll
   module Drops
-    class UnifiedPayloadDrop < Liquid::Drop
+    class UnifiedPayloadDrop < ImmutableDrop
 
       attr_accessor :page, :layout, :content, :paginator
       attr_accessor :highlighter_prefix, :highlighter_suffix
@@ -17,6 +17,11 @@ module Jekyll
 
       def site
         @site_drop ||= SiteDrop.new(@site)
+      end
+
+      private
+      def fallback_data
+        @fallback_data ||= {}
       end
 
     end
