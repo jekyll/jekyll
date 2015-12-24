@@ -30,9 +30,7 @@ module Jekyll
       end
 
       private
-      def fallback_data
-        @obj.config
-      end
+      def_delegator :@obj, :config, :fallback_data
 
     end
   end

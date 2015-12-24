@@ -5,20 +5,13 @@ module Jekyll
     class DocumentDrop < ImmutableDrop
       extend Forwardable
 
+      def_delegator :@obj, :next_doc, :next
+      def_delegator :@obj, :previous_doc, :previous
+      def_delegator :@obj, :relative_path, :path
       def_delegators :@obj, :id, :output, :content, :to_s, :relative_path, :url
-
-      alias_method :path, :relative_path
 
       def collection
         @obj.collection.label
-      end
-
-      def next
-        @obj.next_doc
-      end
-
-      def previous
-        @obj.previous_doc
       end
 
       def excerpt

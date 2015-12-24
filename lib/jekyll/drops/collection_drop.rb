@@ -6,6 +6,7 @@ module Jekyll
     class CollectionDrop < ImmutableDrop
       extend Forwardable
 
+      def_delegator :@obj, :write?, :output
       def_delegators :@obj, :label, :docs, :files, :directory,
                             :relative_directory
 
@@ -13,14 +14,8 @@ module Jekyll
         docs.to_s
       end
 
-      def output
-        @obj.write?
-      end
-
       private
-      def fallback_data
-        @obj.metadata
-      end
+      def_delegator :@obj, :metadata, :fallback_data
 
     end
   end

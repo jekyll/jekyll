@@ -3,16 +3,13 @@
 module Jekyll
   module Drops
     class UrlDrop < ImmutableDrop
+      extend Forwardable
+
+      def_delegator :@obj, :cleaned_relative_path, :path
+      def_delegator :@obj, :output_ext, :output_ext
+
       def collection
         @obj.collection.label
-      end
-
-      def path
-        @obj.cleaned_relative_path
-      end
-
-      def output_ext
-        @obj.output_ext
       end
 
       def name
