@@ -32,6 +32,7 @@ require 'colorator'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
+  StandardError = Class.new(::StandardError)
 
   # internal requires
   autoload :Cleaner,             'jekyll/cleaner'
