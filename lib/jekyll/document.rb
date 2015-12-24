@@ -12,11 +12,13 @@ module Jekyll
 
     # Create a new Document.
     #
-    # site - the Jekyll::Site instance to which this Document belongs
     # path - the path to the file
+    # relations - a hash with keys :site and :collection, the values of which
+    #             are the Jekyll::Site and Jekyll::Collection to which this
+    #             Document belong.
     #
     # Returns nothing.
-    def initialize(path, relations)
+    def initialize(path, relations = {})
       @site = relations[:site]
       @path = path
       @extname = File.extname(path)
@@ -354,9 +356,11 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return ArgumentError.new("document cannot be compared against #{other}") unless other.respond_to?(:data)
-      cmp = data['date'] <=> other.data['date']
-      cmp = path <=> other.path if cmp == 0
-      cmp
+      if data['date'] && other.data['date'] && (cmp = data['date'] <=> other.data['date']) != 0
+        cmp
+      else
+        path <=> other.path
+      end
     end
 
     # Determine whether this document should be written.
