@@ -174,13 +174,14 @@ module Jekyll
         SLUGIFY_PRETTY_REGEXP
       end
 
-      slug = string.
-        # Strip according to the mode
-        gsub(re, '-').
-        # Remove leading/trailing hyphen
-        gsub(/^\-|\-$/i, '')
+      # Strip according to the mode
+      slug = string.gsub(re, '-')
 
-      cased ? slug : slug.downcase
+      # Remove leading/trailing hyphen
+      slug.gsub!(/^\-|\-$/i, '')
+
+      slug.downcase! unless cased
+      slug
     end
 
     # Add an appropriate suffix to template so that it matches the specified
