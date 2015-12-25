@@ -27,6 +27,59 @@ require 'set'
 require 'safe_yaml/load'
 require 'liquid'
 require 'colorator'
+<<<<<<< HEAD
+=======
+require 'toml'
+
+# internal requires
+require 'jekyll/version'
+require 'jekyll/utils'
+require 'jekyll/hooks'
+require 'jekyll/log_adapter'
+require 'jekyll/stevenson'
+require 'jekyll/deprecator'
+require 'jekyll/configuration'
+require 'jekyll/document'
+require 'jekyll/collection'
+require 'jekyll/plugin_manager'
+require 'jekyll/frontmatter_defaults'
+require 'jekyll/site'
+require 'jekyll/convertible'
+require 'jekyll/url'
+require 'jekyll/layout'
+require 'jekyll/page'
+require 'jekyll/post'
+require 'jekyll/excerpt'
+require 'jekyll/draft'
+require 'jekyll/filters'
+require 'jekyll/static_file'
+require 'jekyll/errors'
+require 'jekyll/related_posts'
+require 'jekyll/cleaner'
+require 'jekyll/entry_filter'
+require 'jekyll/layout_reader'
+require 'jekyll/publisher'
+require 'jekyll/renderer'
+
+# extensions
+require 'jekyll/plugin'
+require 'jekyll/converter'
+require 'jekyll/generator'
+require 'jekyll/command'
+require 'jekyll/liquid_extensions'
+
+require_all 'jekyll/commands'
+require_all 'jekyll/converters'
+require_all 'jekyll/converters/markdown'
+require_all 'jekyll/generators'
+require_all 'jekyll/tags'
+
+# plugins
+require 'jekyll-coffeescript'
+require 'jekyll-sass-converter'
+require 'jekyll-paginate'
+require 'jekyll-gist'
+>>>>>>> jekyll/hooks
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 

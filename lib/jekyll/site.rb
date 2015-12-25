@@ -13,6 +13,8 @@ module Jekyll
     attr_accessor :converters, :generators, :reader
     attr_reader   :regenerator, :liquid_renderer
 
+    include Jekyll::Hooks
+
     # Public: Initialize a new Site.
     #
     # config - A Hash containing site configuration details.
