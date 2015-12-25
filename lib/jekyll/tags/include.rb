@@ -18,6 +18,12 @@ module Jekyll
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)(?<params>.*)/
 
+      class << self
+        def source_cache
+          @@source_cache ||= {}
+        end
+      end
+
       def initialize(tag_name, markup, tokens)
         super
         matched = markup.strip.match(VARIABLE_SYNTAX)
@@ -166,8 +172,13 @@ eos
       end
 
       # This method allows to modify the file content by inheriting from the class.
+<<<<<<< HEAD
       def read_file(file, context)
         File.read(file, file_read_opts(context))
+=======
+      def source(file, context)
+        self.class.source_cache[file] ||= File.read(file, file_read_opts(context))
+>>>>>>> jekyll/cache-includes
       end
     end
 

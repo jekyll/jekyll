@@ -33,6 +33,7 @@ group :test do
   end
 end
 
+<<<<<<< HEAD
 group :benchmark do
   if ENV['BENCHMARK']
     gem 'ruby-prof'
@@ -40,6 +41,12 @@ group :benchmark do
     gem 'stackprof'
     gem 'benchmark-ips'
   end
+=======
+if ENV['BENCHMARK']
+  gem 'benchmark-ips'
+  gem 'rbtrace'
+  gem 'stackprof'
+>>>>>>> jekyll/cache-includes
 end
 
 gem 'jekyll-paginate', '~> 1.0'
