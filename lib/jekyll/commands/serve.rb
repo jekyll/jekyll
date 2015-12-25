@@ -39,10 +39,24 @@ module Jekyll
 
         #
 
+<<<<<<< HEAD
         def process(opts)
           opts = configuration_from_options(opts)
           destination = opts["destination"]
           setup(destination)
+=======
+          s = WEBrick::HTTPServer.new(webrick_options(options))
+          s.unmount("")
+
+          s.mount(
+            options['baseurl'],
+            custom_file_handler,
+            destination,
+            file_handler_options
+          )
+
+          Jekyll.logger.info "Server address:", server_address_info(s, options)
+>>>>>>> jekyll/change-default-listening-host
 
           server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
           server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
@@ -216,8 +230,31 @@ module Jekyll
 
         private
         def mime_types
+<<<<<<< HEAD
           file = File.expand_path('../mime.types', File.dirname(__FILE__))
           WEBrick::HTTPUtils.load_mime_types(file)
+=======
+          mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
+          WEBrick::HTTPUtils::load_mime_types(mime_types_file)
+        end
+
+        def server_address_info(server, options)
+          bind_addr = server.config[:BindAddress].to_s
+          listen_addr = bind_addr == "0.0.0.0" ? "localhost" : bind_addr
+          base_url  = "#{options['baseurl']}/" if options['baseurl']
+
+          rtn = "http://#{listen_addr}:#{server.config[:Port]}#{base_url}"
+          rtn = "#{rtn} (listening on all interfaces)" if bind_addr == "0.0.0.0"
+        rtn
+        end
+
+        # recreate NondisclosureName under utf-8 circumstance
+        def file_handler_options
+          WEBrick::Config::FileHandler.merge({
+            :FancyIndexing     => true,
+            :NondisclosureName => ['.ht*','~*']
+          })
+>>>>>>> jekyll/change-default-listening-host
         end
       end
     end
