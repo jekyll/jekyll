@@ -9,8 +9,17 @@ module Jekyll
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
 
+<<<<<<< HEAD
     def strip_heredoc(str)
       str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
+=======
+    # Takes a slug and turns it into a simple title.
+
+    def titleize_slug(slug)
+      slug.split("-").map! do |val|
+        val.capitalize!
+      end.join(" ")
+>>>>>>> origin/pull/cleanup-document__post_read
     end
 
     # Non-destructive version of deep_merge_hashes! See that method.
