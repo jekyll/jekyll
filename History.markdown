@@ -589,6 +589,7 @@
 
 ### Site Enhancements
 
+<<<<<<< HEAD
   * Use Sass and a Docs Collection (#2651)
   * Add `latest_version.txt` file to the site (#2740)
   * Be more ambiguous about `page.content`. But more transparent. (#2522)
@@ -1006,11 +1007,17 @@
   * Add docs for `where` and `group_by` Liquid filters (#2298)
   * Remove notes in docs for unreleased features (#2309)
 
+=======
+>>>>>>> jekyll/v1-stable
 ## 1.5.1 / 2014-03-27
 
 ### Bug Fixes
 
+<<<<<<< HEAD
   * Only strip the drive name if it begins the string (#2176)
+=======
+* Only strip the drive name if it begins the string (#2176)
+>>>>>>> jekyll/v1-stable
 
 ## 1.5.0 / 2014-03-24
 
@@ -1026,11 +1033,19 @@
 
 ### Development Fixes
 
+<<<<<<< HEAD
   * Lock `cucumber` at `1.3.11` (#2167)
+=======
+  * Lock `cucmber` at `1.3.11` (#2167)
+>>>>>>> jekyll/v1-stable
 
 ## 1.4.3 / 2014-01-13
 
 ### Bug Fixes
+<<<<<<< HEAD
+=======
+
+>>>>>>> jekyll/v1-stable
   * Patch show-stopping security vulnerabilities (#1944)
 
 ## 1.4.2 / 2013-12-16

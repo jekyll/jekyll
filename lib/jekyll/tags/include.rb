@@ -116,14 +116,19 @@ eos
       end
 
       def render(context)
+<<<<<<< HEAD
         site = context.registers[:site]
         @includes_dir = tag_includes_dir(context)
         dir = resolved_includes_dir(context)
+=======
+        dir = File.join(File.realpath(context.registers[:site].source), INCLUDES_DIR)
+>>>>>>> jekyll/v1-stable
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
         path = File.join(dir, file)
+<<<<<<< HEAD
         validate_path(path, dir, site.safe)
 
         # Add include to dependency tree
@@ -133,6 +138,9 @@ eos
             path
           )
         end
+=======
+        validate_path(path, dir, context.registers[:site].safe)
+>>>>>>> jekyll/v1-stable
 
         begin
           partial = load_cached_partial(path, context)
@@ -146,6 +154,7 @@ eos
         end
       end
 
+<<<<<<< HEAD
       def load_cached_partial(path, context)
         context.registers[:cached_partials] ||= {}
         cached_partial = context.registers[:cached_partials]
@@ -167,6 +176,18 @@ eos
         elsif !File.exist?(path)
           raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
         end
+=======
+      def validate_path(path, dir, safe)
+        if safe && !realpath_prefixed_with?(path, dir)
+          raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
+        elsif !File.exist?(path)
+          raise IOError.new "Included file '#{path}' not found"
+        end
+      end
+
+      def realpath_prefixed_with?(path, dir)
+        File.exist?(path) && File.realpath(path).start_with?(dir)
+>>>>>>> jekyll/v1-stable
       end
 
       def path_relative_to_source(dir, path)

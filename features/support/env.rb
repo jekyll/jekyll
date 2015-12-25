@@ -33,6 +33,7 @@ def all_steps_to_path(path)
   paths
 end
 
+<<<<<<< HEAD
 def jekyll_output_file
   JEKYLL_COMMAND_OUTPUT_FILE
 end
@@ -73,6 +74,23 @@ def run_in_shell(*args)
   end
 
   spawned
+=======
+def run_jekyll(opts = {})
+  command = JEKYLL_PATH.clone
+  command << " build --trace"
+  command << " --drafts" if opts[:drafts]
+  command << " >> /dev/null 2>&1" if opts[:debug].nil?
+  system command
+end
+
+def call_jekyll_new(opts = {})
+  command = JEKYLL_PATH.clone
+  command << " new --trace"
+  command << " #{opts[:path]}" if opts[:path]
+  command << " --blank" if opts[:blank]
+  command << " >> /dev/null 2>&1" if opts[:debug].nil?
+  system command
+>>>>>>> jekyll/v1-stable
 end
 
 def slug(title)

@@ -51,9 +51,20 @@ module Jekyll
       'paginate_path' => '/page:num',
       'timezone'      => nil,           # use the local timezone
 
+<<<<<<< HEAD
       'quiet'         => false,
       'verbose'       => false,
       'defaults'      => [],
+=======
+      'maruku' => {
+        'fenced_code_blocks' => true,
+        'use_tex'    => false,
+        'use_divs'   => false,
+        'png_engine' => 'blahtex',
+        'png_dir'    => 'images/latex',
+        'png_url'    => '/images/latex'
+      },
+>>>>>>> jekyll/v1-stable
 
       'rdiscount' => {
         'extensions' => []
