@@ -12,9 +12,12 @@ module Jekyll
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     def strip_heredoc(str)
       str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
 =======
+=======
+>>>>>>> origin/pull/cleanup-document__post_read
 =======
 >>>>>>> origin/pull/cleanup-document__post_read
 =======
@@ -27,6 +30,9 @@ module Jekyll
       end.join(" ")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> origin/pull/cleanup-document__post_read
+=======
 >>>>>>> origin/pull/cleanup-document__post_read
 =======
 >>>>>>> origin/pull/cleanup-document__post_read
