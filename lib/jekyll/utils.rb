@@ -10,15 +10,21 @@ module Jekyll
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def strip_heredoc(str)
       str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
 =======
+=======
+>>>>>>> origin/pull/cleanup-document__post_read
     # Takes a slug and turns it into a simple title.
 
     def titleize_slug(slug)
       slug.split("-").map! do |val|
         val.capitalize!
       end.join(" ")
+<<<<<<< HEAD
+>>>>>>> origin/pull/cleanup-document__post_read
+=======
 >>>>>>> origin/pull/cleanup-document__post_read
     end
 
