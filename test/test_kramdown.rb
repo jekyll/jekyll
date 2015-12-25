@@ -94,6 +94,7 @@ class TestKramdown < JekyllUnitTest
       end
     end
 
+<<<<<<< HEAD
     should "move coderay to syntax_highlighter_opts" do
       original = Kramdown::Document.method(:new)
       markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, {
@@ -112,6 +113,15 @@ class TestKramdown < JekyllUnitTest
       end
 
       markdown.convert("hello world")
+=======
+    should "convert quotes to smart quotes" do
+      markdown = MarkdownConverter.new(@config)
+      assert_equal "<p>&#8220;Pit&#8217;hy&#8221;</p>", markdown.convert(%{"Pit'hy"}).strip
+
+      override = { 'kramdown' => { 'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo' } }
+      markdown = MarkdownConverter.new(@config.deep_merge(override))
+      assert_equal "<p>&#171;Pit&#8250;hy&#187;</p>", markdown.convert(%{"Pit'hy"}).strip
+>>>>>>> jekyll/0.12.1-release
     end
   end
 end

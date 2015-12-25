@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 source 'https://rubygems.org'
 gemspec name: 'jekyll'
 
@@ -54,3 +55,7 @@ platform :ruby, :mswin, :mingw do
   gem 'classifier-reborn', '~> 2.0'
   gem 'liquid-c', '~> 3.0'
 end
+=======
+source "https://rubygems.org"
+gemspec
+>>>>>>> jekyll/0.12.1-release
