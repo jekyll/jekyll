@@ -123,11 +123,14 @@ class TestKramdown < JekyllUnitTest
       assert_equal "<p>&#171;Pit&#8250;hy&#187;</p>", markdown.convert(%{"Pit'hy"}).strip
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> jekyll/0.12.1-release
 =======
 >>>>>>> origin/0.12.1-release
 =======
 >>>>>>> jekyll/0.12.1-release
+=======
+>>>>>>> origin/0.12.1-release
     end
   end
 end
