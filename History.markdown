@@ -1,4 +1,5 @@
 ## 1.0.4 / 2013-07-24
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 ### Minor Enhancements
@@ -1362,6 +1363,11 @@
   * Add 'Working with drafts' page to docs (#1289)
   * Add information about time zones to the documentation for a page's
     date (#1304)
+=======
+
+### Bug Fixes
+  * Require Liquid 2.5.1 (#1349)
+>>>>>>> origin/1.0-branch
 
 ## 1.0.3 / 2013-06-07
 
