@@ -158,6 +158,7 @@ module Jekyll
         end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         # Add SSL to the stack if the user triggers --enable-ssl and they
         # provide both types of certificates commonly needed.  Raise if they
         # forget to add one of the certificates.
@@ -168,6 +169,8 @@ module Jekyll
           if !opts[:JekyllOptions]["ssl_cert"] || !opts[:JekyllOptions]["ssl_key"]
             raise RuntimeError, "--ssl-cert or --ssl-key missing."
 =======
+=======
+>>>>>>> origin/add-support-for-webrick-file-precedence
         # Allows files to be routed in a pretty URL in both default format
         # and in custom page/index.html format and while doing so takes into
         # consideration importance of blog.html > blog/ but not > blog/index.html
