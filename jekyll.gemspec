@@ -42,9 +42,15 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
+<<<<<<< HEAD
   s.version           = '0.12.1'
   s.license           = 'MIT'
   s.date              = '2013-02-19'
+=======
+  s.version           = '1.0.4'
+  s.license           = 'MIT'
+  s.date              = '2013-07-25'
+>>>>>>> jekyll/1.0-branch
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -61,7 +67,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w[README.textile LICENSE]
 
-  s.add_runtime_dependency('liquid', "~> 2.3")
+  s.add_runtime_dependency('liquid', "~> 2.5.1")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('directory_watcher', "~> 1.4.1")
   s.add_runtime_dependency('maruku', "~> 0.5")

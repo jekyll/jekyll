@@ -1,5 +1,6 @@
-## HEAD
+## 1.0.4 / 2013-07-24
 
+<<<<<<< HEAD
 ### Minor Enhancements
 
   * Add 'sample' Liquid filter Equivalent to Array#sample functionality (#4223)
@@ -459,6 +460,10 @@
   * In the case that a Gemfile does not exist, ensure Jekyll doesn't fail on requiring the Gemfile group (#3066)
 
 ### Development Fixes
+=======
+### Bug Fixes
+  * Require Liquid 2.5.1 (#1349)
+>>>>>>> jekyll/1.0-branch
 
   * Fix a typo in the doc block for `Jekyll::URL.escape_path` (#3052)
   * Add integration test for `jekyll new --blank` in TestUnit (#2913)
