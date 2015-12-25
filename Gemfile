@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 source 'https://rubygems.org'
 gemspec name: 'jekyll'
 
@@ -56,6 +57,8 @@ platform :ruby, :mswin, :mingw do
   gem 'liquid-c', '~> 3.0'
 end
 =======
+=======
+>>>>>>> origin/0.12.1-release
 source "https://rubygems.org"
 gemspec
 >>>>>>> jekyll/0.12.1-release

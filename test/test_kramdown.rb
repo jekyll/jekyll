@@ -121,7 +121,10 @@ class TestKramdown < JekyllUnitTest
       override = { 'kramdown' => { 'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo' } }
       markdown = MarkdownConverter.new(@config.deep_merge(override))
       assert_equal "<p>&#171;Pit&#8250;hy&#187;</p>", markdown.convert(%{"Pit'hy"}).strip
+<<<<<<< HEAD
 >>>>>>> jekyll/0.12.1-release
+=======
+>>>>>>> origin/0.12.1-release
     end
   end
 end
