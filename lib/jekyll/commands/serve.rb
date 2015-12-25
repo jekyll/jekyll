@@ -157,6 +157,7 @@ module Jekyll
           opts[:Logger] = WEBrick::Log.new($stdout, level)
         end
 
+<<<<<<< HEAD
         # Add SSL to the stack if the user triggers --enable-ssl and they
         # provide both types of certificates commonly needed.  Raise if they
         # forget to add one of the certificates.
@@ -166,6 +167,31 @@ module Jekyll
           return if !opts[:JekyllOptions]["ssl_cert"] && !opts[:JekyllOptions]["ssl_key"]
           if !opts[:JekyllOptions]["ssl_cert"] || !opts[:JekyllOptions]["ssl_key"]
             raise RuntimeError, "--ssl-cert or --ssl-key missing."
+=======
+        # Allows files to be routed in a pretty URL in both default format
+        # and in custom page/index.html format and while doing so takes into
+        # consideration importance of blog.html > blog/ but not > blog/index.html
+        # because you could have URL's like blog.html, blog/archive/page.html
+        # and in a normal circumstance blog/ would be greater than blog.html
+        # breaking your entire site when you are playing around, and I
+        # don't think you really want that to happen when testing do you?
+
+        def custom_file_handler
+          Class.new WEBrick::HTTPServlet::FileHandler do
+            def search_file(req, res, basename)
+              if (file = super) || (file = super req, res, "#{basename}.html")
+                return file
+
+              else
+                file = File.join(@config[:DocumentRoot], req.path.gsub(/\/\Z/, "") + ".html")
+                if File.expand_path(file).start_with?(@config[:DocumentRoot]) && File.file?(file)
+                  return ".html"
+                end
+              end
+
+              nil
+            end
+>>>>>>> jekyll/add-support-for-webrick-file-precedence
           end
 
           require "openssl"; require "webrick/https"
