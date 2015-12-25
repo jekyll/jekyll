@@ -39,10 +39,27 @@ module Jekyll
 
         #
 
+<<<<<<< HEAD
         def process(opts)
           opts = configuration_from_options(opts)
           destination = opts["destination"]
           setup(destination)
+=======
+          s = WEBrick::HTTPServer.new(webrick_options(options))
+          s.unmount("")
+
+          s.mount(
+            options['baseurl'],
+            custom_file_handler,
+            destination,
+            file_handler_options
+          )
+
+          Jekyll.logger.info "Server address:", server_address_info(s, options)
+<<<<<<< HEAD
+>>>>>>> jekyll/change-default-listening-host
+=======
+>>>>>>> origin/change-default-listening-host
 
           server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
           server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
@@ -157,6 +174,8 @@ module Jekyll
           opts[:Logger] = WEBrick::Log.new($stdout, level)
         end
 
+<<<<<<< HEAD
+<<<<<<< HEAD
         # Add SSL to the stack if the user triggers --enable-ssl and they
         # provide both types of certificates commonly needed.  Raise if they
         # forget to add one of the certificates.
@@ -166,6 +185,33 @@ module Jekyll
           return if !opts[:JekyllOptions]["ssl_cert"] && !opts[:JekyllOptions]["ssl_key"]
           if !opts[:JekyllOptions]["ssl_cert"] || !opts[:JekyllOptions]["ssl_key"]
             raise RuntimeError, "--ssl-cert or --ssl-key missing."
+=======
+=======
+>>>>>>> origin/add-support-for-webrick-file-precedence
+        # Allows files to be routed in a pretty URL in both default format
+        # and in custom page/index.html format and while doing so takes into
+        # consideration importance of blog.html > blog/ but not > blog/index.html
+        # because you could have URL's like blog.html, blog/archive/page.html
+        # and in a normal circumstance blog/ would be greater than blog.html
+        # breaking your entire site when you are playing around, and I
+        # don't think you really want that to happen when testing do you?
+
+        def custom_file_handler
+          Class.new WEBrick::HTTPServlet::FileHandler do
+            def search_file(req, res, basename)
+              if (file = super) || (file = super req, res, "#{basename}.html")
+                return file
+
+              else
+                file = File.join(@config[:DocumentRoot], req.path.gsub(/\/\Z/, "") + ".html")
+                if File.expand_path(file).start_with?(@config[:DocumentRoot]) && File.file?(file)
+                  return ".html"
+                end
+              end
+
+              nil
+            end
+>>>>>>> jekyll/add-support-for-webrick-file-precedence
           end
 
           require "openssl"; require "webrick/https"
@@ -187,8 +233,31 @@ module Jekyll
 
         private
         def mime_types
+<<<<<<< HEAD
           file = File.expand_path('../mime.types', File.dirname(__FILE__))
           WEBrick::HTTPUtils.load_mime_types(file)
+=======
+          mime_types_file = File.expand_path('../mime.types', File.dirname(__FILE__))
+          WEBrick::HTTPUtils::load_mime_types(mime_types_file)
+        end
+
+        def server_address_info(server, options)
+          bind_addr = server.config[:BindAddress].to_s
+          listen_addr = bind_addr == "0.0.0.0" ? "localhost" : bind_addr
+          base_url  = "#{options['baseurl']}/" if options['baseurl']
+
+          rtn = "http://#{listen_addr}:#{server.config[:Port]}#{base_url}"
+          rtn = "#{rtn} (listening on all interfaces)" if bind_addr == "0.0.0.0"
+        rtn
+        end
+
+        # recreate NondisclosureName under utf-8 circumstance
+        def file_handler_options
+          WEBrick::Config::FileHandler.merge({
+            :FancyIndexing     => true,
+            :NondisclosureName => ['.ht*','~*']
+          })
+>>>>>>> jekyll/change-default-listening-host
         end
       end
     end

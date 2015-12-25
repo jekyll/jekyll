@@ -26,12 +26,71 @@ require 'set'
 # 3rd party
 require 'safe_yaml/load'
 require 'liquid'
-require 'kramdown'
 require 'colorator'
+<<<<<<< HEAD
+=======
+require 'toml'
+
+# internal requires
+require 'jekyll/version'
+require 'jekyll/utils'
+require 'jekyll/hooks'
+require 'jekyll/log_adapter'
+require 'jekyll/stevenson'
+require 'jekyll/deprecator'
+require 'jekyll/configuration'
+require 'jekyll/document'
+require 'jekyll/collection'
+require 'jekyll/plugin_manager'
+require 'jekyll/frontmatter_defaults'
+require 'jekyll/site'
+require 'jekyll/convertible'
+require 'jekyll/url'
+require 'jekyll/layout'
+require 'jekyll/page'
+require 'jekyll/post'
+require 'jekyll/excerpt'
+require 'jekyll/draft'
+require 'jekyll/filters'
+require 'jekyll/static_file'
+require 'jekyll/errors'
+require 'jekyll/related_posts'
+require 'jekyll/cleaner'
+require 'jekyll/entry_filter'
+require 'jekyll/layout_reader'
+require 'jekyll/publisher'
+require 'jekyll/renderer'
+
+# extensions
+require 'jekyll/plugin'
+require 'jekyll/converter'
+require 'jekyll/generator'
+require 'jekyll/command'
+require 'jekyll/liquid_extensions'
+
+require_all 'jekyll/commands'
+require_all 'jekyll/converters'
+require_all 'jekyll/converters/markdown'
+require_all 'jekyll/generators'
+require_all 'jekyll/tags'
+
+# plugins
+require 'jekyll-coffeescript'
+require 'jekyll-sass-converter'
+require 'jekyll-paginate'
+require 'jekyll-gist'
+>>>>>>> jekyll/hooks
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 
   # internal requires
   autoload :Cleaner,             'jekyll/cleaner'
@@ -84,7 +143,7 @@ module Jekyll
     # images and allows you to skip that when working in development.
 
     def env
-      ENV["JEKYLL_ENV"] || "development"
+      ENV["JEKYLL_ENV"] || "dev"
     end
 
     # Public: Generate a Jekyll configuration Hash by merging the default
@@ -116,6 +175,112 @@ module Jekyll
     # Returns nothing
     def set_timezone(timezone)
       ENV['TZ'] = timezone
+=======
+=======
+>>>>>>> origin/0.12.1-release
+=======
+>>>>>>> jekyll/0.12.1-release
+=======
+>>>>>>> origin/0.12.1-release
+  VERSION = '0.12.1'
+
+  # Default options. Overriden by values in _config.yml or command-line opts.
+  # Strings rather than symbols are used for compatability with YAML.
+  DEFAULTS = {
+    'safe'          => false,
+    'auto'          => false,
+    'server'        => false,
+    'server_port'   => 4000,
+
+    'source'        => Dir.pwd,
+    'destination'   => File.join(Dir.pwd, '_site'),
+    'plugins'       => File.join(Dir.pwd, '_plugins'),
+    'layouts'       => '_layouts',
+
+    'future'        => true,
+    'lsi'           => false,
+    'pygments'      => false,
+    'markdown'      => 'maruku',
+    'permalink'     => 'date',
+    'include'       => ['.htaccess'],
+    'paginate_path' => 'page:num',
+
+    'markdown_ext'  => 'markdown,mkd,mkdn,md',
+    'textile_ext'   => 'textile',
+
+    'maruku' => {
+      'use_tex'    => false,
+      'use_divs'   => false,
+      'png_engine' => 'blahtex',
+      'png_dir'    => 'images/latex',
+      'png_url'    => '/images/latex'
+    },
+
+    'rdiscount' => {
+      'extensions' => []
+    },
+
+    'redcarpet' => {
+      'extensions' => []
+    },
+
+    'kramdown' => {
+      'auto_ids'      => true,
+      'footnote_nr'   => 1,
+      'entity_output' => 'as_char',
+      'toc_levels'    => '1..6',
+      'smart_quotes'  => 'lsquo,rsquo,ldquo,rdquo',
+      'use_coderay'   => false,
+
+      'coderay' => {
+        'coderay_wrap'              => 'div',
+        'coderay_line_numbers'      => 'inline',
+        'coderay_line_number_start' => 1,
+        'coderay_tab_width'         => 4,
+        'coderay_bold_every'        => 10,
+        'coderay_css'               => 'style'
+      }
+    },
+
+    'redcloth' => {
+      'hard_breaks' => true
+    }
+  }
+=======
+  VERSION = '1.0.4'
+>>>>>>> jekyll/1.0-branch
+=======
+  VERSION = '1.0.4'
+>>>>>>> origin/1.0-branch
+=======
+  VERSION = '1.5.1'
+>>>>>>> jekyll/v1-stable
+
+  # Public: Generate a Jekyll configuration Hash by merging the default
+  # options with anything in _config.yml, and adding the given options on top.
+  #
+  # override - A Hash of config directives that override any options in both
+  #            the defaults and the config file. See Jekyll::DEFAULTS for a
+  #            list of option names and their defaults.
+  #
+  # Returns the final configuration Hash.
+  def self.configuration(override)
+    # _config.yml may override default source location, but until
+    # then, we need to know where to look for _config.yml
+    source = override['source'] || Jekyll::DEFAULTS['source']
+
+    # Get configuration from <source>/_config.yml
+    config_file = File.join(source, '_config.yml')
+    begin
+      config = YAML.load_file(config_file)
+      raise "Invalid configuration - #{config_file}" if !config.is_a?(Hash)
+      $stdout.puts "Configuration from #{config_file}"
+    rescue => err
+      $stderr.puts "WARNING: Could not read configuration. " +
+                   "Using defaults (and options)."
+      $stderr.puts "\t" + err.to_s
+      config = {}
+>>>>>>> jekyll/0.12.1-release
     end
 
     # Public: Fetch the logger instance for this Jekyll process.
@@ -166,6 +331,19 @@ module Jekyll
     # Conditional optimizations
     Jekyll::External.require_if_present('liquid-c')
 
+  end
+
+  # Get a subpath without any of the traversal nonsense.
+  #
+  # Returns a pure and clean path
+  def self.sanitized_path(base_directory, questionable_path)
+    clean_path = File.expand_path(questionable_path, "/")
+    clean_path.gsub!(/\A\w\:\//, '/')
+    unless clean_path.start_with?(base_directory)
+      File.join(base_directory, clean_path)
+    else
+      clean_path
+    end
   end
 end
 

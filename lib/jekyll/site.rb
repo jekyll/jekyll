@@ -13,6 +13,8 @@ module Jekyll
     attr_accessor :converters, :generators, :reader
     attr_reader   :regenerator, :liquid_renderer
 
+    include Jekyll::Hooks
+
     # Public: Initialize a new Site.
     #
     # config - A Hash containing site configuration details.
@@ -141,9 +143,117 @@ module Jekyll
     #
     # Returns nothing.
     def read
+<<<<<<< HEAD
       reader.read
       limit_posts!
       Jekyll::Hooks.trigger :site, :post_read, self
+=======
+      self.read_layouts
+      self.read_directories
+      self.read_data(config['data_source'])
+    end
+
+    # Read all the files in <source>/<layouts> and create a new Layout object
+    # with each one.
+    #
+    # Returns nothing.
+    def read_layouts
+      base = File.join(self.source, self.config['layouts'])
+      return unless File.exists?(base)
+      entries = []
+      Dir.chdir(base) { entries = filter_entries(Dir['**/*.*']) }
+
+      entries.each do |f|
+        name = f.split(".")[0..-2].join(".")
+        self.layouts[name] = Layout.new(self, base, f)
+      end
+    end
+
+    # Recursively traverse directories to find posts, pages and static files
+    # that will become part of the site according to the rules in
+    # filter_entries.
+    #
+    # dir - The String relative path of the directory to read. Default: ''.
+    #
+    # Returns nothing.
+    def read_directories(dir = '')
+      base = File.join(self.source, dir)
+      entries = Dir.chdir(base) { filter_entries(Dir.entries('.')) }
+
+      self.read_posts(dir)
+      self.read_drafts(dir) if self.show_drafts
+      self.posts.sort!
+      limit_posts! if limit_posts > 0 # limit the posts if :limit_posts option is set
+
+      entries.each do |f|
+        f_abs = File.join(base, f)
+        if File.directory?(f_abs)
+          f_rel = File.join(dir, f)
+          read_directories(f_rel) unless self.dest.sub(/\/$/, '') == f_abs
+        elsif has_yaml_header?(f_abs)
+          pages << Page.new(self, self.source, dir, f)
+        else
+          static_files << StaticFile.new(self, self.source, dir, f)
+        end
+      end
+    end
+
+    # Read all the files in <source>/<dir>/_posts and create a new Post
+    # object with each one.
+    #
+    # dir - The String relative path of the directory to read.
+    #
+    # Returns nothing.
+    def read_posts(dir)
+      posts = read_things(dir, '_posts', Post)
+
+      posts.each do |post|
+        if post.published && (self.future || post.date <= self.time)
+          aggregate_post_info(post)
+        end
+      end
+   end
+
+    # Read all the files in <source>/<dir>/_drafts and create a new Post
+    # object with each one.
+    #
+    # dir - The String relative path of the directory to read.
+    #
+    # Returns nothing.
+    def read_drafts(dir)
+      drafts = read_things(dir, '_drafts', Draft)
+
+      drafts.each do |draft|
+        aggregate_post_info(draft)
+      end
+    end
+
+    def read_things(dir, magic_dir, klass)
+      get_entries(dir, magic_dir).map do |entry|
+        klass.new(self, self.source, dir, entry) if klass.valid?(entry)
+      end.reject do |entry|
+        entry.nil?
+      end
+    end
+
+    # Read and parse all yaml files under <source>/<dir>
+    #
+    # Returns nothing
+    def read_data(dir)
+      base = File.join(self.source, dir)
+      return unless File.directory?(base) && (!self.safe || !File.symlink?(base))
+
+      entries = Dir.chdir(base) { Dir['*.{yaml,yml}'] }
+      entries.delete_if { |e| File.directory?(File.join(base, e)) }
+
+      entries.each do |entry|
+        path = File.join(self.source, dir, entry)
+        next if File.symlink?(path) && self.safe
+
+        key = sanitize_filename(File.basename(entry, '.*'))
+        self.data[key] = YAML.safe_load_file(path)
+      end
+>>>>>>> jekyll/v1-stable
     end
 
     # Run each of the Generators.

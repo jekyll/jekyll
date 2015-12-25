@@ -17,7 +17,7 @@ Feature: Rendering
     And I have a simple layout that contains "{{ content }}Ahoy, indeed!"
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Hi there, Jekyll development!\nAhoy, indeed" in "_site/index.html"
+    And I should see "Hi there, Jekyll dev!\nAhoy, indeed" in "_site/index.html"
 
   Scenario: Don't place asset files in layout
     Given I have an "index.scss" page with layout "simple" that contains ".foo-bar { color:black; }"

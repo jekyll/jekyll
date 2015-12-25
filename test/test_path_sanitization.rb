@@ -1,11 +1,19 @@
 require 'helper'
 
+<<<<<<< HEAD
 class TestPathSanitization < JekyllUnitTest
+=======
+class TestPathSanitization < Test::Unit::TestCase
+>>>>>>> jekyll/v1-stable
   context "on Windows with absolute source" do
     setup do
       @source = "C:/Users/xmr/Desktop/mpc-hc.org"
       @dest   = "./_site/"
+<<<<<<< HEAD
       allow(Dir).to receive(:pwd).and_return("C:/Users/xmr/Desktop/mpc-hc.org")
+=======
+      stub(Dir).pwd { "C:/Users/xmr/Desktop/mpc-hc.org" }
+>>>>>>> jekyll/v1-stable
     end
     should "strip drive name from path" do
       assert_equal "C:/Users/xmr/Desktop/mpc-hc.org/_site", Jekyll.sanitized_path(@source, @dest)

@@ -43,7 +43,7 @@ module Jekyll
       # Serving
       'detach'        => false,          # default to not detaching the server
       'port'          => '4000',
-      'host'          => '127.0.0.1',
+      'host'          => '0.0.0.0',
       'baseurl'       => '',
 
       # Output Configuration
@@ -51,9 +51,20 @@ module Jekyll
       'paginate_path' => '/page:num',
       'timezone'      => nil,           # use the local timezone
 
+<<<<<<< HEAD
       'quiet'         => false,
       'verbose'       => false,
       'defaults'      => [],
+=======
+      'maruku' => {
+        'fenced_code_blocks' => true,
+        'use_tex'    => false,
+        'use_divs'   => false,
+        'png_engine' => 'blahtex',
+        'png_dir'    => 'images/latex',
+        'png_url'    => '/images/latex'
+      },
+>>>>>>> jekyll/v1-stable
 
       'rdiscount' => {
         'extensions' => []
@@ -85,11 +96,6 @@ module Jekyll
       override[config_key] || self[config_key] || DEFAULTS[config_key]
     end
 
-    # Public: Directory of the Jekyll source folder
-    #
-    # override - the command-line options hash
-    #
-    # Returns the path to the Jekyll source directory
     def source(override)
       get_config_value_with_override('source', override)
     end
@@ -104,6 +110,10 @@ module Jekyll
     end
     alias_method :verbose?, :verbose
 
+    def in_source(override, path)
+      Jekyll.sanitized_path(source(override), path)
+    end
+
     def safe_load_file(filename)
       case File.extname(filename)
       when /\.toml/i
@@ -114,6 +124,13 @@ module Jekyll
       else
         raise ArgumentError, "No parser for '#{filename}' is available. Use a .toml or .y(a)ml file instead."
       end
+    end
+
+    def config_file_with_flexible_extname(basename, override)
+      default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
+        File.exist? in_source(override, "#{basename}.#{ext}")
+      end
+      in_source(override, "#{basename}.#{default}")
     end
 
     # Public: Generate list of configuration files from the override
@@ -128,14 +145,26 @@ module Jekyll
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override.delete('config')
       if config_files.to_s.empty?
-        default = %w[yml yaml].find(Proc.new { 'yml' }) do |ext|
-          File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))
+        config_file = config_file_with_flexible_extname('_config', override)
+        env_filename = config_file_with_flexible_extname(env_config_file_basename, override)
+        if File.exist? env_filename
+          config_files = [config_file, env_filename]
+        else
+          config_files = [config_file]
         end
-        config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
       end
-      config_files = [config_files] unless config_files.is_a? Array
+      config_files = Array(config_files)
+
+
       config_files
+    end
+
+    # Public: The config filename for the current Jekyll environment.
+    #
+    # Returns the filename for the JEKYLL_ENV-specific configuration file.
+    def env_config_file_basename
+      "_config.#{Jekyll.env.downcase}"
     end
 
     # Public: Read configuration and return merged Hash

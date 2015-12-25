@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 source 'https://rubygems.org'
 gemspec name: 'jekyll'
 
@@ -31,6 +35,7 @@ group :test do
   end
 end
 
+<<<<<<< HEAD
 group :benchmark do
   if ENV['BENCHMARK']
     gem 'ruby-prof'
@@ -38,6 +43,12 @@ group :benchmark do
     gem 'stackprof'
     gem 'benchmark-ips'
   end
+=======
+if ENV['BENCHMARK']
+  gem 'benchmark-ips'
+  gem 'rbtrace'
+  gem 'stackprof'
+>>>>>>> jekyll/cache-includes
 end
 
 gem 'jekyll-paginate', '~> 1.0'
@@ -54,3 +65,13 @@ platform :ruby, :mswin, :mingw do
   gem 'classifier-reborn', '~> 2.0'
   gem 'liquid-c', '~> 3.0'
 end
+=======
+=======
+>>>>>>> origin/0.12.1-release
+=======
+>>>>>>> jekyll/0.12.1-release
+=======
+>>>>>>> origin/0.12.1-release
+source "https://rubygems.org"
+gemspec
+>>>>>>> jekyll/0.12.1-release

@@ -134,7 +134,8 @@ Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
 end
 
 Given /^I have fixture collections$/ do
-  FileUtils.cp_r File.join(JEKYLL_SOURCE_DIR, "test", "source", "_methods"), source_dir
+  FileUtils.cp_r File.join(JEKYLL_SOURCE_DIR, "test/source/_methods"), source_dir
+  FileUtils.cp_r File.join(JEKYLL_SOURCE_DIR, "test/source/_thanksgiving"), source_dir
 end
 
 Given /^I wait (\d+) second(s?)$/ do |time, plural|

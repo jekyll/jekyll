@@ -1,5 +1,10 @@
 markdown: kramdown
+<<<<<<< HEAD
 highlighter: pygments
+=======
+highlighter: rouge
+relative_permalinks: false
+>>>>>>> origin/use-rouge
 permalink: /news/:year/:month/:day/:title/
 excerpt_separator: ""
 

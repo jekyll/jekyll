@@ -144,4 +144,19 @@ Feature: Collections
     """
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Collections: Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, , Site#generate," in "_site/index.html"
+    And I should see "Collections: Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Site#generate, YAML with Dots," in "_site/index.html"
+
+  Scenario: Rendered collection with date/dateless filename
+    Given I have an "index.html" page that contains "Collections: {% for method in site.thanksgiving %}{{ method.title }} {% endfor %}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      thanksgiving:
+        output: true
+    """
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "Thanksgiving Black Friday" in "_site/index.html"
+    And I should see "Happy Thanksgiving" in "_site/thanksgiving/2015-11-26-thanksgiving.html"
+    And I should see "Black Friday" in "_site/thanksgiving/black-friday.html"
