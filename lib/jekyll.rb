@@ -26,7 +26,6 @@ require 'set'
 # 3rd party
 require 'safe_yaml/load'
 require 'liquid'
-require 'kramdown'
 require 'colorator'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
@@ -89,7 +88,7 @@ module Jekyll
     # images and allows you to skip that when working in development.
 
     def env
-      ENV["JEKYLL_ENV"] || "development"
+      ENV["JEKYLL_ENV"] || "dev"
     end
 
     # Public: Generate a Jekyll configuration Hash by merging the default

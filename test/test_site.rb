@@ -435,8 +435,8 @@ class TestSite < JekyllUnitTest
         @page = @site.pages.find { |p| p.name == "environment.html" }
       end
 
-      should "default to 'development'" do
-        assert_equal "development", @page.content.strip
+      should "default to 'dev'" do
+        assert_equal "dev", @page.content.strip
       end
 
       context "in production" do
