@@ -91,6 +91,7 @@ module Jekyll
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   # internal requires
   autoload :Cleaner,             'jekyll/cleaner'
@@ -255,6 +256,9 @@ module Jekyll
 =======
   VERSION = '1.5.1'
 >>>>>>> jekyll/v1-stable
+=======
+  VERSION = '1.5.1'
+>>>>>>> origin/v1-stable
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
@@ -331,6 +335,19 @@ module Jekyll
     # Conditional optimizations
     Jekyll::External.require_if_present('liquid-c')
 
+  end
+
+  # Get a subpath without any of the traversal nonsense.
+  #
+  # Returns a pure and clean path
+  def self.sanitized_path(base_directory, questionable_path)
+    clean_path = File.expand_path(questionable_path, "/")
+    clean_path.gsub!(/\A\w\:\//, '/')
+    unless clean_path.start_with?(base_directory)
+      File.join(base_directory, clean_path)
+    else
+      clean_path
+    end
   end
 
   # Get a subpath without any of the traversal nonsense.

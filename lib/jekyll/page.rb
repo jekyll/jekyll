@@ -144,6 +144,7 @@ module Jekyll
     # Returns the destination file path String.
     def destination(dest)
 <<<<<<< HEAD
+<<<<<<< HEAD
       path = site.in_dest_dir(dest, URL.unescape_path(url))
       path = File.join(path, "index") if url.end_with?("/")
       path <<  output_ext unless path.end_with?(output_ext)
@@ -151,6 +152,10 @@ module Jekyll
       path = Jekyll.sanitized_path(dest, url)
       path = File.join(path, "index.html") if url =~ /\/$/
 >>>>>>> jekyll/v1-stable
+=======
+      path = Jekyll.sanitized_path(dest, url)
+      path = File.join(path, "index.html") if url =~ /\/$/
+>>>>>>> origin/v1-stable
       path
     end
 

@@ -1058,6 +1058,44 @@
 ### Bug Fixes
   * Don't allow nil entries when loading posts (#1796)
 
+## 1.5.1 / 2014-03-27
+
+### Bug Fixes
+
+* Only strip the drive name if it begins the string (#2176)
+
+## 1.5.0 / 2014-03-24
+
+### Minor Enhancements
+
+  * Loosen `safe_yaml` dependency to `~> 1.0` (#2167)
+  * Bump `safe_yaml` dependency to `~> 1.0.0` (#1942)
+
+### Bug Fixes
+
+  * Fix issue where filesystem traversal restriction broke Windows (#2167)
+  * Lock `maruku` at `0.7.0` (#2167)
+
+### Development Fixes
+
+  * Lock `cucmber` at `1.3.11` (#2167)
+
+## 1.4.3 / 2014-01-13
+
+### Bug Fixes
+
+  * Patch show-stopping security vulnerabilities (#1944)
+
+## 1.4.2 / 2013-12-16
+
+### Bug Fixes
+  * Turn on Maruku fenced code blocks by default (#1830)
+
+## 1.4.1 / 2013-12-09
+
+### Bug Fixes
+  * Don't allow nil entries when loading posts (#1796)
+
 ## 1.4.0 / 2013-12-07
 
 ### Major Enhancements
