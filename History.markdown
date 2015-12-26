@@ -50,6 +50,7 @@
   * Fix checklist in `_assets.md` (#4259)
   * Add Markdown examples to Pages docs (#4275)
   * Add jekyll-paginate-category to list of third-party plugins (#4273)
+  * Add `jekyll-responsive_image` to list of third-party plugins (#4286)
 
 ## 3.0.1 / 2015-11-17
 
