@@ -80,10 +80,11 @@ module Jekyll
 
     def generate_url_from_drop(template)
       template.gsub(/:([a-z_]+)/) do |match|
-        if replacement = @placeholders.public_send(match.sub(':', ''))
-          self.class.escape_path replacement
-        else
+        replacement = @placeholders.public_send(match.sub(':', ''))
+        if replacement.nil?
           ''.freeze
+        else
+          self.class.escape_path(replacement)
         end
       end.gsub(/\/\//, '/')
     end
