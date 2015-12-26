@@ -1,10 +1,12 @@
 # encoding: UTF-8
-require "jekyll/drops/immutable_drop"
+require "jekyll/drops/drop"
 
 module Jekyll
   module Drops
-    class CollectionDrop < ImmutableDrop
+    class CollectionDrop < Drop
       extend Forwardable
+
+      mutable false
 
       def_delegator :@obj, :write?, :output
       def_delegators :@obj, :label, :docs, :files, :directory,
