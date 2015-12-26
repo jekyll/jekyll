@@ -16,6 +16,7 @@ end
 require 'rubygems'
 
 # stdlib
+require 'forwardable'
 require 'fileutils'
 require 'time'
 require 'English'
