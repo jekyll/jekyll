@@ -7,7 +7,7 @@ require 'yaml'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 require 'jekyll/version'
 
-Dir.glob('lib/tasks/**.rake').each { |f| import f }
+Dir.glob('rake/**.rake').each { |f| import f }
 
 #############################################################################
 #
