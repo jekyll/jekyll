@@ -2386,13 +2386,15 @@ homepage of your Jekyll-generated site.</p>
 
 <h2 id="where-additional-pages-live">Where additional pages live</h2>
 
-<p>Where you put HTML files for pages depends on how you want the pages to work.
+<p>Where you put HTML or <a href="http://daringfireball.net/projects/markdown/">Markdown</a>
+files for pages depends on how you want the pages to work.
 There are two main ways of creating pages:</p>
 
 <ul>
-  <li>Place named HTML files for each page in your site’s root folder.</li>
+  <li>Place named HTML or <a href="http://daringfireball.net/projects/markdown/">Markdown</a>
+files for each page in your site’s root folder.</li>
   <li>Create a folder in the site’s root for each page, and place an index.html
-file in each page folder.</li>
+or index.md file in each page folder.</li>
 </ul>
 
 <p>Both methods work fine (and can be used in conjunction with each other),
@@ -2413,6 +2415,7 @@ and associated URLs might look like:</p>
 <span class="p">|</span>-- _site/
 <span class="p">|</span>-- about.html    <span class="c"># =&gt; http://example.com/about.html</span>
 <span class="p">|</span>-- index.html    <span class="c"># =&gt; http://example.com/</span>
+<span class="p">|</span>-- other.md      <span class="c"># =&gt; http://example.com/other.html</span>
 └── contact.html  <span class="c"># =&gt; http://example.com/contact.html</span></code></pre></figure>
 
 <h3 id="named-folders-containing-index-html-files">Named folders containing index HTML files</h3>
@@ -2435,6 +2438,8 @@ might look like:</p>
 <span class="p">|</span>   └── index.html  <span class="c"># =&gt; http://example.com/about/</span>
 ├── contact/
 <span class="p">|</span>   └── index.html  <span class="c"># =&gt; http://example.com/contact/</span>
+<span class="p">|</span>── other/
+<span class="p">|</span>   └── index.md    <span class="c"># =&gt; http://example.com/other/</span>
 └── index.html      <span class="c"># =&gt; http://example.com/</span></code></pre></figure>
 
 <p>This approach may not suit everyone, but for people who like clean URLs it’s
