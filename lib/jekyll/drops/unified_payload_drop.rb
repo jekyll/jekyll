@@ -2,7 +2,8 @@
 
 module Jekyll
   module Drops
-    class UnifiedPayloadDrop < ImmutableDrop
+    class UnifiedPayloadDrop < Drop
+      mutable false
 
       attr_accessor :page, :layout, :content, :paginator
       attr_accessor :highlighter_prefix, :highlighter_suffix

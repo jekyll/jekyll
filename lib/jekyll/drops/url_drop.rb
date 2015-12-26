@@ -2,8 +2,10 @@
 
 module Jekyll
   module Drops
-    class UrlDrop < ImmutableDrop
+    class UrlDrop < Drop
       extend Forwardable
+
+      mutable false
 
       def_delegator :@obj, :cleaned_relative_path, :path
       def_delegator :@obj, :output_ext, :output_ext

@@ -2,8 +2,10 @@
 
 module Jekyll
   module Drops
-    class SiteDrop < ImmutableDrop
+    class SiteDrop < Drop
       extend Forwardable
+
+      mutable false
 
       def_delegator  :@obj, :site_data, :data
       def_delegators :@obj, :time, :pages, :static_files, :documents,

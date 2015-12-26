@@ -2,8 +2,10 @@
 
 module Jekyll
   module Drops
-    class DocumentDrop < ImmutableDrop
+    class DocumentDrop < Drop
       extend Forwardable
+
+      mutable false
 
       def_delegator :@obj, :next_doc, :next
       def_delegator :@obj, :previous_doc, :previous
