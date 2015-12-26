@@ -54,5 +54,23 @@ class TestURL < JekyllUnitTest
       ).to_s
     end
 
+    should "handle UrlDrop as a placeholder in addition to a hash" do
+      site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "output" => true
+          }
+        },
+      })
+      site.read
+      doc = site.collections["methods"].docs.find do |doc|
+        doc.relative_path == "_methods/escape-+ #%20[].md"
+      end
+      assert_equal '/methods/escape-+-20/escape-20.html', URL.new(
+        :template => '/methods/:title/:name:output_ext',
+        :placeholders => doc.url_placeholders
+      ).to_s
+    end
+
   end
 end

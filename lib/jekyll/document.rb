@@ -12,11 +12,13 @@ module Jekyll
 
     # Create a new Document.
     #
-    # site - the Jekyll::Site instance to which this Document belongs
     # path - the path to the file
+    # relations - a hash with keys :site and :collection, the values of which
+    #             are the Jekyll::Site and Jekyll::Collection to which this
+    #             Document belong.
     #
     # Returns nothing.
-    def initialize(path, relations)
+    def initialize(path, relations = {})
       @site = relations[:site]
       @path = path
       @extname = File.extname(path)
@@ -38,12 +40,10 @@ module Jekyll
     end
 
     def output=(output)
-      @to_liquid = nil
       @output = output
     end
 
     def content=(content)
-      @to_liquid = nil
       @content = content
     end
 
@@ -181,27 +181,7 @@ module Jekyll
     #
     # Returns the Hash of key-value pairs for replacement in the URL.
     def url_placeholders
-      {
-        collection:  collection.label,
-        path:        cleaned_relative_path,
-        output_ext:  output_ext,
-        name:        Utils.slugify(basename_without_ext),
-        title:       Utils.slugify(data['slug'], mode: "pretty", cased: true) || Utils
-                       .slugify(basename_without_ext, mode: "pretty", cased: true),
-        slug:        Utils.slugify(data['slug']) || Utils.slugify(basename_without_ext),
-        year:        date.strftime("%Y"),
-        month:       date.strftime("%m"),
-        day:         date.strftime("%d"),
-        hour:        date.strftime("%H"),
-        minute:      date.strftime("%M"),
-        second:      date.strftime("%S"),
-        i_day:       date.strftime("%-d"),
-        i_month:     date.strftime("%-m"),
-        categories:  (data['categories'] || []).map { |c| c.to_s.downcase }.uniq.join('/'),
-        short_month: date.strftime("%b"),
-        short_year:  date.strftime("%y"),
-        y_day:       date.strftime("%j"),
-      }
+      @url_placeholders ||= Drops::UrlDrop.new(self)
     end
 
     # The permalink for this Document.
@@ -278,8 +258,6 @@ module Jekyll
     #
     # Returns nothing.
     def read(opts = {})
-      @to_liquid = nil
-
       Jekyll.logger.debug "Reading:", relative_path
 
       if yaml_file?
@@ -353,21 +331,7 @@ module Jekyll
     #
     # Returns a Hash representing this Document's data.
     def to_liquid
-      @to_liquid ||= if data.is_a?(Hash)
-        Utils.deep_merge_hashes Utils.deep_merge_hashes({
-          "output"        => output,
-          "content"       => content,
-          "relative_path" => relative_path,
-          "path"          => relative_path,
-          "url"           => url,
-          "collection"    => collection.label,
-          "next"          => next_doc,
-          "previous"      => previous_doc,
-          "id"            => id,
-        }, data), { 'excerpt' => data['excerpt'].to_s }
-      else
-        data
-      end
+      @to_liquid ||= Drops::DocumentDrop.new(self)
     end
 
     # The inspect string for this document.
@@ -391,10 +355,12 @@ module Jekyll
     # Returns -1, 0, +1 or nil depending on whether this doc's path is less than,
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
-      return nil if !other.respond_to?(:data)
-      cmp = data['date'] <=> other.data['date']
-      cmp = path <=> other.path if cmp == 0
-      cmp
+      return ArgumentError.new("document cannot be compared against #{other}") unless other.respond_to?(:data)
+      if data['date'] && other.data['date'] && (cmp = data['date'] <=> other.data['date']) != 0
+        cmp
+      else
+        path <=> other.path
+      end
     end
 
     # Determine whether this document should be written.

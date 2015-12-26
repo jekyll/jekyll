@@ -9,7 +9,7 @@ class TestPage < JekyllUnitTest
 
   def do_render(page)
     layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
-    page.render(layouts, {"site" => {"posts" => []}})
+    page.render(layouts, @site.site_payload)
   end
 
   context "A Page" do

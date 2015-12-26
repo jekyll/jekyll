@@ -89,11 +89,11 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     Jekyll::Hooks.register :pages, :pre_render do |page, payload|
-      payload['myparam'] = 'special' if page.name == 'page1.html'
+      payload.page['myparam'] = 'special' if page.name == 'page1.html'
     end
     """
-    And I have a "page1.html" page that contains "{{ myparam }}"
-    And I have a "page2.html" page that contains "{{ myparam }}"
+    And I have a "page1.html" page that contains "{{ page.myparam }}"
+    And I have a "page2.html" page that contains "{{ page.myparam }}"
     When I run jekyll build
     Then I should see "special" in "_site/page1.html"
     And I should not see "special" in "_site/page2.html"

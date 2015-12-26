@@ -3,12 +3,12 @@
 module Jekyll
   class Renderer
 
-    attr_reader :document, :site, :site_payload
+    attr_reader :document, :site, :payload
 
     def initialize(site, document, site_payload = nil)
-      @site         = site
-      @document     = document
-      @site_payload = site_payload
+      @site     = site
+      @document = document
+      @payload  = site_payload || site.site_payload
     end
 
     # Determine which converters to use based on this document's
@@ -33,12 +33,10 @@ module Jekyll
     def run
       Jekyll.logger.debug "Rendering:", document.relative_path
 
-      payload = Utils.deep_merge_hashes({
-        "page" => document.to_liquid
-      }, site_payload || site.site_payload)
+      payload.page = document.to_liquid
 
       if document.collection.label == 'posts' && document.is_a?(Document)
-        payload['site']['related_posts'] = document.related_posts
+        payload.site['related_posts'] = document.related_posts
       end
 
       Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
@@ -46,12 +44,12 @@ module Jekyll
 
       info = {
         filters:   [Jekyll::Filters],
-        registers: { :site => site, :page => payload['page'] }
+        registers: { :site => site, :page => payload.page }
       }
 
       # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converters.first.highlighter_prefix
-      payload["highlighter_suffix"] = converters.first.highlighter_suffix
+      payload.highlighter_prefix = converters.first.highlighter_prefix
+      payload.highlighter_suffix = converters.first.highlighter_suffix
 
       output = document.content
 
@@ -135,14 +133,9 @@ module Jekyll
       used   = Set.new([layout])
 
       while layout
-        payload = Utils.deep_merge_hashes(
-          payload,
-          {
-            "content" => output,
-            "page"    => document.to_liquid,
-            "layout"  => layout.data
-          }
-        )
+        payload.content = output
+        payload.page = document.to_liquid
+        payload.layout = layout.data
 
         output = render_liquid(
           layout.content,
