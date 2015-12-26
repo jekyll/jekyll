@@ -356,11 +356,9 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return ArgumentError.new("document cannot be compared against #{other}") unless other.respond_to?(:data)
-      if data['date'] && other.data['date'] && (cmp = data['date'] <=> other.data['date']) != 0
-        cmp
-      else
-        path <=> other.path
-      end
+      cmp = data['date'] <=> other.data['date']
+      cmp = path <=> other.path if cmp.nil? || cmp == 0
+      cmp
     end
 
     # Determine whether this document should be written.
