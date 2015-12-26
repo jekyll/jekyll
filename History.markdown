@@ -32,6 +32,7 @@
   * Allow use of Cucumber 2.1 or greater (#4181)
   * Modernize Kramdown for Markdown converter. (#4109)
   * Change TestDoctorCommand to JekyllUnitTest... (#4263)
+  * Create namespaced rake tasks in separate `.rake` files under `lib/tasks` (#4282)
 
 ### Site Enhancements
 
