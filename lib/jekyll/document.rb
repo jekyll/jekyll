@@ -355,7 +355,7 @@ module Jekyll
     # Returns -1, 0, +1 or nil depending on whether this doc's path is less than,
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
-      return ArgumentError.new("document cannot be compared against #{other}") unless other.respond_to?(:data)
+      return nil unless other.respond_to?(:data)
       cmp = data['date'] <=> other.data['date']
       cmp = path <=> other.path if cmp.nil? || cmp == 0
       cmp
