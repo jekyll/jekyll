@@ -1,9 +1,8 @@
 module Jekyll
   module Errors
-    class FatalException < RuntimeError
-    end
+    FatalException = Class.new(::RuntimeError)
 
-    class MissingDependencyException < FatalException
-    end
+    MissingDependencyException = Class.new(FatalException)
+    DropMutationException      = Class.new(FatalException)
   end
 end

@@ -3,8 +3,6 @@
 module Jekyll
   module Drops
     class ImmutableDrop < Liquid::Drop
-      IllegalDropModification = Class.new(Jekyll::StandardError)
-
       def initialize(obj)
         @obj = obj
       end
@@ -19,7 +17,7 @@ module Jekyll
 
       def []=(key, val)
         if respond_to? key
-          raise IllegalDropModification.new("Key #{key} cannot be set in the drop.")
+          raise DropMutationException, "Key #{key} cannot be set in the drop."
         else
           fallback_data[key] = val
         end
