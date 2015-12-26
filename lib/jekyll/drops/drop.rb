@@ -3,6 +3,8 @@
 module Jekyll
   module Drops
     class Drop < Liquid::Drop
+      NON_CONTENT_METHODS = [:[], :[]=, :inspect, :to_h, :fallback_data].freeze
+
       # Get or set whether the drop class is mutable.
       # Mutability determines whether or not pre-defined fields may be
       # overwritten.
@@ -67,6 +69,37 @@ module Jekyll
         else
           fallback_data[key] = val
         end
+      end
+
+      # Generates a list of keys with user content as their values.
+      # This gathers up the Drop methods and keys of the mutations and
+      # underlying data hashes and performs a set union to ensure a list
+      # of unique keys for the Drop.
+      #
+      # Returns an Array of unique keys for content for the Drop.
+      def keys
+        ((self.class.instance_methods(false) - NON_CONTENT_METHODS).map(&:to_s) |
+          @mutations.keys |
+          fallback_data.keys).flatten
+      end
+
+      # Generate a Hash representation of the Drop by resolving each key's
+      # value. It includes Drop methods, mutations, and the underlying object's
+      # data. See the documentation for Drop#keys for more.
+      #
+      # Returns a Hash with all the keys and values resolved.
+      def to_h
+        keys.each_with_object({}) do |(key, val), result|
+          result[key] = self[key]
+        end
+      end
+
+      # Inspect the drop's keys and values through a JSON representation
+      # of its keys and values.
+      #
+      # Returns a pretty generation of the hash representation of the Drop.
+      def inspect
+        JSON.pretty_generate to_h
       end
 
     end
