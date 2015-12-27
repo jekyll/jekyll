@@ -1,6 +1,21 @@
 require 'helper'
 
 class TestUtils < JekyllUnitTest
+  context "The \`Utils.deep_merge_hashes\` method" do
+    setup do
+      clear_dest
+      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
+
+      @site = fixture_site(config)
+      @site.process
+    end
+
+    should "merge a page into the site" do
+      data = {"page" => {}}
+      assert Utils.deep_merge_hashes(data, @site.site_payload)
+    end
+  end
+
   context "hash" do
 
     context "pluralized_array" do
