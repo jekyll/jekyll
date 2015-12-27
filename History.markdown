@@ -27,6 +27,7 @@
   * Avoid using `Dir.glob` with absolute path to allow special characters in the path (#4150)
   * Handle empty config files (#4052)
   * Rename `@options` so that it does not impact Liquid. (#4173)
+  * utils/drops: update Drop to support `Utils.deep_merge_hashes` (#4289)
 
 ### Development Fixes
 
