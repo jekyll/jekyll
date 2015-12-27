@@ -35,6 +35,7 @@
   * Modernize Kramdown for Markdown converter. (#4109)
   * Change TestDoctorCommand to JekyllUnitTest... (#4263)
   * Create namespaced rake tasks in separate `.rake` files under `lib/tasks` (#4282)
+  * markdown: refactor for greater readability & efficiency (#3771)
 
 ### Site Enhancements
 
