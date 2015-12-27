@@ -14,8 +14,7 @@ module Jekyll
           raise Errors::FatalException, "Bailing out; invalid Markdown processor."
         end
 
-        @setup = \
-          true
+        @setup = true
       end
 
       def get_processor
@@ -33,8 +32,7 @@ module Jekyll
       # are not in safe mode.)
 
       def valid_processors
-        %W(rdiscount kramdown redcarpet) + \
-          third_party_processors
+        %W(rdiscount kramdown redcarpet) + third_party_processors
       end
 
       # Public: A list of processors that you provide via plugins.
@@ -55,9 +53,7 @@ module Jekyll
       end
 
       def matches(ext)
-        extname_list.include?(
-          ext.downcase
-        )
+        extname_list.include?(ext.downcase)
       end
 
       def output_ext(ext)
@@ -65,19 +61,15 @@ module Jekyll
       end
 
       def convert(content)
-      setup
-        @parser.convert(
-          content
-        )
+        setup
+        @parser.convert(content)
       end
 
       private
       def get_custom_processor
-        md = @config["markdown"]
-        if custom_class_allowed?(md)
-          self.class.const_get(md).new(
-            @config
-          )
+        converter_name = @config["markdown"]
+        if custom_class_allowed?(converter_name)
+          self.class.const_get(converter_name).new(@config)
         end
       end
 
