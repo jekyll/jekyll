@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require "jekyll/drops/drop"
 
 module Jekyll
   module Drops
