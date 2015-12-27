@@ -71,6 +71,18 @@ module Jekyll
         end
       end
 
+      # Generates a list of strings which correspond to content getter
+      # methods.
+      #
+      # Returns an Array of strings which represent method-specific keys.
+      def content_methods
+        @content_methods ||= (
+          self.class.instance_methods(false) - NON_CONTENT_METHODS
+        ).map(&:to_s).reject do |method|
+          method.end_with?("=")
+        end
+      end
+
       # Generates a list of keys with user content as their values.
       # This gathers up the Drop methods and keys of the mutations and
       # underlying data hashes and performs a set union to ensure a list
@@ -78,7 +90,7 @@ module Jekyll
       #
       # Returns an Array of unique keys for content for the Drop.
       def keys
-        ((self.class.instance_methods(false) - NON_CONTENT_METHODS).map(&:to_s) |
+        (content_methods |
           @mutations.keys |
           fallback_data.keys).flatten
       end
@@ -100,6 +112,15 @@ module Jekyll
       # Returns a pretty generation of the hash representation of the Drop.
       def inspect
         JSON.pretty_generate to_h
+      end
+
+      # Collects all the keys and passes each to the block in turn.
+      #
+      # block - a block which accepts one argument, the key
+      #
+      # Returns nothing.
+      def each_key(&block)
+        keys.each(&block)
       end
 
     end
