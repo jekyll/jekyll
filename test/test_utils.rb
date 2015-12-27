@@ -1,6 +1,31 @@
 require 'helper'
 
 class TestUtils < JekyllUnitTest
+  context "The \`Utils.deep_merge_hashes\` method" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @site.process
+    end
+
+    should "merge a drop into a hash" do
+      data = {"page" => {}}
+      merged = Utils.deep_merge_hashes(data, @site.site_payload)
+      assert merged.is_a? Hash
+      assert merged["site"].is_a? Drops::SiteDrop
+      assert_equal data["page"], {}
+    end
+
+    should "merge a hash into a drop" do
+      data = {"page" => {}}
+      assert_nil @site.site_payload["page"]
+      merged = Utils.deep_merge_hashes(@site.site_payload, data)
+      assert merged.is_a? Drops::UnifiedPayloadDrop
+      assert merged["site"].is_a? Drops::SiteDrop
+      assert_equal data["page"], {}
+    end
+  end
+
   context "hash" do
 
     context "pluralized_array" do
