@@ -16,6 +16,7 @@
   * Allow quoted date in front matter defaults (#4184)
   * Add a Jekyll doctor warning for URLs that only differ by case (#3171)
   * drops: create one base Drop class which can be set as mutable or not (#4285)
+  * drops: provide `#to_h` to allow for hash introspection (#4281)
 
 ### Bug Fixes
 
