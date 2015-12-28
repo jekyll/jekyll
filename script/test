@@ -1,23 +1,56 @@
-#! /bin/bash
-#
+#!/usr/bin/env bash
+set -e
+
 # Usage:
-#   script/test
 #   script/test <test_file>
+#   script/test [ruby|jruby]
+#   script/test
 
-if [ ! -d tmp ]; then
-  mkdir tmp
+if [ -d test/dest ]
+  then rm -r test/dest
 fi
 
-if [ -d test/dest ]; then
-  rm -r test/dest
-fi
+# -----------------------------------------------------------------------------
+# If you send us a ruby then we use that, if you do not then we test with
+# whatever we can detect, this way you can run both suites when you test out
+# your source, we expect full coverage now, not just MRI.
+# -----------------------------------------------------------------------------
 
-if [ -z "$1" ]; then
-  TEST_FILES=$(ruby -e "puts Dir.glob('test/test_*.rb')")
+if [[ "$1" == "ci" ]]
+then
+  rubies=(
+    ruby
+  )
+
+  shift
+elif [[ "$1" == "ruby" ]] || [[ "$1" == "jruby" ]]
+then
+  rubies=(
+    $1
+  )
+
+  shift
 else
-  TEST_FILES="$@"
+  rubies=()
+  for r in jruby ruby; do
+    if which "$r"
+    then
+      rubies+=(
+        $r
+      )
+    fi
+  done
 fi
 
-set -x
-
-time bundle exec ruby -Ilib -Itest -rloader $TEST_FILES --profile
+for ruby in $rubies; do
+  if [[ $# -lt 1 ]]
+  then
+    set -x
+    time $ruby -S bundle exec \
+      rake TESTOPTS='--profile' test
+   else
+    set -x
+    time $ruby -S bundle exec ruby -Itest \
+      "$@" --profile
+  fi
+done

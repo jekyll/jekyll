@@ -13,22 +13,22 @@ class TestSite < JekyllUnitTest
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => '/tmp/plugins'}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => '/tmp/plugins'}))
       assert_equal ['/tmp/plugins'], site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => ['/tmp/plugins', '/tmp/otherplugins']}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => ['/tmp/plugins', '/tmp/otherplugins']}))
       assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => []}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => []}))
       assert_equal [], site.plugins
     end
 
     should "have an empty array for plugins if nil is passed" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins' => nil}))
+      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => nil}))
       assert_equal [], site.plugins
     end
 
@@ -190,9 +190,9 @@ class TestSite < JekyllUnitTest
     end
 
     should "read posts" do
-      @site.read_posts('')
+      @site.posts.docs.concat(PostReader.new(@site).read_posts(''))
       posts = Dir[source_dir('_posts', '**', '*')]
-      posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
+      posts.delete_if { |post| File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER) }
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
 
@@ -219,8 +219,8 @@ class TestSite < JekyllUnitTest
       @site.process
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
-      posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
-      categories = %w(2013 bar baz category foo z_category MixedCase Mixedcase publish_test win).sort
+      posts.delete_if { |post| File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER) }
+      categories = %w(2013 bar baz category foo z_category MixedCase Mixedcase es publish_test win).sort
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
@@ -310,7 +310,7 @@ class TestSite < JekyllUnitTest
 
         custom_processor = "CustomMarkdown"
         s = Site.new(site_configuration('markdown' => custom_processor))
-        assert !!s.process
+        s.process
 
         # Do some cleanup, we don't like straggling stuff's.
         Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
@@ -330,7 +330,7 @@ class TestSite < JekyllUnitTest
         end
 
         bad_processor = "Custom::Markdown"
-        s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
+        s = Site.new(site_configuration('markdown' => bad_processor, 'incremental' => false))
         assert_raises Jekyll::Errors::FatalException do
           s.process
         end
@@ -348,7 +348,7 @@ class TestSite < JekyllUnitTest
 
       should 'throw FatalException at process time' do
         bad_processor = 'not a processor name'
-        s = Site.new(site_configuration('markdown' => bad_processor, 'full_rebuild' => true))
+        s = Site.new(site_configuration('markdown' => bad_processor, 'incremental' => false))
         assert_raises Jekyll::Errors::FatalException do
           s.process
         end
@@ -370,7 +370,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration)
         site.process
 
-        file_content = site.read_data_file(source_dir('_data', 'members.yaml'))
+        file_content = DataReader.new(site).read_data_file(source_dir('_data', 'members.yaml'))
 
         assert_equal site.data['members'], file_content
         assert_equal site.site_payload['site']['data']['members'], file_content
@@ -429,7 +429,7 @@ class TestSite < JekyllUnitTest
     context "manipulating the Jekyll environment" do
       setup do
         @site = Site.new(site_configuration({
-          'full_rebuild' => true
+          'incremental' => false
         }))
         @site.process
         @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -443,7 +443,7 @@ class TestSite < JekyllUnitTest
         setup do
           ENV["JEKYLL_ENV"] = "production"
           @site = Site.new(site_configuration({
-            'full_rebuild' => true
+            'incremental' => false
           }))
           @site.process
           @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -457,6 +457,74 @@ class TestSite < JekyllUnitTest
           assert_equal "production", @page.content.strip
         end
       end
+    end
+
+    context "with liquid profiling" do
+      setup do
+        @site = Site.new(site_configuration('profile' => true))
+      end
+
+      should "print profile table" do
+        expect(@site.liquid_renderer).to receive(:stats_table)
+        @site.process
+      end
+    end
+
+    context "incremental build" do
+      setup do
+        @site = Site.new(site_configuration({
+          'incremental' => true
+        }))
+        @site.read
+      end
+
+      should "build incrementally" do
+        contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
+        @site.process
+
+        source = @site.in_source_dir(contacts_html.path)
+        dest = File.expand_path(contacts_html.destination(@site.dest))
+        mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
+
+        # need to sleep because filesystem timestamps have best resolution in seconds
+        sleep 1
+        @site.process
+        mtime2 = File.stat(dest).mtime.to_i
+        assert_equal mtime1, mtime2 # no modifications, so remain the same
+
+        # simulate file modification by user
+        FileUtils.touch source
+
+        sleep 1
+        @site.process
+        mtime3 = File.stat(dest).mtime.to_i
+        refute_equal mtime2, mtime3 # must be regenerated
+
+        sleep 1
+        @site.process
+        mtime4 = File.stat(dest).mtime.to_i
+        assert_equal mtime3, mtime4 # no modifications, so remain the same
+      end
+
+      should "regnerate files that have had their destination deleted" do
+        contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
+        @site.process
+
+        source = @site.in_source_dir(contacts_html.path)
+        dest = File.expand_path(contacts_html.destination(@site.dest))
+        mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
+
+        # simulate file modification by user
+        File.unlink dest
+        refute File.file?(dest)
+
+        sleep 1 # sleep for 1 second, since mtimes have 1s resolution
+        @site.process
+        assert File.file?(dest)
+        mtime2 = File.stat(dest).mtime.to_i
+        refute_equal mtime1, mtime2 # must be regenerated
+      end
+
     end
 
   end

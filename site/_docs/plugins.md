@@ -31,14 +31,22 @@ Jekyll generates your site.
 2. In your `_config.yml` file, add a new array with the key `gems` and the
 values of the gem names of the plugins you'd like to use. An example:
 
+
         gems: [jekyll-test-plugin, jekyll-jsonify, jekyll-assets]
         # This will require each of these gems automatically.
+
+    Then install your plugins using `gem install jekyll-test-plugin jekyll-jsonify jekyll-assets`
+
 3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
     example:
 
         group :jekyll_plugins do
           gem "my-jekyll-plugin"
+          gem "another-jekyll-plugin"
         end
+
+    Now you need to install all plugins from your Bundler group by running single command `bundle install`
+
 
 <div class="note info">
   <h5>
@@ -470,6 +478,223 @@ module Jekyll
 end
 {% endhighlight %}
 
+## Hooks
+
+Using hooks, your plugin can exercise fine-grained control over various aspects
+of the build process. If your plugin defines any hooks, Jekyll will call them
+at pre-defined points.
+
+Hooks are registered to a container and an event name. To register one, you
+call Jekyll::Hooks.register, and pass the container, event name, and code to
+call whenever the hook is triggered. For example, if you want to execute some
+custom functionality every time Jekyll renders a post, you could register a
+hook like this:
+
+{% highlight ruby %}
+Jekyll::Hooks.register :post, :post_render do |post|
+  # code to call after Jekyll renders a post
+end
+{% endhighlight %}
+
+Jekyll provides hooks for <code>:site</code>, <code>:pages</code>,
+<code>:posts</code>, and <code>:documents</code>. In all cases, Jekyll calls your
+hooks with the container object as the first callback parameter. But in the
+case of <code>:pre_render</code>, your hook will also receive a payload hash as
+a second parameter which allows you full control over the variables that are
+available while rendering.
+
+The complete list of available hooks is below:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Container</th>
+      <th>Event</th>
+      <th>Called</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:after_reset</code></p>
+      </td>
+      <td>
+        <p>Just after site reset</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering the whole site</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering the whole site, but before writing any files</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing the whole site to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:pages</code></p>
+      </td>
+      <td>
+        <p><code>:post_init</code></p>
+      </td>
+      <td>
+        <p>Whenever a page is initialized</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:pages</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering a page</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:pages</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering a page, but before writing it to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:pages</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing a page to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:posts</code></p>
+      </td>
+      <td>
+        <p><code>:post_init</code></p>
+      </td>
+      <td>
+        <p>Whenever a post is initialized</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:posts</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering a post</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:posts</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering a post, but before writing it to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:posts</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing a post to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:documents</code></p>
+      </td>
+      <td>
+        <p><code>:post_init</code></p>
+      </td>
+      <td>
+        <p>Whenever a document is initialized</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:documents</code></p>
+      </td>
+      <td>
+        <p><code>:pre_render</code></p>
+      </td>
+      <td>
+        <p>Just before rendering a document</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:documents</code></p>
+      </td>
+      <td>
+        <p><code>:post_render</code></p>
+      </td>
+      <td>
+        <p>After rendering a document, but before writing it to disk</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:documents</code></p>
+      </td>
+      <td>
+        <p><code>:post_write</code></p>
+      </td>
+      <td>
+        <p>After writing a document to disk</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 ## Available Plugins
 
 You can find a few useful plugins at the following locations:
@@ -492,10 +717,13 @@ LESS.js files during generation.
 - [Pages Directory by Ben Baker-Smith](https://github.com/bbakersmith/jekyll-pages-directory): Defines a `_pages` directory for page files which routes its output relative to the project root.
 - [Page Collections by Jeff Kolesky](https://github.com/jeffkole/jekyll-page-collections): Generates collections of pages with functionality that resembles posts.
 - [Windows 8.1 Live Tile Generation by Matt Sheehan](https://github.com/sheehamj13/jekyll-live-tiles): Generates Internet Explorer 11 config.xml file and Tile Templates for pinning your site to Windows 8.1.
+- [Typescript Generator by Matt Sheehan](https://github.com/sheehamj13/jekyll_ts): Generate Javascript on build from your Typescript.
 - [Jekyll::AutolinkEmail by Ivan Tse](https://github.com/ivantsepp/jekyll-autolink_email): Autolink your emails.
 - [Jekyll::GitMetadata by Ivan Tse](https://github.com/ivantsepp/jekyll-git_metadata): Expose Git metadata for your templates.
 - [Jekyll Http Basic Auth Plugin](https://gist.github.com/snrbrnjna/422a4b7e017192c284b3): Plugin to manage http basic auth for jekyll generated pages and directories.
 - [Jekyll Auto Image by Merlos](https://github.com/merlos/jekyll-auto-image): Gets the first image of a post. Useful to list your posts with images or to add [twitter cards](https://dev.twitter.com/cards/overview) to your site.
+- [Jekyll Portfolio Generator by Shannon Babincsak](https://github.com/codeinpink/jekyll-portfolio-generator): Generates project pages and computes related projects out of project data files.
+- [Jekyll-Umlauts by Arne Gockeln](https://github.com/webchef/jekyll-umlauts): This generator replaces all german umlauts (äöüß) case sensitive with html.
 
 #### Converters
 
@@ -519,6 +747,7 @@ LESS.js files during generation.
 - [Customized Kramdown Converter](https://github.com/mvdbos/kramdown-with-pygments): Enable Pygments syntax highlighting for Kramdown-parsed fenced code blocks.
 - [Bigfootnotes Plugin](https://github.com/TheFox/jekyll-bigfootnotes): Enables big footnotes for Kramdown.
 - [AsciiDoc Plugin](https://github.com/asciidoctor/jekyll-asciidoc): AsciiDoc convertor for Jekyll using [Asciidoctor](http://asciidoctor.org/).
+- [Lazy Tweet Embedding](https://github.com/takuti/jekyll-lazy-tweet-embedding): Automatically convert tweet urls into twitter cards.
 
 #### Filters
 
@@ -529,7 +758,7 @@ LESS.js files during generation.
 - [Smilify](https://github.com/SaswatPadhi/jekyll_smilify) by [SaswatPadhi](https://github.com/SaswatPadhi): Convert text emoticons in your content to themeable smiley pics.
 - [Read in X Minutes](https://gist.github.com/zachleat/5792681) by [zachleat](https://github.com/zachleat): Estimates the reading time of a string (for blog post content).
 - [Jekyll-timeago](https://github.com/markets/jekyll-timeago): Converts a time value to the time ago in words.
-- [pluralize](https://github.com/bdesham/pluralize): Easily combine a number and a word into a gramatically-correct amount like “1 minute” or “2 minute**s**”.
+- [pluralize](https://github.com/bdesham/pluralize): Easily combine a number and a word into a grammatically-correct amount like “1 minute” or “2 minute**s**”.
 - [reading_time](https://github.com/bdesham/reading_time): Count words and estimate reading time for a piece of text, ignoring HTML elements that are unlikely to contain running text.
 - [Table of Content Generator](https://github.com/dafi/jekyll-toc-generator): Generate the HTML code containing a table of content (TOC), the TOC can be customized in many way, for example you can decide which pages can be without TOC.
 - [jekyll-humanize](https://github.com/23maverick23/jekyll-humanize): This is a port of the Django app humanize which adds a "human touch" to data. Each method represents a Fluid type filter that can be used in your Jekyll site templates. Given that Jekyll produces static sites, some of the original methods do not make logical sense to port (e.g. naturaltime).
@@ -538,6 +767,7 @@ LESS.js files during generation.
 - [Jekyll-jalali](https://github.com/mehdisadeghi/jekyll-jalali) by [Mehdi Sadeghi](http://mehdix.ir): A simple Gregorian to Jalali date converter filter.
 - [Jekyll Thumbnail Filter](https://github.com/matallo/jekyll-thumbnail-filter): Related posts thumbnail filter.
 - [Jekyll-Smartify](https://github.com/pathawks/jekyll-smartify): SmartyPants filter. Make &quot;quotes&quot; &ldquo;curly&rdquo;
+- [liquid-md5](https://github.com/pathawks/liquid-md5): Returns an MD5 hash. Helpful for generating Gravatars in templates.
 
 #### Tags
 
@@ -589,6 +819,10 @@ LESS.js files during generation.
 - [inline\_highlight](https://github.com/bdesham/inline_highlight): A tag for inline syntax highlighting.
 - [jekyll-mermaid](https://github.com/jasonbellamy/jekyll-mermaid): Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.
 - [twa](https://github.com/Ezmyrelda/twa): Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.
+- [jekyll-files](https://github.com/x43x61x69/jekyll-files) by [Zhi-Wei Cai](http://vox.vg/): Output relative path strings and other info regarding specific assets.
+- [Fetch remote file content](https://github.com/dimitri-koenig/jekyll-plugins) by [Dimitri König](https://www.dimitrikoenig.net/): Using `remote_file_content` tag you can fetch the content of a remote file and include it as if you would put the content right into your markdown file yourself. Very useful for including code from github repo's to always have a current repo version.
+- [jekyll-asciinema](https://github.com/mnuessler/jekyll-asciinema): A tag for embedding asciicasts recorded with [asciinema](https://asciinema.org) in your Jekyll pages.
+- [Jekyll-Youtube](https://github.com/dommmel/jekyll-youtube)  A Liquid tag that embeds Youtube videos. The default emded markup is responsive but you can also specify your own by using an include/partial.
 
 #### Collections
 
@@ -623,6 +857,7 @@ LESS.js files during generation.
 - [Jekyll CO₂](https://github.com/wdenton/jekyll-co2): Generates HTML showing the monthly change in atmospheric CO₂ at the Mauna Loa observatory in Hawaii.
 - [remote-include](http://www.northfieldx.co.uk/remote-include/): Includes files using remote URLs
 - [jekyll-minifier](https://github.com/digitalsparky/jekyll-minifier): Minifies HTML, XML, CSS, and Javascript both inline and as separate files utilising yui-compressor and htmlcompressor.
+- [Jekyll views router](https://bitbucket.org/nyufac/jekyll-views-router): Simple router between generator plugins and templates.
 
 #### Editors
 

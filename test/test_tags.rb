@@ -4,11 +4,15 @@ require 'helper'
 
 class TestTags < JekyllUnitTest
 
+  def setup
+    FileUtils.mkdir_p("tmp")
+  end
+
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     site = fixture_site({"highlighter" => "rouge"}.merge(override))
 
     if override['read_posts']
-      site.read_posts('')
+      site.posts.docs.concat(PostReader.new(site).read_posts(''))
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
@@ -26,7 +30,7 @@ class TestTags < JekyllUnitTest
 title: This is a test
 ---
 
-This document results in a markdown error with maruku
+This document has some highlighted code in it.
 
 {% highlight text %}
 #{code}
@@ -110,9 +114,9 @@ CONTENT
       assert_equal true, sanitized[:linenos]
     end
 
-    should "allow hl_linenos" do
-      sanitized = @tag.sanitized_opts({:hl_linenos => %w[1 2 3 4]}, true)
-      assert_equal %w[1 2 3 4], sanitized[:hl_linenos]
+    should "allow hl_lines" do
+      sanitized = @tag.sanitized_opts({:hl_lines => %w[1 2 3 4]}, true)
+      assert_equal %w[1 2 3 4], sanitized[:hl_lines]
     end
 
     should "allow cssclass" do
@@ -132,6 +136,14 @@ CONTENT
   end
 
   context "with the pygments highlighter" do
+    setup do
+      if jruby?
+        then skip(
+          "JRuby does not support Pygments."
+        )
+      end
+    end
+
     context "post content has highlight tag" do
       setup do
         fill_post("test", {'highlighter' => 'pygments'})
@@ -334,7 +346,7 @@ EOS
     setup do
       @content = <<CONTENT
 ---
-title: Maruku vs. RDiscount
+title: Kramdown vs. RDiscount vs. Redcarpet
 ---
 
 _FIGHT!_
@@ -347,20 +359,17 @@ puts "3..2..1.."
 CONTENT
     end
 
-    context "using Maruku" do
-      setup do
-        create_post(@content)
-      end
-
-      should "parse correctly" do
-        assert_match %r{<em>FIGHT!</em>}, @result
-        assert_match %r{<em>FINISH HIM</em>}, @result
-      end
-    end
-
     context "using RDiscount" do
       setup do
-        create_post(@content, 'markdown' => 'rdiscount')
+        if jruby?
+          then skip(
+            "JRuby does not perform well with CExt, test disabled."
+          )
+        end
+
+        create_post(@content, {
+          'markdown' => 'rdiscount'
+        })
       end
 
       should "parse correctly" do
@@ -382,7 +391,15 @@ CONTENT
 
     context "using Redcarpet" do
       setup do
-        create_post(@content, 'markdown' => 'redcarpet')
+        if jruby?
+          skip(
+            "JRuby does not perform well with CExt, test disabled."
+          )
+        end
+
+        create_post(@content, {
+          'markdown' => 'redcarpet'
+        })
       end
 
       should "parse correctly" do
@@ -438,8 +455,8 @@ CONTENT
     end
 
     should "have the url to the \"nested\" post from 2008-11-21" do
-      assert_match %r{3\s/2008/11/21/nested/}, @result
-      assert_match %r{4\s/2008/11/21/nested/}, @result
+      assert_match %r{3\s/es/2008/11/21/nested/}, @result
+      assert_match %r{4\s/es/2008/11/21/nested/}, @result
     end
   end
 
@@ -583,6 +600,23 @@ CONTENT
       end
     end
 
+    context "with custom includes directory" do
+      setup do
+        content = <<CONTENT
+---
+title: custom includes directory
+---
+
+{% include custom.html %}
+CONTENT
+        create_post(content, {'includes_dir' => '_includes_custom', 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "include file from custom directory" do
+        assert_match "custom_included", @result
+      end
+    end
+
     context "without parameters within if statement" do
       setup do
         content = <<CONTENT
@@ -597,25 +631,6 @@ CONTENT
 
       should "include file with empty parameters within if statement" do
         assert_match "<span id=\"include-param\"></span>", @result
-      end
-    end
-
-    context "with fenced code blocks with backticks" do
-
-      setup do
-        content = <<CONTENT
-```ruby
-puts "Hello world"
-```
-CONTENT
-        create_post(content, {
-          'markdown' => 'maruku',
-          'maruku' => {'fenced_code_blocks' => true}}
-        )
-      end
-
-      should "render fenced code blocks" do
-        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">puts &quot;Hello world&quot;</code></pre>}, @result.strip
       end
     end
 
@@ -640,11 +655,9 @@ CONTENT
 
     context "include tag with variable and liquid filters" do
       setup do
-        site = fixture_site({'pygments' => true})
-        post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
-        layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-        post.render(layouts, {"site" => {"posts" => []}})
-        @content = post.content
+        site = fixture_site({'pygments' => true}).tap(&:read).tap(&:render)
+        post = site.posts.docs.find {|p| p.basename.eql? "2013-12-17-include-variable-filters.markdown" }
+        @content = post.output
       end
 
       should "include file as variable with liquid filters" do
@@ -672,11 +685,9 @@ CONTENT
 
   context "relative include tag with variable and liquid filters" do
     setup do
-      site = fixture_site('pygments' => true)
-      post = Post.new(site, source_dir, '', "2014-09-02-relative-includes.markdown")
-      layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-      post.render(layouts, {"site" => {"posts" => []}})
-      @content = post.content
+      site = fixture_site({'pygments' => true}).tap(&:read).tap(&:render)
+      post = site.posts.docs.find {|p| p.basename.eql? "2014-09-02-relative-includes.markdown" }
+      @content = post.output
     end
 
     should "include file as variable with liquid filters" do

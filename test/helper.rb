@@ -1,8 +1,13 @@
+def jruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+end
+
 unless ENV['TRAVIS']
   require File.expand_path('../simplecov_custom_profile', __FILE__)
   SimpleCov.start('gem') do
     add_filter "/vendor/bundle"
     add_filter "/vendor/gem"
+    add_filter ".bundle"
   end
 end
 
@@ -15,22 +20,35 @@ require 'rspec/mocks'
 
 require 'jekyll'
 
-require 'rdiscount'
-require 'kramdown'
-require 'redcarpet'
+Jekyll.logger = Logger.new(StringIO.new)
 
+unless jruby?
+  require 'rdiscount'
+  require 'redcarpet'
+end
+
+require 'kramdown'
 require 'shoulda'
 
 include Jekyll
 
-# Send STDERR into the void to suppress program output messages
-STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
+# FIXME: If we really need this we lost the game.
+# STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
 
 # Report with color.
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+Minitest::Reporters.use! [
+  Minitest::Reporters::DefaultReporter.new(
+    :color => true
+  )
+]
 
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
+
+  def mocks_expect(*args)
+    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect).\
+      bind(self).call(*args)
+  end
 
   def before_setup
     ::RSpec::Mocks.setup
@@ -50,12 +68,13 @@ class JekyllUnitTest < Minitest::Test
 
   def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)
     Utils.deep_merge_hashes(base_hash, overrides)
+      .fix_common_issues.backwards_compatibilize.add_default_collections
   end
 
   def site_configuration(overrides = {})
     full_overrides = build_configs(overrides, build_configs({
       "destination" => dest_dir,
-      "full_rebuild" => true
+      "incremental" => false
     }))
     build_configs({
       "source" => source_dir
@@ -92,23 +111,13 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
-  def capture_stdout
-    $old_stdout = $stdout
-    $stdout = StringIO.new
+  def capture_output
+    stderr = StringIO.new
+    Jekyll.logger = Logger.new stderr
     yield
-    $stdout.rewind
-    return $stdout.string
-  ensure
-    $stdout = $old_stdout
+    stderr.rewind
+    return stderr.string.to_s
   end
-
-  def capture_stderr
-    $old_stderr = $stderr
-    $stderr = StringIO.new
-    yield
-    $stderr.rewind
-    return $stderr.string
-  ensure
-    $stderr = $old_stderr
-  end
+  alias_method :capture_stdout, :capture_output
+  alias_method :capture_stderr, :capture_output
 end

@@ -12,9 +12,11 @@ and folders you need for paginated listings.
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
   <p>
-    Pagination does not work with Markdown or Textile files in your Jekyll
-    site. It will only work when used within HTML files. Since you’ll likely be
-    using this for the list of Posts, this shouldn’t be an issue.
+    Pagination does not work from within Markdown or Textile files from
+    your Jekyll site. Pagination works when called from within the HTML
+    file, named <code>index.html</code>, which optionally may reside in and
+    produce pagination from within a subdirectory, via the
+    <code>paginate_path</code> configuration value.
   </p>
 </div>
 
@@ -202,7 +204,7 @@ page with links to all but the current page.
     {% if page == paginator.page %}
       <em>{{ page }}</em>
     {% elsif page == 1 %}
-      <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
     {% else %}
       <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
     {% endif %}

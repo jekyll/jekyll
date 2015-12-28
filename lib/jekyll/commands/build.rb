@@ -23,7 +23,8 @@ module Jekyll
         # Build your jekyll site
         # Continuously watch if `watch` is set to true in the config.
         def process(options)
-          Jekyll.logger.log_level = :error if options['quiet']
+          # Adjust verbosity quickly
+          Jekyll.logger.adjust_verbosity(options)
 
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
@@ -51,10 +52,10 @@ module Jekyll
           t = Time.now
           source      = options['source']
           destination = options['destination']
-          full_build  = options['full_rebuild']
+          incremental = options['incremental']
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
-          Jekyll.logger.info "Incremental build:", (full_build ? "disabled" : "enabled")
+          Jekyll.logger.info "Incremental build:", (incremental ? "enabled" : "disabled. Enable with --incremental")
           Jekyll.logger.info "Generating..."
           process_site(site)
           Jekyll.logger.info "", "done in #{(Time.now - t).round(3)} seconds."

@@ -30,7 +30,6 @@ require 'kramdown'
 require 'colorator'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
-Liquid::Template.error_mode = :strict
 
 module Jekyll
 
@@ -48,16 +47,24 @@ module Jekyll
   autoload :External,            'jekyll/external'
   autoload :Filters,             'jekyll/filters'
   autoload :FrontmatterDefaults, 'jekyll/frontmatter_defaults'
+  autoload :Hooks,               'jekyll/hooks'
   autoload :Layout,              'jekyll/layout'
-  autoload :LayoutReader,        'jekyll/layout_reader'
+  autoload :CollectionReader,    'jekyll/readers/collection_reader'
+  autoload :DataReader,          'jekyll/readers/data_reader'
+  autoload :LayoutReader,        'jekyll/readers/layout_reader'
+  autoload :PostReader,          'jekyll/readers/post_reader'
+  autoload :PageReader,          'jekyll/readers/page_reader'
+  autoload :StaticFileReader,    'jekyll/readers/static_file_reader'
   autoload :LogAdapter,          'jekyll/log_adapter'
   autoload :Page,                'jekyll/page'
   autoload :PluginManager,       'jekyll/plugin_manager'
   autoload :Post,                'jekyll/post'
   autoload :Publisher,           'jekyll/publisher'
+  autoload :Reader,              'jekyll/reader'
   autoload :Regenerator,         'jekyll/regenerator'
   autoload :RelatedPosts,        'jekyll/related_posts'
   autoload :Renderer,            'jekyll/renderer'
+  autoload :LiquidRenderer,      'jekyll/liquid_renderer'
   autoload :Site,                'jekyll/site'
   autoload :StaticFile,          'jekyll/static_file'
   autoload :Stevenson,           'jekyll/stevenson'
@@ -127,7 +134,7 @@ module Jekyll
     #
     # Returns the new logger.
     def logger=(writer)
-      @logger = LogAdapter.new(writer)
+      @logger = LogAdapter.new(writer, (ENV["JEKYLL_LOG_LEVEL"] || :info).to_sym)
     end
 
     # Public: An array of sites
@@ -145,12 +152,15 @@ module Jekyll
     #
     # Returns the sanitized path.
     def sanitized_path(base_directory, questionable_path)
-      return base_directory if base_directory.eql?(questionable_path)
+      windows_drive_path_regexp = /\A\w\:\//
+      return base_directory if base_directory.eql?(questionable_path) || questionable_path.empty?
 
       clean_path = File.expand_path(questionable_path, "/")
-      clean_path = clean_path.sub(/\A\w\:\//, '/')
+      clean_path = clean_path.sub(windows_drive_path_regexp, '/')
+      clean_base = base_directory.sub(windows_drive_path_regexp, "/") + '/'
 
-      unless clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
+      ultra_clean_path = clean_path + '/'
+      unless ultra_clean_path.start_with?(clean_base)
         File.join(base_directory, clean_path)
       else
         clean_path

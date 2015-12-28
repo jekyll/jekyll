@@ -23,7 +23,7 @@ module Jekyll
     #
     # Returns the output extname including the leading period.
     def output_ext
-      converters.first.output_ext(document.extname)
+      @output_ext ||= converters.first.output_ext(document.extname)
     end
 
     ######################
@@ -31,9 +31,18 @@ module Jekyll
     ######################
 
     def run
+      Jekyll.logger.debug "Rendering:", document.relative_path
+
       payload = Utils.deep_merge_hashes({
         "page" => document.to_liquid
       }, site_payload || site.site_payload)
+
+      if document.collection.label == 'posts' && document.is_a?(Document)
+        payload['site']['related_posts'] = document.related_posts
+      end
+
+      Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
+      document.trigger_hooks(:pre_render, payload)
 
       info = {
         filters:   [Jekyll::Filters],
@@ -47,13 +56,16 @@ module Jekyll
       output = document.content
 
       if document.render_with_liquid?
-        output = render_liquid(output, payload, info)
+        Jekyll.logger.debug "Rendering Liquid:", document.relative_path
+        output = render_liquid(output, payload, info, document.path)
       end
 
+      Jekyll.logger.debug "Rendering Markup:", document.relative_path
       output = convert(output)
       document.content = output
 
       if document.place_in_layout?
+        Jekyll.logger.debug "Rendering Layout:", document.relative_path
         place_in_layouts(
           output,
           payload,
@@ -90,7 +102,7 @@ module Jekyll
     #
     # Returns the content, rendered by Liquid.
     def render_liquid(content, payload, info, path = nil)
-      Liquid::Template.parse(content).render!(payload, info)
+      site.liquid_renderer.file(path).parse(content).render!(payload, info)
     rescue Tags::IncludeTagError => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || document.relative_path}"
       raise e
@@ -136,7 +148,7 @@ module Jekyll
           layout.content,
           payload,
           info,
-          File.join(site.config['layouts'], layout.name)
+          File.join(site.config['layouts_dir'], layout.name)
         )
 
         # Add layout to dependency tree

@@ -32,6 +32,7 @@ A basic Jekyll site usually looks something like this:
 ├── _data
 |   └── members.yml
 ├── _site
+├── .jekyll-metadata
 └── index.html
 {% endhighlight %}
 
@@ -132,11 +133,12 @@ An overview of what each of these does:
         <p>
 
           Well-formatted site data should be placed here. The jekyll engine
-          will autoload all yaml files (ends with
-          <code>.yml</code> or <code>.yaml</code>) in this directory. If
-          there's a file <code>members.yml</code> under the directory,
-          then you can access contents of the file
-          through <code>site.data.members</code>.
+          will autoload all YAML files in this directory (using either the
+          <code>.yml</code>, <code>.yaml</code>, <code>.json</code> or
+          <code>.csv</code> formats and extensions) and they will be
+          accessible via `site.data`. If there's a file
+          <code>members.yml</code> under the directory, then you can access
+          contents of the file through <code>site.data.members</code>.
 
         </p>
       </td>
@@ -151,6 +153,22 @@ An overview of what each of these does:
           This is where the generated site will be placed (by default) once
           Jekyll is done transforming it. It’s probably a good idea to add this
           to your <code>.gitignore</code> file.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>.jekyll-metadata</code></p>
+      </td>
+      <td>
+        <p>
+
+          This helps Jekyll keep track of which files have not been modified
+          since the site was last built, and which files will need to be
+          regenerated on the next build. This file will not be included in the
+          generated site. It’s probably a good idea to add this to your
+          <code>.gitignore</code> file.
 
         </p>
       </td>

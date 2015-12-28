@@ -56,6 +56,12 @@ module Jekyll
       end
 
       self.data ||= {}
+
+      unless self.data.is_a?(Hash)
+        Jekyll.logger.abort_with "Fatal:", "Invalid YAML front matter in #{File.join(base, name)}"
+      end
+
+      self.data
     end
 
     # Transform the contents based on the content type.
@@ -102,8 +108,8 @@ module Jekyll
     # info    - the info for Liquid
     #
     # Returns the converted content
-    def render_liquid(content, payload, info, path = nil)
-      Liquid::Template.parse(content).render!(payload, info)
+    def render_liquid(content, payload, info, path)
+      site.liquid_renderer.file(path).parse(content).render(payload, info)
     rescue Tags::IncludeTagError => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
       raise e
@@ -129,11 +135,14 @@ module Jekyll
     #
     # Returns the type of self.
     def type
-      if is_a?(Draft)
-        :drafts
-      elsif is_a?(Post)
-        :posts
-      elsif is_a?(Page)
+      if is_a?(Page)
+        :pages
+      end
+    end
+
+    # returns the owner symbol for hook triggering
+    def hook_owner
+      if is_a?(Page)
         :pages
       end
     end
@@ -200,12 +209,13 @@ module Jekyll
       used = Set.new([layout])
 
       while layout
+        Jekyll.logger.debug "Rendering Layout:", path
         payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
 
         self.output = render_liquid(layout.content,
                                          payload,
                                          info,
-                                         File.join(site.config['layouts'], layout.name))
+                                         File.join(site.config['layouts_dir'], layout.name))
 
         # Add layout to dependency tree
         site.regenerator.add_dependency(
@@ -230,19 +240,29 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
+      Jekyll.logger.debug "Rendering:", self.relative_path
+
+      Jekyll.logger.debug "Pre-Render Hooks:", self.relative_path
+      Jekyll::Hooks.trigger hook_owner, :pre_render, self, payload
       info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
       payload["highlighter_prefix"] = converters.first.highlighter_prefix
       payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
-      self.content = render_liquid(content, payload, info) if render_with_liquid?
+      if render_with_liquid?
+        Jekyll.logger.debug "Rendering Liquid:", self.relative_path
+        self.content = render_liquid(content, payload, info, path)
+      end
+      Jekyll.logger.debug "Rendering Markup:", self.relative_path
       self.content = transform
 
       # output keeps track of what will finally be written
       self.output = content
 
       render_all_layouts(layouts, payload, info) if place_in_layout?
+      Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
+      Jekyll::Hooks.trigger hook_owner, :post_render, self
     end
 
     # Write the generated page file to the destination directory.
@@ -256,6 +276,7 @@ module Jekyll
       File.open(path, 'wb') do |f|
         f.write(output)
       end
+      Jekyll::Hooks.trigger hook_owner, :post_write, self
     end
 
     # Accessor for data properties by Liquid.

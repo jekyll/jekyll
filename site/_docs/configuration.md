@@ -180,7 +180,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Enable auto-regeneration of the site when files are modified.</p>
       </td>
       <td class="align-center">
-        <p><code class="flag">-w, --watch</code></p>
+        <p><code class="flag">-w, --[no-]watch</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -199,6 +199,15 @@ class="flag">flags</code> (specified on the command-line) that control them.
       </td>
       <td class="align-center">
         <p><code class="flag">--drafts</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Environment</strong></p>
+        <p class="description">Use a specific environment value in the build.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">JEKYLL_ENV=production</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -259,9 +268,25 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">-q, --quiet</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Incremental build</strong></p>
+        <p class="description">
+            Enable the experimental incremental build feature. Incremental build only
+            re-builds posts and pages that have changed, resulting in significant performance
+            improvements for large sites, but may also break site generation in certain
+            cases.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">incremental: BOOL</code></p>
+        <p><code class="flag">-I, --incremental</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
+
 
 ### Serve Command Options
 
@@ -338,6 +363,34 @@ before your site is served.
     default settings. Use spaces instead.
   </p>
 </div>
+
+## Specifying a Jekyll environment at build time
+
+In the build (or serve) arguments, you can specify a Jekyll environment and value. The build will then apply this value in any conditional statements in your content.
+
+For example, suppose you set this conditional statement in your code:
+
+{% highlight liquid %}
+{% raw %}
+{% if jekyll.environment == "production" %}
+   {% include disqus.html %}
+{% endif %}
+{% endraw %}
+{% endhighlight %}
+
+When you build your Jekyll site, the content inside the `if` statement won't be run unless you also specify a `production` environment in the build command, like this:
+
+{% highlight sh %}
+JEKYLL_ENV=production jekyll build
+{% endhighlight %}
+
+Specifying an environment value allows you to make certain content available only within specific environments.
+
+The default value for `JEKYLL_ENV` is `development`. Therefore if you omit `JEKYLL_ENV` from the build arguments, the default value will be `JEKYLL_ENV=development`. Any content inside `{% raw %}{% if jekyll.environment == "development" %}{% endraw %}` tags will automatically appear in the build.
+
+Your environment values can be anything you want (not just `development` or `production`). Some elements you might want to hide in development environments include Disqus comment forms or Google Analytics. Conversely, you might want to expose an "Edit me in GitHub" button in a development environment but not include it in production environments.
+
+By specifying the option in the build command, you avoid having to change values in your configuration files when moving from one environment to another.
 
 ## Front Matter defaults
 
@@ -465,12 +518,13 @@ file or on the command-line.
 
 {% highlight yaml %}
 # Where things are
-source:      .
-destination: ./_site
-plugins:     ./_plugins
-layouts:     ./_layouts
-data_source: ./_data
-collections: null
+source:       .
+destination:  ./_site
+plugins_dir:  ./_plugins
+layouts_dir:  ./_layouts
+data_dir:     ./_data
+includes_dir: ./_includes
+collections:  null
 
 # Handling Reading
 safe:         false
@@ -483,7 +537,7 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 # Filtering Content
 show_drafts: null
 limit_posts: 0
-future:      true
+future:      false
 unpublished: false
 
 # Plugins
@@ -495,15 +549,13 @@ markdown:    kramdown
 highlighter: rouge
 lsi:         false
 excerpt_separator: "\n\n"
+incremental: false
 
 # Serving
 detach:  false
 port:    4000
 host:    127.0.0.1
 baseurl: "" # does not include hostname
-
-# Backwards-compatibility
-relative_permalinks: false
 
 # Outputting
 permalink:     date
@@ -514,14 +566,6 @@ quiet:    false
 defaults: []
 
 # Markdown Processors
-maruku:
-  use_tex:    false
-  use_divs:   false
-  png_engine: blahtex
-  png_dir:    images/latex
-  png_url:    /images/latex
-  fenced_code_blocks: true
-
 rdiscount:
   extensions: []
 
@@ -585,15 +629,14 @@ All other extensions retain their usual names from Redcarpet, and no renderer
 options aside from `smart` can be specified in Jekyll. [A list of available
 extensions can be found in the Redcarpet README file.][redcarpet_extensions]
 Make sure you're looking at the README for the right version of
-Redcarpet: Jekyll currently uses v2.2.x, and extensions like `footnotes` and
-`highlight` weren't added until after version 3.0.0. The most commonly used
+Redcarpet: Jekyll currently uses v3.2.x. The most commonly used
 extensions are:
 
 - `tables`
 - `no_intra_emphasis`
 - `autolink`
 
-[redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v2.2.2/README.markdown#and-its-like-really-simple-to-use
+[redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v3.2.2/README.markdown#and-its-like-really-simple-to-use
 
 ### Kramdown
 

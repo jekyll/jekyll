@@ -9,11 +9,6 @@ Need help with Jekyll? Try these resources.
 
 Add **jekyll** to almost any query, and you'll find just what you need.
 
-### [jekyll/jekyll-help]({{site.help_url}}#how-do-i-ask-a-question)
-
-Search through the issues that the fine folks on the **@jekyll/help** team
-have answered, or ask your own.
-
 ### [Jekyll Talk](https://talk.jekyllrb.com/)
 
 Jekyll Talk is our official Discourse forum. Here, users and contributors

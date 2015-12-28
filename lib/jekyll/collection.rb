@@ -1,6 +1,7 @@
 module Jekyll
   class Collection
     attr_reader :site, :label, :metadata
+    attr_writer :docs
 
     # Create a new Collection.
     #
@@ -22,6 +23,23 @@ module Jekyll
       @docs ||= []
     end
 
+    # Override of normal respond_to? to match method_missing's logic for
+    # looking in @data.
+    def respond_to?(method, include_private = false)
+      docs.respond_to?(method.to_sym, include_private) || super
+    end
+
+    # Override of method_missing to check in @data for the key.
+    def method_missing(method, *args, &blck)
+      if docs.respond_to?(method.to_sym)
+        Jekyll.logger.warn "Deprecation:", "Collection##{method} should be called on the #docs array directly."
+        Jekyll.logger.warn "", "Called by #{caller.first}."
+        docs.public_send(method.to_sym, *args, &blck)
+      else
+        super
+      end
+    end
+
     # Fetch the static files in this collection.
     # Defaults to an empty array if no static files have been read in.
     #
@@ -40,7 +58,7 @@ module Jekyll
         if Utils.has_yaml_header? full_path
           doc = Jekyll::Document.new(full_path, { site: site, collection: self })
           doc.read
-          docs << doc if site.publisher.publish?(doc)
+          docs << doc if site.publisher.publish?(doc) || !write?
         else
           relative_dir = Jekyll.sanitized_path(relative_directory, File.dirname(file_path)).chomp("/.")
           files << StaticFile.new(site, site.source, relative_dir, File.basename(full_path), self)
@@ -163,7 +181,7 @@ module Jekyll
     #
     # Returns true if the 'write' metadata is true, false otherwise.
     def write?
-      !!metadata['output']
+      !!metadata.fetch('output', false)
     end
 
     # The URL template to render collection's documents at.

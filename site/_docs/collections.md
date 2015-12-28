@@ -37,6 +37,17 @@ collections:
     foo: bar
 {% endhighlight %}
 
+Default attributes can also be set for a collection:
+
+{% highlight yaml %}
+defaults:
+  - scope:
+      path: ""
+      type: my_collection
+    values:
+      layout: page
+{% endhighlight %}
+
 ### Step 2: Add your content
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add
@@ -44,11 +55,15 @@ documents. YAML Front Matter is read in as data if it exists, and everything
 after it is stuck in the Document's `content` attribute. If no YAML Front
 Matter is provided, Jekyll will not generate the file in your collection.
 
-Note: the folder must be named identically to the collection you defined in
-your `_config.yml` file, with the addition of the preceding `_` character.
+<div class="note info">
+  <h5>Be sure to name your directories correctly</h5>
+  <p>
+The folder must be named identically to the collection you defined in
+your <code>_config.yml</code> file, with the addition of the preceding <code>_</code> character.
+  </p>
+</div>
 
-### Step 3: Optionally render your collection's documents into independent
-files
+### Step 3: Optionally render your collection's documents into independent files
 
 If you'd like Jekyll to create a public-facing, rendered version of each
 document in your collection, set the `output` key to `true` in your collection
@@ -65,8 +80,8 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
-As for posts with [Permalinks](../permalinks/), document URL can be customized
-by setting a `permalink` metadata to the collection:
+As for posts with [Permalinks](../permalinks/), the document
+URL can be customized by setting `permalink` metadata for the collection:
 
 {% highlight yaml %}
 collections:
@@ -77,6 +92,15 @@ collections:
 
 For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be
 written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
+
+<div class="note info">
+  <h5>Don't forget to add YAML for processing</h5>
+  <p>
+  Files in collections that do not have front matter are treated as
+  <a href="/docs/static-files">static files</a> and simply copied to their
+  output location without processing.
+  </p>
+</div>
 
 <div class="mobile-side-scroller">
 <table>
@@ -176,11 +200,21 @@ you specified in your `_config.yml` (if present) and the following information:
     </tr>
     <tr>
       <td>
+        <p><code>files</code></p>
+      </td>
+      <td>
+        <p>
+          An array of static files in the collection.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>relative_directory</code></p>
       </td>
       <td>
         <p>
-          The path to the collections's source directory, relative to the site
+          The path to the collection's source directory, relative to the site
           source.
         </p>
       </td>
@@ -296,3 +330,51 @@ file, each document has the following attributes:
   </tbody>
 </table>
 </div>
+
+## Accessing Collection Attributes
+
+Attributes from the YAML front matter can be accessed as data anywhere in the 
+site. Using the above example for configuring a collection as `site.albums`,
+one might have front matter in an individual file structured as follows (which
+must use a supported markup format, and cannot be saved with a `.yaml`
+extension):
+
+{% highlight yaml %}
+title: "Josquin: Missa De beata virgine and Missa Ave maris stella"
+artist: "The Tallis Scholars"
+director: "Peter Phillips"
+works:
+  - title: "Missa De beata virgine"
+    composer: "Josquin des Prez"
+    tracks:
+      - title: "Kyrie"
+        duration: "4:25"
+      - title: "Gloria"
+        duration: "9:53"
+      - title: "Credo"
+        duration: "9:09"
+      - title: "Sanctus & Benedictus"
+        duration: "7:47"
+      - title: "Agnus Dei I, II & III"
+        duration: "6:49"
+{% endhighlight %}
+
+Every album in the collection could be listed on a single page with a template:
+
+{% highlight html %}
+{% raw %}
+{% for album in site.albums %}
+  <h2>{{ album.title }}</h2>
+  <p>Performed by {{ album.artist }}{% if album.director %}, directed by {{ album.director }}{% endif %}</p>
+  {% for work in album.works %}
+    <h3>{{ work.title }}</h3>
+    <p>Composed by {{ work.composer }}</p>
+    <ul>
+    {% for track in work.tracks %}
+      <li>{{ track.title }} ({{ track.duration }})</li>
+    {% endfor %}
+    </ul>
+  {% endfor %}
+{% endfor %}
+{% endraw %}
+{% endhighlight %}

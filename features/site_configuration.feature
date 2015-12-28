@@ -83,13 +83,6 @@ Feature: Site configuration
     Then the _site directory should exist
     And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
 
-  Scenario: Use Maruku for markup
-    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
-    And I have a configuration file with "markdown" set to "maruku"
-    When I run jekyll build
-    Then the _site directory should exist
-    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
-
   Scenario: Highlight code with pygments
     Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
     When I run jekyll build
@@ -231,7 +224,7 @@ Feature: Site configuration
       | key         | value        |
       | time        | 2010-01-01   |
       | future      | true         |
-      | layouts     | _theme       |
+      | layouts_dir | _theme       |
     And I have a _posts directory
     And I have the following posts:
       | title  | date       | layout | content             |

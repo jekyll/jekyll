@@ -3,10 +3,21 @@ require 'helper'
 class TestRedcarpet < JekyllUnitTest
   context "redcarpet" do
     setup do
+      if jruby?
+        then skip(
+          "JRuby does not perform well with CExt, test disabled."
+        )
+      end
+
       @config = {
-        'redcarpet' => { 'extensions' => ['smart', 'strikethrough', 'filter_html'] },
-        'markdown' => 'redcarpet'
+        'markdown' => 'redcarpet',
+        'redcarpet' => {
+          'extensions' => [
+            'smart', 'strikethrough', 'filter_html'
+          ]
+        }
       }
+
       @markdown = Converters::Markdown.new @config
     end
 
@@ -64,7 +75,7 @@ puts "Hello world"
       end
 
       should "render fenced code blocks without syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" data-lang=\"ruby\">puts &quot;Hello world&quot;\n</code></pre></div>", @markdown.convert(
+        assert_equal "<figure class=\"highlight\"><pre><code class=\"language-ruby\" data-lang=\"ruby\">puts &quot;Hello world&quot;\n</code></pre></figure>", @markdown.convert(
           <<-EOS
 ```ruby
 puts "Hello world"

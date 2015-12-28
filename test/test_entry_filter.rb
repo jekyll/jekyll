@@ -19,7 +19,7 @@ class TestEntryFilter < JekyllUnitTest
       files = %w[index.html site.css .htaccess vendor]
 
       @site.exclude = excludes + ["exclude*"]
-      assert_equal files, @site.filter_entries(excludes + files + ["excludeA"])
+      assert_equal files, @site.reader.filter_entries(excludes + files + ["excludeA"])
     end
 
     should "filter entries with exclude relative to site source" do
@@ -27,7 +27,7 @@ class TestEntryFilter < JekyllUnitTest
       files = %w[index.html vendor/css .htaccess]
 
       @site.exclude = excludes
-      assert_equal files, @site.filter_entries(excludes + files + ["css"])
+      assert_equal files, @site.reader.filter_entries(excludes + files + ["css"])
     end
 
     should "filter excluded directory and contained files" do
@@ -35,7 +35,7 @@ class TestEntryFilter < JekyllUnitTest
       files = %w[index.html .htaccess]
 
       @site.exclude = excludes
-      assert_equal files, @site.filter_entries(excludes + files + ["css", "css/main.css", "css/vendor.css"])
+      assert_equal files, @site.reader.filter_entries(excludes + files + ["css", "css/main.css", "css/vendor.css"])
     end
 
     should "not filter entries within include" do
@@ -43,26 +43,26 @@ class TestEntryFilter < JekyllUnitTest
       files = %w[index.html _index.html .htaccess includeA]
 
       @site.include = includes
-      assert_equal files, @site.filter_entries(files)
+      assert_equal files, @site.reader.filter_entries(files)
     end
 
     should "filter symlink entries when safe mode enabled" do
       site = Site.new(site_configuration('safe' => true))
       allow(File).to receive(:symlink?).with('symlink.js').and_return(true)
       files = %w[symlink.js]
-      assert_equal [], site.filter_entries(files)
+      assert_equal [], site.reader.filter_entries(files)
     end
 
     should "not filter symlink entries when safe mode disabled" do
       allow(File).to receive(:symlink?).with('symlink.js').and_return(true)
       files = %w[symlink.js]
-      assert_equal files, @site.filter_entries(files)
+      assert_equal files, @site.reader.filter_entries(files)
     end
 
     should "not include symlinks in safe mode" do
       site = Site.new(site_configuration('safe' => true))
 
-      site.read_directories("symlink-test")
+      site.reader.read_directories("symlink-test")
       assert_equal [], site.pages
       assert_equal [], site.static_files
     end
@@ -70,7 +70,7 @@ class TestEntryFilter < JekyllUnitTest
     should "include symlinks in unsafe mode" do
       site = Site.new(site_configuration)
 
-      site.read_directories("symlink-test")
+      site.reader.read_directories("symlink-test")
       refute_equal [], site.pages
       refute_equal [], site.static_files
     end

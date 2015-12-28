@@ -20,7 +20,19 @@ Jekyll does what you tell it to do — no more, no less. It doesn't try to outs
 * Read up about its [Usage](http://jekyllrb.com/docs/usage/) and [Configuration](http://jekyllrb.com/docs/configuration/)
 * Take a gander at some existing [Sites](https://wiki.github.com/jekyll/jekyll/sites)
 * Fork and [Contribute](http://jekyllrb.com/docs/contributing/) your own modifications
-* Have questions? Check out [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/).
+* Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) or [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/)
+
+## Code of Conduct
+
+In order to have a more open and welcoming community, Jekyll adheres to a
+[code of conduct](CONDUCT.md) adapted from the Ruby on Rails code of
+conduct.
+
+Please adhere to this code of conduct in any interactions you have in the
+Jekyll community. It is strictly enforced on all official Jekyll
+repositories, websites, and resources. If you encounter someone violating
+these terms, please let a maintainer (@parkr, @envygeeks, or @mattr-) know
+and we will address it as soon as possible.
 
 ## Diving In
 

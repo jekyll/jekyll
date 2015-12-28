@@ -29,7 +29,7 @@ module Jekyll
           include CommonMethods
 
           def code_wrap(code)
-            "<div class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></div>"
+            "<figure class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></figure>"
           end
 
           def block_code(code, lang)
@@ -76,7 +76,7 @@ module Jekyll
                 rouge/plugins/redcarpet
               ])
 
-              if Rouge.version < '1.3.0'
+              unless Gem::Version.new(Rouge.version) > Gem::Version.new("1.3.0")
                 abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
               end
 

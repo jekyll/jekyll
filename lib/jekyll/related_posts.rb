@@ -14,7 +14,7 @@ module Jekyll
     end
 
     def build
-      return [] unless site.posts.size > 1
+      return [] unless site.posts.docs.size > 1
 
       if site.lsi
         build_index
@@ -30,7 +30,7 @@ module Jekyll
         lsi = ClassifierReborn::LSI.new(:auto_rebuild => false)
         display("Populating LSI...")
 
-        site.posts.each do |x|
+        site.posts.docs.each do |x|
           lsi.add_item(x)
         end
 
@@ -42,11 +42,11 @@ module Jekyll
     end
 
     def lsi_related_posts
-      self.class.lsi.find_related(post.content, 11) - [post]
+      self.class.lsi.find_related(post, 11)
     end
 
     def most_recent_posts
-      @most_recent_posts ||= (site.posts.reverse - [post]).first(10)
+      @most_recent_posts ||= (site.posts.docs.reverse - [post]).first(10)
     end
 
     def display(output)
