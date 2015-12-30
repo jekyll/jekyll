@@ -20,8 +20,8 @@ Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     '%q': '{}'
     '%Q': '{}'
-    '%r': '!!'
+    '%r': '{}'
     '%s': '()'
-    '%w': '()'
-    '%W': '()'
+    '%w': '[]'
+    '%W': '[]'
     '%x': '()'
