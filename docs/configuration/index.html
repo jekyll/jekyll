@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Configuration</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.0.1">
+  <meta name="generator" content="Jekyll v3.1.0.pre.beta1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -3049,6 +3049,37 @@ in the <code>_plugins</code> folder or as a gem, specify it in your <code>_confi
 
 <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">markdown</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">MyCustomProcessor</span></code></pre></figure>
 
+<h2 id="incremental-regeneration">Incremental Regeneration</h2>
+<div class="note warning">
+  <h5>Incremental regeneration is still an experimental feature</h5>
+  <p>
+    While incremental regeneration will work for the most common cases, it will
+    not work correctly in every scenario. Please be extremely cautious when
+    using the feature, and report any problems not listed below by
+    <a href="https://github.com/jekyll/jekyll/issues/new">opening an issue on GitHub</a>.
+  </p>
+</div>
+
+<p>Incremental regeneration helps shorten build times by only generating documents
+and pages that were updated since the previous build. It does this by keeping
+track of both file modification times and inter-document dependencies in the
+<code>.jekyll-metadata</code> file.</p>
+
+<p>Under the current implementation, incremental regeneration will only generate a
+document or page if either it, or one of its dependencies, is modified. Currently,
+the only types of dependencies tracked are includes (using the
+<code>{% include %}</code> tag) and layouts. This means that plain
+references to other documents (for example, the common case of iterating over
+<code>site.posts</code> in a post listings page) will not be detected as a dependency.</p>
+
+<p>To remedy some of these shortfalls, putting <code>regenerate: true</code> in the front-matter
+of a document will force Jekyll to regenerate it regardless of whether it has been
+modified. Note that this will generate the specified document only; references
+to other documents’ contents will not work since they won’t be re-rendered.</p>
+
+<p>Incremental regeneration can be enabled via the <code>--incremental</code> flag (<code>-I</code> for
+short) from the command-line or by setting <code>incremental: true</code> in your
+configuration file.</p>
 
           
 
