@@ -32,7 +32,7 @@ def gemspec_file
 end
 
 def gem_file
-  "#{name}-#{Gem::Version.new(version).to_s}.gem"
+  "#{name}-#{Gem::Version.new(version)}.gem"
 end
 
 def normalize_bullets(markdown)

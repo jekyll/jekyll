@@ -1,7 +1,6 @@
 module Jekyll
   module Commands
     class Build < Command
-
       class << self
 
         # Create the Mercenary command for the Jekyll CLI for this Command
@@ -13,7 +12,7 @@ module Jekyll
 
             add_build_options(c)
 
-            c.action do |args, options|
+            c.action do |_args, options|
               options["serving"] = false
               Jekyll::Commands::Build.process(options)
             end
@@ -49,7 +48,7 @@ module Jekyll
         #
         # Returns nothing.
         def build(site, options)
-          t = Time.now
+          t = Time.now.to_f
           source      = options['source']
           destination = options['destination']
           incremental = options['incremental']
@@ -58,7 +57,7 @@ module Jekyll
           Jekyll.logger.info "Incremental build:", (incremental ? "enabled" : "disabled. Enable with --incremental")
           Jekyll.logger.info "Generating..."
           process_site(site)
-          Jekyll.logger.info "", "done in #{(Time.now - t).round(3)} seconds."
+          Jekyll.logger.info "", "done in #{(Time.now.to_f - t).round(3)} seconds."
         end
 
         # Private: Watch for file changes and rebuild the site.
@@ -67,13 +66,12 @@ module Jekyll
         # options - A Hash of options passed to the command
         #
         # Returns nothing.
-        def watch(site, options)
+        def watch(_site, options)
           External.require_with_graceful_fail 'jekyll-watch'
           Jekyll::Watcher.watch(options)
         end
 
       end # end of class << self
-
     end
   end
 end

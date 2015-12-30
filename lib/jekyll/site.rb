@@ -20,7 +20,7 @@ module Jekyll
       @config = config.clone
 
       %w[safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems].each do |opt|
+         show_drafts limit_posts keep_files gems].each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -106,7 +106,7 @@ module Jekyll
       dest_pathname = Pathname.new(dest)
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
-          raise Errors::FatalException.new "Destination directory cannot be or contain the Source directory."
+          Jekyll.logger.abort_with "Destination directory cannot be or contain the Source directory."
         end
       end
     end
@@ -165,7 +165,7 @@ module Jekyll
 
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
-      collections.each do |label, collection|
+      collections.each do |_label, collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run
@@ -196,9 +196,9 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item|
+      each_site_file do |item|
         item.write(dest) if regenerator.regenerate?(item)
-      }
+      end
       regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self
     end
@@ -292,10 +292,10 @@ module Jekyll
     # Returns
     def relative_permalinks_are_deprecated
       if config['relative_permalinks']
-        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" +
-                                " in subfolders must be relative to the" +
-                                " site source directory, not the parent" +
-                                " directory. Check http://jekyllrb.com/docs/upgrading/"+
+        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
+                                " in subfolders must be relative to the" \
+                                " site source directory, not the parent" \
+                                " directory. Check http://jekyllrb.com/docs/upgrading/" \
                                 " for more info."
       end
     end
@@ -317,7 +317,7 @@ module Jekyll
     end
 
     def each_site_file
-      %w(pages static_files docs_to_write).each do |type|
+      %w[pages static_files docs_to_write].each do |type|
         send(type).each do |item|
           yield item
         end
