@@ -57,6 +57,7 @@
   * Add jekyll-paginate-category to list of third-party plugins (#4273)
   * Add `jekyll-responsive_image` to list of third-party plugins (#4286)
   * Add `jekyll-commonmark` to list of third-party plugins (#4299)
+  * Add documentation for incremental regeneration (#4293)
 
 ## 3.0.1 / 2015-11-17
 
