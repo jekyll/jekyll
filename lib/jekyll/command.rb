@@ -1,6 +1,5 @@
 module Jekyll
   class Command
-
     class << self
 
       # A list of subclasses of Jekyll::Command

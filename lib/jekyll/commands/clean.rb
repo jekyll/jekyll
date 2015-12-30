@@ -10,7 +10,7 @@ module Jekyll
 
             add_build_options(c)
 
-            c.action do |args, options|
+            c.action do |_args, options|
               Jekyll::Commands::Clean.process(options)
             end
           end
@@ -37,7 +37,6 @@ module Jekyll
             Jekyll.logger.info "Nothing to do for #{metadata_file}."
           end
         end
-
       end
     end
   end
