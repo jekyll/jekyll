@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if ruby --version | grep -q "jruby"
+then
+  echo "Move along, we are not testing features on JRuby right now."
+  exit 0
+else
+  time ruby -S bundle exec cucumber \
+    -f Features::Support::Overview \
+    "$@"
+fi

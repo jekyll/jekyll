@@ -1,6 +1,9 @@
 module Jekyll
+  module Errors
+    class FatalException < RuntimeError
+    end
 
-  class FatalException < StandardError
+    class MissingDependencyException < FatalException
+    end
   end
-
 end

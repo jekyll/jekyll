@@ -7,10 +7,10 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout  | content                                     |
-      | Star Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
+      | title     | date       | layout  | content                                     |
+      | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
     And I have a default layout that contains "{{ site.time | date_to_xmlschema }}"
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And I should see today's date in "_site/2009/03/27/star-wars.html"
 
@@ -18,10 +18,10 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title       | date      | layout  | content                                     |
-      | Star & Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
+      | title       | date       | layout  | content                                     |
+      | Star & Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
     And I have a default layout that contains "{{ page.title | xml_escape }}"
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "Star &amp; Wars" in "_site/2009/03/27/star-wars.html"
 
@@ -29,10 +29,10 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout  | content                                     |
-      | Star Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
-    And I have a default layout that contains "{{ content | xml_escape }}"
-    When I run jekyll
+      | title     | date       | layout  | content                                     |
+      | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
+    And I have a default layout that contains "{{ content | number_of_words }}"
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "7" in "_site/2009/03/27/star-wars.html"
 
@@ -40,21 +40,66 @@ Feature: Embed filters
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout  | tags                   | content                                     |
-      | Star Wars | 3/27/2009 | default | [scifi, movies, force] | These aren't the droids you're looking for. |
+      | title     | date       | layout  | tags                   | content                                     |
+      | Star Wars | 2009-03-27 | default | [scifi, movies, force] | These aren't the droids you're looking for. |
     And I have a default layout that contains "{{ page.tags | array_to_sentence_string }}"
-    When I run jekyll
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "scifi, movies, and force" in "_site/2009/03/27/star-wars.html"
 
-  Scenario: Textilize a given string
+  Scenario: Markdownify a given string
     Given I have a _posts directory
     And I have a _layouts directory
     And I have the following post:
-      | title     | date      | layout  | content                                      |
-      | Star Wars | 3/27/2009 | default | These aren't the droids you're looking for. |
-    And I have a default layout that contains "By {{ '_Obi-wan_' | textilize }}"
-    When I run jekyll
+      | title     | date       | layout  | content                                     |
+      | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
+    And I have a default layout that contains "By {{ '_Obi-wan_' | markdownify }}"
+    When I run jekyll build
     Then the _site directory should exist
     And I should see "By <p><em>Obi-wan</em></p>" in "_site/2009/03/27/star-wars.html"
 
+  Scenario: Sort by an arbitrary variable
+    Given I have a _layouts directory
+    And I have the following page:
+      | title  | layout  | value | content   |
+      | Page-1 | default | 8     | Something |
+    And I have the following page:
+      | title  | layout  | value | content   |
+      | Page-2 | default | 6     | Something |
+    And I have a default layout that contains "{{ site.pages | sort:'value' | map:'title' | join:', ' }}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see exactly "Page-2, Page-1" in "_site/page-1.html"
+    And I should see exactly "Page-2, Page-1" in "_site/page-2.html"
+
+  Scenario: Sort pages by the title
+    Given I have a _layouts directory
+    And I have the following page:
+      | title | layout | content |
+      | Dog | default | Run |
+    And I have the following page:
+      | title | layout | content |
+      | Bird | default | Fly |
+    And I have the following page:
+      | layout | content |
+      | default | Jump |
+    And I have a default layout that contains "{% assign sorted_pages = site.pages | sort: 'title' %}The rule of {{ sorted_pages.size }}: {% for p in sorted_pages %}{{ p.content | strip_html | strip_newlines }}, {% endfor %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see exactly "The rule of 3: Jump, Fly, Run," in "_site/bird.html"
+
+  Scenario: Sort pages by the title ordering pages without title last
+    Given I have a _layouts directory
+    And I have the following page:
+      | title | layout | content |
+      | Dog | default | Run |
+    And I have the following page:
+      | title | layout | content |
+      | Bird | default | Fly |
+    And I have the following page:
+      | layout | content |
+      | default | Jump |
+    And I have a default layout that contains "{% assign sorted_pages = site.pages | sort: 'title', 'last' %}The rule of {{ sorted_pages.size }}: {% for p in sorted_pages %}{{ p.content | strip_html | strip_newlines }}, {% endfor %}"
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see exactly "The rule of 3: Fly, Run, Jump," in "_site/bird.html"

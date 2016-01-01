@@ -1,0 +1,96 @@
+# These are the same MIME types that GitHub Pages uses as of 26 January 2014
+
+text/html;charset=utf-8               html htm shtml
+text/css                              css
+text/xml;charset=utf-8                xml rss xsl xsd
+image/gif                             gif
+image/jpeg                            jpeg jpg
+application/x-javascript              js
+application/atom+xml                  atom
+application/json                      json geojson topojson
+
+text/mathml                           mml
+text/plain                            txt
+text/vnd.sun.j2me.app-descriptor      jad
+text/vnd.wap.wml                      wml
+text/x-component                      htc
+text/cache-manifest                   manifest appcache
+text/coffeescript                     coffee
+text/plain                            pde
+text/plain                            md markdown
+text/vcard                            vcf vcard
+
+image/png                             png
+image/svg+xml                         svg
+image/svg+xml                         svgz
+image/tiff                            tif tiff
+image/vnd.wap.wbmp                    wbmp
+image/x-icon                          ico
+image/x-jng                           jng
+image/x-ms-bmp                        bmp
+
+application/vnd.ms-fontobject         eot
+application/x-font-ttf                ttf
+application/x-font-woff               woff
+application/font-woff2                woff2
+font/opentype                         otf
+
+application/java-archive              jar ear
+application/mac-binhex40              hqx
+application/msword                    doc
+application/pdf                       pdf
+application/postscript                ps eps ai
+application/rdf+xml                   rdf
+application/rtf                       rtf
+application/vnd.apple.pkpass          pkpass
+application/vnd.ms-excel              xls
+application/vnd.ms-powerpoint         ppt
+application/vnd.wap.wmlc              wmlc
+application/xhtml+xml                 xhtml
+application/x-cocoa                   cco
+application/x-chrome-extension        crx
+application/x-java-archive-diff       jardiff
+application/x-java-jnlp-file          jnlp
+application/x-makeself                run
+application/x-ms-application          application
+application/x-ms-manifest             manifest
+application/x-ms-vsto                 vsto
+application/x-ns-proxy-autoconfig     pac
+application/x-perl                    pl pm
+application/x-pilot                   prc pdb
+application/x-rar-compressed          rar
+application/x-redhat-package-manager  rpm
+application/x-sea                     sea
+application/x-shockwave-flash         swf
+application/x-stuffit                 sit
+application/x-tcl                     tcl tk
+application/x-web-app-manifest+json   webapp
+application/x-x509-ca-cert            der pem crt
+application/x-xpinstall               xpi
+application/x-zip                     war
+application/zip                       zip
+
+application/octet-stream              bin exe dll
+application/octet-stream              deb
+application/octet-stream              deploy
+application/octet-stream              dmg
+application/octet-stream              iso img
+application/octet-stream              msi msp msm
+
+audio/midi                            mid midi kar
+audio/mpeg                            mp3
+audio/x-realaudio                     ra
+audio/ogg                             ogg
+
+video/3gpp                            3gpp 3gp
+video/m4v                             m4v
+video/mp4                             mp4
+video/mpeg                            mpeg mpg
+video/ogg                             ogg ogv
+video/quicktime                       mov
+video/webm                            webm
+video/x-flv                           flv
+video/x-mng                           mng
+video/x-ms-asf                        asx asf
+video/x-ms-wmv                        wmv
+video/x-msvideo                       avi

@@ -1,0 +1,27 @@
+language: ruby
+cache: bundler
+sudo: false
+rvm:
+- 2.2
+- 2.1
+- 2.0
+- jruby-head
+env:
+  matrix:
+    - TEST_SUITE=test
+    - TEST_SUITE=cucumber
+before_script: bundle update
+script: script/cibuild
+notifications:
+  irc:
+    on_success: change
+    on_failure: change
+    channels:
+      - irc.freenode.org#jekyll
+    template:
+      - "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
+  email:
+    on_success: never
+    on_failure: never
+  slack:
+    secure: dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4YGEilNRzKPz18AsFptVXofpwyqcBxaCfmHP809NX5PHBaadydveLm+TNVao2XeLXSWu+HUNAYO1AanCUbJSEyJTju347xCBGzESU=

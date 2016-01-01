@@ -1,22 +1,21 @@
 module Jekyll
+  module Converters
+    class Identity < Converter
+      safe true
 
-  class IdentityConverter < Converter
-    safe true
+      priority :lowest
 
-    priority :lowest
+      def matches(ext)
+        true
+      end
 
-    def matches(ext)
-      true
+      def output_ext(ext)
+        ext
+      end
+
+      def convert(content)
+        content
+      end
     end
-
-    def output_ext(ext)
-      ext
-    end
-
-    def convert(content)
-      content
-    end
-
   end
-
 end

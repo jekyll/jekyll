@@ -1,64 +1,159 @@
 module Jekyll
-
   class Post
     include Comparable
     include Convertible
 
-    class << self
-      attr_accessor :lsi
-    end
-
+    # Valid post name regex.
     MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
+    EXCERPT_ATTRIBUTES_FOR_LIQUID = %w[
+      title
+      url
+      dir
+      date
+      id
+      categories
+      next
+      previous
+      tags
+      path
+    ]
+
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = EXCERPT_ATTRIBUTES_FOR_LIQUID + %w[
+      content
+      excerpt
+      excerpt_separator
+      draft?
+    ]
+
     # Post name validator. Post filenames must be like:
-    #   2008-11-05-my-awesome-post.textile
+    # 2008-11-05-my-awesome-post.textile
     #
-    # Returns <Bool>
+    # Returns true if valid, false if not.
     def self.valid?(name)
       name =~ MATCHER
     end
 
     attr_accessor :site
-    attr_accessor :data, :content, :output, :ext
-    attr_accessor :date, :slug, :published, :tags, :categories
+    attr_accessor :data, :extracted_excerpt, :content, :output, :ext
+    attr_accessor :date, :slug, :tags, :categories
+
+    attr_reader :name
 
     # Initialize this Post instance.
-    #   +site+ is the Site
-    #   +base+ is the String path to the dir containing the post file
-    #   +name+ is the String filename of the post file
-    #   +categories+ is an Array of Strings for the categories for this post
     #
-    # Returns <Post>
+    # site       - The Site.
+    # base       - The String path to the dir containing the post file.
+    # name       - The String filename of the post file.
+    #
+    # Returns the new Post.
     def initialize(site, source, dir, name)
       @site = site
-      @base = File.join(source, dir, '_posts')
+      @dir = dir
+      @base = containing_dir(dir)
       @name = name
 
       self.categories = dir.split('/').reject { |x| x.empty? }
-      self.process(name)
-      self.read_yaml(@base, name)
+      process(name)
+      read_yaml(@base, name)
 
-      #If we've added a date and time to the yaml, use that instead of the filename date
-      #Means we'll sort correctly.
-      if self.data.has_key?('date')
-        # ensure Time via to_s and reparse
-        self.date = Time.parse(self.data["date"].to_s)
+      data.default_proc = proc do |hash, key|
+        site.frontmatter_defaults.find(relative_path, type, key)
       end
 
-      if self.data.has_key?('published') && self.data['published'] == false
-        self.published = false
+      if data.key?('date')
+        self.date = Utils.parse_date(data["date"].to_s, "Post '#{relative_path}' does not have a valid date in the YAML front matter.")
+      end
+
+      populate_categories
+      populate_tags
+
+      Jekyll::Hooks.trigger self, :post_init
+    end
+
+    def published?
+      if data.key?('published') && data['published'] == false
+        false
       else
-        self.published = true
-      end
-
-      self.tags = self.data.pluralized_array("tag", "tags")
-
-      if self.categories.empty?
-        self.categories = self.data.pluralized_array('category', 'categories')
+        true
       end
     end
 
-    # Spaceship is based on Post#date, slug
+    def populate_categories
+      categories_from_data = Utils.pluralized_array_from_hash(data, 'category', 'categories')
+      self.categories = (
+        Array(categories) + categories_from_data
+      ).map { |c| c.to_s }.flatten.uniq
+    end
+
+    def populate_tags
+      self.tags = Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+    end
+
+    # Get the full path to the directory containing the post files
+    def containing_dir(dir)
+      site.in_source_dir(dir, '_posts')
+    end
+
+    # Read the YAML frontmatter.
+    #
+    # base - The String path to the dir containing the file.
+    # name - The String filename of the file.
+    #
+    # Returns nothing.
+    def read_yaml(base, name)
+      super(base, name)
+      self.extracted_excerpt = extract_excerpt
+    end
+
+    # The post excerpt. This is either a custom excerpt
+    # set in YAML front matter or the result of extract_excerpt.
+    #
+    # Returns excerpt string.
+    def excerpt
+      data.fetch('excerpt') { extracted_excerpt.to_s }
+    end
+
+    # Public: the Post title, from the YAML Front-Matter or from the slug
+    #
+    # Returns the post title
+    def title
+      data.fetch('title') { titleized_slug }
+    end
+
+    # Public: the Post excerpt_separator, from the YAML Front-Matter or site default
+    #         excerpt_separator value
+    #
+    # Returns the post excerpt_separator
+    def excerpt_separator
+      (data['excerpt_separator'] || site.config['excerpt_separator']).to_s
+    end
+
+    # Turns the post slug into a suitable title
+    def titleized_slug
+      slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+    end
+
+    # Public: the path to the post relative to the site source,
+    #         from the YAML Front-Matter or from a combination of
+    #         the directory it's in, "_posts", and the name of the
+    #         post file
+    #
+    # Returns the path to the file relative to the site source
+    def path
+      data.fetch('path') { relative_path.sub(/\A\//, '') }
+    end
+
+    # The path to the post source file, relative to the site source
+    def relative_path
+      File.join(*[@dir, "_posts", @name].map(&:to_s).reject(&:empty?))
+    end
+
+    # Compares Post objects. First compares the Post date. If the dates are
+    # equal, it compares the Post slugs.
+    #
+    # other - The other Post we are comparing to.
     #
     # Returns -1, 0, 1
     def <=>(other)
@@ -69,187 +164,168 @@ module Jekyll
       return cmp
     end
 
-    # Extract information from the post filename
-    #   +name+ is the String filename of the post file
+    # Extract information from the post filename.
     #
-    # Returns nothing
+    # name - The String filename of the post file.
+    #
+    # Returns nothing.
     def process(name)
       m, cats, date, slug, ext = *name.match(MATCHER)
-      self.date = Time.parse(date)
+      self.date = Utils.parse_date(date, "Post '#{relative_path}' does not have a valid date in the filename.")
       self.slug = slug
       self.ext = ext
-    rescue ArgumentError
-      raise FatalException.new("Post #{name} does not have a valid date.")
     end
 
     # The generated directory into which the post will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, set to the default date
-    # e.g. "/2008/11/05/" if the permalink style is :date, otherwise nothing
+    # e.g. "/2008/11/05/" if the permalink style is :date, otherwise nothing.
     #
-    # Returns <String>
+    # Returns the String directory.
     def dir
       File.dirname(url)
     end
 
-    # The full path and filename of the post.
-    # Defined in the YAML of the post body
-    # (Optional)
+    # The full path and filename of the post. Defined in the YAML of the post
+    # body (optional).
     #
-    # Returns <String>
+    # Returns the String permalink.
     def permalink
-      self.data && self.data['permalink']
+      data && data['permalink']
     end
 
     def template
-      case self.site.permalink_style
+      case site.permalink_style
       when :pretty
         "/:categories/:year/:month/:day/:title/"
       when :none
         "/:categories/:title.html"
       when :date
         "/:categories/:year/:month/:day/:title.html"
+      when :ordinal
+        "/:categories/:year/:y_day/:title.html"
       else
-        self.site.permalink_style.to_s
+        site.permalink_style.to_s
       end
     end
 
-    # The generated relative url of this post
-    # e.g. /2008/11/05/my-awesome-post.html
+    # The generated relative url of this post.
     #
-    # Returns <String>
+    # Returns the String url.
     def url
-      return @url if @url
-
-      url = if permalink
-        permalink
-      else
-        {
-          "year"       => date.strftime("%Y"),
-          "month"      => date.strftime("%m"),
-          "day"        => date.strftime("%d"),
-          "title"      => CGI.escape(slug),
-          "i_day"      => date.strftime("%d").to_i.to_s,
-          "i_month"    => date.strftime("%m").to_i.to_s,
-          "categories" => categories.join('/'),
-          "output_ext" => self.output_ext
-        }.inject(template) { |result, token|
-          result.gsub(/:#{Regexp.escape token.first}/, token.last)
-        }.gsub(/\/\//, "/")
-      end
-
-      # sanitize url
-      @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
-      @url += "/" if url =~ /\/$/
-      @url
+      @url ||= URL.new({
+        :template => template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
+      }).to_s
     end
 
-    # The UID for this post (useful in feeds)
+    # Returns a hash of URL placeholder names (as symbols) mapping to the
+    # desired placeholder replacements. For details see "url.rb"
+    def url_placeholders
+      {
+        :year        => date.strftime("%Y"),
+        :month       => date.strftime("%m"),
+        :day         => date.strftime("%d"),
+        :title       => slug,
+        :i_day       => date.strftime("%-d"),
+        :i_month     => date.strftime("%-m"),
+        :categories  => (categories || []).map { |c| c.to_s.downcase }.uniq.join('/'),
+        :short_month => date.strftime("%b"),
+        :short_year  => date.strftime("%y"),
+        :y_day       => date.strftime("%j"),
+        :output_ext  => output_ext
+      }
+    end
+
+    # The UID for this post (useful in feeds).
     # e.g. /2008/11/05/my-awesome-post
     #
-    # Returns <String>
+    # Returns the String UID.
     def id
-      File.join(self.dir, self.slug)
+      File.join(dir, slug)
     end
 
     # Calculate related posts.
     #
-    # Returns [<Post>]
+    # Returns an Array of related Posts.
     def related_posts(posts)
-      return [] unless posts.size > 1
-
-      if self.site.lsi
-        self.class.lsi ||= begin
-          puts "Running the classifier... this could take a while."
-          lsi = Classifier::LSI.new
-          posts.each { |x| $stdout.print(".");$stdout.flush;lsi.add_item(x) }
-          puts ""
-          lsi
-        end
-
-        related = self.class.lsi.find_related(self.content, 11)
-        related - [self]
-      else
-        (posts - [self])[0..9]
-      end
+      Jekyll::RelatedPosts.new(self).build
     end
 
-    # Add any necessary layouts to this post
-    #   +layouts+ is a Hash of {"name" => "layout"}
-    #   +site_payload+ is the site payload hash
+    # Add any necessary layouts to this post.
     #
-    # Returns nothing
+    # layouts      - A Hash of {"name" => "layout"}.
+    # site_payload - The site payload hash.
+    #
+    # Returns nothing.
     def render(layouts, site_payload)
       # construct payload
-      payload = {
+      payload = Utils.deep_merge_hashes({
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
-        "page" => self.to_liquid
-      }.deep_merge(site_payload)
+        "page" => to_liquid(self.class::EXCERPT_ATTRIBUTES_FOR_LIQUID)
+      }, site_payload)
 
-      do_layout(payload, layouts)
+      if generate_excerpt?
+        extracted_excerpt.do_layout(payload, {})
+      end
+
+      do_layout(payload.merge({"page" => to_liquid}), layouts)
     end
-    
+
     # Obtain destination path.
-    #   +dest+ is the String path to the destination dir
     #
-    # Returns destination file path.
+    # dest - The String path to the destination dir.
+    #
+    # Returns destination file path String.
     def destination(dest)
       # The url needs to be unescaped in order to preserve the correct filename
-      path = File.join(dest, CGI.unescape(self.url))
-      path = File.join(path, "index.html") if template[/\.html$/].nil?
+      path = site.in_dest_dir(dest, URL.unescape_path(url))
+      path = File.join(path, "index.html") if self.url.end_with?("/")
+      path << output_ext unless path.end_with?(output_ext)
       path
     end
 
-    # Write the generated post file to the destination directory.
-    #   +dest+ is the String path to the destination dir
-    #
-    # Returns nothing
-    def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') do |f|
-        f.write(self.output)
-      end
-    end
-
-    # Convert this post into a Hash for use in Liquid templates.
-    #
-    # Returns <Hash>
-    def to_liquid
-      self.data.deep_merge({
-        "title"      => self.data["title"] || self.slug.split('-').select {|w| w.capitalize! || w }.join(' '),
-        "url"        => self.url,
-        "date"       => self.date,
-        "id"         => self.id,
-        "categories" => self.categories,
-        "next"       => self.next,
-        "previous"   => self.previous,
-        "tags"       => self.tags,
-        "content"    => self.content })
-    end
-
+    # Returns the shorthand String identifier of this Post.
     def inspect
-      "<Post: #{self.id}>"
+      "<Post: #{id}>"
     end
 
     def next
-      pos = self.site.posts.index(self)
-
-      if pos && pos < self.site.posts.length-1
-        self.site.posts[pos+1]
+      pos = site.posts.index {|post| post.equal?(self) }
+      if pos && pos < site.posts.length - 1
+        site.posts[pos + 1]
       else
         nil
       end
     end
 
     def previous
-      pos = self.site.posts.index(self)
+      pos = site.posts.index {|post| post.equal?(self) }
       if pos && pos > 0
-        self.site.posts[pos-1]
+        site.posts[pos - 1]
       else
         nil
       end
     end
-  end
 
+    # Returns if this Post is a Draft
+    def draft?
+      is_a?(Jekyll::Draft)
+    end
+
+    protected
+
+    def extract_excerpt
+      if generate_excerpt?
+        Jekyll::Excerpt.new(self)
+      else
+        ""
+      end
+    end
+
+    def generate_excerpt?
+      !excerpt_separator.empty?
+    end
+  end
 end

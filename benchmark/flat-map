@@ -1,0 +1,16 @@
+require 'benchmark/ips'
+
+enum = (0..50).to_a
+nested = enum.map { |i| [i] }
+
+def do_thing(blah)
+  blah * 1
+end
+
+Benchmark.ips do |x|
+  x.report('.map.flatten with nested arrays') { nested.map { |i| do_thing(i) }.flatten(1) }
+  x.report('.flat_map with nested arrays')    { nested.flat_map { |i| do_thing(i) } }
+
+  x.report('.map.flatten with no nested arrays') { enum.map { |i| do_thing(i) }.flatten(1) }
+  x.report('.flat_map with no nested arrays')    { enum.flat_map { |i| do_thing(i) } }
+end

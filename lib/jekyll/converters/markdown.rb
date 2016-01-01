@@ -1,113 +1,77 @@
 module Jekyll
+  module Converters
+    class Markdown < Converter
+      safe true
 
-  class MarkdownConverter < Converter
-    safe true
+      highlighter_prefix "\n"
+      highlighter_suffix "\n"
 
-    pygments_prefix "\n"
-    pygments_suffix "\n"
-
-    def setup
-      return if @setup
-      # Set the Markdown interpreter (and Maruku self.config, if necessary)
-      case @config['markdown']
-        when 'kramdown'
-          begin
-            require 'kramdown'
-          rescue LoadError
-            STDERR.puts 'You are missing a library required for Markdown. Please run:'
-            STDERR.puts '  $ [sudo] gem install kramdown'
-            raise FatalException.new("Missing dependency: kramdown")
-          end
-        when 'rdiscount'
-          begin
-            require 'rdiscount'
-
-            # Load rdiscount extensions
-            @rdiscount_extensions = @config['rdiscount']['extensions'].map { |e| e.to_sym }
-          rescue LoadError
-            STDERR.puts 'You are missing a library required for Markdown. Please run:'
-            STDERR.puts '  $ [sudo] gem install rdiscount'
-            raise FatalException.new("Missing dependency: rdiscount")
-          end
-        when 'maruku'
-          begin
-            require 'maruku'
-
-            if @config['maruku']['use_divs']
-              require 'maruku/ext/div'
-              STDERR.puts 'Maruku: Using extended syntax for div elements.'
-            end
-
-            if @config['maruku']['use_tex']
-              require 'maruku/ext/math'
-              STDERR.puts "Maruku: Using LaTeX extension. Images in `#{@config['maruku']['png_dir']}`."
-
-              # Switch off MathML output
-              MaRuKu::Globals[:html_math_output_mathml] = false
-              MaRuKu::Globals[:html_math_engine] = 'none'
-
-              # Turn on math to PNG support with blahtex
-              # Resulting PNGs stored in `images/latex`
-              MaRuKu::Globals[:html_math_output_png] = true
-              MaRuKu::Globals[:html_png_engine] =  @config['maruku']['png_engine']
-              MaRuKu::Globals[:html_png_dir] = @config['maruku']['png_dir']
-              MaRuKu::Globals[:html_png_url] = @config['maruku']['png_url']
-            end
-          rescue LoadError
-            STDERR.puts 'You are missing a library required for Markdown. Please run:'
-            STDERR.puts '  $ [sudo] gem install maruku'
-            raise FatalException.new("Missing dependency: maruku")
-          end
-        else
-          STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
-          STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown ]"
-          raise FatalException.new("Invalid Markdown process: #{@config['markdown']}")
-      end
-      @setup = true
-    end
-
-    def matches(ext)
-      ext =~ /(markdown|mkdn?|md)/i
-    end
-
-    def output_ext(ext)
-      ".html"
-    end
-
-    def convert(content)
-      setup
-      case @config['markdown']
-        when 'kramdown'
-          # Check for use of coderay
-          if @config['kramdown']['use_coderay']
-            Kramdown::Document.new(content, {
-              :auto_ids      => @config['kramdown']['auto_ids'],
-              :footnote_nr   => @config['kramdown']['footnote_nr'],
-              :entity_output => @config['kramdown']['entity_output'],
-              :toc_levels    => @config['kramdown']['toc_levels'],
-
-              :coderay_wrap               => @config['kramdown']['coderay']['coderay_wrap'],
-              :coderay_line_numbers       => @config['kramdown']['coderay']['coderay_line_numbers'],
-              :coderay_line_number_start  => @config['kramdown']['coderay']['coderay_line_number_start'],
-              :coderay_tab_width          => @config['kramdown']['coderay']['coderay_tab_width'],
-              :coderay_bold_every         => @config['kramdown']['coderay']['coderay_bold_every'],
-              :coderay_css                => @config['kramdown']['coderay']['coderay_css']
-            }).to_html
+      def setup
+        return if @setup
+        @parser =
+          case @config['markdown'].downcase
+            when 'redcarpet' then RedcarpetParser.new(@config)
+            when 'kramdown'  then KramdownParser.new(@config)
+            when 'rdiscount' then RDiscountParser.new(@config)
           else
-            # not using coderay
-            Kramdown::Document.new(content, {
-              :auto_ids      => @config['kramdown']['auto_ids'],
-              :footnote_nr   => @config['kramdown']['footnote_nr'],
-              :entity_output => @config['kramdown']['entity_output'],
-              :toc_levels    => @config['kramdown']['toc_levels']
-            }).to_html
+            # So they can't try some tricky bullshit or go down the ancestor chain, I hope.
+            if allowed_custom_class?(@config['markdown'])
+              self.class.const_get(@config['markdown']).new(@config)
+            else
+              Jekyll.logger.error "Invalid Markdown Processor:", "#{@config['markdown']}"
+              Jekyll.logger.error "", "Valid options are [ #{valid_processors.join(" | ")} ]"
+              raise Errors::FatalException, "Invalid Markdown Processor: #{@config['markdown']}"
+            end
           end
-        when 'rdiscount'
-          RDiscount.new(content, *@rdiscount_extensions).to_html
-        when 'maruku'
-          Maruku.new(content).to_html
+        @setup = true
+      end
+
+      def valid_processors
+        %w[
+          rdiscount
+          kramdown
+          redcarpet
+        ] + third_party_processors
+      end
+
+      def third_party_processors
+        self.class.constants - %w[
+          KramdownParser
+          RDiscountParser
+          RedcarpetParser
+          PRIORITIES
+        ].map(&:to_sym)
+      end
+
+      def extname_list
+        @extname_list ||= @config['markdown_ext'].split(',').map { |e| ".#{e.downcase}" }
+      end
+
+      def matches(ext)
+        extname_list.include? ext.downcase
+      end
+
+      def output_ext(ext)
+        ".html"
+      end
+
+      def convert(content)
+        setup
+        @parser.convert(content)
+      end
+
+      private
+
+      # Private: Determine whether a class name is an allowed custom markdown
+      # class name
+      #
+      # parser_name - the name of the parser class
+      #
+      # Returns true if the parser name contains only alphanumeric characters
+      # and is defined within Jekyll::Converters::Markdown
+      def allowed_custom_class?(parser_name)
+        parser_name !~ /[^A-Za-z0-9]/ && self.class.constants.include?(parser_name.to_sym)
       end
     end
   end
-
 end
