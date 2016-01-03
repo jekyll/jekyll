@@ -168,7 +168,8 @@ module Jekyll
             raise RuntimeError, "--ssl-cert or --ssl-key missing."
           end
 
-          require "openssl"; require "webrick/https"
+          require "openssl"
+          require "webrick/https"
           source_key = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], opts[:JekyllOptions]["ssl_key" ])
           source_certificate = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], opts[:JekyllOptions]["ssl_cert"])
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(File.read(source_certificate))

@@ -25,7 +25,7 @@ module Jekyll
           @file = matched['variable'].strip
           @params = matched['params'].strip
         else
-          @file, @params = markup.strip.split(' ', 2);
+          @file, @params = markup.strip.split(' ', 2)
         end
         validate_params if @params
         @tag_name = tag_name

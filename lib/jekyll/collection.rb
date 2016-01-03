@@ -79,7 +79,8 @@ module Jekyll
       return [] unless exists?
       @entries ||=
         Utils.safe_glob(collection_dir, ["**", "*.*"]).map do |entry|
-          entry["#{collection_dir}/"] = ''; entry
+          entry["#{collection_dir}/"] = ''
+          entry
         end
     end
 
