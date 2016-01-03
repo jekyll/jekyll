@@ -12,7 +12,6 @@ module Jekyll
     end
 
     class IncludeTag < Liquid::Tag
-
       attr_reader :includes_dir
 
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/

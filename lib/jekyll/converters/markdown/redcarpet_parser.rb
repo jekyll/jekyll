@@ -2,7 +2,6 @@ module Jekyll
   module Converters
     class Markdown
       class RedcarpetParser
-
         module CommonMethods
           def add_code_tags(code, lang)
             code = code.to_s

@@ -2,7 +2,6 @@
 
 module Jekyll
   class Configuration < Hash
-
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = Configuration[{

@@ -165,7 +165,6 @@ module Jekyll
 
     # Conditional optimizations
     Jekyll::External.require_if_present('liquid-c')
-
   end
 end
 

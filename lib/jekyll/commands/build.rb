@@ -1,9 +1,7 @@
 module Jekyll
   module Commands
     class Build < Command
-
       class << self
-
         # Create the Mercenary command for the Jekyll CLI for this Command
         def init_with_program(prog)
           prog.command(:build) do |c|
@@ -71,9 +69,7 @@ module Jekyll
           External.require_with_graceful_fail 'jekyll-watch'
           Jekyll::Watcher.watch(options)
         end
-
       end # end of class << self
-
     end
   end
 end

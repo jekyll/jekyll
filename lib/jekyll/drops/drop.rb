@@ -135,7 +135,6 @@ module Jekyll
       def each_key(&block)
         keys.each(&block)
       end
-
     end
   end
 end

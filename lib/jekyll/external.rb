@@ -1,7 +1,6 @@
 module Jekyll
   module External
     class << self
-
       #
       # Gems that, if installed, should be loaded.
       # Usually contain subcommands.
@@ -54,7 +53,6 @@ If you run into trouble, you can find helpful resources at http://jekyllrb.com/h
           end
         end
       end
-
     end
   end
 end

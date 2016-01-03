@@ -2,7 +2,6 @@ module Jekyll
   module Commands
     class Clean < Command
       class << self
-
         def init_with_program(prog)
           prog.command(:clean) do |c|
             c.syntax 'clean [subcommand]'
@@ -37,7 +36,6 @@ module Jekyll
             Jekyll.logger.info "Nothing to do for #{metadata_file}."
           end
         end
-
       end
     end
   end

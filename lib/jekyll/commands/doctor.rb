@@ -2,7 +2,6 @@ module Jekyll
   module Commands
     class Doctor < Command
       class << self
-
         def init_with_program(prog)
           prog.command(:doctor) do |c|
             c.syntax 'doctor'
@@ -108,7 +107,6 @@ module Jekyll
           end
         end
       end
-
     end
   end
 end

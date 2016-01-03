@@ -115,7 +115,6 @@ eos
         ].join(" ")
         "<figure class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></figure>"
       end
-
     end
   end
 end

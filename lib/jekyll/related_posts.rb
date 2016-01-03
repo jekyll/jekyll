@@ -1,6 +1,5 @@
 module Jekyll
   class RelatedPosts
-
     class << self
       attr_accessor :lsi
     end

@@ -91,6 +91,5 @@ module Jekyll
           "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
       end
     end
-
   end
 end

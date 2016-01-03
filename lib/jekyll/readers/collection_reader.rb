@@ -16,6 +16,5 @@ module Jekyll
         collection.read unless SPECIAL_COLLECTIONS.include?(collection.label)
       end
     end
-
   end
 end
