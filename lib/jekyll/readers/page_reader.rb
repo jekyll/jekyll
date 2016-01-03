@@ -14,8 +14,8 @@ module Jekyll
     #
     # Returns an array of static pages.
     def read(files)
-      files.map{ |page| @unfiltered_content << Page.new(@site, @site.source, @dir, page) }
-      @unfiltered_content.select{ |page| site.publisher.publish?(page) }
+      files.map { |page| @unfiltered_content << Page.new(@site, @site.source, @dir, page) }
+      @unfiltered_content.select { |page| site.publisher.publish?(page) }
     end
   end
 end

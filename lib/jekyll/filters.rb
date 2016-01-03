@@ -337,7 +337,7 @@ module Jekyll
         pairs = item.map { |k, v| as_liquid([k, v]) }
         Hash[pairs]
       when Array
-        item.map{ |i| as_liquid(i) }
+        item.map { |i| as_liquid(i) }
       else
         if item.respond_to?(:to_liquid)
           liquidated = item.to_liquid

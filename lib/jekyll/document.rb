@@ -291,7 +291,7 @@ module Jekyll
           "ext"  => ext
         })
         merge_data!({"date" => date}) if data['date'].nil? || data['date'].to_i == site.time.to_i
-        data['title'] ||= slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+        data['title'] ||= slug.split('-').select { |w| w.capitalize! || w }.join(' ')
       end
       populate_categories
       populate_tags
@@ -386,7 +386,7 @@ module Jekyll
     end
 
     def next_doc
-      pos = collection.docs.index {|post| post.equal?(self) }
+      pos = collection.docs.index { |post| post.equal?(self) }
       if pos && pos < collection.docs.length - 1
         collection.docs[pos + 1]
       else
@@ -395,7 +395,7 @@ module Jekyll
     end
 
     def previous_doc
-      pos = collection.docs.index {|post| post.equal?(self) }
+      pos = collection.docs.index { |post| post.equal?(self) }
       if pos && pos > 0
         collection.docs[pos - 1]
       else

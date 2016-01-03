@@ -273,7 +273,7 @@ module Jekyll
       return config if config['collections'].nil?
 
       if config['collections'].is_a?(Array)
-        config['collections'] = Hash[config['collections'].map{|c| [c, {}]}]
+        config['collections'] = Hash[config['collections'].map { |c| [c, {}] }]
       end
       config['collections']['posts'] ||= {}
       config['collections']['posts']['output'] = true

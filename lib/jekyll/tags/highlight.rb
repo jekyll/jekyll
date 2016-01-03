@@ -68,7 +68,7 @@ eos
             [:linenos,     opts.fetch(:linenos, nil)],
             [:encoding,    opts.fetch(:encoding, 'utf-8')],
             [:cssclass,    opts.fetch(:cssclass, nil)]
-          ].reject {|f| f.last.nil? }]
+          ].reject { |f| f.last.nil? }]
         else
           opts
         end
