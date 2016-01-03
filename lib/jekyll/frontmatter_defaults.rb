@@ -90,7 +90,7 @@ module Jekyll
     end
 
     def applies_path?(scope, path)
-      return true if !scope.has_key?('path') || scope['path'].empty?
+      return true if !scope.key?('path') || scope['path'].empty?
 
       scope_path = Pathname.new(scope['path'])
       Pathname.new(sanitize_path(path)).ascend do |path|
@@ -150,7 +150,7 @@ module Jekyll
     # Returns an array of hashes
     def matching_sets(path, type)
       valid_sets.select do |set|
-        !set.has_key?('scope') || applies?(set['scope'], path, type)
+        !set.key?('scope') || applies?(set['scope'], path, type)
       end
     end
 

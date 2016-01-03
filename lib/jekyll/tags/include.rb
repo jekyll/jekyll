@@ -115,7 +115,7 @@ eos
         validate_path(path, dir, site.safe)
 
         # Add include to dependency tree
-        if context.registers[:page] && context.registers[:page].has_key?("path")
+        if context.registers[:page] && context.registers[:page].key?("path")
           site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path
@@ -138,7 +138,7 @@ eos
         context.registers[:cached_partials] ||= {}
         cached_partial = context.registers[:cached_partials]
 
-        if cached_partial.has_key?(path)
+        if cached_partial.key?(path)
           cached_partial[path]
         else
           cached_partial[path] = context.registers[:site].liquid_renderer.file(path).parse(read_file(path, context))

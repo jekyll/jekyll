@@ -90,7 +90,7 @@ module Jekyll
       return true if path.nil?
 
       # Check for path in cache
-      if cache.has_key? path
+      if cache.key? path
         return cache[path]
       end
 
