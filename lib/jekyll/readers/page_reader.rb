@@ -4,7 +4,7 @@ module Jekyll
     def initialize(site, dir)
       @site = site
       @dir = dir
-      @unfiltered_content = Array.new
+      @unfiltered_content = []
     end
 
     # Read all the files in <source>/<dir>/ for Yaml header and create a new Page

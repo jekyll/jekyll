@@ -1,7 +1,7 @@
 module Jekyll
   class StaticFile
     # The cache of last modification times [path] -> mtime.
-    @@mtimes = Hash.new
+    @@mtimes = {}
 
     attr_reader :relative_path, :extname
 
@@ -90,7 +90,7 @@ module Jekyll
     #
     # Returns nothing.
     def self.reset_cache
-      @@mtimes = Hash.new
+      @@mtimes = {}
       nil
     end
 

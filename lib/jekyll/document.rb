@@ -52,7 +52,7 @@ module Jekyll
     # Returns a Hash containing the data. An empty hash is returned if
     #   no data was read.
     def data
-      @data ||= Hash.new
+      @data ||= {}
     end
 
     # Merge some data in with this document's data.

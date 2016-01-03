@@ -76,7 +76,7 @@ module Jekyll
     # Returns an Array of file paths to the documents in this collection
     #   relative to the collection's directory
     def entries
-      return Array.new unless exists?
+      return [] unless exists?
       @entries ||=
         Utils.safe_glob(collection_dir, ["**", "*.*"]).map do |entry|
           entry["#{collection_dir}/"] = ''; entry
@@ -88,7 +88,7 @@ module Jekyll
     #
     # Returns a list of filtered entry paths.
     def filtered_entries
-      return Array.new unless exists?
+      return [] unless exists?
       @filtered_entries ||=
         Dir.chdir(directory) do
           entry_filter.filter(entries).reject do |f|
@@ -195,7 +195,7 @@ module Jekyll
     # Returns the metadata for this collection
     def extract_metadata
       if site.config['collections'].is_a?(Hash)
-        site.config['collections'][label] || Hash.new
+        site.config['collections'][label] || {}
       else
         {}
       end
