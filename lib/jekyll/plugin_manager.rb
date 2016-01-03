@@ -86,8 +86,8 @@ module Jekyll
     def deprecation_checks
       pagination_included = (site.config['gems'] || []).include?('jekyll-paginate') || defined?(Jekyll::Paginate)
       if site.config['paginate'] && !pagination_included
-        Jekyll::Deprecator.deprecation_message "You appear to have pagination " +
-          "turned on, but you haven't included the `jekyll-paginate` gem. " +
+        Jekyll::Deprecator.deprecation_message "You appear to have pagination " \
+          "turned on, but you haven't included the `jekyll-paginate` gem. " \
           "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
       end
     end

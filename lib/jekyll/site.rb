@@ -292,10 +292,10 @@ module Jekyll
     # Returns
     def relative_permalinks_are_deprecated
       if config['relative_permalinks']
-        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" +
-                                " in subfolders must be relative to the" +
-                                " site source directory, not the parent" +
-                                " directory. Check http://jekyllrb.com/docs/upgrading/"+
+        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
+                                " in subfolders must be relative to the" \
+                                " site source directory, not the parent" \
+                                " directory. Check http://jekyllrb.com/docs/upgrading/"\
                                 " for more info."
       end
     end

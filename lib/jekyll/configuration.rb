@@ -173,7 +173,7 @@ module Jekyll
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
       rescue ArgumentError => err
-        Jekyll.logger.warn "WARNING:", "Error reading configuration. " +
+        Jekyll.logger.warn "WARNING:", "Error reading configuration. " \
                      "Using defaults (and options)."
         $stderr.puts "#{err}"
       end
@@ -198,16 +198,16 @@ module Jekyll
       config = clone
       # Provide backwards-compatibility
       if config.key?('auto') || config.key?('watch')
-        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" +
-                            " be set from your configuration file(s). Use the"+
+        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" \
+                            " be set from your configuration file(s). Use the"\
                             " --[no-]watch/-w command-line option instead."
         config.delete('auto')
         config.delete('watch')
       end
 
       if config.key? 'server'
-        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" +
-                            " is no longer accepted. Use the 'jekyll serve'" +
+        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" \
+                            " is no longer accepted. Use the 'jekyll serve'" \
                             " subcommand to serve your site with WEBrick."
         config.delete('server')
       end
@@ -218,9 +218,9 @@ module Jekyll
       renamed_key 'data_source', 'data_dir', config
 
       if config.key? 'pygments'
-        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" +
-                            " has been renamed to 'highlighter'. Please update your" +
-                            " config file accordingly. The allowed values are 'rouge', " +
+        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" \
+                            " has been renamed to 'highlighter'. Please update your" \
+                            " config file accordingly. The allowed values are 'rouge', " \
                             "'pygments' or null."
 
         config['highlighter'] = 'pygments' if config['pygments']
@@ -230,9 +230,9 @@ module Jekyll
       %w[include exclude].each do |option|
         config[option] ||= []
         if config[option].is_a?(String)
-          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" +
-            " must now be specified as an array, but you specified" +
-            " a string. For now, we've treated the string you provided" +
+          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" \
+            " must now be specified as an array, but you specified" \
+            " a string. For now, we've treated the string you provided" \
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
@@ -240,16 +240,16 @@ module Jekyll
       end
 
       if (config['kramdown'] || {}).key?('use_coderay')
-        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" +
+        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" \
           " to 'enable_coderay' in your configuration file."
         config['kramdown']['use_coderay'] = config['kramdown'].delete('enable_coderay')
       end
 
       if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
-        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " +
-          "Markdown processor, which has been removed as of 3.0.0. " +
-          "We recommend you switch to Kramdown. To do this, replace " +
-          "`markdown: maruku` with `markdown: kramdown` in your " +
+        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " \
+          "Markdown processor, which has been removed as of 3.0.0. " \
+          "We recommend you switch to Kramdown. To do this, replace " \
+          "`markdown: maruku` with `markdown: kramdown` in your " \
           "`_config.yml` file."
       end
 
@@ -260,7 +260,7 @@ module Jekyll
       config = clone
 
       if config.key?('paginate') && (!config['paginate'].is_a?(Integer) || config['paginate'] < 1)
-        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" +
+        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a" \
           " positive integer or nil. It's currently set to '#{config['paginate'].inspect}'."
         config['paginate'] = nil
       end
@@ -285,8 +285,8 @@ module Jekyll
 
     def renamed_key(old, new, config, allowed_values = nil)
       if config.key?(old)
-        Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" +
-          "option has been renamed to '#{new}'. Please update your config " +
+        Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" \
+          "option has been renamed to '#{new}'. Please update your config " \
           "file accordingly."
         config[new] = config.delete(old)
       end

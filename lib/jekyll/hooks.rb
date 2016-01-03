@@ -67,7 +67,7 @@ module Jekyll
       }
 
       unless @registry[owner][event]
-        raise NotAvailable, "Invalid hook. #{owner} supports only the " <<
+        raise NotAvailable, "Invalid hook. #{owner} supports only the " \
           "following hooks #{@registry[owner].keys.inspect}"
       end
 

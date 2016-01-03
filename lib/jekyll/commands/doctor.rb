@@ -39,8 +39,8 @@ module Jekyll
 
         def deprecated_relative_permalinks(site)
           if site.config['relative_permalinks']
-            Jekyll::Deprecator.deprecation_message "Your site still uses relative" +
-                                " permalinks, which was removed in" +
+            Jekyll::Deprecator.deprecation_message "Your site still uses relative" \
+                                " permalinks, which was removed in" \
                                 " Jekyll v3.0.0."
             return true
           end
@@ -54,7 +54,7 @@ module Jekyll
           urls.each do |url, paths|
             if paths.size > 1
               conflicting_urls = true
-              Jekyll.logger.warn "Conflict:", "The URL '#{url}' is the destination" +
+              Jekyll.logger.warn "Conflict:", "The URL '#{url}' is the destination" \
                 " for the following pages: #{paths.join(", ")}"
             end
           end
@@ -83,8 +83,8 @@ module Jekyll
           urls.each do |case_insensitive_url, real_urls|
             if real_urls.uniq.size > 1
               urls_only_differ_by_case = true
-              Jekyll.logger.warn "Warning:", "The following URLs only differ" +
-                " by case. On a case-insensitive file system one of the URLs" +
+              Jekyll.logger.warn "Warning:", "The following URLs only differ" \
+                " by case. On a case-insensitive file system one of the URLs" \
                 " will be overwritten by the other: #{real_urls.join(", ")}"
             end
           end

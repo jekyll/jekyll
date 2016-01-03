@@ -70,9 +70,9 @@ eos
 
         site.posts.docs.each do |p|
           if @post.deprecated_equality p
-            Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{@post.name} }}' did not match " +
-              "a post using the new matching method of checking name " +
-              "(path-date-slug) equality. Please make sure that you " +
+            Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{@post.name} }}' did not match " \
+              "a post using the new matching method of checking name " \
+              "(path-date-slug) equality. Please make sure that you " \
               "change this tag to match the post's name exactly."
             return p.url
           end

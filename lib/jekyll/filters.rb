@@ -234,7 +234,7 @@ module Jekyll
         when nils == "last"
           order = + 1
         else
-          raise ArgumentError.new("Invalid nils order: " +
+          raise ArgumentError.new("Invalid nils order: " \
             "'#{nils}' is not a valid nils order. It must be 'first' or 'last'.")
         end
 
