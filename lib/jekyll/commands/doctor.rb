@@ -59,7 +59,7 @@ module Jekyll
         end
 
         def fsnotify_buggy?(site)
-          return true if !Utils::Platforms.osx?
+          return true unless Utils::Platforms.osx?
           if Dir.pwd != `pwd`.strip
             Jekyll.logger.error "  " + <<-STR.strip.gsub(/\n\s+/, "\n  ")
               We have detected that there might be trouble using fsevent on your
