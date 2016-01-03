@@ -6,6 +6,7 @@ group :development do
   gem 'rdoc', '~> 4.2'
   gem 'launchy', '~> 2.3'
   gem 'toml', '~> 0.1.0'
+  gem "rubocop"
   gem 'pry'
 end
 
