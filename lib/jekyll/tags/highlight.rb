@@ -21,7 +21,7 @@ module Jekyll
               key, value = opt.split('=')
               # If a quoted list, convert to array
               if value && value.include?("\"")
-                  value.gsub!(/"/, "")
+                  value.delete!('"')
                   value = value.split
               end
               @highlight_options[key.to_sym] = value || true
@@ -110,7 +110,7 @@ eos
 
       def add_code_tag(code)
         code_attributes = [
-          "class=\"language-#{@lang.to_s.gsub('+', '-')}\"",
+          "class=\"language-#{@lang.to_s.tr('+', '-')}\"",
           "data-lang=\"#{@lang.to_s}\""
         ].join(" ")
         "<figure class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></figure>"
