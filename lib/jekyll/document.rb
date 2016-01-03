@@ -127,7 +127,7 @@ module Jekyll
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
-      %w[.yaml .yml].include?(extname)
+      %w(.yaml .yml).include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -143,7 +143,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w[.sass .scss].include?(extname)
+      %w(.sass .scss).include?(extname)
     end
 
     # Determine whether the document is a CoffeeScript file.

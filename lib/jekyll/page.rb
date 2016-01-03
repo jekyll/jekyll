@@ -8,13 +8,13 @@ module Jekyll
     attr_accessor :data, :content, :output
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
+    ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
       name
       path
       url
-    ]
+    )
 
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.

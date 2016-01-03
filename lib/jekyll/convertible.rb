@@ -160,7 +160,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w[.sass .scss].include?(ext)
+      %w(.sass .scss).include?(ext)
     end
 
     # Determine whether the document is a CoffeeScript file.

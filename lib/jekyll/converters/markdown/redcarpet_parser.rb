@@ -71,10 +71,10 @@ module Jekyll
             end
           when "rouge"
             Class.new(Redcarpet::Render::HTML) do
-              Jekyll::External.require_with_graceful_fail(%w[
+              Jekyll::External.require_with_graceful_fail(%w(
                 rouge
                 rouge/plugins/redcarpet
-              ])
+              ))
 
               unless Gem::Version.new(Rouge.version) > Gem::Version.new("1.3.0")
                 abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."

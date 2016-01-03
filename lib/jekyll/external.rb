@@ -7,10 +7,10 @@ module Jekyll
       # Usually contain subcommands.
       #
       def blessed_gems
-        %w{
+        %w(
           jekyll-docs
           jekyll-import
-        }
+        )
       end
 
       #

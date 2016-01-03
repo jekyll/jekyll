@@ -41,7 +41,7 @@ module Jekyll
 
       def third_party_processors
         self.class.constants - \
-        %w[KramdownParser RDiscountParser RedcarpetParser PRIORITIES].map(
+        %w(KramdownParser RDiscountParser RedcarpetParser PRIORITIES).map(
           &:to_sym
         )
       end
