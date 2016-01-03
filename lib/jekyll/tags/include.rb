@@ -115,7 +115,7 @@ eos
         validate_path(path, dir, site.safe)
 
         # Add include to dependency tree
-        if context.registers[:page] and context.registers[:page].has_key? "path"
+        if context.registers[:page] && context.registers[:page].has_key?("path")
           site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path

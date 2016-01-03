@@ -27,7 +27,7 @@ module Jekyll
               @highlight_options[key.to_sym] = value || true
             end
           end
-          @highlight_options[:linenos] = "inline" if @highlight_options.key?(:linenos) and @highlight_options[:linenos] == true
+          @highlight_options[:linenos] = "inline" if @highlight_options.key?(:linenos) && @highlight_options[:linenos] == true
         else
           raise SyntaxError.new <<-eos
 Syntax Error in tag 'highlight' while parsing the following markup:

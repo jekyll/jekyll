@@ -31,8 +31,8 @@ module Jekyll
     # Thanks to whoever made it.
     def deep_merge_hashes!(target, overwrite)
       overwrite.each_key do |key|
-        if (overwrite[key].is_a?(Hash) or overwrite[key].is_a?(Drops::Drop)) and
-            (target[key].is_a?(Hash) or target[key].is_a?(Drops::Drop))
+        if (overwrite[key].is_a?(Hash) || overwrite[key].is_a?(Drops::Drop)) &&
+            (target[key].is_a?(Hash) || target[key].is_a?(Drops::Drop))
           target[key] = Utils.deep_merge_hashes(target[key], overwrite[key])
           next
         end

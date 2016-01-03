@@ -75,7 +75,7 @@ module Jekyll
     def write(dest)
       dest_path = destination(dest)
 
-      return false if File.exist?(dest_path) and !modified?
+      return false if File.exist?(dest_path) && !modified?
       @@mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
