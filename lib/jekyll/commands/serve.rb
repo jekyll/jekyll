@@ -103,7 +103,7 @@ module Jekyll
           WEBrick::Config::FileHandler.merge({
             :FancyIndexing     => true,
             :NondisclosureName => [
-              '.ht*','~*'
+              '.ht*', '~*'
             ]
           })
         end

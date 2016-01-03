@@ -38,9 +38,9 @@ module Jekyll
       base = site.in_source_dir(dir)
 
       dot = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
-      dot_dirs = dot.select{ |file| File.directory?(@site.in_source_dir(base,file)) }
+      dot_dirs = dot.select{ |file| File.directory?(@site.in_source_dir(base, file)) }
       dot_files = (dot - dot_dirs)
-      dot_pages = dot_files.select{ |file| Utils.has_yaml_header?(@site.in_source_dir(base,file)) }
+      dot_pages = dot_files.select{ |file| Utils.has_yaml_header?(@site.in_source_dir(base, file)) }
       dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
@@ -69,7 +69,7 @@ module Jekyll
     # Returns nothing.
     def retrieve_dirs(base, dir, dot_dirs)
       dot_dirs.map { |file|
-        dir_path = site.in_source_dir(dir,file)
+        dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
         @site.reader.read_directories(rel_path) unless @site.dest.sub(/\/$/, '') == dir_path
       }

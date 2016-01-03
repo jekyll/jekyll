@@ -18,7 +18,7 @@ module Jekyll
       'safe'          => false,
       'include'       => ['.htaccess'],
       'exclude'       => [],
-      'keep_files'    => ['.git','.svn'],
+      'keep_files'    => ['.git', '.svn'],
       'encoding'      => 'utf-8',
       'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
 
@@ -77,7 +77,7 @@ module Jekyll
     #
     # Return a copy of the hash where all its keys are strings
     def stringify_keys
-      reduce({}) { |hsh,(k,v)| hsh.merge(k.to_s => v) }
+      reduce({}) { |hsh, (k, v)| hsh.merge(k.to_s => v) }
     end
 
     def get_config_value_with_override(config_key, override)
