@@ -19,8 +19,8 @@ module Jekyll
       end
 
       def title
-        Utils.slugify(@obj.data['slug'], mode: "pretty", cased: true) ||
-          Utils.slugify(@obj.basename_without_ext, mode: "pretty", cased: true)
+        Utils.slugify(@obj.data['slug'], :mode => "pretty", :cased => true) ||
+          Utils.slugify(@obj.basename_without_ext, :mode => "pretty", :cased => true)
       end
 
       def slug

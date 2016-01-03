@@ -197,9 +197,9 @@ module Jekyll
     # Returns the computed URL for the document.
     def url
       @url = URL.new({
-        template:     url_template,
-        placeholders: url_placeholders,
-        permalink:    permalink
+        :template => url_template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
       }).to_s
     end
 

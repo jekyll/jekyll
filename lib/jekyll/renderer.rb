@@ -43,8 +43,8 @@ module Jekyll
       document.trigger_hooks(:pre_render, payload)
 
       info = {
-        filters:   [Jekyll::Filters],
-        registers: { :site => site, :page => payload.page }
+        :filters => [Jekyll::Filters],
+        :registers => { :site => site, :page => payload.page }
       }
 
       # render and transform content (this becomes the final content of the object)

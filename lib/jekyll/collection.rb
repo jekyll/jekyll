@@ -56,7 +56,7 @@ module Jekyll
         full_path = collection_dir(file_path)
         next if File.directory?(full_path)
         if Utils.has_yaml_header? full_path
-          doc = Jekyll::Document.new(full_path, { site: site, collection: self })
+          doc = Jekyll::Document.new(full_path, { :site => site, :collection => self })
           doc.read
           if site.publisher.publish?(doc) || !write?
             docs << doc

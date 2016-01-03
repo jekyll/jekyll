@@ -104,12 +104,12 @@ module Jekyll
 
     def placeholders
       {
-        collection: @collection.label,
-        path: relative_path[
+        :collection => @collection.label,
+        :path => relative_path[
           @collection.relative_directory.size..relative_path.size],
-        output_ext: '',
-        name: '',
-        title: '',
+        :output_ext => '',
+        :name => '',
+        :title => '',
       }
     end
 
@@ -121,8 +121,8 @@ module Jekyll
         relative_path
       else
         ::Jekyll::URL.new({
-          template:  @collection.url_template,
-          placeholders: placeholders,
+          :template => @collection.url_template,
+          :placeholders => placeholders,
         })
       end.to_s.gsub /\/$/, ''
     end
