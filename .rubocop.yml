@@ -6,13 +6,15 @@ Metrics/LineLength:   { Max: 112 }
 Style/IndentHash: { EnforcedStyle: consistent }
 Style/HashSyntax: { EnforcedStyle: hash_rockets }
 Style/SignalException: { EnforcedStyle: only_raise }
-Style/SpaceAroundOperators: { AllowForAlignment: true }
 Style/AlignParameters: { EnforcedStyle: with_fixed_indentation }
 Style/StringLiteralsInInterpolation: { EnforcedStyle: double_quotes }
+Style/RegexpLiteral: { EnforcedStyle: slashes, AllowInnerSlashes: true }
+Style/MultilineMethodCallIndentation: { EnforcedStyle: indented }
 Style/MultilineOperationIndentation: { EnforcedStyle: indented }
-# Style/StringLiterals: { EnforcedStyle: double_quotes }
-Style/RegexpLiteral: { EnforcedStyle: percent_r }
+Style/FirstParameterIndentation: { EnforcedStyle: consistent }
+Style/StringLiterals: { EnforcedStyle: double_quotes }
 Style/IndentArray: { EnforcedStyle: consistent }
+Style/ExtraSpacing: { AllowForAlignment: true }
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
@@ -24,6 +26,7 @@ Style/PercentLiteralDelimiters:
     '%W': '()'
     '%x': '()'
 
+Style/AlignArray:                     { Enabled: false }
 Style/StringLiterals:                 { Enabled: false }
 Style/Documentation:                  { Enabled: false }
 Style/DoubleNegation:                 { Enabled: false }
@@ -37,8 +40,12 @@ Style/ModuleFunction:                 { Enabled: false }
 Style/RescueModifier:                 { Enabled: false }
 Style/GuardClause:                    { Enabled: false }
 Style/FileName:                       { Enabled: false }
+Lint/UselessAccessModifier:           { Enabled: false }
+Style/SpaceAroundOperators:           { Enabled: false }
+Style/RedundantReturn:                { Enabled: false }
 
 AllCops:
+  TargetRubyVersion: 2.0
   Include:
     - lib/**/*.rb
 
