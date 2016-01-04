@@ -113,7 +113,7 @@ module Jekyll
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
     end
 
     # Determine whether the document is a YAML file.

@@ -106,7 +106,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0 .. -ext.length - 1]
+      self.basename = name[0..-ext.length - 1]
     end
 
     # Add any necessary layouts to this post
