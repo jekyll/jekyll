@@ -278,7 +278,7 @@ module Jekyll
 
     def post_read
       if DATE_FILENAME_MATCHER =~ relative_path
-        m, cats, date, slug, ext = *relative_path.match(DATE_FILENAME_MATCHER)
+        _, _, date, slug, ext = *relative_path.match(DATE_FILENAME_MATCHER)
         merge_data!({
           "slug" => slug,
           "ext"  => ext

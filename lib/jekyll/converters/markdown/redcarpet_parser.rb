@@ -7,6 +7,7 @@ module Jekyll
             code = code.to_s
             code = code.sub(/<pre>/, "<pre><code class=\"language-#{lang}\" data-lang=\"#{lang}\">")
             code = code.sub(/<\/pre>/, "</code></pre>")
+            code
           end
         end
 
