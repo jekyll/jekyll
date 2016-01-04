@@ -68,11 +68,11 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_dirs(_base, dir, dot_dirs)
-      dot_dirs.map { |file|
+      dot_dirs.map do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
         @site.reader.read_directories(rel_path) unless @site.dest.sub(/\/$/, '') == dir_path
-      }
+      end
     end
 
     # Retrieve all the pages from the current directory,

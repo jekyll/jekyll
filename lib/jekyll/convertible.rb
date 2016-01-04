@@ -87,9 +87,9 @@ module Jekyll
       if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
         ext
       else
-        converters.map { |c|
+        converters.map do |c|
           c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
-        }.compact.last
+        end.compact.last
       end
     end
 
@@ -122,9 +122,9 @@ module Jekyll
     #
     # Returns the Hash representation of this Convertible.
     def to_liquid(attrs = nil)
-      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
+      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map do |attribute|
         [attribute, send(attribute)]
-      }]
+      end]
 
       defaults = site.frontmatter_defaults.all(relative_path, type)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
