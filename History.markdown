@@ -29,6 +29,7 @@
   * Rename `@options` so that it does not impact Liquid. (#4173)
   * utils/drops: update Drop to support `Utils.deep_merge_hashes` (#4289)
   * Make sure jekyll/drops/drop is loaded first. (#4292)
+  * Convertible/Page/Renderer: use payload hash accessor & setter syntax for backwards-compatibility (#4311)
 
 ### Development Fixes
 
