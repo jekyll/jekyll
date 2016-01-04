@@ -62,7 +62,9 @@ module Jekyll
       # and the key matches a method in which case it raises a
       # DropMutationException.
       def []=(key, val)
-        if self.class.mutable
+        if respond_to?("#{key}=")
+          public_send("#{key}=", val)
+        elsif self.class.mutable
           @mutations[key] = val
         elsif respond_to? key
           raise Errors::DropMutationException, "Key #{key} cannot be set in the drop."
