@@ -13,19 +13,20 @@ module Jekyll
     def update_deprecated_types(set)
       return set unless set.key?('scope') && set['scope'].key?('type')
 
-      set['scope']['type'] = case set['scope']['type']
-      when 'page'
-        Deprecator.defaults_deprecate_type('page', 'pages')
-        'pages'
-      when 'post'
-        Deprecator.defaults_deprecate_type('post', 'posts')
-        'posts'
-      when 'draft'
-        Deprecator.defaults_deprecate_type('draft', 'drafts')
-        'drafts'
-      else
-        set['scope']['type']
-      end
+      set['scope']['type'] =
+        case set['scope']['type']
+        when 'page'
+          Deprecator.defaults_deprecate_type('page', 'pages')
+          'pages'
+        when 'post'
+          Deprecator.defaults_deprecate_type('post', 'posts')
+          'posts'
+        when 'draft'
+          Deprecator.defaults_deprecate_type('draft', 'drafts')
+          'drafts'
+        else
+          set['scope']['type']
+        end
 
       set
     end

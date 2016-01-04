@@ -164,16 +164,17 @@ module Jekyll
       end
 
       # Replace each character sequence with a hyphen
-      re = case mode
-      when 'raw'
-        SLUGIFY_RAW_REGEXP
-      when 'default'
-        SLUGIFY_DEFAULT_REGEXP
-      when 'pretty'
-        # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
-        # and is allowed in both extN and NTFS.
-        SLUGIFY_PRETTY_REGEXP
-      end
+      re =
+        case mode
+        when 'raw'
+          SLUGIFY_RAW_REGEXP
+        when 'default'
+          SLUGIFY_DEFAULT_REGEXP
+        when 'pretty'
+          # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
+          # and is allowed in both extN and NTFS.
+          SLUGIFY_PRETTY_REGEXP
+        end
 
       # Strip according to the mode
       slug = string.gsub(re, '-')

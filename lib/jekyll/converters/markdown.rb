@@ -19,9 +19,9 @@ module Jekyll
 
       def get_processor
         case @config["markdown"].downcase
-          when "redcarpet" then return RedcarpetParser.new(@config)
-          when "kramdown"  then return KramdownParser.new(@config)
-          when "rdiscount" then return RDiscountParser.new(@config)
+        when "redcarpet" then return RedcarpetParser.new(@config)
+        when "kramdown"  then return KramdownParser.new(@config)
+        when "rdiscount" then return RDiscountParser.new(@config)
         else
           get_custom_processor
         end
