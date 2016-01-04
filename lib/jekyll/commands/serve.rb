@@ -123,7 +123,14 @@ module Jekyll
 
         private
         def launch_browser(server, opts)
-          command = Utils::Platforms.windows?? "start" : Utils::Platforms.osx?? "open" : "xdg-open"
+          command =
+            if Utils::Platforms.windows?
+              "start"
+            elsif Utils::Platforms.osx?
+              "open"
+            else
+              "xdg-open"
+            end
           system command, server_address(server, opts)
         end
 
