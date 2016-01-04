@@ -155,20 +155,21 @@ module Jekyll
     #
     # Returns the read metadata.
     def read_metadata
-      @metadata = if !disabled? && File.file?(metadata_file)
-        content = File.binread(metadata_file)
+      @metadata =
+        if !disabled? && File.file?(metadata_file)
+          content = File.binread(metadata_file)
 
-        begin
-          Marshal.load(content)
-        rescue TypeError
-          SafeYAML.load(content)
-        rescue ArgumentError => e
-          Jekyll.logger.warn("Failed to load #{metadata_file}: #{e}")
+          begin
+            Marshal.load(content)
+          rescue TypeError
+            SafeYAML.load(content)
+          rescue ArgumentError => e
+            Jekyll.logger.warn("Failed to load #{metadata_file}: #{e}")
+            {}
+          end
+        else
           {}
         end
-      else
-        {}
-      end
     end
   end
 end

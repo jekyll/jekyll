@@ -118,13 +118,13 @@ module Jekyll
     # be overriden in the collection's configuration in _config.yml.
     def url
       @url ||= if @collection.nil?
-        relative_path
-      else
-        ::Jekyll::URL.new({
-          :template => @collection.url_template,
-          :placeholders => placeholders
-        })
-      end.to_s.gsub(/\/$/, '')
+                 relative_path
+               else
+                 ::Jekyll::URL.new({
+                   :template => @collection.url_template,
+                   :placeholders => placeholders
+                 })
+               end.to_s.gsub(/\/$/, '')
     end
 
     # Returns the type of the collection if present, nil otherwise.
