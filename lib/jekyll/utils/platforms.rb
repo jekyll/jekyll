@@ -19,7 +19,6 @@ module Jekyll
 
       { :windows? => /mswin|mingw|cygwin/, :linux? => /linux/, \
           :osx? => /darwin|mac os/, :unix? => /solaris|bsd/ }.each do |k, v|
-
         define_method k do
           !!(
             RbConfig::CONFIG["host_os"] =~ v

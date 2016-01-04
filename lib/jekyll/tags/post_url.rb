@@ -66,7 +66,6 @@ eos
         # New matching method did not match, fall back to old method
         # with deprecation warning if this matches
 
-
         site.posts.docs.each do |p|
           next unless @post.deprecated_equality p
           Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{@post.name} }}' did not match " \
