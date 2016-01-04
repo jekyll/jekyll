@@ -291,7 +291,7 @@ module Jekyll
           "ext"  => ext
         })
         merge_data!({"date" => date}) if data['date'].nil? || data['date'].to_i == site.time.to_i
-        data['title'] ||= slug.split('-').select { |w| w.capitalize! || w }.join(' ')
+        data['title'] ||= slug.split('-').select(&:capitalize).join(' ')
       end
       populate_categories
       populate_tags
@@ -317,7 +317,7 @@ module Jekyll
       merge_data!({
         'categories' => (
           Array(data['categories']) + Utils.pluralized_array_from_hash(data, 'category', 'categories')
-        ).map { |c| c.to_s }.flatten.uniq
+        ).map(&:to_s).flatten.uniq
       })
     end
 
