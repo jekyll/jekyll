@@ -62,7 +62,7 @@ module Jekyll
     end
 
     def value_from_singular_key(hash, key)
-      hash[key] if (hash.key?(key) || (hash.default_proc && hash[key]))
+      hash[key] if hash.key?(key) || (hash.default_proc && hash[key])
     end
 
     def value_from_plural_key(hash, key)

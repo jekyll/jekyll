@@ -115,7 +115,7 @@ module Jekyll
     #
     # Returns nothing.
     def add_dependency(path, dependency)
-      return if (metadata[path].nil? || @disabled)
+      return if metadata[path].nil? || @disabled
 
       unless metadata[path]["deps"].include? dependency
         metadata[path]["deps"] << dependency
