@@ -32,23 +32,23 @@ module Jekyll
     def run
       Jekyll.logger.debug "Rendering:", document.relative_path
 
-      payload.page = document.to_liquid
+      payload["page"] = document.to_liquid
 
       if document.collection.label == 'posts' && document.is_a?(Document)
-        payload.site['related_posts'] = document.related_posts
+        payload['site']['related_posts'] = document.related_posts
       end
 
       Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
       document.trigger_hooks(:pre_render, payload)
 
       info = {
-        :filters => [Jekyll::Filters],
-        :registers => { :site => site, :page => payload.page }
+        :filters   => [Jekyll::Filters],
+        :registers => { :site => site, :page => payload['page'] }
       }
 
       # render and transform content (this becomes the final content of the object)
-      payload.highlighter_prefix = converters.first.highlighter_prefix
-      payload.highlighter_suffix = converters.first.highlighter_suffix
+      payload['highlighter_prefix'] = converters.first.highlighter_prefix
+      payload['highlighter_suffix'] = converters.first.highlighter_suffix
 
       output = document.content
 
@@ -132,9 +132,9 @@ module Jekyll
       used   = Set.new([layout])
 
       while layout
-        payload.content = output
-        payload.page = document.to_liquid
-        payload.layout = layout.data
+        payload['content'] = output
+        payload['page']    = document.to_liquid
+        payload['layout']  = Utils.deep_merge_hashes(payload['layout'] || {}, layout.data)
 
         output = render_liquid(
           layout.content,
