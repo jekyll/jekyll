@@ -37,7 +37,7 @@ module Jekyll
         #
 
         private
-        def validate_and_ensure_charset(req, res)
+        def validate_and_ensure_charset(_req, res)
           key = res.header.keys.grep(/content-type/i).first
           typ = res.header[key]
 

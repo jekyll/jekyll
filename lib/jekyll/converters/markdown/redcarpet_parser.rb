@@ -47,7 +47,7 @@ module Jekyll
           end
 
           protected
-          def rouge_formatter(lexer)
+          def rouge_formatter(_lexer)
             Rouge::Formatters::HTML.new(:wrap => false)
           end
         end

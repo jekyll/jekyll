@@ -282,7 +282,7 @@ module Jekyll
       config
     end
 
-    def renamed_key(old, new, config, allowed_values = nil)
+    def renamed_key(old, new, config, _ = nil)
       if config.key?(old)
         Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" \
           "option has been renamed to '#{new}'. Please update your config " \

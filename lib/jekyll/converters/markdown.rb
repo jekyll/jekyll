@@ -56,7 +56,7 @@ module Jekyll
         extname_list.include?(ext.downcase)
       end
 
-      def output_ext(ext)
+      def output_ext(_ext)
         ".html"
       end
 

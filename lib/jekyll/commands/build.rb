@@ -65,7 +65,7 @@ module Jekyll
         # options - A Hash of options passed to the command
         #
         # Returns nothing.
-        def watch(site, options)
+        def watch(_site, options)
           External.require_with_graceful_fail 'jekyll-watch'
           Jekyll::Watcher.watch(options)
         end

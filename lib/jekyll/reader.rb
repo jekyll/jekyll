@@ -67,7 +67,7 @@ module Jekyll
     # dot_dirs - The Array of subdirectories in the dir.
     #
     # Returns nothing.
-    def retrieve_dirs(base, dir, dot_dirs)
+    def retrieve_dirs(_base, dir, dot_dirs)
       dot_dirs.map { |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)

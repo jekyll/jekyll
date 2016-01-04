@@ -58,7 +58,7 @@ module Jekyll
           conflicting_urls
         end
 
-        def fsnotify_buggy?(site)
+        def fsnotify_buggy?(_site)
           return true unless Utils::Platforms.osx?
           if Dir.pwd != `pwd`.strip
             Jekyll.logger.error "  " + <<-STR.strip.gsub(/\n\s+/, "\n  ")
