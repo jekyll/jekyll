@@ -225,7 +225,6 @@ module Jekyll
       template
     end
 
-
     # Work the same way as Dir.glob but seperating the input into two parts
     # ('dir' + '/' + 'pattern') to make sure the first part('dir') does not act
     # as a pattern.

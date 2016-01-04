@@ -37,7 +37,6 @@ module Jekyll
       @dir  = dir
       @name = name
 
-
       process(name)
       read_yaml(File.join(base, dir), name)
 

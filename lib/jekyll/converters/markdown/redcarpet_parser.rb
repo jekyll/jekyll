@@ -52,7 +52,6 @@ module Jekyll
           end
         end
 
-
         def initialize(config)
           External.require_with_graceful_fail("redcarpet")
           @config = config

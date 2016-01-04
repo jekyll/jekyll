@@ -23,7 +23,6 @@ module Jekyll
       end
     end
 
-
     def build_index
       self.class.lsi ||= begin
         lsi = ClassifierReborn::LSI.new(:auto_rebuild => false)

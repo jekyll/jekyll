@@ -62,14 +62,12 @@ module Jekyll
       clear_cache
     end
 
-
     # Clear just the cache
     #
     # Returns nothing
     def clear_cache
       @cache = {}
     end
-
 
     # Checks if the source has been modified or the
     # destination is missing
