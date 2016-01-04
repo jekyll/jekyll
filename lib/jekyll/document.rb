@@ -4,7 +4,8 @@ module Jekyll
   class Document
     include Comparable
 
-    attr_reader :path, :site, :extname, :output_ext, :content, :output, :collection
+    attr_reader :path, :site, :extname, :output_ext, :collection
+    attr_accessor :content, :output
 
     YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
     DATELESS_FILENAME_MATCHER = /^(.*)(\.[^.]+)$/
@@ -37,14 +38,6 @@ module Jekyll
       end
 
       trigger_hooks(:post_init)
-    end
-
-    def output=(output)
-      @output = output
-    end
-
-    def content=(content)
-      @content = content
     end
 
     # Fetch the Document's data.
