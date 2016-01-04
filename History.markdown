@@ -38,6 +38,7 @@
   * Change TestDoctorCommand to JekyllUnitTest... (#4263)
   * Create namespaced rake tasks in separate `.rake` files under `lib/tasks` (#4282)
   * markdown: refactor for greater readability & efficiency (#3771)
+  * Fix many Rubocop style errors (#4301)
 
 ### Site Enhancements
 
