@@ -187,7 +187,7 @@ module Jekyll
     # Returns the URL template to render collection's documents at.
     def url_template
       metadata.fetch('permalink') do
-          Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
+        Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
       end
     end
 

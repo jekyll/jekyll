@@ -21,7 +21,7 @@ module Jekyll
               key, value = opt.split('=')
               # If a quoted list, convert to array
               if value && value.include?("\"")
-                  value.delete!('"')
+                value.delete!('"')
                   value = value.split
               end
               @highlight_options[key.to_sym] = value || true
