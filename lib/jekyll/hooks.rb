@@ -6,7 +6,7 @@ module Jekyll
     PRIORITY_MAP = {
       :low => 10,
       :normal => 20,
-      :high => 30,
+      :high => 30
     }.freeze
 
     # initial empty hooks
@@ -16,26 +16,26 @@ module Jekyll
         :post_read => [],
         :pre_render => [],
         :post_render => [],
-        :post_write => [],
+        :post_write => []
       },
       :pages => {
         :post_init => [],
         :pre_render => [],
         :post_render => [],
-        :post_write => [],
+        :post_write => []
       },
       :posts => {
         :post_init => [],
         :pre_render => [],
         :post_render => [],
-        :post_write => [],
+        :post_write => []
       },
       :documents => {
         :post_init => [],
         :pre_render => [],
         :post_render => [],
-        :post_write => [],
-      },
+        :post_write => []
+      }
     }
 
     # map of all hooks and their priorities
@@ -63,7 +63,7 @@ module Jekyll
         :post_init => [],
         :pre_render => [],
         :post_render => [],
-        :post_write => [],
+        :post_write => []
       }
 
       unless @registry[owner][event]

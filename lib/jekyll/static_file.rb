@@ -109,7 +109,7 @@ module Jekyll
           @collection.relative_directory.size..relative_path.size],
         :output_ext => '',
         :name => '',
-        :title => '',
+        :title => ''
       }
     end
 
@@ -122,7 +122,7 @@ module Jekyll
       else
         ::Jekyll::URL.new({
           :template => @collection.url_template,
-          :placeholders => placeholders,
+          :placeholders => placeholders
         })
       end.to_s.gsub(/\/$/, '')
     end
