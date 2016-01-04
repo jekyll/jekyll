@@ -69,7 +69,7 @@ module Jekyll
     end
 
     def data_for_table(n)
-      sorted = @stats.sort_by { |filename, file_stats| -file_stats[:time] }
+      sorted = @stats.sort_by { |_, file_stats| -file_stats[:time] }
       sorted = sorted.slice(0, n)
 
       table = [%w(Filename Count Bytes Time)]

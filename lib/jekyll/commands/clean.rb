@@ -9,7 +9,7 @@ module Jekyll
 
             add_build_options(c)
 
-            c.action do |args, options|
+            c.action do |_, options|
               Jekyll::Commands::Clean.process(options)
             end
           end

@@ -5,7 +5,7 @@ module Jekyll
       @level = DEBUG
       @default_formatter = Formatter.new
       @logdev = $stdout
-      @formatter = proc do |severity, datetime, progname, msg|
+      @formatter = proc do |_, _, _, msg|
         "#{msg}"
       end
     end

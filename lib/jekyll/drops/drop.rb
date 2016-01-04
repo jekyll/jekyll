@@ -114,7 +114,7 @@ module Jekyll
       #
       # Returns a Hash with all the keys and values resolved.
       def to_h
-        keys.each_with_object({}) do |(key, val), result|
+        keys.each_with_object({}) do |(key, _), result|
           result[key] = self[key]
         end
       end

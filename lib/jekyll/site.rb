@@ -165,7 +165,7 @@ module Jekyll
 
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
-      collections.each do |label, collection|
+      collections.each do |_, collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run

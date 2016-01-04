@@ -10,7 +10,7 @@ module Jekyll
 
             c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
 
-            c.action do |args, options|
+            c.action do |_, options|
               Jekyll::Commands::Doctor.process(options)
             end
           end

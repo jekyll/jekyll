@@ -41,7 +41,7 @@ module Jekyll
       process(name)
       read_yaml(File.join(base, dir), name)
 
-      data.default_proc = proc do |hash, key|
+      data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 

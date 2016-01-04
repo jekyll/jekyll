@@ -11,7 +11,7 @@ module Jekyll
 
             add_build_options(c)
 
-            c.action do |args, options|
+            c.action do |_, options|
               options["serving"] = false
               Jekyll::Commands::Build.process(options)
             end
