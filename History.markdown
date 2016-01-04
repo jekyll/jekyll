@@ -30,6 +30,7 @@
   * utils/drops: update Drop to support `Utils.deep_merge_hashes` (#4289)
   * Make sure jekyll/drops/drop is loaded first. (#4292)
   * Convertible/Page/Renderer: use payload hash accessor & setter syntax for backwards-compatibility (#4311)
+  * Drop: fix hash setter precendence (#4312)
 
 ### Development Fixes
 
