@@ -283,7 +283,7 @@ module Jekyll
           "slug" => slug,
           "ext"  => ext
         })
-        merge_data!({"date" => date}) if data['date'].nil? || data['date'].to_i == site.time.to_i
+        merge_data!({ "date" => date }) if data['date'].nil? || data['date'].to_i == site.time.to_i
         data['title'] ||= slug.split('-').select(&:capitalize).join(' ')
       end
       populate_categories

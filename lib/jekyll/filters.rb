@@ -194,7 +194,7 @@ module Jekyll
         input.group_by do |item|
           item_property(item, property).to_s
         end.inject([]) do |memo, i|
-          memo << {"name" => i.first, "items" => i.last}
+          memo << { "name" => i.first, "items" => i.last }
         end
       else
         input
