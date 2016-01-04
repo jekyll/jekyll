@@ -64,10 +64,12 @@ module Jekyll
       def []=(key, val)
         if respond_to?("#{key}=")
           public_send("#{key}=", val)
-        elsif self.class.mutable
-          @mutations[key] = val
         elsif respond_to? key
-          raise Errors::DropMutationException, "Key #{key} cannot be set in the drop."
+          if self.class.mutable
+            @mutations[key] = val
+          else
+            raise Errors::DropMutationException, "Key #{key} cannot be set in the drop."
+          end
         else
           fallback_data[key] = val
         end
