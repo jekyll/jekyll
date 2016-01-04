@@ -62,6 +62,7 @@
   * Add `jekyll-commonmark` to list of third-party plugins (#4299)
   * Add documentation for incremental regeneration (#4293)
   * Add note about removal of relative permalink support in upgrading docs (#4303)
+  * Add Pro Tip to use front matter variable to create clean URLs (#4296)
 
 ## 3.0.1 / 2015-11-17
 
