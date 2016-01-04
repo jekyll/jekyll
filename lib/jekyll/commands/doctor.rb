@@ -50,7 +50,8 @@ module Jekyll
           urls = {}
           urls = collect_urls(urls, site.pages, site.dest)
           urls = collect_urls(urls, site.posts.docs, site.dest)
-          urls.select { |_, p| p.size > 1 }.each do |url, paths|
+          urls.each do |url, paths|
+            next unless paths.size > 1
             conflicting_urls = true
             Jekyll.logger.warn "Conflict:", "The URL '#{url}' is the destination" \
               " for the following pages: #{paths.join(", ")}"
@@ -77,7 +78,8 @@ module Jekyll
         def urls_only_differ_by_case(site)
           urls_only_differ_by_case = false
           urls = case_insensitive_urls(site.pages + site.docs_to_write, site.dest)
-          urls.select { |_, p| p.size > 1 }.each do |_, real_urls|
+          urls.each do |case_insensitive_url, real_urls|
+            next unless real_urls.uniq.size > 1
             urls_only_differ_by_case = true
             Jekyll.logger.warn "Warning:", "The following URLs only differ" \
               " by case. On a case-insensitive file system one of the URLs" \

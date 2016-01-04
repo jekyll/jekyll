@@ -59,21 +59,21 @@ eos
       def render(context)
         site = context.registers[:site]
 
-        post = site.posts.docs.find { |p| @post == p }
-        if post
-          return post.url
+        site.posts.docs.each do |p|
+          return p.url if @post == p
         end
 
         # New matching method did not match, fall back to old method
         # with deprecation warning if this matches
 
-        post = site.posts.docs.find { |p| @post.deprecated_equality p }
-        if post
+
+        site.posts.docs.each do |p|
+          next unless @post.deprecated_equality p
           Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{@post.name} }}' did not match " \
             "a post using the new matching method of checking name " \
             "(path-date-slug) equality. Please make sure that you " \
             "change this tag to match the post's name exactly."
-          return post.url
+          return p.url
         end
 
         raise ArgumentError.new <<-eos
