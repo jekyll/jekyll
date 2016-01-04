@@ -116,8 +116,8 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-      site_payload.page = to_liquid
-      site_payload.paginator = pager.to_liquid
+      site_payload["page"] = to_liquid
+      site_payload["paginator"] = pager.to_liquid
 
       do_layout(site_payload, layouts)
     end

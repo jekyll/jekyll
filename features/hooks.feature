@@ -89,7 +89,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     Jekyll::Hooks.register :pages, :pre_render do |page, payload|
-      payload.page['myparam'] = 'special' if page.name == 'page1.html'
+      payload['page']['myparam'] = 'special' if page.name == 'page1.html'
     end
     """
     And I have a "page1.html" page that contains "{{ page.myparam }}"

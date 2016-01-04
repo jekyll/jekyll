@@ -210,8 +210,8 @@ module Jekyll
 
       while layout
         Jekyll.logger.debug "Rendering Layout:", path
-        payload.content = output
-        payload.layout  = layout.data
+        payload["content"] = output
+        payload["layout"]  = Utils.deep_merge_hashes(payload["layout"] || {}, layout.data)
 
         self.output = render_liquid(layout.content,
                                          payload,
@@ -236,7 +236,7 @@ module Jekyll
 
     # Add any necessary layouts to this convertible document.
     #
-    # payload - The site payload Hash.
+    # payload - The site payload Drop or Hash.
     # layouts - A Hash of {"name" => "layout"}.
     #
     # Returns nothing.
@@ -245,11 +245,11 @@ module Jekyll
 
       Jekyll.logger.debug "Pre-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :pre_render, self, payload
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload.page } }
+      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload["page"] } }
 
       # render and transform content (this becomes the final content of the object)
-      payload.highlighter_prefix = converters.first.highlighter_prefix
-      payload.highlighter_suffix = converters.first.highlighter_suffix
+      payload["highlighter_prefix"] = converters.first.highlighter_prefix
+      payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
       if render_with_liquid?
         Jekyll.logger.debug "Rendering Liquid:", self.relative_path
