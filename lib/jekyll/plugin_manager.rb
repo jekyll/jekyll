@@ -76,7 +76,7 @@ module Jekyll
     #
     # Returns an Array of plugin search paths
     def plugins_path
-      if (site.config['plugins_dir'] == Jekyll::Configuration::DEFAULTS['plugins_dir'])
+      if site.config['plugins_dir'] == Jekyll::Configuration::DEFAULTS['plugins_dir']
         [site.in_source_dir(site.config['plugins_dir'])]
       else
         Array(site.config['plugins_dir']).map { |d| File.expand_path(d) }
@@ -86,11 +86,10 @@ module Jekyll
     def deprecation_checks
       pagination_included = (site.config['gems'] || []).include?('jekyll-paginate') || defined?(Jekyll::Paginate)
       if site.config['paginate'] && !pagination_included
-        Jekyll::Deprecator.deprecation_message "You appear to have pagination " +
-          "turned on, but you haven't included the `jekyll-paginate` gem. " +
+        Jekyll::Deprecator.deprecation_message "You appear to have pagination " \
+          "turned on, but you haven't included the `jekyll-paginate` gem. " \
           "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
       end
     end
-
   end
 end

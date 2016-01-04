@@ -47,7 +47,7 @@ module Jekyll
                                  merged_file_read_opts(opts))
         if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
-          self.data = SafeYAML.load($1)
+          self.data = SafeYAML.load(Regexp.last_match(1))
         end
       rescue SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
@@ -87,9 +87,9 @@ module Jekyll
       if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
         ext
       else
-        converters.map { |c|
+        converters.map do |c|
           c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
-        }.compact.last
+        end.compact.last
       end
     end
 
@@ -122,9 +122,9 @@ module Jekyll
     #
     # Returns the Hash representation of this Convertible.
     def to_liquid(attrs = nil)
-      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
+      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map do |attribute|
         [attribute, send(attribute)]
-      }]
+      end]
 
       defaults = site.frontmatter_defaults.all(relative_path, type)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
@@ -160,7 +160,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w[.sass .scss].include?(ext)
+      %w(.sass .scss).include?(ext)
     end
 
     # Determine whether the document is a CoffeeScript file.

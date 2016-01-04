@@ -8,13 +8,13 @@ module Jekyll
     attr_accessor :data, :content, :output
 
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
+    ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
       name
       path
       url
-    ]
+    )
 
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.
@@ -37,11 +37,10 @@ module Jekyll
       @dir  = dir
       @name = name
 
-
       process(name)
       read_yaml(File.join(base, dir), name)
 
-      data.default_proc = proc do |hash, key|
+      data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
@@ -107,7 +106,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0 .. -ext.length - 1]
+      self.basename = name[0..-ext.length - 1]
     end
 
     # Add any necessary layouts to this post

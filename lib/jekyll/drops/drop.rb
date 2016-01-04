@@ -83,6 +83,19 @@ module Jekyll
         end
       end
 
+      # Check if key exists in Drop
+      #
+      # key - the string key whose value to fetch
+      #
+      # Returns true if the given key is present
+      def key?(key)
+        if self.class.mutable && @mutations.key?(key)
+          true
+        else
+          respond_to?(key) || fallback_data.key?(key)
+        end
+      end
+
       # Generates a list of keys with user content as their values.
       # This gathers up the Drop methods and keys of the mutations and
       # underlying data hashes and performs a set union to ensure a list
@@ -101,7 +114,7 @@ module Jekyll
       #
       # Returns a Hash with all the keys and values resolved.
       def to_h
-        keys.each_with_object({}) do |(key, val), result|
+        keys.each_with_object({}) do |(key, _), result|
           result[key] = self[key]
         end
       end
@@ -122,7 +135,6 @@ module Jekyll
       def each_key(&block)
         keys.each(&block)
       end
-
     end
   end
 end

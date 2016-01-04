@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
@@ -95,7 +95,7 @@ module Jekyll
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
-    def configuration(override = Hash.new)
+    def configuration(override = {})
       config = Configuration[Configuration::DEFAULTS]
       override = Configuration[override].stringify_keys
       unless override.delete('skip_config_files')
@@ -156,16 +156,15 @@ module Jekyll
       clean_path = File.expand_path(questionable_path, "/")
       clean_path = clean_path.sub(/\A\w\:\//, '/')
 
-      unless clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
-        File.join(base_directory, clean_path)
-      else
+      if clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
         clean_path
+      else
+        File.join(base_directory, clean_path)
       end
     end
 
     # Conditional optimizations
     Jekyll::External.require_if_present('liquid-c')
-
   end
 end
 

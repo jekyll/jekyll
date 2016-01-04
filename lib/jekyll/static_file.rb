@@ -1,7 +1,7 @@
 module Jekyll
   class StaticFile
     # The cache of last modification times [path] -> mtime.
-    @@mtimes = Hash.new
+    @@mtimes = {}
 
     attr_reader :relative_path, :extname
 
@@ -75,7 +75,7 @@ module Jekyll
     def write(dest)
       dest_path = destination(dest)
 
-      return false if File.exist?(dest_path) and !modified?
+      return false if File.exist?(dest_path) && !modified?
       @@mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
@@ -90,7 +90,7 @@ module Jekyll
     #
     # Returns nothing.
     def self.reset_cache
-      @@mtimes = Hash.new
+      @@mtimes = {}
       nil
     end
 
@@ -104,12 +104,12 @@ module Jekyll
 
     def placeholders
       {
-        collection: @collection.label,
-        path: relative_path[
+        :collection => @collection.label,
+        :path => relative_path[
           @collection.relative_directory.size..relative_path.size],
-        output_ext: '',
-        name: '',
-        title: '',
+        :output_ext => '',
+        :name => '',
+        :title => ''
       }
     end
 
@@ -118,13 +118,13 @@ module Jekyll
     # be overriden in the collection's configuration in _config.yml.
     def url
       @url ||= if @collection.nil?
-        relative_path
-      else
-        ::Jekyll::URL.new({
-          template:  @collection.url_template,
-          placeholders: placeholders,
-        })
-      end.to_s.gsub /\/$/, ''
+                 relative_path
+               else
+                 ::Jekyll::URL.new({
+                   :template => @collection.url_template,
+                   :placeholders => placeholders
+                 })
+               end.to_s.gsub(/\/$/, '')
     end
 
     # Returns the type of the collection if present, nil otherwise.

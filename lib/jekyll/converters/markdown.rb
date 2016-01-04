@@ -7,7 +7,7 @@ module Jekyll
 
       def setup
         return if @setup
-        if (!@parser = get_processor)
+        unless (@parser = get_processor)
           Jekyll.logger.error "Invalid Markdown processor given:", @config["markdown"]
           Jekyll.logger.info  "", "Custom processors are not loaded in safe mode" if @config["safe"]
           Jekyll.logger.error "", "Available processors are: #{valid_processors.join(", ")}"
@@ -19,9 +19,9 @@ module Jekyll
 
       def get_processor
         case @config["markdown"].downcase
-          when "redcarpet" then return RedcarpetParser.new(@config)
-          when "kramdown"  then return KramdownParser.new(@config)
-          when "rdiscount" then return RDiscountParser.new(@config)
+        when "redcarpet" then return RedcarpetParser.new(@config)
+        when "kramdown"  then return KramdownParser.new(@config)
+        when "rdiscount" then return RDiscountParser.new(@config)
         else
           get_custom_processor
         end
@@ -41,7 +41,7 @@ module Jekyll
 
       def third_party_processors
         self.class.constants - \
-        %w[KramdownParser RDiscountParser RedcarpetParser PRIORITIES].map(
+        %w(KramdownParser RDiscountParser RedcarpetParser PRIORITIES).map(
           &:to_sym
         )
       end
@@ -56,7 +56,7 @@ module Jekyll
         extname_list.include?(ext.downcase)
       end
 
-      def output_ext(ext)
+      def output_ext(_ext)
         ".html"
       end
 

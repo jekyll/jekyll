@@ -19,8 +19,8 @@ module Jekyll
     def initialize(config)
       @config = config.clone
 
-      %w[safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems].each do |opt|
+      %w(safe lsi highlighter baseurl exclude include future unpublished
+        show_drafts limit_posts keep_files gems).each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -165,7 +165,7 @@ module Jekyll
 
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
-      collections.each do |label, collection|
+      collections.each do |_, collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run
@@ -196,9 +196,9 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item|
+      each_site_file do |item|
         item.write(dest) if regenerator.regenerate?(item)
-      }
+      end
       regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self
     end
@@ -292,10 +292,10 @@ module Jekyll
     # Returns
     def relative_permalinks_are_deprecated
       if config['relative_permalinks']
-        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" +
-                                " in subfolders must be relative to the" +
-                                " site source directory, not the parent" +
-                                " directory. Check http://jekyllrb.com/docs/upgrading/"+
+        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
+                                " in subfolders must be relative to the" \
+                                " site source directory, not the parent" \
+                                " directory. Check http://jekyllrb.com/docs/upgrading/"\
                                 " for more info."
       end
     end

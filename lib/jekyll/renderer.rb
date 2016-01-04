@@ -2,7 +2,6 @@
 
 module Jekyll
   class Renderer
-
     attr_reader :document, :site, :payload
 
     def initialize(site, document, site_payload = nil)
@@ -43,8 +42,8 @@ module Jekyll
       document.trigger_hooks(:pre_render, payload)
 
       info = {
-        filters:   [Jekyll::Filters],
-        registers: { :site => site, :page => payload.page }
+        :filters => [Jekyll::Filters],
+        :registers => { :site => site, :page => payload.page }
       }
 
       # render and transform content (this becomes the final content of the object)
@@ -161,6 +160,5 @@ module Jekyll
 
       output
     end
-
   end
 end

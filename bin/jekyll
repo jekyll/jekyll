@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
-$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w( .. lib ))
 
 require 'jekyll'
 require 'mercenary'
@@ -28,7 +28,7 @@ Mercenary.program(:jekyll) do |p|
 
   Jekyll::Command.subclasses.each { |c| c.init_with_program(p) }
 
-  p.action do |args, options|
+  p.action do |args, _|
     if args.empty?
       Jekyll.logger.error "A subcommand is required."
       puts p

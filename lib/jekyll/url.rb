@@ -11,7 +11,6 @@ require 'uri'
 #
 module Jekyll
   class URL
-
     # options - One of :permalink or :template must be supplied.
     #           :template     - The String used as template for URL generation,
     #                           for example "/:path/:basename:output_ext", where
@@ -93,7 +92,7 @@ module Jekyll
     # as well as the beginning "/" so we can enforce and ensure it.
 
     def sanitize_url(str)
-      "/" + str.gsub(/\/{2,}/, "/").gsub(%r!\.+\/|\A/+!, "")
+      "/" + str.gsub(/\/{2,}/, "/").gsub(/\.+\/|\A\/+/, "")
     end
 
     # Escapes a path to be a valid URL path segment

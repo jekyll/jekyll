@@ -4,7 +4,7 @@ module Jekyll
     autoload :Ansi, "jekyll/utils/ansi"
 
     # Constants for use in #slugify
-    SLUGIFY_MODES = %w{raw default pretty}
+    SLUGIFY_MODES = %w(raw default pretty)
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
@@ -31,8 +31,8 @@ module Jekyll
     # Thanks to whoever made it.
     def deep_merge_hashes!(target, overwrite)
       overwrite.each_key do |key|
-        if (overwrite[key].is_a?(Hash) or overwrite[key].is_a?(Drops::Drop)) and
-            (target[key].is_a?(Hash) or target[key].is_a?(Drops::Drop))
+        if (overwrite[key].is_a?(Hash) || overwrite[key].is_a?(Drops::Drop)) &&
+            (target[key].is_a?(Hash) || target[key].is_a?(Drops::Drop))
           target[key] = Utils.deep_merge_hashes(target[key], overwrite[key])
           next
         end
@@ -62,7 +62,7 @@ module Jekyll
     end
 
     def value_from_singular_key(hash, key)
-      hash[key] if (hash.key?(key) || (hash.default_proc && hash[key]))
+      hash[key] if hash.key?(key) || (hash.default_proc && hash[key])
     end
 
     def value_from_plural_key(hash, key)
@@ -164,16 +164,17 @@ module Jekyll
       end
 
       # Replace each character sequence with a hyphen
-      re = case mode
-      when 'raw'
-        SLUGIFY_RAW_REGEXP
-      when 'default'
-        SLUGIFY_DEFAULT_REGEXP
-      when 'pretty'
-        # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
-        # and is allowed in both extN and NTFS.
-        SLUGIFY_PRETTY_REGEXP
-      end
+      re =
+        case mode
+        when 'raw'
+          SLUGIFY_RAW_REGEXP
+        when 'default'
+          SLUGIFY_DEFAULT_REGEXP
+        when 'pretty'
+          # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
+          # and is allowed in both extN and NTFS.
+          SLUGIFY_PRETTY_REGEXP
+        end
 
       # Strip according to the mode
       slug = string.gsub(re, '-')
@@ -224,7 +225,6 @@ module Jekyll
       end
       template
     end
-
 
     # Work the same way as Dir.glob but seperating the input into two parts
     # ('dir' + '/' + 'pattern') to make sure the first part('dir') does not act

@@ -4,7 +4,8 @@ module Jekyll
   class Document
     include Comparable
 
-    attr_reader :path, :site, :extname, :output_ext, :content, :output, :collection
+    attr_reader :path, :site, :extname, :output_ext, :collection
+    attr_accessor :content, :output
 
     YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
     DATELESS_FILENAME_MATCHER = /^(.*)(\.[^.]+)$/
@@ -32,19 +33,11 @@ module Jekyll
         categories_from_path(collection.relative_directory)
       end
 
-      data.default_proc = proc do |hash, key|
+      data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(relative_path, collection.label, key)
       end
 
       trigger_hooks(:post_init)
-    end
-
-    def output=(output)
-      @output = output
-    end
-
-    def content=(content)
-      @content = content
     end
 
     # Fetch the Document's data.
@@ -52,7 +45,7 @@ module Jekyll
     # Returns a Hash containing the data. An empty hash is returned if
     #   no data was read.
     def data
-      @data ||= Hash.new
+      @data ||= {}
     end
 
     # Merge some data in with this document's data.
@@ -67,7 +60,7 @@ module Jekyll
       end
       Utils.deep_merge_hashes!(data, other)
       if data.key?('date') && !data['date'].is_a?(Time)
-         data['date'] = Utils.parse_date(data['date'].to_s, "Document '#{relative_path}' does not have a valid date in the YAML front matter.")
+        data['date'] = Utils.parse_date(data['date'].to_s, "Document '#{relative_path}' does not have a valid date in the YAML front matter.")
       end
       data
     end
@@ -120,14 +113,14 @@ module Jekyll
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0 .. -extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
     end
 
     # Determine whether the document is a YAML file.
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
-      %w[.yaml .yml].include?(extname)
+      %w(.yaml .yml).include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -143,7 +136,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w[.sass .scss].include?(extname)
+      %w(.sass .scss).include?(extname)
     end
 
     # Determine whether the document is a CoffeeScript file.
@@ -197,9 +190,9 @@ module Jekyll
     # Returns the computed URL for the document.
     def url
       @url = URL.new({
-        template:     url_template,
-        placeholders: url_placeholders,
-        permalink:    permalink
+        :template => url_template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
       }).to_s
     end
 
@@ -270,7 +263,7 @@ module Jekyll
           self.content = File.read(path, merged_file_read_opts(opts))
           if content =~ YAML_FRONT_MATTER_REGEXP
             self.content = $POSTMATCH
-            data_file = SafeYAML.load($1)
+            data_file = SafeYAML.load(Regexp.last_match(1))
             merge_data!(data_file) if data_file
           end
 
@@ -285,13 +278,13 @@ module Jekyll
 
     def post_read
       if DATE_FILENAME_MATCHER =~ relative_path
-        m, cats, date, slug, ext = *relative_path.match(DATE_FILENAME_MATCHER)
+        _, _, date, slug, ext = *relative_path.match(DATE_FILENAME_MATCHER)
         merge_data!({
           "slug" => slug,
           "ext"  => ext
         })
-        merge_data!({"date" => date}) if data['date'].nil? || data['date'].to_i == site.time.to_i
-        data['title'] ||= slug.split('-').select {|w| w.capitalize! || w }.join(' ')
+        merge_data!({ "date" => date }) if data['date'].nil? || data['date'].to_i == site.time.to_i
+        data['title'] ||= slug.split('-').select(&:capitalize).join(' ')
       end
       populate_categories
       populate_tags
@@ -317,7 +310,7 @@ module Jekyll
       merge_data!({
         'categories' => (
           Array(data['categories']) + Utils.pluralized_array_from_hash(data, 'category', 'categories')
-        ).map { |c| c.to_s }.flatten.uniq
+        ).map(&:to_s).flatten.uniq
       })
     end
 
@@ -386,7 +379,7 @@ module Jekyll
     end
 
     def next_doc
-      pos = collection.docs.index {|post| post.equal?(self) }
+      pos = collection.docs.index { |post| post.equal?(self) }
       if pos && pos < collection.docs.length - 1
         collection.docs[pos + 1]
       else
@@ -395,7 +388,7 @@ module Jekyll
     end
 
     def previous_doc
-      pos = collection.docs.index {|post| post.equal?(self) }
+      pos = collection.docs.index { |post| post.equal?(self) }
       if pos && pos > 0
         collection.docs[pos - 1]
       else
