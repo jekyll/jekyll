@@ -2432,6 +2432,20 @@ go back to using Pygments, set <code>highlighter: pygments</code> in your
 <code>_config.yml</code> file and run <code>gem install pygments.rb</code> or add
 <code>gem 'pygments.rb'</code> to your project’s <code>Gemfile</code>.</p>
 
+<h3 id="relative-permalink-support-removed">Relative Permalink support removed</h3>
+
+<p>In Jekyll 3 and above, relative permalinks have been deprecated. If you
+created your site using Jekyll 2 and below, you may receive the following
+error when trying to <strong>serve</strong> or <strong>build</strong>:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">Since v3.0, permalinks for pages in subfolders must be relative to the site
+source directory, not the parent directory. Check
+http://jekyllrb.com/docs/upgrading/ for more info.</code></pre></figure>
+
+<p>This can be fixed by removing the following line from your <code>_config.yml</code> file:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">relative_permalinks</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span></code></pre></figure>
+
 <p><em>Did we miss something? Please click “Improve this page” above and add a section. Thanks!</em></p>
 
           
@@ -2859,7 +2873,7 @@ go back to using Pygments, set <code>highlighter: pygments</code> in your
   <footer role="contentinfo">
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
-      <p>The contents of this website are &copy;&nbsp;2015 <a href="http://tom.preston-werner.com/">Tom Preston-Werner</a> under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are &copy;&nbsp;2016 <a href="http://tom.preston-werner.com/">Tom Preston-Werner</a> under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>
