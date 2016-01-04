@@ -25,6 +25,7 @@ module Features
         @indent = 0
         @prefixes = options[:prefixes] || {}
         @delayed_messages = []
+        @snippets_input = []
       end
 
       def before_features(features)
@@ -113,6 +114,10 @@ module Features
         @io.puts
         print_exception(exception, status, @indent)
         @io.flush
+      end
+
+      def after_test_step(test_step, result)
+        collect_snippet_data(test_step, result)
       end
 
       private
