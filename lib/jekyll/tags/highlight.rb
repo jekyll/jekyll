@@ -13,11 +13,11 @@ module Jekyll
       def initialize(tag_name, markup, tokens)
         super
         if markup.strip =~ SYNTAX
-          @lang = $1.downcase
+          @lang = Regexp.last_match(1).downcase
           @highlight_options = {}
-          if defined?($2) && $2 != ''
+          if defined?(Regexp.last_match(2)) && Regexp.last_match(2) != ''
             # Split along 3 possible forms -- key="<quoted list>", key=value, or key
-            $2.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
+            Regexp.last_match(2).scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
               key, value = opt.split('=')
               # If a quoted list, convert to array
               if value && value.include?("\"")
