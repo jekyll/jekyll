@@ -2,17 +2,22 @@ Metrics/MethodLength: { Max:  24 }
 Metrics/ClassLength:  { Max: 240 }
 Metrics/ModuleLength: { Max: 240 }
 Metrics/LineLength:   { Max: 112 }
+Metrics/CyclomaticComplexity: { Max: 8 }
+Metrics/PerceivedComplexity: { Max: 8 }
+Metrics/ParameterLists: { Max: 4 }
+Metrics/MethodLength: { Max: 24 }
+Metrics/AbcSize: { Max: 20 }
 
 Style/IndentHash: { EnforcedStyle: consistent }
 Style/HashSyntax: { EnforcedStyle: hash_rockets }
 Style/SignalException: { EnforcedStyle: only_raise }
 Style/AlignParameters: { EnforcedStyle: with_fixed_indentation }
 Style/StringLiteralsInInterpolation: { EnforcedStyle: double_quotes }
-Style/RegexpLiteral: { EnforcedStyle: slashes, AllowInnerSlashes: true }
 Style/MultilineMethodCallIndentation: { EnforcedStyle: indented }
 Style/MultilineOperationIndentation: { EnforcedStyle: indented }
 Style/FirstParameterIndentation: { EnforcedStyle: consistent }
 Style/StringLiterals: { EnforcedStyle: double_quotes }
+Style/RegexpLiteral: { EnforcedStyle: slashes }
 Style/IndentArray: { EnforcedStyle: consistent }
 Style/ExtraSpacing: { AllowForAlignment: true }
 
@@ -43,6 +48,7 @@ Style/FileName:                       { Enabled: false }
 Lint/UselessAccessModifier:           { Enabled: false }
 Style/SpaceAroundOperators:           { Enabled: false }
 Style/RedundantReturn:                { Enabled: false }
+Style/SingleLineMethods:              { Enabled: false }
 
 AllCops:
   TargetRubyVersion: 2.0
