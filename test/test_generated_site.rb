@@ -12,7 +12,7 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "ensure post count is as expected" do
-      assert_equal 48, @site.posts.size
+      assert_equal 49, @site.posts.size
     end
 
     should "insert site.posts into the index" do
