@@ -1,5 +1,8 @@
+require 'mime/types'
+
 module Jekyll
-  module Utils extend self
+  module Utils
+    extend self
     autoload :Platforms, 'jekyll/utils/platforms'
     autoload :Ansi, "jekyll/utils/ansi"
 

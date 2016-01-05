@@ -22,7 +22,11 @@ module Jekyll
     #
     # Returns the output extname including the leading period.
     def output_ext
-      @output_ext ||= converters.first.output_ext(document.extname)
+      @output_ext ||= if document.permalink
+        File.extname(document.permalink)
+      else
+        converters.first.output_ext(document.extname)
+      end
     end
 
     ######################

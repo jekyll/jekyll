@@ -39,8 +39,9 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "process other static files and generate correct permalinks" do
-      assert File.exist?(dest_dir('/about/index.html'))
-      assert File.exist?(dest_dir('/contacts.html'))
+      assert File.exist?(dest_dir('/about/index.html')), "about/index.html should exist"
+      assert File.exist?(dest_dir('/contacts.html')), "contacts.html should exist"
+      assert File.exist?(dest_dir('/dynamic_file.php')), "dynamic_file.php should exist"
     end
 
     should "print a nice list of static files" do

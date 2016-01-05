@@ -298,11 +298,11 @@ module Jekyll
       when :pretty
         "/:categories/:year/:month/:day/:title/"
       when :none
-        "/:categories/:title.html"
+        "/:categories/:title:output_ext"
       when :date
-        "/:categories/:year/:month/:day/:title.html"
+        "/:categories/:year/:month/:day/:title:output_ext"
       when :ordinal
-        "/:categories/:year/:y_day/:title.html"
+        "/:categories/:year/:y_day/:title:output_ext"
       else
         permalink_style.to_s
       end
