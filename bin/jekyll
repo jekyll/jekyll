@@ -40,8 +40,11 @@ Mercenary.program(:jekyll) do |p|
       puts p
       abort
     else
-      unless p.has_command?(args.first)
-        Jekyll.logger.abort_with "Invalid command. Use --help for more information"
+      subcommand = args.first
+      unless p.has_command? subcommand
+        Jekyll.logger.abort_with "fatal: 'jekyll #{args.first}' could not" \
+          " be found. You may need to install the jekyll-#{args.first} gem" \
+          " or a related gem to be able to use this subcommand."
       end
     end
   end
