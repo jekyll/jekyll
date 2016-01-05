@@ -32,6 +32,7 @@
   * Convertible/Page/Renderer: use payload hash accessor & setter syntax for backwards-compatibility (#4311)
   * Drop: fix hash setter precendence (#4312)
   * utils: `has_yaml_header?` should accept files with extraneous spaces (#4290)
+  * Escape html from site.title and page.title in site template (#4307)
 
 ### Development Fixes
 
