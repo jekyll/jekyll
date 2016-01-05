@@ -15,8 +15,13 @@ module Jekyll
       def self.mutable(is_mutable = nil)
         if is_mutable
           @is_mutable = is_mutable
+        else
+          @is_mutable = false
         end
-        @is_mutable || false
+      end
+
+      def self.mutable?
+        @is_mutable
       end
 
       # Create a new Drop
@@ -39,7 +44,7 @@ module Jekyll
       #
       # Returns the value for the given key, or nil if none exists
       def [](key)
-        if self.class.mutable && @mutations.key?(key)
+        if self.class.mutable? && @mutations.key?(key)
           @mutations[key]
         elsif respond_to? key
           public_send key
@@ -65,7 +70,7 @@ module Jekyll
         if respond_to?("#{key}=")
           public_send("#{key}=", val)
         elsif respond_to? key
-          if self.class.mutable
+          if self.class.mutable?
             @mutations[key] = val
           else
             raise Errors::DropMutationException, "Key #{key} cannot be set in the drop."
