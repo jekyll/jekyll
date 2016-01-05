@@ -78,14 +78,14 @@ module Jekyll
     end
 
     def generate_url_from_drop(template)
-      template.gsub(/:([a-z_]+)/) do |match|
-        replacement = @placeholders.public_send(match.sub(':', ''))
+      template.gsub(/:([a-z_]+)/.freeze) do |match|
+        replacement = @placeholders.public_send(match.sub(':'.freeze, ''.freeze))
         if replacement.nil?
           ''.freeze
         else
           self.class.escape_path(replacement)
         end
-      end.gsub(/\/\//, '/')
+      end.gsub(/\/\//.freeze, '/'.freeze)
     end
 
     # Returns a sanitized String URL, stripping "../../" and multiples of "/",
