@@ -37,7 +37,7 @@ module Jekyll
 
       # Public: A list of processors that you provide via plugins.
       # This is really only available if you are not in safe mode, if you are
-      # in safe mode (re: Github) then there will be none.
+      # in safe mode (re: GitHub) then there will be none.
 
       def third_party_processors
         self.class.constants - \

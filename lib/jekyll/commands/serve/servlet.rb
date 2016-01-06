@@ -17,7 +17,7 @@ module Jekyll
         end
 
         # Add the ability to tap file.html the same way that Nginx does on our
-        # Docker images (or on Github pages.) The difference is that we might end
+        # Docker images (or on GitHub Pages.) The difference is that we might end
         # up with a different preference on which comes first.
 
         def search_file(req, res, basename)

@@ -678,7 +678,7 @@ extensions are:
 ### Kramdown
 
 In addition to the defaults mentioned above, you can also turn on recognition
-of Github Flavored Markdown by passing an `input` option with a value of "GFM".
+of GitHub Flavored Markdown by passing an `input` option with a value of "GFM".
 
 For example, in your `_config.yml`:
 
