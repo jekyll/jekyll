@@ -44,6 +44,7 @@
   * Create namespaced rake tasks in separate `.rake` files under `lib/tasks` (#4282)
   * markdown: refactor for greater readability & efficiency (#3771)
   * Fix many Rubocop style errors (#4301)
+  * Fix spelling of "GitHub" in docs and history (#4322)
 
 ### Site Enhancements
 
