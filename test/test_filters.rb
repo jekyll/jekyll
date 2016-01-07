@@ -31,6 +31,11 @@ class TestFilters < JekyllUnitTest
       assert_equal "<p>something <strong>really</strong> simple</p>\n", @filter.markdownify("something **really** simple")
     end
 
+    should "smartify with simple string" do
+      assert_equal "SmartyPants is *not* Markdown", @filter.smartify("SmartyPants is *not* Markdown")
+      assert_equal "“This filter’s test…”", @filter.smartify(%q{"This filter's test..."})
+    end
+
     should "sassify with simple string" do
       assert_equal "p {\n  color: #123456; }\n", @filter.sassify("$blue:#123456\np\n  color: $blue")
     end
