@@ -69,7 +69,15 @@ class TestKramdown < JekyllUnitTest
           ~~~
         MARKDOWN
 
+
         selector = ".highlighter-coderay div.CodeRay div.code pre"
+        if result.css(selector).empty?
+          $stdout.puts "\n\n\n\n"
+          $stdout.puts result.to_s
+          $stdout.puts markdown.inspect
+          $stdout.puts "\n\n\n\n"
+        end
+
         refute_empty result.css(selector)
       end
 
@@ -90,6 +98,13 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = ".highlighter-coderay div.CodeRay div.code pre"
+        if result.css(selector).empty?
+          $stdout.puts "\n\n\n\n"
+          $stdout.puts result.to_s
+          $stdout.puts markdown.inspect
+          $stdout.puts "\n\n\n\n"
+        end
+
         refute_empty result.css(selector)
       end
     end
