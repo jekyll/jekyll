@@ -85,7 +85,7 @@ module Jekyll
         #
 
         def send_deprecation_message_if_using_old_opts
-          unless @coderay.empty?
+          unless @config["coderay"].empty?
             Jekyll::Deprecator.deprecation_message "You are using 'kramdown.coderay' in your configuration, "\
               "please use 'syntax_highlighter_opts' instead."
           end
