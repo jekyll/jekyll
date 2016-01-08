@@ -69,7 +69,6 @@
   * Add note about removal of relative permalink support in upgrading docs (#4303)
   * Add Pro Tip to use front matter variable to create clean URLs (#4296)
   * Fix grammar in the documentation for posts. (#4330)
-  * Fix grammar in the documentation for posts. (#4330)
 
 ## 3.0.1 / 2015-11-17
 
