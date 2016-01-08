@@ -1,3 +1,4 @@
+bundler_args: --without doc:util:site:benchmark:development
 language: ruby
 cache: bundler
 sudo: false
