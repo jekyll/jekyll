@@ -60,16 +60,6 @@ module Jekyll
 
       'redcarpet' => {
         'extensions' => []
-      },
-
-      'kramdown' => {
-        'auto_ids'       => true,
-        'toc_levels'     => '1..6',
-        'entity_output'  => 'as_char',
-        'smart_quotes'   => 'lsquo,rsquo,ldquo,rdquo',
-        'input'          => "GFM",
-        'hard_wrap'      => false,
-        'footnote_nr'    => 1
       }
     }]
 

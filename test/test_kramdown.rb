@@ -6,24 +6,22 @@ class TestKramdown < JekyllUnitTest
   context "kramdown" do
     setup do
       @config = {
-        'markdown' => 'kramdown',
-        'kramdown' => {
-          'smart_quotes' => 'lsquo,rsquo,ldquo,rdquo',
-          'entity_output' => 'as_char',
-          'toc_levels' => '1..6',
-          'auto_ids' => false,
-          'footnote_nr' => 1,
+        "markdown" => "kramdown",
+        "kramdown" => {
+          "toc_levels" => "1..6",
+          "entity_output" => "as_char",
+          "smart_quotes" => "lsquo,rsquo,ldquo,rdquo",
+          "auto_ids" => false,
+          "footnote_nr" => 1,
 
-          'syntax_highlighter_opts' => {
-            'bold_every' => 8, 'css' => :class
+          "syntax_highlighter_opts" => {
+            "bold_every" => 8, "css" => "class"
           }
         }
       }
 
       @config = Jekyll.configuration(@config)
-      @markdown = Converters::Markdown.new(
-        @config
-      )
+      @markdown = Converters::Markdown.new(@config)
     end
 
     should "run Kramdown" do
@@ -32,7 +30,8 @@ class TestKramdown < JekyllUnitTest
 
     context "when asked to convert smart quotes" do
       should "convert" do
-        assert_match %r!<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>!, @markdown.convert(%{"Pit'hy"}).strip
+        assert_match %r!<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>!, \
+          @markdown.convert(%{"Pit'hy"}).strip
       end
 
       should "support custom types" do
@@ -55,29 +54,22 @@ class TestKramdown < JekyllUnitTest
         ~~~
       MARKDOWN
 
-      selector = "div.highlighter-rouge>pre.highlight>code"
-      refute result.css(selector).empty?
+      selector = ".highlighter-rouge pre.highlight code"
+      refute_empty result.css(selector)
     end
 
     context "when a custom highlighter is chosen" do
       should "use the chosen highlighter if it's available" do
-        override = { "markdown" => "kramdown", "kramdown" => { "syntax_highlighter" => :coderay }}
-        markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-        result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc <<-MARKDOWN))
-          ~~~ruby
-          puts "Hello World"
-          ~~~
-        MARKDOWN
+        override = {
+          "markdown" => "kramdown",
+          "kramdown" => {
+            "syntax_highlighter" => "coderay"
+          }
+        }
 
-
+        markdown  = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
+        result = nokogiri_fragment(markdown.convert("~~~ruby\nputs 'hello world'\n~~~"))
         selector = ".highlighter-coderay div.CodeRay div.code pre"
-        if result.css(selector).empty?
-          $stdout.puts "\n\n\n\n"
-          $stdout.puts result.to_s
-          $stdout.puts markdown.instance_variable_get(:@parser).config
-          $stdout.puts "\n\n\n\n"
-        end
-
         refute_empty result.css(selector)
       end
 
@@ -91,27 +83,14 @@ class TestKramdown < JekyllUnitTest
         }
 
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-        result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc <<-MARKDOWN))
-          ~~~ruby
-          puts "Hello World"
-          ~~~
-        MARKDOWN
-
+        result = nokogiri_fragment(markdown.convert("~~~ruby\nputs 'hello world'\n~~~"))
         selector = ".highlighter-coderay div.CodeRay div.code pre"
-        if result.css(selector).empty?
-          $stdout.puts "\n\n\n\n"
-          $stdout.puts result.to_s
-          $stdout.puts markdown.instance_variable_get(:@parser).config
-          $stdout.puts "\n\n\n\n"
-        end
-
         refute_empty result.css(selector)
       end
     end
 
     should "move coderay to syntax_highlighter_opts" do
-      original = Kramdown::Document.method(:new)
-      markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, {
+      override = {
         "markdown" => "kramdown",
         "kramdown" => {
           "syntax_highlighter" => "coderay",
@@ -119,13 +98,16 @@ class TestKramdown < JekyllUnitTest
             "hello" => "world"
           }
         }
-      }))
+      }
 
+      original = Kramdown::Document.method(:new)
+      markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
       expect(Kramdown::Document).to receive(:new) do |arg1, hash|
         assert_equal hash["syntax_highlighter_opts"]["hello"], "world"
         original.call(arg1, hash)
       end
 
+      # Trigger the test now.
       markdown.convert("hello world")
     end
   end
