@@ -65,7 +65,7 @@ module Jekyll
         def modernize_coderay_config
           if highlighter == "coderay"
             send_deprecation_message_if_using_old_opts
-            opts = CODERAY_DEFAULTS.merge(@config["syntax_highlighter_opts"]).merge(@coderay)
+            opts = CODERAY_DEFAULTS.merge(@config["syntax_highlighter_opts"]).merge(@config["coderay"])
             @config["syntax_highlighter_opts"] = strip_coderay_prefix(opts)
           end
         end
