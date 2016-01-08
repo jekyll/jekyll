@@ -69,8 +69,8 @@ class TestKramdown < JekyllUnitTest
           ~~~
         MARKDOWN
 
-        selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-        refute result.css(selector).empty?
+        selector = ".highlighter-coderay div.CodeRay div.code pre"
+        refute_empty result.css(selector)
       end
 
       should "support legacy enable_coderay... for now" do
@@ -89,8 +89,8 @@ class TestKramdown < JekyllUnitTest
           ~~~
         MARKDOWN
 
-        selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-        refute result.css(selector).empty?
+        selector = ".highlighter-coderay div.CodeRay div.code pre"
+        refute_empty result.css(selector)
       end
     end
 
