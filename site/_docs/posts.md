@@ -84,7 +84,7 @@ One common solution is to create a folder in the root of the project directory
 called something like `assets` or `downloads`, into which any images, downloads
 or other resources are placed. Then, from within any post, they can be linked
 to using the site’s root as the path for the asset to include. Again, this will
-depend on the way your site’s (sub)domain and path are configured, but here
+depend on the way your site’s (sub)domain and path are configured, but here are
 some examples (in Markdown) of how you could do this using the `site.url`
 variable in a post.
 
