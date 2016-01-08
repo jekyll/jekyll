@@ -74,7 +74,7 @@ class TestKramdown < JekyllUnitTest
         if result.css(selector).empty?
           $stdout.puts "\n\n\n\n"
           $stdout.puts result.to_s
-          $stdout.puts markdown.inspect
+          $stdout.puts markdown.instance_variable_get(:@parser).config
           $stdout.puts "\n\n\n\n"
         end
 
@@ -101,7 +101,7 @@ class TestKramdown < JekyllUnitTest
         if result.css(selector).empty?
           $stdout.puts "\n\n\n\n"
           $stdout.puts result.to_s
-          $stdout.puts markdown.inspect
+          $stdout.puts markdown.instance_variable_get(:@parser).config
           $stdout.puts "\n\n\n\n"
         end
 

@@ -5,19 +5,20 @@ module Jekyll
   module Converters
     class Markdown
       class KramdownParser
+        attr_accessor :config
         CODERAY_DEFAULTS = {
-          "css"               => "style",
-          "bold_every"        => 10,
-          "line_numbers"      => "inline",
+          "css" => "style",
+          "bold_every" => 10,
+          "line_numbers" => "inline",
           "line_number_start" => 1,
-          "tab_width"         => 4,
-          "wrap"              => "div"
+          "wrap" => "div",
+          "tab_width" => 4
         }
 
         def initialize(config)
           Jekyll::External.require_with_graceful_fail "kramdown"
           @main_fallback_highlighter = config["highlighter"] || "rogue"
-          @config = config["kramdown"] || {}
+          @config = Marshal.load(Marshal.dump(config["kramdown"] || {}))
           setup
         end
 
@@ -31,11 +32,14 @@ module Jekyll
           @config["syntax_highlighter"] ||= highlighter
           @config["syntax_highlighter_opts"] ||= {}
           @config["coderay"] ||= {} # XXX: Legacy.
+          @coderay = @config.delete("coderay")
           modernize_coderay_config
         end
 
+        #
+
         def convert(content)
-          Kramdown::Document.new(content, @config).to_html
+          Kramdown::Document.new(content, @config.dup).to_html
         end
 
         # config[kramdown][syntax_higlighter] > config[kramdown][enable_coderay] > config[highlighter]
@@ -45,21 +49,27 @@ module Jekyll
         private
         def highlighter
           @highlighter ||= begin
-            if highlighter = @config["syntax_highlighter"] then highlighter
-            elsif @config.key?("enable_coderay") && @config["enable_coderay"]
-              Jekyll::Deprecator.deprecation_message "You are using 'enable_coderay', use syntax_highlighter: coderay in your configuration file."
-              "coderay"
-            else
-              @main_fallback_highlighter
+            highlighter = @config["syntax_highlighter"]
+            return highlighter if highlighter
+
+            if @config.key?("enable_coderay") && @config["enable_coderay"]
+              Jekyll::Deprecator.deprecation_message "You are using 'enable_coderay', use "\
+                "syntax_highlighter: coderay in your configuration file."
+              return "coderay"
             end
+
+            @main_fallback_highlighter
           end
         end
+
+        #
 
         private
         def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
             cleaned_key = key.gsub(/\Acoderay_/, "")
-            Jekyll::Deprecator.deprecation_message "You are using '#{key}'. Normalizing to #{cleaned_key}." if key != cleaned_key
+            Jekyll::Deprecator.deprecation_message "Kramdown: You are using '#{key}'. " \
+              "Normalizing to #{cleaned_key}." if key != cleaned_key
             hsh[cleaned_key] = val
           end
         end
@@ -71,14 +81,24 @@ module Jekyll
         private
         def modernize_coderay_config
           if highlighter == "coderay"
-            Jekyll::Deprecator.deprecation_message "You are using 'kramdown.coderay' in your configuration, please use 'syntax_highlighter_opts' instead."
-            @config["syntax_highlighter_opts"] = begin
-              strip_coderay_prefix(
-                @config["syntax_highlighter_opts"] \
-                  .merge(CODERAY_DEFAULTS) \
-                  .merge(@config["coderay"])
-              )
-            end
+            send_deprecation_message_if_using_old_opts
+            @config["syntax_highlighter_opts"] = \
+              begin
+                strip_coderay_prefix(
+                  CODERAY_DEFAULTS \
+                    .merge(@config["syntax_highlighter_opts"]) \
+                    .merge(@coderay)
+                )
+              end
+          end
+        end
+
+        #
+
+        def send_deprecation_message_if_using_old_opts
+          unless @coderay.empty?
+            Jekyll::Deprecator.deprecation_message "You are using 'kramdown.coderay' in your configuration, "\
+              "please use 'syntax_highlighter_opts' instead."
           end
         end
       end
