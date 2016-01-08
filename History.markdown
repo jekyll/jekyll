@@ -45,6 +45,7 @@
   * markdown: refactor for greater readability & efficiency (#3771)
   * Fix many Rubocop style errors (#4301)
   * Fix spelling of "GitHub" in docs and history (#4322)
+  * Reorganize and cleanup the Gemfile, shorten required depends. (#4318)
 
 ### Site Enhancements
 
