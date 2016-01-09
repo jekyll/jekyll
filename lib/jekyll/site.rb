@@ -263,25 +263,21 @@ module Jekyll
     end
 
     # Get the implementation class for the given Converter.
-    #
-    # klass - The Class of the Converter to fetch.
-    #
     # Returns the Converter instance implementing the given Converter.
+    # klass - The Class of the Converter to fetch.
+
     def find_converter_instance(klass)
-      converters.find { |c| c.class == klass } || proc { raise "No converter for #{klass}" }.call
+      converters.find { |klass_| klass_.instance_of?(klass) } || \
+        raise("No Converters found for #{klass}")
     end
 
+    # klass - class or module containing the subclasses.
+    # Returns array of instances of subclasses of parameter.
     # Create array of instances of the subclasses of the class or module
-    #   passed in as argument.
-    #
-    # klass - class or module containing the subclasses which should be
-    #         instantiated
-    #
-    # Returns array of instances of subclasses of parameter
+    # passed in as argument.
+
     def instantiate_subclasses(klass)
-      klass.descendants.select do |c|
-        !safe || c.safe
-      end.sort.map do |c|
+      klass.descendants.select { |c| !safe || c.safe }.sort.map do |c|
         c.new(config)
       end
     end
