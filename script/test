@@ -16,26 +16,25 @@ fi
 # your source, we expect full coverage now, not just MRI.
 # -----------------------------------------------------------------------------
 
-if [[ "$1" == "ci" ]]
+if [ "$1" = "ci" ]
 then
   rubies=(
     ruby
   )
 
   shift
-elif [[ "$1" == "ruby" ]] || [[ "$1" == "jruby" ]]
-then
+elif [ "$1" == "ruby" ] || [ "$1" == "jruby" ]; then
   rubies=(
     $1
   )
 
   shift
+  
 else
   rubies=()
   for r in jruby ruby; do
     if which "$r"
-    then
-      rubies+=(
+      then rubies+=(
         $r
       )
     fi
@@ -43,11 +42,11 @@ else
 fi
 
 for ruby in $rubies; do
-  if [[ $# -lt 1 ]]
-  then
+  if [ $# -lt 1 ]; then
     set -x
     time $ruby -S bundle exec \
       rake TESTOPTS='--profile' test
+
    else
     set -x
     time $ruby -S bundle exec ruby -Itest \

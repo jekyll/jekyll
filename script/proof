@@ -1,34 +1,21 @@
-#!/usr/bin/env bash
-#
-# Usage:
-#   script/proof
-
+#!/bin/sh
 set -e
 
-function msg {
-	printf "\e[0;37m==> $1\e[0m\n"
+msg_and_run() {
+	printf "%s==> $1 %s\n" $(tput setaf 1) $(tput sgr0)
+	shift; "$@"
 }
 
-INGORE_HREFS=$(ruby -e 'puts %w{
-  Chrononaut
-  twitter.com
-  nearlyfreespeech.net
-  eduardoboucas.com
-}.map{|h| "/#{h}/"}.join(",")')
-SOURCE="site"
-DESTINATION="_site"
-
 export PROOF=true
+export DESTINATION="_site"
+export IGNORE_HREFS="/Chrononaut/,/twitter.com/,/nearlyfreespeech.net/,/eduardoboucas.com/"
 export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+export SOURCE="site"
 
-# 1.
-msg "Installing..."
-bundle install -j8 > /dev/null || bundle install > /dev/null
-
-# 2.
-msg "Building..."
-bundle exec jekyll build -s $SOURCE -d $DESTINATION --full-rebuild --trace
-
-# 3.
-msg "Proofing..."
-time bundle exec htmlproof ./$DESTINATION --href-ignore $INGORE_HREFS
+status=0
+msg_and_run "Installing..." bundle install -j8 --with site
+msg_and_run "Building..." bundle exec jekyll build -s "$SOURCE" -d "$DESTINATION" --trace
+msg_and_run "Proofing..." time bundle exec htmlproof "./$DESTINATION" --href-ignore="$INGORE_HREFS" || status=$?
+msg_and_run "Uninstalling..." bundle install -j8 --without site
+msg_and_run "Cleaning..." bundle clean
+exit $status
