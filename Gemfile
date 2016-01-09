@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 gemspec :name => :jekyll
 
-gem "rake", "~> 10.1"
+gem "rake", :require => false
 group :development do
   unless ENV["CI"]
     gem "pry", :require => false
