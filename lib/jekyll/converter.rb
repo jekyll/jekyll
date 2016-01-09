@@ -1,6 +1,6 @@
 module Jekyll
   class Converter < Plugin
-    extend  Forwardable
+    extend Forwardable
 
     #
 
