@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-time ruby -S bundle exec cucumber \
+time bundle exec cucumber \
   -f Features::Support::Overview \
       "$@"
