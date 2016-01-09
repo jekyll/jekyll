@@ -49,6 +49,7 @@ Lint/UselessAccessModifier:           { Enabled: false }
 Style/SpaceAroundOperators:           { Enabled: false }
 Style/RedundantReturn:                { Enabled: false }
 Style/SingleLineMethods:              { Enabled: false }
+Style/EmptyLineBetweenDefs:            { Enabled: false }
 
 AllCops:
   TargetRubyVersion: 2.0
