@@ -25,17 +25,21 @@ group :benchmark do
 end
 
 group :test do
-  gem "redgreen", "~> 1.2"
-  gem "shoulda", "~> 3.5"
-  gem "cucumber", "~> 2.1"
-  gem "simplecov", "~> 0.9"
+  gem "rspec-helpers"
   gem "jekyll_test_plugin"
+  gem "codeclimate-test-reporter"
+  gem "shoulda", "~> 3.5" # REMOVE
   gem "jekyll_test_plugin_malicious"
+  gem "simplecov", "~> 0.9" # REMOVE
+  gem "redgreen", "~> 1.2" # REMOVE
+  gem "luna-rspec-formatters"
+  gem "cucumber", "~> 2.1"
   gem "minitest-reporters"
   gem "minitest-profile"
   gem "rspec-mocks"
   gem "minitest"
   gem "nokogiri"
+  gem "rspec"
 
   if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
     gem "test-unit"
