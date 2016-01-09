@@ -1,20 +1,27 @@
 module Jekyll
   class Plugin
-    PRIORITIES = { :lowest => -100,
-                   :low => -10,
-                   :normal => 0,
-                   :high => 10,
-                   :highest => 100 }
+    PRIORITIES = {
+      :low => -10,
+      :highest => 100,
+      :lowest => -100,
+      :normal => 0,
+      :high => 10
+    }
 
-    # Fetch all the subclasses of this class and its subclasses' subclasses.
     #
-    # Returns an array of descendant classes.
-    def self.descendants
-      descendants = []
-      ObjectSpace.each_object(singleton_class) do |k|
-        descendants.unshift k unless k == self
+
+    def self.inherited(const)
+      const.define_singleton_method :inherited do |const_|
+        (@children ||= Set.new).merge [
+          const_
+        ]
       end
-      descendants
+    end
+
+    #
+
+    def self.descendants
+      @children || Set.new
     end
 
     # Get or set the priority of this plugin. When called without an
