@@ -29,7 +29,7 @@ elif [ "$1" == "ruby" ] || [ "$1" == "jruby" ]; then
   )
 
   shift
-  
+
 else
   rubies=()
   for r in jruby ruby; do
@@ -43,13 +43,11 @@ fi
 
 for ruby in $rubies; do
   if [ $# -lt 1 ]; then
-    set -x
     time $ruby -S bundle exec \
-      rake TESTOPTS='--profile' test
+      rake spec
 
    else
-    set -x
-    time $ruby -S bundle exec ruby -Itest \
-      "$@" --profile
+    time $ruby -S bundle exec \
+      rspec "$@"
   fi
 done
