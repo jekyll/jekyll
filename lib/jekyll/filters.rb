@@ -15,6 +15,17 @@ module Jekyll
       converter.convert(input)
     end
 
+    # Convert a Markdown string into HTML output.
+    #
+    # input - The Markdown String to convert.
+    #
+    # Returns the HTML formatted String.
+    def smartify(input)
+      site = @context.registers[:site]
+      converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
+      converter.convert(input)
+    end
+
     # Convert a Sass string into CSS output.
     #
     # input - The Sass String to convert.
