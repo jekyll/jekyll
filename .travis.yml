@@ -1,13 +1,11 @@
 bundler_args: --without doc:util:site:benchmark:development
-dist: trusty
 language: ruby
 cache: bundler
 sudo: false
 rvm:
-- 2.2.4
-- 2.1.8
-- 2.3.0
-- 2.0.0-p648
+- 2.2
+- 2.1
+- 2.0
 - ruby-head
 - jruby-9.0.3.0
 matrix:
