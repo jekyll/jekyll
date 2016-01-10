@@ -15,7 +15,7 @@ Kramdown comes with optional support for LaTeX to PNG rendering via [MathJax](ht
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 {% endhighlight %}
 
-For more information about getting started, check out [this excellent blog post](http://gastonsanchez.com/blog/opinion/2014/02/16/Mathjax-with-jekyll.html).
+For more information about getting started, check out [this excellent blog post](http://gastonsanchez.com/opinion/2014/02/16/Mathjax-with-jekyll/).
 
 ## Alternative Markdown Processors
 
