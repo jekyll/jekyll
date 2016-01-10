@@ -1,4 +1,5 @@
 bundler_args: --without doc:util:site:benchmark:development
+dist: trusty
 language: ruby
 cache: bundler
 sudo: false
