@@ -63,11 +63,12 @@ AllCops:
   - .rspec
 
   - Gemfile.lock
-  - CHANGELOG.md
-  - readme.md
-  - README.md
-  - Readme.md
-  - ReadMe.md
+  - CHANGELOG.{md,markdown,txt,textile}
+  - CONTRIBUTING.{md,markdown,txt,textile}
+  - readme.{md,markdown,txt,textile}
+  - README.{md,markdown,txt,textile}
+  - Readme.{md,markdown,txt,textile}
+  - ReadMe.{md,markdown,txt,textile}
   - COPYING
   - LICENSE
 
