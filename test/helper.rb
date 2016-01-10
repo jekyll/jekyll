@@ -2,11 +2,14 @@ def jruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end
 
-unless ENV['TRAVIS']
-  require File.expand_path('../simplecov_custom_profile', __FILE__)
-  SimpleCov.start('gem') do
-    add_filter "/vendor/bundle"
+if ENV["CI"]
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+else
+  require File.expand_path("../simplecov_custom_profile", __FILE__)
+  SimpleCov.start "gem" do
     add_filter "/vendor/gem"
+    add_filter "/vendor/bundle"
     add_filter ".bundle"
   end
 end

@@ -17,6 +17,7 @@ group :test do
   gem 'simplecov', '~> 0.9'
   gem 'jekyll_test_plugin'
   gem 'jekyll_test_plugin_malicious'
+  gem "codeclimate-test-reporter"
   gem 'minitest-reporters'
   gem 'minitest-profile'
   gem 'rspec-mocks'
