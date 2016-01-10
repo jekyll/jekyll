@@ -51,6 +51,7 @@
   * Remove script/rebund. (#4341)
   * Implement codeclimate platform (#4340)
   * Remove ObectSpace dumping and start using inherited, it's faster. (#4342)
+  * Add script/travis so all people can play with Travis-CI images. (#4338)
 
 ### Site Enhancements
 
