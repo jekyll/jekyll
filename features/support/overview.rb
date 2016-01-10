@@ -13,10 +13,11 @@ module Features
     # If the output is STDOUT (and not a file), there are bright colours to watch too.
     #
     class Overview
-      include FileUtils
-      include Cucumber::Formatter::Console
       include Cucumber::Formatter::Io
-      attr_writer :indent
+      include Cucumber::Formatter::Console
+      include FileUtils
+
+      attr_writer  :indent
       attr_reader :runtime
 
       def initialize(runtime, path_or_io, options)

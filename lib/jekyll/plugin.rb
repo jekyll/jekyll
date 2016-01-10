@@ -1,77 +1,77 @@
 module Jekyll
   class Plugin
-    PRIORITIES = { :lowest => -100,
-                   :low => -10,
-                   :normal => 0,
-                   :high => 10,
-                   :highest => 100 }
+    PRIORITIES = {
+      :low => -10,
+      :highest => 100,
+      :lowest => -100,
+      :normal => 0,
+      :high => 10
+    }
 
-    # Fetch all the subclasses of this class and its subclasses' subclasses.
     #
-    # Returns an array of descendant classes.
-    def self.descendants
-      descendants = []
-      ObjectSpace.each_object(singleton_class) do |k|
-        descendants.unshift k unless k == self
+
+    def self.inherited(const)
+      const.define_singleton_method :inherited do |const_|
+        (@children ||= Set.new).merge [
+          const_
+        ]
       end
-      descendants
     end
 
+    #
+
+    def self.descendants
+      @children || Set.new
+    end
+
+    # Returns the Symbol priority.
     # Get or set the priority of this plugin. When called without an
     # argument it returns the priority. When an argument is given, it will
     # set the priority.
     #
     # priority - The Symbol priority (default: nil). Valid options are:
-    #            :lowest, :low, :normal, :high, :highest
-    #
-    # Returns the Symbol priority.
+    #   :lowest, :low, :normal, :high, :highest
+
     def self.priority(priority = nil)
       @priority ||= nil
-      if priority && PRIORITIES.key?(priority)
-        @priority = priority
-      end
+      @priority = priority if priority && PRIORITIES.key?(priority)
       @priority || :normal
     end
 
     # Get or set the safety of this plugin. When called without an argument
-    # it returns the safety. When an argument is given, it will set the
-    # safety.
-    #
+    # it returns the safety. When an argument is given, it will set the safety.
     # safe - The Boolean safety (default: nil).
-    #
     # Returns the safety Boolean.
+
     def self.safe(safe = nil)
-      if safe
-        @safe = safe
-      end
+      @safe = safe if safe
       @safe || false
     end
 
     # Spaceship is priority [higher -> lower]
-    #
     # other - The class to be compared.
-    #
     # Returns -1, 0, 1.
+
     def self.<=>(other)
-      PRIORITIES[other.priority] <=> PRIORITIES[self.priority]
+      PRIORITIES[other.priority] <=> PRIORITIES[priority]
+    end
+
+    #
+
+    # config - The Hash of configuration options.
+    # Initialize a new plugin. This should be overridden by the subclass.
+    # Returns a new instance.
+
+    def initialize(config = {})
+      #
     end
 
     # Spaceship is priority [higher -> lower]
-    #
     # other - The class to be compared.
-    #
     # Returns -1, 0, 1.
+
     def <=>(other)
       self.class <=> other.class
-    end
-
-    # Initialize a new plugin. This should be overridden by the subclass.
-    #
-    # config - The Hash of configuration options.
-    #
-    # Returns a new instance.
-    def initialize(config = {})
-      # no-op for default
     end
   end
 end
