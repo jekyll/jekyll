@@ -89,7 +89,7 @@ module Jekyll
     #
     # Returns the output extension
     def output_ext
-      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
+      Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The base filename of the document, without the file extname.
