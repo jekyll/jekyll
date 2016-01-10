@@ -18,6 +18,7 @@
   * drops: create one base Drop class which can be set as mutable or not (#4285)
   * drops: provide `#to_h` to allow for hash introspection (#4281)
   * Shim subcommands with indication of gem possibly required so users know how to use them (#4254)
+  * Add smartify Liquid filter for SmartyPants (#4323)
 
 ### Bug Fixes
 
