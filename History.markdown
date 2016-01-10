@@ -49,6 +49,7 @@
   * Fix spelling of "GitHub" in docs and history (#4322)
   * Reorganize and cleanup the Gemfile, shorten required depends. (#4318)
   * Remove script/rebund. (#4341)
+  * Implement codeclimate platform (#4340)
 
 ### Site Enhancements
 
