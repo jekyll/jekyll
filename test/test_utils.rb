@@ -276,5 +276,4 @@ class TestUtils < JekyllUnitTest
       refute Utils.has_yaml_header?(file)
     end
   end
-
 end

@@ -55,6 +55,15 @@ class TestPage < JekyllUnitTest
         assert_equal ".html", @page.ext
       end
 
+      should "deal properly with non-html extensions" do
+        @page = setup_page('dynamic_page.php')
+        @dest_file = dest_dir("dynamic_page.php")
+        assert_equal ".php", @page.ext
+        assert_equal "dynamic_page", @page.basename
+        assert_equal "/dynamic_page.php", @page.url
+        assert_equal @dest_file, @page.destination(dest_dir)
+      end
+
       should "deal properly with dots" do
         @page = setup_page('deal.with.dots.html')
         @dest_file = dest_dir("deal.with.dots.html")

@@ -174,6 +174,7 @@ class TestSite < JekyllUnitTest
         coffeescript.coffee
         contacts.html
         deal.with.dots.html
+        dynamic_file.php
         environment.html
         exploit.md
         foo.md
