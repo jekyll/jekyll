@@ -17,6 +17,7 @@ exclude_paths:
 - COPYING
 - LICENSE
 
+- site/**/*
 - test/**/*
 - vendor/**/*
 - features/**/*

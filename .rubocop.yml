@@ -53,26 +53,27 @@ Style/SingleLineMethods:              { Enabled: false }
 AllCops:
   TargetRubyVersion: 2.0
   Include:
-    - lib/**/*.rb
+  - lib/**/*.rb
 
   Exclude:
-    - .rubocop.yml
-    - .codeclimate.yml
-    - .travis.yml
-    - .gitignore
-    - .rspec
+  - .rubocop.yml
+  - .codeclimate.yml
+  - .travis.yml
+  - .gitignore
+  - .rspec
 
-    - Gemfile.lock
-    - CHANGELOG.md
-    - readme.md
-    - README.md
-    - Readme.md
-    - ReadMe.md
-    - COPYING
-    - LICENSE
+  - Gemfile.lock
+  - CHANGELOG.md
+  - readme.md
+  - README.md
+  - Readme.md
+  - ReadMe.md
+  - COPYING
+  - LICENSE
 
-    - test/**/*
-    - vendor/**/*
-    - features/**/*
-    - script/**/*
-    - spec/**/*
+  - site/**/*
+  - test/**/*
+  - vendor/**/*
+  - features/**/*
+  - script/**/*
+  - spec/**/*
