@@ -80,7 +80,10 @@ module Jekyll
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
     def generate_url_from_drop(template)
@@ -95,6 +98,9 @@ module Jekyll
     end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> jekyll/master
+=======
 >>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master

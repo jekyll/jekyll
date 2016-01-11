@@ -16,6 +16,7 @@ class TestGeneratedSite < JekyllUnitTest
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       assert_equal 48, @site.posts.size
 =======
       assert_equal 37, @site.posts.size
@@ -23,6 +24,9 @@ class TestGeneratedSite < JekyllUnitTest
 =======
       assert_equal 37, @site.posts.size
 >>>>>>> origin/v1-stable
+=======
+      assert_equal 49, @site.posts.size
+>>>>>>> jekyll/master
 =======
       assert_equal 49, @site.posts.size
 >>>>>>> jekyll/master

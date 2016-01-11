@@ -1049,9 +1049,13 @@
 ### Bug Fixes
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> jekyll/v1-stable
+=======
+
+>>>>>>> jekyll/master
 =======
 
 >>>>>>> jekyll/master
@@ -1067,6 +1071,7 @@
 
 ### Bug Fixes
 
+<<<<<<< HEAD
   * Don't allow nil entries when loading posts (#1796)
 
 ## 1.5.1 / 2014-03-27
@@ -1107,6 +1112,8 @@
 
 ### Bug Fixes
 
+=======
+>>>>>>> jekyll/master
   * Don't allow nil entries when loading posts (#1796)
 
 ## 1.4.0 / 2013-12-07
@@ -1428,6 +1435,7 @@
   * Add 'Working with drafts' page to docs (#1289)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   * Add information about time zones to the documentation for a page's
     date (#1304)
 =======
@@ -1435,6 +1443,9 @@
 ### Bug Fixes
   * Require Liquid 2.5.1 (#1349)
 >>>>>>> origin/1.0-branch
+=======
+  * Add information about time zones to the documentation for a page's date (#1304)
+>>>>>>> jekyll/master
 =======
   * Add information about time zones to the documentation for a page's date (#1304)
 >>>>>>> jekyll/master

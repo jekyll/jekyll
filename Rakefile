@@ -132,6 +132,7 @@ task :console do
 end
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #############################################################################
 #
@@ -371,6 +372,8 @@ task :analysis do
 
   file.close
 end
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
 =======
