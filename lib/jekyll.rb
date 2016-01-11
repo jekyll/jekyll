@@ -96,7 +96,10 @@ module Jekyll
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
 =======
@@ -346,6 +349,7 @@ module Jekyll
     Jekyll::External.require_if_present('liquid-c')
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   end
 
   # Get a subpath without any of the traversal nonsense.
@@ -372,6 +376,8 @@ module Jekyll
     else
       clean_path
     end
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
 =======

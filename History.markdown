@@ -1050,9 +1050,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> jekyll/v1-stable
+=======
+
+>>>>>>> jekyll/master
 =======
 
 >>>>>>> jekyll/master
@@ -1071,6 +1075,7 @@
 
 ### Bug Fixes
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   * Don't allow nil entries when loading posts (#1796)
 
@@ -1112,6 +1117,8 @@
 
 ### Bug Fixes
 
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
   * Don't allow nil entries when loading posts (#1796)
@@ -1436,6 +1443,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   * Add information about time zones to the documentation for a page's
     date (#1304)
 =======
@@ -1443,6 +1451,9 @@
 ### Bug Fixes
   * Require Liquid 2.5.1 (#1349)
 >>>>>>> origin/1.0-branch
+=======
+  * Add information about time zones to the documentation for a page's date (#1304)
+>>>>>>> jekyll/master
 =======
   * Add information about time zones to the documentation for a page's date (#1304)
 >>>>>>> jekyll/master

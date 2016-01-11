@@ -81,7 +81,10 @@ module Jekyll
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
 =======
@@ -99,6 +102,9 @@ module Jekyll
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> jekyll/master
+=======
 >>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master

@@ -209,6 +209,7 @@ module Jekyll
         end
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       # Strip according to the mode
       slug = string.gsub(re, '-')
@@ -216,6 +217,15 @@ module Jekyll
       # Remove leading/trailing hyphen
       slug.gsub!(/^\-|\-$/i, '')
 
+=======
+
+      # Strip according to the mode
+      slug = string.gsub(re, '-')
+
+      # Remove leading/trailing hyphen
+      slug.gsub!(/^\-|\-$/i, '')
+
+>>>>>>> jekyll/master
 =======
 
       # Strip according to the mode
