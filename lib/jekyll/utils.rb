@@ -207,6 +207,7 @@ module Jekyll
           # and is allowed in both extN and NTFS.
           SLUGIFY_PRETTY_REGEXP
         end
+<<<<<<< HEAD
 
       # Strip according to the mode
       slug = string.gsub(re, '-')
@@ -214,6 +215,15 @@ module Jekyll
       # Remove leading/trailing hyphen
       slug.gsub!(/^\-|\-$/i, '')
 
+=======
+
+      # Strip according to the mode
+      slug = string.gsub(re, '-')
+
+      # Remove leading/trailing hyphen
+      slug.gsub!(/^\-|\-$/i, '')
+
+>>>>>>> jekyll/master
       slug.downcase! unless cased
       slug
     end

@@ -79,7 +79,10 @@ module Jekyll
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> jekyll/master
     def generate_url_from_drop(template)
       template.gsub(/:([a-z_]+)/.freeze) do |match|
         replacement = @placeholders.public_send(match.sub(':'.freeze, ''.freeze))
@@ -91,6 +94,9 @@ module Jekyll
       end.gsub(/\/\//.freeze, '/'.freeze)
     end
 
+<<<<<<< HEAD
+>>>>>>> jekyll/master
+=======
 >>>>>>> jekyll/master
     # Returns a sanitized String URL, stripping "../../" and multiples of "/",
     # as well as the beginning "/" so we can enforce and ensure it.

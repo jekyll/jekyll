@@ -1048,19 +1048,25 @@
 
 ### Bug Fixes
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> jekyll/v1-stable
+=======
+
+>>>>>>> jekyll/master
   * Patch show-stopping security vulnerabilities (#1944)
 
 ## 1.4.2 / 2013-12-16
 
 ### Bug Fixes
+
   * Turn on Maruku fenced code blocks by default (#1830)
 
 ## 1.4.1 / 2013-12-09
 
 ### Bug Fixes
+
   * Don't allow nil entries when loading posts (#1796)
 
 ## 1.5.1 / 2014-03-27
@@ -1421,6 +1427,7 @@
   * Add suggestion for Xcode CLT install to troubleshooting page in docs (#1296)
   * Add 'Working with drafts' page to docs (#1289)
 <<<<<<< HEAD
+<<<<<<< HEAD
   * Add information about time zones to the documentation for a page's
     date (#1304)
 =======
@@ -1428,6 +1435,9 @@
 ### Bug Fixes
   * Require Liquid 2.5.1 (#1349)
 >>>>>>> origin/1.0-branch
+=======
+  * Add information about time zones to the documentation for a page's date (#1304)
+>>>>>>> jekyll/master
 =======
   * Add information about time zones to the documentation for a page's date (#1304)
 >>>>>>> jekyll/master

@@ -131,6 +131,7 @@ task :console do
   sh "irb -rubygems -r ./lib/#{name}.rb"
 end
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #############################################################################
 #
@@ -370,5 +371,7 @@ task :analysis do
 
   file.close
 end
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
