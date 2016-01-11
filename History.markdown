@@ -77,6 +77,7 @@
   * Fix grammar in the documentation for posts. (#4330)
   * Add documentation for smartify Liquid filter (#4333)
   * Fixed broken link to blog on using mathjax with jekyll (#4344)
+  * Fixed broken link to blog on using mathjax with jekyll (#4344)
 
 ## 3.0.1 / 2015-11-17
 
