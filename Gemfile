@@ -11,6 +11,7 @@ group :development do
 end
 
 group :test do
+  gem 'rspec-expectations'
   gem 'redgreen', '~> 1.2'
   gem 'shoulda', '~> 3.5'
   gem 'cucumber', '~> 2.1'
