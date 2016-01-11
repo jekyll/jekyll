@@ -45,7 +45,7 @@ end
 
 gem 'jekyll-paginate', '~> 1.0'
 gem 'jekyll-coffeescript', '~> 1.0'
-gem 'jekyll-feed', '~> 0.1.3'
+gem 'jekyll-feed', '~> 0.4.0'
 gem 'jekyll-redirect-from', '~> 0.9.1'
 gem 'jekyll-gist', '~> 1.0'
 gem 'mime-types', '~> 3.0'
