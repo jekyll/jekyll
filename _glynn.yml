@@ -1,0 +1,13 @@
+markdown: rdiscount
+pygments: true
+auto: true
+
+ftp_host: 'dmathieu.com'
+ftp_dir: '/web/site/root'
+ftp_passive: false
+
+# optional
+ftp_port: 21                  # default 21
+ftp_username: 'princeofdarkness76'     # default read from stdin
+ftp_password: 'White$exualDarkne55' # default read from stdin
+ftp_secure: true              # default false
