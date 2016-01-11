@@ -1118,6 +1118,9 @@
 ### Bug Fixes
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
 =======
@@ -1448,6 +1451,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   * Add information about time zones to the documentation for a page's
     date (#1304)
 =======
@@ -1455,6 +1459,9 @@
 ### Bug Fixes
   * Require Liquid 2.5.1 (#1349)
 >>>>>>> origin/1.0-branch
+=======
+  * Add information about time zones to the documentation for a page's date (#1304)
+>>>>>>> jekyll/master
 =======
   * Add information about time zones to the documentation for a page's date (#1304)
 >>>>>>> jekyll/master

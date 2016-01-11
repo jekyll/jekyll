@@ -149,6 +149,7 @@ module Jekyll
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       path <<  output_ext unless path.end_with?(output_ext)
 =======
       path = Jekyll.sanitized_path(dest, url)
@@ -158,6 +159,9 @@ module Jekyll
       path = Jekyll.sanitized_path(dest, url)
       path = File.join(path, "index.html") if url =~ /\/$/
 >>>>>>> origin/v1-stable
+=======
+      path << output_ext unless path.end_with? output_ext
+>>>>>>> jekyll/master
 =======
       path << output_ext unless path.end_with? output_ext
 >>>>>>> jekyll/master

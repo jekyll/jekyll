@@ -149,6 +149,7 @@ module Jekyll
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         config_file = config_file_with_flexible_extname('_config', override)
         env_filename = config_file_with_flexible_extname(env_config_file_basename, override)
         if File.exist? env_filename
@@ -156,6 +157,8 @@ module Jekyll
         else
           config_files = [config_file]
 =======
+=======
+>>>>>>> jekyll/master
 =======
 >>>>>>> jekyll/master
 =======
