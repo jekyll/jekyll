@@ -31,6 +31,34 @@ class TestFilters < JekyllUnitTest
       assert_equal "<p>something <strong>really</strong> simple</p>\n", @filter.markdownify("something **really** simple")
     end
 
+    context "smartify filter" do
+      should "convert quotes and typographic characters" do
+        assert_equal "SmartyPants is *not* Markdown", @filter.smartify("SmartyPants is *not* Markdown")
+        assert_equal "“This filter’s test…”", @filter.smartify(%q{"This filter's test..."})
+      end
+
+      should "escapes special characters when configured to do so" do
+        kramdown = JekyllFilter.new({:kramdown => {:entity_output => :symbolic}})
+        assert_equal "&ldquo;This filter&rsquo;s test&hellip;&rdquo;", kramdown.smartify(%q{"This filter's test..."})
+      end
+
+      should "convert HTML entities to unicode characters" do
+        assert_equal "’", @filter.smartify("&rsquo;")
+        assert_equal "“", @filter.smartify("&ldquo;")
+      end
+
+      should "allow raw HTML passthrough" do
+        assert_equal "Span HTML is <em>not</em> escaped", @filter.smartify("Span HTML is <em>not</em> escaped")
+        assert_equal "<div>Block HTML is not escaped</div>", @filter.smartify("<div>Block HTML is not escaped</div>")
+      end
+
+      should "escape special characters" do
+        assert_equal "3 &lt; 4", @filter.smartify("3 < 4")
+        assert_equal "5 &gt; 4", @filter.smartify("5 > 4")
+        assert_equal "This &amp; that", @filter.smartify("This & that")
+      end
+    end
+
     should "sassify with simple string" do
       assert_equal "p {\n  color: #123456; }\n", @filter.sassify("$blue:#123456\np\n  color: $blue")
     end
@@ -257,7 +285,7 @@ class TestFilters < JekyllUnitTest
             assert_equal 2, g["items"].size
           when ""
             assert g["items"].is_a?(Array), "The list of grouped items for '' is not an Array."
-            assert_equal 11, g["items"].size
+            assert_equal 12, g["items"].size
           end
         end
       end

@@ -87,3 +87,14 @@ might look like:
 
 This approach may not suit everyone, but for people who like clean URLs it’s
 simple and it works. In the end the decision is yours!
+
+<div class="note">
+  <h5>ProTip™: Use permalink Front Matter Variable</h5>
+  <p>
+    Clean URLs can also be achieved using the <code>permalink</code> front
+    matter variable. In the example above, using the first method, you can
+    get URL <code>http://example.com/other</code> for the file
+    <code>other.md</code> by setting this at the top of the file:
+    <code>permalink: /other</code>
+  </p>
+</div>

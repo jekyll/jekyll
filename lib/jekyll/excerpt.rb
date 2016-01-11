@@ -1,5 +1,3 @@
-require 'forwardable'
-
 module Jekyll
   class Excerpt
     extend Forwardable

@@ -13,7 +13,7 @@ Feature: Collections
     And the "_site/methods/configuration.html" file should not exist
 
   Scenario: Rendered collection
-    Given I have an "index.html" page that contains "Collections: {{ site.collections }}"
+    Given I have an "index.html" page that contains "Collections: output => {{ site.collections[0].output }} label => {{ site.collections[0].label }}"
     And I have an "collection_metadata.html" page that contains "Methods metadata: {{ site.collections[0].foo }} {{ site.collections[0] }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
@@ -25,8 +25,8 @@ Feature: Collections
     """
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Collections: {\"output\"=>true" in "_site/index.html"
-    And I should see "\"label\"=>\"methods\"," in "_site/index.html"
+    And I should see "Collections: output => true" in "_site/index.html"
+    And I should see "label => methods" in "_site/index.html"
     And I should see "Methods metadata: bar" in "_site/collection_metadata.html"
     And I should see "<p>Whatever: foo.bar</p>" in "_site/methods/configuration.html"
 
@@ -45,7 +45,7 @@ Feature: Collections
     And I should see "<p>Whatever: foo.bar</p>" in "_site/methods/configuration/index.html"
 
   Scenario: Rendered document in a layout
-    Given I have an "index.html" page that contains "Collections: {{ site.collections }}"
+    Given I have an "index.html" page that contains "Collections: output => {{ site.collections[0].output }} label => {{ site.collections[0].label }} foo => {{ site.collections[0].foo }}"
     And I have a default layout that contains "<div class='title'>Tom Preston-Werner</div> {{content}}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
@@ -57,8 +57,9 @@ Feature: Collections
     """
     When I run jekyll build
     Then the _site directory should exist
-    And I should see "Collections: {\"output\"=>true" in "_site/index.html"
-    And I should see "\"label\"=>\"methods\"," in "_site/index.html"
+    And I should see "Collections: output => true" in "_site/index.html"
+    And I should see "label => methods" in "_site/index.html"
+    And I should see "foo => bar" in "_site/index.html"
     And I should see "<p>Run your generators! default</p>" in "_site/methods/site/generate.html"
     And I should see "<div class='title'>Tom Preston-Werner</div>" in "_site/methods/site/generate.html"
 

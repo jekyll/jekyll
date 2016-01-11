@@ -151,14 +151,14 @@ end
 When /^I run jekyll(.*)$/ do |args|
   status = run_jekyll(args)
   if args.include?("--verbose") || ENV['DEBUG']
-    puts jekyll_run_output
+    $stderr.puts "\n#{jekyll_run_output}\n"
   end
 end
 
 When /^I run bundle(.*)$/ do |args|
   status = run_bundle(args)
   if args.include?("--verbose") || ENV['DEBUG']
-    puts jekyll_run_output
+    $stderr.puts "\n#{jekyll_run_output}\n"
   end
 end
 

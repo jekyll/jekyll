@@ -21,8 +21,8 @@ module Jekyll
     def initialize(config)
       @config = config.clone
 
-      %w[safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems].each do |opt|
+      %w(safe lsi highlighter baseurl exclude include future unpublished
+        show_drafts limit_posts keep_files gems).each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -275,7 +275,7 @@ module Jekyll
 
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
-      collections.each do |label, collection|
+      collections.each do |_, collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run
@@ -306,9 +306,9 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file { |item|
+      each_site_file do |item|
         item.write(dest) if regenerator.regenerate?(item)
-      }
+      end
       regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self
     end
@@ -369,47 +369,25 @@ module Jekyll
     #   "tags"       - The Hash of tag values and Posts.
     #                  See Site#post_attr_hash for type info.
     def site_payload
-      {
-        "jekyll" => {
-          "version" => Jekyll::VERSION,
-          "environment" => Jekyll.env
-        },
-        "site"   => Utils.deep_merge_hashes(config,
-          Utils.deep_merge_hashes(Hash[collections.map{|label, coll| [label, coll.docs]}], {
-            "time"         => time,
-            "posts"        => posts.docs.sort { |a, b| b <=> a },
-            "pages"        => pages,
-            "static_files" => static_files,
-            "html_pages"   => pages.select { |page| page.html? || page.url.end_with?("/") },
-            "categories"   => post_attr_hash('categories'),
-            "tags"         => post_attr_hash('tags'),
-            "collections"  => collections.values.map(&:to_liquid),
-            "documents"    => documents,
-            "data"         => site_data
-        }))
-      }
+      Drops::UnifiedPayloadDrop.new self
     end
 
     # Get the implementation class for the given Converter.
-    #
-    # klass - The Class of the Converter to fetch.
-    #
     # Returns the Converter instance implementing the given Converter.
+    # klass - The Class of the Converter to fetch.
+
     def find_converter_instance(klass)
-      converters.find { |c| c.class == klass } || proc { raise "No converter for #{klass}" }.call
+      converters.find { |klass_| klass_.instance_of?(klass) } || \
+        raise("No Converters found for #{klass}")
     end
 
+    # klass - class or module containing the subclasses.
+    # Returns array of instances of subclasses of parameter.
     # Create array of instances of the subclasses of the class or module
-    #   passed in as argument.
-    #
-    # klass - class or module containing the subclasses which should be
-    #         instantiated
-    #
-    # Returns array of instances of subclasses of parameter
+    # passed in as argument.
+
     def instantiate_subclasses(klass)
-      klass.descendants.select do |c|
-        !safe || c.safe
-      end.sort.map do |c|
+      klass.descendants.select { |c| !safe || c.safe }.sort.map do |c|
         c.new(config)
       end
     end
@@ -420,10 +398,10 @@ module Jekyll
     # Returns
     def relative_permalinks_are_deprecated
       if config['relative_permalinks']
-        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" +
-                                " in subfolders must be relative to the" +
-                                " site source directory, not the parent" +
-                                " directory. Check http://jekyllrb.com/docs/upgrading/"+
+        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
+                                " in subfolders must be relative to the" \
+                                " site source directory, not the parent" \
+                                " directory. Check http://jekyllrb.com/docs/upgrading/"\
                                 " for more info."
       end
     end

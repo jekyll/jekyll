@@ -47,9 +47,7 @@ class TestDocument < JekyllUnitTest
     context "with YAML ending in three dots" do
 
       setup do
-        @site = fixture_site({
-          "collections" => ["methods"],
-        })
+        @site = fixture_site({"collections" => ["methods"]})
         @site.process
         @document = @site.collections["methods"].docs.last
       end
@@ -195,6 +193,7 @@ class TestDocument < JekyllUnitTest
             "permalink" => "/slides/test/:name"
           }
         },
+        "permalink" => "pretty"
       })
       @site.process
       @document = @site.collections["slides"].docs[0]
@@ -245,12 +244,35 @@ class TestDocument < JekyllUnitTest
       })
       @site.permalink_style = :pretty
       @site.process
-      @document = @site.collections["slides"].docs[6]
+      @document = @site.collections["slides"].docs[7]
       @dest_file = dest_dir("slides/example-slide-Upper-Cased/index.html")
     end
 
     should "produce the right cased URL" do
       assert_equal "/slides/example-slide-Upper-Cased/", @document.url
+    end
+  end
+
+  context "a document in a collection with cased file name" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "slides" => {
+            "output" => true
+          }
+        }
+      })
+      @site.process
+      @document = @site.collections["slides"].docs[6]
+      @dest_file = dest_dir("slides/example-slide-7.php")
+    end
+
+    should "produce the permalink as the url" do
+      assert_equal "/slides/example-slide-7.php", @document.url
+    end
+
+    should "be written to the proper directory" do
+      assert_equal @dest_file, @document.destination(dest_dir)
     end
   end
 
@@ -273,6 +295,7 @@ class TestDocument < JekyllUnitTest
     should "produce the right URL if they have a slug" do
       assert_equal "/slides/so-what-is-jekyll-exactly", @document.url
     end
+
     should "produce the right destination file if they have a slug" do
       dest_file = dest_dir("slides/so-what-is-jekyll-exactly.html")
       assert_equal dest_file, @document.destination(dest_dir)

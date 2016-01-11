@@ -206,7 +206,7 @@ for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
 
 ## Kickster
 
-Use [Kickster](http://kickster.nielsenramon.com/) for easy (automated) deploys to Github Pages when using unsupported plugins on Github Pages.
+Use [Kickster](http://kickster.nielsenramon.com/) for easy (automated) deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
 
 Kickster provides a basic Jekyll project setup packed with web best practises and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
 

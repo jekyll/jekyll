@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
@@ -16,6 +16,7 @@ end
 require 'rubygems'
 
 # stdlib
+require 'forwardable'
 require 'fileutils'
 require 'time'
 require 'English'
@@ -92,7 +93,10 @@ module Jekyll
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> jekyll/master
   # internal requires
   autoload :Cleaner,             'jekyll/cleaner'
   autoload :Collection,          'jekyll/collection'
@@ -155,7 +159,7 @@ module Jekyll
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
-    def configuration(override = Hash.new)
+    def configuration(override = {})
       config = Configuration[Configuration::DEFAULTS]
       override = Configuration[override].stringify_keys
       unless override.delete('skip_config_files')
@@ -325,16 +329,15 @@ module Jekyll
       clean_path = File.expand_path(questionable_path, "/")
       clean_path = clean_path.sub(/\A\w\:\//, '/')
 
-      unless clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
-        File.join(base_directory, clean_path)
-      else
+      if clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
         clean_path
+      else
+        File.join(base_directory, clean_path)
       end
     end
 
     # Conditional optimizations
     Jekyll::External.require_if_present('liquid-c')
-
   end
 
   # Get a subpath without any of the traversal nonsense.
@@ -364,9 +367,11 @@ module Jekyll
   end
 end
 
+require "jekyll/drops/drop"
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/converters/markdown'
+require_all 'jekyll/drops'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 

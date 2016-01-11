@@ -7,6 +7,8 @@ require 'yaml'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
 require 'jekyll/version'
 
+Dir.glob('rake/**.rake').each { |f| import f }
+
 #############################################################################
 #
 # Helper functions
@@ -128,6 +130,7 @@ desc "Open an irb session preloaded with this library"
 task :console do
   sh "irb -rubygems -r ./lib/#{name}.rb"
 end
+<<<<<<< HEAD
 
 #############################################################################
 #
@@ -367,3 +370,5 @@ task :analysis do
 
   file.close
 end
+=======
+>>>>>>> jekyll/master

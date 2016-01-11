@@ -2,7 +2,6 @@ module Jekyll
   module Commands
     class Doctor < Command
       class << self
-
         def init_with_program(prog)
           prog.command(:doctor) do |c|
             c.syntax 'doctor'
@@ -11,7 +10,7 @@ module Jekyll
 
             c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
 
-            c.action do |args, options|
+            c.action do |_, options|
               Jekyll::Commands::Doctor.process(options)
             end
           end
@@ -39,8 +38,8 @@ module Jekyll
 
         def deprecated_relative_permalinks(site)
           if site.config['relative_permalinks']
-            Jekyll::Deprecator.deprecation_message "Your site still uses relative" +
-                                " permalinks, which was removed in" +
+            Jekyll::Deprecator.deprecation_message "Your site still uses relative" \
+                                " permalinks, which was removed in" \
                                 " Jekyll v3.0.0."
             return true
           end
@@ -52,17 +51,16 @@ module Jekyll
           urls = collect_urls(urls, site.pages, site.dest)
           urls = collect_urls(urls, site.posts.docs, site.dest)
           urls.each do |url, paths|
-            if paths.size > 1
-              conflicting_urls = true
-              Jekyll.logger.warn "Conflict:", "The URL '#{url}' is the destination" +
-                " for the following pages: #{paths.join(", ")}"
-            end
+            next unless paths.size > 1
+            conflicting_urls = true
+            Jekyll.logger.warn "Conflict:", "The URL '#{url}' is the destination" \
+              " for the following pages: #{paths.join(", ")}"
           end
           conflicting_urls
         end
 
-        def fsnotify_buggy?(site)
-          return true if !Utils::Platforms.osx?
+        def fsnotify_buggy?(_site)
+          return true unless Utils::Platforms.osx?
           if Dir.pwd != `pwd`.strip
             Jekyll.logger.error "  " + <<-STR.strip.gsub(/\n\s+/, "\n  ")
               We have detected that there might be trouble using fsevent on your
@@ -81,12 +79,11 @@ module Jekyll
           urls_only_differ_by_case = false
           urls = case_insensitive_urls(site.pages + site.docs_to_write, site.dest)
           urls.each do |case_insensitive_url, real_urls|
-            if real_urls.uniq.size > 1
-              urls_only_differ_by_case = true
-              Jekyll.logger.warn "Warning:", "The following URLs only differ" +
-                " by case. On a case-insensitive file system one of the URLs" +
-                " will be overwritten by the other: #{real_urls.join(", ")}"
-            end
+            next unless real_urls.uniq.size > 1
+            urls_only_differ_by_case = true
+            Jekyll.logger.warn "Warning:", "The following URLs only differ" \
+              " by case. On a case-insensitive file system one of the URLs" \
+              " will be overwritten by the other: #{real_urls.join(", ")}"
           end
           urls_only_differ_by_case
         end
@@ -105,14 +102,13 @@ module Jekyll
         end
 
         def case_insensitive_urls(things, destination)
-          things.inject(Hash.new) do |memo, thing|
+          things.inject({}) do |memo, thing|
             dest = thing.destination(destination)
             (memo[dest.downcase] ||= []) << dest
             memo
           end
         end
       end
-
     end
   end
 end

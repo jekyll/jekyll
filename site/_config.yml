@@ -14,6 +14,8 @@ google_analytics_id: UA-50755011-1
 repository: https://github.com/jekyll/jekyll
 help_url: https://github.com/jekyll/jekyll-help
 
+timezone: America/Los_Angeles
+
 collections:
   docs:
     output: true
@@ -24,3 +26,4 @@ url: http://jekyllrb.com
 
 gems:
   - jekyll-feed
+  - jekyll-redirect-from

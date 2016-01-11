@@ -120,7 +120,7 @@ module Jekyll
           WEBrick::Config::FileHandler.merge({
             :FancyIndexing     => true,
             :NondisclosureName => [
-              '.ht*','~*'
+              '.ht*', '~*'
             ]
           })
         end
@@ -140,7 +140,14 @@ module Jekyll
 
         private
         def launch_browser(server, opts)
-          command = Utils::Platforms.windows?? "start" : Utils::Platforms.osx?? "open" : "xdg-open"
+          command =
+            if Utils::Platforms.windows?
+              "start"
+            elsif Utils::Platforms.osx?
+              "open"
+            else
+              "xdg-open"
+            end
           system command, server_address(server, opts)
         end
 
@@ -214,7 +221,8 @@ module Jekyll
 >>>>>>> jekyll/add-support-for-webrick-file-precedence
           end
 
-          require "openssl"; require "webrick/https"
+          require "openssl"
+          require "webrick/https"
           source_key = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], opts[:JekyllOptions]["ssl_key" ])
           source_certificate = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], opts[:JekyllOptions]["ssl_cert"])
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(File.read(source_certificate))

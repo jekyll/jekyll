@@ -9,7 +9,7 @@ class TestPage < JekyllUnitTest
 
   def do_render(page)
     layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
-    page.render(layouts, {"site" => {"posts" => []}})
+    page.render(layouts, @site.site_payload)
   end
 
   context "A Page" do
@@ -53,6 +53,15 @@ class TestPage < JekyllUnitTest
       should "deal properly with extensions" do
         @page = setup_page('deal.with.dots.html')
         assert_equal ".html", @page.ext
+      end
+
+      should "deal properly with non-html extensions" do
+        @page = setup_page('dynamic_page.php')
+        @dest_file = dest_dir("dynamic_page.php")
+        assert_equal ".php", @page.ext
+        assert_equal "dynamic_page", @page.basename
+        assert_equal "/dynamic_page.php", @page.url
+        assert_equal @dest_file, @page.destination(dest_dir)
       end
 
       should "deal properly with dots" do

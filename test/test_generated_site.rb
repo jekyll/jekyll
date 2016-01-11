@@ -6,12 +6,13 @@ class TestGeneratedSite < JekyllUnitTest
       clear_dest
       config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
 
-      @site = fixture_site config
+      @site = fixture_site(config)
       @site.process
       @index = File.read(dest_dir('index.html'))
     end
 
     should "ensure post count is as expected" do
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       assert_equal 48, @site.posts.size
@@ -21,6 +22,9 @@ class TestGeneratedSite < JekyllUnitTest
 =======
       assert_equal 37, @site.posts.size
 >>>>>>> origin/v1-stable
+=======
+      assert_equal 49, @site.posts.size
+>>>>>>> jekyll/master
     end
 
     should "insert site.posts into the index" do
@@ -47,8 +51,9 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "process other static files and generate correct permalinks" do
-      assert File.exist?(dest_dir('/about/index.html'))
-      assert File.exist?(dest_dir('/contacts.html'))
+      assert File.exist?(dest_dir('/about/index.html')), "about/index.html should exist"
+      assert File.exist?(dest_dir('/contacts.html')), "contacts.html should exist"
+      assert File.exist?(dest_dir('/dynamic_file.php')), "dynamic_file.php should exist"
     end
 
     should "print a nice list of static files" do
@@ -67,7 +72,7 @@ OUTPUT
     setup do
       clear_dest
       config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 5})
-      @site = fixture_site config
+      @site = fixture_site(config)
       @site.process
       @index = File.read(dest_dir('index.html'))
     end
@@ -81,7 +86,7 @@ OUTPUT
         clear_dest
         config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1})
 
-        @site = fixture_site config
+        @site = fixture_site(config)
       end
     end
 
