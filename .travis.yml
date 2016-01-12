@@ -1,6 +1,7 @@
-cache: bundler
-script: script/cibuild
+bundler_args: --without benchmark:site:development
 before_script: bundle update
+script: script/cibuild
+cache: bundler
 language: ruby
 sudo: false
 
