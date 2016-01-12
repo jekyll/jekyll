@@ -55,6 +55,7 @@
   * Move Cucumber to using RSpec-Expections and furthering JRuby support. (#4343)
   * Rearrange Cucumber and add some flair. (#4347)
   * Remove old FIXME (#4349)
+  * Clean up the Gemfile (and keep all the necessary dependencies) (#4350)
 
 ### Site Enhancements
 
