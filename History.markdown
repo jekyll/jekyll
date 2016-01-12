@@ -54,6 +54,7 @@
   * Add script/travis so all people can play with Travis-CI images. (#4338)
   * Move Cucumber to using RSpec-Expections and furthering JRuby support. (#4343)
   * Rearrange Cucumber and add some flair. (#4347)
+  * Remove old FIXME (#4349)
 
 ### Site Enhancements
 
