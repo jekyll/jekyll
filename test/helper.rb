@@ -35,9 +35,6 @@ require 'shoulda'
 
 include Jekyll
 
-# FIXME: If we really need this we lost the game.
-# STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
-
 # Report with color.
 Minitest::Reporters.use! [
   Minitest::Reporters::DefaultReporter.new(
