@@ -16,14 +16,18 @@ status=0
 if [ $# -eq 2 ]; then
   docker exec -it docker-travis bash -ilc " \
     rvm use --install --binary --fuzzy $1
-    bundle install --path vendor/bundle -j 256
+    bundle install --path vendor/bundle -j 12 \\
+      --without benchmark:site:development
+    bundle clean
     script/test $2
   " || status=$?
 
 elif [ $# -eq 1 ]; then
   docker exec -it docker-travis bash -ilc " \
     rvm use --install --binary --fuzzy $1
-    bundle install --path vendor/bundle -j 256
+    bundle install --path vendor/bundle -j 12 \\
+      --without benchmark:site:development
+    bundle clean
     bundle exec rake
   " || status=$?
 
