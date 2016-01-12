@@ -3,8 +3,8 @@ gemspec :name => "jekyll"
 
 gem "rake", "~> 10.1"
 group :development do
-  gem "rubocop"
   gem "launchy", "~> 2.3"
+  gem "rubocop", :branch => :master, :github => "bbatsov/rubocop"
   gem "pry"
 end
 
