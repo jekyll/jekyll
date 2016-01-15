@@ -18,6 +18,7 @@ group :test do
   gem "rspec-mocks"
   gem "nokogiri"
   gem "rspec"
+  gem "byebug"
 end
 
 #
