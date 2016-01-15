@@ -1,5 +1,3 @@
-require 'mime/types'
-
 module Jekyll
   module Utils
     extend self
