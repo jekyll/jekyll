@@ -56,16 +56,23 @@ module Jekyll
       end
 
       self.data ||= {}
+      
+      validate_data!
+      validate_permalink!
 
+      self.data
+    end
+    
+    def validate_data!
       unless self.data.is_a?(Hash)
         Jekyll.logger.abort_with "Fatal:", "Invalid YAML front matter in #{File.join(base, name)}"
       end
-
+    end
+    
+    def validate_permalink!
       if self.data['permalink'] && self.data['permalink'].size == 0
         Jekyll.logger.abort_with "Fatal:", "Invalid permalink in #{File.join(base, name)}"
       end
-
-      self.data
     end
 
     # Transform the contents based on the content type.
