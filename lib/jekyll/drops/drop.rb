@@ -133,6 +133,7 @@ module Jekyll
       #
       # Returns a pretty generation of the hash representation of the Drop.
       def inspect
+        require 'json'
         JSON.pretty_generate to_h
       end
 
