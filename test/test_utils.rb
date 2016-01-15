@@ -13,7 +13,7 @@ class TestUtils < JekyllUnitTest
       merged = Utils.deep_merge_hashes(data, @site.site_payload)
       assert merged.is_a? Hash
       assert merged["site"].is_a? Drops::SiteDrop
-      assert_equal data["page"], {}
+      assert_equal data["page"], merged["page"]
     end
 
     should "merge a hash into a drop" do
@@ -22,7 +22,7 @@ class TestUtils < JekyllUnitTest
       merged = Utils.deep_merge_hashes(@site.site_payload, data)
       assert merged.is_a? Drops::UnifiedPayloadDrop
       assert merged["site"].is_a? Drops::SiteDrop
-      assert_equal data["page"], {}
+      assert_equal data["page"], merged["page"]
     end
   end
 

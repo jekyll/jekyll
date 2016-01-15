@@ -31,14 +31,12 @@ module Jekyll
     #
     # Thanks to whoever made it.
     def deep_merge_hashes!(target, overwrite)
-      overwrite.each_key do |key|
-        if (overwrite[key].is_a?(Hash) || overwrite[key].is_a?(Drops::Drop)) &&
-            (target[key].is_a?(Hash) || target[key].is_a?(Drops::Drop))
-          target[key] = Utils.deep_merge_hashes(target[key], overwrite[key])
-          next
+      target.merge!(overwrite) do |key, old_val, new_val|
+        if new_val.nil?
+          old_val
+        else
+          mergable?(old_val) && mergable?(new_val) ? deep_merge_hashes(old_val, new_val) : new_val
         end
-
-        target[key] = overwrite[key]
       end
 
       if target.respond_to?(:default_proc) && overwrite.respond_to?(:default_proc) && target.default_proc.nil?
@@ -46,6 +44,10 @@ module Jekyll
       end
 
       target
+    end
+
+    def mergable?(value)
+      value.is_a?(Hash) || value.is_a?(Drops::Drop)
     end
 
     # Read array from the supplied hash favouring the singular key

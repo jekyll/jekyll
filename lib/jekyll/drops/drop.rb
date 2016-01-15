@@ -127,6 +127,7 @@ module Jekyll
           result[key] = self[key]
         end
       end
+      alias_method :to_hash, :to_h
 
       # Inspect the drop's keys and values through a JSON representation
       # of its keys and values.
@@ -144,6 +145,31 @@ module Jekyll
       # Returns nothing.
       def each_key(&block)
         keys.each(&block)
+      end
+
+      def merge(other, &block)
+        self.dup.tap do |me|
+          if block.nil?
+            me.merge!(other)
+          else
+            me.merge!(other, block)
+          end
+        end
+      end
+
+      def merge!(other)
+        other.each_key do |key|
+          if block_given?
+            self[key] = yield key, self[key], other[key]
+          else
+            if Utils.mergable?(self[key]) && Utils.mergable?(other[key])
+              self[key] = Utils.deep_merge_hashes(self[key], other[key])
+              next
+            end
+
+            self[key] = other[key] unless other[key].nil?
+          end
+        end
       end
     end
   end
