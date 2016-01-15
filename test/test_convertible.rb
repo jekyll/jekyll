@@ -58,5 +58,12 @@ class TestConvertible < JekyllUnitTest
       assert_match(/Invalid permalink/, out)
       assert_match(/#{File.join(@base, name)}/, out)
     end
+
+    should "parse the front-matter correctly whitout permalink" do
+      out = capture_stderr do
+        @convertible.read_yaml(@base, 'front_matter.erb')
+      end
+      refute_match(/Invalid permalink/, out)
+    end
   end
 end
