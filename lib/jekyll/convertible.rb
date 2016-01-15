@@ -61,7 +61,7 @@ module Jekyll
         Jekyll.logger.abort_with "Fatal:", "Invalid YAML front matter in #{File.join(base, name)}"
       end
 
-      unless valid_permalink?(self.data['permalink'])
+      if self.data['permalink'] && empty_permalink?(self.data['permalink'])
         Jekyll.logger.error "Error:", "Invalid permalink in #{File.join(base, name)}"
       end
 
@@ -275,8 +275,8 @@ module Jekyll
     # permalink - the data permalink
     #
     # Returns true if the permalink is valid, false if otherwise
-    def valid_permalink?(permalink)
-      permalink.nil? || permalink.length > 0
+    def empty_permalink?(permalink)
+      permalink.length == 0
     end
 
     # Write the generated page file to the destination directory.
