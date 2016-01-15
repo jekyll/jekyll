@@ -600,6 +600,22 @@ CONTENT
       end
     end
 
+    context "without any extension" do
+      setup do
+        content = <<CONTENT
+---
+title: without extension
+---
+
+{% include params %}
+CONTENT
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+      should "include file without extension" do
+        assert_match "<span id=\"include-param\"></span>", @result
+      end
+    end
+
     context "with custom includes directory" do
       setup do
         content = <<CONTENT

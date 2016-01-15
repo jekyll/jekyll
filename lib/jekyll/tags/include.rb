@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'find'
 
 module Jekyll
   module Tags
@@ -52,6 +53,10 @@ module Jekyll
           params[match[1]] = value
         end
         params
+      end
+
+      def file_without_extension?(file)
+        File.basename(file, ".*") == File.basename(file)
       end
 
       def validate_file_name(file)
@@ -111,6 +116,10 @@ eos
         validate_file_name(file)
 
         path = File.join(dir, file)
+        if file_without_extension?(path)
+          match = Dir["#{dir}/#{File.basename(file, ".*")}.{html, htm}"][0]
+          path = match unless match.nil?
+        end
         validate_path(path, dir, site.safe)
 
         # Add include to dependency tree

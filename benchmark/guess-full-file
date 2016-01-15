@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require "benchmark/ips"
+require "find"
+
+def file_without_extension?(file)
+  File.basename(file, ".*") == File.basename(file)
+end
+
+def matching_process(path)
+   if file_without_extension?(path)
+     dir = File.dirname(path)
+     match = Dir["#{dir}/#{File.basename(path)}.{html, htm}"][0]
+     path = match unless match.nil?
+   end
+end
+
+Benchmark.ips do |x|
+  x.report "Matching without extension" do
+    40.times do
+      matching_process("/path")
+    end
+  end
+
+  x.report "Matching with extension" do
+    40.times do
+      matching_process "/prout.htm"
+    end
+  end
+
+  x.report "Matching already existing file without extension" do
+    40.times do
+      matching_process "/home"
+    end
+  end
+end
