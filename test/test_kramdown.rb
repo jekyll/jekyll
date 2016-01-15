@@ -90,7 +90,7 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-        refute result.css(selector).empty?
+        refute result.css(selector).empty?, "pre tag should exist"
       end
     end
 

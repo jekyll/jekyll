@@ -22,3 +22,7 @@ url: http://jekyllrb.com
 gems:
   - jekyll-feed
   - jekyll-redirect-from
+
+exclude:
+  - README.md
+  - CNAME
