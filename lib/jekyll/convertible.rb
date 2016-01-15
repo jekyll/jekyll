@@ -61,8 +61,8 @@ module Jekyll
         Jekyll.logger.abort_with "Fatal:", "Invalid YAML front matter in #{File.join(base, name)}"
       end
 
-      if self.data['permalink'] && empty_permalink?(self.data['permalink'])
-        Jekyll.logger.error "Error:", "Invalid permalink in #{File.join(base, name)}"
+      if self.data['permalink'] && self.data['permalink'].size == 0
+        Jekyll.logger.abort_with "Fatal:", "Invalid permalink in #{File.join(base, name)}"
       end
 
       self.data
@@ -268,15 +268,6 @@ module Jekyll
       render_all_layouts(layouts, payload, info) if place_in_layout?
       Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
-    end
-
-    # Check data permalink
-    #
-    # permalink - the data permalink
-    #
-    # Returns true if the permalink is valid, false if otherwise
-    def empty_permalink?(permalink)
-      permalink.length == 0
     end
 
     # Write the generated page file to the destination directory.
