@@ -26,26 +26,16 @@ module Jekyll
     # master_hash - the "parent" hash whose values will be overridden
     # other_hash  - the other hash whose values will be persisted after the merge
     #
-    # This code was lovingly stolen from some random gem:
-    # http://gemjack.com/gems/tartan-0.1.1/classes/Hash.html
-    #
-    # Thanks to whoever made it.
-    def deep_merge_hashes!(target, overwrite)
-      overwrite.each_key do |key|
-        if (overwrite[key].is_a?(Hash) || overwrite[key].is_a?(Drops::Drop)) &&
-            (target[key].is_a?(Hash) || target[key].is_a?(Drops::Drop))
-          target[key] = Utils.deep_merge_hashes(target[key], overwrite[key])
-          next
-        end
-
-        target[key] = overwrite[key]
+    # Returns the merged hashes.
+    def deep_merge_hashes!(old_hash, new_hash)
+      old_hash.merge(new_hash) do |_, old_val, new_val|
+        mergable?(old_val) && mergable?(new_val) ? deep_merge_hashes(old_val, new_val) : new_val
       end
+      old_hash
+    end
 
-      if target.respond_to?(:default_proc) && overwrite.respond_to?(:default_proc) && target.default_proc.nil?
-        target.default_proc = overwrite.default_proc
-      end
-
-      target
+    def mergable?(val)
+      val.is_a?(Hash) || val.is_a?(Drops::Drop)
     end
 
     # Read array from the supplied hash favouring the singular key
