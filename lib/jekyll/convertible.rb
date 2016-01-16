@@ -42,6 +42,8 @@ module Jekyll
     #
     # Returns nothing.
     def read_yaml(base, name, opts = {})
+      filename = File.join(base, name)
+
       begin
         self.content = File.read(site.in_source_dir(base, name),
                                  merged_file_read_opts(opts))
@@ -50,28 +52,28 @@ module Jekyll
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
       rescue SyntaxError => e
-        Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
       rescue Exception => e
-        Jekyll.logger.warn "Error reading file #{File.join(base, name)}: #{e.message}"
+        Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
       end
 
       self.data ||= {}
-      
-      validate_data!
-      validate_permalink!
+
+      validate_data! filename
+      validate_permalink! filename
 
       self.data
     end
-    
-    def validate_data!
+
+    def validate_data!(filename)
       unless self.data.is_a?(Hash)
-        Jekyll.logger.abort_with "Fatal:", "Invalid YAML front matter in #{File.join(base, name)}"
+        raise Errors::InvalidYAMLFrontMatterError, "Invalid YAML front matter in #{filename}"
       end
     end
-    
-    def validate_permalink!
+
+    def validate_permalink!(filename)
       if self.data['permalink'] && self.data['permalink'].size == 0
-        Jekyll.logger.abort_with "Fatal:", "Invalid permalink in #{File.join(base, name)}"
+        raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
       end
     end
 
