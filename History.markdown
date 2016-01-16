@@ -19,6 +19,7 @@
   * drops: provide `#to_h` to allow for hash introspection (#4281)
   * Shim subcommands with indication of gem possibly required so users know how to use them (#4254)
   * Add smartify Liquid filter for SmartyPants (#4323)
+  * Raise error on empty permalink (#4361)
 
 ### Bug Fixes
 
