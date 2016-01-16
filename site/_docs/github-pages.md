@@ -10,6 +10,11 @@ organizations, and repositories, that are freely hosted on GitHub's
 powered by Jekyll behind the scenes, so in addition to supporting regular HTML
 content, they’re also a great way to host your Jekyll-powered website for free.
 
+Never built a website with GitHub Pages before? [See this marvelous guide by
+Jonathan McGlone to get you up and running](http://jmcglone.com/guides/github-pages/).
+This guide will teach you what you need to know about Git, GitHub, and Jekyll to
+create your very own website on GitHub Pages.
+
 ## Deploying Jekyll to GitHub Pages
 
 GitHub Pages work by looking at certain branches of repositories on GitHub.
