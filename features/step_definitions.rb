@@ -98,7 +98,7 @@ Given %r{^I have a configuration file with "(.*)" set to "(.*)"$} do |key, value
   else
     {}
   end
-  config[key] = value
+  config[key] = YAML.load(value)
   File.write("_config.yml", YAML.dump(config))
 end
 
