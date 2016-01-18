@@ -97,13 +97,7 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
-        ext
-      else
-        converters.map do |c|
-          c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
-        end.compact.last
-      end
+      Jekyll::Renderer.new(site, self).output_ext
     end
 
     # Determine which converter to use based on this convertible's

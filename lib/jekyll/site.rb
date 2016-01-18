@@ -176,7 +176,8 @@ module Jekyll
 
       pages.flatten.each do |page|
         if regenerator.regenerate?(page)
-          page.render(layouts, payload)
+          page.output = Jekyll::Renderer.new(self, page, payload).run
+          page.trigger_hooks(:post_render)
         end
       end
 

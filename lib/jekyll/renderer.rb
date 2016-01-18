@@ -38,7 +38,7 @@ module Jekyll
 
       payload["page"] = document.to_liquid
 
-      if document.collection.label == 'posts' && document.is_a?(Document)
+      if document.is_a?(Document) && document.collection.label == 'posts'
         payload['site']['related_posts'] = document.related_posts
       end
 
