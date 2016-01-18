@@ -22,21 +22,7 @@ module Jekyll
     #
     # Returns the output extname including the leading period.
     def output_ext
-      @output_ext ||= if document.permalink
-        File.extname(document.permalink)
-      else
-        if output_exts.size == 1
-          output_exts.last
-        else
-          output_exts[-2]
-        end
-      end
-    end
-
-    def output_exts
-      @output_exts ||= converters.map do |c|
-        c.output_ext(document.extname)
-      end.compact
+      @output_ext ||= (permalink_ext || converter_output_ext)
     end
 
     ######################
@@ -177,6 +163,29 @@ module Jekyll
       end
 
       output
+    end
+
+    private
+
+    def permalink_ext
+      if document.permalink
+        permalink_ext = File.extname(document.permalink)
+        permalink_ext unless permalink_ext.empty?
+      end
+    end
+
+    def converter_output_ext
+      if output_exts.size == 1
+        output_exts.last
+      else
+        output_exts[-2]
+      end
+    end
+
+    def output_exts
+      @output_exts ||= converters.map do |c|
+        c.output_ext(document.extname)
+      end.compact
     end
   end
 end
