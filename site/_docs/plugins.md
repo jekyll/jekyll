@@ -47,8 +47,7 @@ group :jekyll_plugins do
 end
 {% endhighlight %}
 
-Now, to install the plugins from your Bundler group can be done by
-running`bundle install`
+You can now install the gems from your group by running`bundle install`.
 
 <div class="note info">
   <h5>
