@@ -105,10 +105,8 @@ end
 #
 
 Given %r{^I have a configuration file with:$} do |table|
-  File.open("_config.yml", "w") do |f|
-    table.hashes.each do |row|
-      f.write("#{row["key"]}: #{row["value"]}\n")
-    end
+  table.hashes.each do |row|
+    step %(I have a configuration file with "#{row["key"]}" set to "#{row["value"]}")
   end
 end
 

@@ -2,6 +2,7 @@ require "fileutils"
 require "jekyll/utils"
 require "open3"
 require "time"
+require "safe_yaml/load"
 
 class Paths
   SOURCE_DIR = Pathname.new(File.expand_path("../..", __dir__))
