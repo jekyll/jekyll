@@ -38,6 +38,7 @@
   * Escape html from site.title and page.title in site template (#4307)
   * Allow custom file extensions if defined in `permalink` YAML front matter (#4314)
   * Fix deep_merge_hashes! handling of drops and hashes (#4359)
+  * Page should respect output extension of its permalink (#4373)
 
 ### Development Fixes
 
