@@ -48,9 +48,17 @@ module Jekyll
 
       payload["page"] = document.to_liquid
 
+      if document.respond_to? :pager
+        payload["paginator"] = document.pager.to_liquid
+      end
+
       if document.is_a?(Document) && document.collection.label == 'posts'
         payload['site']['related_posts'] = document.related_posts
       end
+
+      # render and transform content (this becomes the final content of the object)
+      payload['highlighter_prefix'] = converters.first.highlighter_prefix
+      payload['highlighter_suffix'] = converters.first.highlighter_suffix
 
       Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
       document.trigger_hooks(:pre_render, payload)
@@ -59,10 +67,6 @@ module Jekyll
         :filters   => [Jekyll::Filters],
         :registers => { :site => site, :page => payload['page'] }
       }
-
-      # render and transform content (this becomes the final content of the object)
-      payload['highlighter_prefix'] = converters.first.highlighter_prefix
-      payload['highlighter_suffix'] = converters.first.highlighter_suffix
 
       output = document.content
 
