@@ -166,5 +166,9 @@ module Jekyll
     def trigger_hooks(hook_name, *args)
       Jekyll::Hooks.trigger :pages, hook_name, self, *args
     end
+
+    def write?
+      true
+    end
   end
 end
