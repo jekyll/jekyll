@@ -168,7 +168,7 @@ module Jekyll
     end
 
     def write?
-      true.freeze
+      true
     end
   end
 end
