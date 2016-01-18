@@ -275,25 +275,25 @@ class TestSite < JekyllUnitTest
 
       should 'remove orphaned files in destination' do
         @site.process
-        assert !File.exist?(dest_dir('obsolete.html'))
-        assert !File.exist?(dest_dir('qux'))
-        assert !File.exist?(dest_dir('quux'))
-        assert File.exist?(dest_dir('.git'))
-        assert File.exist?(dest_dir('.git/HEAD'))
+        refute_exist dest_dir('obsolete.html')
+        refute_exist dest_dir('qux')
+        refute_exist dest_dir('quux')
+        assert_exist dest_dir('.git')
+        assert_exist dest_dir('.git', 'HEAD')
       end
 
       should 'remove orphaned files in destination - keep_files .svn' do
         config = site_configuration('keep_files' => %w{.svn})
         @site = Site.new(config)
         @site.process
-        assert !File.exist?(dest_dir('.htpasswd'))
-        assert !File.exist?(dest_dir('obsolete.html'))
-        assert !File.exist?(dest_dir('qux'))
-        assert !File.exist?(dest_dir('quux'))
-        assert !File.exist?(dest_dir('.git'))
-        assert !File.exist?(dest_dir('.git/HEAD'))
-        assert File.exist?(dest_dir('.svn'))
-        assert File.exist?(dest_dir('.svn/HEAD'))
+        refute_exist dest_dir('.htpasswd')
+        refute_exist dest_dir('obsolete.html')
+        refute_exist dest_dir('qux')
+        refute_exist dest_dir('quux')
+        refute_exist dest_dir('.git')
+        refute_exist dest_dir('.git', 'HEAD')
+        assert_exist dest_dir('.svn')
+        assert_exist dest_dir('.svn', 'HEAD')
       end
     end
 

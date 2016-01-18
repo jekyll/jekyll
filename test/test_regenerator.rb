@@ -112,7 +112,7 @@ class TestRegenerator < JekyllUnitTest
       assert_equal 1, @regenerator.metadata.size
       path = @regenerator.metadata.keys[0]
 
-      assert File.exist?(@layout_path)
+      assert_exist @layout_path
       @regenerator.add_dependency(path, @layout_path)
 
       File.rename(@layout_path, @layout_path + ".tmp")
