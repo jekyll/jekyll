@@ -69,7 +69,6 @@ class TestPage < JekyllUnitTest
         @dest_file = dest_dir("deal.with.dots.html")
 
         assert_equal "deal.with.dots", @page.basename
-        assert_equal "/deal.with.dots", @page.url
         assert_equal @dest_file, @page.destination(dest_dir)
       end
 
