@@ -120,3 +120,13 @@ Feature: Fancy permalinks
     When I run jekyll build
     Then the _site directory should exist
     And I should see "Totally awesome" in "_site/2009/03/27/Custom_Schema/index.html"
+
+  Scenario: Use a non-HTML file extension in the permalink
+    Given I have a _posts directory
+    And I have an "_posts/2016-01-18-i-am-php.md" page with permalink "/2016/i-am-php.php" that contains "I am PHP"
+    And I have a "i-am-also-php.md" page with permalink "/i-am-also-php.php" that contains "I am also PHP"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "I am PHP" in "_site/2016/i-am-php.php"
+    And I should see "I am also PHP" in "_site/i-am-also-php.php"
