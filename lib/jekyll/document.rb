@@ -59,7 +59,10 @@ module Jekyll
       end
       Utils.deep_merge_hashes!(data, other)
       if data.key?('date') && !data['date'].is_a?(Time)
-        data['date'] = Utils.parse_date(data['date'].to_s, "Document '#{relative_path}' does not have a valid date in the YAML front matter.")
+        data['date'] = Utils.parse_date(
+          data['date'].to_s,
+          "Document '#{relative_path}' does not have a valid date in the YAML front matter."
+        )
       end
       data
     end
