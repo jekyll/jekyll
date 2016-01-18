@@ -40,13 +40,15 @@ values of the gem names of the plugins you'd like to use. An example:
 3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
     example:
 
-        group :jekyll_plugins do
-          gem "my-jekyll-plugin"
-          gem "another-jekyll-plugin"
-        end
+{% highlight ruby %}
+group :jekyll_plugins do
+  gem "my-jekyll-plugin"
+  gem "another-jekyll-plugin"
+end
+{% endhighlight %}
 
-    Now you need to install all plugins from your Bundler group by running single command `bundle install`
-
+Now, to install the plugins from your Bundler group can be done by
+running`bundle install`
 
 <div class="note info">
   <h5>

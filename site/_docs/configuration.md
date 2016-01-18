@@ -650,9 +650,10 @@ extension for disabling fenced code.
 Note that you can also specify a language for highlighting after the first
 delimiter:
 
-        ```ruby
-        # ...ruby code
-        ```
+{% highlight ruby %}
+ruby
+# ...ruby code
+{% endhighlight %}
 
 With both fenced code blocks and highlighter enabled, this will statically
 highlight the code; without any syntax highlighter, it will add a
@@ -682,8 +683,10 @@ of GitHub Flavored Markdown by passing an `input` option with a value of "GFM".
 
 For example, in your `_config.yml`:
 
-    kramdown:
-      input: GFM
+{% highlight yaml %}
+kramdown:
+  input: GFM
+{% endhighlight %}
 
 ### Custom Markdown Processors
 
