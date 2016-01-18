@@ -167,72 +167,68 @@ end
 
 #
 
-Then %r{^the (.*) directory should +exist$} do |dir|
-  expect(Pathname.new(dir)).to exist
+Then %r{^the (.*) directory should +(not )?exist$} do |dir, negative|
+  if negative.nil?
+    expect(Pathname.new(dir)).to exist
+  else
+    expect(Pathname.new(dir)).to_not exist
+  end
 end
 
 #
-
-Then %r{^the (.*) directory should not exist$} do |dir|
-  expect(Pathname.new(dir)).not_to exist
-end
-
-#
-Then %r{^I should see "(.*)" in "(.*)"$} do |text, file|
+Then %r{^I should (not )?see "(.*)" in "(.*)"$} do |negative, text, file|
+  step %(the "#{file}" file should exist)
   regexp = Regexp.new(text, Regexp::MULTILINE)
-  expect(file_contents(file)).to match regexp
+  if negative.nil? || negative.empty?
+    expect(file_contents(file)).to match regexp
+  else
+    expect(file_contents(file)).not_to match regexp
+  end
 end
 
 #
 
 Then %r{^I should see exactly "(.*)" in "(.*)"$} do |text, file|
+  step %(the "#{file}" file should exist)
   expect(file_contents(file).strip).to eq text
 end
 
 #
 
-Then %r{^I should not see "(.*)" in "(.*)"$} do |text, file|
-  regexp = Regexp.new(text, Regexp::MULTILINE)
-  expect(file_contents(file)).not_to match regexp
-end
-
-#
-
 Then %r{^I should see escaped "(.*)" in "(.*)"$} do |text, file|
-  regexp = Regexp.new(Regexp.escape(text))
-  expect(file_contents(file)).to match regexp
+  step %(I should see "#{Regexp.escape(text)}" in "#{file}")
 end
 
 #
 
-Then %r{^the "(.*)" file should +exist$} do |file|
-  expect(Pathname.new(file)).to exist
-end
-
-#
-
-Then %r{^the "(.*)" file should not exist$} do |file|
-  expect(Pathname.new(file)).to_not exist
+Then %r{^the "(.*)" file should +(not )?exist$} do |file, negative|
+  if negative.nil?
+    expect(Pathname.new(file)).to exist
+  else
+    expect(Pathname.new(file)).to_not exist
+  end
 end
 
 #
 
 Then %r{^I should see today's time in "(.*)"$} do |file|
-  seconds = seconds_agnostic_time(Time.now)
-  expect(file_contents(file)).to match Regexp.new(seconds)
+  step %(I should see "#{seconds_agnostic_time(Time.now)}" in "#{file}")
 end
 
 #
 
 Then %r{^I should see today's date in "(.*)"$} do |file|
-  regexp = Regexp.new(Date.today.to_s)
-  expect(file_contents(file)).to match regexp
+  step %(I should see "#{Date.today.to_s}" in "#{file}")
 end
 
 #
 
-Then %r{^I should see "(.*)" in the build output$} do |text|
-  expect(jekyll_run_output).to match Regexp.new(text)
+Then %r{^I should (not )?see "(.*)" in the build output$} do |negative, text|
+  if negative.nil? || negative.empty?
+    expect(jekyll_run_output).to match Regexp.new(text)
+  else
+    expect(jekyll_run_output).not_to match Regexp.new(text)
+  end
 end
 
 #
@@ -244,5 +240,5 @@ end
 #
 
 Then %r{^I should get a non-zero exit(?:\-| )status$} do
-  expect(jekyll_run_status.to_i).not_to match(%r{EXIT STATUS: 0})
+  step %(I should not see "EXIT STATUS: 0" in the build output)
 end
