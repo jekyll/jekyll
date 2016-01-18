@@ -38,10 +38,15 @@ class TestGeneratedSite < JekyllUnitTest
       refute_exist dest_dir('_posts')
     end
 
+    should "process a page with a folder permalink properly" do
+      about = @site.pages.find {|page| page.name == 'about.html' }
+      assert_equal dest_dir('about', 'index.html'), about.destination(dest_dir)
+      assert_exist dest_dir('about', 'index.html')
+    end
+
     should "process other static files and generate correct permalinks" do
-      assert_exist dest_dir('about', 'index.html'), "about/index.html should exist"
-      assert_exist dest_dir('contacts.html'), "contacts.html should exist"
-      assert_exist dest_dir('dynamic_file.php'), "dynamic_file.php should exist"
+      assert_exist dest_dir('contacts.html')
+      assert_exist dest_dir('dynamic_file.php')
     end
 
     should "print a nice list of static files" do
