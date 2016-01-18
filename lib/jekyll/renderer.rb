@@ -25,8 +25,18 @@ module Jekyll
       @output_ext ||= if document.permalink
         File.extname(document.permalink)
       else
-        converters.first.output_ext(document.extname)
+        if output_exts.size == 1
+          output_exts.last
+        else
+          output_exts[-2]
+        end
       end
+    end
+
+    def output_exts
+      @output_exts ||= converters.map do |c|
+        c.output_ext(document.extname)
+      end.compact
     end
 
     ######################
