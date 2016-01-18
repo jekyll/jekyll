@@ -228,8 +228,13 @@ end
 #
 
 Then %r{^I should see "(.*)" in the build output$} do |text|
-  regexp = Regexp.new(text)
-  expect(jekyll_run_output).to match regexp
+  expect(jekyll_run_output).to match Regexp.new(text)
+end
+
+#
+
+Then %r{^I should get a zero exit(?:\-| )status$} do
+  step %(I should see "EXIT STATUS: 0" in the build output)
 end
 
 #

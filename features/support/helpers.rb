@@ -100,8 +100,13 @@ def run_in_shell(*args)
   end
 
   File.write(Paths.status_file, p.value.exitstatus)
-  File.write(Paths.output_file, out) if p.value.exitstatus == 0
-  File.write(Paths.output_file, err) if p.value.exitstatus != 0
+  File.open(Paths.output_file, "wb") do |f|
+    f.puts args.join(" ")
+    f.puts out
+    f.puts err
+    f.puts "EXIT STATUS: #{p.value.exitstatus}"
+  end
+
   p.value
 end
 
