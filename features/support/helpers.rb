@@ -102,7 +102,7 @@ def run_in_shell(*args)
 
   File.write(Paths.status_file, p.value.exitstatus)
   File.open(Paths.output_file, "wb") do |f|
-    f.puts args.join(" ")
+    f.puts "$ " << args.join(" ")
     f.puts out
     f.puts err
     f.puts "EXIT STATUS: #{p.value.exitstatus}"
