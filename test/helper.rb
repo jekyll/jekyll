@@ -42,6 +42,22 @@ Minitest::Reporters.use! [
   )
 ]
 
+module Minitest::Assertions
+  def assert_exist(filename, msg = nil)
+    msg = message(msg) {
+      "Expected '#{filename}' to exist"
+    }
+    assert File.exist?(filename), msg
+  end
+
+  def refute_exist(filename, msg = nil)
+    msg = message(msg) {
+      "Expected '#{filename}' not to exist"
+    }
+    refute File.exist?(filename), msg
+  end
+end
+
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
 

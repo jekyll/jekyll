@@ -22,11 +22,7 @@ module Jekyll
     #
     # Returns the output extname including the leading period.
     def output_ext
-      @output_ext ||= if document.permalink
-        File.extname(document.permalink)
-      else
-        converters.first.output_ext(document.extname)
-      end
+      @output_ext ||= (permalink_ext || converter_output_ext)
     end
 
     ######################
@@ -38,9 +34,17 @@ module Jekyll
 
       payload["page"] = document.to_liquid
 
-      if document.collection.label == 'posts' && document.is_a?(Document)
+      if document.respond_to? :pager
+        payload["paginator"] = document.pager.to_liquid
+      end
+
+      if document.is_a?(Document) && document.collection.label == 'posts'
         payload['site']['related_posts'] = document.related_posts
       end
+
+      # render and transform content (this becomes the final content of the object)
+      payload['highlighter_prefix'] = converters.first.highlighter_prefix
+      payload['highlighter_suffix'] = converters.first.highlighter_suffix
 
       Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
       document.trigger_hooks(:pre_render, payload)
@@ -49,10 +53,6 @@ module Jekyll
         :filters   => [Jekyll::Filters],
         :registers => { :site => site, :page => payload['page'] }
       }
-
-      # render and transform content (this becomes the final content of the object)
-      payload['highlighter_prefix'] = converters.first.highlighter_prefix
-      payload['highlighter_suffix'] = converters.first.highlighter_suffix
 
       output = document.content
 
@@ -163,6 +163,29 @@ module Jekyll
       end
 
       output
+    end
+
+    private
+
+    def permalink_ext
+      if document.permalink
+        permalink_ext = File.extname(document.permalink)
+        permalink_ext unless permalink_ext.empty?
+      end
+    end
+
+    def converter_output_ext
+      if output_exts.size == 1
+        output_exts.last
+      else
+        output_exts[-2]
+      end
+    end
+
+    def output_exts
+      @output_exts ||= converters.map do |c|
+        c.output_ext(document.extname)
+      end.compact
     end
   end
 end

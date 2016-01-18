@@ -7,6 +7,8 @@ module Jekyll
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
+    alias_method :extname, :ext
+
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w(
       content
@@ -159,6 +161,14 @@ module Jekyll
     # Returns the Boolean of whether this Page is an index file or not.
     def index?
       basename == 'index'
+    end
+
+    def trigger_hooks(hook_name, *args)
+      Jekyll::Hooks.trigger :pages, hook_name, self, *args
+    end
+
+    def write?
+      true.freeze
     end
   end
 end

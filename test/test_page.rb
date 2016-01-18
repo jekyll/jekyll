@@ -69,7 +69,6 @@ class TestPage < JekyllUnitTest
         @dest_file = dest_dir("deal.with.dots.html")
 
         assert_equal "deal.with.dots", @page.basename
-        assert_equal "/deal.with.dots", @page.url
         assert_equal @dest_file, @page.destination(dest_dir)
       end
 
@@ -214,7 +213,7 @@ class TestPage < JekyllUnitTest
         do_render(page)
         page.write(dest_dir)
 
-        assert !File.exist?(unexpected)
+        refute_exist unexpected
       end
     end
 
@@ -239,7 +238,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, 'contacts.html'))
+        assert_exist dest_dir('contacts.html')
       end
 
       should "write even when the folder name is plus and permalink has +" do
@@ -247,8 +246,8 @@ class TestPage < JekyllUnitTest
         do_render(page)
         page.write(dest_dir)
 
-        assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, '+', 'plus+in+url.html'))
+        assert File.directory?(dest_dir), "#{dest_dir} should be a directory"
+        assert_exist dest_dir('+', 'plus+in+url.html')
       end
 
       should "write even when permalink has '%# +'" do
@@ -257,7 +256,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, '+', '%# +.html'))
+        assert_exist dest_dir('+', '%# +.html')
       end
 
       should "write properly without html extension" do
@@ -267,7 +266,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
+        assert_exist dest_dir('contacts', 'index.html')
       end
 
       should "support .htm extension and respects that" do
@@ -277,7 +276,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, 'contacts', 'index.htm'))
+        assert_exist dest_dir('contacts', 'index.htm')
       end
 
       should "support .xhtml extension and respects that" do
@@ -287,7 +286,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, 'contacts', 'index.xhtml'))
+        assert_exist dest_dir('contacts', 'index.xhtml')
       end
 
       should "write properly with extension different from html" do
@@ -296,10 +295,10 @@ class TestPage < JekyllUnitTest
         do_render(page)
         page.write(dest_dir)
 
-        assert_equal("/sitemap.xml", page.url)
-        assert_nil(page.url[/\.html$/])
+        assert_equal "/sitemap.xml", page.url
+        assert_nil page.url[/\.html$/]
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir,'sitemap.xml'))
+        assert_exist dest_dir('sitemap.xml')
       end
 
       should "write dotfiles properly" do
@@ -308,7 +307,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, '.htaccess'))
+        assert_exist dest_dir('.htaccess')
       end
 
       context "in a directory hierarchy" do
@@ -318,7 +317,7 @@ class TestPage < JekyllUnitTest
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
+          assert_exist dest_dir('contacts', 'index.html')
         end
 
         should "write properly" do
@@ -327,7 +326,7 @@ class TestPage < JekyllUnitTest
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, 'contacts', 'bar.html'))
+          assert_exist dest_dir('contacts', 'bar.html')
         end
 
         should "write properly without html extension" do
@@ -337,7 +336,7 @@ class TestPage < JekyllUnitTest
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, 'contacts', 'bar', 'index.html'))
+          assert_exist dest_dir('contacts', 'bar', 'index.html')
         end
       end
     end

@@ -31,17 +31,22 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "hide unpublished page" do
-      assert !File.exist?(dest_dir('/unpublished.html'))
+      refute_exist dest_dir('/unpublished.html')
     end
 
     should "not copy _posts directory" do
-      assert !File.exist?(dest_dir('_posts'))
+      refute_exist dest_dir('_posts')
+    end
+
+    should "process a page with a folder permalink properly" do
+      about = @site.pages.find {|page| page.name == 'about.html' }
+      assert_equal dest_dir('about', 'index.html'), about.destination(dest_dir)
+      assert_exist dest_dir('about', 'index.html')
     end
 
     should "process other static files and generate correct permalinks" do
-      assert File.exist?(dest_dir('/about/index.html')), "about/index.html should exist"
-      assert File.exist?(dest_dir('/contacts.html')), "contacts.html should exist"
-      assert File.exist?(dest_dir('/dynamic_file.php')), "dynamic_file.php should exist"
+      assert_exist dest_dir('contacts.html')
+      assert_exist dest_dir('dynamic_file.php')
     end
 
     should "print a nice list of static files" do
@@ -72,15 +77,22 @@ OUTPUT
     should "ensure limit posts is 0 or more" do
       assert_raises ArgumentError do
         clear_dest
-        config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => -1})
-
+        config = Jekyll::Configuration::DEFAULTS.merge({
+          'source' => source_dir,
+          'destination' => dest_dir,
+          'limit_posts' => -1
+        })
         @site = fixture_site(config)
       end
     end
 
     should "acceptable limit post is 0" do
       clear_dest
-      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 0})
+      config = Jekyll::Configuration::DEFAULTS.merge({
+        'source' => source_dir,
+        'destination' => dest_dir,
+        'limit_posts' => 0
+      })
 
       assert Site.new(config), "Couldn't create a site with the given limit_posts."
     end

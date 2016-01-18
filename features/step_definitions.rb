@@ -93,16 +93,20 @@ end
 #
 
 Given %r{^I have a configuration file with "(.*)" set to "(.*)"$} do |key, value|
-  File.write("_config.yml", "#{key}: #{value}\n")
+  config = if source_dir.join("_config.yml").exist?
+    SafeYAML.load_file(source_dir.join("_config.yml"))
+  else
+    {}
+  end
+  config[key] = YAML.load(value)
+  File.write("_config.yml", YAML.dump(config))
 end
 
 #
 
 Given %r{^I have a configuration file with:$} do |table|
-  File.open("_config.yml", "w") do |f|
-    table.hashes.each do |row|
-      f.write("#{row["key"]}: #{row["value"]}\n")
-    end
+  table.hashes.each do |row|
+    step %(I have a configuration file with "#{row["key"]}" set to "#{row["value"]}")
   end
 end
 
@@ -228,12 +232,17 @@ end
 #
 
 Then %r{^I should see "(.*)" in the build output$} do |text|
-  regexp = Regexp.new(text)
-  expect(jekyll_run_output).to match regexp
+  expect(jekyll_run_output).to match Regexp.new(text)
+end
+
+#
+
+Then %r{^I should get a zero exit(?:\-| )status$} do
+  step %(I should see "EXIT STATUS: 0" in the build output)
 end
 
 #
 
 Then %r{^I should get a non-zero exit(?:\-| )status$} do
-  expect(jekyll_run_status.to_i).to be > 0
+  expect(jekyll_run_status.to_i).not_to match(%r{EXIT STATUS: 0})
 end

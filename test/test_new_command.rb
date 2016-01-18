@@ -24,9 +24,9 @@ class TestNewCommand < JekyllUnitTest
     end
 
     should 'create a new directory' do
-      assert !File.exist?(@full_path)
+      refute_exist @full_path
       Jekyll::Commands::New.process(@args)
-      assert File.exist?(@full_path)
+      assert_exist @full_path
     end
 
     should 'display a success message' do
@@ -96,9 +96,9 @@ class TestNewCommand < JekyllUnitTest
     end
 
     should 'create a new directory' do
-      assert !File.exist?(@site_name_with_spaces)
+      refute_exist @site_name_with_spaces
       capture_stdout { Jekyll::Commands::New.process(@multiple_args) }
-      assert File.exist?(@site_name_with_spaces)
+      assert_exist @site_name_with_spaces
     end
   end
 
