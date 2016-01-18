@@ -246,5 +246,5 @@ end
 #
 
 Then %r{^I should get a non-zero exit(?:\-| )status$} do
-  expect(jekyll_run_status.to_i).to be > 0
+  expect(jekyll_run_status.to_i).not_to match(%r{EXIT STATUS: 0})
 end
