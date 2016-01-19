@@ -6,16 +6,17 @@ language: ruby
 sudo: false
 
 rvm:
-- 2.2
-- 2.1
-- 2.0
-- jruby-9.0.3.0
+- 2.0.0-p648
+- 2.1.8
+- 2.2.4
+- 2.3.0
+- jruby-9.0.4.0
 - ruby-head
 
 matrix:
   fast_finish: true
   allow_failures:
-    - rvm: jruby-9.0.3.0
+    - rvm: jruby-9.0.4.0
     - rvm: ruby-head
 env:
   matrix:
