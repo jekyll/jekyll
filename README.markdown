@@ -1,11 +1,16 @@
 # [Jekyll](http://jekyllrb.com/)
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll.svg)](https://rubygems.org/gems/jekyll)
-[![Build Status](https://img.shields.io/travis/jekyll/jekyll/master.svg)](https://travis-ci.org/jekyll/jekyll)
-[![Code Climate](https://img.shields.io/codeclimate/github/jekyll/jekyll.svg)](https://codeclimate.com/github/jekyll/jekyll)
-[![Test Coverage](https://codeclimate.com/github/jekyll/jekyll/badges/coverage.svg)](https://codeclimate.com/github/jekyll/jekyll/coverage)
-[![Dependency Status](https://gemnasium.com/jekyll/jekyll.svg)](https://gemnasium.com/jekyll/jekyll)
-[![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)](https://hakiri.io/github/jekyll/jekyll/master)
+[![Build Status](https://travis-ci.org/jekyll/jekyll.svg?branch=master)][travis]
+[![Test Coverage](https://codeclimate.com/github/jekyll/jekyll/badges/coverage.svg)][coverage]
+[![Code Climate](https://codeclimate.com/github/jekyll/jekyll/badges/gpa.svg)][codeclimate]
+[![Dependency Status](https://gemnasium.com/jekyll/jekyll.svg)][gemnasium]
+[![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)][hakiri]
+
+[gemnasium]: https://gemnasium.com/jekyll/jekyll
+[codeclimate]: https://codeclimate.com/github/jekyll/jekyll
+[coverage]: https://codeclimate.com/github/jekyll/jekyll/coverage
+[hakiri]: https://hakiri.io/github/jekyll/jekyll/master
+[travis]: https://travis-ci.org/jekyll/jekyll
 
 By Tom Preston-Werner, Nick Quaranto, Parker Moore, and many [awesome contributors](https://github.com/jekyll/jekyll/graphs/contributors)!
 
