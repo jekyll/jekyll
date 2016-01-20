@@ -86,6 +86,7 @@
   * Fixed broken link to blog on using mathjax with jekyll (#4344)
   * Documentation: correct reference in Precedence section of Configuration docs (#4355)
   * Add @jmcglone's guide to github-pages doc page (#4364)
+  * Added the Wordpress2Jekyll Wordpress plugin (#4377)
 
 ## 3.0.1 / 2015-11-17
 
