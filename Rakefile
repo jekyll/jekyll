@@ -288,8 +288,8 @@ end
 
 desc "Release #{name} v#{version}"
 task :release => :build do
-  unless `git branch` =~ /^\* master$/
-    puts "You must be on the master branch to release!"
+  unless `git branch` =~ /^\* 3\.0-stable$/
+    puts "You must be on the 3.0-stable branch to release!"
     exit!
   end
   sh "git commit --allow-empty -m 'Release :gem: #{version}'"
