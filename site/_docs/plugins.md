@@ -887,6 +887,7 @@ LESS.js files during generation.
 - [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate
   new posts and run `jekyll build` all without leaving vim.
 - [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
+- [Wordpress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A Wordpress plugin that allows you to use Wordpress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>
