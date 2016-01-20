@@ -15,6 +15,6 @@ first draft:
 {% endhighlight %}
 
 To preview your site with drafts, simply run `bundle exec jekyll serve` or
-`bundle exec jekyll build` with the `--drafts` switch. Each will be assigned
-the value modification timeof the draft file for its date, and thus you will
-see currently edited drafts as the latest posts.
+`bundle exec jekyll build` with the `--drafts` switch. Each post will be
+assigned the value modification time of the draft file for its date, and thus
+you will see currently edited drafts as the latest posts.
