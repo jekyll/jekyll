@@ -10,6 +10,12 @@ module Jekyll
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
 
+    # Takes an indented string and removes the preceding spaces on each line
+
+    def strip_heredoc(str)
+      str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
+    end
+
     # Takes a slug and turns it into a simple title.
 
     def titleize_slug(slug)
