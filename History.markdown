@@ -89,6 +89,12 @@
   * Add @jmcglone's guide to github-pages doc page (#4364)
   * Added the Wordpress2Jekyll Wordpress plugin (#4377)
 
+## 3.0.2 / 2016-01-20
+
+### Bug Fixes
+
+  * Document: throw a useful error when an invalid date is given (#4378)
+
 ## 3.0.1 / 2015-11-17
 
 ### Bug Fixes
