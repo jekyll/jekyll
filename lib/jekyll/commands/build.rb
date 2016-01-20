@@ -33,7 +33,9 @@ module Jekyll
             build(site, options)
           end
 
-          if options.fetch('watch', false)
+          if options.fetch('detach', false)
+            Jekyll.logger.info "Auto-regeneration:", "disabled when running server detached."
+          elsif options.fetch('watch', false)
             watch(site, options)
           else
             Jekyll.logger.info "Auto-regeneration:", "disabled. Use --watch to enable."
