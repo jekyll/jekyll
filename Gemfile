@@ -8,7 +8,7 @@ group :development do
   gem "pry"
 
   unless RUBY_ENGINE == "jruby"
-    gem "byebug"
+    gem "pry-byebug"
   end
 end
 
