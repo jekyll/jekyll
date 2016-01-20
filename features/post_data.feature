@@ -36,6 +36,20 @@ Feature: Post data
     Then the _site directory should exist
     And I should see "Post date: 27 Mar 2009" in "_site/2009/03/27/star-wars.html"
 
+  Scenario: Use post.date variable with invalid
+    Given I have a _posts directory
+    And I have a "_posts/2016-01-01-test.md" page with date "tuesday" that contains "I have a bad date."
+    When I run jekyll build
+    Then the _site directory should not exist
+    And I should see "Document '_posts/2016-01-01-test.md' does not have a valid date in the YAML front matter." in the build output
+
+  Scenario: Invalid date in filename
+    Given I have a _posts directory
+    And I have a "_posts/2016-22-01-test.md" page that contains "I have a bad date."
+    When I run jekyll build
+    Then the _site directory should not exist
+    And I should see "Document '_posts/2016-22-01-test.md' does not have a valid date in the filename." in the build output
+
   Scenario: Use post.id variable
     Given I have a _posts directory
     And I have a _layouts directory
