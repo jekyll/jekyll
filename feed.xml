@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-<generator uri="http://jekyllrb.com" version="3.1.0.pre.rc1">Jekyll</generator>
+<generator uri="http://jekyllrb.com" version="3.1.0.pre.rc2">Jekyll</generator>
 <link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-01-18T08:47:45-08:00</updated>
+<updated>2016-01-20T14:35:12-08:00</updated>
 <id>http://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.0.2 Released</title>
+<link href="http://jekyllrb.com/news/2016/01/20/jekyll-3-0-2-released/" rel="alternate" type="text/html" title="Jekyll 3.0.2 Released" />
+<published>2016-01-20T14:08:18-08:00</published>
+<updated>2016-01-20T14:08:18-08:00</updated>
+<id>http://jekyllrb.com/news/2016/01/20/jekyll-3-0-2-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2016/01/20/jekyll-3-0-2-released/">&lt;p&gt;A crucial bug was found in v3.0.1 which caused invalid post dates to go
+unnoticed in the build chain until the error that popped up was unhelpful.
+v3.0.2 &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/4375&quot;&gt;throws errors as you’d expect&lt;/a&gt;
+when there is a post like &lt;code&gt;_posts/2016-22-01-future.md&lt;/code&gt; or a post has an
+invalid date like &lt;code&gt;date: &quot;tuesday&quot;&lt;/code&gt; in their front matter.&lt;/p&gt;
+
+&lt;p&gt;This should make the experience of working with Jekyll just a little
+better.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.0.1 Released</title>
 <link href="http://jekyllrb.com/news/2015/11/17/jekyll-3-0-1-released/" rel="alternate" type="text/html" title="Jekyll 3.0.1 Released" />
@@ -265,58 +287,6 @@ and Alfred Xing.&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
 
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll’s Mid-Life Crisis (Or, Jekyll turns 2.5.0)</title>
-<link href="http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/" rel="alternate" type="text/html" title="Jekyll&#39;s Mid-Life Crisis (Or, Jekyll turns 2.5.0)" />
-<published>2014-11-05T10:48:22-08:00</published>
-<updated>2014-11-05T10:48:22-08:00</updated>
-<id>http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0</id>
-<content type="html" xml:base="http://jekyllrb.com/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/">&lt;p&gt;A new day, a new release! Jekyll just turned 2.5.0 and has gained a lot of
-wisdom along the way. This 2.5.0 release also comes just a few weeks after
-Jekyll turned 6 years old! In fashion, we’re celebrating this huge
-milestone with a pretty big release. What’s changed in 2.5.0? Here are some
-highlights:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Require plugins in the &lt;code&gt;:jekyll_plugins&lt;/code&gt; Gemfile group (turned off with an environment variable)&lt;/li&gt;
-  &lt;li&gt;YAML Front Matter permalinks can now contain placeholders like &lt;code&gt;:name&lt;/code&gt;. Check out all the placeholders on the &lt;a href=&quot;/docs/permalinks/&quot;&gt;Permalinks docs page&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;The &lt;code&gt;jsonify&lt;/code&gt; filter now deep-converts arrays to liquid.&lt;/li&gt;
-  &lt;li&gt;Shorted &lt;code&gt;build&lt;/code&gt; and &lt;code&gt;serve&lt;/code&gt; commands with &lt;code&gt;b&lt;/code&gt; and &lt;code&gt;s&lt;/code&gt; aliases, respectively&lt;/li&gt;
-  &lt;li&gt;WEBrick will now list your directory if it can’t find an index file.&lt;/li&gt;
-  &lt;li&gt;Any enumerable can be used with the &lt;code&gt;where&lt;/code&gt; filter.&lt;/li&gt;
-  &lt;li&gt;Performance optimizations thanks to @tmm1’s &lt;a href=&quot;https://github.com/tmm1/stackprof&quot;&gt;stackprof&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Fix for Rouge’s Redcarpet interface&lt;/li&gt;
-  &lt;li&gt;Security auditors will love this: path sanitation has now been centralized.&lt;/li&gt;
-  &lt;li&gt;Specify a log level with &lt;code&gt;JEKYLL_LOG_LEVEL&lt;/code&gt;: debug, info, warn, or error.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;…and a whole bunch of other fixes and enhancements you can read more
-about in &lt;a href=&quot;/docs/history/&quot;&gt;the changelog!&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;As always, if you run into issues, please &lt;a href=&quot;{{ site.repository }}/issues&quot;&gt;check the issues&lt;/a&gt;
-and &lt;a href=&quot;{{ site.repository }}/issues/new&quot;&gt;create an issue if one doesn’t exist for the bug you encountered&lt;/a&gt;.
-If you just need some help, the extraordinary &lt;a href=&quot;{{ site.help_url }}&quot;&gt;jekyll help team is here for
-you!&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;When was the &lt;a href=&quot;https://github.com/jekyll/jekyll/commit/d189e05d236769c1e5594af9db4d6eacb86fc16e&quot;&gt;first commit to Jekyll&lt;/a&gt;?
-All the way back on October 19, 2008. It features interesting historical
-tidbits, such as the old name for Jekyll was “autoblog”, and was first
-released via Rubyforge. What a difference 6 years has made!&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Thanks to the following contributors for making this release possible:&lt;/p&gt;
-
-&lt;p&gt;Parker Moore, XhmikosR, Alfred Xing, Ruslan Korolev, Pat Hawks,
-chrisfinazzo, Mike Kruk, Tanguy Krotoff, Matt Hickford, Philipp Rudloff,
-Rob Murray, Sean Collins, Seth Warburton, Tom Thorogood, Vasily Vasinov,
-Veres Lajos, feivel, mitaa, nitoyon, snrbrnjna, tmthrgd, Bret Comnes,
-Charles Baynham, Christian Mayer, Dan Croak, Frederic Hemberger, Glauco
-Custódio, Igor Kapkov, and Kevin Ndung’u!&lt;/p&gt;
 </content>
 <author>
 <name>parkr</name>
