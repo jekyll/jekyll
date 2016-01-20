@@ -7,7 +7,7 @@ group :development do
   gem "rubocop", :branch => :master, :github => "bbatsov/rubocop"
   gem "pry"
 
-  UNLESS RUBY_ENGINE == "jruby"
+  unless RUBY_ENGINE == "jruby"
     gem "byebug"
   end
 end
