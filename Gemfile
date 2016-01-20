@@ -6,6 +6,10 @@ group :development do
   gem "launchy", "~> 2.3"
   gem "rubocop", :branch => :master, :github => "bbatsov/rubocop"
   gem "pry"
+
+  UNLESS RUBY_ENGINE == "jruby"
+    gem "byebug"
+  end
 end
 
 #
@@ -18,7 +22,6 @@ group :test do
   gem "rspec-mocks"
   gem "nokogiri"
   gem "rspec"
-  gem "byebug"
 end
 
 #
