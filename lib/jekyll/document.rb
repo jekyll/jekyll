@@ -58,7 +58,7 @@ module Jekyll
     # Merge some data in with this document's data.
     #
     # Returns the merged data.
-    def merge_data!(other)
+    def merge_data!(other, source: "YAML front matter")
       if other.key?('categories') && !other['categories'].nil?
         if other['categories'].is_a?(String)
           other['categories'] = other['categories'].split(" ").map(&:strip)
@@ -67,7 +67,7 @@ module Jekyll
       end
       Utils.deep_merge_hashes!(data, other)
       if data.key?('date') && !data['date'].is_a?(Time)
-         data['date'] = Utils.parse_date(data['date'].to_s, "Document '#{relative_path}' does not have a valid date in the YAML front matter.")
+        data['date'] = Utils.parse_date(data['date'].to_s, "Document '#{relative_path}' does not have a valid date in the #{source}.")
       end
       data
     end
@@ -287,20 +287,23 @@ module Jekyll
       else
         begin
           defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
-          merge_data!(defaults) unless defaults.empty?
+          merge_data!(defaults, source: "front matter defaults") unless defaults.empty?
 
           self.content = File.read(path, merged_file_read_opts(opts))
           if content =~ YAML_FRONT_MATTER_REGEXP
             self.content = $POSTMATCH
             data_file = SafeYAML.load($1)
-            merge_data!(data_file) if data_file
+            merge_data!(data_file, source: "YAML front matter") if data_file
           end
 
           post_read
         rescue SyntaxError => e
-          puts "YAML Exception reading #{path}: #{e.message}"
+          Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
         rescue Exception => e
-          puts "Error reading file #{path}: #{e.message}"
+          if e.is_a? Jekyll::Errors::FatalException
+            raise e
+          end
+          Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
         end
       end
     end
@@ -311,8 +314,10 @@ module Jekyll
         merge_data!({
           "slug" => slug,
           "ext"  => ext
-        })
-        merge_data!({"date" => date}) if data['date'].nil? || data['date'].to_i == site.time.to_i
+        }, source: "filename")
+        if data['date'].nil? || data['date'].to_i == site.time.to_i
+          merge_data!({"date" => date}, source: "filename")
+        end
         data['title'] ||= slug.split('-').select {|w| w.capitalize! || w }.join(' ')
       end
       populate_categories
@@ -332,7 +337,7 @@ module Jekyll
       superdirs = relative_path.sub(/#{special_dir}(.*)/, '').split(File::SEPARATOR).reject do |c|
         c.empty? || c.eql?(special_dir) || c.eql?(basename)
       end
-      merge_data!({ 'categories' => superdirs })
+      merge_data!({ 'categories' => superdirs }, source: "file path")
     end
 
     def populate_categories
