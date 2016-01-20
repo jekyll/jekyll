@@ -20,6 +20,8 @@ learning purposes.
     ([source](https://github.com/schacon/schacon.github.com))
 - [Leonard Lamprecht](http://leo.im)
     ([source](https://github.com/leo/leo.github.io))
+- [Intercooler.js](http://intercoolerjs.org/)
+    ([source](https://github.com/LeadDyno/intercooler-js/tree/master/www))
 
 If you would like to explore more examples, you can find a list of sites
 and their sources on the ["Sites" page in the Jekyll wiki][jekyll-sites].
