@@ -294,7 +294,7 @@ task :release => :build do
   end
   sh "git commit --allow-empty -m 'Release :gem: #{version}'"
   sh "git tag v#{version}"
-  sh "git push origin master"
+  sh "git push origin 3.0-stable"
   sh "git push origin v#{version}"
   sh "gem push pkg/#{name}-#{version}.gem"
 end
@@ -315,8 +315,8 @@ end
 namespace :docs do
   desc "Release #{docs_name} v#{version}"
   task :release => :build do
-    unless `git branch` =~ /^\* master$/
-      puts "You must be on the master branch to release!"
+  unless `git branch` =~ /^\* 3\.0-stable$/
+    puts "You must be on the 3.0-stable branch to release!"
       exit!
     end
     sh "gem push pkg/#{docs_name}-#{version}.gem"
