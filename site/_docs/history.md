@@ -4,6 +4,20 @@ title: History
 permalink: "/docs/history/"
 ---
 
+## 3.0.2 / 2016-01-20
+{: #v3-0-2}
+
+### Bug Fixes
+{: #bug-fixes-v3-0-2}
+
+- Document: throw a useful error when an invalid date is given ([#4378]({{ site.repository }}/issues/4378))
+
+### Development Fixes
+{: #development-fixes-v3-0-2}
+
+- `jekyll-docs` should be easily release-able ([#4152]({{ site.repository }}/issues/4152))
+
+
 ## 3.0.1 / 2015-11-17
 {: #v3-0-1}
 

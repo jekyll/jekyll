@@ -1,4 +1,8 @@
-## HEAD
+## 3.0.2 / 2016-01-20
+
+### Bug Fixes
+
+  * Document: throw a useful error when an invalid date is given (#4378)
 
 ### Development Fixes
 
