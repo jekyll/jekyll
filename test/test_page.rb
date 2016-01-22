@@ -8,7 +8,9 @@ class TestPage < JekyllUnitTest
   end
 
   def do_render(page)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
+    layouts = {
+      "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")
+    }
     page.render(layouts, @site.site_payload)
   end
 
@@ -204,6 +206,11 @@ class TestPage < JekyllUnitTest
         assert_equal "/about/", @page.permalink
         assert_equal @page.permalink, @page.url
         assert_equal "/about/", @page.dir
+      end
+
+      should "return nil permalink if no permalink exists" do
+        @page = setup_page('')
+        assert_equal nil, @page.permalink
       end
 
       should "not be writable outside of destination" do
