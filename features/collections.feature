@@ -168,7 +168,8 @@ Feature: Collections
         output: true
     """
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "Thanksgiving Black Friday" in "_site/index.html"
     And I should see "Happy Thanksgiving" in "_site/thanksgiving/2015-11-26-thanksgiving.html"
     And I should see "Black Friday" in "_site/thanksgiving/black-friday.html"
