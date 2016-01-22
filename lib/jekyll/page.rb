@@ -63,8 +63,7 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      return nil if data.nil? || data['permalink'].nil?
-      data['permalink']
+      data.nil? ? nil : data['permalink']
     end
 
     # The template of the permalink.
