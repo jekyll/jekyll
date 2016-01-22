@@ -290,18 +290,19 @@ module Jekyll
 
     def post_read
       if relative_path =~ DATE_FILENAME_MATCHER
-        _, date, slug, ext = $1, $2, $3, $4
+        date, slug, ext = $2, $3, $4
         if !data['date'] || data['date'].to_i == site.time.to_i
           merge_data!({"date" => date}, source: "filename")
         end
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
-        _, slug, ext = $1, $2, $3
+        slug, ext = $2, $3
       end
-
-      merge_data!({"slug" => slug, "ext" => ext}, source: "filename")
 
       # Try to ensure the user gets a title.
       data["title"] ||= Utils.titleize_slug(slug)
+      # Only overwrite slug & ext if they aren't specified.
+      data['slug'] ||= slug
+      data['ext']  ||= ext
 
       populate_categories
       populate_tags
