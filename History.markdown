@@ -88,6 +88,7 @@
   * Documentation: correct reference in Precedence section of Configuration docs (#4355)
   * Add @jmcglone's guide to github-pages doc page (#4364)
   * Added the Wordpress2Jekyll Wordpress plugin (#4377)
+  * Add Contentful Extension to list of third-party plugins (#4390)
 
 ## 3.0.2 / 2016-01-20
 
