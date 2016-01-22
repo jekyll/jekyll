@@ -443,11 +443,7 @@ module Jekyll
         super
       end
     end
-<<<<<<< HEAD
 
-=======
-
->>>>>>> origin/pull/cleanup-document__post_read
     private # :nodoc:
     def generate_excerpt
       if generate_excerpt?
