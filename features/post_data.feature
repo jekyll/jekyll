@@ -301,6 +301,18 @@ Feature: Post data
     And the _site directory should exist
     And I should see "Post author: Darth Vader" in "_site/2009/03/27/star-wars.html"
 
+  Scenario: Use a variable which is a reserved keyword in Ruby
+    Given I have a _posts directory
+    And I have a _layouts directory
+    And I have the following post:
+      | title   | date       | layout | class     | content                 |
+      | My post | 2016-01-21 | simple | kewl-post | Luke, I am your father. |
+    And I have a simple layout that contains "{{page.title}} has class {{page.class}}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "My post has class kewl-post" in "_site/2016/01/21/my-post.html"
+
   Scenario: Previous and next posts title
     Given I have a _posts directory
     And I have a _layouts directory

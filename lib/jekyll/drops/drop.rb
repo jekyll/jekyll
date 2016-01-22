@@ -46,7 +46,7 @@ module Jekyll
       def [](key)
         if self.class.mutable? && @mutations.key?(key)
           @mutations[key]
-        elsif respond_to? key
+        elsif self.class.invokable? key
           public_send key
         else
           fallback_data[key]
