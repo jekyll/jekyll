@@ -42,6 +42,7 @@
   * Page should respect output extension of its permalink (#4373)
   * Disable auto-regeneration when running server detached (#4376)
   * Drop#[]: only use public_send for keys in the content_methods array (#4388)
+  * Extract title from filename successfully when no date. (#4195)
 
 ### Development Fixes
 
