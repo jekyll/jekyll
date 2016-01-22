@@ -8,7 +8,7 @@ module Jekyll
     attr_accessor :content, :output
 
     YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-    DATELESS_FILENAME_MATCHER = /^(.*)(\.[^.]+)$/
+    DATELESS_FILENAME_MATCHER = /^(.+\/)*(.*)(\.[^.]+)$/
     DATE_FILENAME_MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
 
     # Create a new Document.
@@ -289,23 +289,24 @@ module Jekyll
     end
 
     def post_read
-      if DATE_FILENAME_MATCHER =~ relative_path
-        _, _, date, slug, ext = *relative_path.match(DATE_FILENAME_MATCHER)
-        merge_data!({
-          "slug" => slug,
-          "ext"  => ext
-        }, source: "filename")
-        data['title'] ||= slug.split('-').select(&:capitalize).join(' ')
-        if data['date'].nil? || data['date'].to_i == site.time.to_i
+      if relative_path =~ DATE_FILENAME_MATCHER
+        date, slug, ext = $2, $3, $4
+        if !data['date'] || data['date'].to_i == site.time.to_i
           merge_data!({"date" => date}, source: "filename")
         end
+      elsif relative_path =~ DATELESS_FILENAME_MATCHER
+        slug, ext = $2, $3
       end
+
+      # Try to ensure the user gets a title.
+      data["title"] ||= Utils.titleize_slug(slug)
+      # Only overwrite slug & ext if they aren't specified.
+      data['slug'] ||= slug
+      data['ext']  ||= ext
+
       populate_categories
       populate_tags
-
-      if generate_excerpt?
-        data['excerpt'] ||= Jekyll::Excerpt.new(self)
-      end
+      generate_excerpt
     end
 
     # Add superdirectories of the special_dir to categories.
@@ -440,6 +441,13 @@ module Jekyll
         data[method.to_s]
       else
         super
+      end
+    end
+
+    private # :nodoc:
+    def generate_excerpt
+      if generate_excerpt?
+        data["excerpt"] ||= Jekyll::Excerpt.new(self)
       end
     end
   end
