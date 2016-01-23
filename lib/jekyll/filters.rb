@@ -311,6 +311,19 @@ module Jekyll
       CGI.escapeHTML(input.inspect)
     end
 
+    # Returns a input if it is not blank, default_value otherwise
+    #
+    # This filter is included in Liquid 3.0
+    # https://github.com/Shopify/liquid/blob/v3.0.0/lib/liquid/standardfilters.rb#L286-L289
+    def default(input, default = EMPTY_STR)
+      return default unless input
+      if input.respond_to?(:empty?) && input.empty?
+        default
+      else
+        input
+      end
+    end
+
     private
     def time(input)
       case input

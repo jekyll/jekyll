@@ -79,6 +79,17 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Default</strong></p>
+        <p>If the input is blank, the output will be the given string. Otherwise, the input is passed through.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ post.author | default:"Guest Writer" }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Where</strong></p>
         <p>Select all the objects in an array where the key has the given value.</p>
       </td>
