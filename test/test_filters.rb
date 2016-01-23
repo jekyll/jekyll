@@ -430,5 +430,19 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "defualt" do
+      should "be overridable" do
+        assert_equal "foo", @filter.default("foo", "bar")
+      end
+
+      should "not be overridden by empty values" do
+        assert_equal "bar", @filter.default(nil, "bar")
+        assert_equal "bar", @filter.default("", "bar")
+        assert_equal "bar", @filter.default(false, "bar")
+        assert_equal "bar", @filter.default([], "bar")
+        assert_equal "bar", @filter.default({}, "bar")
+      end
+    end
+
   end
 end
