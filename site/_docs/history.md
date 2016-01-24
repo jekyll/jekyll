@@ -4,6 +4,107 @@ title: History
 permalink: "/docs/history/"
 ---
 
+## 3.1.0 / 2016-01-23
+{: #v3-1-0}
+
+### Minor Enhancements
+{: #minor-enhancements-v3-1-0}
+
+- Use `Liquid::Drop`s instead of `Hash`es in `#to_liquid` ([#4277]({{ site.repository }}/issues/4277))
+- Add 'sample' Liquid filter Equivalent to Array#sample functionality ([#4223]({{ site.repository }}/issues/4223))
+- Cache parsed include file to save liquid parsing time. ([#4120]({{ site.repository }}/issues/4120))
+- Slightly speed up url sanitization and handle multiples of ///. ([#4168]({{ site.repository }}/issues/4168))
+- Print debug message when a document is skipped from reading ([#4180]({{ site.repository }}/issues/4180))
+- Include tag should accept multiple variables in the include name ([#4183]({{ site.repository }}/issues/4183))
+- Add `-o` option to serve command which opens server URL ([#4144]({{ site.repository }}/issues/4144))
+- Add CodeClimate platform for better code quality. ([#4220]({{ site.repository }}/issues/4220))
+- General improvements for WEBrick via jekyll serve such as SSL & custom headers ([#4224]({{ site.repository }}/issues/4224), [#4228]({{ site.repository }}/issues/4228))
+- Add a default charset to content-type on webrick. ([#4231]({{ site.repository }}/issues/4231))
+- Switch `PluginManager` to use `require_with_graceful_fail` for better UX ([#4233]({{ site.repository }}/issues/4233))
+- Allow quoted date in front matter defaults ([#4184]({{ site.repository }}/issues/4184))
+- Add a Jekyll doctor warning for URLs that only differ by case ([#3171]({{ site.repository }}/issues/3171))
+- drops: create one base Drop class which can be set as mutable or not ([#4285]({{ site.repository }}/issues/4285))
+- drops: provide `#to_h` to allow for hash introspection ([#4281]({{ site.repository }}/issues/4281))
+- Shim subcommands with indication of gem possibly required so users know how to use them ([#4254]({{ site.repository }}/issues/4254))
+- Add smartify Liquid filter for SmartyPants ([#4323]({{ site.repository }}/issues/4323))
+- Raise error on empty permalink ([#4361]({{ site.repository }}/issues/4361))
+- Refactor Page#permalink method ([#4389]({{ site.repository }}/issues/4389))
+
+### Bug Fixes
+{: #bug-fixes-v3-1-0}
+
+- Pass build options into `clean` command ([#4177]({{ site.repository }}/issues/4177))
+- Allow users to use .htm and .xhtml (XHTML5.) ([#4160]({{ site.repository }}/issues/4160))
+- Prevent Shell Injection. ([#4200]({{ site.repository }}/issues/4200))
+- Convertible should make layout data accessible via `layout` instead of `page` ([#4205]({{ site.repository }}/issues/4205))
+- Avoid using `Dir.glob` with absolute path to allow special characters in the path ([#4150]({{ site.repository }}/issues/4150))
+- Handle empty config files ([#4052]({{ site.repository }}/issues/4052))
+- Rename `[@options](https://github.com/options)` so that it does not impact Liquid. ([#4173]({{ site.repository }}/issues/4173))
+- utils/drops: update Drop to support `Utils.deep_merge_hashes` ([#4289]({{ site.repository }}/issues/4289))
+- Make sure jekyll/drops/drop is loaded first. ([#4292]({{ site.repository }}/issues/4292))
+- Convertible/Page/Renderer: use payload hash accessor & setter syntax for backwards-compatibility ([#4311]({{ site.repository }}/issues/4311))
+- Drop: fix hash setter precendence ([#4312]({{ site.repository }}/issues/4312))
+- utils: `has_yaml_header?` should accept files with extraneous spaces ([#4290]({{ site.repository }}/issues/4290))
+- Escape html from site.title and page.title in site template ([#4307]({{ site.repository }}/issues/4307))
+- Allow custom file extensions if defined in `permalink` YAML front matter ([#4314]({{ site.repository }}/issues/4314))
+- Fix deep_merge_hashes! handling of drops and hashes ([#4359]({{ site.repository }}/issues/4359))
+- Page should respect output extension of its permalink ([#4373]({{ site.repository }}/issues/4373))
+- Disable auto-regeneration when running server detached ([#4376]({{ site.repository }}/issues/4376))
+- Drop#[]: only use public_send for keys in the content_methods array ([#4388]({{ site.repository }}/issues/4388))
+- Extract title from filename successfully when no date. ([#4195]({{ site.repository }}/issues/4195))
+
+### Development Fixes
+{: #development-fixes-v3-1-0}
+
+- `jekyll-docs` should be easily release-able ([#4152]({{ site.repository }}/issues/4152))
+- Allow use of Cucumber 2.1 or greater ([#4181]({{ site.repository }}/issues/4181))
+- Modernize Kramdown for Markdown converter. ([#4109]({{ site.repository }}/issues/4109))
+- Change TestDoctorCommand to JekyllUnitTest... ([#4263]({{ site.repository }}/issues/4263))
+- Create namespaced rake tasks in separate `.rake` files under `lib/tasks` ([#4282]({{ site.repository }}/issues/4282))
+- markdown: refactor for greater readability & efficiency ([#3771]({{ site.repository }}/issues/3771))
+- Fix many Rubocop style errors ([#4301]({{ site.repository }}/issues/4301))
+- Fix spelling of "GitHub" in docs and history ([#4322]({{ site.repository }}/issues/4322))
+- Reorganize and cleanup the Gemfile, shorten required depends. ([#4318]({{ site.repository }}/issues/4318))
+- Remove script/rebund. ([#4341]({{ site.repository }}/issues/4341))
+- Implement codeclimate platform ([#4340]({{ site.repository }}/issues/4340))
+- Remove ObectSpace dumping and start using inherited, it's faster. ([#4342]({{ site.repository }}/issues/4342))
+- Add script/travis so all people can play with Travis-CI images. ([#4338]({{ site.repository }}/issues/4338))
+- Move Cucumber to using RSpec-Expections and furthering JRuby support. ([#4343]({{ site.repository }}/issues/4343))
+- Rearrange Cucumber and add some flair. ([#4347]({{ site.repository }}/issues/4347))
+- Remove old FIXME ([#4349]({{ site.repository }}/issues/4349))
+- Clean up the Gemfile (and keep all the necessary dependencies) ([#4350]({{ site.repository }}/issues/4350))
+
+### Site Enhancements
+{: #site-enhancements-v3-1-0}
+
+- Add three plugins to directory ([#4163]({{ site.repository }}/issues/4163))
+- Add upgrading docs from 2.x to 3.x ([#4157]({{ site.repository }}/issues/4157))
+- Add `protect_email` to the plugins index. ([#4169]({{ site.repository }}/issues/4169))
+- Add `jekyll-deploy` to list of third-party plugins ([#4179]({{ site.repository }}/issues/4179))
+- Clarify plugin docs ([#4154]({{ site.repository }}/issues/4154))
+- Add Kickster to deployment methods in documentation ([#4190]({{ site.repository }}/issues/4190))
+- Add DavidBurela's tutorial for Windows to Windows docs page ([#4210]({{ site.repository }}/issues/4210))
+- Change GitHub code block to highlight tag to avoid it overlaps parent div ([#4121]({{ site.repository }}/issues/4121))
+- Update FormKeep link to be something more specific to Jekyll ([#4243]({{ site.repository }}/issues/4243))
+- Remove example Roger Chapman site, as the domain doesn't exist ([#4249]({{ site.repository }}/issues/4249))
+- Added configuration options for `draft_posts` to configuration docs ([#4251]({{ site.repository }}/issues/4251))
+- Fix checklist in `_assets.md` ([#4259]({{ site.repository }}/issues/4259))
+- Add Markdown examples to Pages docs ([#4275]({{ site.repository }}/issues/4275))
+- Add jekyll-paginate-category to list of third-party plugins ([#4273]({{ site.repository }}/issues/4273))
+- Add `jekyll-responsive_image` to list of third-party plugins ([#4286]({{ site.repository }}/issues/4286))
+- Add `jekyll-commonmark` to list of third-party plugins ([#4299]({{ site.repository }}/issues/4299))
+- Add documentation for incremental regeneration ([#4293]({{ site.repository }}/issues/4293))
+- Add note about removal of relative permalink support in upgrading docs ([#4303]({{ site.repository }}/issues/4303))
+- Add Pro Tip to use front matter variable to create clean URLs ([#4296]({{ site.repository }}/issues/4296))
+- Fix grammar in the documentation for posts. ([#4330]({{ site.repository }}/issues/4330))
+- Add documentation for smartify Liquid filter ([#4333]({{ site.repository }}/issues/4333))
+- Fixed broken link to blog on using mathjax with jekyll ([#4344]({{ site.repository }}/issues/4344))
+- Documentation: correct reference in Precedence section of Configuration docs ([#4355]({{ site.repository }}/issues/4355))
+- Add [@jmcglone](https://github.com/jmcglone)'s guide to github-pages doc page ([#4364]({{ site.repository }}/issues/4364))
+- Added the Wordpress2Jekyll Wordpress plugin ([#4377]({{ site.repository }}/issues/4377))
+- Add Contentful Extension to list of third-party plugins ([#4390]({{ site.repository }}/issues/4390))
+
+
 ## 3.0.2 / 2016-01-20
 {: #v3-0-2}
 
