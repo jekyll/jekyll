@@ -1,31 +1,31 @@
-bundler_args: --without benchmark:site:development
 before_script: bundle update
+bundler_args: --without benchmark:site:development
 script: script/cibuild
 cache: bundler
 language: ruby
 sudo: false
 
 rvm:
-- 2.0.0-p648
-- 2.1.8
-- 2.2.4
-- 2.3.0
-- jruby-9.0.4.0
-- ruby-head
+  - &ruby1 2.3.0
+  - &ruby2 2.2.4
+  - &ruby3 2.1.8
+  - &ruby4 2.0.0-p648
+  - &jruby jruby-9.0.4.0
+  - &rhead ruby-head
 
 matrix:
   fast_finish: true
   allow_failures:
-    - rvm: jruby-9.0.4.0
-    - rvm: ruby-head
+    - rvm: *jruby
+    - rvm: *rhead
 env:
   matrix:
-  - TEST_SUITE=test
-  - TEST_SUITE=cucumber
+    - TEST_SUITE=test
+    - TEST_SUITE=cucumber
 
 branches:
   only:
-  - master
+    - master
 
 notifications:
   irc:
