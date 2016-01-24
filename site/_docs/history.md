@@ -103,6 +103,7 @@ permalink: "/docs/history/"
 - Add [@jmcglone](https://github.com/jmcglone)'s guide to github-pages doc page ([#4364]({{ site.repository }}/issues/4364))
 - Added the Wordpress2Jekyll Wordpress plugin ([#4377]({{ site.repository }}/issues/4377))
 - Add Contentful Extension to list of third-party plugins ([#4390]({{ site.repository }}/issues/4390))
+- Correct Minor spelling error ([#4394]({{ site.repository }}/issues/4394))
 
 
 ## 3.0.2 / 2016-01-20
