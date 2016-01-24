@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 2.0.3 Released</title>
+  <title>Jekyll 3.1.0 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.1.0">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" />
@@ -167,8 +167,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 2.0.3 Released
-    <a href="/news/2014/05/08/jekyll-2-0-3-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 3.1.0 Released
+    <a href="/news/2016/01/23/jekyll-3-1-0-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -177,7 +177,7 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      08 May 2014
+      23 Jan 2016
     </span>
     <a href="https://github.com/parkr" class="post-author">
       <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
@@ -185,15 +185,49 @@
     </a>
   </div>
   <div class="post-content">
-    <p>Hey again! Just wanted to let you know we’ve released another version of Jekyll, jam-packed with bug fixes.</p>
+    <p>Happy weekend! To make your weekend all the better, we have just released
+v3.1.0 of Jekyll.</p>
 
-<p>A huge “thank you” is in order for all the folks who have submitted bug reports over the last 2 days — your input is what allows this project to continue. It’s always a pain to deal with a MAJOR version bump release, but it’s been pretty smooth so far and you have all been nice about the flaws you’ve found in the tool. Keep filing those reports so we can continue to make Jekyll even better!</p>
+<p>There are <em>lots</em> of great performance improvements, including a huge one
+which is to use Liquid drops instead of hashes. Much of the slowness in
+Jekyll is due to Jekyll making lots of objects it doesn’t need to make.
+By making these objects only as they’re needed, we can speed up Jekyll
+considerably!</p>
 
-<p>Thank you to the contributors that contributed code to 2.0.1, 2.0.2, and/or 2.0.3:</p>
+<p>Some other highlights:</p>
 
-<p>Parker Moore, Yi Zeng, Gabe Ortiz, Aaron Broder, Alberto Grespan, gpxl, David Briggs, Kevin Ingersoll, and Troy Swanson.</p>
+<ul>
+  <li>Fix: <code>permalink</code>s with non-HTML extensions will not be honored</li>
+  <li>Fix: <code>jekyll clean</code> now accepts build flags like <code>--source</code>.</li>
+  <li>Enhancement: <code>include</code> tags can now accept multiple liquid variables</li>
+  <li>Feature: adds new <code>sample</code> liquid tag which gets random element from an array</li>
+  <li>Fix: Jekyll will read in files with YAML front matter that has extraneous
+spaces after the first line</li>
+  <li>Enhancement: extract the <code>title</code> attribute from the filename for
+collection items without a date</li>
+  <li>Fix: gracefully handle empty configuration files</li>
+</ul>
 
-<p>As always, check out the <a href="/docs/history/">changelog</a> for more info. Happy Jekylling!</p>
+<p>… and <a href="/docs/history/#v3-1-0">a whole bunch more</a>!</p>
+
+<p>Please <a href="https://github.com/jekyll/jekyll/issues/new?title=Jekyll+3.1.0+Issue:">file a bug</a>
+if you encounter any issues! As always, <a href="https://talk.jekyllrb.com">Jekyll Talk</a>
+is the best place to get help if you’re encountering a problem.</p>
+
+<p>Special thanks to all our amazing contributors who helped make v3.1.0 a
+possibility:</p>
+
+<p>Alex J Best, Alexander Köplinger, Alfred Xing, Alistair Calder, Atul
+Bhosale, Ben Orenstein, Chi Trung Nguyen, Conor O’Callaghan, Craig P.
+Motlin, Dan K, David Burela, David Litvak Bruno, Decider UI, Ducksan Cho,
+Florian Thomas, James Wen, Jordon Bedwell, Joseph Wynn, Kakoma, Liam
+Bowers, Mike Neumegen, Nick Quaranto, Nielsen Ramon, Olivér Falvai, Pat
+Hawks, Paul Robert Lloyd, Pedro Euko, Peter Suschlik, Sam Volin, Samuel
+Wright, Sasha Friedenberg, Tim Cuthbertson, Vincent Wochnik, William
+Entriken, Zshawn Syed, chrisfinazzo, ducksan cho, leethomas,
+midnightSuyama, musoke, and rebornix</p>
+
+<p>Happy Jekylling!</p>
 
   </div>
 </article>
@@ -213,7 +247,7 @@
     <h4>Recent Releases</h4>
     <ul>
       
-      <li class="">
+      <li class="current">
         <a href="/news/2016/01/23/jekyll-3-1-0-released/">Version 3.1.0</a>
       </li>
       

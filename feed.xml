@@ -1,12 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-<generator uri="http://jekyllrb.com" version="3.1.0.pre.rc2">Jekyll</generator>
+<generator uri="http://jekyllrb.com" version="3.1.0">Jekyll</generator>
 <link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-01-20T14:35:12-08:00</updated>
+<updated>2016-01-24T13:15:51-08:00</updated>
 <id>http://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.1.0 Released</title>
+<link href="http://jekyllrb.com/news/2016/01/23/jekyll-3-1-0-released/" rel="alternate" type="text/html" title="Jekyll 3.1.0 Released" />
+<published>2016-01-23T17:32:12-08:00</published>
+<updated>2016-01-23T17:32:12-08:00</updated>
+<id>http://jekyllrb.com/news/2016/01/23/jekyll-3-1-0-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2016/01/23/jekyll-3-1-0-released/">&lt;p&gt;Happy weekend! To make your weekend all the better, we have just released
+v3.1.0 of Jekyll.&lt;/p&gt;
+
+&lt;p&gt;There are &lt;em&gt;lots&lt;/em&gt; of great performance improvements, including a huge one
+which is to use Liquid drops instead of hashes. Much of the slowness in
+Jekyll is due to Jekyll making lots of objects it doesn’t need to make.
+By making these objects only as they’re needed, we can speed up Jekyll
+considerably!&lt;/p&gt;
+
+&lt;p&gt;Some other highlights:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fix: &lt;code&gt;permalink&lt;/code&gt;s with non-HTML extensions will not be honored&lt;/li&gt;
+  &lt;li&gt;Fix: &lt;code&gt;jekyll clean&lt;/code&gt; now accepts build flags like &lt;code&gt;--source&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Enhancement: &lt;code&gt;include&lt;/code&gt; tags can now accept multiple liquid variables&lt;/li&gt;
+  &lt;li&gt;Feature: adds new &lt;code&gt;sample&lt;/code&gt; liquid tag which gets random element from an array&lt;/li&gt;
+  &lt;li&gt;Fix: Jekyll will read in files with YAML front matter that has extraneous
+spaces after the first line&lt;/li&gt;
+  &lt;li&gt;Enhancement: extract the &lt;code&gt;title&lt;/code&gt; attribute from the filename for
+collection items without a date&lt;/li&gt;
+  &lt;li&gt;Fix: gracefully handle empty configuration files&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;… and &lt;a href=&quot;/docs/history/#v3-1-0&quot;&gt;a whole bunch more&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;Please &lt;a href=&quot;{{ site.repository }}/issues/new?title=Jekyll+3.1.0+Issue:&quot;&gt;file a bug&lt;/a&gt;
+if you encounter any issues! As always, &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;Jekyll Talk&lt;/a&gt;
+is the best place to get help if you’re encountering a problem.&lt;/p&gt;
+
+&lt;p&gt;Special thanks to all our amazing contributors who helped make v3.1.0 a
+possibility:&lt;/p&gt;
+
+&lt;p&gt;Alex J Best, Alexander Köplinger, Alfred Xing, Alistair Calder, Atul
+Bhosale, Ben Orenstein, Chi Trung Nguyen, Conor O’Callaghan, Craig P.
+Motlin, Dan K, David Burela, David Litvak Bruno, Decider UI, Ducksan Cho,
+Florian Thomas, James Wen, Jordon Bedwell, Joseph Wynn, Kakoma, Liam
+Bowers, Mike Neumegen, Nick Quaranto, Nielsen Ramon, Olivér Falvai, Pat
+Hawks, Paul Robert Lloyd, Pedro Euko, Peter Suschlik, Sam Volin, Samuel
+Wright, Sasha Friedenberg, Tim Cuthbertson, Vincent Wochnik, William
+Entriken, Zshawn Syed, chrisfinazzo, ducksan cho, leethomas,
+midnightSuyama, musoke, and rebornix&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.0.2 Released</title>
 <link href="http://jekyllrb.com/news/2016/01/20/jekyll-3-0-2-released/" rel="alternate" type="text/html" title="Jekyll 3.0.2 Released" />
@@ -256,37 +311,6 @@ on timezone discrepancies.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;/docs/history/&quot;&gt;Full history here.&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll 2.5.1 Released</title>
-<link href="http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released/" rel="alternate" type="text/html" title="Jekyll 2.5.1 Released" />
-<published>2014-11-09T09:47:52-08:00</published>
-<updated>2014-11-09T09:47:52-08:00</updated>
-<id>http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released</id>
-<content type="html" xml:base="http://jekyllrb.com/news/2014/11/09/jekyll-2-5-1-released/">&lt;p&gt;Hot on the heels of v2.5.0, this release brings relief to our Windows
-users. It includes a fix for a 2.5.0 path sanitation change that has been
-confirmed to work on Windows.&lt;/p&gt;
-
-&lt;p&gt;To our Windows users: while we don’t officially support Windows, we don’t
-wish to impede your normal use of Jekyll at all. Our lack of full support
-for Windows is due to our lack of a Windows machine for development testing
-(no one on the core team has a Windows machine upon which to test new
-release candidates), not due to any malice or willful oversight. If you
-come to us with an issue, we are more than happy to work through it with
-you to come to a solution that works for all platforms. Along those lines,
-we have created a &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/3069&quot;&gt;&lt;strong&gt;Windows Test Force&lt;/strong&gt;&lt;/a&gt; (WTF) which is a group of Jekyll
-users dedicated to making sure all future releases work on Windows &lt;em&gt;before&lt;/em&gt;
-they’re released so we don’t have this issue again. A special thanks goes
-out to the initial WTF team members, XhmikosR, Julian Thilo, Pedro Rogério,
-and Alfred Xing.&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;
-
 </content>
 <author>
 <name>parkr</name>

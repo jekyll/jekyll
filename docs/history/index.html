@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>History</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.1.0.pre.rc2">
+  <meta name="generator" content="Jekyll v3.1.0">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -2363,7 +2363,111 @@
             <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/history.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
           </div>
           <h1>History</h1>
-          <h2 id="v3-0-2">3.0.2 / 2016-01-20</h2>
+          <h2 id="v3-1-0">3.1.0 / 2016-01-23</h2>
+
+<h3 id="minor-enhancements-v3-1-0">Minor Enhancements</h3>
+
+<ul>
+  <li>Use <code>Liquid::Drop</code>s instead of <code>Hash</code>es in <code>#to_liquid</code> (<a href="https://github.com/jekyll/jekyll/issues/4277">#4277</a>)</li>
+  <li>Add ‘sample’ Liquid filter Equivalent to Array#sample functionality (<a href="https://github.com/jekyll/jekyll/issues/4223">#4223</a>)</li>
+  <li>Cache parsed include file to save liquid parsing time. (<a href="https://github.com/jekyll/jekyll/issues/4120">#4120</a>)</li>
+  <li>Slightly speed up url sanitization and handle multiples of ///. (<a href="https://github.com/jekyll/jekyll/issues/4168">#4168</a>)</li>
+  <li>Print debug message when a document is skipped from reading (<a href="https://github.com/jekyll/jekyll/issues/4180">#4180</a>)</li>
+  <li>Include tag should accept multiple variables in the include name (<a href="https://github.com/jekyll/jekyll/issues/4183">#4183</a>)</li>
+  <li>Add <code>-o</code> option to serve command which opens server URL (<a href="https://github.com/jekyll/jekyll/issues/4144">#4144</a>)</li>
+  <li>Add CodeClimate platform for better code quality. (<a href="https://github.com/jekyll/jekyll/issues/4220">#4220</a>)</li>
+  <li>General improvements for WEBrick via jekyll serve such as SSL &amp; custom headers (<a href="https://github.com/jekyll/jekyll/issues/4224">#4224</a>, <a href="https://github.com/jekyll/jekyll/issues/4228">#4228</a>)</li>
+  <li>Add a default charset to content-type on webrick. (<a href="https://github.com/jekyll/jekyll/issues/4231">#4231</a>)</li>
+  <li>Switch <code>PluginManager</code> to use <code>require_with_graceful_fail</code> for better UX (<a href="https://github.com/jekyll/jekyll/issues/4233">#4233</a>)</li>
+  <li>Allow quoted date in front matter defaults (<a href="https://github.com/jekyll/jekyll/issues/4184">#4184</a>)</li>
+  <li>Add a Jekyll doctor warning for URLs that only differ by case (<a href="https://github.com/jekyll/jekyll/issues/3171">#3171</a>)</li>
+  <li>drops: create one base Drop class which can be set as mutable or not (<a href="https://github.com/jekyll/jekyll/issues/4285">#4285</a>)</li>
+  <li>drops: provide <code>#to_h</code> to allow for hash introspection (<a href="https://github.com/jekyll/jekyll/issues/4281">#4281</a>)</li>
+  <li>Shim subcommands with indication of gem possibly required so users know how to use them (<a href="https://github.com/jekyll/jekyll/issues/4254">#4254</a>)</li>
+  <li>Add smartify Liquid filter for SmartyPants (<a href="https://github.com/jekyll/jekyll/issues/4323">#4323</a>)</li>
+  <li>Raise error on empty permalink (<a href="https://github.com/jekyll/jekyll/issues/4361">#4361</a>)</li>
+  <li>Refactor Page#permalink method (<a href="https://github.com/jekyll/jekyll/issues/4389">#4389</a>)</li>
+</ul>
+
+<h3 id="bug-fixes-v3-1-0">Bug Fixes</h3>
+
+<ul>
+  <li>Pass build options into <code>clean</code> command (<a href="https://github.com/jekyll/jekyll/issues/4177">#4177</a>)</li>
+  <li>Allow users to use .htm and .xhtml (XHTML5.) (<a href="https://github.com/jekyll/jekyll/issues/4160">#4160</a>)</li>
+  <li>Prevent Shell Injection. (<a href="https://github.com/jekyll/jekyll/issues/4200">#4200</a>)</li>
+  <li>Convertible should make layout data accessible via <code>layout</code> instead of <code>page</code> (<a href="https://github.com/jekyll/jekyll/issues/4205">#4205</a>)</li>
+  <li>Avoid using <code>Dir.glob</code> with absolute path to allow special characters in the path (<a href="https://github.com/jekyll/jekyll/issues/4150">#4150</a>)</li>
+  <li>Handle empty config files (<a href="https://github.com/jekyll/jekyll/issues/4052">#4052</a>)</li>
+  <li>Rename <code>[@options](https://github.com/options)</code> so that it does not impact Liquid. (<a href="https://github.com/jekyll/jekyll/issues/4173">#4173</a>)</li>
+  <li>utils/drops: update Drop to support <code>Utils.deep_merge_hashes</code> (<a href="https://github.com/jekyll/jekyll/issues/4289">#4289</a>)</li>
+  <li>Make sure jekyll/drops/drop is loaded first. (<a href="https://github.com/jekyll/jekyll/issues/4292">#4292</a>)</li>
+  <li>Convertible/Page/Renderer: use payload hash accessor &amp; setter syntax for backwards-compatibility (<a href="https://github.com/jekyll/jekyll/issues/4311">#4311</a>)</li>
+  <li>Drop: fix hash setter precendence (<a href="https://github.com/jekyll/jekyll/issues/4312">#4312</a>)</li>
+  <li>utils: <code>has_yaml_header?</code> should accept files with extraneous spaces (<a href="https://github.com/jekyll/jekyll/issues/4290">#4290</a>)</li>
+  <li>Escape html from site.title and page.title in site template (<a href="https://github.com/jekyll/jekyll/issues/4307">#4307</a>)</li>
+  <li>Allow custom file extensions if defined in <code>permalink</code> YAML front matter (<a href="https://github.com/jekyll/jekyll/issues/4314">#4314</a>)</li>
+  <li>Fix deep_merge_hashes! handling of drops and hashes (<a href="https://github.com/jekyll/jekyll/issues/4359">#4359</a>)</li>
+  <li>Page should respect output extension of its permalink (<a href="https://github.com/jekyll/jekyll/issues/4373">#4373</a>)</li>
+  <li>Disable auto-regeneration when running server detached (<a href="https://github.com/jekyll/jekyll/issues/4376">#4376</a>)</li>
+  <li>Drop#[]: only use public_send for keys in the content_methods array (<a href="https://github.com/jekyll/jekyll/issues/4388">#4388</a>)</li>
+  <li>Extract title from filename successfully when no date. (<a href="https://github.com/jekyll/jekyll/issues/4195">#4195</a>)</li>
+</ul>
+
+<h3 id="development-fixes-v3-1-0">Development Fixes</h3>
+
+<ul>
+  <li><code>jekyll-docs</code> should be easily release-able (<a href="https://github.com/jekyll/jekyll/issues/4152">#4152</a>)</li>
+  <li>Allow use of Cucumber 2.1 or greater (<a href="https://github.com/jekyll/jekyll/issues/4181">#4181</a>)</li>
+  <li>Modernize Kramdown for Markdown converter. (<a href="https://github.com/jekyll/jekyll/issues/4109">#4109</a>)</li>
+  <li>Change TestDoctorCommand to JekyllUnitTest… (<a href="https://github.com/jekyll/jekyll/issues/4263">#4263</a>)</li>
+  <li>Create namespaced rake tasks in separate <code>.rake</code> files under <code>lib/tasks</code> (<a href="https://github.com/jekyll/jekyll/issues/4282">#4282</a>)</li>
+  <li>markdown: refactor for greater readability &amp; efficiency (<a href="https://github.com/jekyll/jekyll/issues/3771">#3771</a>)</li>
+  <li>Fix many Rubocop style errors (<a href="https://github.com/jekyll/jekyll/issues/4301">#4301</a>)</li>
+  <li>Fix spelling of “GitHub” in docs and history (<a href="https://github.com/jekyll/jekyll/issues/4322">#4322</a>)</li>
+  <li>Reorganize and cleanup the Gemfile, shorten required depends. (<a href="https://github.com/jekyll/jekyll/issues/4318">#4318</a>)</li>
+  <li>Remove script/rebund. (<a href="https://github.com/jekyll/jekyll/issues/4341">#4341</a>)</li>
+  <li>Implement codeclimate platform (<a href="https://github.com/jekyll/jekyll/issues/4340">#4340</a>)</li>
+  <li>Remove ObectSpace dumping and start using inherited, it’s faster. (<a href="https://github.com/jekyll/jekyll/issues/4342">#4342</a>)</li>
+  <li>Add script/travis so all people can play with Travis-CI images. (<a href="https://github.com/jekyll/jekyll/issues/4338">#4338</a>)</li>
+  <li>Move Cucumber to using RSpec-Expections and furthering JRuby support. (<a href="https://github.com/jekyll/jekyll/issues/4343">#4343</a>)</li>
+  <li>Rearrange Cucumber and add some flair. (<a href="https://github.com/jekyll/jekyll/issues/4347">#4347</a>)</li>
+  <li>Remove old FIXME (<a href="https://github.com/jekyll/jekyll/issues/4349">#4349</a>)</li>
+  <li>Clean up the Gemfile (and keep all the necessary dependencies) (<a href="https://github.com/jekyll/jekyll/issues/4350">#4350</a>)</li>
+</ul>
+
+<h3 id="site-enhancements-v3-1-0">Site Enhancements</h3>
+
+<ul>
+  <li>Add three plugins to directory (<a href="https://github.com/jekyll/jekyll/issues/4163">#4163</a>)</li>
+  <li>Add upgrading docs from 2.x to 3.x (<a href="https://github.com/jekyll/jekyll/issues/4157">#4157</a>)</li>
+  <li>Add <code>protect_email</code> to the plugins index. (<a href="https://github.com/jekyll/jekyll/issues/4169">#4169</a>)</li>
+  <li>Add <code>jekyll-deploy</code> to list of third-party plugins (<a href="https://github.com/jekyll/jekyll/issues/4179">#4179</a>)</li>
+  <li>Clarify plugin docs (<a href="https://github.com/jekyll/jekyll/issues/4154">#4154</a>)</li>
+  <li>Add Kickster to deployment methods in documentation (<a href="https://github.com/jekyll/jekyll/issues/4190">#4190</a>)</li>
+  <li>Add DavidBurela’s tutorial for Windows to Windows docs page (<a href="https://github.com/jekyll/jekyll/issues/4210">#4210</a>)</li>
+  <li>Change GitHub code block to highlight tag to avoid it overlaps parent div (<a href="https://github.com/jekyll/jekyll/issues/4121">#4121</a>)</li>
+  <li>Update FormKeep link to be something more specific to Jekyll (<a href="https://github.com/jekyll/jekyll/issues/4243">#4243</a>)</li>
+  <li>Remove example Roger Chapman site, as the domain doesn’t exist (<a href="https://github.com/jekyll/jekyll/issues/4249">#4249</a>)</li>
+  <li>Added configuration options for <code>draft_posts</code> to configuration docs (<a href="https://github.com/jekyll/jekyll/issues/4251">#4251</a>)</li>
+  <li>Fix checklist in <code>_assets.md</code> (<a href="https://github.com/jekyll/jekyll/issues/4259">#4259</a>)</li>
+  <li>Add Markdown examples to Pages docs (<a href="https://github.com/jekyll/jekyll/issues/4275">#4275</a>)</li>
+  <li>Add jekyll-paginate-category to list of third-party plugins (<a href="https://github.com/jekyll/jekyll/issues/4273">#4273</a>)</li>
+  <li>Add <code>jekyll-responsive_image</code> to list of third-party plugins (<a href="https://github.com/jekyll/jekyll/issues/4286">#4286</a>)</li>
+  <li>Add <code>jekyll-commonmark</code> to list of third-party plugins (<a href="https://github.com/jekyll/jekyll/issues/4299">#4299</a>)</li>
+  <li>Add documentation for incremental regeneration (<a href="https://github.com/jekyll/jekyll/issues/4293">#4293</a>)</li>
+  <li>Add note about removal of relative permalink support in upgrading docs (<a href="https://github.com/jekyll/jekyll/issues/4303">#4303</a>)</li>
+  <li>Add Pro Tip to use front matter variable to create clean URLs (<a href="https://github.com/jekyll/jekyll/issues/4296">#4296</a>)</li>
+  <li>Fix grammar in the documentation for posts. (<a href="https://github.com/jekyll/jekyll/issues/4330">#4330</a>)</li>
+  <li>Add documentation for smartify Liquid filter (<a href="https://github.com/jekyll/jekyll/issues/4333">#4333</a>)</li>
+  <li>Fixed broken link to blog on using mathjax with jekyll (<a href="https://github.com/jekyll/jekyll/issues/4344">#4344</a>)</li>
+  <li>Documentation: correct reference in Precedence section of Configuration docs (<a href="https://github.com/jekyll/jekyll/issues/4355">#4355</a>)</li>
+  <li>Add <a href="https://github.com/jmcglone">@jmcglone</a>’s guide to github-pages doc page (<a href="https://github.com/jekyll/jekyll/issues/4364">#4364</a>)</li>
+  <li>Added the Wordpress2Jekyll Wordpress plugin (<a href="https://github.com/jekyll/jekyll/issues/4377">#4377</a>)</li>
+  <li>Add Contentful Extension to list of third-party plugins (<a href="https://github.com/jekyll/jekyll/issues/4390">#4390</a>)</li>
+  <li>Correct Minor spelling error (<a href="https://github.com/jekyll/jekyll/issues/4394">#4394</a>)</li>
+</ul>
+
+<h2 id="v3-0-2">3.0.2 / 2016-01-20</h2>
 
 <h3 id="bug-fixes-v3-0-2">Bug Fixes</h3>
 

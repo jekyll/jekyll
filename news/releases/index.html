@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Releases</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.1.0.pre.rc2">
+  <meta name="generator" content="Jekyll v3.1.0">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -80,6 +80,8 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="v1.x">
+      
+      <option value="/news/2016/01/23/jekyll-3-1-0-released/">Jekyll 3.1.0 Released</option>
       
       <option value="/news/2016/01/20/jekyll-3-0-2-released/">Jekyll 3.0.2 Released</option>
       
@@ -164,6 +166,75 @@
 
       <div class="unit four-fifths">
         
+  <article>
+  <h2>
+    <a href="/news/2016/01/23/jekyll-3-1-0-released/">
+      Jekyll 3.1.0 Released
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      release
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      23 Jan 2016
+    </span>
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
+    </a>
+  </div>
+  <div class="post-content">
+    <p>Happy weekend! To make your weekend all the better, we have just released
+v3.1.0 of Jekyll.</p>
+
+<p>There are <em>lots</em> of great performance improvements, including a huge one
+which is to use Liquid drops instead of hashes. Much of the slowness in
+Jekyll is due to Jekyll making lots of objects it doesn’t need to make.
+By making these objects only as they’re needed, we can speed up Jekyll
+considerably!</p>
+
+<p>Some other highlights:</p>
+
+<ul>
+  <li>Fix: <code>permalink</code>s with non-HTML extensions will not be honored</li>
+  <li>Fix: <code>jekyll clean</code> now accepts build flags like <code>--source</code>.</li>
+  <li>Enhancement: <code>include</code> tags can now accept multiple liquid variables</li>
+  <li>Feature: adds new <code>sample</code> liquid tag which gets random element from an array</li>
+  <li>Fix: Jekyll will read in files with YAML front matter that has extraneous
+spaces after the first line</li>
+  <li>Enhancement: extract the <code>title</code> attribute from the filename for
+collection items without a date</li>
+  <li>Fix: gracefully handle empty configuration files</li>
+</ul>
+
+<p>… and <a href="/docs/history/#v3-1-0">a whole bunch more</a>!</p>
+
+<p>Please <a href="https://github.com/jekyll/jekyll/issues/new?title=Jekyll+3.1.0+Issue:">file a bug</a>
+if you encounter any issues! As always, <a href="https://talk.jekyllrb.com">Jekyll Talk</a>
+is the best place to get help if you’re encountering a problem.</p>
+
+<p>Special thanks to all our amazing contributors who helped make v3.1.0 a
+possibility:</p>
+
+<p>Alex J Best, Alexander Köplinger, Alfred Xing, Alistair Calder, Atul
+Bhosale, Ben Orenstein, Chi Trung Nguyen, Conor O’Callaghan, Craig P.
+Motlin, Dan K, David Burela, David Litvak Bruno, Decider UI, Ducksan Cho,
+Florian Thomas, James Wen, Jordon Bedwell, Joseph Wynn, Kakoma, Liam
+Bowers, Mike Neumegen, Nick Quaranto, Nielsen Ramon, Olivér Falvai, Pat
+Hawks, Paul Robert Lloyd, Pedro Euko, Peter Suschlik, Sam Volin, Samuel
+Wright, Sasha Friedenberg, Tim Cuthbertson, Vincent Wochnik, William
+Entriken, Zshawn Syed, chrisfinazzo, ducksan cho, leethomas,
+midnightSuyama, musoke, and rebornix</p>
+
+<p>Happy Jekylling!</p>
+
+  </div>
+</article>
+
+
   <article>
   <h2>
     <a href="/news/2016/01/20/jekyll-3-0-2-released/">
@@ -1644,6 +1715,10 @@ examples and for compiling this list):</p>
     <ul>
       
       <li class="">
+        <a href="/news/2016/01/23/jekyll-3-1-0-released/">Version 3.1.0</a>
+      </li>
+      
+      <li class="">
         <a href="/news/2016/01/20/jekyll-3-0-2-released/">Version 3.0.2</a>
       </li>
       
@@ -1659,16 +1734,14 @@ examples and for compiling this list):</p>
         <a href="/news/2015/01/24/jekyll-3-0-0-beta1-released/">Version 3.0.0.beta1</a>
       </li>
       
-      <li class="">
-        <a href="/news/2014/12/22/jekyll-2-5-3-released/">Version 2.5.3</a>
-      </li>
-      
       <li>
         <a href="/docs/history/">History »</a>
       </li>
     </ul>
     <h4>Other News</h4>
     <ul>
+        
+        
         
         
         
