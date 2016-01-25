@@ -15,6 +15,26 @@ Jonathan McGlone to get you up and running](http://jmcglone.com/guides/github-pa
 This guide will teach you what you need to know about Git, GitHub, and Jekyll to
 create your very own website on GitHub Pages.
 
+### Project Page URL Structure
+
+Sometimes it's nice to preview your Jekyll site before you push your `gh-pages`
+branch to GitHub. However, the subdirectory-like URL structure GitHub uses for
+Project Pages complicates the proper resolution of URLs. In order to assure your
+site builds properly, use `site.github.url` in your URL's.
+
+{% highlight html %}
+{% raw %}
+<!-- Useful for styles with static names... -->
+<link href="{{ site.github.url }}/path/to/css.css" rel="stylesheet">
+<!-- and for documents/pages whose URL's can change... -->
+<a href="{{ page.url | prepend: site.github.url }}">{{ page.title }}</a>
+{% endraw %}
+{% endhighlight %}
+
+This way you can preview your site locally from the site root on localhost,
+but when GitHub generates your pages from the gh-pages branch all the URLs
+will resolve properly.
+
 ## Deploying Jekyll to GitHub Pages
 
 GitHub Pages work by looking at certain branches of repositories on GitHub.
@@ -101,38 +121,12 @@ GitHub Pages <a href="https://help.github.com/articles/troubleshooting-github-pa
   </p>
 </div>
 
-
-### Project Page URL Structure
-
-Sometimes it's nice to preview your Jekyll site before you push your `gh-pages`
-branch to GitHub. However, the subdirectory-like URL structure GitHub uses for
-Project Pages complicates the proper resolution of URLs. Here is an approach to
-utilizing the GitHub Project Page URL structure (`username.github.io/project-name/`)
-whilst maintaining the ability to preview your Jekyll site locally.
-
-1. In `_config.yml`, set the `baseurl` option to `/project-name` -- note the
-   leading slash and the **absence** of a trailing slash.
-2. When referencing JS or CSS files, do it like this:
-   `{% raw %}{{ site.baseurl }}/path/to/css.css{% endraw %}` -- note the slash
-   immediately following the variable (just before "path").
-3. When doing permalinks or internal links, do it like this:
-   `{% raw %}{{ site.baseurl }}{{ post.url }}{% endraw %}` -- note that there
-   is **no** slash between the two variables.
-4. Finally, if you'd like to preview your site before committing/deploying
-   using `jekyll serve`, be sure to pass an **empty string** to the `--baseurl`
-   option, so that you can view everything at `localhost:4000` normally
-   (without `/project-name` at the beginning): `jekyll serve --baseurl ''`
-
-This way you can preview your site locally from the site root on localhost,
-but when GitHub generates your pages from the gh-pages branch all the URLs
-will start with `/project-name` and resolve properly.
-
 <div class="note">
   <h5>GitHub Pages Documentation, Help, and Support</h5>
   <p>
     For more information about what you can do with GitHub Pages, as well as for
     troubleshooting guides, you should check out <a
-    href="https://help.github.com/categories/20/articles">GitHub’s Pages Help
+    href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help
     section</a>. If all else fails, you should contact <a
     href="https://github.com/contact">GitHub Support</a>.
   </p>
