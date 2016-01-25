@@ -168,7 +168,7 @@ module Jekyll
     private
 
     def permalink_ext
-      if document.permalink
+      if document.permalink && !document.permalink.end_with?("/")
         permalink_ext = File.extname(document.permalink)
         permalink_ext unless permalink_ext.empty?
       end

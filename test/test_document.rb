@@ -207,6 +207,10 @@ class TestDocument < JekyllUnitTest
     should "produce the right destination file" do
       assert_equal @dest_file, @document.destination(dest_dir)
     end
+
+    should "honor the output extension of its permalink" do
+      assert_equal ".html", @document.output_ext
+    end
   end
 
   context "a document in a collection with pretty permalink style" do
@@ -267,12 +271,20 @@ class TestDocument < JekyllUnitTest
       @dest_file = dest_dir("slides/example-slide-7.php")
     end
 
+    should "be written out properly" do
+      assert_exist @dest_file
+    end
+
     should "produce the permalink as the url" do
       assert_equal "/slides/example-slide-7.php", @document.url
     end
 
     should "be written to the proper directory" do
       assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "honor the output extension of its permalink" do
+      assert_equal ".php", @document.output_ext
     end
   end
 
@@ -315,6 +327,29 @@ class TestDocument < JekyllUnitTest
     should "produce the right destination file if they have a wild slug" do
       dest_file = dest_dir("/slides/Well,-so-what-is-Jekyll,-then.html")
       assert_equal dest_file, @document_with_strange_slug.destination(dest_dir)
+    end
+  end
+
+  context "document with a permalink with dots & a trailing slash" do
+    setup do
+      @site = fixture_site({"collections" => {
+        "with.dots" => { "output" => true }
+      }})
+      @site.process
+      @document = @site.collections["with.dots"].docs.last
+      @dest_file = dest_dir("with.dots", "permalink.with.slash.tho", "index.html")
+    end
+
+    should "yield an HTML document" do
+      assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "be written properly" do
+      assert_exist @dest_file
+    end
+
+    should "get the right output_ext" do
+      assert_equal ".html", @document.output_ext
     end
   end
 
