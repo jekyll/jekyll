@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Renderer#output_ext: honor folders when looking for ext (#4401)
+
 ## 3.1.0 / 2016-01-23
 
 ### Minor Enhancements
