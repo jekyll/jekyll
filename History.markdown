@@ -8,6 +8,7 @@
 
 ### Minor Enhancements
 
+  * Update the Code of Conduct to the latest version (#4402)
   * Use `Liquid::Drop`s instead of `Hash`es in `#to_liquid` (#4277)
   * Add 'sample' Liquid filter Equivalent to Array#sample functionality (#4223)
   * Cache parsed include file to save liquid parsing time. (#4120)
