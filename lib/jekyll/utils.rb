@@ -273,5 +273,15 @@ module Jekyll
       end
     end
 
+    # Returns merged option hash for File.read of self.site (if exists)
+    # and a given param
+    def merged_file_read_opts(site, opts)
+      merged = (site ? site.file_read_opts : {}).merge(opts)
+      if merged["encoding"] && !merged["encoding"].start_with?("bom|")
+        merged["encoding"].insert(0, "bom|")
+      end
+      merged
+    end
+
   end
 end

@@ -276,4 +276,21 @@ class TestUtils < JekyllUnitTest
       refute Utils.has_yaml_header?(file)
     end
   end
+
+  context "The \`Utils.merged_file_read_opts\` method" do
+    should "ignore encoding if it's not there" do
+      opts = Utils.merged_file_read_opts(nil, {})
+      assert_nil opts["encoding"]
+    end
+
+    should "add bom to encoding" do
+      opts = Utils.merged_file_read_opts(nil, { "encoding" => "utf-8" })
+      assert_equal "bom|utf-8", opts["encoding"]
+    end
+
+    should "preserve bom in encoding" do
+      opts = Utils.merged_file_read_opts(nil, { "encoding" => "bom|utf-8" })
+      assert_equal "bom|utf-8", opts["encoding"]
+    end
+  end
 end
