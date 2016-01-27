@@ -150,6 +150,12 @@ class TestPage < JekyllUnitTest
           assert_equal '/contacts.html', @page.url
           assert_equal @dest_file, @page.destination(dest_dir)
         end
+
+        should "return dir correctly" do
+          assert_equal '/', setup_page('contacts.html').dir
+          assert_equal '/contacts/', setup_page('contacts/bar.html').dir
+          assert_equal '/contacts/', setup_page('contacts/index.html').dir
+        end
       end
 
       context "with custom permalink style with trailing slash" do
@@ -194,8 +200,9 @@ class TestPage < JekyllUnitTest
       context "with any other permalink style" do
         should "return dir correctly" do
           @site.permalink_style = nil
-          @page = setup_page('contacts.html')
-          assert_equal '/', @page.dir
+          assert_equal '/', setup_page('contacts.html').dir
+          assert_equal '/contacts/', setup_page('contacts/index.html').dir
+          assert_equal '/contacts/', setup_page('contacts/bar.html').dir
         end
       end
 
