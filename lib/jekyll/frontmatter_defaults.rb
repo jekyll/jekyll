@@ -13,19 +13,20 @@ module Jekyll
     def update_deprecated_types(set)
       return set unless set.key?('scope') && set['scope'].key?('type')
 
-      set['scope']['type'] = case set['scope']['type']
-      when 'page'
-        Deprecator.defaults_deprecate_type('page', 'pages')
-        'pages'
-      when 'post'
-        Deprecator.defaults_deprecate_type('post', 'posts')
-        'posts'
-      when 'draft'
-        Deprecator.defaults_deprecate_type('draft', 'drafts')
-        'drafts'
-      else
-        set['scope']['type']
-      end
+      set['scope']['type'] =
+        case set['scope']['type']
+        when 'page'
+          Deprecator.defaults_deprecate_type('page', 'pages')
+          'pages'
+        when 'post'
+          Deprecator.defaults_deprecate_type('post', 'posts')
+          'posts'
+        when 'draft'
+          Deprecator.defaults_deprecate_type('draft', 'drafts')
+          'drafts'
+        else
+          set['scope']['type']
+        end
 
       set
     end
@@ -90,7 +91,7 @@ module Jekyll
     end
 
     def applies_path?(scope, path)
-      return true if !scope.has_key?('path') || scope['path'].empty?
+      return true if !scope.key?('path') || scope['path'].empty?
 
       scope_path = Pathname.new(scope['path'])
       Pathname.new(sanitize_path(path)).ascend do |path|
@@ -150,7 +151,7 @@ module Jekyll
     # Returns an array of hashes
     def matching_sets(path, type)
       valid_sets.select do |set|
-        !set.has_key?('scope') || applies?(set['scope'], path, type)
+        !set.key?('scope') || applies?(set['scope'], path, type)
       end
     end
 

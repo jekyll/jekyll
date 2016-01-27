@@ -8,8 +8,10 @@ class TestPage < JekyllUnitTest
   end
 
   def do_render(page)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
-    page.render(layouts, {"site" => {"posts" => []}})
+    layouts = {
+      "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")
+    }
+    page.render(layouts, @site.site_payload)
   end
 
   context "A Page" do
@@ -55,12 +57,20 @@ class TestPage < JekyllUnitTest
         assert_equal ".html", @page.ext
       end
 
+      should "deal properly with non-html extensions" do
+        @page = setup_page('dynamic_page.php')
+        @dest_file = dest_dir("dynamic_page.php")
+        assert_equal ".php", @page.ext
+        assert_equal "dynamic_page", @page.basename
+        assert_equal "/dynamic_page.php", @page.url
+        assert_equal @dest_file, @page.destination(dest_dir)
+      end
+
       should "deal properly with dots" do
         @page = setup_page('deal.with.dots.html')
         @dest_file = dest_dir("deal.with.dots.html")
 
         assert_equal "deal.with.dots", @page.basename
-        assert_equal "/deal.with.dots", @page.url
         assert_equal @dest_file, @page.destination(dest_dir)
       end
 
@@ -198,6 +208,11 @@ class TestPage < JekyllUnitTest
         assert_equal "/about/", @page.dir
       end
 
+      should "return nil permalink if no permalink exists" do
+        @page = setup_page('')
+        assert_equal nil, @page.permalink
+      end
+
       should "not be writable outside of destination" do
         unexpected = File.expand_path("../../../baddie.html", dest_dir)
         File.delete unexpected if File.exist?(unexpected)
@@ -205,7 +220,7 @@ class TestPage < JekyllUnitTest
         do_render(page)
         page.write(dest_dir)
 
-        assert !File.exist?(unexpected)
+        refute_exist unexpected
       end
     end
 
@@ -230,7 +245,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, 'contacts.html'))
+        assert_exist dest_dir('contacts.html')
       end
 
       should "write even when the folder name is plus and permalink has +" do
@@ -238,8 +253,8 @@ class TestPage < JekyllUnitTest
         do_render(page)
         page.write(dest_dir)
 
-        assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, '+', 'plus+in+url.html'))
+        assert File.directory?(dest_dir), "#{dest_dir} should be a directory"
+        assert_exist dest_dir('+', 'plus+in+url.html')
       end
 
       should "write even when permalink has '%# +'" do
@@ -248,7 +263,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, '+', '%# +.html'))
+        assert_exist dest_dir('+', '%# +.html')
       end
 
       should "write properly without html extension" do
@@ -258,7 +273,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
+        assert_exist dest_dir('contacts', 'index.html')
       end
 
       should "support .htm extension and respects that" do
@@ -268,7 +283,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, 'contacts', 'index.htm'))
+        assert_exist dest_dir('contacts', 'index.htm')
       end
 
       should "support .xhtml extension and respects that" do
@@ -278,7 +293,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, 'contacts', 'index.xhtml'))
+        assert_exist dest_dir('contacts', 'index.xhtml')
       end
 
       should "write properly with extension different from html" do
@@ -287,10 +302,10 @@ class TestPage < JekyllUnitTest
         do_render(page)
         page.write(dest_dir)
 
-        assert_equal("/sitemap.xml", page.url)
-        assert_nil(page.url[/\.html$/])
+        assert_equal "/sitemap.xml", page.url
+        assert_nil page.url[/\.html$/]
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir,'sitemap.xml'))
+        assert_exist dest_dir('sitemap.xml')
       end
 
       should "write dotfiles properly" do
@@ -299,7 +314,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert File.exist?(File.join(dest_dir, '.htaccess'))
+        assert_exist dest_dir('.htaccess')
       end
 
       context "in a directory hierarchy" do
@@ -309,7 +324,7 @@ class TestPage < JekyllUnitTest
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, 'contacts', 'index.html'))
+          assert_exist dest_dir('contacts', 'index.html')
         end
 
         should "write properly" do
@@ -318,7 +333,7 @@ class TestPage < JekyllUnitTest
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, 'contacts', 'bar.html'))
+          assert_exist dest_dir('contacts', 'bar.html')
         end
 
         should "write properly without html extension" do
@@ -328,7 +343,7 @@ class TestPage < JekyllUnitTest
           page.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exist?(File.join(dest_dir, 'contacts', 'bar', 'index.html'))
+          assert_exist dest_dir('contacts', 'bar', 'index.html')
         end
       end
     end

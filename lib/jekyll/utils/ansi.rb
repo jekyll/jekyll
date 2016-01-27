@@ -33,7 +33,7 @@ module Jekyll
       def has?(str)
         !!(str =~ MATCH)
       end
-      
+
       # Reset the color back to the default color so that you do not leak any
       # colors when you move onto the next line. This is probably normally
       # used as part of a wrapper so that we don't leak colors.

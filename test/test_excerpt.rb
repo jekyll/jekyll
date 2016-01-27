@@ -10,8 +10,7 @@ class TestExcerpt < JekyllUnitTest
 
   def do_render(document)
     @site.layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
-    payload = {"site" => {"posts" => []}}
-    document.output = Jekyll::Renderer.new(@site, document, payload).run
+    document.output = Jekyll::Renderer.new(@site, document, @site.site_payload).run
   end
 
   context "With extraction disabled" do

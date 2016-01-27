@@ -1,16 +1,15 @@
 module Jekyll
   module External
     class << self
-
       #
       # Gems that, if installed, should be loaded.
       # Usually contain subcommands.
       #
       def blessed_gems
-        %w{
+        %w(
           jekyll-docs
           jekyll-import
-        }
+        )
       end
 
       #
@@ -18,12 +17,13 @@ module Jekyll
       #
       # names - a string gem name or array of gem names
       #
-      def require_if_present(names)
+      def require_if_present(names, &block)
         Array(names).each do |name|
           begin
             require name
           rescue LoadError
             Jekyll.logger.debug "Couldn't load #{name}. Skipping."
+            block.call(name) if block
             false
           end
         end
@@ -39,7 +39,7 @@ module Jekyll
       def require_with_graceful_fail(names)
         Array(names).each do |name|
           begin
-            Jekyll.logger.debug("Requiring #{name}")
+            Jekyll.logger.debug "Requiring:", "#{name}"
             require name
           rescue LoadError => e
             Jekyll.logger.error "Dependency Error:", <<-MSG
@@ -54,7 +54,6 @@ If you run into trouble, you can find helpful resources at http://jekyllrb.com/h
           end
         end
       end
-
     end
   end
 end

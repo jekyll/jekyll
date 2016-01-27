@@ -12,7 +12,6 @@ module Jekyll
     end
 
     class IncludeTag < Liquid::Tag
-
       attr_reader :includes_dir
 
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
@@ -25,7 +24,7 @@ module Jekyll
           @file = matched['variable'].strip
           @params = matched['params'].strip
         else
-          @file, @params = markup.strip.split(' ', 2);
+          @file, @params = markup.strip.split(' ', 2)
         end
         validate_params if @params
         @tag_name = tag_name
@@ -43,12 +42,12 @@ module Jekyll
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
-            match[2].gsub(/\\"/, '"')
-          elsif match[3]
-            match[3].gsub(/\\'/, "'")
-          elsif match[4]
-            context[match[4]]
-          end
+                    match[2].gsub(/\\"/, '"')
+                  elsif match[3]
+                    match[3].gsub(/\\'/, "'")
+                  elsif match[4]
+                    context[match[4]]
+                  end
 
           params[match[1]] = value
         end
@@ -57,7 +56,7 @@ module Jekyll
 
       def validate_file_name(file)
         if file !~ /^[a-zA-Z0-9_\/\.-]+$/ || file =~ /\.\// || file =~ /\/\./
-            raise ArgumentError.new <<-eos
+          raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
   #{file}
@@ -115,7 +114,7 @@ eos
         validate_path(path, dir, site.safe)
 
         # Add include to dependency tree
-        if context.registers[:page] and context.registers[:page].has_key? "path"
+        if context.registers[:page] && context.registers[:page].key?("path")
           site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path
@@ -138,7 +137,7 @@ eos
         context.registers[:cached_partials] ||= {}
         cached_partial = context.registers[:cached_partials]
 
-        if cached_partial.has_key?(path)
+        if cached_partial.key?(path)
           cached_partial[path]
         else
           cached_partial[path] = context.registers[:site].liquid_renderer.file(path).parse(read_file(path, context))

@@ -1,7 +1,15 @@
 ## HEAD
 
+### Development Fixes
+
+  * Renderer#output_ext: honor folders when looking for ext (#4401)
+
+## 3.1.0 / 2016-01-23
+
 ### Minor Enhancements
 
+  * Update the Code of Conduct to the latest version (#4402)
+  * Use `Liquid::Drop`s instead of `Hash`es in `#to_liquid` (#4277)
   * Add 'sample' Liquid filter Equivalent to Array#sample functionality (#4223)
   * Cache parsed include file to save liquid parsing time. (#4120)
   * Slightly speed up url sanitization and handle multiples of ///. (#4168)
@@ -14,6 +22,12 @@
   * Switch `PluginManager` to use `require_with_graceful_fail` for better UX (#4233)
   * Allow quoted date in front matter defaults (#4184)
   * Add a Jekyll doctor warning for URLs that only differ by case (#3171)
+  * drops: create one base Drop class which can be set as mutable or not (#4285)
+  * drops: provide `#to_h` to allow for hash introspection (#4281)
+  * Shim subcommands with indication of gem possibly required so users know how to use them (#4254)
+  * Add smartify Liquid filter for SmartyPants (#4323)
+  * Raise error on empty permalink (#4361)
+  * Refactor Page#permalink method (#4389)
 
 ### Bug Fixes
 
@@ -23,6 +37,19 @@
   * Convertible should make layout data accessible via `layout` instead of `page` (#4205)
   * Avoid using `Dir.glob` with absolute path to allow special characters in the path (#4150)
   * Handle empty config files (#4052)
+  * Rename `@options` so that it does not impact Liquid. (#4173)
+  * utils/drops: update Drop to support `Utils.deep_merge_hashes` (#4289)
+  * Make sure jekyll/drops/drop is loaded first. (#4292)
+  * Convertible/Page/Renderer: use payload hash accessor & setter syntax for backwards-compatibility (#4311)
+  * Drop: fix hash setter precendence (#4312)
+  * utils: `has_yaml_header?` should accept files with extraneous spaces (#4290)
+  * Escape html from site.title and page.title in site template (#4307)
+  * Allow custom file extensions if defined in `permalink` YAML front matter (#4314)
+  * Fix deep_merge_hashes! handling of drops and hashes (#4359)
+  * Page should respect output extension of its permalink (#4373)
+  * Disable auto-regeneration when running server detached (#4376)
+  * Drop#[]: only use public_send for keys in the content_methods array (#4388)
+  * Extract title from filename successfully when no date. (#4195)
 
 ### Development Fixes
 
@@ -30,6 +57,19 @@
   * Allow use of Cucumber 2.1 or greater (#4181)
   * Modernize Kramdown for Markdown converter. (#4109)
   * Change TestDoctorCommand to JekyllUnitTest... (#4263)
+  * Create namespaced rake tasks in separate `.rake` files under `lib/tasks` (#4282)
+  * markdown: refactor for greater readability & efficiency (#3771)
+  * Fix many Rubocop style errors (#4301)
+  * Fix spelling of "GitHub" in docs and history (#4322)
+  * Reorganize and cleanup the Gemfile, shorten required depends. (#4318)
+  * Remove script/rebund. (#4341)
+  * Implement codeclimate platform (#4340)
+  * Remove ObectSpace dumping and start using inherited, it's faster. (#4342)
+  * Add script/travis so all people can play with Travis-CI images. (#4338)
+  * Move Cucumber to using RSpec-Expections and furthering JRuby support. (#4343)
+  * Rearrange Cucumber and add some flair. (#4347)
+  * Remove old FIXME (#4349)
+  * Clean up the Gemfile (and keep all the necessary dependencies) (#4350)
 
 ### Site Enhancements
 
@@ -44,7 +84,28 @@
   * Update FormKeep link to be something more specific to Jekyll (#4243)
   * Remove example Roger Chapman site, as the domain doesn't exist (#4249)
   * Added configuration options for `draft_posts` to configuration docs (#4251)
-  * Fix checklist in _assets.md (#4259)
+  * Fix checklist in `_assets.md` (#4259)
+  * Add Markdown examples to Pages docs (#4275)
+  * Add jekyll-paginate-category to list of third-party plugins (#4273)
+  * Add `jekyll-responsive_image` to list of third-party plugins (#4286)
+  * Add `jekyll-commonmark` to list of third-party plugins (#4299)
+  * Add documentation for incremental regeneration (#4293)
+  * Add note about removal of relative permalink support in upgrading docs (#4303)
+  * Add Pro Tip to use front matter variable to create clean URLs (#4296)
+  * Fix grammar in the documentation for posts. (#4330)
+  * Add documentation for smartify Liquid filter (#4333)
+  * Fixed broken link to blog on using mathjax with jekyll (#4344)
+  * Documentation: correct reference in Precedence section of Configuration docs (#4355)
+  * Add @jmcglone's guide to github-pages doc page (#4364)
+  * Added the Wordpress2Jekyll Wordpress plugin (#4377)
+  * Add Contentful Extension to list of third-party plugins (#4390)
+  * Correct Minor spelling error (#4394)
+
+## 3.0.2 / 2016-01-20
+
+### Bug Fixes
+
+  * Document: throw a useful error when an invalid date is given (#4378)
 
 ## 3.0.1 / 2015-11-17
 
@@ -57,7 +118,6 @@
   * Align hooks implementation with documentation (#4104)
   * Fix the deprecation warning in the doctor command (#4114)
   * Fix case in `:title` and add `:slug` which is downcased (#4100)
-  * Rename @options so that it does not impact Liquid. (#4173)
 
 ### Development Fixes
 
@@ -122,8 +182,7 @@
   * Perf: `Markdown#matches` should avoid regexp (#3321)
   * Perf: Use frozen regular expressions for `Utils#slugify` (#3321)
   * Split off Textile support into jekyll-textile-converter (#3319)
-  * Improve the navigation menu alignment in the site template on small
-    screens (#3331)
+  * Improve the navigation menu alignment in the site template on small screens (#3331)
   * Show the regeneration time after the initial generation (#3378)
   * Site template: Switch default font to Helvetica Neue (#3376)
   * Make the `include` tag a teensy bit faster. (#3391)
@@ -155,8 +214,7 @@
   * Set log level to debug when verbose flag is set (#3665)
   * Added a mention on the Gemfile to complete the instructions (#3671)
   * Perf: Cache `Document#to_liquid` and invalidate where necessary (#3693)
-  * Perf: `Jekyll::Cleaner#existing_files`: Call `keep_file_regex` and
-    `keep_dirs` only once, not once per iteration (#3696)
+  * Perf: `Jekyll::Cleaner#existing_files`: Call `keep_file_regex` and `keep_dirs` only once, not once per iteration (#3696)
   * Omit jekyll/jekyll-help from list of resources. (#3698)
   * Add basic `jekyll doctor` test to detect fsnotify (OSX) anomalies. (#3704)
   * Added talk.jekyllrb.com to "Have questions?" (#3694)
@@ -438,16 +496,14 @@
   * Strip newlines in site template `<meta>` description. (#2982)
   * Add link to atom feed in `head` of site template files (#2996)
   * Performance optimizations (#2994)
-  * Use `Hash#each_key` instead of `Hash#keys.each` to speed up iteration
-    over hash keys. (#3017)
+  * Use `Hash#each_key` instead of `Hash#keys.each` to speed up iteration over hash keys. (#3017)
   * Further minor performance enhancements. (#3022)
   * Add 'b' and 's' aliases for build and serve, respectively (#3065)
 
 ### Bug Fixes
 
   * Fix Rouge's RedCarpet plugin interface integration (#2951)
-  * Remove `--watch` from the site template blog post since it defaults
-    to watching in in 2.4.0 (#2922)
+  * Remove `--watch` from the site template blog post since it defaults to watching in in 2.4.0 (#2922)
   * Fix code for media query mixin in site template (#2946)
   * Allow post URL's to have `.htm` extensions (#2925)
   * `Utils.slugify`: Don't create new objects when gsubbing (#2997)
@@ -475,7 +531,7 @@
   * Add Big Footnotes for Kramdown plugin to list of third-party plugins (#2916)
   * Remove warning regarding GHP use of singular types for front matter defaults (#2919)
   * Fix quote character typo in site documentation for templates (#2917)
-  * Point Liquid links to Liquid’s Github wiki (#2887)
+  * Point Liquid links to Liquid’s GitHub wiki (#2887)
   * Add HTTP Basic Auth (.htaccess) plugin to list of third-party plugins (#2931)
   * (Minor) Grammar & `_config.yml` filename fixes (#2911)
   * Added `mathml.rb` to the list of third-party plugins. (#2937)
@@ -525,11 +581,9 @@
 
   * Document the `name` variable for collection permalinks (#2829)
   * Adds info about installing jekyll in current dir (#2839)
-  * Remove deprecated `jekyll-projectlist` plugin from list of third-party
-    plugins (#2742)
+  * Remove deprecated `jekyll-projectlist` plugin from list of third-party plugins (#2742)
   * Remove tag plugins that are built in to Jekyll (#2751)
-  * Add `markdown-writer` package for Atom Editor to list of third-party
-    plugins (#2763)
+  * Add `markdown-writer` package for Atom Editor to list of third-party plugins (#2763)
   * Fix typo in site documentation for collections (#2764)
   * Fix minor typo on plugins docs page (#2765)
   * Replace markdown with HTML in `sass_dir` note on assets page (#2791)
@@ -617,8 +671,7 @@
 ### Site Enhancements
 
   * Update Kramdown urls (#2588)
-  * Add `Jekyll::AutolinkEmail` and `Jekyll::GitMetadata` to the list of
-    third-party plugins (#2596)
+  * Add `Jekyll::AutolinkEmail` and `Jekyll::GitMetadata` to the list of third-party plugins (#2596)
   * Fix a bunch of broken links in the site (#2601)
   * Replace dead links with working links (#2611)
   * Add jekyll-hook to deployment methods (#2617)
@@ -655,12 +708,10 @@
   * Allow subdirectories in `_data` (#2395)
   * Extract Pagination Generator into gem: `jekyll-paginate` (#2455)
   * Utilize `date_to_rfc822` filter in site template (#2437)
-  * Add categories, last build datetime, and generator to site template
-    feed (#2438)
+  * Add categories, last build datetime, and generator to site template feed (#2438)
   * Configurable, replaceable Logger-compliant logger (#2444)
   * Extract `gist` tag into a separate gem (#2469)
-  * Add `collection` attribute to `Document#to_liquid` to access the
-    document's collection label. (#2436)
+  * Add `collection` attribute to `Document#to_liquid` to access the document's collection label. (#2436)
   * Upgrade listen to `2.7.6 <= x < 3.0.0` (#2492)
   * Allow configuration of different Twitter and GitHub usernames in site template (#2485)
   * Bump Pygments to v0.6.0 (#2504)
@@ -685,8 +736,7 @@
   * Allow front matter defaults to set post categories (#2373)
   * Fix command in subcommand deprecation warning (#2457)
   * Keep all parent directories of files/dirs in `keep_files` (#2458)
-  * When using RedCarpet and Rouge without Rouge installed, fixed erroneous
-    error which stated that redcarpet was missing, not rouge. (#2464)
+  * When using RedCarpet and Rouge without Rouge installed, fixed erroneous error which stated that redcarpet was missing, not rouge. (#2464)
   * Ignore *all* directories and files that merit it on auto-generation (#2459)
   * Before copying file, explicitly remove the old one (#2535)
   * Merge file system categories with categories from YAML. (#2531)
@@ -715,8 +765,7 @@
   * Prevent table from extending parent width in permalink style table (#2424)
   * Add collections to info about pagination support (#2389)
   * Add `jekyll_github_sample` plugin to list of third-party plugins (#2463)
-  * Clarify documentation around front matter defaults and add details
-    about defaults for collections. (#2439)
+  * Clarify documentation around front matter defaults and add details about defaults for collections. (#2439)
   * Add Jekyll Project Version Tag to list of third-party plugins (#2468)
   * Use `https` for GitHub links across whole site (#2470)
   * Add StickerMule + Jekyll post (#2476)
@@ -732,13 +781,11 @@
 
 ### Bug Fixes
 
-  * Properly prefix links in site template with URL or baseurl depending upon
-    need. (#2319)
+  * Properly prefix links in site template with URL or baseurl depending upon need. (#2319)
   * Update gist tag comments and error message to require username (#2326)
   * Fix `permalink` setting in site template (#2331)
   * Don't fail if any of the path objects are nil (#2325)
-  * Instantiate all descendants for converters and generators, not just
-    direct subclasses (#2334)
+  * Instantiate all descendants for converters and generators, not just direct subclasses (#2334)
   * Replace all instances of `site.name` with `site.title` in site template (#2324)
   * `Jekyll::Filters#time` now accepts UNIX timestamps in string or number form (#2339)
   * Use `item_property` for `where` filter so it doesn't break on collections (#2359)
@@ -774,17 +821,16 @@
 ## 2.0.0 / 2014-05-06
 
 ### Major Enhancements
+
   * Add "Collections" feature (#2199)
   * Add gem-based plugin whitelist to safe mode (#1657)
-  * Replace the commander command line parser with a more robust
-    solution for our needs called `mercenary` (#1706)
+  * Replace the commander command line parser with a more robust solution for our needs called `mercenary` (#1706)
   * Remove support for Ruby 1.8.x (#1780)
   * Move to jekyll/jekyll from mojombo/jekyll (#1817)
   * Allow custom markdown processors (#1872)
   * Provide support for the Rouge syntax highlighter (#1859)
   * Provide support for Sass (#1932)
-  * Provide a 300% improvement when generating sites that use
-    `Post#next` or `Post#previous` (#1983)
+  * Provide a 300% improvement when generating sites that use `Post#next` or `Post#previous` (#1983)
   * Provide support for CoffeeScript (#1991)
   * Replace Maruku with Kramdown as Default Markdown Processor (#1988)
   * Expose `site.static_files` to Liquid (#2075)
@@ -795,10 +841,9 @@
   * Exclude files based on prefix as well as `fnmatch?` (#2303)
 
 ### Minor Enhancements
-  * Move the EntryFilter class into the Jekyll module to avoid polluting the
-    global namespace (#1800)
-  * Add `group_by` Liquid filter create lists of items grouped by a common
-    property's value (#1788)
+
+  * Move the EntryFilter class into the Jekyll module to avoid polluting the global namespace (#1800)
+  * Add `group_by` Liquid filter create lists of items grouped by a common property's value (#1788)
   * Add support for Maruku's `fenced_code_blocks` option (#1799)
   * Update Redcarpet dependency to ~> 3.0 (#1815)
   * Automatically sort all pages by name (#1848)
@@ -809,12 +854,10 @@
   * Bump dependency `safe_yaml` to `~> 1.0` (#1886)
   * Allow sorting of content by custom properties (#1849)
   * Add `--quiet` flag to silence output during build and serve (#1898)
-  * Add a `where` filter to filter arrays based on a key/value pair
-    (#1875)
+  * Add a `where` filter to filter arrays based on a key/value pair (#1875)
   * Route 404 errors to a custom 404 page in development (#1899)
   * Excludes are now relative to the site source (#1916)
-  * Bring MIME Types file for `jekyll serve` to complete parity with GH Pages
-    servers (#1993)
+  * Bring MIME Types file for `jekyll serve` to complete parity with GH Pages servers (#1993)
   * Adding Breakpoint to make new site template more responsive (#2038)
   * Default to using the UTF-8 encoding when reading files. (#2031)
   * Update Redcarpet dependency to ~> 3.1 (#2044)
@@ -832,13 +875,11 @@
   * Add support for unpublished drafts (#2164)
   * Add `force_polling` option to the `serve` command (#2165)
   * Clean up the `<head>` in the site template (#2186)
-  * Permit YAML blocks to end with three dots to better conform with the
-    YAML spec (#2110)
+  * Permit YAML blocks to end with three dots to better conform with the YAML spec (#2110)
   * Use `File.exist?` instead of deprecated `File.exists?` (#2214)
   * Require newline after start of YAML Front Matter header (#2211)
   * Add the ability for pages to be marked as `published: false` (#1492)
-  * Add `Jekyll::LiquidExtensions` with `.lookup_variable` method for easy
-    looking up of variable values in a Liquid context. (#2253)
+  * Add `Jekyll::LiquidExtensions` with `.lookup_variable` method for easy looking up of variable values in a Liquid context. (#2253)
   * Remove literal lang name from class (#2292)
   * Return `utf-8` encoding in header for webrick error page response (#2289)
   * Make template site easier to customize (#2268)
@@ -847,13 +888,12 @@
   * Take into account missing values in the Liquid sort filter (#2299)
 
 ### Bug Fixes
+
   * Don't allow nil entries when loading posts (#1796)
-  * Remove the scrollbar that's always displayed in new sites generated
-    from the site template (#1805)
+  * Remove the scrollbar that's always displayed in new sites generated from the site template (#1805)
   * Add `#path` to required methods in `Jekyll::Convertible` (#1866)
   * Default Maruku fenced code blocks to ON for 2.0.0-dev (#1831)
-  * Change short opts for host and port for `jekyll docs` to be consistent with
-    other subcommands (#1877)
+  * Change short opts for host and port for `jekyll docs` to be consistent with other subcommands (#1877)
   * Fix typos (#1910)
   * Lock Maruku at 0.7.0 to prevent bugs caused by Maruku 0.7.1 (#1958)
   * Fixes full path leak to source directory when using include tag (#1951)
@@ -866,8 +906,7 @@
   * Sanitize paths uniformly, in a Windows-friendly way (#2065, #2109)
   * Update gem build steps to work correctly on Windows (#2118)
   * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121).
-  * Remove `+` characters from Pygments lexer names when adding as a CSS
-    class (#994)
+  * Remove `+` characters from Pygments lexer names when adding as a CSS class (#994)
   * Remove some code that caused Ruby interpreter warnings (#2178)
   * Only strip the drive name if it begins the string (#2175)
   * Remove default post with invalid date from site template (#2200)
@@ -882,14 +921,14 @@
   * Add `output` to `Document` liquid output hash (#2309)
 
 ### Development Fixes
+
   * Add a link to the site in the README.md file (#1795)
   * Add in History and site changes from `v1-stable` branch (#1836)
   * Testing additions on the Excerpt class (#1893)
   * Fix the `highlight` tag feature (#1859)
   * Test Jekyll under Ruby 2.1.0 (#1900)
   * Add script/cibuild for fun and profit (#1912)
-  * Use `Forwardable` for delegation between `Excerpt` and `Post`
-    (#1927)
+  * Use `Forwardable` for delegation between `Excerpt` and `Post` (#1927)
   * Rename `read_things` to `read_content` (#1928)
   * Add `script/branding` script for ASCII art lovin' (#1936)
   * Update the README to reflect the repo move (#1943)
@@ -917,11 +956,11 @@
   * Workaround for Travis bug (#2290)
 
 ### Site Enhancements
+
   * Document Kramdown's GFM parser option (#1791)
   * Move CSS to includes & update normalize.css to v2.1.3 (#1787)
   * Minify CSS only in production (#1803)
-  * Fix broken link to installation of Ruby on Mountain Lion blog post on
-    Troubleshooting docs page (#1797)
+  * Fix broken link to installation of Ruby on Mountain Lion blog post on Troubleshooting docs page (#1797)
   * Fix issues with 1.4.1 release blog post (#1804)
   * Add note about deploying to OpenShift (#1812)
   * Collect all Windows-related docs onto one page (#1818)
@@ -936,8 +975,7 @@
   * Add jekyll-compass to the plugin list (#1923)
   * Add note in Posts docs about stripping `<p>` tags from excerpt (#1933)
   * Add additional info about the new exclude behavior (#1938)
-  * Linkify 'awesome contributors' to point to the contributors graph on
-    GitHub (#1940)
+  * Linkify 'awesome contributors' to point to the contributors graph on GitHub (#1940)
   * Update `docs/sites.md` link to GitHub Training materials (#1949)
   * Update `master` with the release info from 1.4.3 (#1947)
   * Define docs nav in datafile (#1953)
@@ -954,8 +992,7 @@
   * Update link to rack-jekyll on "Deployment Methods" page (#2047)
   * Fix typo in /docs/configuration (#2073)
   * Fix count in docs for `site.static_files` (#2077)
-  * Update configuration docs to indicate utf-8 is the default for 2.0.0
-    and ASCII for 1.9.3 (#2074)
+  * Update configuration docs to indicate utf-8 is the default for 2.0.0 and ASCII for 1.9.3 (#2074)
   * Add info about unreleased feature to the site (#2061)
   * Add whitespace to liquid example in GitHub Pages docs (#2084)
   * Clarify the way Sass and CoffeeScript files are read in and output (#2067)
@@ -972,8 +1009,7 @@
   * Some HTML tidying (#2130)
   * Remove modernizr and use html5shiv.js directly for IE less than v9 (#2131)
   * Remove unused images (#2187)
-  * Use `array_to_sentence_string` filter when outputting news item
-    categories (#2191)
+  * Use `array_to_sentence_string` filter when outputting news item categories (#2191)
   * Add link to Help repo in primary navigation bar (#2177)
   * Switch to using an ico file for the shortcut icon (#2193)
   * Use numbers to specify font weights and only bring in font weights used (#2185)
@@ -1023,64 +1059,72 @@
 ## 1.4.3 / 2014-01-13
 
 ### Bug Fixes
+
   * Patch show-stopping security vulnerabilities (#1944)
 
 ## 1.4.2 / 2013-12-16
 
 ### Bug Fixes
+
   * Turn on Maruku fenced code blocks by default (#1830)
 
 ## 1.4.1 / 2013-12-09
 
 ### Bug Fixes
+
   * Don't allow nil entries when loading posts (#1796)
 
 ## 1.4.0 / 2013-12-07
 
 ### Major Enhancements
+
   * Add support for TOML config files (#1765)
 
 ### Minor Enhancements
+
   * Sort plugins as a way to establish a load order (#1682)
   * Update Maruku to 0.7.0 (#1775)
 
 ### Bug Fixes
+
   * Add a space between two words in a Pagination warning message (#1769)
   * Upgrade `toml` gem to `v0.1.0` to maintain compat with Ruby 1.8.7 (#1778)
 
 ### Development Fixes
+
   * Remove some whitespace in the code (#1755)
   * Remove some duplication in the reading of posts and drafts (#1779)
 
 ### Site Enhancements
+
   * Fixed case of a word in the Jekyll v1.3.0 release post (#1762)
   * Fixed the mime type for the favicon (#1772)
 
 ## 1.3.1 / 2013-11-26
 
 ### Minor Enhancements
+
   * Add a `--prefix` option to passthrough for the importers (#1669)
-  * Push the paginator plugin lower in the plugin priority order so
-    other plugins run before it (#1759)
+  * Push the paginator plugin lower in the plugin priority order so other plugins run before it (#1759)
 
 ### Bug Fixes
+
   * Fix the include tag when ran in a loop (#1726)
   * Fix errors when using `--watch` on 1.8.7 (#1730)
-  * Specify where the include is called from if an included file is
-    missing (#1746)
+  * Specify where the include is called from if an included file is missing (#1746)
 
 ### Development Fixes
+
   * Extract `Site#filter_entries` into its own object (#1697)
   * Enable Travis' bundle caching (#1734)
   * Remove trailing whitespace in some files (#1736)
   * Fix a duplicate test name (#1754)
 
 ### Site Enhancements
+
   * Update link to example Rakefile to point to specific commit (#1741)
-  * Fix drafts docs to indicate that draft time is based on file modification
-    time, not `Time.now` (#1695)
-  * Add `jekyll-monthly-archive-plugin` and `jekyll-category-archive-plugin` to
-    list of third-party plugins (#1693)
+  * Fix drafts docs to indicate that draft time is based on file modification time, not `Time.now` (#1695)
+  * Add `jekyll-monthly-archive-plugin` and `jekyll-category-archive-plugin` to list of third-party plugins (#1693)
   * Add `jekyll-asset-path-plugin` to list of third-party plugins (#1670)
   * Add `emoji-for-jekyll` to list of third-part plugins (#1708)
   * Fix previous section link on plugins page to point to pagination page (#1707)
@@ -1092,44 +1136,40 @@
 ## 1.3.0 / 2013-11-04
 
 ### Major Enhancements
-  * Add support for adding data as YAML files under a site's `_data`
-    directory (#1003)
+
+  * Add support for adding data as YAML files under a site's `_data` directory (#1003)
   * Allow variables to be used with `include` tags (#1495)
   * Allow using gems for plugin management (#1557)
 
 ### Minor Enhancements
+
   * Decrease the specificity in the site template CSS (#1574)
   * Add `encoding` configuration option (#1449)
-  * Provide better error handling for Jekyll's custom Liquid tags
-    (#1514)
-  * If an included file causes a Liquid error, add the path to the
-    include file that caused the error to the error message (#1596)
-  * If a layout causes a Liquid error, change the error message so that
-    we know it comes from the layout (#1601)
+  * Provide better error handling for Jekyll's custom Liquid tags (#1514)
+  * If an included file causes a Liquid error, add the path to the include file that caused the error to the error message (#1596)
+  * If a layout causes a Liquid error, change the error message so that we know it comes from the layout (#1601)
   * Update Kramdown dependency to `~> 1.2` (#1610)
   * Update `safe_yaml` dependency to `~> 0.9.7` (#1602)
   * Allow layouts to be in subfolders like includes (#1622)
   * Switch to listen for site watching while serving (#1589)
   * Add a `json` liquid filter to be used in sites (#1651)
-  * Point people to the migration docs when the `jekyll-import` gem is
-    missing (#1662)
+  * Point people to the migration docs when the `jekyll-import` gem is missing (#1662)
 
 ### Bug Fixes
-  * Fix up matching against source and destination when the two
-    locations are similar (#1556)
+
+  * Fix up matching against source and destination when the two locations are similar (#1556)
   * Fix the missing `pathname` require in certain cases (#1255)
   * Use `+` instead of `Array#concat` when building `Post` attribute list (#1571)
   * Print server address when launching a server (#1586)
   * Downgrade to Maruku `~> 0.6.0` in order to avoid changes in rendering (#1598)
   * Fix error with failing include tag when variable was file name (#1613)
   * Downcase lexers before passing them to pygments (#1615)
-  * Capitalize the short verbose switch because it conflicts with the
-    built-in Commander switch (#1660)
+  * Capitalize the short verbose switch because it conflicts with the built-in Commander switch (#1660)
   * Fix compatibility with 1.8.x (#1665)
-  * Fix an error with the new file watching code due to library version
-    incompatibilities (#1687)
+  * Fix an error with the new file watching code due to library version incompatibilities (#1687)
 
 ### Development Fixes
+
   * Add coverage reporting with Coveralls (#1539)
   * Refactor the Liquid `include` tag (#1490)
   * Update launchy dependency to `~> 2.3` (#1608)
@@ -1146,6 +1186,7 @@
   * Improve comparisons of timestamps by ignoring the seconds (#1582)
 
 ### Site Enhancements
+
   * Fix params for `JekyllImport::WordPress.process` arguments (#1554)
   * Add `jekyll-suggested-tweet` to list of third-party plugins (#1555)
   * Link to Liquid's docs for tags and filters (#1553)
@@ -1153,8 +1194,7 @@
   * Simplify/generalize pagination docs (#1577)
   * Add documentation for the new data sources feature (#1503)
   * Add more information on how to create generators (#1590, #1592)
-  * Improve the instructions for mimicking GitHub Flavored Markdown
-    (#1614)
+  * Improve the instructions for mimicking GitHub Flavored Markdown (#1614)
   * Add `jekyll-import` warning note of missing dependencies (#1626)
   * Fix grammar in the Usage section (#1635)
   * Add documentation for the use of gems as plugins (#1656)
@@ -1166,21 +1206,25 @@
 ## 1.2.1 / 2013-09-14
 
 ### Minor Enhancements
+
   * Print better messages for detached server. Mute output on detach. (#1518)
   * Disable reverse lookup when running `jekyll serve` (#1363)
   * Upgrade RedCarpet dependency to `~> 2.3.0` (#1515)
   * Upgrade to Liquid `>= 2.5.2, < 2.6` (#1536)
 
 ### Bug Fixes
+
   * Fix file discrepancy in gemspec (#1522)
   * Force rendering of Include tag (#1525)
 
 ### Development Fixes
+
   * Add a rake task to generate a new release post (#1404)
   * Mute LSI output in tests (#1531)
   * Update contributor documentation (#1537)
 
 ### Site Enhancements
+
   * Fix a couple of validation errors on the site (#1511)
   * Make navigation menus reusable (#1507)
   * Fix link to History page from Release v1.2.0 notes post.
@@ -1190,42 +1234,38 @@
 ## 1.2.0 / 2013-09-06
 
 ### Major Enhancements
+
   * Disable automatically-generated excerpts when `excerpt_separator` is `""`. (#1386)
   * Add checking for URL conflicts when running `jekyll doctor` (#1389)
 
 ### Minor Enhancements
+
   * Catch and fix invalid `paginate` values (#1390)
-  * Remove superfluous `div.container` from the default html template for
-    `jekyll new` (#1315)
+  * Remove superfluous `div.container` from the default html template for `jekyll new` (#1315)
   * Add `-D` short-form switch for the drafts option (#1394)
   * Update the links in the site template for Twitter and GitHub (#1400)
   * Update dummy email address to example.com domain (#1408)
-  * Update normalize.css to v2.1.2 and minify; add rake task to update
-    normalize.css with greater ease. (#1430)
-  * Add the ability to detach the server ran by `jekyll serve` from it's
-    controlling terminal (#1443)
+  * Update normalize.css to v2.1.2 and minify; add rake task to update normalize.css with greater ease. (#1430)
+  * Add the ability to detach the server ran by `jekyll serve` from it's controlling terminal (#1443)
   * Improve permalink generation for URLs with special characters (#944)
-  * Expose the current Jekyll version to posts and pages via a new
-    `jekyll.version` variable (#1481)
+  * Expose the current Jekyll version to posts and pages via a new `jekyll.version` variable (#1481)
 
 ### Bug Fixes
+
   * Markdown extension matching matches only exact matches (#1382)
   * Fixed NoMethodError when message passed to `Stevenson#message` is nil (#1388)
   * Use binary mode when writing file (#1364)
-  * Fix 'undefined method `encoding` for "mailto"' errors w/ Ruby 1.8 and
-    Kramdown > 0.14.0 (#1397)
+  * Fix 'undefined method `encoding` for "mailto"' errors w/ Ruby 1.8 and Kramdown > 0.14.0 (#1397)
   * Do not force the permalink to be a dir if it ends on .html (#963)
   * When a Liquid Exception is caught, show the full path rel. to site source (#1415)
-  * Properly read in the config options when serving the docs locally
-    (#1444)
+  * Properly read in the config options when serving the docs locally (#1444)
   * Fixed `--layouts` option for `build` and `serve` commands (#1458)
   * Remove kramdown as a runtime dependency since it's optional (#1498)
-  * Provide proper error handling for invalid file names in the include
-    tag (#1494)
+  * Provide proper error handling for invalid file names in the include tag (#1494)
 
 ### Development Fixes
-  * Remove redundant argument to
-    Jekyll::Commands::New#scaffold_post_content (#1356)
+
+  * Remove redundant argument to Jekyll::Commands::New#scaffold_post_content (#1356)
   * Add new dependencies to the README (#1360)
   * Fix link to contributing page in README (#1424)
   * Update TomDoc in Pager#initialize to match params (#1441)
@@ -1235,6 +1275,7 @@
   * Add Gem version and dependency badge to README (#1497)
 
 ### Site Enhancements
+
   * Add info about new releases (#1353)
   * Update plugin list with jekyll-rss plugin (#1354)
   * Update the site list page with Ruby's official site (#1358)
@@ -1259,59 +1300,59 @@
 ## 1.1.2 / 2013-07-25
 
 ### Bug Fixes
+
   * Require Liquid 2.5.1 (#1349)
 
 ## 1.1.1 / 2013-07-24
 
 ### Minor Enhancements
+
   * Remove superfluous `table` selector from main.css in `jekyll new` template (#1328)
   * Abort with non-zero exit codes (#1338)
 
 ### Bug Fixes
+
   * Fix up the rendering of excerpts (#1339)
 
 ### Site Enhancements
+
   * Add Jekyll Image Tag to the plugins list (#1306)
   * Remove erroneous statement that `site.pages` are sorted alphabetically.
-  * Add info about the `_drafts` directory to the directory structure
-    docs (#1320)
-  * Improve the layout of the plugin listing by organizing it into
-    categories (#1310)
+  * Add info about the `_drafts` directory to the directory structure docs (#1320)
+  * Improve the layout of the plugin listing by organizing it into categories (#1310)
   * Add generator-jekyllrb and grunt-jekyll to plugins page (#1330)
   * Mention Kramdown as option for markdown parser on Extras page (#1318)
   * Update Quick-Start page to include reminder that all requirements must be installed (#1327)
-  * Change filename in `include` example to an HTML file so as not to indicate that Jekyll
-    will automatically convert them. (#1303)
+  * Change filename in `include` example to an HTML file so as not to indicate that Jekyll will automatically convert them. (#1303)
   * Add an RSS feed for commits to Jekyll (#1343)
 
 ## 1.1.0 / 2013-07-14
 
 ### Major Enhancements
+
   * Add `docs` subcommand to read Jekyll's docs when offline. (#1046)
   * Support passing parameters to templates in `include` tag (#1204)
   * Add support for Liquid tags to post excerpts (#1302)
 
 ### Minor Enhancements
-  * Search the hierarchy of pagination path up to site root to determine template page for
-    pagination. (#1198)
+
+  * Search the hierarchy of pagination path up to site root to determine template page for pagination. (#1198)
   * Add the ability to generate a new Jekyll site without a template (#1171)
-  * Use redcarpet as the default markdown engine in newly generated
-    sites (#1245, #1247)
-  * Add `redcarpet` as a runtime dependency so `jekyll build` works out-of-the-box for new
-    sites. (#1247)
-  * In the generated site, remove files that will be replaced by a
-    directory (#1118)
+  * Use redcarpet as the default markdown engine in newly generated sites (#1245, #1247)
+  * Add `redcarpet` as a runtime dependency so `jekyll build` works out-of-the-box for new sites. (#1247)
+  * In the generated site, remove files that will be replaced by a directory (#1118)
   * Fail loudly if a user-specified configuration file doesn't exist (#1098)
   * Allow for all options for Kramdown HTML Converter (#1201)
 
 ### Bug Fixes
+
   * Fix pagination in subdirectories. (#1198)
-  * Fix an issue with directories and permalinks that have a plus sign
-    (+) in them (#1215)
+  * Fix an issue with directories and permalinks that have a plus sign (+) in them (#1215)
   * Provide better error reporting when generating sites (#1253)
   * Latest posts first in non-LSI `related_posts` (#1271)
 
 ### Development Fixes
+
   * Merge the theme and layout Cucumber steps into one step (#1151)
   * Restrict activesupport dependency to pre-4.0.0 to maintain compatibility with `<= 1.9.2`
   * Include/exclude deprecation handling simplification (#1284)
@@ -1319,22 +1360,20 @@
   * Refactor Jekyll::Site (#1144)
 
 ### Site Enhancements
+
   * Add "News" section for release notes, along with an RSS feed (#1093, #1285, #1286)
   * Add "History" page.
   * Restructured docs sections to include "Meta" section.
-  * Add message to "Templates" page that specifies that Python must be installed in order
-    to use Pygments. (#1182)
+  * Add message to "Templates" page that specifies that Python must be installed in order to use Pygments. (#1182)
   * Update link to the official Maruku repo (#1175)
   * Add documentation about `paginate_path` to "Templates" page in docs (#1129)
   * Give the quick-start guide its own page (#1191)
-  * Update ProTip on Installation page in docs to point to all the info about Pygments and
-    the 'highlight' tag. (#1196)
+  * Update ProTip on Installation page in docs to point to all the info about Pygments and the 'highlight' tag. (#1196)
   * Run `site/img` through ImageOptim (thanks @qrush!) (#1208)
   * Added Jade Converter to `site/docs/plugins` (#1210)
   * Fix location of docs pages in Contributing pages (#1214)
   * Add ReadInXMinutes plugin to the plugin list (#1222)
-  * Remove plugins from the plugin list that have equivalents in Jekyll
-    proper (#1223)
+  * Remove plugins from the plugin list that have equivalents in Jekyll proper (#1223)
   * Add jekyll-assets to the plugin list (#1225)
   * Add jekyll-pandoc-mulitple-formats to the plugin list (#1229)
   * Remove dead link to "Using Git to maintain your blog" (#1227)
@@ -1348,17 +1387,16 @@
   * Add `jekyll-timeago` to list of third-party plugins. (#1260)
   * Add `jekyll-swfobject` to list of third-party plugins. (#1263)
   * Add `jekyll-picture-tag` to list of third-party plugins. (#1280)
-  * Update the GitHub Pages documentation regarding relative URLs
-    (#1291)
+  * Update the GitHub Pages documentation regarding relative URLs (#1291)
   * Update the S3 deployment documentation (#1294)
   * Add suggestion for Xcode CLT install to troubleshooting page in docs (#1296)
   * Add 'Working with drafts' page to docs (#1289)
-  * Add information about time zones to the documentation for a page's
-    date (#1304)
+  * Add information about time zones to the documentation for a page's date (#1304)
 
 ## 1.0.3 / 2013-06-07
 
 ### Minor Enhancements
+
   * Add support to gist tag for private gists. (#1189)
   * Fail loudly when Maruku errors out (#1190)
   * Move the building of related posts into their own class (#1057)
@@ -1367,16 +1405,16 @@
   * Convert IDs in the site template to classes (#1170)
 
 ### Bug Fixes
+
   * Fix typo in Stevenson constant "ERROR". (#1166)
   * Rename Jekyll::Logger to Jekyll::Stevenson to fix inheritance issue (#1106)
   * Exit with a non-zero exit code when dealing with a Liquid error (#1121)
-  * Make the `exclude` and `include` options backwards compatible with
-    versions of Jekyll prior to 1.0 (#1114)
+  * Make the `exclude` and `include` options backwards compatible with versions of Jekyll prior to 1.0 (#1114)
   * Fix pagination on Windows (#1063)
-  * Fix the application of Pygments' Generic Output style to Go code
-    (#1156)
+  * Fix the application of Pygments' Generic Output style to Go code (#1156)
 
 ### Site Enhancements
+
   * Add a Pro Tip to docs about front matter variables being optional (#1147)
   * Add changelog to site as History page in /docs/ (#1065)
   * Add note to Upgrading page about new config options in 1.0.x (#1146)
@@ -1390,12 +1428,12 @@
   * Fix logic for `relative_permalinks` instructions on Upgrading page (#1101)
   * Add docs for post excerpt (#1072)
   * Add docs for gist tag (#1072)
-  * Add docs indicating that Pygments does not need to be installed
-    separately (#1099, #1119)
+  * Add docs indicating that Pygments does not need to be installed separately (#1099, #1119)
   * Update the migrator docs to be current (#1136)
   * Add the Jekyll Gallery Plugin to the plugin list (#1143)
 
 ### Development Fixes
+
   * Use Jekyll.logger instead of Jekyll::Stevenson to log things (#1149)
   * Fix pesky Cucumber infinite loop (#1139)
   * Do not write posts with timezones in Cucumber tests (#1124)
@@ -1404,20 +1442,24 @@
 ## 1.0.2 / 2013-05-12
 
 ### Major Enhancements
+
   * Add `jekyll doctor` command to check site for any known compatibility problems (#1081)
   * Backwards-compatibilize relative permalinks (#1081)
 
 ### Minor Enhancements
+
   * Add a `data-lang="<lang>"` attribute to Redcarpet code blocks (#1066)
   * Deprecate old config `server_port`, match to `port` if `port` isn't set (#1084)
   * Update pygments.rb version to 0.5.0 (#1061)
   * Update Kramdown version to 1.0.2 (#1067)
 
 ### Bug Fixes
+
   * Fix issue when categories are numbers (#1078)
   * Catching that Redcarpet gem isn't installed (#1059)
 
 ### Site Enhancements
+
   * Add documentation about `relative_permalinks` (#1081)
   * Remove pygments-installation instructions, as pygments.rb is bundled with it (#1079)
   * Move pages to be Pages for realz (#985)
@@ -1426,29 +1468,34 @@
 ## 1.0.1 / 2013-05-08
 
 ### Minor Enhancements
+
   * Do not force use of `toc_token` when using `generate_tok` in RDiscount (#1048)
   * Add newer `language-` class name prefix to code blocks (#1037)
   * Commander error message now preferred over process abort with incorrect args (#1040)
 
 ### Bug Fixes
+
   * Make Redcarpet respect the pygments configuration option (#1053)
   * Fix the index build with LSI (#1045)
   * Don't print deprecation warning when no arguments are specified. (#1041)
   * Add missing `</div>` to site template used by `new` subcommand, fixed typos in code (#1032)
 
 ### Site Enhancements
+
   * Changed https to http in the GitHub Pages link (#1051)
   * Remove CSS cruft, fix typos, fix HTML errors (#1028)
   * Removing manual install of Pip and Distribute (#1025)
   * Updated URL for Markdown references plugin (#1022)
 
 ### Development Fixes
+
   * Markdownify history file (#1027)
   * Update links on README to point to new jekyllrb.com (#1018)
 
 ## 1.0.0 / 2013-05-06
 
 ### Major Enhancements
+
   * Add `jekyll new` subcommand: generate a Jekyll scaffold (#764)
   * Refactored Jekyll commands into subcommands: build, serve, and migrate. (#690)
   * Removed importers/migrators from main project, migrated to jekyll-import sub-gem (#793)
@@ -1456,6 +1503,7 @@
   * Add ordinal date permalink style (/:categories/:year/:y_day/:title.html) (#928)
 
 ### Minor Enhancements
+
   * Site template HTML5-ified (#964)
   * Use post's directory path when matching for the `post_url` tag (#998)
   * Loosen dependency on Pygments so it's only required when it's needed (#1015)
@@ -1495,8 +1543,7 @@
   * Massively accelerate LSI performance (#664)
   * Truncate post slugs when importing from Tumblr (#496)
   * Add glob support to include, exclude option (#743)
-  * Layout of Page or Post defaults to 'page' or 'post', respectively (#580)
-    REPEALED by (#977)
+  * Layout of Page or Post defaults to 'page' or 'post', respectively (#580) REPEALED by (#977)
   * "Keep files" feature (#685)
   * Output full path & name for files that don't parse (#745)
   * Add source and destination directory protection (#535)
@@ -1522,14 +1569,14 @@
   * Fixed Page#dir and Page#url for edge cases (#536)
   * Fix broken `post_url` with posts with a time in their YAML front matter (#831)
   * Look for plugins under the source directory (#654)
-  * Tumblr Migrator: finds `_posts` dir correctly, fixes truncation of long
-      post names (#775)
+  * Tumblr Migrator: finds `_posts` dir correctly, fixes truncation of long post names (#775)
   * Force Categories to be Strings (#767)
   * Safe YAML plugin to prevent vulnerability (#777)
   * Add SVG support to Jekyll/WEBrick. (#407, #406)
   * Prevent custom destination from causing continuous regen on watch (#528, #820, #862)
 
 ### Site Enhancements
+
   * Responsify (#860)
   * Fix spelling, punctuation and phrasal errors (#989)
   * Update quickstart instructions with `new` command (#966)
@@ -1540,20 +1587,20 @@
   * Redesigned site (#583)
 
 ### Development Fixes
+
   * Exclude Cucumber 1.2.4, which causes tests to fail in 1.9.2 (#938)
-  * Added "features:html" rake task for debugging purposes, cleaned up
-      Cucumber profiles (#832)
+  * Added "features:html" rake task for debugging purposes, cleaned up Cucumber profiles (#832)
   * Explicitly require HTTPS rubygems source in Gemfile (#826)
   * Changed Ruby version for development to 1.9.3-p374 from p362 (#801)
   * Including a link to the GitHub Ruby style guide in CONTRIBUTING.md (#806)
   * Added script/bootstrap (#776)
-  * Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version
-      of greater than 1.9 (#771)
+  * Running Simplecov under 2 conditions: ENV(COVERAGE)=true and with Ruby version of greater than 1.9 (#771)
   * Switch to Simplecov for coverage report (#765)
 
 ## 0.12.1 / 2013-02-19
 
 ### Minor Enhancements
+
   * Update Kramdown version to 0.14.1 (#744)
   * Test Enhancements
   * Update Rake version to 10.0.3 (#744)
@@ -1563,6 +1610,7 @@
 ## 0.12.0 / 2012-12-22
 
 ### Minor Enhancements
+
   * Add ability to explicitly specify included files (#261)
   * Add `--default-mimetype` option (#279)
   * Allow setting of RedCloth options (#284)
@@ -1582,10 +1630,12 @@
   * Ensure front matter is at start of file (#562)
 
 ## 0.11.2 / 2011-12-27
+
   * Bug Fixes
   * Fix gemspec
 
 ## 0.11.1 / 2011-12-27
+
   * Bug Fixes
   * Fix extra blank line in highlight blocks (#409)
   * Update dependencies
@@ -1593,12 +1643,14 @@
 ## 0.11.0 / 2011-07-10
 
 ### Major Enhancements
+
   * Add command line importer functionality (#253)
   * Add Redcarpet Markdown support (#318)
   * Make markdown/textile extensions configurable (#312)
   * Add `markdownify` filter
 
 ### Minor Enhancements
+
   * Switch to Albino gem
   * Bundler support
   * Use English library to avoid hoops (#292)
@@ -1612,12 +1664,14 @@
   * Secure additional path exploits
 
 ## 0.10.0 / 2010-12-16
+
   * Bug Fixes
   * Add `--no-server` option.
 
 ## 0.9.0 / 2010-12-15
 
 ### Minor Enhancements
+
   * Use OptionParser's `[no-]` functionality for better boolean parsing.
   * Add Drupal migrator (#245)
   * Complain about YAML and Liquid errors (#249)
@@ -1627,6 +1681,7 @@
 ## 0.8.0 / 2010-11-22
 
 ### Minor Enhancements
+
   * Add wordpress.com importer (#207)
   * Add `--limit-posts` cli option (#212)
   * Add `uri_escape` filter (#234)
@@ -1641,12 +1696,14 @@
 ## 0.7.0 / 2010-08-24
 
 ### Minor Enhancements
+
   * Add support for rdiscount extensions (#173)
   * Bug Fixes
   * Highlight should not be able to render local files
   * The site configuration may not always provide a 'time' setting (#184)
 
 ## 0.6.2 / 2010-06-25
+
   * Bug Fixes
   * Fix Rakefile 'release' task (tag pushing was missing origin)
   * Ensure that RedCloth is loaded when textilize filter is used (#183)
@@ -1654,24 +1711,24 @@
   * Fix `page.url` to include full relative path (#181)
 
 ## 0.6.1 / 2010-06-24
+
   * Bug Fixes
   * Fix Markdown Pygments prefix and suffix (#178)
 
 ## 0.6.0 / 2010-06-23
 
 ### Major Enhancements
+
   * Proper plugin system (#19, #100)
   * Add safe mode so unsafe converters/generators can be added
-  * Maruku is now the only processor dependency installed by default.
-      Other processors will be lazy-loaded when necessary (and prompt the
-      user to install them when necessary) (#57)
+  * Maruku is now the only processor dependency installed by default. Other processors will be lazy-loaded when necessary (and prompt the user to install them when necessary) (#57)
 
 ### Minor Enhancements
+
   * Inclusion/exclusion of future dated posts (#59)
   * Generation for a specific time (#59)
   * Allocate `site.time` on render not per site_payload invocation (#59)
-  * Pages now present in the site payload and can be used through the
-      `site.pages` and `site.html_pages` variables
+  * Pages now present in the site payload and can be used through the `site.pages` and `site.html_pages` variables
   * Generate phase added to site#process and pagination is now a generator
   * Switch to RakeGem for build/test process
   * Only regenerate static files when they have changed (#142)
@@ -1688,87 +1745,80 @@
 ## 0.5.7 / 2010-01-12
 
 ### Minor Enhancements
+
   * Allow overriding of post date in the front matter (#62, #38)
   * Bug Fixes
   * Categories isn't always an array (#73)
   * Empty tags causes error in read_posts (#84)
   * Fix pagination to adhere to read/render/write paradigm
   * Test Enhancement
-  * Cucumber features no longer use site.posts.first where a better
-      alternative is available
+  * Cucumber features no longer use site.posts.first where a better alternative is available
 
 ## 0.5.6 / 2010-01-08
+
   * Bug Fixes
   * Require redcloth >= 4.2.1 in tests (#92)
   * Don't break on triple dashes in yaml front matter (#93)
 
 ### Minor Enhancements
+
   * Allow .mkd as markdown extension
   * Use $stdout/err instead of constants (#99)
   * Properly wrap code blocks (#91)
   * Add javascript mime type for webrick (#98)
 
 ## 0.5.5 / 2010-01-08
+
   * Bug Fixes
   * Fix pagination % 0 bug (#78)
-  * Ensure all posts are processed first (#71)
-
-## NOTE
-  * After this point I will no longer be giving credit in the history;
-    that is what the commit log is for.
+  * Ensure all posts are processed first (#71) ## NOTE
+  * After this point I will no longer be giving credit in the history; that is what the commit log is for.
 
 ## 0.5.4 / 2009-08-23
+
   * Bug Fixes
   * Do not allow symlinks (security vulnerability)
 
 ## 0.5.3 / 2009-07-14
+
   * Bug Fixes
-  * Solving the permalink bug where non-html files wouldn't work
-      (@jeffrydegrande)
+  * Solving the permalink bug where non-html files wouldn't work (@jeffrydegrande)
 
 ## 0.5.2 / 2009-06-24
+
   * Enhancements
-  * Added --paginate option to the executable along with a paginator object
-      for the payload (@calavera)
-  * Upgraded RedCloth to 4.2.1, which makes `<notextile>` tags work once
-      again.
-  * Configuration options set in config.yml are now available through the
-      site payload (@vilcans)
-  * Posts can now have an empty YAML front matter or none at all
-      (@ bahuvrihi)
+  * Added --paginate option to the executable along with a paginator object for the payload (@calavera)
+  * Upgraded RedCloth to 4.2.1, which makes `<notextile>` tags work once again.
+  * Configuration options set in config.yml are now available through the site payload (@vilcans)
+  * Posts can now have an empty YAML front matter or none at all (@ bahuvrihi)
   * Bug Fixes
-  * Fixing Ruby 1.9 issue that requires `#to_s` on the err object
-      (@Chrononaut)
+  * Fixing Ruby 1.9 issue that requires `#to_s` on the err object (@Chrononaut)
   * Fixes for pagination and ordering posts on the same day (@ujh)
-  * Made pages respect permalinks style and permalinks in yml front matter
-      (@eugenebolshakov)
-  * Index.html file should always have index.html permalink
-      (@eugenebolshakov)
-  * Added trailing slash to pretty permalink style so Apache is happy
-      (@eugenebolshakov)
-  * Bad markdown processor in config fails sooner and with better message
-      (@ gcnovus)
+  * Made pages respect permalinks style and permalinks in yml front matter (@eugenebolshakov)
+  * Index.html file should always have index.html permalink (@eugenebolshakov)
+  * Added trailing slash to pretty permalink style so Apache is happy (@eugenebolshakov)
+  * Bad markdown processor in config fails sooner and with better message (@ gcnovus)
   * Allow CRLFs in yaml front matter (@juretta)
   * Added Date#xmlschema for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06
 
 ### Major Enhancements
+
   * Next/previous posts in site payload (@pantulis, @tomo)
   * Permalink templating system
   * Moved most of the README out to the GitHub wiki
-  * Exclude option in configuration so specified files won't be brought over
-      with generated site (@duritong)
+  * Exclude option in configuration so specified files won't be brought over with generated site (@duritong)
   * Bug Fixes
   * Making sure config.yaml references are all gone, using only config.yml
   * Fixed syntax highlighting breaking for UTF-8 code (@henrik)
-  * Worked around RDiscount bug that prevents Markdown from getting parsed
-      after highlight (@henrik)
+  * Worked around RDiscount bug that prevents Markdown from getting parsed after highlight (@henrik)
   * CGI escaped post titles (@Chrononaut)
 
 ## 0.5.0 / 2009-04-07
 
 ### Minor Enhancements
+
   * Ability to set post categories via YAML (@qrush)
   * Ability to set prevent a post from publishing via YAML (@qrush)
   * Add textilize filter (@willcodeforfoo)
@@ -1788,6 +1838,7 @@
 ## 0.4.1
 
 ### Minor Enhancements
+
   * Changed date format on wordpress converter (zeropadding) (@dysinger)
   * Bug Fixes
   * Add Jekyll binary as executable to gemspec (@dysinger)
@@ -1795,9 +1846,11 @@
 ## 0.4.0 / 2009-02-03
 
 ### Major Enhancements
+
   * Switch to Jeweler for packaging tasks
 
 ### Minor Enhancements
+
   * Type importer (@codeslinger)
   * `site.topics` accessor (@baz)
   * Add `array_to_sentence_string` filter (@mchung)
@@ -1816,55 +1869,62 @@
 ## 0.3.0 / 2008-12-24
 
 ### Major Enhancements
-  * Added `--server` option to start a simple WEBrick server on destination
-      directory (@johnreilly and @mchung)
+
+  * Added `--server` option to start a simple WEBrick server on destination directory (@johnreilly and @mchung)
 
 ### Minor Enhancements
+
   * Added post categories based on directories containing `_posts` (@mreid)
   * Added post topics based on directories underneath `_posts`
   * Added new date filter that shows the full month name (@mreid)
   * Merge Post's YAML front matter into its to_liquid payload (@remi)
   * Restrict includes to regular files underneath `_includes`
   * Bug Fixes
-  * Change YAML delimiter matcher so as to not chew up 2nd level markdown
-      headers (@mreid)
-  * Fix bug that meant page data (such as the date) was not available in
-      templates (@mreid)
+  * Change YAML delimiter matcher so as to not chew up 2nd level markdown headers (@mreid)
+  * Fix bug that meant page data (such as the date) was not available in templates (@mreid)
   * Properly reject directories in `_layouts`
 
 ## 0.2.1 / 2008-12-15
+
   * Major Changes
   * Use Maruku (pure Ruby) for Markdown by default (@mreid)
   * Allow use of RDiscount with `--rdiscount` flag
 
 ### Minor Enhancements
+
   * Don't load directory_watcher unless it's needed (@pjhyett)
 
 ## 0.2.0 / 2008-12-14
+
   * Major Changes
   * related_posts is now found in `site.related_posts`
 
 ## 0.1.6 / 2008-12-13
+
   * Major Features
   * Include files in `_includes` with `{% include x.textile %}`
 
 ## 0.1.5 / 2008-12-12
 
 ### Major Enhancements
+
   * Code highlighting with Pygments if `--pygments` is specified
   * Disable true LSI by default, enable with `--lsi`
 
 ### Minor Enhancements
+
   * Output informative message if RDiscount is not available (@JackDanger)
   * Bug Fixes
   * Prevent Jekyll from picking up the output directory as a source (@JackDanger)
   * Skip `related_posts` when there is only one post (@JackDanger)
 
 ## 0.1.4 / 2008-12-08
+
   * Bug Fixes
   * DATA does not work properly with rubygems
 
 ## 0.1.3 / 2008-12-06
+
   * Major Features
   * Markdown support (@vanpelt)
   * Mephisto and CSV converters (@vanpelt)
@@ -1874,21 +1934,24 @@
   * Accept both `\r\n` and `\n` in YAML header (@vanpelt)
 
 ## 0.1.2 / 2008-11-22
+
   * Major Features
   * Add a real "related posts" implementation using Classifier
   * Command Line Changes
-  * Allow cli to be called with 0, 1, or 2 args intuiting dir paths
-      if they are omitted
+  * Allow cli to be called with 0, 1, or 2 args intuiting dir paths if they are omitted
 
 ## 0.1.1 / 2008-11-22
+
   * Minor Additions
   * Posts now support introspectional data e.g. `{{ page.url }}`
 
 ## 0.1.0 / 2008-11-05
+
   * First release
   * Converts posts written in Textile
   * Converts regular site pages
   * Simple copy of binary files
 
 ## 0.0.0 / 2008-10-19
+
   * Birthday!

@@ -4,10 +4,10 @@ title: Installation
 permalink: /docs/installation/
 ---
 
-Getting Jekyll installed and ready-to-go should only take a few minutes. If it
-ever becomes a pain in the ass, please [file an
-issue]({{ site.repository }}/issues/new) (or submit a pull request)
-describing the issue you encountered and how we might make the process easier.
+Getting Jekyll installed and ready-to-go should only take a few minutes.
+If it ever becomes a pain, please [file an issue]({{ site.repository }}/issues/new)
+(or submit a pull request) describing the issue you
+encountered and how we might make the process easier
 
 ### Requirements
 

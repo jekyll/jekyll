@@ -1,16 +1,27 @@
 module Jekyll
-  module Utils extend self
+  module Utils
+    extend self
     autoload :Platforms, 'jekyll/utils/platforms'
     autoload :Ansi, "jekyll/utils/ansi"
 
     # Constants for use in #slugify
-    SLUGIFY_MODES = %w{raw default pretty}
+    SLUGIFY_MODES = %w(raw default pretty)
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
 
+    # Takes an indented string and removes the preceding spaces on each line
+
     def strip_heredoc(str)
       str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
+    end
+
+    # Takes a slug and turns it into a simple title.
+
+    def titleize_slug(slug)
+      slug.split("-").map! do |val|
+        val.capitalize!
+      end.join(" ")
     end
 
     # Non-destructive version of deep_merge_hashes! See that method.
@@ -30,20 +41,23 @@ module Jekyll
     #
     # Thanks to whoever made it.
     def deep_merge_hashes!(target, overwrite)
-      overwrite.each_key do |key|
-        if overwrite[key].is_a? Hash and target[key].is_a? Hash
-          target[key] = Utils.deep_merge_hashes(target[key], overwrite[key])
-          next
+      target.merge!(overwrite) do |key, old_val, new_val|
+        if new_val.nil?
+          old_val
+        else
+          mergable?(old_val) && mergable?(new_val) ? deep_merge_hashes(old_val, new_val) : new_val
         end
-
-        target[key] = overwrite[key]
       end
 
-      if target.default_proc.nil?
+      if target.respond_to?(:default_proc) && overwrite.respond_to?(:default_proc) && target.default_proc.nil?
         target.default_proc = overwrite.default_proc
       end
 
       target
+    end
+
+    def mergable?(value)
+      value.is_a?(Hash) || value.is_a?(Drops::Drop)
     end
 
     # Read array from the supplied hash favouring the singular key
@@ -61,7 +75,7 @@ module Jekyll
     end
 
     def value_from_singular_key(hash, key)
-      hash[key] if (hash.key?(key) || (hash.default_proc && hash[key]))
+      hash[key] if hash.key?(key) || (hash.default_proc && hash[key])
     end
 
     def value_from_plural_key(hash, key)
@@ -119,7 +133,9 @@ module Jekyll
     #
     # Returns true if the YAML front matter is present.
     def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
+      !!(File.open(file, 'rb') { |f| f.readline } =~ /\A---\s*\r?\n/)
+    rescue EOFError
+      false
     end
 
     # Slugify a filename or title.
@@ -163,24 +179,26 @@ module Jekyll
       end
 
       # Replace each character sequence with a hyphen
-      re = case mode
-      when 'raw'
-        SLUGIFY_RAW_REGEXP
-      when 'default'
-        SLUGIFY_DEFAULT_REGEXP
-      when 'pretty'
-        # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
-        # and is allowed in both extN and NTFS.
-        SLUGIFY_PRETTY_REGEXP
-      end
+      re =
+        case mode
+        when 'raw'
+          SLUGIFY_RAW_REGEXP
+        when 'default'
+          SLUGIFY_DEFAULT_REGEXP
+        when 'pretty'
+          # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
+          # and is allowed in both extN and NTFS.
+          SLUGIFY_PRETTY_REGEXP
+        end
 
-      slug = string.
-        # Strip according to the mode
-        gsub(re, '-').
-        # Remove leading/trailing hyphen
-        gsub(/^\-|\-$/i, '')
+      # Strip according to the mode
+      slug = string.gsub(re, '-')
 
-      cased ? slug : slug.downcase
+      # Remove leading/trailing hyphen
+      slug.gsub!(/^\-|\-$/i, '')
+
+      slug.downcase! unless cased
+      slug
     end
 
     # Add an appropriate suffix to template so that it matches the specified
@@ -222,7 +240,6 @@ module Jekyll
       end
       template
     end
-
 
     # Work the same way as Dir.glob but seperating the input into two parts
     # ('dir' + '/' + 'pattern') to make sure the first part('dir') does not act

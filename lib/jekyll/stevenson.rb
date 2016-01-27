@@ -5,7 +5,7 @@ module Jekyll
       @level = DEBUG
       @default_formatter = Formatter.new
       @logdev = $stdout
-      @formatter = proc do |severity, datetime, progname, msg|
+      @formatter = proc do |_, _, _, msg|
         "#{msg}"
       end
     end
@@ -14,7 +14,7 @@ module Jekyll
       severity ||= UNKNOWN
       @logdev = set_logdevice(severity)
 
-      if @logdev.nil? or severity < @level
+      if @logdev.nil? || severity < @level
         return true
       end
       progname ||= @progname

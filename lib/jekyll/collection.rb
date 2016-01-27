@@ -56,7 +56,7 @@ module Jekyll
         full_path = collection_dir(file_path)
         next if File.directory?(full_path)
         if Utils.has_yaml_header? full_path
-          doc = Jekyll::Document.new(full_path, { site: site, collection: self })
+          doc = Jekyll::Document.new(full_path, { :site => site, :collection => self })
           doc.read
           if site.publisher.publish?(doc) || !write?
             docs << doc
@@ -76,10 +76,11 @@ module Jekyll
     # Returns an Array of file paths to the documents in this collection
     #   relative to the collection's directory
     def entries
-      return Array.new unless exists?
+      return [] unless exists?
       @entries ||=
         Utils.safe_glob(collection_dir, ["**", "*.*"]).map do |entry|
-          entry["#{collection_dir}/"] = ''; entry
+          entry["#{collection_dir}/"] = ''
+          entry
         end
     end
 
@@ -88,7 +89,7 @@ module Jekyll
     #
     # Returns a list of filtered entry paths.
     def filtered_entries
-      return Array.new unless exists?
+      return [] unless exists?
       @filtered_entries ||=
         Dir.chdir(directory) do
           entry_filter.filter(entries).reject do |f|
@@ -170,14 +171,7 @@ module Jekyll
     #
     # Returns a representation of this collection for use in Liquid.
     def to_liquid
-      metadata.merge({
-        "label"     => label,
-        "docs"      => docs,
-        "files"     => files,
-        "directory" => directory,
-        "output"    => write?,
-        "relative_directory" => relative_directory
-      })
+      Drops::CollectionDrop.new self
     end
 
     # Whether the collection's documents ought to be written as individual
@@ -192,8 +186,8 @@ module Jekyll
     #
     # Returns the URL template to render collection's documents at.
     def url_template
-      metadata.fetch('permalink') do
-          Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
+      @url_template ||= metadata.fetch('permalink') do
+        Utils.add_permalink_suffix("/:collection/:path", site.permalink_style)
       end
     end
 
@@ -202,7 +196,7 @@ module Jekyll
     # Returns the metadata for this collection
     def extract_metadata
       if site.config['collections'].is_a?(Hash)
-        site.config['collections'][label] || Hash.new
+        site.config['collections'][label] || {}
       else
         {}
       end

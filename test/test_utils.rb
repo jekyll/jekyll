@@ -1,6 +1,31 @@
 require 'helper'
 
 class TestUtils < JekyllUnitTest
+  context "The \`Utils.deep_merge_hashes\` method" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @site.process
+    end
+
+    should "merge a drop into a hash" do
+      data = {"page" => {}}
+      merged = Utils.deep_merge_hashes(data, @site.site_payload)
+      assert merged.is_a? Hash
+      assert merged["site"].is_a? Drops::SiteDrop
+      assert_equal data["page"], merged["page"]
+    end
+
+    should "merge a hash into a drop" do
+      data = {"page" => {}}
+      assert_nil @site.site_payload["page"]
+      merged = Utils.deep_merge_hashes(@site.site_payload, data)
+      assert merged.is_a? Drops::UnifiedPayloadDrop
+      assert merged["site"].is_a? Drops::SiteDrop
+      assert_equal data["page"], merged["page"]
+    end
+  end
+
   context "hash" do
 
     context "pluralized_array" do
@@ -234,4 +259,21 @@ class TestUtils < JekyllUnitTest
     end
   end
 
+  context "The \`Utils.has_yaml_header?\` method" do
+    should "accept files with yaml front matter" do
+      file = source_dir("_posts", "2008-10-18-foo-bar.markdown")
+      assert_equal "---\n", File.open(file, 'rb') { |f| f.read(4) }
+      assert Utils.has_yaml_header?(file)
+    end
+    should "accept files with extraneous spaces after yaml front matter" do
+      file = source_dir("_posts", "2015-12-27-extra-spaces.markdown")
+      assert_equal "---  \n", File.open(file, 'rb') { |f| f.read(6) }
+      assert Utils.has_yaml_header?(file)
+    end
+    should "reject pgp files and the like which resemble front matter" do
+      file = source_dir("pgp.key")
+      assert_equal "-----B", File.open(file, 'rb') { |f| f.read(6) }
+      refute Utils.has_yaml_header?(file)
+    end
+  end
 end

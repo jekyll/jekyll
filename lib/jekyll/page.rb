@@ -7,14 +7,16 @@ module Jekyll
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
+    alias_method :extname, :ext
+
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
+    ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
       name
       path
       url
-    ]
+    )
 
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.
@@ -37,11 +39,10 @@ module Jekyll
       @dir  = dir
       @name = name
 
-
       process(name)
       read_yaml(File.join(base, dir), name)
 
-      data.default_proc = proc do |hash, key|
+      data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
 
@@ -62,8 +63,7 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      return nil if data.nil? || data['permalink'].nil?
-      data['permalink']
+      data.nil? ? nil : data['permalink']
     end
 
     # The template of the permalink.
@@ -107,7 +107,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0 .. -ext.length - 1]
+      self.basename = name[0..-ext.length - 1]
     end
 
     # Add any necessary layouts to this post
@@ -117,12 +117,10 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-      payload = Utils.deep_merge_hashes({
-        "page" => to_liquid,
-        'paginator' => pager.to_liquid
-      }, site_payload)
+      site_payload["page"] = to_liquid
+      site_payload["paginator"] = pager.to_liquid
 
-      do_layout(payload, layouts)
+      do_layout(site_payload, layouts)
     end
 
     # The path to the source file
@@ -145,7 +143,7 @@ module Jekyll
     def destination(dest)
       path = site.in_dest_dir(dest, URL.unescape_path(url))
       path = File.join(path, "index") if url.end_with?("/")
-      path <<  output_ext unless path.end_with?(output_ext)
+      path << output_ext unless path.end_with? output_ext
       path
     end
 
@@ -162,6 +160,14 @@ module Jekyll
     # Returns the Boolean of whether this Page is an index file or not.
     def index?
       basename == 'index'
+    end
+
+    def trigger_hooks(hook_name, *args)
+      Jekyll::Hooks.trigger :pages, hook_name, self, *args
+    end
+
+    def write?
+      true
     end
   end
 end

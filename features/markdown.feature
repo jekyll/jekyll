@@ -11,7 +11,8 @@ Feature: Markdown
       | title   | date       | content    | type     |
       | Hackers | 2009-03-27 | # My Title | markdown |
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "Index" in "_site/index.html"
     And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/2009/03/27/hackers.html"
     And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/index.html"
@@ -27,6 +28,7 @@ Feature: Markdown
       | title   | date       | content    | type     |
       | Hackers | 2009-03-27 | # My Title | markdown |
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "Index" in "_site/index.html"
     And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/index.html"

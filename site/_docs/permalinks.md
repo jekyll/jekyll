@@ -79,7 +79,7 @@ permalink is defined according to the format `/:categories/:year/:month/:day/:ti
       </td>
       <td>
         <p>
-          Hour of the day, 24-hour clock, zero-padded from the Post’s filename. (00..23)
+          Hour of the day, 24-hour clock, zero-padded from the post’s <code>date</code> front matter. (00..23)
         </p>
       </td>
     </tr>
@@ -89,7 +89,7 @@ permalink is defined according to the format `/:categories/:year/:month/:day/:ti
       </td>
       <td>
         <p>
-          Minute of the hour from the Post’s filename. (00..59)
+          Minute of the hour from the post’s <code>date</code> front matter. (00..59)
         </p>
       </td>
     </tr>
@@ -99,7 +99,8 @@ permalink is defined according to the format `/:categories/:year/:month/:day/:ti
       </td>
       <td>
         <p>
-          Second of the minute from the Post’s filename. (00..60)
+          Second of the minute from the post’s <code>date</code> front matter. (00..59)
+        </p>
         </p>
       </td>
     </tr>

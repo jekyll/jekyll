@@ -37,6 +37,7 @@ class TestKramdown < JekyllUnitTest
 
       should "support custom types" do
         override = {
+          "highlighter" => nil,
           'kramdown' => {
             'smart_quotes' => 'lsaquo,rsaquo,laquo,raquo'
           }
@@ -61,7 +62,14 @@ class TestKramdown < JekyllUnitTest
 
     context "when a custom highlighter is chosen" do
       should "use the chosen highlighter if it's available" do
-        override = { "markdown" => "kramdown", "kramdown" => { "syntax_highlighter" => :coderay }}
+        override = {
+          "highlighter" => nil,
+          "markdown" => "kramdown",
+          "kramdown" => {
+            "syntax_highlighter" => :coderay
+          }
+        }
+
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
         result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc <<-MARKDOWN))
           ~~~ruby
@@ -77,11 +85,12 @@ class TestKramdown < JekyllUnitTest
         override = {
           "markdown" => "kramdown",
           "kramdown" => {
-            "syntax_highlighter" => nil,
-                "enable_coderay" => true
-            }
+            "enable_coderay" => true,
+          }
         }
 
+        @config.delete("highlighter")
+        @config["kramdown"].delete("syntax_highlighter")
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
         result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc <<-MARKDOWN))
           ~~~ruby
@@ -90,13 +99,14 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-        refute result.css(selector).empty?
+        refute result.css(selector).empty?, "pre tag should exist"
       end
     end
 
     should "move coderay to syntax_highlighter_opts" do
       original = Kramdown::Document.method(:new)
       markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, {
+        "higlighter" => nil,
         "markdown" => "kramdown",
         "kramdown" => {
           "syntax_highlighter" => "coderay",

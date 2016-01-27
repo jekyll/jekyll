@@ -2,11 +2,14 @@ def jruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end
 
-unless ENV['TRAVIS']
-  require File.expand_path('../simplecov_custom_profile', __FILE__)
-  SimpleCov.start('gem') do
-    add_filter "/vendor/bundle"
+if ENV["CI"]
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+else
+  require File.expand_path("../simplecov_custom_profile", __FILE__)
+  SimpleCov.start "gem" do
     add_filter "/vendor/gem"
+    add_filter "/vendor/bundle"
     add_filter ".bundle"
   end
 end
@@ -32,15 +35,28 @@ require 'shoulda'
 
 include Jekyll
 
-# FIXME: If we really need this we lost the game.
-# STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
-
 # Report with color.
 Minitest::Reporters.use! [
   Minitest::Reporters::DefaultReporter.new(
     :color => true
   )
 ]
+
+module Minitest::Assertions
+  def assert_exist(filename, msg = nil)
+    msg = message(msg) {
+      "Expected '#{filename}' to exist"
+    }
+    assert File.exist?(filename), msg
+  end
+
+  def refute_exist(filename, msg = nil)
+    msg = message(msg) {
+      "Expected '#{filename}' not to exist"
+    }
+    refute File.exist?(filename), msg
+  end
+end
 
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods

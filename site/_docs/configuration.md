@@ -397,7 +397,7 @@ webrick:
 
 ### Defaults
 
-We only provide on default and that's a Content-Type header that disables
+We only provide one default and that's a Content-Type header that disables
 caching in development so that you don't have to fight with Chrome's aggressive
 caching when you are in development mode.
 
@@ -506,7 +506,7 @@ In this example the `layout` is set to `default` inside the [collection](../coll
 
 Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
 
-You can see that in the last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
+You can see that in the second to last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
 
 Finally, if you set defaults in the site configuration by adding a `defaults` section to your `_config.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:
 
@@ -678,7 +678,7 @@ extensions are:
 ### Kramdown
 
 In addition to the defaults mentioned above, you can also turn on recognition
-of Github Flavored Markdown by passing an `input` option with a value of "GFM".
+of GitHub Flavored Markdown by passing an `input` option with a value of "GFM".
 
 For example, in your `_config.yml`:
 
@@ -712,3 +712,35 @@ in the `_plugins` folder or as a gem, specify it in your `_config.yml`:
 {% highlight yaml %}
 markdown: MyCustomProcessor
 {% endhighlight %}
+
+## Incremental Regeneration
+<div class="note warning">
+  <h5>Incremental regeneration is still an experimental feature</h5>
+  <p>
+    While incremental regeneration will work for the most common cases, it will
+    not work correctly in every scenario. Please be extremely cautious when
+    using the feature, and report any problems not listed below by
+    <a href="https://github.com/jekyll/jekyll/issues/new">opening an issue on GitHub</a>.
+  </p>
+</div>
+
+Incremental regeneration helps shorten build times by only generating documents
+and pages that were updated since the previous build. It does this by keeping
+track of both file modification times and inter-document dependencies in the
+`.jekyll-metadata` file.
+
+Under the current implementation, incremental regeneration will only generate a
+document or page if either it, or one of its dependencies, is modified. Currently,
+the only types of dependencies tracked are includes (using the
+{% raw %}`{% include %}`{% endraw %} tag) and layouts. This means that plain
+references to other documents (for example, the common case of iterating over
+`site.posts` in a post listings page) will not be detected as a dependency.
+
+To remedy some of these shortfalls, putting `regenerate: true` in the front-matter
+of a document will force Jekyll to regenerate it regardless of whether it has been
+modified. Note that this will generate the specified document only; references
+to other documents' contents will not work since they won't be re-rendered.
+
+Incremental regeneration can be enabled via the `--incremental` flag (`-I` for
+short) from the command-line or by setting `incremental: true` in your
+configuration file.

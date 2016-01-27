@@ -11,7 +11,6 @@ require 'uri'
 #
 module Jekyll
   class URL
-
     # options - One of :permalink or :template must be supplied.
     #           :template     - The String used as template for URL generation,
     #                           for example "/:path/:basename:output_ext", where
@@ -59,6 +58,14 @@ module Jekyll
     #
     # Returns the unsanitized String URL
     def generate_url(template)
+      if @placeholders.is_a? Drops::UrlDrop
+        generate_url_from_drop(template)
+      else
+        generate_url_from_hash(template)
+      end
+    end
+
+    def generate_url_from_hash(template)
       @placeholders.inject(template) do |result, token|
         break result if result.index(':').nil?
         if token.last.nil?
@@ -70,11 +77,22 @@ module Jekyll
       end
     end
 
+    def generate_url_from_drop(template)
+      template.gsub(/:([a-z_]+)/.freeze) do |match|
+        replacement = @placeholders.public_send(match.sub(':'.freeze, ''.freeze))
+        if replacement.nil?
+          ''.freeze
+        else
+          self.class.escape_path(replacement)
+        end
+      end.gsub(/\/\//.freeze, '/'.freeze)
+    end
+
     # Returns a sanitized String URL, stripping "../../" and multiples of "/",
     # as well as the beginning "/" so we can enforce and ensure it.
 
     def sanitize_url(str)
-      "/" + str.gsub(/\/{2,}/, "/").gsub(%r!\.+\/|\A/+!, "")
+      "/" + str.gsub(/\/{2,}/, "/").gsub(/\.+\/|\A\/+/, "")
     end
 
     # Escapes a path to be a valid URL path segment

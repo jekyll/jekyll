@@ -1,6 +1,5 @@
 module Jekyll
   class RelatedPosts
-
     class << self
       attr_accessor :lsi
     end
@@ -23,7 +22,6 @@ module Jekyll
         most_recent_posts
       end
     end
-
 
     def build_index
       self.class.lsi ||= begin

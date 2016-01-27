@@ -1,6 +1,6 @@
 module Jekyll
   class CollectionReader
-    SPECIAL_COLLECTIONS = %w{posts data}.freeze
+    SPECIAL_COLLECTIONS = %w(posts data).freeze
 
     attr_reader :site, :content
     def initialize(site)
@@ -16,6 +16,5 @@ module Jekyll
         collection.read unless SPECIAL_COLLECTIONS.include?(collection.label)
       end
     end
-
   end
 end

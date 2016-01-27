@@ -188,6 +188,17 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Smartify</strong></p>
+        <p>Convert "quotes" into &ldquo;smart quotes.&rdquo;</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ page.title | smartify }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Converting Sass/SCSS</strong></p>
         <p>Convert a Sass- or SCSS-formatted string into CSS.</p>
       </td>

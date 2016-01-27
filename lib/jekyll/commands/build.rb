@@ -1,9 +1,7 @@
 module Jekyll
   module Commands
     class Build < Command
-
       class << self
-
         # Create the Mercenary command for the Jekyll CLI for this Command
         def init_with_program(prog)
           prog.command(:build) do |c|
@@ -13,7 +11,7 @@ module Jekyll
 
             add_build_options(c)
 
-            c.action do |args, options|
+            c.action do |_, options|
               options["serving"] = false
               Jekyll::Commands::Build.process(options)
             end
@@ -35,7 +33,9 @@ module Jekyll
             build(site, options)
           end
 
-          if options.fetch('watch', false)
+          if options.fetch('detach', false)
+            Jekyll.logger.info "Auto-regeneration:", "disabled when running server detached."
+          elsif options.fetch('watch', false)
             watch(site, options)
           else
             Jekyll.logger.info "Auto-regeneration:", "disabled. Use --watch to enable."
@@ -67,13 +67,11 @@ module Jekyll
         # options - A Hash of options passed to the command
         #
         # Returns nothing.
-        def watch(site, options)
+        def watch(_site, options)
           External.require_with_graceful_fail 'jekyll-watch'
           Jekyll::Watcher.watch(options)
         end
-
       end # end of class << self
-
     end
   end
 end
