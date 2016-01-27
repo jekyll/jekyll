@@ -320,21 +320,38 @@ class TestRegenerator < JekyllUnitTest
       @site.process
       @layout_post = (@site.posts.find { |post| post.data["layout"] == "default" }).path
       @includes_post = (@site.posts.find { |post| post.data["title"] == "Include" }).path
+
+      @content_page = @site.pages.find { |page| page.data["title"] == "Content Dependency"}
+      @random_post = @site.posts.sample.path
+
       @regenerator = @site.regenerator
     end
 
     should "add layouts as a dependency" do
+      refute @regenerator.metadata[@layout_post].nil?
       layout_dep = @regenerator.metadata[@layout_post]["deps"].find { |dep|
         dep =~ /_layouts\/default.html$/
       }
-      assert !layout_dep.nil?
+      refute layout_dep.nil?
     end
 
     should "add includes as a dependency" do
+      refute @regenerator.metadata[@includes_post].nil?
       includes_dep = @regenerator.metadata[@includes_post]["deps"].find { |dep|
         dep =~ /_includes\/sig.markdown$/
       }
-      assert !includes_dep.nil?
+      refute includes_dep.nil?
+    end
+
+    should "add documents as a dependency when content referenced" do
+      page_path = @site.in_source_dir(@content_page.relative_path)
+      refute @regenerator.metadata[page_path].nil?
+
+      post_dep = @regenerator.metadata[page_path]["deps"].find { |dep|
+        dep.include? @random_post
+      }
+
+      refute post_dep.nil?
     end
   end
 

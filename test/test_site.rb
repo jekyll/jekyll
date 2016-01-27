@@ -173,6 +173,7 @@ class TestSite < JekyllUnitTest
         bar.html
         coffeescript.coffee
         contacts.html
+        content_dependency.html
         deal.with.dots.html
         dynamic_file.php
         environment.html
