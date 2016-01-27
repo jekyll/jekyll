@@ -1,5 +1,9 @@
 ## HEAD
 
+### Bug Fixes
+
+  * Page#dir: ensure it ends in a slash (#4403)
+
 ### Development Fixes
 
   * Renderer#output_ext: honor folders when looking for ext (#4401)
