@@ -171,6 +171,32 @@ module Jekyll
           end
         end
       end
+
+      # Adds the resource behind this Drop as a dependency to whatever resource
+      # is rendering it. Paths are taken from the Liquid context available to
+      # the drop
+      #
+      # Returns nothing.
+      def link_dependency
+        site = @context.registers[:site]
+        requirer = @context.registers[:page]
+
+        # Make sure both requirer and required resource have a path
+        return unless @obj.path && requirer && requirer["path"]
+
+        res_path = site.in_source_dir(@obj.path)
+        req_path = site.in_source_dir(requirer["path"])
+
+        # Make sure requirer and resource are not the same
+        return unless res_path != req_path
+
+        # Store dependency in metadata
+        Jekyll.logger.debug "Content method:", "Adding dependency to regenerator metadata"
+        site.regenerator.add_dependency(
+          req_path,
+          res_path
+        )
+      end
     end
   end
 end
