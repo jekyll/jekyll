@@ -58,7 +58,7 @@ $ bundle exec jekyll serve
 # Auto-regeneration: enabled. Use `--no-watch` to disable.
 
 $ bundle exec jekyll serve --detach
-# => Same as `jekyll serve` but will detach from the current terminal.
+# => Same as `bundle exec jekyll serve` but will detach from the current terminal.
 #    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
 #    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).
 {% endhighlight %}
@@ -66,13 +66,14 @@ $ bundle exec jekyll serve --detach
 <div class="note info">
   <h5>Be aware of default behavior</h5>
   <p>
-    As of version 2.4, the <code>serve</code> command will watch for changes automatically. To disable this, you can use <code>jekyll serve --no-watch</code>, which preserves the old behavior.
+    As of version 2.4, the <code>serve</code> command will watch for changes automatically. To disable this, you can use the <code>--no-watch</code> flag,
+    which preserves the old behavior.
   </p>
 </div>
 
 {% highlight bash %}
 $ bundle exec jekyll serve --no-watch
-# => Same as `jekyll serve` but will not watch for changes.
+# => Same as `bundle exec jekyll serve` but will not watch for changes.
 {% endhighlight %}
 
 These are just a few of the available [configuration options](../configuration/).
@@ -98,4 +99,4 @@ For more about the possible configuration options, see the
 [configuration](../configuration/) page.
 
 If you're interested in browsing these docs on-the-go, install the
-`jekyll-docs` gem and run `jekyll docs` in your terminal.
+`jekyll-docs` gem and run `bundle exec jekyll docs` in your terminal.

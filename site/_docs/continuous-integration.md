@@ -25,9 +25,9 @@ Enabling Travis builds for your GitHub repository is pretty simple:
 
 ## 2. The Test Script
 
-The simplest test script simply runs `jekyll build` and ensures that Jekyll
-doesn't fail to build the site. It doesn't check the resulting site, but it
-does ensure things are built properly.
+The simplest test script simply runs `bundle exec jekyll build` and ensures
+that Jekyll doesn't fail to build the site. It doesn't check the resulting
+site, but it does ensure things are built properly.
 
 When testing Jekyll output, there is no better tool than [html-proofer][2].
 This tool checks your resulting site to ensure all links and images exist.
@@ -154,7 +154,7 @@ incantation here directly:
 
 {% highlight yaml %}
 install: gem install jekyll html-proofer
-script: jekyll build && htmlproof ./_site
+script: bundle exec jekyll build && htmlproof ./_site
 {% endhighlight %}
 
 The `script` directive can be absolutely any valid shell command.
