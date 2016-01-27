@@ -64,4 +64,26 @@ class TestConvertible < JekyllUnitTest
       refute_match(/Invalid permalink/, out)
     end
   end
+
+  context "#published?" do
+    setup do
+      @convertible = OpenStruct.new(
+        "site" => Site.new(Jekyll.configuration(
+          "source" => File.expand_path('../fixtures', __FILE__)
+        ))
+      )
+      @convertible.extend Jekyll::Convertible
+      @base = File.expand_path('../fixtures', __FILE__)
+      @convertible.read_yaml(@base, 'front_matter.erb')
+    end
+
+    should "return true if published" do
+      @convertible.data['published'] = true
+      assert_equal true, @convertible.published?
+    end
+
+    should "return false if not published" do
+      assert_equal false, @convertible.published?
+    end
+  end
 end
