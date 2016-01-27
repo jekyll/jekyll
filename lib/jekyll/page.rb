@@ -9,6 +9,8 @@ module Jekyll
 
     alias_method :extname, :ext
 
+    FORWARD_SLASH = '/'.freeze
+
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w(
       content
@@ -55,9 +57,12 @@ module Jekyll
     #
     # Returns the String destination directory.
     def dir
-      dest_dir = url[-1, 1] == '/' ? url : File.dirname(url)
-      dest_dir << '/' unless dest_dir.end_with?('/')
-      dest_dir
+      if url.end_with?(FORWARD_SLASH)
+        url
+      else
+        url_dir = File.dirname(url)
+        url_dir.end_with?(FORWARD_SLASH) ? url_dir : "#{url_dir}/"
+      end
     end
 
     # The full path and filename of the post. Defined in the YAML of the post
