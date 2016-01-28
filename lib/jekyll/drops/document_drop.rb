@@ -11,6 +11,7 @@ module Jekyll
       def_delegator :@obj, :previous_doc, :previous
       def_delegator :@obj, :relative_path, :path
       def_delegators :@obj, :id, :output, :content, :to_s, :relative_path, :url
+      def_delegators :@obj, :dir, :name
 
       def collection
         @obj.collection.label

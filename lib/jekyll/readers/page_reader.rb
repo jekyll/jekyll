@@ -15,7 +15,7 @@ module Jekyll
     def read(files)
       read_documents(files).tap do |docs|
         docs.each(&:read)
-      end
+      end.select { |page| site.publisher.publish?(page) }
     end
 
     def read_documents(files)
@@ -25,7 +25,7 @@ module Jekyll
           :site => @site,
           :collection => @site.pages
         })
-      end.select { |page| site.publisher.publish?(page) }
+      end
     end
   end
 end
