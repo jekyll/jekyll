@@ -489,7 +489,7 @@ With these defaults, all posts would use the `my-site` layout. Any html files th
 {% highlight yaml %}
 collections:
   - my_collection:
-    output: true
+      output: true
 
 defaults:
   -
