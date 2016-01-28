@@ -17,6 +17,13 @@ For the impatient, here's how to get a boilerplate Jekyll site up and running.
 If you wish to install jekyll into the current directory, you can do so by
 alternatively running `jekyll new .` instead of a new directory name.
 
+<div class="note warning">
+  <h5>Use of <code>--force</code> is discouraged</h5>
+  <p>If you want to install Jekyll into an existing, non-empty directory, you
+can use the <code>--force</code> option to do so. However, as the name implies,
+this is a destructive action which should only be used in extreme cases.</p>
+</div>
+
 That's nothing, though. The real magic happens when you start creating blog
 posts, using the front matter to control templates and layouts, and taking
 advantage of all the awesome configuration options Jekyll makes available.
