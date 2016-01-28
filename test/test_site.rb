@@ -465,6 +465,14 @@ class TestSite < JekyllUnitTest
         @site = Site.new(site_configuration('profile' => true))
       end
 
+      # Suppress output while testing
+      setup do
+        $stdout = StringIO.new
+      end
+      teardown do
+        $stdout = STDOUT
+      end
+
       should "print profile table" do
         expect(@site.liquid_renderer).to receive(:stats_table)
         @site.process
