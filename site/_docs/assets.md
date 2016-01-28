@@ -86,7 +86,7 @@ here, too.
 To enable Coffeescript in Jekyll 3.0 and up you must
 
 * Install the `jekyll-coffeescript` gem
-* Ensure that your `_config.yml` is up-to-date and includes the following
+* Ensure that your `_config.yml` is up-to-date and includes the following:
 
 {% highlight yaml %}
 gems:
