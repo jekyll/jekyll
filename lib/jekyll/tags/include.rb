@@ -55,7 +55,7 @@ module Jekyll
       end
 
       def validate_file_name(file)
-        if file !~ /^[a-zA-Z0-9_\/\.-]+$/ || file =~ /\.\// || file =~ /\/\./
+        if file !~ /^[ a-zA-Zа-яА-ЯёЁ0-9_\/\.-]+$/u || file =~ /\.\// || file =~ /\/\./
           raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
