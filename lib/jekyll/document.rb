@@ -203,6 +203,8 @@ module Jekyll
         :placeholders => url_placeholders,
         :permalink => permalink
       }).to_s
+      puts @url
+      @url
     end
 
     def [](key)

@@ -18,6 +18,10 @@ module Jekyll
         Utils.slugify(@obj.basename_without_ext)
       end
 
+      def basename
+        @obj.basename_without_ext
+      end
+
       def title
         Utils.slugify(@obj.data['slug'], :mode => "pretty", :cased => true) ||
           Utils.slugify(@obj.basename_without_ext, :mode => "pretty", :cased => true)

@@ -14,7 +14,13 @@ module Jekyll
     #
     # Returns an array of static pages.
     def read(files)
-      files.map { |page| @unfiltered_content << Page.new(@site, @site.source, @dir, page) }
+      files.each do |page|
+        path = @site.in_source_dir(File.join(@dir, page))
+        @unfiltered_content << Page.new(path, {
+          :site => @site,
+          :collection => @site.pages
+        })
+      end
       @unfiltered_content.select { |page| site.publisher.publish?(page) }
     end
   end

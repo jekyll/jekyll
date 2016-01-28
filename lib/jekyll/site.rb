@@ -4,7 +4,7 @@ require 'csv'
 module Jekyll
   class Site
     attr_reader   :source, :dest, :config
-    attr_accessor :layouts, :pages, :static_files, :drafts,
+    attr_accessor :layouts, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
@@ -74,7 +74,6 @@ module Jekyll
     def reset
       self.time = (config['time'] ? Utils.parse_date(config['time'].to_s, "Invalid time in _config.yml.") : Time.now)
       self.layouts = {}
-      self.pages = []
       self.static_files = []
       self.data = {}
       @collections = nil
@@ -174,13 +173,6 @@ module Jekyll
         end
       end
 
-      pages.flatten.each do |page|
-        if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
-        end
-      end
-
       Jekyll::Hooks.trigger :site, :post_render, self, payload
     rescue Errno::ENOENT
       # ignore missing layout dir
@@ -206,6 +198,10 @@ module Jekyll
 
     def posts
       collections['posts'] ||= Collection.new(self, 'posts')
+    end
+
+    def pages
+      collections['pages'] || Collection.new(self, 'pages')
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -314,7 +310,7 @@ module Jekyll
     end
 
     def each_site_file
-      %w(pages static_files docs_to_write).each do |type|
+      %w(static_files docs_to_write).each do |type|
         send(type).each do |item|
           yield item
         end
