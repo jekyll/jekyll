@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.1.1 Released</title>
+  <title>Jekyll 3.1.1 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.1.1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" />
@@ -169,8 +169,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.1.1 Released
-    <a href="/news/2013/07/24/jekyll-1-1-1-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 3.1.1 Released
+    <a href="/news/2016/01/28/jekyll-3-1-1-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -179,7 +179,7 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      24 Jul 2013
+      28 Jan 2016
     </span>
     <a href="https://github.com/parkr" class="post-author">
       <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
@@ -187,19 +187,30 @@
     </a>
   </div>
   <div class="post-content">
-    <p>Coming just 10 days after the release of v1.1.0, v1.1.1 is out with a patch for the nasty
-excerpt inception bug (<a href="https://github.com/jekyll/jekyll/issues/1339">#1339</a>) and non-zero exit codes for invalid commands
-(<a href="https://github.com/jekyll/jekyll/issues/1338">#1338</a>).</p>
+    <p>This release squashes a few bugs :bug: :bug: :bug: noticed by a few
+wonderful Jekyll users:</p>
 
-<p>To all those affected by the <a href="https://github.com/jekyll/jekyll/issues/1321">strange excerpt bug in v1.1.0</a>, I’m sorry. I think we
-have it all patched up and it should be deployed to <a href="http://pages.github.com">GitHub Pages</a> in the next
-couple weeks. Thank you for your patience!</p>
+<ul>
+  <li>If your <code>permalink</code> ended with a <code>/</code>, your URL didn’t have any extension,
+even if you wanted one</li>
+  <li>We now strip the BOM by default per Ruby’s <code>IO.open</code>.</li>
+  <li><code>page.dir</code> will not always end in a slash.</li>
+</ul>
 
-<p>If you’re checking out v1.1.x for the first time, definitely check out <a href="https://github.com/jekyll/jekyll/releases/tag/v1.1.0">what shipped with
-v1.1.0!</a></p>
+<p>We also updated our <a href="/conduct/">Code of Conduct</a> to the latest version of
+the Contributor Covenant. The update includes language to ensure that the
+reporter of the incident remains confidential to non-maintainers and that
+all complaints will result in an appropriate response. I care deeply about
+Jekyll’s community and will do everything in my power to ensure it is a
+welcoming community. Feel free to reach out to me directly if you feel
+there is a way we can improve the community for everyone!</p>
 
-<p>See the <a href="https://github.com/jekyll/jekyll/releases/tag/v1.1.1">GitHub Release</a> page for more a more detailed changelog for this release.</p>
+<p>See links to the PR’s on <a href="/docs/history/#v3-1-1">the history page</a>.</p>
 
+<p>Thanks to Jordon Bedwell, chrisfinazzo, Kroum Tzanev, David Celis, and
+Alfred Xing for their commits on this latest release! :sparkles:</p>
+
+<p>Happy Jekylling!</p>
 
   </div>
 </article>
@@ -219,7 +230,7 @@ v1.1.0!</a></p>
     <h4>Recent Releases</h4>
     <ul>
       
-      <li class="">
+      <li class="current">
         <a href="/news/2016/01/28/jekyll-3-1-1-released/">Version 3.1.1</a>
       </li>
       

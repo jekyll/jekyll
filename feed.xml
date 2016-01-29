@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-<generator uri="http://jekyllrb.com" version="3.1.0">Jekyll</generator>
+<generator uri="http://jekyllrb.com" version="3.1.1">Jekyll</generator>
 <link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-01-28T17:19:33-08:00</updated>
+<updated>2016-01-29T15:12:51-08:00</updated>
 <id>http://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.1.1 Released</title>
+<link href="http://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released/" rel="alternate" type="text/html" title="Jekyll 3.1.1 Released" />
+<published>2016-01-28T17:21:50-08:00</published>
+<updated>2016-01-28T17:21:50-08:00</updated>
+<id>http://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released/">&lt;p&gt;This release squashes a few bugs :bug: :bug: :bug: noticed by a few
+wonderful Jekyll users:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If your &lt;code&gt;permalink&lt;/code&gt; ended with a &lt;code&gt;/&lt;/code&gt;, your URL didn’t have any extension,
+even if you wanted one&lt;/li&gt;
+  &lt;li&gt;We now strip the BOM by default per Ruby’s &lt;code&gt;IO.open&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;page.dir&lt;/code&gt; will not always end in a slash.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We also updated our &lt;a href=&quot;/conduct/&quot;&gt;Code of Conduct&lt;/a&gt; to the latest version of
+the Contributor Covenant. The update includes language to ensure that the
+reporter of the incident remains confidential to non-maintainers and that
+all complaints will result in an appropriate response. I care deeply about
+Jekyll’s community and will do everything in my power to ensure it is a
+welcoming community. Feel free to reach out to me directly if you feel
+there is a way we can improve the community for everyone!&lt;/p&gt;
+
+&lt;p&gt;See links to the PR’s on &lt;a href=&quot;/docs/history/#v3-1-1&quot;&gt;the history page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thanks to Jordon Bedwell, chrisfinazzo, Kroum Tzanev, David Celis, and
+Alfred Xing for their commits on this latest release! :sparkles:&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.1.0 Released</title>
 <link href="http://jekyllrb.com/news/2016/01/24/jekyll-3-1-0-released/" rel="alternate" type="text/html" title="Jekyll 3.1.0 Released" />
@@ -290,27 +326,6 @@ place!&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
 
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll 2.5.2 Released</title>
-<link href="http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released/" rel="alternate" type="text/html" title="Jekyll 2.5.2 Released" />
-<published>2014-11-12T18:49:08-08:00</published>
-<updated>2014-11-12T18:49:08-08:00</updated>
-<id>http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released</id>
-<content type="html" xml:base="http://jekyllrb.com/news/2014/11/12/jekyll-2-5-2-released/">&lt;p&gt;A very minor release, 2.5.2 fixes a bug with path sanitation that 2.5.1
-introduced. It also improves the &lt;code&gt;post_url&lt;/code&gt; tag such that it checks the
-posts’ name (e.g. &lt;code&gt;2014-03-03-my-cool-post&lt;/code&gt;) instead of a compiled time and
-name. This fixes issues where posts are created and the day changes based
-on timezone discrepancies.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/docs/history/&quot;&gt;Full history here.&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;
 </content>
 <author>
 <name>parkr</name>
