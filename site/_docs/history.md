@@ -4,13 +4,32 @@ title: History
 permalink: "/docs/history/"
 ---
 
+## 3.1.1 / 2016-01-29
+{: #v3-1-1}
+
+### Meta
+
+- Update the Code of Conduct to the latest version ([#4402]({{ site.repository }}/issues/4402))
+
+### Bug Fixes
+{: #bug-fixes-v3-1-1}
+
+- `Page#dir`: ensure it ends in a slash ([#4403]({{ site.repository }}/issues/4403))
+- Add `Utils.merged_file_read_opts` to unify reading & strip the BOM ([#4404]({{ site.repository }}/issues/4404))
+- `Renderer#output_ext`: honor folders when looking for ext ([#4401]({{ site.repository }}/issues/4401))
+
+### Development Fixes
+{: #development-fixes-v3-1-1}
+
+- Suppress stdout in liquid profiling test ([#4409]({{ site.repository }}/issues/4409))
+
+
 ## 3.1.0 / 2016-01-23
 {: #v3-1-0}
 
 ### Minor Enhancements
 {: #minor-enhancements-v3-1-0}
 
-- Update the Code of Conduct to the latest version ([#4402]({{ site.repository }}/issues/4402))
 - Use `Liquid::Drop`s instead of `Hash`es in `#to_liquid` ([#4277]({{ site.repository }}/issues/4277))
 - Add 'sample' Liquid filter Equivalent to Array#sample functionality ([#4223]({{ site.repository }}/issues/4223))
 - Cache parsed include file to save liquid parsing time. ([#4120]({{ site.repository }}/issues/4120))

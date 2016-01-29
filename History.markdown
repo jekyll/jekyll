@@ -1,20 +1,23 @@
-## HEAD
+## 3.1.1 / 2016-01-29
+
+### Meta
+
+  * Update the Code of Conduct to the latest version (#4402)
 
 ### Bug Fixes
 
-  * Page#dir: ensure it ends in a slash (#4403)
-  * Add Utils.merged_file_read_opts to unify reading & strip the BOM (#4404)
+  * `Page#dir`: ensure it ends in a slash (#4403)
+  * Add `Utils.merged_file_read_opts` to unify reading & strip the BOM (#4404)
+  * `Renderer#output_ext`: honor folders when looking for ext (#4401)
 
 ### Development Fixes
 
-  * Renderer#output_ext: honor folders when looking for ext (#4401)
   * Suppress stdout in liquid profiling test (#4409)
 
 ## 3.1.0 / 2016-01-23
 
 ### Minor Enhancements
 
-  * Update the Code of Conduct to the latest version (#4402)
   * Use `Liquid::Drop`s instead of `Hash`es in `#to_liquid` (#4277)
   * Add 'sample' Liquid filter Equivalent to Array#sample functionality (#4223)
   * Cache parsed include file to save liquid parsing time. (#4120)
