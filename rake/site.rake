@@ -5,8 +5,10 @@
 #############################################################################
 
 namespace :site do
+  task :generated_pages => [:history, :version_file, :conduct]
+
   desc "Generate and view the site locally"
-  task :preview => [:history, :version_file] do
+  task :preview => :generated_pages do
     require "launchy"
     require "jekyll"
 
@@ -31,7 +33,7 @@ namespace :site do
   end
 
   desc "Generate the site"
-  task :generate => [:history, :version_file] do
+  task :generate => :generated_pages do
     require "jekyll"
     Jekyll::Commands::Build.process({
       "source"      => File.expand_path("site"),
@@ -50,7 +52,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish => [:history, :version_file] do
+  task :publish => :generated_pages do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
@@ -116,6 +118,25 @@ namespace :site do
       end
     else
       abort "You seem to have misplaced your History.markdown file. I can haz?"
+    end
+  end
+
+  desc "Copy the Code of Conduct"
+  task :conduct do
+    code_of_conduct = File.read("CONDUCT.md")
+    header, _, body = code_of_conduct.partition("\n\n")
+    front_matter = {
+      "layout"        => "docs",
+      "title"         => header.sub('# Contributor ', ''),
+      "permalink"     => "/docs/conduct/",
+      "redirect_from" => "/conduct/index.html",
+      "editable"      => false
+    }
+    Dir.chdir('site/_docs') do
+      File.open("conduct.md", "w") do |file|
+        file.write("#{front_matter.to_yaml}---\n\n")
+        file.write(body)
+      end
     end
   end
 
