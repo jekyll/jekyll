@@ -2391,6 +2391,12 @@ A simple conversion must be made in your templates:</p>
 
 <p>When iterating over <code>site.collections</code>, ensure the above conversions are made.</p>
 
+<p>For <code>site.collections.myCollection</code> in Jekyll 2, you now do:</p>
+
+<figure class="highlight"><pre><code class="language-liquid" data-lang="liquid"><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="na">myCollection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>site.collections<span class="w"> </span>|<span class="w"> </span><span class="na">where</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;label&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;myCollection&quot;</span><span class="w"> </span>|<span class="w"> </span>first<span class="w"> </span><span class="p">%}</span></code></pre></figure>
+
+<p>This is a bit cumbersome at first, but is easier than a big <code>for</code> loop.</p>
+
 <h3 id="dropped-dependencies">Dropped dependencies</h3>
 
 <p>We dropped a number of dependencies the Core Team felt were optional. As such, in 3.0, they must be explicitly installed and included if you use any of the features. They are:</p>
