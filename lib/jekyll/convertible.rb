@@ -28,12 +28,6 @@ module Jekyll
       !(data.key?('published') && data['published'] == false)
     end
 
-    # Returns merged option hash for File.read of self.site (if exists)
-    # and a given param
-    def merged_file_read_opts(opts)
-      (site ? site.file_read_opts : {}).merge(opts)
-    end
-
     # Read the YAML frontmatter.
     #
     # base - The String path to the dir containing the file.
@@ -46,7 +40,7 @@ module Jekyll
 
       begin
         self.content = File.read(site.in_source_dir(base, name),
-                                 merged_file_read_opts(opts))
+                                 Utils.merged_file_read_opts(site, opts))
         if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))

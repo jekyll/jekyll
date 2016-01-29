@@ -237,16 +237,6 @@ module Jekyll
       trigger_hooks(:post_write)
     end
 
-    # Returns merged option hash for File.read of self.site (if exists)
-    # and a given param
-    #
-    # opts - override options
-    #
-    # Return the file read options hash.
-    def merged_file_read_opts(opts)
-      site ? site.file_read_opts.merge(opts) : opts
-    end
-
     # Whether the file is published or not, as indicated in YAML front-matter
     #
     # Returns true if the 'published' key is specified in the YAML front-matter and not `false`.
@@ -269,7 +259,7 @@ module Jekyll
           defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
           merge_data!(defaults, source: "front matter defaults") unless defaults.empty?
 
-          self.content = File.read(path, merged_file_read_opts(opts))
+          self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
           if content =~ YAML_FRONT_MATTER_REGEXP
             self.content = $POSTMATCH
             data_file = SafeYAML.load(Regexp.last_match(1))
