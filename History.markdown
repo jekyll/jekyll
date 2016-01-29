@@ -3,6 +3,7 @@
 ### Bug Fixes
 
   * Page#dir: ensure it ends in a slash (#4403)
+  * Add Utils.merged_file_read_opts to unify reading & strip the BOM (#4404)
 
 ### Development Fixes
 
