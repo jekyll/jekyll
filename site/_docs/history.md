@@ -10,6 +10,7 @@ permalink: "/docs/history/"
 ### Minor Enhancements
 {: #minor-enhancements-v3-1-0}
 
+- Update the Code of Conduct to the latest version ([#4402]({{ site.repository }}/issues/4402))
 - Use `Liquid::Drop`s instead of `Hash`es in `#to_liquid` ([#4277]({{ site.repository }}/issues/4277))
 - Add 'sample' Liquid filter Equivalent to Array#sample functionality ([#4223]({{ site.repository }}/issues/4223))
 - Cache parsed include file to save liquid parsing time. ([#4120]({{ site.repository }}/issues/4120))
