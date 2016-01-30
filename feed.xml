@@ -3,7 +3,7 @@
 <generator uri="http://jekyllrb.com" version="3.1.1">Jekyll</generator>
 <link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-01-29T15:12:51-08:00</updated>
+<updated>2016-01-29T16:00:32-08:00</updated>
 <id>http://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
@@ -29,7 +29,9 @@ reporter of the incident remains confidential to non-maintainers and that
 all complaints will result in an appropriate response. I care deeply about
 Jekyll’s community and will do everything in my power to ensure it is a
 welcoming community. Feel free to reach out to me directly if you feel
-there is a way we can improve the community for everyone!&lt;/p&gt;
+there is a way we can improve the community for everyone! If you’re
+interested in more details, &lt;a href=&quot;https://github.com/ContributorCovenant/contributor_covenant/blob/v1_4/diffs/1_3_vs_1_4.patch&quot;&gt;there is a diff for
+that&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;See links to the PR’s on &lt;a href=&quot;/docs/history/#v3-1-1&quot;&gt;the history page&lt;/a&gt;.&lt;/p&gt;
 
