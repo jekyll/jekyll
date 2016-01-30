@@ -28,7 +28,7 @@ class TestStaticFile < JekyllUnitTest
     StaticFile.new(site, base, dir, name)
   end
 
-  context "A StaticFile" do
+  context "A Static File" do
     setup do
       clear_dest
       @old_pwd = Dir.pwd
