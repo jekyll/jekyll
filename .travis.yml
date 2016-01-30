@@ -1,3 +1,5 @@
+# Travis CI (https://travis-ci.org/jekyll/jekyll)
+sudo: false
 before_script: bundle update
 bundler_args: --without benchmark:site:development
 script: script/cibuild
