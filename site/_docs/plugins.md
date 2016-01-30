@@ -40,13 +40,14 @@ values of the gem names of the plugins you'd like to use. An example:
 3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
     example:
 
-        group :jekyll_plugins do
-          gem "my-jekyll-plugin"
-          gem "another-jekyll-plugin"
-        end
+{% highlight ruby %}
+group :jekyll_plugins do
+  gem "my-jekyll-plugin"
+  gem "another-jekyll-plugin"
+end
+{% endhighlight %}
 
-    Now you need to install all plugins from your Bundler group by running single command `bundle install`
-
+You can now install the gems from your group by running`bundle install`.
 
 <div class="note info">
   <h5>
@@ -886,7 +887,7 @@ LESS.js files during generation.
 
 - [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
 - [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate
-  new posts and run `jekyll build` all without leaving vim.
+  new posts and run `bundle exec jekyll build` all without leaving vim.
 - [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
 - [Wordpress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A Wordpress plugin that allows you to use Wordpress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
 

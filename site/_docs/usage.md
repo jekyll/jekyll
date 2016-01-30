@@ -8,16 +8,16 @@ The Jekyll gem makes a `jekyll` executable available to you in your Terminal
 window. You can use this command in a number of ways:
 
 {% highlight bash %}
-$ jekyll build
+$ bundle exec jekyll build
 # => The current folder will be generated into ./_site
 
-$ jekyll build --destination <destination>
+$ bundle exec jekyll build --destination <destination>
 # => The current folder will be generated into <destination>
 
-$ jekyll build --source <source> --destination <destination>
+$ bundle exec jekyll build --source <source> --destination <destination>
 # => The <source> folder will be generated into <destination>
 
-$ jekyll build --watch
+$ bundle exec jekyll build --watch
 # => The current folder will be generated into ./_site,
 #    watched for changes, and regenerated automatically.
 {% endhighlight %}
@@ -53,12 +53,12 @@ Jekyll also comes with a built-in development server that will allow you to
 preview what the generated site will look like in your browser locally.
 
 {% highlight bash %}
-$ jekyll serve
+$ bundle exec jekyll serve
 # => A development server will run at http://localhost:4000/
 # Auto-regeneration: enabled. Use `--no-watch` to disable.
 
-$ jekyll serve --detach
-# => Same as `jekyll serve` but will detach from the current terminal.
+$ bundle exec jekyll serve --detach
+# => Same as `bundle exec jekyll serve` but will detach from the current terminal.
 #    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
 #    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance. [Read more](http://unixhelp.ed.ac.uk/shell/jobz5.html).
 {% endhighlight %}
@@ -66,13 +66,14 @@ $ jekyll serve --detach
 <div class="note info">
   <h5>Be aware of default behavior</h5>
   <p>
-    As of version 2.4, the <code>serve</code> command will watch for changes automatically. To disable this, you can use <code>jekyll serve --no-watch</code>, which preserves the old behavior.
+    As of version 2.4, the <code>serve</code> command will watch for changes automatically. To disable this, you can use the <code>--no-watch</code> flag,
+    which preserves the old behavior.
   </p>
 </div>
 
 {% highlight bash %}
-$ jekyll serve --no-watch
-# => Same as `jekyll serve` but will not watch for changes.
+$ bundle exec jekyll serve --no-watch
+# => Same as `bundle exec jekyll serve` but will not watch for changes.
 {% endhighlight %}
 
 These are just a few of the available [configuration options](../configuration/).
@@ -87,15 +88,15 @@ source:      _source
 destination: _deploy
 {% endhighlight %}
 
-Then the following two commands will be equivalent:
+Then, the following two commands will be equivalent:
 
 {% highlight bash %}
-$ jekyll build
-$ jekyll build --source _source --destination _deploy
+$ bundle exec jekyll build
+$ bundle exec jekyll build --source _source --destination _deploy
 {% endhighlight %}
 
 For more about the possible configuration options, see the
 [configuration](../configuration/) page.
 
 If you're interested in browsing these docs on-the-go, install the
-`jekyll-docs` gem and run `jekyll docs` in your terminal.
+`jekyll-docs` gem and run `bundle exec jekyll docs` in your terminal.

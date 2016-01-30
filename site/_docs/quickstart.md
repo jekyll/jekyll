@@ -7,15 +7,16 @@ permalink: /docs/quickstart/
 For the impatient, here's how to get a boilerplate Jekyll site up and running.
 
 {% highlight bash %}
-~ $ gem install jekyll
-~ $ jekyll new myblog
-~ $ cd myblog
-~/myblog $ jekyll serve
+~/myblog $ gem install bundler
+# => Now create a Gemfile (bundle init)
+~/myblog $ bundle install
+~/$ bundle exec jekyll new myblog
+~/myblog $ bundle exec jekyll serve
 # => Now browse to http://localhost:4000
 {% endhighlight %}
 
 If you wish to install jekyll into the current directory, you can do so by
-alternatively running `jekyll new .` instead of a new directory name.
+alternatively running `bundle exec jekyll new .` instead of a new directory name.
 
 That's nothing, though. The real magic happens when you start creating blog
 posts, using the front matter to control templates and layouts, and taking

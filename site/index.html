@@ -44,24 +44,27 @@ overview: true
       <p class="title">Quick-start Instructions</p>
       <div class="shell">
         <p class="line">
-          <span class="path">~</span>
+          <span class="path">~/my-awesome-site</span>
           <span class="prompt">$</span>
-          <span class="command">gem install jekyll</span>
+          <span class="command">gem install bundler</span>
         </p>
         <p class="line">
-          <span class="path">~</span>
-          <span class="prompt">$</span>
-          <span class="command">jekyll new my-awesome-site</span>
-        </p>
-        <p class="line">
-          <span class="path">~</span>
-          <span class="prompt">$</span>
-          <span class="command">cd my-awesome-site</span>
+          <span class="output"># => Now create a Gemfile (bundle init)</span>
         </p>
         <p class="line">
           <span class="path">~/my-awesome-site</span>
           <span class="prompt">$</span>
-          <span class="command">jekyll serve</span>
+          <span class="command">bundle install</span>
+        </p>
+        <p class="line">
+          <span class="path">~/my-awesome-site</span>
+          <span class="prompt">$</span>
+          <span class="command">bundle exec jekyll new .</span>
+        </p>
+        <p class="line">
+          <span class="path">~/my-awesome-site</span>
+          <span class="prompt">$</span>
+          <span class="command">bundle exec jekyll serve</span>
         </p>
         <p class="line">
           <span class="output"># => Now browse to http://localhost:4000</span>

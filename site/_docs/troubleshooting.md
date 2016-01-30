@@ -145,7 +145,7 @@ in order to have the `jekyll` executable be available in your Terminal.
 If you are using base-url option like:
 
 {% highlight bash %}
-jekyll serve --baseurl '/blog'
+bundle exec jekyll serve --baseurl '/blog'
 {% endhighlight %}
 
 … then make sure that you access the site at:
