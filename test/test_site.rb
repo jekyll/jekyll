@@ -187,7 +187,7 @@ class TestSite < JekyllUnitTest
         static_files.html
         symlinked-file
       )
-      assert_equal sorted_pages, @site.pages.map(&:name)
+      assert_equal sorted_pages, @site.pages.docs.map(&:name)
     end
 
     should "read posts" do

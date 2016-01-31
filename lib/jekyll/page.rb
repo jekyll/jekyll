@@ -2,15 +2,6 @@
 
 module Jekyll
   class Page < Document
-    # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w(
-      content
-      dir
-      name
-      path
-      url
-    ).freeze
-
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.
     HTML_EXTENSIONS = %w(
