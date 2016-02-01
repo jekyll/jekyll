@@ -3,6 +3,7 @@
 ### Site Enhancements
 
   * Add jekyll-toc plugin (#4429)
+  * Docs: Quickstart - added documentation about the `--force` option (#4410)
 
 ## 3.1.1 / 2016-01-29
 
