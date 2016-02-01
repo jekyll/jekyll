@@ -1,3 +1,9 @@
+## HEAD
+
+### Site Enhancements
+
+  * Add jekyll-toc plugin (#4429)
+
 ## 3.1.1 / 2016-01-29
 
 ### Meta
