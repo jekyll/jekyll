@@ -37,7 +37,7 @@ See: http://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011
 ## Code of Conduct
 
 In order to have a more open and welcoming community, Jekyll adheres to a
-[code of conduct](CONDUCT.md) adapted from the Ruby on Rails code of
+[code of conduct](CONDUCT.markdown) adapted from the Ruby on Rails code of
 conduct.
 
 Please adhere to this code of conduct in any interactions you have in the
