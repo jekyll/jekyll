@@ -7,6 +7,7 @@
 ### Minor Enhancements
 
   * Include .rubocop.yml in Gem (#4437)
+  * LiquidRenderer#parse: parse with line numbers. (#4452)
 
 ### Site Enhancements
 
