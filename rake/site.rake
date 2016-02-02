@@ -123,7 +123,7 @@ namespace :site do
 
   desc "Copy the Code of Conduct"
   task :conduct do
-    code_of_conduct = File.read("CONDUCT.md")
+    code_of_conduct = File.read("CONDUCT.markdown")
     header, _, body = code_of_conduct.partition("\n\n")
     front_matter = {
       "layout"        => "docs",
