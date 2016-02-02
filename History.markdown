@@ -1,5 +1,9 @@
 ## HEAD
 
+### Bug Fixes
+
+  * Fix #4427: Make our @config hash symbol accessible. (#4428)
+
 ### Minor Enhancements
 
   * Include .rubocop.yml in Gem (#4437)
