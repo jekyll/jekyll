@@ -15,7 +15,7 @@ even if you wanted one
 * We now strip the BOM by default per Ruby's `IO.open`.
 * `page.dir` will not always end in a slash.
 
-We also updated our [Code of Conduct](/conduct/) to the latest version of
+We also updated our [Code of Conduct](/docs/conduct/) to the latest version of
 the Contributor Covenant. The update includes language to ensure that the
 reporter of the incident remains confidential to non-maintainers and that
 all complaints will result in an appropriate response. I care deeply about
