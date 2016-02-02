@@ -3,7 +3,7 @@
 <generator uri="http://jekyllrb.com" version="3.1.1">Jekyll</generator>
 <link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-01-29T16:00:32-08:00</updated>
+<updated>2016-02-02T07:41:52-08:00</updated>
 <id>http://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
@@ -23,7 +23,7 @@ even if you wanted one&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;page.dir&lt;/code&gt; will not always end in a slash.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;We also updated our &lt;a href=&quot;/conduct/&quot;&gt;Code of Conduct&lt;/a&gt; to the latest version of
+&lt;p&gt;We also updated our &lt;a href=&quot;/docs/conduct/&quot;&gt;Code of Conduct&lt;/a&gt; to the latest version of
 the Contributor Covenant. The update includes language to ensure that the
 reporter of the incident remains confidential to non-maintainers and that
 all complaints will result in an appropriate response. I care deeply about
@@ -178,7 +178,7 @@ Will Norris, XhmikosR, chrisfinazzo, and rebornix.&lt;/p&gt;
   &lt;li&gt;… and lots more!&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;We also added a &lt;a href=&quot;{{ site.repository }}/blob/master/CONDUCT.md&quot;&gt;Code of Conduct&lt;/a&gt; to encourage a happier, nicer community where contributions and discussion is protected from negative behaviour.&lt;/p&gt;
+&lt;p&gt;We also added a &lt;a href=&quot;/docs/conduct/&quot;&gt;Code of Conduct&lt;/a&gt; to encourage a happier, nicer community where contributions and discussion is protected from negative behaviour.&lt;/p&gt;
 
 &lt;p&gt;A huge shout-out to the amazing Jekyll Core Team members Jordon Bedwell, Alfred Xing, and Matt Rogers for all their hard work in making Jekyll 3 the best release yet.&lt;/p&gt;
 
