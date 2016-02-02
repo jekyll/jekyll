@@ -16,7 +16,7 @@ module Jekyll
 
         def initialize(config)
           Jekyll::External.require_with_graceful_fail "kramdown"
-          @main_fallback_highlighter = config["highlighter"] || "rogue"
+          @main_fallback_highlighter = config["highlighter"] || "rouge"
           @config = config["kramdown"] || {}
           setup
         end
