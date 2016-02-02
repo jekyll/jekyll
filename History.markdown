@@ -1,5 +1,9 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Include .rubocop.yml in Gem (#4437)
+
 ### Site Enhancements
 
   * Add jekyll-toc plugin (#4429)
