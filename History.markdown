@@ -15,6 +15,7 @@
   * Docs: Quickstart - added documentation about the `--force` option (#4410)
   * Fix broken links to the Code of Conduct (#4436)
   * upgrade notes: mention trailing slash in permalink; fixes #4440 (#4455)
+  * Add hooks to the plugin categories toc (#4463)
 
 ## 3.1.1 / 2016-01-29
 
