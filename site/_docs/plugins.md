@@ -60,12 +60,13 @@ values of the gem names of the plugins you'd like to use. An example:
   </p>
 </div>
 
-In general, plugins you make will fall into one of four categories:
+In general, plugins you make will fall into one of five categories:
 
 1. [Generators](#generators)
 2. [Converters](#converters)
 3. [Commands](#commands)
 4. [Tags](#tags)
+5. [Hooks](#hooks)
 
 ## Generators
 
