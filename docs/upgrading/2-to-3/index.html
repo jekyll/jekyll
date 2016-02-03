@@ -2588,6 +2588,10 @@ http://jekyllrb.com/docs/upgrading/ for more info.</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">relative_permalinks</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span></code></pre></figure>
 
+<h3 id="permalinks-no-longer-automatically-add-a-trailing-slash">Permalinks no longer automatically add a trailing slash</h3>
+
+<p>In Jekyll 2, any URL constructed from the <code>permalink:</code> field had a trailing slash (<code>/</code>) added to it automatically.  Jekyll 3 no longer adds a trailing slash automatically to <code>permalink:</code> URLs. This can potentially result in old links to pages returning a 404 error. For example, suppose a page previously contained the YAML <code>permalink: /:year-:month-:day-:title</code> that resulted in the URL <code>example.com/2016-02-01-test/</code> (notice the trailing slash). In Jekyll 3, the URL for the same page is <code>example.com/2016-02-01-test</code>, and consequently any links to the old URL will result in a 404 error. In order to maintain the same URLs and avoid this problem, a trailing slash should be added to the <code>permalink:</code> field, for example <code>permalink: /:year-:month-:day-:title/</code>.</p>
+
 <p><em>Did we miss something? Please click “Improve this page” above and add a section. Thanks!</em></p>
 
           
