@@ -132,7 +132,7 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Well-formatted site data should be placed here. The jekyll engine
+          Well-formatted site data should be placed here. The Jekyll engine
           will autoload all YAML files in this directory (using either the
           <code>.yml</code>, <code>.yaml</code>, <code>.json</code> or
           <code>.csv</code> formats and extensions) and they will be
