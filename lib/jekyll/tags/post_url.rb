@@ -18,7 +18,7 @@ module Jekyll
       end
 
       def deprecated_equality(other)
-        date = Utils.parse_date(name, "'#{name}' does not contain valid date and/or title.")
+        date = Utils.parse_date(@date, "'#{@date}' does not contain valid date.")
         slug == post_slug(other) &&
           date.year  == other.date.year &&
           date.month == other.date.month &&
