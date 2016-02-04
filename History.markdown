@@ -16,6 +16,7 @@
   * Fix broken links to the Code of Conduct (#4436)
   * upgrade notes: mention trailing slash in permalink; fixes #4440 (#4455)
   * Add hooks to the plugin categories toc (#4463)
+  * [add note] Jekyll 3 requires newer version of Ruby. (#4461)
 
 ## 3.1.1 / 2016-01-29
 
