@@ -1,6 +1,7 @@
 require 'uri'
 require 'json'
 require 'date'
+require 'liquid'
 
 module Jekyll
   module Filters
@@ -225,6 +226,26 @@ module Jekyll
       input.select { |object| Array(item_property(object, property)).map(&:to_s).include?(value.to_s) }
     end
 
+    # Filters an array of objects against an expression
+    #
+    # input - the object array
+    # variable - the variable to assign each item to in the expression
+    # expression - a Liquid comparison expression passed in as a string
+    #
+    # Returns the filtered array of objects
+    def where_exp(input, variable, expression)
+      return input unless input.is_a?(Enumerable)
+      input = input.values if input.is_a?(Hash)
+
+      c = parse_condition(expression)
+      @context.stack do
+        input.select do |object|
+          @context[variable] = object
+          c.evaluate(@context)
+        end
+      end
+    end
+
     # Sort an array of objects
     #
     # input - the object array
@@ -362,6 +383,21 @@ module Jekyll
           item
         end
       end
+    end
+
+    # Parse a string to a Liquid Condition
+    def parse_condition(exp)
+      parser = Liquid::Parser.new(exp)
+      a = parser.expression
+      if op = parser.consume?(:comparison)
+        b = parser.expression
+        condition = Liquid::Condition.new(a, op, b)
+      else
+        condition = Liquid::Condition.new(a)
+      end
+      parser.consume(:end_of_string)
+
+      condition
     end
   end
 end
