@@ -339,7 +339,7 @@ EOS
       end
 
       should "should stop highlighting at boundary" do
-        assert_match "<p>This is not yet highlighted</p> <div class="highlight"><pre><code class="language-php" data-lang="php"> <table style="border-spacing: 0"> <tbody> <tr> <td class="gutter gl" style="text-align: right"> <pre class="lineno">1</pre> </td> <td class="code"><pre>test<span class="w"></span></pre> </td> </tr> </tbody> </table></code></pre></div> <p>This should not be highlighted, right?</p>", @result
+        assert_match "<p>This is not yet highlighted</p> <div class=\"highlight\"><pre><code class=\"language-php\" data-lang=\"php\"> <table style=\"border-spacing: 0\"> <tbody> <tr> <td class=\"gutter gl\" style=\"text-align: right\"> <pre class=\"lineno\">1</pre> </td> <td class=\"code\"><pre>test<span class=\"w\"></span></pre> </td> </tr> </tbody> </table></code></pre></div> <p>This should not be highlighted, right?</p>", @result
       end
     end
 
