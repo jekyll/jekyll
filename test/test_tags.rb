@@ -320,15 +320,6 @@ EOS
     context "post content has highlight tag with linenumbers" do
       setup do
         fill_post <<-EOS
----
-layout: post
-status: publish
-published: true
-title: This blog is now on Jekyll
-date: '2016-01-31 00:00:00 +0200'
-tags: []
-excerpt: Some excerpt
----
 This is not yet highlighted
 {% highlight php linenos %}
 test
