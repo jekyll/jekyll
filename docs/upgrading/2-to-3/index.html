@@ -2506,6 +2506,8 @@ that you’ll want to know about.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem update jekyll</code></pre></figure>
 
+<p>Please note: Jekyll 3 requires Ruby version &gt;= 2.0.0.</p>
+
 <div class="note feature">
   <h5>Diving in</h5>
   <p>Want to get a new Jekyll site up and running quickly? Simply
@@ -2558,7 +2560,7 @@ generate when running <code>jekyll build</code> or <code>jekyll serve</code>.</p
 
 <h3 id="layout-metadata">Layout metadata</h3>
 
-<p>Introducing: <code>layout</code>. In Jekyll 2 and below, any metadata in the layout was munged onto
+<p>Introducing: <code>layout</code>. In Jekyll 2 and below, any metadata in the layout was merged onto
 the <code>page</code> variable in Liquid. This caused a lot of confusion in the way the data was
 merged and some unexpected behaviour. In Jekyll 3, all layout data is accessible via <code>layout</code>
 in Liquid. For example, if your layout has <code>class: my-layout</code> in its YAML front matter,
@@ -2590,7 +2592,23 @@ http://jekyllrb.com/docs/upgrading/ for more info.</code></pre></figure>
 
 <h3 id="permalinks-no-longer-automatically-add-a-trailing-slash">Permalinks no longer automatically add a trailing slash</h3>
 
-<p>In Jekyll 2, any URL constructed from the <code>permalink:</code> field had a trailing slash (<code>/</code>) added to it automatically.  Jekyll 3 no longer adds a trailing slash automatically to <code>permalink:</code> URLs. This can potentially result in old links to pages returning a 404 error. For example, suppose a page previously contained the YAML <code>permalink: /:year-:month-:day-:title</code> that resulted in the URL <code>example.com/2016-02-01-test/</code> (notice the trailing slash). In Jekyll 3, the URL for the same page is <code>example.com/2016-02-01-test</code>, and consequently any links to the old URL will result in a 404 error. In order to maintain the same URLs and avoid this problem, a trailing slash should be added to the <code>permalink:</code> field, for example <code>permalink: /:year-:month-:day-:title/</code>.</p>
+<p>In Jekyll 2, any URL constructed from the <code>permalink:</code> field had a trailing slash (<code>/</code>) added to it automatically.  Jekyll 3 no longer adds a trailing slash automatically to <code>permalink:</code> URLs. This can potentially result in old links to pages returning a 404 error. For example, suppose a page previously contained the YAML <code>permalink: /:year-:month-:day-:title</code> that resulted in the URL <code>example.com/2016-02-01-test/</code> (notice the trailing slash), Jekyll internaly generates a folder named <code>2016-02-01-test</code>. In Jekyll 3, the same <code>permalink:</code> generate the file <code>2016-02-01-test.html</code> and the URL for the same page will be <code>example.com/2016-02-01-test</code>, and consequently any links to the old URL will result in a 404 error. In order to maintain the same URLs and avoid this problem, a trailing slash should be added to the <code>permalink:</code> field, for example <code>permalink: /:year-:month-:day-:title/</code>.</p>
+
+<h3 id="all-my-posts-are-gone-whered-they-go">All my posts are gone! Where’d they go!</h3>
+
+<p>Try adding <code>future: true</code> to your <code>_config.yml</code> file. Are they showing up now? If they are, then you were ensnared by an issue with the way Ruby parses times. Each of your posts is being read in a different timezone than you might expect and, when compared to the computer’s current time, is “in the future.” The fix for this is to add <a href="https://en.wikipedia.org/wiki/List_of_UTC_time_offsets">a timezone offset</a> to each post (and make sure you remove <code>future: true</code> from your <code>_config.yml</code> file). If you’re writing from California, for example, you would change this:</p>
+
+<pre><code class="language-yaml">---
+date: 2016-02-06 19:32:10
+---
+</code></pre>
+
+<p>to this (note the offset):</p>
+
+<pre><code class="language-yaml">---
+date: 2016-02-06 19:32:10 -0800
+---
+</code></pre>
 
 <p><em>Did we miss something? Please click “Improve this page” above and add a section. Thanks!</em></p>
 
