@@ -2598,17 +2598,15 @@ http://jekyllrb.com/docs/upgrading/ for more info.</code></pre></figure>
 
 <p>Try adding <code>future: true</code> to your <code>_config.yml</code> file. Are they showing up now? If they are, then you were ensnared by an issue with the way Ruby parses times. Each of your posts is being read in a different timezone than you might expect and, when compared to the computer’s current time, is “in the future.” The fix for this is to add <a href="https://en.wikipedia.org/wiki/List_of_UTC_time_offsets">a timezone offset</a> to each post (and make sure you remove <code>future: true</code> from your <code>_config.yml</code> file). If you’re writing from California, for example, you would change this:</p>
 
-<pre><code class="language-yaml">---
-date: 2016-02-06 19:32:10
----
-</code></pre>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="nn">---</span>
+<span class="l-Scalar-Plain">date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2016-02-06 19:32:10</span>
+<span class="nn">---</span></code></pre></figure>
 
 <p>to this (note the offset):</p>
 
-<pre><code class="language-yaml">---
-date: 2016-02-06 19:32:10 -0800
----
-</code></pre>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="nn">---</span>
+<span class="l-Scalar-Plain">date</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2016-02-06 19:32:10 -0800</span>
+<span class="nn">---</span></code></pre></figure>
 
 <p><em>Did we miss something? Please click “Improve this page” above and add a section. Thanks!</em></p>
 
