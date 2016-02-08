@@ -19,6 +19,7 @@
   * [add note] Jekyll 3 requires newer version of Ruby. (#4461)
   * Fix typo in upgrading docs (#4473)
   * Add note about upgrading documentation on jekyllrb.com/help/ (#4484)
+  * Update Rake link (#4496)
 
 ## 3.1.1 / 2016-01-29
 
