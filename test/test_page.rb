@@ -310,6 +310,18 @@ class TestPage < JekyllUnitTest
           assert File.directory?(dest_dir)
           assert File.exist?(File.join(dest_dir, 'contacts', 'bar', 'index.html'))
         end
+
+        should "write properly without html extension in source file" do
+          page = setup_page('/contacts', 'humans.txt')
+          page.site.permalink_style = "/:categories/:year/:month/:day/:title/"
+          do_render(page)
+          page.write(dest_dir)
+          dest = dest_dir('contacts', 'humans', 'index.html')
+
+          assert File.directory?(dest_dir)
+          assert_equal dest, page.destination(dest_dir)
+          assert File.exist?(dest), "contacts/humans/index.html should exist"
+        end
       end
     end
 
