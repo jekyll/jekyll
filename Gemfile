@@ -79,4 +79,5 @@ group :site do
   if ENV["PROOF"]
     gem "html-proofer", "~> 2.0"
   end
+  gem "jemoji"
 end
