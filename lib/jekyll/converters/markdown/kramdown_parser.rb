@@ -16,7 +16,7 @@ module Jekyll
 
         def initialize(config)
           Jekyll::External.require_with_graceful_fail "kramdown"
-          @main_fallback_highlighter = config["highlighter"] || "rouge"
+          @fallback_highlighter = config.key?("highlighter") ? config["highlighter"] : "rouge"
           @config = config["kramdown"] || {}
           @highlighter = nil
           setup
@@ -60,7 +60,7 @@ module Jekyll
         def highlighter
           return @highlighter if @highlighter
 
-          if @config["syntax_highlighter"]
+          if @config.key?("syntax_highlighter")
             return @highlighter = @config[
               "syntax_highlighter"
             ]
@@ -73,7 +73,7 @@ module Jekyll
 
               "coderay"
             else
-              @main_fallback_highlighter
+              @fallback_highlighter
             end
           end
         end

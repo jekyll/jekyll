@@ -31,6 +31,24 @@ class TestKramdown < JekyllUnitTest
       assert_equal "<h1>Some Header</h1>", @markdown.convert('# Some Header #').strip
     end
 
+    context "when asked to disable the highlighter" do
+      should "accept nil" do
+        override = {
+          "kramdown" => {
+            "syntax_highlighter" => nil
+          }
+        }
+
+        markdown = Converters::Markdown.new(Utils.deep_merge_hashes(
+          @config, override
+        ))
+
+        result = nokogiri_fragment(markdown.convert "```ruby\nhello\n```")
+        select = "pre/code[contains(@class, 'language-ruby')][contains(text(),'hello')]"
+        refute result.xpath(select).empty?
+      end
+    end
+
     context "when asked to convert smart quotes" do
       should "convert" do
         assert_match %r!<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>!, @markdown.convert(%{"Pit'hy"}).strip
