@@ -380,4 +380,33 @@ class TestDocument < JekyllUnitTest
 
   end
 
+  context "a document in a collection with a non-HTML-able filename" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "with.dots" => {
+            "output" => true,
+            "permalink" => "/:collection/:path/"
+          }
+        },
+      })
+      @site.process
+      @document = @site.collections["with.dots"].docs.find { |doc| doc.relative_path == "_with.dots/mit.txt" }
+      @dest_file = dest_dir("with.dots", "mit", "index.html")
+    end
+
+    should "produce the right URL" do
+      assert_equal "/with.dots/mit/", @document.url
+    end
+
+    should "produce the right destination" do
+      assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "be output in the correct place" do
+      assert_equal true, File.file?(@dest_file)
+    end
+
+  end
+
 end
