@@ -3,7 +3,7 @@
 <generator uri="http://jekyllrb.com" version="3.1.1">Jekyll</generator>
 <link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-02-08T11:05:27-08:00</updated>
+<updated>2016-02-08T11:09:50-08:00</updated>
 <id>http://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
@@ -13,9 +13,10 @@
 <published>2016-02-08T10:39:08-08:00</published>
 <updated>2016-02-08T10:39:08-08:00</updated>
 <id>http://jekyllrb.com/news/2016/02/08/jekyll-3-0-3-released</id>
-<content type="html" xml:base="http://jekyllrb.com/news/2016/02/08/jekyll-3-0-3-released/">&lt;p&gt;&lt;a href=&quot;https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0&quot;&gt;GitHub Pages upgraded to Jekyll 3.0.2&lt;/a&gt; last week and there has been a
-joyous reception so far! This release is to address some bugs that affected
-some users during the cut-over. The fixes include:&lt;/p&gt;
+<content type="html" xml:base="http://jekyllrb.com/news/2016/02/08/jekyll-3-0-3-released/">&lt;p&gt;&lt;a href=&quot;https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0&quot;&gt;GitHub Pages upgraded to Jekyll 3.0.2&lt;/a&gt; last week. With a testbed of
+over a million sites, this really put Jekyll 3 through the wringer. This
+release addresses a handful of bugs that were surfaced as a result. The
+fixes:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Fix problem where outputting to a folder would have two extensions&lt;/li&gt;
