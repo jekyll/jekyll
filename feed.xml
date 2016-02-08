@@ -3,17 +3,50 @@
 <generator uri="http://jekyllrb.com" version="3.1.1">Jekyll</generator>
 <link href="http://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="http://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-02-06T19:21:23-08:00</updated>
+<updated>2016-02-08T11:05:27-08:00</updated>
 <id>http://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.0.3 Released</title>
+<link href="http://jekyllrb.com/news/2016/02/08/jekyll-3-0-3-released/" rel="alternate" type="text/html" title="Jekyll 3.0.3 Released" />
+<published>2016-02-08T10:39:08-08:00</published>
+<updated>2016-02-08T10:39:08-08:00</updated>
+<id>http://jekyllrb.com/news/2016/02/08/jekyll-3-0-3-released</id>
+<content type="html" xml:base="http://jekyllrb.com/news/2016/02/08/jekyll-3-0-3-released/">&lt;p&gt;&lt;a href=&quot;https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0&quot;&gt;GitHub Pages upgraded to Jekyll 3.0.2&lt;/a&gt; last week and there has been a
+joyous reception so far! This release is to address some bugs that affected
+some users during the cut-over. The fixes include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fix problem where outputting to a folder would have two extensions&lt;/li&gt;
+  &lt;li&gt;Handle tildes (&lt;code&gt;~&lt;/code&gt;) in filenames properly&lt;/li&gt;
+  &lt;li&gt;Fix issue when comparing documents without dates&lt;/li&gt;
+  &lt;li&gt;Include line numbers in liquid error output&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Read more on the &lt;a href=&quot;/docs/history/#v3-0-3&quot;&gt;changelog&lt;/a&gt; with links to the
+related patches.&lt;/p&gt;
+
+&lt;p&gt;Please keep &lt;a href=&quot;{{ site.repository }}/issues&quot;&gt;submitting bugs&lt;/a&gt; as you find them! Please do take a look
+&lt;a href=&quot;/help/&quot;&gt;in our various help resources&lt;/a&gt; before filing a bug and use &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;our
+forum&lt;/a&gt; for asking questions and getting help on a specific problem
+you’re having.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.1.1 Released</title>
 <link href="http://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released/" rel="alternate" type="text/html" title="Jekyll 3.1.1 Released" />
 <published>2016-01-28T17:21:50-08:00</published>
 <updated>2016-01-28T17:21:50-08:00</updated>
 <id>http://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released</id>
-<content type="html" xml:base="http://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released/">&lt;p&gt;This release squashes a few bugs :bug: :bug: :bug: noticed by a few
+<content type="html" xml:base="http://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released/">&lt;p&gt;This release squashes a few bugs &lt;img class=&quot;emoji&quot; title=&quot;:bug:&quot; alt=&quot;:bug:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f41b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;img class=&quot;emoji&quot; title=&quot;:bug:&quot; alt=&quot;:bug:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f41b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;img class=&quot;emoji&quot; title=&quot;:bug:&quot; alt=&quot;:bug:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f41b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; noticed by a few
 wonderful Jekyll users:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -36,7 +69,7 @@ that&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;See links to the PR’s on &lt;a href=&quot;/docs/history/#v3-1-1&quot;&gt;the history page&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Thanks to Jordon Bedwell, chrisfinazzo, Kroum Tzanev, David Celis, and
-Alfred Xing for their commits on this latest release! :sparkles:&lt;/p&gt;
+Alfred Xing for their commits on this latest release! &lt;img class=&quot;emoji&quot; title=&quot;:sparkles:&quot; alt=&quot;:sparkles:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/2728.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
 </content>
@@ -300,34 +333,6 @@ over on my personal blog: &lt;a href=&quot;https://byparker.com/blog/2014/jekyll
 Feel free to chime in over on GitHub.&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Alfred Xing has joined the Jekyll core team</title>
-<link href="http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core/" rel="alternate" type="text/html" title="Alfred Xing has joined the Jekyll core team" />
-<published>2014-12-17T11:16:21-08:00</published>
-<updated>2014-12-17T11:16:21-08:00</updated>
-<id>http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core</id>
-<content type="html" xml:base="http://jekyllrb.com/news/2014/12/17/alfredxing-welcome-to-jekyll-core/">&lt;p&gt;We’re excited to announce that &lt;a href=&quot;https://github.com/alfredxing&quot;&gt;@alfredxing&lt;/a&gt; has joined the @jekyll/core
-team!&lt;/p&gt;
-
-&lt;p&gt;He hails from Vancouver, BC, Canada, where he is studying Economics and
-Computer Science at the &lt;a href=&quot;http://ubc.ca&quot;&gt;University of British Columbia&lt;/a&gt;. Alfred popped up in
-the issues a few months ago with terrific insights, focus, and humility.
-Performance buffs may be pleased to hear incremental regeneration will be
-released in a future version of Jekyll – a significant piece of the
-feature written by Alfred.&lt;/p&gt;
-
-&lt;p&gt;Please join me in welcoming Alfred to the Jekyll core team. We’re excited
-he’s agreed to lend his talents to this project. The future is an exciting
-place!&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;
-
 </content>
 <author>
 <name>parkr</name>

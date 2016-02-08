@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.4 Released</title>
+  <title>Jekyll 3.0.3 Released</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.1.1">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" />
@@ -171,8 +171,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.4 Released
-    <a href="/news/2013/07/25/jekyll-1-0-4-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 3.0.3 Released
+    <a href="/news/2016/02/08/jekyll-3-0-3-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -181,22 +181,34 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      25 Jul 2013
+      08 Feb 2016
     </span>
-    <a href="https://github.com/mattr-" class="post-author">
-      <img src="https://github.com/mattr-.png" class="avatar" alt="mattr- avatar" width="24" height="24">
-      mattr-
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
     </a>
   </div>
   <div class="post-content">
-    <p>Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
+    <p><a href="https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0">GitHub Pages upgraded to Jekyll 3.0.2</a> last week and there has been a
+joyous reception so far! This release is to address some bugs that affected
+some users during the cut-over. The fixes include:</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<ul>
+  <li>Fix problem where outputting to a folder would have two extensions</li>
+  <li>Handle tildes (<code>~</code>) in filenames properly</li>
+  <li>Fix issue when comparing documents without dates</li>
+  <li>Include line numbers in liquid error output</li>
+</ul>
 
-<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
+<p>Read more on the <a href="/docs/history/#v3-0-3">changelog</a> with links to the
+related patches.</p>
 
-<p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
-and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
+<p>Please keep <a href="https://github.com/jekyll/jekyll/issues">submitting bugs</a> as you find them! Please do take a look
+<a href="/help/">in our various help resources</a> before filing a bug and use <a href="https://talk.jekyllrb.com/">our
+forum</a> for asking questions and getting help on a specific problem
+you’re having.</p>
+
+<p>Happy Jekylling!</p>
 
 
   </div>
@@ -217,7 +229,7 @@ and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a
     <h4>Recent Releases</h4>
     <ul>
       
-      <li class="">
+      <li class="current">
         <a href="/news/2016/02/08/jekyll-3-0-3-released/">Version 3.0.3</a>
       </li>
       
