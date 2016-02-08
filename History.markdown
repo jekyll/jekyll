@@ -3,6 +3,7 @@
 ### Bug Fixes
 
   * Fix #4427: Make our @config hash symbol accessible. (#4428)
+  * Jekyll.sanitized_path: sanitizing a questionable path should handle tildes (#4492)
 
 ### Minor Enhancements
 
