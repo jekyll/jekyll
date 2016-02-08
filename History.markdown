@@ -3,7 +3,7 @@
 ### Bug Fixes
 
   * Fix #4427: Make our @config hash symbol accessible. (#4428)
-  * Jekyll.sanitized_path: sanitizing a questionable path should handle tildes (#4492)
+  * `Jekyll.sanitized_path`: sanitizing a questionable path should handle tildes (#4492)
 
 ### Minor Enhancements
 
@@ -134,6 +134,16 @@
   * Added the Wordpress2Jekyll Wordpress plugin (#4377)
   * Add Contentful Extension to list of third-party plugins (#4390)
   * Correct Minor spelling error (#4394)
+
+## 3.0.3 / 2016-02-08
+
+### Bug Fixes
+
+* Fix extension weirdness with folders (#4493)
+* EntryFilter: only include 'excluded' log on excluded files (#4479)
+* `Jekyll.sanitized_path`: escape tildes before sanitizing a questionable path (#4468)
+* `LiquidRenderer#parse`: parse with line numbers (#4453)
+* `Document#<=>`: protect against nil comparison in dates. (#4446)
 
 ## 3.0.2 / 2016-01-20
 
