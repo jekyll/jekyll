@@ -120,7 +120,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class="name"><strong>Encoding</strong></p>
         <p class="description">
-            Set the encoding of files by name. Only available for Ruby
+            Set the encoding of files by name (only available for Ruby
             1.9 or later).
             The default value is <code>utf-8</code> starting in 2.0.0,
             and <code>nil</code> before 2.0.0, which will yield the Ruby
