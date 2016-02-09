@@ -10,6 +10,8 @@ module Jekyll
           "ssl_key"  => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"     => ["-P", "--port [PORT]", "Port to listen on"],
           "baseurl"  => ["-b", "--baseurl [URL]", "Base URL"],
+          "directory_index" => ["--[no-]directory-index [FILE1,[FILE2,...]]", Array,
+            "Directory index files"],
           "skip_initial_build" => ["skip_initial_build", "--skip-initial-build",
             "Skips the initial site build which occurs before the server is started."]
         }
@@ -82,14 +84,11 @@ module Jekyll
             :StartCallback      => start_callback(opts["detach"]),
             :BindAddress        => opts["host"],
             :Port               => opts["port"],
-            :DirectoryIndex     => %W(
-              index.htm
-              index.html
-              index.rhtml
-              index.cgi
-              index.xml
-            )
+            :DirectoryIndex     => opts["directory_index"]
           }
+
+          # Needed for when the --no-directory-index option is passed
+          opts[:DirectoryIndex] = [] unless opts[:DirectoryIndex].respond_to?(:each)
 
           enable_ssl(opts)
           enable_logging(opts)
