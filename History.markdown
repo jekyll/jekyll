@@ -9,6 +9,7 @@
 
   * Include .rubocop.yml in Gem (#4437)
   * LiquidRenderer#parse: parse with line numbers. (#4452)
+  * add consistency to the deprecation message (#4505)
 
 ### Site Enhancements
 
@@ -139,11 +140,11 @@
 
 ### Bug Fixes
 
-* Fix extension weirdness with folders (#4493)
-* EntryFilter: only include 'excluded' log on excluded files (#4479)
-* `Jekyll.sanitized_path`: escape tildes before sanitizing a questionable path (#4468)
-* `LiquidRenderer#parse`: parse with line numbers (#4453)
-* `Document#<=>`: protect against nil comparison in dates. (#4446)
+  * Fix extension weirdness with folders (#4493)
+  * EntryFilter: only include 'excluded' log on excluded files (#4479)
+  * `Jekyll.sanitized_path`: escape tildes before sanitizing a questionable path (#4468)
+  * `LiquidRenderer#parse`: parse with line numbers (#4453)
+  * `Document#<=>`: protect against nil comparison in dates. (#4446)
 
 ## 3.0.2 / 2016-01-20
 
