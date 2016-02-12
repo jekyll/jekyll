@@ -6,10 +6,10 @@ permalink: /docs/posts/
 
 One of Jekyll’s best aspects is that it is “blog aware”. What does this mean,
 exactly? Well, simply put, it means that blogging is baked into Jekyll’s
-functionality. If you write articles and publish them online, this means that
-you can publish and maintain a blog simply by managing a folder of text-files on
-your computer. Compared to the hassle of configuring and maintaining databases
-and web-based CMS systems, this will be a welcome change!
+functionality. If you write articles and publish them online, you can publish
+and maintain a blog simply by managing a folder of text-files on your computer.
+Compared to the hassle of configuring and maintaining databases and web-based
+CMS systems, this will be a welcome change!
 
 ## The Posts Folder
 
@@ -23,7 +23,7 @@ static site.
 
 ### Creating Post Files
 
-To create a new post, all you need to do is create a new file in the `_posts`
+To create a new post, all you need to do is create a file in the `_posts`
 directory. How you name files in this folder is important. Jekyll requires blog
 post files to be named according to the following format:
 

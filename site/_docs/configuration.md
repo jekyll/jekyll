@@ -500,7 +500,8 @@ defaults:
       layout: "default"
 {% endhighlight %}
 
-In this example the `layout` is set to `default` inside the [collection](../collections/) with the name `my_collection`.
+In this example, the `layout` is set to `default` inside the
+[collection](../collections/) with the name `my_collection`.
 
 ### Precedence
 

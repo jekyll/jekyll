@@ -86,7 +86,7 @@ might look like:
 {% endhighlight %}
 
 This approach may not suit everyone, but for people who like clean URLs it’s
-simple and it works. In the end the decision is yours!
+simple and it works. In the end, the decision is yours!
 
 <div class="note">
   <h5>ProTip™: Use permalink Front Matter Variable</h5>
