@@ -1,5 +1,9 @@
 ## HEAD
 
+### Development Fixes
+
+  * require at least cucumber version 2.1.0 (#4514)
+
 ### Bug Fixes
 
   * Fix #4427: Make our @config hash symbol accessible. (#4428)
