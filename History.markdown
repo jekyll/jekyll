@@ -23,6 +23,7 @@
   * Add note about upgrading documentation on jekyllrb.com/help/ (#4484)
   * Update Rake link (#4496)
   * Update & prune the short list of example sites (#4374)
+  * Added amp-jekyll plugin to plugins docs (#4517)
 
 ## 3.1.1 / 2016-01-29
 
