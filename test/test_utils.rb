@@ -206,6 +206,14 @@ class TestUtils < JekyllUnitTest
     end
   end
 
+  context "The \`Utils.titleize_slug\` method" do
+    should "capitalize all words and not drop any words" do
+      assert_equal "This Is A Long Title With Mixed Capitalization", Utils.titleize_slug("This-is-a-Long-title-with-Mixed-capitalization")
+      assert_equal "This Is A Title With Just The Initial Word Capitalized", Utils.titleize_slug("This-is-a-title-with-just-the-initial-word-capitalized")
+      assert_equal "This Is A Title With No Capitalization", Utils.titleize_slug("this-is-a-title-with-no-capitalization")
+    end
+  end
+
   context "The \`Utils.add_permalink_suffix\` method" do
     should "handle built-in permalink styles" do
       assert_equal "/:basename/", Utils.add_permalink_suffix("/:basename", :pretty)

@@ -20,7 +20,7 @@ module Jekyll
 
     def titleize_slug(slug)
       slug.split("-").map! do |val|
-        val.capitalize!
+        val.capitalize
       end.join(" ")
     end
 
