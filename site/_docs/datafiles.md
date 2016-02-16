@@ -33,8 +33,8 @@ of code in your Jekyll templates:
 In `_data/members.yml`:
 
 {% highlight yaml %}
-- name: Tom Preston-Werner
-  github: mojombo
+- name: Eric Mill
+  github: konklone
 
 - name: Parker Moore
   github: parkr
@@ -47,7 +47,7 @@ Or `_data/members.csv`:
 
 {% highlight text %}
 name,github
-Tom Preston-Werner,mojombo
+Eric Mill,konklone
 Parker Moore,parkr
 Liu Fengyun,liufengyun
 {% endhighlight %}

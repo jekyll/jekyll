@@ -132,11 +132,11 @@ permalink: "/docs/history/"
 ### Bug Fixes
 {: #bug-fixes-v3-0-3}
 
-* Fix extension weirdness with folders ([#4493]({{ site.repository }}/issues/4493))
-* EntryFilter: only include 'excluded' log on excluded files ([#4479]({{ site.repository }}/issues/4479))
-* `Jekyll.sanitized_path`: escape tildes before sanitizing a questionable path ([#4468]({{ site.repository }}/issues/4468))
-* `LiquidRenderer#parse`: parse with line numbers ([#4453]({{ site.repository }}/issues/4453))
-* `Document#<=>`: protect against nil comparison in dates. ([#4446]({{ site.repository }}/issues/4446))
+- Fix extension weirdness with folders ([#4493]({{ site.repository }}/issues/4493))
+- EntryFilter: only include 'excluded' log on excluded files ([#4479]({{ site.repository }}/issues/4479))
+- `Jekyll.sanitized_path`: escape tildes before sanitizing a questionable path ([#4468]({{ site.repository }}/issues/4468))
+- `LiquidRenderer#parse`: parse with line numbers ([#4453]({{ site.repository }}/issues/4453))
+- `Document#<=>`: protect against nil comparison in dates. ([#4446]({{ site.repository }}/issues/4446))
 
 
 ## 3.0.2 / 2016-01-20
