@@ -30,6 +30,7 @@
   * Update & prune the short list of example sites (#4374)
   * Added amp-jekyll plugin to plugins docs (#4517)
   * A few grammar fixes (#4512)
+  * Update structure.md (#4522)
 
 ## 3.1.1 / 2016-01-29
 
