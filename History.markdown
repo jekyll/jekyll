@@ -8,6 +8,7 @@
 
   * Fix #4427: Make our @config hash symbol accessible. (#4428)
   * `Jekyll.sanitized_path`: sanitizing a questionable path should handle tildes (#4492)
+  * Fix titleize so already capitalized words are not dropped (#4525)
 
 ### Minor Enhancements
 
