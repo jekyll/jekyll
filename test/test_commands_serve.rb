@@ -68,6 +68,18 @@ class TestCommandsServe < JekyllUnitTest
         ]
       end
 
+      should "use user directory index list" do
+        assert_equal custom_opts(
+          { 'directory_index' => ['welcome.html', 'default.html'] }
+        )[:DirectoryIndex], ['welcome.html', 'default.html']
+      end
+
+      should "use empty directory index list when directory_index is false" do
+        assert_equal custom_opts(
+          { 'directory_index' => false }
+        )[:DirectoryIndex], []
+      end
+
       context "verbose" do
         should "debug when verbose" do
           assert_equal custom_opts({ "verbose" => true })[:Logger].level, 5

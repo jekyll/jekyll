@@ -44,6 +44,13 @@ module Jekyll
       'port'          => '4000',
       'host'          => '127.0.0.1',
       'baseurl'       => '',
+      'directory_index' => %W(
+        index.htm
+        index.html
+        index.rhtml
+        index.cgi
+        index.xml
+      ),
 
       # Output Configuration
       'permalink'     => 'date',
