@@ -80,6 +80,26 @@ Feature: frontmatter defaults
     And I should see "main: <p>content of site/special/2013/10/14/about1.html</p>" in "_site/special/2013/10/14/about1.html"
     And I should see "main: <p>content of site/special/2013/10/14/about2.html</p>" in "_site/special/2013/10/14/about2.html"
 
+  Scenario: Use frontmatter scopes for subdirectories
+    Given I have a _layouts directory
+    And I have a main layout that contains "main: {{ content }}"
+
+    And I have a _posts/en directory
+    And I have the following post under "en":
+      | title | date       | content                               |
+      | helloworld | 2014-09-01 | {{page.lang}} is the current language |
+    And I have a _posts/de directory
+    And I have the following post under "de":
+      | title  | date       | content                                        |
+      | hallowelt | 2014-09-01 | {{page.lang}} is the current language |
+
+    And I have a configuration file with "defaults" set to "[{scope: {path: "_posts/en"}, values: {layout: "main", lang: "en"}}, {scope: {path: "_posts/de"}, values: {layout: "main", lang: "de"}}]"
+
+    When I run jekyll build
+    Then the _site directory should exist
+    And I should see "main: <p>en is the current language</p>" in "_site/2014/09/01/helloworld.html"
+    And I should see "main: <p>de is the current language</p>" in "_site/2014/09/01/hallowelt.html"
+
   Scenario: Override frontmatter defaults by type
     Given I have a _posts directory
     And I have the following post:
