@@ -7,6 +7,7 @@
 
 
 ###### What did you do?
+(Please include the content causing the issue, any relevant configuration settings, and the command you ran)
 
 
 
