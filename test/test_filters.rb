@@ -151,7 +151,7 @@ class TestFilters < JekyllUnitTest
         end
 
         should "format a time with xmlschema" do
-          assert_match /2014-05-10T00:10:07/, @filter.date_to_xmlschema(@time_as_numeric)
+          assert_match(/2014-05-10T00:10:07/, @filter.date_to_xmlschema(@time_as_numeric))
         end
 
         should "format a time according to RFC-822" do

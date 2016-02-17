@@ -18,6 +18,7 @@ module Jekyll
           Jekyll::External.require_with_graceful_fail "kramdown"
           @main_fallback_highlighter = config["highlighter"] || "rouge"
           @config = config["kramdown"] || {}
+          @highlighter = nil
           setup
         end
 

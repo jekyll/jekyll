@@ -231,13 +231,13 @@ class TestSite < JekyllUnitTest
     context 'error handling' do
       should "raise if destination is included in source" do
         assert_raises Jekyll::Errors::FatalException do
-          site = Site.new(site_configuration('destination' => source_dir))
+          Site.new(site_configuration('destination' => source_dir))
         end
       end
 
       should "raise if destination is source" do
         assert_raises Jekyll::Errors::FatalException do
-          site = Site.new(site_configuration('destination' => File.join(source_dir, "..")))
+          Site.new(site_configuration('destination' => File.join(source_dir, "..")))
         end
       end
     end
@@ -519,7 +519,6 @@ class TestSite < JekyllUnitTest
         contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
         @site.process
 
-        source = @site.in_source_dir(contacts_html.path)
         dest = File.expand_path(contacts_html.destination(@site.dest))
         mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
 
