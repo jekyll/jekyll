@@ -68,6 +68,11 @@ class TestCommandsServe < JekyllUnitTest
         ]
       end
 
+      should "use empty directory index list when show_dir_listing is true" do
+        opts = { "show_dir_listing" => true }
+        assert custom_opts(opts)[:DirectoryIndex].empty?
+      end
+
       context "verbose" do
         should "debug when verbose" do
           assert_equal custom_opts({ "verbose" => true })[:Logger].level, 5

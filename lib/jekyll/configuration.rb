@@ -44,6 +44,7 @@ module Jekyll
       'port'          => '4000',
       'host'          => '127.0.0.1',
       'baseurl'       => '',
+      'show_dir_listing' => false,
 
       # Output Configuration
       'permalink'     => 'date',
