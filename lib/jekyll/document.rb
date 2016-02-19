@@ -217,8 +217,11 @@ module Jekyll
     def destination(base_directory)
       dest = site.in_dest_dir(base_directory)
       path = site.in_dest_dir(dest, URL.unescape_path(url))
-      path = File.join(path, "index.html") if url.end_with?("/")
-      path << output_ext unless path.end_with? output_ext
+      if url.end_with? "/"
+        path = File.join(path, "index.html")
+      else
+        path << output_ext unless path.end_with? output_ext
+      end
       path
     end
 
