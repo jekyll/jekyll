@@ -178,6 +178,7 @@ class TestSite < JekyllUnitTest
         environment.html
         exploit.md
         foo.md
+        humans.txt
         index.html
         index.html
         main.scss
