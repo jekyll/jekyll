@@ -4,6 +4,47 @@ title: History
 permalink: "/docs/history/"
 ---
 
+## 3.1.2 / 2016-02-19
+{: #v3-1-2}
+
+### Minor Enhancements
+{: #minor-enhancements-v3-1-2}
+
+- Include `.rubocop.yml` in Gem ([#4437]({{ site.repository }}/issues/4437))
+- `LiquidRenderer#parse`: parse with line numbers. ([#4452]({{ site.repository }}/issues/4452))
+- Add consistency to the no-subcommand deprecation message ([#4505]({{ site.repository }}/issues/4505))
+
+### Bug Fixes
+{: #bug-fixes-v3-1-2}
+
+- Fix syntax highlighting in kramdown by making `[@config](https://github.com/config)` accessible in the Markdown converter. ([#4428]({{ site.repository }}/issues/4428))
+- `Jekyll.sanitized_path`: sanitizing a questionable path should handle tildes ([#4492]({{ site.repository }}/issues/4492))
+- Fix `titleize` so already capitalized words are not dropped ([#4525]({{ site.repository }}/issues/4525))
+- Permalinks which end in a slash should always output HTML ([#4546]({{ site.repository }}/issues/4546))
+
+### Development Fixes
+{: #development-fixes-v3-1-2}
+
+- Require at least cucumber version 2.1.0 ([#4514]({{ site.repository }}/issues/4514))
+
+### Site Enhancements
+{: #site-enhancements-v3-1-2}
+
+- Add jekyll-toc plugin ([#4429]({{ site.repository }}/issues/4429))
+- Docs: Quickstart - added documentation about the `--force` option ([#4410]({{ site.repository }}/issues/4410))
+- Fix broken links to the Code of Conduct ([#4436]({{ site.repository }}/issues/4436))
+- Upgrade notes: mention trailing slash in permalink; fixes [#4440]({{ site.repository }}/issues/4440) ([#4455]({{ site.repository }}/issues/4455))
+- Add hooks to the plugin categories toc ([#4463]({{ site.repository }}/issues/4463))
+- [add note] Jekyll 3 requires newer version of Ruby. ([#4461]({{ site.repository }}/issues/4461))
+- Fix typo in upgrading docs ([#4473]({{ site.repository }}/issues/4473))
+- Add note about upgrading documentation on jekyllrb.com/help/ ([#4484]({{ site.repository }}/issues/4484))
+- Update Rake link ([#4496]({{ site.repository }}/issues/4496))
+- Update & prune the short list of example sites ([#4374]({{ site.repository }}/issues/4374))
+- Added amp-jekyll plugin to plugins docs ([#4517]({{ site.repository }}/issues/4517))
+- A few grammar fixes ([#4512]({{ site.repository }}/issues/4512))
+- Correct a couple mistakes in structure.md ([#4522]({{ site.repository }}/issues/4522))
+
+
 ## 3.1.1 / 2016-01-29
 {: #v3-1-1}
 
