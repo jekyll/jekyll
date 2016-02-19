@@ -203,7 +203,7 @@ class TestCollections < JekyllUnitTest
     end
 
     should "contain one document" do
-      assert_equal 3, @collection.docs.size
+      assert_equal 4, @collection.docs.size
     end
 
     should "allow dots in the filename" do
