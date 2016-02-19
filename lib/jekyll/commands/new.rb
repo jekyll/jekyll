@@ -35,6 +35,10 @@ module Jekyll
             File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
               f.write(scaffold_post_content)
             end
+            
+            File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
+              f.write(gemfile_contents)
+            end
           end
 
           Jekyll.logger.info "New jekyll site installed in #{new_blog_path}."
@@ -59,6 +63,27 @@ module Jekyll
         end
 
         private
+        
+        def gemfile_contents
+          <<-RUBY
+source 'https://rubygems.org'
+  
+# Hello! This is where you manage which Jekyll version is used to run.
+# When you wwant to use a different version, change it below, save the
+# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
+#
+#     bundle exec jekyll serve
+#
+# This will help ensure the proper Jekyll version is running.
+# Happy Jekylling!
+gem 'jekyll', '#{Jekyll::VERSION}'
+  
+# If you have any plugins, put them here!
+# group :jekyll_plugins do
+#   gem 'jekyll-github-metadata', '~> 1.0'
+# end
+RUBY
+        end
 
         def preserve_source_location?(path, options)
           !options["force"] && !Dir["#{path}/**/*"].empty?
