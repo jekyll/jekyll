@@ -126,6 +126,7 @@ class TestCollections < JekyllUnitTest
         assert_includes %w[
           _methods/configuration.md
           _methods/sanitized_path.md
+          _methods/collection/entries
           _methods/site/generate.md
           _methods/site/initialize.md
           _methods/um_hi.md
