@@ -439,6 +439,7 @@ module Jekyll
     end
 
     def previous_doc
+      Jekyll.logger.debug "Document", "called previous_doc from #{self}"
       pos = collection.docs.index {|post| post.equal?(self) }
       if pos && pos > 0
         collection.docs[pos - 1]

@@ -74,7 +74,7 @@ module Jekyll
     def entries
       return Array.new unless exists?
       @entries ||=
-        Dir.glob(collection_dir("**", "*.*")).map do |entry|
+        Dir.glob(collection_dir("**", "*")).map do |entry|
           entry["#{collection_dir}/"] = ''; entry
         end
     end
