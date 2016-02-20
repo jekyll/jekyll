@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.files << "lib/jekyll-docs.rb"
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'jekyll', Jekyll::VERSION
+  spec.add_dependency 'jekyll', ENV.fetch('JEKYLL_VERSION')
 
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'rake', '~> 10.0'
