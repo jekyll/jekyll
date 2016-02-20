@@ -1,0 +1,19 @@
+require "bundler/gem_tasks"
+task :build => :init
+task :default => :init
+
+def jekyll_version
+  ENV.fetch('JEKYLL_VERSION')
+end
+
+task :init do
+  sh "git clone git://github.com/jekyll/jekyll.git jekyll" unless Dir.exist? "jekyll/.git"
+  Dir.chdir("jekyll") { sh "git checkout v#{jekyll_version}" }
+  rm_rf "site"
+  cp_r "jekyll/site", "site"
+end
+
+task :teardown do
+  rm_rf "site"
+  rm_rf "jekyll"
+end
