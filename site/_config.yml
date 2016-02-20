@@ -19,7 +19,15 @@ name: Jekyll • Simple, blog-aware, static sites
 description: Transform your plain text into static websites and blogs
 url: http://jekyllrb.com
 
+twitter:
+  username: jekyllrb
+
+logo: img/logo-2x.png
+
 gems:
   - jekyll-feed
   - jekyll-redirect-from
   - jemoji
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-avatar
