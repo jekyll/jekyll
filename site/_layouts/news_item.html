@@ -17,7 +17,7 @@ layout: news
       {{ page.date | date_to_string }}
     </span>
     <a href="https://github.com/{{ page.author }}" class="post-author">
-      <img src="https://github.com/{{ page.author }}.png" class="avatar" alt="{{ page.author }} avatar" width="24" height="24">
+      {% avatar {{ page.author}} size=24 %}
       {{ page.author }}
     </a>
   </div>

@@ -81,4 +81,7 @@ group :site do
     gem "html-proofer", "~> 2.0"
   end
   gem "jemoji"
+  gem "jekyll-sitemap"
+  gem "jekyll-seo-tag"
+  gem "jekyll-avatar"
 end
