@@ -1,3 +1,9 @@
+## HEAD
+
+### Site Enhancements
+
+  * Add jekyll-seo-tag, jekyll-avatar, and jekyll-sitemap to the site (#4553)
+
 ## 3.1.2 / 2016-02-19
 
 ### Minor Enhancements
