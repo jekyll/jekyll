@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Releases</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.1.1">
+  <meta name="generator" content="Jekyll v3.1.2">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -80,6 +80,8 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="v1.x">
+      
+      <option value="/news/2016/02/19/jekyll-3-1-2-released/">Jekyll 3.1.2 Released!</option>
       
       <option value="/news/2016/02/08/jekyll-3-0-3-released/">Jekyll 3.0.3 Released</option>
       
@@ -170,6 +172,45 @@
 
       <div class="unit four-fifths">
         
+  <article>
+  <h2>
+    <a href="/news/2016/02/19/jekyll-3-1-2-released/">
+      Jekyll 3.1.2 Released!
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      release
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      19 Feb 2016
+    </span>
+    <a href="https://github.com/parkr" class="post-author">
+      <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
+      parkr
+    </a>
+  </div>
+  <div class="post-content">
+    <p>Happy Friday from sunny California! Today, we’re excited to announce the release of Jekyll v3.1.2, which comes with some crucial bug fixes:</p>
+
+<ul>
+  <li>If a syntax error is encountered by Liquid, it will now print the line number.</li>
+  <li>A nasty war between symbols and strings in our configuration hash caused kramdown syntax highlighting to break. That has been resolved; you stand victorious!</li>
+  <li>A tilde at the beginning of a filename will no longer crash Jekyll.</li>
+  <li>The <code>titleize</code> filter mistakenly dropped words that were already capitalized. Fixed!</li>
+  <li>Permalinks which end in a slash will now always output as a folder with an <code>index.html</code> inside.</li>
+</ul>
+
+<p>Nitty-gritty details, like always, are available in the <a href="/docs/history/">history</a>.</p>
+
+<p>Thanks to those who contributed to this release: Alfred Xing, atomicules, bojanland, Brenton Horne, Carlos Garcés, Cash Costello, Chris, chrisfinazzo, Daniel Schildt, Dean Attali, Florian Thomas, Jordon Bedwell, Juuso Mikkonen, Katya Demidova, lonnen, Manabu Sakai, Michael Lee, Michael Lyons, Mitesh Shah, Nicolas Hoizey, Parker Moore, Pat Hawks, Prayag Verma, Robert Martin, Suriyaa Kudo, and toshi.</p>
+
+  </div>
+</article>
+
+
   <article>
   <h2>
     <a href="/news/2016/02/08/jekyll-3-0-3-released/">
@@ -1819,6 +1860,10 @@ examples and for compiling this list):</p>
     <ul>
       
       <li class="">
+        <a href="/news/2016/02/19/jekyll-3-1-2-released/">Version 3.1.2</a>
+      </li>
+      
+      <li class="">
         <a href="/news/2016/02/08/jekyll-3-0-3-released/">Version 3.0.3</a>
       </li>
       
@@ -1834,16 +1879,14 @@ examples and for compiling this list):</p>
         <a href="/news/2016/01/20/jekyll-3-0-2-released/">Version 3.0.2</a>
       </li>
       
-      <li class="">
-        <a href="/news/2015/11/17/jekyll-3-0-1-released/">Version 3.0.1</a>
-      </li>
-      
       <li>
         <a href="/docs/history/">History »</a>
       </li>
     </ul>
     <h4>Other News</h4>
     <ul>
+        
+        
         
         
         

@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Jekyll 1.0.0 Released</title>
+  <title>Jekyll 3.1.2 Released!</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.1.2">
   <link type="application/atom+xml" rel="alternate" href="http://jekyllrb.com/feed.xml" />
@@ -173,8 +173,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll 1.0.0 Released
-    <a href="/news/2013/05/05/jekyll-1-0-0-released/" class="permalink" title="Permalink">∞</a>
+    Jekyll 3.1.2 Released!
+    <a href="/news/2016/02/19/jekyll-3-1-2-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -183,7 +183,7 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      05 May 2013
+      19 Feb 2016
     </span>
     <a href="https://github.com/parkr" class="post-author">
       <img src="https://github.com/parkr.png" class="avatar" alt="parkr avatar" width="24" height="24">
@@ -191,20 +191,19 @@
     </a>
   </div>
   <div class="post-content">
-    <p>Hey! After many months of hard work by Jekyll’s contributors, we’re excited
-to announce the first major release of the project in a long while. v1.0.0 is
-finally here! While the list of improvements and bug fixes is <a href="/docs/history/#v1-0-0">quite lengthy</a>,
-here are the highlights (thanks to <a href="http://twitter.com/BenBalter">@benbalter</a> for the
-examples and for compiling this list):</p>
+    <p>Happy Friday from sunny California! Today, we’re excited to announce the release of Jekyll v3.1.2, which comes with some crucial bug fixes:</p>
 
 <ul>
-  <li>Support for the Gist tag for easily embedding Gists (<a href="https://gist.github.com/benbalter/5555251">example</a>)</li>
-  <li>Automatically generated post excerpts (<a href="https://gist.github.com/benbalter/5555369">example</a>)</li>
-  <li>Save and preview drafts before publishing (<a href="https://gist.github.com/benbalter/5555992">example</a>)</li>
+  <li>If a syntax error is encountered by Liquid, it will now print the line number.</li>
+  <li>A nasty war between symbols and strings in our configuration hash caused kramdown syntax highlighting to break. That has been resolved; you stand victorious!</li>
+  <li>A tilde at the beginning of a filename will no longer crash Jekyll.</li>
+  <li>The <code>titleize</code> filter mistakenly dropped words that were already capitalized. Fixed!</li>
+  <li>Permalinks which end in a slash will now always output as a folder with an <code>index.html</code> inside.</li>
 </ul>
 
-<p>Take a look at the <a href="/docs/upgrading/">Upgrading</a> page in the docs for more detailed information.</p>
+<p>Nitty-gritty details, like always, are available in the <a href="/docs/history/">history</a>.</p>
 
+<p>Thanks to those who contributed to this release: Alfred Xing, atomicules, bojanland, Brenton Horne, Carlos Garcés, Cash Costello, Chris, chrisfinazzo, Daniel Schildt, Dean Attali, Florian Thomas, Jordon Bedwell, Juuso Mikkonen, Katya Demidova, lonnen, Manabu Sakai, Michael Lee, Michael Lyons, Mitesh Shah, Nicolas Hoizey, Parker Moore, Pat Hawks, Prayag Verma, Robert Martin, Suriyaa Kudo, and toshi.</p>
 
   </div>
 </article>
@@ -224,7 +223,7 @@ examples and for compiling this list):</p>
     <h4>Recent Releases</h4>
     <ul>
       
-      <li class="">
+      <li class="current">
         <a href="/news/2016/02/19/jekyll-3-1-2-released/">Version 3.1.2</a>
       </li>
       
