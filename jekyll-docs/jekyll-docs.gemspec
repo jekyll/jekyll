@@ -9,8 +9,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'http://jekyllrb.com'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split("\x0").grep(%r{^site/})
-  spec.files << "lib/jekyll-docs.rb"
+  spec.files         = Dir['**/*'].grep(%r{^(lib|site)/})
   spec.require_paths = ['lib']
 
   spec.add_dependency 'jekyll', ENV.fetch('JEKYLL_VERSION')

@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'jekyll'
+require 'tmpdir'
 
 module JekyllDocs
   class DocsCommand < Jekyll::Command
