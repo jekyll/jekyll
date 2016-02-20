@@ -20,13 +20,15 @@ module JekyllDocs
 
       def process(opts)
         Dir.mktmpdir do |dest_dir|
-          Jekyll::Commands::Serve.process(opts.merge({
+          options = opts.merge({
             "serving"     => true,
             "watch"       => false,
             "config"      => File.expand_path("../../site/_config.yml", __FILE__),
-            "source"      => File.expand_path("../../site/", __FILE__),
+            "source"      => File.expand_path("../../site", __FILE__),
             "destination" => dest_dir
-          }))
+          })
+          Jekyll::Commands::Build.process(options)
+          Jekyll::Commands::Serve.process(options)
         end
       end
     end
