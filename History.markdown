@@ -1,28 +1,28 @@
-## HEAD
-
-### Development Fixes
-
-  * require at least cucumber version 2.1.0 (#4514)
-
-### Bug Fixes
-
-  * Fix #4427: Make our @config hash symbol accessible. (#4428)
-  * `Jekyll.sanitized_path`: sanitizing a questionable path should handle tildes (#4492)
-  * Fix titleize so already capitalized words are not dropped (#4525)
-  * Permalinks which end in a slash should always output HTML (#4546)
+## 3.1.2 / 2016-02-19
 
 ### Minor Enhancements
 
-  * Include .rubocop.yml in Gem (#4437)
-  * LiquidRenderer#parse: parse with line numbers. (#4452)
-  * add consistency to the deprecation message (#4505)
+  * Include `.rubocop.yml` in Gem (#4437)
+  * `LiquidRenderer#parse`: parse with line numbers. (#4452)
+  * Add consistency to the no-subcommand deprecation message (#4505)
+
+### Bug Fixes
+
+  * Fix syntax highlighting in kramdown by making `@config` accessible in the Markdown converter. (#4428)
+  * `Jekyll.sanitized_path`: sanitizing a questionable path should handle tildes (#4492)
+  * Fix `titleize` so already capitalized words are not dropped (#4525)
+  * Permalinks which end in a slash should always output HTML (#4546)
+
+### Development Fixes
+
+  * Require at least cucumber version 2.1.0 (#4514)
 
 ### Site Enhancements
 
   * Add jekyll-toc plugin (#4429)
   * Docs: Quickstart - added documentation about the `--force` option (#4410)
   * Fix broken links to the Code of Conduct (#4436)
-  * upgrade notes: mention trailing slash in permalink; fixes #4440 (#4455)
+  * Upgrade notes: mention trailing slash in permalink; fixes #4440 (#4455)
   * Add hooks to the plugin categories toc (#4463)
   * [add note] Jekyll 3 requires newer version of Ruby. (#4461)
   * Fix typo in upgrading docs (#4473)
