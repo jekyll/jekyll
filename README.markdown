@@ -29,7 +29,7 @@ See: http://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011
 * [Install](http://jekyllrb.com/docs/installation/) the gem
 * Read up about its [Usage](http://jekyllrb.com/docs/usage/) and [Configuration](http://jekyllrb.com/docs/configuration/)
 * Take a gander at some existing [Sites](https://wiki.github.com/jekyll/jekyll/sites)
-* Fork and [Contribute](http://jekyllrb.com/docs/contributing/) your own modifications
+* [Fork](https://github.com/jekyll/jekyll/fork) and [Contribute](http://jekyllrb.com/docs/contributing/) your own modifications
 * Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) or [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/)
 
 ## Code of Conduct
