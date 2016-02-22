@@ -41,16 +41,7 @@ At the terminal prompt, simply run the following command:
 $ gem install bundler
 {% endhighlight %}
 
-Next, create a Gemfile by running `bundle init`. This file has
-the following format:
-
-{% highlight ruby %}
-source 'https://rubygems.org'
-
-gem 'bundler'
-{% endhighlight %}
-
-Finally, install Jekyll by running `bundle install`.
+Now you can install Jekyll simply by running `bundle install`.
 
 All of Jekyll’s gem dependencies are automatically installed by the above
 command, so you won’t have to worry about them at all. If you have problems
