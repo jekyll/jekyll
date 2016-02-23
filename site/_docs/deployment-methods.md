@@ -25,7 +25,8 @@ There are also a number of ways to easily automate the deployment of a Jekyll si
 
 ### Git post-update hook
 
-If you store your Jekyll site in [Git](http://git-scm.com/) (you are using version control, right?), it’s pretty easy to automate the
+If you store your Jekyll site in [Git](https://git-scm.com/) (you are using
+version control, right?), it’s pretty easy to automate the
 deployment process by setting up a post-update hook in your Git
 repository, [like
 this](http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/).
@@ -96,7 +97,14 @@ Another way to deploy your Jekyll site is to use [Rake](https://github.com/ruby/
 
 ### scp
 
-Once you’ve generated the `_site` directory, you can easily scp it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy). You’d obviously need to change the values to reflect your site’s details. There is even [a matching TextMate command](http://gist.github.com/214959) that will help you run this script from within Textmate.
+Once you’ve generated the `_site` directory, you can easily scp it using a
+`tasks/deploy` shell script similar to [this deploy script][]. You’d obviously
+need to change the values to reflect your site’s details. There is even [a 
+matching TextMate command][] that will help you run this script.
+
+[this deploy script here]: https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy
+
+[a matching TextMate command]: https://gist.github.com/henrik/214959
 
 ### rsync
 
@@ -109,7 +117,7 @@ process. It makes sense to restrict rsync access only to the directory which it 
 
 If it is not already installed by your host, you can do it yourself:
 
-- [Download rrsync](http://ftp.samba.org/pub/unpacked/rsync/support/rrsync)
+- [Download rrsync](https://ftp.samba.org/pub/unpacked/rsync/support/rrsync)
 - Place it in the `bin` subdirectory of your home folder  (`~/bin`)
 - Make it executable (`chmod +x`)
 
