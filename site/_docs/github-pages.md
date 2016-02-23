@@ -4,7 +4,7 @@ title: GitHub Pages
 permalink: /docs/github-pages/
 ---
 
-[GitHub Pages](http://pages.github.com) are public web pages for users,
+[GitHub Pages](https://pages.github.com) are public web pages for users,
 organizations, and repositories, that are freely hosted on GitHub's
 `github.io` domain or on a custom domain name of your choice. GitHub Pages are
 powered by Jekyll behind the scenes, so in addition to supporting regular HTML
@@ -117,7 +117,7 @@ branch]({{ site.repository }}/tree/gh-pages) of the same repository.
 <div class="note warning">
   <h5>Source Files Must be in the Root Directory</h5>
   <p>
-GitHub Pages <a href="https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting">overrides</a> the <a href="http://jekyllrb.com/docs/configuration/#global-configuration">“Site Source”</a> configuration value, so if you locate your files anywhere other than the root directory, your site may not build correctly.
+GitHub Pages <a href="https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting">overrides</a> the <a href="/docs/configuration/#global-configuration">“Site Source”</a> configuration value, so if you locate your files anywhere other than the root directory, your site may not build correctly.
   </p>
 </div>
 
