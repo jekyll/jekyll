@@ -27,10 +27,8 @@ following in mind:
   change is to review, the more likely it will be merged.
 * When submitting a pull request, please make judicious use of the pull request
   body. A description of what changes were made, the motivations behind the
-  changes and [any tasks completed or left to complete][]
+  changes, and [any tasks completed or left to complete](http://git.io/gfm-tasks)
   will also speed up review time.
-
-[any tasks completed or left to complete]: https://git.io/gfm-tasks
 
 <div class="note warning">
   <h5>Contributions will not be accepted without tests</h5>
