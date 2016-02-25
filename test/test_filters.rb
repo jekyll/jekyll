@@ -306,6 +306,16 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
       end
 
+      should "filter array properties appropriately" do
+        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>["x"]}, "c"=>{"tags"=>["y","z"]}}
+        assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "filter array properties alongside string properties" do
+        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>"x"}, "c"=>{"tags"=>["y","z"]}}
+        assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
       should "stringify during comparison for compatibility with liquid parsing" do
         hash = {
           "The Words" => {"rating" => 1.2, "featured" => false},
