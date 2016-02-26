@@ -56,7 +56,7 @@ Workflow
 
 Here's the most direct way to get your work merged into the project:
 
-* Fork the project.
+* [Fork](https://github.com/jekyll/jekyll/fork) the project.
 * Clone down your fork ( `git clone git@github.com:[username]/jekyll.git` ).
 * Create a topic branch to contain your change ( `git checkout -b my_awesome_feature` ).
 * Hack away, add tests. Not necessarily in that order.
