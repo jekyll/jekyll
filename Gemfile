@@ -12,7 +12,7 @@ group :development do
   end
 end
 
-#
+# Gems for Jekyll Test
 
 group :test do
   gem "cucumber", "~> 2.1"
@@ -24,7 +24,7 @@ group :test do
   gem "rspec"
 end
 
-#
+# Gems for Jekyll Test Lagacy
 
 group :test_legacy do
   if RUBY_PLATFORM =~ /cygwin/ || RUBY_VERSION.start_with?("2.2")
@@ -39,7 +39,7 @@ group :test_legacy do
   gem "shoulda"
 end
 
-#
+# Gems for benchmark
 
 group :benchmark do
   if ENV["BENCHMARK"]
@@ -50,7 +50,7 @@ group :benchmark do
   end
 end
 
-#
+# Gems for Jekyll Optional Dependencies
 
 group :jekyll_optional_dependencies do
   gem "toml", "~> 0.1.0"
@@ -74,7 +74,7 @@ group :jekyll_optional_dependencies do
   end
 end
 
-#
+# Gems for Jekyll site
 
 group :site do
   if ENV["PROOF"]
