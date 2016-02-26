@@ -1,5 +1,9 @@
 ## HEAD
 
+### Development Fixes
+
+  * Add project maintainer profile links (#4591)
+
 ### Site Enhancements
 
   * Add jekyll-seo-tag, jekyll-avatar, and jekyll-sitemap to the site (#4553)
