@@ -5,10 +5,14 @@ title: Getting Help
 
 Need help with Jekyll? Try these resources.
 
-### [Upgrading Documentation](/docs/upgrading/)
+### [Upgrading](/docs/upgrading/)
 
 Did you recently upgrade from Jekyll 1 to 2 or from Jekyll 2 to 3?
 Known breaking changes are listed in the upgrading docs.
+
+### [Documentation](/docs/home/)
+
+Our guide to Jekyll covering installation, writing, customization, deployment, and more.
 
 ### [Google](https://www.google.com/?q=jekyll)
 
