@@ -10,7 +10,7 @@ Need help with Jekyll? Try these resources.
 Did you recently upgrade from Jekyll 1 to 2 or from Jekyll 2 to 3?
 Known breaking changes are listed in the upgrading docs.
 
-### [Google](https://www.google.de/?q=jekyll)
+### [Google](https://www.google.com/?q=jekyll)
 
 Add **jekyll** to almost any query, and you'll find just what you need.
 
