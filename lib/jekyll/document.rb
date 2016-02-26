@@ -68,7 +68,10 @@ module Jekyll
     end
 
     def date
-      data['date'] ||= site.time
+      return data['date'] if data['date']
+
+      result       = (self.draft? && File.mtime(path)) || site.time || Time.now
+      data['date'] = result
     end
 
     # Returns whether the document is a draft. This is only the case if
