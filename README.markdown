@@ -41,7 +41,7 @@ conduct.
 Please adhere to this code of conduct in any interactions you have in the
 Jekyll community. It is strictly enforced on all official Jekyll
 repositories, websites, and resources. If you encounter someone violating
-these terms, please let a maintainer (@parkr, @envygeeks, or @mattr-) know
+these terms, please let a maintainer ([@parkr](https://github.com/parkr), [@envygeeks](https://github.com/envygeeks), or [@mattr-](https://github.com/mattr-)) know
 and we will address it as soon as possible.
 
 ## Diving In
