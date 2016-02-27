@@ -80,6 +80,7 @@ group :site do
   if ENV["PROOF"]
     gem "html-proofer", "~> 2.0"
   end
+
   gem "jemoji"
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag", "~> 1.1"
