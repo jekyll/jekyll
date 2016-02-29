@@ -9,7 +9,6 @@ rvm:
   - &ruby1 2.3.0
   - &ruby2 2.2.4
   - &ruby3 2.1.8
-  - &ruby4 2.0.0-p648
   - &jruby jruby-9.0.4.0
   - &rhead ruby-head
 
