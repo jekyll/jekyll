@@ -1,5 +1,9 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Allow collections to have documents that have no file extension (#4545)
+
 ### Bug Fixes
 
   * Site template: Escape title and description where it is used in HTML (#4606)
