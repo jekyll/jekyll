@@ -1,5 +1,9 @@
 ## HEAD
 
+### Bug Fixes
+
+  * Site template: Escape title and description where it is used in HTML (#4606)
+
 ### Development Fixes
 
   * Add project maintainer profile links (#4591)
