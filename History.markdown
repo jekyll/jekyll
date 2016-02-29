@@ -2,6 +2,7 @@
 
 ### Minor Enhancements
 
+  * Stop testing with Ruby 2.0.x, which is EOL'd. (#4381)
   * Allow collections to have documents that have no file extension (#4545)
 
 ### Bug Fixes
