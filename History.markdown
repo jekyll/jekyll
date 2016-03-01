@@ -16,6 +16,7 @@
 ### Development Fixes
 
   * Add project maintainer profile links (#4591)
+  * Fix state leakage in Kramdown test (#4618)
 
 ### Site Enhancements
 
