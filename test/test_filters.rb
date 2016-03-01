@@ -289,6 +289,14 @@ class TestFilters < JekyllUnitTest
           end
         end
       end
+
+      should "include the size of each grouping" do
+        @filter.site.process
+        grouping = @filter.group_by(@filter.site.pages, "layout")
+        grouping.each do |g|
+          assert_equal g["items"].size, g["size"], "The size property for '#{g["name"]}' doesn't match the size of the Array."
+        end
+      end
     end
 
     context "where filter" do
