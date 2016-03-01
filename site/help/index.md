@@ -14,6 +14,10 @@ Known breaking changes are listed in the upgrading docs.
 
 Our guide to Jekyll covering installation, writing, customization, deployment, and more.
 
+### [View source](https://github.com/jekyll/jekyll/wiki/sites)
+
+Learn from the source of others' Jekyll-powered sites.
+
 ### [Google](https://www.google.com/?q=jekyll)
 
 Add **jekyll** to almost any query, and you'll find just what you need.
