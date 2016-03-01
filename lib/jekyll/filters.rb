@@ -315,7 +315,7 @@ module Jekyll
     def time(input)
       case input
       when Time
-        input
+        input.clone
       when Date
         input.to_time
       when String
