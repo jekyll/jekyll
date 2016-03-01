@@ -8,6 +8,7 @@
 ### Bug Fixes
 
   * Site template: Escape title and description where it is used in HTML (#4606)
+  * Document#date: drafts which have no date should use source file mtime (#4611)
 
 ### Development Fixes
 
