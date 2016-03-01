@@ -37,6 +37,14 @@ module Jekyll
       read_yaml(base, name)
     end
 
+    # The path to the layout, relative to the site source.
+    #
+    # Returns a String path which represents the relative path
+    #   from the site source to this layout
+    def relative_path
+      @relative_path ||= Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
+    end
+
     # Extract information from the layout filename.
     #
     # name - The String filename of the layout file.
