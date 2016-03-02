@@ -68,7 +68,11 @@ module Jekyll
     end
 
     def date
-      data['date'] ||= site.time
+      data['date'] ||= (draft? ? source_file_mtime : site.time)
+    end
+
+    def source_file_mtime
+      @source_file_mtime ||= File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if

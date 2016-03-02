@@ -12,7 +12,7 @@ class TestDocument < JekyllUnitTest
         "collections" => ["methods"]
       })
       @site.process
-      @document = @site.collections["methods"].docs.first
+      @document = @site.collections["methods"].docs.detect {|d| d.relative_path == "_methods/configuration.md" }
     end
 
     should "exist" do
@@ -49,7 +49,7 @@ class TestDocument < JekyllUnitTest
       setup do
         @site = fixture_site({"collections" => ["methods"]})
         @site.process
-        @document = @site.collections["methods"].docs.last
+        @document = @site.collections["methods"].docs.detect {|d| d.relative_path == "_methods/yaml_with_dots.md" }
       end
 
       should "know its data" do

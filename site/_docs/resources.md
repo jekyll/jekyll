@@ -14,7 +14,7 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 - [Blogging with Git, Emacs and Jekyll](http://metajack.im/2009/01/23/blogging-with-git-emacs-and-jekyll/)
 - [Tips for working with GitHub Pages Integration](https://gist.github.com/jedschneider/2890453)
 
-### Integrations 
+### Integrations
 
 - [Use FormKeep as a backend for forms (contact forms, hiring forms, etc.)](https://formkeep.com/guides/how-to-make-a-contact-form-in-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
 - [Use Simple Form to add a simple contact form](http://getsimpleform.com/)
@@ -24,7 +24,7 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 
 ### Other commentary
 
-- [‘My Jekyll Fork’, by Mike West](http://mikewest.org/2009/11/my-jekyll-fork)
+- [‘My Jekyll Fork’, by Mike West](https://mikewest.org/2009/11/my-jekyll-fork)
 
   > “Jekyll is a well-architected throwback to a time before WordPress, when men were men, and HTML was static. I like the ideas it espouses, and have made a few improvements to it’s core. Here, I’ll point out some highlights of my fork in the hopes that they see usage beyond this site.”
 
