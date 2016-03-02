@@ -12,6 +12,7 @@
   * Document#date: drafts which have no date should use source file mtime (#4611)
   * Filters#time: clone an input Time so as to be non-destructive (#4590)
   * Doctor: fix issue where `--config` wasn't a recognized flag (#4598)
+  * Ensures related_posts are only set for a post (#4620)
 
 ### Development Fixes
 
