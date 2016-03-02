@@ -6,6 +6,7 @@
 [![Code Climate](https://codeclimate.com/github/jekyll/jekyll/badges/gpa.svg)][codeclimate]
 [![Dependency Status](https://gemnasium.com/jekyll/jekyll.svg)][gemnasium]
 [![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)][hakiri]
+[![codebeat](https://codebeat.co/badges/b6b1292a-fbdc-4054-ba17-18b41df6d5ae)](https://codebeat.co/projects/github-com-jekyll-jekyll)
 
 [ruby-gems]: https://rubygems.org/gems/jekyll
 [gemnasium]: https://gemnasium.com/jekyll/jekyll
