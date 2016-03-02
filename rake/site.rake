@@ -117,7 +117,7 @@ namespace :site do
 
   desc "Copy the contributing file"
   task :contributing do
-    siteify_file('CONTRIBUTING.markdown')
+    siteify_file('.github/CONTRIBUTING.markdown')
   end
 
   desc "Write the site latest_version.txt file"
