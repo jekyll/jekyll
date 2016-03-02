@@ -14,6 +14,10 @@ class TestTags < JekyllUnitTest
     if override['read_posts']
       site.posts.docs.concat(PostReader.new(site).read_posts(''))
     end
+    if override['read_collections']
+      # puts "reading collections"
+      CollectionReader.new(site).read
+    end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
@@ -472,6 +476,73 @@ CONTENT
 
       assert_raises ArgumentError do
         create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+    end
+  end
+
+  context "simple page with collection linking" do
+    setup do
+      content = <<CONTENT
+---
+title: Collection linking
+---
+
+{% collection_url methods yaml_with_dots %}
+CONTENT
+      create_post(content, {'source' => source_dir, 'destination' => dest_dir, 'collections' => { 'methods' => {}}, 'read_collections' => true})
+    end
+
+    should "not cause an error" do
+      refute_match /markdown\-html\-error/, @result
+    end
+
+    should "have the url to the \"yaml_with_dots\" item" do
+      assert_match %r{/methods/yaml_with_dots}, @result
+    end
+  end
+
+  context "simple page with nested collection linking" do
+    setup do
+      content = <<CONTENT
+---
+title: Collection linking
+---
+
+- 1 {% collection_url methods sanitized_path %}
+- 2 {% collection_url methods /sanitized_path %}
+- 3 {% collection_url methods site/generate %}
+- 4 {% collection_url methods /site/generate %}
+CONTENT
+      create_post(content, {'source' => source_dir, 'destination' => dest_dir, 'collections' => { 'methods' => {}}, 'read_collections' => true})
+    end
+
+    should "not cause an error" do
+      refute_match /markdown\-html\-error/, @result
+    end
+
+    should "have the url to the \"sanitized_path\" item" do
+      assert_match %r{1\s/methods/sanitized_path}, @result
+      assert_match %r{2\s/methods/sanitized_path}, @result
+    end
+
+    should "have the url to the \"site/generate\" item" do
+      assert_match %r{3\s/methods/site/generate}, @result
+      assert_match %r{4\s/methods/site/generate}, @result
+    end
+  end
+
+  context "simple page with invalid collection linking" do
+    should "cause an error" do
+      content = <<CONTENT
+---
+title: Invalid collection name linking
+---
+
+{% collection_url methods non-existent-collection-item %}
+CONTENT
+
+      assert_raises ArgumentError do
+        create_post(content, {'source' => source_dir, 'destination' => dest_dir, 'collections' => { 'methods' => {}}, 'read_collections' => true})
       end
     end
   end
