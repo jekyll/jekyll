@@ -104,14 +104,32 @@ eos
 
       def render(context)
         site = context.registers[:site]
-        @includes_dir = tag_includes_dir(context)
-        dir = resolved_includes_dir(context)
+        @includes_dir = Array(tag_includes_dir(context))
+
+        includes_dir = @includes_dir.map do |dir|
+          resolved_includes_dir(context, dir)
+        end
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
+        dir = includes_dir.reverse[0..-2].detect do |dir|
+          begin
+            path = File.join(dir, file)
+            validate_path(path, dir, site.safe, site.source)
+            true
+          rescue IOError => e
+            false
+          end
+        end
+ 
+        unless dir
+          dir = includes_dir[0]
+          path = File.join(dir, file)
+          validate_path(path, dir, site.safe, site.source)
+        end
+
         path = File.join(dir, file)
-        validate_path(path, dir, site.safe)
 
         # Add include to dependency tree
         if context.registers[:page] && context.registers[:page].key?("path")
@@ -129,7 +147,7 @@ eos
             partial.render!(context)
           end
         rescue => e
-          raise IncludeTagError.new e.message, File.join(@includes_dir, @file)
+          raise IncludeTagError.new e.message, path
         end
       end
 
@@ -144,20 +162,22 @@ eos
         end
       end
 
-      def resolved_includes_dir(context)
-        context.registers[:site].in_source_dir(@includes_dir)
+      def resolved_includes_dir(context, dir)
+        context.registers[:site].in_source_dir(dir)
       end
 
-      def validate_path(path, dir, safe)
+      def validate_path(path, dir, safe, source)
         if safe && !realpath_prefixed_with?(path, dir)
           raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
         elsif !File.exist?(path)
-          raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
+          raise IOError.new "Included file '#{path_relative_to_source(path, source)}' not found"
         end
       end
 
-      def path_relative_to_source(dir, path)
-        File.join(@includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
+      def path_relative_to_source(path, source)
+        path = Pathname.new(path).relative_path_from(Pathname.new(source)).to_s
+        path = "./#{path}" unless path.include? "/"
+        path
       end
 
       def realpath_prefixed_with?(path, dir)
@@ -175,12 +195,12 @@ eos
         '.'.freeze
       end
 
-      def page_path(context)
-        context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
+      def page_path(context, dir)
+        context.registers[:page].nil? ? dir : File.dirname(context.registers[:page]["path"])
       end
 
-      def resolved_includes_dir(context)
-        context.registers[:site].in_source_dir(page_path(context))
+      def resolved_includes_dir(context, dir)
+        context.registers[:site].in_source_dir(page_path(context, dir))
       end
     end
   end

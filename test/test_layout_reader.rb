@@ -37,7 +37,7 @@ class TestLayoutReader < JekyllUnitTest
 
       should "read layouts" do
         layouts = LayoutReader.new(@site).read
-        assert_equal ["default2"], layouts.keys
+        assert_equal ["override_test", "default2"].sort, layouts.keys.sort
       end
     end
 
@@ -49,7 +49,8 @@ class TestLayoutReader < JekyllUnitTest
 
       should "read layouts" do
         layouts = LayoutReader.new(@site).read
-        assert_equal ["default2", "default3"].sort, layouts.keys.sort
+        assert_equal ["override_test", "default2", "default3"].sort, layouts.keys.sort
+        assert_match /^_layouts3\//, layouts["override_test"].relative_path
       end
     end
   end
