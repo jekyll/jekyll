@@ -105,7 +105,7 @@ end
 def content_for(file)
   contents = File.read(file)
   case file
-  when "HISTORY.markdown"
+  when "History.markdown"
     converted_history(contents)
   else
     contents.gsub!(/\A# .*\n\n?/, "")
