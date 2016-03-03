@@ -1,5 +1,4 @@
-Contribute
-==========
+# Contributing
 
 So you've got an awesome idea to throw into Jekyll. Great! Please keep the
 following in mind:
