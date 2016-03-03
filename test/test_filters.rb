@@ -316,6 +316,11 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(hash, "tags", "x").length
       end
 
+      should "not match substrings" do
+        hash = {"a"=>{"category"=>"bear"}, "b"=>{"category"=>"wolf"}, "c"=>{"category"=>["bear","lion"]}}
+        assert_equal 0, @filter.where(hash, "category", "ear").length
+      end
+
       should "stringify during comparison for compatibility with liquid parsing" do
         hash = {
           "The Words" => {"rating" => 1.2, "featured" => false},
