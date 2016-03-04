@@ -8,6 +8,7 @@
 
 ### Bug Fixes
 
+  * Site Template: Added a default lang attribute (#4633)
   * Site template: Escape title and description where it is used in HTML (#4606)
   * Document#date: drafts which have no date should use source file mtime (#4611)
   * Filters#time: clone an input Time so as to be non-destructive (#4590)
