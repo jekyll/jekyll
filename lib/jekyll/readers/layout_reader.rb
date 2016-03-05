@@ -25,11 +25,6 @@ module Jekyll
       within(layout_directory) do
         entries = EntryFilter.new(site).filter(Dir['**/*.*'])
       end
-      if site.theme
-        within(site.theme.layouts_path) do
-          entries.concat EntryFilter.new(site).filter(Dir['**/*.*'])
-        end
-      end
       entries
     end
 
