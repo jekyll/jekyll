@@ -27,6 +27,10 @@ module Jekyll
       path_for "layouts"
     end
 
+    def sass_path
+      path_for "sass"
+    end
+
     private
 
     def path_for(folder)
