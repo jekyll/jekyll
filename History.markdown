@@ -1,8 +1,35 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Stop testing with Ruby 2.0.x, which is EOL'd. (#4381)
+  * Allow collections to have documents that have no file extension (#4545)
+  * Add size property to group_by result (#4557)
+  * Site Template: Removed unnecessary nesting from `_base.scss` (#4637)
+
+### Bug Fixes
+
+  * Site Template: Added a default lang attribute (#4633)
+  * Site template: Escape title and description where it is used in HTML (#4606)
+  * Document#date: drafts which have no date should use source file mtime (#4611)
+  * Filters#time: clone an input Time so as to be non-destructive (#4590)
+  * Doctor: fix issue where `--config` wasn't a recognized flag (#4598)
+  * Ensures related_posts are only set for a post (#4620)
+
+### Development Fixes
+
+  * Add project maintainer profile links (#4591)
+  * Fix state leakage in Kramdown test (#4618)
+  * Unify method for copying special files from repo to site (#4601)
+
 ### Site Enhancements
 
   * Add jekyll-seo-tag, jekyll-avatar, and jekyll-sitemap to the site (#4553)
+  * Add Google search query to /docs/help/ (#4589)
+  * Upgrading, documentation (#4597)
+  * Add 'view source' entry (#4602)
+  * Add jekyll-video-embed to list of third-party plugins. (#4621)
+  * Adding Aerobatic to list of deployment options (#4630)
 
 ## 3.1.2 / 2016-02-19
 

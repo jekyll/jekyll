@@ -8,7 +8,7 @@ module Jekyll
             c.description 'Search site and print specific deprecation warnings'
             c.alias(:hyde)
 
-            c.option '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
+            c.option 'config', '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
 
             c.action do |_, options|
               Jekyll::Commands::Doctor.process(options)

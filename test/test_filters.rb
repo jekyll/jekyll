@@ -103,6 +103,13 @@ class TestFilters < JekyllUnitTest
         should "format a time according to RFC-822" do
           assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
         end
+
+        should "not modify a time in-place when using filters" do
+          t = Time.new(2004, 9, 15, 0, 2, 37, "+01:00")
+          assert_equal 3600, t.utc_offset
+          @filter.date_to_string(t)
+          assert_equal 3600, t.utc_offset
+        end
       end
 
       context "with Date object" do
@@ -287,6 +294,14 @@ class TestFilters < JekyllUnitTest
             assert g["items"].is_a?(Array), "The list of grouped items for '' is not an Array."
             assert_equal 13, g["items"].size
           end
+        end
+      end
+
+      should "include the size of each grouping" do
+        grouping = @filter.group_by(@filter.site.pages, "layout")
+        grouping.each do |g|
+          p g
+          assert_equal g["items"].size, g["size"], "The size property for '#{g["name"]}' doesn't match the size of the Array."
         end
       end
     end

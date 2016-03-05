@@ -14,6 +14,7 @@ class TestKramdown < JekyllUnitTest
           'auto_ids' => false,
           'footnote_nr' => 1,
 
+          'syntax_highlighter' => 'rouge',
           'syntax_highlighter_opts' => {
             'bold_every' => 8, 'css' => :class
           }

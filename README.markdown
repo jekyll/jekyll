@@ -1,4 +1,4 @@
-# [Jekyll](http://jekyllrb.com/)
+# [Jekyll](https://jekyllrb.com/)
 
 [![Gem Version](https://img.shields.io/gem/v/jekyll.svg)][ruby-gems]
 [![Build Status](https://travis-ci.org/jekyll/jekyll.svg?branch=master)][travis]
@@ -14,7 +14,7 @@
 [hakiri]: https://hakiri.io/github/jekyll/jekyll/master
 [travis]: https://travis-ci.org/jekyll/jekyll
 
-Jekyll is a simple, blog-aware, static site generator perfect for personal, project, or organization sites. Think of it like a file-based CMS, without all the complexity. Jekyll takes your content, renders Markdown and Liquid templates, and spits out a complete, static website ready to be served by Apache, Nginx or another web server. Jekyll is the engine behind [GitHub Pages](http://pages.github.com), which you can use to host sites right from your GitHub repositories.
+Jekyll is a simple, blog-aware, static site generator perfect for personal, project, or organization sites. Think of it like a file-based CMS, without all the complexity. Jekyll takes your content, renders Markdown and Liquid templates, and spits out a complete, static website ready to be served by Apache, Nginx or another web server. Jekyll is the engine behind [GitHub Pages](https://pages.github.com), which you can use to host sites right from your GitHub repositories.
 
 ## Philosophy
 
@@ -22,14 +22,14 @@ Jekyll does what you tell it to do — no more, no less. It doesn't try to outs
 
 ## Having trouble with OS X El Capitan?
 
-See: http://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011
+See: https://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011
 
 ## Getting Started
 
-* [Install](http://jekyllrb.com/docs/installation/) the gem
-* Read up about its [Usage](http://jekyllrb.com/docs/usage/) and [Configuration](http://jekyllrb.com/docs/configuration/)
+* [Install](https://jekyllrb.com/docs/installation/) the gem
+* Read up about its [Usage](https://jekyllrb.com/docs/usage/) and [Configuration](https://jekyllrb.com/docs/configuration/)
 * Take a gander at some existing [Sites](https://wiki.github.com/jekyll/jekyll/sites)
-* [Fork](https://github.com/jekyll/jekyll/fork) and [Contribute](http://jekyllrb.com/docs/contributing/) your own modifications
+* [Fork](https://github.com/jekyll/jekyll/fork) and [Contribute](https://jekyllrb.com/docs/contributing/) your own modifications
 * Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) or [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/)
 
 ## Code of Conduct
@@ -41,17 +41,17 @@ conduct.
 Please adhere to this code of conduct in any interactions you have in the
 Jekyll community. It is strictly enforced on all official Jekyll
 repositories, websites, and resources. If you encounter someone violating
-these terms, please let a maintainer (@parkr, @envygeeks, or @mattr-) know
+these terms, please let a maintainer ([@parkr](https://github.com/parkr), [@envygeeks](https://github.com/envygeeks), or [@mattr-](https://github.com/mattr-)) know
 and we will address it as soon as possible.
 
 ## Diving In
 
 * [Migrate](http://import.jekyllrb.com/docs/home/) from your previous system
-* Learn how the [YAML Front Matter](http://jekyllrb.com/docs/frontmatter/) works
-* Put information on your site with [Variables](http://jekyllrb.com/docs/variables/)
-* Customize the [Permalinks](http://jekyllrb.com/docs/permalinks/) your posts are generated with
-* Use the built-in [Liquid Extensions](http://jekyllrb.com/docs/templates/) to make your life easier
-* Use custom [Plugins](http://jekyllrb.com/docs/plugins/) to generate content specific to your site
+* Learn how the [YAML Front Matter](https://jekyllrb.com/docs/frontmatter/) works
+* Put information on your site with [Variables](https://jekyllrb.com/docs/variables/)
+* Customize the [Permalinks](https://jekyllrb.com/docs/permalinks/) your posts are generated with
+* Use the built-in [Liquid Extensions](https://jekyllrb.com/docs/templates/) to make your life easier
+* Use custom [Plugins](https://jekyllrb.com/docs/plugins/) to generate content specific to your site
 
 ## License
 
