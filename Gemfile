@@ -22,6 +22,7 @@ group :test do
   gem "rspec-mocks"
   gem "nokogiri"
   gem "rspec"
+  gem "test-theme", path: File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
 end
 
 #

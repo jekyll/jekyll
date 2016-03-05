@@ -4,11 +4,11 @@ module Jekyll
 
     def initialize(name)
       @name = name.downcase.strip
-      raise MissingDependencyException unless gemspec
+      raise Jekyll::Errors::MissingDependencyException unless gemspec
     end
 
     def root
-      @root ||= gemspec.gem_dir
+      @root ||= gemspec.full_gem_path
     end
 
     def version
@@ -34,7 +34,8 @@ module Jekyll
     private
 
     def path_for(folder)
-      Jekyll.sanitized_path root, "_#{folder}"
+      path = Jekyll.sanitized_path root, "_#{folder}"
+      path if Dir.exists?(path)
     end
 
     def gemspec
