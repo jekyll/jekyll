@@ -16,25 +16,26 @@ module Jekyll
     end
 
     def assets_path
-      path_for "assets"
+      path_for :assets
     end
 
     def includes_path
-      path_for "includes"
+      path_for :includes
     end
 
     def layouts_path
-      path_for "layouts"
+      path_for :layouts
     end
 
     def sass_path
-      path_for "sass"
+      path_for :sass
     end
 
     private
 
     def path_for(folder)
-      path = Jekyll.sanitized_path root, "_#{folder}"
+      folder = "_#{folder}" unless folder == :assets
+      path   = Jekyll.sanitized_path root, folder.to_s
       path if Dir.exists?(path)
     end
 
