@@ -18,7 +18,7 @@
 <meta property='og:url' content='https://jekyllrb.com/docs/contributing/' />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-03-01T20:14:55-08:00" />
+<meta property="article:published_time" content="2016-03-08T14:44:56-08:00" />
 <link rel="next" href="https://jekyllrb.com/docs/datafiles/" title="Data Files" />
 <link rel="prev" href="https://jekyllrb.com/docs/continuous-integration/" title="Continuous Integration" />
 <meta name="twitter:card" content="summary" />
@@ -35,7 +35,7 @@
 
     "headline": "Contributing",
 
-    "datePublished": "2016-03-01T20:14:55-08:00",
+    "datePublished": "2016-03-08T14:44:56-08:00",
 
     "description": "Transform your plain text into static websites and blogs",
 
@@ -2559,37 +2559,33 @@ when modifying Ruby code.</li>
 change is to review, the more likely it will be merged.</li>
   <li>When submitting a pull request, please make judicious use of the pull request
 body. A description of what changes were made, the motivations behind the
-changes, and <a href="http://git.io/gfm-tasks">any tasks completed or left to complete</a>
+changes and <a href="http://git.io/gfm-tasks">any tasks completed or left to complete</a>
 will also speed up review time.</li>
 </ul>
-
-<div class="note warning">
-  <h5>Contributions will not be accepted without tests</h5>
-  <p>
-    If you’re creating a small fix or patch to an existing feature, just
-    a simple test will do.
-  </p>
-</div>
 
 <h2 id="test-dependencies">Test Dependencies</h2>
 
 <p>To run the test suite and build the gem you’ll need to install Jekyll’s
-dependencies. Simply run this command to get all set up:</p>
+dependencies. Simply run this command to get all setup:</p>
 
-<figure class="highlight"><pre><code>$ script/bootstrap</code></pre></figure>
+<pre><code>$ script/bootstrap
+</code></pre>
 
 <p>Before you start, run the tests and make sure that they pass (to confirm your
 environment is configured properly):</p>
 
-<figure class="highlight"><pre><code>$ script/cibuild</code></pre></figure>
+<pre><code>$ script/cibuild
+</code></pre>
 
 <p>If you are only updating a file in <code>test/</code>, you can use the command:</p>
 
-<figure class="highlight"><pre><code>$ script/test test/blah_test.rb</code></pre></figure>
+<pre><code>$ script/test test/blah_test.rb
+</code></pre>
 
 <p>If you are only updating a <code>.feature</code> file, you can use the command:</p>
 
-<figure class="highlight"><pre><code>$ script/cucumber features/blah.feature</code></pre></figure>
+<pre><code>$ script/cucumber features/blah.feature
+</code></pre>
 
 <p>Both <code>script/test</code> and <code>script/cucumber</code> can be run without arguments to
 run its entire respective suite.</p>
@@ -2599,7 +2595,7 @@ run its entire respective suite.</p>
 <p>Here’s the most direct way to get your work merged into the project:</p>
 
 <ul>
-  <li>Fork the project.</li>
+  <li><a href="https://github.com/jekyll/jekyll/fork">Fork</a> the project.</li>
   <li>Clone down your fork ( <code>git clone git@github.com:[username]/jekyll.git</code> ).</li>
   <li>Create a topic branch to contain your change ( <code>git checkout -b my_awesome_feature</code> ).</li>
   <li>Hack away, add tests. Not necessarily in that order.</li>
@@ -2626,9 +2622,10 @@ requests directed at another branch will not be accepted.</p>
 <p>The <a href="https://github.com/jekyll/jekyll/wiki">Jekyll wiki</a> on GitHub
 can be freely updated without a pull request as all GitHub users have access.</p>
 
-<p>If you want to add your plugin to the <a href="/docs/plugins/#available-plugins">list of plugins</a>,
-please submit a pull request modifying the <a href="https://github.com/jekyll/jekyll/blob/master/site/_docs/plugins.md">plugins page source
-file</a> by adding a
+<p>If you want to add your plugin to the
+<a href="http://jekyllrb.com/docs/plugins/#available-plugins">list of plugins</a>,
+please submit a pull request modifying the
+<a href="site/_docs/plugins.md">plugins page source file</a> by adding a
 link to your plugin under the proper subheading depending upon its type.</p>
 
 <h2 id="gotchas">Gotchas</h2>
@@ -2644,14 +2641,8 @@ actively read the issues and will label it once they come across it.</li>
 
 <h2 id="finally">Finally…</h2>
 
-<div class="note">
-  <h5>Let us know what could be better!</h5>
-  <p>
-    Both using and hacking on Jekyll should be fun, simple, and easy, so if for
-    some reason you find it’s a pain, please <a href="https://github.com/jekyll/jekyll/issues/new">create an issue</a> on
-    GitHub describing your experience so we can make it better.
-  </p>
-</div>
+<p>Thanks! Hacking on Jekyll should be fun. If you find any of this hard to figure
+out, let us know so we can improve our process or documentation!</p>
 
           
 
