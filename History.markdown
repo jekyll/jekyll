@@ -7,6 +7,7 @@
   * Add size property to group_by result (#4557)
   * Site Template: Removed unnecessary nesting from `_base.scss` (#4637)
   * Adding a debug log statment for skipped future documents. (#4558)
+  * Site Template: Changed main `<div>` to `<main>` and added accessibility info (#4636)
 
 ### Bug Fixes
 
