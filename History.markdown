@@ -1,5 +1,3 @@
-# History
-
 ## HEAD
 
 ### Minor Enhancements

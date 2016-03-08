@@ -103,7 +103,7 @@ namespace :site do
 
   desc "Create a nicely formatted history page for the jekyll site based on the repo history."
   task :history do
-    siteify_file('History.markdown')
+    siteify_file('History.markdown', { title: "History" })
   end
 
   desc "Copy the Code of Conduct"
