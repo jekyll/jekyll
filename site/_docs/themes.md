@@ -10,17 +10,13 @@ Jekyll has an extensive theme system, which allows you to leverage community-mai
 
 1. To install a theme, first, add the theme to your site's `Gemfile`:
 
-    ```ruby
-    gem 'my-awesome-jekyll-theme'
-    ```
+        gem 'my-awesome-jekyll-theme'
 
 2. Save the changes to your `Gemfile`
 3. Run the command `bundle install` to install the theme
 4. Finally, activate the theme by adding the following to your site's `_config.yml`:
 
-    ```yml
-    theme: my-awesome-jekyll-theme
-    ```
+        theme: my-awesome-jekyll-theme
 
 You can have multiple themes listed in your site's Gemfile, but only one theme can be selected in your site's `_config.yml`.
 {: .note .info }
@@ -43,7 +39,7 @@ Refer to your selected theme's documentation and source repository for more info
 
 Jekyll themes are distributed as Ruby gems. The only required file is the [Ruby Gemspec](http://guides.rubygems.org/specification-reference/). Here's an example of a minimal Gemspec for the `my-awesome-jekyll-theme` theme, saved as `/my-awsome-jekyll-theme.gemspec`:
 
-```ruby
+{% highlight ruby %}
 Gem::Specification.new do |s|
   s.name     = 'My Awesome theme'
   s.version  = '0.1.0'
@@ -54,7 +50,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/jekyll/my-awesome-jekyll-theme'
   s.files    = `git ls-files -z`.split("\x0").grep(%r{^(assets|_sass|_includes|_layouts)/})
 end
-```
+{% endhighlight %}
 
 ### Layouts and includes
 
@@ -96,12 +92,8 @@ Themes are published via [RubyGems.org](https://rubygems.org). You'll need a Rub
 
 1. First, package your theme, by running the following command, replacing `my-awesome-jekyll-theme` with the name of your theme:
 
-    ```
-    gem build my-awesome-jekyll-theme.gemspec
-    ```
+        gem build my-awesome-jekyll-theme.gemspec
 
 2. Next, push your packaged theme up to the RubyGems service, by running the following command, again replacing `my-awesome-jekyll-theme` with the name of your theme:
 
-    ```
-    gem push my-awesome-jekyll-theme-*.gem
-    ```
+        gem push my-awesome-jekyll-theme-*.gem
