@@ -33,6 +33,7 @@
   * Add jekyll-video-embed to list of third-party plugins. (#4621)
   * Adding Aerobatic to list of deployment options (#4630)
   * Update documentation: HTMLProofer CLI command (#4641)
+  * Document that subdirectories of `_posts` are no longer categories (#4639)
 
 ## 3.1.2 / 2016-02-19
 
