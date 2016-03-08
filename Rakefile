@@ -89,7 +89,11 @@ end
 
 def siteify_file(file, front_matter = {})
   abort "You seem to have misplaced your #{file} file. I can haz?" unless File.exists?(file)
-  title = File.read(file).match(/\A# (.*)$/)[1]
+  title = begin
+            File.read(file).match(/\A# (.*)$/)[1]
+          rescue
+            File.basename(file, ".*")
+          end
   slug  = File.basename(file, ".markdown").downcase
   front_matter = front_matter.merge({
     "title"     => title,
@@ -107,7 +111,7 @@ def content_for(file)
   when "History.markdown"
     converted_history(contents)
   else
-    contents.gsub!(/\A# .*\n\n?/, "")
+    contents.gsub(/\A# .*\n\n?/, "")
   end
 end
 
