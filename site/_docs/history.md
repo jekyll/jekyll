@@ -1,5 +1,4 @@
 ---
-:title: History
 title: 
 layout: docs
 permalink: "/docs/history/"
