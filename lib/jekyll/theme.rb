@@ -1,6 +1,8 @@
 module Jekyll
   class Theme
+    extend Forwardable
     attr_reader :name
+    def_delegator :gemspec, :version, :version
 
     def initialize(name)
       @name = name.downcase.strip
@@ -8,10 +10,6 @@ module Jekyll
 
     def root
       @root ||= gemspec.full_gem_path
-    end
-
-    def version
-      gemspec.version
     end
 
     def assets_path
