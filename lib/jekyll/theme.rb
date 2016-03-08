@@ -4,7 +4,6 @@ module Jekyll
 
     def initialize(name)
       @name = name.downcase.strip
-      raise Jekyll::Errors::MissingDependencyException unless gemspec
     end
 
     def root
@@ -42,7 +41,7 @@ module Jekyll
     def gemspec
       @gemspec ||= Gem::Specification.find_by_name(name)
     rescue Gem::LoadError
-      nil
+      raise Jekyll::Errors::MissingDependencyException, "The #{name} theme could not be found."
     end
   end
 end
