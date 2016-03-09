@@ -35,6 +35,7 @@
   * Adding Aerobatic to list of deployment options (#4630)
   * Update documentation: HTMLProofer CLI command (#4641)
   * Document that subdirectories of `_posts` are no longer categories (#4639)
+  * Update continuous-integration docs with sudo: false information (#4628)
 
 ## 3.1.2 / 2016-02-19
 
