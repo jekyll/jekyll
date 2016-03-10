@@ -1,5 +1,3 @@
-# History
-
 ## HEAD
 
 ### Minor Enhancements
@@ -26,6 +24,7 @@
   * Add project maintainer profile links (#4591)
   * Fix state leakage in Kramdown test (#4618)
   * Unify method for copying special files from repo to site (#4601)
+  * Refresh the contributing file (#4596)
 
 ### Site Enhancements
 
