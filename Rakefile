@@ -92,7 +92,7 @@ def siteify_file(file, front_matter = {})
   title = begin
             File.read(file).match(/\A# (.*)$/)[1]
           rescue
-            File.basename(file, ".*")
+            File.basename(file, ".*").downcase.capitalize
           end
   slug  = File.basename(file, ".markdown").downcase
   front_matter = front_matter.merge({
