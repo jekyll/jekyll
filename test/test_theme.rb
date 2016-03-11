@@ -22,7 +22,7 @@ class TestTheme < JekyllUnitTest
 
     should "raise an error for invalid themes" do
       assert_raises Jekyll::Errors::MissingDependencyException do
-        Theme.new("foo").gemspec
+        Theme.new("foo").version
       end
     end
   end
