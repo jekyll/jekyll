@@ -6,6 +6,10 @@
   * Allow collections to have documents that have no file extension (#4545)
   * Add size property to group_by result (#4557)
   * Site Template: Removed unnecessary nesting from `_base.scss` (#4637)
+  * Adding a debug log statment for skipped future documents. (#4558)
+  * Site Template: Changed main `<div>` to `<main>` and added accessibility info (#4636)
+  * Add array support to `where` filter (#4555)
+  * 'jekyll clean': also remove .sass-cache (#4652)
 
 ### Bug Fixes
 
@@ -21,6 +25,8 @@
   * Add project maintainer profile links (#4591)
   * Fix state leakage in Kramdown test (#4618)
   * Unify method for copying special files from repo to site (#4601)
+  * Refresh the contributing file (#4596)
+  * change smartify doc from copy/paste of mardownify doc (#4653)
 
 ### Site Enhancements
 
@@ -30,6 +36,10 @@
   * Add 'view source' entry (#4602)
   * Add jekyll-video-embed to list of third-party plugins. (#4621)
   * Adding Aerobatic to list of deployment options (#4630)
+  * Update documentation: HTMLProofer CLI command (#4641)
+  * Document that subdirectories of `_posts` are no longer categories (#4639)
+  * Update continuous-integration docs with sudo: false information (#4628)
+  * Blog post on refreshed contributing file and new affinity teams (#4645)
 
 ## 3.1.2 / 2016-02-19
 
@@ -992,7 +1002,7 @@
   * Patch a couple show-stopping security vulnerabilities (#1946)
   * Sanitize paths uniformly, in a Windows-friendly way (#2065, #2109)
   * Update gem build steps to work correctly on Windows (#2118)
-  * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121).
+  * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121)
   * Remove `+` characters from Pygments lexer names when adding as a CSS class (#994)
   * Remove some code that caused Ruby interpreter warnings (#2178)
   * Only strip the drive name if it begins the string (#2175)
@@ -1858,7 +1868,7 @@
 
   * Bug Fixes
   * Fix pagination % 0 bug (#78)
-  * Ensure all posts are processed first (#71) ## NOTE
+  * Ensure all posts are processed first (#71)
   * After this point I will no longer be giving credit in the history; that is what the commit log is for.
 
 ## 0.5.4 / 2009-08-23
