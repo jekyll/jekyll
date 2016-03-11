@@ -19,21 +19,19 @@ module Jekyll
           options = configuration_from_options(options)
           destination = options['destination']
           metadata_file = File.join(options['source'], '.jekyll-metadata')
+          sass_cache = File.join(options['source'], '.sass-cache')
 
-          if File.directory? destination
-            Jekyll.logger.info "Cleaning #{destination}..."
-            FileUtils.rm_rf(destination)
-            Jekyll.logger.info "", "done."
-          else
-            Jekyll.logger.info "Nothing to do for #{destination}."
-          end
+          remove(destination, checker_func: :directory?)
+          remove(metadata_file, checker_func: :file?)
+          remove(sass_cache, checker_func: :directory?)
+        end
 
-          if File.file? metadata_file
-            Jekyll.logger.info "Removing #{metadata_file}..."
-            FileUtils.rm_rf(metadata_file)
-            Jekyll.logger.info "", "done."
+        def remove(filename, checker_func: :file?)
+          if File.public_send(checker_func, filename)
+            Jekyll.logger.info "Cleaner:", "Removing #{filename}..."
+            FileUtils.rm_rf(filename)
           else
-            Jekyll.logger.info "Nothing to do for #{metadata_file}."
+            Jekyll.logger.info "Cleaner:", "Nothing to do for #{filename}."
           end
         end
       end
