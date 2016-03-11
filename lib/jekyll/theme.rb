@@ -27,8 +27,7 @@ module Jekyll
     private
 
     def path_for(folder)
-      folder = "_#{folder}" unless folder == :assets
-      path   = Jekyll.sanitized_path root, folder.to_s
+      path = Jekyll.sanitized_path root, "_#{folder}"
       path if Dir.exists?(path)
     end
 
