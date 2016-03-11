@@ -40,6 +40,7 @@
   * Document that subdirectories of `_posts` are no longer categories (#4639)
   * Update continuous-integration docs with sudo: false information (#4628)
   * Blog post on refreshed contributing file and new affinity teams (#4645)
+  * Fixes typo on collections (#4647)
 
 ## 3.1.2 / 2016-02-19
 
