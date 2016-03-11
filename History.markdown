@@ -9,6 +9,7 @@
   * Adding a debug log statment for skipped future documents. (#4558)
   * Site Template: Changed main `<div>` to `<main>` and added accessibility info (#4636)
   * Add array support to `where` filter (#4555)
+  * 'jekyll clean': also remove .sass-cache (#4652)
 
 ### Bug Fixes
 
