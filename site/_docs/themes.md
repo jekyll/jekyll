@@ -4,7 +4,7 @@ title: Themes
 permalink: /docs/themes/
 ---
 
-Jekyll has an extensive theme system, which allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes package layouts, includes, stylesheets, and static assets in a way that can be overridden by your site's content.
+Jekyll has an extensive theme system, which allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes package layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
 ## Installing a theme
 
@@ -23,14 +23,13 @@ You can have multiple themes listed in your site's Gemfile, but only one theme c
 
 ## Overriding theme defaults
 
-Jekyll themes set default layouts, includes, stylesheets and static assets, that can be overridden by your site's content. For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` folder (e.g., `_layouts/page.html`).
+Jekyll themes set default layouts, includes, and stylesheets, that can be overridden by your site's content. For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` folder (e.g., `_layouts/page.html`).
 
 Jekyll will look first to your site's content, before looking to the theme's defaults, for any requested file in the following folders:
 
 * `/_layouts`
 * `/_includes`
 * `/_sass`
-* `/assets/`
 
 Refer to your selected theme's documentation and source repository for more information on what files you can override.
 {: .note .info}
@@ -48,7 +47,7 @@ Gem::Specification.new do |s|
   s.author   = 'Dr. Jekyll'
   s.email    = 'doc@jekyllrb.com'
   s.homepage = 'https://github.com/jekyll/my-awesome-jekyll-theme'
-  s.files    = `git ls-files -z`.split("\x0").grep(%r{^(assets|_sass|_includes|_layouts)/})
+  s.files    = `git ls-files -z`.split("\x0").grep(%r{^_(sass|includes|layouts)/})
 end
 {% endhighlight %}
 
@@ -61,15 +60,6 @@ For example, if your theme has a `/_layouts/page.html` file, and a page has `lay
 ### Stylesheets
 
 Your theme's stylesheets should be placed in your theme's `/_sass` folder, again, just as you would when authoring a Jekyll site. Your theme's styles can be included in the user's stylesheet using the `@import` directive.
-
-You may also need to output the rendered styles, by adding an `/assets/style.scss` file, which imports the necessary stylesheets, by following the instructions in the [static assets](#static-assets) section below.
-
-Do not place your theme's styles in the `/assets/style.scss` file. Storing styles in the `/_sass` folder allows users to use SaSS's `@import` directive, to combine their custom styles, with the theme's in a single file.
-{: .info .note }
-
-### Static assets
-
-You may also bundle static assets within your theme (e.g., javascripts, images, and fonts). Place any files you'd like in your theme's `/assets` folder, which will be included in the published site. It's common to group files into folders, such as `/assets/js`, `/assets/img`, and `/assets/fonts`.
 
 ### Documenting your theme
 

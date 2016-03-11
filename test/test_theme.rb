@@ -28,20 +28,16 @@ class TestTheme < JekyllUnitTest
   end
 
   context "path generation" do
-    [:assets, :layouts, :includes, :sass].each do |folder|
+    [:layouts, :includes, :sass].each do |folder|
       should "know the #{folder} path" do
-        if folder == :assets
-          expected = File.expand_path(folder.to_s, @expected_root)
-        else
-          expected = File.expand_path("_#{folder}", @expected_root)
-        end
+        expected = File.expand_path("_#{folder}", @expected_root)
         assert_equal expected, @theme.public_send("#{folder}_path")
       end
     end
 
     should "generate folder paths" do
-      expected = File.expand_path("./assets", @expected_root)
-      assert_equal expected, @theme.send(:path_for, :assets)
+      expected = File.expand_path("./_sass", @expected_root)
+      assert_equal expected, @theme.send(:path_for, :sass)
     end
 
     should "not allow paths outside of the theme root" do

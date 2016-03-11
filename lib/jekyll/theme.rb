@@ -12,10 +12,6 @@ module Jekyll
       @root ||= gemspec.full_gem_path
     end
 
-    def assets_path
-      path_for :assets
-    end
-
     def includes_path
       path_for :includes
     end
