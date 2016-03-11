@@ -3,10 +3,31 @@
 <generator uri="http://jekyllrb.com" version="3.1.2">Jekyll</generator>
 <link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-03-10T09:00:51-08:00</updated>
+<updated>2016-03-11T10:26:33-08:00</updated>
 <id>https://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Making it easier to contribute to Jekyll</title>
+<link href="https://jekyllrb.com/news/2016/03/10/making-it-easier-to-contribute-to-jekyll/" rel="alternate" type="text/html" title="Making it easier to contribute to Jekyll" />
+<published>2016-03-10T00:00:00-08:00</published>
+<updated>2016-03-10T00:00:00-08:00</updated>
+<id>https://jekyllrb.com/news/2016/03/10/making-it-easier-to-contribute-to-jekyll</id>
+<content type="html" xml:base="https://jekyllrb.com/news/2016/03/10/making-it-easier-to-contribute-to-jekyll/">&lt;p&gt;Jekyll is an open source project, built one contribution at a time by community members just like you. These community contributions can come in many forms beyond just writing code, from reporting an issue or suggesting a new feature to improving documentation or providing feedback on proposed changes.&lt;/p&gt;
+
+&lt;p&gt;If you’ve been looking to get involved with the Jekyll community, but didn’t know, we’ve recently made it easier to contribute to Jekyll in two ways:&lt;/p&gt;
+
+&lt;p&gt;First, we’ve completely rewritten &lt;a href=&quot;https://jekyllrb.com/docs/contributing/&quot;&gt;the project’s contributing guidelines&lt;/a&gt;, outlining &lt;a href=&quot;https://jekyllrb.com/docs/contributing/#ways-to-contribute&quot;&gt;the various ways you can contribute&lt;/a&gt;, and including better instructions for &lt;a href=&quot;https://jekyllrb.com/docs/contributing/#submitting-a-pull-request-via-githubcom&quot;&gt;submitting proposed changes via GitHub.com&lt;/a&gt; or for &lt;a href=&quot;https://jekyllrb.com/docs/contributing/#code-contributions&quot;&gt;submitting your first code improvement&lt;/a&gt;. And if you have any feedback, we’d love to hear it! Simply click the “improve this page” button in the top right corner of the contributing documentation.&lt;/p&gt;
+
+&lt;p&gt;Second, this week, we created six community interest groups, we’re calling &lt;a href=&quot;https://teams.jekyllrb.com&quot;&gt;Jekyll affinity teams&lt;/a&gt;. If you’re interested in a particular aspect of the project (or just want to learn more), you can join any one of these teams (or two, or three), to participate in discussions about potential bugs and proposed improvements. And the best part is there’s no commitment. If you just want to listen, or if at any point you want to leave (or switch teams), that’s totally fine. We won’t say a thing. To learn more about the various affinity teams, or to join one (please do!), just head on over to &lt;a href=&quot;https://teams.jekyllrb.com/&quot;&gt;teams.jekyllrb.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We hope these changes will make it easier for you to make your first (or second, or third) contribution to Jekyll today. Thanks for helping to make Jekyll awesome!&lt;/p&gt;
+</content>
+<author>
+<name>benbalter</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.1.2 Released!</title>
 <link href="https://jekyllrb.com/news/2016/02/19/jekyll-3-1-2-released/" rel="alternate" type="text/html" title="Jekyll 3.1.2 Released!" />
@@ -312,30 +333,6 @@ can reproduce.&lt;/p&gt;
 We’re always looking to make Jekyll easier to use!&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll Meet &amp;amp; Greet at GitHub HQ</title>
-<link href="https://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet/" rel="alternate" type="text/html" title="Jekyll Meet &amp; Greet at GitHub HQ" />
-<published>2015-01-20T19:23:12-08:00</published>
-<updated>2015-01-20T19:23:12-08:00</updated>
-<id>https://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet</id>
-<content type="html" xml:base="https://jekyllrb.com/news/2015/01/20/jekyll-meet-and-greet/">&lt;p&gt;Hey! Our friends at GitHub have agreed to host a Jekyll meet &amp;amp; greet on
-&lt;strong&gt;February 5, 2015 at 7pm&lt;/strong&gt;. The event will be hosted at
-&lt;a href=&quot;https://goo.gl/maps/Bmy7i&quot;&gt;GitHub’s Headquarters&lt;/a&gt;
-here in San Francisco, CA. Pizza &amp;amp; beer will be available for those interested,
-and there will be much time to sit and chat about all things Jekyll. This would
-be an especially good time to get help with bugs you’ve encountered or to talk
-over a potential feature with the core team in attendance.&lt;/p&gt;
-
-&lt;p&gt;A special thanks to &lt;a href=&quot;https://github.com/gjtorikian&quot;&gt;@gjtorikian&lt;/a&gt; for making this
-all possible! You rock.&lt;/p&gt;
-
-&lt;p&gt;We look forward to meeting all you fine folks. Cheers!&lt;/p&gt;
 </content>
 <author>
 <name>parkr</name>
