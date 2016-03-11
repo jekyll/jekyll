@@ -26,6 +26,7 @@
   * Fix state leakage in Kramdown test (#4618)
   * Unify method for copying special files from repo to site (#4601)
   * Refresh the contributing file (#4596)
+  * change smartify doc from copy/paste of mardownify doc (#4653)
 
 ### Site Enhancements
 
