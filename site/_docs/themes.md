@@ -40,12 +40,12 @@ Jekyll themes are distributed as Ruby gems. The only required file is the [Ruby 
 
 {% highlight ruby %}
 Gem::Specification.new do |s|
-  s.name     = 'My Awesome theme'
+  s.name     = '<THEME TITLE>'
   s.version  = '0.1.0'
   s.license  = 'MIT'
-  s.summary  = 'This is an awesome Jekyll theme!'
-  s.author   = 'Dr. Jekyll'
-  s.email    = 'doc@jekyllrb.com'
+  s.summary  = '<THEME DESCRIPTION>'
+  s.author   = '<YOUR NAME>'
+  s.email    = '<YOUR EMAIL>'
   s.homepage = 'https://github.com/jekyll/my-awesome-jekyll-theme'
   s.files    = `git ls-files -z`.split("\x0").grep(%r{^_(sass|includes|layouts)/})
 end
