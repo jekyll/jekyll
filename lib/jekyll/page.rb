@@ -66,6 +66,11 @@ module Jekyll
       false
     end
 
+    # Always render pages with Liquid (compatibility)
+    def render_with_liquid?
+      true
+    end
+
     # Alias methods to maintain compatibility
     alias_method :name, :basename
     alias_method :basename, :basename_without_ext
