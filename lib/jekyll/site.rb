@@ -201,7 +201,7 @@ module Jekyll
     end
 
     def pages
-      collections['pages'] || Collection.new(self, 'pages')
+      collections['pages'] ||= Collection.new(self, 'pages')
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
