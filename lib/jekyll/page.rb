@@ -71,6 +71,20 @@ module Jekyll
       true
     end
 
+    def name=(name)
+      process(name)
+    end
+
+    def process(name)
+      @basename = name
+      @basename_without_ext = File.basename(name, '.*')
+      @extname = File.extname(name)
+    end
+
+    def data=(data)
+      @data = data
+    end
+
     # Alias methods to maintain compatibility
     alias_method :name, :basename
     alias_method :basename, :basename_without_ext
