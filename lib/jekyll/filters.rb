@@ -15,11 +15,11 @@ module Jekyll
       converter.convert(input)
     end
 
-    # Convert a Markdown string into HTML output.
+    # Convert quotes into smart quotes.
     #
-    # input - The Markdown String to convert.
+    # input - The String to convert.
     #
-    # Returns the HTML formatted String.
+    # Returns the smart-quotified String.
     def smartify(input)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
@@ -205,7 +205,7 @@ module Jekyll
         input.group_by do |item|
           item_property(item, property).to_s
         end.inject([]) do |memo, i|
-          memo << { "name" => i.first, "items" => i.last }
+          memo << { "name" => i.first, "items" => i.last, "size" => i.last.size }
         end
       else
         input
@@ -222,7 +222,7 @@ module Jekyll
     def where(input, property, value)
       return input unless input.is_a?(Enumerable)
       input = input.values if input.is_a?(Hash)
-      input.select { |object| item_property(object, property).to_s == value.to_s }
+      input.select { |object| Array(item_property(object, property)).map(&:to_s).include?(value.to_s) }
     end
 
     # Sort an array of objects
@@ -315,7 +315,7 @@ module Jekyll
     def time(input)
       case input
       when Time
-        input
+        input.clone
       when Date
         input.to_time
       when String

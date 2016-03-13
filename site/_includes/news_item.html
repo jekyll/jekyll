@@ -14,7 +14,8 @@
       {{ post.date | date_to_string }}
     </span>
     <a href="https://github.com/{{ post.author }}" class="post-author">
-      <img src="https://github.com/{{ post.author }}.png" class="avatar" alt="{{ post.author }} avatar" width="24" height="24">
+      {% assign author = post.author %}
+      {% avatar user=author size=24 %}
       {{ post.author }}
     </a>
   </div>

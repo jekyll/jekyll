@@ -178,6 +178,7 @@ class TestSite < JekyllUnitTest
         environment.html
         exploit.md
         foo.md
+        humans.txt
         index.html
         index.html
         main.scss
@@ -463,6 +464,14 @@ class TestSite < JekyllUnitTest
     context "with liquid profiling" do
       setup do
         @site = Site.new(site_configuration('profile' => true))
+      end
+
+      # Suppress output while testing
+      setup do
+        $stdout = StringIO.new
+      end
+      teardown do
+        $stdout = STDOUT
       end
 
       should "print profile table" do

@@ -22,7 +22,7 @@ The much-anticipated Jekyll 3.0 has been released! Key changes:
 - Lots of performance improvements
 - ... and lots more!
 
-We also added a [Code of Conduct]({{ site.repository }}/blob/master/CONDUCT.md) to encourage a happier, nicer community where contributions and discussion is protected from negative behaviour.
+We also added a [Code of Conduct](/docs/conduct/) to encourage a happier, nicer community where contributions and discussion is protected from negative behaviour.
 
 A huge shout-out to the amazing Jekyll Core Team members Jordon Bedwell, Alfred Xing, and Matt Rogers for all their hard work in making Jekyll 3 the best release yet.
 

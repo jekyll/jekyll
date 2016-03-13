@@ -6,16 +6,16 @@ permalink: /docs/posts/
 
 One of Jekyll’s best aspects is that it is “blog aware”. What does this mean,
 exactly? Well, simply put, it means that blogging is baked into Jekyll’s
-functionality. If you write articles and publish them online, this means that
-you can publish and maintain a blog simply by managing a folder of text-files on
-your computer. Compared to the hassle of configuring and maintaining databases
-and web-based CMS systems, this will be a welcome change!
+functionality. If you write articles and publish them online, you can publish
+and maintain a blog simply by managing a folder of text-files on your computer.
+Compared to the hassle of configuring and maintaining databases and web-based
+CMS systems, this will be a welcome change!
 
 ## The Posts Folder
 
 As explained on the [directory structure](../structure/) page, the `_posts`
 folder is where your blog posts will live. These files are generally
-[Markdown](http://daringfireball.net/projects/markdown/) or HTML, but can
+[Markdown](https://daringfireball.net/projects/markdown/) or HTML, but can
 be other formats with the proper converter installed.
 All posts must have [YAML Front Matter](../frontmatter/), and they will be
 converted from their source format into an HTML page that is part of your
@@ -23,7 +23,7 @@ static site.
 
 ### Creating Post Files
 
-To create a new post, all you need to do is create a new file in the `_posts`
+To create a new post, all you need to do is create a file in the `_posts`
 directory. How you name files in this folder is important. Jekyll requires blog
 post files to be named according to the following format:
 
@@ -53,7 +53,7 @@ file. For example, the following are examples of valid post filenames:
 
 All blog post files must begin with [YAML Front Matter](../frontmatter/). After
 that, it's simply a matter of deciding which format you prefer. Jekyll supports
-[Markdown](http://daringfireball.net/projects/markdown/) out of the box,
+[Markdown](https://daringfireball.net/projects/markdown/) out of the box,
 and has [myriad extensions for other formats as well](/docs/plugins/#converters-1),
 including the popular [Textile](http://redcloth.org/textile) format. These
 formats each have their own way of marking up different types of content
@@ -116,8 +116,8 @@ Linking to a PDF for readers to download:
 It’s all well and good to have posts in a folder, but a blog is no use unless
 you have a list of posts somewhere. Creating an index of posts on another page
 (or in a [template](../templates/)) is easy, thanks to the [Liquid template
-language](http://wiki.shopify.com/Liquid) and its tags. Here’s a basic example
-of how to create a list of links to your blog posts:
+language](https://docs.shopify.com/themes/liquid/basics) and its tags. Here’s a
+basic example of how to create a list of links to your blog posts:
 
 {% highlight html %}
 <ul>

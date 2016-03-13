@@ -11,7 +11,7 @@ having to modify the Jekyll source itself.
 <div class="note info">
   <h5>Plugins on GitHub Pages</h5>
   <p>
-    <a href="http://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
+    <a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
     However, all Pages sites are generated using the <code>--safe</code> option
     to disable custom plugins for security reasons. Unfortunately, this means
     your plugins won’t work if you’re deploying to GitHub Pages.<br><br>
@@ -60,12 +60,13 @@ values of the gem names of the plugins you'd like to use. An example:
   </p>
 </div>
 
-In general, plugins you make will fall into one of four categories:
+In general, plugins you make will fall into one of five categories:
 
 1. [Generators](#generators)
 2. [Converters](#converters)
 3. [Commands](#commands)
 4. [Tags](#tags)
+5. [Hooks](#hooks)
 
 ## Generators
 
@@ -310,7 +311,7 @@ Commands should implement this single class method:
       </td>
       <td><p>
         This method accepts one parameter, the
-        <code><a href="http://github.com/jekyll/mercenary#readme">Mercenary::Program</a></code>
+        <code><a href="https://github.com/jekyll/mercenary#readme">Mercenary::Program</a></code>
         instance, which is the Jekyll program itself. Upon the program,
         commands may be created using the above syntax. For more details,
         visit the Mercenary repository on GitHub.com.
@@ -737,6 +738,7 @@ LESS.js files during generation.
 - [Jekyll-Umlauts by Arne Gockeln](https://github.com/webchef/jekyll-umlauts): This generator replaces all german umlauts (äöüß) case sensitive with html.
 - [Jekyll Flickr Plugin](https://github.com/lawmurray/indii-jekyll-flickr) by [Lawrence Murray](http://www.indii.org): Generates posts for photos uploaded to a Flickr photostream.
 - [Jekyll::Paginate::Category](https://github.com/midnightSuyama/jekyll-paginate-category): Pagination Generator for Jekyll Category.
+- [AMP-Jekyll by Juuso Mikkonen](https://github.com/juusaw/amp-jekyll): Generate [Accelerated Mobile Pages](https://www.ampproject.org) of Jekyll posts.
 
 #### Converters
 
@@ -775,6 +777,7 @@ LESS.js files during generation.
 - [pluralize](https://github.com/bdesham/pluralize): Easily combine a number and a word into a grammatically-correct amount like “1 minute” or “2 minute**s**”.
 - [reading_time](https://github.com/bdesham/reading_time): Count words and estimate reading time for a piece of text, ignoring HTML elements that are unlikely to contain running text.
 - [Table of Content Generator](https://github.com/dafi/jekyll-toc-generator): Generate the HTML code containing a table of content (TOC), the TOC can be customized in many way, for example you can decide which pages can be without TOC.
+- [jekyll-toc](https://github.com/toshimaru/jekyll-toc): A liquid filter plugin for Jekyll which generates a table of contents.
 - [jekyll-humanize](https://github.com/23maverick23/jekyll-humanize): This is a port of the Django app humanize which adds a "human touch" to data. Each method represents a Fluid type filter that can be used in your Jekyll site templates. Given that Jekyll produces static sites, some of the original methods do not make logical sense to port (e.g. naturaltime).
 - [Jekyll-Ordinal](https://github.com/PatrickC8t/Jekyll-Ordinal): Jekyll liquid filter to output a date ordinal such as "st", "nd", "rd", or "th".
 - [Deprecated articles keeper](https://github.com/kzykbys/JekyllPlugins) by [Kazuya Kobayashi](http://blog.kazuya.co/): A simple Jekyll filter which monitor how old an article is.
@@ -837,12 +840,12 @@ LESS.js files during generation.
 - [inline\_highlight](https://github.com/bdesham/inline_highlight): A tag for inline syntax highlighting.
 - [jekyll-mermaid](https://github.com/jasonbellamy/jekyll-mermaid): Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.
 - [twa](https://github.com/Ezmyrelda/twa): Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.
-- [jekyll-files](https://github.com/x43x61x69/jekyll-files) by [Zhi-Wei Cai](http://vox.vg/): Output relative path strings and other info regarding specific assets.
 - [Fetch remote file content](https://github.com/dimitri-koenig/jekyll-plugins) by [Dimitri König](https://www.dimitrikoenig.net/): Using `remote_file_content` tag you can fetch the content of a remote file and include it as if you would put the content right into your markdown file yourself. Very useful for including code from github repo's to always have a current repo version.
 - [jekyll-asciinema](https://github.com/mnuessler/jekyll-asciinema): A tag for embedding asciicasts recorded with [asciinema](https://asciinema.org) in your Jekyll pages.
 - [Jekyll-Youtube](https://github.com/dommmel/jekyll-youtube)  A Liquid tag that embeds Youtube videos. The default emded markup is responsive but you can also specify your own by using an include/partial.
 - [Jekyll Flickr Plugin](https://github.com/lawmurray/indii-jekyll-flickr) by [Lawrence Murray](http://www.indii.org): Embeds Flickr photosets (albums) as a gallery of thumbnails, with lightbox links to larger images.
 - [jekyll-figure](https://github.com/paulrobertlloyd/jekyll-figure): A liquid tag for Jekyll that generates `<figure>` elements.
+- [Jekyll Video Embed](https://github.com/eug/jekyll-video-embed): It provides several tags to easily embed videos (e.g. Youtube, Vimeo, UStream and Ted Talks)
 
 #### Collections
 
@@ -858,6 +861,7 @@ LESS.js files during generation.
 - [Growl Notification Generator by Tate Johnson](https://gist.github.com/490101): Send Jekyll notifications to Growl.
 - [Growl Notification Hook by Tate Johnson](https://gist.github.com/525267): Better alternative to the above, but requires his “hook” fork.
 - [Related Posts by Lawrence Woodman](https://github.com/LawrenceWoodman/related_posts-jekyll_plugin): Overrides `site.related_posts` to use categories to assess relationship.
+- [jekyll-tagging-related_posts](https://github.com/toshimaru/jekyll-tagging-related_posts): Jekyll related_posts function based on tags (works on Jekyll3).
 - [Tiered Archives by Eli Naeher](https://gist.github.com/88cda643aa7e3b0ca1e5): Create tiered template variable that allows you to group archives by year and month.
 - [Jekyll-localization](https://github.com/blackwinter/jekyll-localization): Jekyll plugin that adds localization features to the rendering engine.
 - [Jekyll-rendering](https://github.com/blackwinter/jekyll-rendering): Jekyll plugin to provide alternative rendering engines.

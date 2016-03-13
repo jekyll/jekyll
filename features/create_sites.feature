@@ -186,3 +186,20 @@ Feature: Create sites
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/2020/12/31/entry1.html" file should exist
+
+  Scenario: Basic site with layouts, posts and related posts
+    Given I have a _layouts directory
+    And I have a page layout that contains "Page {{ page.title }}: {{ content }}"
+    And I have a post layout that contains "Post {{ page.title }}: {{ content }}Related posts: {{ site.related_posts | size }}"
+    And I have an "index.html" page with layout "page" that contains "Site contains {{ site.pages.size }} pages and {{ site.posts.size }} posts; Related posts: {{ site.related_posts | size }}"
+    And I have a _posts directory
+    And I have the following posts:
+      | title  | date       | layout | content             |
+      | entry1 | 2009-03-27 | post   | content for entry1. |
+      | entry2 | 2009-04-27 | post   | content for entry2. |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Page : Site contains 1 pages and 2 posts; Related posts: 0" in "_site/index.html"
+    And I should see "Post entry1: <p>content for entry1.</p>\nRelated posts: 1" in "_site/2009/03/27/entry1.html"
+    And I should see "Post entry2: <p>content for entry2.</p>\nRelated posts: 1" in "_site/2009/04/27/entry2.html"

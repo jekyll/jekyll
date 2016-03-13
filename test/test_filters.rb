@@ -103,6 +103,13 @@ class TestFilters < JekyllUnitTest
         should "format a time according to RFC-822" do
           assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
         end
+
+        should "not modify a time in-place when using filters" do
+          t = Time.new(2004, 9, 15, 0, 2, 37, "+01:00")
+          assert_equal 3600, t.utc_offset
+          @filter.date_to_string(t)
+          assert_equal 3600, t.utc_offset
+        end
       end
 
       context "with Date object" do
@@ -285,8 +292,16 @@ class TestFilters < JekyllUnitTest
             assert_equal 2, g["items"].size
           when ""
             assert g["items"].is_a?(Array), "The list of grouped items for '' is not an Array."
-            assert_equal 12, g["items"].size
+            assert_equal 13, g["items"].size
           end
+        end
+      end
+
+      should "include the size of each grouping" do
+        grouping = @filter.group_by(@filter.site.pages, "layout")
+        grouping.each do |g|
+          p g
+          assert_equal g["items"].size, g["size"], "The size property for '#{g["name"]}' doesn't match the size of the Array."
         end
       end
     end
@@ -304,6 +319,21 @@ class TestFilters < JekyllUnitTest
 
       should "filter objects appropriately" do
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
+      end
+
+      should "filter array properties appropriately" do
+        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>["x"]}, "c"=>{"tags"=>["y","z"]}}
+        assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "filter array properties alongside string properties" do
+        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>"x"}, "c"=>{"tags"=>["y","z"]}}
+        assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "not match substrings" do
+        hash = {"a"=>{"category"=>"bear"}, "b"=>{"category"=>"wolf"}, "c"=>{"category"=>["bear","lion"]}}
+        assert_equal 0, @filter.where(hash, "category", "ear").length
       end
 
       should "stringify during comparison for compatibility with liquid parsing" do

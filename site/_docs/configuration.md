@@ -106,9 +106,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
             Set the time zone for site generation. This sets the <code>TZ</code>
             environment variable, which Ruby uses to handle time and date
             creation and manipulation. Any entry from the
-            <a href="http://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
+            <a href="https://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
             Database</a> is valid, e.g. <code>America/New_York</code>. A list of all
-            available values can be found <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">
+            available values can be found <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">
             here</a>. The default is the local time zone, as set by your operating system.
         </p>
       </td>
@@ -120,7 +120,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class="name"><strong>Encoding</strong></p>
         <p class="description">
-            Set the encoding of files by name. Only available for Ruby
+            Set the encoding of files by name (only available for Ruby
             1.9 or later).
             The default value is <code>utf-8</code> starting in 2.0.0,
             and <code>nil</code> before 2.0.0, which will yield the Ruby
@@ -489,7 +489,7 @@ With these defaults, all posts would use the `my-site` layout. Any html files th
 {% highlight yaml %}
 collections:
   - my_collection:
-    output: true
+      output: true
 
 defaults:
   -
@@ -500,7 +500,8 @@ defaults:
       layout: "default"
 {% endhighlight %}
 
-In this example the `layout` is set to `default` inside the [collection](../collections/) with the name `my_collection`.
+In this example, the `layout` is set to `default` inside the
+[collection](../collections/) with the name `my_collection`.
 
 ### Precedence
 

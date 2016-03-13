@@ -20,7 +20,7 @@ module Jekyll
 
     def titleize_slug(slug)
       slug.split("-").map! do |val|
-        val.capitalize!
+        val.capitalize
       end.join(" ")
     end
 
@@ -271,6 +271,16 @@ module Jekyll
       Dir.chdir(dir) do
         Dir.glob(pattern, flags).map { |f| File.join(dir, f) }
       end
+    end
+
+    # Returns merged option hash for File.read of self.site (if exists)
+    # and a given param
+    def merged_file_read_opts(site, opts)
+      merged = (site ? site.file_read_opts : {}).merge(opts)
+      if merged["encoding"] && !merged["encoding"].start_with?("bom|")
+        merged["encoding"].insert(0, "bom|")
+      end
+      merged
     end
 
   end

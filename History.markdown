@@ -1,18 +1,102 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Stop testing with Ruby 2.0.x, which is EOL'd. (#4381)
+  * Allow collections to have documents that have no file extension (#4545)
+  * Add size property to group_by result (#4557)
+  * Site Template: Removed unnecessary nesting from `_base.scss` (#4637)
+  * Adding a debug log statment for skipped future documents. (#4558)
+  * Site Template: Changed main `<div>` to `<main>` and added accessibility info (#4636)
+  * Add array support to `where` filter (#4555)
+  * 'jekyll clean': also remove .sass-cache (#4652)
+
 ### Bug Fixes
 
-  * Page#dir: ensure it ends in a slash (#4403)
+  * Site Template: Added a default lang attribute (#4633)
+  * Site template: Escape title and description where it is used in HTML (#4606)
+  * Document#date: drafts which have no date should use source file mtime (#4611)
+  * Filters#time: clone an input Time so as to be non-destructive (#4590)
+  * Doctor: fix issue where `--config` wasn't a recognized flag (#4598)
+  * Ensures related_posts are only set for a post (#4620)
 
 ### Development Fixes
 
-  * Renderer#output_ext: honor folders when looking for ext (#4401)
+  * Add project maintainer profile links (#4591)
+  * Fix state leakage in Kramdown test (#4618)
+  * Unify method for copying special files from repo to site (#4601)
+  * Refresh the contributing file (#4596)
+  * change smartify doc from copy/paste of mardownify doc (#4653)
+
+### Site Enhancements
+
+  * Add jekyll-seo-tag, jekyll-avatar, and jekyll-sitemap to the site (#4553)
+  * Add Google search query to /docs/help/ (#4589)
+  * Upgrading, documentation (#4597)
+  * Add 'view source' entry (#4602)
+  * Add jekyll-video-embed to list of third-party plugins. (#4621)
+  * Adding Aerobatic to list of deployment options (#4630)
+  * Update documentation: HTMLProofer CLI command (#4641)
+  * Document that subdirectories of `_posts` are no longer categories (#4639)
+  * Update continuous-integration docs with sudo: false information (#4628)
+  * Blog post on refreshed contributing file and new affinity teams (#4645)
+  * Fixes typo on collections (#4647)
+
+## 3.1.2 / 2016-02-19
+
+### Minor Enhancements
+
+  * Include `.rubocop.yml` in Gem (#4437)
+  * `LiquidRenderer#parse`: parse with line numbers. (#4452)
+  * Add consistency to the no-subcommand deprecation message (#4505)
+
+### Bug Fixes
+
+  * Fix syntax highlighting in kramdown by making `@config` accessible in the Markdown converter. (#4428)
+  * `Jekyll.sanitized_path`: sanitizing a questionable path should handle tildes (#4492)
+  * Fix `titleize` so already capitalized words are not dropped (#4525)
+  * Permalinks which end in a slash should always output HTML (#4546)
+
+### Development Fixes
+
+  * Require at least cucumber version 2.1.0 (#4514)
+
+### Site Enhancements
+
+  * Add jekyll-toc plugin (#4429)
+  * Docs: Quickstart - added documentation about the `--force` option (#4410)
+  * Fix broken links to the Code of Conduct (#4436)
+  * Upgrade notes: mention trailing slash in permalink; fixes #4440 (#4455)
+  * Add hooks to the plugin categories toc (#4463)
+  * [add note] Jekyll 3 requires newer version of Ruby. (#4461)
+  * Fix typo in upgrading docs (#4473)
+  * Add note about upgrading documentation on jekyllrb.com/help/ (#4484)
+  * Update Rake link (#4496)
+  * Update & prune the short list of example sites (#4374)
+  * Added amp-jekyll plugin to plugins docs (#4517)
+  * A few grammar fixes (#4512)
+  * Correct a couple mistakes in structure.md (#4522)
+
+## 3.1.1 / 2016-01-29
+
+### Meta
+
+  * Update the Code of Conduct to the latest version (#4402)
+
+### Bug Fixes
+
+  * `Page#dir`: ensure it ends in a slash (#4403)
+  * Add `Utils.merged_file_read_opts` to unify reading & strip the BOM (#4404)
+  * `Renderer#output_ext`: honor folders when looking for ext (#4401)
+
+### Development Fixes
+
+  * Suppress stdout in liquid profiling test (#4409)
 
 ## 3.1.0 / 2016-01-23
 
 ### Minor Enhancements
 
-  * Update the Code of Conduct to the latest version (#4402)
   * Use `Liquid::Drop`s instead of `Hash`es in `#to_liquid` (#4277)
   * Add 'sample' Liquid filter Equivalent to Array#sample functionality (#4223)
   * Cache parsed include file to save liquid parsing time. (#4120)
@@ -104,6 +188,16 @@
   * Added the Wordpress2Jekyll Wordpress plugin (#4377)
   * Add Contentful Extension to list of third-party plugins (#4390)
   * Correct Minor spelling error (#4394)
+
+## 3.0.3 / 2016-02-08
+
+### Bug Fixes
+
+  * Fix extension weirdness with folders (#4493)
+  * EntryFilter: only include 'excluded' log on excluded files (#4479)
+  * `Jekyll.sanitized_path`: escape tildes before sanitizing a questionable path (#4468)
+  * `LiquidRenderer#parse`: parse with line numbers (#4453)
+  * `Document#<=>`: protect against nil comparison in dates. (#4446)
 
 ## 3.0.2 / 2016-01-20
 
@@ -909,7 +1003,7 @@
   * Patch a couple show-stopping security vulnerabilities (#1946)
   * Sanitize paths uniformly, in a Windows-friendly way (#2065, #2109)
   * Update gem build steps to work correctly on Windows (#2118)
-  * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121).
+  * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121)
   * Remove `+` characters from Pygments lexer names when adding as a CSS class (#994)
   * Remove some code that caused Ruby interpreter warnings (#2178)
   * Only strip the drive name if it begins the string (#2175)
@@ -1775,7 +1869,7 @@
 
   * Bug Fixes
   * Fix pagination % 0 bug (#78)
-  * Ensure all posts are processed first (#71) ## NOTE
+  * Ensure all posts are processed first (#71)
   * After this point I will no longer be giving credit in the history; that is what the commit log is for.
 
 ## 0.5.4 / 2009-08-23

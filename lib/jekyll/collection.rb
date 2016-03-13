@@ -78,7 +78,7 @@ module Jekyll
     def entries
       return [] unless exists?
       @entries ||=
-        Utils.safe_glob(collection_dir, ["**", "*.*"]).map do |entry|
+        Utils.safe_glob(collection_dir, ["**", "*"]).map do |entry|
           entry["#{collection_dir}/"] = ''
           entry
         end

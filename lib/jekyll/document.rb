@@ -68,7 +68,11 @@ module Jekyll
     end
 
     def date
-      data['date'] ||= site.time
+      data['date'] ||= (draft? ? source_file_mtime : site.time)
+    end
+
+    def source_file_mtime
+      @source_file_mtime ||= File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if
@@ -217,8 +221,11 @@ module Jekyll
     def destination(base_directory)
       dest = site.in_dest_dir(base_directory)
       path = site.in_dest_dir(dest, URL.unescape_path(url))
-      path = File.join(path, "index") if url.end_with?("/")
-      path << output_ext unless path.end_with? output_ext
+      if url.end_with? "/"
+        path = File.join(path, "index.html")
+      else
+        path << output_ext unless path.end_with? output_ext
+      end
       path
     end
 
@@ -235,16 +242,6 @@ module Jekyll
       end
 
       trigger_hooks(:post_write)
-    end
-
-    # Returns merged option hash for File.read of self.site (if exists)
-    # and a given param
-    #
-    # opts - override options
-    #
-    # Return the file read options hash.
-    def merged_file_read_opts(opts)
-      site ? site.file_read_opts.merge(opts) : opts
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter
@@ -269,7 +266,7 @@ module Jekyll
           defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
           merge_data!(defaults, source: "front matter defaults") unless defaults.empty?
 
-          self.content = File.read(path, merged_file_read_opts(opts))
+          self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
           if content =~ YAML_FRONT_MATTER_REGEXP
             self.content = $POSTMATCH
             data_file = SafeYAML.load(Regexp.last_match(1))

@@ -15,7 +15,7 @@ end
 #
 
 group :test do
-  gem "cucumber"
+  gem "cucumber", "~> 2.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
   gem "codeclimate-test-reporter"
@@ -55,6 +55,7 @@ end
 group :jekyll_optional_dependencies do
   gem "toml", "~> 0.1.0"
   gem "coderay", "~> 1.1.0"
+  gem "jekyll-docs", :path => '../docs' if Dir.exist?('../docs') && ENV['JEKYLL_VERSION']
   gem "jekyll-gist", "~> 1.0"
   gem "jekyll-feed", "~> 0.1.3"
   gem "jekyll-coffeescript", "~> 1.0"
@@ -79,4 +80,9 @@ group :site do
   if ENV["PROOF"]
     gem "html-proofer", "~> 2.0"
   end
+
+  gem "jemoji"
+  gem "jekyll-sitemap"
+  gem "jekyll-seo-tag", "~> 1.1"
+  gem "jekyll-avatar"
 end

@@ -25,7 +25,8 @@ There are also a number of ways to easily automate the deployment of a Jekyll si
 
 ### Git post-update hook
 
-If you store your Jekyll site in [Git](http://git-scm.com/) (you are using version control, right?), it’s pretty easy to automate the
+If you store your Jekyll site in [Git](https://git-scm.com/) (you are using
+version control, right?), it’s pretty easy to automate the
 deployment process by setting up a post-update hook in your Git
 repository, [like
 this](http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/).
@@ -90,13 +91,20 @@ Setup steps are fully documented
 
 ### Rake
 
-Another way to deploy your Jekyll site is to use [Rake](https://github.com/jimweirich/rake), [HighLine](https://github.com/JEG2/highline), and
+Another way to deploy your Jekyll site is to use [Rake](https://github.com/ruby/rake), [HighLine](https://github.com/JEG2/highline), and
 [Net::SSH](https://github.com/net-ssh/net-ssh). A more complex example of deploying Jekyll with Rake that deals with multiple branches can be found in [Git Ready](https://github.com/gitready/gitready/blob/cdfbc4ec5321ff8d18c3ce936e9c749dbbc4f190/Rakefile).
 
 
 ### scp
 
-Once you’ve generated the `_site` directory, you can easily scp it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy). You’d obviously need to change the values to reflect your site’s details. There is even [a matching TextMate command](http://gist.github.com/214959) that will help you run this script from within Textmate.
+Once you’ve generated the `_site` directory, you can easily scp it using a
+`tasks/deploy` shell script similar to [this deploy script][]. You’d obviously
+need to change the values to reflect your site’s details. There is even [a 
+matching TextMate command][] that will help you run this script.
+
+[this deploy script here]: https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy
+
+[a matching TextMate command]: https://gist.github.com/henrik/214959
 
 ### rsync
 
@@ -109,7 +117,7 @@ process. It makes sense to restrict rsync access only to the directory which it 
 
 If it is not already installed by your host, you can do it yourself:
 
-- [Download rrsync](http://ftp.samba.org/pub/unpacked/rsync/support/rrsync)
+- [Download rrsync](https://ftp.samba.org/pub/unpacked/rsync/support/rrsync)
 - Place it in the `bin` subdirectory of your home folder  (`~/bin`)
 - Make it executable (`chmod +x`)
 
@@ -211,3 +219,9 @@ Use [Kickster](http://kickster.nielsenramon.com/) for easy (automated) deploys t
 Kickster provides a basic Jekyll project setup packed with web best practises and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
 
 Setting up Kickster is very easy, just install the gem and you are good to go. More documentation can here found [here](https://github.com/nielsenramon/kickster#kickster). If you do not want to use the gem or start a new project you can just copy paste the deployment scripts for [Travis CI](https://github.com/nielsenramon/kickster/tree/master/snippets/travis) or [Circle CI](https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci).
+
+## Aerobatic
+
+[Aerobatic](https://www.aerobatic.com) is an add-on for Bitbucket that brings GitHub Pages style functionality to Bitbucket users. It includes continuous deployment, custom domains with a wildcard SSL cert, CDN, basic auth, and staging branches all in the box.
+
+Automating the build and deployment of a Jekyll site is just as simple as GitHub Pages - push your changes to your repo (excluding the `_site` directory) and within seconds a build will be triggered and your built site deployed to our highly- available, globally distributed hosting service. The build process will even install and execute custom Ruby plugins. See our [Jekyll docs](https://www.aerobatic.com/docs/static-generators#jekyll) for more details.

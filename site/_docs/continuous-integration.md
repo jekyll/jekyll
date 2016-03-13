@@ -31,7 +31,7 @@ does ensure things are built properly.
 
 When testing Jekyll output, there is no better tool than [html-proofer][2].
 This tool checks your resulting site to ensure all links and images exist.
-Utilize it either with the convenient `htmlproof` command-line executable,
+Utilize it either with the convenient `htmlproofer` command-line executable,
 or write a Ruby script which utilizes the gem.
 
 Save the commands you want to run and succeed in a file: `./script/cibuild`
@@ -43,17 +43,17 @@ Save the commands you want to run and succeed in a file: `./script/cibuild`
 set -e # halt script on error
 
 bundle exec jekyll build
-bundle exec htmlproof ./_site
+bundle exec htmlproofer ./_site
 {% endhighlight %}
 
 Some options can be specified via command-line switches. Check out the
 `html-proofer` README for more information about these switches, or run
-`htmlproof --help` locally.
+`htmlproofer --help` locally.
 
 For example to avoid testing external sites, use this command:
 
 {% highlight bash %}
-$ bundle exec htmlproof ./_site --disable-external
+$ bundle exec htmlproofer ./_site --disable-external
 {% endhighlight %}
 
 ### The HTML Proofer Library
@@ -80,7 +80,7 @@ with Ruby and requires RubyGems to install, we use the Ruby language build
 environment. Below is a sample `.travis.yml` file, followed by
 an explanation of each line.
 
-**Note:** You will need a Gemfile as well, [Travis will automatically install](http://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems:
+**Note:** You will need a Gemfile as well, [Travis will automatically install](https://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems:
 
 {% highlight ruby %}
 source "https://rubygems.org"
@@ -112,6 +112,8 @@ branches:
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
+
+sudo: false # route your build to the container-based infrastructure for a faster build
 {% endhighlight %}
 
 Ok, now for an explanation of each line:
@@ -154,7 +156,7 @@ incantation here directly:
 
 {% highlight yaml %}
 install: gem install jekyll html-proofer
-script: jekyll build && htmlproof ./_site
+script: jekyll build && htmlproofer ./_site
 {% endhighlight %}
 
 The `script` directive can be absolutely any valid shell command.
@@ -200,6 +202,16 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
 {% highlight yaml %}
 exclude: [vendor]
+{% endhighlight %}
+
+By default you should supply the `sudo: false` command to Travis. This command 
+explicitly tells Travis to run your build on Travis's [container-based
+ infrastructure](https://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure). Running on the container-based infrastructure can often times
+speed up your build. If you have any trouble with your build, or if your build
+does need `sudo` access, modify the line to `sudo: required`.
+
+{% highlight yaml %}
+sudo: false
 {% endhighlight %}
 
 ### Troubleshooting

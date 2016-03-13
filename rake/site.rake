@@ -5,8 +5,10 @@
 #############################################################################
 
 namespace :site do
+  task :generated_pages => [:history, :version_file, :conduct, :contributing]
+
   desc "Generate and view the site locally"
-  task :preview => [:history, :version_file] do
+  task :preview => :generated_pages do
     require "launchy"
     require "jekyll"
 
@@ -31,7 +33,7 @@ namespace :site do
   end
 
   desc "Generate the site"
-  task :generate => [:history, :version_file] do
+  task :generate => :generated_pages do
     require "jekyll"
     Jekyll::Commands::Build.process({
       "source"      => File.expand_path("site"),
@@ -50,7 +52,7 @@ namespace :site do
   end
 
   desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
-  task :publish => [:history, :version_file] do
+  task :publish => :generated_pages do
     # Ensure the gh-pages dir exists so we can generate into it.
     puts "Checking for gh-pages dir..."
     unless File.exist?("./gh-pages")
@@ -101,22 +103,21 @@ namespace :site do
 
   desc "Create a nicely formatted history page for the jekyll site based on the repo history."
   task :history do
-    if File.exist?("History.markdown")
-      history_file = File.read("History.markdown")
-      front_matter = {
-        "layout" => "docs",
-        "title" => "History",
-        "permalink" => "/docs/history/"
-      }
-      Dir.chdir('site/_docs/') do
-        File.open("history.md", "w") do |file|
-          file.write("#{front_matter.to_yaml}---\n\n")
-          file.write(converted_history(history_file))
-        end
-      end
-    else
-      abort "You seem to have misplaced your History.markdown file. I can haz?"
-    end
+    siteify_file('History.markdown')
+  end
+
+  desc "Copy the Code of Conduct"
+  task :conduct do
+    front_matter = {
+      "redirect_from" => "/conduct/index.html",
+      "editable"      => false
+    }
+    siteify_file('CONDUCT.markdown', front_matter)
+  end
+
+  desc "Copy the contributing file"
+  task :contributing do
+    siteify_file('.github/CONTRIBUTING.markdown', "title" => "Contributing")
   end
 
   desc "Write the site latest_version.txt file"
