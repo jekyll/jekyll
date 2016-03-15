@@ -1,48 +1,38 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
+<body>
+
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.1.2">
-  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" />
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <!-- Begin Jekyll SEO tag v1.3.1 -->
+  <!-- Begin Jekyll SEO tag v1.3.2 -->
 <title>Data Files - Jekyll • Simple, blog-aware, static sites</title>
-<meta property="og:title" content="Data Files" />
-<meta name="description" content="Transform your plain text into static websites and blogs" />
-<meta property='og:description' content="Transform your plain text into static websites and blogs" />
-<link rel="canonical" href="https://jekyllrb.com/docs/datafiles/" />
-<meta property='og:url' content='https://jekyllrb.com/docs/datafiles/' />
-<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-03-11T10:26:33-08:00" />
-<link rel="next" href="https://jekyllrb.com/docs/deployment-methods/" title="Deployment methods" />
-<link rel="prev" href="https://jekyllrb.com/docs/contributing/" title="Contributing" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@jekyllrb" />
-<meta name="twitter:title" content="Data Files - Jekyll • Simple, blog-aware, static sites" />
-<meta name="twitter:description" content="Transform your plain text into static websites and blogs" />
-<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<meta property="og:title" content="Data Files">
+<meta name="description" content="Transform your plain text into static websites and blogs">
+<meta property="og:description" content="Transform your plain text into static websites and blogs">
+<link rel="canonical" href="https://jekyllrb.com/docs/datafiles/">
+<meta property="og:url" content="https://jekyllrb.com/docs/datafiles/">
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-03-15T15:42:50-07:00">
+<link rel="next" href="https://jekyllrb.com/docs/deployment-methods/" title="Deployment methods">
+<link rel="prev" href="https://jekyllrb.com/docs/contributing/" title="Contributing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@jekyllrb">
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
 <script type="application/ld+json">
   {
-    "@context" : "http://schema.org",
-
-
-    "@type" : "BlogPosting",
-
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
     "headline": "Data Files",
-
-    "datePublished": "2016-03-11T10:26:33-08:00",
-
+    "datePublished": "2016-03-15T15:42:50-07:00",
     "description": "Transform your plain text into static websites and blogs",
-
     "logo": "https://jekyllrb.com/img/logo-2x.png",
-
-
-    "url" : "https://jekyllrb.com/docs/datafiles/"
+    "url": "https://jekyllrb.com/docs/datafiles/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -50,10 +40,10 @@
   <script src="/js/html5shiv.min.js"></script>
   <script src="/js/respond.min.js"></script>
   <![endif]-->
-</head>
 
 
-<body class="wrap">
+
+
   <header role="banner">
   <nav class="mobile-nav show-on-mobiles">
     <ul>
@@ -2532,7 +2522,7 @@
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/datafiles.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/datafiles.md"><i class="fa fa-pencil"></i>  Improve this page</a>
           </div>
           <h1>Data Files</h1>
           <p>In addition to the <a href="../variables/">built-in variables</a> available from Jekyll,
@@ -2587,7 +2577,7 @@ determines the variable name).</p>
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
 {% for member in site.data.members %}
   <span class="nt">&lt;li&gt;</span>
-    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/{{ member.github }}&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/{{ member.github }}"</span><span class="nt">&gt;</span>
       {{ member.name }}
     <span class="nt">&lt;/a&gt;</span>
   <span class="nt">&lt;/li&gt;</span>
@@ -2627,7 +2617,7 @@ file name:</p>
 {% for org_hash in site.data.orgs %}
 {% assign org = org_hash[1] %}
   <span class="nt">&lt;li&gt;</span>
-    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/{{ org.username }}&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/{{ org.username }}"</span><span class="nt">&gt;</span>
       {{ org.name }}
     <span class="nt">&lt;/a&gt;</span>
     ({{ org.members | size }} members)
@@ -2653,9 +2643,9 @@ author: dave
 ---
 
 {% assign author = site.data.people[page.author] %}
-<span class="nt">&lt;a</span> <span class="na">rel=</span><span class="s">&quot;author&quot;</span>
-  <span class="na">href=</span><span class="s">&quot;{{ author.twitter }}&quot;</span>
-  <span class="na">title=</span><span class="s">&quot;{{ author.name }}&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">rel=</span><span class="s">"author"</span>
+  <span class="na">href=</span><span class="s">"{{ author.twitter }}"</span>
+  <span class="na">title=</span><span class="s">"{{ author.name }}"</span><span class="nt">&gt;</span>
     {{ author.name }}
 <span class="nt">&lt;/a&gt;</span></code></pre></figure>
 
@@ -3048,7 +3038,7 @@ author: dave
   <footer role="contentinfo">
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
-      <p>The contents of this website are <br />&copy;&nbsp;2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are <br>© 2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>
@@ -3127,5 +3117,6 @@ author: dave
 
 
 
+
+
 </body>
-</html>

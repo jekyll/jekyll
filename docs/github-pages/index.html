@@ -1,48 +1,38 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
+<body>
+
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.1.2">
-  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" />
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <!-- Begin Jekyll SEO tag v1.3.1 -->
+  <!-- Begin Jekyll SEO tag v1.3.2 -->
 <title>GitHub Pages - Jekyll • Simple, blog-aware, static sites</title>
-<meta property="og:title" content="GitHub Pages" />
-<meta name="description" content="Transform your plain text into static websites and blogs" />
-<meta property='og:description' content="Transform your plain text into static websites and blogs" />
-<link rel="canonical" href="https://jekyllrb.com/docs/github-pages/" />
-<meta property='og:url' content='https://jekyllrb.com/docs/github-pages/' />
-<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-03-11T10:26:33-08:00" />
-<link rel="next" href="https://jekyllrb.com/docs/history/" title="History" />
-<link rel="prev" href="https://jekyllrb.com/docs/frontmatter/" title="Front Matter" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@jekyllrb" />
-<meta name="twitter:title" content="GitHub Pages - Jekyll • Simple, blog-aware, static sites" />
-<meta name="twitter:description" content="Transform your plain text into static websites and blogs" />
-<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<meta property="og:title" content="GitHub Pages">
+<meta name="description" content="Transform your plain text into static websites and blogs">
+<meta property="og:description" content="Transform your plain text into static websites and blogs">
+<link rel="canonical" href="https://jekyllrb.com/docs/github-pages/">
+<meta property="og:url" content="https://jekyllrb.com/docs/github-pages/">
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-03-15T15:42:50-07:00">
+<link rel="next" href="https://jekyllrb.com/docs/history/" title="History">
+<link rel="prev" href="https://jekyllrb.com/docs/frontmatter/" title="Front Matter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@jekyllrb">
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
 <script type="application/ld+json">
   {
-    "@context" : "http://schema.org",
-
-
-    "@type" : "BlogPosting",
-
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
     "headline": "GitHub Pages",
-
-    "datePublished": "2016-03-11T10:26:33-08:00",
-
+    "datePublished": "2016-03-15T15:42:50-07:00",
     "description": "Transform your plain text into static websites and blogs",
-
     "logo": "https://jekyllrb.com/img/logo-2x.png",
-
-
-    "url" : "https://jekyllrb.com/docs/github-pages/"
+    "url": "https://jekyllrb.com/docs/github-pages/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -50,10 +40,10 @@
   <script src="/js/html5shiv.min.js"></script>
   <script src="/js/respond.min.js"></script>
   <![endif]-->
-</head>
 
 
-<body class="wrap">
+
+
   <header role="banner">
   <nav class="mobile-nav show-on-mobiles">
     <ul>
@@ -2532,7 +2522,7 @@
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/github-pages.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/github-pages.md"><i class="fa fa-pencil"></i>  Improve this page</a>
           </div>
           <h1>GitHub Pages</h1>
           <p><a href="https://pages.github.com">GitHub Pages</a> are public web pages for users,
@@ -2554,9 +2544,9 @@ Project Pages complicates the proper resolution of URLs. In order to assure your
 site builds properly, use <code>site.github.url</code> in your URL’s.</p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- Useful for styles with static names... --&gt;</span>
-<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;{{ site.github.url }}/path/to/css.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
-<span class="c">&lt;!-- and for documents/pages whose URL&#39;s can change... --&gt;</span>
-<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ page.url | prepend: site.github.url }}&quot;</span><span class="nt">&gt;</span>{{ page.title }}<span class="nt">&lt;/a&gt;</span></code></pre></figure>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"{{ site.github.url }}/path/to/css.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+<span class="c">&lt;!-- and for documents/pages whose URL's can change... --&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{{ page.url | prepend: site.github.url }}"</span><span class="nt">&gt;</span>{{ page.title }}<span class="nt">&lt;/a&gt;</span></code></pre></figure>
 
 <p>This way you can preview your site locally from the site root on localhost,
 but when GitHub generates your pages from the gh-pages branch all the URLs
@@ -2582,13 +2572,13 @@ few minor details.</p>
     following to your <code>Gemfile</code>:
 
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s1">'https://rubygems.org'</span>
 
-<span class="nb">require</span> <span class="s1">&#39;json&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
-<span class="n">versions</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;https://pages.github.com/versions.json&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">)</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'open-uri'</span>
+<span class="n">versions</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">'https://pages.github.com/versions.json'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">)</span>
 
-<span class="n">gem</span> <span class="s1">&#39;github-pages&#39;</span><span class="p">,</span> <span class="n">versions</span><span class="o">[</span><span class="s1">&#39;github-pages&#39;</span><span class="o">]</span></code></pre></figure>
+<span class="n">gem</span> <span class="s1">'github-pages'</span><span class="p">,</span> <span class="n">versions</span><span class="o">[</span><span class="s1">'github-pages'</span><span class="o">]</span></code></pre></figure>
 
 
     This will ensure that when you run <code>bundle install</code>, you
@@ -2597,9 +2587,9 @@ few minor details.</p>
     If that fails, simplify it:
 
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s1">'https://rubygems.org'</span>
 
-<span class="n">gem</span> <span class="s1">&#39;github-pages&#39;</span></code></pre></figure>
+<span class="n">gem</span> <span class="s1">'github-pages'</span></code></pre></figure>
 
 
     And be sure to run <code>bundle update</code> often.
@@ -3069,7 +3059,7 @@ GitHub Pages <a href="https://help.github.com/articles/troubleshooting-github-pa
   <footer role="contentinfo">
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
-      <p>The contents of this website are <br />&copy;&nbsp;2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are <br>© 2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>
@@ -3148,5 +3138,6 @@ GitHub Pages <a href="https://help.github.com/articles/troubleshooting-github-pa
 
 
 
+
+
 </body>
-</html>
