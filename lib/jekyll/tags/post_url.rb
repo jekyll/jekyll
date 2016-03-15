@@ -18,8 +18,8 @@ module Jekyll
       end
 
       def post_date
-        @post_date ||= Utils.parse_date(name,
-          "\"#{name}\" does not contain valid date and/or title.")
+        @post_date ||= Utils.parse_date(date,
+          "\"#{date}\" does not contain valid date and/or title.")
       end
 
       def ==(other)
