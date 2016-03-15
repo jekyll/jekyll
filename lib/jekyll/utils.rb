@@ -1,3 +1,4 @@
+
 module Jekyll
   module Utils
     extend self
@@ -126,7 +127,7 @@ module Jekyll
     def parse_date(input, msg = "Input could not be parsed.")
       Time.parse(input).localtime
     rescue ArgumentError
-      raise Errors::FatalException.new("Invalid date '#{input}': " + msg)
+      raise Errors::InvalidDateError, "Invalid date '#{input}': #{msg}"
     end
 
     # Determines whether a given file has
