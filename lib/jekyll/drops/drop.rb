@@ -137,6 +137,7 @@ module Jekyll
         require 'json'
         JSON.pretty_generate to_h
       end
+      alias_method :to_json, :inspect
 
       # Collects all the keys and passes each to the block in turn.
       #

@@ -44,6 +44,16 @@ class TestDocument < JekyllUnitTest
       assert_equal "foo.bar", @document.data["whatever"]
     end
 
+    should "be able to jsonify its data" do
+      require 'json'
+
+      page_json = @document.to_liquid.to_json
+      parsed = JSON.parse(page_json)
+
+      assert_equal 'Jekyll.configuration', parsed['title']
+      assert_equal 'foo.bar', parsed['whatever']
+    end
+
     context "with YAML ending in three dots" do
 
       setup do
