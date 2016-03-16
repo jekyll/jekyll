@@ -10,6 +10,7 @@
   * Site Template: Changed main `<div>` to `<main>` and added accessibility info (#4636)
   * Add array support to `where` filter (#4555)
   * 'jekyll clean': also remove .sass-cache (#4652)
+  * Clean up Tags::PostUrl a bit, including better errors and date parsing (#4670)
 
 ### Bug Fixes
 
