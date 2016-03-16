@@ -1,35 +1,35 @@
-<body>
-
-
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.1.2">
-  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v1.3.2 -->
 <title>Plugins - Jekyll • Simple, blog-aware, static sites</title>
-<meta property="og:title" content="Plugins">
-<meta name="description" content="Transform your plain text into static websites and blogs">
-<meta property="og:description" content="Transform your plain text into static websites and blogs">
-<link rel="canonical" href="https://jekyllrb.com/docs/plugins/">
-<meta property="og:url" content="https://jekyllrb.com/docs/plugins/">
-<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-03-16T13:45:31-07:00">
-<link rel="next" href="https://jekyllrb.com/docs/posts/" title="Writing posts">
-<link rel="prev" href="https://jekyllrb.com/docs/permalinks/" title="Permalinks">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@jekyllrb">
-<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
+<meta property="og:title" content="Plugins" />
+<meta name="description" content="Transform your plain text into static websites and blogs" />
+<meta property="og:description" content="Transform your plain text into static websites and blogs" />
+<link rel="canonical" href="https://jekyllrb.com/docs/plugins/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/plugins/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-03-16T13:50:00-07:00" />
+<link rel="next" href="https://jekyllrb.com/docs/posts/" title="Writing posts" />
+<link rel="prev" href="https://jekyllrb.com/docs/permalinks/" title="Permalinks" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Plugins",
-    "datePublished": "2016-03-16T13:45:31-07:00",
+    "datePublished": "2016-03-16T13:50:00-07:00",
     "description": "Transform your plain text into static websites and blogs",
     "logo": "https://jekyllrb.com/img/logo-2x.png",
     "url": "https://jekyllrb.com/docs/plugins/"
@@ -40,10 +40,10 @@
   <script src="/js/html5shiv.min.js"></script>
   <script src="/js/respond.min.js"></script>
   <![endif]-->
+</head>
 
 
-
-
+<body class="wrap">
   <header role="banner">
   <nav class="mobile-nav show-on-mobiles">
     <ul>
@@ -2522,7 +2522,7 @@
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/plugins.md"><i class="fa fa-pencil"></i>  Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/plugins.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
           </div>
           <h1>Plugins</h1>
           <p>Jekyll has a plugin system with hooks that allow you to create custom generated
@@ -2535,7 +2535,7 @@ having to modify the Jekyll source itself.</p>
     <a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
     However, all Pages sites are generated using the <code>--safe</code> option
     to disable custom plugins for security reasons. Unfortunately, this means
-    your plugins won’t work if you’re deploying to GitHub Pages.<br><br>
+    your plugins won’t work if you’re deploying to GitHub Pages.<br /><br />
     You can still use GitHub Pages to publish your site, but you’ll need to
     convert the site locally and push the generated static files to your GitHub
     repository instead of the Jekyll source files.
@@ -2626,9 +2626,9 @@ variables <code>ongoing</code> and <code>done</code> that we fill in the generat
     <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
       <span class="n">ongoing</span><span class="p">,</span> <span class="n">done</span> <span class="o">=</span> <span class="no">Book</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:ongoing?</span><span class="p">)</span>
 
-      <span class="n">reading</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">detect</span> <span class="p">{</span><span class="o">|</span><span class="n">page</span><span class="o">|</span> <span class="n">page</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">'reading.html'</span><span class="p">}</span>
-      <span class="n">reading</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">'ongoing'</span><span class="o">]</span> <span class="o">=</span> <span class="n">ongoing</span>
-      <span class="n">reading</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">'done'</span><span class="o">]</span> <span class="o">=</span> <span class="n">done</span>
+      <span class="n">reading</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">detect</span> <span class="p">{</span><span class="o">|</span><span class="n">page</span><span class="o">|</span> <span class="n">page</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;reading.html&#39;</span><span class="p">}</span>
+      <span class="n">reading</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;ongoing&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">ongoing</span>
+      <span class="n">reading</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;done&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">done</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
@@ -2642,14 +2642,14 @@ variables <code>ongoing</code> and <code>done</code> that we fill in the generat
       <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
       <span class="vi">@base</span> <span class="o">=</span> <span class="n">base</span>
       <span class="vi">@dir</span> <span class="o">=</span> <span class="n">dir</span>
-      <span class="vi">@name</span> <span class="o">=</span> <span class="s1">'index.html'</span>
+      <span class="vi">@name</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>
 
       <span class="nb">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">'_layouts'</span><span class="p">),</span> <span class="s1">'category_index.html'</span><span class="p">)</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">'category'</span><span class="o">]</span> <span class="o">=</span> <span class="n">category</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;category_index.html&#39;</span><span class="p">)</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;category&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">category</span>
 
-      <span class="n">category_title_prefix</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">'category_title_prefix'</span><span class="o">]</span> <span class="o">||</span> <span class="s1">'Category: '</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">'title'</span><span class="o">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">category_title_prefix</span><span class="si">}#{</span><span class="n">category</span><span class="si">}</span><span class="s2">"</span>
+      <span class="n">category_title_prefix</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_title_prefix&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;Category: &#39;</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">category_title_prefix</span><span class="si">}#{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
@@ -2657,8 +2657,8 @@ variables <code>ongoing</code> and <code>done</code> that we fill in the generat
     <span class="n">safe</span> <span class="kp">true</span>
 
     <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
-      <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">'category_index'</span>
-        <span class="n">dir</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">'category_dir'</span><span class="o">]</span> <span class="o">||</span> <span class="s1">'categories'</span>
+      <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">&#39;category_index&#39;</span>
+        <span class="n">dir</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_dir&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;categories&#39;</span>
         <span class="n">site</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">each_key</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
           <span class="n">site</span><span class="o">.</span><span class="n">pages</span> <span class="o">&lt;&lt;</span> <span class="no">CategoryPage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">),</span> <span class="n">category</span><span class="p">)</span>
         <span class="k">end</span>
@@ -2723,7 +2723,7 @@ them using the <code>UpcaseConverter</code>:</p>
     <span class="k">end</span>
 
     <span class="k">def</span> <span class="nf">output_ext</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
-      <span class="s2">".html"</span>
+      <span class="s2">&quot;.html&quot;</span>
     <span class="k">end</span>
 
     <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
@@ -2789,7 +2789,7 @@ subcommands for the <code>jekyll</code> executable. This is possible by includin
 relevant plugins in a <code>Gemfile</code> group called <code>:jekyll_plugins</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
-  <span class="n">gem</span> <span class="s2">"my_fancy_jekyll_plugin"</span>
+  <span class="n">gem</span> <span class="s2">&quot;my_fancy_jekyll_plugin&quot;</span>
 <span class="k">end</span></code></pre></figure>
 
 <p>Each <code>Command</code> must be a subclass of the <code>Jekyll::Command</code> class and must
@@ -2799,13 +2799,13 @@ contain one class method: <code>init_with_program</code>. An example:</p>
   <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
     <span class="k">def</span> <span class="nf">init_with_program</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span>
       <span class="n">prog</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
-        <span class="n">c</span><span class="o">.</span><span class="n">syntax</span> <span class="s2">"new [options]"</span>
-        <span class="n">c</span><span class="o">.</span><span class="n">description</span> <span class="s1">'Create a new Jekyll site.'</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">syntax</span> <span class="s2">&quot;new [options]&quot;</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">description</span> <span class="s1">&#39;Create a new Jekyll site.&#39;</span>
 
-        <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">'dest'</span><span class="p">,</span> <span class="s1">'-d DEST'</span><span class="p">,</span> <span class="s1">'Where the site should go.'</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">&#39;dest&#39;</span><span class="p">,</span> <span class="s1">&#39;-d DEST&#39;</span><span class="p">,</span> <span class="s1">&#39;Where the site should go.&#39;</span>
 
         <span class="n">c</span><span class="o">.</span><span class="n">action</span> <span class="k">do</span> <span class="o">|</span><span class="n">args</span><span class="p">,</span> <span class="n">options</span><span class="o">|</span>
-          <span class="no">Jekyll</span><span class="o">::</span><span class="no">Site</span><span class="o">.</span><span class="n">new_site_at</span><span class="p">(</span><span class="n">options</span><span class="o">[</span><span class="s1">'dest'</span><span class="o">]</span><span class="p">)</span>
+          <span class="no">Jekyll</span><span class="o">::</span><span class="no">Site</span><span class="o">.</span><span class="n">new_site_at</span><span class="p">(</span><span class="n">options</span><span class="o">[</span><span class="s1">&#39;dest&#39;</span><span class="o">]</span><span class="p">)</span>
         <span class="k">end</span>
       <span class="k">end</span>
     <span class="k">end</span>
@@ -2855,12 +2855,12 @@ will output the time the page was rendered:</p>
     <span class="k">end</span>
 
     <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-      <span class="s2">"</span><span class="si">#{</span><span class="vi">@text</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="si">}</span><span class="s2">"</span>
+      <span class="s2">&quot;</span><span class="si">#{</span><span class="vi">@text</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">'render_time'</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></figure>
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;render_time&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></figure>
 
 <p>At a minimum, liquid tags must implement:</p>
 
@@ -2888,7 +2888,7 @@ will output the time the page was rendered:</p>
 <p>You must also register the custom tag with the Liquid template engine as
 follows:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">'render_time'</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="o">.</span><span class="n">register_tag</span><span class="p">(</span><span class="s1">&#39;render_time&#39;</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span></code></pre></figure>
 
 <p>In the example above, we can place the following tag anywhere in one of our
 pages:</p>
@@ -2909,7 +2909,7 @@ of the filter. The return value will be the output of the filter.</p>
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
   <span class="k">module</span> <span class="nn">AssetFilter</span>
     <span class="k">def</span> <span class="nf">asset_url</span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
-      <span class="s2">"http://www.example.com/</span><span class="si">#{</span><span class="n">input</span><span class="si">}</span><span class="s2">?</span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_i</span><span class="si">}</span><span class="s2">"</span>
+      <span class="s2">&quot;http://www.example.com/</span><span class="si">#{</span><span class="n">input</span><span class="si">}</span><span class="s2">?</span><span class="si">#{</span><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_i</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -3216,359 +3216,198 @@ available while rendering.</p>
 <h4 id="generators-1">Generators</h4>
 
 <ul>
-  <li>
-<a href="https://gist.github.com/707909">ArchiveGenerator by Ilkka Laukkanen</a>: Uses <a href="https://gist.github.com/707020">this archive page</a> to generate archives.</li>
-  <li>
-<a href="https://gist.github.com/642739">LESS.js Generator by Andy Fowler</a>: Renders
+  <li><a href="https://gist.github.com/707909">ArchiveGenerator by Ilkka Laukkanen</a>: Uses <a href="https://gist.github.com/707020">this archive page</a> to generate archives.</li>
+  <li><a href="https://gist.github.com/642739">LESS.js Generator by Andy Fowler</a>: Renders
 LESS.js files during generation.</li>
-  <li>
-<a href="https://gist.github.com/449491">Version Reporter by Blake Smith</a>: Creates a version.html file containing the Jekyll version.</li>
-  <li>
-<a href="https://github.com/kinnetica/jekyll-plugins">Sitemap.xml Generator by Michael Levin</a>: Generates a sitemap.xml file by traversing all of the available posts and pages.</li>
-  <li>
-<a href="https://github.com/PascalW/jekyll_indextank">Full-text search by Pascal Widdershoven</a>: Adds full-text search to your Jekyll site with a plugin and a bit of JavaScript.</li>
-  <li>
-<a href="https://github.com/tsmango/jekyll_alias_generator">AliasGenerator by Thomas Mango</a>: Generates redirect pages for posts when an alias is specified in the YAML Front Matter.</li>
-  <li>
-<a href="https://github.com/nquinlan/jekyll-pageless-redirects">Pageless Redirect Generator by Nick Quinlan</a>: Generates redirects based on files in the Jekyll root, with support for htaccess style redirects.</li>
-  <li>
-<a href="https://github.com/agelber/jekyll-rss">RssGenerator by Assaf Gelber</a>: Automatically creates an RSS 2.0 feed from your posts.</li>
-  <li>
-<a href="https://github.com/shigeya/jekyll-monthly-archive-plugin">Monthly archive generator by Shigeya Suzuki</a>: Generator and template which renders monthly archive like MovableType style, based on the work by Ilkka Laukkanen and others above.</li>
-  <li>
-<a href="https://github.com/shigeya/jekyll-category-archive-plugin">Category archive generator by Shigeya Suzuki</a>: Generator and template which renders category archive like MovableType style, based on Monthly archive generator.</li>
-  <li>
-<a href="https://github.com/yihangho/emoji-for-jekyll">Emoji for Jekyll</a>: Seamlessly enable emoji for all posts and pages.</li>
-  <li>
-<a href="https://github.com/mscharley/jekyll-compass">Compass integration for Jekyll</a>: Easily integrate Compass and Sass with your Jekyll website.</li>
-  <li>
-<a href="https://github.com/bbakersmith/jekyll-pages-directory">Pages Directory by Ben Baker-Smith</a>: Defines a <code>_pages</code> directory for page files which routes its output relative to the project root.</li>
-  <li>
-<a href="https://github.com/jeffkole/jekyll-page-collections">Page Collections by Jeff Kolesky</a>: Generates collections of pages with functionality that resembles posts.</li>
-  <li>
-<a href="https://github.com/sheehamj13/jekyll-live-tiles">Windows 8.1 Live Tile Generation by Matt Sheehan</a>: Generates Internet Explorer 11 config.xml file and Tile Templates for pinning your site to Windows 8.1.</li>
-  <li>
-<a href="https://github.com/sheehamj13/jekyll_ts">Typescript Generator by Matt Sheehan</a>: Generate Javascript on build from your Typescript.</li>
-  <li>
-<a href="https://github.com/ivantsepp/jekyll-autolink_email">Jekyll::AutolinkEmail by Ivan Tse</a>: Autolink your emails.</li>
-  <li>
-<a href="https://github.com/ivantsepp/jekyll-git_metadata">Jekyll::GitMetadata by Ivan Tse</a>: Expose Git metadata for your templates.</li>
-  <li>
-<a href="https://gist.github.com/snrbrnjna/422a4b7e017192c284b3">Jekyll Http Basic Auth Plugin</a>: Plugin to manage http basic auth for jekyll generated pages and directories.</li>
-  <li>
-<a href="https://github.com/merlos/jekyll-auto-image">Jekyll Auto Image by Merlos</a>: Gets the first image of a post. Useful to list your posts with images or to add <a href="https://dev.twitter.com/cards/overview">twitter cards</a> to your site.</li>
-  <li>
-<a href="https://github.com/codeinpink/jekyll-portfolio-generator">Jekyll Portfolio Generator by Shannon Babincsak</a>: Generates project pages and computes related projects out of project data files.</li>
-  <li>
-<a href="https://github.com/webchef/jekyll-umlauts">Jekyll-Umlauts by Arne Gockeln</a>: This generator replaces all german umlauts (äöüß) case sensitive with html.</li>
-  <li>
-<a href="https://github.com/lawmurray/indii-jekyll-flickr">Jekyll Flickr Plugin</a> by <a href="http://www.indii.org">Lawrence Murray</a>: Generates posts for photos uploaded to a Flickr photostream.</li>
-  <li>
-<a href="https://github.com/midnightSuyama/jekyll-paginate-category">Jekyll::Paginate::Category</a>: Pagination Generator for Jekyll Category.</li>
-  <li>
-<a href="https://github.com/juusaw/amp-jekyll">AMP-Jekyll by Juuso Mikkonen</a>: Generate <a href="https://www.ampproject.org">Accelerated Mobile Pages</a> of Jekyll posts.</li>
+  <li><a href="https://gist.github.com/449491">Version Reporter by Blake Smith</a>: Creates a version.html file containing the Jekyll version.</li>
+  <li><a href="https://github.com/kinnetica/jekyll-plugins">Sitemap.xml Generator by Michael Levin</a>: Generates a sitemap.xml file by traversing all of the available posts and pages.</li>
+  <li><a href="https://github.com/PascalW/jekyll_indextank">Full-text search by Pascal Widdershoven</a>: Adds full-text search to your Jekyll site with a plugin and a bit of JavaScript.</li>
+  <li><a href="https://github.com/tsmango/jekyll_alias_generator">AliasGenerator by Thomas Mango</a>: Generates redirect pages for posts when an alias is specified in the YAML Front Matter.</li>
+  <li><a href="https://github.com/nquinlan/jekyll-pageless-redirects">Pageless Redirect Generator by Nick Quinlan</a>: Generates redirects based on files in the Jekyll root, with support for htaccess style redirects.</li>
+  <li><a href="https://github.com/agelber/jekyll-rss">RssGenerator by Assaf Gelber</a>: Automatically creates an RSS 2.0 feed from your posts.</li>
+  <li><a href="https://github.com/shigeya/jekyll-monthly-archive-plugin">Monthly archive generator by Shigeya Suzuki</a>: Generator and template which renders monthly archive like MovableType style, based on the work by Ilkka Laukkanen and others above.</li>
+  <li><a href="https://github.com/shigeya/jekyll-category-archive-plugin">Category archive generator by Shigeya Suzuki</a>: Generator and template which renders category archive like MovableType style, based on Monthly archive generator.</li>
+  <li><a href="https://github.com/yihangho/emoji-for-jekyll">Emoji for Jekyll</a>: Seamlessly enable emoji for all posts and pages.</li>
+  <li><a href="https://github.com/mscharley/jekyll-compass">Compass integration for Jekyll</a>: Easily integrate Compass and Sass with your Jekyll website.</li>
+  <li><a href="https://github.com/bbakersmith/jekyll-pages-directory">Pages Directory by Ben Baker-Smith</a>: Defines a <code>_pages</code> directory for page files which routes its output relative to the project root.</li>
+  <li><a href="https://github.com/jeffkole/jekyll-page-collections">Page Collections by Jeff Kolesky</a>: Generates collections of pages with functionality that resembles posts.</li>
+  <li><a href="https://github.com/sheehamj13/jekyll-live-tiles">Windows 8.1 Live Tile Generation by Matt Sheehan</a>: Generates Internet Explorer 11 config.xml file and Tile Templates for pinning your site to Windows 8.1.</li>
+  <li><a href="https://github.com/sheehamj13/jekyll_ts">Typescript Generator by Matt Sheehan</a>: Generate Javascript on build from your Typescript.</li>
+  <li><a href="https://github.com/ivantsepp/jekyll-autolink_email">Jekyll::AutolinkEmail by Ivan Tse</a>: Autolink your emails.</li>
+  <li><a href="https://github.com/ivantsepp/jekyll-git_metadata">Jekyll::GitMetadata by Ivan Tse</a>: Expose Git metadata for your templates.</li>
+  <li><a href="https://gist.github.com/snrbrnjna/422a4b7e017192c284b3">Jekyll Http Basic Auth Plugin</a>: Plugin to manage http basic auth for jekyll generated pages and directories.</li>
+  <li><a href="https://github.com/merlos/jekyll-auto-image">Jekyll Auto Image by Merlos</a>: Gets the first image of a post. Useful to list your posts with images or to add <a href="https://dev.twitter.com/cards/overview">twitter cards</a> to your site.</li>
+  <li><a href="https://github.com/codeinpink/jekyll-portfolio-generator">Jekyll Portfolio Generator by Shannon Babincsak</a>: Generates project pages and computes related projects out of project data files.</li>
+  <li><a href="https://github.com/webchef/jekyll-umlauts">Jekyll-Umlauts by Arne Gockeln</a>: This generator replaces all german umlauts (äöüß) case sensitive with html.</li>
+  <li><a href="https://github.com/lawmurray/indii-jekyll-flickr">Jekyll Flickr Plugin</a> by <a href="http://www.indii.org">Lawrence Murray</a>: Generates posts for photos uploaded to a Flickr photostream.</li>
+  <li><a href="https://github.com/midnightSuyama/jekyll-paginate-category">Jekyll::Paginate::Category</a>: Pagination Generator for Jekyll Category.</li>
+  <li><a href="https://github.com/juusaw/amp-jekyll">AMP-Jekyll by Juuso Mikkonen</a>: Generate <a href="https://www.ampproject.org">Accelerated Mobile Pages</a> of Jekyll posts.</li>
 </ul>
 
 <h4 id="converters-1">Converters</h4>
 
 <ul>
-  <li>
-<a href="https://github.com/jekyll/jekyll-textile-converter">Textile converter</a>: Convert <code>.textile</code> files into HTML. Also includes the <code>textilize</code> Liquid filter.</li>
-  <li>
-<a href="https://github.com/slim-template/jekyll-slim">Slim plugin</a>: Slim converter and includes for Jekyll with support for Liquid tags.</li>
-  <li>
-<a href="https://github.com/snappylabs/jade-jekyll-plugin">Jade plugin by John Papandriopoulos</a>: Jade converter for Jekyll.</li>
-  <li>
-<a href="https://gist.github.com/517556">HAML plugin by Sam Z</a>: HAML converter for Jekyll.</li>
-  <li>
-<a href="https://gist.github.com/481456">HAML-Sass Converter by Adam Pearson</a>: Simple HAML-Sass converter for Jekyll. <a href="https://gist.github.com/528642">Fork</a> by Sam X.</li>
-  <li>
-<a href="https://gist.github.com/960150">Sass SCSS Converter by Mark Wolfe</a>: Sass converter which uses the new CSS compatible syntax, based Sam X’s fork above.</li>
-  <li>
-<a href="https://gist.github.com/639920">LESS Converter by Jason Graham</a>: Convert LESS files to CSS.</li>
-  <li>
-<a href="https://gist.github.com/760265">LESS Converter by Josh Brown</a>: Simple LESS converter.</li>
-  <li>
-<a href="https://gist.github.com/449463">Upcase Converter by Blake Smith</a>: An example Jekyll converter.</li>
-  <li>
-<a href="https://gist.github.com/959938">CoffeeScript Converter by phaer</a>: A <a href="http://coffeescript.org">CoffeeScript</a> to Javascript converter.</li>
-  <li>
-<a href="https://github.com/olov/jekyll-references">Markdown References by Olov Lassus</a>: Keep all your markdown reference-style link definitions in one _references.md file.</li>
-  <li>
-<a href="https://gist.github.com/988201">Stylus Converter</a>: Convert .styl to .css.</li>
-  <li>
-<a href="https://github.com/xdissent/jekyll-rst">ReStructuredText Converter</a>: Converts ReST documents to HTML with Pygments syntax highlighting.</li>
-  <li>
-<a href="https://github.com/dsanson/jekyll-pandoc-plugin">Jekyll-pandoc-plugin</a>: Use pandoc for rendering markdown.</li>
-  <li>
-<a href="https://github.com/fauno/jekyll-pandoc-multiple-formats">Jekyll-pandoc-multiple-formats</a> by <a href="https://github.com/edsl">edsl</a>: Use pandoc to generate your site in multiple formats. Supports pandoc’s markdown extensions.</li>
-  <li>
-<a href="https://gist.github.com/1472645">Transform Layouts</a>: Allows HAML layouts (you need a HAML Converter plugin for this to work).</li>
-  <li>
-<a href="https://gist.github.com/abhiyerra/7377603">Org-mode Converter</a>: Org-mode converter for Jekyll.</li>
-  <li>
-<a href="https://github.com/mvdbos/kramdown-with-pygments">Customized Kramdown Converter</a>: Enable Pygments syntax highlighting for Kramdown-parsed fenced code blocks.</li>
-  <li>
-<a href="https://github.com/TheFox/jekyll-bigfootnotes">Bigfootnotes Plugin</a>: Enables big footnotes for Kramdown.</li>
-  <li>
-<a href="https://github.com/asciidoctor/jekyll-asciidoc">AsciiDoc Plugin</a>: AsciiDoc convertor for Jekyll using <a href="http://asciidoctor.org/">Asciidoctor</a>.</li>
-  <li>
-<a href="https://github.com/takuti/jekyll-lazy-tweet-embedding">Lazy Tweet Embedding</a>: Automatically convert tweet urls into twitter cards.</li>
-  <li>
-<a href="https://github.com/pathawks/jekyll-commonmark">jekyll-commonmark</a>: Markdown converter that uses <a href="https://github.com/jgm/CommonMark">libcmark</a>, the reference parser for CommonMark.</li>
+  <li><a href="https://github.com/jekyll/jekyll-textile-converter">Textile converter</a>: Convert <code>.textile</code> files into HTML. Also includes the <code>textilize</code> Liquid filter.</li>
+  <li><a href="https://github.com/slim-template/jekyll-slim">Slim plugin</a>: Slim converter and includes for Jekyll with support for Liquid tags.</li>
+  <li><a href="https://github.com/snappylabs/jade-jekyll-plugin">Jade plugin by John Papandriopoulos</a>: Jade converter for Jekyll.</li>
+  <li><a href="https://gist.github.com/517556">HAML plugin by Sam Z</a>: HAML converter for Jekyll.</li>
+  <li><a href="https://gist.github.com/481456">HAML-Sass Converter by Adam Pearson</a>: Simple HAML-Sass converter for Jekyll. <a href="https://gist.github.com/528642">Fork</a> by Sam X.</li>
+  <li><a href="https://gist.github.com/960150">Sass SCSS Converter by Mark Wolfe</a>: Sass converter which uses the new CSS compatible syntax, based Sam X’s fork above.</li>
+  <li><a href="https://gist.github.com/639920">LESS Converter by Jason Graham</a>: Convert LESS files to CSS.</li>
+  <li><a href="https://gist.github.com/760265">LESS Converter by Josh Brown</a>: Simple LESS converter.</li>
+  <li><a href="https://gist.github.com/449463">Upcase Converter by Blake Smith</a>: An example Jekyll converter.</li>
+  <li><a href="https://gist.github.com/959938">CoffeeScript Converter by phaer</a>: A <a href="http://coffeescript.org">CoffeeScript</a> to Javascript converter.</li>
+  <li><a href="https://github.com/olov/jekyll-references">Markdown References by Olov Lassus</a>: Keep all your markdown reference-style link definitions in one _references.md file.</li>
+  <li><a href="https://gist.github.com/988201">Stylus Converter</a>: Convert .styl to .css.</li>
+  <li><a href="https://github.com/xdissent/jekyll-rst">ReStructuredText Converter</a>: Converts ReST documents to HTML with Pygments syntax highlighting.</li>
+  <li><a href="https://github.com/dsanson/jekyll-pandoc-plugin">Jekyll-pandoc-plugin</a>: Use pandoc for rendering markdown.</li>
+  <li><a href="https://github.com/fauno/jekyll-pandoc-multiple-formats">Jekyll-pandoc-multiple-formats</a> by <a href="https://github.com/edsl">edsl</a>: Use pandoc to generate your site in multiple formats. Supports pandoc’s markdown extensions.</li>
+  <li><a href="https://gist.github.com/1472645">Transform Layouts</a>: Allows HAML layouts (you need a HAML Converter plugin for this to work).</li>
+  <li><a href="https://gist.github.com/abhiyerra/7377603">Org-mode Converter</a>: Org-mode converter for Jekyll.</li>
+  <li><a href="https://github.com/mvdbos/kramdown-with-pygments">Customized Kramdown Converter</a>: Enable Pygments syntax highlighting for Kramdown-parsed fenced code blocks.</li>
+  <li><a href="https://github.com/TheFox/jekyll-bigfootnotes">Bigfootnotes Plugin</a>: Enables big footnotes for Kramdown.</li>
+  <li><a href="https://github.com/asciidoctor/jekyll-asciidoc">AsciiDoc Plugin</a>: AsciiDoc convertor for Jekyll using <a href="http://asciidoctor.org/">Asciidoctor</a>.</li>
+  <li><a href="https://github.com/takuti/jekyll-lazy-tweet-embedding">Lazy Tweet Embedding</a>: Automatically convert tweet urls into twitter cards.</li>
+  <li><a href="https://github.com/pathawks/jekyll-commonmark">jekyll-commonmark</a>: Markdown converter that uses <a href="https://github.com/jgm/CommonMark">libcmark</a>, the reference parser for CommonMark.</li>
 </ul>
 
 <h4 id="filters">Filters</h4>
 
 <ul>
-  <li>
-<a href="https://github.com/MattHall/truncatehtml">Truncate HTML</a> by <a href="http://codebeef.com">Matt Hall</a>: A Jekyll filter that truncates HTML while preserving markup structure.</li>
-  <li>
-<a href="https://github.com/LawrenceWoodman/domain_name-liquid_filter">Domain Name Filter by Lawrence Woodman</a>: Filters the input text so that just the domain name is left.</li>
-  <li>
-<a href="https://gist.github.com/731597">Summarize Filter by Mathieu Arnold</a>: Remove markup after a <code>&lt;div id="extended"&gt;</code> tag.</li>
-  <li>
-<a href="https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb">i18n_filter</a>: Liquid filter to use I18n localization.</li>
-  <li>
-<a href="https://github.com/SaswatPadhi/jekyll_smilify">Smilify</a> by <a href="https://github.com/SaswatPadhi">SaswatPadhi</a>: Convert text emoticons in your content to themeable smiley pics.</li>
-  <li>
-<a href="https://gist.github.com/zachleat/5792681">Read in X Minutes</a> by <a href="https://github.com/zachleat">zachleat</a>: Estimates the reading time of a string (for blog post content).</li>
-  <li>
-<a href="https://github.com/markets/jekyll-timeago">Jekyll-timeago</a>: Converts a time value to the time ago in words.</li>
-  <li>
-<a href="https://github.com/bdesham/pluralize">pluralize</a>: Easily combine a number and a word into a grammatically-correct amount like “1 minute” or “2 minute<strong>s</strong>”.</li>
-  <li>
-<a href="https://github.com/bdesham/reading_time">reading_time</a>: Count words and estimate reading time for a piece of text, ignoring HTML elements that are unlikely to contain running text.</li>
-  <li>
-<a href="https://github.com/dafi/jekyll-toc-generator">Table of Content Generator</a>: Generate the HTML code containing a table of content (TOC), the TOC can be customized in many way, for example you can decide which pages can be without TOC.</li>
-  <li>
-<a href="https://github.com/toshimaru/jekyll-toc">jekyll-toc</a>: A liquid filter plugin for Jekyll which generates a table of contents.</li>
-  <li>
-<a href="https://github.com/23maverick23/jekyll-humanize">jekyll-humanize</a>: This is a port of the Django app humanize which adds a “human touch” to data. Each method represents a Fluid type filter that can be used in your Jekyll site templates. Given that Jekyll produces static sites, some of the original methods do not make logical sense to port (e.g. naturaltime).</li>
-  <li>
-<a href="https://github.com/PatrickC8t/Jekyll-Ordinal">Jekyll-Ordinal</a>: Jekyll liquid filter to output a date ordinal such as “st”, “nd”, “rd”, or “th”.</li>
-  <li>
-<a href="https://github.com/kzykbys/JekyllPlugins">Deprecated articles keeper</a> by <a href="http://blog.kazuya.co/">Kazuya Kobayashi</a>: A simple Jekyll filter which monitor how old an article is.</li>
-  <li>
-<a href="https://github.com/mehdisadeghi/jekyll-jalali">Jekyll-jalali</a> by <a href="http://mehdix.ir">Mehdi Sadeghi</a>: A simple Gregorian to Jalali date converter filter.</li>
-  <li>
-<a href="https://github.com/matallo/jekyll-thumbnail-filter">Jekyll Thumbnail Filter</a>: Related posts thumbnail filter.</li>
-  <li>
-<a href="https://github.com/pathawks/jekyll-smartify">Jekyll-Smartify</a>: SmartyPants filter. Make "quotes" “curly”</li>
-  <li>
-<a href="https://github.com/pathawks/liquid-md5">liquid-md5</a>: Returns an MD5 hash. Helpful for generating Gravatars in templates.</li>
-  <li>
-<a href="https://github.com/paulrobertlloyd/jekyll-roman">jekyll-roman</a>: A liquid filter for Jekyll that converts numbers into Roman numerals.</li>
-  <li>
-<a href="https://github.com/myles/jekyll-typogrify">jekyll-typogrify</a>: A Jekyll plugin that brings the functions of <a href="http://avdgaag.github.io/typogruby/">typogruby</a>.</li>
-  <li>
-<a href="https://github.com/vwochnik/jekyll-email-protect">Jekyll Email Protect</a>: Email protection liquid filter for Jekyll</li>
+  <li><a href="https://github.com/MattHall/truncatehtml">Truncate HTML</a> by <a href="http://codebeef.com">Matt Hall</a>: A Jekyll filter that truncates HTML while preserving markup structure.</li>
+  <li><a href="https://github.com/LawrenceWoodman/domain_name-liquid_filter">Domain Name Filter by Lawrence Woodman</a>: Filters the input text so that just the domain name is left.</li>
+  <li><a href="https://gist.github.com/731597">Summarize Filter by Mathieu Arnold</a>: Remove markup after a <code>&lt;div id="extended"&gt;</code> tag.</li>
+  <li><a href="https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb">i18n_filter</a>: Liquid filter to use I18n localization.</li>
+  <li><a href="https://github.com/SaswatPadhi/jekyll_smilify">Smilify</a> by <a href="https://github.com/SaswatPadhi">SaswatPadhi</a>: Convert text emoticons in your content to themeable smiley pics.</li>
+  <li><a href="https://gist.github.com/zachleat/5792681">Read in X Minutes</a> by <a href="https://github.com/zachleat">zachleat</a>: Estimates the reading time of a string (for blog post content).</li>
+  <li><a href="https://github.com/markets/jekyll-timeago">Jekyll-timeago</a>: Converts a time value to the time ago in words.</li>
+  <li><a href="https://github.com/bdesham/pluralize">pluralize</a>: Easily combine a number and a word into a grammatically-correct amount like “1 minute” or “2 minute<strong>s</strong>”.</li>
+  <li><a href="https://github.com/bdesham/reading_time">reading_time</a>: Count words and estimate reading time for a piece of text, ignoring HTML elements that are unlikely to contain running text.</li>
+  <li><a href="https://github.com/dafi/jekyll-toc-generator">Table of Content Generator</a>: Generate the HTML code containing a table of content (TOC), the TOC can be customized in many way, for example you can decide which pages can be without TOC.</li>
+  <li><a href="https://github.com/toshimaru/jekyll-toc">jekyll-toc</a>: A liquid filter plugin for Jekyll which generates a table of contents.</li>
+  <li><a href="https://github.com/23maverick23/jekyll-humanize">jekyll-humanize</a>: This is a port of the Django app humanize which adds a “human touch” to data. Each method represents a Fluid type filter that can be used in your Jekyll site templates. Given that Jekyll produces static sites, some of the original methods do not make logical sense to port (e.g. naturaltime).</li>
+  <li><a href="https://github.com/PatrickC8t/Jekyll-Ordinal">Jekyll-Ordinal</a>: Jekyll liquid filter to output a date ordinal such as “st”, “nd”, “rd”, or “th”.</li>
+  <li><a href="https://github.com/kzykbys/JekyllPlugins">Deprecated articles keeper</a> by <a href="http://blog.kazuya.co/">Kazuya Kobayashi</a>: A simple Jekyll filter which monitor how old an article is.</li>
+  <li><a href="https://github.com/mehdisadeghi/jekyll-jalali">Jekyll-jalali</a> by <a href="http://mehdix.ir">Mehdi Sadeghi</a>: A simple Gregorian to Jalali date converter filter.</li>
+  <li><a href="https://github.com/matallo/jekyll-thumbnail-filter">Jekyll Thumbnail Filter</a>: Related posts thumbnail filter.</li>
+  <li><a href="https://github.com/pathawks/jekyll-smartify">Jekyll-Smartify</a>: SmartyPants filter. Make "quotes" “curly”</li>
+  <li><a href="https://github.com/pathawks/liquid-md5">liquid-md5</a>: Returns an MD5 hash. Helpful for generating Gravatars in templates.</li>
+  <li><a href="https://github.com/paulrobertlloyd/jekyll-roman">jekyll-roman</a>: A liquid filter for Jekyll that converts numbers into Roman numerals.</li>
+  <li><a href="https://github.com/myles/jekyll-typogrify">jekyll-typogrify</a>: A Jekyll plugin that brings the functions of <a href="http://avdgaag.github.io/typogruby/">typogruby</a>.</li>
+  <li><a href="https://github.com/vwochnik/jekyll-email-protect">Jekyll Email Protect</a>: Email protection liquid filter for Jekyll</li>
 </ul>
 
 <h4 id="tags-1">Tags</h4>
 
 <ul>
-  <li>
-<a href="https://github.com/samrayner/jekyll-asset-path-plugin">Asset Path Tag</a> by <a href="http://www.samrayner.com/">Sam Rayner</a>: Allows organisation of assets into subdirectories by outputting a path for a given file relative to the current post or page.</li>
-  <li>
-<a href="https://github.com/christianhellsten/jekyll-plugins">Delicious Plugin by Christian Hellsten</a>: Fetches and renders bookmarks from delicious.com.</li>
-  <li>
-<a href="https://gist.github.com/480380">Ultraviolet Plugin by Steve Alex</a>: Jekyll tag for the <a href="https://github.com/grosser/ultraviolet">Ultraviolet</a> code highligher.</li>
-  <li>
-<a href="https://gist.github.com/710577">Tag Cloud Plugin by Ilkka Laukkanen</a>: Generate a tag cloud that links to tag pages.</li>
-  <li>
-<a href="https://gist.github.com/730347">GIT Tag by Alexandre Girard</a>: Add Git activity inside a list.</li>
-  <li>
-<a href="https://gist.github.com/834610">MathJax Liquid Tags by Jessy Cowan-Sharp</a>: Simple liquid tags for Jekyll that convert inline math and block equations to the appropriate MathJax script tags.</li>
-  <li>
-<a href="https://gist.github.com/1027674">Non-JS Gist Tag by Brandon Tilley</a> A Liquid tag that embeds Gists and shows code for non-JavaScript enabled browsers and readers.</li>
-  <li>
-<a href="https://gist.github.com/449509">Render Time Tag by Blake Smith</a>: Displays the time a Jekyll page was generated.</li>
-  <li>
-<a href="https://gist.github.com/912466">Status.net/OStatus Tag by phaer</a>: Displays the notices in a given status.net/ostatus feed.</li>
-  <li>
-<a href="https://github.com/robb/jekyll-embedly-client">Embed.ly client by Robert Böhnke</a>: Autogenerate embeds from URLs using oEmbed.</li>
-  <li>
-<a href="https://gist.github.com/2290195">Logarithmic Tag Cloud</a>: Flexible. Logarithmic distribution. Documentation inline.</li>
-  <li>
-<a href="https://gist.github.com/1455726">oEmbed Tag by Tammo van Lessen</a>: Enables easy content embedding (e.g. from YouTube, Flickr, Slideshare) via oEmbed.</li>
-  <li>
-<a href="https://github.com/tsmango/jekyll_flickr_set_tag">FlickrSetTag by Thomas Mango</a>: Generates image galleries from Flickr sets.</li>
-  <li>
-<a href="https://github.com/scottwb/jekyll-tweet-tag">Tweet Tag by Scott W. Bradley</a>: Liquid tag for <a href="https://dev.twitter.com/docs/embedded-tweets">Embedded Tweets</a> using Twitter’s shortcodes.</li>
-  <li>
-<a href="https://github.com/rob-murray/jekyll-twitter-plugin">Jekyll Twitter Plugin</a>: A Liquid tag plugin that renders Tweets from Twitter API. Currently supports the <a href="https://dev.twitter.com/rest/reference/get/statuses/oembed">oEmbed</a> API.</li>
-  <li>
-<a href="https://github.com/rustygeldmacher/jekyll-contentblocks">Jekyll-contentblocks</a>: Lets you use Rails-like content_for tags in your templates, for passing content from your posts up to your layouts.</li>
-  <li>
-<a href="https://gist.github.com/1805814">Generate YouTube Embed</a> by <a href="https://github.com/joelverhagen">joelverhagen</a>: Jekyll plugin which allows you to embed a YouTube video in your page with the YouTube ID. Optionally specify width and height dimensions. Like “oEmbed Tag” but just for YouTube.</li>
-  <li>
-<a href="https://github.com/okeeblow/jekyll-beastiepress">Jekyll-beastiepress</a>: FreeBSD utility tags for Jekyll sites.</li>
-  <li>
-<a href="https://gist.github.com/1895282">Jsonball</a>: Reads json files and produces maps for use in Jekyll files.</li>
-  <li>
-<a href="https://github.com/pablooliveira/bibjekyll">Bibjekyll</a>: Render BibTeX-formatted bibliographies/citations included in posts and pages using bibtex2html.</li>
-  <li>
-<a href="https://github.com/archome/jekyll-citation">Jekyll-citation</a>: Render BibTeX-formatted bibliographies/citations included in posts and pages (pure Ruby).</li>
-  <li>
-<a href="https://github.com/ericdfields/Jekyll-Dribbble-Set-Tag">Jekyll Dribbble Set Tag</a>: Builds Dribbble image galleries from any user.</li>
-  <li>
-<a href="https://gist.github.com/2218470">Debbugs</a>: Allows posting links to Debian BTS easily.</li>
-  <li>
-<a href="https://github.com/aburdette/refheap_tag">Refheap_tag</a>: Liquid tag that allows embedding pastes from <a href="https://www.refheap.com/">refheap</a>.</li>
-  <li>
-<a href="https://gist.github.com/2403522">Jekyll-devonly_tag</a>: A block tag for including markup only during development.</li>
-  <li>
-<a href="https://github.com/redwallhp/JekyllGalleryTag">JekyllGalleryTag</a> by <a href="https://github.com/redwallhp">redwallhp</a>: Generates thumbnails from a directory of images and displays them in a grid.</li>
-  <li>
-<a href="https://gist.github.com/Yexiaoxing/5891929">Youku and Tudou Embed</a>: Liquid plugin for embedding Youku and Tudou videos.</li>
-  <li>
-<a href="https://github.com/sectore/jekyll-swfobject">Jekyll-swfobject</a>: Liquid plugin for embedding Adobe Flash files (.swf) using <a href="http://code.google.com/p/swfobject/">SWFObject</a>.</li>
-  <li>
-<a href="https://github.com/robwierzbowski/jekyll-picture-tag">Jekyll Picture Tag</a>: Easy responsive images for Jekyll. Based on the proposed <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-picture-element"><code>&lt;picture&gt;</code></a> element, polyfilled with Scott Jehl’s <a href="https://github.com/scottjehl/picturefill">Picturefill</a>.</li>
-  <li>
-<a href="https://github.com/robwierzbowski/jekyll-image-tag">Jekyll Image Tag</a>: Better images for Jekyll. Save image presets, generate resized images, and add classes, alt text, and other attributes.</li>
-  <li>
-<a href="https://github.com/wildlyinaccurate/jekyll-responsive-image">Jekyll Responsive Image</a>: Responsive images for Jekyll. Automatically resizes images, supports all responsive methods (<code>&lt;picture&gt;</code>, <code>srcset</code>, Imager.js, etc), super-flexible configuration.</li>
-  <li>
-<a href="https://github.com/matze/jekyll-ditaa">Ditaa Tag</a> by <a href="https://github.com/matze">matze</a>: Renders ASCII diagram art into PNG images and inserts a figure tag.</li>
-  <li>
-<a href="https://github.com/davidensinger/jekyll-suggested-tweet">Jekyll Suggested Tweet</a> by <a href="https://github.com/davidensinger/">David Ensinger</a>: A Liquid tag for Jekyll that allows for the embedding of suggested tweets via Twitter’s Web Intents API.</li>
-  <li>
-<a href="https://github.com/GSI/jekyll_date_chart">Jekyll Date Chart</a> by <a href="https://github.com/GSI">GSI</a>: Block that renders date line charts based on textile-formatted tables.</li>
-  <li>
-<a href="https://github.com/GSI/jekyll_image_encode">Jekyll Image Encode</a> by <a href="https://github.com/GSI">GSI</a>: Tag that renders base64 codes of images fetched from the web.</li>
-  <li>
-<a href="https://github.com/GSI/jekyll_quick_man">Jekyll Quick Man</a> by <a href="https://github.com/GSI">GSI</a>: Tag that renders pretty links to man page sources on the internet.</li>
-  <li>
-<a href="https://gist.github.com/23maverick23/8532525">jekyll-font-awesome</a>: Quickly and easily add Font Awesome icons to your posts.</li>
-  <li>
-<a href="https://gist.github.com/tobru/9171700">Lychee Gallery Tag</a> by <a href="https://github.com/tobru">tobru</a>: Include <a href="http://lychee.electerious.com/">Lychee</a> albums into a post. For an introduction, see <a href="https://tobrunet.ch/articles/jekyll-meets-lychee-a-liquid-tag-plugin/">Jekyll meets Lychee - A Liquid Tag plugin</a>
-</li>
-  <li>
-<a href="https://github.com/callmeed/jekyll-image-set">Image Set/Gallery Tag</a> by <a href="https://github.com/callmeed">callmeed</a>: Renders HTML for an image gallery from a folder in your Jekyll site. Just pass it a folder name and class/tag options.</li>
-  <li>
-<a href="https://github.com/lmullen/jekyll_figure">jekyll_figure</a>: Generate figures and captions with links to the figure in a variety of formats</li>
-  <li>
-<a href="https://github.com/bwillis/jekyll-github-sample">Jekyll GitHub Sample Tag</a>: A liquid tag to include a sample of a github repo file in your Jekyll site.</li>
-  <li>
-<a href="https://github.com/rob-murray/jekyll-version-plugin">Jekyll Project Version Tag</a>: A Liquid tag plugin that renders a version identifier for your Jekyll site sourced from the git repository containing your code.</li>
-  <li>
-<a href="https://github.com/AlessandroLorenzi/piwigo_gallery">Piwigo Gallery</a> by <a href="http://www.alorenzi.eu/">Alessandro Lorenzi</a>: Jekyll plugin to generate thumbnails from a Piwigo gallery and display them with a Liquid tag</li>
-  <li>
-<a href="https://github.com/tmthrgd/jekyll-plugins">mathml.rb</a> by Tom Thorogood: A plugin to convert TeX mathematics into MathML for display.</li>
-  <li>
-<a href="https://github.com/aarongustafson/jekyll-webmention_io">webmention_io.rb</a> by <a href="http://aaron-gustafson.com/">Aaron Gustafson</a>: A plugin to enable <a href="http://indiewebcamp.com/webmention">webmention</a> integration using <a href="http://webmention.io">Webmention.io</a>. Includes an optional JavaScript for updating webmentions automatically between publishes and, if available, in realtime using WebSockets.</li>
-  <li>
-<a href="https://github.com/lkorth/jekyll-500px-embed">Jekyll 500px Embed</a> by Luke Korth. A Liquid tag plugin that embeds <a href="https://500px.com/">500px</a> photos.</li>
-  <li>
-<a href="https://github.com/bdesham/inline_highlight">inline_highlight</a>: A tag for inline syntax highlighting.</li>
-  <li>
-<a href="https://github.com/jasonbellamy/jekyll-mermaid">jekyll-mermaid</a>: Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.</li>
-  <li>
-<a href="https://github.com/Ezmyrelda/twa">twa</a>: Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.</li>
-  <li>
-<a href="https://github.com/dimitri-koenig/jekyll-plugins">Fetch remote file content</a> by <a href="https://www.dimitrikoenig.net/">Dimitri König</a>: Using <code>remote_file_content</code> tag you can fetch the content of a remote file and include it as if you would put the content right into your markdown file yourself. Very useful for including code from github repo’s to always have a current repo version.</li>
-  <li>
-<a href="https://github.com/mnuessler/jekyll-asciinema">jekyll-asciinema</a>: A tag for embedding asciicasts recorded with <a href="https://asciinema.org">asciinema</a> in your Jekyll pages.</li>
-  <li>
-<a href="https://github.com/dommmel/jekyll-youtube">Jekyll-Youtube</a>  A Liquid tag that embeds Youtube videos. The default emded markup is responsive but you can also specify your own by using an include/partial.</li>
-  <li>
-<a href="https://github.com/lawmurray/indii-jekyll-flickr">Jekyll Flickr Plugin</a> by <a href="http://www.indii.org">Lawrence Murray</a>: Embeds Flickr photosets (albums) as a gallery of thumbnails, with lightbox links to larger images.</li>
-  <li>
-<a href="https://github.com/paulrobertlloyd/jekyll-figure">jekyll-figure</a>: A liquid tag for Jekyll that generates <code>&lt;figure&gt;</code> elements.</li>
-  <li>
-<a href="https://github.com/eug/jekyll-video-embed">Jekyll Video Embed</a>: It provides several tags to easily embed videos (e.g. Youtube, Vimeo, UStream and Ted Talks)</li>
+  <li><a href="https://github.com/samrayner/jekyll-asset-path-plugin">Asset Path Tag</a> by <a href="http://www.samrayner.com/">Sam Rayner</a>: Allows organisation of assets into subdirectories by outputting a path for a given file relative to the current post or page.</li>
+  <li><a href="https://github.com/christianhellsten/jekyll-plugins">Delicious Plugin by Christian Hellsten</a>: Fetches and renders bookmarks from delicious.com.</li>
+  <li><a href="https://gist.github.com/480380">Ultraviolet Plugin by Steve Alex</a>: Jekyll tag for the <a href="https://github.com/grosser/ultraviolet">Ultraviolet</a> code highligher.</li>
+  <li><a href="https://gist.github.com/710577">Tag Cloud Plugin by Ilkka Laukkanen</a>: Generate a tag cloud that links to tag pages.</li>
+  <li><a href="https://gist.github.com/730347">GIT Tag by Alexandre Girard</a>: Add Git activity inside a list.</li>
+  <li><a href="https://gist.github.com/834610">MathJax Liquid Tags by Jessy Cowan-Sharp</a>: Simple liquid tags for Jekyll that convert inline math and block equations to the appropriate MathJax script tags.</li>
+  <li><a href="https://gist.github.com/1027674">Non-JS Gist Tag by Brandon Tilley</a> A Liquid tag that embeds Gists and shows code for non-JavaScript enabled browsers and readers.</li>
+  <li><a href="https://gist.github.com/449509">Render Time Tag by Blake Smith</a>: Displays the time a Jekyll page was generated.</li>
+  <li><a href="https://gist.github.com/912466">Status.net/OStatus Tag by phaer</a>: Displays the notices in a given status.net/ostatus feed.</li>
+  <li><a href="https://github.com/robb/jekyll-embedly-client">Embed.ly client by Robert Böhnke</a>: Autogenerate embeds from URLs using oEmbed.</li>
+  <li><a href="https://gist.github.com/2290195">Logarithmic Tag Cloud</a>: Flexible. Logarithmic distribution. Documentation inline.</li>
+  <li><a href="https://gist.github.com/1455726">oEmbed Tag by Tammo van Lessen</a>: Enables easy content embedding (e.g. from YouTube, Flickr, Slideshare) via oEmbed.</li>
+  <li><a href="https://github.com/tsmango/jekyll_flickr_set_tag">FlickrSetTag by Thomas Mango</a>: Generates image galleries from Flickr sets.</li>
+  <li><a href="https://github.com/scottwb/jekyll-tweet-tag">Tweet Tag by Scott W. Bradley</a>: Liquid tag for <a href="https://dev.twitter.com/docs/embedded-tweets">Embedded Tweets</a> using Twitter’s shortcodes.</li>
+  <li><a href="https://github.com/rob-murray/jekyll-twitter-plugin">Jekyll Twitter Plugin</a>: A Liquid tag plugin that renders Tweets from Twitter API. Currently supports the <a href="https://dev.twitter.com/rest/reference/get/statuses/oembed">oEmbed</a> API.</li>
+  <li><a href="https://github.com/rustygeldmacher/jekyll-contentblocks">Jekyll-contentblocks</a>: Lets you use Rails-like content_for tags in your templates, for passing content from your posts up to your layouts.</li>
+  <li><a href="https://gist.github.com/1805814">Generate YouTube Embed</a> by <a href="https://github.com/joelverhagen">joelverhagen</a>: Jekyll plugin which allows you to embed a YouTube video in your page with the YouTube ID. Optionally specify width and height dimensions. Like “oEmbed Tag” but just for YouTube.</li>
+  <li><a href="https://github.com/okeeblow/jekyll-beastiepress">Jekyll-beastiepress</a>: FreeBSD utility tags for Jekyll sites.</li>
+  <li><a href="https://gist.github.com/1895282">Jsonball</a>: Reads json files and produces maps for use in Jekyll files.</li>
+  <li><a href="https://github.com/pablooliveira/bibjekyll">Bibjekyll</a>: Render BibTeX-formatted bibliographies/citations included in posts and pages using bibtex2html.</li>
+  <li><a href="https://github.com/archome/jekyll-citation">Jekyll-citation</a>: Render BibTeX-formatted bibliographies/citations included in posts and pages (pure Ruby).</li>
+  <li><a href="https://github.com/ericdfields/Jekyll-Dribbble-Set-Tag">Jekyll Dribbble Set Tag</a>: Builds Dribbble image galleries from any user.</li>
+  <li><a href="https://gist.github.com/2218470">Debbugs</a>: Allows posting links to Debian BTS easily.</li>
+  <li><a href="https://github.com/aburdette/refheap_tag">Refheap_tag</a>: Liquid tag that allows embedding pastes from <a href="https://www.refheap.com/">refheap</a>.</li>
+  <li><a href="https://gist.github.com/2403522">Jekyll-devonly_tag</a>: A block tag for including markup only during development.</li>
+  <li><a href="https://github.com/redwallhp/JekyllGalleryTag">JekyllGalleryTag</a> by <a href="https://github.com/redwallhp">redwallhp</a>: Generates thumbnails from a directory of images and displays them in a grid.</li>
+  <li><a href="https://gist.github.com/Yexiaoxing/5891929">Youku and Tudou Embed</a>: Liquid plugin for embedding Youku and Tudou videos.</li>
+  <li><a href="https://github.com/sectore/jekyll-swfobject">Jekyll-swfobject</a>: Liquid plugin for embedding Adobe Flash files (.swf) using <a href="http://code.google.com/p/swfobject/">SWFObject</a>.</li>
+  <li><a href="https://github.com/robwierzbowski/jekyll-picture-tag">Jekyll Picture Tag</a>: Easy responsive images for Jekyll. Based on the proposed <a href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-picture-element"><code>&lt;picture&gt;</code></a> element, polyfilled with Scott Jehl’s <a href="https://github.com/scottjehl/picturefill">Picturefill</a>.</li>
+  <li><a href="https://github.com/robwierzbowski/jekyll-image-tag">Jekyll Image Tag</a>: Better images for Jekyll. Save image presets, generate resized images, and add classes, alt text, and other attributes.</li>
+  <li><a href="https://github.com/wildlyinaccurate/jekyll-responsive-image">Jekyll Responsive Image</a>: Responsive images for Jekyll. Automatically resizes images, supports all responsive methods (<code>&lt;picture&gt;</code>, <code>srcset</code>, Imager.js, etc), super-flexible configuration.</li>
+  <li><a href="https://github.com/matze/jekyll-ditaa">Ditaa Tag</a> by <a href="https://github.com/matze">matze</a>: Renders ASCII diagram art into PNG images and inserts a figure tag.</li>
+  <li><a href="https://github.com/davidensinger/jekyll-suggested-tweet">Jekyll Suggested Tweet</a> by <a href="https://github.com/davidensinger/">David Ensinger</a>: A Liquid tag for Jekyll that allows for the embedding of suggested tweets via Twitter’s Web Intents API.</li>
+  <li><a href="https://github.com/GSI/jekyll_date_chart">Jekyll Date Chart</a> by <a href="https://github.com/GSI">GSI</a>: Block that renders date line charts based on textile-formatted tables.</li>
+  <li><a href="https://github.com/GSI/jekyll_image_encode">Jekyll Image Encode</a> by <a href="https://github.com/GSI">GSI</a>: Tag that renders base64 codes of images fetched from the web.</li>
+  <li><a href="https://github.com/GSI/jekyll_quick_man">Jekyll Quick Man</a> by <a href="https://github.com/GSI">GSI</a>: Tag that renders pretty links to man page sources on the internet.</li>
+  <li><a href="https://gist.github.com/23maverick23/8532525">jekyll-font-awesome</a>: Quickly and easily add Font Awesome icons to your posts.</li>
+  <li><a href="https://gist.github.com/tobru/9171700">Lychee Gallery Tag</a> by <a href="https://github.com/tobru">tobru</a>: Include <a href="http://lychee.electerious.com/">Lychee</a> albums into a post. For an introduction, see <a href="https://tobrunet.ch/articles/jekyll-meets-lychee-a-liquid-tag-plugin/">Jekyll meets Lychee - A Liquid Tag plugin</a></li>
+  <li><a href="https://github.com/callmeed/jekyll-image-set">Image Set/Gallery Tag</a> by <a href="https://github.com/callmeed">callmeed</a>: Renders HTML for an image gallery from a folder in your Jekyll site. Just pass it a folder name and class/tag options.</li>
+  <li><a href="https://github.com/lmullen/jekyll_figure">jekyll_figure</a>: Generate figures and captions with links to the figure in a variety of formats</li>
+  <li><a href="https://github.com/bwillis/jekyll-github-sample">Jekyll GitHub Sample Tag</a>: A liquid tag to include a sample of a github repo file in your Jekyll site.</li>
+  <li><a href="https://github.com/rob-murray/jekyll-version-plugin">Jekyll Project Version Tag</a>: A Liquid tag plugin that renders a version identifier for your Jekyll site sourced from the git repository containing your code.</li>
+  <li><a href="https://github.com/AlessandroLorenzi/piwigo_gallery">Piwigo Gallery</a> by <a href="http://www.alorenzi.eu/">Alessandro Lorenzi</a>: Jekyll plugin to generate thumbnails from a Piwigo gallery and display them with a Liquid tag</li>
+  <li><a href="https://github.com/tmthrgd/jekyll-plugins">mathml.rb</a> by Tom Thorogood: A plugin to convert TeX mathematics into MathML for display.</li>
+  <li><a href="https://github.com/aarongustafson/jekyll-webmention_io">webmention_io.rb</a> by <a href="http://aaron-gustafson.com/">Aaron Gustafson</a>: A plugin to enable <a href="http://indiewebcamp.com/webmention">webmention</a> integration using <a href="http://webmention.io">Webmention.io</a>. Includes an optional JavaScript for updating webmentions automatically between publishes and, if available, in realtime using WebSockets.</li>
+  <li><a href="https://github.com/lkorth/jekyll-500px-embed">Jekyll 500px Embed</a> by Luke Korth. A Liquid tag plugin that embeds <a href="https://500px.com/">500px</a> photos.</li>
+  <li><a href="https://github.com/bdesham/inline_highlight">inline_highlight</a>: A tag for inline syntax highlighting.</li>
+  <li><a href="https://github.com/jasonbellamy/jekyll-mermaid">jekyll-mermaid</a>: Simplify the creation of mermaid diagrams and flowcharts in your posts and pages.</li>
+  <li><a href="https://github.com/Ezmyrelda/twa">twa</a>: Twemoji Awesome plugin for Jekyll. Liquid tag allowing you to use twitter emoji in your jekyll pages.</li>
+  <li><a href="https://github.com/dimitri-koenig/jekyll-plugins">Fetch remote file content</a> by <a href="https://www.dimitrikoenig.net/">Dimitri König</a>: Using <code>remote_file_content</code> tag you can fetch the content of a remote file and include it as if you would put the content right into your markdown file yourself. Very useful for including code from github repo’s to always have a current repo version.</li>
+  <li><a href="https://github.com/mnuessler/jekyll-asciinema">jekyll-asciinema</a>: A tag for embedding asciicasts recorded with <a href="https://asciinema.org">asciinema</a> in your Jekyll pages.</li>
+  <li><a href="https://github.com/dommmel/jekyll-youtube">Jekyll-Youtube</a>  A Liquid tag that embeds Youtube videos. The default emded markup is responsive but you can also specify your own by using an include/partial.</li>
+  <li><a href="https://github.com/lawmurray/indii-jekyll-flickr">Jekyll Flickr Plugin</a> by <a href="http://www.indii.org">Lawrence Murray</a>: Embeds Flickr photosets (albums) as a gallery of thumbnails, with lightbox links to larger images.</li>
+  <li><a href="https://github.com/paulrobertlloyd/jekyll-figure">jekyll-figure</a>: A liquid tag for Jekyll that generates <code>&lt;figure&gt;</code> elements.</li>
+  <li><a href="https://github.com/eug/jekyll-video-embed">Jekyll Video Embed</a>: It provides several tags to easily embed videos (e.g. Youtube, Vimeo, UStream and Ted Talks)</li>
 </ul>
 
 <h4 id="collections">Collections</h4>
 
 <ul>
-  <li>
-<a href="https://github.com/recurser/jekyll-plugins">Jekyll Plugins by Recursive Design</a>: Plugins to generate Project pages from GitHub readmes, a Category page, and a Sitemap generator.</li>
-  <li>
-<a href="https://github.com/flatterline/jekyll-plugins">Company website and blog plugins</a> by Flatterline, a <a href="http://flatterline.com/">Ruby on Rails development company</a>: Portfolio/project page generator, team/individual page generator, an author bio liquid tag for use on posts, and a few other smaller plugins.</li>
-  <li>
-<a href="https://github.com/aucor/jekyll-plugins">Jekyll plugins by Aucor</a>: Plugins for trimming unwanted newlines/whitespace and sorting pages by weight attribute.</li>
+  <li><a href="https://github.com/recurser/jekyll-plugins">Jekyll Plugins by Recursive Design</a>: Plugins to generate Project pages from GitHub readmes, a Category page, and a Sitemap generator.</li>
+  <li><a href="https://github.com/flatterline/jekyll-plugins">Company website and blog plugins</a> by Flatterline, a <a href="http://flatterline.com/">Ruby on Rails development company</a>: Portfolio/project page generator, team/individual page generator, an author bio liquid tag for use on posts, and a few other smaller plugins.</li>
+  <li><a href="https://github.com/aucor/jekyll-plugins">Jekyll plugins by Aucor</a>: Plugins for trimming unwanted newlines/whitespace and sorting pages by weight attribute.</li>
 </ul>
 
 <h4 id="other">Other</h4>
 
 <ul>
-  <li>
-<a href="https://github.com/tmthrgd/ditaa-ditaa">ditaa-ditaa</a> by Tom Thorogood: a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.</li>
-  <li>
-<a href="https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb">Pygments Cache Path by Raimonds Simanovskis</a>: Plugin to cache syntax-highlighted code from Pygments.</li>
-  <li>
-<a href="https://gist.github.com/49630">Draft/Publish Plugin by Michael Ivey</a>: Save posts as drafts.</li>
-  <li>
-<a href="https://gist.github.com/490101">Growl Notification Generator by Tate Johnson</a>: Send Jekyll notifications to Growl.</li>
-  <li>
-<a href="https://gist.github.com/525267">Growl Notification Hook by Tate Johnson</a>: Better alternative to the above, but requires his “hook” fork.</li>
-  <li>
-<a href="https://github.com/LawrenceWoodman/related_posts-jekyll_plugin">Related Posts by Lawrence Woodman</a>: Overrides <code>site.related_posts</code> to use categories to assess relationship.</li>
-  <li>
-<a href="https://github.com/toshimaru/jekyll-tagging-related_posts">jekyll-tagging-related_posts</a>: Jekyll related_posts function based on tags (works on Jekyll3).</li>
-  <li>
-<a href="https://gist.github.com/88cda643aa7e3b0ca1e5">Tiered Archives by Eli Naeher</a>: Create tiered template variable that allows you to group archives by year and month.</li>
-  <li>
-<a href="https://github.com/blackwinter/jekyll-localization">Jekyll-localization</a>: Jekyll plugin that adds localization features to the rendering engine.</li>
-  <li>
-<a href="https://github.com/blackwinter/jekyll-rendering">Jekyll-rendering</a>: Jekyll plugin to provide alternative rendering engines.</li>
-  <li>
-<a href="https://github.com/blackwinter/jekyll-pagination">Jekyll-pagination</a>: Jekyll plugin to extend the pagination generator.</li>
-  <li>
-<a href="https://github.com/pattex/jekyll-tagging">Jekyll-tagging</a>: Jekyll plugin to automatically generate a tag cloud and tag pages.</li>
-  <li>
-<a href="https://github.com/inukshuk/jekyll-scholar">Jekyll-scholar</a>: Jekyll extensions for the blogging scholar.</li>
-  <li>
-<a href="https://github.com/moshen/jekyll-asset_bundler">Jekyll-asset_bundler</a>: Bundles and minifies JavaScript and CSS.</li>
-  <li>
-<a href="http://ixti.net/jekyll-assets/">Jekyll-assets</a> by <a href="https://github.com/ixti">ixti</a>: Rails-alike assets pipeline (write assets in CoffeeScript, Sass, LESS etc; specify dependencies for automatic bundling using simple declarative comments in assets; minify and compress; use JST templates; cache bust; and many-many more).</li>
-  <li>
-<a href="https://github.com/kitsched/japr">JAPR</a>: Jekyll Asset Pipeline Reborn - Powerful asset pipeline for Jekyll that collects, converts and compresses JavaScript and CSS assets.</li>
-  <li>
-<a href="https://gist.github.com/2758691">File compressor</a> by <a href="https://github.com/mytharcher">mytharcher</a>: Compress HTML and JavaScript files on site build.</li>
-  <li>
-<a href="https://github.com/tkareine/jekyll-minibundle">Jekyll-minibundle</a>: Asset bundling and cache busting using external minification tool of your choice. No gem dependencies.</li>
-  <li>
-<a href="https://github.com/JCB-K/singlepage-jekyll">Singlepage-jekyll</a> by <a href="https://github.com/JCB-K">JCB-K</a>: Turns Jekyll into a dynamic one-page website.</li>
-  <li>
-<a href="https://github.com/robwierzbowski/generator-jekyllrb">generator-jekyllrb</a>: A generator that wraps Jekyll in <a href="http://yeoman.io/">Yeoman</a>, a tool collection and workflow for building modern web apps.</li>
-  <li>
-<a href="https://github.com/dannygarcia/grunt-jekyll">grunt-jekyll</a>: A straightforward <a href="http://gruntjs.com/">Grunt</a> plugin for Jekyll.</li>
-  <li>
-<a href="https://github.com/indirect/jekyll-postfiles">jekyll-postfiles</a>: Add <code>_postfiles</code> directory and <code>{{ postfile }}</code> tag so the files a post refers to will always be right there inside your repo.</li>
-  <li>
-<a href="http://jch.penibelst.de/">A layout that compresses HTML</a>: GitHub Pages compatible, configurable way to compress HTML files on site build.</li>
-  <li>
-<a href="https://github.com/wdenton/jekyll-co2">Jekyll CO₂</a>: Generates HTML showing the monthly change in atmospheric CO₂ at the Mauna Loa observatory in Hawaii.</li>
-  <li>
-<a href="http://www.northfieldx.co.uk/remote-include/">remote-include</a>: Includes files using remote URLs</li>
-  <li>
-<a href="https://github.com/digitalsparky/jekyll-minifier">jekyll-minifier</a>: Minifies HTML, XML, CSS, and Javascript both inline and as separate files utilising yui-compressor and htmlcompressor.</li>
-  <li>
-<a href="https://bitbucket.org/nyufac/jekyll-views-router">Jekyll views router</a>: Simple router between generator plugins and templates.</li>
-  <li>
-<a href="https://github.com/vwochnik/jekyll-language-plugin">Jekyll Language Plugin</a>: Jekyll 3.0-compatible multi-language plugin for posts, pages and includes.</li>
-  <li>
-<a href="https://github.com/vwochnik/jekyll-deploy">Jekyll Deploy</a>: Adds a <code>deploy</code> sub-command to Jekyll.</li>
-  <li>
-<a href="https://github.com/contentful/jekyll-contentful-data-import">Official Contentful Jekyll Plugin</a>: Adds a <code>contentful</code> sub-command to Jekyll to import data from Contentful.</li>
+  <li><a href="https://github.com/tmthrgd/ditaa-ditaa">ditaa-ditaa</a> by Tom Thorogood: a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.</li>
+  <li><a href="https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb">Pygments Cache Path by Raimonds Simanovskis</a>: Plugin to cache syntax-highlighted code from Pygments.</li>
+  <li><a href="https://gist.github.com/49630">Draft/Publish Plugin by Michael Ivey</a>: Save posts as drafts.</li>
+  <li><a href="https://gist.github.com/490101">Growl Notification Generator by Tate Johnson</a>: Send Jekyll notifications to Growl.</li>
+  <li><a href="https://gist.github.com/525267">Growl Notification Hook by Tate Johnson</a>: Better alternative to the above, but requires his “hook” fork.</li>
+  <li><a href="https://github.com/LawrenceWoodman/related_posts-jekyll_plugin">Related Posts by Lawrence Woodman</a>: Overrides <code>site.related_posts</code> to use categories to assess relationship.</li>
+  <li><a href="https://github.com/toshimaru/jekyll-tagging-related_posts">jekyll-tagging-related_posts</a>: Jekyll related_posts function based on tags (works on Jekyll3).</li>
+  <li><a href="https://gist.github.com/88cda643aa7e3b0ca1e5">Tiered Archives by Eli Naeher</a>: Create tiered template variable that allows you to group archives by year and month.</li>
+  <li><a href="https://github.com/blackwinter/jekyll-localization">Jekyll-localization</a>: Jekyll plugin that adds localization features to the rendering engine.</li>
+  <li><a href="https://github.com/blackwinter/jekyll-rendering">Jekyll-rendering</a>: Jekyll plugin to provide alternative rendering engines.</li>
+  <li><a href="https://github.com/blackwinter/jekyll-pagination">Jekyll-pagination</a>: Jekyll plugin to extend the pagination generator.</li>
+  <li><a href="https://github.com/pattex/jekyll-tagging">Jekyll-tagging</a>: Jekyll plugin to automatically generate a tag cloud and tag pages.</li>
+  <li><a href="https://github.com/inukshuk/jekyll-scholar">Jekyll-scholar</a>: Jekyll extensions for the blogging scholar.</li>
+  <li><a href="https://github.com/moshen/jekyll-asset_bundler">Jekyll-asset_bundler</a>: Bundles and minifies JavaScript and CSS.</li>
+  <li><a href="http://ixti.net/jekyll-assets/">Jekyll-assets</a> by <a href="https://github.com/ixti">ixti</a>: Rails-alike assets pipeline (write assets in CoffeeScript, Sass, LESS etc; specify dependencies for automatic bundling using simple declarative comments in assets; minify and compress; use JST templates; cache bust; and many-many more).</li>
+  <li><a href="https://github.com/kitsched/japr">JAPR</a>: Jekyll Asset Pipeline Reborn - Powerful asset pipeline for Jekyll that collects, converts and compresses JavaScript and CSS assets.</li>
+  <li><a href="https://gist.github.com/2758691">File compressor</a> by <a href="https://github.com/mytharcher">mytharcher</a>: Compress HTML and JavaScript files on site build.</li>
+  <li><a href="https://github.com/tkareine/jekyll-minibundle">Jekyll-minibundle</a>: Asset bundling and cache busting using external minification tool of your choice. No gem dependencies.</li>
+  <li><a href="https://github.com/JCB-K/singlepage-jekyll">Singlepage-jekyll</a> by <a href="https://github.com/JCB-K">JCB-K</a>: Turns Jekyll into a dynamic one-page website.</li>
+  <li><a href="https://github.com/robwierzbowski/generator-jekyllrb">generator-jekyllrb</a>: A generator that wraps Jekyll in <a href="http://yeoman.io/">Yeoman</a>, a tool collection and workflow for building modern web apps.</li>
+  <li><a href="https://github.com/dannygarcia/grunt-jekyll">grunt-jekyll</a>: A straightforward <a href="http://gruntjs.com/">Grunt</a> plugin for Jekyll.</li>
+  <li><a href="https://github.com/indirect/jekyll-postfiles">jekyll-postfiles</a>: Add <code>_postfiles</code> directory and <code>{{ postfile }}</code> tag so the files a post refers to will always be right there inside your repo.</li>
+  <li><a href="http://jch.penibelst.de/">A layout that compresses HTML</a>: GitHub Pages compatible, configurable way to compress HTML files on site build.</li>
+  <li><a href="https://github.com/wdenton/jekyll-co2">Jekyll CO₂</a>: Generates HTML showing the monthly change in atmospheric CO₂ at the Mauna Loa observatory in Hawaii.</li>
+  <li><a href="http://www.northfieldx.co.uk/remote-include/">remote-include</a>: Includes files using remote URLs</li>
+  <li><a href="https://github.com/digitalsparky/jekyll-minifier">jekyll-minifier</a>: Minifies HTML, XML, CSS, and Javascript both inline and as separate files utilising yui-compressor and htmlcompressor.</li>
+  <li><a href="https://bitbucket.org/nyufac/jekyll-views-router">Jekyll views router</a>: Simple router between generator plugins and templates.</li>
+  <li><a href="https://github.com/vwochnik/jekyll-language-plugin">Jekyll Language Plugin</a>: Jekyll 3.0-compatible multi-language plugin for posts, pages and includes.</li>
+  <li><a href="https://github.com/vwochnik/jekyll-deploy">Jekyll Deploy</a>: Adds a <code>deploy</code> sub-command to Jekyll.</li>
+  <li><a href="https://github.com/contentful/jekyll-contentful-data-import">Official Contentful Jekyll Plugin</a>: Adds a <code>contentful</code> sub-command to Jekyll to import data from Contentful.</li>
 </ul>
 
 <h4 id="editors">Editors</h4>
 
 <ul>
-  <li>
-<a href="https://github.com/23maverick23/sublime-jekyll">sublime-jekyll</a>: A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via <a href="https://packagecontrol.io/packages/Jekyll">Package Control</a>.</li>
-  <li>
-<a href="https://github.com/parkr/vim-jekyll">vim-jekyll</a>: A vim plugin to generate
+  <li><a href="https://github.com/23maverick23/sublime-jekyll">sublime-jekyll</a>: A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via <a href="https://packagecontrol.io/packages/Jekyll">Package Control</a>.</li>
+  <li><a href="https://github.com/parkr/vim-jekyll">vim-jekyll</a>: A vim plugin to generate
 new posts and run <code>jekyll build</code> all without leaving vim.</li>
-  <li>
-<a href="https://atom.io/packages/markdown-writer">markdown-writer</a>: An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.</li>
-  <li>
-<a href="https://wordpress.org/plugins/wp2jekyll/">Wordpress2Jekyll</a>: A Wordpress plugin that allows you to use Wordpress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.</li>
+  <li><a href="https://atom.io/packages/markdown-writer">markdown-writer</a>: An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.</li>
+  <li><a href="https://wordpress.org/plugins/wp2jekyll/">Wordpress2Jekyll</a>: A Wordpress plugin that allows you to use Wordpress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.</li>
 </ul>
 
 <div class="note info">
@@ -3986,7 +3825,7 @@ new posts and run <code>jekyll build</code> all without leaving vim.</li>
   <footer role="contentinfo">
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
-      <p>The contents of this website are <br>© 2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
+      <p>The contents of this website are <br />&copy;&nbsp;2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>
@@ -4065,6 +3904,5 @@ new posts and run <code>jekyll build</code> all without leaving vim.</li>
 
 
 
-
-
 </body>
+</html>
