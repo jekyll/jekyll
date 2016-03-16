@@ -31,7 +31,6 @@ module Jekyll
 
     def run
       Jekyll.logger.debug "Rendering:", document.relative_path
-      start = Time.now
 
       payload["page"] = document.to_liquid
 
@@ -49,7 +48,7 @@ module Jekyll
       payload['highlighter_prefix'] = converters.first.highlighter_prefix
       payload['highlighter_suffix'] = converters.first.highlighter_suffix
 
-      time "Pre-Render Hooks:", document.relative_path do
+      Utils.time "Pre-Render Hooks:", document.relative_path do
         document.trigger_hooks(:pre_render, payload)
       end
 
@@ -61,18 +60,18 @@ module Jekyll
       output = document.content
 
       if document.render_with_liquid?
-        output = time "Rendering Liquid:", document.relative_path do
+        output = Utils.time "Rendering Liquid:", document.relative_path do
           render_liquid(output, payload, info, document.path)
         end
       end
 
-      output = time "Rendering Markup:", document.relative_path do
+      output = Utils.time "Rendering Markup:", document.relative_path do
         convert(output)
       end
       document.content = output
 
       if document.place_in_layout?
-        output = time "Rendering Layout:", document.relative_path do
+        output = Utils.time "Rendering Layout:", document.relative_path do
           place_in_layouts(
             output,
             payload,
@@ -81,7 +80,6 @@ module Jekyll
         end
       end
 
-      Jekyll.logger.debug "Rendered:", "#{document.relative_path} in #{Time.now - start}s"
       output
     end
 
@@ -93,7 +91,7 @@ module Jekyll
     def convert(content)
       converters.reduce(content) do |output, converter|
         begin
-          time "Rendering Markup:", "#{document.relative_path} through #{converter.class}" do
+          Utils.time "Rendering Markup:", "#{document.relative_path} through #{converter.class}" do
             converter.convert output
           end
         rescue => e
@@ -176,13 +174,6 @@ module Jekyll
     end
 
     private
-
-    def time(left, right)
-      start = Time.now
-      output = yield
-      Jekyll.logger.debug left, "#{right} in #{format("%.8f", Time.now - start)}s"
-      output
-    end
 
     def permalink_ext
       if document.permalink && !document.permalink.end_with?("/")

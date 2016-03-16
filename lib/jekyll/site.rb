@@ -168,16 +168,20 @@ module Jekyll
       collections.each do |_, collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
-            document.output = Jekyll::Renderer.new(self, document, payload).run
-            document.trigger_hooks(:post_render)
+            Utils.time "Rendered:", document.relative_path do
+              document.output = Jekyll::Renderer.new(self, document, payload).run
+              document.trigger_hooks(:post_render)
+            end
           end
         end
       end
 
       pages.flatten.each do |page|
         if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
+          Utils.time "Rendered:", page.relative_path do
+            page.output = Jekyll::Renderer.new(self, page, payload).run
+            page.trigger_hooks(:post_render)
+          end
         end
       end
 
