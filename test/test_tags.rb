@@ -470,8 +470,32 @@ title: Invalid post name linking
 {% post_url abc2008-11-21-complex %}
 CONTENT
 
-      assert_raises ArgumentError do
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      assert_raises Jekyll::Errors::PostURLError do
+        create_post(content, {
+          'permalink' => 'pretty',
+          'source' => source_dir,
+          'destination' => dest_dir,
+          'read_posts' => true
+        })
+      end
+    end
+
+    should "cause an error with a bad date" do
+      content = <<CONTENT
+---
+title: Invalid post name linking
+---
+
+{% post_url 2008-42-21-complex %}
+CONTENT
+
+      assert_raises Jekyll::Errors::InvalidDateError do
+        create_post(content, {
+          'permalink' => 'pretty',
+          'source' => source_dir,
+          'destination' => dest_dir,
+          'read_posts' => true
+        })
       end
     end
   end
