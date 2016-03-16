@@ -76,7 +76,8 @@ module Jekyll
               ))
 
               unless Gem::Version.new(Rouge.version) > Gem::Version.new("1.3.0")
-                abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
+                raise Jekyll::Errors::IncorrectDependencyError,
+                  "Please install Rouge 1.3.0 or greater and try running Jekyll again."
               end
 
               include Rouge::Plugins::Redcarpet

@@ -174,13 +174,15 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML).to receive(:load_file).with(@path).and_return(Array.new)
       allow($stderr).to receive(:puts).and_return(("WARNING: ".rjust(20) + "Error reading configuration. Using defaults (and options).").yellow)
       allow($stderr).to receive(:puts).and_return("Configuration file: (INVALID) #{@path}".yellow)
-      assert_equal @@defaults, Jekyll.configuration({})
+      assert_raises Jekyll::Errors::InvalidConfigurationError do
+        Jekyll.configuration({})
+      end
     end
 
     should "fire warning when user-specified config file isn't there" do
       allow(SafeYAML).to receive(:load_file).with(@user_config) { raise SystemCallError, "No such file or directory - #{@user_config}" }
       allow($stderr).to receive(:puts).with(("Fatal: ".rjust(20) + "The configuration file '#{@user_config}' could not be found.").red)
-      assert_raises LoadError do
+      assert_raises Jekyll::Errors::FileNotFoundError do
         Jekyll.configuration({'config' => [@user_config]})
       end
     end

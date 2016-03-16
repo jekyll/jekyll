@@ -23,7 +23,7 @@ module Jekyll
           if healthy?(site)
             Jekyll.logger.info "Your test results", "are in. Everything looks fine."
           else
-            abort
+            raise Jekyll::Errors::UnhealthySiteError
           end
         end
 
