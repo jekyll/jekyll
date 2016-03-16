@@ -137,7 +137,16 @@ module Jekyll
         require 'json'
         JSON.pretty_generate to_h
       end
-      alias_method :to_json, :inspect
+
+      # When a JSON representation of the drop is requested (e.g. through
+      # template filters) then only show the YAML front matter data.
+      # Other Jekyll objects might not be dumpable due to recursiveness.
+      #
+      # Returns a JSON dump of the YAML front matter data.
+      def to_json
+        require 'json'
+        JSON.generate fallback_data
+      end
 
       # Collects all the keys and passes each to the block in turn.
       #
