@@ -192,8 +192,11 @@ module Jekyll
           SLUGIFY_PRETTY_REGEXP
         end
 
+      # Transliterate slug
+      slug = I18n.transliterate(string);
+
       # Strip according to the mode
-      slug = string.gsub(re, '-')
+      slug.gsub(re, '-')
 
       # Remove leading/trailing hyphen
       slug.gsub!(/^\-|\-$/i, '')
