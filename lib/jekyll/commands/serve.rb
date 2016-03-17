@@ -33,6 +33,7 @@ module Jekyll
             cmd.action do |_, opts|
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
+              self.class.trace = cmd.trace
               Build.process(opts)
               Serve.process(opts)
             end

@@ -1,6 +1,8 @@
 module Jekyll
   class Command
     class << self
+      attr_accessor :trace
+
       # A list of subclasses of Jekyll::Command
       def subclasses
         @subclasses ||= []
@@ -26,8 +28,15 @@ module Jekyll
         site.process
       rescue Jekyll::Errors::FatalException => e
         Jekyll.logger.error "ERROR:", "YOUR SITE COULD NOT BE BUILT:"
-        Jekyll.logger.error "", "------------------------------------"
+        Jekyll.logger.error "", "------------------------------------------"
         Jekyll.logger.error "", e.message
+        if self.class.trace
+          Jekyll.logger.error "", "------------------------------------------"
+          Jekyll.logger.error "Stacktrace:", e.backtrace.join("\n")
+        else
+          Jekyll.logger.error "", ""
+          Jekyll.logger.error "", "Run jekyll with --trace for more information."
+        end
         exit(1)
       end
 

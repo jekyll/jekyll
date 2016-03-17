@@ -13,6 +13,7 @@ module Jekyll
 
             c.action do |_, options|
               options["serving"] = false
+              self.class.trace = c.trace
               Jekyll::Commands::Build.process(options)
             end
           end
