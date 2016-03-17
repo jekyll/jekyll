@@ -16,11 +16,8 @@ module Jekyll
           return document.url if document.relative_path == @relative_path
         end
 
-        raise ArgumentError.new <<-eos
-Could not find document "#{@relative_path}" in tag '#{TagName}'.
-
-Make sure the document exists and the path is correct.
-eos
+        raise ArgumentError, "Could not find document '#{@relative_path}' in tag '#{TagName}'.\n\n" \
+          "Make sure the document exists and the path is correct."
       end
     end
   end

@@ -11,12 +11,8 @@ class TestTags < JekyllUnitTest
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     site = fixture_site({"highlighter" => "rouge"}.merge(override))
 
-    if override['read_posts']
-      site.posts.docs.concat(PostReader.new(site).read_posts(''))
-    end
-    if override['read_collections']
-      CollectionReader.new(site).read
-    end
+    site.posts.docs.concat(PostReader.new(site).read_posts('')) if override['read_posts']
+    CollectionReader.new(site).read if override['read_collections']
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
