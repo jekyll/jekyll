@@ -144,8 +144,7 @@ module Jekyll
       #
       # Returns a JSON dump of the YAML front matter data.
       def to_json
-        require 'json'
-        JSON.generate fallback_data
+        fallback_data.to_json
       end
 
       # Collects all the keys and passes each to the block in turn.
