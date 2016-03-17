@@ -198,9 +198,6 @@ module Jekyll
       # Remove leading/trailing hyphen
       slug.gsub!(/^\-|\-$/i, '')
 
-      # Remove non-ASCII characters
-      slug.delete!("^\u{0000}-\u{007F}")
-
       slug.downcase! unless cased
       slug
     end
