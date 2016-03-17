@@ -271,6 +271,26 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Array Filters</strong></p>
+        <p>Push, pop, shift, and unshift elements from an Array.</p>
+      </td>
+      <td class="align-center">
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | push: 'Spokane' }}{% endraw %}</code>
+          <code class="filter">{% raw %}{{ page.tags | pop }}{% endraw %}</code>
+          <code class="filter">{% raw %}{{ page.tags | shift }}{% endraw %}</code>
+          <code class="filter">{% raw %}{{ page.tags | unshift }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Seattle', 'Tacoma', 'Spokane']</code>
+          <code class="output">['Seattle', 'Tacoma']</code>
+          <code class="output">['Seattle']</code>
+          <code class="output">['Tacoma']</code>
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
