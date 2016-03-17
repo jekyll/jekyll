@@ -275,19 +275,32 @@ common tasks easier.
       <td>
         <p class="name"><strong>Array Filters</strong></p>
         <p>Push, pop, shift, and unshift elements from an Array.</p>
+        <p>These are <strong>NON-DESTRUCTIVE</strong>, i.e. they do not mutate the array, but rather make a copy and mutate that.</p>
       </td>
       <td class="align-center">
         <p>
           <code class="filter">{% raw %}{{ page.tags | push: 'Spokane' }}{% endraw %}</code>
-          <code class="filter">{% raw %}{{ page.tags | pop }}{% endraw %}</code>
-          <code class="filter">{% raw %}{{ page.tags | shift }}{% endraw %}</code>
-          <code class="filter">{% raw %}{{ page.tags | unshift }}{% endraw %}</code>
         </p>
         <p>
           <code class="output">['Seattle', 'Tacoma', 'Spokane']</code>
-          <code class="output">['Seattle', 'Tacoma']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | pop }}{% endraw %}</code>
+        </p>
+        <p>
           <code class="output">['Seattle']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | shift }}{% endraw %}</code>
+        </p>
+        <p>
           <code class="output">['Tacoma']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | unshift: "Olympia" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Olympia', 'Seattle', 'Tacoma']</code>
         </p>
       </td>
     </tr>
