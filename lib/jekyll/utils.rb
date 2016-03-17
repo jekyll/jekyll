@@ -192,6 +192,10 @@ module Jekyll
           SLUGIFY_PRETTY_REGEXP
         end
 
+      # Use :en as locale
+      I18n.available_locales = [:en]
+      I18n.locale = :en
+
       # Transliterate slug
       slug = I18n.transliterate(string);
 
