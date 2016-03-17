@@ -98,7 +98,11 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      msg = formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      lines = message.to_s.split("\n")
+      first_line = formatted_topic(topic) + lines.shift.to_s
+      msg = ([first_line] + lines.map {|line|
+        formatted_topic("") + line.gsub(/[ ]+/, ' ')
+      }).join("\n")
       messages << msg
       msg
     end

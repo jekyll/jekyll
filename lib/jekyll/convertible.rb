@@ -79,9 +79,9 @@ module Jekyll
         begin
           converter.convert output
         rescue => e
-          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error while converting '#{path}':"
-          Jekyll.logger.error("", e.to_s)
-          raise e
+          raise Jekyll::Errors::ConversionError, "" \
+            "#{converter.class} encountered an error while converting '#{path}':" \
+            "\n#{e.to_s}"
         end
       end
     end
@@ -112,11 +112,17 @@ module Jekyll
     def render_liquid(content, payload, info, path)
       site.liquid_renderer.file(path).parse(content).render!(payload, info)
     rescue Tags::IncludeTagError => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
-      raise e
-    rescue Exception => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || self.path}"
-      raise e
+      raise Jekyll::Errors::LiquidRenderError,
+        "Liquid exception in #{e.path} included in #{path || self.path}:" \
+        "\n#{e.message}"
+    rescue Liquid::Error => e
+      raise Jekyll::Errors::LiquidRenderError,
+        "Liquid exception on line #{e.line_number} in #{path || self.path}:" \
+        "\n#{e.message}"
+    rescue => e
+      raise Jekyll::Errors::LiquidRenderError,
+        "Liquid exception in #{path || self.path}:" \
+        "\n#{e.message}"
     end
 
     # Convert this Convertible's data to a Hash suitable for use by Liquid.

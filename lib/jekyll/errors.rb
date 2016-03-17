@@ -18,6 +18,8 @@ module Jekyll
     InvalidYAMLFrontMatterError = Class.new(FatalException)
     MissingDependencyError      = Class.new(FatalException)
     IncorrectDependencyError    = Class.new(FatalException)
+    ConversionError             = Class.new(FatalException)
+    LiquidRenderError           = Class.new(FatalException)
 
     # post_url tag errors
     InvalidDateError = Class.new(FatalException)
