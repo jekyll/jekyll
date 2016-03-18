@@ -200,7 +200,7 @@ module Jekyll
       slug = I18n.transliterate(string);
 
       # Testing
-      slug2 = string;
+      slug2 = I18n.transliterate(string);
       slug2.tr('^A-Za-z0-9', '-')
 
       # Strip according to the mode
