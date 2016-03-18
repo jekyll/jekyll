@@ -200,7 +200,7 @@ module Jekyll
       slug = I18n.transliterate(string);
 
       # Testing
-      slug2 = 'Antti on = ' + slug;
+      slug2 = string;
       slug2.gsub(/[^[:alnum:]]+/, '-')
 
       # Strip according to the mode
