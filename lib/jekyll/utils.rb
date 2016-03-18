@@ -10,6 +10,7 @@ module Jekyll
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
+    SLUGIFY_URLSAFE_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
     # Takes an indented string and removes the preceding spaces on each line
 
@@ -190,6 +191,11 @@ module Jekyll
           # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
           # and is allowed in both extN and NTFS.
           SLUGIFY_PRETTY_REGEXP
+        when 'urlsafe'
+          # For web servers not being able to handle Unicode, the safe
+          # method is to ditch anything else but latin letters and numeric
+          # digits.
+          SLUGIFY_URLSAFE_REGEXP
         end
 
       # Strip according to the mode
