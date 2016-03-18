@@ -207,7 +207,8 @@ module Jekyll
 
       slug.downcase! unless cased
 
-      puts("Generated slug" + slug)
+      pp slug
+
       slug
     end
 
