@@ -201,7 +201,7 @@ module Jekyll
 
       # Testing
       slug2 = string;
-      slug2.gsub(/[^[:alnum:]]+/, '-')
+      slug2.tr('^A-Za-z0-9', '-')
 
       # Strip according to the mode
       slug.gsub(re, '-')
