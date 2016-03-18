@@ -192,13 +192,27 @@ module Jekyll
           SLUGIFY_PRETTY_REGEXP
         end
 
+      # Use :en as locale
+      I18n.available_locales = [:en]
+      I18n.locale = :en
+
+      # Transliterate slug
+      slug = I18n.transliterate(string);
+
+      # Testing
+      slug2 = I18n.transliterate(string);
+      slug2.tr('^A-Za-z0-9', '-')
+
       # Strip according to the mode
-      slug = string.gsub(re, '-')
+      slug.gsub(re, '-')
 
       # Remove leading/trailing hyphen
       slug.gsub!(/^\-|\-$/i, '')
 
       slug.downcase! unless cased
+
+      pp slug2
+
       slug
     end
 

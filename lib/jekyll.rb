@@ -29,6 +29,8 @@ require 'safe_yaml/load'
 require 'liquid'
 require 'kramdown'
 require 'colorator'
+require 'i18n'
+require 'pp'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
