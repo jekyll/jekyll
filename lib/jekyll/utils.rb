@@ -197,7 +197,7 @@ module Jekyll
       I18n.locale = :en
 
       # Transliterate slug
-      slug = I18n.transliterate(string).force_encoding('utf-8');
+      slug = I18n.transliterate(string);
 
       # Strip according to the mode
       slug.gsub(re, '-')
@@ -206,6 +206,8 @@ module Jekyll
       slug.gsub!(/^\-|\-$/i, '')
 
       slug.downcase! unless cased
+
+      puts("Generated slug" + slug)
       slug
     end
 
