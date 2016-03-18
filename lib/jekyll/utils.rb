@@ -199,6 +199,10 @@ module Jekyll
       # Transliterate slug
       slug = I18n.transliterate(string);
 
+      # Testing
+      slug2 = slug;
+      slug2.gsub(/[^[:alnum:]]+/, '-')
+
       # Strip according to the mode
       slug.gsub(re, '-')
 
@@ -207,7 +211,7 @@ module Jekyll
 
       slug.downcase! unless cased
 
-      pp slug
+      pp slug2
 
       slug
     end
