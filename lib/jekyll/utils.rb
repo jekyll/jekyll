@@ -6,7 +6,7 @@ module Jekyll
     autoload :Ansi, "jekyll/utils/ansi"
 
     # Constants for use in #slugify
-    SLUGIFY_MODES = %w(raw default pretty)
+    SLUGIFY_MODES = %w(raw default pretty urlsafe)
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
