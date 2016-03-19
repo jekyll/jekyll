@@ -214,7 +214,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Future</strong></p>
-        <p class="description">Publish posts or any collection with a future date.</p>
+        <p class="description">Publish posts or collection documents with a future date.</p>
       </td>
       <td class="align-center">
         <p><code class="option">future: BOOL</code></p>
