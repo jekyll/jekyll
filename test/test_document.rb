@@ -45,8 +45,6 @@ class TestDocument < JekyllUnitTest
     end
 
     should "be able to jsonify its data" do
-      require 'json'
-
       page_json = @document.to_liquid.to_json
       parsed = JSON.parse(page_json)
 
