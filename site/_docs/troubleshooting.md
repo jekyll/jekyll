@@ -28,8 +28,14 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 
 {% highlight bash %}
 sudo yum install ruby-devel
-sudo yum group install "C Development Tools and Libraries"
 {% endhighlight %}
+
+If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, simply run:
+
+{% highlight bash %}
+sudo dnf install redhat-rpm-config
+{% endhighlight %}
+
 
 On [NearlyFreeSpeech](https://www.nearlyfreespeech.net/) you need to run the
 following commands before installing Jekyll:
