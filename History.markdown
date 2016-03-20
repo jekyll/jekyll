@@ -43,6 +43,7 @@
   * Blog post on refreshed contributing file and new affinity teams (#4645)
   * Fixes typo on collections (#4647)
   * Documentation: future option also works for collections (#4682)
+  * Additional package needed for Fedora 23 Workspace (#4685)
 
 ## 3.1.2 / 2016-02-19
 
