@@ -20,6 +20,7 @@
   * Filters#time: clone an input Time so as to be non-destructive (#4590)
   * Doctor: fix issue where `--config` wasn't a recognized flag (#4598)
   * Ensures related_posts are only set for a post (#4620)
+  * EntryFilter#special?: ignore filenames which begin with '~' (#4491)
 
 ### Development Fixes
 
