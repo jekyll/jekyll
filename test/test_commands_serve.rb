@@ -105,7 +105,7 @@ class TestCommandsServe < JekyllUnitTest
             "ssl_key" => "bar"
           })
 
-          assert result[:EnableSSL]
+          assert result[:SSLEnable]
           assert_equal result[:SSLPrivateKey ], "c2"
           assert_equal result[:SSLCertificate], "c1"
         end
