@@ -116,11 +116,12 @@ module Jekyll
 
         private
         def server_address(server, opts)
-          address = server.config[:BindAddress]
-          baseurl = "#{opts["baseurl"]}/" if opts["baseurl"]
-          port = server.config[:Port]
-
-          "http://#{address}:#{port}#{baseurl}"
+          "%{prefix}://%{address}:%{port}%{baseurl}" % {
+            :prefix => server.config[:SSLEnable] ? "https" : "http",
+            :baseurl => opts["baseurl"] ? "#{opts["baseurl"]}/" : "",
+            :address => server.config[:BindAddress],
+            :port => server.config[:Port]
+          }
         end
 
         #
@@ -182,7 +183,7 @@ module Jekyll
           source_certificate = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], opts[:JekyllOptions]["ssl_cert"])
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(File.read(source_certificate))
           opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(File.read(source_key))
-          opts[:EnableSSL] = true
+          opts[:SSLEnable] = true
         end
 
         private
