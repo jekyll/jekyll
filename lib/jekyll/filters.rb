@@ -117,7 +117,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      CGI.escapeHTML(input.to_s)
+      input.to_s.encode(:xml => :attr).gsub(/\A"|"\Z/, "")
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters
@@ -308,7 +308,7 @@ module Jekyll
     #
     # Returns a String representation of the object.
     def inspect(input)
-      CGI.escapeHTML(input.inspect)
+      xml_escape(input.inspect)
     end
 
     private
