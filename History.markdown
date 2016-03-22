@@ -11,6 +11,7 @@
   * Add array support to `where` filter (#4555)
   * 'jekyll clean': also remove .sass-cache (#4652)
   * Clean up Tags::PostUrl a bit, including better errors and date parsing (#4670)
+  * Use String#encode for xml_escape filter instead of CGI.escapeHTML (#4694)
 
 ### Bug Fixes
 
