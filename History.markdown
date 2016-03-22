@@ -46,6 +46,7 @@
   * Documentation: future option also works for collections (#4682)
   * Additional package needed for Fedora 23 Workspace (#4685)
   * Fix typo on Chocolatey name in Windows documentation (#4686)
+  * Use the correct URL, Fixes #4698 (#4699)
 
 ## 3.1.2 / 2016-02-19
 
