@@ -35,4 +35,4 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 - [Generating a Tag Cloud in Jekyll](http://www.justkez.com/generating-a-tag-cloud-in-jekyll/) – A guide to implementing a tag cloud and per-tag content pages using Jekyll.
 - A way to [extend Jekyll](https://github.com/rfelix/jekyll_ext) without forking and modifying the Jekyll gem codebase and some [portable Jekyll extensions](https://wiki.github.com/rfelix/jekyll_ext/extensions) that can be reused and shared.
 - [Using your Rails layouts in Jekyll](http://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
-- [Adding Ajax pagination to Jekyll](https://eduardoboucas.com/blog/2014/11/10/adding-ajax-pagination-to-jekyll.html)
+- [Adding Ajax pagination to Jekyll](https://eduardoboucas.com/blog/2014/11/05/adding-ajax-pagination-to-jekyll.html)
