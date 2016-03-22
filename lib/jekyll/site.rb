@@ -1,5 +1,6 @@
 # encoding: UTF-8
 require 'csv'
+require 'parallel'
 
 module Jekyll
   class Site
@@ -197,7 +198,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file do |item|
+      Parallel.each(pages + static_files + docs_to_write) do |item|
         item.write(dest) if regenerator.regenerate?(item)
       end
       regenerator.write_metadata
