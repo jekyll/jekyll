@@ -17,8 +17,31 @@ module Jekyll
     #
     # config - A Hash containing site configuration details.
     def initialize(config)
+      # Source and destination may not be changed after the site has been created.
+      @source          = File.expand_path(config['source']).freeze
+      @dest            = File.expand_path(config['destination']).freeze
+
+      self.config = config
+
+      @reader          = Reader.new(self)
+      @regenerator     = Regenerator.new(self)
+      @liquid_renderer = LiquidRenderer.new(self)
+
+      Jekyll.sites << self
 
       Jekyll::Hooks.trigger :site, :after_init, self
+
+      reset
+      setup
+    end
+
+    # Public: Set the site's configuration. This handles side-effects caused by
+    # changing values in the configuration.
+    #
+    # config - a Jekyll::Configuration, containing the new configuration.
+    #
+    # Returns the new configuration.
+    def config=(config)
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
