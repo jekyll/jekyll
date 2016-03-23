@@ -45,8 +45,8 @@ CONTENT
     Jekyll::Tags::HighlightBlock.parse(
       "highlight",
       options_string,
-      ["test", "{% endhighlight %}", "\n"],
-      {}
+      Liquid::Tokenizer.new("test{% endhighlight %}\n"),
+      Liquid::ParseContext.new
     )
   end
 
