@@ -17,23 +17,14 @@ module Jekyll
     #
     # config - A Hash containing site configuration details.
     def initialize(config)
+
+      Jekyll::Hooks.trigger :site, :after_init, self
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
         show_drafts limit_posts keep_files gems).each do |opt|
         self.send("#{opt}=", config[opt])
       end
-
-      # Source and destination may not be changed after the site has been created.
-      @source              = File.expand_path(config['source']).freeze
-      @dest                = File.expand_path(config['destination']).freeze
-
-      @reader = Jekyll::Reader.new(self)
-
-      # Initialize incremental regenerator
-      @regenerator = Regenerator.new(self)
-
-      @liquid_renderer = LiquidRenderer.new(self)
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
@@ -43,10 +34,7 @@ module Jekyll
 
       self.permalink_style = config['permalink'].to_sym
 
-      Jekyll.sites << self
-
-      reset
-      setup
+      @config
     end
 
     # Public: Read, process, and write this Site to output.

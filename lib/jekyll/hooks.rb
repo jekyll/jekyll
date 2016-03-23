@@ -12,6 +12,7 @@ module Jekyll
     # initial empty hooks
     @registry = {
       :site => {
+        :after_init => [],
         :after_reset => [],
         :post_read => [],
         :pre_render => [],

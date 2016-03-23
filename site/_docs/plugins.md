@@ -521,6 +521,18 @@ The complete list of available hooks is below:
         <p><code>:site</code></p>
       </td>
       <td>
+        <p><code>:after_init</code></p>
+      </td>
+      <td>
+        <p>Just after the site initializes, but before setup & render. Good
+        for modifying the configuration of the site.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
         <p><code>:after_reset</code></p>
       </td>
       <td>
