@@ -641,6 +641,26 @@ CONTENT
       end
     end
 
+    context "with multiple custom includes directories" do
+      setup do
+        content = <<CONTENT
+---
+title: custom includes directory
+---
+
+{% include custom.html %}
+{% include custom2.html %}
+CONTENT
+        create_post(content, {'includes_dir' => ['_includes_custom', '_includes_custom2'], 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "include file from custom directories" do
+        refute_match "custom_included", @result
+        assert_match "custom2_override", @result
+        assert_match "custom2_included", @result
+      end
+    end
+
     context "without parameters within if statement" do
       setup do
         content = <<CONTENT

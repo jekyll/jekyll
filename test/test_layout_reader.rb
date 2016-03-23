@@ -14,7 +14,7 @@ class TestLayoutReader < JekyllUnitTest
 
     context "when no _layouts directory exists in CWD" do
       should "know to use the layout directory relative to the site source" do
-        assert_equal LayoutReader.new(@site).layout_directory, source_dir("_layouts")
+        assert_equal LayoutReader.new(@site).layout_directories, [source_dir("_layouts")]
       end
     end
 
@@ -25,7 +25,32 @@ class TestLayoutReader < JekyllUnitTest
       end
 
       should "know to use the layout directory relative to CWD" do
-        assert_equal LayoutReader.new(@site).layout_directory, source_dir("blah/_layouts")
+        assert_equal LayoutReader.new(@site).layout_directories, [source_dir("blah/_layouts")]
+      end
+    end
+
+    context "when layout directories is a string" do
+      setup do
+        config = Jekyll::Configuration::DEFAULTS.merge({'layouts_dir' => "_layouts2"})
+        @site = fixture_site(config)
+      end
+
+      should "read layouts" do
+        layouts = LayoutReader.new(@site).read
+        assert_equal ["override_test", "default2"].sort, layouts.keys.sort
+      end
+    end
+
+    context "when layout directories is an array" do
+      setup do
+        config = Jekyll::Configuration::DEFAULTS.merge({'layouts_dir' => ["_layouts2", "_layouts3"]})
+        @site = fixture_site(config)
+      end
+
+      should "read layouts" do
+        layouts = LayoutReader.new(@site).read
+        assert_equal ["override_test", "default2", "default3"].sort, layouts.keys.sort
+        assert_match /^_layouts3\//, layouts["override_test"].relative_path
       end
     end
   end

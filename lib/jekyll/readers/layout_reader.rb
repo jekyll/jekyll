@@ -7,23 +7,30 @@ module Jekyll
     end
 
     def read
-      layout_entries.each do |f|
-        @layouts[layout_name(f)] = Layout.new(site, layout_directory, f)
+      layout_entries.each do |directory, entries|
+        entries.each do |name|
+          @layouts[layout_name(name)] = Layout.new(site, directory, name)
+        end
       end
 
       @layouts
     end
 
-    def layout_directory
-      @layout_directory ||= (layout_directory_in_cwd || layout_directory_inside_source)
+    def layout_directories
+      @layout_directories ||= Array(site.config['layouts_dir']).map do |directory|
+        layout_directory_in_cwd(directory) || layout_directory_inside_source(directory)
+      end
     end
 
     private
 
     def layout_entries
-      entries = []
-      within(layout_directory) do
-        entries = EntryFilter.new(site).filter(Dir['**/*.*'])
+      entries = {}
+      layout_directories.each do |directory|
+        entries[directory] = []
+        within(directory) do
+          entries[directory].concat EntryFilter.new(site).filter(Dir['**/*.*'])
+        end
       end
       entries
     end
@@ -37,12 +44,12 @@ module Jekyll
       Dir.chdir(directory) { yield }
     end
 
-    def layout_directory_inside_source
-      site.in_source_dir(site.config['layouts_dir'])
+    def layout_directory_inside_source(directory)
+      site.in_source_dir(directory)
     end
 
-    def layout_directory_in_cwd
-      dir = Jekyll.sanitized_path(Dir.pwd, site.config['layouts_dir'])
+    def layout_directory_in_cwd(directory)
+      dir = Jekyll.sanitized_path(Dir.pwd, directory)
       if File.directory?(dir) && !site.safe
         dir
       else
