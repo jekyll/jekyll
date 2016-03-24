@@ -66,7 +66,7 @@ module Jekyll
         
         def gemfile_contents
           <<-RUBY
-source 'https://rubygems.org'
+source "https://rubygems.org"
   
 # Hello! This is where you manage which Jekyll version is used to run.
 # When you want to use a different version, change it below, save the
@@ -84,7 +84,7 @@ gem "jekyll", "#{Jekyll::VERSION}"
   
 # If you have any plugins, put them here!
 # group :jekyll_plugins do
-#   gem 'jekyll-github-metadata', '~> 1.0'
+#   gem "jekyll-github-metadata", "~> 1.0"
 # end
 RUBY
         end
