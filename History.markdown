@@ -26,6 +26,7 @@
   * Doctor: fix issue where `--config` wasn't a recognized flag (#4598)
   * Ensures related_posts are only set for a post (#4620)
   * EntryFilter#special?: ignore filenames which begin with '~' (#4491)
+  * Cleaner: `keep_files` should only apply to the beginning of paths, not substrings with index > 0 (#3849)
 
 ### Development Fixes
 
