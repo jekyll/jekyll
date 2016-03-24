@@ -11,9 +11,8 @@ class TestTags < JekyllUnitTest
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     site = fixture_site({"highlighter" => "rouge"}.merge(override))
 
-    if override['read_posts']
-      site.posts.docs.concat(PostReader.new(site).read_posts(''))
-    end
+    site.posts.docs.concat(PostReader.new(site).read_posts('')) if override['read_posts']
+    CollectionReader.new(site).read if override['read_collections']
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
@@ -517,6 +516,69 @@ CONTENT
           'destination' => dest_dir,
           'read_posts' => true
         })
+      end
+    end
+  end
+
+  context "simple page with linking" do
+    setup do
+      content = <<CONTENT
+---
+title: linking
+---
+
+{% link _methods/yaml_with_dots.md %}
+CONTENT
+      create_post(content, {'source' => source_dir, 'destination' => dest_dir, 'collections' => { 'methods' => { 'output' => true }}, 'read_collections' => true})
+    end
+
+    should "not cause an error" do
+      refute_match /markdown\-html\-error/, @result
+    end
+
+    should "have the url to the \"yaml_with_dots\" item" do
+      assert_match %r{/methods/yaml_with_dots\.html}, @result
+    end
+  end
+
+  context "simple page with nested linking" do
+    setup do
+      content = <<CONTENT
+---
+title: linking
+---
+
+- 1 {% link _methods/sanitized_path.md %}
+- 2 {% link _methods/site/generate.md %}
+CONTENT
+      create_post(content, {'source' => source_dir, 'destination' => dest_dir, 'collections' => { 'methods' => { 'output' => true }}, 'read_collections' => true})
+    end
+
+    should "not cause an error" do
+      refute_match /markdown\-html\-error/, @result
+    end
+
+    should "have the url to the \"sanitized_path\" item" do
+      assert_match %r{1\s/methods/sanitized_path\.html}, @result
+    end
+
+    should "have the url to the \"site/generate\" item" do
+      assert_match %r{2\s/methods/site/generate\.html}, @result
+    end
+  end
+
+  context "simple page with invalid linking" do
+    should "cause an error" do
+      content = <<CONTENT
+---
+title: Invalid linking
+---
+
+{% link non-existent-collection-item %}
+CONTENT
+
+      assert_raises ArgumentError do
+        create_post(content, {'source' => source_dir, 'destination' => dest_dir, 'collections' => { 'methods' => { 'output' => true }}, 'read_collections' => true})
       end
     end
   end
