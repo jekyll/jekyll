@@ -161,7 +161,7 @@ eos
       end
 
       def realpath_prefixed_with?(path, dir)
-        File.exist?(path) && File.realpath(path).start_with?(dir)
+        File.exist?(path) && File.absolute_path(path).start_with?(dir)
       end
 
       # This method allows to modify the file content by inheriting from the class.
