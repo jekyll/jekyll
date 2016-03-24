@@ -12,7 +12,7 @@ class TestTags < JekyllUnitTest
     site = fixture_site({"highlighter" => "rouge"}.merge(override))
 
     if override['read_posts']
-      site.posts.concat(PostReader.new(site).read(''))
+      site.posts.docs.concat(PostReader.new(site).read_posts(''))
     end
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
@@ -65,37 +65,37 @@ CONTENT
   context "highlight tag in unsafe mode" do
     should "set the no options with just a language name" do
       tag = highlight_block_with_opts('ruby ')
-      assert_equal({}, tag.instance_variable_get(:@options))
+      assert_equal({}, tag.instance_variable_get(:@highlight_options))
     end
 
     should "set the linenos option as 'inline' if no linenos value" do
       tag = highlight_block_with_opts('ruby linenos ')
-      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "set the linenos option to 'table' if the linenos key is given the table value" do
       tag = highlight_block_with_opts('ruby linenos=table ')
-      assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "recognize nowrap option with linenos set" do
       tag = highlight_block_with_opts('ruby linenos=table nowrap ')
-      assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "recognize the cssclass option" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "recognize the hl_linenos option and its value" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl hl_linenos=3 ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@options))
+      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => '3' }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "recognize multiple values of hl_linenos" do
       tag = highlight_block_with_opts('ruby linenos=table cssclass=hl hl_linenos="3 5 6" ')
-      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@options))
+      assert_equal({ :cssclass => 'hl', :linenos => 'table', :hl_linenos => ['3', '5', '6'] }, tag.instance_variable_get(:@highlight_options))
     end
 
     should "treat language name as case insensitive" do
@@ -114,9 +114,9 @@ CONTENT
       assert_equal true, sanitized[:linenos]
     end
 
-    should "allow hl_linenos" do
-      sanitized = @tag.sanitized_opts({:hl_linenos => %w[1 2 3 4]}, true)
-      assert_equal %w[1 2 3 4], sanitized[:hl_linenos]
+    should "allow hl_lines" do
+      sanitized = @tag.sanitized_opts({:hl_lines => %w[1 2 3 4]}, true)
+      assert_equal %w[1 2 3 4], sanitized[:hl_lines]
     end
 
     should "allow cssclass" do
@@ -317,6 +317,27 @@ EOS
       end
     end
 
+    context "post content has highlight tag with linenumbers" do
+      setup do
+        create_post <<-EOS
+---
+title: This is a test
+---
+
+This is not yet highlighted
+{% highlight php linenos %}
+test
+{% endhighlight %}
+
+This should not be highlighted, right?
+EOS
+      end
+
+      should "should stop highlighting at boundary" do
+        assert_match "<p>This is not yet highlighted</p>\n\n<figure class=\"highlight\"><pre><code class=\"language-php\" data-lang=\"php\"><table style=\"border-spacing: 0\"><tbody><tr><td class=\"gutter gl\" style=\"text-align: right\"><pre class=\"lineno\">1</pre></td><td class=\"code\"><pre>test<span class=\"w\">\n</span></pre></td></tr></tbody></table></code></pre></figure>\n\n<p>This should not be highlighted, right?</p>", @result
+      end
+    end
+
     context "post content has highlight tag with preceding spaces & Windows-style newlines" do
       setup do
         fill_post "\r\n\r\n\r\n     [,1] [,2]"
@@ -470,8 +491,32 @@ title: Invalid post name linking
 {% post_url abc2008-11-21-complex %}
 CONTENT
 
-      assert_raises ArgumentError do
-        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      assert_raises Jekyll::Errors::PostURLError do
+        create_post(content, {
+          'permalink' => 'pretty',
+          'source' => source_dir,
+          'destination' => dest_dir,
+          'read_posts' => true
+        })
+      end
+    end
+
+    should "cause an error with a bad date" do
+      content = <<CONTENT
+---
+title: Invalid post name linking
+---
+
+{% post_url 2008-42-21-complex %}
+CONTENT
+
+      assert_raises Jekyll::Errors::InvalidDateError do
+        create_post(content, {
+          'permalink' => 'pretty',
+          'source' => source_dir,
+          'destination' => dest_dir,
+          'read_posts' => true
+        })
       end
     end
   end
@@ -600,6 +645,23 @@ CONTENT
       end
     end
 
+    context "with custom includes directory" do
+      setup do
+        content = <<CONTENT
+---
+title: custom includes directory
+---
+
+{% include custom.html %}
+CONTENT
+        create_post(content, {'includes_dir' => '_includes_custom', 'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+
+      should "include file from custom directory" do
+        assert_match "custom_included", @result
+      end
+    end
+
     context "without parameters within if statement" do
       setup do
         content = <<CONTENT
@@ -638,11 +700,9 @@ CONTENT
 
     context "include tag with variable and liquid filters" do
       setup do
-        site = fixture_site({'pygments' => true})
-        post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
-        layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-        post.render(layouts, {"site" => {"posts" => []}})
-        @content = post.content
+        site = fixture_site({'pygments' => true}).tap(&:read).tap(&:render)
+        post = site.posts.docs.find {|p| p.basename.eql? "2013-12-17-include-variable-filters.markdown" }
+        @content = post.output
       end
 
       should "include file as variable with liquid filters" do
@@ -670,11 +730,9 @@ CONTENT
 
   context "relative include tag with variable and liquid filters" do
     setup do
-      site = fixture_site('pygments' => true)
-      post = Post.new(site, source_dir, '', "2014-09-02-relative-includes.markdown")
-      layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
-      post.render(layouts, {"site" => {"posts" => []}})
-      @content = post.content
+      site = fixture_site({'pygments' => true}).tap(&:read).tap(&:render)
+      post = site.posts.docs.find {|p| p.basename.eql? "2014-09-02-relative-includes.markdown" }
+      @content = post.output
     end
 
     should "include file as variable with liquid filters" do

@@ -25,7 +25,8 @@ There are also a number of ways to easily automate the deployment of a Jekyll si
 
 ### Git post-update hook
 
-If you store your Jekyll site in [Git](http://git-scm.com/) (you are using version control, right?), it’s pretty easy to automate the
+If you store your Jekyll site in [Git](https://git-scm.com/) (you are using
+version control, right?), it’s pretty easy to automate the
 deployment process by setting up a post-update hook in your Git
 repository, [like
 this](http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/03/26/deploying-a-jekyll-generated-site/).
@@ -84,16 +85,102 @@ host your site directly on a CDN or file host like S3.
 Setup steps are fully documented
 [in the `jekyll-hook` repo](https://github.com/developmentseed/jekyll-hook).
 
+### Static Publisher
+
+[Static Publisher](https://github.com/static-publisher/static-publisher) is another automated deployment option with a server listening for webhook posts, though it's not tied to GitHub specifically. It has a one-click deploy to Heroku, it can watch multiple projects from one server, it has an easy to user admin interface and can publish to either S3 or to a git repository (e.g. gh-pages).
+
 ### Rake
 
-Another way to deploy your Jekyll site is to use [Rake](https://github.com/jimweirich/rake), [HighLine](https://github.com/JEG2/highline), and
+Another way to deploy your Jekyll site is to use [Rake](https://github.com/ruby/rake), [HighLine](https://github.com/JEG2/highline), and
 [Net::SSH](https://github.com/net-ssh/net-ssh). A more complex example of deploying Jekyll with Rake that deals with multiple branches can be found in [Git Ready](https://github.com/gitready/gitready/blob/cdfbc4ec5321ff8d18c3ce936e9c749dbbc4f190/Rakefile).
+
+
+### scp
+
+Once you’ve generated the `_site` directory, you can easily scp it using a
+`tasks/deploy` shell script similar to [this deploy script][]. You’d obviously
+need to change the values to reflect your site’s details. There is even [a 
+matching TextMate command][] that will help you run this script.
+
+[this deploy script here]: https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy
+
+[a matching TextMate command]: https://gist.github.com/henrik/214959
 
 ### rsync
 
-Once you’ve generated the `_site` directory, you can easily rsync it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy). You’d obviously need to change the values to reflect your site’s details. There is even [a matching TextMate command](http://gist.github.com/214959) that will help you run
-this script from within Textmate.
+Once you’ve generated the `_site` directory, you can easily rsync it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/vitalyrepin/vrepinblog/blob/master/transfer.sh). You’d obviously need to change the values to reflect your site’s details.
 
+Certificate-based authorization is another way to simplify the publishing
+process. It makes sense to restrict rsync access only to the directory which it is supposed to sync. This can be done using rrsync.
+
+#### Step 1: Install rrsync to your home folder (server-side)
+
+If it is not already installed by your host, you can do it yourself:
+
+- [Download rrsync](https://ftp.samba.org/pub/unpacked/rsync/support/rrsync)
+- Place it in the `bin` subdirectory of your home folder  (`~/bin`)
+- Make it executable (`chmod +x`)
+
+#### Step 2: Set up certificate-based SSH access (server side)
+
+This [process](https://wiki.gentoo.org/wiki/SSH#Passwordless_Authentication) is
+described in several places online. What is different from the typical approach
+is to put the restriction to certificate-based authorization in
+`~/.ssh/authorized_keys`. Then, launch `rrsync` and supply
+it with the folder it shall have read-write access to:
+
+{% highlight bash %}
+command="$HOME/bin/rrsync <folder>",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa <cert>
+{% endhighlight %}
+
+`<folder>` is the path to your site. E.g., `~/public_html/you.org/blog-html/`.
+
+#### Step 3: Rsync (client-side)
+
+Add the `deploy` script to the site source folder:
+
+{% highlight bash %}
+#!/bin/sh
+
+rsync -crvz --rsh=ssh -p2222' --delete-after --delete-excluded   <folder> <user>@<site>:
+{% endhighlight %}
+
+Command line parameters are:
+
+- `--rsh=ssh -p2222` &mdash; The port for SSH access. It is required if
+your host uses a different port than the default (e.g, HostGator)
+- `<folder>` &mdash; The name of the local output folder (defaults to `_site`)
+- `<user>` &mdash; The username for your hosting account
+- `<site>` &mdash; Your hosting server
+
+Using this setup, you might run the following command:
+
+{% highlight bash %}
+rsync -crvz --rsh='ssh -p2222' --delete-after --delete-excluded   _site/ hostuser@example.org:
+{% endhighlight %}
+
+Don't forget the column `:` after server name!
+
+#### Step 4 (Optional): Exclude the transfer script from being copied to the output folder.
+
+This step is recommended if you use these instructions to deploy your site. If
+you put the `deploy` script in the root folder of your project, Jekyll will
+copy it to the output folder. This behavior can be changed in `_config.yml`.
+
+Just add the following line:
+
+{% highlight yaml %}
+# Do not copy these files to the output directory
+exclude: ["deploy"]
+{% endhighlight %}
+
+Alternatively, you can use an `rsync-exclude.txt` file to control which files will be transferred to your server.
+
+#### Done!
+
+Now it's possible to publish your website simply by running the  `deploy` 
+script. If your SSH certificate  is [passphrase-protected](https://martin.kleppmann.com/2013/05/24/improving-security-of-ssh-private-keys.html), you will be asked to enter it when the
+script executes.
 
 ## Rack-Jekyll
 
@@ -124,3 +211,17 @@ for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
   <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages/">host your Jekyll-powered website for free</a>.</p>
 </div>
+
+## Kickster
+
+Use [Kickster](http://kickster.nielsenramon.com/) for easy (automated) deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
+
+Kickster provides a basic Jekyll project setup packed with web best practises and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
+
+Setting up Kickster is very easy, just install the gem and you are good to go. More documentation can here found [here](https://github.com/nielsenramon/kickster#kickster). If you do not want to use the gem or start a new project you can just copy paste the deployment scripts for [Travis CI](https://github.com/nielsenramon/kickster/tree/master/snippets/travis) or [Circle CI](https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci).
+
+## Aerobatic
+
+[Aerobatic](https://www.aerobatic.com) is an add-on for Bitbucket that brings GitHub Pages style functionality to Bitbucket users. It includes continuous deployment, custom domains with a wildcard SSL cert, CDN, basic auth, and staging branches all in the box.
+
+Automating the build and deployment of a Jekyll site is just as simple as GitHub Pages - push your changes to your repo (excluding the `_site` directory) and within seconds a build will be triggered and your built site deployed to our highly- available, globally distributed hosting service. The build process will even install and execute custom Ruby plugins. See our [Jekyll docs](https://www.aerobatic.com/docs/static-generators#jekyll) for more details.

@@ -2,13 +2,17 @@ require 'helper'
 
 class TestDocument < JekyllUnitTest
 
+  def assert_equal_value(key, one, other)
+    assert_equal(one[key], other[key])
+  end
+
   context "a document in a collection" do
     setup do
       @site = fixture_site({
         "collections" => ["methods"]
       })
       @site.process
-      @document = @site.collections["methods"].docs.first
+      @document = @site.collections["methods"].docs.detect {|d| d.relative_path == "_methods/configuration.md" }
     end
 
     should "exist" do
@@ -36,27 +40,21 @@ class TestDocument < JekyllUnitTest
     end
 
     should "know its data" do
-      assert_equal({
-        "title" => "Jekyll.configuration",
-        "whatever" => "foo.bar"
-      }, @document.data)
+      assert_equal "Jekyll.configuration", @document.data["title"]
+      assert_equal "foo.bar", @document.data["whatever"]
     end
 
     context "with YAML ending in three dots" do
 
       setup do
-        @site = fixture_site({
-          "collections" => ["methods"],
-        })
+        @site = fixture_site({"collections" => ["methods"]})
         @site.process
-        @document = @site.collections["methods"].docs.last
+        @document = @site.collections["methods"].docs.detect {|d| d.relative_path == "_methods/yaml_with_dots.md" }
       end
 
       should "know its data" do
-        assert_equal({
-          "title" => "YAML with Dots",
-          "whatever" => "foo.bar"
-          }, @document.data)
+        assert_equal "YAML with Dots", @document.data["title"]
+        assert_equal "foo.bar", @document.data["whatever"]
       end
     end
 
@@ -88,13 +86,9 @@ class TestDocument < JekyllUnitTest
     end
 
     should "know the frontmatter defaults" do
-      assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide",
-        "nested"=> {
-          "key"=>"myval"
-        }
-      }, @document.data)
+      assert_equal "Example slide", @document.data["title"]
+      assert_equal "slide", @document.data["layout"]
+      assert_equal({"key"=>"myval"}, @document.data["nested"])
     end
   end
 
@@ -117,14 +111,9 @@ class TestDocument < JekyllUnitTest
     end
 
     should "override default values in the document frontmatter" do
-      assert_equal({
-        "title"=>"Override title",
-        "layout"=>"slide",
-        "nested"=> {
-          "test1"=>"override1",
-          "test2"=>"override2"
-        }
-      }, @document.data)
+      assert_equal "Override title", @document.data["title"]
+      assert_equal "slide", @document.data["layout"]
+      assert_equal({"test1"=>"override1","test2"=>"override2"}, @document.data["nested"])
     end
   end
 
@@ -146,13 +135,9 @@ class TestDocument < JekyllUnitTest
     end
 
     should "know the frontmatter defaults" do
-      assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide",
-        "nested"=> {
-          "key"=>"value123"
-        }
-      }, @document.data)
+      assert_equal "Example slide", @document.data["title"]
+      assert_equal "slide", @document.data["layout"]
+      assert_equal({"key"=>"value123"}, @document.data["nested"])
     end
   end
 
@@ -174,10 +159,9 @@ class TestDocument < JekyllUnitTest
     end
 
     should "not know the specified frontmatter defaults" do
-      assert_equal({
-        "title"=>"Example slide",
-        "layout"=>"slide"
-      }, @document.data)
+      assert_equal "Example slide", @document.data["title"]
+      assert_equal "slide", @document.data["layout"]
+      assert_equal nil, @document.data["nested"]
     end
   end
 
@@ -209,6 +193,7 @@ class TestDocument < JekyllUnitTest
             "permalink" => "/slides/test/:name"
           }
         },
+        "permalink" => "pretty"
       })
       @site.process
       @document = @site.collections["slides"].docs[0]
@@ -221,6 +206,10 @@ class TestDocument < JekyllUnitTest
 
     should "produce the right destination file" do
       assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "honor the output extension of its permalink" do
+      assert_equal ".html", @document.output_ext
     end
   end
 
@@ -248,6 +237,57 @@ class TestDocument < JekyllUnitTest
     end
   end
 
+  context "a document in a collection with cased file name" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "slides" => {
+             "output" => true,
+          }
+        },
+      })
+      @site.permalink_style = :pretty
+      @site.process
+      @document = @site.collections["slides"].docs[7]
+      @dest_file = dest_dir("slides/example-slide-Upper-Cased/index.html")
+    end
+
+    should "produce the right cased URL" do
+      assert_equal "/slides/example-slide-Upper-Cased/", @document.url
+    end
+  end
+
+  context "a document in a collection with cased file name" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "slides" => {
+            "output" => true
+          }
+        }
+      })
+      @site.process
+      @document = @site.collections["slides"].docs[6]
+      @dest_file = dest_dir("slides/example-slide-7.php")
+    end
+
+    should "be written out properly" do
+      assert_exist @dest_file
+    end
+
+    should "produce the permalink as the url" do
+      assert_equal "/slides/example-slide-7.php", @document.url
+    end
+
+    should "be written to the proper directory" do
+      assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "honor the output extension of its permalink" do
+      assert_equal ".php", @document.output_ext
+    end
+  end
+
   context "documents in a collection with custom title permalinks" do
     setup do
       @site = fixture_site({
@@ -267,6 +307,7 @@ class TestDocument < JekyllUnitTest
     should "produce the right URL if they have a slug" do
       assert_equal "/slides/so-what-is-jekyll-exactly", @document.url
     end
+
     should "produce the right destination file if they have a slug" do
       dest_file = dest_dir("slides/so-what-is-jekyll-exactly.html")
       assert_equal dest_file, @document.destination(dest_dir)
@@ -281,11 +322,34 @@ class TestDocument < JekyllUnitTest
     end
 
     should "produce the right URL if they have a wild slug" do
-      assert_equal "/slides/well-so-what-is-jekyll-then", @document_with_strange_slug.url
+      assert_equal "/slides/Well,-so-what-is-Jekyll,-then", @document_with_strange_slug.url
     end
     should "produce the right destination file if they have a wild slug" do
-      dest_file = dest_dir("/slides/well-so-what-is-jekyll-then.html")
+      dest_file = dest_dir("/slides/Well,-so-what-is-Jekyll,-then.html")
       assert_equal dest_file, @document_with_strange_slug.destination(dest_dir)
+    end
+  end
+
+  context "document with a permalink with dots & a trailing slash" do
+    setup do
+      @site = fixture_site({"collections" => {
+        "with.dots" => { "output" => true }
+      }})
+      @site.process
+      @document = @site.collections["with.dots"].docs.last
+      @dest_file = dest_dir("with.dots", "permalink.with.slash.tho", "index.html")
+    end
+
+    should "yield an HTML document" do
+      assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "be written properly" do
+      assert_exist @dest_file
+    end
+
+    should "get the right output_ext" do
+      assert_equal ".html", @document.output_ext
     end
   end
 
@@ -342,7 +406,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "be output in the correct place" do
-      assert_equal true, File.file?(@dest_file)
+      assert File.file?(@dest_file)
     end
   end
 

@@ -13,20 +13,28 @@ module Jekyll
     def update_deprecated_types(set)
       return set unless set.key?('scope') && set['scope'].key?('type')
 
-      set['scope']['type'] = case set['scope']['type']
-      when 'page'
-        Deprecator.defaults_deprecate_type('page', 'pages')
-        'pages'
-      when 'post'
-        Deprecator.defaults_deprecate_type('post', 'posts')
-        'posts'
-      when 'draft'
-        Deprecator.defaults_deprecate_type('draft', 'drafts')
-        'drafts'
-      else
-        set['scope']['type']
-      end
+      set['scope']['type'] =
+        case set['scope']['type']
+        when 'page'
+          Deprecator.defaults_deprecate_type('page', 'pages')
+          'pages'
+        when 'post'
+          Deprecator.defaults_deprecate_type('post', 'posts')
+          'posts'
+        when 'draft'
+          Deprecator.defaults_deprecate_type('draft', 'drafts')
+          'drafts'
+        else
+          set['scope']['type']
+        end
 
+      set
+    end
+
+    def ensure_time!(set)
+      return set unless set.key?('values') && set['values'].key?('date')
+      return set if set['values']['date'].is_a?(Time)
+      set['values']['date'] = Utils.parse_date(set['values']['date'], "An invalid date format was found in a front-matter default set: #{set}")
       set
     end
 
@@ -83,11 +91,11 @@ module Jekyll
     end
 
     def applies_path?(scope, path)
-      return true if !scope.has_key?('path') || scope['path'].empty?
+      return true if !scope.key?('path') || scope['path'].empty?
 
       scope_path = Pathname.new(scope['path'])
       Pathname.new(sanitize_path(path)).ascend do |path|
-        if path == scope_path
+        if path.to_s == scope_path.to_s
           return true
         end
       end
@@ -143,7 +151,7 @@ module Jekyll
     # Returns an array of hashes
     def matching_sets(path, type)
       valid_sets.select do |set|
-        !set.has_key?('scope') || applies?(set['scope'], path, type)
+        !set.key?('scope') || applies?(set['scope'], path, type)
       end
     end
 
@@ -159,7 +167,7 @@ module Jekyll
 
       sets.map do |set|
         if valid?(set)
-          update_deprecated_types(set)
+          ensure_time!(update_deprecated_types(set))
         else
           Jekyll.logger.warn "Defaults:", "An invalid front-matter default set was found:"
           Jekyll.logger.warn "#{set}"

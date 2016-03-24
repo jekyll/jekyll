@@ -5,7 +5,7 @@ module Jekyll
         def initialize(config)
           Jekyll::External.require_with_graceful_fail "rdiscount"
           @config = config
-          @rdiscount_extensions = @config['rdiscount']['extensions'].map { |e| e.to_sym }
+          @rdiscount_extensions = @config['rdiscount']['extensions'].map(&:to_sym)
         end
 
         def convert(content)

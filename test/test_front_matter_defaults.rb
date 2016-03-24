@@ -69,7 +69,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       }))
       @site.process
-      @affected = @site.posts.find { |page| page.relative_path =~ /^\/win/ }
+      @affected = @site.posts.docs.find { |page| page.relative_path =~ /win\// }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
 
@@ -95,7 +95,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       }))
       @site.process
       @affected = @site.pages
-      @not_affected = @site.posts
+      @not_affected = @site.posts.docs
     end
 
     should "affect only the specified type and all paths" do
@@ -120,7 +120,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       }))
       @site.process
       @affected = @site.pages
-      @not_affected = @site.posts
+      @not_affected = @site.posts.docs
     end
 
     should "affect only the specified type and all paths" do
@@ -172,6 +172,31 @@ class TestFrontMatterDefaults < JekyllUnitTest
     should "affect all types and paths" do
       assert_equal @affected.reject { |page| page.data["key"] == "val" }, []
       assert_equal @not_affected.reject { |page| page.data["key"] == "val" }, []
+    end
+  end
+
+  context "A site with front matter defaults with quoted date" do
+    setup do
+      @site = Site.new(Jekyll.configuration({
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults" => [{
+          "values" => {
+            "date" => "2015-01-01 00:00:01"
+          }
+        }]
+      }))
+    end
+
+    should "not raise error" do
+      @site.process
+    end
+
+    should "parse date" do
+      @site.process
+      date = Time.parse("2015-01-01 00:00:01")
+      assert @site.pages.find { |page| page.data["date"] == date }
+      assert @site.posts.find { |page| page.data["date"] == date }
     end
   end
 

@@ -22,6 +22,18 @@ $ jekyll build --watch
 #    watched for changes, and regenerated automatically.
 {% endhighlight %}
 
+<div class="note info">
+  <h5>Changes to _config.yml are not included during automatic regeneration.</h5>
+  <p>
+    The <code>_config.yml</code> master configuration file contains global configurations
+    and variable definitions that are read once at execution time. Changes made to <code>_config.yml</code>
+    during automatic regeneration are not loaded until the next execution.
+  </p>
+  <p>
+    Note <a href="../datafiles">Data Files</a> are included and reloaded during automatic regeneration.
+  </p>
+</div>
+
 <div class="note warning">
   <h5>Destination folders are cleaned on site builds</h5>
   <p>

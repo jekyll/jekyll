@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
+
 export BENCHMARK=1
 
-TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site', 'full_rebuild' => true})"
+TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site'})"
 
 RUBY=$(cat <<RUBY
   require 'ruby-prof'

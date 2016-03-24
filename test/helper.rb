@@ -2,22 +2,28 @@ def jruby?
   defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
 end
 
-unless ENV['TRAVIS']
-  require File.expand_path('../simplecov_custom_profile', __FILE__)
-  SimpleCov.start('gem') do
-    add_filter "/vendor/bundle"
+if ENV["CI"]
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+else
+  require File.expand_path("../simplecov_custom_profile", __FILE__)
+  SimpleCov.start "gem" do
     add_filter "/vendor/gem"
+    add_filter "/vendor/bundle"
+    add_filter ".bundle"
   end
 end
 
+require "nokogiri"
 require 'rubygems'
 require 'ostruct'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/profile'
 require 'rspec/mocks'
-
 require 'jekyll'
+
+Jekyll.logger = Logger.new(StringIO.new)
 
 unless jruby?
   require 'rdiscount'
@@ -29,15 +35,28 @@ require 'shoulda'
 
 include Jekyll
 
-# FIXME: If we really need this we lost the game.
-STDERR.reopen(test(?e, '/dev/null') ? '/dev/null' : 'NUL:')
-
 # Report with color.
 Minitest::Reporters.use! [
   Minitest::Reporters::DefaultReporter.new(
     :color => true
   )
 ]
+
+module Minitest::Assertions
+  def assert_exist(filename, msg = nil)
+    msg = message(msg) {
+      "Expected '#{filename}' to exist"
+    }
+    assert File.exist?(filename), msg
+  end
+
+  def refute_exist(filename, msg = nil)
+    msg = message(msg) {
+      "Expected '#{filename}' not to exist"
+    }
+    refute File.exist?(filename), msg
+  end
+end
 
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
@@ -48,15 +67,15 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def before_setup
-    ::RSpec::Mocks.setup
+    RSpec::Mocks.setup
     super
   end
 
   def after_teardown
     super
-    ::RSpec::Mocks.verify
+    RSpec::Mocks.verify
   ensure
-    ::RSpec::Mocks.teardown
+    RSpec::Mocks.teardown
   end
 
   def fixture_site(overrides = {})
@@ -65,12 +84,13 @@ class JekyllUnitTest < Minitest::Test
 
   def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)
     Utils.deep_merge_hashes(base_hash, overrides)
+      .fix_common_issues.backwards_compatibilize.add_default_collections
   end
 
   def site_configuration(overrides = {})
     full_overrides = build_configs(overrides, build_configs({
       "destination" => dest_dir,
-      "full_rebuild" => true
+      "incremental" => false
     }))
     build_configs({
       "source" => source_dir
@@ -107,23 +127,19 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
-  def capture_stdout
-    $old_stdout = $stdout
-    $stdout = StringIO.new
+  def capture_output
+    stderr = StringIO.new
+    Jekyll.logger = Logger.new stderr
     yield
-    $stdout.rewind
-    return $stdout.string
-  ensure
-    $stdout = $old_stdout
+    stderr.rewind
+    return stderr.string.to_s
   end
+  alias_method :capture_stdout, :capture_output
+  alias_method :capture_stderr, :capture_output
 
-  def capture_stderr
-    $old_stderr = $stderr
-    $stderr = StringIO.new
-    yield
-    $stderr.rewind
-    return $stderr.string
-  ensure
-    $stderr = $old_stderr
+  def nokogiri_fragment(str)
+    Nokogiri::HTML.fragment(
+      str
+    )
   end
 end

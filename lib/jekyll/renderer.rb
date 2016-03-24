@@ -2,13 +2,12 @@
 
 module Jekyll
   class Renderer
-
-    attr_reader :document, :site, :site_payload
+    attr_reader :document, :site, :payload
 
     def initialize(site, document, site_payload = nil)
-      @site         = site
-      @document     = document
-      @site_payload = site_payload
+      @site     = site
+      @document = document
+      @payload  = site_payload || site.site_payload
     end
 
     # Determine which converters to use based on this document's
@@ -23,7 +22,7 @@ module Jekyll
     #
     # Returns the output extname including the leading period.
     def output_ext
-      converters.first.output_ext(document.extname)
+      @output_ext ||= (permalink_ext || converter_output_ext)
     end
 
     ######################
@@ -31,31 +30,45 @@ module Jekyll
     ######################
 
     def run
-      payload = Utils.deep_merge_hashes({
-        "page" => document.to_liquid
-      }, site_payload || site.site_payload)
+      Jekyll.logger.debug "Rendering:", document.relative_path
 
-      Jekyll::Hooks.trigger document, :pre_render, payload
+      payload["page"] = document.to_liquid
 
-      info = {
-        filters:   [Jekyll::Filters],
-        registers: { :site => site, :page => payload['page'] }
-      }
+      if document.respond_to? :pager
+        payload["paginator"] = document.pager.to_liquid
+      end
+
+      if document.is_a?(Document) && document.collection.label == 'posts'
+        payload['site']['related_posts'] = document.related_posts
+      else
+        payload['site']['related_posts'] = nil
+      end
 
       # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converters.first.highlighter_prefix
-      payload["highlighter_suffix"] = converters.first.highlighter_suffix
+      payload['highlighter_prefix'] = converters.first.highlighter_prefix
+      payload['highlighter_suffix'] = converters.first.highlighter_suffix
+
+      Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
+      document.trigger_hooks(:pre_render, payload)
+
+      info = {
+        :filters   => [Jekyll::Filters],
+        :registers => { :site => site, :page => payload['page'] }
+      }
 
       output = document.content
 
       if document.render_with_liquid?
+        Jekyll.logger.debug "Rendering Liquid:", document.relative_path
         output = render_liquid(output, payload, info, document.path)
       end
 
+      Jekyll.logger.debug "Rendering Markup:", document.relative_path
       output = convert(output)
       document.content = output
 
       if document.place_in_layout?
+        Jekyll.logger.debug "Rendering Layout:", document.relative_path
         place_in_layouts(
           output,
           payload,
@@ -125,20 +138,15 @@ module Jekyll
       used   = Set.new([layout])
 
       while layout
-        payload = Utils.deep_merge_hashes(
-          payload,
-          {
-            "content" => output,
-            "page"    => document.to_liquid,
-            "layout"  => layout.data
-          }
-        )
+        payload['content'] = output
+        payload['page']    = document.to_liquid
+        payload['layout']  = Utils.deep_merge_hashes(payload['layout'] || {}, layout.data)
 
         output = render_liquid(
           layout.content,
           payload,
           info,
-          File.join(site.config['layouts'], layout.name)
+          File.join(site.config['layouts_dir'], layout.name)
         )
 
         # Add layout to dependency tree
@@ -159,5 +167,27 @@ module Jekyll
       output
     end
 
+    private
+
+    def permalink_ext
+      if document.permalink && !document.permalink.end_with?("/")
+        permalink_ext = File.extname(document.permalink)
+        permalink_ext unless permalink_ext.empty?
+      end
+    end
+
+    def converter_output_ext
+      if output_exts.size == 1
+        output_exts.last
+      else
+        output_exts[-2]
+      end
+    end
+
+    def output_exts
+      @output_exts ||= converters.map do |c|
+        c.output_ext(document.extname)
+      end.compact
+    end
   end
 end

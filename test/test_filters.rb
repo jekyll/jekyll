@@ -31,6 +31,34 @@ class TestFilters < JekyllUnitTest
       assert_equal "<p>something <strong>really</strong> simple</p>\n", @filter.markdownify("something **really** simple")
     end
 
+    context "smartify filter" do
+      should "convert quotes and typographic characters" do
+        assert_equal "SmartyPants is *not* Markdown", @filter.smartify("SmartyPants is *not* Markdown")
+        assert_equal "“This filter’s test…”", @filter.smartify(%q{"This filter's test..."})
+      end
+
+      should "escapes special characters when configured to do so" do
+        kramdown = JekyllFilter.new({:kramdown => {:entity_output => :symbolic}})
+        assert_equal "&ldquo;This filter&rsquo;s test&hellip;&rdquo;", kramdown.smartify(%q{"This filter's test..."})
+      end
+
+      should "convert HTML entities to unicode characters" do
+        assert_equal "’", @filter.smartify("&rsquo;")
+        assert_equal "“", @filter.smartify("&ldquo;")
+      end
+
+      should "allow raw HTML passthrough" do
+        assert_equal "Span HTML is <em>not</em> escaped", @filter.smartify("Span HTML is <em>not</em> escaped")
+        assert_equal "<div>Block HTML is not escaped</div>", @filter.smartify("<div>Block HTML is not escaped</div>")
+      end
+
+      should "escape special characters" do
+        assert_equal "3 &lt; 4", @filter.smartify("3 < 4")
+        assert_equal "5 &gt; 4", @filter.smartify("5 > 4")
+        assert_equal "This &amp; that", @filter.smartify("This & that")
+      end
+    end
+
     should "sassify with simple string" do
       assert_equal "p {\n  color: #123456; }\n", @filter.sassify("$blue:#123456\np\n  color: $blue")
     end
@@ -74,6 +102,13 @@ class TestFilters < JekyllUnitTest
 
         should "format a time according to RFC-822" do
           assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
+        end
+
+        should "not modify a time in-place when using filters" do
+          t = Time.new(2004, 9, 15, 0, 2, 37, "+01:00")
+          assert_equal 3600, t.utc_offset
+          @filter.date_to_string(t)
+          assert_equal 3600, t.utc_offset
         end
       end
 
@@ -257,8 +292,16 @@ class TestFilters < JekyllUnitTest
             assert_equal 2, g["items"].size
           when ""
             assert g["items"].is_a?(Array), "The list of grouped items for '' is not an Array."
-            assert_equal 11, g["items"].size
+            assert_equal 13, g["items"].size
           end
+        end
+      end
+
+      should "include the size of each grouping" do
+        grouping = @filter.group_by(@filter.site.pages, "layout")
+        grouping.each do |g|
+          p g
+          assert_equal g["items"].size, g["size"], "The size property for '#{g["name"]}' doesn't match the size of the Array."
         end
       end
     end
@@ -276,6 +319,38 @@ class TestFilters < JekyllUnitTest
 
       should "filter objects appropriately" do
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
+      end
+
+      should "filter array properties appropriately" do
+        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>["x"]}, "c"=>{"tags"=>["y","z"]}}
+        assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "filter array properties alongside string properties" do
+        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>"x"}, "c"=>{"tags"=>["y","z"]}}
+        assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "not match substrings" do
+        hash = {"a"=>{"category"=>"bear"}, "b"=>{"category"=>"wolf"}, "c"=>{"category"=>["bear","lion"]}}
+        assert_equal 0, @filter.where(hash, "category", "ear").length
+      end
+
+      should "stringify during comparison for compatibility with liquid parsing" do
+        hash = {
+          "The Words" => {"rating" => 1.2, "featured" => false},
+          "Limitless" => {"rating" => 9.2, "featured" => true},
+          "Hustle"    => {"rating" => 4.7, "featured" => true},
+        }
+
+        results = @filter.where(hash, "featured", "true")
+        assert_equal 2, results.length
+        assert_equal 9.2, results[0]["rating"]
+        assert_equal 4.7, results[1]["rating"]
+
+        results = @filter.where(hash, "rating", 4.7)
+        assert_equal 1, results.length
+        assert_equal 4.7, results[0]["rating"]
       end
     end
 
@@ -318,6 +393,10 @@ class TestFilters < JekyllUnitTest
     context "inspect filter" do
       should "return a HTML-escaped string representation of an object" do
         assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect({ "<a>" => 1 })
+      end
+
+      should "quote strings" do
+        assert_equal "&quot;string&quot;", @filter.inspect("string")
       end
     end
 
@@ -368,6 +447,20 @@ class TestFilters < JekyllUnitTest
     context "unshift filter" do
       should "return a new array with the element put at the front" do
         assert_equal %w{aloha there bernie}, @filter.unshift(%w{there bernie}, "aloha")
+      end
+    end
+
+    context "sample filter" do
+      should "return a random item from the array" do
+        input = %w(hey there bernie)
+        assert_includes input, @filter.sample(input)
+      end
+
+      should "allow sampling of multiple values (n > 1)" do
+        input = %w(hey there bernie)
+        @filter.sample(input, 2).each do |val|
+          assert_includes input, val
+        end
       end
     end
 

@@ -19,12 +19,12 @@ class TestStaticFile < JekyllUnitTest
   end
 
   def setup_static_file_with_collection(base, dir, name, label, metadata)
-    site = fixture_site 'collections' => {label => metadata}
+    site = fixture_site('collections' => {label => metadata})
     StaticFile.new(site, base, dir, name, site.collections[label])
   end
 
   def setup_static_file_with_defaults(base, dir, name, defaults)
-    site = fixture_site 'defaults' => defaults
+    site = fixture_site('defaults' => defaults)
     StaticFile.new(site, base, dir, name)
   end
 
@@ -130,4 +130,3 @@ class TestStaticFile < JekyllUnitTest
     end
   end
 end
-

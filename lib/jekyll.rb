@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
@@ -16,6 +16,7 @@ end
 require 'rubygems'
 
 # stdlib
+require 'forwardable'
 require 'fileutils'
 require 'time'
 require 'English'
@@ -30,10 +31,8 @@ require 'kramdown'
 require 'colorator'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
-Liquid::Template.error_mode = :strict
 
 module Jekyll
-
   # internal requires
   autoload :Cleaner,             'jekyll/cleaner'
   autoload :Collection,          'jekyll/collection'
@@ -53,14 +52,12 @@ module Jekyll
   autoload :CollectionReader,    'jekyll/readers/collection_reader'
   autoload :DataReader,          'jekyll/readers/data_reader'
   autoload :LayoutReader,        'jekyll/readers/layout_reader'
-  autoload :DraftReader,         'jekyll/readers/draft_reader'
   autoload :PostReader,          'jekyll/readers/post_reader'
   autoload :PageReader,          'jekyll/readers/page_reader'
   autoload :StaticFileReader,    'jekyll/readers/static_file_reader'
   autoload :LogAdapter,          'jekyll/log_adapter'
   autoload :Page,                'jekyll/page'
   autoload :PluginManager,       'jekyll/plugin_manager'
-  autoload :Post,                'jekyll/post'
   autoload :Publisher,           'jekyll/publisher'
   autoload :Reader,              'jekyll/reader'
   autoload :Regenerator,         'jekyll/regenerator'
@@ -98,7 +95,7 @@ module Jekyll
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
-    def configuration(override = Hash.new)
+    def configuration(override = {})
       config = Configuration[Configuration::DEFAULTS]
       override = Configuration[override].stringify_keys
       unless override.delete('skip_config_files')
@@ -136,7 +133,7 @@ module Jekyll
     #
     # Returns the new logger.
     def logger=(writer)
-      @logger = LogAdapter.new(writer)
+      @logger = LogAdapter.new(writer, (ENV["JEKYLL_LOG_LEVEL"] || :info).to_sym)
     end
 
     # Public: An array of sites
@@ -156,25 +153,27 @@ module Jekyll
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
 
+      questionable_path.insert(0, '/') if questionable_path.start_with?('~')
       clean_path = File.expand_path(questionable_path, "/")
-      clean_path = clean_path.sub(/\A\w\:\//, '/')
+      clean_path.sub!(/\A\w\:\//, '/')
 
-      unless clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
-        File.join(base_directory, clean_path)
-      else
+      if clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
         clean_path
+      else
+        File.join(base_directory, clean_path)
       end
     end
 
     # Conditional optimizations
     Jekyll::External.require_if_present('liquid-c')
-
   end
 end
 
+require "jekyll/drops/drop"
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/converters/markdown'
+require_all 'jekyll/drops'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 

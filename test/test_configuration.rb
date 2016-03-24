@@ -1,6 +1,8 @@
 require 'helper'
 
 class TestConfiguration < JekyllUnitTest
+  @@defaults = Jekyll::Configuration::DEFAULTS.add_default_collections.freeze
+
   context "#stringify_keys" do
     setup do
       @mixed_keys = Configuration[{
@@ -57,6 +59,34 @@ class TestConfiguration < JekyllUnitTest
       assert_equal %w[config/site.yml config/deploy.toml configuration.yml], @config.config_files(@multiple_files)
     end
   end
+
+  context "#read_config_file" do
+    setup do
+      @config = Configuration[{"source" => source_dir('empty.yml')}]
+    end
+
+    should "not raise an error on empty files" do
+      allow(SafeYAML).to receive(:load_file).with('empty.yml').and_return(false)
+      Jekyll.logger.log_level = :warn
+      @config.read_config_file('empty.yml')
+      Jekyll.logger.log_level = :info
+    end
+  end
+
+  context "#read_config_files" do
+    setup do
+      @config = Configuration[{"source" => source_dir}]
+    end
+
+    should "continue to read config files if one is empty" do
+      allow(SafeYAML).to receive(:load_file).with('empty.yml').and_return(false)
+      allow(SafeYAML).to receive(:load_file).with('not_empty.yml').and_return({'foo' => 'bar', 'include' => '', 'exclude' => ''})
+      Jekyll.logger.log_level = :warn
+      read_config = @config.read_config_files(['empty.yml', 'not_empty.yml'])
+      Jekyll.logger.log_level = :info
+      assert_equal 'bar', read_config['foo']
+    end
+  end
   context "#backwards_compatibilize" do
     setup do
       @config = Configuration[{
@@ -66,6 +96,9 @@ class TestConfiguration < JekyllUnitTest
         "exclude"  => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
         "include"  => "STOP_THE_PRESSES.txt,.heloses, .git",
         "pygments" => true,
+        "plugins" => true,
+        "layouts" => true,
+        "data_source" => true,
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -93,6 +126,17 @@ class TestConfiguration < JekyllUnitTest
       assert !@config.backwards_compatibilize.key?("pygments")
       assert_equal @config.backwards_compatibilize["highlighter"], "pygments"
     end
+    should "adjust directory names" do
+      assert @config.key?("plugins")
+      assert !@config.backwards_compatibilize.key?("plugins")
+      assert @config.backwards_compatibilize["plugins_dir"]
+      assert @config.key?("layouts")
+      assert !@config.backwards_compatibilize.key?("layouts")
+      assert @config.backwards_compatibilize["layouts_dir"]
+      assert @config.key?("data_source")
+      assert !@config.backwards_compatibilize.key?("data_source")
+      assert @config.backwards_compatibilize["data_dir"]
+    end
   end
   context "#fix_common_issues" do
     setup do
@@ -117,20 +161,20 @@ class TestConfiguration < JekyllUnitTest
     should "fire warning with no _config.yml" do
       allow(SafeYAML).to receive(:load_file).with(@path) { raise SystemCallError, "No such file or directory - #{@path}" }
       allow($stderr).to receive(:puts).with("Configuration file: none".yellow)
-      assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
+      assert_equal @@defaults, Jekyll.configuration({})
     end
 
     should "load configuration as hash" do
       allow(SafeYAML).to receive(:load_file).with(@path).and_return(Hash.new)
       allow($stdout).to receive(:puts).with("Configuration file: #{@path}")
-      assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
+      assert_equal @@defaults, Jekyll.configuration({})
     end
 
     should "fire warning with bad config" do
       allow(SafeYAML).to receive(:load_file).with(@path).and_return(Array.new)
       allow($stderr).to receive(:puts).and_return(("WARNING: ".rjust(20) + "Error reading configuration. Using defaults (and options).").yellow)
       allow($stderr).to receive(:puts).and_return("Configuration file: (INVALID) #{@path}".yellow)
-      assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
+      assert_equal @@defaults, Jekyll.configuration({})
     end
 
     should "fire warning when user-specified config file isn't there" do
@@ -156,27 +200,27 @@ class TestConfiguration < JekyllUnitTest
       }
     end
 
-    should "load default config if no config_file is set" do
+    should "load default plus posts config if no config_file is set" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
-      assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({})
+      assert_equal @@defaults, Jekyll.configuration({})
     end
 
     should "load different config if specified" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({"baseurl" => "http://wahoo.dev"})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
-      assert_equal Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => @paths[:other] })
+      assert_equal Utils.deep_merge_hashes(@@defaults, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => @paths[:other] })
     end
 
     should "load default config if path passed is empty" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
-      assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({ "config" => @paths[:empty] })
+      assert_equal @@defaults, Jekyll.configuration({ "config" => @paths[:empty] })
     end
 
     should "successfully load a TOML file" do
       Jekyll.logger.log_level = :warn
-      assert_equal Jekyll::Configuration::DEFAULTS.merge({ "baseurl" => "/you-beautiful-blog-you", "title" => "My magnificent site, wut" }), Jekyll.configuration({ "config" => [@paths[:toml]] })
+      assert_equal @@defaults.clone.merge({ "baseurl" => "/you-beautiful-blog-you", "title" => "My magnificent site, wut" }), Jekyll.configuration({ "config" => [@paths[:toml]] })
       Jekyll.logger.log_level = :info
     end
 
@@ -189,7 +233,7 @@ class TestConfiguration < JekyllUnitTest
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:toml]}")
-      assert_equal Jekyll::Configuration::DEFAULTS, Jekyll.configuration({ "config" => [@paths[:default], @paths[:other], @paths[:toml]] })
+      assert_equal @@defaults, Jekyll.configuration({ "config" => [@paths[:default], @paths[:other], @paths[:toml]] })
     end
 
     should "load multiple config files and last config should win" do
@@ -197,7 +241,7 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({"baseurl" => "http://wahoo.dev"})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
-      assert_equal Utils.deep_merge_hashes(Jekyll::Configuration::DEFAULTS, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })
+      assert_equal Utils.deep_merge_hashes(@@defaults, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })
     end
   end
 end

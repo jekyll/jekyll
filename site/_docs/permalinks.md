@@ -75,12 +75,55 @@ permalink is defined according to the format `/:categories/:year/:month/:day/:ti
     </tr>
     <tr>
       <td>
+        <p><code>hour</code></p>
+      </td>
+      <td>
+        <p>
+          Hour of the day, 24-hour clock, zero-padded from the post’s <code>date</code> front matter. (00..23)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>minute</code></p>
+      </td>
+      <td>
+        <p>
+          Minute of the hour from the post’s <code>date</code> front matter. (00..59)
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>second</code></p>
+      </td>
+      <td>
+        <p>
+          Second of the minute from the post’s <code>date</code> front matter. (00..59)
+        </p>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>title</code></p>
       </td>
       <td>
         <p>
-            Title from the document’s filename. May be overridden via the
-            document’s <code>slug</code> YAML front matter.
+            Title from the document’s filename. May be overridden via
+            the document’s <code>slug</code> YAML front matter.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>slug</code></p>
+      </td>
+      <td>
+        <p>
+            Slugified title from the document’s filename ( any character
+            except numbers and letters is replaced as hyphen ). May be
+            overridden via the document’s <code>slug</code> YAML front matter.
         </p>
       </td>
     </tr>
@@ -153,14 +196,6 @@ Jekyll also provides the following built-in styles for convenience.
 
 ## Pages and collections
 
-<div class="note unreleased">
-  <h5>Support for improved page and collection permalinks is currently unreleased.</h5>
-  <p>
-    In order to use this feature, <a href="/docs/installation/#pre-releases">
-    install the latest development version of Jekyll</a>.
-  </p>
-</div>
-
 The `permalink` configuration setting specifies the permalink style used for
 posts. Pages and collections each have their own default permalink style; the
 default style for pages is `/:path/:basename` and the default for collections is
@@ -204,7 +239,7 @@ Given a post named: `/2009-04-29-slap-chop.md`
         <p><code>pretty</code></p>
       </td>
       <td>
-        <p><code>/2009/04/29/slap-chop/index.html</code></p>
+        <p><code>/2009/04/29/slap-chop/</code></p>
       </td>
     </tr>
     <tr>
@@ -237,14 +272,6 @@ Given a post named: `/2009-04-29-slap-chop.md`
 </div>
 
 ## Extensionless permalinks
-
-<div class="note unreleased">
-  <h5>Support for extensionless permalink is currently unreleased.</h5>
-  <p>
-    In order to use this feature, <a href="/docs/installation/#pre-releases">
-    install the latest development version of Jekyll</a>.
-  </p>
-</div>
 
 Jekyll supports permalinks that contain neither a trailing slash nor a file
 extension, but this requires additional support from the web server to properly

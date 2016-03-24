@@ -30,6 +30,13 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 sudo yum install ruby-devel
 {% endhighlight %}
 
+If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, simply run:
+
+{% highlight bash %}
+sudo dnf install redhat-rpm-config
+{% endhighlight %}
+
+
 On [NearlyFreeSpeech](https://www.nearlyfreespeech.net/) you need to run the
 following commands before installing Jekyll:
 
@@ -40,20 +47,6 @@ export PATH=$PATH:/home/private/gems/bin
 export RB_USER_INSTALL='true'
 {% endhighlight %}
 
-On Mac OS X, you may need to update RubyGems:
-
-{% highlight bash %}
-sudo gem update --system
-{% endhighlight %}
-
-If you still have issues, you may need to [use Xcode to install Command Line
-Tools](http://www.zlu.me/ruby/os%20x/gem/mountain%20lion/2012/02/21/install-native-ruby-gem-in-mountain-lion-preview.html)
-that will allow you to install native gems using the following command:
-
-{% highlight bash %}
-sudo gem install jekyll
-{% endhighlight %}
-
 To install RubyGems on Gentoo:
 
 {% highlight bash %}
@@ -62,6 +55,85 @@ sudo emerge -av dev-ruby/rubygems
 
 On Windows, you may need to install [RubyInstaller
 DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
+
+On Mac OS X, you may need to update RubyGems (using `sudo` only if necessary):
+
+{% highlight bash %}
+sudo gem update --system
+{% endhighlight %}
+
+If you still have issues, you can download and install new Command Line
+Tools (such as `gcc`) using the command
+
+{% highlight bash %}
+xcode-select --install
+{% endhighlight %}
+
+which may allow you to install native gems using this command (again using
+`sudo` only if necessary):
+
+{% highlight bash %}
+sudo gem install jekyll
+{% endhighlight %}
+
+Note that upgrading Mac OS X does not automatically upgrade Xcode itself
+(that can be done separately via the App Store), and having an out-of-date
+Xcode.app can interfere with the command line tools downloaded above. If
+you run into this issue, upgrade Xcode and install the upgraded Command
+Line Tools.
+
+### Jekyll &amp; Mac OS X 10.11
+
+With the introduction of System Integrity Protection, several directories
+that were previously writable are now considered system locations and are no
+longer available. Given these changes, there are a couple of simple ways to get
+up and running. One option is to change the location where the gem will be
+installed (again using `sudo` only if necessary):
+
+{% highlight bash %}
+sudo gem install -n /usr/local/bin jekyll
+{% endhighlight %}
+
+Alternatively, Homebrew can be installed and used to set up Ruby. This can be
+done as follows:
+
+{% highlight bash %}
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+{% endhighlight %}
+
+Once Homebrew is installed, the second step is easy:
+
+{% highlight bash %}
+brew install ruby
+{% endhighlight %}
+
+Advanced users (with more complex needs) may find it helpful to choose one of a
+number of Ruby version managers ([RVM][], [rbenv][], [chruby][], [etc][].) in
+which to install Jekyll.
+
+[RVM]: https://rvm.io
+[rbenv]: http://rbenv.org
+[chruby]: https://github.com/postmodern/chruby
+[etc]: https://github.com/rvm/rvm/blob/master/docs/alt.md
+
+If you elect to use one of the above methods to install Ruby, it might be
+necessary to modify your `$PATH` variable using the following command:
+
+{% highlight bash %}
+export PATH=/usr/local/bin:$PATH
+{% endhighlight %}
+
+GUI apps can modify the `$PATH` as follows:
+
+{% highlight bash %}
+launchctl setenv PATH "/usr/local/bin:$PATH"
+{% endhighlight %}
+
+Either of these approaches are useful because `/usr/local` is considered a
+"safe" location on systems which have SIP enabled, they avoid potential
+conflicts with the version of Ruby included by Apple, and it keeps Jekyll and
+its dependencies in a sandboxed environment. This also has the added
+benefit of not requiring `sudo` when you want to add or remove a gem.
 
 ### Could not find a JavaScript runtime. (ExecJS::RuntimeUnavailable)
 

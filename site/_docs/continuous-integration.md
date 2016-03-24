@@ -31,8 +31,10 @@ does ensure things are built properly.
 
 When testing Jekyll output, there is no better tool than [html-proofer][2].
 This tool checks your resulting site to ensure all links and images exist.
-Utilize it either with the convenient `htmlproof` command-line executable,
+Utilize it either with the convenient `htmlproofer` command-line executable,
 or write a Ruby script which utilizes the gem.
+
+Save the commands you want to run and succeed in a file: `./script/cibuild`
 
 ### The HTML Proofer Executable
 
@@ -41,12 +43,18 @@ or write a Ruby script which utilizes the gem.
 set -e # halt script on error
 
 bundle exec jekyll build
-bundle exec htmlproof ./_site
+bundle exec htmlproofer ./_site
 {% endhighlight %}
 
 Some options can be specified via command-line switches. Check out the
 `html-proofer` README for more information about these switches, or run
-`htmlproof --help` locally.
+`htmlproofer --help` locally.
+
+For example to avoid testing external sites, use this command:
+
+{% highlight bash %}
+$ bundle exec htmlproofer ./_site --disable-external
+{% endhighlight %}
 
 ### The HTML Proofer Library
 
@@ -72,7 +80,7 @@ with Ruby and requires RubyGems to install, we use the Ruby language build
 environment. Below is a sample `.travis.yml` file, followed by
 an explanation of each line.
 
-**Note:** You will need a Gemfile as well, [Travis will automatically install](http://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems:
+**Note:** You will need a Gemfile as well, [Travis will automatically install](https://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems:
 
 {% highlight ruby %}
 source "https://rubygems.org"
@@ -81,15 +89,21 @@ gem "jekyll"
 gem "html-proofer"
 {% endhighlight %}
 
+Your `.travis.yml` file should look like this:
 
 {% highlight yaml %}
 language: ruby
 rvm:
 - 2.1
-# Assume bundler is being used, install step will run `bundle install`.
+
+before_script:
+ - chmod +x ./script/cibuild # or do this locally and commit
+
+# Assume bundler is being used, therefore
+# the `install` step will run `bundle install` by default.
 script: ./script/cibuild
 
-# branch whitelist
+# branch whitelist, only for GitHub Pages
 branches:
   only:
   - gh-pages     # test the gh-pages branch
@@ -98,6 +112,8 @@ branches:
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
+
+sudo: false # route your build to the container-based infrastructure for a faster build
 {% endhighlight %}
 
 Ok, now for an explanation of each line:
@@ -119,6 +135,16 @@ directive tells Travis the Ruby version to use when running your test
 script.
 
 {% highlight yaml %}
+before_script:
+ - chmod +x ./script/cibuild
+{% endhighlight %}
+
+The build script file needs to have the *executable* attribute set or
+Travis will fail with a permission denied error. You can also run this
+locally and commit the permissions directly, thus rendering this step
+irrelevant.
+
+{% highlight yaml %}
 script: ./script/cibuild
 {% endhighlight %}
 
@@ -130,13 +156,13 @@ incantation here directly:
 
 {% highlight yaml %}
 install: gem install jekyll html-proofer
-script: jekyll build && htmlproof ./_site
+script: jekyll build && htmlproofer ./_site
 {% endhighlight %}
 
 The `script` directive can be absolutely any valid shell command.
 
 {% highlight yaml %}
-# branch whitelist
+# branch whitelist, only for GitHub Pages
 branches:
   only:
   - gh-pages     # test the gh-pages branch
@@ -152,7 +178,8 @@ a pull request flow for proposing changes, you may wish to enforce a
 convention for your builds such that all branches containing edits are
 prefixed, exemplified above with the `/pages-(.*)/` regular expression.
 
-The `branches` directive is completely optional.
+The `branches` directive is completely optional. Travis will build from every
+push to any branch of your repo if leave it out.
 
 {% highlight yaml %}
 env:
@@ -177,10 +204,30 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 exclude: [vendor]
 {% endhighlight %}
 
+By default you should supply the `sudo: false` command to Travis. This command 
+explicitly tells Travis to run your build on Travis's [container-based
+ infrastructure](https://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure). Running on the container-based infrastructure can often times
+speed up your build. If you have any trouble with your build, or if your build
+does need `sudo` access, modify the line to `sudo: required`.
+
+{% highlight yaml %}
+sudo: false
+{% endhighlight %}
+
+### Troubleshooting
+
+**Travis error:** *"You are trying to install in deployment mode after changing
+your Gemfile. Run bundle install elsewhere and add the updated Gemfile.lock
+to version control."*
+
+**Workaround:** Either run `bundle install` locally and commit your changes to
+`Gemfile.lock`, or remove the `Gemfile.lock` file from your repository and add
+an entry in the `.gitignore` file to avoid it from being checked in again.
+
 ### Questions?
 
 This entire guide is open-source. Go ahead and [edit it][3] if you have a
 fix or [ask for help][4] if you run into trouble and need some help.
 
 [3]: https://github.com/jekyll/jekyll/edit/master/site/_docs/continuous-integration.md
-[4]: https://github.com/jekyll/jekyll-help#how-do-i-ask-a-question
+[4]: http://jekyllrb.com/help/

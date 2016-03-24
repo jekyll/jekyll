@@ -15,6 +15,17 @@ module Jekyll
       converter.convert(input)
     end
 
+    # Convert quotes into smart quotes.
+    #
+    # input - The String to convert.
+    #
+    # Returns the smart-quotified String.
+    def smartify(input)
+      site = @context.registers[:site]
+      converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
+      converter.convert(input)
+    end
+
     # Convert a Sass string into CSS output.
     #
     # input - The Sass String to convert.
@@ -45,7 +56,7 @@ module Jekyll
     # Returns the given filename or title as a lowercase URL String.
     # See Utils.slugify for more detail.
     def slugify(input, mode=nil)
-      Utils.slugify(input, mode)
+      Utils.slugify(input, :mode => mode)
     end
 
     # Format a date in short format e.g. "27 Jan 2011".
@@ -106,7 +117,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      CGI.escapeHTML(input.to_s)
+      input.to_s.encode(:xml => :attr).gsub(/\A"|"\Z/, "")
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters
@@ -194,7 +205,7 @@ module Jekyll
         input.group_by do |item|
           item_property(item, property).to_s
         end.inject([]) do |memo, i|
-          memo << {"name" => i.first, "items" => i.last}
+          memo << { "name" => i.first, "items" => i.last, "size" => i.last.size }
         end
       else
         input
@@ -211,7 +222,7 @@ module Jekyll
     def where(input, property, value)
       return input unless input.is_a?(Enumerable)
       input = input.values if input.is_a?(Hash)
-      input.select { |object| item_property(object, property) == value }
+      input.select { |object| Array(item_property(object, property)).map(&:to_s).include?(value.to_s) }
     end
 
     # Sort an array of objects
@@ -223,7 +234,7 @@ module Jekyll
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
       if input.nil?
-          raise ArgumentError.new("Cannot sort a null object.")
+        raise ArgumentError.new("Cannot sort a null object.")
       end
       if property.nil?
         input.sort
@@ -234,11 +245,11 @@ module Jekyll
         when nils == "last"
           order = + 1
         else
-          raise ArgumentError.new("Invalid nils order: " +
+          raise ArgumentError.new("Invalid nils order: " \
             "'#{nils}' is not a valid nils order. It must be 'first' or 'last'.")
         end
 
-        input.sort { |apple, orange|
+        input.sort do |apple, orange|
           apple_property = item_property(apple, property)
           orange_property = item_property(orange, property)
 
@@ -249,7 +260,7 @@ module Jekyll
           else
             apple_property <=> orange_property
           end
-        }
+        end
       end
     end
 
@@ -281,20 +292,30 @@ module Jekyll
       new_ary
     end
 
+    def sample(input, num = 1)
+      return input unless input.respond_to?(:sample)
+      n = num.to_i rescue 1
+      if n == 1
+        input.sample
+      else
+        input.sample(n)
+      end
+    end
+
     # Convert an object into its String representation for debugging
     #
     # input - The Object to be converted
     #
     # Returns a String representation of the object.
     def inspect(input)
-      CGI.escapeHTML(input.inspect)
+      xml_escape(input.inspect)
     end
 
     private
     def time(input)
       case input
       when Time
-        input
+        input.clone
       when Date
         input.to_time
       when String
@@ -327,7 +348,7 @@ module Jekyll
         pairs = item.map { |k, v| as_liquid([k, v]) }
         Hash[pairs]
       when Array
-        item.map{ |i| as_liquid(i) }
+        item.map { |i| as_liquid(i) }
       else
         if item.respond_to?(:to_liquid)
           liquidated = item.to_liquid

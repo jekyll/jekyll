@@ -106,7 +106,7 @@ following is a reference of the available data.
         related Posts. By default, these are the ten most recent posts.
         For high quality but slow to compute results, run the
         <code>jekyll</code> command with the <code>--lsi</code> (latent semantic
-        indexing) option. Also note Github pages does not support the <code>lsi</code> option when generating sites.
+        indexing) option. Also note GitHub Pages does not support the <code>lsi</code> option when generating sites.
 
       </p></td>
     </tr>
@@ -125,7 +125,15 @@ following is a reference of the available data.
       <td><p><code>site.html_pages</code></p></td>
       <td><p>
 
-        A list of all HTML Pages.
+        A subset of `site.pages` listing those which end in `.html`.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>site.html_files</code></p></td>
+      <td><p>
+
+        A subset of `site.static_files` listing those which end in `.html`.
 
       </p></td>
     </tr>

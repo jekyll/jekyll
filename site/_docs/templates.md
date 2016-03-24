@@ -188,6 +188,17 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Smartify</strong></p>
+        <p>Convert "quotes" into &ldquo;smart quotes.&rdquo;</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ page.title | smartify }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Converting Sass/SCSS</strong></p>
         <p>Convert a Sass- or SCSS-formatted string into CSS.</p>
       </td>
@@ -243,6 +254,53 @@ common tasks easier.
         </p>
         <p>
          <code class="filter">{% raw %}{{ site.pages | sort: 'title', 'last' }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Sample</strong></p>
+        <p>Pick a random value from an array. Optional: pick multiple values.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.pages | sample }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.pages | sample:2 }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Array Filters</strong></p>
+        <p>Push, pop, shift, and unshift elements from an Array.</p>
+        <p>These are <strong>NON-DESTRUCTIVE</strong>, i.e. they do not mutate the array, but rather make a copy and mutate that.</p>
+      </td>
+      <td class="align-center">
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | push: 'Spokane' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Seattle', 'Tacoma', 'Spokane']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | pop }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Seattle']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | shift }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Tacoma']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | unshift: "Olympia" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Olympia', 'Seattle', 'Tacoma']</code>
         </p>
       </td>
     </tr>
@@ -317,16 +375,16 @@ such as using variables.
 
 ### Code snippet highlighting
 
-Jekyll has built in support for syntax highlighting of [over 100
-languages](http://pygments.org/languages/) thanks to
-[Pygments](http://pygments.org/). To use Pygments, you must have Python installed
-on your system and set `highlighter` to `pygments` in your site's configuration
-file.
+Jekyll has built in support for syntax highlighting of over 60 languages
+thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
+in Jekyll 3 and above. To use it in Jekyll 2, set `highlighter` to `rouge`
+and ensure the `rouge` gem is installed properly.
 
-Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to highlight
-your code snippets. It doesn't support as many languages as Pygments, however it
-should suit most use cases. Also, since [Rouge](https://github.com/jayferd/rouge)
-is written in pure Ruby, you don't need Python on your system!
+Alternatively, you can use [Pygments](http://pygments.org) to highlight
+your code snippets. To use Pygments, you must have Python installed on your
+system, have the `pygments.rb` gem installed and set `highlighter` to
+`pygments` in your site's configuration file. Pygments supports [over 100
+languages](http://pygments.org/languages/)
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -342,9 +400,9 @@ end
 
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
-you want to highlight, look for the “short name” on the [Pygments' Lexers
-page](http://pygments.org/docs/lexers/) or the [Rouge
-wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers).
+you want to highlight, look for the “short name” on the [Rouge
+wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers)
+or the [Pygments' Lexers page](http://pygments.org/docs/lexers/).
 
 #### Line numbers
 
@@ -421,3 +479,6 @@ You may also optionally specify the filename in the gist to display:
 {% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
 {% endraw %}
 {% endhighlight %}
+
+To use the `gist` tag, you'll need to add the
+[jekyll-gist](https://github.com/jekyll/jekyll-gist) gem to your project.

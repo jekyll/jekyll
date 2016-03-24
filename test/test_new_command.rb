@@ -24,15 +24,16 @@ class TestNewCommand < JekyllUnitTest
     end
 
     should 'create a new directory' do
-      assert !File.exist?(@full_path)
-      capture_stdout { Jekyll::Commands::New.process(@args) }
-      assert File.exist?(@full_path)
+      refute_exist @full_path
+      Jekyll::Commands::New.process(@args)
+      assert_exist @full_path
     end
 
     should 'display a success message' do
-      output = capture_stdout { Jekyll::Commands::New.process(@args) }
-      success_message = "New jekyll site installed in #{@full_path}. \n"
-      assert_equal success_message, output
+      Jekyll::Commands::New.process(@args)
+      output = Jekyll.logger.messages.last
+      success_message = "New jekyll site installed in #{@full_path}."
+      assert_includes output, success_message
     end
 
     should 'copy the static files in site template to the new directory' do
@@ -95,9 +96,9 @@ class TestNewCommand < JekyllUnitTest
     end
 
     should 'create a new directory' do
-      assert !File.exist?(@site_name_with_spaces)
+      refute_exist @site_name_with_spaces
       capture_stdout { Jekyll::Commands::New.process(@multiple_args) }
-      assert File.exist?(@site_name_with_spaces)
+      assert_exist @site_name_with_spaces
     end
   end
 

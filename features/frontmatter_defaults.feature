@@ -12,7 +12,8 @@ Feature: frontmatter defaults
     And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {layout: "pretty"}}]"
 
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "THIS IS THE LAYOUT: <p>just some post</p>" in "_site/2013/09/11/default-layout.html"
     And I should see "THIS IS THE LAYOUT: just some page" in "_site/index.html"
 
@@ -24,7 +25,8 @@ Feature: frontmatter defaults
     And I have an "index.html" page that contains "just {{page.custom}} by {{page.author}}"
     And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {custom: "some special data", author: "Ben"}}]"
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "<p>some special data</p>\n<div>Ben</div>" in "_site/2013/09/11/default-data.html"
     And I should see "just some special data by Ben" in "_site/index.html"
 
@@ -48,7 +50,8 @@ Feature: frontmatter defaults
     And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "subfolder", description: "the special section"}}, {scope: {path: ""}, values: {layout: "root", description: "the webpage"}}]"
 
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "root: <p>info on the webpage</p>" in "_site/2013/10/14/about.html"
     And I should see "subfolder: <p>info on the special section</p>" in "_site/special/2013/10/14/about.html"
     And I should see "root: Overview for the webpage" in "_site/index.html"
@@ -71,7 +74,8 @@ Feature: frontmatter defaults
     And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "main"}}, {scope: {path: "special/_posts"}, values: {layout: "main"}}, {scope: {path: "_posts"}, values: {layout: "main"}}]"
 
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "main: <p>content of site/2013/10/14/about.html</p>" in "_site/2013/10/14/about.html"
     And I should see "main: <p>content of site/special/2013/10/14/about1.html</p>" in "_site/special/2013/10/14/about1.html"
     And I should see "main: <p>content of site/special/2013/10/14/about2.html</p>" in "_site/special/2013/10/14/about2.html"
@@ -132,7 +136,8 @@ Feature: frontmatter defaults
             myval: "Test"
     """
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "Value: Test" in "_site/slides/slide1.html"
 
   Scenario: Override frontmatter defaults inside a collection
@@ -159,7 +164,8 @@ Feature: frontmatter defaults
             myval: "Test"
     """
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "Value: Override" in "_site/slides/slide2.html"
 
   Scenario: Deep merge frontmatter defaults

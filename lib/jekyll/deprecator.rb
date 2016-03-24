@@ -3,8 +3,9 @@ module Jekyll
     extend self
 
     def process(args)
-      no_subcommand(args)
       arg_is_present? args, "--server", "The --server command has been replaced by the \
+                          'serve' subcommand."
+      arg_is_present? args, "--serve", "The --server command has been replaced by the \
                           'serve' subcommand."
       arg_is_present? args, "--no-server", "To build Jekyll without launching a server, \
                           use the 'build' subcommand."
@@ -16,12 +17,13 @@ module Jekyll
       arg_is_present? args, "--paginate", "The 'paginate' setting can only be set in your \
                           config files."
       arg_is_present? args, "--url", "The 'url' setting can only be set in your config files."
+      no_subcommand(args)
     end
 
     def no_subcommand(args)
-      if args.size > 0 && args.first =~ /^--/ && !%w[--help --version].include?(args.first)
-        deprecation_message "Jekyll now uses subcommands instead of just \
-                            switches. Run `jekyll --help` to find out more."
+      if args.size > 0 && args.first =~ /^--/ && !%w(--help --version).include?(args.first)
+        deprecation_message "Jekyll now uses subcommands instead of just switches. Run `jekyll help` to find out more."
+        abort
       end
     end
 

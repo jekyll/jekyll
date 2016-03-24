@@ -2,12 +2,12 @@ module Jekyll
   module Converters
     class Markdown
       class RedcarpetParser
-
         module CommonMethods
           def add_code_tags(code, lang)
             code = code.to_s
             code = code.sub(/<pre>/, "<pre><code class=\"language-#{lang}\" data-lang=\"#{lang}\">")
-            code = code.sub(/<\/pre>/,"</code></pre>")
+            code = code.sub(/<\/pre>/, "</code></pre>")
+            code
           end
         end
 
@@ -48,11 +48,10 @@ module Jekyll
           end
 
           protected
-          def rouge_formatter(lexer)
+          def rouge_formatter(_lexer)
             Rouge::Formatters::HTML.new(:wrap => false)
           end
         end
-
 
         def initialize(config)
           External.require_with_graceful_fail("redcarpet")
@@ -71,12 +70,12 @@ module Jekyll
             end
           when "rouge"
             Class.new(Redcarpet::Render::HTML) do
-              Jekyll::External.require_with_graceful_fail(%w[
+              Jekyll::External.require_with_graceful_fail(%w(
                 rouge
                 rouge/plugins/redcarpet
-              ])
+              ))
 
-              if Rouge.version < '1.3.0'
+              unless Gem::Version.new(Rouge.version) > Gem::Version.new("1.3.0")
                 abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
               end
 

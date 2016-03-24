@@ -80,8 +80,9 @@ class TestCollections < JekyllUnitTest
       @site.process
     end
 
-    should "not contain any collections" do
-      assert_equal Hash.new, @site.collections
+    should "contain only the defaul collections" do
+      refute_equal Hash.new, @site.collections
+      refute_nil @site.collections
     end
   end
 
@@ -125,6 +126,7 @@ class TestCollections < JekyllUnitTest
         assert_includes %w[
           _methods/configuration.md
           _methods/sanitized_path.md
+          _methods/collection/entries
           _methods/site/generate.md
           _methods/site/initialize.md
           _methods/um_hi.md
@@ -202,7 +204,7 @@ class TestCollections < JekyllUnitTest
     end
 
     should "contain one document" do
-      assert_equal 2, @collection.docs.size
+      assert_equal 4, @collection.docs.size
     end
 
     should "allow dots in the filename" do

@@ -16,18 +16,18 @@ module Jekyll
       @site.layouts = LayoutReader.new(site).read
       read_directories
       sort_files!
-      @site.data = DataReader.new(site).read(site.config['data_source'])
+      @site.data = DataReader.new(site).read(site.config['data_dir'])
       CollectionReader.new(site).read
     end
 
     # Sorts posts, pages, and static files.
     def sort_files!
-      site.posts.sort!
+      site.collections.values.each { |c| c.docs.sort! }
       site.pages.sort_by!(&:name)
       site.static_files.sort_by!(&:relative_path)
     end
 
-    # Recursively traverse directories to find posts, pages and static files
+    # Recursively traverse directories to find pages and static files
     # that will become part of the site according to the rules in
     # filter_entries.
     #
@@ -38,9 +38,9 @@ module Jekyll
       base = site.in_source_dir(dir)
 
       dot = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
-      dot_dirs = dot.select{ |file| File.directory?(@site.in_source_dir(base,file)) }
+      dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
       dot_files = (dot - dot_dirs)
-      dot_pages = dot_files.select{ |file| Utils.has_yaml_header?(@site.in_source_dir(base,file)) }
+      dot_pages = dot_files.select { |file| Utils.has_yaml_header?(@site.in_source_dir(base, file)) }
       dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
@@ -56,8 +56,8 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_posts(dir)
-      site.posts.concat(PostReader.new(site).read(dir))
-      site.posts.concat(DraftReader.new(site).read(dir)) if site.show_drafts
+      site.posts.docs.concat(PostReader.new(site).read_posts(dir))
+      site.posts.docs.concat(PostReader.new(site).read_drafts(dir)) if site.show_drafts
     end
 
     # Recursively traverse directories with the read_directories function.
@@ -67,12 +67,12 @@ module Jekyll
     # dot_dirs - The Array of subdirectories in the dir.
     #
     # Returns nothing.
-    def retrieve_dirs(base, dir, dot_dirs)
-      dot_dirs.map { |file|
-        dir_path = site.in_source_dir(dir,file)
+    def retrieve_dirs(_base, dir, dot_dirs)
+      dot_dirs.map do |file|
+        dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
         @site.reader.read_directories(rel_path) unless @site.dest.sub(/\/$/, '') == dir_path
-      }
+      end
     end
 
     # Retrieve all the pages from the current directory,
