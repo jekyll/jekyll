@@ -12,6 +12,7 @@
   * 'jekyll clean': also remove .sass-cache (#4652)
   * Clean up Tags::PostUrl a bit, including better errors and date parsing (#4670)
   * Use String#encode for xml_escape filter instead of CGI.escapeHTML (#4694)
+  * Add show_dir_listing option for serve command and fix index file names (#4533)
 
 ### Bug Fixes
 
