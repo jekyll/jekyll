@@ -1,6 +1,15 @@
 module Jekyll
   module External
     class << self
+      def required_gems
+        @required_gems ||= Set.new
+      end
+
+      def require_gem(name)
+        require name
+        required_gems << name
+      end
+
       #
       # Gems that, if installed, should be loaded.
       # Usually contain subcommands.
@@ -19,8 +28,10 @@ module Jekyll
       #
       def require_if_present(names, &block)
         Array(names).each do |name|
+          next if required_gems.include? name
           begin
             require name
+            required_gems << name
           rescue LoadError
             Jekyll.logger.debug "Couldn't load #{name}. Skipping."
             block.call(name) if block
@@ -38,9 +49,10 @@ module Jekyll
       #
       def require_with_graceful_fail(names)
         Array(names).each do |name|
+          next if required_gems.include? name
           begin
             Jekyll.logger.debug "Requiring:", "#{name}"
-            require name
+            require_gem name
           rescue LoadError => e
             Jekyll.logger.error "Dependency Error:", <<-MSG
 Yikes! It looks like you don't have #{name} or one of its dependencies installed.

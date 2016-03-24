@@ -284,5 +284,14 @@ module Jekyll
       merged
     end
 
+    # Record the duration of an action and output it plus any user-defined
+    # messages as debug output.
+    def time(left, right)
+      start = Time.now
+      output = yield
+      Jekyll.logger.debug left, "#{right} in #{format("%.8f", Time.now - start)}s"
+      output
+    end
+
   end
 end

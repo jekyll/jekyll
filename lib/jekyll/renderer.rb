@@ -48,8 +48,9 @@ module Jekyll
       payload['highlighter_prefix'] = converters.first.highlighter_prefix
       payload['highlighter_suffix'] = converters.first.highlighter_suffix
 
-      Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
-      document.trigger_hooks(:pre_render, payload)
+      Utils.time "Pre-Render Hooks:", document.relative_path do
+        document.trigger_hooks(:pre_render, payload)
+      end
 
       info = {
         :filters   => [Jekyll::Filters],
@@ -59,24 +60,27 @@ module Jekyll
       output = document.content
 
       if document.render_with_liquid?
-        Jekyll.logger.debug "Rendering Liquid:", document.relative_path
-        output = render_liquid(output, payload, info, document.path)
+        output = Utils.time "Rendering Liquid:", document.relative_path do
+          render_liquid(output, payload, info, document.path)
+        end
       end
 
-      Jekyll.logger.debug "Rendering Markup:", document.relative_path
-      output = convert(output)
+      output = Utils.time "Rendering Markup:", document.relative_path do
+        convert(output)
+      end
       document.content = output
 
       if document.place_in_layout?
-        Jekyll.logger.debug "Rendering Layout:", document.relative_path
-        place_in_layouts(
-          output,
-          payload,
-          info
-        )
-      else
-        output
+        output = Utils.time "Rendering Layout:", document.relative_path do
+          place_in_layouts(
+            output,
+            payload,
+            info
+          )
+        end
       end
+
+      output
     end
 
     # Convert the given content using the converters which match this renderer's document.
@@ -87,7 +91,9 @@ module Jekyll
     def convert(content)
       converters.reduce(content) do |output, converter|
         begin
-          converter.convert output
+          Utils.time "Rendering Markup:", "#{document.relative_path} through #{converter.class}" do
+            converter.convert output
+          end
         rescue => e
           Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error while converting '#{document.relative_path}':"
           Jekyll.logger.error("", e.to_s)
