@@ -492,7 +492,7 @@ CONTENT
     end
 
     should "have the url to the \"yaml_with_dots\" item" do
-      assert_match %r{/methods/yaml_with_dots}, @result
+      assert_match %r{/methods/yaml_with_dots\.html}, @result
     end
   end
 
@@ -514,11 +514,11 @@ CONTENT
     end
 
     should "have the url to the \"sanitized_path\" item" do
-      assert_match %r{1\s/methods/sanitized_path}, @result
+      assert_match %r{1\s/methods/sanitized_path\.html}, @result
     end
 
     should "have the url to the \"site/generate\" item" do
-      assert_match %r{2\s/methods/site/generate}, @result
+      assert_match %r{2\s/methods/site/generate\.html}, @result
     end
   end
 
