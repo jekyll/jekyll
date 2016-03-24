@@ -51,6 +51,7 @@
   * Fix typo on Chocolatey name in Windows documentation (#4686)
   * Use the correct URL, Fixes #4698 (#4699)
   * Add jekyll-paspagon plugin (#4700)
+  * Bold-italicize note in assets documentation about needing yaml front matter (#4706)
 
 ## 3.1.2 / 2016-02-19
 
