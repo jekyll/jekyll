@@ -29,6 +29,15 @@ class TestNewCommand < JekyllUnitTest
       assert_exist @full_path
     end
 
+    should "create a Gemfile" do
+      gemfile = File.join(@full_path, "Gemfile")
+      refute_exist @full_path
+      capture_stdout { Jekyll::Commands::New.process(@args) }
+      assert_exist gemfile
+      assert_match /gem "jekyll", "#{Jekyll::VERSION}"/, File.read(gemfile)
+      assert_match /gem "github-pages"/, File.read(gemfile)
+    end
+
     should 'display a success message' do
       Jekyll::Commands::New.process(@args)
       output = Jekyll.logger.messages.last
@@ -40,6 +49,7 @@ class TestNewCommand < JekyllUnitTest
       static_template_files = dir_contents(site_template).reject do |f|
         File.extname(f) == '.erb'
       end
+      static_template_files << "/Gemfile"
 
       capture_stdout { Jekyll::Commands::New.process(@args) }
 
