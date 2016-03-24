@@ -55,7 +55,7 @@ class TestCleaner < JekyllUnitTest
 
     teardown do
       FileUtils.rm_rf(dest_dir('.git'))
-      FileUtils.rm_rf(dest_dir('.username.github.io'))
+      FileUtils.rm_rf(dest_dir('username.github.io'))
     end
 
     should "keep the file in the directory in keep_files" do
