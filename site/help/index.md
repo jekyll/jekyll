@@ -27,7 +27,7 @@ Add **jekyll** to almost any query, and you'll find just what you need.
 Jekyll Talk is our official Discourse forum. Here, users and contributors
 can ask questions and discuss all aspects of Jekyll.
 
-### [Jekyll on StackOverflow](http://stackoverflow.com/questions/tagged/jekyll)
+### [Jekyll on StackOverflow](https://stackoverflow.com/questions/tagged/jekyll)
 
 StackOverflow is a staple of any developer's diet. Check out the Jekyll tag
 on StackOverflow for an answer to your question. Not there? Ask a new

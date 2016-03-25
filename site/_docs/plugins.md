@@ -521,6 +521,18 @@ The complete list of available hooks is below:
         <p><code>:site</code></p>
       </td>
       <td>
+        <p><code>:after_init</code></p>
+      </td>
+      <td>
+        <p>Just after the site initializes, but before setup & render. Good
+        for modifying the configuration of the site.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:site</code></p>
+      </td>
+      <td>
         <p><code>:after_reset</code></p>
       </td>
       <td>
@@ -885,6 +897,7 @@ LESS.js files during generation.
 - [Jekyll Language Plugin](https://github.com/vwochnik/jekyll-language-plugin): Jekyll 3.0-compatible multi-language plugin for posts, pages and includes.
 - [Jekyll Deploy](https://github.com/vwochnik/jekyll-deploy): Adds a `deploy` sub-command to Jekyll.
 - [Official Contentful Jekyll Plugin](https://github.com/contentful/jekyll-contentful-data-import): Adds a `contentful` sub-command to Jekyll to import data from Contentful.
+- [jekyll-paspagon](https://github.com/KrzysiekJ/jekyll-paspagon): Sell your posts in various formats for cryptocurrencies.
 
 #### Editors
 

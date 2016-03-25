@@ -95,11 +95,12 @@ module Jekyll
     # Private: Creates a regular expression from the config's keep_files array
     #
     # Examples
-    #   ['.git','.svn'] creates the following regex: /\/(\.git|\/.svn)/
+    #   ['.git','.svn'] with site.dest "/myblog/_site" creates 
+    #   the following regex: /\A\/myblog\/_site\/(\.git|\/.svn)/
     #
     # Returns the regular expression
     def keep_file_regex
-      Regexp.union(site.keep_files)
+      /\A#{Regexp.quote(site.dest)}\/(#{Regexp.union(site.keep_files).source})/
     end
   end
 end

@@ -7,10 +7,19 @@ module Jekyll
 
       def initialize(name)
         @name = name
+
         all, @path, @date, @slug = *name.sub(/^\//, "").match(MATCHER)
-        raise ArgumentError.new("'#{name}' does not contain valid date and/or title.") unless all
+        unless all
+          raise Jekyll::Errors::InvalidPostNameError,
+            "'#{name}' does not contain valid date and/or title."
+        end
 
         @name_regex = /^#{path}#{date}-#{slug}\.[^.]+/
+      end
+
+      def post_date
+        @post_date ||= Utils.parse_date(date,
+          "\"#{date}\" does not contain valid date and/or title.")
       end
 
       def ==(other)
@@ -18,11 +27,10 @@ module Jekyll
       end
 
       def deprecated_equality(other)
-        date = Utils.parse_date(name, "'#{name}' does not contain valid date and/or title.")
         slug == post_slug(other) &&
-          date.year  == other.date.year &&
-          date.month == other.date.month &&
-          date.day   == other.date.day
+          post_date.year  == other.date.year &&
+          post_date.month == other.date.month &&
+          post_date.day   == other.date.day
       end
 
       private
@@ -47,11 +55,13 @@ module Jekyll
         @orig_post = post.strip
         begin
           @post = PostComparer.new(@orig_post)
-        rescue
-          raise ArgumentError.new <<-eos
+        rescue => e
+          raise Jekyll::Errors::PostURLError, <<-eos
 Could not parse name of post "#{@orig_post}" in tag 'post_url'.
 
 Make sure the post exists and the name is correct.
+
+#{e.class}: #{e.message}
 eos
         end
       end
@@ -75,7 +85,7 @@ eos
           return p.url
         end
 
-        raise ArgumentError.new <<-eos
+        raise Jekyll::Errors::PostURLError, <<-eos
 Could not find post "#{@orig_post}" in tag 'post_url'.
 
 Make sure the post exists and the name is correct.

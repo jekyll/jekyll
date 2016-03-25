@@ -20,7 +20,7 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 
 * [Install Jekyll on your computer](https://jekyllrb.com/docs/installation/) and kick the tires. Does it work? Does it do what you'd expect? If not, [open an issue](https://github.com/jekyll/jekyll/issues/new) and let us know.
 * Comment on some of the project's [open issues](https://github.com/jekyll/jekyll/issues). Have you experienced the same problem? Know a work around? Do you have a suggestion for how the feature could be better?
-* Read through [the documentation](http://jekyllrb.com/docs/home/), and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
+* Read through [the documentation](https://jekyllrb.com/docs/home/), and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
 * Browse through [the Jekyll discussion forum](https://talk.jekyllrb.com/), and lend a hand answering questions. There's a good chance you've already experienced what another user is experiencing.
 * Find [an open issue](https://github.com/jekyll/jekyll/issues) (especially [those labeled `help-wanted`](https://github.com/jekyll/jekyll/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted)), and submit a proposed fix. If it's your first pull request, we promise we won't bite, and are glad to answer any questions.
 * Help evaluate [open pull requests](https://github.com/jekyll/jekyll/pulls), by testing the changes locally and reviewing what's proposed.
@@ -73,7 +73,7 @@ One gotcha, all pull requests should be directed at the `master` branch (the def
 
 ### Adding plugins
 
-If you want to add your plugin to the [list of plugins](http://jekyllrb.com/docs/plugins/#available-plugins), please submit a pull request modifying the [plugins page source file](site/_docs/plugins.md) by adding a link to your plugin under the proper subheading depending upon its type.
+If you want to add your plugin to the [list of plugins](https://jekyllrb.com/docs/plugins/#available-plugins), please submit a pull request modifying the [plugins page source file](site/_docs/plugins.md) by adding a link to your plugin under the proper subheading depending upon its type.
 
 ## Code Contributions
 
@@ -105,19 +105,19 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 To run the test suite and build the gem you'll need to install Jekyll's dependencies by running the following command:
 
-    $ script/bootstrap
+<pre class="highlight"><code>$ script/bootstrap</code></pre>
 
 Before you make any changes, run the tests and make sure that they pass (to confirm your environment is configured properly):
 
-    $ script/cibuild
+<pre class="highlight"><code>$ script/cibuild</code></pre>
 
 If you are only updating a file in `test/`, you can use the command:
 
-    $ script/test test/blah_test.rb
+<pre class="highlight"><code>$ script/test test/blah_test.rb</code></pre>
 
 If you are only updating a `.feature` file, you can use the command:
 
-    $ script/cucumber features/blah.feature
+<pre class="highlight"><code>$ script/cucumber features/blah.feature</code></pre>
 
 Both `script/test` and `script/cucumber` can be run without arguments to
 run its entire respective suite.

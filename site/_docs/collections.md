@@ -303,11 +303,8 @@ file, each document has the following attributes:
       </td>
       <td>
         <p>
-          The URL of the rendered collection. The file is only written to the
-          destination when the name of the collection to which it belongs is
-          included in the <code>render</code> key in the site's configuration
-          file.
-        </p>
+          The URL of the rendered collection. The file is only written to the destination when the collection to which it belongs has <code>output: true</code> in the site's configuration.
+          </p>
       </td>
     </tr>
     <tr>

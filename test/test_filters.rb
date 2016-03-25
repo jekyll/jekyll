@@ -394,6 +394,10 @@ class TestFilters < JekyllUnitTest
       should "return a HTML-escaped string representation of an object" do
         assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect({ "<a>" => 1 })
       end
+
+      should "quote strings" do
+        assert_equal "&quot;string&quot;", @filter.inspect("string")
+      end
     end
 
     context "slugify filter" do

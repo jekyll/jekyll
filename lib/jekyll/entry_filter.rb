@@ -1,6 +1,6 @@
 module Jekyll
   class EntryFilter
-    SPECIAL_LEADING_CHARACTERS = ['.', '_', '#'].freeze
+    SPECIAL_LEADING_CHARACTERS = ['.', '_', '#', '~'].freeze
 
     attr_reader :site
 

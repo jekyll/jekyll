@@ -10,6 +10,14 @@
   * Site Template: Changed main `<div>` to `<main>` and added accessibility info (#4636)
   * Add array support to `where` filter (#4555)
   * 'jekyll clean': also remove .sass-cache (#4652)
+  * Clean up Tags::PostUrl a bit, including better errors and date parsing (#4670)
+  * Use String#encode for xml_escape filter instead of CGI.escapeHTML (#4694)
+  * Add show_dir_listing option for serve command and fix index file names (#4533)
+  * Site Template: write a Gemfile which is educational to the new site (#4542)
+  * Site template: add explanation of site variables in the example `_config.yml` (#4704)
+  * Adds `link` Liquid tag to make generation of URL's easier (#4624)
+  * Allow static files to be symlinked in unsafe mode or non-prod environments (#4640)
+  * Add `:after_init` hook & add `Site#config=` to make resetting config easy (#4703)
 
 ### Bug Fixes
 
@@ -19,6 +27,8 @@
   * Filters#time: clone an input Time so as to be non-destructive (#4590)
   * Doctor: fix issue where `--config` wasn't a recognized flag (#4598)
   * Ensures related_posts are only set for a post (#4620)
+  * EntryFilter#special?: ignore filenames which begin with '~' (#4491)
+  * Cleaner: `keep_files` should only apply to the beginning of paths, not substrings with index > 0 (#3849)
 
 ### Development Fixes
 
@@ -40,6 +50,14 @@
   * Document that subdirectories of `_posts` are no longer categories (#4639)
   * Update continuous-integration docs with sudo: false information (#4628)
   * Blog post on refreshed contributing file and new affinity teams (#4645)
+  * Fixes typo on collections (#4647)
+  * Documentation: future option also works for collections (#4682)
+  * Additional package needed for Fedora 23 Workspace (#4685)
+  * Fix typo on Chocolatey name in Windows documentation (#4686)
+  * Use the correct URL, Fixes #4698 (#4699)
+  * Add jekyll-paspagon plugin (#4700)
+  * Bold-italicize note in assets documentation about needing yaml front matter (#4706)
+  * Highlight the `script/` calls in the Contributing documentation (#4712)
 
 ## 3.1.2 / 2016-02-19
 
