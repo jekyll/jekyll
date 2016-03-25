@@ -46,11 +46,11 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal files, @site.reader.filter_entries(files)
     end
 
-    should "filter symlink entries when safe mode enabled" do
+    should "keep safe symlink entries when safe mode enabled" do
       site = Site.new(site_configuration('safe' => true))
       allow(File).to receive(:symlink?).with('symlink.js').and_return(true)
       files = %w[symlink.js]
-      assert_equal [], site.reader.filter_entries(files)
+      assert_equal files, @site.reader.filter_entries(files)
     end
 
     should "not filter symlink entries when safe mode disabled" do
@@ -59,12 +59,12 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal files, @site.reader.filter_entries(files)
     end
 
-    should "not include symlinks in safe mode" do
+    should "include only safe symlinks in safe mode" do
       site = Site.new(site_configuration('safe' => true))
 
       site.reader.read_directories("symlink-test")
-      assert_equal [], site.pages
-      assert_equal [], site.static_files
+      assert_equal %w[main.scss symlinked-file].length, site.pages.length
+      refute_equal [], site.static_files
     end
 
     should "include symlinks in unsafe mode" do
