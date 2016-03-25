@@ -1,10 +1,9 @@
 module Jekyll
   class PageReader
-    attr_reader :site, :dir, :unfiltered_content
+    attr_reader :site, :dir
     def initialize(site, dir)
       @site = site
       @dir = dir
-      @unfiltered_content = []
     end
 
     # Read all the files in <source>/<dir>/ for Yaml header and create a new Page
@@ -14,8 +13,19 @@ module Jekyll
     #
     # Returns an array of static pages.
     def read(files)
-      files.map { |page| @unfiltered_content << Page.new(@site, @site.source, @dir, page) }
-      @unfiltered_content.select { |page| site.publisher.publish?(page) }
+      read_documents(files).tap do |docs|
+        docs.each(&:read)
+      end.select { |page| site.publisher.publish?(page) }
+    end
+
+    def read_documents(files)
+      files.map do |page|
+        path = @site.in_source_dir(File.join(@dir, page))
+        Page.new(path, {
+          :site => @site,
+          :collection => @site.pages
+        })
+      end
     end
   end
 end

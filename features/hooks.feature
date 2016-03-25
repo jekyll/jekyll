@@ -8,19 +8,16 @@ Feature: Hooks
     """
     Jekyll::Hooks.register :site, :after_reset do |site|
       pageklass = Class.new(Jekyll::Page) do
-        def initialize(site, base)
+        def initialize(site)
           @site = site
-          @base = base
-          @data = {}
-          @dir = '/'
-          @name = 'foo.html'
+          @path = File.join(site.source, 'foo.html')
+          @extname = '.html'
+          @collection = site.pages
           @content = 'mytinypage'
-
-          self.process(@name)
         end
       end
 
-      site.pages << pageklass.new(site, site.source)
+      site.pages << pageklass.new(site)
     end
     """
     When I run jekyll build
@@ -80,7 +77,6 @@ Feature: Hooks
     """
     Jekyll::Hooks.register :pages, :post_init do |page|
       page.name = 'renamed.html'
-      page.process(page.name)
     end
     """
     And I have a "page1.html" page that contains "page1"
@@ -256,7 +252,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     Jekyll::Hooks.register :documents, :pre_render do |doc, payload|
-      doc.data['text'] = doc.data['text'] << ' are belong to us'
+      doc.data['text'] = doc.data['text'] << ' are belong to us' unless doc.data['text'].nil?
     end
     """
     And I have a "_config.yml" file that contains "collections: [ memes ]"

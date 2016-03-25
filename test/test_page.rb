@@ -4,14 +4,22 @@ class TestPage < JekyllUnitTest
   def setup_page(*args)
     dir, file = args
     dir, file = ['', dir] if file.nil?
-    @page = Page.new(@site, source_dir, dir, file)
+
+    path = @site.in_source_dir(File.join(dir, file))
+    @page = Page.new(path, {
+      :site => @site,
+      :collection => @site.pages
+    })
+    @page.read
+
+    @page
   end
 
   def do_render(page)
-    layouts = {
+    @site.layouts = {
       "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")
     }
-    page.render(layouts, @site.site_payload)
+    Jekyll::Renderer.new(@site, page, @site.site_payload).run
   end
 
   context "A Page" do
@@ -20,7 +28,7 @@ class TestPage < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source" => source_dir,
         "destination" => dest_dir,
-        "skip_config_files" => true
+        "skip_config_files" => false
       }))
     end
 
@@ -75,11 +83,11 @@ class TestPage < JekyllUnitTest
       end
 
       should "make properties accessible through #[]" do
-        page = setup_page('properties.html')
+        page = Drops::DocumentDrop.new(setup_page('properties.html'))
         attrs = {
           content: "All the properties.\n",
           dir: "/properties/",
-          excerpt: nil,
+          excerpt: "",
           foo: 'bar',
           layout: 'default',
           name: "properties.html",

@@ -93,9 +93,9 @@ module Jekyll
     def applies_path?(scope, path)
       return true if !scope.key?('path') || scope['path'].empty?
 
-      scope_path = Pathname.new(scope['path'])
+      scope_path = Pathname.new(scope['path']).to_s.gsub(/\/$/, '')
       Pathname.new(sanitize_path(path)).ascend do |path|
-        if path.to_s == scope_path.to_s
+        if path.to_s == scope_path
           return true
         end
       end
@@ -181,7 +181,7 @@ module Jekyll
       if path.nil? || path.empty?
         ""
       else
-        path.gsub(/\A\//, '').gsub(/([^\/])\z/, '\1')
+        path.gsub(/\A\//, '').gsub(/([^\/])\z/, '\1').gsub(/\/$/, '')
       end
     end
   end

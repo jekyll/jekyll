@@ -63,7 +63,7 @@ class TestEntryFilter < JekyllUnitTest
       site = Site.new(site_configuration('safe' => true))
 
       site.reader.read_directories("symlink-test")
-      assert_equal [], site.pages
+      assert_equal [], site.pages.docs
       assert_equal [], site.static_files
     end
 

@@ -17,11 +17,6 @@ module Jekyll
     # Returns a boolean.
     def regenerate?(document)
       case document
-      when Page
-        document.asset_file? || document.data['regenerate'] ||
-          source_modified_or_dest_missing?(
-            site.in_source_dir(document.relative_path), document.destination(@site.dest)
-          )
       when Document
         !document.write? || document.data['regenerate'] ||
           source_modified_or_dest_missing?(

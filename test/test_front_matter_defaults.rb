@@ -18,8 +18,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       }))
       @site.process
-      @affected = @site.pages.find { |page| page.relative_path == "/contacts/bar.html" }
-      @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
+      @affected = @site.pages.docs.find { |page| page.relative_path == "contacts/bar.html" }
+      @not_affected = @site.pages.docs.find { |page| page.relative_path == "about.html" }
     end
 
     should "affect only the specified path and type" do
@@ -70,7 +70,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       }))
       @site.process
       @affected = @site.posts.docs.find { |page| page.relative_path =~ /win\// }
-      @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
+      @not_affected = @site.pages.docs.find { |page| page.relative_path == "about.html" }
     end
 
     should "affect only the specified path and all types" do
@@ -94,7 +94,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       }))
       @site.process
-      @affected = @site.pages
+      @affected = @site.pages.docs
       @not_affected = @site.posts.docs
     end
 
@@ -119,7 +119,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       }))
       @site.process
-      @affected = @site.pages
+      @affected = @site.pages.docs
       @not_affected = @site.posts.docs
     end
 
@@ -143,8 +143,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       }))
       @site.process
-      @affected = @site.pages
-      @not_affected = @site.posts
+      @affected = @site.pages.docs
+      @not_affected = @site.posts.docs
     end
 
     should "affect all types and paths" do
@@ -165,8 +165,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       }))
       @site.process
-      @affected = @site.pages
-      @not_affected = @site.posts
+      @affected = @site.pages.docs
+      @not_affected = @site.posts.docs
     end
 
     should "affect all types and paths" do

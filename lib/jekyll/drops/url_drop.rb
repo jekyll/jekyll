@@ -9,6 +9,7 @@ module Jekyll
 
       def_delegator :@obj, :cleaned_relative_path, :path
       def_delegator :@obj, :output_ext, :output_ext
+      def_delegator :@obj, :file_dir, :dir
 
       def collection
         @obj.collection.label
@@ -16,6 +17,10 @@ module Jekyll
 
       def name
         Utils.slugify(@obj.basename_without_ext)
+      end
+
+      def basename
+        @obj.basename_without_ext
       end
 
       def title
