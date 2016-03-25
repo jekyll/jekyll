@@ -24,6 +24,10 @@ module Jekyll
       path_for :sass
     end
 
+    def configure_sass
+      Sass.load_paths << sass_path if sass_path
+    end
+
     private
 
     def path_for(folder)
