@@ -45,5 +45,13 @@ module Jekyll
     def process(name)
       self.ext = File.extname(name)
     end
+
+    # The path to the layout, relative to the site source.
+    #
+    # Returns a String path which represents the relative path
+    #   from the site source to this layout
+    def relative_path
+      @relative_path ||= Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
+    end
   end
 end
