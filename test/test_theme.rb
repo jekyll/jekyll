@@ -25,6 +25,12 @@ class TestTheme < JekyllUnitTest
         Theme.new("foo").version
       end
     end
+
+    should "add itself to sass's load path" do
+      refute Sass.load_paths.includes?(@theme.sass_path)
+      @theme.configure_sass
+      assert Sass.load_paths.includes?(@theme.sass_path)
+    end
   end
 
   context "path generation" do
