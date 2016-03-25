@@ -16,6 +16,7 @@
   * Site Template: write a Gemfile which is educational to the new site (#4542)
   * Site template: add explanation of site variables in the example `_config.yml` (#4704)
   * Adds `link` Liquid tag to make generation of URL's easier (#4624)
+  * Allow static files to be symlinked in unsafe mode or non-prod environments (#4640)
 
 ### Bug Fixes
 
