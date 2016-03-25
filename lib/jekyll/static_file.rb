@@ -80,7 +80,7 @@ module Jekyll
 
       FileUtils.mkdir_p(File.dirname(dest_path))
       FileUtils.rm(dest_path) if File.exist?(dest_path)
-      if @site.safe
+      if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)
       else
         FileUtils.copy_entry(path, dest_path)
