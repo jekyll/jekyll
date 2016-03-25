@@ -27,7 +27,6 @@ class TestTheme < JekyllUnitTest
     end
 
     should "add itself to sass's load path" do
-      refute Sass.load_paths.includes?(@theme.sass_path)
       @theme.configure_sass
       assert Sass.load_paths.includes?(@theme.sass_path)
     end
