@@ -4,6 +4,7 @@ module Jekyll
     def initialize(site)
       @site = site
       @content = {}
+      @entry_filter = EntryFilter.new(site)
     end
 
     # Read all the files in <source>/<dir>/_drafts and create a new Draft
@@ -26,7 +27,7 @@ module Jekyll
     #
     # Returns nothing
     def read_data_to(dir, data)
-      return unless File.directory?(dir) && (!site.safe || !File.symlink?(dir))
+      return unless File.directory?(dir) && !@entry_filter.symlink?(dir)
 
       entries = Dir.chdir(dir) do
         Dir['*.{yaml,yml,json,csv}'] + Dir['*'].select { |fn| File.directory?(fn) }
@@ -34,7 +35,7 @@ module Jekyll
 
       entries.each do |entry|
         path = @site.in_source_dir(dir, entry)
-        next if File.symlink?(path) && site.safe
+        next if @entry_filter.symlink?(path)
 
         key = sanitize_filename(File.basename(entry, '.*'))
         if File.directory?(path)

@@ -179,13 +179,13 @@ class TestCollections < JekyllUnitTest
       @collection = @site.collections["methods"]
     end
 
-    should "not allow symlinks" do
-      refute_includes @collection.filtered_entries, "um_hi.md"
+    should "include the symlinked file as it resolves to inside site.source" do
+      assert_includes @collection.filtered_entries, "um_hi.md"
       refute_includes @collection.filtered_entries, "/um_hi.md"
     end
 
-    should "not include the symlinked file in the list of docs" do
-      refute_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
+    should "include the symlinked file in the list of docs as it resolves to inside site.source" do
+      assert_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end
 
