@@ -12,8 +12,6 @@ module Jekyll
     end
 
     class IncludeTag < Liquid::Tag
-      attr_reader :includes_dir
-
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
       VARIABLE_SYNTAX = /(?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)(?<params>.*)/
 
@@ -98,20 +96,29 @@ eos
         end
       end
 
-      def tag_includes_dir(context)
-        context.registers[:site].config['includes_dir'].freeze
+      def tag_includes_dirs(context)
+        context.registers[:site].includes_load_paths.freeze
+      end
+
+      def locate_include_file(context, file, safe)
+        includes_dirs = tag_includes_dirs(context)
+        includes_dirs.each do |dir|
+          path = File.join(dir, file)
+          return path if valid_include_file?(path, dir, safe)
+        end
+        raise IOError, "Could not locate the included file '#{file}' in any of #{includes_dirs}." \
+          " Ensure it exists in one of those directories and, if it is a symlink, " \
+          "does not point outside your site source."
       end
 
       def render(context)
         site = context.registers[:site]
-        @includes_dir = tag_includes_dir(context)
-        dir = resolved_includes_dir(context)
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
-        path = File.join(dir, file)
-        validate_path(path, dir, site.safe)
+        path = locate_include_file(context, file, site.safe)
+        return unless path
 
         # Add include to dependency tree
         if context.registers[:page] && context.registers[:page].key?("path")
@@ -121,16 +128,16 @@ eos
           )
         end
 
-        begin
+        #begin
           partial = load_cached_partial(path, context)
 
           context.stack do
             context['include'] = parse_params(context) if @params
             partial.render!(context)
           end
-        rescue => e
-          raise IncludeTagError.new e.message, File.join(@includes_dir, @file)
-        end
+          #rescue => e
+          #raise IncludeTagError.new e.message, path
+          #end
       end
 
       def load_cached_partial(path, context)
@@ -144,24 +151,18 @@ eos
         end
       end
 
-      def resolved_includes_dir(context)
-        context.registers[:site].in_source_dir(@includes_dir)
+      def valid_include_file?(path, dir, safe)
+        !(outside_site_source?(path, dir, safe) || !File.exist?(path))
       end
 
-      def validate_path(path, dir, safe)
-        if safe && !realpath_prefixed_with?(path, dir)
-          raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
-        elsif !File.exist?(path)
-          raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
-        end
-      end
-
-      def path_relative_to_source(dir, path)
-        File.join(@includes_dir, path.sub(Regexp.new("^#{dir}"), ""))
+      def outside_site_source?(path, dir, safe)
+        safe && !realpath_prefixed_with?(path, dir)
       end
 
       def realpath_prefixed_with?(path, dir)
         File.exist?(path) && File.realpath(path).start_with?(dir)
+      rescue
+        false
       end
 
       # This method allows to modify the file content by inheriting from the class.
@@ -171,16 +172,17 @@ eos
     end
 
     class IncludeRelativeTag < IncludeTag
-      def tag_includes_dir(context)
-        '.'.freeze
+      def tag_includes_dirs(context)
+        Array(page_path(context)).freeze
       end
 
       def page_path(context)
-        context.registers[:page].nil? ? includes_dir : File.dirname(context.registers[:page]["path"])
-      end
-
-      def resolved_includes_dir(context)
-        context.registers[:site].in_source_dir(page_path(context))
+        if context.registers[:page].nil?
+          context.registers[:site].source
+        else
+          current_doc_dir = File.dirname(context.registers[:page]["path"])
+          context.registers[:site].in_source_dir current_doc_dir
+        end
       end
     end
   end

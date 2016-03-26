@@ -11,7 +11,7 @@ module Jekyll
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
 
     # Public: Initialize a new Site.
     #
@@ -52,7 +52,11 @@ module Jekyll
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
 
+      self.theme = nil
       self.theme = Jekyll::Theme.new(config["theme"]) if config["theme"]
+
+      @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
+      @includes_load_paths << theme.includes_path if self.theme
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
