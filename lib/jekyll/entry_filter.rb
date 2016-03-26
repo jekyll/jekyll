@@ -52,10 +52,10 @@ module Jekyll
     end
 
     def symlink?(entry)
-      site.safe && File.symlink?(entry) && bad_symlink?(entry)
+      site.safe && File.symlink?(entry) && symlink_outside_site_source?(entry)
     end
 
-    def bad_symlink?(entry)
+    def symlink_outside_site_source?(entry)
       ! File.realpath(entry).start_with?(File.realpath(@site.source))
     end
 
