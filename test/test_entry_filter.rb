@@ -59,6 +59,12 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal files, @site.reader.filter_entries(files)
     end
 
+    should "filter symlink pointing outside site source" do
+      ent1 = %w[_includes/tmp]
+      entries = EntryFilter.new(@site).filter(ent1)
+      assert_equal %w[], entries
+    end
+
     should "include only safe symlinks in safe mode" do
       site = Site.new(site_configuration('safe' => true))
 
