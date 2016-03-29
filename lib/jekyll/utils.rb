@@ -10,7 +10,7 @@ module Jekyll
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
-    SLUGIFY_URLSAFE_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
+    SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
     # Takes an indented string and removes the preceding spaces on each line
 
@@ -158,6 +158,9 @@ module Jekyll
     # When mode is "pretty", some non-alphabetic characters (._~!$&'()+,;=@)
     # are not replaced with hyphen.
     #
+    # When mode is "ascii", some everything else except ASCII characters
+    # a-z (lowercase), A-Z (uppercase) and 0-9 (numbers) are not replaced with hyphen.
+    #
     # If cased is true, all uppercase letters in the result string are
     # replaced with their lowercase counterparts.
     #
@@ -170,6 +173,9 @@ module Jekyll
     #
     #   slugify("The _config.yml file", "pretty", true)
     #   # => "The-_config.yml file"
+    #
+    #   slugify("The _config.yml file", "ascii")
+    #   # => "the-config.yml-file"
     #
     # Returns the slugified string.
     def slugify(string, mode: nil, cased: false)
