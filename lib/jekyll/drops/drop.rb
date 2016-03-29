@@ -145,8 +145,8 @@ module Jekyll
       # Returns a JSON dump of the YAML front matter data.
       def to_json
         results = keys.each_with_object({}) do |(key, _), result|
-          if %w{previous next}.include? key
-            result[key] = self[key].inspect
+          if %w{previous next}.include? key && !self[key].nil?
+            result[key] = self[key].url
           else
             result[key] = self[key]
           end
