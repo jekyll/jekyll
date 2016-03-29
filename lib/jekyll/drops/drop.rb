@@ -144,7 +144,14 @@ module Jekyll
       #
       # Returns a JSON dump of the YAML front matter data.
       def to_json
-        fallback_data.to_json
+        results = keys.each_with_object({}) do |(key, _), result|
+          if %w{previous next}.include? key
+            result[key] = self[key].inspect
+          else
+            result[key] = self[key]
+          end
+        end
+        results.to_json
       end
 
       # Collects all the keys and passes each to the block in turn.
