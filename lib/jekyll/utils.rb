@@ -197,11 +197,11 @@ module Jekyll
           # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
           # and is allowed in both extN and NTFS.
           SLUGIFY_PRETTY_REGEXP
-        when 'urlsafe'
+        when 'ascii'
           # For web servers not being able to handle Unicode, the safe
           # method is to ditch anything else but latin letters and numeric
           # digits.
-          SLUGIFY_URLSAFE_REGEXP
+          SLUGIFY_ASCII_REGEXP
         end
 
       # Strip according to the mode
