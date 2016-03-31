@@ -107,11 +107,17 @@ module Jekyll
     def render_liquid(content, payload, info, path = nil)
       site.liquid_renderer.file(path).parse(content).render!(payload, info)
     rescue Tags::IncludeTagError => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || document.relative_path}"
-      raise e
-    rescue Exception => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || document.relative_path}"
-      raise e
+      raise Jekyll::Errors::LiquidRenderError,
+        "Liquid exception in #{e.path} included in #{path || self.path}:" \
+        "\n#{e.message}"
+    rescue Liquid::Error => e
+      raise Jekyll::Errors::LiquidRenderError,
+        "Liquid exception on line #{e.line_number} in #{path || self.path}:" \
+        "\n#{e.message}"
+    rescue => e
+      raise Jekyll::Errors::LiquidRenderError,
+        "Liquid exception in #{path || self.path}:" \
+        "\n#{e.message}"
     end
 
     # Checks if the layout specified in the document actually exists

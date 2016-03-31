@@ -48,9 +48,13 @@ for ruby in $rubies; do
     set -x
     time $ruby -S bundle exec \
       rake TESTOPTS='--profile' test
+    time $ruby -S bundle exec rspec --color \
+      --require spec_helper
    else
     set -x
     time $ruby -S bundle exec ruby -Itest \
       "$@" --profile
+    time $ruby -S bundle exec rspec --color \
+      --require spec_helper --profile
   fi
 done
