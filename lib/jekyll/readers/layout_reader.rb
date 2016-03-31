@@ -8,7 +8,9 @@ module Jekyll
 
     def read
       layout_entries.each do |f|
-        @layouts[layout_name(f)] = Layout.new(site, layout_directory, f)
+        name = layout_name(f)
+        @layouts[name] ||= []
+        @layouts[name] << Layout.new(site, layout_directory, f)
       end
 
       @layouts

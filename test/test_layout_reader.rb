@@ -14,8 +14,15 @@ class TestLayoutReader < JekyllUnitTest
 
     should "work out format for layouts" do
       layouts = LayoutReader.new(@site).read
-      assert_equal "text/html", layouts["default"].mime_type.to_s
-      assert_equal ".html", layouts["default"].ext
+      assert_equal "text/html", layouts["default"][0].mime_type.to_s
+      assert_equal ".html", layouts["default"][0].ext
+    end
+
+    should "read multiple formats for each layout" do
+      layouts = LayoutReader.new(@site).read
+      assert_equal 2, layouts["simple"].length
+      assert_equal "text/html", layouts["simple"][0].mime_type.to_s
+      assert_equal "application/json", layouts["simple"][1].mime_type.to_s
     end
 
     context "when no _layouts directory exists in CWD" do

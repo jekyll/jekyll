@@ -131,7 +131,9 @@ module Jekyll
     # Returns the content placed in the Liquid-rendered layouts
     def place_in_layouts(content, payload, info)
       output = content.dup
-      layout = site.layouts[document.data["layout"]]
+      # Load first layout from list, for now
+      layouts = site.layouts[document.data["layout"]]
+      layout = layouts ? layouts.first : nil
 
       Jekyll.logger.warn("Build Warning:", "Layout '#{document.data["layout"]}' requested in #{document.relative_path} does not exist.") if invalid_layout? layout
 
@@ -155,7 +157,7 @@ module Jekyll
           site.in_source_dir(layout.path)
         ) if document.write?
 
-        if layout = site.layouts[layout.data["layout"]]
+        if layout = site.layouts[layout.data["layout"]] ? site.layouts[layout.data["layout"]].first : nil
           if used.include?(layout)
             layout = nil # avoid recursive chain
           else
