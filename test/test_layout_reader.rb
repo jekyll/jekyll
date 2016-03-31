@@ -12,6 +12,12 @@ class TestLayoutReader < JekyllUnitTest
       assert_equal ["default", "simple", "post/simple"].sort, layouts.keys.sort
     end
 
+    should "work out format for layouts" do
+      layouts = LayoutReader.new(@site).read
+      assert_equal "text/html", layouts["default"].mime_type.to_s
+      assert_equal ".html", layouts["default"].ext
+    end
+
     context "when no _layouts directory exists in CWD" do
       should "know to use the layout directory relative to the site source" do
         assert_equal LayoutReader.new(@site).layout_directory, source_dir("_layouts")

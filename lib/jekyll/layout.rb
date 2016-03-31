@@ -1,3 +1,5 @@
+require 'mime/types'
+
 module Jekyll
   class Layout
     include Convertible
@@ -11,8 +13,8 @@ module Jekyll
     # Gets the path to this layout.
     attr_reader :path
 
-    # Gets/Sets the extension of this layout.
-    attr_accessor :ext
+    # Gets/Sets the MIME type of this layout.
+    attr_accessor :mime_type
 
     # Gets/Sets the Hash that holds the metadata for this layout.
     attr_accessor :data
@@ -43,7 +45,11 @@ module Jekyll
     #
     # Returns nothing.
     def process(name)
-      self.ext = File.extname(name)
+      self.mime_type = MIME::Types.find{|t| ".#{t.preferred_extension}" == File.extname(name)}
+    end
+    
+    def ext
+      "." + @mime_type.preferred_extension
     end
   end
 end
