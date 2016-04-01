@@ -149,7 +149,7 @@ CONTENT
       end
 
       should "not cause a markdown error" do
-        refute_match /markdown\-html\-error/, @result
+        refute_match(/markdown\-html\-error/, @result)
       end
 
       should "render markdown with pygments" do
@@ -442,7 +442,7 @@ CONTENT
     end
 
     should "not cause an error" do
-      refute_match /markdown\-html\-error/, @result
+      refute_match(/markdown\-html\-error/, @result)
     end
 
     should "have the url to the \"complex\" post from 2008-11-21" do
@@ -466,7 +466,7 @@ CONTENT
     end
 
     should "not cause an error" do
-      refute_match /markdown\-html\-error/, @result
+      refute_match(/markdown\-html\-error/, @result)
     end
 
     should "have the url to the \"complex\" post from 2008-11-21" do
@@ -600,7 +600,8 @@ title: Include symlink
 CONTENT
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
-        refute_match /SYMLINK TEST/, @result
+        @result ||= ''
+        refute_match(/SYMLINK TEST/, @result)
       end
 
       should "not expose the existence of symlinked files" do
@@ -615,7 +616,7 @@ title: Include symlink
 CONTENT
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
-        assert_match /should exist and should not be a symlink/, ex.message
+        assert_match(/should exist and should not be a symlink/, ex.message)
       end
     end
 
@@ -877,7 +878,8 @@ title: Include symlink
 CONTENT
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
-        refute_match /SYMLINK TEST/, @result
+        @result ||= ''
+        refute_match(/SYMLINK TEST/, @result)
       end
 
       should "not expose the existence of symlinked files" do
@@ -892,7 +894,7 @@ title: Include symlink
 CONTENT
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
-        assert_match /should exist and should not be a symlink/, ex.message
+        assert_match(/should exist and should not be a symlink/, ex.message)
       end
     end
   end
