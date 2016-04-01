@@ -39,6 +39,7 @@
   * change smartify doc from copy/paste of mardownify doc (#4653)
   * Update Rake & disable warnings when running tests (#4720)
   * Fix many warnings (#4537)
+  * Don't blindly assume the last system when determining "open" cmd (#4717)
 
 ### Site Enhancements
 
