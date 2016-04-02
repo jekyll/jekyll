@@ -1,12 +1,23 @@
 require 'helper'
 
-class TestRedcarpet < Test::Unit::TestCase
+class TestRedcarpet < JekyllUnitTest
   context "redcarpet" do
     setup do
+      if jruby?
+        then skip(
+          "JRuby does not perform well with CExt, test disabled."
+        )
+      end
+
       @config = {
-        'redcarpet' => { 'extensions' => ['smart', 'strikethrough', 'filter_html'] },
-        'markdown' => 'redcarpet'
+        'markdown' => 'redcarpet',
+        'redcarpet' => {
+          'extensions' => [
+            'smart', 'strikethrough', 'filter_html'
+          ]
+        }
       }
+
       @markdown = Converters::Markdown.new @config
     end
 
@@ -28,11 +39,11 @@ class TestRedcarpet < Test::Unit::TestCase
 
     context "with pygments enabled" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ 'pygments' => true })
+        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => 'pygments' })
       end
 
       should "render fenced code blocks with syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
+        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>", @markdown.convert(
           <<-EOS
 ```ruby
 puts "Hello world"
@@ -42,13 +53,29 @@ puts "Hello world"
       end
     end
 
-    context "with pygments disabled" do
+    context "with rouge enabled" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ 'pygments' => false })
+        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => 'rouge' })
+      end
+
+      should "render fenced code blocks with syntax highlighting" do
+        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" data-lang=\"ruby\"><span class=\"nb\">puts</span> <span class=\"s2\">\"Hello world\"</span>\n</code></pre></div>", @markdown.convert(
+          <<-EOS
+```ruby
+puts "Hello world"
+```
+          EOS
+        ).strip
+      end
+    end
+
+    context "without any highlighter" do
+      setup do
+        @markdown = Converters::Markdown.new @config.merge({ 'highlighter' => nil })
       end
 
       should "render fenced code blocks without syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"ruby language-ruby\" data-lang=\"ruby\">puts &quot;Hello world&quot;\n</code></pre></div>", @markdown.convert(
+        assert_equal "<figure class=\"highlight\"><pre><code class=\"language-ruby\" data-lang=\"ruby\">puts &quot;Hello world&quot;\n</code></pre></figure>", @markdown.convert(
           <<-EOS
 ```ruby
 puts "Hello world"

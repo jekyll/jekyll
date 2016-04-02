@@ -1,0 +1,80 @@
+Metrics/MethodLength: { Max:  24 }
+Metrics/ClassLength:  { Max: 240 }
+Metrics/ModuleLength: { Max: 240 }
+Metrics/LineLength:   { Max: 112 }
+Metrics/CyclomaticComplexity: { Max: 8 }
+Metrics/PerceivedComplexity: { Max: 8 }
+Metrics/ParameterLists: { Max: 4 }
+Metrics/MethodLength: { Max: 24 }
+Metrics/AbcSize: { Max: 20 }
+
+Style/IndentHash: { EnforcedStyle: consistent }
+Style/HashSyntax: { EnforcedStyle: hash_rockets }
+Style/SignalException: { EnforcedStyle: only_raise }
+Style/AlignParameters: { EnforcedStyle: with_fixed_indentation }
+Style/StringLiteralsInInterpolation: { EnforcedStyle: double_quotes }
+Style/MultilineMethodCallIndentation: { EnforcedStyle: indented }
+Style/MultilineOperationIndentation: { EnforcedStyle: indented }
+Style/FirstParameterIndentation: { EnforcedStyle: consistent }
+Style/StringLiterals: { EnforcedStyle: double_quotes }
+Style/RegexpLiteral: { EnforcedStyle: slashes }
+Style/IndentArray: { EnforcedStyle: consistent }
+Style/ExtraSpacing: { AllowForAlignment: true }
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%q': '{}'
+    '%Q': '{}'
+    '%r': '!!'
+    '%s': '()'
+    '%w': '()'
+    '%W': '()'
+    '%x': '()'
+
+Style/AlignArray:                     { Enabled: false }
+Style/StringLiterals:                 { Enabled: false }
+Style/Documentation:                  { Enabled: false }
+Style/DoubleNegation:                 { Enabled: false }
+Style/UnneededCapitalW:               { Enabled: false }
+Style/EmptyLinesAroundModuleBody:     { Enabled: false }
+Style/EmptyLinesAroundAccessModifier: { Enabled: false }
+Style/BracesAroundHashParameters:     { Enabled: false }
+Style/SpaceInsideBrackets:            { Enabled: false }
+Style/IfUnlessModifier:               { Enabled: false }
+Style/ModuleFunction:                 { Enabled: false }
+Style/RescueModifier:                 { Enabled: false }
+Style/GuardClause:                    { Enabled: false }
+Style/FileName:                       { Enabled: false }
+Lint/UselessAccessModifier:           { Enabled: false }
+Style/SpaceAroundOperators:           { Enabled: false }
+Style/RedundantReturn:                { Enabled: false }
+Style/SingleLineMethods:              { Enabled: false }
+
+AllCops:
+  TargetRubyVersion: 2.0
+  Include:
+  - lib/**/*.rb
+
+  Exclude:
+  - .rubocop.yml
+  - .codeclimate.yml
+  - .travis.yml
+  - .gitignore
+  - .rspec
+
+  - Gemfile.lock
+  - CHANGELOG.{md,markdown,txt,textile}
+  - CONTRIBUTING.{md,markdown,txt,textile}
+  - readme.{md,markdown,txt,textile}
+  - README.{md,markdown,txt,textile}
+  - Readme.{md,markdown,txt,textile}
+  - ReadMe.{md,markdown,txt,textile}
+  - COPYING
+  - LICENSE
+
+  - site/**/*
+  - test/**/*
+  - vendor/**/*
+  - features/**/*
+  - script/**/*
+  - spec/**/*

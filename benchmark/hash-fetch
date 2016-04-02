@@ -1,0 +1,9 @@
+require 'benchmark/ips'
+
+h = {:bar => 'uco'}
+
+Benchmark.ips do |x|
+  x.report('fetch with no block') { h.fetch(:bar, (0..9).to_a)    }
+  x.report('fetch with a block')  { h.fetch(:bar) { (0..9).to_a } }
+  x.report('brackets with an ||') { h[:bar] || (0..9).to_a        }
+end

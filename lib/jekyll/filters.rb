@@ -1,18 +1,9 @@
 require 'uri'
+require 'json'
+require 'date'
 
 module Jekyll
   module Filters
-    # Convert a Textile string into HTML output.
-    #
-    # input - The Textile String to convert.
-    #
-    # Returns the HTML formatted String.
-    def textilize(input)
-      site = @context.registers[:site]
-      converter = site.getConverterImpl(Jekyll::Converters::Textile)
-      converter.convert(input)
-    end
-
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.
@@ -20,8 +11,52 @@ module Jekyll
     # Returns the HTML formatted String.
     def markdownify(input)
       site = @context.registers[:site]
-      converter = site.getConverterImpl(Jekyll::Converters::Markdown)
+      converter = site.find_converter_instance(Jekyll::Converters::Markdown)
       converter.convert(input)
+    end
+
+    # Convert quotes into smart quotes.
+    #
+    # input - The String to convert.
+    #
+    # Returns the smart-quotified String.
+    def smartify(input)
+      site = @context.registers[:site]
+      converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
+      converter.convert(input)
+    end
+
+    # Convert a Sass string into CSS output.
+    #
+    # input - The Sass String to convert.
+    #
+    # Returns the CSS formatted String.
+    def sassify(input)
+      site = @context.registers[:site]
+      converter = site.find_converter_instance(Jekyll::Converters::Sass)
+      converter.convert(input)
+    end
+
+    # Convert a Scss string into CSS output.
+    #
+    # input - The Scss String to convert.
+    #
+    # Returns the CSS formatted String.
+    def scssify(input)
+      site = @context.registers[:site]
+      converter = site.find_converter_instance(Jekyll::Converters::Scss)
+      converter.convert(input)
+    end
+
+    # Slugify a filename or title.
+    #
+    # input - The filename or title to slugify.
+    # mode - how string is slugified
+    #
+    # Returns the given filename or title as a lowercase URL String.
+    # See Utils.slugify for more detail.
+    def slugify(input, mode=nil)
+      Utils.slugify(input, :mode => mode)
     end
 
     # Format a date in short format e.g. "27 Jan 2011".
@@ -82,7 +117,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      CGI.escapeHTML(input)
+      input.to_s.encode(:xml => :attr).gsub(/\A"|"\Z/, "")
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters
@@ -99,7 +134,7 @@ module Jekyll
     def cgi_escape(input)
       CGI::escape(input)
     end
-    
+
     # URI escape a string.
     #
     # input - The String to escape.
@@ -123,7 +158,7 @@ module Jekyll
       input.split.length
     end
 
-    # Join an array of things into a string by separating with commes and the
+    # Join an array of things into a string by separating with commas and the
     # word "and" for the last one.
     #
     # array - The Array of Strings to join.
@@ -148,16 +183,184 @@ module Jekyll
       end
     end
 
+    # Convert the input into json string
+    #
+    # input - The Array or Hash to be converted
+    #
+    # Returns the converted json string
+    def jsonify(input)
+      as_liquid(input).to_json
+    end
+
+    # Group an array of items by a property
+    #
+    # input - the inputted Enumerable
+    # property - the property
+    #
+    # Returns an array of Hashes, each looking something like this:
+    #  {"name"  => "larry"
+    #   "items" => [...] } # all the items where `property` == "larry"
+    def group_by(input, property)
+      if groupable?(input)
+        input.group_by do |item|
+          item_property(item, property).to_s
+        end.inject([]) do |memo, i|
+          memo << { "name" => i.first, "items" => i.last, "size" => i.last.size }
+        end
+      else
+        input
+      end
+    end
+
+    # Filter an array of objects
+    #
+    # input - the object array
+    # property - property within each object to filter by
+    # value - desired value
+    #
+    # Returns the filtered array of objects
+    def where(input, property, value)
+      return input unless input.is_a?(Enumerable)
+      input = input.values if input.is_a?(Hash)
+      input.select { |object| Array(item_property(object, property)).map(&:to_s).include?(value.to_s) }
+    end
+
+    # Sort an array of objects
+    #
+    # input - the object array
+    # property - property within each object to filter by
+    # nils ('first' | 'last') - nils appear before or after non-nil values
+    #
+    # Returns the filtered array of objects
+    def sort(input, property = nil, nils = "first")
+      if input.nil?
+        raise ArgumentError.new("Cannot sort a null object.")
+      end
+      if property.nil?
+        input.sort
+      else
+        case
+        when nils == "first"
+          order = - 1
+        when nils == "last"
+          order = + 1
+        else
+          raise ArgumentError.new("Invalid nils order: " \
+            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'.")
+        end
+
+        input.sort do |apple, orange|
+          apple_property = item_property(apple, property)
+          orange_property = item_property(orange, property)
+
+          if !apple_property.nil? && orange_property.nil?
+            - order
+          elsif apple_property.nil? && !orange_property.nil?
+            + order
+          else
+            apple_property <=> orange_property
+          end
+        end
+      end
+    end
+
+    def pop(array, input = 1)
+      return array unless array.is_a?(Array)
+      new_ary = array.dup
+      new_ary.pop(input.to_i || 1)
+      new_ary
+    end
+
+    def push(array, input)
+      return array unless array.is_a?(Array)
+      new_ary = array.dup
+      new_ary.push(input)
+      new_ary
+    end
+
+    def shift(array, input = 1)
+      return array unless array.is_a?(Array)
+      new_ary = array.dup
+      new_ary.shift(input.to_i || 1)
+      new_ary
+    end
+
+    def unshift(array, input)
+      return array unless array.is_a?(Array)
+      new_ary = array.dup
+      new_ary.unshift(input)
+      new_ary
+    end
+
+    def sample(input, num = 1)
+      return input unless input.respond_to?(:sample)
+      n = num.to_i rescue 1
+      if n == 1
+        input.sample
+      else
+        input.sample(n)
+      end
+    end
+
+    # Convert an object into its String representation for debugging
+    #
+    # input - The Object to be converted
+    #
+    # Returns a String representation of the object.
+    def inspect(input)
+      xml_escape(input.inspect)
+    end
+
     private
     def time(input)
       case input
       when Time
-        input
+        input.clone
+      when Date
+        input.to_time
       when String
-        Time.parse(input)
+        Time.parse(input) rescue Time.at(input.to_i)
+      when Numeric
+        Time.at(input)
       else
         Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)
+      end.localtime
+    end
+
+    def groupable?(element)
+      element.respond_to?(:group_by)
+    end
+
+    def item_property(item, property)
+      if item.respond_to?(:to_liquid)
+        item.to_liquid[property.to_s]
+      elsif item.respond_to?(:data)
+        item.data[property.to_s]
+      else
+        item[property.to_s]
+      end
+    end
+
+    def as_liquid(item)
+      case item
+      when Hash
+        pairs = item.map { |k, v| as_liquid([k, v]) }
+        Hash[pairs]
+      when Array
+        item.map { |i| as_liquid(i) }
+      else
+        if item.respond_to?(:to_liquid)
+          liquidated = item.to_liquid
+          # prevent infinite recursion for simple types (which return `self`)
+          if liquidated == item
+            item
+          else
+            as_liquid(liquidated)
+          end
+        else
+          item
+        end
       end
     end
   end

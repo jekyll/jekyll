@@ -23,7 +23,7 @@ See the [GitHub Release][] page for more a more detailed changelog for this rele
 
 {% assign issue_numbers = "1339|1338|1321" | split: "|" %}
 {% for issue in issue_numbers %}
-[{{ issue }}]: {{ site.repository }}/issues/{{ issue }}
+[#{{ issue }}]: {{ site.repository }}/issues/{{ issue }}
 {% endfor %}
 
 [GitHub Release]: {{ site.repository }}/releases/tag/v1.1.1

@@ -2,60 +2,92 @@ module Jekyll
   module Converters
     class Markdown
       class RedcarpetParser
-
         module CommonMethods
           def add_code_tags(code, lang)
-            code = code.sub(/<pre>/, "<pre><code class=\"#{lang} language-#{lang}\" data-lang=\"#{lang}\">")
-            code = code.sub(/<\/pre>/,"</code></pre>")
+            code = code.to_s
+            code = code.sub(/<pre>/, "<pre><code class=\"language-#{lang}\" data-lang=\"#{lang}\">")
+            code = code.sub(/<\/pre>/, "</code></pre>")
+            code
           end
         end
 
         module WithPygments
           include CommonMethods
           def block_code(code, lang)
-            require 'pygments'
+            Jekyll::External.require_with_graceful_fail("pygments")
             lang = lang && lang.split.first || "text"
-            output = add_code_tags(
+            add_code_tags(
               Pygments.highlight(code, :lexer => lang, :options => { :encoding => 'utf-8' }),
               lang
             )
           end
         end
 
-        module WithoutPygments
+        module WithoutHighlighting
           require 'cgi'
 
           include CommonMethods
 
           def code_wrap(code)
-            "<div class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></div>"
+            "<figure class=\"highlight\"><pre>#{CGI::escapeHTML(code)}</pre></figure>"
           end
 
           def block_code(code, lang)
             lang = lang && lang.split.first || "text"
-            output = add_code_tags(code_wrap(code), lang)
+            add_code_tags(code_wrap(code), lang)
+          end
+        end
+
+        module WithRouge
+          def block_code(code, lang)
+            code = "<pre>#{super}</pre>"
+
+            output = "<div class=\"highlight\">"
+            output << add_code_tags(code, lang)
+            output << "</div>"
+          end
+
+          protected
+          def rouge_formatter(_lexer)
+            Rouge::Formatters::HTML.new(:wrap => false)
           end
         end
 
         def initialize(config)
-          require 'redcarpet'
+          External.require_with_graceful_fail("redcarpet")
           @config = config
           @redcarpet_extensions = {}
           @config['redcarpet']['extensions'].each { |e| @redcarpet_extensions[e.to_sym] = true }
 
-          @renderer ||= if @config['pygments']
-                          Class.new(Redcarpet::Render::HTML) do
-                            include WithPygments
-                          end
-                        else
-                          Class.new(Redcarpet::Render::HTML) do
-                            include WithoutPygments
-                          end
-                        end
-        rescue LoadError
-          STDERR.puts 'You are missing a library required for Markdown. Please run:'
-          STDERR.puts '  $ [sudo] gem install redcarpet'
-          raise FatalException.new("Missing dependency: redcarpet")
+          @renderer ||= class_with_proper_highlighter(@config['highlighter'])
+        end
+
+        def class_with_proper_highlighter(highlighter)
+          case highlighter
+          when "pygments"
+            Class.new(Redcarpet::Render::HTML) do
+              include WithPygments
+            end
+          when "rouge"
+            Class.new(Redcarpet::Render::HTML) do
+              Jekyll::External.require_with_graceful_fail(%w(
+                rouge
+                rouge/plugins/redcarpet
+              ))
+
+              unless Gem::Version.new(Rouge.version) > Gem::Version.new("1.3.0")
+                abort "Please install Rouge 1.3.0 or greater and try running Jekyll again."
+              end
+
+              include Rouge::Plugins::Redcarpet
+              include CommonMethods
+              include WithRouge
+            end
+          else
+            Class.new(Redcarpet::Render::HTML) do
+              include WithoutHighlighting
+            end
+          end
         end
 
         def convert(content)

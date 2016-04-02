@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -e
+
+# Usage:
+#   script/test <test_file>
+#   script/test [ruby|jruby]
+#   script/test
+
+if [ -d test/dest ]
+  then rm -r test/dest
+fi
+
+# -----------------------------------------------------------------------------
+# If you send us a ruby then we use that, if you do not then we test with
+# whatever we can detect, this way you can run both suites when you test out
+# your source, we expect full coverage now, not just MRI.
+# -----------------------------------------------------------------------------
+
+if [[ "$1" == "ci" ]]
+then
+  rubies=(
+    ruby
+  )
+
+  shift
+elif [[ "$1" == "ruby" ]] || [[ "$1" == "jruby" ]]
+then
+  rubies=(
+    $1
+  )
+
+  shift
+else
+  rubies=()
+  for r in jruby ruby; do
+    if which "$r"
+    then
+      rubies+=(
+        $r
+      )
+    fi
+  done
+fi
+
+for ruby in $rubies; do
+  if [[ $# -lt 1 ]]
+  then
+    set -x
+    time $ruby -S bundle exec \
+      rake TESTOPTS='--profile' test
+   else
+    set -x
+    time $ruby -S bundle exec ruby -Itest \
+      "$@" --profile
+  fi
+done

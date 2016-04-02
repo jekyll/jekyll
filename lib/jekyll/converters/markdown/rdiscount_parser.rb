@@ -3,13 +3,9 @@ module Jekyll
     class Markdown
       class RDiscountParser
         def initialize(config)
-          require 'rdiscount'
+          Jekyll::External.require_with_graceful_fail "rdiscount"
           @config = config
-          @rdiscount_extensions = @config['rdiscount']['extensions'].map { |e| e.to_sym }
-        rescue LoadError
-          STDERR.puts 'You are missing a library required for Markdown. Please run:'
-          STDERR.puts '  $ [sudo] gem install rdiscount'
-          raise FatalException.new("Missing dependency: rdiscount")
+          @rdiscount_extensions = @config['rdiscount']['extensions'].map(&:to_sym)
         end
 
         def convert(content)

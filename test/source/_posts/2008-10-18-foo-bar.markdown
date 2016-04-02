@@ -1,0 +1,8 @@
+---
+layout: default
+title: Foo Bar
+---
+
+# {{ page.title }}
+
+Best **post** ever
