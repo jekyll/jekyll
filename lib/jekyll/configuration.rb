@@ -71,7 +71,7 @@ module Jekyll
         'hard_wrap'      => false,
         'footnote_nr'    => 1
       }
-    }]
+    }].freeze
 
     # Public: Turn all keys into string
     #
@@ -270,14 +270,20 @@ module Jekyll
     def add_default_collections
       config = clone
 
+      # It defaults to `{}`, so this is only if someone sets it to null manually.
       return config if config['collections'].nil?
 
+      # Ensure we have a hash.
       if config['collections'].is_a?(Array)
         config['collections'] = Hash[config['collections'].map { |c| [c, {}] }]
       end
+
+      # Add posts.
       config['collections']['posts'] ||= {}
       config['collections']['posts']['output'] = true
-      config['collections']['posts']['permalink'] = style_to_permalink(config['permalink'])
+      if config['permalink']
+        config['collections']['posts']['permalink'] ||= style_to_permalink(config['permalink'])
+      end
 
       config
     end
