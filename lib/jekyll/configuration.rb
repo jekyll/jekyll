@@ -285,7 +285,7 @@ module Jekyll
       end
       config['collections']['posts'] ||= {}
       config['collections']['posts']['output'] = true
-      config['collections']['posts']['permalink'] = style_to_permalink(config['permalink'])
+      config['collections']['posts']['permalink'] ||= style_to_permalink(config['permalink'])
 
       config
     end
