@@ -258,4 +258,58 @@ class TestConfiguration < JekyllUnitTest
         Jekyll.configuration(@@test_config.merge({ "config" => [@paths[:default], @paths[:other]] }))
     end
   end
+
+  context "#add_default_collections" do
+    should "not do anything if collections is nil" do
+      conf = Configuration[default_configuration].tap {|c| c['collections'] = nil }
+      assert_equal conf.add_default_collections, conf
+      assert_nil conf.add_default_collections['collections']
+    end
+
+    should "converts collections to a hash if an array" do
+      conf = Configuration[default_configuration].tap {|c| c['collections'] = ['docs'] }
+      assert_equal conf.add_default_collections, conf.merge({
+        "collections" => {
+          "docs" => {},
+          "posts" => {
+            "output" => true,
+            "permalink" => "/:categories/:year/:month/:day/:title.html"
+          }}})
+    end
+
+    should "force collections.posts.output = true" do
+      conf = Configuration[default_configuration].tap {|c| c['collections'] = {'posts' => {'output' => false}} }
+      assert_equal conf.add_default_collections, conf.merge({
+        "collections" => {
+          "posts" => {
+            "output" => true,
+            "permalink" => "/:categories/:year/:month/:day/:title.html"
+          }}})
+    end
+
+    should "set collections.posts.permalink if it's not set" do
+      conf = Configuration[default_configuration]
+      assert_equal conf.add_default_collections, conf.merge({
+        "collections" => {
+          "posts" => {
+            "output" => true,
+            "permalink" => "/:categories/:year/:month/:day/:title.html"
+          }}})
+    end
+
+    should "leave collections.posts.permalink alone if it is set" do
+      posts_permalink = "/:year/:title/"
+      conf = Configuration[default_configuration].tap do |c|
+        c['collections'] = {
+          "posts" => { "permalink" => posts_permalink }
+        }
+      end
+      assert_equal conf.add_default_collections, conf.merge({
+        "collections" => {
+          "posts" => {
+            "output" => true,
+            "permalink" => posts_permalink
+          }}})
+    end
+  end
 end
