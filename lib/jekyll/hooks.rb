@@ -19,21 +19,24 @@ module Jekyll
         :post_render => [],
         :post_write  => []
       },
-      :pages     => {
+      :pages => {
         :post_init   => [],
         :pre_render  => [],
+        :post_content_render => [],
         :post_render => [],
         :post_write  => []
       },
       :posts     => {
         :post_init   => [],
         :pre_render  => [],
+        :post_content_render => [],
         :post_render => [],
         :post_write  => []
       },
       :documents => {
         :post_init   => [],
         :pre_render  => [],
+        :post_content_render => [],
         :post_render => [],
         :post_write  => []
       }
