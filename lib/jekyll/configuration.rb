@@ -169,6 +169,7 @@ module Jekyll
 
       begin
         files.each do |config_file|
+          next if config_file.nil? or config_file.empty?
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
