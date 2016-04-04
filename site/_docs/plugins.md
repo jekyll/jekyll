@@ -898,6 +898,7 @@ LESS.js files during generation.
 - [Jekyll Deploy](https://github.com/vwochnik/jekyll-deploy): Adds a `deploy` sub-command to Jekyll.
 - [Official Contentful Jekyll Plugin](https://github.com/contentful/jekyll-contentful-data-import): Adds a `contentful` sub-command to Jekyll to import data from Contentful.
 - [jekyll-paspagon](https://github.com/KrzysiekJ/jekyll-paspagon): Sell your posts in various formats for cryptocurrencies.
+- [Hawkins](https://github.com/awood/hawkins): Adds a `liveserve` sub-command to Jekyll that incorporates [LiveReload](http://livereload.com/) into your pages while you preview them.  No more hitting the refresh button in your browser!
 
 #### Editors
 
