@@ -42,8 +42,30 @@ Minitest::Reporters.use! [
   )
 ]
 
+module DirectoryHelpers
+  def dest_dir(*subdirs)
+    test_dir('dest', *subdirs)
+  end
+
+  def source_dir(*subdirs)
+    test_dir('source', *subdirs)
+  end
+
+  def test_dir(*subdirs)
+    File.join(File.dirname(__FILE__), *subdirs)
+  end
+end
+
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
+  include DirectoryHelpers
+  extend DirectoryHelpers
+
+  def mu_pp obj
+    s = obj.is_a?(Hash) ? JSON.pretty_generate(obj) : obj.inspect
+    s = s.encode Encoding.default_external if defined? Encoding
+    s
+  end
 
   def mocks_expect(*args)
     RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect).\
@@ -87,21 +109,9 @@ class JekyllUnitTest < Minitest::Test
       add_default_collections
   end
 
-  def dest_dir(*subdirs)
-    test_dir('dest', *subdirs)
-  end
-
-  def source_dir(*subdirs)
-    test_dir('source', *subdirs)
-  end
-
   def clear_dest
     FileUtils.rm_rf(dest_dir)
     FileUtils.rm_rf(source_dir('.jekyll-metadata'))
-  end
-
-  def test_dir(*subdirs)
-    File.join(File.dirname(__FILE__), *subdirs)
   end
 
   def directory_with_contents(path)
