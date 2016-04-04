@@ -96,7 +96,7 @@ module Jekyll
     #
     # Returns the final configuration Hash.
     def configuration(override = Hash.new)
-      config = Configuration[Marshal.load(Marshal.dump(Configuration::DEFAULTS))]
+      config = Configuration[Configuration::DEFAULTS]
       override = Configuration[override].stringify_keys
       unless override.delete('skip_config_files')
         config = config.read_config_files(config.config_files(override))
