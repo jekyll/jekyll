@@ -82,9 +82,12 @@ class JekyllUnitTest < Minitest::Test
     Jekyll::Site.new(site_configuration(overrides))
   end
 
-  def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)
+  def default_configuration
+    Marshal.load(Marshal.dump(Jekyll::Configuration::DEFAULTS))
+  end
+
+  def build_configs(overrides, base_hash = default_configuration)
     Utils.deep_merge_hashes(base_hash, overrides)
-      .fix_common_issues.backwards_compatibilize.add_default_collections
   end
 
   def site_configuration(overrides = {})
@@ -94,7 +97,10 @@ class JekyllUnitTest < Minitest::Test
     }))
     build_configs({
       "source" => source_dir
-    }, full_overrides)
+    }, full_overrides).
+      fix_common_issues.
+      backwards_compatibilize.
+      add_default_collections
   end
 
   def dest_dir(*subdirs)
