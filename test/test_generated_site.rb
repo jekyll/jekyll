@@ -4,9 +4,12 @@ class TestGeneratedSite < JekyllUnitTest
   context "generated sites" do
     setup do
       clear_dest
-      config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir})
 
+<<<<<<< HEAD
       @site = fixture_site(config)
+=======
+      @site = fixture_site
+>>>>>>> f2beef3... Refactor some tests to prevent manipulation of Jekyll::Config::DEFAULTS
       @site.process
       @index = File.read(dest_dir('index.html'))
     end
@@ -64,8 +67,12 @@ OUTPUT
   context "generating limited posts" do
     setup do
       clear_dest
+<<<<<<< HEAD
       config = Jekyll::Configuration::DEFAULTS.merge({'source' => source_dir, 'destination' => dest_dir, 'limit_posts' => 5})
       @site = fixture_site(config)
+=======
+      @site = fixture_site("limit_posts" => 5)
+>>>>>>> f2beef3... Refactor some tests to prevent manipulation of Jekyll::Config::DEFAULTS
       @site.process
       @index = File.read(dest_dir('index.html'))
     end
@@ -77,24 +84,32 @@ OUTPUT
     should "ensure limit posts is 0 or more" do
       assert_raises ArgumentError do
         clear_dest
+<<<<<<< HEAD
         config = Jekyll::Configuration::DEFAULTS.merge({
           'source' => source_dir,
           'destination' => dest_dir,
           'limit_posts' => -1
         })
         @site = fixture_site(config)
+=======
+
+        @site = fixture_site("limit_posts" => -1)
+>>>>>>> f2beef3... Refactor some tests to prevent manipulation of Jekyll::Config::DEFAULTS
       end
     end
 
     should "acceptable limit post is 0" do
       clear_dest
+<<<<<<< HEAD
       config = Jekyll::Configuration::DEFAULTS.merge({
         'source' => source_dir,
         'destination' => dest_dir,
         'limit_posts' => 0
       })
+=======
+>>>>>>> f2beef3... Refactor some tests to prevent manipulation of Jekyll::Config::DEFAULTS
 
-      assert Site.new(config), "Couldn't create a site with the given limit_posts."
+      assert fixture_site("limit_posts" => 0), "Couldn't create a site with limit_posts=0."
     end
   end
 end
