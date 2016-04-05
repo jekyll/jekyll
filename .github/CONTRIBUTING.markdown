@@ -84,7 +84,7 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 #### Tests
 
-* If you're creating a small fix or patch to an existing feature, a simple test if more than enough. You can usually copy/paste from an existing example in the `tests` folder, but if you need to can find out about our tests suites [Shoulda](https://github.com/thoughtbot/shoulda/tree/master) and [RSpec-Mocks](https://github.com/rspec/rspec-mocks).
+* If you're creating a small fix or patch to an existing feature, a simple test is more than enough. You can usually copy/paste from an existing example in the `tests` folder, but if you need you can find out about our tests suites [Shoulda](https://github.com/thoughtbot/shoulda/tree/master) and [RSpec-Mocks](https://github.com/rspec/rspec-mocks).
 
 * If it's a brand new feature, create a new [Cucumber](https://github.com/cucumber/cucumber/) feature, reusing existing steps where appropriate.
 
