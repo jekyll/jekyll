@@ -67,7 +67,7 @@ module Jekyll
       document.content = output
 
       # Hook to modify converted content before layout is applied
-      document.trigger_hooks(:post_content_render, output)
+      document.trigger_hooks(:post_render_content, output)
       output = document.content
 
       if document.place_in_layout?
