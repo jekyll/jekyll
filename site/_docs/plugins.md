@@ -610,6 +610,17 @@ The complete list of available hooks is below:
         <p><code>:pages</code></p>
       </td>
       <td>
+        <p><code>:post_render_content</code></p>
+      </td>
+      <td>
+        <p>After rendering the page content, but before rendering the page layout</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:pages</code></p>
+      </td>
+      <td>
         <p><code>:post_render</code></p>
       </td>
       <td>
@@ -654,6 +665,17 @@ The complete list of available hooks is below:
         <p><code>:posts</code></p>
       </td>
       <td>
+        <p><code>:post_render_content</code></p>
+      </td>
+      <td>
+        <p>After rendering the post content, but before rendering the post layout</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:posts</code></p>
+      </td>
+      <td>
         <p><code>:post_render</code></p>
       </td>
       <td>
@@ -691,6 +713,17 @@ The complete list of available hooks is below:
       </td>
       <td>
         <p>Just before rendering a document</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:documents</code></p>
+      </td>
+      <td>
+        <p><code>:post_render_content</code></p>
+      </td>
+      <td>
+        <p>After rendering the document content, but before rendering the document layout</p>
       </td>
     </tr>
     <tr>
