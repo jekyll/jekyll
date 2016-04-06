@@ -353,7 +353,7 @@ following is a reference of the available data.
     </tr>
     <tr>
       <td><p><code>paginator.total_pages</code></p></td>
-      <td><p>Total number of Pages.</p></td>
+      <td><p>Total number of pages.</p></td>
     </tr>
     <tr>
       <td><p><code>paginator.page</code></p></td>
