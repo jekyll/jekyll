@@ -9,6 +9,7 @@ rvm:
   - &ruby1 2.3.0
   - &ruby2 2.2.4
   - &ruby3 2.1.8
+  - &ruby4 2.1.10
   - &jruby jruby-9.0.4.0
   - &rhead ruby-head
 
@@ -17,6 +18,7 @@ matrix:
   allow_failures:
     - rvm: *jruby
     - rvm: *rhead
+    - rmv: *ruby4
 env:
   matrix:
     - TEST_SUITE=test
