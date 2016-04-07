@@ -18,6 +18,7 @@
   * Adds `link` Liquid tag to make generation of URL's easier (#4624)
   * Allow static files to be symlinked in unsafe mode or non-prod environments (#4640)
   * Add `:after_init` hook & add `Site#config=` to make resetting config easy (#4703)
+  * DocumentDrop: add `#<=>` which sorts by date (falling back to path) (#4741)
 
 ### Bug Fixes
 
