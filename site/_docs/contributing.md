@@ -54,7 +54,7 @@ That's it! You'll be automatically subscribed to receive updates as others revie
 ### Submitting a pull request via Git command line
 
 1. Fork the project by clicking "Fork" in the top right corner of [`jekyll/jekyll`](https://github.com/jekyll/jekyll)
-2. Clone the repository lcoally `git clone https://github.com/<you-username>/jekyll`
+2. Clone the repository locally `git clone https://github.com/<you-username>/jekyll`
 3. Create a new, descriptively named branch to contain your change ( `git checkout -b my-awesome-feature` ).
 4. Hack away, add tests. Not necessarily in that order.
 5. Make sure everything still passes by running `script/cibuild` (see [the tests section](#running-tests-locally) below)
