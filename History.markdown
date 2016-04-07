@@ -64,6 +64,7 @@
   * Highlight the `script/` calls in the Contributing documentation (#4712)
   * Add Hawkins to the list of third-party plugins (#4755)
   * Fix a typo in pagination doc (#4763)
+  * Switch second GitHub Pages link to HTTPS (#4760)
 
 ## 3.1.2 / 2016-02-19
 
