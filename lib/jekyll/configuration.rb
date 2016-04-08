@@ -297,11 +297,13 @@ module Jekyll
         config['collections'] = Hash[config['collections'].map { |c| [c, {}] }]
       end
 
-      # Add posts.
-      config['collections']['posts'] ||= {}
-      config['collections']['posts']['output'] = true
-      if config['permalink']
-        config['collections']['posts']['permalink'] ||= style_to_permalink(config['permalink'])
+      config['collections'] = Utils.deep_merge_hashes(
+        { 'posts' => {} }, config['collections']
+      ).tap do |collections|
+        collections['posts']['output'] = true
+        if config['permalink']
+          collections['posts']['permalink'] ||= style_to_permalink(config['permalink'])
+        end
       end
 
       config
