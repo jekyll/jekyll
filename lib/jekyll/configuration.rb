@@ -74,6 +74,23 @@ module Jekyll
       }
     }].freeze
 
+    class << self
+      # Static: Produce a Configuration ready for use in a Site.
+      # It takes the input, fills in the defaults where values do not
+      # exist, and patches common issues including migrating options for
+      # backwards compatiblity. Except where a key or value is being fixed,
+      # the user configuration will override the defaults.
+      #
+      # user_config - a Hash or Configuration of overrides.
+      #
+      # Returns a Configuration filled with defaults and fixed for common
+      # problems and backwards-compatibility.
+      def from(user_config)
+        Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys).
+          fix_common_issues.backwards_compatibilize.add_default_collections
+      end
+    end
+
     # Public: Turn all keys into string
     #
     # Return a copy of the hash where all its keys are strings
@@ -237,7 +254,7 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
-        config[option].map!(&:to_s)
+        config[option].map!(&:to_s) if config[option]
       end
 
       if (config['kramdown'] || {}).key?('use_coderay')

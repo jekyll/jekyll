@@ -96,14 +96,13 @@ module Jekyll
     #
     # Returns the final configuration Hash.
     def configuration(override = Hash.new)
-      config = Configuration[Configuration::DEFAULTS]
-      override = Configuration[override].stringify_keys
+      config = Configuration.new
       unless override.delete('skip_config_files')
         config = config.read_config_files(config.config_files(override))
       end
 
       # Merge DEFAULTS < _config.yml < override
-      config = Utils.deep_merge_hashes(config, override).stringify_keys
+      config = Configuration.from Utils.deep_merge_hashes(config, override).stringify_keys
       set_timezone(config['timezone']) if config['timezone']
 
       config
