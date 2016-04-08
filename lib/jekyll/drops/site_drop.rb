@@ -28,7 +28,7 @@ module Jekyll
       end
 
       def collections
-        @site_collections ||= @obj.collections.values.map(&:to_liquid)
+        @site_collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
       end
 
       private
