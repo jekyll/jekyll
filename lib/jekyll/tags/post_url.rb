@@ -52,7 +52,16 @@ module Jekyll
     class PostUrl < Liquid::Tag
       def initialize(tag_name, post, tokens)
         super
-        @orig_post = post.strip
+        
+        # Check to see if the user specified a collection name.
+        params = post.strip.split(" ")
+        if params.length == 2
+            @collection = params[0]
+            @orig_post = params[1]
+        else
+            @orig_post = post.strip
+        end
+        
         begin
           @post = PostComparer.new(@orig_post)
         rescue => e
@@ -69,14 +78,21 @@ eos
       def render(context)
         site = context.registers[:site]
 
-        site.posts.docs.each do |p|
+        docs = []
+        if @collection
+            docs = site.collections[@collection].docs
+        else
+            docs = site.posts.docs
+        end
+
+        docs.each do |p|
           return p.url if @post == p
         end
 
         # New matching method did not match, fall back to old method
         # with deprecation warning if this matches
 
-        site.posts.docs.each do |p|
+        docs.each do |p|
           next unless @post.deprecated_equality p
           Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{@post.name} }}' did not match " \
             "a post using the new matching method of checking name " \
