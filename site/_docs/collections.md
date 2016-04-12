@@ -317,6 +317,16 @@ file, each document has the following attributes:
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p><code>date</code></p>
+      </td>
+      <td>
+        <p>
+          The date of the document's collection.
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
