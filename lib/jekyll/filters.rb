@@ -389,8 +389,9 @@ module Jekyll
     def parse_condition(exp)
       parser = Liquid::Parser.new(exp)
       left_expr = parser.expression
+      operator = parser.consume?(:comparison)
       condition =
-        if operator = parser.consume?(:comparison)
+        if operator
           Liquid::Condition.new(left_expr, operator, parser.expression)
         else
           Liquid::Condition.new(left_expr)
