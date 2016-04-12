@@ -69,6 +69,7 @@
   * Explain data file format requirements more clearly in documentation (#4781)
   * Add jekyll-i18n_tags to list of third-party plugins (#4775)
   * Remove Leonard Lamprecht's website from Sites page (#4771)
+  * Updates documentation for collections to include `date` property (#4769)
 
 ## 3.1.2 / 2016-02-19
 
