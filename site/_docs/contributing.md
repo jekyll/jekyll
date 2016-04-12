@@ -11,8 +11,8 @@ Hi there! Interested in contributing to Jekyll? We'd love your help. Jekyll is a
 
 * If you have a question about using Jekyll, start a discussion on [Jekyll Talk](https://talk.jekyllrb.com).
 * If you think you've found a bug within a Jekyll plugin, open an issue in that plugin's repository.
-* If you think you've found a bug within Jekyll itself, [open an issue](https://github.com/jekyll/jekyll/issues/new)
-* More resources are listed on our [Help page](https://jekyllrb.com/help/)
+* If you think you've found a bug within Jekyll itself, [open an issue](https://github.com/jekyll/jekyll/issues/new).
+* More resources are listed on our [Help page](https://jekyllrb.com/help/).
 
 ## Ways to contribute
 
@@ -33,7 +33,7 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 
 * The more information, the better. Make judicious use of the pull request body. Describe what changes were made, why you made them, and what impact they will have for users.
 
-* Pull request are easy and fun. If this is your first pull request, it may help to [understand GitHub Flow](https://guides.github.com/introduction/flow/)
+* Pull request are easy and fun. If this is your first pull request, it may help to [understand GitHub Flow](https://guides.github.com/introduction/flow/).
 
 * If you're submitting a code contribution, be sure to read the [code contributions](#code-contributions) section below.
 
@@ -41,7 +41,7 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 
 Many small changes can be made entirely through the github.com web interface.
 
-1. Navigate to the file within [`jekyll/jekyll`](https://github.com/jekyll/jekyll) that you'd like to edit
+1. Navigate to the file within [`jekyll/jekyll`](https://github.com/jekyll/jekyll) that you'd like to edit.
 2. Click the pencil icon in the top right corner to edit the file
 3. Make your proposed changes
 4. Click "Propose file change"
@@ -53,13 +53,13 @@ That's it! You'll be automatically subscribed to receive updates as others revie
 
 ### Submitting a pull request via Git command line
 
-1. Fork the project by clicking "Fork" in the top right corner of [`jekyll/jekyll`](https://github.com/jekyll/jekyll)
-2. Clone the repository locally `git clone https://github.com/<you-username>/jekyll`
+1. Fork the project by clicking "Fork" in the top right corner of [`jekyll/jekyll`](https://github.com/jekyll/jekyll).
+2. Clone the repository locally `git clone https://github.com/<you-username>/jekyll`.
 3. Create a new, descriptively named branch to contain your change ( `git checkout -b my-awesome-feature` ).
 4. Hack away, add tests. Not necessarily in that order.
 5. Make sure everything still passes by running `script/cibuild` (see [the tests section](#running-tests-locally) below)
 6. Push the branch up ( `git push origin my-awesome-feature` ).
-7. Create a pull request by visiting https://github.com/<your-username>/jekyll/ and following the instructions at the top of the screen.
+7. Create a pull request by visiting `https://github.com/<your-username>/jekyll` and following the instructions at the top of the screen.
 
 ## Proposing updates to the documentation
 

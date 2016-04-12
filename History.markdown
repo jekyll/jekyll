@@ -22,7 +22,6 @@
 
 ### Bug Fixes
 
-  * Cherry Pick: 2b9e849 into Master (Fix SSL options.)
   * Site Template: Added a default lang attribute (#4633)
   * Site template: Escape title and description where it is used in HTML (#4606)
   * Document#date: drafts which have no date should use source file mtime (#4611)
@@ -31,7 +30,7 @@
   * Ensures related_posts are only set for a post (#4620)
   * EntryFilter#special?: ignore filenames which begin with '~' (#4491)
   * Cleaner: `keep_files` should only apply to the beginning of paths, not substrings with index > 0 (#3849)
-  * Fix #4689: Use SSLEnable instead of EnableSSL and make URL HTTPS. (#4693)
+  * Use SSLEnable instead of EnableSSL and make URL HTTPS. (#4693)
 
 ### Development Fixes
 
