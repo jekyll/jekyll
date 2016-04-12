@@ -100,7 +100,7 @@ common tasks easier.
          <code class="filter">{% raw %}{{ site.members | where_exp:"item",
 "item.graduation_year < 2014" }}{% endraw %}</code>
          <code class="filter">{% raw %}{{ site.members | where_exp:"item",
-"item.projects includes 'foo'" }}{% endraw %}</code>
+"item.projects contains 'foo'" }}{% endraw %}</code>
         </p>
       </td>
     </tr>

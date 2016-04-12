@@ -235,13 +235,13 @@ module Jekyll
     # Returns the filtered array of objects
     def where_exp(input, variable, expression)
       return input unless input.is_a?(Enumerable)
-      input = input.values if input.is_a?(Hash)
+      input = input.values if input.is_a?(Hash) # FIXME
 
-      c = parse_condition(expression)
+      condition = parse_condition(expression)
       @context.stack do
         input.select do |object|
           @context[variable] = object
-          c.evaluate(@context)
+          condition.evaluate(@context)
         end
       end
     end
@@ -388,13 +388,13 @@ module Jekyll
     # Parse a string to a Liquid Condition
     def parse_condition(exp)
       parser = Liquid::Parser.new(exp)
-      a = parser.expression
-      if op = parser.consume?(:comparison)
-        b = parser.expression
-        condition = Liquid::Condition.new(a, op, b)
-      else
-        condition = Liquid::Condition.new(a)
-      end
+      left_expr = parser.expression
+      condition =
+        if operator = parser.consume?(:comparison)
+          Liquid::Condition.new(left_expr, operator, parser.expression)
+        else
+          Liquid::Condition.new(left_expr)
+        end
       parser.consume(:end_of_string)
 
       condition
