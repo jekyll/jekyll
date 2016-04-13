@@ -110,24 +110,16 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def default_configuration
-    Marshal.load(Marshal.dump(Jekyll::Configuration::DEFAULTS))
-  end
-
-  def build_configs(overrides, base_hash = default_configuration)
-    Utils.deep_merge_hashes(base_hash, overrides)
+    Configuration.from({})
   end
 
   def site_configuration(overrides = {})
-    full_overrides = build_configs(overrides, build_configs({
+    Configuration.from({
       "destination" => dest_dir,
       "incremental" => false
+    }.merge(overrides).merge({
+      "source"      => source_dir
     }))
-    build_configs({
-      "source" => source_dir
-    }, full_overrides).
-      fix_common_issues.
-      backwards_compatibilize.
-      add_default_collections
   end
 
   def clear_dest

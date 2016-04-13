@@ -13,22 +13,23 @@ class TestSite < JekyllUnitTest
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(build_configs({ 'plugins_dir' => '/tmp/plugins' }))
+      site = Site.new(Configuration.from({ 'plugins_dir' => '/tmp/plugins' }))
       assert_equal ['/tmp/plugins'], site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(build_configs({ 'plugins_dir' => ['/tmp/plugins', '/tmp/otherplugins'] }))
+      site = Site.new(Configuration.from({ 'plugins_dir' => ['/tmp/plugins', '/tmp/otherplugins'] }))
       assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
-      site = Site.new(build_configs({ 'plugins_dir' => [] }))
+      site = Site.new(Configuration.from({ 'plugins_dir' => [] }))
       assert_equal [], site.plugins
     end
 
     should "have an empty array for plugins if nil is passed" do
-      site = Site.new(build_configs({ 'plugins_dir' => nil }))
+      site = Site.new(Configuration.from({ 'plugins_dir' => nil }))
+      assert_nil site.config['plugins_dir']
       assert_equal [], site.plugins
     end
 
@@ -38,7 +39,7 @@ class TestSite < JekyllUnitTest
     end
 
     should "expose baseurl passed in from config" do
-      site = Site.new(build_configs({ 'baseurl' => '/blog' }))
+      site = Site.new(site_configuration({ 'baseurl' => '/blog' }))
       assert_equal '/blog', site.baseurl
     end
   end

@@ -261,13 +261,13 @@ class TestConfiguration < JekyllUnitTest
 
   context "#add_default_collections" do
     should "not do anything if collections is nil" do
-      conf = Configuration[default_configuration].tap {|c| c['collections'] = nil }
+      conf = Configuration::DEFAULTS.dup.tap {|c| c['collections'] = nil }
       assert_equal conf.add_default_collections, conf
       assert_nil conf.add_default_collections['collections']
     end
 
     should "converts collections to a hash if an array" do
-      conf = Configuration[default_configuration].tap {|c| c['collections'] = ['docs'] }
+      conf = Configuration::DEFAULTS.dup.tap {|c| c['collections'] = ['docs'] }
       assert_equal conf.add_default_collections, conf.merge({
         "collections" => {
           "docs" => {},
@@ -278,7 +278,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "force collections.posts.output = true" do
-      conf = Configuration[default_configuration].tap {|c| c['collections'] = {'posts' => {'output' => false}} }
+      conf = Configuration::DEFAULTS.dup.tap {|c| c['collections'] = {'posts' => {'output' => false}} }
       assert_equal conf.add_default_collections, conf.merge({
         "collections" => {
           "posts" => {
@@ -288,7 +288,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "set collections.posts.permalink if it's not set" do
-      conf = Configuration[default_configuration]
+      conf = Configuration::DEFAULTS
       assert_equal conf.add_default_collections, conf.merge({
         "collections" => {
           "posts" => {
