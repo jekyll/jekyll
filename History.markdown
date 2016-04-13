@@ -19,6 +19,7 @@
   * Allow static files to be symlinked in unsafe mode or non-prod environments (#4640)
   * Add `:after_init` hook & add `Site#config=` to make resetting config easy (#4703)
   * DocumentDrop: add `#<=>` which sorts by date (falling back to path) (#4741)
+  * Add a where_exp filter for filtering by expression (#4478)
 
 ### Bug Fixes
 
