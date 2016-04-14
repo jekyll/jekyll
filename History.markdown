@@ -72,6 +72,7 @@
   * Add jekyll-i18n_tags to list of third-party plugins (#4775)
   * Remove Leonard Lamprecht's website from Sites page (#4771)
   * Updates documentation for collections to include `date` property (#4769)
+  * Added an explicit rerun note to configuration.md, defaults section (#4734)
 
 ## 3.1.2 / 2016-02-19
 
