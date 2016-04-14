@@ -610,10 +610,10 @@ The complete list of available hooks is below:
         <p><code>:pages</code></p>
       </td>
       <td>
-        <p><code>:post_render_content</code></p>
+        <p><code>:post_convert</code></p>
       </td>
       <td>
-        <p>After rendering the page content, but before rendering the page layout</p>
+        <p>After converting the page content, but before rendering the page layout</p>
       </td>
     </tr>
     <tr>
@@ -665,10 +665,10 @@ The complete list of available hooks is below:
         <p><code>:posts</code></p>
       </td>
       <td>
-        <p><code>:post_render_content</code></p>
+        <p><code>:post_convert</code></p>
       </td>
       <td>
-        <p>After rendering the post content, but before rendering the post layout</p>
+        <p>After converting the post content, but before rendering the post layout</p>
       </td>
     </tr>
     <tr>
@@ -720,10 +720,10 @@ The complete list of available hooks is below:
         <p><code>:documents</code></p>
       </td>
       <td>
-        <p><code>:post_render_content</code></p>
+        <p><code>:post_convert</code></p>
       </td>
       <td>
-        <p>After rendering the document content, but before rendering the document layout</p>
+        <p>After converting the document content, but before rendering the document layout</p>
       </td>
     </tr>
     <tr>
