@@ -41,7 +41,7 @@ module Jekyll
       begin
         self.content = File.read(site.in_source_dir(base, name),
                                  Utils.merged_file_read_opts(site, opts))
-        if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+        if content =~ Document::YAML_FRONT_MATTER_REGEXP
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
