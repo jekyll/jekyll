@@ -32,6 +32,7 @@
   * EntryFilter#special?: ignore filenames which begin with '~' (#4491)
   * Cleaner: `keep_files` should only apply to the beginning of paths, not substrings with index > 0 (#3849)
   * Use SSLEnable instead of EnableSSL and make URL HTTPS. (#4693)
+  * convertible: use Document::YAML_FRONT_MATTER_REGEXP to parse transformable files (#4786)
 
 ### Development Fixes
 
