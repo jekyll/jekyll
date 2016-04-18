@@ -76,6 +76,11 @@
   * Added an explicit rerun note to configuration.md, defaults section (#4734)
   * Update Rack-Jekyll Heroku deployment blog post url (#4789)
 
+## 3.1.3 / 2016-04-18
+
+  * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4807)
+  * Use SSLEnable instead of EnableSSL and make URL HTTPS (WEBrick) (#4693)
+
 ## 3.1.2 / 2016-02-19
 
 ### Minor Enhancements
@@ -222,6 +227,11 @@
   * Added the Wordpress2Jekyll Wordpress plugin (#4377)
   * Add Contentful Extension to list of third-party plugins (#4390)
   * Correct Minor spelling error (#4394)
+
+## 3.0.4 / 2016-04-18
+
+  * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4806)
+  * Configuration: allow users to specify a `collections.posts.permalink` directly without `permalink` clobbering it (#4753)
 
 ## 3.0.3 / 2016-02-08
 
