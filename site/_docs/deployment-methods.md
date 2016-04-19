@@ -142,7 +142,7 @@ Add the `deploy` script to the site source folder:
 {% highlight bash %}
 #!/bin/sh
 
-rsync -crvz --rsh=ssh -p2222' --delete-after --delete-excluded   <folder> <user>@<site>:
+rsync -crvz --rsh='ssh -p2222' --delete-after --delete-excluded   <folder> <user>@<site>:
 {% endhighlight %}
 
 Command line parameters are:
