@@ -75,6 +75,7 @@
   * Updates documentation for collections to include `date` property (#4769)
   * Added an explicit rerun note to configuration.md, defaults section (#4734)
   * Update Rack-Jekyll Heroku deployment blog post url (#4789)
+  * Added missing single quote on rsync client side command (#4813)
 
 ## 3.1.3 / 2016-04-18
 
