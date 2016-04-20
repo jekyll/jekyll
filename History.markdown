@@ -77,6 +77,7 @@
   * Update Rack-Jekyll Heroku deployment blog post url (#4789)
   * Added missing single quote on rsync client side command (#4813)
   * Organize Form Platforms-as-a-Service into unified list & add FormSpree.io (#4754)
+  * Fixed typo on Configuration page (#4804)
 
 ## 3.1.3 / 2016-04-18
 
