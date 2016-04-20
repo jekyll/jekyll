@@ -16,8 +16,10 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 
 ### Integrations
 
-- [Use FormKeep as a backend for forms (contact forms, hiring forms, etc.)](https://formkeep.com/guides/how-to-make-a-contact-form-in-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
-- [Use Simple Form to add a simple contact form](http://getsimpleform.com/)
+- Use a saas service as a backend for forms (contact forms, hiring forms, etc.)
+  - [Formspree (also open source)](http://formspree.io/)
+  - [FormKeep](https://formkeep.com/guides/how-to-make-a-contact-form-in-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
+  - [Simple Form](http://getsimpleform.com/)
 - [Jekyll Bootstrap](http://jekyllbootstrap.com), 0 to Blog in 3 minutes. Provides detailed explanations, examples, and helper-code to make getting started with Jekyll easier.
 - [Integrating Twitter with Jekyll](http://www.justkez.com/integrating-twitter-with-jekyll/)
   > “Having migrated Justkez.com to be based on Jekyll, I was pondering how I might include my recent twitterings on the front page of the site. In the WordPress world, this would have been done via a plugin which may or may not have hung the loading of the page, might have employed caching, but would certainly have had some overheads. … Not in Jekyll.”
