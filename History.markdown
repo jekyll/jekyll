@@ -17,6 +17,9 @@
   * Site template: add explanation of site variables in the example `_config.yml` (#4704)
   * Adds `link` Liquid tag to make generation of URL's easier (#4624)
   * Allow static files to be symlinked in unsafe mode or non-prod environments (#4640)
+  * Add `:after_init` hook & add `Site#config=` to make resetting config easy (#4703)
+  * DocumentDrop: add `#<=>` which sorts by date (falling back to path) (#4741)
+  * Add a where_exp filter for filtering by expression (#4478)
 
 ### Bug Fixes
 
@@ -28,6 +31,8 @@
   * Ensures related_posts are only set for a post (#4620)
   * EntryFilter#special?: ignore filenames which begin with '~' (#4491)
   * Cleaner: `keep_files` should only apply to the beginning of paths, not substrings with index > 0 (#3849)
+  * Use SSLEnable instead of EnableSSL and make URL HTTPS. (#4693)
+  * convertible: use Document::YAML_FRONT_MATTER_REGEXP to parse transformable files (#4786)
 
 ### Development Fixes
 
@@ -36,6 +41,10 @@
   * Unify method for copying special files from repo to site (#4601)
   * Refresh the contributing file (#4596)
   * change smartify doc from copy/paste of mardownify doc (#4653)
+  * Update Rake & disable warnings when running tests (#4720)
+  * Fix many warnings (#4537)
+  * Don't blindly assume the last system when determining "open" cmd (#4717)
+  * Fix "locally" typo in contributing documentation (#4756)
 
 ### Site Enhancements
 
@@ -56,6 +65,22 @@
   * Use the correct URL, Fixes #4698 (#4699)
   * Add jekyll-paspagon plugin (#4700)
   * Bold-italicize note in assets documentation about needing yaml front matter (#4706)
+  * Highlight the `script/` calls in the Contributing documentation (#4712)
+  * Add Hawkins to the list of third-party plugins (#4755)
+  * Fix a typo in pagination doc (#4763)
+  * Switch second GitHub Pages link to HTTPS (#4760)
+  * Explain data file format requirements more clearly in documentation (#4781)
+  * Add jekyll-i18n_tags to list of third-party plugins (#4775)
+  * Remove Leonard Lamprecht's website from Sites page (#4771)
+  * Updates documentation for collections to include `date` property (#4769)
+  * Added an explicit rerun note to configuration.md, defaults section (#4734)
+  * Update Rack-Jekyll Heroku deployment blog post url (#4789)
+  * Added missing single quote on rsync client side command (#4813)
+
+## 3.1.3 / 2016-04-18
+
+  * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4807)
+  * Use SSLEnable instead of EnableSSL and make URL HTTPS (WEBrick) (#4693)
 
 ## 3.1.2 / 2016-02-19
 
@@ -203,6 +228,11 @@
   * Added the Wordpress2Jekyll Wordpress plugin (#4377)
   * Add Contentful Extension to list of third-party plugins (#4390)
   * Correct Minor spelling error (#4394)
+
+## 3.0.4 / 2016-04-18
+
+  * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4806)
+  * Configuration: allow users to specify a `collections.posts.permalink` directly without `permalink` clobbering it (#4753)
 
 ## 3.0.3 / 2016-02-08
 

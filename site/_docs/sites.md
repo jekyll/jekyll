@@ -14,8 +14,6 @@ learning purposes.
     ([source](https://github.com/github/training-kit))
 - [Rasmus Andersson](http://rsms.me/)
     ([source](https://github.com/rsms/rsms.github.com))
-- [Leonard Lamprecht](http://leo.im)
-    ([source](https://github.com/leo/leo.github.io))
 
 If you would like to explore more examples, you can find a list of sites
 and their sources on the ["Sites" page in the Jekyll wiki][jekyll-sites].

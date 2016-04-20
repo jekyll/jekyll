@@ -91,7 +91,7 @@ class TestNewCommand < JekyllUnitTest
     should 'force created folder' do
       capture_stdout { Jekyll::Commands::New.process(@args) }
       output = capture_stdout { Jekyll::Commands::New.process(@args, '--force') }
-      assert_match /New jekyll site installed in/, output
+      assert_match(/New jekyll site installed in/, output)
     end
   end
 
