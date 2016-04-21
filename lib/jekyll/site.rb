@@ -373,6 +373,19 @@ module Jekyll
       end
     end
 
+    # Public: Prefix a given path with the theme directory.
+    #
+    # paths - (optional) path elements to a file or directory within the
+    #         theme directory
+    #
+    # Returns a path which is prefixed with the theme root directory.
+    def in_theme_dir(*paths)
+      return nil unless theme
+      paths.reduce(theme.root) do |base, path|
+        Jekyll.sanitized_path(base, path)
+      end
+    end
+
     # Public: Prefix a given path with the destination directory.
     #
     # paths - (optional) path elements to a file or directory within the

@@ -39,7 +39,7 @@ module Jekyll
       filename = File.join(base, name)
 
       begin
-        self.content = File.read(site.in_source_dir(base, name),
+        self.content = File.read(@path || site.in_source_dir(base, name),
                                  Utils.merged_file_read_opts(site, opts))
         if content =~ Document::YAML_FRONT_MATTER_REGEXP
           self.content = $POSTMATCH
