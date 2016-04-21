@@ -52,6 +52,11 @@ class TestTheme < JekyllUnitTest
     should "return nil for paths that don't exist" do
       assert_equal nil, @theme.send(:path_for, "foo")
     end
+
+    should "return the resolved path when a symlink & resolved path exists" do
+      expected = File.expand_path("./_layouts", @expected_root)
+      assert_equal expected, @theme.send(:path_for, :symlink)
+    end
   end
 
   should "retrieve the gemspec" do

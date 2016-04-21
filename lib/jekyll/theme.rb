@@ -34,8 +34,17 @@ module Jekyll
     private
 
     def path_for(folder)
-      path = Jekyll.sanitized_path root, "_#{folder}"
+      resolved_dir = realpath_for(folder)
+      return unless resolved_dir
+
+      path = Jekyll.sanitized_path(root, resolved_dir)
       path if Dir.exists?(path)
+    end
+
+    def realpath_for(folder)
+      File.realpath(Jekyll.sanitized_path(root, "_#{folder}"))
+    rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
+      nil
     end
 
     def gemspec
