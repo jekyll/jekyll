@@ -6,6 +6,7 @@ module Jekyll
 
     def initialize(name)
       @name = name.downcase.strip
+      configure_sass
     end
 
     def root
@@ -25,7 +26,9 @@ module Jekyll
     end
 
     def configure_sass
-      Sass.load_paths << sass_path if sass_path
+      return unless sass_path
+      require 'sass'
+      Sass.load_paths << sass_path
     end
 
     private
