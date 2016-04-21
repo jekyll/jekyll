@@ -615,7 +615,7 @@ title: Include symlink
 CONTENT
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
-        assert_match "Could not locate the included file 'tmp/pages-test-does-not-exist' in any of [\"/Users/parkr/jekyll/jekyll/test/source/_includes\"].", ex.message
+        assert_match "Could not locate the included file 'tmp/pages-test-does-not-exist' in any of [\"#{source_dir}/_includes\"].", ex.message
       end
     end
 
