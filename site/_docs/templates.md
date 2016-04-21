@@ -90,6 +90,22 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Where Expression</strong></p>
+        <p>Select all the objects in an array where the expression is true.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.members | where_exp:"item",
+"item.graduation_year == 2014" }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.members | where_exp:"item",
+"item.graduation_year < 2014" }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.members | where_exp:"item",
+"item.projects contains 'foo'" }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Group By</strong></p>
         <p>Group an array's items by a given property.</p>
       </td>

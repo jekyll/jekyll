@@ -45,7 +45,6 @@ module Jekyll
   autoload :Errors,              'jekyll/errors'
   autoload :Excerpt,             'jekyll/excerpt'
   autoload :External,            'jekyll/external'
-  autoload :Filters,             'jekyll/filters'
   autoload :FrontmatterDefaults, 'jekyll/frontmatter_defaults'
   autoload :Hooks,               'jekyll/hooks'
   autoload :Layout,              'jekyll/layout'
@@ -78,6 +77,7 @@ module Jekyll
   require 'jekyll/generator'
   require 'jekyll/command'
   require 'jekyll/liquid_extensions'
+  require "jekyll/filters"
 
   class << self
     # Public: Tells you which Jekyll environment you are building in so you can skip tasks

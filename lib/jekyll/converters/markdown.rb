@@ -6,7 +6,7 @@ module Jekyll
       safe true
 
       def setup
-        return if @setup
+        return if @setup ||= false
         unless (@parser = get_processor)
           Jekyll.logger.error "Invalid Markdown processor given:", @config["markdown"]
           Jekyll.logger.info  "", "Custom processors are not loaded in safe mode" if @config["safe"]

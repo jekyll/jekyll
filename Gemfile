@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
-gem "rake", "~> 10.1"
+gem "rake", "~> 11.0"
 group :development do
   gem "launchy", "~> 2.3"
   gem "rubocop", :branch => :master, :github => "bbatsov/rubocop"

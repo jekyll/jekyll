@@ -94,8 +94,8 @@ module Jekyll
       return true if !scope.key?('path') || scope['path'].empty?
 
       scope_path = Pathname.new(scope['path'])
-      Pathname.new(sanitize_path(path)).ascend do |path|
-        if path.to_s == scope_path.to_s
+      Pathname.new(sanitize_path(path)).ascend do |ascended_path|
+        if ascended_path.to_s == scope_path.to_s
           return true
         end
       end
