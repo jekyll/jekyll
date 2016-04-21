@@ -23,7 +23,7 @@ module Jekyll
     end
 
     def theme_layout_directory
-      @theme_layout_directory ||= site.theme.layout_dir if site.theme
+      @theme_layout_directory ||= site.theme.layouts_path if site.theme
     end
 
     private
