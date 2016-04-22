@@ -10,17 +10,17 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v1.3.3 -->
-<title>Jekyll Turns 21! Err… I mean 2.1.0. - Jekyll • Simple, blog-aware, static sites</title>
-<meta property="og:title" content="Jekyll Turns 21! Err… I mean 2.1.0." />
+<title>Jekyll 3.0.4 Released - Jekyll • Simple, blog-aware, static sites</title>
+<meta property="og:title" content="Jekyll 3.0.4 Released" />
 <meta name="description" content="Transform your plain text into static websites and blogs" />
 <meta property="og:description" content="Transform your plain text into static websites and blogs" />
-<link rel="canonical" href="https://jekyllrb.com/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/" />
-<meta property="og:url" content="https://jekyllrb.com/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/" />
+<link rel="canonical" href="https://jekyllrb.com/news/2016/04/19/jekyll-3-0-4-released/" />
+<meta property="og:url" content="https://jekyllrb.com/news/2016/04/19/jekyll-3-0-4-released/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2014-06-28T14:26:59-07:00" />
-<link rel="next" href="https://jekyllrb.com/news/2014/07/01/jekyll-2-1-1-released/" title="Jekyll 2.1.1 Released" />
-<link rel="prev" href="https://jekyllrb.com/news/2014/06/04/jekyll-stickers-1-dollar-stickermule/" title="Pick Up your $1 Jekyll Sticker" />
+<meta property="article:published_time" content="2016-04-19T10:26:12-07:00" />
+<link rel="next" href="https://jekyllrb.com/news/2016/04/19/jekyll-3-1-3-released/" title="Jekyll 3.1.3 Released" />
+<link rel="prev" href="https://jekyllrb.com/news/2016/03/10/making-it-easier-to-contribute-to-jekyll/" title="Making it easier to contribute to Jekyll" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="twitter:creator" content="@parkr" />
@@ -29,11 +29,11 @@
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Jekyll Turns 21! Err… I mean 2.1.0.",
-    "datePublished": "2014-06-28T14:26:59-07:00",
+    "headline": "Jekyll 3.0.4 Released",
+    "datePublished": "2016-04-19T10:26:12-07:00",
     "description": "Transform your plain text into static websites and blogs",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
-    "url": "https://jekyllrb.com/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/"
+    "url": "https://jekyllrb.com/news/2016/04/19/jekyll-3-0-4-released/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -206,8 +206,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Jekyll Turns 21! Err... I mean 2.1.0.
-    <a href="/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/" class="permalink" title="Permalink">∞</a>
+    Jekyll 3.0.4 Released
+    <a href="/news/2016/04/19/jekyll-3-0-4-released/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -216,7 +216,7 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      28 Jun 2014
+      19 Apr 2016
     </span>
     <a href="https://github.com/parkr" class="post-author">
       <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
@@ -224,30 +224,21 @@
     </a>
   </div>
   <div class="post-content">
-    <p>Jekyll’s finally <a href="http://en.wikipedia.org/wiki/Legal_drinking_age">legal to drink in the States</a>.
-And he’s done a lot of learning in the process! Here are some of the new
-things to look forward to:</p>
+    <p>v3.0.4 is a patch release which fixes the follow two issues:</p>
 
 <ul>
-  <li>Uses the latest Liquid version (2.6.1) (#2495)</li>
-  <li>Set front matter defaults for collections (#2419)</li>
-  <li>Set a collection-specific URL template (#2418)</li>
-  <li><code>pygments.rb</code> 0.6.0! (#2504)</li>
-  <li><code>.json</code> files in <code>_data</code> (#2369)</li>
-  <li>Allow subdirectories in <code>_data</code> (#2395)</li>
-  <li>Add support for <code>hl_lines</code> in <code>highlight</code> tag (#2532)</li>
-  <li>Post categories now merge with directory, front matter, and defaults (#2373)</li>
-  <li>New <code>--skip_initial_build</code> flag for <code>jekyll serve</code> (#2477)</li>
-  <li>A bajilion bug fixes and site updates!</li>
+  <li>Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source</li>
+  <li>Configuration for the posts permalink might be borked when a user specified a value for <code>collections.posts.permalink</code> directly. This forced the use of <code>permalink</code> at the top level, which also affected pages. To configure a permalink <em>just for posts</em>, you can do so with:</li>
 </ul>
 
-<p>Let’s go party!</p>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">posts</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">output</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+    <span class="l-Scalar-Plain">permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/:year/:title/</span></code></pre></figure>
 
-<p><em>Check out the <a href="/docs/history/#v2-1-0">full changelog</a> for more.</em></p>
+<p>Both of these issues have been resolved. For more information, check out <a href="/docs/history/#v3-0-4">the full history</a>.</p>
 
-<p>Many thanks to these 37 contributors for the 2.1.0 release:</p>
-
-<p>Alberto Grespan, Alessandro Lorenzi, Alex Medearis, Alfred Xing, Anatol Broder, Ben, Ben Balter, Bud Parr, Chezou, Denilson Figueiredo de Sá, Denilson Sá, Ivan Tse, Jens Nazarenus, Jesse Shawl, Jordon Bedwell, Josh Davis, János Rusiczki, Marc Ransome, Mathieu Bruyen, Matt Rogers, Parker Moore, Pat Hawks, Paul Henry, Peter Rhoades, Philipp Rudloff, Quinn Shanahan, Renaud Martinet, Rob Murray, Rodrigo Dumont, Simon Sarris, Terry, Terry Schmidt, Tomer Cohen, XhmikosR, Yihang Ho, jaybe@jekyll, and mikecole.</p>
+<p>Happy Jekylling!</p>
 
   </div>
 </article>
@@ -271,7 +262,7 @@ things to look forward to:</p>
         <a href="/news/2016/04/19/jekyll-3-1-3-released/">Version 3.1.3</a>
       </li>
       
-      <li class="">
+      <li class="current">
         <a href="/news/2016/04/19/jekyll-3-0-4-released/">Version 3.0.4</a>
       </li>
       

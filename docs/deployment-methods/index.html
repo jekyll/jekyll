@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://jekyllrb.com/docs/deployment-methods/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-04-11T19:59:10-07:00" />
+<meta property="article:published_time" content="2016-04-21T17:17:50-07:00" />
 <link rel="next" href="https://jekyllrb.com/docs/drafts/" title="Working with drafts" />
 <link rel="prev" href="https://jekyllrb.com/docs/datafiles/" title="Data Files" />
 <meta name="twitter:card" content="summary" />
@@ -29,7 +29,7 @@
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Deployment methods",
-    "datePublished": "2016-04-11T19:59:10-07:00",
+    "datePublished": "2016-04-21T17:17:50-07:00",
     "description": "Transform your plain text into static websites and blogs",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
     "url": "https://jekyllrb.com/docs/deployment-methods/"
@@ -2649,7 +2649,7 @@ it with the folder it shall have read-write access to:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
 
-rsync -crvz --rsh<span class="o">=</span>ssh -p2222<span class="err">&#39;</span> --delete-after --delete-excluded   &lt;folder&gt; &lt;user&gt;@&lt;site&gt;:</code></pre></figure>
+rsync -crvz --rsh<span class="o">=</span><span class="s1">&#39;ssh -p2222&#39;</span> --delete-after --delete-excluded   &lt;folder&gt; &lt;user&gt;@&lt;site&gt;:</code></pre></figure>
 
 <p>Command line parameters are:</p>
 
@@ -2690,7 +2690,7 @@ script executes.</p>
 
 <p><a href="https://github.com/adaoraul/rack-jekyll/">Rack-Jekyll</a> is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with <a href="https://github.com/rtomayko/shotgun/">shotgun</a>, <a href="https://github.com/rack/rack">rackup</a>, <a href="https://github.com/mongrel/mongrel">mongrel</a>, <a href="https://github.com/defunkt/unicorn/">unicorn</a>, and <a href="https://github.com/adaoraul/rack-jekyll#readme">others</a>.</p>
 
-<p>Read <a href="http://blog.crowdint.com/2010/08/02/instant-blog-using-jekyll-and-heroku.html">this post</a> on how to deploy to Heroku using Rack-Jekyll.</p>
+<p>Read <a href="http://andycroll.com/ruby/serving-a-jekyll-blog-using-heroku">this post</a> on how to deploy to Heroku using Rack-Jekyll.</p>
 
 <h2 id="jekyll-admin-for-rails">Jekyll-Admin for Rails</h2>
 

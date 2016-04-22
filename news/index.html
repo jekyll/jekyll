@@ -103,6 +103,10 @@
     <option value="/news/">Home</option>
     <optgroup label="v1.x">
       
+      <option value="/news/2016/04/19/jekyll-3-1-3-released/">Jekyll 3.1.3 Released</option>
+      
+      <option value="/news/2016/04/19/jekyll-3-0-4-released/">Jekyll 3.0.4 Released</option>
+      
       <option value="/news/2016/03/10/making-it-easier-to-contribute-to-jekyll/">Making it easier to contribute to Jekyll</option>
       
       <option value="/news/2016/02/19/jekyll-3-1-2-released/">Jekyll 3.1.2 Released!</option>
@@ -196,6 +200,86 @@
 
       <div class="unit four-fifths">
         
+  <article>
+  <h2>
+    <a href="/news/2016/04/19/jekyll-3-1-3-released/">
+      Jekyll 3.1.3 Released
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      release
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      19 Apr 2016
+    </span>
+    <a href="https://github.com/parkr" class="post-author">
+      
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      parkr
+    </a>
+  </div>
+  <div class="post-content">
+    <p>v3.1.3 is a patch release which fixes the follow two issues:</p>
+
+<ul>
+  <li>Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source</li>
+  <li>Running <code>jekyll serve</code> with SSL enabled was broken due to a bad configuration.</li>
+</ul>
+
+<p>Both of these issues have been resolved. For more information, check out <a href="/docs/history/#v3-1-3">the full history</a>.</p>
+
+<p>Happy Jekylling!</p>
+
+
+  </div>
+</article>
+
+
+  <article>
+  <h2>
+    <a href="/news/2016/04/19/jekyll-3-0-4-released/">
+      Jekyll 3.0.4 Released
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      release
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      19 Apr 2016
+    </span>
+    <a href="https://github.com/parkr" class="post-author">
+      
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      parkr
+    </a>
+  </div>
+  <div class="post-content">
+    <p>v3.0.4 is a patch release which fixes the follow two issues:</p>
+
+<ul>
+  <li>Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source</li>
+  <li>Configuration for the posts permalink might be borked when a user specified a value for <code>collections.posts.permalink</code> directly. This forced the use of <code>permalink</code> at the top level, which also affected pages. To configure a permalink <em>just for posts</em>, you can do so with:</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">posts</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">output</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+    <span class="l-Scalar-Plain">permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/:year/:title/</span></code></pre></figure>
+
+<p>Both of these issues have been resolved. For more information, check out <a href="/docs/history/#v3-0-4">the full history</a>.</p>
+
+<p>Happy Jekylling!</p>
+
+  </div>
+</article>
+
+
   <article>
   <h2>
     <a href="/news/2016/03/10/making-it-easier-to-contribute-to-jekyll/">
@@ -2112,6 +2196,14 @@ examples and for compiling this list):</p>
     <ul>
       
       <li class="">
+        <a href="/news/2016/04/19/jekyll-3-1-3-released/">Version 3.1.3</a>
+      </li>
+      
+      <li class="">
+        <a href="/news/2016/04/19/jekyll-3-0-4-released/">Version 3.0.4</a>
+      </li>
+      
+      <li class="">
         <a href="/news/2016/02/19/jekyll-3-1-2-released/">Version 3.1.2</a>
       </li>
       
@@ -2123,20 +2215,16 @@ examples and for compiling this list):</p>
         <a href="/news/2016/01/28/jekyll-3-1-1-released/">Version 3.1.1</a>
       </li>
       
-      <li class="">
-        <a href="/news/2016/01/24/jekyll-3-1-0-released/">Version 3.1.0</a>
-      </li>
-      
-      <li class="">
-        <a href="/news/2016/01/20/jekyll-3-0-2-released/">Version 3.0.2</a>
-      </li>
-      
       <li>
         <a href="/docs/history/">History »</a>
       </li>
     </ul>
     <h4>Other News</h4>
     <ul>
+        
+        
+        
+        
         
         
         <li class="">

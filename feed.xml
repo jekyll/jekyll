@@ -3,10 +3,62 @@
 <generator uri="http://jekyllrb.com" version="3.1.2">Jekyll</generator>
 <link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-04-11T19:59:10-07:00</updated>
+<updated>2016-04-21T17:17:50-07:00</updated>
 <id>https://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.1.3 Released</title>
+<link href="https://jekyllrb.com/news/2016/04/19/jekyll-3-1-3-released/" rel="alternate" type="text/html" title="Jekyll 3.1.3 Released" />
+<published>2016-04-19T10:26:16-07:00</published>
+<updated>2016-04-19T10:26:16-07:00</updated>
+<id>https://jekyllrb.com/news/2016/04/19/jekyll-3-1-3-released</id>
+<content type="html" xml:base="https://jekyllrb.com/news/2016/04/19/jekyll-3-1-3-released/">&lt;p&gt;v3.1.3 is a patch release which fixes the follow two issues:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source&lt;/li&gt;
+  &lt;li&gt;Running &lt;code&gt;jekyll serve&lt;/code&gt; with SSL enabled was broken due to a bad configuration.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Both of these issues have been resolved. For more information, check out &lt;a href=&quot;/docs/history/#v3-1-3&quot;&gt;the full history&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
+<entry>
+<title>Jekyll 3.0.4 Released</title>
+<link href="https://jekyllrb.com/news/2016/04/19/jekyll-3-0-4-released/" rel="alternate" type="text/html" title="Jekyll 3.0.4 Released" />
+<published>2016-04-19T10:26:12-07:00</published>
+<updated>2016-04-19T10:26:12-07:00</updated>
+<id>https://jekyllrb.com/news/2016/04/19/jekyll-3-0-4-released</id>
+<content type="html" xml:base="https://jekyllrb.com/news/2016/04/19/jekyll-3-0-4-released/">&lt;p&gt;v3.0.4 is a patch release which fixes the follow two issues:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source&lt;/li&gt;
+  &lt;li&gt;Configuration for the posts permalink might be borked when a user specified a value for &lt;code&gt;collections.posts.permalink&lt;/code&gt; directly. This forced the use of &lt;code&gt;permalink&lt;/code&gt; at the top level, which also affected pages. To configure a permalink &lt;em&gt;just for posts&lt;/em&gt;, you can do so with:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;{% highlight yaml %}
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:title/
+{% endhighlight %}&lt;/p&gt;
+
+&lt;p&gt;Both of these issues have been resolved. For more information, check out &lt;a href=&quot;/docs/history/#v3-0-4&quot;&gt;the full history&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Making it easier to contribute to Jekyll</title>
 <link href="https://jekyllrb.com/news/2016/03/10/making-it-easier-to-contribute-to-jekyll/" rel="alternate" type="text/html" title="Making it easier to contribute to Jekyll" />
@@ -267,70 +319,6 @@ Will Norris, XhmikosR, chrisfinazzo, and rebornix.&lt;/p&gt;
 &lt;p&gt;As always, check out the &lt;a href=&quot;/docs/history/#v3-0-0&quot;&gt;full history&lt;/a&gt; for more details.&lt;/p&gt;
 
 &lt;p&gt;Our contributors are the core of what makes Jekyll great! Many thanks to the 132 contributors who made this release possible (in alphabetical order): AJ Acevedo, Adam Richeimer, Alan Scherger, Alfred Xing, Anatol Broder, Andrew Dunning, Anna Debenham, Anton, Arne Gockeln, Arthur Hammer, Arthur Neves, BRAVO, Ben Balter, Bernardo Dias, BigBlueHat, Brandon Mathis, Bruce Smith, Cai⚡️, Carlos Matallín, ChaYoung You, Christian Vuerings, Cory Simmons, David Herman, David Silva Smith, David Smith, David Wales, David Williamson, DigitalSparky, Dimitri König, Dominik, Eduardo Boucas, Eduardo Bouças, Eduardo Bouças, Erlend Sogge Heggen, Eugene Pirogov, Ezmyrelda Andrade, Fabian Rodriguez, Fabian Tamp, Fabio Niephaus, Falko Richter, Florian Weingarten, Fonso, Garen Torikian, Guillaume LARIVIERE, Günter Kits, I´m a robot, Jason Ly, Jedd Ahyoung, Jensen Kuras, Jesse Pinho, Jesse W, Jim Meyer, Joel Glovier, Johan Bové, Joop Aué, Jordan Thornquest, Jordon Bedwell, Joseph Anderson, Julien Bourdeau, Justin Weiss, Kamil Dziemianowicz, Kevin Locke, Kevin Ushey, Leonard, Lukas, Mads Ohm Larsen, Malo Skrylevo, Marcus Stollsteimer, Mark Phelps, Mark Tareshawty, Martijn den Hoedt, Martin Jorn Rogalla, Martin Rogalla, Matt Rogers, Matt Sheehan, Matthias Nuessler, Max, Max Beizer, Max White, Merlos, Michael Giuffrida, Michael Tu, Mike Bland, Mike Callan, MonsieurV, Nate Berkopec, Neil Faccly, Nic West, Nicholas Burlett, Nicolas Hoizey, Parker Moore, Pascal Borreli, Pat Hawks, Paul Rayner, Pedro Euko, Peter Robins, Philipp Rudloff, Philippe Loctaux, Rafael Picanço, Renaud Martinet, Robert Papp, Ryan Burnette, Ryan Tomayko, Seb, Seth Warburton, Shannon, Stephen Crosby, Stuart Kent, Suriyaa Kudo, Sylvester Keil, Tanguy Krotoff, Toddy69, Tom Johnson, Tony Eichelberger, Tunghsiao Liu, Veres Lajos, Vitaly Repin, Will Norris, William Entriken, XhmikosR, chrisfinazzo, eksperimental, hartmel, jaybe@jekyll, kaatt, nightsense, nitoyon, robschia, schneems, sonnym, takuti, and tasken.&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Join the Discussion at Jekyll Talk</title>
-<link href="https://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/" rel="alternate" type="text/html" title="Join the Discussion at Jekyll Talk" />
-<published>2015-02-26T21:06:51-08:00</published>
-<updated>2015-02-26T21:06:51-08:00</updated>
-<id>https://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk</id>
-<content type="html" xml:base="https://jekyllrb.com/news/2015/02/26/introducing-jekyll-talk/">&lt;p&gt;We’re super excited to announce the launch of &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;Jekyll Talk&lt;/a&gt;, a Discourse forum for anything related to Jekyll!&lt;/p&gt;
-
-&lt;p&gt;The forum was set up by &lt;a href=&quot;https://github.com/envygeeks&quot;&gt;@envygeeks&lt;/a&gt; to build a community more accessible to Jekyll users and more suitable for general discussion.&lt;/p&gt;
-
-&lt;p&gt;There’s already been a lot of interesting topics, including a &lt;a href=&quot;https://talk.jekyllrb.com/t/showcase-sites-made-using-jekyll/18&quot;&gt;site showcase&lt;/a&gt; and &lt;a href=&quot;https://talk.jekyllrb.com/t/poll-installation-priorities-for-3-0/106/9&quot;&gt;a poll for Jekyll 3.0 priorities&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Come join the fun!&lt;/p&gt;
-</content>
-<author>
-<name>alfredxing</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll 3.0.0.beta1 Released</title>
-<link href="https://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released/" rel="alternate" type="text/html" title="Jekyll 3.0.0.beta1 Released" />
-<published>2015-01-24T00:42:31-08:00</published>
-<updated>2015-01-24T00:42:31-08:00</updated>
-<id>https://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released</id>
-<content type="html" xml:base="https://jekyllrb.com/news/2015/01/24/jekyll-3-0-0-beta1-released/">&lt;p&gt;Hey!&lt;/p&gt;
-
-&lt;p&gt;Exciting news! First beta for Jekyll 3 is out. Check out the &lt;a href=&quot;https://github.com/jekyll/jekyll/blob/v3.0.0.beta1/History.markdown#head&quot;&gt;sizable
-changelog&lt;/a&gt;
-to get a feel for what changes are afoot. Key features:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Speed.&lt;/strong&gt; Jekyll now features incremental regeneration and greatly
-improved problematic code that caused slow-downs.&lt;/li&gt;
-  &lt;li&gt;Gobs of bugfixes and customization.&lt;/li&gt;
-  &lt;li&gt;Uniformity and sanity to Jekyll extensions of Liquid.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;To install just run:&lt;/p&gt;
-
-&lt;p&gt;{% highlight bash %}
-$ gem install jekyll –pre
-{% endhighlight %}&lt;/p&gt;
-
-&lt;p&gt;Future versions will include &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/3324&quot;&gt;some awesome new
-features&lt;/a&gt; that we haven’t
-built yet. If you see one you want to tackle, submit a PR &amp;amp; you’ll be
-featured in the Jekyll 3.0 release post as a contributor to that epic
-release.&lt;/p&gt;
-
-&lt;p&gt;Please file bugs as you encounter them, being sure to include your version
-of Ruby, the Jekyll version, and (if possible) a link to your site so we
-can reproduce.&lt;/p&gt;
-
-&lt;p&gt;If you think there’s room for improvement in the UX, also do let us know.
-We’re always looking to make Jekyll easier to use!&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
 </content>
