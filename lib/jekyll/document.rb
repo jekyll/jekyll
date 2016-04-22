@@ -263,7 +263,7 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
-          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
+          defaults = @site.frontmatter_defaults.all(relative_path, collection.label.to_sym)
           merge_data!(defaults, source: "front matter defaults") unless defaults.empty?
 
           self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
