@@ -36,6 +36,7 @@
   * Use SSLEnable instead of EnableSSL and make URL HTTPS. (#4693)
   * convertible: use Document::YAML_FRONT_MATTER_REGEXP to parse transformable files (#4786)
   * Example in the site template should be IANA-approved example.com (#4793)
+  * 3.2.x/master: Fix defaults for Documents (posts/collection docs) (#4808)
 
 ### Development Fixes
 
