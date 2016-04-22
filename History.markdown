@@ -22,6 +22,7 @@
   * Add a where_exp filter for filtering by expression (#4478)
   * Globalize Jekyll's Filters. (#4792)
   * Gem-based themes (#4595)
+  * Allow symlinks if they point to stuff inside site.source (#4710)
 
 ### Bug Fixes
 
