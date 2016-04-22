@@ -66,6 +66,7 @@ module Jekyll
   autoload :Site,                'jekyll/site'
   autoload :StaticFile,          'jekyll/static_file'
   autoload :Stevenson,           'jekyll/stevenson'
+  autoload :Theme,               'jekyll/theme'
   autoload :URL,                 'jekyll/url'
   autoload :Utils,               'jekyll/utils'
   autoload :VERSION,             'jekyll/version'

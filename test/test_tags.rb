@@ -616,7 +616,7 @@ title: Include symlink
 CONTENT
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
-        assert_match(/should exist and should not be a symlink/, ex.message)
+        assert_match "Could not locate the included file 'tmp/pages-test-does-not-exist' in any of [\"#{source_dir}/_includes\"].", ex.message
       end
     end
 
@@ -757,7 +757,7 @@ CONTENT
         exception = assert_raises IOError do
           create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
         end
-        assert_equal 'Included file \'_includes/missing.html\' not found', exception.message
+        assert_match "Could not locate the included file 'missing.html' in any of [\"#{source_dir}/_includes\"].", exception.message
       end
     end
 
@@ -839,7 +839,7 @@ CONTENT
           exception = assert_raises IOError do
             create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
           end
-          assert_equal 'Included file \'./missing.html\' not found', exception.message
+          assert_match "Could not locate the included file 'missing.html' in any of [\"#{source_dir}\"].", exception.message
         end
       end
 
@@ -894,7 +894,7 @@ title: Include symlink
 CONTENT
           create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true, 'safe' => true })
         end
-        assert_match(/should exist and should not be a symlink/, ex.message)
+        assert_match /Ensure it exists in one of those directories and, if it is a symlink, does not point outside your site source./, ex.message
       end
     end
   end

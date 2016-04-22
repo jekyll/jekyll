@@ -8,10 +8,10 @@ module Jekyll
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :plugin_manager
+                  :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
 
     # Public: Initialize a new Site.
     #
@@ -51,6 +51,12 @@ module Jekyll
 
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
+
+      self.theme = nil
+      self.theme = Jekyll::Theme.new(config["theme"]) if config["theme"]
+
+      @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
+      @includes_load_paths << theme.includes_path if self.theme
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
@@ -363,6 +369,19 @@ module Jekyll
     # Returns a path which is prefixed with the source directory.
     def in_source_dir(*paths)
       paths.reduce(source) do |base, path|
+        Jekyll.sanitized_path(base, path)
+      end
+    end
+
+    # Public: Prefix a given path with the theme directory.
+    #
+    # paths - (optional) path elements to a file or directory within the
+    #         theme directory
+    #
+    # Returns a path which is prefixed with the theme root directory.
+    def in_theme_dir(*paths)
+      return nil unless theme
+      paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
     end

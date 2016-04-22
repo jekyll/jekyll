@@ -25,6 +25,7 @@ env:
 branches:
   only:
     - master
+    - themes
 
 notifications:
   irc:
