@@ -21,6 +21,7 @@
   * DocumentDrop: add `#<=>` which sorts by date (falling back to path) (#4741)
   * Add a where_exp filter for filtering by expression (#4478)
   * Globalize Jekyll's Filters. (#4792)
+  * Gem-based themes (#4595)
 
 ### Bug Fixes
 
