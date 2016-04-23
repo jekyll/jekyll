@@ -1,6 +1,6 @@
 module Jekyll
   class CollectionReader
-    SPECIAL_COLLECTIONS = %w(posts data).freeze
+    SPECIAL_COLLECTIONS = %w(posts pages data).freeze
 
     attr_reader :site, :content
     def initialize(site)

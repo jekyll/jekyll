@@ -276,9 +276,14 @@ module Jekyll
       if config['collections'].is_a?(Array)
         config['collections'] = Hash[config['collections'].map { |c| [c, {}] }]
       end
+
       config['collections']['posts'] ||= {}
       config['collections']['posts']['output'] = true
       config['collections']['posts']['permalink'] = style_to_permalink(config['permalink'])
+
+      config['collections']['pages'] ||= {}
+      config['collections']['pages']['output'] = true
+      config['collections']['pages']['permalink'] = style_to_permalink(config['permalink'])
 
       config
     end

@@ -1,16 +1,16 @@
 module Jekyll
-  class Page
-    include Convertible
-
+  class Page < Document
     attr_writer :dir
-    attr_accessor :site, :pager
+    attr_accessor :pager
     attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_writer :data
 
     alias_method :extname, :ext
 
     FORWARD_SLASH = '/'.freeze
 
+    # Compatibility
+    #
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w(
       content
@@ -22,7 +22,6 @@ module Jekyll
 
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.
-
     HTML_EXTENSIONS = %W(
       .html
       .xhtml
@@ -36,22 +35,22 @@ module Jekyll
     # dir  - The String path between the source and the file.
     # name - The String filename of the file.
     def initialize(site, base, dir, name)
-      @site = site
       @base = base
-      @dir  = dir
+      @dir = dir
       @name = name
-      @path = site.in_source_dir(base, dir, name)
 
-      process(name)
-      read_yaml(File.join(base, dir), name)
+      full_path = site.in_source_dir(base, dir, name)
+      super(full_path, {
+        :site => site,
+        :collection => site.pages
+      })
 
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
-      end
-
-      Jekyll::Hooks.trigger :pages, :post_init, self
+      process(@name)
+      read(path: full_path)
     end
 
+    # Compatibility
+    #
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
     # permalink is absent, we be '/'
@@ -66,18 +65,10 @@ module Jekyll
       end
     end
 
-    # The full path and filename of the post. Defined in the YAML of the post
-    # body.
-    #
-    # Returns the String permalink or nil if none has been set.
-    def permalink
-      data.nil? ? nil : data['permalink']
-    end
-
     # The template of the permalink.
     #
     # Returns the template String.
-    def template
+    def url_template
       if !html?
         "/:path/:basename:output_ext"
       elsif index?
@@ -85,17 +76,6 @@ module Jekyll
       else
         Utils.add_permalink_suffix("/:path/:basename", site.permalink_style)
       end
-    end
-
-    # The generated relative url of this page. e.g. /about.html.
-    #
-    # Returns the String url.
-    def url
-      @url ||= URL.new({
-        :template => template,
-        :placeholders => url_placeholders,
-        :permalink => permalink
-      }).to_s
     end
 
     # Returns a hash of URL placeholder names (as symbols) mapping to the
@@ -116,21 +96,21 @@ module Jekyll
     def process(name)
       self.ext = File.extname(name)
       self.basename = name[0..-ext.length - 1]
+
+      # Invalidate URL
+      @url = nil
+      url
     end
 
-    # Add any necessary layouts to this post
+    # Compatibility
     #
-    # layouts      - The Hash of {"name" => "layout"}.
-    # site_payload - The site payload Hash.
-    #
-    # Returns nothing.
+    # Render the page
     def render(layouts, site_payload)
-      site_payload["page"] = to_liquid
-      site_payload["paginator"] = pager.to_liquid
-
-      do_layout(site_payload, layouts)
+      self.output = Jekyll::Renderer.new(@site, self, site_payload).run
     end
 
+    # Compatibility
+    #
     # The path to the source file
     #
     # Returns the path to the source file
@@ -138,11 +118,15 @@ module Jekyll
       data.fetch('path') { relative_path.sub(/\A\//, '') }
     end
 
+    # Compatiblity
+    #
     # The path to the page source file, relative to the site source
     def relative_path
       File.join(*[@dir, @name].map(&:to_s).reject(&:empty?))
     end
 
+    # Compatibility
+    #
     # Obtain destination path.
     #
     # dest - The String path to the destination dir.
@@ -153,11 +137,6 @@ module Jekyll
       path = File.join(path, "index") if url.end_with?("/")
       path << output_ext unless path.end_with? output_ext
       path
-    end
-
-    # Returns the object as a debug String.
-    def inspect
-      "#<Jekyll:Page @name=#{name.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.
@@ -174,8 +153,41 @@ module Jekyll
       Jekyll::Hooks.trigger :pages, hook_name, self, *args
     end
 
-    def write?
+    # Don't generate excerpts for pages
+    def generate_excerpt?
+      false
+    end
+
+    # Determine whether the file should be rendered with Liquid.
+    #
+    # Always returns true.
+    def render_with_liquid?
       true
     end
+
+    # Don't generate a title
+    def post_read
+      original = data['title']
+      super
+      data['title'] = original
+    end
+
+    # Compatibility
+    #
+    # Accessor for data properties by Liquid.
+    #
+    # property - The String name of the property to retrieve.
+    #
+    # Returns the String value or nil if the property isn't included.
+    def [](property)
+      if property == 'path'
+        data.fetch('path') { relative_path.sub(/\A\//, '') }
+      elsif self.class::ATTRIBUTES_FOR_LIQUID.include?(property)
+        send(property)
+      else
+        data[property]
+      end
+    end
+
   end
 end
