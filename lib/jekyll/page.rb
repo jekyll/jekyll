@@ -180,9 +180,7 @@ module Jekyll
     #
     # Returns the String value or nil if the property isn't included.
     def [](property)
-      if property == 'path'
-        data.fetch('path') { relative_path.sub(/\A\//, '') }
-      elsif self.class::ATTRIBUTES_FOR_LIQUID.include?(property)
+      if self.class::ATTRIBUTES_FOR_LIQUID.include?(property)
         send(property)
       else
         data[property]
