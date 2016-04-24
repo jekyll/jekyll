@@ -9,7 +9,7 @@ module Jekyll
 
     FORWARD_SLASH = '/'.freeze
 
-    # Compatibility
+    # NOTE: COMPATIBILITY
     #
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w(
@@ -36,7 +36,7 @@ module Jekyll
     # name - The String filename of the file.
     def initialize(site, base, dir, name)
       @base = base
-      @dir = dir
+      @dir  = dir
       @name = name
 
       full_path = site.in_source_dir(base, dir, name)
@@ -49,7 +49,7 @@ module Jekyll
       read(path: full_path)
     end
 
-    # Compatibility
+    # NOTE: COMPATIBILITY
     #
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
@@ -102,20 +102,22 @@ module Jekyll
       url
     end
 
-    # Compatibility
+    # NOTE: COMPATIBILITY
     #
     # Render the page
     def render(layouts, site_payload)
       self.output = Jekyll::Renderer.new(@site, self, site_payload).run
     end
 
-    # Compatibility
+    # NOTE: COMPATIBILITY
     #
     # The path to the source file
     #
     # Returns the path to the source file
     def path
-      data.fetch('path') { relative_path.sub(/\A\//, '') }
+      data.fetch('path') do
+        relative_path.sub(/\A\//, '')
+      end
     end
 
     # Compatiblity
@@ -125,7 +127,7 @@ module Jekyll
       File.join(*[@dir, @name].map(&:to_s).reject(&:empty?))
     end
 
-    # Compatibility
+    # NOTE: COMPATIBILITY
     #
     # Obtain destination path.
     #
@@ -137,6 +139,13 @@ module Jekyll
       path = File.join(path, "index") if url.end_with?("/")
       path << output_ext unless path.end_with? output_ext
       path
+    end
+
+    # NOTE: COMPATIBILITY
+    #
+    # Returns the object as a debug String.
+    def inspect
+      "#<Jekyll:Page @name=#{name.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.
@@ -172,7 +181,7 @@ module Jekyll
       data['title'] = original
     end
 
-    # Compatibility
+    # NOTE: COMPATIBILITY
     #
     # Accessor for data properties by Liquid.
     #
@@ -180,7 +189,7 @@ module Jekyll
     #
     # Returns the String value or nil if the property isn't included.
     def [](property)
-      if self.class::ATTRIBUTES_FOR_LIQUID.include?(property)
+      if ATTRIBUTES_FOR_LIQUID.include?(property)
         send(property)
       else
         data[property]
