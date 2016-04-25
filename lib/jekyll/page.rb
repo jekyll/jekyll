@@ -46,7 +46,7 @@ module Jekyll
       })
 
       process(@name)
-      read(path: full_path)
+      read(:path => full_path)
     end
 
     # NOTE: COMPATIBILITY
@@ -190,7 +190,7 @@ module Jekyll
     # Returns the String value or nil if the property isn't included.
     def [](property)
       if ATTRIBUTES_FOR_LIQUID.include?(property)
-        send(property)
+        public_send(property)
       else
         data[property]
       end

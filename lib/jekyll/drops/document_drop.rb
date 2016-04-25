@@ -13,7 +13,7 @@ module Jekyll
       def_delegators :@obj, :name, :name
 
       def path
-        if (@obj.is_a? Page)
+        if @obj.is_a?(Page)
           @obj.path
         else
           @obj.relative_path
