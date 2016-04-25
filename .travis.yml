@@ -28,10 +28,6 @@ branches:
     - themes
 
 notifications:
-  irc:
-    template: "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
-    channels: irc.freenode.org#jekyll
-
   email:
     recipients:
       - jordon@envygeeks.io
