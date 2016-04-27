@@ -4,7 +4,7 @@ gemspec :name => "jekyll"
 gem "rake", "~> 11.0"
 group :development do
   gem "launchy", "~> 2.3"
-  gem "rubocop", :branch => :master, :github => "bbatsov/rubocop"
+  gem "rubocop"
   gem "pry"
 
   unless RUBY_ENGINE == "jruby"
