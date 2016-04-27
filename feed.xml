@@ -3,10 +3,38 @@
 <generator uri="http://jekyllrb.com" version="3.1.2">Jekyll</generator>
 <link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-04-26T17:21:07-07:00</updated>
+<updated>2016-04-26T18:01:18-07:00</updated>
 <id>https://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.0.5 Released</title>
+<link href="https://jekyllrb.com/news/2016/04/26/jekyll-3-0-5-released/" rel="alternate" type="text/html" title="Jekyll 3.0.5 Released" />
+<published>2016-04-26T17:40:44-07:00</published>
+<updated>2016-04-26T17:40:44-07:00</updated>
+<id>https://jekyllrb.com/news/2016/04/26/jekyll-3-0-5-released</id>
+<content type="html" xml:base="https://jekyllrb.com/news/2016/04/26/jekyll-3-0-5-released/">&lt;p&gt;This version fixes a bug affecting only v3.0.4 where autoregeneration was
+&lt;em&gt;always&lt;/em&gt; disabled when running Jekyll locally. This feature is a huge
+reason why Jekyll (or any static site generator, for that matter) is a joy
+to use. Sorry for the regression!&lt;/p&gt;
+
+&lt;p&gt;If you’re using GitHub Pages, &lt;a href=&quot;https://github.com/github/pages-gem/pull/285&quot;&gt;you can follow the progress of the upgrade
+on the github/pages-gem repo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As always, our &lt;a href=&quot;/docs/history/#v3-0-5&quot;&gt;history doc&lt;/a&gt; has links to the pull
+requests and issues associated with the release for your perusal.&lt;/p&gt;
+
+&lt;p&gt;We’re looking forward to the upcoming release of v3.2 which &lt;a href=&quot;https://github.com/jekyll/jekyll/blob/master/History.markdown#head&quot;&gt;has some
+excellent goodies&lt;/a&gt;
+we think you’ll love.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.1.3 Released</title>
 <link href="https://jekyllrb.com/news/2016/04/19/jekyll-3-1-3-released/" rel="alternate" type="text/html" title="Jekyll 3.1.3 Released" />
@@ -278,49 +306,6 @@ patch release: Alfred Xing, Christian Trosell, Jordan Thornquest, Jordon
 Bedwell, Larry Fox, Lawrence Murray, Lewis Cowles, Matt Rogers, Nicole
 White, Parker Moore, Paul Robert Lloyd, Sarah Kuehnle, Vincent Wochnik,
 Will Norris, XhmikosR, chrisfinazzo, and rebornix.&lt;/p&gt;
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll 3.0 Released</title>
-<link href="https://jekyllrb.com/news/2015/10/26/jekyll-3-0-released/" rel="alternate" type="text/html" title="Jekyll 3.0 Released" />
-<published>2015-10-26T15:37:30-07:00</published>
-<updated>2015-10-26T15:37:30-07:00</updated>
-<id>https://jekyllrb.com/news/2015/10/26/jekyll-3-0-released</id>
-<content type="html" xml:base="https://jekyllrb.com/news/2015/10/26/jekyll-3-0-released/">&lt;p&gt;The much-anticipated Jekyll 3.0 has been released! Key changes:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Incremental regeneration (experimental, enable with &lt;code&gt;--incremental&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;Liquid profiler (add &lt;code&gt;--profile&lt;/code&gt; to a build or serve)&lt;/li&gt;
-  &lt;li&gt;Hook plugin API (no more monkey-patching!)&lt;/li&gt;
-  &lt;li&gt;Dependencies reduced from 14 to 8, none contain C extensions. We’re hoping to reduce this even more in the future.&lt;/li&gt;
-  &lt;li&gt;Changed version support: no support for Ruby 1.9.3, added basic JRuby support. Better Windows support.&lt;/li&gt;
-  &lt;li&gt;Extension-less URLs&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;site.collections&lt;/code&gt; is an array of collections, thus:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;collection[0]&lt;/code&gt; becomes &lt;code&gt;collection.label&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;collection[1]&lt;/code&gt; becomes &lt;code&gt;collection&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Default highlighter is now Rouge instead of Pygments&lt;/li&gt;
-  &lt;li&gt;Lots of performance improvements&lt;/li&gt;
-  &lt;li&gt;… and lots more!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We also added a &lt;a href=&quot;/docs/conduct/&quot;&gt;Code of Conduct&lt;/a&gt; to encourage a happier, nicer community where contributions and discussion is protected from negative behaviour.&lt;/p&gt;
-
-&lt;p&gt;A huge shout-out to the amazing Jekyll Core Team members Jordon Bedwell, Alfred Xing, and Matt Rogers for all their hard work in making Jekyll 3 the best release yet.&lt;/p&gt;
-
-&lt;p&gt;We also added &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;Jekyll Talk&lt;/a&gt;, managed solely by Jordon, which offers a modern forum experience for Jekyllers across the globe to talk and learn about Jekyll!&lt;/p&gt;
-
-&lt;p&gt;As always, check out the &lt;a href=&quot;/docs/history/#v3-0-0&quot;&gt;full history&lt;/a&gt; for more details.&lt;/p&gt;
-
-&lt;p&gt;Our contributors are the core of what makes Jekyll great! Many thanks to the 132 contributors who made this release possible (in alphabetical order): AJ Acevedo, Adam Richeimer, Alan Scherger, Alfred Xing, Anatol Broder, Andrew Dunning, Anna Debenham, Anton, Arne Gockeln, Arthur Hammer, Arthur Neves, BRAVO, Ben Balter, Bernardo Dias, BigBlueHat, Brandon Mathis, Bruce Smith, Cai⚡️, Carlos Matallín, ChaYoung You, Christian Vuerings, Cory Simmons, David Herman, David Silva Smith, David Smith, David Wales, David Williamson, DigitalSparky, Dimitri König, Dominik, Eduardo Boucas, Eduardo Bouças, Eduardo Bouças, Erlend Sogge Heggen, Eugene Pirogov, Ezmyrelda Andrade, Fabian Rodriguez, Fabian Tamp, Fabio Niephaus, Falko Richter, Florian Weingarten, Fonso, Garen Torikian, Guillaume LARIVIERE, Günter Kits, I´m a robot, Jason Ly, Jedd Ahyoung, Jensen Kuras, Jesse Pinho, Jesse W, Jim Meyer, Joel Glovier, Johan Bové, Joop Aué, Jordan Thornquest, Jordon Bedwell, Joseph Anderson, Julien Bourdeau, Justin Weiss, Kamil Dziemianowicz, Kevin Locke, Kevin Ushey, Leonard, Lukas, Mads Ohm Larsen, Malo Skrylevo, Marcus Stollsteimer, Mark Phelps, Mark Tareshawty, Martijn den Hoedt, Martin Jorn Rogalla, Martin Rogalla, Matt Rogers, Matt Sheehan, Matthias Nuessler, Max, Max Beizer, Max White, Merlos, Michael Giuffrida, Michael Tu, Mike Bland, Mike Callan, MonsieurV, Nate Berkopec, Neil Faccly, Nic West, Nicholas Burlett, Nicolas Hoizey, Parker Moore, Pascal Borreli, Pat Hawks, Paul Rayner, Pedro Euko, Peter Robins, Philipp Rudloff, Philippe Loctaux, Rafael Picanço, Renaud Martinet, Robert Papp, Ryan Burnette, Ryan Tomayko, Seb, Seth Warburton, Shannon, Stephen Crosby, Stuart Kent, Suriyaa Kudo, Sylvester Keil, Tanguy Krotoff, Toddy69, Tom Johnson, Tony Eichelberger, Tunghsiao Liu, Veres Lajos, Vitaly Repin, Will Norris, William Entriken, XhmikosR, chrisfinazzo, eksperimental, hartmel, jaybe@jekyll, kaatt, nightsense, nitoyon, robschia, schneems, sonnym, takuti, and tasken.&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;
 </content>
 <author>
 <name>parkr</name>
