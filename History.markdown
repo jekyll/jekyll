@@ -83,6 +83,7 @@
   * Added missing single quote on rsync client side command (#4813)
   * Organize Form Platforms-as-a-Service into unified list & add FormSpree.io (#4754)
   * Fixed typo on Configuration page (#4804)
+  * Update FormKeep URL on the Resources doc (#4844)
 
 ## 3.1.3 / 2016-04-18
 
