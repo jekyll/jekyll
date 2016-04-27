@@ -18,7 +18,7 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 
 - Use a saas service as a backend for forms (contact forms, hiring forms, etc.)
   - [Formspree (also open source)](http://formspree.io/)
-  - [FormKeep](https://formkeep.com/guides/how-to-make-a-contact-form-in-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
+  - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
   - [Simple Form](http://getsimpleform.com/)
 - [Jekyll Bootstrap](http://jekyllbootstrap.com), 0 to Blog in 3 minutes. Provides detailed explanations, examples, and helper-code to make getting started with Jekyll easier.
 - [Integrating Twitter with Jekyll](http://www.justkez.com/integrating-twitter-with-jekyll/)
