@@ -6,6 +6,58 @@ class TestConfiguration < JekyllUnitTest
     "destination" => dest_dir
   }
 
+  context ".from" do
+    should "create a Configuration object" do
+      assert_instance_of Configuration, Configuration.from({})
+    end
+
+    should "merge input over defaults" do
+      result = Configuration.from({"source" => "blah"})
+      refute_equal result["source"], Configuration::DEFAULTS["source"]
+      assert_equal result["source"], "blah"
+    end
+
+    should "fix common mistakes" do
+      result = Configuration.from({"paginate" => 0})
+      assert_nil result["paginate"], "Expected 'paginate' to be corrected to 'nil', but was #{result["paginate"].inspect}"
+    end
+
+    should "add default collections" do
+      result = Configuration.from({})
+      assert_equal result["collections"], {"posts" => {"output" => true, "permalink" => "/:categories/:year/:month/:day/:title.html"}}
+    end
+
+    should "NOT backwards-compatibilize" do
+      assert Configuration.from("watch" => true)["watch"], "Expected the 'watch' key to not be removed."
+    end
+  end
+
+  context "#add_default_collections" do
+    should "no-op if collections is nil" do
+      result = Configuration[{"collections" => nil}].add_default_collections
+      assert_nil result["collections"]
+    end
+
+    should "turn an array into a hash" do
+      result = Configuration[{"collections" => %w{methods}}].add_default_collections
+      assert_instance_of Hash, result["collections"]
+      assert_equal result["collections"], {"posts" => {"output" => true}, "methods" => {}}
+    end
+
+    should "only assign collections.posts.permalink if a permalink is specified" do
+      result = Configuration[{"permalink" => "pretty", "collections" => {}}].add_default_collections
+      assert_equal result["collections"], {"posts" => {"output" => true, "permalink" => "/:categories/:year/:month/:day/:title/"}}
+
+      result = Configuration[{"permalink" => nil, "collections" => {}}].add_default_collections
+      assert_equal result["collections"], {"posts" => {"output" => true}}
+    end
+
+    should "forces posts to output" do
+      result = Configuration[{"collections" => {"posts" => {"output" => false}}}].add_default_collections
+      assert_equal result["collections"]["posts"]["output"], true
+    end
+  end
+
   context "#stringify_keys" do
     setup do
       @mixed_keys = Configuration[{
