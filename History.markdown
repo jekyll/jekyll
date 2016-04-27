@@ -237,6 +237,10 @@
   * Add Contentful Extension to list of third-party plugins (#4390)
   * Correct Minor spelling error (#4394)
 
+## 3.0.5 / 2016-04-26
+
+  * Remove call to `#backwards_compatibilize` in `Configuration.from` (#4846)
+
 ## 3.0.4 / 2016-04-18
 
   * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4806)
