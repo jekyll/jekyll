@@ -86,7 +86,7 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys).
-          fix_common_issues.backwards_compatibilize.add_default_collections
+          fix_common_issues.add_default_collections
       end
     end
 
