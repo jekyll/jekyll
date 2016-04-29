@@ -23,6 +23,7 @@
   * Globalize Jekyll's Filters. (#4792)
   * Gem-based themes (#4595)
   * Allow symlinks if they point to stuff inside site.source (#4710)
+  * Update colorator dependency to v1.x (#4855)
 
 ### Bug Fixes
 
