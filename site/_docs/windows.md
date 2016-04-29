@@ -27,7 +27,7 @@ Additionally, you might need to change the code page of the console window to UT
 in case you get a "Liquid Exception: Incompatible character encoding" error during
 the site generation process. It can be done with the following command:
 
-{% highlight bash %}
+{% highlight shell %}
 $ chcp 65001
 {% endhighlight %}
 

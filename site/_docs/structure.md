@@ -14,7 +14,7 @@ product.
 
 A basic Jekyll site usually looks something like this:
 
-{% highlight bash %}
+{% highlight shell %}
 .
 ├── _config.yml
 ├── _drafts

@@ -38,7 +38,7 @@ Save the commands you want to run and succeed in a file: `./script/cibuild`
 
 ### The HTML Proofer Executable
 
-{% highlight bash %}
+{% highlight shell %}
 #!/usr/bin/env bash
 set -e # halt script on error
 
@@ -52,7 +52,7 @@ Some options can be specified via command-line switches. Check out the
 
 For example to avoid testing external sites, use this command:
 
-{% highlight bash %}
+{% highlight shell %}
 $ bundle exec htmlproofer ./_site --disable-external
 {% endhighlight %}
 
