@@ -3,7 +3,7 @@
 <generator uri="http://jekyllrb.com" version="3.1.2">Jekyll</generator>
 <link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-04-26T18:01:18-07:00</updated>
+<updated>2016-04-28T18:28:33-07:00</updated>
 <id>https://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
@@ -45,7 +45,7 @@ we think you’ll love.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source&lt;/li&gt;
-  &lt;li&gt;Running &lt;code&gt;jekyll serve&lt;/code&gt; with SSL enabled was broken due to a bad configuration.&lt;/li&gt;
+  &lt;li&gt;Running &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt; with SSL enabled was broken due to a bad configuration.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Both of these issues have been resolved. For more information, check out &lt;a href=&quot;/docs/history/#v3-1-3&quot;&gt;the full history&lt;/a&gt;.&lt;/p&gt;
@@ -68,7 +68,7 @@ we think you’ll love.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source&lt;/li&gt;
-  &lt;li&gt;Configuration for the posts permalink might be borked when a user specified a value for &lt;code&gt;collections.posts.permalink&lt;/code&gt; directly. This forced the use of &lt;code&gt;permalink&lt;/code&gt; at the top level, which also affected pages. To configure a permalink &lt;em&gt;just for posts&lt;/em&gt;, you can do so with:&lt;/li&gt;
+  &lt;li&gt;Configuration for the posts permalink might be borked when a user specified a value for &lt;code class=&quot;highlighter-rouge&quot;&gt;collections.posts.permalink&lt;/code&gt; directly. This forced the use of &lt;code class=&quot;highlighter-rouge&quot;&gt;permalink&lt;/code&gt; at the top level, which also affected pages. To configure a permalink &lt;em&gt;just for posts&lt;/em&gt;, you can do so with:&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;{% highlight yaml %}
@@ -120,8 +120,8 @@ collections:
   &lt;li&gt;If a syntax error is encountered by Liquid, it will now print the line number.&lt;/li&gt;
   &lt;li&gt;A nasty war between symbols and strings in our configuration hash caused kramdown syntax highlighting to break. That has been resolved; you stand victorious!&lt;/li&gt;
   &lt;li&gt;A tilde at the beginning of a filename will no longer crash Jekyll.&lt;/li&gt;
-  &lt;li&gt;The &lt;code&gt;titleize&lt;/code&gt; filter mistakenly dropped words that were already capitalized. Fixed!&lt;/li&gt;
-  &lt;li&gt;Permalinks which end in a slash will now always output as a folder with an &lt;code&gt;index.html&lt;/code&gt; inside.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;titleize&lt;/code&gt; filter mistakenly dropped words that were already capitalized. Fixed!&lt;/li&gt;
+  &lt;li&gt;Permalinks which end in a slash will now always output as a folder with an &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; inside.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Nitty-gritty details, like always, are available in the &lt;a href=&quot;/docs/history/&quot;&gt;history&lt;/a&gt;.&lt;/p&gt;
@@ -146,7 +146,7 @@ fixes:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Fix problem where outputting to a folder would have two extensions&lt;/li&gt;
-  &lt;li&gt;Handle tildes (&lt;code&gt;~&lt;/code&gt;) in filenames properly&lt;/li&gt;
+  &lt;li&gt;Handle tildes (&lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt;) in filenames properly&lt;/li&gt;
   &lt;li&gt;Fix issue when comparing documents without dates&lt;/li&gt;
   &lt;li&gt;Include line numbers in liquid error output&lt;/li&gt;
 &lt;/ul&gt;
@@ -177,10 +177,10 @@ you’re having.&lt;/p&gt;
 wonderful Jekyll users:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;If your &lt;code&gt;permalink&lt;/code&gt; ended with a &lt;code&gt;/&lt;/code&gt;, your URL didn’t have any extension,
+  &lt;li&gt;If your &lt;code class=&quot;highlighter-rouge&quot;&gt;permalink&lt;/code&gt; ended with a &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;, your URL didn’t have any extension,
 even if you wanted one&lt;/li&gt;
-  &lt;li&gt;We now strip the BOM by default per Ruby’s &lt;code&gt;IO.open&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;page.dir&lt;/code&gt; will not always end in a slash.&lt;/li&gt;
+  &lt;li&gt;We now strip the BOM by default per Ruby’s &lt;code class=&quot;highlighter-rouge&quot;&gt;IO.open&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;page.dir&lt;/code&gt; will not always end in a slash.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;We also updated our &lt;a href=&quot;/docs/conduct/&quot;&gt;Code of Conduct&lt;/a&gt; to the latest version of
@@ -223,13 +223,13 @@ considerably!&lt;/p&gt;
 &lt;p&gt;Some other highlights:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Fix: &lt;code&gt;permalink&lt;/code&gt;s with non-HTML extensions will not be honored&lt;/li&gt;
-  &lt;li&gt;Fix: &lt;code&gt;jekyll clean&lt;/code&gt; now accepts build flags like &lt;code&gt;--source&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Enhancement: &lt;code&gt;include&lt;/code&gt; tags can now accept multiple liquid variables&lt;/li&gt;
-  &lt;li&gt;Feature: adds new &lt;code&gt;sample&lt;/code&gt; liquid tag which gets random element from an array&lt;/li&gt;
+  &lt;li&gt;Fix: &lt;code class=&quot;highlighter-rouge&quot;&gt;permalink&lt;/code&gt;s with non-HTML extensions will not be honored&lt;/li&gt;
+  &lt;li&gt;Fix: &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll clean&lt;/code&gt; now accepts build flags like &lt;code class=&quot;highlighter-rouge&quot;&gt;--source&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Enhancement: &lt;code class=&quot;highlighter-rouge&quot;&gt;include&lt;/code&gt; tags can now accept multiple liquid variables&lt;/li&gt;
+  &lt;li&gt;Feature: adds new &lt;code class=&quot;highlighter-rouge&quot;&gt;sample&lt;/code&gt; liquid tag which gets random element from an array&lt;/li&gt;
   &lt;li&gt;Fix: Jekyll will read in files with YAML front matter that has extraneous
 spaces after the first line&lt;/li&gt;
-  &lt;li&gt;Enhancement: extract the &lt;code&gt;title&lt;/code&gt; attribute from the filename for
+  &lt;li&gt;Enhancement: extract the &lt;code class=&quot;highlighter-rouge&quot;&gt;title&lt;/code&gt; attribute from the filename for
 collection items without a date&lt;/li&gt;
   &lt;li&gt;Fix: gracefully handle empty configuration files&lt;/li&gt;
 &lt;/ul&gt;
@@ -269,8 +269,8 @@ midnightSuyama, musoke, and rebornix&lt;/p&gt;
 <content type="html" xml:base="https://jekyllrb.com/news/2016/01/20/jekyll-3-0-2-released/">&lt;p&gt;A crucial bug was found in v3.0.1 which caused invalid post dates to go
 unnoticed in the build chain until the error that popped up was unhelpful.
 v3.0.2 &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/4375&quot;&gt;throws errors as you’d expect&lt;/a&gt;
-when there is a post like &lt;code&gt;_posts/2016-22-01-future.md&lt;/code&gt; or a post has an
-invalid date like &lt;code&gt;date: &quot;tuesday&quot;&lt;/code&gt; in their front matter.&lt;/p&gt;
+when there is a post like &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts/2016-22-01-future.md&lt;/code&gt; or a post has an
+invalid date like &lt;code class=&quot;highlighter-rouge&quot;&gt;date: &quot;tuesday&quot;&lt;/code&gt; in their front matter.&lt;/p&gt;
 
 &lt;p&gt;This should make the experience of working with Jekyll just a little
 better.&lt;/p&gt;
@@ -291,10 +291,10 @@ better.&lt;/p&gt;
 <content type="html" xml:base="https://jekyllrb.com/news/2015/11/17/jekyll-3-0-1-released/">&lt;p&gt;Hey, folks! Bunch of bug fixes here. Notables:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Only superdirectories of &lt;code&gt;_posts&lt;/code&gt; will be categories.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;:title&lt;/code&gt; in permalink templates are now properly cased as before&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;.jekyll-metadata&lt;/code&gt; being erroneously written when not using incremental build.&lt;/li&gt;
-  &lt;li&gt;Failure in liquid will now always fail the &lt;code&gt;jekyll&lt;/code&gt; process.&lt;/li&gt;
+  &lt;li&gt;Only superdirectories of &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; will be categories.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;:title&lt;/code&gt; in permalink templates are now properly cased as before&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.jekyll-metadata&lt;/code&gt; being erroneously written when not using incremental build.&lt;/li&gt;
+  &lt;li&gt;Failure in liquid will now always fail the &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; process.&lt;/li&gt;
   &lt;li&gt;All hooks should now be properly registered &amp;amp; documented&lt;/li&gt;
 &lt;/ul&gt;
 

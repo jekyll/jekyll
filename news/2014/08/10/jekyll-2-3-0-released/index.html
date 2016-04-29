@@ -234,22 +234,22 @@ fixes. Some of the highlights:</p>
 curious bug indeed.</a></li>
   <li>Pages, Posts, and Drafts can now be converted by multiple converters.</li>
   <li>Static files can now be safely included in collections. They’ll be placed
-in a <code>collection.files</code> array. <code>collection.docs</code> still holds exclusively
+in a <code class="highlighter-rouge">collection.files</code> array. <code class="highlighter-rouge">collection.docs</code> still holds exclusively
 content with YAML front matter.</li>
   <li>Sass files can once again be rendered by Liquid. However, neither Sass
-nor CoffeeScript can ever have a layout. Bonus: <code>scssify</code> and <code>sassify</code>
+nor CoffeeScript can ever have a layout. Bonus: <code class="highlighter-rouge">scssify</code> and <code class="highlighter-rouge">sassify</code>
 Liquid filters.</li>
-  <li>Partial variables allowed now in the path argument of <code>include</code> calls</li>
-  <li>We added a <code>jekyll help</code> command. Pass it a subcommand to see more info
-about that subcommand. Or don’t, to see the help for <code>jekyll</code> itself.</li>
-  <li>Lots of fixes to the site template we use for <code>jekyll new</code>, including
+  <li>Partial variables allowed now in the path argument of <code class="highlighter-rouge">include</code> calls</li>
+  <li>We added a <code class="highlighter-rouge">jekyll help</code> command. Pass it a subcommand to see more info
+about that subcommand. Or don’t, to see the help for <code class="highlighter-rouge">jekyll</code> itself.</li>
+  <li>Lots of fixes to the site template we use for <code class="highlighter-rouge">jekyll new</code>, including
 converting the CSS into SCSS.</li>
-  <li>The <code>jsonify</code> filter will now call <code>#to_liquid</code> for you</li>
+  <li>The <code class="highlighter-rouge">jsonify</code> filter will now call <code class="highlighter-rouge">#to_liquid</code> for you</li>
   <li>Lots, lots more!</li>
 </ul>
 
 <p>One change deserves special note. In <a href="https://github.com/jekyll/jekyll/issues/2633">#2633</a>, subfolders <em>inside</em> a
-<code>_posts</code> folder were processed and added as categories to the posts. It
+<code class="highlighter-rouge">_posts</code> folder were processed and added as categories to the posts. It
 turns out, this behaviour was unwanted by a large number of individuals, as
 it is a handy way to organize posts. Ultimately, we decided to revert this
 change in <a href="https://github.com/jekyll/jekyll/issues/2705">#2705</a>, because it was a change in behaviour that was already

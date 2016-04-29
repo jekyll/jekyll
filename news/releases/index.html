@@ -271,7 +271,7 @@ we think you’ll love.</p>
 
 <ul>
   <li>Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source</li>
-  <li>Running <code>jekyll serve</code> with SSL enabled was broken due to a bad configuration.</li>
+  <li>Running <code class="highlighter-rouge">jekyll serve</code> with SSL enabled was broken due to a bad configuration.</li>
 </ul>
 
 <p>Both of these issues have been resolved. For more information, check out <a href="/docs/history/#v3-1-3">the full history</a>.</p>
@@ -309,13 +309,13 @@ we think you’ll love.</p>
 
 <ul>
   <li>Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source</li>
-  <li>Configuration for the posts permalink might be borked when a user specified a value for <code>collections.posts.permalink</code> directly. This forced the use of <code>permalink</code> at the top level, which also affected pages. To configure a permalink <em>just for posts</em>, you can do so with:</li>
+  <li>Configuration for the posts permalink might be borked when a user specified a value for <code class="highlighter-rouge">collections.posts.permalink</code> directly. This forced the use of <code class="highlighter-rouge">permalink</code> at the top level, which also affected pages. To configure a permalink <em>just for posts</em>, you can do so with:</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">posts</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">output</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
-    <span class="l-Scalar-Plain">permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/:year/:title/</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="s">collections</span><span class="pi">:</span>
+  <span class="s">posts</span><span class="pi">:</span>
+    <span class="s">output</span><span class="pi">:</span> <span class="s">true</span>
+    <span class="s">permalink</span><span class="pi">:</span> <span class="s">/blog/:year/:title/</span></code></pre></figure>
 
 <p>Both of these issues have been resolved. For more information, check out <a href="/docs/history/#v3-0-4">the full history</a>.</p>
 
@@ -353,8 +353,8 @@ we think you’ll love.</p>
   <li>If a syntax error is encountered by Liquid, it will now print the line number.</li>
   <li>A nasty war between symbols and strings in our configuration hash caused kramdown syntax highlighting to break. That has been resolved; you stand victorious!</li>
   <li>A tilde at the beginning of a filename will no longer crash Jekyll.</li>
-  <li>The <code>titleize</code> filter mistakenly dropped words that were already capitalized. Fixed!</li>
-  <li>Permalinks which end in a slash will now always output as a folder with an <code>index.html</code> inside.</li>
+  <li>The <code class="highlighter-rouge">titleize</code> filter mistakenly dropped words that were already capitalized. Fixed!</li>
+  <li>Permalinks which end in a slash will now always output as a folder with an <code class="highlighter-rouge">index.html</code> inside.</li>
 </ul>
 
 <p>Nitty-gritty details, like always, are available in the <a href="/docs/history/">history</a>.</p>
@@ -394,7 +394,7 @@ fixes:</p>
 
 <ul>
   <li>Fix problem where outputting to a folder would have two extensions</li>
-  <li>Handle tildes (<code>~</code>) in filenames properly</li>
+  <li>Handle tildes (<code class="highlighter-rouge">~</code>) in filenames properly</li>
   <li>Fix issue when comparing documents without dates</li>
   <li>Include line numbers in liquid error output</li>
 </ul>
@@ -440,10 +440,10 @@ you’re having.</p>
 wonderful Jekyll users:</p>
 
 <ul>
-  <li>If your <code>permalink</code> ended with a <code>/</code>, your URL didn’t have any extension,
+  <li>If your <code class="highlighter-rouge">permalink</code> ended with a <code class="highlighter-rouge">/</code>, your URL didn’t have any extension,
 even if you wanted one</li>
-  <li>We now strip the BOM by default per Ruby’s <code>IO.open</code>.</li>
-  <li><code>page.dir</code> will not always end in a slash.</li>
+  <li>We now strip the BOM by default per Ruby’s <code class="highlighter-rouge">IO.open</code>.</li>
+  <li><code class="highlighter-rouge">page.dir</code> will not always end in a slash.</li>
 </ul>
 
 <p>We also updated our <a href="/docs/conduct/">Code of Conduct</a> to the latest version of
@@ -501,13 +501,13 @@ considerably!</p>
 <p>Some other highlights:</p>
 
 <ul>
-  <li>Fix: <code>permalink</code>s with non-HTML extensions will not be honored</li>
-  <li>Fix: <code>jekyll clean</code> now accepts build flags like <code>--source</code>.</li>
-  <li>Enhancement: <code>include</code> tags can now accept multiple liquid variables</li>
-  <li>Feature: adds new <code>sample</code> liquid tag which gets random element from an array</li>
+  <li>Fix: <code class="highlighter-rouge">permalink</code>s with non-HTML extensions will not be honored</li>
+  <li>Fix: <code class="highlighter-rouge">jekyll clean</code> now accepts build flags like <code class="highlighter-rouge">--source</code>.</li>
+  <li>Enhancement: <code class="highlighter-rouge">include</code> tags can now accept multiple liquid variables</li>
+  <li>Feature: adds new <code class="highlighter-rouge">sample</code> liquid tag which gets random element from an array</li>
   <li>Fix: Jekyll will read in files with YAML front matter that has extraneous
 spaces after the first line</li>
-  <li>Enhancement: extract the <code>title</code> attribute from the filename for
+  <li>Enhancement: extract the <code class="highlighter-rouge">title</code> attribute from the filename for
 collection items without a date</li>
   <li>Fix: gracefully handle empty configuration files</li>
 </ul>
@@ -562,8 +562,8 @@ midnightSuyama, musoke, and rebornix</p>
     <p>A crucial bug was found in v3.0.1 which caused invalid post dates to go
 unnoticed in the build chain until the error that popped up was unhelpful.
 v3.0.2 <a href="https://github.com/jekyll/jekyll/issues/4375">throws errors as you’d expect</a>
-when there is a post like <code>_posts/2016-22-01-future.md</code> or a post has an
-invalid date like <code>date: "tuesday"</code> in their front matter.</p>
+when there is a post like <code class="highlighter-rouge">_posts/2016-22-01-future.md</code> or a post has an
+invalid date like <code class="highlighter-rouge">date: "tuesday"</code> in their front matter.</p>
 
 <p>This should make the experience of working with Jekyll just a little
 better.</p>
@@ -599,10 +599,10 @@ better.</p>
     <p>Hey, folks! Bunch of bug fixes here. Notables:</p>
 
 <ul>
-  <li>Only superdirectories of <code>_posts</code> will be categories.</li>
-  <li><code>:title</code> in permalink templates are now properly cased as before</li>
-  <li><code>.jekyll-metadata</code> being erroneously written when not using incremental build.</li>
-  <li>Failure in liquid will now always fail the <code>jekyll</code> process.</li>
+  <li>Only superdirectories of <code class="highlighter-rouge">_posts</code> will be categories.</li>
+  <li><code class="highlighter-rouge">:title</code> in permalink templates are now properly cased as before</li>
+  <li><code class="highlighter-rouge">.jekyll-metadata</code> being erroneously written when not using incremental build.</li>
+  <li>Failure in liquid will now always fail the <code class="highlighter-rouge">jekyll</code> process.</li>
   <li>All hooks should now be properly registered &amp; documented</li>
 </ul>
 
@@ -644,16 +644,16 @@ Will Norris, XhmikosR, chrisfinazzo, and rebornix.</p>
     <p>The much-anticipated Jekyll 3.0 has been released! Key changes:</p>
 
 <ul>
-  <li>Incremental regeneration (experimental, enable with <code>--incremental</code>)</li>
-  <li>Liquid profiler (add <code>--profile</code> to a build or serve)</li>
+  <li>Incremental regeneration (experimental, enable with <code class="highlighter-rouge">--incremental</code>)</li>
+  <li>Liquid profiler (add <code class="highlighter-rouge">--profile</code> to a build or serve)</li>
   <li>Hook plugin API (no more monkey-patching!)</li>
   <li>Dependencies reduced from 14 to 8, none contain C extensions. We’re hoping to reduce this even more in the future.</li>
   <li>Changed version support: no support for Ruby 1.9.3, added basic JRuby support. Better Windows support.</li>
   <li>Extension-less URLs</li>
-  <li><code>site.collections</code> is an array of collections, thus:
+  <li><code class="highlighter-rouge">site.collections</code> is an array of collections, thus:
     <ul>
-      <li><code>collection[0]</code> becomes <code>collection.label</code></li>
-      <li><code>collection[1]</code> becomes <code>collection</code></li>
+      <li><code class="highlighter-rouge">collection[0]</code> becomes <code class="highlighter-rouge">collection.label</code></li>
+      <li><code class="highlighter-rouge">collection[1]</code> becomes <code class="highlighter-rouge">collection</code></li>
     </ul>
   </li>
   <li>Default highlighter is now Rouge instead of Pygments</li>
@@ -714,7 +714,7 @@ improved problematic code that caused slow-downs.</li>
 
 <p>To install just run:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>gem install jekyll --pre</code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>gem install jekyll --pre</code></pre></figure>
 
 <p>Future versions will include <a href="https://github.com/jekyll/jekyll/issues/3324">some awesome new
 features</a> that we haven’t
@@ -796,8 +796,8 @@ Feel free to chime in over on GitHub.</p>
   </div>
   <div class="post-content">
     <p>A very minor release, 2.5.2 fixes a bug with path sanitation that 2.5.1
-introduced. It also improves the <code>post_url</code> tag such that it checks the
-posts’ name (e.g. <code>2014-03-03-my-cool-post</code>) instead of a compiled time and
+introduced. It also improves the <code class="highlighter-rouge">post_url</code> tag such that it checks the
+posts’ name (e.g. <code class="highlighter-rouge">2014-03-03-my-cool-post</code>) instead of a compiled time and
 name. This fixes issues where posts are created and the day changes based
 on timezone discrepancies.</p>
 
@@ -884,16 +884,16 @@ milestone with a pretty big release. What’s changed in 2.5.0? Here are some
 highlights:</p>
 
 <ul>
-  <li>Require plugins in the <code>:jekyll_plugins</code> Gemfile group (turned off with an environment variable)</li>
-  <li>YAML Front Matter permalinks can now contain placeholders like <code>:name</code>. Check out all the placeholders on the <a href="/docs/permalinks/">Permalinks docs page</a>.</li>
-  <li>The <code>jsonify</code> filter now deep-converts arrays to liquid.</li>
-  <li>Shorted <code>build</code> and <code>serve</code> commands with <code>b</code> and <code>s</code> aliases, respectively</li>
+  <li>Require plugins in the <code class="highlighter-rouge">:jekyll_plugins</code> Gemfile group (turned off with an environment variable)</li>
+  <li>YAML Front Matter permalinks can now contain placeholders like <code class="highlighter-rouge">:name</code>. Check out all the placeholders on the <a href="/docs/permalinks/">Permalinks docs page</a>.</li>
+  <li>The <code class="highlighter-rouge">jsonify</code> filter now deep-converts arrays to liquid.</li>
+  <li>Shorted <code class="highlighter-rouge">build</code> and <code class="highlighter-rouge">serve</code> commands with <code class="highlighter-rouge">b</code> and <code class="highlighter-rouge">s</code> aliases, respectively</li>
   <li>WEBrick will now list your directory if it can’t find an index file.</li>
-  <li>Any enumerable can be used with the <code>where</code> filter.</li>
+  <li>Any enumerable can be used with the <code class="highlighter-rouge">where</code> filter.</li>
   <li>Performance optimizations thanks to @tmm1’s <a href="https://github.com/tmm1/stackprof">stackprof</a></li>
   <li>Fix for Rouge’s Redcarpet interface</li>
   <li>Security auditors will love this: path sanitation has now been centralized.</li>
-  <li>Specify a log level with <code>JEKYLL_LOG_LEVEL</code>: debug, info, warn, or error.</li>
+  <li>Specify a log level with <code class="highlighter-rouge">JEKYLL_LOG_LEVEL</code>: debug, info, warn, or error.</li>
 </ul>
 
 <p>…and a whole bunch of other fixes and enhancements you can read more
@@ -947,14 +947,14 @@ Custódio, Igor Kapkov, and Kevin Ndung’u!</p>
     <p>Well, lookie here! A new release of Jekyll! v2.4.0 contains lots of goodies, including some brilliant new additions:</p>
 
 <ul>
-  <li>A new <code>relative_include</code> Liquid tag (<a href="https://github.com/jekyll/jekyll/issues/2870">#2870</a>)</li>
+  <li>A new <code class="highlighter-rouge">relative_include</code> Liquid tag (<a href="https://github.com/jekyll/jekyll/issues/2870">#2870</a>)</li>
   <li>Render Liquid in CoffeeScript files (<a href="https://github.com/jekyll/jekyll/issues/2830">#2830</a>)</li>
-  <li>Add 4 new array Liquid filters: <code>push</code>, <code>pop</code>, <code>shift</code>, and <code>unshift</code> (<a href="https://github.com/jekyll/jekyll/pull/2895">#2895</a>)</li>
-  <li>Auto-enable watch on ‘serve’ (<a href="https://github.com/jekyll/jekyll/issues/2858">#2858</a>). No more <code>-w</code>!</li>
-  <li>Add <code>:title</code> and <code>:name</code> to collection URL template fillers (<a href="https://github.com/jekyll/jekyll/issues/2864">#2864</a> &amp; <a href="https://github.com/jekyll/jekyll/issues/2799">#2799</a>)</li>
-  <li>Add support for CSV files in the <code>_data</code> directory (<a href="https://github.com/jekyll/jekyll/issues/2761">#2761</a>)</li>
-  <li>Add <code>inspect</code> liquid filter (<a href="https://github.com/jekyll/jekyll/issues/2867">#2867</a>)</li>
-  <li>Add a <code>slugify</code> Liquid filter (<a href="https://github.com/jekyll/jekyll/issues/2880">#2880</a>)</li>
+  <li>Add 4 new array Liquid filters: <code class="highlighter-rouge">push</code>, <code class="highlighter-rouge">pop</code>, <code class="highlighter-rouge">shift</code>, and <code class="highlighter-rouge">unshift</code> (<a href="https://github.com/jekyll/jekyll/pull/2895">#2895</a>)</li>
+  <li>Auto-enable watch on ‘serve’ (<a href="https://github.com/jekyll/jekyll/issues/2858">#2858</a>). No more <code class="highlighter-rouge">-w</code>!</li>
+  <li>Add <code class="highlighter-rouge">:title</code> and <code class="highlighter-rouge">:name</code> to collection URL template fillers (<a href="https://github.com/jekyll/jekyll/issues/2864">#2864</a> &amp; <a href="https://github.com/jekyll/jekyll/issues/2799">#2799</a>)</li>
+  <li>Add support for CSV files in the <code class="highlighter-rouge">_data</code> directory (<a href="https://github.com/jekyll/jekyll/issues/2761">#2761</a>)</li>
+  <li>Add <code class="highlighter-rouge">inspect</code> liquid filter (<a href="https://github.com/jekyll/jekyll/issues/2867">#2867</a>)</li>
+  <li>Add a <code class="highlighter-rouge">slugify</code> Liquid filter (<a href="https://github.com/jekyll/jekyll/issues/2880">#2880</a>)</li>
 </ul>
 
 <p>Some other wunderbar bug fixes in there as well. Check out the <a href="/docs/history/">full changelog</a> for the whole scoop.</p>
@@ -997,22 +997,22 @@ fixes. Some of the highlights:</p>
 curious bug indeed.</a></li>
   <li>Pages, Posts, and Drafts can now be converted by multiple converters.</li>
   <li>Static files can now be safely included in collections. They’ll be placed
-in a <code>collection.files</code> array. <code>collection.docs</code> still holds exclusively
+in a <code class="highlighter-rouge">collection.files</code> array. <code class="highlighter-rouge">collection.docs</code> still holds exclusively
 content with YAML front matter.</li>
   <li>Sass files can once again be rendered by Liquid. However, neither Sass
-nor CoffeeScript can ever have a layout. Bonus: <code>scssify</code> and <code>sassify</code>
+nor CoffeeScript can ever have a layout. Bonus: <code class="highlighter-rouge">scssify</code> and <code class="highlighter-rouge">sassify</code>
 Liquid filters.</li>
-  <li>Partial variables allowed now in the path argument of <code>include</code> calls</li>
-  <li>We added a <code>jekyll help</code> command. Pass it a subcommand to see more info
-about that subcommand. Or don’t, to see the help for <code>jekyll</code> itself.</li>
-  <li>Lots of fixes to the site template we use for <code>jekyll new</code>, including
+  <li>Partial variables allowed now in the path argument of <code class="highlighter-rouge">include</code> calls</li>
+  <li>We added a <code class="highlighter-rouge">jekyll help</code> command. Pass it a subcommand to see more info
+about that subcommand. Or don’t, to see the help for <code class="highlighter-rouge">jekyll</code> itself.</li>
+  <li>Lots of fixes to the site template we use for <code class="highlighter-rouge">jekyll new</code>, including
 converting the CSS into SCSS.</li>
-  <li>The <code>jsonify</code> filter will now call <code>#to_liquid</code> for you</li>
+  <li>The <code class="highlighter-rouge">jsonify</code> filter will now call <code class="highlighter-rouge">#to_liquid</code> for you</li>
   <li>Lots, lots more!</li>
 </ul>
 
 <p>One change deserves special note. In <a href="https://github.com/jekyll/jekyll/issues/2633">#2633</a>, subfolders <em>inside</em> a
-<code>_posts</code> folder were processed and added as categories to the posts. It
+<code class="highlighter-rouge">_posts</code> folder were processed and added as categories to the posts. It
 turns out, this behaviour was unwanted by a large number of individuals, as
 it is a handy way to organize posts. Ultimately, we decided to revert this
 change in <a href="https://github.com/jekyll/jekyll/issues/2705">#2705</a>, because it was a change in behaviour that was already
@@ -1053,7 +1053,7 @@ page</a>! Happy Jekylling!</p>
   <li>A warning will now fire if you specify a layout in any of your pages or
  posts that doesn’t exist.</li>
   <li>Certain Pygments options are now whitelisted in safe mode</li>
-  <li>Categories in a post’s path are now respected (i.e. folders in <code>_posts</code>
+  <li>Categories in a post’s path are now respected (i.e. folders in <code class="highlighter-rouge">_posts</code>
 will now work properly).</li>
 </ol>
 
@@ -1093,7 +1093,7 @@ introduces fixes for a couple security-related issues.</p>
 
 <ol>
   <li>One in the reading of data</li>
-  <li>One in the <code>layouts</code> setting</li>
+  <li>One in the <code class="highlighter-rouge">layouts</code> setting</li>
 </ol>
 
 <p>They were identified in Jekyll 1.5.1 and has been confirmed as patched
@@ -1101,7 +1101,7 @@ in this version and the version used by GitHub Pages. If you are in the
 business of building Jekyll sites, please ensure you upgrade to 2.1.1 as
 soon as possible.</p>
 
-<p>For more, check out <a href="https://github.com/jekyll/jekyll/pull/2563"><code>jekyll/jekyll#2563</code></a>.</p>
+<p>For more, check out <a href="https://github.com/jekyll/jekyll/pull/2563"><code class="highlighter-rouge">jekyll/jekyll#2563</code></a>.</p>
 
 <p>Additionally, the dependency on Maruku has been loosened and a bug was
 fixed with document URLs.</p>
@@ -1144,12 +1144,12 @@ things to look forward to:</p>
   <li>Uses the latest Liquid version (2.6.1) (#2495)</li>
   <li>Set front matter defaults for collections (#2419)</li>
   <li>Set a collection-specific URL template (#2418)</li>
-  <li><code>pygments.rb</code> 0.6.0! (#2504)</li>
-  <li><code>.json</code> files in <code>_data</code> (#2369)</li>
-  <li>Allow subdirectories in <code>_data</code> (#2395)</li>
-  <li>Add support for <code>hl_lines</code> in <code>highlight</code> tag (#2532)</li>
+  <li><code class="highlighter-rouge">pygments.rb</code> 0.6.0! (#2504)</li>
+  <li><code class="highlighter-rouge">.json</code> files in <code class="highlighter-rouge">_data</code> (#2369)</li>
+  <li>Allow subdirectories in <code class="highlighter-rouge">_data</code> (#2395)</li>
+  <li>Add support for <code class="highlighter-rouge">hl_lines</code> in <code class="highlighter-rouge">highlight</code> tag (#2532)</li>
   <li>Post categories now merge with directory, front matter, and defaults (#2373)</li>
-  <li>New <code>--skip_initial_build</code> flag for <code>jekyll serve</code> (#2477)</li>
+  <li>New <code class="highlighter-rouge">--skip_initial_build</code> flag for <code class="highlighter-rouge">jekyll serve</code> (#2477)</li>
   <li>A bajilion bug fixes and site updates!</li>
 </ul>
 
@@ -1229,11 +1229,11 @@ things to look forward to:</p>
 
 <ol>
   <li><a href="/docs/collections/">Collections</a> - Collections allow you to define an unlimited number of custom document types (beyond just posts and pages) for different types of content you may want to author in Jekyll such as API documentation or a cookbook!</li>
-  <li><a href="https://github.com/jekyll/jekyll/pull/2050#issuecomment-35938016">Brand new site template</a> (thanks <a href="https://github.com/jglovier">@jglovier</a>!) - Getting started with Jekyll just got a lot easier and a lot more beautiful. Just run <code>jekyll new &lt;path&gt;</code> and you’re good to go.</li>
+  <li><a href="https://github.com/jekyll/jekyll/pull/2050#issuecomment-35938016">Brand new site template</a> (thanks <a href="https://github.com/jglovier">@jglovier</a>!) - Getting started with Jekyll just got a lot easier and a lot more beautiful. Just run <code class="highlighter-rouge">jekyll new &lt;path&gt;</code> and you’re good to go.</li>
   <li><a href="/docs/assets/">Native Sass &amp; CoffeeScript support</a> - We love CSS and JavaScript as much as the next guy, but there will always be a special place in our hearts for Sass and CoffeeScript. We now offer native support for these file types — no more messing around with Rake or Grunt!</li>
-  <li><a href="/docs/configuration/#front-matter-defaults">YAML Front Matter defaults</a> - If you’ve set <code>layout: post</code> more than once in your life, you’ll love this new feature: set front matter defaults for a given directory or type.</li>
-  <li><a href="/docs/configuration/#custom-markdown-processors">Custom markdown processors</a> - Always wanted to use your favourite home-grown Markdown converter, but couldn’t with Jekyll? Now you can. Simply specify <code>markdown: MyConverterClass</code> and you’re on your way.</li>
-  <li><a href="/docs/templates/#filters">Addition of <code>where</code> and <code>group_by</code> Liquid filters</a> - Simplifying your Liquid templates one filter at a time. The <code>where</code> filter selects from an array all items within which have a given value for a property. The <code>group_by</code> filter groups all items in an array which have the same value for a given property.</li>
+  <li><a href="/docs/configuration/#front-matter-defaults">YAML Front Matter defaults</a> - If you’ve set <code class="highlighter-rouge">layout: post</code> more than once in your life, you’ll love this new feature: set front matter defaults for a given directory or type.</li>
+  <li><a href="/docs/configuration/#custom-markdown-processors">Custom markdown processors</a> - Always wanted to use your favourite home-grown Markdown converter, but couldn’t with Jekyll? Now you can. Simply specify <code class="highlighter-rouge">markdown: MyConverterClass</code> and you’re on your way.</li>
+  <li><a href="/docs/templates/#filters">Addition of <code class="highlighter-rouge">where</code> and <code class="highlighter-rouge">group_by</code> Liquid filters</a> - Simplifying your Liquid templates one filter at a time. The <code class="highlighter-rouge">where</code> filter selects from an array all items within which have a given value for a property. The <code class="highlighter-rouge">group_by</code> filter groups all items in an array which have the same value for a given property.</li>
   <li><a href="https://github.com/jekyll/jekyll/pull/1988">Switch from Maruku to Kramdown as default markdown converter</a> - Maruku is dead. We’ve replaced it with the converter which has the closest feature parity: Kramdown!</li>
 </ol>
 
@@ -1273,15 +1273,15 @@ things to look forward to:</p>
   </div>
   <div class="post-content">
     <p>The hawk-eyed <a href="https://github.com/gregose">@gregose</a> spotted a bug in our
-<code>Jekyll.sanitized_path</code> code:</p>
+<code class="highlighter-rouge">Jekyll.sanitized_path</code> code:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
-<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/../../../etc/passwd&quot;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">"/tmp/foobar/jail"</span><span class="p">,</span> <span class="s2">"..c:/..c:/..c:/etc/passwd"</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">"/tmp/foobar/jail/../../../etc/passwd"</span></code></pre></figure>
 
 <p>Well, we can’t have that! In 1.5.1, you’ll instead see:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
-<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/..c:/..c:/..c:/etc/passwd&quot;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">"/tmp/foobar/jail"</span><span class="p">,</span> <span class="s2">"..c:/..c:/..c:/etc/passwd"</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">"/tmp/foobar/jail/..c:/..c:/..c:/etc/passwd"</span></code></pre></figure>
 
 <p>Luckily not affecting 1.4.x, this fix will make 1.5.0 that much safer for
 the masses. Thanks, Greg!</p>
@@ -1313,7 +1313,7 @@ the masses. Thanks, Greg!</p>
   </div>
   <div class="post-content">
     <p>As work continues on Jekyll 2.0.0, we felt it was important to address two key
-issues of Jekyll 1.4.3, namely the <code>safe_yaml</code> dependency below 1.0 and the
+issues of Jekyll 1.4.3, namely the <code class="highlighter-rouge">safe_yaml</code> dependency below 1.0 and the
 inability to use Jekyll 1.4.3 on Windows due to a <a href="https://github.com/jekyll/jekyll/issues/1948">fun issue with path sanitizing</a>.</p>
 
 <p>For a full changelog, check out our <a href="/docs/history/#v1-5-0">history</a> page.</p>
@@ -1358,7 +1358,7 @@ generated output via improper symlink sanitization, potentially resulting in an
 inadvertent information disclosure.</p>
 
 <p>Versions of Jekyll prior to 1.4.3 may also allow malicious users to write
-arbitrary <code>.html</code> files outside of the destination folder via relative path
+arbitrary <code class="highlighter-rouge">.html</code> files outside of the destination folder via relative path
 traversal, potentially overwriting otherwise-trusted content with arbitrary HTML
 or Javascript depending on your server’s configuration.</p>
 
@@ -1393,8 +1393,8 @@ these vulnerabilities, and to @BenBalter and @alindeman for writing the patch.</
   <div class="post-content">
     <p>This release fixes <a href="https://github.com/jekyll/jekyll/pull/1830">a regression</a> where Maruku fenced code blocks were turned
 off, instead of the previous default to on. We’ve added a new default
-configuration to our <code>maruku</code> config key: <code>fenced_code_blocks</code> and set it to
-default to <code>true</code>.</p>
+configuration to our <code class="highlighter-rouge">maruku</code> config key: <code class="highlighter-rouge">fenced_code_blocks</code> and set it to
+default to <code class="highlighter-rouge">true</code>.</p>
 
 <p>If you do not wish to use Maruku fenced code blocks, you may turn this option
 off in your site’s configuration file.</p>
@@ -1477,7 +1477,7 @@ Jekyll v1.4.0. This release will be the last non-patch release to support Ruby
 a ton of bugfixes over the previous 0.6.x releases.</p>
   </li>
   <li>
-    <p>Non-<code>gem</code> Plugins are now sorted alphabetically by filename before they’re
+    <p>Non-<code class="highlighter-rouge">gem</code> Plugins are now sorted alphabetically by filename before they’re
 processed, which can provide a rudimentary way to establish a load order for
 plugins.</p>
   </li>
@@ -1521,7 +1521,7 @@ Karékinian, Jordon Bedwell, Matthew Iversen, Persa Zula, and Yi Zeng.</p>
 release of 1.3.0.</p>
 
 <p>In addition to a couple of other smaller bug fixes, the biggest thing
-we’ve fixed is an issue with the <code>--watch</code> option with Ruby 1.8.7. For a
+we’ve fixed is an issue with the <code class="highlighter-rouge">--watch</code> option with Ruby 1.8.7. For a
 full run-down, visit our <a href="/docs/history/">change log</a>!</p>
 
 <p>Thanks to all the people who have contributed to this release! They are
@@ -1565,33 +1565,33 @@ love.</p>
 <ul>
   <li>
     <p>You can add <a href="/docs/datafiles/">arbitrary data</a> to the site by adding YAML files under a
-site’s <code>_data</code> directory. This will allow you to avoid
+site’s <code class="highlighter-rouge">_data</code> directory. This will allow you to avoid
 repetition in your templates and to set site specific options without
-changing <code>_config.yml</code>.</p>
+changing <code class="highlighter-rouge">_config.yml</code>.</p>
   </li>
   <li>
-    <p>You can now run <code>jekyll serve --detach</code> to boot up a WEBrick server in the
-background. <strong>Note:</strong> you’ll need to run <code>kill [server_pid]</code> to shut
+    <p>You can now run <code class="highlighter-rouge">jekyll serve --detach</code> to boot up a WEBrick server in the
+background. <strong>Note:</strong> you’ll need to run <code class="highlighter-rouge">kill [server_pid]</code> to shut
 the server down. When ran, you’ll get a process id that you can use in
-place of <code>[server_pid]</code></p>
+place of <code class="highlighter-rouge">[server_pid]</code></p>
   </li>
   <li>
     <p>You can now <strong>disable automatically-generated excerpts</strong> if you set
-<code>excerpt_separator</code> to <code>""</code>.</p>
+<code class="highlighter-rouge">excerpt_separator</code> to <code class="highlighter-rouge">""</code>.</p>
   </li>
   <li>
     <p>If you’re moving pages and posts, you can now check for <strong>URL
-conflicts</strong> by running <code>jekyll doctor</code>.</p>
+conflicts</strong> by running <code class="highlighter-rouge">jekyll doctor</code>.</p>
   </li>
   <li>
     <p>If you’re a fan of the drafts feature, you’ll be happy to know we’ve
-added <code>-D</code>, a shortened version of <code>--drafts</code>.</p>
+added <code class="highlighter-rouge">-D</code>, a shortened version of <code class="highlighter-rouge">--drafts</code>.</p>
   </li>
   <li>
     <p>Permalinks with special characters should now generate without errors.</p>
   </li>
   <li>
-    <p>Expose the current Jekyll version as the <code>jekyll.version</code> Liquid
+    <p>Expose the current Jekyll version as the <code class="highlighter-rouge">jekyll.version</code> Liquid
 variable.</p>
   </li>
 </ul>
@@ -1662,11 +1662,11 @@ issues!</p>
   <div class="post-content">
     <p>Quick turnover, anyone? A <a href="https://github.com/jekyll/jekyll/pull/1525">recent incompatibility with Liquid
 v2.5.2</a> produced a nasty bug in
-which <code>include</code> tags were not rendered properly within <code>if</code> blocks.</p>
+which <code class="highlighter-rouge">include</code> tags were not rendered properly within <code class="highlighter-rouge">if</code> blocks.</p>
 
 <p>This release also includes a better handling of detached servers (prints pid and
-the command for killing the process). <strong>Note</strong>: the <code>--detach</code> flag and
-<code>--watch</code> flags are presently incompatible in 1.2.x. Fix for that coming soon!</p>
+the command for killing the process). <strong>Note</strong>: the <code class="highlighter-rouge">--detach</code> flag and
+<code class="highlighter-rouge">--watch</code> flags are presently incompatible in 1.2.x. Fix for that coming soon!</p>
 
 <p>For a full list of the fixes in this release, check out <a href="/docs/history/">the change
 log</a>!</p>
@@ -1704,12 +1704,12 @@ enhancements that we think you’ll love.</p>
 <p>Here are a few things we think you’ll want to know about this release:</p>
 
 <ul>
-  <li>Run <code>jekyll serve --detach</code> to boot up a WEBrick server in the background. <strong>Note:</strong> you’ll need to run <code>kill [server_pid]</code> to shut the server down.</li>
-  <li>You can now <strong>disable automatically-generated excerpts</strong> if you set <code>excerpt_separator</code> to <code>""</code>.</li>
-  <li>If you’re moving around pages and post, you can now check for <strong>URL conflicts</strong> by running <code>jekyll doctor</code>.</li>
-  <li>If you’re a fan of the drafts feature, you’ll be happy to know we’ve added <code>-D</code>, a shortened version of <code>--drafts</code>.</li>
+  <li>Run <code class="highlighter-rouge">jekyll serve --detach</code> to boot up a WEBrick server in the background. <strong>Note:</strong> you’ll need to run <code class="highlighter-rouge">kill [server_pid]</code> to shut the server down.</li>
+  <li>You can now <strong>disable automatically-generated excerpts</strong> if you set <code class="highlighter-rouge">excerpt_separator</code> to <code class="highlighter-rouge">""</code>.</li>
+  <li>If you’re moving around pages and post, you can now check for <strong>URL conflicts</strong> by running <code class="highlighter-rouge">jekyll doctor</code>.</li>
+  <li>If you’re a fan of the drafts feature, you’ll be happy to know we’ve added <code class="highlighter-rouge">-D</code>, a shortened version of <code class="highlighter-rouge">--drafts</code>.</li>
   <li>Permalinks with special characters should now generate without errors.</li>
-  <li>Expose the current Jekyll version as the <code>jekyll.version</code> Liquid variable.</li>
+  <li>Expose the current Jekyll version as the <code class="highlighter-rouge">jekyll.version</code> Liquid variable.</li>
 </ul>
 
 <p>For a full run-down, visit our <a href="/docs/history/">change log</a>!</p>
@@ -1742,9 +1742,9 @@ enhancements that we think you’ll love.</p>
   <div class="post-content">
     <p>Version 1.1.2 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<p>Community and custom plugins extending the <code class="highlighter-rouge">Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
 
-<p>We recommend you upgrade to Jekyll v1.1.2 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
+<p>We recommend you upgrade to Jekyll v1.1.2 immediately if you use <code class="highlighter-rouge">Liquid::Drop</code> plugins on your Jekyll site.</p>
 
 <p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
 and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
@@ -1778,9 +1778,9 @@ and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a
   <div class="post-content">
     <p>Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.</p>
 
-<p>Community and custom plugins extending the <code>Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
+<p>Community and custom plugins extending the <code class="highlighter-rouge">Liquid::Drop</code> class may inadvertently disclose some system information such as directory structure or software configuration to users with access to the Liquid templating system.</p>
 
-<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code>Liquid::Drop</code> plugins on your Jekyll site.</p>
+<p>We recommend you upgrade to Jekyll v1.0.4 immediately if you use <code class="highlighter-rouge">Liquid::Drop</code> plugins on your Jekyll site.</p>
 
 <p>Many thanks for <a href="https://github.com/benbalter">Ben Balter</a> for alerting us to the problem
 and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a> so quickly.</p>
@@ -1856,12 +1856,12 @@ v1.1.0!</a></p>
 Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new additions:</p>
 
 <ul>
-  <li>Add <code>docs</code> subcommand to read Jekyll’s docs when offline. (<a href="https://github.com/jekyll/jekyll/issues/1046">#1046</a>)</li>
-  <li>Support passing parameters to templates in <code>include</code> tag (<a href="https://github.com/jekyll/jekyll/issues/1204">#1204</a>)</li>
+  <li>Add <code class="highlighter-rouge">docs</code> subcommand to read Jekyll’s docs when offline. (<a href="https://github.com/jekyll/jekyll/issues/1046">#1046</a>)</li>
+  <li>Support passing parameters to templates in <code class="highlighter-rouge">include</code> tag (<a href="https://github.com/jekyll/jekyll/issues/1204">#1204</a>)</li>
   <li>Add support for Liquid tags to post excerpts (<a href="https://github.com/jekyll/jekyll/issues/1302">#1302</a>)</li>
   <li>Fix pagination for subdirectories (<a href="https://github.com/jekyll/jekyll/issues/1198">#1198</a>)</li>
   <li>Provide better error reporting when generating sites (<a href="https://github.com/jekyll/jekyll/issues/1253">#1253</a>)</li>
-  <li>Latest posts first in non-LSI <code>related_posts</code> (<a href="https://github.com/jekyll/jekyll/issues/1271">#1271</a>)</li>
+  <li>Latest posts first in non-LSI <code class="highlighter-rouge">related_posts</code> (<a href="https://github.com/jekyll/jekyll/issues/1271">#1271</a>)</li>
 </ul>
 
 <p>See the <a href="https://github.com/jekyll/jekyll/releases/tag/v1.1.0">GitHub Release</a> page for more a more detailed changelog for this release.</p>
@@ -1897,10 +1897,10 @@ Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new add
 
 <ul>
   <li>Fail with non-zero exit code when MaRuKu errors (<a href="https://github.com/jekyll/jekyll/issues/1190">#1190</a>) or Liquid errors (<a href="https://github.com/jekyll/jekyll/issues/1121">#1121</a>)</li>
-  <li>Add support for private gists to <code>gist</code> tag (<a href="https://github.com/jekyll/jekyll/issues/1189">#1189</a>)</li>
-  <li>Add <code>--force</code> option to <code>jekyll new</code> (<a href="https://github.com/jekyll/jekyll/issues/1115">#1115</a>)</li>
-  <li>Fix compatibility with <code>exclude</code> and <code>include</code> with pre-1.0 Jekyll (<a href="https://github.com/jekyll/jekyll/issues/1114">#1114</a>)</li>
-  <li>Fix pagination issue regarding <code>File.basename</code> and <code>page:num</code> (<a href="https://github.com/jekyll/jekyll/issues/1063">#1063</a>)</li>
+  <li>Add support for private gists to <code class="highlighter-rouge">gist</code> tag (<a href="https://github.com/jekyll/jekyll/issues/1189">#1189</a>)</li>
+  <li>Add <code class="highlighter-rouge">--force</code> option to <code class="highlighter-rouge">jekyll new</code> (<a href="https://github.com/jekyll/jekyll/issues/1115">#1115</a>)</li>
+  <li>Fix compatibility with <code class="highlighter-rouge">exclude</code> and <code class="highlighter-rouge">include</code> with pre-1.0 Jekyll (<a href="https://github.com/jekyll/jekyll/issues/1114">#1114</a>)</li>
+  <li>Fix pagination issue regarding <code class="highlighter-rouge">File.basename</code> and <code class="highlighter-rouge">page:num</code> (<a href="https://github.com/jekyll/jekyll/issues/1063">#1063</a>)</li>
 </ul>
 
 <p>See the <a href="/docs/history/#v1-0-3">History</a> page for more information on this release.</p>
@@ -1937,11 +1937,11 @@ releases, and fix some other annoying bugs:</p>
 
 <ul>
   <li>Backwards-compatibilize relative permalinks (<a href="https://github.com/jekyll/jekyll/issues/1081">#1081</a>)</li>
-  <li>Add <code>jekyll doctor</code> command to check site for any known compatibility problems (<a href="https://github.com/jekyll/jekyll/issues/1081">#1081</a>)</li>
-  <li>Deprecate old config <code>server_port</code>, match to <code>port</code> if <code>port</code> isn’t set (<a href="https://github.com/jekyll/jekyll/issues/1084">#1084</a>)</li>
+  <li>Add <code class="highlighter-rouge">jekyll doctor</code> command to check site for any known compatibility problems (<a href="https://github.com/jekyll/jekyll/issues/1081">#1081</a>)</li>
+  <li>Deprecate old config <code class="highlighter-rouge">server_port</code>, match to <code class="highlighter-rouge">port</code> if <code class="highlighter-rouge">port</code> isn’t set (<a href="https://github.com/jekyll/jekyll/issues/1084">#1084</a>)</li>
   <li>Update pygments.rb and kramdon versions to 0.5.0 and 1.0.2, respectively (<a href="https://github.com/jekyll/jekyll/issues/1061">#1061</a>, <a href="https://github.com/jekyll/jekyll/issues/1067">#1067</a>)</li>
   <li>Fix issue when post categories are numbers (<a href="https://github.com/jekyll/jekyll/issues/1078">#1078</a>)</li>
-  <li>Add a <code>data-lang="&lt;lang&gt;"</code> attribute to Redcarpet code blocks (<a href="https://github.com/jekyll/jekyll/issues/1066">#1066</a>)</li>
+  <li>Add a <code class="highlighter-rouge">data-lang="&lt;lang&gt;"</code> attribute to Redcarpet code blocks (<a href="https://github.com/jekyll/jekyll/issues/1066">#1066</a>)</li>
   <li>Catching that Redcarpet gem isn’t installed (<a href="https://github.com/jekyll/jekyll/issues/1059">#1059</a>)</li>
 </ul>
 
@@ -1977,13 +1977,13 @@ releases, and fix some other annoying bugs:</p>
     <p>Hot on the trails of v1.0, v1.0.1 is out! Here are the highlights:</p>
 
 <ul>
-  <li>Add newer <code>language-</code> class name prefix to code blocks (<a href="https://github.com/jekyll/jekyll/issues/1037">#1037</a>)</li>
+  <li>Add newer <code class="highlighter-rouge">language-</code> class name prefix to code blocks (<a href="https://github.com/jekyll/jekyll/issues/1037">#1037</a>)</li>
   <li>Commander error message now preferred over process abort with incorrect args (<a href="https://github.com/jekyll/jekyll/issues/1040">#1040</a>)</li>
   <li>Do not force use of toc_token when using generate_toc in RDiscount (<a href="https://github.com/jekyll/jekyll/issues/1048">#1048</a>)</li>
   <li>Make Redcarpet respect the pygments configuration option (<a href="https://github.com/jekyll/jekyll/issues/1053">#1053</a>)</li>
   <li>Fix the index build with LSI (<a href="https://github.com/jekyll/jekyll/issues/1045">#1045</a>)</li>
   <li>Don’t print deprecation warning when no arguments are specified. (<a href="https://github.com/jekyll/jekyll/issues/1041">#1041</a>)</li>
-  <li>Add missing <code>&lt;/div&gt;</code> to site template used by <code>new</code> subcommand, fixed typos in code (<a href="https://github.com/jekyll/jekyll/issues/1032">#1032</a>)</li>
+  <li>Add missing <code class="highlighter-rouge">&lt;/div&gt;</code> to site template used by <code class="highlighter-rouge">new</code> subcommand, fixed typos in code (<a href="https://github.com/jekyll/jekyll/issues/1032">#1032</a>)</li>
 </ul>
 
 <p>See the <a href="/docs/history/#v1-0-1">History</a> page for more information on this release.</p>

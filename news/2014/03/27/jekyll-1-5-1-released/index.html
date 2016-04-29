@@ -227,15 +227,15 @@
   </div>
   <div class="post-content">
     <p>The hawk-eyed <a href="https://github.com/gregose">@gregose</a> spotted a bug in our
-<code>Jekyll.sanitized_path</code> code:</p>
+<code class="highlighter-rouge">Jekyll.sanitized_path</code> code:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
-<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/../../../etc/passwd&quot;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">"/tmp/foobar/jail"</span><span class="p">,</span> <span class="s2">"..c:/..c:/..c:/etc/passwd"</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">"/tmp/foobar/jail/../../../etc/passwd"</span></code></pre></figure>
 
 <p>Well, we can’t have that! In 1.5.1, you’ll instead see:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">&quot;/tmp/foobar/jail&quot;</span><span class="p">,</span> <span class="s2">&quot;..c:/..c:/..c:/etc/passwd&quot;</span><span class="p">)</span>
-<span class="o">=&gt;</span> <span class="s2">&quot;/tmp/foobar/jail/..c:/..c:/..c:/etc/passwd&quot;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">&gt;</span> <span class="n">sanitized_path</span><span class="p">(</span><span class="s2">"/tmp/foobar/jail"</span><span class="p">,</span> <span class="s2">"..c:/..c:/..c:/etc/passwd"</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="s2">"/tmp/foobar/jail/..c:/..c:/..c:/etc/passwd"</span></code></pre></figure>
 
 <p>Luckily not affecting 1.4.x, this fix will make 1.5.0 that much safer for
 the masses. Thanks, Greg!</p>

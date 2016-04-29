@@ -230,13 +230,13 @@
 
 <ul>
   <li>Front matter defaults may not have worked for collection documents and posts due to a problem where they were looked up by their URL rather than their path relative to the site source</li>
-  <li>Configuration for the posts permalink might be borked when a user specified a value for <code>collections.posts.permalink</code> directly. This forced the use of <code>permalink</code> at the top level, which also affected pages. To configure a permalink <em>just for posts</em>, you can do so with:</li>
+  <li>Configuration for the posts permalink might be borked when a user specified a value for <code class="highlighter-rouge">collections.posts.permalink</code> directly. This forced the use of <code class="highlighter-rouge">permalink</code> at the top level, which also affected pages. To configure a permalink <em>just for posts</em>, you can do so with:</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">collections</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">posts</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">output</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
-    <span class="l-Scalar-Plain">permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/:year/:title/</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="s">collections</span><span class="pi">:</span>
+  <span class="s">posts</span><span class="pi">:</span>
+    <span class="s">output</span><span class="pi">:</span> <span class="s">true</span>
+    <span class="s">permalink</span><span class="pi">:</span> <span class="s">/blog/:year/:title/</span></code></pre></figure>
 
 <p>Both of these issues have been resolved. For more information, check out <a href="/docs/history/#v3-0-4">the full history</a>.</p>
 
