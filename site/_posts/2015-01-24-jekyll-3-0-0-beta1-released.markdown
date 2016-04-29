@@ -20,7 +20,7 @@ to get a feel for what changes are afoot. Key features:
 
 To install just run:
 
-{% highlight bash %}
+{% highlight shell %}
 $ gem install jekyll --pre
 {% endhighlight %}
 
