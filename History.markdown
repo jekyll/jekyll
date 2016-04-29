@@ -39,6 +39,7 @@
   * convertible: use Document::YAML_FRONT_MATTER_REGEXP to parse transformable files (#4786)
   * Example in the site template should be IANA-approved example.com (#4793)
   * 3.2.x/master: Fix defaults for Documents (posts/collection docs) (#4808)
+  * Don't rescue LoadError or bundler load errors for Bundler. (#4857)
 
 ### Development Fixes
 
