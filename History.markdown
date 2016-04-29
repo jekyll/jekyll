@@ -84,6 +84,7 @@
   * Organize Form Platforms-as-a-Service into unified list & add FormSpree.io (#4754)
   * Fixed typo on Configuration page (#4804)
   * Update FormKeep URL on the Resources doc (#4844)
+  * site: use liquid & reduce some whitespace noise (#4854)
 
 ## 3.1.3 / 2016-04-18
 
