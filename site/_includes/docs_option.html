@@ -1,11 +1,5 @@
-{% assign items = include.items %}
-
-{% for item in items %}
+{% for item in include.items %}
   {% assign item_url = item | prepend:"/docs/" | append:"/" %}
-
-  {% for p in site.docs %}
-    {% if p.url == item_url %}
-      <option value="{{ site.url }}{{ p.url }}">{{ p.title }}</option>
-    {% endif %}
-  {% endfor %}
+  {% assign doc = site.docs | where: "url", item_url | first %}
+  <option value="{{ site.url }}{{ doc.url }}">{{ doc.title }}</option>
 {% endfor %}
