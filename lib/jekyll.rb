@@ -16,6 +16,7 @@ end
 require 'rubygems'
 
 # stdlib
+require "pathutil"
 require 'forwardable'
 require 'fileutils'
 require 'time'
