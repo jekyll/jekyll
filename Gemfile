@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
-gem "rake", "~> 10.1"
+gem "rake", "~> 11.0"
 group :development do
   gem "launchy", "~> 2.3"
-  gem "rubocop", :branch => :master, :github => "bbatsov/rubocop"
+  gem "rubocop"
   gem "pry"
 
   unless RUBY_ENGINE == "jruby"
@@ -22,6 +22,7 @@ group :test do
   gem "rspec-mocks"
   gem "nokogiri"
   gem "rspec"
+  gem "test-theme", path: File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
 end
 
 #
@@ -55,7 +56,7 @@ end
 group :jekyll_optional_dependencies do
   gem "toml", "~> 0.1.0"
   gem "coderay", "~> 1.1.0"
-  gem "jekyll-docs", :path => '../docs' if Dir.exist?('../docs')
+  gem "jekyll-docs", :path => '../docs' if Dir.exist?('../docs') && ENV['JEKYLL_VERSION']
   gem "jekyll-gist", "~> 1.0"
   gem "jekyll-feed", "~> 0.1.3"
   gem "jekyll-coffeescript", "~> 1.0"
@@ -81,7 +82,7 @@ group :site do
     gem "html-proofer", "~> 2.0"
   end
 
-  gem "jemoji"
+  gem "jemoji", "0.5.1"
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag", "~> 1.1"
   gem "jekyll-avatar"

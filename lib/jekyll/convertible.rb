@@ -39,9 +39,9 @@ module Jekyll
       filename = File.join(base, name)
 
       begin
-        self.content = File.read(site.in_source_dir(base, name),
+        self.content = File.read(@path || site.in_source_dir(base, name),
                                  Utils.merged_file_read_opts(site, opts))
-        if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+        if content =~ Document::YAML_FRONT_MATTER_REGEXP
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
@@ -215,9 +215,9 @@ module Jekyll
         payload["layout"]  = Utils.deep_merge_hashes(payload["layout"] || {}, layout.data)
 
         self.output = render_liquid(layout.content,
-                                         payload,
-                                         info,
-                                         File.join(site.config['layouts_dir'], layout.name))
+                                    payload,
+                                    info,
+                                    layout.relative_path)
 
         # Add layout to dependency tree
         site.regenerator.add_dependency(

@@ -8,15 +8,40 @@ module Jekyll
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :plugin_manager
+                  :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
 
     # Public: Initialize a new Site.
     #
     # config - A Hash containing site configuration details.
     def initialize(config)
+      # Source and destination may not be changed after the site has been created.
+      @source          = File.expand_path(config['source']).freeze
+      @dest            = File.expand_path(config['destination']).freeze
+
+      self.config = config
+
+      @reader          = Reader.new(self)
+      @regenerator     = Regenerator.new(self)
+      @liquid_renderer = LiquidRenderer.new(self)
+
+      Jekyll.sites << self
+
+      Jekyll::Hooks.trigger :site, :after_init, self
+
+      reset
+      setup
+    end
+
+    # Public: Set the site's configuration. This handles side-effects caused by
+    # changing values in the configuration.
+    #
+    # config - a Jekyll::Configuration, containing the new configuration.
+    #
+    # Returns the new configuration.
+    def config=(config)
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
@@ -24,29 +49,21 @@ module Jekyll
         self.send("#{opt}=", config[opt])
       end
 
-      # Source and destination may not be changed after the site has been created.
-      @source              = File.expand_path(config['source']).freeze
-      @dest                = File.expand_path(config['destination']).freeze
-
-      @reader = Jekyll::Reader.new(self)
-
-      # Initialize incremental regenerator
-      @regenerator = Regenerator.new(self)
-
-      @liquid_renderer = LiquidRenderer.new(self)
-
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
+
+      self.theme = nil
+      self.theme = Jekyll::Theme.new(config["theme"]) if config["theme"]
+
+      @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
+      @includes_load_paths << theme.includes_path if self.theme
 
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config['encoding'] if config['encoding']
 
       self.permalink_style = config['permalink'].to_sym
 
-      Jekyll.sites << self
-
-      reset
-      setup
+      @config
     end
 
     # Public: Read, process, and write this Site to output.
@@ -352,6 +369,19 @@ module Jekyll
     # Returns a path which is prefixed with the source directory.
     def in_source_dir(*paths)
       paths.reduce(source) do |base, path|
+        Jekyll.sanitized_path(base, path)
+      end
+    end
+
+    # Public: Prefix a given path with the theme directory.
+    #
+    # paths - (optional) path elements to a file or directory within the
+    #         theme directory
+    #
+    # Returns a path which is prefixed with the theme root directory.
+    def in_theme_dir(*paths)
+      return nil unless theme
+      paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
     end

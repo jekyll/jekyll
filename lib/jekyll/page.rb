@@ -40,6 +40,7 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
+      @path = site.in_source_dir(base, dir, name)
 
       process(name)
       read_yaml(File.join(base, dir), name)

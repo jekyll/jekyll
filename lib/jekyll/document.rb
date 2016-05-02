@@ -68,7 +68,11 @@ module Jekyll
     end
 
     def date
-      data['date'] ||= site.time
+      data['date'] ||= (draft? ? source_file_mtime : site.time)
+    end
+
+    def source_file_mtime
+      @source_file_mtime ||= File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if
@@ -259,7 +263,7 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
-          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
+          defaults = @site.frontmatter_defaults.all(relative_path, collection.label.to_sym)
           merge_data!(defaults, source: "front matter defaults") unless defaults.empty?
 
           self.content = File.read(path, Utils.merged_file_read_opts(site, opts))

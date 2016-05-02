@@ -40,6 +40,8 @@ module Jekyll
 
       if document.is_a?(Document) && document.collection.label == 'posts'
         payload['site']['related_posts'] = document.related_posts
+      else
+        payload['site']['related_posts'] = nil
       end
 
       # render and transform content (this becomes the final content of the object)
@@ -50,7 +52,6 @@ module Jekyll
       document.trigger_hooks(:pre_render, payload)
 
       info = {
-        :filters   => [Jekyll::Filters],
         :registers => { :site => site, :page => payload['page'] }
       }
 
@@ -144,7 +145,7 @@ module Jekyll
           layout.content,
           payload,
           info,
-          File.join(site.config['layouts_dir'], layout.name)
+          layout.relative_path
         )
 
         # Add layout to dependency tree

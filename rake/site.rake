@@ -5,7 +5,7 @@
 #############################################################################
 
 namespace :site do
-  task :generated_pages => [:history, :version_file, :conduct]
+  task :generated_pages => [:history, :version_file, :conduct, :contributing]
 
   desc "Generate and view the site locally"
   task :preview => :generated_pages do
@@ -103,41 +103,21 @@ namespace :site do
 
   desc "Create a nicely formatted history page for the jekyll site based on the repo history."
   task :history do
-    if File.exist?("History.markdown")
-      history_file = File.read("History.markdown")
-      front_matter = {
-        "layout" => "docs",
-        "title" => "History",
-        "permalink" => "/docs/history/"
-      }
-      Dir.chdir('site/_docs/') do
-        File.open("history.md", "w") do |file|
-          file.write("#{front_matter.to_yaml}---\n\n")
-          file.write(converted_history(history_file))
-        end
-      end
-    else
-      abort "You seem to have misplaced your History.markdown file. I can haz?"
-    end
+    siteify_file('History.markdown', { "title" => "History" })
   end
 
   desc "Copy the Code of Conduct"
   task :conduct do
-    code_of_conduct = File.read("CONDUCT.markdown")
-    header, _, body = code_of_conduct.partition("\n\n")
     front_matter = {
-      "layout"        => "docs",
-      "title"         => header.sub('# Contributor ', ''),
-      "permalink"     => "/docs/conduct/",
       "redirect_from" => "/conduct/index.html",
       "editable"      => false
     }
-    Dir.chdir('site/_docs') do
-      File.open("conduct.md", "w") do |file|
-        file.write("#{front_matter.to_yaml}---\n\n")
-        file.write(body)
-      end
-    end
+    siteify_file('CONDUCT.markdown', front_matter)
+  end
+
+  desc "Copy the contributing file"
+  task :contributing do
+    siteify_file('.github/CONTRIBUTING.markdown', "title" => "Contributing")
   end
 
   desc "Write the site latest_version.txt file"

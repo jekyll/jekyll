@@ -35,7 +35,11 @@ module Jekyll
       read_content(dir, magic_dir, matcher).tap do |docs|
         docs.each(&:read)
       end.select do |doc|
-        site.publisher.publish?(doc)
+        site.publisher.publish?(doc).tap do |will_publish|
+          if !will_publish && site.publisher.hidden_in_the_future?(doc)
+            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+          end
+        end
       end
     end
 

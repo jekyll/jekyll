@@ -63,12 +63,12 @@ class TestURL < JekyllUnitTest
         },
       })
       site.read
-      doc = site.collections["methods"].docs.find do |doc|
+      matching_doc = site.collections["methods"].docs.find do |doc|
         doc.relative_path == "_methods/escape-+ #%20[].md"
       end
       assert_equal '/methods/escape-+-20/escape-20.html', URL.new(
         :template => '/methods/:title/:name:output_ext',
-        :placeholders => doc.url_placeholders
+        :placeholders => matching_doc.url_placeholders
       ).to_s
     end
 

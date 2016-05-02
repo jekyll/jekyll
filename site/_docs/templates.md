@@ -90,6 +90,22 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Where Expression</strong></p>
+        <p>Select all the objects in an array where the expression is true.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.members | where_exp:"item",
+"item.graduation_year == 2014" }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.members | where_exp:"item",
+"item.graduation_year < 2014" }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.members | where_exp:"item",
+"item.projects contains 'foo'" }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Group By</strong></p>
         <p>Group an array's items by a given property.</p>
       </td>
@@ -271,6 +287,39 @@ common tasks easier.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Array Filters</strong></p>
+        <p>Push, pop, shift, and unshift elements from an Array.</p>
+        <p>These are <strong>NON-DESTRUCTIVE</strong>, i.e. they do not mutate the array, but rather make a copy and mutate that.</p>
+      </td>
+      <td class="align-center">
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | push: 'Spokane' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Seattle', 'Tacoma', 'Spokane']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | pop }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Seattle']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | shift }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Tacoma']</code>
+        </p>
+        <p>
+          <code class="filter">{% raw %}{{ page.tags | unshift: "Olympia" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">['Olympia', 'Seattle', 'Tacoma']</code>
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -292,7 +341,7 @@ The default is `default`. They are as follows (with what they filter):
 If you have small page fragments that you wish to include in multiple places on
 your site, you can use the `include` tag.
 
-{% highlight ruby %}
+{% highlight liquid %}
 {% raw %}{% include footer.html %}{% endraw %}
 {% endhighlight %}
 
@@ -313,13 +362,13 @@ root of your source directory. This will embed the contents of
 
 You can also pass parameters to an include. Omit the quotation marks to send a variable's value. Liquid curly brackets should not be used here:
 
-{% highlight ruby %}
+{% highlight liquid %}
 {% raw %}{% include footer.html param="value" variable-param=page.variable %}{% endraw %}
 {% endhighlight %}
 
 These parameters are available via Liquid in the include:
 
-{% highlight ruby %}
+{% highlight liquid %}
 {% raw %}{{ include.param }}{% endraw %}
 {% endhighlight %}
 
@@ -327,7 +376,7 @@ These parameters are available via Liquid in the include:
 
 You can also choose to include file fragments relative to the current file:
 
-{% highlight ruby %}
+{% highlight liquid %}
 {% raw %}{% include_relative somedir/footer.html %}{% endraw %}
 {% endhighlight %}
 
@@ -355,7 +404,7 @@ languages](http://pygments.org/languages/)
 
 To render a code block with syntax highlighting, surround your code as follows:
 
-{% highlight text %}
+{% highlight liquid %}
 {% raw %}
 {% highlight ruby %}
 def foo
@@ -378,7 +427,7 @@ Including the `linenos` argument will force the highlighted code to include line
 numbers. For instance, the following code block would include line numbers next
 to each line:
 
-{% highlight text %}
+{% highlight liquid %}
 {% raw %}
 {% highlight ruby linenos %}
 def foo
@@ -403,7 +452,7 @@ numbers from the highlighted code.
 If you would like to include a link to a post on your site, the `post_url` tag
 will generate the correct permalink URL for the post you specify.
 
-{% highlight text %}
+{% highlight liquid %}
 {% raw %}
 {% post_url 2010-07-21-name-of-post %}
 {% endraw %}
@@ -412,7 +461,7 @@ will generate the correct permalink URL for the post you specify.
 If you organize your posts in subdirectories, you need to include subdirectory
 path to the post:
 
-{% highlight text %}
+{% highlight liquid %}
 {% raw %}
 {% post_url /subdir/2010-07-21-name-of-post %}
 {% endraw %}
@@ -422,7 +471,7 @@ There is no need to include the file extension when using the `post_url` tag.
 
 You can also use this tag to create a link to a post in Markdown as follows:
 
-{% highlight text %}
+{% highlight liquid %}
 {% raw %}
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
 {% endraw %}
@@ -433,7 +482,7 @@ You can also use this tag to create a link to a post in Markdown as follows:
 Use the `gist` tag to easily embed a GitHub Gist onto your site. This works
 with public or secret gists:
 
-{% highlight text %}
+{% highlight liquid %}
 {% raw %}
 {% gist parkr/931c1c8d465a04042403 %}
 {% endraw %}
@@ -441,7 +490,7 @@ with public or secret gists:
 
 You may also optionally specify the filename in the gist to display:
 
-{% highlight text %}
+{% highlight liquid %}
 {% raw %}
 {% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
 {% endraw %}

@@ -10,6 +10,8 @@ module Jekyll
           "ssl_key"  => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"     => ["-P", "--port [PORT]", "Port to listen on"],
           "baseurl"  => ["-b", "--baseurl [URL]", "Base URL"],
+          "show_dir_listing" => ["--show-dir-listing",
+            "Show a directory listing instead of loading your index file."],
           "skip_initial_build" => ["skip_initial_build", "--skip-initial-build",
             "Skips the initial site build which occurs before the server is started."]
         }
@@ -91,6 +93,8 @@ module Jekyll
             )
           }
 
+          opts[:DirectoryIndex] = [] if opts[:JekyllOptions]['show_dir_listing']
+
           enable_ssl(opts)
           enable_logging(opts)
           opts
@@ -112,26 +116,24 @@ module Jekyll
 
         private
         def server_address(server, opts)
-          address = server.config[:BindAddress]
-          baseurl = "#{opts["baseurl"]}/" if opts["baseurl"]
-          port = server.config[:Port]
-
-          "http://#{address}:#{port}#{baseurl}"
+          "%{prefix}://%{address}:%{port}%{baseurl}" % {
+            :prefix => server.config[:SSLEnable] ? "https" : "http",
+            :baseurl => opts["baseurl"] ? "#{opts["baseurl"]}/" : "",
+            :address => server.config[:BindAddress],
+            :port => server.config[:Port]
+          }
         end
 
         #
 
         private
         def launch_browser(server, opts)
-          command =
-            if Utils::Platforms.windows?
-              "start"
-            elsif Utils::Platforms.osx?
-              "open"
-            else
-              "xdg-open"
-            end
-          system command, server_address(server, opts)
+          address = server_address(server, opts)
+          return system "start", address if Utils::Platforms.windows?
+          return system "xdg-open", address if Utils::Platforms.linux?
+          return system "open", address if Utils::Platforms.osx?
+          Jekyll.logger.error "Refusing to launch browser; " \
+            "Platform launcher unknown."
         end
 
         # Keep in our area with a thread or detach the server as requested
@@ -181,7 +183,7 @@ module Jekyll
           source_certificate = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], opts[:JekyllOptions]["ssl_cert"])
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(File.read(source_certificate))
           opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(File.read(source_key))
-          opts[:EnableSSL] = true
+          opts[:SSLEnable] = true
         end
 
         private

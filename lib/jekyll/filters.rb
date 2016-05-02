@@ -1,6 +1,7 @@
 require 'uri'
 require 'json'
 require 'date'
+require 'liquid'
 
 module Jekyll
   module Filters
@@ -15,11 +16,11 @@ module Jekyll
       converter.convert(input)
     end
 
-    # Convert a Markdown string into HTML output.
+    # Convert quotes into smart quotes.
     #
-    # input - The Markdown String to convert.
+    # input - The String to convert.
     #
-    # Returns the HTML formatted String.
+    # Returns the smart-quotified String.
     def smartify(input)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
@@ -117,7 +118,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      CGI.escapeHTML(input.to_s)
+      input.to_s.encode(:xml => :attr).gsub(/\A"|"\Z/, "")
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters
@@ -205,7 +206,7 @@ module Jekyll
         input.group_by do |item|
           item_property(item, property).to_s
         end.inject([]) do |memo, i|
-          memo << { "name" => i.first, "items" => i.last }
+          memo << { "name" => i.first, "items" => i.last, "size" => i.last.size }
         end
       else
         input
@@ -222,7 +223,27 @@ module Jekyll
     def where(input, property, value)
       return input unless input.is_a?(Enumerable)
       input = input.values if input.is_a?(Hash)
-      input.select { |object| item_property(object, property).to_s == value.to_s }
+      input.select { |object| Array(item_property(object, property)).map(&:to_s).include?(value.to_s) }
+    end
+
+    # Filters an array of objects against an expression
+    #
+    # input - the object array
+    # variable - the variable to assign each item to in the expression
+    # expression - a Liquid comparison expression passed in as a string
+    #
+    # Returns the filtered array of objects
+    def where_exp(input, variable, expression)
+      return input unless input.is_a?(Enumerable)
+      input = input.values if input.is_a?(Hash) # FIXME
+
+      condition = parse_condition(expression)
+      @context.stack do
+        input.select do |object|
+          @context[variable] = object
+          condition.evaluate(@context)
+        end
+      end
     end
 
     # Sort an array of objects
@@ -308,14 +329,14 @@ module Jekyll
     #
     # Returns a String representation of the object.
     def inspect(input)
-      CGI.escapeHTML(input.inspect)
+      xml_escape(input.inspect)
     end
 
     private
     def time(input)
       case input
       when Time
-        input
+        input.clone
       when Date
         input.to_time
       when String
@@ -363,5 +384,25 @@ module Jekyll
         end
       end
     end
+
+    # Parse a string to a Liquid Condition
+    def parse_condition(exp)
+      parser = Liquid::Parser.new(exp)
+      left_expr = parser.expression
+      operator = parser.consume?(:comparison)
+      condition =
+        if operator
+          Liquid::Condition.new(left_expr, operator, parser.expression)
+        else
+          Liquid::Condition.new(left_expr)
+        end
+      parser.consume(:end_of_string)
+
+      condition
+    end
   end
 end
+
+Liquid::Template.register_filter(
+  Jekyll::Filters
+)

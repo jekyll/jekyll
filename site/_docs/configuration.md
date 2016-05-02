@@ -214,7 +214,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Future</strong></p>
-        <p class="description">Publish posts with a future date.</p>
+        <p class="description">Publish posts or collection documents with a future date.</p>
       </td>
       <td class="align-center">
         <p><code class="option">future: BOOL</code></p>
@@ -435,7 +435,7 @@ Using [YAML Front Matter](../frontmatter/) is one way that you can specify confi
 
 Often times, you will find that you are repeating a lot of configuration options. Setting the same layout in each file, adding the same category - or categories - to a post, etc. You can even add custom variables like author names, which might be the same for the majority of posts on your blog.
 
-Instead of repeating this configuration each time you create a new post or page, Jekyll provides a way to set these defaults in the site configuration. To do this, you can specify  site-wide defaults using the `defaults` key in the `_config.yml` file in your projects root directory.
+Instead of repeating this configuration each time you create a new post or page, Jekyll provides a way to set these defaults in the site configuration. To do this, you can specify  site-wide defaults using the `defaults` key in the `_config.yml` file in your project's root directory.
 
 The `defaults` key holds an array of scope/values pairs that define what defaults should be set for a particular file path, and optionally, a file type in that path.
 
@@ -449,6 +449,18 @@ defaults:
     values:
       layout: "default"
 {% endhighlight %}
+
+<div class="note info">
+  <h5>Please stop and rerun `jekyll serve` command.</h5>
+  <p>
+    The <code>_config.yml</code> master configuration file contains global configurations
+    and variable definitions that are read once at execution time. Changes made to <code>_config.yml</code>
+    during automatic regeneration are not loaded until the next execution.
+  </p>
+  <p>
+    Note <a href="../datafiles">Data Files</a> are included and reloaded during automatic regeneration.
+  </p>
+</div>
 
 Here, we are scoping the `values` to any file that exists in the scopes path. Since the path is set as an empty string, it will apply to **all files** in your project. You probably don't want to set a layout on every file in your project - like css files, for example - so you can also specify a `type` value under the `scope` key.
 

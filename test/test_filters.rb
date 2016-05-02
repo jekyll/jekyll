@@ -103,6 +103,13 @@ class TestFilters < JekyllUnitTest
         should "format a time according to RFC-822" do
           assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
         end
+
+        should "not modify a time in-place when using filters" do
+          t = Time.new(2004, 9, 15, 0, 2, 37, "+01:00")
+          assert_equal 3600, t.utc_offset
+          @filter.date_to_string(t)
+          assert_equal 3600, t.utc_offset
+        end
       end
 
       context "with Date object" do
@@ -151,7 +158,7 @@ class TestFilters < JekyllUnitTest
         end
 
         should "format a time with xmlschema" do
-          assert_match /2014-05-10T00:10:07/, @filter.date_to_xmlschema(@time_as_numeric)
+          assert_match(/2014-05-10T00:10:07/, @filter.date_to_xmlschema(@time_as_numeric))
         end
 
         should "format a time according to RFC-822" do
@@ -289,6 +296,14 @@ class TestFilters < JekyllUnitTest
           end
         end
       end
+
+      should "include the size of each grouping" do
+        grouping = @filter.group_by(@filter.site.pages, "layout")
+        grouping.each do |g|
+          p g
+          assert_equal g["items"].size, g["size"], "The size property for '#{g["name"]}' doesn't match the size of the Array."
+        end
+      end
     end
 
     context "where filter" do
@@ -306,6 +321,21 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
       end
 
+      should "filter array properties appropriately" do
+        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>["x"]}, "c"=>{"tags"=>["y","z"]}}
+        assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "filter array properties alongside string properties" do
+        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>"x"}, "c"=>{"tags"=>["y","z"]}}
+        assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "not match substrings" do
+        hash = {"a"=>{"category"=>"bear"}, "b"=>{"category"=>"wolf"}, "c"=>{"category"=>["bear","lion"]}}
+        assert_equal 0, @filter.where(hash, "category", "ear").length
+      end
+
       should "stringify during comparison for compatibility with liquid parsing" do
         hash = {
           "The Words" => {"rating" => 1.2, "featured" => false},
@@ -321,6 +351,64 @@ class TestFilters < JekyllUnitTest
         results = @filter.where(hash, "rating", 4.7)
         assert_equal 1, results.length
         assert_equal 4.7, results[0]["rating"]
+      end
+    end
+
+    context "where_exp filter" do
+      should "return any input that is not an array" do
+        assert_equal "some string", @filter.where_exp("some string", "la", "le")
+      end
+
+      should "filter objects in a hash appropriately" do
+        hash = {"a"=>{"color"=>"red"}, "b"=>{"color"=>"blue"}}
+        assert_equal 1, @filter.where_exp(hash, "item", "item.color == 'red'").length
+        assert_equal [{"color"=>"red"}], @filter.where_exp(hash, "item", "item.color == 'red'")
+      end
+
+      should "filter objects appropriately" do
+        assert_equal 2, @filter.where_exp(@array_of_objects, "item", "item.color == 'red'").length
+      end
+
+      should "stringify during comparison for compatibility with liquid parsing" do
+        hash = {
+          "The Words" => {"rating" => 1.2, "featured" => false},
+          "Limitless" => {"rating" => 9.2, "featured" => true},
+          "Hustle"    => {"rating" => 4.7, "featured" => true},
+        }
+
+        results = @filter.where_exp(hash, "item", "item.featured == true")
+        assert_equal 2, results.length
+        assert_equal 9.2, results[0]["rating"]
+        assert_equal 4.7, results[1]["rating"]
+
+        results = @filter.where_exp(hash, "item", "item.rating == 4.7")
+        assert_equal 1, results.length
+        assert_equal 4.7, results[0]["rating"]
+      end
+
+      should "filter with other operators" do
+        assert_equal [3, 4, 5], @filter.where_exp([ 1, 2, 3, 4, 5 ], "n", "n >= 3")
+      end
+
+      objects = [
+        { "id" => "a", "groups" => [1, 2] },
+        { "id" => "b", "groups" => [2, 3] },
+        { "id" => "c" },
+        { "id" => "d", "groups" => [1, 3] }
+      ]
+      should "filter with the contains operator over arrays" do
+        results = @filter.where_exp(objects, "obj", "obj.groups contains 1")
+        assert_equal 2, results.length
+        assert_equal "a", results[0]["id"]
+        assert_equal "d", results[1]["id"]
+      end
+
+      should "filter with the contains operator over hash keys" do
+        results = @filter.where_exp(objects, "obj", "obj contains 'groups'")
+        assert_equal 3, results.length
+        assert_equal "a", results[0]["id"]
+        assert_equal "b", results[1]["id"]
+        assert_equal "d", results[2]["id"]
       end
     end
 
@@ -363,6 +451,10 @@ class TestFilters < JekyllUnitTest
     context "inspect filter" do
       should "return a HTML-escaped string representation of an object" do
         assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect({ "<a>" => 1 })
+      end
+
+      should "quote strings" do
+        assert_equal "&quot;string&quot;", @filter.inspect("string")
       end
     end
 

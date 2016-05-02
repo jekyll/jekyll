@@ -55,4 +55,4 @@ and we will address it as soon as possible.
 
 ## License
 
-See [LICENSE](https://github.com/jekyll/jekyll/blob/master/LICENSE).
+See the [LICENSE](https://github.com/jekyll/jekyll/blob/master/LICENSE) file.

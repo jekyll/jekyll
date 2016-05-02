@@ -232,13 +232,13 @@ class TestSite < JekyllUnitTest
     context 'error handling' do
       should "raise if destination is included in source" do
         assert_raises Jekyll::Errors::FatalException do
-          site = Site.new(site_configuration('destination' => source_dir))
+          Site.new(site_configuration('destination' => source_dir))
         end
       end
 
       should "raise if destination is source" do
         assert_raises Jekyll::Errors::FatalException do
-          site = Site.new(site_configuration('destination' => File.join(source_dir, "..")))
+          Site.new(site_configuration('destination' => File.join(source_dir, "..")))
         end
       end
     end
@@ -418,12 +418,12 @@ class TestSite < JekyllUnitTest
         assert_equal site.site_payload['site']['data']['products'], file_content
       end
 
-      should "not load symlink files in safe mode" do
+      should "load the symlink files in safe mode, as they resolve to inside site.source" do
         site = Site.new(site_configuration('safe' => true))
         site.process
-
-        assert_nil site.data['products']
-        assert_nil site.site_payload['site']['data']['products']
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
+        assert_equal site.data['products'], file_content
+        assert_equal site.site_payload['site']['data']['products'], file_content
       end
 
     end
@@ -520,7 +520,6 @@ class TestSite < JekyllUnitTest
         contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
         @site.process
 
-        source = @site.in_source_dir(contacts_html.path)
         dest = File.expand_path(contacts_html.destination(@site.dest))
         mtime1 = File.stat(dest).mtime.to_i # first run must generate dest file
 

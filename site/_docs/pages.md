@@ -46,7 +46,7 @@ directory with a suitable name for the page you want to create. For a site with
 a homepage, an about page, and a contact page, here’s what the root directory
 and associated URLs might look like:
 
-{% highlight bash %}
+{% highlight shell %}
 .
 |-- _config.yml
 |-- _includes/
@@ -69,7 +69,7 @@ the page URL ends up being the folder name, and the web server will serve up
 the respective `index.html` file. Here's an example of what this structure
 might look like:
 
-{% highlight bash %}
+{% highlight shell %}
 .
 ├── _config.yml
 ├── _includes/

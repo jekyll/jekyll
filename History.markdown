@@ -1,14 +1,97 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Stop testing with Ruby 2.0.x, which is EOL'd. (#4381)
+  * Allow collections to have documents that have no file extension (#4545)
+  * Add size property to group_by result (#4557)
+  * Site Template: Removed unnecessary nesting from `_base.scss` (#4637)
+  * Adding a debug log statment for skipped future documents. (#4558)
+  * Site Template: Changed main `<div>` to `<main>` and added accessibility info (#4636)
+  * Add array support to `where` filter (#4555)
+  * 'jekyll clean': also remove .sass-cache (#4652)
+  * Clean up Tags::PostUrl a bit, including better errors and date parsing (#4670)
+  * Use String#encode for xml_escape filter instead of CGI.escapeHTML (#4694)
+  * Add show_dir_listing option for serve command and fix index file names (#4533)
+  * Site Template: write a Gemfile which is educational to the new site (#4542)
+  * Site template: add explanation of site variables in the example `_config.yml` (#4704)
+  * Adds `link` Liquid tag to make generation of URL's easier (#4624)
+  * Allow static files to be symlinked in unsafe mode or non-prod environments (#4640)
+  * Add `:after_init` hook & add `Site#config=` to make resetting config easy (#4703)
+  * DocumentDrop: add `#<=>` which sorts by date (falling back to path) (#4741)
+  * Add a where_exp filter for filtering by expression (#4478)
+  * Globalize Jekyll's Filters. (#4792)
+  * Gem-based themes (#4595)
+  * Allow symlinks if they point to stuff inside site.source (#4710)
+  * Update colorator dependency to v1.x (#4855)
+
+### Bug Fixes
+
+  * Site Template: Added a default lang attribute (#4633)
+  * Site template: Escape title and description where it is used in HTML (#4606)
+  * Document#date: drafts which have no date should use source file mtime (#4611)
+  * Filters#time: clone an input Time so as to be non-destructive (#4590)
+  * Doctor: fix issue where `--config` wasn't a recognized flag (#4598)
+  * Ensures related_posts are only set for a post (#4620)
+  * EntryFilter#special?: ignore filenames which begin with '~' (#4491)
+  * Cleaner: `keep_files` should only apply to the beginning of paths, not substrings with index > 0 (#3849)
+  * Use SSLEnable instead of EnableSSL and make URL HTTPS. (#4693)
+  * convertible: use Document::YAML_FRONT_MATTER_REGEXP to parse transformable files (#4786)
+  * Example in the site template should be IANA-approved example.com (#4793)
+  * 3.2.x/master: Fix defaults for Documents (posts/collection docs) (#4808)
+  * Don't rescue LoadError or bundler load errors for Bundler. (#4857)
+
 ### Development Fixes
 
   * Add project maintainer profile links (#4591)
+  * Fix state leakage in Kramdown test (#4618)
+  * Unify method for copying special files from repo to site (#4601)
+  * Refresh the contributing file (#4596)
+  * change smartify doc from copy/paste of mardownify doc (#4653)
+  * Update Rake & disable warnings when running tests (#4720)
+  * Fix many warnings (#4537)
+  * Don't blindly assume the last system when determining "open" cmd (#4717)
+  * Fix "locally" typo in contributing documentation (#4756)
 
 ### Site Enhancements
 
   * Add jekyll-seo-tag, jekyll-avatar, and jekyll-sitemap to the site (#4553)
   * Add Google search query to /docs/help/ (#4589)
   * Upgrading, documentation (#4597)
+  * Add 'view source' entry (#4602)
+  * Add jekyll-video-embed to list of third-party plugins. (#4621)
+  * Adding Aerobatic to list of deployment options (#4630)
+  * Update documentation: HTMLProofer CLI command (#4641)
+  * Document that subdirectories of `_posts` are no longer categories (#4639)
+  * Update continuous-integration docs with sudo: false information (#4628)
+  * Blog post on refreshed contributing file and new affinity teams (#4645)
+  * Fixes typo on collections (#4647)
+  * Documentation: future option also works for collections (#4682)
+  * Additional package needed for Fedora 23 Workspace (#4685)
+  * Fix typo on Chocolatey name in Windows documentation (#4686)
+  * Use the correct URL, Fixes #4698 (#4699)
+  * Add jekyll-paspagon plugin (#4700)
+  * Bold-italicize note in assets documentation about needing yaml front matter (#4706)
+  * Highlight the `script/` calls in the Contributing documentation (#4712)
+  * Add Hawkins to the list of third-party plugins (#4755)
+  * Fix a typo in pagination doc (#4763)
+  * Switch second GitHub Pages link to HTTPS (#4760)
+  * Explain data file format requirements more clearly in documentation (#4781)
+  * Add jekyll-i18n_tags to list of third-party plugins (#4775)
+  * Remove Leonard Lamprecht's website from Sites page (#4771)
+  * Updates documentation for collections to include `date` property (#4769)
+  * Added an explicit rerun note to configuration.md, defaults section (#4734)
+  * Update Rack-Jekyll Heroku deployment blog post url (#4789)
+  * Added missing single quote on rsync client side command (#4813)
+  * Organize Form Platforms-as-a-Service into unified list & add FormSpree.io (#4754)
+  * Fixed typo on Configuration page (#4804)
+  * Update FormKeep URL on the Resources doc (#4844)
+  * site: use liquid & reduce some whitespace noise (#4854)
+
+## 3.1.3 / 2016-04-18
+
+  * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4807)
+  * Use SSLEnable instead of EnableSSL and make URL HTTPS (WEBrick) (#4693)
 
 ## 3.1.2 / 2016-02-19
 
@@ -156,6 +239,15 @@
   * Added the Wordpress2Jekyll Wordpress plugin (#4377)
   * Add Contentful Extension to list of third-party plugins (#4390)
   * Correct Minor spelling error (#4394)
+
+## 3.0.5 / 2016-04-26
+
+  * Remove call to `#backwards_compatibilize` in `Configuration.from` (#4846)
+
+## 3.0.4 / 2016-04-18
+
+  * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4806)
+  * Configuration: allow users to specify a `collections.posts.permalink` directly without `permalink` clobbering it (#4753)
 
 ## 3.0.3 / 2016-02-08
 
@@ -971,7 +1063,7 @@
   * Patch a couple show-stopping security vulnerabilities (#1946)
   * Sanitize paths uniformly, in a Windows-friendly way (#2065, #2109)
   * Update gem build steps to work correctly on Windows (#2118)
-  * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121).
+  * Remove obsolete `normalize_options` method call from `bin/jekyll` (#2121)
   * Remove `+` characters from Pygments lexer names when adding as a CSS class (#994)
   * Remove some code that caused Ruby interpreter warnings (#2178)
   * Only strip the drive name if it begins the string (#2175)
@@ -1837,7 +1929,7 @@
 
   * Bug Fixes
   * Fix pagination % 0 bug (#78)
-  * Ensure all posts are processed first (#71) ## NOTE
+  * Ensure all posts are processed first (#71)
   * After this point I will no longer be giving credit in the history; that is what the commit log is for.
 
 ## 0.5.4 / 2009-08-23

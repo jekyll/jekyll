@@ -1,6 +1,6 @@
 module Jekyll
   class EntryFilter
-    SPECIAL_LEADING_CHARACTERS = ['.', '_', '#'].freeze
+    SPECIAL_LEADING_CHARACTERS = ['.', '_', '#', '~'].freeze
 
     attr_reader :site
 
@@ -52,7 +52,11 @@ module Jekyll
     end
 
     def symlink?(entry)
-      File.symlink?(entry) && site.safe
+      site.safe && File.symlink?(entry) && symlink_outside_site_source?(entry)
+    end
+
+    def symlink_outside_site_source?(entry)
+      ! File.realpath(entry).start_with?(File.realpath(@site.source))
     end
 
     def ensure_leading_slash(path)

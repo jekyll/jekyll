@@ -14,6 +14,7 @@ INGORE_HREFS=$(ruby -e 'puts %w{
   twitter.com
   nearlyfreespeech.net
   eduardoboucas.com
+  github.com\/matrix9180
 }.map{|h| "/#{h}/"}.join(",")')
 SOURCE="site"
 DESTINATION="_site"
@@ -31,4 +32,4 @@ bundle exec jekyll build -s $SOURCE -d $DESTINATION --trace
 
 # 3.
 msg "Proofing..."
-time bundle exec htmlproof ./$DESTINATION --href-ignore $INGORE_HREFS
+time bundle exec htmlproof ./$DESTINATION --url-ignore $INGORE_HREFS

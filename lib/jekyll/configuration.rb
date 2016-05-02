@@ -44,6 +44,7 @@ module Jekyll
       'port'          => '4000',
       'host'          => '127.0.0.1',
       'baseurl'       => '',
+      'show_dir_listing' => false,
 
       # Output Configuration
       'permalink'     => 'date',
@@ -148,7 +149,7 @@ module Jekyll
       Jekyll.logger.info "Configuration file:", file
       next_config
     rescue SystemCallError
-      if @default_config_file
+      if @default_config_file ||= nil
         Jekyll.logger.warn "Configuration file:", "none"
         {}
       else
@@ -285,8 +286,8 @@ module Jekyll
     def renamed_key(old, new, config, _ = nil)
       if config.key?(old)
         Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" \
-          "option has been renamed to '#{new}'. Please update your config " \
-          "file accordingly."
+          " option has been renamed to '#{new}'. Please update your config" \
+          " file accordingly."
         config[new] = config.delete(old)
       end
     end

@@ -37,6 +37,40 @@ class TestCleaner < JekyllUnitTest
     end
   end
 
+  context "not-nested directory in keep_files and similary named directory not in keep_files" do
+    setup do
+      clear_dest
+
+      FileUtils.mkdir_p(dest_dir('.git/child_dir'))
+      FileUtils.mkdir_p(dest_dir('username.github.io'))
+      FileUtils.touch(File.join(dest_dir('.git'), 'index.html'))
+      FileUtils.touch(File.join(dest_dir('username.github.io'), 'index.html'))
+
+      @site = fixture_site
+      @site.keep_files = ['.git']
+
+      @cleaner = Cleaner.new(@site)
+      @cleaner.cleanup!
+    end
+
+    teardown do
+      FileUtils.rm_rf(dest_dir('.git'))
+      FileUtils.rm_rf(dest_dir('username.github.io'))
+    end
+
+    should "keep the file in the directory in keep_files" do
+      assert File.exist?(File.join(dest_dir('.git'), 'index.html'))
+    end
+
+    should "delete the file in the directory not in keep_files" do
+      assert !File.exist?(File.join(dest_dir('username.github.io'), 'index.html'))
+    end
+
+    should "delete the directory not in keep_files" do
+      assert !File.exist?(dest_dir('username.github.io'))
+    end
+  end
+
   context "directory containing no files and non-empty directories" do
     setup do
       clear_dest

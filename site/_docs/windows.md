@@ -15,7 +15,7 @@ Julian Thilo has written up instructions to get
 people. The instructions were written for Ruby 2.0.0, but should work for later
 versions [prior to 2.2][hitimes-issue].
 
-Alternatively David Burela has written instructions on [how to install Jekyll via Chocolately with 3 command prompt entries](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/).
+Alternatively David Burela has written instructions on [how to install Jekyll via Chocolatey with 3 command prompt entries](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/).
 
 ## Encoding
 
@@ -27,7 +27,7 @@ Additionally, you might need to change the code page of the console window to UT
 in case you get a "Liquid Exception: Incompatible character encoding" error during
 the site generation process. It can be done with the following command:
 
-{% highlight bash %}
+{% highlight shell %}
 $ chcp 65001
 {% endhighlight %}
 

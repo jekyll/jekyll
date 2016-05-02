@@ -78,7 +78,7 @@ module Jekyll
     def entries
       return [] unless exists?
       @entries ||=
-        Utils.safe_glob(collection_dir, ["**", "*.*"]).map do |entry|
+        Utils.safe_glob(collection_dir, ["**", "*"]).map do |entry|
           entry["#{collection_dir}/"] = ''
           entry
         end
@@ -94,7 +94,7 @@ module Jekyll
         Dir.chdir(directory) do
           entry_filter.filter(entries).reject do |f|
             path = collection_dir(f)
-            File.directory?(path) || (File.symlink?(f) && site.safe)
+            File.directory?(path) || entry_filter.symlink?(f)
           end
         end
     end
@@ -135,7 +135,7 @@ module Jekyll
     # Returns false if the directory doesn't exist or if it's a symlink
     #   and we're in safe mode.
     def exists?
-      File.directory?(directory) && !(File.symlink?(directory) && site.safe)
+      File.directory?(directory) && !entry_filter.symlink?(directory)
     end
 
     # The entry filter for this collection.
