@@ -82,9 +82,9 @@ module Jekyll
 
       #
 
-      def background_name(keyword, name, source_line, indend)
+      def background_name(keyword, name, source_line, indent)
         print_feature_element_name(
-          keyword, name, source_line, indend
+          keyword, name, source_line, indent
         )
       end
 
