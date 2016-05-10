@@ -89,6 +89,7 @@
   * site: use liquid & reduce some whitespace noise (#4854)
   * Add jekyll-breadcrumbs to list of third-party plugins (#4874)
   * Added Pug converter to list of third-party plugins (#4872)
+  * Add jekyll-ideal-image-slider to list of third-party plugins (#4863)
 
 ## 3.1.3 / 2016-04-18
 
