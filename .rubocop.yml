@@ -191,7 +191,6 @@ Style/SpaceAroundOperators:
 Style/SpaceInsideBrackets:
   Enabled: false
 Style/StringLiterals:
-  Enabled: false
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
