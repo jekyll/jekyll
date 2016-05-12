@@ -14,6 +14,17 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal %w[foo.markdown bar.markdown baz.markdown .htaccess], entries
     end
 
+    should "allow regexp filtering" do
+      files = %w(README.md)
+      @site.exclude = excludes = [
+        /README/
+      ]
+
+      assert_empty @site.reader.filter_entries(
+        files
+      )
+    end
+
     should "filter entries with exclude" do
       excludes = %w[README TODO vendor/bundle]
       files = %w[index.html site.css .htaccess vendor]
