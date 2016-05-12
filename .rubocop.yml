@@ -8,7 +8,6 @@ AllCops:
   - lib/jekyll/collection.rb
   - lib/jekyll/command.rb
   - lib/jekyll/commands/build.rb
-  - lib/jekyll/commands/clean.rb
   - lib/jekyll/commands/doctor.rb
   - lib/jekyll/commands/help.rb
   - lib/jekyll/commands/new.rb
