@@ -54,6 +54,7 @@
   * Don't blindly assume the last system when determining "open" cmd (#4717)
   * Fix "locally" typo in contributing documentation (#4756)
   * Update Rubocop rules (#4886)
+  * Flesh out the issue template to be much more detailed (#4849)
 
 ### Site Enhancements
 
