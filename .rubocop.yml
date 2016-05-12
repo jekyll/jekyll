@@ -1,80 +1,199 @@
-Metrics/MethodLength: { Max:  24 }
-Metrics/ClassLength:  { Max: 240 }
-Metrics/ModuleLength: { Max: 240 }
-Metrics/LineLength:   { Max: 112 }
-Metrics/CyclomaticComplexity: { Max: 8 }
-Metrics/PerceivedComplexity: { Max: 8 }
-Metrics/ParameterLists: { Max: 4 }
-Metrics/MethodLength: { Max: 24 }
-Metrics/AbcSize: { Max: 20 }
-
-Style/IndentHash: { EnforcedStyle: consistent }
-Style/HashSyntax: { EnforcedStyle: hash_rockets }
-Style/SignalException: { EnforcedStyle: only_raise }
-Style/AlignParameters: { EnforcedStyle: with_fixed_indentation }
-Style/StringLiteralsInInterpolation: { EnforcedStyle: double_quotes }
-Style/MultilineMethodCallIndentation: { EnforcedStyle: indented }
-Style/MultilineOperationIndentation: { EnforcedStyle: indented }
-Style/FirstParameterIndentation: { EnforcedStyle: consistent }
-Style/StringLiterals: { EnforcedStyle: double_quotes }
-Style/RegexpLiteral: { EnforcedStyle: slashes }
-Style/IndentArray: { EnforcedStyle: consistent }
-Style/ExtraSpacing: { AllowForAlignment: true }
-
-Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    '%q': '{}'
-    '%Q': '{}'
-    '%r': '!!'
-    '%s': '()'
-    '%w': '()'
-    '%W': '()'
-    '%x': '()'
-
-Style/AlignArray:                     { Enabled: false }
-Style/StringLiterals:                 { Enabled: false }
-Style/Documentation:                  { Enabled: false }
-Style/DoubleNegation:                 { Enabled: false }
-Style/UnneededCapitalW:               { Enabled: false }
-Style/EmptyLinesAroundModuleBody:     { Enabled: false }
-Style/EmptyLinesAroundAccessModifier: { Enabled: false }
-Style/BracesAroundHashParameters:     { Enabled: false }
-Style/SpaceInsideBrackets:            { Enabled: false }
-Style/IfUnlessModifier:               { Enabled: false }
-Style/ModuleFunction:                 { Enabled: false }
-Style/RescueModifier:                 { Enabled: false }
-Style/GuardClause:                    { Enabled: false }
-Style/FileName:                       { Enabled: false }
-Lint/UselessAccessModifier:           { Enabled: false }
-Style/SpaceAroundOperators:           { Enabled: false }
-Style/RedundantReturn:                { Enabled: false }
-Style/SingleLineMethods:              { Enabled: false }
-
+---
 AllCops:
   TargetRubyVersion: 2.0
   Include:
   - lib/**/*.rb
-
   Exclude:
-  - .rubocop.yml
-  - .codeclimate.yml
-  - .travis.yml
-  - .gitignore
-  - .rspec
-
-  - Gemfile.lock
-  - CHANGELOG.{md,markdown,txt,textile}
-  - CONTRIBUTING.{md,markdown,txt,textile}
-  - readme.{md,markdown,txt,textile}
-  - README.{md,markdown,txt,textile}
-  - Readme.{md,markdown,txt,textile}
-  - ReadMe.{md,markdown,txt,textile}
-  - COPYING
-  - LICENSE
-
-  - site/**/*
-  - test/**/*
-  - vendor/**/*
-  - features/**/*
+  - lib/jekyll/cleaner.rb
+  - lib/jekyll/collection.rb
+  - lib/jekyll/command.rb
+  - lib/jekyll/commands/build.rb
+  - lib/jekyll/commands/clean.rb
+  - lib/jekyll/commands/doctor.rb
+  - lib/jekyll/commands/help.rb
+  - lib/jekyll/commands/new.rb
+  - lib/jekyll/commands/serve
+  - lib/jekyll/commands/serve/servlet.rb
+  - lib/jekyll/commands/serve.rb
+  - lib/jekyll/configuration.rb
+  - lib/jekyll/converter.rb
+  - lib/jekyll/converters/identity.rb
+  - lib/jekyll/converters/markdown
+  - lib/jekyll/converters/markdown/kramdown_parser.rb
+  - lib/jekyll/converters/markdown/rdiscount_parser.rb
+  - lib/jekyll/converters/markdown/redcarpet_parser.rb
+  - lib/jekyll/converters/markdown.rb
+  - lib/jekyll/converters/smartypants.rb
+  - lib/jekyll/convertible.rb
+  - lib/jekyll/deprecator.rb
+  - lib/jekyll/document.rb
+  - lib/jekyll/drops/collection_drop.rb
+  - lib/jekyll/drops/document_drop.rb
+  - lib/jekyll/drops/drop.rb
+  - lib/jekyll/drops/jekyll_drop.rb
+  - lib/jekyll/drops/site_drop.rb
+  - lib/jekyll/drops/unified_payload_drop.rb
+  - lib/jekyll/drops/url_drop.rb
+  - lib/jekyll/entry_filter.rb
+  - lib/jekyll/errors.rb
+  - lib/jekyll/excerpt.rb
+  - lib/jekyll/external.rb
+  - lib/jekyll/filters.rb
+  - lib/jekyll/frontmatter_defaults.rb
+  - lib/jekyll/generator.rb
+  - lib/jekyll/hooks.rb
+  - lib/jekyll/layout.rb
+  - lib/jekyll/liquid_extensions.rb
+  - lib/jekyll/liquid_renderer/file.rb
+  - lib/jekyll/liquid_renderer/table.rb
+  - lib/jekyll/liquid_renderer.rb
+  - lib/jekyll/log_adapter.rb
+  - lib/jekyll/page.rb
+  - lib/jekyll/plugin.rb
+  - lib/jekyll/plugin_manager.rb
+  - lib/jekyll/publisher.rb
+  - lib/jekyll/reader.rb
+  - lib/jekyll/readers/collection_reader.rb
+  - lib/jekyll/readers/data_reader.rb
+  - lib/jekyll/readers/layout_reader.rb
+  - lib/jekyll/readers/page_reader.rb
+  - lib/jekyll/readers/post_reader.rb
+  - lib/jekyll/readers/static_file_reader.rb
+  - lib/jekyll/regenerator.rb
+  - lib/jekyll/related_posts.rb
+  - lib/jekyll/renderer.rb
+  - lib/jekyll/site.rb
+  - lib/jekyll/static_file.rb
+  - lib/jekyll/stevenson.rb
+  - lib/jekyll/tags/highlight.rb
+  - lib/jekyll/tags/include.rb
+  - lib/jekyll/tags/link.rb
+  - lib/jekyll/tags/post_url.rb
+  - lib/jekyll/theme.rb
+  - lib/jekyll/url.rb
+  - lib/jekyll/utils/ansi.rb
+  - lib/jekyll/utils/platforms.rb
+  - lib/jekyll/utils.rb
+  - lib/jekyll/version.rb
+  - lib/jekyll.rb
+  - bin/**/*
   - script/**/*
-  - spec/**/*
+  - vendor/**/*
+Lint/AmbiguousRegexpLiteral:
+  Exclude:
+  - features/step_definitions.rb
+Lint/EndAlignment:
+  Severity: error
+Lint/UnreachableCode:
+  Severity: error
+Lint/UselessAccessModifier:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 20
+Metrics/ClassLength:
+  Max: 240
+  Exclude:
+  - !ruby/regexp /features\/.*.rb$/
+Metrics/CyclomaticComplexity:
+  Max: 8
+Metrics/LineLength:
+  Max: 90
+  Severity: warning
+  Exclude:
+  - !ruby/regexp /features\/.*.rb/
+Metrics/MethodLength:
+  Max: 20
+  CountComments: false
+  Severity: error
+Metrics/ModuleLength:
+  Max: 240
+Metrics/ParameterLists:
+  Max: 4
+Metrics/PerceivedComplexity:
+  Max: 8
+Style/Alias:
+  Enabled: false
+Style/AlignArray:
+  Enabled: false
+Style/AlignHash:
+  SupportedLastArgumentHashStyles: always_ignore
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+  Enabled: false
+Style/AndOr:
+  Severity: error
+Style/Attr:
+  Enabled: false
+Style/BracesAroundHashParameters:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+  Exclude:
+  - !ruby/regexp /features\/.*.rb$/
+Style/DoubleNegation:
+  Enabled: false
+Style/EmptyLinesAroundAccessModifier:
+  Enabled: false
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+Style/ExtraSpacing:
+  AllowForAlignment: true
+Style/FileName:
+  Enabled: false
+Style/FirstParameterIndentation:
+  EnforcedStyle: consistent
+Style/GuardClause:
+  Enabled: false
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+  Severity: error
+Style/IfUnlessModifier:
+  Enabled: false
+Style/IndentArray:
+  EnforcedStyle: consistent
+Style/IndentHash:
+  EnforcedStyle: consistent
+Style/IndentationWidth:
+  Severity: error
+Style/ModuleFunction:
+  Enabled: false
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Style/MultilineTernaryOperator:
+  Severity: error
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    "%q": "{}"
+    "%Q": "{}"
+    "%r": "{}"
+    "%s": "()"
+    "%w": "()"
+    "%W": "()"
+    "%x": "()"
+Style/RedundantReturn:
+  Enabled: false
+Style/RedundantSelf:
+  Enabled: false
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+Style/RescueModifier:
+  Enabled: false
+Style/SignalException:
+  EnforcedStyle: only_raise
+Style/SingleLineMethods:
+  Enabled: false
+Style/SpaceAroundOperators:
+  Enabled: false
+Style/SpaceInsideBrackets:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+  EnforcedStyle: double_quotes
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+Style/UnneededCapitalW:
+  Enabled: false
