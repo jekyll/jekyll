@@ -79,9 +79,6 @@ AllCops:
   - bin/**/*
   - script/**/*
   - vendor/**/*
-Lint/AmbiguousRegexpLiteral:
-  Exclude:
-  - features/step_definitions.rb
 Lint/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
