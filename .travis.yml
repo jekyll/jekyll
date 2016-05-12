@@ -17,6 +17,9 @@ matrix:
   allow_failures:
     - rvm: *jruby
     - rvm: *rhead
+  include:
+    - rvm: 2.3.0
+      env: TEST_SUITE=fmt
 env:
   matrix:
     - TEST_SUITE=test
