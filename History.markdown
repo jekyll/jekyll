@@ -53,6 +53,7 @@
   * Fix many warnings (#4537)
   * Don't blindly assume the last system when determining "open" cmd (#4717)
   * Fix "locally" typo in contributing documentation (#4756)
+  * Update Rubocop rules (#4886)
 
 ### Site Enhancements
 
