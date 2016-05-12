@@ -35,7 +35,7 @@ module Jekyll
             File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
               f.write(scaffold_post_content)
             end
-            
+
             File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
               f.write(gemfile_contents)
             end
@@ -63,11 +63,12 @@ module Jekyll
         end
 
         private
-        
+
         def gemfile_contents
           <<-RUBY
 source "https://rubygems.org"
-  
+ruby RUBY_VERSION
+
 # Hello! This is where you manage which Jekyll version is used to run.
 # When you want to use a different version, change it below, save the
 # file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
@@ -81,7 +82,7 @@ gem "jekyll", "#{Jekyll::VERSION}"
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
-  
+
 # If you have any plugins, put them here!
 # group :jekyll_plugins do
 #   gem "jekyll-github-metadata", "~> 1.0"
