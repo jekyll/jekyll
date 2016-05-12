@@ -92,6 +92,7 @@
   * Add jekyll-breadcrumbs to list of third-party plugins (#4874)
   * Added Pug converter to list of third-party plugins (#4872)
   * Add jekyll-ideal-image-slider to list of third-party plugins (#4863)
+  * Add Jekyll Tips and the Cheatsheet to the list of resources (#4887)
 
 ## 3.1.3 / 2016-04-18
 
