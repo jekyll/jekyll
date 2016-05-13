@@ -55,6 +55,7 @@
   * Fix "locally" typo in contributing documentation (#4756)
   * Update Rubocop rules (#4886)
   * Flesh out the issue template to be much more detailed (#4849)
+  * Fixing rubocop offenses in lib/jekyll/cleaner.rb (#4892)
 
 ### Site Enhancements
 
