@@ -34,7 +34,8 @@ Default attributes can also be set for a collection:
 
 {% highlight yaml %}
 defaults:
-  - scope:
+  -
+    scope:
       path: ""
       type: my_collection
     values:
