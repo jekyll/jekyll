@@ -174,7 +174,7 @@ module Jekyll
         def enable_ssl(opts)
           return if !opts[:JekyllOptions]["ssl_cert"] && !opts[:JekyllOptions]["ssl_key"]
           if !opts[:JekyllOptions]["ssl_cert"] || !opts[:JekyllOptions]["ssl_key"]
-            raise RuntimeError, "--ssl-cert or --ssl-key missing."
+            raise RuntimeError
           end
           require "openssl"
           require "webrick/https"
