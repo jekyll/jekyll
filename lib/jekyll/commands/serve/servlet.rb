@@ -25,9 +25,8 @@ module Jekyll
           super || super(req, res, "#{basename}.html")
         end
 
-        #
-
-        def do_get(req, res)
+        # rubocop:disable Style/MethodName
+        def do_GET(req, res)
           rtn = super
           validate_and_ensure_charset(req, res)
           res.header.merge!(@headers)

@@ -171,10 +171,12 @@ module Jekyll
         # forget to add one of the certificates.
 
         private
+        # rubocop:disable Metrics/AbcSize
         def enable_ssl(opts)
           return if !opts[:JekyllOptions]["ssl_cert"] && !opts[:JekyllOptions]["ssl_key"]
           if !opts[:JekyllOptions]["ssl_cert"] || !opts[:JekyllOptions]["ssl_key"]
-            raise RuntimeError
+            # rubocop:disable Style/RedundantException
+            raise RuntimeError, "--ssl-cert or --ssl-key missing."
           end
           require "openssl"
           require "webrick/https"

@@ -28,19 +28,7 @@ module Jekyll
                       "#{new_blog_path} exists and is not empty."
           end
 
-          if options["blank"]
-            create_blank_site new_blog_path
-          else
-            create_sample_files new_blog_path
-
-            File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
-              f.write(scaffold_post_content)
-            end
-
-            File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
-              f.write(gemfile_contents)
-            end
-          end
+          if_options_blank(new_blog_path, options)
 
           Jekyll.logger.info "New jekyll site installed in #{new_blog_path}."
         end
@@ -89,6 +77,22 @@ gem "jekyll", "#{Jekyll::VERSION}"
 #   gem "jekyll-github-metadata", "~> 1.0"
 # end
 RUBY
+        end
+
+        def if_options_blank(new_blog_path, options)
+          if options["blank"]
+            create_blank_site new_blog_path
+          else
+            create_sample_files new_blog_path
+
+            File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
+              f.write(scaffold_post_content)
+            end
+
+            File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
+              f.write(gemfile_contents)
+            end
+          end
         end
 
         def preserve_source_location?(path, options)
