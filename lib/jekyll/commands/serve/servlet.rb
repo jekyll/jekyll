@@ -7,7 +7,7 @@ module Jekyll
         DEFAULTS = {
           "Cache-Control" => "private, max-age=0, proxy-revalidate, " \
             "no-store, no-cache, must-revalidate"
-        }
+        }.freeze
 
         def initialize(server, root, callbacks)
           # So we can access them easily.
@@ -27,7 +27,7 @@ module Jekyll
 
         #
 
-        def do_GET(req, res)
+        def do_GET(req, res) # rubocop:disable Style/MethodName
           rtn = super
           validate_and_ensure_charset(req, res)
           res.header.merge!(@headers)
