@@ -4,11 +4,12 @@ module Jekyll
       class << self
         def init_with_program(prog)
           prog.command(:doctor) do |c|
-            c.syntax 'doctor'
-            c.description 'Search site and print specific deprecation warnings'
+            c.syntax "doctor"
+            c.description "Search site and print specific deprecation warnings"
             c.alias(:hyde)
 
-            c.option 'config', '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
+            c.option "config", "--config CONFIG_FILE[,CONFIG_FILE2,...]", Array,
+                            "Custom configuration file"
 
             c.action do |_, options|
               Jekyll::Commands::Doctor.process(options)
@@ -37,7 +38,7 @@ module Jekyll
         end
 
         def deprecated_relative_permalinks(site)
-          if site.config['relative_permalinks']
+          if site.config["relative_permalinks"]
             Jekyll::Deprecator.deprecation_message "Your site still uses relative" \
                                 " permalinks, which was removed in" \
                                 " Jekyll v3.0.0."
@@ -78,7 +79,7 @@ module Jekyll
         def urls_only_differ_by_case(site)
           urls_only_differ_by_case = false
           urls = case_insensitive_urls(site.pages + site.docs_to_write, site.dest)
-          urls.each do |case_insensitive_url, real_urls|
+          urls.each do |_case_insensitive_url, real_urls|
             next unless real_urls.uniq.size > 1
             urls_only_differ_by_case = true
             Jekyll.logger.warn "Warning:", "The following URLs only differ" \
@@ -102,7 +103,7 @@ module Jekyll
         end
 
         def case_insensitive_urls(things, destination)
-          things.inject({}) do |memo, thing|
+          things.each_with_object({}) do |memo, thing|
             dest = thing.destination(destination)
             (memo[dest.downcase] ||= []) << dest
             memo
