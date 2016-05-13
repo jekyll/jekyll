@@ -5,7 +5,6 @@ AllCops:
   - lib/**/*.rb
   Exclude:
   - lib/jekyll/collection.rb
-  - lib/jekyll/commands/doctor.rb
   - lib/jekyll/commands/help.rb
   - lib/jekyll/commands/new.rb
   - lib/jekyll/commands/serve
