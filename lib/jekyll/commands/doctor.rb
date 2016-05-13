@@ -103,10 +103,9 @@ module Jekyll
         end
 
         def case_insensitive_urls(things, destination)
-          things.each_with_object({}) do |memo, thing|
+          things.each_with_object({}) do |thing, memo|
             dest = thing.destination(destination)
             (memo[dest.downcase] ||= []) << dest
-            memo
           end
         end
       end

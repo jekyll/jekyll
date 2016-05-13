@@ -28,7 +28,19 @@ module Jekyll
                       "#{new_blog_path} exists and is not empty."
           end
 
-          if_blank_options
+          if options["blank"]
+            create_blank_site new_blog_path
+          else
+            create_sample_files new_blog_path
+
+            File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
+              f.write(scaffold_post_content)
+            end
+
+            File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
+              f.write(gemfile_contents)
+            end
+          end
 
           Jekyll.logger.info "New jekyll site installed in #{new_blog_path}."
         end
@@ -94,22 +106,6 @@ RUBY
 
         def scaffold_path
           "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
-        end
-
-        def if_blank_options
-          if options["blank"]
-            create_blank_site new_blog_path
-          else
-            create_sample_files new_blog_path
-
-            File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
-              f.write(scaffold_post_content)
-            end
-
-            File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
-              f.write(gemfile_contents)
-            end
-          end
         end
       end
     end
