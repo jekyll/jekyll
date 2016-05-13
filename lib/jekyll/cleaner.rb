@@ -1,9 +1,9 @@
-require 'set'
+require "set"
 
 module Jekyll
   # Handles the cleanup of a site's destination before it is built.
   class Cleaner
-    HIDDEN_FILE_REGEX = /\/\.{1,2}$/
+    HIDDEN_FILE_REGEX = %r!\/\.{1,2}$!
     attr_reader :site
 
     def initialize(site)
@@ -32,7 +32,8 @@ module Jekyll
       [site.regenerator.metadata_file]
     end
 
-    # Private: The list of existing files, apart from those included in keep_files and hidden files.
+    # Private: The list of existing files, apart from those included in
+    # keep_files and hidden files.
     #
     # Returns a Set with the file paths
     def existing_files
@@ -77,15 +78,16 @@ module Jekyll
       end
     end
 
-    # Private: The list of existing files that will be replaced by a directory during build
+    # Private: The list of existing files that will be replaced by a directory
+    # during build
     #
     # Returns a Set with the file paths
     def replaced_files
       new_dirs.select { |dir| File.file?(dir) }.to_set
     end
 
-    # Private: The list of directories that need to be kept because they are parent directories
-    # of files specified in keep_files
+    # Private: The list of directories that need to be kept because they are
+    # parent directories of files specified in keep_files
     #
     # Returns a Set with the directory paths
     def keep_dirs
@@ -95,12 +97,12 @@ module Jekyll
     # Private: Creates a regular expression from the config's keep_files array
     #
     # Examples
-    #   ['.git','.svn'] with site.dest "/myblog/_site" creates 
+    #   ['.git','.svn'] with site.dest "/myblog/_site" creates
     #   the following regex: /\A\/myblog\/_site\/(\.git|\/.svn)/
     #
     # Returns the regular expression
     def keep_file_regex
-      /\A#{Regexp.quote(site.dest)}\/(#{Regexp.union(site.keep_files).source})/
+      %r!\A#{Regexp.quote(site.dest)}\/(#{Regexp.union(site.keep_files).source})!
     end
   end
 end
