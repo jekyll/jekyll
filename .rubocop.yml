@@ -5,15 +5,6 @@ AllCops:
   - lib/**/*.rb
   Exclude:
   - lib/jekyll/collection.rb
-  - lib/jekyll/command.rb
-  - lib/jekyll/commands/build.rb
-  - lib/jekyll/commands/clean.rb
-  - lib/jekyll/commands/doctor.rb
-  - lib/jekyll/commands/help.rb
-  - lib/jekyll/commands/new.rb
-  - lib/jekyll/commands/serve
-  - lib/jekyll/commands/serve/servlet.rb
-  - lib/jekyll/commands/serve.rb
   - lib/jekyll/configuration.rb
   - lib/jekyll/converter.rb
   - lib/jekyll/converters/identity.rb

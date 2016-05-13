@@ -14,7 +14,7 @@ module Jekyll
             "Show a directory listing instead of loading your index file."],
           "skip_initial_build" => ["skip_initial_build", "--skip-initial-build",
             "Skips the initial site build which occurs before the server is started."]
-        }
+        }.freeze
 
         #
 
@@ -93,7 +93,7 @@ module Jekyll
             )
           }
 
-          opts[:DirectoryIndex] = [] if opts[:JekyllOptions]['show_dir_listing']
+          opts[:DirectoryIndex] = [] if opts[:JekyllOptions]["show_dir_listing"]
 
           enable_ssl(opts)
           enable_logging(opts)
@@ -107,7 +107,7 @@ module Jekyll
           WEBrick::Config::FileHandler.merge({
             :FancyIndexing     => true,
             :NondisclosureName => [
-              '.ht*', '~*'
+              ".ht*", "~*"
             ]
           })
         end
@@ -116,12 +116,11 @@ module Jekyll
 
         private
         def server_address(server, opts)
-          "%{prefix}://%{address}:%{port}%{baseurl}" % {
+          format("%{prefix}://%{address}:%{port}%{baseurl}",
             :prefix => server.config[:SSLEnable] ? "https" : "http",
             :baseurl => opts["baseurl"] ? "#{opts["baseurl"]}/" : "",
             :address => server.config[:BindAddress],
-            :port => server.config[:Port]
-          }
+            :port => server.config[:Port])
         end
 
         #
@@ -174,16 +173,29 @@ module Jekyll
         def enable_ssl(opts)
           return if !opts[:JekyllOptions]["ssl_cert"] && !opts[:JekyllOptions]["ssl_key"]
           if !opts[:JekyllOptions]["ssl_cert"] || !opts[:JekyllOptions]["ssl_key"]
-            raise RuntimeError, "--ssl-cert or --ssl-key missing."
+            raise "--ssl-cert or --ssl-key missing."
           end
 
+          load_ssl_cert_and_private_key(opts)
+          opts[:SSLEnable] = true
+        end
+
+        def load_ssl_cert_and_private_key(opts)
           require "openssl"
           require "webrick/https"
-          source_key = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], opts[:JekyllOptions]["ssl_key" ])
-          source_certificate = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], opts[:JekyllOptions]["ssl_cert"])
-          opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(File.read(source_certificate))
-          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(File.read(source_key))
-          opts[:SSLEnable] = true
+          opts[:SSLCertificate] =
+            OpenSSL::X509::Certificate.new(File.read(source_certificate(opts)))
+          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(File.read(source_key(opts)))
+        end
+
+        def source_key(opts)
+          Jekyll.sanitized_path(opts[:JekyllOptions]["source"],
+            opts[:JekyllOptions]["ssl_key" ])
+        end
+
+        def source_certificate(opts)
+          Jekyll.sanitized_path(opts[:JekyllOptions]["source"],
+            opts[:JekyllOptions]["ssl_cert"])
         end
 
         private
@@ -197,7 +209,7 @@ module Jekyll
 
         private
         def mime_types
-          file = File.expand_path('../mime.types', File.dirname(__FILE__))
+          file = File.expand_path("../mime.types", File.dirname(__FILE__))
           WEBrick::HTTPUtils.load_mime_types(file)
         end
       end
