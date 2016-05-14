@@ -14,14 +14,18 @@ end
 
 # rubygems
 require 'rubygems'
+require "pathname"
+
+# DO NOT MERGE THIS COMMIT.
+require "pathutil"
+Pathname = Pathutil
+
 
 # stdlib
-require "pathutil"
 require 'forwardable'
 require 'fileutils'
 require 'time'
 require 'English'
-require 'pathname'
 require 'logger'
 require 'set'
 
