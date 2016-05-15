@@ -6,7 +6,7 @@
 
 desc "Release #{name} v#{version}"
 task :release => :build do
-  unless `git branch` =~ /^\* master$/
+  unless `git branch` =~ /^\* 3\.1-stable$/
     puts "You must be on the master branch to release!"
     exit!
   end
