@@ -9,14 +9,9 @@ Feature: Hooks
     Jekyll::Hooks.register :site, :after_reset do |site|
       pageklass = Class.new(Jekyll::Page) do
         def initialize(site, base)
-          @site = site
-          @base = base
+          super(site, base, '/', 'foo.html')
           @data = {}
-          @dir = '/'
-          @name = 'foo.html'
           @content = 'mytinypage'
-
-          self.process(@name)
         end
       end
 

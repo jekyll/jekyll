@@ -256,7 +256,7 @@ module Jekyll
     # values
     #
     # Returns nothing.
-    def read(opts = {})
+    def read(opts = {}, path: self.path)
       Jekyll.logger.debug "Reading:", relative_path
 
       if yaml_file?

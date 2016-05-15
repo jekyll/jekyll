@@ -191,13 +191,6 @@ module Jekyll
         end
       end
 
-      pages.flatten.each do |page|
-        if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
-        end
-      end
-
       Jekyll::Hooks.trigger :site, :post_render, self, payload
     rescue Errno::ENOENT
       # ignore missing layout dir
@@ -223,6 +216,10 @@ module Jekyll
 
     def posts
       collections['posts'] ||= Collection.new(self, 'posts')
+    end
+
+    def pages
+      collections['pages'] ||= Collection.new(self, 'pages')
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
