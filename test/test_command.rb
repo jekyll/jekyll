@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestCommand < JekyllUnitTest
   context "when calling .add_build_options" do
