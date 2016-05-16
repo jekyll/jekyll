@@ -1,7 +1,6 @@
-require 'helper'
+require "helper"
 
 class TestFrontMatterDefaults < JekyllUnitTest
-
   context "A site with full front matter defaults" do
     setup do
       @site = Site.new(Jekyll.configuration({
@@ -69,7 +68,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       }))
       @site.process
-      @affected = @site.posts.docs.find { |page| page.relative_path =~ /win\// }
+      @affected = @site.posts.docs.find { |page| page.relative_path =~ %r!win\/! }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
 
@@ -100,7 +99,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
     should "affect only the specified type and all paths" do
       assert_equal @affected.reject { |page| page.data["key"] == "val" }, []
-      assert_equal @not_affected.reject { |page| page.data["key"] == "val" }, @not_affected
+      assert_equal @not_affected.reject { |page| page.data["key"] == "val" },
+                   @not_affected
     end
   end
 
@@ -125,7 +125,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
     should "affect only the specified type and all paths" do
       assert_equal @affected.reject { |page| page.data["key"] == "val" }, []
-      assert_equal @not_affected.reject { |page| page.data["key"] == "val" }, @not_affected
+      assert_equal @not_affected.reject { |page| page.data["key"] == "val" },
+                   @not_affected
     end
   end
 
@@ -199,5 +200,4 @@ class TestFrontMatterDefaults < JekyllUnitTest
       assert @site.posts.find { |page| page.data["date"] == date }
     end
   end
-
 end

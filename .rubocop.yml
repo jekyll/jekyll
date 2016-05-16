@@ -74,7 +74,6 @@ AllCops:
   - test/test_document.rb
   - test/test_entry_filter.rb
   - test/test_filters.rb
-  - test/test_front_matter_defaults.rb
   - test/test_generated_site.rb
   - test/test_kramdown.rb
   - test/test_layout_reader.rb
