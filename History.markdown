@@ -56,6 +56,7 @@
   * Update Rubocop rules (#4886)
   * Flesh out the issue template to be much more detailed (#4849)
   * Fixing rubocop offenses in lib/jekyll/cleaner.rb (#4892)
+  * Update `jekyll/commands*` to pass rubocop rules (#4888)
 
 ### Site Enhancements
 
