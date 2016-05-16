@@ -1,4 +1,4 @@
-require 'erb'
+require "erb"
 
 module Jekyll
   module Commands
@@ -6,11 +6,11 @@ module Jekyll
       class << self
         def init_with_program(prog)
           prog.command(:new) do |c|
-            c.syntax 'new PATH'
-            c.description 'Creates a new Jekyll site scaffold in PATH'
+            c.syntax "new PATH"
+            c.description "Creates a new Jekyll site scaffold in PATH"
 
-            c.option 'force', '--force', 'Force creation even if PATH already exists'
-            c.option 'blank', '--blank', 'Creates scaffolding but with empty files'
+            c.option "force", "--force", "Force creation even if PATH already exists"
+            c.option "blank", "--blank", "Creates scaffolding but with empty files"
 
             c.action do |args, options|
               Jekyll::Commands::New.process(args, options)
@@ -19,26 +19,19 @@ module Jekyll
         end
 
         def process(args, options = {})
-          raise ArgumentError.new('You must specify a path.') if args.empty?
+          raise ArgumentError, "You must specify a path." if args.empty?
 
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
-            Jekyll.logger.abort_with "Conflict:", "#{new_blog_path} exists and is not empty."
+            Jekyll.logger.abort_with "Conflict:",
+                      "#{new_blog_path} exists and is not empty."
           end
 
           if options["blank"]
             create_blank_site new_blog_path
           else
-            create_sample_files new_blog_path
-
-            File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
-              f.write(scaffold_post_content)
-            end
-
-            File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
-              f.write(gemfile_contents)
-            end
+            create_site new_blog_path
           end
 
           Jekyll.logger.info "New jekyll site installed in #{new_blog_path}."
@@ -59,7 +52,7 @@ module Jekyll
         #
         # Returns the filename of the sample post, as a String
         def initialized_post_name
-          "_posts/#{Time.now.strftime('%Y-%m-%d')}-welcome-to-jekyll.markdown"
+          "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.markdown"
         end
 
         private
@@ -90,12 +83,24 @@ gem "jekyll", "#{Jekyll::VERSION}"
 RUBY
         end
 
+        def create_site(new_blog_path)
+          create_sample_files new_blog_path
+
+          File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
+            f.write(scaffold_post_content)
+          end
+
+          File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
+            f.write(gemfile_contents)
+          end
+        end
+
         def preserve_source_location?(path, options)
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
         def create_sample_files(path)
-          FileUtils.cp_r site_template + '/.', path
+          FileUtils.cp_r site_template + "/.", path
           FileUtils.rm File.expand_path(scaffold_path, path)
         end
 
