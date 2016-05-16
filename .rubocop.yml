@@ -77,7 +77,6 @@ AllCops:
   - test/test_kramdown.rb
   - test/test_liquid_renderer.rb
   - test/test_page.rb
-  - test/test_rdiscount.rb
   - test/test_redcarpet.rb
   - test/test_regenerator.rb
   - test/test_related_posts.rb
