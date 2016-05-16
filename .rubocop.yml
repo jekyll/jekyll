@@ -76,7 +76,6 @@ AllCops:
   - test/test_filters.rb
   - test/test_kramdown.rb
   - test/test_liquid_renderer.rb
-  - test/test_log_adapter.rb
   - test/test_new_command.rb
   - test/test_page.rb
   - test/test_path_sanitization.rb
