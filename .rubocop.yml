@@ -71,7 +71,6 @@ AllCops:
   - features/support/formatter.rb
   - features/support/helpers.rb
   - test/test_configuration.rb
-  - test/test_doctor_command.rb
   - test/test_document.rb
   - test/test_entry_filter.rb
   - test/test_excerpt.rb
