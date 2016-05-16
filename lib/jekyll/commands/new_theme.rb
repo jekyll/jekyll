@@ -1,11 +1,11 @@
-require 'erb'
+require "erb"
 
 class Jekyll::Commands::NewTheme < Jekyll::Command
   class << self
     def init_with_program(prog)
       prog.command(:"new-theme") do |c|
-        c.syntax 'new-theme NAME'
-        c.description 'Creates a new Jekyll theme scaffold'
+        c.syntax "new-theme NAME"
+        c.description "Creates a new Jekyll theme scaffold"
 
         c.action do |args, _|
           Jekyll::Commands::NewTheme.process(args)
@@ -14,7 +14,7 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
     end
 
     def process(args)
-      raise InvalidThemeName, 'You must specify a theme name.' if args.empty?
+      raise Jekyll::Errors::InvalidThemeName, "You must specify a theme name." if args.empty?
 
       new_theme_name = args.join("_")
       theme = Jekyll::ThemeBuilder.new(new_theme_name)
@@ -23,7 +23,8 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
       end
 
       theme.create!
-      Jekyll.logger.info "Your new Jekyll theme, #{theme.name}, is ready for you in #{theme.path}!"
+      Jekyll.logger.info "Your new Jekyll theme, #{theme.name}," \
+        " is ready for you in #{theme.path}!"
       Jekyll.logger.info "For help getting started, read #{theme.path}/README.md."
     end
   end

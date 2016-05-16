@@ -1,12 +1,12 @@
 class Jekyll::ThemeBuilder
-  SCAFFOLD_DIRECTORIES = %w{
+  SCAFFOLD_DIRECTORIES = %w(
     _layouts _includes _sass
-  }.freeze
+  ).freeze
 
   attr_reader :name, :path
 
   def initialize(theme_name)
-    @name = theme_name.to_s.gsub(/ /, "_").gsub(/_+/, "_")
+    @name = theme_name.to_s.tr(" ", "_").gsub(/_+/, "_")
     @path = Pathname.new(File.expand_path(name, Dir.pwd))
   end
 
@@ -26,10 +26,8 @@ class Jekyll::ThemeBuilder
   def template_file(filename)
     [
       root.join("theme_template", "#{filename}.erb"),
-      root.join("theme_template", "#{filename}")
-    ].find do |pathname|
-      pathname.exist?
-    end
+      root.join("theme_template", filename.to_s)
+    ].find(&:exist?)
   end
 
   def template(filename)
@@ -43,14 +41,14 @@ class Jekyll::ThemeBuilder
   def mkdir_p(directories)
     Array(directories).each do |directory|
       full_path = path.join(directory)
-      Jekyll.logger.info "create", "#{full_path}"
+      Jekyll.logger.info "create", full_path.to_s
       FileUtils.mkdir_p(full_path)
     end
   end
 
   def write_file(filename, contents)
     full_path = path.join(filename)
-    Jekyll.logger.info "create", "#{full_path}"
+    Jekyll.logger.info "create", full_path.to_s
     File.write(full_path, contents)
   end
 
@@ -64,13 +62,13 @@ class Jekyll::ThemeBuilder
   end
 
   def create_accessories
-    %w{README.md CODE_OF_CONDUCT.md LICENSE.txt}.each do |filename|
+    %w(README.md CODE_OF_CONDUCT.md LICENSE.txt).each do |filename|
       write_file(filename, template(filename))
     end
   end
 
   def initialize_git_repo
-    Jekyll.logger.info "initialize", "#{path.join(".git")}"
+    Jekyll.logger.info "initialize", path.join(".git").to_s
     Dir.chdir(path.to_s) { `git init` }
   end
 
