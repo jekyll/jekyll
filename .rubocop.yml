@@ -70,7 +70,6 @@ AllCops:
   - features/step_definitions.rb
   - features/support/formatter.rb
   - features/support/helpers.rb
-  - test/simplecov_custom_profile.rb
   - test/test_configuration.rb
   - test/test_convertible.rb
   - test/test_doctor_command.rb
