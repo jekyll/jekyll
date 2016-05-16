@@ -3,14 +3,14 @@ module Jekyll
     class Serve < Command
       class << self
         COMMAND_OPTIONS = {
-          "ssl_cert" => ["--ssl-cert [CERT]", "X.509 (SSL) certificate."],
-          "host"     => ["host", "-H", "--host [HOST]", "Host to bind to"],
-          "open_url" => ["-o", "--open-url", "Launch your browser with your site."],
-          "detach"   => ["-B", "--detach", "Run the server in the background (detach)"],
-          "ssl_key"  => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
-          "port"     => ["-P", "--port [PORT]", "Port to listen on"],
-          "baseurl"  => ["-b", "--baseurl [URL]", "Base URL"],
-          "show_dir_listing" => ["--show-dir-listing",
+          "ssl_cert"           => ["--ssl-cert [CERT]", "X.509 (SSL) certificate."],
+          "host"               => ["host", "-H", "--host [HOST]", "Host to bind to"],
+          "open_url"           => ["-o", "--open-url", "Launch your site in a browser"],
+          "detach"             => ["-B", "--detach", "Run the server in the background"],
+          "ssl_key"            => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
+          "port"               => ["-P", "--port [PORT]", "Port to listen on"],
+          "baseurl"            => ["-b", "--baseurl [URL]", "Base URL"],
+          "show_dir_listing"   => ["--show-dir-listing",
             "Show a directory listing instead of loading your index file."],
           "skip_initial_build" => ["skip_initial_build", "--skip-initial-build",
             "Skips the initial site build which occurs before the server is started."]
@@ -117,10 +117,10 @@ module Jekyll
         private
         def server_address(server, opts)
           format("%{prefix}://%{address}:%{port}%{baseurl}", {
-            :prefix => server.config[:SSLEnable] ? "https" : "http",
+            :prefix  => server.config[:SSLEnable] ? "https" : "http",
             :baseurl => opts["baseurl"] ? "#{opts["baseurl"]}/" : "",
             :address => server.config[:BindAddress],
-            :port => server.config[:Port]
+            :port    => server.config[:Port]
           })
         end
 

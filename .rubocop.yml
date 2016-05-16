@@ -145,7 +145,7 @@ Style/Alias:
 Style/AlignArray:
   Enabled: false
 Style/AlignHash:
-  SupportedLastArgumentHashStyles: always_ignore
+  EnforcedHashRocketStyle: table
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
   Enabled: false
