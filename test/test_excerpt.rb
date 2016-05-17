@@ -92,8 +92,9 @@ class TestExcerpt < JekyllUnitTest
     context "#content" do
       context "before render" do
         should "be the first paragraph of the page" do
-          assert_equal "First paragraph with [link ref][link].\n\n[link]:"\
-                       " http://www.jekyllrb.com/", @excerpt.content
+          expected = "First paragraph with [link ref][link].\n\n[link]: "\
+                     "http://www.jekyllrb.com/"
+          assert_equal expected, @excerpt.content
         end
 
         should "contain any refs at the bottom of the page" do
@@ -109,8 +110,9 @@ class TestExcerpt < JekyllUnitTest
         end
 
         should "be the first paragraph of the page" do
-          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">"\
-                       "link ref</a>.</p>\n\n", @extracted_excerpt.output
+          expected = "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link "\
+                     "ref</a>.</p>\n\n"
+          assert_equal expected, @extracted_excerpt.output
         end
 
         should "link properly" do
