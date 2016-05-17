@@ -21,7 +21,7 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest/profile'
 require 'rspec/mocks'
-require File.expand_path("../lib/jekyll.rb", __dir__)
+require_relative "../lib/jekyll.rb"
 
 Jekyll.logger = Logger.new(StringIO.new)
 
