@@ -99,6 +99,7 @@
   * Add Jekyll Tips and the Cheatsheet to the list of resources (#4887)
   * Removed extra `</p>` from `site/_docs/permalinks.md` (#4890)
   * Add pubstorm deployment instructions to docs (#4881)
+  * Corrected pagination docs for hidden: true feature (#4903)
 
 ## 3.1.3 / 2016-04-18
 
