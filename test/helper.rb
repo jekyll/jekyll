@@ -28,7 +28,7 @@ require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/profile"
 require "rspec/mocks"
-require "jekyll"
+require_relative "../lib/jekyll.rb"
 
 Jekyll.logger = Logger.new(StringIO.new)
 
