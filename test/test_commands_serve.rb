@@ -11,7 +11,8 @@ class TestCommandsServe < JekyllUnitTest
 
   context "with a program" do
     setup do
-      @merc, @cmd = nil, Jekyll::Commands::Serve
+      @merc = nil
+      @cmd = Jekyll::Commands::Serve
       Mercenary.program(:jekyll) do |p|
         @merc = @cmd.init_with_program(
           p
@@ -63,7 +64,7 @@ class TestCommandsServe < JekyllUnitTest
 
       should "use user port" do
         # WHAT?!?!1 Over 9000? That's impossible.
-        assert_equal 9001, custom_opts( { "port" => 9001 })[
+        assert_equal 9001, custom_opts({ "port" => 9001 })[
           :Port
         ]
       end
@@ -104,10 +105,10 @@ class TestCommandsServe < JekyllUnitTest
           allow(File).to receive(:read).and_return("foo")
 
           result = custom_opts({
-            "ssl_cert" => "foo",
-            "source" => "bar",
+            "ssl_cert"   => "foo",
+            "source"     => "bar",
             "enable_ssl" => true,
-            "ssl_key" => "bar"
+            "ssl_key"    => "bar"
           })
 
           assert result[:SSLEnable]
