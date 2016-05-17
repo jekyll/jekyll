@@ -4,7 +4,7 @@ class TestGeneratedSite < JekyllUnitTest
   context "generated sites" do
     setup do
       clear_dest
-      config = Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir,
+      config = Jekyll::Configuration::DEFAULTS.merge({ "source"      => source_dir,
                                                        "destination" => dest_dir })
 
       @site = fixture_site(config)
@@ -65,7 +65,7 @@ OUTPUT
   context "generating limited posts" do
     setup do
       clear_dest
-      config = Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir,
+      config = Jekyll::Configuration::DEFAULTS.merge({ "source"      => source_dir,
                                                        "destination" => dest_dir,
                                                        "limit_posts" => 5 })
       @site = fixture_site(config)
@@ -81,7 +81,7 @@ OUTPUT
       assert_raises ArgumentError do
         clear_dest
         config = Jekyll::Configuration::DEFAULTS.merge({
-          "source" => source_dir,
+          "source"      => source_dir,
           "destination" => dest_dir,
           "limit_posts" => -1
         })
@@ -92,7 +92,7 @@ OUTPUT
     should "acceptable limit post is 0" do
       clear_dest
       config = Jekyll::Configuration::DEFAULTS.merge({
-        "source" => source_dir,
+        "source"      => source_dir,
         "destination" => dest_dir,
         "limit_posts" => 0
       })

@@ -105,10 +105,10 @@ class TestCommandsServe < JekyllUnitTest
           allow(File).to receive(:read).and_return("foo")
 
           result = custom_opts({
-            "ssl_cert" => "foo",
-            "source" => "bar",
+            "ssl_cert"   => "foo",
+            "source"     => "bar",
             "enable_ssl" => true,
-            "ssl_key" => "bar"
+            "ssl_key"    => "bar"
           })
 
           assert result[:SSLEnable]

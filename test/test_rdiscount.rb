@@ -10,9 +10,9 @@ class TestRdiscount < JekyllUnitTest
       end
 
       config = {
-        "markdown" => "rdiscount",
+        "markdown"  => "rdiscount",
         "rdiscount" => {
-          "toc_token" => "{:toc}",
+          "toc_token"  => "{:toc}",
           "extensions" => %w(smart generate_toc)
         }
       }

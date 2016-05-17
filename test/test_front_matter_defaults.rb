@@ -6,8 +6,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "defaults" => [{
-          "scope" => {
+        "defaults"    => [{
+          "scope"  => {
             "path" => "contacts",
             "type" => "page"
           },
@@ -32,8 +32,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "defaults" => [{
-          "scope" => {
+        "defaults"    => [{
+          "scope"  => {
             "path" => "index.html"
           },
           "values" => {
@@ -58,8 +58,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "defaults" => [{
-          "scope" => {
+        "defaults"    => [{
+          "scope"  => {
             "path" => "win"
           },
           "values" => {
@@ -83,8 +83,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "defaults" => [{
-          "scope" => {
+        "defaults"    => [{
+          "scope"  => {
             "type" => "page"
           },
           "values" => {
@@ -109,8 +109,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "defaults" => [{
-          "scope" => {
+        "defaults"    => [{
+          "scope"  => {
             "type" => "pages"
           },
           "values" => {
@@ -135,8 +135,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "defaults" => [{
-          "scope" => {
+        "defaults"    => [{
+          "scope"  => {
           },
           "values" => {
             "key" => "val"
@@ -159,7 +159,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "defaults" => [{
+        "defaults"    => [{
           "values" => {
             "key" => "val"
           }
@@ -181,7 +181,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "defaults" => [{
+        "defaults"    => [{
           "values" => {
             "date" => "2015-01-01 00:00:01"
           }

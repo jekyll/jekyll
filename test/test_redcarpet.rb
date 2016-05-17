@@ -10,7 +10,7 @@ class TestRedcarpet < JekyllUnitTest
       end
 
       @config = {
-        "markdown" => "redcarpet",
+        "markdown"  => "redcarpet",
         "redcarpet" => {
           "extensions" => %w(smart strikethrough filter_html)
         }

@@ -3,7 +3,7 @@ require "helper"
 class TestLayoutReader < JekyllUnitTest
   context "reading layouts" do
     setup do
-      config = Jekyll::Configuration::DEFAULTS.merge({ "source" => source_dir,
+      config = Jekyll::Configuration::DEFAULTS.merge({ "source"      => source_dir,
                                                        "destination" => dest_dir })
       @site = fixture_site(config)
     end

@@ -9,7 +9,7 @@ class TestDoctorCommand < JekyllUnitTest
 
     should "return success on a valid site/page" do
       @site = Site.new(Jekyll.configuration({
-        "source" => File.join(source_dir, "/_urls_differ_by_case_valid"),
+        "source"      => File.join(source_dir, "/_urls_differ_by_case_valid"),
         "destination" => dest_dir
       }))
       @site.process
@@ -22,7 +22,7 @@ class TestDoctorCommand < JekyllUnitTest
 
     should "return warning for pages only differing by case" do
       @site = Site.new(Jekyll.configuration({
-        "source" => File.join(source_dir, "/_urls_differ_by_case_invalid"),
+        "source"      => File.join(source_dir, "/_urls_differ_by_case_invalid"),
         "destination" => dest_dir
       }))
       @site.process
