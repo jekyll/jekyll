@@ -26,6 +26,7 @@ env:
 branches:
   only:
     - master
+    - 3.1-(.*)
 
 notifications:
   irc:
