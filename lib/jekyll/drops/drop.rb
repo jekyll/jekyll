@@ -3,7 +3,7 @@
 module Jekyll
   module Drops
     class Drop < Liquid::Drop
-      NON_CONTENT_METHODS = [:[], :[]=, :inspect, :to_h, :fallback_data].freeze
+      NON_CONTENT_METHODS = [:[], :[]=, :inspect, :to_h, :fallback_data, :to_s].freeze
 
       # Get or set whether the drop class is mutable.
       # Mutability determines whether or not pre-defined fields may be
