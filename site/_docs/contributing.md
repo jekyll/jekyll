@@ -95,7 +95,7 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 ### Code contributions generally
 
-* Jekyll follows the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby).
+* Jekyll follows the [Ruby Styleguide](https://github.com/bbatsov/ruby-style-guide).
 
 * Don't bump the Gem version in your pull request (if you don't know what that means, you probably didn't).
 
