@@ -9,8 +9,9 @@ class TestExcerpt < JekyllUnitTest
   end
 
   def do_render(document)
-    @site.layouts = { "default" => Layout.new(@site, source_dir("_layouts"),
-                                                                "simple.html") }
+    @site.layouts = {
+      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")
+    }
     document.output = Jekyll::Renderer.new(@site, document, @site.site_payload).run
   end
 
