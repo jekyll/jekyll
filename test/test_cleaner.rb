@@ -37,8 +37,7 @@ class TestCleaner < JekyllUnitTest
     end
   end
 
-  context "not-nested directory in keep_files and similary named directory not "\
-          "in keep_files" do
+  context "non-nested directory & similarly-named directory *not* in keep_files" do
     setup do
       clear_dest
 

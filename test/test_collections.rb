@@ -113,8 +113,7 @@ class TestCollections < JekyllUnitTest
       @collection = @site.collections["methods"]
     end
 
-    should "create a Hash on Site with the label mapped to the instance of the "\
-           "Collection" do
+    should "create a Hash mapping label to Collection instance" do
       assert @site.collections.is_a?(Hash)
       refute_nil @site.collections["methods"]
       assert @site.collections["methods"].is_a? Jekyll::Collection
@@ -137,8 +136,7 @@ class TestCollections < JekyllUnitTest
       end
     end
 
-    should "not include files which start with an underscore in the base collection "\
-           "directory" do
+    should "not include files from base dir which start with an underscore" do
       refute_includes @collection.filtered_entries, "_do_not_read_me.md"
     end
 
@@ -187,8 +185,7 @@ class TestCollections < JekyllUnitTest
       refute_includes @collection.filtered_entries, "/um_hi.md"
     end
 
-    should "include the symlinked file in the list of docs as it resolves to inside "\
-           "site.source" do
+    should "include the symlinked file from site.source in the list of docs" do
       assert_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end
