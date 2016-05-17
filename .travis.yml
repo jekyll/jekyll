@@ -23,11 +23,6 @@ env:
     - TEST_SUITE=test
     - TEST_SUITE=cucumber
 
-branches:
-  only:
-    - master
-    - 3.1-(.*)
-
 notifications:
   irc:
     template: "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
