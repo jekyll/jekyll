@@ -43,11 +43,7 @@ module Jekyll
     # Thanks to whoever made it.
     def deep_merge_hashes!(target, overwrite)
       target.merge!(overwrite) do |key, old_val, new_val|
-        if new_val.nil?
-          old_val
-        else
-          mergable?(old_val) && mergable?(new_val) ? deep_merge_hashes(old_val, new_val) : new_val
-        end
+        mergable?(old_val) && mergable?(new_val) ? deep_merge_hashes(old_val, new_val) : new_val
       end
 
       if target.respond_to?(:default_proc) && overwrite.respond_to?(:default_proc) && target.default_proc.nil?

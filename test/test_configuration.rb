@@ -1,7 +1,10 @@
 require 'helper'
 
 class TestConfiguration < JekyllUnitTest
-  @@defaults = Jekyll::Configuration::DEFAULTS.add_default_collections.freeze
+  @@test_config = {
+    "source" => new(nil).source_dir,
+    "destination" => dest_dir
+  }
 
   context "#stringify_keys" do
     setup do
@@ -154,27 +157,27 @@ class TestConfiguration < JekyllUnitTest
   end
   context "loading configuration" do
     setup do
-      @path = File.join(Dir.pwd, '_config.yml')
+      @path = source_dir('_config.yml')
       @user_config = File.join(Dir.pwd, "my_config_file.yml")
     end
 
     should "fire warning with no _config.yml" do
       allow(SafeYAML).to receive(:load_file).with(@path) { raise SystemCallError, "No such file or directory - #{@path}" }
       allow($stderr).to receive(:puts).with("Configuration file: none".yellow)
-      assert_equal @@defaults, Jekyll.configuration({})
+      assert_equal site_configuration, Jekyll.configuration(@@test_config)
     end
 
     should "load configuration as hash" do
       allow(SafeYAML).to receive(:load_file).with(@path).and_return(Hash.new)
       allow($stdout).to receive(:puts).with("Configuration file: #{@path}")
-      assert_equal @@defaults, Jekyll.configuration({})
+      assert_equal site_configuration, Jekyll.configuration(@@test_config)
     end
 
     should "fire warning with bad config" do
       allow(SafeYAML).to receive(:load_file).with(@path).and_return(Array.new)
       allow($stderr).to receive(:puts).and_return(("WARNING: ".rjust(20) + "Error reading configuration. Using defaults (and options).").yellow)
       allow($stderr).to receive(:puts).and_return("Configuration file: (INVALID) #{@path}".yellow)
-      assert_equal @@defaults, Jekyll.configuration({})
+      assert_equal site_configuration, Jekyll.configuration(@@test_config)
     end
 
     should "fire warning when user-specified config file isn't there" do
@@ -193,8 +196,8 @@ class TestConfiguration < JekyllUnitTest
   context "loading config from external file" do
     setup do
       @paths = {
-        :default => File.join(Dir.pwd, '_config.yml'),
-        :other   => File.join(Dir.pwd, '_config.live.yml'),
+        :default => source_dir('_config.yml'),
+        :other   => source_dir('_config.live.yml'),
         :toml    => source_dir('_config.dev.toml'),
         :empty   => ""
       }
@@ -203,24 +206,31 @@ class TestConfiguration < JekyllUnitTest
     should "load default plus posts config if no config_file is set" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
-      assert_equal @@defaults, Jekyll.configuration({})
+      assert_equal site_configuration, Jekyll.configuration(@@test_config)
     end
 
     should "load different config if specified" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({"baseurl" => "http://wahoo.dev"})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
-      assert_equal Utils.deep_merge_hashes(@@defaults, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => @paths[:other] })
+      Jekyll.configuration({ "config" => @paths[:other] })
+      assert_equal \
+        site_configuration({ "baseurl" => "http://wahoo.dev" }),
+        Jekyll.configuration(@@test_config.merge({ "config" => @paths[:other] }))
     end
 
     should "load default config if path passed is empty" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
-      assert_equal @@defaults, Jekyll.configuration({ "config" => @paths[:empty] })
+      assert_equal \
+        site_configuration,
+        Jekyll.configuration(@@test_config.merge({ "config" => [@paths[:empty]] }))
     end
 
     should "successfully load a TOML file" do
       Jekyll.logger.log_level = :warn
-      assert_equal @@defaults.clone.merge({ "baseurl" => "/you-beautiful-blog-you", "title" => "My magnificent site, wut" }), Jekyll.configuration({ "config" => [@paths[:toml]] })
+      assert_equal \
+        site_configuration({ "baseurl" => "/you-beautiful-blog-you", "title" => "My magnificent site, wut" }),
+        Jekyll.configuration(@@test_config.merge({ "config" => [@paths[:toml]] }))
       Jekyll.logger.log_level = :info
     end
 
@@ -233,7 +243,9 @@ class TestConfiguration < JekyllUnitTest
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:toml]}")
-      assert_equal @@defaults, Jekyll.configuration({ "config" => [@paths[:default], @paths[:other], @paths[:toml]] })
+      assert_equal \
+        site_configuration,
+        Jekyll.configuration(@@test_config.merge({ "config" => [@paths[:default], @paths[:other], @paths[:toml]] }))
     end
 
     should "load multiple config files and last config should win" do
@@ -241,7 +253,63 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({"baseurl" => "http://wahoo.dev"})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
-      assert_equal Utils.deep_merge_hashes(@@defaults, { "baseurl" => "http://wahoo.dev" }), Jekyll.configuration({ "config" => [@paths[:default], @paths[:other]] })
+      assert_equal \
+        site_configuration({ "baseurl" => "http://wahoo.dev" }),
+        Jekyll.configuration(@@test_config.merge({ "config" => [@paths[:default], @paths[:other]] }))
+    end
+  end
+
+  context "#add_default_collections" do
+    should "not do anything if collections is nil" do
+      conf = Configuration::DEFAULTS.dup.tap {|c| c['collections'] = nil }
+      assert_equal conf.add_default_collections, conf
+      assert_nil conf.add_default_collections['collections']
+    end
+
+    should "converts collections to a hash if an array" do
+      conf = Configuration::DEFAULTS.dup.tap {|c| c['collections'] = ['docs'] }
+      assert_equal conf.add_default_collections, conf.merge({
+        "collections" => {
+          "docs" => {},
+          "posts" => {
+            "output" => true,
+            "permalink" => "/:categories/:year/:month/:day/:title.html"
+          }}})
+    end
+
+    should "force collections.posts.output = true" do
+      conf = Configuration::DEFAULTS.dup.tap {|c| c['collections'] = {'posts' => {'output' => false}} }
+      assert_equal conf.add_default_collections, conf.merge({
+        "collections" => {
+          "posts" => {
+            "output" => true,
+            "permalink" => "/:categories/:year/:month/:day/:title.html"
+          }}})
+    end
+
+    should "set collections.posts.permalink if it's not set" do
+      conf = Configuration::DEFAULTS
+      assert_equal conf.add_default_collections, conf.merge({
+        "collections" => {
+          "posts" => {
+            "output" => true,
+            "permalink" => "/:categories/:year/:month/:day/:title.html"
+          }}})
+    end
+
+    should "leave collections.posts.permalink alone if it is set" do
+      posts_permalink = "/:year/:title/"
+      conf = Configuration[default_configuration].tap do |c|
+        c['collections'] = {
+          "posts" => { "permalink" => posts_permalink }
+        }
+      end
+      assert_equal conf.add_default_collections, conf.merge({
+        "collections" => {
+          "posts" => {
+            "output" => true,
+            "permalink" => posts_permalink
+          }}})
     end
   end
 end
