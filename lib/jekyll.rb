@@ -105,10 +105,9 @@ module Jekyll
       end
 
       # Merge DEFAULTS < _config.yml < override
-      config = Configuration.from Utils.deep_merge_hashes(config, override).stringify_keys
-      set_timezone(config['timezone']) if config['timezone']
-
-      config
+      Configuration.from(Utils.deep_merge_hashes(config, override)).tap do |config|
+        set_timezone(config['timezone']) if config['timezone']
+      end
     end
 
     # Public: Set the TZ environment variable to use the timezone specified
