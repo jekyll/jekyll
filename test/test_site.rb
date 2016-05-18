@@ -3,42 +3,42 @@ require 'helper'
 class TestSite < JekyllUnitTest
   context "configuring sites" do
     should "have an array for plugins by default" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS)
+      site = Site.new default_configuration
       assert_equal [File.join(Dir.pwd, '_plugins')], site.plugins
     end
 
     should "look for plugins under the site directory by default" do
       site = Site.new(site_configuration)
-      assert_equal [File.join(source_dir, '_plugins')], site.plugins
+      assert_equal [source_dir('_plugins')], site.plugins
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => '/tmp/plugins'}))
+      site = Site.new(site_configuration({ 'plugins_dir' => '/tmp/plugins' }))
       assert_equal ['/tmp/plugins'], site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => ['/tmp/plugins', '/tmp/otherplugins']}))
+      site = Site.new(site_configuration({ 'plugins_dir' => ['/tmp/plugins', '/tmp/otherplugins'] }))
       assert_equal ['/tmp/plugins', '/tmp/otherplugins'], site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => []}))
+      site = Site.new(site_configuration({ 'plugins_dir' => [] }))
       assert_equal [], site.plugins
     end
 
-    should "have an empty array for plugins if nil is passed" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'plugins_dir' => nil}))
-      assert_equal [], site.plugins
+    should "have the default for plugins if nil is passed" do
+      site = Site.new(site_configuration({ 'plugins_dir' => nil }))
+      assert_equal [source_dir('_plugins')], site.plugins
     end
 
     should "expose default baseurl" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS)
+      site = Site.new(default_configuration)
       assert_equal Jekyll::Configuration::DEFAULTS['baseurl'], site.baseurl
     end
 
     should "expose baseurl passed in from config" do
-      site = Site.new(Jekyll::Configuration::DEFAULTS.merge({'baseurl' => '/blog'}))
+      site = Site.new(site_configuration({ 'baseurl' => '/blog' }))
       assert_equal '/blog', site.baseurl
     end
   end
