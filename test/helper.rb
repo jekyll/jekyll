@@ -55,6 +55,7 @@ module Minitest::Assertions
       "Expected '#{filename}' not to exist"
     }
     refute File.exist?(filename), msg
+  end
 end
 
 module DirectoryHelpers
