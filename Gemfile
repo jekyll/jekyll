@@ -4,7 +4,7 @@ gemspec :name => "jekyll"
 gem "rake", "~> 10.1"
 group :development do
   gem "launchy", "~> 2.3"
-  gem "rubocop", :branch => :master, :github => "bbatsov/rubocop"
+  gem "rubocop", "~> 0.40"
   gem "pry"
 
   unless RUBY_ENGINE == "jruby"
@@ -55,7 +55,7 @@ end
 group :jekyll_optional_dependencies do
   gem "toml", "~> 0.1.0"
   gem "coderay", "~> 1.1.0"
-  gem "jekyll-docs", path: '../docs' if Dir.exist?('../docs')
+  gem "jekyll-docs", path: '../docs' if Dir.exist?('../docs') && ENV["JEKYLL_VERSION"]
   gem "jekyll-gist", "~> 1.0"
   gem "jekyll-feed", "~> 0.1.3"
   gem "jekyll-coffeescript", "~> 1.0"
