@@ -71,7 +71,7 @@ module Jekyll
         'hard_wrap'      => false,
         'footnote_nr'    => 1
       }
-    }].freeze
+    }.map { |k, v| [k, v.freeze] }].freeze
 
     class << self
       # Static: Produce a Configuration ready for use in a Site.

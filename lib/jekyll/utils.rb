@@ -53,11 +53,24 @@ module Jekyll
         target.default_proc = overwrite.default_proc
       end
 
+      target.each do |key, val|
+        target[key] = val.dup if val.frozen? && duplicable?(val)
+      end
+
       target
     end
 
     def mergable?(value)
       value.is_a?(Hash) || value.is_a?(Drops::Drop)
+    end
+
+    def duplicable?(obj)
+      case obj
+      when nil, false, true, Symbol, Numeric
+        false
+      else
+        true
+      end
     end
 
     # Read array from the supplied hash favouring the singular key
