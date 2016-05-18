@@ -6,6 +6,8 @@
   * Configuration permalink fix where `collections.posts.permalink` inherits properly from `permalink` only when it doesn't exist (#4910)
   * Add `Configuration.from` to make it easier to build configs from just a hash
   * Sorting `site.collections` in Liquid by label (#4910)
+  * Fix bug where `layout` in Liquid would inherit from previously-rendered layouts' metadatas (#4909)
+  * Fix bug where `layout` in Liquid would override in the wrong direction (more-specific layouts' data were overwritten by their parent layouts' data; this has now been reversed) (#4909)
 
 ## 3.1.2 / 2016-02-19
 
