@@ -209,10 +209,13 @@ module Jekyll
 
       used = Set.new([layout])
 
+      # Reset the payload layout data to ensure it starts fresh for each page.
+      payload["layout"] = nil
+
       while layout
         Jekyll.logger.debug "Rendering Layout:", path
         payload["content"] = output
-        payload["layout"]  = Utils.deep_merge_hashes(payload["layout"] || {}, layout.data)
+        payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
 
         self.output = render_liquid(layout.content,
                                     payload,
