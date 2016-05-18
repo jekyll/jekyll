@@ -3,6 +3,9 @@
 ### Bug Fixes
 
   * Add `ExcerptDrop` and remove excerpt's ability to refer to itself in Liquid (#4907)
+  * Configuration permalink fix where `collections.posts.permalink` inherits properly from `permalink` only when it doesn't exist (#4910)
+  * Add `Configuration.from` to make it easier to build configs from just a hash
+  * Sorting `site.collections` in Liquid by label (#4910)
 
 ## 3.1.2 / 2016-02-19
 
