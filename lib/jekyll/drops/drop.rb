@@ -147,6 +147,12 @@ module Jekyll
         keys.each(&block)
       end
 
+      def each(&block)
+        each_key.each do |key|
+          yield key, self[key]
+        end
+      end
+
       def merge(other, &block)
         self.dup.tap do |me|
           if block.nil?
