@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Add `ExcerptDrop` and remove excerpt's ability to refer to itself in Liquid (#4907)
+
 ## 3.1.2 / 2016-02-19
 
 ### Minor Enhancements
