@@ -58,6 +58,7 @@ module Minitest::Assertions
   def refute_exist(filename, msg = nil)
     msg = message(msg) { "Expected '#{filename}' not to exist" }
     refute File.exist?(filename), msg
+  end
 end
 
 module DirectoryHelpers
