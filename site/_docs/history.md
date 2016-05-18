@@ -4,6 +4,20 @@ title: History
 permalink: "/docs/history/"
 ---
 
+## 3.1.4 / 2016-05-18
+{: #v3-1-4}
+
+### Bug Fixes
+{: #bug-fixes-v3-1-4}
+
+- Add `ExcerptDrop` and remove excerpt's ability to refer to itself in Liquid ([#4907]({{ site.repository }}/issues/4907))
+- Configuration permalink fix where `collections.posts.permalink` inherits properly from `permalink` only when it doesn't exist ([#4910]({{ site.repository }}/issues/4910))
+- Add `Configuration.from` to make it easier to build configs from just a hash
+- Sorting `site.collections` in Liquid by label ([#4910]({{ site.repository }}/issues/4910))
+- Fix bug where `layout` in Liquid would inherit from previously-rendered layouts' metadatas ([#4909]({{ site.repository }}/issues/4909))
+- Fix bug where `layout` in Liquid would override in the wrong direction (more-specific layouts' data were overwritten by their parent layouts' data; this has now been reversed) ([#4909]({{ site.repository }}/issues/4909))
+
+
 ## 3.1.2 / 2016-02-19
 {: #v3-1-2}
 
