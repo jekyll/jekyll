@@ -30,6 +30,7 @@ module Jekyll
         @options = options
         @exceptions = []
         @indent = 0
+        @timings = {}
       end
 
       #
@@ -42,6 +43,7 @@ module Jekyll
 
       def after_features(features)
         @io.puts
+        print_worst_offenders
         print_summary(features)
       end
 
@@ -54,20 +56,32 @@ module Jekyll
 
       #
 
-      def tag_name(tag_name); end
-
-      def comment_line(comment_line); end
-
-      def after_feature_element(feature_element); end
-
-      def after_tags(tags); end
+      def feature_element_timing_key(feature_element)
+        "\"#{feature_element.name.to_s.sub("Scenario: ", "")}\" (#{feature_element.location})"
+      end
 
       #
 
       def before_feature_element(_feature_element)
         @indent = 2
         @scenario_indent = 2
+        @timings[feature_element_timing_key(feature_element)] = Time.now
       end
+
+      #
+
+      def after_feature_element(feature_element)
+        @timings[feature_element_timing_key(feature_element)] = Time.now - @timings[feature_element_timing_key(feature_element)]
+        @io.print " (#{@timings[feature_element_timing_key(feature_element)]}s)"
+      end
+
+      #
+
+      def tag_name(tag_name); end
+
+      def comment_line(comment_line); end
+
+      def after_tags(tags); end
 
       #
 
@@ -174,6 +188,17 @@ module Jekyll
 
       def cell_prefix(status)
         @prefixes[status]
+      end
+
+      #
+
+      def print_worst_offenders
+        @io.puts
+        @io.puts "Worst offenders:"
+        @timings.sort_by { |_f, t| -t }.each do |(f, t)|
+          @io.puts "  #{t}s for #{f}"
+        end
+        @io.puts
       end
 
       #
