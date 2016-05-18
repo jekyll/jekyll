@@ -245,7 +245,6 @@ module Jekyll
       end
 
       %w(include exclude).each do |option|
-        config[option] ||= []
         if config[option].is_a?(String)
           Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" \
             " must now be specified as an array, but you specified" \
