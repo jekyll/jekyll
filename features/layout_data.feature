@@ -36,17 +36,21 @@ Feature: Layout data
     Then the "_site/index.html" file should exist
     And I should see "page content\n foo: my custom data" in "_site/index.html"
 
-  Scenario: Inherit custom layout data
+  Scenario: Inherit custom layout data and clear when not present
     Given I have a _layouts directory
     And I have a "_layouts/default.html" file with content:
       """
-      {{ content }} foo: '{{ layout.foo }}'
+      ---
+      bar: i'm default
+      ---
+      {{ content }} foo: '{{ layout.foo }}' bar: '{{ layout.bar }}'
       """
     And I have a "_layouts/special.html" file with content:
       """
       ---
       layout: default
       foo: my special data
+      bar: im special
       ---
       {{ content }}
       """
@@ -54,6 +58,7 @@ Feature: Layout data
       """
       ---
       layout: default
+      bar: im page
       ---
       {{ content }}
       """
@@ -61,5 +66,5 @@ Feature: Layout data
     And I have an "jekyll.html" page with layout "page" that contains "page content"
     When I run jekyll build
     Then the "_site/index.html" file should exist
-    And I should see "page content\n foo: 'my special data'" in "_site/index.html"
-    And I should see "page content\n foo: ''" in "_site/jekyll.html"
+    And I should see "page content\n foo: 'my special data' bar: 'im special'" in "_site/index.html"
+    And I should see "page content\n foo: '' bar: 'im page'" in "_site/jekyll.html"
