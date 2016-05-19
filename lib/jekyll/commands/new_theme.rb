@@ -14,7 +14,9 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
     end
 
     def process(args)
-      raise Jekyll::Errors::InvalidThemeName, "You must specify a theme name." if args.empty?
+      if !args || args.empty?
+        raise Jekyll::Errors::InvalidThemeName, "You must specify a theme name."
+      end
 
       new_theme_name = args.join("_")
       theme = Jekyll::ThemeBuilder.new(new_theme_name)
