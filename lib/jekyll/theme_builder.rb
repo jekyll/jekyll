@@ -1,6 +1,6 @@
 class Jekyll::ThemeBuilder
   SCAFFOLD_DIRECTORIES = %w(
-    _layouts _includes _sass
+    _layouts _includes _sass example example/_posts
   ).freeze
 
   attr_reader :name, :path
@@ -14,6 +14,7 @@ class Jekyll::ThemeBuilder
     create_directories
     create_gemspec
     create_accessories
+    create_example_site
     initialize_git_repo
   end
 
@@ -62,9 +63,16 @@ class Jekyll::ThemeBuilder
   end
 
   def create_accessories
-    %w(README.md CODE_OF_CONDUCT.md LICENSE.txt).each do |filename|
+    %w(README.md Rakefile CODE_OF_CONDUCT.md LICENSE.txt).each do |filename|
       write_file(filename, template(filename))
     end
+  end
+
+  def create_example_site
+    %w(example/_config.yml example/index.html example/style.scss).each do |filename|
+      write_file(filename, template(filename))
+    end
+    write_file("example/_posts/#{Time.now.strftime("%Y-%m-%d")}-my-example-post.md", template("example/_post.md"))
   end
 
   def initialize_git_repo
