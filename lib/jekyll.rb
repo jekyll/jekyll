@@ -168,6 +168,7 @@ module Jekyll
 end
 
 require "jekyll/drops/drop"
+require "jekyll/drops/document_drop"
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/converters/markdown'
