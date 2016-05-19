@@ -101,6 +101,12 @@
   * Add pubstorm deployment instructions to docs (#4881)
   * Corrected pagination docs for hidden: true feature (#4903)
 
+## 3.1.5 / 2016-05-18
+
+### Bug Fixes
+
+  * Sort the results of the `require_all` glob (affects Linux only). (#4912)
+
 ## 3.1.4 / 2016-05-18
 
 ### Bug Fixes
