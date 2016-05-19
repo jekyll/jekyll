@@ -3,7 +3,9 @@
 module Jekyll
   module Drops
     class Drop < Liquid::Drop
-      NON_CONTENT_METHODS = [:[], :[]=, :inspect, :to_h, :fallback_data].freeze
+      include Enumerable
+
+      NON_CONTENT_METHODS = [:[], :[]=, :inspect, :to_h, :fallback_data, :collapse_document].freeze
 
       # Get or set whether the drop class is mutable.
       # Mutability determines whether or not pre-defined fields may be
@@ -136,6 +138,22 @@ module Jekyll
       def inspect
         require 'json'
         JSON.pretty_generate to_h
+      end
+
+      # Generate a Hash for use in generating JSON.
+      # This is useful if fields need to be cleared before the JSON can generate.
+      #
+      # Returns a Hash ready for JSON generation.
+      def hash_for_json(state = nil)
+        to_h
+      end
+
+      # Generate a JSON representation of the Drop.
+      #
+      # Returns a JSON representation of the Drop in a String.
+      def to_json(state = nil)
+        require 'json'
+        JSON.generate(hash_for_json(state), state)
       end
 
       # Collects all the keys and passes each to the block in turn.

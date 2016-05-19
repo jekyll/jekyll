@@ -44,6 +44,46 @@ class TestDocument < JekyllUnitTest
       assert_equal "foo.bar", @document.data["whatever"]
     end
 
+    should "be jsonify-able" do
+      page_json = @document.to_liquid.to_json
+      parsed = JSON.parse(page_json)
+
+      assert_equal "Jekyll.configuration", parsed["title"]
+      assert_equal "foo.bar", parsed["whatever"]
+      assert_equal nil, parsed["previous"]
+
+      next_doc = parsed["next"]
+      assert_equal "_methods/escape-+ #%20[].md", next_doc["path"]
+      assert_equal "Jekyll.escape", next_doc["title"]
+
+      next_prev_doc = next_doc["previous"]
+      assert_equal "Jekyll.configuration", next_prev_doc["title"]
+      assert_equal "_methods/configuration.md", next_prev_doc["path"]
+      assert_equal "_methods/escape-+ #%20[].md", next_prev_doc["next"]["path"]
+      assert_nil next_prev_doc["previous"] # nothing before Jekyll.configuration
+      assert_nil next_prev_doc["next"]["next"]
+      assert_nil next_prev_doc["next"]["previous"]
+      assert_nil next_prev_doc["next"]["content"]
+      assert_nil next_prev_doc["next"]["excerpt"]
+      assert_nil next_prev_doc["next"]["output"]
+
+      next_next_doc = next_doc["next"]
+      assert_equal "Jekyll.sanitized_path", next_next_doc["title"]
+      assert_equal "_methods/sanitized_path.md", next_next_doc["path"]
+      assert_equal "_methods/escape-+ #%20[].md", next_next_doc["previous"]["path"]
+      assert_equal "_methods/site/generate.md", next_next_doc["next"]["path"]
+      assert_nil next_next_doc["next"]["next"]
+      assert_nil next_next_doc["next"]["previous"]
+      assert_nil next_next_doc["next"]["content"]
+      assert_nil next_next_doc["next"]["excerpt"]
+      assert_nil next_next_doc["next"]["output"]
+      assert_nil next_next_doc["previous"]["next"]
+      assert_nil next_next_doc["previous"]["previous"]
+      assert_nil next_next_doc["previous"]["content"]
+      assert_nil next_next_doc["previous"]["excerpt"]
+      assert_nil next_next_doc["previous"]["output"]
+    end
+
     context "with YAML ending in three dots" do
 
       setup do

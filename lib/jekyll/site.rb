@@ -279,6 +279,7 @@ module Jekyll
     def site_payload
       Drops::UnifiedPayloadDrop.new self
     end
+    alias_method :to_liquid, :site_payload
 
     # Get the implementation class for the given Converter.
     # Returns the Converter instance implementing the given Converter.
