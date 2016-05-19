@@ -101,6 +101,12 @@
   * Add pubstorm deployment instructions to docs (#4881)
   * Corrected pagination docs for hidden: true feature (#4903)
 
+## 3.1.6 / 2016-05-19
+
+### Bug Fixes
+
+  * Add ability to `jsonify` Drops such that, e.g. `site | jsonify`, works. (#4914)
+
 ## 3.1.5 / 2016-05-18
 
 ### Bug Fixes
