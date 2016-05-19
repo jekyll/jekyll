@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jekyllrb.com/news/2016/05/18/jekyll-3-1-5-released/</loc>
+<lastmod>2016-05-18T21:35:27-07:00</lastmod>
+</url>
+<url>
 <loc>https://jekyllrb.com/news/2016/05/18/jekyll-3-1-4-released/</loc>
 <lastmod>2016-05-18T16:50:37-07:00</lastmod>
 </url>

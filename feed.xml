@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-<generator uri="http://jekyllrb.com" version="3.1.4">Jekyll</generator>
+<generator uri="http://jekyllrb.com" version="3.1.5">Jekyll</generator>
 <link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-05-18T17:16:59-07:00</updated>
+<updated>2016-05-18T21:40:19-07:00</updated>
 <id>https://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.1.5 Released</title>
+<link href="https://jekyllrb.com/news/2016/05/18/jekyll-3-1-5-released/" rel="alternate" type="text/html" title="Jekyll 3.1.5 Released" />
+<published>2016-05-18T21:35:27-07:00</published>
+<updated>2016-05-18T21:35:27-07:00</updated>
+<id>https://jekyllrb.com/news/2016/05/18/jekyll-3-1-5-released</id>
+<content type="html" xml:base="https://jekyllrb.com/news/2016/05/18/jekyll-3-1-5-released/">&lt;p&gt;There’s always at least one bug, right? :)&lt;/p&gt;
+
+&lt;p&gt;Hot on the trails of &lt;a href=&quot;/news/2016/05/18/jekyll-3-1-4-released/&quot;&gt;v3.1.4&lt;/a&gt;, we
+bring you v3.1.5! It fixes one bug around requiring the &lt;code class=&quot;highlighter-rouge&quot;&gt;ExcerptDrop&lt;/code&gt;,
+which only affects Linux. For the gory details, see &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/4912&quot;&gt;the pull
+request for the fix&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.1.4 “Stability Sam” Released</title>
 <link href="https://jekyllrb.com/news/2016/05/18/jekyll-3-1-4-released/" rel="alternate" type="text/html" title="Jekyll 3.1.4 &quot;Stability Sam&quot; Released" />
@@ -283,28 +303,6 @@ Hawks, Paul Robert Lloyd, Pedro Euko, Peter Suschlik, Sam Volin, Samuel
 Wright, Sasha Friedenberg, Tim Cuthbertson, Vincent Wochnik, William
 Entriken, Zshawn Syed, chrisfinazzo, ducksan cho, leethomas,
 midnightSuyama, musoke, and rebornix&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll 3.0.2 Released</title>
-<link href="https://jekyllrb.com/news/2016/01/20/jekyll-3-0-2-released/" rel="alternate" type="text/html" title="Jekyll 3.0.2 Released" />
-<published>2016-01-20T14:08:18-08:00</published>
-<updated>2016-01-20T14:08:18-08:00</updated>
-<id>https://jekyllrb.com/news/2016/01/20/jekyll-3-0-2-released</id>
-<content type="html" xml:base="https://jekyllrb.com/news/2016/01/20/jekyll-3-0-2-released/">&lt;p&gt;A crucial bug was found in v3.0.1 which caused invalid post dates to go
-unnoticed in the build chain until the error that popped up was unhelpful.
-v3.0.2 &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/4375&quot;&gt;throws errors as you’d expect&lt;/a&gt;
-when there is a post like &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts/2016-22-01-future.md&lt;/code&gt; or a post has an
-invalid date like &lt;code class=&quot;highlighter-rouge&quot;&gt;date: &quot;tuesday&quot;&lt;/code&gt; in their front matter.&lt;/p&gt;
-
-&lt;p&gt;This should make the experience of working with Jekyll just a little
-better.&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
 </content>
