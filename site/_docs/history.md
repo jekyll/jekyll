@@ -4,6 +4,15 @@ title: History
 permalink: "/docs/history/"
 ---
 
+## 3.1.5 / 2016-05-18
+{: #v3-1-5}
+
+### Bug Fixes
+{: #bug-fixes-v3-1-5}
+
+- Sort the results of the `require_all` glob (affects Linux only). ([#4912]({{ site.repository }}/issues/4912))
+
+
 ## 3.1.4 / 2016-05-18
 {: #v3-1-4}
 
