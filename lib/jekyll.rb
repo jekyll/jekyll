@@ -7,7 +7,7 @@ $LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is insta
 # Returns nothing.
 def require_all(path)
   glob = File.join(File.dirname(__FILE__), path, '*.rb')
-  Dir[glob].each do |f|
+  Dir[glob].sort.each do |f|
     require f
   end
 end
