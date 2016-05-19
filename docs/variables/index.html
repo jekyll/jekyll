@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://jekyllrb.com/docs/variables/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-05-19T12:55:09-07:00" />
+<meta property="article:published_time" content="2016-05-19T14:44:09-07:00" />
 <link rel="next" href="https://jekyllrb.com/docs/windows/" title="Jekyll on Windows" />
 <link rel="prev" href="https://jekyllrb.com/docs/usage/" title="Basic Usage" />
 <meta name="twitter:card" content="summary" />
@@ -29,7 +29,7 @@
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Variables",
-    "datePublished": "2016-05-19T12:55:09-07:00",
+    "datePublished": "2016-05-19T14:44:09-07:00",
     "description": "Transform your plain text into static websites and blogs",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
     "url": "https://jekyllrb.com/docs/variables/"
@@ -310,6 +310,16 @@ following is a reference of the available data.</p>
         Page specific information + the <a href="../frontmatter/">YAML front
         matter</a>. Custom variables set via the YAML Front Matter will be
         available here. See below for details.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>layout</code></p></td>
+      <td><p>
+
+        Layout specific information + the <a href="../frontmatter/">YAML front
+        matter</a>. Custom variables set via the YAML Front Matter in
+        layouts will be available here.
 
       </p></td>
     </tr>
@@ -596,6 +606,14 @@ following is a reference of the available data.</p>
     <code>page</code>. For example, if you specify <code>custom_css: true</code>
     in a page’s front matter, that value will be available as
     <code>page.custom_css</code>.
+
+  </p>
+  <p>
+
+    If you specify front matter in a layout, access that via <code>page</code>
+    For example, if you specify <code>class: full_page</code>
+    in a page’s front matter, that value will be available as
+    <code>layout.class</code> in the layout and its parents.
 
   </p>
 </div>
