@@ -101,6 +101,17 @@
   * Add pubstorm deployment instructions to docs (#4881)
   * Corrected pagination docs for hidden: true feature (#4903)
 
+## 3.1.4 / 2016-05-18
+
+### Bug Fixes
+
+  * Add `ExcerptDrop` and remove excerpt's ability to refer to itself in Liquid (#4907)
+  * Configuration permalink fix where `collections.posts.permalink` inherits properly from `permalink` only when it doesn't exist (#4910)
+  * Add `Configuration.from` to make it easier to build configs from just a hash
+  * Sorting `site.collections` in Liquid by label (#4910)
+  * Fix bug where `layout` in Liquid would inherit from previously-rendered layouts' metadatas (#4909)
+  * Fix bug where `layout` in Liquid would override in the wrong direction (more-specific layouts' data were overwritten by their parent layouts' data; this has now been reversed) (#4909)
+
 ## 3.1.3 / 2016-04-18
 
   * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4807)
