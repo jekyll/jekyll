@@ -7,7 +7,7 @@ $LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is insta
 # Returns nothing.
 def require_all(path)
   glob = File.join(File.dirname(__FILE__), path, '*.rb')
-  Dir[glob].each do |f|
+  Dir[glob].sort.each do |f|
     require f
   end
 end
@@ -168,6 +168,7 @@ module Jekyll
 end
 
 require "jekyll/drops/drop"
+require "jekyll/drops/document_drop"
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/converters/markdown'
