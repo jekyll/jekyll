@@ -195,7 +195,7 @@ module Jekyll
       def print_worst_offenders
         @io.puts
         @io.puts "Worst offenders:"
-        @timings.sort_by { |_f, t| -t }.each do |(f, t)|
+        @timings.sort_by { |_f, t| -t }.take_while { |i| i < 10 }.each do |(f, t)|
           @io.puts "  #{t}s for #{f}"
         end
         @io.puts
