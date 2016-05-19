@@ -3,6 +3,11 @@ Feature: Writing themes
   I want to be able to make a gemified theme
   In order to share my awesome style skillz with other Jekyllites
 
+  Scenario: Generating a new theme scaffold
+    When I run jekyll new-theme my-cool-theme
+    Then I should get a zero exit status
+    And the my-cool-theme directory should exist
+
   Scenario: A theme with SCSS
     Given I have a configuration file with "theme" set to "test-theme"
     And I have a css directory
