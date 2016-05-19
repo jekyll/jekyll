@@ -4,6 +4,15 @@ title: History
 permalink: "/docs/history/"
 ---
 
+## 3.1.6 / 2016-05-19
+{: #v3-1-6}
+
+### Bug Fixes
+{: #bug-fixes-v3-1-6}
+
+- Add ability to `jsonify` Drops such that, e.g. `site | jsonify`, works. ([#4914]({{ site.repository }}/issues/4914))
+
+
 ## 3.1.5 / 2016-05-18
 {: #v3-1-5}
 
