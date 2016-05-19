@@ -201,10 +201,9 @@ class TestFilters < JekyllUnitTest
       should "convert drop to json" do
         @filter.site.read
         expected = {
-          "next" => "Categories _should_ work",
           "path" => "_posts/2008-02-02-published.markdown",
-          "output" => nil,
           "previous" => nil,
+          "output" => nil,
           "content" => "This should be published.\n",
           "id" => "/publish_test/2008/02/02/published",
           "url" => "/publish_test/2008/02/02/published.html",
@@ -223,8 +222,13 @@ class TestFilters < JekyllUnitTest
           "ext" => ".markdown",
           "tags" => []
         }
-        actual = @filter.jsonify(@filter.site.docs_to_write.first.to_liquid)
-        assert_equal expected, JSON.parse(actual)
+        actual = JSON.parse(@filter.jsonify(@filter.site.docs_to_write.first.to_liquid))
+
+        next_doc = actual.delete("next")
+        refute_nil next_doc
+        assert next_doc.is_a?(Hash), "doc.next should be an object"
+
+        assert_equal expected, actual
       end
 
       should "convert drop with drops to json" do
