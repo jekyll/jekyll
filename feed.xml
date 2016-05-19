@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-<generator uri="http://jekyllrb.com" version="3.1.2">Jekyll</generator>
+<generator uri="http://jekyllrb.com" version="3.1.4">Jekyll</generator>
 <link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-05-17T11:08:06-07:00</updated>
+<updated>2016-05-18T17:16:59-07:00</updated>
 <id>https://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll 3.1.4 “Stability Sam” Released</title>
+<link href="https://jekyllrb.com/news/2016/05/18/jekyll-3-1-4-released/" rel="alternate" type="text/html" title="Jekyll 3.1.4 &quot;Stability Sam&quot; Released" />
+<published>2016-05-18T16:50:37-07:00</published>
+<updated>2016-05-18T16:50:37-07:00</updated>
+<id>https://jekyllrb.com/news/2016/05/18/jekyll-3-1-4-released</id>
+<content type="html" xml:base="https://jekyllrb.com/news/2016/05/18/jekyll-3-1-4-released/">&lt;p&gt;Hey Jekyllites!&lt;/p&gt;
+
+&lt;p&gt;Today, we released v3.1.4 in an effort to bring more stability to the v3.1.x series. This bugfix release consists of:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A fix for &lt;code class=&quot;highlighter-rouge&quot;&gt;layout&lt;/code&gt; in Liquid where values would carry over from one document to the next&lt;/li&gt;
+  &lt;li&gt;A fix for &lt;code class=&quot;highlighter-rouge&quot;&gt;layout&lt;/code&gt; in Liquid where a parent layout (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;default&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;base&lt;/code&gt;) would overwrite the metadata of the child layout (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;post&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;special&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;A fix where &lt;code class=&quot;highlighter-rouge&quot;&gt;page.excerpt&lt;/code&gt; referencing its excerpt would cause an infinite loop of recursive horror.&lt;/li&gt;
+  &lt;li&gt;We added &lt;code class=&quot;highlighter-rouge&quot;&gt;Configuration.from&lt;/code&gt; and the great permalink fix from &lt;a href=&quot;/news/2016/04/19/jekyll-3-0-4-released/&quot;&gt;v3.0.4&lt;/a&gt; to the v3.1.x series&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;site.collections&lt;/code&gt; in Liquid is now sorted alphabetically by label, so &lt;code class=&quot;highlighter-rouge&quot;&gt;docs&lt;/code&gt; shows up before &lt;code class=&quot;highlighter-rouge&quot;&gt;posts&lt;/code&gt; reliably.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The fixes for &lt;code class=&quot;highlighter-rouge&quot;&gt;layout&lt;/code&gt; may not be seamless for everyone, but we believe they will be the “right thing to do” going forward.&lt;/p&gt;
+
+&lt;p&gt;We are alwawys striving to make Jekyll more straight-forward to use. Please do open an issue if you believe an aspect of Jekyll’s user experience isn’t up to par.&lt;/p&gt;
+
+&lt;p&gt;For a full history of our changes, &lt;a href=&quot;/docs/history/#v3-1-4&quot;&gt;see the changelog&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As always, Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.0.5 Released</title>
 <link href="https://jekyllrb.com/news/2016/04/26/jekyll-3-0-5-released/" rel="alternate" type="text/html" title="Jekyll 3.0.5 Released" />
@@ -276,36 +307,6 @@ invalid date like &lt;code class=&quot;highlighter-rouge&quot;&gt;date: &quot;tu
 better.&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll 3.0.1 Released</title>
-<link href="https://jekyllrb.com/news/2015/11/17/jekyll-3-0-1-released/" rel="alternate" type="text/html" title="Jekyll 3.0.1 Released" />
-<published>2015-11-17T22:04:39-08:00</published>
-<updated>2015-11-17T22:04:39-08:00</updated>
-<id>https://jekyllrb.com/news/2015/11/17/jekyll-3-0-1-released</id>
-<content type="html" xml:base="https://jekyllrb.com/news/2015/11/17/jekyll-3-0-1-released/">&lt;p&gt;Hey, folks! Bunch of bug fixes here. Notables:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Only superdirectories of &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; will be categories.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;:title&lt;/code&gt; in permalink templates are now properly cased as before&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.jekyll-metadata&lt;/code&gt; being erroneously written when not using incremental build.&lt;/li&gt;
-  &lt;li&gt;Failure in liquid will now always fail the &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll&lt;/code&gt; process.&lt;/li&gt;
-  &lt;li&gt;All hooks should now be properly registered &amp;amp; documented&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And a bunch more changes which you can see over in the
-&lt;a href=&quot;/docs/history&quot;&gt;changelog&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Thanks to the 17 developers who contributed code and documentation to this
-patch release: Alfred Xing, Christian Trosell, Jordan Thornquest, Jordon
-Bedwell, Larry Fox, Lawrence Murray, Lewis Cowles, Matt Rogers, Nicole
-White, Parker Moore, Paul Robert Lloyd, Sarah Kuehnle, Vincent Wochnik,
-Will Norris, XhmikosR, chrisfinazzo, and rebornix.&lt;/p&gt;
 </content>
 <author>
 <name>parkr</name>

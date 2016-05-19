@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.1.2">
+  <meta name="generator" content="Jekyll v3.1.4">
   <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -102,6 +102,8 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="v1.x">
+      
+      <option value="/news/2016/05/18/jekyll-3-1-4-released/">Jekyll 3.1.4 "Stability Sam" Released</option>
       
       <option value="/news/2016/04/26/jekyll-3-0-5-released/">Jekyll 3.0.5 Released</option>
       
@@ -202,6 +204,52 @@
 
       <div class="unit four-fifths">
         
+  <article>
+  <h2>
+    <a href="/news/2016/05/18/jekyll-3-1-4-released/">
+      Jekyll 3.1.4 "Stability Sam" Released
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      release
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      18 May 2016
+    </span>
+    <a href="https://github.com/parkr" class="post-author">
+      
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      parkr
+    </a>
+  </div>
+  <div class="post-content">
+    <p>Hey Jekyllites!</p>
+
+<p>Today, we released v3.1.4 in an effort to bring more stability to the v3.1.x series. This bugfix release consists of:</p>
+
+<ul>
+  <li>A fix for <code class="highlighter-rouge">layout</code> in Liquid where values would carry over from one document to the next</li>
+  <li>A fix for <code class="highlighter-rouge">layout</code> in Liquid where a parent layout (e.g. <code class="highlighter-rouge">default</code> or <code class="highlighter-rouge">base</code>) would overwrite the metadata of the child layout (e.g. <code class="highlighter-rouge">post</code> or <code class="highlighter-rouge">special</code>).</li>
+  <li>A fix where <code class="highlighter-rouge">page.excerpt</code> referencing its excerpt would cause an infinite loop of recursive horror.</li>
+  <li>We added <code class="highlighter-rouge">Configuration.from</code> and the great permalink fix from <a href="/news/2016/04/19/jekyll-3-0-4-released/">v3.0.4</a> to the v3.1.x series</li>
+  <li><code class="highlighter-rouge">site.collections</code> in Liquid is now sorted alphabetically by label, so <code class="highlighter-rouge">docs</code> shows up before <code class="highlighter-rouge">posts</code> reliably.</li>
+</ul>
+
+<p>The fixes for <code class="highlighter-rouge">layout</code> may not be seamless for everyone, but we believe they will be the “right thing to do” going forward.</p>
+
+<p>We are alwawys striving to make Jekyll more straight-forward to use. Please do open an issue if you believe an aspect of Jekyll’s user experience isn’t up to par.</p>
+
+<p>For a full history of our changes, <a href="/docs/history/#v3-1-4">see the changelog</a>.</p>
+
+<p>As always, Happy Jekylling!</p>
+
+  </div>
+</article>
+
+
   <article>
   <h2>
     <a href="/news/2016/04/26/jekyll-3-0-5-released/">
@@ -2241,6 +2289,10 @@ examples and for compiling this list):</p>
     <ul>
       
       <li class="">
+        <a href="/news/2016/05/18/jekyll-3-1-4-released/">Version 3.1.4</a>
+      </li>
+      
+      <li class="">
         <a href="/news/2016/04/26/jekyll-3-0-5-released/">Version 3.0.5</a>
       </li>
       
@@ -2256,16 +2308,14 @@ examples and for compiling this list):</p>
         <a href="/news/2016/02/19/jekyll-3-1-2-released/">Version 3.1.2</a>
       </li>
       
-      <li class="">
-        <a href="/news/2016/02/08/jekyll-3-0-3-released/">Version 3.0.3</a>
-      </li>
-      
       <li>
         <a href="/docs/history/">History »</a>
       </li>
     </ul>
     <h4>Other News</h4>
     <ul>
+        
+        
         
         
         
