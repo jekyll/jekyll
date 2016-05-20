@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestRelatedPosts < JekyllUnitTest
   context "building related posts without lsi" do
@@ -33,26 +33,29 @@ class TestRelatedPosts < JekyllUnitTest
 
       @site.reset
       @site.read
-      require 'classifier-reborn'
+      require "classifier-reborn"
       Jekyll::RelatedPosts.lsi = nil
     end
 
     should "index Jekyll::Post objects" do
       @site.posts.docs = @site.posts.docs.first(1)
-      expect_any_instance_of(::ClassifierReborn::LSI).to receive(:add_item).with(kind_of(Jekyll::Document))
+      expect_any_instance_of(::ClassifierReborn::LSI).to \
+        receive(:add_item).with(kind_of(Jekyll::Document))
       Jekyll::RelatedPosts.new(@site.posts.last).build_index
     end
 
     should "find related Jekyll::Post objects, given a Jekyll::Post object" do
       post = @site.posts.last
       allow_any_instance_of(::ClassifierReborn::LSI).to receive(:build_index)
-      expect_any_instance_of(::ClassifierReborn::LSI).to receive(:find_related).with(post, 11).and_return(@site.posts[-1..-9])
+      expect_any_instance_of(::ClassifierReborn::LSI).to \
+        receive(:find_related).with(post, 11).and_return(@site.posts[-1..-9])
 
       Jekyll::RelatedPosts.new(post).build
     end
 
     should "use lsi for the related posts" do
-      allow_any_instance_of(::ClassifierReborn::LSI).to receive(:find_related).and_return(@site.posts[-1..-9])
+      allow_any_instance_of(::ClassifierReborn::LSI).to \
+        receive(:find_related).and_return(@site.posts[-1..-9])
       allow_any_instance_of(::ClassifierReborn::LSI).to receive(:build_index)
 
       assert_equal @site.posts[-1..-9], Jekyll::RelatedPosts.new(@site.posts.last).build

@@ -78,7 +78,6 @@ AllCops:
   - test/test_liquid_renderer.rb
   - test/test_page.rb
   - test/test_regenerator.rb
-  - test/test_related_posts.rb
   - test/test_site.rb
   - test/test_tags.rb
   - test/test_utils.rb
