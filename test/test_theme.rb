@@ -1,14 +1,14 @@
-require 'helper'
+require "helper"
 
 class TestTheme < JekyllUnitTest
   def setup
-    @theme = Theme.new('test-theme')
+    @theme = Theme.new("test-theme")
     @expected_root = File.expand_path "./fixtures/test-theme", File.dirname(__FILE__)
   end
 
   context "initializing" do
     should "normalize the theme name" do
-      theme = Theme.new(' Test-Theme ')
+      theme = Theme.new(" Test-Theme ")
       assert_equal "test-theme", theme.name
     end
 
@@ -28,7 +28,8 @@ class TestTheme < JekyllUnitTest
 
     should "add itself to sass's load path" do
       @theme.configure_sass
-      assert Sass.load_paths.include?(@theme.sass_path), "Sass load paths should include the theme sass dir"
+      message = "Sass load paths should include the theme sass dir"
+      assert Sass.load_paths.include?(@theme.sass_path), message
     end
   end
 

@@ -83,7 +83,6 @@ AllCops:
   - test/test_site.rb
   - test/test_static_file.rb
   - test/test_tags.rb
-  - test/test_theme.rb
   - test/test_utils.rb
   - bin/**/*
   - benchmark/**/*
