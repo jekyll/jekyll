@@ -62,7 +62,6 @@ AllCops:
   - lib/jekyll/tags/post_url.rb
   - lib/jekyll/theme.rb
   - lib/jekyll/url.rb
-  - lib/jekyll/utils/platforms.rb
   - lib/jekyll/utils.rb
   - lib/jekyll.rb
   - features/step_definitions.rb
