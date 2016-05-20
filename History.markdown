@@ -25,6 +25,7 @@
   * Allow symlinks if they point to stuff inside site.source (#4710)
   * Update colorator dependency to v1.x (#4855)
   * Move EntryFilter to use Pathutil & fix `glob_include?` (#4859)
+  * Add 'jekyll new-theme' command to help users get up and running creating a theme (#4848)
 
 ### Bug Fixes
 
