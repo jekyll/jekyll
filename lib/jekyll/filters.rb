@@ -150,6 +150,15 @@ module Jekyll
       URI.escape(input)
     end
 
+    # Replace any whitespace in the input string with a single space
+    #
+    # input - The String on which to operate.
+    #
+    # Returns the formatted String
+    def normalize_whitespace(input)
+      input.to_s.gsub(/\s+/, " ").strip
+    end
+
     # Count the number of words in the input string.
     #
     # input - The String on which to operate.

@@ -86,6 +86,30 @@ class TestFilters < JekyllUnitTest
       assert_equal "chunky, bacon, bits, and pieces", @filter.array_to_sentence_string(["chunky", "bacon", "bits", "pieces"])
     end
 
+    context "normalize_whitespace filter" do
+      should "replace newlines with a space" do
+        assert_equal "a b", @filter.normalize_whitespace("a\nb")
+        assert_equal "a b", @filter.normalize_whitespace("a\n\nb")
+      end
+
+      should "replace tabs with a space" do
+        assert_equal "a b", @filter.normalize_whitespace("a\tb")
+        assert_equal "a b", @filter.normalize_whitespace("a\t\tb")
+      end
+
+      should "replace multiple spaces with a single space" do
+        assert_equal "a b", @filter.normalize_whitespace("a  b")
+        assert_equal "a b", @filter.normalize_whitespace("a\t\nb")
+        assert_equal "a b", @filter.normalize_whitespace("a \t \n\nb")
+      end
+
+      should "strip whitespace from begining and end of string" do
+        assert_equal "a", @filter.normalize_whitespace("a ")
+        assert_equal "a", @filter.normalize_whitespace(" a")
+        assert_equal "a", @filter.normalize_whitespace(" a ")
+      end
+    end
+
     context "date filters" do
       context "with Time object" do
         should "format a date with short format" do
