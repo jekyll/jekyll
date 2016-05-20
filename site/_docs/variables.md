@@ -338,7 +338,7 @@ following is a reference of the available data.
   </p>
   <p>
 
-    If you specify front matter in a layout, access that via <code>page</code>
+    If you specify front matter in a layout, access that via <code>layout</code>.
     For example, if you specify <code>class: full_page</code>
     in a page’s front matter, that value will be available as
     <code>layout.class</code> in the layout and its parents.
