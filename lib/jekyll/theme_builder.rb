@@ -72,7 +72,10 @@ class Jekyll::ThemeBuilder
     %w(example/_config.yml example/index.html example/style.scss).each do |filename|
       write_file(filename, template(filename))
     end
-    write_file("example/_posts/#{Time.now.strftime("%Y-%m-%d")}-my-example-post.md", template("example/_post.md"))
+    write_file(
+      "example/_posts/#{Time.now.strftime("%Y-%m-%d")}-my-example-post.md",
+      template("example/_post.md")
+    )
   end
 
   def initialize_git_repo
