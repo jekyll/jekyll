@@ -90,8 +90,11 @@ RUBY
             f.write(scaffold_post_content)
           end
 
-          File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
-            f.write(gemfile_contents)
+          gemfilePath = File.expand_path("Gemfile", new_blog_path)
+          if !File.exist?(gemfilePath)
+            File.open(gemfilePath, "w") do |f|
+              f.write(gemfile_contents)
+            end
           end
         end
 
