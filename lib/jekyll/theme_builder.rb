@@ -1,6 +1,6 @@
 class Jekyll::ThemeBuilder
   SCAFFOLD_DIRECTORIES = %w(
-    _layouts _includes _sass example example/_posts
+    _layouts _includes _sass
   ).freeze
 
   attr_reader :name, :path
@@ -55,6 +55,7 @@ class Jekyll::ThemeBuilder
 
   def create_directories
     mkdir_p(SCAFFOLD_DIRECTORIES)
+    mkdir_p(%w{example example/_posts})
   end
 
   def create_gemspec
