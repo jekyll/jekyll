@@ -63,16 +63,24 @@ class TestStaticFile < JekyllUnitTest
     end
 
     should "have a destination relative directory with a collection" do
-      static_file = setup_static_file_with_collection("root", "_foo/dir/subdir",
-        "file.html", { "output" => true })
+      static_file = setup_static_file_with_collection(
+        "root",
+        "_foo/dir/subdir",
+        "file.html",
+        { "output" => true }
+      )
       assert_equal :foo, static_file.type
       assert_equal "/foo/dir/subdir/file.html", static_file.url
       assert_equal "/foo/dir/subdir", static_file.destination_rel_dir
     end
 
     should "use its collection's permalink template for destination relative directory" do
-      static_file = setup_static_file_with_collection("root", "_foo/dir/subdir",
-        "file.html", { "output" => true, "permalink" => "/:path/" })
+      static_file = setup_static_file_with_collection(
+        "root",
+        "_foo/dir/subdir",
+        "file.html",
+        { "output" => true, "permalink" => "/:path/" }
+      )
       assert_equal :foo, static_file.type
       assert_equal "/dir/subdir/file.html", static_file.url
       assert_equal "/dir/subdir", static_file.destination_rel_dir
@@ -89,8 +97,12 @@ class TestStaticFile < JekyllUnitTest
         "scope"  => { "path" => "private" },
         "values" => { "published" => false }
       }]
-      static_file = setup_static_file_with_defaults("root", "private/dir/subdir",
-                                                    "file.html", defaults)
+      static_file = setup_static_file_with_defaults(
+        "root",
+        "private/dir/subdir",
+        "file.html",
+        defaults
+      )
       assert(!static_file.write?,
         "static_file.write? should return false when _config.yml sets " \
         "`published: false`")
