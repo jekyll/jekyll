@@ -91,7 +91,7 @@ RUBY
           end
 
           gemfile_path = File.expand_path("Gemfile", new_blog_path)
-          if !File.exist?(gemfile_path)
+          unless File.exist?(gemfile_path)
             File.open(gemfile_path, "w") do |f|
               f.write(gemfile_contents)
             end
