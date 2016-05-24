@@ -1,7 +1,7 @@
 module Jekyll
   module Tags
     class Link < Liquid::Tag
-      TagName = 'link'
+      TAG_NAME = "link".freeze
 
       def initialize(tag_name, relative_path, tokens)
         super
@@ -16,11 +16,15 @@ module Jekyll
           return document.url if document.relative_path == @relative_path
         end
 
-        raise ArgumentError, "Could not find document '#{@relative_path}' in tag '#{TagName}'.\n\n" \
-          "Make sure the document exists and the path is correct."
+        raise ArgumentError, <<eos
+Could not find document '#{@relative_path}' in tag '#{TAG_NAME}'.
+
+
+Make sure the document exists and the path is correct.
+eos
       end
     end
   end
 end
 
-Liquid::Template.register_tag(Jekyll::Tags::Link::TagName, Jekyll::Tags::Link)
+Liquid::Template.register_tag(Jekyll::Tags::Link::TAG_NAME, Jekyll::Tags::Link)
