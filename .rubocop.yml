@@ -42,7 +42,6 @@ AllCops:
   - lib/jekyll/page.rb
   - lib/jekyll/plugin.rb
   - lib/jekyll/plugin_manager.rb
-  - lib/jekyll/publisher.rb
   - lib/jekyll/reader.rb
   - lib/jekyll/readers/collection_reader.rb
   - lib/jekyll/readers/data_reader.rb
