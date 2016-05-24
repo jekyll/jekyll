@@ -35,7 +35,6 @@ AllCops:
   - lib/jekyll/hooks.rb
   - lib/jekyll/liquid_renderer/file.rb
   - lib/jekyll/liquid_renderer/table.rb
-  - lib/jekyll/liquid_renderer.rb
   - lib/jekyll/reader.rb
   - lib/jekyll/readers/collection_reader.rb
   - lib/jekyll/readers/data_reader.rb
