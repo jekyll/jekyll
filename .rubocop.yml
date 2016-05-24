@@ -57,7 +57,6 @@ AllCops:
   - lib/jekyll/static_file.rb
   - lib/jekyll/stevenson.rb
   - lib/jekyll/tags/include.rb
-  - lib/jekyll/tags/post_url.rb
   - lib/jekyll/theme.rb
   - lib/jekyll/url.rb
   - lib/jekyll/utils.rb
