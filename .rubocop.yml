@@ -38,7 +38,6 @@ AllCops:
   - lib/jekyll/liquid_renderer/file.rb
   - lib/jekyll/liquid_renderer/table.rb
   - lib/jekyll/liquid_renderer.rb
-  - lib/jekyll/page.rb
   - lib/jekyll/plugin_manager.rb
   - lib/jekyll/reader.rb
   - lib/jekyll/readers/collection_reader.rb
