@@ -33,7 +33,6 @@ AllCops:
   - lib/jekyll/frontmatter_defaults.rb
   - lib/jekyll/generator.rb
   - lib/jekyll/hooks.rb
-  - lib/jekyll/liquid_renderer/file.rb
   - lib/jekyll/liquid_renderer/table.rb
   - lib/jekyll/reader.rb
   - lib/jekyll/readers/collection_reader.rb
