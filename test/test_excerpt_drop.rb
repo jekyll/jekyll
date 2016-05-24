@@ -1,13 +1,13 @@
-require 'helper'
+require "helper"
 
 class TestExcerptDrop < JekyllUnitTest
   context "an excerpt drop" do
     setup do
       @site = fixture_site
       @site.read
-      @doc = @site.docs_to_write.find { |d| !d.data['layout'].nil? }
+      @doc = @site.docs_to_write.find { |d| !d.data["layout"].nil? }
       @doc_drop = @doc.to_liquid
-      @excerpt = @doc.data['excerpt']
+      @excerpt = @doc.data["excerpt"]
       @excerpt_drop = @excerpt.to_liquid
     end
 
@@ -19,14 +19,14 @@ class TestExcerptDrop < JekyllUnitTest
     end
 
     should "not have an excerpt" do
-      assert_nil @excerpt.data['excerpt']
-      assert @excerpt_drop.class.invokable? 'excerpt'
-      assert_nil @excerpt_drop['excerpt']
+      assert_nil @excerpt.data["excerpt"]
+      assert @excerpt_drop.class.invokable? "excerpt"
+      assert_nil @excerpt_drop["excerpt"]
     end
 
     should "inherit the layout for the drop but not the excerpt" do
-      assert_nil @excerpt.data['layout']
-      assert_equal @excerpt_drop['layout'], @doc_drop['layout']
+      assert_nil @excerpt.data["layout"]
+      assert_equal @excerpt_drop["layout"], @doc_drop["layout"]
     end
 
     should "inherit values from the document" do
