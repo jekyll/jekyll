@@ -23,7 +23,7 @@ module Jekyll
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.
 
-    HTML_EXTENSIONS = %W(
+    HTML_EXTENSIONS = %w(
       .html
       .xhtml
       .htm
