@@ -23,7 +23,7 @@ module Jekyll
             require name
           rescue LoadError
             Jekyll.logger.debug "Couldn't load #{name}. Skipping."
-            block.call(name) if block
+            yield(name) if block
             false
           end
         end
@@ -39,7 +39,7 @@ module Jekyll
       def require_with_graceful_fail(names)
         Array(names).each do |name|
           begin
-            Jekyll.logger.debug "Requiring:", "#{name}"
+            Jekyll.logger.debug "Requiring:", name.to_s
             require name
           rescue LoadError => e
             Jekyll.logger.error "Dependency Error:", <<-MSG
@@ -50,7 +50,7 @@ The full error message from Ruby is: '#{e.message}'
 
 If you run into trouble, you can find helpful resources at http://jekyllrb.com/help/!
             MSG
-            raise Jekyll::Errors::MissingDependencyException.new(name)
+            raise Jekyll::Errors::MissingDependencyException, name
           end
         end
       end

@@ -59,9 +59,9 @@ module Jekyll
     end
 
     def to_liquid
-      doc.data['excerpt'] = nil
+      doc.data["excerpt"] = nil
       @to_liquid ||= doc.to_liquid
-      doc.data['excerpt'] = self
+      doc.data["excerpt"] = self
       @to_liquid
     end
 
