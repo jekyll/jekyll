@@ -47,6 +47,7 @@
 
   * From v3.1.4: Add ExcerptDrop and remove excerpt's ability to refer to itself in Liquid (#4941)
   * From v3.1.4: Configuration permalink fix and addition of Configuration.from and sorting `site.collections` by label (#4942)
+  * From v3.1.4: Fix `{{ layout }}` oddities (proper inheritance & fixing overflow of old data) (#4943)
 
 ### Development Fixes
 
