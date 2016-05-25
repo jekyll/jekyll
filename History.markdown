@@ -46,7 +46,7 @@
 ### Forward Ports
 
   * From v3.1.4: Add ExcerptDrop and remove excerpt's ability to refer to itself in Liquid (#4941)
-  * Forward-port: Configuration permalink fix and addition of Configuration.from and sorting `site.collections` by label (#4942)
+  * From v3.1.4: Configuration permalink fix and addition of Configuration.from and sorting `site.collections` by label (#4942)
 
 ### Development Fixes
 
