@@ -63,11 +63,11 @@ end
 
 module DirectoryHelpers
   def dest_dir(*subdirs)
-    test_dir('dest', *subdirs)
+    test_dir("dest", *subdirs)
   end
 
   def source_dir(*subdirs)
-    test_dir('source', *subdirs)
+    test_dir("source", *subdirs)
   end
 
   def test_dir(*subdirs)
@@ -80,7 +80,7 @@ class JekyllUnitTest < Minitest::Test
   include DirectoryHelpers
   extend DirectoryHelpers
 
-  def mu_pp obj
+  def mu_pp(obj)
     s = obj.is_a?(Hash) ? JSON.pretty_generate(obj) : obj.inspect
     s = s.encode Encoding.default_external if defined? Encoding
     s
@@ -122,10 +122,10 @@ class JekyllUnitTest < Minitest::Test
     }))
     build_configs({
       "source" => source_dir
-    }, full_overrides).
-      fix_common_issues.
-      backwards_compatibilize.
-      add_default_collections
+    }, full_overrides)
+      .fix_common_issues
+      .backwards_compatibilize
+      .add_default_collections
   end
 
   def clear_dest

@@ -81,7 +81,10 @@ OUTPUT
 
     should "acceptable limit post is 0" do
       clear_dest
-      assert fixture_site("limit_posts" => 0), "Couldn't create a site with limit_posts=0."
+      assert(
+        fixture_site("limit_posts" => 0),
+        "Couldn't create a site with limit_posts=0."
+      )
     end
   end
 end

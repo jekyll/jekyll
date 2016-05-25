@@ -5,7 +5,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     setup do
       @site = fixture_site({
         "defaults" => [{
-          "scope" => {
+          "scope"  => {
             "path" => "contacts",
             "type" => "page"
           },
@@ -29,7 +29,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     setup do
       @site = fixture_site({
         "defaults" => [{
-          "scope" => {
+          "scope"  => {
             "path" => "index.html"
           },
           "values" => {
@@ -53,7 +53,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     setup do
       @site = fixture_site({
         "defaults" => [{
-          "scope" => {
+          "scope"  => {
             "path" => "win"
           },
           "values" => {
@@ -77,7 +77,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     setup do
       @site = fixture_site({
         "defaults" => [{
-          "scope" => {
+          "scope"  => {
             "type" => "page"
           },
           "values" => {
@@ -102,7 +102,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     setup do
       @site = fixture_site({
         "defaults" => [{
-          "scope" => {
+          "scope"  => {
             "type" => "pages"
           },
           "values" => {
@@ -126,7 +126,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     setup do
       @site = fixture_site({
         "defaults" => [{
-          "scope" => {
+          "scope"  => {
           },
           "values" => {
             "key" => "val"
