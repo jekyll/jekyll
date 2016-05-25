@@ -19,7 +19,6 @@ module Jekyll
         raise ArgumentError, <<eos
 Could not find document '#{@relative_path}' in tag '#{TAG_NAME}'.
 
-
 Make sure the document exists and the path is correct.
 eos
       end
