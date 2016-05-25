@@ -138,6 +138,22 @@ module Jekyll
         JSON.pretty_generate to_h
       end
 
+      # When a JSON representation of the drop is requested (e.g. through
+      # template filters) then only show the YAML front matter data.
+      # Other Jekyll objects might not be dumpable due to recursiveness.
+      #
+      # Returns a JSON dump of the YAML front matter data.
+      def to_json
+        results = keys.each_with_object({}) do |(key, _), result|
+          if %w{previous next}.include? key && !self[key].nil?
+            result[key] = self[key].url
+          else
+            result[key] = self[key]
+          end
+        end
+        results.to_json
+      end
+
       # Collects all the keys and passes each to the block in turn.
       #
       # block - a block which accepts one argument, the key
