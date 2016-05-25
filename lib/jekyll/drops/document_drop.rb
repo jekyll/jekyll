@@ -5,9 +5,9 @@ module Jekyll
     class DocumentDrop < Drop
       extend Forwardable
 
-      NESTED_OBJECT_FIELD_BLACKLIST = %w{
+      NESTED_OBJECT_FIELD_BLACKLIST = %w(
         content output excerpt next previous
-      }.freeze
+      ).freeze
 
       mutable false
 
@@ -39,6 +39,8 @@ module Jekyll
 
       # Generate a Hash for use in generating JSON.
       # This is useful if fields need to be cleared before the JSON can generate.
+      #
+      # state - the JSON::State object which determines the state of current processing.
       #
       # Returns a Hash ready for JSON generation.
       def hash_for_json(state = nil)

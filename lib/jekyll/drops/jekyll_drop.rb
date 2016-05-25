@@ -19,13 +19,13 @@ module Jekyll
 
       def to_h
         @to_h ||= {
-          "version" => version,
+          "version"     => version,
           "environment" => environment
         }
       end
 
       def to_json(state = nil)
-        require 'json'
+        require "json"
         JSON.generate(to_h, state)
       end
     end

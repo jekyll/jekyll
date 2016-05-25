@@ -88,7 +88,9 @@ module Jekyll
       # Returns an Array of strings which represent method-specific keys.
       def content_methods
         @content_methods ||= (
-          self.class.instance_methods - Jekyll::Drops::Drop.instance_methods - NON_CONTENT_METHODS
+          self.class.instance_methods \
+            - Jekyll::Drops::Drop.instance_methods \
+            - NON_CONTENT_METHODS
         ).map(&:to_s).reject do |method|
           method.end_with?("=")
         end
@@ -144,15 +146,17 @@ module Jekyll
       # This is useful if fields need to be cleared before the JSON can generate.
       #
       # Returns a Hash ready for JSON generation.
-      def hash_for_json(state = nil)
+      def hash_for_json(*)
         to_h
       end
 
       # Generate a JSON representation of the Drop.
       #
+      # state - the JSON::State object which determines the state of current processing.
+      #
       # Returns a JSON representation of the Drop in a String.
       def to_json(state = nil)
-        require 'json'
+        require "json"
         JSON.generate(hash_for_json(state), state)
       end
 
@@ -165,7 +169,7 @@ module Jekyll
         keys.each(&block)
       end
 
-      def each(&block)
+      def each
         each_key.each do |key|
           yield key, self[key]
         end
