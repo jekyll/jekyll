@@ -3,7 +3,7 @@
 module Jekyll
   module Drops
     class Drop < Liquid::Drop
-      NON_CONTENT_METHODS = [:[], :[]=, :inspect, :to_h, :fallback_data].freeze
+      NON_CONTENT_METHODS = [:fallback_data].freeze
 
       # Get or set whether the drop class is mutable.
       # Mutability determines whether or not pre-defined fields may be
@@ -86,7 +86,7 @@ module Jekyll
       # Returns an Array of strings which represent method-specific keys.
       def content_methods
         @content_methods ||= (
-          self.class.instance_methods(false) - NON_CONTENT_METHODS
+          self.class.instance_methods - Jekyll::Drops::Drop.instance_methods - NON_CONTENT_METHODS
         ).map(&:to_s).reject do |method|
           method.end_with?("=")
         end
