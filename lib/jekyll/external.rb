@@ -17,13 +17,13 @@ module Jekyll
       #
       # names - a string gem name or array of gem names
       #
-      def require_if_present(names, &block)
+      def require_if_present(names)
         Array(names).each do |name|
           begin
             require name
           rescue LoadError
             Jekyll.logger.debug "Couldn't load #{name}. Skipping."
-            yield(name) if block
+            yield(name) if block_given?
             false
           end
         end
