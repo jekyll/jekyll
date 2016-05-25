@@ -12,17 +12,23 @@ module Jekyll
     end
 
     class IncludeTag < Liquid::Tag
-      VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
-      VARIABLE_SYNTAX = /(?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)(?<params>.*)/
+      VALID_SYNTAX = /
+        ([\w-]+)\s*=\s*
+        (?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))
+      /x
+      VARIABLE_SYNTAX = /
+        (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
+        (?<params>.*)
+      /x
 
       def initialize(tag_name, markup, tokens)
         super
         matched = markup.strip.match(VARIABLE_SYNTAX)
         if matched
-          @file = matched['variable'].strip
-          @params = matched['params'].strip
+          @file = matched["variable"].strip
+          @params = matched["params"].strip
         else
-          @file, @params = markup.strip.split(' ', 2)
+          @file, @params = markup.strip.split(" ", 2)
         end
         validate_params if @params
         @tag_name = tag_name
@@ -36,7 +42,7 @@ module Jekyll
         params = {}
         markup = @params
 
-        while match = VALID_SYNTAX.match(markup) do
+        while (match = VALID_SYNTAX.match(markup))
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
@@ -53,8 +59,8 @@ module Jekyll
       end
 
       def validate_file_name(file)
-        if file !~ /^[a-zA-Z0-9_\/\.-]+$/ || file =~ /\.\// || file =~ /\/\./
-          raise ArgumentError.new <<-eos
+        if file !~ %r!^[a-zA-Z0-9_/\.-]+$! || file =~ %r!\./! || file =~ %r!/\.!
+          raise ArgumentError, <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
   #{file}
@@ -68,9 +74,9 @@ eos
       end
 
       def validate_params
-        full_valid_syntax = Regexp.compile('\A\s*(?:' + VALID_SYNTAX.to_s + '(?=\s|\z)\s*)*\z')
+        full_valid_syntax = /\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z/
         unless @params =~ full_valid_syntax
-          raise ArgumentError.new <<-eos
+          raise ArgumentError, <<-eos
 Invalid syntax for include tag:
 
   #{@params}
@@ -91,7 +97,10 @@ eos
       # Render the variable if required
       def render_variable(context)
         if @file.match(VARIABLE_SYNTAX)
-          partial = context.registers[:site].liquid_renderer.file("(variable)").parse(@file)
+          partial = context.registers[:site]
+            .liquid_renderer
+            .file("(variable)")
+            .parse(@file)
           partial.render!(context)
         end
       end
@@ -106,9 +115,9 @@ eos
           path = File.join(dir, file)
           return path if valid_include_file?(path, dir, safe)
         end
-        raise IOError, "Could not locate the included file '#{file}' in any of #{includes_dirs}." \
-          " Ensure it exists in one of those directories and, if it is a symlink, " \
-          "does not point outside your site source."
+        raise IOError, "Could not locate the included file '#{file}' in any of "\
+          "#{includes_dirs}. Ensure it exists in one of those directories and, "\
+          "if it is a symlink, does not point outside your site source."
       end
 
       def render(context)
@@ -120,24 +129,23 @@ eos
         path = locate_include_file(context, file, site.safe)
         return unless path
 
-        # Add include to dependency tree
+        add_include_to_dependency(site, path, context)
+
+        partial = load_cached_partial(path, context)
+
+        context.stack do
+          context["include"] = parse_params(context) if @params
+          partial.render!(context)
+        end
+      end
+
+      def add_include_to_dependency(site, path, context)
         if context.registers[:page] && context.registers[:page].key?("path")
           site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path
           )
         end
-
-        #begin
-          partial = load_cached_partial(path, context)
-
-          context.stack do
-            context['include'] = parse_params(context) if @params
-            partial.render!(context)
-          end
-          #rescue => e
-          #raise IncludeTagError.new e.message, path
-          #end
       end
 
       def load_cached_partial(path, context)
@@ -147,7 +155,10 @@ eos
         if cached_partial.key?(path)
           cached_partial[path]
         else
-          cached_partial[path] = context.registers[:site].liquid_renderer.file(path).parse(read_file(path, context))
+          cached_partial[path] = context.registers[:site]
+            .liquid_renderer
+            .file(path)
+            .parse(read_file(path, context))
         end
       end
 
@@ -188,5 +199,5 @@ eos
   end
 end
 
-Liquid::Template.register_tag('include', Jekyll::Tags::IncludeTag)
-Liquid::Template.register_tag('include_relative', Jekyll::Tags::IncludeRelativeTag)
+Liquid::Template.register_tag("include", Jekyll::Tags::IncludeTag)
+Liquid::Template.register_tag("include_relative", Jekyll::Tags::IncludeRelativeTag)
