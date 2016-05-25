@@ -43,6 +43,10 @@
   * 3.2.x/master: Fix defaults for Documents (posts/collection docs) (#4808)
   * Don't rescue LoadError or bundler load errors for Bundler. (#4857)
 
+### Forward Ports
+
+  * From v3.1.4: Add ExcerptDrop and remove excerpt's ability to refer to itself in Liquid (#4941)
+
 ### Development Fixes
 
   * Add project maintainer profile links (#4591)
