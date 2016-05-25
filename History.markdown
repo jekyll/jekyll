@@ -49,6 +49,7 @@
   * From v3.1.4: Configuration permalink fix and addition of Configuration.from and sorting `site.collections` by label (#4942)
   * From v3.1.4: Fix `{{ layout }}` oddities (proper inheritance & fixing overflow of old data) (#4943)
   * From v3.1.5: Sort the results of the `require_all` glob (#4944)
+  * From v3.1.6: Add ability to render drops as JSON (#4945)
 
 ### Development Fixes
 
