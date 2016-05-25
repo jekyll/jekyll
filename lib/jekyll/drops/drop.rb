@@ -13,11 +13,11 @@ module Jekyll
       #
       # Returns the mutability of the class
       def self.mutable(is_mutable = nil)
-        if is_mutable
-          @is_mutable = is_mutable
-        else
-          @is_mutable = false
-        end
+        @is_mutable = if is_mutable
+                        is_mutable
+                      else
+                        false
+                      end
       end
 
       def self.mutable?
@@ -134,7 +134,7 @@ module Jekyll
       #
       # Returns a pretty generation of the hash representation of the Drop.
       def inspect
-        require 'json'
+        require "json"
         JSON.pretty_generate to_h
       end
 

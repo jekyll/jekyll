@@ -19,20 +19,20 @@ module Jekyll
       end
 
       def title
-        Utils.slugify(@obj.data['slug'], :mode => "pretty", :cased => true) ||
+        Utils.slugify(@obj.data["slug"], :mode => "pretty", :cased => true) ||
           Utils.slugify(@obj.basename_without_ext, :mode => "pretty", :cased => true)
       end
 
       def slug
-        Utils.slugify(@obj.data['slug']) || Utils.slugify(@obj.basename_without_ext)
+        Utils.slugify(@obj.data["slug"]) || Utils.slugify(@obj.basename_without_ext)
       end
 
       def categories
         category_set = Set.new
-        Array(@obj.data['categories']).each do |category|
+        Array(@obj.data["categories"]).each do |category|
           category_set << category.to_s.downcase
         end
-        category_set.to_a.join('/')
+        category_set.to_a.join("/")
       end
 
       def year
