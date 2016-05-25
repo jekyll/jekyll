@@ -50,7 +50,8 @@ class TestDocument < JekyllUnitTest
 
       assert_equal "Jekyll.configuration", parsed["title"]
       assert_equal "foo.bar", parsed["whatever"]
-      assert_equal nil, parsed["previous"]
+      assert_equal "_methods/collection/entries", parsed["previous"]["path"]
+      assert_equal "Collection#entries", parsed["previous"]["title"]
 
       next_doc = parsed["next"]
       assert_equal "_methods/escape-+ #%20[].md", next_doc["path"]
@@ -60,7 +61,7 @@ class TestDocument < JekyllUnitTest
       assert_equal "Jekyll.configuration", next_prev_doc["title"]
       assert_equal "_methods/configuration.md", next_prev_doc["path"]
       assert_equal "_methods/escape-+ #%20[].md", next_prev_doc["next"]["path"]
-      assert_nil next_prev_doc["previous"] # nothing before Jekyll.configuration
+      assert_equal "_methods/collection/entries", next_prev_doc["previous"]["path"]
       assert_nil next_prev_doc["next"]["next"]
       assert_nil next_prev_doc["next"]["previous"]
       assert_nil next_prev_doc["next"]["content"]
