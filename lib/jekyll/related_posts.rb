@@ -9,7 +9,7 @@ module Jekyll
     def initialize(post)
       @post = post
       @site = post.site
-      Jekyll::External.require_with_graceful_fail('classifier-reborn') if site.lsi
+      Jekyll::External.require_with_graceful_fail("classifier-reborn") if site.lsi
     end
 
     def build

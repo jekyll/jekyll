@@ -43,6 +43,13 @@
   * 3.2.x/master: Fix defaults for Documents (posts/collection docs) (#4808)
   * Don't rescue LoadError or bundler load errors for Bundler. (#4857)
 
+### Forward Ports
+
+  * From v3.1.4: Add ExcerptDrop and remove excerpt's ability to refer to itself in Liquid (#4941)
+  * From v3.1.4: Configuration permalink fix and addition of Configuration.from and sorting `site.collections` by label (#4942)
+  * From v3.1.4: Fix `{{ layout }}` oddities (proper inheritance & fixing overflow of old data) (#4943)
+  * From v3.1.5: Sort the results of the `require_all` glob (#4944)
+
 ### Development Fixes
 
   * Add project maintainer profile links (#4591)
@@ -60,6 +67,7 @@
   * Update `jekyll/commands*` to pass rubocop rules (#4888)
   * Clean up many test files to pass Rubocop rules (#4902)
   * Rubocop cleanup for some utils and further test files (#4916)
+  * Rubocop: Low hanging fruit (#4936)
 
 ### Site Enhancements
 

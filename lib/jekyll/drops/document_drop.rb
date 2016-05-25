@@ -19,13 +19,13 @@ module Jekyll
       end
 
       def excerpt
-        fallback_data['excerpt'].to_s
+        fallback_data["excerpt"].to_s
       end
 
       def <=>(other)
         return nil unless other.is_a? DocumentDrop
-        cmp = self['date'] <=> other['date']
-        cmp = self['path'] <=> other['path'] if cmp.nil? || cmp == 0
+        cmp = self["date"] <=> other["date"]
+        cmp = self["path"] <=> other["path"] if cmp.nil? || cmp == 0
         cmp
       end
 

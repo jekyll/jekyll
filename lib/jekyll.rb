@@ -7,7 +7,7 @@ $LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is insta
 # Returns nothing.
 def require_all(path)
   glob = File.join(File.dirname(__FILE__), path, '*.rb')
-  Dir[glob].each do |f|
+  Dir[glob].sort.each do |f|
     require f
   end
 end
@@ -98,18 +98,16 @@ module Jekyll
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
-    def configuration(override = {})
-      config = Configuration[Configuration::DEFAULTS]
-      override = Configuration[override].stringify_keys
+    def configuration(override = Hash.new)
+      config = Configuration.new
       unless override.delete('skip_config_files')
         config = config.read_config_files(config.config_files(override))
       end
 
       # Merge DEFAULTS < _config.yml < override
-      config = Utils.deep_merge_hashes(config, override).stringify_keys
-      set_timezone(config['timezone']) if config['timezone']
-
-      config
+      Configuration.from(Utils.deep_merge_hashes(config, override)).tap do |config|
+        set_timezone(config['timezone']) if config['timezone']
+      end
     end
 
     # Public: Set the TZ environment variable to use the timezone specified
@@ -173,6 +171,7 @@ module Jekyll
 end
 
 require "jekyll/drops/drop"
+require "jekyll/drops/document_drop"
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
 require_all 'jekyll/converters/markdown'

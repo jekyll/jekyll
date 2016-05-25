@@ -72,7 +72,24 @@ module Jekyll
         'hard_wrap'      => false,
         'footnote_nr'    => 1
       }
-    }]
+    }.map { |k, v| [k, v.freeze] }].freeze
+
+    class << self
+      # Static: Produce a Configuration ready for use in a Site.
+      # It takes the input, fills in the defaults where values do not
+      # exist, and patches common issues including migrating options for
+      # backwards compatiblity. Except where a key or value is being fixed,
+      # the user configuration will override the defaults.
+      #
+      # user_config - a Hash or Configuration of overrides.
+      #
+      # Returns a Configuration filled with defaults and fixed for common
+      # problems and backwards-compatibility.
+      def from(user_config)
+        Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys).
+          fix_common_issues.add_default_collections
+      end
+    end
 
     # Public: Turn all keys into string
     #
@@ -169,6 +186,7 @@ module Jekyll
 
       begin
         files.each do |config_file|
+          next if config_file.nil? or config_file.empty?
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
@@ -228,7 +246,6 @@ module Jekyll
       end
 
       %w(include exclude).each do |option|
-        config[option] ||= []
         if config[option].is_a?(String)
           Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" \
             " must now be specified as an array, but you specified" \
@@ -236,7 +253,7 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
-        config[option].map!(&:to_s)
+        config[option].map!(&:to_s) if config[option]
       end
 
       if (config['kramdown'] || {}).key?('use_coderay')
@@ -271,14 +288,22 @@ module Jekyll
     def add_default_collections
       config = clone
 
+      # It defaults to `{}`, so this is only if someone sets it to null manually.
       return config if config['collections'].nil?
 
+      # Ensure we have a hash.
       if config['collections'].is_a?(Array)
         config['collections'] = Hash[config['collections'].map { |c| [c, {}] }]
       end
-      config['collections']['posts'] ||= {}
-      config['collections']['posts']['output'] = true
-      config['collections']['posts']['permalink'] = style_to_permalink(config['permalink'])
+
+      config['collections'] = Utils.deep_merge_hashes(
+        { 'posts' => {} }, config['collections']
+      ).tap do |collections|
+        collections['posts']['output'] = true
+        if config['permalink']
+          collections['posts']['permalink'] ||= style_to_permalink(config['permalink'])
+        end
+      end
 
       config
     end

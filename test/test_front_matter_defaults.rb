@@ -3,10 +3,8 @@ require "helper"
 class TestFrontMatterDefaults < JekyllUnitTest
   context "A site with full front matter defaults" do
     setup do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "defaults"    => [{
+      @site = fixture_site({
+        "defaults" => [{
           "scope"  => {
             "path" => "contacts",
             "type" => "page"
@@ -15,7 +13,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
             "key" => "val"
           }
         }]
-      }))
+      })
       @site.process
       @affected = @site.pages.find { |page| page.relative_path == "/contacts/bar.html" }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
@@ -29,10 +27,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
   context "A site with front matter type pages and an extension" do
     setup do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "defaults"    => [{
+      @site = fixture_site({
+        "defaults" => [{
           "scope"  => {
             "path" => "index.html"
           },
@@ -40,7 +36,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
             "key" => "val"
           }
         }]
-      }))
+      })
 
       @site.process
       @affected = @site.pages.find { |page| page.relative_path == "index.html" }
@@ -55,10 +51,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
   context "A site with front matter defaults with no type" do
     setup do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "defaults"    => [{
+      @site = fixture_site({
+        "defaults" => [{
           "scope"  => {
             "path" => "win"
           },
@@ -66,7 +60,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
             "key" => "val"
           }
         }]
-      }))
+      })
+
       @site.process
       @affected = @site.posts.docs.find { |page| page.relative_path =~ %r!win\/! }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
@@ -80,10 +75,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
   context "A site with front matter defaults with no path and a deprecated type" do
     setup do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "defaults"    => [{
+      @site = fixture_site({
+        "defaults" => [{
           "scope"  => {
             "type" => "page"
           },
@@ -91,7 +84,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
             "key" => "val"
           }
         }]
-      }))
+      })
+
       @site.process
       @affected = @site.pages
       @not_affected = @site.posts.docs
@@ -106,10 +100,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
   context "A site with front matter defaults with no path" do
     setup do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "defaults"    => [{
+      @site = fixture_site({
+        "defaults" => [{
           "scope"  => {
             "type" => "pages"
           },
@@ -117,7 +109,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
             "key" => "val"
           }
         }]
-      }))
+      })
       @site.process
       @affected = @site.pages
       @not_affected = @site.posts.docs
@@ -132,17 +124,15 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
   context "A site with front matter defaults with no path or type" do
     setup do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "defaults"    => [{
+      @site = fixture_site({
+        "defaults" => [{
           "scope"  => {
           },
           "values" => {
             "key" => "val"
           }
         }]
-      }))
+      })
       @site.process
       @affected = @site.pages
       @not_affected = @site.posts
@@ -156,15 +146,13 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
   context "A site with front matter defaults with no scope" do
     setup do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "defaults"    => [{
+      @site = fixture_site({
+        "defaults" => [{
           "values" => {
             "key" => "val"
           }
         }]
-      }))
+      })
       @site.process
       @affected = @site.pages
       @not_affected = @site.posts
