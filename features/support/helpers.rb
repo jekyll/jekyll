@@ -7,26 +7,31 @@ require "safe_yaml/load"
 class Paths
   SOURCE_DIR = Pathname.new(File.expand_path("../..", __dir__))
   def self.test_dir; source_dir.join("tmp", "jekyll"); end
+
   def self.output_file; test_dir.join("jekyll_output.txt"); end
+
   def self.status_file; test_dir.join("jekyll_status.txt"); end
+
   def self.jekyll_bin; source_dir.join("bin", "jekyll"); end
+
   def self.source_dir; SOURCE_DIR; end
 end
 
 #
 
 def file_content_from_hash(input_hash)
-  matter_hash = input_hash.reject { |k, v| k == "content" }
-  matter = matter_hash.map do |k, v| "#{k}: #{v}\n"
+  matter_hash = input_hash.reject { |k, _v| k == "content" }
+  matter = matter_hash.map do |k, v|
+    "#{k}: #{v}\n"
   end
 
   matter = matter.join.chomp
   content = \
-  if !input_hash['input'] || !input_hash['filter']
-    then input_hash['content']
-    else "{{ #{input_hash['input']} | " \
-      "#{input_hash['filter']} }}"
-  end
+    if !input_hash["input"] || !input_hash["filter"]
+      then input_hash["content"]
+    else "{{ #{input_hash["input"]} | " \
+        "#{input_hash["filter"]} }}"
+    end
 
   Jekyll::Utils.strip_heredoc(<<-EOF)
     ---
@@ -78,7 +83,7 @@ end
 #
 
 def run_bundle(args)
-  run_in_shell("bundle", *args.strip.split(' '))
+  run_in_shell("bundle", *args.strip.split(" "))
 end
 
 #
@@ -91,14 +96,13 @@ end
 
 #
 
+# rubocop:disable Metrics/AbcSize
 def run_in_shell(*args)
   i, o, e, p = Open3.popen3(*args)
   out = o.read.strip
   err = e.read.strip
 
-  [i, o, e].each do |m|
-    m.close
-  end
+  [i, o, e].each(&:close)
 
   File.write(Paths.status_file, p.value.exitstatus)
   File.open(Paths.output_file, "wb") do |f|
@@ -110,13 +114,14 @@ def run_in_shell(*args)
 
   p.value
 end
+# rubocop:enable Metrics/AbcSize
 
 #
 
 def slug(title = nil)
   if !title
     then Time.now.strftime("%s%9N") # nanoseconds since the Epoch
-    else title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, '-')
+  else title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, "-")
   end
 end
 
@@ -124,12 +129,12 @@ end
 
 def location(folder, direction)
   if folder
-    before = folder if direction ==    "in"
+    before = folder if direction == "in"
     after  = folder if direction == "under"
   end
 
-  [before || '.',
-    after || '.']
+  [before || ".",
+    after || "."]
 end
 
 #
@@ -149,13 +154,13 @@ def seconds_agnostic_datetime(datetime = Time.now)
     "#{time}:\\d{2}",
     Regexp.escape(zone)
   ] \
-  .join("\\ ")
+    .join("\\ ")
 end
 
 #
 
 def seconds_agnostic_time(time)
   time = time.strftime("%H:%M:%S") if time.is_a?(Time)
-  hour, minutes, _ = time.split(":")
+  hour, minutes, = time.split(":")
   "#{hour}:#{minutes}"
 end
