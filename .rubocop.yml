@@ -18,8 +18,6 @@ AllCops:
   - lib/jekyll/entry_filter.rb
   - lib/jekyll/filters.rb
   - lib/jekyll/frontmatter_defaults.rb
-  - lib/jekyll/liquid_renderer/table.rb
-  - lib/jekyll/liquid_renderer.rb
   - lib/jekyll/reader.rb
   - lib/jekyll/readers/layout_reader.rb
   - lib/jekyll/readers/page_reader.rb
