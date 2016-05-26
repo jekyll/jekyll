@@ -6,13 +6,13 @@ module Jekyll
       @default_formatter = Formatter.new
       @logdev = $stdout
       @formatter = proc do |_, _, _, msg|
-        "#{msg}"
+        msg.to_s
       end
     end
 
-    def add(severity, message = nil, progname = nil, &block)
+    def add(severity, message = nil, progname = nil)
       severity ||= UNKNOWN
-      @logdev = set_logdevice(severity)
+      @logdev = logdevice(severity)
 
       if @logdev.nil? || severity < @level
         return true
@@ -27,7 +27,8 @@ module Jekyll
         end
       end
       @logdev.puts(
-        format_message(format_severity(severity), Time.now, progname, message))
+        format_message(format_severity(severity), Time.now, progname, message)
+      )
       true
     end
 
@@ -47,7 +48,7 @@ module Jekyll
 
     private
 
-    def set_logdevice(severity)
+    def logdevice(severity)
       if severity > INFO
         $stderr
       else
