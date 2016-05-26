@@ -65,7 +65,7 @@ eos
 
       def parse_options(input)
         options = {}
-        if defined?(input) && input != ""
+        unless input.empty?
           # Split along 3 possible forms -- key="<quoted list>", key=value, or key
           input.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
             key, value = opt.split("=")
