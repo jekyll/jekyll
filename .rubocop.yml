@@ -10,7 +10,6 @@ AllCops:
   - lib/jekyll/convertible.rb
   - lib/jekyll/deprecator.rb
   - lib/jekyll/document.rb
-  - lib/jekyll/drops/site_drop.rb
   - lib/jekyll/filters.rb
   - lib/jekyll/frontmatter_defaults.rb
   - lib/jekyll/reader.rb
