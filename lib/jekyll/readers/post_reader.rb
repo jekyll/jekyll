@@ -32,16 +32,14 @@ module Jekyll
     #
     # Returns nothing.
     def read_publishable(dir, magic_dir, matcher)
-      documents = read_content(dir, magic_dir, matcher).tap do |docs|
-        docs.each(&:read)
-      end
-      documents.select do |doc|
-        site.publisher.publish?(doc).tap do |will_publish|
-          if !will_publish && site.publisher.hidden_in_the_future?(doc)
-            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+      read_content(dir, magic_dir, matcher).tap { |docs| docs.each(&:read) }
+        .select do |doc|
+          site.publisher.publish?(doc).tap do |will_publish|
+            if !will_publish && site.publisher.hidden_in_the_future?(doc)
+              Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+            end
           end
         end
-      end
     end
 
     # Read all the content files from <source>/<dir>/magic_dir
