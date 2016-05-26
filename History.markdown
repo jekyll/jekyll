@@ -76,6 +76,7 @@
   * Rubocop: test/* (#4947)
   * Rubocop: features (#4934)
   * Rubocop: Liquid renderer (#4933)
+  * Rubocop: converters (#4931)
 
 ### Site Enhancements
 
