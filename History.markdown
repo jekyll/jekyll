@@ -74,6 +74,7 @@
   * Rubocop: Stevenson (#4951)
   * Rubocop: lib/jekyll/entry_filter.rb (#4950)
   * Rubocop: test/* (#4947)
+  * Rubocop: features (#4934)
 
 ### Site Enhancements
 
