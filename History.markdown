@@ -70,6 +70,7 @@
   * Rubocop cleanup for some utils and further test files (#4916)
   * Rubocop: Low hanging fruit (#4936)
   * Rubocop: `Drop` changes from v3.1 forward-ports (#4949)
+  * Rubocop: cleanup for misc files (#4946)
 
 ### Site Enhancements
 
