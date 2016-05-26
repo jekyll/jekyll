@@ -14,7 +14,9 @@ module Jekyll
     #
     # Returns an array of static files.
     def read(files)
-      files.map { |file| @unfiltered_content << StaticFile.new(@site, @site.source, @dir, file) }
+      files.map do |file|
+        @unfiltered_content << StaticFile.new(@site, @site.source, @dir, file)
+      end
       @unfiltered_content
     end
   end
