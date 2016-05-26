@@ -77,6 +77,7 @@
   * Rubocop: features (#4934)
   * Rubocop: Liquid renderer (#4933)
   * Rubocop: converters (#4931)
+  * Rubocop: Site Drop (#4948)
 
 ### Site Enhancements
 
