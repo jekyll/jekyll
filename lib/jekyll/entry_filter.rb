@@ -2,7 +2,7 @@ module Jekyll
   class EntryFilter
     attr_reader :site
     SPECIAL_LEADING_CHARACTERS = [
-      '.', '_', '#', '~'
+      ".", "_", '#', "~"
     ].freeze
 
     def initialize(site, base_directory = nil)
@@ -37,8 +37,7 @@ module Jekyll
 
     def included?(entry)
       glob_include?(site.include,
-        entry
-      )
+        entry)
     end
 
     def special?(entry)
@@ -47,12 +46,17 @@ module Jekyll
     end
 
     def backup?(entry)
-      entry[-1..-1] == '~'
+      entry[-1..-1] == "~"
     end
 
     def excluded?(entry)
       excluded = glob_include?(site.exclude, relative_to_source(entry))
-      Jekyll.logger.debug "EntryFilter:", "excluded #{relative_to_source(entry)}" if excluded
+      if excluded
+        Jekyll.logger.debug(
+          "EntryFilter:",
+          "excluded #{relative_to_source(entry)}"
+        )
+      end
       excluded
     end
 
@@ -83,7 +87,6 @@ module Jekyll
     def glob_include?(enum, e)
       entry = Pathutil.new(site.in_source_dir).join(e)
       enum.any? do |exp|
-
         # Users who send a Regexp knows what they want to
         # exclude, so let them send a Regexp to exclude files,
         # we will not bother caring if it works or not, it's
