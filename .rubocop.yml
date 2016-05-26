@@ -39,17 +39,6 @@ AllCops:
   - features/step_definitions.rb
   - features/support/formatter.rb
   - features/support/helpers.rb
-  - test/test_configuration.rb
-  - test/test_document.rb
-  - test/test_entry_filter.rb
-  - test/test_filters.rb
-  - test/test_kramdown.rb
-  - test/test_liquid_renderer.rb
-  - test/test_page.rb
-  - test/test_regenerator.rb
-  - test/test_site.rb
-  - test/test_tags.rb
-  - test/test_utils.rb
   - bin/**/*
   - benchmark/**/*
   - script/**/*
@@ -66,6 +55,7 @@ Metrics/ClassLength:
   Max: 240
   Exclude:
   - !ruby/regexp /features\/.*.rb$/
+  - !ruby/regexp /test\/.*.rb$/
 Metrics/CyclomaticComplexity:
   Max: 8
 Metrics/LineLength:
