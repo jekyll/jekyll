@@ -21,8 +21,6 @@ AllCops:
   - lib/jekyll/utils.rb
   - lib/jekyll.rb
   - features/step_definitions.rb
-  - features/support/formatter.rb
-  - features/support/helpers.rb
   - bin/**/*
   - benchmark/**/*
   - script/**/*
