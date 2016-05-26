@@ -29,7 +29,6 @@ AllCops:
   - lib/jekyll/renderer.rb
   - lib/jekyll/site.rb
   - lib/jekyll/static_file.rb
-  - lib/jekyll/stevenson.rb
   - lib/jekyll/tags/highlight.rb
   - lib/jekyll/tags/include.rb
   - lib/jekyll/tags/link.rb
