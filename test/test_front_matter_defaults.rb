@@ -15,7 +15,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
         }]
       })
       @site.process
-      @affected = @site.pages.find { |page| page.relative_path == "/contacts/bar.html" }
+      @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
 
