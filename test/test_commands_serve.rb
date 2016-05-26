@@ -74,6 +74,20 @@ class TestCommandsServe < JekyllUnitTest
         assert custom_opts(opts)[:DirectoryIndex].empty?
       end
 
+      should "keep config between build and serve" do
+        custom_options = {
+          "config"  => %w(_config.yml _development.yml),
+          "serving" => true,
+          "watch"   => false # for not having guard output when running the tests
+        }
+        allow(SafeYAML).to receive(:load_file).and_return({})
+        allow(Jekyll::Commands::Build).to receive(:build).and_return("")
+
+        expect(Jekyll::Commands::Serve).to receive(:process).with(custom_options)
+        @merc.execute(:serve, { "config" => %w(_config.yml _development.yml),
+                                "watch"  => false })
+      end
+
       context "verbose" do
         should "debug when verbose" do
           assert_equal custom_opts({ "verbose" => true })[:Logger].level, 5
