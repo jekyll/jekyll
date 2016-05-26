@@ -75,6 +75,7 @@
   * Rubocop: lib/jekyll/entry_filter.rb (#4950)
   * Rubocop: test/* (#4947)
   * Rubocop: features (#4934)
+  * Rubocop: Liquid renderer (#4933)
 
 ### Site Enhancements
 
