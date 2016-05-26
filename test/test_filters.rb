@@ -1,6 +1,6 @@
 # coding: utf-8
 
-require 'helper'
+require "helper"
 
 class TestFilters < JekyllUnitTest
   class JekyllFilter
@@ -8,18 +8,24 @@ class TestFilters < JekyllUnitTest
     attr_accessor :site, :context
 
     def initialize(opts = {})
-      @site = Jekyll::Site.new(Jekyll.configuration(opts.merge('skip_config_files' => true)))
+      @site = Jekyll::Site.new(
+        Jekyll.configuration(opts.merge("skip_config_files" => true))
+      )
       @context = Liquid::Context.new({}, {}, { :site => @site })
     end
   end
 
   context "filters" do
     setup do
-      @filter = JekyllFilter.new({"source" => source_dir, "destination" => dest_dir, "timezone" => "UTC"})
+      @filter = JekyllFilter.new({
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "timezone"    => "UTC"
+      })
       @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
       @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
-      @time_as_numeric = 1399680607
+      @time_as_numeric = 1_399_680_607
       @array_of_objects = [
         { "color" => "red",  "size" => "large"  },
         { "color" => "red",  "size" => "medium" },
@@ -28,18 +34,30 @@ class TestFilters < JekyllUnitTest
     end
 
     should "markdownify with simple string" do
-      assert_equal "<p>something <strong>really</strong> simple</p>\n", @filter.markdownify("something **really** simple")
+      assert_equal(
+        "<p>something <strong>really</strong> simple</p>\n",
+        @filter.markdownify("something **really** simple")
+      )
     end
 
     context "smartify filter" do
       should "convert quotes and typographic characters" do
-        assert_equal "SmartyPants is *not* Markdown", @filter.smartify("SmartyPants is *not* Markdown")
-        assert_equal "“This filter’s test…”", @filter.smartify(%q{"This filter's test..."})
+        assert_equal(
+          "SmartyPants is *not* Markdown",
+          @filter.smartify("SmartyPants is *not* Markdown")
+        )
+        assert_equal(
+          "“This filter’s test…”",
+          @filter.smartify(%q{"This filter's test..."})
+        )
       end
 
       should "escapes special characters when configured to do so" do
-        kramdown = JekyllFilter.new({:kramdown => {:entity_output => :symbolic}})
-        assert_equal "&ldquo;This filter&rsquo;s test&hellip;&rdquo;", kramdown.smartify(%q{"This filter's test..."})
+        kramdown = JekyllFilter.new({ :kramdown => { :entity_output => :symbolic } })
+        assert_equal(
+          "&ldquo;This filter&rsquo;s test&hellip;&rdquo;",
+          kramdown.smartify(%q{"This filter's test..."})
+        )
       end
 
       should "convert HTML entities to unicode characters" do
@@ -48,8 +66,14 @@ class TestFilters < JekyllUnitTest
       end
 
       should "allow raw HTML passthrough" do
-        assert_equal "Span HTML is <em>not</em> escaped", @filter.smartify("Span HTML is <em>not</em> escaped")
-        assert_equal "<div>Block HTML is not escaped</div>", @filter.smartify("<div>Block HTML is not escaped</div>")
+        assert_equal(
+          "Span HTML is <em>not</em> escaped",
+          @filter.smartify("Span HTML is <em>not</em> escaped")
+        )
+        assert_equal(
+          "<div>Block HTML is not escaped</div>",
+          @filter.smartify("<div>Block HTML is not escaped</div>")
+        )
       end
 
       should "escape special characters" do
@@ -60,11 +84,17 @@ class TestFilters < JekyllUnitTest
     end
 
     should "sassify with simple string" do
-      assert_equal "p {\n  color: #123456; }\n", @filter.sassify("$blue:#123456\np\n  color: $blue")
+      assert_equal(
+        "p {\n  color: #123456; }\n",
+        @filter.sassify("$blue:#123456\np\n  color: $blue")
+      )
     end
 
     should "scssify with simple string" do
-      assert_equal "p {\n  color: #123456; }\n", @filter.scssify("$blue:#123456; p{color: $blue}")
+      assert_equal(
+        "p {\n  color: #123456; }\n",
+        @filter.scssify("$blue:#123456; p{color: $blue}")
+      )
     end
 
     should "convert array to sentence string with no args" do
@@ -78,12 +108,15 @@ class TestFilters < JekyllUnitTest
 
     should "convert array to sentence string with two args" do
       assert_equal "1 and 2", @filter.array_to_sentence_string([1, 2])
-      assert_equal "chunky and bacon", @filter.array_to_sentence_string(["chunky", "bacon"])
+      assert_equal "chunky and bacon", @filter.array_to_sentence_string(%w(chunky bacon))
     end
 
     should "convert array to sentence string with multiple args" do
       assert_equal "1, 2, 3, and 4", @filter.array_to_sentence_string([1, 2, 3, 4])
-      assert_equal "chunky, bacon, bits, and pieces", @filter.array_to_sentence_string(["chunky", "bacon", "bits", "pieces"])
+      assert_equal(
+        "chunky, bacon, bits, and pieces",
+        @filter.array_to_sentence_string(%w(chunky bacon bits pieces))
+      )
     end
 
     context "date filters" do
@@ -97,11 +130,17 @@ class TestFilters < JekyllUnitTest
         end
 
         should "format a time with xmlschema" do
-          assert_equal "2013-03-27T11:22:33+00:00", @filter.date_to_xmlschema(@sample_time)
+          assert_equal(
+            "2013-03-27T11:22:33+00:00",
+            @filter.date_to_xmlschema(@sample_time)
+          )
         end
 
         should "format a time according to RFC-822" do
-          assert_equal "Wed, 27 Mar 2013 11:22:33 +0000", @filter.date_to_rfc822(@sample_time)
+          assert_equal(
+            "Wed, 27 Mar 2013 11:22:33 +0000",
+            @filter.date_to_rfc822(@sample_time)
+          )
         end
 
         should "not modify a time in-place when using filters" do
@@ -122,11 +161,17 @@ class TestFilters < JekyllUnitTest
         end
 
         should "format a time with xmlschema" do
-          assert_equal "2013-03-27T00:00:00+00:00", @filter.date_to_xmlschema(@sample_date)
+          assert_equal(
+            "2013-03-27T00:00:00+00:00",
+            @filter.date_to_xmlschema(@sample_date)
+          )
         end
 
         should "format a time according to RFC-822" do
-          assert_equal "Wed, 27 Mar 2013 00:00:00 +0000", @filter.date_to_rfc822(@sample_date)
+          assert_equal(
+            "Wed, 27 Mar 2013 00:00:00 +0000",
+            @filter.date_to_rfc822(@sample_date)
+          )
         end
       end
 
@@ -140,11 +185,17 @@ class TestFilters < JekyllUnitTest
         end
 
         should "format a time with xmlschema" do
-          assert_equal "2001-09-11T12:46:30+00:00", @filter.date_to_xmlschema(@time_as_string)
+          assert_equal(
+            "2001-09-11T12:46:30+00:00",
+            @filter.date_to_xmlschema(@time_as_string)
+          )
         end
 
         should "format a time according to RFC-822" do
-          assert_equal "Tue, 11 Sep 2001 12:46:30 +0000", @filter.date_to_rfc822(@time_as_string)
+          assert_equal(
+            "Tue, 11 Sep 2001 12:46:30 +0000",
+            @filter.date_to_rfc822(@time_as_string)
+          )
         end
       end
 
@@ -158,18 +209,27 @@ class TestFilters < JekyllUnitTest
         end
 
         should "format a time with xmlschema" do
-          assert_match(/2014-05-10T00:10:07/, @filter.date_to_xmlschema(@time_as_numeric))
+          assert_match(
+            "2014-05-10T00:10:07",
+            @filter.date_to_xmlschema(@time_as_numeric)
+          )
         end
 
         should "format a time according to RFC-822" do
-          assert_equal "Sat, 10 May 2014 00:10:07 +0000", @filter.date_to_rfc822(@time_as_numeric)
+          assert_equal(
+            "Sat, 10 May 2014 00:10:07 +0000",
+            @filter.date_to_rfc822(@time_as_numeric)
+          )
         end
       end
     end
 
     should "escape xml with ampersands" do
       assert_equal "AT&amp;T", @filter.xml_escape("AT&T")
-      assert_equal "&lt;code&gt;command &amp;lt;filename&amp;gt;&lt;/code&gt;", @filter.xml_escape("<code>command &lt;filename&gt;</code>")
+      assert_equal(
+        "&lt;code&gt;command &amp;lt;filename&amp;gt;&lt;/code&gt;",
+        @filter.xml_escape("<code>command &lt;filename&gt;</code>")
+      )
     end
 
     should "not error when xml escaping nil" do
@@ -190,37 +250,40 @@ class TestFilters < JekyllUnitTest
 
     context "jsonify filter" do
       should "convert hash to json" do
-        assert_equal "{\"age\":18}", @filter.jsonify({:age => 18})
+        assert_equal "{\"age\":18}", @filter.jsonify({ :age => 18 })
       end
 
       should "convert array to json" do
         assert_equal "[1,2]", @filter.jsonify([1, 2])
-        assert_equal "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]", @filter.jsonify([{:name => 'Jack'}, {:name => 'Smith'}])
+        assert_equal(
+          "[{\"name\":\"Jack\"},{\"name\":\"Smith\"}]",
+          @filter.jsonify([{ :name => "Jack" }, { :name => "Smith" }])
+        )
       end
 
       should "convert drop to json" do
         @filter.site.read
         expected = {
-          "path" => "_posts/2008-02-02-published.markdown",
-          "previous" => nil,
-          "output" => nil,
-          "content" => "This should be published.\n",
-          "id" => "/publish_test/2008/02/02/published",
-          "url" => "/publish_test/2008/02/02/published.html",
+          "path"          => "_posts/2008-02-02-published.markdown",
+          "previous"      => nil,
+          "output"        => nil,
+          "content"       => "This should be published.\n",
+          "id"            => "/publish_test/2008/02/02/published",
+          "url"           => "/publish_test/2008/02/02/published.html",
           "relative_path" => "_posts/2008-02-02-published.markdown",
-          "collection" => "posts",
-          "excerpt" => "<p>This should be published.</p>\n",
-          "draft" => false,
-          "categories" => [
+          "collection"    => "posts",
+          "excerpt"       => "<p>This should be published.</p>\n",
+          "draft"         => false,
+          "categories"    => [
             "publish_test"
           ],
-          "layout" => "default",
-          "title" => "Publish",
-          "category" => "publish_test",
-          "date" => "2008-02-02 00:00:00 +0000",
-          "slug" => "published",
-          "ext" => ".markdown",
-          "tags" => []
+          "layout"        => "default",
+          "title"         => "Publish",
+          "category"      => "publish_test",
+          "date"          => "2008-02-02 00:00:00 +0000",
+          "slug"          => "published",
+          "ext"           => ".markdown",
+          "tags"          => []
         }
         actual = JSON.parse(@filter.jsonify(@filter.site.docs_to_write.first.to_liquid))
 
@@ -236,10 +299,11 @@ class TestFilters < JekyllUnitTest
         actual = @filter.jsonify(@filter.site.to_liquid)
         assert_equal JSON.parse(actual)["jekyll"], {
           "environment" => "development",
-          "version" => Jekyll::VERSION
+          "version"     => Jekyll::VERSION
         }
       end
 
+      # rubocop:disable Style/StructInheritance
       class M < Struct.new(:message)
         def to_liquid
           [message]
@@ -247,7 +311,12 @@ class TestFilters < JekyllUnitTest
       end
       class T < Struct.new(:name)
         def to_liquid
-          { "name" => name, :v => 1, :thing => M.new({:kay => "jewelers"}), :stuff => true }
+          {
+            "name" => name,
+            :v     => 1,
+            :thing => M.new({ :kay => "jewelers" }),
+            :stuff => true
+          }
         end
       end
 
@@ -277,6 +346,7 @@ class TestFilters < JekyllUnitTest
         result = @filter.jsonify([T.new("Jeremiah"), T.new("Smathers")])
         assert_equal expected, JSON.parse(result)
       end
+      # rubocop:enable Style/StructInheritance
 
       should "handle hashes with all sorts of weird keys and values" do
         my_hash = { "posts" => Array.new(3) { |i| T.new(i) } }
@@ -324,16 +394,28 @@ class TestFilters < JekyllUnitTest
         @filter.site.process
         grouping = @filter.group_by(@filter.site.pages, "layout")
         grouping.each do |g|
-          assert ["default", "nil", ""].include?(g["name"]), "#{g['name']} isn't a valid grouping."
+          assert(
+            ["default", "nil", ""].include?(g["name"]),
+            "#{g["name"]} isn't a valid grouping."
+          )
           case g["name"]
           when "default"
-            assert g["items"].is_a?(Array), "The list of grouped items for 'default' is not an Array."
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for 'default' is not an Array."
+            )
             assert_equal 5, g["items"].size
           when "nil"
-            assert g["items"].is_a?(Array), "The list of grouped items for 'nil' is not an Array."
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for 'nil' is not an Array."
+            )
             assert_equal 2, g["items"].size
           when ""
-            assert g["items"].is_a?(Array), "The list of grouped items for '' is not an Array."
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for '' is not an Array."
+            )
             assert_equal 13, g["items"].size
           end
         end
@@ -343,7 +425,11 @@ class TestFilters < JekyllUnitTest
         grouping = @filter.group_by(@filter.site.pages, "layout")
         grouping.each do |g|
           p g
-          assert_equal g["items"].size, g["size"], "The size property for '#{g["name"]}' doesn't match the size of the Array."
+          assert_equal(
+            g["items"].size,
+            g["size"],
+            "The size property for '#{g["name"]}' doesn't match the size of the Array."
+          )
         end
       end
     end
@@ -354,9 +440,9 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter objects in a hash appropriately" do
-        hash = {"a"=>{"color"=>"red"}, "b"=>{"color"=>"blue"}}
+        hash = { "a"=>{ "color"=>"red" }, "b"=>{ "color"=>"blue" } }
         assert_equal 1, @filter.where(hash, "color", "red").length
-        assert_equal [{"color"=>"red"}], @filter.where(hash, "color", "red")
+        assert_equal [{ "color"=>"red" }], @filter.where(hash, "color", "red")
       end
 
       should "filter objects appropriately" do
@@ -364,25 +450,37 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter array properties appropriately" do
-        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>["x"]}, "c"=>{"tags"=>["y","z"]}}
+        hash = {
+          "a" => { "tags"=>%w(x y) },
+          "b" => { "tags"=>["x"] },
+          "c" => { "tags"=>%w(y z) }
+        }
         assert_equal 2, @filter.where(hash, "tags", "x").length
       end
 
       should "filter array properties alongside string properties" do
-        hash = {"a"=>{"tags"=>["x","y"]}, "b"=>{"tags"=>"x"}, "c"=>{"tags"=>["y","z"]}}
+        hash = {
+          "a" => { "tags"=>%w(x y) },
+          "b" => { "tags"=>"x" },
+          "c" => { "tags"=>%w(y z) }
+        }
         assert_equal 2, @filter.where(hash, "tags", "x").length
       end
 
       should "not match substrings" do
-        hash = {"a"=>{"category"=>"bear"}, "b"=>{"category"=>"wolf"}, "c"=>{"category"=>["bear","lion"]}}
+        hash = {
+          "a" => { "category"=>"bear" },
+          "b" => { "category"=>"wolf" },
+          "c" => { "category"=>%w(bear lion) }
+        }
         assert_equal 0, @filter.where(hash, "category", "ear").length
       end
 
       should "stringify during comparison for compatibility with liquid parsing" do
         hash = {
-          "The Words" => {"rating" => 1.2, "featured" => false},
-          "Limitless" => {"rating" => 9.2, "featured" => true},
-          "Hustle"    => {"rating" => 4.7, "featured" => true},
+          "The Words" => { "rating" => 1.2, "featured" => false },
+          "Limitless" => { "rating" => 9.2, "featured" => true },
+          "Hustle"    => { "rating" => 4.7, "featured" => true }
         }
 
         results = @filter.where(hash, "featured", "true")
@@ -402,20 +500,26 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter objects in a hash appropriately" do
-        hash = {"a"=>{"color"=>"red"}, "b"=>{"color"=>"blue"}}
+        hash = { "a"=>{ "color"=>"red" }, "b"=>{ "color"=>"blue" } }
         assert_equal 1, @filter.where_exp(hash, "item", "item.color == 'red'").length
-        assert_equal [{"color"=>"red"}], @filter.where_exp(hash, "item", "item.color == 'red'")
+        assert_equal(
+          [{ "color"=>"red" }],
+          @filter.where_exp(hash, "item", "item.color == 'red'")
+        )
       end
 
       should "filter objects appropriately" do
-        assert_equal 2, @filter.where_exp(@array_of_objects, "item", "item.color == 'red'").length
+        assert_equal(
+          2,
+          @filter.where_exp(@array_of_objects, "item", "item.color == 'red'").length
+        )
       end
 
       should "stringify during comparison for compatibility with liquid parsing" do
         hash = {
-          "The Words" => {"rating" => 1.2, "featured" => false},
-          "Limitless" => {"rating" => 9.2, "featured" => true},
-          "Hustle"    => {"rating" => 4.7, "featured" => true},
+          "The Words" => { "rating" => 1.2, "featured" => false },
+          "Limitless" => { "rating" => 9.2, "featured" => true },
+          "Hustle"    => { "rating" => 4.7, "featured" => true }
         }
 
         results = @filter.where_exp(hash, "item", "item.featured == true")
@@ -465,28 +569,31 @@ class TestFilters < JekyllUnitTest
         assert_equal [1, 2, 2.2, 3], @filter.sort([3, 2.2, 2, 1])
       end
       should "return sorted strings" do
-        assert_equal ["10", "2"], @filter.sort(["10", "2"])
-        assert_equal [{"a" => "10"}, {"a" => "2"}], @filter.sort([{"a" => "10"}, {"a" => "2"}], "a")
-        assert_equal ["FOO", "Foo", "foo"], @filter.sort(["foo", "Foo", "FOO"])
-        assert_equal ["_foo", "foo", "foo_"], @filter.sort(["foo_", "_foo", "foo"])
+        assert_equal %w(10 2), @filter.sort(%w(10 2))
+        assert_equal(
+          [{ "a" => "10" }, { "a" => "2" }],
+          @filter.sort([{ "a" => "10" }, { "a" => "2" }], "a")
+        )
+        assert_equal %w(FOO Foo foo), @filter.sort(%w(foo Foo FOO))
+        assert_equal %w(_foo foo foo_), @filter.sort(%w(foo_ _foo foo))
         # Cyrillic
-        assert_equal ["ВУЗ", "Вуз", "вуз"], @filter.sort(["Вуз", "вуз", "ВУЗ"])
-        assert_equal ["_вуз", "вуз", "вуз_"], @filter.sort(["вуз_", "_вуз", "вуз"])
+        assert_equal %w(ВУЗ Вуз вуз), @filter.sort(%w(Вуз вуз ВУЗ))
+        assert_equal %w(_вуз вуз вуз_), @filter.sort(%w(вуз_ _вуз вуз))
         # Hebrew
-        assert_equal ["אלף", "בית"], @filter.sort(["בית", "אלף"])
+        assert_equal %w(אלף בית), @filter.sort(%w(בית אלף))
       end
       should "return sorted by property array" do
-        assert_equal [{"a" => 1}, {"a" => 2}, {"a" => 3}, {"a" => 4}],
-          @filter.sort([{"a" => 4}, {"a" => 3}, {"a" => 1}, {"a" => 2}], "a")
+        assert_equal [{ "a" => 1 }, { "a" => 2 }, { "a" => 3 }, { "a" => 4 }],
+          @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
       end
       should "return sorted by property array with nils first" do
-        ary = [{"a" => 2}, {"b" => 1}, {"a" => 1}]
-        assert_equal [{"b" => 1}, {"a" => 1}, {"a" => 2}], @filter.sort(ary, "a")
+        ary = [{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }]
+        assert_equal [{ "b" => 1 }, { "a" => 1 }, { "a" => 2 }], @filter.sort(ary, "a")
         assert_equal @filter.sort(ary, "a"), @filter.sort(ary, "a", "first")
       end
       should "return sorted by property array with nils last" do
-        assert_equal [{"a" => 1}, {"a" => 2}, {"b" => 1}],
-          @filter.sort([{"a" => 2}, {"b" => 1}, {"a" => 1}], "a", "last")
+        assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
+          @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
       end
     end
 
@@ -512,41 +619,41 @@ class TestFilters < JekyllUnitTest
 
     context "push filter" do
       should "return a new array with the element pushed to the end" do
-        assert_equal %w{hi there bernie}, @filter.push(%w{hi there}, "bernie")
+        assert_equal %w(hi there bernie), @filter.push(%w(hi there), "bernie")
       end
     end
 
     context "pop filter" do
       should "return a new array with the last element popped" do
-        assert_equal %w{hi there}, @filter.pop(%w{hi there bernie})
+        assert_equal %w(hi there), @filter.pop(%w(hi there bernie))
       end
 
       should "allow multiple els to be popped" do
-        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, 2)
+        assert_equal %w(hi there bert), @filter.pop(%w(hi there bert and ernie), 2)
       end
 
       should "cast string inputs for # into nums" do
-        assert_equal %w{hi there bert}, @filter.pop(%w{hi there bert and ernie}, "2")
+        assert_equal %w(hi there bert), @filter.pop(%w(hi there bert and ernie), "2")
       end
     end
 
     context "shift filter" do
       should "return a new array with the element removed from the front" do
-        assert_equal %w{a friendly greeting}, @filter.shift(%w{just a friendly greeting})
+        assert_equal %w(a friendly greeting), @filter.shift(%w(just a friendly greeting))
       end
 
       should "allow multiple els to be shifted" do
-        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, 2)
+        assert_equal %w(bert and ernie), @filter.shift(%w(hi there bert and ernie), 2)
       end
 
       should "cast string inputs for # into nums" do
-        assert_equal %w{bert and ernie}, @filter.shift(%w{hi there bert and ernie}, "2")
+        assert_equal %w(bert and ernie), @filter.shift(%w(hi there bert and ernie), "2")
       end
     end
 
     context "unshift filter" do
       should "return a new array with the element put at the front" do
-        assert_equal %w{aloha there bernie}, @filter.unshift(%w{there bernie}, "aloha")
+        assert_equal %w(aloha there bernie), @filter.unshift(%w(there bernie), "aloha")
       end
     end
 
@@ -563,6 +670,5 @@ class TestFilters < JekyllUnitTest
         end
       end
     end
-
   end
 end
