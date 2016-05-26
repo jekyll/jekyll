@@ -73,6 +73,7 @@
   * Rubocop: cleanup for misc files (#4946)
   * Rubocop: Stevenson (#4951)
   * Rubocop: lib/jekyll/entry_filter.rb (#4950)
+  * Rubocop: test/* (#4947)
 
 ### Site Enhancements
 
