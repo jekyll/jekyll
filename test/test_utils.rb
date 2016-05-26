@@ -1,4 +1,4 @@
-require 'helper'
+require "helper"
 
 class TestUtils < JekyllUnitTest
   context "The \`Utils.deep_merge_hashes\` method" do
@@ -9,7 +9,7 @@ class TestUtils < JekyllUnitTest
     end
 
     should "merge a drop into a hash" do
-      data = {"page" => {}}
+      data = { "page" => {} }
       merged = Utils.deep_merge_hashes(data, @site.site_payload)
       assert merged.is_a? Hash
       assert merged["site"].is_a? Drops::SiteDrop
@@ -17,7 +17,7 @@ class TestUtils < JekyllUnitTest
     end
 
     should "merge a hash into a drop" do
-      data = {"page" => {}}
+      data = { "page" => {} }
       assert_nil @site.site_payload["page"]
       merged = Utils.deep_merge_hashes(@site.site_payload, data)
       assert merged.is_a? Drops::UnifiedPayloadDrop
@@ -27,66 +27,64 @@ class TestUtils < JekyllUnitTest
   end
 
   context "hash" do
-
     context "pluralized_array" do
-
       should "return empty array with no values" do
         data = {}
-        assert_equal [], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        assert_equal [], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return empty array with no matching values" do
-        data = { 'foo' => 'bar' }
-        assert_equal [], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        data = { "foo" => "bar" }
+        assert_equal [], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return plural array with nil singular" do
-        data = { 'foo' => 'bar', 'tag' => nil, 'tags' => ['dog', 'cat'] }
-        assert_equal ['dog', 'cat'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        data = { "foo" => "bar", "tag" => nil, "tags" => %w(dog cat) }
+        assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching singular" do
-        data = { 'foo' => 'bar', 'tag' => 'dog', 'tags' => ['dog', 'cat'] }
-        assert_equal ['dog'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        data = { "foo" => "bar", "tag" => "dog", "tags" => %w(dog cat) }
+        assert_equal ["dog"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching singular with spaces" do
-        data = { 'foo' => 'bar', 'tag' => 'dog cat', 'tags' => ['dog', 'cat'] }
-        assert_equal ['dog cat'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        data = { "foo" => "bar", "tag" => "dog cat", "tags" => %w(dog cat) }
+        assert_equal ["dog cat"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return empty array with matching nil plural" do
-        data = { 'foo' => 'bar', 'tags' => nil }
-        assert_equal [], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        data = { "foo" => "bar", "tags" => nil }
+        assert_equal [], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return empty array with matching empty array" do
-        data = { 'foo' => 'bar', 'tags' => [] }
-        assert_equal [], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        data = { "foo" => "bar", "tags" => [] }
+        assert_equal [], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching plural with single string value" do
-        data = { 'foo' => 'bar', 'tags' => 'dog' }
-        assert_equal ['dog'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        data = { "foo" => "bar", "tags" => "dog" }
+        assert_equal ["dog"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
-      should "return multiple value array with matching plural with single string value with spaces" do
-        data = { 'foo' => 'bar', 'tags' => 'dog cat' }
-        assert_equal ['dog', 'cat'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+      should "return multiple value array with matching plural with " \
+             "single string value with spaces" do
+        data = { "foo" => "bar", "tags" => "dog cat" }
+        assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching plural with single value array" do
-        data = { 'foo' => 'bar', 'tags' => ['dog'] }
-        assert_equal ['dog'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+        data = { "foo" => "bar", "tags" => ["dog"] }
+        assert_equal ["dog"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
-      should "return multiple value array with matching plural with multiple value array" do
-        data = { 'foo' => 'bar', 'tags' => ['dog', 'cat'] }
-        assert_equal ['dog', 'cat'], Utils.pluralized_array_from_hash(data, 'tag', 'tags')
+      should "return multiple value array with matching plural with " \
+             "multiple value array" do
+        data = { "foo" => "bar", "tags" => %w(dog cat) }
+        assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
-
     end
-
   end
 
   context "The \`Utils.parse_date\` method" do
@@ -108,7 +106,10 @@ class TestUtils < JekyllUnitTest
 
     should "throw an error with the default message if no message is passed in" do
       date = "Blah this is invalid"
-      assert_raises Jekyll::Errors::InvalidDateError, "Invalid date '#{date}': Input could not be parsed." do
+      assert_raises(
+        Jekyll::Errors::InvalidDateError,
+        "Invalid date '#{date}': Input could not be parsed."
+      ) do
         Utils.parse_date(date)
       end
     end
@@ -116,7 +117,10 @@ class TestUtils < JekyllUnitTest
     should "throw an error with the provided message if a message is passed in" do
       date = "Blah this is invalid"
       message = "Aaaah, the world has exploded!"
-      assert_raises Jekyll::Errors::InvalidDateError, "Invalid date '#{date}': #{message}" do
+      assert_raises(
+        Jekyll::Errors::InvalidDateError,
+        "Invalid date '#{date}': #{message}"
+      ) do
         Utils.parse_date(date, message)
       end
     end
@@ -144,7 +148,10 @@ class TestUtils < JekyllUnitTest
     end
 
     should "drop trailing punctuation" do
-      assert_equal "so-what-is-jekyll-exactly", Utils.slugify("So what is Jekyll, exactly?")
+      assert_equal(
+        "so-what-is-jekyll-exactly",
+        Utils.slugify("So what is Jekyll, exactly?")
+      )
       assert_equal "كيف-حالك", Utils.slugify("كيف حالك؟")
     end
 
@@ -157,7 +164,10 @@ class TestUtils < JekyllUnitTest
     end
 
     should "combine adjacent hyphens and spaces" do
-      assert_equal "customizing-git-git-hooks", Utils.slugify("Customizing Git - Git Hooks")
+      assert_equal(
+        "customizing-git-git-hooks",
+        Utils.slugify("Customizing Git - Git Hooks")
+      )
     end
 
     should "replace punctuation in any scripts by hyphens" do
@@ -171,7 +181,10 @@ class TestUtils < JekyllUnitTest
     end
 
     should "not change behaviour if mode is default" do
-      assert_equal "the-config-yml-file", Utils.slugify("The _config.yml file?", mode: "default")
+      assert_equal(
+        "the-config-yml-file",
+        Utils.slugify("The _config.yml file?", :mode => "default")
+      )
     end
 
     should "not change behaviour if mode is nil" do
@@ -179,53 +192,128 @@ class TestUtils < JekyllUnitTest
     end
 
     should "not replace period and underscore if mode is pretty" do
-      assert_equal "the-_config.yml-file", Utils.slugify("The _config.yml file?", mode: "pretty")
+      assert_equal(
+        "the-_config.yml-file",
+        Utils.slugify("The _config.yml file?", :mode => "pretty")
+      )
     end
 
     should "only replace whitespace if mode is raw" do
-      assert_equal "the-_config.yml-file?", Utils.slugify("The _config.yml file?", mode: "raw")
+      assert_equal(
+        "the-_config.yml-file?",
+        Utils.slugify("The _config.yml file?", :mode => "raw")
+      )
     end
 
     should "return the given string if mode is none" do
-      assert_equal "the _config.yml file?", Utils.slugify("The _config.yml file?", mode: "none")
+      assert_equal(
+        "the _config.yml file?",
+        Utils.slugify("The _config.yml file?", :mode => "none")
+      )
     end
 
     should "Keep all uppercase letters if cased is true" do
-      assert_equal "Working-with-drafts", Utils.slugify("Working with drafts", cased: true)
-      assert_equal "Basic-Usage", Utils.slugify("Basic   Usage", cased: true)
-      assert_equal "Working-with-drafts", Utils.slugify("  Working with drafts   ", cased: true)
-      assert_equal "So-what-is-Jekyll-exactly", Utils.slugify("So what is Jekyll, exactly?", cased: true)
-      assert_equal "Pre-releases", Utils.slugify("Pre-releases", cased: true)
-      assert_equal "The-config-yml-file", Utils.slugify("The _config.yml file", cased: true)
-      assert_equal "Customizing-Git-Git-Hooks", Utils.slugify("Customizing Git - Git Hooks", cased: true)
-      assert_equal "The-config-yml-file", Utils.slugify("The _config.yml file?", mode: "default", cased: true)
-      assert_equal "The-config-yml-file", Utils.slugify("The _config.yml file?", cased: true)
-      assert_equal "The-_config.yml-file", Utils.slugify("The _config.yml file?", mode: "pretty", cased: true)
-      assert_equal "The-_config.yml-file?", Utils.slugify("The _config.yml file?", mode: "raw", cased: true)
-      assert_equal "The _config.yml file?", Utils.slugify("The _config.yml file?", mode: "none", cased: true)
+      assert_equal(
+        "Working-with-drafts",
+        Utils.slugify("Working with drafts", :cased => true)
+      )
+      assert_equal(
+        "Basic-Usage",
+        Utils.slugify("Basic   Usage", :cased => true)
+      )
+      assert_equal(
+        "Working-with-drafts",
+        Utils.slugify("  Working with drafts   ", :cased => true)
+      )
+      assert_equal(
+        "So-what-is-Jekyll-exactly",
+        Utils.slugify("So what is Jekyll, exactly?", :cased => true)
+      )
+      assert_equal(
+        "Pre-releases",
+        Utils.slugify("Pre-releases", :cased => true)
+      )
+      assert_equal(
+        "The-config-yml-file",
+        Utils.slugify("The _config.yml file", :cased => true)
+      )
+      assert_equal(
+        "Customizing-Git-Git-Hooks",
+        Utils.slugify("Customizing Git - Git Hooks", :cased => true)
+      )
+      assert_equal(
+        "The-config-yml-file",
+        Utils.slugify("The _config.yml file?", :mode => "default", :cased => true)
+      )
+      assert_equal(
+        "The-config-yml-file",
+        Utils.slugify("The _config.yml file?", :cased => true)
+      )
+      assert_equal(
+        "The-_config.yml-file",
+        Utils.slugify("The _config.yml file?", :mode => "pretty", :cased => true)
+      )
+      assert_equal(
+        "The-_config.yml-file?",
+        Utils.slugify("The _config.yml file?", :mode => "raw", :cased => true)
+      )
+      assert_equal(
+        "The _config.yml file?",
+        Utils.slugify("The _config.yml file?", :mode => "none", :cased => true)
+      )
     end
   end
 
   context "The \`Utils.titleize_slug\` method" do
     should "capitalize all words and not drop any words" do
-      assert_equal "This Is A Long Title With Mixed Capitalization", Utils.titleize_slug("This-is-a-Long-title-with-Mixed-capitalization")
-      assert_equal "This Is A Title With Just The Initial Word Capitalized", Utils.titleize_slug("This-is-a-title-with-just-the-initial-word-capitalized")
-      assert_equal "This Is A Title With No Capitalization", Utils.titleize_slug("this-is-a-title-with-no-capitalization")
+      assert_equal(
+        "This Is A Long Title With Mixed Capitalization",
+        Utils.titleize_slug("This-is-a-Long-title-with-Mixed-capitalization")
+      )
+      assert_equal(
+        "This Is A Title With Just The Initial Word Capitalized",
+        Utils.titleize_slug("This-is-a-title-with-just-the-initial-word-capitalized")
+      )
+      assert_equal(
+        "This Is A Title With No Capitalization",
+        Utils.titleize_slug("this-is-a-title-with-no-capitalization")
+      )
     end
   end
 
   context "The \`Utils.add_permalink_suffix\` method" do
     should "handle built-in permalink styles" do
-      assert_equal "/:basename/", Utils.add_permalink_suffix("/:basename", :pretty)
-      assert_equal "/:basename:output_ext", Utils.add_permalink_suffix("/:basename", :date)
-      assert_equal "/:basename:output_ext", Utils.add_permalink_suffix("/:basename", :ordinal)
-      assert_equal "/:basename:output_ext", Utils.add_permalink_suffix("/:basename", :none)
+      assert_equal(
+        "/:basename/",
+        Utils.add_permalink_suffix("/:basename", :pretty)
+      )
+      assert_equal(
+        "/:basename:output_ext",
+        Utils.add_permalink_suffix("/:basename", :date)
+      )
+      assert_equal(
+        "/:basename:output_ext",
+        Utils.add_permalink_suffix("/:basename", :ordinal)
+      )
+      assert_equal(
+        "/:basename:output_ext",
+        Utils.add_permalink_suffix("/:basename", :none)
+      )
     end
 
     should "handle custom permalink styles" do
-      assert_equal "/:basename/", Utils.add_permalink_suffix("/:basename", "/:title/")
-      assert_equal "/:basename:output_ext", Utils.add_permalink_suffix("/:basename", "/:title:output_ext")
-      assert_equal "/:basename", Utils.add_permalink_suffix("/:basename", "/:title")
+      assert_equal(
+        "/:basename/",
+        Utils.add_permalink_suffix("/:basename", "/:title/")
+      )
+      assert_equal(
+        "/:basename:output_ext",
+        Utils.add_permalink_suffix("/:basename", "/:title:output_ext")
+      )
+      assert_equal(
+        "/:basename",
+        Utils.add_permalink_suffix("/:basename", "/:title")
+      )
     end
   end
 
@@ -270,17 +358,17 @@ class TestUtils < JekyllUnitTest
   context "The \`Utils.has_yaml_header?\` method" do
     should "accept files with yaml front matter" do
       file = source_dir("_posts", "2008-10-18-foo-bar.markdown")
-      assert_equal "---\n", File.open(file, 'rb') { |f| f.read(4) }
+      assert_equal "---\n", File.open(file, "rb") { |f| f.read(4) }
       assert Utils.has_yaml_header?(file)
     end
     should "accept files with extraneous spaces after yaml front matter" do
       file = source_dir("_posts", "2015-12-27-extra-spaces.markdown")
-      assert_equal "---  \n", File.open(file, 'rb') { |f| f.read(6) }
+      assert_equal "---  \n", File.open(file, "rb") { |f| f.read(6) }
       assert Utils.has_yaml_header?(file)
     end
     should "reject pgp files and the like which resemble front matter" do
       file = source_dir("pgp.key")
-      assert_equal "-----B", File.open(file, 'rb') { |f| f.read(6) }
+      assert_equal "-----B", File.open(file, "rb") { |f| f.read(6) }
       refute Utils.has_yaml_header?(file)
     end
   end
