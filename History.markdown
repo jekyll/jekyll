@@ -79,6 +79,7 @@
   * Rubocop: converters (#4931)
   * Rubocop: Site Drop (#4948)
   * Rubocop: tags (#4938)
+  * Rubocop: Readers (#4932)
 
 ### Site Enhancements
 
