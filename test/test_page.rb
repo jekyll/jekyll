@@ -11,10 +11,10 @@ class TestPage < JekyllUnitTest
   end
 
   def do_render(page)
-    layouts = {
+    @site.layouts = {
       "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")
     }
-    page.render(layouts, @site.site_payload)
+    page.render(@site.site_payload)
   end
 
   context "A Page" do
