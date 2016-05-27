@@ -93,11 +93,12 @@ end
 #
 
 Given(/^I have a configuration file with "(.*)" set to "(.*)"$/) do |key, value|
-  config = if source_dir.join("_config.yml").exist?
-             SafeYAML.load_file(source_dir.join("_config.yml"))
-           else
-             {}
-           end
+  config = \
+    if source_dir.join("_config.yml").exist?
+      SafeYAML.load_file(source_dir.join("_config.yml"))
+    else
+      {}
+    end
   config[key] = YAML.load(value)
   File.write("_config.yml", YAML.dump(config))
 end
