@@ -27,7 +27,7 @@ module Jekyll
 
     def configure_sass
       return unless sass_path
-      require 'sass'
+      require "sass"
       Sass.load_paths << sass_path
     end
 
@@ -38,7 +38,7 @@ module Jekyll
       return unless resolved_dir
 
       path = Jekyll.sanitized_path(root, resolved_dir)
-      path if Dir.exists?(path)
+      path if Dir.exist?(path)
     end
 
     def realpath_for(folder)
@@ -50,7 +50,8 @@ module Jekyll
     def gemspec
       @gemspec ||= Gem::Specification.find_by_name(name)
     rescue Gem::LoadError
-      raise Jekyll::Errors::MissingDependencyException, "The #{name} theme could not be found."
+      raise Jekyll::Errors::MissingDependencyException,
+        "The #{name} theme could not be found."
     end
   end
 end
