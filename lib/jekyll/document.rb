@@ -253,6 +253,7 @@ module Jekyll
           raise e if e.is_a? Jekyll::Errors::FatalException
           Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
         end
+        # rubocop: enable RescueException
       end
     end
 
