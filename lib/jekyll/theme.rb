@@ -38,7 +38,7 @@ module Jekyll
       return unless resolved_dir
 
       path = Jekyll.sanitized_path(root, resolved_dir)
-      path if Dir.exist?(path)
+      path if File.directory?(path)
     end
 
     def realpath_for(folder)
