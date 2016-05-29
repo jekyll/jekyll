@@ -225,8 +225,8 @@ module Jekyll
 
     # Whether the file is published or not, as indicated in YAML front-matter
     #
-    # Returns true if the 'published' key is
-    # specified in the YAML front-matter and not `false`.
+    # Returns 'false' if the 'published' key is specified in the
+    # YAML front-matter and is 'false'. Otherwise returns 'true'.
     def published?
       !(data.key?("published") && data["published"] == false)
     end
