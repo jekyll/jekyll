@@ -19,7 +19,6 @@ AllCops:
   - lib/jekyll/theme.rb
   - lib/jekyll/url.rb
   - lib/jekyll/utils.rb
-  - lib/jekyll.rb
   - features/step_definitions.rb
   - bin/**/*
   - benchmark/**/*
