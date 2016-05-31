@@ -122,6 +122,7 @@
   * Removed extra `</p>` from `site/_docs/permalinks.md` (#4890)
   * Add pubstorm deployment instructions to docs (#4881)
   * Corrected pagination docs for hidden: true feature (#4903)
+  * Remove a Broken Link for Refheap Plugin (#4971)
 
 ## 3.1.6 / 2016-05-19
 
