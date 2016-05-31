@@ -25,7 +25,7 @@ module Jekyll
 
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
-      !(data.key?('published') && data['published'] == false)
+      data.key?('published') && data['published']
     end
 
     # Read the YAML frontmatter.
