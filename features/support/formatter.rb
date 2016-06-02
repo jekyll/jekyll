@@ -62,7 +62,7 @@ module Jekyll
 
       #
 
-      def before_feature_element(_feature_element)
+      def before_feature_element(feature_element)
         @indent = 2
         @scenario_indent = 2
         @timings[feature_element_timing_key(feature_element)] = Time.now
