@@ -16,7 +16,6 @@ AllCops:
   - lib/jekyll/site.rb
   - lib/jekyll/static_file.rb
   - lib/jekyll/utils.rb
-  - lib/jekyll.rb
   - bin/**/*
   - benchmark/**/*
   - script/**/*
