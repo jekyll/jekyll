@@ -81,6 +81,7 @@
   * Rubocop: Site Drop (#4948)
   * Rubocop: tags (#4938)
   * Rubocop: Readers (#4932)
+  * rubocop: jekyll/lib/frontmatter_defaults.rb (#4974)
 
 ### Site Enhancements
 
