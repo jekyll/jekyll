@@ -33,7 +33,9 @@ module Jekyll
             cmd.action do |_, opts|
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
+              config = opts["config"]
               Build.process(opts)
+              opts["config"] = config
               Serve.process(opts)
             end
           end
