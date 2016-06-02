@@ -397,7 +397,7 @@ webrick:
 
 ### Defaults
 
-We only provide one default and that's a Content-Type header that disables
+We only provide one default and that's a Cache-Control header that disables
 caching in development so that you don't have to fight with Chrome's aggressive
 caching when you are in development mode.
 
