@@ -54,7 +54,7 @@ module Jekyll
       old_scope = nil
 
       matching_sets(path, type).each do |set|
-        if set["values"].key?(setting) && precedence?(old_scope, set["scope"])
+        if set["values"].key?(setting) && has_precedence?(old_scope, set["scope"])
           value = set["values"][setting]
           old_scope = set["scope"]
         end
@@ -72,7 +72,7 @@ module Jekyll
       defaults = {}
       old_scope = nil
       matching_sets(path, type).each do |set|
-        if precedence?(old_scope, set["scope"])
+        if has_precedence?(old_scope, set["scope"])
           defaults = Utils.deep_merge_hashes(defaults, set["values"])
           old_scope = set["scope"]
         else
@@ -136,7 +136,8 @@ module Jekyll
     # new_scope - the new scope hash
     #
     # Returns true if the new scope has precedence over the older
-    def precedence?(old_scope, new_scope)
+    # rubocop: disable PredicateName
+    def has_precedence?(old_scope, new_scope)
       return true if old_scope.nil?
 
       new_path = sanitize_path(new_scope["path"])
@@ -144,12 +145,13 @@ module Jekyll
 
       if new_path.length != old_path.length
         new_path.length >= old_path.length
-      elsif new_scope.key? "type"
+      elsif new_scope.key?("type")
         true
       else
         !old_scope.key? "type"
       end
     end
+    # rubocop: enable PredicateName
 
     # Collects a list of sets that match the given path and type
     #
