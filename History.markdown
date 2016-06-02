@@ -26,6 +26,7 @@
   * Update colorator dependency to v1.x (#4855)
   * Move EntryFilter to use Pathutil & fix `glob_include?` (#4859)
   * Add 'jekyll new-theme' command to help users get up and running creating a theme (#4848)
+  * markdownify and smartify should convert input to string before conversion (#4958)
 
 ### Bug Fixes
 
@@ -80,7 +81,6 @@
   * Rubocop: Site Drop (#4948)
   * Rubocop: tags (#4938)
   * Rubocop: Readers (#4932)
-  * markdownify and smartify should convert input to string before conversion (#4958)
 
 ### Site Enhancements
 
