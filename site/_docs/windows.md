@@ -10,12 +10,14 @@ knowledge and lessons that have been unearthed by Windows users.
 
 ## Installation
 
-Julian Thilo has written up instructions to get
-[Jekyll running on Windows][windows-installation] and it seems to work for most
-people. The instructions were written for Ruby 2.0.0, but should work for later
-versions [prior to 2.2][hitimes-issue].
+A quick way to install Jekyll it to follow the [installation instructions by David Burela](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/):
 
-Alternatively David Burela has written instructions on [how to install Jekyll via Chocolatey with 3 command prompt entries](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/).
+ 1. Install a package manager for Windows called [Chocolatey](https://chocolatey.org/install)
+ 2. Install Ruby via Chocolatey: `choco install ruby -y`
+ 3. Reopen a command prompt and install Jekyll: `gem install jekyll`
+
+For a more conventional way of installing Jekyll you can follow the [installation instruction by Julian Thilo][windows-installation]. The instructions were written for Ruby 2.0.0, but should work for later
+versions [prior to 2.2][hitimes-issue].
 
 ## Encoding
 
