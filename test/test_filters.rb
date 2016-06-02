@@ -40,6 +40,13 @@ class TestFilters < JekyllUnitTest
       )
     end
 
+    should "markdownify with a number" do
+      assert_equal(
+        "<p>404</p>\n",
+        @filter.markdownify(404)
+      )
+    end
+
     context "smartify filter" do
       should "convert quotes and typographic characters" do
         assert_equal(
@@ -80,6 +87,13 @@ class TestFilters < JekyllUnitTest
         assert_equal "3 &lt; 4", @filter.smartify("3 < 4")
         assert_equal "5 &gt; 4", @filter.smartify("5 > 4")
         assert_equal "This &amp; that", @filter.smartify("This & that")
+      end
+
+      should "convert a number to a string" do
+        assert_equal(
+          "404",
+          @filter.smartify(404)
+        )
       end
     end
 

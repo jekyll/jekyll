@@ -13,7 +13,7 @@ module Jekyll
     def markdownify(input)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::Markdown)
-      converter.convert(input)
+      converter.convert(input.to_s)
     end
 
     # Convert quotes into smart quotes.
@@ -24,7 +24,7 @@ module Jekyll
     def smartify(input)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
-      converter.convert(input)
+      converter.convert(input.to_s)
     end
 
     # Convert a Sass string into CSS output.
