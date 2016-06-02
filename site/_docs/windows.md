@@ -47,7 +47,7 @@ with Windows. Add the following to the Gemfile for your site:
 gem 'wdm', '~> 0.1.0' if Gem.win_platform?
 {% endhighlight %}
 
-### How to install github-gem
+### How to install github-pages
 
 This section is part of an article written by [Jens Willmer][jwillmerPost]. To follow the instructions you need to have [Chocolatey][] installed on your system. If you already have a version of Ruby installed you need to uninstall it before you can continue.
 
@@ -69,10 +69,10 @@ The development kit did not set the environment path for Ruby so we need to do i
 
 #### Nokogiri gem installation
 
-This gem is also needed in the github-gem and to get it running on Windows x64 we have to install a few things.
+This gem is also needed in the github-pages and to get it running on Windows x64 we have to install a few things.
 
 
-**Note:** In the current [pre release][nokogiriFails] it works out of the box with Windows x64 but this version is not referenced in the github-gem.
+**Note:** In the current [pre release][nokogiriFails] it works out of the box with Windows x64 but this version is not referenced in the github-pages.
 
 
 `cinst -Source "https://go.microsoft.com/fwlink/?LinkID=230477" libxml2`{:.language-ruby}
@@ -91,7 +91,7 @@ This gem is also needed in the github-gem and to get it running on Windows x64 w
    --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
 ```
 
-#### Install github-gem
+#### Install github-pages
 
  * Open command prompt and install [Bundler][]: `gem install bundler`
  * Create a file called `Gemfile` without any extension in your root directory of your blog
@@ -110,7 +110,7 @@ gem 'github-pages'
 After this process you should have github-pages installed on your system and you can host your blog again with `jekyll s`. \\
 There will be a warning on startup that you should include `gem 'wdm', '>= 0.1.0' if Gem.win_platform?` to your `Gemfile` but I could not get `jekyll s` working if I include that line so for the moment I ignore that warning.
 
-In the future the installation process of the github-gem should be as simple as the setup of the blog. But as long as the new version of the Nokogiri ([v1.6.8][nokogiriReleases]) is not stable and referenced, it is work to get it up and running on Windows. 
+In the future the installation process of the github-pages should be as simple as the setup of the blog. But as long as the new version of the Nokogiri ([v1.6.8][nokogiriReleases]) is not stable and referenced, it is work to get it up and running on Windows. 
  
 [jwillmerPost]: http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46 "Installation instructions by Jens Willmer"
 [Chocolatey]: https://chocolatey.org/install "Package manager for Windows"
