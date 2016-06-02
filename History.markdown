@@ -80,6 +80,7 @@
   * Rubocop: Site Drop (#4948)
   * Rubocop: tags (#4938)
   * Rubocop: Readers (#4932)
+  * markdownify and smartify should convert input to string before conversion (#4958)
 
 ### Site Enhancements
 
