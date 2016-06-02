@@ -11,7 +11,6 @@ AllCops:
   - lib/jekyll/deprecator.rb
   - lib/jekyll/document.rb
   - lib/jekyll/filters.rb
-  - lib/jekyll/frontmatter_defaults.rb
   - lib/jekyll/regenerator.rb
   - lib/jekyll/renderer.rb
   - lib/jekyll/site.rb
