@@ -91,7 +91,7 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Where Expression</strong></p>
-        <p>Select all the objects in an array where the expression is true.</p>
+        <p>Select all the objects in an array where the expression is true. Jekyll v3.2.0 & later.</p>
       </td>
       <td class="align-center">
         <p>
