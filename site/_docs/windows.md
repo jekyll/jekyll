@@ -10,7 +10,7 @@ knowledge and lessons that have been unearthed by Windows users.
 
 ## Installation
 
-A quick way to install Jekyll it to follow the [installation instructions by David Burela](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/):
+A quick way to install Jekyll is to follow the [installation instructions by David Burela](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/):
 
  1. Install a package manager for Windows called [Chocolatey](https://chocolatey.org/install)
  2. Install Ruby via Chocolatey: `choco install ruby -y`
