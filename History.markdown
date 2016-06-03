@@ -85,6 +85,7 @@
   * rubocop: jekyll/lib/frontmatter_defaults.rb (#4974)
   * rubocop: features/step_definitions.rb (#4956)
   * Rubocop theme and url jekyll libs (#4959)
+  * Rubocop jekyll.rb (#4966)
 
 ### Site Enhancements
 
