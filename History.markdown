@@ -83,6 +83,7 @@
   * Rubocop: tags (#4938)
   * Rubocop: Readers (#4932)
   * rubocop: jekyll/lib/frontmatter_defaults.rb (#4974)
+  * rubocop: features/step_definitions.rb (#4956)
 
 ### Site Enhancements
 
