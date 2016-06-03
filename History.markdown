@@ -133,6 +133,7 @@
   * Minor tweak to fix missing apostrophne (#4962)
   * Instructions on how to install github-gem on Windows (v2) (#4977)
   * Fix inaccurate HTTP response header field name (#4976)
+  * Add post about GSoC project (#4980)
 
 ## 3.1.6 / 2016-05-19
 
