@@ -15,8 +15,6 @@ AllCops:
   - lib/jekyll/renderer.rb
   - lib/jekyll/site.rb
   - lib/jekyll/static_file.rb
-  - lib/jekyll/theme.rb
-  - lib/jekyll/url.rb
   - lib/jekyll/utils.rb
   - lib/jekyll.rb
   - bin/**/*
