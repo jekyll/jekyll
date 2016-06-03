@@ -34,8 +34,8 @@ class TestNewCommand < JekyllUnitTest
       refute_exist @full_path
       capture_stdout { Jekyll::Commands::New.process(@args) }
       assert_exist gemfile
-      assert_match(/gem "jekyll", "#{Jekyll::VERSION}"/, File.read(gemfile))
-      assert_match(/gem "github-pages"/, File.read(gemfile))
+      assert_match(%r!gem "jekyll", "#{Jekyll::VERSION}"!, File.read(gemfile))
+      assert_match(%r!gem "github-pages"!, File.read(gemfile))
     end
 
     should "display a success message" do
@@ -91,7 +91,7 @@ class TestNewCommand < JekyllUnitTest
     should "force created folder" do
       capture_stdout { Jekyll::Commands::New.process(@args) }
       output = capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
-      assert_match(/New jekyll site installed in/, output)
+      assert_match(%r!New jekyll site installed in!, output)
     end
   end
 

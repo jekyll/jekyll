@@ -313,7 +313,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert_equal "/sitemap.xml", page.url
-        assert_nil page.url[/\.html$/]
+        assert_nil page.url[%r!\.html$!]
         assert File.directory?(dest_dir)
         assert_exist dest_dir("sitemap.xml")
       end

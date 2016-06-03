@@ -6,7 +6,7 @@ class Jekyll::ThemeBuilder
   attr_reader :name, :path
 
   def initialize(theme_name)
-    @name = theme_name.to_s.tr(" ", "_").gsub(/_+/, "_")
+    @name = theme_name.to_s.tr(" ", "_").gsub(%r!_+!, "_")
     @path = Pathname.new(File.expand_path(name, Dir.pwd))
   end
 

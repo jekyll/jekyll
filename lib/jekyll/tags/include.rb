@@ -12,14 +12,14 @@ module Jekyll
     end
 
     class IncludeTag < Liquid::Tag
-      VALID_SYNTAX = /
+      VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
         (?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))
-      /x
-      VARIABLE_SYNTAX = /
+      !x
+      VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
-      /x
+      !x
 
       def initialize(tag_name, markup, tokens)
         super
@@ -28,7 +28,7 @@ module Jekyll
           @file = matched["variable"].strip
           @params = matched["params"].strip
         else
-          @file, @params = markup.strip.split(/\s+/, 2)
+          @file, @params = markup.strip.split(%r!\s+!, 2)
         end
         validate_params if @params
         @tag_name = tag_name
@@ -46,9 +46,9 @@ module Jekyll
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
-                    match[2].gsub(/\\"/, '"')
+                    match[2].gsub(%r!\\"!, '"')
                   elsif match[3]
-                    match[3].gsub(/\\'/, "'")
+                    match[3].gsub(%r!\\'!, "'")
                   elsif match[4]
                     context[match[4]]
                   end
@@ -74,7 +74,7 @@ eos
       end
 
       def validate_params
-        full_valid_syntax = /\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z/
+        full_valid_syntax = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
         unless @params =~ full_valid_syntax
           raise ArgumentError, <<-eos
 Invalid syntax for include tag:

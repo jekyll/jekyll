@@ -36,7 +36,7 @@ def file_content_from_hash(input_hash)
   Jekyll::Utils.strip_heredoc(<<-EOF)
     ---
     #{matter.gsub(
-      /\n/, "\n    "
+      %r!\n!, "\n    "
     )}
     ---
     #{content}
@@ -121,7 +121,7 @@ end
 def slug(title = nil)
   if !title
     then Time.now.strftime("%s%9N") # nanoseconds since the Epoch
-  else title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, "-")
+  else title.downcase.gsub(%r![^\w]!, " ").strip.gsub(%r!\s+!, "-")
   end
 end
 
