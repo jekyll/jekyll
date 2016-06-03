@@ -32,3 +32,4 @@ gems:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-avatar
+  - jekyll-mentions
