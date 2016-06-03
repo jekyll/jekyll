@@ -6,9 +6,11 @@ author: parkr
 categories: [community]
 ---
 
-This year, Jekyll applied to be a part of [Google Summer of Code](https://summerofcode.withgoogle.com/how-it-works/). Students were able to propose any project related to Jekyll. With a gracious sponsorship from GitHub and the participation of myself, [@benbalter](https://github.com/benbalter) and [@jldec](https://github.com/jldec), Jekyll was able to accept two students for the 2016 season, [@mertkahyaoglu](https://github.com/mertkahyaoglu) and [@rush-skills](https://github.com/rush-skills).
+This year, Jekyll applied to be a part of [Google Summer of Code](https://summerofcode.withgoogle.com/how-it-works/). Students were able to propose any project related to Jekyll. With a gracious sponsorship from GitHub and the participation of myself, @benbalter and @jldec, Jekyll was able to accept two students for the 2016 season, @mertkahyaoglu and @rush-skills.
 
-These students are working on a project that fills a huge need for the community: **a graphical solution for managing your site's content.** Current plans include a fully-integrated admin which spins up when you run `jekyll serve` and a web interface at an address like `http://localhost:4000/admin/`. The server implements a common interface which would make a hosted version to make updates to hosted content like a repository on GitHub very easy to write – simply implement the CRUD API and the web interface will happily use that instead.
+These students are working on a project that fills a huge need for the community: **a graphical solution for managing your site's content.**
+
+Current plans include a fully-integrated admin which spins up when you run `jekyll serve` and a web interface at an address like `http://localhost:4000/admin/`. The server implements a common interface which would make a hosted version to make updates to hosted content like a repository on GitHub very easy to write – simply implement the CRUD API and the web interface will happily use that instead.
 
 The strength of text files as the storage medium for content has been part of Jekyll's success. [Our homepage](/) lauds the absence of a traditional SQL database when using Jekyll – your content should be what demands your time, not pesky database downtime. Unfortunately, understanding of the structure of a Jekyll site takes some work, enough that for some users, it's prohibitive to using Jekyll to accomplish their publishing goals.
 

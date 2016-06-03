@@ -86,4 +86,5 @@ group :site do
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag", "~> 1.1"
   gem "jekyll-avatar"
+  gem "jekyll-mentions"
 end
