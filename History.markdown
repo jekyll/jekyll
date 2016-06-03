@@ -129,6 +129,7 @@
   * Corrected pagination docs for hidden: true feature (#4903)
   * Remove a Broken Link for Refheap Plugin (#4971)
   * Instructions on how to install github-gem on Windows (#4975)
+  * Minor tweak to fix missing apostrophne (#4962)
 
 ## 3.1.6 / 2016-05-19
 
