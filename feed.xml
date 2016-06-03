@@ -3,10 +3,33 @@
 <generator uri="http://jekyllrb.com" version="3.2.0.pre.beta1">Jekyll</generator>
 <link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" />
 <link href="https://jekyllrb.com/" rel="alternate" type="text/html" />
-<updated>2016-06-02T14:20:37-07:00</updated>
+<updated>2016-06-03T16:42:55-07:00</updated>
 <id>https://jekyllrb.com/</id>
 <title>Jekyll • Simple, blog-aware, static sites</title>
 <subtitle>Transform your plain text into static websites and blogs</subtitle>
+<entry>
+<title>Jekyll’s Google Summer of Code Project: The CMS You Always Wanted</title>
+<link href="https://jekyllrb.com/news/2016/06/03/update-on-jekyll-s-google-summer-of-code-projects/" rel="alternate" type="text/html" title="Jekyll's Google Summer of Code Project: The CMS You Always Wanted" />
+<published>2016-06-03T13:21:02-07:00</published>
+<updated>2016-06-03T13:21:02-07:00</updated>
+<id>https://jekyllrb.com/news/2016/06/03/update-on-jekyll-s-google-summer-of-code-projects</id>
+<content type="html" xml:base="https://jekyllrb.com/news/2016/06/03/update-on-jekyll-s-google-summer-of-code-projects/">&lt;p&gt;This year, Jekyll applied to be a part of &lt;a href=&quot;https://summerofcode.withgoogle.com/how-it-works/&quot;&gt;Google Summer of Code&lt;/a&gt;. Students were able to propose any project related to Jekyll. With a gracious sponsorship from GitHub and the participation of myself, @benbalter and @jldec, Jekyll was able to accept two students for the 2016 season, @mertkahyaoglu and @rush-skills.&lt;/p&gt;
+
+&lt;p&gt;These students are working on a project that fills a huge need for the community: &lt;em&gt;a graphical solution for managing your site’s content.&lt;/em&gt; Current plans include a fully-integrated admin which spins up when you run jekyll serve and provides a friendly web interface for creating and editing your content. The server and web interface will speak a common HTTP interface so either piece could be switched out for, e.g. a server which writes directly to a repository on GitHub.&lt;/p&gt;
+
+&lt;p&gt;The strength of text files as the storage medium for content has been part of Jekyll’s success. &lt;a href=&quot;/&quot;&gt;Our homepage&lt;/a&gt; lauds the absence of a traditional SQL database when using Jekyll – your content should be what demands your time, not pesky database downtime. Unfortunately, understanding of the structure of a Jekyll site takes some work, enough that for some users, it’s prohibitive to using Jekyll to accomplish their publishing goals.&lt;/p&gt;
+
+&lt;p&gt;Mert and Ankur both applied to take on this challenge and agreed to split the project, one taking on the web interface and the other taking on the backend. We’re very excited to see a fully-functional CMS for Jekyll at the end of the summer produced by these excellent community members, and we hope you’ll join us in cheering them on and sharing our gratitude for all their hard work.&lt;/p&gt;
+
+&lt;p&gt;Thanks, as always, for being part of such a wonderful community that made this all possible. I’m honored to work with each of you to create something folks all around the globe find a joy to use. I look forward to our continued work to move Jekyll forward.&lt;/p&gt;
+
+&lt;p&gt;As always, Happy Jekylling!&lt;/p&gt;
+</content>
+<author>
+<name>parkr</name>
+</author>
+<summary></summary>
+</entry>
 <entry>
 <title>Jekyll 3.1.6 Released</title>
 <link href="https://jekyllrb.com/news/2016/05/19/jekyll-3-1-6-released/" rel="alternate" type="text/html" title="Jekyll 3.1.6 Released" />
@@ -234,44 +257,6 @@ you’re having.&lt;/p&gt;
 
 &lt;p&gt;Happy Jekylling!&lt;/p&gt;
 
-</content>
-<author>
-<name>parkr</name>
-</author>
-<summary></summary>
-</entry>
-<entry>
-<title>Jekyll 3.1.1 Released</title>
-<link href="https://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released/" rel="alternate" type="text/html" title="Jekyll 3.1.1 Released" />
-<published>2016-01-28T17:21:50-08:00</published>
-<updated>2016-01-28T17:21:50-08:00</updated>
-<id>https://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released</id>
-<content type="html" xml:base="https://jekyllrb.com/news/2016/01/28/jekyll-3-1-1-released/">&lt;p&gt;This release squashes a few bugs &lt;img class=&quot;emoji&quot; title=&quot;:bug:&quot; alt=&quot;:bug:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f41b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;img class=&quot;emoji&quot; title=&quot;:bug:&quot; alt=&quot;:bug:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f41b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; &lt;img class=&quot;emoji&quot; title=&quot;:bug:&quot; alt=&quot;:bug:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/1f41b.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt; noticed by a few
-wonderful Jekyll users:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;If your &lt;code class=&quot;highlighter-rouge&quot;&gt;permalink&lt;/code&gt; ended with a &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;, your URL didn’t have any extension,
-even if you wanted one&lt;/li&gt;
-  &lt;li&gt;We now strip the BOM by default per Ruby’s &lt;code class=&quot;highlighter-rouge&quot;&gt;IO.open&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;page.dir&lt;/code&gt; will not always end in a slash.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We also updated our &lt;a href=&quot;/docs/conduct/&quot;&gt;Code of Conduct&lt;/a&gt; to the latest version of
-the Contributor Covenant. The update includes language to ensure that the
-reporter of the incident remains confidential to non-maintainers and that
-all complaints will result in an appropriate response. I care deeply about
-Jekyll’s community and will do everything in my power to ensure it is a
-welcoming community. Feel free to reach out to me directly if you feel
-there is a way we can improve the community for everyone! If you’re
-interested in more details, &lt;a href=&quot;https://github.com/ContributorCovenant/contributor_covenant/blob/v1_4/diffs/1_3_vs_1_4.patch&quot;&gt;there is a diff for
-that&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;See links to the PR’s on &lt;a href=&quot;/docs/history/#v3-1-1&quot;&gt;the history page&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Thanks to Jordon Bedwell, chrisfinazzo, Kroum Tzanev, David Celis, and
-Alfred Xing for their commits on this latest release! &lt;img class=&quot;emoji&quot; title=&quot;:sparkles:&quot; alt=&quot;:sparkles:&quot; src=&quot;https://assets.github.com/images/icons/emoji/unicode/2728.png&quot; height=&quot;20&quot; width=&quot;20&quot; align=&quot;absmiddle&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;
 </content>
 <author>
 <name>parkr</name>

@@ -1,34 +1,35 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.2.0.pre.beta1">
-  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" />
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v1.4.0 -->
 <title>Jekyll on Windows - Jekyll • Simple, blog-aware, static sites</title>
-<meta property="og:title" content="Jekyll on Windows" />
-<meta name="description" content="Transform your plain text into static websites and blogs" />
-<meta property="og:description" content="Transform your plain text into static websites and blogs" />
-<link rel="canonical" href="https://jekyllrb.com/docs/windows/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/windows/" />
-<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-06-02T14:20:37-07:00" />
-<link rel="prev" href="https://jekyllrb.com/docs/variables/" title="Variables" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@jekyllrb" />
-<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<meta property="og:title" content="Jekyll on Windows">
+<meta name="description" content="Transform your plain text into static websites and blogs">
+<meta property="og:description" content="Transform your plain text into static websites and blogs">
+<link rel="canonical" href="https://jekyllrb.com/docs/windows/">
+<meta property="og:url" content="https://jekyllrb.com/docs/windows/">
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-06-03T16:42:55-07:00">
+<link rel="prev" href="https://jekyllrb.com/docs/variables/" title="Variables">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@jekyllrb">
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Jekyll on Windows",
-    "datePublished": "2016-06-02T14:20:37-07:00",
+    "datePublished": "2016-06-03T16:42:55-07:00",
     "description": "Transform your plain text into static websites and blogs",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
     "url": "https://jekyllrb.com/docs/windows/"
@@ -273,7 +274,7 @@
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/windows.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/windows.md"><i class="fa fa-pencil"></i>  Improve this page</a>
           </div>
           <h1>Jekyll on Windows</h1>
           <p>While Windows is not an officially-supported platform, it can be used to run
@@ -282,12 +283,19 @@ knowledge and lessons that have been unearthed by Windows users.</p>
 
 <h2 id="installation">Installation</h2>
 
-<p>Julian Thilo has written up instructions to get
-<a href="http://jekyll-windows.juthilo.com/">Jekyll running on Windows</a> and it seems to work for most
-people. The instructions were written for Ruby 2.0.0, but should work for later
-versions <a href="https://github.com/copiousfreetime/hitimes/issues/40">prior to 2.2</a>.</p>
+<p>A quick way to install Jekyll is to follow the <a href="https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/">installation instructions by David Burela</a>:</p>
 
-<p>Alternatively David Burela has written instructions on <a href="https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/">how to install Jekyll via Chocolatey with 3 command prompt entries</a>.</p>
+<ol>
+  <li>Install a package manager for Windows called <a href="https://chocolatey.org/install">Chocolatey</a>
+</li>
+  <li>Install Ruby via Chocolatey: <code class="highlighter-rouge">choco install ruby -y</code>
+</li>
+  <li>Reopen a command prompt and install Jekyll: <code class="highlighter-rouge">gem install jekyll</code>
+</li>
+</ol>
+
+<p>For a more conventional way of installing Jekyll you can follow the <a href="http://jekyll-windows.juthilo.com/">installation instruction by Julian Thilo</a>. The instructions were written for Ruby 2.0.0, but should work for later
+versions <a href="https://github.com/copiousfreetime/hitimes/issues/40">prior to 2.2</a>.</p>
 
 <h2 id="encoding">Encoding</h2>
 
@@ -309,6 +317,82 @@ built-in support for UNIX systems, it requires an extra gem for compatibility
 with Windows. Add the following to the Gemfile for your site:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">'wdm'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1.0'</span> <span class="k">if</span> <span class="no">Gem</span><span class="p">.</span><span class="nf">win_platform?</span></code></pre></figure>
+
+<h3 id="how-to-install-github-pages">How to install github-pages</h3>
+
+<p>This section is part of an article written by <a href="http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46" title="Installation instructions by Jens Willmer">Jens Willmer</a>. To follow the instructions you need to have <a href="https://chocolatey.org/install" title="Package manager for Windows">Chocolatey</a> installed on your system. If you already have a version of Ruby installed you need to uninstall it before you can continue.</p>
+
+<h4 id="install-ruby-and-ruby-development-kit">Install Ruby and Ruby development kit</h4>
+
+<p>Open a command prompt and execute the following commands:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">choco install ruby -version 2.2.4</code></li>
+  <li>
+<code class="highlighter-rouge">choco install ruby2.devkit</code> - <em>needed for compilation of json gem</em>
+</li>
+</ul>
+
+<h4 id="configure-ruby-development-kit">Configure Ruby development kit</h4>
+
+<p>The development kit did not set the environment path for Ruby so we need to do it.</p>
+
+<ul>
+  <li>Open command prompt in <code class="highlighter-rouge">C:\tools\DevKit2</code>
+</li>
+  <li>Execute <code class="highlighter-rouge">ruby dk.rb init</code> to create a file called <code class="highlighter-rouge">config.yml</code>
+</li>
+  <li>Edit the <code class="highlighter-rouge">config.yml</code> file and include the path to Ruby <code class="highlighter-rouge">- C:/tools/ruby22</code>
+</li>
+  <li>Execute the following command to set the path: <code class="highlighter-rouge">ruby dk.rb install</code>
+</li>
+</ul>
+
+<h4 id="nokogiri-gem-installation">Nokogiri gem installation</h4>
+
+<p>This gem is also needed in the github-pages and to get it running on Windows x64 we have to install a few things.</p>
+
+<p><strong>Note:</strong> In the current <a href="https://github.com/sparklemotion/nokogiri/issues/1456#issuecomment-206481794" title="Nokogiri fails to install on Ruby 2.3 for Windows">pre release</a> it works out of the box with Windows x64 but this version is not referenced in the github-pages.</p>
+
+<p><code class="language-ruby highlighter-rouge"><span class="n">cinst</span> <span class="o">-</span><span class="no">Source</span> <span class="s2">"https://go.microsoft.com/fwlink/?LinkID=230477"</span> <span class="n">libxml2</span></code></p>
+
+<p><code class="language-ruby highlighter-rouge"><span class="n">cinst</span> <span class="o">-</span><span class="no">Source</span> <span class="s2">"https://go.microsoft.com/fwlink/?LinkID=230477"</span> <span class="n">libxslt</span></code></p>
+
+<p><code class="language-ruby highlighter-rouge"><span class="n">cinst</span> <span class="o">-</span><span class="no">Source</span> <span class="s2">"https://go.microsoft.com/fwlink/?LinkID=230477"</span> <span class="n">libiconv</span></code></p>
+
+<pre><code class="language-language-ruby"> gem install nokogiri --^
+   --with-xml2-include=C:\Chocolatey\lib\libxml2.2.7.8.7\build\native\include^
+   --with-xml2-lib=C:\Chocolatey\lib\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl^
+   --with-iconv-include=C:\Chocolatey\lib\libiconv.1.14.0.11\build\native\include^
+   --with-iconv-lib=C:\Chocolatey\lib\libiconv.redist.1.14.0.11\build\native\bin\v110\x64\Release\dynamic\cdecl^
+   --with-xslt-include=C:\Chocolatey\lib\libxslt.1.1.28.0\build\native\include^
+   --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
+</code></pre>
+
+<h4 id="install-github-pages">Install github-pages</h4>
+
+<ul>
+  <li>Open command prompt and install <a href="http://bundler.io/" title="Ruby Dependencie Manager">Bundler</a>: <code class="highlighter-rouge">gem install bundler</code>
+</li>
+  <li>Create a file called <code class="highlighter-rouge">Gemfile</code> without any extension in your root directory of your blog</li>
+  <li>Copy &amp; past the two lines into the file:</li>
+</ul>
+
+<pre><code class="language-language-ruby">source 'http://rubygems.org'
+gem 'github-pages'
+</code></pre>
+
+<ul>
+  <li>
+<strong>Note:</strong> We use an unsecure connection because SSL throws exceptions in the version of Ruby</li>
+  <li>Open a command prompt and install github-pages: <code class="highlighter-rouge">bundle install</code>
+</li>
+</ul>
+
+<p>After this process you should have github-pages installed on your system and you can host your blog again with <code class="highlighter-rouge">jekyll s</code>. <br>
+There will be a warning on startup that you should include <code class="highlighter-rouge">gem 'wdm', '&gt;= 0.1.0' if Gem.win_platform?</code> to your <code class="highlighter-rouge">Gemfile</code> but I could not get <code class="highlighter-rouge">jekyll s</code> working if I include that line so for the moment I ignore that warning.</p>
+
+<p>In the future the installation process of the github-pages should be as simple as the setup of the blog. But as long as the new version of the Nokogiri (<a href="https://github.com/sparklemotion/nokogiri/releases" title="Nokogiri Releases">v1.6.8</a>) is not stable and referenced, it is work to get it up and running on Windows.</p>
 
 
           
@@ -603,7 +687,7 @@ with Windows. Add the following to the Gemfile for your site:</p>
   <footer role="contentinfo">
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
-      <p>The contents of this website are <br />&copy;&nbsp;2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are <br>© 2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>

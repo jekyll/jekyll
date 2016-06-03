@@ -1,35 +1,36 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.2.0.pre.beta1">
-  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" />
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v1.4.0 -->
 <title>Configuration - Jekyll • Simple, blog-aware, static sites</title>
-<meta property="og:title" content="Configuration" />
-<meta name="description" content="Transform your plain text into static websites and blogs" />
-<meta property="og:description" content="Transform your plain text into static websites and blogs" />
-<link rel="canonical" href="https://jekyllrb.com/docs/configuration/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/configuration/" />
-<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-06-02T14:20:37-07:00" />
-<link rel="next" href="https://jekyllrb.com/docs/continuous-integration/" title="Continuous Integration" />
-<link rel="prev" href="https://jekyllrb.com/docs/conduct/" title="Code of Conduct" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@jekyllrb" />
-<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<meta property="og:title" content="Configuration">
+<meta name="description" content="Transform your plain text into static websites and blogs">
+<meta property="og:description" content="Transform your plain text into static websites and blogs">
+<link rel="canonical" href="https://jekyllrb.com/docs/configuration/">
+<meta property="og:url" content="https://jekyllrb.com/docs/configuration/">
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-06-03T16:42:55-07:00">
+<link rel="next" href="https://jekyllrb.com/docs/continuous-integration/" title="Continuous Integration">
+<link rel="prev" href="https://jekyllrb.com/docs/conduct/" title="Code of Conduct">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@jekyllrb">
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Configuration",
-    "datePublished": "2016-06-02T14:20:37-07:00",
+    "datePublished": "2016-06-03T16:42:55-07:00",
     "description": "Transform your plain text into static websites and blogs",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
     "url": "https://jekyllrb.com/docs/configuration/"
@@ -274,7 +275,7 @@
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/configuration.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/site/_docs/configuration.md"><i class="fa fa-pencil"></i>  Improve this page</a>
           </div>
           <h1>Configuration</h1>
           <p>Jekyll allows you to concoct your sites in any way you can dream up, and it’s
@@ -441,7 +442,9 @@ in the terminal.</p>
   <thead>
     <tr>
       <th>Setting</th>
-      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
+      <th>
+<span class="option">Options</span> and <span class="flag">Flags</span>
+</th>
     </tr>
   </thead>
   <tbody>
@@ -570,7 +573,9 @@ before your site is served.</p>
   <thead>
     <tr>
       <th>Setting</th>
-      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
+      <th>
+<span class="option">Options</span> and <span class="flag">Flags</span>
+</th>
     </tr>
   </thead>
   <tbody>
@@ -653,7 +658,7 @@ before your site is served.</p>
   </p>
 </div>
 
-<h2 id="custom-webrick-headers">Custom WEBRick Headers</h2>
+<h2 id="custom-webrick-headers">Custom WEBrick Headers</h2>
 
 <p>You can provide custom headers for your site by adding them to <code class="highlighter-rouge">_config.yml</code></p>
 
@@ -665,9 +670,10 @@ before your site is served.</p>
 
 <h3 id="defaults">Defaults</h3>
 
-<p>We only provide one default and that’s a Content-Type header that disables
-caching in development so that you don’t have to fight with Chrome’s aggressive
-caching when you are in development mode.</p>
+<p>We provide by default <code class="highlighter-rouge">Content-Type</code> and <code class="highlighter-rouge">Cache-Control</code> response headers: one
+dynamic in order to specify the nature of the data being served, the other
+static in order to disable caching so that you don’t have to fight with Chrome’s
+aggressive caching when you are in development mode.</p>
 
 <h2 id="specifying-a-jekyll-environment-at-build-time">Specifying a Jekyll environment at build time</h2>
 
@@ -722,7 +728,7 @@ caching when you are in development mode.</p>
   </p>
 </div>
 
-<p>Here, we are scoping the <code class="highlighter-rouge">values</code> to any file that exists in the scopes path. Since the path is set as an empty string, it will apply to <strong>all files</strong> in your project. You probably don’t want to set a layout on every file in your project - like css files, for example - so you can also specify a <code class="highlighter-rouge">type</code> value under the <code class="highlighter-rouge">scope</code> key.</p>
+<p>Here, we are scoping the <code class="highlighter-rouge">values</code> to any file that exists in the path <code class="highlighter-rouge">scope</code>. Since the path is set as an empty string, it will apply to <strong>all files</strong> in your project. You probably don’t want to set a layout on every file in your project - like css files, for example - so you can also specify a <code class="highlighter-rouge">type</code> value under the <code class="highlighter-rouge">scope</code> key.</p>
 
 <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="s">defaults</span><span class="pi">:</span>
   <span class="pi">-</span>
@@ -902,7 +908,8 @@ set the corresponding extension to <code class="highlighter-rouge">true</code>.<
 <p>Jekyll handles two special Redcarpet extensions:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">no_fenced_code_blocks</code> — By default, Jekyll sets the <code class="highlighter-rouge">fenced_code_blocks</code>
+  <li>
+<code class="highlighter-rouge">no_fenced_code_blocks</code> — By default, Jekyll sets the <code class="highlighter-rouge">fenced_code_blocks</code>
 extension (for delimiting code blocks with triple tildes or triple backticks)
 to <code class="highlighter-rouge">true</code>, probably because GitHub’s eager adoption of them is starting to make
 them inescapable. Redcarpet’s normal <code class="highlighter-rouge">fenced_code_blocks</code> extension is inert
@@ -913,7 +920,8 @@ extension for disabling fenced code.</li>
 <p>Note that you can also specify a language for highlighting after the first
 delimiter:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    ```ruby
+<div class="highlighter-rouge">
+<pre class="highlight"><code>    ```ruby
     # ...ruby code
     ```
 </code></pre>
@@ -925,7 +933,8 @@ highlight the code; without any syntax highlighter, it will add a
 hint by various JavaScript code highlighting libraries.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">smart</code> — This pseudo-extension turns on SmartyPants, which converts
+  <li>
+<code class="highlighter-rouge">smart</code> — This pseudo-extension turns on SmartyPants, which converts
 straight quotes to curly quotes and runs of hyphens to em (<code class="highlighter-rouge">---</code>) and en (<code class="highlighter-rouge">--</code>) dashes.</li>
 </ul>
 
@@ -949,7 +958,8 @@ of GitHub Flavored Markdown by passing an <code class="highlighter-rouge">input<
 
 <p>For example, in your <code class="highlighter-rouge">_config.yml</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>kramdown:
+<div class="highlighter-rouge">
+<pre class="highlight"><code>kramdown:
   input: GFM
 </code></pre>
 </div>
@@ -1238,7 +1248,7 @@ configuration file.</p>
   <footer role="contentinfo">
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
-      <p>The contents of this website are <br />&copy;&nbsp;2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are <br>© 2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>

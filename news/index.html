@@ -1,26 +1,27 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.2.0.pre.beta1">
-  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" />
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v1.4.0 -->
 <title>News - Jekyll • Simple, blog-aware, static sites</title>
-<meta property="og:title" content="News" />
-<meta name="description" content="Transform your plain text into static websites and blogs" />
-<meta property="og:description" content="Transform your plain text into static websites and blogs" />
-<link rel="canonical" href="https://jekyllrb.com/news/" />
-<meta property="og:url" content="https://jekyllrb.com/news/" />
-<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@jekyllrb" />
-<meta name="twitter:creator" content="@all" />
-<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<meta property="og:title" content="News">
+<meta name="description" content="Transform your plain text into static websites and blogs">
+<meta property="og:description" content="Transform your plain text into static websites and blogs">
+<link rel="canonical" href="https://jekyllrb.com/news/">
+<meta property="og:url" content="https://jekyllrb.com/news/">
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@jekyllrb">
+<meta name="twitter:creator" content="@all">
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
@@ -103,6 +104,8 @@
     <option value="/news/">Home</option>
     <optgroup label="v1.x">
       
+      <option value="/news/2016/06/03/update-on-jekyll-s-google-summer-of-code-projects/">Jekyll's Google Summer of Code Project: The CMS You Always Wanted</option>
+      
       <option value="/news/2016/05/19/jekyll-3-1-6-released/">Jekyll 3.1.6 Released</option>
       
       <option value="/news/2016/05/18/jekyll-3-1-5-released/">Jekyll 3.1.5 Released</option>
@@ -135,7 +138,7 @@
       
       <option value="/news/2015/01/24/jekyll-3-0-0-beta1-released/">Jekyll 3.0.0.beta1 Released</option>
       
-      <option value="/news/2015/01/20/jekyll-meet-and-greet/">Jekyll Meet & Greet at GitHub HQ</option>
+      <option value="/news/2015/01/20/jekyll-meet-and-greet/">Jekyll Meet &amp; Greet at GitHub HQ</option>
       
       <option value="/news/2014/12/22/jekyll-2-5-3-released/">Jekyll Release for the Holidays! v2.5.3 Out</option>
       
@@ -210,6 +213,44 @@
         
   <article>
   <h2>
+    <a href="/news/2016/06/03/update-on-jekyll-s-google-summer-of-code-projects/">
+      Jekyll's Google Summer of Code Project: The CMS You Always Wanted
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      community
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      03 Jun 2016
+    </span>
+    <a href="https://github.com/parkr" class="post-author">
+      
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
+      parkr
+    </a>
+  </div>
+  <div class="post-content">
+    <p>This year, Jekyll applied to be a part of <a href="https://summerofcode.withgoogle.com/how-it-works/">Google Summer of Code</a>. Students were able to propose any project related to Jekyll. With a gracious sponsorship from GitHub and the participation of myself, <a href="https://github.com/benbalter" class="user-mention">@benbalter</a> and <a href="https://github.com/jldec" class="user-mention">@jldec</a>, Jekyll was able to accept two students for the 2016 season, <a href="https://github.com/mertkahyaoglu" class="user-mention">@mertkahyaoglu</a> and <a href="https://github.com/rush-skills" class="user-mention">@rush-skills</a>.</p>
+
+<p>These students are working on a project that fills a huge need for the community: <em>a graphical solution for managing your site’s content.</em> Current plans include a fully-integrated admin which spins up when you run jekyll serve and provides a friendly web interface for creating and editing your content. The server and web interface will speak a common HTTP interface so either piece could be switched out for, e.g. a server which writes directly to a repository on GitHub.</p>
+
+<p>The strength of text files as the storage medium for content has been part of Jekyll’s success. <a href="/">Our homepage</a> lauds the absence of a traditional SQL database when using Jekyll – your content should be what demands your time, not pesky database downtime. Unfortunately, understanding of the structure of a Jekyll site takes some work, enough that for some users, it’s prohibitive to using Jekyll to accomplish their publishing goals.</p>
+
+<p>Mert and Ankur both applied to take on this challenge and agreed to split the project, one taking on the web interface and the other taking on the backend. We’re very excited to see a fully-functional CMS for Jekyll at the end of the summer produced by these excellent community members, and we hope you’ll join us in cheering them on and sharing our gratitude for all their hard work.</p>
+
+<p>Thanks, as always, for being part of such a wonderful community that made this all possible. I’m honored to work with each of you to create something folks all around the globe find a joy to use. I look forward to our continued work to move Jekyll forward.</p>
+
+<p>As always, Happy Jekylling!</p>
+
+  </div>
+</article>
+
+
+  <article>
+  <h2>
     <a href="/news/2016/05/19/jekyll-3-1-6-released/">
       Jekyll 3.1.6 Released
     </a>
@@ -225,7 +266,7 @@
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -262,7 +303,7 @@ changelog</a>.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -297,7 +338,7 @@ request for the fix</a>.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -311,7 +352,8 @@ request for the fix</a>.</p>
   <li>A fix for <code class="highlighter-rouge">layout</code> in Liquid where a parent layout (e.g. <code class="highlighter-rouge">default</code> or <code class="highlighter-rouge">base</code>) would overwrite the metadata of the child layout (e.g. <code class="highlighter-rouge">post</code> or <code class="highlighter-rouge">special</code>).</li>
   <li>A fix where <code class="highlighter-rouge">page.excerpt</code> referencing its excerpt would cause an infinite loop of recursive horror.</li>
   <li>We added <code class="highlighter-rouge">Configuration.from</code> and the great permalink fix from <a href="/news/2016/04/19/jekyll-3-0-4-released/">v3.0.4</a> to the v3.1.x series</li>
-  <li><code class="highlighter-rouge">site.collections</code> in Liquid is now sorted alphabetically by label, so <code class="highlighter-rouge">docs</code> shows up before <code class="highlighter-rouge">posts</code> reliably.</li>
+  <li>
+<code class="highlighter-rouge">site.collections</code> in Liquid is now sorted alphabetically by label, so <code class="highlighter-rouge">docs</code> shows up before <code class="highlighter-rouge">posts</code> reliably.</li>
 </ul>
 
 <p>The fixes for <code class="highlighter-rouge">layout</code> may not be seamless for everyone, but we believe they will be the “right thing to do” going forward.</p>
@@ -343,7 +385,7 @@ request for the fix</a>.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -386,7 +428,7 @@ we think you’ll love.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -424,7 +466,7 @@ we think you’ll love.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -466,7 +508,7 @@ we think you’ll love.</p>
     </span>
     <a href="https://github.com/benbalter" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/benbalter?v=3&s=24" alt="benbalter" srcset="https://avatars0.githubusercontent.com/benbalter?v=3&s=24 1x, https://avatars0.githubusercontent.com/benbalter?v=3&s=48 2x, https://avatars0.githubusercontent.com/benbalter?v=3&s=72 3x, https://avatars0.githubusercontent.com/benbalter?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=24" alt="benbalter" srcset="https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       benbalter
     </a>
   </div>
@@ -502,7 +544,7 @@ we think you’ll love.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -542,7 +584,7 @@ we think you’ll love.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -591,19 +633,20 @@ you’re having.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
   <div class="post-content">
-    <p>This release squashes a few bugs <img class="emoji" title=":bug:" alt=":bug:" src="https://assets.github.com/images/icons/emoji/unicode/1f41b.png" height="20" width="20" align="absmiddle" /> <img class="emoji" title=":bug:" alt=":bug:" src="https://assets.github.com/images/icons/emoji/unicode/1f41b.png" height="20" width="20" align="absmiddle" /> <img class="emoji" title=":bug:" alt=":bug:" src="https://assets.github.com/images/icons/emoji/unicode/1f41b.png" height="20" width="20" align="absmiddle" /> noticed by a few
+    <p>This release squashes a few bugs <img class="emoji" title=":bug:" alt=":bug:" src="https://assets.github.com/images/icons/emoji/unicode/1f41b.png" height="20" width="20" align="absmiddle"> <img class="emoji" title=":bug:" alt=":bug:" src="https://assets.github.com/images/icons/emoji/unicode/1f41b.png" height="20" width="20" align="absmiddle"> <img class="emoji" title=":bug:" alt=":bug:" src="https://assets.github.com/images/icons/emoji/unicode/1f41b.png" height="20" width="20" align="absmiddle"> noticed by a few
 wonderful Jekyll users:</p>
 
 <ul>
   <li>If your <code class="highlighter-rouge">permalink</code> ended with a <code class="highlighter-rouge">/</code>, your URL didn’t have any extension,
 even if you wanted one</li>
   <li>We now strip the BOM by default per Ruby’s <code class="highlighter-rouge">IO.open</code>.</li>
-  <li><code class="highlighter-rouge">page.dir</code> will not always end in a slash.</li>
+  <li>
+<code class="highlighter-rouge">page.dir</code> will not always end in a slash.</li>
 </ul>
 
 <p>We also updated our <a href="/docs/conduct/">Code of Conduct</a> to the latest version of
@@ -619,7 +662,7 @@ that</a>.</p>
 <p>See links to the PR’s on <a href="/docs/history/#v3-1-1">the history page</a>.</p>
 
 <p>Thanks to Jordon Bedwell, chrisfinazzo, Kroum Tzanev, David Celis, and
-Alfred Xing for their commits on this latest release! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://assets.github.com/images/icons/emoji/unicode/2728.png" height="20" width="20" align="absmiddle" /></p>
+Alfred Xing for their commits on this latest release! <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://assets.github.com/images/icons/emoji/unicode/2728.png" height="20" width="20" align="absmiddle"></p>
 
 <p>Happy Jekylling!</p>
 
@@ -644,7 +687,7 @@ Alfred Xing for their commits on this latest release! <img class="emoji" title="
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -714,7 +757,7 @@ midnightSuyama, musoke, and rebornix</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -751,7 +794,7 @@ better.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -760,8 +803,10 @@ better.</p>
 
 <ul>
   <li>Only superdirectories of <code class="highlighter-rouge">_posts</code> will be categories.</li>
-  <li><code class="highlighter-rouge">:title</code> in permalink templates are now properly cased as before</li>
-  <li><code class="highlighter-rouge">.jekyll-metadata</code> being erroneously written when not using incremental build.</li>
+  <li>
+<code class="highlighter-rouge">:title</code> in permalink templates are now properly cased as before</li>
+  <li>
+<code class="highlighter-rouge">.jekyll-metadata</code> being erroneously written when not using incremental build.</li>
   <li>Failure in liquid will now always fail the <code class="highlighter-rouge">jekyll</code> process.</li>
   <li>All hooks should now be properly registered &amp; documented</li>
 </ul>
@@ -796,7 +841,7 @@ Will Norris, XhmikosR, chrisfinazzo, and rebornix.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -810,10 +855,15 @@ Will Norris, XhmikosR, chrisfinazzo, and rebornix.</p>
   <li>Dependencies reduced from 14 to 8, none contain C extensions. We’re hoping to reduce this even more in the future.</li>
   <li>Changed version support: no support for Ruby 1.9.3, added basic JRuby support. Better Windows support.</li>
   <li>Extension-less URLs</li>
-  <li><code class="highlighter-rouge">site.collections</code> is an array of collections, thus:
+  <li>
+<code class="highlighter-rouge">site.collections</code> is an array of collections, thus:
     <ul>
-      <li><code class="highlighter-rouge">collection[0]</code> becomes <code class="highlighter-rouge">collection.label</code></li>
-      <li><code class="highlighter-rouge">collection[1]</code> becomes <code class="highlighter-rouge">collection</code></li>
+      <li>
+<code class="highlighter-rouge">collection[0]</code> becomes <code class="highlighter-rouge">collection.label</code>
+</li>
+      <li>
+<code class="highlighter-rouge">collection[1]</code> becomes <code class="highlighter-rouge">collection</code>
+</li>
     </ul>
   </li>
   <li>Default highlighter is now Rouge instead of Pygments</li>
@@ -854,7 +904,7 @@ Will Norris, XhmikosR, chrisfinazzo, and rebornix.</p>
     </span>
     <a href="https://github.com/alfredxing" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/alfredxing?v=3&s=24" alt="alfredxing" srcset="https://avatars0.githubusercontent.com/alfredxing?v=3&s=24 1x, https://avatars0.githubusercontent.com/alfredxing?v=3&s=48 2x, https://avatars0.githubusercontent.com/alfredxing?v=3&s=72 3x, https://avatars0.githubusercontent.com/alfredxing?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/alfredxing?v=3&amp;s=24" alt="alfredxing" srcset="https://avatars0.githubusercontent.com/alfredxing?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/alfredxing?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/alfredxing?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/alfredxing?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       alfredxing
     </a>
   </div>
@@ -888,7 +938,7 @@ Will Norris, XhmikosR, chrisfinazzo, and rebornix.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -900,7 +950,8 @@ changelog</a>
 to get a feel for what changes are afoot. Key features:</p>
 
 <ol>
-  <li><strong>Speed.</strong> Jekyll now features incremental regeneration and greatly
+  <li>
+<strong>Speed.</strong> Jekyll now features incremental regeneration and greatly
 improved problematic code that caused slow-downs.</li>
   <li>Gobs of bugfixes and customization.</li>
   <li>Uniformity and sanity to Jekyll extensions of Liquid.</li>
@@ -932,7 +983,7 @@ We’re always looking to make Jekyll easier to use!</p>
   <article>
   <h2>
     <a href="/news/2015/01/20/jekyll-meet-and-greet/">
-      Jekyll Meet & Greet at GitHub HQ
+      Jekyll Meet &amp; Greet at GitHub HQ
     </a>
   </h2>
   <span class="post-category">
@@ -946,7 +997,7 @@ We’re always looking to make Jekyll easier to use!</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -985,7 +1036,7 @@ all possible! You rock.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1023,7 +1074,7 @@ Feel free to chime in over on GitHub.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1066,7 +1117,7 @@ place!</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1102,7 +1153,7 @@ on timezone discrepancies.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1148,7 +1199,7 @@ and Alfred Xing.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1166,7 +1217,8 @@ highlights:</p>
   <li>Shorted <code class="highlighter-rouge">build</code> and <code class="highlighter-rouge">serve</code> commands with <code class="highlighter-rouge">b</code> and <code class="highlighter-rouge">s</code> aliases, respectively</li>
   <li>WEBrick will now list your directory if it can’t find an index file.</li>
   <li>Any enumerable can be used with the <code class="highlighter-rouge">where</code> filter.</li>
-  <li>Performance optimizations thanks to @tmm1’s <a href="https://github.com/tmm1/stackprof">stackprof</a></li>
+  <li>Performance optimizations thanks to <a href="https://github.com/tmm1" class="user-mention">@tmm1</a>’s <a href="https://github.com/tmm1/stackprof">stackprof</a>
+</li>
   <li>Fix for Rouge’s Redcarpet interface</li>
   <li>Security auditors will love this: path sanitation has now been centralized.</li>
   <li>Specify a log level with <code class="highlighter-rouge">JEKYLL_LOG_LEVEL</code>: debug, info, warn, or error.</li>
@@ -1215,7 +1267,7 @@ Custódio, Igor Kapkov, and Kevin Ndung’u!</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1260,7 +1312,7 @@ Custódio, Igor Kapkov, and Kevin Ndung’u!</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1270,7 +1322,8 @@ fixes. Some of the highlights:</p>
 
 <ul>
   <li>Strange bug around spacing/indentation should be resolved. <a href="https://github.com/jekyll/jekyll/issues/2676">It was a
-curious bug indeed.</a></li>
+curious bug indeed.</a>
+</li>
   <li>Pages, Posts, and Drafts can now be converted by multiple converters.</li>
   <li>Static files can now be safely included in collections. They’ll be placed
 in a <code class="highlighter-rouge">collection.files</code> array. <code class="highlighter-rouge">collection.docs</code> still holds exclusively
@@ -1318,7 +1371,7 @@ page</a>! Happy Jekylling!</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1357,7 +1410,7 @@ will now work properly).</li>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1407,7 +1460,7 @@ fixed with document URLs.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1420,8 +1473,10 @@ things to look forward to:</p>
   <li>Uses the latest Liquid version (2.6.1) (#2495)</li>
   <li>Set front matter defaults for collections (#2419)</li>
   <li>Set a collection-specific URL template (#2418)</li>
-  <li><code class="highlighter-rouge">pygments.rb</code> 0.6.0! (#2504)</li>
-  <li><code class="highlighter-rouge">.json</code> files in <code class="highlighter-rouge">_data</code> (#2369)</li>
+  <li>
+<code class="highlighter-rouge">pygments.rb</code> 0.6.0! (#2504)</li>
+  <li>
+<code class="highlighter-rouge">.json</code> files in <code class="highlighter-rouge">_data</code> (#2369)</li>
   <li>Allow subdirectories in <code class="highlighter-rouge">_data</code> (#2395)</li>
   <li>Add support for <code class="highlighter-rouge">hl_lines</code> in <code class="highlighter-rouge">highlight</code> tag (#2532)</li>
   <li>Post categories now merge with directory, front matter, and defaults (#2373)</li>
@@ -1458,12 +1513,12 @@ things to look forward to:</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
   <div class="post-content">
-    <p><img src="/img/jekyll-sticker.jpg" alt="Jekyll Sticker" /></p>
+    <p><img src="/img/jekyll-sticker.jpg" alt="Jekyll Sticker"></p>
 
 <p>You may have heard that <a href="https://github.com/cobyism">@cobyism</a>’s excellent
 Jekyll logo has been made into a sticker. You may have sat idly by, wishing
@@ -1496,7 +1551,7 @@ swell on your favourite hardware.</a></p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1532,7 +1587,7 @@ swell on your favourite hardware.</a></p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1542,13 +1597,20 @@ swell on your favourite hardware.</a></p>
 <p>Jam-packed with some <a href="/docs/history/">highly-requested features and bugfixes galore</a>, this is the best Jekyll yet. Some notable changes:</p>
 
 <ol>
-  <li><a href="/docs/collections/">Collections</a> - Collections allow you to define an unlimited number of custom document types (beyond just posts and pages) for different types of content you may want to author in Jekyll such as API documentation or a cookbook!</li>
-  <li><a href="https://github.com/jekyll/jekyll/pull/2050#issuecomment-35938016">Brand new site template</a> (thanks <a href="https://github.com/jglovier">@jglovier</a>!) - Getting started with Jekyll just got a lot easier and a lot more beautiful. Just run <code class="highlighter-rouge">jekyll new &lt;path&gt;</code> and you’re good to go.</li>
-  <li><a href="/docs/assets/">Native Sass &amp; CoffeeScript support</a> - We love CSS and JavaScript as much as the next guy, but there will always be a special place in our hearts for Sass and CoffeeScript. We now offer native support for these file types — no more messing around with Rake or Grunt!</li>
-  <li><a href="/docs/configuration/#front-matter-defaults">YAML Front Matter defaults</a> - If you’ve set <code class="highlighter-rouge">layout: post</code> more than once in your life, you’ll love this new feature: set front matter defaults for a given directory or type.</li>
-  <li><a href="/docs/configuration/#custom-markdown-processors">Custom markdown processors</a> - Always wanted to use your favourite home-grown Markdown converter, but couldn’t with Jekyll? Now you can. Simply specify <code class="highlighter-rouge">markdown: MyConverterClass</code> and you’re on your way.</li>
-  <li><a href="/docs/templates/#filters">Addition of <code class="highlighter-rouge">where</code> and <code class="highlighter-rouge">group_by</code> Liquid filters</a> - Simplifying your Liquid templates one filter at a time. The <code class="highlighter-rouge">where</code> filter selects from an array all items within which have a given value for a property. The <code class="highlighter-rouge">group_by</code> filter groups all items in an array which have the same value for a given property.</li>
-  <li><a href="https://github.com/jekyll/jekyll/pull/1988">Switch from Maruku to Kramdown as default markdown converter</a> - Maruku is dead. We’ve replaced it with the converter which has the closest feature parity: Kramdown!</li>
+  <li>
+<a href="/docs/collections/">Collections</a> - Collections allow you to define an unlimited number of custom document types (beyond just posts and pages) for different types of content you may want to author in Jekyll such as API documentation or a cookbook!</li>
+  <li>
+<a href="https://github.com/jekyll/jekyll/pull/2050#issuecomment-35938016">Brand new site template</a> (thanks <a href="https://github.com/jglovier">@jglovier</a>!) - Getting started with Jekyll just got a lot easier and a lot more beautiful. Just run <code class="highlighter-rouge">jekyll new &lt;path&gt;</code> and you’re good to go.</li>
+  <li>
+<a href="/docs/assets/">Native Sass &amp; CoffeeScript support</a> - We love CSS and JavaScript as much as the next guy, but there will always be a special place in our hearts for Sass and CoffeeScript. We now offer native support for these file types — no more messing around with Rake or Grunt!</li>
+  <li>
+<a href="/docs/configuration/#front-matter-defaults">YAML Front Matter defaults</a> - If you’ve set <code class="highlighter-rouge">layout: post</code> more than once in your life, you’ll love this new feature: set front matter defaults for a given directory or type.</li>
+  <li>
+<a href="/docs/configuration/#custom-markdown-processors">Custom markdown processors</a> - Always wanted to use your favourite home-grown Markdown converter, but couldn’t with Jekyll? Now you can. Simply specify <code class="highlighter-rouge">markdown: MyConverterClass</code> and you’re on your way.</li>
+  <li>
+<a href="/docs/templates/#filters">Addition of <code class="highlighter-rouge">where</code> and <code class="highlighter-rouge">group_by</code> Liquid filters</a> - Simplifying your Liquid templates one filter at a time. The <code class="highlighter-rouge">where</code> filter selects from an array all items within which have a given value for a property. The <code class="highlighter-rouge">group_by</code> filter groups all items in an array which have the same value for a given property.</li>
+  <li>
+<a href="https://github.com/jekyll/jekyll/pull/1988">Switch from Maruku to Kramdown as default markdown converter</a> - Maruku is dead. We’ve replaced it with the converter which has the closest feature parity: Kramdown!</li>
 </ol>
 
 <p>Check out our <a href="/docs/history/">changelog</a> for a complete list of all (200+) changes.</p>
@@ -1581,7 +1643,7 @@ swell on your favourite hardware.</a></p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1621,7 +1683,7 @@ the masses. Thanks, Greg!</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1656,7 +1718,7 @@ inability to use Jekyll 1.4.3 on Windows due to a <a href="https://github.com/je
     </span>
     <a href="https://github.com/benbalter" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/benbalter?v=3&s=24" alt="benbalter" srcset="https://avatars0.githubusercontent.com/benbalter?v=3&s=24 1x, https://avatars0.githubusercontent.com/benbalter?v=3&s=48 2x, https://avatars0.githubusercontent.com/benbalter?v=3&s=72 3x, https://avatars0.githubusercontent.com/benbalter?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=24" alt="benbalter" srcset="https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/benbalter?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       benbalter
     </a>
   </div>
@@ -1676,8 +1738,8 @@ arbitrary <code class="highlighter-rouge">.html</code> files outside of the dest
 traversal, potentially overwriting otherwise-trusted content with arbitrary HTML
 or Javascript depending on your server’s configuration.</p>
 
-<p><em>Maintainer’s note: Many thanks to @gregose and @charliesome for discovering
-these vulnerabilities, and to @BenBalter and @alindeman for writing the patch.</em></p>
+<p><em>Maintainer’s note: Many thanks to <a href="https://github.com/gregose" class="user-mention">@gregose</a> and <a href="https://github.com/charliesome" class="user-mention">@charliesome</a> for discovering
+these vulnerabilities, and to @BenBalter and <a href="https://github.com/alindeman" class="user-mention">@alindeman</a> for writing the patch.</em></p>
 
   </div>
 </article>
@@ -1700,7 +1762,7 @@ these vulnerabilities, and to @BenBalter and @alindeman for writing the patch.</
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -1735,7 +1797,7 @@ off in your site’s configuration file.</p>
     </span>
     <a href="https://github.com/mattr-" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       mattr-
     </a>
   </div>
@@ -1771,7 +1833,7 @@ keep on writing without any problems.</p>
     </span>
     <a href="https://github.com/mattr-" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       mattr-
     </a>
   </div>
@@ -1825,7 +1887,7 @@ Karékinian, Jordon Bedwell, Matthew Iversen, Persa Zula, and Yi Zeng.</p>
     </span>
     <a href="https://github.com/mattr-" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       mattr-
     </a>
   </div>
@@ -1864,7 +1926,7 @@ albertogg, andrewhavens, maul.esel, and thomasdao</p>
     </span>
     <a href="https://github.com/mattr-" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       mattr-
     </a>
   </div>
@@ -1934,7 +1996,7 @@ variable.</p>
     </span>
     <a href="https://github.com/mattr-" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       mattr-
     </a>
   </div>
@@ -1969,7 +2031,7 @@ issues!</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2006,7 +2068,7 @@ log</a>!</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2049,7 +2111,7 @@ enhancements that we think you’ll love.</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2085,7 +2147,7 @@ and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a
     </span>
     <a href="https://github.com/mattr-" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24" alt="mattr-" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       mattr-
     </a>
   </div>
@@ -2121,7 +2183,7 @@ and <a href="https://github.com/jekyll/jekyll/issues/1349">submitting a patch</a
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2161,7 +2223,7 @@ v1.1.0!</a></p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2202,7 +2264,7 @@ Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new add
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2241,7 +2303,7 @@ Jekyll v1.1.0! This latest release of Jekyll brings some really exciting new add
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2283,7 +2345,7 @@ releases, and fix some other annoying bugs:</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2324,7 +2386,7 @@ releases, and fix some other annoying bugs:</p>
     </span>
     <a href="https://github.com/parkr" class="post-author">
       
-      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" width="24" height="24" data-proofer-ignore="true" />
+      <img class="avatar avatar-small" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" alt="parkr" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x" width="24" height="24" data-proofer-ignore="true">
       parkr
     </a>
   </div>
@@ -2392,6 +2454,12 @@ examples and for compiling this list):</p>
     <ul>
         
         
+        <li class="">
+          <a href="/news/2016/06/03/update-on-jekyll-s-google-summer-of-code-projects/">Jekyll's Google Summer of Code Project: The CMS You Always Wanted</a>
+        </li>
+        
+        
+        
         
         
         
@@ -2433,7 +2501,7 @@ examples and for compiling this list):</p>
         
         
         <li class="">
-          <a href="/news/2015/01/20/jekyll-meet-and-greet/">Jekyll Meet & Greet at GitHub HQ</a>
+          <a href="/news/2015/01/20/jekyll-meet-and-greet/">Jekyll Meet &amp; Greet at GitHub HQ</a>
         </li>
         
         
@@ -2523,7 +2591,7 @@ examples and for compiling this list):</p>
   <footer role="contentinfo">
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
-      <p>The contents of this website are <br />&copy;&nbsp;2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are <br>© 2016 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>
