@@ -383,7 +383,7 @@ before your site is served.
   </p>
 </div>
 
-## Custom WEBRick Headers
+## Custom WEBrick Headers
 
 You can provide custom headers for your site by adding them to `_config.yml`
 
@@ -397,9 +397,10 @@ webrick:
 
 ### Defaults
 
-We only provide one default and that's a Content-Type header that disables
-caching in development so that you don't have to fight with Chrome's aggressive
-caching when you are in development mode.
+We provide by default `Content-Type` and `Cache-Control` response headers: one
+dynamic in order to specify the nature of the data being served, the other
+static in order to disable caching so that you don't have to fight with Chrome's
+aggressive caching when you are in development mode.
 
 ## Specifying a Jekyll environment at build time
 
@@ -462,7 +463,7 @@ defaults:
   </p>
 </div>
 
-Here, we are scoping the `values` to any file that exists in the scopes path. Since the path is set as an empty string, it will apply to **all files** in your project. You probably don't want to set a layout on every file in your project - like css files, for example - so you can also specify a `type` value under the `scope` key.
+Here, we are scoping the `values` to any file that exists in the path `scope`. Since the path is set as an empty string, it will apply to **all files** in your project. You probably don't want to set a layout on every file in your project - like css files, for example - so you can also specify a `type` value under the `scope` key.
 
 {% highlight yaml %}
 defaults:

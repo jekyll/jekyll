@@ -84,6 +84,8 @@
   * Rubocop: Readers (#4932)
   * rubocop: jekyll/lib/frontmatter_defaults.rb (#4974)
   * rubocop: features/step_definitions.rb (#4956)
+  * Rubocop theme and url jekyll libs (#4959)
+  * Rubocop jekyll.rb (#4966)
 
 ### Site Enhancements
 
@@ -128,6 +130,10 @@
   * Corrected pagination docs for hidden: true feature (#4903)
   * Remove a Broken Link for Refheap Plugin (#4971)
   * Instructions on how to install github-gem on Windows (#4975)
+  * Minor tweak to fix missing apostrophne (#4962)
+  * Instructions on how to install github-gem on Windows (v2) (#4977)
+  * Fix inaccurate HTTP response header field name (#4976)
+  * Add post about GSoC project (#4980)
 
 ## 3.1.6 / 2016-05-19
 

@@ -81,6 +81,16 @@ gem 'github-pages'
   </p>
 </div>
 
+<div class="note info">
+  <h5>Installing <code>github-pages</code> gem on Windows</h5>
+  <p>
+    While Windows is not officially supported, it is possible 
+    to install <code>github-pages</code> gem on Windows. 
+    Special instructions can be found on our
+    <a href="../windows/#installation">Windows-specific docs page</a>.
+  </p>
+</div>
+
 ### User and Organization Pages
 
 User and organization pages live in a special GitHub repository dedicated to
