@@ -177,7 +177,7 @@ CONTENT
       end
 
       should "not cause a markdown error" do
-        refute_match(/markdown\-html\-error/, @result)
+        refute_match(%r!markdown\-html\-error!, @result)
       end
 
       should "render markdown with pygments" do
@@ -544,7 +544,7 @@ CONTENT
     end
 
     should "not cause an error" do
-      refute_match(/markdown\-html\-error/, @result)
+      refute_match(%r!markdown\-html\-error!, @result)
     end
 
     should "have the url to the \"complex\" post from 2008-11-21" do
@@ -573,7 +573,7 @@ CONTENT
     end
 
     should "not cause an error" do
-      refute_match(/markdown\-html\-error/, @result)
+      refute_match(%r!markdown\-html\-error!, @result)
     end
 
     should "have the url to the \"complex\" post from 2008-11-21" do
@@ -645,7 +645,7 @@ CONTENT
     end
 
     should "not cause an error" do
-      refute_match(/markdown\-html\-error/, @result)
+      refute_match(%r!markdown\-html\-error!, @result)
     end
 
     should "have the url to the \"yaml_with_dots\" item" do
@@ -672,7 +672,7 @@ CONTENT
     end
 
     should "not cause an error" do
-      refute_match(/markdown\-html\-error/, @result)
+      refute_match(%r!markdown\-html\-error!, @result)
     end
 
     should "have the url to the \"sanitized_path\" item" do
@@ -727,7 +727,7 @@ CONTENT
           })
         end
         @result ||= ""
-        refute_match(/SYMLINK TEST/, @result)
+        refute_match(%r!SYMLINK TEST!, @result)
       end
 
       should "not expose the existence of symlinked files" do
@@ -954,15 +954,15 @@ CONTENT
       end
 
       should "include file as variable with liquid filters" do
-        assert_match(/1 included/, @content)
-        assert_match(/2 included/, @content)
-        assert_match(/3 included/, @content)
+        assert_match(%r!1 included!, @content)
+        assert_match(%r!2 included!, @content)
+        assert_match(%r!3 included!, @content)
       end
 
       should "include file as variable and liquid filters with arbitrary whitespace" do
-        assert_match(/4 included/, @content)
-        assert_match(/5 included/, @content)
-        assert_match(/6 included/, @content)
+        assert_match(%r!4 included!, @content)
+        assert_match(%r!5 included!, @content)
+        assert_match(%r!6 included!, @content)
       end
 
       should "include file as variable and filters with additional parameters" do
@@ -971,7 +971,7 @@ CONTENT
       end
 
       should "include file as partial variable" do
-        assert_match(/8 included/, @content)
+        assert_match(%r!8 included!, @content)
       end
     end
   end
@@ -986,15 +986,15 @@ CONTENT
     end
 
     should "include file as variable with liquid filters" do
-      assert_match(/1 relative_include/, @content)
-      assert_match(/2 relative_include/, @content)
-      assert_match(/3 relative_include/, @content)
+      assert_match(%r!1 relative_include!, @content)
+      assert_match(%r!2 relative_include!, @content)
+      assert_match(%r!3 relative_include!, @content)
     end
 
     should "include file as variable and liquid filters with arbitrary whitespace" do
-      assert_match(/4 relative_include/, @content)
-      assert_match(/5 relative_include/, @content)
-      assert_match(/6 relative_include/, @content)
+      assert_match(%r!4 relative_include!, @content)
+      assert_match(%r!5 relative_include!, @content)
+      assert_match(%r!6 relative_include!, @content)
     end
 
     should "include file as variable and filters with additional parameters" do
@@ -1003,11 +1003,11 @@ CONTENT
     end
 
     should "include file as partial variable" do
-      assert_match(/8 relative_include/, @content)
+      assert_match(%r!8 relative_include!, @content)
     end
 
     should "include files relative to self" do
-      assert_match(/9 —\ntitle: Test Post Where YAML/, @content)
+      assert_match(%r!9 —\ntitle: Test Post Where YAML!, @content)
     end
 
     context "trying to do bad stuff" do
@@ -1087,7 +1087,7 @@ CONTENT
           })
         end
         @result ||= ""
-        refute_match(/SYMLINK TEST/, @result)
+        refute_match(%r!SYMLINK TEST!, @result)
       end
 
       should "not expose the existence of symlinked files" do

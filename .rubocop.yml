@@ -118,7 +118,7 @@ Style/RedundantReturn:
 Style/RedundantSelf:
   Enabled: false
 Style/RegexpLiteral:
-  EnforcedStyle: slashes
+  EnforcedStyle: percent_r
 Style/RescueModifier:
   Enabled: false
 Style/SignalException:

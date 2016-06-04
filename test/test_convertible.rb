@@ -29,8 +29,8 @@ class TestConvertible < JekyllUnitTest
         ret = @convertible.read_yaml(@base, name)
         assert_equal({}, ret)
       end
-      assert_match(/YAML Exception|syntax error|Error reading file/, out)
-      assert_match(/#{File.join(@base, name)}/, out)
+      assert_match(%r!YAML Exception|syntax error|Error reading file!, out)
+      assert_match(%r!#{File.join(@base, name)}!, out)
     end
 
     should "not allow ruby objects in yaml" do
@@ -46,8 +46,8 @@ class TestConvertible < JekyllUnitTest
         ret = @convertible.read_yaml(@base, name, :encoding => "utf-8")
         assert_equal({}, ret)
       end
-      assert_match(/invalid byte sequence in UTF-8/, out)
-      assert_match(/#{File.join(@base, name)}/, out)
+      assert_match(%r!invalid byte sequence in UTF-8!, out)
+      assert_match(%r!#{File.join(@base, name)}!, out)
     end
 
     should "parse the front-matter but show an error if permalink is empty" do
@@ -61,7 +61,7 @@ class TestConvertible < JekyllUnitTest
       out = capture_stderr do
         @convertible.read_yaml(@base, "front_matter.erb")
       end
-      refute_match(/Invalid permalink/, out)
+      refute_match(%r!Invalid permalink!, out)
     end
   end
 end
