@@ -72,13 +72,13 @@ module Jekyll
           # Remove leading "/" to avoid generating urls with `//`
           result.gsub(%r!/:#{token.first}!, "")
         else
-          result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
+          result.gsub(%r!:#{token.first}!, self.class.escape_path(token.last))
         end
       end
     end
 
     def generate_url_from_drop(template)
-      template.gsub(/:([a-z_]+)/) do |match|
+      template.gsub(%r!:([a-z_]+)!) do |match|
         replacement = @placeholders.public_send(match.sub(":".freeze, "".freeze))
         if replacement.nil?
           "".freeze
