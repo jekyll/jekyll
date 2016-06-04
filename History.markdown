@@ -135,6 +135,7 @@
   * Instructions on how to install github-gem on Windows (v2) (#4977)
   * Fix inaccurate HTTP response header field name (#4976)
   * Add post about GSoC project (#4980)
+  * Link to the HTML page instead of Markdown (#4985)
 
 ## 3.1.6 / 2016-05-19
 
