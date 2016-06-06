@@ -87,6 +87,7 @@
   * Rubocop theme and url jekyll libs (#4959)
   * Rubocop jekyll.rb (#4966)
   * Rubocop: use %r for all regular expressions. (#4979)
+  * Cleanup and make misc files compliant with Rubocop. (#4940)
 
 ### Site Enhancements
 
