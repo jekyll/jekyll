@@ -8,7 +8,6 @@ AllCops:
   - lib/jekyll/command.rb
   - lib/jekyll/configuration.rb
   - lib/jekyll/convertible.rb
-  - lib/jekyll/deprecator.rb
   - lib/jekyll/document.rb
   - lib/jekyll/filters.rb
   - lib/jekyll/regenerator.rb
