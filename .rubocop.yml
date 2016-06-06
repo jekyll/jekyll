@@ -12,7 +12,6 @@ AllCops:
   - lib/jekyll/filters.rb
   - lib/jekyll/regenerator.rb
   - lib/jekyll/renderer.rb
-  - lib/jekyll/site.rb
   - lib/jekyll/static_file.rb
   - lib/jekyll/utils.rb
   - bin/**/*
@@ -28,7 +27,7 @@ Lint/UselessAccessModifier:
 Metrics/AbcSize:
   Max: 20
 Metrics/ClassLength:
-  Max: 240
+  Max: 300
   Exclude:
   - !ruby/regexp /features\/.*.rb$/
   - !ruby/regexp /test\/.*.rb$/
