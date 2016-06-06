@@ -138,6 +138,7 @@
   * Fix inaccurate HTTP response header field name (#4976)
   * Add post about GSoC project (#4980)
   * Link to the HTML page instead of Markdown (#4985)
+  * Update normalize.css to v4.0.0. (#4989)
 
 ## 3.1.6 / 2016-05-19
 
