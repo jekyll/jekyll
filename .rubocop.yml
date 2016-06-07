@@ -9,7 +9,6 @@ AllCops:
   - lib/jekyll/configuration.rb
   - lib/jekyll/convertible.rb
   - lib/jekyll/document.rb
-  - lib/jekyll/filters.rb
   - lib/jekyll/regenerator.rb
   - lib/jekyll/renderer.rb
   - lib/jekyll/static_file.rb
