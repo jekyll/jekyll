@@ -20,7 +20,7 @@
 
 ---
 
-- [ ] I am on (or have tested on) ***Mac OS*** 10+
+- [ ] I am on (or have tested on) ***MacOS*** 10+
 - [ ] I am on (or have tested on) ***Debian/Ubuntu*** GNU/Linux
 - [ ] I am on (or have tested on) ***Fedora*** GNU/Linux
 - [ ] I am on (or have tested on) ***Arch*** GNU/Linux
