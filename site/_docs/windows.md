@@ -104,7 +104,7 @@ gem 'github-pages'
 ```
 
  * **Note:** We use an unsecure connection because SSL throws exceptions in the version of Ruby
- * Open a command prompt and install github-pages: `bundle install`
+ * Open a command prompt, target your local blog repository root, and install github-pages: `bundle install`
 
  
 After this process you should have github-pages installed on your system and you can host your blog again with `jekyll s`. \\
