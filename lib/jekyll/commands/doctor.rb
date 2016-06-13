@@ -19,7 +19,9 @@ module Jekyll
 
         def process(options)
           site = Jekyll::Site.new(configuration_from_options(options))
+          site.reset
           site.read
+          site.generate
 
           if healthy?(site)
             Jekyll.logger.info "Your test results", "are in. Everything looks fine."
