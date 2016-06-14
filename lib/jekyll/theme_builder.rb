@@ -104,7 +104,7 @@ class Jekyll::ThemeBuilder
       @theme_builder = theme_builder
     end
 
-    def jekyll_pessimistic_version
+    def jekyll_version_with_minor
       Jekyll::VERSION.split(".").take(2).join(".")
     end
 
