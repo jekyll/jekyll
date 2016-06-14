@@ -82,6 +82,7 @@ class Jekyll::ThemeBuilder
   def initialize_git_repo
     Jekyll.logger.info "initialize", path.join(".git").to_s
     Dir.chdir(path.to_s) { `git init` }
+    write_file(".gitignore", template("gitignore"))
   end
 
   def user_name
