@@ -145,6 +145,7 @@
   * Add jekyll-tags-list-plugin to list of third-party plugins (#5000)
   * Windows docs: Command needs to be called from blog path (#5006)
   * Update text to be consitent with example (#5010)
+  * Update template links to point to core Liquid site (#5012)
 
 ## 3.1.6 / 2016-05-19
 
