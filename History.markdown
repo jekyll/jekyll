@@ -91,6 +91,7 @@
   * Cleanup and make misc files compliant with Rubocop. (#4940)
   * Rubocop: jekyll/lib/site.rb (#4973)
   * Add timings for each scenario in cucumber & print worst offenders (#4908)
+  * rubocop: jekyll/lib/filters.rb (#4993)
 
 ### Site Enhancements
 
