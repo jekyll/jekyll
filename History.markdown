@@ -28,6 +28,7 @@
   * Add 'jekyll new-theme' command to help users get up and running creating a theme (#4848)
   * markdownify and smartify should convert input to string before conversion (#4958)
   * Run Site#generate for 'jekyll doctor' to catch plugin issues (#5005)
+  * Add normalize_whitepace filter (#4917)
 
 ### Bug Fixes
 
