@@ -1,7 +1,7 @@
-require 'uri'
-require 'json'
-require 'date'
-require 'liquid'
+require "uri"
+require "json"
+require "date"
+require "liquid"
 
 module Jekyll
   module Filters
@@ -56,7 +56,7 @@ module Jekyll
     #
     # Returns the given filename or title as a lowercase URL String.
     # See Utils.slugify for more detail.
-    def slugify(input, mode=nil)
+    def slugify(input, mode = nil)
       Utils.slugify(input, :mode => mode)
     end
 
@@ -118,7 +118,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      input.to_s.encode(:xml => :attr).gsub(/\A"|"\Z/, "")
+      input.to_s.encode(:xml => :attr).gsub(%r!\A"|"\Z!, "")
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters
@@ -133,7 +133,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def cgi_escape(input)
-      CGI::escape(input)
+      CGI.escape(input)
     end
 
     # URI escape a string.
@@ -180,7 +180,7 @@ module Jekyll
       when 2
         "#{array[0]} #{connector} #{array[1]}"
       else
-        "#{array[0...-1].join(', ')}, #{connector} #{array[-1]}"
+        "#{array[0...-1].join(", ")}, #{connector} #{array[-1]}"
       end
     end
 
@@ -203,11 +203,14 @@ module Jekyll
     #   "items" => [...] } # all the items where `property` == "larry"
     def group_by(input, property)
       if groupable?(input)
-        input.group_by do |item|
-          item_property(item, property).to_s
-        end.inject([]) do |memo, i|
-          memo << { "name" => i.first, "items" => i.last, "size" => i.last.size }
-        end
+        input.group_by { |item| item_property(item, property).to_s }
+          .each_with_object([]) do |item, array|
+            array << {
+              "name"  => item.first,
+              "items" => item.last,
+              "size"  => item.last.size
+            }
+          end
       else
         input
       end
@@ -223,7 +226,9 @@ module Jekyll
     def where(input, property, value)
       return input unless input.is_a?(Enumerable)
       input = input.values if input.is_a?(Hash)
-      input.select { |object| Array(item_property(object, property)).map(&:to_s).include?(value.to_s) }
+      input.select do |object|
+        Array(item_property(object, property)).map(&:to_s).include?(value.to_s)
+      end
     end
 
     # Filters an array of objects against an expression
@@ -255,33 +260,21 @@ module Jekyll
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
       if input.nil?
-        raise ArgumentError.new("Cannot sort a null object.")
+        raise ArgumentError, "Cannot sort a null object."
       end
       if property.nil?
         input.sort
       else
-        case
-        when nils == "first"
+        if nils == "first"
           order = - 1
-        when nils == "last"
+        elsif nils == "last"
           order = + 1
         else
-          raise ArgumentError.new("Invalid nils order: " \
-            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'.")
+          raise ArgumentError, "Invalid nils order: " \
+            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
         end
 
-        input.sort do |apple, orange|
-          apple_property = item_property(apple, property)
-          orange_property = item_property(orange, property)
-
-          if !apple_property.nil? && orange_property.nil?
-            - order
-          elsif apple_property.nil? && !orange_property.nil?
-            + order
-          else
-            apple_property <=> orange_property
-          end
-        end
+        sort_input(input, property, order)
       end
     end
 
@@ -333,6 +326,22 @@ module Jekyll
     end
 
     private
+    def sort_input(input, property, order)
+      input.sort do |apple, orange|
+        apple_property = item_property(apple, property)
+        orange_property = item_property(orange, property)
+
+        if !apple_property.nil? && orange_property.nil?
+          - order
+        elsif apple_property.nil? && !orange_property.nil?
+          + order
+        else
+          apple_property <=> orange_property
+        end
+      end
+    end
+
+    private
     def time(input)
       case input
       when Time
@@ -349,10 +358,12 @@ module Jekyll
       end.localtime
     end
 
+    private
     def groupable?(element)
       element.respond_to?(:group_by)
     end
 
+    private
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
         item.to_liquid[property.to_s]
@@ -363,6 +374,7 @@ module Jekyll
       end
     end
 
+    private
     def as_liquid(item)
       case item
       when Hash
@@ -386,6 +398,7 @@ module Jekyll
     end
 
     # Parse a string to a Liquid Condition
+    private
     def parse_condition(exp)
       parser = Liquid::Parser.new(exp)
       left_expr = parser.expression
