@@ -9,14 +9,8 @@ rvm:
   - &ruby1 2.3.0
   - &ruby2 2.2.4
   - &ruby3 2.1.8
-  - &jruby jruby-9.0.5.0
-  - &rhead ruby-head
 
 matrix:
-  fast_finish: true
-  allow_failures:
-    - rvm: *jruby
-    - rvm: *rhead
   include:
     - rvm: 2.3.0
       env: TEST_SUITE=fmt
