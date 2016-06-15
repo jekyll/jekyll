@@ -96,6 +96,7 @@
   * Add timings for each scenario in cucumber & print worst offenders (#4908)
   * rubocop: jekyll/lib/filters.rb (#4993)
   * Fix rubocop offenses in exe/jekyll (#5017)
+  * Rubocop: lib/jekyll/command.rb  (#5018)
 
 ### Site Enhancements
 
