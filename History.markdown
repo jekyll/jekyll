@@ -29,6 +29,7 @@
   * markdownify and smartify should convert input to string before conversion (#4958)
   * Run Site#generate for 'jekyll doctor' to catch plugin issues (#5005)
   * Add normalize_whitepace filter (#4917)
+  * Move bin/jekyll to exe/jekyll to prevent collision with binstubs (#5014)
 
 ### Bug Fixes
 
