@@ -141,7 +141,6 @@ module Jekyll
 
       while layout
         payload['content'] = output
-        payload['page']    = document.to_liquid
         payload['layout']  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
 
         output = render_liquid(
