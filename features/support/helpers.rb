@@ -12,7 +12,7 @@ class Paths
 
   def self.status_file; test_dir.join("jekyll_status.txt"); end
 
-  def self.jekyll_bin; source_dir.join("bin", "jekyll"); end
+  def self.jekyll_bin; source_dir.join("exe", "jekyll"); end
 
   def self.source_dir; SOURCE_DIR; end
 end
