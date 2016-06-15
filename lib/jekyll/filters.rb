@@ -156,7 +156,7 @@ module Jekyll
     #
     # Returns the formatted String
     def normalize_whitespace(input)
-      input.to_s.gsub(/\s+/, " ").strip
+      input.to_s.gsub(%r!\s+!, " ").strip
     end
 
     # Count the number of words in the input string.
