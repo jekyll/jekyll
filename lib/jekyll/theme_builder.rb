@@ -55,7 +55,7 @@ class Jekyll::ThemeBuilder
 
   def create_directories
     mkdir_p(SCAFFOLD_DIRECTORIES)
-    mkdir_p(%w{example example/_posts})
+    mkdir_p(%w(example example/_posts))
   end
 
   def create_gemspec
