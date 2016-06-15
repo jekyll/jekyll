@@ -12,6 +12,7 @@ class Jekyll::ThemeBuilder
 
   def create!
     create_directories
+    create_starter_files
     create_gemspec
     create_accessories
     create_example_site
@@ -56,6 +57,12 @@ class Jekyll::ThemeBuilder
   def create_directories
     mkdir_p(SCAFFOLD_DIRECTORIES)
     mkdir_p(%w(example example/_posts))
+  end
+
+  def create_starter_files
+    %w(page post default).each do |layout|
+      write_file("_layouts/#{layout}.html", template("_layouts/#{layout}.html"))
+    end
   end
 
   def create_gemspec
