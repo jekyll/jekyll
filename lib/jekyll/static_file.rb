@@ -2,6 +2,17 @@ module Jekyll
   class StaticFile
     attr_reader :relative_path, :extname
 
+    class << self
+      # The cache of last modification times [path] -> mtime.
+      def mtimes
+        @mtimes ||= {}
+      end
+
+      def reset_cache
+        @mtimes = nil
+      end
+    end
+
     # Initialize a new StaticFile.
     #
     # site - The Site.
@@ -17,8 +28,6 @@ module Jekyll
       @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
-      # The cache of last modification times [path] -> mtime.
-      @mtimes = {}
     end
     # rubocop: enable ParameterLists
 
@@ -57,7 +66,7 @@ module Jekyll
     #
     # Returns true if modified since last write.
     def modified?
-      @mtimes[path] != mtime
+      self.class.mtimes[path] != mtime
     end
 
     # Whether to write the file to the filesystem
@@ -77,12 +86,11 @@ module Jekyll
       dest_path = destination(dest)
 
       return false if File.exist?(dest_path) && !modified?
-      @mtimes[path] = mtime
+      self.class.mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
       FileUtils.rm(dest_path) if File.exist?(dest_path)
       copy_file(dest_path)
-      File.utime(@mtimes[path], @mtimes[path], dest_path)
 
       true
     end
@@ -138,6 +146,7 @@ module Jekyll
       else
         FileUtils.copy_entry(path, dest_path)
       end
+      File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
     end
   end
 end
