@@ -6,4 +6,4 @@ Here are some key things to remember when evaluating an issue.
 
 ## Reproducible?
 
-If the bug has clear reproduction steps, take a minute to try them.
+If the bug has clear reproduction steps, take a minute to try them. If it helps, write a test in our test suite for the scenario which replicates the problem.

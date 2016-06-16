@@ -2,7 +2,7 @@
 
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
 
-# 1. Use Homebrew
+# 1. Use Jekyll
 
 Maintainers of Homebrew should be using it regularly. This is partly because you won't be a good maintainer unless you can put yourself in the shoes of our users but also because you may decide to stop using Jekyll and at that point you should also decide not to be a maintainer and find other things to work on.
 

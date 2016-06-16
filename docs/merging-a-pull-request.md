@@ -6,9 +6,7 @@
 
 All pull requests should be subject to code review. Code review is a [foundational value](https://blog.fullstory.com/what-we-learned-from-google-code-reviews-arent-just-for-catching-bugs-b125a13aa292) of good engineering teams. Besides providing validation of correctness, it promotes a sense of community and gives other maintainers understanding of all parts of the code base. In short, code review is crucial to a healthy open source project.
 
-Before merging a pull request **that changes code**, ensure that code is thoroughly reviewed and has received a thorough review from at least two maintainers.
-
-Before merging a pull request **that changes the documentation**, ensure there aren't any errors and that at least one other maintainer has agreed on the changes.
+**Read our guide for [Reviewing a pull request](reviewing-a-pull-request.md) before merging.** Notably, the change must have tests if for code, and at least two maintainers must give it an OK.
 
 ## Merging
 

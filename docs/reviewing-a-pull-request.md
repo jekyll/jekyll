@@ -24,6 +24,10 @@ Leave detailed comments wherever possible. Provide the contributor with context 
 
 You may close a pull request if more than 30 days pass without a response from the author.
 
+## Look for Tests
+
+If this is a code change, are there tests for the updated or added behaviour? Shipping a version with bugs is inevitable, but ensuring changes are tested helps keep bugs and regressions to a minimum.
+
 ## CI Must Pass
 
 It is fine to ask a contributor to investigate failures on Travis and patch them up before you begin your review. It is helpful to leave a message for the contributor indicating that the tests have failed and that no review will occur before the tests pass. If they ask for help, take a look and assist if you can.
