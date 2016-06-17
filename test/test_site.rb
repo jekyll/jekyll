@@ -100,6 +100,7 @@ class TestSite < JekyllUnitTest
 
     should "write only modified static files" do
       clear_dest
+      StaticFile.reset_cache
       @site.regenerator.clear
 
       @site.process
@@ -129,6 +130,7 @@ class TestSite < JekyllUnitTest
 
     should "write static files if not modified but missing in destination" do
       clear_dest
+      StaticFile.reset_cache
       @site.regenerator.clear
 
       @site.process
