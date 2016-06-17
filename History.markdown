@@ -30,6 +30,7 @@
   * Run Site#generate for 'jekyll doctor' to catch plugin issues (#5005)
   * Add normalize_whitepace filter (#4917)
   * Move bin/jekyll to exe/jekyll to prevent collision with binstubs (#5014)
+  * Cleaning up site template & theme updates. (#4922)
 
 ### Bug Fixes
 
