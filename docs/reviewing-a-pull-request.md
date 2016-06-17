@@ -18,11 +18,13 @@ If your response requires a response on the part of the author, please add the `
 
 ## Resolve Quickly
 
-Similarly, we should aim to resolve pull requests quickly. If a pull request introduces a feature which does not fit into the core purpose or goal of the project, close it prompty with a kind explanation of why it is not acceptable.
+Similarly, we should aim to resolve pull requests quickly. If a pull request introduces a feature which does not fit into the core purpose or goal of the project, close it promptly with a kind explanation of why it is not acceptable.
 
-Leave detailed comments wherever possible. Provide the contributor with context around why the change you are requesting is necessary, or why the question you are asking is important to resolve. The more context we can clearly communicate to the contributor, the better able
+Leave detailed comments wherever possible. Provide the contributor with context around why the change you are requesting is necessary, or why the question you are asking is important to resolve. The more context we can clearly communicate to the contributor, the better able the contributor is to provide high-quality patches.
 
 You may close a pull request if more than 30 days pass without a response from the author.
+
+In some cases, review will involve many weeks of back-and-forth. As long as communication continues, this is fine. Ideally, any PR would be capable of resolution within 30 days of it being opened.
 
 ## Look for Tests
 
