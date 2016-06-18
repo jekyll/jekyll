@@ -98,6 +98,7 @@
   * rubocop: jekyll/lib/filters.rb (#4993)
   * Fix rubocop offenses in exe/jekyll (#5017)
   * Rubocop: lib/jekyll/command.rb  (#5018)
+  * rubocop: lib/jekyll/static_file.rb (#5019)
 
 ### Site Enhancements
 
