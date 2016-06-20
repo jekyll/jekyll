@@ -4,21 +4,21 @@ title: Installation
 permalink: /docs/installation/
 ---
 
-Getting Jekyll installed and ready-to-go should only take a few minutes. If it
-ever becomes a pain in the ass, please [file an
-issue]({{ site.repository }}/issues/new) (or submit a pull request)
-describing the issue you encountered and how we might make the process easier.
+Getting Jekyll installed and ready-to-go should only take a few minutes.
+If it ever becomes a pain, please [file an issue]({{ site.repository }}/issues/new)
+(or submit a pull request) describing the issue you
+encountered and how we might make the process easier
 
 ### Requirements
 
 Installing Jekyll is easy and straight-forward, but there are a few
 requirements you’ll need to make sure your system has before you start.
 
-- [Ruby](http://www.ruby-lang.org/en/downloads/) (including development
+- [Ruby](https://www.ruby-lang.org/en/downloads/) (including development
   headers, v1.9.3 or above for Jekyll 2 and v2 or above for Jekyll 3)
-- [RubyGems](http://rubygems.org/pages/download)
+- [RubyGems](https://rubygems.org/pages/download)
 - Linux, Unix, or Mac OS X
-- [NodeJS](http://nodejs.org), or another JavaScript runtime (Jekyll 2 and
+- [NodeJS](https://nodejs.org/), or another JavaScript runtime (Jekyll 2 and
 earlier, for CoffeeScript support).
 - [Python 2.7](https://www.python.org/downloads/) (for Jekyll 2 and earlier)
 
@@ -37,7 +37,7 @@ The best way to install Jekyll is via
 [RubyGems](http://rubygems.org/pages/download). At the terminal prompt,
 simply run the following command to install Jekyll:
 
-{% highlight bash %}
+{% highlight shell %}
 $ gem install jekyll
 {% endhighlight %}
 
@@ -62,14 +62,14 @@ community can improve the experience for everyone.
 In order to install a pre-release, make sure you have all the requirements
 installed properly and run:
 
-{% highlight bash %}
+{% highlight shell %}
 gem install jekyll --pre
 {% endhighlight %}
 
 This will install the latest pre-release. If you want a particular pre-release,
 use the `-v` switch to indicate the version you'd like to install:
 
-{% highlight bash %}
+{% highlight shell %}
 gem install jekyll -v '2.0.0.alpha.1'
 {% endhighlight %}
 
@@ -77,7 +77,7 @@ If you'd like to install a development version of Jekyll, the process is a bit
 more involved. This gives you the advantage of having the latest and greatest,
 but may be unstable.
 
-{% highlight bash %}
+{% highlight shell %}
 $ git clone git://github.com/jekyll/jekyll.git
 $ cd jekyll
 $ script/bootstrap

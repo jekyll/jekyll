@@ -1,0 +1,4 @@
+---
+---
+
+I should be output to `/with.dots/mit/index.html`.

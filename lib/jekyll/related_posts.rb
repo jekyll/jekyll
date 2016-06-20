@@ -1,6 +1,5 @@
 module Jekyll
   class RelatedPosts
-
     class << self
       attr_accessor :lsi
     end
@@ -10,11 +9,11 @@ module Jekyll
     def initialize(post)
       @post = post
       @site = post.site
-      Jekyll::External.require_with_graceful_fail('classifier-reborn') if site.lsi
+      Jekyll::External.require_with_graceful_fail("classifier-reborn") if site.lsi
     end
 
     def build
-      return [] unless site.posts.size > 1
+      return [] unless site.posts.docs.size > 1
 
       if site.lsi
         build_index
@@ -24,13 +23,12 @@ module Jekyll
       end
     end
 
-
     def build_index
       self.class.lsi ||= begin
         lsi = ClassifierReborn::LSI.new(:auto_rebuild => false)
         display("Populating LSI...")
 
-        site.posts.each do |x|
+        site.posts.docs.each do |x|
           lsi.add_item(x)
         end
 
@@ -46,7 +44,7 @@ module Jekyll
     end
 
     def most_recent_posts
-      @most_recent_posts ||= (site.posts.reverse - [post]).first(10)
+      @most_recent_posts ||= (site.posts.docs.reverse - [post]).first(10)
     end
 
     def display(output)

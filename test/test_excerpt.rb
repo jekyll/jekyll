@@ -1,38 +1,41 @@
-require 'helper'
+require "helper"
 
 class TestExcerpt < JekyllUnitTest
   def setup_post(file)
-    Post.new(@site, source_dir, '', file)
+    Document.new(@site.in_source_dir(File.join("_posts", file)), {
+      :site       => @site,
+      :collection => @site.posts
+    }).tap(&:read)
   end
 
-  def do_render(post)
-    layouts = { "default" => Layout.new(@site, source_dir('_layouts'), "simple.html")}
-    post.render(layouts, {"site" => {"posts" => []}})
+  def do_render(document)
+    @site.layouts = {
+      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")
+    }
+    document.output = Jekyll::Renderer.new(@site, document, @site.site_payload).run
   end
 
   context "With extraction disabled" do
     setup do
       clear_dest
-      @site = Site.new(site_configuration('excerpt_separator' => ''))
+      @site = fixture_site("excerpt_separator" => "")
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
     end
 
     should "not be generated" do
-      excerpt = @post.send(:extract_excerpt)
-      assert_equal true, excerpt.empty?
+      refute @post.generate_excerpt?
     end
   end
 
   context "An extracted excerpt" do
     setup do
       clear_dest
-      @site = Site.new(site_configuration)
+      @site = fixture_site
       @post = setup_post("2013-07-22-post-excerpt-with-layout.markdown")
-      @excerpt = @post.send :extract_excerpt
+      @excerpt = @post.data["excerpt"]
     end
 
     context "#include(string)" do
-
       setup do
         @excerpt.output = "Here is a fake output stub"
       end
@@ -45,7 +48,7 @@ class TestExcerpt < JekyllUnitTest
 
     context "#id" do
       should "contain the UID for the post" do
-        assert_equal @excerpt.id, "#{@post.id}/#excerpt"
+        assert_equal @excerpt.id, "#{@post.id}#excerpt"
       end
       should "return a string" do
         assert_same @post.id.class, String
@@ -53,8 +56,8 @@ class TestExcerpt < JekyllUnitTest
     end
 
     context "#to_s" do
-      should "return its content if no output present" do
-        assert_equal @excerpt.content, @excerpt.to_s
+      should "return rendered output" do
+        assert_equal @excerpt.output, @excerpt.to_s
       end
 
       should "return its output if output present" do
@@ -76,30 +79,22 @@ class TestExcerpt < JekyllUnitTest
     context "#to_liquid" do
       should "contain the proper page data to mimick the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
-        assert_equal "/bar/baz/z_category/mixedcase/2013/07/22/post-excerpt-with-layout.html", @excerpt.to_liquid["url"]
+        url = "/bar/baz/z_category/mixedcase/2013/07/22/post-excerpt-with-layout.html"
+        assert_equal url, @excerpt.to_liquid["url"]
         assert_equal Time.parse("2013-07-22"), @excerpt.to_liquid["date"]
-        assert_equal %w[bar baz z_category MixedCase], @excerpt.to_liquid["categories"]
-        assert_equal %w[first second third jekyllrb.com], @excerpt.to_liquid["tags"]
-        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown", @excerpt.to_liquid["path"]
-      end
-
-      should "consider inheritance" do
-        klass = Class.new(Jekyll::Post)
-        assert_gets_called = false
-        klass.send(:define_method, :assert_gets_called) { assert_gets_called = true }
-        klass.const_set(:EXCERPT_ATTRIBUTES_FOR_LIQUID, Jekyll::Post::EXCERPT_ATTRIBUTES_FOR_LIQUID + ['assert_gets_called'])
-        post = klass.new(@site, source_dir, '', "2008-02-02-published.markdown")
-        Jekyll::Excerpt.new(post).to_liquid
-
-        assert assert_gets_called, 'assert_gets_called did not get called on post.'
+        assert_equal %w(bar baz z_category MixedCase), @excerpt.to_liquid["categories"]
+        assert_equal %w(first second third jekyllrb.com), @excerpt.to_liquid["tags"]
+        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown",
+                     @excerpt.to_liquid["path"]
       end
     end
 
     context "#content" do
-
       context "before render" do
         should "be the first paragraph of the page" do
-          assert_equal "First paragraph with [link ref][link].\n\n[link]: http://www.jekyllrb.com/", @excerpt.content
+          expected = "First paragraph with [link ref][link].\n\n[link]: "\
+                     "http://www.jekyllrb.com/"
+          assert_equal expected, @excerpt.content
         end
 
         should "contain any refs at the bottom of the page" do
@@ -111,11 +106,13 @@ class TestExcerpt < JekyllUnitTest
         setup do
           @rendered_post = @post.dup
           do_render(@rendered_post)
-          @extracted_excerpt = @rendered_post.send :extracted_excerpt
+          @extracted_excerpt = @rendered_post.data["excerpt"]
         end
 
         should "be the first paragraph of the page" do
-          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>\n\n", @extracted_excerpt.content
+          expected = "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link "\
+                     "ref</a>.</p>\n\n"
+          assert_equal expected, @extracted_excerpt.output
         end
 
         should "link properly" do
@@ -128,9 +125,9 @@ class TestExcerpt < JekyllUnitTest
   context "A whole-post excerpt" do
     setup do
       clear_dest
-      @site = Site.new(site_configuration)
+      @site = fixture_site
       @post = setup_post("2008-02-02-published.markdown")
-      @excerpt = @post.send :extract_excerpt
+      @excerpt = @post.data["excerpt"]
     end
 
     should "be generated" do

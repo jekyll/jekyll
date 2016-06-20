@@ -6,16 +6,16 @@ permalink: /docs/posts/
 
 One of Jekyll’s best aspects is that it is “blog aware”. What does this mean,
 exactly? Well, simply put, it means that blogging is baked into Jekyll’s
-functionality. If you write articles and publish them online, this means that
-you can publish and maintain a blog simply by managing a folder of text-files on
-your computer. Compared to the hassle of configuring and maintaining databases
-and web-based CMS systems, this will be a welcome change!
+functionality. If you write articles and publish them online, you can publish
+and maintain a blog simply by managing a folder of text-files on your computer.
+Compared to the hassle of configuring and maintaining databases and web-based
+CMS systems, this will be a welcome change!
 
 ## The Posts Folder
 
 As explained on the [directory structure](../structure/) page, the `_posts`
 folder is where your blog posts will live. These files are generally
-[Markdown](http://daringfireball.net/projects/markdown/) or HTML, but can
+[Markdown](https://daringfireball.net/projects/markdown/) or HTML, but can
 be other formats with the proper converter installed.
 All posts must have [YAML Front Matter](../frontmatter/), and they will be
 converted from their source format into an HTML page that is part of your
@@ -23,11 +23,11 @@ static site.
 
 ### Creating Post Files
 
-To create a new post, all you need to do is create a new file in the `_posts`
+To create a new post, all you need to do is create a file in the `_posts`
 directory. How you name files in this folder is important. Jekyll requires blog
 post files to be named according to the following format:
 
-{% highlight bash %}
+{% highlight shell %}
 YEAR-MONTH-DAY-title.MARKUP
 {% endhighlight %}
 
@@ -35,7 +35,7 @@ Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit
 numbers, and `MARKUP` is the file extension representing the format used in the
 file. For example, the following are examples of valid post filenames:
 
-{% highlight bash %}
+{% highlight shell %}
 2011-12-31-new-years-eve-is-awesome.md
 2012-09-12-how-to-write-a-blog.textile
 {% endhighlight %}
@@ -53,7 +53,7 @@ file. For example, the following are examples of valid post filenames:
 
 All blog post files must begin with [YAML Front Matter](../frontmatter/). After
 that, it's simply a matter of deciding which format you prefer. Jekyll supports
-[Markdown](http://daringfireball.net/projects/markdown/) out of the box,
+[Markdown](https://daringfireball.net/projects/markdown/) out of the box,
 and has [myriad extensions for other formats as well](/docs/plugins/#converters-1),
 including the popular [Textile](http://redcloth.org/textile) format. These
 formats each have their own way of marking up different types of content
@@ -84,21 +84,21 @@ One common solution is to create a folder in the root of the project directory
 called something like `assets` or `downloads`, into which any images, downloads
 or other resources are placed. Then, from within any post, they can be linked
 to using the site’s root as the path for the asset to include. Again, this will
-depend on the way your site’s (sub)domain and path are configured, but here
+depend on the way your site’s (sub)domain and path are configured, but here are
 some examples (in Markdown) of how you could do this using the `site.url`
 variable in a post.
 
 Including an image asset in a post:
 
 {% highlight text %}
-… which is shown in the screenshot below:
+... which is shown in the screenshot below:
 ![My helpful screenshot]({% raw %}{{ site.url }}{% endraw %}/assets/screenshot.jpg)
 {% endhighlight %}
 
 Linking to a PDF for readers to download:
 
 {% highlight text %}
-… you can [get the PDF]({% raw %}{{ site.url }}{% endraw %}/assets/mydoc.pdf) directly.
+... you can [get the PDF]({% raw %}{{ site.url }}{% endraw %}/assets/mydoc.pdf) directly.
 {% endhighlight %}
 
 <div class="note">
@@ -116,8 +116,8 @@ Linking to a PDF for readers to download:
 It’s all well and good to have posts in a folder, but a blog is no use unless
 you have a list of posts somewhere. Creating an index of posts on another page
 (or in a [template](../templates/)) is easy, thanks to the [Liquid template
-language](http://wiki.shopify.com/Liquid) and its tags. Here’s a basic example
-of how to create a list of links to your blog posts:
+language](https://docs.shopify.com/themes/liquid/basics) and its tags. Here’s a
+basic example of how to create a list of links to your blog posts:
 
 {% highlight html %}
 <ul>

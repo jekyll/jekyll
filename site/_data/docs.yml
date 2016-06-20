@@ -26,6 +26,7 @@
   - permalinks
   - pagination
   - plugins
+  - themes
   - extras
 
 - title: Deployment
@@ -39,9 +40,11 @@
   - troubleshooting
   - sites
   - resources
-  - upgrading
+  - upgrading/0-to-2
+  - upgrading/2-to-3
 
 - title: Meta
   docs:
   - contributing
+  - conduct
   - history
