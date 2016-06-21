@@ -4,7 +4,7 @@
 
 # 1. Use Jekyll
 
-Maintainers of Homebrew should be using it regularly. This is partly because you won't be a good maintainer unless you can put yourself in the shoes of our users but also because you may decide to stop using Jekyll and at that point you should also decide not to be a maintainer and find other things to work on.
+Maintainers of Jekyll should be using it regularly. This is partly because you won't be a good maintainer unless you can put yourself in the shoes of our users but also because you may decide to stop using Jekyll and at that point you should also decide not to be a maintainer and find other things to work on.
 
 # 2. No Guilt About Leaving
 
