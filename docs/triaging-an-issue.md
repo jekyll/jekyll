@@ -27,12 +27,18 @@ If you can't replicate the issue, post your replication steps which didn't work 
 
 ### Supported Platform
 
-Is the author using a supported platform? We support the latest versions of macOS, most common distributions of Linux. If the author is using Windows, you can use the `@jekyll/windows` team to help you investigate, but ultimately it is not a supported platform.
+Is the author using a supported platform? We support the latest versions of macOS, and most common distributions of Linux.
+
+You may close the issue immediately if the author cannot reproduce the issue on a supported platform. For Windows-related problems, leave a comment letting the user know that Windows is not officially supported, but that they may absolutely continue using the issue to communicate with folks from `@jekyll/windows` to further investigate. Additionally, you can point them to Jekyll Talk (https://talk.jekyllrb.com) as a means of getting support from the community.
 
 If the user is experiencing issues with GitHub Pages or another hosted platform that we cannot reproduce, please direct them to the platform's support channel and close the issue.
 
 ### What they wanted vs. what they got
 
-An issue without a clear explanation of what the user got and what they were expecting to get is not an issue we can accurately respond to. If the user doesn't provide this information, please ask for clarification. This information helps us build test cases such that we do not break the behaviour again in the future.
+An issue without a clear explanation of what the user got and what they were expecting to get is not an issue we can accurately respond to. If the user doesn't provide this information, please ask for clarification and apply the `pending-feedback` label. This information helps us build test cases such that we do not break the behaviour again in the future. The `pending-feedback` label will be removed automatically once the issue author posts a reply.
 
 Is what they wanted to get something we want to happen? Sometimes a bug report is actually masquerading as a feature request. See the guidance above for handling feature requests.
+
+### Staleness and automatic closure
+
+@jekyllbot will automatically mark issues as `stale` if no  activity occurs for at least one month. @jekyllbot leaves a comment asking for information about reproducibility in current versions. If no one responds after another month, the issue is automatically closed.
