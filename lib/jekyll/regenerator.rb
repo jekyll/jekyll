@@ -90,7 +90,14 @@ module Jekyll
         return cache[path]
       end
 
-      check_path_exists(path)
+      if metadata[path]
+        # If we have seen this file before,
+        # check if it or one of its dependencies has been modified
+        existing_file_modified?(path)
+      else
+        # If we have not seen this file before, add it to the metadata and regenerate it
+        add(path)
+      end
     end
 
     # Add a dependency of a path
@@ -170,25 +177,23 @@ module Jekyll
         )
     end
 
-    # Private: Check path that exists in metadata
-    #
-    # Returns Boolean
     private
-    def check_path_exists(path)
-      data = metadata[path]
-      if data
-        data["deps"].each do |dependency|
-          if modified?(dependency)
-            return cache[dependency] = cache[path] = true
-          end
-        end
-        if File.exist?(path) && data["mtime"].eql?(File.mtime(path))
-          return cache[path] = false
+    def existing_file_modified?(path)
+      # If one of this file dependencies have been modified,
+      # set the regeneration bit for both the dependency and the file to true
+      metadata[path]["deps"].each do |dependency|
+        if modified?(dependency)
+          return cache[dependency] = cache[path] = true
         end
       end
 
-      # Path does not exist in metadata, add it
-      add(path)
+      if File.exist?(path) && metadata[path]["mtime"].eql?(File.mtime(path))
+        # If this file has not been modified, set the regeneration bit to false
+        cache[path] = false
+      else
+        # If it has been modified, set it to true
+        add(path)
+      end
     end
   end
 end
