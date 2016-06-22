@@ -302,14 +302,9 @@ module Jekyll
 
     private
     def merge_default_proc(target, overwrite)
-      if default_proc?(target) && default_proc?(overwrite) && target.default_proc.nil?
+      if target.is_a?(Hash) && overwrite.is_a?(Hash) && target.default_proc.nil?
         target.default_proc = overwrite.default_proc
       end
-    end
-
-    private
-    def default_proc?(object)
-      object.respond_to?(:default_proc)
     end
 
     private
