@@ -27,7 +27,7 @@ If you can't replicate the issue, post your replication steps which didn't work 
 
 ### Supported Platform
 
-Is the author using a supported platform? We support the latest versions of macOS, and most common distributions of Linux.
+Is the author using a supported platform? We support the latest versions of macOS, Ubuntu, Debian, CentOS, Fedora, and Arch Linux.
 
 You may close the issue immediately if the author cannot reproduce the issue on a supported platform. For Windows-related problems, leave a comment letting the user know that Windows is not officially supported, but that they may absolutely continue using the issue to communicate with folks from `@jekyll/windows` to further investigate. Additionally, you can point them to Jekyll Talk (https://talk.jekyllrb.com) as a means of getting support from the community.
 
