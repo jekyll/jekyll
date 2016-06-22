@@ -6,6 +6,7 @@ Hello! This is where we document various processes for maintaining Jekyll. Being
 2. [Reviewing a pull request](reviewing-a-pull-request.md)
 3. [Merging a pull request](merging-a-pull-request.md)
 4. [Avoiding burnout](avoiding-burnout.md)
+5. [Special Labels](special-labels.md)
 
 Interested in becoming a maintainer? Here is some documentation for **contributors**:
 
