@@ -10,7 +10,6 @@ AllCops:
   - lib/jekyll/document.rb
   - lib/jekyll/regenerator.rb
   - lib/jekyll/renderer.rb
-  - lib/jekyll/utils.rb
   - bin/**/*
   - benchmark/**/*
   - script/**/*
