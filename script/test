@@ -31,26 +31,26 @@ then
 
   shift
 else
-  rubies=()
-  for r in jruby ruby; do
-    if which "$r"
-    then
-      rubies+=(
-        $r
-      )
-    fi
-  done
+  rubies=($(script/rubies))
 fi
 
+
 for ruby in $rubies; do
+  if [[ "$ruby" == "jruby" ]]
+  then
+    testopts=""
+  else
+    testopts="--profile"
+  fi
+
   if [[ $# -lt 1 ]]
   then
     set -x
     time $ruby -S bundle exec \
-      rake TESTOPTS='--profile' test
+      rake TESTOPTS=$testopts test
    else
     set -x
     time $ruby -S bundle exec ruby -Itest \
-      "$@" --profile
+      "$@" $testops
   fi
 done
