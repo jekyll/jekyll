@@ -101,6 +101,7 @@
   * rubocop: lib/jekyll/static_file.rb (#5019)
   * rubocop: lib/jekyll/utils.rb (#5026)
   * rubocop: lib/jekyll/regenerator.rb (#5025)
+  * rubocop: lib/jekyll/configuration.rb (#5024)
 
 ### Site Enhancements
 
