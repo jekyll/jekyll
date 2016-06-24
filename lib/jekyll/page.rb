@@ -120,15 +120,11 @@ module Jekyll
 
     # Add any necessary layouts to this post
     #
-    # layouts      - The Hash of {"name" => "layout"}.
     # site_payload - The site payload Hash.
     #
-    # Returns nothing.
-    def render(layouts, site_payload)
-      site_payload["page"] = to_liquid
-      site_payload["paginator"] = pager.to_liquid
-
-      do_layout(site_payload, layouts)
+    # Returns String rendered page.
+    def render(site_payload)
+      Renderer.new(site, self, site_payload).run
     end
 
     # The path to the source file
@@ -176,6 +172,18 @@ module Jekyll
 
     def write?
       true
+    end
+
+    # Convert this Page's data to a Hash suitable for use by Liquid.
+    #
+    # Returns the Hash representation of this Page.
+    def to_liquid(attrs = nil)
+      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map do |attribute|
+        [attribute, send(attribute)]
+      end]
+
+      defaults = site.frontmatter_defaults.all(relative_path, type)
+      Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
     end
   end
 end
