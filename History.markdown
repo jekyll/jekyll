@@ -103,6 +103,7 @@
   * rubocop: lib/jekyll/regenerator.rb (#5025)
   * rubocop: lib/jekyll/configuration.rb (#5024)
   * rubocop: lib/jekyll/renderer.rb style fixes (#5032)
+  * rubocop: lib/jekyll/convertible.rb style fixes (#5031)
 
 ### Site Enhancements
 
