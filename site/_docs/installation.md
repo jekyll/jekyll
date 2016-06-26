@@ -17,7 +17,7 @@ requirements you’ll need to make sure your system has before you start.
 - [Ruby](https://www.ruby-lang.org/en/downloads/) (including development
   headers, v1.9.3 or above for Jekyll 2 and v2 or above for Jekyll 3)
 - [RubyGems](https://rubygems.org/pages/download)
-- Linux, Unix, or Mac OS X
+- Linux, Unix, or macOS
 - [NodeJS](https://nodejs.org/), or another JavaScript runtime (Jekyll 2 and
 earlier, for CoffeeScript support).
 - [Python 2.7](https://www.python.org/downloads/) (for Jekyll 2 and earlier)
@@ -51,7 +51,7 @@ community can improve the experience for everyone.
   <h5>Installing Xcode Command-Line Tools</h5>
   <p>
     If you run into issues installing Jekyll's dependencies which make use of
-    native extensions and are using Mac OS X, you will need to install Xcode
+    native extensions and are using macOS, you will need to install Xcode
     and the Command-Line Tools it ships with. Download in
     <code>Preferences &#8594; Downloads &#8594; Components</code>.
   </p>
