@@ -435,7 +435,8 @@ module Jekyll
     def method_missing(method, *args, &blck)
       if data.key?(method.to_s)
         Jekyll::Deprecator.deprecation_message "Document##{method} is now a key "\
-                           "in the #data hash. Called by #{caller.first}."
+                           "in the #data hash."
+        Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."
         data[method.to_s]
       else
         super
