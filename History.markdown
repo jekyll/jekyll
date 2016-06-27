@@ -104,6 +104,7 @@
   * rubocop: lib/jekyll/configuration.rb (#5024)
   * rubocop: lib/jekyll/renderer.rb style fixes (#5032)
   * rubocop: lib/jekyll/convertible.rb style fixes (#5031)
+  * rubocop: lib/jekyll/document.rb style fixes (#5030)
 
 ### Site Enhancements
 
