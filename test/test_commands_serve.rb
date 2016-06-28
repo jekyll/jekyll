@@ -114,6 +114,8 @@ class TestCommandsServe < JekyllUnitTest
         end
 
         should "allow SSL with a key and cert" do
+          skip "JRuby does not have OpenSSL bindings." if jruby?
+
           expect(OpenSSL::PKey::RSA).to receive(:new).and_return("c2")
           expect(OpenSSL::X509::Certificate).to receive(:new).and_return("c1")
           allow(File).to receive(:read).and_return("foo")
