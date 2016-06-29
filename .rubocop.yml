@@ -4,16 +4,10 @@ AllCops:
   Include:
   - lib/**/*.rb
   Exclude:
-  - exe/jekyll
   - lib/jekyll/collection.rb
-  - lib/jekyll/command.rb
-  - lib/jekyll/configuration.rb
   - lib/jekyll/convertible.rb
   - lib/jekyll/document.rb
-  - lib/jekyll/regenerator.rb
   - lib/jekyll/renderer.rb
-  - lib/jekyll/static_file.rb
-  - lib/jekyll/utils.rb
   - bin/**/*
   - benchmark/**/*
   - script/**/*

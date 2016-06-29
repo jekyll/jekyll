@@ -30,6 +30,7 @@
   * Run Site#generate for 'jekyll doctor' to catch plugin issues (#5005)
   * Add normalize_whitepace filter (#4917)
   * Move bin/jekyll to exe/jekyll to prevent collision with binstubs (#5014)
+  * Cleaning up site template & theme updates. (#4922)
 
 ### Bug Fixes
 
@@ -95,6 +96,15 @@
   * Rubocop: jekyll/lib/site.rb (#4973)
   * Add timings for each scenario in cucumber & print worst offenders (#4908)
   * rubocop: jekyll/lib/filters.rb (#4993)
+  * Fix rubocop offenses in exe/jekyll (#5017)
+  * Rubocop: lib/jekyll/command.rb  (#5018)
+  * rubocop: lib/jekyll/static_file.rb (#5019)
+  * rubocop: lib/jekyll/utils.rb (#5026)
+  * rubocop: lib/jekyll/regenerator.rb (#5025)
+  * rubocop: lib/jekyll/configuration.rb (#5024)
+  * rubocop: lib/jekyll/renderer.rb style fixes (#5032)
+  * rubocop: lib/jekyll/convertible.rb style fixes (#5031)
+  * rubocop: lib/jekyll/document.rb style fixes (#5030)
 
 ### Site Enhancements
 
@@ -149,6 +159,7 @@
   * Windows docs: Command needs to be called from blog path (#5006)
   * Update text to be consitent with example (#5010)
   * Update template links to point to core Liquid site (#5012)
+  * Add generator-jekyllized to third-party plugins (#5027)
 
 ## 3.1.6 / 2016-05-19
 

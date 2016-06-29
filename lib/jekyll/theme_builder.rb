@@ -1,6 +1,6 @@
 class Jekyll::ThemeBuilder
   SCAFFOLD_DIRECTORIES = %w(
-    _layouts _includes _sass example example/_posts
+    _layouts _includes _sass
   ).freeze
 
   attr_reader :name, :path
@@ -12,6 +12,7 @@ class Jekyll::ThemeBuilder
 
   def create!
     create_directories
+    create_starter_files
     create_gemspec
     create_accessories
     create_example_site
@@ -55,6 +56,13 @@ class Jekyll::ThemeBuilder
 
   def create_directories
     mkdir_p(SCAFFOLD_DIRECTORIES)
+    mkdir_p(%w(example example/_posts))
+  end
+
+  def create_starter_files
+    %w(page post default).each do |layout|
+      write_file("_layouts/#{layout}.html", template("_layouts/#{layout}.html"))
+    end
   end
 
   def create_gemspec
@@ -81,6 +89,7 @@ class Jekyll::ThemeBuilder
   def initialize_git_repo
     Jekyll.logger.info "initialize", path.join(".git").to_s
     Dir.chdir(path.to_s) { `git init` }
+    write_file(".gitignore", template("gitignore"))
   end
 
   def user_name
@@ -102,7 +111,7 @@ class Jekyll::ThemeBuilder
       @theme_builder = theme_builder
     end
 
-    def jekyll_pessimistic_version
+    def jekyll_version_with_minor
       Jekyll::VERSION.split(".").take(2).join(".")
     end
 

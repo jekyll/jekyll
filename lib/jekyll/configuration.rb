@@ -86,8 +86,8 @@ module Jekyll
       # Returns a Configuration filled with defaults and fixed for common
       # problems and backwards-compatibility.
       def from(user_config)
-        Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys).
-          fix_common_issues.add_default_collections
+        Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
+          .fix_common_issues.add_default_collections
       end
     end
 
@@ -123,10 +123,10 @@ module Jekyll
 
     def safe_load_file(filename)
       case File.extname(filename)
-      when /\.toml/i
+      when %r!\.toml!i
         Jekyll::External.require_with_graceful_fail("toml") unless defined?(TOML)
         TOML.load_file(filename)
-      when /\.ya?ml/i
+      when %r!\.ya?ml!i
         SafeYAML.load_file(filename) || {}
       else
         raise ArgumentError, "No parser for '#{filename}' is available.
@@ -191,7 +191,7 @@ module Jekyll
 
       begin
         files.each do |config_file|
-          next if config_file.nil? or config_file.empty?
+          next if config_file.nil? || config_file.empty?
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
@@ -220,60 +220,18 @@ module Jekyll
     def backwards_compatibilize
       config = clone
       # Provide backwards-compatibility
-      if config.key?("auto") || config.key?("watch")
-        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" \
-                            " be set from your configuration file(s). Use the" \
-                            " --[no-]watch/-w command-line option instead."
-        config.delete("auto")
-        config.delete("watch")
-      end
-
-      if config.key?("server")
-        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" \
-                            " is no longer accepted. Use the 'jekyll serve'" \
-                            " subcommand to serve your site with WEBrick."
-        config.delete("server")
-      end
+      check_auto(config)
+      check_server(config)
 
       renamed_key "server_port", "port", config
       renamed_key "plugins", "plugins_dir", config
       renamed_key "layouts", "layouts_dir", config
       renamed_key "data_source", "data_dir", config
 
-      if config.key?("pygments")
-        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" \
-                            " has been renamed to 'highlighter'. Please update your" \
-                            " config file accordingly. The allowed values are 'rouge', " \
-                            "'pygments' or null."
-
-        config["highlighter"] = "pygments" if config["pygments"]
-        config.delete("pygments")
-      end
-
-      %w(include exclude).each do |option|
-        if config[option].is_a?(String)
-          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" \
-            " must now be specified as an array, but you specified" \
-            " a string. For now, we've treated the string you provided" \
-            " as a list of comma-separated values."
-          config[option] = csv_to_array(config[option])
-        end
-        config[option].map!(&:to_s) if config[option]
-      end
-
-      if (config["kramdown"] || {}).key?("use_coderay")
-        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" \
-          " to 'enable_coderay' in your configuration file."
-        config["kramdown"]["use_coderay"] = config["kramdown"].delete("enable_coderay")
-      end
-
-      if config.fetch("markdown", "kramdown").to_s.casecmp("maruku") == 0
-        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " \
-          "Markdown processor, which has been removed as of 3.0.0. " \
-          "We recommend you switch to Kramdown. To do this, replace " \
-          "`markdown: maruku` with `markdown: kramdown` in your " \
-          "`_config.yml` file."
-      end
+      check_pygments(config)
+      check_include_exclude(config)
+      check_coderay(config)
+      check_maruku(config)
 
       config
     end
@@ -296,19 +254,19 @@ module Jekyll
       config = clone
 
       # It defaults to `{}`, so this is only if someone sets it to null manually.
-      return config if config['collections'].nil?
+      return config if config["collections"].nil?
 
       # Ensure we have a hash.
-      if config['collections'].is_a?(Array)
-        config['collections'] = Hash[config['collections'].map { |c| [c, {}] }]
+      if config["collections"].is_a?(Array)
+        config["collections"] = Hash[config["collections"].map { |c| [c, {}] }]
       end
 
-      config['collections'] = Utils.deep_merge_hashes(
-        { 'posts' => {} }, config['collections']
+      config["collections"] = Utils.deep_merge_hashes(
+        { "posts" => {} }, config["collections"]
       ).tap do |collections|
-        collections['posts']['output'] = true
-        if config['permalink']
-          collections['posts']['permalink'] ||= style_to_permalink(config['permalink'])
+        collections["posts"]["output"] = true
+        if config["permalink"]
+          collections["posts"]["permalink"] ||= style_to_permalink(config["permalink"])
         end
       end
 
@@ -325,7 +283,6 @@ module Jekyll
     end
 
     private
-
     def style_to_permalink(permalink_style)
       case permalink_style.to_sym
       when :pretty
@@ -347,9 +304,78 @@ module Jekyll
     # file - the file from which the config was extracted
     #
     # Raises an ArgumentError if given config is not a hash
+    private
     def check_config_is_hash!(extracted_config, file)
       unless extracted_config.is_a?(Hash)
-        raise ArgumentError.new("Configuration file: (INVALID) #{file}".yellow)
+        raise ArgumentError, "Configuration file: (INVALID) #{file}".yellow
+      end
+    end
+
+    private
+    def check_auto(config)
+      if config.key?("auto") || config.key?("watch")
+        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" \
+                            " be set from your configuration file(s). Use the" \
+                            " --[no-]watch/-w command-line option instead."
+        config.delete("auto")
+        config.delete("watch")
+      end
+    end
+
+    private
+    def check_server(config)
+      if config.key?("server")
+        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" \
+                            " is no longer accepted. Use the 'jekyll serve'" \
+                            " subcommand to serve your site with WEBrick."
+        config.delete("server")
+      end
+    end
+
+    private
+    def check_pygments(config)
+      if config.key?("pygments")
+        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" \
+                            " has been renamed to 'highlighter'. Please update your" \
+                            " config file accordingly. The allowed values are 'rouge', " \
+                            "'pygments' or null."
+
+        config["highlighter"] = "pygments" if config["pygments"]
+        config.delete("pygments")
+      end
+    end
+
+    private
+    def check_include_exclude(config)
+      %w(include exclude).each do |option|
+        if config[option].is_a?(String)
+          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" \
+            " must now be specified as an array, but you specified" \
+            " a string. For now, we've treated the string you provided" \
+            " as a list of comma-separated values."
+          config[option] = csv_to_array(config[option])
+        end
+        config[option].map!(&:to_s) if config[option]
+      end
+    end
+
+    private
+    def check_coderay(config)
+      if (config["kramdown"] || {}).key?("use_coderay")
+        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" \
+          " to 'enable_coderay' in your configuration file."
+        config["kramdown"]["use_coderay"] = config["kramdown"].delete("enable_coderay")
+      end
+    end
+
+    private
+    def check_maruku(config)
+      if config.fetch("markdown", "kramdown").to_s.casecmp("maruku") == 0
+        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " \
+          "Markdown processor, which has been removed as of 3.0.0. " \
+          "We recommend you switch to Kramdown. To do this, replace " \
+          "`markdown: maruku` with `markdown: kramdown` in your " \
+          "`_config.yml` file."
       end
     end
   end

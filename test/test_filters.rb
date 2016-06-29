@@ -22,7 +22,7 @@ class TestFilters < JekyllUnitTest
         "destination" => dest_dir,
         "timezone"    => "UTC"
       })
-      @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
+      @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
       @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
