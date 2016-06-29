@@ -1,6 +1,7 @@
 require "webrick"
 require "mercenary"
 require "helper"
+require "openssl"
 
 class TestCommandsServe < JekyllUnitTest
   def custom_opts(what)

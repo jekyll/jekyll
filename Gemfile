@@ -23,6 +23,8 @@ group :test do
   gem "nokogiri"
   gem "rspec"
   gem "test-theme", path: File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
+
+  gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
 
 #

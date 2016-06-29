@@ -1,4 +1,5 @@
 require "helper"
+require "colorator"
 
 class TestConfiguration < JekyllUnitTest
   test_config = {
@@ -260,7 +261,9 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML).to receive(:load_file).with(@path) do
         raise SystemCallError, "No such file or directory - #{@path}"
       end
-      allow($stderr).to receive(:puts).with("Configuration file: none".yellow)
+      allow($stderr).to receive(:puts).with(
+        Colorator.yellow("Configuration file: none")
+      )
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
@@ -275,13 +278,12 @@ class TestConfiguration < JekyllUnitTest
       allow($stderr)
         .to receive(:puts)
         .and_return(
-          ("WARNING: "
-             .rjust(20) + "Error reading configuration. Using defaults (and options).")
-              .yellow
+          "WARNING: ".rjust(20) +
+          Colorator.yellow("Error reading configuration. Using defaults (and options).")
         )
       allow($stderr)
         .to receive(:puts)
-        .and_return("Configuration file: (INVALID) #{@path}".yellow)
+        .and_return(Colorator.yellow("Configuration file: (INVALID) #{@path}"))
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
@@ -291,10 +293,10 @@ class TestConfiguration < JekyllUnitTest
       end
       allow($stderr)
         .to receive(:puts)
-        .with((
+        .with(Colorator.red(
           "Fatal: ".rjust(20) + \
           "The configuration file '#{@user_config}' could not be found."
-        ).red)
+        ))
       assert_raises LoadError do
         Jekyll.configuration({ "config" => [@user_config] })
       end
