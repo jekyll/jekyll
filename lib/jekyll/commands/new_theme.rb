@@ -6,20 +6,23 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
       prog.command(:"new-theme") do |c|
         c.syntax "new-theme NAME"
         c.description "Creates a new Jekyll theme scaffold"
+        c.option "code_of_conduct", \
+          "-c", "--code-of-conduct", \
+          "Include a Code of Conduct. (defaults to false)"
 
-        c.action do |args, _|
-          Jekyll::Commands::NewTheme.process(args)
+        c.action do |args, opts|
+          Jekyll::Commands::NewTheme.process(args, opts)
         end
       end
     end
 
-    def process(args)
+    def process(args, opts)
       if !args || args.empty?
         raise Jekyll::Errors::InvalidThemeName, "You must specify a theme name."
       end
 
       new_theme_name = args.join("_")
-      theme = Jekyll::ThemeBuilder.new(new_theme_name)
+      theme = Jekyll::ThemeBuilder.new(new_theme_name, opts)
       if theme.path.exist?
         Jekyll.logger.abort_with "Conflict:", "#{theme.path} already exists."
       end

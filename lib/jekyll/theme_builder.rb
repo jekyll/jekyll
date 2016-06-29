@@ -3,11 +3,12 @@ class Jekyll::ThemeBuilder
     _layouts _includes _sass
   ).freeze
 
-  attr_reader :name, :path
+  attr_reader :name, :path, :code_of_conduct
 
-  def initialize(theme_name)
+  def initialize(theme_name, opts)
     @name = theme_name.to_s.tr(" ", "_").gsub(%r!_+!, "_")
     @path = Pathname.new(File.expand_path(name, Dir.pwd))
+    @code_of_conduct = !!opts["code_of_conduct"]
   end
 
   def create!
@@ -71,7 +72,9 @@ class Jekyll::ThemeBuilder
   end
 
   def create_accessories
-    %w(README.md Rakefile CODE_OF_CONDUCT.md LICENSE.txt).each do |filename|
+    accessories = %w(README.md Rakefile LICENSE.txt)
+    accessories << "CODE_OF_CONDUCT.md" if code_of_conduct
+    accessories.each do |filename|
       write_file(filename, template(filename))
     end
   end
