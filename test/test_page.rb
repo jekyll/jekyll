@@ -39,7 +39,7 @@ class TestPage < JekyllUnitTest
       end
 
       should "create url with non-alphabetic characters" do
-        @page = setup_page("+", '%# +.md')
+        @page = setup_page("+", "%# +.md")
         assert_equal "/+/%25%23%20+.html", @page.url
       end
 
@@ -268,12 +268,12 @@ class TestPage < JekyllUnitTest
       end
 
       should "write even when permalink has '%# +'" do
-        page = setup_page("+", '%# +.md')
+        page = setup_page("+", "%# +.md")
         do_render(page)
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert_exist dest_dir("+", '%# +.html')
+        assert_exist dest_dir("+", "%# +.html")
       end
 
       should "write properly without html extension" do
