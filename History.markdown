@@ -161,6 +161,7 @@
   * Update text to be consitent with example (#5010)
   * Update template links to point to core Liquid site (#5012)
   * Add generator-jekyllized to third-party plugins (#5027)
+  * Add Jekyll Art Hallery generator plugin to list of third-party plugins (#5043)
 
 ## 3.1.6 / 2016-05-19
 
