@@ -51,19 +51,9 @@ module Jekyll
     #
     # Returns the merged data.
     def merge_data!(other, source: "YAML front matter")
-      if other.key?("categories") && !other["categories"].nil?
-        if other["categories"].is_a?(String)
-          other["categories"] = other["categories"].split(" ").map(&:strip)
-        end
-        other["categories"] = (data["categories"] || []) | other["categories"]
-      end
+      merge_categories!(other)
       Utils.deep_merge_hashes!(data, other)
-      if data.key?("date") && !data["date"].is_a?(Time)
-        data["date"] = Utils.parse_date(
-          data["date"].to_s,
-          "Document '#{relative_path}' does not have a valid date in the #{source}."
-        )
-      end
+      merge_date!(source)
       data
     end
 
@@ -90,8 +80,7 @@ module Jekyll
     # Returns a String path which represents the relative path
     #   from the site source to this document
     def relative_path
-      @relative_path ||= Pathname.new(path)
-        .relative_path_from(Pathname.new(site.source)).to_s
+      @relative_path ||= Pathutil.new(path).relative_path_from(site.source).to_s
     end
 
     # The output extension of the document.
@@ -264,20 +253,9 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
-          defaults = @site.frontmatter_defaults.all(
-            relative_path,
-            collection.label.to_sym
-          )
-          merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
-
-          self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
-          if content =~ YAML_FRONT_MATTER_REGEXP
-            self.content = $POSTMATCH
-            data_file = SafeYAML.load(Regexp.last_match(1))
-            merge_data!(data_file, :source => "YAML front matter") if data_file
-          end
-
-          post_read
+          merge_defaults
+          read_content(opts)
+          read_post_data
         rescue SyntaxError => e
           Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
         rescue => e
@@ -285,56 +263,6 @@ module Jekyll
           Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
         end
       end
-    end
-
-    def post_read
-      if relative_path =~ DATE_FILENAME_MATCHER
-        date, slug, ext = Regexp.last_match.captures
-        if !data["date"] || data["date"].to_i == site.time.to_i
-          merge_data!({ "date" => date }, :source => "filename")
-        end
-      elsif relative_path =~ DATELESS_FILENAME_MATCHER
-        slug, ext = Regexp.last_match.captures
-      end
-
-      # Try to ensure the user gets a title.
-      data["title"] ||= Utils.titleize_slug(slug)
-      # Only overwrite slug & ext if they aren't specified.
-      data["slug"] ||= slug
-      data["ext"]  ||= ext
-
-      populate_categories
-      populate_tags
-      generate_excerpt
-    end
-
-    # Add superdirectories of the special_dir to categories.
-    # In the case of es/_posts, 'es' is added as a category.
-    # In the case of _posts/es, 'es' is NOT added as a category.
-    #
-    # Returns nothing.
-    def categories_from_path(special_dir)
-      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
-        .split(File::SEPARATOR)
-        .reject do |c|
-        c.empty? || c.eql?(special_dir) || c.eql?(basename)
-      end
-      merge_data!({ "categories" => superdirs }, :source => "file path")
-    end
-
-    def populate_categories
-      merge_data!({
-        "categories" => (
-          Array(data["categories"]) +
-          Utils.pluralized_array_from_hash(data, "category", "categories")
-        ).map(&:to_s).flatten.uniq
-      })
-    end
-
-    def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
-      })
     end
 
     # Create a Liquid-understandable version of this Document.
@@ -443,7 +371,112 @@ module Jekyll
       end
     end
 
-    private # :nodoc:
+    private
+    def merge_categories!(other)
+      if other.key?("categories") && !other["categories"].nil?
+        if other["categories"].is_a?(String)
+          other["categories"] = other["categories"].split(%r!\s+!).map(&:strip)
+        end
+        other["categories"] = (data["categories"] || []) | other["categories"]
+      end
+    end
+
+    private
+    def merge_date!(source)
+      if data.key?("date") && !data["date"].is_a?(Time)
+        data["date"] = Utils.parse_date(
+          data["date"].to_s,
+          "Document '#{relative_path}' does not have a valid date in the #{source}."
+        )
+      end
+    end
+
+    private
+    def merge_defaults
+      defaults = @site.frontmatter_defaults.all(
+        relative_path,
+        collection.label.to_sym
+      )
+      merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
+    end
+
+    private
+    def read_content(opts)
+      self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+      if content =~ YAML_FRONT_MATTER_REGEXP
+        self.content = $POSTMATCH
+        data_file = SafeYAML.load(Regexp.last_match(1))
+        merge_data!(data_file, :source => "YAML front matter") if data_file
+      end
+    end
+
+    private
+    def read_post_data
+      populate_title
+      populate_categories
+      populate_tags
+      generate_excerpt
+    end
+
+    private
+    def populate_title
+      if relative_path =~ DATE_FILENAME_MATCHER
+        date, slug, ext = Regexp.last_match.captures
+        modify_date(date)
+      elsif relative_path =~ DATELESS_FILENAME_MATCHER
+        slug, ext = Regexp.last_match.captures
+      end
+
+      # Try to ensure the user gets a title.
+      data["title"] ||= Utils.titleize_slug(slug)
+      # Only overwrite slug & ext if they aren't specified.
+      data["slug"]  ||= slug
+      data["ext"]   ||= ext
+    end
+
+    private
+    def modify_date(date)
+      if !data["date"] || data["date"].to_i == site.time.to_i
+        merge_data!({ "date" => date }, :source => "filename")
+      end
+    end
+
+    # Add superdirectories of the special_dir to categories.
+    # In the case of es/_posts, 'es' is added as a category.
+    # In the case of _posts/es, 'es' is NOT added as a category.
+    #
+    # Returns nothing.
+    private
+    def categories_from_path(special_dir)
+      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
+        .split(File::SEPARATOR)
+        .reject do |c|
+        c.empty? || c == special_dir || c == basename
+      end
+      merge_data!({ "categories" => superdirs }, :source => "file path")
+    end
+
+    private
+    def populate_categories
+      merge_data!({
+        "categories" => (
+        Array(data["categories"]) + Utils.pluralized_array_from_hash(
+          data,
+          "category",
+          "categories"
+        )
+        ).map(&:to_s).flatten.uniq
+      })
+    end
+
+    private
+    def populate_tags
+      merge_data!({
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+      })
+    end
+
+    private
     def generate_excerpt
       if generate_excerpt?
         data["excerpt"] ||= Jekyll::Excerpt.new(self)
