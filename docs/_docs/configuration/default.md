@@ -59,6 +59,7 @@ show_dir_listing    : false
 permalink           : date
 paginate_path       : /page:num
 timezone            : null
+hardlinks           : false
 
 quiet               : false
 verbose             : false

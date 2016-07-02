@@ -108,6 +108,21 @@ class="flag">flags</code> (specified on the command-line) that control them.
       </td>
     </tr>
     <tr class="setting">
+        <p class="name"><strong>Hardlink static files</strong></p>
+        <p class="description">
+            Enable the hardlink feature. Creates hard links to static files in
+            the site destination directory rather than copying them. This
+            results in a significant performance improvement for large files,
+            but will not work if the site source and site destination are
+            on different files system nor if the file system does not support
+            hard links (notably FAT).
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">hardlinks: BOOL</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
       <td>
         <p class="name"><strong>Encoding</strong></p>
         <p class="description">

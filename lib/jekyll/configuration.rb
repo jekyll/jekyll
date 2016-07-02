@@ -53,6 +53,7 @@ module Jekyll
       "permalink"           => "date",
       "paginate_path"       => "/page:num",
       "timezone"            => nil, # use the local timezone
+      "hardlinks"           => false,
 
       "quiet"               => false,
       "verbose"             => false,

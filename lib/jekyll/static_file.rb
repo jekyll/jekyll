@@ -189,14 +189,16 @@ module Jekyll
     private
 
     def copy_file(dest_path)
-      if @site.safe || Jekyll.env == "production"
+      if @site.safe || Jekyll.env == "production" || !@site.config["hardlinks"]
         FileUtils.cp(path, dest_path)
       else
-        FileUtils.copy_entry(path, dest_path)
+        # Link to the real file, not a symlink.
+        FileUtils.ln(File.realpath(path), dest_path)
       end
 
       unless File.symlink?(dest_path)
-        File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
+        times = self.class.mtimes[path]
+        File.utime(times, times, dest_path)
       end
     end
   end
