@@ -1,0 +1,25 @@
+---
+version: "{build}"
+#branches:
+#  only:
+#    - master
+clone_depth: 10
+install:
+  - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
+  - ruby --version
+  - gem --version
+  - gem install bundler --quiet --no-ri --no-rdoc
+  - bundler --version
+  - bundle install -j4
+test_script:
+  - ./script/cibuild
+#artifacts:
+#  - path: pkg\*.gem
+
+environment:
+  matrix:
+    - ruby_version: "193"
+    - ruby_version: "200"
+    - ruby_version: "200-x64"
+    - ruby_version: "21"
+    - ruby_version: "21-x64"
