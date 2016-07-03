@@ -78,7 +78,7 @@ module Jekyll
     #
     # Returns the transformed contents.
     def transform
-      _renderer.transform
+      _renderer.convert(content)
     end
 
     # Determine the extension depending on content_type.
