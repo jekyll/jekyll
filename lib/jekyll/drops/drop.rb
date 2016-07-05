@@ -199,6 +199,10 @@ module Jekyll
           end
         end
       end
+
+      def fetch(*args, &block)
+        to_h.fetch(*args, &block)
+      end
     end
   end
 end
