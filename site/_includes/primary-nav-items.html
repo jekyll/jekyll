@@ -8,7 +8,7 @@
   <li class="{% if page.author %}current{% endif %}">
     <a href="/news/">News</a>
   </li>
-  <li>
+  <li class="{% if page.url contains '/help/' %}current{% endif %}">
     <a href="/help/">Help</a>
   </li>
   <li>
