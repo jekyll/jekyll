@@ -8,7 +8,7 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 
 ### Useful Guides
 
-- [Jekyll Tips](http://jekyll.tips) is a set of resources created by [CloudCannon](https://cloudcannon.com) to help folks get up and running with Jekyll. The cover all skill levels, and even include some great video tutorials.
+- [Jekyll Tips](http://jekyll.tips) is a set of resources created by [CloudCannon](https://cloudcannon.com) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
 - [Jekyll Cheatsheet](http://cheat.jekyll.tips) is a single-page resource for Jekyll filters, variables, and the like.
 - [“Creating and Hosting a Personal Site on GitHub”](http://jmcglone.com/guides/github-pages/)
 - [‘Build A Blog With Jekyll And GitHub Pages’ on Smashing Magazine](http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/)
