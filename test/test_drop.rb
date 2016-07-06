@@ -27,8 +27,16 @@ class TestDrop < JekyllUnitTest
       assert_equal "default", @drop.fetch("not_existing_key", "default")
     end
 
+    should "fetch default boolean value correctly" do
+      assert_equal false, @drop.fetch("bar", false)
+    end
+
     should "fetch default value from block if key is not found" do
       assert_equal "default bar", @drop.fetch("bar") { |el| "default #{el}" }
+    end
+
+    should "fetch default value from block first if both argument and block given" do
+      assert_equal "baz", @drop.fetch("bar", "default") { "baz" }
     end
   end
 end
