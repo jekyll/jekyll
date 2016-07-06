@@ -334,6 +334,18 @@ class TestConfiguration < JekyllUnitTest
         Jekyll.configuration(test_config.merge({ "config" => @paths[:other] }))
     end
 
+    should "load different config if specified with symbol key" do
+      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
+      allow(SafeYAML)
+        .to receive(:load_file)
+        .with(@paths[:other])
+        .and_return({ "baseurl" => "http://example.com" })
+      allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
+      assert_equal \
+        site_configuration({ "baseurl" => "http://example.com" }),
+        Jekyll.configuration(test_config.merge({ :config => @paths[:other] }))
+    end
+
     should "load default config if path passed is empty" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
