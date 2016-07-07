@@ -199,6 +199,17 @@ module Jekyll
           end
         end
       end
+
+      # Imitate Hash.fetch method in Drop
+      #
+      # Returns value if key is present in Drop, otherwise returns default value
+      # KeyError is raised if key is not present and no default value given
+      def fetch(key, default = nil, &block)
+        return self[key] if key?(key)
+        raise KeyError, %(key not found: "#{key}") if default.nil? && block.nil?
+        return yield(key) unless block.nil?
+        return default unless default.nil?
+      end
     end
   end
 end
