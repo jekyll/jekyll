@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 
 rubies=()
-for r in jruby ruby; do
+for r in ruby jruby; do
   if which "$r" > /dev/null 2>&1
   then
     echo $r
