@@ -329,7 +329,6 @@ class TestConfiguration < JekyllUnitTest
         .with(@paths[:other])
         .and_return({ "baseurl" => "http://wahoo.dev" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
-      Jekyll.configuration({ "config" => @paths[:other] })
       assert_equal \
         site_configuration({ "baseurl" => "http://wahoo.dev" }),
         Jekyll.configuration(test_config.merge({ "config" => @paths[:other] }))
