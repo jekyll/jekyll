@@ -1,7 +1,11 @@
 module Jekyll
   module Tags
     class Link < Liquid::Tag
-      TAG_NAME = "link".freeze
+      class << self
+        def tag_name
+          self.name.split("::").last.downcase
+        end
+      end
 
       def initialize(tag_name, relative_path, tokens)
         super
@@ -17,7 +21,7 @@ module Jekyll
         end
 
         raise ArgumentError, <<eos
-Could not find document '#{@relative_path}' in tag '#{TAG_NAME}'.
+Could not find document '#{@relative_path}' in tag '#{self.class.tag_name}'.
 
 Make sure the document exists and the path is correct.
 eos
@@ -26,4 +30,4 @@ eos
   end
 end
 
-Liquid::Template.register_tag(Jekyll::Tags::Link::TAG_NAME, Jekyll::Tags::Link)
+Liquid::Template.register_tag(Jekyll::Tags::Link.tag_name, Jekyll::Tags::Link)
