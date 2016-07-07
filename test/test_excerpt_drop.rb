@@ -29,6 +29,10 @@ class TestExcerptDrop < JekyllUnitTest
       assert_equal @excerpt_drop["layout"], @doc_drop["layout"]
     end
 
+    should "be inspectable" do
+      refute_empty @excerpt_drop.inspect
+    end
+
     should "inherit values from the document" do
       assert_equal @excerpt_drop.keys.sort, @doc_drop.keys.sort
     end
