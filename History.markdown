@@ -163,6 +163,7 @@
   * Add generator-jekyllized to third-party plugins (#5027)
   * Add Jekyll Art Hallery generator plugin to list of third-party plugins (#5043)
   * Add Formingo to the list of Jekyll form SaaS (#5054)
+  * Highlight help nav item when navigated to. (#5058)
 
 ## 3.1.6 / 2016-05-19
 
