@@ -32,6 +32,7 @@
   * Move bin/jekyll to exe/jekyll to prevent collision with binstubs (#5014)
   * Cleaning up site template & theme updates. (#4922)
   * Add fetch method to Drops (#5056)
+  * Extract tag name to class method (#5063)
 
 ### Bug Fixes
 
