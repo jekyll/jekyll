@@ -102,8 +102,8 @@ module Jekyll
       #
       # Returns true if the given key is present
       def key?(key)
-        if self.class.mutable && @mutations.key?(key)
-          true
+        if self.class.mutable
+          @mutations.key?(key)
         else
           respond_to?(key) || fallback_data.key?(key)
         end
