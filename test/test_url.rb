@@ -70,5 +70,15 @@ class TestURL < JekyllUnitTest
         :placeholders => matching_doc.url_placeholders
       ).to_s
     end
+
+    should "throw an exception if the URL contains a colon" do
+      url = URL.new(
+        :template     => "/:x/:y/:z",
+        :placeholders => { :x => "foo", :z => "bar" }
+      )
+      assert_raises Jekyll::Errors::InvalidURLError do
+        url.to_s
+      end
+    end
   end
 end

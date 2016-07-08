@@ -35,8 +35,15 @@ module Jekyll
     # The generated relative URL of the resource
     #
     # Returns the String URL
+    # Raises a Jekyll::Errors::InvalidURLError if the relative URL contains a colon
     def to_s
-      sanitize_url(generated_permalink || generated_url)
+      sanitized_url = sanitize_url(generated_permalink || generated_url)
+      if sanitized_url.include?(":")
+        raise Jekyll::Errors::InvalidURLError,
+          "The URL #{sanitized_url} is invalid because it contains a colon."
+      else
+        sanitized_url
+      end
     end
 
     # Generates a URL from the permalink
