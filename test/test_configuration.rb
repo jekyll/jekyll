@@ -327,10 +327,10 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML)
         .to receive(:load_file)
         .with(@paths[:other])
-        .and_return({ "baseurl" => "http://wahoo.dev" })
+        .and_return({ "baseurl" => "http://example.com" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://wahoo.dev" }),
+        site_configuration({ "baseurl" => "http://example.com" }),
         Jekyll.configuration(test_config.merge({ "config" => @paths[:other] }))
     end
 
@@ -378,7 +378,7 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML)
         .to receive(:load_file)
         .with(@paths[:other])
-        .and_return({ "baseurl" => "http://wahoo.dev" })
+        .and_return({ "baseurl" => "http://example.com" })
       allow($stdout)
         .to receive(:puts)
         .with("Configuration file: #{@paths[:default]}")
@@ -386,7 +386,7 @@ class TestConfiguration < JekyllUnitTest
         .to receive(:puts)
         .with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://wahoo.dev" }),
+        site_configuration({ "baseurl" => "http://example.com" }),
         Jekyll.configuration(
           test_config.merge({ "config" => [@paths[:default], @paths[:other]] })
         )
