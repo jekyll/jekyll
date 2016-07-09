@@ -109,6 +109,7 @@
   * rubocop: lib/jekyll/document.rb style fixes (#5030)
   * Remove ruby-head from Travis matrix & fix jruby failures (#5015)
   * Remove useless statement from Configuration test (#5065)
+  * Change baseurl to example.com for some test cases (#5068)
 
 ### Site Enhancements
 
