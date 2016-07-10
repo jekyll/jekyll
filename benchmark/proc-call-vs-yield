@@ -1,0 +1,14 @@
+require 'benchmark/ips'
+
+def fast
+  yield
+end
+
+def slow(&block)
+  block.call
+end
+
+Benchmark.ips do |x|
+  x.report('yield') { fast { (0..9).to_a } }
+  x.report('block.call') { slow { (0..9).to_a } }
+end

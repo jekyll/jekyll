@@ -1,7 +1,3 @@
 module Jekyll
-
-  class Generator < Plugin
-
-  end
-
+  Generator = Class.new(Plugin)
 end

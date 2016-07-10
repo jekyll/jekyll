@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/jekyll'
+require 'benchmark/ips'
+
+base_directory = Dir.pwd
+
+Benchmark.ips do |x|
+  #
+  # Does not include the base_directory
+  #
+  x.report('with no questionable path') do
+    Jekyll.sanitized_path(base_directory, '')
+  end
+  x.report('with a single-part questionable path') do
+    Jekyll.sanitized_path(base_directory, 'thingy')
+  end
+  x.report('with a multi-part questionable path') do
+    Jekyll.sanitized_path(base_directory, 'thingy/in/my/soup')
+  end
+  x.report('with a single-part traversal path') do
+    Jekyll.sanitized_path(base_directory, '../thingy')
+  end
+  x.report('with a multi-part traversal path') do
+    Jekyll.sanitized_path(base_directory, '../thingy/in/my/../../soup')
+  end
+
+  #
+  # Including the base_directory
+  #
+  x.report('with the exact same paths') do
+    Jekyll.sanitized_path(base_directory, base_directory)
+  end
+  x.report('with a single-part absolute path including the base_directory') do
+    Jekyll.sanitized_path(base_directory, File.join(base_directory, 'thingy'))
+  end
+  x.report('with a multi-part absolute path including the base_directory') do
+    Jekyll.sanitized_path(base_directory, File.join(base_directory, 'thingy/in/my/soup'))
+  end
+  x.report('with a single-part traversal path including the base_directory') do
+    Jekyll.sanitized_path(base_directory, File.join(base_directory, 'thingy/..'))
+  end
+  x.report('with a multi-part traversal path including the base_directory') do
+    Jekyll.sanitized_path(base_directory, File.join('thingy/in/my/../../soup'))
+  end
+end
