@@ -25,4 +25,4 @@ See the [History][] page for more information on this release.
 [#{{ issue }}]: {{ site.repository }}/issues/{{ issue }}
 {% endfor %}
 
-[History]: /docs/history/#102__20130512
+[History]: /docs/history/#v1-0-2

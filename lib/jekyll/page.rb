@@ -7,12 +7,27 @@ module Jekyll
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
 
+    alias_method :extname, :ext
+
+    FORWARD_SLASH = "/".freeze
+
     # Attributes for Liquid templates
-    ATTRIBUTES_FOR_LIQUID = %w[
-      url
+    ATTRIBUTES_FOR_LIQUID = %w(
       content
+      dir
+      name
       path
-    ]
+      url
+    ).freeze
+
+    # A set of extensions that are considered HTML or HTML-like so we
+    # should not alter them,  this includes .xhtml through XHTM5.
+
+    HTML_EXTENSIONS = %w(
+      .html
+      .xhtml
+      .htm
+    ).freeze
 
     # Initialize a new Page.
     #
@@ -25,9 +40,16 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
+      @path = site.in_source_dir(base, dir, name)
 
-      self.process(name)
-      self.read_yaml(File.join(base, dir), name)
+      process(name)
+      read_yaml(File.join(base, dir), name)
+
+      data.default_proc = proc do |_, key|
+        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+      end
+
+      Jekyll::Hooks.trigger :pages, :post_init, self
     end
 
     # The generated directory into which the page will be placed
@@ -36,7 +58,12 @@ module Jekyll
     #
     # Returns the String destination directory.
     def dir
-      url[-1, 1] == '/' ? url : File.dirname(url)
+      if url.end_with?(FORWARD_SLASH)
+        url
+      else
+        url_dir = File.dirname(url)
+        url_dir.end_with?(FORWARD_SLASH) ? url_dir : "#{url_dir}/"
+      end
     end
 
     # The full path and filename of the post. Defined in the YAML of the post
@@ -44,28 +71,19 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      return nil if self.data.nil? || self.data['permalink'].nil?
-      if site.config['relative_permalinks']
-        File.join(@dir, self.data['permalink'])
-      else
-        self.data['permalink']
-      end
+      data.nil? ? nil : data["permalink"]
     end
 
     # The template of the permalink.
     #
     # Returns the template String.
     def template
-      if self.site.permalink_style == :pretty
-        if index? && html?
-          "/:path/"
-        elsif html?
-          "/:path/:basename/"
-        else
-          "/:path/:basename:output_ext"
-        end
-      else
+      if !html?
         "/:path/:basename:output_ext"
+      elsif index?
+        "/:path/"
+      else
+        Utils.add_permalink_suffix("/:path/:basename", site.permalink_style)
       end
     end
 
@@ -74,9 +92,9 @@ module Jekyll
     # Returns the String url.
     def url
       @url ||= URL.new({
-        :template => template,
+        :template     => template,
         :placeholders => url_placeholders,
-        :permalink => permalink
+        :permalink    => permalink
       }).to_s
     end
 
@@ -85,8 +103,8 @@ module Jekyll
     def url_placeholders
       {
         :path       => @dir,
-        :basename   => self.basename,
-        :output_ext => self.output_ext
+        :basename   => basename,
+        :output_ext => output_ext
       }
     end
 
@@ -97,7 +115,7 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0 .. -self.ext.length-1]
+      self.basename = name[0..-ext.length - 1]
     end
 
     # Add any necessary layouts to this post
@@ -107,24 +125,22 @@ module Jekyll
     #
     # Returns nothing.
     def render(layouts, site_payload)
-      payload = {
-        "page" => self.to_liquid,
-        'paginator' => pager.to_liquid
-      }.deep_merge(site_payload)
+      site_payload["page"] = to_liquid
+      site_payload["paginator"] = pager.to_liquid
 
-      do_layout(payload, layouts)
+      do_layout(site_payload, layouts)
     end
 
     # The path to the source file
     #
     # Returns the path to the source file
     def path
-      self.data.fetch('path', self.relative_path.sub(/\A\//, ''))
+      data.fetch("path") { relative_path }
     end
 
     # The path to the page source file, relative to the site source
     def relative_path
-      File.join(@dir, @name)
+      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
     end
 
     # Obtain destination path.
@@ -133,28 +149,33 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      path = File.join(dest, self.url)
-      path = File.join(path, "index.html") if self.url =~ /\/$/
+      path = site.in_dest_dir(dest, URL.unescape_path(url))
+      path = File.join(path, "index") if url.end_with?("/")
+      path << output_ext unless path.end_with? output_ext
       path
     end
 
     # Returns the object as a debug String.
     def inspect
-      "#<Jekyll:Page @name=#{self.name.inspect}>"
+      "#<Jekyll:Page @name=#{name.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.
     def html?
-      output_ext == '.html'
+      HTML_EXTENSIONS.include?(output_ext)
     end
 
     # Returns the Boolean of whether this Page is an index file or not.
     def index?
-      basename == 'index'
+      basename == "index"
     end
 
-    def uses_relative_permalinks
-      permalink && @dir != "" && site.config['relative_permalinks']
+    def trigger_hooks(hook_name, *args)
+      Jekyll::Hooks.trigger :pages, hook_name, self, *args
+    end
+
+    def write?
+      true
     end
   end
 end

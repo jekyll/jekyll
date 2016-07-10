@@ -1,0 +1,5 @@
+---
+permalink: /contacts/humans/
+---
+
+I should be output to `/contacts/humans/index.html`.

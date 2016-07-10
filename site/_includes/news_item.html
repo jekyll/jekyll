@@ -5,20 +5,21 @@
     </a>
   </h2>
   <span class="post-category">
-    {% for category in post.categories %}
-    <span class="label">{{ category }}</span>
-    {% endfor %}
+    <span class="label">
+      {{ post.categories | array_to_sentence_string }}
+    </span>
   </span>
   <div class="post-meta">
     <span class="post-date">
       {{ post.date | date_to_string }}
     </span>
     <a href="https://github.com/{{ post.author }}" class="post-author">
-      <img src="https://github.com/{{ post.author }}.png" class="avatar" />
+      {% assign author = post.author %}
+      {% avatar user=author size=24 %}
       {{ post.author }}
     </a>
   </div>
-  <p class="post-content">
+  <div class="post-content">
     {{ post.content }}
-  </p>
+  </div>
 </article>

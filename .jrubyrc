@@ -1,0 +1,3 @@
+backtrace.mask=true
+backtrace.color=true
+backtrace.style=mri

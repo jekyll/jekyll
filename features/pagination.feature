@@ -4,17 +4,20 @@ Feature: Site pagination
   I want divide the posts in several pages
 
   Scenario Outline: Paginate with N posts per page
-    Given I have a configuration file with "paginate" set to "<num>"
+    Given I have a configuration file with:
+      | key      | value             |
+      | paginate | <num>             |
+      | gems     | [jekyll-paginate] |
     And I have a _layouts directory
     And I have an "index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
     And I have the following posts:
-      | title     | date      | layout  | content                                |
+      | title     | date       | layout  | content                                |
       | Wargames  | 2009-03-27 | default | The only winning move is not to play.  |
       | Wargames2 | 2009-04-27 | default | The only winning move is not to play2. |
       | Wargames3 | 2009-05-27 | default | The only winning move is not to play3. |
       | Wargames4 | 2009-06-27 | default | The only winning move is not to play4. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site/page<exist> directory should exist
     And the "_site/page<exist>/index.html" file should exist
     And I should see "<posts>" in "_site/page<exist>/index.html"
@@ -32,16 +35,17 @@ Feature: Site pagination
       | paginate      | 1                              |
       | paginate_path | /blog/page-:num                |
       | permalink     | /blog/:year/:month/:day/:title |
+      | gems          | [jekyll-paginate]              |
     And I have a blog directory
     And I have an "blog/index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
     And I have the following posts:
-      | title     | date      | layout  | content                                |
+      | title     | date       | layout  | content                                |
       | Wargames  | 2009-03-27 | default | The only winning move is not to play.  |
       | Wargames2 | 2009-04-27 | default | The only winning move is not to play2. |
       | Wargames3 | 2009-05-27 | default | The only winning move is not to play3. |
       | Wargames4 | 2009-06-27 | default | The only winning move is not to play4. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site/blog/page-<exist> directory should exist
     And the "_site/blog/page-<exist>/index.html" file should exist
     And I should see "<posts>" in "_site/blog/page-<exist>/index.html"
@@ -59,6 +63,7 @@ Feature: Site pagination
       | paginate      | 1                              |
       | paginate_path | /blog/page/:num                |
       | permalink     | /blog/:year/:month/:day/:title |
+      | gems          | [jekyll-paginate]              |
     And I have a blog directory
     And I have an "blog/index.html" page that contains "{{ paginator.posts.size }}"
     And I have an "index.html" page that contains "Don't pick me!"
@@ -69,7 +74,7 @@ Feature: Site pagination
       | Wargames2 | 2009-04-27 | default | The only winning move is not to play2. |
       | Wargames3 | 2009-05-27 | default | The only winning move is not to play3. |
       | Wargames4 | 2009-06-27 | default | The only winning move is not to play4. |
-    When I run jekyll
+    When I run jekyll build
     Then the _site/blog/page/<exist> directory should exist
     And the "_site/blog/page/<exist>/index.html" file should exist
     And I should see "<posts>" in "_site/blog/page/<exist>/index.html"

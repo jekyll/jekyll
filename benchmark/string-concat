@@ -1,0 +1,8 @@
+require 'benchmark/ips'
+
+url = "http://jekyllrb.com"
+
+Benchmark.ips do |x|
+  x.report('+=') { url += '/' }
+  x.report('<<') { url << '/' }
+end

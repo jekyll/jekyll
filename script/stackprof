@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+case "$1" in
+  cpu|object) STACKPROF_MODE="$1"; shift ;;
+  *) STACKPROF_MODE="cpu" ;;
+esac
+
+export BENCHMARK=true
+command -v stackprof > /dev/null || script/bootstrap
+
+TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site'})"
+PROF_OUTPUT_FILE=tmp/stackprof-${STACKPROF_MODE}-$(date +%Y%m%d%H%M).dump
+
+echo Stackprof Mode: $STACKPROF_MODE
+test -f "$PROF_OUTPUT_FILE" || {
+  bundle exec ruby -r./lib/jekyll -rstackprof \
+    -e "StackProf.run(mode: :${STACKPROF_MODE}, interval: 100, out: '${PROF_OUTPUT_FILE}') { ${TEST_SCRIPT} }"
+}
+
+bundle exec stackprof $PROF_OUTPUT_FILE $@
