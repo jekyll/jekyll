@@ -1,8 +1,8 @@
 ---
 layout: docs
 title: Welcome
-next_section: quickstart
 permalink: /docs/home/
+redirect_from: /docs/index.html
 ---
 
 This site aims to be a comprehensive guide to Jekyll. We’ll cover topics such
@@ -15,12 +15,11 @@ development of Jekyll itself.
 
 Jekyll is a simple, blog-aware, static site generator. It takes a template
 directory containing raw text files in various formats, runs it through
-[Markdown](http://daringfireball.net/projects/markdown/) (or
-[Textile](http://redcloth.org/textile)) and
-[Liquid](https://github.com/Shopify/liquid/wiki)
-converters, and spits out a complete, ready-to-publish static website suitable
+a converter (like [Markdown](https://daringfireball.net/projects/markdown/))
+and our [Liquid](https://github.com/Shopify/liquid/wiki) renderer, and
+spits out a complete, ready-to-publish static website suitable
 for serving with your favorite web server. Jekyll also happens to be the engine
-behind [GitHub Pages](http://pages.github.com), which means you can use Jekyll
+behind [GitHub Pages](https://pages.github.com), which means you can use Jekyll
 to host your project’s page, blog, or website from GitHub’s servers **for
 free**.
 

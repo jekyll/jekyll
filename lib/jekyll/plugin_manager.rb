@@ -17,33 +17,32 @@ module Jekyll
     def conscientious_require
       require_plugin_files
       require_gems
+      deprecation_checks
     end
 
     # Require each of the gem plugins specified.
     #
     # Returns nothing.
     def require_gems
-      site.gems.each do |gem|
-        if plugin_allowed?(gem)
-          Jekyll.logger.debug("PluginManager:", "Requiring #{gem}")
-          require gem
-        end
-      end
+      Jekyll::External.require_with_graceful_fail(
+        site.gems.select { |gem| plugin_allowed?(gem) }
+      )
     end
 
     def self.require_from_bundler
       if !ENV["JEKYLL_NO_BUNDLER_REQUIRE"] && File.file?("Gemfile")
         require "bundler"
-        Bundler.setup # puts all groups on the load path
-        required_gems = Bundler.require(:jekyll_plugins) # requires the gems in this group only
-        Jekyll.logger.debug("PluginManager:", "Required #{required_gems.map(&:name).join(', ')}")
+
+        Bundler.setup
+        required_gems = Bundler.require(:jekyll_plugins)
+        message = "Required #{required_gems.map(&:name).join(", ")}"
+        Jekyll.logger.debug("PluginManager:", message)
         ENV["JEKYLL_NO_BUNDLER_REQUIRE"] = "true"
+
         true
       else
         false
       end
-    rescue LoadError, Bundler::GemfileNotFound
-      false
     end
 
     # Check whether a gem plugin is allowed to be used during this build.
@@ -61,7 +60,7 @@ module Jekyll
     # Returns an array of strings, each string being the name of a gem name
     #   that is allowed to be used.
     def whitelist
-      @whitelist ||= Array[site.config['whitelist']].flatten
+      @whitelist ||= Array[site.config["whitelist"]].flatten
     end
 
     # Require all .rb files if safe mode is off
@@ -69,10 +68,9 @@ module Jekyll
     # Returns nothing.
     def require_plugin_files
       unless site.safe
-        plugins_path.each do |plugins|
-          Dir[File.join(plugins, "**", "*.rb")].sort.each do |f|
-            require f
-          end
+        plugins_path.each do |plugin_search_path|
+          plugin_files = Utils.safe_glob(plugin_search_path, File.join("**", "*.rb"))
+          Jekyll::External.require_with_graceful_fail(plugin_files)
         end
       end
     end
@@ -81,12 +79,21 @@ module Jekyll
     #
     # Returns an Array of plugin search paths
     def plugins_path
-      if (site.config['plugins'] == Jekyll::Configuration::DEFAULTS['plugins'])
-        [site.in_source_dir(site.config['plugins'])]
+      if site.config["plugins_dir"].eql? Jekyll::Configuration::DEFAULTS["plugins_dir"]
+        [site.in_source_dir(site.config["plugins_dir"])]
       else
-        Array(site.config['plugins']).map { |d| File.expand_path(d) }
+        Array(site.config["plugins_dir"]).map { |d| File.expand_path(d) }
       end
     end
 
+    def deprecation_checks
+      pagination_included = (site.config["gems"] || []).include?("jekyll-paginate") ||
+        defined?(Jekyll::Paginate)
+      if site.config["paginate"] && !pagination_included
+        Jekyll::Deprecator.deprecation_message "You appear to have pagination " \
+          "turned on, but you haven't included the `jekyll-paginate` gem. " \
+          "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
+      end
+    end
   end
 end

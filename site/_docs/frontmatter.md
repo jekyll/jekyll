@@ -1,8 +1,6 @@
 ---
 layout: docs
 title: Front Matter
-prev_section: configuration
-next_section: posts
 permalink: /docs/frontmatter/
 ---
 
@@ -38,10 +36,10 @@ relies on.
 <div class="note">
   <h5>ProTip™: Front Matter Variables Are Optional</h5>
   <p>
-    If you want to use <a href="../variables/">Liquid tags and variables</a> but
-    don’t need anything in your front matter, just leave it empty! The set of
-    triple-dashed lines with nothing in between will still get Jekyll to process
-    your file. (This is useful for things like CSS and RSS feeds!)
+    If you want to use <a href="../variables/">Liquid tags and variables</a>
+    but don’t need anything in your front matter, just leave it empty! The set
+    of triple-dashed lines with nothing in between will still get Jekyll to
+    process your file. (This is useful for things like CSS and RSS feeds!)
   </p>
 </div>
 
@@ -81,7 +79,7 @@ front matter of a page or post.
         <p>
 
           If you need your processed blog post URLs to be something other than
-          the default <code>/year/month/day/title.html</code> then you can set
+          the site-wide style (default <code>/year/month/day/title.html</code>), then you can set
           this variable and it will be used as the final URL.
 
         </p>
@@ -95,38 +93,6 @@ front matter of a page or post.
         <p>
           Set to false if you don’t want a specific post to show up when the
           site is generated.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p style="margin-bottom: 5px;"><code>category</code></p>
-        <p><code>categories</code></p>
-      </td>
-      <td>
-        <p>
-
-          Instead of placing posts inside of folders, you can specify one or
-          more categories that the post belongs to. When the site is generated
-          the post will act as though it had been set with these categories
-          normally. Categories (plural key) can be specified as a <a
-          href="http://en.wikipedia.org/wiki/YAML#Lists">YAML list</a> or a
-          space-separated string.
-
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>tags</code></p>
-      </td>
-      <td>
-        <p>
-
-          Similar to categories, one or multiple tags can be added to a post.
-          Also like categories, tags can be specified as a YAML list or a space-
-          separated string.
-
         </p>
       </td>
     </tr>
@@ -172,7 +138,41 @@ These are available out-of-the-box to be used in the front matter for a post.
       <td>
         <p>
           A date here overrides the date from the name of the post. This can be
-          used to ensure correct sorting of posts.
+          used to ensure correct sorting of posts. A date is specified in the
+          format <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code>; hours, minutes, seconds, and timezone offset
+          are optional.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p style="margin-bottom: 5px;"><code>category</code></p>
+        <p><code>categories</code></p>
+      </td>
+      <td>
+        <p>
+
+          Instead of placing posts inside of folders, you can specify one or
+          more categories that the post belongs to. When the site is generated
+          the post will act as though it had been set with these categories
+          normally. Categories (plural key) can be specified as a <a
+          href="https://en.wikipedia.org/wiki/YAML#Lists">YAML list</a> or a
+          comma-separated string.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>tags</code></p>
+      </td>
+      <td>
+        <p>
+
+          Similar to categories, one or multiple tags can be added to a post.
+          Also like categories, tags can be specified as a YAML list or a
+          comma-separated string.
+
         </p>
       </td>
     </tr>
@@ -183,9 +183,9 @@ These are available out-of-the-box to be used in the front matter for a post.
 <div class="note">
   <h5>ProTip™: Don't repeat yourself</h5>
   <p>
-    If you don't want to repeat your frequently used front matter variables over and over,
-    just define <a href="../configuration/#front-matter-defaults" title="Front Matter defaults">defaults</a>
-    for them and only override them where necessary (or not at all). This works both for predefined
-    and custom variables.
+    If you don't want to repeat your frequently used front matter variables
+    over and over, just define <a href="../configuration/#front-matter-defaults" title="Front Matter defaults">defaults</a>
+    for them and only override them where necessary (or not at all). This works
+    both for predefined and custom variables.
   </p>
 </div>

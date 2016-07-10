@@ -1,22 +1,20 @@
 ---
 layout: docs
 title: Directory structure
-prev_section: usage
-next_section: configuration
 permalink: /docs/structure/
 ---
 
 Jekyll is, at its core, a text transformation engine. The concept behind the
 system is this: you give it text written in your favorite markup language, be
 that Markdown, Textile, or just plain HTML, and it churns that through a layout
-or series of layout files. Throughout that process you can tweak how you want
-the site URLs to look, what data gets displayed in the layout, and more. This is
-all done through editing text files, and the static web site is the final
+or a series of layout files. Throughout that process you can tweak how you want
+the site URLs to look, what data gets displayed in the layout, and more. This
+is all done through editing text files; the static web site is the final
 product.
 
 A basic Jekyll site usually looks something like this:
 
-{% highlight bash %}
+{% highlight shell %}
 .
 ├── _config.yml
 ├── _drafts
@@ -34,6 +32,7 @@ A basic Jekyll site usually looks something like this:
 ├── _data
 |   └── members.yml
 ├── _site
+├── .jekyll-metadata
 └── index.html
 {% endhighlight %}
 
@@ -69,7 +68,9 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Drafts are unpublished posts. The format of these files is without a date: <code>title.MARKUP</code>. Learn how to <a href="../drafts/">work with drafts</a>.
+          Drafts are unpublished posts. The format of these files is without a
+          date: <code>title.MARKUP</code>. Learn how to <a href="../drafts/">
+          work with drafts</a>.
 
         </p>
       </td>
@@ -97,8 +98,9 @@ An overview of what each of these does:
       <td>
         <p>
 
-          These are the templates that wrap posts. Layouts are chosen on a post-
-          by-post basis in the <a href="../frontmatter/">YAML Front Matter</a>,
+          These are the templates that wrap posts. Layouts are chosen on a
+          post-by-post basis in the
+          <a href="../frontmatter/">YAML Front Matter</a>,
           which is described in the next section. The liquid tag
           <code>{% raw %}{{ content }}{% endraw %}</code>
           is used to inject content into the web page.
@@ -113,12 +115,12 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Your dynamic content, so to speak. The naming convention of these files is
-          important, and must follow the format:
+          Your dynamic content, so to speak. The naming convention of these
+          files is important, and must follow the format:
           <code>YEAR-MONTH-DAY-title.MARKUP</code>.
-          The <a href="../permalinks/">permalinks</a> can be customized for each
-          post, but the date and markup language are determined solely by the
-          file name.
+          The <a href="../permalinks/">permalinks</a> can be customized for
+          each post, but the date and markup language are determined solely by
+          the file name.
 
         </p>
       </td>
@@ -130,10 +132,13 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Well-formatted site data should be placed here. The jekyll engine will
-          autoload all yaml files (ends with <code>.yml</code> or <code>.yaml</code>)
-          in this directory. If there's a file <code>members.yml</code> under the directory,
-          then you can access contents of the file through <code>site.data.members</code>.
+          Well-formatted site data should be placed here. The Jekyll engine
+          will autoload all YAML files in this directory (using either the
+          <code>.yml</code>, <code>.yaml</code>, <code>.json</code> or
+          <code>.csv</code> formats and extensions) and they will be
+          accessible via `site.data`. If there's a file
+          <code>members.yml</code> under the directory, then you can access
+          contents of the file through <code>site.data.members</code>.
 
         </p>
       </td>
@@ -148,6 +153,22 @@ An overview of what each of these does:
           This is where the generated site will be placed (by default) once
           Jekyll is done transforming it. It’s probably a good idea to add this
           to your <code>.gitignore</code> file.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>.jekyll-metadata</code></p>
+      </td>
+      <td>
+        <p>
+
+          This helps Jekyll keep track of which files have not been modified
+          since the site was last built, and which files will need to be
+          regenerated on the next build. This file will not be included in the
+          generated site. It’s probably a good idea to add this to your
+          <code>.gitignore</code> file.
 
         </p>
       </td>

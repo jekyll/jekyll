@@ -8,6 +8,6 @@ Benchmark.ips do |x|
   x.report('#tr')    { str.tr('some', 'a')    }
   x.report('#gsub')  { str.gsub('some', 'a')  }
   x.report('#gsub!') { str.gsub!('some', 'a') }
-  x.report('#sub')   { str.sub('some', 'a')  }
-  x.report('#sub!')  { str.sub!('some', 'a') }
+  x.report('#sub')   { str.sub('some', 'a')   }
+  x.report('#sub!')  { str.sub!('some', 'a')  }
 end
