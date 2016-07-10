@@ -15,6 +15,10 @@ class TestFilters < JekyllUnitTest
     end
   end
 
+  class SelectDummy
+    def select; end
+  end
+
   context "filters" do
     setup do
       @filter = JekyllFilter.new({
@@ -530,6 +534,11 @@ class TestFilters < JekyllUnitTest
         assert_equal 1, results.length
         assert_equal 4.7, results[0]["rating"]
       end
+
+      should "always return an array if the object responds to `select`" do
+        results = @filter.where(SelectDummy.new, "obj", "1 == 1")
+        assert_equal [], results
+      end
     end
 
     context "where_exp filter" do
@@ -601,6 +610,11 @@ class TestFilters < JekyllUnitTest
         results = @filter.where_exp(posts, "obj", "obj.title == 'Foo Bar'")
         assert_equal 1, results.length
         assert_equal site.posts.find { |p| p.title == "Foo Bar" }, results.first
+      end
+
+      should "always return an array if the object responds to `select`" do
+        results = @filter.where_exp(SelectDummy.new, "obj", "1 == 1")
+        assert_equal [], results
       end
     end
 
