@@ -16,4 +16,4 @@ Jekyll 2.2.0 contains a few key updates:
    will now work properly).
 
 As always, a full list of the updates are on the
-[history page](/docs/history#v2-2-0). Happy Jekylling!
+[history page](/docs/history/#v2-2-0). Happy Jekylling!

@@ -12,7 +12,8 @@ Feature: Post excerpts
       | title  | date       | layout | content             |
       | entry1 | 2007-12-31 | post   | content for entry1. |
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see exactly "<p>content for entry1.</p>" in "_site/index.html"
 
   Scenario: An excerpt from a post with a layout
@@ -24,7 +25,8 @@ Feature: Post excerpts
       | title  | date       | layout | content             |
       | entry1 | 2007-12-31 | post   | content for entry1. |
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And the _site/2007 directory should exist
     And the _site/2007/12 directory should exist
     And the _site/2007/12/31 directory should exist
@@ -41,10 +43,11 @@ Feature: Post excerpts
       | title  | date       | layout | content             |
       | entry1 | 2007-12-31 | post   | content for entry1. |
     When I run jekyll build
-    Then the _site directory should exist
+    Then I should get a zero exit status
+    And the _site directory should exist
     And the _site/2007 directory should exist
     And the _site/2007/12 directory should exist
     And the _site/2007/12/31 directory should exist
     And the "_site/2007/12/31/entry1.html" file should exist
-    And I should see exactly "<p>content for entry1.</p>" in "_site/index.html"
-    And I should see exactly "<html><head></head><body><p>content for entry1.</p></body></html>" in "_site/2007/12/31/entry1.html"
+    And I should see "<p>content for entry1.</p>" in "_site/index.html"
+    And I should see "<html><head></head><body><p>content for entry1.</p>\n</body></html>" in "_site/2007/12/31/entry1.html"

@@ -1,12 +1,17 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 script/branding
 
 set -e
 
-if test -z "$TEST_SUITE"; then
-  script/test
+if [[ -z "$TEST_SUITE" ]]
+then
+  script/test  ci
   script/cucumber
-else
+elif [[ -x "script/$TEST_SUITE" ]]
+then
   script/$TEST_SUITE
+else
+  echo "Unknown test suite."
+  exit 1
 fi

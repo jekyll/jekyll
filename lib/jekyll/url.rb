@@ -1,4 +1,4 @@
-require 'uri'
+require "uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
@@ -11,7 +11,6 @@ require 'uri'
 #
 module Jekyll
   class URL
-
     # options - One of :permalink or :template must be supplied.
     #           :template     - The String used as template for URL generation,
     #                           for example "/:path/:basename:output_ext", where
@@ -44,12 +43,12 @@ module Jekyll
     #
     # Returns the _unsanitized String URL
     def generated_permalink
-      (@generated_permlink ||= generate_url(@permalink)) if @permalink
+      (@generated_permalink ||= generate_url(@permalink)) if @permalink
     end
 
     # Generates a URL from the template
     #
-    # Returns the _unsanitized String URL
+    # Returns the unsanitized String URL
     def generated_url
       @generated_url ||= generate_url(@template)
     end
@@ -57,28 +56,43 @@ module Jekyll
     # Internal: Generate the URL by replacing all placeholders with their
     # respective values in the given template
     #
-    # Returns the _unsanitizied_ String URL
+    # Returns the unsanitized String URL
     def generate_url(template)
-      @placeholders.inject(template) do |result, token|
-        break result if result.index(':').nil?
-        result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
+      if @placeholders.is_a? Drops::UrlDrop
+        generate_url_from_drop(template)
+      else
+        generate_url_from_hash(template)
       end
     end
 
-    # Returns a sanitized String URL
-    def sanitize_url(in_url)
-      url = in_url \
-        # Remove all double slashes
-        .gsub(/\/\//, '/') \
-        # Remove every URL segment that consists solely of dots
-        .split('/').reject{ |part| part =~ /^\.+$/ }.join('/') \
-        # Always add a leading slash
-        .gsub(/\A([^\/])/, '/\1')
+    def generate_url_from_hash(template)
+      @placeholders.inject(template) do |result, token|
+        break result if result.index(":").nil?
+        if token.last.nil?
+          # Remove leading "/" to avoid generating urls with `//`
+          result.gsub(%r!/:#{token.first}!, "")
+        else
+          result.gsub(%r!:#{token.first}!, self.class.escape_path(token.last))
+        end
+      end
+    end
 
-      # Append a trailing slash to the URL if the unsanitized URL had one
-      url << "/" if in_url[-1].eql?('/')
+    def generate_url_from_drop(template)
+      template.gsub(%r!:([a-z_]+)!) do |match|
+        replacement = @placeholders.public_send(match.sub(":".freeze, "".freeze))
+        if replacement.nil?
+          "".freeze
+        else
+          self.class.escape_path(replacement)
+        end
+      end.gsub(%r!//!, "/".freeze)
+    end
 
-      url
+    # Returns a sanitized String URL, stripping "../../" and multiples of "/",
+    # as well as the beginning "/" so we can enforce and ensure it.
+
+    def sanitize_url(str)
+      "/" + str.gsub(%r!/{2,}!, "/").gsub(%r!\.+/|\A/+!, "")
     end
 
     # Escapes a path to be a valid URL path segment
@@ -92,7 +106,7 @@ module Jekyll
     #
     # Returns the escaped path.
     def self.escape_path(path)
-      # Because URI.escape doesn't escape '?', '[' and ']' by default,
+      # Because URI.escape doesn't escape "?", "[" and "]" by default,
       # specify unsafe string (except unreserved, sub-delims, ":", "@" and "/").
       #
       # URI path segment is defined in RFC 3986 as follows:
@@ -102,7 +116,7 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      URI.escape(path, /[^a-zA-Z\d\-._~!$&\'()*+,;=:@\/]/).encode('utf-8')
+      URI.escape(path, %r{[^a-zA-Z\d\-._~!$&'()*+,;=:@\/]}).encode("utf-8")
     end
 
     # Unescapes a URL path segment
@@ -116,7 +130,7 @@ module Jekyll
     #
     # Returns the unescaped path.
     def self.unescape_path(path)
-      URI.unescape(path.encode('utf-8'))
+      URI.unescape(path.encode("utf-8"))
     end
   end
 end

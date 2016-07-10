@@ -1,14 +1,12 @@
 ---
 layout: docs
 title: Creating pages
-prev_section: drafts
-next_section: variables
 permalink: /docs/pages/
 ---
 
-In addition to [writing posts](../posts/), another thing you may want to do with
-your Jekyll site is create static pages. By taking advantage of the way Jekyll
-copies files and directories, this is easy to do.
+In addition to [writing posts](../posts/), another thing you may want to do
+with your Jekyll site is create static pages. By taking advantage of the way
+Jekyll copies files and directories, this is easy to do.
 
 ## Homepage
 
@@ -29,12 +27,14 @@ homepage of your Jekyll-generated site.
 
 ## Where additional pages live
 
-Where you put HTML files for pages depends on how you want the pages to work.
+Where you put HTML or [Markdown](https://daringfireball.net/projects/markdown/)
+files for pages depends on how you want the pages to work.
 There are two main ways of creating pages:
 
-- Place named HTML files for each page in your site's root folder.
-- Create a folder in the site's root for each page, and place an index.html file
-  in each page folder.
+- Place named HTML or [Markdown](https://daringfireball.net/projects/markdown/)
+files for each page in your site's root folder.
+- Create a folder in the site's root for each page, and place an index.html
+or index.md file in each page folder.
 
 Both methods work fine (and can be used in conjunction with each other),
 with the only real difference being the resulting URLs.
@@ -46,7 +46,7 @@ directory with a suitable name for the page you want to create. For a site with
 a homepage, an about page, and a contact page, here’s what the root directory
 and associated URLs might look like:
 
-{% highlight bash %}
+{% highlight shell %}
 .
 |-- _config.yml
 |-- _includes/
@@ -55,20 +55,21 @@ and associated URLs might look like:
 |-- _site/
 |-- about.html    # => http://example.com/about.html
 |-- index.html    # => http://example.com/
+|-- other.md      # => http://example.com/other.html
 └── contact.html  # => http://example.com/contact.html
 {% endhighlight %}
 
 ### Named folders containing index HTML files
 
-There is nothing wrong with the above method, however some people like to keep
+There is nothing wrong with the above method. However, some people like to keep
 their URLs free from things like filename extensions. To achieve clean URLs for
 pages using Jekyll, you simply need to create a folder for each top-level page
 you want, and then place an `index.html` file in each page’s folder. This way
-the page URL ends up being the folder name, and the web server will serve up the
-respective `index.html` file. Here's an example of what this structure might
-look like:
+the page URL ends up being the folder name, and the web server will serve up
+the respective `index.html` file. Here's an example of what this structure
+might look like:
 
-{% highlight bash %}
+{% highlight shell %}
 .
 ├── _config.yml
 ├── _includes/
@@ -79,8 +80,21 @@ look like:
 |   └── index.html  # => http://example.com/about/
 ├── contact/
 |   └── index.html  # => http://example.com/contact/
+|── other/
+|   └── index.md    # => http://example.com/other/
 └── index.html      # => http://example.com/
 {% endhighlight %}
 
 This approach may not suit everyone, but for people who like clean URLs it’s
-simple and it works. In the end the decision is yours!
+simple and it works. In the end, the decision is yours!
+
+<div class="note">
+  <h5>ProTip™: Use permalink Front Matter Variable</h5>
+  <p>
+    Clean URLs can also be achieved using the <code>permalink</code> front
+    matter variable. In the example above, using the first method, you can
+    get URL <code>http://example.com/other</code> for the file
+    <code>other.md</code> by setting this at the top of the file:
+    <code>permalink: /other</code>
+  </p>
+</div>

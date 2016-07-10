@@ -1,0 +1,129 @@
+---
+AllCops:
+  TargetRubyVersion: 2.0
+  Include:
+  - lib/**/*.rb
+  Exclude:
+  - lib/jekyll/collection.rb
+  - lib/jekyll/convertible.rb
+  - lib/jekyll/document.rb
+  - lib/jekyll/renderer.rb
+  - bin/**/*
+  - benchmark/**/*
+  - script/**/*
+  - vendor/**/*
+Lint/EndAlignment:
+  Severity: error
+Lint/UnreachableCode:
+  Severity: error
+Lint/UselessAccessModifier:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 20
+Metrics/ClassLength:
+  Max: 300
+  Exclude:
+  - !ruby/regexp /features\/.*.rb$/
+  - !ruby/regexp /test\/.*.rb$/
+Metrics/CyclomaticComplexity:
+  Max: 8
+Metrics/LineLength:
+  Max: 90
+  Severity: warning
+  Exclude:
+  - !ruby/regexp /features\/.*.rb/
+Metrics/MethodLength:
+  Max: 20
+  CountComments: false
+  Severity: error
+Metrics/ModuleLength:
+  Max: 240
+Metrics/ParameterLists:
+  Max: 4
+Metrics/PerceivedComplexity:
+  Max: 8
+Style/Alias:
+  Enabled: false
+Style/AlignArray:
+  Enabled: false
+Style/AlignHash:
+  EnforcedHashRocketStyle: table
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+  Enabled: false
+Style/AndOr:
+  Severity: error
+Style/Attr:
+  Enabled: false
+Style/BracesAroundHashParameters:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+  Exclude:
+  - !ruby/regexp /features\/.*.rb$/
+Style/DoubleNegation:
+  Enabled: false
+Style/EmptyLinesAroundAccessModifier:
+  Enabled: false
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+Style/ExtraSpacing:
+  AllowForAlignment: true
+Style/FileName:
+  Enabled: false
+Style/FirstParameterIndentation:
+  EnforcedStyle: consistent
+Style/GuardClause:
+  Enabled: false
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+  Severity: error
+Style/IfUnlessModifier:
+  Enabled: false
+Style/IndentArray:
+  EnforcedStyle: consistent
+Style/IndentHash:
+  EnforcedStyle: consistent
+Style/IndentationWidth:
+  Severity: error
+Style/ModuleFunction:
+  Enabled: false
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Style/MultilineTernaryOperator:
+  Severity: error
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    "%q": "{}"
+    "%Q": "{}"
+    "%r": "!!"
+    "%s": "()"
+    "%w": "()"
+    "%W": "()"
+    "%x": "()"
+Style/RedundantReturn:
+  Enabled: false
+Style/RedundantSelf:
+  Enabled: false
+Style/RegexpLiteral:
+  EnforcedStyle: percent_r
+Style/RescueModifier:
+  Enabled: false
+Style/SignalException:
+  EnforcedStyle: only_raise
+Style/SingleLineMethods:
+  Enabled: false
+Style/SpaceAroundOperators:
+  Enabled: false
+Style/SpaceInsideBrackets:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+Style/UnneededCapitalW:
+  Enabled: false

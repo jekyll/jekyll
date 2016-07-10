@@ -5,6 +5,7 @@ categories:
 - bar
 - baz
 - z_category
+- MixedCase
 tags:
 - first
 - second

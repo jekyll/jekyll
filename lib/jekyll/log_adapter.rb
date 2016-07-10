@@ -1,21 +1,22 @@
 module Jekyll
   class LogAdapter
-    attr_reader :writer
+    attr_reader :writer, :messages
 
     LOG_LEVELS = {
       :debug => ::Logger::DEBUG,
       :info  => ::Logger::INFO,
       :warn  => ::Logger::WARN,
       :error => ::Logger::ERROR
-    }
+    }.freeze
 
-    # Public: Create a new instance of Jekyll's log writer
+    # Public: Create a new instance of a log writer
     #
     # writer - Logger compatible instance
     # log_level - (optional, symbol) the log level
     #
     # Returns nothing
     def initialize(writer, level = :info)
+      @messages = []
       @writer = writer
       self.log_level = level
     end
@@ -29,7 +30,17 @@ module Jekyll
       writer.level = LOG_LEVELS.fetch(level)
     end
 
-    # Public: Print a jekyll debug message
+    def adjust_verbosity(options = {})
+      # Quiet always wins.
+      if options[:quiet]
+        self.log_level = :error
+      elsif options[:verbose]
+        self.log_level = :debug
+      end
+      debug "Logging at level:", LOG_LEVELS.key(writer.level).to_s
+    end
+
+    # Public: Print a debug message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -39,7 +50,7 @@ module Jekyll
       writer.debug(message(topic, message))
     end
 
-    # Public: Print a jekyll message
+    # Public: Print a message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -49,7 +60,7 @@ module Jekyll
       writer.info(message(topic, message))
     end
 
-    # Public: Print a jekyll message
+    # Public: Print a message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -59,7 +70,7 @@ module Jekyll
       writer.warn(message(topic, message))
     end
 
-    # Public: Print a jekyll error message
+    # Public: Print an error message
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
@@ -69,7 +80,7 @@ module Jekyll
       writer.error(message(topic, message))
     end
 
-    # Public: Print a Jekyll error message and immediately abort the process
+    # Public: Print an error message and immediately abort the process
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail (can be omitted)
@@ -80,14 +91,16 @@ module Jekyll
       abort
     end
 
-    # Internal: Build a Jekyll topic method
+    # Internal: Build a topic method
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     # message - the message detail
     #
     # Returns the formatted message
     def message(topic, message)
-      formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      msg = formatted_topic(topic) + message.to_s.gsub(%r!\s+!, " ")
+      messages << msg
+      msg
     end
 
     # Internal: Format the topic

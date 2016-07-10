@@ -1,5 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-time bundle exec cucumber \
-  -f Features::Support::Overview \
-  "$@"
+time ruby -S bundle exec cucumber \
+  -f Jekyll::Cucumber::Formatter "$@"

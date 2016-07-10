@@ -1,14 +1,12 @@
 ---
 layout: docs
 title: Quick-start guide
-prev_section: home
-next_section: installation
 permalink: /docs/quickstart/
 ---
 
 For the impatient, here's how to get a boilerplate Jekyll site up and running.
 
-{% highlight bash %}
+{% highlight shell %}
 ~ $ gem install jekyll
 ~ $ jekyll new myblog
 ~ $ cd myblog
@@ -16,7 +14,7 @@ For the impatient, here's how to get a boilerplate Jekyll site up and running.
 # => Now browse to http://localhost:4000
 {% endhighlight %}
 
-If you wish to install jekyll into the current directory, you can do so by alternatively running `jekyll new .` instead of a new directory name.
+If you wish to install jekyll into an existing directory, you can do so by running `jekyll new .` from within the directory instead of creating a new one. If the existing directory isn't empty, you'll also have to pass the `--force` option like so `jekyll new . --force`.
 
 That's nothing, though. The real magic happens when you start creating blog
 posts, using the front matter to control templates and layouts, and taking

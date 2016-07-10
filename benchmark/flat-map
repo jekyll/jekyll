@@ -14,4 +14,3 @@ Benchmark.ips do |x|
   x.report('.map.flatten with no nested arrays') { enum.map { |i| do_thing(i) }.flatten(1) }
   x.report('.flat_map with no nested arrays')    { enum.flat_map { |i| do_thing(i) } }
 end
-
