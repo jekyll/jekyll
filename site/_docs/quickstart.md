@@ -6,7 +6,7 @@ permalink: /docs/quickstart/
 
 For the impatient, here's how to get a boilerplate Jekyll site up and running.
 
-{% highlight bash %}
+{% highlight shell %}
 ~ $ gem install jekyll
 ~ $ jekyll new myblog
 ~ $ cd myblog

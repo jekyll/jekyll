@@ -1,5 +1,5 @@
 # encoding: UTF-8
-require 'csv'
+require "csv"
 
 module Jekyll
   class Reader
@@ -16,7 +16,7 @@ module Jekyll
       @site.layouts = LayoutReader.new(site).read
       read_directories
       sort_files!
-      @site.data = DataReader.new(site).read(site.config['data_dir'])
+      @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
     end
 
@@ -34,13 +34,15 @@ module Jekyll
     # dir - The String relative path of the directory to read. Default: ''.
     #
     # Returns nothing.
-    def read_directories(dir = '')
+    def read_directories(dir = "")
       base = site.in_source_dir(dir)
 
-      dot = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
+      dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
       dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
       dot_files = (dot - dot_dirs)
-      dot_pages = dot_files.select { |file| Utils.has_yaml_header?(@site.in_source_dir(base, file)) }
+      dot_pages = dot_files.select do |file|
+        Utils.has_yaml_header?(@site.in_source_dir(base, file))
+      end
       dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
@@ -71,7 +73,9 @@ module Jekyll
       dot_dirs.map do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
-        @site.reader.read_directories(rel_path) unless @site.dest.sub(/\/$/, '') == dir_path
+        unless @site.dest.sub(%r!/$!, "") == dir_path
+          @site.reader.read_directories(rel_path)
+        end
       end
     end
 
@@ -119,7 +123,7 @@ module Jekyll
     def get_entries(dir, subfolder)
       base = site.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
+      entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
     end
   end

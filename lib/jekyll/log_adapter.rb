@@ -7,7 +7,7 @@ module Jekyll
       :info  => ::Logger::INFO,
       :warn  => ::Logger::WARN,
       :error => ::Logger::ERROR
-    }
+    }.freeze
 
     # Public: Create a new instance of a log writer
     #
@@ -98,7 +98,7 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      msg = formatted_topic(topic) + message.to_s.gsub(/\s+/, ' ')
+      msg = formatted_topic(topic) + message.to_s.gsub(%r!\s+!, " ")
       messages << msg
       msg
     end

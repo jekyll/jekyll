@@ -1,7 +1,7 @@
-require 'fileutils'
-require 'colorator'
-require 'cucumber/formatter/console'
-require 'cucumber/formatter/io'
+require "fileutils"
+require "colorator"
+require "cucumber/formatter/console"
+require "cucumber/formatter/io"
 
 module Jekyll
   module Cucumber
@@ -17,7 +17,7 @@ module Jekyll
         :undefined => "\u2718".red,
         :passed    => "\u2714".green,
         :skipped   => "\u203D".blue
-      }
+      }.freeze
 
       #
 
@@ -30,11 +30,12 @@ module Jekyll
         @options = options
         @exceptions = []
         @indent = 0
+        @timings = {}
       end
 
       #
 
-      def before_features(features)
+      def before_features(_features)
         print_profile_information
       end
 
@@ -42,33 +43,49 @@ module Jekyll
 
       def after_features(features)
         @io.puts
+        print_worst_offenders
         print_summary(features)
       end
 
       #
 
-      def before_feature(feature)
+      def before_feature(_feature)
         @exceptions = []
         @indent = 0
       end
 
       #
 
-      def tag_name(tag_name); end
-      def comment_line(comment_line); end
-      def after_feature_element(feature_element); end
-      def after_tags(tags); end
+      def feature_element_timing_key(feature_element)
+        "\"#{feature_element.name.to_s.sub("Scenario: ", "")}\" (#{feature_element.location})"
+      end
 
       #
 
       def before_feature_element(feature_element)
         @indent = 2
         @scenario_indent = 2
+        @timings[feature_element_timing_key(feature_element)] = Time.now
       end
 
       #
 
-      def before_background(background)
+      def after_feature_element(feature_element)
+        @timings[feature_element_timing_key(feature_element)] = Time.now - @timings[feature_element_timing_key(feature_element)]
+        @io.print " (#{@timings[feature_element_timing_key(feature_element)]}s)"
+      end
+
+      #
+
+      def tag_name(tag_name); end
+
+      def comment_line(comment_line); end
+
+      def after_tags(tags); end
+
+      #
+
+      def before_background(_background)
         @scenario_indent = 2
         @in_background = true
         @indent = 2
@@ -76,15 +93,15 @@ module Jekyll
 
       #
 
-      def after_background(background)
+      def after_background(_background)
         @in_background = nil
       end
 
       #
 
-      def background_name(keyword, name, source_line, indend)
+      def background_name(keyword, name, source_line, indent)
         print_feature_element_name(
-          keyword, name, source_line, indend
+          keyword, name, source_line, indent
         )
       end
 
@@ -104,8 +121,9 @@ module Jekyll
 
       #
 
-      def before_step_result(keyword, step_match, multiline_arg, status, exception, \
-          source_indent, background, file_colon_line)
+      # rubocop:disable Metrics/ParameterLists
+      def before_step_result(_keyword, _step_match, _multiline_arg, status, exception, \
+              _source_indent, background, _file_colon_line)
 
         @hide_this_step = false
         if exception
@@ -127,10 +145,11 @@ module Jekyll
 
       #
 
-      def step_name(keyword, step_match, status, source_indent, background, file_colon_line)
+      def step_name(_keyword, _step_match, status, _source_indent, _background, _file_colon_line)
         @io.print CHARS[status]
         @io.print " "
       end
+      # rubocop:enable Metrics/ParameterLists
 
       #
 
@@ -153,7 +172,7 @@ module Jekyll
       #
 
       private
-      def print_feature_element_name(keyword, name, source_line, indent)
+      def print_feature_element_name(keyword, name, source_line, _indent)
         @io.puts
 
         names = name.empty? ? [name] : name.each_line.to_a
@@ -169,6 +188,17 @@ module Jekyll
 
       def cell_prefix(status)
         @prefixes[status]
+      end
+
+      #
+
+      def print_worst_offenders
+        @io.puts
+        @io.puts "Worst offenders:"
+        @timings.sort_by { |_f, t| -t }.take(10).each do |(f, t)|
+          @io.puts "  #{t}s for #{f}"
+        end
+        @io.puts
       end
 
       #

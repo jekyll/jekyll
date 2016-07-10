@@ -8,17 +8,17 @@ module Jekyll
       extend self
 
       ESCAPE = format("%c", 27)
-      MATCH = /#{ESCAPE}\[(?:\d+)(?:;\d+)*(j|k|m|s|u|A|B|G)|\e\(B\e\[m/ix.freeze
+      MATCH = %r!#{ESCAPE}\[(?:\d+)(?:;\d+)*(j|k|m|s|u|A|B|G)|\e\(B\e\[m!ix
       COLORS = {
-        :red => 31,
-        :green => 32,
-        :black => 30,
+        :red     => 31,
+        :green   => 32,
+        :black   => 30,
         :magenta => 35,
-        :yellow => 33,
-        :white => 37,
-        :blue => 34,
-        :cyan => 36
-      }
+        :yellow  => 33,
+        :white   => 37,
+        :blue    => 34,
+        :cyan    => 36
+      }.freeze
 
       # Strip ANSI from the current string.  It also strips cursor stuff,
       # well some of it, and it also strips some other stuff that a lot of

@@ -14,24 +14,24 @@ end
 
 #
 
-Given %r{^I have a blank site in "(.*)"$} do |path|
-  if !File.exist?(path)
+Given(%r!^I have a blank site in "(.*)"$!) do |path|
+  unless File.exist?(path)
     then FileUtils.mkdir_p(path)
   end
 end
 
 #
 
-Given %r{^I do not have a "(.*)" directory$} do |path|
+Given(%r!^I do not have a "(.*)" directory$!) do |path|
   Paths.test_dir.join(path).directory?
 end
 
 #
 
-Given %r{^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$} do |file, key, value, text|
+Given(%r!^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$!) do |file, key, value, text|
   File.write(file, Jekyll::Utils.strip_heredoc(<<-DATA))
     ---
-    #{key || 'layout'}: #{value || 'nil'}
+    #{key || "layout"}: #{value || "nil"}
     ---
 
     #{text}
@@ -40,13 +40,13 @@ end
 
 #
 
-Given %r{^I have an? "(.*)" file that contains "(.*)"$} do |file, text|
+Given(%r!^I have an? "(.*)" file that contains "(.*)"$!) do |file, text|
   File.write(file, text)
 end
 
 #
 
-Given %r{^I have an? (.*) (layout|theme) that contains "(.*)"$} do |name, type, text|
+Given(%r!^I have an? (.*) (layout|theme) that contains "(.*)"$!) do |name, type, text|
   folder = type == "layout" ? "_layouts" : "_theme"
 
   destination_file = Pathname.new(File.join(folder, "#{name}.html"))
@@ -56,33 +56,33 @@ end
 
 #
 
-Given %r{^I have an? "(.*)" file with content:$} do |file, text|
+Given(%r!^I have an? "(.*)" file with content:$!) do |file, text|
   File.write(file, text)
 end
 
 #
 
-Given %r{^I have an? (.*) directory$} do |dir|
-  if !File.directory?(dir)
+Given(%r!^I have an? (.*) directory$!) do |dir|
+  unless File.directory?(dir)
     then FileUtils.mkdir_p(dir)
   end
 end
 
 #
 
-Given %r{^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$} do |status, direction, folder, table|
+Given(%r!^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$!) do |status, direction, folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
     ext = input_hash["type"] || "markdown"
-    filename = filename = "#{title}.#{ext}" if %w(draft page).include?(status)
+    filename = "#{title}.#{ext}" if %w(draft page).include?(status)
     before, after = location(folder, direction)
     dest_folder = "_drafts" if status == "draft"
-    dest_folder = "_posts"  if status ==  "post"
+    dest_folder = "_posts"  if status == "post"
     dest_folder = "" if status == "page"
 
     if status == "post"
-      parsed_date = Time.xmlschema(input_hash['date']) rescue Time.parse(input_hash['date'])
-      filename = "#{parsed_date.strftime('%Y-%m-%d')}-#{title}.#{ext}"
+      parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+      filename = "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.#{ext}"
     end
 
     path = File.join(before, dest_folder, after, filename)
@@ -92,19 +92,20 @@ end
 
 #
 
-Given %r{^I have a configuration file with "(.*)" set to "(.*)"$} do |key, value|
-  config = if source_dir.join("_config.yml").exist?
-    SafeYAML.load_file(source_dir.join("_config.yml"))
-  else
-    {}
-  end
+Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, value|
+  config = \
+    if source_dir.join("_config.yml").exist?
+      SafeYAML.load_file(source_dir.join("_config.yml"))
+    else
+      {}
+    end
   config[key] = YAML.load(value)
   File.write("_config.yml", YAML.dump(config))
 end
 
 #
 
-Given %r{^I have a configuration file with:$} do |table|
+Given(%r!^I have a configuration file with:$!) do |table|
   table.hashes.each do |row|
     step %(I have a configuration file with "#{row["key"]}" set to "#{row["value"]}")
   end
@@ -112,7 +113,7 @@ end
 
 #
 
-Given %r{^I have a configuration file with "([^\"]*)" set to:$} do |key, table|
+Given(%r!^I have a configuration file with "([^\"]*)" set to:$!) do |key, table|
   File.open("_config.yml", "w") do |f|
     f.write("#{key}:\n")
     table.hashes.each do |row|
@@ -123,20 +124,20 @@ end
 
 #
 
-Given %r{^I have fixture collections$} do
+Given(%r!^I have fixture collections$!) do
   FileUtils.cp_r Paths.source_dir.join("test", "source", "_methods"), source_dir
   FileUtils.cp_r Paths.source_dir.join("test", "source", "_thanksgiving"), source_dir
 end
 
 #
 
-Given %r{^I wait (\d+) second(s?)$} do |time, plural|
+Given(%r!^I wait (\d+) second(s?)$!) do |time, _|
   sleep(time.to_f)
 end
 
 #
 
-When %r{^I run jekyll(.*)$} do |args|
+When(%r!^I run jekyll(.*)$!) do |args|
   run_jekyll(args)
   if args.include?("--verbose") || ENV["DEBUG"]
     $stderr.puts "\n#{jekyll_run_output}\n"
@@ -145,16 +146,16 @@ end
 
 #
 
-When %r{^I run bundle(.*)$} do |args|
+When(%r!^I run bundle(.*)$!) do |args|
   run_bundle(args)
-  if args.include?("--verbose") || ENV['DEBUG']
+  if args.include?("--verbose") || ENV["DEBUG"]
     $stderr.puts "\n#{jekyll_run_output}\n"
   end
 end
 
 #
 
-When %r{^I change "(.*)" to contain "(.*)"$} do |file, text|
+When(%r!^I change "(.*)" to contain "(.*)"$!) do |file, text|
   File.open(file, "a") do |f|
     f.write(text)
   end
@@ -162,13 +163,13 @@ end
 
 #
 
-When %r{^I delete the file "(.*)"$} do |file|
+When(%r!^I delete the file "(.*)"$!) do |file|
   File.delete(file)
 end
 
 #
 
-Then %r{^the (.*) directory should +(not )?exist$} do |dir, negative|
+Then(%r!^the (.*) directory should +(not )?exist$!) do |dir, negative|
   if negative.nil?
     expect(Pathname.new(dir)).to exist
   else
@@ -177,7 +178,7 @@ Then %r{^the (.*) directory should +(not )?exist$} do |dir, negative|
 end
 
 #
-Then %r{^I should (not )?see "(.*)" in "(.*)"$} do |negative, text, file|
+Then(%r!^I should (not )?see "(.*)" in "(.*)"$!) do |negative, text, file|
   step %(the "#{file}" file should exist)
   regexp = Regexp.new(text, Regexp::MULTILINE)
   if negative.nil? || negative.empty?
@@ -189,20 +190,20 @@ end
 
 #
 
-Then %r{^I should see exactly "(.*)" in "(.*)"$} do |text, file|
+Then(%r!^I should see exactly "(.*)" in "(.*)"$!) do |text, file|
   step %(the "#{file}" file should exist)
   expect(file_contents(file).strip).to eq text
 end
 
 #
 
-Then %r{^I should see escaped "(.*)" in "(.*)"$} do |text, file|
+Then(%r!^I should see escaped "(.*)" in "(.*)"$!) do |text, file|
   step %(I should see "#{Regexp.escape(text)}" in "#{file}")
 end
 
 #
 
-Then %r{^the "(.*)" file should +(not )?exist$} do |file, negative|
+Then(%r!^the "(.*)" file should +(not )?exist$!) do |file, negative|
   if negative.nil?
     expect(Pathname.new(file)).to exist
   else
@@ -212,19 +213,19 @@ end
 
 #
 
-Then %r{^I should see today's time in "(.*)"$} do |file|
+Then(%r!^I should see today's time in "(.*)"$!) do |file|
   step %(I should see "#{seconds_agnostic_time(Time.now)}" in "#{file}")
 end
 
 #
 
-Then %r{^I should see today's date in "(.*)"$} do |file|
-  step %(I should see "#{Date.today.to_s}" in "#{file}")
+Then(%r!^I should see today's date in "(.*)"$!) do |file|
+  step %(I should see "#{Date.today}" in "#{file}")
 end
 
 #
 
-Then %r{^I should (not )?see "(.*)" in the build output$} do |negative, text|
+Then(%r!^I should (not )?see "(.*)" in the build output$!) do |negative, text|
   if negative.nil? || negative.empty?
     expect(jekyll_run_output).to match Regexp.new(text)
   else
@@ -234,12 +235,12 @@ end
 
 #
 
-Then %r{^I should get a zero exit(?:\-| )status$} do
+Then(%r!^I should get a zero exit(?:\-| )status$!) do
   step %(I should see "EXIT STATUS: 0" in the build output)
 end
 
 #
 
-Then %r{^I should get a non-zero exit(?:\-| )status$} do
+Then(%r!^I should get a non-zero exit(?:\-| )status$!) do
   step %(I should not see "EXIT STATUS: 0" in the build output)
 end

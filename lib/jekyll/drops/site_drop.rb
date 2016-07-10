@@ -24,11 +24,13 @@ module Jekyll
       end
 
       def html_pages
-        @site_html_pages ||= @obj.pages.select { |page| page.html? || page.url.end_with?("/") }
+        @site_html_pages ||= @obj.pages.select do |page|
+          page.html? || page.url.end_with?("/")
+        end
       end
 
       def collections
-        @site_collections ||= @obj.collections.values.map(&:to_liquid)
+        @site_collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
       end
 
       private

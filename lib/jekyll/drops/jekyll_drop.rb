@@ -16,6 +16,18 @@ module Jekyll
       def environment
         Jekyll.env
       end
+
+      def to_h
+        @to_h ||= {
+          "version"     => version,
+          "environment" => environment
+        }
+      end
+
+      def to_json(state = nil)
+        require "json"
+        JSON.generate(to_h, state)
+      end
     end
   end
 end

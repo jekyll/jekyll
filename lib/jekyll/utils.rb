@@ -2,27 +2,25 @@
 module Jekyll
   module Utils
     extend self
-    autoload :Platforms, 'jekyll/utils/platforms'
+    autoload :Platforms, "jekyll/utils/platforms"
     autoload :Ansi, "jekyll/utils/ansi"
 
     # Constants for use in #slugify
-    SLUGIFY_MODES = %w(raw default pretty)
+    SLUGIFY_MODES = %w(raw default pretty).freeze
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
-    SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
+    SLUGIFY_DEFAULT_REGEXP = Regexp.new("[^[:alnum:]]+").freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
 
     # Takes an indented string and removes the preceding spaces on each line
 
     def strip_heredoc(str)
-      str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
+      str.gsub(%r!^[ \t]{#{(str.scan(%r!^[ \t]*(?=\S)!).min || "").size}}!, "")
     end
 
     # Takes a slug and turns it into a simple title.
 
     def titleize_slug(slug)
-      slug.split("-").map! do |val|
-        val.capitalize
-      end.join(" ")
+      slug.split("-").map!(&:capitalize).join(" ")
     end
 
     # Non-destructive version of deep_merge_hashes! See that method.
@@ -42,23 +40,24 @@ module Jekyll
     #
     # Thanks to whoever made it.
     def deep_merge_hashes!(target, overwrite)
-      target.merge!(overwrite) do |key, old_val, new_val|
-        if new_val.nil?
-          old_val
-        else
-          mergable?(old_val) && mergable?(new_val) ? deep_merge_hashes(old_val, new_val) : new_val
-        end
-      end
-
-      if target.respond_to?(:default_proc) && overwrite.respond_to?(:default_proc) && target.default_proc.nil?
-        target.default_proc = overwrite.default_proc
-      end
+      merge_values(target, overwrite)
+      merge_default_proc(target, overwrite)
+      duplicate_frozen_values(target)
 
       target
     end
 
     def mergable?(value)
       value.is_a?(Hash) || value.is_a?(Drops::Drop)
+    end
+
+    def duplicable?(obj)
+      case obj
+      when nil, false, true, Symbol, Numeric
+        false
+      else
+        true
+      end
     end
 
     # Read array from the supplied hash favouring the singular key
@@ -71,7 +70,9 @@ module Jekyll
     # Returns an array
     def pluralized_array_from_hash(hash, singular_key, plural_key)
       [].tap do |array|
-        array << (value_from_singular_key(hash, singular_key) || value_from_plural_key(hash, plural_key))
+        value = value_from_singular_key(hash, singular_key)
+        value ||= value_from_plural_key(hash, plural_key)
+        array << value
       end.flatten.compact
     end
 
@@ -133,11 +134,13 @@ module Jekyll
     # Determines whether a given file has
     #
     # Returns true if the YAML front matter is present.
+    # rubocop: disable PredicateName
     def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.readline } =~ /\A---\s*\r?\n/)
+      !!(File.open(file, "rb", &:readline) =~ %r!\A---\s*\r?\n!)
     rescue EOFError
       false
     end
+    # rubocop: enable PredicateName
 
     # Slugify a filename or title.
     #
@@ -172,7 +175,7 @@ module Jekyll
     #
     # Returns the slugified string.
     def slugify(string, mode: nil, cased: false)
-      mode ||= 'default'
+      mode ||= "default"
       return nil if string.nil?
 
       unless SLUGIFY_MODES.include?(mode)
@@ -182,21 +185,21 @@ module Jekyll
       # Replace each character sequence with a hyphen
       re =
         case mode
-        when 'raw'
+        when "raw"
           SLUGIFY_RAW_REGEXP
-        when 'default'
+        when "default"
           SLUGIFY_DEFAULT_REGEXP
-        when 'pretty'
+        when "pretty"
           # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
           # and is allowed in both extN and NTFS.
           SLUGIFY_PRETTY_REGEXP
         end
 
       # Strip according to the mode
-      slug = string.gsub(re, '-')
+      slug = string.gsub(re, "-")
 
       # Remove leading/trailing hyphen
-      slug.gsub!(/^\-|\-$/i, '')
+      slug.gsub!(%r!^\-|\-$!i, "")
 
       slug.downcase! unless cased
       slug
@@ -267,7 +270,7 @@ module Jekyll
     # Returns matched pathes
     def safe_glob(dir, patterns, flags = 0)
       return [] unless Dir.exist?(dir)
-      pattern = File.join(Array patterns)
+      pattern = File.join(Array(patterns))
       return [dir] if pattern.empty?
       Dir.chdir(dir) do
         Dir.glob(pattern, flags).map { |f| File.join(dir, f) }
@@ -284,5 +287,31 @@ module Jekyll
       merged
     end
 
+    private
+    def merge_values(target, overwrite)
+      target.merge!(overwrite) do |_key, old_val, new_val|
+        if new_val.nil?
+          old_val
+        elsif mergable?(old_val) && mergable?(new_val)
+          deep_merge_hashes(old_val, new_val)
+        else
+          new_val
+        end
+      end
+    end
+
+    private
+    def merge_default_proc(target, overwrite)
+      if target.is_a?(Hash) && overwrite.is_a?(Hash) && target.default_proc.nil?
+        target.default_proc = overwrite.default_proc
+      end
+    end
+
+    private
+    def duplicate_frozen_values(target)
+      target.each do |key, val|
+        target[key] = val.dup if val.frozen? && duplicable?(val)
+      end
+    end
   end
 end

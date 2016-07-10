@@ -35,7 +35,7 @@ this](http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/0
 
 To have a remote server handle the deploy for you every time you push changes using Git, you can create a user account which has all the public keys that are authorized to deploy in its `authorized_keys` file. With that in place, setting up the post-receive hook is done as follows:
 
-{% highlight bash %}
+{% highlight shell %}
 laptop$ ssh deployer@example.com
 server$ mkdir myrepo.git
 server$ cd myrepo.git
@@ -47,7 +47,7 @@ server$ mkdir /var/www/myrepo
 Next, add the following lines to hooks/post-receive and be sure Jekyll is
 installed on the server:
 
-{% highlight bash %}
+{% highlight shell %}
 GIT_REPO=$HOME/myrepo.git
 TMP_GIT_CLONE=$HOME/tmp/myrepo
 PUBLIC_WWW=/var/www/myrepo
@@ -61,14 +61,14 @@ exit
 Finally, run the following command on any users laptop that needs to be able to
 deploy using this hook:
 
-{% highlight bash %}
+{% highlight shell %}
 laptops$ git remote add deploy deployer@example.com:~/myrepo.git
 {% endhighlight %}
 
 Deploying is now as easy as telling nginx or Apache to look at
 `/var/www/myrepo` and running the following:
 
-{% highlight bash %}
+{% highlight shell %}
 laptops$ git push deploy master
 {% endhighlight %}
 
@@ -129,7 +129,7 @@ is to put the restriction to certificate-based authorization in
 `~/.ssh/authorized_keys`. Then, launch `rrsync` and supply
 it with the folder it shall have read-write access to:
 
-{% highlight bash %}
+{% highlight shell %}
 command="$HOME/bin/rrsync <folder>",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa <cert>
 {% endhighlight %}
 
@@ -139,10 +139,10 @@ command="$HOME/bin/rrsync <folder>",no-agent-forwarding,no-port-forwarding,no-pt
 
 Add the `deploy` script to the site source folder:
 
-{% highlight bash %}
+{% highlight shell %}
 #!/bin/sh
 
-rsync -crvz --rsh=ssh -p2222' --delete-after --delete-excluded   <folder> <user>@<site>:
+rsync -crvz --rsh='ssh -p2222' --delete-after --delete-excluded   <folder> <user>@<site>:
 {% endhighlight %}
 
 Command line parameters are:
@@ -155,7 +155,7 @@ your host uses a different port than the default (e.g, HostGator)
 
 Using this setup, you might run the following command:
 
-{% highlight bash %}
+{% highlight shell %}
 rsync -crvz --rsh='ssh -p2222' --delete-after --delete-excluded   _site/ hostuser@example.org:
 {% endhighlight %}
 
@@ -186,7 +186,7 @@ script executes.
 
 [Rack-Jekyll](https://github.com/adaoraul/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](https://github.com/rtomayko/shotgun/), [rackup](https://github.com/rack/rack), [mongrel](https://github.com/mongrel/mongrel), [unicorn](https://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
 
-Read [this post](http://blog.crowdint.com/2010/08/02/instant-blog-using-jekyll-and-heroku.html) on how to deploy to Heroku using Rack-Jekyll.
+Read [this post](http://andycroll.com/ruby/serving-a-jekyll-blog-using-heroku) on how to deploy to Heroku using Rack-Jekyll.
 
 ## Jekyll-Admin for Rails
 
@@ -225,3 +225,13 @@ Setting up Kickster is very easy, just install the gem and you are good to go. M
 [Aerobatic](https://www.aerobatic.com) is an add-on for Bitbucket that brings GitHub Pages style functionality to Bitbucket users. It includes continuous deployment, custom domains with a wildcard SSL cert, CDN, basic auth, and staging branches all in the box.
 
 Automating the build and deployment of a Jekyll site is just as simple as GitHub Pages - push your changes to your repo (excluding the `_site` directory) and within seconds a build will be triggered and your built site deployed to our highly- available, globally distributed hosting service. The build process will even install and execute custom Ruby plugins. See our [Jekyll docs](https://www.aerobatic.com/docs/static-generators#jekyll) for more details.
+
+## PubStorm
+
+[PubStorm](https://www.pubstorm.com) is a free front-end and static-site publishing platform built by [Nitrous](https://www.nitrous.io). PubStorm is distributed as a node package and can be installed by running `npm install -g pubstorm`. You can create a free account by running `storm signup`.
+
+To publish your site, run `storm init` from the root of your project and enter `_site` as the project path when prompted. You can the run `jekyll build` to build your site and then run `storm deploy` to publish your site in seconds.
+
+PubStorm offers a pre-configured CDN, free custom domains, SSL certs, rollbacks, collaboration and more. To configure additional features, [follow the instructions on the PubStorm help site](http://help.pubstorm.com).
+
+You can also use the [Nitrous Jekyll Template](https://www.nitrous.io/quickstarts) to develop your Jekyll project and deploy to PubStorm directly from Nitrous. This is a great option for developing Jekyll projects on Windows.

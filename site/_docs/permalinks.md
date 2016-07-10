@@ -101,7 +101,6 @@ permalink is defined according to the format `/:categories/:year/:month/:day/:ti
         <p>
           Second of the minute from the post’s <code>date</code> front matter. (00..59)
         </p>
-        </p>
       </td>
     </tr>
     <tr>

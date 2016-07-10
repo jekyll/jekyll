@@ -3,7 +3,9 @@
 module Jekyll
   module Drops
     class Drop < Liquid::Drop
-      NON_CONTENT_METHODS = [:[], :[]=, :inspect, :to_h, :fallback_data].freeze
+      include Enumerable
+
+      NON_CONTENT_METHODS = [:fallback_data, :collapse_document].freeze
 
       # Get or set whether the drop class is mutable.
       # Mutability determines whether or not pre-defined fields may be
@@ -13,11 +15,11 @@ module Jekyll
       #
       # Returns the mutability of the class
       def self.mutable(is_mutable = nil)
-        if is_mutable
-          @is_mutable = is_mutable
-        else
-          @is_mutable = false
-        end
+        @is_mutable = if is_mutable
+                        is_mutable
+                      else
+                        false
+                      end
       end
 
       def self.mutable?
@@ -86,7 +88,9 @@ module Jekyll
       # Returns an Array of strings which represent method-specific keys.
       def content_methods
         @content_methods ||= (
-          self.class.instance_methods(false) - NON_CONTENT_METHODS
+          self.class.instance_methods \
+            - Jekyll::Drops::Drop.instance_methods \
+            - NON_CONTENT_METHODS
         ).map(&:to_s).reject do |method|
           method.end_with?("=")
         end
@@ -134,8 +138,26 @@ module Jekyll
       #
       # Returns a pretty generation of the hash representation of the Drop.
       def inspect
-        require 'json'
+        require "json"
         JSON.pretty_generate to_h
+      end
+
+      # Generate a Hash for use in generating JSON.
+      # This is useful if fields need to be cleared before the JSON can generate.
+      #
+      # Returns a Hash ready for JSON generation.
+      def hash_for_json(*)
+        to_h
+      end
+
+      # Generate a JSON representation of the Drop.
+      #
+      # state - the JSON::State object which determines the state of current processing.
+      #
+      # Returns a JSON representation of the Drop in a String.
+      def to_json(state = nil)
+        require "json"
+        JSON.generate(hash_for_json(state), state)
       end
 
       # Collects all the keys and passes each to the block in turn.
@@ -145,6 +167,12 @@ module Jekyll
       # Returns nothing.
       def each_key(&block)
         keys.each(&block)
+      end
+
+      def each
+        each_key.each do |key|
+          yield key, self[key]
+        end
       end
 
       def merge(other, &block)

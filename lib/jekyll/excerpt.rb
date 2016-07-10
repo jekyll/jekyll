@@ -7,7 +7,7 @@ module Jekyll
     attr_writer   :output
 
     def_delegators :@doc, :site, :name, :ext, :relative_path, :extname,
-                          :render_with_liquid?, :collection, :related_posts
+                          :render_with_liquid?, :collection, :related_posts, :url
 
     # Initialize this Excerpt instance.
     #
@@ -59,10 +59,7 @@ module Jekyll
     end
 
     def to_liquid
-      doc.data['excerpt'] = nil
-      @to_liquid ||= doc.to_liquid
-      doc.data['excerpt'] = self
-      @to_liquid
+      Jekyll::Drops::ExcerptDrop.new(self)
     end
 
     # Returns the shorthand String identifier of this doc.
@@ -120,7 +117,7 @@ module Jekyll
       if tail.empty?
         head
       else
-        "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
+        "" << head << "\n\n" << tail.scan(%r!^\[[^\]]+\]:.+$!).join("\n")
       end
     end
   end

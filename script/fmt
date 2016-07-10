@@ -1,0 +1,3 @@
+#!/bin/sh
+bundle exec rubocop --version
+bundle exec rubocop -D $@

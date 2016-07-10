@@ -4,38 +4,38 @@ module Jekyll
 
     # compatibility layer for octopress-hooks users
     PRIORITY_MAP = {
-      :low => 10,
+      :low    => 10,
       :normal => 20,
-      :high => 30
+      :high   => 30
     }.freeze
 
     # initial empty hooks
     @registry = {
-      :site => {
-        :after_init => [],
+      :site      => {
+        :after_init  => [],
         :after_reset => [],
-        :post_read => [],
-        :pre_render => [],
+        :post_read   => [],
+        :pre_render  => [],
         :post_render => [],
-        :post_write => []
+        :post_write  => []
       },
-      :pages => {
-        :post_init => [],
-        :pre_render => [],
+      :pages     => {
+        :post_init   => [],
+        :pre_render  => [],
         :post_render => [],
-        :post_write => []
+        :post_write  => []
       },
-      :posts => {
-        :post_init => [],
-        :pre_render => [],
+      :posts     => {
+        :post_init   => [],
+        :pre_render  => [],
         :post_render => [],
-        :post_write => []
+        :post_write  => []
       },
       :documents => {
-        :post_init => [],
-        :pre_render => [],
+        :post_init   => [],
+        :pre_render  => [],
         :post_render => [],
-        :post_write => []
+        :post_write  => []
       }
     }
 
@@ -61,10 +61,10 @@ module Jekyll
     # register a single hook to be called later, internal API
     def self.register_one(owner, event, priority, &block)
       @registry[owner] ||={
-        :post_init => [],
-        :pre_render => [],
+        :post_init   => [],
+        :pre_render  => [],
         :post_render => [],
-        :post_write => []
+        :post_write  => []
       }
 
       unless @registry[owner][event]

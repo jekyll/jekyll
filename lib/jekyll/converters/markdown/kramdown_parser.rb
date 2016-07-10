@@ -24,7 +24,8 @@ module Jekyll
 
         # Setup and normalize the configuration:
         #   * Create Kramdown if it doesn't exist.
-        #   * Set syntax_highlighter, detecting enable_coderay and merging highlighter if none.
+        #   * Set syntax_highlighter, detecting enable_coderay and merging
+        #       highlighter if none.
         #   * Merge kramdown[coderay] into syntax_highlighter_opts stripping coderay_.
         #   * Make sure `syntax_highlighter_opts` exists.
 
@@ -52,7 +53,9 @@ module Jekyll
           end
         end
 
-        # config[kramdown][syntax_higlighter] > config[kramdown][enable_coderay] > config[highlighter]
+        # config[kramdown][syntax_higlighter] >
+        #   config[kramdown][enable_coderay] >
+        #   config[highlighter]
         # Where `enable_coderay` is now deprecated because Kramdown
         # supports Rouge now too.
 
@@ -68,8 +71,10 @@ module Jekyll
 
           @highlighter = begin
             if @config.key?("enable_coderay") && @config["enable_coderay"]
-              Jekyll::Deprecator.deprecation_message "You are using 'enable_coderay', " \
+              Jekyll::Deprecator.deprecation_message(
+                "You are using 'enable_coderay', " \
                 "use syntax_highlighter: coderay in your configuration file."
+              )
 
               "coderay"
             else
@@ -81,7 +86,7 @@ module Jekyll
         private
         def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
-            cleaned_key = key.gsub(/\Acoderay_/, "")
+            cleaned_key = key.gsub(%r!\Acoderay_!, "")
 
             if key != cleaned_key
               Jekyll::Deprecator.deprecation_message(
@@ -100,8 +105,10 @@ module Jekyll
         private
         def modernize_coderay_config
           if highlighter == "coderay"
-            Jekyll::Deprecator.deprecation_message "You are using 'kramdown.coderay' in your configuration, " \
+            Jekyll::Deprecator.deprecation_message(
+              "You are using 'kramdown.coderay' in your configuration, " \
               "please use 'syntax_highlighter_opts' instead."
+            )
 
             @config["syntax_highlighter_opts"] = begin
               strip_coderay_prefix(

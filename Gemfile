@@ -4,7 +4,6 @@ gemspec :name => "jekyll"
 gem "rake", "~> 11.0"
 group :development do
   gem "launchy", "~> 2.3"
-  gem "rubocop", :branch => :master, :github => "bbatsov/rubocop"
   gem "pry"
 
   unless RUBY_ENGINE == "jruby"
@@ -15,6 +14,7 @@ end
 #
 
 group :test do
+  gem "rubocop"
   gem "cucumber", "~> 2.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
@@ -22,6 +22,9 @@ group :test do
   gem "rspec-mocks"
   gem "nokogiri"
   gem "rspec"
+  gem "test-theme", path: File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
+
+  gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
 
 #
@@ -85,4 +88,5 @@ group :site do
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag", "~> 1.1"
   gem "jekyll-avatar"
+  gem "jekyll-mentions"
 end

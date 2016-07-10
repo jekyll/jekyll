@@ -1,20 +1,20 @@
 module Jekyll
   module Tags
     class PostComparer
-      MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)$/
+      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!
 
       attr_reader :path, :date, :slug, :name
 
       def initialize(name)
         @name = name
 
-        all, @path, @date, @slug = *name.sub(/^\//, "").match(MATCHER)
+        all, @path, @date, @slug = *name.sub(%r!^/!, "").match(MATCHER)
         unless all
           raise Jekyll::Errors::InvalidPostNameError,
             "'#{name}' does not contain valid date and/or title."
         end
 
-        @name_regex = /^#{path}#{date}-#{slug}\.[^.]+/
+        @name_regex = %r!^#{path}#{date}-#{slug}\.[^.]+!
       end
 
       def post_date
@@ -42,9 +42,9 @@ module Jekyll
       def post_slug(other)
         path = other.basename.split("/")[0...-1].join("/")
         if path.nil? || path == ""
-          other.data['slug']
+          other.data["slug"]
         else
-          path + '/' + other.data['slug']
+          path + "/" + other.data["slug"]
         end
       end
     end
@@ -78,7 +78,8 @@ eos
 
         site.posts.docs.each do |p|
           next unless @post.deprecated_equality p
-          Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{@post.name} }}' did not match " \
+          Jekyll::Deprecator.deprecation_message "A call to "\
+            "'{{ post_url #{@post.name} }}' did not match " \
             "a post using the new matching method of checking name " \
             "(path-date-slug) equality. Please make sure that you " \
             "change this tag to match the post's name exactly."
@@ -95,4 +96,4 @@ eos
   end
 end
 
-Liquid::Template.register_tag('post_url', Jekyll::Tags::PostUrl)
+Liquid::Template.register_tag("post_url", Jekyll::Tags::PostUrl)

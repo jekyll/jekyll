@@ -9,7 +9,7 @@ module Jekyll
 
     alias_method :extname, :ext
 
-    FORWARD_SLASH = '/'.freeze
+    FORWARD_SLASH = "/".freeze
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w(
@@ -18,16 +18,16 @@ module Jekyll
       name
       path
       url
-    )
+    ).freeze
 
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.
 
-    HTML_EXTENSIONS = %W(
+    HTML_EXTENSIONS = %w(
       .html
       .xhtml
       .htm
-    )
+    ).freeze
 
     # Initialize a new Page.
     #
@@ -40,6 +40,7 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
+      @path = site.in_source_dir(base, dir, name)
 
       process(name)
       read_yaml(File.join(base, dir), name)
@@ -70,7 +71,7 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      data.nil? ? nil : data['permalink']
+      data.nil? ? nil : data["permalink"]
     end
 
     # The template of the permalink.
@@ -91,9 +92,9 @@ module Jekyll
     # Returns the String url.
     def url
       @url ||= URL.new({
-        :template => template,
+        :template     => template,
         :placeholders => url_placeholders,
-        :permalink => permalink
+        :permalink    => permalink
       }).to_s
     end
 
@@ -134,12 +135,12 @@ module Jekyll
     #
     # Returns the path to the source file
     def path
-      data.fetch('path') { relative_path.sub(/\A\//, '') }
+      data.fetch("path") { relative_path }
     end
 
     # The path to the page source file, relative to the site source
     def relative_path
-      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?))
+      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
     end
 
     # Obtain destination path.
@@ -166,7 +167,7 @@ module Jekyll
 
     # Returns the Boolean of whether this Page is an index file or not.
     def index?
-      basename == 'index'
+      basename == "index"
     end
 
     def trigger_hooks(hook_name, *args)

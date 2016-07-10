@@ -8,6 +8,8 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 
 ### Useful Guides
 
+- [Jekyll Tips](http://jekyll.tips) is a set of resources created by [CloudCannon](https://cloudcannon.com) to help folks get up and running with Jekyll. The cover all skill levels, and even include some great video tutorials.
+- [Jekyll Cheatsheet](http://cheat.jekyll.tips) is a single-page resource for Jekyll filters, variables, and the like.
 - [“Creating and Hosting a Personal Site on GitHub”](http://jmcglone.com/guides/github-pages/)
 - [‘Build A Blog With Jekyll And GitHub Pages’ on Smashing Magazine](http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/)
 - Publishing to GitHub Pages? [Check out our documentation page for just that purpose](/docs/github-pages/).
@@ -16,8 +18,10 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 
 ### Integrations
 
-- [Use FormKeep as a backend for forms (contact forms, hiring forms, etc.)](https://formkeep.com/guides/how-to-make-a-contact-form-in-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
-- [Use Simple Form to add a simple contact form](http://getsimpleform.com/)
+- Use a saas service as a backend for forms (contact forms, hiring forms, etc.)
+  - [Formspree (also open source)](http://formspree.io/)
+  - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
+  - [Simple Form](http://getsimpleform.com/)
 - [Jekyll Bootstrap](http://jekyllbootstrap.com), 0 to Blog in 3 minutes. Provides detailed explanations, examples, and helper-code to make getting started with Jekyll easier.
 - [Integrating Twitter with Jekyll](http://www.justkez.com/integrating-twitter-with-jekyll/)
   > “Having migrated Justkez.com to be based on Jekyll, I was pondering how I might include my recent twitterings on the front page of the site. In the WordPress world, this would have been done via a plugin which may or may not have hung the loading of the page, might have employed caching, but would certainly have had some overheads. … Not in Jekyll.”

@@ -1,5 +1,5 @@
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 permalink: /news/:year/:month/:day/:title/
 excerpt_separator: ""
 
@@ -32,3 +32,4 @@ gems:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-avatar
+  - jekyll-mentions

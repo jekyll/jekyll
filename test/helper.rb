@@ -6,7 +6,7 @@ $stdout.puts "# -------------------------------------------------------------"
 $VERBOSE = nil
 
 def jruby?
-  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == "jruby"
 end
 
 if ENV["CI"]
@@ -22,23 +22,23 @@ else
 end
 
 require "nokogiri"
-require 'rubygems'
-require 'ostruct'
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/profile'
-require 'rspec/mocks'
-require 'jekyll'
+require "rubygems"
+require "ostruct"
+require "minitest/autorun"
+require "minitest/reporters"
+require "minitest/profile"
+require "rspec/mocks"
+require_relative "../lib/jekyll.rb"
 
 Jekyll.logger = Logger.new(StringIO.new)
 
 unless jruby?
-  require 'rdiscount'
-  require 'redcarpet'
+  require "rdiscount"
+  require "redcarpet"
 end
 
-require 'kramdown'
-require 'shoulda'
+require "kramdown"
+require "shoulda"
 
 include Jekyll
 
@@ -51,26 +51,44 @@ Minitest::Reporters.use! [
 
 module Minitest::Assertions
   def assert_exist(filename, msg = nil)
-    msg = message(msg) {
-      "Expected '#{filename}' to exist"
-    }
+    msg = message(msg) { "Expected '#{filename}' to exist" }
     assert File.exist?(filename), msg
   end
 
   def refute_exist(filename, msg = nil)
-    msg = message(msg) {
-      "Expected '#{filename}' not to exist"
-    }
+    msg = message(msg) { "Expected '#{filename}' not to exist" }
     refute File.exist?(filename), msg
+  end
+end
+
+module DirectoryHelpers
+  def dest_dir(*subdirs)
+    test_dir("dest", *subdirs)
+  end
+
+  def source_dir(*subdirs)
+    test_dir("source", *subdirs)
+  end
+
+  def test_dir(*subdirs)
+    File.join(File.dirname(__FILE__), *subdirs)
   end
 end
 
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
+  include DirectoryHelpers
+  extend DirectoryHelpers
+
+  def mu_pp(obj)
+    s = obj.is_a?(Hash) ? JSON.pretty_generate(obj) : obj.inspect
+    s = s.encode Encoding.default_external if defined? Encoding
+    s
+  end
 
   def mocks_expect(*args)
-    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect).\
-      bind(self).call(*args)
+    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect)\
+      .bind(self).call(*args)
   end
 
   def before_setup
@@ -89,9 +107,12 @@ class JekyllUnitTest < Minitest::Test
     Jekyll::Site.new(site_configuration(overrides))
   end
 
-  def build_configs(overrides, base_hash = Jekyll::Configuration::DEFAULTS)
+  def default_configuration
+    Marshal.load(Marshal.dump(Jekyll::Configuration::DEFAULTS))
+  end
+
+  def build_configs(overrides, base_hash = default_configuration)
     Utils.deep_merge_hashes(base_hash, overrides)
-      .fix_common_issues.backwards_compatibilize.add_default_collections
   end
 
   def site_configuration(overrides = {})
@@ -102,29 +123,20 @@ class JekyllUnitTest < Minitest::Test
     build_configs({
       "source" => source_dir
     }, full_overrides)
-  end
-
-  def dest_dir(*subdirs)
-    test_dir('dest', *subdirs)
-  end
-
-  def source_dir(*subdirs)
-    test_dir('source', *subdirs)
+      .fix_common_issues
+      .backwards_compatibilize
+      .add_default_collections
   end
 
   def clear_dest
     FileUtils.rm_rf(dest_dir)
-    FileUtils.rm_rf(source_dir('.jekyll-metadata'))
-  end
-
-  def test_dir(*subdirs)
-    File.join(File.dirname(__FILE__), *subdirs)
+    FileUtils.rm_rf(source_dir(".jekyll-metadata"))
   end
 
   def directory_with_contents(path)
     FileUtils.rm_rf(path)
     FileUtils.mkdir(path)
-    File.open("#{path}/index.html", "w"){ |f| f.write("I was previously generated.") }
+    File.open("#{path}/index.html", "w") { |f| f.write("I was previously generated.") }
   end
 
   def with_env(key, value)

@@ -7,7 +7,7 @@ module Jekyll
         DEFAULTS = {
           "Cache-Control" => "private, max-age=0, proxy-revalidate, " \
             "no-store, no-cache, must-revalidate"
-        }
+        }.freeze
 
         def initialize(server, root, callbacks)
           # So we can access them easily.
@@ -25,8 +25,7 @@ module Jekyll
           super || super(req, res, "#{basename}.html")
         end
 
-        #
-
+        # rubocop:disable Style/MethodName
         def do_GET(req, res)
           rtn = super
           validate_and_ensure_charset(req, res)
@@ -38,10 +37,10 @@ module Jekyll
 
         private
         def validate_and_ensure_charset(_req, res)
-          key = res.header.keys.grep(/content-type/i).first
+          key = res.header.keys.grep(%r!content-type!i).first
           typ = res.header[key]
 
-          unless typ =~ /;\s*charset=/
+          unless typ =~ %r!;\s*charset=!
             res.header[key] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
           end
         end

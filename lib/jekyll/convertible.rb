@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'set'
+require "set"
 
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
@@ -20,12 +20,12 @@ module Jekyll
   module Convertible
     # Returns the contents as a String.
     def to_s
-      content || ''
+      content || ""
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
-      !(data.key?('published') && data['published'] == false)
+      !(data.key?("published") && data["published"] == false)
     end
 
     # Read the YAML frontmatter.
@@ -39,15 +39,15 @@ module Jekyll
       filename = File.join(base, name)
 
       begin
-        self.content = File.read(site.in_source_dir(base, name),
+        self.content = File.read(@path || site.in_source_dir(base, name),
                                  Utils.merged_file_read_opts(site, opts))
-        if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
+        if content =~ Document::YAML_FRONT_MATTER_REGEXP
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
       rescue SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
-      rescue Exception => e
+      rescue => e
         Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
       end
 
@@ -61,12 +61,13 @@ module Jekyll
 
     def validate_data!(filename)
       unless self.data.is_a?(Hash)
-        raise Errors::InvalidYAMLFrontMatterError, "Invalid YAML front matter in #{filename}"
+        raise Errors::InvalidYAMLFrontMatterError,
+          "Invalid YAML front matter in #{filename}"
       end
     end
 
     def validate_permalink!(filename)
-      if self.data['permalink'] && self.data['permalink'].size == 0
+      if self.data["permalink"] && self.data["permalink"].empty?
         raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
       end
     end
@@ -79,7 +80,10 @@ module Jekyll
         begin
           converter.convert output
         rescue => e
-          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error while converting '#{path}':"
+          Jekyll.logger.error(
+            "Conversion error:",
+            "#{converter.class} encountered an error while converting '#{path}':"
+          )
           Jekyll.logger.error("", e.to_s)
           raise e
         end
@@ -112,12 +116,17 @@ module Jekyll
     def render_liquid(content, payload, info, path)
       site.liquid_renderer.file(path).parse(content).render!(payload, info)
     rescue Tags::IncludeTagError => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
+      Jekyll.logger.error(
+        "Liquid Exception:",
+        "#{e.message} in #{e.path}, included in #{path || self.path}"
+      )
       raise e
+    # rubocop: disable RescueException
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || self.path}"
       raise e
     end
+    # rubocop: enable RescueException
 
     # Convert this Convertible's data to a Hash suitable for use by Liquid.
     #
@@ -168,7 +177,7 @@ module Jekyll
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      '.coffee'.eql?(ext)
+      ".coffee" == ext
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -205,19 +214,25 @@ module Jekyll
       # recursively render layouts
       layout = layouts[data["layout"]]
 
-      Jekyll.logger.warn("Build Warning:", "Layout '#{data["layout"]}' requested in #{path} does not exist.") if invalid_layout? layout
+      Jekyll.logger.warn(
+        "Build Warning:",
+        "Layout '#{data["layout"]}' requested in #{path} does not exist."
+      ) if invalid_layout? layout
 
       used = Set.new([layout])
+
+      # Reset the payload layout data to ensure it starts fresh for each page.
+      payload["layout"] = nil
 
       while layout
         Jekyll.logger.debug "Rendering Layout:", path
         payload["content"] = output
-        payload["layout"]  = Utils.deep_merge_hashes(payload["layout"] || {}, layout.data)
+        payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
 
         self.output = render_liquid(layout.content,
-                                         payload,
-                                         info,
-                                         File.join(site.config['layouts_dir'], layout.name))
+                                    payload,
+                                    info,
+                                    layout.relative_path)
 
         # Add layout to dependency tree
         site.regenerator.add_dependency(
@@ -225,12 +240,9 @@ module Jekyll
           site.in_source_dir(layout.path)
         )
 
-        if layout = layouts[layout.data["layout"]]
-          if used.include?(layout)
-            layout = nil # avoid recursive chain
-          else
-            used << layout
-          end
+        if (layout = layouts[layout.data["layout"]])
+          break if used.include?(layout)
+          used << layout
         end
       end
     end
@@ -246,7 +258,10 @@ module Jekyll
 
       Jekyll.logger.debug "Pre-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :pre_render, self, payload
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload["page"] } }
+      info = {
+        :filters   => [Jekyll::Filters],
+        :registers => { :site => site, :page => payload["page"] }
+      }
 
       # render and transform content (this becomes the final content of the object)
       payload["highlighter_prefix"] = converters.first.highlighter_prefix
@@ -275,9 +290,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
-        f.write(output)
-      end
+      File.write(path, output, :mode => "wb")
       Jekyll::Hooks.trigger hook_owner, :post_write, self
     end
 

@@ -19,6 +19,18 @@
   * Allow static files to be symlinked in unsafe mode or non-prod environments (#4640)
   * Add `:after_init` hook & add `Site#config=` to make resetting config easy (#4703)
   * DocumentDrop: add `#<=>` which sorts by date (falling back to path) (#4741)
+  * Add a where_exp filter for filtering by expression (#4478)
+  * Globalize Jekyll's Filters. (#4792)
+  * Gem-based themes (#4595)
+  * Allow symlinks if they point to stuff inside site.source (#4710)
+  * Update colorator dependency to v1.x (#4855)
+  * Move EntryFilter to use Pathutil & fix `glob_include?` (#4859)
+  * Add 'jekyll new-theme' command to help users get up and running creating a theme (#4848)
+  * markdownify and smartify should convert input to string before conversion (#4958)
+  * Run Site#generate for 'jekyll doctor' to catch plugin issues (#5005)
+  * Add normalize_whitepace filter (#4917)
+  * Move bin/jekyll to exe/jekyll to prevent collision with binstubs (#5014)
+  * Cleaning up site template & theme updates. (#4922)
 
 ### Bug Fixes
 
@@ -30,6 +42,21 @@
   * Ensures related_posts are only set for a post (#4620)
   * EntryFilter#special?: ignore filenames which begin with '~' (#4491)
   * Cleaner: `keep_files` should only apply to the beginning of paths, not substrings with index > 0 (#3849)
+  * Use SSLEnable instead of EnableSSL and make URL HTTPS. (#4693)
+  * convertible: use Document::YAML_FRONT_MATTER_REGEXP to parse transformable files (#4786)
+  * Example in the site template should be IANA-approved example.com (#4793)
+  * 3.2.x/master: Fix defaults for Documents (posts/collection docs) (#4808)
+  * Don't rescue LoadError or bundler load errors for Bundler. (#4857)
+  * `Serve.process` should receive same config as `Build.process` (#4953)
+  * Prevent reset of page in Liquid payload right before rendering layouts (#5009)
+
+### Forward Ports
+
+  * From v3.1.4: Add ExcerptDrop and remove excerpt's ability to refer to itself in Liquid (#4941)
+  * From v3.1.4: Configuration permalink fix and addition of Configuration.from and sorting `site.collections` by label (#4942)
+  * From v3.1.4: Fix `{{ layout }}` oddities (proper inheritance & fixing overflow of old data) (#4943)
+  * From v3.1.5: Sort the results of the `require_all` glob (#4944)
+  * From v3.1.6: Add ability to render drops as JSON (#4945)
 
 ### Development Fixes
 
@@ -41,6 +68,44 @@
   * Update Rake & disable warnings when running tests (#4720)
   * Fix many warnings (#4537)
   * Don't blindly assume the last system when determining "open" cmd (#4717)
+  * Fix "locally" typo in contributing documentation (#4756)
+  * Update Rubocop rules (#4886)
+  * Flesh out the issue template to be much more detailed (#4849)
+  * Fixing rubocop offenses in lib/jekyll/cleaner.rb (#4892)
+  * Update `jekyll/commands*` to pass rubocop rules (#4888)
+  * Clean up many test files to pass Rubocop rules (#4902)
+  * Rubocop cleanup for some utils and further test files (#4916)
+  * Rubocop: Low hanging fruit (#4936)
+  * Rubocop: `Drop` changes from v3.1 forward-ports (#4949)
+  * Rubocop: cleanup for misc files (#4946)
+  * Rubocop: Stevenson (#4951)
+  * Rubocop: lib/jekyll/entry_filter.rb (#4950)
+  * Rubocop: `test/*` (#4947)
+  * Rubocop: features (#4934)
+  * Rubocop: Liquid renderer (#4933)
+  * Rubocop: converters (#4931)
+  * Rubocop: Site Drop (#4948)
+  * Rubocop: tags (#4938)
+  * Rubocop: Readers (#4932)
+  * rubocop: jekyll/lib/frontmatter_defaults.rb (#4974)
+  * rubocop: features/step_definitions.rb (#4956)
+  * Rubocop theme and url jekyll libs (#4959)
+  * Rubocop jekyll.rb (#4966)
+  * Rubocop: use %r for all regular expressions. (#4979)
+  * Cleanup and make misc files compliant with Rubocop. (#4940)
+  * Rubocop: jekyll/lib/site.rb (#4973)
+  * Add timings for each scenario in cucumber & print worst offenders (#4908)
+  * rubocop: jekyll/lib/filters.rb (#4993)
+  * Fix rubocop offenses in exe/jekyll (#5017)
+  * Rubocop: lib/jekyll/command.rb  (#5018)
+  * rubocop: lib/jekyll/static_file.rb (#5019)
+  * rubocop: lib/jekyll/utils.rb (#5026)
+  * rubocop: lib/jekyll/regenerator.rb (#5025)
+  * rubocop: lib/jekyll/configuration.rb (#5024)
+  * rubocop: lib/jekyll/renderer.rb style fixes (#5032)
+  * rubocop: lib/jekyll/convertible.rb style fixes (#5031)
+  * rubocop: lib/jekyll/document.rb style fixes (#5030)
+  * Remove ruby-head from Travis matrix & fix jruby failures (#5015)
 
 ### Site Enhancements
 
@@ -65,6 +130,66 @@
   * Add Hawkins to the list of third-party plugins (#4755)
   * Fix a typo in pagination doc (#4763)
   * Switch second GitHub Pages link to HTTPS (#4760)
+  * Explain data file format requirements more clearly in documentation (#4781)
+  * Add jekyll-i18n_tags to list of third-party plugins (#4775)
+  * Remove Leonard Lamprecht's website from Sites page (#4771)
+  * Updates documentation for collections to include `date` property (#4769)
+  * Added an explicit rerun note to configuration.md, defaults section (#4734)
+  * Update Rack-Jekyll Heroku deployment blog post url (#4789)
+  * Added missing single quote on rsync client side command (#4813)
+  * Organize Form Platforms-as-a-Service into unified list & add FormSpree.io (#4754)
+  * Fixed typo on Configuration page (#4804)
+  * Update FormKeep URL on the Resources doc (#4844)
+  * site: use liquid & reduce some whitespace noise (#4854)
+  * Add jekyll-breadcrumbs to list of third-party plugins (#4874)
+  * Added Pug converter to list of third-party plugins (#4872)
+  * Add jekyll-ideal-image-slider to list of third-party plugins (#4863)
+  * Add Jekyll Tips and the Cheatsheet to the list of resources (#4887)
+  * Removed extra `</p>` from `site/_docs/permalinks.md` (#4890)
+  * Add pubstorm deployment instructions to docs (#4881)
+  * Corrected pagination docs for hidden: true feature (#4903)
+  * Remove a Broken Link for Refheap Plugin (#4971)
+  * Instructions on how to install github-gem on Windows (#4975)
+  * Minor tweak to fix missing apostrophne (#4962)
+  * Instructions on how to install github-gem on Windows (v2) (#4977)
+  * Fix inaccurate HTTP response header field name (#4976)
+  * Add post about GSoC project (#4980)
+  * Link to the HTML page instead of Markdown (#4985)
+  * Update normalize.css to v4.0.0. (#4989)
+  * Add jekyll-tags-list-plugin to list of third-party plugins (#5000)
+  * Windows docs: Command needs to be called from blog path (#5006)
+  * Update text to be consitent with example (#5010)
+  * Update template links to point to core Liquid site (#5012)
+  * Add generator-jekyllized to third-party plugins (#5027)
+  * Add Jekyll Art Hallery generator plugin to list of third-party plugins (#5043)
+
+## 3.1.6 / 2016-05-19
+
+### Bug Fixes
+
+  * Add ability to `jsonify` Drops such that, e.g. `site | jsonify`, works. (#4914)
+
+## 3.1.5 / 2016-05-18
+
+### Bug Fixes
+
+  * Sort the results of the `require_all` glob (affects Linux only). (#4912)
+
+## 3.1.4 / 2016-05-18
+
+### Bug Fixes
+
+  * Add `ExcerptDrop` and remove excerpt's ability to refer to itself in Liquid (#4907)
+  * Configuration permalink fix where `collections.posts.permalink` inherits properly from `permalink` only when it doesn't exist (#4910)
+  * Add `Configuration.from` to make it easier to build configs from just a hash
+  * Sorting `site.collections` in Liquid by label (#4910)
+  * Fix bug where `layout` in Liquid would inherit from previously-rendered layouts' metadatas (#4909)
+  * Fix bug where `layout` in Liquid would override in the wrong direction (more-specific layouts' data were overwritten by their parent layouts' data; this has now been reversed) (#4909)
+
+## 3.1.3 / 2016-04-18
+
+  * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4807)
+  * Use SSLEnable instead of EnableSSL and make URL HTTPS (WEBrick) (#4693)
 
 ## 3.1.2 / 2016-02-19
 
@@ -212,6 +337,15 @@
   * Added the Wordpress2Jekyll Wordpress plugin (#4377)
   * Add Contentful Extension to list of third-party plugins (#4390)
   * Correct Minor spelling error (#4394)
+
+## 3.0.5 / 2016-04-26
+
+  * Remove call to `#backwards_compatibilize` in `Configuration.from` (#4846)
+
+## 3.0.4 / 2016-04-18
+
+  * Fix defaults for Documents to lookup defaults based on `relative_path` instead of `url` (#4806)
+  * Configuration: allow users to specify a `collections.posts.permalink` directly without `permalink` clobbering it (#4753)
 
 ## 3.0.3 / 2016-02-08
 

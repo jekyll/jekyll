@@ -38,22 +38,21 @@ module Jekyll
         payload["paginator"] = document.pager.to_liquid
       end
 
-      if document.is_a?(Document) && document.collection.label == 'posts'
-        payload['site']['related_posts'] = document.related_posts
+      if document.is_a?(Document) && document.collection.label == "posts"
+        payload["site"]["related_posts"] = document.related_posts
       else
-        payload['site']['related_posts'] = nil
+        payload["site"]["related_posts"] = nil
       end
 
       # render and transform content (this becomes the final content of the object)
-      payload['highlighter_prefix'] = converters.first.highlighter_prefix
-      payload['highlighter_suffix'] = converters.first.highlighter_suffix
+      payload["highlighter_prefix"] = converters.first.highlighter_prefix
+      payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
       Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
       document.trigger_hooks(:pre_render, payload)
 
       info = {
-        :filters   => [Jekyll::Filters],
-        :registers => { :site => site, :page => payload['page'] }
+        :registers => { :site => site, :page => payload["page"] }
       }
 
       output = document.content
@@ -89,7 +88,9 @@ module Jekyll
         begin
           converter.convert output
         rescue => e
-          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error while converting '#{document.relative_path}':"
+          Jekyll.logger.error "Conversion error:",
+            "#{converter.class} encountered an error while "\
+            "converting '#{document.relative_path}':"
           Jekyll.logger.error("", e.to_s)
           raise e
         end
@@ -107,12 +108,16 @@ module Jekyll
     def render_liquid(content, payload, info, path = nil)
       site.liquid_renderer.file(path).parse(content).render!(payload, info)
     rescue Tags::IncludeTagError => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || document.relative_path}"
+      Jekyll.logger.error "Liquid Exception:",
+        "#{e.message} in #{e.path}, included in #{path || document.relative_path}"
       raise e
+    # rubocop: disable RescueException
     rescue Exception => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || document.relative_path}"
+      Jekyll.logger.error "Liquid Exception:",
+        "#{e.message} in #{path || document.relative_path}"
       raise e
     end
+    # rubocop: enable RescueException
 
     # Checks if the layout specified in the document actually exists
     #
@@ -133,20 +138,26 @@ module Jekyll
       output = content.dup
       layout = site.layouts[document.data["layout"]]
 
-      Jekyll.logger.warn("Build Warning:", "Layout '#{document.data["layout"]}' requested in #{document.relative_path} does not exist.") if invalid_layout? layout
+      Jekyll.logger.warn(
+        "Build Warning:",
+        "Layout '#{document.data["layout"]}' requested in "\
+        "#{document.relative_path} does not exist."
+      ) if invalid_layout? layout
 
-      used   = Set.new([layout])
+      used = Set.new([layout])
+
+      # Reset the payload layout data to ensure it starts fresh for each page.
+      payload["layout"] = nil
 
       while layout
-        payload['content'] = output
-        payload['page']    = document.to_liquid
-        payload['layout']  = Utils.deep_merge_hashes(payload['layout'] || {}, layout.data)
+        payload["content"] = output
+        payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
 
         output = render_liquid(
           layout.content,
           payload,
           info,
-          File.join(site.config['layouts_dir'], layout.name)
+          layout.relative_path
         )
 
         # Add layout to dependency tree
@@ -155,12 +166,9 @@ module Jekyll
           site.in_source_dir(layout.path)
         ) if document.write?
 
-        if layout = site.layouts[layout.data["layout"]]
-          if used.include?(layout)
-            layout = nil # avoid recursive chain
-          else
-            used << layout
-          end
+        if (layout = site.layouts[layout.data["layout"]])
+          break if used.include?(layout)
+          used << layout
         end
       end
 

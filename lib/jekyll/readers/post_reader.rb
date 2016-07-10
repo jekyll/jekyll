@@ -12,7 +12,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_drafts(dir)
-      read_publishable(dir, '_drafts', Document::DATELESS_FILENAME_MATCHER)
+      read_publishable(dir, "_drafts", Document::DATELESS_FILENAME_MATCHER)
     end
 
     # Read all the files in <source>/<dir>/_posts and create a new Document
@@ -22,7 +22,7 @@ module Jekyll
     #
     # Returns nothing.
     def read_posts(dir)
-      read_publishable(dir, '_posts', Document::DATE_FILENAME_MATCHER)
+      read_publishable(dir, "_posts", Document::DATE_FILENAME_MATCHER)
     end
 
     # Read all the files in <source>/<dir>/<magic_dir> and create a new
@@ -32,15 +32,14 @@ module Jekyll
     #
     # Returns nothing.
     def read_publishable(dir, magic_dir, matcher)
-      read_content(dir, magic_dir, matcher).tap do |docs|
-        docs.each(&:read)
-      end.select do |doc|
-        site.publisher.publish?(doc).tap do |will_publish|
-          if !will_publish && site.publisher.hidden_in_the_future?(doc)
-            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+      read_content(dir, magic_dir, matcher).tap { |docs| docs.each(&:read) }
+        .select do |doc|
+          site.publisher.publish?(doc).tap do |will_publish|
+            if !will_publish && site.publisher.hidden_in_the_future?(doc)
+              Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+            end
           end
         end
-      end
     end
 
     # Read all the content files from <source>/<dir>/magic_dir
@@ -57,7 +56,7 @@ module Jekyll
         next unless entry =~ matcher
         path = @site.in_source_dir(File.join(dir, magic_dir, entry))
         Document.new(path, {
-          :site => @site,
+          :site       => @site,
           :collection => @site.posts
         })
       end.reject(&:nil?)

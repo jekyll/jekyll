@@ -1,5 +1,5 @@
-require 'jekyll/liquid_renderer/file'
-require 'jekyll/liquid_renderer/table'
+require "jekyll/liquid_renderer/file"
+require "jekyll/liquid_renderer/table"
 
 module Jekyll
   class LiquidRenderer
@@ -13,7 +13,10 @@ module Jekyll
     end
 
     def file(filename)
-      filename = @site.in_source_dir(filename).sub(/\A#{Regexp.escape(@site.source)}\//, '')
+      filename = @site.in_source_dir(filename).sub(
+        %r!\A#{Regexp.escape(@site.source)}/!,
+        ""
+      )
 
       LiquidRenderer::File.new(self, filename).tap do
         @stats[filename] ||= {}
