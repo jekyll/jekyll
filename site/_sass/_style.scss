@@ -56,6 +56,7 @@ nav {
   ul {
     padding: 0;
     margin: 0;
+    white-space: nowrap;
   }
 
   li { display: inline-block; }
@@ -984,6 +985,21 @@ code.output {
   a .show-on-mobiles {
     display: inline !important;
   }
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 52.4%;
+  padding-top: 25px;
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 
