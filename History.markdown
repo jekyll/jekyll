@@ -168,6 +168,7 @@
   * Add Jekyll Art Hallery generator plugin to list of third-party plugins (#5043)
   * Add Formingo to the list of Jekyll form SaaS (#5054)
   * Highlight help nav item when navigated to. (#5058)
+  * Update normalize.css to v4.2.0. (#5096)
 
 ## 3.1.6 / 2016-05-19
 
