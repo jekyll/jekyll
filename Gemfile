@@ -2,6 +2,9 @@ source "https://rubygems.org"
 gemspec :name => "jekyll"
 
 gem "rake", "~> 11.0"
+
+gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_ENGINE == 'ruby' && RUBY_VERSION < '2.2.2'
+
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
