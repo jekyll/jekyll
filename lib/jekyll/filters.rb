@@ -260,6 +260,15 @@ module Jekyll
       end
     end
 
+    # Convert the input into integer
+    #
+    # input - the object string
+    #
+    # Returns the integer value
+    def to_integer(input)
+      input.to_i
+    end
+
     # Sort an array of objects
     #
     # input - the object array
