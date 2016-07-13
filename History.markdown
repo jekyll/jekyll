@@ -112,6 +112,7 @@
   * Remove ruby-head from Travis matrix & fix jruby failures (#5015)
   * Remove useless statement from Configuration test (#5065)
   * Change baseurl to example.com for some test cases (#5068)
+  * use activesupport < 5 if we are on a Ruby < 2.2.2 (#5100)
 
 ### Site Enhancements
 
