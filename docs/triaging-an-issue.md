@@ -2,7 +2,14 @@
 
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
 
-Here are some key things to remember when evaluating an issue.
+Before evaluating an issue, it is important to identify if it is a feature
+request or a bug. For the Jekyll project the following definitions are used
+to identify a feature or a bug:
+
+**Feature** - A feature is defined as a request that adds functionality to
+Jekyll outside of its current capabilities.
+**Bug** - A bug is defined as an issue that identifies an error that a user
+(or users) encounter when using current Jekyll functionalities.
 
 ## Feature?
 
