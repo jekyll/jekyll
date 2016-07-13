@@ -266,7 +266,14 @@ module Jekyll
     #
     # Returns the integer value
     def to_integer(input)
-      input.to_i
+      return input if input.is_a?(Integer)
+      return 1 if input == true
+      return 0 if input == false
+      begin
+        input.to_i
+      rescue
+        raise ArgumentError, "Invalid input object type."
+      end
     end
 
     # Sort an array of objects
