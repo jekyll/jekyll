@@ -26,6 +26,7 @@ class TestFilters < JekyllUnitTest
       @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
+      @integer_as_string = "142857"
       @array_of_objects = [
         { "color" => "red",  "size" => "large"  },
         { "color" => "red",  "size" => "medium" },
@@ -233,6 +234,13 @@ class TestFilters < JekyllUnitTest
           assert_equal(
             "Tue, 11 Sep 2001 12:46:30 +0000",
             @filter.date_to_rfc822(@time_as_string)
+          )
+        end
+
+        should "convert a String to Integer" do
+          assert_equal(
+            142_857,
+            @filter.to_integer(@integer_as_string)
           )
         end
       end
@@ -632,6 +640,28 @@ class TestFilters < JekyllUnitTest
       should "return sorted by property array with nils last" do
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
           @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
+      end
+    end
+
+    context "to_integer filter" do
+      should "raise Exception when input is not integer or string" do
+        assert_raises NoMethodError do
+          @filter.to_integer([1, 2])
+        end
+      end
+      should "return 0 when input is nil" do
+        assert_equal 0, @filter.to_integer(nil)
+      end
+      should "return integer when input is boolean" do
+        assert_equal 0, @filter.to_integer(false)
+        assert_equal 1, @filter.to_integer(true)
+      end
+      should "return integers" do
+        assert_equal 0, @filter.to_integer(0)
+        assert_equal 1, @filter.to_integer(1)
+        assert_equal 1, @filter.to_integer(1.42857)
+        assert_equal(-1, @filter.to_integer(-1))
+        assert_equal(-1, @filter.to_integer(-1.42857))
       end
     end
 
