@@ -63,8 +63,8 @@ You can also invoke `html-proofer` in Ruby scripts (e.g. in a Rakefile):
 {% highlight ruby %}
 #!/usr/bin/env ruby
 
-require 'html/proofer'
-HTML::Proofer.new("./_site").run
+require 'html-proofer'
+HTMLProofer.check_directory("./_site").run
 {% endhighlight %}
 
 Options are given as a second argument to `.new`, and are encoded in a
