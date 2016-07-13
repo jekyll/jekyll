@@ -172,6 +172,7 @@
   * Highlight help nav item when navigated to. (#5058)
   * Update normalize.css to v4.2.0. (#5096)
   * Updates html-proofer code (#5098)
+  * Jekyll Community (#5097)
 
 ## 3.1.6 / 2016-05-19
 
