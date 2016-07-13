@@ -239,7 +239,7 @@ class TestFilters < JekyllUnitTest
 
         should "convert a String to Integer" do
           assert_equal(
-            142857,
+            142_857,
             @filter.to_integer(@integer_as_string)
           )
         end
