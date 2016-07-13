@@ -662,8 +662,8 @@ class TestFilters < JekyllUnitTest
         assert_equal 0, @filter.to_integer(0)
         assert_equal 1, @filter.to_integer(1)
         assert_equal 1, @filter.to_integer(1.42857)
-        assert_equal -1, @filter.to_integer(-1)
-        assert_equal -1, @filter.to_integer(-1.42857)
+        assert_equal(-1, @filter.to_integer(-1))
+        assert_equal(-1, @filter.to_integer(-1.42857))
       end
     end
 
