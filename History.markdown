@@ -33,6 +33,7 @@
   * Cleaning up site template & theme updates. (#4922)
   * Add fetch method to Drops (#5056)
   * Extract tag name to class method (#5063)
+  * check if relative URL contains a colon (#5069)
 
 ### Bug Fixes
 
