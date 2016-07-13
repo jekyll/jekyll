@@ -113,6 +113,7 @@
   * Remove useless statement from Configuration test (#5065)
   * Change baseurl to example.com for some test cases (#5068)
   * use activesupport < 5 if we are on a Ruby < 2.2.2 (#5100)
+  * Internal documentation for working on Jekyll (#5011)
 
 ### Site Enhancements
 
