@@ -645,7 +645,7 @@ class TestFilters < JekyllUnitTest
 
     context "to_integer filter" do
       should "raise Exception when input is not integer or string" do
-        err_msg = "Invalid input object type."
+        err_msg = "Object '[1, 2]' could not be converted into an integer."
         err = assert_raises ArgumentError do
           @filter.to_integer([1, 2])
         end
