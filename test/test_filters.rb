@@ -645,16 +645,9 @@ class TestFilters < JekyllUnitTest
 
     context "to_integer filter" do
       should "raise Exception when input is not integer or string" do
-        err_msg = <<-EOS.strip!
-undefined method `to_i' for [1, 2]:Array
-Did you mean?  to_s
-               to_a
-               to_h
-EOS
-        err = assert_raises NoMethodError do
+        assert_raises NoMethodError do
           @filter.to_integer([1, 2])
         end
-        assert_equal err_msg, err.message
       end
       should "return 0 when input is nil" do
         assert_equal 0, @filter.to_integer(nil)
