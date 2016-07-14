@@ -273,7 +273,8 @@ module Jekyll
       begin
         input.to_i
       rescue
-        raise ArgumentError, "Object '#{input.inspect}' could not be converted into an integer."
+        raise ArgumentError,
+          "Object '#{input.inspect}' could not be converted into an integer."
       end
     end
 
