@@ -267,7 +267,6 @@ module Jekyll
     #
     # Returns the integer value
     def to_integer(input)
-      return input if input.is_a?(Integer)
       return 1 if input == true
       return 0 if input == false
       begin
