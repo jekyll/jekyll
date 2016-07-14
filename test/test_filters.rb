@@ -645,8 +645,13 @@ class TestFilters < JekyllUnitTest
 
     context "to_integer filter" do
       should "raise Exception when input is not integer or string" do
-        err_msg = "Object '[1, 2]' could not be converted into an integer."
-        err = assert_raises ArgumentError do
+        err_msg = <<-EOS.strip!
+undefined method `to_i' for [1, 2]:Array
+Did you mean?  to_s
+               to_a
+               to_h
+EOS
+        err = assert_raises NoMethodError do
           @filter.to_integer([1, 2])
         end
         assert_equal err_msg, err.message

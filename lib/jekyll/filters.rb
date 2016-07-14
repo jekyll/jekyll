@@ -4,7 +4,6 @@ require "date"
 require "liquid"
 
 module Jekyll
-  # rubocop:disable Metrics/ModuleLength
   module Filters
     # Convert a Markdown string into HTML output.
     #
@@ -269,12 +268,7 @@ module Jekyll
     def to_integer(input)
       return 1 if input == true
       return 0 if input == false
-      begin
-        input.to_i
-      rescue
-        raise ArgumentError,
-          "Object '#{input.inspect}' could not be converted into an integer."
-      end
+      input.to_i
     end
 
     # Sort an array of objects
