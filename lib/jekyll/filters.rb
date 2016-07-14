@@ -4,6 +4,7 @@ require "date"
 require "liquid"
 
 module Jekyll
+  # rubocop:disable Metrics/ModuleLength
   module Filters
     # Convert a Markdown string into HTML output.
     #
