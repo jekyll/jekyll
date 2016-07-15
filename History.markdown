@@ -34,6 +34,7 @@
   * Add fetch method to Drops (#5056)
   * Extract tag name to class method (#5063)
   * check if relative URL contains a colon (#5069)
+  * Enable strict (or lax) liquid parsing via a config variable. (#5053)
 
 ### Bug Fixes
 
