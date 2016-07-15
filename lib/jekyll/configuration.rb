@@ -55,6 +55,10 @@ module Jekyll
       "verbose"           => false,
       "defaults"          => [],
 
+      "liquid"            => {
+        "error_mode" => "warn"
+      },
+
       "rdiscount"         => {
         "extensions" => []
       },

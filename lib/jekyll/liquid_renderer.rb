@@ -5,6 +5,7 @@ module Jekyll
   class LiquidRenderer
     def initialize(site)
       @site = site
+      Liquid::Template.error_mode = @site.config["liquid"]["error_mode"].to_sym
       reset
     end
 
