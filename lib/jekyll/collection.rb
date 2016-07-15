@@ -57,9 +57,9 @@ module Jekyll
         full_path = collection_dir(file_path)
         next if File.directory?(full_path)
         if Utils.has_yaml_header? full_path
-          read_docs(full_path)
+          read_document(full_path)
         else
-          read_files(file_path, full_path)
+          read_static_file(file_path, full_path)
         end
       end
       docs.sort!
@@ -197,8 +197,8 @@ module Jekyll
     end
 
     private
-    def read_docs(full_path)
-      doc = Jekyll::Document.new(full_path, { :site => site, :collection => self })
+    def read_document(full_path)
+      doc = Jekyll::Document.new(full_path, :site => site, :collection => self)
       doc.read
       if site.publisher.publish?(doc) || !write?
         docs << doc
@@ -208,11 +208,14 @@ module Jekyll
     end
 
     private
-    def read_files(file_path, full_path)
-      relative_dir = Jekyll.sanitized_path(relative_directory,
-                                           File.dirname(file_path)).chomp("/.")
+    def read_static_file(file_path, full_path)
+      relative_dir = Jekyll.sanitized_path(
+        relative_directory,
+        File.dirname(file_path)
+      ).chomp("/.")
+
       files << StaticFile.new(site, site.source, relative_dir,
-                              File.basename(full_path), self)
+        File.basename(full_path), self)
     end
   end
 end
