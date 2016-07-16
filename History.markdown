@@ -56,6 +56,7 @@
   * Prevent reset of page in Liquid payload right before rendering layouts (#5009)
   * Add missing fields to ExcerptDrop (#5067)
   * Stringify configuration overrides before first use (#5060)
+  * hooks: move after_init hook call at the end of Site.initialize (#5106)
 
 ### Forward Ports
 
