@@ -29,10 +29,10 @@ module Jekyll
 
       Jekyll.sites << self
 
-      Jekyll::Hooks.trigger :site, :after_init, self
-
       reset
       setup
+
+      Jekyll::Hooks.trigger :site, :after_init, self
     end
 
     # Public: Set the site's configuration. This handles side-effects caused by
