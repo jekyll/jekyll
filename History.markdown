@@ -55,6 +55,7 @@
   * `Serve.process` should receive same config as `Build.process` (#4953)
   * Prevent reset of page in Liquid payload right before rendering layouts (#5009)
   * Add missing fields to ExcerptDrop (#5067)
+  * Stringify configuration overrides before first use (#5060)
 
 ### Forward Ports
 
