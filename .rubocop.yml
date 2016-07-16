@@ -4,7 +4,6 @@ AllCops:
   Include:
   - lib/**/*.rb
   Exclude:
-  - lib/jekyll/collection.rb
   - lib/jekyll/convertible.rb
   - lib/jekyll/document.rb
   - lib/jekyll/renderer.rb

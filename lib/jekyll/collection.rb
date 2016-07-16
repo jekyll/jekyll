@@ -57,18 +57,9 @@ module Jekyll
         full_path = collection_dir(file_path)
         next if File.directory?(full_path)
         if Utils.has_yaml_header? full_path
-          doc = Jekyll::Document.new(full_path, { :site => site, :collection => self })
-          doc.read
-          if site.publisher.publish?(doc) || !write?
-            docs << doc
-          else
-            Jekyll.logger.debug "Skipped From Publishing:", doc.relative_path
-          end
+          read_document(full_path)
         else
-          relative_dir = Jekyll.sanitized_path(relative_directory,
-            File.dirname(file_path)).chomp("/.")
-          files << StaticFile.new(site, site.source, relative_dir,
-            File.basename(full_path), self)
+          read_static_file(file_path, full_path)
         end
       end
       docs.sort!
@@ -164,7 +155,7 @@ module Jekyll
     #
     # Returns a sanitized version of the label.
     def sanitize_label(label)
-      label.gsub(/[^a-z0-9_\-\.]/i, "")
+      label.gsub(%r![^a-z0-9_\-\.]!i, "")
     end
 
     # Produce a representation of this Collection for use in Liquid.
@@ -203,6 +194,28 @@ module Jekyll
       else
         {}
       end
+    end
+
+    private
+    def read_document(full_path)
+      doc = Jekyll::Document.new(full_path, :site => site, :collection => self)
+      doc.read
+      if site.publisher.publish?(doc) || !write?
+        docs << doc
+      else
+        Jekyll.logger.debug "Skipped From Publishing:", doc.relative_path
+      end
+    end
+
+    private
+    def read_static_file(file_path, full_path)
+      relative_dir = Jekyll.sanitized_path(
+        relative_directory,
+        File.dirname(file_path)
+      ).chomp("/.")
+
+      files << StaticFile.new(site, site.source, relative_dir,
+        File.basename(full_path), self)
     end
   end
 end
