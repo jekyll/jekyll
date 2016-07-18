@@ -259,7 +259,7 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Normalize Whitespace</strong></p>
-        <p>Replace any occurance of whitespace with a single space.</p>
+        <p>Replace any occurrence of whitespace with a single space.</p>
       </td>
       <td class="align-center">
         <p>
