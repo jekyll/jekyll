@@ -36,7 +36,7 @@ class TestDocument < JekyllUnitTest
       assert_equal "configuration", @document.basename_without_ext
     end
 
-    should "know whether its a yaml file" do
+    should "know whether it's a YAML file" do
       assert_equal false, @document.yaml_file?
     end
 
@@ -110,7 +110,7 @@ class TestDocument < JekyllUnitTest
     end
   end
 
-  context "a document as part of a collection with frontmatter defaults" do
+  context "a document as part of a collection with front matter defaults" do
     setup do
       @site = fixture_site({
         "collections" => ["slides"],
@@ -127,14 +127,14 @@ class TestDocument < JekyllUnitTest
       @document = @site.collections["slides"].docs.select { |d| d.is_a?(Document) }.first
     end
 
-    should "know the frontmatter defaults" do
+    should "know the front matter defaults" do
       assert_equal "Example slide", @document.data["title"]
       assert_equal "slide", @document.data["layout"]
       assert_equal({ "key"=>"myval" }, @document.data["nested"])
     end
   end
 
-  context "a document as part of a collection with overriden default values" do
+  context "a document as part of a collection with overridden default values" do
     setup do
       @site = fixture_site({
         "collections" => ["slides"],
@@ -152,7 +152,7 @@ class TestDocument < JekyllUnitTest
       @document = @site.collections["slides"].docs[1]
     end
 
-    should "override default values in the document frontmatter" do
+    should "override default values in the document front matter" do
       assert_equal "Override title", @document.data["title"]
       assert_equal "slide", @document.data["layout"]
       assert_equal(
@@ -179,7 +179,7 @@ class TestDocument < JekyllUnitTest
       @document = @site.collections["slides"].docs.first
     end
 
-    should "know the frontmatter defaults" do
+    should "know the front matter defaults" do
       assert_equal "Example slide", @document.data["title"]
       assert_equal "slide", @document.data["layout"]
       assert_equal({ "key"=>"value123" }, @document.data["nested"])
@@ -203,7 +203,7 @@ class TestDocument < JekyllUnitTest
       @document = @site.collections["slides"].docs.first
     end
 
-    should "not know the specified frontmatter defaults" do
+    should "not know the specified front matter defaults" do
       assert_equal "Example slide", @document.data["title"]
       assert_equal "slide", @document.data["layout"]
       assert_equal nil, @document.data["nested"]

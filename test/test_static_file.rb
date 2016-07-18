@@ -118,7 +118,7 @@ class TestStaticFile < JekyllUnitTest
       assert @static_file.modified?
     end
 
-    should "known if the source path is modified, when its not" do
+    should "known if the source path is modified, when it's not" do
       @static_file.write(dest_dir)
       sleep 1 # wait, else the times are still the same
       assert !@static_file.modified?
@@ -128,7 +128,7 @@ class TestStaticFile < JekyllUnitTest
       assert @static_file.write?, "always true, with current implementation"
     end
 
-    should "be able to write itself to the desitination directory" do
+    should "be able to write itself to the destination directory" do
       assert @static_file.write(dest_dir)
     end
 

@@ -18,7 +18,7 @@ class TestRelatedPosts < JekyllUnitTest
     end
   end
 
-  context "building related posts with lsi" do
+  context "building related posts with LSI" do
     setup do
       if jruby?
         skip(
@@ -53,7 +53,7 @@ class TestRelatedPosts < JekyllUnitTest
       Jekyll::RelatedPosts.new(post).build
     end
 
-    should "use lsi for the related posts" do
+    should "use LSI for the related posts" do
       allow_any_instance_of(::ClassifierReborn::LSI).to \
         receive(:find_related).and_return(@site.posts[-1..-9])
       allow_any_instance_of(::ClassifierReborn::LSI).to receive(:build_index)

@@ -151,7 +151,7 @@ class TestFilters < JekyllUnitTest
         assert_equal "a b", @filter.normalize_whitespace("a \t \n\nb")
       end
 
-      should "strip whitespace from begining and end of string" do
+      should "strip whitespace from beginning and end of string" do
         assert_equal "a", @filter.normalize_whitespace("a ")
         assert_equal "a", @filter.normalize_whitespace(" a")
         assert_equal "a", @filter.normalize_whitespace(" a ")

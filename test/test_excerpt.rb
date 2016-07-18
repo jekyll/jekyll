@@ -77,7 +77,7 @@ class TestExcerpt < JekyllUnitTest
     end
 
     context "#to_liquid" do
-      should "contain the proper page data to mimick the post liquid" do
+      should "contain the proper page data to mimic the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
         url = "/bar/baz/z_category/mixedcase/2013/07/22/post-excerpt-with-layout.html"
         assert_equal url, @excerpt.to_liquid["url"]

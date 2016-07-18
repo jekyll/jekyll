@@ -547,7 +547,7 @@ CONTENT
       refute_match(%r!markdown\-html\-error!, @result)
     end
 
-    should "have the url to the \"complex\" post from 2008-11-21" do
+    should "have the URL to the \"complex\" post from 2008-11-21" do
       assert_match %r!/2008/11/21/complex/!, @result
     end
   end
@@ -576,12 +576,12 @@ CONTENT
       refute_match(%r!markdown\-html\-error!, @result)
     end
 
-    should "have the url to the \"complex\" post from 2008-11-21" do
+    should "have the URL to the \"complex\" post from 2008-11-21" do
       assert_match %r!1\s/2008/11/21/complex/!, @result
       assert_match %r!2\s/2008/11/21/complex/!, @result
     end
 
-    should "have the url to the \"nested\" post from 2008-11-21" do
+    should "have the URL to the \"nested\" post from 2008-11-21" do
       assert_match %r!3\s/2008/11/21/nested/!, @result
       assert_match %r!4\s/2008/11/21/nested/!, @result
     end
@@ -648,7 +648,7 @@ CONTENT
       refute_match(%r!markdown\-html\-error!, @result)
     end
 
-    should "have the url to the \"yaml_with_dots\" item" do
+    should "have the URL to the \"yaml_with_dots\" item" do
       assert_match(%r!/methods/yaml_with_dots\.html!, @result)
     end
   end
@@ -675,11 +675,11 @@ CONTENT
       refute_match(%r!markdown\-html\-error!, @result)
     end
 
-    should "have the url to the \"sanitized_path\" item" do
+    should "have the URL to the \"sanitized_path\" item" do
       assert_match %r!1\s/methods/sanitized_path\.html!, @result
     end
 
-    should "have the url to the \"site/generate\" item" do
+    should "have the URL to the \"site/generate\" item" do
       assert_match %r!2\s/methods/site/generate\.html!, @result
     end
   end
