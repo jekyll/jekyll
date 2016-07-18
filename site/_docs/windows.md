@@ -55,14 +55,14 @@ This section is part of an article written by [Jens Willmer][jwillmerPost]. To f
 
 Open a command prompt and execute the following commands:
 
- * `choco install ruby -version 2.2.4` 
+ * `choco install ruby -version 2.2.4`
  * `choco install ruby2.devkit` - _needed for compilation of json gem_
- 
-#### Configure Ruby development kit 
+
+#### Configure Ruby development kit
 
 The development kit did not set the environment path for Ruby so we need to do it.
- 
- * Open command prompt in `C:\tools\DevKit2` 
+
+ * Open command prompt in `C:\tools\DevKit2`
  * Execute `ruby dk.rb init` to create a file called `config.yml`
  * Edit the `config.yml` file and include the path to Ruby `- C:/tools/ruby22`
  * Execute the following command to set the path: `ruby dk.rb install`
@@ -80,7 +80,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 `cinst -Source "https://go.microsoft.com/fwlink/?LinkID=230477" libxslt`{:.language-ruby}
 
 `cinst -Source "https://go.microsoft.com/fwlink/?LinkID=230477" libiconv`{:.language-ruby}
- 
+
 ```language-ruby
  gem install nokogiri --^
    --with-xml2-include=C:\Chocolatey\lib\libxml2.2.7.8.7\build\native\include^
@@ -96,8 +96,8 @@ This gem is also needed in the github-pages and to get it running on Windows x64
  * Open command prompt and install [Bundler][]: `gem install bundler`
  * Create a file called `Gemfile` without any extension in your root directory of your blog
  * Copy & past the two lines into the file:
- 
- 
+
+
 ```language-ruby
 source 'http://rubygems.org'
 gem 'github-pages'
@@ -106,12 +106,12 @@ gem 'github-pages'
  * **Note:** We use an unsecure connection because SSL throws exceptions in the version of Ruby
  * Open a command prompt, target your local blog repository root, and install github-pages: `bundle install`
 
- 
+
 After this process you should have github-pages installed on your system and you can host your blog again with `jekyll s`. \\
 There will be a warning on startup that you should include `gem 'wdm', '>= 0.1.0' if Gem.win_platform?` to your `Gemfile` but I could not get `jekyll s` working if I include that line so for the moment I ignore that warning.
 
-In the future the installation process of the github-pages should be as simple as the setup of the blog. But as long as the new version of the Nokogiri ([v1.6.8][nokogiriReleases]) is not stable and referenced, it is work to get it up and running on Windows. 
- 
+In the future the installation process of the github-pages should be as simple as the setup of the blog. But as long as the new version of the Nokogiri ([v1.6.8][nokogiriReleases]) is not stable and referenced, it is work to get it up and running on Windows.
+
 [jwillmerPost]: http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46 "Installation instructions by Jens Willmer"
 [Chocolatey]: https://chocolatey.org/install "Package manager for Windows"
 [Bundler]: http://bundler.io/ "Ruby Dependencie Manager"

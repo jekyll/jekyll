@@ -146,7 +146,7 @@ module Jekyll
     #
     # string - the filename or title to slugify
     # mode - how string is slugified
-    # cased - whether to replace all  uppercase letters with their
+    # cased - whether to replace all uppercase letters with their
     # lowercase counterparts
     #
     # When mode is "none", return the given string.
