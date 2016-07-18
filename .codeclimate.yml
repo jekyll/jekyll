@@ -1,29 +1,33 @@
 engines:
-  rubocop: { enabled: true  }
-  fixme:   { enabled: false }
+  fixme:
+    enabled: false
+  rubocop:
+    enabled: true
+
 exclude_paths:
-- .rubocop.yml
-- .codeclimate.yml
-- .travis.yml
-- .gitignore
-- .rspec
+  - .codeclimate.yml
+  - .gitignore
+  - .rspec
+  - .rubocop.yml
+  - .travis.yml
 
-- Gemfile.lock
-- CHANGELOG.{md,markdown,txt,textile}
-- CONTRIBUTING.{md,markdown,txt,textile}
-- readme.{md,markdown,txt,textile}
-- README.{md,markdown,txt,textile}
-- Readme.{md,markdown,txt,textile}
-- ReadMe.{md,markdown,txt,textile}
-- COPYING
-- LICENSE
+  - Gemfile.lock
+  - CHANGELOG.{md,markdown,txt,textile}
+  - CONTRIBUTING.{md,markdown,txt,textile}
+  - readme.{md,markdown,txt,textile}
+  - README.{md,markdown,txt,textile}
+  - Readme.{md,markdown,txt,textile}
+  - ReadMe.{md,markdown,txt,textile}
+  - COPYING
+  - LICENSE
 
-- site/**/*
-- test/**/*
-- vendor/**/*
-- features/**/*
-- script/**/*
-- spec/**/*
+  - features/**/*
+  - script/**/*
+  - site/**/*
+  - spec/**/*
+  - test/**/*
+  - vendor/**/*
+
 ratings:
   paths:
-  - lib/**/*.rb
+    - lib/**/*.rb

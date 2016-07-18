@@ -2,15 +2,15 @@
 AllCops:
   TargetRubyVersion: 2.0
   Include:
-  - lib/**/*.rb
+    - lib/**/*.rb
   Exclude:
-  - lib/jekyll/convertible.rb
-  - lib/jekyll/document.rb
-  - lib/jekyll/renderer.rb
-  - bin/**/*
-  - benchmark/**/*
-  - script/**/*
-  - vendor/**/*
+    - lib/jekyll/convertible.rb
+    - lib/jekyll/document.rb
+    - lib/jekyll/renderer.rb
+    - bin/**/*
+    - benchmark/**/*
+    - script/**/*
+    - vendor/**/*
 Lint/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
@@ -20,20 +20,20 @@ Lint/UselessAccessModifier:
 Metrics/AbcSize:
   Max: 20
 Metrics/ClassLength:
-  Max: 300
   Exclude:
-  - !ruby/regexp /features\/.*.rb$/
-  - !ruby/regexp /test\/.*.rb$/
+    - !ruby/regexp /features\/.*.rb$/
+    - !ruby/regexp /test\/.*.rb$/
+  Max: 300
 Metrics/CyclomaticComplexity:
   Max: 8
 Metrics/LineLength:
+  Exclude:
+    - !ruby/regexp /features\/.*.rb/
   Max: 90
   Severity: warning
-  Exclude:
-  - !ruby/regexp /features\/.*.rb/
 Metrics/MethodLength:
-  Max: 20
   CountComments: false
+  Max: 20
   Severity: error
 Metrics/ModuleLength:
   Max: 240
@@ -48,8 +48,8 @@ Style/AlignArray:
 Style/AlignHash:
   EnforcedHashRocketStyle: table
 Style/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
   Enabled: false
+  EnforcedStyle: with_fixed_indentation
 Style/AndOr:
   Severity: error
 Style/Attr:
@@ -61,7 +61,7 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
   Exclude:
-  - !ruby/regexp /features\/.*.rb$/
+    - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
 Style/EmptyLinesAroundAccessModifier:
