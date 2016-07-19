@@ -121,6 +121,7 @@
   * rubocop: lib/jekyll/collection.rb (#5022)
   * tests: Typo fixes. (#5114)
   * Normalize yml files. (#5116)
+  * Whitespace cleanup. (#5113)
 
 ### Site Enhancements
 
