@@ -120,6 +120,7 @@
   * Internal documentation for working on Jekyll (#5011)
   * rubocop: lib/jekyll/collection.rb (#5022)
   * tests: Typo fixes. (#5114)
+  * Normalize yml files. (#5116)
 
 ### Site Enhancements
 
