@@ -122,6 +122,7 @@
   * tests: Typo fixes. (#5114)
   * Normalize yml files. (#5116)
   * Whitespace cleanup. (#5113)
+  * Add AppVeyor support. (#5115)
 
 ### Site Enhancements
 
