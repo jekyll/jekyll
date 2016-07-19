@@ -2,7 +2,7 @@ require "helper"
 require "jekyll/commands/doctor"
 
 class TestDoctorCommand < JekyllUnitTest
-  context "urls only differ by case" do
+  context "URLs only differ by case" do
     setup do
       clear_dest
     end

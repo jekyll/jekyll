@@ -99,7 +99,7 @@ class TestCommandsServe < JekyllUnitTest
         end
       end
 
-      context "enabling ssl" do
+      context "enabling SSL" do
         should "raise if enabling without key or cert" do
           assert_raises RuntimeError do
             custom_opts({

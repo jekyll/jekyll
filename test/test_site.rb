@@ -210,12 +210,12 @@ class TestSite < JekyllUnitTest
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
 
-    should "read pages with yaml front matter" do
+    should "read pages with YAML front matter" do
       abs_path = File.expand_path("about.html", @site.source)
       assert_equal true, Utils.has_yaml_header?(abs_path)
     end
 
-    should "enforce a strict 3-dash limit on the start of the YAML front-matter" do
+    should "enforce a strict 3-dash limit on the start of the YAML front matter" do
       abs_path = File.expand_path("pgp.key", @site.source)
       assert_equal false, Utils.has_yaml_header?(abs_path)
     end
@@ -330,7 +330,7 @@ class TestSite < JekyllUnitTest
         s = Site.new(site_configuration("markdown" => custom_processor))
         s.process
 
-        # Do some cleanup, we don't like straggling stuff's.
+        # Do some cleanup, we don't like straggling stuff.
         Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
       end
 
@@ -356,7 +356,7 @@ class TestSite < JekyllUnitTest
           s.process
         end
 
-        # Do some cleanup, we don't like straggling stuff's.
+        # Do some cleanup, we don't like straggling stuff.
         Jekyll::Converters::Markdown.send(:remove_const, :Custom)
       end
     end
@@ -544,7 +544,7 @@ class TestSite < JekyllUnitTest
         assert_equal mtime3, mtime4 # no modifications, so remain the same
       end
 
-      should "regnerate files that have had their destination deleted" do
+      should "regenerate files that have had their destination deleted" do
         contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
         @site.process
 

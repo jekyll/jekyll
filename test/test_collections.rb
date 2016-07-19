@@ -28,7 +28,7 @@ class TestCollections < JekyllUnitTest
       assert_equal @collection.label, "methods"
     end
 
-    should "have default url template" do
+    should "have default URL template" do
       assert_equal @collection.url_template, "/:collection/:path:output_ext"
     end
 
@@ -99,7 +99,7 @@ class TestCollections < JekyllUnitTest
       @collection = @site.collections["methods"]
     end
 
-    should "have custom url template" do
+    should "have custom URL template" do
       assert_equal @collection.url_template, "/awesome/:path/"
     end
   end
