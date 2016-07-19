@@ -1,8 +1,8 @@
 <!--
-  Hi! Thanks for considering to file a bug with Jekyll.  Please take the time to
+  Hi! Thanks for considering to file a bug with Jekyll. Please take the time to
   answer the basic questions. You can convert `[ ]` into `[x]` to check boxes (or submit
   and check.) If there is no need for certain fields like output and redirection, please delete
-  those headers before submitting.  We know not all tickets require those steps.
+  those headers before submitting. We know not all tickets require those steps.
   Otherwise, please try to be as detailed as possible.
   
   If you are unsure this is a bug in Jekyll, or this is a bug caused

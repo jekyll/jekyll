@@ -6,7 +6,7 @@ set -e
 
 if [[ -z "$TEST_SUITE" ]]
 then
-  script/test  ci
+  script/test ci
   script/cucumber
 elif [[ -x "script/$TEST_SUITE" ]]
 then

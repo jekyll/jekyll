@@ -76,7 +76,7 @@ gem 'github-pages'
 {% endhighlight %}
 
     And be sure to run <code>bundle update</code> often.
-    
+
     If you like to install <code>pages-gem</code> on Windows you can find instructions by Jens Willmer on <a href="http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins">how to install github-pages gem on Windows (x64)</a>.
   </p>
 </div>
@@ -84,8 +84,8 @@ gem 'github-pages'
 <div class="note info">
   <h5>Installing <code>github-pages</code> gem on Windows</h5>
   <p>
-    While Windows is not officially supported, it is possible 
-    to install <code>github-pages</code> gem on Windows. 
+    While Windows is not officially supported, it is possible
+    to install <code>github-pages</code> gem on Windows.
     Special instructions can be found on our
     <a href="../windows/#installation">Windows-specific docs page</a>.
   </p>

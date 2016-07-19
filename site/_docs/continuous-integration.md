@@ -204,7 +204,7 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 exclude: [vendor]
 {% endhighlight %}
 
-By default you should supply the `sudo: false` command to Travis. This command 
+By default you should supply the `sudo: false` command to Travis. This command
 explicitly tells Travis to run your build on Travis's [container-based
  infrastructure](https://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure). Running on the container-based infrastructure can often times
 speed up your build. If you have any trouble with your build, or if your build
