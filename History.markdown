@@ -123,6 +123,7 @@
   * Normalize yml files. (#5116)
   * Whitespace cleanup. (#5113)
   * Add AppVeyor support. (#5115)
+  * appveyor.yml: drop Ruby 2.0.0. (#5119)
 
 ### Site Enhancements
 
