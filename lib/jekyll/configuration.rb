@@ -25,6 +25,7 @@ module Jekyll
       # Filtering Content
       "show_drafts"       => nil,
       "limit_posts"       => 0,
+      "limit_pages"       => 0,
       "future"            => false,
       "unpublished"       => false,
 

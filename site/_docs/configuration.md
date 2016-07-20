@@ -241,6 +241,16 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--limit_posts NUM</code></p>
       </td>
     </tr>
+        <tr class="setting">
+      <td>
+        <p class="name"><strong>Limit Pages</strong></p>
+        <p class="description">Limit the number of pages to parse and publish.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">limit_pages: NUM</code></p>
+        <p><code class="flag">--limit_pages NUM</code></p>
+      </td>
+    </tr>
     <tr class="setting">
       <td>
         <p class="name"><strong>Force polling</strong></p>
