@@ -45,8 +45,6 @@ environment:
     - ruby_folder_version: "21"
       ruby_gems_folder: "2.1.0"
       TEST_SUITE: "cucumber"
-    - ruby_folder_version: "200"
-      ruby_gems_folder: "2.0.0"
 
 test_script:
   - ruby --version
