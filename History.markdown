@@ -36,6 +36,7 @@
   * check if relative URL contains a colon (#5069)
   * Enable strict (or lax) liquid parsing via a config variable. (#5053)
   * Add filter: to_integer (#5101)
+  * watcher: pass site instance to watch plugin (#5109)
 
 ### Bug Fixes
 
