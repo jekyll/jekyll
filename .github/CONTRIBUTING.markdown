@@ -68,7 +68,7 @@ One gotcha, all pull requests should be directed at the `master` branch (the def
 
 ### Adding plugins
 
-If you want to add your plugin to the [list of plugins](https://jekyllrb.com/docs/plugins/#available-plugins), please submit a pull request modifying the [plugins page source file](site/_docs/plugins.md) by adding a link to your plugin under the proper subheading depending upon its type.
+If you want to add your plugin to the [list of plugins](https://jekyllrb.com/docs/plugins/#available-plugins), please submit a pull request modifying the [plugins page source file](https://github.com/jekyll/jekyll/blob/master/site/_docs/plugins.md) by adding a link to your plugin under the proper subheading depending upon its type.
 
 ## Code Contributions
 
