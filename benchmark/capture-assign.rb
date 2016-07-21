@@ -8,7 +8,7 @@ template1 = '{% capture foobar %}foo{{ bar }}{% endcapture %}{{ foo }}{{ foobar 
 template2 = '{% assign foobar = "foo" | append: bar %}{{ foobar }}'
 
 def render(template)
-    Liquid::Template.parse(template).render("bar" => "42")
+  Liquid::Template.parse(template).render("bar" => "42")
 end
 
 puts render(template1)
