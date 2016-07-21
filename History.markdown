@@ -188,6 +188,7 @@
   * Jekyll Community (#5097)
   * Typo in documentation file templates.md (#5117)
   * Slightly, improve PNG compression. (#5112)
+  * docs: add jekyll-maps plugin reference (#5123)
 
 ## 3.1.6 / 2016-05-19
 
