@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://jekyllrb.com/docs/deployment-methods/">
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-07-18T22:06:31-07:00">
+<meta property="article:published_time" content="2016-07-22T14:41:38-07:00">
 <link rel="next" href="https://jekyllrb.com/docs/drafts/" title="Working with drafts">
 <link rel="prev" href="https://jekyllrb.com/docs/datafiles/" title="Data Files">
 <meta name="twitter:card" content="summary">
@@ -30,7 +30,7 @@
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Deployment methods",
-    "datePublished": "2016-07-18T22:06:31-07:00",
+    "datePublished": "2016-07-22T14:41:38-07:00",
     "description": "Transform your plain text into static websites and blogs",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
     "url": "https://jekyllrb.com/docs/deployment-methods/"
@@ -370,7 +370,7 @@ host your site directly on a CDN or file host like S3.</p>
 
 <p>Once you’ve generated the <code class="highlighter-rouge">_site</code> directory, you can easily scp it using a
 <code class="highlighter-rouge">tasks/deploy</code> shell script similar to [this deploy script][]. You’d obviously
-need to change the values to reflect your site’s details. There is even <a href="https://gist.github.com/henrik/214959">a 
+need to change the values to reflect your site’s details. There is even <a href="https://gist.github.com/henrik/214959">a
 matching TextMate command</a> that will help you run this script.</p>
 
 <h3 id="rsync">rsync</h3>
@@ -426,7 +426,7 @@ your host uses a different port than the default (e.g, HostGator)</li>
 
 <p>Using this setup, you might run the following command:</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">rsync -crvz --rsh<span class="o">=</span><span class="s1">'ssh -p2222'</span> --delete-after --delete-excluded   _site/ hostuser@example.org:</code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">rsync -crvz --rsh<span class="o">=</span><span class="s1">'ssh -p2222'</span> --delete-after --delete-excluded _site/ hostuser@example.org:</code></pre></figure>
 
 <p>Don’t forget the column <code class="highlighter-rouge">:</code> after server name!</p>
 
@@ -445,7 +445,7 @@ copy it to the output folder. This behavior can be changed in <code class="highl
 
 <h4 id="done">Done!</h4>
 
-<p>Now it’s possible to publish your website simply by running the  <code class="highlighter-rouge">deploy</code> 
+<p>Now it’s possible to publish your website simply by running the <code class="highlighter-rouge">deploy</code>
 script. If your SSH certificate  is <a href="https://martin.kleppmann.com/2013/05/24/improving-security-of-ssh-private-keys.html">passphrase-protected</a>, you will be asked to enter it when the
 script executes.</p>
 
