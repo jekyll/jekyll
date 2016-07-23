@@ -268,6 +268,15 @@ class TestFilters < JekyllUnitTest
           )
         end
       end
+
+      context "without input" do
+        should "raise an error if input is nil" do
+          err = assert_raises Jekyll::Errors::InvalidDateError do
+            @filter.date_to_xmlschema(nil)
+          end
+          assert_equal "Invalid Date: 'nil' is not a valid datetime.", err.message
+        end
+      end
     end
 
     should "escape xml with ampersands" do
