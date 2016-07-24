@@ -229,9 +229,10 @@ module Jekyll
       # Provide backwards-compatibility
       check_auto(config)
       check_server(config)
+      check_plugins(config)
 
       renamed_key "server_port", "port", config
-      renamed_key "plugins", "plugins_dir", config
+      renamed_key "plugins", "gems", config, false
       renamed_key "layouts", "layouts_dir", config
       renamed_key "data_source", "data_dir", config
 
@@ -280,11 +281,11 @@ module Jekyll
       config
     end
 
-    def renamed_key(old, new, config, _ = nil)
+    def renamed_key(old, new, config, with_deprecation_warning = true)
       if config.key?(old)
         Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" \
           " option has been renamed to '#{new}'. Please update your config" \
-          " file accordingly."
+          " file accordingly." if with_deprecation_warning
         config[new] = config.delete(old)
       end
     end
@@ -383,6 +384,23 @@ module Jekyll
           "We recommend you switch to Kramdown. To do this, replace " \
           "`markdown: maruku` with `markdown: kramdown` in your " \
           "`_config.yml` file."
+      end
+    end
+
+    # Private: Checks if the `plugins` config is a String
+    #
+    # config - the config hash
+    #
+    # Raises a Jekyll::Errors::InvalidConfigurationError if the config `plugins`
+    # is a string
+    private
+    def check_plugins(config)
+      if config.key?("plugins") && config["plugins"].is_a?(String)
+        Jekyll.logger.error "Configuration Error:", "You specified the" \
+          " `plugins` config in your configuration file as a String, please" \
+          " use an Array instead. If you wanted to set the directory of your" \
+          " plugins, use the config key `plugins_dir` instead."
+        raise Jekyll::Errors::InvalidConfigurationError, "plugins: #{config["plugins"]}"
       end
     end
   end

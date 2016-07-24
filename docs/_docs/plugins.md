@@ -27,12 +27,12 @@ You have 3 options for installing plugins:
 1. In your site source root, make a `_plugins` directory. Place your plugins
 here. Any file ending in `*.rb` inside this directory will be loaded before
 Jekyll generates your site.
-2. In your `_config.yml` file, add a new array with the key `gems` and the
+2. In your `_config.yml` file, add a new array with the key `plugins` and the
 values of the gem names of the plugins you'd like to use. An example:
 
 
-        gems: [jekyll-coffeescript, jekyll-watch, jekyll-assets]
-        # This will require each of these gems automatically.
+        plugins: [jekyll-coffeescript, jekyll-watch, jekyll-assets]
+        # This will require each of these plugins automatically.
 
     Then install your plugins using `gem install jekyll-coffeescript jekyll-watch jekyll-assets`
 

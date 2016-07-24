@@ -205,9 +205,9 @@ class TestConfiguration < JekyllUnitTest
         "exclude"     => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
         "include"     => "STOP_THE_PRESSES.txt,.heloses, .git",
         "pygments"    => true,
-        "plugins"     => true,
         "layouts"     => true,
         "data_source" => true,
+        "plugins"     => []
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -242,15 +242,26 @@ class TestConfiguration < JekyllUnitTest
       assert_equal @config.backwards_compatibilize["highlighter"], "pygments"
     end
     should "adjust directory names" do
-      assert @config.key?("plugins")
-      assert !@config.backwards_compatibilize.key?("plugins")
-      assert @config.backwards_compatibilize["plugins_dir"]
       assert @config.key?("layouts")
       assert !@config.backwards_compatibilize.key?("layouts")
       assert @config.backwards_compatibilize["layouts_dir"]
       assert @config.key?("data_source")
       assert !@config.backwards_compatibilize.key?("data_source")
       assert @config.backwards_compatibilize["data_dir"]
+    end
+    should "raise an error if `plugins` key is a string" do
+      config = Configuration[{ "plugins" => "_plugin" }]
+      assert_raises Jekyll::Errors::InvalidConfigurationError do
+        config.backwards_compatibilize
+      end
+    end
+    should "set the `plugins` config to `gems`" do
+      assert @config.key?("plugins")
+      expect(Jekyll::Deprecator).to_not(
+        receive(:deprecation_message).with(%r!The 'plugins' configuration!)
+      )
+      assert !@config.backwards_compatibilize["plugins"]
+      assert @config.backwards_compatibilize["gems"]
     end
   end
   context "#fix_common_issues" do
