@@ -373,8 +373,8 @@ module Jekyll
       when Numeric
         Time.at(input)
       else
-        Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
-        exit(1)
+        raise Errors::InvalidDateError,
+          "Invalid Date: '#{input.inspect}' is not a valid datetime."
       end.localtime
     end
 
