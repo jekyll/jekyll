@@ -374,7 +374,7 @@ module Jekyll
 
     private
     def check_maruku(config)
-      if config.fetch("markdown", "kramdown").to_s.casecmp("maruku") == 0
+      if config.fetch("markdown", "kramdown").to_s.casecmp("maruku").zero?
         Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " \
           "Markdown processor, which has been removed as of 3.0.0. " \
           "We recommend you switch to Kramdown. To do this, replace " \
