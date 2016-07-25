@@ -191,6 +191,7 @@
   * Slightly, improve PNG compression. (#5112)
   * docs: add jekyll-maps plugin reference (#5123)
   * docs: fix link to plugins page source (#5122)
+  * Update the configuration docs to match the code (#5131)
 
 ## 3.1.6 / 2016-05-19
 
