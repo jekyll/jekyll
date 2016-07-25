@@ -37,6 +37,7 @@
   * Enable strict (or lax) liquid parsing via a config variable. (#5053)
   * Add filter: to_integer (#5101)
   * watcher: pass site instance to watch plugin (#5109)
+  * Show liquid warnings. (#5129)
 
 ### Bug Fixes
 
