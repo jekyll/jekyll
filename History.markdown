@@ -60,6 +60,7 @@
   * Stringify configuration overrides before first use (#5060)
   * hooks: move after_init hook call at the end of Site.initialize (#5106)
   * filters: raise error if no input given to date filters (#5127)
+  * where_exp filter should filter posts (#4860)
 
 ### Forward Ports
 
