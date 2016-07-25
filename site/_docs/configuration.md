@@ -571,11 +571,13 @@ file or on the command-line.
 # Where things are
 source:       .
 destination:  ./_site
-plugins_dir:  ./_plugins
-layouts_dir:  ./_layouts
-data_dir:     ./_data
-includes_dir: ./_includes
-collections:  null
+plugins_dir:  _plugins
+layouts_dir:  _layouts
+data_dir:     _data
+includes_dir: _includes
+collections:
+  posts:
+    output:   true
 
 # Handling Reading
 safe:         false
@@ -607,6 +609,7 @@ detach:  false
 port:    4000
 host:    127.0.0.1
 baseurl: "" # does not include hostname
+show_dir_listing: false
 
 # Outputting
 permalink:     date
@@ -614,7 +617,11 @@ paginate_path: /page:num
 timezone:      null
 
 quiet:    false
+verbose:  false
 defaults: []
+
+liquid:
+  error_mode: warn
 
 # Markdown Processors
 rdiscount:
@@ -629,16 +636,19 @@ kramdown:
   entity_output:  as_char
   toc_levels:     1..6
   smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  enable_coderay: false
-
-  coderay:
-    coderay_wrap:              div
-    coderay_line_numbers:      inline
-    coderay_line_number_start: 1
-    coderay_tab_width:         4
-    coderay_bold_every:        10
-    coderay_css:               style
+  input:          GFM
+  hard_wrap:      false
+  footnote_nr:    1
 {% endhighlight %}
+
+## Liquid Options
+
+Liquid's response to errors can be configured by setting `error_mode`. The
+options are
+
+- `lax` --- Ignore all errors.
+- `warn` --- Output a warning on the console for each error.
+- `strict` --- Output an error message and stop the build.
 
 ## Markdown Options
 
@@ -688,16 +698,6 @@ extensions are:
 - `autolink`
 
 [redcarpet_extensions]: https://github.com/vmg/redcarpet/blob/v3.2.2/README.markdown#and-its-like-really-simple-to-use
-
-### Kramdown
-
-In addition to the defaults mentioned above, you can also turn on recognition
-of GitHub Flavored Markdown by passing an `input` option with a value of "GFM".
-
-For example, in your `_config.yml`:
-
-    kramdown:
-      input: GFM
 
 ### Custom Markdown Processors
 
