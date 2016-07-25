@@ -39,5 +39,12 @@ module Jekyll
     def stats_table(n = 50)
       LiquidRenderer::Table.new(@stats).to_s(n)
     end
+
+    def self.format_error(e, path)
+      if e.is_a? Tags::IncludeTagError
+        return "#{e.message} in #{e.path}, included in #{path}"
+      end
+      "#{e.message} in #{path}"
+    end
   end
 end

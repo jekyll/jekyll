@@ -106,15 +106,16 @@ module Jekyll
     #
     # Returns the content, rendered by Liquid.
     def render_liquid(content, payload, info, path = nil)
-      site.liquid_renderer.file(path).parse(content).render!(payload, info)
-    rescue Tags::IncludeTagError => e
-      Jekyll.logger.error "Liquid Exception:",
-        "#{e.message} in #{e.path}, included in #{path || document.relative_path}"
-      raise e
+      template = site.liquid_renderer.file(path).parse(content)
+      template.warnings.each do |e|
+        Jekyll.logger.warn "Liquid Warning:",
+          LiquidRenderer.format_error(e, path || document.relative_path)
+      end
+      template.render!(payload, info)
     # rubocop: disable RescueException
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:",
-        "#{e.message} in #{path || document.relative_path}"
+        LiquidRenderer.format_error(e, path || document.relative_path)
       raise e
     end
     # rubocop: enable RescueException
