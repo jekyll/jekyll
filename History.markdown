@@ -38,6 +38,7 @@
   * Add filter: to_integer (#5101)
   * watcher: pass site instance to watch plugin (#5109)
   * Show liquid warnings. (#5129)
+  * Add `--baseurl` to `build` subcommand (#5135)
 
 ### Bug Fixes
 
