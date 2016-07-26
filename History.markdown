@@ -130,10 +130,7 @@
   * Add AppVeyor support. (#5115)
   * appveyor.yml: drop Ruby 2.0.0. (#5119)
   * Fix indentation in benchmark (#5124)
-  * Style fixes for Rubocop 0.42.0
-
-- var == 0 becomes var.zero?
-- when defining method_missing, also define respond_to_missing? (#5137)
+  * Style fixes for Rubocop 0.42.0 - var == 0 becomes var.zero? - when defining method_missing, also define respond_to_missing? (#5137)
 
 ### Site Enhancements
 
@@ -200,6 +197,7 @@
   * docs: add jekyll-maps plugin reference (#5123)
   * docs: fix link to plugins page source (#5122)
   * Update the configuration docs to match the code (#5131)
+  * Removed confusing word repetition. (#5139)
 
 ## 3.1.6 / 2016-05-19
 
