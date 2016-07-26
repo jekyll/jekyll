@@ -258,7 +258,7 @@ class TestConfiguration < JekyllUnitTest
     should "set the `gems` config to `plugins`" do
       assert @config.key?("gems")
       expect(Jekyll::Deprecator).to_not(
-        receive(:deprecation_message).with(%r!The 'plugins' configuration!)
+        receive(:deprecation_message).with(%r!The 'gems' configuration!)
       )
       assert !@config.backwards_compatibilize["gems"]
       assert @config.backwards_compatibilize["plugins"]
