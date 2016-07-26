@@ -198,6 +198,7 @@
   * docs: fix link to plugins page source (#5122)
   * Update the configuration docs to match the code (#5131)
   * Removed confusing word repetition. (#5139)
+  * Add a note about script/fmt (#5138)
 
 ## 3.1.6 / 2016-05-19
 
