@@ -400,7 +400,8 @@ module Jekyll
           " `plugins` config in your configuration file as a String, please" \
           " use an Array instead. If you wanted to set the directory of your" \
           " plugins, use the config key `plugins_dir` instead."
-        raise Jekyll::Errors::InvalidConfigurationError, "plugins: #{config["plugins"]}"
+        raise Jekyll::Errors::InvalidConfigurationError,
+          "plugins: #{config["plugins"].inspect}"
       end
     end
   end
