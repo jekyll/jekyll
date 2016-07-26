@@ -367,7 +367,7 @@ module Jekyll
     def <=>(other)
       return nil unless other.respond_to?(:data)
       cmp = data["date"] <=> other.data["date"]
-      cmp = path <=> other.path if cmp.nil? || cmp == 0
+      cmp = path <=> other.path if cmp.nil? || cmp.zero?
       cmp
     end
 

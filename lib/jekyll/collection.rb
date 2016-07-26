@@ -25,7 +25,7 @@ module Jekyll
 
     # Override of normal respond_to? to match method_missing's logic for
     # looking in @data.
-    def respond_to?(method, include_private = false)
+    def respond_to_missing?(method, include_private = false)
       docs.respond_to?(method.to_sym, include_private) || super
     end
 
