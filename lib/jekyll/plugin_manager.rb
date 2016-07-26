@@ -25,7 +25,7 @@ module Jekyll
     # Returns nothing.
     def require_gems
       Jekyll::External.require_with_graceful_fail(
-        site.gems.select { |gem| plugin_allowed?(gem) }
+        site.plugins.select { |plugin| plugin_allowed?(plugin) }
       )
     end
 
@@ -47,12 +47,12 @@ module Jekyll
 
     # Check whether a gem plugin is allowed to be used during this build.
     #
-    # gem_name - the name of the gem
+    # plugin_name - the name of the plugin
     #
-    # Returns true if the gem name is in the whitelist or if the site is not
+    # Returns true if the plugin name is in the whitelist or if the site is not
     #   in safe mode.
-    def plugin_allowed?(gem_name)
-      !site.safe || whitelist.include?(gem_name)
+    def plugin_allowed?(plugin_name)
+      !site.safe || whitelist.include?(plugin_name)
     end
 
     # Build an array of allowed plugin gem names.

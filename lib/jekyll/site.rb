@@ -6,9 +6,9 @@ module Jekyll
     attr_reader   :source, :dest, :config
     attr_accessor :layouts, :pages, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
-                  :time, :future, :unpublished, :safe, :plugins, :limit_posts,
+                  :time, :future, :unpublished, :safe, :plugins_dir, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :plugin_manager, :theme
+                  :plugins, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
     attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
@@ -45,7 +45,7 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems).each do |opt|
+        show_drafts limit_posts keep_files plugins).each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -414,7 +414,7 @@ module Jekyll
     private
     def configure_plugins
       self.plugin_manager = Jekyll::PluginManager.new(self)
-      self.plugins        = plugin_manager.plugins_path
+      self.plugins_dir    = plugin_manager.plugins_path
     end
 
     private
