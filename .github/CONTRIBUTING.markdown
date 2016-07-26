@@ -90,7 +90,7 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 ### Code contributions generally
 
-* Jekyll follows the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby).
+* Jekyll uses the [Rubocop](https://github.com/bbatsov/rubocop) static analyzer to ensure that contributions follow the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby). Please check your code using `script/fmt` and resolve any errors before pushing your branch.
 
 * Don't bump the Gem version in your pull request (if you don't know what that means, you probably didn't).
 
