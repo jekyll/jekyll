@@ -207,7 +207,7 @@ class TestConfiguration < JekyllUnitTest
         "pygments"    => true,
         "layouts"     => true,
         "data_source" => true,
-        "plugins"     => []
+        "gems"        => []
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -255,13 +255,13 @@ class TestConfiguration < JekyllUnitTest
         config.backwards_compatibilize
       end
     end
-    should "set the `plugins` config to `gems`" do
-      assert @config.key?("plugins")
+    should "set the `gems` config to `plugins`" do
+      assert @config.key?("gems")
       expect(Jekyll::Deprecator).to_not(
         receive(:deprecation_message).with(%r!The 'plugins' configuration!)
       )
-      assert !@config.backwards_compatibilize["plugins"]
-      assert @config.backwards_compatibilize["gems"]
+      assert !@config.backwards_compatibilize["gems"]
+      assert @config.backwards_compatibilize["plugins"]
     end
   end
   context "#fix_common_issues" do

@@ -33,7 +33,7 @@ module Jekyll
 
       # Plugins
       "whitelist"         => [],
-      "gems"              => [],
+      "plugins"           => [],
 
       # Conversion
       "markdown"          => "kramdown",
@@ -232,7 +232,7 @@ module Jekyll
       check_plugins(config)
 
       renamed_key "server_port", "port", config
-      renamed_key "plugins", "gems", config, false
+      renamed_key "gems", "plugins", config, false
       renamed_key "layouts", "layouts_dir", config
       renamed_key "data_source", "data_dir", config
 
