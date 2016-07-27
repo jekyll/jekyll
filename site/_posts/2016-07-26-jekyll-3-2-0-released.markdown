@@ -62,7 +62,6 @@ patches, and so on. These release took the work of over 80 people:
 - David Von Lehman
 - David Zhang
 - Derek Gottlieb
-- DirtyF
 - Enes Gönültaş
 - EricH
 - Erick Sasse
