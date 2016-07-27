@@ -57,7 +57,6 @@ patches, and so on. These release took the work of over 80 people:
 - Chris Wells
 - chrisfinazzo
 - Clark Winkelmann
-- crisp
 - Dan Allen
 - David Von Lehman
 - David Zhang
