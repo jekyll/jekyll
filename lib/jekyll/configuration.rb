@@ -232,7 +232,7 @@ module Jekyll
       check_plugins(config)
 
       renamed_key "server_port", "port", config
-      renamed_key "gems", "plugins", config, false
+      renamed_key "gems", "plugins", config
       renamed_key "layouts", "layouts_dir", config
       renamed_key "data_source", "data_dir", config
 
@@ -281,11 +281,11 @@ module Jekyll
       config
     end
 
-    def renamed_key(old, new, config, with_deprecation_warning = true)
+    def renamed_key(old, new, config, _ = nil)
       if config.key?(old)
         Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" \
           " option has been renamed to '#{new}'. Please update your config" \
-          " file accordingly." if with_deprecation_warning
+          " file accordingly."
         config[new] = config.delete(old)
       end
     end
@@ -397,11 +397,12 @@ module Jekyll
     def check_plugins(config)
       if config.key?("plugins") && config["plugins"].is_a?(String)
         Jekyll.logger.error "Configuration Error:", "You specified the" \
-          " `plugins` config in your configuration file as a String, please" \
-          " use an Array instead. If you wanted to set the directory of your" \
+          " `plugins` config in your configuration file as a string, please" \
+          " use an array instead. If you wanted to set the directory of your" \
           " plugins, use the config key `plugins_dir` instead."
         raise Jekyll::Errors::InvalidConfigurationError,
-          "plugins: #{config["plugins"].inspect}"
+          "'plugins' should not be a string, but was: "\
+          "#{config["plugins"].inspect}. Use 'plugins_dir' instead."
       end
     end
   end
