@@ -4,6 +4,7 @@
 
   * Enable site excerpts (#5150)
   * Initial 404 page (#5143)
+  * Remove the "this feature is unreleased" warning from the theme docs (#5158)
 
 ## 3.2.0 / 2016-07-26
 
