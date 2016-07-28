@@ -19,7 +19,7 @@ env:
   matrix:
     - TEST_SUITE=test
     - TEST_SUITE=cucumber
-
+    - TEST_SUITE=default-site
 branches:
   only:
     - master
