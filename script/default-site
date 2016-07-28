@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Runs the `jekyll new` command and builds the default site as a sanity check
+
+set -e
+
+mkdir -p ./tmp
+rm -Rf ./tmp/default-site
+
+bundle exec jekyll new tmp/default-site
+cd tmp/default-site
+
+bundle exec jekyll build --verbose
