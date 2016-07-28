@@ -10,7 +10,11 @@ module Jekyll
     end
 
     def root
-      @root ||= gemspec.full_gem_path
+      # Must use File.realpath to resolve symlinks created by rbenv
+      # Otherwise, Jekyll.sanitized path with prepend the unresolved root
+      @root ||= File.realpath(gemspec.full_gem_path)
+    rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
+      nil
     end
 
     def includes_path
