@@ -80,7 +80,7 @@ module Jekyll
     end
 
     def self.insert_hook(owner, event, priority, &block)
-      @hook_priority[block] = "#{priority}.#{@hook_priority.size}".to_f
+      @hook_priority[block] = [-priority, @hook_priority.size]
       @registry[owner][event] << block
     end
 
