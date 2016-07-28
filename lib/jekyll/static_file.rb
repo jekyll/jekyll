@@ -3,7 +3,9 @@ module Jekyll
     attr_reader :relative_path, :extname
 
     class << self
-      # The cache of last modification times [path] -> mtime.
+      #
+      # The cache of last modification times
+      # [path] -> mtime.
       def mtimes
         @mtimes ||= {}
       end
@@ -29,25 +31,29 @@ module Jekyll
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
     end
-    # rubocop: enable ParameterLists
 
+    # rubocop: enable ParameterLists
     # Returns source file path.
     def path
-      File.join(*[@base, @dir, @name].compact)
+      File.join(
+        *[@base, @dir, @name].compact
+      )
     end
 
     # Obtain destination path.
-    #
     # dest - The String path to the destination dir.
-    #
     # Returns destination file path.
     def destination(dest)
-      @site.in_dest_dir(*[dest, destination_rel_dir, @name].compact)
+      @site.in_dest_dir(
+        *[dest, destination_rel_dir, @name].compact
+      )
     end
 
     def destination_rel_dir
       if @collection
-        File.dirname(url)
+        File.dirname(
+          url
+        )
       else
         @dir
       end
@@ -63,14 +69,12 @@ module Jekyll
     end
 
     # Is source path modified?
-    #
     # Returns true if modified since last write.
     def modified?
       self.class.mtimes[path] != mtime
     end
 
     # Whether to write the file to the filesystem
-    #
     # Returns true unless the defaults for the destination path from
     # _config.yml contain `published: false`.
     def write?
@@ -78,20 +82,18 @@ module Jekyll
     end
 
     # Write the static file to the destination directory (if modified).
-    #
-    # dest - The String path to the destination dir.
-    #
     # Returns false if the file was not modified since last time (no-op).
+    # dest - The String path to the destination dir.
     def write(dest)
       dest_path = destination(dest)
+      if File.exist?(dest_path) && !modified?
+        return false
+      end
 
-      return false if File.exist?(dest_path) && !modified?
       self.class.mtimes[path] = mtime
-
       FileUtils.mkdir_p(File.dirname(dest_path))
       FileUtils.rm(dest_path) if File.exist?(dest_path)
       copy_file(dest_path)
-
       true
     end
 
@@ -106,11 +108,12 @@ module Jekyll
     def placeholders
       {
         :collection => @collection.label,
-        :path       => relative_path[
-          @collection.relative_directory.size..relative_path.size],
         :output_ext => "",
         :name       => "",
-        :title      => ""
+        :title      => "",
+        :path       => relative_path[
+          @collection.relative_directory.size..relative_path.size
+        ]
       }
     end
 
@@ -118,14 +121,16 @@ module Jekyll
     # the collection's URL template into account. The default URL template can
     # be overriden in the collection's configuration in _config.yml.
     def url
-      @url ||= if @collection.nil?
-                 relative_path
-               else
-                 ::Jekyll::URL.new({
-                   :template     => @collection.url_template,
-                   :placeholders => placeholders
-                 })
-               end.to_s.gsub(%r!/$!, "")
+      @url ||=
+        if @collection.nil?
+          relative_path
+        else
+          ::Jekyll::URL.new({
+            :template     => @collection.url_template,
+            :placeholders => placeholders
+          })
+        end
+          .to_s.gsub(%r!/$!, "")
     end
 
     # Returns the type of the collection if present, nil otherwise.
@@ -136,17 +141,28 @@ module Jekyll
     # Returns the front matter defaults defined for the file's URL and/or type
     # as defined in _config.yml.
     def defaults
-      @defaults ||= @site.frontmatter_defaults.all url, type
+      @defaults ||= @site.frontmatter_defaults.all(
+        url, type
+      )
     end
 
     private
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
-        FileUtils.cp(path, dest_path)
+        FileUtils.cp(
+          path, dest_path
+        )
       else
-        FileUtils.copy_entry(path, dest_path)
+        FileUtils.copy_entry(
+          path, dest_path
+        )
       end
-      File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
+
+      File.utime(
+        self.class.mtimes[path],
+        self.class.mtimes[path],
+        dest_path
+      )
     end
   end
 end
