@@ -1,3 +1,9 @@
+## HEAD
+
+### Site Enhancements
+
+  * Enable site excerpts (#5150)
+
 ## 3.2.0 / 2016-07-26
 
 ### Minor Enhancements
