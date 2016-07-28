@@ -3,6 +3,7 @@
 ### Site Enhancements
 
   * Enable site excerpts (#5150)
+  * Initial 404 page (#5143)
 
 ## 3.2.0 / 2016-07-26
 
