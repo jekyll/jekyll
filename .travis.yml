@@ -15,11 +15,12 @@ matrix:
       env: TEST_SUITE=fmt
     - rvm: jruby-9.0.5.0
       env: TEST_SUITE=test
+    - rvm: 2.3.0
+      env: TEST_SUITE=default-site
 env:
   matrix:
     - TEST_SUITE=test
     - TEST_SUITE=cucumber
-    - TEST_SUITE=default-site
 branches:
   only:
     - master
