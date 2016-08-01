@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.rdoc_options = ['--charset=UTF-8']
-  s.extra_rdoc_files = %w[README.markdown LICENSE]
+  s.extra_rdoc_files = %w[README.md LICENSE]
 
   s.add_runtime_dependency('liquid',    '~> 3.0')
   s.add_runtime_dependency('kramdown',  '~> 1.3')
