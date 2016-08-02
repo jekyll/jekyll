@@ -4,15 +4,6 @@ title: Themes
 permalink: /docs/themes/
 ---
 
-<div class="note unreleased">
-  <h5>This feature is unreleased!</h5>
-  <p>
-    Jekyll 3.0 and 3.1 do NOT have the ability to add themes in this way.
-    The documentation below is for an unreleased version of Jekyll and
-    cannot be used at the moment.
-  </p>
-</div>
-
 Jekyll has an extensive theme system, which allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes package layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
 ## Installing a theme
