@@ -1,4 +1,16 @@
-## HEAD
+## 3.2.1 / 2016-08-02
+
+### Bug Fixes
+
+  * Include theme directories in default gemspec (#5152)
+  * Fix for symlinked themes (#5156)
+  * Layout: set `relative_path` without using Pathname (#5164)
+
+### Development Fixes
+
+  * Add test to build the default site (#5154)
+  * script/default-site: specify `BUNDLE_GEMFILE` for new site (#5178)
+  * script/default-site: read Jekyll source from local clone (#5188)
 
 ### Site Enhancements
 
@@ -9,18 +21,6 @@
   * Minor updates and corrections (#5177)
   * index.html: update instructions to require bundler  (#5169)
   * docs/quickstart: update instructions to require bundler (#5168)
-
-### Bug Fixes
-
-  * Include theme directories in default gemspec (#5152)
-  * Fix for symlinked themes (#5156)
-  * Layout: set relative_path without using Pathname (#5164)
-
-### Development Fixes
-
-  * Add test to build the default site (#5154)
-  * script/default-site: specify BUNDLE_GEMFILE for new site (#5178)
-  * script/default-site: read Jekyll source from local clone (#5188)
 
 ## 3.2.0 / 2016-07-26
 
