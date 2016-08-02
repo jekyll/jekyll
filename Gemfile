@@ -72,7 +72,7 @@ group :jekyll_optional_dependencies do
   gem "kramdown", "~> 1.9"
   gem "rdoc", "~> 4.2"
 
-  platform :ruby, :mswin, :mingw do
+  platform :ruby, :mswin, :mingw, :x64_mingw do
     gem "rdiscount", "~> 2.0"
     gem "pygments.rb", "~> 0.6.0"
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
