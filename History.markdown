@@ -19,6 +19,7 @@
 ### Development Fixes
 
   * Add test to build the default site (#5154)
+  * script/default-site: specify BUNDLE_GEMFILE for new site (#5178)
 
 ## 3.2.0 / 2016-07-26
 
