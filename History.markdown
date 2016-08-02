@@ -11,6 +11,7 @@
 ### Bug Fixes
 
   * Include theme directories in default gemspec (#5152)
+  * Fix for symlinked themes (#5156)
 
 ## 3.2.0 / 2016-07-26
 
