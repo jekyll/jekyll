@@ -6,6 +6,7 @@
   * Initial 404 page (#5143)
   * Remove the "this feature is unreleased" warning from the theme docs (#5158)
   * Future True on GitHub Pages note (#5173)
+  * Minor updates and corrections (#5177)
 
 ### Bug Fixes
 
