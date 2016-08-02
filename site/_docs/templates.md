@@ -349,7 +349,7 @@ common tasks easier.
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ some_var | to_integer }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ some_var | inspect }}{% endraw %}</code>
         </p>
       </td>
     </tr>
