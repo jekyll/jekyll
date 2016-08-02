@@ -20,6 +20,7 @@
 
   * Add test to build the default site (#5154)
   * script/default-site: specify BUNDLE_GEMFILE for new site (#5178)
+  * script/default-site: read Jekyll source from local clone (#5188)
 
 ## 3.2.0 / 2016-07-26
 
