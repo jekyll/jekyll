@@ -8,6 +8,7 @@
   * Future True on GitHub Pages note (#5173)
   * Minor updates and corrections (#5177)
   * index.html: update instructions to require bundler  (#5169)
+  * docs/quickstart: update instructions to require bundler (#5168)
 
 ### Bug Fixes
 
