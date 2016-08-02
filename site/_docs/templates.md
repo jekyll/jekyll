@@ -488,6 +488,24 @@ You can also use this tag to create a link to a post in Markdown as follows:
 {% endraw %}
 {% endhighlight %}
 
+### Link
+
+If you would like to include a link to a collection's document, the `link` tag will generate the correct permalink URL for the document path you specify. You must include the file extension when using the `link` tag.
+
+{% highlight liquid %}
+{% raw %}
+{% link _collection/name-of-document.md %}
+{% endraw %}
+{% endhighlight %}
+
+You can also use this tag to create a link to a collection's document in Markdown as follows:
+
+{% highlight liquid %}
+{% raw %}
+[Name of Link]({% link _collection/name-of-document.md %})
+{% endraw %}
+{% endhighlight %}
+
 ### Gist
 
 Use the `gist` tag to easily embed a GitHub Gist onto your site. This works
