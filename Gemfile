@@ -63,11 +63,11 @@ group :jekyll_optional_dependencies do
   gem "toml", "~> 0.1.0"
   gem "coderay", "~> 1.1.0"
   gem "jekyll-docs", :path => '../docs' if Dir.exist?('../docs') && ENV['JEKYLL_VERSION']
-  gem "jekyll-gist", "~> 1.0"
-  gem "jekyll-feed", "~> 0.1.3"
-  gem "jekyll-coffeescript", "~> 1.0"
-  gem "jekyll-redirect-from", "~> 0.9.1"
-  gem "jekyll-paginate", "~> 1.0"
+  gem "jekyll-gist"
+  gem "jekyll-feed"
+  gem "jekyll-coffeescript"
+  gem "jekyll-redirect-from"
+  gem "jekyll-paginate"
   gem "mime-types", "~> 3.0"
   gem "kramdown", "~> 1.9"
   gem "rdoc", "~> 4.2"
@@ -90,7 +90,7 @@ group :site do
 
   gem "jemoji", "0.5.1"
   gem "jekyll-sitemap"
-  gem "jekyll-seo-tag", "~> 1.1"
+  gem "jekyll-seo-tag"
   gem "jekyll-avatar"
   gem "jekyll-mentions"
 end
