@@ -75,13 +75,13 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 **Note:** In the current [pre release][nokogiriFails] it works out of the box with Windows x64 but this version is not referenced in the github-pages.
 
 
-`cinst -Source "https://go.microsoft.com/fwlink/?LinkID=230477" libxml2`{:.language-ruby}
+`choco install libxml2 -Source "https://www.nuget.org/api/v2/"`{:.language-ruby}
 
-`cinst -Source "https://go.microsoft.com/fwlink/?LinkID=230477" libxslt`{:.language-ruby}
+`choco install libxslt -Source "https://www.nuget.org/api/v2/"`{:.language-ruby}
 
-`cinst -Source "https://go.microsoft.com/fwlink/?LinkID=230477" libiconv`{:.language-ruby}
+`choco install libiconv -Source "https://www.nuget.org/api/v2/"`{:.language-ruby}
 
-```language-ruby
+{% highlight ruby %}
  gem install nokogiri --^
    --with-xml2-include=C:\Chocolatey\lib\libxml2.2.7.8.7\build\native\include^
    --with-xml2-lib=C:\Chocolatey\lib\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl^
@@ -89,7 +89,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
    --with-iconv-lib=C:\Chocolatey\lib\libiconv.redist.1.14.0.11\build\native\bin\v110\x64\Release\dynamic\cdecl^
    --with-xslt-include=C:\Chocolatey\lib\libxslt.1.1.28.0\build\native\include^
    --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
-```
+{% endhighlight %}
 
 #### Install github-pages
 
@@ -98,10 +98,10 @@ This gem is also needed in the github-pages and to get it running on Windows x64
  * Copy & past the two lines into the file:
 
 
-```language-ruby
+{% highlight ruby %}
 source 'http://rubygems.org'
 gem 'github-pages'
-```
+{% endhighlight %}
 
  * **Note:** We use an unsecure connection because SSL throws exceptions in the version of Ruby
  * Open a command prompt, target your local blog repository root, and install github-pages: `bundle install`
