@@ -458,6 +458,25 @@ site. If you use `linenos`, you might want to include an additional CSS class
 definition for the `.lineno` class in `syntax.css` to distinguish the line
 numbers from the highlighted code.
 
+### Link
+
+If you would like to include a link to a collection's document or to a post, the `link` tag will generate the correct permalink URL for the path you specify. You must include the file extension when using the `link` tag.
+
+{% highlight liquid %}
+{% raw %}
+{% link _collection/name-of-document.md %}
+{% link _posts/2016-07-26-name-of-post.md %}
+{% endraw %}
+{% endhighlight %}
+
+You can also use this tag to create a link in Markdown as follows:
+
+{% highlight liquid %}
+{% raw %}
+[Name of Link]({% link _collection/name-of-document.md %})
+{% endraw %}
+{% endhighlight %}
+
 ### Post URL
 
 If you would like to include a link to a post on your site, the `post_url` tag
@@ -485,24 +504,6 @@ You can also use this tag to create a link to a post in Markdown as follows:
 {% highlight liquid %}
 {% raw %}
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
-{% endraw %}
-{% endhighlight %}
-
-### Link
-
-If you would like to include a link to a collection's document, the `link` tag will generate the correct permalink URL for the document path you specify. You must include the file extension when using the `link` tag.
-
-{% highlight liquid %}
-{% raw %}
-{% link _collection/name-of-document.md %}
-{% endraw %}
-{% endhighlight %}
-
-You can also use this tag to create a link to a collection's document in Markdown as follows:
-
-{% highlight liquid %}
-{% raw %}
-[Name of Link]({% link _collection/name-of-document.md %})
 {% endraw %}
 {% endhighlight %}
 
