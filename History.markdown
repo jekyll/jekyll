@@ -13,6 +13,10 @@
   * Include theme directories in default gemspec (#5152)
   * Fix for symlinked themes (#5156)
 
+### Development Fixes
+
+  * Add test to build the default site (#5154)
+
 ## 3.2.0 / 2016-07-26
 
 ### Minor Enhancements
