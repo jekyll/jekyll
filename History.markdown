@@ -13,6 +13,7 @@
 
   * Include theme directories in default gemspec (#5152)
   * Fix for symlinked themes (#5156)
+  * Layout: set relative_path without using Pathname (#5164)
 
 ### Development Fixes
 
