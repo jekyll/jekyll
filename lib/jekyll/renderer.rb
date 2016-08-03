@@ -139,6 +139,11 @@ module Jekyll
       output = content.dup
       layout = site.layouts[document.data["layout"]]
 
+      if layout
+        layout_source = layout.path.start_with?(site.source) ? :site : :theme
+        Jekyll.logger.debug("Layout source:", layout_source)
+      end
+
       Jekyll.logger.warn(
         "Build Warning:",
         "Layout '#{document.data["layout"]}' requested in "\

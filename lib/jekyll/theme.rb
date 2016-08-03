@@ -6,6 +6,8 @@ module Jekyll
 
     def initialize(name)
       @name = name.downcase.strip
+      Jekyll.logger.debug "Theme:", name
+      Jekyll.logger.debug "Theme source:", root
       configure_sass
     end
 
@@ -14,19 +16,19 @@ module Jekyll
       # Otherwise, Jekyll.sanitized path with prepend the unresolved root
       @root ||= File.realpath(gemspec.full_gem_path)
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      nil
+      Jekyll.logger.warn "Invalid theme source:", gemspec.full_gem_path
     end
 
     def includes_path
-      path_for :includes
+      @includes_path ||= path_for :includes
     end
 
     def layouts_path
-      path_for :layouts
+      @layouts_path ||= path_for :layouts
     end
 
     def sass_path
-      path_for :sass
+      @sass_path ||= path_for :sass
     end
 
     def configure_sass
@@ -45,7 +47,7 @@ module Jekyll
     def realpath_for(folder)
       File.realpath(Jekyll.sanitized_path(root, "_#{folder}"))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      nil
+      Jekyll.logger.warn "Invalid theme folder:", folder
     end
 
     def gemspec
