@@ -300,6 +300,17 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>To Integer</strong></p>
+        <p>Convert a string or boolean to integer.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ some_var | to_integer }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Array Filters</strong></p>
         <p>Push, pop, shift, and unshift elements from an Array.</p>
         <p>These are <strong>NON-DESTRUCTIVE</strong>, i.e. they do not mutate the array, but rather make a copy and mutate that.</p>
@@ -328,6 +339,17 @@ common tasks easier.
         </p>
         <p>
           <code class="output">['Olympia', 'Seattle', 'Tacoma']</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Inspect</strong></p>
+        <p>Convert an object into its String representation for debugging.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ some_var | inspect }}{% endraw %}</code>
         </p>
       </td>
     </tr>
