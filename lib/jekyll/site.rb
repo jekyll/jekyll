@@ -424,7 +424,7 @@ module Jekyll
     private
     def configure_theme
       self.theme = nil
-      self.theme = Jekyll::Theme.new(config["theme"]) if config["theme"]
+      self.theme = Jekyll::Theme.new(config["theme"]) if config["theme"].is_a?(String)
     end
 
     private
