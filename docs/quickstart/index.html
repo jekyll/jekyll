@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.2.0">
-  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml">
+  <meta name="generator" content="Jekyll v3.2.1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites">
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <!-- Begin Jekyll SEO tag v1.4.0 -->
+  <!-- Begin Jekyll SEO tag v2.0.0 -->
 <title>Quick-start guide - Jekyll • Simple, blog-aware, static sites</title>
 <meta property="og:title" content="Quick-start guide">
 <meta name="description" content="For the impatient, here’s how to get a boilerplate Jekyll site up and running.">
@@ -19,9 +19,7 @@
 <meta property="og:url" content="https://jekyllrb.com/docs/quickstart/">
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-07-29T16:43:50-07:00">
-<link rel="next" href="https://jekyllrb.com/docs/resources/" title="Resources">
-<link rel="prev" href="https://jekyllrb.com/docs/posts/" title="Writing posts">
+<meta property="article:published_time" content="2016-08-02T17:06:39-07:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@jekyllrb">
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
@@ -30,7 +28,7 @@
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Quick-start guide",
-    "datePublished": "2016-07-29T16:43:50-07:00",
+    "datePublished": "2016-08-02T17:06:39-07:00",
     "description": "For the impatient, here’s how to get a boilerplate Jekyll site up and running.",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
     "url": "https://jekyllrb.com/docs/quickstart/"
@@ -289,7 +287,8 @@
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell">~ <span class="nv">$ </span>gem install jekyll
 ~ <span class="nv">$ </span>jekyll new myblog
 ~ <span class="nv">$ </span><span class="nb">cd </span>myblog
-~/myblog <span class="nv">$ </span>jekyll serve
+~/myblog <span class="nv">$ </span>bundle install
+~/myblog <span class="nv">$ </span>bundle <span class="nb">exec </span>jekyll serve
 <span class="c"># =&gt; Now browse to http://localhost:4000</span></code></pre></figure>
 
 <p>If you wish to install jekyll into an existing directory, you can do so by running <code class="highlighter-rouge">jekyll new .</code> from within the directory instead of creating a new one. If the existing directory isn’t empty, you’ll also have to pass the <code class="highlighter-rouge">--force</code> option like so <code class="highlighter-rouge">jekyll new . --force</code>.</p>
