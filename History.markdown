@@ -1,3 +1,9 @@
+## HEAD
+
+### Site Enhancements
+
+  * Document for to_integer and inspect filters (#5185)
+
 ## 3.2.1 / 2016-08-02
 
 ### Bug Fixes
