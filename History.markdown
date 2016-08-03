@@ -3,6 +3,7 @@
 ### Site Enhancements
 
   * Document for to_integer and inspect filters (#5185)
+  * Fix path in the prompt (#5194)
 
 ### Development Fixes
 
