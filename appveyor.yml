@@ -12,39 +12,33 @@ branches:
 build: off
 
 install:
-  - SET PATH=C:\Ruby%ruby_folder_version%\bin;%PATH%
+  - SET PATH=C:\Ruby%RUBY_FOLDER_VER%\bin;%PATH%
   - bundle install --retry 5
 
 environment:
   BUNDLE_WITHOUT: "benchmark:site:development"
   matrix:
-    - ruby_folder_version: "23"
-      ruby_gems_folder: "2.3.0"
+    - RUBY_FOLDER_VER: "23"
+      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "test"
-    - ruby_folder_version: "23"
-      ruby_gems_folder: "2.3.0"
+    - RUBY_FOLDER_VER: "23"
+      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "cucumber"
-    - ruby_folder_version: "23"
-      ruby_gems_folder: "2.3.0"
+    - RUBY_FOLDER_VER: "23"
+      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "fmt"
-    - ruby_folder_version: "23-x64"
-      ruby_gems_folder: "2.3.0"
-      TEST_SUITE: "cucumber"
-    - ruby_folder_version: "23-x64"
-      ruby_gems_folder: "2.3.0"
+    - RUBY_FOLDER_VER: "23"
+      GEMS_FOLDER_VER: "2.3.0"
+      TEST_SUITE: "default-site"
+    - RUBY_FOLDER_VER: "23-x64"
+      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "test"
-    - ruby_folder_version: "22"
-      ruby_gems_folder: "2.2.0"
+    - RUBY_FOLDER_VER: "22"
+      GEMS_FOLDER_VER: "2.2.0"
       TEST_SUITE: "test"
-    - ruby_folder_version: "22"
-      ruby_gems_folder: "2.2.0"
-      TEST_SUITE: "cucumber"
-    - ruby_folder_version: "21"
-      ruby_gems_folder: "2.1.0"
+    - RUBY_FOLDER_VER: "21"
+      GEMS_FOLDER_VER: "2.1.0"
       TEST_SUITE: "test"
-    - ruby_folder_version: "21"
-      ruby_gems_folder: "2.1.0"
-      TEST_SUITE: "cucumber"
 
 test_script:
   - ruby --version
@@ -52,9 +46,7 @@ test_script:
   - bundler --version
   - bash ./script/cibuild
 
-matrix:
-  fast_finish: true
-
 cache:
-  - C:\Ruby%ruby_folder_version%\bin -> Gemfile,jekyll.gemspec
-  - C:\Ruby%ruby_folder_version%\lib\ruby\gems\%ruby_gems_folder% -> Gemfile,jekyll.gemspec
+  # If one of the files after the right arrow changes, cache will be skipped
+  - C:\Ruby%RUBY_FOLDER_VER%\bin -> Gemfile,jekyll.gemspec,appveyor.yml
+  - C:\Ruby%RUBY_FOLDER_VER%\lib\ruby\gems\%GEMS_FOLDER_VER% -> Gemfile,jekyll.gemspec,appveyor.yml
