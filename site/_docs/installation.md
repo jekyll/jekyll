@@ -14,6 +14,7 @@ encountered and how we might make the process easier
 Installing Jekyll is easy and straight-forward, but there are a few
 requirements you’ll need to make sure your system has before you start.
 
+- [Bundler](http://bundler.io)
 - [Ruby](https://www.ruby-lang.org/en/downloads/) (including development
   headers, v1.9.3 or above for Jekyll 2 and v2 or above for Jekyll 3)
 - [RubyGems](https://rubygems.org/pages/download)
@@ -31,15 +32,17 @@ earlier, for CoffeeScript support).
   </p>
 </div>
 
-## Install with RubyGems
+## Install with Bundler and RubyGems
 
-The best way to install Jekyll is via
+The best way to install Jekyll is using a Gemfile via Bundler
 [RubyGems](http://rubygems.org/pages/download). At the terminal prompt,
 simply run the following command to install Jekyll:
 
 {% highlight shell %}
-$ gem install jekyll
+$ gem install bundler
 {% endhighlight %}
+
+Now you can install Jekyll simply by running `bundle install`.
 
 All of Jekyll’s gem dependencies are automatically installed by the above
 command, so you won’t have to worry about them at all. If you have problems
