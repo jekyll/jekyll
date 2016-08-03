@@ -4,6 +4,10 @@
 
   * Document for to_integer and inspect filters (#5185)
 
+### Development Fixes
+
+  * Update appveyor.yml and fix optional deps for Ruby x64 (#5180)
+
 ## 3.2.1 / 2016-08-02
 
 ### Bug Fixes
