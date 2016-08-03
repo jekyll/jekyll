@@ -37,7 +37,6 @@ namespace :site do
     require "jekyll"
     Jekyll::Commands::Build.process({
       "profile" => true,
-      "verbose" => true,
       "source"      => File.expand_path("site"),
       "destination" => File.expand_path("site/_site")
     })
@@ -85,7 +84,6 @@ namespace :site do
     ENV['JEKYLL_ENV'] = 'production'
     require "jekyll"
     Jekyll::Commands::Build.process({
-      "verbose" => true,
       "source"       => File.expand_path("site"),
       "destination"  => File.expand_path("gh-pages"),
       "sass"         => { "style" => "compressed" }
