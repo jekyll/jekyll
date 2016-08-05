@@ -54,9 +54,9 @@ jekyll new-theme my-awesome-theme
              create /path/to/my-awesome-theme/.gitignore
 Your new Jekyll theme, my-awesome-theme, is ready for you in /path/to/my-awesome-theme!
 For help getting started, read /path/to/my-awesome-theme/README.md.
-{% hightlight %}
+{% endhighlight %}
 
-Add your template files in the corresponding folders, complete the `.gemspec` and the README files according to your needs. 
+Add your template files in the corresponding folders, complete the `.gemspec` and the README files according to your needs.
 
 ### Layouts and includes
 
