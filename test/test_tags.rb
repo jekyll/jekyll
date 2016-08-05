@@ -637,11 +637,12 @@ title: linking
 
 {% link contacts.html %}
 {% link info.md %}
+{% link /css/screen.css %}
 CONTENT
       create_post(content, {
-        "source"           => source_dir,
-        "destination"      => dest_dir,
-        "read_all"         => true
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "read_all"    => true
       })
     end
 
@@ -655,6 +656,10 @@ CONTENT
 
     should "have the URL to the \"info\" item" do
       assert_match(%r!/info\.html!, @result)
+    end
+
+    should "have the URL to the \"screen.css\" item" do
+      assert_match(%r!/css/screen\.css!, @result)
     end
   end
 
