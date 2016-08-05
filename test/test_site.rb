@@ -191,6 +191,7 @@ class TestSite < JekyllUnitTest
         humans.txt
         index.html
         index.html
+        info.md
         main.scss
         main.scss
         properties.html
