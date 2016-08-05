@@ -36,20 +36,27 @@ Refer to your selected theme's documentation and source repository for more info
 
 ## Creating a theme
 
-Jekyll themes are distributed as Ruby gems. The only required file is the [Ruby Gemspec](http://guides.rubygems.org/specification-reference/). Here's an example of a minimal Gemspec for the `my-awesome-jekyll-theme` theme, saved as `/my-awsome-jekyll-theme.gemspec`:
+Jekyll themes are distributed as Ruby gems. Don't worry Jekyll will help you scaffold a new theme with the `new-theme` command. Just run `jekyll new-theme` with the theme name as an argument:
 
-{% highlight ruby %}
-Gem::Specification.new do |s|
-  s.name     = '<THEME TITLE>'
-  s.version  = '0.1.0'
-  s.license  = 'MIT'
-  s.summary  = '<THEME DESCRIPTION>'
-  s.author   = '<YOUR NAME>'
-  s.email    = '<YOUR EMAIL>'
-  s.homepage = 'https://github.com/jekyll/my-awesome-jekyll-theme'
-  s.files    = `git ls-files -z`.split("\x0").grep(%r{^_(sass|includes|layouts)/})
-end
-{% endhighlight %}
+{% highlight shell %}
+jekyll new-theme my-awesome-theme
+             create /path/to/my-awesome-theme/_layouts
+             create /path/to/my-awesome-theme/_includes
+             create /path/to/my-awesome-theme/_sass
+             create /path/to/my-awesome-theme/_layouts/page.html
+             create /path/to/my-awesome-theme/_layouts/post.html
+             create /path/to/my-awesome-theme/_layouts/default.html
+             create /path/to/my-awesome-theme/Gemfile
+             create /path/to/my-awesome-theme/my-awesome-theme.gemspec
+             create /path/to/my-awesome-theme/README.md
+             create /path/to/my-awesome-theme/LICENSE.txt
+         initialize /path/to/my-awesome-theme/.git
+             create /path/to/my-awesome-theme/.gitignore
+Your new Jekyll theme, my-awesome-theme, is ready for you in /path/to/my-awesome-theme!
+For help getting started, read /path/to/my-awesome-theme/README.md.
+{% hightlight %}
+
+Add your template files in the corresponding folders, complete the `.gemspec` and the README files according to your needs. 
 
 ### Layouts and includes
 
