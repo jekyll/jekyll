@@ -21,6 +21,7 @@ module Jekyll
         def process(args, options = {})
           raise ArgumentError, "You must specify a path." if args.empty?
 
+          new_blog_title = args[0]
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
@@ -34,7 +35,8 @@ module Jekyll
             create_site new_blog_path
           end
 
-          Jekyll.logger.info "New jekyll site installed in #{new_blog_path}."
+          Jekyll.logger.info %Q{New jekyll site "#{new_blog_title}"} \
+            " installed in #{new_blog_path}."
         end
 
         def create_blank_site(path)
@@ -48,43 +50,22 @@ module Jekyll
           ERB.new(File.read(File.expand_path(scaffold_path, site_template))).result
         end
 
+        def config_file_content
+          ERB.new(File.read(File.expand_path("_config.yml.erb", site_template))).result
+        end
+
+        def gemfile_content
+          ERB.new(File.read(File.expand_path("Gemfile.erb", site_template))).result
+        end
+
         # Internal: Gets the filename of the sample post to be created
         #
         # Returns the filename of the sample post, as a String
         def initialized_post_name
-          "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.markdown"
+          "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.md"
         end
 
         private
-
-        def gemfile_contents
-          <<-RUBY
-source "https://rubygems.org"
-ruby RUBY_VERSION
-
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
-#
-#     bundle exec jekyll serve
-#
-# This will help ensure the proper Jekyll version is running.
-# Happy Jekylling!
-gem "jekyll", "#{Jekyll::VERSION}"
-
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima"
-
-# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
-# uncomment the line below. To upgrade, run `bundle update github-pages`.
-# gem "github-pages", group: :jekyll_plugins
-
-# If you have any plugins, put them here!
-group :jekyll_plugins do
-   gem "jekyll-feed", "~> 0.6"
-end
-RUBY
-        end
 
         def create_site(new_blog_path)
           create_sample_files new_blog_path
@@ -94,7 +75,11 @@ RUBY
           end
 
           File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
-            f.write(gemfile_contents)
+            f.write(gemfile_content)
+          end
+
+          File.open(File.expand_path("_config.yml", new_blog_path), "w") do |f|
+            f.write(config_file_content)
           end
         end
 
@@ -102,9 +87,18 @@ RUBY
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
+        def erb_files
+          erb_file = File.join("**", "*.erb")
+          Dir.glob(erb_file)
+        end
+
         def create_sample_files(path)
           FileUtils.cp_r site_template + "/.", path
           FileUtils.rm File.expand_path(scaffold_path, path)
+
+          erb_files.each do |file|
+            FileUtils.rm file
+          end
         end
 
         def site_template
@@ -112,7 +106,7 @@ RUBY
         end
 
         def scaffold_path
-          "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
+          "_posts/0000-00-00-welcome-to-jekyll.md.erb"
         end
       end
     end
