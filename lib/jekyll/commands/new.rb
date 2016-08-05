@@ -21,7 +21,12 @@ module Jekyll
         def process(args, options = {})
           raise ArgumentError, "You must specify a path." if args.empty?
 
-          new_blog_title = args[0]
+          if args.size == 1
+            new_blog_title = args[0]
+          elsif args.size > 1
+            new_blog_title = args.join(" ")
+          end
+          
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
