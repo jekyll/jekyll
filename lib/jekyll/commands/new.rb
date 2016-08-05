@@ -21,12 +21,7 @@ module Jekyll
         def process(args, options = {})
           raise ArgumentError, "You must specify a path." if args.empty?
 
-          if args.size == 1
-            new_blog_title = args[0]
-          elsif args.size > 1
-            new_blog_title = args.join(" ")
-          end
-          
+          new_blog_title = args.join(" ")
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
@@ -40,7 +35,7 @@ module Jekyll
             create_site new_blog_path
           end
 
-          Jekyll.logger.info %Q{New jekyll site "#{new_blog_title}"} \
+          Jekyll.logger.info "New jekyll site '#{new_blog_title}'" \
             " installed in #{new_blog_path}."
         end
 
@@ -92,8 +87,16 @@ module Jekyll
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
+        def site_template
+          File.expand_path("../../site_template", File.dirname(__FILE__))
+        end
+
+        def scaffold_path
+          "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
+        end
+
         def erb_files
-          erb_file = File.join("**", "*.erb")
+          erb_file = File.join("*", "*.erb")
           Dir.glob(erb_file)
         end
 
@@ -104,14 +107,6 @@ module Jekyll
           erb_files.each do |file|
             FileUtils.rm file
           end
-        end
-
-        def site_template
-          File.expand_path("../../site_template", File.dirname(__FILE__))
-        end
-
-        def scaffold_path
-          "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
         end
       end
     end
