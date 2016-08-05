@@ -67,7 +67,7 @@ module Jekyll
         #
         # Returns the filename of the sample post, as a String
         def initialized_post_name
-          "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.md"
+          "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.markdown"
         end
 
         private
@@ -111,7 +111,7 @@ module Jekyll
         end
 
         def scaffold_path
-          "_posts/0000-00-00-welcome-to-jekyll.md.erb"
+          "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
         end
       end
     end
