@@ -13,8 +13,8 @@ Feature: Collections
     And the "_site/methods/configuration.html" file should not exist
 
   Scenario: Rendered collection
-    Given I have an "index.html" page that contains "Collections: output => {{ site.collections[0].output }} label => {{ site.collections[0].label }}"
-    And I have an "collection_metadata.html" page that contains "Methods metadata: {{ site.collections[0].foo }} {{ site.collections[0] }}"
+    Given I have an "index.html" page that contains "Collections: output => {{ site.collections[1].output }} label => {{ site.collections[1].label }}"
+    And I have an "collection_metadata.html" page that contains "Methods metadata: {{ site.collections[1].foo }} {{ site.collections[1] }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
     """
@@ -47,7 +47,7 @@ Feature: Collections
     And I should see "<p>Whatever: foo.bar</p>" in "_site/methods/configuration/index.html"
 
   Scenario: Rendered document in a layout
-    Given I have an "index.html" page that contains "Collections: output => {{ site.collections[0].output }} label => {{ site.collections[0].label }} foo => {{ site.collections[0].foo }}"
+    Given I have an "index.html" page that contains "Collections: output => {{ site.collections[1].output }} label => {{ site.collections[1].label }} foo => {{ site.collections[1].foo }}"
     And I have a default layout that contains "<div class='title'>Tom Preston-Werner</div> {{content}}"
     And I have fixture collections
     And I have a "_config.yml" file with content:

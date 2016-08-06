@@ -131,11 +131,32 @@ module Jekyll
         relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
     end
 
+    # Returns an array of sub directories that represents the document's path
+    # relative to the collection directory
+    def subdirs
+      cleaned_relative_path.split(File::SEPARATOR)
+        .reject { |c| c.empty? || c.eql?(basename_without_ext) }
+    end
+
     # Determine whether the document is a YAML file.
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
       %w(.yaml .yml).include?(extname)
+    end
+
+    # Determine whether the document is a JSON file.
+    #
+    # Returns true if extname == .json, false otherwise.
+    def json_file?
+      ".json" == extname
+    end
+
+    # Determine whether the document is a CSV file.
+    #
+    # Returns true if extname == .csv, false otherwise.
+    def csv_file?
+      ".csv" == extname
     end
 
     # Determine whether the document is an asset file.
@@ -166,7 +187,7 @@ module Jekyll
     # Returns false if the document is either an asset file or a yaml file,
     #   true otherwise.
     def render_with_liquid?
-      !(coffeescript_file? || yaml_file?)
+      !(coffeescript_file? || yaml_file? || json_file? || csv_file?)
     end
 
     # Determine whether the file should be placed into layouts.
@@ -174,7 +195,7 @@ module Jekyll
     # Returns false if the document is either an asset file or a yaml file,
     #   true otherwise.
     def place_in_layout?
-      !(asset_file? || yaml_file?)
+      !(asset_file? || yaml_file? || yaml_file? || json_file? || csv_file?)
     end
 
     # The URL template where the document would be accessible.
@@ -260,8 +281,13 @@ module Jekyll
     def read(opts = {})
       Jekyll.logger.debug "Reading:", relative_path
 
-      if yaml_file?
+      if yaml_file? || json_file?
         @data = SafeYAML.load_file(path)
+      elsif csv_file?
+        @data = CSV.read(path, {
+          :headers  => true,
+          :encoding => site.config["encoding"]
+        }).map(&:to_hash)
       else
         begin
           defaults = @site.frontmatter_defaults.all(
@@ -341,6 +367,7 @@ module Jekyll
     #
     # Returns a Hash representing this Document's data.
     def to_liquid
+      return data if data.is_a?(Array)
       @to_liquid ||= Drops::DocumentDrop.new(self)
     end
 
@@ -366,7 +393,9 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return nil unless other.respond_to?(:data)
-      cmp = data["date"] <=> other.data["date"]
+      if data.is_a?(Hash) && other.data.is_a?(Hash)
+        cmp = data["date"] <=> other.data["date"]
+      end
       cmp = path <=> other.path if cmp.nil? || cmp.zero?
       cmp
     end
@@ -428,12 +457,12 @@ module Jekyll
     # Override of normal respond_to? to match method_missing's logic for
     # looking in @data.
     def respond_to?(method, include_private = false)
-      data.key?(method.to_s) || super
+      data.is_a?(Hash) && data.key?(method.to_s) || super
     end
 
     # Override of method_missing to check in @data for the key.
     def method_missing(method, *args, &blck)
-      if data.key?(method.to_s)
+      if data.is_a?(Hash) && data.key?(method.to_s)
         Jekyll::Deprecator.deprecation_message "Document##{method} is now a key "\
                            "in the #data hash."
         Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."

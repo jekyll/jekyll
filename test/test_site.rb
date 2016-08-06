@@ -390,17 +390,6 @@ class TestSite < JekyllUnitTest
         assert_equal site.site_payload["site"]["data"]["members"], file_content
       end
 
-      should "load yaml files from extracted method" do
-        site = Site.new(site_configuration)
-        site.process
-
-        file_content = DataReader.new(site)
-          .read_data_file(source_dir("_data", "members.yaml"))
-
-        assert_equal site.data["members"], file_content
-        assert_equal site.site_payload["site"]["data"]["members"], file_content
-      end
-
       should "auto load yml files" do
         site = Site.new(site_configuration)
         site.process

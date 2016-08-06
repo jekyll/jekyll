@@ -16,7 +16,6 @@ module Jekyll
       @site.layouts = LayoutReader.new(site).read
       read_directories
       sort_files!
-      @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
     end
 
@@ -46,6 +45,7 @@ module Jekyll
       dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
+      retrieve_data(dir)
       retrieve_dirs(base, dir, dot_dirs)
       retrieve_pages(dir, dot_pages)
       retrieve_static_files(dir, dot_static_files)
@@ -60,6 +60,10 @@ module Jekyll
     def retrieve_posts(dir)
       site.posts.docs.concat(PostReader.new(site).read_posts(dir))
       site.posts.docs.concat(PostReader.new(site).read_drafts(dir)) if site.show_drafts
+    end
+
+    def retrieve_data(dir)
+      site.data_collection.docs.concat(DataReader.new(site).read_data(dir))
     end
 
     # Recursively traverse directories with the read_directories function.

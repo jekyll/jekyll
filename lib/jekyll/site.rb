@@ -90,7 +90,7 @@ module Jekyll
       self.layouts = {}
       self.pages = []
       self.static_files = []
-      self.data = {}
+      @data = nil
       @collections = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
@@ -217,6 +217,14 @@ module Jekyll
 
     def posts
       collections["posts"] ||= Collection.new(self, "posts")
+    end
+
+    def data_collection
+      collections["data"] ||= Collection.new(self, "data")
+    end
+
+    def data
+      @data ||= Drops::DataDrop.new(data_collection)
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.

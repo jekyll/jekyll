@@ -12,7 +12,7 @@ module Jekyll
                             :tags, :categories
 
       def [](key)
-        if @obj.collections.key?(key) && key != "posts"
+        if @obj.collections.key?(key) && key != "posts" && key != "data"
           @obj.collections[key].docs
         else
           super(key)
