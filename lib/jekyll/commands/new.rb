@@ -25,7 +25,7 @@ module Jekyll
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
 
           FileUtils.mkdir_p new_blog_path
-          
+
           if preserve_source_location?(new_blog_path, options)
             Jekyll.logger.abort_with "Conflict:",
                       "#{new_blog_path} exists and is not empty."
@@ -59,9 +59,7 @@ module Jekyll
           config_template = File.expand_path("_config.yml.erb", site_template)
           config_copy = ERB.new(File.read(config_template)).result(binding)
 
-          File.open(File.expand_path("_config.yml", path), "w") do |f|
-            f.write(config_copy)
-          end
+          create_file("_config.yml", path, config_copy)
         end
 
         def gemfile_content
@@ -79,14 +77,8 @@ module Jekyll
 
         def create_site(new_blog_path)
           create_sample_files new_blog_path
-
-          File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
-            f.write(scaffold_post_content)
-          end
-
-          File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
-            f.write(gemfile_content)
-          end
+          create_file("Gemfile", new_blog_path, gemfile_content)
+          create_file(initialized_post_name, new_blog_path, scaffold_post_content)
         end
 
         def preserve_source_location?(path, options)
@@ -104,6 +96,12 @@ module Jekyll
         def erb_files
           erb_file = File.join("*", "*.erb")
           Dir.glob(erb_file)
+        end
+
+        def create_file(file, path, content)
+          File.open(File.expand_path(file, path), "w") do |f|
+            f.write(content)
+          end
         end
 
         def create_sample_files(path)

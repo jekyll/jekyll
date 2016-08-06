@@ -34,7 +34,7 @@ class TestNewCommand < JekyllUnitTest
       refute_exist @full_path
       capture_stdout { Jekyll::Commands::New.process(@args) }
       assert_exist gemfile
-      assert_match(%r!gem "jekyll", "#{Jekyll::VERSION}"!, File.read(gemfile))
+      assert_match(%r!gem "jekyll", "~> #{Jekyll::VERSION}"!, File.read(gemfile))
       assert_match(%r!gem "minima"!, File.read(gemfile))
     end
 
@@ -49,6 +49,8 @@ class TestNewCommand < JekyllUnitTest
       static_template_files = dir_contents(site_template).reject do |f|
         File.extname(f) == ".erb"
       end
+      static_template_files << "/Gemfile"
+      static_template_files << "/_config.yml"
 
       capture_stdout { Jekyll::Commands::New.process(@args) }
 
@@ -90,7 +92,7 @@ class TestNewCommand < JekyllUnitTest
     should "force created folder" do
       capture_stdout { Jekyll::Commands::New.process(@args) }
       output = capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
-      assert_match(%r!New jekyll site #{@path} installed in!, output)
+      assert_match(%r!New jekyll site '#{@path}' installed in!, output)
     end
   end
 
