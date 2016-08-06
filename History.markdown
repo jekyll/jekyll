@@ -5,6 +5,7 @@
   * Document for to_integer and inspect filters (#5185)
   * Fix path in the prompt (#5194)
   * need subcommand build (#5190)
+  * Add the Jekyll Cloudinary plugin (#5183)
 
 ### Development Fixes
 
