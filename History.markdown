@@ -10,6 +10,10 @@
 
   * Update appveyor.yml and fix optional deps for Ruby x64 (#5180)
 
+### Bug Fixes
+
+  * Use jekyll-feed to generate the default site's RSS feed (#5196)
+
 ## 3.2.1 / 2016-08-02
 
 ### Bug Fixes
