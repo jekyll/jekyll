@@ -863,6 +863,7 @@ LESS.js files during generation.
 - [Jekyll Ideal Image Slider](https://github.com/xHN35RQ/jekyll-ideal-image-slider): Liquid tag plugin to create image sliders using [Ideal Image Slider](https://github.com/gilbitron/Ideal-Image-Slider).
 - [Jekyll Tags List Plugin](https://github.com/crispgm/jekyll-tags-list-plugin): A Liquid tag plugin that creates tags list in specific order.
 - [Jekyll Maps](https://github.com/ayastreb/jekyll-maps) by [Anatoliy Yastreb](https://github.com/ayastreb): A Jekyll plugin to easily embed maps with filterable locations.
+- [Jekyll Cloudinary](https://nhoizey.github.io/jekyll-cloudinary/) by [Nicolas Hoizey](https://nicolas-hoizey.com/): a Jekyll plugin adding a Liquid tag to ease the use of Cloudinary for responsive images in your Markdown/Kramdown posts.
 
 #### Collections
 
