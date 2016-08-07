@@ -424,7 +424,14 @@ module Jekyll
     private
     def configure_theme
       self.theme = nil
-      self.theme = Jekyll::Theme.new(config["theme"]) if config["theme"].is_a?(String)
+      return unless config["theme"]
+
+      if config["theme"].is_a?(String)
+        self.theme = Jekyll::Theme.new(config["theme"])
+      else
+        Jekyll.logger.warn "Theme:",
+          "value of 'theme' in config should be String, but got #{config["theme"].class}"
+      end
     end
 
     private
