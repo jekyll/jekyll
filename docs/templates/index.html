@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://jekyllrb.com/docs/templates/">
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-08-07T11:46:36-07:00">
+<meta property="article:published_time" content="2016-08-07T12:11:50-07:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@jekyllrb">
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
@@ -28,7 +28,7 @@
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Templates",
-    "datePublished": "2016-08-07T11:46:36-07:00",
+    "datePublished": "2016-08-07T12:11:50-07:00",
     "description": "Jekyll uses the Liquid templating language toprocess templates. All of the standard Liquid tags andfilters aresupported. Jekyll even adds a few handy filters and tags of its own to makecommon tasks easier.",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
     "url": "https://jekyllrb.com/docs/templates/"
@@ -750,6 +750,25 @@ are the same styles as used by GitHub and you are free to use them for your own
 site. If you use <code class="highlighter-rouge">linenos</code>, you might want to include an additional CSS class
 definition for the <code class="highlighter-rouge">.lineno</code> class in <code class="highlighter-rouge">syntax.css</code> to distinguish the line
 numbers from the highlighted code.</p>
+
+<h3 id="link">Link</h3>
+
+<p>If you would like to include a link to a collection’s document, or a post
+the <code class="highlighter-rouge">link</code> tag will generate the correct permalink URL for the path you
+specify.</p>
+
+<p>You must include the file extension when using the <code class="highlighter-rouge">link</code> tag.</p>
+
+<figure class="highlight"><pre><code class="language-liquid" data-lang="liquid"><span class="p">{%</span><span class="w"> </span><span class="nt">link</span><span class="w"> </span>_collection/name-of-document.md<span class="w"> </span><span class="p">%}</span>
+<span class="p">{%</span><span class="w"> </span><span class="nt">link</span><span class="w"> </span>_posts/<span class="mi">2016</span>-<span class="mi">07</span>-<span class="mi">26</span>-name-of-post.md<span class="w"> </span><span class="p">%}</span></code></pre></figure>
+
+<p>You can also use this tag to create a link in Markdown as follows:</p>
+
+<figure class="highlight"><pre><code class="language-liquid" data-lang="liquid">[Link to a document](<span class="p">{%</span><span class="w"> </span><span class="nt">link</span><span class="w"> </span>_collection/name-of-document.md<span class="w"> </span><span class="p">%}</span>)
+[Link to a post](<span class="p">{%</span><span class="w"> </span><span class="nt">link</span><span class="w"> </span>_posts/<span class="mi">2016</span>-<span class="mi">07</span>-<span class="mi">26</span>-name-of-post.md<span class="w"> </span><span class="p">%}</span>)</code></pre></figure>
+
+<p>Support for static files and pages is coming in a later release but is
+<strong>not</strong> released as of v3.2.1.</p>
 
 <h3 id="post-url">Post URL</h3>
 
