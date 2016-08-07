@@ -7,20 +7,9 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     Jekyll::Hooks.register :site, :after_reset do |site|
-      pageklass = Class.new(Jekyll::Page) do
-        def initialize(site, base)
-          @site = site
-          @base = base
-          @data = {}
-          @dir = '/'
-          @name = 'foo.html'
-          @content = 'mytinypage'
-
-          self.process(@name)
-        end
-      end
-
-      site.pages << pageklass.new(site, site.source)
+      page = Jekyll::Page.new(site, site.source, "/", "foo.html")
+      page.content = "mytinypage"
+      site.pages.docs << page
     end
     """
     When I run jekyll build
@@ -79,7 +68,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     Jekyll::Hooks.register :pages, :post_init do |page|
-      page.name = 'renamed.html'
+      page.instance_variable_set "@relative_path", '/renamed.html'
       page.process(page.name)
     end
     """
@@ -256,6 +245,7 @@ Feature: Hooks
     And I have a "_plugins/ext.rb" file with content:
     """
     Jekyll::Hooks.register :documents, :pre_render do |doc, payload|
+      doc.data['text'] ||= ''
       doc.data['text'] = doc.data['text'] << ' are belong to us'
     end
     """

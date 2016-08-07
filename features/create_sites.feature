@@ -82,10 +82,10 @@ Feature: Create sites
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Page : Site contains 2 pages and 4 posts" in "_site/index.html"
+    And I should see "Page Index: Site contains 2 pages and 4 posts" in "_site/index.html"
     And I should see "No replacement \{\{ site.posts.size \}\}" in "_site/about.html"
     And I should see "" in "_site/another_file"
-    And I should see "Page : blog category index page" in "_site/blog/index.html"
+    And I should see "Page Index: blog category index page" in "_site/blog/index.html"
     And I should see "Post entry1: <p>content for entry1.</p>" in "_site/2009/03/27/entry1.html"
     And I should see "Post entry2: <p>content for entry2.</p>" in "_site/2009/04/27/entry2.html"
     And I should see "Post entry3: <p>content for entry3.</p>" in "_site/category/2009/05/27/entry3.html"
@@ -200,6 +200,6 @@ Feature: Create sites
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Page : Site contains 1 pages and 2 posts; Related posts: 0" in "_site/index.html"
+    And I should see "Page Index: Site contains 1 pages and 2 posts; Related posts: 0" in "_site/index.html"
     And I should see "Post entry1: <p>content for entry1.</p>\nRelated posts: 1" in "_site/2009/03/27/entry1.html"
     And I should see "Post entry2: <p>content for entry2.</p>\nRelated posts: 1" in "_site/2009/04/27/entry2.html"

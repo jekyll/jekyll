@@ -106,4 +106,4 @@ Feature: Embed filters
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see exactly "The rule of 3: Fly, Run, Jump," in "_site/bird.html"
+    And I should see exactly "The rule of 3: Jump, Fly, Run," in "_site/bird.html"

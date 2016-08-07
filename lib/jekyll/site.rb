@@ -88,7 +88,6 @@ module Jekyll
         self.time = Time.now
       end
       self.layouts = {}
-      self.pages = []
       self.static_files = []
       self.data = {}
       @collections = nil
@@ -132,11 +131,18 @@ module Jekyll
     # If config['collections'] is set, a new instance is created
     # for each item in the collection, a new hash is returned otherwise.
     #
+    # Note: For backwards compatibility, we want Pages to be the last
+    # collection to render so other documents have output at render time
+    #
     # Returns a Hash containing collection name-to-instance pairs.
     def collections
-      @collections ||= Hash[collection_names.map do |coll|
-        [coll, Jekyll::Collection.new(self, coll)]
-      end]
+      @collections ||= begin
+        collections = Hash[collection_names.map do |coll|
+          [coll, Jekyll::Collection.new(self, coll)]
+        end]
+        collections["pages"] = collections.delete("pages")
+        collections
+      end
     end
 
     # The list of collection names.
@@ -188,7 +194,6 @@ module Jekyll
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
       render_docs(payload)
-      render_pages(payload)
 
       Jekyll::Hooks.trigger :site, :post_render, self, payload
     # rubocop: disable HandleExceptions
@@ -217,6 +222,10 @@ module Jekyll
 
     def posts
       collections["posts"] ||= Collection.new(self, "posts")
+    end
+
+    def pages
+      collections["pages"] ||= Collection.new(self, "pages")
     end
 
     # Construct a Hash of Posts indexed by the specified Post attribute.
@@ -328,7 +337,7 @@ module Jekyll
     end
 
     def each_site_file
-      %w(pages static_files docs_to_write).each do |type|
+      %w(static_files docs_to_write).each do |type|
         send(type).each do |item|
           yield item
         end
@@ -447,16 +456,6 @@ module Jekyll
             document.output = Jekyll::Renderer.new(self, document, payload).run
             document.trigger_hooks(:post_render)
           end
-        end
-      end
-    end
-
-    private
-    def render_pages(payload)
-      pages.flatten.each do |page|
-        if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
         end
       end
     end

@@ -19,6 +19,9 @@ def site_configuration(overrides = {})
     "source"      => source_dir,
     "destination" => dest_dir
   }, build_configs(overrides))
+    .fix_common_issues
+    .backwards_compatibilize
+    .add_default_collections
 end
 
 def dest_dir(*subdirs)

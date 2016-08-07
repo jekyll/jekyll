@@ -1,13 +1,11 @@
 module Jekyll
-  class Page
-    include Convertible
-
+  class Page < Document
     attr_writer :dir
-    attr_accessor :site, :pager
-    attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :pager
 
-    alias_method :extname, :ext
+    alias_method :ext, :extname
+    alias_method :name, :basename
+    alias_method :process, :read
 
     FORWARD_SLASH = "/".freeze
 
@@ -20,41 +18,35 @@ module Jekyll
       url
     ).freeze
 
-    # A set of extensions that are considered HTML or HTML-like so we
-    # should not alter them,  this includes .xhtml through XHTM5.
-
-    HTML_EXTENSIONS = %w(
-      .html
-      .xhtml
-      .htm
-    ).freeze
-
     # Initialize a new Page.
     #
     # site - The Site object.
     # base - The String path to the source.
     # dir  - The String path between the source and the file.
     # name - The String filename of the file.
-    def initialize(site, base, dir, name)
-      @site = site
-      @base = base
-      @dir  = dir
-      @name = name
-      @path = site.in_source_dir(base, dir, name)
-
-      process(name)
-      read_yaml(File.join(base, dir), name)
-
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+    def initialize(*args)
+      # Document-style
+      if args.size == 2
+        super
+      # Legacy Page support
+      elsif args.size == 4
+        Jekyll.logger.warn "Deprecation:", "Pages are now Documents."
+        @site = args[0]
+        @base = args[1]
+        @dir  = args[2]
+        @name = args[3]
+        @path = site.in_source_dir(@base, @dir, @name)
+        super(@path, :collection => site.pages, :site => @site)
+        read
+        backwards_compatibilize
+      else
+        raise ArugmentError, "Expected 2 or 4 arguments, #{args.size} given"
       end
-
-      Jekyll::Hooks.trigger :pages, :post_init, self
     end
 
-    # The generated directory into which the page will be placed
-    # upon generation. This is derived from the permalink or, if
-    # permalink is absent, we be '/'
+    # Backwards compatible shim to return the generated directory into which
+    # the page will be placed upon generation. This is derived from the
+    # permalink or, if permalink is absent, will be '/'
     #
     # Returns the String destination directory.
     def dir
@@ -66,116 +58,37 @@ module Jekyll
       end
     end
 
-    # The full path and filename of the post. Defined in the YAML of the post
-    # body.
-    #
-    # Returns the String permalink or nil if none has been set.
-    def permalink
-      data.nil? ? nil : data["permalink"]
-    end
-
     # The template of the permalink.
     #
     # Returns the template String.
-    def template
+    def url_template
       if !html?
-        "/:path/:basename:output_ext"
+        "/:path:output_ext"
       elsif index?
-        "/:path/"
+        "/:relative_path_without_basename/"
       else
-        Utils.add_permalink_suffix("/:path/:basename", site.permalink_style)
+        Utils.add_permalink_suffix("/:path", site.permalink_style)
       end
     end
+    alias_method :template, :url_template
 
-    # The generated relative url of this page. e.g. /about.html.
-    #
-    # Returns the String url.
-    def url
-      @url ||= URL.new({
-        :template     => template,
-        :placeholders => url_placeholders,
-        :permalink    => permalink
-      }).to_s
-    end
-
-    # Returns a hash of URL placeholder names (as symbols) mapping to the
-    # desired placeholder replacements. For details see "url.rb"
-    def url_placeholders
-      {
-        :path       => @dir,
-        :basename   => basename,
-        :output_ext => output_ext
-      }
-    end
-
-    # Extract information from the page filename.
-    #
-    # name - The String filename of the page file.
-    #
-    # Returns nothing.
-    def process(name)
-      self.ext = File.extname(name)
-      self.basename = name[0..-ext.length - 1]
-    end
-
-    # Add any necessary layouts to this post
+    # Backwards compatible shim to add any necessary layouts to this post
     #
     # layouts      - The Hash of {"name" => "layout"}.
     # site_payload - The site payload Hash.
     #
     # Returns nothing.
-    def render(layouts, site_payload)
-      site_payload["page"] = to_liquid
-      site_payload["paginator"] = pager.to_liquid
-
-      do_layout(site_payload, layouts)
+    def render(_, site_payload = nil)
+      Jekyll::Renderer.new(site, self, site_payload).run
     end
 
-    # The path to the source file
-    #
-    # Returns the path to the source file
-    def path
-      data.fetch("path") { relative_path }
-    end
+    private
 
-    # The path to the page source file, relative to the site source
-    def relative_path
-      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
-    end
-
-    # Obtain destination path.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns the destination file path String.
-    def destination(dest)
-      path = site.in_dest_dir(dest, URL.unescape_path(url))
-      path = File.join(path, "index") if url.end_with?("/")
-      path << output_ext unless path.end_with? output_ext
-      path
-    end
-
-    # Returns the object as a debug String.
-    def inspect
-      "#<Jekyll:Page @name=#{name.inspect}>"
-    end
-
-    # Returns the Boolean of whether this Page is HTML or not.
-    def html?
-      HTML_EXTENSIONS.include?(output_ext)
-    end
-
-    # Returns the Boolean of whether this Page is an index file or not.
-    def index?
-      basename == "index"
-    end
-
-    def trigger_hooks(hook_name, *args)
-      Jekyll::Hooks.trigger :pages, hook_name, self, *args
-    end
-
-    def write?
-      true
+    # Pages expect addition fields to be exposed via :[]
+    def backwards_compatibilize
+      ATTRIBUTES_FOR_LIQUID.each do |key|
+        data[key] = public_send(key.sub("path", "relative_path").to_sym)
+      end
     end
   end
 end

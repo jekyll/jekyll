@@ -177,28 +177,28 @@ class TestSite < JekyllUnitTest
       @site.process
       # files in symlinked directories may appear twice
       sorted_pages = %w(
-        %#\ +.md
+        +/%#\ +.md
+        +/foo.md
         .htaccess
         about.html
-        bar.html
-        coffeescript.coffee
         contacts.html
+        contacts/bar.html
+        contacts/humans.txt
+        contacts/index.html
+        css/main.scss
         deal.with.dots.html
         dynamic_file.php
         environment.html
         exploit.md
-        foo.md
-        humans.txt
         index.html
-        index.html
-        main.scss
-        main.scss
+        js/coffeescript.coffee
         properties.html
         sitemap.xml
         static_files.html
-        symlinked-file
+        symlink-test/symlinked-dir/main.scss
+        symlink-test/symlinked-file
       )
-      assert_equal sorted_pages, @site.pages.map(&:name)
+      assert_equal sorted_pages, @site.pages.docs.map(&:relative_path)
     end
 
     should "read posts" do

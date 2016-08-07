@@ -266,9 +266,10 @@ module Jekyll
       end
 
       config["collections"] = Utils.deep_merge_hashes(
-        { "posts" => {} }, config["collections"]
+        { "posts" => {}, "pages" => {} }, config["collections"]
       ).tap do |collections|
         collections["posts"]["output"] = true
+        collections["pages"]["output"] = true
         if config["permalink"]
           collections["posts"]["permalink"] ||= style_to_permalink(config["permalink"])
         end

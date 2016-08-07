@@ -11,6 +11,14 @@ module Jekyll
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
     DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$!
 
+    # A set of extensions that are considered HTML or HTML-like so we
+    # should not alter them,  this includes .xhtml through XHTM5.
+    HTML_EXTENSIONS = %w(
+      .html
+      .xhtml
+      .htm
+    ).freeze
+
     # Create a new Document.
     #
     # path - the path to the file
@@ -94,6 +102,10 @@ module Jekyll
         .relative_path_from(Pathname.new(site.source)).to_s
     end
 
+    def relative_path_without_basename
+      @relative_path_without_basename = relative_path.sub(/#{basename}\z/, "")
+    end
+
     # The output extension of the document.
     #
     # Returns the output extension
@@ -163,10 +175,9 @@ module Jekyll
 
     # Determine whether the file should be rendered with Liquid.
     #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
+    # Returns false if the document is a yaml file, true otherwise.
     def render_with_liquid?
-      !(coffeescript_file? || yaml_file?)
+      !yaml_file?
     end
 
     # Determine whether the file should be placed into layouts.
@@ -175,6 +186,16 @@ module Jekyll
     #   true otherwise.
     def place_in_layout?
       !(asset_file? || yaml_file?)
+    end
+
+    # Returns the Boolean of whether this Page is HTML or not.
+    def html?
+      HTML_EXTENSIONS.include?(output_ext)
+    end
+
+    # Returns the Boolean of whether this Page is an index file or not.
+    def index?
+      basename_without_ext == "index"
     end
 
     # The URL template where the document would be accessible.
@@ -224,7 +245,7 @@ module Jekyll
       dest = site.in_dest_dir(base_directory)
       path = site.in_dest_dir(dest, URL.unescape_path(url))
       if url.end_with? "/"
-        path = File.join(path, "index.html")
+        path = File.join(path, "index#{output_ext}")
       else
         path << output_ext unless path.end_with? output_ext
       end

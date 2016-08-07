@@ -103,10 +103,10 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "All documents: _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html"
+    And I should see "All documents: _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md _methods/yaml_with_dots.md index.html" in "_site/index.html"
 
   Scenario: Documents have an output attribute, which is the converted HTML
-    Given I have an "index.html" page that contains "Second document's output: {{ site.documents[1].output }}"
+    Given I have an "index.html" page that contains "Second method's output: {{ site.methods[1].output }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
     """
@@ -116,7 +116,7 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Second document's output: <p>Use <code class=\"highlighter-rouge\">Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
+    And I should see "Second method's output: <p>Use <code class=\"highlighter-rouge\">Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
 
   Scenario: Filter documents by where
     Given I have an "index.html" page that contains "{% assign items = site.methods | where: 'whatever','foo.bar' %}Item count: {{ items.size }}"

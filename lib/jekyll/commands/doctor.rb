@@ -51,7 +51,7 @@ module Jekyll
         def conflicting_urls(site)
           conflicting_urls = false
           urls = {}
-          urls = collect_urls(urls, site.pages, site.dest)
+          urls = collect_urls(urls, site.pages.docs, site.dest)
           urls = collect_urls(urls, site.posts.docs, site.dest)
           urls.each do |url, paths|
             next unless paths.size > 1
@@ -80,7 +80,7 @@ module Jekyll
 
         def urls_only_differ_by_case(site)
           urls_only_differ_by_case = false
-          urls = case_insensitive_urls(site.pages + site.docs_to_write, site.dest)
+          urls = case_insensitive_urls(site.docs_to_write, site.dest)
           urls.each do |_case_insensitive_url, real_urls|
             next unless real_urls.uniq.size > 1
             urls_only_differ_by_case = true

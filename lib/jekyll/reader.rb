@@ -23,7 +23,6 @@ module Jekyll
     # Sorts posts, pages, and static files.
     def sort_files!
       site.collections.values.each { |c| c.docs.sort! }
-      site.pages.sort_by!(&:name)
       site.static_files.sort_by!(&:relative_path)
     end
 
@@ -87,7 +86,7 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_pages(dir, dot_pages)
-      site.pages.concat(PageReader.new(site, dir).read(dot_pages))
+      site.pages.docs.concat(PageReader.new(site, dir).read(dot_pages))
     end
 
     # Retrieve all the static files from the current directory,
