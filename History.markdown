@@ -7,6 +7,7 @@
   * need subcommand build (#5190)
   * Add the Jekyll Cloudinary plugin (#5183)
   * Documentation : `new-theme` command (#5205)
+  * Document `link` Liquid tag (#5182)
 
 ### Development Fixes
 
