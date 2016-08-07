@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://jekyllrb.com/docs/themes/">
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-08-03T11:59:19-07:00">
+<meta property="article:published_time" content="2016-08-07T11:46:36-07:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@jekyllrb">
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY">
@@ -28,7 +28,7 @@
     "@context": "http://schema.org",
     "@type": "BlogPosting",
     "headline": "Themes",
-    "datePublished": "2016-08-03T11:59:19-07:00",
+    "datePublished": "2016-08-07T11:46:36-07:00",
     "description": "Jekyll has an extensive theme system, which allows you to leverage community-maintained templates and styles to customize your site’s presentation. Jekyll themes package layouts, includes, and stylesheets in a way that can be overridden by your site’s content.",
     "logo": "https://jekyllrb.comimg/logo-2x.png",
     "url": "https://jekyllrb.com/docs/themes/"
@@ -326,18 +326,25 @@
 
 <h2 id="creating-a-theme">Creating a theme</h2>
 
-<p>Jekyll themes are distributed as Ruby gems. The only required file is the <a href="http://guides.rubygems.org/specification-reference/">Ruby Gemspec</a>. Here’s an example of a minimal Gemspec for the <code class="highlighter-rouge">my-awesome-jekyll-theme</code> theme, saved as <code class="highlighter-rouge">/my-awsome-jekyll-theme.gemspec</code>:</p>
+<p>Jekyll themes are distributed as Ruby gems. Don’t worry Jekyll will help you scaffold a new theme with the <code class="highlighter-rouge">new-theme</code> command. Just run <code class="highlighter-rouge">jekyll new-theme</code> with the theme name as an argument:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Gem</span><span class="o">::</span><span class="no">Specification</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">name</span>     <span class="o">=</span> <span class="s1">'&lt;THEME TITLE&gt;'</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">version</span>  <span class="o">=</span> <span class="s1">'0.1.0'</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">license</span>  <span class="o">=</span> <span class="s1">'MIT'</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">summary</span>  <span class="o">=</span> <span class="s1">'&lt;THEME DESCRIPTION&gt;'</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">author</span>   <span class="o">=</span> <span class="s1">'&lt;YOUR NAME&gt;'</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">email</span>    <span class="o">=</span> <span class="s1">'&lt;YOUR EMAIL&gt;'</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">homepage</span> <span class="o">=</span> <span class="s1">'https://github.com/jekyll/my-awesome-jekyll-theme'</span>
-  <span class="n">s</span><span class="p">.</span><span class="nf">files</span>    <span class="o">=</span> <span class="sb">`git ls-files -z`</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\x0</span><span class="s2">"</span><span class="p">).</span><span class="nf">grep</span><span class="p">(</span><span class="sr">%r{^_(sass|includes|layouts)/}</span><span class="p">)</span>
-<span class="k">end</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">jekyll new-theme my-awesome-theme
+             create /path/to/my-awesome-theme/_layouts
+             create /path/to/my-awesome-theme/_includes
+             create /path/to/my-awesome-theme/_sass
+             create /path/to/my-awesome-theme/_layouts/page.html
+             create /path/to/my-awesome-theme/_layouts/post.html
+             create /path/to/my-awesome-theme/_layouts/default.html
+             create /path/to/my-awesome-theme/Gemfile
+             create /path/to/my-awesome-theme/my-awesome-theme.gemspec
+             create /path/to/my-awesome-theme/README.md
+             create /path/to/my-awesome-theme/LICENSE.txt
+         initialize /path/to/my-awesome-theme/.git
+             create /path/to/my-awesome-theme/.gitignore
+Your new Jekyll theme, my-awesome-theme, is ready <span class="k">for </span>you <span class="k">in</span> /path/to/my-awesome-theme!
+For <span class="nb">help </span>getting started, <span class="nb">read</span> /path/to/my-awesome-theme/README.md.</code></pre></figure>
+
+<p>Add your template files in the corresponding folders, complete the <code class="highlighter-rouge">.gemspec</code> and the README files according to your needs.</p>
 
 <h3 id="layouts-and-includes">Layouts and includes</h3>
 
