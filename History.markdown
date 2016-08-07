@@ -6,6 +6,7 @@
   * Fix path in the prompt (#5194)
   * need subcommand build (#5190)
   * Add the Jekyll Cloudinary plugin (#5183)
+  * Documentation : `new-theme` command (#5205)
 
 ### Development Fixes
 
