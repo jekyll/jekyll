@@ -119,6 +119,32 @@ class TestExcerpt < JekyllUnitTest
           assert @extracted_excerpt.content.include?("http://www.jekyllrb.com/")
         end
       end
+
+      context "with indented link references" do
+        setup do
+          @post = setup_post("2016-08-16-indented-link-references.markdown")
+          @excerpt = @post.excerpt
+        end
+
+        should "contain all refs at the bottom of the page" do
+          (0..3).each do |i|
+            assert_match "[link_#{i}]: www.example.com/#{i}", @excerpt.content
+          end
+        end
+
+        should "ignore indented code" do
+          refute_match "[fakelink]:", @excerpt.content
+        end
+
+        should "render links properly" do
+          @rendered_post = @post.dup
+          do_render(@rendered_post)
+          output = @rendered_post.data["excerpt"].output
+          (0..3).each do |i|
+            assert_includes output, "<a href=\"www.example.com/#{i}\">"
+          end
+        end
+      end
     end
   end
 

@@ -118,7 +118,7 @@ module Jekyll
       if tail.empty?
         head
       else
-        "" << head << "\n\n" << tail.scan(%r!^\[[^\]]+\]:.+$!).join("\n")
+        "" << head << "\n\n" << tail.scan(%r!^ {0,3}\[[^\]]+\]:.+$!).join("\n")
       end
     end
   end
