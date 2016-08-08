@@ -4,8 +4,13 @@ module Jekyll
   class Document
     include Comparable
 
-    attr_reader :path, :site, :extname, :collection
+    attr_reader :site, :extname, :collection
     attr_accessor :content, :output
+
+    # In order to retain backwards compatability, @path is the absolute path
+    # in Documents, but the relative path in Pages. If you need the Document's
+    # path, it's better to use #absolute_path and #relative_path
+    attr_reader :path
 
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
@@ -98,12 +103,23 @@ module Jekyll
     # Returns a String path which represents the relative path
     #   from the site source to this document
     def relative_path
-      @relative_path ||= Pathname.new(path)
+      @relative_path ||= Pathname.new(absolute_path)
         .relative_path_from(Pathname.new(site.source)).to_s
     end
 
+    # The path to the document's containing directory, relative to the site source
+    #
+    # Returns a String path which represents the relative path
+    #   from the site source to this document's containing directory
     def relative_path_without_basename
       @relative_path_without_basename = relative_path.sub(/#{basename}\z/, "")
+    end
+
+    # The absolute path to the document
+    #
+    # Returns a String path which represents the absolute pat to this document
+    def absolute_path
+      Pathname.new(@path).to_s
     end
 
     # The output extension of the document.
@@ -117,14 +133,14 @@ module Jekyll
     #
     # Returns the basename without the file extname.
     def basename_without_ext
-      @basename_without_ext ||= File.basename(path, ".*")
+      @basename_without_ext ||= File.basename(absolute_path, ".*")
     end
 
     # The base filename of the document.
     #
     # Returns the base filename of the document.
     def basename
-      @basename ||= File.basename(path)
+      @basename ||= File.basename(absolute_path)
     end
 
     # Produces a "cleaned" relative path.
@@ -282,7 +298,7 @@ module Jekyll
       Jekyll.logger.debug "Reading:", relative_path
 
       if yaml_file?
-        @data = SafeYAML.load_file(path)
+        @data = SafeYAML.load_file(absolute_path)
       else
         begin
           defaults = @site.frontmatter_defaults.all(
@@ -291,7 +307,7 @@ module Jekyll
           )
           merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
 
-          self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+          self.content = File.read(absolute_path, Utils.merged_file_read_opts(site, opts))
           if content =~ YAML_FRONT_MATTER_REGEXP
             self.content = $POSTMATCH
             data_file = SafeYAML.load(Regexp.last_match(1))
@@ -300,10 +316,10 @@ module Jekyll
 
           post_read
         rescue SyntaxError => e
-          Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
+          Jekyll.logger.error "Error:", "YAML Exception reading #{relative_path}: #{e.message}"
         rescue => e
           raise e if e.is_a? Jekyll::Errors::FatalException
-          Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
+          Jekyll.logger.error "Error:", "could not read file #{relative_path}: #{e.message}"
         end
       end
     end
@@ -388,7 +404,7 @@ module Jekyll
     def <=>(other)
       return nil unless other.respond_to?(:data)
       cmp = data["date"] <=> other.data["date"]
-      cmp = path <=> other.path if cmp.nil? || cmp.zero?
+      cmp = relative_path <=> other.relative_path if cmp.nil? || cmp.zero?
       cmp
     end
 

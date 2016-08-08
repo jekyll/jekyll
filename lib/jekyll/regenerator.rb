@@ -165,7 +165,7 @@ module Jekyll
     def regenerate_page?(document)
       document.asset_file? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
-          document.path, document.destination(@site.dest)
+          document.absolute_path, document.destination(@site.dest)
         )
     end
 
@@ -173,7 +173,7 @@ module Jekyll
     def regenerate_document?(document)
       !document.write? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
-          document.path, document.destination(@site.dest)
+          document.absolute_path, document.destination(@site.dest)
         )
     end
 

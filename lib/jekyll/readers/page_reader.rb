@@ -15,7 +15,8 @@ module Jekyll
     # Returns an array of static pages.
     def read(files)
       files.map do |page|
-        doc = Page.new(@site, @site.source, @dir, page)
+        path = File.join @site.source, @dir, page
+        doc = Page.new(path, :collection => site.pages, :site => site)
         doc.read
         doc if site.publisher.publish?(doc)
       end.compact

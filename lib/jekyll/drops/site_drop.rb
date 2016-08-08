@@ -24,7 +24,7 @@ module Jekyll
       end
 
       def html_pages
-        @site_html_pages ||= @obj.pages.select do |page|
+        @site_html_pages ||= @obj.pages.docs.select do |page|
           page.html? || page.url.end_with?("/")
         end
       end

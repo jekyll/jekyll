@@ -59,7 +59,7 @@ module Jekyll
 
       if document.render_with_liquid?
         Jekyll.logger.debug "Rendering Liquid:", document.relative_path
-        output = render_liquid(output, payload, info, document.path)
+        output = render_liquid(output, payload, info, document.relative_path)
       end
 
       Jekyll.logger.debug "Rendering Markup:", document.relative_path
@@ -163,7 +163,7 @@ module Jekyll
 
         # Add layout to dependency tree
         site.regenerator.add_dependency(
-          site.in_source_dir(document.path),
+          site.in_source_dir(document.relative_path),
           site.in_source_dir(layout.path)
         ) if document.write?
 

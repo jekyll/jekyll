@@ -25,16 +25,12 @@ module Jekyll
     # dir  - The String path between the source and the file.
     # name - The String filename of the file.
     def initialize(*args)
-      # Document-style
-      if args.size == 2
+      if args.size == 2 # Initialized as Document
         super
-      # Legacy Page support
-      elsif args.size == 4
-        Jekyll.logger.warn "Deprecation:", "Pages are now Documents."
-        @site = args[0]
-        @base = args[1]
-        @dir  = args[2]
-        @name = args[3]
+      elsif args.size == 4 # Legacy Page support
+        Jekyll::Deprecator.deprecation_message "Pages are now Documents."
+        Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."
+        @site, @base, @dir, @name = args
         @path = site.in_source_dir(@base, @dir, @name)
         super(@path, :collection => site.pages, :site => @site)
         read
@@ -82,12 +78,20 @@ module Jekyll
       Jekyll::Renderer.new(site, self, site_payload).run
     end
 
+    # To maintain backwards compataiblity, path is relative for Pages
+    # but absolute for documents. Use #absolute_path to get the absolute path
+    def path
+      Jekyll::Deprecator.deprecation_message "Page#path is now Page#relative_path."
+      Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."
+      relative_path
+    end
+
     private
 
     # Pages expect addition fields to be exposed via :[]
     def backwards_compatibilize
       ATTRIBUTES_FOR_LIQUID.each do |key|
-        data[key] = public_send(key.sub("path", "relative_path").to_sym)
+        data[key] = public_send(key.to_sym)
       end
     end
   end
