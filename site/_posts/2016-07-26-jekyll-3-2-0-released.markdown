@@ -24,7 +24,7 @@ Some other notable changes:
 - Added an `:after_init` Hook
 - Added a `where_exp` filter to provide more powerful filtering
 - Added a `link` liquid tag which can be used to generate URL's for any
-post, page, or document based on its path relative to the site source
+post or document based on its path relative to the site source
 - ... and lots more!
 
 As always, there is [a full list of changes](/docs/history/#v3-2-0) for
