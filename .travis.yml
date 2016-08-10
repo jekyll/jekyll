@@ -8,15 +8,18 @@ rvm:
   - &ruby1 2.3.0
   - &ruby2 2.2.4
   - &ruby3 2.1.8
+  - &jruby 9.1.2.0
 
 matrix:
   include:
-    - rvm: 2.3.0
+    - rvm: *ruby1
       env: TEST_SUITE=fmt
-    - rvm: jruby-9.0.5.0
-      env: TEST_SUITE=test
-    - rvm: 2.3.0
-      env: TEST_SUITE=default-site
+    - env: TEST_SUITE=default-site
+      rvm: *ruby1
+  exclude:
+    - rvm *jruby
+      env: TEST_SUITE=cucumber
+    
 env:
   matrix:
     - TEST_SUITE=test
