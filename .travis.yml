@@ -17,7 +17,7 @@ matrix:
     - env: TEST_SUITE=default-site
       rvm: *ruby1
   exclude:
-    - rvm *jruby
+    - rvm: *jruby
       env: TEST_SUITE=cucumber
     
 env:
