@@ -12,32 +12,32 @@ branches:
 build: off
 
 install:
-  - SET PATH=C:\Ruby%RUBY_FOLDER_VER%\bin;%PATH%
-  - bundle install --retry 5
+  - SET PATH=C:\Ruby%RUBY_SERIES%\bin;%PATH%
+  - bundle install --retry 3
 
 environment:
   BUNDLE_WITHOUT: "benchmark:site:development"
   matrix:
-    - RUBY_FOLDER_VER: "23"
-      GEMS_FOLDER_VER: "2.3.0"
+    - RUBY_SERIES: "23"
+      RUBY_VERSION: "2.3.1"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "23"
-      GEMS_FOLDER_VER: "2.3.0"
+    - RUBY_SERIES: "23"
+      RUBY_VERSION: "2.3.1"
       TEST_SUITE: "cucumber"
-    - RUBY_FOLDER_VER: "23"
-      GEMS_FOLDER_VER: "2.3.0"
+    - RUBY_SERIES: "23"
+      RUBY_VERSION: "2.3.1"
       TEST_SUITE: "fmt"
-    - RUBY_FOLDER_VER: "23"
-      GEMS_FOLDER_VER: "2.3.0"
+    - RUBY_SERIES: "23"
+      RUBY_VERSION: "2.3.1"
       TEST_SUITE: "default-site"
-    - RUBY_FOLDER_VER: "23-x64"
-      GEMS_FOLDER_VER: "2.3.0"
+    - RUBY_SERIES: "23-x64"
+      RUBY_VERSION: "2.3.1"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "22"
-      GEMS_FOLDER_VER: "2.2.0"
+    - RUBY_SERIES: "22"
+      RUBY_VERSION: "2.2.5"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "21"
-      GEMS_FOLDER_VER: "2.1.0"
+    - RUBY_SERIES: "21"
+      RUBY_VERSION: "2.1.9"
       TEST_SUITE: "test"
 
 test_script:
@@ -47,6 +47,5 @@ test_script:
   - bash ./script/cibuild
 
 cache:
-  # If one of the files after the right arrow changes, cache will be skipped
-  - C:\Ruby%RUBY_FOLDER_VER%\bin -> Gemfile,jekyll.gemspec,appveyor.yml
-  - C:\Ruby%RUBY_FOLDER_VER%\lib\ruby\gems\%GEMS_FOLDER_VER% -> Gemfile,jekyll.gemspec,appveyor.yml
+  - C:\Ruby%RUBY_SERIES%\bin
+  - C:\Ruby%RUBY_SERIES%\lib\ruby\gems\%RUBY_VERSION%
