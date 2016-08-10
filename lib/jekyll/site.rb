@@ -410,36 +410,30 @@ module Jekyll
     # already exist.
     #
     # Returns The Cleaner
-    private
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
     end
 
-    private
     def configure_plugins
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
     end
 
-    private
     def configure_theme
       self.theme = nil
       self.theme = Jekyll::Theme.new(config["theme"]) if config["theme"]
     end
 
-    private
     def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
       @includes_load_paths << theme.includes_path if self.theme
     end
 
-    private
     def configure_file_read_opts
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
     end
 
-    private
     def render_docs(payload)
       collections.each do |_, collection|
         collection.docs.each do |document|
@@ -451,7 +445,6 @@ module Jekyll
       end
     end
 
-    private
     def render_pages(payload)
       pages.flatten.each do |page|
         if regenerator.regenerate?(page)

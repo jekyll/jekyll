@@ -207,7 +207,6 @@ module Jekyll
       end
     end
 
-    private
     def read_static_file(file_path, full_path)
       relative_dir = Jekyll.sanitized_path(
         relative_directory,

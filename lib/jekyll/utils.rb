@@ -300,14 +300,12 @@ module Jekyll
       end
     end
 
-    private
     def merge_default_proc(target, overwrite)
       if target.is_a?(Hash) && overwrite.is_a?(Hash) && target.default_proc.nil?
         target.default_proc = overwrite.default_proc
       end
     end
 
-    private
     def duplicate_frozen_values(target)
       target.each do |key, val|
         target[key] = val.dup if val.frozen? && duplicable?(val)
