@@ -317,10 +317,10 @@ EOS
 
       should "render markdown with rouge with line numbers" do
         assert_match(
-          %(<table style="border-spacing: 0"><tbody>) +
-            %(<tr><td class="gutter gl" style="text-align: right">) +
-            %(<pre class="lineno">1</pre></td>) +
-            %(<td class="code"><pre>test<span class="w">\n</span></pre></td></tr>) +
+          %(<table class="rouge-table"><tbody>) +
+            %(<tr><td class="gutter gl">) +
+            %(<pre class="lineno">1\n</pre></td>) +
+            %(<td class="code"><pre>test</pre></td></tr>) +
             %(</tbody></table>),
           @result
         )
@@ -415,15 +415,15 @@ EOS
       end
 
       should "should stop highlighting at boundary" do
-        expected = <<-EOS
-<p>This is not yet highlighted</p>
-
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>This should not be highlighted, right?</p>
-EOS
-        assert_match(expected, @result)
+        assert_match(
+          %(<p>This is not yet highlighted</p>\n\n<figure class="highlight">) +
+            %(<pre><code class="language-php" data-lang="php">) +
+            %(<table class="rouge-table"><tbody><tr><td class="gutter gl">) +
+            %(<pre class="lineno">1\n</pre></td><td class="code"><pre>test</pre></td>) +
+            %(</tr></tbody></table></code></pre></figure>\n\n) +
+            %(<p>This should not be highlighted, right?</p>),
+          @result
+        )
       end
     end
 
