@@ -95,7 +95,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 
  * Open command prompt and install [Bundler][]: `gem install bundler`
  * Create a file called `Gemfile` without any extension in your root directory of your blog
- * Copy & past the two lines into the file:
+ * Copy & paste the two lines into the file:
 
 
 {% highlight ruby %}
