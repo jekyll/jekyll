@@ -16,7 +16,10 @@ class TestKramdown < JekyllUnitTest
 
           "syntax_highlighter"      => "rouge",
           "syntax_highlighter_opts" => {
-            "bold_every" => 8, "css" => :class,
+            "bold_every" => 8,
+            "css"        => :class,
+            "css_class"  => "highlight",
+            "formatter"  => ::Rouge::Formatters::HTMLLegacy,
           },
         },
       }
