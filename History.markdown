@@ -10,6 +10,7 @@
   * Document `link` Liquid tag (#5182)
   * Remove mention of page for link tag in release post (#5214)
   * fixed typo (#5226)
+  * Add missing comma (#5222)
 
 ### Development Fixes
 
