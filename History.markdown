@@ -9,6 +9,7 @@
   * Documentation : `new-theme` command (#5205)
   * Document `link` Liquid tag (#5182)
   * Remove mention of page for link tag in release post (#5214)
+  * fixed typo (#5226)
 
 ### Development Fixes
 
