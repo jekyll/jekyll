@@ -16,6 +16,7 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def process(args, opts)
       if !args || args.empty?
         raise Jekyll::Errors::InvalidThemeName, "You must specify a theme name."
@@ -28,9 +29,10 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
       end
 
       theme.create!
-      Jekyll.logger.info "Your new Jekyll theme, #{theme.name}," \
-        " is ready for you in #{theme.path}!"
+      Jekyll.logger.info "Your new Jekyll theme, #{theme.name.cyan}," \
+        " is ready for you in #{theme.path.to_s.cyan}!"
       Jekyll.logger.info "For help getting started, read #{theme.path}/README.md."
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end

@@ -41,7 +41,7 @@ class TestNewCommand < JekyllUnitTest
     should "display a success message" do
       Jekyll::Commands::New.process(@args)
       output = Jekyll.logger.messages.last
-      success_message = "New jekyll site installed in #{@full_path}."
+      success_message = "New jekyll site installed in #{@full_path.cyan}."
       assert_includes output, success_message
     end
 

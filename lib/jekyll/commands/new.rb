@@ -34,7 +34,7 @@ module Jekyll
             create_site new_blog_path
           end
 
-          Jekyll.logger.info "New jekyll site installed in #{new_blog_path}."
+          Jekyll.logger.info "New jekyll site installed in #{new_blog_path.cyan}."
         end
 
         def create_blank_site(path)
