@@ -71,12 +71,23 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
-          External.require_with_graceful_fail "jekyll-watch"
-          watch_method = Jekyll::Watcher.method(:watch)
-          if watch_method.parameters.size == 1
-            watch_method.call(options)
+          if Utils::Platforms.windows?
+            Jekyll.logger.warn "", "--watch arg is unsupported on Windows. "
+            Jekyll.logger.warn "", "If you are on Windows Bash, please see: " \
+              "https://github.com/Microsoft/BashOnWindows/issues/216"
+
           else
-            watch_method.call(options, site)
+            External.require_with_graceful_fail "jekyll-watch"
+            watch_method = Jekyll::Watcher.method(:watch)
+            if watch_method.parameters.size == 1
+              watch_method.call(
+                options
+              )
+            else
+              watch_method.call(
+                options, site
+              )
+            end
           end
         end
       end # end of class << self
