@@ -16,6 +16,7 @@
 
   * Update appveyor.yml and fix optional deps for Ruby x64 (#5180)
   * Improve tests for Jekyll::PluginManager (#5167)
+  * Update Ruby versions in travis.yml (#5221)
 
 ### Bug Fixes
 
