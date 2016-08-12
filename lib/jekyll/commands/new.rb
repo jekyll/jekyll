@@ -22,8 +22,11 @@ module Jekyll
         def process(args, options = {})
           raise ArgumentError, "You must specify a path." if args.empty?
 
+          new_blog_title = args.join(" ")
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
+
           FileUtils.mkdir_p new_blog_path
+
           if preserve_source_location?(new_blog_path, options)
             Jekyll.logger.abort_with "Conflict:",
                       "#{new_blog_path} exists and is not empty."
@@ -33,9 +36,10 @@ module Jekyll
             create_blank_site new_blog_path
           else
             create_site new_blog_path
+            create_config_file(new_blog_title, new_blog_path)
           end
 
-          after_install(new_blog_path, options)
+          after_install(new_blog_title, new_blog_path, options)
         end
 
         def create_blank_site(path)
@@ -47,6 +51,17 @@ module Jekyll
 
         def scaffold_post_content
           ERB.new(File.read(File.expand_path(scaffold_path, site_template))).result
+        end
+
+        def create_config_file(title, path)
+          @blog_title = title
+
+          config_template = File.expand_path("_config.yml.erb", site_template)
+          config_copy = ERB.new(File.read(config_template)).result(binding)
+
+          File.open(File.expand_path("_config.yml", path), "w") do |f|
+            f.write(config_copy)
+          end
         end
 
         # Internal: Gets the filename of the sample post to be created
@@ -103,9 +118,18 @@ RUBY
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
+        def erb_files
+          erb_file = File.join("*", "*.erb")
+          Dir.glob(erb_file)
+        end
+
         def create_sample_files(path)
           FileUtils.cp_r site_template + "/.", path
           FileUtils.rm File.expand_path(scaffold_path, path)
+
+          erb_files.each do |file|
+            FileUtils.rm file
+          end
         end
 
         def site_template
@@ -120,8 +144,8 @@ RUBY
         # then automatically execute bundle install from within the new blog dir
         # unless the user opts to generate a blank blog or skip 'bundle install'.
 
-        def after_install(path, options = {})
-          Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
+        def after_install(title, path, options = {})
+          Jekyll.logger.info "New jekyll site #{title.cyan} installed in #{path.cyan}."
           Jekyll.logger.info "Bundle install skipped." if options["skip-bundle"]
 
           unless options["blank"] || options["skip-bundle"]
