@@ -110,6 +110,10 @@ class TestPluginManager < JekyllUnitTest
   end
 
   context "plugins_dir is set to a different dir" do
+    setup do
+      skip_if_windows "Jekyll doesn't currently support " \
+      "setting plugins_dir to a different dir on Windows"
+    end
     should "expand plugin path" do
       site = double({ :config => { "plugins_dir" => "some_other_plugins_path" } })
       plugin_manager = PluginManager.new(site)

@@ -158,4 +158,18 @@ class JekyllUnitTest < Minitest::Test
       str
     )
   end
+
+  def skip_if_windows(msg = nil)
+    if Jekyll::Utils::Platforms.really_windows?
+      msg ||= "Jekyll doesn't support Symlinks on Windows"
+      skip msg
+    end
+  end
+
+  def skip_unless_windows(msg = nil)
+    unless Jekyll::Utils::Platforms.really_windows?
+      msg ||= "Skipped test designed for Windows"
+      skip msg
+    end
+  end
 end

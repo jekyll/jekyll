@@ -51,7 +51,7 @@ class TestGeneratedSite < JekyllUnitTest
     should "print a nice list of static files" do
       time_regexp = "\\d+:\\d+"
       expected_output = Regexp.new <<-OUTPUT
-- /css/screen.css last edited at #{time_regexp} with extname .css
+- |/css/screen.css last edited at #{time_regexp} with extname .css
 - /pgp.key last edited at #{time_regexp} with extname .key
 - /products.yml last edited at #{time_regexp} with extname .yml
 - /symlink-test/symlinked-dir/screen.css last edited at #{time_regexp} with extname .css

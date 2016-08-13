@@ -170,6 +170,7 @@ class TestSite < JekyllUnitTest
     end
 
     should "sort pages alphabetically" do
+      skip_if_windows
       method = Dir.method(:entries)
       allow(Dir).to receive(:entries) do |*args, &block|
         method.call(*args, &block).reverse
@@ -199,6 +200,38 @@ class TestSite < JekyllUnitTest
         sitemap.xml
         static_files.html
         symlinked-file
+      )
+      assert_equal sorted_pages, @site.pages.map(&:name)
+    end
+
+    should "sort pages alphabetically on Windows" do
+      skip_unless_windows
+      method = Dir.method(:entries)
+      allow(Dir).to receive(:entries) do |*args, &block|
+        method.call(*args, &block).reverse
+      end
+      @site.process
+      sorted_pages = %w(
+        %#\ +.md
+        .htaccess
+        about.html
+        application.coffee
+        bar.html
+        coffeescript.coffee
+        contacts.html
+        deal.with.dots.html
+        dynamic_file.php
+        environment.html
+        exploit.md
+        foo.md
+        humans.txt
+        index.html
+        index.html
+        info.md
+        main.scss
+        properties.html
+        sitemap.xml
+        static_files.html
       )
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
@@ -294,10 +327,12 @@ class TestSite < JekyllUnitTest
 
       should "remove orphaned files in destination" do
         @site.process
-        refute_exist dest_dir("obsolete.html")
-        refute_exist dest_dir("qux")
-        refute_exist dest_dir("quux")
-        assert_exist dest_dir(".git")
+        unless Jekyll::Utils::Platforms.really_windows?
+          refute_exist dest_dir("obsolete.html")
+          refute_exist dest_dir("qux")
+          refute_exist dest_dir("quux")
+          assert_exist dest_dir(".git")
+        end
         assert_exist dest_dir(".git", "HEAD")
       end
 
@@ -306,11 +341,13 @@ class TestSite < JekyllUnitTest
         @site = Site.new(config)
         @site.process
         refute_exist dest_dir(".htpasswd")
-        refute_exist dest_dir("obsolete.html")
-        refute_exist dest_dir("qux")
-        refute_exist dest_dir("quux")
-        refute_exist dest_dir(".git")
-        refute_exist dest_dir(".git", "HEAD")
+        unless Jekyll::Utils::Platforms.really_windows?
+          refute_exist dest_dir("obsolete.html")
+          refute_exist dest_dir("qux")
+          refute_exist dest_dir("quux")
+          refute_exist dest_dir(".git")
+          refute_exist dest_dir(".git", "HEAD")
+        end
         assert_exist dest_dir(".svn")
         assert_exist dest_dir(".svn", "HEAD")
       end
