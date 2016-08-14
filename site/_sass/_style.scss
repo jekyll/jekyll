@@ -10,7 +10,7 @@ body {
   font: 300 21px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #ddd;
   background-color: #333;
-  border-top: 5px solid #fc0;
+  border-top: 5px solid transparent;
   @include box-shadow(inset 0 3px 30px rgba(0,0,0,.3));
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
   -webkit-font-feature-settings: "kern" 1;
@@ -62,6 +62,11 @@ nav {
   li { display: inline-block; }
 }
 
+header {
+  background: #2b2b2b;
+  margin-bottom: 40px;
+}
+
 .main-nav {
   margin-top: 52px;
 
@@ -69,12 +74,12 @@ nav {
     margin-right: 10px;
 
     a {
-      @include border-radius(5px);
       font-weight: 900;
       font-size: 14px;
       padding: 0.5em 1em;
       text-shadow: none;
       text-transform: uppercase;
+      @include border-radius(5px);
       @include transition(all .25s);
 
       &:hover {
@@ -87,9 +92,7 @@ nav {
     &.current {
 
       a {
-        background-color: #fc0;
-        color: #222;
-        @include box-shadow(inset 0 1px 0 rgba(255,255,255,.5), 0 1px 5px rgba(0,0,0,.5));
+        color: #f5b800;
         text-shadow: 0 1px 0 rgba(255,255,255,.3);
       }
     }
@@ -171,7 +174,7 @@ footer {
   background-color: #212121;
   font-size: 16px;
   padding-bottom: 5px;
-  color: #c0c0c0;
+  color: #a1a1a1;
   margin-top: 40px;
 
   a {
@@ -392,8 +395,8 @@ footer {
 
 
 article {
-  background-color: #444;
-  @include border-radius(10px);
+  background-color: #3d3d3d;
+  @include border-radius(5px);
   padding: 20px;
   margin: 0 10px;
   @include box-shadow(0 3px 10px rgba(0,0,0,.1));
@@ -444,16 +447,23 @@ aside {
       position: relative
     }
 
-    &.current a:before {
-      content: "";
-      border-color: transparent transparent transparent #444;
-      border-style: solid;
-      border-width: 10px;
-      width: 0;
-      height: 0;
-      position: absolute;
-      top: 0;
-      left: -30px;
+    &.current {
+
+      a {
+        color: #f5b800;
+      
+        &:before {
+          content: "";
+          border-color: transparent transparent transparent #444;
+          border-style: solid;
+          border-width: 10px;
+          width: 0;
+          height: 0;
+          position: absolute;
+          top: 0;
+          left: -30px;
+        }
+      }
     }
   }
 }
@@ -678,7 +688,7 @@ h5 > code,
 h1, h2, h3, h4, h5, h6 { margin: 0; }
 
 a {
-  color: #fc0;
+  color: #bfbfbf;
   text-decoration: none;
   @include transition(all .25s);
 
@@ -714,6 +724,10 @@ article {
   ol li {
     line-height: 1.5em;
     margin-bottom: 0.5em;
+  }
+
+  a {
+    color: #f5b800;
   }
 
 }
