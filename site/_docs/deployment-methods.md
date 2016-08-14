@@ -98,13 +98,12 @@ Another way to deploy your Jekyll site is to use [Rake](https://github.com/ruby/
 ### scp
 
 Once you’ve generated the `_site` directory, you can easily scp it using a
-`tasks/deploy` shell script similar to [this deploy script][]. You’d obviously
-need to change the values to reflect your site’s details. There is even [a
-matching TextMate command][] that will help you run this script.
+`tasks/deploy` shell script similar to this:
 
-[this deploy script here]: https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy
+    #!/bin/bash
+    
+    scp -r _site/* user@server:/home/user/public_html
 
-[a matching TextMate command]: https://gist.github.com/henrik/214959
 
 ### rsync
 
