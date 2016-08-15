@@ -34,14 +34,14 @@ class TestNewCommand < JekyllUnitTest
       refute_exist @full_path
       capture_stdout { Jekyll::Commands::New.process(@args) }
       assert_exist gemfile
-      assert_match(%r!gem "jekyll", "#{Jekyll::VERSION}"!, File.read(gemfile))
-      assert_match(%r!gem "github-pages"!, File.read(gemfile))
+      assert_match(%r!gem "jekyll", "~> #{Jekyll::VERSION}"!, File.read(gemfile))
+      assert_match(%r!gem "minima"!, File.read(gemfile))
     end
 
     should "display a success message" do
       Jekyll::Commands::New.process(@args)
       output = Jekyll.logger.messages.last
-      success_message = "New jekyll site installed in #{@full_path}."
+      success_message = "New jekyll site '#{@path}' installed in #{@full_path}."
       assert_includes output, success_message
     end
 
@@ -50,6 +50,7 @@ class TestNewCommand < JekyllUnitTest
         File.extname(f) == ".erb"
       end
       static_template_files << "/Gemfile"
+      static_template_files << "/_config.yml"
 
       capture_stdout { Jekyll::Commands::New.process(@args) }
 
@@ -91,7 +92,7 @@ class TestNewCommand < JekyllUnitTest
     should "force created folder" do
       capture_stdout { Jekyll::Commands::New.process(@args) }
       output = capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
-      assert_match(%r!New jekyll site installed in!, output)
+      assert_match(%r!New jekyll site '#{@path}' installed in!, output)
     end
   end
 
