@@ -22,6 +22,10 @@
 
   * Use jekyll-feed to generate the default site's RSS feed (#5196)
 
+### Minor Enhancements
+
+  * Colorize interpolated output in logger.info (#5239)
+
 ## 3.2.1 / 2016-08-02
 
 ### Bug Fixes
