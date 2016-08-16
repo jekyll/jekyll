@@ -38,7 +38,7 @@ Refer to your selected theme's documentation and source repository for more info
 
 Jekyll themes are distributed as Ruby gems. Don't worry, Jekyll will help you scaffold a new theme with the `new-theme` command. Just run `jekyll new-theme` with the theme name as an argument:
 
-{% highlight shell %}
+{% highlight plaintext %}
 jekyll new-theme my-awesome-theme
              create /path/to/my-awesome-theme/_layouts
              create /path/to/my-awesome-theme/_includes
