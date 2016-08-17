@@ -89,11 +89,12 @@
    becomes smaller */
 .unit img {
   max-width: 100%;
+  height: auto;
 }
 
 /* Responsive Stuff */
 @media screen and (max-width: 568px) {
-  /* Stack anything that isn’t full-width on smaller screens 
+  /* Stack anything that isn’t full-width on smaller screens
      and doesn't provide the no-stacking-on-mobiles class */
   .grid:not(.no-stacking-on-mobiles) > .unit {
     width: 100% !important;
