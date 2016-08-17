@@ -11,6 +11,7 @@
   * Remove mention of page for link tag in release post (#5214)
   * fixed typo (#5226)
   * Add missing comma (#5222)
+  * Maintain aspect ratio with height: auto; (#5254)
 
 ### Development Fixes
 
