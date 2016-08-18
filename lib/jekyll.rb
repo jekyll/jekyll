@@ -160,11 +160,11 @@ module Jekyll
 
       questionable_path.insert(0, "/") if questionable_path.start_with?("~")
       clean_path = File.expand_path(questionable_path, "/")
-      clean_path.sub!(%r!\A\w:/!, "/")
 
-      if clean_path.start_with?(base_directory.sub(%r!\A\w:/!, "/"))
+      if clean_path.start_with?(base_directory)
         clean_path
       else
+        clean_path.sub!(%r!\A\w:/!, "/")
         File.join(base_directory, clean_path)
       end
     end
