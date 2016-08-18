@@ -12,6 +12,7 @@
   * fixed typo (#5226)
   * Add missing comma (#5222)
   * Maintain aspect ratio with height: auto; (#5254)
+  * Fix a link in deployment-methods.md (#5244)
 
 ### Development Fixes
 
