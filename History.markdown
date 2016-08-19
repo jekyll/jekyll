@@ -14,6 +14,7 @@
   * Maintain aspect ratio with height: auto; (#5254)
   * Fix a link in deployment-methods.md (#5244)
   * Documentation: improve highlight in `Creating a theme` (#5249)
+  * Bundler isn't installed by default (#5258)
 
 ### Development Fixes
 
