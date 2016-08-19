@@ -8,6 +8,7 @@ For the impatient, here's how to get a boilerplate Jekyll site up and running.
 
 {% highlight shell %}
 ~ $ gem install jekyll
+~ $ gem install bundler
 ~ $ jekyll new myblog
 ~ $ cd myblog
 ~/myblog $ bundle install
