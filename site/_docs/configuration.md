@@ -495,6 +495,7 @@ defaults:
     values:
       layout: "project" # overrides previous default layout
       author: "Mr. Hyde"
+      category: "project"
 {% endhighlight %}
 
 With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde`.
