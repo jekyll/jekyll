@@ -10,12 +10,12 @@ Jekyll as a special file. The front matter must be the first thing in the file
 and must take the form of valid YAML set between triple-dashed lines. Here is a
 basic example:
 
-{% highlight yaml %}
+```yaml
 ---
 layout: post
 title: Blogging Like a Hacker
 ---
-{% endhighlight %}
+```
 
 Between these triple-dashed lines, you can set predefined variables (see below
 for a reference) or even create custom ones of your own. These variables will
@@ -108,7 +108,7 @@ data that is sent to the Liquid templating engine during the conversion. For
 instance, if you set a title, you can use that in your layout to set the page
 title:
 
-{% highlight html %}
+```html
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -116,7 +116,7 @@ title:
   </head>
   <body>
     ...
-{% endhighlight %}
+```
 
 ## Predefined Variables for Posts
 

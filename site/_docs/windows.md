@@ -29,9 +29,9 @@ Additionally, you might need to change the code page of the console window to UT
 in case you get a "Liquid Exception: Incompatible character encoding" error during
 the site generation process. It can be done with the following command:
 
-{% highlight shell %}
+```sh
 $ chcp 65001
-{% endhighlight %}
+```
 
 [windows-installation]: http://jekyll-windows.juthilo.com/
 [hitimes-issue]: https://github.com/copiousfreetime/hitimes/issues/40
@@ -43,9 +43,9 @@ As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
 built-in support for UNIX systems, it requires an extra gem for compatibility
 with Windows. Add the following to the Gemfile for your site:
 
-{% highlight ruby %}
+```ruby
 gem 'wdm', '~> 0.1.0' if Gem.win_platform?
-{% endhighlight %}
+```
 
 ### How to install github-pages
 
@@ -81,7 +81,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 
 `choco install libiconv -Source "https://www.nuget.org/api/v2/"`{:.language-ruby}
 
-{% highlight ruby %}
+```ruby
  gem install nokogiri --^
    --with-xml2-include=C:\Chocolatey\lib\libxml2.2.7.8.7\build\native\include^
    --with-xml2-lib=C:\Chocolatey\lib\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl^
@@ -89,7 +89,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
    --with-iconv-lib=C:\Chocolatey\lib\libiconv.redist.1.14.0.11\build\native\bin\v110\x64\Release\dynamic\cdecl^
    --with-xslt-include=C:\Chocolatey\lib\libxslt.1.1.28.0\build\native\include^
    --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
-{% endhighlight %}
+```
 
 #### Install github-pages
 
@@ -98,10 +98,10 @@ This gem is also needed in the github-pages and to get it running on Windows x64
  * Copy & paste the two lines into the file:
 
 
-{% highlight ruby %}
+```ruby
 source 'http://rubygems.org'
 gem 'github-pages'
-{% endhighlight %}
+```
 
  * **Note:** We use an unsecure connection because SSL throws exceptions in the version of Ruby
  * Open a command prompt, target your local blog repository root, and install github-pages: `bundle install`

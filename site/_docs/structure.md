@@ -14,7 +14,7 @@ product.
 
 A basic Jekyll site usually looks something like this:
 
-{% highlight shell %}
+```sh
 .
 ├── _config.yml
 ├── _drafts
@@ -34,7 +34,7 @@ A basic Jekyll site usually looks something like this:
 ├── _site
 ├── .jekyll-metadata
 └── index.html
-{% endhighlight %}
+```
 
 An overview of what each of these does:
 

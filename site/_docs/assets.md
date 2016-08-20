@@ -9,14 +9,14 @@ a Ruby gem. In order to use them, you must first create a file with the
 proper extension name (one of `.sass`, `.scss`, or `.coffee`) and ***start the
 file with two lines of triple dashes***, like this:
 
-{% highlight sass %}
+```sass
 ---
 ---
 
 // start content
 .my-definition
   font-size: 1.2em
-{% endhighlight %}
+```
 
 Jekyll treats these files the same as a regular page, in that the output file
 will be placed in the same directory that it came from. For instance, if you
@@ -46,10 +46,10 @@ If you are using Sass `@import` statements, you'll need to ensure that your
 `sass_dir` is set to the base directory that contains your Sass files. You
 can do that thusly:
 
-{% highlight yaml %}
+```yaml
 sass:
     sass_dir: _sass
-{% endhighlight %}
+```
 
 The Sass converter will default the `sass_dir` configuration option to
 `_sass`.
@@ -72,10 +72,10 @@ The Sass converter will default the `sass_dir` configuration option to
 You may also specify the output style with the `style` option in your
 `_config.yml` file:
 
-{% highlight yaml %}
+```yaml
 sass:
     style: compressed
-{% endhighlight %}
+```
 
 These are passed to Sass, so any output style options Sass supports are valid
 here, too.
@@ -88,7 +88,7 @@ To enable Coffeescript in Jekyll 3.0 and up you must
 * Install the `jekyll-coffeescript` gem
 * Ensure that your `_config.yml` is up-to-date and includes the following:
 
-{% highlight yaml %}
+```yaml
 gems:
  - jekyll-coffeescript
-{% endhighlight %}
+```
