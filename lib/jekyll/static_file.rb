@@ -1,6 +1,6 @@
 module Jekyll
   class StaticFile
-    attr_reader :relative_path, :extname
+    attr_reader :relative_path, :extname, :name
 
     class << self
       # The cache of last modification times [path] -> mtime.
@@ -97,6 +97,7 @@ module Jekyll
 
     def to_liquid
       {
+        "filename"      => File.basename(name, extname),
         "extname"       => extname,
         "modified_time" => modified_time,
         "path"          => File.join("", relative_path)
