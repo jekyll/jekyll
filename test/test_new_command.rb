@@ -38,6 +38,15 @@ class TestNewCommand < JekyllUnitTest
       assert_match(%r!gem "github-pages"!, File.read(gemfile))
     end
 
+    should "create a config file" do
+      config_file = File.join(@full_path, "_config.yml")
+      refute_exist @full_path
+      capture_stdout { Jekyll::Commands::New.process(@args) }
+      assert_exist config_file
+      assert_match("title: new-site", File.read(config_file))
+      assert_match("email: your-email@domain.com", File.read(config_file))
+    end
+
     should "display a success message" do
       Jekyll::Commands::New.process(@args)
       output = Jekyll.logger.messages[-3]
