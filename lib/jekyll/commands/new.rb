@@ -55,6 +55,7 @@ module Jekyll
 
         def create_config_file(title, path)
           @blog_title = title
+          @user_email = user_email
 
           config_template = File.expand_path("_config.yml.erb", site_template)
           config_copy = ERB.new(File.read(config_template)).result(binding)
@@ -159,6 +160,11 @@ RUBY
           Dir.chdir(path) do
             system("bundle", "install")
           end
+        end
+
+        def user_email
+          gitconfig_email = `git config user.email`.chomp
+          gitconfig_email.empty? ? "your-email@domain.com" : gitconfig_email
         end
       end
     end
