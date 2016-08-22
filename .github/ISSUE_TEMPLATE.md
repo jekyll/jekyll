@@ -9,7 +9,10 @@
   by a plugin that isn't directly related to Jekyll, or if this is just
   a generic usage question, please consider asking your question at
   https://talk.jekyllrb.com where non-bug questions go.
-  
+
+  Please make sure to mention an affinity team whose responsibilities
+  most closely align with your issue.
+
   Thanks!
 -->
 
@@ -76,3 +79,4 @@
   anything like that so there should be no need to alter it.
 -->
 
+/cc include any Jekyll affinity teams here (see https://teams.jekyllrb.com/ for more info)
