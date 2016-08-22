@@ -14,7 +14,8 @@ class TestNewCommand < JekyllUnitTest
 
   context "when args contains a path" do
     setup do
-      @path = "new-site"
+      @path = "path/to/new-site"
+      @title = "new-site"
       @args = [@path]
       @full_path = File.expand_path(@path, Dir.pwd)
     end
@@ -51,7 +52,7 @@ class TestNewCommand < JekyllUnitTest
       Jekyll::Commands::New.process(@args)
       output = Jekyll.logger.messages[-3]
       output_last = Jekyll.logger.messages.last
-      success_message = "New jekyll site #{@path.cyan} installed in #{@full_path.cyan}."
+      success_message = "New jekyll site #{@title.cyan} installed in #{@full_path.cyan}."
       bundle_message = "Running bundle install in #{@full_path.cyan}..."
       assert_includes output, success_message
       assert_includes output_last, bundle_message
@@ -107,7 +108,7 @@ class TestNewCommand < JekyllUnitTest
     should "force created folder" do
       capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
       output = Jekyll.logger.messages[-3]
-      success_message = "New jekyll site #{@path.cyan} " \
+      success_message = "New jekyll site #{@title.cyan} " \
       "installed in #{@full_path.cyan}."
       assert_includes output, success_message
     end

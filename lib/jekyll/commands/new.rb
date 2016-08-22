@@ -7,7 +7,8 @@ module Jekyll
         def init_with_program(prog)
           prog.command(:new) do |c|
             c.syntax "new PATH"
-            c.description "Creates a new Jekyll site scaffold in PATH"
+            c.description "Creates a new Jekyll site scaffold in PATH, and " \
+                        "automatically assigns site's title based on argument passed."
 
             c.option "force", "--force", "Force creation even if PATH already exists"
             c.option "blank", "--blank", "Creates scaffolding but with empty files"
@@ -22,7 +23,7 @@ module Jekyll
         def process(args, options = {})
           raise ArgumentError, "You must specify a path." if args.empty?
 
-          new_blog_title = args.join(" ")
+          new_blog_title = extract_title args
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
 
           FileUtils.mkdir_p new_blog_path
@@ -35,8 +36,7 @@ module Jekyll
           if options["blank"]
             create_blank_site new_blog_path
           else
-            create_site new_blog_path
-            create_config_file(new_blog_title, new_blog_path)
+            create_site new_blog_title, new_blog_path
           end
 
           after_install(new_blog_title, new_blog_path, options)
@@ -74,6 +74,11 @@ module Jekyll
 
         private
 
+        def extract_title(args)
+          a = args.join(" ")
+          a.tr("\\", "/").split("/").last
+        end
+
         def gemfile_contents
           <<-RUBY
 source "https://rubygems.org"
@@ -103,8 +108,8 @@ end
 RUBY
         end
 
-        def create_site(new_blog_path)
-          create_sample_files new_blog_path
+        def create_site(new_blog_title, new_blog_path)
+          create_sample_files new_blog_title, new_blog_path
 
           File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
             f.write(scaffold_post_content)
@@ -119,16 +124,15 @@ RUBY
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
-        def erb_files
-          erb_file = File.join("*", "*.erb")
+        def erb_files(title)
+          erb_file = File.join("**", title.to_s, "**", "*.erb")
           Dir.glob(erb_file)
         end
 
-        def create_sample_files(path)
+        def create_sample_files(title, path)
           FileUtils.cp_r site_template + "/.", path
-          FileUtils.rm File.expand_path(scaffold_path, path)
-
-          erb_files.each do |file|
+          create_config_file title, path
+          erb_files(title).each do |file|
             FileUtils.rm file
           end
         end
