@@ -180,6 +180,11 @@ That is: defaults are overridden by options specified in `_config.yml`,
 and flags specified at the command-line will override all other settings
 specified elsewhere.
 
+If you encounter an error in building the site, with the error message 
+"'0000-00-00-welcome-to-jekyll.markdown.erb' does not have a valid date in the 
+YAML front matter." try including the line `exclude: [vendor]` 
+in `_config.yml`. 
+
 ## Markup Problems
 
 The various markup engines that Jekyll uses may have some issues. This
