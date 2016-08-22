@@ -15,6 +15,7 @@
   * Fix a link in deployment-methods.md (#5244)
   * Documentation: improve highlight in `Creating a theme` (#5249)
   * Bundler isn't installed by default (#5258)
+  * Update troubleshooting documentation to include fix for issue with vendored gems (#5271)
 
 ### Development Fixes
 
