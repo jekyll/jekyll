@@ -284,6 +284,18 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">-I, --incremental</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Liquid profiler</strong></p>
+        <p class="description">
+            Generate a Liquid rendering profile to help you identify performance bottlenecks.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">profile: BOOL</code></p>
+        <p><code class="flag">--profile</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
