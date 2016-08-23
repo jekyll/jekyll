@@ -17,6 +17,7 @@
   * Bundler isn't installed by default (#5258)
   * Update troubleshooting documentation to include fix for issue with vendored gems (#5271)
   * Link --lsi option's description to Wikipedia docs on LSI (#5274)
+  * Document --profile option on the configuration page (#5279)
 
 ### Development Fixes
 
