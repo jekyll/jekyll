@@ -41,7 +41,7 @@
 
 - [ ] I was trying to install.
 - [ ] There is a broken Plugin API.
-- [ ] I had an error on GitHub Pages, and I have not tested locally.
+- [ ] I had an error on GitHub Pages, and I have reproduced it locally.
 - [ ] I had an error on GitHub Pages, and GitHub Support said it was a Jekyll Bug.
 - [ ] I had an error on GitHub Pages and I did not test it locally.
 - [ ] I was trying to build.
