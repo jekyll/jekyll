@@ -27,6 +27,7 @@
   * Update Ruby versions in travis.yml (#5221)
   * Avoid installing unecessary gems for site testing (#5272)
   * Proposal: Affinity teams and their captains (#5273)
+  * Replace duplicate with postive local test in issue template (#5286)
 
 ### Bug Fixes
 
