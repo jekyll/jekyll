@@ -25,6 +25,7 @@
   * Improve tests for Jekyll::PluginManager (#5167)
   * Update Ruby versions in travis.yml (#5221)
   * Avoid installing unecessary gems for site testing (#5272)
+  * Proposal: Affinity teams and their captains (#5273)
 
 ### Bug Fixes
 
