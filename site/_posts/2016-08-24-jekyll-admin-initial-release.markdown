@@ -1,7 +1,7 @@
 ---
 layout: news_item
 title: "Jekyll Admin Initial Release"
-date: "2016-08-24 15:51:00 -0700"
+date: "2016-08-25 15:51:00 -0700"
 author: mertkahyaoglu
 categories: [community]
 ---
