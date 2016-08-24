@@ -673,6 +673,12 @@ h5 > code,
   overflow: auto;
 }
 
+.highlighter-rouge .highlight {
+  @extend .highlight;
+  margin: 0;
+  padding: 10px 0.5em;
+}
+
 /* HTML Elements */
 
 h1, h2, h3, h4, h5, h6 { margin: 0; }
