@@ -45,8 +45,7 @@ values of the gem names of the plugins you'd like to use. An example:
           gem "another-jekyll-plugin"
         end
 
-    Now you need to install all plugins from your Bundler group by running single command `bundle install`
-
+You can now install the gems from your group by running `bundle install`.
 
 <div class="note info">
   <h5>
