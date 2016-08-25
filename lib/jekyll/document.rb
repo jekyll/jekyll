@@ -371,6 +371,10 @@ module Jekyll
       end
     end
 
+    def respond_to_missing?(method, *)
+      data.key?(method.to_s) || super
+    end
+
     private
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
