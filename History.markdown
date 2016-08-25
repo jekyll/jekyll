@@ -19,6 +19,7 @@
   * Link --lsi option's description to Wikipedia docs on LSI (#5274)
   * Document --profile option on the configuration page (#5279)
   * Update homepage to sync with merge of #5258 (#5287)
+  * Add post about Jekyll Admin initial release (#5291)
 
 ### Development Fixes
 
