@@ -38,13 +38,13 @@ Save the commands you want to run and succeed in a file: `./script/cibuild`
 
 ### The HTML Proofer Executable
 
-{% highlight shell %}
+```sh
 #!/usr/bin/env bash
 set -e # halt script on error
 
 bundle exec jekyll build
 bundle exec htmlproofer ./_site
-{% endhighlight %}
+```
 
 Some options can be specified via command-line switches. Check out the
 `html-proofer` README for more information about these switches, or run
@@ -52,20 +52,20 @@ Some options can be specified via command-line switches. Check out the
 
 For example to avoid testing external sites, use this command:
 
-{% highlight shell %}
+```sh
 $ bundle exec htmlproofer ./_site --disable-external
-{% endhighlight %}
+```
 
 ### The HTML Proofer Library
 
 You can also invoke `html-proofer` in Ruby scripts (e.g. in a Rakefile):
 
-{% highlight ruby %}
+```ruby
 #!/usr/bin/env ruby
 
 require 'html-proofer'
 HTMLProofer.check_directory("./_site").run
-{% endhighlight %}
+```
 
 Options are given as a second argument to `.new`, and are encoded in a
 symbol-keyed Ruby Hash. For more information about the configuration options,
@@ -82,16 +82,16 @@ an explanation of each line.
 
 **Note:** You will need a Gemfile as well, [Travis will automatically install](https://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems:
 
-{% highlight ruby %}
+```ruby
 source "https://rubygems.org"
 
 gem "jekyll"
 gem "html-proofer"
-{% endhighlight %}
+```
 
 Your `.travis.yml` file should look like this:
 
-{% highlight yaml %}
+```yaml
 language: ruby
 rvm:
 - 2.1
@@ -114,39 +114,39 @@ env:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
 
 sudo: false # route your build to the container-based infrastructure for a faster build
-{% endhighlight %}
+```
 
 Ok, now for an explanation of each line:
 
-{% highlight yaml %}
+```yaml
 language: ruby
-{% endhighlight %}
+```
 
 This line tells Travis to use a Ruby build container. It gives your script
 access to Bundler, RubyGems, and a Ruby runtime.
 
-{% highlight yaml %}
+```yaml
 rvm:
 - 2.1
-{% endhighlight %}
+```
 
 RVM is a popular Ruby Version Manager (like rbenv, chruby, etc). This
 directive tells Travis the Ruby version to use when running your test
 script.
 
-{% highlight yaml %}
+```yaml
 before_script:
  - chmod +x ./script/cibuild
-{% endhighlight %}
+```
 
 The build script file needs to have the *executable* attribute set or
 Travis will fail with a permission denied error. You can also run this
 locally and commit the permissions directly, thus rendering this step
 irrelevant.
 
-{% highlight yaml %}
+```yaml
 script: ./script/cibuild
-{% endhighlight %}
+```
 
 Travis allows you to run any arbitrary shell script to test your site. One
 convention is to put all scripts for your project in the `script`
@@ -154,20 +154,20 @@ directory, and to call your test script `cibuild`. This line is completely
 customizable. If your script won't change much, you can write your test
 incantation here directly:
 
-{% highlight yaml %}
+```yaml
 install: gem install jekyll html-proofer
 script: jekyll build && htmlproofer ./_site
-{% endhighlight %}
+```
 
 The `script` directive can be absolutely any valid shell command.
 
-{% highlight yaml %}
+```yaml
 # branch whitelist, only for GitHub Pages
 branches:
   only:
   - gh-pages     # test the gh-pages branch
   - /pages-(.*)/ # test every branch which starts with "pages-"
-{% endhighlight %}
+```
 
 You want to ensure the Travis builds for your site are being run only on
 the branch or branches which contain your site. One means of ensuring this
@@ -181,11 +181,11 @@ prefixed, exemplified above with the `/pages-(.*)/` regular expression.
 The `branches` directive is completely optional. Travis will build from every
 push to any branch of your repo if leave it out.
 
-{% highlight yaml %}
+```yaml
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
-{% endhighlight %}
+```
 
 Using `html-proofer`? You'll want this environment variable. Nokogiri, used
 to parse HTML files in your compiled site, comes bundled with libraries
@@ -200,9 +200,9 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
    servers, which Jekyll will mistakenly read and explode on.</p>
 </div>
 
-{% highlight yaml %}
+```yaml
 exclude: [vendor]
-{% endhighlight %}
+```
 
 By default you should supply the `sudo: false` command to Travis. This command
 explicitly tells Travis to run your build on Travis's [container-based
@@ -210,9 +210,9 @@ explicitly tells Travis to run your build on Travis's [container-based
 speed up your build. If you have any trouble with your build, or if your build
 does need `sudo` access, modify the line to `sudo: required`.
 
-{% highlight yaml %}
+```yaml
 sudo: false
-{% endhighlight %}
+```
 
 ### Troubleshooting
 

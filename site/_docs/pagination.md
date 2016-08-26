@@ -28,18 +28,18 @@ your `_config.yml` under `gems`. For Jekyll 2, this is standard.
 To enable pagination for your blog, add a line to the `_config.yml` file that
 specifies how many items should be displayed per page:
 
-{% highlight yaml %}
+```yaml
 paginate: 5
-{% endhighlight %}
+```
 
 The number should be the maximum number of Posts you’d like to be displayed
 per-page in the generated site.
 
 You may also specify the destination of the pagination pages:
 
-{% highlight yaml %}
+```yaml
 paginate_path: "/blog/page:num/"
-{% endhighlight %}
+```
 
 This will read in `blog/index.html`, send it each pagination page in Liquid as
 `paginator` and write the output to `blog/page:num/`, where `:num` is the
@@ -146,7 +146,7 @@ the `paginator` variable that will now be available to you. You’ll probably
 want to do this in one of the main pages of your site. Here’s one example of a
 simple way of rendering paginated Posts in a HTML file:
 
-{% highlight html %}
+```html
 {% raw %}
 ---
 layout: default
@@ -179,7 +179,7 @@ title: My Blog
   {% endif %}
 </div>
 {% endraw %}
-{% endhighlight %}
+```
 
 <div class="note warning">
   <h5>Beware the page one edge-case</h5>
@@ -193,7 +193,7 @@ title: My Blog
 The following HTML snippet should handle page one, and render a list of each
 page with links to all but the current page.
 
-{% highlight html %}
+```html
 {% raw %}
 {% if paginator.total_pages > 1 %}
 <div class="pagination">
@@ -221,4 +221,4 @@ page with links to all but the current page.
 </div>
 {% endif %}
 {% endraw %}
-{% endhighlight %}
+```

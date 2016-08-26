@@ -22,14 +22,14 @@ branch to GitHub. However, the subdirectory-like URL structure GitHub uses for
 Project Pages complicates the proper resolution of URLs. In order to assure your
 site builds properly, use `site.github.url` in your URL's.
 
-{% highlight html %}
+```html
 {% raw %}
 <!-- Useful for styles with static names... -->
 <link href="{{ site.github.url }}/path/to/css.css" rel="stylesheet">
 <!-- and for documents/pages whose URL's can change... -->
 <a href="{{ page.url | prepend: site.github.url }}">{{ page.title }}</a>
 {% endraw %}
-{% endhighlight %}
+```
 
 This way you can preview your site locally from the site root on localhost,
 but when GitHub generates your pages from the gh-pages branch all the URLs
@@ -54,7 +54,7 @@ few minor details.
     currently-deployed version of the gem in your project, add the
     following to your <code>Gemfile</code>:
 
-{% highlight ruby %}
+```ruby
 source 'https://rubygems.org'
 
 require 'json'
@@ -62,18 +62,18 @@ require 'open-uri'
 versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
 gem 'github-pages', versions['github-pages']
-{% endhighlight %}
+```
 
     This will ensure that when you run <code>bundle install</code>, you
     have the correct version of the <code>github-pages</code> gem.
 
     If that fails, simplify it:
 
-{% highlight ruby %}
+```ruby
 source 'https://rubygems.org'
 
 gem 'github-pages'
-{% endhighlight %}
+```
 
     And be sure to run <code>bundle update</code> often.
 

@@ -32,7 +32,7 @@ of code in your Jekyll templates:
 
 In `_data/members.yml`:
 
-{% highlight yaml %}
+```yaml
 - name: Eric Mill
   github: konklone
 
@@ -41,23 +41,23 @@ In `_data/members.yml`:
 
 - name: Liu Fengyun
   github: liufengyun
-{% endhighlight %}
+```
 
 Or `_data/members.csv`:
 
-{% highlight text %}
+```text
 name,github
 Eric Mill,konklone
 Parker Moore,parkr
 Liu Fengyun,liufengyun
-{% endhighlight %}
+```
 
 This data can be accessed via `site.data.members` (notice that the filename
 determines the variable name).
 
 You can now render the list of members in a template:
 
-{% highlight html %}
+```html
 {% raw %}
 <ul>
 {% for member in site.data.members %}
@@ -69,7 +69,7 @@ You can now render the list of members in a template:
 {% endfor %}
 </ul>
 {% endraw %}
-{% endhighlight %}
+```
 
 ## Example: Organizations
 
@@ -80,7 +80,7 @@ folder:
 
 In `_data/orgs/jekyll.yml`:
 
-{% highlight yaml %}
+```yaml
 username: jekyll
 name: Jekyll
 members:
@@ -89,22 +89,22 @@ members:
 
   - name: Parker Moore
     github: parkr
-{% endhighlight %}
+```
 
 In `_data/orgs/doeorg.yml`:
 
-{% highlight yaml %}
+```yaml
 username: doeorg
 name: Doe Org
 members:
   - name: John Doe
     github: jdoe
-{% endhighlight %}
+```
 
 The organizations can then be accessed via `site.data.orgs`, followed by the
 file name:
 
-{% highlight html %}
+```html
 {% raw %}
 <ul>
 {% for org_hash in site.data.orgs %}
@@ -118,22 +118,22 @@ file name:
 {% endfor %}
 </ul>
 {% endraw %}
-{% endhighlight %}
+```
 
 ## Example: Accessing a specific author
 
 Pages and posts can also access a specific data item. The example below shows how to access a specific item:
 
 `_data/people.yml`:
-{% highlight yaml %}
+```yaml
 dave:
     name: David Smith
     twitter: DavidSilvaSmith
-{% endhighlight %}
+```
 
 The author can then be specified as a page variable in a post's frontmatter:
 
-{% highlight html %}
+```html
 {% raw %}
 ---
 title: sample post
@@ -148,4 +148,4 @@ author: dave
 </a>
 
 {% endraw %}
-{% endhighlight %}
+```
