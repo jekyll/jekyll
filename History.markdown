@@ -21,6 +21,7 @@
   * Update homepage to sync with merge of #5258 (#5287)
   * Add post about Jekyll Admin initial release (#5291)
   * Replace liquid highlight tag with backticks (#5262)
+  * Word update (#5294)
 
 ### Development Fixes
 
