@@ -40,6 +40,7 @@
 ### Minor Enhancements
 
   * Colorize interpolated output in logger.info (#5239)
+  * Site template: exclude Gemfile and Gemfile.lock in site config (#5293)
 
 ## 3.2.1 / 2016-08-02
 
