@@ -42,7 +42,15 @@ following metadata:
       <td><p><code>file.name</code></p></td>
       <td><p>
 
-        The string name of the file without the extension, e.g. <code>image</code> for <code>image.jpg</code>
+        The string name of the file e.g. <code>image.jpg</code> for <code>image.jpg</code>
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>file.basename</code></p></td>
+      <td><p>
+
+        The string basename of the file e.g. <code>image</code> for <code>image.jpg</code>
 
       </p></td>
     </tr>

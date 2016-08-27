@@ -97,7 +97,8 @@ module Jekyll
 
     def to_liquid
       {
-        "name"          => File.basename(name, extname),
+        "basename"      => File.basename(name, extname),
+        "name"          => name,
         "extname"       => extname,
         "modified_time" => modified_time,
         "path"          => File.join("", relative_path)
