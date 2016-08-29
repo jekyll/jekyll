@@ -32,6 +32,7 @@
   * Avoid installing unecessary gems for site testing (#5272)
   * Proposal: Affinity teams and their captains (#5273)
   * Replace duplicate with postive local test in issue template (#5286)
+  * Update AppVeyor config. (#5240)
 
 ### Bug Fixes
 
