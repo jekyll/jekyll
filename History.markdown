@@ -23,6 +23,7 @@
   * Replace liquid highlight tag with backticks (#5262)
   * Word update (#5294)
   * Site documentation section links always point to https://jekyllrb.com (#5281)
+  * Missing ":site, :post_render" payload documentation on site (#5280)
 
 ### Development Fixes
 
