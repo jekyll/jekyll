@@ -103,7 +103,7 @@ module Jekyll
     #
     # Returns the Converter instance.
     def converters
-      @converters ||= site.converters.select { |c| c.matches(ext) }.sort
+      _renderer.converters
     end
 
     # Render Liquid in the content
