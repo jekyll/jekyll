@@ -423,11 +423,14 @@ module Jekyll
 
     private
     def configure_theme
+      self.theme = nil
+      return if config["theme"].nil?
+
       self.theme =
         if config["theme"].is_a?(String)
           Jekyll::Theme.new(config["theme"])
         else
-          Jekyll.logger.warn "Theme:", "value of 'theme' in config should be "
+          Jekyll.logger.warn "Theme:", "value of 'theme' in config should be " \
           "String to use gem-based themes, but got #{config["theme"].class}"
           nil
         end

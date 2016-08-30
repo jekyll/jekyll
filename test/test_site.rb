@@ -489,6 +489,32 @@ class TestSite < JekyllUnitTest
       end
     end
 
+    context "when setting theme" do
+      should "set no theme if config is not set" do
+        expect($stderr).not_to receive(:puts)
+        expect($stdout).not_to receive(:puts)
+        site = fixture_site({ "theme" => nil })
+        assert_nil site.theme
+      end
+
+      should "set no theme if config is a hash" do
+        output = capture_output do
+          site = fixture_site({ "theme" => {} })
+          assert_nil site.theme
+        end
+        expected_msg = "Theme: value of 'theme' in config should be String to use gem-based themes, but got Hash\n"
+        assert output.end_with?(expected_msg), "Expected #{output.inspect} to end with #{expected_msg.inspect}"
+      end
+
+      should "set a theme if the config is a string" do
+        expect($stderr).not_to receive(:puts)
+        expect($stdout).not_to receive(:puts)
+        site = fixture_site({ "theme" => "test-theme" })
+        assert_instance_of Jekyll::Theme, site.theme
+        assert_equal "test-theme", site.theme.name
+      end
+    end
+
     context "with liquid profiling" do
       setup do
         @site = Site.new(site_configuration("profile" => true))
