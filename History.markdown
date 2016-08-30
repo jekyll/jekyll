@@ -1,8 +1,17 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Colorize interpolated output in logger.info (#5239)
+  * Site template: exclude Gemfile and Gemfile.lock in site config (#5293)
+
+### Bug Fixes
+
+  * Use jekyll-feed to generate the default site's RSS feed (#5196)
+
 ### Site Enhancements
 
-  * Document for to_integer and inspect filters (#5185)
+  * Document `to_integer` and `inspect` filters (#5185)
   * Fix path in the prompt (#5194)
   * need subcommand build (#5190)
   * Add the Jekyll Cloudinary plugin (#5183)
@@ -11,20 +20,20 @@
   * Remove mention of page for link tag in release post (#5214)
   * fixed typo (#5226)
   * Add missing comma (#5222)
-  * Maintain aspect ratio with height: auto; (#5254)
+  * Maintain aspect ratio with `height: auto;` (#5254)
   * Fix a link in deployment-methods.md (#5244)
   * Documentation: improve highlight in `Creating a theme` (#5249)
   * Bundler isn't installed by default (#5258)
   * Update troubleshooting documentation to include fix for issue with vendored gems (#5271)
-  * Link --lsi option's description to Wikipedia docs on LSI (#5274)
-  * Document --profile option on the configuration page (#5279)
+  * Link `--lsi` option's description to Wikipedia docs on LSI (#5274)
+  * Document `--profile` option on the configuration page (#5279)
   * Update homepage to sync with merge of #5258 (#5287)
   * Add post about Jekyll Admin initial release (#5291)
   * Replace liquid highlight tag with backticks (#5262)
   * Word update (#5294)
   * Site documentation section links always point to https://jekyllrb.com (#5281)
-  * Missing ":site, :post_render" payload documentation on site (#5280)
-  * Site: exclude README.md and .gitignore [ci skip] (#5304)
+  * Missing `:site, :post_render` payload documentation on site (#5280)
+  * Site: exclude README.md and .gitignore (#5304)
 
 ### Development Fixes
 
@@ -36,15 +45,6 @@
   * Replace duplicate with postive local test in issue template (#5286)
   * Update AppVeyor config. (#5240)
   * Execute jekyll from clone instead of defined binary when running 'script/default-site' (#5295)
-
-### Bug Fixes
-
-  * Use jekyll-feed to generate the default site's RSS feed (#5196)
-
-### Minor Enhancements
-
-  * Colorize interpolated output in logger.info (#5239)
-  * Site template: exclude Gemfile and Gemfile.lock in site config (#5293)
 
 ## 3.2.1 / 2016-08-02
 
