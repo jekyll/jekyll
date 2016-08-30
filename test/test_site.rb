@@ -502,8 +502,10 @@ class TestSite < JekyllUnitTest
           site = fixture_site({ "theme" => {} })
           assert_nil site.theme
         end
-        expected_msg = "Theme: value of 'theme' in config should be String to use gem-based themes, but got Hash\n"
-        assert output.end_with?(expected_msg), "Expected #{output.inspect} to end with #{expected_msg.inspect}"
+        expected_msg = "Theme: value of 'theme' in config should be String " \
+          "to use gem-based themes, but got Hash\n"
+        assert output.end_with?(expected_msg),
+          "Expected #{output.inspect} to end with #{expected_msg.inspect}"
       end
 
       should "set a theme if the config is a string" do
