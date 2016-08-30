@@ -76,18 +76,7 @@ module Jekyll
     #
     # Returns the transformed contents.
     def transform
-      converters.reduce(content) do |output, converter|
-        begin
-          converter.convert output
-        rescue => e
-          Jekyll.logger.error(
-            "Conversion error:",
-            "#{converter.class} encountered an error while converting '#{path}':"
-          )
-          Jekyll.logger.error("", e.to_s)
-          raise e
-        end
-      end
+      _renderer.transform
     end
 
     # Determine the extension depending on content_type.
