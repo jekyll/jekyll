@@ -103,17 +103,7 @@ module Jekyll
     #
     # Returns the converted content
     def render_liquid(content, payload, info, path)
-      template = site.liquid_renderer.file(path).parse(content)
-      template.warnings.each do |e|
-        Jekyll.logger.warn "Liquid Warning:",
-          LiquidRenderer.format_error(e, path || self.path)
-      end
-      template.render!(payload, info)
-    # rubocop: disable RescueException
-    rescue Exception => e
-      Jekyll.logger.error "Liquid Exception:",
-        LiquidRenderer.format_error(e, path || self.path)
-      raise e
+      _renderer.render_liquid(content, payload, info, path)
     end
     # rubocop: enable RescueException
 
