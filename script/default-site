@@ -7,11 +7,10 @@ echo "$0: setting up tmp directory"
 mkdir -p ./tmp
 rm -Rf ./tmp/default-site
 
-workdir=$(pwd)
-
 echo "$0: creating new default site"
 bundle exec jekyll new tmp/default-site
 pushd tmp/default-site
+workdir="../../"
 
 echo "$0: respecifying the jekyll install location"
 ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/gem \"jekyll\".*\\n/, 'gem \"jekyll\", path: \"$workdir\"'))"
