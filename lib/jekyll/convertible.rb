@@ -35,6 +35,7 @@ module Jekyll
     # opts - optional parameter to File.read, default at site configs
     #
     # Returns nothing.
+    # rubocop:disable Metrics/AbcSize
     def read_yaml(base, name, opts = {})
       filename = File.join(base, name)
 
@@ -58,6 +59,7 @@ module Jekyll
 
       self.data
     end
+    # rubocop:enable Metrics/AbcSize
 
     def validate_data!(filename)
       unless self.data.is_a?(Hash)
