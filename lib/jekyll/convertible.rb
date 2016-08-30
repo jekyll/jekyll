@@ -190,7 +190,10 @@ module Jekyll
     #
     # Returns nothing
     def render_all_layouts(layouts, payload, info)
+      _renderer.layouts = layouts
       _renderer.place_in_layouts(output, payload, info)
+    ensure
+      @_renderer = nil # this will allow the modifications above to disappear
     end
 
     # Add any necessary layouts to this convertible document.
@@ -200,11 +203,16 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      @_renderer = Jekyll::Renderer.new(site, self, payload)
-      _renderer.run
+      _renderer.tap do |renderer|
+        renderer.layouts = layouts
+        renderer.payload = payload
+        renderer.run
+      end
 
       Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
+    ensure
+      @_renderer = nil # this will allow the modifications above to disappear
     end
 
     # Write the generated page file to the destination directory.
