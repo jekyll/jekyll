@@ -200,30 +200,9 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      Jekyll.logger.debug "Rendering:", self.relative_path
+      @_renderer = Jekyll::Renderer.new(site, self, payload)
+      _renderer.run
 
-      Jekyll.logger.debug "Pre-Render Hooks:", self.relative_path
-      Jekyll::Hooks.trigger hook_owner, :pre_render, self, payload
-      info = {
-        :filters   => [Jekyll::Filters],
-        :registers => { :site => site, :page => payload["page"] }
-      }
-
-      # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converters.first.highlighter_prefix
-      payload["highlighter_suffix"] = converters.first.highlighter_suffix
-
-      if render_with_liquid?
-        Jekyll.logger.debug "Rendering Liquid:", self.relative_path
-        self.content = render_liquid(content, payload, info, path)
-      end
-      Jekyll.logger.debug "Rendering Markup:", self.relative_path
-      self.content = transform
-
-      # output keeps track of what will finally be written
-      self.output = content
-
-      render_all_layouts(layouts, payload, info) if place_in_layout?
       Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
     end
