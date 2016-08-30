@@ -24,6 +24,7 @@
   * Word update (#5294)
   * Site documentation section links always point to https://jekyllrb.com (#5281)
   * Missing ":site, :post_render" payload documentation on site (#5280)
+  * Site: exclude README.md and .gitignore [ci skip] (#5304)
 
 ### Development Fixes
 
