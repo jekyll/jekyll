@@ -95,7 +95,7 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      _renderer.output_ext
     end
 
     # Determine which converter to use based on this convertible's
@@ -211,40 +211,7 @@ module Jekyll
     #
     # Returns nothing
     def render_all_layouts(layouts, payload, info)
-      # recursively render layouts
-      layout = layouts[data["layout"]]
-
-      Jekyll.logger.warn(
-        "Build Warning:",
-        "Layout '#{data["layout"]}' requested in #{path} does not exist."
-      ) if invalid_layout? layout
-
-      used = Set.new([layout])
-
-      # Reset the payload layout data to ensure it starts fresh for each page.
-      payload["layout"] = nil
-
-      while layout
-        Jekyll.logger.debug "Rendering Layout:", path
-        payload["content"] = output
-        payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
-
-        self.output = render_liquid(layout.content,
-                                    payload,
-                                    info,
-                                    layout.relative_path)
-
-        # Add layout to dependency tree
-        site.regenerator.add_dependency(
-          site.in_source_dir(path),
-          site.in_source_dir(layout.path)
-        )
-
-        if (layout = layouts[layout.data["layout"]])
-          break if used.include?(layout)
-          used << layout
-        end
-      end
+      _renderer.place_in_layouts(output, payload, info)
     end
 
     # Add any necessary layouts to this convertible document.
@@ -305,6 +272,11 @@ module Jekyll
       else
         data[property]
       end
+    end
+
+    private
+    def _renderer
+      @_renderer ||= Jekyll::Renderer.new(site, self)
     end
   end
 end
