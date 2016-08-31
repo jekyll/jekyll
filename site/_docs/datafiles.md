@@ -107,7 +107,7 @@ file name:
 ```html
 {% raw %}
 <ul>
-{% for org_hash in site.data.orgs %}
+{% for org_hash in site.data.orgs.doeorg %}
 {% assign org = org_hash[1] %}
   <li>
     <a href="https://github.com/{{ org.username }}">
