@@ -23,6 +23,7 @@ module Jekyll
           raise ArgumentError, "You must specify a path." if args.empty?
 
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
+
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
             Jekyll.logger.abort_with "Conflict:",
@@ -49,6 +50,15 @@ module Jekyll
           ERB.new(File.read(File.expand_path(scaffold_path, site_template))).result
         end
 
+        def create_gemfile(path)
+          gemfile_template = File.expand_path("Gemfile.erb", site_template)
+          gemfile_copy = ERB.new(File.read(gemfile_template)).result(binding)
+
+          File.open(File.expand_path("Gemfile", path), "w") do |f|
+            f.write(gemfile_copy)
+          end
+        end
+
         # Internal: Gets the filename of the sample post to be created
         #
         # Returns the filename of the sample post, as a String
@@ -58,44 +68,11 @@ module Jekyll
 
         private
 
-        def gemfile_contents
-          <<-RUBY
-source "https://rubygems.org"
-ruby RUBY_VERSION
-
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
-#
-#     bundle exec jekyll serve
-#
-# This will help ensure the proper Jekyll version is running.
-# Happy Jekylling!
-gem "jekyll", "#{Jekyll::VERSION}"
-
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima"
-
-# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
-# uncomment the line below. To upgrade, run `bundle update github-pages`.
-# gem "github-pages", group: :jekyll_plugins
-
-# If you have any plugins, put them here!
-group :jekyll_plugins do
-   gem "jekyll-feed", "~> 0.6"
-end
-RUBY
-        end
-
         def create_site(new_blog_path)
           create_sample_files new_blog_path
 
           File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
             f.write(scaffold_post_content)
-          end
-
-          File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
-            f.write(gemfile_contents)
           end
         end
 
@@ -103,8 +80,17 @@ RUBY
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
+        def erb_files
+          erb_file = File.join("*", "*.erb")
+          Dir.glob(erb_file)
+        end
+
         def create_sample_files(path)
           FileUtils.cp_r site_template + "/.", path
+          create_gemfile path
+          erb_files.each do |file|
+            FileUtils.rm file
+          end
           FileUtils.rm File.expand_path(scaffold_path, path)
         end
 
