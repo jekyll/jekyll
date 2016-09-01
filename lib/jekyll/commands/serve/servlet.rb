@@ -47,7 +47,6 @@ module Jekyll
 
         #
 
-        private
         def set_defaults
           hash_ = @jekyll_opts.fetch("webrick", {}).fetch("headers", {})
           DEFAULTS.each_with_object(@headers = hash_) do |(key, val), hash|
