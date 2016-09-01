@@ -40,6 +40,13 @@ file. For example, the following are examples of valid post filenames:
 2012-09-12-how-to-write-a-blog.textile
 ```
 
+You can also create posts easily with the generator `jekyll post`
+
+{% highlight bash %}
+jekyll post 'My new Post'
+jekyll post 'My new post' textile
+{% endhighlight %}
+
 <div class="note">
   <h5>ProTip™: Link to other posts</h5>
   <p>
