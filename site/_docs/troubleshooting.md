@@ -56,7 +56,7 @@ sudo emerge -av dev-ruby/rubygems
 On Windows, you may need to install [RubyInstaller
 DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
-On Mac OS X, you may need to update RubyGems (using `sudo` only if necessary):
+On macOS, you may need to update RubyGems (using `sudo` only if necessary):
 
 ```sh
 sudo gem update --system
@@ -76,13 +76,13 @@ which may allow you to install native gems using this command (again using
 sudo gem install jekyll
 ```
 
-Note that upgrading Mac OS X does not automatically upgrade Xcode itself
+Note that upgrading macOS does not automatically upgrade Xcode itself
 (that can be done separately via the App Store), and having an out-of-date
 Xcode.app can interfere with the command line tools downloaded above. If
 you run into this issue, upgrade Xcode and install the upgraded Command
 Line Tools.
 
-### Jekyll &amp; Mac OS X 10.11
+### Jekyll &amp; macOS 10.11
 
 With the introduction of System Integrity Protection, several directories
 that were previously writable are now considered system locations and are no
