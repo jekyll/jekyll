@@ -46,6 +46,9 @@
   margin: 0 auto;
 }
 
+section .grid {
+  max-width: 1024px !important; 
+}
 /* Width classes also have shorthand versions numbered as fractions
  * For example: for a grid unit 1/3 (one third) of the parent width,
  * simply apply class="w-1-3" to the element. */
@@ -117,8 +120,7 @@
 
 /* Expand the wrap a bit further on larger screens */
 @media screen and (min-width: 1180px) {
-  .wider .grid,
-  .grid.wider {
+  .wrap .grid {
     max-width: 1180px;
     margin: 0 auto;
   }
