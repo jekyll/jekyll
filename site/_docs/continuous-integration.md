@@ -56,6 +56,21 @@ For example to avoid testing external sites, use this command:
 $ bundle exec htmlproofer ./_site --disable-external
 ```
 
+and to allow internal links which point to `#` (and empty anchor on the
+current page), use this command
+
+{% highlight bash %}
+$ bundle exec htmlproof ./_site --allow-hash-href
+{% endhighlight %}
+
+which is necessary for an initial jekyll site created with
+
+{% highlight bash %}
+jekyll new PATH
+{% endhighlight %}
+
+to pass.
+
 ### The HTML Proofer Library
 
 You can also invoke `html-proofer` in Ruby scripts (e.g. in a Rakefile):
