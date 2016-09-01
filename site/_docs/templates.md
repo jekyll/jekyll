@@ -537,6 +537,29 @@ You can also use this tag to create a link to a post in Markdown as follows:
 {% endraw %}
 ```
 
+### Link
+
+There is a `link` tag that is similar to the `post_url` tag but allows you to
+create a link for any document Jekyll generates.  You simply specify the
+relative path to the document.
+
+{% highlight liquid %}
+{% raw %}
+{% link about.md %}
+{% endraw %}
+{% endhighlight %}
+
+Or, if the page you want to link to is in a subdirectory, then you need to
+include that in the path:
+
+{% highlight liquid %}
+{% raw %}
+{% link about/team.md %}
+{% endraw %}
+{% endhighlight %}
+
+You do need to include the file extension when using the `link` tag.
+
 ### Gist
 
 Use the `gist` tag to easily embed a GitHub Gist onto your site. This works
