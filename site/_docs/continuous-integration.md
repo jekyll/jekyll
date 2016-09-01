@@ -23,7 +23,28 @@ Enabling Travis builds for your GitHub repository is pretty simple:
    configuration happens in your `.travis.yml` file. More details on that
    below.
 
-## 2. The Test Script
+## 2. Testing your content before the jekyll build
+
+Some of your files may start with a [YAML front matter block](/docs/frontmatter/). You do not need to start the build if you can detect, beforehand, somes errors in this description. You can test that, using a Ruby script (below an example that targets markdown posts) :
+
+```
+@posts = []
+Dir.glob('_posts/**/*.{md,markdown}').each do |p|
+  @posts << p
+end
+@posts.each do |post|
+   begin
+     YAML.load_file(post)
+   rescue Exception => e
+     puts post
+     puts e.message
+     raise "Post syntax is not valid"
+   end
+end
+puts "#{@posts.size} valid posts"
+```
+
+## 3. The Jekyll Test Script
 
 The simplest test script simply runs `jekyll build` and ensures that Jekyll
 doesn't fail to build the site. It doesn't check the resulting site, but it
