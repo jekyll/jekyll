@@ -6,9 +6,9 @@ module Jekyll
     attr_reader   :source, :dest, :config
     attr_accessor :layouts, :pages, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
-                  :time, :future, :unpublished, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :plugin_manager, :theme
+                  :time, :future, :unpublished, :safe, :plugins, :limit_pages,
+                  :limit_posts, :show_drafts, :keep_files, :baseurl, :data,
+                  :file_read_opts, :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
     attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
@@ -45,7 +45,7 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems).each do |opt|
+        show_drafts limit_posts limit_pages keep_files gems).each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -97,6 +97,10 @@ module Jekyll
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
+      end
+
+      if limit_pages < 0
+        raise ArgumentError, "limit_pages must be a non-negative number"
       end
 
       Jekyll::Hooks.trigger :site, :after_reset, self
@@ -401,6 +405,13 @@ module Jekyll
     private
     def limit_posts!
       if limit_posts > 0
+        limit = pages.docs.length < limit_pages ? pages.docs.length : limit_pages
+        self.pages.docs = pages.docs[-limit, limit]
+      end
+    end
+
+    def limit_pages!
+      if limit_pages > 0
         limit = posts.docs.length < limit_posts ? posts.docs.length : limit_posts
         self.posts.docs = posts.docs[-limit, limit]
       end

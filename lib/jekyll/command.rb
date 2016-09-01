@@ -54,6 +54,8 @@ module Jekyll
         c.option "future", "--future", "Publishes posts with a future date"
         c.option "limit_posts", "--limit_posts MAX_POSTS", Integer,
           "Limits the number of posts to parse and publish"
+        c.option "limit_pages", "--limit_pages MAX_PAGES", Integer,
+          "Limits the number of pages to parse and publish"
         c.option "watch", "-w", "--[no-]watch", "Watch for changes and rebuild"
         c.option "baseurl", "-b", "--baseurl URL",
           "Serve the website from the given base URL"

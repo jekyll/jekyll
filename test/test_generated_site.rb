@@ -87,4 +87,32 @@ OUTPUT
       )
     end
   end
+
+  context "generating limited pages" do
+    setup do
+      clear_dest
+      @site = fixture_site("limit_pages" => 5)
+      @site.process
+      @index = File.read(dest_dir("index.html"))
+    end
+
+    should "generate only the specified number of pages" do
+      assert_equal 5, @site.pages.size
+    end
+
+    should "ensure limit pages is 0 or more" do
+      assert_raises ArgumentError do
+        clear_dest
+        @site = fixture_site("limit_pages" => -1)
+      end
+    end
+
+    should "acceptable limit page is 0" do
+      clear_dest
+      assert(
+        fixture_site("limit_pages" => 0),
+        "Couldn't create a site with limit_pages=0."
+      )
+    end
+  end
 end
