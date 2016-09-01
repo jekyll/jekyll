@@ -98,4 +98,4 @@ For more about the possible configuration options, see the
 [configuration](../configuration/) page.
 
 If you're interested in browsing these docs on-the-go, install the
-`jekyll-docs` gem and run `jekyll docs` in your terminal.
+Jekyll Docs gem using `gem install jekyll-docs --pre` and than run `jekyll docs` in your terminal.
