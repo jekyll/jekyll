@@ -5,6 +5,22 @@ require "liquid"
 
 module Jekyll
   module Filters
+    # Convert a title into "Title Case" so you don't have to do much work.
+    #   This is taken directly from Rails:
+    #     activesupport/lib/active_support/inflector/methods.rb
+    # input - The string to be titleized.
+    # Returns the string as a "Title Case" string.
+
+    def titlecase(input)
+      input.to_s.gsub(/\b(?<!['’`])[a-z]/) do
+        $&.capitalize
+      end
+    end
+
+    alias_method :title, :titlecase
+    alias_method :titleize, \
+      :titlecase
+
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.

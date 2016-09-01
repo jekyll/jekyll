@@ -38,6 +38,38 @@ class TestFilters < JekyllUnitTest
       ]
     end
 
+    context "titlecase" do
+      should "have an alias to titleize" do
+        assert_equal true, Jekyll::Filters.method_defined?(
+          :titleize
+        )
+      end
+
+      should "have an alias to title" do
+        assert_equal true, Jekyll::Filters.method_defined?(
+          :title
+        )
+      end
+
+      should "not break if there is a -" do
+        assert_equal "Hello-World", @filter.titlecase(
+          "hello-world"
+        )
+      end
+
+      should "not titlecase _" do
+        assert_equal "Hello_world", @filter.titlecase(
+          "hello_world"
+        )
+      end
+
+      should "generically titlecase" do
+        assert_equal "Hello-World How Are You Today?", @filter.titlecase(
+          "hello-world how are you today?"
+        )
+      end
+    end
+
     should "markdownify with simple string" do
       assert_equal(
         "<p>something <strong>really</strong> simple</p>\n",
