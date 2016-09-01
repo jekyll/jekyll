@@ -99,7 +99,7 @@ Check out [the extras page](../extras/) for more information.
     want to enable syntax highlighting using <a href="http://pygments.org/">Pygments</a>
     or <a href="https://github.com/jayferd/rouge">Rouge</a>. You should really
     <a href="../templates/#code-snippet-highlighting">check out how to
-    do that</a> before you go any farther.
+    do that</a> before you go any further.
   </p>
 </div>
 
