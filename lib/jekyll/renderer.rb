@@ -5,11 +5,10 @@ module Jekyll
     attr_reader :document, :site
     attr_writer :layouts, :payload
 
-    def initialize(site, document, site_payload = nil, layouts: nil)
+    def initialize(site, document, site_payload = nil)
       @site     = site
       @document = document
       @payload  = site_payload
-      @layouts  = layouts
     end
 
     # Fetches the payload used in Liquid rendering.
