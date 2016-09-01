@@ -678,17 +678,6 @@ The complete list of available hooks is below:
         <p><code>:documents</code></p>
       </td>
       <td>
-        <p><code>:post_init</code></p>
-      </td>
-      <td>
-        <p>Whenever a document is initialized</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:documents</code></p>
-      </td>
-      <td>
         <p><code>:pre_render</code></p>
       </td>
       <td>
