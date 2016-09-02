@@ -2,12 +2,32 @@
 
 module Jekyll
   class Renderer
-    attr_reader :document, :site, :payload
+    attr_reader :document, :site
+    attr_writer :layouts, :payload
 
     def initialize(site, document, site_payload = nil)
       @site     = site
       @document = document
-      @payload  = site_payload || site.site_payload
+      @payload  = site_payload
+    end
+
+    # Fetches the payload used in Liquid rendering.
+    # It can be written with #payload=(new_payload)
+    # Falls back to site.site_payload if no payload is set.
+    #
+    # Returns a Jekyll::Drops::UnifiedPayloadDrop
+    def payload
+      @payload ||= site.site_payload
+    end
+
+    # The list of layouts registered for this Renderer.
+    # It can be written with #layouts=(new_layouts)
+    # Falls back to site.layouts if no layouts are registered.
+    #
+    # Returns a Hash of String => Jekyll::Layout identified
+    # as basename without the extension name.
+    def layouts
+      @layouts || site.layouts
     end
 
     # Determine which converters to use based on this document's
@@ -15,7 +35,7 @@ module Jekyll
     #
     # Returns an array of Converter instances.
     def converters
-      @converters ||= site.converters.select { |c| c.matches(document.extname) }
+      @converters ||= site.converters.select { |c| c.matches(document.extname) }.sort
     end
 
     # Determine the extname the outputted file should have
@@ -126,7 +146,7 @@ module Jekyll
     #
     # Returns true if the layout is invalid, false if otherwise
     def invalid_layout?(layout)
-      !document.data["layout"].nil? && layout.nil?
+      !document.data["layout"].nil? && layout.nil? && !(document.is_a? Jekyll::Excerpt)
     end
 
     # Render layouts and place given content inside.
@@ -137,7 +157,7 @@ module Jekyll
     # Returns the content placed in the Liquid-rendered layouts
     def place_in_layouts(content, payload, info)
       output = content.dup
-      layout = site.layouts[document.data["layout"]]
+      layout = layouts[document.data["layout"]]
 
       Jekyll.logger.warn(
         "Build Warning:",
@@ -167,7 +187,7 @@ module Jekyll
           site.in_source_dir(layout.path)
         ) if document.write?
 
-        if (layout = site.layouts[layout.data["layout"]])
+        if (layout = layouts[layout.data["layout"]])
           break if used.include?(layout)
           used << layout
         end
