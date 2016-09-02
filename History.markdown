@@ -48,6 +48,7 @@
   * Update AppVeyor config. (#5240)
   * Execute jekyll from clone instead of defined binary when running 'script/default-site' (#5295)
   * rubocop: lib/jekyll/document.rb complexity fixes (#5045)
+  * Proxy a number of Convertible methods to Renderer (#5308)
 
 ## 3.2.1 / 2016-08-02
 
