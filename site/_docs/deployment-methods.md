@@ -205,7 +205,7 @@ low-volume blogs as you only pay for what you use.
 ## OpenShift
 
 If you'd like to deploy your site to an OpenShift gear, there's [a cartridge
-for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
+for that](https://github.com/openshift-quickstart/jekyll-openshift).
 
 <div class="note">
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
