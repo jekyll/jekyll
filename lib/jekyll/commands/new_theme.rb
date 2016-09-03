@@ -10,6 +10,10 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
           "-c", "--code-of-conduct", \
           "Include a Code of Conduct. (defaults to false)"
 
+        c.option "base_theme", \
+          "-b", "--base [THEME]", \
+          "Base theme to import files from"
+
         c.action do |args, opts|
           Jekyll::Commands::NewTheme.process(args, opts)
         end

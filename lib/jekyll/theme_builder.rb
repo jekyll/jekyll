@@ -3,17 +3,24 @@ class Jekyll::ThemeBuilder
     _layouts _includes _sass
   ).freeze
 
-  attr_reader :name, :path, :code_of_conduct
+  attr_reader :name, :path, :code_of_conduct, :theme_root
 
   def initialize(theme_name, opts)
     @name = theme_name.to_s.tr(" ", "_").gsub(%r!_+!, "_")
     @path = Pathname.new(File.expand_path(name, Dir.pwd))
     @code_of_conduct = !!opts["code_of_conduct"]
+    @theme_root = Pathname.new(
+      Jekyll::Theme.new(opts["base_theme"]).root
+    ) if opts["base_theme"]
   end
 
   def create!
     create_directories
-    create_starter_files
+    if @theme_root
+      import_theme_files
+    else
+      create_starter_files
+    end
     create_gemspec
     create_accessories
     initialize_git_repo
@@ -61,6 +68,14 @@ class Jekyll::ThemeBuilder
   def create_starter_files
     %w(page post default).each do |layout|
       write_file("_layouts/#{layout}.html", template("_layouts/#{layout}.html"))
+    end
+  end
+
+  def import_theme_files
+    Array(SCAFFOLD_DIRECTORIES).each do |directory|
+      full_path = path.join(directory)
+      Jekyll.logger.info "import", full_path.to_s
+      FileUtils.cp_r(theme_root.join(directory), path)
     end
   end
 
