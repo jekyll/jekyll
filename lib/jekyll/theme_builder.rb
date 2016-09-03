@@ -5,9 +5,16 @@ class Jekyll::ThemeBuilder
 
   attr_reader :name, :path, :code_of_conduct, :theme_root
 
+  INVALID_NAME_REGEX = %r![^A-Za-z0-9.-_]!
+
   def initialize(theme_name, opts)
-    @name = theme_name.to_s.tr(" ", "_").gsub(%r!_+!, "_")
-    @path = Pathname.new(File.expand_path(name, Dir.pwd))
+    @name = theme_name.to_s
+      .downcase
+      .gsub(INVALID_NAME_REGEX, "-")
+      .gsub(%r!-+!, "-")
+    @path = Pathname.new(
+      File.expand_path(opts["theme_path"] || name, Dir.pwd)
+    )
     @code_of_conduct = !!opts["code_of_conduct"]
     @theme_root = Pathname.new(
       Jekyll::Theme.new(opts["base_theme"]).root
