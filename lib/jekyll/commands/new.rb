@@ -75,6 +75,15 @@ gem "jekyll", "#{Jekyll::VERSION}"
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 gem "minima"
 
+# If you want to develop a custom theme, first create a new theme, like so
+#
+#     bundle exec jekyll new-theme -b minima custom-theme -o _theme
+#
+# To use this theme, uncomment the line below and change the theme to
+# "custom-theme" in `_config.yml`
+#
+# gem "custom-theme", path: "_theme"
+
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
