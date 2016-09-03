@@ -36,6 +36,7 @@
   * Missing `:site, :post_render` payload documentation on site (#5280)
   * Site: exclude README.md and .gitignore (#5304)
   * Add link to Staticman (#5224)
+  * Update url for OpenShift (#5320)
 
 ### Development Fixes
 
