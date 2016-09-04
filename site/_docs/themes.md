@@ -95,4 +95,5 @@ Themes are published via [RubyGems.org](https://rubygems.org). You'll need a Rub
 
         gem push my-awesome-jekyll-theme-*.gem
 
-3. To release a new version of your theme, simply update the version number in the gemspec file, ( `my-awesome-jekyll-theme.gemspec` in this example ), following the principles of [Semantic Versioning](http://semver.org/) and then repeat Steps 1 & 2 above.
+3. To release a new version of your theme, simply update the version number in the gemspec file, ( `my-awesome-jekyll-theme.gemspec` in this example ), and then repeat Steps 1 & 2 above.
+We recommend that you follow [Semantic Versioning](http://semver.org/) while bumping your theme-version.
