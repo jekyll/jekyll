@@ -13,6 +13,7 @@ that might be of help. If the problem you’re experiencing isn’t covered belo
 - [Base-URL Problems](#base-url-problems)
 - [Configuration problems](#configuration-problems)
 - [Markup Problems](#markup-problems)
+- [Production Problems](#production-problems)
 
 ## Installation Problems
 
@@ -208,6 +209,13 @@ v1.1.0, Jekyll also passes these excerpts through Liquid, which can cause
 strange errors where references don't exist or a tag hasn't been closed. If you
 run into these errors, try setting `excerpt_separator: ""` in your
 `_config.yml`, or set it to some nonsense string.
+
+## Production Problems
+
+If you run into an issue that a static file can't be found in your
+production environment during build since v3.2.0 you should set your
+[environment to `production`](../configuration/#specifying-a-jekyll-environment-at-build-time).
+The issue is caused by trying to copy a non-existing symlink.
 
 <div class="note">
   <h5>Please report issues you encounter!</h5>
