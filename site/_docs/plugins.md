@@ -906,7 +906,7 @@ LESS.js files during generation.
 - [Jekyll Deploy](https://github.com/vwochnik/jekyll-deploy): Adds a `deploy` sub-command to Jekyll.
 - [Official Contentful Jekyll Plugin](https://github.com/contentful/jekyll-contentful-data-import): Adds a `contentful` sub-command to Jekyll to import data from Contentful.
 - [jekyll-paspagon](https://github.com/KrzysiekJ/jekyll-paspagon): Sell your posts in various formats for cryptocurrencies.
-- [Hawkins](https://github.com/awood/hawkins): Adds a `liveserve` sub-command to Jekyll that incorporates [LiveReload](http://livereload.com/) into your pages while you preview them.  No more hitting the refresh button in your browser!
+- [Hawkins](https://github.com/awood/hawkins): Adds a `liveserve` sub-command to Jekyll that incorporates [LiveReload](http://livereload.com/) into your pages while you preview them. No more hitting the refresh button in your browser!
 - [Jekyll Autoprefixer](https://github.com/vwochnik/jekyll-autoprefixer): Autoprefixer integration for Jekyll
 - [Jekyll-breadcrumbs](https://github.com/git-no/jekyll-breadcrumbs): Creates breadcrumbs for Jekyll 3.x, includes features like SEO optimization, optional breadcrumb item translation and more.
 - [generator-jekyllized](https://github.com/sondr3/generator-jekyllized): A Yeoman generator for rapidly developing sites with Gulp. Live reload your site, automatically minify and optimize your assets and much more.
