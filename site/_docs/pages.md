@@ -95,6 +95,6 @@ simple and it works. In the end, the decision is yours!
     matter variable. In the example above, using the first method, you can
     get URL <code>http://example.com/other</code> for the file
     <code>other.md</code> by setting this at the top of the file:
-    <code>permalink: /other</code>
+    <code>permalink: other/</code>
   </p>
 </div>
