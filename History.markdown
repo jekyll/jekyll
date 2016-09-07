@@ -4,6 +4,7 @@
 
   * Colorize interpolated output in logger.info (#5239)
   * Site template: exclude Gemfile and Gemfile.lock in site config (#5293)
+  * Fix #5233: Increase our ability to detect Windows. (#5235)
 
 ### Bug Fixes
 
