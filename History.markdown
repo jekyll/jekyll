@@ -37,6 +37,7 @@
   * Site: exclude README.md and .gitignore (#5304)
   * Add link to Staticman (#5224)
   * Update url for OpenShift (#5320)
+  * [docs] add help for missing static_file e.g. on heroku (#5334)
 
 ### Development Fixes
 
