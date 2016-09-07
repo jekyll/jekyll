@@ -34,6 +34,10 @@ Jekyll will look first to your site's content, before looking to the theme's def
 Refer to your selected theme's documentation and source repository for more information on what files you can override.
 {: .note .info}
 
+To locate theme's files on your computer, run `bundle show` followed by
+the name of the theme's gem, e.g. `bundle show minima` for default Jekyll's
+theme. Then copy the files you want to override, from the returned path to your root folder.
+
 ## Creating a theme
 
 Jekyll themes are distributed as Ruby gems. Don't worry, Jekyll will help you scaffold a new theme with the `new-theme` command. Just run `jekyll new-theme` with the theme name as an argument:
