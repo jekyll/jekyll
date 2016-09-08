@@ -193,7 +193,7 @@ module Jekyll
     # Returns nothing
     def render_all_layouts(layouts, payload, info)
       _renderer.layouts = layouts
-      _renderer.place_in_layouts(output, payload, info)
+      self.output = _renderer.place_in_layouts(output, payload, info)
     ensure
       @_renderer = nil # this will allow the modifications above to disappear
     end
@@ -205,11 +205,10 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      _renderer.tap do |renderer|
+      self.output = _renderer.tap do |renderer|
         renderer.layouts = layouts
         renderer.payload = payload
-        renderer.run
-      end
+      end.run
 
       Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
