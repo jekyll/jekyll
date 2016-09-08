@@ -10,6 +10,7 @@
 
   * Use jekyll-feed to generate the default site's RSS feed (#5196)
   * Site#configure_theme: do not set theme unless it's a string (#5189)
+  * Convertible: set self.output in #render_all_layouts and #do_layout (#5337)
 
 ### Site Enhancements
 
