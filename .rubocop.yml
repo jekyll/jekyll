@@ -23,7 +23,7 @@ Metrics/ClassLength:
     - !ruby/regexp /test\/.*.rb$/
   Max: 300
 Metrics/CyclomaticComplexity:
-  Max: 8
+  Max: 9
 Metrics/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
