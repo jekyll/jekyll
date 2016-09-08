@@ -37,7 +37,7 @@ file. For example, the following are examples of valid post filenames:
 
 ```sh
 2011-12-31-new-years-eve-is-awesome.md
-2012-09-12-how-to-write-a-blog.textile
+2012-09-12-how-to-write-a-blog.md
 ```
 
 <div class="note">
