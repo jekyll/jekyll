@@ -40,6 +40,7 @@
   * Update url for OpenShift (#5320)
   * [docs] add help for missing static_file e.g. on heroku (#5334)
   * Add a line about updating theme-gems in the docs (#5318)
+  * Explain how to copy a theme's files (#5335)
 
 ### Development Fixes
 
