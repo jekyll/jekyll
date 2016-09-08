@@ -98,7 +98,7 @@ module Jekyll
     # Returns a String containing the directory name where the collection
     #   is stored on the filesystem.
     def relative_directory
-      @relative_directory ||= "_#{label}"
+      @relative_directory ||= (metadata['relative_directory'] && site.in_source_dir(metadata['relative_directory']) ||  "_#{label}")
     end
 
     # The full path to the directory containing the collection.

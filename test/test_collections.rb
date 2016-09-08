@@ -1,6 +1,37 @@
 require "helper"
 
 class TestCollections < JekyllUnitTest
+  context "a collection in a subfolder" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "relative_directory" => "_methods/site"
+          }
+        }
+      })
+      @site.process
+      @collection = @site.collections["methods"]
+
+      should "create a collection with label 'methods'" do
+        refute_nil @site.collections["methods"]
+        assert_equal @site.collections["methods"].label, "methods"
+      end
+      should "have a relative path equal to that in the metadata" do
+        assert_equal @collection.relative_directory, "_methods/site"
+      end
+      should "be a collection of the files in the relative directory" do
+        assert_equal 2, @collection.docs.size
+        @site.collections["methods"].docs.each do |doc|
+          assert_includes %w[
+            _methods/site/generate.md
+            _methods/site/initialize.md
+          ], doc.relative_path
+        end
+      end
+    end
+  end
+
   context "an evil collection" do
     setup do
       @collection = Jekyll::Collection.new(fixture_site, "../../etc/password")
