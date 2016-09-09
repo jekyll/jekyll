@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require "parallel"
 require "csv"
 
 module Jekyll
@@ -162,14 +163,15 @@ module Jekyll
     def read
       reader.read
       limit_posts!
-      Jekyll::Hooks.trigger :site, :post_read, self
+      Jekyll::Hooks.trigger :site,
+        :post_read, self
     end
 
     # Run each of the Generators.
     #
     # Returns nothing.
     def generate
-      generators.each do |generator|
+      Parallel.each(generators, :in_processes => ENV["PARALLEL_UNITS"].to_i) do |generator|
         start = Time.now
         generator.generate(self)
         Jekyll.logger.debug "Generating:",
@@ -208,11 +210,17 @@ module Jekyll
     #
     # Returns nothing.
     def write
-      each_site_file do |item|
-        item.write(dest) if regenerator.regenerate?(item)
+      Parallel.each(each_site_file, :in_process => ENV["PARALLEL_UNITS"].to_i) do |item|
+        if regenerator.regenerate?(item)
+          item.write(
+            dest
+          )
+        end
       end
+
       regenerator.write_metadata
-      Jekyll::Hooks.trigger :site, :post_write, self
+      Jekyll::Hooks.trigger :site,
+        :post_write, self
     end
 
     def posts
@@ -328,6 +336,7 @@ module Jekyll
     end
 
     def each_site_file
+      return [pages, static_files, docs_to_write].flatten.to_enum unless block_given?
       %w(pages static_files docs_to_write).each do |type|
         send(type).each do |item|
           yield item
@@ -451,22 +460,44 @@ module Jekyll
     private
     def render_docs(payload)
       collections.each do |_, collection|
-        collection.docs.each do |document|
+        collection.docs = Parallel.map(collection.docs, :in_processes => ENV["PARALLEL_UNITS"].to_i) do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run
-            document.trigger_hooks(:post_render)
+            document.trigger_hooks(
+              :post_render
+            )
           end
+
+          document
+        end
+
+        collection.docs.map do |doc|
+          doc.restore_state(
+            self, collection
+          )
         end
       end
     end
 
     private
     def render_pages(payload)
-      pages.flatten.each do |page|
-        if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
+      begin
+        @pages = Parallel.map(pages.flatten, :in_processes => ENV["PARALLEL_UNITS"].to_i) do |page|
+          if regenerator.regenerate?(page)
+            page.output = Jekyll::Renderer.new(self, page, payload).run
+            page.trigger_hooks(
+              :post_render
+            )
+          end
+
+          page
         end
+      end
+
+      pages.map do |page|
+        page.restore_state(
+          self
+        )
       end
     end
   end

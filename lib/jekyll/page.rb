@@ -44,12 +44,58 @@ module Jekyll
 
       process(name)
       read_yaml(File.join(base, dir), name)
+      data.default_proc = ddp
 
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+      Jekyll::Hooks.trigger :pages,
+        :post_init, self
+    end
+
+    def ddp
+      proc do |_, key|
+        @site.frontmatter_defaults.find(
+          File.join(@dir, @name), type, key
+        )
+      end
+    end
+
+    def marshal
+      Marshal.dump(
+        self
+      )
+    end
+
+    def restore_state(site)
+      @site = site
+    end
+
+    def marshal_dump
+      @data.default_proc = nil
+      blacklist = [
+        :@site, :@_renderer
+      ]
+
+      Jekyll.logger.debug "Skipping the marshal of vars #{
+        blacklist
+      }."
+
+      (instance_variables - blacklist).each_with_object({}) do |var, obj|
+        Jekyll.logger.debug "Marshaling the variable #{var} in Document"
+        obj[var] = instance_variable_get(
+          var
+        )
+      end
+    end
+
+    def marshal_load(data)
+      data.each do |k, v|
+        instance_variable_set(
+          k, v
+        )
       end
 
-      Jekyll::Hooks.trigger :pages, :post_init, self
+      @data.
+        default_proc = ddp
+      self
     end
 
     # The generated directory into which the page will be placed

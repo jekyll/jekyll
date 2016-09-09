@@ -32,6 +32,9 @@ require "kramdown"
 require "colorator"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
+ENV["PARALLEL_UNITS"] ||= Pathutil.new("/proc/cpuinfo").read
+  .scan(/^processor\s+:\s+\d/m).size.to_s
+
 
 module Jekyll
   # internal requires

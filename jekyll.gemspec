@@ -38,4 +38,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0')
   s.add_runtime_dependency('jekyll-watch', '~> 1.1')
   s.add_runtime_dependency("pathutil", "~> 0.9")
+  s.add_runtime_dependency("parallel", "~> 1.9")
 end
