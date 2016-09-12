@@ -263,7 +263,7 @@ common tasks easier.
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "a \n b" | normalize_whitepace }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "a \n b" | normalize_whitespace }}{% endraw %}</code>
         </p>
       </td>
     </tr>
