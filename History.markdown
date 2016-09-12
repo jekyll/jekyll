@@ -44,6 +44,7 @@
   * Add a line about updating theme-gems in the docs (#5318)
   * Explain how to copy a theme's files (#5335)
   * [docs] .md as default extension in examples (#5316)
+  * Fix small typo in docs (#5347)
 
 ### Development Fixes
 
