@@ -6,6 +6,7 @@
   * Site template: exclude Gemfile and Gemfile.lock in site config (#5293)
   * Fix #5233: Increase our ability to detect Windows. (#5235)
   * update gitignore template to ignore theme gems built by user (#5326)
+  * Adds ability to link to all files (#5199)
 
 ### Bug Fixes
 
