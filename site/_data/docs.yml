@@ -7,6 +7,17 @@
   - structure
   - configuration
 
+- title: Jekyll Commands
+  docs:
+  - commands
+  - commands/build
+  - commands/clean
+  - commands/doctor
+  - commands/help
+  - commands/new
+  - commands/new-theme
+  - commands/serve
+
 - title: Your Content
   docs:
   - frontmatter
