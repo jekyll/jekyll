@@ -16,8 +16,10 @@ module Jekyll
       def render(context)
         site = context.registers[:site]
 
-        site.docs_to_write.each do |document|
-          return document.url if document.relative_path == @relative_path
+        site.each_site_file do |item|
+          return item.url if item.relative_path == @relative_path
+          # This takes care of the case for static files that have a leading /
+          return item.url if item.relative_path == "/#{@relative_path}"
         end
 
         raise ArgumentError, <<eos

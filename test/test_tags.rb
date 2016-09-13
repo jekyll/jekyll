@@ -12,6 +12,7 @@ class TestTags < JekyllUnitTest
 
     site.posts.docs.concat(PostReader.new(site).read_posts("")) if override["read_posts"]
     CollectionReader.new(site).read if override["read_collections"]
+    site.read if override["read_all"]
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
@@ -624,6 +625,41 @@ CONTENT
           "read_posts"  => true
         })
       end
+    end
+  end
+
+  context "simple page with linking to a page" do
+    setup do
+      content = <<CONTENT
+---
+title: linking
+---
+
+{% link contacts.html %}
+{% link info.md %}
+{% link /css/screen.css %}
+CONTENT
+      create_post(content, {
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "read_all"    => true
+      })
+    end
+
+    should "not cause an error" do
+      refute_match(%r!markdown\-html\-error!, @result)
+    end
+
+    should "have the URL to the \"contacts\" item" do
+      assert_match(%r!/contacts\.html!, @result)
+    end
+
+    should "have the URL to the \"info\" item" do
+      assert_match(%r!/info\.html!, @result)
+    end
+
+    should "have the URL to the \"screen.css\" item" do
+      assert_match(%r!/css/screen\.css!, @result)
     end
   end
 
