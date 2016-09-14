@@ -11,6 +11,7 @@ module Jekyll
 
             c.option "force", "--force", "Force creation even if PATH already exists"
             c.option "blank", "--blank", "Creates scaffolding but with empty files"
+            c.option "classic", "--classic", "Creates classic Jekyll scaffolding"
 
             c.action do |args, options|
               Jekyll::Commands::New.process(args, options)
@@ -30,6 +31,8 @@ module Jekyll
 
           if options["blank"]
             create_blank_site new_blog_path
+          elsif options["classic"]
+            create_classic_site new_blog_path
           else
             create_site new_blog_path
           end
@@ -41,6 +44,19 @@ module Jekyll
           Dir.chdir(path) do
             FileUtils.mkdir(%w(_layouts _posts _drafts))
             FileUtils.touch("index.html")
+          end
+        end
+
+        def create_classic_site(path)
+          src = File.expand_path("../../site_classic_template", File.dirname(__FILE__))
+          FileUtils.cp_r src + "/.", path
+          FileUtils.rm File.expand_path(scaffold_path, path)
+
+          File.open(File.expand_path(initialized_post_name, path), "w") do |f|
+            f.write(scaffold_post_content)
+          end
+          File.open(File.expand_path("Gemfile", path), "w") do |f|
+            f.write(gemfile_contents)
           end
         end
 
