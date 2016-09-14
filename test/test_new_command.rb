@@ -93,6 +93,20 @@ class TestNewCommand < JekyllUnitTest
       output = capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
       assert_match(%r!New jekyll site installed in!, output)
     end
+
+    should "copy classic static files to new directory" do
+      template = File.expand_path("../lib/site_classic_template", File.dirname(__FILE__))
+      static_classic_files = dir_contents(template).reject do |f|
+        File.extname(f) == ".erb"
+      end
+      static_classic_files << "/Gemfile"
+
+      capture_stdout { Jekyll::Commands::New.process(@args, "--classic") }
+      new_site_files = dir_contents(@full_path).reject do |f|
+        File.extname(f) == ".markdown"
+      end
+      assert_same_elements static_classic_files, new_site_files
+    end
   end
 
   context "when multiple args are given" do
