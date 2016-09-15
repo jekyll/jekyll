@@ -1,4 +1,5 @@
 # coding: utf-8
+require "jekyll"
 
 Gem::Specification.new do |spec|
   spec.name          = <%= theme_name.inspect %>
@@ -10,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(<%= theme_directories.join("|") %>|LICENSE|README)/i}) }
+  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(Jekyll::ThemeBuilder::GEM_INCLUSION_REGEX) }
 
   spec.add_development_dependency "jekyll", "~> <%= jekyll_version_with_minor %>"
   spec.add_development_dependency "bundler", "~> 1.12"

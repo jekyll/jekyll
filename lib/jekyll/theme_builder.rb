@@ -3,6 +3,15 @@ class Jekyll::ThemeBuilder
     _layouts _includes _sass
   ).freeze
 
+  DOCUMENTATION_FILES = %w(
+    README LICENSE
+  ).freeze
+
+  GEM_INCLUSION_REGEX = Regexp.union(
+    %r!\A#{Regexp.union(SCAFFOLD_DIRECTORIES)}/!,
+    %r!\A#{Regexp.union(DOCUMENTATION_FILES)}(?:\.[^/]+)?\z!i
+  ).freeze
+
   attr_reader :name, :path, :code_of_conduct
 
   def initialize(theme_name, opts)
