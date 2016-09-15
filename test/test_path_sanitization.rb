@@ -28,4 +28,10 @@ class TestPathSanitization < JekyllUnitTest
     assert_equal source_dir("files", "hi.txt"),
                  Jekyll.sanitized_path(source_dir, "f./../../../../../../files/hi.txt")
   end
+  
+  should "preserve base path in cases where base is a prefix of filename" do
+    assert_equal "/app/maple_sauce.md", Jekyll.sanitized_path('/app','maple_sauce.md')
+    assert_equal "/app/apple_sauce.md", Jekyll.sanitized_path('/app','apple_sauce.md')
+  end
+
 end
