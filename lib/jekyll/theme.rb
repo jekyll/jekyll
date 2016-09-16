@@ -18,15 +18,19 @@ module Jekyll
     end
 
     def includes_path
-      path_for :includes
+      path_for :_includes
     end
 
     def layouts_path
-      path_for :layouts
+      path_for :_layouts
     end
 
     def sass_path
-      path_for :sass
+      path_for :_sass
+    end
+
+    def assets_path
+      path_for :assets
     end
 
     def configure_sass
@@ -43,7 +47,7 @@ module Jekyll
     end
 
     def realpath_for(folder)
-      File.realpath(Jekyll.sanitized_path(root, "_#{folder}"))
+      File.realpath(Jekyll.sanitized_path(root, folder.to_s))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
       nil
     end

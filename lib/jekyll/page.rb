@@ -40,7 +40,11 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
-      @path = site.in_source_dir(base, dir, name)
+      if site.in_theme_dir(base) == base # we're in a theme
+        @path = site.in_theme_dir(base, dir, name)
+      else
+        @path = site.in_source_dir(base, dir, name)
+      end
 
       process(name)
       read_yaml(File.join(base, dir), name)
