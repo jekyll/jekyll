@@ -402,9 +402,11 @@ module Jekyll
       operator = parser.consume?(:comparison)
       condition =
         if operator
-          Liquid::Condition.new(left_expr, operator, parser.expression)
+          Liquid::Condition.new(Liquid::Expression.parse(left_expr),
+                                operator,
+                                Liquid::Expression.parse(parser.expression))
         else
-          Liquid::Condition.new(left_expr)
+          Liquid::Condition.new(Liquid::Expression.parse(left_expr))
         end
       parser.consume(:end_of_string)
 
