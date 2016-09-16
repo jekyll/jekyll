@@ -43,7 +43,7 @@ class TestTheme < JekyllUnitTest
 
     should "generate folder paths" do
       expected = File.expand_path("./_sass", @expected_root)
-      assert_equal expected, @theme.send(:path_for, :sass)
+      assert_equal expected, @theme.send(:path_for, :_sass)
     end
 
     should "not allow paths outside of the theme root" do
@@ -56,7 +56,7 @@ class TestTheme < JekyllUnitTest
 
     should "return the resolved path when a symlink & resolved path exists" do
       expected = File.expand_path("./_layouts", @expected_root)
-      assert_equal expected, @theme.send(:path_for, :symlink)
+      assert_equal expected, @theme.send(:path_for, :_symlink)
     end
   end
 
