@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Runs the `jekyll new-theme` command and builds the theme gem as a sanity check
+
+set -e
+
+echo
+echo "setting up tmp directory"
+echo "------------------------"
+mkdir -p ./tmp
+rm -Rf ./tmp/demo-theme
+pushd tmp/
+echo
+
+echo "creating new demo-theme"
+echo "-----------------------"
+bundle exec jekyll new-theme demo-theme
+pushd demo-theme
+echo
+
+echo "editing the theme gemspec.."
+echo "---------------------------"
+ruby -e "contents = File.read('demo-theme.gemspec'); File.write('demo-theme.gemspec', contents.sub('TODO: ', ''))"
+echo " ...DONE!"
+echo
+
+echo "creating blank files"
+echo "--------------------"
+ruby -e "File.new \"_sass/main.scss\",\"w\""
+echo -e "  Created: _sass/main.scss"
+ruby -e "File.new \"_includes/header.html\",\"w\""
+echo -e "  Created: _includes/header.html"
+ruby -e "File.new \"_includes/footer.html\",\"w\""
+echo -e "  Created: _includes/footer.html"
+echo
+
+echo "building the theme gem"
+echo "----------------------"
+echo "  - add files to git index.."
+git add .
+echo "  - build the gem.."
+gem build demo-theme.gemspec
+echo
+
+echo "inspecting gem contents"
+echo "-----------------------"
+echo "  - unpack gem to theme-root.."
+gem unpack demo-theme-0.1.0.gem
+echo
+echo "  - list gem contents:"
+ruby -e "gem_files = File.join(\"**\", \"demo-theme-0.1.0\", \"**\", \"*\"); Dir.glob(gem_files).each{ |f| puts f }"
+echo
+echo "Exiting..."
+popd
