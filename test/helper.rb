@@ -27,10 +27,16 @@ require "ostruct"
 require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/profile"
-require "minitest/profile_plugin"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
-require "win32/file" if Jekyll::Utils::Platforms.really_windows?
+
+if Jekyll::Utils::Platforms.really_windows?
+  # Include our Windows-specific Filesystem patches.
+  require "win32/file"
+
+  # Profiling plugin appears not to work on Windows.
+  ENV.fetch("TESTOPTS", "").sub("--profile", "")
+end
 
 Jekyll.logger = Logger.new(StringIO.new)
 
