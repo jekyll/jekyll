@@ -47,6 +47,7 @@
   * Explain how to copy a theme's files (#5335)
   * [docs] .md as default extension in examples (#5316)
   * Fix small typo in docs (#5347)
+  * Add missing period to sentence in first paragraph. (#5372)
 
 ### Development Fixes
 
