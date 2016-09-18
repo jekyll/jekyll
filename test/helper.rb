@@ -29,6 +29,7 @@ require "minitest/reporters"
 require "minitest/profile"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
+require "win32/file"
 
 Jekyll.logger = Logger.new(StringIO.new)
 

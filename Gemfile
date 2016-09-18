@@ -27,6 +27,7 @@ group :test do
   gem "nokogiri"
   gem "rspec"
   gem "test-theme", path: File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
+  gem "win32-file" unless RUBY_PLATFORM =~ /win/
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
