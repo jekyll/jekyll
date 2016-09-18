@@ -3,22 +3,24 @@ require "helper"
 class TestThemeAssetsReader < JekyllUnitTest
   def setup
     @site = fixture_site(
-      "theme" => "test-theme",
+      "theme"       => "test-theme",
       "theme-color" => "black"
     )
     assert @site.theme
   end
 
   def assert_file_with_relative_path(haystack, relative_path)
-      assert haystack.any? { |f|
-        f.relative_path == relative_path
-      }, "Site should read in the #{relative_path} file, but it was not found in #{haystack.inspect}"
+    assert haystack.any? { |f|
+      f.relative_path == relative_path
+    }, "Site should read in the #{relative_path} file, " \
+      "but it was not found in #{haystack.inspect}"
   end
 
   def refute_file_with_relative_path(haystack, relative_path)
-      refute haystack.any? { |f|
-        f.relative_path == relative_path
-      }, "Site should not have read in the #{relative_path} file, but it was found in #{haystack.inspect}"
+    refute haystack.any? { |f|
+      f.relative_path == relative_path
+    }, "Site should not have read in the #{relative_path} file, " \
+      "but it was found in #{haystack.inspect}"
   end
 
   context "with a valid theme" do
@@ -55,7 +57,5 @@ class TestThemeAssetsReader < JekyllUnitTest
       refute_file_with_relative_path @site.static_files, "assets/img/logo.png"
       refute_file_with_relative_path @site.pages, "assets/style.scss"
     end
-
   end
-
 end

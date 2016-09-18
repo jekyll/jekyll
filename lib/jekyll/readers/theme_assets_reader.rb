@@ -13,19 +13,35 @@ module Jekyll
         if File.symlink?(path)
           Jekyll.logger.warn "Theme reader:", "Ignored symlinked asset: #{path}"
         else
-          base = site.theme.root
-          dir = File.dirname(path.sub("#{site.theme.root}/", ""))
-          name = File.basename(path)
-          relative_path = File.join(*[dir, name].compact)
-          if Utils.has_yaml_header?(path)
-            next if site.pages.any? { |file| file.relative_path == relative_path }
-            site.pages << Jekyll::Page.new(site, base, dir, name)
-          else
-            next if site.static_files.any? { |file| file.relative_path == relative_path }
-            site.static_files << Jekyll::StaticFile.new(site, base, dir, name)
-          end
+          read_theme_asset(path)
         end
       end
+    end
+
+    private
+    def read_theme_asset(path)
+      base = site.theme.root
+      dir = File.dirname(path.sub("#{site.theme.root}/", ""))
+      name = File.basename(path)
+
+      if Utils.has_yaml_header?(path)
+        append_unless_exists site.pages,
+          Jekyll::Page.new(site, base, dir, name)
+      else
+        append_unless_exists site.static_files,
+          Jekyll::StaticFile.new(site, base, dir, name)
+      end
+    end
+
+    def append_unless_exists(haystack, new_item)
+      if haystack.any? { |file| file.relative_path == new_item.relative_path }
+        Jekyll.logger.debug "Theme:",
+          "Ignoring #{new_item.relative_path} in theme due to existing file " \
+          "with that path in site."
+        return
+      end
+
+      haystack << new_item
     end
   end
 end
