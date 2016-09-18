@@ -27,6 +27,7 @@ require "ostruct"
 require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/profile"
+require "minitest/profile_plugin"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
 require "win32/file" if Jekyll::Utils::Platforms.really_windows?
