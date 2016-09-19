@@ -156,6 +156,31 @@ end
 
 #
 
+When(%r!^I run gem(.*)$!) do |args|
+  run_rubygem(args)
+  if args.include?("--verbose") || ENV["DEBUG"]
+    $stderr.puts "\n#{jekyll_run_output}\n"
+  end
+end
+
+#
+
+When(%r!^I run git add .$!) do
+  run_in_shell("git", "add", ".")
+end
+
+#
+
+When(%r!^I decide to build the theme gem$!) do
+  Dir.chdir(Paths.theme_gem_dir)
+  gemspec = "my-cool-theme.gemspec"
+  File.write(gemspec, File.read(gemspec).sub("TODO: ", ""))
+  File.new("_includes/blank.html", "w")
+  File.new("_sass/blank.scss", "w")
+end
+
+#
+
 When(%r!^I change "(.*)" to contain "(.*)"$!) do |file, text|
   File.open(file, "a") do |f|
     f.write(text)
@@ -179,6 +204,7 @@ Then(%r!^the (.*) directory should +(not )?exist$!) do |dir, negative|
 end
 
 #
+
 Then(%r!^I should (not )?see "(.*)" in "(.*)"$!) do |negative, text, file|
   step %(the "#{file}" file should exist)
   regexp = Regexp.new(text, Regexp::MULTILINE)
