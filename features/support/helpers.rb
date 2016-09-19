@@ -90,7 +90,7 @@ end
 
 def run_jekyll(args)
   args = args.strip.split(" ") # Shellwords?
-  process = run_in_shell(Paths.jekyll_bin.to_s, *args, "--trace")
+  process = run_in_shell("ruby", Paths.jekyll_bin.to_s, *args, "--trace")
   process.exitstatus.zero?
 end
 
