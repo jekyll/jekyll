@@ -54,7 +54,7 @@ module Jekyll
 
     # Ensure the priority is a Fixnum
     def self.priority_value(priority)
-      return priority if priority.is_a?(Fixnum)
+      return priority if priority.is_a?(Integer)
       PRIORITY_MAP[priority] || DEFAULT_PRIORITY
     end
 
