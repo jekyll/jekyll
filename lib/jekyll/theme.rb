@@ -18,19 +18,19 @@ module Jekyll
     end
 
     def includes_path
-      path_for :_includes
+      path_for "_includes".freeze
     end
 
     def layouts_path
-      path_for :_layouts
+      path_for "_layouts".freeze
     end
 
     def sass_path
-      path_for :_sass
+      path_for "_sass".freeze
     end
 
     def assets_path
-      path_for :assets
+      path_for "assets".freeze
     end
 
     def configure_sass
