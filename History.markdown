@@ -62,6 +62,7 @@
   * rubocop: lib/jekyll/document.rb complexity fixes (#5045)
   * Proxy a number of Convertible methods to Renderer (#5308)
   * Run executable for Cucumber via Ruby instead of Shell (#5383)
+  * Appease Rubocop (#5381)
 
 ## 3.2.1 / 2016-08-02
 
