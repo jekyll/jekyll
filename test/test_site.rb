@@ -180,6 +180,7 @@ class TestSite < JekyllUnitTest
         %#\ +.md
         .htaccess
         about.html
+        application.coffee
         bar.html
         coffeescript.coffee
         contacts.html

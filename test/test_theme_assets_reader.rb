@@ -25,6 +25,7 @@ class TestThemeAssetsReader < JekyllUnitTest
 
   context "with a valid theme" do
     should "read all assets" do
+      @site.reset
       ThemeAssetsReader.new(@site).read
       assert_file_with_relative_path @site.static_files, "assets/img/logo.png"
       assert_file_with_relative_path @site.pages, "assets/style.scss"
@@ -38,15 +39,24 @@ class TestThemeAssetsReader < JekyllUnitTest
       assert_equal @site.in_dest_dir("assets/style.css"), file.destination(@site.dest)
       assert_includes file.output, ".sample {\n  color: black; }"
     end
+
+    should "not overwrite site content with the same relative path" do
+      @site.reset
+      @site.read
+
+      file = @site.pages.find { |f| f.relative_path == "assets/application.coffee" }
+      refute_nil file
+      assert_includes file.content, "alert \"From your site.\""
+    end
   end
 
   context "with a valid theme without an assets dir" do
     should "not read any assets" do
-      allow(Theme).to receive(:realpath_for).with(:sass).and_return(nil)
       site = fixture_site("theme" => "test-theme")
+      allow(site.theme).to receive(:assets_path).and_return(nil)
       ThemeAssetsReader.new(site).read
-      refute_file_with_relative_path @site.static_files, "assets/img/logo.png"
-      refute_file_with_relative_path @site.pages, "assets/style.scss"
+      refute_file_with_relative_path site.static_files, "assets/img/logo.png"
+      refute_file_with_relative_path site.pages, "assets/style.scss"
     end
   end
 
@@ -54,8 +64,8 @@ class TestThemeAssetsReader < JekyllUnitTest
     should "not read any assets" do
       site = fixture_site("theme" => nil)
       ThemeAssetsReader.new(site).read
-      refute_file_with_relative_path @site.static_files, "assets/img/logo.png"
-      refute_file_with_relative_path @site.pages, "assets/style.scss"
+      refute_file_with_relative_path site.static_files, "assets/img/logo.png"
+      refute_file_with_relative_path site.pages, "assets/style.scss"
     end
   end
 end
