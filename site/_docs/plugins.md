@@ -910,6 +910,7 @@ LESS.js files during generation.
 - [Jekyll Autoprefixer](https://github.com/vwochnik/jekyll-autoprefixer): Autoprefixer integration for Jekyll
 - [Jekyll-breadcrumbs](https://github.com/git-no/jekyll-breadcrumbs): Creates breadcrumbs for Jekyll 3.x, includes features like SEO optimization, optional breadcrumb item translation and more.
 - [generator-jekyllized](https://github.com/sondr3/generator-jekyllized): A Yeoman generator for rapidly developing sites with Gulp. Live reload your site, automatically minify and optimize your assets and much more.
+- [Jekyll-Spotify](https://github.com/MertcanGokgoz/Jekyll-Spotify): Easily output Spotify Embed Player for jekyll
 
 #### Editors
 
