@@ -104,7 +104,7 @@ module Jekyll
 
         private
         def modernize_coderay_config
-          if highlighter == "coderay"
+          unless @config["coderay"].empty?
             Jekyll::Deprecator.deprecation_message(
               "You are using 'kramdown.coderay' in your configuration, " \
               "please use 'syntax_highlighter_opts' instead."
