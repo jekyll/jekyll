@@ -47,6 +47,7 @@
   * Explain how to copy a theme's files (#5335)
   * [docs] .md as default extension in examples (#5316)
   * Fix small typo in docs (#5347)
+  * Add missing period to sentence in first paragraph. (#5372)
 
 ### Development Fixes
 
@@ -60,6 +61,8 @@
   * Execute jekyll from clone instead of defined binary when running 'script/default-site' (#5295)
   * rubocop: lib/jekyll/document.rb complexity fixes (#5045)
   * Proxy a number of Convertible methods to Renderer (#5308)
+  * Run executable for Cucumber via Ruby instead of Shell (#5383)
+  * Appease Rubocop (#5381)
 
 ## 3.2.1 / 2016-08-02
 
