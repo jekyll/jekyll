@@ -49,6 +49,7 @@
   * [docs] .md as default extension in examples (#5316)
   * Fix small typo in docs (#5347)
   * Add missing period to sentence in first paragraph. (#5372)
+  * added jekyll-spotify plugin (#5369)
 
 ### Development Fixes
 
