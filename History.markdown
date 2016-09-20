@@ -9,6 +9,7 @@
   * Adds ability to link to all files (#5199)
   * Exclude vendor by default (#5361)
   * Add ThemeAssetsReader which reads assets from a theme (#5364)
+  * Add bundle install to jekyll new command (#5237)
 
 ### Bug Fixes
 
