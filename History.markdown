@@ -17,6 +17,7 @@
   * Site#configure_theme: do not set theme unless it's a string (#5189)
   * Convertible: set self.output in #render_all_layouts and #do_layout (#5337)
   * Only complain about `kramdown.coderay` if it is actually in the config (#5380)
+  * Clarify documentation in theme gem's README template (#5376)
 
 ### Site Enhancements
 
