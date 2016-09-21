@@ -1,4 +1,5 @@
 Before do
+  FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
   FileUtils.mkdir_p(Paths.test_dir) unless Paths.test_dir.directory?
   Dir.chdir(Paths.test_dir)
 end
@@ -6,7 +7,7 @@ end
 #
 
 After do
-  Paths.test_dir.rmtree if Paths.test_dir.exist?
+  FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
   Paths.output_file.delete if Paths.output_file.exist?
   Paths.status_file.delete if Paths.status_file.exist?
   Dir.chdir(Paths.test_dir.parent)
