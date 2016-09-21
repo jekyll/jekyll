@@ -59,6 +59,7 @@ CONTENT
       assert_match r, "xml+cheetah"
       assert_match r, "x.y"
       assert_match r, "coffee-script"
+      assert_match r, "shell_session"
 
       refute_match r, "blah^"
 
