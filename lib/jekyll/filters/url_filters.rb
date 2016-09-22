@@ -32,12 +32,8 @@ module Jekyll
 
       private
       def ensure_leading_slash(input)
-        return input if input.nil? || input.empty?
-        if input.start_with?("/")
-          input
-        else
-          "/#{input}"
-        end
+        return input if input.nil? || input.empty? || input.start_with?("/")
+        "/#{input}"
       end
 
     end
