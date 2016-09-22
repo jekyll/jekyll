@@ -19,6 +19,10 @@ module Jekyll
         end
       end
 
+      def key?(key)
+        (@obj.collections.key?(key) && key != "posts") || super
+      end
+
       def posts
         @site_posts ||= @obj.posts.docs.sort { |a, b| b <=> a }
       end
