@@ -54,6 +54,7 @@
   * Fix small typo in docs (#5347)
   * Add missing period to sentence in first paragraph. (#5372)
   * added jekyll-spotify plugin (#5369)
+  * Add jekyll-menus to the list of plugins. (#5397)
 
 ### Development Fixes
 
