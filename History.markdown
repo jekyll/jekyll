@@ -19,6 +19,7 @@
   * Only complain about `kramdown.coderay` if it is actually in the config (#5380)
   * Clarify documentation in theme gem's README template (#5376)
   * Allow underscore in highlighter language (#5375)
+  * Site template: set empty url in config file by default (#5338)
 
 ### Site Enhancements
 
