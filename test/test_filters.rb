@@ -11,7 +11,8 @@ class TestFilters < JekyllUnitTest
       @site = Jekyll::Site.new(
         Jekyll.configuration(opts.merge("skip_config_files" => true))
       )
-      @context = Liquid::Context.new({}, {}, { :site => @site })
+      @context = Liquid::Context.new({ "site" => @site.site_payload["site"] },
+        {}, { :site => @site })
     end
   end
 
@@ -21,12 +22,13 @@ class TestFilters < JekyllUnitTest
 
   context "filters" do
     setup do
-      @filter = JekyllFilter.new({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "timezone"    => "UTC"
-      })
       @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
+      @filter = JekyllFilter.new({
+        "source"                 => source_dir,
+        "destination"            => dest_dir,
+        "timezone"               => "UTC",
+        "dont_show_posts_before" => @sample_time
+      })
       @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
@@ -632,6 +634,14 @@ class TestFilters < JekyllUnitTest
       should "always return an array if the object responds to `select`" do
         results = @filter.where_exp(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
+      end
+
+      should "filter by variable values" do
+        @filter.site.tap(&:read)
+        posts = @filter.site.site_payload["site"]["posts"]
+        results = @filter.where_exp(posts, "post",
+          "post.date > site.dont_show_posts_before")
+        assert_equal posts.select { |p| p.date > @sample_time }.count, results.length
       end
     end
 
