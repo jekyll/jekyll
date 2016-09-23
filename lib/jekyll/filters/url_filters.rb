@@ -22,12 +22,9 @@ module Jekyll
         return if input.nil?
         site = @context.registers[:site]
         return ensure_leading_slash(input.to_s) if site.config["baseurl"].nil?
-        ensure_leading_slash( # in case the baseurl doesn't have a leading slash
-          URI(
-            site.config["baseurl"] + ensure_leading_slash(input.to_s)
-            # in case the input doesn't have a leading slash
-          ).to_s
-        )
+        URI(
+          ensure_leading_slash(site.config["baseurl"]) + ensure_leading_slash(input.to_s)
+        ).to_s
       end
 
       private
