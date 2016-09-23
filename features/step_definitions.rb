@@ -177,6 +177,8 @@ When(%r!^I decide to build the theme gem$!) do
   File.write(gemspec, File.read(gemspec).sub("TODO: ", ""))
   File.new("_includes/blank.html", "w")
   File.new("_sass/blank.scss", "w")
+  FileUtils.mkdir_p("assets/css")
+  File.new("assets/css/blank.scss", "w")
 end
 
 #
