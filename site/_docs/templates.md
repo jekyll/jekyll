@@ -23,6 +23,34 @@ common tasks easier.
   <tbody>
     <tr>
       <td>
+        <p class="name"><strong>Relative URL</strong></p>
+        <p>Prepend the <code>baseurl</code> value to the input. Useful if your site is hosted at a subpath rather than the root of the domain.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ "/assets/style.css" | relative_url }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="output">/my-baseurl/assets/style.css</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Absolute URL</strong></p>
+        <p>Prepend the <code>url</code> and <code>baseurl</code> value to the input.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ "/assets/style.css" | absolute_url }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">http://example.com/my-baseurl/assets/style.css</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Date to XML Schema</strong></p>
         <p>Convert a Date into XML Schema (ISO 8601) format.</p>
       </td>
