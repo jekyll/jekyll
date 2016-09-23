@@ -7,7 +7,8 @@ module Jekyll
         def init_with_program(prog)
           prog.command(:new) do |c|
             c.syntax "new PATH"
-            c.description "Creates a new Jekyll site scaffold in PATH"
+            c.description "Creates a new Jekyll site scaffold in PATH, and " \
+                        "automatically assigns site's title based on argument passed."
 
             c.option "force", "--force", "Force creation even if PATH already exists"
             c.option "blank", "--blank", "Creates scaffolding but with empty files"
@@ -22,8 +23,11 @@ module Jekyll
         def process(args, options = {})
           raise ArgumentError, "You must specify a path." if args.empty?
 
+          new_blog_title = extract_title args
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
+
           FileUtils.mkdir_p new_blog_path
+
           if preserve_source_location?(new_blog_path, options)
             Jekyll.logger.abort_with "Conflict:",
                       "#{new_blog_path} exists and is not empty."
@@ -32,10 +36,10 @@ module Jekyll
           if options["blank"]
             create_blank_site new_blog_path
           else
-            create_site new_blog_path
+            create_site new_blog_title, new_blog_path
           end
 
-          after_install(new_blog_path, options)
+          after_install(new_blog_title, new_blog_path, options)
         end
 
         def create_blank_site(path)
@@ -49,6 +53,18 @@ module Jekyll
           ERB.new(File.read(File.expand_path(scaffold_path, site_template))).result
         end
 
+        def create_config_file(title, path)
+          @blog_title = title
+          @user_email = user_email
+
+          config_template = File.expand_path("_config.yml.erb", site_template)
+          config_copy = ERB.new(File.read(config_template)).result(binding)
+
+          File.open(File.expand_path("_config.yml", path), "w") do |f|
+            f.write(config_copy)
+          end
+        end
+
         # Internal: Gets the filename of the sample post to be created
         #
         # Returns the filename of the sample post, as a String
@@ -57,6 +73,11 @@ module Jekyll
         end
 
         private
+
+        def extract_title(args)
+          a = args.join(" ")
+          a.tr("\\", "/").split("/").last
+        end
 
         def gemfile_contents
           <<-RUBY
@@ -87,8 +108,8 @@ end
 RUBY
         end
 
-        def create_site(new_blog_path)
-          create_sample_files new_blog_path
+        def create_site(new_blog_title, new_blog_path)
+          create_sample_files new_blog_title, new_blog_path
 
           File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
             f.write(scaffold_post_content)
@@ -103,9 +124,17 @@ RUBY
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
-        def create_sample_files(path)
+        def erb_files(title)
+          erb_file = File.join("**", title.to_s, "**", "*.erb")
+          Dir.glob(erb_file)
+        end
+
+        def create_sample_files(title, path)
           FileUtils.cp_r site_template + "/.", path
-          FileUtils.rm File.expand_path(scaffold_path, path)
+          create_config_file title, path
+          erb_files(title).each do |file|
+            FileUtils.rm file
+          end
         end
 
         def site_template
@@ -120,8 +149,8 @@ RUBY
         # then automatically execute bundle install from within the new blog dir
         # unless the user opts to generate a blank blog or skip 'bundle install'.
 
-        def after_install(path, options = {})
-          Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
+        def after_install(title, path, options = {})
+          Jekyll.logger.info "New jekyll site #{title.cyan} installed in #{path.cyan}."
           Jekyll.logger.info "Bundle install skipped." if options["skip-bundle"]
 
           unless options["blank"] || options["skip-bundle"]
@@ -135,6 +164,11 @@ RUBY
           Dir.chdir(path) do
             system("bundle", "install")
           end
+        end
+
+        def user_email
+          gitconfig_email = `git config user.email`.chomp
+          gitconfig_email.empty? ? "your-email@domain.com" : gitconfig_email
         end
       end
     end

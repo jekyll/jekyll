@@ -14,7 +14,8 @@ class TestNewCommand < JekyllUnitTest
 
   context "when args contains a path" do
     setup do
-      @path = "new-site"
+      @path = "path/to/new-site"
+      @title = "new-site"
       @args = [@path]
       @full_path = File.expand_path(@path, Dir.pwd)
     end
@@ -38,11 +39,20 @@ class TestNewCommand < JekyllUnitTest
       assert_match(%r!gem "github-pages"!, File.read(gemfile))
     end
 
+    should "create a config file" do
+      config_file = File.join(@full_path, "_config.yml")
+      refute_exist @full_path
+      capture_stdout { Jekyll::Commands::New.process(@args) }
+      assert_exist config_file
+      assert_match("title: new-site", File.read(config_file))
+      assert_match("email: your-email@domain.com", File.read(config_file))
+    end
+
     should "display a success message" do
       Jekyll::Commands::New.process(@args)
       output = Jekyll.logger.messages[-3]
       output_last = Jekyll.logger.messages.last
-      success_message = "New jekyll site installed in #{@full_path.cyan}."
+      success_message = "New jekyll site #{@title.cyan} installed in #{@full_path.cyan}."
       bundle_message = "Running bundle install in #{@full_path.cyan}..."
       assert_includes output, success_message
       assert_includes output_last, bundle_message
@@ -53,6 +63,7 @@ class TestNewCommand < JekyllUnitTest
         File.extname(f) == ".erb"
       end
       static_template_files << "/Gemfile"
+      static_template_files << "/_config.yml"
 
       capture_stdout { Jekyll::Commands::New.process(@args) }
 
@@ -95,9 +106,11 @@ class TestNewCommand < JekyllUnitTest
     end
 
     should "force created folder" do
-      capture_stdout { Jekyll::Commands::New.process(@args) }
-      output = capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
-      assert_match(%r!New jekyll site installed in!, output)
+      capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
+      output = Jekyll.logger.messages[-3]
+      success_message = "New jekyll site #{@title.cyan} " \
+      "installed in #{@full_path.cyan}."
+      assert_includes output, success_message
     end
 
     should "skip bundle install when opted to" do
