@@ -11,6 +11,7 @@
   * Add ThemeAssetsReader which reads assets from a theme (#5364)
   * Add bundle install to jekyll new command (#5237)
   * Add absolute_url and relative_url filters. (#5399)
+  * Site template: remove `css/` from new site scaffolding (#5402)
 
 ### Bug Fixes
 
