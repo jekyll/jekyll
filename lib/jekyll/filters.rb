@@ -3,8 +3,11 @@ require "json"
 require "date"
 require "liquid"
 
+require_all "jekyll/filters"
+
 module Jekyll
   module Filters
+    include URLFilters
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.

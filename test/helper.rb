@@ -120,12 +120,9 @@ class JekyllUnitTest < Minitest::Test
       "destination" => dest_dir,
       "incremental" => false
     }))
-    build_configs({
+    Configuration.from(full_overrides.merge({
       "source" => source_dir
-    }, full_overrides)
-      .fix_common_issues
-      .backwards_compatibilize
-      .add_default_collections
+    }))
   end
 
   def clear_dest
