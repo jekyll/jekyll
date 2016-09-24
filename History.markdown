@@ -59,6 +59,7 @@
   * added jekyll-spotify plugin (#5369)
   * Add jekyll-menus to the list of plugins. (#5397)
   * macOS and one grammar fix (#5403)
+  * Add documentation for relative_url and absolute_url (#5405)
 
 ### Development Fixes
 
