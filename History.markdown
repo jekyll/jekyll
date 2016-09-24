@@ -58,6 +58,7 @@
   * Add missing period to sentence in first paragraph. (#5372)
   * added jekyll-spotify plugin (#5369)
   * Add jekyll-menus to the list of plugins. (#5397)
+  * macOS and one grammar fix (#5403)
 
 ### Development Fixes
 
