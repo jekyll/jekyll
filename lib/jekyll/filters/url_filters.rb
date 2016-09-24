@@ -1,3 +1,5 @@
+require "addressable/uri"
+
 module Jekyll
   module Filters
     module URLFilters
@@ -10,7 +12,7 @@ module Jekyll
         return if input.nil?
         site = @context.registers[:site]
         return relative_url(input).to_s if site.config["url"].nil?
-        URI(site.config["url"] + relative_url(input)).to_s
+        Addressable::URI.parse(site.config["url"] + relative_url(input)).normalize.to_s
       end
 
       # Produces a URL relative to the domain root based on site.baseurl.
@@ -22,9 +24,9 @@ module Jekyll
         return if input.nil?
         site = @context.registers[:site]
         return ensure_leading_slash(input.to_s) if site.config["baseurl"].nil?
-        URI(
+        Addressable::URI.parse(
           ensure_leading_slash(site.config["baseurl"]) + ensure_leading_slash(input.to_s)
-        ).to_s
+        ).normalize.to_s
       end
 
       private

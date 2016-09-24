@@ -397,7 +397,7 @@ class TestFilters < JekyllUnitTest
 
       should "normalize international URLs" do
         page_url = "错误.html"
-        assert_equal "%E9%94%99%E8%AF%AF.html", @filter.relative_url(page_url)
+        assert_equal "/base/%E9%94%99%E8%AF%AF.html", @filter.relative_url(page_url)
       end
 
       should "be ok with a nil 'baseurl'" do
