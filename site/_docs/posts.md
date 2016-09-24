@@ -27,18 +27,18 @@ To create a new post, all you need to do is create a file in the `_posts`
 directory. How you name files in this folder is important. Jekyll requires blog
 post files to be named according to the following format:
 
-{% highlight shell %}
+```sh
 YEAR-MONTH-DAY-title.MARKUP
-{% endhighlight %}
+```
 
 Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit
 numbers, and `MARKUP` is the file extension representing the format used in the
 file. For example, the following are examples of valid post filenames:
 
-{% highlight shell %}
+```sh
 2011-12-31-new-years-eve-is-awesome.md
-2012-09-12-how-to-write-a-blog.textile
-{% endhighlight %}
+2012-09-12-how-to-write-a-blog.md
+```
 
 <div class="note">
   <h5>ProTip™: Link to other posts</h5>
@@ -90,16 +90,16 @@ variable in a post.
 
 Including an image asset in a post:
 
-{% highlight text %}
+```text
 ... which is shown in the screenshot below:
 ![My helpful screenshot]({% raw %}{{ site.url }}{% endraw %}/assets/screenshot.jpg)
-{% endhighlight %}
+```
 
 Linking to a PDF for readers to download:
 
-{% highlight text %}
+```text
 ... you can [get the PDF]({% raw %}{{ site.url }}{% endraw %}/assets/mydoc.pdf) directly.
-{% endhighlight %}
+```
 
 <div class="note">
   <h5>ProTip™: Link using just the site root URL</h5>
@@ -119,7 +119,7 @@ you have a list of posts somewhere. Creating an index of posts on another page
 language](https://docs.shopify.com/themes/liquid/basics) and its tags. Here’s a
 basic example of how to create a list of links to your blog posts:
 
-{% highlight html %}
+```html
 <ul>
   {% raw %}{% for post in site.posts %}{% endraw %}
     <li>
@@ -127,7 +127,7 @@ basic example of how to create a list of links to your blog posts:
     </li>
   {% raw %}{% endfor %}{% endraw %}
 </ul>
-{% endhighlight %}
+```
 
 Of course, you have full control over how (and where) you display your posts,
 and how you structure your site. You should read more about [how templates
@@ -146,7 +146,7 @@ Take the above example of an index of posts. Perhaps you want to include
 a little hint about the post's content by adding the first paragraph of each of
 your posts:
 
-{% highlight html %}
+```html
 <ul>
   {% raw %}{% for post in site.posts %}{% endraw %}
     <li>
@@ -155,22 +155,22 @@ your posts:
     </li>
   {% raw %}{% endfor %}{% endraw %}
 </ul>
-{% endhighlight %}
+```
 
 Because Jekyll grabs the first paragraph you will not need to wrap the excerpt
 in `p` tags, which is already done for you. These tags can be removed with the
 following if you'd prefer:
 
-{% highlight html %}
+```html
 {% raw %}{{ post.excerpt | remove: '<p>' | remove: '</p>' }}{% endraw %}
-{% endhighlight %}
+```
 
 If you don't like the automatically-generated post excerpt, it can be
 explicitly overridden by adding an `excerpt` value to your post's YAML
 Front Matter. Alternatively, you can choose to define a custom
 `excerpt_separator` in the post's YAML front matter:
 
-{% highlight text %}
+```text
 ---
 excerpt_separator: <!--more-->
 ---
@@ -178,7 +178,7 @@ excerpt_separator: <!--more-->
 Excerpt
 <!--more-->
 Out-of-excerpt
-{% endhighlight %}
+```
 
 You can also set the `excerpt_separator` globally in your `_config.yml`
 configuration file.
@@ -197,7 +197,7 @@ Jekyll also has built-in support for syntax highlighting of code snippets using
 either Pygments or Rouge, and including a code snippet in any post is easy.
 Just use the dedicated Liquid tag as follows:
 
-{% highlight text %}
+```text
 {% raw %}{% highlight ruby %}{% endraw %}
 def show
   @widget = Widget(params[:id])
@@ -207,11 +207,11 @@ def show
   end
 end
 {% raw %}{% endhighlight %}{% endraw %}
-{% endhighlight %}
+```
 
 And the output will look like this:
 
-{% highlight ruby %}
+```ruby
 def show
   @widget = Widget(params[:id])
   respond_to do |format|
@@ -219,7 +219,7 @@ def show
     format.json { render json: @widget }
   end
 end
-{% endhighlight %}
+```
 
 <div class="note">
   <h5>ProTip™: Show line numbers</h5>

@@ -17,7 +17,7 @@ Feature: Writing themes
   Scenario: A theme with SCSS
     Given I have a configuration file with "theme" set to "test-theme"
     And I have a css directory
-    And I have a "css/main.scss" page that contains "@import 'style';"
+    And I have a "css/main.scss" page that contains "@import 'test-theme-black';"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist

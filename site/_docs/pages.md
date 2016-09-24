@@ -46,7 +46,7 @@ directory with a suitable name for the page you want to create. For a site with
 a homepage, an about page, and a contact page, here’s what the root directory
 and associated URLs might look like:
 
-{% highlight shell %}
+```sh
 .
 |-- _config.yml
 |-- _includes/
@@ -57,7 +57,7 @@ and associated URLs might look like:
 |-- index.html    # => http://example.com/
 |-- other.md      # => http://example.com/other.html
 └── contact.html  # => http://example.com/contact.html
-{% endhighlight %}
+```
 
 ### Named folders containing index HTML files
 
@@ -69,7 +69,7 @@ the page URL ends up being the folder name, and the web server will serve up
 the respective `index.html` file. Here's an example of what this structure
 might look like:
 
-{% highlight shell %}
+```sh
 .
 ├── _config.yml
 ├── _includes/
@@ -83,7 +83,7 @@ might look like:
 |── other/
 |   └── index.md    # => http://example.com/other/
 └── index.html      # => http://example.com/
-{% endhighlight %}
+```
 
 This approach may not suit everyone, but for people who like clean URLs it’s
 simple and it works. In the end, the decision is yours!

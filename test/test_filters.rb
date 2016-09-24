@@ -8,10 +8,15 @@ class TestFilters < JekyllUnitTest
     attr_accessor :site, :context
 
     def initialize(opts = {})
-      @site = Jekyll::Site.new(
-        Jekyll.configuration(opts.merge("skip_config_files" => true))
-      )
+      @site = Jekyll::Site.new(opts.merge("skip_config_files" => true))
       @context = Liquid::Context.new({}, {}, { :site => @site })
+    end
+  end
+
+  def make_filter_mock(opts = {})
+    JekyllFilter.new(site_configuration(opts)).tap do |f|
+      tz = f.site.config["timezone"]
+      Jekyll.set_timezone(tz) if tz
     end
   end
 
@@ -21,10 +26,10 @@ class TestFilters < JekyllUnitTest
 
   context "filters" do
     setup do
-      @filter = JekyllFilter.new({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "timezone"    => "UTC"
+      @filter = make_filter_mock({
+        "timezone" => "UTC",
+        "url"      => "http://example.com",
+        "baseurl"  => "/base"
       })
       @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
       @sample_date = Date.parse("2013-03-27")
@@ -65,7 +70,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "escapes special characters when configured to do so" do
-        kramdown = JekyllFilter.new({ :kramdown => { :entity_output => :symbolic } })
+        kramdown = make_filter_mock({ :kramdown => { :entity_output => :symbolic } })
         assert_equal(
           "&ldquo;This filter&rsquo;s test&hellip;&rdquo;",
           kramdown.smartify(%q{"This filter's test..."})
@@ -307,6 +312,99 @@ class TestFilters < JekyllUnitTest
       assert_equal "my%20things", @filter.uri_escape("my things")
     end
 
+    context "absolute_url filter" do
+      should "produce an absolute URL from a page URL" do
+        page_url = "/about/my_favorite_page/"
+        assert_equal "http://example.com/base#{page_url}", @filter.absolute_url(page_url)
+      end
+
+      should "ensure the leading slash" do
+        page_url = "about/my_favorite_page/"
+        assert_equal "http://example.com/base/#{page_url}", @filter.absolute_url(page_url)
+      end
+
+      should "ensure the leading slash for the baseurl" do
+        page_url = "about/my_favorite_page/"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "base"
+        })
+        assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
+      end
+
+      should "be ok with a blank but present 'url'" do
+        page_url = "about/my_favorite_page/"
+        filter = make_filter_mock({
+          "url"     => "",
+          "baseurl" => "base"
+        })
+        assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
+      end
+
+      should "be ok with a nil 'url'" do
+        page_url = "about/my_favorite_page/"
+        filter = make_filter_mock({
+          "url"     => nil,
+          "baseurl" => "base"
+        })
+        assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
+      end
+
+      should "be ok with a nil 'baseurl'" do
+        page_url = "about/my_favorite_page/"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => nil
+        })
+        assert_equal "http://example.com/#{page_url}", filter.absolute_url(page_url)
+      end
+
+      should "not prepend a forward slash if input is empty" do
+        page_url = ""
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "/base"
+        })
+        assert_equal "http://example.com/base", filter.absolute_url(page_url)
+      end
+    end
+
+    context "relative_url filter" do
+      should "produce a relative URL from a page URL" do
+        page_url = "/about/my_favorite_page/"
+        assert_equal "/base#{page_url}", @filter.relative_url(page_url)
+      end
+
+      should "ensure the leading slash between baseurl and input" do
+        page_url = "about/my_favorite_page/"
+        assert_equal "/base/#{page_url}", @filter.relative_url(page_url)
+      end
+
+      should "ensure the leading slash for the baseurl" do
+        page_url = "about/my_favorite_page/"
+        filter = make_filter_mock({ "baseurl" => "base" })
+        assert_equal "/base/#{page_url}", filter.relative_url(page_url)
+      end
+
+      should "be ok with a nil 'baseurl'" do
+        page_url = "about/my_favorite_page/"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => nil
+        })
+        assert_equal "/#{page_url}", filter.relative_url(page_url)
+      end
+
+      should "not prepend a forward slash if input is empty" do
+        page_url = ""
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "/base"
+        })
+        assert_equal "/base", filter.relative_url(page_url)
+      end
+    end
+
     context "jsonify filter" do
       should "convert hash to json" do
         assert_equal "{\"age\":18}", @filter.jsonify({ :age => 18 })
@@ -475,7 +573,7 @@ class TestFilters < JekyllUnitTest
               g["items"].is_a?(Array),
               "The list of grouped items for '' is not an Array."
             )
-            assert_equal 13, g["items"].size
+            assert_equal 15, g["items"].size
           end
         end
       end

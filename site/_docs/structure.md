@@ -14,12 +14,12 @@ product.
 
 A basic Jekyll site usually looks something like this:
 
-{% highlight shell %}
+```sh
 .
 ├── _config.yml
 ├── _drafts
-|   ├── begin-with-the-crazy-ideas.textile
-|   └── on-simplicity-in-technology.markdown
+|   ├── begin-with-the-crazy-ideas.md
+|   └── on-simplicity-in-technology.md
 ├── _includes
 |   ├── footer.html
 |   └── header.html
@@ -27,14 +27,14 @@ A basic Jekyll site usually looks something like this:
 |   ├── default.html
 |   └── post.html
 ├── _posts
-|   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile
-|   └── 2009-04-26-barcamp-boston-4-roundup.textile
+|   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
+|   └── 2009-04-26-barcamp-boston-4-roundup.md
 ├── _data
 |   └── members.yml
 ├── _site
 ├── .jekyll-metadata
 └── index.html
-{% endhighlight %}
+```
 
 An overview of what each of these does:
 

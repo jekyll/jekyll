@@ -93,7 +93,7 @@ For instance, a generator can inject values computed at build time for template
 variables. In the following example the template `reading.html` has two
 variables `ongoing` and `done` that we fill in the generator:
 
-{% highlight ruby %}
+```ruby
 module Reading
   class Generator < Jekyll::Generator
     def generate(site)
@@ -105,11 +105,11 @@ module Reading
     end
   end
 end
-{% endhighlight %}
+```
 
 This is a more complex generator that generates new pages:
 
-{% highlight ruby %}
+```ruby
 module Jekyll
 
   class CategoryPage < Page
@@ -142,7 +142,7 @@ module Jekyll
   end
 
 end
-{% endhighlight %}
+```
 
 In this example, our generator will create a series of files under the
 `categories` directory for each category, listing the posts in each category
@@ -189,7 +189,7 @@ languages are implemented using this method.
 Below is a converter that will take all posts ending in `.upcase` and process
 them using the `UpcaseConverter`:
 
-{% highlight ruby %}
+```ruby
 module Jekyll
   class UpcaseConverter < Converter
     safe true
@@ -208,7 +208,7 @@ module Jekyll
     end
   end
 end
-{% endhighlight %}
+```
 
 Converters should implement at a minimum 3 methods:
 
@@ -266,16 +266,16 @@ As of version 2.5.0, Jekyll can be extended with plugins which provide
 subcommands for the `jekyll` executable. This is possible by including the
 relevant plugins in a `Gemfile` group called `:jekyll_plugins`:
 
-{% highlight ruby %}
+```ruby
 group :jekyll_plugins do
   gem "my_fancy_jekyll_plugin"
 end
-{% endhighlight %}
+```
 
 Each `Command` must be a subclass of the `Jekyll::Command` class and must
 contain one class method: `init_with_program`. An example:
 
-{% highlight ruby %}
+```ruby
 class MyNewCommand < Jekyll::Command
   class << self
     def init_with_program(prog)
@@ -292,7 +292,7 @@ class MyNewCommand < Jekyll::Command
     end
   end
 end
-{% endhighlight %}
+```
 
 Commands should implement this single class method:
 
@@ -328,7 +328,7 @@ hooking into the tagging system. Built-in examples added by Jekyll include the
 `highlight` and `include` tags. Below is an example of a custom liquid tag that
 will output the time the page was rendered:
 
-{% highlight ruby %}
+```ruby
 module Jekyll
   class RenderTimeTag < Liquid::Tag
 
@@ -344,7 +344,7 @@ module Jekyll
 end
 
 Liquid::Template.register_tag('render_time', Jekyll::RenderTimeTag)
-{% endhighlight %}
+```
 
 At a minimum, liquid tags must implement:
 
@@ -372,24 +372,24 @@ At a minimum, liquid tags must implement:
 You must also register the custom tag with the Liquid template engine as
 follows:
 
-{% highlight ruby %}
+```ruby
 Liquid::Template.register_tag('render_time', Jekyll::RenderTimeTag)
-{% endhighlight %}
+```
 
 In the example above, we can place the following tag anywhere in one of our
 pages:
 
-{% highlight ruby %}
+```ruby
 {% raw %}
 <p>{% render_time page rendered at: %}</p>
 {% endraw %}
-{% endhighlight %}
+```
 
 And we would get something like this on the page:
 
-{% highlight html %}
+```html
 <p>page rendered at: Tue June 22 23:38:47 –0500 2010</p>
-{% endhighlight %}
+```
 
 ### Liquid filters
 
@@ -398,7 +398,7 @@ add tags above. Filters are simply modules that export their methods to liquid.
 All methods will have to take at least one parameter which represents the input
 of the filter. The return value will be the output of the filter.
 
-{% highlight ruby %}
+```ruby
 module Jekyll
   module AssetFilter
     def asset_url(input)
@@ -408,7 +408,7 @@ module Jekyll
 end
 
 Liquid::Template.register_filter(Jekyll::AssetFilter)
-{% endhighlight %}
+```
 
 <div class="note">
   <h5>ProTip™: Access the site object using Liquid</h5>
@@ -469,7 +469,7 @@ There are two flags to be aware of when writing a plugin:
 To use one of the example plugins above as an illustration, here is how you’d
 specify these two flags:
 
-{% highlight ruby %}
+```ruby
 module Jekyll
   class UpcaseConverter < Converter
     safe true
@@ -477,7 +477,7 @@ module Jekyll
     ...
   end
 end
-{% endhighlight %}
+```
 
 ## Hooks
 
@@ -491,18 +491,20 @@ call whenever the hook is triggered. For example, if you want to execute some
 custom functionality every time Jekyll renders a post, you could register a
 hook like this:
 
-{% highlight ruby %}
+```ruby
 Jekyll::Hooks.register :posts, :post_render do |post|
   # code to call after Jekyll renders a post
 end
-{% endhighlight %}
+```
 
 Jekyll provides hooks for <code>:site</code>, <code>:pages</code>,
-<code>:posts</code>, and <code>:documents</code>. In all cases, Jekyll calls your
-hooks with the container object as the first callback parameter. But in the
-case of <code>:pre_render</code>, your hook will also receive a payload hash as
-a second parameter which allows you full control over the variables that are
-available while rendering.
+<code>:posts</code>, and <code>:documents</code>. In all cases, Jekyll calls
+your hooks with the container object as the first callback parameter. However,
+all `:pre_render` hooks and the`:site, :post_render` hook will also provide a
+payload hash as a second parameter. In the case of `:pre_render`, the payload
+gives you full control over the variables that are available while rendering.
+In the case of `:site, :post_render`, the payload contains final values after
+rendering all the site (useful for sitemaps, feeds, etc).
 
 The complete list of available hooks is below:
 
@@ -908,6 +910,8 @@ LESS.js files during generation.
 - [Jekyll Autoprefixer](https://github.com/vwochnik/jekyll-autoprefixer): Autoprefixer integration for Jekyll
 - [Jekyll-breadcrumbs](https://github.com/git-no/jekyll-breadcrumbs): Creates breadcrumbs for Jekyll 3.x, includes features like SEO optimization, optional breadcrumb item translation and more.
 - [generator-jekyllized](https://github.com/sondr3/generator-jekyllized): A Yeoman generator for rapidly developing sites with Gulp. Live reload your site, automatically minify and optimize your assets and much more.
+- [Jekyll-Spotify](https://github.com/MertcanGokgoz/Jekyll-Spotify): Easily output Spotify Embed Player for jekyll
+- [jekyll-menus](https://github.com/forestryio/jekyll-menus): Hugo style menus for your Jekyll site... recursive menus included.
 
 #### Editors
 

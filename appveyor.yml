@@ -1,5 +1,3 @@
-# https://www.appveyor.com/docs/appveyor-yml
-
 version: "{build}"
 
 clone_depth: 10
@@ -13,31 +11,24 @@ build: off
 
 install:
   - SET PATH=C:\Ruby%RUBY_FOLDER_VER%\bin;%PATH%
-  - bundle install --retry 5
+  - bundle install --retry 5 --jobs=%NUMBER_OF_PROCESSORS% --clean --path vendor\bundle
 
 environment:
   BUNDLE_WITHOUT: "benchmark:site:development"
   matrix:
     - RUBY_FOLDER_VER: "23"
-      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "23"
-      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "cucumber"
     - RUBY_FOLDER_VER: "23"
-      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "fmt"
     - RUBY_FOLDER_VER: "23"
-      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "default-site"
     - RUBY_FOLDER_VER: "23-x64"
-      GEMS_FOLDER_VER: "2.3.0"
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "22"
-      GEMS_FOLDER_VER: "2.2.0"
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "21"
-      GEMS_FOLDER_VER: "2.1.0"
       TEST_SUITE: "test"
 
 test_script:
@@ -48,5 +39,4 @@ test_script:
 
 cache:
   # If one of the files after the right arrow changes, cache will be skipped
-  - C:\Ruby%RUBY_FOLDER_VER%\bin -> Gemfile,jekyll.gemspec,appveyor.yml
-  - C:\Ruby%RUBY_FOLDER_VER%\lib\ruby\gems\%GEMS_FOLDER_VER% -> Gemfile,jekyll.gemspec,appveyor.yml
+  - 'vendor\bundle -> appveyor.yml,Gemfile,jekyll.gemspec'

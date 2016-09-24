@@ -17,29 +17,29 @@ namespace.
 Add the following to your site's `_config.yml` file, replacing `my_collection`
 with the name of your collection:
 
-{% highlight yaml %}
+```yaml
 collections:
 - my_collection
-{% endhighlight %}
+```
 
 You can optionally specify metadata for your collection in the configuration:
 
-{% highlight yaml %}
+```yaml
 collections:
   my_collection:
     foo: bar
-{% endhighlight %}
+```
 
 Default attributes can also be set for a collection:
 
-{% highlight yaml %}
+```yaml
 defaults:
   - scope:
       path: ""
       type: my_collection
     values:
       layout: page
-{% endhighlight %}
+```
 
 ### Step 2: Add your content
 
@@ -62,11 +62,11 @@ If you'd like Jekyll to create a public-facing, rendered version of each
 document in your collection, set the `output` key to `true` in your collection
 metadata in your `_config.yml`:
 
-{% highlight yaml %}
+```yaml
 collections:
   my_collection:
     output: true
-{% endhighlight %}
+```
 
 This will produce a file for each document in the collection.
 For example, if you have `_my_collection/some_subdir/some_doc.md`,
@@ -76,12 +76,12 @@ choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 As for posts with [Permalinks](../permalinks/), the document
 URL can be customized by setting `permalink` metadata for the collection:
 
-{% highlight yaml %}
+```yaml
 collections:
   my_collection:
     output: true
     permalink: /awesome/:path/
-{% endhighlight %}
+```
 
 For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be
 written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
@@ -339,7 +339,7 @@ one might have front matter in an individual file structured as follows (which
 must use a supported markup format, and cannot be saved with a `.yaml`
 extension):
 
-{% highlight yaml %}
+```yaml
 title: "Josquin: Missa De beata virgine and Missa Ave maris stella"
 artist: "The Tallis Scholars"
 director: "Peter Phillips"
@@ -357,11 +357,11 @@ works:
         duration: "7:47"
       - title: "Agnus Dei I, II & III"
         duration: "6:49"
-{% endhighlight %}
+```
 
 Every album in the collection could be listed on a single page with a template:
 
-{% highlight html %}
+```html
 {% raw %}
 {% for album in site.albums %}
   <h2>{{ album.title }}</h2>
@@ -377,4 +377,4 @@ Every album in the collection could be listed on a single page with a template:
   {% endfor %}
 {% endfor %}
 {% endraw %}
-{% endhighlight %}
+```

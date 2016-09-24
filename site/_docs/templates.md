@@ -263,7 +263,7 @@ common tasks easier.
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "a \n b" | normalize_whitepace }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "a \n b" | normalize_whitespace }}{% endraw %}</code>
         </p>
       </td>
     </tr>
@@ -374,9 +374,9 @@ The default is `default`. They are as follows (with what they filter):
 If you have small page fragments that you wish to include in multiple places on
 your site, you can use the `include` tag.
 
-{% highlight liquid %}
+```liquid
 {% raw %}{% include footer.html %}{% endraw %}
-{% endhighlight %}
+```
 
 Jekyll expects all include files to be placed in an `_includes` directory at the
 root of your source directory. This will embed the contents of
@@ -395,23 +395,23 @@ root of your source directory. This will embed the contents of
 
 You can also pass parameters to an include. Omit the quotation marks to send a variable's value. Liquid curly brackets should not be used here:
 
-{% highlight liquid %}
+```liquid
 {% raw %}{% include footer.html param="value" variable-param=page.variable %}{% endraw %}
-{% endhighlight %}
+```
 
 These parameters are available via Liquid in the include:
 
-{% highlight liquid %}
+```liquid
 {% raw %}{{ include.param }}{% endraw %}
-{% endhighlight %}
+```
 
 #### Including files relative to another file
 
 You can also choose to include file fragments relative to the current file:
 
-{% highlight liquid %}
+```liquid
 {% raw %}{% include_relative somedir/footer.html %}{% endraw %}
-{% endhighlight %}
+```
 
 You won't need to place your included content within the `_includes` directory. Instead,
 the inclusion is specifically relative to the file where the tag is being used. For example,
@@ -437,7 +437,7 @@ languages](http://pygments.org/languages/)
 
 To render a code block with syntax highlighting, surround your code as follows:
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 {% highlight ruby %}
 def foo
@@ -445,7 +445,7 @@ def foo
 end
 {% endhighlight %}
 {% endraw %}
-{% endhighlight %}
+```
 
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
@@ -460,7 +460,7 @@ Including the `linenos` argument will force the highlighted code to include line
 numbers. For instance, the following code block would include line numbers next
 to each line:
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 {% highlight ruby linenos %}
 def foo
@@ -468,7 +468,7 @@ def foo
 end
 {% endhighlight %}
 {% endraw %}
-{% endhighlight %}
+```
 
 #### Stylesheets for syntax highlighting
 
@@ -488,21 +488,21 @@ specify.
 
 You must include the file extension when using the `link` tag.
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 {% link _collection/name-of-document.md %}
 {% link _posts/2016-07-26-name-of-post.md %}
 {% endraw %}
-{% endhighlight %}
+```
 
 You can also use this tag to create a link in Markdown as follows:
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 [Link to a document]({% link _collection/name-of-document.md %})
 [Link to a post]({% link _posts/2016-07-26-name-of-post.md %})
 {% endraw %}
-{% endhighlight %}
+```
 
 Support for static files and pages is coming in a later release but is
 **not** released as of v3.2.1.
@@ -512,49 +512,49 @@ Support for static files and pages is coming in a later release but is
 If you would like to include a link to a post on your site, the `post_url` tag
 will generate the correct permalink URL for the post you specify.
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 {% post_url 2010-07-21-name-of-post %}
 {% endraw %}
-{% endhighlight %}
+```
 
 If you organize your posts in subdirectories, you need to include subdirectory
 path to the post:
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 {% post_url /subdir/2010-07-21-name-of-post %}
 {% endraw %}
-{% endhighlight %}
+```
 
 There is no need to include the file extension when using the `post_url` tag.
 
 You can also use this tag to create a link to a post in Markdown as follows:
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
 {% endraw %}
-{% endhighlight %}
+```
 
 ### Gist
 
 Use the `gist` tag to easily embed a GitHub Gist onto your site. This works
 with public or secret gists:
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 {% gist parkr/931c1c8d465a04042403 %}
 {% endraw %}
-{% endhighlight %}
+```
 
 You may also optionally specify the filename in the gist to display:
 
-{% highlight liquid %}
+```liquid
 {% raw %}
 {% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
 {% endraw %}
-{% endhighlight %}
+```
 
 To use the `gist` tag, you'll need to add the
 [jekyll-gist](https://github.com/jekyll/jekyll-gist) gem to your project.

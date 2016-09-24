@@ -27,6 +27,7 @@ Jekyll themes set default layouts, includes, and stylesheets, that can be overri
 
 Jekyll will look first to your site's content, before looking to the theme's defaults, for any requested file in the following folders:
 
+* `/assets`
 * `/_layouts`
 * `/_includes`
 * `/_sass`
@@ -34,11 +35,15 @@ Jekyll will look first to your site's content, before looking to the theme's def
 Refer to your selected theme's documentation and source repository for more information on what files you can override.
 {: .note .info}
 
+To locate theme's files on your computer, run `bundle show` followed by
+the name of the theme's gem, e.g. `bundle show minima` for default Jekyll's
+theme. Then copy the files you want to override, from the returned path to your root folder.
+
 ## Creating a theme
 
 Jekyll themes are distributed as Ruby gems. Don't worry, Jekyll will help you scaffold a new theme with the `new-theme` command. Just run `jekyll new-theme` with the theme name as an argument:
 
-{% highlight plaintext %}
+```sh
 jekyll new-theme my-awesome-theme
              create /path/to/my-awesome-theme/_layouts
              create /path/to/my-awesome-theme/_includes
@@ -54,7 +59,7 @@ jekyll new-theme my-awesome-theme
              create /path/to/my-awesome-theme/.gitignore
 Your new Jekyll theme, my-awesome-theme, is ready for you in /path/to/my-awesome-theme!
 For help getting started, read /path/to/my-awesome-theme/README.md.
-{% endhighlight %}
+```
 
 Add your template files in the corresponding folders, complete the `.gemspec` and the README files according to your needs.
 
@@ -63,6 +68,12 @@ Add your template files in the corresponding folders, complete the `.gemspec` an
 Theme layouts and includes work just like they work in any Jekyll site. Place layouts in your theme's `/_layouts` folder, and place includes in your themes `/_includes` folder.
 
 For example, if your theme has a `/_layouts/page.html` file, and a page has `layout: page` in its YAML front matter, Jekyll will first look to the site's `_layouts` folder for a the `page` layout, and if none exists, will use your theme's `page` layout.
+
+### Assets
+
+Any file in `/assets` will be copied over to the user's site upon build unless they have a file with the same relative path. You may ship any kind of asset here: SCSS, an image, a webfont, etc. These files behave just like pages and static files in Jekyll: if the file has [YAML front matter]({{ site.baseurl }}/docs/frontmatter/) at the top, then it will be rendered. If it does not have YAML front matter, it will simply be copied over into the resulting site. This allows theme creators to ship a default `/assets/styles.scss` file which their layouts can depend on as `/assets/styles.css`.
+
+All files in `/assets` will be output into the compiled site in the `/assets` folder just as you'd expect from using Jekyll on your sites.
 
 ### Stylesheets
 
@@ -94,3 +105,6 @@ Themes are published via [RubyGems.org](https://rubygems.org). You'll need a Rub
 2. Next, push your packaged theme up to the RubyGems service, by running the following command, again replacing `my-awesome-jekyll-theme` with the name of your theme:
 
         gem push my-awesome-jekyll-theme-*.gem
+
+3. To release a new version of your theme, simply update the version number in the gemspec file, ( `my-awesome-jekyll-theme.gemspec` in this example ), and then repeat Steps 1 & 2 above.
+We recommend that you follow [Semantic Versioning](http://semver.org/) while bumping your theme-version.

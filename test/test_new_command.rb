@@ -40,9 +40,12 @@ class TestNewCommand < JekyllUnitTest
 
     should "display a success message" do
       Jekyll::Commands::New.process(@args)
-      output = Jekyll.logger.messages.last
+      output = Jekyll.logger.messages[-3]
+      output_last = Jekyll.logger.messages.last
       success_message = "New jekyll site installed in #{@full_path.cyan}."
+      bundle_message = "Running bundle install in #{@full_path.cyan}..."
       assert_includes output, success_message
+      assert_includes output_last, bundle_message
     end
 
     should "copy the static files in site template to the new directory" do
@@ -85,13 +88,23 @@ class TestNewCommand < JekyllUnitTest
     should "create blank project" do
       blank_contents = %w(/_drafts /_layouts /_posts /index.html)
       capture_stdout { Jekyll::Commands::New.process(@args, "--blank") }
+      output = Jekyll.logger.messages.last
+      bundle_message = "Running bundle install in #{@full_path.cyan}..."
       assert_same_elements blank_contents, dir_contents(@full_path)
+      refute_includes output, bundle_message
     end
 
     should "force created folder" do
       capture_stdout { Jekyll::Commands::New.process(@args) }
       output = capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
       assert_match(%r!New jekyll site installed in!, output)
+    end
+
+    should "skip bundle install when opted to" do
+      capture_stdout { Jekyll::Commands::New.process(@args, "--skip-bundle") }
+      output = Jekyll.logger.messages.last
+      bundle_message = "Bundle install skipped."
+      assert_includes output, bundle_message
     end
   end
 

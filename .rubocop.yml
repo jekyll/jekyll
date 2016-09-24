@@ -4,8 +4,6 @@ AllCops:
   Include:
     - lib/**/*.rb
   Exclude:
-    - lib/jekyll/convertible.rb
-    - lib/jekyll/document.rb
     - lib/jekyll/renderer.rb
     - bin/**/*
     - benchmark/**/*
@@ -18,14 +16,14 @@ Lint/UnreachableCode:
 Lint/UselessAccessModifier:
   Enabled: false
 Metrics/AbcSize:
-  Max: 20
+  Max: 21
 Metrics/ClassLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
     - !ruby/regexp /test\/.*.rb$/
   Max: 300
 Metrics/CyclomaticComplexity:
-  Max: 8
+  Max: 9
 Metrics/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/

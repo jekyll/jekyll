@@ -35,19 +35,19 @@ this](http://web.archive.org/web/20091223025644/http://www.taknado.com/en/2009/0
 
 To have a remote server handle the deploy for you every time you push changes using Git, you can create a user account which has all the public keys that are authorized to deploy in its `authorized_keys` file. With that in place, setting up the post-receive hook is done as follows:
 
-{% highlight shell %}
+```sh
 laptop$ ssh deployer@example.com
 server$ mkdir myrepo.git
 server$ cd myrepo.git
 server$ git --bare init
 server$ cp hooks/post-receive.sample hooks/post-receive
 server$ mkdir /var/www/myrepo
-{% endhighlight %}
+```
 
 Next, add the following lines to hooks/post-receive and be sure Jekyll is
 installed on the server:
 
-{% highlight shell %}
+```sh
 GIT_REPO=$HOME/myrepo.git
 TMP_GIT_CLONE=$HOME/tmp/myrepo
 PUBLIC_WWW=/var/www/myrepo
@@ -56,21 +56,21 @@ git clone $GIT_REPO $TMP_GIT_CLONE
 jekyll build -s $TMP_GIT_CLONE -d $PUBLIC_WWW
 rm -Rf $TMP_GIT_CLONE
 exit
-{% endhighlight %}
+```
 
 Finally, run the following command on any users laptop that needs to be able to
 deploy using this hook:
 
-{% highlight shell %}
+```sh
 laptops$ git remote add deploy deployer@example.com:~/myrepo.git
-{% endhighlight %}
+```
 
 Deploying is now as easy as telling nginx or Apache to look at
 `/var/www/myrepo` and running the following:
 
-{% highlight shell %}
+```sh
 laptops$ git push deploy master
-{% endhighlight %}
+```
 
 ### Jekyll-hook
 
@@ -98,12 +98,13 @@ Another way to deploy your Jekyll site is to use [Rake](https://github.com/ruby/
 ### scp
 
 Once you’ve generated the `_site` directory, you can easily scp it using a
-`tasks/deploy` shell script similar to this:
+`tasks/deploy` shell script similar to [this deploy script][]. You’d obviously
+need to change the values to reflect your site’s details. There is even [a
+matching TextMate command][] that will help you run this script.
 
-    #!/bin/bash
-    
-    scp -r _site/* user@server:/home/user/public_html
+[this deploy script here]: https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy
 
+[a matching TextMate command]: https://gist.github.com/henrik/214959
 
 ### rsync
 
@@ -128,9 +129,9 @@ is to put the restriction to certificate-based authorization in
 `~/.ssh/authorized_keys`. Then, launch `rrsync` and supply
 it with the folder it shall have read-write access to:
 
-{% highlight shell %}
+```sh
 command="$HOME/bin/rrsync <folder>",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ssh-rsa <cert>
-{% endhighlight %}
+```
 
 `<folder>` is the path to your site. E.g., `~/public_html/you.org/blog-html/`.
 
@@ -138,11 +139,11 @@ command="$HOME/bin/rrsync <folder>",no-agent-forwarding,no-port-forwarding,no-pt
 
 Add the `deploy` script to the site source folder:
 
-{% highlight shell %}
+```sh
 #!/bin/sh
 
 rsync -crvz --rsh='ssh -p2222' --delete-after --delete-excluded   <folder> <user>@<site>:
-{% endhighlight %}
+```
 
 Command line parameters are:
 
@@ -154,9 +155,9 @@ your host uses a different port than the default (e.g, HostGator)
 
 Using this setup, you might run the following command:
 
-{% highlight shell %}
+```sh
 rsync -crvz --rsh='ssh -p2222' --delete-after --delete-excluded _site/ hostuser@example.org:
-{% endhighlight %}
+```
 
 Don't forget the column `:` after server name!
 
@@ -168,10 +169,10 @@ copy it to the output folder. This behavior can be changed in `_config.yml`.
 
 Just add the following line:
 
-{% highlight yaml %}
+```yaml
 # Do not copy these files to the output directory
 exclude: ["deploy"]
-{% endhighlight %}
+```
 
 Alternatively, you can use an `rsync-exclude.txt` file to control which files will be transferred to your server.
 
@@ -204,7 +205,7 @@ low-volume blogs as you only pay for what you use.
 ## OpenShift
 
 If you'd like to deploy your site to an OpenShift gear, there's [a cartridge
-for that](https://github.com/openshift-cartridges/openshift-jekyll-cartridge).
+for that](https://github.com/openshift-quickstart/jekyll-openshift).
 
 <div class="note">
   <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>

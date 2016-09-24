@@ -115,8 +115,7 @@ following is a reference of the available data.
         If the page being processed is a Post, this contains a list of up to ten
         related Posts. By default, these are the ten most recent posts.
         For high quality but slow to compute results, run the
-        <code>jekyll</code> command with the <code>--lsi</code> (latent semantic
-        indexing) option. Also note GitHub Pages does not support the <code>lsi</code> option when generating sites.
+        <code>jekyll</code> command with the <code>--lsi</code> (<a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis#Latent_semantic_indexing">latent semantic indexing</a>) option. Also note GitHub Pages does not support the <code>lsi</code> option when generating sites.
 
       </p></td>
     </tr>

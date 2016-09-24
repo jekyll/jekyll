@@ -1,8 +1,31 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Colorize interpolated output in logger.info (#5239)
+  * Site template: exclude Gemfile and Gemfile.lock in site config (#5293)
+  * Fix #5233: Increase our ability to detect Windows. (#5235)
+  * update gitignore template to ignore theme gems built by user (#5326)
+  * Adds ability to link to all files (#5199)
+  * Exclude vendor by default (#5361)
+  * Add ThemeAssetsReader which reads assets from a theme (#5364)
+  * Add bundle install to jekyll new command (#5237)
+  * Add absolute_url and relative_url filters. (#5399)
+  * Site template: remove `css/` from new site scaffolding (#5402)
+
+### Bug Fixes
+
+  * Use jekyll-feed to generate the default site's RSS feed (#5196)
+  * Site#configure_theme: do not set theme unless it's a string (#5189)
+  * Convertible: set self.output in #render_all_layouts and #do_layout (#5337)
+  * Only complain about `kramdown.coderay` if it is actually in the config (#5380)
+  * Clarify documentation in theme gem's README template (#5376)
+  * Allow underscore in highlighter language (#5375)
+  * Site template: set empty url in config file by default (#5338)
+
 ### Site Enhancements
 
-  * Document for to_integer and inspect filters (#5185)
+  * Document `to_integer` and `inspect` filters (#5185)
   * Fix path in the prompt (#5194)
   * need subcommand build (#5190)
   * Add the Jekyll Cloudinary plugin (#5183)
@@ -11,23 +34,46 @@
   * Remove mention of page for link tag in release post (#5214)
   * fixed typo (#5226)
   * Add missing comma (#5222)
-  * Maintain aspect ratio with height: auto; (#5254)
+  * Maintain aspect ratio with `height: auto;` (#5254)
   * Fix a link in deployment-methods.md (#5244)
   * Documentation: improve highlight in `Creating a theme` (#5249)
+  * Bundler isn't installed by default (#5258)
+  * Update troubleshooting documentation to include fix for issue with vendored gems (#5271)
+  * Link `--lsi` option's description to Wikipedia docs on LSI (#5274)
+  * Document `--profile` option on the configuration page (#5279)
+  * Update homepage to sync with merge of #5258 (#5287)
+  * Add post about Jekyll Admin initial release (#5291)
+  * Replace liquid highlight tag with backticks (#5262)
+  * Word update (#5294)
+  * Site documentation section links always point to https://jekyllrb.com (#5281)
+  * Missing `:site, :post_render` payload documentation on site (#5280)
+  * Site: exclude README.md and .gitignore (#5304)
+  * Add link to Staticman (#5224)
+  * Update url for OpenShift (#5320)
+  * [docs] add help for missing static_file e.g. on heroku (#5334)
+  * Add a line about updating theme-gems in the docs (#5318)
+  * Explain how to copy a theme's files (#5335)
+  * [docs] .md as default extension in examples (#5316)
+  * Fix small typo in docs (#5347)
+  * Add missing period to sentence in first paragraph. (#5372)
+  * added jekyll-spotify plugin (#5369)
+  * Add jekyll-menus to the list of plugins. (#5397)
 
 ### Development Fixes
 
   * Update appveyor.yml and fix optional deps for Ruby x64 (#5180)
   * Improve tests for Jekyll::PluginManager (#5167)
   * Update Ruby versions in travis.yml (#5221)
-
-### Bug Fixes
-
-  * Use jekyll-feed to generate the default site's RSS feed (#5196)
-
-### Minor Enhancements
-
-  * Colorize interpolated output in logger.info (#5239)
+  * Avoid installing unecessary gems for site testing (#5272)
+  * Proposal: Affinity teams and their captains (#5273)
+  * Replace duplicate with postive local test in issue template (#5286)
+  * Update AppVeyor config. (#5240)
+  * Execute jekyll from clone instead of defined binary when running 'script/default-site' (#5295)
+  * rubocop: lib/jekyll/document.rb complexity fixes (#5045)
+  * Proxy a number of Convertible methods to Renderer (#5308)
+  * Run executable for Cucumber via Ruby instead of Shell (#5383)
+  * Appease Rubocop (#5381)
+  * remove features' directories on windows with proper access (#5389)
 
 ## 3.2.1 / 2016-08-02
 

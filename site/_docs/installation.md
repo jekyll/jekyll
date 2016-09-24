@@ -7,7 +7,7 @@ permalink: /docs/installation/
 Getting Jekyll installed and ready-to-go should only take a few minutes.
 If it ever becomes a pain, please [file an issue]({{ site.repository }}/issues/new)
 (or submit a pull request) describing the issue you
-encountered and how we might make the process easier
+encountered and how we might make the process easier.
 
 ### Requirements
 
@@ -37,9 +37,9 @@ The best way to install Jekyll is via
 [RubyGems](http://rubygems.org/pages/download). At the terminal prompt,
 simply run the following command to install Jekyll:
 
-{% highlight shell %}
+```sh
 $ gem install jekyll
-{% endhighlight %}
+```
 
 All of Jekyll’s gem dependencies are automatically installed by the above
 command, so you won’t have to worry about them at all. If you have problems
@@ -62,28 +62,28 @@ community can improve the experience for everyone.
 In order to install a pre-release, make sure you have all the requirements
 installed properly and run:
 
-{% highlight shell %}
+```sh
 gem install jekyll --pre
-{% endhighlight %}
+```
 
 This will install the latest pre-release. If you want a particular pre-release,
 use the `-v` switch to indicate the version you'd like to install:
 
-{% highlight shell %}
+```sh
 gem install jekyll -v '2.0.0.alpha.1'
-{% endhighlight %}
+```
 
 If you'd like to install a development version of Jekyll, the process is a bit
 more involved. This gives you the advantage of having the latest and greatest,
 but may be unstable.
 
-{% highlight shell %}
+```sh
 $ git clone git://github.com/jekyll/jekyll.git
 $ cd jekyll
 $ script/bootstrap
 $ bundle exec rake build
 $ ls pkg/*.gem | head -n 1 | xargs gem install -l
-{% endhighlight %}
+```
 
 ## Optional Extras
 
