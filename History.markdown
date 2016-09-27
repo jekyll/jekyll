@@ -61,6 +61,7 @@
   * Add jekyll-menus to the list of plugins. (#5397)
   * macOS and one grammar fix (#5403)
   * Add documentation for relative_url and absolute_url (#5405)
+  * Bugfix on logo in JSON-LD (#5421)
 
 ### Development Fixes
 
