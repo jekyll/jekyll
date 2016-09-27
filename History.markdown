@@ -12,6 +12,7 @@
   * Add bundle install to jekyll new command (#5237)
   * Add absolute_url and relative_url filters. (#5399)
   * Site template: remove `css/` from new site scaffolding (#5402)
+  * Site template: Move contents of the index.html page to the 'home' layout (#5420)
 
 ### Bug Fixes
 
