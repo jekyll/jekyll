@@ -22,7 +22,7 @@ url: https://jekyllrb.com
 twitter:
   username: jekyllrb
 
-logo: img/logo-2x.png
+logo: /img/logo-2x.png
 
 gems:
   - jekyll-feed
