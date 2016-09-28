@@ -14,6 +14,7 @@
   * Site template: remove `css/` from new site scaffolding (#5402)
   * Site template: Move contents of the index.html page to the 'home' layout (#5420)
   * Exclude node_modules by default (#5210)
+  * Run hooks in priority order. (#5157)
 
 ### Bug Fixes
 
