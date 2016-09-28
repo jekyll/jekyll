@@ -60,8 +60,9 @@
   * added jekyll-spotify plugin (#5369)
   * Add jekyll-menus to the list of plugins. (#5397)
   * macOS and one grammar fix (#5403)
-  * Add documentation for relative_url and absolute_url (#5405)
+  * Add documentation for `relative_url` and `absolute_url` (#5405)
   * Bugfix on logo in JSON-LD (#5421)
+  * Fix Travis.ci documentation (#5413)
 
 ### Development Fixes
 
@@ -78,8 +79,7 @@
   * Run executable for Cucumber via Ruby instead of Shell (#5383)
   * Appease Rubocop (#5381)
   * remove features' directories on windows with proper access (#5389)
-  * site_configuration.feature: use UTC format in timezone (#5416)
-  * Fix Travis.ci documentation (#5413)
+  * `site_configuration.feature`: use UTC format in timezone (#5416)
 
 ## 3.2.1 / 2016-08-02
 
