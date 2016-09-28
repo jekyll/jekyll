@@ -79,6 +79,7 @@
   * Appease Rubocop (#5381)
   * remove features' directories on windows with proper access (#5389)
   * site_configuration.feature: use UTC format in timezone (#5416)
+  * Fix Travis.ci documentation (#5413)
 
 ## 3.2.1 / 2016-08-02
 
