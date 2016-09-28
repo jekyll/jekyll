@@ -112,6 +112,14 @@ class TestStaticFile < JekyllUnitTest
       assert_equal Time.new.to_i, @static_file.mtime
     end
 
+    should "only set modified time if not a symlink" do
+      expect(File).to receive(:symlink?).and_return(true)
+      expect(File).not_to receive(:utime)
+      @static_file.write(dest_dir)
+
+      allow(File).to receive(:symlink?).and_call_original
+    end
+
     should "known if the source path is modified, when it is" do
       sleep 1
       modify_dummy_file(@filename)
