@@ -69,6 +69,7 @@
   * Bugfix on logo in JSON-LD (#5421)
   * Fix Travis.ci documentation (#5413)
   * [docs] Update documentation regarding `bundle install` after `jekyll new` (#5428)
+  * Replace classic box-sizing reset with inheritance reset (#5411)
 
 ### Development Fixes
 
