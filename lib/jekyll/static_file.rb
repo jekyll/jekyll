@@ -146,7 +146,10 @@ module Jekyll
       else
         FileUtils.copy_entry(path, dest_path)
       end
-      File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
+
+      unless File.symlink?(dest_path)
+        File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
+      end
     end
   end
 end
