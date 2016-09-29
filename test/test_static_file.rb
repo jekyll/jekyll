@@ -142,6 +142,8 @@ class TestStaticFile < JekyllUnitTest
 
     should "be able to convert to liquid" do
       expected = {
+        "basename"      => "static_file",
+        "name"          => "static_file.txt",
         "extname"       => ".txt",
         "modified_time" => @static_file.modified_time,
         "path"          => "/static_file.txt"
