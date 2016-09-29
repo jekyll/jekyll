@@ -30,10 +30,6 @@ branches:
     - themes
 
 notifications:
-  email:
-    recipients:
-      - jordon@envygeeks.io
-
   slack:
     secure: "\
       dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4Y\
