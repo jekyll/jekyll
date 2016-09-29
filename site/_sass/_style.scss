@@ -1,10 +1,14 @@
 /* Base */
 
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
+ html {
+   box-sizing: border-box;
+ }
+
+ *,
+ *:before,
+ *:after {
+   box-sizing: inherit;
+ }
 
 body {
   font: 300 21px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
