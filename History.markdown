@@ -15,6 +15,7 @@
   * Site template: Move contents of the index.html page to the 'home' layout (#5420)
   * Exclude node_modules by default (#5210)
   * Run hooks in priority order. (#5157)
+  * Add `static_file.name` and `.basename` Liquid attributes (#5264)
 
 ### Bug Fixes
 
