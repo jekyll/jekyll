@@ -27,7 +27,6 @@ group :test do
   gem "nokogiri"
   gem "rspec"
   gem "test-theme", path: File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
-  gem "win32-file" unless RUBY_PLATFORM =~ /win/
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
@@ -79,6 +78,7 @@ group :jekyll_optional_dependencies do
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
     gem "classifier-reborn", "~> 2.0"
     gem "liquid-c", "~> 3.0"
+    gem "win32-file"
   end
 end
 
