@@ -14,7 +14,11 @@ Jekyll has an extensive theme system, which allows you to leverage community-mai
 
 2. Save the changes to your `Gemfile`
 3. Run the command `bundle install` to install the theme
-4. Finally, activate the theme by adding the following to your site's `_config.yml`:
+4. Set your `/css/main.scss` to import your theme partials using the `@import` directive:
+
+        @import "my-awesome-jekyll-theme";
+
+5. Finally, activate the theme by adding the following to your site's `_config.yml`:
 
         theme: my-awesome-jekyll-theme
 
