@@ -65,6 +65,7 @@
   * Add documentation for `relative_url` and `absolute_url` (#5405)
   * Bugfix on logo in JSON-LD (#5421)
   * Fix Travis.ci documentation (#5413)
+  * [docs] Update documentation regarding `bundle install` after `jekyll new` (#5428)
 
 ### Development Fixes
 
