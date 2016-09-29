@@ -25,6 +25,7 @@
   * Clarify documentation in theme gem's README template (#5376)
   * Allow underscore in highlighter language (#5375)
   * Site template: set empty url in config file by default (#5338)
+  * Site template config: prepend 'jekyll serve' with 'bundle exec' (#5430)
 
 ### Site Enhancements
 
