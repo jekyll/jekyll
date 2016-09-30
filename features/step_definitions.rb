@@ -177,8 +177,7 @@ When(%r!^I decide to build the theme gem$!) do
   File.write(gemspec, File.read(gemspec).sub("TODO: ", ""))
   File.new("_includes/blank.html", "w")
   File.new("_sass/blank.scss", "w")
-  FileUtils.mkdir_p("assets/css")
-  File.new("assets/css/blank.scss", "w")
+  File.new("assets/blank.scss", "w")
 end
 
 #
@@ -275,7 +274,7 @@ Then(%r!^I should get an updated git index$!) do
     _layouts/page.html
     _layouts/post.html
     _sass/blank.scss
-    assets/css/blank.scss
+    assets/blank.scss
     my-cool-theme.gemspec
   )
   index.each do |file|
