@@ -33,6 +33,7 @@ module Jekyll
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
               config = opts["config"]
+              opts["url"] = default_url(opts) if Jekyll.env == "development"
               Build.process(opts)
               opts["config"] = config
               Serve.process(opts)
@@ -47,11 +48,7 @@ module Jekyll
           destination = opts["destination"]
           setup(destination)
 
-          server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
-          server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
-          Jekyll.logger.info "Server address:", server_address(server, opts)
-          launch_browser server, opts if opts["open_url"]
-          boot_or_detach server, opts
+          start_up_webrick(opts, destination)
         end
 
         # Do a base pre-setup of WEBRick so that everything is in place
@@ -101,6 +98,17 @@ module Jekyll
           opts
         end
 
+        #
+
+        private
+        def start_up_webrick(opts, destination)
+          server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
+          server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
+          Jekyll.logger.info "Server address:", server_address(server, opts)
+          launch_browser server, opts if opts["open_url"]
+          boot_or_detach server, opts
+        end
+
         # Recreate NondisclosureName under utf-8 circumstance
 
         private
@@ -123,6 +131,16 @@ module Jekyll
             :address => server.config[:BindAddress],
             :port    => server.config[:Port]
           })
+        end
+
+        #
+
+        def default_url(opts)
+          config = configuration_from_options(opts)
+          host = config["host"] == "127.0.0.1" ? "localhost" : config["host"]
+          port = config["port"]
+          protocol = config["ssl_cert"] && config["ssl_key"] ? "https" : "http"
+          "#{protocol}://#{host}:#{port}"
         end
 
         #
