@@ -179,6 +179,7 @@ Then(%r!^the (.*) directory should +(not )?exist$!) do |dir, negative|
 end
 
 #
+
 Then(%r!^I should (not )?see "(.*)" in "(.*)"$!) do |negative, text, file|
   step %(the "#{file}" file should exist)
   regexp = Regexp.new(text, Regexp::MULTILINE)
@@ -186,6 +187,34 @@ Then(%r!^I should (not )?see "(.*)" in "(.*)"$!) do |negative, text, file|
     expect(file_contents(file)).to match regexp
   else
     expect(file_contents(file)).not_to match regexp
+  end
+end
+
+#
+
+Then(%r!^I should (not )?see "(.*)" in "(.*)" if on Windows$!) do |negative, text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text, Regexp::MULTILINE)
+  if negative.nil? || negative.empty?
+    if on_windows
+      expect(file_contents(file)).to match regexp
+    else
+      expect(file_contents(file)).not_to match regexp
+    end
+  end
+end
+
+#
+
+Then(%r!^I should (not )?see "(.*)" in "(.*)" unless Windows$!) do |negative, text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text, Regexp::MULTILINE)
+  if negative.nil? || negative.empty?
+    if on_windows
+      expect(file_contents(file)).not_to match regexp
+    else
+      expect(file_contents(file)).to match regexp
+    end
   end
 end
 
