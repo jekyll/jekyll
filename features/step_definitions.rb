@@ -166,7 +166,7 @@ end
 #
 
 When(%r!^I run git add .$!) do
-  run_in_shell("git", "add", ".")
+  run_in_shell("git", "add", ".", "--verbose")
 end
 
 #
@@ -259,6 +259,27 @@ Then(%r!^I should (not )?see "(.*)" in the build output$!) do |negative, text|
     expect(jekyll_run_output).to match Regexp.new(text)
   else
     expect(jekyll_run_output).not_to match Regexp.new(text)
+  end
+end
+
+#
+
+Then(%r!^I should get an updated git index$!) do
+  index = %w(
+    .gitignore
+    Gemfile
+    LICENSE.txt
+    README.md
+    _includes/blank.html
+    _layouts/default.html
+    _layouts/page.html
+    _layouts/post.html
+    _sass/blank.scss
+    assets/css/blank.scss
+    my-cool-theme.gemspec
+  )
+  index.each do |file|
+    expect(jekyll_run_output).to match file
   end
 end
 

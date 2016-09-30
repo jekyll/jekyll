@@ -10,18 +10,17 @@ Feature: Building Theme Gems
 
   Scenario: Checking if a bonafide Theme gem will be built from generated scaffolding
     When I run jekyll new-theme my-cool-theme
-    Then I should get a zero exit status
-    And the my-cool-theme directory should exist
+    Then the my-cool-theme directory should exist
     When I decide to build the theme gem
-    Then I should get a zero exit status
+    Then the "_includes/blank.html" file should exist
+    Then the "_sass/blank.scss" file should exist
+    Then the "assets/css/blank.scss" file should exist
     When I run git add .
-    Then I should get a zero exit status
+    Then I should get an updated git index
     When I run gem build my-cool-theme.gemspec
-    Then I should get a zero exit status
-    And the "./my-cool-theme-0.1.0.gem" file should exist
+    Then the "./my-cool-theme-0.1.0.gem" file should exist
     When I run gem unpack my-cool-theme-0.1.0.gem
-    Then I should get a zero exit status
-    And the my-cool-theme-0.1.0 directory should exist
+    Then the my-cool-theme-0.1.0 directory should exist
     And the "my-cool-theme-0.1.0/_layouts/default.html" file should exist
     And the "my-cool-theme-0.1.0/_includes/blank.html" file should exist
     And the "my-cool-theme-0.1.0/_sass/blank.scss" file should exist
