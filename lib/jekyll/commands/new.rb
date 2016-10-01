@@ -50,15 +50,6 @@ module Jekyll
           ERB.new(File.read(File.expand_path(scaffold_path, site_template))).result
         end
 
-        def create_gemfile(path)
-          gemfile_template = File.expand_path("Gemfile.erb", site_template)
-          gemfile_copy = ERB.new(File.read(gemfile_template)).result(binding)
-
-          File.open(File.expand_path("Gemfile", path), "w") do |f|
-            f.write(gemfile_copy)
-          end
-        end
-
         # Internal: Gets the filename of the sample post to be created
         #
         # Returns the filename of the sample post, as a String
@@ -70,28 +61,32 @@ module Jekyll
 
         def create_site(new_blog_path)
           create_sample_files new_blog_path
-
-          File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
-            f.write(scaffold_post_content)
-          end
         end
 
         def preserve_source_location?(path, options)
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
-        def erb_files
-          erb_file = File.join("*", "*.erb")
-          Dir.glob(erb_file)
+        def create_sample_files(path)
+          FileUtils.mkdir_p(File.expand_path("_posts", path))
+
+          static_files = %w(index.md about.md _config.yml .gitignore)
+          static_files.each do |file|
+            write_file(file, template(file), path)
+          end
+
+          write_file("Gemfile", template("Gemfile.erb"), path)
+          write_file(initialized_post_name, template(scaffold_path), path)
         end
 
-        def create_sample_files(path)
-          FileUtils.cp_r site_template + "/.", path
-          create_gemfile path
-          erb_files.each do |file|
-            FileUtils.rm file
-          end
-          FileUtils.rm File.expand_path(scaffold_path, path)
+        def write_file(filename, contents, path)
+          full_path = File.expand_path(filename, path)
+          File.write(full_path, contents)
+        end
+
+        def template(filename)
+          erb ||= ThemeBuilder::ERBRenderer.new(self)
+          erb.render(File.read(File.expand_path(filename, site_template)))
         end
 
         def site_template
