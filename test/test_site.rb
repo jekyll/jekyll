@@ -438,6 +438,21 @@ class TestSite < JekyllUnitTest
         )
       end
 
+      should "auto load yaml files in subdirectory with a period in the name" do
+        site = Site.new(site_configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(
+          source_dir, "_data", "categories.01", "dairy.yaml"
+        ))
+
+        assert_equal site.data["categories.01"]["dairy"], file_content
+        assert_equal(
+          site.site_payload["site"]["data"]["categories.01"]["dairy"],
+          file_content
+        )
+      end
+
       should "load symlink files in unsafe mode" do
         site = Site.new(site_configuration("safe" => false))
         site.process
