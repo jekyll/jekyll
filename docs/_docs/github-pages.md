@@ -53,24 +53,33 @@ few minor details.
     differences between various versions of the gems. To use the
     currently-deployed version of the gem in your project, add the
     following to your <code>Gemfile</code>:
+  </p>
 
-    <p><code>source 'https://rubygems.org'</code></p>
+  {% highlight ruby %}
+    source 'https://rubygems.org'
 
-    <p><code>require 'json'</code></p>
-    <p><code>require 'open-uri'</code></p>
-    <p><code>versions = JSON.parse(open('https://pages.github.com/versions.json').read)</code></p>
+    require 'json'
+    require 'open-uri'
+    versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
-    <p><code>gem 'github-pages', versions['github-pages']</code></p>
+    gem 'github-pages', versions['github-pages']
+  {% endhighlight %}
 
+  <p>
     This will ensure that when you run <code>bundle install</code>, you
     have the correct version of the <code>github-pages</code> gem.
 
     If that fails, simplify it:
+  </p>
 
-    <p><code>source 'https://rubygems.org'</code></p>
 
-    <p><code>gem 'github-pages'</code></p>
+  {% highlight ruby %}
+    source 'https://rubygems.org'
 
+    gem 'github-pages'
+  {% endhighlight %}
+
+  <p>
     And be sure to run <code>bundle update</code> often.
 
     If you like to install <code>pages-gem</code> on Windows you can find instructions by Jens Willmer on <a href="http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins">how to install github-pages gem on Windows (x64)</a>.
