@@ -41,7 +41,6 @@ module Jekyll
   autoload :Convertible,         "jekyll/convertible"
   autoload :Deprecator,          "jekyll/deprecator"
   autoload :Document,            "jekyll/document"
-  autoload :Draft,               "jekyll/draft"
   autoload :EntryFilter,         "jekyll/entry_filter"
   autoload :Errors,              "jekyll/errors"
   autoload :Excerpt,             "jekyll/excerpt"
