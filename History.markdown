@@ -29,6 +29,7 @@
   * Site template config: prepend 'jekyll serve' with 'bundle exec' (#5430)
   * Don't call `File.utime` for StaticFiles if it's a symlink (#5427)
   * Fix handling of non-ASCII characters in new `*_url` filters (#5410)
+  * Remove autoload of Draft which no longer exists. (#5441)
 
 ### Site Enhancements
 
