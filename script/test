@@ -40,7 +40,7 @@ for ruby in $rubies; do
   then
     testopts=""
   else
-    testopts="--profile"
+    testopts=""
   fi
 
   if [[ $# -lt 1 ]]
