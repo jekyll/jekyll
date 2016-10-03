@@ -367,6 +367,15 @@ class TestFilters < JekyllUnitTest
         })
         assert_equal "http://example.com/base", filter.absolute_url(page_url)
       end
+
+      should "normalize international URLs" do
+        page_url = ""
+        filter = make_filter_mock({
+          "url"     => "http://ümlaut.example.org/",
+          "baseurl" => nil
+        })
+        assert_equal "http://xn--mlaut-jva.example.org/", filter.absolute_url(page_url)
+      end
     end
 
     context "relative_url filter" do
@@ -384,6 +393,11 @@ class TestFilters < JekyllUnitTest
         page_url = "about/my_favorite_page/"
         filter = make_filter_mock({ "baseurl" => "base" })
         assert_equal "/base/#{page_url}", filter.relative_url(page_url)
+      end
+
+      should "normalize international URLs" do
+        page_url = "错误.html"
+        assert_equal "/base/%E9%94%99%E8%AF%AF.html", @filter.relative_url(page_url)
       end
 
       should "be ok with a nil 'baseurl'" do

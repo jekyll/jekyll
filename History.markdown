@@ -12,6 +12,10 @@
   * Add bundle install to jekyll new command (#5237)
   * Add absolute_url and relative_url filters. (#5399)
   * Site template: remove `css/` from new site scaffolding (#5402)
+  * Site template: Move contents of the index.html page to the 'home' layout (#5420)
+  * Exclude node_modules by default (#5210)
+  * Run hooks in priority order. (#5157)
+  * Add `static_file.name` and `.basename` Liquid attributes (#5264)
 
 ### Bug Fixes
 
@@ -22,6 +26,9 @@
   * Clarify documentation in theme gem's README template (#5376)
   * Allow underscore in highlighter language (#5375)
   * Site template: set empty url in config file by default (#5338)
+  * Site template config: prepend 'jekyll serve' with 'bundle exec' (#5430)
+  * Don't call `File.utime` for StaticFiles if it's a symlink (#5427)
+  * Fix handling of non-ASCII characters in new `*_url` filters (#5410)
 
 ### Site Enhancements
 
@@ -59,6 +66,11 @@
   * added jekyll-spotify plugin (#5369)
   * Add jekyll-menus to the list of plugins. (#5397)
   * macOS and one grammar fix (#5403)
+  * Add documentation for `relative_url` and `absolute_url` (#5405)
+  * Bugfix on logo in JSON-LD (#5421)
+  * Fix Travis.ci documentation (#5413)
+  * [docs] Update documentation regarding `bundle install` after `jekyll new` (#5428)
+  * Replace classic box-sizing reset with inheritance reset (#5411)
 
 ### Development Fixes
 
@@ -75,6 +87,9 @@
   * Run executable for Cucumber via Ruby instead of Shell (#5383)
   * Appease Rubocop (#5381)
   * remove features' directories on windows with proper access (#5389)
+  * `site_configuration.feature`: use UTC format in timezone (#5416)
+  * swallow bundle output from `jekyll new` while in CI (#5408)
+  * Add .editorconfig (#5412)
 
 ## 3.2.1 / 2016-08-02
 

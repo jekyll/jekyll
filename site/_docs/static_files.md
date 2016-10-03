@@ -26,7 +26,7 @@ following metadata:
       <td><p><code>file.path</code></p></td>
       <td><p>
 
-        The relative path to the file.
+        The relative path to the file, e.g <code>/assets/img/image.jpg</code>
 
       </p></td>
     </tr>
@@ -34,7 +34,23 @@ following metadata:
       <td><p><code>file.modified_time</code></p></td>
       <td><p>
 
-        The `Time` the file was last modified.
+        The `Time` the file was last modified, e.g <code>2016-04-01 16:35:26 +0200</code>
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>file.name</code></p></td>
+      <td><p>
+
+        The string name of the file e.g. <code>image.jpg</code> for <code>image.jpg</code>
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>file.basename</code></p></td>
+      <td><p>
+
+        The string basename of the file e.g. <code>image</code> for <code>image.jpg</code>
 
       </p></td>
     </tr>

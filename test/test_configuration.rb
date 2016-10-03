@@ -48,6 +48,12 @@ class TestConfiguration < JekyllUnitTest
     end
   end
 
+  context "the defaults" do
+    should "exclude node_modules" do
+      assert_includes Configuration.from({})["exclude"], "node_modules"
+    end
+  end
+
   context "#add_default_collections" do
     should "no-op if collections is nil" do
       result = Configuration[{ "collections" => nil }].add_default_collections

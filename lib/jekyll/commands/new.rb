@@ -133,7 +133,11 @@ RUBY
           Jekyll::External.require_with_graceful_fail "bundler"
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
-            system("bundle", "install")
+            if ENV["CI"]
+              system("bundle", "install", "--quiet")
+            else
+              system("bundle", "install")
+            end
           end
         end
       end
