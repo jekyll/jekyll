@@ -42,48 +42,46 @@ There are two basic types available: user/organization pages and project pages.
 The way to deploy these two types of sites are nearly identical, except for a
 few minor details.
 
-<div class="note protip">
-  <h5>Use the <code>github-pages</code> gem</h5>
-  <p>
-    Our friends at GitHub have provided the
-    <a href="https://github.com/github/pages-gem">github-pages</a>
-    gem which is used to manage Jekyll and its dependencies on
-    GitHub Pages. Using it in your projects means that when you deploy
-    your site to GitHub Pages, you will not be caught by unexpected
-    differences between various versions of the gems. To use the
-    currently-deployed version of the gem in your project, add the
-    following to your <code>Gemfile</code>:
-  </p>
+<div class="note protip" markdown="1">
+##### Use the `github-pages` gem
 
-  {% highlight ruby %}
-    source 'https://rubygems.org'
+Our friends at GitHub have provided the
+<a href="https://github.com/github/pages-gem">github-pages</a>
+gem which is used to manage Jekyll and its dependencies on
+GitHub Pages. Using it in your projects means that when you deploy
+your site to GitHub Pages, you will not be caught by unexpected
+differences between various versions of the gems. To use the
+currently-deployed version of the gem in your project, add the
+following to your `Gemfile`:
 
-    require 'json'
-    require 'open-uri'
-    versions = JSON.parse(open('https://pages.github.com/versions.json').read)
+<div class="code-block" markdown="1">
+```ruby
+source 'https://rubygems.org'
 
-    gem 'github-pages', versions['github-pages']
-  {% endhighlight %}
+require 'json'
+require 'open-uri'
+versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
-  <p>
-    This will ensure that when you run <code>bundle install</code>, you
-    have the correct version of the <code>github-pages</code> gem.
+gem 'github-pages', versions['github-pages']
+```
+</div>
 
-    If that fails, simplify it:
-  </p>
+This will ensure that when you run `bundle install`, you
+have the correct version of the `github-pages` gem.
 
+If that fails, simplify it:
 
-  {% highlight ruby %}
-    source 'https://rubygems.org'
+<div class="code-block" markdown="1">
+```ruby
+source 'https://rubygems.org'
 
-    gem 'github-pages'
-  {% endhighlight %}
+gem 'github-pages'
+```
+</div>
 
-  <p>
-    And be sure to run <code>bundle update</code> often.
+And be sure to run `bundle update` often.
 
-    If you like to install <code>pages-gem</code> on Windows you can find instructions by Jens Willmer on <a href="http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins">how to install github-pages gem on Windows (x64)</a>.
-  </p>
+If you like to install `pages-gem` on Windows you can find instructions by Jens Willmer on <a href="http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins">how to install github-pages gem on Windows (x64)</a>.
 </div>
 
 <div class="note info">
