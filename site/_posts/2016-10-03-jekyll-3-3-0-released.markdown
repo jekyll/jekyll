@@ -26,8 +26,8 @@ if it has YAML front matter, it will be converted and renderd. No YAML
 front matter, and it will simply be copied over like a static asset. Neat,
 huh?
 
-See our [documentation on the subject](/docs/assets#assets-directory) for
-more info.
+See our [documentation on the subject]({{ "/docs/themes/#assets" | relative_url }})
+for more info.
 
 ### 2. `relative_url` and `absolute_url` filters
 
@@ -83,7 +83,7 @@ of their free time to making this release happen:
 
 !! TODO: Add list of contributors for this release!
 
-[Full release notes]({{ "/docs/history/" | relative_url }}) are available
+[Full release notes]({{ "/docs/history/#v3-3-0" | relative_url }}) are available
 for your perusal. If you notice any issues, please don't hesitate to file a
 bug report.
 
