@@ -446,9 +446,9 @@ class TestSite < JekyllUnitTest
           source_dir, "_data", "categories.01", "dairy.yaml"
         ))
 
-        assert_equal site.data["categories.01"]["dairy"], file_content
+        assert_equal site.data["categories01"]["dairy"], file_content
         assert_equal(
-          site.site_payload["site"]["data"]["categories.01"]["dairy"],
+          site.site_payload["site"]["data"]["categories01"]["dairy"],
           file_content
         )
       end

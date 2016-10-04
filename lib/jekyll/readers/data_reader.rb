@@ -38,7 +38,7 @@ module Jekyll
         next if @entry_filter.symlink?(path)
 
         if File.directory?(path)
-          read_data_to(path, data[entry] = {})
+          read_data_to(path, data[sanitize_filename(entry)] = {})
         else
           key = sanitize_filename(File.basename(entry, ".*"))
           data[key] = read_data_file(path)
