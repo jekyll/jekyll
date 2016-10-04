@@ -29,6 +29,20 @@ module Jekyll
         ).normalize.to_s
       end
 
+      # Produces the path to the given asset relative to the assets directory at the
+      # domain root based on site.baseurl
+      #
+      # input - the asset file relative to the 'assets' directory. The string may also
+      #         include any subfolder(s) the asset may be a part of.
+      #           e.g. "main.css" or "css/main.css"
+      #
+      # Returns a path relative to the assets directory as a String.
+      def asset_url(input)
+        relative_url(
+          "/assets" + ensure_leading_slash(input.to_s)
+        )
+      end
+
       private
       def ensure_leading_slash(input)
         return input if input.nil? || input.empty? || input.start_with?("/")
