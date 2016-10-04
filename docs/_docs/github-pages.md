@@ -43,6 +43,9 @@ The way to deploy these two types of sites are nearly identical, except for a
 few minor details.
 
 <div class="note protip" markdown="1">
+<div markdown="1">
+</div>
+
 ##### Use the `github-pages` gem
 
 Our friends at GitHub have provided the
@@ -55,6 +58,9 @@ currently-deployed version of the gem in your project, add the
 following to your `Gemfile`:
 
 <div class="code-block" markdown="1">
+<div markdown="1">
+</div>
+
 ```ruby
 source 'https://rubygems.org'
 
@@ -72,6 +78,9 @@ have the correct version of the `github-pages` gem.
 If that fails, simplify it:
 
 <div class="code-block" markdown="1">
+<div markdown="1">
+</div>
+
 ```ruby
 source 'https://rubygems.org'
 
