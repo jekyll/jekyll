@@ -670,6 +670,11 @@ h5 > code,
   font-size: 0.8em;
 }
 
+.code-block {
+  margin: 10px 0;
+  code { background: none; }
+}
+
 .highlight {
   margin: 1em 0;
   padding: 10px 0;
