@@ -589,6 +589,40 @@ CONTENT
     end
   end
 
+  context "simple page with nested post linking and path not used in `post_url`" do
+    setup do
+      content = <<CONTENT
+---
+title: Deprecated Post linking
+---
+
+- 1 {% post_url 2008-11-21-nested %}
+CONTENT
+      create_post(content, {
+        "permalink"   => "pretty",
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "read_posts"  => true
+      })
+    end
+
+    should "not cause an error" do
+      refute_match(%r!markdown\-html\-error!, @result)
+    end
+
+    should "have the url to the \"nested\" post from 2008-11-21" do
+      assert_match %r!1\s/2008/11/21/nested/!, @result
+    end
+
+    should "throw a deprecation warning" do
+      deprecation_warning = "       Deprecation: A call to "\
+        "'{{ post_url 2008-11-21-nested }}' did not match a post using the new matching "\
+        "method of checking name (path-date-slug) equality. Please make sure that you "\
+        "change this tag to match the post's name exactly."
+      assert_includes Jekyll.logger.messages, deprecation_warning
+    end
+  end
+
   context "simple page with invalid post name linking" do
     should "cause an error" do
       content = <<CONTENT

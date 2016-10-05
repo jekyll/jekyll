@@ -14,7 +14,8 @@ module Jekyll
             "'#{name}' does not contain valid date and/or title."
         end
 
-        @name_regex = %r!^#{path}#{date}-#{slug}\.[^.]+!
+        @name_regex = %r!^_posts/#{path}#{date}-#{slug}\.[^.]+|
+          ^#{path}_posts/?#{date}-#{slug}\.[^.]+!x
       end
 
       def post_date
@@ -23,7 +24,7 @@ module Jekyll
       end
 
       def ==(other)
-        other.basename.match(@name_regex)
+        other.relative_path.match(@name_regex)
       end
 
       def deprecated_equality(other)
