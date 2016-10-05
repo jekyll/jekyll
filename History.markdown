@@ -17,6 +17,7 @@
   * Run hooks in priority order. (#5157)
   * Add `static_file.name` and `.basename` Liquid attributes (#5264)
   * set site.url in dev environment to `http://localhost:4000` (#5431)
+  * Add support for indented link references on excerpt (#5212)
 
 ### Bug Fixes
 
