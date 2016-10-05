@@ -33,6 +33,7 @@
   * Fix handling of non-ASCII characters in new `*_url` filters (#5410)
   * Remove autoload of Draft which no longer exists. (#5441)
   * Fix issue where Windows drive name is stripped from Jekyll.sanitized_path incorrectly (#5256)
+  * Fix bug where `post_url` tag matched incorrect post with subdirectory (#4873)
 
 ### Site Enhancements
 
