@@ -510,7 +510,9 @@ numbers from the highlighted code.
 
 ### Link
 
-If you would like to include a link to a collection's document, a post, a page or a file the `link` tag will generate the correct permalink URL for the path you specify.
+If you want to include a link to a collection's document, a post, a page
+or a file the `link` tag will generate the correct permalink URL for the path
+you specify.
 
 You must include the file extension when using the `link` tag.
 
