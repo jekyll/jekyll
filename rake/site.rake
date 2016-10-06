@@ -123,7 +123,7 @@ namespace :site do
 
   desc "Write the site latest_version.txt file"
   task :version_file do
-    File.open('site/latest_version.txt', 'wb') { |f| f.puts(version) } unless version =~ /(beta|rc|alpha)/i
+    File.open("#{docs_folder}/latest_version.txt", 'wb') { |f| f.puts(version) } unless version =~ /(beta|rc|alpha)/i
   end
 
   namespace :releases do
