@@ -76,6 +76,7 @@
   * Fix Travis.ci documentation (#5413)
   * [docs] Update documentation regarding `bundle install` after `jekyll new` (#5428)
   * Replace classic box-sizing reset with inheritance reset (#5411)
+  * Update Wikipedia YAML list link (#5452)
 
 ### Development Fixes
 
