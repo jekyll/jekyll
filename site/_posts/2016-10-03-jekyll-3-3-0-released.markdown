@@ -7,24 +7,26 @@ version: 3.3.0
 categories: [release]
 ---
 
-We have tons of new features for you in our latest release of Jekyll. Three
-key things you might want to give a whirl:
+There are tons of great new quality-of-life features you can use in 3.3.
+Three key things you might want to try:
 
 ### 1. Themes can now ship static & dynamic assets in an `/assets` directory
 
-We're really stoked about this one. In Jekyll 3.2, we shipped the ability
-to use a theme that was packaged as a gem. Due to security necessities and
-ease-of-use concerns, this initial ship only included support for includes,
-layouts, and sass partials. A theme couldn't write any CSS, JavaScript, or
-content to your site.
+In Jekyll 3.2, we shipped the ability to use a theme that was packaged as a
+[gem](http://guides.rubygems.org/). 3.2 included support for includes,
+layouts, and sass partials. In 3.3, we're adding assets to that list.
 
 In an effort to make theme management a bit easier, any files you put into
 `/assets` in your theme will be read in as though they were part of the
 user's site. This means you can ship SCSS and CoffeeScript, images and
-webfonts, JSON and other data. Same rules apply here as in a Jekyll site:
-if it has YAML front matter, it will be converted and renderd. No YAML
-front matter, and it will simply be copied over like a static asset. Neat,
-huh?
+webfonts, and so on -- anything you'd consider a part of the
+*presentation*. Same rules apply here as in a Jekyll site: if it has YAML
+front matter, it will be converted and rendered. No YAML front matter, and
+it will simply be copied over like a static asset.
+
+Note that if a user has a file of the same path, the theme content will not
+be included in the site, i.e. a user's `/assets/main.scss` will be written
+instead of a theme's `/assets/main.scss`. It's
 
 See our [documentation on the subject]({{ "/docs/themes/#assets" | relative_url }})
 for more info.
@@ -43,7 +45,16 @@ you pass it:
 {% endraw %}
 {% endhighlight %}
 
-A result of `relative_url` will safely always yield a link which is
+By default, `baseurl` is set to `""` and therefore yields (never set to
+`"/"`):
+
+{% highlight liquid %}
+{% raw %}
+{{ "/docs/assets/" | relative_url }} => /docs/assets
+{% endraw %}
+{% endhighlight %}
+
+A result of `relative_url` will safely always produce a URL which is
 relative to the domain root. A similar principle applies to `absolute_url`.
 It prepends your `baseurl` and `url` values, making absolute URL's all the
 easier to make:
@@ -67,8 +78,9 @@ the value of the `host`, `port`, and SSL-related options. This defaults to
 `url: http://localhost:4000`. When you are developing locally, `site.url`
 will yield `http://localhost:4000`.
 
-Note that this only applies when `JEKYLL_ENV` is equal to `development`. If
-you set `JEKYLL_ENV=production` and run `jekyll serve`, it will not
+This happens by default when running Jekyll locally. It will not be set if
+you set `JEKYLL_ENV=production` and run `jekyll serve`. If `JEKYLL_ENV` is
+any value except `development` (its default value), Jekyll will not
 overwrite the value of `url` in your config. And again, this only applies
 to serving, not to building.
 
