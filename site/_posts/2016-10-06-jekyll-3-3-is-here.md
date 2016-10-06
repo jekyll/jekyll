@@ -1,7 +1,7 @@
 ---
 layout: news_item
 title: 'Jekyll 3.3 is here with better theme support, new URL filters, and tons more'
-date: 2016-10-03 17:08:38 -0700
+date: 2016-10-06 11:10:38 -0700
 author: parkr
 version: 3.3.0
 categories: [release]
@@ -93,7 +93,15 @@ greater stability and reliability to your everyday development workflow.
 As always, thanks to our many contributors who contributed countless hours
 of their free time to making this release happen:
 
-!! TODO: Add list of contributors for this release!
+Anatoliy Yastreb, Anthony Gaudino, Antonio, Ashwin Maroli, Ben Balter,
+Charles Horn, Chris Finazzo, Daniel Chapman, David Zhang, Eduardo
+Bouças, Edward Thomson, Eloy Espinaco, Florian Thomas, Frank Taillandier,
+Gerardo, Heng Kwokfu, Heng, K. (Stephen), Jeff Kolesky, Jonathan Thornton,
+Jordon Bedwell, Jussi Kinnula, Júnior Messias, Kyle O'Brien, Manmeet Gill,
+Mark H. Wilkinson, Marko Locher, Mertcan GÖKGÖZ, Michal Švácha, Mike
+Kasberg, Nadjib Amar, Nicolas Hoizey, Nicolas Porcel, Parker Moore, Pat
+Hawks, Patrick Marsceill, Stephen Checkoway, Stuart Kent, XhmikosR, Zlatan
+Vasović, mertkahyaoglu, shingo-nakanishi, and vohedge.
 
 [Full release notes]({{ "/docs/history/#v3-3-0" | relative_url }}) are available
 for your perusal. If you notice any issues, please don't hesitate to file a
