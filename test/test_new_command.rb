@@ -34,8 +34,8 @@ class TestNewCommand < JekyllUnitTest
       refute_exist @full_path
       capture_stdout { Jekyll::Commands::New.process(@args) }
       assert_exist gemfile
-      assert_match(%r!gem "jekyll", "#{Jekyll::VERSION}"!, File.read(gemfile))
-      assert_match(%r!gem "github-pages"!, File.read(gemfile))
+      assert_match(%r!gem "jekyll", "~> #{Jekyll::VERSION}"!, File.read(gemfile))
+      assert_match(%r!gem "minima"!, File.read(gemfile))
     end
 
     should "display a success message" do
@@ -95,9 +95,10 @@ class TestNewCommand < JekyllUnitTest
     end
 
     should "force created folder" do
-      capture_stdout { Jekyll::Commands::New.process(@args) }
-      output = capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
-      assert_match(%r!New jekyll site installed in!, output)
+      capture_stdout { Jekyll::Commands::New.process(@args, "--force") }
+      output = Jekyll.logger.messages[-3]
+      success_message = "New jekyll site installed in #{@full_path.cyan}."
+      assert_includes output, success_message
     end
 
     should "skip bundle install when opted to" do
