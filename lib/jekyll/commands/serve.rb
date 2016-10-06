@@ -129,7 +129,7 @@ module Jekyll
             server.config[:SSLEnable],
             server.config[:BindAddress],
             server.config[:Port],
-            options["baseurl"],
+            options["baseurl"]
           )
         end
 
