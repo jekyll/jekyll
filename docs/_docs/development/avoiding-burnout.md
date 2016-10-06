@@ -1,6 +1,11 @@
-# Maintainers: Avoiding Burnout
+---
+title: "Avoiding Burnout"
+layout: docs
+permalink: /docs/development/avoiding-burnout/
+---
 
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
+{: .note .info }
 
 # 1. Use Jekyll
 

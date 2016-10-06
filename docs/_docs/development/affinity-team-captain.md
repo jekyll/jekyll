@@ -1,6 +1,11 @@
-# Affinity Team Captains
+---
+title: Affinity Team Captains
+layout: docs
+permalink: /docs/development/affinity-team-captain/
+---
 
 **This guide is for affinity team captains.** These special people are **team maintainers** of one of our [affinity teams][] and help triage and evaluate the issues and contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
+{: .note .info }
 
 ## Affinity teams & their captains
 

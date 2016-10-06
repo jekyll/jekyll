@@ -28,7 +28,7 @@ def docs_name
 end
 
 def docs_folder
-  "site"
+  "docs"
 end
 
 def gemspec_file
