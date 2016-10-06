@@ -25,8 +25,8 @@ front matter, it will be converted and rendered. No YAML front matter, and
 it will simply be copied over like a static asset.
 
 Note that if a user has a file of the same path, the theme content will not
-be included in the site, i.e. a user's `/assets/main.scss` will be written
-instead of a theme's `/assets/main.scss`. It's
+be included in the site, i.e. a user's `/assets/main.scss` will be read and
+processed if present instead of a theme's `/assets/main.scss`.
 
 See our [documentation on the subject]({{ "/docs/themes/#assets" | relative_url }})
 for more info.
