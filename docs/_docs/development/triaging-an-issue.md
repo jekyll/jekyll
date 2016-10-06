@@ -1,6 +1,11 @@
-# Maintainers: Triaging an Issue
+---
+title: "Triaging an Issue"
+layout: docs
+permalink: /docs/development/triaging-an-issue/
+---
 
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
+{: .note .info }
 
 Before evaluating an issue, it is important to identify if it is a feature
 request or a bug. For the Jekyll project the following definitions are used
