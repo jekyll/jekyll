@@ -23,8 +23,8 @@ namespace :site do
     # Generate the site in server mode.
     puts "Running Jekyll..."
     options = {
-      "source"      => File.expand_path("site"),
-      "destination" => File.expand_path("site/_site"),
+      "source"      => File.expand_path(docs_folder),
+      "destination" => File.expand_path("#{docs_folder}/_site"),
       "watch"       => true,
       "serving"     => true
     }
@@ -37,15 +37,15 @@ namespace :site do
     require "jekyll"
     Jekyll::Commands::Build.process({
       "profile" => true,
-      "source"      => File.expand_path("site"),
-      "destination" => File.expand_path("site/_site")
+      "source"      => File.expand_path(docs_folder),
+      "destination" => File.expand_path("#{docs_folder}/_site")
     })
   end
   task :build => :generate
 
   desc "Update normalize.css library to the latest version and minify"
   task :update_normalize_css do
-    Dir.chdir("site/_sass") do
+    Dir.chdir("#{docs_folder}/_sass") do
       sh 'curl "http://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
       sh 'sass "normalize.scss":"_normalize.scss" --style compressed'
       rm ['normalize.scss', Dir.glob('*.map')].flatten
@@ -84,7 +84,7 @@ namespace :site do
     ENV['JEKYLL_ENV'] = 'production'
     require "jekyll"
     Jekyll::Commands::Build.process({
-      "source"       => File.expand_path("site"),
+      "source"       => File.expand_path(docs_folder),
       "destination"  => File.expand_path("gh-pages"),
       "sass"         => { "style" => "compressed" }
     })
@@ -132,7 +132,7 @@ namespace :site do
       raise "Specify a version: rake site:releases:new['1.2.3']" unless args.version
       today = Time.new.strftime('%Y-%m-%d')
       release = args.version.to_s
-      filename = "site/_posts/#{today}-jekyll-#{release.split('.').join('-')}-released.markdown"
+      filename = "#{docs_folder}/_posts/#{today}-jekyll-#{release.split('.').join('-')}-released.markdown"
 
       File.open(filename, "wb") do |post|
         post.puts("---")
