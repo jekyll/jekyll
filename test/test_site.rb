@@ -413,6 +413,17 @@ class TestSite < JekyllUnitTest
         assert_equal site.site_payload["site"]["data"]["languages"], file_content
       end
 
+      should "include data files with period" do
+        site = Site.new(site_configuration)
+        site.process
+
+        file_content = DataReader.new(site)
+          .read_data_file(source_dir("_data", "file.with.period.yml"))
+
+        assert_equal site.data["file.with.period"], file_content
+        assert_equal site.site_payload["site"]["data"]["file.with.period"], file_content
+      end
+
       should "auto load json files" do
         site = Site.new(site_configuration)
         site.process
