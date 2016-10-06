@@ -104,12 +104,7 @@ module Jekyll
         def start_up_webrick(opts, destination)
           server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
           server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
-          Jekyll.logger.info "Server address:", server_address(
-            server.config[:SSLEnable],
-            server.config[:BindAddress],
-            server.config[:Port],
-            opts["baseurl"]
-          )
+          Jekyll.logger.info "Server address:", server_address(server, opts)
           launch_browser server, opts if opts["open_url"]
           boot_or_detach server, opts
         end
@@ -129,9 +124,19 @@ module Jekyll
         #
 
         private
-        def server_address(prefix, address, port, baseurl = nil)
+        def server_address(server, options = {})
+          format_url(
+            server.config[:SSLEnable],
+            server.config[:BindAddress],
+            server.config[:Port],
+            options["baseurl"],
+          )
+        end
+
+        private
+        def format_url(ssl_enabled, address, port, baseurl = nil)
           format("%{prefix}://%{address}:%{port}%{baseurl}", {
-            :prefix  => prefix ? "https" : "http",
+            :prefix  => ssl_enabled ? "https" : "http",
             :address => address,
             :port    => port,
             :baseurl => baseurl ? "#{baseurl}/" : ""
@@ -143,7 +148,7 @@ module Jekyll
         private
         def default_url(opts)
           config = configuration_from_options(opts)
-          server_address(
+          format_url(
             config["ssl_cert"] && config["ssl_key"],
             config["host"] == "127.0.0.1" ? "localhost" : config["host"],
             config["port"]
