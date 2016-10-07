@@ -71,10 +71,10 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
-          if Utils::Platforms.windows?
-            Jekyll.logger.warn "", "--watch arg is unsupported on Windows. "
-            Jekyll.logger.warn "", "If you are on Windows Bash, please see: " \
-              "https://github.com/Microsoft/BashOnWindows/issues/216"
+          if Utils::Platforms.bash_on_windows?
+            Jekyll.logger.warn "", "--watch arg is unsupported in Bash on Windows. "
+            Jekyll.logger.warn "", "Please see: https://github.com/Microsoft/BashOnWindows/issues/216"
+            Jekyll.logger.warn "", "If iNotify is fixed, please file a ticket."
 
           else
             External.require_with_graceful_fail "jekyll-watch"
