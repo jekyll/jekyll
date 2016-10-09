@@ -55,6 +55,7 @@ module Jekyll
   autoload :PageReader,          "jekyll/readers/page_reader"
   autoload :StaticFileReader,    "jekyll/readers/static_file_reader"
   autoload :ThemeAssetsReader,   "jekyll/readers/theme_assets_reader"
+  autoload :ThemeDataReader,     "jekyll/readers/theme_data_reader"
   autoload :LogAdapter,          "jekyll/log_adapter"
   autoload :Page,                "jekyll/page"
   autoload :PluginManager,       "jekyll/plugin_manager"

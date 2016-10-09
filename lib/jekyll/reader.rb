@@ -17,6 +17,7 @@ module Jekyll
       read_directories
       sort_files!
       @site.data = DataReader.new(site).read(site.config["data_dir"])
+      read_theme_data
       CollectionReader.new(site).read
       ThemeAssetsReader.new(site).read
     end
@@ -126,6 +127,16 @@ module Jekyll
       return [] unless File.exist?(base)
       entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
+    end
+
+    # Read data files within a theme gem and add them to internal data
+    #
+    # Returns a hash appended with new data
+    def read_theme_data
+      if site.theme && site.theme.data_path
+        theme_data = ThemeDataReader.new(site).read(site.config["data_dir"])
+        @site.data = Utils.deep_merge_hashes(theme_data, @site.data)
+      end
     end
   end
 end

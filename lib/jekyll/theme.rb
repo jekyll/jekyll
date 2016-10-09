@@ -29,6 +29,10 @@ module Jekyll
       path_for "_sass".freeze
     end
 
+    def data_path
+      path_for "_data".freeze
+    end
+
     def assets_path
       path_for "assets".freeze
     end
