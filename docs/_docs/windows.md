@@ -16,8 +16,10 @@ A quick way to install Jekyll is to follow the [installation instructions by Dav
  2. Install Ruby via Chocolatey: `choco install ruby -y`
  3. Reopen a command prompt and install Jekyll: `gem install jekyll`
 
-For a more conventional way of installing Jekyll you can follow the [installation instruction by Julian Thilo][windows-installation]. The instructions were written for Ruby 2.0.0, but should work for later
-versions [prior to 2.2][hitimes-issue].
+For a more conventional way of installing Jekyll you can follow the [installation instructions by Sverrir Sigmundarson][windows-installjekyll3]. These instructions are for newer versions of Ruby 2.2.5 and Jekyll 3.
+
+For instructions for older versions of Ruby 2.0.0 ([prior to 2.2][hitimes-issue]) and Jekyll 2 and older you should follow the [installation instruction by Julian Thilo][windows-installation].
+
 
 ## Encoding
 
@@ -34,6 +36,7 @@ $ chcp 65001
 ```
 
 [windows-installation]: http://jekyll-windows.juthilo.com/
+[windows-installjekyll3]: https://labs.sverrirs.com/jekyll/
 [hitimes-issue]: https://github.com/copiousfreetime/hitimes/issues/40
 
 ## Auto-regeneration
