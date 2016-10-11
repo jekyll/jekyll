@@ -3,6 +3,7 @@
 ### Site Enhancements
 
   * Documentation: {% link %} tag  (#5449)
+  * Updating install instruction link for Jekyll 3 on Windows (#5475)
 
 ## 3.3.0 / 2016-10-06
 
