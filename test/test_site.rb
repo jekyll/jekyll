@@ -197,6 +197,8 @@ class TestSite < JekyllUnitTest
         main.scss
         properties.html
         sitemap.xml
+        source.html
+        source_override.html
         static_files.html
         symlinked-file
       )

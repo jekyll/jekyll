@@ -587,7 +587,7 @@ class TestFilters < JekyllUnitTest
               g["items"].is_a?(Array),
               "The list of grouped items for '' is not an Array."
             )
-            assert_equal 15, g["items"].size
+            assert_equal 17, g["items"].size
           end
         end
       end
