@@ -14,6 +14,22 @@ Feature: Writing themes
     And the my-cool-theme directory should exist
     And the "my-cool-theme/CODE_OF_CONDUCT.md" file should exist
 
+  Scenario: A theme with data files
+    Given I have a configuration file with "theme" set to "test-theme"
+    And I have a "index.html" file with content:
+    """
+    ---
+    ---
+    {% assign menu = site.data.navigation %}
+    {% for nav in menu.topnav %}
+      <a href="{{ nav.url | relative_url }}">{{ nav.title | escape }}</a>
+    {% endfor %}
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "\n\n  <a href=\"/about/\">About</a>\n\n  <a href=\"/contact/\">Contact</a>\n" in "_site/index.html"
+
   Scenario: A theme with SCSS
     Given I have a configuration file with "theme" set to "test-theme"
     And I have a css directory
