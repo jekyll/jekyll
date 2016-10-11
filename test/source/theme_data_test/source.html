@@ -1,0 +1,15 @@
+---
+permalink: /theme_data_test/nav.html
+---
+
+{% assign menu = site.data.navigation %}
+<div id="top_nav">
+{% for nav in menu.topnav %}
+  <a href="{{ nav.url | relative_url }}">{{ nav.title | escape }}</a>
+{% endfor %}
+</div>
+<div id="side_nav">
+{% for nav in menu.sidenav %}
+  <a href="{{ nav.url | relative_url }}">{{ nav.title | escape }}</a>
+{% endfor %}
+</div>
