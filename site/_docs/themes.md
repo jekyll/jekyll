@@ -31,6 +31,7 @@ Jekyll will look first to your site's content, before looking to the theme's def
 * `/_layouts`
 * `/_includes`
 * `/_sass`
+* `/_data`
 
 Refer to your selected theme's documentation and source repository for more information on what files you can override.
 {: .note .info}
@@ -78,6 +79,60 @@ All files in `/assets` will be output into the compiled site in the `/assets` fo
 ### Stylesheets
 
 Your theme's stylesheets should be placed in your theme's `/_sass` folder, again, just as you would when authoring a Jekyll site. Your theme's styles can be included in the user's stylesheet using the `@import` directive.
+
+### Data Files
+
+Any data-file (`*.csv`, `*.json`, `*.yaml`, `*.yml`) in `/_data` will be read and *added* to your site's internal data hash unless the hash already contains a `key` of the same name. This allows theme creators to easily define certain elements like the structure of various types of site-navigation, or ship pre-defined localization strings with their gem. Any data included in the theme gem can be overridden by having a similar data file in your `<source>/_data/`. Theme creators may either ship data with a single file or group them in sub-directories. The two cases below are equally valid:  
+
+#### Case A
+```yaml
+# <theme.root>/_data/navigation/top_nav.yml
+
+- title  : About Me
+  url    : /about/
+- title  : Contact
+  url    : /contact/
+```
+```yaml
+# <theme.root>/_data/navigation/side_nav.yml
+
+- title  : Link A
+  url    : /link-a.html
+- title  : Link B
+  url    : /link-b.html
+```
+
+#### Case B
+````yaml
+# <theme.root>/_data/navigation.yml
+
+top_nav:
+- title  : About Me
+  url    : /about/
+- title  : Contact
+  url    : /contact/
+
+side_nav:
+- title  : Link A
+  url    : /link-a.html
+- title  : Link B
+  url    : /link-b.html
+```
+
+Similarly, user-overrides may simply be a single file as well. Do note, that if a mapping key has been declared, it will override the entire has block within theme data even if the sub-keys are lesser in number. In the example below, the resulting `side_nav` map will contain just *one key/value* pair even if the theme shipped with two pairs. 
+```yaml
+#<site.root>/_data/overrides.yml
+
+top_nav:
+- title  : About Jekyll
+  url    : /about/
+- title  : Jekyll at Github
+  url    : /community/
+
+side_nav:
+- title  : News
+  url    : /news/
+```
 
 ### Documenting your theme
 
