@@ -4,6 +4,7 @@
 
   * Documentation: {% link %} tag  (#5449)
   * Updating install instruction link for Jekyll 3 on Windows (#5475)
+  * Update normalize.css to v5.0.0 (#5471)
 
 ## 3.3.0 / 2016-10-06
 
