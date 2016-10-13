@@ -6,6 +6,10 @@
   * Updating install instruction link for Jekyll 3 on Windows (#5475)
   * Update normalize.css to v5.0.0 (#5471)
 
+### Bug Fixes
+
+  * Fix typo in theme_template README (#5472)
+
 ## 3.3.0 / 2016-10-06
 
 ### Minor Enhancements
