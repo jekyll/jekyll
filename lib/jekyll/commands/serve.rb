@@ -32,19 +32,35 @@ module Jekyll
             cmd.action do |_, opts|
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
-              config = opts["config"]
-              opts["url"] = default_url(opts) if Jekyll.env == "development"
-              Build.process(opts)
-              opts["config"] = config
-              Serve.process(opts)
+              read_config = configuration_from_options(opts)
+              if Jekyll.env == "development"
+                opts["url"] = read_config["url"] = default_url(opts, read_config)
+              end
+
+              build_and_serve(opts, read_config)
             end
           end
         end
 
         #
 
-        def process(opts)
-          opts = configuration_from_options(opts)
+        def build_and_serve(opts, read_config)
+          if Build.method(:process).arity == -2
+            Build.process(opts, read_config)
+          else
+            Build.process(opts)
+          end
+          if Serve.method(:process).arity == -2
+            Serve.process(opts, read_config)
+          else
+            Serve.process(opts)
+          end
+        end
+
+        #
+
+        def process(opts, read_config = nil)
+          opts = read_config.nil? ? configuration_from_options(opts) : read_config
           destination = opts["destination"]
           setup(destination)
 
@@ -146,8 +162,9 @@ module Jekyll
         #
 
         private
-        def default_url(opts)
-          config = configuration_from_options(opts)
+        def default_url(opts, read_config = nil)
+          config = read_config.nil? ? configuration_from_options(opts) : read_config
+
           format_url(
             config["ssl_cert"] && config["ssl_key"],
             config["host"] == "127.0.0.1" ? "localhost" : config["host"],

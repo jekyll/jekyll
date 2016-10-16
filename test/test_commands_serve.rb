@@ -89,7 +89,12 @@ class TestCommandsServe < JekyllUnitTest
           "url"     => "http://localhost:4000",
         }
 
-        expect(Jekyll::Commands::Serve).to receive(:process).with(custom_options)
+        expect(Jekyll::Commands::Build).to(
+          receive(:process).with(custom_options, any_args).and_call_original
+        )
+        expect(Jekyll::Commands::Serve).to(
+          receive(:process).with(custom_options, any_args)
+        )
         @merc.execute(:serve, { "config" => %w(_config.yml _development.yml),
                                 "watch"  => false, })
       end
@@ -174,6 +179,12 @@ class TestCommandsServe < JekyllUnitTest
           assert_equal result[:SSLCertificate], "c1"
         end
       end
+    end
+
+    should "read `configuration` only once" do
+      expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
+      expect(Jekyll).to receive(:configuration).once.and_call_original
+      @merc.execute(:serve, { "watch" => false })
     end
   end
 end
