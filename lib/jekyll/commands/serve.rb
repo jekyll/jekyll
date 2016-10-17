@@ -45,15 +45,12 @@ module Jekyll
         #
 
         def build_and_serve(opts, read_config)
-          if Build.method(:process).arity == -2
-            Build.process(opts, read_config)
-          else
-            Build.process(opts)
-          end
-          if Serve.method(:process).arity == -2
-            Serve.process(opts, read_config)
-          else
-            Serve.process(opts)
+          [Build, Serve].each do |klass|
+            if klass.method(:process).arity == -2
+              klass.process(opts, read_config)
+            else
+              klass.process(opts)
+            end
           end
         end
 

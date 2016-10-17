@@ -182,7 +182,8 @@ class TestCommandsServe < JekyllUnitTest
     end
 
     should "read `configuration` only once" do
-      expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
+      allow(Jekyll::Commands::Serve).to receive(:start_up_webrick)
+
       expect(Jekyll).to receive(:configuration).once.and_call_original
       @merc.execute(:serve, { "watch" => false })
     end
