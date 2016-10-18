@@ -11,6 +11,10 @@
 
   * Fix typo in theme_template README (#5472)
 
+### Development Fixes
+
+  * fix rubocop errors on testing with Rubocop 0.44 (#5489)
+
 ## 3.3.0 / 2016-10-06
 
 ### Minor Enhancements
