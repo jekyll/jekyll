@@ -50,7 +50,7 @@ for ruby in $rubies; do
       rake TESTOPTS=$testopts test
    else
     set -x
-    time $ruby -S bundle exec ruby -Itest \
+    time $ruby -S bundle exec ruby -I test \
       "$@" $testops
   fi
 done
