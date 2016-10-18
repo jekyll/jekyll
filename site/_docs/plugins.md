@@ -912,6 +912,7 @@ LESS.js files during generation.
 - [generator-jekyllized](https://github.com/sondr3/generator-jekyllized): A Yeoman generator for rapidly developing sites with Gulp. Live reload your site, automatically minify and optimize your assets and much more.
 - [Jekyll-Spotify](https://github.com/MertcanGokgoz/Jekyll-Spotify): Easily output Spotify Embed Player for jekyll
 - [jekyll-menus](https://github.com/forestryio/jekyll-menus): Hugo style menus for your Jekyll site... recursive menus included.
+- [jekyll-data](https://github.com/ashmaroli/jekyll-data): Read data files within Jekyll Theme Gems.
 
 #### Editors
 
