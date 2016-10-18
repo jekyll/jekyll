@@ -14,6 +14,7 @@
 ### Development Fixes
 
   * fix rubocop errors on testing with Rubocop 0.44 (#5489)
+  * script/test: add missing whitespace (#5479)
 
 ## 3.3.0 / 2016-10-06
 
