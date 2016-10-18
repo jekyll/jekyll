@@ -62,8 +62,7 @@ module Jekyll
     end
 
     def sanitize_filename(name)
-      name.gsub!(%r![^\w\s-]+!, "")
-      name.gsub!(%r!(^|\b\s)\s+($|\s?\b)!, '\\1\\2')
+      name.gsub!(%r![^\w\s-]+|(?<=^|\b\s)\s+(?=$|\s?\b)!, "".freeze)
       name.gsub(%r!\s+!, "_")
     end
   end

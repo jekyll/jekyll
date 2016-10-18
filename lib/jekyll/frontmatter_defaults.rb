@@ -188,7 +188,7 @@ module Jekyll
       if path.nil? || path.empty?
         ""
       else
-        path.gsub(%r!\A/!, "").gsub(%r!([^/])\z!, '\1')
+        path.gsub(%r!\A/|(?<=[^/])\z!, "".freeze)
       end
     end
   end
