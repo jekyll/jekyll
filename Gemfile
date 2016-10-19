@@ -18,7 +18,7 @@ end
 #
 
 group :test do
-  gem "rubocop"
+  gem "rubocop", "~> 0.44.1"
   gem "cucumber", "~> 2.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
