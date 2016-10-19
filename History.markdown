@@ -17,6 +17,7 @@
 
   * fix rubocop errors on testing with Rubocop 0.44 (#5489)
   * script/test: add missing whitespace (#5479)
+  * Restrict Rubocop version (#5496)
 
 ### Minor Enhancements
 
