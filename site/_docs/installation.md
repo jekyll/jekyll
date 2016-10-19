@@ -112,13 +112,13 @@ $ jekyll --version
 $ gem list jekyll
 ```
 
-You can always use <a href="https://rubygems.org/gems/jekyll">RubyGems</a> to find the current stable version of the Jekyll gem. But you can also use the `gem` command line tool:
+You can also use <a href="https://rubygems.org/gems/jekyll">RubyGems</a> to find the current versioning of any gem. But you can also use the `gem` command line tool:
 
 ```sh
 $ gem search jekyll --remote
 ```
 
-and you'll search for just the name `Jekyll`, and in brackets will be latest version. If you aren't running the latest version, run the update command:
+and you'll search for just the name `jekyll`, and in brackets will be latest version. If you aren't running the latest version, run the update command:
 
 ```sh
 $ gem update jekyll
