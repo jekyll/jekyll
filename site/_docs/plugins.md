@@ -866,7 +866,7 @@ LESS.js files during generation.
 - [Jekyll Tags List Plugin](https://github.com/crispgm/jekyll-tags-list-plugin): A Liquid tag plugin that creates tags list in specific order.
 - [Jekyll Maps](https://github.com/ayastreb/jekyll-maps) by [Anatoliy Yastreb](https://github.com/ayastreb): A Jekyll plugin to easily embed maps with filterable locations.
 - [Jekyll Cloudinary](https://nhoizey.github.io/jekyll-cloudinary/) by [Nicolas Hoizey](https://nicolas-hoizey.com/): a Jekyll plugin adding a Liquid tag to ease the use of Cloudinary for responsive images in your Markdown/Kramdown posts.
-- [jekyll-include-absolute-plugin](https://github.com/tnhu/jekyll-include-absolute-plugin) by [Tan Nhu](https://github.com/tnhu): A Jekyll plugin to include a file from its path relate to Jekyll's source folder.
+- [jekyll-include-absolute-plugin](https://github.com/tnhu/jekyll-include-absolute-plugin) by [Tan Nhu](https://github.com/tnhu): A Jekyll plugin to include a file from its path relative to Jekyll's source folder.
 
 #### Collections
 
