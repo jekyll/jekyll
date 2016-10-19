@@ -7,6 +7,7 @@
   * Update normalize.css to v5.0.0 (#5471)
   * Add jekyll-data to the list of plugins (#5491)
   * Add info about checking version + updating (#5497)
+  * Add jekyll-include-absolute-plugin to list of third-party plugins (#5492)
 
 ### Bug Fixes
 
