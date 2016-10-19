@@ -103,4 +103,25 @@ Check out [the extras page](../extras/) for more information.
   </p>
 </div>
 
-Now that you’ve got everything installed, let’s get to work!
+## Already Have Jekyll?
+
+Before you start developing with Jekyll, you may want to check that you're up to date with the latest version. To find your version of Jekyll, run one of these commands:
+
+```sh
+$ jekyll --version
+$ gem list jekyll
+```
+
+You can also use [RubyGems](https://rubygems.org/gems/jekyll) to find the current versioning of any gem. But you can also use the `gem` command line tool:
+
+```sh
+$ gem search jekyll --remote
+```
+
+and you'll search for just the name `jekyll`, and in brackets will be latest version. Another way to check if you have the latest version is to run the command `gem outdated`. This will provide a list of all the gems on your system that need to be updated. If you aren't running the latest version, run this command:
+
+```sh
+$ gem update jekyll
+```
+
+Now that you’ve got everything up-to-date and installed, let’s get to work!
