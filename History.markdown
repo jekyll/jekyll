@@ -6,6 +6,7 @@
   * Updating install instruction link for Jekyll 3 on Windows (#5475)
   * Update normalize.css to v5.0.0 (#5471)
   * Add jekyll-data to the list of plugins (#5491)
+  * Add info about checking version + updating (#5497)
 
 ### Bug Fixes
 
