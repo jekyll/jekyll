@@ -118,7 +118,7 @@ You can also use [RubyGems](https://rubygems.org/gems/jekyll) to find the curren
 $ gem search jekyll --remote
 ```
 
-and you'll search for just the name `jekyll`, and in brackets will be latest version. If you aren't running the latest version, run the update command:
+and you'll search for just the name `jekyll`, and in brackets will be latest version. Another way to check if you have the latest version is to run the command `gem outdated`. This will provide a list of all the gems on your system that need to be updated. If you aren't running the latest version, run this command:
 
 ```sh
 $ gem update jekyll
