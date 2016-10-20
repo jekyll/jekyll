@@ -53,7 +53,7 @@ module Jekyll
         #
         # Returns the filename of the sample post, as a String
         def initialized_post_name
-          "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.markdown"
+          "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.md"
         end
 
         private
@@ -113,7 +113,7 @@ RUBY
         end
 
         def scaffold_path
-          "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
+          "_posts/0000-00-00-welcome-to-jekyll.md.erb"
         end
 
         # After a new blog has been created, print a success notification and

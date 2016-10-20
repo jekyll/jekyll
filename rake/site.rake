@@ -113,12 +113,12 @@ namespace :site do
       "redirect_from" => "/conduct/index.html",
       "editable"      => false
     }
-    siteify_file('CONDUCT.markdown', front_matter)
+    siteify_file('CONDUCT.md', front_matter)
   end
 
   desc "Copy the contributing file"
   task :contributing do
-    siteify_file('.github/CONTRIBUTING.markdown', "title" => "Contributing")
+    siteify_file('.github/CONTRIBUTING.md', "title" => "Contributing")
   end
 
   desc "Write the site latest_version.txt file"
@@ -132,7 +132,7 @@ namespace :site do
       raise "Specify a version: rake site:releases:new['1.2.3']" unless args.version
       today = Time.new.strftime('%Y-%m-%d')
       release = args.version.to_s
-      filename = "site/_posts/#{today}-jekyll-#{release.split('.').join('-')}-released.markdown"
+      filename = "site/_posts/#{today}-jekyll-#{release.split('.').join('-')}-released.md"
 
       File.open(filename, "wb") do |post|
         post.puts("---")

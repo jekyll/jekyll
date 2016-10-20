@@ -57,8 +57,10 @@ class TestNewCommand < JekyllUnitTest
       capture_stdout { Jekyll::Commands::New.process(@args) }
 
       new_site_files = dir_contents(@full_path).reject do |f|
-        File.extname(f) == ".markdown"
+        File.extname(f) == ".md"
       end
+      new_site_files << "/index.md"
+      new_site_files << "/about.md"
 
       assert_same_elements static_template_files, new_site_files
     end

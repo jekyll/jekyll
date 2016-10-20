@@ -94,7 +94,7 @@ def siteify_file(file, overrides_front_matter = {})
           rescue
             File.basename(file, ".*").downcase.capitalize
           end
-  slug  = File.basename(file, ".markdown").downcase
+  slug  = File.basename(file, ".md").downcase
   front_matter = {
     "title"     => title,
     "layout"    => "docs",
