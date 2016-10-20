@@ -72,7 +72,8 @@ Deploying is now as easy as telling nginx or Apache to look at
 laptops$ git push deploy master
 ```
 
-### Jekyll-hook
+### Jekyll-hook (outdated)
+**NOTE: This approach is outdated, click into the repo for suggestions and explanation.**
 
 You can also use jekyll-hook, a server that listens for webhook posts from
 GitHub, generates a website with Jekyll, and moves it somewhere to be
