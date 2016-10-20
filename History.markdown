@@ -12,6 +12,7 @@
 ### Bug Fixes
 
   * Fix typo in theme_template README (#5472)
+  * Do not swallow all exceptions on render (#5495)
 
 ### Development Fixes
 
