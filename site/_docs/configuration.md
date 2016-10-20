@@ -422,7 +422,7 @@ For example, suppose you set this conditional statement in your code:
 
 ```liquid
 {% raw %}
-{% if jekyll.environment == "production" %}
+{% if site.environment == "production" %}
    {% include disqus.html %}
 {% endif %}
 {% endraw %}
@@ -436,7 +436,7 @@ JEKYLL_ENV=production jekyll build
 
 Specifying an environment value allows you to make certain content available only within specific environments.
 
-The default value for `JEKYLL_ENV` is `development`. Therefore if you omit `JEKYLL_ENV` from the build arguments, the default value will be `JEKYLL_ENV=development`. Any content inside `{% raw %}{% if jekyll.environment == "development" %}{% endraw %}` tags will automatically appear in the build.
+The default value for `JEKYLL_ENV` is `development`. Therefore if you omit `JEKYLL_ENV` from the build arguments, the default value will be `JEKYLL_ENV=development`. Any content inside `{% raw %}{% if site.environment == "development" %}{% endraw %}` tags will automatically appear in the build.
 
 Your environment values can be anything you want (not just `development` or `production`). Some elements you might want to hide in development environments include Disqus comment forms or Google Analytics. Conversely, you might want to expose an "Edit me in GitHub" button in a development environment but not include it in production environments.
 
