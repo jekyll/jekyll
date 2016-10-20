@@ -191,11 +191,7 @@ module Jekyll
       render_pages(payload)
 
       Jekyll::Hooks.trigger :site, :post_render, self, payload
-    # rubocop: disable HandleExceptions
-    rescue Errno::ENOENT
-      # ignore missing layout dir
     end
-    # rubocop: enable HandleExceptions
 
     # Remove orphaned files and empty directories in destination.
     #
