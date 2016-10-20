@@ -8,6 +8,7 @@
   * Add jekyll-data to the list of plugins (#5491)
   * Add info about checking version + updating (#5497)
   * Add jekyll-include-absolute-plugin to list of third-party plugins (#5492)
+  * Remove jekyll-hook from deployment methods (#5502)
 
 ### Bug Fixes
 
