@@ -72,19 +72,6 @@ Deploying is now as easy as telling nginx or Apache to look at
 laptops$ git push deploy master
 ```
 
-### Jekyll-hook
-
-You can also use jekyll-hook, a server that listens for webhook posts from
-GitHub, generates a website with Jekyll, and moves it somewhere to be
-published. Use this to run your own GitHub Pages-style web server.
-
-This method is useful if you need to serve your websites behind a firewall,
-need extra server-level features like HTTP basic authentication or want to
-host your site directly on a CDN or file host like S3.
-
-Setup steps are fully documented
-[in the `jekyll-hook` repo](https://github.com/developmentseed/jekyll-hook).
-
 ### Static Publisher
 
 [Static Publisher](https://github.com/static-publisher/static-publisher) is another automated deployment option with a server listening for webhook posts, though it's not tied to GitHub specifically. It has a one-click deploy to Heroku, it can watch multiple projects from one server, it has an easy to user admin interface and can publish to either S3 or to a git repository (e.g. gh-pages).
