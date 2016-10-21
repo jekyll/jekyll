@@ -89,7 +89,7 @@ Once you’ve generated the `_site` directory, you can easily scp it using a
 need to change the values to reflect your site’s details. There is even [a
 matching TextMate command][] that will help you run this script.
 
-[this deploy script here]: https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy
+[this deploy script]: https://github.com/henrik/henrik.nyh.se/blob/master/script/deploy
 
 [a matching TextMate command]: https://gist.github.com/henrik/214959
 
