@@ -54,7 +54,8 @@ few minor details.
     currently-deployed version of the gem in your project, add the
     following to your <code>Gemfile</code>:
 
-```ruby
+{% highlight ruby %}
+{% raw %}
 source 'https://rubygems.org'
 
 require 'json'
@@ -62,18 +63,21 @@ require 'open-uri'
 versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
 gem 'github-pages', versions['github-pages']
-```
+{% endraw %}
+{% endhighlight %}
 
     This will ensure that when you run <code>bundle install</code>, you
     have the correct version of the <code>github-pages</code> gem.
 
     If that fails, simplify it:
 
-```ruby
+{% highlight ruby %}
+{% raw %}
 source 'https://rubygems.org'
 
 gem 'github-pages'
-```
+{% endraw %}
+{% endhighlight %}
 
     And be sure to run <code>bundle update</code> often.
 
