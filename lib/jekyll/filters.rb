@@ -17,9 +17,7 @@ module Jekyll
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::Markdown)
       output = converter.convert(input.to_s)
-      if mode.to_s == 'inline'
-        output = output.gsub(/<p>(.*?)<\/p>\n/im, '\1')
-      end
+      output = output.gsub(%r!<p>(.*?)<\/p>\n!im, '\1') if mode.to_s == "inline"
       output
     end
 
