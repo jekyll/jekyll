@@ -57,11 +57,11 @@ Feature: Embed filters
     And I have the following post:
       | title     | date       | layout  | content                                     |
       | Star Wars | 2009-03-27 | default | These aren't the droids you're looking for. |
-    And I have a default layout that contains "{{ 'By _Obi-wan_' | markdownify }}"
+    And I have a default layout that contains "By {{ '_Obi-wan_' | markdownify }}"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<p>By <em>Obi-wan</em></p>" in "_site/2009/03/27/star-wars.html"
+    And I should see "By <p><em>Obi-wan</em></p>" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Markdownify a given inline string
     Given I have a _posts directory
