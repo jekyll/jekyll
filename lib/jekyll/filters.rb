@@ -13,10 +13,14 @@ module Jekyll
     # input - The Markdown String to convert.
     #
     # Returns the HTML formatted String.
-    def markdownify(input)
+    def markdownify(input, mode = nil)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::Markdown)
-      converter.convert(input.to_s)
+      output = converter.convert(input.to_s)
+      if mode.to_s == 'inline'
+        output = output.gsub(/<p>(.*?)<\/p>\n/im, '\1')
+      end
+      output
     end
 
     # Convert quotes into smart quotes.
