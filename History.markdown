@@ -15,6 +15,7 @@
 
   * Fix typo in theme_template README (#5472)
   * Do not swallow all exceptions on render (#5495)
+  * Site template: fixed `_config.yml` comment typo (#5511)
 
 ### Development Fixes
 
