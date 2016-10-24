@@ -16,6 +16,7 @@
   * Fix typo in theme_template README (#5472)
   * Do not swallow all exceptions on render (#5495)
   * Site template: fixed `_config.yml` comment typo (#5511)
+  * `jekyll new-theme` should specify Jekyll as a runtime dependency for the theme (#5457)
 
 ### Development Fixes
 
