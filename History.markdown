@@ -22,6 +22,7 @@
   * fix rubocop errors on testing with Rubocop 0.44 (#5489)
   * script/test: add missing whitespace (#5479)
   * Restrict Rubocop version (#5496)
+  * include a hashbang for all benchmark scripts & make them executable (#5505)
 
 ### Minor Enhancements
 
