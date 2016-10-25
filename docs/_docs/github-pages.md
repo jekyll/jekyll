@@ -27,7 +27,7 @@ site builds properly, use `site.github.url` in your URL's.
 <!-- Useful for styles with static names... -->
 <link href="{{ site.github.url }}/path/to/css.css" rel="stylesheet">
 <!-- and for documents/pages whose URL's can change... -->
-<a href="{{ page.url | prepend: site.github.url }}">{{ page.title }}</a>
+[{{ page.title }}]("{{ page.url | prepend: site.github.url }}")
 {% endraw %}
 ```
 
@@ -49,7 +49,7 @@ few minor details.
 ##### Use the `github-pages` gem
 
 Our friends at GitHub have provided the
-<a href="https://github.com/github/pages-gem">github-pages</a>
+[github-pages](https://github.com/github/pages-gem)
 gem which is used to manage Jekyll and its dependencies on
 GitHub Pages. Using it in your projects means that when you deploy
 your site to GitHub Pages, you will not be caught by unexpected
@@ -90,7 +90,8 @@ gem 'github-pages'
 
 And be sure to run `bundle update` often.
 
-If you like to install `pages-gem` on Windows you can find instructions by Jens Willmer on <a href="http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins">how to install github-pages gem on Windows (x64)</a>.
+If you like to install `pages-gem` on Windows you can find instructions by Jens Willmer on
+[how to install github-pages gem on Windows (x64)]("http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins").
 </div>
 
 <div class="note info">
@@ -107,8 +108,7 @@ If you like to install `pages-gem` on Windows you can find instructions by Jens 
 
 User and organization pages live in a special GitHub repository dedicated to
 only the GitHub Pages files. This repository must be named after the account
-name. For example, [@mojombo’s user page
-repository](https://github.com/mojombo/mojombo.github.io) has the name
+name. For example, [@mojombo’s user page repository](https://github.com/mojombo/mojombo.github.io) has the name
 `mojombo.github.io`.
 
 Content from the `master` branch of your repository will be used to build and
@@ -156,9 +156,8 @@ to see more detailed examples.
   <h5>GitHub Pages Documentation, Help, and Support</h5>
   <p>
     For more information about what you can do with GitHub Pages, as well as for
-    troubleshooting guides, you should check out <a
-    href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help
-    section</a>. If all else fails, you should contact <a
-    href="https://github.com/contact">GitHub Support</a>.
+    troubleshooting guides, you should check out
+    <a href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help section</a>.
+    If all else fails, you should contact <a href="https://github.com/contact">GitHub Support</a>.
   </p>
 </div>
