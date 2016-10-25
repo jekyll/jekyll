@@ -10,6 +10,7 @@
   * Add jekyll-include-absolute-plugin to list of third-party plugins (#5492)
   * Remove jekyll-hook from deployment methods (#5502)
   * Update deployment-methods.md (#5504)
+  * Ubuntu users should install ruby2.3-dev (#5512)
 
 ### Bug Fixes
 
