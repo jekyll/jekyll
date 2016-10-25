@@ -747,6 +747,88 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "group_by_exp filter" do
+      should "successfully group array of Jekyll::Page's" do
+        @filter.site.process
+        groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout | upcase")
+        groups.each do |g|
+          assert(
+            ["DEFAULT", "NIL", ""].include?(g["name"]),
+            "#{g["name"]} isn't a valid grouping."
+          )
+          case g["name"]
+          when "DEFAULT"
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for 'default' is not an Array."
+            )
+            assert_equal 5, g["items"].size
+          when "nil"
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for 'nil' is not an Array."
+            )
+            assert_equal 2, g["items"].size
+          when ""
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for '' is not an Array."
+            )
+            assert_equal 15, g["items"].size
+          end
+        end
+      end
+
+      should "include the size of each grouping" do
+        groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout")
+        groups.each do |g|
+          p g
+          assert_equal(
+            g["items"].size,
+            g["size"],
+            "The size property for '#{g["name"]}' doesn't match the size of the Array."
+          )
+        end
+      end
+
+      should "allow more complex filters" do
+        items = [
+          { "version"=>"1.0", "result"=>"slow" },
+          { "version"=>"1.1.5", "result"=>"medium" },
+          { "version"=>"2.7.3", "result"=>"fast" }
+        ]
+
+        result = @filter.group_by_exp(items, "item", "item.version | split: '.' | first")
+        assert_equal 2, result.size
+      end
+
+      should "be equivalent of group_by" do
+        actual = @filter.group_by_exp(@filter.site.pages, "page", "page.layout")
+        expected = @filter.group_by(@filter.site.pages, "layout")
+
+        assert_equal expected, actual
+      end
+
+      should "return any input that is not an array" do
+        assert_equal "some string", @filter.group_by_exp("some string", "la", "le")
+      end
+
+      should "group by full element (as opposed to a field of the element)" do
+        items = %w(a b c d)
+
+        result = @filter.group_by_exp(items, "item", "item")
+        assert_equal 4, result.length
+        assert_equal ["a"], result.first["items"]
+      end
+
+      should "accept hashes" do
+        hash = { 1 => "a", 2 => "b", 3 => "c", 4 => "d" }
+
+        result = @filter.group_by_exp(hash, "item", "item")
+        assert_equal 4, result.length
+      end
+    end
+
     context "sort filter" do
       should "raise Exception when input is nil" do
         err = assert_raises ArgumentError do

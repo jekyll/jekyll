@@ -149,6 +149,22 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Group By Expression</strong></p>
+        <p>Group an array's items using a Liquid expression.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.members | group_by_exp:"item",
+"item.graduation_year | truncate: 3, \"\"" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">[{"name"=>"201...", "items"=>[...]},
+{"name"=>"200...", "items"=>[...]}]</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>XML Escape</strong></p>
         <p>Escape some text for use in XML.</p>
       </td>
