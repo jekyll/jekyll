@@ -15,10 +15,12 @@ module Jekyll
     # Returns the HTML formatted String.
     def markdownify(input, mode = nil)
       site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::Markdown)
-      output = converter.convert(input.to_s)
-      output = output.gsub(%r!<p>(.*?)<\/p>\n!im, '\1') if mode.to_s == "inline"
-      output
+      if mode.to_s == "inline"
+        converter = site.find_converter_instance(Jekyll::Converters::Markdown::Inline)
+      else
+        converter = site.find_converter_instance(Jekyll::Converters::Markdown)
+      end
+      converter.convert(input.to_s)
     end
 
     # Convert quotes into smart quotes.
