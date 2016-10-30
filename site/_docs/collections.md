@@ -19,7 +19,7 @@ with the name of your collection:
 
 ```yaml
 collections:
-- my_collection
+  my_collection
 ```
 
 You can optionally specify metadata for your collection in the configuration:
@@ -34,11 +34,11 @@ Default attributes can also be set for a collection:
 
 ```yaml
 defaults:
-  - scope:
-      path: ""
-      type: my_collection
-    values:
-      layout: page
+  scope:
+    path: ""
+    type: my_collection
+  values:
+    layout: page
 ```
 
 ### Step 2: Add your content
