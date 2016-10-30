@@ -16,6 +16,8 @@ A quick way to install Jekyll is to follow the [installation instructions by Dav
  2. Install Ruby via Chocolatey: `choco install ruby -y`
  3. Reopen a command prompt and install Jekyll: `gem install jekyll`
 
+Note: if step 3 fails due to an SSL error, save the file [cacert.perm](https://curl.haxx.se/ca/cacert.pem) into your rubygems folder "C:\tools\rubyXX\lib\ruby\X.X.X\rubygems\ssl_certs" and retry step 3.
+
 For a more conventional way of installing Jekyll you can follow the [installation instruction by Julian Thilo][windows-installation]. The instructions were written for Ruby 2.0.0, but should work for later
 versions [prior to 2.2][hitimes-issue].
 
