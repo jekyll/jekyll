@@ -93,11 +93,12 @@ class TestURL < JekyllUnitTest
       matching_doc = site.collections["methods"].docs.find do |doc|
         doc.relative_path == "_methods/escape-+ #%20[].md"
       end
-      URL.new(
-        :template     => "/methods/:title/:headline",
-        :placeholders => matching_doc.url_placeholders
-      ).to_s
-      pass
+      assert_raises NoMethodError do
+        URL.new(
+          :template     => "/methods/:headline",
+          :placeholders => matching_doc.url_placeholders
+        ).to_s
+      end
     end
   end
 end

@@ -86,15 +86,14 @@ module Jekyll
 
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
-        begin
-          replacement = @placeholders.public_send(match.sub(":".freeze, "".freeze))
-        rescue NoMethodError
-          Jekyll.logger.warn "", "#{match} is not defined!"
+        key = match.sub(":".freeze, "".freeze)
+        unless @placeholders.key?(key)
+          raise NoMethodError, "The URL template key #{key} doesn't exist!"
         end
-        if replacement.nil?
+        if @placeholders[key].nil?
           "".freeze
         else
-          self.class.escape_path(replacement)
+          self.class.escape_path(@placeholders[key])
         end
       end.gsub(%r!//!, "/".freeze)
     end
