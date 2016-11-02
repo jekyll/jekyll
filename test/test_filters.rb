@@ -419,6 +419,47 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "asset_url filter" do
+      should "produce a relative URL for a given asset file" do
+        asset_file = "test.css"
+        assert_equal "/base/assets/#{asset_file}", @filter.asset_url(asset_file)
+      end
+
+      should "produce a relative URL for a given asset file within a subdirectory" do
+        asset_file = "css/test.css"
+        assert_equal "/base/assets/#{asset_file}", @filter.asset_url(asset_file)
+      end
+
+      should "ensure the leading slash between baseurl, assets_dir and input" do
+        input = "test.css"
+        assert_equal "/base/assets/#{input}", @filter.asset_url(input)
+      end
+
+      should "ensure the leading slash for the baseurl" do
+        asset_file = "test.css"
+        filter = make_filter_mock({ "baseurl" => "base" })
+        assert_equal "/base/assets/#{asset_file}", filter.asset_url(asset_file)
+      end
+
+      should "be ok with a nil 'baseurl'" do
+        asset_file = "test.css"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => nil
+        })
+        assert_equal "/assets/#{asset_file}", filter.asset_url(asset_file)
+      end
+
+      should "not prepend a forward slash if input is empty" do
+        input = ""
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "/base"
+        })
+        assert_equal "/base/assets", filter.asset_url(input)
+      end
+    end
+
     context "jsonify filter" do
       should "convert hash to json" do
         assert_equal "{\"age\":18}", @filter.jsonify({ :age => 18 })

@@ -50,6 +50,30 @@ common tasks easier.
       </td>
     </tr>
     <tr>
+      <td rowspan="2">
+        <p class="name"><strong>Asset URL</strong></p>
+        <p>Prepend <code>baseurl</code> value and string <code>/assets</code> to the input. This will produce a relative URL to just the assets directory. Subdirectories, if present, may be passed along with the input as well.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ "style.css" | asset_url }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">/my-baseurl/assets/style.css</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ "css/style.css" | asset_url }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">/my-baseurl/assets/css/style.css</code>
+        </p>
+      </td>
+    </tr>    
+    <tr>
       <td>
         <p class="name"><strong>Date to XML Schema</strong></p>
         <p>Convert a Date into XML Schema (ISO 8601) format.</p>
