@@ -12,6 +12,7 @@
   * Update deployment-methods.md (#5504)
   * Ubuntu users should install ruby2.3-dev (#5512)
   * Remove Glynn as deployment option (#5519)
+  * Fix broken forum link (#5466)
 
 ### Bug Fixes
 
