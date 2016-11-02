@@ -175,7 +175,8 @@ class TestSite < JekyllUnitTest
         method.call(*args, &block).reverse
       end
       @site.process
-      # files in symlinked directories may appear twice
+      # exclude files in symlinked directories here and insert them in the
+      # following step when not on Windows.
       sorted_pages = %w(
         %#\ +.md
         .htaccess
@@ -194,12 +195,14 @@ class TestSite < JekyllUnitTest
         index.html
         info.md
         main.scss
-        main.scss
         properties.html
         sitemap.xml
         static_files.html
-        symlinked-file
       )
+      unless Utils::Platforms.really_windows?
+        # files in symlinked directories may appear twice
+        sorted_pages.push("main.scss", "symlinked-file").sort!
+      end
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
