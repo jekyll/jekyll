@@ -12,11 +12,11 @@ namespace :site do
     require "launchy"
     require "jekyll"
 
-    # Yep, it's a hack! Wait a few seconds for the Jekyll site to generate and
-    # then open it in a browser. Someday we can do better than this, I hope.
-    Thread.new do
-      sleep 4
-      puts "Opening in browser..."
+    browser_launched = false
+    Jekyll::Hooks.register :site, :post_write do |site|
+      next if browser_launched
+      browser_launched = true
+      Jekyll.logger.info "Opening in browser..."
       Launchy.open("http://localhost:4000")
     end
 
@@ -36,7 +36,7 @@ namespace :site do
   task :generate => :generated_pages do
     require "jekyll"
     Jekyll::Commands::Build.process({
-      "profile" => true,
+      "profile"     => true,
       "source"      => File.expand_path(docs_folder),
       "destination" => File.expand_path("#{docs_folder}/_site")
     })
@@ -54,14 +54,8 @@ namespace :site do
 
   desc "Generate generated pages and publish to GitHub Pages"
   task :publish => :generated_pages do
-    puts "Committing and pushing to GitHub Pages..."
-    sha = `git rev-parse HEAD`.strip
-    Dir.chdir('gh-pages') do
-      sh "git add docs/"
-      sh "git commit --allow-empty -m 'Generating pages for #{sha}.'"
-      sh "git push origin master"
-    end
-    puts 'Done.'
+    puts "GitHub Pages now compiles our docs site on every push to the `master` branch. Cool, huh?"
+    exit 1
   end
 
   desc "Create a nicely formatted history page for the jekyll site based on the repo history."
