@@ -186,6 +186,9 @@ class TestCollections < JekyllUnitTest
     end
 
     should "include the symlinked file from site.source in the list of docs" do
+      # no support for including symlinked file on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
       assert_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end
