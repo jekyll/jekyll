@@ -14,14 +14,20 @@ class TestSite < JekyllUnitTest
 
     should "have an array for plugins if passed as a string" do
       site = Site.new(site_configuration({ "plugins_dir" => "/tmp/plugins" }))
-      assert_equal ["/tmp/plugins"], site.plugins
+      array = Utils::Platforms.windows? ? ["C:/tmp/plugins"] : ["/tmp/plugins"]
+      assert_equal array, site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
       site = Site.new(site_configuration({
         "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
       }))
-      assert_equal ["/tmp/plugins", "/tmp/otherplugins"], site.plugins
+      array = if Utils::Platforms.windows?
+                ["C:/tmp/plugins", "C:/tmp/otherplugins"]
+              else
+                ["/tmp/plugins", "/tmp/otherplugins"]
+              end
+      assert_equal array, site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
