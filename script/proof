@@ -16,7 +16,7 @@ INGORE_HREFS=$(ruby -e 'puts %w{
   eduardoboucas.com
   github.com\/matrix9180
 }.map{|h| "/#{h}/"}.join(",")')
-SOURCE="site"
+SOURCE="docs"
 DESTINATION="_site"
 
 export PROOF=true
