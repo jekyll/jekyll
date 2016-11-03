@@ -12,6 +12,7 @@ timezone: America/Los_Angeles
 
 collections:
   docs:
+    permalink: /:collection/:path/
     output: true
   posts:
     permalink: /news/:year/:month/:day/:title/
