@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Add permalinks to docs in '/maintaining/' (#5532)
+
 ### Site Enhancements
 
   * Documentation: {% link %} tag  (#5449)
