@@ -157,7 +157,7 @@ These are available out-of-the-box to be used in the front matter for a post.
           the post will act as though it had been set with these categories
           normally. Categories (plural key) can be specified as a <a
           href="https://en.wikipedia.org/wiki/YAML#Basic_components">YAML list</a> or a
-          comma-separated string.
+          space-separated string.
 
         </p>
       </td>
@@ -172,7 +172,7 @@ These are available out-of-the-box to be used in the front matter for a post.
           Similar to categories, one or multiple tags can be added to a post.
           Also like categories, tags can be specified as a <a
           href="https://en.wikipedia.org/wiki/YAML#Basic_components">YAML list</a> or a
-          comma-separated string.
+          space-separated string.
 
         </p>
       </td>
