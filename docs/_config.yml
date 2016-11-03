@@ -32,7 +32,6 @@ gems:
   - jemoji
   - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll-avatar
   - jekyll-mentions
 
 exclude:

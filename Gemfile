@@ -91,6 +91,5 @@ group :site do
   gem "jemoji", "0.5.1"
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag"
-  gem "jekyll-avatar"
   gem "jekyll-mentions"
 end
