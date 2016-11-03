@@ -17,6 +17,7 @@
   * Fix broken forum link (#5466)
   * Move documentation to docs folder (#5459)
   * Fix broken links in CONTRIBUTING (#5533)
+  * Update documentation on jekyllrb.com (#5540)
 
 ### Bug Fixes
 
