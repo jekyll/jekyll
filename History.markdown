@@ -16,6 +16,7 @@
   * Remove Glynn as deployment option (#5519)
   * Fix broken forum link (#5466)
   * Move documentation to docs folder (#5459)
+  * Fix broken links in CONTRIBUTING (#5533)
 
 ### Bug Fixes
 
