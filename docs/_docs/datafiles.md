@@ -125,6 +125,7 @@ file name:
 Pages and posts can also access a specific data item. The example below shows how to access a specific item:
 
 `_data/people.yml`:
+
 ```yaml
 dave:
     name: David Smith
