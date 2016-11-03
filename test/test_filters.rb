@@ -374,7 +374,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "/base"
         })
-        refute_equal "http://example.com/base//", filter.absolute_url(page_url)
+        assert_equal "http://example.com/base/", filter.absolute_url(page_url)
       end
 
       should "not append a forward slash if input is '/' and nil 'baseurl'" do
@@ -383,7 +383,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => nil
         })
-        refute_equal "http://example.com//", filter.absolute_url(page_url)
+        assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
       should "normalize international URLs" do
