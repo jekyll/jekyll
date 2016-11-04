@@ -18,6 +18,13 @@ module Jekyll
         end
       end
 
+      # Group an array of items by an expression
+      #
+      # input - the object array
+      # variable - the variable to assign each item to in the expression
+      # expression -a Liquid comparison expression passed in as a string
+      #
+      # Returns the filtered array of objects
       def group_by_exp(input, variable, expression)
         return input unless groupable?(input)
 
