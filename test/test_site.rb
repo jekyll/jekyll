@@ -277,19 +277,19 @@ class TestSite < JekyllUnitTest
         @site.process
         # generate some orphaned files:
         # single file
-        File.open(dest_dir("obsolete.html"), "w")
+        FileUtils.touch(dest_dir("obsolete.html"))
         # single file in sub directory
         FileUtils.mkdir(dest_dir("qux"))
-        File.open(dest_dir("qux/obsolete.html"), "w")
+        FileUtils.touch(dest_dir("qux/obsolete.html"))
         # empty directory
         FileUtils.mkdir(dest_dir("quux"))
         FileUtils.mkdir(dest_dir(".git"))
         FileUtils.mkdir(dest_dir(".svn"))
         FileUtils.mkdir(dest_dir(".hg"))
         # single file in repository
-        File.open(dest_dir(".git/HEAD"), "w")
-        File.open(dest_dir(".svn/HEAD"), "w")
-        File.open(dest_dir(".hg/HEAD"), "w")
+        FileUtils.touch(dest_dir(".git/HEAD"))
+        FileUtils.touch(dest_dir(".svn/HEAD"))
+        FileUtils.touch(dest_dir(".hg/HEAD"))
       end
 
       teardown do
