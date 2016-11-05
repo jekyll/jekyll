@@ -82,7 +82,9 @@ module Jekyll
       if site.config["plugins_dir"].eql? Jekyll::Configuration::DEFAULTS["plugins_dir"]
         [site.in_source_dir(site.config["plugins_dir"])]
       else
-        Array(site.config["plugins_dir"]).map { |d| File.expand_path(d) }
+        Array(site.config["plugins_dir"]).map do |dir|
+          File.expand_path(dir.sub(%r!\A\/!, ""))
+        end
       end
     end
 
