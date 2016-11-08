@@ -208,12 +208,3 @@ Setting up Kickster is very easy, just install the gem and you are good to go. M
 
 Automating the build and deployment of a Jekyll site is just as simple as GitHub Pages - push your changes to your repo (excluding the `_site` directory) and within seconds a build will be triggered and your built site deployed to our highly- available, globally distributed hosting service. The build process will even install and execute custom Ruby plugins. See our [Jekyll docs](https://www.aerobatic.com/docs/static-generators#jekyll) for more details.
 
-## PubStorm
-
-[PubStorm](https://www.pubstorm.com) is a free front-end and static-site publishing platform built by [Nitrous](https://www.nitrous.io). PubStorm is distributed as a node package and can be installed by running `npm install -g pubstorm`. You can create a free account by running `storm signup`.
-
-To publish your site, run `storm init` from the root of your project and enter `_site` as the project path when prompted. You can the run `jekyll build` to build your site and then run `storm deploy` to publish your site in seconds.
-
-PubStorm offers a pre-configured CDN, free custom domains, SSL certs, rollbacks, collaboration and more. To configure additional features, [follow the instructions on the PubStorm help site](http://help.pubstorm.com).
-
-You can also use the [Nitrous Jekyll Template](https://www.nitrous.io/quickstarts) to develop your Jekyll project and deploy to PubStorm directly from Nitrous. This is a great option for developing Jekyll projects on Windows.
