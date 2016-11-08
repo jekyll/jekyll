@@ -19,6 +19,7 @@
   * Fix broken links in CONTRIBUTING (#5533)
   * Update documentation on jekyllrb.com (#5540)
   * Fix HTML rendering (#5536)
+  * Remove outdated deployment information (#5557)
 
 ### Bug Fixes
 
