@@ -543,7 +543,7 @@ will generate the correct permalink URL for the post you specify.
 
 ```liquid
 {% raw %}
-{% post_url 2010-07-21-name-of-post %}
+{{ site.baseurl }}{% post_url 2010-07-21-name-of-post %}
 {% endraw %}
 ```
 
@@ -552,7 +552,7 @@ path to the post:
 
 ```liquid
 {% raw %}
-{% post_url /subdir/2010-07-21-name-of-post %}
+{{ site.baseurl }}{% post_url /subdir/2010-07-21-name-of-post %}
 {% endraw %}
 ```
 
@@ -562,7 +562,7 @@ You can also use this tag to create a link to a post in Markdown as follows:
 
 ```liquid
 {% raw %}
-[Name of Link]({% post_url 2010-07-21-name-of-post %})
+[Name of Link]({{ site.baseurl }}{% post_url 2010-07-21-name-of-post %})
 {% endraw %}
 ```
 
