@@ -82,6 +82,16 @@ module Jekyll
       if site.config["plugins_dir"].eql? Jekyll::Configuration::DEFAULTS["plugins_dir"]
         [site.in_source_dir(site.config["plugins_dir"])]
       else
+        custom_plugins_path
+      end
+    end
+
+    def custom_plugins_path
+      if Jekyll::Utils::Platforms.windows?
+        Jekyll.logger.warn "Conflict:", "Jekyll doesn't currently support " \
+                  "setting plugins_dir to a different dir on Windows"
+        Array(site.config["plugins_dir"])
+      else
         Array(site.config["plugins_dir"]).map { |d| File.expand_path(d) }
       end
     end

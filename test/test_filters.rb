@@ -561,6 +561,10 @@ class TestFilters < JekyllUnitTest
     end
 
     context "group_by filter" do
+      setup do
+        skip_if_windows "skipped in favour of test designed for Windows"
+      end
+
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         grouping = @filter.group_by(@filter.site.pages, "layout")
@@ -588,6 +592,55 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             assert_equal 15, g["items"].size
+          end
+        end
+      end
+
+      should "include the size of each grouping" do
+        grouping = @filter.group_by(@filter.site.pages, "layout")
+        grouping.each do |g|
+          p g
+          assert_equal(
+            g["items"].size,
+            g["size"],
+            "The size property for '#{g["name"]}' doesn't match the size of the Array."
+          )
+        end
+      end
+    end
+
+    context "group_by filter on Windows" do
+      setup do
+        skip_unless_windows
+      end
+
+      should "successfully group array of Jekyll::Page's" do
+        @filter.site.process
+        grouping = @filter.group_by(@filter.site.pages, "layout")
+        grouping.each do |g|
+          assert(
+            ["default", "nil", ""].include?(g["name"]),
+            "#{g["name"]} isn't a valid grouping."
+          )
+          case g["name"]
+          when "default"
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for 'default' is not an Array."
+            )
+            assert_equal 4, g["items"].size
+          when "nil"
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for 'nil' is not an Array."
+            )
+            assert_equal 2, g["items"].size
+          when ""
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for '' is not an Array."
+            )
+            assert_equal 14, g["items"].size
           end
         end
       end

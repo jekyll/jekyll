@@ -82,15 +82,17 @@ class TestEntryFilter < JekyllUnitTest
 
     # rubocop:disable Performance/FixedSize
     should "include only safe symlinks in safe mode" do
+      skip_if_windows
       site = Site.new(site_configuration("safe" => true))
       site.reader.read_directories("symlink-test")
 
       assert_equal %w(main.scss symlinked-file).length, site.pages.length
       refute_equal [], site.static_files
     end
-    # rubocop:enable Performance/FixedSize
 
+    # rubocop:enable Performance/FixedSize
     should "include symlinks in unsafe mode" do
+      skip_if_windows
       site = Site.new(site_configuration)
 
       site.reader.read_directories("symlink-test")

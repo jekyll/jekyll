@@ -178,6 +178,8 @@ class TestCollections < JekyllUnitTest
       })
       @site.process
       @collection = @site.collections["methods"]
+
+      skip_if_windows
     end
 
     should "include the symlinked file as it resolves to inside site.source" do

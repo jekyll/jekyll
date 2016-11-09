@@ -1,4 +1,5 @@
 require "fileutils"
+require "jekyll"
 require "jekyll/utils"
 require "open3"
 require "time"
@@ -163,4 +164,14 @@ def seconds_agnostic_time(time)
   time = time.strftime("%H:%M:%S") if time.is_a?(Time)
   hour, minutes, = time.split(":")
   "#{hour}:#{minutes}"
+end
+
+#
+
+def on_windows
+  if Jekyll::Utils::Platforms.really_windows?
+    return true
+  else
+    return false
+  end
 end
