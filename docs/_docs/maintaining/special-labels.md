@@ -18,4 +18,4 @@ These labels are used to indicate that the Git state of a pull request must chan
 
 ## `stale`
 
-This label is automatically added and removed by @jekyllbot based on activity on an issue or pull request. The rules for this label are laid out in [Triaging an Issue: Staleness and automatic closure](triaging-an-issue.md#staleness-and-automatic-closure).
+This label is automatically added and removed by @jekyllbot based on activity on an issue or pull request. The rules for this label are laid out in [Triaging an Issue: Staleness and automatic closure](../triaging-an-issue/#staleness-and-automatic-closure).
