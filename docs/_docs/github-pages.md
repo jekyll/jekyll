@@ -122,9 +122,9 @@ custom domain is specified—see below).
 
 The Jekyll project repository itself is a perfect example of this branch
 structure—the [master branch]({{ site.repository }}) contains the
-actual software project for Jekyll, however the Jekyll website (that you’re
-looking at right now) is contained in the [gh-pages
-branch]({{ site.repository }}/tree/gh-pages) of the same repository.
+actual software project for Jekyll, and the Jekyll website that you’re
+looking at right now is contained in the [docs
+folder]({{ site.repository }}/tree/master/docs) of the same repository.
 
 <div class="note warning">
   <h5>Source Files Must be in the Root Directory</h5>
