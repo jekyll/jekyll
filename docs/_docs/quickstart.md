@@ -25,4 +25,6 @@ advantage of all the awesome configuration options Jekyll makes available.
 If you're running into problems, ensure you have all the [requirements
 installed][Installation].
 
+When in doubt, use the <code>help</code> command to remind you of all available options and usage, it also works with the <code>new</code>, <code>build</code> and <code>serve</code> subcommands, e.g. <code>jekyll help new</code> or <code>jekyll help build</code>.
+
 [Installation]: /docs/installation/
