@@ -39,6 +39,7 @@
 ### Minor Enhancements
 
   * Collapse `gsub` (#5494)
+  * URL: warn if key doesn't exist in url drop (#5524)
 
 ## 3.3.0 / 2016-10-06
 
