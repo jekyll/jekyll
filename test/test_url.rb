@@ -80,5 +80,25 @@ class TestURL < JekyllUnitTest
         url.to_s
       end
     end
+
+    should "ignore NoMethodErrors when a placeholder is not found" do
+      site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "output" => true
+          }
+        }
+      })
+      site.read
+      matching_doc = site.collections["methods"].docs.find do |doc|
+        doc.relative_path == "_methods/escape-+ #%20[].md"
+      end
+      assert_raises NoMethodError do
+        URL.new(
+          :template     => "/methods/:headline",
+          :placeholders => matching_doc.url_placeholders
+        ).to_s
+      end
+    end
   end
 end
