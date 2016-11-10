@@ -20,6 +20,7 @@
   * Remove outdated deployment information (#5557)
   * no more invalid US-ASCII on lines 30 and 97 (#5520)
   * Add permalinks to docs in '/maintaining/' (#5532)
+  * Add jekyll-pinboard to list of third-party plugins (#5514)
 
 ### Bug Fixes
 
