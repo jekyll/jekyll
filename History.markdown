@@ -22,6 +22,7 @@
   * Add permalinks to docs in '/maintaining/' (#5532)
   * Add jekyll-pinboard to list of third-party plugins (#5514)
   * Fix formatting in 2-to-3.md (#5507)
+  * Add two plugins to the plugins page (#5493)
 
 ### Bug Fixes
 
