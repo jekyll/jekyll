@@ -74,7 +74,7 @@ class TestURL < JekyllUnitTest
     should "check for key without trailing underscore" do
       _, matching_doc = fixture_document("_methods/configuration.md")
       assert_equal "/methods/2016-11-10_configuration", URL.new(
-        :template => "/methods/:year-:month-:day_:title",
+        :template     => "/methods/:year-:month-:day_:title",
         :placeholders => matching_doc.url_placeholders
       ).to_s
     end
