@@ -20,6 +20,7 @@
   * Update documentation on jekyllrb.com (#5540)
   * Fix HTML rendering (#5536)
   * Remove outdated deployment information (#5557)
+  * no more invalid US-ASCII on lines 30 and 97 (#5520)
 
 ### Bug Fixes
 
