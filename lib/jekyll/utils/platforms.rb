@@ -19,16 +19,29 @@ module Jekyll
       # /proc/version returns nothing to us.
       # --
 
-      def really_windows?
+      def vanilla_windows?
         RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i && \
           !proc_version
+      end
+
+      # --
+      # XXX: Remove in 4.0
+      # --
+
+      alias_method :really_windows?, \
+        :vanilla_windows?
+
+      #
+
+      def bash_on_windows?
+        RbConfig::CONFIG["host_os"] =~ %r!linux! && \
+          proc_version =~ %r!microsoft!i
       end
 
       #
 
       def windows?
-        RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i || \
-          proc_version =~ %r!microsoft!i
+        vanilla_windows? || bash_on_windows?
       end
 
       #
