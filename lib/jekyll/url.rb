@@ -84,17 +84,29 @@ module Jekyll
       end
     end
 
+    def possible_keys(key)
+      if key.end_with?("_")
+        [key, key.chomp("_")]
+      else
+        [key]
+      end
+    end
+
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
-        key = match.sub(":".freeze, "".freeze)
-        unless @placeholders.key?(key)
-          raise NoMethodError, "The URL template key #{key} doesn't exist!"
+        pool = possible_keys(match.sub(":".freeze, "".freeze))
+
+        winner = pool.find { |key| @placeholders.key?(key) }
+        if winner.nil?
+          raise NoMethodError,
+            "The URL template doesn't have #{pool.join(" or ")} keys. Check your permalink template!"
         end
-        if @placeholders[key].nil?
-          "".freeze
-        else
-          self.class.escape_path(@placeholders[key])
-        end
+
+        value = @placeholders[winner]
+        value = "" if value.nil?
+        replacement = self.class.escape_path(value)
+
+        match.sub(":#{winner}", replacement)
       end.gsub(%r!//!, "/".freeze)
     end
 
