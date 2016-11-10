@@ -1,7 +1,5 @@
 ## HEAD
 
-  * Add permalinks to docs in '/maintaining/' (#5532)
-
 ### Site Enhancements
 
   * Documentation: {% link %} tag  (#5449)
@@ -21,6 +19,7 @@
   * Fix HTML rendering (#5536)
   * Remove outdated deployment information (#5557)
   * no more invalid US-ASCII on lines 30 and 97 (#5520)
+  * Add permalinks to docs in '/maintaining/' (#5532)
 
 ### Bug Fixes
 
