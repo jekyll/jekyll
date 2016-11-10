@@ -37,6 +37,7 @@
   * include a hashbang for all benchmark scripts & make them executable (#5505)
   * Update source in script/proof (#5538)
   * Collections.feature: conditional steps to have it pass on Windows (#5546)
+  * Fix tests to get script/test to pass on Windows (#5526)
 
 ### Minor Enhancements
 
