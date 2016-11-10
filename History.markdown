@@ -25,6 +25,7 @@
   * Add two plugins to the plugins page (#5493)
   * Use site.baseurl before link and post_url tags (#5559)
   * Fix link to jekyll-pinboard plugin (#5570)
+  * mention `docs` folder as a way to deploy on GitHub Pages (#5571)
 
 ### Bug Fixes
 
