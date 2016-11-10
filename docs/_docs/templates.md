@@ -518,10 +518,10 @@ You must include the file extension when using the `link` tag.
 
 ```liquid
 {% raw %}
-{% link _collection/name-of-document.md %}
-{% link _posts/2016-07-26-name-of-post.md %}
-{% link news/index.html %}
-{% link /assets/files/doc.pdf %}
+{{ site.baseurl }}{% link _collection/name-of-document.md %}
+{{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %}
+{{ site.baseurl }}{% link news/index.html %}
+{{ site.baseurl }}{% link /assets/files/doc.pdf %}
 {% endraw %}
 ```
 
@@ -529,10 +529,10 @@ You can also use this tag to create a link in Markdown as follows:
 
 ```liquid
 {% raw %}
-[Link to a document]({% link _collection/name-of-document.md %})
-[Link to a post]({% link _posts/2016-07-26-name-of-post.md %})
-[Link to a page]({% link news/index.html %})
-[Link to a file]({% link /assets/files/doc.pdf %})
+[Link to a document]({{ site.baseurl }}{% link _collection/name-of-document.md %})
+[Link to a post]({{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %})
+[Link to a page]({{ site.baseurl }}{% link news/index.html %})
+[Link to a file]({{ site.baseurl }}{% link /assets/files/doc.pdf %})
 {% endraw %}
 ```
 
@@ -543,7 +543,7 @@ will generate the correct permalink URL for the post you specify.
 
 ```liquid
 {% raw %}
-{% post_url 2010-07-21-name-of-post %}
+{{ site.baseurl }}{% post_url 2010-07-21-name-of-post %}
 {% endraw %}
 ```
 
@@ -552,7 +552,7 @@ path to the post:
 
 ```liquid
 {% raw %}
-{% post_url /subdir/2010-07-21-name-of-post %}
+{{ site.baseurl }}{% post_url /subdir/2010-07-21-name-of-post %}
 {% endraw %}
 ```
 
@@ -562,7 +562,7 @@ You can also use this tag to create a link to a post in Markdown as follows:
 
 ```liquid
 {% raw %}
-[Name of Link]({% post_url 2010-07-21-name-of-post %})
+[Name of Link]({{ site.baseurl }}{% post_url 2010-07-21-name-of-post %})
 {% endraw %}
 ```
 
