@@ -51,6 +51,8 @@ module Jekyll
     end
 
     class PostUrl < Liquid::Tag
+      include Jekyll::Filters::URLFilters
+
       def initialize(tag_name, post, tokens)
         super
         @orig_post = post.strip
@@ -68,10 +70,11 @@ eos
       end
 
       def render(context)
+        @context = context
         site = context.registers[:site]
 
         site.posts.docs.each do |p|
-          return p.url if @post == p
+          return relative_url(p.url) if @post == p
         end
 
         # New matching method did not match, fall back to old method
