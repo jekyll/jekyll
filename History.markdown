@@ -24,6 +24,7 @@
   * Fix formatting in 2-to-3.md (#5507)
   * Add two plugins to the plugins page (#5493)
   * Use site.baseurl before link and post_url tags (#5559)
+  * Fix link to jekyll-pinboard plugin (#5570)
 
 ### Bug Fixes
 
