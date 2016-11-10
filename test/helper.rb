@@ -158,4 +158,11 @@ class JekyllUnitTest < Minitest::Test
       str
     )
   end
+
+  def skip_if_windows(msg = nil)
+    if Utils::Platforms.really_windows?
+      msg ||= "Jekyll does not currently support this feature on Windows."
+      skip msg.to_s.magenta
+    end
+  end
 end

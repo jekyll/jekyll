@@ -55,6 +55,9 @@ class TestTheme < JekyllUnitTest
     end
 
     should "return the resolved path when a symlink & resolved path exists" do
+      # no support for symlinks on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
       expected = File.expand_path("./_layouts", @expected_root)
       assert_equal expected, @theme.send(:path_for, :_symlink)
     end
