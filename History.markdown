@@ -33,6 +33,7 @@
   * Site template: fixed `_config.yml` comment typo (#5511)
   * `jekyll new-theme` should specify Jekyll as a runtime dependency for the theme (#5457)
   * Be much more specific about ignoring specific vendored directories. (#5564)
+  * Only warn about auto-regeneration bug on Bash On Windows. (#5464)
 
 ### Development Fixes
 
