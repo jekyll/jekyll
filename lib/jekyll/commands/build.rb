@@ -71,23 +71,27 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
+          # Warn Windows users that they might need to upgrade.
           if Utils::Platforms.bash_on_windows?
-            Jekyll.logger.warn "", "--watch arg is unsupported in Bash on Windows. "
-            Jekyll.logger.warn "", "Please see: https://github.com/Microsoft/BashOnWindows/issues/216"
-            Jekyll.logger.warn "", "If iNotify is fixed, please file a ticket."
+            Jekyll.logger.warn "",
+              "Auto-regeneration may not work on some Windows versions."
+            Jekyll.logger.warn "",
+              "Please see: https://github.com/Microsoft/BashOnWindows/issues/216"
+            Jekyll.logger.warn "",
+              "If it does not work, please upgrade Bash on Windows or "\
+                "run Jekyll with --no-watch."
+          end
 
+          External.require_with_graceful_fail "jekyll-watch"
+          watch_method = Jekyll::Watcher.method(:watch)
+          if watch_method.parameters.size == 1
+            watch_method.call(
+              options
+            )
           else
-            External.require_with_graceful_fail "jekyll-watch"
-            watch_method = Jekyll::Watcher.method(:watch)
-            if watch_method.parameters.size == 1
-              watch_method.call(
-                options
-              )
-            else
-              watch_method.call(
-                options, site
-              )
-            end
+            watch_method.call(
+              options, site
+            )
           end
         end
       end # end of class << self
