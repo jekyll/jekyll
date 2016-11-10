@@ -1,5 +1,5 @@
 require "fileutils"
-require "jekyll/utils"
+require "jekyll"
 require "open3"
 require "time"
 require "safe_yaml/load"
