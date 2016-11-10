@@ -115,21 +115,28 @@ publish the GitHub Pages site, so make sure your Jekyll site is stored there.
 
 Unlike user and organization Pages, Project Pages are kept in the same
 repository as the project they are for, except that the website content is
-stored in a specially named `gh-pages` branch. The content of this branch will
-be rendered using Jekyll, and the output will become available under a subpath
-of your user pages subdomain, such as `username.github.io/project` (unless a
-custom domain is specified—see below).
+stored in a specially named `gh-pages` branch or in a `docs` folder on the
+`master` branch. The content will be rendered using Jekyll, and the output
+will become available under a subpath of your user pages subdomain, such as
+`username.github.io/project` (unless a custom domain is specified).
 
-The Jekyll project repository itself is a perfect example of this branch
-structure—the [master branch]({{ site.repository }}) contains the
-actual software project for Jekyll, however the Jekyll website (that you’re
-looking at right now) is contained in the [gh-pages
-branch]({{ site.repository }}/tree/gh-pages) of the same repository.
+The Jekyll project repository itself is a perfect example: the
+[master branch]({{ site.repository }}) contains the actual software project
+for Jekyll, however the Jekyll website (that you’re looking at right now) is
+contained in the [docs folder]({{ site.repository }}/tree/master/docs) of the
+same repository.
+
+Please refer to GitHub official documentation on
+[user, organization and projets pages](https://help.github.com/articles/user-organization-and-project-pages/)
+to see more detailed examples.
 
 <div class="note warning">
   <h5>Source Files Must be in the Root Directory</h5>
   <p>
-GitHub Pages <a href="https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting">overrides</a> the <a href="/docs/configuration/#global-configuration">“Site Source”</a> configuration value, so if you locate your files anywhere other than the root directory, your site may not build correctly.
+    GitHub Pages <a href="https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting">overrides</a>
+    the <a href="/docs/configuration/#global-configuration">“Site Source”</a>
+    configuration value, so if you locate your files anywhere other than the
+    root directory, your site may not build correctly.
   </p>
 </div>
 
