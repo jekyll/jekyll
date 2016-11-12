@@ -17,6 +17,8 @@ A basic Jekyll site usually looks something like this:
 ```sh
 .
 ├── _config.yml
+├── _data
+|   └── members.yml
 ├── _drafts
 |   ├── begin-with-the-crazy-ideas.md
 |   └── on-simplicity-in-technology.md
@@ -29,12 +31,27 @@ A basic Jekyll site usually looks something like this:
 ├── _posts
 |   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
 |   └── 2009-04-26-barcamp-boston-4-roundup.md
-├── _data
-|   └── members.yml
+├── _sass
+|   ├── _base.scss
+|   └── _layout.scss
 ├── _site
 ├── .jekyll-metadata
-└── index.html
+└── index.html # can also be an 'index.md' with valid YAML Frontmatter
 ```
+
+<div class="note info">
+  <h5>Directory Structure of Jekyll Sites using Theme Gems</h5>
+  <p>
+    Starting <strong><em>v3.2</em></strong>, a new Jekyll Project installed by <code>jekyll new</code> uses gem-based themes to define the look of the site, and would have a slightly changed directory structure. <br><code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are now part of the gem-based theme, which by default, is <em><a href="https://github.com/jekyll/minima">minima</a>.</em>
+  </p>
+  <p>
+    With <strong><em>v3.3</em></strong>, the <code>css</code> directory has been renamed to <code>assets</code>, and moved to <em>minima</em> as well. Moreover, <code>index.html</code> is now an <code>index.md</code>.
+  </p><br>
+  <p>
+    You can easily find the path to your local installation of minima gem by executing <code>bundle show minima</code>.
+    For further information, refer <a href="../themes/">our documentation on theme-gems</a>.
+  </p>
+</div>
 
 An overview of what each of these does:
 
@@ -133,12 +150,26 @@ An overview of what each of these does:
         <p>
 
           Well-formatted site data should be placed here. The Jekyll engine
-          will autoload all YAML files in this directory (using either the
-          <code>.yml</code>, <code>.yaml</code>, <code>.json</code> or
-          <code>.csv</code> formats and extensions) and they will be
+          will autoload all data files (using either the <code>.yml</code>,
+          <code>.yaml</code>, <code>.json</code> or <code>.csv</code>
+          formats and extensions) in this directory, and they will be
           accessible via `site.data`. If there's a file
           <code>members.yml</code> under the directory, then you can access
           contents of the file through <code>site.data.members</code>.
+
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>_sass</code></p>
+      </td>
+      <td>
+        <p>
+
+          These are sass partials that can be imported into your <code>main.scss</code>
+          which will then be processed into a single stylesheet <code>main.css</code>
+          that defines the styles to be used by your site.
 
         </p>
       </td>
@@ -175,7 +206,7 @@ An overview of what each of these does:
     </tr>
     <tr>
       <td>
-        <p><code>index.html</code> and other HTML, Markdown, Textile files</p>
+        <p><code>index.html</code> or <code>index.md</code> and other HTML, Markdown, Textile files</p>
       </td>
       <td>
         <p>
