@@ -40,13 +40,13 @@ A basic Jekyll site usually looks something like this:
 ```
 
 <div class="note info">
-  <h5>Directory structure of Jekyll sites using gem themes</h5>
+  <h5>Directory structure of Jekyll sites using gem-based themes</h5>
   <p>
-    Starting <strong>Jekyll 3.2</strong>, a new Jekyll project boostraped with <code>jekyll new</code> uses <a href="../themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure : <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored by default in the gem theme path.
+    Starting <strong>Jekyll 3.2</strong>, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="../themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure : <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
   </p>
   <br />
   <p>
-     <a href="https://github.com/jekyll/minima">minima</a> is the current default theme, <code>bundle show minima</code> will show you where minima theme's files are stored on your computer.
+     <a href="https://github.com/jekyll/minima">minima</a> is the current default theme, and <code>bundle show minima</code> will show you where minima theme's files are stored on your computer.
   </p>
 </div>
 
@@ -153,8 +153,7 @@ An overview of what each of these does:
         <p>
           These are sass partials that can be imported into your <code>main.scss</code>
           which will then be processed into a single stylesheet
-          <code>main.css</code>
-          that defines the styles to be used by your site.
+          <code>main.css</code> that defines the styles to be used by your site.
         </p>
       </td>
     </tr>
@@ -186,7 +185,8 @@ An overview of what each of these does:
     </tr>
     <tr>
       <td>
-        <p><code>index.html</code> or <code>index.md</code> and other HTML, Markdown, Textile files</p>
+        <p><code>index.html</code> or <code>index.md</code> and other HTML,
+        Markdown, Textile files</p>
       </td>
       <td>
         <p>
