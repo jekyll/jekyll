@@ -85,7 +85,7 @@ module Jekyll
     end
 
     # We include underscores in keys to allow for 'i_month' and so forth.
-    # This poses a problem for keys which are followed by and underscore
+    # This poses a problem for keys which are followed by an underscore
     # but the underscore is not part of the key, e.g. '/:month_:day'.
     # That should be :month and :day, but our key extraction regexp isn't
     # smart enough to know that so we have to make it an explicit
