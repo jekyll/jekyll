@@ -1,8 +1,23 @@
-## HEAD
+## 3.3.1 / 2016-11-14
+
+### Minor Enhancements
+
+  * Collapse `gsub` for performance (#5494)
+  * URL: warn if key doesn't exist in url drop (#5524)
+
+### Bug Fixes
+
+  * Fix typo in `theme_template` README (#5472)
+  * Do not swallow all exceptions on render (#5495)
+  * Site template: fixed `_config.yml` comment typo (#5511)
+  * `jekyll new-theme` should specify Jekyll as a runtime dependency for the theme (#5457)
+  * Be much more specific about ignoring specific vendored directories. (#5564)
+  * Only warn about auto-regeneration bug on Bash On Windows. (#5464)
+  * Allow permalink template to have underscores (#5572)
 
 ### Site Enhancements
 
-  * Documentation: {% link %} tag  (#5449)
+  * Documentation: `link` Liquid tag  (#5449)
   * Updating install instruction link for Jekyll 3 on Windows (#5475)
   * Update normalize.css to v5.0.0 (#5471)
   * Add jekyll-data to the list of plugins (#5491)
@@ -27,16 +42,6 @@
   * Fix link to jekyll-pinboard plugin (#5570)
   * mention `docs` folder as a way to deploy on GitHub Pages (#5571)
 
-### Bug Fixes
-
-  * Fix typo in theme_template README (#5472)
-  * Do not swallow all exceptions on render (#5495)
-  * Site template: fixed `_config.yml` comment typo (#5511)
-  * `jekyll new-theme` should specify Jekyll as a runtime dependency for the theme (#5457)
-  * Be much more specific about ignoring specific vendored directories. (#5564)
-  * Only warn about auto-regeneration bug on Bash On Windows. (#5464)
-  * Allow permalink template to have underscores (#5572)
-
 ### Development Fixes
 
   * fix rubocop errors on testing with Rubocop 0.44 (#5489)
@@ -46,11 +51,6 @@
   * Update source in script/proof (#5538)
   * Collections.feature: conditional steps to have it pass on Windows (#5546)
   * Fix tests to get script/test to pass on Windows (#5526)
-
-### Minor Enhancements
-
-  * Collapse `gsub` (#5494)
-  * URL: warn if key doesn't exist in url drop (#5524)
 
 ## 3.3.0 / 2016-10-06
 
