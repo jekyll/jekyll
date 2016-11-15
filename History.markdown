@@ -1,3 +1,9 @@
+## HEAD
+
+### Site Enhancements
+
+  * Remove instructions to install Jekyll 2 on Windows (#5582)
+
 ## 3.3.1 / 2016-11-14
 
 ### Minor Enhancements
