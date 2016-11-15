@@ -31,9 +31,14 @@ site builds properly, use `site.github.url` in your URL's.
 {% endraw %}
 ```
 
-This way you can preview your site locally from the site root on localhost,
-but when GitHub generates your pages from the gh-pages branch all the URLs
-will resolve properly.
+To be able to preview your site locally from the site root on localhost, in your
+`config.yml` set `github.url` like so:
+
+    github:
+      url: http://localhost:4000
+
+When GitHub generates your pages from the gh-pages branch it will override this
+and all the URLs will resolve properly.
 
 ## Deploying Jekyll to GitHub Pages
 
