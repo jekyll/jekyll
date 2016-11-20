@@ -27,7 +27,7 @@ site builds properly, use `site.github.url` in your URL's.
 <!-- Useful for styles with static names... -->
 <link href="{{ site.github.url }}/path/to/css.css" rel="stylesheet">
 <!-- and for documents/pages whose URL's can change... -->
-<a href="{{ page.url | prepend: site.github.url }}">{{ page.title }}</a>
+[{{ page.title }}]("{{ page.url | prepend: site.github.url }}")
 {% endraw %}
 ```
 
@@ -42,17 +42,24 @@ There are two basic types available: user/organization pages and project pages.
 The way to deploy these two types of sites are nearly identical, except for a
 few minor details.
 
-<div class="note protip">
-  <h5>Use the <code>github-pages</code> gem</h5>
-  <p>
-    Our friends at GitHub have provided the
-    <a href="https://github.com/github/pages-gem">github-pages</a>
-    gem which is used to manage Jekyll and its dependencies on
-    GitHub Pages. Using it in your projects means that when you deploy
-    your site to GitHub Pages, you will not be caught by unexpected
-    differences between various versions of the gems. To use the
-    currently-deployed version of the gem in your project, add the
-    following to your <code>Gemfile</code>:
+<div class="note protip" markdown="1">
+<div markdown="1">
+</div>
+
+##### Use the `github-pages` gem
+
+Our friends at GitHub have provided the
+[github-pages](https://github.com/github/pages-gem)
+gem which is used to manage Jekyll and its dependencies on
+GitHub Pages. Using it in your projects means that when you deploy
+your site to GitHub Pages, you will not be caught by unexpected
+differences between various versions of the gems. To use the
+currently-deployed version of the gem in your project, add the
+following to your `Gemfile`:
+
+<div class="code-block" markdown="1">
+<div markdown="1">
+</div>
 
 ```ruby
 source 'https://rubygems.org'
@@ -63,22 +70,28 @@ versions = JSON.parse(open('https://pages.github.com/versions.json').read)
 
 gem 'github-pages', versions['github-pages']
 ```
+</div>
 
-    This will ensure that when you run <code>bundle install</code>, you
-    have the correct version of the <code>github-pages</code> gem.
+This will ensure that when you run `bundle install`, you
+have the correct version of the `github-pages` gem.
 
-    If that fails, simplify it:
+If that fails, simplify it:
+
+<div class="code-block" markdown="1">
+<div markdown="1">
+</div>
 
 ```ruby
 source 'https://rubygems.org'
 
 gem 'github-pages'
 ```
+</div>
 
-    And be sure to run <code>bundle update</code> often.
+And be sure to run `bundle update` often.
 
-    If you like to install <code>pages-gem</code> on Windows you can find instructions by Jens Willmer on <a href="http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins">how to install github-pages gem on Windows (x64)</a>.
-  </p>
+If you like to install `pages-gem` on Windows you can find instructions by Jens Willmer on
+[how to install github-pages gem on Windows (x64)]("http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins").
 </div>
 
 <div class="note info">
@@ -95,8 +108,7 @@ gem 'github-pages'
 
 User and organization pages live in a special GitHub repository dedicated to
 only the GitHub Pages files. This repository must be named after the account
-name. For example, [@mojombo’s user page
-repository](https://github.com/mojombo/mojombo.github.io) has the name
+name. For example, [@mojombo’s user page repository](https://github.com/mojombo/mojombo.github.io) has the name
 `mojombo.github.io`.
 
 Content from the `master` branch of your repository will be used to build and
@@ -144,9 +156,8 @@ to see more detailed examples.
   <h5>GitHub Pages Documentation, Help, and Support</h5>
   <p>
     For more information about what you can do with GitHub Pages, as well as for
-    troubleshooting guides, you should check out <a
-    href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help
-    section</a>. If all else fails, you should contact <a
-    href="https://github.com/contact">GitHub Support</a>.
+    troubleshooting guides, you should check out
+    <a href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help section</a>.
+    If all else fails, you should contact <a href="https://github.com/contact">GitHub Support</a>.
   </p>
 </div>
