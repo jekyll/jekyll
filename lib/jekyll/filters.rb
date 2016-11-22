@@ -175,6 +175,7 @@ module Jekyll
     # word "and" for the last one.
     #
     # array - The Array of Strings to join.
+    # connector - Word used to connect the last 2 items in the array
     #
     # Examples
     #
@@ -182,8 +183,7 @@ module Jekyll
     #   # => "apples, oranges, and grapes"
     #
     # Returns the formatted String.
-    def array_to_sentence_string(array)
-      connector = "and"
+    def array_to_sentence_string(array, connector = "and")
       case array.length
       when 0
         ""

@@ -143,6 +143,11 @@ class TestFilters < JekyllUnitTest
       )
     end
 
+    should "convert array to sentence string with different connector" do
+      assert_equal "1 or 2", @filter.array_to_sentence_string([1, 2], "or")
+      assert_equal "1, 2, 3, or 4", @filter.array_to_sentence_string([1, 2, 3, 4], "or")
+    end
+
     context "normalize_whitespace filter" do
       should "replace newlines with a space" do
         assert_equal "a b", @filter.normalize_whitespace("a\nb")
