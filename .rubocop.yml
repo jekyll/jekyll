@@ -71,6 +71,8 @@ Style/EmptyLinesAroundAccessModifier:
   Enabled: false
 Style/EmptyLinesAroundModuleBody:
   Enabled: false
+Style/EndOfLine:
+  Enabled: false
 Style/ExtraSpacing:
   AllowForAlignment: true
 Style/FileName:
