@@ -6,6 +6,10 @@
   * Fix example URL inconsistency (#5592)
   * Replace backticks within HTML blocks with HTML tags (#5435)
 
+### Minor Enhancements
+
+  * Add connector param to array_to_sentence_string filter (#5597)
+
 ## 3.3.1 / 2016-11-14
 
 ### Minor Enhancements
