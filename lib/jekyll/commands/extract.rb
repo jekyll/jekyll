@@ -8,6 +8,7 @@ module Jekyll
             c.description "Extract files and directories from theme-gem to site"
 
             c.option "force", "--force", "Force extraction even if file already exists"
+            c.option "show", "--show", "List the contents of the specified [DIR]"
 
             c.action do |args, options|
               process(args, options)
@@ -17,6 +18,7 @@ module Jekyll
 
         def process(args, options = {})
           @force = options["force"] if options["force"]
+          @show = options["show"] if options["show"]
           if args.empty?
             Jekyll.logger.abort_with("Error:",
               "You must specify a theme directory or a file path.")
@@ -24,6 +26,9 @@ module Jekyll
             config = Jekyll.configuration(options)
             @source = config["source"]
             @theme_dir = Site.new(config).theme.root
+
+            Jekyll.logger.info "Source Directory:", @source
+            Jekyll.logger.info "Theme Directory:", @theme_dir
 
             # Substitute leading special-characters in an argument with an
             # 'underscore' to disable extraction of files outside the theme-gem
@@ -49,12 +54,25 @@ module Jekyll
         end
 
         def extract_to_source(path)
-          if File.directory? path
+          if File.directory?(path) && @show
+            list_contents path
+          elsif File.directory? path
             dir_path = File.expand_path(path.split("/").last, @source)
             extract_directory dir_path, path
+          elsif !File.directory?(path) && @show
+            Jekyll.logger.warn "Error:", relative_path(path)
+            Jekyll.logger.warn "", "The --show switch only works for directories"
           else
             dir_path = File.dirname(File.join(@source, relative_path(path)))
             extract_file_with_directory dir_path, path
+          end
+        end
+
+        def list_contents(path)
+          Jekyll.logger.info("Listing:",
+            "Contents of '#{relative_path(path)}' in theme gem...")
+          files_in(path).each do |file|
+            Jekyll.logger.info "", relative_path(file).cyan
           end
         end
 
@@ -63,7 +81,7 @@ module Jekyll
             already_exists_msg path
           else
             FileUtils.cp_r path, @source
-            Dir["#{path}/**/*"].reject { |d| File.directory? d }.each do |file|
+            files_in(path).each do |file|
               extraction_msg file
             end
           end
@@ -78,6 +96,10 @@ module Jekyll
             FileUtils.cp_r file_path, dir_path
             extraction_msg file_path
           end
+        end
+
+        def files_in(dir_path)
+          Dir["#{dir_path}/**/*"].reject { |d| File.directory? d }
         end
 
         def relative_path(file)
