@@ -16,7 +16,7 @@ module Jekyll
 
         escaped_slug = Regexp.escape(slug)
         @name_regex = %r!^_posts/#{path}#{date}-#{escaped_slug}\.[^.]+|
-          ^#{path}_posts/?#{date}-#{slug}\.[^.]+!x
+          ^#{path}_posts/?#{date}-#{escaped_slug}\.[^.]+!x
       end
 
       def post_date

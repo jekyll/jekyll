@@ -554,6 +554,32 @@ CONTENT
     end
   end
 
+  context "simple page with post linking containing special characters" do
+    setup do
+      content = <<CONTENT
+---
+title: Post linking
+---
+
+{% post_url 2016-11-26-special-chars-(+) %}
+CONTENT
+      create_post(content, {
+        "permalink"   => "pretty",
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "read_posts"  => true
+      })
+    end
+
+    should "not cause an error" do
+      refute_match(%r!markdown\-html\-error!, @result)
+    end
+
+    should "have the URL to the \"complex\" post from 2008-11-21" do
+      assert_match %r!/2016/11/26/special-chars-\(\+\)/!, @result
+    end
+  end
+
   context "simple page with nested post linking" do
     setup do
       content = <<CONTENT
