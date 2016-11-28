@@ -575,7 +575,7 @@ CONTENT
       refute_match(%r!markdown\-html\-error!, @result)
     end
 
-    should "have the URL to the \"complex\" post from 2008-11-21" do
+    should 'have the URL to the "special-chars" post from 2016-11-26' do
       assert_match %r!/2016/11/26/special-chars-\(\+\)/!, @result
     end
   end
