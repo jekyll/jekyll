@@ -10,6 +10,10 @@
 
   * Add connector param to array_to_sentence_string filter (#5597)
 
+### Bug Fixes
+
+  * Escaped regular expressions when using post_url. (#5605)
+
 ## 3.3.1 / 2016-11-14
 
 ### Minor Enhancements
