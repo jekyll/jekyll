@@ -146,7 +146,7 @@ Feature: Collections
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "2. of 9: <p>Page without title.</p>" in "_site/index.html" unless Windows
-    And I should see "2. of 7: <p>Page without title.</p>" in "_site/index.html" if on Windows
+    And I should see "2. of 8: <p>Page without title.</p>" in "_site/index.html" if on Windows
 
   Scenario: Sort by relative_path
     Given I have an "index.html" page that contains "Collections: {% assign methods = site.methods | sort: 'relative_path' %}{{ methods | map:"title" | join: ", " }}"
