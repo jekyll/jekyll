@@ -513,8 +513,8 @@ With these defaults, all posts would use the `my-site` layout. Any html files th
 
 ```yaml
 collections:
-  - my_collection:
-      output: true
+  my_collection:
+    output: true
 
 defaults:
   -
