@@ -8,6 +8,7 @@
   * Add jekyll-migrate-permalink (#5600)
   * Fix bad config YAML in collections example (#5587)
   * Bring documentation on 'Directory Structure' up-to-date (#5573)
+  * Use only the used Font Awesome icons. (#5530)
 
 ### Minor Enhancements
 
