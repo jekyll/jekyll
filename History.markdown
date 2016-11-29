@@ -6,6 +6,7 @@
   * Fix example URL inconsistency (#5592)
   * Replace backticks within HTML blocks with HTML tags (#5435)
   * Add jekyll-migrate-permalink (#5600)
+  * Fix bad config YAML in collections example (#5587)
 
 ### Minor Enhancements
 
