@@ -5,6 +5,7 @@
   * Remove instructions to install Jekyll 2 on Windows (#5582)
   * Fix example URL inconsistency (#5592)
   * Replace backticks within HTML blocks with HTML tags (#5435)
+  * Add jekyll-migrate-permalink (#5600)
 
 ### Minor Enhancements
 
