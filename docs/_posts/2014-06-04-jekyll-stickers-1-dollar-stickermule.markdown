@@ -14,6 +14,6 @@ that you could have a sticker honoring your beloved Jekyll.
 
 The StickerMule team says, *"Pine no longer!"* StickerMule has **[discounted the
 price of Jekyll stickers down to $1 and are offering free (domestic)
-shipping](http://www.stickermule.com/marketplace/825-jekyll-stickers)!**
+shipping](https://www.stickermule.com/marketplace/825-jekyll-stickers)!**
 Go grab one now on the StickerMule marketplace – [they'll look
 swell on your favourite hardware.](https://twitter.com/parkr/status/430826309707902976/photo/1)

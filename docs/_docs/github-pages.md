@@ -91,7 +91,7 @@ gem 'github-pages'
 And be sure to run `bundle update` often.
 
 If you like to install `pages-gem` on Windows you can find instructions by Jens Willmer on
-[how to install github-pages gem on Windows (x64)]("http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins").
+[how to install github-pages gem on Windows (x64)]("https://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins").
 </div>
 
 <div class="note info">

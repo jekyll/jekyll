@@ -27,5 +27,5 @@ See the [GitHub Release][] page for more a more detailed changelog for this rele
 {% endfor %}
 
 [GitHub Release]: {{ site.repository }}/releases/tag/v1.1.1
-[gh_pages]: http://pages.github.com
+[gh_pages]: https://pages.github.com/
 [v1_1_0]: {{ site.repository }}/releases/tag/v1.1.0
