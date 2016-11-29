@@ -16,6 +16,7 @@
 ### Bug Fixes
 
   * Escaped regular expressions when using post_url. (#5605)
+  * fix date parsing in file names to be stricter (#5609)
 
 ### Development Fixes
 
