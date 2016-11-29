@@ -405,43 +405,17 @@ The default is `default`. They are as follows (with what they filter):
 
 ### Includes
 
-If you have small page fragments that you wish to include in multiple places on
-your site, you can use the `include` tag.
+If you have small page fragments that you want to include in multiple places on your site, you can use the `include` tag:
 
 ```liquid
 {% raw %}{% include footer.html %}{% endraw %}
 ```
 
-Jekyll expects all include files to be placed in an `_includes` directory at the
-root of your source directory. This will embed the contents of
-`<source>/_includes/footer.html` into the calling file.
+Jekyll expects all include files to be placed in an `_includes` directory at the root of your source directory. This will embed the contents of `<source>/_includes/footer.html` into the calling file.
 
-<div class="note">
-  <h5>ProTip™: Use variables as file name</h5>
-  <p>
+### Including files relative to another file
 
-    The name of the file you wish to embed can be literal (as in the example above),
-    or you can use a variable, using liquid-like variable syntax as in
-    <code>{% raw %}{% include {{my_variable}} %}{% endraw %}</code>.
-
-  </p>
-</div>
-
-You can also pass parameters to an include. Omit the quotation marks to send a variable's value. Liquid curly brackets should not be used here:
-
-```liquid
-{% raw %}{% include footer.html param="value" variable-param=page.variable %}{% endraw %}
-```
-
-These parameters are available via Liquid in the include:
-
-```liquid
-{% raw %}{{ include.param }}{% endraw %}
-```
-
-#### Including files relative to another file
-
-You can also choose to include file fragments relative to the current file:
+You can also choose to include file fragments relative to the current file by using the `include_relative` tag:
 
 ```liquid
 {% raw %}{% include_relative somedir/footer.html %}{% endraw %}
@@ -450,11 +424,145 @@ You can also choose to include file fragments relative to the current file:
 You won't need to place your included content within the `_includes` directory. Instead,
 the inclusion is specifically relative to the file where the tag is being used. For example,
 if `_posts/2014-09-03-my-file.markdown` uses the `include_relative` tag, the included file
-must be within the `_posts` directory, or one of its subdirectories. You cannot include
-files in other locations.
+must be within the `_posts` directory, or one of its subdirectories. 
+
+Note that you cannot use the `../` syntax to specify an include location that refers to a higher-level directory.
 
 All the other capabilities of the `include` tag are available to the `include_relative` tag,
 such as using variables.
+
+### Using variables names for the include file
+
+The name of the file you want to embed can be specified as a variable instead of an actual file name. For example, suppose you defined a variable in your page's frontmatter like this:
+
+```yaml
+---
+title: My page
+my_variable: footer_company_a.html
+---
+```
+
+You could then reference that variable in your include:
+
+```liquid
+{% raw %}{% include {{page.my_variable}} %}{% endraw %}
+```
+
+In this example, the include would insert the file footer_company_a.html from the \_includes directory.
+
+### Passing parameters to includes
+
+You can also pass parameters to an include. For example, suppose you have a file called note.html in your \_includes folder that contains this formatting: 
+ 
+```liquid
+{% raw %}<div markdown="span" class="alert alert-info" role="alert">
+<i class="fa fa-info-circle"></i> <b>Note:</b> {{include.content}}
+</div>{% endraw %}
+```
+
+The {% raw %}`{{include.content}}`{% endraw %} is a parameter gets populated when you call the include and specify a value for that parameter, like this:
+
+```liquid
+{% raw %}{% include note.html content="This is my sample note." %} {% endraw %}
+```
+
+The value of `content` (which is `This is my sample note`) will be inserted into the {% raw %}`{{include.content}}`{% endraw %} parameter.
+
+Passing parameters to includes is especially helpful when you want to hide away complex formatting from your Markdown content. 
+
+For example, images with figure captions often have complicated formatting that you might want to simplify through an include with parameters. Here's an example:
+
+```html 
+<figure><a href="http://jekyllrb.com"><img src="logo.png" 
+style="max-width: 200px;" alt="Jekyll logo" /><figcaption>
+This is the Jekyll logo</figcaption></figure>
+```
+
+You could templatize this content in your include and make each value available as a parameter, like this:
+
+```liquid
+{% raw %}<figure>{% if {{include.url}} %}<a href="{{include.url}}">
+{% endif %}<img src="{{include.file}}" {% if {{include.max-width}} 
+%} style="max-width: {{include.max-width}}" {% endif %} 
+alt="{{include.alt}}" />{% if {{include.url}} %}</a>{% endif %}
+{% if {{include.caption}} %}<figcaption>{{include.caption}}
+</figcaption>{% endif %}</figure>{% endraw %}
+```
+
+This include contains 5 parameters:
+    
+* `url`
+* `max-width`
+* `file`
+* `alt`
+* `caption`
+
+To account for optional parameters, the include uses `if` tags with the parameters. For example, `{% raw %}if {{include.url}}{% endraw %}` will include the `url` only if the `url` parameter is specified in the include.
+
+Here's an example that passes all the parameters to this include (the include file is named image.html):
+
+```liquid
+{% raw %}{% include image.html url="http://jekyllrb.com" 
+max-width="200px" file="logo.png" alt="Jekyll logo" 
+caption="This is the Jekyll logo." %} {% endraw %}
+```
+
+The result is the original HTML code shown earlier. 
+
+You can create includes that act as templates for a variety of uses &mdash; inserting audio or video clips, alerts, special formatting, and more.
+
+### Passing parameter variables to includes
+
+Suppose the parameter you want to pass to the include is a variable rather than a string. For example, you might be using {% raw %}`{{site.product_name}}`{% endraw %} to refer to every instance of your product rather than the actual hard-coded name. (In this case, your _config.yml file would have a key called `product_name` with a value of your product's name.)
+
+The string you pass to your include parameter can't contain curly braces. For example, you can't pass a parameter that contains this: {% raw %}`"The latest version of {{site.product_name}} is now available."`{% endraw %} 
+
+If you want to include this variable in your parameter that you pass to an include, you need to store the entire parameter as a variable before passing it to the include. You can use `capture` tags to create the variable:
+
+```liquid
+{% raw %}{% capture download_note %}The latest version of 
+{{site.product_name}} is now available.{% endcapture %}{% endraw %}
+```
+
+Then pass this captured variable into the parameter for the include. Omit the quotation marks around the parameter content because it's no longer a string (it's a variable):
+
+```liquid
+{% raw %}{% include note.html content=download_note %}{% endraw %}
+```
+
+### Passing references to YAML files as parameter values
+ 
+Instead of passing string variables to the include, you can pass a reference to a YAML data file stored in the \_data folder. 
+
+Here's an example. In the \_data folder, suppose you have a YAML file called profiles.yml. Its content looks like this:
+ 
+```yaml
+- name: John Doe
+  login_age: old
+  image: johndoe.jpg
+
+- name: Jane Doe
+  login_age: new
+  image: janedoe.jpg
+```
+
+In the \_includes folder, you have a file called spotlight.html with this code:
+
+```liquid
+{% raw %}{% for person in {{include.participants}} %}
+{% if person.login_age == "new" %}
+{{person.name}}
+{% endif %}
+{% endfor %}{% endraw %}
+```
+
+Now when you include the spotlight.html file, you can submit the YAML file as a parameter:
+
+```
+{% raw %}{% include spotlight.html participants=site.data.profiles %}{% endraw %}
+```
+
+In this instance, `site.data.profiles` gets inserted in place of {% raw %}`{{include.participants}}`{% endraw %} in the include, and the Liquid logic processes. The result will be `Jane Doe`. 
 
 ### Code snippet highlighting
 
