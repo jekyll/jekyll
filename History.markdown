@@ -14,6 +14,10 @@
 
   * Escaped regular expressions when using post_url. (#5605)
 
+### Development Fixes
+
+  * clean unit-test names in `test/test_tags.rb` (#5608)
+
 ## 3.3.1 / 2016-11-14
 
 ### Minor Enhancements
