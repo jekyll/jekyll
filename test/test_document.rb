@@ -492,4 +492,33 @@ class TestDocument < JekyllUnitTest
       assert_equal true, File.file?(@dest_file)
     end
   end
+
+  context "a document in a collection with dash-separated numeric file name" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "output" => true
+          }
+        }
+      })
+      @site.process
+      @document = @site.collections["methods"].docs.find do |doc|
+        doc.relative_path == "_methods/3940394-21-9393050-fifif1323-test.md"
+      end
+      @dest_file = dest_dir("methods/3940394-21-9393050-fifif1323-test.html")
+    end
+
+    should "produce the right URL" do
+      assert_equal "/methods/3940394-21-9393050-fifif1323-test.html", @document.url
+    end
+
+    should "produce the right destination" do
+      assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "be output in the correct place" do
+      assert_equal true, File.file?(@dest_file)
+    end
+  end
 end
