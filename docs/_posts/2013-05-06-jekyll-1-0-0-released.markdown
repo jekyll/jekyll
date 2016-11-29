@@ -10,7 +10,7 @@ categories: [release]
 Hey! After many months of hard work by Jekyll's contributors, we're excited
 to announce the first major release of the project in a long while. v1.0.0 is
 finally here! While the list of improvements and bug fixes is [quite lengthy][history],
-here are the highlights (thanks to [@benbalter](http://twitter.com/BenBalter) for the
+here are the highlights (thanks to [@benbalter](https://twitter.com/BenBalter) for the
 examples and for compiling this list):
 
 - Support for the Gist tag for easily embedding Gists ([example](https://gist.github.com/benbalter/5555251))

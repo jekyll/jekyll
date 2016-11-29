@@ -1,6 +1,6 @@
 #############################################################################
 #
-# Site tasks - http://jekyllrb.com
+# Site tasks - https://jekyllrb.com
 #
 #############################################################################
 
@@ -46,7 +46,7 @@ namespace :site do
   desc "Update normalize.css library to the latest version and minify"
   task :update_normalize_css do
     Dir.chdir("#{docs_folder}/_sass") do
-      sh 'curl "http://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
+      sh 'curl "https://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
       sh 'sass "normalize.scss":"_normalize.scss" --style compressed'
       rm ['normalize.scss', Dir.glob('*.map')].flatten
     end

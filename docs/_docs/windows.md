@@ -97,7 +97,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 
 
 ```ruby
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 gem 'github-pages', group: :jekyll_plugins
 ```
 
@@ -110,7 +110,7 @@ There will be a warning on startup that you should include `gem 'wdm', '>= 0.1.0
 
 In the future the installation process of the github-pages should be as simple as the setup of the blog. But as long as the new version of the Nokogiri ([v1.6.8][nokogiriReleases]) is not stable and referenced, it is work to get it up and running on Windows.
 
-[jwillmerPost]: http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46 "Installation instructions by Jens Willmer"
+[jwillmerPost]: https://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46 "Installation instructions by Jens Willmer"
 [Chocolatey]: https://chocolatey.org/install "Package manager for Windows"
 [Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
 [nokogiriReleases]: https://github.com/sparklemotion/nokogiri/releases "Nokogiri Releases"
