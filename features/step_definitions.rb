@@ -156,6 +156,32 @@ end
 
 #
 
+When(%r!^I run gem(.*)$!) do |args|
+  run_rubygem(args)
+  if args.include?("--verbose") || ENV["DEBUG"]
+    $stderr.puts "\n#{jekyll_run_output}\n"
+  end
+end
+
+#
+
+When(%r!^I run git add .$!) do
+  run_in_shell("git", "add", ".", "--verbose")
+end
+
+#
+
+When(%r!^I decide to build the theme gem$!) do
+  Dir.chdir(Paths.theme_gem_dir)
+  gemspec = "my-cool-theme.gemspec"
+  File.write(gemspec, File.read(gemspec).sub("TODO: ", ""))
+  File.new("_includes/blank.html", "w")
+  File.new("_sass/blank.scss", "w")
+  File.new("assets/blank.scss", "w")
+end
+
+#
+
 When(%r!^I change "(.*)" to contain "(.*)"$!) do |file, text|
   File.open(file, "a") do |f|
     f.write(text)
@@ -260,6 +286,27 @@ Then(%r!^I should (not )?see "(.*)" in the build output$!) do |negative, text|
     expect(jekyll_run_output).to match Regexp.new(text)
   else
     expect(jekyll_run_output).not_to match Regexp.new(text)
+  end
+end
+
+#
+
+Then(%r!^I should get an updated git index$!) do
+  index = %w(
+    .gitignore
+    Gemfile
+    LICENSE.txt
+    README.md
+    _includes/blank.html
+    _layouts/default.html
+    _layouts/page.html
+    _layouts/post.html
+    _sass/blank.scss
+    assets/blank.scss
+    my-cool-theme.gemspec
+  )
+  index.each do |file|
+    expect(jekyll_run_output).to match file
   end
 end
 
