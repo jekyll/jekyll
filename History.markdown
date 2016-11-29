@@ -20,6 +20,7 @@
 ### Development Fixes
 
   * clean unit-test names in `test/test_tags.rb` (#5608)
+  * Add cucumber feature to test for bonafide theme gems (#5384)
 
 ## 3.3.1 / 2016-11-14
 
