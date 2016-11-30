@@ -12,7 +12,7 @@ module Jekyll
       def group_by(input, property)
         if groupable?(input)
           groups = input.group_by { |item| item_property(item, property).to_s }
-          make_grouped_array(groups)
+          grouped_array(groups)
         else
           input
         end
@@ -34,7 +34,7 @@ module Jekyll
             @context[variable] = item
             parsed_expr.render(@context)
           end
-          make_grouped_array(groups)
+          grouped_array(groups)
         end
       end
 
@@ -49,7 +49,7 @@ module Jekyll
       end
 
       private
-      def make_grouped_array(groups)
+      def grouped_array(groups)
         groups.each_with_object([]) do |item, array|
           array << {
             "name"  => item.first,
