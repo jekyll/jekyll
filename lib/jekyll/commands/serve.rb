@@ -32,32 +32,20 @@ module Jekyll
             cmd.action do |_, opts|
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
-              read_config = configuration_from_options(opts)
+
+              config = configuration_from_options(opts)
               if Jekyll.env == "development"
-                opts["url"] = read_config["url"] = default_url(opts, read_config)
+                config["url"] = default_url(config)
               end
-
-              build_and_serve(opts, read_config)
+              build_and_serve(config)
             end
           end
         end
 
         #
 
-        def build_and_serve(opts, read_config)
-          [Build, Serve].each do |klass|
-            if klass.method(:process).arity == -2
-              klass.process(opts, read_config)
-            else
-              klass.process(opts)
-            end
-          end
-        end
-
-        #
-
-        def process(opts, read_config = nil)
-          opts = read_config.nil? ? configuration_from_options(opts) : read_config
+        def process(opts)
+          opts = configuration_from_options(opts)
           destination = opts["destination"]
           setup(destination)
 
@@ -81,6 +69,14 @@ module Jekyll
               end
             end
           end
+        end
+
+        #
+
+        private
+        def build_and_serve(config)
+          Build.process(config)
+          Serve.process(config)
         end
 
         #
@@ -159,9 +155,8 @@ module Jekyll
         #
 
         private
-        def default_url(opts, read_config = nil)
-          config = read_config.nil? ? configuration_from_options(opts) : read_config
-
+        def default_url(opts)
+          config = configuration_from_options(opts)
           format_url(
             config["ssl_cert"] && config["ssl_key"],
             config["host"] == "127.0.0.1" ? "localhost" : config["host"],

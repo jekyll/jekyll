@@ -20,11 +20,11 @@ module Jekyll
 
         # Build your jekyll site
         # Continuously watch if `watch` is set to true in the config.
-        def process(options, read_config = nil)
+        def process(options)
           # Adjust verbosity quickly
           Jekyll.logger.adjust_verbosity(options)
 
-          options = read_config.nil? ? configuration_from_options(options) : read_config
+          options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
 
           if options.fetch("skip_initial_build", false)
