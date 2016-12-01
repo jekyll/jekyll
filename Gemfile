@@ -42,7 +42,7 @@ group :test_legacy do
   gem "simplecov"
   gem "minitest-reporters"
   gem "minitest-profile"
-  gem "minitest"
+  gem "minitest", "~> 5.9.1"
   gem "shoulda"
 end
 
