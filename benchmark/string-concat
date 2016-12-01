@@ -1,6 +1,7 @@
+#!/usr/bin/env ruby
 require 'benchmark/ips'
 
-url = "http://jekyllrb.com"
+url = "https://jekyllrb.com"
 
 Benchmark.ips do |x|
   x.report('+=') { url += '/' }

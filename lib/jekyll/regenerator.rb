@@ -20,18 +20,14 @@ module Jekyll
     def regenerate?(document)
       case document
       when Page
-        document.asset_file? || document.data['regenerate'] ||
-          source_modified_or_dest_missing?(
-            site.in_source_dir(document.relative_path), document.destination(@site.dest)
-          )
+        regenerate_page?(document)
       when Document
-        !document.write? || document.data['regenerate'] ||
-          source_modified_or_dest_missing?(
-            document.path, document.destination(@site.dest)
-          )
+        regenerate_document?(document)
       else
-        source_path = document.respond_to?(:path)        ? document.path                    : nil
-        dest_path   = document.respond_to?(:destination) ? document.destination(@site.dest) : nil
+        source_path = document.respond_to?(:path) ? document.path : nil
+        dest_path = if document.respond_to?(:destination)
+                      document.destination(@site.dest)
+                    end
         source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
@@ -44,7 +40,7 @@ module Jekyll
 
       metadata[path] = {
         "mtime" => File.mtime(path),
-        "deps" => []
+        "deps"  => []
       }
       cache[path] = true
     end
@@ -94,23 +90,14 @@ module Jekyll
         return cache[path]
       end
 
-      # Check path that exists in metadata
-      data = metadata[path]
-      if data
-        data["deps"].each do |dependency|
-          if modified?(dependency)
-            return cache[dependency] = cache[path] = true
-          end
-        end
-        if File.exist?(path) && data["mtime"].eql?(File.mtime(path))
-          return cache[path] = false
-        else
-          return add(path)
-        end
+      if metadata[path]
+        # If we have seen this file before,
+        # check if it or one of its dependencies has been modified
+        existing_file_modified?(path)
+      else
+        # If we have not seen this file before, add it to the metadata and regenerate it
+        add(path)
       end
-
-      # Path does not exist in metadata, add it
-      return add(path)
     end
 
     # Add a dependency of a path
@@ -139,7 +126,7 @@ module Jekyll
     #
     # Returns the String path of the file.
     def metadata_file
-      site.in_source_dir('.jekyll-metadata')
+      site.in_source_dir(".jekyll-metadata")
     end
 
     # Check if metadata has been disabled
@@ -172,6 +159,41 @@ module Jekyll
         else
           {}
         end
+    end
+
+    private
+    def regenerate_page?(document)
+      document.asset_file? || document.data["regenerate"] ||
+        source_modified_or_dest_missing?(
+          site.in_source_dir(document.relative_path), document.destination(@site.dest)
+        )
+    end
+
+    private
+    def regenerate_document?(document)
+      !document.write? || document.data["regenerate"] ||
+        source_modified_or_dest_missing?(
+          document.path, document.destination(@site.dest)
+        )
+    end
+
+    private
+    def existing_file_modified?(path)
+      # If one of this file dependencies have been modified,
+      # set the regeneration bit for both the dependency and the file to true
+      metadata[path]["deps"].each do |dependency|
+        if modified?(dependency)
+          return cache[dependency] = cache[path] = true
+        end
+      end
+
+      if File.exist?(path) && metadata[path]["mtime"].eql?(File.mtime(path))
+        # If this file has not been modified, set the regeneration bit to false
+        cache[path] = false
+      else
+        # If it has been modified, set it to true
+        add(path)
+      end
     end
   end
 end

@@ -28,7 +28,7 @@ class TestCollections < JekyllUnitTest
       assert_equal @collection.label, "methods"
     end
 
-    should "have default url template" do
+    should "have default URL template" do
       assert_equal @collection.url_template, "/:collection/:path:output_ext"
     end
 
@@ -99,7 +99,7 @@ class TestCollections < JekyllUnitTest
       @collection = @site.collections["methods"]
     end
 
-    should "have custom url template" do
+    should "have custom URL template" do
       assert_equal @collection.url_template, "/awesome/:path/"
     end
   end
@@ -132,6 +132,7 @@ class TestCollections < JekyllUnitTest
           _methods/um_hi.md
           _methods/escape-+\ #%20[].md
           _methods/yaml_with_dots.md
+          _methods/3940394-21-9393050-fifif1323-test.md
         ), doc.relative_path
       end
     end
@@ -186,6 +187,9 @@ class TestCollections < JekyllUnitTest
     end
 
     should "include the symlinked file from site.source in the list of docs" do
+      # no support for including symlinked file on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
       assert_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end

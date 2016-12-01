@@ -235,7 +235,7 @@ Feature: Hooks
       owner.output = "1 #{owner.output.chomp}"
     end
     Jekyll::Hooks.register :pages, :post_render, priority: :high do |owner|
-      # high runs last
+      # high runs first
       owner.output = "2 #{owner.output.chomp}"
     end
     Jekyll::Hooks.register :pages, :post_render do |owner|
@@ -243,13 +243,13 @@ Feature: Hooks
       owner.output = "3 #{owner.output.chomp}"
     end
     Jekyll::Hooks.register :pages, :post_render, priority: :low do |owner|
-      # low runs first
+      # low runs last 
       owner.output = "4 #{owner.output.chomp}"
     end
     """
     And I have a "index.html" page that contains "WRAP ME"
     When I run jekyll build
-    Then I should see "2 3 1 4 WRAP ME" in "_site/index.html"
+    Then I should see "4 3 1 2 WRAP ME" in "_site/index.html"
 
   Scenario: Alter a document right after it is initialized
     Given I have a _plugins directory
@@ -333,3 +333,28 @@ Feature: Hooks
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "Wrote document 0" in "_site/document-build.log"
+
+  Scenario: Set a custom payload['page'] property
+    Given I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :pages, :pre_render do |page, payload|
+        payload['page']['foo'] = "hello world"
+    end
+    """
+    And I have a _layouts directory
+    And I have a "_layouts/custom.html" file with content:
+      """
+      ---
+      ---
+      {{ content }} {% include foo.html %}
+      """
+    And I have a _includes directory
+    And I have a "_includes/foo.html" file with content:
+      """
+      {{page.foo}}
+      """
+    And I have an "index.html" page with layout "custom" that contains "page content"
+    When I run jekyll build
+    Then the "_site/index.html" file should exist
+    And I should see "page content\n hello world" in "_site/index.html"

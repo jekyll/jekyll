@@ -1,4 +1,3 @@
-before_script: bundle update
 bundler_args: --without benchmark:site:development
 script: script/cibuild
 cache: bundler
@@ -6,35 +5,31 @@ language: ruby
 sudo: false
 
 rvm:
-  - &ruby1 2.3.0
-  - &ruby2 2.2.4
-  - &ruby3 2.1.8
-  - &jruby jruby-9.0.5.0
-  - &rhead ruby-head
+  - &ruby1 2.3.1
+  - &ruby2 2.2.5
+  - &ruby3 2.1.9
+  - &jruby jruby-9.1.2.0
 
 matrix:
-  fast_finish: true
-  allow_failures:
-    - rvm: *jruby
-    - rvm: *rhead
   include:
-    - rvm: 2.3.0
+    - rvm: *ruby1
       env: TEST_SUITE=fmt
+    - rvm: *ruby1
+      env: TEST_SUITE=default-site
+  exclude:
+    - rvm: *jruby
+      env: TEST_SUITE=cucumber
+
 env:
   matrix:
     - TEST_SUITE=test
     - TEST_SUITE=cucumber
-
 branches:
   only:
     - master
     - themes
 
 notifications:
-  email:
-    recipients:
-      - jordon@envygeeks.io
-
   slack:
     secure: "\
       dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4Y\

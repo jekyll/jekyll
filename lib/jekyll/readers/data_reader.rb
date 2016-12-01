@@ -37,10 +37,10 @@ module Jekyll
         path = @site.in_source_dir(dir, entry)
         next if @entry_filter.symlink?(path)
 
-        key = sanitize_filename(File.basename(entry, ".*"))
         if File.directory?(path)
-          read_data_to(path, data[key] = {})
+          read_data_to(path, data[sanitize_filename(entry)] = {})
         else
+          key = sanitize_filename(File.basename(entry, ".*"))
           data[key] = read_data_file(path)
         end
       end
@@ -62,9 +62,8 @@ module Jekyll
     end
 
     def sanitize_filename(name)
-      name.gsub!(/[^\w\s-]+/, "")
-      name.gsub!(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
-      name.gsub(/\s+/, "_")
+      name.gsub!(%r![^\w\s-]+|(?<=^|\b\s)\s+(?=$|\s?\b)!, "".freeze)
+      name.gsub(%r!\s+!, "_")
     end
   end
 end

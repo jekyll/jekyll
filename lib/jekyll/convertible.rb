@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'set'
+require "set"
 
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
@@ -20,12 +20,12 @@ module Jekyll
   module Convertible
     # Returns the contents as a String.
     def to_s
-      content || ''
+      content || ""
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
-      !(data.key?('published') && data['published'] == false)
+      !(data.key?("published") && data["published"] == false)
     end
 
     # Read the YAML frontmatter.
@@ -35,6 +35,7 @@ module Jekyll
     # opts - optional parameter to File.read, default at site configs
     #
     # Returns nothing.
+    # rubocop:disable Metrics/AbcSize
     def read_yaml(base, name, opts = {})
       filename = File.join(base, name)
 
@@ -47,7 +48,7 @@ module Jekyll
         end
       rescue SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
-      rescue Exception => e
+      rescue => e
         Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
       end
 
@@ -58,15 +59,17 @@ module Jekyll
 
       self.data
     end
+    # rubocop:enable Metrics/AbcSize
 
     def validate_data!(filename)
       unless self.data.is_a?(Hash)
-        raise Errors::InvalidYAMLFrontMatterError, "Invalid YAML front matter in #{filename}"
+        raise Errors::InvalidYAMLFrontMatterError,
+          "Invalid YAML front matter in #{filename}"
       end
     end
 
     def validate_permalink!(filename)
-      if self.data['permalink'] && self.data['permalink'].size == 0
+      if self.data["permalink"] && self.data["permalink"].empty?
         raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
       end
     end
@@ -75,15 +78,7 @@ module Jekyll
     #
     # Returns the transformed contents.
     def transform
-      converters.reduce(content) do |output, converter|
-        begin
-          converter.convert output
-        rescue => e
-          Jekyll.logger.error "Conversion error:", "#{converter.class} encountered an error while converting '#{path}':"
-          Jekyll.logger.error("", e.to_s)
-          raise e
-        end
-      end
+      _renderer.transform
     end
 
     # Determine the extension depending on content_type.
@@ -91,7 +86,7 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      _renderer.output_ext
     end
 
     # Determine which converter to use based on this convertible's
@@ -99,7 +94,7 @@ module Jekyll
     #
     # Returns the Converter instance.
     def converters
-      @converters ||= site.converters.select { |c| c.matches(ext) }.sort
+      _renderer.converters
     end
 
     # Render Liquid in the content
@@ -110,14 +105,9 @@ module Jekyll
     #
     # Returns the converted content
     def render_liquid(content, payload, info, path)
-      site.liquid_renderer.file(path).parse(content).render!(payload, info)
-    rescue Tags::IncludeTagError => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
-      raise e
-    rescue Exception => e
-      Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{path || self.path}"
-      raise e
+      _renderer.render_liquid(content, payload, info, path)
     end
+    # rubocop: enable RescueException
 
     # Convert this Convertible's data to a Hash suitable for use by Liquid.
     #
@@ -168,7 +158,7 @@ module Jekyll
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      '.coffee'.eql?(ext)
+      ".coffee" == ext
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -202,40 +192,10 @@ module Jekyll
     #
     # Returns nothing
     def render_all_layouts(layouts, payload, info)
-      # recursively render layouts
-      layout = layouts[data["layout"]]
-
-      Jekyll.logger.warn("Build Warning:", "Layout '#{data["layout"]}' requested in #{path} does not exist.") if invalid_layout? layout
-
-      used = Set.new([layout])
-
-      # Reset the payload layout data to ensure it starts fresh for each page.
-      payload["layout"] = nil
-
-      while layout
-        Jekyll.logger.debug "Rendering Layout:", path
-        payload["content"] = output
-        payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
-
-        self.output = render_liquid(layout.content,
-                                    payload,
-                                    info,
-                                    layout.relative_path)
-
-        # Add layout to dependency tree
-        site.regenerator.add_dependency(
-          site.in_source_dir(path),
-          site.in_source_dir(layout.path)
-        )
-
-        if layout = layouts[layout.data["layout"]]
-          if used.include?(layout)
-            layout = nil # avoid recursive chain
-          else
-            used << layout
-          end
-        end
-      end
+      _renderer.layouts = layouts
+      self.output = _renderer.place_in_layouts(output, payload, info)
+    ensure
+      @_renderer = nil # this will allow the modifications above to disappear
     end
 
     # Add any necessary layouts to this convertible document.
@@ -245,29 +205,15 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      Jekyll.logger.debug "Rendering:", self.relative_path
+      self.output = _renderer.tap do |renderer|
+        renderer.layouts = layouts
+        renderer.payload = payload
+      end.run
 
-      Jekyll.logger.debug "Pre-Render Hooks:", self.relative_path
-      Jekyll::Hooks.trigger hook_owner, :pre_render, self, payload
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload["page"] } }
-
-      # render and transform content (this becomes the final content of the object)
-      payload["highlighter_prefix"] = converters.first.highlighter_prefix
-      payload["highlighter_suffix"] = converters.first.highlighter_suffix
-
-      if render_with_liquid?
-        Jekyll.logger.debug "Rendering Liquid:", self.relative_path
-        self.content = render_liquid(content, payload, info, path)
-      end
-      Jekyll.logger.debug "Rendering Markup:", self.relative_path
-      self.content = transform
-
-      # output keeps track of what will finally be written
-      self.output = content
-
-      render_all_layouts(layouts, payload, info) if place_in_layout?
       Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
+    ensure
+      @_renderer = nil # this will allow the modifications above to disappear
     end
 
     # Write the generated page file to the destination directory.
@@ -278,9 +224,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
-        f.write(output)
-      end
+      File.write(path, output, :mode => "wb")
       Jekyll::Hooks.trigger hook_owner, :post_write, self
     end
 
@@ -295,6 +239,11 @@ module Jekyll
       else
         data[property]
       end
+    end
+
+    private
+    def _renderer
+      @_renderer ||= Jekyll::Renderer.new(site, self)
     end
   end
 end

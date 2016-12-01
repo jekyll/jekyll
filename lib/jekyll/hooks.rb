@@ -54,7 +54,7 @@ module Jekyll
 
     # Ensure the priority is a Fixnum
     def self.priority_value(priority)
-      return priority if priority.is_a?(Fixnum)
+      return priority if priority.is_a?(Integer)
       PRIORITY_MAP[priority] || DEFAULT_PRIORITY
     end
 
@@ -80,7 +80,7 @@ module Jekyll
     end
 
     def self.insert_hook(owner, event, priority, &block)
-      @hook_priority[block] = "#{priority}.#{@hook_priority.size}".to_f
+      @hook_priority[block] = [-priority, @hook_priority.size]
       @registry[owner][event] << block
     end
 

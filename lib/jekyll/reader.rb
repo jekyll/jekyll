@@ -18,6 +18,7 @@ module Jekyll
       sort_files!
       @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
+      ThemeAssetsReader.new(site).read
     end
 
     # Sorts posts, pages, and static files.

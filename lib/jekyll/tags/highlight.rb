@@ -8,7 +8,7 @@ module Jekyll
       # forms: name, name=value, or name="<quoted list>"
       #
       # <quoted list> is a space-separated list of numbers
-      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$/
+      SYNTAX = %r!^([a-zA-Z0-9.+#_-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!
 
       def initialize(tag_name, markup, tokens)
         super
@@ -29,7 +29,7 @@ eos
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
-        code = super.to_s.gsub(/\A(\n|\r)+|(\n|\r)+\z/, "")
+        code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
 
         is_safe = !!context.registers[:site].safe
 
@@ -67,7 +67,7 @@ eos
         options = {}
         unless input.empty?
           # Split along 3 possible forms -- key="<quoted list>", key=value, or key
-          input.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
+          input.scan(%r!(?:\w="[^"]*"|\w=\w|\w)+!) do |opt|
             key, value = opt.split("=")
             # If a quoted list, convert to array
             if value && value.include?("\"")

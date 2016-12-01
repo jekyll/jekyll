@@ -1,4 +1,5 @@
 require "helper"
+require "colorator"
 
 class TestConfiguration < JekyllUnitTest
   test_config = {
@@ -44,6 +45,20 @@ class TestConfiguration < JekyllUnitTest
         Configuration.from("watch" => true)["watch"],
         "Expected the 'watch' key to not be removed."
       )
+    end
+  end
+
+  context "the defaults" do
+    should "exclude node_modules" do
+      assert_includes Configuration.from({})["exclude"], "node_modules"
+    end
+
+    should "exclude ruby vendor directories" do
+      exclude = Configuration.from({})["exclude"]
+      assert_includes exclude, "vendor/bundle/"
+      assert_includes exclude, "vendor/cache/"
+      assert_includes exclude, "vendor/gems/"
+      assert_includes exclude, "vendor/ruby/"
     end
   end
 
@@ -260,7 +275,9 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML).to receive(:load_file).with(@path) do
         raise SystemCallError, "No such file or directory - #{@path}"
       end
-      allow($stderr).to receive(:puts).with("Configuration file: none".yellow)
+      allow($stderr).to receive(:puts).with(
+        Colorator.yellow("Configuration file: none")
+      )
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
@@ -275,13 +292,12 @@ class TestConfiguration < JekyllUnitTest
       allow($stderr)
         .to receive(:puts)
         .and_return(
-          ("WARNING: "
-             .rjust(20) + "Error reading configuration. Using defaults (and options).")
-              .yellow
+          "WARNING: ".rjust(20) +
+          Colorator.yellow("Error reading configuration. Using defaults (and options).")
         )
       allow($stderr)
         .to receive(:puts)
-        .and_return("Configuration file: (INVALID) #{@path}".yellow)
+        .and_return(Colorator.yellow("Configuration file: (INVALID) #{@path}"))
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
@@ -291,10 +307,10 @@ class TestConfiguration < JekyllUnitTest
       end
       allow($stderr)
         .to receive(:puts)
-        .with((
+        .with(Colorator.red(
           "Fatal: ".rjust(20) + \
           "The configuration file '#{@user_config}' could not be found."
-        ).red)
+        ))
       assert_raises LoadError do
         Jekyll.configuration({ "config" => [@user_config] })
       end
@@ -325,12 +341,23 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML)
         .to receive(:load_file)
         .with(@paths[:other])
-        .and_return({ "baseurl" => "http://wahoo.dev" })
+        .and_return({ "baseurl" => "http://example.com" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
-      Jekyll.configuration({ "config" => @paths[:other] })
       assert_equal \
-        site_configuration({ "baseurl" => "http://wahoo.dev" }),
+        site_configuration({ "baseurl" => "http://example.com" }),
         Jekyll.configuration(test_config.merge({ "config" => @paths[:other] }))
+    end
+
+    should "load different config if specified with symbol key" do
+      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
+      allow(SafeYAML)
+        .to receive(:load_file)
+        .with(@paths[:other])
+        .and_return({ "baseurl" => "http://example.com" })
+      allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
+      assert_equal \
+        site_configuration({ "baseurl" => "http://example.com" }),
+        Jekyll.configuration(test_config.merge({ :config => @paths[:other] }))
     end
 
     should "load default config if path passed is empty" do
@@ -377,7 +404,7 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML)
         .to receive(:load_file)
         .with(@paths[:other])
-        .and_return({ "baseurl" => "http://wahoo.dev" })
+        .and_return({ "baseurl" => "http://example.com" })
       allow($stdout)
         .to receive(:puts)
         .with("Configuration file: #{@paths[:default]}")
@@ -385,7 +412,7 @@ class TestConfiguration < JekyllUnitTest
         .to receive(:puts)
         .with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://wahoo.dev" }),
+        site_configuration({ "baseurl" => "http://example.com" }),
         Jekyll.configuration(
           test_config.merge({ "config" => [@paths[:default], @paths[:other]] })
         )

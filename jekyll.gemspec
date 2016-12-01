@@ -21,8 +21,9 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/jekyll/jekyll'
 
   all_files       = `git ls-files -z`.split("\x0")
-  s.files         = all_files.grep(%r{^(bin|lib)/|^.rubocop.yml$})
-  s.executables   = all_files.grep(%r{^bin/}) { |f| File.basename(f) }
+  s.files         = all_files.grep(%r{^(exe|lib)/|^.rubocop.yml$})
+  s.executables   = all_files.grep(%r{^exe/}) { |f| File.basename(f) }
+  s.bindir        = "exe"
   s.require_paths = ['lib']
 
   s.rdoc_options = ['--charset=UTF-8']
@@ -37,4 +38,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('jekyll-sass-converter', '~> 1.0')
   s.add_runtime_dependency('jekyll-watch', '~> 1.1')
   s.add_runtime_dependency("pathutil", "~> 0.9")
+  s.add_runtime_dependency('addressable', '~> 2.4')
 end

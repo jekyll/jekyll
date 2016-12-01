@@ -30,6 +30,10 @@ module Jekyll
         end
       end
 
+      def warnings
+        @template.warnings
+      end
+
       private
 
       def measure_bytes

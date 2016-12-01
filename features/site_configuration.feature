@@ -64,28 +64,28 @@ Feature: Site configuration
     And the "_site/README" file should not exist
 
   Scenario: Use RDiscount for markup
-    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
+    Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
     And I have a configuration file with "markdown" set to "rdiscount"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
+    And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Use Kramdown for markup
-    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
+    Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
     And I have a configuration file with "markdown" set to "kramdown"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
+    And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Use Redcarpet for markup
-    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
+    Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
     And I have a configuration file with "markdown" set to "redcarpet"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
+    And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Highlight code with pygments
     Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
@@ -161,8 +161,8 @@ Feature: Site configuration
       And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
       And I have an "index.html" page with layout "page" that contains "site index page"
       And I have a configuration file with:
-        | key         | value            |
-        | timezone    | America/New_York |
+        | key         | value        |
+        | timezone    | UTC+04:00    |
       And I have a _posts directory
       And I have the following posts:
         | title     | date                   | layout  | content             |
@@ -181,8 +181,8 @@ Feature: Site configuration
       And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
       And I have an "index.html" page with layout "page" that contains "site index page"
       And I have a configuration file with:
-        | key         | value               |
-        | timezone    | Pacific/Honolulu    |
+        | key         | value        |
+        | timezone    | UTC+10:00    |
       And I have a _posts directory
       And I have the following posts:
         | title     | date                   | layout  | content             |

@@ -62,13 +62,13 @@ We want the Jekyll documentation to be the best it can be. We've open-sourced ou
 
 ### How to submit changes
 
-You can find the documentation for jekyllrb.com in the [site](https://github.com/jekyll/jekyll/tree/master/site) directory. See the section above, [submitting a pull request](#submitting-a-pull-request) for information on how to propose a change.
+You can find the documentation for jekyllrb.com in the [docs](https://github.com/jekyll/jekyll/tree/master/docs) directory. See the section above, [submitting a pull request](#submitting-a-pull-request) for information on how to propose a change.
 
 One gotcha, all pull requests should be directed at the `master` branch (the default branch).
 
 ### Adding plugins
 
-If you want to add your plugin to the [list of plugins](https://jekyllrb.com/docs/plugins/#available-plugins), please submit a pull request modifying the [plugins page source file](site/_docs/plugins.md) by adding a link to your plugin under the proper subheading depending upon its type.
+If you want to add your plugin to the [list of plugins](https://jekyllrb.com/docs/plugins/#available-plugins), please submit a pull request modifying the [plugins page source file](https://github.com/jekyll/jekyll/blob/master/docs/_docs/plugins.md) by adding a link to your plugin under the proper subheading depending upon its type.
 
 ## Code Contributions
 
@@ -80,7 +80,7 @@ Any time you propose a code change, you should also include updates to the docum
 
 #### Documentation
 
-If your contribution changes any Jekyll behavior, make sure to update the documentation. Documentation lives in the `site/_docs` folder (spoiler alert: it's a Jekyll site!). If the docs are missing information, please feel free to add it in. Great docs make a great project. Include changes to the documentation within your pull request, and once merged, `jekyllrb.com` will be updated.
+If your contribution changes any Jekyll behavior, make sure to update the documentation. Documentation lives in the `docs/_docs` folder (spoiler alert: it's a Jekyll site!). If the docs are missing information, please feel free to add it in. Great docs make a great project. Include changes to the documentation within your pull request, and once merged, `jekyllrb.com` will be updated.
 
 #### Tests
 
@@ -90,7 +90,7 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 ### Code contributions generally
 
-* Jekyll follows the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby).
+* Jekyll uses the [Rubocop](https://github.com/bbatsov/rubocop) static analyzer to ensure that contributions follow the [GitHub Ruby Styleguide](https://github.com/styleguide/ruby). Please check your code using `script/fmt` and resolve any errors before pushing your branch.
 
 * Don't bump the Gem version in your pull request (if you don't know what that means, you probably didn't).
 

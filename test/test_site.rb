@@ -14,14 +14,20 @@ class TestSite < JekyllUnitTest
 
     should "have an array for plugins if passed as a string" do
       site = Site.new(site_configuration({ "plugins_dir" => "/tmp/plugins" }))
-      assert_equal ["/tmp/plugins"], site.plugins
+      array = Utils::Platforms.windows? ? ["C:/tmp/plugins"] : ["/tmp/plugins"]
+      assert_equal array, site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
       site = Site.new(site_configuration({
         "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
       }))
-      assert_equal ["/tmp/plugins", "/tmp/otherplugins"], site.plugins
+      array = if Utils::Platforms.windows?
+                ["C:/tmp/plugins", "C:/tmp/otherplugins"]
+              else
+                ["/tmp/plugins", "/tmp/otherplugins"]
+              end
+      assert_equal array, site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
@@ -175,11 +181,13 @@ class TestSite < JekyllUnitTest
         method.call(*args, &block).reverse
       end
       @site.process
-      # files in symlinked directories may appear twice
+      # exclude files in symlinked directories here and insert them in the
+      # following step when not on Windows.
       sorted_pages = %w(
         %#\ +.md
         .htaccess
         about.html
+        application.coffee
         bar.html
         coffeescript.coffee
         contacts.html
@@ -191,13 +199,16 @@ class TestSite < JekyllUnitTest
         humans.txt
         index.html
         index.html
-        main.scss
+        info.md
         main.scss
         properties.html
         sitemap.xml
         static_files.html
-        symlinked-file
       )
+      unless Utils::Platforms.really_windows?
+        # files in symlinked directories may appear twice
+        sorted_pages.push("main.scss", "symlinked-file").sort!
+      end
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
@@ -210,12 +221,12 @@ class TestSite < JekyllUnitTest
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
 
-    should "read pages with yaml front matter" do
+    should "read pages with YAML front matter" do
       abs_path = File.expand_path("about.html", @site.source)
       assert_equal true, Utils.has_yaml_header?(abs_path)
     end
 
-    should "enforce a strict 3-dash limit on the start of the YAML front-matter" do
+    should "enforce a strict 3-dash limit on the start of the YAML front matter" do
       abs_path = File.expand_path("pgp.key", @site.source)
       assert_equal false, Utils.has_yaml_header?(abs_path)
     end
@@ -266,19 +277,19 @@ class TestSite < JekyllUnitTest
         @site.process
         # generate some orphaned files:
         # single file
-        File.open(dest_dir("obsolete.html"), "w")
+        FileUtils.touch(dest_dir("obsolete.html"))
         # single file in sub directory
         FileUtils.mkdir(dest_dir("qux"))
-        File.open(dest_dir("qux/obsolete.html"), "w")
+        FileUtils.touch(dest_dir("qux/obsolete.html"))
         # empty directory
         FileUtils.mkdir(dest_dir("quux"))
         FileUtils.mkdir(dest_dir(".git"))
         FileUtils.mkdir(dest_dir(".svn"))
         FileUtils.mkdir(dest_dir(".hg"))
         # single file in repository
-        File.open(dest_dir(".git/HEAD"), "w")
-        File.open(dest_dir(".svn/HEAD"), "w")
-        File.open(dest_dir(".hg/HEAD"), "w")
+        FileUtils.touch(dest_dir(".git/HEAD"))
+        FileUtils.touch(dest_dir(".svn/HEAD"))
+        FileUtils.touch(dest_dir(".hg/HEAD"))
       end
 
       teardown do
@@ -330,7 +341,7 @@ class TestSite < JekyllUnitTest
         s = Site.new(site_configuration("markdown" => custom_processor))
         s.process
 
-        # Do some cleanup, we don't like straggling stuff's.
+        # Do some cleanup, we don't like straggling stuff.
         Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
       end
 
@@ -356,7 +367,7 @@ class TestSite < JekyllUnitTest
           s.process
         end
 
-        # Do some cleanup, we don't like straggling stuff's.
+        # Do some cleanup, we don't like straggling stuff.
         Jekyll::Converters::Markdown.send(:remove_const, :Custom)
       end
     end
@@ -436,6 +447,21 @@ class TestSite < JekyllUnitTest
         )
       end
 
+      should "auto load yaml files in subdirectory with a period in the name" do
+        site = Site.new(site_configuration)
+        site.process
+
+        file_content = SafeYAML.load_file(File.join(
+          source_dir, "_data", "categories.01", "dairy.yaml"
+        ))
+
+        assert_equal site.data["categories01"]["dairy"], file_content
+        assert_equal(
+          site.site_payload["site"]["data"]["categories01"]["dairy"],
+          file_content
+        )
+      end
+
       should "load symlink files in unsafe mode" do
         site = Site.new(site_configuration("safe" => false))
         site.process
@@ -486,6 +512,34 @@ class TestSite < JekyllUnitTest
         should "be overridden by JEKYLL_ENV" do
           assert_equal "production", @page.content.strip
         end
+      end
+    end
+
+    context "when setting theme" do
+      should "set no theme if config is not set" do
+        expect($stderr).not_to receive(:puts)
+        expect($stdout).not_to receive(:puts)
+        site = fixture_site({ "theme" => nil })
+        assert_nil site.theme
+      end
+
+      should "set no theme if config is a hash" do
+        output = capture_output do
+          site = fixture_site({ "theme" => {} })
+          assert_nil site.theme
+        end
+        expected_msg = "Theme: value of 'theme' in config should be String " \
+          "to use gem-based themes, but got Hash\n"
+        assert output.end_with?(expected_msg),
+          "Expected #{output.inspect} to end with #{expected_msg.inspect}"
+      end
+
+      should "set a theme if the config is a string" do
+        expect($stderr).not_to receive(:puts)
+        expect($stdout).not_to receive(:puts)
+        site = fixture_site({ "theme" => "test-theme" })
+        assert_instance_of Jekyll::Theme, site.theme
+        assert_equal "test-theme", site.theme.name
       end
     end
 
@@ -544,7 +598,7 @@ class TestSite < JekyllUnitTest
         assert_equal mtime3, mtime4 # no modifications, so remain the same
       end
 
-      should "regnerate files that have had their destination deleted" do
+      should "regenerate files that have had their destination deleted" do
         contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
         @site.process
 

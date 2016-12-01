@@ -19,7 +19,9 @@ module Jekyll
 
         def process(options)
           site = Jekyll::Site.new(configuration_from_options(options))
+          site.reset
           site.read
+          site.generate
 
           if healthy?(site)
             Jekyll.logger.info "Your test results", "are in. Everything looks fine."
@@ -63,7 +65,7 @@ module Jekyll
         def fsnotify_buggy?(_site)
           return true unless Utils::Platforms.osx?
           if Dir.pwd != `pwd`.strip
-            Jekyll.logger.error "  " + <<-STR.strip.gsub(/\n\s+/, "\n  ")
+            Jekyll.logger.error "  " + <<-STR.strip.gsub(%r!\n\s+!, "\n  ")
               We have detected that there might be trouble using fsevent on your
               operating system, you can read https://github.com/thibaudgg/rb-fsevent/wiki/no-fsevents-fired-(OSX-bug)
               for possible work arounds or you can work around it immediately
