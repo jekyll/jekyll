@@ -10,6 +10,7 @@
   * Bring documentation on 'Directory Structure' up-to-date (#5573)
   * Use only the used Font Awesome icons. (#5530)
   * Switch to `https` when possible. (#5611)
+  * Update _font-awesome.scss (#5614)
 
 ### Minor Enhancements
 
