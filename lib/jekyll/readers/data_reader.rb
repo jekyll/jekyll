@@ -19,7 +19,7 @@ module Jekyll
       @content
     end
 
-    # Read and parse all .yaml, .yml, .json, and .csv 
+    # Read and parse all .yaml, .yml, .json, and .csv
     # files under <dir> and add them to the <data> variable.
     #
     # dir - The string absolute path of the directory to read.
