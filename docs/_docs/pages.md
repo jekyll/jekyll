@@ -59,42 +59,21 @@ and associated URLs might look like:
 └── contact.html  # => http://example.com/contact.html
 ```
 
-### Named folders containing index HTML files
+If you have a lot of pages, you can organize those pages into subfolders. The same subfolders that are used to group your pages in our project's source will exist in the _site folder when your site builds.
 
-There is nothing wrong with the above method. However, some people like to keep
-their URLs free from things like filename extensions. To achieve clean URLs for
-pages using Jekyll, you simply need to create a folder for each top-level page
-you want, and then place an `index.html` file in each page’s folder. This way
-the page URL ends up being the folder name, and the web server will serve up
-the respective `index.html` file. Here's an example of what this structure
-might look like:
+If you want to automatically move pages to the root in the _site directory when your page builds (similar to post behavior), add a permalink in your page's frontmatter like this:
 
-```sh
-.
-├── _config.yml
-├── _includes/
-├── _layouts/
-├── _posts/
-├── _site/
-├── about/
-|   └── index.html  # => http://example.com/about/
-├── contact/
-|   └── index.html  # => http://example.com/contact/
-|── other/
-|   └── index.md    # => http://example.com/other/
-└── index.html      # => http://example.com/
+```
+---
+title: My page
+permalink: mypageurl.html
+---
 ```
 
-This approach may not suit everyone, but for people who like clean URLs it’s
-simple and it works. In the end, the decision is yours!
+### Named folders containing index HTML files
 
-<div class="note">
-  <h5>ProTip™: Use permalink Front Matter Variable</h5>
-  <p>
-    Clean URLs can also be achieved using the <code>permalink</code> front
-    matter variable. In the example above, using the first method, you can
-    get URL <code>http://example.com/other</code> for the file
-    <code>other.md</code> by setting this at the top of the file:
-    <code>permalink: /other</code>
-  </p>
-</div>
+If you don't want file extensions (`.html`) to appear in your page URLs (which is the default), you can choose a [permalink](../permalinks.html) style that has a trailing slash instead.
+
+Which style is better? Neither has better SEO, but some people feel that "clean" URLs (without the file extension) are more readable and hence more likely to be clicked in search results.
+
+On the other hand, if you want to build your site and view it offline (without the Jekyll preview server), your browsers will need the file extension to display the page.

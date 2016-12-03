@@ -622,64 +622,6 @@ site. If you use `linenos`, you might want to include an additional CSS class
 definition for the `.lineno` class in `syntax.css` to distinguish the line
 numbers from the highlighted code.
 
-### Link
-
-If you want to include a link to a collection's document, a post, a page
-or a file the `link` tag will generate the correct permalink URL for the path
-you specify.
-
-You must include the file extension when using the `link` tag.
-
-```liquid
-{% raw %}
-{{ site.baseurl }}{% link _collection/name-of-document.md %}
-{{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %}
-{{ site.baseurl }}{% link news/index.html %}
-{{ site.baseurl }}{% link /assets/files/doc.pdf %}
-{% endraw %}
-```
-
-You can also use this tag to create a link in Markdown as follows:
-
-```liquid
-{% raw %}
-[Link to a document]({{ site.baseurl }}{% link _collection/name-of-document.md %})
-[Link to a post]({{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %})
-[Link to a page]({{ site.baseurl }}{% link news/index.html %})
-[Link to a file]({{ site.baseurl }}{% link /assets/files/doc.pdf %})
-{% endraw %}
-```
-
-### Post URL
-
-If you would like to include a link to a post on your site, the `post_url` tag
-will generate the correct permalink URL for the post you specify.
-
-```liquid
-{% raw %}
-{{ site.baseurl }}{% post_url 2010-07-21-name-of-post %}
-{% endraw %}
-```
-
-If you organize your posts in subdirectories, you need to include subdirectory
-path to the post:
-
-```liquid
-{% raw %}
-{{ site.baseurl }}{% post_url /subdir/2010-07-21-name-of-post %}
-{% endraw %}
-```
-
-There is no need to include the file extension when using the `post_url` tag.
-
-You can also use this tag to create a link to a post in Markdown as follows:
-
-```liquid
-{% raw %}
-[Name of Link]({{ site.baseurl }}{% post_url 2010-07-21-name-of-post %})
-{% endraw %}
-```
-
 ### Gist
 
 Use the `gist` tag to easily embed a GitHub Gist onto your site. This works
@@ -701,3 +643,67 @@ You may also optionally specify the filename in the gist to display:
 
 To use the `gist` tag, you'll need to add the
 [jekyll-gist](https://github.com/jekyll/jekyll-gist) gem to your project.
+
+## Linking to pages {#linktags}
+
+To link to a post, a page, collection item, or file, the `link` tag will generate the correct permalink URL for the path you specify. For example, if you use the `link` tag to link to mypage.html, if you change your permalink style to include the file extension or omit it, the URL formed by the `link` tag will always be valid.
+
+You must include the file's original extension when using the `link` tag. Here are some examples:
+
+```liquid
+{% raw %}
+{{ site.baseurl }}{% link _collection/name-of-document.md %}
+{{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %}
+{{ site.baseurl }}{% link news/index.html %}
+{{ site.baseurl }}{% link /assets/files/doc.pdf %}
+{% endraw %}
+```
+
+You can also use the link tag to create a link in Markdown as follows:
+
+```liquid
+{% raw %}
+[Link to a document]({{ site.baseurl }}{% link _collection/name-of-document.md %})
+[Link to a post]({{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %})
+[Link to a page]({{ site.baseurl }}{% link news/index.html %})
+[Link to a file]({{ site.baseurl }}{% link /assets/files/doc.pdf %})
+{% endraw %}
+```
+
+Including {% raw %}{{site.baseurl}}{% endraw %} is optional -- it depends on whether you want the link to be absolute or root-relative.
+
+The path to the post, page, or collection is defined as the path starting from the root directory (where your config file is) to the file, not the path from your existing page to the other page. 
+
+For example, suppose you're creating a link page_a.md stored in pages/folder1/folder2 directory to page_b.md stored in pages/folder1 directory. Your path in the link would not be ../page_b.html. Instead, it would be /pages/folder1/page_b.md.
+
+If you're unsure of the path, add {% raw %}{{page.path}}{% endraw %} to the page and it will display the path.
+ 
+One major benefit of using the `link` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
+
+### Linking to posts
+
+If you want like to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
+
+```liquid
+{% raw %}
+{{ site.baseurl }}{% post_url 2010-07-21-name-of-post %}
+{% endraw %}
+```
+
+If you organize your posts in subdirectories, you need to include subdirectory path to the post:
+
+```liquid
+{% raw %}
+{{ site.baseurl }}{% post_url /subdir/2010-07-21-name-of-post %}
+{% endraw %}
+```
+
+There is no need to include the file extension when using the `post_url` tag.
+
+You can also use this tag to create a link to a post in Markdown as follows:
+
+```liquid
+{% raw %}
+[Name of Link]({{ site.baseurl }}{% post_url 2010-07-21-name-of-post %})
+{% endraw %}
+```
