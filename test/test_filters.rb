@@ -793,6 +793,12 @@ class TestFilters < JekyllUnitTest
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
           @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
       end
+      should "return sorted by subproperty array" do
+        assert_equal [{ "a" => { "b" => 1 } }, { "a" => { "b" => 2 } },
+                      { "a" => { "b" => 3 } }],
+          @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
+                        { "a" => { "b" => 3 } }], "a.b")
+      end
     end
 
     context "to_integer filter" do
