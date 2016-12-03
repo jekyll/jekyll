@@ -390,7 +390,7 @@ module Jekyll
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
         res = item.to_liquid
-        for attr in property.to_s.split(".")
+        property.to_s.split(".").each do |attr|
           res = res[attr]
         end
         res
