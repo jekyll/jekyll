@@ -4,11 +4,11 @@ title: Permalinks
 permalink: /docs/permalinks/
 ---
 
-Jekyll supports a flexible way to build the permalinks for your pages, posts, and collections. A permalink is the URL for the page, post or collection (excluding the domain name or directory folder). 
+Jekyll supports a flexible way to build the permalinks for your pages, posts, and collections. A permalink is the URL for the page, post, or collection (excluding the domain name or directory folder). 
 
 You construct permalinks by creating a template URL where dynamic elements are represented by colon-prefixed keywords. The default template permalink is as follows: `/:categories/:year/:month/:day/:title.html`. Each of the colon-prefixed keywords is a template variable. 
 
-You’re free to choose construct your own permalink style using the available template variables or choose one of the built-in permalink styles (such as `date`) that automatically use a template-variable pattern.
+You’re free to construct your own permalink style using template variables or choose one of the built-in permalink styles (such as `date`) that automatically use a template-variable pattern.
 
 ## Where to configure permalinks
 
@@ -48,11 +48,11 @@ When you use permalinks that omit the `.html` file extension (called "clean URLs
 │   └── index.html
 ```
 
-Servers automatically load the index.html file inside of any folder, so users can simply type `mypageurl` to get to the page.
+Servers automatically load the index.html file inside of any folder, so users can simply type `http://somedomain.com/mypageurl` to get to index.html. 
  
 ## Template variables for permalinks
 
-The following table lists the template variables available to use in your permalink configuration.
+The following table lists the template variables available for permalinks.
 
 <div class="mobile-side-scroller">
 <table>
@@ -181,6 +181,8 @@ The following table lists the template variables available to use in your permal
 </table>
 </div>
 
+Note that all template variables relating to time or categories are available to posts only.
+
 ## Built-in permalink styles {#builtinpermalinkstyles}
 
 Although you can specify a custom permalink pattern using template variables, Jekyll also provides the following built-in styles for convenience.
@@ -298,27 +300,33 @@ The permalink setting in your configuration file specifies the permalink style u
 
 For example, a permalink style of `/:categories/:year/:month/:day/:title.html` for posts becomes `/:title.html` for pages and collections.
 
-A permalink style of `pretty` (or `/:categories/:year/:month/:day/:title/`), which omits the file extension and contains a trailing slash, will update page and collection permalinks to also contain a trailing slash: `/:title/`. But no time or category information will appear in page or collection permalinks.
+A permalink style of `pretty` (or `/:categories/:year/:month/:day/:title/`), which omits the file extension and contains a trailing slash, will update page and collection permalinks to also omit the file extension and contain a trailing slash: `/:title/`. But no time or category information will be included.
 
-## Default paths 
+## Permalinks and default paths
 
 The path to the post or page in the built site differs for posts, pages, and collections:
 
-**Posts**. No matter how many subfolders you organize your posts into inside your _posts folder, all posts are pulled out of those subfolders and flattened into the _site's root directory upon build. 
+### Posts
 
-If you use a permalink style that omits the `.html` file extension, each post is rendered as index.html file inside a folder with the post's name (for example, `categoryname/2016/12/01/mypostname/index.html`). 
+No matter how many subfolders you organize your posts into inside your _posts folder, all posts are pulled out of those subfolders and flattened into the _site's root directory upon build. 
 
-**Pages**. Pages are *not* removed from their subfolder directories when you build your site. Pages remain in the same folder and subfolder structure in which you organized your pages in the source directory, except that the structure is now mirrored in _site. 
+If you use a permalink style that omits the `.html` file extension, each post is rendered as an index.html file inside a folder with the post's name (for example, `categoryname/2016/12/01/mypostname/index.html`). 
+
+### Pages
+
+Pages are *not* removed from their subfolder directories when you build your site. Pages remain in the same folder and subfolder structure in which you organized your pages in the source directory, except that the structure is now mirrored in _site. 
 
 As with posts, if you use a permalink style that omits the `.html` file extension, each page is rendered as an index.html file inserted inside a folder with the page's name (for example, `mypage/index.html`).
 
-**Collections**. By default, collections follow a similar structure in the _site folder as pages, except that the path is prefaced by the collection name. For example: `collectionname/mypage.html`. For permalink settings that omit the file extension, the path would be `collection_name/mypage/index.html`. 
+### Collections
 
-Collections have their own way of setting permalinks. Additionally, collections have unique template variables available available (such as `path` and `output_ext`). See the ["Configuring permalinks for collections"]( ../collections.html#permalinks ) in Collections for more information.
+By default, collections follow a similar structure in the _site folder as pages, except that the path is prefaced by the collection name. For example: `collectionname/mypage.html`. For permalink settings that omit the file extension, the path would be `collection_name/mypage/index.html`. 
+
+Collections have their own way of setting permalinks. Additionally, collections have unique template variables available available (such as `path` and `output_ext`). See the ["Configuring permalinks for collections"]( ../collections#permalinks ) in Collections for more information.
 
 ## Flattening pages in the _site folder on build
 
-If you want to flatten your pages (pull them out of subfolders) in the _site directory when your site builds (similar to posts), add the permalink property in each of your page's frontmatter like this:
+If you want to flatten your pages (pull them out of subfolders) in the _site directory when your site builds (similar to posts), add the permalink property in each of your page's frontmatter:
 
 ```
 ---
@@ -327,7 +335,7 @@ permalink: mypageurl.html
 ---
 ```
 
-Moving all pages to the root on build can make it easier to implement relative linking across your site, if that's important for you (such as for offline viewing).
+Moving all pages to the root on build can make it easier to implement relative linking across your site, if that's important for you.
 
 ## Extensionless permalinks with no trailing slashes {#extensionless-permalinks}
 

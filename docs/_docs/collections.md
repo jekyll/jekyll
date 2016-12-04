@@ -153,9 +153,9 @@ Collections have the following template variables available for permalinks:
 
 ## Permalink examples for collections
 
-Depending on how you declare your permalinks in your configuration file, the permalinks and paths get written differently in the _site folder. A few examples will help clarify the various options.
+Depending on how you declare your permalinks in your configuration file, the permalinks and paths get written differently in the _site folder. A few examples will help clarify the options.
 
-Let's say your collection is called "apidocs", with doc1.md in your collection. doc1.md is grouped inside a folder called "mydocs". Your project's source directory for the collection looks this:
+Let's say your collection is called "apidocs" with doc1.md in your collection. doc1.md is grouped inside a folder called "mydocs". Your project's source directory for the collection looks this:
 
 ```
 ├── _apidocs
@@ -163,7 +163,7 @@ Let's say your collection is called "apidocs", with doc1.md in your collection. 
 │       └── doc1.md
 ```
 
-The following examples show various permalink configurations and their outputs based on this scenario.
+Based on this scenario, here are a few permalink options.
 
 **Permalink configuration**: None <br/>
 **Output**: 
