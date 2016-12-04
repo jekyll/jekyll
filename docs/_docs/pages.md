@@ -28,16 +28,14 @@ homepage of your Jekyll-generated site.
 ## Where additional pages live
 
 Where you put HTML or [Markdown](https://daringfireball.net/projects/markdown/)
-files for pages depends on how you want the pages to work.
-There are two main ways of creating pages:
+files for pages depends on how you want the pages to work. There are two main ways of creating pages:
 
 - Place named HTML or [Markdown](https://daringfireball.net/projects/markdown/)
 files for each page in your site's root folder.
-- Create a folder in the site's root for each page, and place an index.html
-or index.md file in each page folder.
+- Place pages inside folders and subfolders named whatever you want.
 
 Both methods work fine (and can be used in conjunction with each other),
-with the only real difference being the resulting URLs.
+with the only real difference being the resulting URLs. Pages retain the same folder structure in _site as they do in the source directory.
 
 ### Named HTML files
 
@@ -72,8 +70,8 @@ permalink: mypageurl.html
 
 ### Named folders containing index HTML files
 
-If you don't want file extensions (`.html`) to appear in your page URLs (which is the default), you can choose a [permalink](../permalinks.html) style that has a trailing slash instead.
+If you don't want file extensions (`.html`) to appear in your page URLs (file extensions are the default), you can choose a [permalink](../permalinks.html) style that has a trailing slash instead of a file extension.
 
-Which style is better? Neither has better SEO, but some people feel that "clean" URLs (without the file extension) are more readable and hence more likely to be clicked in search results.
+Which style is better &mdash; URLs with file extensions or clean URLs? Neither has better SEO, but some people feel that clean URLs are more readable and hence more likely to be clicked in search results.
 
-On the other hand, if you want to build your site and view it offline (without the Jekyll preview server), your browsers will need the file extension to display the page.
+On the other hand, if you want to build your site and view it offline without the Jekyll preview server, your browser will need the file extension to display the page.
