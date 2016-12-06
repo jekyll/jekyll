@@ -70,7 +70,7 @@ permalink: mypageurl.html
 
 ### Named folders containing index HTML files
 
-If you don't want file extensions (`.html`) to appear in your page URLs (file extensions are the default), you can choose a [permalink](../permalinks.html) style that has a trailing slash instead of a file extension.
+If you don't want file extensions (`.html`) to appear in your page URLs (file extensions are the default), you can choose a [permalink style](../permalinks/#builtinpermalinkstyles) that has a trailing slash instead of a file extension.
 
 Which style is better &mdash; URLs with file extensions or clean URLs? Neither has better SEO, but some people feel that clean URLs are more readable and hence more likely to be clicked in search results.
 

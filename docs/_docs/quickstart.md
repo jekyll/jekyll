@@ -7,19 +7,24 @@ permalink: /docs/quickstart/
 If you already have [Ruby](https://www.ruby-lang.org/en/downloads/) and [RubyGems](https://rubygems.org/pages/download) installed (see Jekyll's [requirements](/docs/installation/#requirements/)), you can create a new Jekyll site by doing the following:
 
 ```sh
+# Install Jekyll and Bundler through RubyGems
 ~ $ gem install jekyll bundler 
-# installs Jekyll and Bundler through RubyGems
+
+# Create a new Jekyll site at myblog
 ~ $ jekyll new myblog 
-# Creates a new Jekyll site called myblog
+
+# Change into new directory
 ~ $ cd myblog
+
+# Build the site on the preview server
 ~/myblog $ bundle exec jekyll serve 
-# Builds the site on the preview server
+
 # Now browse to http://localhost:4000
 ```
 
-The `jekyll new myblog` command installs a new Jekyll site into a subdirectory called `myblog`. The `jekyll new` command automatically initiates `bundle install` to install the dependencies required. (To skip `bundle install`, you can add the following flag: `jekyll new myblog --skip-bundle`.) {% comment %} why would someone want to skip bundle install -- seems unnecessary to even mention it. {% endcomment %}
+The `jekyll new <PATH>` command installs a new Jekyll site at the path specified &mdash; in this case, in a directory called `myblog`. To install jekyll into the directory you're currently in, run `jekyll new .` (If the existing directory isn't empty, you'll also have to pass the `--force` option with `jekyll new . --force`.)  
 
-To install jekyll into the directory you're currently in, run `jekyll new .` (If the existing directory isn't empty, you'll also have to pass the `--force` option with `jekyll new . --force`.)  
+The `jekyll new` command automatically initiates `bundle install` to install the dependencies required. (If you don't want Bundler to install the gems, add the following option: `jekyll new myblog --skip-bundle`.) 
 
 ## Understanding gem-based themes
 
@@ -63,7 +68,7 @@ To copy the gem's files directly into your Jekyll folder:
     
     A Finder or Explorer window opens showing the Minima files and directories, which include _includes, _layouts, _sass, assets, LICENSE.txt, README.md.
      
-3.  Copy these files into your `/myblog` directory.
+3.  Copy these files into your `/myblog` directory (or wherever you installed your Jekyll site).
 4.  To remove the gem from the theme:
     
     *  Open **Gemfile** and remove `gem "minima", "~> 2.0"`. 
@@ -75,11 +80,11 @@ You've now copied all gem files into your theme directory and removed the gem fr
 
 ## Gem-based themes and Github Pages
 
-If you're publishing your Jekyll site on [Github Pages](https://pages.github.com/), note that Github Pages supports only some gem-based themes. (Gem-based themes are a new feature.) See [Supported Themes](https://pages.github.com/themes/) in Github's documentation to see which themes are supported. (Currently only Minima is supported.) 
+If you're publishing your Jekyll site on [Github Pages](https://pages.github.com/), note that Github Pages supports only some gem-based themes. (Gem-based themes are a new feature.) See [Supported Themes](https://pages.github.com/themes/) in Github's documentation to see which themes are supported. Currently only Minima is supported.
 
 ## Using other themes
 
-The `jekyll new <sitename>` command isn't the only way to create a new Jekyll site. You can also simply [find a Jekyll theme](https://www.google.com/search?q=jekyll+themes&oq=jekyll+themes) you like, download the theme, and run the following commands to install and start Jekyll:
+The `jekyll new <sitename>` command isn't the only way to create a new Jekyll site. You can also simply find a [Jekyll theme](../themes/) you like, download the theme, and run the following commands to install and start Jekyll:
 
 ```sh
 ~ $ gem install jekyll bundler 
