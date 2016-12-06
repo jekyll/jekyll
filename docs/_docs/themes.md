@@ -4,28 +4,37 @@ title: Themes
 permalink: /docs/themes/
 ---
 
-Jekyll has an extensive theme system, which allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes package layouts, includes, and stylesheets in a way that can be overridden by your site's content.
+Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes package layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
-## Installing a theme
+## Understanding gem-based themes
 
-1. To install a theme, first, add the theme to your site's `Gemfile`:
+When you [create a new Jekyll site](/docs/quickstart) (by running the `jekyll new <PATH>` command), Jekyll installs a gem-based theme called [Minima](https://github.com/jekyll/minima). 
 
-        gem 'my-awesome-jekyll-theme'
+With [gem-based themes](/docs/themes/), some of the theme directories and files are stored in the gem, hidden from view in your Jekyll project. As a result, the files and directories shown for your site are a subset of all the theme's files. In the case of Minima, you see only the following:
 
-2. Save the changes to your `Gemfile`
-3. Run the command `bundle install` to install the theme
-4. Finally, activate the theme by adding the following to your site's `_config.yml`:
+```
+├── Gemfile
+├── Gemfile.lock
+├── _config.yml
+├── _posts
+│   └── 2016-12-04-welcome-to-jekyll.markdown
+├── about.md
+└── index.md
+```
 
-        theme: my-awesome-jekyll-theme
+The Gemfile and Gemfile.lock files are used by Bundler to keep track of the required gems and gem versions you need to build your Jekyll site.
 
-You can have multiple themes listed in your site's Gemfile, but only one theme can be selected in your site's `_config.yml`.
-{: .note .info }
+Gem-based themes make it easy for theme developers to remotely update the theme for everyone who has the gem. When there's an update, theme developers push the update to RubyGems. 
 
-## Overriding theme defaults
+You can then run `bundle update` to update all gems in your project (or run `bundle update <theme>`, replacing `<theme>` with the theme name, such as `minima`, to just update your theme gem). Any new files or updates the theme developer has made (such as to stylesheets or includes) will be pulled into your project automatically.
 
-Jekyll themes set default layouts, includes, and stylesheets, that can be overridden by your site's content. For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` folder (e.g., `_layouts/page.html`).
+The goal of gem-based themes is to allow you to get all the benefits of a robust, continually updated theme without having all the theme's files getting in your way and over-complicating what might be your primary focus: creating content.
 
-Jekyll will look first to your site's content, before looking to the theme's defaults, for any requested file in the following folders:
+## Overwriting theme defaults
+
+Jekyll themes set default layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content. For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` folder (e.g., `_layouts/page.html`).
+
+Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
 
 * `/assets`
 * `/_layouts`
@@ -35,13 +44,70 @@ Jekyll will look first to your site's content, before looking to the theme's def
 Refer to your selected theme's documentation and source repository for more information on what files you can override.
 {: .note .info}
 
-To locate theme's files on your computer, run `bundle show` followed by
-the name of the theme's gem, e.g. `bundle show minima` for default Jekyll's
-theme. Then copy the files you want to override, from the returned path to your root folder.
+To locate theme's files on your computer:
 
-## Creating a theme
+1.  Run `bundle show` followed by the name of the theme's gem, e.g., `bundle show minima` for default Jekyll's theme. 
+    
+    The location of the theme gem is returned. For example, minima is located in `/usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0` on a Mac.
+        
+2.  Change to the directory's location and open the directory in Finder or Explorer:
 
-Jekyll themes are distributed as Ruby gems. Don't worry, Jekyll will help you scaffold a new theme with the `new-theme` command. Just run `jekyll new-theme` with the theme name as an argument:
+    ```
+    cd /usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0
+    open . 
+    # for Windows, use "explorer ."
+    ```
+    
+    A Finder or Explorer window opens showing the theme's files and directories.
+     
+    With a clear understanding of the theme's files, you can now override any theme file by creating a similarly named file in your Jekyll site directory.
+    
+If you want to get rid of the theme gem altogether, copy the files from the theme gem's directory into your Jekyll site directory (for example, copy them to `/myblog` if you created your Jekyll site at `/myblog`).
+
+Then modify the Gemfile and configuration to remove references to the theme gem. For example, to remove Minima:
+*  Open **Gemfile** and remove `gem "minima", "~> 2.0"`.
+*  Open **_config.yml** and remove `theme: minima`.
+    
+Now `bundle update` will no longer get updates for the theme gem.
+
+## Using themes other than the default
+
+The `jekyll new <PATH>` command isn't the only way to create a new Jekyll site with a gem-based theme. You can also [find gem-based themes](https://github.com/jekyll/jekyll/wiki/Themes) online and incorporate them into your Jekyll project. To install a gem-based theme:
+    
+1.  Add the theme to your site's `Gemfile`:
+
+    ```
+    gem 'my-awesome-jekyll-theme'
+    ```
+    
+3.  Install the theme:
+    
+    ```
+    bundle install
+    ```
+    
+3. Add the following to your site's `_config.yml` to activate the theme:
+    
+    ```
+    theme: my-awesome-jekyll-theme
+    ```
+
+5.  Build your site:
+    
+    ```
+    bundle exec jekyll serve
+    ```
+    
+You can have multiple themes listed in your site's Gemfile, but only one theme can be selected in your site's `_config.yml`.
+{: .note .info }
+
+If you're publishing your Jekyll site on [Github Pages](https://pages.github.com/), note that Github Pages supports only some gem-based themes. See [Supported Themes](https://pages.github.com/themes/) in Github's documentation to see which themes are supported. Currently only Minima is currently supported.
+
+## Creating your own gem-based theme
+
+If you're a Jekyll theme developer (rather than just a consumer of themes), you can package up your theme in RubyGems and allow users to install it through Bundler.
+
+If you're unfamiliar with distributing Ruby gems, don't worry, Jekyll will help you scaffold a new theme with the `new-theme` command. Just run `jekyll new-theme` with the theme name as an argument:
 
 ```sh
 jekyll new-theme my-awesome-theme
@@ -61,7 +127,7 @@ Your new Jekyll theme, my-awesome-theme, is ready for you in /path/to/my-awesome
 For help getting started, read /path/to/my-awesome-theme/README.md.
 ```
 
-Add your template files in the corresponding folders, complete the `.gemspec` and the README files according to your needs.
+Add your template files in the corresponding folders. Then complete the `.gemspec` and the README files according to your needs.
 
 ### Layouts and includes
 
@@ -71,7 +137,7 @@ For example, if your theme has a `/_layouts/page.html` file, and a page has `lay
 
 ### Assets
 
-Any file in `/assets` will be copied over to the user's site upon build unless they have a file with the same relative path. You may ship any kind of asset here: SCSS, an image, a webfont, etc. These files behave just like pages and static files in Jekyll: if the file has [YAML front matter]({{ site.baseurl }}/docs/frontmatter/) at the top, then it will be rendered. If it does not have YAML front matter, it will simply be copied over into the resulting site. This allows theme creators to ship a default `/assets/styles.scss` file which their layouts can depend on as `/assets/styles.css`.
+Any file in `/assets` will be copied over to the user's site upon build unless they have a file with the same relative path. You can ship any kind of asset here: SCSS, an image, a webfont, etc. These files behave just like pages and static files in Jekyll: if the file has [YAML front matter](../docs/frontmatter/) at the top, then it will be rendered. If it does not have YAML front matter, it will simply be copied over into the resulting site. This allows theme creators to ship a default `/assets/styles.scss` file which their layouts can depend on as `/assets/styles.css`.
 
 All files in `/assets` will be output into the compiled site in the `/assets` folder just as you'd expect from using Jekyll on your sites.
 
