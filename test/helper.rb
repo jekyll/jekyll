@@ -159,11 +159,11 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def capture_output
-    stderr = StringIO.new
-    Jekyll.logger = Logger.new stderr
+    buffer = StringIO.new
+    Jekyll.logger = Logger.new(buffer)
     yield
-    stderr.rewind
-    return stderr.string.to_s
+    buffer.rewind
+    buffer.string.to_s
   end
   alias_method :capture_stdout, :capture_output
   alias_method :capture_stderr, :capture_output
