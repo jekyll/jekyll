@@ -30,6 +30,7 @@
 
   * Fixed typo (#5632)
   * use backticks for Gemfile for consistency since in the next sentence … (#5641)
+  * Update Core team list in the README file (#5643)
 
 ## 3.3.1 / 2016-11-14
 
