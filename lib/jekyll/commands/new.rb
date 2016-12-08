@@ -121,22 +121,23 @@ RUBY
         # unless the user opts to generate a blank blog or skip 'bundle install'.
 
         def after_install(path, options = {})
-          Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
-          Jekyll.logger.info "Bundle install skipped." if options["skip-bundle"]
-
           unless options["blank"] || options["skip-bundle"]
             bundle_install path
           end
+
+          Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
+          Jekyll.logger.info "Bundle install skipped." if options["skip-bundle"]
         end
 
         def bundle_install(path)
           Jekyll::External.require_with_graceful_fail "bundler"
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
-            _, output = Jekyll::Utils::Exec.run("bundle", "install", "--quiet")
+            process, output = Jekyll::Utils::Exec.run("bundle", "install")
             output.to_s.each_line do |line|
-              Jekyll.logger.info(line)
+              Jekyll.logger.info("Bundler:".green, line.strip) unless line.to_s.empty?
             end
+            raise SystemExit unless process.success?
           end
         end
       end
