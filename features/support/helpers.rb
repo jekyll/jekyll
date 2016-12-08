@@ -102,8 +102,6 @@ def run_jekyll(args)
 end
 
 #
-
-# rubocop:disable Metrics/AbcSize
 def run_in_shell(*args)
   p, output = Jekyll::Utils::Exec.run(*args)
 

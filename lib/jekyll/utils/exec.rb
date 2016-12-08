@@ -1,4 +1,4 @@
-require 'open3'
+require "open3"
 
 module Jekyll
   module Utils
