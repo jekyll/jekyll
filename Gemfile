@@ -79,6 +79,9 @@ group :jekyll_optional_dependencies do
     gem "classifier-reborn", "~> 2.0"
     gem "liquid-c", "~> 3.0"
   end
+
+  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+  gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 end
 
 #

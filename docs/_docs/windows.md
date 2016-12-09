@@ -34,6 +34,19 @@ the site generation process. It can be done with the following command:
 $ chcp 65001
 ```
 
+## Timezone Management
+
+Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.  
+Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
+
+Jekyll now uses a rubygem to internally configure Timezone based on established [IANA Timezone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).  
+While 'new' blogs created with Jekyll v3.4 and greater, will have the following added to their 'Gemfile' by default, existing sites *will* have to update their 'Gemfile' (and installed) to enable development on Windows:
+
+```ruby
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+```
+
 ## Auto-regeneration
 
 As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
