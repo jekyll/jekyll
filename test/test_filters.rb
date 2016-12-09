@@ -656,6 +656,15 @@ class TestFilters < JekyllUnitTest
         assert_equal 0, @filter.where(hash, "category", "ear").length
       end
 
+      should "not match string values that include a space" do
+        hash = {
+          "a" => { "category"=>"bear" },
+          "b" => { "category"=>"wolf" },
+          "c" => { "category"=>"polar bear" }
+        }
+        assert_equal 1, @filter.where(hash, "category", "polar bear").length
+      end
+
       should "stringify during comparison for compatibility with liquid parsing" do
         hash = {
           "The Words" => { "rating" => 1.2, "featured" => false },
