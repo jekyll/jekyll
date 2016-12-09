@@ -239,8 +239,8 @@ module Jekyll
       return input unless input.respond_to?(:select)
       input = input.values if input.is_a?(Hash)
       input.select do |object|
-        item_property(object, property).to_s == value.to_s or
-        Array(item_property(object, property)).map(&:to_s).include?(value.to_s)
+        (item_property(object, property).to_s == value.to_s) ||
+          Array(item_property(object, property)).map(&:to_s).include?(value.to_s)
       end || []
     end
 
