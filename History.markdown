@@ -27,6 +27,7 @@
 
   * clean unit-test names in `test/test_tags.rb` (#5608)
   * Add cucumber feature to test for bonafide theme gems (#5384)
+  * Use `assert_nil` instead of `assert_equal nil` (#5652)
 
 ### Documentation
 
