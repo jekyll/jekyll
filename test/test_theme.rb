@@ -47,11 +47,11 @@ class TestTheme < JekyllUnitTest
     end
 
     should "not allow paths outside of the theme root" do
-      assert_equal nil, @theme.send(:path_for, "../../source")
+      assert_nil @theme.send(:path_for, "../../source")
     end
 
     should "return nil for paths that don't exist" do
-      assert_equal nil, @theme.send(:path_for, "foo")
+      assert_nil @theme.send(:path_for, "foo")
     end
 
     should "return the resolved path when a symlink & resolved path exists" do

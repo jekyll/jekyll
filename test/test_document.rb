@@ -206,7 +206,7 @@ class TestDocument < JekyllUnitTest
     should "not know the specified front matter defaults" do
       assert_equal "Example slide", @document.data["title"]
       assert_equal "slide", @document.data["layout"]
-      assert_equal nil, @document.data["nested"]
+      assert_nil @document.data["nested"]
     end
   end
 
