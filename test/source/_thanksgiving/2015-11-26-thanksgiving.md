@@ -1,3 +1,0 @@
----
----
-Happy {{ page.title }} !

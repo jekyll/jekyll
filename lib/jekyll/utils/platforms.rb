@@ -1,7 +1,6 @@
 module Jekyll
   module Utils
-    module Platforms
-      extend self
+    module Platforms extend self
 
       # Provides jruby? and mri? which respectively detect these two types of
       # tested Engines we support, in the future we might probably support the
@@ -17,8 +16,9 @@ module Jekyll
       # platforms. This is mostly useful for `jekyll doctor` and for testing
       # where we kick off certain tests based on the platform.
 
-      { :windows? => %r!mswin|mingw|cygwin!, :linux? => %r!linux!, \
-          :osx? => %r!darwin|mac os!, :unix? => %r!solaris|bsd! }.each do |k, v|
+      { :windows? => /mswin|mingw|cygwin/, :linux? => /linux/, \
+          :osx? => /darwin|mac os/, :unix? => /solaris|bsd/ }.each do |k, v|
+
         define_method k do
           !!(
             RbConfig::CONFIG["host_os"] =~ v

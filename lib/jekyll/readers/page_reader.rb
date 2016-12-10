@@ -4,7 +4,7 @@ module Jekyll
     def initialize(site, dir)
       @site = site
       @dir = dir
-      @unfiltered_content = []
+      @unfiltered_content = Array.new
     end
 
     # Read all the files in <source>/<dir>/ for Yaml header and create a new Page
@@ -14,10 +14,8 @@ module Jekyll
     #
     # Returns an array of static pages.
     def read(files)
-      files.map do |page|
-        @unfiltered_content << Page.new(@site, @site.source, @dir, page)
-      end
-      @unfiltered_content.select { |page| site.publisher.publish?(page) }
+      files.map{ |page| @unfiltered_content << Page.new(@site, @site.source, @dir, page) }
+      @unfiltered_content.select{ |page| site.publisher.publish?(page) }
     end
   end
 end

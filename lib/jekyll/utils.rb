@@ -1,36 +1,12 @@
-
 module Jekyll
-  module Utils
-    extend self
+  module Utils extend self
     autoload :Platforms, 'jekyll/utils/platforms'
-    autoload :Ansi, "jekyll/utils/ansi"
 
     # Constants for use in #slugify
-    SLUGIFY_MODES = %w(raw default pretty)
+    SLUGIFY_MODES = %w{raw default pretty}
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
     SLUGIFY_DEFAULT_REGEXP = Regexp.new('[^[:alnum:]]+').freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
-
-    # Takes an indented string and removes the preceding spaces on each line
-
-    def strip_heredoc(str)
-      str.gsub(/^[ \t]{#{(str.scan(/^[ \t]*(?=\S)/).min || "").size}}/, "")
-    end
-
-    # Takes a slug and turns it into a simple title.
-
-    def titleize_slug(slug)
-      slug.split("-").map! do |val|
-        val.capitalize
-      end.join(" ")
-    end
-
-    # Non-destructive version of deep_merge_hashes! See that method.
-    #
-    # Returns the merged hashes.
-    def deep_merge_hashes(master_hash, other_hash)
-      deep_merge_hashes!(master_hash.dup, other_hash)
-    end
 
     # Merges a master hash with another hash, recursively.
     #
@@ -41,37 +17,19 @@ module Jekyll
     # http://gemjack.com/gems/tartan-0.1.1/classes/Hash.html
     #
     # Thanks to whoever made it.
-    def deep_merge_hashes!(target, overwrite)
-      target.merge!(overwrite) do |key, old_val, new_val|
-        if new_val.nil?
-          old_val
-        else
-          mergable?(old_val) && mergable?(new_val) ? deep_merge_hashes(old_val, new_val) : new_val
+    def deep_merge_hashes(master_hash, other_hash)
+      target = master_hash.dup
+
+      other_hash.each_key do |key|
+        if other_hash[key].is_a? Hash and target[key].is_a? Hash
+          target[key] = Utils.deep_merge_hashes(target[key], other_hash[key])
+          next
         end
-      end
 
-      if target.respond_to?(:default_proc) && overwrite.respond_to?(:default_proc) && target.default_proc.nil?
-        target.default_proc = overwrite.default_proc
-      end
-
-      target.each do |key, val|
-        target[key] = val.dup if val.frozen? && duplicable?(val)
+        target[key] = other_hash[key]
       end
 
       target
-    end
-
-    def mergable?(value)
-      value.is_a?(Hash) || value.is_a?(Drops::Drop)
-    end
-
-    def duplicable?(obj)
-      case obj
-      when nil, false, true, Symbol, Numeric
-        false
-      else
-        true
-      end
     end
 
     # Read array from the supplied hash favouring the singular key
@@ -89,7 +47,7 @@ module Jekyll
     end
 
     def value_from_singular_key(hash, key)
-      hash[key] if hash.key?(key) || (hash.default_proc && hash[key])
+      hash[key] if (hash.key?(key) || (hash.default_proc && hash[key]))
     end
 
     def value_from_plural_key(hash, key)
@@ -140,28 +98,24 @@ module Jekyll
     def parse_date(input, msg = "Input could not be parsed.")
       Time.parse(input).localtime
     rescue ArgumentError
-      raise Errors::InvalidDateError, "Invalid date '#{input}': #{msg}"
+      raise Errors::FatalException.new("Invalid date '#{input}': " + msg)
     end
 
     # Determines whether a given file has
     #
     # Returns true if the YAML front matter is present.
     def has_yaml_header?(file)
-      !!(File.open(file, 'rb') { |f| f.readline } =~ /\A---\s*\r?\n/)
-    rescue EOFError
-      false
+      !!(File.open(file, 'rb') { |f| f.read(5) } =~ /\A---\r?\n/)
     end
 
     # Slugify a filename or title.
     #
     # string - the filename or title to slugify
     # mode - how string is slugified
-    # cased - whether to replace all  uppercase letters with their
-    # lowercase counterparts
     #
-    # When mode is "none", return the given string.
+    # When mode is "none", return the given string in lowercase.
     #
-    # When mode is "raw", return the given string,
+    # When mode is "raw", return the given string in lowercase,
     # with every sequence of spaces characters replaced with a hyphen.
     #
     # When mode is "default" or nil, non-alphabetic characters are
@@ -170,9 +124,6 @@ module Jekyll
     # When mode is "pretty", some non-alphabetic characters (._~!$&'()+,;=@)
     # are not replaced with hyphen.
     #
-    # If cased is true, all uppercase letters in the result string are
-    # replaced with their lowercase counterparts.
-    #
     # Examples:
     #   slugify("The _config.yml file")
     #   # => "the-config-yml-file"
@@ -180,39 +131,31 @@ module Jekyll
     #   slugify("The _config.yml file", "pretty")
     #   # => "the-_config.yml-file"
     #
-    #   slugify("The _config.yml file", "pretty", true)
-    #   # => "The-_config.yml file"
-    #
     # Returns the slugified string.
-    def slugify(string, mode: nil, cased: false)
+    def slugify(string, mode=nil)
       mode ||= 'default'
       return nil if string.nil?
-
-      unless SLUGIFY_MODES.include?(mode)
-        return cased ? string : string.downcase
-      end
+      return string.downcase unless SLUGIFY_MODES.include?(mode)
 
       # Replace each character sequence with a hyphen
-      re =
-        case mode
-        when 'raw'
-          SLUGIFY_RAW_REGEXP
-        when 'default'
-          SLUGIFY_DEFAULT_REGEXP
-        when 'pretty'
-          # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
-          # and is allowed in both extN and NTFS.
-          SLUGIFY_PRETTY_REGEXP
-        end
+      re = case mode
+      when 'raw'
+        SLUGIFY_RAW_REGEXP
+      when 'default'
+        SLUGIFY_DEFAULT_REGEXP
+      when 'pretty'
+        # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
+        # and is allowed in both extN and NTFS.
+        SLUGIFY_PRETTY_REGEXP
+      end
 
-      # Strip according to the mode
-      slug = string.gsub(re, '-')
-
-      # Remove leading/trailing hyphen
-      slug.gsub!(/^\-|\-$/i, '')
-
-      slug.downcase! unless cased
-      slug
+      string.
+        # Strip according to the mode
+        gsub(re, '-').
+        # Remove leading/trailing hyphen
+        gsub(/^\-|\-$/i, '').
+        # Downcase
+        downcase
     end
 
     # Add an appropriate suffix to template so that it matches the specified
@@ -253,48 +196,6 @@ module Jekyll
         template << ":output_ext" if permalink_style.to_s.end_with?(":output_ext")
       end
       template
-    end
-
-    # Work the same way as Dir.glob but seperating the input into two parts
-    # ('dir' + '/' + 'pattern') to make sure the first part('dir') does not act
-    # as a pattern.
-    #
-    # For example, Dir.glob("path[/*") always returns an empty array,
-    # because the method fails to find the closing pattern to '[' which is ']'
-    #
-    # Examples:
-    #   safe_glob("path[", "*")
-    #   # => ["path[/file1", "path[/file2"]
-    #
-    #   safe_glob("path", "*", File::FNM_DOTMATCH)
-    #   # => ["path/.", "path/..", "path/file1"]
-    #
-    #   safe_glob("path", ["**", "*"])
-    #   # => ["path[/file1", "path[/folder/file2"]
-    #
-    # dir      - the dir where glob will be executed under
-    #           (the dir will be included to each result)
-    # patterns - the patterns (or the pattern) which will be applied under the dir
-    # flags    - the flags which will be applied to the pattern
-    #
-    # Returns matched pathes
-    def safe_glob(dir, patterns, flags = 0)
-      return [] unless Dir.exist?(dir)
-      pattern = File.join(Array patterns)
-      return [dir] if pattern.empty?
-      Dir.chdir(dir) do
-        Dir.glob(pattern, flags).map { |f| File.join(dir, f) }
-      end
-    end
-
-    # Returns merged option hash for File.read of self.site (if exists)
-    # and a given param
-    def merged_file_read_opts(site, opts)
-      merged = (site ? site.file_read_opts : {}).merge(opts)
-      if merged["encoding"] && !merged["encoding"].start_with?("bom|")
-        merged["encoding"].insert(0, "bom|")
-      end
-      merged
     end
 
   end

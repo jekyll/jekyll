@@ -1,4 +1,4 @@
-require "helper"
+require 'helper'
 
 class TestCollections < JekyllUnitTest
   context "an evil collection" do
@@ -50,7 +50,7 @@ class TestCollections < JekyllUnitTest
       end
 
       should "have a docs attribute" do
-        assert_equal @collection.to_liquid["docs"], []
+        assert_equal @collection.to_liquid["docs"], Array.new
       end
 
       should "have a directory attribute" do
@@ -68,9 +68,9 @@ class TestCollections < JekyllUnitTest
 
     should "know whether it should be written or not" do
       assert_equal @collection.write?, false
-      @collection.metadata["output"] = true
+      @collection.metadata['output'] = true
       assert_equal @collection.write?, true
-      @collection.metadata.delete "output"
+      @collection.metadata.delete 'output'
     end
   end
 
@@ -80,9 +80,8 @@ class TestCollections < JekyllUnitTest
       @site.process
     end
 
-    should "contain only the default collections" do
-      refute_equal @site.collections, {}
-      refute_nil @site.collections
+    should "not contain any collections" do
+      assert_equal Hash.new, @site.collections
     end
   end
 
@@ -113,7 +112,7 @@ class TestCollections < JekyllUnitTest
       @collection = @site.collections["methods"]
     end
 
-    should "create a Hash mapping label to Collection instance" do
+    should "create a Hash on Site with the label mapped to the instance of the Collection" do
       assert @site.collections.is_a?(Hash)
       refute_nil @site.collections["methods"]
       assert @site.collections["methods"].is_a? Jekyll::Collection
@@ -123,20 +122,19 @@ class TestCollections < JekyllUnitTest
       assert @site.collections["methods"].docs.is_a? Array
       @site.collections["methods"].docs.each do |doc|
         assert doc.is_a? Jekyll::Document
-        assert_includes %w(
+        assert_includes %w[
           _methods/configuration.md
           _methods/sanitized_path.md
-          _methods/collection/entries
           _methods/site/generate.md
           _methods/site/initialize.md
           _methods/um_hi.md
           _methods/escape-+\ #%20[].md
           _methods/yaml_with_dots.md
-        ), doc.relative_path
+        ], doc.relative_path
       end
     end
 
-    should "not include files from base dir which start with an underscore" do
+    should "not include files which start with an underscore in the base collection directory" do
       refute_includes @collection.filtered_entries, "_do_not_read_me.md"
     end
 
@@ -146,8 +144,7 @@ class TestCollections < JekyllUnitTest
 
     should "not include the underscored files in the list of docs" do
       refute_includes @collection.docs.map(&:relative_path), "_methods/_do_not_read_me.md"
-      refute_includes @collection.docs.map(&:relative_path),
-                                           "_methods/site/_dont_include_me_either.md"
+      refute_includes @collection.docs.map(&:relative_path), "_methods/site/_dont_include_me_either.md"
     end
   end
 
@@ -166,7 +163,7 @@ class TestCollections < JekyllUnitTest
     end
 
     should "extract the configuration collection information as metadata" do
-      assert_equal @collection.metadata, { "foo" => "bar", "baz" => "whoo" }
+      assert_equal @collection.metadata, {"foo" => "bar", "baz" => "whoo"}
     end
   end
 
@@ -180,13 +177,13 @@ class TestCollections < JekyllUnitTest
       @collection = @site.collections["methods"]
     end
 
-    should "include the symlinked file as it resolves to inside site.source" do
-      assert_includes @collection.filtered_entries, "um_hi.md"
+    should "not allow symlinks" do
+      refute_includes @collection.filtered_entries, "um_hi.md"
       refute_includes @collection.filtered_entries, "/um_hi.md"
     end
 
-    should "include the symlinked file from site.source in the list of docs" do
-      assert_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
+    should "not include the symlinked file in the list of docs" do
+      refute_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end
 
@@ -205,7 +202,7 @@ class TestCollections < JekyllUnitTest
     end
 
     should "contain one document" do
-      assert_equal 4, @collection.docs.size
+      assert_equal 2, @collection.docs.size
     end
 
     should "allow dots in the filename" do
@@ -216,4 +213,5 @@ class TestCollections < JekyllUnitTest
       assert @collection.docs.any? { |d| d.path.include?("all.dots") }
     end
   end
+
 end

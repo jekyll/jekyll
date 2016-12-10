@@ -2,8 +2,6 @@
 
 script/branding
 
-set -e
-
 if [[ -z "$TEST_SUITE" ]]
 then
   script/test  ci

@@ -1,3 +1,4 @@
 module Jekyll
-  Generator = Class.new(Plugin)
+  class Generator < Plugin
+  end
 end

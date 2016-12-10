@@ -106,9 +106,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
             Set the time zone for site generation. This sets the <code>TZ</code>
             environment variable, which Ruby uses to handle time and date
             creation and manipulation. Any entry from the
-            <a href="https://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
+            <a href="http://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
             Database</a> is valid, e.g. <code>America/New_York</code>. A list of all
-            available values can be found <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">
+            available values can be found <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">
             here</a>. The default is the local time zone, as set by your operating system.
         </p>
       </td>
@@ -120,7 +120,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class="name"><strong>Encoding</strong></p>
         <p class="description">
-            Set the encoding of files by name (only available for Ruby
+            Set the encoding of files by name. Only available for Ruby
             1.9 or later).
             The default value is <code>utf-8</code> starting in 2.0.0,
             and <code>nil</code> before 2.0.0, which will yield the Ruby
@@ -198,7 +198,6 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Process and render draft posts.</p>
       </td>
       <td class="align-center">
-        <p><code class="option">show_drafts: BOOL</code></p>
         <p><code class="flag">--drafts</code></p>
       </td>
     </tr>
@@ -214,7 +213,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Future</strong></p>
-        <p class="description">Publish posts or collection documents with a future date.</p>
+        <p class="description">Publish posts with a future date.</p>
       </td>
       <td class="align-center">
         <p><code class="option">future: BOOL</code></p>
@@ -267,21 +266,6 @@ class="flag">flags</code> (specified on the command-line) that control them.
       </td>
       <td class="align-center">
         <p><code class="flag">-q, --quiet</code></p>
-      </td>
-    </tr>
-    <tr class="setting">
-      <td>
-        <p class="name"><strong>Incremental build</strong></p>
-        <p class="description">
-            Enable the experimental incremental build feature. Incremental build only
-            re-builds posts and pages that have changed, resulting in significant performance
-            improvements for large sites, but may also break site generation in certain
-            cases.
-        </p>
-      </td>
-      <td class="align-center">
-        <p><code class="option">incremental: BOOL</code></p>
-        <p><code class="flag">-I, --incremental</code></p>
       </td>
     </tr>
   </tbody>
@@ -353,24 +337,6 @@ before your site is served.
         <p><code class="flag">--skip-initial-build</code></p>
       </td>
     </tr>
-    <tr class="setting">
-      <td>
-        <p class="name"><strong>X.509 (SSL) Private Key</strong></p>
-        <p class="description">SSL Private Key.</p>
-      </td>
-      <td class="align-center">
-        <p><code class="flag">--ssl-key</code></p>
-      </td>
-    </tr>
-    <tr class="setting">
-      <td>
-        <p class="name"><strong>X.509 (SSL) Certificate</strong></p>
-        <p class="description">SSL Public certificate.</p>
-      </td>
-      <td class="align-center">
-        <p><code class="flag">--ssl-cert</code></p>
-      </td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -382,25 +348,6 @@ before your site is served.
     default settings. Use spaces instead.
   </p>
 </div>
-
-## Custom WEBrick Headers
-
-You can provide custom headers for your site by adding them to `_config.yml`
-
-{% highlight yaml %}
-# File: _config.yml
-webrick:
-  headers:
-    My-Header: My-Value
-    My-Other-Header: My-Other-Value
-{% endhighlight %}
-
-### Defaults
-
-We provide by default `Content-Type` and `Cache-Control` response headers: one
-dynamic in order to specify the nature of the data being served, the other
-static in order to disable caching so that you don't have to fight with Chrome's
-aggressive caching when you are in development mode.
 
 ## Specifying a Jekyll environment at build time
 
@@ -436,7 +383,7 @@ Using [YAML Front Matter](../frontmatter/) is one way that you can specify confi
 
 Often times, you will find that you are repeating a lot of configuration options. Setting the same layout in each file, adding the same category - or categories - to a post, etc. You can even add custom variables like author names, which might be the same for the majority of posts on your blog.
 
-Instead of repeating this configuration each time you create a new post or page, Jekyll provides a way to set these defaults in the site configuration. To do this, you can specify  site-wide defaults using the `defaults` key in the `_config.yml` file in your project's root directory.
+Instead of repeating this configuration each time you create a new post or page, Jekyll provides a way to set these defaults in the site configuration. To do this, you can specify  site-wide defaults using the `defaults` key in the `_config.yml` file in your projects root directory.
 
 The `defaults` key holds an array of scope/values pairs that define what defaults should be set for a particular file path, and optionally, a file type in that path.
 
@@ -451,19 +398,7 @@ defaults:
       layout: "default"
 {% endhighlight %}
 
-<div class="note info">
-  <h5>Please stop and rerun `jekyll serve` command.</h5>
-  <p>
-    The <code>_config.yml</code> master configuration file contains global configurations
-    and variable definitions that are read once at execution time. Changes made to <code>_config.yml</code>
-    during automatic regeneration are not loaded until the next execution.
-  </p>
-  <p>
-    Note <a href="../datafiles">Data Files</a> are included and reloaded during automatic regeneration.
-  </p>
-</div>
-
-Here, we are scoping the `values` to any file that exists in the path `scope`. Since the path is set as an empty string, it will apply to **all files** in your project. You probably don't want to set a layout on every file in your project - like css files, for example - so you can also specify a `type` value under the `scope` key.
+Here, we are scoping the `values` to any file that exists in the scopes path. Since the path is set as an empty string, it will apply to **all files** in your project. You probably don't want to set a layout on every file in your project - like css files, for example - so you can also specify a `type` value under the `scope` key.
 
 {% highlight yaml %}
 defaults:
@@ -497,12 +432,12 @@ defaults:
       author: "Mr. Hyde"
 {% endhighlight %}
 
-With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde`.
+With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde` as well as have the category for the page set to `project`.
 
 {% highlight yaml %}
 collections:
   - my_collection:
-      output: true
+    output: true
 
 defaults:
   -
@@ -513,14 +448,13 @@ defaults:
       layout: "default"
 {% endhighlight %}
 
-In this example, the `layout` is set to `default` inside the
-[collection](../collections/) with the name `my_collection`.
+In this example the `layout` is set to `default` inside the [collection](../collections/) with the name `my_collection`.
 
 ### Precedence
 
 Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
 
-You can see that in the second to last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
+You can see that in the last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
 
 Finally, if you set defaults in the site configuration by adding a `defaults` section to your `_config.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:
 
@@ -600,7 +534,6 @@ markdown:    kramdown
 highlighter: rouge
 lsi:         false
 excerpt_separator: "\n\n"
-incremental: false
 
 # Serving
 detach:  false
@@ -692,7 +625,7 @@ extensions are:
 ### Kramdown
 
 In addition to the defaults mentioned above, you can also turn on recognition
-of GitHub Flavored Markdown by passing an `input` option with a value of "GFM".
+of Github Flavored Markdown by passing an `input` option with a value of "GFM".
 
 For example, in your `_config.yml`:
 
@@ -720,41 +653,9 @@ class Jekyll::Converters::Markdown::MyCustomProcessor
 end
 {% endhighlight %}
 
-Once you've created your class and have it properly set up either as a plugin
-in the `_plugins` folder or as a gem, specify it in your `_config.yml`:
+Once you've created your class and have it properly setup either as a plugin in
+the `_plugins` folder or as a gem, specify it in your `_config.yml`:
 
 {% highlight yaml %}
 markdown: MyCustomProcessor
 {% endhighlight %}
-
-## Incremental Regeneration
-<div class="note warning">
-  <h5>Incremental regeneration is still an experimental feature</h5>
-  <p>
-    While incremental regeneration will work for the most common cases, it will
-    not work correctly in every scenario. Please be extremely cautious when
-    using the feature, and report any problems not listed below by
-    <a href="https://github.com/jekyll/jekyll/issues/new">opening an issue on GitHub</a>.
-  </p>
-</div>
-
-Incremental regeneration helps shorten build times by only generating documents
-and pages that were updated since the previous build. It does this by keeping
-track of both file modification times and inter-document dependencies in the
-`.jekyll-metadata` file.
-
-Under the current implementation, incremental regeneration will only generate a
-document or page if either it, or one of its dependencies, is modified. Currently,
-the only types of dependencies tracked are includes (using the
-{% raw %}`{% include %}`{% endraw %} tag) and layouts. This means that plain
-references to other documents (for example, the common case of iterating over
-`site.posts` in a post listings page) will not be detected as a dependency.
-
-To remedy some of these shortfalls, putting `regenerate: true` in the front-matter
-of a document will force Jekyll to regenerate it regardless of whether it has been
-modified. Note that this will generate the specified document only; references
-to other documents' contents will not work since they won't be re-rendered.
-
-Incremental regeneration can be enabled via the `--incremental` flag (`-I` for
-short) from the command-line or by setting `incremental: true` in your
-configuration file.

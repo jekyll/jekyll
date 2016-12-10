@@ -1,6 +1,7 @@
-require "helper"
+require 'helper'
 
 class TestRdiscount < JekyllUnitTest
+
   context "rdiscount" do
     setup do
       if jruby?
@@ -10,10 +11,12 @@ class TestRdiscount < JekyllUnitTest
       end
 
       config = {
-        "markdown"  => "rdiscount",
-        "rdiscount" => {
-          "toc_token"  => "{:toc}",
-          "extensions" => %w(smart generate_toc)
+        'markdown' => 'rdiscount',
+        'rdiscount' => {
+          'toc_token' => '{:toc}',
+          'extensions' => [
+            'smart', 'generate_toc'
+          ],
         }
       }
 
@@ -42,8 +45,7 @@ class TestRdiscount < JekyllUnitTest
 
 </p>
 TOC
-      assert_equal toc.strip,
-                   @markdown.convert("# Header 1\n\n## Header 2\n\n{:toc}").strip
+      assert_equal toc.strip, @markdown.convert("# Header 1\n\n## Header 2\n\n{:toc}").strip
     end
   end
 end

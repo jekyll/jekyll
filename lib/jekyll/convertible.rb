@@ -28,6 +28,12 @@ module Jekyll
       !(data.key?('published') && data['published'] == false)
     end
 
+    # Returns merged option hash for File.read of self.site (if exists)
+    # and a given param
+    def merged_file_read_opts(opts)
+      (site ? site.file_read_opts : {}).merge(opts)
+    end
+
     # Read the YAML frontmatter.
     #
     # base - The String path to the dir containing the file.
@@ -36,39 +42,26 @@ module Jekyll
     #
     # Returns nothing.
     def read_yaml(base, name, opts = {})
-      filename = File.join(base, name)
-
       begin
-        self.content = File.read(@path || site.in_source_dir(base, name),
-                                 Utils.merged_file_read_opts(site, opts))
-        if content =~ Document::YAML_FRONT_MATTER_REGEXP
+        self.content = File.read(site.in_source_dir(base, name),
+                                 merged_file_read_opts(opts))
+        if content =~ /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
           self.content = $POSTMATCH
-          self.data = SafeYAML.load(Regexp.last_match(1))
+          self.data = SafeYAML.load($1)
         end
       rescue SyntaxError => e
-        Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
+        Jekyll.logger.warn "YAML Exception reading #{File.join(base, name)}: #{e.message}"
       rescue Exception => e
-        Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
+        Jekyll.logger.warn "Error reading file #{File.join(base, name)}: #{e.message}"
       end
 
       self.data ||= {}
 
-      validate_data! filename
-      validate_permalink! filename
+      unless self.data.is_a?(Hash)
+        Jekyll.logger.abort_with "Fatal:", "Invalid YAML front matter in #{File.join(base, name)}"
+      end
 
       self.data
-    end
-
-    def validate_data!(filename)
-      unless self.data.is_a?(Hash)
-        raise Errors::InvalidYAMLFrontMatterError, "Invalid YAML front matter in #{filename}"
-      end
-    end
-
-    def validate_permalink!(filename)
-      if self.data['permalink'] && self.data['permalink'].size == 0
-        raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
-      end
     end
 
     # Transform the contents based on the content type.
@@ -91,7 +84,13 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      if converters.all? { |c| c.is_a?(Jekyll::Converters::Identity) }
+        ext
+      else
+        converters.map { |c|
+          c.output_ext(ext) unless c.is_a?(Jekyll::Converters::Identity)
+        }.compact.last
+      end
     end
 
     # Determine which converter to use based on this convertible's
@@ -110,7 +109,7 @@ module Jekyll
     #
     # Returns the converted content
     def render_liquid(content, payload, info, path)
-      site.liquid_renderer.file(path).parse(content).render!(payload, info)
+      site.liquid_renderer.file(path).parse(content).render(payload, info)
     rescue Tags::IncludeTagError => e
       Jekyll.logger.error "Liquid Exception:", "#{e.message} in #{e.path}, included in #{path || self.path}"
       raise e
@@ -123,9 +122,9 @@ module Jekyll
     #
     # Returns the Hash representation of this Convertible.
     def to_liquid(attrs = nil)
-      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map do |attribute|
+      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map { |attribute|
         [attribute, send(attribute)]
-      end]
+      }]
 
       defaults = site.frontmatter_defaults.all(relative_path, type)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
@@ -136,15 +135,21 @@ module Jekyll
     #
     # Returns the type of self.
     def type
-      if is_a?(Page)
+      if is_a?(Draft)
+        :drafts
+      elsif is_a?(Post)
+        :posts
+      elsif is_a?(Page)
         :pages
       end
     end
 
     # returns the owner symbol for hook triggering
     def hook_owner
-      if is_a?(Page)
-        :pages
+      if is_a?(Post)
+        :post
+      elsif is_a?(Page)
+        :page
       end
     end
 
@@ -161,7 +166,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w(.sass .scss).include?(ext)
+      %w[.sass .scss].include?(ext)
     end
 
     # Determine whether the document is a CoffeeScript file.
@@ -209,18 +214,13 @@ module Jekyll
 
       used = Set.new([layout])
 
-      # Reset the payload layout data to ensure it starts fresh for each page.
-      payload["layout"] = nil
-
       while layout
-        Jekyll.logger.debug "Rendering Layout:", path
-        payload["content"] = output
-        payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
+        payload = Utils.deep_merge_hashes(payload, {"content" => output, "page" => layout.data})
 
         self.output = render_liquid(layout.content,
-                                    payload,
-                                    info,
-                                    layout.relative_path)
+                                         payload,
+                                         info,
+                                         File.join(site.config['layouts_dir'], layout.name))
 
         # Add layout to dependency tree
         site.regenerator.add_dependency(
@@ -240,33 +240,25 @@ module Jekyll
 
     # Add any necessary layouts to this convertible document.
     #
-    # payload - The site payload Drop or Hash.
+    # payload - The site payload Hash.
     # layouts - A Hash of {"name" => "layout"}.
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      Jekyll.logger.debug "Rendering:", self.relative_path
-
-      Jekyll.logger.debug "Pre-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :pre_render, self, payload
-      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload["page"] } }
+      info = { :filters => [Jekyll::Filters], :registers => { :site => site, :page => payload['page'] } }
 
       # render and transform content (this becomes the final content of the object)
       payload["highlighter_prefix"] = converters.first.highlighter_prefix
       payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
-      if render_with_liquid?
-        Jekyll.logger.debug "Rendering Liquid:", self.relative_path
-        self.content = render_liquid(content, payload, info, path)
-      end
-      Jekyll.logger.debug "Rendering Markup:", self.relative_path
+      self.content = render_liquid(content, payload, info, path) if render_with_liquid?
       self.content = transform
 
       # output keeps track of what will finally be written
       self.output = content
 
       render_all_layouts(layouts, payload, info) if place_in_layout?
-      Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
     end
 

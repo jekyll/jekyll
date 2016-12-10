@@ -2,39 +2,42 @@ module Jekyll
   module Commands
     class Clean < Command
       class << self
+
         def init_with_program(prog)
           prog.command(:clean) do |c|
-            c.syntax "clean [subcommand]"
-            c.description "Clean the site " \
-                  "(removes site output and metadata file) without building."
+            c.syntax 'clean [subcommand]'
+            c.description 'Clean the site (removes site output and metadata file) without building.'
 
             add_build_options(c)
 
-            c.action do |_, options|
-              Jekyll::Commands::Clean.process(options)
+            c.action do |args, _|
+              Jekyll::Commands::Clean.process({})
             end
           end
         end
 
         def process(options)
           options = configuration_from_options(options)
-          destination = options["destination"]
-          metadata_file = File.join(options["source"], ".jekyll-metadata")
-          sass_cache = File.join(options["source"], ".sass-cache")
+          destination = options['destination']
+          metadata_file = File.join(options['source'], '.jekyll-metadata')
 
-          remove(destination, :checker_func => :directory?)
-          remove(metadata_file, :checker_func => :file?)
-          remove(sass_cache, :checker_func => :directory?)
-        end
-
-        def remove(filename, checker_func: :file?)
-          if File.public_send(checker_func, filename)
-            Jekyll.logger.info "Cleaner:", "Removing #{filename}..."
-            FileUtils.rm_rf(filename)
+          if File.directory? destination
+            Jekyll.logger.info "Cleaning #{destination}..."
+            FileUtils.rm_rf(destination)
+            Jekyll.logger.info "", "done."
           else
-            Jekyll.logger.info "Cleaner:", "Nothing to do for #{filename}."
+            Jekyll.logger.info "Nothing to do for #{destination}."
+          end
+
+          if File.file? metadata_file
+            Jekyll.logger.info "Removing #{metadata_file}..."
+            FileUtils.rm_rf(metadata_file)
+            Jekyll.logger.info "", "done."
+          else
+            Jekyll.logger.info "Nothing to do for #{metadata_file}."
           end
         end
+
       end
     end
   end

@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+STDOUT.sync = true
+
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+
+require 'jekyll'
+require 'mercenary'
+
+Jekyll::External.require_if_present(
+  Jekyll::External.blessed_gems
+)
+
+Jekyll::PluginManager.require_from_bundler
+
+Jekyll::Deprecator.process(ARGV)
+
+Mercenary.program(:jekyll) do |p|
+  p.version Jekyll::VERSION
+  p.description 'Jekyll is a blog-aware, static site generator in Ruby'
+  p.syntax 'jekyll <subcommand> [options]'
+
+  p.option 'source', '-s', '--source [DIR]', 'Source directory (defaults to ./)'
+  p.option 'destination', '-d', '--destination [DIR]', 'Destination directory (defaults to ./_site)'
+  p.option 'safe', '--safe', 'Safe mode (defaults to false)'
+  p.option 'plugins_dir', '-p', '--plugins PLUGINS_DIR1[,PLUGINS_DIR2[,...]]', Array, 'Plugins directory (defaults to ./_plugins)'
+  p.option 'layouts_dir', '--layouts DIR', String, 'Layouts directory (defaults to ./_layouts)'
+  p.option 'profile', '--profile', 'Generate a Liquid rendering profile'
+
+  Jekyll::Command.subclasses.each { |c| c.init_with_program(p) }
+
+  p.action do |args, options|
+    if args.empty?
+      Jekyll.logger.error "A subcommand is required."
+      puts p
+      abort
+    else
+      unless p.has_command?(args.first)
+        Jekyll.logger.abort_with "Invalid command. Use --help for more information"
+      end
+    end
+  end
+end

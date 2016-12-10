@@ -1,5 +1,0 @@
----
-layout: default
----
-
-{{ content }}

@@ -8,15 +8,28 @@ module Jekyll
       # forms: name, name=value, or name="<quoted list>"
       #
       # <quoted list> is a space-separated list of numbers
-      SYNTAX = %r!^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!
+      SYNTAX = /^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$/
 
       def initialize(tag_name, markup, tokens)
         super
         if markup.strip =~ SYNTAX
-          @lang = Regexp.last_match(1).downcase
-          @highlight_options = parse_options(Regexp.last_match(2))
+          @lang = $1.downcase
+          @options = {}
+          if defined?($2) && $2 != ''
+            # Split along 3 possible forms -- key="<quoted list>", key=value, or key
+            $2.scan(/(?:\w="[^"]*"|\w=\w|\w)+/) do |opt|
+              key, value = opt.split('=')
+              # If a quoted list, convert to array
+              if value && value.include?("\"")
+                  value.gsub!(/"/, "")
+                  value = value.split
+              end
+              @options[key.to_sym] = value || true
+            end
+          end
+          @options[:linenos] = "inline" if @options.key?(:linenos) and @options[:linenos] == true
         else
-          raise SyntaxError, <<-eos
+          raise SyntaxError.new <<-eos
 Syntax Error in tag 'highlight' while parsing the following markup:
 
   #{markup}
@@ -29,15 +42,15 @@ eos
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
-        code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
+        code = super.to_s.gsub(/\A(\n|\r)+|(\n|\r)+\z/, '')
 
         is_safe = !!context.registers[:site].safe
 
         output =
           case context.registers[:site].highlighter
-          when "pygments"
+          when 'pygments'
             render_pygments(code, is_safe)
-          when "rouge"
+          when 'rouge'
             render_rouge(code)
           else
             render_codehighlighter(code)
@@ -53,67 +66,40 @@ eos
             [:startinline, opts.fetch(:startinline, nil)],
             [:hl_lines,    opts.fetch(:hl_lines, nil)],
             [:linenos,     opts.fetch(:linenos, nil)],
-            [:encoding,    opts.fetch(:encoding, "utf-8")],
+            [:encoding,    opts.fetch(:encoding, 'utf-8')],
             [:cssclass,    opts.fetch(:cssclass, nil)]
-          ].reject { |f| f.last.nil? }]
+          ].reject {|f| f.last.nil? }]
         else
           opts
         end
       end
 
-      private
-
-      def parse_options(input)
-        options = {}
-        unless input.empty?
-          # Split along 3 possible forms -- key="<quoted list>", key=value, or key
-          input.scan(%r!(?:\w="[^"]*"|\w=\w|\w)+!) do |opt|
-            key, value = opt.split("=")
-            # If a quoted list, convert to array
-            if value && value.include?("\"")
-              value.delete!('"')
-              value = value.split
-            end
-            options[key.to_sym] = value || true
-          end
-        end
-        if options.key?(:linenos) && options[:linenos] == true
-          options[:linenos] = "inline"
-        end
-        options
-      end
-
       def render_pygments(code, is_safe)
-        Jekyll::External.require_with_graceful_fail("pygments")
+        Jekyll::External.require_with_graceful_fail('pygments')
 
         highlighted_code = Pygments.highlight(
           code,
           :lexer   => @lang,
-          :options => sanitized_opts(@highlight_options, is_safe)
+          :options => sanitized_opts(@options, is_safe)
         )
 
         if highlighted_code.nil?
-          Jekyll.logger.error <<eos
-There was an error highlighting your code:
-
-#{code}
-
-While attempting to convert the above code, Pygments.rb returned an unacceptable value.
-This is usually a timeout problem solved by running `jekyll build` again.
-eos
-          raise ArgumentError, "Pygments.rb returned an unacceptable value "\
-          "when attempting to highlight some code."
+          Jekyll.logger.error "There was an error highlighting your code:"
+          puts
+          Jekyll.logger.error code
+          puts
+          Jekyll.logger.error "While attempting to convert the above code, Pygments.rb" +
+            " returned an unacceptable value."
+          Jekyll.logger.error "This is usually a timeout problem solved by running `jekyll build` again."
+          raise ArgumentError.new("Pygments.rb returned an unacceptable value when attempting to highlight some code.")
         end
 
-        highlighted_code.sub('<div class="highlight"><pre>', "").sub("</pre></div>", "")
+        highlighted_code.sub('<div class="highlight"><pre>', '').sub('</pre></div>', '')
       end
 
       def render_rouge(code)
-        Jekyll::External.require_with_graceful_fail("rouge")
-        formatter = Rouge::Formatters::HTML.new(
-          :line_numbers => @highlight_options[:linenos],
-          :wrap         => false
-        )
+        Jekyll::External.require_with_graceful_fail('rouge')
+        formatter = Rouge::Formatters::HTML.new(line_numbers: @options[:linenos], wrap: false)
         lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
@@ -124,14 +110,14 @@ eos
 
       def add_code_tag(code)
         code_attributes = [
-          "class=\"language-#{@lang.to_s.tr("+", "-")}\"",
-          "data-lang=\"#{@lang}\""
+          "class=\"language-#{@lang.to_s.gsub('+', '-')}\"",
+          "data-lang=\"#{@lang.to_s}\""
         ].join(" ")
-        "<figure class=\"highlight\"><pre><code #{code_attributes}>"\
-        "#{code.chomp}</code></pre></figure>"
+        "<figure class=\"highlight\"><pre><code #{code_attributes}>#{code.chomp}</code></pre></figure>"
       end
+
     end
   end
 end
 
-Liquid::Template.register_tag("highlight", Jekyll::Tags::HighlightBlock)
+Liquid::Template.register_tag('highlight', Jekyll::Tags::HighlightBlock)

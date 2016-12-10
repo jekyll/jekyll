@@ -7,14 +7,14 @@ permalink: /docs/structure/
 Jekyll is, at its core, a text transformation engine. The concept behind the
 system is this: you give it text written in your favorite markup language, be
 that Markdown, Textile, or just plain HTML, and it churns that through a layout
-or a series of layout files. Throughout that process you can tweak how you want
+or series of layout files. Throughout that process you can tweak how you want
 the site URLs to look, what data gets displayed in the layout, and more. This
-is all done through editing text files; the static web site is the final
+is all done through editing text files, and the static web site is the final
 product.
 
 A basic Jekyll site usually looks something like this:
 
-{% highlight shell %}
+{% highlight bash %}
 .
 ├── _config.yml
 ├── _drafts
@@ -132,7 +132,7 @@ An overview of what each of these does:
       <td>
         <p>
 
-          Well-formatted site data should be placed here. The Jekyll engine
+          Well-formatted site data should be placed here. The jekyll engine
           will autoload all YAML files in this directory (using either the
           <code>.yml</code>, <code>.yaml</code>, <code>.json</code> or
           <code>.csv</code> formats and extensions) and they will be

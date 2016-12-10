@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+$:.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
@@ -6,80 +6,80 @@ $LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is insta
 #
 # Returns nothing.
 def require_all(path)
-  glob = File.join(File.dirname(__FILE__), path, "*.rb")
-  Dir[glob].sort.each do |f|
+  glob = File.join(File.dirname(__FILE__), path, '*.rb')
+  Dir[glob].each do |f|
     require f
   end
 end
 
 # rubygems
-require "rubygems"
+require 'rubygems'
 
 # stdlib
-require "pathutil"
-require "forwardable"
-require "fileutils"
-require "time"
-require "English"
-require "pathname"
-require "logger"
-require "set"
+require 'fileutils'
+require 'time'
+require 'English'
+require 'pathname'
+require 'logger'
+require 'set'
 
 # 3rd party
-require "safe_yaml/load"
-require "liquid"
-require "kramdown"
-require "colorator"
+require 'safe_yaml/load'
+require 'liquid'
+require 'kramdown'
+require 'colorator'
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
+Liquid::Template.error_mode = :strict
 
 module Jekyll
+
   # internal requires
-  autoload :Cleaner,             "jekyll/cleaner"
-  autoload :Collection,          "jekyll/collection"
-  autoload :Configuration,       "jekyll/configuration"
-  autoload :Convertible,         "jekyll/convertible"
-  autoload :Deprecator,          "jekyll/deprecator"
-  autoload :Document,            "jekyll/document"
-  autoload :Draft,               "jekyll/draft"
-  autoload :EntryFilter,         "jekyll/entry_filter"
-  autoload :Errors,              "jekyll/errors"
-  autoload :Excerpt,             "jekyll/excerpt"
-  autoload :External,            "jekyll/external"
-  autoload :FrontmatterDefaults, "jekyll/frontmatter_defaults"
-  autoload :Hooks,               "jekyll/hooks"
-  autoload :Layout,              "jekyll/layout"
-  autoload :CollectionReader,    "jekyll/readers/collection_reader"
-  autoload :DataReader,          "jekyll/readers/data_reader"
-  autoload :LayoutReader,        "jekyll/readers/layout_reader"
-  autoload :PostReader,          "jekyll/readers/post_reader"
-  autoload :PageReader,          "jekyll/readers/page_reader"
-  autoload :StaticFileReader,    "jekyll/readers/static_file_reader"
-  autoload :LogAdapter,          "jekyll/log_adapter"
-  autoload :Page,                "jekyll/page"
-  autoload :PluginManager,       "jekyll/plugin_manager"
-  autoload :Publisher,           "jekyll/publisher"
-  autoload :Reader,              "jekyll/reader"
-  autoload :Regenerator,         "jekyll/regenerator"
-  autoload :RelatedPosts,        "jekyll/related_posts"
-  autoload :Renderer,            "jekyll/renderer"
-  autoload :LiquidRenderer,      "jekyll/liquid_renderer"
-  autoload :Site,                "jekyll/site"
-  autoload :StaticFile,          "jekyll/static_file"
-  autoload :Stevenson,           "jekyll/stevenson"
-  autoload :Theme,               "jekyll/theme"
-  autoload :ThemeBuilder,        "jekyll/theme_builder"
-  autoload :URL,                 "jekyll/url"
-  autoload :Utils,               "jekyll/utils"
-  autoload :VERSION,             "jekyll/version"
+  autoload :Cleaner,             'jekyll/cleaner'
+  autoload :Collection,          'jekyll/collection'
+  autoload :Configuration,       'jekyll/configuration'
+  autoload :Convertible,         'jekyll/convertible'
+  autoload :Deprecator,          'jekyll/deprecator'
+  autoload :Document,            'jekyll/document'
+  autoload :Draft,               'jekyll/draft'
+  autoload :EntryFilter,         'jekyll/entry_filter'
+  autoload :Errors,              'jekyll/errors'
+  autoload :Excerpt,             'jekyll/excerpt'
+  autoload :External,            'jekyll/external'
+  autoload :Filters,             'jekyll/filters'
+  autoload :FrontmatterDefaults, 'jekyll/frontmatter_defaults'
+  autoload :Hooks,               'jekyll/hooks'
+  autoload :Layout,              'jekyll/layout'
+  autoload :CollectionReader,    'jekyll/readers/collection_reader'
+  autoload :DataReader,          'jekyll/readers/data_reader'
+  autoload :LayoutReader,        'jekyll/readers/layout_reader'
+  autoload :DraftReader,         'jekyll/readers/draft_reader'
+  autoload :PostReader,          'jekyll/readers/post_reader'
+  autoload :PageReader,          'jekyll/readers/page_reader'
+  autoload :StaticFileReader,    'jekyll/readers/static_file_reader'
+  autoload :LogAdapter,          'jekyll/log_adapter'
+  autoload :Page,                'jekyll/page'
+  autoload :PluginManager,       'jekyll/plugin_manager'
+  autoload :Post,                'jekyll/post'
+  autoload :Publisher,           'jekyll/publisher'
+  autoload :Reader,              'jekyll/reader'
+  autoload :Regenerator,         'jekyll/regenerator'
+  autoload :RelatedPosts,        'jekyll/related_posts'
+  autoload :Renderer,            'jekyll/renderer'
+  autoload :LiquidRenderer,      'jekyll/liquid_renderer'
+  autoload :Site,                'jekyll/site'
+  autoload :StaticFile,          'jekyll/static_file'
+  autoload :Stevenson,           'jekyll/stevenson'
+  autoload :URL,                 'jekyll/url'
+  autoload :Utils,               'jekyll/utils'
+  autoload :VERSION,             'jekyll/version'
 
   # extensions
-  require "jekyll/plugin"
-  require "jekyll/converter"
-  require "jekyll/generator"
-  require "jekyll/command"
-  require "jekyll/liquid_extensions"
-  require "jekyll/filters"
+  require 'jekyll/plugin'
+  require 'jekyll/converter'
+  require 'jekyll/generator'
+  require 'jekyll/command'
+  require 'jekyll/liquid_extensions'
 
   class << self
     # Public: Tells you which Jekyll environment you are building in so you can skip tasks
@@ -94,21 +94,22 @@ module Jekyll
     # options with anything in _config.yml, and adding the given options on top.
     #
     # override - A Hash of config directives that override any options in both
-    #            the defaults and the config file.
-    #            See Jekyll::Configuration::DEFAULTS for a
+    #            the defaults and the config file. See Jekyll::Configuration::DEFAULTS for a
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
-    def configuration(override = {})
-      config = Configuration.new
-      unless override.delete("skip_config_files")
+    def configuration(override = Hash.new)
+      config = Configuration[Configuration::DEFAULTS]
+      override = Configuration[override].stringify_keys
+      unless override.delete('skip_config_files')
         config = config.read_config_files(config.config_files(override))
       end
 
       # Merge DEFAULTS < _config.yml < override
-      Configuration.from(Utils.deep_merge_hashes(config, override)).tap do |obj|
-        set_timezone(obj["timezone"]) if obj["timezone"]
-      end
+      config = Utils.deep_merge_hashes(config, override).stringify_keys
+      set_timezone(config['timezone']) if config['timezone']
+
+      config
     end
 
     # Public: Set the TZ environment variable to use the timezone specified
@@ -116,11 +117,9 @@ module Jekyll
     # timezone - the IANA Time Zone
     #
     # Returns nothing
-    # rubocop:disable Style/AccessorMethodName
     def set_timezone(timezone)
-      ENV["TZ"] = timezone
+      ENV['TZ'] = timezone
     end
-    # rubocop:enable Style/AccessorMethodName
 
     # Public: Fetch the logger instance for this Jekyll process.
     #
@@ -137,7 +136,7 @@ module Jekyll
     #
     # Returns the new logger.
     def logger=(writer)
-      @logger = LogAdapter.new(writer, (ENV["JEKYLL_LOG_LEVEL"] || :info).to_sym)
+      @logger = LogAdapter.new(writer)
     end
 
     # Public: An array of sites
@@ -157,29 +156,26 @@ module Jekyll
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
 
-      questionable_path.insert(0, "/") if questionable_path.start_with?("~")
       clean_path = File.expand_path(questionable_path, "/")
-      clean_path.sub!(%r!\A\w:/!, "/")
+      clean_path = clean_path.sub(/\A\w\:\//, '/')
 
-      if clean_path.start_with?(base_directory.sub(%r!\A\w:/!, "/"))
-        clean_path
-      else
+      unless clean_path.start_with?(base_directory.sub(/\A\w\:\//, '/'))
         File.join(base_directory, clean_path)
+      else
+        clean_path
       end
     end
 
     # Conditional optimizations
-    Jekyll::External.require_if_present("liquid-c")
+    Jekyll::External.require_if_present('liquid-c')
+
   end
 end
 
-require "jekyll/drops/drop"
-require "jekyll/drops/document_drop"
-require_all "jekyll/commands"
-require_all "jekyll/converters"
-require_all "jekyll/converters/markdown"
-require_all "jekyll/drops"
-require_all "jekyll/generators"
-require_all "jekyll/tags"
+require_all 'jekyll/commands'
+require_all 'jekyll/converters'
+require_all 'jekyll/converters/markdown'
+require_all 'jekyll/generators'
+require_all 'jekyll/tags'
 
-require "jekyll-sass-converter"
+require 'jekyll-sass-converter'

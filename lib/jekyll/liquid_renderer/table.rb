@@ -31,8 +31,8 @@ module Jekyll
       str = ""
 
       row_data.each_index do |cell_index|
-        str << "-" * widths[cell_index]
-        str << "-+-" unless cell_index == row_data.length-1
+        str << '-' * widths[cell_index]
+        str << '-+-' unless cell_index == row_data.length-1
       end
 
       str << "\n"
@@ -40,16 +40,16 @@ module Jekyll
     end
 
     def generate_row(row_data, widths)
-      str = ""
+      str = ''
 
       row_data.each_with_index do |cell_data, cell_index|
-        str << if cell_index == 0
-                 cell_data.ljust(widths[cell_index], " ")
-               else
-                 cell_data.rjust(widths[cell_index], " ")
-               end
+        if cell_index == 0
+          str << cell_data.ljust(widths[cell_index], ' ')
+        else
+          str << cell_data.rjust(widths[cell_index], ' ')
+        end
 
-        str << " | " unless cell_index == row_data.length-1
+        str << ' | ' unless cell_index == row_data.length-1
       end
 
       str << "\n"
@@ -69,17 +69,17 @@ module Jekyll
     end
 
     def data_for_table(n)
-      sorted = @stats.sort_by { |_, file_stats| -file_stats[:time] }
+      sorted = @stats.sort_by{ |filename, file_stats| -file_stats[:time] }
       sorted = sorted.slice(0, n)
 
-      table = [%w(Filename Count Bytes Time)]
+      table = [[ 'Filename', 'Count', 'Bytes', 'Time' ]]
 
       sorted.each do |filename, file_stats|
         row = []
         row << filename
         row << file_stats[:count].to_s
         row << format_bytes(file_stats[:bytes])
-        row << format("%.3f", file_stats[:time])
+        row << "%.3f" % file_stats[:time]
         table << row
       end
 
@@ -88,7 +88,7 @@ module Jekyll
 
     def format_bytes(bytes)
       bytes /= 1024.0
-      format("%.2fK", bytes)
+      "%.2fK" % bytes
     end
   end
 end

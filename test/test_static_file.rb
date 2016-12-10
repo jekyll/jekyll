@@ -1,4 +1,4 @@
-require "helper"
+require 'helper'
 
 class TestStaticFile < JekyllUnitTest
   def make_dummy_file(filename)
@@ -6,8 +6,7 @@ class TestStaticFile < JekyllUnitTest
   end
 
   def modify_dummy_file(filename)
-    string = "some content"
-    offset = string.size
+    offset = "some content".size
     File.write(source_dir(filename), "more content", offset)
   end
 
@@ -19,13 +18,13 @@ class TestStaticFile < JekyllUnitTest
     StaticFile.new(@site, base, dir, name)
   end
 
-  def setup_static_file_with_collection(base, dir, name, metadata)
-    site = fixture_site("collections" => { "foo" => metadata })
-    StaticFile.new(site, base, dir, name, site.collections["foo"])
+  def setup_static_file_with_collection(base, dir, name, label, metadata)
+    site = fixture_site 'collections' => {label => metadata}
+    StaticFile.new(site, base, dir, name, site.collections[label])
   end
 
   def setup_static_file_with_defaults(base, dir, name, defaults)
-    site = fixture_site("defaults" => defaults)
+    site = fixture_site 'defaults' => defaults
     StaticFile.new(site, base, dir, name)
   end
 
@@ -64,23 +63,16 @@ class TestStaticFile < JekyllUnitTest
 
     should "have a destination relative directory with a collection" do
       static_file = setup_static_file_with_collection(
-        "root",
-        "_foo/dir/subdir",
-        "file.html",
-        { "output" => true }
-      )
+        "root", "_foo/dir/subdir", "file.html", "foo", {"output" => true})
       assert_equal :foo, static_file.type
       assert_equal "/foo/dir/subdir/file.html", static_file.url
       assert_equal "/foo/dir/subdir", static_file.destination_rel_dir
     end
 
-    should "use its collection's permalink template for destination relative directory" do
+    should "use its collection's permalink template for the destination relative directory" do
       static_file = setup_static_file_with_collection(
-        "root",
-        "_foo/dir/subdir",
-        "file.html",
-        { "output" => true, "permalink" => "/:path/" }
-      )
+        "root", "_foo/dir/subdir", "file.html", "foo",
+        {"output" => true, "permalink" => "/:path/"})
       assert_equal :foo, static_file.type
       assert_equal "/dir/subdir/file.html", static_file.url
       assert_equal "/dir/subdir", static_file.destination_rel_dir
@@ -94,17 +86,13 @@ class TestStaticFile < JekyllUnitTest
 
     should "use the _config.yml defaults to determine writability" do
       defaults = [{
-        "scope"  => { "path" => "private" },
-        "values" => { "published" => false }
+        "scope" => {"path" => "private"},
+        "values" => {"published" => false}
       }]
       static_file = setup_static_file_with_defaults(
-        "root",
-        "private/dir/subdir",
-        "file.html",
-        defaults
-      )
+        "root", "private/dir/subdir", "file.html", defaults)
       assert(!static_file.write?,
-        "static_file.write? should return false when _config.yml sets " \
+        "static_file.write? should return false when _config.yml sets " +
         "`published: false`")
     end
 
@@ -128,17 +116,18 @@ class TestStaticFile < JekyllUnitTest
       assert @static_file.write?, "always true, with current implementation"
     end
 
-    should "be able to write itself to the desitination directory" do
+    should "be able to write itself to the desitination direcotry" do
       assert @static_file.write(dest_dir)
     end
 
     should "be able to convert to liquid" do
       expected = {
-        "extname"       => ".txt",
-        "modified_time" => @static_file.modified_time,
-        "path"          => "/static_file.txt"
+          "extname"       => ".txt",
+          "modified_time" => @static_file.modified_time,
+          "path"          => "/static_file.txt",
       }
       assert_equal expected, @static_file.to_liquid
     end
   end
 end
+

@@ -1,39 +1,20 @@
 module Jekyll
   class Plugin
-    PRIORITIES = {
-      :low     => -10,
-      :highest => 100,
-      :lowest  => -100,
-      :normal  => 0,
-      :high    => 10
-    }.freeze
+    PRIORITIES = { :lowest => -100,
+                   :low => -10,
+                   :normal => 0,
+                   :high => 10,
+                   :highest => 100 }
 
+    # Fetch all the subclasses of this class and its subclasses' subclasses.
     #
-
-    def self.inherited(const)
-      return catch_inheritance(const) do |const_|
-        catch_inheritance(const_)
-      end
-    end
-
-    #
-
-    def self.catch_inheritance(const)
-      const.define_singleton_method :inherited do |const_|
-        (@children ||= Set.new).add const_
-        if block_given?
-          yield const_
-        end
-      end
-    end
-
-    #
-
+    # Returns an array of descendant classes.
     def self.descendants
-      @children ||= Set.new
-      out = @children.map(&:descendants)
-      out << self unless superclass == Plugin
-      Set.new(out).flatten
+      descendants = []
+      ObjectSpace.each_object(singleton_class) do |k|
+        descendants.unshift k unless k == self
+      end
+      descendants
     end
 
     # Get or set the priority of this plugin. When called without an
@@ -60,7 +41,7 @@ module Jekyll
     #
     # Returns the safety Boolean.
     def self.safe(safe = nil)
-      if !defined?(@safe) || !safe.nil?
+      if safe
         @safe = safe
       end
       @safe || false

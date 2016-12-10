@@ -5,7 +5,7 @@ module Jekyll
 
       priority :lowest
 
-      def matches(_ext)
+      def matches(ext)
         true
       end
 

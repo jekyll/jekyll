@@ -41,16 +41,6 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
-      <td><p><code>layout</code></p></td>
-      <td><p>
-
-        Layout specific information + the <a href="../frontmatter/">YAML front
-        matter</a>. Custom variables set via the YAML Front Matter in
-        layouts will be available here.
-
-      </p></td>
-    </tr>
-    <tr>
       <td><p><code>content</code></p></td>
       <td><p>
 
@@ -116,7 +106,7 @@ following is a reference of the available data.
         related Posts. By default, these are the ten most recent posts.
         For high quality but slow to compute results, run the
         <code>jekyll</code> command with the <code>--lsi</code> (latent semantic
-        indexing) option. Also note GitHub Pages does not support the <code>lsi</code> option when generating sites.
+        indexing) option. Also note Github pages does not support the <code>lsi</code> option when generating sites.
 
       </p></td>
     </tr>
@@ -336,14 +326,6 @@ following is a reference of the available data.
     <code>page.custom_css</code>.
 
   </p>
-  <p>
-
-    If you specify front matter in a layout, access that via <code>layout</code>.
-    For example, if you specify <code>class: full_page</code>
-    in a page’s front matter, that value will be available as
-    <code>layout.class</code> in the layout and its parents.
-
-  </p>
 </div>
 
 ## Paginator
@@ -371,7 +353,7 @@ following is a reference of the available data.
     </tr>
     <tr>
       <td><p><code>paginator.total_pages</code></p></td>
-      <td><p>Total number of pages.</p></td>
+      <td><p>Total number of Pages.</p></td>
     </tr>
     <tr>
       <td><p><code>paginator.page</code></p></td>

@@ -1,52 +1,30 @@
-before_script: bundle update
-bundler_args: --without benchmark:site:development
-script: script/cibuild
-cache: bundler
 language: ruby
+cache: bundler
 sudo: false
-
 rvm:
-  - &ruby1 2.3.0
-  - &ruby2 2.2.4
-  - &ruby3 2.1.8
-  - &jruby jruby-9.0.5.0
-  - &rhead ruby-head
-
+- 2.2
+- 2.1
+- 2.0
+- jruby-9.0.0.0
 matrix:
-  fast_finish: true
   allow_failures:
-    - rvm: *jruby
-    - rvm: *rhead
-  include:
-    - rvm: 2.3.0
-      env: TEST_SUITE=fmt
+    - rvm: jruby-9.0.0.0
 env:
   matrix:
     - TEST_SUITE=test
     - TEST_SUITE=cucumber
-
-branches:
-  only:
-    - master
-    - themes
-
+before_script: bundle update
+script: script/cibuild
 notifications:
+  irc:
+    on_success: change
+    on_failure: change
+    channels:
+      - irc.freenode.org#jekyll
+    template:
+      - "%{repository}#%{build_number} (%{branch}) %{message} %{build_url}"
   email:
-    recipients:
-      - jordon@envygeeks.io
-
+    on_success: never
+    on_failure: never
   slack:
-    secure: "\
-      dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4Y\
-      GEilNRzKPz18AsFptVXofpwyqcBxaCfmHP809NX5PHBaadydveLm+TNVao2XeLXSWu+HUNAY\
-      O1AanCUbJSEyJTju347xCBGzESU=\
-    "
-
-addons:
-  code_climate:
-    repo_token:
-      secure: "\
-        mAuvDu+nrzB8dOaLqsublDGt423mGRyZYM3vsrXh4Tf1sT+L1PxsRzU4gLmcV27HtX2Oq9\
-        DA4vsRURfABU0fIhwYkQuZqEcA3d8TL36BZcGEshG6MQ2AmnYsmFiTcxqV5bmlElHEqQuT\
-        5SUFXLafgZPBnL0qDwujQcHukID41sE=\
-      "
+    secure: dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4YGEilNRzKPz18AsFptVXofpwyqcBxaCfmHP809NX5PHBaadydveLm+TNVao2XeLXSWu+HUNAYO1AanCUbJSEyJTju347xCBGzESU=

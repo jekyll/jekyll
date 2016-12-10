@@ -20,27 +20,20 @@ If you encounter errors during gem installation, you may need to install
 the header files for compiling extension modules for Ruby 2.0.0. This
 can be done on Ubuntu or Debian by running:
 
-{% highlight shell %}
+{% highlight bash %}
 sudo apt-get install ruby2.0.0-dev
 {% endhighlight %}
 
 On Red Hat, CentOS, and Fedora systems you can do this by running:
 
-{% highlight shell %}
+{% highlight bash %}
 sudo yum install ruby-devel
 {% endhighlight %}
-
-If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, simply run:
-
-{% highlight shell %}
-sudo dnf install redhat-rpm-config
-{% endhighlight %}
-
 
 On [NearlyFreeSpeech](https://www.nearlyfreespeech.net/) you need to run the
 following commands before installing Jekyll:
 
-{% highlight shell %}
+{% highlight bash %}
 export GEM_HOME=/home/private/gems
 export GEM_PATH=/home/private/gems:/usr/local/lib/ruby/gems/1.8/
 export PATH=$PATH:/home/private/gems/bin
@@ -49,7 +42,7 @@ export RB_USER_INSTALL='true'
 
 To install RubyGems on Gentoo:
 
-{% highlight shell %}
+{% highlight bash %}
 sudo emerge -av dev-ruby/rubygems
 {% endhighlight %}
 
@@ -58,21 +51,21 @@ DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
 On Mac OS X, you may need to update RubyGems (using `sudo` only if necessary):
 
-{% highlight shell %}
+{% highlight bash %}
 sudo gem update --system
 {% endhighlight %}
 
 If you still have issues, you can download and install new Command Line
 Tools (such as `gcc`) using the command
 
-{% highlight shell %}
+{% highlight bash %}
 xcode-select --install
 {% endhighlight %}
 
 which may allow you to install native gems using this command (again using
 `sudo` only if necessary):
 
-{% highlight shell %}
+{% highlight bash %}
 sudo gem install jekyll
 {% endhighlight %}
 
@@ -90,20 +83,20 @@ longer available. Given these changes, there are a couple of simple ways to get
 up and running. One option is to change the location where the gem will be
 installed (again using `sudo` only if necessary):
 
-{% highlight shell %}
+{% highlight bash %}
 sudo gem install -n /usr/local/bin jekyll
 {% endhighlight %}
 
 Alternatively, Homebrew can be installed and used to set up Ruby. This can be
 done as follows:
 
-{% highlight shell %}
+{% highlight bash %}
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 {% endhighlight %}
 
 Once Homebrew is installed, the second step is easy:
 
-{% highlight shell %}
+{% highlight bash %}
 brew install ruby
 {% endhighlight %}
 
@@ -119,13 +112,13 @@ which to install Jekyll.
 If you elect to use one of the above methods to install Ruby, it might be
 necessary to modify your `$PATH` variable using the following command:
 
-{% highlight shell %}
+{% highlight bash %}
 export PATH=/usr/local/bin:$PATH
 {% endhighlight %}
 
 GUI apps can modify the `$PATH` as follows:
 
-{% highlight shell %}
+{% highlight bash %}
 launchctl setenv PATH "/usr/local/bin:$PATH"
 {% endhighlight %}
 
@@ -151,19 +144,19 @@ in order to have the `jekyll` executable be available in your Terminal.
 
 If you are using base-url option like:
 
-{% highlight shell %}
+{% highlight bash %}
 jekyll serve --baseurl '/blog'
 {% endhighlight %}
 
 … then make sure that you access the site at:
 
-{% highlight shell %}
+{% highlight bash %}
 http://localhost:4000/blog/index.html
 {% endhighlight %}
 
 It won’t work to just access:
 
-{% highlight shell %}
+{% highlight bash %}
 http://localhost:4000/blog
 {% endhighlight %}
 
@@ -192,7 +185,7 @@ The latest version, version 2.0, seems to break the use of `{{ "{{" }}` in
 templates. Unlike previous versions, using `{{ "{{" }}` in 2.0 triggers the
 following error:
 
-{% highlight shell %}
+{% highlight bash %}
 '{{ "{{" }}' was not properly terminated with regexp: /\}\}/  (Liquid::SyntaxError)
 {% endhighlight %}
 

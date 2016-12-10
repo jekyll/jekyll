@@ -8,7 +8,7 @@ module Jekyll
 
       def parse(content)
         measure_time do
-          @template = Liquid::Template.parse(content, :line_numbers => true)
+          @template = Liquid::Template.parse(content)
         end
 
         self

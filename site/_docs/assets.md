@@ -4,10 +4,9 @@ title: Assets
 permalink: /docs/assets/
 ---
 
-Jekyll provides built-in support for Sass and can work with CoffeeScript via 
-a Ruby gem. In order to use them, you must first create a file with the 
-proper extension name (one of `.sass`, `.scss`, or `.coffee`) and ***start the 
-file with two lines of triple dashes***, like this:
+Jekyll provides built-in support for Sass and CoffeeScript. In order to use
+them, create a file with the proper extension name (one of `.sass`, `.scss`,
+or `.coffee`) and start the file with two lines of triple dashes, like this:
 
 {% highlight sass %}
 ---
@@ -26,7 +25,7 @@ will process it and put it in your site's destination folder under
 
 <div class="note info">
   <h5>Jekyll processes all Liquid filters and tags in asset files</h5>
-  <p>If you are using <a href="https://mustache.github.io">Mustache</a>
+  <p>If you are using <a href="http://mustache.github.io">Mustache</a>
      or another JavaScript templating language that conflicts with
      the <a href="/docs/templates/">Liquid template syntax</a>, you
      will need to place <code>{&#37; raw &#37;}</code> and
@@ -79,16 +78,3 @@ sass:
 
 These are passed to Sass, so any output style options Sass supports are valid
 here, too.
-
-
-## Coffeescript
-
-To enable Coffeescript in Jekyll 3.0 and up you must
-
-* Install the `jekyll-coffeescript` gem
-* Ensure that your `_config.yml` is up-to-date and includes the following:
-
-{% highlight yaml %}
-gems:
- - jekyll-coffeescript
-{% endhighlight %}

@@ -4,13 +4,10 @@ title: Pagination
 permalink: /docs/pagination/
 ---
 
-With many websites &mdash; especially blogs &mdash; it’s very common to
-break the main listing of posts up into smaller lists and display them over
-multiple pages. Jekyll offers a pagination plugin, so you can automatically
-generate the appropriate files and folders you need for paginated listings.
-
-For Jekyll 3, include the `jekyll-paginate` plugin in your Gemfile and in
-your `_config.yml` under `gems`. For Jekyll 2, this is standard.
+With many websites—especially blogs—it’s very common to break the main listing
+of posts up into smaller lists and display them over multiple pages. Jekyll has
+pagination built-in, so you can automatically generate the appropriate files
+and folders you need for paginated listings.
 
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
@@ -133,8 +130,8 @@ attributes:
 <div class="note info">
   <h5>Pagination does not support tags or categories</h5>
   <p>Pagination pages through every post in the <code>posts</code>
-  variable unless a post has <code>hidden: true</code> in its YAML Front Matter.
-  It does not currently allow paging over groups of posts linked
+  variable regardless of variables defined in the YAML Front Matter of
+  each. It does not currently allow paging over groups of posts linked
   by a common tag or category. It cannot include any collection of
   documents because it is restricted to posts.</p>
 </div>

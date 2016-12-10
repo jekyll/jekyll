@@ -1,17 +1,9 @@
 module Jekyll
   class StaticFile
+    # The cache of last modification times [path] -> mtime.
+    @@mtimes = Hash.new
+
     attr_reader :relative_path, :extname
-
-    class << self
-      # The cache of last modification times [path] -> mtime.
-      def mtimes
-        @mtimes ||= {}
-      end
-
-      def reset_cache
-        @mtimes = nil
-      end
-    end
 
     # Initialize a new StaticFile.
     #
@@ -19,7 +11,6 @@ module Jekyll
     # base - The String path to the <source>.
     # dir  - The String path between <source> and the file.
     # name - The String filename of the file.
-    # rubocop: disable ParameterLists
     def initialize(site, base, dir, name, collection = nil)
       @site = site
       @base = base
@@ -29,7 +20,6 @@ module Jekyll
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
     end
-    # rubocop: enable ParameterLists
 
     # Returns source file path.
     def path
@@ -66,7 +56,7 @@ module Jekyll
     #
     # Returns true if modified since last write.
     def modified?
-      self.class.mtimes[path] != mtime
+      @@mtimes[path] != mtime
     end
 
     # Whether to write the file to the filesystem
@@ -74,7 +64,7 @@ module Jekyll
     # Returns true unless the defaults for the destination path from
     # _config.yml contain `published: false`.
     def write?
-      defaults.fetch("published", true)
+      defaults.fetch('published', true)
     end
 
     # Write the static file to the destination directory (if modified).
@@ -85,14 +75,23 @@ module Jekyll
     def write(dest)
       dest_path = destination(dest)
 
-      return false if File.exist?(dest_path) && !modified?
-      self.class.mtimes[path] = mtime
+      return false if File.exist?(dest_path) and !modified?
+      @@mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
       FileUtils.rm(dest_path) if File.exist?(dest_path)
-      copy_file(dest_path)
+      FileUtils.cp(path, dest_path)
+      File.utime(@@mtimes[path], @@mtimes[path], dest_path)
 
       true
+    end
+
+    # Reset the mtimes cache (for testing purposes).
+    #
+    # Returns nothing.
+    def self.reset_cache
+      @@mtimes = Hash.new
+      nil
     end
 
     def to_liquid
@@ -105,12 +104,12 @@ module Jekyll
 
     def placeholders
       {
-        :collection => @collection.label,
-        :path       => relative_path[
+        collection: @collection.label,
+        path: relative_path[
           @collection.relative_directory.size..relative_path.size],
-        :output_ext => "",
-        :name       => "",
-        :title      => ""
+        output_ext: '',
+        name: '',
+        title: '',
       }
     end
 
@@ -119,13 +118,13 @@ module Jekyll
     # be overriden in the collection's configuration in _config.yml.
     def url
       @url ||= if @collection.nil?
-                 relative_path
-               else
-                 ::Jekyll::URL.new({
-                   :template     => @collection.url_template,
-                   :placeholders => placeholders
-                 })
-               end.to_s.gsub(%r!/$!, "")
+        relative_path
+      else
+        ::Jekyll::URL.new({
+          template:  @collection.url_template,
+          placeholders: placeholders,
+        })
+      end.to_s.gsub /\/$/, ''
     end
 
     # Returns the type of the collection if present, nil otherwise.
@@ -137,16 +136,6 @@ module Jekyll
     # as defined in _config.yml.
     def defaults
       @defaults ||= @site.frontmatter_defaults.all url, type
-    end
-
-    private
-    def copy_file(dest_path)
-      if @site.safe || Jekyll.env == "production"
-        FileUtils.cp(path, dest_path)
-      else
-        FileUtils.copy_entry(path, dest_path)
-      end
-      File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
     end
   end
 end
