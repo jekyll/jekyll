@@ -15,6 +15,7 @@
 ### Minor Enhancements
 
   * Add connector param to array_to_sentence_string filter (#5597)
+  * Adds group_by_exp filter (#5513)
 
 ### Bug Fixes
 
