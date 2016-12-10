@@ -96,7 +96,11 @@ class TestPage < JekyllUnitTest
         attrs.each do |attr, val|
           attr_str = attr.to_s
           result = page[attr_str]
-          assert_equal val, result, "For <page[\"#{attr_str}\"]>:"
+          if val.nil?
+            assert_nil result, "For <page[\"#{attr_str}\"]>:"
+          else
+            assert_equal val, result, "For <page[\"#{attr_str}\"]>:"
+          end
         end
       end
 
@@ -220,7 +224,7 @@ class TestPage < JekyllUnitTest
 
       should "return nil permalink if no permalink exists" do
         @page = setup_page("")
-        assert_equal nil, @page.permalink
+        assert_nil @page.permalink
       end
 
       should "not be writable outside of destination" do
