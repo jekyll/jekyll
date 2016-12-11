@@ -71,25 +71,25 @@ You can find the documentation for jekyllrb.com in the [docs](https://github.com
 
 One gotcha, all pull requests should be directed at the `master` branch (the default branch).
 
-### Updating FontAwesome package for jekyllrb.com
+### Updating FontAwesome iconset for jekyllrb.com
 
 We recently moved to using a stripped-down version of FontAwesome iconset on the site, consisting of only those icons that we actually use here.
 
 If you ever need to update our documentation with an icon that is not already available in our custom iconset, you'll have to regenerate the iconset using Icomoon's Generator:
 
-1. Go to <https://icomoon.io/app/>
-2. Click `Import Icons` on the top-horizontal-bar and upload `icomoon-selection.json`
-3. Click `Add Icons from Library..` further down on the page, and add 'Font Awesome'
+1. Go to <https://icomoon.io/app/>.
+2. Click `Import Icons` on the top-horizontal-bar and upload the existing `<jekyll>/docs/icomoon-selection.json`.
+3. Click `Add Icons from Library..` further down on the page, and add 'Font Awesome'.
 4. Select the required icon(s) from the Library (make sure its the 'FontAwesome' library instead of 'IcoMoon-Free' library).
-5. Click `Generate Font` on the bottom-horizontal-bar
+5. Click `Generate Font` on the bottom-horizontal-bar.
 6. Inspect the included icons and proceed by clicking `Download`.
 7. Extract the font files and adapt the CSS to the paths we use in Jekyll:
   - Copy the entire `fonts` directory over and overwrite existing ones at `<jekyll>/docs/`.
   - Copy the contents of `selection.json` and overwrite existing content inside `<jekyll>/docs/icomoon-selection.json`.
   - Copy the entire `@font-face {}` declaration and only the **new-icon(s)' css declarations** further below, to update the
   `<jekyll>/docs/_sass/_font-awesome.scss` sass partial.
-  - Fix paths in the `@font-face {}` declaraion by adding `../` before `fonts/FontAwesome.???` like so:
-  `('../fonts/Fontawesome.woff?9h6hxj')`
+  - Fix paths in the `@font-face {}` declaration by adding `../` before `fonts/FontAwesome.*` like so:
+  `('../fonts/Fontawesome.woff?9h6hxj')`.
 
 ### Adding plugins
 
