@@ -1,0 +1,65 @@
+<div class="structure">
+  <ul class="folder-tree"> <!-- main-branch -->
+    {% for item in site.data.structure %}
+      <li> 
+        <i class="{% if item.type == "folder" %}fa folder fa-folder{% else %}fa fa-file{% endif %}"></i>
+        <span class="name {% if item.contents %}accordion{% endif %}">{{ item.name }}</span>{% if item.description %}<span class="description">{{ item.description }}</span>{% endif %}
+        {% if item.contents %}
+          <ul class="branch"> <!-- secondary-branch -->
+            {% for child in item.contents %}
+            <li>
+              <i class="{% if child.type == "folder" %}fa folder fa-folder{% else %}fa fa-file{% endif %}"></i>
+              <span class="name {% if child.contents %}accordion{% endif %}">{{ child.name }}</span>
+              {% if child.description %}<span class="description">{{ child.description }}</span>{% endif %}
+              {% if child.contents %}
+              <ul class="branch"> <!-- tertiary-branch -->
+                {% for grandchild in child.contents %}
+                <li>
+                  <i class="{% if grandchild.type == "folder" %}fa folder fa-folder{% else %}fa fa-file{% endif %}"></i>
+                  <span class="name {% if grandchild.contents %}accordion{% endif %}">{{ grandchild.name }}</span>
+                  {% if grandchild.description %}<span class="description">{{ grandchild.description }}</span>{% endif %}
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+window.onload = (function(){
+  var branches = document.getElementsByClassName("branch");
+  for (i = 0; i < branches.length; i++) {
+    branches[i].classList.add("hidden");
+  }
+})();
+
+function changeClass(element, class1, class2) {
+  if (element.classList.contains(class1)) {
+    element.classList.remove(class1);
+    element.classList.add(class2);
+  } else {
+    element.classList.remove(class2);
+    element.classList.add(class1);
+  }
+}
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].onclick = function(){
+    this.classList.toggle("active");
+
+    var icon = this.previousElementSibling;
+    var sublist = this.parentElement.lastElementChild;
+    changeClass(icon, "fa-folder", "fa-folder-open");
+    changeClass(sublist, "hidden", "shown");
+  }
+}
+</script>
