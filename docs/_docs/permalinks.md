@@ -14,6 +14,16 @@ Permalinks are constructed by creating a template URL where dynamic elements
 are represented by colon-prefixed keywords. For example, the default `date`
 permalink is defined according to the format `/:categories/:year/:month/:day/:title.html`.
 
+<div class="note info">
+  <h5>Specifying permalinks through the YAML Front Matter</h5>
+  <p>
+    Built-in permalink styles are not recognized in YAML Front Matter. So
+    <code>permalink: pretty</code> will not work, but the equivalent 
+    <code>/:categories/:year/:month/:day/:title/</code>
+    using template variables will.
+  </p>
+</div>
+
 ## Template variables
 
 <div class="mobile-side-scroller">
