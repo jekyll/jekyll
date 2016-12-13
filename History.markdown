@@ -35,6 +35,7 @@
   * use backticks for Gemfile for consistency since in the next sentence … (#5641)
   * Update Core team list in the README file (#5643)
   * Improve Permalinks documentation. (#5653)
+  * Fix typo in Variables doc page (#5657)
 
 ## 3.3.1 / 2016-11-14
 
