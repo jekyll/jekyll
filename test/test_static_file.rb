@@ -57,7 +57,7 @@ class TestStaticFile < JekyllUnitTest
 
     should "have a destination relative directory without a collection" do
       static_file = setup_static_file("root", "dir/subdir", "file.html")
-      assert_equal nil, static_file.type
+      assert_nil static_file.type
       assert_equal "dir/subdir/file.html", static_file.url
       assert_equal "dir/subdir", static_file.destination_rel_dir
     end

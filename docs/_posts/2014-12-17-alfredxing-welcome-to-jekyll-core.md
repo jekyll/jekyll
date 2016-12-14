@@ -24,4 +24,4 @@ place!
 Happy Jekylling!
 
 [@alfredxing]: https://github.com/alfredxing
-[University of British Columbia]: http://ubc.ca
+[University of British Columbia]: http://www.ubc.ca

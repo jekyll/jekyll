@@ -58,7 +58,7 @@ module Jekyll
 
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
-    # permalink is absent, we be '/'
+    # permalink is absent, will be '/'
     #
     # Returns the String destination directory.
     def dir

@@ -34,6 +34,19 @@ the site generation process. It can be done with the following command:
 $ chcp 65001
 ```
 
+## Timezone Management
+
+Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.  
+Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
+
+Jekyll now uses a rubygem to internally configure Timezone based on established [IANA Timezone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).  
+While 'new' blogs created with Jekyll v3.4 and greater, will have the following added to their 'Gemfile' by default, existing sites *will* have to update their 'Gemfile' (and installed) to enable development on Windows:
+
+```ruby
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+```
+
 ## Auto-regeneration
 
 As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
@@ -97,7 +110,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 
 
 ```ruby
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 gem 'github-pages', group: :jekyll_plugins
 ```
 
@@ -110,7 +123,7 @@ There will be a warning on startup that you should include `gem 'wdm', '>= 0.1.0
 
 In the future the installation process of the github-pages should be as simple as the setup of the blog. But as long as the new version of the Nokogiri ([v1.6.8][nokogiriReleases]) is not stable and referenced, it is work to get it up and running on Windows.
 
-[jwillmerPost]: http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46 "Installation instructions by Jens Willmer"
+[jwillmerPost]: https://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46 "Installation instructions by Jens Willmer"
 [Chocolatey]: https://chocolatey.org/install "Package manager for Windows"
 [Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
 [nokogiriReleases]: https://github.com/sparklemotion/nokogiri/releases "Nokogiri Releases"

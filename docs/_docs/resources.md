@@ -9,19 +9,19 @@ Jekyll’s growing use is producing a wide variety of tutorials, frameworks, ext
 ### Useful Guides
 
 - [Jekyll Tips](http://jekyll.tips) is a set of resources created by [CloudCannon](https://cloudcannon.com) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
-- [Jekyll Cheatsheet](http://cheat.jekyll.tips) is a single-page resource for Jekyll filters, variables, and the like.
+- [Jekyll Cheatsheet](http://jekyll.tips/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
 - [“Creating and Hosting a Personal Site on GitHub”](http://jmcglone.com/guides/github-pages/)
-- [‘Build A Blog With Jekyll And GitHub Pages’ on Smashing Magazine](http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/)
+- [‘Build A Blog With Jekyll And GitHub Pages’ on Smashing Magazine](https://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/)
 - Publishing to GitHub Pages? [Check out our documentation page for just that purpose](/docs/github-pages/).
-- [Blogging with Git, Emacs and Jekyll](http://metajack.im/2009/01/23/blogging-with-git-emacs-and-jekyll/)
+- [Blogging with Git, Emacs and Jekyll](https://metajack.im/2009/01/23/blogging-with-git-emacs-and-jekyll/)
 - [Tips for working with GitHub Pages Integration](https://gist.github.com/jedschneider/2890453)
 
 ### Integrations
 
 - Use a saas service as a backend for forms (contact forms, hiring forms, etc.)
-  - [Formspree (also open source)](http://formspree.io/)
+  - [Formspree (also open source)](https://formspree.io/)
   - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
-  - [Simple Form](http://getsimpleform.com/)
+  - [Simple Form](https://getsimpleform.com/)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
 - [Jekyll Bootstrap](http://jekyllbootstrap.com), 0 to Blog in 3 minutes. Provides detailed explanations, examples, and helper-code to make getting started with Jekyll easier.
 - [Integrating Twitter with Jekyll](http://www.justkez.com/integrating-twitter-with-jekyll/)

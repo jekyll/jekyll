@@ -8,19 +8,35 @@
   * Add jekyll-migrate-permalink (#5600)
   * Fix bad config YAML in collections example (#5587)
   * Bring documentation on 'Directory Structure' up-to-date (#5573)
+  * Use only the used Font Awesome icons. (#5530)
+  * Switch to `https` when possible. (#5611)
+  * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
 
 ### Minor Enhancements
 
   * Add connector param to array_to_sentence_string filter (#5597)
+  * Adds group_by_exp filter (#5513)
 
 ### Bug Fixes
 
   * Escaped regular expressions when using post_url. (#5605)
+  * fix date parsing in file names to be stricter (#5609)
+  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
 
 ### Development Fixes
 
   * clean unit-test names in `test/test_tags.rb` (#5608)
   * Add cucumber feature to test for bonafide theme gems (#5384)
+  * Use `assert_nil` instead of `assert_equal nil` (#5652)
+
+### Documentation
+
+  * Fixed typo (#5632)
+  * use backticks for Gemfile for consistency since in the next sentence … (#5641)
+  * Update Core team list in the README file (#5643)
+  * Improve Permalinks documentation. (#5653)
+  * Fix typo in Variables doc page (#5657)
+  * Fix a couple of typos in the docs (#5658)
 
 ## 3.3.1 / 2016-11-14
 
