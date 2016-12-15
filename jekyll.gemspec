@@ -39,4 +39,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('jekyll-watch', '~> 1.1')
   s.add_runtime_dependency("pathutil", "~> 0.9")
   s.add_runtime_dependency('addressable', '~> 2.4')
+  s.add_runtime_dependency('bundler', '~> 1.13')
 end
