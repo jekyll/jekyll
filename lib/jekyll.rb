@@ -177,6 +177,7 @@ module Jekyll
 
     # Conditional optimizations
     Jekyll::External.require_if_present("liquid-c")
+    Jekyll::External.require_if_present("win32-file")
   end
 end
 

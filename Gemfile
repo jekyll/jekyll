@@ -78,6 +78,7 @@ group :jekyll_optional_dependencies do
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
     gem "classifier-reborn", "~> 2.0"
     gem "liquid-c", "~> 3.0"
+    gem "win32-file"
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
