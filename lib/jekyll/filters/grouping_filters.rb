@@ -40,7 +40,7 @@ module Jekyll
 
       private
       def parse_expression(str)
-        Liquid::Variable.new(str, {})
+        Liquid::Variable.new(str, Liquid::ParseContext.new)
       end
 
       private
