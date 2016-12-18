@@ -73,7 +73,7 @@ One gotcha, all pull requests should be directed at the `master` branch (the def
 
 ### Updating FontAwesome iconset for jekyllrb.com
 
-We recently moved to using a stripped-down version of FontAwesome iconset on the site, consisting of only those icons that we actually use here.
+We use a custom version of FontAwesome which contains just the icons we use.
 
 If you ever need to update our documentation with an icon that is not already available in our custom iconset, you'll have to regenerate the iconset using Icomoon's Generator:
 
