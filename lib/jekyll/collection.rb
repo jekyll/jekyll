@@ -216,8 +216,13 @@ module Jekyll
         File.dirname(file_path)
       ).chomp("/.")
 
-      files << StaticFile.new(site, site.source, relative_dir,
-                              File.basename(full_path), self)
+      files << StaticFile.new(
+        site,
+        site.source,
+        relative_dir,
+        File.basename(full_path),
+        self
+      )
     end
   end
 end
