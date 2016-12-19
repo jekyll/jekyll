@@ -47,7 +47,7 @@ module Jekyll
       dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
-      retrieve_dirs(base, dir, dot_dirs)
+      retrieve_dirs(dir, dot_dirs)
       retrieve_pages(dir, dot_pages)
       retrieve_static_files(dir, dot_static_files)
     end
@@ -70,7 +70,7 @@ module Jekyll
     # dot_dirs - The Array of subdirectories in the dir.
     #
     # Returns nothing.
-    def retrieve_dirs(_base, dir, dot_dirs)
+    def retrieve_dirs(dir, dot_dirs)
       dot_dirs.map do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
