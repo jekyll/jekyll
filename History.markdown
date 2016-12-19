@@ -23,6 +23,7 @@
   * Escaped regular expressions when using post_url. (#5605)
   * fix date parsing in file names to be stricter (#5609)
   * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
+  * Use each instead of map to actually return nothing (#5668)
 
 ### Development Fixes
 
