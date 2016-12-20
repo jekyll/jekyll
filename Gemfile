@@ -26,7 +26,7 @@ group :test do
   gem "rspec"
   gem "rspec-mocks"
   gem "rubocop", "~> 0.44.1"
-  gem "test-theme", path => File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
+  gem "test-theme", :path => File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
