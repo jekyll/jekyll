@@ -32,6 +32,7 @@
   * Use `assert_nil` instead of `assert_equal nil` (#5652)
   * Rubocop -a on lib/jekyll (#5666)
   * Bump to rake 12.0 (#5670)
+  * Rubocop Gemfile (#5671)
 
 ### Documentation
 
