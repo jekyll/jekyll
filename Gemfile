@@ -66,6 +66,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-gist"
   gem "jekyll-feed"
   gem "jekyll-coffeescript"
+  gem "coffee-script-source", "~> 1.11.1"
   gem "jekyll-redirect-from"
   gem "jekyll-paginate"
   gem "mime-types", "~> 3.0"
