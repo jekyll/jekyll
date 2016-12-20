@@ -31,6 +31,7 @@
   * Add cucumber feature to test for bonafide theme gems (#5384)
   * Use `assert_nil` instead of `assert_equal nil` (#5652)
   * Rubocop -a on lib/jekyll (#5666)
+  * Bump to rake 12.0 (#5670)
 
 ### Documentation
 
