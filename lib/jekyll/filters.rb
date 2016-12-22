@@ -345,16 +345,9 @@ module Jekyll
 
     private
     def time(input)
-      case input
-      when Time
-        input.clone
-      when Date
-        input.to_time
-      when String
-        Time.parse(input) rescue Time.at(input.to_i)
-      when Numeric
-        Time.at(input)
-      else
+      begin
+        Liquid::Utils.to_date(input).to_time
+      rescue NoMethodError
         raise Errors::InvalidDateError,
           "Invalid Date: '#{input.inspect}' is not a valid datetime."
       end.localtime
