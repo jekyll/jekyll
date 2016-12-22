@@ -312,7 +312,7 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
-      num = Liquid::Utils.to_integer(num)
+      num = Liquid::Utils.to_integer(num) rescue 1
       if num == 1
         input.sample
       else
