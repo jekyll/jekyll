@@ -280,10 +280,11 @@ module Jekyll
       end
     end
 
-    def pop(array, input = 1)
+    def pop(array, num = 1)
       return array unless array.is_a?(Array)
+      num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
-      new_ary.pop(input.to_i || 1)
+      new_ary.pop(num)
       new_ary
     end
 
@@ -294,10 +295,11 @@ module Jekyll
       new_ary
     end
 
-    def shift(array, input = 1)
+    def shift(array, num = 1)
       return array unless array.is_a?(Array)
+      num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
-      new_ary.shift(input.to_i || 1)
+      new_ary.shift(num)
       new_ary
     end
 
@@ -310,11 +312,11 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
-      n = num.to_i rescue 1
-      if n == 1
+      num = Liquid::Utils.to_integer(num)
+      if num == 1
         input.sample
       else
-        input.sample(n)
+        input.sample(num)
       end
     end
 
