@@ -348,7 +348,7 @@ module Jekyll
     private
     def time(input)
       date = Liquid::Utils.to_date(input)
-      unless date.respond_to?(:strftime)
+      unless date.respond_to?(:to_time)
         raise Errors::InvalidDateError,
           "Invalid Date: '#{input.inspect}' is not a valid datetime."
       end
