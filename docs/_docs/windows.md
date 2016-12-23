@@ -20,6 +20,9 @@ For a more conventional way of installing Jekyll you can follow this [complete g
 
 [windows-installjekyll3]: https://labs.sverrirs.com/jekyll/
 
+\[Update 12/23/2016\]: Updates in the infrastructure of Ruby may cause SLL errors when attemptying to use gem install on a version of ruby older than 2.6. (The ruby package installed via the Chocolatey tool is version 2.3) If you have installed an older version, you can update ruby using the directions [here.][ssl-certificate-update]
+[ssl-certificate-update]: http://guides.rubygems.org/ssl-certificate-update/#installing-using-update-packages
+
 ## Encoding
 
 If you use UTF-8 encoding, make sure that no `BOM` header
