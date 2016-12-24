@@ -16,12 +16,12 @@ A quick way to install Jekyll is to follow the [installation instructions by Dav
  2. Install Ruby via Chocolatey: `choco install ruby -y`
  3. Reopen a command prompt and install Jekyll: `gem install jekyll`
 
+Updates in the infrastructure of Ruby may cause SLL errors when attempting to use `gem install` on a version of the RubyGems package older than 2.6. (The RubyGems package installed via the Chocolatey tool is version 2.3) If you have installed an older version, you can update the RubyGems package using the directions [here.][ssl-certificate-update]
+[ssl-certificate-update]: http://guides.rubygems.org/ssl-certificate-update/#installing-using-update-packages
+
 For a more conventional way of installing Jekyll you can follow this [complete guide to install Jekyll 3 on Windows by Sverrir Sigmundarson][windows-installjekyll3].
 
 [windows-installjekyll3]: https://labs.sverrirs.com/jekyll/
-
-\[Update 12/23/2016\]: Updates in the infrastructure of Ruby may cause SLL errors when attemptying to use gem install on a version of ruby older than 2.6. (The ruby package installed via the Chocolatey tool is version 2.3) If you have installed an older version, you can update ruby using the directions [here.][ssl-certificate-update]
-[ssl-certificate-update]: http://guides.rubygems.org/ssl-certificate-update/#installing-using-update-packages
 
 ## Encoding
 
