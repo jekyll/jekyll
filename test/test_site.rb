@@ -273,6 +273,15 @@ class TestSite < JekyllUnitTest
       assert_equal @site.static_files, @site.site_payload["site"]["static_files"]
     end
 
+    should "index posts by a String attribute" do
+      clear_dest
+      @site.process
+
+      authors = ["Mr. Hyde", "Dr. Jekyll"]
+      assert_equal authors, @site.post_attr_hash("author").keys
+      assert_equal 1, @site.post_attr_hash("author")["Dr. Jekyll"].size
+    end
+
     should "deploy payload" do
       clear_dest
       @site.process
