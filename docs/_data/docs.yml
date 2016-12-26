@@ -19,6 +19,7 @@
   - datafiles
   - assets
   - migrations
+  - includes
 
 - title: Customization
   docs:
