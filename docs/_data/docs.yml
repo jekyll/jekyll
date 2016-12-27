@@ -19,11 +19,11 @@
   - datafiles
   - assets
   - migrations
-  - includes
 
 - title: Customization
   docs:
   - templates
+  - includes
   - permalinks
   - pagination
   - plugins
