@@ -421,13 +421,13 @@ The default is `default`. They are as follows (with what they filter):
 
 ### Includes
 
-If you have small page fragments that you want to include in multiple places on your site, you can use the `include` tag:
+If you have small page snippets that you want to include in multiple places on your site, save the snippets as *include files* and insert them where required, by using the `include` tag:
 
 ```liquid
 {% raw %}{% include footer.html %}{% endraw %}
 ```
 
-Jekyll expects all include files to be placed in an `_includes` directory at the root of your source directory. In the above example, this will embed the contents of `_includes/footer.html` into the calling file.
+Jekyll expects all **include files** to be placed in an `_includes` directory at the root of your source directory. In the above example, this will embed the contents of `_includes/footer.html` into the calling file.
 
 For more advanced information on using includes, see [Includes](../includes).
 
@@ -539,7 +539,7 @@ You can also use the `link` tag to create a link in Markdown as follows:
 {% endraw %}
 ```
 
-Including `{% raw %}{{site.baseurl}}{% endraw %}` is optional &mdash; it depends on whether you want the link to be absolute or root-relative.
+(Including `{% raw %}{{site.baseurl}}{% endraw %}` is optional &mdash; it depends on whether you want to preface the page URL with the `baseurl` value.)
 
 The path to the post, page, or collection is defined as the path relative to the root directory (where your config file is) to the file, not the path from your existing page to the other page.
 
