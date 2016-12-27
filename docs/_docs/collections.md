@@ -7,7 +7,7 @@ permalink: /docs/collections/
 Not everything is a post or a page. Maybe you want to document the various
 methods in your open source project, members of a team, or talks at a
 conference. Collections allow you to define a new type of document that behave
-like Pages or Posts do normally but which also have their own unique properties and
+like Pages or Posts do normally, but also have their own unique properties and
 namespace.
 
 ## Using Collections
@@ -51,7 +51,7 @@ defaults:
 
 Create a corresponding folder (for example, `<source>/_my_collection`) and add
 documents. YAML Front Matter is read in as data if it exists, and everything
-after it is available in the document's `content` attribute. If no YAML Front
+after it is accessible via the document's `content` attribute. If no YAML Front
 Matter is provided, Jekyll will not generate the file in your collection.
 
 <div class="note info">
