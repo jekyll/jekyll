@@ -22,7 +22,7 @@ If you already have [Ruby](https://www.ruby-lang.org/en/downloads/) and [RubyGem
 # Now browse to http://localhost:4000
 ```
 
-## About bundler
+## About Bundler
 
 `gem install jekyll bundler` installs the [jekyll](https://rubygems.org/gems/jekyll/) and [bundler](https://rubygems.org/gems/bundler) gems through [RubyGems](https://rubygems.org/). You need only to install the gems one time &mdash; not every time you create a new Jekyll project. Here are some additional details:
 
@@ -31,13 +31,14 @@ If you already have [Ruby](https://www.ruby-lang.org/en/downloads/) and [RubyGem
 
 * When you run `bundle exec jekyll serve`, Bundler uses the gems and versions as specified in `Gemfile.lock` to ensure your Jekyll site builds with no compatibility or dependency conflicts.
 
-## Jekyll new options
+## Options for creating a new site with Jekyll
 
 `jekyll new <PATH>` installs a new Jekyll site at the path specified (relative to current directory). In this case, Jekyll will be installed in a directory called `myblog`. Here are some additional details:
 
 * To install the Jekyll site into the directory you're currently in, run `jekyll new .` If the existing directory isn't empty, you can pass the `--force` option with `jekyll new . --force`.  
 * `jekyll new` automatically initiates `bundle install` to install the dependencies required. (If you don't want Bundler to install the gems, use `jekyll new myblog --skip-bundle`.)
 * By default, the Jekyll site installed by `jekyll new` uses a gem-based theme called [Minima](https://github.com/jekyll/minima). With [gem-based themes](../themes), some of the directories and files are stored in the theme-gem, hidden from your immediate view.
+* To learn about other parameters you can include with `jekyll new`, type ` jekyll new --help`.
 
 ## Next steps
 
