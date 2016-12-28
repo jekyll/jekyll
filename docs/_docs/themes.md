@@ -98,7 +98,7 @@ To install a gem-based theme:
     bundle install
     ```
 
-3. Add the following to your site's `_config.yml` to activate the theme:
+3.  Add the following to your site's `_config.yml` to activate the theme:
 
     ```sh
     theme: my-awesome-jekyll-theme
