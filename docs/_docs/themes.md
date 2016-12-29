@@ -36,7 +36,7 @@ The goal of gem-based themes is to allow you to get all the benefits of a robust
 
 Jekyll themes set default layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content.
 
-For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` directory (for example, `_layouts/page.html`).
+For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` directory (that is, `_layouts/page.html`).
 
 Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
 
@@ -52,7 +52,7 @@ To locate theme's files on your computer:
 
 1.  Run `bundle show` followed by the name of the theme's gem, e.g., `bundle show minima` for default Jekyll's theme.
 
-    The location of the theme gem is returned. For example, minima is located in `/usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0` on a Mac.
+    The location of the theme gem is returned. For example, minima is located in `/usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0` when using the system Ruby installation on a Mac.
 
 2.  Change to the directory's location and open the directory in Finder or Explorer:
 
@@ -62,9 +62,39 @@ To locate theme's files on your computer:
     # for Windows, use "explorer ."
     ```
 
-    A Finder or Explorer window opens showing the theme's files and directories.
+    A Finder or Explorer window opens showing the theme's files and directories. The Minima theme gem contains these files:
+    
+    ```
+    ├── LICENSE.txt
+    ├── README.md
+    ├── _includes
+    │   ├── disqus_comments.html
+    │   ├── footer.html
+    │   ├── google-analytics.html
+    │   ├── head.html
+    │   ├── header.html
+    │   ├── icon-github.html
+    │   ├── icon-github.svg
+    │   ├── icon-twitter.html
+    │   └── icon-twitter.svg
+    ├── _layouts
+    │   ├── default.html
+    │   ├── home.html
+    │   ├── page.html
+    │   └── post.html
+    ├── _sass
+    │   ├── minima
+    │   │   ├── _base.scss
+    │   │   ├── _layout.scss
+    │   │   └── _syntax-highlighting.scss
+    │   └── minima.scss
+    └── assets
+        └── main.scss
+     ```
 
     With a clear understanding of the theme's files, you can now override any theme file by creating a similarly named file in your Jekyll site directory.
+    
+    Let's say you want to override Minima's footer. In your Jekyll site, create an `_includes` folder and add a file in it called `footer.html`. Jekyll will now use your site's `footer.html` file instead of the `footer.html` file from the Minima theme gem.
 
 ## Converting gem-based themes to regular themes
 
@@ -82,7 +112,7 @@ Now `bundle update` will no longer get updates for the theme gem.
 
 The `jekyll new <PATH>` command isn't the only way to create a new Jekyll site with a gem-based theme. You can also find gem-based themes online and incorporate them into your Jekyll project.
 
-For example, search for [jekyll-theme on RubyGems](https://rubygems.org/search?utf8=%E2%9C%93&query=jekyll-theme) to find other gem-based themes. (Note that not all themes are using `jekyll-theme` as a convention in the theme name.)
+For example, search for [jekyll theme on RubyGems](https://rubygems.org/search?utf8=%E2%9C%93&query=jekyll-theme) to find other gem-based themes. (Note that not all themes are using `jekyll-theme` as a convention in the theme name.)
 
 To install a gem-based theme:
 
@@ -98,7 +128,7 @@ To install a gem-based theme:
     bundle install
     ```
 
-3.  Add the following to your site's `_config.yml` to activate the theme:
+3. Add the following to your site's `_config.yml` to activate the theme:
 
     ```sh
     theme: my-awesome-jekyll-theme
@@ -113,7 +143,7 @@ To install a gem-based theme:
 You can have multiple themes listed in your site's `Gemfile`, but only one theme can be selected in your site's `_config.yml`.
 {: .note .info }
 
-If you're publishing your Jekyll site on [Github Pages](https://pages.github.com/), note that Github Pages supports only some gem-based themes. See [Supported Themes](https://pages.github.com/themes/) in Github's documentation to see which themes are supported.
+If you're publishing your Jekyll site on [GitHub Pages](https://pages.github.com/), note that GitHub Pages supports only some gem-based themes. See [Supported Themes](https://pages.github.com/themes/) in GitHub's documentation to see which themes are supported.
 
 ## Creating a gem-based theme
 
