@@ -45,7 +45,7 @@ defaults:
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add
 documents. YAML Front Matter is read in as data if it exists, and everything
-after it is stuck in the Document's `content` attribute. If no YAML Front
+after it is stuck in the document's `content` attribute. If no YAML Front
 Matter is provided, Jekyll will not generate the file in your collection.
 
 <div class="note info">
@@ -73,19 +73,6 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
-As for posts with [Permalinks](../permalinks/), the document
-URL can be customized by setting `permalink` metadata for the collection:
-
-```yaml
-collections:
-  my_collection:
-    output: true
-    permalink: /awesome/:path/
-```
-
-For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be
-written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
-
 <div class="note info">
   <h5>Don't forget to add YAML for processing</h5>
   <p>
@@ -94,6 +81,21 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
   output location without processing.
   </p>
 </div>
+
+## Configuring permalinks for collections {#permalinks}
+
+You can customize the [Permalinks](../permalinks/) for your collection's documents by setting `permalink` property in the collection's configuration as follows:
+
+```yaml
+collections:
+  my_collection:
+    output: true
+    permalink: /awesome/:path/:title.output_ext
+```
+
+In this example, the collection documents will the have the URL of `awesome` followed by the path to the document and its file extension.
+
+Collections have the following template variables available for permalinks:
 
 <div class="mobile-side-scroller">
 <table>
@@ -148,6 +150,83 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
   </tbody>
 </table>
 </div>
+
+## Permalink examples for collections
+
+Depending on how you declare your permalinks in your configuration file, the permalinks and paths get written differently in the _site folder. A few examples will help clarify the options.
+
+Let's say your collection is called "apidocs" with doc1.md in your collection. doc1.md is grouped inside a folder called "mydocs". Your project's source directory for the collection looks this:
+
+```
+├── _apidocs
+│   └── mydocs
+│       └── doc1.md
+```
+
+Based on this scenario, here are a few permalink options.
+
+**Permalink configuration**: None <br/>
+**Output**: 
+
+```
+├── apidocs
+│   └── mydocs
+│       └── doc1.html
+```
+
+**Permalink configuration**: No collection permalinks configured, but `pretty` configured for pages/posts. <br/>
+**Output**:
+
+```
+├── apidocs
+│   └── mydocs
+│       └── doc1
+│           └── index.html
+```
+
+**Permalink configuration**: `/:collection/:path/:title:output_ext`  <br/>
+**Output**:
+
+```
+├── apidocs
+│   └── mydocs
+│       └── doc1
+│           └── doc1.html
+```
+
+**Permalink configuration**: `/awesome/:path/:title.html`   <br/>
+**Output**:
+
+```
+├── awesome
+│   └── mydocs
+│       └── doc1.html
+```
+
+**Permalink configuration**: `/awesome/:path/:title/`  <br/>
+**Output**:
+
+```
+├── awesome
+│   └── mydocs
+│       └── doc1
+│           └── index.html
+```
+
+**Permalink configuration**: `/awesome/:title.html` <br/>
+**Output**:  
+
+```
+├── awesome
+│   └── doc1.html
+```
+
+**Permalink configuration**: `:title.html`
+**Output**:
+
+```
+├── doc1.html
+```
 
 ## Liquid Attributes
 
@@ -378,3 +457,4 @@ Every album in the collection could be listed on a single page with a template:
 {% endfor %}
 {% endraw %}
 ```
+

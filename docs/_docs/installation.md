@@ -9,7 +9,7 @@ If it ever becomes a pain, please [file an issue]({{ site.repository }}/issues/n
 (or submit a pull request) describing the issue you
 encountered and how we might make the process easier.
 
-### Requirements
+### Requirements {#requirements}
 
 Installing Jekyll is easy and straight-forward, but there are a few
 requirements you’ll need to make sure your system has before you start.
