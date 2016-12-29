@@ -4,11 +4,10 @@ title: Permalinks
 permalink: /docs/permalinks/
 ---
 
-Jekyll supports a flexible way to build the permalinks for your pages, posts, and collections. A permalink is the URL for the page, post, or collection (excluding the domain name or directory folder).
+Permalinks refer to the URLs (excluding the domain name or directory folder) for your pages, posts, or collections.
+Jekyll supports a flexible way to build permalinks, allowing you to leverage various template variables or choose built-in permalink styles (such as `date`) that automatically use a template-variable pattern.
 
 You construct permalinks by creating a template URL where dynamic elements are represented by colon-prefixed keywords. The default template permalink is `/:categories/:year/:month/:day/:title.html`. Each of the colon-prefixed keywords is a template variable.
-
-You’re free to construct your own permalink style using the available template variables or choose one of the built-in permalink styles (such as `date`) that automatically use a template-variable pattern.
 
 ## Where to configure permalinks
 
@@ -41,21 +40,14 @@ permalink: /mypageurl/
 
 Even if your configuration file specifies the `date` style, the URL for this page would be `http://somedomain.com/mypageurl/`.
 
-{% comment %}this note needs clarification
-<div class="note info">
-<h5>Specifying permalinks through the YAML Front Matter</h5>
-<p>Built-in permalink styles are not recognized in YAML Front Matter. As a result, <code>permalink: pretty</code> will not work, but the equivalent <code>/:categories/:year/:month/:day/:title/</code> using template variables will.</p>
-</div>
-{% endcomment %}
-
-When you use permalinks that omit the `.html` file extension (called "clean URLs") Jekyll builds the file as index.html placed inside a folder with the page's name. For example:
+When you use permalinks that omit the `.html` file extension (called "pretty URLs") Jekyll builds the file as index.html placed inside a folder with the page's name. For example:
 
 ```
 ├── mypageurl
 │   └── index.html
 ```
 
-Servers automatically load the index.html file inside of any folder, so users can simply navigate to `http://somedomain.com/mypageurl` to get to `mypageurl/index.html`.
+With a URL such as `/mypageurl/`, servers automatically load the index.html file inside the folder, so users can simply navigate to `http://somedomain.com/mypageurl/` to get to `mypageurl/index.html`.
 
 ## Template variables for permalinks {#template-variables}
 
@@ -241,6 +233,11 @@ Although you can specify a custom permalink pattern using [template variables](#
 
 Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: date`.
 
+<div class="note info">
+<h5>Specifying permalinks through the YAML Front Matter</h5>
+<p>Built-in permalink styles are not recognized in YAML Front Matter. As a result, <code>permalink: pretty</code> will not work.</p>
+</div>
+
 ## Permalink style examples with posts {#permalink-style-examples}
 
 Here are a few examples to clarify how permalink styles get applied with posts.
@@ -291,7 +288,7 @@ Given a post named: `/2009-04-29-slap-chop.md`
     <tr>
       <td>
         <p><code>/:year/:month/:title</code></p>
-        <p>See <a href="#extensionless-permalinks">extensionless permalinks</a> for details.</p>
+        <p>See <a href="#extensionless-permalinks">Extensionless permalinks with no trailing slashes</a> for details.</p>
       </td>
       <td>
         <p><code>/2009/04/slap-chop</code></p>
@@ -317,13 +314,13 @@ The path to the post or page in the built site differs for posts, pages, and col
 
 ### Posts
 
-No matter how many subfolders you organize your posts into inside the `_posts` folder, all posts are pulled out of those subfolders and flattened into the `_site`'s root directory upon build.
+The subfolders into which you may have organized your posts inside the `_posts` directory will not be part of the permalink.
 
 If you use a permalink style that omits the `.html` file extension, each post is rendered as an `index.html` file inside a folder with the post's name (for example, `categoryname/2016/12/01/mypostname/index.html`).
 
 ### Pages
 
-Unlike posts, pages are *not* removed from their subfolder directories when you build your site. Pages remain in the same folder structure in which you organized your pages in the source directory, except that the structure is now mirrored in `_site`. (The only exception is if your page has a `permalink` declared its front matter &mdash; in that case, the structure honors the permalink setting instead of the source folder structure.)
+Unlike posts, pages by default mimic the source directory structure exactly. (The only exception is if your page has a `permalink` declared its front matter &mdash; in that case, the structure honors the permalink setting instead of the source folder structure.)
 
 As with posts, if you use a permalink style that omits the `.html` file extension, each page is rendered as an `index.html` file inserted inside a folder with the page's name (for example, `mypage/index.html`).
 
@@ -335,7 +332,7 @@ Collections have their own way of setting permalinks. Additionally, collections 
 
 ## Flattening pages in \_site on build
 
-If you want to flatten your pages (pull them out of subfolders) in the `_site` directory when your site builds (similar to posts), add the permalink property of each page's front matter:
+If you want to flatten your pages (pull them out of subfolders) in the `_site` directory when your site builds (similar to posts), add the `permalink` property to the front matter of each page, with no path specified:
 
 ```
 ---
@@ -346,7 +343,7 @@ permalink: mypageurl.html
 
 ## Extensionless permalinks with no trailing slashes {#extensionless-permalinks}
 
-Jekyll supports permalinks that contain neither a trailing slash nor a file extension, but this requires additional support from the web server to properly serve. When using extensionless permalinks, output files written to disk will still have the proper file extension (typically `.html`), so the web server must be able to map requests without file extensions to these files.
+Jekyll supports permalinks that contain neither a trailing slash nor a file extension, but this requires additional support from the web server to properly serve. When using these types of permalinks, output files written to disk will still have the proper file extension (typically `.html`), so the web server must be able to map requests without file extensions to these files.
 
 Both [GitHub Pages](../github-pages/) and the Jekyll's built-in WEBrick server handle these requests properly without any additional work.
 
@@ -368,4 +365,4 @@ try_files $uri $uri.html $uri/ =404;
 
 ## Linking without regard to permalink styles
 
-You can create links in your topics to other posts, pages, or collection items in a way that is valid no matter what permalink configuration you choose. By using the `link` tag, if you change your permalinks, your links won't break. See [Linking to pages](../templates#link) for more details.
+You can create links in your topics to other posts, pages, or collection items in a way that is valid no matter what permalink configuration you choose. By using the `link` tag, if you change your permalinks, your links won't break. See [Linking to pages](../templates#link) in Templates for more details.
