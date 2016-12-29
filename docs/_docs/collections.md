@@ -96,7 +96,7 @@ You can customize the [Permalinks](../permalinks/) for your collection's documen
 collections:
   my_collection:
     output: true
-    permalink: /awesome/:path/:title.output_ext
+    permalink: /awesome/:path/:title.:output_ext
 ```
 
 In this example, the collection documents will the have the URL of `awesome` followed by the path to the document and its file extension.
@@ -237,11 +237,12 @@ Based on this scenario, here are a few permalink options.
 
 ### Collections
 
-Each collection is accessible through the `site` variable. For example, if
+Each collection is accessible as a field on the `site` variable. For example, if
 you want to access the `albums` collection found in `_albums`, you'd use
-`site.albums`. Each collection is itself an array of documents
-(for example, `site.albums` is an array of documents, much like `site.pages` and
-`site.posts`). See below for how to access attributes of those documents.
+`site.albums`. 
+
+Each collection is itself an array of documents (e.g., `site.albums` is an array of documents, much like `site.pages` and
+`site.posts`). See the table below for how to access attributes of those documents.
 
 The collections are also available under `site.collections`, with the metadata
 you specified in your `_config.yml` (if present) and the following information:
