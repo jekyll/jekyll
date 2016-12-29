@@ -918,6 +918,7 @@ LESS.js files during generation.
 - [jekyll-data](https://github.com/ashmaroli/jekyll-data): Read data files within Jekyll Theme Gems.
 - [jekyll-pinboard](https://github.com/snaptortoise/jekyll-pinboard-plugin): Access your Pinboard bookmarks within your Jekyll theme.
 - [jekyll-migrate-permalink](https://github.com/mpchadwick/jekyll-migrate-permalink): Adds a `migrate-permalink` sub-command to help deal with side effects of changing your permalink.
+- [Jekyll-Post](https://github.com/robcrocombe/jekyll-post): A CLI tool to easily draft, edit, and publish Jekyll posts.
 
 #### Editors
 
