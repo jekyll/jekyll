@@ -427,7 +427,7 @@ If you have small page snippets that you want to include in multiple places on y
 {% raw %}{% include footer.html %}{% endraw %}
 ```
 
-Jekyll expects all **include files** to be placed in an `_includes` directory at the root of your source directory. In the above example, this will embed the contents of `_includes/footer.html` into the calling file.
+Jekyll expects all *include files* to be placed in an `_includes` directory at the root of your source directory. In the above example, this will embed the contents of `_includes/footer.html` into the calling file.
 
 For more advanced information on using includes, see [Includes](../includes).
 
