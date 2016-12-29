@@ -49,10 +49,10 @@ defaults:
 
 ### Step 2: Add your content {#step2}
 
-Create a corresponding folder (for example, `<source>/_my_collection`) and add
-documents. YAML Front Matter is read in as data if it exists, and everything
-after it is accessible via the document's `content` attribute. If no YAML Front
-Matter is provided, Jekyll will not generate the file in your collection.
+Create a corresponding folder (e.g. `<source>/_my_collection`) and add
+documents. YAML front matter is processed if the front matter exists, and everything
+after the front matter is pushed into the document's `content` attribute. If no YAML front
+matter is provided, Jekyll will not generate the file in your collection.
 
 <div class="note info">
   <h5>Be sure to name your directories correctly</h5>
