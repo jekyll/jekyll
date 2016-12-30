@@ -18,7 +18,7 @@ permalink is defined according to the format `/:categories/:year/:month/:day/:ti
   <h5>Specifying permalinks through the YAML Front Matter</h5>
   <p>
     Built-in permalink styles are not recognized in YAML Front Matter. So
-    <code>permalink: pretty</code> will not work, but the equivalent 
+    <code>permalink: pretty</code> will not work, but the equivalent
     <code>/:categories/:year/:month/:day/:title/</code>
     using template variables will.
   </p>
