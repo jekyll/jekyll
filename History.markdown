@@ -12,6 +12,7 @@
   * Switch to `https` when possible. (#5611)
   * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
   * Update documentation on updating FontAwesome Iconset (#5655)
+  * Improve quickstart docs (#5689)
 
 ### Minor Enhancements
 
