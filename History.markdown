@@ -13,6 +13,7 @@
   * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
   * Update documentation on updating FontAwesome Iconset (#5655)
   * Improve quickstart docs (#5689)
+  * Add Jekyll-Post to list of plugins (#5705)
 
 ### Minor Enhancements
 
