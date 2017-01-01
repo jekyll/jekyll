@@ -44,6 +44,7 @@
   * Improve Permalinks documentation. (#5653)
   * Fix typo in Variables doc page (#5657)
   * Fix a couple of typos in the docs (#5658)
+  * Update windows.md (#5683)
 
 ## 3.3.1 / 2016-11-14
 
