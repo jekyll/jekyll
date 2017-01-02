@@ -19,6 +19,7 @@
 
   * Add connector param to array_to_sentence_string filter (#5597)
   * Adds group_by_exp filter (#5513)
+  * Use the current year for the LICENSE of theme (#5712)
 
 ### Bug Fixes
 
