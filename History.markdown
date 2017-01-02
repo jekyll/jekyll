@@ -12,11 +12,14 @@
   * Switch to `https` when possible. (#5611)
   * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
   * Update documentation on updating FontAwesome Iconset (#5655)
+  * Improve quickstart docs (#5689)
+  * Add Jekyll-Post to list of plugins (#5705)
 
 ### Minor Enhancements
 
   * Add connector param to array_to_sentence_string filter (#5597)
   * Adds group_by_exp filter (#5513)
+  * Use the current year for the LICENSE of theme (#5712)
 
 ### Bug Fixes
 
@@ -33,6 +36,7 @@
   * Rubocop -a on lib/jekyll (#5666)
   * Bump to rake 12.0 (#5670)
   * Rubocop Gemfile (#5671)
+  * update Classifier-Reborn to 2.1.0 (#5711)
 
 ### Documentation
 
@@ -42,6 +46,7 @@
   * Improve Permalinks documentation. (#5653)
   * Fix typo in Variables doc page (#5657)
   * Fix a couple of typos in the docs (#5658)
+  * Update windows.md (#5683)
 
 ## 3.3.1 / 2016-11-14
 
