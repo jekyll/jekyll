@@ -35,6 +35,7 @@
   * Rubocop -a on lib/jekyll (#5666)
   * Bump to rake 12.0 (#5670)
   * Rubocop Gemfile (#5671)
+  * update Classifier-Reborn to 2.1.0 (#5711)
 
 ### Documentation
 
