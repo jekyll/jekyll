@@ -1031,3 +1031,11 @@ code.output {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+.result {
+  border: 1px solid yellow;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size:14px;
+}

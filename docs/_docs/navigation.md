@@ -1,18 +1,7 @@
 ---
 layout: docs
-title: Navigation
 permalink: /docs/navigation
 ---
-
-<style>
-.result {
-border: 1px solid yellow;
-padding: 10px;
-margin-top: 10px;
-margin-bottom: 10px;
-font-size:14px;
-}
-</style>
 
 If your Jekyll site has a lot of pages, you might want to create navigation for the pages. Instead of hard-coding navigation links, you can programmatically retrieve a list of pages to build the navigation for your site.
 
@@ -67,12 +56,12 @@ docs:
 
 **Result**
 <div class="result">
-<h2>ACME Documentation</h2>
-<ul>
-<li><a href="introduction.html" alt="Introduction">Introduction</a></li>
-<li><a href="configuration.html" alt="Configuration">Configuration</a></li>
-<li><a href="deployment.html" alt="Deployment">Deployment</a></li>
-</ul>
+   <h2>ACME Documentation</h2>
+   <ul>
+      <li><a href="introduction.html" alt="Introduction">Introduction</a></li>
+      <li><a href="configuration.html" alt="Configuration">Configuration</a></li>
+      <li><a href="deployment.html" alt="Deployment">Deployment</a></li>
+   </ul>
 </div>
 
 When you use a `for` loop, you choose how you want to refer to the items you're looping through. The variable you choose (in this case, `item`) becomes how you access the properties of each item in the list. Dot notation is used to get a property of the item (for example, `item.url`).
@@ -99,16 +88,16 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 ```liquid
 {% raw %}{% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
 {% for item in doclist %}
-<li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+    <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
 {% endfor %}{% endraw %}
 ```
 
 **Result**
 
 <div class="result">
-<li><a href="configuration.html" alt="Configuration">Configuration</a></li>
-<li><a href="deployment.html" alt="Deployment">Deployment</a></li>
-<li><a href="introduction.html" alt="Introduction">Introduction</a></li>
+   <li><a href="configuration.html" alt="Configuration">Configuration</a></li>
+   <li><a href="deployment.html" alt="Deployment">Deployment</a></li>
+   <li><a href="introduction.html" alt="Introduction">Introduction</a></li>
 </div>
 
 The items now appear in alphabetical order. The `sort` property in the Liquid filter applies to the `title`, which is an actual property in the list. If `title` weren't a property, we would need to sort by another property.
@@ -274,24 +263,39 @@ toc2:
 **Result**
 
 <div class="result">
-<div>
- <h3>Group 1</h3>
- <ul>
- <li><a href="/thing1.html">Thing 1</a></li> <li><a href="/thing2.html">Thing 2</a></li> <ul>
- <li><a href="/subthing1.html">Subthing 1</a></li> <li><a href="/subthing2.html">Subthing 2</a></li> </ul>
- <li><a href="/thing3.html">Thing 3</a></li> </ul>
- <h3>Group 2</h3>
- <ul>
- <li><a href="/piece1.html">Piece 1</a></li> <li><a href="/piece2.html">Piece 2</a></li> <li><a href="/piece3.html">Piece 3</a></li> <ul>
- <li><a href="/subpiece1.html">Subpiece 1</a></li> <li><a href="/subpiece2.html">Subpiece2</a></li> </ul>
- </ul>
- <h3>Group 3</h3>
- <ul>
- <li><a href="/widget1.html">Widget 1</a></li> <ul>
- <li><a href="/subwidget1.html">Subwidget 1</a></li> <li><a href="/subwidget2.html">Subwidget 2</a></li> </ul>
- <li><a href="/widget2.html">Widget 2</a></li> <li><a href="/widget3.html">Widget 3</a></li> </ul>
- </div>
- </div>
+   <div>
+      <h3>Group 1</h3>
+      <ul>
+         <li><a href="/thing1.html">Thing 1</a></li>
+         <li><a href="/thing2.html">Thing 2</a></li>
+         <ul>
+            <li><a href="/subthing1.html">Subthing 1</a></li>
+            <li><a href="/subthing2.html">Subthing 2</a></li>
+         </ul>
+         <li><a href="/thing3.html">Thing 3</a></li>
+      </ul>
+      <h3>Group 2</h3>
+      <ul>
+         <li><a href="/piece1.html">Piece 1</a></li>
+         <li><a href="/piece2.html">Piece 2</a></li>
+         <li><a href="/piece3.html">Piece 3</a></li>
+         <ul>
+            <li><a href="/subpiece1.html">Subpiece 1</a></li>
+            <li><a href="/subpiece2.html">Subpiece2</a></li>
+         </ul>
+      </ul>
+      <h3>Group 3</h3>
+      <ul>
+         <li><a href="/widget1.html">Widget 1</a></li>
+         <ul>
+            <li><a href="/subwidget1.html">Subwidget 1</a></li>
+            <li><a href="/subwidget2.html">Subwidget 2</a></li>
+         </ul>
+         <li><a href="/widget2.html">Widget 2</a></li>
+         <li><a href="/widget3.html">Widget 3</a></li>
+      </ul>
+   </div>
+</div>
 
  In this example, `if site.data.samplelist.toc2[0]` is used to ensure that the YAML level actually contains items. If there isn't anything at the `[0]` position, we can skip looking in this level.
 
@@ -319,19 +323,19 @@ sidebar: toc
 
 ```liquid
 {% raw %}<ul>
-{% for item in site.data.samplelist[page.sidebar] %}
-<li><a href="{{ item.url }}">{{ item.title }}</a></li>
-{% endfor %}
+    {% for item in site.data.samplelist[page.sidebar] %}
+    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+    {% endfor %}
 </ul>{% endraw %}
 ```
 **Result**
 
 <div class="result">
-<ul>
-<li><a href="introduction.html">Introduction</a></li>
-<li><a href="configuration.html">Configuration</a></li>
-<li><a href="deployment.html">Deployment</a></li>
-</ul>
+   <ul>
+      <li><a href="introduction.html">Introduction</a></li>
+      <li><a href="configuration.html">Configuration</a></li>
+      <li><a href="deployment.html">Deployment</a></li>
+   </ul>
 </div>
 
 In this scenario, we want to pass values from the page's front matter into a `for` loop that contains a variable. When the assigned variable isn't a string but rather a data reference, you must use brackets (instead of curly braces) to refer to the front matter's value.
@@ -353,8 +357,8 @@ In addition to inserting items from the YAML data file into your list, you also 
 
 ```liquid
 {% raw %}{% for item in site.data.samplelist.docs %}
-<li class="{% if item.url == page.url %}active{% endif %}">
-<a href="{{ item.url }}">{{ item.title }}</a></li>
+    <li class="{% if item.url == page.url %}active{% endif %}">
+    <a href="{{ item.url }}">{{ item.title }}</a></li>
 {% endfor %}{% endraw %}
 ```
 
@@ -368,9 +372,9 @@ In addition to inserting items from the YAML data file into your list, you also 
 </style>
 
 <div class="result">
-<li class=""><a href="introduction.html">Introduction</a></li>
-<li class=""><a href="configuration.html">Configuration</a></li>
-<li class="active"><a href="deployment.html">Deployment</a></li>
+   <li class=""><a href="introduction.html">Introduction</a></li>
+   <li class=""><a href="configuration.html">Configuration</a></li>
+   <li class="active"><a href="deployment.html">Deployment</a></li>
 </div>
 
 In this case, assume `Deployment` is the current page.
@@ -403,21 +407,21 @@ docs2:
 
 ```liquid
 {% raw %}<ul>
-{% for item in site.data.samplelist.docs2 %}
-{% if item.version == 1 %}
-  <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-{% endif %}
-{% endfor %}
+    {% for item in site.data.samplelist.docs2 %}
+        {% if item.version == 1 %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endif %}
+    {% endfor %}
 </ul>{% endraw %}
 ```
 
 **Result**
 
 <div class="result">
-<ul>
-<li><a href="introduction.html">Introduction</a></li>
-<li><a href="configuration.html">Configuration</a></li>
-</ul>
+   <ul>
+      <li><a href="introduction.html">Introduction</a></li>
+      <li><a href="configuration.html">Configuration</a></li>
+   </ul>
 </div>
 
 The `Deployment` page is excluded because its `version` is `2`.
@@ -483,22 +487,22 @@ If you wanted to simply get all docs in the collection for a specific category, 
 ```liquid
 {% raw %}<h3>Getting Started</h3>
 <ul>
-{% for doc in site.docs %}
-{% if doc.category == "getting-started" %}
-  <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
-{% endif %}
-{% endfor %}
+    {% for doc in site.docs %}
+        {% if doc.category == "getting-started" %}
+          <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
+        {% endif %}
+    {% endfor %}
 </ul>{% endraw %}
 ```
 
 The result would be as follows:
 
 <div class="result">
-<h3>Getting Started</h3>
-<ul>
-<li><a href="/docs/sample1">Sample1</a></li>
-<li><a href="/docs/sample2">Sample2</a></li>
-</ul>
+   <h3>Getting Started</h3>
+   <ul>
+      <li><a href="/docs/sample1">Sample1</a></li>
+      <li><a href="/docs/sample2">Sample2</a></li>
+   </ul>
 </div>
 
 This might be useful if you're setting up a knowledge base and have dozens of topics in each category, with each category displaying on its own page.
@@ -516,35 +520,33 @@ Here's the code for getting lists of pages grouped under their corresponding cat
 {% raw %}{% assign mydocs = site.docs | group_by: 'category' %}
 {% for cat in mydocs %}
 <h2>{{ cat.name | capitalize }}</h2>
-<ul>
-{% assign items = cat.items | sort: 'weight' %}
-{% for item in items %}
-  <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-{% endfor %}
-</ul>
+    <ul>
+        {% assign items = cat.items | sort: 'weight' %}
+        {% for item in items %}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+    </ul>
 {% endfor %}{% endraw %}
 ```
 
 **Result**
 
 <div class="result">
-<h2>Getting-started</h2>
-<ul>
-<li><a href="/docs/sample2">Sample2</a></li>
-<li><a href="/docs/sample1">Sample1</a></li>
-</ul>
-
-<h2>Configuration</h2>
-<ul>
-<li><a href="/docs/topic2">Topic2</a></li>
-<li><a href="/docs/topic1">Topic1</a></li>
-</ul>
-
-<h2>Deployment</h2>
-<ul>
-<li><a href="/docs/widget2">Widget2</a></li>
-<li><a href="/docs/widget1">Widget1</a></li>
-</ul>
+   <h2>Getting-started</h2>
+   <ul>
+      <li><a href="/docs/sample2">Sample2</a></li>
+      <li><a href="/docs/sample1">Sample1</a></li>
+   </ul>
+   <h2>Configuration</h2>
+   <ul>
+      <li><a href="/docs/topic2">Topic2</a></li>
+      <li><a href="/docs/topic1">Topic1</a></li>
+   </ul>
+   <h2>Deployment</h2>
+   <ul>
+      <li><a href="/docs/widget2">Widget2</a></li>
+      <li><a href="/docs/widget1">Widget1</a></li>
+   </ul>
 </div>
 
 Let's walk through the code. First, we assign a variable (`mydocs`) to the collection content (`site.docs`).
