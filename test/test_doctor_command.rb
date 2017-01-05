@@ -35,4 +35,22 @@ class TestDoctorCommand < JekyllUnitTest
       "other: #{dest_dir}/about/index.html, #{dest_dir}/About/index.html"
     end
   end
+
+  context 'Liquid errors' do
+    setup do
+      clear_dest
+    end
+
+    should 'return error for invalid Liquid' do
+      @site = Site.new(Jekyll.configuration({
+        "source" => File.join(source_dir, '/_liquid_errors'),
+        "destination" => dest_dir
+      }))
+      @site.process
+      output = capture_stderr do
+         ret = Jekyll::Commands::Doctor.liquid_errors(@site)
+         assert_equal true, ret
+      end
+    end
+  end
 end

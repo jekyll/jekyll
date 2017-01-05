@@ -35,7 +35,8 @@ module Jekyll
             fsnotify_buggy?(site),
             !deprecated_relative_permalinks(site),
             !conflicting_urls(site),
-            !urls_only_differ_by_case(site)
+            !urls_only_differ_by_case(site),
+            !liquid_errors(site)
           ].all?
         end
 
@@ -89,6 +90,18 @@ module Jekyll
               " will be overwritten by the other: #{real_urls.join(", ")}"
           end
           urls_only_differ_by_case
+        end
+
+        def liquid_errors(site)
+          Liquid::Template.error_mode = :strict
+          begin
+            site.generate
+            site.render
+          rescue
+            true
+          else
+            false
+          end
         end
 
         private
