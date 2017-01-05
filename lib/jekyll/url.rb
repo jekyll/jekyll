@@ -1,3 +1,4 @@
+require "addressable/uri"
 require "uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
@@ -159,7 +160,7 @@ module Jekyll
     #
     # Returns the unescaped path.
     def self.unescape_path(path)
-      URI.unescape(path.encode("utf-8"))
+      Addressable::URI.unencode(path.encode("utf-8"))
     end
   end
 end
