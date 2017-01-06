@@ -14,6 +14,7 @@
   * Update documentation on updating FontAwesome Iconset (#5655)
   * Improve quickstart docs (#5689)
   * Add Jekyll-Post to list of plugins (#5705)
+  * Add jekyll-numbered-headings (#5688)
 
 ### Minor Enhancements
 
