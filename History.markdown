@@ -50,6 +50,7 @@
   * Fix a couple of typos in the docs (#5658)
   * Update windows.md (#5683)
   * Improve permalinks docs (#5693)
+  * Document --unpublished build option (#5720)
 
 ## 3.3.1 / 2016-11-14
 
