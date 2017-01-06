@@ -11,24 +11,44 @@
   * Use only the used Font Awesome icons. (#5530)
   * Switch to `https` when possible. (#5611)
   * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
+  * Update documentation on updating FontAwesome Iconset (#5655)
+  * Improve quickstart docs (#5689)
+  * Add Jekyll-Post to list of plugins (#5705)
 
 ### Minor Enhancements
 
   * Add connector param to array_to_sentence_string filter (#5597)
+  * Adds group_by_exp filter (#5513)
+  * Use the current year for the LICENSE of theme (#5712)
+  * Update License (#5713)
 
 ### Bug Fixes
 
   * Escaped regular expressions when using post_url. (#5605)
   * fix date parsing in file names to be stricter (#5609)
+  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
+  * Use each instead of map to actually return nothing (#5668)
 
 ### Development Fixes
 
   * clean unit-test names in `test/test_tags.rb` (#5608)
   * Add cucumber feature to test for bonafide theme gems (#5384)
+  * Use `assert_nil` instead of `assert_equal nil` (#5652)
+  * Rubocop -a on lib/jekyll (#5666)
+  * Bump to rake 12.0 (#5670)
+  * Rubocop Gemfile (#5671)
+  * update Classifier-Reborn to 2.1.0 (#5711)
 
 ### Documentation
 
   * Fixed typo (#5632)
+  * use backticks for Gemfile for consistency since in the next sentence … (#5641)
+  * Update Core team list in the README file (#5643)
+  * Improve Permalinks documentation. (#5653)
+  * Fix typo in Variables doc page (#5657)
+  * Fix a couple of typos in the docs (#5658)
+  * Update windows.md (#5683)
+  * Improve permalinks docs (#5693)
 
 ## 3.3.1 / 2016-11-14
 
