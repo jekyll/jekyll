@@ -40,12 +40,11 @@ class TestNewCommand < JekyllUnitTest
 
     should "display a success message" do
       Jekyll::Commands::New.process(@args)
-      output = Jekyll.logger.messages[-3]
-      output_last = Jekyll.logger.messages.last
-      success_message = "New jekyll site installed in #{@full_path.cyan}."
-      bundle_message = "Running bundle install in #{@full_path.cyan}..."
+      output = Jekyll.logger.messages
+      success_message = "New jekyll site installed in #{@full_path.cyan}. "
+      bundle_message = "Running bundle install in #{@full_path.cyan}... "
       assert_includes output, success_message
-      assert_includes output_last, bundle_message
+      assert_includes output, bundle_message
     end
 
     should "copy the static files in site template to the new directory" do
