@@ -114,7 +114,6 @@ def run_in_shell(*args)
 
   p
 end
-# rubocop:enable Metrics/AbcSize
 
 #
 
