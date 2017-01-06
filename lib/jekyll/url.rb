@@ -146,7 +146,7 @@ module Jekyll
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
       path = Addressable::URI.encode(path)
-      path.encode("utf-8")
+      path.encode("utf-8").sub("#", "%23")
     end
 
     # Unescapes a URL path segment
