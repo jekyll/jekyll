@@ -11,4 +11,4 @@ Second paragraph
 
 Third paragraph
 
-[link]: http://www.jekyllrb.com/
+[link]: https://jekyllrb.com/

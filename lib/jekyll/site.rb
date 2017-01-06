@@ -302,7 +302,7 @@ module Jekyll
         Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
                                 " in subfolders must be relative to the" \
                                 " site source directory, not the parent" \
-                                " directory. Check http://jekyllrb.com/docs/upgrading/"\
+                                " directory. Check https://jekyllrb.com/docs/upgrading/"\
                                 " for more info."
       end
     end

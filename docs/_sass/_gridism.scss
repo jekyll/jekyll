@@ -27,7 +27,7 @@
 .grid .unit:first-child { padding-left: 20px; }
 .grid .unit:last-child { padding-right: 20px; }
 
-/* Nested grids already have padding though, so let’s nuke it */
+/* Nested grids already have padding though, so let's nuke it */
 .unit .unit:first-child { padding-left: 0; }
 .unit .unit:last-child { padding-right: 0; }
 .unit .grid:first-child > .unit { padding-top: 0; }
@@ -94,7 +94,7 @@
 
 /* Responsive Stuff */
 @media screen and (max-width: 568px) {
-  /* Stack anything that isn’t full-width on smaller screens
+  /* Stack anything that isn't full-width on smaller screens
      and doesn't provide the no-stacking-on-mobiles class */
   .grid:not(.no-stacking-on-mobiles) > .unit {
     width: 100% !important;

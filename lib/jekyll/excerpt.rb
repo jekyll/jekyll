@@ -30,8 +30,7 @@ module Jekyll
       @data
     end
 
-    def trigger_hooks(*)
-    end
+    def trigger_hooks(*); end
 
     # 'Path' of the excerpt.
     #

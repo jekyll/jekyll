@@ -513,8 +513,8 @@ With these defaults, all posts would use the `my-site` layout. Any html files th
 
 ```yaml
 collections:
-  - my_collection:
-      output: true
+  my_collection:
+    output: true
 
 defaults:
   -
@@ -594,7 +594,7 @@ collections:
 # Handling Reading
 safe:         false
 include:      [".htaccess"]
-exclude:      ["node_modules", "vendor"]
+exclude:      ["node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
 keep_files:   [".git", ".svn"]
 encoding:     "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"

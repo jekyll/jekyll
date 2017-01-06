@@ -8,6 +8,8 @@ require_all "jekyll/filters"
 module Jekyll
   module Filters
     include URLFilters
+    include GroupingFilters
+
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.
@@ -175,6 +177,7 @@ module Jekyll
     # word "and" for the last one.
     #
     # array - The Array of Strings to join.
+    # connector - Word used to connect the last 2 items in the array
     #
     # Examples
     #
@@ -182,8 +185,7 @@ module Jekyll
     #   # => "apples, oranges, and grapes"
     #
     # Returns the formatted String.
-    def array_to_sentence_string(array)
-      connector = "and"
+    def array_to_sentence_string(array, connector = "and")
       case array.length
       when 0
         ""
@@ -203,29 +205,6 @@ module Jekyll
     # Returns the converted json string
     def jsonify(input)
       as_liquid(input).to_json
-    end
-
-    # Group an array of items by a property
-    #
-    # input - the inputted Enumerable
-    # property - the property
-    #
-    # Returns an array of Hashes, each looking something like this:
-    #  {"name"  => "larry"
-    #   "items" => [...] } # all the items where `property` == "larry"
-    def group_by(input, property)
-      if groupable?(input)
-        input.group_by { |item| item_property(item, property).to_s }
-          .each_with_object([]) do |item, array|
-            array << {
-              "name"  => item.first,
-              "items" => item.last,
-              "size"  => item.last.size
-            }
-          end
-      else
-        input
-      end
     end
 
     # Filter an array of objects
@@ -382,11 +361,6 @@ module Jekyll
     end
 
     private
-    def groupable?(element)
-      element.respond_to?(:group_by)
-    end
-
-    private
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
         item.to_liquid[property.to_s]
@@ -436,6 +410,7 @@ module Jekyll
 
       condition
     end
+
   end
 end
 

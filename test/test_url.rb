@@ -54,17 +54,7 @@ class TestURL < JekyllUnitTest
     end
 
     should "handle UrlDrop as a placeholder in addition to a hash" do
-      site = fixture_site({
-        "collections" => {
-          "methods" => {
-            "output" => true
-          }
-        }
-      })
-      site.read
-      matching_doc = site.collections["methods"].docs.find do |doc|
-        doc.relative_path == "_methods/escape-+ #%20[].md"
-      end
+      _, matching_doc = fixture_document("_methods/escape-+ #%20[].md")
       assert_equal "/methods/escape-+-20/escape-20.html", URL.new(
         :template     => "/methods/:title/:name:output_ext",
         :placeholders => matching_doc.url_placeholders
@@ -78,6 +68,24 @@ class TestURL < JekyllUnitTest
       )
       assert_raises Jekyll::Errors::InvalidURLError do
         url.to_s
+      end
+    end
+
+    should "check for key without trailing underscore" do
+      _, matching_doc = fixture_document("_methods/configuration.md")
+      assert_equal "/methods/configuration-configuration_methods_configuration", URL.new(
+        :template     => "/methods/:name-:slug_:collection_:title",
+        :placeholders => matching_doc.url_placeholders
+      ).to_s
+    end
+
+    should "raise custom error when URL placeholder doesn't have key" do
+      _, matching_doc = fixture_document("_methods/escape-+ #%20[].md")
+      assert_raises NoMethodError do
+        URL.new(
+          :template     => "/methods/:headline",
+          :placeholders => matching_doc.url_placeholders
+        ).to_s
       end
     end
   end

@@ -84,14 +84,36 @@ module Jekyll
       end
     end
 
+    # We include underscores in keys to allow for 'i_month' and so forth.
+    # This poses a problem for keys which are followed by an underscore
+    # but the underscore is not part of the key, e.g. '/:month_:day'.
+    # That should be :month and :day, but our key extraction regexp isn't
+    # smart enough to know that so we have to make it an explicit
+    # possibility.
+    def possible_keys(key)
+      if key.end_with?("_")
+        [key, key.chomp("_")]
+      else
+        [key]
+      end
+    end
+
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
-        replacement = @placeholders.public_send(match.sub(":".freeze, "".freeze))
-        if replacement.nil?
-          "".freeze
-        else
-          self.class.escape_path(replacement)
+        pool = possible_keys(match.sub(":".freeze, "".freeze))
+
+        winner = pool.find { |key| @placeholders.key?(key) }
+        if winner.nil?
+          raise NoMethodError,
+            "The URL template doesn't have #{pool.join(" or ")} keys. "\
+              "Check your permalink template!"
         end
+
+        value = @placeholders[winner]
+        value = "" if value.nil?
+        replacement = self.class.escape_path(value)
+
+        match.sub(":#{winner}", replacement)
       end.gsub(%r!//!, "/".freeze)
     end
 

@@ -14,14 +14,20 @@ class TestSite < JekyllUnitTest
 
     should "have an array for plugins if passed as a string" do
       site = Site.new(site_configuration({ "plugins_dir" => "/tmp/plugins" }))
-      assert_equal ["/tmp/plugins"], site.plugins
+      array = Utils::Platforms.windows? ? ["C:/tmp/plugins"] : ["/tmp/plugins"]
+      assert_equal array, site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
       site = Site.new(site_configuration({
         "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
       }))
-      assert_equal ["/tmp/plugins", "/tmp/otherplugins"], site.plugins
+      array = if Utils::Platforms.windows?
+                ["C:/tmp/plugins", "C:/tmp/otherplugins"]
+              else
+                ["/tmp/plugins", "/tmp/otherplugins"]
+              end
+      assert_equal array, site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
@@ -175,7 +181,8 @@ class TestSite < JekyllUnitTest
         method.call(*args, &block).reverse
       end
       @site.process
-      # files in symlinked directories may appear twice
+      # exclude files in symlinked directories here and insert them in the
+      # following step when not on Windows.
       sorted_pages = %w(
         %#\ +.md
         .htaccess
@@ -194,12 +201,14 @@ class TestSite < JekyllUnitTest
         index.html
         info.md
         main.scss
-        main.scss
         properties.html
         sitemap.xml
         static_files.html
-        symlinked-file
       )
+      unless Utils::Platforms.really_windows?
+        # files in symlinked directories may appear twice
+        sorted_pages.push("main.scss", "symlinked-file").sort!
+      end
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
@@ -268,19 +277,19 @@ class TestSite < JekyllUnitTest
         @site.process
         # generate some orphaned files:
         # single file
-        File.open(dest_dir("obsolete.html"), "w")
+        FileUtils.touch(dest_dir("obsolete.html"))
         # single file in sub directory
         FileUtils.mkdir(dest_dir("qux"))
-        File.open(dest_dir("qux/obsolete.html"), "w")
+        FileUtils.touch(dest_dir("qux/obsolete.html"))
         # empty directory
         FileUtils.mkdir(dest_dir("quux"))
         FileUtils.mkdir(dest_dir(".git"))
         FileUtils.mkdir(dest_dir(".svn"))
         FileUtils.mkdir(dest_dir(".hg"))
         # single file in repository
-        File.open(dest_dir(".git/HEAD"), "w")
-        File.open(dest_dir(".svn/HEAD"), "w")
-        File.open(dest_dir(".hg/HEAD"), "w")
+        FileUtils.touch(dest_dir(".git/HEAD"))
+        FileUtils.touch(dest_dir(".svn/HEAD"))
+        FileUtils.touch(dest_dir(".hg/HEAD"))
       end
 
       teardown do

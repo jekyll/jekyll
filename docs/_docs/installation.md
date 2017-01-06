@@ -34,7 +34,7 @@ earlier, for CoffeeScript support).
 ## Install with RubyGems
 
 The best way to install Jekyll is via
-[RubyGems](http://rubygems.org/pages/download). At the terminal prompt,
+[RubyGems](https://rubygems.org/pages/download). At the terminal prompt,
 simply run the following command to install Jekyll:
 
 ```sh

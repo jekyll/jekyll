@@ -71,7 +71,7 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_dirs(_base, dir, dot_dirs)
-      dot_dirs.map do |file|
+      dot_dirs.each do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
         unless @site.dest.sub(%r!/$!, "") == dir_path

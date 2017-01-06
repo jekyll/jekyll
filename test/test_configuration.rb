@@ -52,6 +52,14 @@ class TestConfiguration < JekyllUnitTest
     should "exclude node_modules" do
       assert_includes Configuration.from({})["exclude"], "node_modules"
     end
+
+    should "exclude ruby vendor directories" do
+      exclude = Configuration.from({})["exclude"]
+      assert_includes exclude, "vendor/bundle/"
+      assert_includes exclude, "vendor/cache/"
+      assert_includes exclude, "vendor/gems/"
+      assert_includes exclude, "vendor/ruby/"
+    end
   end
 
   context "#add_default_collections" do

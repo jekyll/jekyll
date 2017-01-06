@@ -143,6 +143,11 @@ class TestFilters < JekyllUnitTest
       )
     end
 
+    should "convert array to sentence string with different connector" do
+      assert_equal "1 or 2", @filter.array_to_sentence_string([1, 2], "or")
+      assert_equal "1, 2, 3, or 4", @filter.array_to_sentence_string([1, 2, 3, 4], "or")
+    end
+
     context "normalize_whitespace filter" do
       should "replace newlines with a space" do
         assert_equal "a b", @filter.normalize_whitespace("a\nb")
@@ -593,7 +598,9 @@ class TestFilters < JekyllUnitTest
               g["items"].is_a?(Array),
               "The list of grouped items for 'default' is not an Array."
             )
-            assert_equal 5, g["items"].size
+            # adjust array.size to ignore symlinked page in Windows
+            qty = Utils::Platforms.really_windows? ? 4 : 5
+            assert_equal qty, g["items"].size
           when "nil"
             assert(
               g["items"].is_a?(Array),
@@ -605,7 +612,9 @@ class TestFilters < JekyllUnitTest
               g["items"].is_a?(Array),
               "The list of grouped items for '' is not an Array."
             )
-            assert_equal 15, g["items"].size
+            # adjust array.size to ignore symlinked page in Windows
+            qty = Utils::Platforms.really_windows? ? 14 : 15
+            assert_equal qty, g["items"].size
           end
         end
       end
@@ -762,6 +771,91 @@ class TestFilters < JekyllUnitTest
       should "always return an array if the object responds to `select`" do
         results = @filter.where_exp(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
+      end
+    end
+
+    context "group_by_exp filter" do
+      should "successfully group array of Jekyll::Page's" do
+        @filter.site.process
+        groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout | upcase")
+        groups.each do |g|
+          assert(
+            ["DEFAULT", "NIL", ""].include?(g["name"]),
+            "#{g["name"]} isn't a valid grouping."
+          )
+          case g["name"]
+          when "DEFAULT"
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for 'default' is not an Array."
+            )
+            # adjust array.size to ignore symlinked page in Windows
+            qty = Utils::Platforms.really_windows? ? 4 : 5
+            assert_equal qty, g["items"].size
+          when "nil"
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for 'nil' is not an Array."
+            )
+            assert_equal 2, g["items"].size
+          when ""
+            assert(
+              g["items"].is_a?(Array),
+              "The list of grouped items for '' is not an Array."
+            )
+            # adjust array.size to ignore symlinked page in Windows
+            qty = Utils::Platforms.really_windows? ? 14 : 15
+            assert_equal qty, g["items"].size
+          end
+        end
+      end
+
+      should "include the size of each grouping" do
+        groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout")
+        groups.each do |g|
+          assert_equal(
+            g["items"].size,
+            g["size"],
+            "The size property for '#{g["name"]}' doesn't match the size of the Array."
+          )
+        end
+      end
+
+      should "allow more complex filters" do
+        items = [
+          { "version"=>"1.0", "result"=>"slow" },
+          { "version"=>"1.1.5", "result"=>"medium" },
+          { "version"=>"2.7.3", "result"=>"fast" }
+        ]
+
+        result = @filter.group_by_exp(items, "item", "item.version | split: '.' | first")
+        assert_equal 2, result.size
+      end
+
+      should "be equivalent of group_by" do
+        actual = @filter.group_by_exp(@filter.site.pages, "page", "page.layout")
+        expected = @filter.group_by(@filter.site.pages, "layout")
+
+        assert_equal expected, actual
+      end
+
+      should "return any input that is not an array" do
+        assert_equal "some string", @filter.group_by_exp("some string", "la", "le")
+      end
+
+      should "group by full element (as opposed to a field of the element)" do
+        items = %w(a b c d)
+
+        result = @filter.group_by_exp(items, "item", "item")
+        assert_equal 4, result.length
+        assert_equal ["a"], result.first["items"]
+      end
+
+      should "accept hashes" do
+        hash = { 1 => "a", 2 => "b", 3 => "c", 4 => "d" }
+
+        result = @filter.group_by_exp(hash, "item", "item")
+        assert_equal 4, result.length
       end
     end
 

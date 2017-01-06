@@ -125,6 +125,7 @@ file name:
 Pages and posts can also access a specific data item. The example below shows how to access a specific item:
 
 `_data/people.yml`:
+
 ```yaml
 dave:
     name: David Smith
@@ -142,7 +143,7 @@ author: dave
 
 {% assign author = site.data.people[page.author] %}
 <a rel="author"
-  href="{{ author.twitter }}"
+  href="https://twitter.com/{{ author.twitter }}"
   title="{{ author.name }}">
     {{ author.name }}
 </a>
