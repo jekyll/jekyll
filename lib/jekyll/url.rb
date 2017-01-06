@@ -1,5 +1,4 @@
 require "addressable/uri"
-require "uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
@@ -146,7 +145,8 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      URI.escape(path, %r{[^a-zA-Z\d\-._~!$&'()*+,;=:@\/]}).encode("utf-8")
+      path = Addressable::URI.encode(path)
+      path.encode("utf-8")
     end
 
     # Unescapes a URL path segment
