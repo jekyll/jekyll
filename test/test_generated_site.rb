@@ -63,14 +63,16 @@ OUTPUT
 
     context "handling detached front matter files" do
       should "read pages with detached YAML front matter" do
-        abs_path = File.expand_path("detached_front_matter/detached_front_matter.html", @site.source)
+        path = "detached_front_matter/detached_front_matter.html"
+        abs_path = File.expand_path(path, @site.source)
         assert_equal true, Utils.has_yaml_header?(abs_path)
       end
 
       should "not include detached YAML front matter files" do
         @site.each_site_file do |item|
           if item.respond_to?(:path)
-            assert !Utils.detached_front_matter?(item.path), "#{item.path} should be filtered out"
+            assert !Utils.detached_front_matter?(item.path),
+                   "#{item.path} should be filtered out"
           end
         end
       end

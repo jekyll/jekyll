@@ -74,20 +74,21 @@ class TestConvertible < JekyllUnitTest
       #   yaml data from detached_front_matter2.md.fm.yml will be merged with
       #   inline yaml front matter from detached_front_matter2.md
       expected = {
-          "test1" => {
-              "a" => {
-                  "aa" => "inline_overriden_a_aa",
-                  "xx" => "inline_added_a_xx"
-              },
-              "b" => {
-                  "bb" => "detached_b_bb"
-              },
-              "c" => {
-                  "cc" => "inline_added_c_cc"
-              }
+        "test1" => {
+          "a" => {
+            "aa" => "inline_overriden_a_aa",
+            "xx" => "inline_added_a_xx"
           },
-          "test2" => "detached",
-          "test3" => "inline"}
+          "b" => {
+            "bb" => "detached_b_bb"
+          },
+          "c" => {
+            "cc" => "inline_added_c_cc"
+          }
+        },
+        "test2" => "detached",
+        "test3" => "inline"
+      }
       ret = @convertible.read_yaml(@base, "detached_front_matter2.md")
       assert_equal(expected, ret)
     end
