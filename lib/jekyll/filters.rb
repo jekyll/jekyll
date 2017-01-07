@@ -1,4 +1,4 @@
-require "uri"
+require "addressable/uri"
 require "json"
 require "date"
 require "liquid"
@@ -152,7 +152,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def uri_escape(input)
-      URI.escape(input)
+      Addressable::URI.encode(input)
     end
 
     # Replace any whitespace in the input string with a single space
