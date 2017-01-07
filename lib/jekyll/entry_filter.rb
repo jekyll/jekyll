@@ -30,7 +30,7 @@ module Jekyll
     def filter(entries)
       entries.reject do |e|
         unless included?(e)
-          special?(e) || backup?(e) || excluded?(e) || symlink?(e)
+          special?(e) || backup?(e) || excluded?(e) || symlink?(e) || detached_front_matter?(e)
         end
       end
     end
@@ -57,6 +57,10 @@ module Jekyll
           )
         end
       end
+    end
+
+    def detached_front_matter?(entry)
+      Utils.detached_front_matter?(entry)
     end
 
     # --

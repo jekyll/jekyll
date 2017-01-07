@@ -1,0 +1,6 @@
+test1:
+  a:
+    aa: detached_a_aa
+  b:
+    bb: detached_b_bb
+test2: detached

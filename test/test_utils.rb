@@ -378,6 +378,35 @@ class TestUtils < JekyllUnitTest
       assert_equal "-----B", File.open(file, "rb") { |f| f.read(6) }
       refute Utils.has_yaml_header?(file)
     end
+    should "accept files with detached .yaml front matter" do
+      file = source_dir("_posts", "2008-10-18-detached-front-matter-1.markdown")
+      assert File.exist?(file+".fm.yaml")
+      assert "---\n" != File.open(file, "rb") { |f| f.read(4) }
+      assert Utils.has_yaml_header?(file)
+    end
+    should "accept files with detached .yml front matter" do
+      file = source_dir("_posts", "2008-10-18-detached-front-matter-2.markdown")
+      assert File.exist?(file+".fm.yml")
+      assert "---\n" != File.open(file, "rb") { |f| f.read(4) }
+      assert Utils.has_yaml_header?(file)
+    end
+  end
+
+  context "The \`Utils.detached_front_matter?\` method" do
+    should "recognize .fm.yml files as detached front matter" do
+      assert Utils.detached_front_matter?("some/path/content_file.ext.fm.yml")
+    end
+    should "recognize .fm.yaml files as detached front matter" do
+      assert Utils.detached_front_matter?("some/path/content_file.ext.fm.yaml")
+    end
+    should "not recognize .yaml files as detached front matter" do
+      assert !Utils.detached_front_matter?("some/path/content_file.ext.yaml")
+      assert !Utils.detached_front_matter?("some/path/file.yaml")
+    end
+    should "not recognize .yml files as detached front matter" do
+      assert !Utils.detached_front_matter?("some/path/content_file.ext.yml")
+      assert !Utils.detached_front_matter?("some/path/file.yml")
+    end
   end
 
   context "The \`Utils.merged_file_read_opts\` method" do

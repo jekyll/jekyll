@@ -63,5 +63,50 @@ class TestConvertible < JekyllUnitTest
       end
       refute_match(%r!Invalid permalink!, out)
     end
+
+    should "parse detached front matter correctly" do
+      ret = @convertible.read_yaml(@base, "detached_front_matter1.md")
+      assert_equal({ "test" => "I was defined in detached yaml file" }, ret)
+    end
+
+    should "merge detached front matter with inline front matter" do
+      # here we want to test proper merging of detached and inline front matters
+      #   yaml data from detached_front_matter2.md.fm.yml will be merged with
+      #   inline yaml front matter from detached_front_matter2.md
+      expected = {
+          "test1" => {
+              "a" => {
+                  "aa" => "inline_overriden_a_aa",
+                  "xx" => "inline_added_a_xx"
+              },
+              "b" => {
+                  "bb" => "detached_b_bb"
+              },
+              "c" => {
+                  "cc" => "inline_added_c_cc"
+              }
+          },
+          "test2" => "detached",
+          "test3" => "inline"}
+      ret = @convertible.read_yaml(@base, "detached_front_matter2.md")
+      assert_equal(expected, ret)
+    end
+
+    should "not parse if there is syntax error in detached front matter" do
+      name = "detached_front_matter3_broken.md"
+      out = capture_stderr do
+        ret = @convertible.read_yaml(@base, name)
+        assert_equal({}, ret)
+      end
+      assert_match(%r!YAML Exception|syntax error|Error reading file!, out)
+      assert_match(%r!#{File.join(@base, name+".fm.yaml")}!, out)
+    end
+
+    should "not allow ruby objects in detached front matter" do
+      out = capture_stderr do
+        @convertible.read_yaml(@base, "detached_front_matter4_exploit.md")
+      end
+      refute_match(%r!undefined class\/module DoesNotExist!, out)
+    end
   end
 end
