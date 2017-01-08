@@ -54,6 +54,7 @@
   * Improve permalinks docs (#5693)
   * Document --unpublished build option (#5720)
   * Improve pages docs (#5692)
+  * Added new includes.md topic to docs (#5696)
 
 ## 3.3.1 / 2016-11-14
 
