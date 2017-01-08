@@ -539,13 +539,13 @@ You can also use the `link` tag to create a link in Markdown as follows:
 {% endraw %}
 ```
 
-(Including `{% raw %}{{site.baseurl}}{% endraw %}` is optional &mdash; it depends on whether you want to preface the page URL with the `baseurl` value.)
+(Including `{% raw %}{{ site.baseurl }}{% endraw %}` is optional &mdash; it depends on whether you want to preface the page URL with the `baseurl` value.)
 
 The path to the post, page, or collection is defined as the path relative to the root directory (where your config file is) to the file, not the path from your existing page to the other page.
 
 For example, suppose you're creating a link `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
 
-If you're unsure of the path, add `{% raw %}{{page.path}}{% endraw %}` to the page and it will display the path.
+If you're unsure of the path, add `{% raw %}{{ page.path }}{% endraw %}` to the page and it will display the path.
 
 One major benefit of using the `link` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
 
