@@ -28,16 +28,28 @@ module Jekyll
       !(data.key?("published") && data["published"] == false)
     end
 
+    def validate_data!(data, filename)
+      unless data.is_a?(Hash)
+        raise Errors::InvalidYAMLFrontMatterError,
+              "Invalid YAML front matter in #{filename}, expected a hash, "\
+              "instead got '#{data.inspect}'"
+      end
+    end
+
     def read_detached_front_matter(path)
       detached_path = Utils.detect_detached_front_matter(path)
       if detached_path
         data = SafeYAML.load_file(detached_path)
-        validate_data!(data, path)
+        data = {} if data.nil? # empty front matter is fine
+        data = {} if data == false # https://github.com/ruby/psych/issues/149
+        validate_data!(data, detached_path)
         return data
       end
     rescue SyntaxError => e
       Jekyll.logger.warn "YAML Exception reading #{detached_path}: #{e.message}"
       nil
+    rescue Errors::InvalidYAMLFrontMatterError => e
+      raise e
     rescue => e
       Jekyll.logger.warn "Error reading file #{detached_path}: #{e.message}"
       nil
@@ -47,12 +59,18 @@ module Jekyll
       if self.content =~ Document::YAML_FRONT_MATTER_REGEXP
         self.content = $POSTMATCH
         data = SafeYAML.load(Regexp.last_match(1), path)
+        data = {} if data.nil? # empty front matter is fine
+        data = {} if data == false # https://github.com/ruby/psych/issues/149
         validate_data!(data, path)
         return data
       end
+    rescue Errors::InvalidYAMLFrontMatterError => e
+      raise e
     rescue SyntaxError => e
       Jekyll.logger.warn "YAML Exception reading #{path}: #{e.message}"
       nil
+    rescue Errors::InvalidYAMLFrontMatterError => e
+      raise e
     rescue => e
       Jekyll.logger.warn "Error reading file #{path}: #{e.message}"
       nil
@@ -85,13 +103,6 @@ module Jekyll
       validate_permalink! filename
 
       self.data
-    end
-
-    def validate_data!(data, filename)
-      unless data.is_a?(Hash)
-        raise Errors::InvalidYAMLFrontMatterError,
-          "Invalid YAML front matter in #{filename}"
-      end
     end
 
     def validate_permalink!(filename)

@@ -109,5 +109,25 @@ class TestConvertible < JekyllUnitTest
       end
       refute_match(%r!undefined class\/module DoesNotExist!, out)
     end
+
+    should "allow nil detached front matter" do
+      ret = @convertible.read_yaml(@base, "detached_front_matter5_nil.md")
+      assert_equal({}, ret)
+    end
+
+    should "allow empty detached front matter" do
+      ret = @convertible.read_yaml(@base, "detached_front_matter6_false.md")
+      assert_equal({}, ret)
+    end
+
+    should "not parse if there is non-hash detached front matter" do
+      name = "detached_front_matter7_nonhash.md"
+      exception = assert_raises Errors::InvalidYAMLFrontMatterError do
+        @convertible.read_yaml(@base, name)
+      end
+      assert_match(%r!Invalid YAML front matter.*expected a hash.*instead got 'true'!,
+        exception.message)
+      assert_match(%r!#{File.join(@base, name+".fm.yaml")}!, exception.message)
+    end
   end
 end
