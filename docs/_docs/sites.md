@@ -10,9 +10,9 @@ learning purposes.
 
 - [Tom Preston-Werner](http://tom.preston-werner.com/)
     ([source](https://github.com/mojombo/mojombo.github.io))
-- [GitHub Official Teaching Materials](http://training.github.com)
+- [GitHub Official Teaching Materials](https://services.github.com/training/)
     ([source](https://github.com/github/training-kit))
-- [Rasmus Andersson](http://rsms.me/)
+- [Rasmus Andersson](https://rsms.me/)
     ([source](https://github.com/rsms/rsms.github.com))
 
 If you would like to explore more examples, you can find a list of sites

@@ -149,6 +149,22 @@ common tasks easier.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Group By Expression</strong></p>
+        <p>Group an array's items using a Liquid expression.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.members | group_by_exp:"item",
+"item.graduation_year | truncate: 3, \"\"" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">[{"name"=>"201...", "items"=>[...]},
+{"name"=>"200...", "items"=>[...]}]</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>XML Escape</strong></p>
         <p>Escape some text for use in XML.</p>
       </td>
@@ -208,7 +224,7 @@ common tasks easier.
     <tr>
       <td>
         <p class="name"><strong>Array to Sentence</strong></p>
-        <p>Convert an array into a sentence. Useful for listing tags.</p>
+        <p>Convert an array into a sentence. Useful for listing tags. Optional argument for connector.</p>
       </td>
       <td class="align-center">
         <p>
@@ -216,6 +232,12 @@ common tasks easier.
         </p>
         <p>
           <code class="output">foo, bar, and baz</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ page.tags | array_to_sentence_string: 'or' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">foo, bar, or baz</code>
         </p>
       </td>
     </tr>
@@ -518,10 +540,10 @@ You must include the file extension when using the `link` tag.
 
 ```liquid
 {% raw %}
-{% link _collection/name-of-document.md %}
-{% link _posts/2016-07-26-name-of-post.md %}
-{% link news/index.html %}
-{% link /assets/files/doc.pdf %}
+{{ site.baseurl }}{% link _collection/name-of-document.md %}
+{{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %}
+{{ site.baseurl }}{% link news/index.html %}
+{{ site.baseurl }}{% link /assets/files/doc.pdf %}
 {% endraw %}
 ```
 
@@ -529,10 +551,10 @@ You can also use this tag to create a link in Markdown as follows:
 
 ```liquid
 {% raw %}
-[Link to a document]({% link _collection/name-of-document.md %})
-[Link to a post]({% link _posts/2016-07-26-name-of-post.md %})
-[Link to a page]({% link news/index.html %})
-[Link to a file]({% link /assets/files/doc.pdf %})
+[Link to a document]({{ site.baseurl }}{% link _collection/name-of-document.md %})
+[Link to a post]({{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %})
+[Link to a page]({{ site.baseurl }}{% link news/index.html %})
+[Link to a file]({{ site.baseurl }}{% link /assets/files/doc.pdf %})
 {% endraw %}
 ```
 
@@ -543,7 +565,7 @@ will generate the correct permalink URL for the post you specify.
 
 ```liquid
 {% raw %}
-{% post_url 2010-07-21-name-of-post %}
+{{ site.baseurl }}{% post_url 2010-07-21-name-of-post %}
 {% endraw %}
 ```
 
@@ -552,7 +574,7 @@ path to the post:
 
 ```liquid
 {% raw %}
-{% post_url /subdir/2010-07-21-name-of-post %}
+{{ site.baseurl }}{% post_url /subdir/2010-07-21-name-of-post %}
 {% endraw %}
 ```
 
@@ -562,7 +584,7 @@ You can also use this tag to create a link to a post in Markdown as follows:
 
 ```liquid
 {% raw %}
-[Name of Link]({% post_url 2010-07-21-name-of-post %})
+[Name of Link]({{ site.baseurl }}{% post_url 2010-07-21-name-of-post %})
 {% endraw %}
 ```
 

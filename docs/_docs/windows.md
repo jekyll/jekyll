@@ -16,10 +16,12 @@ A quick way to install Jekyll is to follow the [installation instructions by Dav
  2. Install Ruby via Chocolatey: `choco install ruby -y`
  3. Reopen a command prompt and install Jekyll: `gem install jekyll`
 
-For a more conventional way of installing Jekyll you can follow the [installation instructions by Sverrir Sigmundarson][windows-installjekyll3]. These instructions are for newer versions of Ruby 2.2.5 and Jekyll 3.
+Updates in the infrastructure of Ruby may cause SSL errors when attempting to use `gem install` with versions of the RubyGems package older than 2.6. (The RubyGems package installed via the Chocolatey tool is version 2.3) If you have installed an older version, you can update the RubyGems package using the directions [here.][ssl-certificate-update]
+[ssl-certificate-update]: http://guides.rubygems.org/ssl-certificate-update/#installing-using-update-packages
 
-For instructions for older versions of Ruby 2.0.0 ([prior to 2.2][hitimes-issue]) and Jekyll 2 and older you should follow the [installation instruction by Julian Thilo][windows-installation].
+For a more conventional way of installing Jekyll you can follow this [complete guide to install Jekyll 3 on Windows by Sverrir Sigmundarson][windows-installjekyll3].
 
+[windows-installjekyll3]: https://labs.sverrirs.com/jekyll/
 
 ## Encoding
 
@@ -35,9 +37,18 @@ the site generation process. It can be done with the following command:
 $ chcp 65001
 ```
 
-[windows-installation]: http://jekyll-windows.juthilo.com/
-[windows-installjekyll3]: https://labs.sverrirs.com/jekyll/
-[hitimes-issue]: https://github.com/copiousfreetime/hitimes/issues/40
+## Timezone Management
+
+Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.  
+Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
+
+Jekyll now uses a rubygem to internally configure Timezone based on established [IANA Timezone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).  
+While 'new' blogs created with Jekyll v3.4 and greater, will have the following added to their 'Gemfile' by default, existing sites *will* have to update their 'Gemfile' (and installed) to enable development on Windows:
+
+```ruby
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+```
 
 ## Auto-regeneration
 
@@ -102,8 +113,8 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 
 
 ```ruby
-source 'http://rubygems.org'
-gem 'github-pages'
+source 'https://rubygems.org'
+gem 'github-pages', group: :jekyll_plugins
 ```
 
  * **Note:** We use an unsecure connection because SSL throws exceptions in the version of Ruby
@@ -115,7 +126,7 @@ There will be a warning on startup that you should include `gem 'wdm', '>= 0.1.0
 
 In the future the installation process of the github-pages should be as simple as the setup of the blog. But as long as the new version of the Nokogiri ([v1.6.8][nokogiriReleases]) is not stable and referenced, it is work to get it up and running on Windows.
 
-[jwillmerPost]: http://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46 "Installation instructions by Jens Willmer"
+[jwillmerPost]: https://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46 "Installation instructions by Jens Willmer"
 [Chocolatey]: https://chocolatey.org/install "Package manager for Windows"
 [Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
 [nokogiriReleases]: https://github.com/sparklemotion/nokogiri/releases "Nokogiri Releases"

@@ -103,6 +103,21 @@ class JekyllUnitTest < Minitest::Test
     RSpec::Mocks.teardown
   end
 
+  def fixture_document(relative_path)
+    site = fixture_site({
+      "collections" => {
+        "methods" => {
+          "output" => true
+        }
+      }
+    })
+    site.read
+    matching_doc = site.collections["methods"].docs.find do |doc|
+      doc.relative_path == relative_path
+    end
+    [site, matching_doc]
+  end
+
   def fixture_site(overrides = {})
     Jekyll::Site.new(site_configuration(overrides))
   end
@@ -157,5 +172,12 @@ class JekyllUnitTest < Minitest::Test
     Nokogiri::HTML.fragment(
       str
     )
+  end
+
+  def skip_if_windows(msg = nil)
+    if Utils::Platforms.really_windows?
+      msg ||= "Jekyll does not currently support this feature on Windows."
+      skip msg.to_s.magenta
+    end
   end
 end

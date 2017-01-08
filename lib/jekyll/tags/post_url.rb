@@ -14,8 +14,9 @@ module Jekyll
             "'#{name}' does not contain valid date and/or title."
         end
 
-        @name_regex = %r!^_posts/#{path}#{date}-#{slug}\.[^.]+|
-          ^#{path}_posts/?#{date}-#{slug}\.[^.]+!x
+        escaped_slug = Regexp.escape(slug)
+        @name_regex = %r!^_posts/#{path}#{date}-#{escaped_slug}\.[^.]+|
+          ^#{path}_posts/?#{date}-#{escaped_slug}\.[^.]+!x
       end
 
       def post_date
