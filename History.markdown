@@ -15,6 +15,7 @@
   * Improve quickstart docs (#5689)
   * Add Jekyll-Post to list of plugins (#5705)
   * Add jekyll-numbered-headings (#5688)
+  * Docs: move permalinks from documents into config (#5544)
 
 ### Minor Enhancements
 
