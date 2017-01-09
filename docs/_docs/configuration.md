@@ -492,7 +492,7 @@ defaults:
   -
     scope:
       path: "" # an empty string here means all files in the project
-      type: "posts" # previously `post` in Jekyll 2.2.
+      type: "posts"
     values:
       layout: "default"
 ```
@@ -513,7 +513,7 @@ defaults:
   -
     scope:
       path: "projects"
-      type: "pages" # previously `page` in Jekyll 2.2.
+      type: "pages"
     values:
       layout: "project" # overrides previous default layout
       author: "Mr. Hyde"

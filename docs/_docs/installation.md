@@ -15,12 +15,9 @@ Installing Jekyll is easy and straight-forward, but there are a few
 requirements you’ll need to make sure your system has before you start.
 
 - [Ruby](https://www.ruby-lang.org/en/downloads/) (including development
-  headers, v1.9.3 or above for Jekyll 2 and v2 or above for Jekyll 3)
+  headers, v2 or above for Jekyll 3)
 - [RubyGems](https://rubygems.org/pages/download)
 - Linux, Unix, or macOS
-- [NodeJS](https://nodejs.org/), or another JavaScript runtime (Jekyll 2 and
-earlier, for CoffeeScript support).
-- [Python 2.7](https://www.python.org/downloads/) (for Jekyll 2 and earlier)
 
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>
@@ -70,7 +67,7 @@ This will install the latest pre-release. If you want a particular pre-release,
 use the `-v` switch to indicate the version you'd like to install:
 
 ```sh
-gem install jekyll -v '2.0.0.alpha.1'
+gem install jekyll -v '3.0.0.alpha.1'
 ```
 
 If you'd like to install a development version of Jekyll, the process is a bit

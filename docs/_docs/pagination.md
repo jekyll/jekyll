@@ -10,7 +10,7 @@ multiple pages. Jekyll offers a pagination plugin, so you can automatically
 generate the appropriate files and folders you need for paginated listings.
 
 For Jekyll 3, include the `jekyll-paginate` plugin in your Gemfile and in
-your `_config.yml` under `gems`. For Jekyll 2, this is standard.
+your `_config.yml` under `gems`.
 
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
