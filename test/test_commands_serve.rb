@@ -89,7 +89,6 @@ class TestCommandsServe < JekyllUnitTest
           "url"     => "http://localhost:4000",
         }
         config = Jekyll::Configuration.from(options)
-        untouched_config = config.clone
 
         allow(Jekyll::Command).to(
           receive(:configuration_from_options).with(options).and_return(config)
