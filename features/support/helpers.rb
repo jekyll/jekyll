@@ -1,5 +1,5 @@
 require "fileutils"
-require "jekyll/utils"
+require "jekyll"
 require "open3"
 require "time"
 require "safe_yaml/load"
@@ -7,6 +7,8 @@ require "safe_yaml/load"
 class Paths
   SOURCE_DIR = Pathname.new(File.expand_path("../..", __dir__))
   def self.test_dir; source_dir.join("tmp", "jekyll"); end
+
+  def self.theme_gem_dir; source_dir.join("tmp", "jekyll", "my-cool-theme"); end
 
   def self.output_file; test_dir.join("jekyll_output.txt"); end
 
@@ -84,6 +86,12 @@ end
 
 def run_bundle(args)
   run_in_shell("bundle", *args.strip.split(" "))
+end
+
+#
+
+def run_rubygem(args)
+  run_in_shell("gem", *args.strip.split(" "))
 end
 
 #

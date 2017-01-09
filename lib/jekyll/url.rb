@@ -1,4 +1,4 @@
-require "uri"
+require "addressable/uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
@@ -84,17 +84,36 @@ module Jekyll
       end
     end
 
+    # We include underscores in keys to allow for 'i_month' and so forth.
+    # This poses a problem for keys which are followed by an underscore
+    # but the underscore is not part of the key, e.g. '/:month_:day'.
+    # That should be :month and :day, but our key extraction regexp isn't
+    # smart enough to know that so we have to make it an explicit
+    # possibility.
+    def possible_keys(key)
+      if key.end_with?("_")
+        [key, key.chomp("_")]
+      else
+        [key]
+      end
+    end
+
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
-        key = match.sub(":".freeze, "".freeze)
-        unless @placeholders.key?(key)
-          raise NoMethodError, "The URL template key #{key} doesn't exist!"
+        pool = possible_keys(match.sub(":".freeze, "".freeze))
+
+        winner = pool.find { |key| @placeholders.key?(key) }
+        if winner.nil?
+          raise NoMethodError,
+            "The URL template doesn't have #{pool.join(" or ")} keys. "\
+              "Check your permalink template!"
         end
-        if @placeholders[key].nil?
-          "".freeze
-        else
-          self.class.escape_path(@placeholders[key])
-        end
+
+        value = @placeholders[winner]
+        value = "" if value.nil?
+        replacement = self.class.escape_path(value)
+
+        match.sub(":#{winner}", replacement)
       end.gsub(%r!//!, "/".freeze)
     end
 
@@ -126,7 +145,8 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      URI.escape(path, %r{[^a-zA-Z\d\-._~!$&'()*+,;=:@\/]}).encode("utf-8")
+      path = Addressable::URI.encode(path)
+      path.encode("utf-8").sub("#", "%23")
     end
 
     # Unescapes a URL path segment
@@ -140,7 +160,7 @@ module Jekyll
     #
     # Returns the unescaped path.
     def self.unescape_path(path)
-      URI.unescape(path.encode("utf-8"))
+      Addressable::URI.unencode(path.encode("utf-8"))
     end
   end
 end

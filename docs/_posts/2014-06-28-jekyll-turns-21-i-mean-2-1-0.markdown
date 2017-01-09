@@ -7,7 +7,7 @@ version: 2.1.0
 categories: [release]
 ---
 
-Jekyll's finally [legal to drink in the States](http://en.wikipedia.org/wiki/Legal_drinking_age).
+Jekyll's finally [legal to drink in the States](https://en.wikipedia.org/wiki/Legal_drinking_age).
 And he's done a lot of learning in the process! Here are some of the new
 things to look forward to:
 

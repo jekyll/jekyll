@@ -61,7 +61,7 @@ easier to make:
 
 {% highlight liquid %}
 {% raw %}
-{{ "/docs/assets/" | absolute_url }} => http://jekyllrb.com/myproject/docs/assets
+{{ "/docs/assets/" | absolute_url }} => https://jekyllrb.com/myproject/docs/assets
 {% endraw %}
 {% endhighlight %}
 
