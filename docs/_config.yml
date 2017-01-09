@@ -28,14 +28,14 @@ twitter:
 logo: /img/logo-2x.png
 
 gems:
-  - jekyll-feed
-  - jekyll-redirect-from
-  - jemoji
-  - jekyll-sitemap
-  - jekyll-seo-tag
   - jekyll-avatar
+  - jekyll-feed
   - jekyll-mentions
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jemoji
 
 exclude:
-  - README.md
   - .gitignore
+  - README.md
