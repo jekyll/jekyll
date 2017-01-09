@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: "Jekyll Admin Initial Release"
 date: "2016-08-25 09:50:00 +0300"
 author: mertkahyaoglu

@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Includes
 permalink: /docs/includes/
 ---

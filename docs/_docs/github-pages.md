@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: GitHub Pages
 permalink: /docs/github-pages/
 ---

@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Extras
 permalink: /docs/extras/
 ---

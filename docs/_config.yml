@@ -10,6 +10,21 @@ help_url: https://github.com/jekyll/jekyll-help
 
 timezone: America/Los_Angeles
 
+defaults:
+  -
+    scope:
+      path: "_docs"
+      type: "docs"
+    values:
+      layout: "docs"
+  -
+    scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "news_item"
+
+
 collections:
   docs:
     permalink: /:collection/:path/
