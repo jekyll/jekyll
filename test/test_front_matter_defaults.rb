@@ -21,7 +21,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
     should "affect only the specified path and type" do
       assert_equal @affected.data["key"], "val"
-      assert_equal @not_affected.data["key"], nil
+      assert_nil @not_affected.data["key"]
     end
   end
 
@@ -45,7 +45,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
     should "affect only the specified path" do
       assert_equal @affected.data["key"], "val"
-      assert_equal @not_affected.data["key"], nil
+      assert_nil @not_affected.data["key"]
     end
   end
 
@@ -69,7 +69,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
     should "affect only the specified path and all types" do
       assert_equal @affected.data["key"], "val"
-      assert_equal @not_affected.data["key"], nil
+      assert_nil @not_affected.data["key"]
     end
   end
 
