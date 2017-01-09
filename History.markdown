@@ -57,6 +57,7 @@
   * Added new includes.md topic to docs (#5696)
   * Replace a dead link with a web-archived one (#5738)
   * Remove duplicate paragraph. (#5740)
+  * Addition of a sample "typical post" (#5473)
 
 ## 3.3.1 / 2016-11-14
 
