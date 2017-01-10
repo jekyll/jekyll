@@ -29,14 +29,14 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w(README.markdown LICENSE)
 
-  s.add_runtime_dependency("liquid",    "~> 3.0")
-  s.add_runtime_dependency("kramdown",  "~> 1.3")
-  s.add_runtime_dependency("mercenary", "~> 0.3.3")
-  s.add_runtime_dependency("safe_yaml", "~> 1.0")
-  s.add_runtime_dependency("colorator", "~> 1.0")
-  s.add_runtime_dependency("rouge", "~> 1.7")
+  s.add_runtime_dependency("addressable",           "~> 2.4")
+  s.add_runtime_dependency("colorator",             "~> 1.0")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 1.0")
-  s.add_runtime_dependency("jekyll-watch", "~> 1.1")
-  s.add_runtime_dependency("pathutil", "~> 0.9")
-  s.add_runtime_dependency("addressable", "~> 2.4")
+  s.add_runtime_dependency("jekyll-watch",          "~> 1.1")
+  s.add_runtime_dependency("kramdown",              "~> 1.3")
+  s.add_runtime_dependency("liquid",                "~> 3.0")
+  s.add_runtime_dependency("mercenary",             "~> 0.3.3")
+  s.add_runtime_dependency("pathutil",              "~> 0.9")
+  s.add_runtime_dependency("rouge",                 "~> 1.7")
+  s.add_runtime_dependency("safe_yaml",             "~> 1.0")
 end
