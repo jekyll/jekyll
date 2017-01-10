@@ -24,6 +24,7 @@
   * Use the current year for the LICENSE of theme (#5712)
   * Update License (#5713)
   * Use Addressable instead of URI to decode (#5726)
+  * Sort gems (#5746)
 
 ### Bug Fixes
 
