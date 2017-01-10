@@ -60,6 +60,7 @@
   * Replace a dead link with a web-archived one (#5738)
   * Remove duplicate paragraph. (#5740)
   * Addition of a sample "typical post" (#5473)
+  * Fix a minor grammatical mistake on themes' document (#5748)
 
 ## 3.3.1 / 2016-11-14
 
