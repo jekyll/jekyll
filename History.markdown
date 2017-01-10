@@ -1,5 +1,20 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Add connector param to `array_to_sentence_string` filter (#5597)
+  * Adds `group_by_exp` filter (#5513)
+  * Use the current year for the LICENSE of theme (#5712)
+  * Update License (#5713)
+  * Use Addressable instead of URI to decode (#5726)
+
+### Bug Fixes
+
+  * Escaped regular expressions when using `post_url`. (#5605)
+  * fix date parsing in file names to be stricter (#5609)
+  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
+  * Use each instead of map to actually return nothing (#5668)
+
 ### Site Enhancements
 
   * Remove instructions to install Jekyll 2 on Windows (#5582)
@@ -16,22 +31,7 @@
   * Add Jekyll-Post to list of plugins (#5705)
   * Add jekyll-numbered-headings (#5688)
   * Docs: move permalinks from documents into config (#5544)
-
-### Minor Enhancements
-
-  * Add connector param to array_to_sentence_string filter (#5597)
-  * Adds group_by_exp filter (#5513)
-  * Use the current year for the LICENSE of theme (#5712)
-  * Update License (#5713)
-  * Use Addressable instead of URI to decode (#5726)
-  * Sort gems (#5746)
-
-### Bug Fixes
-
-  * Escaped regular expressions when using post_url. (#5605)
-  * fix date parsing in file names to be stricter (#5609)
-  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
-  * Use each instead of map to actually return nothing (#5668)
+  * Sort gems in `docs/_config.yml` (#5746)
 
 ### Development Fixes
 
@@ -44,6 +44,7 @@
   * update Classifier-Reborn to 2.1.0 (#5711)
   * Rubocop: fix Rakefile and gemspec (#5745)
   * Use `assert_nil` (#5725)
+  * Sort gems in `jekyll.gemspec` (#5746)
 
 ### Documentation
 
