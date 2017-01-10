@@ -64,6 +64,10 @@
   * Addition of a sample "typical post" (#5473)
   * Fix a minor grammatical mistake on themes' document (#5748)
 
+### -dev
+
+  * Correct comments in data_reader.rb (#5621)
+
 ## 3.3.1 / 2016-11-14
 
 ### Minor Enhancements
