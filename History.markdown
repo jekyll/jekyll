@@ -1,5 +1,20 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Add connector param to `array_to_sentence_string` filter (#5597)
+  * Adds `group_by_exp` filter (#5513)
+  * Use the current year for the LICENSE of theme (#5712)
+  * Update License (#5713)
+  * Use Addressable instead of URI to decode (#5726)
+
+### Bug Fixes
+
+  * Escaped regular expressions when using `post_url`. (#5605)
+  * fix date parsing in file names to be stricter (#5609)
+  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
+  * Use each instead of map to actually return nothing (#5668)
+
 ### Site Enhancements
 
   * Remove instructions to install Jekyll 2 on Windows (#5582)
@@ -11,23 +26,25 @@
   * Use only the used Font Awesome icons. (#5530)
   * Switch to `https` when possible. (#5611)
   * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
-
-### Minor Enhancements
-
-  * Add connector param to array_to_sentence_string filter (#5597)
-  * Adds group_by_exp filter (#5513)
-
-### Bug Fixes
-
-  * Escaped regular expressions when using post_url. (#5605)
-  * fix date parsing in file names to be stricter (#5609)
-  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
+  * Update documentation on updating FontAwesome Iconset (#5655)
+  * Improve quickstart docs (#5689)
+  * Add Jekyll-Post to list of plugins (#5705)
+  * Add jekyll-numbered-headings (#5688)
+  * Docs: move permalinks from documents into config (#5544)
+  * Sort gems in `docs/_config.yml` (#5746)
 
 ### Development Fixes
 
   * clean unit-test names in `test/test_tags.rb` (#5608)
   * Add cucumber feature to test for bonafide theme gems (#5384)
   * Use `assert_nil` instead of `assert_equal nil` (#5652)
+  * Rubocop -a on lib/jekyll (#5666)
+  * Bump to rake 12.0 (#5670)
+  * Rubocop Gemfile (#5671)
+  * update Classifier-Reborn to 2.1.0 (#5711)
+  * Rubocop: fix Rakefile and gemspec (#5745)
+  * Use `assert_nil` (#5725)
+  * Sort gems in `jekyll.gemspec` (#5746)
 
 ### Documentation
 
@@ -37,6 +54,15 @@
   * Improve Permalinks documentation. (#5653)
   * Fix typo in Variables doc page (#5657)
   * Fix a couple of typos in the docs (#5658)
+  * Update windows.md (#5683)
+  * Improve permalinks docs (#5693)
+  * Document --unpublished build option (#5720)
+  * Improve pages docs (#5692)
+  * Added new includes.md topic to docs (#5696)
+  * Replace a dead link with a web-archived one (#5738)
+  * Remove duplicate paragraph. (#5740)
+  * Addition of a sample "typical post" (#5473)
+  * Fix a minor grammatical mistake on themes' document (#5748)
 
 ## 3.3.1 / 2016-11-14
 
