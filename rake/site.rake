@@ -92,7 +92,6 @@ namespace :site do
 
       File.open(filename, "wb") do |post|
         post.puts("---")
-        post.puts("layout: news_item")
         post.puts("title: 'Jekyll #{release} Released'")
         post.puts("date: #{Time.new.strftime('%Y-%m-%d %H:%M:%S %z')}")
         post.puts("author: ")

@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Themes
 permalink: /docs/themes/
 ---

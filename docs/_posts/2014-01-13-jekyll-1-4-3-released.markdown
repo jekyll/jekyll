@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll 1.4.3 Released'
 date: 2014-01-13 17:43:32 -0800
 author: benbalter

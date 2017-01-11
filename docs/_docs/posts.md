@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Writing posts
 permalink: /docs/posts/
 ---
