@@ -919,6 +919,7 @@ LESS.js files during generation.
 - [jekyll-migrate-permalink](https://github.com/mpchadwick/jekyll-migrate-permalink): Adds a `migrate-permalink` sub-command to help deal with side effects of changing your permalink.
 - [Jekyll-Post](https://github.com/robcrocombe/jekyll-post): A CLI tool to easily draft, edit, and publish Jekyll posts.
 - [jekyll-numbered-headings](https://github.com/muratayusuke/jekyll-numbered-headings): Adds ordered number to headings.
+- [jekyll-pre-commit](https://github.com/mpchadwick/jekyll-pre-commit): A framework for running checks against your posts using a git pre-commit hook before you publish them.
 
 #### Editors
 
