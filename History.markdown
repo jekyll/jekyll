@@ -32,6 +32,7 @@
   * Add jekyll-numbered-headings (#5688)
   * Docs: move permalinks from documents into config (#5544)
   * Sort gems in `docs/_config.yml` (#5746)
+  * [site] Use defaults for docs and news-items (#5744)
 
 ### Development Fixes
 
