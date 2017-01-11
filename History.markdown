@@ -62,11 +62,9 @@
   * Replace a dead link with a web-archived one (#5738)
   * Remove duplicate paragraph. (#5740)
   * Addition of a sample "typical post" (#5473)
-  * Fix a minor grammatical mistake on themes' document (#5748)
-
-### -dev
-
+  * Fix a minor grammatical mistake on themes' document ### -dev (#5748)
   * Correct comments in data_reader.rb (#5621)
+  * Add jekyll-pre-commit to plugins list (#5752)
 
 ## 3.3.1 / 2016-11-14
 
