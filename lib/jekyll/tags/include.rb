@@ -163,7 +163,7 @@ eos
       end
 
       def valid_include_file?(path, dir, safe)
-        !(outside_site_source?(path, dir, safe) || !File.file?(path))
+        !outside_site_source?(path, dir, safe) && File.file?(path)
       end
 
       def outside_site_source?(path, dir, safe)
