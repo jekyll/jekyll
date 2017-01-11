@@ -38,8 +38,9 @@ The categories match the H3's in the history/changelog file, and they are:
 1. Major Enhancements (`+major`) – major updates or breaking changes to the code which necessitate a major version bump (v3 ~> v4)
 2. Minor Enhancements (`+minor`) – minor updates (feature, enhancement) which necessitate a minor version bump (v3.1 ~> v3.2)
 3. Bug Fixes (`+bug`) – corrections to code which do not change or add functionality, which necessitate a patch version bump (v3.1.0 ~> v3.1.1)
-4. Site Enhancements (`+site`) – changes to the source of https://jekyllrb.com, found in `site/`
+4. Site Enhancements (`+site` or `+doc`) – changes to the source or the documentation found in `docs/` and published on https://jekyllrb.com, 
 5. Development Fixes (`+dev`) – changes which do not affect user-facing functionality or documentation, such as test fixes or bumping internal dependencies
+6. Forward Ports (`+port`) — forward-port changes, e.g. from v3.1.4.
 
 Once @jekyllbot has merged the pull request, you should see three things:
 
