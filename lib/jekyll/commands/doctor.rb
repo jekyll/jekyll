@@ -1,3 +1,5 @@
+require "addressable/uri"
+
 module Jekyll
   module Commands
     class Doctor < Command
@@ -36,6 +38,7 @@ module Jekyll
             !deprecated_relative_permalinks(site),
             !conflicting_urls(site),
             !urls_only_differ_by_case(site),
+            proper_site_url?(site)
           ].all?
         end
 
@@ -91,6 +94,13 @@ module Jekyll
           urls_only_differ_by_case
         end
 
+        def proper_site_url?(site)
+          url = site.config["url"]
+          url_exists?(url) &&
+            url_valid?(url) &&
+            url_absolute(url)
+        end
+
         private
         def collect_urls(urls, things, destination)
           things.each do |thing|
@@ -109,6 +119,27 @@ module Jekyll
             dest = thing.destination(destination)
             (memo[dest.downcase] ||= []) << dest
           end
+        end
+
+        def url_exists?(url)
+          return true unless url.nil? || url.empty?
+          Jekyll.logger.warn "Warning:", "Site URL does not appear to be set"
+          false
+        end
+
+        def url_valid?(url)
+          Addressable::URI.parse(url)
+          true
+        rescue
+          Jekyll.logger.warn "Warning:", "Cannot parse site URL: #{url}"
+          false
+        end
+
+        def url_absolute(url)
+          return true if Addressable::URI.parse(url).absolute?
+          Jekyll.logger.warn "Warning:", "Site URL does not appear to be" \
+            " absolute: #{url}"
+          false
         end
       end
     end
