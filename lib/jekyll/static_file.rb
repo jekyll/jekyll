@@ -101,7 +101,7 @@ module Jekyll
         "name"          => name,
         "extname"       => extname,
         "modified_time" => modified_time,
-        "path"          => File.join("", relative_path)
+        "path"          => File.join("", relative_path),
       }
     end
 
@@ -112,7 +112,7 @@ module Jekyll
           @collection.relative_directory.size..relative_path.size],
         :output_ext => "",
         :name       => "",
-        :title      => ""
+        :title      => "",
       }
     end
 
@@ -125,7 +125,7 @@ module Jekyll
                else
                  ::Jekyll::URL.new({
                    :template     => @collection.url_template,
-                   :placeholders => placeholders
+                   :placeholders => placeholders,
                  })
                end.to_s.gsub(%r!/$!, "")
     end

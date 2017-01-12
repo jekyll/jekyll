@@ -4,7 +4,7 @@ require "colorator"
 class TestConfiguration < JekyllUnitTest
   test_config = {
     "source"      => new(nil).source_dir,
-    "destination" => dest_dir
+    "destination" => dest_dir,
   }
 
   context ".from" do
@@ -34,8 +34,8 @@ class TestConfiguration < JekyllUnitTest
         {
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext"
-          }
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+          },
         }
       )
     end
@@ -85,8 +85,8 @@ class TestConfiguration < JekyllUnitTest
         {
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title/"
-          }
+            "permalink" => "/:categories/:year/:month/:day/:title/",
+          },
         }
       )
 
@@ -109,14 +109,14 @@ class TestConfiguration < JekyllUnitTest
         :permalink => "date",
         "baseurl"  => "/",
         :include   => [".htaccess"],
-        :source    => "./"
+        :source    => "./",
       }]
       @string_keys = Configuration[{
         "markdown"  => "kramdown",
         "permalink" => "date",
         "baseurl"   => "/",
         "include"   => [".htaccess"],
-        "source"    => "./"
+        "source"    => "./",
       }]
     end
     should "stringify symbol keys" do
@@ -132,7 +132,7 @@ class TestConfiguration < JekyllUnitTest
       @no_override     = {}
       @one_config_file = { "config" => "config.yml" }
       @multiple_files  = {
-        "config" => %w(config/site.yml config/deploy.toml configuration.yml)
+        "config" => %w(config/site.yml config/deploy.toml configuration.yml),
       }
     end
 
@@ -205,7 +205,7 @@ class TestConfiguration < JekyllUnitTest
         "pygments"    => true,
         "plugins"     => true,
         "layouts"     => true,
-        "data_source" => true
+        "data_source" => true,
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -255,7 +255,7 @@ class TestConfiguration < JekyllUnitTest
     setup do
       @config = proc do |val|
         Configuration[{
-          "paginate" => val
+          "paginate" => val,
         }]
       end
     end
@@ -327,7 +327,7 @@ class TestConfiguration < JekyllUnitTest
         :default => source_dir("_config.yml"),
         :other   => source_dir("_config.live.yml"),
         :toml    => source_dir("_config.dev.toml"),
-        :empty   => ""
+        :empty   => "",
       }
     end
 
@@ -372,7 +372,7 @@ class TestConfiguration < JekyllUnitTest
       Jekyll.logger.log_level = :warn
       assert_equal \
         site_configuration({ "baseurl" => "/you-beautiful-blog-you",
-                             "title"   => "My magnificent site, wut" }),
+                             "title"   => "My magnificent site, wut", }),
         Jekyll.configuration(test_config.merge({ "config" => [@paths[:toml]] }))
       Jekyll.logger.log_level = :info
     end
@@ -435,9 +435,9 @@ class TestConfiguration < JekyllUnitTest
           "docs"  => {},
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext"
-          }
-        }
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+          },
+        },
       })
     end
 
@@ -449,9 +449,9 @@ class TestConfiguration < JekyllUnitTest
         "collections" => {
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext"
-          }
-        }
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+          },
+        },
       })
     end
 
@@ -461,9 +461,9 @@ class TestConfiguration < JekyllUnitTest
         "collections" => {
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext"
-          }
-        }
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+          },
+        },
       })
     end
 
@@ -471,16 +471,16 @@ class TestConfiguration < JekyllUnitTest
       posts_permalink = "/:year/:title/"
       conf = Configuration[default_configuration].tap do |c|
         c["collections"] = {
-          "posts" => { "permalink" => posts_permalink }
+          "posts" => { "permalink" => posts_permalink },
         }
       end
       assert_equal conf.add_default_collections, conf.merge({
         "collections" => {
           "posts" => {
             "output"    => true,
-            "permalink" => posts_permalink
-          }
-        }
+            "permalink" => posts_permalink,
+          },
+        },
       })
     end
   end

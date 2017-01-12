@@ -6,7 +6,7 @@ module Jekyll
       :debug => ::Logger::DEBUG,
       :info  => ::Logger::INFO,
       :warn  => ::Logger::WARN,
-      :error => ::Logger::ERROR
+      :error => ::Logger::ERROR,
     }.freeze
 
     # Public: Create a new instance of a log writer

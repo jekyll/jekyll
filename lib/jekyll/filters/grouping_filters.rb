@@ -54,7 +54,7 @@ module Jekyll
           array << {
             "name"  => item.first,
             "items" => item.last,
-            "size"  => item.last.size
+            "size"  => item.last.size,
           }
         end
       end

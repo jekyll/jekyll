@@ -95,8 +95,8 @@ class TestStaticFile < JekyllUnitTest
     should "use the _config.yml defaults to determine writability" do
       defaults = [{
         "scope"  => { "path" => "private" },
-        "values" => { "published" => false }
-      }]
+        "values" => { "published" => false },
+      },]
       static_file = setup_static_file_with_defaults(
         "root",
         "private/dir/subdir",
@@ -146,7 +146,7 @@ class TestStaticFile < JekyllUnitTest
         "name"          => "static_file.txt",
         "extname"       => ".txt",
         "modified_time" => @static_file.modified_time,
-        "path"          => "/static_file.txt"
+        "path"          => "/static_file.txt",
       }
       assert_equal expected, @static_file.to_liquid
     end

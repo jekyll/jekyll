@@ -2,7 +2,7 @@ module Jekyll
   class EntryFilter
     attr_reader :site
     SPECIAL_LEADING_CHARACTERS = [
-      ".", "_", "#", "~"
+      ".", "_", "#", "~",
     ].freeze
 
     def initialize(site, base_directory = nil)
