@@ -16,7 +16,7 @@ class TestLiquidRenderer < JekyllUnitTest
       expected = [
         %r!^Filename\s+|\s+Count\s+|\s+Bytes\s+|\s+Time$!,
         %r!^-+\++-+\++-+\++-+$!,
-        %r!^_posts/2010-01-09-date-override\.markdown\s+|\s+\d+\s+|\s+\d+\.\d{2}K\s+|\s+\d+\.\d{3}$!
+        %r!^_posts/2010-01-09-date-override\.markdown\s+|\s+\d+\s+|\s+\d+\.\d{2}K\s+|\s+\d+\.\d{3}$!,
       ]
       # rubocop:enable Metrics/LineLength
 

@@ -4,7 +4,7 @@ class TestDrop < JekyllUnitTest
   context "a document drop" do
     setup do
       @site = fixture_site({
-        "collections" => ["methods"]
+        "collections" => ["methods"],
       })
       @site.process
       @document = @site.collections["methods"].docs.detect do |d|

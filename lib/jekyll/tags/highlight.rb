@@ -54,7 +54,7 @@ eos
             [:hl_lines,    opts.fetch(:hl_lines, nil)],
             [:linenos,     opts.fetch(:linenos, nil)],
             [:encoding,    opts.fetch(:encoding, "utf-8")],
-            [:cssclass,    opts.fetch(:cssclass, nil)]
+            [:cssclass,    opts.fetch(:cssclass, nil)],
           ].reject { |f| f.last.nil? }]
         else
           opts
@@ -125,7 +125,7 @@ eos
       def add_code_tag(code)
         code_attributes = [
           "class=\"language-#{@lang.to_s.tr("+", "-")}\"",
-          "data-lang=\"#{@lang}\""
+          "data-lang=\"#{@lang}\"",
         ].join(" ")
         "<figure class=\"highlight\"><pre><code #{code_attributes}>"\
         "#{code.chomp}</code></pre></figure>"

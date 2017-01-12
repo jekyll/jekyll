@@ -46,7 +46,7 @@ include Jekyll
 Minitest::Reporters.use! [
   Minitest::Reporters::DefaultReporter.new(
     :color => true
-  )
+  ),
 ]
 
 module Minitest::Assertions
@@ -107,9 +107,9 @@ class JekyllUnitTest < Minitest::Test
     site = fixture_site({
       "collections" => {
         "methods" => {
-          "output" => true
-        }
-      }
+          "output" => true,
+        },
+      },
     })
     site.read
     matching_doc = site.collections["methods"].docs.find do |doc|
@@ -133,10 +133,10 @@ class JekyllUnitTest < Minitest::Test
   def site_configuration(overrides = {})
     full_overrides = build_configs(overrides, build_configs({
       "destination" => dest_dir,
-      "incremental" => false
+      "incremental" => false,
     }))
     Configuration.from(full_overrides.merge({
-      "source" => source_dir
+      "source" => source_dir,
     }))
   end
 

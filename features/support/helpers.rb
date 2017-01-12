@@ -142,7 +142,7 @@ def location(folder, direction)
   end
 
   [before || ".",
-    after || "."]
+    after || ".",]
 end
 
 #
@@ -160,7 +160,7 @@ def seconds_agnostic_datetime(datetime = Time.now)
   [
     Regexp.escape(date),
     "#{time}:\\d{2}",
-    Regexp.escape(zone)
+    Regexp.escape(zone),
   ] \
     .join("\\ ")
 end
