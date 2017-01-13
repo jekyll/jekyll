@@ -49,20 +49,23 @@ docs:
 {% raw %}<h2>{{ site.data.samplelist.docs_list_title }}</h2>
 <ul>
    {% for item in site.data.samplelist.docs %}
-   <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+      <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
    {% endfor %}
 </ul>{% endraw %}
 ```
 
 **Result**
-<div class="result">
+<div class="highlight result">
    <h2>ACME Documentation</h2>
    <ul>
-      <li><a href="introduction.html" alt="Introduction">Introduction</a></li>
-      <li><a href="configuration.html" alt="Configuration">Configuration</a></li>
-      <li><a href="deployment.html" alt="Deployment">Deployment</a></li>
+      <li><a href="#" alt="Introduction">Introduction</a></li>
+      <li><a href="#" alt="Configuration">Configuration</a></li>
+      <li><a href="#" alt="Deployment">Deployment</a></li>
    </ul>
 </div>
+
+{: .note .info }
+For the results in these samples with fictitious page references, `#` is manually substituted for the actual link value to avoid 404 errors.) 
 
 When you use a `for` loop, you choose how you want to refer to the items you're looping through. The variable you choose (in this case, `item`) becomes how you access the properties of each item in the list. Dot notation is used to get a property of the item (for example, `item.url`).
 
@@ -94,10 +97,10 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 
 **Result**
 
-<div class="result">
-   <li><a href="configuration.html" alt="Configuration">Configuration</a></li>
-   <li><a href="deployment.html" alt="Deployment">Deployment</a></li>
-   <li><a href="introduction.html" alt="Introduction">Introduction</a></li>
+<div class="highlight result">
+   <li><a href="#" alt="Configuration">Configuration</a></li>
+   <li><a href="#" alt="Deployment">Deployment</a></li>
+   <li><a href="#" alt="Introduction">Introduction</a></li>
 </div>
 
 The items now appear in alphabetical order. The `sort` property in the Liquid filter applies to the `title`, which is an actual property in the list. If `title` weren't a property, we would need to sort by another property.
@@ -158,26 +161,26 @@ toc:
 ```
 
 **Result**
-<div class="result">
+<div class="highlight result">
     <h3>Group 1</h3>
       <ul>
-          <li><a href="/thing1.html">Thing 1</a></li>
-          <li><a href="/thing2.html">Thing 2</a></li>
-          <li><a href="/thing3.html">Thing 3</a></li>
+          <li><a href="#">Thing 1</a></li>
+          <li><a href="#">Thing 2</a></li>
+          <li><a href="#">Thing 3</a></li>
       </ul>
 
     <h3>Group 2</h3>
       <ul>
-          <li><a href="/piece1.html">Piece 1</a></li>
-          <li><a href="/piece2.html">Piece 2</a></li>
-          <li><a href="/piece3.html">Piece 3</a></li>
+          <li><a href="#">Piece 1</a></li>
+          <li><a href="#">Piece 2</a></li>
+          <li><a href="#">Piece 3</a></li>
       </ul>
 
     <h3>Group 3</h3>
       <ul>
-          <li><a href="/widget1.html">Widget 1</a></li>
-          <li><a href="/widget2.html">Widget 2</a></li>
-          <li><a href="/widget3.html">Widget 3</a></li>
+          <li><a href="#">Widget 1</a></li>
+          <li><a href="#">Widget 2</a></li>
+          <li><a href="#">Widget 3</a></li>
       </ul>
 </div>
 
@@ -240,64 +243,64 @@ toc2:
 {% raw %}<div>
 {% if site.data.samplelist.toc2[0] %}
   {% for item in site.data.samplelist.toc2 %}
-  <h3>{{ item.title }}</h3>
-    {% if item.subfolderitems[0] %}
-      <ul>
-        {% for entry in item.subfolderitems %}
-            <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
-              {% if entry.subsubfolderitems[0] %}
-                <ul>
-                {% for subentry in entry.subsubfolderitems %}
-                    <li><a href="{{ subentry.url }}">{{ subentry.page }}</a></li>
-                {% endfor %}
-                </ul>
-              {% endif %}
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endfor %}
+    <h3>{{ item.title }}</h3>
+      {% if item.subfolderitems[0] %}
+        <ul>
+          {% for entry in item.subfolderitems %}
+              <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
+                {% if entry.subsubfolderitems[0] %}
+                  <ul>
+                  {% for subentry in entry.subsubfolderitems %}
+                      <li><a href="{{ subentry.url }}">{{ subentry.page }}</a></li>
+                  {% endfor %}
+                  </ul>
+                {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endfor %}
 {% endif %}
 </div>{% endraw %}
 ```
 
 **Result**
 
-<div class="result">
+<div class="highlight result">
    <div>
       <h3>Group 1</h3>
       <ul>
-         <li><a href="/thing1.html">Thing 1</a></li>
-         <li><a href="/thing2.html">Thing 2</a></li>
+         <li><a href="#">Thing 1</a></li>
+         <li><a href="#">Thing 2</a></li>
          <ul>
-            <li><a href="/subthing1.html">Subthing 1</a></li>
-            <li><a href="/subthing2.html">Subthing 2</a></li>
+            <li><a href="#">Subthing 1</a></li>
+            <li><a href="#">Subthing 2</a></li>
          </ul>
-         <li><a href="/thing3.html">Thing 3</a></li>
+         <li><a href="#">Thing 3</a></li>
       </ul>
       <h3>Group 2</h3>
       <ul>
-         <li><a href="/piece1.html">Piece 1</a></li>
-         <li><a href="/piece2.html">Piece 2</a></li>
-         <li><a href="/piece3.html">Piece 3</a></li>
+         <li><a href="#">Piece 1</a></li>
+         <li><a href="#">Piece 2</a></li>
+         <li><a href="#">Piece 3</a></li>
          <ul>
-            <li><a href="/subpiece1.html">Subpiece 1</a></li>
-            <li><a href="/subpiece2.html">Subpiece2</a></li>
+            <li><a href="#">Subpiece 1</a></li>
+            <li><a href="#">Subpiece2</a></li>
          </ul>
       </ul>
       <h3>Group 3</h3>
       <ul>
-         <li><a href="/widget1.html">Widget 1</a></li>
+         <li><a href="#">Widget 1</a></li>
          <ul>
-            <li><a href="/subwidget1.html">Subwidget 1</a></li>
-            <li><a href="/subwidget2.html">Subwidget 2</a></li>
+            <li><a href="#">Subwidget 1</a></li>
+            <li><a href="#">Subwidget 2</a></li>
          </ul>
-         <li><a href="/widget2.html">Widget 2</a></li>
-         <li><a href="/widget3.html">Widget 3</a></li>
+         <li><a href="#">Widget 2</a></li>
+         <li><a href="#">Widget 3</a></li>
       </ul>
    </div>
 </div>
 
- In this example, `if site.data.samplelist.toc2[0]` is used to ensure that the YAML level actually contains items. If there isn't anything at the `[0]` position, we can skip looking in this level.
+In this example, `if site.data.samplelist.toc2[0]` is used to ensure that the YAML level actually contains items. If there isn't anything at the `[0]` position, we can skip looking in this level.
 
 <div class="note">
   <h5>ProTip: Line up <code>for</code> loops and <code>if</code> statements</h5>
@@ -324,17 +327,17 @@ sidebar: toc
 ```liquid
 {% raw %}<ul>
     {% for item in site.data.samplelist[page.sidebar] %}
-    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+      <li><a href="{{ item.url }}">{{ item.title }}</a></li>
     {% endfor %}
 </ul>{% endraw %}
 ```
 **Result**
 
-<div class="result">
+<div class="highlight result">
    <ul>
-      <li><a href="introduction.html">Introduction</a></li>
-      <li><a href="configuration.html">Configuration</a></li>
-      <li><a href="deployment.html">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
    </ul>
 </div>
 
@@ -358,7 +361,8 @@ In addition to inserting items from the YAML data file into your list, you also 
 ```liquid
 {% raw %}{% for item in site.data.samplelist.docs %}
     <li class="{% if item.url == page.url %}active{% endif %}">
-    <a href="{{ item.url }}">{{ item.title }}</a></li>
+      <a href="{{ item.url }}">{{ item.title }}</a>
+    </li>
 {% endfor %}{% endraw %}
 ```
 
@@ -371,10 +375,10 @@ In addition to inserting items from the YAML data file into your list, you also 
   }
 </style>
 
-<div class="result">
-   <li class=""><a href="introduction.html">Introduction</a></li>
-   <li class=""><a href="configuration.html">Configuration</a></li>
-   <li class="active"><a href="deployment.html">Deployment</a></li>
+<div class="highlight result">
+   <li class=""><a href="#">Introduction</a></li>
+   <li class=""><a href="#">Configuration</a></li>
+   <li class="active"><a href="#">Deployment</a></li>
 </div>
 
 In this case, assume `Deployment` is the current page.
@@ -408,19 +412,19 @@ docs2:
 ```liquid
 {% raw %}<ul>
     {% for item in site.data.samplelist.docs2 %}
-        {% if item.version == 1 %}
-          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-        {% endif %}
+      {% if item.version == 1 %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+      {% endif %}
     {% endfor %}
 </ul>{% endraw %}
 ```
 
 **Result**
 
-<div class="result">
+<div class="highlight result">
    <ul>
-      <li><a href="introduction.html">Introduction</a></li>
-      <li><a href="configuration.html">Configuration</a></li>
+      <li><a href="#">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
    </ul>
 </div>
 
@@ -488,20 +492,20 @@ If you wanted to simply get all docs in the collection for a specific category, 
 {% raw %}<h3>Getting Started</h3>
 <ul>
     {% for doc in site.docs %}
-        {% if doc.category == "getting-started" %}
-          <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
-        {% endif %}
+      {% if doc.category == "getting-started" %}
+        <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
+      {% endif %}
     {% endfor %}
 </ul>{% endraw %}
 ```
 
 The result would be as follows:
 
-<div class="result">
+<div class="highlight result">
    <h3>Getting Started</h3>
    <ul>
-      <li><a href="/docs/sample1">Sample1</a></li>
-      <li><a href="/docs/sample2">Sample2</a></li>
+      <li><a href="#">Sample1</a></li>
+      <li><a href="#">Sample2</a></li>
    </ul>
 </div>
 
@@ -521,31 +525,31 @@ Here's the code for getting lists of pages grouped under their corresponding cat
 {% for cat in mydocs %}
 <h2>{{ cat.name | capitalize }}</h2>
     <ul>
-        {% assign items = cat.items | sort: 'weight' %}
-        {% for item in items %}
-          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-        {% endfor %}
+      {% assign items = cat.items | sort: 'order' %}
+      {% for item in items %}
+        <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+      {% endfor %}
     </ul>
 {% endfor %}{% endraw %}
 ```
 
 **Result**
 
-<div class="result">
+<div class="highlight result">
    <h2>Getting-started</h2>
    <ul>
-      <li><a href="/docs/sample2">Sample2</a></li>
-      <li><a href="/docs/sample1">Sample1</a></li>
+      <li><a href="#">Sample2</a></li>
+      <li><a href="#">Sample1</a></li>
    </ul>
    <h2>Configuration</h2>
    <ul>
-      <li><a href="/docs/topic2">Topic2</a></li>
-      <li><a href="/docs/topic1">Topic1</a></li>
+      <li><a href="#">Topic2</a></li>
+      <li><a href="#">Topic1</a></li>
    </ul>
    <h2>Deployment</h2>
    <ul>
-      <li><a href="/docs/widget2">Widget2</a></li>
-      <li><a href="/docs/widget1">Widget1</a></li>
+      <li><a href="#">Widget2</a></li>
+      <li><a href="#">Widget1</a></li>
    </ul>
 </div>
 
