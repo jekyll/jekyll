@@ -70,8 +70,9 @@ You can now render the list of members in a template:
 </ul>
 {% endraw %}
 ```
+
 {: .note .info }
-If your Jekyll site has a lot of pages, such as with documentation websites, we've got you covered with some detailed examples on [how to build robust navigation for your site](..navigation). 
+If your Jekyll site has a lot of pages, such as with documentation websites, see the detailed examples in [how to build robust navigation for your site](../navigation). 
 
 ## Example: Organizations
 

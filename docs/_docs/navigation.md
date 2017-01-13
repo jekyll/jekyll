@@ -10,7 +10,7 @@ There are two primary ways of retrieving pages on a Jekyll site:
 * **Retrieve pages listed in a YAML data source**. Store the page data in a YAML (or JSON or CSV) file in the `_data` folder, loop through the YAML properties, and insert the values into your theme.
 * **Retrieve pages by looping through the page front matter**. Look through the front matter of your pages to identify certain properties, return those pages, and insert the pages' front matter values into your theme.
 
-The examples that follow start with a basic navigation scenario and add more sophisticated elements to demonstrate different ways of returning the pages. In almost every scenario, you'll see 3 elements:
+The examples that follow start with a basic navigation scenario and add more sophisticated elements to demonstrate different ways of returning the pages. In every scenario, you'll see 3 elements:
 
 * YAML
 * Liquid
@@ -65,7 +65,7 @@ docs:
 </div>
 
 {: .note .info }
-For the results in these samples with fictitious page references, `#` is manually substituted for the actual link value to avoid 404 errors.) 
+For the results in these fictitious samples, `#` is manually substituted for the actual link value to avoid 404 errors.) 
 
 When you use a `for` loop, you choose how you want to refer to the items you're looping through. The variable you choose (in this case, `item`) becomes how you access the properties of each item in the list. Dot notation is used to get a property of the item (for example, `item.url`).
 
@@ -434,7 +434,7 @@ The `Deployment` page is excluded because its `version` is `2`.
 
 If you don't want to store your navigation items in a YAML file in your `_data` folder, you can use `for` loops to look through the YAML front matter of each page or collection and get the content based on properties in the front matter.
 
-In this scenario, suppose we have a collection called `_docs`. Collections are often better than pages because they allow you to be more specific in what you're looping through. (Try to avoid scenarios where you loop through large numbers of items, since it will increase your build time. Collections help you narrow the scope. For more information about collections, see [Collections]({% link _docs/collections.md %}).)
+In this scenario, suppose we have a collection called `_docs`. Collections are often better than pages because they allow you to narrow the list of what you're looping through. (Try to avoid scenarios where you loop through large numbers of items, since it will increase your build time. [Collections]({% link _docs/collections.md %}) help you narrow the scope.)
 
 In our scenario, there are 6 docs in the `docs` collection: Sample 1, Sample 2, Topic 1, Topic 2, Widget 1, and Widget 2.
 
@@ -513,7 +513,7 @@ This might be useful if you're setting up a knowledge base and have dozens of to
 
 But let's say you want to sort the items by category and group them under the category name, without hard-coding the category names. To achieve this, you could use two filters:
 
-* `group by`
+* `group_by`
 * `sort`
 
 Here's the code for getting lists of pages grouped under their corresponding category headers:
@@ -571,6 +571,6 @@ After getting the category name, we assign the variable `items` for the docs and
 
 The `for item in items` loop looks through each `item` and gets the `title` and `url` to form the list item link.
 
-For more details on the `group by` filter, see [group by in Jekyll's Templates documentation](https://jekyllrb.com/docs/templates/) as well as [this Siteleaf tutorial](https://www.siteleaf.com/blog/advanced-liquid-group-by/). For more details on the `sort` filter, see [sort in Liquid's documentation](https://help.shopify.com/themes/liquid/filters/array-filters#sort).
+For more details on the `group_by` filter, see [Jekyll's Templates documentation](https://jekyllrb.com/docs/templates/) as well as [this Siteleaf tutorial](https://www.siteleaf.com/blog/advanced-liquid-group-by/). For more details on the `sort` filter, see [sort](https://help.shopify.com/themes/liquid/filters/array-filters#sort) in Liquid's documentation.
 
 Whether you use properties in your doc's front matter to retrieve your pages or a YAML data file, in both cases you can programmatically build a more robust navigation for your site.
