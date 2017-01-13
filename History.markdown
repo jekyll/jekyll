@@ -67,6 +67,7 @@
   * Fix a minor grammatical mistake on themes' document ### -dev (#5748)
   * Correct comments in data_reader.rb (#5621)
   * Add jekyll-pre-commit to plugins list (#5752)
+  * Update quickstart.md (#5758)
 
 ## 3.3.1 / 2016-11-14
 
