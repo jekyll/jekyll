@@ -46,6 +46,7 @@
   * Rubocop: fix Rakefile and gemspec (#5745)
   * Use `assert_nil` (#5725)
   * Sort gems in `jekyll.gemspec` (#5746)
+  * Rubocop: Require consistent comma in multiline literals (#5761)
 
 ### Documentation
 
