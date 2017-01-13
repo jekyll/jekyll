@@ -196,7 +196,7 @@ module Jekyll
       @url = URL.new({
         :template     => url_template,
         :placeholders => url_placeholders,
-        :permalink    => permalink
+        :permalink    => permalink,
       }).to_s
     end
 
@@ -469,14 +469,14 @@ module Jekyll
           "category",
           "categories"
         )
-        ).map(&:to_s).flatten.uniq
+        ).map(&:to_s).flatten.uniq,
       })
     end
 
     private
     def populate_tags
       merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
       })
     end
 

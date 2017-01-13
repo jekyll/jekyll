@@ -57,7 +57,7 @@ module Jekyll
         path = @site.in_source_dir(File.join(dir, magic_dir, entry))
         Document.new(path, {
           :site       => @site,
-          :collection => @site.posts
+          :collection => @site.posts,
         })
       end.reject(&:nil?)
     end

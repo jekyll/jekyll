@@ -7,12 +7,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
         "defaults" => [{
           "scope"  => {
             "path" => "contacts",
-            "type" => "page"
+            "type" => "page",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
       @site.process
       @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
@@ -30,12 +30,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "scope"  => {
-            "path" => "index.html"
+            "path" => "index.html",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
 
       @site.process
@@ -54,12 +54,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "scope"  => {
-            "path" => "win"
+            "path" => "win",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
 
       @site.process
@@ -78,12 +78,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "scope"  => {
-            "type" => "page"
+            "type" => "page",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
 
       @site.process
@@ -103,12 +103,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "scope"  => {
-            "type" => "pages"
+            "type" => "pages",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
       @site.process
       @affected = @site.pages
@@ -129,9 +129,9 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "scope"  => {
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
       @site.process
       @affected = @site.pages
@@ -149,9 +149,9 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
       @site.process
       @affected = @site.pages
@@ -171,9 +171,9 @@ class TestFrontMatterDefaults < JekyllUnitTest
         "destination" => dest_dir,
         "defaults"    => [{
           "values" => {
-            "date" => "2015-01-01 00:00:01"
-          }
-        }]
+            "date" => "2015-01-01 00:00:01",
+          },
+        },],
       }))
     end
 

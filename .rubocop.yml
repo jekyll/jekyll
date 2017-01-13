@@ -127,5 +127,7 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: consistent_comma
 Style/UnneededCapitalW:
   Enabled: false
