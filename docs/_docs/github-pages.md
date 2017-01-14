@@ -138,7 +138,7 @@ looking at right now is contained in the [docs
 folder]({{ site.repository }}/tree/master/docs) of the same repository.
 
 Please refer to GitHub official documentation on
-[user, organization and projets pages](https://help.github.com/articles/user-organization-and-project-pages/)
+[user, organization and project pages](https://help.github.com/articles/user-organization-and-project-pages/)
 to see more detailed examples.
 
 <div class="note warning">
