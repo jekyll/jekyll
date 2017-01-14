@@ -112,8 +112,8 @@ eos
       def locate_include_file(context, file, safe)
         includes_dirs = tag_includes_dirs(context)
         includes_dirs.each do |dir|
-          path = File.join(dir, file)
-          return path if valid_include_file?(path, dir, safe)
+          path = File.join(dir.to_s, file.to_s)
+          return path if valid_include_file?(path, dir.to_s, safe)
         end
         raise IOError, "Could not locate the included file '#{file}' in any of "\
           "#{includes_dirs}. Ensure it exists in one of those directories and, "\
@@ -163,7 +163,7 @@ eos
       end
 
       def valid_include_file?(path, dir, safe)
-        !(outside_site_source?(path, dir, safe) || !File.exist?(path))
+        !outside_site_source?(path, dir, safe) && File.file?(path)
       end
 
       def outside_site_source?(path, dir, safe)
