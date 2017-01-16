@@ -48,6 +48,14 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 8
+Security/MarshalLoad:
+  Exclude:
+    - !ruby/regexp /test\/.*.rb$/
+    - lib/jekyll/regenerator.rb
+Security/YAMLLoad:
+  Exclude:
+    - !ruby/regexp /features\/.*.rb/
+    - !ruby/regexp /test\/.*.rb$/
 Style/Alias:
   Enabled: false
 Style/AlignArray:
