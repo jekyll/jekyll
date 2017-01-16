@@ -49,6 +49,7 @@
   * Sort gems in `jekyll.gemspec` (#5746)
   * Rubocop: Require consistent comma in multiline literals (#5761)
   * Bump rubocop (#5765)
+  * New rubocop security checks (#5768)
 
 ### Documentation
 
