@@ -155,10 +155,14 @@ eos
         if cached_partial.key?(path)
           cached_partial[path]
         else
-          cached_partial[path] = context.registers[:site]
+          unparsed_file = context.registers[:site]
             .liquid_renderer
             .file(path)
-            .parse(read_file(path, context))
+          begin
+            cached_partial[path] = unparsed_file.parse(read_file(path, context))
+          rescue Liquid::SyntaxError => ex
+            raise IncludeTagError.new(ex.message, path)
+          end
         end
       end
 
