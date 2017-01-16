@@ -71,6 +71,7 @@
   * Add jekyll-pre-commit to plugins list (#5752)
   * Update quickstart.md (#5758)
   * Correct minor typo (#5764)
+  * Fix a markdown link to look properly on the web (#5769)
 
 ## 3.3.1 / 2016-11-14
 
