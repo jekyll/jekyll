@@ -7,6 +7,7 @@
   * Use the current year for the LICENSE of theme (#5712)
   * Update License (#5713)
   * Use Addressable instead of URI to decode (#5726)
+  * throw IncludeTagError if error occurs in included file (#5767)
 
 ### Bug Fixes
 
