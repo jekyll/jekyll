@@ -30,11 +30,6 @@ require "minitest/profile"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
 
-# The default "source" and "destination" values depend on Dir.pwd,
-# which changes when we use Dir.chdir without a block. Initialize
-# it here so it has Dir.pwd = root of this repo.
-Jekyll::Configuration::DEFAULTS
-
 Jekyll.logger = Logger.new(StringIO.new)
 
 unless jruby?
@@ -67,6 +62,10 @@ module Minitest::Assertions
 end
 
 module DirectoryHelpers
+  def root_dir(*subdirs)
+    File.join(File.dirname(File.dirname(__FILE__)), *subdirs)
+  end
+
   def dest_dir(*subdirs)
     test_dir("dest", *subdirs)
   end
@@ -76,7 +75,7 @@ module DirectoryHelpers
   end
 
   def test_dir(*subdirs)
-    File.join(File.dirname(__FILE__), *subdirs)
+    root_dir("test", *subdirs)
   end
 end
 
