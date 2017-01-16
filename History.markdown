@@ -50,6 +50,7 @@
   * Rubocop: Require consistent comma in multiline literals (#5761)
   * Bump rubocop (#5765)
   * New rubocop security checks (#5768)
+  * test/helper: fix flaky plugin path test by removing calls to Dir.chdir without a block (#5779)
 
 ### Documentation
 
