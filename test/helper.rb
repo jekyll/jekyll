@@ -30,6 +30,11 @@ require "minitest/profile"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
 
+# The default "source" and "destination" values depend on Dir.pwd,
+# which changes when we use Dir.chdir without a block. Initialize
+# it here so it has Dir.pwd = root of this repo.
+Jekyll::Configuration::DEFAULTS
+
 Jekyll.logger = Logger.new(StringIO.new)
 
 unless jruby?
