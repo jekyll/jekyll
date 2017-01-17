@@ -88,7 +88,7 @@ end
 
 group :site do
   if ENV["PROOF"]
-    gem "html-proofer", "~> 2.0"
+    gem "html-proofer", "~> 3.4"
   end
 
   gem "jekyll-avatar"
