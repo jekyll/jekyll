@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Basic Usage
 permalink: /docs/usage/
 ---
@@ -96,6 +95,13 @@ $ jekyll build --source _source --destination _deploy
 
 For more about the possible configuration options, see the
 [configuration](../configuration/) page.
+
+<div class="note info">
+  <h5>Call for help</h5>
+  <p>
+    The <code>help</code> command is always here to remind you of all available options and usage, and also works with the <code>build</code>, <code>serve</code> and <code>new</code> subcommands, e.g <code>jekyll help new</code> or <code>jekyll help build</code>.
+  </p>
+</div>
 
 If you're interested in browsing these docs on-the-go, install the
 `jekyll-docs` gem and run `jekyll docs` in your terminal.

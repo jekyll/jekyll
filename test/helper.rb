@@ -46,7 +46,7 @@ include Jekyll
 Minitest::Reporters.use! [
   Minitest::Reporters::DefaultReporter.new(
     :color => true
-  )
+  ),
 ]
 
 module Minitest::Assertions
@@ -62,6 +62,10 @@ module Minitest::Assertions
 end
 
 module DirectoryHelpers
+  def root_dir(*subdirs)
+    File.join(File.dirname(File.dirname(__FILE__)), *subdirs)
+  end
+
   def dest_dir(*subdirs)
     test_dir("dest", *subdirs)
   end
@@ -71,7 +75,7 @@ module DirectoryHelpers
   end
 
   def test_dir(*subdirs)
-    File.join(File.dirname(__FILE__), *subdirs)
+    root_dir("test", *subdirs)
   end
 end
 
@@ -107,9 +111,9 @@ class JekyllUnitTest < Minitest::Test
     site = fixture_site({
       "collections" => {
         "methods" => {
-          "output" => true
-        }
-      }
+          "output" => true,
+        },
+      },
     })
     site.read
     matching_doc = site.collections["methods"].docs.find do |doc|
@@ -133,10 +137,10 @@ class JekyllUnitTest < Minitest::Test
   def site_configuration(overrides = {})
     full_overrides = build_configs(overrides, build_configs({
       "destination" => dest_dir,
-      "incremental" => false
+      "incremental" => false,
     }))
     Configuration.from(full_overrides.merge({
-      "source" => source_dir
+      "source" => source_dir,
     }))
   end
 

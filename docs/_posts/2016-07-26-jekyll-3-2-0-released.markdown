@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll turns 3.2'
 date: 2016-07-26 15:06:49 -0700
 author: parkr

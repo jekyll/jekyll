@@ -86,12 +86,12 @@ class TestCommandsServe < JekyllUnitTest
           "config"  => %w(_config.yml _development.yml),
           "serving" => true,
           "watch"   => false, # for not having guard output when running the tests
-          "url"     => "http://localhost:4000"
+          "url"     => "http://localhost:4000",
         }
 
         expect(Jekyll::Commands::Serve).to receive(:process).with(custom_options)
         @merc.execute(:serve, { "config" => %w(_config.yml _development.yml),
-                                "watch"  => false })
+                                "watch"  => false, })
       end
 
       context "in development environment" do
@@ -113,7 +113,7 @@ class TestCommandsServe < JekyllUnitTest
             "port"     => "9999",
             "url"      => "https://jekyllrb.com/",
             "ssl_cert" => "foo",
-            "ssl_key"  => "bar"
+            "ssl_key"  => "bar",
           })
 
           assert_equal 1, Jekyll.sites.count
@@ -146,13 +146,13 @@ class TestCommandsServe < JekyllUnitTest
         should "raise if enabling without key or cert" do
           assert_raises RuntimeError do
             custom_opts({
-              "ssl_key" => "foo"
+              "ssl_key" => "foo",
             })
           end
 
           assert_raises RuntimeError do
             custom_opts({
-              "ssl_key" => "foo"
+              "ssl_key" => "foo",
             })
           end
         end
@@ -166,7 +166,7 @@ class TestCommandsServe < JekyllUnitTest
             "ssl_cert"   => "foo",
             "source"     => "bar",
             "enable_ssl" => true,
-            "ssl_key"    => "bar"
+            "ssl_key"    => "bar",
           })
 
           assert result[:SSLEnable]

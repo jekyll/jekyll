@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Pagination
 permalink: /docs/pagination/
 ---

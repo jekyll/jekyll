@@ -5,7 +5,7 @@ class TestSass < JekyllUnitTest
     setup do
       @site = Jekyll::Site.new(Jekyll.configuration({
         "source"      => source_dir,
-        "destination" => dest_dir
+        "destination" => dest_dir,
       }))
       @site.process
       @test_css_file = dest_dir("css/main.css")

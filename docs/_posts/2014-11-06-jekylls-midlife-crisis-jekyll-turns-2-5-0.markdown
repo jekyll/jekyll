@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: "Jekyll's Mid-Life Crisis (Or, Jekyll turns 2.5.0)"
 date: 2014-11-05 10:48:22 -0800
 author: parkr
