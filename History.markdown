@@ -56,6 +56,7 @@
   * test/helper: fix flaky plugin path test by removing calls to Dir.chdir without a block (#5779)
   * Use latest jemoji gem (#5782)
   * Bump htmlproofer (#5781)
+  * Bump rubies we test against (#5784)
 
 ### Documentation
 
