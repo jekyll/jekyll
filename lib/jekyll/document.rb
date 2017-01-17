@@ -7,7 +7,7 @@ module Jekyll
     attr_reader :path, :site, :extname, :collection
     attr_accessor :content, :output
 
-    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
+    YAML_FRONT_MATTER_REGEXP = %r!\A(?:<!--\s)?(---\s*\n.*?\n?)^((---|\.\.\.|-->)\s*$\n?)!m
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
     DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{4}-\d{2}-\d{2})-(.*)(\.[^.]+)$!
 
