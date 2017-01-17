@@ -74,6 +74,10 @@ module DirectoryHelpers
     test_dir("source", *subdirs)
   end
 
+  def theme_dir(*subdirs)
+    test_dir("fixtures", "test-theme", *subdirs)
+  end
+
   def test_dir(*subdirs)
     root_dir("test", *subdirs)
   end
