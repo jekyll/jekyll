@@ -16,7 +16,7 @@ module Jekyll
         :pending   => "\u203D".yellow,
         :undefined => "\u2718".red,
         :passed    => "\u2714".green,
-        :skipped   => "\u203D".blue
+        :skipped   => "\u203D".blue,
       }.freeze
 
       #

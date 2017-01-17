@@ -25,7 +25,7 @@ group :test do
   gem "nokogiri"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.44.1"
+  gem "rubocop", "~> 0.47"
   gem "test-theme", :path => File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
@@ -88,12 +88,12 @@ end
 
 group :site do
   if ENV["PROOF"]
-    gem "html-proofer", "~> 2.0"
+    gem "html-proofer", "~> 3.4"
   end
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"
   gem "jekyll-seo-tag"
   gem "jekyll-sitemap"
-  gem "jemoji", "0.5.1"
+  gem "jemoji"
 end

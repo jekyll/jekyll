@@ -13,8 +13,8 @@ class TestRdiscount < JekyllUnitTest
         "markdown"  => "rdiscount",
         "rdiscount" => {
           "toc_token"  => "{:toc}",
-          "extensions" => %w(smart generate_toc)
-        }
+          "extensions" => %w(smart generate_toc),
+        },
       }
 
       @markdown = Converters::Markdown.new config

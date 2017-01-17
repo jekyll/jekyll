@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Front Matter
 permalink: /docs/frontmatter/
 ---

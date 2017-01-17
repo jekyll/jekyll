@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Static Files
 permalink: /docs/static-files/
 ---

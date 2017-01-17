@@ -12,7 +12,7 @@ class TestPage < JekyllUnitTest
 
   def do_render(page)
     layouts = {
-      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")
+      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html"),
     }
     page.render(layouts, @site.site_payload)
   end
@@ -23,7 +23,7 @@ class TestPage < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"            => source_dir,
         "destination"       => dest_dir,
-        "skip_config_files" => true
+        "skip_config_files" => true,
       }))
     end
 
@@ -90,7 +90,7 @@ class TestPage < JekyllUnitTest
           :permalink => "/properties/",
           :published => nil,
           :title     => "Properties Page",
-          :url       => "/properties/"
+          :url       => "/properties/",
         }
 
         attrs.each do |attr, val|

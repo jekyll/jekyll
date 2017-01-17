@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Working with drafts
 permalink: /docs/drafts/
 ---

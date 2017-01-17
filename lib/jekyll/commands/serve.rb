@@ -10,9 +10,9 @@ module Jekyll
           "ssl_key"            => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"               => ["-P", "--port [PORT]", "Port to listen on"],
           "show_dir_listing"   => ["--show-dir-listing",
-            "Show a directory listing instead of loading your index file."],
+            "Show a directory listing instead of loading your index file.",],
           "skip_initial_build" => ["skip_initial_build", "--skip-initial-build",
-            "Skips the initial site build which occurs before the server is started."]
+            "Skips the initial site build which occurs before the server is started.",],
         }.freeze
 
         #
@@ -88,7 +88,7 @@ module Jekyll
               index.rhtml
               index.cgi
               index.xml
-            )
+            ),
           }
 
           opts[:DirectoryIndex] = [] if opts[:JekyllOptions]["show_dir_listing"]
@@ -116,8 +116,8 @@ module Jekyll
           WEBrick::Config::FileHandler.merge({
             :FancyIndexing     => true,
             :NondisclosureName => [
-              ".ht*", "~*"
-            ]
+              ".ht*", "~*",
+            ],
           })
         end
 
@@ -139,7 +139,7 @@ module Jekyll
             :prefix  => ssl_enabled ? "https" : "http",
             :address => address,
             :port    => port,
-            :baseurl => baseurl ? "#{baseurl}/" : ""
+            :baseurl => baseurl ? "#{baseurl}/" : "",
           })
         end
 

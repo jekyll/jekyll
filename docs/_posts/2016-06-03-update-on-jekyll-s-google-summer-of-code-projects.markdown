@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: "Jekyll's Google Summer of Code Project: The CMS You Always Wanted"
 date: "2016-06-03 13:21:02 -0700"
 author: parkr

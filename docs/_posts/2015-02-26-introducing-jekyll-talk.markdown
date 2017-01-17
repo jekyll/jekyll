@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Join the Discussion at Jekyll Talk'
 date: 2015-02-26 21:06:51 -0800
 author: alfredxing

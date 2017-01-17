@@ -35,7 +35,7 @@ module Jekyll
             fsnotify_buggy?(site),
             !deprecated_relative_permalinks(site),
             !conflicting_urls(site),
-            !urls_only_differ_by_case(site)
+            !urls_only_differ_by_case(site),
           ].all?
         end
 

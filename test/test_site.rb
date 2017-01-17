@@ -20,7 +20,7 @@ class TestSite < JekyllUnitTest
 
     should "have an array for plugins if passed as an array" do
       site = Site.new(site_configuration({
-        "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
+        "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"],
       }))
       array = if Utils::Platforms.windows?
                 ["C:/tmp/plugins", "C:/tmp/otherplugins"]
@@ -485,7 +485,7 @@ class TestSite < JekyllUnitTest
     context "manipulating the Jekyll environment" do
       setup do
         @site = Site.new(site_configuration({
-          "incremental" => false
+          "incremental" => false,
         }))
         @site.process
         @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -499,7 +499,7 @@ class TestSite < JekyllUnitTest
         setup do
           ENV["JEKYLL_ENV"] = "production"
           @site = Site.new(site_configuration({
-            "incremental" => false
+            "incremental" => false,
           }))
           @site.process
           @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -565,7 +565,7 @@ class TestSite < JekyllUnitTest
     context "incremental build" do
       setup do
         @site = Site.new(site_configuration({
-          "incremental" => true
+          "incremental" => true,
         }))
         @site.read
       end

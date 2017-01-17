@@ -1,5 +1,22 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Add connector param to `array_to_sentence_string` filter (#5597)
+  * Adds `group_by_exp` filter (#5513)
+  * Use the current year for the LICENSE of theme (#5712)
+  * Update License (#5713)
+  * Use Addressable instead of URI to decode (#5726)
+  * throw IncludeTagError if error occurs in included file (#5767)
+
+### Bug Fixes
+
+  * Escaped regular expressions when using `post_url`. (#5605)
+  * fix date parsing in file names to be stricter (#5609)
+  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
+  * Use each instead of map to actually return nothing (#5668)
+  * include: fix 'no implicit conversion of nil to String' (#5750)
+
 ### Site Enhancements
 
   * Remove instructions to install Jekyll 2 on Windows (#5582)
@@ -16,21 +33,10 @@
   * Add Jekyll-Post to list of plugins (#5705)
   * Add jekyll-numbered-headings (#5688)
   * Docs: move permalinks from documents into config (#5544)
-
-### Minor Enhancements
-
-  * Add connector param to array_to_sentence_string filter (#5597)
-  * Adds group_by_exp filter (#5513)
-  * Use the current year for the LICENSE of theme (#5712)
-  * Update License (#5713)
-  * Use Addressable instead of URI to decode (#5726)
-
-### Bug Fixes
-
-  * Escaped regular expressions when using post_url. (#5605)
-  * fix date parsing in file names to be stricter (#5609)
-  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
-  * Use each instead of map to actually return nothing (#5668)
+  * Sort gems in `docs/_config.yml` (#5746)
+  * [site] Use defaults for docs and news-items (#5744)
+  * Improve collections docs (#5691)
+  * Fix #5730: add gcc and make to the list of requirements (#5731)
 
 ### Development Fixes
 
@@ -41,6 +47,15 @@
   * Bump to rake 12.0 (#5670)
   * Rubocop Gemfile (#5671)
   * update Classifier-Reborn to 2.1.0 (#5711)
+  * Rubocop: fix Rakefile and gemspec (#5745)
+  * Use `assert_nil` (#5725)
+  * Sort gems in `jekyll.gemspec` (#5746)
+  * Rubocop: Require consistent comma in multiline literals (#5761)
+  * Bump rubocop (#5765)
+  * New rubocop security checks (#5768)
+  * test/helper: fix flaky plugin path test by removing calls to Dir.chdir without a block (#5779)
+  * Use latest jemoji gem (#5782)
+  * Bump htmlproofer (#5781)
 
 ### Documentation
 
@@ -58,6 +73,12 @@
   * Replace a dead link with a web-archived one (#5738)
   * Remove duplicate paragraph. (#5740)
   * Addition of a sample "typical post" (#5473)
+  * Fix a minor grammatical mistake on themes' document ### -dev (#5748)
+  * Correct comments in data_reader.rb (#5621)
+  * Add jekyll-pre-commit to plugins list (#5752)
+  * Update quickstart.md (#5758)
+  * Correct minor typo (#5764)
+  * Fix a markdown link to look properly on the web (#5769)
 
 ## 3.3.1 / 2016-11-14
 
