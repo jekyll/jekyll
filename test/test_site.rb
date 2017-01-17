@@ -49,6 +49,17 @@ class TestSite < JekyllUnitTest
       site = Site.new(site_configuration({ "baseurl" => "/blog" }))
       assert_equal "/blog", site.baseurl
     end
+
+    should "only include theme includes_path if the path exists" do
+      site = fixture_site({ "theme" => "test-theme" })
+      assert_equal [source_dir("_includes"), theme_dir("_includes")], site.includes_load_paths
+
+      allow(File).to receive(:directory?).with(theme_dir("_sass")).and_return(true)
+      allow(File).to receive(:directory?).with(theme_dir("_layouts")).and_return(true)
+      allow(File).to receive(:directory?).with(theme_dir("_includes")).and_return(false)
+      site = fixture_site({ "theme" => "test-theme" })
+      assert_equal [source_dir("_includes")], site.includes_load_paths
+    end
   end
   context "creating sites" do
     setup do
