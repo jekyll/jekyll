@@ -36,6 +36,7 @@
   * Sort gems in `docs/_config.yml` (#5746)
   * [site] Use defaults for docs and news-items (#5744)
   * Improve collections docs (#5691)
+  * Fix #5730: add gcc and make to the list of requirements (#5731)
 
 ### Development Fixes
 
