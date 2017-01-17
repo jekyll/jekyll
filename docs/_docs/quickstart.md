@@ -37,15 +37,14 @@ If you encounter any unexpected errors during the above, please refer to the alr
 
 `jekyll new <PATH>` installs a new Jekyll site at the path specified (relative to current directory). In this case, Jekyll will be installed in a directory called `myblog`. Here are some additional details:
 
-* To install the Jekyll site into the directory you're currently in, run `jekyll new .` If the existing directory isn't empty, you can pass the `--force` option with `jekyll new . --force`.  
+* To install the Jekyll site into the directory you're currently in, run `jekyll new .` If the existing directory isn't empty, you can pass the `--force` option with `jekyll new . --force`.
 * `jekyll new` automatically initiates `bundle install` to install the dependencies required. (If you don't want Bundler to install the gems, use `jekyll new myblog --skip-bundle`.)
 * By default, the Jekyll site installed by `jekyll new` uses a gem-based theme called [Minima](https://github.com/jekyll/minima). With [gem-based themes](../themes), some of the directories and files are stored in the theme-gem, hidden from your immediate view.
 * To learn about other parameters you can include with `jekyll new`, type `jekyll new --help`.
 
 When in doubt, use the <code>help</code> command to remind you of all available options and usage, it also works with the <code>new</code>, <code>build</code> and <code>serve</code> subcommands, e.g. <code>jekyll help new</code> or <code>jekyll help build</code>.
-{: .info }
+{: .note .info }
 
 ## Next steps
 
 Building a Jekyll site with the default theme is just the first step. The real magic happens when you start creating blog posts, using the front matter to control templates and layouts, and taking advantage of all the awesome configuration options Jekyll makes available.
-
