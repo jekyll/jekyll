@@ -55,6 +55,7 @@
   * New rubocop security checks (#5768)
   * test/helper: fix flaky plugin path test by removing calls to Dir.chdir without a block (#5779)
   * Use latest jemoji gem (#5782)
+  * Bump htmlproofer (#5781)
 
 ### Documentation
 
