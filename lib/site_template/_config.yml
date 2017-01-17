@@ -28,6 +28,7 @@ github_username:  jekyll
 markdown: kramdown
 theme: minima
 gems:
+  - jekyll-admin
   - jekyll-feed
 exclude:
   - Gemfile
