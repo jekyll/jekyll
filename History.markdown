@@ -83,6 +83,7 @@
   * Correct minor typo (#5764)
   * Fix a markdown link to look properly on the web (#5769)
   * [docs] Info about the help command usage (#5312)
+  * Add missing merge labels for jekyllbot (#5753)
 
 ## 3.3.1 / 2016-11-14
 
