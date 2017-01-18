@@ -373,6 +373,24 @@ class TestFilters < JekyllUnitTest
         assert_equal "http://example.com/base", filter.absolute_url(page_url)
       end
 
+      should "not append a forward slash if input is '/'" do
+        page_url = "/"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "/base"
+        })
+        assert_equal "http://example.com/base/", filter.absolute_url(page_url)
+      end
+
+      should "not append a forward slash if input is '/' and nil 'baseurl'" do
+        page_url = "/"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => nil
+        })
+        assert_equal "http://example.com/", filter.absolute_url(page_url)
+      end
+
       should "normalize international URLs" do
         page_url = ""
         filter = make_filter_mock({
