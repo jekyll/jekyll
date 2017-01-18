@@ -8,6 +8,7 @@
   * Update License (#5713)
   * Use Addressable instead of URI to decode (#5726)
   * throw IncludeTagError if error occurs in included file (#5767)
+  * Write Jekyll::Utils::Exec.run for running shell commands. (#5640)
 
 ### Bug Fixes
 
