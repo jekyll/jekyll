@@ -41,6 +41,7 @@
   * Improve collections docs (#5691)
   * Fix #5730: add gcc and make to the list of requirements (#5731)
   * Add missing class (#5791)
+  * Improve template docs (#5694)
 
 ### Development Fixes
 
