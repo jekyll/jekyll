@@ -377,7 +377,7 @@ class TestFilters < JekyllUnitTest
         page_url = "/"
         filter = make_filter_mock({
           "url"     => "http://example.com",
-          "baseurl" => "/base"
+          "baseurl" => "/base",
         })
         assert_equal "http://example.com/base/", filter.absolute_url(page_url)
       end
@@ -386,7 +386,7 @@ class TestFilters < JekyllUnitTest
         page_url = "/"
         filter = make_filter_mock({
           "url"     => "http://example.com",
-          "baseurl" => nil
+          "baseurl" => nil,
         })
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
