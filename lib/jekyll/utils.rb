@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Jekyll
   module Utils
@@ -14,12 +15,17 @@ module Jekyll
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
+    # Byte Order Marker. This is a weird Windows thing.
+    BOM = "\xEF\xBB\xBF"
+
+    # YAML front matter first line
+    YAML_FRONT_MATTER_FIRST_LINE =  %r!\A(#{BOM})?---\s*\r?\n!
+
     # Takes an indented string and removes the preceding spaces on each line
 
     def strip_heredoc(str)
       str.gsub(%r!^[ \t]{#{(str.scan(%r!^[ \t]*(?=\S)!).min || "").size}}!, "")
     end
-
     # Takes a slug and turns it into a simple title.
 
     def titleize_slug(slug)
@@ -139,7 +145,7 @@ module Jekyll
     # Returns true if the YAML front matter is present.
     # rubocop: disable PredicateName
     def has_yaml_header?(file)
-      !!(File.open(file, "rb", &:readline) =~ %r!\A---\s*\r?\n!)
+      !!(File.open(file, "rb", &:readline) =~ YAML_FRONT_MATTER_FIRST_LINE)
     rescue EOFError
       false
     end
