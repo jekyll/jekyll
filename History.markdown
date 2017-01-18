@@ -17,6 +17,7 @@
   * Use each instead of map to actually return nothing (#5668)
   * include: fix 'no implicit conversion of nil to String' (#5750)
   * Don't include the theme's includes_path if it is nil. (#5780)
+  * test double slash when input = '/' (#5542)
 
 ### Site Enhancements
 
