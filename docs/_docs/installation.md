@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Installation
 permalink: /docs/installation/
 ---
@@ -21,6 +20,7 @@ requirements you’ll need to make sure your system has before you start.
 - [NodeJS](https://nodejs.org/), or another JavaScript runtime (Jekyll 2 and
 earlier, for CoffeeScript support).
 - [Python 2.7](https://www.python.org/downloads/) (for Jekyll 2 and earlier)
+- [GCC](https://gcc.gnu.org/install/) and [Make](https://www.gnu.org/software/make/) (in case your system doesn't have them installed, which you can check by running `gcc -v` and `make -v` in your system's command line interface)
 
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>

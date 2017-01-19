@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Writing posts
 permalink: /docs/posts/
 ---
@@ -110,6 +109,24 @@ Linking to a PDF for readers to download:
     just <code>/path/file.jpg</code>.
   </p>
 </div>
+
+## A typical post
+
+Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including an Title, Layout, Publishing Date, and Categories might look like this:
+
+```
+---
+layout: post
+title:  "Welcome to Jekyll!"
+date:   2015-11-17 16:16:01 -0600
+categories: jekyll update
+---
+You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `bundle exec jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+
+To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+
+```
+Everything in between the first and second `---` are part of the YAML Front Matter, and everything after the second `---` will be rendered with Markdown and show up as "Content."
 
 ## Displaying an index of posts
 

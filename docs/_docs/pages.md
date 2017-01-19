@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Creating pages
 permalink: /docs/pages/
 ---

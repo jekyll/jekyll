@@ -1,7 +1,6 @@
 ---
 title: Making it easier to contribute to Jekyll
 description: We've made it easier to contribute to Jekyll by updating our contributing documentation and introducing Jekyll Affinity Teams, teams dedicated to specific aspects of the project.
-layout: news_item
 author: benbalter
 categories: [community]
 ---

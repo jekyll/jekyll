@@ -1,10 +1,10 @@
 ---
-layout: docs
 title: Quick-start guide
 permalink: /docs/quickstart/
 ---
 
-If you already have [Ruby](https://www.ruby-lang.org/en/downloads/) and [RubyGems](https://rubygems.org/pages/download) installed (see Jekyll's [requirements](../installation/#requirements)), you can create a new Jekyll site by doing the following:
+
+If you already have a full [Ruby](https://www.ruby-lang.org/en/downloads/) development environment with all headers and [RubyGems](https://rubygems.org/pages/download) installed (see Jekyll's [requirements](/docs/installation/#requirements/)), you can create a new Jekyll site by doing the following:
 
 ```sh
 # Install Jekyll and Bundler gems through RubyGems
@@ -21,6 +21,8 @@ If you already have [Ruby](https://www.ruby-lang.org/en/downloads/) and [RubyGem
 
 # Now browse to http://localhost:4000
 ```
+
+If you encounter any unexpected errors during the above, please refer to the already-mentioned [requirements](/docs/installation/#requirements/) page, as you might be missing development headers or other prerequisites.
 
 ## About Bundler
 
@@ -39,6 +41,9 @@ If you already have [Ruby](https://www.ruby-lang.org/en/downloads/) and [RubyGem
 * `jekyll new` automatically initiates `bundle install` to install the dependencies required. (If you don't want Bundler to install the gems, use `jekyll new myblog --skip-bundle`.)
 * By default, the Jekyll site installed by `jekyll new` uses a gem-based theme called [Minima](https://github.com/jekyll/minima). With [gem-based themes](../themes), some of the directories and files are stored in the theme-gem, hidden from your immediate view.
 * To learn about other parameters you can include with `jekyll new`, type `jekyll new --help`.
+
+When in doubt, use the <code>help</code> command to remind you of all available options and usage, it also works with the <code>new</code>, <code>build</code> and <code>serve</code> subcommands, e.g. <code>jekyll help new</code> or <code>jekyll help build</code>.
+{: .note .info }
 
 ## Next steps
 

@@ -1,6 +1,5 @@
 require "fileutils"
 require "jekyll"
-require "open3"
 require "time"
 require "safe_yaml/load"
 
@@ -103,26 +102,18 @@ def run_jekyll(args)
 end
 
 #
-
-# rubocop:disable Metrics/AbcSize
 def run_in_shell(*args)
-  i, o, e, p = Open3.popen3(*args)
-  out = o.read.strip
-  err = e.read.strip
+  p, output = Jekyll::Utils::Exec.run(*args)
 
-  [i, o, e].each(&:close)
-
-  File.write(Paths.status_file, p.value.exitstatus)
+  File.write(Paths.status_file, p.exitstatus)
   File.open(Paths.output_file, "wb") do |f|
     f.puts "$ " << args.join(" ")
-    f.puts out
-    f.puts err
-    f.puts "EXIT STATUS: #{p.value.exitstatus}"
+    f.puts output
+    f.puts "EXIT STATUS: #{p.exitstatus}"
   end
 
-  p.value
+  p
 end
-# rubocop:enable Metrics/AbcSize
 
 #
 
@@ -142,7 +133,7 @@ def location(folder, direction)
   end
 
   [before || ".",
-    after || "."]
+    after || ".",]
 end
 
 #
@@ -160,7 +151,7 @@ def seconds_agnostic_datetime(datetime = Time.now)
   [
     Regexp.escape(date),
     "#{time}:\\d{2}",
-    Regexp.escape(zone)
+    Regexp.escape(zone),
   ] \
     .join("\\ ")
 end

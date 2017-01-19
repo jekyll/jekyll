@@ -7,20 +7,20 @@ module Jekyll
       @entry_filter = EntryFilter.new(site)
     end
 
-    # Read all the files in <source>/<dir>/_drafts and create a new Draft
-    # object with each one.
+    # Read all the files in <dir> and adds them to @content
     #
     # dir - The String relative path of the directory to read.
     #
-    # Returns nothing.
+    # Returns @content, a Hash of the .yaml, .yml,
+    # .json, and .csv files in the base directory
     def read(dir)
       base = site.in_source_dir(dir)
       read_data_to(base, @content)
       @content
     end
 
-    # Read and parse all yaml files under <dir> and add them to the
-    # <data> variable.
+    # Read and parse all .yaml, .yml, .json, and .csv
+    # files under <dir> and add them to the <data> variable.
     #
     # dir - The string absolute path of the directory to read.
     # data - The variable to which data will be added.
@@ -54,7 +54,7 @@ module Jekyll
       when ".csv"
         CSV.read(path, {
           :headers  => true,
-          :encoding => site.config["encoding"]
+          :encoding => site.config["encoding"],
         }).map(&:to_hash)
       else
         SafeYAML.load_file(path)

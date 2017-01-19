@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll 3.2.1 Released with Fix for Windows'
 date: 2016-08-02 13:20:11 -0700
 author: parkr

@@ -112,8 +112,8 @@ eos
       def locate_include_file(context, file, safe)
         includes_dirs = tag_includes_dirs(context)
         includes_dirs.each do |dir|
-          path = File.join(dir, file)
-          return path if valid_include_file?(path, dir, safe)
+          path = File.join(dir.to_s, file.to_s)
+          return path if valid_include_file?(path, dir.to_s, safe)
         end
         raise IOError, "Could not locate the included file '#{file}' in any of "\
           "#{includes_dirs}. Ensure it exists in one of those directories and, "\
@@ -155,15 +155,19 @@ eos
         if cached_partial.key?(path)
           cached_partial[path]
         else
-          cached_partial[path] = context.registers[:site]
+          unparsed_file = context.registers[:site]
             .liquid_renderer
             .file(path)
-            .parse(read_file(path, context))
+          begin
+            cached_partial[path] = unparsed_file.parse(read_file(path, context))
+          rescue Liquid::SyntaxError => ex
+            raise IncludeTagError.new(ex.message, path)
+          end
         end
       end
 
       def valid_include_file?(path, dir, safe)
-        !(outside_site_source?(path, dir, safe) || !File.exist?(path))
+        !outside_site_source?(path, dir, safe) && File.file?(path)
       end
 
       def outside_site_source?(path, dir, safe)

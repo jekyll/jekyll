@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Sites using Jekyll
 permalink: /docs/sites/
 ---

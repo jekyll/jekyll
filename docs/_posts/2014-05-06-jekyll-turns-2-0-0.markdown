@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll turns 2.0.0'
 author: parkr
 version: 2.0.0

@@ -58,15 +58,15 @@ module Jekyll
       "defaults"          => [],
 
       "liquid"            => {
-        "error_mode" => "warn"
+        "error_mode" => "warn",
       },
 
       "rdiscount"         => {
-        "extensions" => []
+        "extensions" => [],
       },
 
       "redcarpet"         => {
-        "extensions" => []
+        "extensions" => [],
       },
 
       "kramdown"          => {
@@ -76,8 +76,8 @@ module Jekyll
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",
         "hard_wrap"     => false,
-        "footnote_nr"   => 1
-      }
+        "footnote_nr"   => 1,
+      },
     }.map { |k, v| [k, v.freeze] }].freeze
 
     class << self

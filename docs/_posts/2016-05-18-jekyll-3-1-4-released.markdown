@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll 3.1.4 "Stability Sam" Released'
 date: 2016-05-18 16:50:37 -0700
 author: parkr

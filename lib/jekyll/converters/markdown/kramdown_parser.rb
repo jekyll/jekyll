@@ -11,7 +11,7 @@ module Jekyll
           "line_numbers"      => "inline",
           "line_number_start" => 1,
           "tab_width"         => 4,
-          "wrap"              => "div"
+          "wrap"              => "div",
         }.freeze
 
         def initialize(config)
