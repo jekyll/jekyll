@@ -18,7 +18,7 @@ end
 #
 
 group :test do
-  gem "codeclimate-test-reporter", "~> 0.6.0"
+  gem "codeclimate-test-reporter", "~> 1.0.5"
   gem "cucumber", "~> 2.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
