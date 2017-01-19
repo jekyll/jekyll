@@ -15,7 +15,8 @@ A quick way to install Jekyll is to follow the [installation instructions by Dav
  2. Install Ruby via Chocolatey: `choco install ruby -y`
  3. Reopen a command prompt and install Jekyll: `gem install jekyll`
 
-Updates in the infrastructure of Ruby may cause SSL errors when attempting to use `gem install` with versions of the RubyGems package older than 2.6. (The RubyGems package installed via the Chocolatey tool is version 2.3) If you have installed an older version, you can update the RubyGems package using the directions [here.][ssl-certificate-update]
+Updates in the infrastructure of Ruby may cause SSL errors when attempting to use `gem install` with versions of the RubyGems package older than 2.6. (The RubyGems package installed via the Chocolatey tool is version 2.3) If you have installed an older version, you can update the RubyGems package using the directions [here][ssl-certificate-update].
+
 [ssl-certificate-update]: http://guides.rubygems.org/ssl-certificate-update/#installing-using-update-packages
 
 For a more conventional way of installing Jekyll you can follow this [complete guide to install Jekyll 3 on Windows by Sverrir Sigmundarson][windows-installjekyll3].
@@ -38,10 +39,10 @@ $ chcp 65001
 
 ## Timezone Management
 
-Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.  
+Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
 Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
 
-Jekyll now uses a rubygem to internally configure Timezone based on established [IANA Timezone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).  
+Jekyll now uses a rubygem to internally configure Timezone based on established [IANA Timezone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 While 'new' blogs created with Jekyll v3.4 and greater, will have the following added to their 'Gemfile' by default, existing sites *will* have to update their 'Gemfile' (and installed) to enable development on Windows:
 
 ```ruby

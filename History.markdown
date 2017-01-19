@@ -7,6 +7,8 @@
   * Use the current year for the LICENSE of theme (#5712)
   * Update License (#5713)
   * Use Addressable instead of URI to decode (#5726)
+  * throw IncludeTagError if error occurs in included file (#5767)
+  * Write Jekyll::Utils::Exec.run for running shell commands. (#5640)
 
 ### Bug Fixes
 
@@ -14,6 +16,9 @@
   * fix date parsing in file names to be stricter (#5609)
   * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
   * Use each instead of map to actually return nothing (#5668)
+  * include: fix 'no implicit conversion of nil to String' (#5750)
+  * Don't include the theme's includes_path if it is nil. (#5780)
+  * test double slash when input = '/' (#5542)
 
 ### Site Enhancements
 
@@ -33,6 +38,10 @@
   * Docs: move permalinks from documents into config (#5544)
   * Sort gems in `docs/_config.yml` (#5746)
   * [site] Use defaults for docs and news-items (#5744)
+  * Improve collections docs (#5691)
+  * Fix #5730: add gcc and make to the list of requirements (#5731)
+  * Add missing class (#5791)
+  * Improve template docs (#5694)
 
 ### Development Fixes
 
@@ -46,6 +55,13 @@
   * Rubocop: fix Rakefile and gemspec (#5745)
   * Use `assert_nil` (#5725)
   * Sort gems in `jekyll.gemspec` (#5746)
+  * Rubocop: Require consistent comma in multiline literals (#5761)
+  * Bump rubocop (#5765)
+  * New rubocop security checks (#5768)
+  * test/helper: fix flaky plugin path test by removing calls to Dir.chdir without a block (#5779)
+  * Use latest jemoji gem (#5782)
+  * Bump htmlproofer (#5781)
+  * Bump rubies we test against (#5784)
 
 ### Documentation
 
@@ -66,6 +82,12 @@
   * Fix a minor grammatical mistake on themes' document ### -dev (#5748)
   * Correct comments in data_reader.rb (#5621)
   * Add jekyll-pre-commit to plugins list (#5752)
+  * Update quickstart.md (#5758)
+  * Correct minor typo (#5764)
+  * Fix a markdown link to look properly on the web (#5769)
+  * [docs] Info about the help command usage (#5312)
+  * Add missing merge labels for jekyllbot (#5753)
+  * Fix broken links in documentation (#5736)
 
 ## 3.3.1 / 2016-11-14
 

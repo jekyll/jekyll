@@ -32,4 +32,4 @@ bundle exec jekyll build -s $SOURCE -d $DESTINATION --trace
 
 # 3.
 msg "Proofing..."
-time bundle exec htmlproof ./$DESTINATION --url-ignore $INGORE_HREFS $@
+time bundle exec htmlproofer ./$DESTINATION --url-ignore $INGORE_HREFS $@

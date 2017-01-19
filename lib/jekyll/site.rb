@@ -435,7 +435,7 @@ module Jekyll
     private
     def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
-      @includes_load_paths << theme.includes_path if self.theme
+      @includes_load_paths << theme.includes_path if theme && theme.includes_path
     end
 
     private
