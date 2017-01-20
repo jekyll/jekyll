@@ -69,7 +69,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-redirect-from"
   gem "kramdown", "~> 1.9"
   gem "mime-types", "~> 3.0"
-  gem "rdoc", "~> 4.2"
+  gem "rdoc", "~> 5.0"
   gem "toml", "~> 0.1.0"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
