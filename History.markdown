@@ -62,6 +62,7 @@
   * Use latest jemoji gem (#5782)
   * Bump htmlproofer (#5781)
   * Bump rubies we test against (#5784)
+  * Bump rdoc to v5.0 (#5797)
 
 ### Documentation
 
