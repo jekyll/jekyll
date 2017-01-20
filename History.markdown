@@ -88,6 +88,7 @@
   * [docs] Info about the help command usage (#5312)
   * Add missing merge labels for jekyllbot (#5753)
   * Fix broken links in documentation (#5736)
+  * Docs: add `match_regex` and `replace_regex` filters (#5799)
 
 ## 3.3.1 / 2016-11-14
 
