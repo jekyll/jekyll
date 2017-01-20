@@ -803,6 +803,8 @@ LESS.js files during generation.
 - [jekyll-typogrify](https://github.com/myles/jekyll-typogrify): A Jekyll plugin that brings the functions of [typogruby](http://avdgaag.github.io/typogruby/).
 - [Jekyll Email Protect](https://github.com/vwochnik/jekyll-email-protect): Email protection liquid filter for Jekyll
 - [Jekyll Uglify Filter](https://github.com/mattg/jekyll-uglify-filter): A Liquid filter that runs your JavaScript through UglifyJS.
+- [match_regex](https://github.com/sparanoid/match_regex): A Liquid filter to perform regex match.
+- [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
 
 #### Tags
 
