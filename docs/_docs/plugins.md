@@ -805,6 +805,7 @@ LESS.js files during generation.
 - [Jekyll Uglify Filter](https://github.com/mattg/jekyll-uglify-filter): A Liquid filter that runs your JavaScript through UglifyJS.
 - [match_regex](https://github.com/sparanoid/match_regex): A Liquid filter to perform regex match.
 - [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
+- [Jekyll Money](https://rubygems.org/gems/jekyll-money): A Jekyll plugin for dealing with money. Because we all have to at some point.
 
 #### Tags
 
