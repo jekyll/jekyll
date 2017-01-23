@@ -6,7 +6,7 @@ version: 3.4.0
 categories: [release]
 ---
 
-Hey there! We have a quick updated of Jekyll for you to enjoy this January.
+Hey there! We have a quick update of Jekyll for you to enjoy this January.
 Packed full of bug fixes as usual, thanks to the tireless efforts of our
 exceptional Jekyll community. Three changes to call out:
 
