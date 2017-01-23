@@ -91,6 +91,7 @@
   * Fix broken links in documentation (#5736)
   * Docs: add `match_regex` and `replace_regex` filters (#5799)
   * Got that diaper money? (#5810)
+  * Sort content by popularity using Google Analytics (#5812)
 
 ## 3.3.1 / 2016-11-14
 
