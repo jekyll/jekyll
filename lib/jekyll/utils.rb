@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# encoding: UTF-8
 
 module Jekyll
   module Utils
@@ -15,11 +15,8 @@ module Jekyll
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
-    # Byte Order Marker. This is a weird Windows thing.
-    BOM = "\xEF\xBB\xBF"
-
     # YAML front matter first line
-    YAML_FRONT_MATTER_FIRST_LINE =  %r!\A(#{BOM})?---\s*\r?\n!
+    YAML_FRONT_MATTER_FIRST_LINE =  %r!\A---\s*\r?\n!
 
     # Takes an indented string and removes the preceding spaces on each line
 
@@ -145,7 +142,14 @@ module Jekyll
     # Returns true if the YAML front matter is present.
     # rubocop: disable PredicateName
     def has_yaml_header?(file)
-      !!(File.open(file, "rb", &:readline) =~ YAML_FRONT_MATTER_FIRST_LINE)
+      opts = {
+        #external_encoding: "BOM|UTF-8",
+        #internal_encoding: "BOM|UTF-8",
+        encoding: "BOM|UTF-8:BOM|UTF-8",
+        binmode: true
+      }
+
+      !!(File.open(file, opts, &:readline) =~ YAML_FRONT_MATTER_FIRST_LINE)
     rescue EOFError
       false
     end
