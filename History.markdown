@@ -94,6 +94,7 @@
   * Sort content by popularity using Google Analytics (#5812)
   * Rework CI doc to include multiple providers. (#5815)
   * Improve theme docs (#5690)
+  * Add mention of classifier-reborn for LSI (#5811)
 
 ## 3.3.1 / 2016-11-14
 
