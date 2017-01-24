@@ -25,16 +25,11 @@ Before you start, make sure your system has the following:
 - [Python 2.7](https://www.python.org/downloads/)
 
 <div class="note info">
-  <h5>Running Jekyll on Ubuntu</h5>
+  <h5>Problems installing Jekyll?</h5>
   <p>
-    Users of Jekyll on Ubuntu have reported encountering 
-    <i>Could not locate Gemfile or .bundle/ directory</i> error messages at the 
-    <code>bundle exec jekyll serve</code> step in the <a href="../quickstart/">Quick-start guide</a>.
-    The likely cause is that all installation requirements have not been fully met.
-    Recent stock Ubuntu distributions require the installation of both the <code>ruby</code> and <code>ruby-all-dev</code>
-    packages, e.g. via <code>sudo apt-get install ruby ruby-all-dev</code> (RubyGems should be included in <code>ruby</code>).
-    The <code>ruby-all-dev</code> .deb package in particular contains development header files whose absence causes 
-    the above error message.
+    Check out the <a href="../troubleshooting/">troubleshooting</a> page or
+    <a href="{{ site.repository }}/issues/new">report an issue</a> so the
+    Jekyll community can improve the experience for everyone.
   </p>
 </div>
 
@@ -58,10 +53,7 @@ $ gem install jekyll
 ```
 
 All of Jekyll’s gem dependencies are automatically installed by the above
-command, so you won’t have to worry about them at all. If you have problems
-installing Jekyll, check out the [troubleshooting](../troubleshooting/) page or
-[report an issue]({{ site.repository }}/issues/new) so the Jekyll
-community can improve the experience for everyone.
+command, so you won’t have to worry about them at all.
 
 <div class="note info">
   <h5>Installing Xcode Command-Line Tools</h5>
