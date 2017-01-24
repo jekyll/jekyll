@@ -15,7 +15,7 @@ even bigger fan of [`group_by_exp`](/docs/filters/).
 2. Using a custom timezone in Jekyll on Windows? Yeah, sorry that hasn't ever worked
    properly. We made it possible to accurately [set the timezone using IANA
    timezone codes](https://jekyllrb.com/docs/windows/#timezone-management).
-3. New users should
+3. Documentation has been improved, notably on themes, includes and permalinks.
 
 And [lots and lots more!](/docs/history/#v3-4-0)
 
