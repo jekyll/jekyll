@@ -8,7 +8,7 @@ Building, testing, and deploying your Jekyll-generated website can quickly be do
 [1]: https://github.com/
 [2]: https://bitbucket.org/
 
-## Follow Your Project on CircleCI
+## 1. Follow Your Project on CircleCI
 
 To start building your project on CircleCI, all you need to do is 'follow' your project from CircleCI's website:
 
@@ -19,7 +19,7 @@ To start building your project on CircleCI, all you need to do is 'follow' your 
 
 [3]: https://circleci.com/docs/configuration/
 
-## Dependencies
+## 2. Dependencies
 
 The easiest way to manage dependencies for a Jekyll project (with or without CircleCI) is via a [Gemfile][4]. You'd want to have Jekyll, any Jekyll plugins, [HTML Proofer](#html-proofer), and any other gems that you are using in the `Gemfile`. Don't forget to version `Gemfile.lock` as well. Here's an example `Gemfile`:
 
@@ -36,7 +36,7 @@ gem 'html-proofer'
 
 CircleCI detects when `Gemfile` is present is will automatically run `bundle install` for you in the `dependencies` phase.
 
-## Testing
+## 3. Testing
 
 The most basic test that can be run is simply seeing if `jekyll build` actually works. This is a blocker, a dependency if you will,  for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
 
