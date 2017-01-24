@@ -95,6 +95,7 @@
   * Rework CI doc to include multiple providers. (#5815)
   * Improve theme docs (#5690)
   * Add mention of classifier-reborn for LSI (#5811)
+  * Added note about --blank flag (#5802)
 
 ## 3.3.1 / 2016-11-14
 
