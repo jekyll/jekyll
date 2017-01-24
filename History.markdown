@@ -4,11 +4,11 @@
 
   * Add connector param to `array_to_sentence_string` filter (#5597)
   * Adds `group_by_exp` filter (#5513)
-  * Use the current year for the LICENSE of theme (#5712)
-  * Update License (#5713)
   * Use Addressable instead of URI to decode (#5726)
   * throw IncludeTagError if error occurs in included file (#5767)
   * Write Jekyll::Utils::Exec.run for running shell commands. (#5640)
+  * Use the current year for the LICENSE of theme (#5712)
+  * Update License (#5713)
 
 ### Bug Fixes
 
@@ -22,24 +22,12 @@
 
 ### Site Enhancements
 
-  * Remove instructions to install Jekyll 2 on Windows (#5582)
-  * Fix example URL inconsistency (#5592)
-  * Replace backticks within HTML blocks with HTML tags (#5435)
-  * Add jekyll-migrate-permalink (#5600)
-  * Fix bad config YAML in collections example (#5587)
-  * Bring documentation on 'Directory Structure' up-to-date (#5573)
   * Use only the used Font Awesome icons. (#5530)
   * Switch to `https` when possible. (#5611)
   * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
   * Update documentation on updating FontAwesome Iconset (#5655)
-  * Improve quickstart docs (#5689)
-  * Add Jekyll-Post to list of plugins (#5705)
-  * Add jekyll-numbered-headings (#5688)
-  * Docs: move permalinks from documents into config (#5544)
-  * Sort gems in `docs/_config.yml` (#5746)
   * [site] Use defaults for docs and news-items (#5744)
-  * Improve collections docs (#5691)
-  * Fix #5730: add gcc and make to the list of requirements (#5731)
+  * Sort gems in `docs/_config.yml` (#5746)
   * Add missing class (#5791)
 
 ### Development Fixes
@@ -64,6 +52,18 @@
 
 ### Documentation
 
+  * Improve quickstart docs (#5689)
+  * Add Jekyll-Post to list of plugins (#5705)
+  * Add jekyll-numbered-headings (#5688)
+  * Docs: move permalinks from documents into config (#5544)
+  * Improve collections docs (#5691)
+  * Fix #5730: add gcc and make to the list of requirements (#5731)
+  * Remove instructions to install Jekyll 2 on Windows (#5582)
+  * Fix example URL inconsistency (#5592)
+  * Replace backticks within HTML blocks with HTML tags (#5435)
+  * Add jekyll-migrate-permalink (#5600)
+  * Fix bad config YAML in collections example (#5587)
+  * Bring documentation on 'Directory Structure' up-to-date (#5573)
   * Fixed typo (#5632)
   * use backticks for Gemfile for consistency since in the next sentence … (#5641)
   * Update Core team list in the README file (#5643)
