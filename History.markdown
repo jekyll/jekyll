@@ -92,6 +92,7 @@
   * Docs: add `match_regex` and `replace_regex` filters (#5799)
   * Got that diaper money? (#5810)
   * Sort content by popularity using Google Analytics (#5812)
+  * Rework CI doc to include multiple providers. (#5815)
 
 ## 3.3.1 / 2016-11-14
 
