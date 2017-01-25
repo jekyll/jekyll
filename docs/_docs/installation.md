@@ -10,7 +10,7 @@ encountered and how we might make the process easier.
 
 ### Requirements
 
-Installing Jekyll ought to be straight-forward if all requirements are met.
+Installing Jekyll should be straight-forward if all requirements are met.
 Before you start, make sure your system has the following:
 
 - GNU/Linux, Unix, or macOS
