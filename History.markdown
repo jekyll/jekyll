@@ -96,6 +96,7 @@
   * Improve theme docs (#5690)
   * Add mention of classifier-reborn for LSI (#5811)
   * Added note about --blank flag (#5802)
+  * Fixed inaccuracy in "Built-in permalink styles" docs (#5819)
 
 ## 3.3.1 / 2016-11-14
 
