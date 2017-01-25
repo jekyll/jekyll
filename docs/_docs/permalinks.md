@@ -230,7 +230,7 @@ Although you can specify a custom permalink pattern using [template variables](#
 </table>
 </div>
 
-Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: date`.
+Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: pretty`.
 
 <div class="note info">
 <h5>Specifying permalinks through the YAML Front Matter</h5>
