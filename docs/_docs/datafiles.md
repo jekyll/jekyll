@@ -72,7 +72,7 @@ You can now render the list of members in a template:
 ```
 
 {: .note .info }
-If your Jekyll site has a lot of pages, such as with documentation websites, see the detailed examples in [how to build robust navigation for your site](../navigation). 
+If your Jekyll site has a lot of pages, such as with documentation websites, see the detailed examples in [how to build robust navigation for your site]({% link _tutorials/navigation.md %}).
 
 ## Example: Organizations
 
