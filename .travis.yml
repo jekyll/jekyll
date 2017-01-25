@@ -45,3 +45,6 @@ addons:
         DA4vsRURfABU0fIhwYkQuZqEcA3d8TL36BZcGEshG6MQ2AmnYsmFiTcxqV5bmlElHEqQuT\
         5SUFXLafgZPBnL0qDwujQcHukID41sE=\
       "
+# regular test configuration
+after_success:
+  - bundle exec codeclimate-test-reporter
