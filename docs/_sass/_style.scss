@@ -459,6 +459,9 @@ aside {
       top: 0;
       left: -30px;
     }
+    &.current a {
+        color: #f90;
+    }
   }
 }
 
