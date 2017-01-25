@@ -1,6 +1,7 @@
 ---
-layout: docs
-permalink: /docs/navigation
+layout: tutorials
+permalink: /tutorials/navigation/
+title: Navigation
 ---
 
 If your Jekyll site has a lot of pages, you might want to create navigation for the pages. Instead of hard-coding navigation links, you can programmatically retrieve a list of pages to build the navigation for your site.

@@ -16,6 +16,8 @@ collections:
   posts:
     permalink: /news/:year/:month/:day/:title/
     output: true
+  tutorials:
+    output: true
 
 name: Jekyll • Simple, blog-aware, static sites
 description: Transform your plain text into static websites and blogs

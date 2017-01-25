@@ -5,6 +5,9 @@
   <li class="{% if page.url contains '/docs/' %}current{% endif %}">
     <a href="/docs/home/">Docs</a>
   </li>
+  <li class="{% if page.url contains '/tutorials/' %}current{% endif %}">
+    <a href="/tutorials/home/">Tutorials</a>
+  </li>
   <li class="{% if page.author %}current{% endif %}">
     <a href="/news/">News</a>
   </li>
@@ -15,6 +18,6 @@
     <a href="/help/">Help</a>
   </li>
   <li>
-    <a href="{{ site.repository }}"><span class="hide-on-mobiles">View on </span>GitHub</a>
+    <a href="{{ site.repository }}">GitHub</a>
   </li>
 </ul>
