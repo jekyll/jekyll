@@ -28,7 +28,7 @@ Hansen, Kevin Wojniak, Kurt Anderson, Longwelwind, Max Chadwick, Nicolas
 Hoizey, Nursen, Parker Moore, Pat Hawks, Purplecarrot, Ricardo N Feliciano,
 Rob Crocombe, Roger Ogden, Skylar Challand, Thiago Arrais, Tim Banks, Tom
 Johnson, Tunghsiao Liu, XhmikosR, Zlatan Vasović, alexmalik, brainscript,
-jona, kimbaudi, muratayusuke, penny, and yoostk.
+kimbaudi, muratayusuke, penny, and yoostk.
 
 As always, if you encounter bugs, please do [search the issues]({{ site.repository }}/issues)
 and [file an issue]({{ site.repository }}/issues/new) if you aren't able to
