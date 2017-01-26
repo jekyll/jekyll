@@ -19,6 +19,7 @@
   * include: fix 'no implicit conversion of nil to String' (#5750)
   * Don't include the theme's includes_path if it is nil. (#5780)
   * test double slash when input = '/' (#5542)
+  * use logger.info for related posts (#5822)
 
 ### Site Enhancements
 
@@ -29,6 +30,7 @@
   * [site] Use defaults for docs and news-items (#5744)
   * Sort gems in `docs/_config.yml` (#5746)
   * Add missing class (#5791)
+  * Improve template docs (#5694)
 
 ### Development Fixes
 
@@ -49,6 +51,8 @@
   * Use latest jemoji gem (#5782)
   * Bump htmlproofer (#5781)
   * Bump rubies we test against (#5784)
+  * Bump rdoc to v5.0 (#5797)
+  * Bump codeclimate-test-reporter to v1.0.5 (#5798)
 
 ### Documentation
 
@@ -86,6 +90,15 @@
   * Fix a markdown link to look properly on the web (#5769)
   * [docs] Info about the help command usage (#5312)
   * Add missing merge labels for jekyllbot (#5753)
+  * Fix broken links in documentation (#5736)
+  * Docs: add `match_regex` and `replace_regex` filters (#5799)
+  * Got that diaper money? (#5810)
+  * Sort content by popularity using Google Analytics (#5812)
+  * Rework CI doc to include multiple providers. (#5815)
+  * Improve theme docs (#5690)
+  * Add mention of classifier-reborn for LSI (#5811)
+  * Added note about --blank flag (#5802)
+  * Fixed inaccuracy in "Built-in permalink styles" docs (#5819)
 
 ## 3.3.1 / 2016-11-14
 

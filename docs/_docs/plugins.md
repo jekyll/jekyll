@@ -753,6 +753,7 @@ LESS.js files during generation.
 - [Jekyll::Paginate::Category](https://github.com/midnightSuyama/jekyll-paginate-category): Pagination Generator for Jekyll Category.
 - [AMP-Jekyll by Juuso Mikkonen](https://github.com/juusaw/amp-jekyll): Generate [Accelerated Mobile Pages](https://www.ampproject.org) of Jekyll posts.
 - [Jekyll Art Gallery plugin](https://github.com/alexivkin/Jekyll-Art-Gallery-Plugin): An advanced art/photo gallery generation plugin for creating galleries from a set of image folders. Supports image tagging, thumbnails, sorting, image rotation, post-processing (remove EXIF, add watermark), multiple collections and much more.
+- [jekyll-ga](https://github.com/developmentseed/jekyll-ga): A Jekyll plugin that downloads Google Analytics data and adds it to posts. Useful for making a site that lists "most popular" content. [Read the introduction](https://developmentseed.org/blog/google-analytics-jekyll-plugin/) post on the developmentSEED blog.
 
 #### Converters
 
@@ -803,6 +804,9 @@ LESS.js files during generation.
 - [jekyll-typogrify](https://github.com/myles/jekyll-typogrify): A Jekyll plugin that brings the functions of [typogruby](http://avdgaag.github.io/typogruby/).
 - [Jekyll Email Protect](https://github.com/vwochnik/jekyll-email-protect): Email protection liquid filter for Jekyll
 - [Jekyll Uglify Filter](https://github.com/mattg/jekyll-uglify-filter): A Liquid filter that runs your JavaScript through UglifyJS.
+- [match_regex](https://github.com/sparanoid/match_regex): A Liquid filter to perform regex match.
+- [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
+- [Jekyll Money](https://rubygems.org/gems/jekyll-money): A Jekyll plugin for dealing with money. Because we all have to at some point.
 
 #### Tags
 

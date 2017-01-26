@@ -18,7 +18,7 @@ end
 #
 
 group :test do
-  gem "codeclimate-test-reporter", "~> 0.6.0"
+  gem "codeclimate-test-reporter", "~> 1.0.5"
   gem "cucumber", "~> 2.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
@@ -69,7 +69,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-redirect-from"
   gem "kramdown", "~> 1.9"
   gem "mime-types", "~> 3.0"
-  gem "rdoc", "~> 4.2"
+  gem "rdoc", "~> 5.0"
   gem "toml", "~> 0.1.0"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do

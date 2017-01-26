@@ -10,8 +10,8 @@ def jruby?
 end
 
 if ENV["CI"]
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
+  require "simplecov"
+  SimpleCov.start
 else
   require File.expand_path("../simplecov_custom_profile", __FILE__)
   SimpleCov.start "gem" do

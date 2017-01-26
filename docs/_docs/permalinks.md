@@ -230,7 +230,7 @@ Although you can specify a custom permalink pattern using [template variables](#
 </table>
 </div>
 
-Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: date`.
+Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: pretty`.
 
 <div class="note info">
 <h5>Specifying permalinks through the YAML Front Matter</h5>
@@ -327,7 +327,7 @@ As with posts, if you use a permalink style that omits the `.html` file extensio
 
 By default, collections follow a similar structure in the `_site` folder as pages, except that the path is prefaced by the collection name. For example: `collectionname/mypage.html`. For permalink settings that omit the file extension, the path would be `collection_name/mypage/index.html`.
 
-Collections have their own way of setting permalinks. Additionally, collections have unique template variables available available (such as `path` and `output_ext`). See the [Configuring permalinks for collections]( ../collections#permalinks ) in Collections for more information.
+Collections have their own way of setting permalinks. Additionally, collections have unique template variables available available (such as `path` and `output_ext`). See the [Configuring permalinks for collections](../collections/#permalinks) in Collections for more information.
 
 ## Flattening pages in \_site on build
 

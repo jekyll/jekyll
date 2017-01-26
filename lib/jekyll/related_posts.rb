@@ -26,15 +26,15 @@ module Jekyll
     def build_index
       self.class.lsi ||= begin
         lsi = ClassifierReborn::LSI.new(:auto_rebuild => false)
-        display("Populating LSI...")
+        Jekyll.logger.info("Populating LSI...")
 
         site.posts.docs.each do |x|
           lsi.add_item(x)
         end
 
-        display("Rebuilding index...")
+        Jekyll.logger.info("Rebuilding index...")
         lsi.build_index
-        display("")
+        Jekyll.logger.info("")
         lsi
       end
     end
@@ -45,12 +45,6 @@ module Jekyll
 
     def most_recent_posts
       @most_recent_posts ||= (site.posts.docs.reverse - [post]).first(10)
-    end
-
-    def display(output)
-      $stdout.print("\n")
-      $stdout.print(Jekyll.logger.formatted_topic(output))
-      $stdout.flush
     end
   end
 end
