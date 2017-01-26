@@ -20,7 +20,15 @@ even bigger fan of [`group_by_exp`](/docs/filters/).
 And [lots and lots more!](/docs/history/#v3-4-0)
 
 This update was made possible by the dedicated efforts of our excellent
-contributors: Frank Taillandier, Tom Johnson, Ashwin Maroli, Parker Moore, Pat Hawks, alexmalik, Thiago Arrais, Nursen, Eldritch Cheese, XhmikosR, Roger Ogden, Ricardo N Feliciano, Nicolas Hoizey, Max Chadwick, Kenton Hansen, Josh Habdas, penny, Zlatan Vasović, yoostk, Tunghsiao Liu, Tim Banks, Skylar Challand, Rob Crocombe, Purplecarrot, muratayusuke, Longwelwind, Kurt Anderson, kimbaudi, Kevin Wojniak, Ivan Dmitrievsky, Hugo, Florian Thomas, Fabrice Laporte, Don Denton, Dmitrii Evdokimov, Dean Attali, Chayoung You, Chase, brainscript, BlueberryFoxtrot, Alexey Rogachev, Ajay Karwal.
+contributors: Ajay Karwal, Alexey Rogachev, Ashwin Maroli,
+BlueberryFoxtrot, Chase, Chayoung You, Dean Attali, Dmitrii Evdokimov, Don
+Denton, Eldritch Cheese, Fabrice Laporte, Florian Thomas, Frank
+Taillandier, Hugo, Ivan Dmitrievsky, Joel Meyer-Hamme, Josh Habdas, Kenton
+Hansen, Kevin Wojniak, Kurt Anderson, Longwelwind, Max Chadwick, Nicolas
+Hoizey, Nursen, Parker Moore, Pat Hawks, Purplecarrot, Ricardo N Feliciano,
+Rob Crocombe, Roger Ogden, Skylar Challand, Thiago Arrais, Tim Banks, Tom
+Johnson, Tunghsiao Liu, XhmikosR, Zlatan Vasović, alexmalik, brainscript,
+jona, kimbaudi, muratayusuke, penny, and yoostk.
 
 As always, if you encounter bugs, please do [search the issues]({{ site.repository }}/issues)
 and [file an issue]({{ site.repository }}/issues/new) if you aren't able to
