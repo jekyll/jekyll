@@ -64,6 +64,7 @@
   * Bump htmlproofer (#5781)
   * Bump rubies we test against (#5784)
   * Bump rdoc to v5.0 (#5797)
+  * Bump codeclimate-test-reporter to v1.0.5 (#5798)
 
 ### Documentation
 
