@@ -55,12 +55,32 @@ module Jekyll
           source      = options["source"]
           destination = options["destination"]
           incremental = options["incremental"]
+          parallel    = options["parallel"]
+
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
           Jekyll.logger.info "Incremental build:",
             (incremental ? "enabled" : "disabled. Enable with --incremental")
-          Jekyll.logger.info "Generating..."
-          process_site(site)
+
+          if parallel
+            processes = (ENV['JEKYLL_PROCESSES'] ||= 4.to_s).to_i
+
+            processes.times do |i|
+              Jekyll.logger.info "Spawning parallel worker #{i}"
+
+              fork do
+                ENV['JEKYLL_PROCESS'] = i.to_s
+                Jekyll.logger.info "Generating..."
+                process_site(site)
+              end
+            end
+
+            Process.waitall
+          else
+            Jekyll.logger.info "Generating..."
+            process_site(site)
+          end
+
           Jekyll.logger.info "", "done in #{(Time.now - t).round(3)} seconds."
         end
 
