@@ -1,3 +1,9 @@
+## HEAD
+
+### Minor Enhancements
+
+  * Upgrade to Liquid v4 (#4362)
+
 ## 3.4.0 / 2016-01-27
 
 ### Minor Enhancements
