@@ -4,6 +4,10 @@
 
   * Upgrade to Liquid v4 (#4362)
 
+### Documentation
+
+  * Install troubleshooting on Ubuntu (#5817)
+
 ## 3.4.0 / 2016-01-27
 
 ### Minor Enhancements
