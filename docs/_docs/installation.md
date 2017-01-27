@@ -10,17 +10,33 @@ encountered and how we might make the process easier.
 
 ### Requirements
 
-Installing Jekyll is easy and straight-forward, but there are a few
-requirements you’ll need to make sure your system has before you start.
+Installing Jekyll ought to be straight-forward if all requirements are met.
+Before you start, make sure your system has the following:
 
-- [Ruby](https://www.ruby-lang.org/en/downloads/) (including development
-  headers, v1.9.3 or above for Jekyll 2 and v2 or above for Jekyll 3)
+- GNU/Linux, Unix, or macOS
+- [Ruby](https://www.ruby-lang.org/en/downloads/) version 2.0 or above, including all development
+  headers
 - [RubyGems](https://rubygems.org/pages/download)
-- Linux, Unix, or macOS
-- [NodeJS](https://nodejs.org/), or another JavaScript runtime (Jekyll 2 and
-earlier, for CoffeeScript support).
-- [Python 2.7](https://www.python.org/downloads/) (for Jekyll 2 and earlier)
 - [GCC](https://gcc.gnu.org/install/) and [Make](https://www.gnu.org/software/make/) (in case your system doesn't have them installed, which you can check by running `gcc -v` and `make -v` in your system's command line interface)
+
+#### Only required for Jekyll 2 and earlier
+
+- [NodeJS](https://nodejs.org/), or another JavaScript runtime (for CoffeeScript support).
+- [Python 2.7](https://www.python.org/downloads/)
+
+<div class="note info">
+  <h5>Running Jekyll on Ubuntu</h5>
+  <p>
+    Users of Jekyll on Ubuntu have reported encountering 
+    <i>Could not locate Gemfile or .bundle/ directory</i> error messages at the 
+    <code>bundle exec jekyll serve</code> step in the <a href="../quickstart/">Quick-start guide</a>.
+    The likely cause is that all installation requirements have not been fully met.
+    Recent stock Ubuntu distributions require the installation of both the <code>ruby</code> and <code>ruby-all-dev</code>
+    packages, e.g. via <code>sudo apt-get install ruby ruby-all-dev</code> (RubyGems should be included in <code>ruby</code>).
+    The <code>ruby-all-dev</code> .deb package in particular contains development header files whose absence causes 
+    the above error message.
+  </p>
+</div>
 
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>
