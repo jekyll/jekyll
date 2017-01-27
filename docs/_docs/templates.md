@@ -434,8 +434,7 @@ For more advanced information on using includes, see [Includes](../includes).
 
 Jekyll has built in support for syntax highlighting of over 60 languages
 thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
-in Jekyll 3 and above. To use it in Jekyll 2, set `highlighter` to `rouge`
-and ensure the `rouge` gem is installed properly.
+in Jekyll 3 and above.
 
 Alternatively, you can use [Pygments](http://pygments.org) to highlight
 your code snippets. To use Pygments, you must have Python installed on your
