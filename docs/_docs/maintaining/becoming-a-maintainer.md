@@ -1,7 +1,5 @@
 ---
 title: "Becoming a Maintainer"
-layout: docs
-permalink: /docs/maintaining/becoming-a-maintainer/
 ---
 
 **This guide is for contributors.** These special people have contributed to one or more of Jekyll's repositories, but do not yet have write access to any. You may find what is written here interesting, but it’s definitely not for everyone.
@@ -37,4 +35,4 @@ We would love to expand the team and look forward to many more community members
 
 # Helping Out Elsewhere
 
-In addition to maintainers of our core and plugin code, the Jekyll team is comprised of moderators for our forums. These helpful community members take a look at the topics posted to https://talk.jekyllrb.com and ensure they are properly categorized and are acceptable under our Code of Conduct. If you would like to be a moderator, email one of the maintainers with links to where you have answered questions and a request to be added as a moderator. More help is always welcome.
+In addition to maintainers of our core and plugin code, the Jekyll team is comprised of moderators for our forums. These helpful community members take a look at the topics posted to [https://talk.jekyllrb.com](https://talk.jekyllrb.com) and ensure they are properly categorized and are acceptable under our Code of Conduct. If you would like to be a moderator, email one of the maintainers with links to where you have answered questions and a request to be added as a moderator. More help is always welcome.

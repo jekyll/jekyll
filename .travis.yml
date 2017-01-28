@@ -6,10 +6,10 @@ sudo: false
 
 rvm:
   - &ruby1 2.4.0
-  - &ruby2 2.3.1
-  - &ruby3 2.2.5
-  - &ruby4 2.1.9
-  - &jruby jruby-9.1.2.0
+  - &ruby1 2.3.3
+  - &ruby2 2.2.6
+  - &ruby3 2.1.9
+  - &jruby jruby-9.1.7.0
 
 matrix:
   include:
@@ -46,3 +46,6 @@ addons:
         DA4vsRURfABU0fIhwYkQuZqEcA3d8TL36BZcGEshG6MQ2AmnYsmFiTcxqV5bmlElHEqQuT\
         5SUFXLafgZPBnL0qDwujQcHukID41sE=\
       "
+# regular test configuration
+after_success:
+  - bundle exec codeclimate-test-reporter

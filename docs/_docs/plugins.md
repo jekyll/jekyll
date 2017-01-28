@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Plugins
 permalink: /docs/plugins/
 ---
@@ -754,6 +753,7 @@ LESS.js files during generation.
 - [Jekyll::Paginate::Category](https://github.com/midnightSuyama/jekyll-paginate-category): Pagination Generator for Jekyll Category.
 - [AMP-Jekyll by Juuso Mikkonen](https://github.com/juusaw/amp-jekyll): Generate [Accelerated Mobile Pages](https://www.ampproject.org) of Jekyll posts.
 - [Jekyll Art Gallery plugin](https://github.com/alexivkin/Jekyll-Art-Gallery-Plugin): An advanced art/photo gallery generation plugin for creating galleries from a set of image folders. Supports image tagging, thumbnails, sorting, image rotation, post-processing (remove EXIF, add watermark), multiple collections and much more.
+- [jekyll-ga](https://github.com/developmentseed/jekyll-ga): A Jekyll plugin that downloads Google Analytics data and adds it to posts. Useful for making a site that lists "most popular" content. [Read the introduction](https://developmentseed.org/blog/google-analytics-jekyll-plugin/) post on the developmentSEED blog.
 
 #### Converters
 
@@ -771,7 +771,6 @@ LESS.js files during generation.
 - [Markdown References by Olov Lassus](https://github.com/olov/jekyll-references): Keep all your markdown reference-style link definitions in one \_references.md file.
 - [Stylus Converter](https://gist.github.com/988201): Convert .styl to .css.
 - [ReStructuredText Converter](https://github.com/xdissent/jekyll-rst): Converts ReST documents to HTML with Pygments syntax highlighting.
-- [Jekyll-pandoc-plugin](https://github.com/dsanson/jekyll-pandoc-plugin): Use pandoc for rendering markdown.
 - [Jekyll-pandoc-multiple-formats](https://github.com/fauno/jekyll-pandoc-multiple-formats) by [edsl](https://github.com/edsl): Use pandoc to generate your site in multiple formats. Supports pandoc’s markdown extensions.
 - [Transform Layouts](https://gist.github.com/1472645): Allows HAML layouts (you need a HAML Converter plugin for this to work).
 - [Org-mode Converter](https://gist.github.com/abhiyerra/7377603): Org-mode converter for Jekyll.
@@ -805,6 +804,9 @@ LESS.js files during generation.
 - [jekyll-typogrify](https://github.com/myles/jekyll-typogrify): A Jekyll plugin that brings the functions of [typogruby](http://avdgaag.github.io/typogruby/).
 - [Jekyll Email Protect](https://github.com/vwochnik/jekyll-email-protect): Email protection liquid filter for Jekyll
 - [Jekyll Uglify Filter](https://github.com/mattg/jekyll-uglify-filter): A Liquid filter that runs your JavaScript through UglifyJS.
+- [match_regex](https://github.com/sparanoid/match_regex): A Liquid filter to perform regex match.
+- [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
+- [Jekyll Money](https://rubygems.org/gems/jekyll-money): A Jekyll plugin for dealing with money. Because we all have to at some point.
 
 #### Tags
 
@@ -918,6 +920,9 @@ LESS.js files during generation.
 - [jekyll-data](https://github.com/ashmaroli/jekyll-data): Read data files within Jekyll Theme Gems.
 - [jekyll-pinboard](https://github.com/snaptortoise/jekyll-pinboard-plugin): Access your Pinboard bookmarks within your Jekyll theme.
 - [jekyll-migrate-permalink](https://github.com/mpchadwick/jekyll-migrate-permalink): Adds a `migrate-permalink` sub-command to help deal with side effects of changing your permalink.
+- [Jekyll-Post](https://github.com/robcrocombe/jekyll-post): A CLI tool to easily draft, edit, and publish Jekyll posts.
+- [jekyll-numbered-headings](https://github.com/muratayusuke/jekyll-numbered-headings): Adds ordered number to headings.
+- [jekyll-pre-commit](https://github.com/mpchadwick/jekyll-pre-commit): A framework for running checks against your posts using a git pre-commit hook before you publish them.
 
 #### Editors
 

@@ -8,7 +8,7 @@ class TestDocument < JekyllUnitTest
   context "a document in a collection" do
     setup do
       @site = fixture_site({
-        "collections" => ["methods"]
+        "collections" => ["methods"],
       })
       @site.process
       @document = @site.collections["methods"].docs.detect do |d|
@@ -118,10 +118,10 @@ class TestDocument < JekyllUnitTest
           "scope"  => { "path"=>"", "type"=>"slides" },
           "values" => {
             "nested" => {
-              "key" => "myval"
-            }
-          }
-        }]
+              "key" => "myval",
+            },
+          },
+        },],
       })
       @site.process
       @document = @site.collections["slides"].docs.select { |d| d.is_a?(Document) }.first
@@ -143,10 +143,10 @@ class TestDocument < JekyllUnitTest
           "values" => {
             "nested" => {
               "test1" => "default1",
-              "test2" => "default1"
-            }
-          }
-        }]
+              "test2" => "default1",
+            },
+          },
+        },],
       })
       @site.process
       @document = @site.collections["slides"].docs[1]
@@ -170,10 +170,10 @@ class TestDocument < JekyllUnitTest
           "scope"  => { "path"=>"_slides", "type"=>"slides" },
           "values" => {
             "nested" => {
-              "key" => "value123"
-            }
-          }
-        }]
+              "key" => "value123",
+            },
+          },
+        },],
       })
       @site.process
       @document = @site.collections["slides"].docs.first
@@ -194,10 +194,10 @@ class TestDocument < JekyllUnitTest
           "scope"  => { "path"=>"somepath", "type"=>"slides" },
           "values" => {
             "nested" => {
-              "key" => "myval"
-            }
-          }
-        }]
+              "key" => "myval",
+            },
+          },
+        },],
       })
       @site.process
       @document = @site.collections["slides"].docs.first
@@ -213,7 +213,7 @@ class TestDocument < JekyllUnitTest
   context "a document in a collection with a custom permalink" do
     setup do
       @site = fixture_site({
-        "collections" => ["slides"]
+        "collections" => ["slides"],
       })
       @site.process
       @document = @site.collections["slides"].docs[2]
@@ -235,10 +235,10 @@ class TestDocument < JekyllUnitTest
         "collections" => {
           "slides" => {
             "output"    => true,
-            "permalink" => "/slides/test/:name"
-          }
+            "permalink" => "/slides/test/:name",
+          },
         },
-        "permalink"   => "pretty"
+        "permalink"   => "pretty",
       })
       @site.process
       @document = @site.collections["slides"].docs[0]
@@ -263,9 +263,9 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "slides" => {
-            "output" => true
-          }
-        }
+            "output" => true,
+          },
+        },
       })
       @site.permalink_style = :pretty
       @site.process
@@ -287,9 +287,9 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "slides" => {
-            "output" => true
-          }
-        }
+            "output" => true,
+          },
+        },
       })
       @site.permalink_style = :pretty
       @site.process
@@ -307,9 +307,9 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "slides" => {
-            "output" => true
-          }
-        }
+            "output" => true,
+          },
+        },
       })
       @site.process
       @document = @site.collections["slides"].docs[6]
@@ -339,9 +339,9 @@ class TestDocument < JekyllUnitTest
         "collections" => {
           "slides" => {
             "output"    => true,
-            "permalink" => "/slides/:title"
-          }
-        }
+            "permalink" => "/slides/:title",
+          },
+        },
       })
       @site.process
       @document = @site.collections["slides"].docs[3]
@@ -381,8 +381,8 @@ class TestDocument < JekyllUnitTest
   context "document with a permalink with dots & a trailing slash" do
     setup do
       @site = fixture_site({ "collections" => {
-        "with.dots" => { "output" => true }
-      } })
+        "with.dots" => { "output" => true },
+      }, })
       @site.process
       @document = @site.collections["with.dots"].docs.last
       @dest_file = dest_dir("with.dots", "permalink.with.slash.tho", "index.html")
@@ -406,9 +406,9 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "slides" => {
-            "output" => true
-          }
-        }
+            "output" => true,
+          },
+        },
       })
       @site.process
       @files = @site.collections["slides"].docs
@@ -436,9 +436,9 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "slides" => {
-            "output" => true
-          }
-        }
+            "output" => true,
+          },
+        },
       })
       @site.process
       @document = @site.collections["slides"].files.find do |doc|
@@ -469,9 +469,9 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "methods" => {
-            "output" => true
-          }
-        }
+            "output" => true,
+          },
+        },
       })
       @site.process
       @document = @site.collections["methods"].docs.find do |doc|
@@ -498,9 +498,9 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "methods" => {
-            "output" => true
-          }
-        }
+            "output" => true,
+          },
+        },
       })
       @site.process
       @document = @site.collections["methods"].docs.find do |doc|

@@ -28,7 +28,7 @@ class Jekyll::ThemeBuilder
   def template_file(filename)
     [
       root.join("theme_template", "#{filename}.erb"),
-      root.join("theme_template", filename.to_s)
+      root.join("theme_template", filename.to_s),
     ].find(&:exist?)
   end
 

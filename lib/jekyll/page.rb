@@ -98,7 +98,7 @@ module Jekyll
       @url ||= URL.new({
         :template     => template,
         :placeholders => url_placeholders,
-        :permalink    => permalink
+        :permalink    => permalink,
       }).to_s
     end
 
@@ -108,7 +108,7 @@ module Jekyll
       {
         :path       => @dir,
         :basename   => basename,
-        :output_ext => output_ext
+        :output_ext => output_ext,
       }
     end
 

@@ -1,12 +1,9 @@
 ---
-layout: docs
 title: Creating pages
 permalink: /docs/pages/
 ---
 
-In addition to [writing posts](../posts/), another thing you may want to do
-with your Jekyll site is create static pages. By taking advantage of the way
-Jekyll copies files and directories, this is easy to do.
+In addition to [writing posts](../posts/), you might also want to add static pages (content that isn't date-based) to your Jekyll site. By taking advantage of the way Jekyll copies files and directories, this is easy to do.
 
 ## Homepage
 
@@ -28,16 +25,14 @@ homepage of your Jekyll-generated site.
 ## Where additional pages live
 
 Where you put HTML or [Markdown](https://daringfireball.net/projects/markdown/)
-files for pages depends on how you want the pages to work.
-There are two main ways of creating pages:
+files for pages depends on how you want the pages to work. There are two main ways of creating pages:
 
 - Place named HTML or [Markdown](https://daringfireball.net/projects/markdown/)
 files for each page in your site's root folder.
-- Create a folder in the site's root for each page, and place an index.html
-or index.md file in each page folder.
+- Place pages inside folders and subfolders named whatever you want.
 
 Both methods work fine (and can be used in conjunction with each other),
-with the only real difference being the resulting URLs.
+with the only real difference being the resulting URLs. By default, pages retain the same folder structure in `_site` as they do in the source directory.
 
 ### Named HTML files
 
@@ -59,42 +54,21 @@ and associated URLs might look like:
 └── contact.html  # => http://example.com/contact.html
 ```
 
-### Named folders containing index HTML files
+If you have a lot of pages, you can organize those pages into subfolders. The same subfolders that are used to group your pages in our project's source will exist in the `_site` folder when your site builds.
 
-There is nothing wrong with the above method. However, some people like to keep
-their URLs free from things like filename extensions. To achieve clean URLs for
-pages using Jekyll, you simply need to create a folder for each top-level page
-you want, and then place an `index.html` file in each page’s folder. This way
-the page URL ends up being the folder name, and the web server will serve up
-the respective `index.html` file. Here's an example of what this structure
-might look like:
+## Flattening pages from subfolders into the root directory
 
-```sh
-.
-├── _config.yml
-├── _includes/
-├── _layouts/
-├── _posts/
-├── _site/
-├── about/
-|   └── index.html  # => http://example.com/about/
-├── contact/
-|   └── index.html  # => http://example.com/contact/
-|── other/
-|   └── index.md    # => http://example.com/other/
-└── index.html      # => http://example.com/
+If you have pages organized into subfolders in your source folder and want to flatten them in the root folder on build, you must add the [permalink]({% link _docs/permalinks.md %}) property directly in your page's front matter like this:
+
+```
+---
+title: My page
+permalink: mypageurl.html
+---
 ```
 
-This approach may not suit everyone, but for people who like clean URLs it’s
-simple and it works. In the end, the decision is yours!
+### Named folders containing index HTML files
 
-<div class="note">
-  <h5>ProTip™: Use permalink Front Matter Variable</h5>
-  <p>
-    Clean URLs can also be achieved using the <code>permalink</code> front
-    matter variable. In the example above, using the first method, you can
-    get URL <code>http://example.com/other</code> for the file
-    <code>other.md</code> by setting this at the top of the file:
-    <code>permalink: /other</code>
-  </p>
-</div>
+If you don't want file extensions (`.html`) to appear in your page URLs (file extensions are the default), you can choose a [permalink style](../permalinks/#builtinpermalinkstyles) that has a trailing slash instead of a file extension.
+
+Note if you want to view your site offline *without the Jekyll preview server*, your browser will need the file extension to display the page, and all assets will need to be relative links that function without the server baseurl.

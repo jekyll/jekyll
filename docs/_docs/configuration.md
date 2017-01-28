@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Configuration
 permalink: /docs/configuration/
 ---
@@ -223,8 +222,18 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
     <tr class="setting">
       <td>
+        <p class="name"><strong>Unpublished</strong></p>
+        <p class="description">Render posts that were marked as unpublished.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">unpublished: BOOL</code></p>
+        <p><code class="flag">--unpublished</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
         <p class="name"><strong>LSI</strong></p>
-        <p class="description">Produce an index for related posts.</p>
+        <p class="description">Produce an index for related posts. Requires the <a href="http://www.classifier-reborn.com/">classifier-reborn</a> plugin.</p>
       </td>
       <td class="align-center">
         <p><code class="option">lsi: BOOL</code></p>

@@ -40,7 +40,7 @@ module Jekyll
 
       private
       def parse_expression(str)
-        Liquid::Variable.new(str, {})
+        Liquid::Variable.new(str, Liquid::ParseContext.new)
       end
 
       private
@@ -54,7 +54,7 @@ module Jekyll
           array << {
             "name"  => item.first,
             "items" => item.last,
-            "size"  => item.last.size
+            "size"  => item.last.size,
           }
         end
       end

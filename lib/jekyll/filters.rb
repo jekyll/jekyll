@@ -1,4 +1,4 @@
-require "uri"
+require "addressable/uri"
 require "json"
 require "date"
 require "liquid"
@@ -152,7 +152,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def uri_escape(input)
-      URI.escape(input)
+      Addressable::URI.encode(input)
     end
 
     # Replace any whitespace in the input string with a single space
@@ -280,10 +280,11 @@ module Jekyll
       end
     end
 
-    def pop(array, input = 1)
+    def pop(array, num = 1)
       return array unless array.is_a?(Array)
+      num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
-      new_ary.pop(input.to_i || 1)
+      new_ary.pop(num)
       new_ary
     end
 
@@ -294,10 +295,11 @@ module Jekyll
       new_ary
     end
 
-    def shift(array, input = 1)
+    def shift(array, num = 1)
       return array unless array.is_a?(Array)
+      num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
-      new_ary.shift(input.to_i || 1)
+      new_ary.shift(num)
       new_ary
     end
 
@@ -310,11 +312,11 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
-      n = num.to_i rescue 1
-      if n == 1
+      num = Liquid::Utils.to_integer(num) rescue 1
+      if num == 1
         input.sample
       else
-        input.sample(n)
+        input.sample(num)
       end
     end
 
@@ -345,19 +347,12 @@ module Jekyll
 
     private
     def time(input)
-      case input
-      when Time
-        input.clone
-      when Date
-        input.to_time
-      when String
-        Time.parse(input) rescue Time.at(input.to_i)
-      when Numeric
-        Time.at(input)
-      else
+      date = Liquid::Utils.to_date(input)
+      unless date.respond_to?(:to_time)
         raise Errors::InvalidDateError,
           "Invalid Date: '#{input.inspect}' is not a valid datetime."
-      end.localtime
+      end
+      date.to_time.localtime
     end
 
     private
@@ -402,9 +397,11 @@ module Jekyll
       operator = parser.consume?(:comparison)
       condition =
         if operator
-          Liquid::Condition.new(left_expr, operator, parser.expression)
+          Liquid::Condition.new(Liquid::Expression.parse(left_expr),
+                                operator,
+                                Liquid::Expression.parse(parser.expression))
         else
-          Liquid::Condition.new(left_expr)
+          Liquid::Condition.new(Liquid::Expression.parse(left_expr))
         end
       parser.consume(:end_of_string)
 

@@ -6,7 +6,7 @@ module Jekyll
       class Servlet < WEBrick::HTTPServlet::FileHandler
         DEFAULTS = {
           "Cache-Control" => "private, max-age=0, proxy-revalidate, " \
-            "no-store, no-cache, must-revalidate"
+            "no-store, no-cache, must-revalidate",
         }.freeze
 
         def initialize(server, root, callbacks)

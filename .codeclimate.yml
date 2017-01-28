@@ -23,7 +23,7 @@ exclude_paths:
 
   - features/**/*
   - script/**/*
-  - site/**/*
+  - docs/**/*
   - spec/**/*
   - test/**/*
   - vendor/**/*

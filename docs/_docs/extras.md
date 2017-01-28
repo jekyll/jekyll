@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Extras
 permalink: /docs/extras/
 ---
@@ -15,7 +14,7 @@ Kramdown comes with optional support for LaTeX to PNG rendering via [MathJax](ht
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 ```
 
-For more information about getting started, check out [this excellent blog post](http://gastonsanchez.com/opinion/2014/02/16/Mathjax-with-jekyll/).
+For more information about getting started, check out [this excellent blog post](http://gastonsanchez.com/visually-enforced/opinion/2014/02/16/Mathjax-with-jekyll/).
 
 ## Alternative Markdown Processors
 

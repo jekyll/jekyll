@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll 1.3.0 Released'
 date: 2013-11-04 21:46:02 -0600
 author: mattr-
