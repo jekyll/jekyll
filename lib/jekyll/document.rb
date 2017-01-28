@@ -256,7 +256,7 @@ module Jekyll
           merge_defaults
           read_content(opts)
           read_post_data
-        rescue SyntaxError => e
+        rescue Psych::SyntaxError => e
           Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
         rescue => e
           raise e if e.is_a? Jekyll::Errors::FatalException
