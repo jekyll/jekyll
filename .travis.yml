@@ -6,9 +6,9 @@ sudo: false
 
 rvm:
   - &ruby1 2.4.0
-  - &ruby1 2.3.3
-  - &ruby2 2.2.6
-  - &ruby3 2.1.9
+  - &ruby2 2.3.3
+  - &ruby3 2.2.6
+  - &ruby4 2.1.9
   - &jruby jruby-9.1.7.0
 
 matrix:
@@ -16,6 +16,10 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=fmt
     - rvm: *ruby1
+      env: TEST_SUITE=default-site
+    - rvm: *ruby2
+      env: TEST_SUITE=fmt
+    - rvm: *ruby2
       env: TEST_SUITE=default-site
   exclude:
     - rvm: *jruby
@@ -49,3 +53,6 @@ addons:
 # regular test configuration
 after_success:
   - bundle exec codeclimate-test-reporter
+
+before_install:
+  - gem update --system
