@@ -6,71 +6,72 @@ module Jekyll
     # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = Configuration[{
       # Where things are
-      "source"            => Dir.pwd,
-      "destination"       => File.join(Dir.pwd, "_site"),
-      "plugins_dir"       => "_plugins",
-      "layouts_dir"       => "_layouts",
-      "data_dir"          => "_data",
-      "includes_dir"      => "_includes",
-      "collections"       => {},
+      "source"              => Dir.pwd,
+      "destination"         => File.join(Dir.pwd, "_site"),
+      "plugins_dir"         => "_plugins",
+      "layouts_dir"         => "_layouts",
+      "data_dir"            => "_data",
+      "includes_dir"        => "_includes",
+      "collections"         => {},
 
       # Handling Reading
-      "safe"              => false,
-      "include"           => [".htaccess"],
-      "exclude"           => %w(
+      "safe"                => false,
+      "include"             => [".htaccess"],
+      "exclude"             => %w(
         Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
         vendor/ruby/
       ),
-      "keep_files"        => [".git", ".svn"],
-      "encoding"          => "utf-8",
-      "markdown_ext"      => "markdown,mkdown,mkdn,mkd,md",
+      "keep_files"          => [".git", ".svn"],
+      "encoding"            => "utf-8",
+      "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md",
+      "strict_front_matter" => false,
 
       # Filtering Content
-      "show_drafts"       => nil,
-      "limit_posts"       => 0,
-      "future"            => false,
-      "unpublished"       => false,
+      "show_drafts"         => nil,
+      "limit_posts"         => 0,
+      "future"              => false,
+      "unpublished"         => false,
 
       # Plugins
-      "whitelist"         => [],
-      "plugins"           => [],
+      "whitelist"           => [],
+      "plugins"             => [],
 
       # Conversion
-      "markdown"          => "kramdown",
-      "highlighter"       => "rouge",
-      "lsi"               => false,
-      "excerpt_separator" => "\n\n",
-      "incremental"       => false,
+      "markdown"            => "kramdown",
+      "highlighter"         => "rouge",
+      "lsi"                 => false,
+      "excerpt_separator"   => "\n\n",
+      "incremental"         => false,
 
       # Serving
-      "detach"            => false, # default to not detaching the server
-      "port"              => "4000",
-      "host"              => "127.0.0.1",
-      "baseurl"           => "",
-      "show_dir_listing"  => false,
+      "detach"              => false, # default to not detaching the server
+      "port"                => "4000",
+      "host"                => "127.0.0.1",
+      "baseurl"             => "",
+      "show_dir_listing"    => false,
 
       # Output Configuration
-      "permalink"         => "date",
-      "paginate_path"     => "/page:num",
-      "timezone"          => nil, # use the local timezone
+      "permalink"           => "date",
+      "paginate_path"       => "/page:num",
+      "timezone"            => nil, # use the local timezone
 
-      "quiet"             => false,
-      "verbose"           => false,
-      "defaults"          => [],
+      "quiet"               => false,
+      "verbose"             => false,
+      "defaults"            => [],
 
-      "liquid"            => {
+      "liquid"              => {
         "error_mode" => "warn",
       },
 
-      "rdiscount"         => {
+      "rdiscount"           => {
         "extensions" => [],
       },
 
-      "redcarpet"         => {
+      "redcarpet"           => {
         "extensions" => [],
       },
 
-      "kramdown"          => {
+      "kramdown"            => {
         "auto_ids"      => true,
         "toc_levels"    => "1..6",
         "entity_output" => "as_char",

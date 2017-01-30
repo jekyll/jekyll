@@ -66,6 +66,8 @@ module Jekyll
         c.option "quiet", "-q", "--quiet", "Silence output."
         c.option "verbose", "-V", "--verbose", "Print verbose output."
         c.option "incremental", "-I", "--incremental", "Enable incremental rebuild."
+        c.option "strict_front_matter", "--strict_front_matter",
+          "Fail if errors are present in front matter"
       end
     end
   end
