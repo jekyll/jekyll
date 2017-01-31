@@ -7,6 +7,7 @@
 ### Documentation
 
   * Install troubleshooting on Ubuntu (#5817)
+  * Add Termux section on troubleshooting (#5837)
 
 ### Development Fixes
 
