@@ -4,7 +4,7 @@ class TestSiteDrop < JekyllUnitTest
   context "a site drop" do
     setup do
       @site = fixture_site({
-        "collections" => ["thanksgiving"]
+        "collections" => ["thanksgiving"],
       })
       @site.process
       @drop = @site.to_liquid.site
