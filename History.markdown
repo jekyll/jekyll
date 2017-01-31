@@ -12,7 +12,7 @@
 
   * [Rubocop] add missing comma (#5835)
 
-## 3.4.0 / 2016-01-27
+## 3.4.0 / 2017-01-27
 
 ### Minor Enhancements
 
