@@ -47,7 +47,14 @@ module Jekyll
     #
     # Returns nothing
     def debug(topic, message = nil)
-      writer.debug(message(topic, message))
+      msg = message(topic, message)
+      if long_msg?(msg)
+        msg = hard_wrap(message)
+        writer.debug(message(topic, msg.first))
+        msg[1..-1].each { |m| writer.debug(message("", m)) }
+      else
+        writer.debug(msg)
+      end
     end
 
     # Public: Print a message
@@ -57,7 +64,14 @@ module Jekyll
     #
     # Returns nothing
     def info(topic, message = nil)
-      writer.info(message(topic, message))
+      msg = message(topic, message)
+      if long_msg?(msg)
+        msg = hard_wrap(message)
+        writer.info(message(topic, msg.first))
+        msg[1..-1].each {|m| writer.info(message("", m)) }
+      else
+        writer.info(msg)
+      end
     end
 
     # Public: Print a message
@@ -67,7 +81,14 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message = nil)
-      writer.warn(message(topic, message))
+      msg = message(topic, message)
+      if long_msg?(msg)
+        msg = hard_wrap(message)
+        writer.warn(message(topic, msg.first))
+        msg[1..-1].each { |m| writer.warn(message("", m)) }
+      else
+        writer.warn(msg)
+      end
     end
 
     # Public: Print an error message
@@ -77,7 +98,14 @@ module Jekyll
     #
     # Returns nothing
     def error(topic, message = nil)
-      writer.error(message(topic, message))
+      msg = message(topic, message)
+      if long_msg?(msg)
+        msg = hard_wrap(message)
+        writer.error(message(topic, msg.first))
+        msg[1..-1].each { |m| writer.error(message("", m)) }
+      else
+        writer.error(msg)
+      end
     end
 
     # Public: Print an error message and immediately abort the process
@@ -98,7 +126,7 @@ module Jekyll
     #
     # Returns the formatted message
     def message(topic, message)
-      msg = formatted_topic(topic) + message.to_s.gsub(%r!\s+!, " ")
+      msg = formatted_topic(topic) + message.to_s
       messages << msg
       msg
     end
@@ -110,6 +138,22 @@ module Jekyll
     # Returns the formatted topic statement
     def formatted_topic(topic)
       "#{topic} ".rjust(20)
+    end
+
+    private
+
+    # helper method to check if a logger message is longer than the terminal window
+    def long_msg?(message)
+      require "tty-screen"
+      @width = TTY::Screen.new.width
+      message.length > @width ? true : false
+    end
+
+    def hard_wrap(message)
+      # width: 2 columns lesser than the rjust() value to act as padding.
+      width = @width - 22
+      regex = %r!(.{1,#{width}})(\s+|\W|\Z)|(.{1,#{width}})!
+      message.scan(regex).map { |msg| msg.join.sub("\n", "") }
     end
   end
 end
