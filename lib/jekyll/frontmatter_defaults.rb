@@ -100,12 +100,18 @@ module Jekyll
     def applies_path?(scope, path)
       return true if !scope.key?("path") || scope["path"].empty?
 
-      scope_path = Pathname.new(scope["path"])
-      Pathname.new(sanitize_path(path)).ascend do |ascended_path|
-        if ascended_path.to_s == scope_path.to_s
-          return true
+      site_path = Pathname.new(@site.source)
+      rel_scope_path = Pathname.new(scope["path"])
+      abs_scope_path = File.join(@site.source, rel_scope_path)
+      Dir.glob(abs_scope_path).each do |scope_path|
+        scope_path = Pathname.new(scope_path).relative_path_from site_path
+        Pathname.new(sanitize_path(path)).ascend do |ascended_path|
+          if ascended_path.to_s == scope_path.to_s
+            return true
+          end
         end
       end
+      return false
     end
 
     # Determines whether the scope applies to type.
