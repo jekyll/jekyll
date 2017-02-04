@@ -238,7 +238,7 @@ module Jekyll
         d.data[doc_attr].each { |t| hash[t] << d } if d.data[doc_attr]
       end
 
-      hash.values.each { |documents| documents.sort!.reverse! }
+      hash.values.each { |docs| docs.sort!.reverse! }
       hash
     end
 
