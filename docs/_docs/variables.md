@@ -173,7 +173,7 @@ following is a reference of the available data.
       <td><p><code>site.categories.CATEGORY</code></p></td>
       <td><p>
 
-        The list of all Posts in category <code>CATEGORY</code>.
+        The list of all Documents in category <code>CATEGORY</code>.
 
       </p></td>
     </tr>
@@ -181,7 +181,7 @@ following is a reference of the available data.
       <td><p><code>site.tags.TAG</code></p></td>
       <td><p>
 
-        The list of all Posts with tag <code>TAG</code>.
+        The list of all Documents with tag <code>TAG</code>.
 
       </p></td>
     </tr>
