@@ -48,41 +48,6 @@ The variable won't render because the page's order of interpretation is to rende
 
 To make the code work, you could put the variable assignment into the page's front matter.
 
-### Liquid tag in data reference not rendered
-
-In `_data/mydata.yml`, suppose you have this mapping:
-
-```
-{% raw %}somevalue: {{ myvar }}{% endraw %}
-```
-
-On a page, you try to insert this value:
-
-```
-{% raw %}{{ site.data.mydata.somevalue }}{% endraw %}
-```
-
-This renders as a string (`{% raw %}"{{ site.data.mydata.somevalue }}{% endraw %}"` rather than the variable's value. This is because first the site variables populate, and then Liquid renders. When the site variables populate, the value for `{% raw %}{{ site.data.mydata.somevalue }}{% endraw %}` is simply `{% raw %}{{ myvar }}{% endraw %}`, which registers as a string. You can't use Liquid in data files.
-
-Similarly, suppose you have a `highlight` tag in your `_data/mydata.yml` file:
-
-```
-{% raw %}myvalue: >
-  {% highlight javascript %}
-  console.log('alert');
-  {% endhighlight %}{% endraw %}
-```
-
-On a page, you try to insert the value:
-
-```
-{% raw %}{{ site.data.mydata.myvalue }}{% endraw %}
-```
-
-This renders as a string for the same reasons described above. When the `site.data.mydata.myvalue` tag populates, the value gets stored as a string and printed to the page as a string.
-
-To make the code work, consider populating content from includes.
-
 ### Markdown in include file not processed
 
 Suppose you have a Markdown file at `_includes/mycontent.md`. In the Markdown file, you have some Markdown formatting:
@@ -103,7 +68,7 @@ The Markdown is not processed because first the Liquid (`include` tag) gets proc
 
 But because the content is included into an *HTML* page, the Markdown isn't rendered. The Markdown filter processes content only in Markdown files.
 
-To make the code work, use HMTL formatting in includes that are inserted into HTML files.
+To make the code work, use HTML formatting in includes that are inserted into HTML files.
 
 Note that `highlight` tags don't require Markdown to process. Suppose your include contains the following:
 
@@ -132,7 +97,7 @@ function someFunction() {
 </script>{% endraw %}
 ```
 
-This won't work because the `assign` tag is only available during the Liquid rendering phase of the site. In this JavaScript example, the script executes when a user clicks a button ("Click me") on the page. At that time, the Liquid logic is no longer available, so the `assign` tag wouldn't return anything.
+This won't work because the `assign` tag is only available during the Liquid rendering phase of the site. In this JavaScript example, the script executes when a user clicks a button ("Click me") on the HTML page. At that time, the Liquid logic is no longer available, so the `assign` tag wouldn't return anything.
 
 However, you can use Jekyll's site variables or Liquid to *populate* a script that is executed at a later time. For example, suppose you have the following property in your front matter: `someContent: "This is some content"`. You could do this:
 
@@ -152,3 +117,24 @@ function someFunction() {
 When Jekyll builds the site, this `someContent` property populates the script's values, converting `{% raw %}{{ page.someContent }}{% endraw %}` to `"This is some content"`.
 
 The key to remember is that Liquid renders when Jekyll builds your site. Liquid is not available at run-time in the browser when a user executes an event.
+
+## Note about using Liquid in YAML
+
+There's one more detail to remember: Liquid does not render when embedded in YAML files or front matter. (This isn't related to order of interpretation, but it's worth mentioning because it's a common question about element rendering.)
+
+For example, suppose you have a `highlight` tag in your `_data/mydata.yml` file:
+
+```
+{% raw %}myvalue: >
+  {% highlight javascript %}
+  console.log('alert');
+  {% endhighlight %}{% endraw %}
+```
+
+On a page, you try to insert the value:
+
+```
+{% raw %}{{ site.data.mydata.myvalue }}{% endraw %}
+```
+
+This would render as a string rather than a code sample with syntax highlighting. To make the code render, you might use an include instead.
