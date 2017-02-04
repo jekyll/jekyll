@@ -16,6 +16,7 @@
 ### Site Enhancements
 
   * Corrected date for version 3.4.0 (#5842)
+  * Add the correct year to the 3.4.0 release date (#5858)
 
 ## 3.4.0 / 2017-01-27
 
