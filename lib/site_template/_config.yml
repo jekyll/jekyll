@@ -29,6 +29,17 @@ markdown: kramdown
 theme: minima
 gems:
   - jekyll-feed
-exclude:
-  - Gemfile
-  - Gemfile.lock
+
+# Exclude from processing.
+#   The items below are excluded by default, to customize the list, uncomment the
+#   lines below and simply add to the list. Items removed will **not** be excluded
+#   from processing.
+#
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
