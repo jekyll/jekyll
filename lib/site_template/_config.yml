@@ -31,10 +31,8 @@ gems:
   - jekyll-feed
 
 # Exclude from processing.
-#   The items below are excluded by default, to customize the list, uncomment the
-#   lines below and simply add to the list. Items removed will **not** be excluded
-#   from processing.
-#
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
 # exclude:
 #   - Gemfile
 #   - Gemfile.lock
